@@ -1,0 +1,9 @@
+*.DS_Store
+deploy/
+docs/badKeys/
+docs/deltaPackage/
+logs/
+node_modules/
+template/
+**/QueryStudioResults at*
+.mcdev-auth.json

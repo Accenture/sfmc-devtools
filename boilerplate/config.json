@@ -1,0 +1,84 @@
+{
+    "credentials": {
+        "default": {
+            "clientId": "--- update me ---",
+            "clientSecret": "--- update me ---",
+            "tenant": "--- update me ---",
+            "eid": "000000000",
+            "businessUnits": {}
+        }
+    },
+    "options": {
+        "deployment": {
+            "commitHistory": 10,
+            "sourceTargetMapping": {
+                "deployment-source": "deployment-target"
+            },
+            "targetBranchBuMapping": {
+                "release/*": "MySandbox/QA-DE",
+                "master": ["MyProduction/PROD-DE", "MyProduction/PROD-NL"]
+            }
+        },
+        "documentType": "md",
+        "exclude": {},
+        "include": {},
+        "serverTimeOffset": -6
+    },
+    "directories": {
+        "badKeys": "docs/badKeys/",
+        "businessUnits": "businessUnits/",
+        "dataExtension": "docs/dataExtension/",
+        "deltaPackage": "docs/deltaPackage/",
+        "deploy": "deploy/",
+        "retrieve": "retrieve/",
+        "roles": "docs/roles/",
+        "template": "template/",
+        "templateBuilds": ["retrieve/", "deploy/"]
+    },
+    "markets": {
+        "DEV-NL": {
+            "mid": "12345",
+            "buName": "DEV - Child NL",
+            "sharedFolder": "/Shared Data Extensions/DEV/NL",
+            "suffix": "_DEV_NL",
+            "countryCodeIn": "'NL'"
+        },
+        "QA-DE": {
+            "mid": "12346",
+            "buName": "QA - Child DE",
+            "sharedFolder": "/Shared Data Extensions/QA/DE",
+            "suffix": "_QA_DE",
+            "countryCodeIn": "'DE'"
+        },
+        "PROD-DE": {
+            "mid": "12349",
+            "buName": "DE - Germany",
+            "sharedFolder": "/Shared Data Extensions/DE - Germany",
+            "suffix": "_DE",
+            "countryCodeIn": "'DE'"
+        },
+        "PROD-NL": {
+            "mid": "12351",
+            "buName": "NL - Netherlands",
+            "sharedFolder": "/Shared Data Extensions/NL - Netherlands",
+            "suffix": "_NL",
+            "countryCodeIn": "'NL'"
+        }
+    },
+    "marketList": {
+        "deployment-source": {
+            "description": "Define one 1:1 BU-Market combo here to as source for automated creation of deployment packages; you can create more than one source market list",
+            "MySandbox/DEV-NL": "DEV-NL"
+        },
+        "deployment-target": {
+            "description": "Define n BU-Market combo here to as target for automated creation of deployment packages; you can create more than one target market list and they can be as complex as you like",
+            "MySandbox/QA-DE": "QA-DE",
+            "MyProduction/PROD-DE": "PROD-DE",
+            "MyProduction/PROD-NL": "PROD-NL"
+        }
+    },
+    "metaDataTypes": {
+        "documentOnRetrieve": ["role", "dataExtension"],
+        "retrieve": []
+    }
+}

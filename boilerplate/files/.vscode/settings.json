@@ -1,0 +1,31 @@
+{
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "editor.formatOnSave": true,
+    "files.associations": {
+        "*.ssjs": "javascript"
+    },
+    "files.eol": "\n",
+    "files.exclude": {
+        "node_modules": true
+    },
+    "javascript.validate.enable": false,
+    "sql-formatter.indent": "    ",
+    "sql-formatter.uppercase": true,
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}

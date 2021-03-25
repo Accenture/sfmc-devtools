@@ -1,0 +1,45 @@
+{
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+        "source.fixAll.markdownlint": true
+    },
+    "editor.formatOnSave": true,
+    "files.associations": {
+        "*.ssjs": "javascript"
+    },
+    "files.eol": "\n",
+    "js/ts.implicitProjectConfig.checkJs": true,
+    "javascript.validate.enable": false,
+    "markdown.extension.italic.indicator": "_",
+    "markdown.extension.list.indentationSize": "adaptive",
+    "markdown.extension.tableFormatter.enabled": false,
+    "markdown.extension.toc.levels": "2..6",
+    "markdown.extension.toc.orderedList": false,
+    "sql-formatter.indent": "    ",
+    "sql-formatter.uppercase": true,
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "markdown-toc.orderedList": true,
+    "markdown-toc.insertAnchor": true,
+    "markdown-toc.anchorMode": "gitlab.com",
+    "outline.showProperties": false,
+    "outline.showVariables": false,
+    "breadcrumbs.showVariables": false,
+    "breadcrumbs.showProperties": false
+}

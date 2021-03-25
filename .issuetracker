@@ -1,0 +1,7 @@
+# Integration with Issue Tracker
+#
+# (note that '\' need to be escaped).
+
+[issuetracker "Jira Rule"]
+  regex = "CSCLSROZ-(\\d+)"
+  url = "https://alm.accenture.com/jira/browse/CSCLSROZ-$1"

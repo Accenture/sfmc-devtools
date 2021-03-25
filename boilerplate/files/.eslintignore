@@ -1,0 +1,5 @@
+/deploy/**
+/docs/**
+/logs/**
+/node_modules/**
+/template/**

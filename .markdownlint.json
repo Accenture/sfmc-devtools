@@ -1,0 +1,16 @@
+{
+    "default": true,
+    "line-length": false,
+    "no-duplicate-header": false,
+    "no-trailing-punctuation": false,
+    "no-inline-html": false,
+    "no-bare-urls": false,
+    "list-marker-space": {
+        "ul_single": 1,
+        "ol_single": 1,
+        "ul_multi": 1,
+        "ol_multi": 1
+    },
+    "ul-indent": { "indent": 2 },
+    "ol-prefix": { "style": "ordered" }
+}
