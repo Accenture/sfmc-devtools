@@ -1,8 +1,9 @@
-<a id="markdown-mcdev" name="mcdev"></a>
 
-# mcdev
+<a id="markdown-accenture-sfmc-devtools" name="accenture-sfmc-devtools"></a>
 
-Accenture SFMC DevTools is a rapid deployment/rollout, backup and development tool for Salesforce Marketing Cloud. It allows you to retrieve and deploy configuration and code across Business Units and instances.
+# Accenture SFMC DevTools
+
+Accenture Salesforce Marketing Cloud DevTools (mcdev) is a rapid deployment/rollout, backup and development tool for Salesforce Marketing Cloud. It allows you to retrieve and deploy configuration and code across Business Units and instances.
 
 <!-- TOC -->
 
