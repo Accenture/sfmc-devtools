@@ -3,6 +3,8 @@
 
 # Accenture SFMC DevTools
 
+[![NPM](https://nodei.co/npm/mcdev.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/mcdev)
+
 Accenture Salesforce Marketing Cloud DevTools (mcdev) is a rapid deployment/rollout, backup and development tool for Salesforce Marketing Cloud. It allows you to retrieve and deploy configuration and code across Business Units and instances.
 
 <!-- TOC -->
