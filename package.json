@@ -8,7 +8,7 @@
         "type": "git",
         "url": "https://github.com/Accenture/sfmc-devtools.git"
     },
-    "homepage": "https://github.com/Accenture/sfmc-devtools",
+    "homepage": "https://github.com/Accenture/sfmc-devtools#readme",
     "bugs": {
         "url": "https://github.com/Accenture/sfmc-devtools/issues",
         "email": "joern.berkefeld@accenture.com"
