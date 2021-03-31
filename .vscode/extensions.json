@@ -7,7 +7,7 @@
         // collaboration
         "gruntfuggly.todo-tree",
         "aaron-bond.better-comments",
-        "ms-vsliveshare.vsliveshare",
+        "github.vscode-pull-request-github",
 
         // Linters
         "dbaeumer.vscode-eslint",
@@ -16,7 +16,6 @@
         "editorconfig.editorconfig",
         "esbenp.prettier-vscode",
         "sergey-agadzhanov.ampscript",
-        "adpyke.vscode-sql-formatter",
 
         // Markdown / Readme.md
         "yzhang.markdown-all-in-one",
