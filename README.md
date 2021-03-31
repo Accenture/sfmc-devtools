@@ -1,4 +1,3 @@
-
 <a id="markdown-accenture-sfmc-devtools" name="accenture-sfmc-devtools"></a>
 
 # Accenture SFMC DevTools
@@ -1015,7 +1014,7 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
 The way retention policy is saved is a bit misleading and hence we wanted to provide a bit of guidance if you ever need to do a deep dive here.
 
 | Field                                | Description                                                                                                                                                                                                                                                                                                                        | Values                                                                 |
-| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------ |
 | **DataRetentionPeriod**              | this field should print the value of the unit of measure but it unfortunately is off by one (e.g. showing "weeks" instead of "months"). Also, it seems to have no impact on what's stored.<br> We therefore excluded it from retrieve/deploy                                                                                       | -                                                                      |
 | **DataRetentionPeriodUnitOfMeasure** | represents drop down for "period after" selection                                                                                                                                                                                                                                                                                  | 6: years<br>5: months<br>4: weeks<br>2: days                           |
 | **DataRetentionPeriodLength**        | represents number field for "period after" selection                                                                                                                                                                                                                                                                               | min: 1<br>max: 999                                                     |
@@ -1291,12 +1290,12 @@ If you want to enhance Accenture SFMC DevTools you are welcome to fork the repo 
 
 Instead of installing Accenture SFMC DevTools as a npm dependency from our git repo, we recommend cloning our repo and then linking it locally:
 
-Assuming you cloned Accenture SFMC DevTools into `C:\repos\mcdev\` (or `~/repos/MyProject/` on Mac) you can then go into your project directory, open a terminal there and run:
+Assuming you cloned Accenture SFMC DevTools into `C:\repos\sfmc-devtools\` (or `~/repos/sfmc-devtools/` on Mac) you can then go into your project directory, open a terminal there and run:
 
 _Local install:_
 
 ```bash
-npm install --save-dev "C:\repos\mcdev"
+npm install --save-dev "C:\repos\sfmc-devtools"
 ```
 
 or
@@ -1304,7 +1303,7 @@ or
 _Global install **(recommended)**:_
 
 ```bash
-npm install -g "C:\repos\mcdev"
+npm install -g "C:\repos\sfmc-devtools"
 ```
 
 This should tell npm to create a symlink to your cloned local directoty, allowing you to see updates you make in your mcdev repo instantly.
