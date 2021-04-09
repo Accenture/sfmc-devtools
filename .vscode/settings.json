@@ -41,5 +41,20 @@
     "outline.showProperties": false,
     "outline.showVariables": false,
     "breadcrumbs.showVariables": false,
-    "breadcrumbs.showProperties": false
+    "breadcrumbs.showProperties": false,
+    "githubIssues.issueBranchTitle": "bugfix/i${issueNumber}-${sanitizedIssueTitle}",
+    "githubIssues.queries": [
+        {
+            "label": "My Issues",
+            "query": "default"
+        },
+        {
+            "label": "New Issues",
+            "query": "no:assignee state:open repo:${owner}/${repository} sort:created-desc"
+        },
+        {
+            "label": "Created By Me",
+            "query": "author:${user} state:open repo:${owner}/${repository} sort:created-desc"
+        }
+    ]
 }
