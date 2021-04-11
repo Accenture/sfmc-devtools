@@ -384,7 +384,7 @@ FileTransfer MetadataType
 * [Asset](#Asset) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, _, __, [selectedSubType])](#Asset.retrieve) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
     * [.retrieveForCache(_, [selectedSubType])](#Asset.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
-    * [.retrieveAsTemplate(templateDir, templateName, templateVariables, [selectedSubType])](#Asset.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType])](#Asset.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
     * [.create(metadata)](#Asset.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#Asset.update) ⇒ <code>Promise</code>
     * [.requestSubType(subType, subTypeArray, [retrieveDir], [templateName], [templateVariables])](#Asset.requestSubType) ⇒ <code>Promise</code>
@@ -434,7 +434,7 @@ Retrieves asset metadata for caching
 
 <a name="Asset.retrieveAsTemplate"></a>
 
-### Asset.retrieveAsTemplate(templateDir, templateName, templateVariables, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
+### Asset.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
 Retrieves asset metadata for caching
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -443,7 +443,7 @@ Retrieves asset metadata for caching
 | Param | Type | Description |
 | --- | --- | --- |
 | templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
-| templateName | <code>string</code> | name of the metadata file |
+| name | <code>string</code> | name of the metadata file |
 | templateVariables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
 | [selectedSubType] | <code>AssetSubType</code> | optionally limit to a single subtype |
 
@@ -5292,6 +5292,8 @@ REST format
 | modifiedDate | <code>string</code> | e.g. "2020-09-14T01:42:03.017" |
 | targetUpdateTypeName | <code>&#x27;Overwrite&#x27;</code> \| <code>&#x27;Update&#x27;</code> \| <code>&#x27;Append&#x27;</code> | defines how the query writes into the target data extension |
 | [targetUpdateTypeId] | <code>0</code> \| <code>1</code> \| <code>2</code> | mapped to targetUpdateTypeName via this.definition.targetUpdateTypeMapping |
+| [targetId] | <code>string</code> | Object ID of DE (removed before save) |
+| [targetDescription] | <code>string</code> | Description DE (removed before save) |
 | isFrozen | <code>boolean</code> | looks like this is always set to false |
 | [queryText] | <code>string</code> | contains SQL query with line breaks converted to '\n'. The content is extracted during retrieval and written into a separate *.sql file |
 | [categoryId] | <code>string</code> | holds folder ID, replaced with r__folder_Path during retrieve |
