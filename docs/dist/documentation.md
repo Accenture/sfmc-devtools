@@ -202,6 +202,8 @@ Provides default functionality that can be overwritten by child metadata type cl
 ## Typedefs
 
 <dl>
+<dt><a href="#CodeExtractItem">CodeExtractItem</a> : <code>Object.&lt;string, any&gt;</code></dt>
+<dd></dd>
 <dt><a href="#AutomationMap">AutomationMap</a> : <code>Object</code></dt>
 <dd><p>REST format</p>
 </dd>
@@ -210,6 +212,10 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#DataExtensionFieldMap">DataExtensionFieldMap</a> : <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#MultiMetadataTypeMap">MultiMetadataTypeMap</a> : <code>Object.&lt;string, any&gt;</code></dt>
+<dd></dd>
+<dt><a href="#CodeExtractItem">CodeExtractItem</a> : <code>Object</code></dt>
+<dd></dd>
+<dt><a href="#CodeExtractItem">CodeExtractItem</a> : <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#TemplateMap">TemplateMap</a> : <code>Object.&lt;string, string&gt;</code></dt>
 <dd></dd>
@@ -376,70 +382,70 @@ FileTransfer MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Asset](#Asset) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, _, __, [selectedSubType])](#Asset.retrieve) ⇒ <code>Promise</code>
-    * [.retrieveForCache(_, [selectedSubType])](#Asset.retrieveForCache) ⇒ <code>Promise</code>
-    * [.retrieveAsTemplate(templateDir, templateName, templateVariables, [selectedSubType])](#Asset.retrieveAsTemplate) ⇒ <code>Promise</code>
+    * [.retrieve(retrieveDir, _, __, [selectedSubType])](#Asset.retrieve) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
+    * [.retrieveForCache(_, [selectedSubType])](#Asset.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType])](#Asset.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
     * [.create(metadata)](#Asset.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#Asset.update) ⇒ <code>Promise</code>
     * [.requestSubType(subType, subTypeArray, [retrieveDir], [templateName], [templateVariables])](#Asset.requestSubType) ⇒ <code>Promise</code>
     * [.requestAndSaveExtended(items, subType, retrieveDir, [templateVariables])](#Asset.requestAndSaveExtended) ⇒ <code>Promise</code>
     * [._retrieveExtendedFile(metadata, subType, retrieveDir)](#Asset._retrieveExtendedFile) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._readExtendedFileFromFS(metadata, subType, deployDir)](#Asset._readExtendedFileFromFS) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.postRetrieveTasks(metadata, [_], isTemplating)](#Asset.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
-    * [.preDeployTasks(metadata, deployDir)](#Asset.preDeployTasks) ⇒ <code>Promise</code>
-    * [.getSubtype(metadata)](#Asset.getSubtype) ⇒ <code>String</code>
-    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#Asset.buildDefinitionForExtracts) ⇒ <code>Promise</code>
-    * [.parseMetadata(metadata)](#Asset.parseMetadata) ⇒ <code>Object</code>
-    * [._mergeCode(metadata, deployDir, subType, [templateName])](#Asset._mergeCode) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+    * [.postRetrieveTasks(metadata, [_], isTemplating)](#Asset.postRetrieveTasks) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
+    * [.preDeployTasks(metadata, deployDir)](#Asset.preDeployTasks) ⇒ <code>Promise.&lt;AssetItem&gt;</code>
+    * [.getSubtype(metadata)](#Asset.getSubtype) ⇒ <code>AssetSubType</code>
+    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#Asset.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.parseMetadata(metadata)](#Asset.parseMetadata) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
+    * [._mergeCode(metadata, deployDir, subType, [templateName])](#Asset._mergeCode) ⇒ <code>Promise.&lt;Array.&lt;MetadataType.CodeExtract&gt;&gt;</code>
     * [._mergeCode_slots(metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName])](#Asset._mergeCode_slots) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._extractCode(metadata)](#Asset._extractCode) ⇒ <code>Object</code>
+    * [._extractCode(metadata)](#Asset._extractCode) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
     * [._extractCode_slots(metadataSlots, codeArr)](#Asset._extractCode_slots) ⇒ <code>void</code>
     * [.getJsonFromFS(dir)](#Asset.getJsonFromFS) ⇒ <code>Object</code>
-    * [.findSubType(templateDir, templateName)](#Asset.findSubType) ⇒ <code>string</code>
-    * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName)](#Asset.readSecondaryFolder) ⇒ <code>Object</code>
+    * [.findSubType(templateDir, templateName)](#Asset.findSubType) ⇒ <code>AssetSubType</code>
+    * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName)](#Asset.readSecondaryFolder) ⇒ <code>AssetItem</code>
 
 <a name="Asset.retrieve"></a>
 
-### Asset.retrieve(retrieveDir, _, __, [selectedSubType]) ⇒ <code>Promise</code>
+### Asset.retrieve(retrieveDir, _, __, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
 Retrieves Metadata of Asset
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| retrieveDir | <code>String</code> | Directory where retrieved metadata directory will be saved |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | _ | <code>void</code> | - |
 | __ | <code>void</code> | - |
-| [selectedSubType] | <code>String</code> | optionally limit to a single subtype |
+| [selectedSubType] | <code>AssetSubType</code> | optionally limit to a single subtype |
 
 <a name="Asset.retrieveForCache"></a>
 
-### Asset.retrieveForCache(_, [selectedSubType]) ⇒ <code>Promise</code>
+### Asset.retrieveForCache(_, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
 Retrieves asset metadata for caching
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | _ | <code>void</code> | - |
-| [selectedSubType] | <code>String</code> | optionally limit to a single subtype |
+| [selectedSubType] | <code>string</code> | optionally limit to a single subtype |
 
 <a name="Asset.retrieveAsTemplate"></a>
 
-### Asset.retrieveAsTemplate(templateDir, templateName, templateVariables, [selectedSubType]) ⇒ <code>Promise</code>
+### Asset.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
 Retrieves asset metadata for caching
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| templateDir | <code>String</code> | Directory where retrieved metadata directory will be saved |
-| templateName | <code>String</code> | name of the metadata file |
-| templateVariables | <code>Object</code> | variables to be replaced in the metadata |
-| [selectedSubType] | <code>String</code> | optionally limit to a single subtype |
+| templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| name | <code>string</code> | name of the metadata file |
+| templateVariables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
+| [selectedSubType] | <code>AssetSubType</code> | optionally limit to a single subtype |
 
 <a name="Asset.create"></a>
 
@@ -451,7 +457,7 @@ Creates a single asset
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single asset |
+| metadata | <code>AssetItem</code> | a single asset |
 
 <a name="Asset.update"></a>
 
@@ -463,7 +469,7 @@ Updates a single asset
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single asset |
+| metadata | <code>AssetItem</code> | a single asset |
 
 <a name="Asset.requestSubType"></a>
 
@@ -475,11 +481,11 @@ Retrieves Metadata of a specific asset type
 
 | Param | Type | Description |
 | --- | --- | --- |
-| subType | <code>String</code> | group of similar assets to put in a folder (ie. images) |
-| subTypeArray | <code>Array</code> | list of all asset types within this subtype |
-| [retrieveDir] | <code>String</code> | target directory for saving assets |
-| [templateName] | <code>String</code> | name of the metadata file |
-| [templateVariables] | <code>Object</code> | variables to be replaced in the metadata |
+| subType | <code>AssetSubType</code> | group of similar assets to put in a folder (ie. images) |
+| subTypeArray | <code>Array.&lt;AssetSubType&gt;</code> | list of all asset types within this subtype |
+| [retrieveDir] | <code>string</code> | target directory for saving assets |
+| [templateName] | <code>string</code> | name of the metadata file |
+| [templateVariables] | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="Asset.requestAndSaveExtended"></a>
 
@@ -492,9 +498,9 @@ Retrieves extended metadata (files or extended content) of asset
 | Param | Type | Description |
 | --- | --- | --- |
 | items | <code>Array</code> | array of items to retrieve |
-| subType | <code>String</code> | group of similar assets to put in a folder (ie. images) |
-| retrieveDir | <code>String</code> | target directory for saving assets |
-| [templateVariables] | <code>Object</code> | variables to be replaced in the metadata |
+| subType | <code>AssetSubType</code> | group of similar assets to put in a folder (ie. images) |
+| retrieveDir | <code>string</code> | target directory for saving assets |
+| [templateVariables] | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="Asset._retrieveExtendedFile"></a>
 
@@ -507,9 +513,9 @@ This method retrieves these and saves them alongside the metadata json
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single asset |
-| subType | <code>String</code> | group of similar assets to put in a folder (ie. images) |
-| retrieveDir | <code>String</code> | target directory for saving assets |
+| metadata | <code>AssetItem</code> | a single asset |
+| subType | <code>AssetSubType</code> | group of similar assets to put in a folder (ie. images) |
+| retrieveDir | <code>string</code> | target directory for saving assets |
 
 <a name="Asset._readExtendedFileFromFS"></a>
 
@@ -523,92 +529,92 @@ This method reads these from the local FS stores them in the metadata object all
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single asset |
-| subType | <code>String</code> | group of similar assets to put in a folder (ie. images) |
-| deployDir | <code>String</code> | directory of deploy files |
+| metadata | <code>AssetItem</code> | a single asset |
+| subType | <code>AssetSubType</code> | group of similar assets to put in a folder (ie. images) |
+| deployDir | <code>string</code> | directory of deploy files |
 
 <a name="Asset.postRetrieveTasks"></a>
 
-### Asset.postRetrieveTasks(metadata, [_], isTemplating) ⇒ <code>Array.&lt;Object&gt;</code>
+### Asset.postRetrieveTasks(metadata, [_], isTemplating) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
 manages post retrieve steps
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Array.&lt;Object&gt;</code> - metadata  
+**Returns**: [<code>CodeExtractItem</code>](#CodeExtractItem) - metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single asset |
-| [_] | <code>String</code> | unused |
+| metadata | <code>AssetItem</code> | a single asset |
+| [_] | <code>string</code> | unused |
 | isTemplating | <code>Boolean</code> | signals that we are retrieving templates |
 
 <a name="Asset.preDeployTasks"></a>
 
-### Asset.preDeployTasks(metadata, deployDir) ⇒ <code>Promise</code>
+### Asset.preDeployTasks(metadata, deployDir) ⇒ <code>Promise.&lt;AssetItem&gt;</code>
 prepares an asset definition for deployment
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;AssetItem&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single asset |
-| deployDir | <code>String</code> | directory of deploy files |
+| metadata | <code>AssetItem</code> | a single asset |
+| deployDir | <code>string</code> | directory of deploy files |
 
 <a name="Asset.getSubtype"></a>
 
-### Asset.getSubtype(metadata) ⇒ <code>String</code>
+### Asset.getSubtype(metadata) ⇒ <code>AssetSubType</code>
 determines the subtype of the current asset
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>String</code> - subtype  
+**Returns**: <code>AssetSubType</code> - subtype  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single asset |
+| metadata | <code>AssetItem</code> | a single asset |
 
 <a name="Asset.buildDefinitionForExtracts"></a>
 
-### Asset.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName) ⇒ <code>Promise</code>
+### Asset.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for buildDefinition
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| templateDir | <code>String</code> | Directory where metadata templates are stored |
-| targetDir | <code>String</code> | Directory where built definitions will be saved |
-| metadata | <code>Object</code> | main JSON file that was read from file system |
-| variables | <code>Object</code> | variables to be replaced in the metadata |
-| templateName | <code>String</code> | name of the template to be built |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> | Directory where built definitions will be saved |
+| metadata | <code>AssetItem</code> | main JSON file that was read from file system |
+| variables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
+| templateName | <code>string</code> | name of the template to be built |
 
 <a name="Asset.parseMetadata"></a>
 
-### Asset.parseMetadata(metadata) ⇒ <code>Object</code>
+### Asset.parseMetadata(metadata) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
 parses retrieved Metadata before saving
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Object</code> - parsed metadata definition  
+**Returns**: [<code>CodeExtractItem</code>](#CodeExtractItem) - parsed metadata definition  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single asset definition |
+| metadata | <code>AssetItem</code> | a single asset definition |
 
 <a name="Asset._mergeCode"></a>
 
-### Asset.\_mergeCode(metadata, deployDir, subType, [templateName]) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+### Asset.\_mergeCode(metadata, deployDir, subType, [templateName]) ⇒ <code>Promise.&lt;Array.&lt;MetadataType.CodeExtract&gt;&gt;</code>
 helper for this.preDeployTasks() that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code> - fileList for templating (disregarded during deployment)  
+**Returns**: <code>Promise.&lt;Array.&lt;MetadataType.CodeExtract&gt;&gt;</code> - fileList for templating (disregarded during deployment)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single asset definition |
-| deployDir | <code>String</code> | directory of deploy files |
-| subType | <code>String</code> | asset-subtype name |
-| [templateName] | <code>String</code> | name of the template used to built defintion (prior applying templating) |
+| metadata | <code>AssetItem</code> | a single asset definition |
+| deployDir | <code>string</code> | directory of deploy files |
+| subType | <code>AssetSubType</code> | asset-subtype name |
+| [templateName] | <code>string</code> | name of the template used to built defintion (prior applying templating) |
 
 <a name="Asset._mergeCode_slots"></a>
 
@@ -621,25 +627,25 @@ helper for this.preDeployTasks() that loads extracted code content back into JSO
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataSlots | <code>Object</code> | metadata.views.html.slots or deeper slots.<>.blocks.<>.slots |
-| readDirArr | <code>Array.&lt;String&gt;</code> | directory of deploy files |
-| subtypeExtension | <code>String</code> | asset-subtype name ending on -meta |
-| subDirArr | <code>Array.&lt;String&gt;</code> | directory of files w/o leading deploy dir |
+| readDirArr | <code>Array.&lt;string&gt;</code> | directory of deploy files |
+| subtypeExtension | <code>string</code> | asset-subtype name ending on -meta |
+| subDirArr | <code>Array.&lt;string&gt;</code> | directory of files w/o leading deploy dir |
 | fileList | <code>Array.&lt;Object&gt;</code> | directory of files w/o leading deploy dir |
-| customerKey | <code>String</code> | external key of template (could have been changed if used during templating) |
-| [templateName] | <code>String</code> | name of the template used to built defintion (prior applying templating) |
+| customerKey | <code>string</code> | external key of template (could have been changed if used during templating) |
+| [templateName] | <code>string</code> | name of the template used to built defintion (prior applying templating) |
 
 <a name="Asset._extractCode"></a>
 
-### Asset.\_extractCode(metadata) ⇒ <code>Object</code>
+### Asset.\_extractCode(metadata) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
 helper for this.parseMetadata() that finds code content in JSON and extracts it
 to allow saving that separately and formatted
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Object</code> - { json: metadata, codeArr: object[], subFolder: string[] }  
+**Returns**: [<code>CodeExtractItem</code>](#CodeExtractItem) - { json: metadata, codeArr: object[], subFolder: string[] }  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single asset definition |
+| metadata | <code>AssetItem</code> | a single asset definition |
 
 <a name="Asset._extractCode_slots"></a>
 
@@ -654,42 +660,42 @@ to allow saving that separately and formatted
 <a name="Asset.getJsonFromFS"></a>
 
 ### Asset.getJsonFromFS(dir) ⇒ <code>Object</code>
-Returns file contents mapped to their filename without '.json' ending
+Returns file contents mapped to their fileName without '.json' ending
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| dir | <code>String</code> | directory that contains '.json' files to be read |
+| dir | <code>string</code> | directory that contains '.json' files to be read |
 
 <a name="Asset.findSubType"></a>
 
-### Asset.findSubType(templateDir, templateName) ⇒ <code>string</code>
+### Asset.findSubType(templateDir, templateName) ⇒ <code>AssetSubType</code>
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>string</code> - subtype name  
+**Returns**: <code>AssetSubType</code> - subtype name  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| templateDir | <code>String</code> | Directory where metadata templates are stored |
-| templateName | <code>String</code> | name of the metadata file |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| templateName | <code>string</code> | name of the metadata file |
 
 <a name="Asset.readSecondaryFolder"></a>
 
-### Asset.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName) ⇒ <code>Object</code>
+### Asset.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName) ⇒ <code>AssetItem</code>
 optional method used for some types to try a different folder structure
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Object</code> - metadata  
+**Returns**: <code>AssetItem</code> - metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| templateDir | <code>String</code> | Directory where metadata templates are stored |
-| typeDirArr | <code>Array.&lt;String&gt;</code> | current subdir for this type |
-| templateName | <code>String</code> | name of the metadata template |
-| fileName | <code>String</code> | name of the metadata template file w/o extension |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| typeDirArr | <code>Array.&lt;string&gt;</code> | current subdir for this type |
+| templateName | <code>string</code> | name of the metadata template |
+| fileName | <code>string</code> | name of the metadata template file w/o extension |
 
 <a name="AttributeGroup"></a>
 
@@ -2242,7 +2248,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.retrieveSOAPgeneric(retrieveDir, buObject, [options], [additionalFields])](#MetadataType.retrieveSOAPgeneric) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
     * [.retrieveSOAPBody(fields, [options], [type])](#MetadataType.retrieveSOAPBody) ⇒ <code>Promise.&lt;MetadataTypeMap&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
-    * [.parseResponseBody(body, [bodyIteratorField], [keyField])](#MetadataType.parseResponseBody) ⇒ <code>Promise.&lt;MetadataTypeMap&gt;</code>
+    * [.parseResponseBody(body)](#MetadataType.parseResponseBody) ⇒ <code>Promise.&lt;MetadataTypeMap&gt;</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
     * [.removeNotCreateableFields(metadataEntry)](#MetadataType.removeNotCreateableFields) ⇒ <code>void</code>
     * [.removeNotUpdateableFields(metadataEntry)](#MetadataType.removeNotUpdateableFields) ⇒ <code>void</code>
@@ -2551,7 +2557,7 @@ Retrieves Metadata for Rest Types
 
 <a name="MetadataType.parseResponseBody"></a>
 
-### MetadataType.parseResponseBody(body, [bodyIteratorField], [keyField]) ⇒ <code>Promise.&lt;MetadataTypeMap&gt;</code>
+### MetadataType.parseResponseBody(body) ⇒ <code>Promise.&lt;MetadataTypeMap&gt;</code>
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -2560,8 +2566,6 @@ Builds map of metadata entries mapped to their keyfields
 | Param | Type | Description |
 | --- | --- | --- |
 | body | <code>Object</code> | json of response body |
-| [bodyIteratorField] | <code>string</code> | overrides bodyIteratorField of definition |
-| [keyField] | <code>string</code> | overrides keyField of definition |
 
 <a name="MetadataType.deleteFieldByDefinition"></a>
 
@@ -2801,62 +2805,62 @@ Query MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Query](#Query) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir)](#Query.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.retrieveForCache()](#Query.retrieveForCache) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Query.retrieveAsTemplate) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.postRetrieveTasks(metadata, _, isTemplating)](#Query.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
+    * [.retrieve(retrieveDir)](#Query.retrieve) ⇒ <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code>
+    * [.retrieveForCache()](#Query.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Query.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code>
+    * [.postRetrieveTasks(metadata, _, isTemplating)](#Query.postRetrieveTasks) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
     * [.create(query)](#Query.create) ⇒ <code>Promise</code>
     * [.update(query)](#Query.update) ⇒ <code>Promise</code>
-    * [.preDeployTasks(metadata, deployDir)](#Query.preDeployTasks) ⇒ <code>Promise</code>
+    * [.preDeployTasks(metadata, deployDir)](#Query.preDeployTasks) ⇒ <code>Promise.&lt;QueryItem&gt;</code>
     * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#Query.buildDefinitionForExtracts) ⇒ <code>Promise</code>
-    * [.parseMetadata(metadata)](#Query.parseMetadata) ⇒ <code>Array</code>
+    * [.parseMetadata(metadata)](#Query.parseMetadata) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
 
 <a name="Query.retrieve"></a>
 
-### Query.retrieve(retrieveDir) ⇒ <code>Promise.&lt;Object&gt;</code>
+### Query.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code>
 Retrieves Metadata of queries
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of metadata  
+**Returns**: <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| retrieveDir | <code>String</code> | Directory where retrieved metadata directory will be saved |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 
 <a name="Query.retrieveForCache"></a>
 
-### Query.retrieveForCache() ⇒ <code>Promise.&lt;Object&gt;</code>
+### Query.retrieveForCache() ⇒ <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code>
 Retrieves query metadata for caching
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of metadata  
+**Returns**: <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code> - Promise of metadata  
 <a name="Query.retrieveAsTemplate"></a>
 
-### Query.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;Object&gt;</code>
+### Query.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code>
 Retrieve a specific Query by Name
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of metadata  
+**Returns**: <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| templateDir | <code>String</code> | Directory where retrieved metadata directory will be saved |
-| name | <code>String</code> | name of the metadata file |
-| templateVariables | <code>Object</code> | variables to be replaced in the metadata |
+| templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| name | <code>string</code> | name of the metadata file |
+| templateVariables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="Query.postRetrieveTasks"></a>
 
-### Query.postRetrieveTasks(metadata, _, isTemplating) ⇒ <code>Array.&lt;Object&gt;</code>
+### Query.postRetrieveTasks(metadata, _, isTemplating) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
 manages post retrieve steps
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>Array.&lt;Object&gt;</code> - Array with one metadata object and one query string  
+**Returns**: [<code>CodeExtractItem</code>](#CodeExtractItem) - Array with one metadata object and one query string  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single query |
-| _ | <code>String</code> | unused |
-| isTemplating | <code>Boolean</code> | signals that we are retrieving templates |
+| metadata | <code>QueryItem</code> | a single query |
+| _ | <code>string</code> | unused |
+| isTemplating | <code>boolean</code> | signals that we are retrieving templates |
 
 <a name="Query.create"></a>
 
@@ -2868,7 +2872,7 @@ Creates a single query
 
 | Param | Type | Description |
 | --- | --- | --- |
-| query | <code>Object</code> | a single query |
+| query | <code>QueryItem</code> | a single query |
 
 <a name="Query.update"></a>
 
@@ -2880,20 +2884,20 @@ Updates a single query
 
 | Param | Type | Description |
 | --- | --- | --- |
-| query | <code>Object</code> | a single query |
+| query | <code>QueryItem</code> | a single query |
 
 <a name="Query.preDeployTasks"></a>
 
-### Query.preDeployTasks(metadata, deployDir) ⇒ <code>Promise</code>
+### Query.preDeployTasks(metadata, deployDir) ⇒ <code>Promise.&lt;QueryItem&gt;</code>
 prepares a Query for deployment
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;QueryItem&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single query activity definition |
-| deployDir | <code>String</code> | directory of deploy files |
+| metadata | <code>QueryItem</code> | a single query activity |
+| deployDir | <code>string</code> | directory of deploy files |
 
 <a name="Query.buildDefinitionForExtracts"></a>
 
@@ -2906,23 +2910,23 @@ handles extracted code if any are found for complex types
 
 | Param | Type | Description |
 | --- | --- | --- |
-| templateDir | <code>String</code> | Directory where metadata templates are stored |
-| targetDir | <code>String</code> \| <code>Array.&lt;String&gt;</code> | (List of) Directory where built definitions will be saved |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> \| <code>Array.&lt;string&gt;</code> | (List of) Directory where built definitions will be saved |
 | metadata | <code>Object</code> | main JSON file that was read from file system |
 | variables | <code>Object</code> | variables to be replaced in the metadata |
-| templateName | <code>String</code> | name of the template to be built |
+| templateName | <code>string</code> | name of the template to be built |
 
 <a name="Query.parseMetadata"></a>
 
-### Query.parseMetadata(metadata) ⇒ <code>Array</code>
+### Query.parseMetadata(metadata) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
 parses retrieved Metadata before saving
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>Array</code> - Array with one metadata object and one sql string  
+**Returns**: [<code>CodeExtractItem</code>](#CodeExtractItem) - a single item with code parts extracted  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single query activity definition |
+| metadata | <code>QueryItem</code> | a single query activity definition |
 
 <a name="Role"></a>
 
@@ -3026,64 +3030,64 @@ Script MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Script](#Script) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir)](#Script.retrieve) ⇒ <code>Promise</code>
-    * [.retrieveForCache()](#Script.retrieveForCache) ⇒ <code>Promise</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Script.retrieveAsTemplate) ⇒ <code>Promise</code>
-    * [.postRetrieveTasks(metadata, [_], [isTemplating])](#Script.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
+    * [.retrieve(retrieveDir)](#Script.retrieve) ⇒ <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code>
+    * [.retrieveForCache()](#Script.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Script.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code>
+    * [.postRetrieveTasks(metadata, [_], [isTemplating])](#Script.postRetrieveTasks) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
     * [.update(script)](#Script.update) ⇒ <code>Promise</code>
     * [.create(script)](#Script.create) ⇒ <code>Promise</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#Script._mergeCode) ⇒ <code>Promise.&lt;String&gt;</code>
-    * [.preDeployTasks(metadata, dir)](#Script.preDeployTasks) ⇒ <code>Promise</code>
+    * [.preDeployTasks(metadata, dir)](#Script.preDeployTasks) ⇒ <code>ScriptItem</code>
     * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#Script.buildDefinitionForExtracts) ⇒ <code>Promise</code>
-    * [.parseMetadata(metadata)](#Script.parseMetadata) ⇒ <code>Array.&lt;Object&gt;</code>
+    * [.parseMetadata(metadata)](#Script.parseMetadata) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
 
 <a name="Script.retrieve"></a>
 
-### Script.retrieve(retrieveDir) ⇒ <code>Promise</code>
+### Script.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code>
 Retrieves Metadata of Script
 Endpoint /automation/v1/scripts/ return all Scripts with all details.
 
 **Kind**: static method of [<code>Script</code>](#Script)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| retrieveDir | <code>String</code> | Directory where retrieved metadata directory will be saved |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 
 <a name="Script.retrieveForCache"></a>
 
-### Script.retrieveForCache() ⇒ <code>Promise</code>
+### Script.retrieveForCache() ⇒ <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code>
 Retrieves script metadata for caching
 
 **Kind**: static method of [<code>Script</code>](#Script)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code> - Promise  
 <a name="Script.retrieveAsTemplate"></a>
 
-### Script.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise</code>
+### Script.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code>
 Retrieve a specific Script by Name
 
 **Kind**: static method of [<code>Script</code>](#Script)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| templateDir | <code>String</code> | Directory where retrieved metadata directory will be saved |
-| name | <code>String</code> | name of the metadata file |
-| templateVariables | <code>Object</code> | variables to be replaced in the metadata |
+| templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| name | <code>string</code> | name of the metadata file |
+| templateVariables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="Script.postRetrieveTasks"></a>
 
-### Script.postRetrieveTasks(metadata, [_], [isTemplating]) ⇒ <code>Array.&lt;Object&gt;</code>
+### Script.postRetrieveTasks(metadata, [_], [isTemplating]) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
 manages post retrieve steps
 
 **Kind**: static method of [<code>Script</code>](#Script)  
-**Returns**: <code>Array.&lt;Object&gt;</code> - Array with one metadata object and one ssjs string  
+**Returns**: [<code>CodeExtractItem</code>](#CodeExtractItem) - Array with one metadata object and one ssjs string  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single script |
-| [_] | <code>String</code> | unused |
-| [isTemplating] | <code>Boolean</code> | signals that we are retrieving templates |
+| metadata | <code>ScriptItem</code> | a single script |
+| [_] | <code>string</code> | unused |
+| [isTemplating] | <code>boolean</code> | signals that we are retrieving templates |
 
 <a name="Script.update"></a>
 
@@ -3119,22 +3123,22 @@ helper for this.preDeployTasks() that loads extracted code content back into JSO
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single asset definition |
-| deployDir | <code>String</code> | directory of deploy files |
-| [templateName] | <code>String</code> | name of the template used to built defintion (prior applying templating) |
+| metadata | <code>ScriptItem</code> | a single asset definition |
+| deployDir | <code>string</code> | directory of deploy files |
+| [templateName] | <code>string</code> | name of the template used to built defintion (prior applying templating) |
 
 <a name="Script.preDeployTasks"></a>
 
-### Script.preDeployTasks(metadata, dir) ⇒ <code>Promise</code>
+### Script.preDeployTasks(metadata, dir) ⇒ <code>ScriptItem</code>
 prepares a Script for deployment
 
 **Kind**: static method of [<code>Script</code>](#Script)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>ScriptItem</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single script activity definition |
-| dir | <code>String</code> | directory of deploy files |
+| metadata | <code>ScriptItem</code> | a single script activity definition |
+| dir | <code>string</code> | directory of deploy files |
 
 <a name="Script.buildDefinitionForExtracts"></a>
 
@@ -3147,23 +3151,23 @@ handles extracted code if any are found for complex types
 
 | Param | Type | Description |
 | --- | --- | --- |
-| templateDir | <code>String</code> | Directory where metadata templates are stored |
-| targetDir | <code>String</code> \| <code>Array.&lt;String&gt;</code> | (List of) Directory where built definitions will be saved |
-| metadata | <code>Object</code> | main JSON file that was read from file system |
-| variables | <code>Object</code> | variables to be replaced in the metadata |
-| templateName | <code>String</code> | name of the template to be built |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> \| <code>Array.&lt;string&gt;</code> | (List of) Directory where built definitions will be saved |
+| metadata | <code>ScriptItem</code> | main JSON file that was read from file system |
+| variables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
+| templateName | <code>string</code> | name of the template to be built |
 
 <a name="Script.parseMetadata"></a>
 
-### Script.parseMetadata(metadata) ⇒ <code>Array.&lt;Object&gt;</code>
+### Script.parseMetadata(metadata) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
 Splits the script metadata into two parts and parses in a standard manner
 
 **Kind**: static method of [<code>Script</code>](#Script)  
-**Returns**: <code>Array.&lt;Object&gt;</code> - Array with one metadata object and one ssjs string  
+**Returns**: [<code>CodeExtractItem</code>](#CodeExtractItem) - a single item with code parts extracted  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single script activity definition |
+| metadata | <code>ScriptItem</code> | a single script activity definition |
 
 <a name="SetDefinition"></a>
 
@@ -5126,6 +5130,18 @@ wrapper around our standard winston logging to console and logfile
 initiate winston logger
 
 **Kind**: global function  
+<a name="CodeExtractItem"></a>
+
+## CodeExtractItem : <code>Object.&lt;string, any&gt;</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| json | <code>AssetItem</code> | metadata of one item w/o code |
+| codeArr | <code>Array.&lt;MetadataType.CodeExtract&gt;</code> | list of code snippets in this item |
+| subFolder | <code>Array.&lt;string&gt;</code> | mostly set to null, otherwise list of subfolders |
+
 <a name="AutomationMap"></a>
 
 ## AutomationMap : <code>Object</code>
@@ -5247,6 +5263,65 @@ REST format
 
 ## MultiMetadataTypeMap : <code>Object.&lt;string, any&gt;</code>
 **Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| json | <code>MetadataTypeItem</code> | metadata of one item w/o code |
+| codeArr | <code>Array.&lt;CodeExtract&gt;</code> | list of code snippets in this item |
+| subFolder | <code>Array.&lt;string&gt;</code> | mostly set to null, otherwise list of subfolders |
+| subFolder | <code>Array.&lt;string&gt;</code> | mostly set to null, otherwise subfolders path split into elements |
+| fileName | <code>string</code> | name of file w/o extension |
+| fileExt | <code>string</code> | file extension |
+| content | <code>string</code> | file content |
+| [encoding] | <code>&#x27;base64&#x27;</code> | optional for binary files |
+
+<a name="CodeExtractItem"></a>
+
+## CodeExtractItem : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | name |
+| key | <code>string</code> | key |
+| description | <code>string</code> | - |
+| targetKey | <code>string</code> | key of target data extension |
+| createdDate | <code>string</code> | e.g. "2020-09-14T01:42:03.017" |
+| modifiedDate | <code>string</code> | e.g. "2020-09-14T01:42:03.017" |
+| targetUpdateTypeName | <code>&#x27;Overwrite&#x27;</code> \| <code>&#x27;Update&#x27;</code> \| <code>&#x27;Append&#x27;</code> | defines how the query writes into the target data extension |
+| [targetUpdateTypeId] | <code>0</code> \| <code>1</code> \| <code>2</code> | mapped to targetUpdateTypeName via this.definition.targetUpdateTypeMapping |
+| [targetId] | <code>string</code> | Object ID of DE (removed before save) |
+| [targetDescription] | <code>string</code> | Description DE (removed before save) |
+| isFrozen | <code>boolean</code> | looks like this is always set to false |
+| [queryText] | <code>string</code> | contains SQL query with line breaks converted to '\n'. The content is extracted during retrieval and written into a separate *.sql file |
+| [categoryId] | <code>string</code> | holds folder ID, replaced with r__folder_Path during retrieve |
+| r__folder_Path | <code>string</code> | folder path in which this DE is saved |
+| json | <code>QueryItem</code> | metadata of one item w/o code |
+| codeArr | <code>Array.&lt;MetadataType.CodeExtract&gt;</code> | list of code snippets in this item |
+| subFolder | <code>Array.&lt;string&gt;</code> | mostly set to null, otherwise list of subfolders |
+
+<a name="CodeExtractItem"></a>
+
+## CodeExtractItem : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | name |
+| key | <code>string</code> | key |
+| description | <code>string</code> | - |
+| createdDate | <code>string</code> | e.g. "2020-09-14T01:42:03.017" |
+| modifiedDate | <code>string</code> | e.g. "2020-09-14T01:42:03.017" |
+| [script] | <code>string</code> | contains script with line breaks converted to '\n'. The content is extracted during retrieval and written into a separate *.ssjs file |
+| [categoryId] | <code>string</code> | holds folder ID, replaced with r__folder_Path during retrieve |
+| r__folder_Path | <code>string</code> | folder path in which this DE is saved |
+| json | <code>ScriptItem</code> | metadata of one item w/o code |
+| codeArr | <code>Array.&lt;MetadataType.CodeExtract&gt;</code> | list of code snippets in this item |
+| subFolder | <code>Array.&lt;string&gt;</code> | mostly set to null, otherwise list of subfolders |
+
 <a name="TemplateMap"></a>
 
 ## TemplateMap : <code>Object.&lt;string, string&gt;</code>
