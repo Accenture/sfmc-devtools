@@ -17,19 +17,19 @@
         "type": "corporate",
         "url": "https://github.com/Accenture/sfmc-devtools"
     },
-    "main": "./lib/index.js",
+    "main": "./lib/cli/index.js",
     "bin": {
-        "mcdev": "./lib/index.js"
+        "mcdev": "./lib/cli/index.js"
     },
     "engines": {
         "node": ">=14.16"
     },
     "scripts": {
-        "start": "node lib/index.js",
-        "mcdev": "node lib/index.js",
+        "start": "node lib/cli/index.js",
+        "mcdev": "node lib/cli/index.js",
         "postinstall": "node postinstall.js",
         "build": "run-s lint docs",
-        "debug": "node --nolazy --inspect-brk=9229 lib/index.js",
+        "debug": "node --nolazy --inspect-brk=9229 lib/cli/index.js",
         "docs": "jsdoc2md --files lib/**/*.js > docs/dist/documentation.md",
         "lint": "eslint --fix lib/**/*.js && eslint --fix test/**/*.js && prettier --write lib/**/*.js",
         "test": "mocha --recursive",

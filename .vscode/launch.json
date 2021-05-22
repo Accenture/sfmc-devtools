@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}\\lib\\index.js",
+            "program": "${workspaceFolder}\\lib\\cli\\index.js",
             "args": ["retrieve", "Dev"]
         }
     ]
