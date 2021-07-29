@@ -14,6 +14,7 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 - [#48](https://github.com/Accenture/sfmc-devtools/issues/48) connection errors for dataExtensions and other types are now handled gracefully
 - [#49](https://github.com/Accenture/sfmc-devtools/issues/49) connection errors for asset subtypes no longer restart downloading all subtypes
 - [#51](https://github.com/Accenture/sfmc-devtools/issues/51) retrieving asset subtypes now always uses the default list of subtypes
+- [#52](https://github.com/Accenture/sfmc-devtools/issues/52) no more endless retries in case of connection errors
 
 ---
 
