@@ -4,7 +4,21 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 
 ---
 
-## 3.0.1 - 2021-04-11
+## [3.0.2](https://github.com/Accenture/sfmc-devtools/compare/v3.0.1...v3.0.2) - 2021-08-03
+
+**Bugfixes:**
+
+- [#26](https://github.com/Accenture/sfmc-devtools/issues/26) retrieving asset subtypes via r ... asset-xyz actually saves result to disk
+- [#45](https://github.com/Accenture/sfmc-devtools/issues/45) connection errors for automations fixed
+- [#46](https://github.com/Accenture/sfmc-devtools/issues/46) (temp fix) campaigns break entire retrieve - disabled for now
+- [#48](https://github.com/Accenture/sfmc-devtools/issues/48) connection errors for dataExtensions and other types are now handled gracefully
+- [#49](https://github.com/Accenture/sfmc-devtools/issues/49) connection errors for asset subtypes no longer restart downloading all subtypes
+- [#51](https://github.com/Accenture/sfmc-devtools/issues/51) retrieving asset subtypes now always uses the default list of subtypes
+- [#52](https://github.com/Accenture/sfmc-devtools/issues/52) no more endless retries in case of connection errors
+
+---
+
+## [3.0.1](https://github.com/Accenture/sfmc-devtools/compare/v3.0.0...v3.0.1) - 2021-04-11
 
 **Bugfixes:**
 
