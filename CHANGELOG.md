@@ -11,6 +11,10 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 - [#100](https://github.com/Accenture/sfmc-devtools/issues/100) Handle ECONNRESET errors across various types (incl. Data Extensions)
 - [#102](https://github.com/Accenture/sfmc-devtools/issues/102) block deployment attempt for synchronized Data Extensions with proper error message
 - [#104](https://github.com/Accenture/sfmc-devtools/issues/104) block deployment of shared data extensions on child BUs (existing solution broke somewhere down the line)
+
+**Chores:**
+
+- [#107](https://github.com/Accenture/sfmc-devtools/issues/107) rewrite folder to use generic update/create to help with ECONNRESET issue
 - [#108](https://github.com/Accenture/sfmc-devtools/issues/108) return full API error messages for create & update via SOAP
 - [#110](https://github.com/Accenture/sfmc-devtools/issues/110) improve error message for missing dependencies
 
