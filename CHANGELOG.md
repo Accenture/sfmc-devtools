@@ -4,6 +4,18 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 
 ---
 
+## [3.0.3](https://github.com/Accenture/sfmc-devtools/compare/v3.0.2...v3.0.3) - 2021-08-11
+
+**Bugfixes:**
+
+- [#100](https://github.com/Accenture/sfmc-devtools/issues/100) Handle ECONNRESET errors across various types (incl. Data Extensions)
+- [#102](https://github.com/Accenture/sfmc-devtools/issues/102) block deployment attempt for synchronized Data Extensions with proper error message
+- [#104](https://github.com/Accenture/sfmc-devtools/issues/104) block deployment of shared data extensions on child BUs (existing solution broke somewhere down the line)
+- [#108](https://github.com/Accenture/sfmc-devtools/issues/108) return full API error messages for create & update via SOAP
+- [#110](https://github.com/Accenture/sfmc-devtools/issues/110) improve error message for missing dependencies
+
+---
+
 ## [3.0.2](https://github.com/Accenture/sfmc-devtools/compare/v3.0.1...v3.0.2) - 2021-08-03
 
 **Bugfixes:**
