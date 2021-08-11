@@ -25,5 +25,6 @@ _Please delete options that are not relevant._
 - [ ] I have performed a self-review of my own code
 - [ ] I have commented my code, particularly in hard-to-understand areas
 - [ ] ESLint & Prettier are not outputting errors or warnings
-- [ ] Documentation updated (if applicable)
-- [ ] Changelog updated
+- [ ] README.md updated (if applicable)
+- [ ] CHANGELOG.md updated
+- [ ] ran `npm run docs` to update developer docs

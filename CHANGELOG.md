@@ -4,6 +4,28 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 
 ---
 
+## [3.0.3](https://github.com/Accenture/sfmc-devtools/compare/v3.0.2...v3.0.3) - 2021-08-11
+
+**Bugfixes:**
+
+- [#100](https://github.com/Accenture/sfmc-devtools/issues/100) Handle ECONNRESET errors across various types (incl. Data Extensions)
+- [#102](https://github.com/Accenture/sfmc-devtools/issues/102) block deployment attempt for synchronized Data Extensions with proper error message
+- [#104](https://github.com/Accenture/sfmc-devtools/issues/104) block deployment of shared data extensions on child BUs (existing solution broke somewhere down the line)
+
+**Chores:**
+
+- [#107](https://github.com/Accenture/sfmc-devtools/issues/107) rewrite folder to use generic update/create to help with ECONNRESET issue
+- [#108](https://github.com/Accenture/sfmc-devtools/issues/108) return full API error messages for create & update via SOAP
+- [#110](https://github.com/Accenture/sfmc-devtools/issues/110) improve error message for missing dependencies
+- bumped jsdoc-to-markdown to 7.0.1
+- bumped eslint-plugin-mocha to 9.0.0
+- bumped eslint-plugin-prettier to 3.4.0
+- bumped eslint-config-prettier to 8.3.0
+- bumped eslint to 7.32.0
+- enhanced Pull Request Template with note on `npm run docs`
+
+---
+
 ## [3.0.2](https://github.com/Accenture/sfmc-devtools/compare/v3.0.1...v3.0.2) - 2021-08-03
 
 **Bugfixes:**
