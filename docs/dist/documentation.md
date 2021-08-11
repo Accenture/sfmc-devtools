@@ -1854,20 +1854,20 @@ Folder MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Folder](#Folder) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [overrideFields], buObject)](#Folder.retrieve) ⇒ <code>Promise</code>
+    * [.retrieve(retrieveDir, [additionalFields], buObject)](#Folder.retrieve) ⇒ <code>Promise</code>
     * [.retrieveForCache(buObject)](#Folder.retrieveForCache) ⇒ <code>Promise</code>
     * [.upsert(metadata)](#Folder.upsert) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.create(metadata)](#Folder.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#Folder.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#Folder.preDeployTasks) ⇒ <code>Promise</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#Folder.getJsonFromFS) ⇒ <code>Object</code>
-    * [.retrieveHelper([overrideFields], [queryAllAccounts])](#Folder.retrieveHelper) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.retrieveHelper([additionalFields], [queryAllAccounts])](#Folder.retrieveHelper) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.postRetrieveTasks(metadata)](#Folder.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.saveResults(results, retrieveDir, mid)](#Folder.saveResults) ⇒ <code>Promise.&lt;Object&gt;</code>
 
 <a name="Folder.retrieve"></a>
 
-### Folder.retrieve(retrieveDir, [overrideFields], buObject) ⇒ <code>Promise</code>
+### Folder.retrieve(retrieveDir, [additionalFields], buObject) ⇒ <code>Promise</code>
 Retrieves metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: static method of [<code>Folder</code>](#Folder)  
@@ -1876,7 +1876,7 @@ Retrieves metadata of metadata type into local filesystem. executes callback wit
 | Param | Type | Description |
 | --- | --- | --- |
 | retrieveDir | <code>String</code> | Directory where retrieved metadata directory will be saved |
-| [overrideFields] | <code>Array.&lt;String&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
+| [additionalFields] | <code>Array.&lt;String&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | buObject | <code>Object</code> | properties for auth |
 
 <a name="Folder.retrieveForCache"></a>
@@ -1956,7 +1956,7 @@ Returns file contents mapped to their filename without '.json' ending
 
 <a name="Folder.retrieveHelper"></a>
 
-### Folder.retrieveHelper([overrideFields], [queryAllAccounts]) ⇒ <code>Promise.&lt;Object&gt;</code>
+### Folder.retrieveHelper([additionalFields], [queryAllAccounts]) ⇒ <code>Promise.&lt;Object&gt;</code>
 Helper to retrieve the folders as promise
 
 **Kind**: static method of [<code>Folder</code>](#Folder)  
@@ -1964,7 +1964,7 @@ Helper to retrieve the folders as promise
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [overrideFields] | <code>Array.&lt;String&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
+| [additionalFields] | <code>Array.&lt;String&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | [queryAllAccounts] | <code>Boolean</code> | which queryAllAccounts setting to use |
 
 <a name="Folder.postRetrieveTasks"></a>
@@ -2242,10 +2242,10 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.update(metadata, [metadataBefore])](#MetadataType.update) ⇒ <code>void</code>
     * [.upsert(metadata, deployDir, [buObject])](#MetadataType.upsert) ⇒ <code>Promise.&lt;MetadataTypeMap&gt;</code>
     * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise</code>
-    * [.createSOAP(metadataEntry)](#MetadataType.createSOAP) ⇒ <code>Promise</code>
+    * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise</code>
     * [.updateREST(metadataEntry, uri)](#MetadataType.updateREST) ⇒ <code>Promise</code>
-    * [.updateSOAP(metadataEntry)](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
-    * [.retrieveSOAPgeneric(retrieveDir, buObject, [options], [additionalFields])](#MetadataType.retrieveSOAPgeneric) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
+    * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
+    * [.retrieveSOAPgeneric(retrieveDir, buObject, [options], [additionalFields], [overrideType])](#MetadataType.retrieveSOAPgeneric) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
     * [.retrieveSOAPBody(fields, [options], [type])](#MetadataType.retrieveSOAPBody) ⇒ <code>Promise.&lt;MetadataTypeMap&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
     * [.parseResponseBody(body)](#MetadataType.parseResponseBody) ⇒ <code>Promise.&lt;MetadataTypeMap&gt;</code>
@@ -2476,7 +2476,7 @@ Creates a single metadata entry via REST
 
 <a name="MetadataType.createSOAP"></a>
 
-### MetadataType.createSOAP(metadataEntry) ⇒ <code>Promise</code>
+### MetadataType.createSOAP(metadataEntry, [overrideType], [handleOutside]) ⇒ <code>Promise</code>
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -2485,6 +2485,8 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataEntry | <code>MetadataTypeItem</code> | single metadata entry |
+| [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
+| [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
 <a name="MetadataType.updateREST"></a>
 
@@ -2501,7 +2503,7 @@ Updates a single metadata entry via REST
 
 <a name="MetadataType.updateSOAP"></a>
 
-### MetadataType.updateSOAP(metadataEntry) ⇒ <code>Promise</code>
+### MetadataType.updateSOAP(metadataEntry, [overrideType], [handleOutside]) ⇒ <code>Promise</code>
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -2510,10 +2512,12 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataEntry | <code>MetadataTypeItem</code> | single metadata entry |
+| [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
+| [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
 <a name="MetadataType.retrieveSOAPgeneric"></a>
 
-### MetadataType.retrieveSOAPgeneric(retrieveDir, buObject, [options], [additionalFields]) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
+### MetadataType.retrieveSOAPgeneric(retrieveDir, buObject, [options], [additionalFields], [overrideType]) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -2525,6 +2529,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 | buObject | <code>Util.BuObject</code> | properties for auth |
 | [options] | <code>Object</code> | required for the specific request (filter for example) |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
+| [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
 
 <a name="MetadataType.retrieveSOAPBody"></a>
 
