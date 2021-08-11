@@ -17,6 +17,12 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 - [#107](https://github.com/Accenture/sfmc-devtools/issues/107) rewrite folder to use generic update/create to help with ECONNRESET issue
 - [#108](https://github.com/Accenture/sfmc-devtools/issues/108) return full API error messages for create & update via SOAP
 - [#110](https://github.com/Accenture/sfmc-devtools/issues/110) improve error message for missing dependencies
+- bumped jsdoc-to-markdown to 7.0.1
+- bumped eslint-plugin-mocha to 9.0.0
+- bumped eslint-plugin-prettier to 3.4.0
+- bumped eslint-config-prettier to 8.3.0
+- bumped eslint to 7.32.0
+- enhanced Pull Request Template with note on `npm run docs`
 
 ---
 
