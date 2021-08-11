@@ -46,6 +46,7 @@ Accenture Salesforce Marketing Cloud DevTools (mcdev) is a rapid deployment/roll
   - [7.1. Config Options](#71-config-options)
   - [7.2. Metadata specific settings & options](#72-metadata-specific-settings--options)
     - [7.2.1. Retention Policy fields in Data Extensions](#721-retention-policy-fields-in-data-extensions)
+    - [7.2.2. Renaming fields of a Data Extensions](#722-renaming-fields-of-a-data-extensions)
   - [7.3. Market Configuration](#73-market-configuration)
   - [7.4. Market List Configuration](#74-market-list-configuration)
 - [8. Examples](#8-examples)
@@ -1024,6 +1025,77 @@ To **disable retention completely**, ensure that you have the 3 booleans set to 
 To enable "delete All records and data extensions" you have to set RowBasedRetention:false and DeleteAtEndOfRetentionPeriod:false while at the same time providing a date in RetainUntil field or a DataRetentionPeriod via the 2 associated fields.
 
 It seems the 2 other modes were added on top later and hence "all records and data extension" is the default retention mode.
+
+#### 7.2.2. Renaming fields of a Data Extensions
+
+With a small addition to the Data Extension's JSON it is possible to rename fields via MC DevTools. Imagine the following Data Extension:
+
+```json
+{
+    "CustomerKey": "Account",
+    "Name": "Account",
+    "Description": "",
+    "IsSendable": "false",
+    "IsTestable": "false",
+    "Fields": [
+        {
+            "Name": "BillingCity",
+            "Scale": "0",
+            "DefaultValue": "",
+            "MaxLength": "40",
+            "IsRequired": "false",
+            "IsPrimaryKey": "true",
+            "FieldType": "Text"
+        },
+        {
+            "Name": "BillingCountry",
+            "Scale": "0",
+            "DefaultValue": "",
+            "MaxLength": "80",
+            "IsRequired": "false",
+            "IsPrimaryKey": "false",
+            "FieldType": "Text"
+        }
+    ],
+    "r__folder_Path": "Data Extensions"
+}
+```
+
+Imagine you wanted to rename `BillingCountry` to `BillingZip` for some reason. Previously, you could either go into the GUI or delete & recreate the field. Now, MC DevTools allows you to specify `Name_new` on the field and the tool will take care of the rest during **deployment**:
+
+```json
+{
+    "CustomerKey": "Account",
+    "Name": "Account",
+    "Description": "",
+    "IsSendable": "false",
+    "IsTestable": "false",
+    "Fields": [
+        {
+            "Name": "BillingCity",
+            "Scale": "0",
+            "DefaultValue": "",
+            "MaxLength": "40",
+            "IsRequired": "false",
+            "IsPrimaryKey": "true",
+            "FieldType": "Text"
+        },
+        {
+            "Name": "BillingCountry", /* old name, keep here for reference during the update! */
+            "Name_new": "BillingZip", /* new name */
+            "Scale": "0",
+            "DefaultValue": "",
+            "MaxLength": "80",
+            "IsRequired": "false",
+            "IsPrimaryKey": "false",
+            "FieldType": "Text"
+        }
+    ],
+    "r__folder_Path": "Data Extensions"
+}
+```
+
+All you have to do is deploy the data extension again with Name_new specified for each field that needs to be renamed.
 
 ### 7.3. Market Configuration
 
