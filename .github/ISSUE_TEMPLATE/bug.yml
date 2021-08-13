@@ -37,7 +37,7 @@ body:
   id: version
   attributes:
     label: Version
-    description: What version of our software are you running?
+    description: What version of our software are you running? (mcdev --version)
     options:
       - 3.0.3 (Default)
       - 3.0.2
@@ -50,12 +50,10 @@ body:
     label: Environment
     description: |
       examples:
-        - **mcdev (mcdev --version)**: 3.0.3
         - **Operating system (Windows/Mac/Linux/...)**: Windows 10
         - **Node (node --version)**: 13.14.0
         - **npm (npm --version)**: 7.6.3
     value: |
-        - mcdev: 
         - OS: 
         - Node: 
         - npm: 
