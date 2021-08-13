@@ -33,6 +33,18 @@ body:
       4. See error...
   validations:
     required: false
+- type: dropdown
+  id: version
+  attributes:
+    label: Version
+    description: What version of our software are you running?
+    options:
+      - 3.0.3 (Default)
+      - 3.0.2
+      - 3.0.1
+      - develop-branch
+  validations:
+    required: true
 - type: textarea
   attributes:
     label: Environment
