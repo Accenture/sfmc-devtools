@@ -1,0 +1,51 @@
+name: 🐞 Bug
+description: File a bug/issue
+title: "[BUG] <title>"
+labels: [bug, NEW]
+body:
+- type: checkboxes
+  attributes:
+    label: Is there an existing issue for this?
+    description: Please [search here](https://github.com/Accenture/sfmc-devtools/issues) to see if an issue already exists for your problem.
+    options:
+    - label: I have searched the existing issues
+      required: true
+- type: textarea
+  attributes:
+    label: Current Behavior
+    description: A clear & concise description of what you're experiencing.
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: Expected Behavior
+    description: A clear & concise description of what you expected to happen.
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: Steps To Reproduce
+    description: Steps to reproduce the behavior.
+    value: |
+      1. Go to '...'
+      2. Click on '....'
+      3. Run '...'
+      4. See error...
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: Environment
+    description: |
+      examples:
+        - **mcdev (mcdev --version)**: 3.0.3
+        - **Operating system (Windows/Mac/Linux/...)**: Windows 10
+        - **Node (node --version)**: 13.14.0
+        - **npm (npm --version)**: 7.6.3
+    value: |
+        - mcdev: 
+        - OS: 
+        - Node: 
+        - npm: 
+  validations:
+    required: false
