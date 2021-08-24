@@ -4,6 +4,14 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 
 ---
 
+## [3.1.0](https://github.com/Accenture/sfmc-devtools/compare/v3.0.3...v3.1.0) - 2021-??-??
+
+**Bugfixes:**
+
+- [#117](https://github.com/Accenture/sfmc-devtools/issues/117) queries not deployable when target is shared DE
+
+---
+
 ## [3.0.3](https://github.com/Accenture/sfmc-devtools/compare/v3.0.2...v3.0.3) - 2021-08-11
 
 **Bugfixes:**
