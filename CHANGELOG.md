@@ -16,6 +16,8 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 - [#117](https://github.com/Accenture/sfmc-devtools/issues/117) queries not deployable when target is shared DE
 - [#118](https://github.com/Accenture/sfmc-devtools/issues/118) automation start not auto-retried during deploy
 - [#119](https://github.com/Accenture/sfmc-devtools/issues/119) fixed list dependency for importFile
+- [#122](https://github.com/Accenture/sfmc-devtools/issues/122) ECONNRESET on caching metadata during deploy
+- [#127](https://github.com/Accenture/sfmc-devtools/issues/127) bad message "info: updated automation: undefined"
 
 ---
 
