@@ -4,6 +4,20 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 
 ---
 
+## [3.1.0](https://github.com/Accenture/sfmc-devtools/compare/v3.0.3...v3.1.0) - 2021-??-??
+
+**Features:**
+
+- [#133](https://github.com/Accenture/sfmc-devtools/issues/133) DE field validation during DE update
+
+**Bugfixes:**
+
+- fix [#128](https://github.com/Accenture/sfmc-devtools/issues/128) #128 dataExtension json not equal for retrieve/deploy
+- [#129](https://github.com/Accenture/sfmc-devtools/issues/129) Script json not equal for retrieve/deploy
+- [#132](https://github.com/Accenture/sfmc-devtools/issues/132) dataExtension.SendableSubscriberField.Name now has a slightly more readable value
+
+---
+
 ## [3.0.3](https://github.com/Accenture/sfmc-devtools/compare/v3.0.2...v3.0.3) - 2021-08-11
 
 **Bugfixes:**
