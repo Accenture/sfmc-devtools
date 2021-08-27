@@ -46,6 +46,7 @@ Accenture Salesforce Marketing Cloud DevTools (mcdev) is a rapid deployment/roll
   - [7.1. Config Options](#71-config-options)
   - [7.2. Metadata specific settings](#72-metadata-specific-settings)
     - [7.2.1. Retention Policy fields in Data Extensions](#721-retention-policy-fields-in-data-extensions)
+    - [7.2.2. Adding/Updating Fields on existing Data Extensions](#722-addingupdating-fields-on-existing-data-extensions)
 - [8. Examples](#8-examples)
   - [8.1. Retrieve and deploy Data Extension](#81-retrieve-and-deploy-data-extension)
   - [8.2. Metadata Retrieving/Backup](#82-metadata-retrievingbackup)
@@ -1014,7 +1015,7 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
 The way retention policy is saved is a bit misleading and hence we wanted to provide a bit of guidance if you ever need to do a deep dive here.
 
 | Field                                | Description                                                                                                                                                                                                                                                                                                                        | Values                                                                 |
-| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------ |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | 
 | **DataRetentionPeriod**              | this field should print the value of the unit of measure but it unfortunately is off by one (e.g. showing "weeks" instead of "months"). Also, it seems to have no impact on what's stored.<br> We therefore excluded it from retrieve/deploy                                                                                       | -                                                                      |
 | **DataRetentionPeriodUnitOfMeasure** | represents drop down for "period after" selection                                                                                                                                                                                                                                                                                  | 6: years<br>5: months<br>4: weeks<br>2: days                           |
 | **DataRetentionPeriodLength**        | represents number field for "period after" selection                                                                                                                                                                                                                                                                               | min: 1<br>max: 999                                                     |
@@ -1029,7 +1030,18 @@ To enable "delete All records and data extensions" you have to set RowBasedReten
 
 It seems the 2 other modes were added on top later and hence "all records and data extension" is the default retention mode.
 
+#### 7.2.2. Adding/Updating Fields on existing Data Extensions
+
 <a id="markdown-8-examples" name="8-examples"></a>
+
+There are a few rules to keep in mind when playing with Data Extensions fields:
+
+- The `FieldType` cannot be changed on existing fields; the API returns in error is the attribute is even provided unchanged during an update
+- `MaxLength` can be increased or kept on the same value but never decreased during an update
+- A Non-Required/Nullable field cannot be set to be required during an UPDATE
+- When new fields are added, they can be required, but then also have to have a `DefaultValue` set
+- The value for `IsRequired` should be 'true' or 'false'
+- The value for `IsPrimary` should be 'true' or 'false'
 
 ## 8. Examples
 
