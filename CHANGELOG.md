@@ -8,6 +8,8 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 
 **Bugfixes:**
 
+
+- [#118](https://github.com/Accenture/sfmc-devtools/issues/118) automation start not auto-retried during deploy
 - [#112](https://github.com/Accenture/sfmc-devtools/issues/112) add (unknown) new type 783 to defintion of importFile
 - [#119](https://github.com/Accenture/sfmc-devtools/issues/119) fixed list dependency for importFile
 
