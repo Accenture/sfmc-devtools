@@ -6,18 +6,25 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 
 ## [3.1.0](https://github.com/Accenture/sfmc-devtools/compare/v3.0.3...v3.1.0) - 2021-??-??
 
-**Bugfixes:**
-
-- [#117](https://github.com/Accenture/sfmc-devtools/issues/117) queries not deployable when target is shared
-- [#122](https://github.com/Accenture/sfmc-devtools/issues/122) ECONNRESET on caching metadata during deploy
-- [#127](https://github.com/Accenture/sfmc-devtools/issues/127) bad message "info: updated automation: undefined"
-- [#118](https://github.com/Accenture/sfmc-devtools/issues/118) automation start not auto-retried during deploy
-- [#112](https://github.com/Accenture/sfmc-devtools/issues/112) add (unknown) new type 783 to defintion of importFile
-- [#119](https://github.com/Accenture/sfmc-devtools/issues/119) fixed list dependency for importFile
-
 **Features:**
 
-- [#103](https://github.com/Accenture/sfmc-devtools/issues/103) Add rename Data Extension Field option (via Name_new)
+- [#103](https://github.com/Accenture/sfmc-devtools/issues/103) Add rename `dataExtensionField` option (via Name_new)
+- [#133](https://github.com/Accenture/sfmc-devtools/issues/133) `dataExtensionField` validation during DE update
+
+**Bugfixes:**
+
+- [#112](https://github.com/Accenture/sfmc-devtools/issues/112) add (unknown) new type 783 to defintion of `importFile`
+- [#117](https://github.com/Accenture/sfmc-devtools/issues/117) `queries` not deployable when target is `shared DE`
+- [#118](https://github.com/Accenture/sfmc-devtools/issues/118) `automation` start not auto-retried during deploy
+- [#119](https://github.com/Accenture/sfmc-devtools/issues/119) fixed `list` dependency for importFile
+- [#122](https://github.com/Accenture/sfmc-devtools/issues/122) ECONNRESET on caching metadata during deploy
+- [#128](https://github.com/Accenture/sfmc-devtools/issues/128) `dataExtension` json not equal for retrieve/deploy
+- [#129](https://github.com/Accenture/sfmc-devtools/issues/129) `script` json not equal for retrieve/deploy
+
+**Chores:**
+
+- [#127](https://github.com/Accenture/sfmc-devtools/issues/127) bad message "info: updated automation: undefined"
+- [#132](https://github.com/Accenture/sfmc-devtools/issues/132) `dataExtension.SendableSubscriberField.Name` now has a slightly more readable value
 
 ---
 

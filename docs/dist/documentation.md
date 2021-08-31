@@ -1025,15 +1025,15 @@ DataExtension MetadataType
 * [DataExtension](#DataExtension) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.upsert(desToDeploy, _, buObject)](#DataExtension.upsert) ⇒ <code>Promise</code>
     * [._filterUpsertResults(res)](#DataExtension._filterUpsertResults) ⇒ <code>Boolean</code>
-    * [.prepareDeployColumnsOnUpdate(deployColumns, targetColumns)](#DataExtension.prepareDeployColumnsOnUpdate) ⇒ <code>void</code>
     * [.create(metadata)](#DataExtension.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#DataExtension.update) ⇒ <code>Promise</code>
-    * [.retrieve(retrieveDir, [additionalFields], buObject)](#DataExtension.retrieve) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
+    * [.postDeployTasks(upsertedMetadata)](#DataExtension.postDeployTasks) ⇒ <code>void</code>
+    * [.retrieve(retrieveDir, [additionalFields], buObject, [_], [isDeploy])](#DataExtension.retrieve) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
     * [.postRetrieveTasks(metadata, [_], [isTemplating])](#DataExtension.postRetrieveTasks) ⇒ <code>DataExtensionItem</code>
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;DataExtensionItem&gt;</code>
     * [.document(buObject, [metadata], [isDeploy])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(buObject, customerKey)](#DataExtension.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.retrieveForCache(buObject)](#DataExtension.retrieveForCache) ⇒ <code>Promise</code>
+    * [.retrieveForCache(buObject, [_], [isDeploy])](#DataExtension.retrieveForCache) ⇒ <code>Promise</code>
     * [.retrieveAsTemplate(templateDir, name, variables)](#DataExtension.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
 
 <a name="DataExtension.upsert"></a>
@@ -1063,19 +1063,6 @@ helper for upsert()
 | --- | --- | --- |
 | res | <code>Object</code> | - |
 
-<a name="DataExtension.prepareDeployColumnsOnUpdate"></a>
-
-### DataExtension.prepareDeployColumnsOnUpdate(deployColumns, targetColumns) ⇒ <code>void</code>
-Mofifies passed deployColumns for update by mapping ObjectID to their target column's values.
-Removes FieldType field if its the same in deploy and target column, because it results in an error even if its of the same type
-
-**Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| deployColumns | <code>Array.&lt;DataExtensionField.DataExtensionFieldItem&gt;</code> | Columns of data extension that will be deployed |
-| targetColumns | <code>Array.&lt;DataExtensionField.DataExtensionFieldItem&gt;</code> | Columns of data extension that currently exists in target |
-
 <a name="DataExtension.create"></a>
 
 ### DataExtension.create(metadata) ⇒ <code>Promise</code>
@@ -1100,9 +1087,20 @@ Updates a single dataExtension. Also updates their columns in 'dataExtension.col
 | --- | --- | --- |
 | metadata | <code>DataExtensionItem</code> | single metadata entry |
 
+<a name="DataExtension.postDeployTasks"></a>
+
+### DataExtension.postDeployTasks(upsertedMetadata) ⇒ <code>void</code>
+Gets executed after deployment of metadata type
+
+**Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| upsertedMetadata | [<code>DataExtensionMap</code>](#DataExtensionMap) | metadata mapped by their keyField |
+
 <a name="DataExtension.retrieve"></a>
 
-### DataExtension.retrieve(retrieveDir, [additionalFields], buObject) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
+### DataExtension.retrieve(retrieveDir, [additionalFields], buObject, [_], [isDeploy]) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
 Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionColumn metadata retrieval
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -1113,6 +1111,8 @@ Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionCo
 | retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | buObject | <code>Util.BuObject</code> | properties for auth |
+| [_] | <code>void</code> | - |
+| [isDeploy] | <code>boolean</code> | used to signal that fields shall be retrieve in caching mode |
 
 <a name="DataExtension.postRetrieveTasks"></a>
 
@@ -1169,7 +1169,7 @@ Delete a data extension from the specified business unit
 
 <a name="DataExtension.retrieveForCache"></a>
 
-### DataExtension.retrieveForCache(buObject) ⇒ <code>Promise</code>
+### DataExtension.retrieveForCache(buObject, [_], [isDeploy]) ⇒ <code>Promise</code>
 Retrieves folder metadata into local filesystem. Also creates a uniquePath attribute for each folder.
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -1178,6 +1178,8 @@ Retrieves folder metadata into local filesystem. Also creates a uniquePath attri
 | Param | Type | Description |
 | --- | --- | --- |
 | buObject | <code>Object</code> | properties for auth |
+| [_] | <code>void</code> | - |
+| [isDeploy] | <code>boolean</code> | used to signal that fields shall be retrieve in caching mode |
 
 <a name="DataExtension.retrieveAsTemplate"></a>
 
@@ -1207,6 +1209,7 @@ DataExtensionField MetadataType
     * [.convertToSortedArray(fieldsObj)](#DataExtensionField.convertToSortedArray) ⇒ <code>Array.&lt;DataExtensionFieldItem&gt;</code>
     * [.sortDeFields(a, b)](#DataExtensionField.sortDeFields) ⇒ <code>boolean</code>
     * [.postRetrieveTasks(metadata, forDataExtension)](#DataExtensionField.postRetrieveTasks) ⇒ <code>DataExtensionFieldItem</code>
+    * [.prepareDeployColumnsOnUpdate(deployColumns, deKey)](#DataExtensionField.prepareDeployColumnsOnUpdate) ⇒ <code>Object.&lt;string, DataExtensionFieldItem&gt;</code>
 
 <a name="DataExtensionField.retrieve"></a>
 
@@ -1272,6 +1275,20 @@ manages post retrieve steps
 | --- | --- | --- |
 | metadata | <code>DataExtensionFieldItem</code> | a single item |
 | forDataExtension | <code>boolean</code> | when used by DataExtension class we remove more fields |
+
+<a name="DataExtensionField.prepareDeployColumnsOnUpdate"></a>
+
+### DataExtensionField.prepareDeployColumnsOnUpdate(deployColumns, deKey) ⇒ <code>Object.&lt;string, DataExtensionFieldItem&gt;</code>
+Mofifies passed deployColumns for update by mapping ObjectID to their target column's values.
+Removes FieldType field if its the same in deploy and target column, because it results in an error even if its of the same type
+
+**Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Returns**: <code>Object.&lt;string, DataExtensionFieldItem&gt;</code> - existing fields by their original name to allow re-adding FieldType after update  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| deployColumns | <code>Array.&lt;DataExtensionFieldItem&gt;</code> | Columns of data extension that will be deployed |
+| deKey | <code>string</code> | external/customer key of Data Extension |
 
 <a name="DataExtensionTemplate"></a>
 
@@ -4694,6 +4711,8 @@ Util that contains logger and simple util methods
 
 * [Util](#Util)
     * [.logger](#Util.logger)
+    * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
+    * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
     * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>boolean</code> \| <code>Array.&lt;String&gt;</code>
@@ -4716,6 +4735,30 @@ Util that contains logger and simple util methods
 Logger that creates timestamped log file in 'logs/' directory
 
 **Kind**: static property of [<code>Util</code>](#Util)  
+<a name="Util.isTrue"></a>
+
+### Util.isTrue(attrValue) ⇒ <code>boolean</code>
+SFMC accepts multiple true values for Boolean attributes for which we are checking here
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - attribute value == true ? true : false  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| attrValue | <code>\*</code> | value |
+
+<a name="Util.isFalse"></a>
+
+### Util.isFalse(attrValue) ⇒ <code>boolean</code>
+SFMC accepts multiple false values for Boolean attributes for which we are checking here
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - attribute value == false ? true : false  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| attrValue | <code>\*</code> | value |
+
 <a name="Util.getDefaultProperties"></a>
 
 ### Util.getDefaultProperties() ⇒ <code>object</code>
@@ -5254,16 +5297,17 @@ REST format
 | Name | Type | Description |
 | --- | --- | --- |
 | [ObjectID] | <code>string</code> | id |
-| [CustomerKey] | <code>string</code> | key |
+| [CustomerKey] | <code>string</code> | key in format [DEkey].[FieldName] |
 | [DataExtension] | <code>Object</code> | - |
 | DataExtension.CustomerKey | <code>string</code> | key of DE |
-| Name | <code>string</code> | name |
+| Name | <code>string</code> | name of field |
 | [Name_new] | <code>string</code> | custom attribute that is only used when trying to rename a field from Name to Name_new |
-| DefaultValue | <code>string</code> | - |
+| DefaultValue | <code>string</code> | empty string for not set |
 | IsRequired | <code>&#x27;true&#x27;</code> \| <code>&#x27;false&#x27;</code> | - |
 | IsPrimaryKey | <code>&#x27;true&#x27;</code> \| <code>&#x27;false&#x27;</code> | - |
 | Ordinal | <code>string</code> | 1, 2, 3, ... |
-| FieldType | <code>&#x27;Text&#x27;</code> \| <code>&#x27;Date&#x27;</code> \| <code>&#x27;Number&#x27;</code> \| <code>&#x27;Decimal&#x27;</code> \| <code>&#x27;Email&#x27;</code> | type of data in this field; API fails if field is provided during an update |
+| FieldType | <code>&#x27;Text&#x27;</code> \| <code>&#x27;Number&#x27;</code> \| <code>&#x27;Date&#x27;</code> \| <code>&#x27;Boolean&#x27;</code> \| <code>&#x27;Decimal&#x27;</code> \| <code>&#x27;EmailAddress&#x27;</code> \| <code>&#x27;Phone&#x27;</code> \| <code>&#x27;Locale&#x27;</code> | can only be set on create |
+| Scale | <code>string</code> | the number of places after the decimal that the field can hold; example: "0","1", ... |
 
 <a name="MultiMetadataTypeMap"></a>
 
