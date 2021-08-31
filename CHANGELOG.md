@@ -4,6 +4,14 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 
 ---
 
+## [3.1.0](https://github.com/Accenture/sfmc-devtools/compare/v3.0.3...v3.1.0) - 2021-??-??
+
+**Features:**
+
+- [#103](https://github.com/Accenture/sfmc-devtools/issues/103) Add rename Data Extension Field option (via Name_new)
+
+---
+
 ## [3.0.3](https://github.com/Accenture/sfmc-devtools/compare/v3.0.2...v3.0.3) - 2021-08-11
 
 **Bugfixes:**
