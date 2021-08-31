@@ -7,8 +7,12 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 ## [3.1.0](https://github.com/Accenture/sfmc-devtools/compare/v3.0.3...v3.1.0) - 2021-??-??
 
 **Bugfixes:**
+
+- [#112](https://github.com/Accenture/sfmc-devtools/issues/112) add (unknown) new type 783 to defintion of importFile
 - [#119](https://github.com/Accenture/sfmc-devtools/issues/119) fixed list dependency for importFile
+
 **Features:**
+
 - [#103](https://github.com/Accenture/sfmc-devtools/issues/103) Add rename Data Extension Field option (via Name_new)
 
 ---
