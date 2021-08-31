@@ -11,6 +11,13 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 - [#117](https://github.com/Accenture/sfmc-devtools/issues/117) queries not deployable when target is shared
 - [#122](https://github.com/Accenture/sfmc-devtools/issues/122) ECONNRESET on caching metadata during deploy
 - [#127](https://github.com/Accenture/sfmc-devtools/issues/127) bad message "info: updated automation: undefined"
+- [#118](https://github.com/Accenture/sfmc-devtools/issues/118) automation start not auto-retried during deploy
+- [#112](https://github.com/Accenture/sfmc-devtools/issues/112) add (unknown) new type 783 to defintion of importFile
+- [#119](https://github.com/Accenture/sfmc-devtools/issues/119) fixed list dependency for importFile
+
+**Features:**
+
+- [#103](https://github.com/Accenture/sfmc-devtools/issues/103) Add rename Data Extension Field option (via Name_new)
 
 ---
 
