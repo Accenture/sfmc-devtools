@@ -5301,6 +5301,7 @@ REST format
 | [DataExtension] | <code>Object</code> | - |
 | DataExtension.CustomerKey | <code>string</code> | key of DE |
 | Name | <code>string</code> | name of field |
+| [Name_new] | <code>string</code> | custom attribute that is only used when trying to rename a field from Name to Name_new |
 | DefaultValue | <code>string</code> | empty string for not set |
 | IsRequired | <code>&#x27;true&#x27;</code> \| <code>&#x27;false&#x27;</code> | - |
 | IsPrimaryKey | <code>&#x27;true&#x27;</code> \| <code>&#x27;false&#x27;</code> | - |

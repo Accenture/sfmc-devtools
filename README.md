@@ -1,6 +1,6 @@
-<a id="markdown-accenture-sfmc-devtools" name="accenture-sfmc-devtools"></a>
-
 # Accenture SFMC DevTools
+
+<a id="markdown-accenture-sfmc-devtools" name="accenture-sfmc-devtools"></a>
 
 [![NPM](https://nodei.co/npm/mcdev.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/mcdev)
 
@@ -44,15 +44,16 @@ Accenture Salesforce Marketing Cloud DevTools (mcdev) is a rapid deployment/roll
     - [6.2.7. createDeltaPkg](#627-createdeltapkg)
 - [7. Advanced Configuration](#7-advanced-configuration)
   - [7.1. Config Options](#71-config-options)
-  - [7.2. Metadata specific settings](#72-metadata-specific-settings)
+  - [7.2. Metadata specific settings & options](#72-metadata-specific-settings--options)
     - [7.2.1. Retention Policy fields in Data Extensions](#721-retention-policy-fields-in-data-extensions)
     - [7.2.2. Adding/Updating Fields on existing Data Extensions](#722-addingupdating-fields-on-existing-data-extensions)
+    - [7.2.3. Renaming fields of a Data Extensions](#723-renaming-fields-of-a-data-extensions)
+  - [7.3. Market Configuration](#73-market-configuration)
+  - [7.4. Market List Configuration](#74-market-list-configuration)
 - [8. Examples](#8-examples)
   - [8.1. Retrieve and deploy Data Extension](#81-retrieve-and-deploy-data-extension)
   - [8.2. Metadata Retrieving/Backup](#82-metadata-retrievingbackup)
   - [8.3. Automation Deployment](#83-automation-deployment)
-  - [8.4. Market Configuration](#84-market-configuration)
-  - [8.5. Market List Configuration](#85-market-list-configuration)
 - [9. Contribute](#9-contribute)
   - [9.1. Install Guide for Developers](#91-install-guide-for-developers)
   - [9.2. Local install](#92-local-install)
@@ -61,27 +62,27 @@ Accenture Salesforce Marketing Cloud DevTools (mcdev) is a rapid deployment/roll
 
 <!-- /TOC -->
 
-<a id="markdown-1-changelog" name="1-changelog"></a>
-
 ## 1. Changelog
+
+<a id="markdown-changelog" name="changelog"></a>
 
 Find info on the latest changes in our [Changelog](CHANGELOG.md).
 
-<a id="markdown-2-getting-started" name="2-getting-started"></a>
-
 ## 2. Getting Started
+
+<a id="markdown-getting-started" name="getting-started"></a>
 
 Accenture SFMC DevTools can be installed as Node.JS package. The following guide will demonstrate how you can get started within 10 minutes or less.
 
 <a name="pre-requisites"></a>
 
-<a id="markdown-21-pre-requisites" name="21-pre-requisites"></a>
-
 ### 2.1. Pre-requisites
 
-<a id="markdown-211-install-nodejs-with-npm" name="211-install-nodejs-with-npm"></a>
+<a id="markdown-pre-requisites" name="pre-requisites"></a>
 
 #### 2.1.1. Install Node.js with npm
+
+<a id="markdown-install-node.js-with-npm" name="install-node.js-with-npm"></a>
 
 1. To check if it is already installed, at the OS command prompt, type: `node --version`
    - If this command reports Node version 14.16.x or later, you’re done—proceed to the next installation. If the reported version is earlier than 14.16.x, continue to step 2.
@@ -90,9 +91,9 @@ Accenture SFMC DevTools can be installed as Node.JS package. The following guide
 3. Download and run the latest **LTS** installer for your operating system.
 4. When the installer finishes, try step 1 again. If it fails, please restart your terminal. If it still does not work, reboot your computer and try the version check then.
 
-<a id="markdown-212-install-the-git-command-line" name="212-install-the-git-command-line"></a>
-
 #### 2.1.2. Install the Git Command Line
+
+<a id="markdown-install-the-git-command-line" name="install-the-git-command-line"></a>
 
 1. To check if git is already installed, at the OS command prompt, type: `git version`
    - If this command reports a git version such as “git version 2.31.0” (or "git version 2.31.0.windows.1" on Windows), you’re done. Proceed to native Android or iOS environment setup.
@@ -104,9 +105,9 @@ Accenture SFMC DevTools can be installed as Node.JS package. The following guide
 
 <a name="install-mcdev"></a>
 
-<a id="markdown-22-install-accenture-sfmc-devtools" name="22-install-accenture-sfmc-devtools"></a>
-
 ### 2.2. Install Accenture SFMC DevTools
+
+<a id="markdown-install-accenture-sfmc-devtools" name="install-accenture-sfmc-devtools"></a>
 
 If you experience issues installing Accenture SFMC DevTools, please check out the [Troubleshoot Install/Update](#troubleshoot-installupdate) section in this manual.
 
@@ -123,11 +124,9 @@ When completed you will see `+ mcdev@3.0.0` printed to your screen (or the curre
 >
 > You may choose to install mcdev globally or locally. Global install runs faster and allows you to initialize new projects by running `mcdev init` in any directory. If your project does require a local installation, please refer to the [Local Install Guide](#local-install).
 
-<a name="initial-project-setup"></a>
-
-<a id="markdown-23-initial-project-setup" name="23-initial-project-setup"></a>
-
 ### 2.3. Initial project setup
+
+<a id="markdown-initial-project-setup" name="initial-project-setup"></a>
 
 After the successful installation, you will now need to setup the connection to your Marketing Cloud instance.
 
@@ -159,9 +158,9 @@ After the successful installation, you will now need to setup the connection to 
    3. Add this as your repository remote named "origin". If you use a GUI based tool, that should be fairly simple, otherwise execute `git remote add origin YOUR-URL` in your project folder.
    4. Now run `git push -u origin master` to actually start the upload.
 
-<a id="markdown-24-joining-a-project-that-was-set-up-before" name="24-joining-a-project-that-was-set-up-before"></a>
-
 ### 2.4. Joining a project that was set up before
+
+<a id="markdown-joining-a-project-that-was-set-up-before" name="joining-a-project-that-was-set-up-before"></a>
 
 If Accenture SFMC DevTools was already used to set up the project by somebody in your team, including all of the steps in the above chapter [Initial project configuration](#initial-project-setup), then basically you are in luck. Things are much faster from here on:
 
@@ -175,9 +174,9 @@ If Accenture SFMC DevTools was already used to set up the project by somebody in
 7. At this point the system will recognize the previously set up project and ask you for `Client ID`, `Client Secret` and the `Authentication Base URI`.
 8. Done.
 
-<a id="markdown-25-recommended-additional-installs" name="25-recommended-additional-installs"></a>
-
 ### 2.5. Recommended additional installs
+
+<a id="markdown-recommended-additional-installs" name="recommended-additional-installs"></a>
 
 The following seeks to enhance your daily process. Our guide assumes that you are using [Visual Studio Code](https://code.visualstudio.com/download) to develop, backup and deploy your project. For smooth operations we highly recommend the following Marketing Cloud specific plugins for it.
 
@@ -216,9 +215,9 @@ Please note that Visual Studio Code might warn you about using the local install
 
 <a name="updating-mcdev"></a>
 
-<a id="markdown-3-updating-accenture-sfmc-devtools" name="3-updating-accenture-sfmc-devtools"></a>
-
 ## 3. Updating Accenture SFMC DevTools
+
+<a id="markdown-updating-accenture-sfmc-devtools" name="updating-accenture-sfmc-devtools"></a>
 
 If you have mcdev already installed you can update your installation in a simplified way:
 
@@ -228,13 +227,13 @@ npm update -g mcdev
 
 <a name="troubleshoot-installupdate"></a>
 
-<a id="markdown-4-troubleshoot-installupdate" name="4-troubleshoot-installupdate"></a>
-
 ## 4. Troubleshoot Install/Update
 
-<a id="markdown-41-installing-specific-version" name="41-installing-specific-version"></a>
+<a id="markdown-troubleshoot-install%2Fupdate" name="troubleshoot-install%2Fupdate"></a>
 
 ### 4.1. Installing specific version
+
+<a id="markdown-installing-specific-version" name="installing-specific-version"></a>
 
 To work with our **developer-version** or to install a **specific older version** you can select any branch or tag from our git repository during install to do so:
 
@@ -252,9 +251,9 @@ If you opted for `@develop` you will continue to get the latest developer udates
 
 > **Note**: The version is currently _not_ updated on the developer branch until a new release is published. Hence, you will not see a change if you run `mcdev --version`.
 
-<a id="markdown-42-using-custom-clis" name="42-using-custom-clis"></a>
-
 ### 4.2. Using custom CLIs
+
+<a id="markdown-using-custom-clis" name="using-custom-clis"></a>
 
 Some users of Accenture SFMC DevTools prefer to use git bash or other CLIs instead of the operating system's default. Please note that some of the functionality of Accenture SFMC DevTools but also of other tools like the Node package manager (npm) do not necessarily function properly in these.
 
@@ -262,9 +261,9 @@ If you encounter problems, we strongly recommend to first try it in the default 
 
 <a name="missing-write-access-toon-macos"></a>
 
-<a id="markdown-43-missing-write-access-toon-macos" name="43-missing-write-access-toon-macos"></a>
-
 ### 4.3. Missing write access to...on MacOS
+
+<a id="markdown-missing-write-access-to...on-macos" name="missing-write-access-to...on-macos"></a>
 
 Depending on your setup, the default global installs & updates might error out with "Missing write access to /usr/local/lib/node_modules". In this case prefix your command with `sudo`:
 
@@ -278,9 +277,9 @@ sudo npm update -g mcdev
 
 ![Mac sudo](img/README.md/troubleshoot-mac-sudo.png)
 
-<a id="markdown-44-running-scripts-is-disabled-on-this-system" name="44-running-scripts-is-disabled-on-this-system"></a>
-
 ### 4.4. ...running scripts is disabled on this system
+
+<a id="markdown-...running-scripts-is-disabled-on-this-system" name="...running-scripts-is-disabled-on-this-system"></a>
 
 If you see the below error then your system's security settings are rather strict.
 
@@ -296,9 +295,9 @@ Steps to solve this:
 
 Please note that this change is global and not just for your current folder.
 
-<a id="markdown-45-operation-not-permitted-or-no-such-file-or-directory" name="45-operation-not-permitted-or-no-such-file-or-directory"></a>
-
 ### 4.5. Operation not permitted OR No such file or directory
+
+<a id="markdown-operation-not-permitted-or-no-such-file-or-directory" name="operation-not-permitted-or-no-such-file-or-directory"></a>
 
 If you encounter out of the 3 following errors you will have to completely remove Node.JS and install it again afterwards.
 
@@ -346,14 +345,14 @@ Now, please follow the guides above in the [Pre-requisites](#pre-requisites) sec
 
 <a name="metadata-type-support"></a>
 
-<a id="markdown-5-metadata-type-support" name="5-metadata-type-support"></a>
-
 ## 5. Metadata Type Support
+
+<a id="markdown-metadata-type-support" name="metadata-type-support"></a>
 
 The following metadata types are currently supported:
 
-| MetadataType                       | CLI Argument              | Retrieve | Deploy     | Template   | Retrieved by Default | Description                                                                                                        |
-| ---------------------------------- | ------------------------- | -------- | ---------- | ---------- | -------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| MetadataType                       | CLI Argument              | Retrieve | Deploy     | Template   | Retrieved by Default | Description |
+| -- | -- | -- | -- | -- | -- | -- |
 | API Discovery                      | `discovery`               | Yes      | -          | -          | -                    | Description of all API endpoints accessible via REST API; only relevant for developers of Accenture SFMC DevTools. |
 | Asset                              | `asset`                   | Yes      | Yes        | Yes        | Yes                  | Assets from Content Builder grouped into subtypes.                                                                 |
 | Automation                         | `automation`              | Yes      | Yes        | Yes        | Yes                  | Used via Automation Studio directly - or indirectly via Journey Builder & MC Connect.                              |
@@ -380,9 +379,9 @@ The following metadata types are currently supported:
 | Role                               | `role`                    | Yes      | Yes        | -          | Yes                  | User Roles define groups that are used to grant users access to SFMC systems.                                      |
 | Triggered Send                     | `triggeredSendDefinition` | Yes      | Yes        | -          | Yes                  | **DEPRECATED**: Sends emails via API or DataExtension Event.                                                       |
 
-<a id="markdown-6-command-overview" name="6-command-overview"></a>
-
 ## 6. Command Overview
+
+<a id="markdown-command-overview" name="command-overview"></a>
 
 If you installed mcdev globally as described above you can run mcdev in any directory. See our [install Accenture SFMC DevTools](#install-mcdev) chapter for more details.
 
@@ -406,15 +405,13 @@ _Note:_ Parameters listed below in between square brackets = `[...]` are optiona
 
 _Note:_ Credentials and Business Unit names can always be selected interactively. Try inputing a questionmark = `?` in their place if more parameters follow, or omit them completely if no other parameters are required for a command.
 
-<a id="markdown-61-maintenance-and-setup-commands" name="61-maintenance-and-setup-commands"></a>
-
 ### 6.1. Maintenance and setup commands
 
-<a name="init"></a>
-
-<a id="markdown-611-init" name="611-init"></a>
+<a id="markdown-maintenance-and-setup-commands" name="maintenance-and-setup-commands"></a>
 
 #### 6.1.1. init
+
+<a id="markdown-init" name="init"></a>
 
 _Command:_ `mcdev init`
 
@@ -452,9 +449,9 @@ Example url: `https://mcg123abcysykllg-0321cbs8bbt64.auth.marketingcloudapis.com
 >
 > To get the tenant subdomain, please take the Authentication Base Uri and extract the part after `https://` and before `.auth.marketingcloudapis.com`. In the above example this would therefore be `mcg123abcysykllg-0321cbs8bbt64`.
 
-<a id="markdown-612-upgrade" name="612-upgrade"></a>
-
 #### 6.1.2. upgrade
+
+<a id="markdown-upgrade" name="upgrade"></a>
 
 _Command:_ `mcdev upgrade`
 
@@ -468,9 +465,9 @@ _Example:_
 mcdev upgrade
 ```
 
-<a id="markdown-613-reloadbus" name="613-reloadbus"></a>
-
 #### 6.1.3. reloadBUs
+
+<a id="markdown-reloadbus" name="reloadbus"></a>
 
 _Command:_ `mcdev reloadBUs [credential]`
 
@@ -484,9 +481,9 @@ _Example:_
 mcdev reloadBUs MyProject
 ```
 
-<a id="markdown-614-badkeys" name="614-badkeys"></a>
-
 #### 6.1.4. badKeys
+
+<a id="markdown-badkeys" name="badkeys"></a>
 
 _Command:_ `mcdev badKeys [business unit]`
 
@@ -500,9 +497,9 @@ _Example:_
 mcdev badKeys MyProject/DEV
 ```
 
-<a id="markdown-615-document" name="615-document"></a>
-
 #### 6.1.5. document
+
+<a id="markdown-document" name="document"></a>
 
 _Command:_ `mcdev document <TYPE> <business unit>`
 
@@ -525,9 +522,9 @@ _Example:_
 mcdev document role myServer
 ```
 
-<a id="markdown-616-selecttypes" name="616-selecttypes"></a>
-
 #### 6.1.6. selectTypes
+
+<a id="markdown-selecttypes" name="selecttypes"></a>
 
 _Command:_ `mcdev selectTypes`
 
@@ -543,9 +540,9 @@ mcdev selectTypes
 
 _Note:_ You may select non-standard types if you run `mcdev selectTypes --debug`. This may be needed in edge cases but is not recommended in most situations.
 
-<a id="markdown-617-explaintypes" name="617-explaintypes"></a>
-
 #### 6.1.7. explainTypes
+
+<a id="markdown-explaintypes" name="explaintypes"></a>
 
 _Command:_ `mcdev explainTypes`
 
@@ -561,13 +558,13 @@ _Example:_
 mcdev explainTypes
 ```
 
-<a id="markdown-62-operational-commands" name="62-operational-commands"></a>
-
 ### 6.2. Operational commands
 
-<a id="markdown-621-retrieve" name="621-retrieve"></a>
+<a id="markdown-operational-commands" name="operational-commands"></a>
 
 #### 6.2.1. retrieve
+
+<a id="markdown-retrieve" name="retrieve"></a>
 
 _Command:_ `mcdev retrieve [business unit] [metadata type]`
 
@@ -623,9 +620,9 @@ mcdev retrieve "*"
 
 > Note: retrieve-all will fail in some CLIs if you do not wrap the asterix (\*) in quotes. This is due to the special meaning of \* as a parameter in these CLIs.
 
-<a id="markdown-622-deploy" name="622-deploy"></a>
-
 #### 6.2.2. deploy
+
+<a id="markdown-deploy" name="deploy"></a>
 
 _Command:_ `mcdev deploy [business unit] [metadata type]`
 
@@ -669,9 +666,9 @@ mcdev deploy "*"
 
 > Note: deploy-all will fail in some CLIs if you do not wrap the asterix (\*) in quotes. This is due to the special meaning of \* as a parameter in these CLIs.
 
-<a id="markdown-623-delete" name="623-delete"></a>
-
 #### 6.2.3. delete
+
+<a id="markdown-delete" name="delete"></a>
 
 _Command:_ `mcdev delete <business unit> <type> <external key>`
 
@@ -691,9 +688,9 @@ _Example:_
 mcdev delete MyProject/_ParentBU_ dataExtension MyUserTable
 ```
 
-<a id="markdown-624-retrieveastemplate" name="624-retrieveastemplate"></a>
-
 #### 6.2.4. retrieveAsTemplate
+
+<a id="markdown-retrieveastemplate" name="retrieveastemplate"></a>
 
 _Command:_ `mcdev retrieveAsTemplate <business unit> <type> <name> <market>`
 
@@ -729,9 +726,9 @@ This will result in the following files being created in your `template/` direct
 - `table2.dataExtension-meta.json`
 - `table3.dataExtension-meta.json`
 
-<a id="markdown-625-builddefinition" name="625-builddefinition"></a>
-
 #### 6.2.5. buildDefinition
+
+<a id="markdown-builddefinition" name="builddefinition"></a>
 
 _Command:_ `mcdev buildDefinition <business unit> <type> <name> <market>`
 
@@ -770,9 +767,9 @@ This will result in the following files being created in your `retrieve/MyProjec
 - `table2.dataExtension-meta.json`
 - `table3.dataExtension-meta.json`
 
-<a id="markdown-626-builddefinitionbulk" name="626-builddefinitionbulk"></a>
-
 #### 6.2.6. buildDefinitionBulk
+
+<a id="markdown-builddefinitionbulk" name="builddefinitionbulk"></a>
 
 _Command:_ `mcdev buildDefinitionBulk <list name> <type> <name>`
 
@@ -790,9 +787,9 @@ _Example:_
 mcdev bdb pilotMarketsQA dataExtension MyUserTable
 ```
 
-<a id="markdown-627-createdeltapkg" name="627-createdeltapkg"></a>
-
 #### 6.2.7. createDeltaPkg
+
+<a id="markdown-createdeltapkg" name="createdeltapkg"></a>
 
 _Command:_ `mcdev createDeltaPkg [range] [filter]`
 
@@ -921,9 +918,9 @@ mcdev createDeltaPkg d21b4221..HEAD 'MyProject/BU1,MyProject/BU3'
 > mcdev createDeltaPkg <range> [filter] --y
 > ```
 
-<a id="markdown-7-advanced-configuration" name="7-advanced-configuration"></a>
-
 ## 7. Advanced Configuration
+
+<a id="markdown-advanced-configuration" name="advanced-configuration"></a>
 
 The tools confiuration can be changed in the file `.mcdevrc.json` located in the root of your project folder.
 
@@ -933,9 +930,9 @@ You will also find the configuration for what metadata shall be retrieved here i
 
 You will also find a secondary file named `.mcdev-auth.json` containing your credentials. **Do not commit this to your repository!** You should only commit `.mcdevrc.json` as this file contains project wide settings that do not compromise security.
 
-<a id="markdown-71-config-options" name="71-config-options"></a>
-
 ### 7.1. Config Options
+
+<a id="markdown-config-options" name="config-options"></a>
 
 The central config in `.mcdevrc.json` holds multiple adjustable settings:
 
@@ -983,46 +980,46 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
 }
 ```
 
-| Setting                                  | Default                                      | Description                                                                                                                 |
-| ---------------------------------------- | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| options.deployment.commitHistory         | 10                                           | Configures how many commits `createDeltaPkg` will display if no parameters are given                                        |
-| options.deployment.sourceTargetMapping   | `{"deployment-source": "deployment-target"}` | Configuration of 1 or many source-target marketList combos for `mcdev createDeltaPkg`                                       |
-| options.deployment.targetBranchBuMapping | `{"release/*": "...","master": ["..."]}`     | Can be used by CI/CD pipelines to know what BUs shall be deployed to upon a merge into one of the specified branches        |
-| options.documentType                     | 'md'                                         | Defines the format for documentation ('md', 'html', 'both')                                                                 |
-| options.exclude.`type`.`field`           | []                                           | Allows you to filter out metadata on retrieve based on their field values, e.g. CustomerKey (previously `options.filter`)   |
-| options.include.`type`.`field`           | []                                           | Allows you to filter out metadata on retrieve based on their field values, e.g. CustomerKey                                 |
+| Setting | Default | Description |
+| -- | -- | -- |
+| options.deployment.commitHistory         | 10                                           | Configures how many commits `createDeltaPkg` will display if no parameters are given |
+| options.deployment.sourceTargetMapping   | `{"deployment-source": "deployment-target"}` | Configuration of 1 or many source-target marketList combos for `mcdev createDeltaPkg` |
+| options.deployment.targetBranchBuMapping | `{"release/*": "...","master": ["..."]}`     | Can be used by CI/CD pipelines to know what BUs shall be deployed to upon a merge into one of the specified branches |
+| options.documentType                     | 'md'                                         | Defines the format for documentation ('md', 'html', 'both') |
+| options.exclude.`type`.`field`           | []                                           | Allows you to filter out metadata on retrieve based on their field values, e.g. CustomerKey (previously `options.filter`) |
+| options.include.`type`.`field`           | []                                           | Allows you to filter out metadata on retrieve based on their field values, e.g. CustomerKey |
 | options.serverTimeOffset                 | -6                                           | Used to work around quirks in how SFMC handles timezones; For stack4: set to -7 (US Mountain time); others: -6 (US Central) |
-| directories.badKeys                      | 'docs/badKeys/'                              | Where the documentation for bad key-name combos is stored on retrieve                                                       |
-| directories.businessUnits                | 'businessUnits/'                             | Directory to save BU base details in                                                                                        |
-| directories.dataExtension                | 'docs/dataExtension/'                        | Directory for `document dataExtension` output                                                                               |
-| directories.deltaPackage                 | 'docs/deltaPackage/'                         | Where `createDeltaPkg` stores its log                                                                                       |
-| directories.deploy                       | 'deploy/'                                    | Where `deploy` searches for files to deploy                                                                                 |
-| directories.retrieve                     | 'retrieve/'                                  | Where `retrieve` stores downloaded files                                                                                    |
-| directories.roles                        | 'docs/roles/'                                | Directory for `document role` output                                                                                        |
-| directories.template                     | 'template/'                                  | Where `rt` stores downloaded templates & `bd` retrieves them from                                                           |
-| directories.templateBuilds               | ['retrieve/','deploy/']                      | Where `bd` saves final deployment versions in. This can hold multiple directories, e.g. ['retrieve/','deploy/']             |
-| metaDataTypes.documentOnRetrieve         | ['role','dataExtension']                     | automatically executes `document` for selected types                                                                        |
-| metaDataTypes.retrieve                   | _changes with each release_                  | check [Metadata Type Support](#metadata-type-support) for current list                                                      |
+| directories.badKeys                      | 'docs/badKeys/'                              | Where the documentation for bad key-name combos is stored on retrieve |
+| directories.businessUnits                | 'businessUnits/'                             | Directory to save BU base details in |
+| directories.dataExtension                | 'docs/dataExtension/'                        | Directory for `document dataExtension` output |
+| directories.deltaPackage                 | 'docs/deltaPackage/'                         | Where `createDeltaPkg` stores its log |
+| directories.deploy                       | 'deploy/'                                    | Where `deploy` searches for files to deploy |
+| directories.retrieve                     | 'retrieve/'                                  | Where `retrieve` stores downloaded files |
+| directories.roles                        | 'docs/roles/'                                | Directory for `document role` output |
+| directories.template                     | 'template/'                                  | Where `rt` stores downloaded templates & `bd` retrieves them from |
+| directories.templateBuilds               | ['retrieve/','deploy/']                      | Where `bd` saves final deployment versions in. This can hold multiple directories, e.g. ['retrieve/','deploy/'] |
+| metaDataTypes.documentOnRetrieve         | ['role','dataExtension']                     | automatically executes `document` for selected types |
+| metaDataTypes.retrieve                   | _changes with each release_                  | check [Metadata Type Support](#metadata-type-support) for current list |
 
-<a id="markdown-72-metadata-specific-settings" name="72-metadata-specific-settings"></a>
+### 7.2. Metadata specific settings & options
 
-### 7.2. Metadata specific settings
-
-<a id="markdown-721-retention-policy-fields-in-data-extensions" name="721-retention-policy-fields-in-data-extensions"></a>
+<a id="markdown-metadata-specific-settings" name="metadata-specific-settings"></a>
 
 #### 7.2.1. Retention Policy fields in Data Extensions
 
+<a id="markdown-retention-policy-fields-in-data-extensions" name="retention-policy-fields-in-data-extensions"></a>
+
 The way retention policy is saved is a bit misleading and hence we wanted to provide a bit of guidance if you ever need to do a deep dive here.
 
-| Field                                | Description                                                                                                                                                                                                                                                                                                                        | Values                                                                 |
-| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | 
-| **DataRetentionPeriod**              | this field should print the value of the unit of measure but it unfortunately is off by one (e.g. showing "weeks" instead of "months"). Also, it seems to have no impact on what's stored.<br> We therefore excluded it from retrieve/deploy                                                                                       | -                                                                      |
-| **DataRetentionPeriodUnitOfMeasure** | represents drop down for "period after" selection                                                                                                                                                                                                                                                                                  | 6: years<br>5: months<br>4: weeks<br>2: days                           |
-| **DataRetentionPeriodLength**        | represents number field for "period after" selection                                                                                                                                                                                                                                                                               | min: 1<br>max: 999                                                     |
-| **RowBasedRetention**                | only true if "delete individual records" is selected, otherwise false                                                                                                                                                                                                                                                              | true / false                                                           |
-| **ResetRetentionPeriodOnImport**     | true if "Reset period on import" is checked.                                                                                                                                                                                                                                                                                       | This option is always false if "delete individual records" is selected | true / false |
-| **DeleteAtEndOfRetentionPeriod**     | true if "delete all records" is selected, otherwise false                                                                                                                                                                                                                                                                          | true / false                                                           |
-| **RetainUntil**                      | Normally, this should only be filled if a date, rather than a period was set.<br><br>This is empty for "delete individual records", but filled with a (calculated) date for the other 2 delete options even if "period after" was used.<br> Warning: trying to update a DE is denied when "period after" fields & this is provided | ""<br>or date in US format (m/d/Y H:m:s") "12/6/2021 12:00:00 AM")     |
+| Field | Description | Values |
+| -- | -- | -- |
+| **DataRetentionPeriod** | this field should print the value of the unit of measure but it unfortunately is off by one (e.g. showing "weeks" instead of "months"). Also, it seems to have no impact on what's stored.<br> We therefore excluded it from retrieve/deploy | - |
+| **DataRetentionPeriodUnitOfMeasure** | represents drop down for "period after" selection | 6: years<br>5: months<br>4: weeks<br>2: days |
+| **DataRetentionPeriodLength** | represents number field for "period after" selection | min: 1<br>max: 999 |
+| **RowBasedRetention** | only true if "delete individual records" is selected, otherwise false | true / false |
+| **ResetRetentionPeriodOnImport** | true if "Reset period on import" is checked. | This option is always false if "delete individual records" is selected | true / false |
+| **DeleteAtEndOfRetentionPeriod** | true if "delete all records" is selected, otherwise false | true / false |
+| **RetainUntil** | Normally, this should only be filled if a date, rather than a period was set.<br><br>This is empty for "delete individual records", but filled with a (calculated) date for the other 2 delete options even if "period after" was used.<br> Warning: trying to update a DE is denied when "period after" fields & this is provided | ""<br>or date in US format (m/d/Y H:m:s") "12/6/2021 12:00:00 AM") |
 
 To **disable retention completely**, ensure that you have the 3 booleans set to false, RetainUntil set to an empty string and no DataRetentionPeriod set (=those 2 attributes not present in file).
 
@@ -1043,49 +1040,80 @@ There are a few rules to keep in mind when playing with Data Extensions fields:
 - The value for `IsRequired` should be 'true' or 'false'
 - The value for `IsPrimary` should be 'true' or 'false'
 
-## 8. Examples
+#### 7.2.3. Renaming fields of a Data Extensions
 
-<a id="markdown-81-retrieve-and-deploy-data-extension" name="81-retrieve-and-deploy-data-extension"></a>
+With a small addition to the Data Extension's JSON it is possible to rename fields via MC DevTools. Imagine the following Data Extension:
 
-### 8.1. Retrieve and deploy Data Extension
+```json
+{
+    "CustomerKey": "Account",
+    "Name": "Account",
+    "Description": "",
+    "IsSendable": "false",
+    "IsTestable": "false",
+    "Fields": [
+        {
+            "Name": "BillingCity",
+            "Scale": "0",
+            "DefaultValue": "",
+            "MaxLength": "40",
+            "IsRequired": "false",
+            "IsPrimaryKey": "true",
+            "FieldType": "Text"
+        },
+        {
+            "Name": "BillingCountry",
+            "Scale": "0",
+            "DefaultValue": "",
+            "MaxLength": "80",
+            "IsRequired": "false",
+            "IsPrimaryKey": "false",
+            "FieldType": "Text"
+        }
+    ],
+    "r__folder_Path": "Data Extensions"
+}
+```
 
-1. Retrieve metadata by running `mcdev retrieve <BU>` (where the BU corresponds to a credential-Business Unit combo in the **.mcdevrc.json**)
-2. Create a directory called `deploy/` in the root directory
-3. Create a directory called `dataExtension/` in the `deploy/` directory
-4. Copy a single dataExtension directory from the `retrieve/<credential>/<BU-Name>/dataExtension/` directory into `deploy/<credential>/<BU-Name>/dataExtension/`
-5. Run `mcdev deploy <BU>` to deploy everything in the **deploy** folder to the specified Business Unit
+Imagine you wanted to rename `BillingCountry` to `BillingZip` for some reason. Previously, you could either go into the GUI or delete & recreate the field. Now, MC DevTools allows you to specify `Name_new` on the field and the tool will take care of the rest during **deployment**:
 
-<a id="markdown-82-metadata-retrievingbackup" name="82-metadata-retrievingbackup"></a>
+```json
+{
+    "CustomerKey": "Account",
+    "Name": "Account",
+    "Description": "",
+    "IsSendable": "false",
+    "IsTestable": "false",
+    "Fields": [
+        {
+            "Name": "BillingCity",
+            "Scale": "0",
+            "DefaultValue": "",
+            "MaxLength": "40",
+            "IsRequired": "false",
+            "IsPrimaryKey": "true",
+            "FieldType": "Text"
+        },
+        {
+            "Name": "BillingCountry", /* old name, keep here for reference during the update! */
+            "Name_new": "BillingZip", /* new name */
+            "Scale": "0",
+            "DefaultValue": "",
+            "MaxLength": "80",
+            "IsRequired": "false",
+            "IsPrimaryKey": "false",
+            "FieldType": "Text"
+        }
+    ],
+    "r__folder_Path": "Data Extensions"
+}
+```
 
-### 8.2. Metadata Retrieving/Backup
+All you have to do is deploy the data extension again with Name_new specified for each field that needs to be renamed.
 
-Metadata of a Business Unit can be retrieved by running the following command:
+### 7.3. Market Configuration
 
-`mcdev retrieve <BU>`
-
-where `<BU>` needs to be replaced with `credentialName/businessUnit-Name` that is defined in **.mcdevrc.json**.
-
-Run this command for each of your defined Business Units and this will result in a **retrieve** directory with a sub-directory for each Business Unit. Each sub-directory contains the metadata from this Business Unit that is currently supported to **retrieve**.
-
-This folder structure can be commited into a git repository and used as backup.
-
-<a id="markdown-83-automation-deployment" name="83-automation-deployment"></a>
-
-### 8.3. Automation Deployment
-
-Now we want to deploy an Automation with it's related metadata. Select a retrieved Automation and copy it into the deploy folder. (`deploy/<credential>/<BU-Name>/automation/myAutomation.meta-automation.json`)
-
-Copy all related activity metadata of this automation into the deploy folder. (_Example:_ `deploy/<credential>/<BU-Name>/query/myquery.meta-query.json` and `deploy/<credential>/<BU-Name>/query/myquery.meta-query.sql`)
-
-To start the deployment run the following command:
-
-`mcdev deploy <BU>`
-
-<a name="market-configuration"></a>
-
-<a id="markdown-84-market-configuration" name="84-market-configuration"></a>
-
-### 8.4. Market Configuration
+<a id="markdown-market-configuration" name="market-configuration"></a>
 
 You will want to setup configs for variable parts that change inbetween Business Units. We advise starting this _after_ you've first run the `retrieveAsTemplate` command. This might sound counterintuitive but when you review what was copied into your template folder you will likely spot these variable parts the fastest and can then start setting up your market config. Please consider this an iterative process as you will likely run `rt` followed by another update of your config multiple times until you got it right.
 
@@ -1207,9 +1235,9 @@ Way more complex example with dedicated "Parent" BUs per enviroment (DEV, QA, PR
 
 <a name="market-list-configuration"></a>
 
-<a id="markdown-85-market-list-configuration" name="85-market-list-configuration"></a>
+### 7.4. Market List Configuration
 
-### 8.5. Market List Configuration
+<a id="markdown-market-list-configuration" name="market-list-configuration"></a>
 
 Market Lists are very powerful and you will quickly notice how much time they can safe you during your deployment preparation.
 Let's first look at an example list config:
@@ -1290,15 +1318,55 @@ Apart from that we can see 4 types of lists here:
 3. `Parent-medium-multi`/`Parent-large-multi` (medium:_instance parent_; large:_environment parent_): Any scripts, queries, automations that are executed on the parent but require one per child (e.g. query to fill country-specific Shared Data Extensions)
 4. `Children` (_child BUs_): everything that is needed on the market specific Business Units.
 
-<a id="markdown-9-contribute" name="9-contribute"></a>
+## 8. Examples
+
+<a id="markdown-examples" name="examples"></a>
+
+### 8.1. Retrieve and deploy Data Extension
+
+<a id="markdown-retrieve-and-deploy-data-extension" name="retrieve-and-deploy-data-extension"></a>
+
+1. Retrieve metadata by running `mcdev retrieve <BU>` (where the BU corresponds to a credential-Business Unit combo in the **.mcdevrc.json**)
+2. Create a directory called `deploy/` in the root directory
+3. Create a directory called `dataExtension/` in the `deploy/` directory
+4. Copy a single dataExtension directory from the `retrieve/<credential>/<BU-Name>/dataExtension/` directory into `deploy/<credential>/<BU-Name>/dataExtension/`
+5. Run `mcdev deploy <BU>` to deploy everything in the **deploy** folder to the specified Business Unit
+
+### 8.2. Metadata Retrieving/Backup
+
+<a id="markdown-metadata-retrieving%2Fbackup" name="metadata-retrieving%2Fbackup"></a>
+
+Metadata of a Business Unit can be retrieved by running the following command:
+
+`mcdev retrieve <BU>`
+
+where `<BU>` needs to be replaced with `credentialName/businessUnit-Name` that is defined in **.mcdevrc.json**.
+
+Run this command for each of your defined Business Units and this will result in a **retrieve** directory with a sub-directory for each Business Unit. Each sub-directory contains the metadata from this Business Unit that is currently supported to **retrieve**.
+
+This folder structure can be commited into a git repository and used as backup.
+
+### 8.3. Automation Deployment
+
+<a id="markdown-automation-deployment" name="automation-deployment"></a>
+
+Now we want to deploy an Automation with it's related metadata. Select a retrieved Automation and copy it into the deploy folder. (`deploy/<credential>/<BU-Name>/automation/myAutomation.meta-automation.json`)
+
+Copy all related activity metadata of this automation into the deploy folder. (_Example:_ `deploy/<credential>/<BU-Name>/query/myquery.meta-query.json` and `deploy/<credential>/<BU-Name>/query/myquery.meta-query.sql`)
+
+To start the deployment run the following command:
+
+`mcdev deploy <BU>`
 
 ## 9. Contribute
 
+<a id="markdown-contribute" name="contribute"></a>
+
 If you want to enhance Accenture SFMC DevTools you are welcome to fork the repo and create a pull request. Please understand that we will have to conduct a code review before accepting your changes.
 
-<a id="markdown-91-install-guide-for-developers" name="91-install-guide-for-developers"></a>
-
 ### 9.1. Install Guide for Developers
+
+<a id="markdown-install-guide-for-developers" name="install-guide-for-developers"></a>
 
 Instead of installing Accenture SFMC DevTools as a npm dependency from our git repo, we recommend cloning our repo and then linking it locally:
 
@@ -1332,9 +1400,9 @@ To test your new **global** developer setup, run `mcdev --version` in CLI which 
 
 <a name="local-install"></a>
 
-<a id="markdown-92-local-install" name="92-local-install"></a>
-
 ### 9.2. Local install
+
+<a id="markdown-local-install" name="local-install"></a>
 
 > **Warning:** local installation (leading to the use of [npx](https://github.com/npm/npx#readme)) causes issues when spaces are used in keys/names and is therefore not recommended.
 > You will also make setting up projects much harder if you choose the local installation as you cannot use `mcdev init` to automatically setup your entire project.
@@ -1357,9 +1425,9 @@ The following explains how you _could_ install it locally for certain edge cases
 
 When completed you will see `+ mcdev@3.0.0` printed to your screen (or the current version of it respectively).
 
-<a id="markdown-93-npm-scripts" name="93-npm-scripts"></a>
-
 ### 9.3. NPM Scripts
+
+<a id="markdown-npm-scripts" name="npm-scripts"></a>
 
 - `start`: Main entry point
 - `mcdev`: alias for `start`
@@ -1370,9 +1438,9 @@ When completed you will see `+ mcdev@3.0.0` printed to your screen (or the curre
 - `test`: Runs mocha tests - outdated
 - `upgrade`: run npm-check to test for updated depdencies
 
-<a id="markdown-94-developer-documentation" name="94-developer-documentation"></a>
-
 ### 9.4. Developer Documentation
+
+<a id="markdown-developer-documentation" name="developer-documentation"></a>
 
 - [Link to API Documentation](docs/dist/documentation.md)
 - [Link to Considerations & Findings Documentation](docs/dist/considerations.md)
