@@ -8,8 +8,12 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 
 **Features:**
 
+- [#55](https://github.com/Accenture/sfmc-devtools/issues/55) added user / roles documentation
+- [#64](https://github.com/Accenture/sfmc-devtools/issues/64) Added `accountUser` (system users) support (retrieve)
 - [#103](https://github.com/Accenture/sfmc-devtools/issues/103) Add rename `dataExtensionField` option (via Name_new)
+- [#130](https://github.com/Accenture/sfmc-devtools/issues/130) offer `retrieveChangelog` option to other node packages including mcdev
 - [#133](https://github.com/Accenture/sfmc-devtools/issues/133) `dataExtensionField` validation during DE update
+- [#136](https://github.com/Accenture/sfmc-devtools/issues/136) enable including mcdev in other node packages
 
 **Bugfixes:**
 
