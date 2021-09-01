@@ -17,6 +17,7 @@ Accenture Salesforce Marketing Cloud DevTools (mcdev) is a rapid deployment/roll
   - [2.3. Initial project setup](#23-initial-project-setup)
   - [2.4. Joining a project that was set up before](#24-joining-a-project-that-was-set-up-before)
   - [2.5. Recommended additional installs](#25-recommended-additional-installs)
+  - [2.6 Using mcdev in other node packages](#26-using-mcdev-in-other-node-packages)
 - [3. Updating Accenture SFMC DevTools](#3-updating-accenture-sfmc-devtools)
 - [4. Troubleshoot Install/Update](#4-troubleshoot-installupdate)
   - [4.1. Installing specific version](#41-installing-specific-version)
@@ -212,6 +213,29 @@ The "Workspace Recommendations" were defined by Accenture SFMC DevTools. Clickin
 Please note that Visual Studio Code might warn you about using the local installation of ESLint with a pop up like the following. Please confirm this with `Allow` or, if you are certain about what you are doing, with `Allow Everywhere`. Inside of Accenture SFMC DevTools project folders this warning is normal, because we ask to install the VSCode extension and the node module for ESLint.
 
 ![VSCode Eslint install warning](img/README.md/vscode-eslint-allow_everywhere.jpg)
+
+### 2.6 Using mcdev in other node packages
+
+Install it locally first via the following (or with a [specific version](#41-installing-specific-version)):
+
+```bash
+npm install --save mcdev
+```
+
+And then require it in your code:
+
+```javascript
+const mcdev = require('mcdev');
+
+// download all metadata from your instance's Parent BU
+mcdev.retrieve('MyCredential/_ParentBU_');
+
+
+// or download all metadata from your instance's Parent BU
+mcdev.retrieve('MyCredential/_ParentBU_','dataExtension');
+```
+
+For more details on the available methods look out for what Intellisense will return or refer to the [developer documentation](docs/dist/documentation.md).
 
 <a name="updating-mcdev"></a>
 
