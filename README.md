@@ -257,21 +257,23 @@ npm update -g mcdev
 
 ### 4.1. Installing specific version
 
-<a id="markdown-installing-specific-version" name="installing-specific-version"></a>
+<a id="installing-specific-version" name="installing-specific-version"></a>
 
 To work with our **developer-version** or to install a **specific older version** you can select any branch or tag from our git repository during install to do so:
 
-```bash
-// most recent developer version (using the branch name)
-npm install -g mcdev@develop
+**Most recent developer version (using the GitHub repo & branch name):**
 
-// install specific version (using a tag)
-npm install -g mcdev@3.0.0
+```bash
+npm install -g accenture/sfmc-devtools#develop
 ```
 
-**Warning**: When you used the above method to install Accenture SFMC DevTools for a specific version or tag, trying to [update Accenture SFMC DevTools](#updating-mcdev) might not download the most recently published official version but instead stay on the version or branch you previously selected (in the above examples: develop, 3.0.0)!
+**Install specific version (using a version tag on npm):**
 
-If you opted for `@develop` you will continue to get the latest developer udates. If, however, you opted for a version, you will have to use the install command again to overwrite whatever version you used before.
+```bash
+npm install -g mcdev@3.1.0
+```
+
+**Warning**: When you used the above method to install Accenture SFMC DevTools for a specific version or tag, trying to [update Accenture SFMC DevTools](#updating-mcdev) might not download the most recently published official version but instead stay on the version or branch you previously selected (in the above examples: develop, 3.1.0)!
 
 > **Note**: The version is currently _not_ updated on the developer branch until a new release is published. Hence, you will not see a change if you run `mcdev --version`.
 
