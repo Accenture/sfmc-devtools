@@ -378,6 +378,7 @@ The following metadata types are currently supported:
 | List                               | `list`                    | Yes      | in backlog | -          | Yes                  | Old way of storing data. Still used for central Email Subscriber DB.                                               |
 | Role                               | `role`                    | Yes      | Yes        | -          | Yes                  | User Roles define groups that are used to grant users access to SFMC systems.                                      |
 | Triggered Send                     | `triggeredSendDefinition` | Yes      | Yes        | -          | Yes                  | **DEPRECATED**: Sends emails via API or DataExtension Event.                                                       |
+| User                               | `accountUser`             | Yes      | in backlog | -          | Yes                  | Users and Installed Packages including their assigned Roles, BUs and personal permissions                          |
 
 ## 6. Command Overview
 
@@ -515,6 +516,7 @@ Currently supported types:
 | -------------- | --------------- |
 | Data Extension | `dataExtension` |
 | Role           | `role`          |
+| User           | `accountUser`   |
 
 _Example:_
 
