@@ -6,6 +6,10 @@
   regex = "(CSCLSROZ)-(\\d+)"
   url = "https://alm.accenture.com/jira/browse/$1-$2"
 
-[issuetracker "GitHub Rule"]
+[issuetracker "GitHub Pull Request Rule"]
+  regex = "pull request #(\\d+)"
+  url = "https://github.com/Accenture/sfmc-devtools/pull/$1"
+
+[issuetracker "GitHub Issue Rule"]
   regex = "#(\\d+)"
   url = "https://github.com/Accenture/sfmc-devtools/issues/$1"
