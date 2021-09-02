@@ -2,6 +2,10 @@
 #
 # (note that '\' need to be escaped).
 
-[issuetracker "Jira Rule"]
-  regex = "CSCLSROZ-(\\d+)"
-  url = "https://alm.accenture.com/jira/browse/CSCLSROZ-$1"
+[issuetracker "Accenture Jira Rule"]
+  regex = "(CSCLSROZ)-(\\d+)"
+  url = "https://alm.accenture.com/jira/browse/$1-$2"
+
+[issuetracker "GitHub Rule"]
+  regex = "#(\\d+)"
+  url = "https://github.com/Accenture/sfmc-devtools/issues/$1"
