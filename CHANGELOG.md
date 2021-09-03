@@ -31,6 +31,7 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 - [#132](https://github.com/Accenture/sfmc-devtools/issues/132) `dataExtension.SendableSubscriberField.Name` now has a slightly more readable value
 - [#137](https://github.com/Accenture/sfmc-devtools/issues/137) docs for installing a specific version are incorrect
 - [#138](https://github.com/Accenture/sfmc-devtools/issues/138) make issues and pull requests clickable in gitfork
+- improved error handling of `document role` command
 
 ---
 
