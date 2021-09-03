@@ -1024,6 +1024,7 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
 | directories.deploy                       | 'deploy/'                                    | Where `deploy` searches for files to deploy |
 | directories.retrieve                     | 'retrieve/'                                  | Where `retrieve` stores downloaded files |
 | directories.roles                        | 'docs/roles/'                                | Directory for `document role` output |
+| directories.users                        | 'docs/users/'                                | Directory for `document accountUser` output |
 | directories.template                     | 'template/'                                  | Where `rt` stores downloaded templates & `bd` retrieves them from |
 | directories.templateBuilds               | ['retrieve/','deploy/']                      | Where `bd` saves final deployment versions in. This can hold multiple directories, e.g. ['retrieve/','deploy/'] |
 | metaDataTypes.documentOnRetrieve         | ['role','dataExtension']                     | automatically executes `document` for selected types |
