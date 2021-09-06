@@ -8,8 +8,12 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 
 **Features:**
 
+- [#55](https://github.com/Accenture/sfmc-devtools/issues/55) added user / roles documentation
+- [#64](https://github.com/Accenture/sfmc-devtools/issues/64) Added `accountUser` (system users) support (retrieve)
 - [#103](https://github.com/Accenture/sfmc-devtools/issues/103) Add rename `dataExtensionField` option (via Name_new)
+- [#130](https://github.com/Accenture/sfmc-devtools/issues/130) offer `retrieveChangelog` option to other node packages including mcdev
 - [#133](https://github.com/Accenture/sfmc-devtools/issues/133) `dataExtensionField` validation during DE update
+- [#136](https://github.com/Accenture/sfmc-devtools/issues/136) enable including mcdev in other node packages
 
 **Bugfixes:**
 
@@ -25,6 +29,10 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 
 - [#127](https://github.com/Accenture/sfmc-devtools/issues/127) bad message "info: updated automation: undefined"
 - [#132](https://github.com/Accenture/sfmc-devtools/issues/132) `dataExtension.SendableSubscriberField.Name` now has a slightly more readable value
+- [#137](https://github.com/Accenture/sfmc-devtools/issues/137) docs for installing a specific version are incorrect
+- [#138](https://github.com/Accenture/sfmc-devtools/issues/138) make issues and pull requests clickable in gitfork
+- change `mcdev document` to take the cred/BU first and then the type to align it with other commands
+- improved error handling of `document role` command
 
 ---
 

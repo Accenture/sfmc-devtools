@@ -19,7 +19,7 @@
     },
     "main": "./lib/index.js",
     "bin": {
-        "mcdev": "./lib/index.js"
+        "mcdev": "./lib/cli.js"
     },
     "engines": {
         "node": ">=14.16"
