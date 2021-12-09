@@ -45,7 +45,7 @@
         "inquirer": "8.2.0",
         "json-to-table": "4.2.1",
         "mustache": "4.2.0",
-        "prettier": "2.3.2",
+        "prettier": "2.5.1",
         "semver": "5.7.1",
         "sfmc-fuelsdk-node": "2.4.0",
         "simple-git": "2.37.0",
