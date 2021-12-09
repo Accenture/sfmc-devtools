@@ -115,6 +115,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#MetadataTypeInfo">MetadataTypeInfo</a></dt>
 <dd><p>Provides access to all metadataType classes</p>
 </dd>
+<dt><a href="#mcdev">mcdev</a></dt>
+<dd><p>sample file on how to retrieve a simple changelog to use in GUIs or automated processing of any kind</p>
+</dd>
 <dt><a href="#BusinessUnit">BusinessUnit</a></dt>
 <dd><p>Helper that handles retrieval of BU info</p>
 </dd>
@@ -346,8 +349,8 @@ main class
     * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>Promise</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
-    * [.retrieve(businessUnit, [selectedType], [listOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [._retrieveBU(cred, bu, [selectedType], [listOnly])](#Mcdev._retrieveBU) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.retrieve(businessUnit, [selectedType], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [._retrieveBU(cred, bu, [selectedType], [changelogOnly])](#Mcdev._retrieveBU) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [._deployBU(cred, bu, [type])](#Mcdev._deployBU) ⇒ <code>Promise</code>
     * [.deploy(businessUnit, [selectedType])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initProject([credentialsName], [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -410,7 +413,7 @@ configures what is displayed in the console
 
 <a name="Mcdev.retrieve"></a>
 
-### Mcdev.retrieve(businessUnit, [selectedType], [listOnly]) ⇒ <code>Promise.&lt;Object&gt;</code>
+### Mcdev.retrieve(businessUnit, [selectedType], [changelogOnly]) ⇒ <code>Promise.&lt;Object&gt;</code>
 Retrieve all metadata from the specified business unit into the local file system.
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -420,11 +423,11 @@ Retrieve all metadata from the specified business unit into the local file syste
 | --- | --- | --- |
 | businessUnit | <code>String</code> | references credentials from properties.json |
 | [selectedType] | <code>String</code> | limit retrieval to given metadata type |
-| [listOnly] | <code>boolean</code> | skip saving, only create json in memory |
+| [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
 
 <a name="Mcdev._retrieveBU"></a>
 
-### Mcdev.\_retrieveBU(cred, bu, [selectedType], [listOnly]) ⇒ <code>Promise.&lt;Object&gt;</code>
+### Mcdev.\_retrieveBU(cred, bu, [selectedType], [changelogOnly]) ⇒ <code>Promise.&lt;Object&gt;</code>
 helper for retrieve()
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -435,7 +438,7 @@ helper for retrieve()
 | cred | <code>String</code> | name of Credential |
 | bu | <code>String</code> | name of BU |
 | [selectedType] | <code>String</code> | limit retrieval to given metadata type/subtype |
-| [listOnly] | <code>boolean</code> | skip saving, only create json in memory |
+| [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
 
 <a name="Mcdev._deployBU"></a>
 
@@ -1056,7 +1059,7 @@ Automation MetadataType
 * [Automation](#Automation) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.client](#Automation.client) : <code>Util.ET\_Client</code>
     * [.retrieve(retrieveDir)](#Automation.retrieve) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
-    * [.retrieveList()](#Automation.retrieveList) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
+    * [.retrieveChangelog()](#Automation.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
     * [.retrieveForCache()](#Automation.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, variables)](#Automation.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
     * [.postRetrieveTasks(metadata, [_], [isTemplating])](#Automation.postRetrieveTasks) ⇒ <code>AutomationItem</code>
@@ -1086,9 +1089,9 @@ Retrieves Metadata of Automation
 | --- | --- | --- |
 | retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 
-<a name="Automation.retrieveList"></a>
+<a name="Automation.retrieveChangelog"></a>
 
-### Automation.retrieveList() ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
+### Automation.retrieveChangelog() ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
 Retrieves Metadata of Automation
 
 **Kind**: static method of [<code>Automation</code>](#Automation)  
@@ -1360,7 +1363,7 @@ DataExtension MetadataType
     * [.update(metadata)](#DataExtension.update) ⇒ <code>Promise</code>
     * [.postDeployTasks(upsertedMetadata)](#DataExtension.postDeployTasks) ⇒ <code>void</code>
     * [.retrieve(retrieveDir, [additionalFields], buObject, [_], [isDeploy])](#DataExtension.retrieve) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
-    * [.retrieveList([additionalFields])](#DataExtension.retrieveList) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
+    * [.retrieveChangelog([additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
     * [.postRetrieveTasks(metadata, [_], [isTemplating])](#DataExtension.postRetrieveTasks) ⇒ <code>DataExtensionItem</code>
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;DataExtensionItem&gt;</code>
     * [.document(buObject, [metadata], [isDeploy])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -1450,9 +1453,9 @@ Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionCo
 | [_] | <code>void</code> | - |
 | [isDeploy] | <code>boolean</code> | used to signal that fields shall be retrieve in caching mode |
 
-<a name="DataExtension.retrieveList"></a>
+<a name="DataExtension.retrieveChangelog"></a>
 
-### DataExtension.retrieveList([additionalFields]) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
+### DataExtension.retrieveChangelog([additionalFields]) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
 Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionColumn metadata retrieval
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -2600,7 +2603,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>MetadataTypeItem</code>
     * [.overrideKeyWithName(metadata, [warningMsg])](#MetadataType.overrideKeyWithName) ⇒ <code>void</code>
     * [.retrieve(retrieveDir, [additionalFields], buObject, [subType])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
-    * [.retrieveList([additionalFields], buObject, [subType])](#MetadataType.retrieveList) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveChangelog([additionalFields], buObject, [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
     * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
     * [.preDeployTasks(metadata, deployDir)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;MetadataTypeItem&gt;</code>
@@ -2748,9 +2751,9 @@ Gets metadata from Marketing Cloud
 | buObject | <code>Util.BuObject</code> | properties for auth |
 | [subType] | <code>string</code> | optionally limit to a single subtype |
 
-<a name="MetadataType.retrieveList"></a>
+<a name="MetadataType.retrieveChangelog"></a>
 
-### MetadataType.retrieveList([additionalFields], buObject, [subType]) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
+### MetadataType.retrieveChangelog([additionalFields], buObject, [subType]) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
 Gets metadata from Marketing Cloud
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3682,7 +3685,7 @@ Retrieves metadata from a business unit and saves it to the local filesystem.
 
 * [Retriever](#Retriever)
     * [new Retriever(properties, buObject, client)](#new_Retriever_new)
-    * [.retrieve(metadataTypes, [name], [templateVariables], [listOnly])](#Retriever+retrieve) ⇒ <code>Promise.&lt;Object.&lt;string, Object&gt;&gt;</code>
+    * [.retrieve(metadataTypes, [name], [templateVariables], [changelogOnly])](#Retriever+retrieve) ⇒ <code>Promise.&lt;Object.&lt;string, Object&gt;&gt;</code>
 
 <a name="new_Retriever_new"></a>
 
@@ -3705,7 +3708,7 @@ Creates a Retriever, uses v2 auth if v2AuthOptions are passed.
 
 <a name="Retriever+retrieve"></a>
 
-### retriever.retrieve(metadataTypes, [name], [templateVariables], [listOnly]) ⇒ <code>Promise.&lt;Object.&lt;string, Object&gt;&gt;</code>
+### retriever.retrieve(metadataTypes, [name], [templateVariables], [changelogOnly]) ⇒ <code>Promise.&lt;Object.&lt;string, Object&gt;&gt;</code>
 Retrieve metadata of specified types into local file system and Retriever.metadata
 
 **Kind**: instance method of [<code>Retriever</code>](#Retriever)  
@@ -3716,7 +3719,7 @@ Retrieve metadata of specified types into local file system and Retriever.metada
 | metadataTypes | <code>Array.&lt;String&gt;</code> | String list of metadata types to retrieve |
 | [name] | <code>String</code> | name of Metadata to retrieve (in case of templating) |
 | [templateVariables] | <code>Object</code> | Object of values which can be replaced (in case of templating) |
-| [listOnly] | <code>boolean</code> | skip saving, only create json in memory |
+| [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
 
 <a name="Util"></a>
 
@@ -3971,6 +3974,24 @@ Provides access to all metadataType classes
 Provides access to all metadataType classes
 
 **Kind**: global constant  
+<a name="mcdev"></a>
+
+## mcdev
+sample file on how to retrieve a simple changelog to use in GUIs or automated processing of any kind
+
+**Kind**: global constant  
+**Example**  
+```js
+[{
+    name: 'deName',
+    key: 'deKey',
+    t: 'dataExtension',
+    cd: '2020-05-06T00:16:00.737',
+    cb: 'name of creator',
+    ld: '2020-05-06T00:16:00.737',
+    lb: 'name of lastmodified'
+  }]
+```
 <a name="BusinessUnit"></a>
 
 ## BusinessUnit
