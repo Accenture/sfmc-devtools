@@ -4,16 +4,16 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 
 ---
 
-## [3.1.0](https://github.com/Accenture/sfmc-devtools/compare/v3.0.3...v3.1.0) - 2021-??-??
+## [3.1.0](https://github.com/Accenture/sfmc-devtools/compare/v3.0.3...v3.1.0) - 2021-12-??
 
 **Features:**
 
 - [#55](https://github.com/Accenture/sfmc-devtools/issues/55) added user / roles documentation
 - [#64](https://github.com/Accenture/sfmc-devtools/issues/64) Added `accountUser` (system users) support (retrieve)
 - [#103](https://github.com/Accenture/sfmc-devtools/issues/103) Add rename `dataExtensionField` option (via Name_new)
-- [#130](https://github.com/Accenture/sfmc-devtools/issues/130) offer `retrieveChangelog` option to other node packages including mcdev
-- [#133](https://github.com/Accenture/sfmc-devtools/issues/133) `dataExtensionField` validation during DE update
-- [#136](https://github.com/Accenture/sfmc-devtools/issues/136) enable including mcdev in other node packages
+- [#130](https://github.com/Accenture/sfmc-devtools/issues/130) offer `retrieveChangelog` option to other node packages including mcdev (see [retrieveChangelog.js](/lib/retrieveChangelog.js) for a how-to)
+- [#133](https://github.com/Accenture/sfmc-devtools/issues/133) `dataExtensionField` validation during DE update (see [README](README.md#722-addingupdating-fields-on-existing-data-extensions) for details)
+- [#136](https://github.com/Accenture/sfmc-devtools/issues/136) enable including mcdev in other node packages (see [README](README.md#26-using-mcdev-in-other-node-packages) for a how-to)
 
 **Bugfixes:**
 
