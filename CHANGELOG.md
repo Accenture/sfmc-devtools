@@ -24,15 +24,31 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 - [#122](https://github.com/Accenture/sfmc-devtools/issues/122) ECONNRESET on caching metadata during deploy
 - [#128](https://github.com/Accenture/sfmc-devtools/issues/128) `dataExtension` json not equal for retrieve/deploy
 - [#129](https://github.com/Accenture/sfmc-devtools/issues/129) `script` json not equal for retrieve/deploy
+- [#140](https://github.com/Accenture/sfmc-devtools/issues/140) avoid issues when retrieving `dataExtensions` that do not have a folder ID (edge case) - thanks to @fbellgr
 
 **Chores:**
 
 - [#127](https://github.com/Accenture/sfmc-devtools/issues/127) bad message "info: updated automation: undefined"
 - [#132](https://github.com/Accenture/sfmc-devtools/issues/132) `dataExtension.SendableSubscriberField.Name` now has a slightly more readable value
-- [#137](https://github.com/Accenture/sfmc-devtools/issues/137) docs for installing a specific version are incorrect
+- [#137](https://github.com/Accenture/sfmc-devtools/issues/137) docs for installing a specific version were incorrect
 - [#138](https://github.com/Accenture/sfmc-devtools/issues/138) make issues and pull requests clickable in gitfork
 - change `mcdev document` to take the cred/BU first and then the type to align it with other commands
 - improved error handling of `document role` command
+- bumped cli-progress to 3.9.1
+- bumped eslint to 8.4.1
+- bumped eslint-plugin-mocha to 10.0.1
+- bumped eslint-plugin-prettier to 4.0.0
+- bumped fs-extra to 10.0.0
+- bumped husky to 7.0.4
+- bumped inquirer to 8.2.0
+- bumped jsdoc-to-markdown to 7.1.0
+- bumped lint-staged to 12.1.2
+- bumped mocha to 9.1.3
+- bumped mustache to 4.2.0
+- bumped prettier to 2.5.1
+- bumped semver to 7.3.5
+- bumped simple-git to 2.48.0
+- bumped yargs to 17.3.0
 
 ---
 
