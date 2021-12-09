@@ -14,6 +14,7 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 - [#130](https://github.com/Accenture/sfmc-devtools/issues/130) offer `retrieveChangelog` option to other node packages including mcdev (see [retrieveChangelog.js](/lib/retrieveChangelog.js) for a how-to)
 - [#133](https://github.com/Accenture/sfmc-devtools/issues/133) `dataExtensionField` validation during DE update (see [README](README.md#722-addingupdating-fields-on-existing-data-extensions) for details)
 - [#136](https://github.com/Accenture/sfmc-devtools/issues/136) enable including mcdev in other node packages (see [README](README.md#26-using-mcdev-in-other-node-packages) for a how-to)
+- [#144](https://github.com/Accenture/sfmc-devtools/issues/144) added file type .ai to `asset` - thanks to @fbellgr
 
 **Bugfixes:**
 
@@ -25,6 +26,7 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 - [#128](https://github.com/Accenture/sfmc-devtools/issues/128) `dataExtension` json not equal for retrieve/deploy
 - [#129](https://github.com/Accenture/sfmc-devtools/issues/129) `script` json not equal for retrieve/deploy
 - [#140](https://github.com/Accenture/sfmc-devtools/issues/140) avoid issues when retrieving `dataExtensions` that do not have a folder ID (edge case) - thanks to @fbellgr
+- [#144](https://github.com/Accenture/sfmc-devtools/issues/144) improved handling high volumes of `asset` - thanks to @fbellgr
 
 **Chores:**
 
