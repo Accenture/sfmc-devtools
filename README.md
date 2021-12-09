@@ -17,6 +17,7 @@ Accenture Salesforce Marketing Cloud DevTools (mcdev) is a rapid deployment/roll
   - [2.3. Initial project setup](#23-initial-project-setup)
   - [2.4. Joining a project that was set up before](#24-joining-a-project-that-was-set-up-before)
   - [2.5. Recommended additional installs](#25-recommended-additional-installs)
+  - [2.6 Using mcdev in other node packages](#26-using-mcdev-in-other-node-packages)
 - [3. Updating Accenture SFMC DevTools](#3-updating-accenture-sfmc-devtools)
 - [4. Troubleshoot Install/Update](#4-troubleshoot-installupdate)
   - [4.1. Installing specific version](#41-installing-specific-version)
@@ -213,6 +214,29 @@ Please note that Visual Studio Code might warn you about using the local install
 
 ![VSCode Eslint install warning](img/README.md/vscode-eslint-allow_everywhere.jpg)
 
+### 2.6 Using mcdev in other node packages
+
+Install it locally first via the following (or with a [specific version](#41-installing-specific-version)):
+
+```bash
+npm install --save mcdev
+```
+
+And then require it in your code:
+
+```javascript
+const mcdev = require('mcdev');
+
+// download all metadata from your instance's Parent BU
+mcdev.retrieve('MyCredential/_ParentBU_');
+
+
+// or download all metadata from your instance's Parent BU
+mcdev.retrieve('MyCredential/_ParentBU_','dataExtension');
+```
+
+For more details on the available methods look out for what Intellisense will return or refer to the [developer documentation](docs/dist/documentation.md).
+
 <a name="updating-mcdev"></a>
 
 ## 3. Updating Accenture SFMC DevTools
@@ -233,21 +257,23 @@ npm update -g mcdev
 
 ### 4.1. Installing specific version
 
-<a id="markdown-installing-specific-version" name="installing-specific-version"></a>
+<a id="installing-specific-version" name="installing-specific-version"></a>
 
 To work with our **developer-version** or to install a **specific older version** you can select any branch or tag from our git repository during install to do so:
 
-```bash
-// most recent developer version (using the branch name)
-npm install -g mcdev@develop
+**Most recent developer version (using the GitHub repo & branch name):**
 
-// install specific version (using a tag)
-npm install -g mcdev@3.0.0
+```bash
+npm install -g accenture/sfmc-devtools#develop
 ```
 
-**Warning**: When you used the above method to install Accenture SFMC DevTools for a specific version or tag, trying to [update Accenture SFMC DevTools](#updating-mcdev) might not download the most recently published official version but instead stay on the version or branch you previously selected (in the above examples: develop, 3.0.0)!
+**Install specific version (using a version tag on npm):**
 
-If you opted for `@develop` you will continue to get the latest developer udates. If, however, you opted for a version, you will have to use the install command again to overwrite whatever version you used before.
+```bash
+npm install -g mcdev@3.1.0
+```
+
+**Warning**: When you used the above method to install Accenture SFMC DevTools for a specific version or tag, trying to [update Accenture SFMC DevTools](#updating-mcdev) might not download the most recently published official version but instead stay on the version or branch you previously selected (in the above examples: develop, 3.1.0)!
 
 > **Note**: The version is currently _not_ updated on the developer branch until a new release is published. Hence, you will not see a change if you run `mcdev --version`.
 
@@ -378,6 +404,7 @@ The following metadata types are currently supported:
 | List                               | `list`                    | Yes      | in backlog | -          | Yes                  | Old way of storing data. Still used for central Email Subscriber DB.                                               |
 | Role                               | `role`                    | Yes      | Yes        | -          | Yes                  | User Roles define groups that are used to grant users access to SFMC systems.                                      |
 | Triggered Send                     | `triggeredSendDefinition` | Yes      | Yes        | -          | Yes                  | **DEPRECATED**: Sends emails via API or DataExtension Event.                                                       |
+| User                               | `accountUser`             | Yes      | in backlog | -          | Yes                  | Users and Installed Packages including their assigned Roles, BUs and personal permissions                          |
 
 ## 6. Command Overview
 
@@ -515,6 +542,7 @@ Currently supported types:
 | -------------- | --------------- |
 | Data Extension | `dataExtension` |
 | Role           | `role`          |
+| User           | `accountUser`   |
 
 _Example:_
 
@@ -996,6 +1024,7 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
 | directories.deploy                       | 'deploy/'                                    | Where `deploy` searches for files to deploy |
 | directories.retrieve                     | 'retrieve/'                                  | Where `retrieve` stores downloaded files |
 | directories.roles                        | 'docs/roles/'                                | Directory for `document role` output |
+| directories.users                        | 'docs/users/'                                | Directory for `document accountUser` output |
 | directories.template                     | 'template/'                                  | Where `rt` stores downloaded templates & `bd` retrieves them from |
 | directories.templateBuilds               | ['retrieve/','deploy/']                      | Where `bd` saves final deployment versions in. This can hold multiple directories, e.g. ['retrieve/','deploy/'] |
 | metaDataTypes.documentOnRetrieve         | ['role','dataExtension']                     | automatically executes `document` for selected types |
