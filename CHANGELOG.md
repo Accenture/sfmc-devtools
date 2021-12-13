@@ -30,6 +30,7 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 
 **Chores:**
 
+- [#5](https://github.com/Accenture/sfmc-devtools/issues/5) removed postinstall msg after npm 7 dropped support for that
 - [#127](https://github.com/Accenture/sfmc-devtools/issues/127) bad message "info: updated automation: undefined"
 - [#132](https://github.com/Accenture/sfmc-devtools/issues/132) `dataExtension.SendableSubscriberField.Name` now has a slightly more readable value
 - [#137](https://github.com/Accenture/sfmc-devtools/issues/137) docs for installing a specific version were incorrect
