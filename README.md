@@ -153,7 +153,7 @@ After the successful installation, you will now need to setup the connection to 
    3. If this is the first time you set up Accenture SFMC DevTools or you recently upgraded Accenture SFMC DevTools, please restart VS Code now! A pop-up will likely appear in the lower right corner prompting you to install recommended extensions.
    4. Done.
 3. Sharing the project with your team
-   1. Make sure you have a Git repo (Bitbucket, GitHub, GitLab) set up somewhere. Usually your client will have to do this for you. Sometimes, we host client repos in our own Innersource, which is instance of Bitbucket.
+   1. Make sure you have a Git repo (Bitbucket, GitHub, GitLab) set up somewhere. If you are an SI partner, usually, your client will have to do this for you.
       > While running `mcdev init`, the tool already made sure to set up a local Git repo for you. Now, you need to upload ("push") it to the online repo:
    2. Open the URL of your online repo and find the "CLONE" button. This will likely show you a normal URL, ending on ".git"
    3. Add this as your repository remote named "origin". If you use a GUI based tool, that should be fairly simple, otherwise execute `git remote add origin YOUR-URL` in your project folder.
@@ -230,9 +230,8 @@ const mcdev = require('mcdev');
 // download all metadata from your instance's Parent BU
 mcdev.retrieve('MyCredential/_ParentBU_');
 
-
 // or download all metadata from your instance's Parent BU
-mcdev.retrieve('MyCredential/_ParentBU_','dataExtension');
+mcdev.retrieve('MyCredential/_ParentBU_', 'dataExtension');
 ```
 
 For more details on the available methods look out for what Intellisense will return or refer to the [developer documentation](docs/dist/documentation.md).
@@ -331,11 +330,7 @@ If you encounter out of the 3 following errors you will have to completely remov
 
 ![index.js not found](img/README.md/troubleshoot-nodejs-index.jpg)
 
-**Error 2:** Cannot find module postinstall.js
-
-![postinstall.js not found](img/README.md/troubleshoot-nodejs-postinstall.jpg)
-
-**Error 3:** Operation not permitted
+**Error 2:** Operation not permitted
 
 ![operation not permitted](img/README.md/troubleshoot-nodejs-permission.jpg)
 
@@ -377,8 +372,8 @@ Now, please follow the guides above in the [Pre-requisites](#pre-requisites) sec
 
 The following metadata types are currently supported:
 
-| MetadataType                       | CLI Argument              | Retrieve | Deploy     | Template   | Retrieved by Default | Description |
-| -- | -- | -- | -- | -- | -- | -- |
+| MetadataType                       | CLI Argument              | Retrieve | Deploy     | Template   | Retrieved by Default | Description                                                                                                        |
+| ---------------------------------- | ------------------------- | -------- | ---------- | ---------- | -------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | API Discovery                      | `discovery`               | Yes      | -          | -          | -                    | Description of all API endpoints accessible via REST API; only relevant for developers of Accenture SFMC DevTools. |
 | Asset                              | `asset`                   | Yes      | Yes        | Yes        | Yes                  | Assets from Content Builder grouped into subtypes.                                                                 |
 | Automation                         | `automation`              | Yes      | Yes        | Yes        | Yes                  | Used via Automation Studio directly - or indirectly via Journey Builder & MC Connect.                              |
@@ -1008,27 +1003,27 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
 }
 ```
 
-| Setting | Default | Description |
-| -- | -- | -- |
-| options.deployment.commitHistory         | 10                                           | Configures how many commits `createDeltaPkg` will display if no parameters are given |
-| options.deployment.sourceTargetMapping   | `{"deployment-source": "deployment-target"}` | Configuration of 1 or many source-target marketList combos for `mcdev createDeltaPkg` |
-| options.deployment.targetBranchBuMapping | `{"release/*": "...","master": ["..."]}`     | Can be used by CI/CD pipelines to know what BUs shall be deployed to upon a merge into one of the specified branches |
-| options.documentType                     | 'md'                                         | Defines the format for documentation ('md', 'html', 'both') |
-| options.exclude.`type`.`field`           | []                                           | Allows you to filter out metadata on retrieve based on their field values, e.g. CustomerKey (previously `options.filter`) |
-| options.include.`type`.`field`           | []                                           | Allows you to filter out metadata on retrieve based on their field values, e.g. CustomerKey |
+| Setting                                  | Default                                      | Description                                                                                                                 |
+| ---------------------------------------- | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| options.deployment.commitHistory         | 10                                           | Configures how many commits `createDeltaPkg` will display if no parameters are given                                        |
+| options.deployment.sourceTargetMapping   | `{"deployment-source": "deployment-target"}` | Configuration of 1 or many source-target marketList combos for `mcdev createDeltaPkg`                                       |
+| options.deployment.targetBranchBuMapping | `{"release/*": "...","master": ["..."]}`     | Can be used by CI/CD pipelines to know what BUs shall be deployed to upon a merge into one of the specified branches        |
+| options.documentType                     | 'md'                                         | Defines the format for documentation ('md', 'html', 'both')                                                                 |
+| options.exclude.`type`.`field`           | []                                           | Allows you to filter out metadata on retrieve based on their field values, e.g. CustomerKey (previously `options.filter`)   |
+| options.include.`type`.`field`           | []                                           | Allows you to filter out metadata on retrieve based on their field values, e.g. CustomerKey                                 |
 | options.serverTimeOffset                 | -6                                           | Used to work around quirks in how SFMC handles timezones; For stack4: set to -7 (US Mountain time); others: -6 (US Central) |
-| directories.badKeys                      | 'docs/badKeys/'                              | Where the documentation for bad key-name combos is stored on retrieve |
-| directories.businessUnits                | 'businessUnits/'                             | Directory to save BU base details in |
-| directories.dataExtension                | 'docs/dataExtension/'                        | Directory for `document dataExtension` output |
-| directories.deltaPackage                 | 'docs/deltaPackage/'                         | Where `createDeltaPkg` stores its log |
-| directories.deploy                       | 'deploy/'                                    | Where `deploy` searches for files to deploy |
-| directories.retrieve                     | 'retrieve/'                                  | Where `retrieve` stores downloaded files |
-| directories.roles                        | 'docs/roles/'                                | Directory for `document role` output |
-| directories.users                        | 'docs/users/'                                | Directory for `document accountUser` output |
-| directories.template                     | 'template/'                                  | Where `rt` stores downloaded templates & `bd` retrieves them from |
-| directories.templateBuilds               | ['retrieve/','deploy/']                      | Where `bd` saves final deployment versions in. This can hold multiple directories, e.g. ['retrieve/','deploy/'] |
-| metaDataTypes.documentOnRetrieve         | ['role','dataExtension']                     | automatically executes `document` for selected types |
-| metaDataTypes.retrieve                   | _changes with each release_                  | check [Metadata Type Support](#metadata-type-support) for current list |
+| directories.badKeys                      | 'docs/badKeys/'                              | Where the documentation for bad key-name combos is stored on retrieve                                                       |
+| directories.businessUnits                | 'businessUnits/'                             | Directory to save BU base details in                                                                                        |
+| directories.dataExtension                | 'docs/dataExtension/'                        | Directory for `document dataExtension` output                                                                               |
+| directories.deltaPackage                 | 'docs/deltaPackage/'                         | Where `createDeltaPkg` stores its log                                                                                       |
+| directories.deploy                       | 'deploy/'                                    | Where `deploy` searches for files to deploy                                                                                 |
+| directories.retrieve                     | 'retrieve/'                                  | Where `retrieve` stores downloaded files                                                                                    |
+| directories.roles                        | 'docs/roles/'                                | Directory for `document role` output                                                                                        |
+| directories.users                        | 'docs/users/'                                | Directory for `document accountUser` output                                                                                 |
+| directories.template                     | 'template/'                                  | Where `rt` stores downloaded templates & `bd` retrieves them from                                                           |
+| directories.templateBuilds               | ['retrieve/','deploy/']                      | Where `bd` saves final deployment versions in. This can hold multiple directories, e.g. ['retrieve/','deploy/']             |
+| metaDataTypes.documentOnRetrieve         | ['role','dataExtension']                     | automatically executes `document` for selected types                                                                        |
+| metaDataTypes.retrieve                   | _changes with each release_                  | check [Metadata Type Support](#metadata-type-support) for current list                                                      |
 
 ### 7.2. Metadata specific settings & options
 
@@ -1040,15 +1035,15 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
 
 The way retention policy is saved is a bit misleading and hence we wanted to provide a bit of guidance if you ever need to do a deep dive here.
 
-| Field | Description | Values |
-| -- | -- | -- |
-| **DataRetentionPeriod** | this field should print the value of the unit of measure but it unfortunately is off by one (e.g. showing "weeks" instead of "months"). Also, it seems to have no impact on what's stored.<br> We therefore excluded it from retrieve/deploy | - |
-| **DataRetentionPeriodUnitOfMeasure** | represents drop down for "period after" selection | 6: years<br>5: months<br>4: weeks<br>2: days |
-| **DataRetentionPeriodLength** | represents number field for "period after" selection | min: 1<br>max: 999 |
-| **RowBasedRetention** | only true if "delete individual records" is selected, otherwise false | true / false |
-| **ResetRetentionPeriodOnImport** | true if "Reset period on import" is checked. | This option is always false if "delete individual records" is selected | true / false |
-| **DeleteAtEndOfRetentionPeriod** | true if "delete all records" is selected, otherwise false | true / false |
-| **RetainUntil** | Normally, this should only be filled if a date, rather than a period was set.<br><br>This is empty for "delete individual records", but filled with a (calculated) date for the other 2 delete options even if "period after" was used.<br> Warning: trying to update a DE is denied when "period after" fields & this is provided | ""<br>or date in US format (m/d/Y H:m:s") "12/6/2021 12:00:00 AM") |
+| Field                                | Description                                                                                                                                                                                                                                                                                                                        | Values                                                                 |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------ |
+| **DataRetentionPeriod**              | this field should print the value of the unit of measure but it unfortunately is off by one (e.g. showing "weeks" instead of "months"). Also, it seems to have no impact on what's stored.<br> We therefore excluded it from retrieve/deploy                                                                                       | -                                                                      |
+| **DataRetentionPeriodUnitOfMeasure** | represents drop down for "period after" selection                                                                                                                                                                                                                                                                                  | 6: years<br>5: months<br>4: weeks<br>2: days                           |
+| **DataRetentionPeriodLength**        | represents number field for "period after" selection                                                                                                                                                                                                                                                                               | min: 1<br>max: 999                                                     |
+| **RowBasedRetention**                | only true if "delete individual records" is selected, otherwise false                                                                                                                                                                                                                                                              | true / false                                                           |
+| **ResetRetentionPeriodOnImport**     | true if "Reset period on import" is checked.                                                                                                                                                                                                                                                                                       | This option is always false if "delete individual records" is selected | true / false |
+| **DeleteAtEndOfRetentionPeriod**     | true if "delete all records" is selected, otherwise false                                                                                                                                                                                                                                                                          | true / false                                                           |
+| **RetainUntil**                      | Normally, this should only be filled if a date, rather than a period was set.<br><br>This is empty for "delete individual records", but filled with a (calculated) date for the other 2 delete options even if "period after" was used.<br> Warning: trying to update a DE is denied when "period after" fields & this is provided | ""<br>or date in US format (m/d/Y H:m:s") "12/6/2021 12:00:00 AM")     |
 
 To **disable retention completely**, ensure that you have the 3 booleans set to false, RetainUntil set to an empty string and no DataRetentionPeriod set (=those 2 attributes not present in file).
 
@@ -1075,32 +1070,32 @@ With a small addition to the Data Extension's JSON it is possible to rename fiel
 
 ```json
 {
-    "CustomerKey": "Account",
-    "Name": "Account",
-    "Description": "",
-    "IsSendable": "false",
-    "IsTestable": "false",
-    "Fields": [
-        {
-            "Name": "BillingCity",
-            "Scale": "0",
-            "DefaultValue": "",
-            "MaxLength": "40",
-            "IsRequired": "false",
-            "IsPrimaryKey": "true",
-            "FieldType": "Text"
-        },
-        {
-            "Name": "BillingCountry",
-            "Scale": "0",
-            "DefaultValue": "",
-            "MaxLength": "80",
-            "IsRequired": "false",
-            "IsPrimaryKey": "false",
-            "FieldType": "Text"
-        }
-    ],
-    "r__folder_Path": "Data Extensions"
+  "CustomerKey": "Account",
+  "Name": "Account",
+  "Description": "",
+  "IsSendable": "false",
+  "IsTestable": "false",
+  "Fields": [
+    {
+      "Name": "BillingCity",
+      "Scale": "0",
+      "DefaultValue": "",
+      "MaxLength": "40",
+      "IsRequired": "false",
+      "IsPrimaryKey": "true",
+      "FieldType": "Text"
+    },
+    {
+      "Name": "BillingCountry",
+      "Scale": "0",
+      "DefaultValue": "",
+      "MaxLength": "80",
+      "IsRequired": "false",
+      "IsPrimaryKey": "false",
+      "FieldType": "Text"
+    }
+  ],
+  "r__folder_Path": "Data Extensions"
 }
 ```
 
@@ -1108,33 +1103,33 @@ Imagine you wanted to rename `BillingCountry` to `BillingZip` for some reason. P
 
 ```json
 {
-    "CustomerKey": "Account",
-    "Name": "Account",
-    "Description": "",
-    "IsSendable": "false",
-    "IsTestable": "false",
-    "Fields": [
-        {
-            "Name": "BillingCity",
-            "Scale": "0",
-            "DefaultValue": "",
-            "MaxLength": "40",
-            "IsRequired": "false",
-            "IsPrimaryKey": "true",
-            "FieldType": "Text"
-        },
-        {
-            "Name": "BillingCountry", /* old name, keep here for reference during the update! */
-            "Name_new": "BillingZip", /* new name */
-            "Scale": "0",
-            "DefaultValue": "",
-            "MaxLength": "80",
-            "IsRequired": "false",
-            "IsPrimaryKey": "false",
-            "FieldType": "Text"
-        }
-    ],
-    "r__folder_Path": "Data Extensions"
+  "CustomerKey": "Account",
+  "Name": "Account",
+  "Description": "",
+  "IsSendable": "false",
+  "IsTestable": "false",
+  "Fields": [
+    {
+      "Name": "BillingCity",
+      "Scale": "0",
+      "DefaultValue": "",
+      "MaxLength": "40",
+      "IsRequired": "false",
+      "IsPrimaryKey": "true",
+      "FieldType": "Text"
+    },
+    {
+      "Name": "BillingCountry" /* old name, keep here for reference during the update! */,
+      "Name_new": "BillingZip" /* new name */,
+      "Scale": "0",
+      "DefaultValue": "",
+      "MaxLength": "80",
+      "IsRequired": "false",
+      "IsPrimaryKey": "false",
+      "FieldType": "Text"
+    }
+  ],
+  "r__folder_Path": "Data Extensions"
 }
 ```
 
