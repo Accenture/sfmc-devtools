@@ -52,6 +52,7 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 - bumped semver to 7.3.5
 - bumped simple-git to 2.48.0
 - bumped yargs to 17.3.0
+- [#146](https://github.com/Accenture/sfmc-devtools/issues/146) remove AccountUser retrieve as a default retrieve option
 
 ---
 
