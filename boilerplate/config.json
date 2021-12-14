@@ -79,7 +79,7 @@
         }
     },
     "metaDataTypes": {
-        "documentOnRetrieve": ["role", "dataExtension"],
+        "documentOnRetrieve": ["accountUser", "dataExtension", "role"],
         "retrieve": []
     }
 }
