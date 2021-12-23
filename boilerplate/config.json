@@ -33,7 +33,8 @@
         "retrieve": "retrieve/",
         "roles": "docs/roles/",
         "template": "template/",
-        "templateBuilds": ["retrieve/", "deploy/"]
+        "templateBuilds": ["retrieve/", "deploy/"],
+        "users": "docs/users/"
     },
     "markets": {
         "DEV-NL": {
@@ -78,7 +79,7 @@
         }
     },
     "metaDataTypes": {
-        "documentOnRetrieve": ["role", "dataExtension"],
+        "documentOnRetrieve": ["accountUser", "dataExtension", "role"],
         "retrieve": []
     }
 }
