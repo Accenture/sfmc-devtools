@@ -27,6 +27,7 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 - [#129](https://github.com/Accenture/sfmc-devtools/issues/129) `script` json not equal for retrieve/deploy
 - [#140](https://github.com/Accenture/sfmc-devtools/issues/140) avoid issues when retrieving `dataExtensions` that do not have a folder ID (edge case) - thanks to @fbellgr
 - [#144](https://github.com/Accenture/sfmc-devtools/issues/144) improved handling high volumes of `asset` - thanks to @fbellgr
+- [#149](https://github.com/Accenture/sfmc-devtools/issues/149) handle errors on upsert of data extensions gracefully
 
 **Chores:**
 
