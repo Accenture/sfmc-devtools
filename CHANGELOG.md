@@ -4,7 +4,7 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 
 ---
 
-## [3.1.0](https://github.com/Accenture/sfmc-devtools/compare/v3.0.3...v3.1.0) - 2021-12-??
+## [3.1.0](https://github.com/Accenture/sfmc-devtools/compare/v3.0.3...v3.1.0) - 2021-12-27
 
 **Features:**
 
