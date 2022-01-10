@@ -4,6 +4,19 @@ Accenture SFMC DevTools follows [semantic versioning](https://semver.org/).
 
 ---
 
+## [3.1.1](https://github.com/Accenture/sfmc-devtools/compare/v3.1.0...v3.1.1) - 2022-01-10
+
+**Bugfixes:**
+
+- [#160](https://github.com/Accenture/sfmc-devtools/issues/160) mcdev outputs bogus text since dependency colorjs got corrupted ( [background story](https://www.theverge.com/2022/1/9/22874949/developer-corrupts-open-source-libraries-projects-affected))
+
+**Chores:**
+
+- bumped cli-progress to 3.10.0 (removes colors dependency)
+- bumped winston to 3.3.4 (removes colors dependency)
+
+---
+
 ## [3.1.0](https://github.com/Accenture/sfmc-devtools/compare/v3.0.3...v3.1.0) - 2021-12-27
 
 **Features:**
