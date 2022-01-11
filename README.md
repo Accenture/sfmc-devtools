@@ -713,6 +713,8 @@ _Example:_
 
 ```bash
 mcdev delete MyProject/_ParentBU_ dataExtension MyUserTable
+
+mcdev delete MyProject/_ParentBU_ dataExtensionField MyUserTable.MyFieldName
 ```
 
 #### 6.2.4. retrieveAsTemplate
