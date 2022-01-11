@@ -704,6 +704,10 @@ Currently supported types:
 | Name           | CLI Argument    |
 | -------------- | --------------- |
 | Data Extension | `dataExtension` |
+| Data Extension Field | `dataExtensionField` |
+| Email Send Definition | `Email Send Definition` |
+| List | `list` |
+| Triggered Send | `triggeredSendDefinition` |
 
 _Example:_
 
