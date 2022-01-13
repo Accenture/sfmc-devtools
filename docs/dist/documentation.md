@@ -1061,7 +1061,7 @@ Automation MetadataType
     * [.retrieve(retrieveDir)](#Automation.retrieve) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
     * [.retrieveChangelog()](#Automation.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
     * [.retrieveForCache()](#Automation.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, variables)](#Automation.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Automation.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
     * [.postRetrieveTasks(metadata, [_], [isTemplating])](#Automation.postRetrieveTasks) ⇒ <code>AutomationItem</code>
     * [.deploy(metadata, targetBU, retrieveDir)](#Automation.deploy) ⇒ [<code>Promise.&lt;AutomationMap&gt;</code>](#AutomationMap)
     * [.create(metadata)](#Automation.create) ⇒ <code>Promise</code>
@@ -1105,7 +1105,7 @@ Retrieves automation metadata for caching
 **Returns**: <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code> - Promise of metadata  
 <a name="Automation.retrieveAsTemplate"></a>
 
-### Automation.retrieveAsTemplate(templateDir, name, variables) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
+### Automation.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
 Retrieve a specific Automation Definition by Name
 
 **Kind**: static method of [<code>Automation</code>](#Automation)  
@@ -1115,7 +1115,7 @@ Retrieve a specific Automation Definition by Name
 | --- | --- | --- |
 | templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | name | <code>string</code> | name of the metadata file |
-| variables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
+| templateVariables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="Automation.postRetrieveTasks"></a>
 
@@ -1369,7 +1369,7 @@ DataExtension MetadataType
     * [.document(buObject, [metadata], [isDeploy])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(buObject, customerKey)](#DataExtension.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.retrieveForCache(buObject, [_], [isDeploy])](#DataExtension.retrieveForCache) ⇒ <code>Promise</code>
-    * [.retrieveAsTemplate(templateDir, name, variables)](#DataExtension.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtension.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
 
 <a name="DataExtension.client"></a>
 
@@ -1534,7 +1534,7 @@ Retrieves folder metadata into local filesystem. Also creates a uniquePath attri
 
 <a name="DataExtension.retrieveAsTemplate"></a>
 
-### DataExtension.retrieveAsTemplate(templateDir, name, variables) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
+### DataExtension.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
 Retrieves dataExtension metadata in template format.
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -1544,7 +1544,7 @@ Retrieves dataExtension metadata in template format.
 | --- | --- | --- |
 | templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | name | <code>string</code> | name of the metadata item |
-| variables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
+| templateVariables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="DataExtensionField"></a>
 
@@ -1671,7 +1671,7 @@ DataExtract MetadataType
 * [DataExtract](#DataExtract) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir)](#DataExtract.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.retrieveForCache()](#DataExtract.retrieveForCache) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, variables)](#DataExtract.retrieveAsTemplate) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtract.retrieveAsTemplate) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.postRetrieveTasks(fileTransfer)](#DataExtract.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.create(dataExtract)](#DataExtract.create) ⇒ <code>Promise</code>
     * [.update(dataExtract)](#DataExtract.update) ⇒ <code>Promise</code>
@@ -1700,7 +1700,7 @@ Retrieves Metadata of  Data Extract Activity for caching
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of metadata  
 <a name="DataExtract.retrieveAsTemplate"></a>
 
-### DataExtract.retrieveAsTemplate(templateDir, name, variables) ⇒ <code>Promise.&lt;Object&gt;</code>
+### DataExtract.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;Object&gt;</code>
 Retrieve a specific dataExtract Definition by Name
 
 **Kind**: static method of [<code>DataExtract</code>](#DataExtract)  
@@ -1710,7 +1710,7 @@ Retrieve a specific dataExtract Definition by Name
 | --- | --- | --- |
 | templateDir | <code>String</code> | Directory where retrieved metadata directory will be saved |
 | name | <code>String</code> | name of the metadata file |
-| variables | <code>Object</code> | variables to be replaced in the metadata |
+| templateVariables | <code>Object</code> | variables to be replaced in the metadata |
 
 <a name="DataExtract.postRetrieveTasks"></a>
 
@@ -1977,7 +1977,7 @@ EventDefinition MetadataType
 * [EventDefinition](#EventDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir)](#EventDefinition.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.retrieveForCache()](#EventDefinition.retrieveForCache) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, variables)](#EventDefinition.retrieveAsTemplate) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#EventDefinition.retrieveAsTemplate) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.postRetrieveTasks(eventDef)](#EventDefinition.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.create(EventDefinition)](#EventDefinition.create) ⇒ <code>Promise</code>
     * [.update(EventDefinition)](#EventDefinition.update) ⇒ <code>Promise</code>
@@ -2007,7 +2007,7 @@ Retrieves event definition metadata for caching
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of metadata  
 <a name="EventDefinition.retrieveAsTemplate"></a>
 
-### EventDefinition.retrieveAsTemplate(templateDir, name, variables) ⇒ <code>Promise.&lt;Object&gt;</code>
+### EventDefinition.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;Object&gt;</code>
 Retrieve a specific Event Definition by Name
 
 **Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
@@ -2017,7 +2017,7 @@ Retrieve a specific Event Definition by Name
 | --- | --- | --- |
 | templateDir | <code>String</code> | Directory where retrieved metadata directory will be saved |
 | name | <code>String</code> | name of the metadata file |
-| variables | <code>Object</code> | variables to be replaced in the metadata |
+| templateVariables | <code>Object</code> | variables to be replaced in the metadata |
 
 <a name="EventDefinition.postRetrieveTasks"></a>
 
@@ -2090,7 +2090,7 @@ FileTransfer MetadataType
 * [FileTransfer](#FileTransfer) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir)](#FileTransfer.retrieve) ⇒ <code>Promise</code>
     * [.retrieveForCache()](#FileTransfer.retrieveForCache) ⇒ <code>Promise</code>
-    * [.retrieveAsTemplate(templateDir, name, variables)](#FileTransfer.retrieveAsTemplate) ⇒ <code>Promise</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#FileTransfer.retrieveAsTemplate) ⇒ <code>Promise</code>
     * [.postRetrieveTasks(metadata)](#FileTransfer.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.create(fileTransfer)](#FileTransfer.create) ⇒ <code>Promise</code>
     * [.update(fileTransfer)](#FileTransfer.update) ⇒ <code>Promise</code>
@@ -2119,7 +2119,7 @@ Retrieves Metadata of  FileTransfer Activity for caching
 **Returns**: <code>Promise</code> - Promise  
 <a name="FileTransfer.retrieveAsTemplate"></a>
 
-### FileTransfer.retrieveAsTemplate(templateDir, name, variables) ⇒ <code>Promise</code>
+### FileTransfer.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise</code>
 Retrieve a specific File Transfer Definition by Name
 
 **Kind**: static method of [<code>FileTransfer</code>](#FileTransfer)  
@@ -2129,7 +2129,7 @@ Retrieve a specific File Transfer Definition by Name
 | --- | --- | --- |
 | templateDir | <code>String</code> | Directory where retrieved metadata directory will be saved |
 | name | <code>String</code> | name of the metadata file |
-| variables | <code>Object</code> | variables to be replaced in the metadata |
+| templateVariables | <code>Object</code> | variables to be replaced in the metadata |
 
 <a name="FileTransfer.postRetrieveTasks"></a>
 
@@ -2404,7 +2404,7 @@ ImportFile MetadataType
 * [ImportFile](#ImportFile) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir)](#ImportFile.retrieve) ⇒ <code>Promise</code>
     * [.retrieveForCache()](#ImportFile.retrieveForCache) ⇒ <code>Promise</code>
-    * [.retrieveAsTemplate(templateDir, name, variables)](#ImportFile.retrieveAsTemplate) ⇒ <code>Promise</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#ImportFile.retrieveAsTemplate) ⇒ <code>Promise</code>
     * [.postRetrieveTasks(importDef)](#ImportFile.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.create(importFile)](#ImportFile.create) ⇒ <code>Promise</code>
     * [.update(importFile)](#ImportFile.update) ⇒ <code>Promise</code>
@@ -2434,7 +2434,7 @@ Retrieves import definition metadata for caching
 **Returns**: <code>Promise</code> - Promise  
 <a name="ImportFile.retrieveAsTemplate"></a>
 
-### ImportFile.retrieveAsTemplate(templateDir, name, variables) ⇒ <code>Promise</code>
+### ImportFile.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise</code>
 Retrieve a specific Import Definition by Name
 
 **Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
@@ -2444,7 +2444,7 @@ Retrieve a specific Import Definition by Name
 | --- | --- | --- |
 | templateDir | <code>String</code> | Directory where retrieved metadata directory will be saved |
 | name | <code>String</code> | name of the metadata file |
-| variables | <code>Object</code> | variables to be replaced in the metadata |
+| templateVariables | <code>Object</code> | variables to be replaced in the metadata |
 
 <a name="ImportFile.postRetrieveTasks"></a>
 
