@@ -1,0 +1,22 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+INPUT_FILE=$1
+START_LINE=`head -n1 $INPUT_FILE`
+PATTERN="^#[[:digit:]]"
+ISMERGE=`git rev-parse -q --verify MERGE_HEAD`
+TICKETID=`cat .git/templatemessage`
+
+if ! [[ -z "$ISMERGE" ]] ; then
+  exit 0
+fi
+
+if [[ "$START_LINE" =~ $PATTERN && ! $START_LINE =~ $TICKETID* ]] ; then
+  echo "Bad commit message, see example: \"${TICKETID} commit message\" OR \"commit message\", you provided: $START_LINE"
+  exit 1
+fi
+
+if ! [[ "$START_LINE" =~ $PATTERN ]] ; then
+  START_LINE="${TICKETID}${START_LINE}"
+  echo $START_LINE > ".git/COMMIT_EDITMSG"
+fi
