@@ -12,9 +12,10 @@
     "javascript.validate.enable": false,
     "markdown.extension.italic.indicator": "_",
     "markdown.extension.list.indentationSize": "adaptive",
-    "markdown.extension.tableFormatter.enabled": false,
     "markdown.extension.toc.levels": "2..6",
     "markdown.extension.toc.orderedList": false,
+    "markdown.extension.toc.slugifyMode": "github",
+    "markdown.extension.tableFormatter.enabled": false,
     "sql-formatter.indent": "    ",
     "sql-formatter.uppercase": true,
     "[html]": {
@@ -30,19 +31,18 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[markdown]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
     },
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "markdown-toc.orderedList": true,
     "markdown-toc.insertAnchor": true,
-    "markdown-toc.anchorMode": "gitlab.com",
     "outline.showProperties": false,
     "outline.showVariables": false,
     "breadcrumbs.showVariables": false,
     "breadcrumbs.showProperties": false,
-    "githubIssues.issueBranchTitle": "bugfix/i${issueNumber}-${sanitizedIssueTitle}",
+    "githubIssues.issueBranchTitle": "feature/${issueNumber}-${sanitizedIssueTitle}",
     "githubIssues.queries": [
         {
             "label": "My Issues",
