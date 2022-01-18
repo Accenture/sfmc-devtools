@@ -1354,7 +1354,7 @@ DataExtension MetadataType
     * [.postRetrieveTasks(metadata, [_], [isTemplating])](#DataExtension.postRetrieveTasks) ⇒ <code>DataExtensionItem</code>
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;DataExtensionItem&gt;</code>
     * [.document(buObject, [metadata], [isDeploy])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.deleteByKey(buObject, customerKey)](#DataExtension.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.postDeleteTasks(buObject, customerKey)](#DataExtension.postDeleteTasks) ⇒ <code>void</code>
     * [.retrieveForCache(buObject, [_], [isDeploy])](#DataExtension.retrieveForCache) ⇒ <code>Promise</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtension.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
 
@@ -1492,18 +1492,18 @@ Parses metadata into a readable Markdown/HTML format then saves it
 | [metadata] | [<code>DataExtensionMap</code>](#DataExtensionMap) | a list of dataExtension definitions |
 | [isDeploy] | <code>boolean</code> | used to skip non-supported message during deploy |
 
-<a name="DataExtension.deleteByKey"></a>
+<a name="DataExtension.postDeleteTasks"></a>
 
-### DataExtension.deleteByKey(buObject, customerKey) ⇒ <code>Promise.&lt;void&gt;</code>
-Delete a data extension from the specified business unit
+### DataExtension.postDeleteTasks(buObject, customerKey) ⇒ <code>void</code>
+clean up after deleting a metadata item
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+**Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>Object</code> | references credentials |
-| customerKey | <code>string</code> | Identifier of data extension |
+| buObject | <code>Util.BuObject</code> | references credentials |
+| customerKey | <code>string</code> | Identifier of metadata item |
 
 <a name="DataExtension.retrieveForCache"></a>
 
@@ -1548,6 +1548,8 @@ DataExtensionField MetadataType
     * [.sortDeFields(a, b)](#DataExtensionField.sortDeFields) ⇒ <code>boolean</code>
     * [.postRetrieveTasks(metadata, forDataExtension)](#DataExtensionField.postRetrieveTasks) ⇒ <code>DataExtensionFieldItem</code>
     * [.prepareDeployColumnsOnUpdate(deployColumns, deKey)](#DataExtensionField.prepareDeployColumnsOnUpdate) ⇒ <code>Object.&lt;string, DataExtensionFieldItem&gt;</code>
+    * [.deleteByKeySOAP(buObject, customerKey, [handleOutside])](#DataExtensionField.deleteByKeySOAP) ⇒ <code>boolean</code>
+    * [.postDeleteTasks(customerKey)](#DataExtensionField.postDeleteTasks) ⇒ <code>void</code>
 
 <a name="DataExtensionField.retrieve"></a>
 
@@ -1627,6 +1629,32 @@ Removes FieldType field if its the same in deploy and target column, because it 
 | --- | --- | --- |
 | deployColumns | <code>Array.&lt;DataExtensionFieldItem&gt;</code> | Columns of data extension that will be deployed |
 | deKey | <code>string</code> | external/customer key of Data Extension |
+
+<a name="DataExtensionField.deleteByKeySOAP"></a>
+
+### DataExtensionField.deleteByKeySOAP(buObject, customerKey, [handleOutside]) ⇒ <code>boolean</code>
+Delete a data extension from the specified business unit
+
+**Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Returns**: <code>boolean</code> - deletion success flag  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>Util.BuObject</code> | references credentials |
+| customerKey | <code>string</code> | Identifier of metadata |
+| [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
+
+<a name="DataExtensionField.postDeleteTasks"></a>
+
+### DataExtensionField.postDeleteTasks(customerKey) ⇒ <code>void</code>
+clean up after deleting a metadata item
+
+**Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Returns**: <code>void</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of metadata item |
 
 <a name="DataExtensionTemplate"></a>
 
@@ -2620,6 +2648,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.checkForErrors(ex)](#MetadataType.checkForErrors) ⇒ <code>void</code>
     * [.document([buObject], [metadata], [isDeploy])](#MetadataType.document) ⇒ <code>void</code>
     * [.deleteByKey(buObject, customerKey)](#MetadataType.deleteByKey) ⇒ <code>void</code>
+    * [.postDeleteTasks(buObject, customerKey)](#MetadataType.postDeleteTasks) ⇒ <code>void</code>
+    * [.deleteByKeySOAP(buObject, customerKey, [handleOutside])](#MetadataType.deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType.readBUMetadataForType) ⇒ <code>Object</code>
 
 <a name="new_MetadataType_new"></a>
@@ -3142,6 +3172,33 @@ Delete a data extension from the specified business unit
 | --- | --- | --- |
 | buObject | <code>Util.BuObject</code> | references credentials |
 | customerKey | <code>string</code> | Identifier of data extension |
+
+<a name="MetadataType.postDeleteTasks"></a>
+
+### MetadataType.postDeleteTasks(buObject, customerKey) ⇒ <code>void</code>
+clean up after deleting a metadata item
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>void</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>Util.BuObject</code> | references credentials |
+| customerKey | <code>string</code> | Identifier of metadata item |
+
+<a name="MetadataType.deleteByKeySOAP"></a>
+
+### MetadataType.deleteByKeySOAP(buObject, customerKey, [handleOutside]) ⇒ <code>boolean</code>
+Delete a data extension from the specified business unit
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>boolean</code> - deletion success flag  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>Util.BuObject</code> | references credentials |
+| customerKey | <code>string</code> | Identifier of metadata |
+| [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
 <a name="MetadataType.readBUMetadataForType"></a>
 

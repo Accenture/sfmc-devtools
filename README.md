@@ -704,11 +704,17 @@ Currently supported types:
 | Name           | CLI Argument    |
 | -------------- | --------------- |
 | Data Extension | `dataExtension` |
+| Data Extension Field | `dataExtensionField` |
+| Email Send Definition | `Email Send Definition` |
+| List | `list` |
+| Triggered Send | `triggeredSendDefinition` |
 
 _Example:_
 
 ```bash
 mcdev delete MyProject/_ParentBU_ dataExtension MyUserTable
+
+mcdev delete MyProject/_ParentBU_ dataExtensionField MyUserTable.MyFieldName
 ```
 
 #### 6.2.4. retrieveAsTemplate
