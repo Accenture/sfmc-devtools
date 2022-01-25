@@ -1,6 +1,6 @@
 {
     "name": "mcdev",
-    "version": "3.1.2",
+    "version": "3.1.3",
     "description": "Accenture Salesforce Marketing Cloud DevTools",
     "author": "joern.berkefeld, douglas.midgley, robert.zimmermann, maciej.barnas",
     "license": "MIT",
