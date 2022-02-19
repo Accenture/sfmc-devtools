@@ -83,6 +83,12 @@ as this is a configuration in the EID</p>
 <dd><p>MetadataType class that gets extended by their specific metadata type class.
 Provides default functionality that can be overwritten by child metadata type classes</p>
 </dd>
+<dt><a href="#MobileCode">MobileCode</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>MobileCode MetadataType</p>
+</dd>
+<dt><a href="#MobileKeyword">MobileKeyword</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>MobileKeyword MetadataType</p>
+</dd>
 <dt><a href="#Query">Query</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>Query MetadataType</p>
 </dd>
@@ -345,7 +351,7 @@ main class
 
 * [Mcdev](#Mcdev)
     * [.createDeltaPkg(argv)](#Mcdev.createDeltaPkg) ⇒ <code>void</code>
-    * [._setLoggingLevel(argv)](#Mcdev._setLoggingLevel) ⇒ <code>void</code>
+    * [.setLoggingLevel(argv)](#Mcdev.setLoggingLevel) ⇒ <code>void</code>
     * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>Promise</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
@@ -377,9 +383,9 @@ handler for 'mcdev createDeltaPkg
 | [argv.filter] | <code>String</code> | filter file paths that start with any |
 | [argv.skipInteraction] | <code>Boolean</code> | allows to skip interactive wizard |
 
-<a name="Mcdev._setLoggingLevel"></a>
+<a name="Mcdev.setLoggingLevel"></a>
 
-### Mcdev.\_setLoggingLevel(argv) ⇒ <code>void</code>
+### Mcdev.setLoggingLevel(argv) ⇒ <code>void</code>
 configures what is displayed in the console
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -596,6 +602,7 @@ MessageSendActivity MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [AccountUser](#AccountUser) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.client](#AccountUser.client) : <code>Util.SDK</code>
     * [.retrieve(retrieveDir, _, buObject)](#AccountUser.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.timeSinceDate(date, date2)](#AccountUser.timeSinceDate) ⇒ <code>number</code>
     * [.getBuName(buObject, id)](#AccountUser.getBuName) ⇒ <code>string</code>
@@ -604,6 +611,10 @@ MessageSendActivity MetadataType
     * [.postRetrieveTasks(metadata)](#AccountUser.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.parseMetadata(metadata)](#AccountUser.parseMetadata) ⇒ <code>Array</code>
 
+<a name="AccountUser.client"></a>
+
+### AccountUser.client : <code>Util.SDK</code>
+**Kind**: static property of [<code>AccountUser</code>](#AccountUser)  
 <a name="AccountUser.retrieve"></a>
 
 ### AccountUser.retrieve(retrieveDir, _, buObject) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -702,6 +713,7 @@ FileTransfer MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Asset](#Asset) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.client](#Asset.client) : <code>Util.SDK</code>
     * [.retrieve(retrieveDir, _, __, [selectedSubType])](#Asset.retrieve) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
     * [.retrieveForCache(_, [selectedSubType])](#Asset.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType])](#Asset.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
@@ -724,6 +736,10 @@ FileTransfer MetadataType
     * [.findSubType(templateDir, templateName)](#Asset.findSubType) ⇒ <code>AssetSubType</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName)](#Asset.readSecondaryFolder) ⇒ <code>AssetItem</code>
 
+<a name="Asset.client"></a>
+
+### Asset.client : <code>Util.SDK</code>
+**Kind**: static property of [<code>Asset</code>](#Asset)  
 <a name="Asset.retrieve"></a>
 
 ### Asset.retrieve(retrieveDir, _, __, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
@@ -1026,9 +1042,14 @@ AttributeGroup MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [AttributeGroup](#AttributeGroup) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.client](#AttributeGroup.client) : <code>Util.SDK</code>
     * [.retrieveForCache()](#AttributeGroup.retrieveForCache) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.retrieve(retrieveDir)](#AttributeGroup.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
 
+<a name="AttributeGroup.client"></a>
+
+### AttributeGroup.client : <code>Util.SDK</code>
+**Kind**: static property of [<code>AttributeGroup</code>](#AttributeGroup)  
 <a name="AttributeGroup.retrieveForCache"></a>
 
 ### AttributeGroup.retrieveForCache() ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -1256,9 +1277,14 @@ Campaign MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Campaign](#Campaign) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.client](#Campaign.client) : <code>Util.SDK</code>
     * [.retrieve(retrieveDir)](#Campaign.retrieve) ⇒ <code>Promise</code>
     * [.getAssetTags(retrieveDir, id, name)](#Campaign.getAssetTags) ⇒ <code>Promise.&lt;Object&gt;</code>
 
+<a name="Campaign.client"></a>
+
+### Campaign.client : <code>Util.SDK</code>
+**Kind**: static property of [<code>Campaign</code>](#Campaign)  
 <a name="Campaign.retrieve"></a>
 
 ### Campaign.retrieve(retrieveDir) ⇒ <code>Promise</code>
@@ -1354,6 +1380,7 @@ DataExtension MetadataType
     * [.postRetrieveTasks(metadata, [_], [isTemplating])](#DataExtension.postRetrieveTasks) ⇒ <code>DataExtensionItem</code>
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;DataExtensionItem&gt;</code>
     * [.document(buObject, [metadata], [isDeploy])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.deleteByKey(buObject, customerKey)](#DataExtension.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postDeleteTasks(buObject, customerKey)](#DataExtension.postDeleteTasks) ⇒ <code>void</code>
     * [.retrieveForCache(buObject, [_], [isDeploy])](#DataExtension.retrieveForCache) ⇒ <code>Promise</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtension.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
@@ -1492,6 +1519,19 @@ Parses metadata into a readable Markdown/HTML format then saves it
 | [metadata] | [<code>DataExtensionMap</code>](#DataExtensionMap) | a list of dataExtension definitions |
 | [isDeploy] | <code>boolean</code> | used to skip non-supported message during deploy |
 
+<a name="DataExtension.deleteByKey"></a>
+
+### DataExtension.deleteByKey(buObject, customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>Util.BuObject</code> | references credentials |
+| customerKey | <code>string</code> | Identifier of data extension |
+
 <a name="DataExtension.postDeleteTasks"></a>
 
 ### DataExtension.postDeleteTasks(buObject, customerKey) ⇒ <code>void</code>
@@ -1542,15 +1582,21 @@ DataExtensionField MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [DataExtensionField](#DataExtensionField) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.client](#DataExtensionField.client) : <code>Util.SDK</code>
     * [.retrieve(retrieveDir, [additionalFields], buObject)](#DataExtensionField.retrieve) ⇒ <code>Promise.&lt;{metadata:DataExtensionFieldMap, type:string}&gt;</code>
     * [.retrieveForCache([requestParams], [additionalFields])](#DataExtensionField.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:DataExtensionFieldMap, type:string}&gt;</code>
     * [.convertToSortedArray(fieldsObj)](#DataExtensionField.convertToSortedArray) ⇒ <code>Array.&lt;DataExtensionFieldItem&gt;</code>
     * [.sortDeFields(a, b)](#DataExtensionField.sortDeFields) ⇒ <code>boolean</code>
     * [.postRetrieveTasks(metadata, forDataExtension)](#DataExtensionField.postRetrieveTasks) ⇒ <code>DataExtensionFieldItem</code>
     * [.prepareDeployColumnsOnUpdate(deployColumns, deKey)](#DataExtensionField.prepareDeployColumnsOnUpdate) ⇒ <code>Object.&lt;string, DataExtensionFieldItem&gt;</code>
+    * [.deleteByKey(buObject, customerKey)](#DataExtensionField.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.deleteByKeySOAP(buObject, customerKey, [handleOutside])](#DataExtensionField.deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#DataExtensionField.postDeleteTasks) ⇒ <code>void</code>
 
+<a name="DataExtensionField.client"></a>
+
+### DataExtensionField.client : <code>Util.SDK</code>
+**Kind**: static property of [<code>DataExtensionField</code>](#DataExtensionField)  
 <a name="DataExtensionField.retrieve"></a>
 
 ### DataExtensionField.retrieve(retrieveDir, [additionalFields], buObject) ⇒ <code>Promise.&lt;{metadata:DataExtensionFieldMap, type:string}&gt;</code>
@@ -1630,6 +1676,19 @@ Removes FieldType field if its the same in deploy and target column, because it 
 | deployColumns | <code>Array.&lt;DataExtensionFieldItem&gt;</code> | Columns of data extension that will be deployed |
 | deKey | <code>string</code> | external/customer key of Data Extension |
 
+<a name="DataExtensionField.deleteByKey"></a>
+
+### DataExtensionField.deleteByKey(buObject, customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>Util.BuObject</code> | references credentials |
+| customerKey | <code>string</code> | Identifier of data extension |
+
 <a name="DataExtensionField.deleteByKeySOAP"></a>
 
 ### DataExtensionField.deleteByKeySOAP(buObject, customerKey, [handleOutside]) ⇒ <code>boolean</code>
@@ -1684,6 +1743,7 @@ DataExtract MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [DataExtract](#DataExtract) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.client](#DataExtract.client) : <code>Util.SDK</code>
     * [.retrieve(retrieveDir)](#DataExtract.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.retrieveForCache()](#DataExtract.retrieveForCache) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtract.retrieveAsTemplate) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -1693,6 +1753,10 @@ DataExtract MetadataType
     * [.preDeployTasks(metadata)](#DataExtract.preDeployTasks) ⇒ <code>Object</code>
     * [.parseMetadata(metadata)](#DataExtract.parseMetadata) ⇒ <code>Array</code>
 
+<a name="DataExtract.client"></a>
+
+### DataExtract.client : <code>Util.SDK</code>
+**Kind**: static property of [<code>DataExtract</code>](#DataExtract)  
 <a name="DataExtract.retrieve"></a>
 
 ### DataExtract.retrieve(retrieveDir) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -1900,13 +1964,19 @@ MessageSendActivity MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [EmailSendDefinition](#EmailSendDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.client](#EmailSendDefinition.client) : <code>Util.SDK</code>
     * [.retrieve(retrieveDir, _, buObject)](#EmailSendDefinition.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.update(metadataItem)](#EmailSendDefinition.update) ⇒ <code>Promise</code>
     * [.create(metadataItem)](#EmailSendDefinition.create) ⇒ <code>Promise</code>
+    * [.deleteByKey(buObject, customerKey)](#EmailSendDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.preDeployTasks(metadata)](#EmailSendDefinition.preDeployTasks) ⇒ <code>Promise</code>
     * [.postRetrieveTasks(metadata)](#EmailSendDefinition.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.parseMetadata(metadata)](#EmailSendDefinition.parseMetadata) ⇒ <code>Array</code>
 
+<a name="EmailSendDefinition.client"></a>
+
+### EmailSendDefinition.client : <code>Util.SDK</code>
+**Kind**: static property of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
 <a name="EmailSendDefinition.retrieve"></a>
 
 ### EmailSendDefinition.retrieve(retrieveDir, _, buObject) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -1944,6 +2014,19 @@ Creates a single item
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataItem | <code>Object</code> | a single item |
+
+<a name="EmailSendDefinition.deleteByKey"></a>
+
+### EmailSendDefinition.deleteByKey(buObject, customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>Util.BuObject</code> | references credentials |
+| customerKey | <code>string</code> | Identifier of data extension |
 
 <a name="EmailSendDefinition.preDeployTasks"></a>
 
@@ -1990,6 +2073,7 @@ EventDefinition MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [EventDefinition](#EventDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.client](#EventDefinition.client) : <code>Util.SDK</code>
     * [.retrieve(retrieveDir)](#EventDefinition.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.retrieveForCache()](#EventDefinition.retrieveForCache) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#EventDefinition.retrieveAsTemplate) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -1999,6 +2083,10 @@ EventDefinition MetadataType
     * [.preDeployTasks(metadata)](#EventDefinition.preDeployTasks) ⇒ <code>Promise</code>
     * [.parseMetadata(metadata)](#EventDefinition.parseMetadata) ⇒ <code>Array</code>
 
+<a name="EventDefinition.client"></a>
+
+### EventDefinition.client : <code>Util.SDK</code>
+**Kind**: static property of [<code>EventDefinition</code>](#EventDefinition)  
 <a name="EventDefinition.retrieve"></a>
 
 ### EventDefinition.retrieve(retrieveDir) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -2103,6 +2191,7 @@ FileTransfer MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [FileTransfer](#FileTransfer) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.client](#FileTransfer.client) : <code>Util.SDK</code>
     * [.retrieve(retrieveDir)](#FileTransfer.retrieve) ⇒ <code>Promise</code>
     * [.retrieveForCache()](#FileTransfer.retrieveForCache) ⇒ <code>Promise</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#FileTransfer.retrieveAsTemplate) ⇒ <code>Promise</code>
@@ -2112,6 +2201,10 @@ FileTransfer MetadataType
     * [.preDeployTasks(metadata)](#FileTransfer.preDeployTasks) ⇒ <code>Promise</code>
     * [.parseMetadata(metadata)](#FileTransfer.parseMetadata) ⇒ <code>Array</code>
 
+<a name="FileTransfer.client"></a>
+
+### FileTransfer.client : <code>Util.SDK</code>
+**Kind**: static property of [<code>FileTransfer</code>](#FileTransfer)  
 <a name="FileTransfer.retrieve"></a>
 
 ### FileTransfer.retrieve(retrieveDir) ⇒ <code>Promise</code>
@@ -2237,6 +2330,7 @@ Folder MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Folder](#Folder) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.client](#Folder.client) : <code>Util.SDK</code>
     * [.retrieve(retrieveDir, [additionalFields], buObject)](#Folder.retrieve) ⇒ <code>Promise</code>
     * [.retrieveForCache(buObject)](#Folder.retrieveForCache) ⇒ <code>Promise</code>
     * [.upsert(metadata)](#Folder.upsert) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -2248,6 +2342,10 @@ Folder MetadataType
     * [.postRetrieveTasks(metadata)](#Folder.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.saveResults(results, retrieveDir, mid)](#Folder.saveResults) ⇒ <code>Promise.&lt;Object&gt;</code>
 
+<a name="Folder.client"></a>
+
+### Folder.client : <code>Util.SDK</code>
+**Kind**: static property of [<code>Folder</code>](#Folder)  
 <a name="Folder.retrieve"></a>
 
 ### Folder.retrieve(retrieveDir, [additionalFields], buObject) ⇒ <code>Promise</code>
@@ -2385,9 +2483,14 @@ ImportFile MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [FtpLocation](#FtpLocation) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.client](#FtpLocation.client) : <code>Util.SDK</code>
     * [.retrieve(retrieveDir)](#FtpLocation.retrieve) ⇒ <code>Promise</code>
     * [.retrieveForCache()](#FtpLocation.retrieveForCache) ⇒ <code>Promise</code>
 
+<a name="FtpLocation.client"></a>
+
+### FtpLocation.client : <code>Util.SDK</code>
+**Kind**: static property of [<code>FtpLocation</code>](#FtpLocation)  
 <a name="FtpLocation.retrieve"></a>
 
 ### FtpLocation.retrieve(retrieveDir) ⇒ <code>Promise</code>
@@ -2417,6 +2520,7 @@ ImportFile MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [ImportFile](#ImportFile) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.client](#ImportFile.client) : <code>Util.SDK</code>
     * [.retrieve(retrieveDir)](#ImportFile.retrieve) ⇒ <code>Promise</code>
     * [.retrieveForCache()](#ImportFile.retrieveForCache) ⇒ <code>Promise</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#ImportFile.retrieveAsTemplate) ⇒ <code>Promise</code>
@@ -2426,6 +2530,10 @@ ImportFile MetadataType
     * [.preDeployTasks(metadata)](#ImportFile.preDeployTasks) ⇒ <code>Promise</code>
     * [.parseMetadata(metadata)](#ImportFile.parseMetadata) ⇒ <code>Object</code>
 
+<a name="ImportFile.client"></a>
+
+### ImportFile.client : <code>Util.SDK</code>
+**Kind**: static property of [<code>ImportFile</code>](#ImportFile)  
 <a name="ImportFile.retrieve"></a>
 
 ### ImportFile.retrieve(retrieveDir) ⇒ <code>Promise</code>
@@ -2528,6 +2636,15 @@ Script MetadataType
 
 **Kind**: global class  
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [Interaction](#Interaction) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.client](#Interaction.client) : <code>Util.SDK</code>
+    * [.retrieve(retrieveDir)](#Interaction.retrieve) ⇒ <code>Promise</code>
+
+<a name="Interaction.client"></a>
+
+### Interaction.client : <code>Util.SDK</code>
+**Kind**: static property of [<code>Interaction</code>](#Interaction)  
 <a name="Interaction.retrieve"></a>
 
 ### Interaction.retrieve(retrieveDir) ⇒ <code>Promise</code>
@@ -2550,11 +2667,17 @@ List MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [List](#List) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.client](#List.client) : <code>Util.SDK</code>
     * [.retrieve(retrieveDir)](#List.retrieve) ⇒ <code>Promise</code>
     * [.retrieveForCache()](#List.retrieveForCache) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.deleteByKey(buObject, customerKey)](#List.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postRetrieveTasks(list)](#List.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.parseMetadata(metadata, [parseForCache])](#List.parseMetadata) ⇒ <code>Array</code>
 
+<a name="List.client"></a>
+
+### List.client : <code>Util.SDK</code>
+**Kind**: static property of [<code>List</code>](#List)  
 <a name="List.retrieve"></a>
 
 ### List.retrieve(retrieveDir) ⇒ <code>Promise</code>
@@ -2574,6 +2697,19 @@ Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: static method of [<code>List</code>](#List)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of metadata  
+<a name="List.deleteByKey"></a>
+
+### List.deleteByKey(buObject, customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>List</code>](#List)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>Util.BuObject</code> | references credentials |
+| customerKey | <code>string</code> | Identifier of data extension |
+
 <a name="List.postRetrieveTasks"></a>
 
 ### List.postRetrieveTasks(list) ⇒ <code>Array.&lt;Object&gt;</code>
@@ -2645,9 +2781,9 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.findSubType(templateDir, templateName)](#MetadataType.findSubType) ⇒ <code>string</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName, ex)](#MetadataType.readSecondaryFolder) ⇒ <code>Object</code>
     * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType.buildDefinition) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
-    * [.checkForErrors(ex)](#MetadataType.checkForErrors) ⇒ <code>void</code>
+    * [.checkForErrors(ex)](#MetadataType.checkForErrors) ⇒ <code>string</code>
     * [.document([buObject], [metadata], [isDeploy])](#MetadataType.document) ⇒ <code>void</code>
-    * [.deleteByKey(buObject, customerKey)](#MetadataType.deleteByKey) ⇒ <code>void</code>
+    * [.deleteByKey(buObject, customerKey)](#MetadataType.deleteByKey) ⇒ <code>boolean</code>
     * [.postDeleteTasks(buObject, customerKey)](#MetadataType.postDeleteTasks) ⇒ <code>void</code>
     * [.deleteByKeySOAP(buObject, customerKey, [handleOutside])](#MetadataType.deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType.readBUMetadataForType) ⇒ <code>Object</code>
@@ -3140,8 +3276,11 @@ parsing is required (for example scripts & queries)
 
 <a name="MetadataType.checkForErrors"></a>
 
-### MetadataType.checkForErrors(ex) ⇒ <code>void</code>
+### MetadataType.checkForErrors(ex) ⇒ <code>string</code>
+Standardizes a check for multiple messages
+
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3162,11 +3301,11 @@ Gets metadata cache with limited fields and does not store value to disk
 
 <a name="MetadataType.deleteByKey"></a>
 
-### MetadataType.deleteByKey(buObject, customerKey) ⇒ <code>void</code>
-Delete a data extension from the specified business unit
+### MetadataType.deleteByKey(buObject, customerKey) ⇒ <code>boolean</code>
+Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>void</code> - -  
+**Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3214,6 +3353,111 @@ Returns metadata of a business unit that is saved locally
 | [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
 | [buMetadata] | <code>Object</code> |  | Metadata of BU in local directory |
 
+<a name="MobileCode"></a>
+
+## MobileCode ⇐ [<code>MetadataType</code>](#MetadataType)
+MobileCode MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [MobileCode](#MobileCode) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir)](#MobileCode.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.retrieveForCache()](#MobileCode.retrieveForCache) ⇒ <code>Promise.&lt;Object&gt;</code>
+
+<a name="MobileCode.retrieve"></a>
+
+### MobileCode.retrieve(retrieveDir) ⇒ <code>Promise.&lt;Object&gt;</code>
+Retrieves Metadata of Mobile Keywords
+Endpoint /legacy/v1/beta/mobile/code/ return all Mobile Codes with all details.
+
+**Kind**: static method of [<code>MobileCode</code>](#MobileCode)  
+**Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>String</code> | Directory where retrieved metadata directory will be saved |
+
+<a name="MobileCode.retrieveForCache"></a>
+
+### MobileCode.retrieveForCache() ⇒ <code>Promise.&lt;Object&gt;</code>
+Retrieves event definition metadata for caching
+
+**Kind**: static method of [<code>MobileCode</code>](#MobileCode)  
+**Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of metadata  
+<a name="MobileKeyword"></a>
+
+## MobileKeyword ⇐ [<code>MetadataType</code>](#MetadataType)
+MobileKeyword MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [MobileKeyword](#MobileKeyword) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir)](#MobileKeyword.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.retrieveForCache()](#MobileKeyword.retrieveForCache) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#MobileKeyword.retrieveAsTemplate) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.create(MobileKeyword)](#MobileKeyword.create) ⇒ <code>Promise</code>
+    * [.preDeployTasks(metadata)](#MobileKeyword.preDeployTasks) ⇒ <code>Promise</code>
+
+<a name="MobileKeyword.retrieve"></a>
+
+### MobileKeyword.retrieve(retrieveDir) ⇒ <code>Promise.&lt;Object&gt;</code>
+Retrieves Metadata of Mobile Keywords
+Endpoint /legacy/v1/beta/mobile/keyword/ return all Mobile Keywords with all details.
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>String</code> | Directory where retrieved metadata directory will be saved |
+
+<a name="MobileKeyword.retrieveForCache"></a>
+
+### MobileKeyword.retrieveForCache() ⇒ <code>Promise.&lt;Object&gt;</code>
+Retrieves event definition metadata for caching
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of metadata  
+<a name="MobileKeyword.retrieveAsTemplate"></a>
+
+### MobileKeyword.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;Object&gt;</code>
+Retrieve a specific keyword
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>String</code> | Directory where retrieved metadata directory will be saved |
+| name | <code>String</code> | name of the metadata file |
+| templateVariables | <code>Object</code> | variables to be replaced in the metadata |
+
+<a name="MobileKeyword.create"></a>
+
+### MobileKeyword.create(MobileKeyword) ⇒ <code>Promise</code>
+Creates a single Event Definition
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| MobileKeyword | <code>Object</code> | a single Event Definition |
+
+<a name="MobileKeyword.preDeployTasks"></a>
+
+### MobileKeyword.preDeployTasks(metadata) ⇒ <code>Promise</code>
+prepares an event definition for deployment
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>Object</code> | a single MobileKeyword |
+
 <a name="Query"></a>
 
 ## Query ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -3223,6 +3467,7 @@ Query MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Query](#Query) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.client](#Query.client) : <code>Util.SDK</code>
     * [.retrieve(retrieveDir)](#Query.retrieve) ⇒ <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code>
     * [.retrieveForCache()](#Query.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Query.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code>
@@ -3233,6 +3478,10 @@ Query MetadataType
     * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#Query.buildDefinitionForExtracts) ⇒ <code>Promise</code>
     * [.parseMetadata(metadata)](#Query.parseMetadata) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
 
+<a name="Query.client"></a>
+
+### Query.client : <code>Util.SDK</code>
+**Kind**: static property of [<code>Query</code>](#Query)  
 <a name="Query.retrieve"></a>
 
 ### Query.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code>
@@ -3355,6 +3604,7 @@ ImportFile MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Role](#Role) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.client](#Role.client) : <code>Util.SDK</code>
     * [.retrieve(retrieveDir, _, buObject)](#Role.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.preDeployTasks(metadata)](#Role.preDeployTasks) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.create(metadata)](#Role.create) ⇒ <code>Promise</code>
@@ -3362,6 +3612,10 @@ ImportFile MetadataType
     * [.document(buObject, [metadata])](#Role.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._traverseRoles(role, element, [permission], [isAllowed])](#Role._traverseRoles) ⇒ <code>void</code>
 
+<a name="Role.client"></a>
+
+### Role.client : <code>Util.SDK</code>
+**Kind**: static property of [<code>Role</code>](#Role)  
 <a name="Role.retrieve"></a>
 
 ### Role.retrieve(retrieveDir, _, buObject) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -3448,6 +3702,7 @@ Script MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Script](#Script) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.client](#Script.client) : <code>Util.SDK</code>
     * [.retrieve(retrieveDir)](#Script.retrieve) ⇒ <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code>
     * [.retrieveForCache()](#Script.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Script.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code>
@@ -3459,6 +3714,10 @@ Script MetadataType
     * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#Script.buildDefinitionForExtracts) ⇒ <code>Promise</code>
     * [.parseMetadata(metadata)](#Script.parseMetadata) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
 
+<a name="Script.client"></a>
+
+### Script.client : <code>Util.SDK</code>
+**Kind**: static property of [<code>Script</code>](#Script)  
 <a name="Script.retrieve"></a>
 
 ### Script.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code>
@@ -3596,9 +3855,14 @@ SetDefinition MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [SetDefinition](#SetDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.client](#SetDefinition.client) : <code>Util.SDK</code>
     * [.retrieve(retrieveDir)](#SetDefinition.retrieve) ⇒ <code>Promise</code>
     * [.retrieveForCache()](#SetDefinition.retrieveForCache) ⇒ <code>Promise</code>
 
+<a name="SetDefinition.client"></a>
+
+### SetDefinition.client : <code>Util.SDK</code>
+**Kind**: static property of [<code>SetDefinition</code>](#SetDefinition)  
 <a name="SetDefinition.retrieve"></a>
 
 ### SetDefinition.retrieve(retrieveDir) ⇒ <code>Promise</code>
@@ -3627,13 +3891,19 @@ MessageSendActivity MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [TriggeredSendDefinition](#TriggeredSendDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.client](#TriggeredSendDefinition.client) : <code>Util.SDK</code>
     * [.retrieve(retrieveDir)](#TriggeredSendDefinition.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.create(metadata)](#TriggeredSendDefinition.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#TriggeredSendDefinition.update) ⇒ <code>Promise</code>
+    * [.deleteByKey(buObject, customerKey)](#TriggeredSendDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postRetrieveTasks(metadata)](#TriggeredSendDefinition.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.parseMetadata(metadata)](#TriggeredSendDefinition.parseMetadata) ⇒ <code>Array</code>
     * [.preDeployTasks(metadata)](#TriggeredSendDefinition.preDeployTasks) ⇒ <code>Object</code>
 
+<a name="TriggeredSendDefinition.client"></a>
+
+### TriggeredSendDefinition.client : <code>Util.SDK</code>
+**Kind**: static property of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
 <a name="TriggeredSendDefinition.retrieve"></a>
 
 ### TriggeredSendDefinition.retrieve(retrieveDir) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -3669,6 +3939,19 @@ Updates a single TSD.
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>Object</code> | single metadata entry |
+
+<a name="TriggeredSendDefinition.deleteByKey"></a>
+
+### TriggeredSendDefinition.deleteByKey(buObject, customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>Util.BuObject</code> | references credentials |
+| customerKey | <code>string</code> | Identifier of data extension |
 
 <a name="TriggeredSendDefinition.postRetrieveTasks"></a>
 
@@ -3775,8 +4058,8 @@ CLI entry for SFMC DevTools
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
     * [.getListObjectIdFromCache(cache, listPathName, returnField)](#Util.getListObjectIdFromCache) ⇒ <code>String</code>
     * [.getListPathNameFromCache(cache, searchValue, searchField)](#Util.getListPathNameFromCache) ⇒ <code>String</code>
-    * [.retryOnError(errorMsg, callback, [silentError], [retries])](#Util.retryOnError) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
+    * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>MetadataTypeItem</code>
 
 <a name="Util.logger"></a>
 
@@ -3965,21 +4248,6 @@ standardized method for getting data from cache - adapted for special case of li
 | searchValue | <code>String</code> | unique identifier of metadata being looked for |
 | searchField | <code>String</code> | ObjectID or ID |
 
-<a name="Util.retryOnError"></a>
-
-### Util.retryOnError(errorMsg, callback, [silentError], [retries]) ⇒ <code>Promise.&lt;void&gt;</code>
-retry on network issues
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| errorMsg | <code>String</code> |  | what to print behind "Connection error. " |
-| callback | <code>function</code> |  | what to try executing |
-| [silentError] | <code>Boolean</code> | <code>false</code> | prints retry messages to log only; default=false |
-| [retries] | <code>Number</code> | <code>1</code> | number of retries; default=1 |
-
 <a name="Util.execSync"></a>
 
 ### Util.execSync(cmd, [args]) ⇒ <code>undefined</code>
@@ -3991,6 +4259,20 @@ helper to run other commands as if run manually by user
 | --- | --- | --- |
 | cmd | <code>string</code> | to be executed command |
 | [args] | <code>Array.&lt;string&gt;</code> | list of arguments |
+
+<a name="Util.templateSearchResult"></a>
+
+### Util.templateSearchResult(results, keyToSearch, searchValue) ⇒ <code>MetadataTypeItem</code>
+standardize check to ensure only one result is returned from template search
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>MetadataTypeItem</code> - metadata to be used in building template  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| results | <code>Array.&lt;MetadataTypeItem&gt;</code> | array of metadata |
+| keyToSearch | <code>string</code> | the field which contains the searched value |
+| searchValue | <code>string</code> | the value which is being looked for |
 
 <a name="MetadataTypeDefinitions"></a>
 
@@ -5389,8 +5671,8 @@ Util that contains logger and simple util methods
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
     * [.getListObjectIdFromCache(cache, listPathName, returnField)](#Util.getListObjectIdFromCache) ⇒ <code>String</code>
     * [.getListPathNameFromCache(cache, searchValue, searchField)](#Util.getListPathNameFromCache) ⇒ <code>String</code>
-    * [.retryOnError(errorMsg, callback, [silentError], [retries])](#Util.retryOnError) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
+    * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>MetadataTypeItem</code>
 
 <a name="Util.logger"></a>
 
@@ -5579,21 +5861,6 @@ standardized method for getting data from cache - adapted for special case of li
 | searchValue | <code>String</code> | unique identifier of metadata being looked for |
 | searchField | <code>String</code> | ObjectID or ID |
 
-<a name="Util.retryOnError"></a>
-
-### Util.retryOnError(errorMsg, callback, [silentError], [retries]) ⇒ <code>Promise.&lt;void&gt;</code>
-retry on network issues
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| errorMsg | <code>String</code> |  | what to print behind "Connection error. " |
-| callback | <code>function</code> |  | what to try executing |
-| [silentError] | <code>Boolean</code> | <code>false</code> | prints retry messages to log only; default=false |
-| [retries] | <code>Number</code> | <code>1</code> | number of retries; default=1 |
-
 <a name="Util.execSync"></a>
 
 ### Util.execSync(cmd, [args]) ⇒ <code>undefined</code>
@@ -5605,6 +5872,20 @@ helper to run other commands as if run manually by user
 | --- | --- | --- |
 | cmd | <code>string</code> | to be executed command |
 | [args] | <code>Array.&lt;string&gt;</code> | list of arguments |
+
+<a name="Util.templateSearchResult"></a>
+
+### Util.templateSearchResult(results, keyToSearch, searchValue) ⇒ <code>MetadataTypeItem</code>
+standardize check to ensure only one result is returned from template search
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>MetadataTypeItem</code> - metadata to be used in building template  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| results | <code>Array.&lt;MetadataTypeItem&gt;</code> | array of metadata |
+| keyToSearch | <code>string</code> | the field which contains the searched value |
+| searchValue | <code>string</code> | the value which is being looked for |
 
 <a name="getUserName"></a>
 
