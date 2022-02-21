@@ -3943,7 +3943,6 @@ CLI entry for SFMC DevTools
     * [.getETClient(buObject)](#Util.getETClient) ⇒ [<code>Promise.&lt;SDK&gt;</code>](#SDK)
         * [~sdk](#Util.getETClient..sdk) : [<code>SDK</code>](#SDK)
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
-    * [.getListObjectIdFromCache(cache, listPathName, returnField)](#Util.getListObjectIdFromCache) ⇒ <code>String</code>
     * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>MetadataTypeItem</code>
 
@@ -4087,21 +4086,6 @@ let's you dynamically walk down an object and get a value
 | --- | --- | --- |
 | path | <code>String</code> | 'fieldA.fieldB.fieldC' |
 | obj | <code>Object</code> | some parent object |
-
-<a name="Util.getListObjectIdFromCache"></a>
-
-### Util.getListObjectIdFromCache(cache, listPathName, returnField) ⇒ <code>String</code>
-standardized method for getting data from cache - adapted for special case of lists
-! keeping this in util/util.js rather than in metadataTypes/List.js to avoid potential circular dependencies
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>String</code> - unique ObjectId of list  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| cache | <code>Object</code> | data retrieved from sfmc instance |
-| listPathName | <code>String</code> | folderPath/ListName combo of list |
-| returnField | <code>String</code> | ObjectID or ID |
 
 <a name="Util.execSync"></a>
 
@@ -5523,7 +5507,6 @@ Util that contains logger and simple util methods
     * [.getETClient(buObject)](#Util.getETClient) ⇒ [<code>Promise.&lt;SDK&gt;</code>](#SDK)
         * [~sdk](#Util.getETClient..sdk) : [<code>SDK</code>](#SDK)
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
-    * [.getListObjectIdFromCache(cache, listPathName, returnField)](#Util.getListObjectIdFromCache) ⇒ <code>String</code>
     * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>MetadataTypeItem</code>
 
@@ -5667,21 +5650,6 @@ let's you dynamically walk down an object and get a value
 | --- | --- | --- |
 | path | <code>String</code> | 'fieldA.fieldB.fieldC' |
 | obj | <code>Object</code> | some parent object |
-
-<a name="Util.getListObjectIdFromCache"></a>
-
-### Util.getListObjectIdFromCache(cache, listPathName, returnField) ⇒ <code>String</code>
-standardized method for getting data from cache - adapted for special case of lists
-! keeping this in util/util.js rather than in metadataTypes/List.js to avoid potential circular dependencies
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>String</code> - unique ObjectId of list  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| cache | <code>Object</code> | data retrieved from sfmc instance |
-| listPathName | <code>String</code> | folderPath/ListName combo of list |
-| returnField | <code>String</code> | ObjectID or ID |
 
 <a name="Util.execSync"></a>
 
