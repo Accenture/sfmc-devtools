@@ -1,0 +1,12 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+INPUT_FILE=$1
+START_LINE=`head -n1 $INPUT_FILE`
+PATTERN="^#[[:digit:]]"
+TICKETID=`cat .git/templatemessage`
+ echo "starting checks"
+
+if ! [[ "$START_LINE" =~ $PATTERN ]] ; then
+  echo "Bad commit message, see example: \"${TICKETID}commit message\", you provided: \"$START_LINE\""
+  exit 1
+fi

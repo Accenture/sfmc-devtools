@@ -30,7 +30,8 @@
         "build": "run-s lint docs",
         "debug": "node --nolazy --inspect-brk=9229 lib/index.js",
         "docs": "jsdoc2md --files lib/**/*.js > docs/dist/documentation.md",
-        "lint": "eslint --fix lib/**/*.js && eslint --fix test/**/*.js && prettier --write lib/**/*.js",
+        "lint:fix": "eslint --fix lib/**/*.js && eslint --fix test/**/*.js && prettier --write lib/**/*.js",
+        "lint": "eslint lib/**/*.js && eslint test/**/*.js",
         "test": "mocha --recursive",
         "upgrade": "npm-check --update",
         "prepare": "husky install"
