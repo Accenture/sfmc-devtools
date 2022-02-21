@@ -4058,7 +4058,6 @@ CLI entry for SFMC DevTools
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
     * [.getListObjectIdFromCache(cache, listPathName, returnField)](#Util.getListObjectIdFromCache) ⇒ <code>String</code>
     * [.getListPathNameFromCache(cache, searchValue, searchField)](#Util.getListPathNameFromCache) ⇒ <code>String</code>
-    * [.retryOnError(errorMsg, callback, [silentError], [retries])](#Util.retryOnError) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>MetadataTypeItem</code>
 
@@ -4248,21 +4247,6 @@ standardized method for getting data from cache - adapted for special case of li
 | cache | <code>Object</code> | data retrieved from sfmc instance |
 | searchValue | <code>String</code> | unique identifier of metadata being looked for |
 | searchField | <code>String</code> | ObjectID or ID |
-
-<a name="Util.retryOnError"></a>
-
-### Util.retryOnError(errorMsg, callback, [silentError], [retries]) ⇒ <code>Promise.&lt;void&gt;</code>
-retry on network issues
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| errorMsg | <code>String</code> |  | what to print behind "Connection error. " |
-| callback | <code>function</code> |  | what to try executing |
-| [silentError] | <code>Boolean</code> | <code>false</code> | prints retry messages to log only; default=false |
-| [retries] | <code>Number</code> | <code>1</code> | number of retries; default=1 |
 
 <a name="Util.execSync"></a>
 
@@ -5687,7 +5671,6 @@ Util that contains logger and simple util methods
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
     * [.getListObjectIdFromCache(cache, listPathName, returnField)](#Util.getListObjectIdFromCache) ⇒ <code>String</code>
     * [.getListPathNameFromCache(cache, searchValue, searchField)](#Util.getListPathNameFromCache) ⇒ <code>String</code>
-    * [.retryOnError(errorMsg, callback, [silentError], [retries])](#Util.retryOnError) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>MetadataTypeItem</code>
 
@@ -5877,21 +5860,6 @@ standardized method for getting data from cache - adapted for special case of li
 | cache | <code>Object</code> | data retrieved from sfmc instance |
 | searchValue | <code>String</code> | unique identifier of metadata being looked for |
 | searchField | <code>String</code> | ObjectID or ID |
-
-<a name="Util.retryOnError"></a>
-
-### Util.retryOnError(errorMsg, callback, [silentError], [retries]) ⇒ <code>Promise.&lt;void&gt;</code>
-retry on network issues
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| errorMsg | <code>String</code> |  | what to print behind "Connection error. " |
-| callback | <code>function</code> |  | what to try executing |
-| [silentError] | <code>Boolean</code> | <code>false</code> | prints retry messages to log only; default=false |
-| [retries] | <code>Number</code> | <code>1</code> | number of retries; default=1 |
 
 <a name="Util.execSync"></a>
 
