@@ -1,7 +1,0 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-git config commit.template .git/templatemessage
-TICKETID=`git reflog | awk 'NR==1{ print $8; exit }' | LC_ALL=en_US.utf8 grep -oP '\d{3,5}'`
-echo "[POST_CHECKOUT] Setting template commit to #$TICKETID"
-echo "#$TICKETID " > ".git/templatemessage"
