@@ -2035,7 +2035,7 @@ EventDefinition MetadataType
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#EventDefinition.retrieveAsTemplate) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.postRetrieveTasks(eventDef)](#EventDefinition.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.create(EventDefinition)](#EventDefinition.create) ⇒ <code>Promise</code>
-    * [.update(EventDefinition)](#EventDefinition.update) ⇒ <code>Promise</code>
+    * [.update(metadataEntry)](#EventDefinition.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#EventDefinition.preDeployTasks) ⇒ <code>Promise</code>
     * [.parseMetadata(metadata)](#EventDefinition.parseMetadata) ⇒ <code>Array</code>
 
@@ -2096,11 +2096,11 @@ Creates a single Event Definition
 
 | Param | Type | Description |
 | --- | --- | --- |
-| EventDefinition | <code>Object</code> | a single Event Definition |
+| EventDefinition | <code>Util.MetadataTypeItem</code> | a single Event Definition |
 
 <a name="EventDefinition.update"></a>
 
-### EventDefinition.update(EventDefinition) ⇒ <code>Promise</code>
+### EventDefinition.update(metadataEntry) ⇒ <code>Promise</code>
 Updates a single Event Definition (using PUT method since PATCH isn't supported)
 
 **Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
@@ -2108,7 +2108,7 @@ Updates a single Event Definition (using PUT method since PATCH isn't supported)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| EventDefinition | <code>Object</code> | a single Event Definition |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | a single Event Definition |
 
 <a name="EventDefinition.preDeployTasks"></a>
 
@@ -2196,7 +2196,7 @@ manages post retrieve steps
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single fileTransfer activity definition |
+| metadata | <code>Util.MetadataTypeItem</code> | a single fileTransfer activity definition |
 
 <a name="FileTransfer.create"></a>
 
@@ -2208,7 +2208,7 @@ Creates a single File Transfer
 
 | Param | Type | Description |
 | --- | --- | --- |
-| fileTransfer | <code>Object</code> | a single File Transfer |
+| fileTransfer | <code>Util.MetadataTypeItem</code> | a single File Transfer |
 
 <a name="FileTransfer.update"></a>
 
@@ -2220,7 +2220,7 @@ Updates a single File Transfer
 
 | Param | Type | Description |
 | --- | --- | --- |
-| fileTransfer | <code>Object</code> | a single File Transfer |
+| fileTransfer | <code>Util.MetadataTypeItem</code> | a single File Transfer |
 
 <a name="FileTransfer.preDeployTasks"></a>
 
@@ -2232,7 +2232,7 @@ prepares a fileTransfer for deployment
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single fileTransfer activity definition |
+| metadata | <code>Util.MetadataTypeItem</code> | a single fileTransfer activity definition |
 
 <a name="FileTransfer.parseMetadata"></a>
 
@@ -2244,7 +2244,7 @@ parses retrieved Metadata before saving
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single fileTransfer activity definition |
+| metadata | <code>Util.MetadataTypeItem</code> | a single fileTransfer activity definition |
 
 <a name="Filter"></a>
 
@@ -2280,8 +2280,8 @@ Folder MetadataType
     * [.retrieve(retrieveDir, [additionalFields], buObject)](#Folder.retrieve) ⇒ <code>Promise</code>
     * [.retrieveForCache(buObject)](#Folder.retrieveForCache) ⇒ <code>Promise</code>
     * [.upsert(metadata)](#Folder.upsert) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.create(metadata)](#Folder.create) ⇒ <code>Promise</code>
-    * [.update(metadata)](#Folder.update) ⇒ <code>Promise</code>
+    * [.create(metadataEntry)](#Folder.create) ⇒ <code>Promise</code>
+    * [.update(metadataEntry)](#Folder.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#Folder.preDeployTasks) ⇒ <code>Promise</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#Folder.getJsonFromFS) ⇒ <code>Object</code>
     * [.retrieveHelper([additionalFields], [queryAllAccounts])](#Folder.retrieveHelper) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -2326,11 +2326,11 @@ Copied due to having a dependency on itself, meaning the created need to be seri
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | metadata mapped by their keyField |
+| metadata | <code>Util.MetadataTypeMap</code> | metadata mapped by their keyField |
 
 <a name="Folder.create"></a>
 
-### Folder.create(metadata) ⇒ <code>Promise</code>
+### Folder.create(metadataEntry) ⇒ <code>Promise</code>
 creates a folder based on metatadata
 
 **Kind**: static method of [<code>Folder</code>](#Folder)  
@@ -2338,11 +2338,11 @@ creates a folder based on metatadata
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | metadata of the folder |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | metadata of the folder |
 
 <a name="Folder.update"></a>
 
-### Folder.update(metadata) ⇒ <code>Promise</code>
+### Folder.update(metadataEntry) ⇒ <code>Promise</code>
 Updates a single Folder.
 
 **Kind**: static method of [<code>Folder</code>](#Folder)  
@@ -2350,7 +2350,7 @@ Updates a single Folder.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | single metadata entry |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | single metadata entry |
 
 <a name="Folder.preDeployTasks"></a>
 
