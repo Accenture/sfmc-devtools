@@ -42,7 +42,7 @@
         "command-exists": "1.2.9",
         "conf": "10.1.1",
         "console.table": "0.10.0",
-        "fs-extra": "10.0.0",
+        "fs-extra": "10.0.1",
         "inquirer": "8.2.0",
         "json-to-table": "4.2.1",
         "mustache": "4.2.0",
