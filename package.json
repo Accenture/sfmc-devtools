@@ -59,7 +59,7 @@
     "devDependencies": {
         "chai": "4.3.6",
         "eslint": "8.12.0",
-        "eslint-config-prettier": "8.4.0",
+        "eslint-config-prettier": "8.5.0",
         "eslint-config-ssjs": "1.1.11",
         "eslint-plugin-mocha": "10.0.3",
         "eslint-plugin-prettier": "4.0.0",
