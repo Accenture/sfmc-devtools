@@ -986,6 +986,7 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
       }
     },
     "documentType": "md",
+    "documentStandardRoles": true,
     "exclude": {
       "role": {
         "CustomerKey": ["excludedRoleKey","excludedOtherRoleKey"]
@@ -1022,6 +1023,7 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
 | options.deployment.sourceTargetMapping   | `{"deployment-source": "deployment-target"}` | Configuration of 1 or many source-target marketList combos for `mcdev createDeltaPkg`                                       |
 | options.deployment.targetBranchBuMapping | `{"release/*": "...","master": ["..."]}`     | Can be used by CI/CD pipelines to know what BUs shall be deployed to upon a merge into one of the specified branches        |
 | options.documentType                     | 'md'                                         | Defines the format for documentation ('md', 'html', 'both')                                                                 |
+| options.documentStandardRoles            | true                                         | Optionally skip standard role documentation by setting to false                                                         |
 | options.exclude.`type`.`field`           | []                                           | Allows you to filter out metadata on retrieve based on their field values, e.g. CustomerKey (previously `options.filter`)   |
 | options.include.`type`.`field`           | []                                           | Allows you to filter out metadata on retrieve based on their field values, e.g. CustomerKey                                 |
 | options.serverTimeOffset                 | -6                                           | Used to work around quirks in how SFMC handles timezones; For stack4: set to -7 (US Mountain time); others: -6 (US Central) |
