@@ -71,6 +71,6 @@
         "npm-run-all": "4.1.5"
     },
     "lint-staged": {
-        "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write", "npm run docs"]
+        "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"]
     }
 }
