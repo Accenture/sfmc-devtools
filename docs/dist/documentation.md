@@ -3920,7 +3920,7 @@ CLI entry for SFMC DevTools
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>boolean</code> \| <code>Array.&lt;String&gt;</code>
+    * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;String&gt;)&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>String</code> \| <code>Object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>String</code>
@@ -3978,11 +3978,11 @@ helper for getDefaultProperties()
 **Returns**: <code>Array.&lt;string&gt;</code> - type choices  
 <a name="Util.checkProperties"></a>
 
-### Util.checkProperties(properties, [silent]) ⇒ <code>boolean</code> \| <code>Array.&lt;String&gt;</code>
+### Util.checkProperties(properties, [silent]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;String&gt;)&gt;</code>
 check if the config file is correctly formatted and has values
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> \| <code>Array.&lt;String&gt;</code> - file structure ok OR list of fields to be fixed  
+**Returns**: <code>Promise.&lt;(boolean\|Array.&lt;String&gt;)&gt;</code> - file structure ok OR list of fields to be fixed  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5484,7 +5484,7 @@ Util that contains logger and simple util methods
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>boolean</code> \| <code>Array.&lt;String&gt;</code>
+    * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;String&gt;)&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>String</code> \| <code>Object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>String</code>
@@ -5542,11 +5542,11 @@ helper for getDefaultProperties()
 **Returns**: <code>Array.&lt;string&gt;</code> - type choices  
 <a name="Util.checkProperties"></a>
 
-### Util.checkProperties(properties, [silent]) ⇒ <code>boolean</code> \| <code>Array.&lt;String&gt;</code>
+### Util.checkProperties(properties, [silent]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;String&gt;)&gt;</code>
 check if the config file is correctly formatted and has values
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> \| <code>Array.&lt;String&gt;</code> - file structure ok OR list of fields to be fixed  
+**Returns**: <code>Promise.&lt;(boolean\|Array.&lt;String&gt;)&gt;</code> - file structure ok OR list of fields to be fixed  
 
 | Param | Type | Description |
 | --- | --- | --- |
