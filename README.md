@@ -530,13 +530,15 @@ mcdev badKeys MyProject/DEV
 
 <a id="markdown-document" name="document"></a>
 
-_Command:_ `mcdev document <TYPE> <business unit>`
+_Command:_ `mcdev document <business unit> <TYPE>`
 
 _Alias:_ `mcdev doc`
 
 Creates human readable documentation for your metadata. This command is executed by default unless you changed your config manually to set `options.documentOnRetrieve : false`. Therefore, running it manually is typically not required. You can choose to generate **HTML** (`html`) or **Markdown** (`md`) docs via `options.documentType`.
 
 The default format is set to `md` as Markdown renders nicely in Git as well as in VSCode's Markdown preview and can be copied from there into Confluence and other applications without losing the formatting.
+
+As standard roles are often not used by projects, we have the optional setting `options.documentStandardRoles` which is by default set to false
 
 Currently supported types:
 
@@ -549,7 +551,7 @@ Currently supported types:
 _Example:_
 
 ```bash
-mcdev document role myServer
+mcdev document myServer role
 ```
 
 #### 6.1.6. selectTypes
@@ -986,6 +988,7 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
       }
     },
     "documentType": "md",
+    "documentStandardRoles": true,
     "exclude": {
       "role": {
         "CustomerKey": ["excludedRoleKey","excludedOtherRoleKey"]
@@ -1022,6 +1025,7 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
 | options.deployment.sourceTargetMapping   | `{"deployment-source": "deployment-target"}` | Configuration of 1 or many source-target marketList combos for `mcdev createDeltaPkg`                                       |
 | options.deployment.targetBranchBuMapping | `{"release/*": "...","master": ["..."]}`     | Can be used by CI/CD pipelines to know what BUs shall be deployed to upon a merge into one of the specified branches        |
 | options.documentType                     | 'md'                                         | Defines the format for documentation ('md', 'html', 'both')                                                                 |
+| options.documentStandardRoles            | false                                         | Optionally skip standard role documentation by setting to false                                                         |
 | options.exclude.`type`.`field`           | []                                           | Allows you to filter out metadata on retrieve based on their field values, e.g. CustomerKey (previously `options.filter`)   |
 | options.include.`type`.`field`           | []                                           | Allows you to filter out metadata on retrieve based on their field values, e.g. CustomerKey                                 |
 | options.serverTimeOffset                 | -6                                           | Used to work around quirks in how SFMC handles timezones; For stack4: set to -7 (US Mountain time); others: -6 (US Central) |

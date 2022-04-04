@@ -353,7 +353,6 @@ main class
 
 * [Mcdev](#Mcdev)
     * [.createDeltaPkg(argv)](#Mcdev.createDeltaPkg) ⇒ <code>void</code>
-    * [.setLoggingLevel(argv)](#Mcdev.setLoggingLevel) ⇒ <code>void</code>
     * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>Promise</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
@@ -384,20 +383,6 @@ handler for 'mcdev createDeltaPkg
 | [argv.range] | <code>String</code> | git commit range     into deploy directory |
 | [argv.filter] | <code>String</code> | filter file paths that start with any |
 | [argv.skipInteraction] | <code>Boolean</code> | allows to skip interactive wizard |
-
-<a name="Mcdev.setLoggingLevel"></a>
-
-### Mcdev.setLoggingLevel(argv) ⇒ <code>void</code>
-configures what is displayed in the console
-
-**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| argv | <code>object</code> | list of command line parameters given by user |
-| [argv.silent] | <code>Boolean</code> | only errors printed to CLI |
-| [argv.verbose] | <code>Boolean</code> | chatty user CLI output |
-| [argv.debug] | <code>Boolean</code> | enables developer output & features |
 
 <a name="Mcdev.selectTypes"></a>
 
@@ -725,9 +710,9 @@ FileTransfer MetadataType
     * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#Asset.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseMetadata(metadata)](#Asset.parseMetadata) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
     * [._mergeCode(metadata, deployDir, subType, [templateName])](#Asset._mergeCode) ⇒ <code>Promise.&lt;Array.&lt;MetadataType.CodeExtract&gt;&gt;</code>
-    * [._mergeCode_slots(metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName])](#Asset._mergeCode_slots) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._mergeCode_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName])](#Asset._mergeCode_slots) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._extractCode(metadata)](#Asset._extractCode) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
-    * [._extractCode_slots(metadataSlots, codeArr)](#Asset._extractCode_slots) ⇒ <code>void</code>
+    * [._extractCode_slots(prefix, metadataSlots, codeArr)](#Asset._extractCode_slots) ⇒ <code>void</code>
     * [.getJsonFromFS(dir)](#Asset.getJsonFromFS) ⇒ <code>Object</code>
     * [.findSubType(templateDir, templateName)](#Asset.findSubType) ⇒ <code>AssetSubType</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName)](#Asset.readSecondaryFolder) ⇒ <code>AssetItem</code>
@@ -946,7 +931,7 @@ helper for this.preDeployTasks() that loads extracted code content back into JSO
 
 <a name="Asset._mergeCode_slots"></a>
 
-### Asset.\_mergeCode\_slots(metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Asset.\_mergeCode\_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName]) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for this.preDeployTasks() that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -954,6 +939,7 @@ helper for this.preDeployTasks() that loads extracted code content back into JSO
 
 | Param | Type | Description |
 | --- | --- | --- |
+| prefix | <code>string</code> | usually the customerkey |
 | metadataSlots | <code>Object</code> | metadata.views.html.slots or deeper slots.<>.blocks.<>.slots |
 | readDirArr | <code>Array.&lt;string&gt;</code> | directory of deploy files |
 | subtypeExtension | <code>string</code> | asset-subtype name ending on -meta |
@@ -977,11 +963,12 @@ to allow saving that separately and formatted
 
 <a name="Asset._extractCode_slots"></a>
 
-### Asset.\_extractCode\_slots(metadataSlots, codeArr) ⇒ <code>void</code>
+### Asset.\_extractCode\_slots(prefix, metadataSlots, codeArr) ⇒ <code>void</code>
 **Kind**: static method of [<code>Asset</code>](#Asset)  
 
 | Param | Type | Description |
 | --- | --- | --- |
+| prefix | <code>string</code> | usually the customerkey |
 | metadataSlots | <code>Object</code> | metadata.views.html.slots or deeper slots.<>.blocks.<>.slots |
 | codeArr | <code>Array.&lt;Object&gt;</code> | to be extended array for extracted code |
 
@@ -2684,8 +2671,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise</code>
     * [.updateREST(metadataEntry, uri)](#MetadataType.updateREST) ⇒ <code>Promise</code>
     * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
-    * [.retrieveSOAPgeneric(retrieveDir, buObject, [requestParams], [additionalFields], [overrideType])](#MetadataType.retrieveSOAPgeneric) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-    * [.retrieveSOAPBody(fields, [options], [type])](#MetadataType.retrieveSOAPBody) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
+    * [.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields], [overrideType])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
     * [.parseResponseBody(body)](#MetadataType.parseResponseBody) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
@@ -2963,9 +2949,9 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 | [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
 | [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
-<a name="MetadataType.retrieveSOAPgeneric"></a>
+<a name="MetadataType.retrieveSOAP"></a>
 
-### MetadataType.retrieveSOAPgeneric(retrieveDir, buObject, [requestParams], [additionalFields], [overrideType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+### MetadataType.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields], [overrideType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -2978,20 +2964,6 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 | [requestParams] | <code>Object</code> | required for the specific request (filter for example) |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
-
-<a name="MetadataType.retrieveSOAPBody"></a>
-
-### MetadataType.retrieveSOAPBody(fields, [options], [type]) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
-helper that handles batched retrieve via SOAP
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| fields | <code>Array.&lt;string&gt;</code> | list of fields that we want to see retrieved |
-| [options] | <code>Object</code> | required for the specific request (filter for example) |
-| [type] | <code>string</code> | optionally overwrite the API type of the metadata here |
 
 <a name="MetadataType.retrieveREST"></a>
 
@@ -3945,6 +3917,7 @@ CLI entry for SFMC DevTools
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
     * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>MetadataTypeItem</code>
+    * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
 
 <a name="Util.logger"></a>
 
@@ -4112,6 +4085,20 @@ standardize check to ensure only one result is returned from template search
 | results | <code>Array.&lt;MetadataTypeItem&gt;</code> | array of metadata |
 | keyToSearch | <code>string</code> | the field which contains the searched value |
 | searchValue | <code>string</code> | the value which is being looked for |
+
+<a name="Util.setLoggingLevel"></a>
+
+### Util.setLoggingLevel(argv) ⇒ <code>void</code>
+configures what is displayed in the console
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| argv | <code>Object</code> | list of command line parameters given by user |
+| [argv.silent] | <code>boolean</code> | only errors printed to CLI |
+| [argv.verbose] | <code>boolean</code> | chatty user CLI output |
+| [argv.debug] | <code>boolean</code> | enables developer output & features |
 
 <a name="MetadataTypeDefinitions"></a>
 
@@ -5509,6 +5496,7 @@ Util that contains logger and simple util methods
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
     * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>MetadataTypeItem</code>
+    * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
 
 <a name="Util.logger"></a>
 
@@ -5676,6 +5664,20 @@ standardize check to ensure only one result is returned from template search
 | results | <code>Array.&lt;MetadataTypeItem&gt;</code> | array of metadata |
 | keyToSearch | <code>string</code> | the field which contains the searched value |
 | searchValue | <code>string</code> | the value which is being looked for |
+
+<a name="Util.setLoggingLevel"></a>
+
+### Util.setLoggingLevel(argv) ⇒ <code>void</code>
+configures what is displayed in the console
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| argv | <code>Object</code> | list of command line parameters given by user |
+| [argv.silent] | <code>boolean</code> | only errors printed to CLI |
+| [argv.verbose] | <code>boolean</code> | chatty user CLI output |
+| [argv.debug] | <code>boolean</code> | enables developer output & features |
 
 <a name="getUserName"></a>
 
@@ -5924,8 +5926,7 @@ REST format
     * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise</code>
     * [.updateREST(metadataEntry, uri)](#MetadataType.updateREST) ⇒ <code>Promise</code>
     * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
-    * [.retrieveSOAPgeneric(retrieveDir, buObject, [requestParams], [additionalFields], [overrideType])](#MetadataType.retrieveSOAPgeneric) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-    * [.retrieveSOAPBody(fields, [options], [type])](#MetadataType.retrieveSOAPBody) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
+    * [.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields], [overrideType])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
     * [.parseResponseBody(body)](#MetadataType.parseResponseBody) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
@@ -6203,9 +6204,9 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 | [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
 | [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
-<a name="MetadataType.retrieveSOAPgeneric"></a>
+<a name="MetadataType.retrieveSOAP"></a>
 
-### MetadataType.retrieveSOAPgeneric(retrieveDir, buObject, [requestParams], [additionalFields], [overrideType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+### MetadataType.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields], [overrideType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -6218,20 +6219,6 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 | [requestParams] | <code>Object</code> | required for the specific request (filter for example) |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
-
-<a name="MetadataType.retrieveSOAPBody"></a>
-
-### MetadataType.retrieveSOAPBody(fields, [options], [type]) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
-helper that handles batched retrieve via SOAP
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| fields | <code>Array.&lt;string&gt;</code> | list of fields that we want to see retrieved |
-| [options] | <code>Object</code> | required for the specific request (filter for example) |
-| [type] | <code>string</code> | optionally overwrite the API type of the metadata here |
 
 <a name="MetadataType.retrieveREST"></a>
 
