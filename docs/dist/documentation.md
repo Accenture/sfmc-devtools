@@ -2684,8 +2684,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise</code>
     * [.updateREST(metadataEntry, uri)](#MetadataType.updateREST) ⇒ <code>Promise</code>
     * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
-    * [.retrieveSOAPgeneric(retrieveDir, buObject, [requestParams], [additionalFields], [overrideType])](#MetadataType.retrieveSOAPgeneric) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-    * [.retrieveSOAPBody(fields, [options], [type])](#MetadataType.retrieveSOAPBody) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
+    * [.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields], [overrideType])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
     * [.parseResponseBody(body)](#MetadataType.parseResponseBody) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
@@ -2963,9 +2962,9 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 | [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
 | [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
-<a name="MetadataType.retrieveSOAPgeneric"></a>
+<a name="MetadataType.retrieveSOAP"></a>
 
-### MetadataType.retrieveSOAPgeneric(retrieveDir, buObject, [requestParams], [additionalFields], [overrideType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+### MetadataType.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields], [overrideType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -2978,20 +2977,6 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 | [requestParams] | <code>Object</code> | required for the specific request (filter for example) |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
-
-<a name="MetadataType.retrieveSOAPBody"></a>
-
-### MetadataType.retrieveSOAPBody(fields, [options], [type]) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
-helper that handles batched retrieve via SOAP
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| fields | <code>Array.&lt;string&gt;</code> | list of fields that we want to see retrieved |
-| [options] | <code>Object</code> | required for the specific request (filter for example) |
-| [type] | <code>string</code> | optionally overwrite the API type of the metadata here |
 
 <a name="MetadataType.retrieveREST"></a>
 
@@ -5924,8 +5909,7 @@ REST format
     * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise</code>
     * [.updateREST(metadataEntry, uri)](#MetadataType.updateREST) ⇒ <code>Promise</code>
     * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
-    * [.retrieveSOAPgeneric(retrieveDir, buObject, [requestParams], [additionalFields], [overrideType])](#MetadataType.retrieveSOAPgeneric) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-    * [.retrieveSOAPBody(fields, [options], [type])](#MetadataType.retrieveSOAPBody) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
+    * [.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields], [overrideType])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
     * [.parseResponseBody(body)](#MetadataType.parseResponseBody) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
@@ -6203,9 +6187,9 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 | [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
 | [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
-<a name="MetadataType.retrieveSOAPgeneric"></a>
+<a name="MetadataType.retrieveSOAP"></a>
 
-### MetadataType.retrieveSOAPgeneric(retrieveDir, buObject, [requestParams], [additionalFields], [overrideType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+### MetadataType.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields], [overrideType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -6218,20 +6202,6 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 | [requestParams] | <code>Object</code> | required for the specific request (filter for example) |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
-
-<a name="MetadataType.retrieveSOAPBody"></a>
-
-### MetadataType.retrieveSOAPBody(fields, [options], [type]) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
-helper that handles batched retrieve via SOAP
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| fields | <code>Array.&lt;string&gt;</code> | list of fields that we want to see retrieved |
-| [options] | <code>Object</code> | required for the specific request (filter for example) |
-| [type] | <code>string</code> | optionally overwrite the API type of the metadata here |
 
 <a name="MetadataType.retrieveREST"></a>
 
