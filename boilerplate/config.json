@@ -20,6 +20,7 @@
             }
         },
         "documentType": "md",
+        "documentStandardRoles": false,
         "exclude": {},
         "include": {},
         "serverTimeOffset": -6

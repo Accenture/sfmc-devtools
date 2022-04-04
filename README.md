@@ -2,7 +2,12 @@
 
 <a id="markdown-accenture-sfmc-devtools" name="accenture-sfmc-devtools"></a>
 
-[![NPM](https://nodei.co/npm/mcdev.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/mcdev)
+[![view on npm](https://badgen.net/github/release/Accenture/sfmc-devtools)](https://www.npmjs.org/package/mcdev)
+[![view on npm](https://badgen.net/npm/node/mcdev)](https://www.npmjs.org/package/mcdev)
+[![license](https://badgen.net/npm/license/mcdev)](https://www.npmjs.org/package/mcdev)
+[![npm module downloads](https://badgen.net/npm/dt/mcdev)](https://www.npmjs.org/package/mcdev)
+[![GitHub closed issues](https://badgen.net/github/closed-issues/Accenture/sfmc-devtools)](https://github.com/Accenture/sfmc-devtools/issues?q=is%3Aissue+is%3Aclosed)
+[![GitHub releases](https://badgen.net/github/releases/Accenture/sfmc-devtools)](https://github.com/Accenture/sfmc-devtools/releases)
 
 Accenture Salesforce Marketing Cloud DevTools (mcdev) is a rapid deployment/rollout, backup and development tool for Salesforce Marketing Cloud. It allows you to retrieve and deploy configuration and code across Business Units and instances.
 
@@ -117,7 +122,7 @@ If you experience issues installing Accenture SFMC DevTools, please check out th
 1. Install Accenture SFMC DevTools by running `npm install -g mcdev` (prefix with `sudo` on MacOS)
    - If you get an error, please see the below troubleshooting section.
 
-When completed you will see `+ mcdev@3.0.0` printed to your screen (or the current version of it respectively).
+When completed you will see `+ mcdev@3.2.0` printed to your screen (or the current version of it respectively).
 
 > **_Side note for proud nerds_:**
 >
@@ -269,10 +274,10 @@ npm install -g accenture/sfmc-devtools#develop
 **Install specific version (using a version tag on npm):**
 
 ```bash
-npm install -g mcdev@3.1.0
+npm install -g mcdev@3.2.0
 ```
 
-**Warning**: When you used the above method to install Accenture SFMC DevTools for a specific version or tag, trying to [update Accenture SFMC DevTools](#updating-mcdev) might not download the most recently published official version but instead stay on the version or branch you previously selected (in the above examples: develop, 3.1.0)!
+**Warning**: When you used the above method to install Accenture SFMC DevTools for a specific version or tag, trying to [update Accenture SFMC DevTools](#updating-mcdev) might not download the most recently published official version but instead stay on the version or branch you previously selected (in the above examples: develop, 3.2.0)!
 
 > **Note**: The version is currently _not_ updated on the developer branch until a new release is published. Hence, you will not see a change if you run `mcdev --version`.
 
@@ -395,8 +400,10 @@ The following metadata types are currently supported:
 | Folder                             | `folder`                  | Yes      | Yes        | in backlog | -                    | Used to structure all kinds of other metadata.                                                                     |
 | FTPLocation                        | `ftpLocation`             | Yes      | -          | -          | Yes                  | A File Location which can be used for export or import of files to/from Marketing Cloud.                           |
 | Journey                            | `interaction`             | Yes      | in backlog | in backlog | -                    | Journey from Builder (internally called "Interaction").                                                            |
-| Journey: Entry Event Definition    | `eventDefinition`         | Yes      | Yes        | in backlog | -                    | Used in Journeys (Interactions) to define Entry Events.                                                            |
+| Journey: Entry Event Definition    | `eventDefinition`         | Yes      | Yes        | Yes        | -                    | Used in Journeys (Interactions) to define Entry Events.                                                            |
 | List                               | `list`                    | Yes      | in backlog | -          | Yes                  | Old way of storing data. Still used for central Email Subscriber DB.                                               |
+| Mobile Connect Code                | `mobileCode`              | Yes      | No         | No         | -                    | Mobile Connect Shore or Long Codes used for sending. First 50 per BU are retrieved                                 |
+| Mobile Connect Keyword             | `mobileKeyword`           | Yes      | Yes        | Yes        | -                    | Mobile Connect keywords configured within the Business UNit. First 50 per BU are retrieved                         |
 | Role                               | `role`                    | Yes      | Yes        | -          | Yes                  | User Roles define groups that are used to grant users access to SFMC systems.                                      |
 | Triggered Send                     | `triggeredSendDefinition` | Yes      | Yes        | -          | Yes                  | **DEPRECATED**: Sends emails via API or DataExtension Event.                                                       |
 | User                               | `accountUser`             | Yes      | in backlog | -          | -                    | Users and Installed Packages including their assigned Roles, BUs and personal permissions                          |
@@ -523,13 +530,15 @@ mcdev badKeys MyProject/DEV
 
 <a id="markdown-document" name="document"></a>
 
-_Command:_ `mcdev document <TYPE> <business unit>`
+_Command:_ `mcdev document <business unit> <TYPE>`
 
 _Alias:_ `mcdev doc`
 
 Creates human readable documentation for your metadata. This command is executed by default unless you changed your config manually to set `options.documentOnRetrieve : false`. Therefore, running it manually is typically not required. You can choose to generate **HTML** (`html`) or **Markdown** (`md`) docs via `options.documentType`.
 
 The default format is set to `md` as Markdown renders nicely in Git as well as in VSCode's Markdown preview and can be copied from there into Confluence and other applications without losing the formatting.
+
+As standard roles are often not used by projects, we have the optional setting `options.documentStandardRoles` which is by default set to false
 
 Currently supported types:
 
@@ -542,7 +551,7 @@ Currently supported types:
 _Example:_
 
 ```bash
-mcdev document role myServer
+mcdev document myServer role
 ```
 
 #### 6.1.6. selectTypes
@@ -704,11 +713,17 @@ Currently supported types:
 | Name           | CLI Argument    |
 | -------------- | --------------- |
 | Data Extension | `dataExtension` |
+| Data Extension Field | `dataExtensionField` |
+| Email Send Definition | `Email Send Definition` |
+| List | `list` |
+| Triggered Send | `triggeredSendDefinition` |
 
 _Example:_
 
 ```bash
 mcdev delete MyProject/_ParentBU_ dataExtension MyUserTable
+
+mcdev delete MyProject/_ParentBU_ dataExtensionField MyUserTable.MyFieldName
 ```
 
 #### 6.2.4. retrieveAsTemplate
@@ -973,6 +988,7 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
       }
     },
     "documentType": "md",
+    "documentStandardRoles": true,
     "exclude": {
       "role": {
         "CustomerKey": ["excludedRoleKey","excludedOtherRoleKey"]
@@ -1009,6 +1025,7 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
 | options.deployment.sourceTargetMapping   | `{"deployment-source": "deployment-target"}` | Configuration of 1 or many source-target marketList combos for `mcdev createDeltaPkg`                                       |
 | options.deployment.targetBranchBuMapping | `{"release/*": "...","master": ["..."]}`     | Can be used by CI/CD pipelines to know what BUs shall be deployed to upon a merge into one of the specified branches        |
 | options.documentType                     | 'md'                                         | Defines the format for documentation ('md', 'html', 'both')                                                                 |
+| options.documentStandardRoles            | false                                         | Optionally skip standard role documentation by setting to false                                                         |
 | options.exclude.`type`.`field`           | []                                           | Allows you to filter out metadata on retrieve based on their field values, e.g. CustomerKey (previously `options.filter`)   |
 | options.include.`type`.`field`           | []                                           | Allows you to filter out metadata on retrieve based on their field values, e.g. CustomerKey                                 |
 | options.serverTimeOffset                 | -6                                           | Used to work around quirks in how SFMC handles timezones; For stack4: set to -7 (US Mountain time); others: -6 (US Central) |
@@ -1420,7 +1437,7 @@ If you use Accenture SFMC DevTools in your team it is recommended to install you
 
 If you do need to install it locally, make sure you don't commit your project's package.json with this change or you might break mcdev for other developers in your team that either didn't clone the Accenture SFMC DevTools repo or stored in a different directory.
 
-To test your new **global** developer setup, run `mcdev --version` in CLI which should return the current version (e.g. `3.0.0`). Then, go into your mcdev repo and update the version with the suffix `-dev`, e.g. to `3.0.0-dev` and then run `mcdev --version` again to verify that your change propagates instantly.
+To test your new **global** developer setup, run `mcdev --version` in CLI which should return the current version (e.g. `3.2.0`). Then, go into your mcdev repo and update the version with the suffix `-dev`, e.g. to `3.2.0-dev` and then run `mcdev --version` again to verify that your change propagates instantly.
 
 <a name="local-install"></a>
 
@@ -1447,7 +1464,7 @@ The following explains how you _could_ install it locally for certain edge cases
 4. Afterwards, install Accenture SFMC DevTools by running `npm install --save-dev mcdev`
    - If you get an error, please see the below troubleshooting section.
 
-When completed you will see `+ mcdev@3.0.0` printed to your screen (or the current version of it respectively).
+When completed you will see `+ mcdev@3.2.0` printed to your screen (or the current version of it respectively).
 
 ### 9.3. NPM Scripts
 
