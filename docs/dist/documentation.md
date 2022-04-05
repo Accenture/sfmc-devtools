@@ -353,7 +353,6 @@ main class
 
 * [Mcdev](#Mcdev)
     * [.createDeltaPkg(argv)](#Mcdev.createDeltaPkg) ⇒ <code>void</code>
-    * [.setLoggingLevel(argv)](#Mcdev.setLoggingLevel) ⇒ <code>void</code>
     * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>Promise</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
@@ -384,20 +383,6 @@ handler for 'mcdev createDeltaPkg
 | [argv.range] | <code>String</code> | git commit range     into deploy directory |
 | [argv.filter] | <code>String</code> | filter file paths that start with any |
 | [argv.skipInteraction] | <code>Boolean</code> | allows to skip interactive wizard |
-
-<a name="Mcdev.setLoggingLevel"></a>
-
-### Mcdev.setLoggingLevel(argv) ⇒ <code>void</code>
-configures what is displayed in the console
-
-**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| argv | <code>object</code> | list of command line parameters given by user |
-| [argv.silent] | <code>Boolean</code> | only errors printed to CLI |
-| [argv.verbose] | <code>Boolean</code> | chatty user CLI output |
-| [argv.debug] | <code>Boolean</code> | enables developer output & features |
 
 <a name="Mcdev.selectTypes"></a>
 
@@ -725,9 +710,9 @@ FileTransfer MetadataType
     * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#Asset.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseMetadata(metadata)](#Asset.parseMetadata) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
     * [._mergeCode(metadata, deployDir, subType, [templateName])](#Asset._mergeCode) ⇒ <code>Promise.&lt;Array.&lt;MetadataType.CodeExtract&gt;&gt;</code>
-    * [._mergeCode_slots(metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName])](#Asset._mergeCode_slots) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._mergeCode_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName])](#Asset._mergeCode_slots) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._extractCode(metadata)](#Asset._extractCode) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
-    * [._extractCode_slots(metadataSlots, codeArr)](#Asset._extractCode_slots) ⇒ <code>void</code>
+    * [._extractCode_slots(prefix, metadataSlots, codeArr)](#Asset._extractCode_slots) ⇒ <code>void</code>
     * [.getJsonFromFS(dir)](#Asset.getJsonFromFS) ⇒ <code>Object</code>
     * [.findSubType(templateDir, templateName)](#Asset.findSubType) ⇒ <code>AssetSubType</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName)](#Asset.readSecondaryFolder) ⇒ <code>AssetItem</code>
@@ -946,7 +931,7 @@ helper for this.preDeployTasks() that loads extracted code content back into JSO
 
 <a name="Asset._mergeCode_slots"></a>
 
-### Asset.\_mergeCode\_slots(metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Asset.\_mergeCode\_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName]) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for this.preDeployTasks() that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -954,6 +939,7 @@ helper for this.preDeployTasks() that loads extracted code content back into JSO
 
 | Param | Type | Description |
 | --- | --- | --- |
+| prefix | <code>string</code> | usually the customerkey |
 | metadataSlots | <code>Object</code> | metadata.views.html.slots or deeper slots.<>.blocks.<>.slots |
 | readDirArr | <code>Array.&lt;string&gt;</code> | directory of deploy files |
 | subtypeExtension | <code>string</code> | asset-subtype name ending on -meta |
@@ -977,11 +963,12 @@ to allow saving that separately and formatted
 
 <a name="Asset._extractCode_slots"></a>
 
-### Asset.\_extractCode\_slots(metadataSlots, codeArr) ⇒ <code>void</code>
+### Asset.\_extractCode\_slots(prefix, metadataSlots, codeArr) ⇒ <code>void</code>
 **Kind**: static method of [<code>Asset</code>](#Asset)  
 
 | Param | Type | Description |
 | --- | --- | --- |
+| prefix | <code>string</code> | usually the customerkey |
 | metadataSlots | <code>Object</code> | metadata.views.html.slots or deeper slots.<>.blocks.<>.slots |
 | codeArr | <code>Array.&lt;Object&gt;</code> | to be extended array for extracted code |
 
@@ -3930,6 +3917,7 @@ CLI entry for SFMC DevTools
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
     * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>MetadataTypeItem</code>
+    * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
 
 <a name="Util.logger"></a>
 
@@ -4097,6 +4085,20 @@ standardize check to ensure only one result is returned from template search
 | results | <code>Array.&lt;MetadataTypeItem&gt;</code> | array of metadata |
 | keyToSearch | <code>string</code> | the field which contains the searched value |
 | searchValue | <code>string</code> | the value which is being looked for |
+
+<a name="Util.setLoggingLevel"></a>
+
+### Util.setLoggingLevel(argv) ⇒ <code>void</code>
+configures what is displayed in the console
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| argv | <code>Object</code> | list of command line parameters given by user |
+| [argv.silent] | <code>boolean</code> | only errors printed to CLI |
+| [argv.verbose] | <code>boolean</code> | chatty user CLI output |
+| [argv.debug] | <code>boolean</code> | enables developer output & features |
 
 <a name="MetadataTypeDefinitions"></a>
 
@@ -5494,6 +5496,7 @@ Util that contains logger and simple util methods
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
     * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>MetadataTypeItem</code>
+    * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
 
 <a name="Util.logger"></a>
 
@@ -5661,6 +5664,20 @@ standardize check to ensure only one result is returned from template search
 | results | <code>Array.&lt;MetadataTypeItem&gt;</code> | array of metadata |
 | keyToSearch | <code>string</code> | the field which contains the searched value |
 | searchValue | <code>string</code> | the value which is being looked for |
+
+<a name="Util.setLoggingLevel"></a>
+
+### Util.setLoggingLevel(argv) ⇒ <code>void</code>
+configures what is displayed in the console
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| argv | <code>Object</code> | list of command line parameters given by user |
+| [argv.silent] | <code>boolean</code> | only errors printed to CLI |
+| [argv.verbose] | <code>boolean</code> | chatty user CLI output |
+| [argv.debug] | <code>boolean</code> | enables developer output & features |
 
 <a name="getUserName"></a>
 
