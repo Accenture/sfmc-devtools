@@ -352,6 +352,7 @@ main class
 **Kind**: global class  
 
 * [Mcdev](#Mcdev)
+    * [.setSkipInteraction([skipInteraction])](#Mcdev.setSkipInteraction) ⇒ <code>void</code>
     * [.createDeltaPkg(argv)](#Mcdev.createDeltaPkg) ⇒ <code>void</code>
     * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>Promise</code>
@@ -369,6 +370,22 @@ main class
     * [.buildDefinition(businessUnit, type, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._checkMarket(market)](#Mcdev._checkMarket) ⇒ <code>Boolean</code>
     * [.buildDefinitionBulk(listName, type, name)](#Mcdev.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
+
+<a name="Mcdev.setSkipInteraction"></a>
+
+### Mcdev.setSkipInteraction([skipInteraction]) ⇒ <code>void</code>
+helper method to use unattended mode when including mcdev as a package
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [skipInteraction] | <code>boolean</code> \| <code>Object</code> | signals what to insert automatically for things usually asked via wizard |
+| skipInteraction.clientId | <code>String</code> | client id of installed package |
+| skipInteraction.clientSecret | <code>String</code> | client secret of installed package |
+| skipInteraction.tenant | <code>String</code> | tenant of installed package |
+| skipInteraction.eid | <code>String</code> | MID of the Parent Business Unit |
+| skipInteraction.credentialsName | <code>String</code> | how you would like the credential to be named |
 
 <a name="Mcdev.createDeltaPkg"></a>
 
@@ -3903,6 +3920,7 @@ CLI entry for SFMC DevTools
 
 * [Util](#Util)
     * [.logger](#Util.logger)
+    * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
@@ -3925,6 +3943,12 @@ CLI entry for SFMC DevTools
 Logger that creates timestamped log file in 'logs/' directory
 
 **Kind**: static property of [<code>Util</code>](#Util)  
+<a name="Util.signalFatalError"></a>
+
+### Util.signalFatalError() ⇒ <code>void</code>
+used to ensure the program tells surrounding software that an unrecoverable error occured
+
+**Kind**: static method of [<code>Util</code>](#Util)  
 <a name="Util.isTrue"></a>
 
 ### Util.isTrue(attrValue) ⇒ <code>boolean</code>
@@ -5482,6 +5506,7 @@ Util that contains logger and simple util methods
 
 * [Util](#Util)
     * [.logger](#Util.logger)
+    * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
@@ -5504,6 +5529,12 @@ Util that contains logger and simple util methods
 Logger that creates timestamped log file in 'logs/' directory
 
 **Kind**: static property of [<code>Util</code>](#Util)  
+<a name="Util.signalFatalError"></a>
+
+### Util.signalFatalError() ⇒ <code>void</code>
+used to ensure the program tells surrounding software that an unrecoverable error occured
+
+**Kind**: static method of [<code>Util</code>](#Util)  
 <a name="Util.isTrue"></a>
 
 ### Util.isTrue(attrValue) ⇒ <code>boolean</code>
