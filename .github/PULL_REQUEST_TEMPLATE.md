@@ -27,4 +27,3 @@ _Please delete options that are not relevant._
 - [ ] ESLint & Prettier are not outputting errors or warnings
 - [ ] README.md updated (if applicable)
 - [ ] Release Notes updated
-- [ ] ran `npm run docs` to update developer docs
