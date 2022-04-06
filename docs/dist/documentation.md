@@ -3920,6 +3920,7 @@ CLI entry for SFMC DevTools
 
 * [Util](#Util)
     * [.logger](#Util.logger)
+    * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
@@ -3942,6 +3943,12 @@ CLI entry for SFMC DevTools
 Logger that creates timestamped log file in 'logs/' directory
 
 **Kind**: static property of [<code>Util</code>](#Util)  
+<a name="Util.signalFatalError"></a>
+
+### Util.signalFatalError() ⇒ <code>void</code>
+used to ensure the program tells surrounding software that an unrecoverable error occured
+
+**Kind**: static method of [<code>Util</code>](#Util)  
 <a name="Util.isTrue"></a>
 
 ### Util.isTrue(attrValue) ⇒ <code>boolean</code>
@@ -5499,6 +5506,7 @@ Util that contains logger and simple util methods
 
 * [Util](#Util)
     * [.logger](#Util.logger)
+    * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
@@ -5521,6 +5529,12 @@ Util that contains logger and simple util methods
 Logger that creates timestamped log file in 'logs/' directory
 
 **Kind**: static property of [<code>Util</code>](#Util)  
+<a name="Util.signalFatalError"></a>
+
+### Util.signalFatalError() ⇒ <code>void</code>
+used to ensure the program tells surrounding software that an unrecoverable error occured
+
+**Kind**: static method of [<code>Util</code>](#Util)  
 <a name="Util.isTrue"></a>
 
 ### Util.isTrue(attrValue) ⇒ <code>boolean</code>
