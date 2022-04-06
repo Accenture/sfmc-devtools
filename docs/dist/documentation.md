@@ -353,11 +353,11 @@ main class
 
 * [Mcdev](#Mcdev)
     * [.createDeltaPkg(argv)](#Mcdev.createDeltaPkg) ⇒ <code>void</code>
-    * [.selectTypes([skipInteraction])](#Mcdev.selectTypes) ⇒ <code>Promise</code>
+    * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>Promise</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
-    * [.retrieve(businessUnit, [selectedType], [changelogOnly], [skipInteraction])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [._retrieveBU(cred, bu, [selectedType], [changelogOnly], [skipInteraction])](#Mcdev._retrieveBU) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.retrieve(businessUnit, [selectedType], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [._retrieveBU(cred, bu, [selectedType], [changelogOnly])](#Mcdev._retrieveBU) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [._deployBU(cred, bu, [type])](#Mcdev._deployBU) ⇒ <code>Promise</code>
     * [.deploy(businessUnit, [selectedType])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initProject([credentialsName], [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -386,14 +386,9 @@ handler for 'mcdev createDeltaPkg
 
 <a name="Mcdev.selectTypes"></a>
 
-### Mcdev.selectTypes([skipInteraction]) ⇒ <code>Promise</code>
+### Mcdev.selectTypes() ⇒ <code>Promise</code>
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 **Returns**: <code>Promise</code> - .  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> | optionally dont show questions |
-
 <a name="Mcdev.explainTypes"></a>
 
 ### Mcdev.explainTypes() ⇒ <code>Promise</code>
@@ -411,7 +406,7 @@ handler for 'mcdev createDeltaPkg
 
 <a name="Mcdev.retrieve"></a>
 
-### Mcdev.retrieve(businessUnit, [selectedType], [changelogOnly], [skipInteraction]) ⇒ <code>Promise.&lt;Object&gt;</code>
+### Mcdev.retrieve(businessUnit, [selectedType], [changelogOnly]) ⇒ <code>Promise.&lt;Object&gt;</code>
 Retrieve all metadata from the specified business unit into the local file system.
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -422,11 +417,10 @@ Retrieve all metadata from the specified business unit into the local file syste
 | businessUnit | <code>String</code> | references credentials from properties.json |
 | [selectedType] | <code>String</code> | limit retrieval to given metadata type |
 | [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
-| [skipInteraction] | <code>boolean</code> | optionally dont show questions |
 
 <a name="Mcdev._retrieveBU"></a>
 
-### Mcdev.\_retrieveBU(cred, bu, [selectedType], [changelogOnly], [skipInteraction]) ⇒ <code>Promise.&lt;Object&gt;</code>
+### Mcdev.\_retrieveBU(cred, bu, [selectedType], [changelogOnly]) ⇒ <code>Promise.&lt;Object&gt;</code>
 helper for retrieve()
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -438,7 +432,6 @@ helper for retrieve()
 | bu | <code>String</code> | name of BU |
 | [selectedType] | <code>String</code> | limit retrieval to given metadata type/subtype |
 | [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
-| [skipInteraction] | <code>boolean</code> \| <code>Object</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Mcdev._deployBU"></a>
 
@@ -4167,7 +4160,7 @@ CLI helper class
     * [.initMcdevConfig([skipInteraction])](#Cli.initMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.addExtraCredential(properties, [skipInteraction])](#Cli.addExtraCredential) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.updateCredential(properties, credName, [skipInteraction])](#Cli.updateCredential) ⇒ <code>Promise.&lt;Boolean&gt;</code>
-    * [.getCredentialObject(properties, target, [isCredentialOnly], [allowAll], [skipInteraction])](#Cli.getCredentialObject) ⇒ <code>Promise.&lt;Util.BuObject&gt;</code>
+    * [.getCredentialObject(properties, target, [isCredentialOnly], [allowAll])](#Cli.getCredentialObject) ⇒ <code>Promise.&lt;Util.BuObject&gt;</code>
     * [._selectBU(properties, [credential], [isCredentialOnly], [allowAll])](#Cli._selectBU) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [._setCredential(properties, [credName], [skipInteraction])](#Cli._setCredential) ⇒ <code>Promise.&lt;(boolean\|String)&gt;</code>
     * [._askCredentials(properties, [credName])](#Cli._askCredentials) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -4234,7 +4227,7 @@ update credentials
 
 <a name="Cli.getCredentialObject"></a>
 
-### Cli.getCredentialObject(properties, target, [isCredentialOnly], [allowAll], [skipInteraction]) ⇒ <code>Promise.&lt;Util.BuObject&gt;</code>
+### Cli.getCredentialObject(properties, target, [isCredentialOnly], [allowAll]) ⇒ <code>Promise.&lt;Util.BuObject&gt;</code>
 Returns Object with parameters required for accessing API
 
 **Kind**: static method of [<code>Cli</code>](#Cli)  
@@ -4246,7 +4239,6 @@ Returns Object with parameters required for accessing API
 | target | <code>String</code> | code of BU to use |
 | [isCredentialOnly] | <code>boolean</code> \| <code>string</code> | true:don't ask for BU | string: name of BU |
 | [allowAll] | <code>boolean</code> | Offer ALL as option in BU selection |
-| [skipInteraction] | <code>boolean</code> \| <code>Object</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Cli._selectBU"></a>
 
