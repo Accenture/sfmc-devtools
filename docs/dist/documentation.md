@@ -2687,7 +2687,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.updateREST(metadataEntry, uri)](#MetadataType.updateREST) ⇒ <code>Promise</code>
     * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
     * [.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-    * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (Util.MetadataTypeMap\|Util.MetadataTypeItem), type:string}&gt;</code>
     * [.parseResponseBody(body)](#MetadataType.parseResponseBody) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
     * [.removeNotCreateableFields(metadataEntry)](#MetadataType.removeNotCreateableFields) ⇒ <code>void</code>
@@ -2981,11 +2981,11 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 
 <a name="MetadataType.retrieveREST"></a>
 
-### MetadataType.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+### MetadataType.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables]) ⇒ <code>Promise.&lt;{metadata: (Util.MetadataTypeMap\|Util.MetadataTypeItem), type:string}&gt;</code>
 Retrieves Metadata for Rest Types
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
+**Returns**: <code>Promise.&lt;{metadata: (Util.MetadataTypeMap\|Util.MetadataTypeItem), type:string}&gt;</code> - Promise of item map (single item for templated result)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3918,7 +3918,6 @@ CLI entry for SFMC DevTools
 * [Util](#Util)
     * [.logger](#Util.logger)
     * [.getMetadataMapToList(metadata)](#Util.getMetadataMapToList) ⇒ <code>Array.&lt;MetadataTypeItem&gt;</code>
-    * [.extractSingleItem(obj)](#Util.extractSingleItem) ⇒ <code>Object.&lt;{metadata:MetadataTypeItem, type:string}&gt;</code>
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
@@ -3953,18 +3952,6 @@ helper to quickly ensure we are working with a flat Array of items
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>MetadataTypeMap</code> \| <code>Array.&lt;MetadataTypeItem&gt;</code> | map or array of metadata |
-
-<a name="Util.extractSingleItem"></a>
-
-### Util.extractSingleItem(obj) ⇒ <code>Object.&lt;{metadata:MetadataTypeItem, type:string}&gt;</code>
-helper to turn an array or object into a single item
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Object.&lt;{metadata:MetadataTypeItem, type:string}&gt;</code> - item list reduced to single item  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| obj | <code>Object.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code> | map or array of metadata |
 
 <a name="Util.signalFatalError"></a>
 
@@ -5530,7 +5517,6 @@ Util that contains logger and simple util methods
 * [Util](#Util)
     * [.logger](#Util.logger)
     * [.getMetadataMapToList(metadata)](#Util.getMetadataMapToList) ⇒ <code>Array.&lt;MetadataTypeItem&gt;</code>
-    * [.extractSingleItem(obj)](#Util.extractSingleItem) ⇒ <code>Object.&lt;{metadata:MetadataTypeItem, type:string}&gt;</code>
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
@@ -5565,18 +5551,6 @@ helper to quickly ensure we are working with a flat Array of items
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>MetadataTypeMap</code> \| <code>Array.&lt;MetadataTypeItem&gt;</code> | map or array of metadata |
-
-<a name="Util.extractSingleItem"></a>
-
-### Util.extractSingleItem(obj) ⇒ <code>Object.&lt;{metadata:MetadataTypeItem, type:string}&gt;</code>
-helper to turn an array or object into a single item
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Object.&lt;{metadata:MetadataTypeItem, type:string}&gt;</code> - item list reduced to single item  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| obj | <code>Object.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code> | map or array of metadata |
 
 <a name="Util.signalFatalError"></a>
 
@@ -6007,7 +5981,7 @@ REST format
     * [.updateREST(metadataEntry, uri)](#MetadataType.updateREST) ⇒ <code>Promise</code>
     * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
     * [.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-    * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (Util.MetadataTypeMap\|Util.MetadataTypeItem), type:string}&gt;</code>
     * [.parseResponseBody(body)](#MetadataType.parseResponseBody) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
     * [.removeNotCreateableFields(metadataEntry)](#MetadataType.removeNotCreateableFields) ⇒ <code>void</code>
@@ -6301,11 +6275,11 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 
 <a name="MetadataType.retrieveREST"></a>
 
-### MetadataType.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+### MetadataType.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables]) ⇒ <code>Promise.&lt;{metadata: (Util.MetadataTypeMap\|Util.MetadataTypeItem), type:string}&gt;</code>
 Retrieves Metadata for Rest Types
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
+**Returns**: <code>Promise.&lt;{metadata: (Util.MetadataTypeMap\|Util.MetadataTypeItem), type:string}&gt;</code> - Promise of item map (single item for templated result)  
 
 | Param | Type | Description |
 | --- | --- | --- |
