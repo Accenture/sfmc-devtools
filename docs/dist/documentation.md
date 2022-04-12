@@ -3921,7 +3921,7 @@ CLI entry for SFMC DevTools
 * [Util](#Util)
     * [.logger](#Util.logger)
     * [.getMetadataMapToList(metadata)](#Util.getMetadataMapToList) ⇒ <code>Array.&lt;MetadataTypeItem&gt;</code>
-    * [.reduceMetadataMap(obj)](#Util.reduceMetadataMap) ⇒ <code>Object.&lt;{metadata:MetadataTypeItem, type:string}&gt;</code>
+    * [.extractSingleItem(obj)](#Util.extractSingleItem) ⇒ <code>Object.&lt;{metadata:MetadataTypeItem, type:string}&gt;</code>
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
@@ -3957,9 +3957,9 @@ helper to quickly ensure we are working with a flat Array of items
 | --- | --- | --- |
 | metadata | <code>MetadataTypeMap</code> \| <code>Array.&lt;MetadataTypeItem&gt;</code> | map or array of metadata |
 
-<a name="Util.reduceMetadataMap"></a>
+<a name="Util.extractSingleItem"></a>
 
-### Util.reduceMetadataMap(obj) ⇒ <code>Object.&lt;{metadata:MetadataTypeItem, type:string}&gt;</code>
+### Util.extractSingleItem(obj) ⇒ <code>Object.&lt;{metadata:MetadataTypeItem, type:string}&gt;</code>
 helper to turn an array or object into a single item
 
 **Kind**: static method of [<code>Util</code>](#Util)  
@@ -5533,7 +5533,7 @@ Util that contains logger and simple util methods
 * [Util](#Util)
     * [.logger](#Util.logger)
     * [.getMetadataMapToList(metadata)](#Util.getMetadataMapToList) ⇒ <code>Array.&lt;MetadataTypeItem&gt;</code>
-    * [.reduceMetadataMap(obj)](#Util.reduceMetadataMap) ⇒ <code>Object.&lt;{metadata:MetadataTypeItem, type:string}&gt;</code>
+    * [.extractSingleItem(obj)](#Util.extractSingleItem) ⇒ <code>Object.&lt;{metadata:MetadataTypeItem, type:string}&gt;</code>
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
@@ -5569,9 +5569,9 @@ helper to quickly ensure we are working with a flat Array of items
 | --- | --- | --- |
 | metadata | <code>MetadataTypeMap</code> \| <code>Array.&lt;MetadataTypeItem&gt;</code> | map or array of metadata |
 
-<a name="Util.reduceMetadataMap"></a>
+<a name="Util.extractSingleItem"></a>
 
-### Util.reduceMetadataMap(obj) ⇒ <code>Object.&lt;{metadata:MetadataTypeItem, type:string}&gt;</code>
+### Util.extractSingleItem(obj) ⇒ <code>Object.&lt;{metadata:MetadataTypeItem, type:string}&gt;</code>
 helper to turn an array or object into a single item
 
 **Kind**: static method of [<code>Util</code>](#Util)  
