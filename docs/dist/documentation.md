@@ -266,17 +266,17 @@ Source and target business units are also compared before the deployment to appl
 **Kind**: global class  
 
 * [Deployer](#Deployer)
-    * [new Deployer(properties, buObject, [type])](#new_Deployer_new)
+    * [new Deployer(properties, buObject)](#new_Deployer_new)
     * _instance_
-        * [.deploy()](#Deployer+deploy) ⇒ <code>Promise</code>
+        * [.deploy([type])](#Deployer+deploy) ⇒ <code>Promise</code>
         * [.deployCallback(result, metadataType)](#Deployer+deployCallback) ⇒ <code>void</code>
     * _static_
         * [.readBUMetadata(deployDir, [type], [listBadKeys])](#Deployer.readBUMetadata) ⇒ <code>Object</code>
-        * [.createFolderDefinitions(deployDir, metadata, metadataTypeArr)](#Deployer.createFolderDefinitions) ⇒ <code>void</code>
+        * [.createFolderDefinitions(deployDir, metadata, metadataTypeArr, folderInstance)](#Deployer.createFolderDefinitions) ⇒ <code>void</code>
 
 <a name="new_Deployer_new"></a>
 
-### new Deployer(properties, buObject, [type])
+### new Deployer(properties, buObject)
 Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 
 
@@ -285,15 +285,19 @@ Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 | properties | <code>Object</code> | General configuration to be used in retrieve |
 | properties.directories | <code>Object</code> | Directories to be used when interacting with FS |
 | buObject | <code>auth.BuObject</code> | details of business unit in processing |
-| [type] | <code>String</code> | limit deployment to given metadata type |
 
 <a name="Deployer+deploy"></a>
 
-### deployer.deploy() ⇒ <code>Promise</code>
+### deployer.deploy([type]) ⇒ <code>Promise</code>
 Deploy all metadata that is located in the deployDir
 
 **Kind**: instance method of [<code>Deployer</code>](#Deployer)  
 **Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [type] | <code>String</code> | limit deployment to given metadata type |
+
 <a name="Deployer+deployCallback"></a>
 
 ### deployer.deployCallback(result, metadataType) ⇒ <code>void</code>
@@ -322,7 +326,7 @@ Returns metadata of a business unit that is saved locally
 
 <a name="Deployer.createFolderDefinitions"></a>
 
-### Deployer.createFolderDefinitions(deployDir, metadata, metadataTypeArr) ⇒ <code>void</code>
+### Deployer.createFolderDefinitions(deployDir, metadata, metadataTypeArr, folderInstance) ⇒ <code>void</code>
 parses asset metadata to auto-create folders in target folder
 
 **Kind**: static method of [<code>Deployer</code>](#Deployer)  
@@ -332,6 +336,7 @@ parses asset metadata to auto-create folders in target folder
 | deployDir | <code>String</code> | root directory of metadata. |
 | metadata | <code>Object</code> | list of metadata |
 | metadataTypeArr | <code>String</code> | list of metadata types |
+| folderInstance | [<code>Folder</code>](#Folder) | instance of Folder metadata class |
 
 <a name="Mcdev"></a>
 
@@ -595,49 +600,63 @@ MessageSendActivity MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [AccountUser](#AccountUser) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir)](#AccountUser+retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.timeSinceDate(date, date2)](#AccountUser+timeSinceDate) ⇒ <code>number</code>
-    * [.getBuName(id)](#AccountUser+getBuName) ⇒ <code>string</code>
-    * [.document([metadata])](#AccountUser+document) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._generateDocMd(users, type, columnsToPrint)](#AccountUser+_generateDocMd) ⇒ <code>string</code>
-    * [.postRetrieveTasks(metadata)](#AccountUser+postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
-    * [.parseMetadata(metadata)](#AccountUser+parseMetadata) ⇒ <code>Array</code>
-    * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType+getJsonFromFS) ⇒ <code>Object</code>
-    * [.getFieldNamesToRetrieve([additionalFields])](#MetadataType+getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.deploy(metadata, deployDir, retrieveDir)](#MetadataType+deploy) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.postDeployTasks(metadata, originalMetadata)](#MetadataType+postDeployTasks) ⇒ <code>void</code>
-    * [.overrideKeyWithName(metadata, [warningMsg])](#MetadataType+overrideKeyWithName) ⇒ <code>void</code>
-    * [.retrieveChangelog([additionalFields], [subType])](#MetadataType+retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-    * [.retrieveForCache([subType])](#MetadataType+retrieveForCache) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType+retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-    * [.preDeployTasks(metadata, deployDir)](#MetadataType+preDeployTasks) ⇒ <code>Promise.&lt;Util.MetadataTypeItem&gt;</code>
-    * [.create(metadata, deployDir)](#MetadataType+create) ⇒ <code>void</code>
-    * [.update(metadata, [metadataBefore])](#MetadataType+update) ⇒ <code>void</code>
-    * [.upsert(metadata, deployDir)](#MetadataType+upsert) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
-    * [.createREST(metadataEntry, uri)](#MetadataType+createREST) ⇒ <code>Promise</code>
-    * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType+createSOAP) ⇒ <code>Promise</code>
-    * [.updateREST(metadataEntry, uri)](#MetadataType+updateREST) ⇒ <code>Promise</code>
-    * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType+updateSOAP) ⇒ <code>Promise</code>
-    * [.retrieveSOAP(retrieveDir, [requestParams], [additionalFields], [overrideType])](#MetadataType+retrieveSOAP) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-    * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables])](#MetadataType+retrieveREST) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-    * [.parseResponseBody(body)](#MetadataType+parseResponseBody) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
-    * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType+deleteFieldByDefinition) ⇒ <code>void</code>
-    * [.removeNotCreateableFields(metadataEntry)](#MetadataType+removeNotCreateableFields) ⇒ <code>void</code>
-    * [.removeNotUpdateableFields(metadataEntry)](#MetadataType+removeNotUpdateableFields) ⇒ <code>void</code>
-    * [.keepTemplateFields(metadataEntry)](#MetadataType+keepTemplateFields) ⇒ <code>void</code>
-    * [.keepRetrieveFields(metadataEntry)](#MetadataType+keepRetrieveFields) ⇒ <code>void</code>
-    * [.isFiltered(metadataEntry, [include])](#MetadataType+isFiltered) ⇒ <code>boolean</code>
-    * [.isFilteredFolder(metadataEntry, [include])](#MetadataType+isFilteredFolder) ⇒ <code>boolean</code>
-    * [.saveResults(results, retrieveDir, [overrideType], [templateVariables])](#MetadataType+saveResults) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
-    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#MetadataType+buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.findSubType(templateDir, templateName)](#MetadataType+findSubType) ⇒ <code>string</code>
-    * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName, ex)](#MetadataType+readSecondaryFolder) ⇒ <code>Object</code>
-    * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType+buildDefinition) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-    * [.checkForErrors(ex)](#MetadataType+checkForErrors) ⇒ <code>string</code>
-    * [.deleteByKey(customerKey)](#MetadataType+deleteByKey) ⇒ <code>boolean</code>
-    * [.postDeleteTasks(customerKey)](#MetadataType+postDeleteTasks) ⇒ <code>void</code>
-    * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
-    * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
+    * [new AccountUser(properties, buObject)](#new_AccountUser_new)
+    * _instance_
+        * [.retrieve(retrieveDir)](#AccountUser+retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.timeSinceDate(date, date2)](#AccountUser+timeSinceDate) ⇒ <code>number</code>
+        * [.getBuName(id)](#AccountUser+getBuName) ⇒ <code>string</code>
+        * [.document([metadata])](#AccountUser+document) ⇒ <code>Promise.&lt;void&gt;</code>
+        * [.postRetrieveTasks(metadata)](#AccountUser+postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
+        * [.parseMetadata(metadata)](#AccountUser+parseMetadata) ⇒ <code>Array</code>
+        * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType+getJsonFromFS) ⇒ <code>Object</code>
+        * [.getFieldNamesToRetrieve([additionalFields])](#MetadataType+getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
+        * [.deploy(metadata, deployDir, retrieveDir)](#MetadataType+deploy) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.postDeployTasks(metadata, originalMetadata)](#MetadataType+postDeployTasks) ⇒ <code>void</code>
+        * [.overrideKeyWithName(metadata, [warningMsg])](#MetadataType+overrideKeyWithName) ⇒ <code>void</code>
+        * [.retrieveChangelog([additionalFields], [subType])](#MetadataType+retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+        * [.retrieveForCache([subType])](#MetadataType+retrieveForCache) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+        * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType+retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+        * [.preDeployTasks(metadata, deployDir)](#MetadataType+preDeployTasks) ⇒ <code>Promise.&lt;Util.MetadataTypeItem&gt;</code>
+        * [.create(metadata, deployDir)](#MetadataType+create) ⇒ <code>void</code>
+        * [.update(metadata, [metadataBefore])](#MetadataType+update) ⇒ <code>void</code>
+        * [.upsert(metadata, deployDir)](#MetadataType+upsert) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
+        * [.createREST(metadataEntry, uri)](#MetadataType+createREST) ⇒ <code>Promise</code>
+        * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType+createSOAP) ⇒ <code>Promise</code>
+        * [.updateREST(metadataEntry, uri)](#MetadataType+updateREST) ⇒ <code>Promise</code>
+        * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType+updateSOAP) ⇒ <code>Promise</code>
+        * [.retrieveSOAP(retrieveDir, [requestParams], [additionalFields], [overrideType])](#MetadataType+retrieveSOAP) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+        * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables])](#MetadataType+retrieveREST) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+        * [.parseResponseBody(body)](#MetadataType+parseResponseBody) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
+        * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType+deleteFieldByDefinition) ⇒ <code>void</code>
+        * [.removeNotCreateableFields(metadataEntry)](#MetadataType+removeNotCreateableFields) ⇒ <code>void</code>
+        * [.removeNotUpdateableFields(metadataEntry)](#MetadataType+removeNotUpdateableFields) ⇒ <code>void</code>
+        * [.keepTemplateFields(metadataEntry)](#MetadataType+keepTemplateFields) ⇒ <code>void</code>
+        * [.keepRetrieveFields(metadataEntry)](#MetadataType+keepRetrieveFields) ⇒ <code>void</code>
+        * [.isFiltered(metadataEntry, [include])](#MetadataType+isFiltered) ⇒ <code>boolean</code>
+        * [.isFilteredFolder(metadataEntry, [include])](#MetadataType+isFilteredFolder) ⇒ <code>boolean</code>
+        * [.saveResults(results, retrieveDir, [overrideType], [templateVariables])](#MetadataType+saveResults) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
+        * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#MetadataType+buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
+        * [.findSubType(templateDir, templateName)](#MetadataType+findSubType) ⇒ <code>string</code>
+        * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName, ex)](#MetadataType+readSecondaryFolder) ⇒ <code>Object</code>
+        * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType+buildDefinition) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+        * [.checkForErrors(ex)](#MetadataType+checkForErrors) ⇒ <code>string</code>
+        * [.deleteByKey(customerKey)](#MetadataType+deleteByKey) ⇒ <code>boolean</code>
+        * [.postDeleteTasks(customerKey)](#MetadataType+postDeleteTasks) ⇒ <code>void</code>
+        * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
+        * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
+    * _static_
+        * [._generateDocMd(users, type, columnsToPrint)](#AccountUser._generateDocMd) ⇒ <code>string</code>
+
+<a name="new_AccountUser_new"></a>
+
+### new AccountUser(properties, buObject)
+Constructor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="AccountUser+retrieve"></a>
 
@@ -689,18 +708,6 @@ Creates markdown documentation of all roles
 | --- | --- | --- |
 | [metadata] | <code>Object</code> | user list |
 
-<a name="AccountUser+_generateDocMd"></a>
-
-### accountUser.\_generateDocMd(users, type, columnsToPrint) ⇒ <code>string</code>
-**Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>string</code> - markdown  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| users | <code>Array.&lt;Object&gt;</code> | list of users and installed package |
-| type | <code>&#x27;Installed Package&#x27;</code> \| <code>&#x27;User&#x27;</code> | choose what sub type to print |
-| columnsToPrint | <code>Array.&lt;Array&gt;</code> | helper array |
-
 <a name="AccountUser+postRetrieveTasks"></a>
 
 ### accountUser.postRetrieveTasks(metadata) ⇒ <code>Array.&lt;Object&gt;</code>
@@ -732,6 +739,7 @@ parses retrieved Metadata before saving
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -745,6 +753,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -757,6 +766,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -771,6 +781,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -783,6 +794,7 @@ Gets executed after deployment of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -795,6 +807,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -808,6 +821,7 @@ Gets metadata from Marketing Cloud
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>retrieveForCache</code>](#MetadataType+retrieveForCache)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -820,6 +834,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>retrieveAsTemplate</code>](#MetadataType+retrieveAsTemplate)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -835,6 +850,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets executed before deploying metadata
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>preDeployTasks</code>](#MetadataType+preDeployTasks)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeItem&gt;</code> - Promise of a single metadata item  
 
 | Param | Type | Description |
@@ -848,6 +864,7 @@ Gets executed before deploying metadata
 Abstract create method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>create</code>](#MetadataType+create)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -860,6 +877,7 @@ Abstract create method that needs to be implemented in child metadata type
 Abstract update method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>update</code>](#MetadataType+update)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -872,6 +890,7 @@ Abstract update method that needs to be implemented in child metadata type
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -885,6 +904,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -898,6 +918,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -912,6 +933,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -925,6 +947,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -939,6 +962,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -954,6 +978,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -969,6 +994,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -981,6 +1007,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1000,6 +1027,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1011,6 +1039,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1022,6 +1051,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1033,6 +1063,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1044,6 +1075,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -1057,6 +1089,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -1070,6 +1103,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -1086,6 +1120,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -1102,6 +1137,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -1115,6 +1151,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -1133,6 +1170,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -1148,6 +1186,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -1160,6 +1199,7 @@ Standardizes a check for multiple messages
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -1172,6 +1212,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -1184,6 +1225,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -1197,6 +1239,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>AccountUser</code>](#AccountUser)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -1204,6 +1247,18 @@ Returns metadata of a business unit that is saved locally
 | readDir | <code>string</code> |  | root directory of metadata. |
 | [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
 | [buMetadata] | <code>Object</code> |  | Metadata of BU in local directory |
+
+<a name="AccountUser._generateDocMd"></a>
+
+### AccountUser.\_generateDocMd(users, type, columnsToPrint) ⇒ <code>string</code>
+**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
+**Returns**: <code>string</code> - markdown  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| users | <code>Array.&lt;Object&gt;</code> | list of users and installed package |
+| type | <code>&#x27;Installed Package&#x27;</code> \| <code>&#x27;User&#x27;</code> | choose what sub type to print |
+| columnsToPrint | <code>Array.&lt;Array&gt;</code> | helper array |
 
 <a name="Asset"></a>
 
@@ -1214,6 +1269,7 @@ FileTransfer MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Asset](#Asset) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new Asset(properties, buObject)](#new_Asset_new)
     * [.retrieve(retrieveDir, _, __, [selectedSubType])](#Asset+retrieve) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
     * [.retrieveForCache([selectedSubType])](#Asset+retrieveForCache) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType])](#Asset+retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
@@ -1263,6 +1319,17 @@ FileTransfer MetadataType
     * [.postDeleteTasks(customerKey)](#MetadataType+postDeleteTasks) ⇒ <code>void</code>
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
+
+<a name="new_Asset_new"></a>
+
+### new Asset(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="Asset+retrieve"></a>
 
@@ -1575,6 +1642,7 @@ optional method used for some types to try a different folder structure
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -1587,6 +1655,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -1601,6 +1670,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1613,6 +1683,7 @@ Gets executed after deployment of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1625,6 +1696,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -1638,6 +1710,7 @@ Gets metadata from Marketing Cloud
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -1651,6 +1724,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -1664,6 +1738,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -1678,6 +1753,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -1691,6 +1767,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -1705,6 +1782,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -1720,6 +1798,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -1735,6 +1814,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -1747,6 +1827,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1766,6 +1847,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1777,6 +1859,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1788,6 +1871,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1799,6 +1883,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1810,6 +1895,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -1823,6 +1909,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -1836,6 +1923,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -1853,6 +1941,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -1868,6 +1957,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -1880,6 +1970,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1892,6 +1983,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -1904,6 +1996,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -1916,6 +2009,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -1929,6 +2023,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>Asset</code>](#Asset)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -1946,6 +2041,7 @@ AttributeGroup MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [AttributeGroup](#AttributeGroup) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new AttributeGroup(properties, buObject)](#new_AttributeGroup_new)
     * [.retrieveForCache()](#AttributeGroup+retrieveForCache) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.retrieve(retrieveDir)](#AttributeGroup+retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType+getJsonFromFS) ⇒ <code>Object</code>
@@ -1986,6 +2082,17 @@ AttributeGroup MetadataType
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
 
+<a name="new_AttributeGroup_new"></a>
+
+### new AttributeGroup(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
+
 <a name="AttributeGroup+retrieveForCache"></a>
 
 ### attributeGroup.retrieveForCache() ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -2013,6 +2120,7 @@ Retrieves Metadata of schema attribute groups.
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -2026,6 +2134,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -2038,6 +2147,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -2052,6 +2162,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2064,6 +2175,7 @@ Gets executed after deployment of metadata type
 Gets executed after retreive of metadata type
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>postRetrieveTasks</code>](#MetadataType+postRetrieveTasks)  
 **Returns**: <code>Util.MetadataTypeItem</code> - cloned metadata  
 
 | Param | Type | Description |
@@ -2078,6 +2190,7 @@ Gets executed after retreive of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2090,6 +2203,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -2103,6 +2217,7 @@ Gets metadata from Marketing Cloud
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>retrieveAsTemplate</code>](#MetadataType+retrieveAsTemplate)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -2118,6 +2233,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets executed before deploying metadata
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>preDeployTasks</code>](#MetadataType+preDeployTasks)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeItem&gt;</code> - Promise of a single metadata item  
 
 | Param | Type | Description |
@@ -2131,6 +2247,7 @@ Gets executed before deploying metadata
 Abstract create method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>create</code>](#MetadataType+create)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2143,6 +2260,7 @@ Abstract create method that needs to be implemented in child metadata type
 Abstract update method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>update</code>](#MetadataType+update)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2155,6 +2273,7 @@ Abstract update method that needs to be implemented in child metadata type
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -2168,6 +2287,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -2181,6 +2301,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -2195,6 +2316,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -2208,6 +2330,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -2222,6 +2345,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -2237,6 +2361,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -2252,6 +2377,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -2264,6 +2390,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2283,6 +2410,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2294,6 +2422,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2305,6 +2434,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2316,6 +2446,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2327,6 +2458,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -2340,6 +2472,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -2353,6 +2486,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -2369,6 +2503,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -2385,6 +2520,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -2398,6 +2534,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -2416,6 +2553,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -2431,6 +2569,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -2443,6 +2582,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2455,6 +2595,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -2467,6 +2608,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -2479,6 +2621,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -2492,6 +2635,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -2509,6 +2653,7 @@ Automation MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Automation](#Automation) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new Automation(properties, buObject)](#new_Automation_new)
     * [.retrieve(retrieveDir)](#Automation+retrieve) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
     * [.retrieveChangelog()](#Automation+retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
     * [.retrieveForCache()](#Automation+retrieveForCache) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
@@ -2552,6 +2697,17 @@ Automation MetadataType
     * [.postDeleteTasks(customerKey)](#MetadataType+postDeleteTasks) ⇒ <code>void</code>
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
+
+<a name="new_Automation_new"></a>
+
+### new Automation(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="Automation+retrieve"></a>
 
@@ -2739,6 +2895,7 @@ used to convert dates to the system timezone required for startDate
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -2752,6 +2909,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -2764,6 +2922,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2776,6 +2935,7 @@ used to synchronize name and external key during retrieveAsTemplate
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -2789,6 +2949,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -2802,6 +2963,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -2816,6 +2978,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -2829,6 +2992,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -2843,6 +3007,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -2858,6 +3023,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -2873,6 +3039,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -2885,6 +3052,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2904,6 +3072,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2915,6 +3084,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2926,6 +3096,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2937,6 +3108,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2948,6 +3120,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -2961,6 +3134,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -2974,6 +3148,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -2990,6 +3165,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -3006,6 +3182,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -3019,6 +3196,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -3037,6 +3215,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -3052,6 +3231,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -3064,6 +3244,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3076,6 +3257,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -3088,6 +3270,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -3100,6 +3283,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -3113,6 +3297,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>Automation</code>](#Automation)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -3130,6 +3315,7 @@ Campaign MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Campaign](#Campaign) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new Campaign(properties, buObject)](#new_Campaign_new)
     * [.retrieve(retrieveDir)](#Campaign+retrieve) ⇒ <code>Promise</code>
     * [.getAssetTags(retrieveDir, id, name)](#Campaign+getAssetTags) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType+getJsonFromFS) ⇒ <code>Object</code>
@@ -3171,6 +3357,17 @@ Campaign MetadataType
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
 
+<a name="new_Campaign_new"></a>
+
+### new Campaign(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
+
 <a name="Campaign+retrieve"></a>
 
 ### campaign.retrieve(retrieveDir) ⇒ <code>Promise</code>
@@ -3204,6 +3401,7 @@ Parses campaign asset response body and returns metadata entries mapped to their
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -3217,6 +3415,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -3229,6 +3428,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -3243,6 +3443,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3255,6 +3456,7 @@ Gets executed after deployment of metadata type
 Gets executed after retreive of metadata type
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>postRetrieveTasks</code>](#MetadataType+postRetrieveTasks)  
 **Returns**: <code>Util.MetadataTypeItem</code> - cloned metadata  
 
 | Param | Type | Description |
@@ -3269,6 +3471,7 @@ Gets executed after retreive of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3281,6 +3484,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -3294,6 +3498,7 @@ Gets metadata from Marketing Cloud
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>retrieveForCache</code>](#MetadataType+retrieveForCache)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -3306,6 +3511,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>retrieveAsTemplate</code>](#MetadataType+retrieveAsTemplate)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -3321,6 +3527,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets executed before deploying metadata
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>preDeployTasks</code>](#MetadataType+preDeployTasks)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeItem&gt;</code> - Promise of a single metadata item  
 
 | Param | Type | Description |
@@ -3334,6 +3541,7 @@ Gets executed before deploying metadata
 Abstract create method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>create</code>](#MetadataType+create)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3346,6 +3554,7 @@ Abstract create method that needs to be implemented in child metadata type
 Abstract update method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>update</code>](#MetadataType+update)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3358,6 +3567,7 @@ Abstract update method that needs to be implemented in child metadata type
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -3371,6 +3581,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -3384,6 +3595,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -3398,6 +3610,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -3411,6 +3624,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -3425,6 +3639,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -3440,6 +3655,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -3455,6 +3671,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -3467,6 +3684,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3486,6 +3704,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3497,6 +3716,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3508,6 +3728,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3519,6 +3740,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3530,6 +3752,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -3543,6 +3766,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -3556,6 +3780,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -3572,6 +3797,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -3588,6 +3814,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -3601,6 +3828,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -3619,6 +3847,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -3634,6 +3863,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -3646,6 +3876,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3658,6 +3889,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -3670,6 +3902,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -3682,6 +3915,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -3695,6 +3929,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>Campaign</code>](#Campaign)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -3712,6 +3947,7 @@ ContentArea MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [ContentArea](#ContentArea) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new ContentArea(properties, buObject)](#new_ContentArea_new)
     * [.retrieve(retrieveDir)](#ContentArea+retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.postRetrieveTasks(metadata)](#ContentArea+postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.parseMetadata(metadata)](#ContentArea+parseMetadata) ⇒ <code>Array</code>
@@ -3752,6 +3988,17 @@ ContentArea MetadataType
     * [.postDeleteTasks(customerKey)](#MetadataType+postDeleteTasks) ⇒ <code>void</code>
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
+
+<a name="new_ContentArea_new"></a>
+
+### new ContentArea(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="ContentArea+retrieve"></a>
 
@@ -3797,6 +4044,7 @@ parses retrieved Metadata before saving
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -3810,6 +4058,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -3822,6 +4071,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -3836,6 +4086,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3848,6 +4099,7 @@ Gets executed after deployment of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3860,6 +4112,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -3873,6 +4126,7 @@ Gets metadata from Marketing Cloud
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>retrieveForCache</code>](#MetadataType+retrieveForCache)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -3885,6 +4139,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>retrieveAsTemplate</code>](#MetadataType+retrieveAsTemplate)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -3900,6 +4155,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets executed before deploying metadata
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>preDeployTasks</code>](#MetadataType+preDeployTasks)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeItem&gt;</code> - Promise of a single metadata item  
 
 | Param | Type | Description |
@@ -3913,6 +4169,7 @@ Gets executed before deploying metadata
 Abstract create method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>create</code>](#MetadataType+create)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3925,6 +4182,7 @@ Abstract create method that needs to be implemented in child metadata type
 Abstract update method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>update</code>](#MetadataType+update)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3937,6 +4195,7 @@ Abstract update method that needs to be implemented in child metadata type
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -3950,6 +4209,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -3963,6 +4223,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -3977,6 +4238,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -3990,6 +4252,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -4004,6 +4267,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -4019,6 +4283,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -4034,6 +4299,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -4046,6 +4312,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4065,6 +4332,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4076,6 +4344,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4087,6 +4356,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4098,6 +4368,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4109,6 +4380,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -4122,6 +4394,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -4135,6 +4408,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -4151,6 +4425,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -4167,6 +4442,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -4180,6 +4456,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -4198,6 +4475,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -4213,6 +4491,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -4225,6 +4504,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4237,6 +4517,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -4249,6 +4530,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -4261,6 +4543,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -4274,6 +4557,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>ContentArea</code>](#ContentArea)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -4291,6 +4575,7 @@ DataExtension MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [DataExtension](#DataExtension) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new DataExtension(properties, buObject)](#new_DataExtension_new)
     * [.upsert(desToDeploy)](#DataExtension+upsert) ⇒ <code>Promise</code>
     * [._filterUpsertResults(res)](#DataExtension+_filterUpsertResults) ⇒ <code>Boolean</code>
     * [.create(metadata)](#DataExtension+create) ⇒ <code>Promise</code>
@@ -4331,6 +4616,17 @@ DataExtension MetadataType
     * [.checkForErrors(ex)](#MetadataType+checkForErrors) ⇒ <code>string</code>
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
+
+<a name="new_DataExtension_new"></a>
+
+### new DataExtension(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="DataExtension+upsert"></a>
 
@@ -4528,6 +4824,7 @@ Retrieves dataExtension metadata in template format.
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -4541,6 +4838,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -4553,6 +4851,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -4567,6 +4866,7 @@ Deploys metadata
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4579,6 +4879,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -4592,6 +4893,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -4606,6 +4908,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -4619,6 +4922,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -4633,6 +4937,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -4648,6 +4953,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -4663,6 +4969,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -4675,6 +4982,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4694,6 +5002,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4705,6 +5014,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4716,6 +5026,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4727,6 +5038,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4738,6 +5050,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -4751,6 +5064,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -4764,6 +5078,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -4780,6 +5095,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -4796,6 +5112,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -4809,6 +5126,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -4827,6 +5145,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -4842,6 +5161,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -4854,6 +5174,7 @@ Standardizes a check for multiple messages
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -4867,6 +5188,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>DataExtension</code>](#DataExtension)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -4884,6 +5206,7 @@ DataExtensionField MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [DataExtensionField](#DataExtensionField) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new DataExtensionField(properties, buObject)](#new_DataExtensionField_new)
     * [.retrieve(retrieveDir, [additionalFields])](#DataExtensionField+retrieve) ⇒ <code>Promise.&lt;{metadata:DataExtensionFieldMap, type:string}&gt;</code>
     * [.retrieveForCache([requestParams], [additionalFields])](#DataExtensionField+retrieveForCache) ⇒ <code>Promise.&lt;{metadata:DataExtensionFieldMap, type:string}&gt;</code>
     * [.convertToSortedArray(fieldsObj)](#DataExtensionField+convertToSortedArray) ⇒ <code>Array.&lt;DataExtensionFieldItem&gt;</code>
@@ -4926,6 +5249,17 @@ DataExtensionField MetadataType
     * [.checkForErrors(ex)](#MetadataType+checkForErrors) ⇒ <code>string</code>
     * [.document([metadata], [isDeploy])](#MetadataType+document) ⇒ <code>void</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
+
+<a name="new_DataExtensionField_new"></a>
+
+### new DataExtensionField(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="DataExtensionField+retrieve"></a>
 
@@ -5054,6 +5388,7 @@ clean up after deleting a metadata item
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -5067,6 +5402,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -5079,6 +5415,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -5093,6 +5430,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5105,6 +5443,7 @@ Gets executed after deployment of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5117,6 +5456,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -5130,6 +5470,7 @@ Gets metadata from Marketing Cloud
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>retrieveAsTemplate</code>](#MetadataType+retrieveAsTemplate)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -5145,6 +5486,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets executed before deploying metadata
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>preDeployTasks</code>](#MetadataType+preDeployTasks)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeItem&gt;</code> - Promise of a single metadata item  
 
 | Param | Type | Description |
@@ -5158,6 +5500,7 @@ Gets executed before deploying metadata
 Abstract create method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>create</code>](#MetadataType+create)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5170,6 +5513,7 @@ Abstract create method that needs to be implemented in child metadata type
 Abstract update method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>update</code>](#MetadataType+update)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5182,6 +5526,7 @@ Abstract update method that needs to be implemented in child metadata type
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -5195,6 +5540,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -5208,6 +5554,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -5222,6 +5569,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -5235,6 +5583,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -5249,6 +5598,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -5264,6 +5614,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -5279,6 +5630,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -5291,6 +5643,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5310,6 +5663,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5321,6 +5675,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5332,6 +5687,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5343,6 +5699,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5354,6 +5711,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -5367,6 +5725,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -5380,6 +5739,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -5396,6 +5756,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -5412,6 +5773,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -5425,6 +5787,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -5443,6 +5806,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -5458,6 +5822,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -5470,6 +5835,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5482,6 +5848,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -5499,6 +5866,7 @@ DataExtensionTemplate MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [DataExtensionTemplate](#DataExtensionTemplate) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new DataExtensionTemplate(properties, buObject)](#new_DataExtensionTemplate_new)
     * [.retrieve(retrieveDir)](#DataExtensionTemplate+retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType+getJsonFromFS) ⇒ <code>Object</code>
     * [.getFieldNamesToRetrieve([additionalFields])](#MetadataType+getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
@@ -5539,6 +5907,17 @@ DataExtensionTemplate MetadataType
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
 
+<a name="new_DataExtensionTemplate_new"></a>
+
+### new DataExtensionTemplate(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
+
 <a name="DataExtensionTemplate+retrieve"></a>
 
 ### dataExtensionTemplate.retrieve(retrieveDir) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -5558,6 +5937,7 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -5571,6 +5951,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -5583,6 +5964,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -5597,6 +5979,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5609,6 +5992,7 @@ Gets executed after deployment of metadata type
 Gets executed after retreive of metadata type
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>postRetrieveTasks</code>](#MetadataType+postRetrieveTasks)  
 **Returns**: <code>Util.MetadataTypeItem</code> - cloned metadata  
 
 | Param | Type | Description |
@@ -5623,6 +6007,7 @@ Gets executed after retreive of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5635,6 +6020,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -5648,6 +6034,7 @@ Gets metadata from Marketing Cloud
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>retrieveForCache</code>](#MetadataType+retrieveForCache)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -5660,6 +6047,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>retrieveAsTemplate</code>](#MetadataType+retrieveAsTemplate)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -5675,6 +6063,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets executed before deploying metadata
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>preDeployTasks</code>](#MetadataType+preDeployTasks)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeItem&gt;</code> - Promise of a single metadata item  
 
 | Param | Type | Description |
@@ -5688,6 +6077,7 @@ Gets executed before deploying metadata
 Abstract create method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>create</code>](#MetadataType+create)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5700,6 +6090,7 @@ Abstract create method that needs to be implemented in child metadata type
 Abstract update method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>update</code>](#MetadataType+update)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5712,6 +6103,7 @@ Abstract update method that needs to be implemented in child metadata type
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -5725,6 +6117,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -5738,6 +6131,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -5752,6 +6146,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -5765,6 +6160,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -5779,6 +6175,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -5794,6 +6191,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -5809,6 +6207,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -5821,6 +6220,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5840,6 +6240,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5851,6 +6252,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5862,6 +6264,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5873,6 +6276,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5884,6 +6288,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -5897,6 +6302,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -5910,6 +6316,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -5926,6 +6333,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -5942,6 +6350,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -5955,6 +6364,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -5973,6 +6383,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -5988,6 +6399,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -6000,6 +6412,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6012,6 +6425,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -6024,6 +6438,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -6036,6 +6451,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -6049,6 +6465,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>DataExtensionTemplate</code>](#DataExtensionTemplate)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -6066,6 +6483,7 @@ DataExtract MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [DataExtract](#DataExtract) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new DataExtract(properties, buObject)](#new_DataExtract_new)
     * [.retrieve(retrieveDir)](#DataExtract+retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.retrieveForCache()](#DataExtract+retrieveForCache) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtract+retrieveAsTemplate) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -6106,6 +6524,17 @@ DataExtract MetadataType
     * [.postDeleteTasks(customerKey)](#MetadataType+postDeleteTasks) ⇒ <code>void</code>
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
+
+<a name="new_DataExtract_new"></a>
+
+### new DataExtract(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="DataExtract+retrieve"></a>
 
@@ -6214,6 +6643,7 @@ parses retrieved Metadata before saving
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -6227,6 +6657,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -6239,6 +6670,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -6253,6 +6685,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6265,6 +6698,7 @@ Gets executed after deployment of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6277,6 +6711,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -6290,6 +6725,7 @@ Gets metadata from Marketing Cloud
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -6303,6 +6739,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -6316,6 +6753,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -6330,6 +6768,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -6343,6 +6782,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -6357,6 +6797,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -6372,6 +6813,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -6387,6 +6829,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -6399,6 +6842,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6418,6 +6862,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6429,6 +6874,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6440,6 +6886,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6451,6 +6898,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6462,6 +6910,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -6475,6 +6924,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -6488,6 +6938,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -6504,6 +6955,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -6520,6 +6972,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -6533,6 +6986,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -6551,6 +7005,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -6566,6 +7021,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -6578,6 +7034,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6590,6 +7047,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -6602,6 +7060,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -6614,6 +7073,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -6627,6 +7087,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>DataExtract</code>](#DataExtract)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -6646,6 +7107,7 @@ as this is a configuration in the EID
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [DataExtractType](#DataExtractType) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new DataExtractType(properties, buObject)](#new_DataExtractType_new)
     * [.retrieve(retrieveDir)](#DataExtractType+retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.retrieveForCache()](#DataExtractType+retrieveForCache) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType+getJsonFromFS) ⇒ <code>Object</code>
@@ -6686,6 +7148,17 @@ as this is a configuration in the EID
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
 
+<a name="new_DataExtractType_new"></a>
+
+### new DataExtractType(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
+
 <a name="DataExtractType+retrieve"></a>
 
 ### dataExtractType.retrieve(retrieveDir) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -6713,6 +7186,7 @@ Retrieves Metadata of  Data Extract Type for caching.
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -6726,6 +7200,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -6738,6 +7213,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -6752,6 +7228,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6764,6 +7241,7 @@ Gets executed after deployment of metadata type
 Gets executed after retreive of metadata type
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>postRetrieveTasks</code>](#MetadataType+postRetrieveTasks)  
 **Returns**: <code>Util.MetadataTypeItem</code> - cloned metadata  
 
 | Param | Type | Description |
@@ -6778,6 +7256,7 @@ Gets executed after retreive of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6790,6 +7269,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -6803,6 +7283,7 @@ Gets metadata from Marketing Cloud
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>retrieveAsTemplate</code>](#MetadataType+retrieveAsTemplate)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -6818,6 +7299,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets executed before deploying metadata
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>preDeployTasks</code>](#MetadataType+preDeployTasks)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeItem&gt;</code> - Promise of a single metadata item  
 
 | Param | Type | Description |
@@ -6831,6 +7313,7 @@ Gets executed before deploying metadata
 Abstract create method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>create</code>](#MetadataType+create)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6843,6 +7326,7 @@ Abstract create method that needs to be implemented in child metadata type
 Abstract update method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>update</code>](#MetadataType+update)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6855,6 +7339,7 @@ Abstract update method that needs to be implemented in child metadata type
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -6868,6 +7353,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -6881,6 +7367,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -6895,6 +7382,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -6908,6 +7396,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -6922,6 +7411,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -6937,6 +7427,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -6952,6 +7443,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -6964,6 +7456,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6983,6 +7476,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6994,6 +7488,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7005,6 +7500,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7016,6 +7512,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7027,6 +7524,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -7040,6 +7538,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -7053,6 +7552,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -7069,6 +7569,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -7085,6 +7586,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -7098,6 +7600,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -7116,6 +7619,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -7131,6 +7635,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -7143,6 +7648,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7155,6 +7661,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -7167,6 +7674,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -7179,6 +7687,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -7192,6 +7701,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>DataExtractType</code>](#DataExtractType)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -7209,6 +7719,7 @@ ImportFile MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Discovery](#Discovery) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new Discovery(properties, buObject)](#new_Discovery_new)
     * [.retrieve(retrieveDir)](#Discovery+retrieve) ⇒ <code>Promise</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType+getJsonFromFS) ⇒ <code>Object</code>
     * [.getFieldNamesToRetrieve([additionalFields])](#MetadataType+getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
@@ -7249,6 +7760,17 @@ ImportFile MetadataType
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
 
+<a name="new_Discovery_new"></a>
+
+### new Discovery(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
+
 <a name="Discovery+retrieve"></a>
 
 ### discovery.retrieve(retrieveDir) ⇒ <code>Promise</code>
@@ -7269,6 +7791,7 @@ documentation: https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-ap
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -7282,6 +7805,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -7294,6 +7818,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -7308,6 +7833,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7320,6 +7846,7 @@ Gets executed after deployment of metadata type
 Gets executed after retreive of metadata type
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>postRetrieveTasks</code>](#MetadataType+postRetrieveTasks)  
 **Returns**: <code>Util.MetadataTypeItem</code> - cloned metadata  
 
 | Param | Type | Description |
@@ -7334,6 +7861,7 @@ Gets executed after retreive of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7346,6 +7874,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -7359,6 +7888,7 @@ Gets metadata from Marketing Cloud
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>retrieveForCache</code>](#MetadataType+retrieveForCache)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -7371,6 +7901,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>retrieveAsTemplate</code>](#MetadataType+retrieveAsTemplate)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -7386,6 +7917,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets executed before deploying metadata
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>preDeployTasks</code>](#MetadataType+preDeployTasks)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeItem&gt;</code> - Promise of a single metadata item  
 
 | Param | Type | Description |
@@ -7399,6 +7931,7 @@ Gets executed before deploying metadata
 Abstract create method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>create</code>](#MetadataType+create)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7411,6 +7944,7 @@ Abstract create method that needs to be implemented in child metadata type
 Abstract update method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>update</code>](#MetadataType+update)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7423,6 +7957,7 @@ Abstract update method that needs to be implemented in child metadata type
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -7436,6 +7971,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -7449,6 +7985,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -7463,6 +8000,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -7476,6 +8014,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -7490,6 +8029,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -7505,6 +8045,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -7520,6 +8061,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -7532,6 +8074,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7551,6 +8094,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7562,6 +8106,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7573,6 +8118,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7584,6 +8130,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7595,6 +8142,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -7608,6 +8156,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -7621,6 +8170,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -7637,6 +8187,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -7653,6 +8204,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -7666,6 +8218,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -7684,6 +8237,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -7699,6 +8253,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -7711,6 +8266,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7723,6 +8279,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -7735,6 +8292,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -7747,6 +8305,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -7760,6 +8319,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>Discovery</code>](#Discovery)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -7777,6 +8337,7 @@ Email MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Email](#Email) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new Email(properties, buObject)](#new_Email_new)
     * [.retrieve(retrieveDir)](#Email+retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.postRetrieveTasks(metadata)](#Email+postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.parseMetadata(metadata)](#Email+parseMetadata) ⇒ <code>Array</code>
@@ -7817,6 +8378,17 @@ Email MetadataType
     * [.postDeleteTasks(customerKey)](#MetadataType+postDeleteTasks) ⇒ <code>void</code>
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
+
+<a name="new_Email_new"></a>
+
+### new Email(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="Email+retrieve"></a>
 
@@ -7862,6 +8434,7 @@ parses retrieved Metadata before saving
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -7875,6 +8448,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -7887,6 +8461,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -7901,6 +8476,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7913,6 +8489,7 @@ Gets executed after deployment of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7925,6 +8502,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -7938,6 +8516,7 @@ Gets metadata from Marketing Cloud
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>retrieveForCache</code>](#MetadataType+retrieveForCache)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -7950,6 +8529,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>retrieveAsTemplate</code>](#MetadataType+retrieveAsTemplate)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -7965,6 +8545,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets executed before deploying metadata
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>preDeployTasks</code>](#MetadataType+preDeployTasks)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeItem&gt;</code> - Promise of a single metadata item  
 
 | Param | Type | Description |
@@ -7978,6 +8559,7 @@ Gets executed before deploying metadata
 Abstract create method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>create</code>](#MetadataType+create)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7990,6 +8572,7 @@ Abstract create method that needs to be implemented in child metadata type
 Abstract update method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>update</code>](#MetadataType+update)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8002,6 +8585,7 @@ Abstract update method that needs to be implemented in child metadata type
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -8015,6 +8599,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -8028,6 +8613,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -8042,6 +8628,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -8055,6 +8642,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -8069,6 +8657,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -8084,6 +8673,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -8099,6 +8689,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -8111,6 +8702,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8130,6 +8722,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8141,6 +8734,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8152,6 +8746,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8163,6 +8758,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8174,6 +8770,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -8187,6 +8784,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -8200,6 +8798,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -8216,6 +8815,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -8232,6 +8832,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -8245,6 +8846,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -8263,6 +8865,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -8278,6 +8881,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -8290,6 +8894,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8302,6 +8907,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -8314,6 +8920,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -8326,6 +8933,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -8339,6 +8947,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>Email</code>](#Email)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -8356,6 +8965,7 @@ MessageSendActivity MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [EmailSendDefinition](#EmailSendDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new EmailSendDefinition(properties, buObject)](#new_EmailSendDefinition_new)
     * [.retrieve(retrieveDir)](#EmailSendDefinition+retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.update(metadataItem)](#EmailSendDefinition+update) ⇒ <code>Promise</code>
     * [.create(metadataItem)](#EmailSendDefinition+create) ⇒ <code>Promise</code>
@@ -8396,6 +9006,17 @@ MessageSendActivity MetadataType
     * [.postDeleteTasks(customerKey)](#MetadataType+postDeleteTasks) ⇒ <code>void</code>
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
+
+<a name="new_EmailSendDefinition_new"></a>
+
+### new EmailSendDefinition(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="EmailSendDefinition+retrieve"></a>
 
@@ -8493,6 +9114,7 @@ parses retrieved Metadata before saving
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -8506,6 +9128,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -8518,6 +9141,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -8532,6 +9156,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8544,6 +9169,7 @@ Gets executed after deployment of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8556,6 +9182,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -8569,6 +9196,7 @@ Gets metadata from Marketing Cloud
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>retrieveForCache</code>](#MetadataType+retrieveForCache)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -8581,6 +9209,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>retrieveAsTemplate</code>](#MetadataType+retrieveAsTemplate)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -8596,6 +9225,7 @@ Gets metadata cache with limited fields and does not store value to disk
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -8609,6 +9239,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -8622,6 +9253,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -8636,6 +9268,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -8649,6 +9282,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -8663,6 +9297,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -8678,6 +9313,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -8693,6 +9329,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -8705,6 +9342,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8724,6 +9362,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8735,6 +9374,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8746,6 +9386,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8757,6 +9398,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8768,6 +9410,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -8781,6 +9424,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -8794,6 +9438,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -8810,6 +9455,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -8826,6 +9472,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -8839,6 +9486,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -8857,6 +9505,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -8872,6 +9521,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -8884,6 +9534,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8896,6 +9547,7 @@ Gets metadata cache with limited fields and does not store value to disk
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -8908,6 +9560,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -8921,6 +9574,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -8938,6 +9592,7 @@ EventDefinition MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [EventDefinition](#EventDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new EventDefinition(properties, buObject)](#new_EventDefinition_new)
     * [.retrieve(retrieveDir)](#EventDefinition+retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.retrieveForCache()](#EventDefinition+retrieveForCache) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#EventDefinition+retrieveAsTemplate) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -8978,6 +9633,17 @@ EventDefinition MetadataType
     * [.postDeleteTasks(customerKey)](#MetadataType+postDeleteTasks) ⇒ <code>void</code>
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
+
+<a name="new_EventDefinition_new"></a>
+
+### new EventDefinition(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="EventDefinition+retrieve"></a>
 
@@ -9087,6 +9753,7 @@ parses retrieved Metadata before saving
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -9100,6 +9767,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -9112,6 +9780,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -9126,6 +9795,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -9138,6 +9808,7 @@ Gets executed after deployment of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -9150,6 +9821,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -9163,6 +9835,7 @@ Gets metadata from Marketing Cloud
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -9176,6 +9849,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -9189,6 +9863,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -9203,6 +9878,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -9216,6 +9892,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -9230,6 +9907,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -9245,6 +9923,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -9260,6 +9939,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -9272,6 +9952,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -9291,6 +9972,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -9302,6 +9984,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -9313,6 +9996,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -9324,6 +10008,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -9335,6 +10020,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -9348,6 +10034,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -9361,6 +10048,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -9377,6 +10065,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -9393,6 +10082,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -9406,6 +10096,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -9424,6 +10115,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -9439,6 +10131,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -9451,6 +10144,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -9463,6 +10157,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -9475,6 +10170,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -9487,6 +10183,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -9500,6 +10197,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>EventDefinition</code>](#EventDefinition)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -9517,6 +10215,7 @@ FileTransfer MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [FileTransfer](#FileTransfer) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new FileTransfer(properties, buObject)](#new_FileTransfer_new)
     * [.retrieve(retrieveDir)](#FileTransfer+retrieve) ⇒ <code>Promise</code>
     * [.retrieveForCache()](#FileTransfer+retrieveForCache) ⇒ <code>Promise</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#FileTransfer+retrieveAsTemplate) ⇒ <code>Promise</code>
@@ -9557,6 +10256,17 @@ FileTransfer MetadataType
     * [.postDeleteTasks(customerKey)](#MetadataType+postDeleteTasks) ⇒ <code>void</code>
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
+
+<a name="new_FileTransfer_new"></a>
+
+### new FileTransfer(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="FileTransfer+retrieve"></a>
 
@@ -9665,6 +10375,7 @@ parses retrieved Metadata before saving
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -9678,6 +10389,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -9690,6 +10402,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -9704,6 +10417,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -9716,6 +10430,7 @@ Gets executed after deployment of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -9728,6 +10443,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -9741,6 +10457,7 @@ Gets metadata from Marketing Cloud
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -9754,6 +10471,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -9767,6 +10485,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -9781,6 +10500,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -9794,6 +10514,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -9808,6 +10529,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -9823,6 +10545,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -9838,6 +10561,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -9850,6 +10574,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -9869,6 +10594,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -9880,6 +10606,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -9891,6 +10618,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -9902,6 +10630,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -9913,6 +10642,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -9926,6 +10656,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -9939,6 +10670,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -9955,6 +10687,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -9971,6 +10704,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -9984,6 +10718,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -10002,6 +10737,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -10017,6 +10753,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -10029,6 +10766,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -10041,6 +10779,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -10053,6 +10792,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -10065,6 +10805,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -10078,6 +10819,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>FileTransfer</code>](#FileTransfer)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -10095,6 +10837,7 @@ Filter MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Filter](#Filter) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new Filter(properties, buObject)](#new_Filter_new)
     * [.retrieve(retrieveDir)](#Filter+retrieve) ⇒ <code>Promise</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType+getJsonFromFS) ⇒ <code>Object</code>
     * [.getFieldNamesToRetrieve([additionalFields])](#MetadataType+getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
@@ -10135,6 +10878,17 @@ Filter MetadataType
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
 
+<a name="new_Filter_new"></a>
+
+### new Filter(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
+
 <a name="Filter+retrieve"></a>
 
 ### filter.retrieve(retrieveDir) ⇒ <code>Promise</code>
@@ -10157,6 +10911,7 @@ Filters with the endpoint /automation/v1/filters/{id}
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -10170,6 +10925,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -10182,6 +10938,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -10196,6 +10953,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -10208,6 +10966,7 @@ Gets executed after deployment of metadata type
 Gets executed after retreive of metadata type
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>postRetrieveTasks</code>](#MetadataType+postRetrieveTasks)  
 **Returns**: <code>Util.MetadataTypeItem</code> - cloned metadata  
 
 | Param | Type | Description |
@@ -10222,6 +10981,7 @@ Gets executed after retreive of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -10234,6 +10994,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -10247,6 +11008,7 @@ Gets metadata from Marketing Cloud
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>retrieveForCache</code>](#MetadataType+retrieveForCache)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -10259,6 +11021,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>retrieveAsTemplate</code>](#MetadataType+retrieveAsTemplate)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -10274,6 +11037,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets executed before deploying metadata
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>preDeployTasks</code>](#MetadataType+preDeployTasks)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeItem&gt;</code> - Promise of a single metadata item  
 
 | Param | Type | Description |
@@ -10287,6 +11051,7 @@ Gets executed before deploying metadata
 Abstract create method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>create</code>](#MetadataType+create)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -10299,6 +11064,7 @@ Abstract create method that needs to be implemented in child metadata type
 Abstract update method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>update</code>](#MetadataType+update)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -10311,6 +11077,7 @@ Abstract update method that needs to be implemented in child metadata type
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -10324,6 +11091,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -10337,6 +11105,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -10351,6 +11120,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -10364,6 +11134,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -10378,6 +11149,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -10393,6 +11165,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -10408,6 +11181,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -10420,6 +11194,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -10439,6 +11214,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -10450,6 +11226,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -10461,6 +11238,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -10472,6 +11250,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -10483,6 +11262,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -10496,6 +11276,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -10509,6 +11290,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -10525,6 +11307,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -10541,6 +11324,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -10554,6 +11338,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -10572,6 +11357,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -10587,6 +11373,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -10599,6 +11386,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -10611,6 +11399,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -10623,6 +11412,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -10635,6 +11425,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -10648,6 +11439,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -10665,6 +11457,7 @@ Folder MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Folder](#Folder) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new Folder(properties, buObject)](#new_Folder_new)
     * [.retrieve(retrieveDir, [additionalFields])](#Folder+retrieve) ⇒ <code>Promise</code>
     * [.retrieveForCache()](#Folder+retrieveForCache) ⇒ <code>Promise</code>
     * [.upsert(metadata)](#Folder+upsert) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -10705,6 +11498,17 @@ Folder MetadataType
     * [.postDeleteTasks(customerKey)](#MetadataType+postDeleteTasks) ⇒ <code>void</code>
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
+
+<a name="new_Folder_new"></a>
+
+### new Folder(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="Folder+retrieve"></a>
 
@@ -10843,6 +11647,7 @@ Helper for writing Metadata to disk, used for Retrieve and deploy
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -10855,6 +11660,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -10869,6 +11675,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -10881,6 +11688,7 @@ Gets executed after deployment of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -10893,6 +11701,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -10906,6 +11715,7 @@ Gets metadata from Marketing Cloud
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>retrieveAsTemplate</code>](#MetadataType+retrieveAsTemplate)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -10921,6 +11731,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -10934,6 +11745,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -10948,6 +11760,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -10961,6 +11774,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -10975,6 +11789,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -10990,6 +11805,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -11005,6 +11821,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -11017,6 +11834,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -11036,6 +11854,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -11047,6 +11866,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -11058,6 +11878,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -11069,6 +11890,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -11080,6 +11902,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -11093,6 +11916,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -11107,6 +11931,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -11123,6 +11948,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -11136,6 +11962,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -11154,6 +11981,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -11169,6 +11997,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -11181,6 +12010,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -11193,6 +12023,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -11205,6 +12036,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -11217,6 +12049,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -11230,6 +12063,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>Folder</code>](#Folder)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -11247,6 +12081,7 @@ ImportFile MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [FtpLocation](#FtpLocation) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new FtpLocation(properties, buObject)](#new_FtpLocation_new)
     * [.retrieve(retrieveDir)](#FtpLocation+retrieve) ⇒ <code>Promise</code>
     * [.retrieveForCache()](#FtpLocation+retrieveForCache) ⇒ <code>Promise</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType+getJsonFromFS) ⇒ <code>Object</code>
@@ -11287,6 +12122,17 @@ ImportFile MetadataType
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
 
+<a name="new_FtpLocation_new"></a>
+
+### new FtpLocation(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
+
 <a name="FtpLocation+retrieve"></a>
 
 ### ftpLocation.retrieve(retrieveDir) ⇒ <code>Promise</code>
@@ -11315,6 +12161,7 @@ Retrieves folder metadata into local filesystem. Also creates a uniquePath attri
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -11328,6 +12175,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -11340,6 +12188,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -11354,6 +12203,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -11366,6 +12216,7 @@ Gets executed after deployment of metadata type
 Gets executed after retreive of metadata type
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>postRetrieveTasks</code>](#MetadataType+postRetrieveTasks)  
 **Returns**: <code>Util.MetadataTypeItem</code> - cloned metadata  
 
 | Param | Type | Description |
@@ -11380,6 +12231,7 @@ Gets executed after retreive of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -11392,6 +12244,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -11405,6 +12258,7 @@ Gets metadata from Marketing Cloud
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>retrieveAsTemplate</code>](#MetadataType+retrieveAsTemplate)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -11420,6 +12274,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets executed before deploying metadata
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>preDeployTasks</code>](#MetadataType+preDeployTasks)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeItem&gt;</code> - Promise of a single metadata item  
 
 | Param | Type | Description |
@@ -11433,6 +12288,7 @@ Gets executed before deploying metadata
 Abstract create method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>create</code>](#MetadataType+create)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -11445,6 +12301,7 @@ Abstract create method that needs to be implemented in child metadata type
 Abstract update method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>update</code>](#MetadataType+update)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -11457,6 +12314,7 @@ Abstract update method that needs to be implemented in child metadata type
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -11470,6 +12328,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -11483,6 +12342,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -11497,6 +12357,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -11510,6 +12371,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -11524,6 +12386,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -11539,6 +12402,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -11554,6 +12418,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -11566,6 +12431,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -11585,6 +12451,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -11596,6 +12463,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -11607,6 +12475,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -11618,6 +12487,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -11629,6 +12499,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -11642,6 +12513,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -11655,6 +12527,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -11671,6 +12544,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -11687,6 +12561,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -11700,6 +12575,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -11718,6 +12594,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -11733,6 +12610,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -11745,6 +12623,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -11757,6 +12636,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -11769,6 +12649,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -11781,6 +12662,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -11794,6 +12676,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>FtpLocation</code>](#FtpLocation)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -11811,6 +12694,7 @@ ImportFile MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [ImportFile](#ImportFile) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new ImportFile(properties, buObject)](#new_ImportFile_new)
     * [.retrieve(retrieveDir)](#ImportFile+retrieve) ⇒ <code>Promise</code>
     * [.retrieveForCache()](#ImportFile+retrieveForCache) ⇒ <code>Promise</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#ImportFile+retrieveAsTemplate) ⇒ <code>Promise</code>
@@ -11851,6 +12735,17 @@ ImportFile MetadataType
     * [.postDeleteTasks(customerKey)](#MetadataType+postDeleteTasks) ⇒ <code>void</code>
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
+
+<a name="new_ImportFile_new"></a>
+
+### new ImportFile(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="ImportFile+retrieve"></a>
 
@@ -11960,6 +12855,7 @@ parses retrieved Metadata before saving
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -11973,6 +12869,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -11985,6 +12882,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -11999,6 +12897,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -12011,6 +12910,7 @@ Gets executed after deployment of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -12023,6 +12923,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -12036,6 +12937,7 @@ Gets metadata from Marketing Cloud
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -12049,6 +12951,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -12062,6 +12965,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -12076,6 +12980,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -12089,6 +12994,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -12103,6 +13009,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -12118,6 +13025,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -12133,6 +13041,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -12145,6 +13054,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -12164,6 +13074,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -12175,6 +13086,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -12186,6 +13098,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -12197,6 +13110,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -12208,6 +13122,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -12221,6 +13136,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -12234,6 +13150,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -12250,6 +13167,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -12266,6 +13184,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -12279,6 +13198,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -12297,6 +13217,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -12312,6 +13233,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -12324,6 +13246,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -12336,6 +13259,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -12348,6 +13272,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -12360,6 +13285,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -12373,6 +13299,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>ImportFile</code>](#ImportFile)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -12390,6 +13317,7 @@ Script MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Interaction](#Interaction) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new Interaction(properties, buObject)](#new_Interaction_new)
     * [.retrieve(retrieveDir)](#Interaction+retrieve) ⇒ <code>Promise</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType+getJsonFromFS) ⇒ <code>Object</code>
     * [.getFieldNamesToRetrieve([additionalFields])](#MetadataType+getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
@@ -12430,6 +13358,17 @@ Script MetadataType
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
 
+<a name="new_Interaction_new"></a>
+
+### new Interaction(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
+
 <a name="Interaction+retrieve"></a>
 
 ### interaction.retrieve(retrieveDir) ⇒ <code>Promise</code>
@@ -12450,6 +13389,7 @@ Endpoint /interaction/v1/interactions?extras=all&pageSize=50000 return 50000 Scr
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -12463,6 +13403,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -12475,6 +13416,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -12489,6 +13431,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -12501,6 +13444,7 @@ Gets executed after deployment of metadata type
 Gets executed after retreive of metadata type
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>postRetrieveTasks</code>](#MetadataType+postRetrieveTasks)  
 **Returns**: <code>Util.MetadataTypeItem</code> - cloned metadata  
 
 | Param | Type | Description |
@@ -12515,6 +13459,7 @@ Gets executed after retreive of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -12527,6 +13472,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -12540,6 +13486,7 @@ Gets metadata from Marketing Cloud
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>retrieveForCache</code>](#MetadataType+retrieveForCache)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -12552,6 +13499,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>retrieveAsTemplate</code>](#MetadataType+retrieveAsTemplate)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -12567,6 +13515,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets executed before deploying metadata
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>preDeployTasks</code>](#MetadataType+preDeployTasks)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeItem&gt;</code> - Promise of a single metadata item  
 
 | Param | Type | Description |
@@ -12580,6 +13529,7 @@ Gets executed before deploying metadata
 Abstract create method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>create</code>](#MetadataType+create)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -12592,6 +13542,7 @@ Abstract create method that needs to be implemented in child metadata type
 Abstract update method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>update</code>](#MetadataType+update)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -12604,6 +13555,7 @@ Abstract update method that needs to be implemented in child metadata type
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -12617,6 +13569,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -12630,6 +13583,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -12644,6 +13598,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -12657,6 +13612,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -12671,6 +13627,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -12686,6 +13643,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -12701,6 +13659,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -12713,6 +13672,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -12732,6 +13692,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -12743,6 +13704,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -12754,6 +13716,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -12765,6 +13728,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -12776,6 +13740,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -12789,6 +13754,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -12802,6 +13768,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -12818,6 +13785,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -12834,6 +13802,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -12847,6 +13816,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -12865,6 +13835,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -12880,6 +13851,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -12892,6 +13864,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -12904,6 +13877,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -12916,6 +13890,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -12928,6 +13903,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -12941,6 +13917,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -12958,6 +13935,7 @@ List MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [List](#List) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new List(properties, buObject)](#new_List_new)
     * [.retrieve(retrieveDir)](#List+retrieve) ⇒ <code>Promise</code>
     * [.retrieveForCache()](#List+retrieveForCache) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.deleteByKey(customerKey)](#List+deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -12998,6 +13976,17 @@ List MetadataType
     * [.postDeleteTasks(customerKey)](#MetadataType+postDeleteTasks) ⇒ <code>void</code>
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
+
+<a name="new_List_new"></a>
+
+### new List(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="List+retrieve"></a>
 
@@ -13065,6 +14054,7 @@ parses retrieved Metadata before saving
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -13078,6 +14068,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -13090,6 +14081,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -13104,6 +14096,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -13116,6 +14109,7 @@ Gets executed after deployment of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -13128,6 +14122,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -13141,6 +14136,7 @@ Gets metadata from Marketing Cloud
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>retrieveAsTemplate</code>](#MetadataType+retrieveAsTemplate)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -13156,6 +14152,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets executed before deploying metadata
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>preDeployTasks</code>](#MetadataType+preDeployTasks)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeItem&gt;</code> - Promise of a single metadata item  
 
 | Param | Type | Description |
@@ -13169,6 +14166,7 @@ Gets executed before deploying metadata
 Abstract create method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>create</code>](#MetadataType+create)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -13181,6 +14179,7 @@ Abstract create method that needs to be implemented in child metadata type
 Abstract update method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>update</code>](#MetadataType+update)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -13193,6 +14192,7 @@ Abstract update method that needs to be implemented in child metadata type
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -13206,6 +14206,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -13219,6 +14220,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -13233,6 +14235,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -13246,6 +14249,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -13260,6 +14264,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -13275,6 +14280,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -13290,6 +14296,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -13302,6 +14309,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -13321,6 +14329,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -13332,6 +14341,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -13343,6 +14353,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -13354,6 +14365,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -13365,6 +14377,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -13378,6 +14391,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -13391,6 +14405,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -13407,6 +14422,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -13423,6 +14439,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -13436,6 +14453,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -13454,6 +14472,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -13469,6 +14488,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -13481,6 +14501,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -13493,6 +14514,7 @@ Gets metadata cache with limited fields and does not store value to disk
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -13505,6 +14527,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -13518,6 +14541,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>List</code>](#List)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -13535,6 +14559,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 **Kind**: global class  
 
 * [MetadataType](#MetadataType)
+    * [new MetadataType(properties, buObject)](#new_MetadataType_new)
     * _instance_
         * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType+getJsonFromFS) ⇒ <code>Object</code>
         * [.getFieldNamesToRetrieve([additionalFields])](#MetadataType+getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
@@ -13580,6 +14605,17 @@ Provides default functionality that can be overwritten by child metadata type cl
         * [.properties](#MetadataType.properties) : <code>Util.MultiMetadataTypeMap</code>
         * [.subType](#MetadataType.subType) : <code>string</code>
         * [.buObject](#MetadataType.buObject) : <code>Object</code>
+
+<a name="new_MetadataType_new"></a>
+
+### new MetadataType(properties, buObject)
+Returns file contents mapped to their filename without '.json' ending
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="MetadataType+getJsonFromFS"></a>
 
@@ -14125,6 +15161,7 @@ MobileCode MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [MobileCode](#MobileCode) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new MobileCode(properties, buObject)](#new_MobileCode_new)
     * [.retrieve(retrieveDir)](#MobileCode+retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.retrieveForCache()](#MobileCode+retrieveForCache) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType+getJsonFromFS) ⇒ <code>Object</code>
@@ -14165,6 +15202,17 @@ MobileCode MetadataType
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
 
+<a name="new_MobileCode_new"></a>
+
+### new MobileCode(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
+
 <a name="MobileCode+retrieve"></a>
 
 ### mobileCode.retrieve(retrieveDir) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -14193,6 +15241,7 @@ Retrieves event definition metadata for caching
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -14206,6 +15255,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -14218,6 +15268,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -14232,6 +15283,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -14244,6 +15296,7 @@ Gets executed after deployment of metadata type
 Gets executed after retreive of metadata type
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>postRetrieveTasks</code>](#MetadataType+postRetrieveTasks)  
 **Returns**: <code>Util.MetadataTypeItem</code> - cloned metadata  
 
 | Param | Type | Description |
@@ -14258,6 +15311,7 @@ Gets executed after retreive of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -14270,6 +15324,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -14283,6 +15338,7 @@ Gets metadata from Marketing Cloud
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>retrieveAsTemplate</code>](#MetadataType+retrieveAsTemplate)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -14298,6 +15354,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets executed before deploying metadata
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>preDeployTasks</code>](#MetadataType+preDeployTasks)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeItem&gt;</code> - Promise of a single metadata item  
 
 | Param | Type | Description |
@@ -14311,6 +15368,7 @@ Gets executed before deploying metadata
 Abstract create method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>create</code>](#MetadataType+create)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -14323,6 +15381,7 @@ Abstract create method that needs to be implemented in child metadata type
 Abstract update method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>update</code>](#MetadataType+update)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -14335,6 +15394,7 @@ Abstract update method that needs to be implemented in child metadata type
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -14348,6 +15408,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -14361,6 +15422,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -14375,6 +15437,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -14388,6 +15451,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -14402,6 +15466,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -14417,6 +15482,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -14432,6 +15498,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -14444,6 +15511,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -14463,6 +15531,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -14474,6 +15543,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -14485,6 +15555,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -14496,6 +15567,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -14507,6 +15579,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -14520,6 +15593,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -14533,6 +15607,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -14549,6 +15624,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -14565,6 +15641,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -14578,6 +15655,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -14596,6 +15674,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -14611,6 +15690,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -14623,6 +15703,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -14635,6 +15716,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -14647,6 +15729,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -14659,6 +15742,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -14672,6 +15756,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>MobileCode</code>](#MobileCode)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -14689,6 +15774,7 @@ MobileKeyword MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [MobileKeyword](#MobileKeyword) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new MobileKeyword(properties, buObject)](#new_MobileKeyword_new)
     * [.retrieve(retrieveDir)](#MobileKeyword+retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.retrieveForCache()](#MobileKeyword+retrieveForCache) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#MobileKeyword+retrieveAsTemplate) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -14728,6 +15814,17 @@ MobileKeyword MetadataType
     * [.postDeleteTasks(customerKey)](#MetadataType+postDeleteTasks) ⇒ <code>void</code>
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
+
+<a name="new_MobileKeyword_new"></a>
+
+### new MobileKeyword(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="MobileKeyword+retrieve"></a>
 
@@ -14798,6 +15895,7 @@ prepares an event definition for deployment
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -14811,6 +15909,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -14823,6 +15922,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -14837,6 +15937,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -14849,6 +15950,7 @@ Gets executed after deployment of metadata type
 Gets executed after retreive of metadata type
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>postRetrieveTasks</code>](#MetadataType+postRetrieveTasks)  
 **Returns**: <code>Util.MetadataTypeItem</code> - cloned metadata  
 
 | Param | Type | Description |
@@ -14863,6 +15965,7 @@ Gets executed after retreive of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -14875,6 +15978,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -14888,6 +15992,7 @@ Gets metadata from Marketing Cloud
 Abstract update method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>update</code>](#MetadataType+update)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -14900,6 +16005,7 @@ Abstract update method that needs to be implemented in child metadata type
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -14913,6 +16019,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -14926,6 +16033,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -14940,6 +16048,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -14953,6 +16062,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -14967,6 +16077,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -14982,6 +16093,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -14997,6 +16109,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -15009,6 +16122,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -15028,6 +16142,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -15039,6 +16154,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -15050,6 +16166,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -15061,6 +16178,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -15072,6 +16190,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -15085,6 +16204,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -15098,6 +16218,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -15114,6 +16235,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -15130,6 +16252,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -15143,6 +16266,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -15161,6 +16285,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -15176,6 +16301,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -15188,6 +16314,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -15200,6 +16327,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -15212,6 +16340,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -15224,6 +16353,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -15237,6 +16367,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -15254,6 +16385,7 @@ Query MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Query](#Query) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new Query(properties, buObject)](#new_Query_new)
     * [.retrieve(retrieveDir)](#Query+retrieve) ⇒ <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code>
     * [.retrieveForCache()](#Query+retrieveForCache) ⇒ <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Query+retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code>
@@ -15294,6 +16426,17 @@ Query MetadataType
     * [.postDeleteTasks(customerKey)](#MetadataType+postDeleteTasks) ⇒ <code>void</code>
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
+
+<a name="new_Query_new"></a>
+
+### new Query(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="Query+retrieve"></a>
 
@@ -15422,6 +16565,7 @@ parses retrieved Metadata before saving
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -15435,6 +16579,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -15447,6 +16592,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -15461,6 +16607,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -15473,6 +16620,7 @@ Gets executed after deployment of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -15485,6 +16633,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -15498,6 +16647,7 @@ Gets metadata from Marketing Cloud
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -15511,6 +16661,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -15524,6 +16675,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -15538,6 +16690,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -15551,6 +16704,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -15565,6 +16719,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -15580,6 +16735,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -15595,6 +16751,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -15607,6 +16764,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -15626,6 +16784,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -15637,6 +16796,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -15648,6 +16808,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -15659,6 +16820,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -15670,6 +16832,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -15683,6 +16846,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -15696,6 +16860,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -15711,6 +16876,7 @@ Helper for writing Metadata to disk, used for Retrieve and deploy
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -15724,6 +16890,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -15742,6 +16909,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -15757,6 +16925,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -15769,6 +16938,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -15781,6 +16951,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -15793,6 +16964,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -15805,6 +16977,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -15818,6 +16991,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>Query</code>](#Query)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -15835,6 +17009,7 @@ ImportFile MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Role](#Role) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new Role(properties, buObject)](#new_Role_new)
     * [.retrieve(retrieveDir)](#Role+retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.preDeployTasks(metadata)](#Role+preDeployTasks) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.create(metadata)](#Role+create) ⇒ <code>Promise</code>
@@ -15875,6 +17050,17 @@ ImportFile MetadataType
     * [.postDeleteTasks(customerKey)](#MetadataType+postDeleteTasks) ⇒ <code>void</code>
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
+
+<a name="new_Role_new"></a>
+
+### new Role(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="Role+retrieve"></a>
 
@@ -15961,6 +17147,7 @@ iterates through permissions to output proper row-names for nested permissionss
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -15974,6 +17161,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -15986,6 +17174,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -16000,6 +17189,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -16012,6 +17202,7 @@ Gets executed after deployment of metadata type
 Gets executed after retreive of metadata type
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>postRetrieveTasks</code>](#MetadataType+postRetrieveTasks)  
 **Returns**: <code>Util.MetadataTypeItem</code> - cloned metadata  
 
 | Param | Type | Description |
@@ -16026,6 +17217,7 @@ Gets executed after retreive of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -16038,6 +17230,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -16051,6 +17244,7 @@ Gets metadata from Marketing Cloud
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>retrieveForCache</code>](#MetadataType+retrieveForCache)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -16063,6 +17257,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>retrieveAsTemplate</code>](#MetadataType+retrieveAsTemplate)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -16078,6 +17273,7 @@ Gets metadata cache with limited fields and does not store value to disk
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -16091,6 +17287,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -16104,6 +17301,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -16118,6 +17316,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -16131,6 +17330,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -16145,6 +17345,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -16160,6 +17361,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -16175,6 +17377,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -16187,6 +17390,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -16206,6 +17410,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -16217,6 +17422,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -16228,6 +17434,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -16239,6 +17446,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -16250,6 +17458,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -16263,6 +17472,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -16276,6 +17486,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -16292,6 +17503,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -16308,6 +17520,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -16321,6 +17534,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -16339,6 +17553,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -16354,6 +17569,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -16366,6 +17582,7 @@ Standardizes a check for multiple messages
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -16378,6 +17595,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -16390,6 +17608,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -16403,6 +17622,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -16420,6 +17640,7 @@ Script MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Script](#Script) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new Script(properties, buObject)](#new_Script_new)
     * [.retrieve(retrieveDir)](#Script+retrieve) ⇒ <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code>
     * [.retrieveForCache()](#Script+retrieveForCache) ⇒ <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Script+retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code>
@@ -16461,6 +17682,17 @@ Script MetadataType
     * [.postDeleteTasks(customerKey)](#MetadataType+postDeleteTasks) ⇒ <code>void</code>
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
+
+<a name="new_Script_new"></a>
+
+### new Script(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="Script+retrieve"></a>
 
@@ -16604,6 +17836,7 @@ Splits the script metadata into two parts and parses in a standard manner
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -16617,6 +17850,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -16629,6 +17863,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -16643,6 +17878,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -16655,6 +17891,7 @@ Gets executed after deployment of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -16667,6 +17904,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -16680,6 +17918,7 @@ Gets metadata from Marketing Cloud
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -16693,6 +17932,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -16706,6 +17946,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -16720,6 +17961,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -16733,6 +17975,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -16747,6 +17990,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -16762,6 +18006,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -16777,6 +18022,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -16789,6 +18035,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -16808,6 +18055,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -16819,6 +18067,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -16830,6 +18079,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -16841,6 +18091,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -16852,6 +18103,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -16865,6 +18117,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -16878,6 +18131,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -16893,6 +18147,7 @@ Helper for writing Metadata to disk, used for Retrieve and deploy
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -16906,6 +18161,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -16924,6 +18180,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -16939,6 +18196,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -16951,6 +18209,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -16963,6 +18222,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -16975,6 +18235,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -16987,6 +18248,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -17000,6 +18262,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>Script</code>](#Script)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -17017,6 +18280,7 @@ SetDefinition MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [SetDefinition](#SetDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new SetDefinition(properties, buObject)](#new_SetDefinition_new)
     * [.retrieve(retrieveDir)](#SetDefinition+retrieve) ⇒ <code>Promise</code>
     * [.retrieveForCache()](#SetDefinition+retrieveForCache) ⇒ <code>Promise</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType+getJsonFromFS) ⇒ <code>Object</code>
@@ -17057,6 +18321,17 @@ SetDefinition MetadataType
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
 
+<a name="new_SetDefinition_new"></a>
+
+### new SetDefinition(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
+
 <a name="SetDefinition+retrieve"></a>
 
 ### setDefinition.retrieve(retrieveDir) ⇒ <code>Promise</code>
@@ -17084,6 +18359,7 @@ Retrieves Metadata of schema set definitions for caching.
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -17097,6 +18373,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -17109,6 +18386,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -17123,6 +18401,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -17135,6 +18414,7 @@ Gets executed after deployment of metadata type
 Gets executed after retreive of metadata type
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>postRetrieveTasks</code>](#MetadataType+postRetrieveTasks)  
 **Returns**: <code>Util.MetadataTypeItem</code> - cloned metadata  
 
 | Param | Type | Description |
@@ -17149,6 +18429,7 @@ Gets executed after retreive of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -17161,6 +18442,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -17174,6 +18456,7 @@ Gets metadata from Marketing Cloud
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>retrieveAsTemplate</code>](#MetadataType+retrieveAsTemplate)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -17189,6 +18472,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets executed before deploying metadata
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>preDeployTasks</code>](#MetadataType+preDeployTasks)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeItem&gt;</code> - Promise of a single metadata item  
 
 | Param | Type | Description |
@@ -17202,6 +18486,7 @@ Gets executed before deploying metadata
 Abstract create method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>create</code>](#MetadataType+create)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -17214,6 +18499,7 @@ Abstract create method that needs to be implemented in child metadata type
 Abstract update method that needs to be implemented in child metadata type
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>update</code>](#MetadataType+update)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -17226,6 +18512,7 @@ Abstract update method that needs to be implemented in child metadata type
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -17239,6 +18526,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -17252,6 +18540,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -17266,6 +18555,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -17279,6 +18569,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -17293,6 +18584,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -17308,6 +18600,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -17323,6 +18616,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -17335,6 +18629,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -17354,6 +18649,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -17365,6 +18661,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -17376,6 +18673,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -17387,6 +18685,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -17398,6 +18697,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -17411,6 +18711,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -17424,6 +18725,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -17440,6 +18742,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -17456,6 +18759,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -17469,6 +18773,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -17487,6 +18792,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -17502,6 +18808,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -17514,6 +18821,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -17526,6 +18834,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Delete a metadata item from the specified business unit
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>deleteByKey</code>](#MetadataType+deleteByKey)  
 **Returns**: <code>boolean</code> - deletion success status  
 
 | Param | Type | Description |
@@ -17538,6 +18847,7 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -17550,6 +18860,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -17563,6 +18874,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>SetDefinition</code>](#SetDefinition)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -17580,6 +18892,7 @@ MessageSendActivity MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [TriggeredSendDefinition](#TriggeredSendDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [new TriggeredSendDefinition(properties, buObject)](#new_TriggeredSendDefinition_new)
     * [.retrieve(retrieveDir)](#TriggeredSendDefinition+retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.create(metadata)](#TriggeredSendDefinition+create) ⇒ <code>Promise</code>
     * [.update(metadata)](#TriggeredSendDefinition+update) ⇒ <code>Promise</code>
@@ -17620,6 +18933,17 @@ MessageSendActivity MetadataType
     * [.postDeleteTasks(customerKey)](#MetadataType+postDeleteTasks) ⇒ <code>void</code>
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType+deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType+readBUMetadataForType) ⇒ <code>Object</code>
+
+<a name="new_TriggeredSendDefinition_new"></a>
+
+### new TriggeredSendDefinition(properties, buObject)
+Construtor method
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="TriggeredSendDefinition+retrieve"></a>
 
@@ -17717,6 +19041,7 @@ prepares a TSD for deployment
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>getJsonFromFS</code>](#MetadataType+getJsonFromFS)  
 **Returns**: <code>Object</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
@@ -17730,6 +19055,7 @@ Returns file contents mapped to their filename without '.json' ending
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>getFieldNamesToRetrieve</code>](#MetadataType+getFieldNamesToRetrieve)  
 **Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
 
 | Param | Type | Description |
@@ -17742,6 +19068,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 Deploys metadata
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>deploy</code>](#MetadataType+deploy)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -17756,6 +19083,7 @@ Deploys metadata
 Gets executed after deployment of metadata type
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>postDeployTasks</code>](#MetadataType+postDeployTasks)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -17768,6 +19096,7 @@ Gets executed after deployment of metadata type
 used to synchronize name and external key during retrieveAsTemplate
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>overrideKeyWithName</code>](#MetadataType+overrideKeyWithName)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -17780,6 +19109,7 @@ used to synchronize name and external key during retrieveAsTemplate
 Gets metadata from Marketing Cloud
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>retrieveChangelog</code>](#MetadataType+retrieveChangelog)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -17793,6 +19123,7 @@ Gets metadata from Marketing Cloud
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>retrieveForCache</code>](#MetadataType+retrieveForCache)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -17805,6 +19136,7 @@ Gets metadata cache with limited fields and does not store value to disk
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>retrieveAsTemplate</code>](#MetadataType+retrieveAsTemplate)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
@@ -17820,6 +19152,7 @@ Gets metadata cache with limited fields and does not store value to disk
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>upsert</code>](#MetadataType+upsert)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -17833,6 +19166,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 Creates a single metadata entry via REST
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>createREST</code>](#MetadataType+createREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -17846,6 +19180,7 @@ Creates a single metadata entry via REST
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>createSOAP</code>](#MetadataType+createSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -17860,6 +19195,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 Updates a single metadata entry via REST
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>updateREST</code>](#MetadataType+updateREST)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -17873,6 +19209,7 @@ Updates a single metadata entry via REST
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>updateSOAP</code>](#MetadataType+updateSOAP)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -17887,6 +19224,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>retrieveSOAP</code>](#MetadataType+retrieveSOAP)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -17902,6 +19240,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 Retrieves Metadata for Rest Types
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>retrieveREST</code>](#MetadataType+retrieveREST)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -17917,6 +19256,7 @@ Retrieves Metadata for Rest Types
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>parseResponseBody</code>](#MetadataType+parseResponseBody)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -17929,6 +19269,7 @@ Builds map of metadata entries mapped to their keyfields
 Deletes a field in a metadata entry if the selected definition property equals false.
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>deleteFieldByDefinition</code>](#MetadataType+deleteFieldByDefinition)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -17948,6 +19289,7 @@ deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
 Remove fields from metadata entry that are not createable
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>removeNotCreateableFields</code>](#MetadataType+removeNotCreateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -17959,6 +19301,7 @@ Remove fields from metadata entry that are not createable
 Remove fields from metadata entry that are not updateable
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>removeNotUpdateableFields</code>](#MetadataType+removeNotUpdateableFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -17970,6 +19313,7 @@ Remove fields from metadata entry that are not updateable
 Remove fields from metadata entry that are not needed in the template
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>keepTemplateFields</code>](#MetadataType+keepTemplateFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -17981,6 +19325,7 @@ Remove fields from metadata entry that are not needed in the template
 Remove fields from metadata entry that are not needed in the stored metadata
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>keepRetrieveFields</code>](#MetadataType+keepRetrieveFields)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -17992,6 +19337,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 checks if the current metadata entry should be saved on retrieve or not
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>isFiltered</code>](#MetadataType+isFiltered)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
 | Param | Type | Default | Description |
@@ -18005,6 +19351,7 @@ checks if the current metadata entry should be saved on retrieve or not
 optionally filter by what folder something is in
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>isFilteredFolder</code>](#MetadataType+isFilteredFolder)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
 | Param | Type | Default | Description |
@@ -18018,6 +19365,7 @@ optionally filter by what folder something is in
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>saveResults</code>](#MetadataType+saveResults)  
 **Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
@@ -18034,6 +19382,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>buildDefinitionForExtracts</code>](#MetadataType+buildDefinitionForExtracts)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -18050,6 +19399,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>findSubType</code>](#MetadataType+findSubType)  
 **Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
@@ -18063,6 +19413,7 @@ check template directory for complex types that open subfolders for their subtyp
 optional method used for some types to try a different folder structure
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>readSecondaryFolder</code>](#MetadataType+readSecondaryFolder)  
 **Returns**: <code>Object</code> - metadata  
 
 | Param | Type | Description |
@@ -18081,6 +19432,7 @@ NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>buildDefinition</code>](#MetadataType+buildDefinition)  
 **Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
@@ -18096,6 +19448,7 @@ parsing is required (for example scripts & queries)
 Standardizes a check for multiple messages
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>checkForErrors</code>](#MetadataType+checkForErrors)  
 **Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
@@ -18108,6 +19461,7 @@ Standardizes a check for multiple messages
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>document</code>](#MetadataType+document)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -18120,6 +19474,7 @@ Gets metadata cache with limited fields and does not store value to disk
 clean up after deleting a metadata item
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>postDeleteTasks</code>](#MetadataType+postDeleteTasks)  
 **Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
@@ -18132,6 +19487,7 @@ clean up after deleting a metadata item
 Delete a data extension from the specified business unit
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>deleteByKeySOAP</code>](#MetadataType+deleteByKeySOAP)  
 **Returns**: <code>boolean</code> - deletion success flag  
 
 | Param | Type | Description |
@@ -18145,6 +19501,7 @@ Delete a data extension from the specified business unit
 Returns metadata of a business unit that is saved locally
 
 **Kind**: instance method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Overrides**: [<code>readBUMetadataForType</code>](#MetadataType+readBUMetadataForType)  
 **Returns**: <code>Object</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
@@ -20169,6 +21526,7 @@ REST format
 **Kind**: global typedef  
 
 * [MetadataType](#MetadataType) : <code>require(&#x27;../metadataTypes/MetadataType.js&#x27;)</code>
+    * [new MetadataType(properties, buObject)](#new_MetadataType_new)
     * _instance_
         * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType+getJsonFromFS) ⇒ <code>Object</code>
         * [.getFieldNamesToRetrieve([additionalFields])](#MetadataType+getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
@@ -20214,6 +21572,17 @@ REST format
         * [.properties](#MetadataType.properties) : <code>Util.MultiMetadataTypeMap</code>
         * [.subType](#MetadataType.subType) : <code>string</code>
         * [.buObject](#MetadataType.buObject) : <code>Object</code>
+
+<a name="new_MetadataType_new"></a>
+
+### new MetadataType(properties, buObject)
+Returns file contents mapped to their filename without '.json' ending
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="MetadataType+getJsonFromFS"></a>
 
@@ -20782,6 +22151,7 @@ Returns metadata of a business unit that is saved locally
 **Kind**: global typedef  
 
 * [MetadataType](#MetadataType) : <code>require(&#x27;../metadataTypes/MetadataType.js&#x27;)</code>
+    * [new MetadataType(properties, buObject)](#new_MetadataType_new)
     * _instance_
         * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType+getJsonFromFS) ⇒ <code>Object</code>
         * [.getFieldNamesToRetrieve([additionalFields])](#MetadataType+getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
@@ -20827,6 +22197,17 @@ Returns metadata of a business unit that is saved locally
         * [.properties](#MetadataType.properties) : <code>Util.MultiMetadataTypeMap</code>
         * [.subType](#MetadataType.subType) : <code>string</code>
         * [.buObject](#MetadataType.buObject) : <code>Object</code>
+
+<a name="new_MetadataType_new"></a>
+
+### new MetadataType(properties, buObject)
+Returns file contents mapped to their filename without '.json' ending
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| buObject | <code>auth.BuObject</code> | details of business unit in processing |
 
 <a name="MetadataType+getJsonFromFS"></a>
 
