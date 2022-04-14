@@ -1,11 +1,10 @@
 {
     "env": {
         "es6": true,
-        "node": true,
-        "mocha": true
+        "node": true
     },
     "extends": ["eslint:recommended", "prettier", "ssjs"],
-    "plugins": ["mocha", "prettier"],
+    "plugins": ["prettier"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -17,7 +16,6 @@
     "rules": {
         "arrow-body-style": ["error", "as-needed"],
         "curly": "error",
-        "mocha/no-exclusive-tests": "error",
         "no-console": "off",
         "require-jsdoc": [
             "warn",

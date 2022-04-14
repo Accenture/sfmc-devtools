@@ -64,6 +64,9 @@ as this is a configuration in the EID</p>
 <dt><a href="#Filter">Filter</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>Filter MetadataType</p>
 </dd>
+<dt><a href="#FilterDefinition">FilterDefinition</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>FilterDefinition MetadataType</p>
+</dd>
 <dt><a href="#Folder">Folder</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>Folder MetadataType</p>
 </dd>
@@ -82,6 +85,12 @@ as this is a configuration in the EID</p>
 <dt><a href="#MetadataType">MetadataType</a></dt>
 <dd><p>MetadataType class that gets extended by their specific metadata type class.
 Provides default functionality that can be overwritten by child metadata type classes</p>
+</dd>
+<dt><a href="#MobileCode">MobileCode</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>MobileCode MetadataType</p>
+</dd>
+<dt><a href="#MobileKeyword">MobileKeyword</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>MobileKeyword MetadataType</p>
 </dd>
 <dt><a href="#Query">Query</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>Query MetadataType</p>
@@ -174,13 +183,20 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dd></dd>
 <dt><a href="#DataExtensionFieldMap">DataExtensionFieldMap</a> : <code>Object</code></dt>
 <dd></dd>
-<dt><a href="#MultiMetadataTypeMap">MultiMetadataTypeMap</a> : <code>Object.&lt;string, any&gt;</code></dt>
+<dt><a href="#FilterMap">FilterMap</a> : <code>Object</code></dt>
+<dd></dd>
+<dt><a href="#FilterDefinitionMap">FilterDefinitionMap</a> : <code>Object</code></dt>
+<dd><p>/automation/v1/filterdefinitions/<id> (not used)</p>
+</dd>
+<dt><a href="#CodeExtract">CodeExtract</a> : <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#CodeExtractItem">CodeExtractItem</a> : <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#CodeExtractItem">CodeExtractItem</a> : <code>Object</code></dt>
 <dd></dd>
-<dt><a href="#TemplateMap">TemplateMap</a> : <code>Object.&lt;string, string&gt;</code></dt>
+<dt><a href="#MetadataType">MetadataType</a> : <code>require(&#x27;../metadataTypes/MetadataType.js&#x27;)</code></dt>
+<dd></dd>
+<dt><a href="#MultiMetadataTypeList">MultiMetadataTypeList</a> : <code>Object.&lt;string, string&gt;</code></dt>
 <dd></dd>
 </dl>
 
@@ -344,8 +360,8 @@ main class
 **Kind**: global class  
 
 * [Mcdev](#Mcdev)
+    * [.setSkipInteraction([skipInteraction])](#Mcdev.setSkipInteraction) ⇒ <code>void</code>
     * [.createDeltaPkg(argv)](#Mcdev.createDeltaPkg) ⇒ <code>void</code>
-    * [._setLoggingLevel(argv)](#Mcdev._setLoggingLevel) ⇒ <code>void</code>
     * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>Promise</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
@@ -358,10 +374,26 @@ main class
     * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(businessUnit, type, customerKey)](#Mcdev.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.badKeys(businessUnit)](#Mcdev.badKeys) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.retrieveAsTemplate(businessUnit, selectedType, name, market)](#Mcdev.retrieveAsTemplate) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.retrieveAsTemplate(businessUnit, selectedType, name, market)](#Mcdev.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
     * [.buildDefinition(businessUnit, type, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._checkMarket(market)](#Mcdev._checkMarket) ⇒ <code>Boolean</code>
     * [.buildDefinitionBulk(listName, type, name)](#Mcdev.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
+
+<a name="Mcdev.setSkipInteraction"></a>
+
+### Mcdev.setSkipInteraction([skipInteraction]) ⇒ <code>void</code>
+helper method to use unattended mode when including mcdev as a package
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [skipInteraction] | <code>boolean</code> \| <code>Object</code> | signals what to insert automatically for things usually asked via wizard |
+| skipInteraction.clientId | <code>String</code> | client id of installed package |
+| skipInteraction.clientSecret | <code>String</code> | client secret of installed package |
+| skipInteraction.tenant | <code>String</code> | tenant of installed package |
+| skipInteraction.eid | <code>String</code> | MID of the Parent Business Unit |
+| skipInteraction.credentialsName | <code>String</code> | how you would like the credential to be named |
 
 <a name="Mcdev.createDeltaPkg"></a>
 
@@ -376,20 +408,6 @@ handler for 'mcdev createDeltaPkg
 | [argv.range] | <code>String</code> | git commit range     into deploy directory |
 | [argv.filter] | <code>String</code> | filter file paths that start with any |
 | [argv.skipInteraction] | <code>Boolean</code> | allows to skip interactive wizard |
-
-<a name="Mcdev._setLoggingLevel"></a>
-
-### Mcdev.\_setLoggingLevel(argv) ⇒ <code>void</code>
-configures what is displayed in the console
-
-**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| argv | <code>object</code> | list of command line parameters given by user |
-| [argv.silent] | <code>Boolean</code> | only errors printed to CLI |
-| [argv.verbose] | <code>Boolean</code> | chatty user CLI output |
-| [argv.debug] | <code>Boolean</code> | enables developer output & features |
 
 <a name="Mcdev.selectTypes"></a>
 
@@ -533,18 +551,18 @@ Converts metadata to legacy format. Output is saved in 'converted' directory
 
 <a name="Mcdev.retrieveAsTemplate"></a>
 
-### Mcdev.retrieveAsTemplate(businessUnit, selectedType, name, market) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.retrieveAsTemplate(businessUnit, selectedType, name, market) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
 Retrieve a specific metadata file and templatise.
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| businessUnit | <code>String</code> | references credentials from properties.json |
-| selectedType | <code>String</code> | supported metadata type |
-| name | <code>String</code> | name of the metadata |
-| market | <code>String</code> | market which should be used to revert template |
+| businessUnit | <code>string</code> | references credentials from properties.json |
+| selectedType | <code>string</code> | supported metadata type |
+| name | <code>string</code> | name of the metadata |
+| market | <code>string</code> | market which should be used to revert template |
 
 <a name="Mcdev.buildDefinition"></a>
 
@@ -704,7 +722,7 @@ FileTransfer MetadataType
 * [Asset](#Asset) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, _, __, [selectedSubType])](#Asset.retrieve) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
     * [.retrieveForCache(_, [selectedSubType])](#Asset.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType])](#Asset.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType])](#Asset.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:AssetItem, type:string}&gt;</code>
     * [.create(metadata)](#Asset.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#Asset.update) ⇒ <code>Promise</code>
     * [.requestSubType(subType, subTypeArray, [retrieveDir], [templateName], [templateVariables])](#Asset.requestSubType) ⇒ <code>Promise</code>
@@ -717,9 +735,9 @@ FileTransfer MetadataType
     * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#Asset.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseMetadata(metadata)](#Asset.parseMetadata) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
     * [._mergeCode(metadata, deployDir, subType, [templateName])](#Asset._mergeCode) ⇒ <code>Promise.&lt;Array.&lt;MetadataType.CodeExtract&gt;&gt;</code>
-    * [._mergeCode_slots(metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName])](#Asset._mergeCode_slots) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._mergeCode_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName])](#Asset._mergeCode_slots) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._extractCode(metadata)](#Asset._extractCode) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
-    * [._extractCode_slots(metadataSlots, codeArr)](#Asset._extractCode_slots) ⇒ <code>void</code>
+    * [._extractCode_slots(prefix, metadataSlots, codeArr)](#Asset._extractCode_slots) ⇒ <code>void</code>
     * [.getJsonFromFS(dir)](#Asset.getJsonFromFS) ⇒ <code>Object</code>
     * [.findSubType(templateDir, templateName)](#Asset.findSubType) ⇒ <code>AssetSubType</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName)](#Asset.readSecondaryFolder) ⇒ <code>AssetItem</code>
@@ -754,11 +772,11 @@ Retrieves asset metadata for caching
 
 <a name="Asset.retrieveAsTemplate"></a>
 
-### Asset.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
-Retrieves asset metadata for caching
+### Asset.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata:AssetItem, type:string}&gt;</code>
+Retrieves asset metadata for templating
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata:AssetItem, type:string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -938,7 +956,7 @@ helper for this.preDeployTasks() that loads extracted code content back into JSO
 
 <a name="Asset._mergeCode_slots"></a>
 
-### Asset.\_mergeCode\_slots(metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Asset.\_mergeCode\_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName]) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for this.preDeployTasks() that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -946,6 +964,7 @@ helper for this.preDeployTasks() that loads extracted code content back into JSO
 
 | Param | Type | Description |
 | --- | --- | --- |
+| prefix | <code>string</code> | usually the customerkey |
 | metadataSlots | <code>Object</code> | metadata.views.html.slots or deeper slots.<>.blocks.<>.slots |
 | readDirArr | <code>Array.&lt;string&gt;</code> | directory of deploy files |
 | subtypeExtension | <code>string</code> | asset-subtype name ending on -meta |
@@ -969,11 +988,12 @@ to allow saving that separately and formatted
 
 <a name="Asset._extractCode_slots"></a>
 
-### Asset.\_extractCode\_slots(metadataSlots, codeArr) ⇒ <code>void</code>
+### Asset.\_extractCode\_slots(prefix, metadataSlots, codeArr) ⇒ <code>void</code>
 **Kind**: static method of [<code>Asset</code>](#Asset)  
 
 | Param | Type | Description |
 | --- | --- | --- |
+| prefix | <code>string</code> | usually the customerkey |
 | metadataSlots | <code>Object</code> | metadata.views.html.slots or deeper slots.<>.blocks.<>.slots |
 | codeArr | <code>Array.&lt;Object&gt;</code> | to be extended array for extracted code |
 
@@ -1057,11 +1077,10 @@ Automation MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Automation](#Automation) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.client](#Automation.client) : <code>Util.SDK</code>
     * [.retrieve(retrieveDir)](#Automation.retrieve) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
     * [.retrieveChangelog()](#Automation.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
     * [.retrieveForCache()](#Automation.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Automation.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Automation.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:AutomationItem, type:string}&gt;</code>
     * [.postRetrieveTasks(metadata, [_], [isTemplating])](#Automation.postRetrieveTasks) ⇒ <code>AutomationItem</code>
     * [.deploy(metadata, targetBU, retrieveDir)](#Automation.deploy) ⇒ [<code>Promise.&lt;AutomationMap&gt;</code>](#AutomationMap)
     * [.create(metadata)](#Automation.create) ⇒ <code>Promise</code>
@@ -1073,10 +1092,6 @@ Automation MetadataType
     * [._buildSchedule(scheduleObject)](#Automation._buildSchedule) ⇒ <code>AutomationScheduleSoap</code>
     * [._calcTime(offsetServer, dateInput, [offsetInput])](#Automation._calcTime) ⇒ <code>string</code>
 
-<a name="Automation.client"></a>
-
-### Automation.client : <code>Util.SDK</code>
-**Kind**: static property of [<code>Automation</code>](#Automation)  
 <a name="Automation.retrieve"></a>
 
 ### Automation.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
@@ -1105,11 +1120,11 @@ Retrieves automation metadata for caching
 **Returns**: <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code> - Promise of metadata  
 <a name="Automation.retrieveAsTemplate"></a>
 
-### Automation.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code>
+### Automation.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:AutomationItem, type:string}&gt;</code>
 Retrieve a specific Automation Definition by Name
 
 **Kind**: static method of [<code>Automation</code>](#Automation)  
-**Returns**: <code>Promise.&lt;{metadata:AutomationMap, type:string}&gt;</code> - Promise of metadata  
+**Returns**: <code>Promise.&lt;{metadata:AutomationItem, type:string}&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1343,7 +1358,6 @@ DataExtension MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [DataExtension](#DataExtension) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.client](#DataExtension.client) : <code>Util.SDK</code>
     * [.upsert(desToDeploy, _, buObject)](#DataExtension.upsert) ⇒ <code>Promise</code>
     * [._filterUpsertResults(res)](#DataExtension._filterUpsertResults) ⇒ <code>Boolean</code>
     * [.create(metadata)](#DataExtension.create) ⇒ <code>Promise</code>
@@ -1354,14 +1368,11 @@ DataExtension MetadataType
     * [.postRetrieveTasks(metadata, [_], [isTemplating])](#DataExtension.postRetrieveTasks) ⇒ <code>DataExtensionItem</code>
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;DataExtensionItem&gt;</code>
     * [.document(buObject, [metadata], [isDeploy])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.deleteByKey(buObject, customerKey)](#DataExtension.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.retrieveForCache(buObject, [_], [isDeploy])](#DataExtension.retrieveForCache) ⇒ <code>Promise</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtension.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
+    * [.deleteByKey(buObject, customerKey)](#DataExtension.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.postDeleteTasks(buObject, customerKey)](#DataExtension.postDeleteTasks) ⇒ <code>void</code>
+    * [.retrieveForCache(buObject, [_], [isDeploy])](#DataExtension.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtension.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:DataExtension, type:string}&gt;</code>
 
-<a name="DataExtension.client"></a>
-
-### DataExtension.client : <code>Util.SDK</code>
-**Kind**: static property of [<code>DataExtension</code>](#DataExtension)  
 <a name="DataExtension.upsert"></a>
 
 ### DataExtension.upsert(desToDeploy, _, buObject) ⇒ <code>Promise</code>
@@ -1494,24 +1505,37 @@ Parses metadata into a readable Markdown/HTML format then saves it
 
 <a name="DataExtension.deleteByKey"></a>
 
-### DataExtension.deleteByKey(buObject, customerKey) ⇒ <code>Promise.&lt;void&gt;</code>
-Delete a data extension from the specified business unit
+### DataExtension.deleteByKey(buObject, customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>Object</code> | references credentials |
+| buObject | <code>Util.BuObject</code> | references credentials |
 | customerKey | <code>string</code> | Identifier of data extension |
+
+<a name="DataExtension.postDeleteTasks"></a>
+
+### DataExtension.postDeleteTasks(buObject, customerKey) ⇒ <code>void</code>
+clean up after deleting a metadata item
+
+**Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
+**Returns**: <code>void</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>Util.BuObject</code> | references credentials |
+| customerKey | <code>string</code> | Identifier of metadata item |
 
 <a name="DataExtension.retrieveForCache"></a>
 
-### DataExtension.retrieveForCache(buObject, [_], [isDeploy]) ⇒ <code>Promise</code>
+### DataExtension.retrieveForCache(buObject, [_], [isDeploy]) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
 Retrieves folder metadata into local filesystem. Also creates a uniquePath attribute for each folder.
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1521,11 +1545,11 @@ Retrieves folder metadata into local filesystem. Also creates a uniquePath attri
 
 <a name="DataExtension.retrieveAsTemplate"></a>
 
-### DataExtension.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
+### DataExtension.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:DataExtension, type:string}&gt;</code>
 Retrieves dataExtension metadata in template format.
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
-**Returns**: <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code> - Promise of items  
+**Returns**: <code>Promise.&lt;{metadata:DataExtension, type:string}&gt;</code> - Promise of items  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1548,6 +1572,9 @@ DataExtensionField MetadataType
     * [.sortDeFields(a, b)](#DataExtensionField.sortDeFields) ⇒ <code>boolean</code>
     * [.postRetrieveTasks(metadata, forDataExtension)](#DataExtensionField.postRetrieveTasks) ⇒ <code>DataExtensionFieldItem</code>
     * [.prepareDeployColumnsOnUpdate(deployColumns, deKey)](#DataExtensionField.prepareDeployColumnsOnUpdate) ⇒ <code>Object.&lt;string, DataExtensionFieldItem&gt;</code>
+    * [.deleteByKey(buObject, customerKey)](#DataExtensionField.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deleteByKeySOAP(buObject, customerKey, [handleOutside])](#DataExtensionField.deleteByKeySOAP) ⇒ <code>boolean</code>
+    * [.postDeleteTasks(customerKey)](#DataExtensionField.postDeleteTasks) ⇒ <code>void</code>
 
 <a name="DataExtensionField.retrieve"></a>
 
@@ -1628,6 +1655,45 @@ Removes FieldType field if its the same in deploy and target column, because it 
 | deployColumns | <code>Array.&lt;DataExtensionFieldItem&gt;</code> | Columns of data extension that will be deployed |
 | deKey | <code>string</code> | external/customer key of Data Extension |
 
+<a name="DataExtensionField.deleteByKey"></a>
+
+### DataExtensionField.deleteByKey(buObject, customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>Util.BuObject</code> | references credentials |
+| customerKey | <code>string</code> | Identifier of data extension |
+
+<a name="DataExtensionField.deleteByKeySOAP"></a>
+
+### DataExtensionField.deleteByKeySOAP(buObject, customerKey, [handleOutside]) ⇒ <code>boolean</code>
+Delete a data extension from the specified business unit
+
+**Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Returns**: <code>boolean</code> - deletion success flag  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>Util.BuObject</code> | references credentials |
+| customerKey | <code>string</code> | Identifier of metadata |
+| [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
+
+<a name="DataExtensionField.postDeleteTasks"></a>
+
+### DataExtensionField.postDeleteTasks(customerKey) ⇒ <code>void</code>
+clean up after deleting a metadata item
+
+**Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
+**Returns**: <code>void</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of metadata item |
+
 <a name="DataExtensionTemplate"></a>
 
 ## DataExtensionTemplate ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -1656,9 +1722,9 @@ DataExtract MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [DataExtract](#DataExtract) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir)](#DataExtract.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.retrieveForCache()](#DataExtract.retrieveForCache) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtract.retrieveAsTemplate) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.retrieve(retrieveDir)](#DataExtract.retrieve) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveForCache()](#DataExtract.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtract.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
     * [.postRetrieveTasks(fileTransfer)](#DataExtract.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.create(dataExtract)](#DataExtract.create) ⇒ <code>Promise</code>
     * [.update(dataExtract)](#DataExtract.update) ⇒ <code>Promise</code>
@@ -1667,12 +1733,12 @@ DataExtract MetadataType
 
 <a name="DataExtract.retrieve"></a>
 
-### DataExtract.retrieve(retrieveDir) ⇒ <code>Promise.&lt;Object&gt;</code>
+### DataExtract.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
 Retrieves Metadata of Data Extract Activity.
 Endpoint /automation/v1/dataextracts/ returns all Data Extracts
 
 **Kind**: static method of [<code>DataExtract</code>](#DataExtract)  
-**Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of metadata  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1680,18 +1746,18 @@ Endpoint /automation/v1/dataextracts/ returns all Data Extracts
 
 <a name="DataExtract.retrieveForCache"></a>
 
-### DataExtract.retrieveForCache() ⇒ <code>Promise.&lt;Object&gt;</code>
+### DataExtract.retrieveForCache() ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
 Retrieves Metadata of  Data Extract Activity for caching
 
 **Kind**: static method of [<code>DataExtract</code>](#DataExtract)  
-**Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of metadata  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of metadata  
 <a name="DataExtract.retrieveAsTemplate"></a>
 
-### DataExtract.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;Object&gt;</code>
+### DataExtract.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
 Retrieve a specific dataExtract Definition by Name
 
 **Kind**: static method of [<code>DataExtract</code>](#DataExtract)  
-**Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of metadata  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1872,16 +1938,17 @@ MessageSendActivity MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [EmailSendDefinition](#EmailSendDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, _, buObject)](#EmailSendDefinition.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.retrieve(retrieveDir)](#EmailSendDefinition.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.update(metadataItem)](#EmailSendDefinition.update) ⇒ <code>Promise</code>
     * [.create(metadataItem)](#EmailSendDefinition.create) ⇒ <code>Promise</code>
+    * [.deleteByKey(buObject, customerKey)](#EmailSendDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.preDeployTasks(metadata)](#EmailSendDefinition.preDeployTasks) ⇒ <code>Promise</code>
     * [.postRetrieveTasks(metadata)](#EmailSendDefinition.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.parseMetadata(metadata)](#EmailSendDefinition.parseMetadata) ⇒ <code>Array</code>
 
 <a name="EmailSendDefinition.retrieve"></a>
 
-### EmailSendDefinition.retrieve(retrieveDir, _, buObject) ⇒ <code>Promise.&lt;Object&gt;</code>
+### EmailSendDefinition.retrieve(retrieveDir) ⇒ <code>Promise.&lt;Object&gt;</code>
 Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: static method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
@@ -1890,8 +1957,6 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 | Param | Type | Description |
 | --- | --- | --- |
 | retrieveDir | <code>String</code> | Directory where retrieved metadata directory will be saved |
-| _ | <code>void</code> | - |
-| buObject | <code>Object</code> | properties for auth |
 
 <a name="EmailSendDefinition.update"></a>
 
@@ -1916,6 +1981,19 @@ Creates a single item
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataItem | <code>Object</code> | a single item |
+
+<a name="EmailSendDefinition.deleteByKey"></a>
+
+### EmailSendDefinition.deleteByKey(buObject, customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>Util.BuObject</code> | references credentials |
+| customerKey | <code>string</code> | Identifier of data extension |
 
 <a name="EmailSendDefinition.preDeployTasks"></a>
 
@@ -1962,24 +2040,24 @@ EventDefinition MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [EventDefinition](#EventDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir)](#EventDefinition.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.retrieveForCache()](#EventDefinition.retrieveForCache) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#EventDefinition.retrieveAsTemplate) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.retrieve(retrieveDir)](#EventDefinition.retrieve) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveForCache()](#EventDefinition.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#EventDefinition.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
     * [.postRetrieveTasks(eventDef)](#EventDefinition.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.create(EventDefinition)](#EventDefinition.create) ⇒ <code>Promise</code>
-    * [.update(EventDefinition)](#EventDefinition.update) ⇒ <code>Promise</code>
+    * [.update(metadataEntry)](#EventDefinition.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#EventDefinition.preDeployTasks) ⇒ <code>Promise</code>
     * [.parseMetadata(metadata)](#EventDefinition.parseMetadata) ⇒ <code>Array</code>
 
 <a name="EventDefinition.retrieve"></a>
 
-### EventDefinition.retrieve(retrieveDir) ⇒ <code>Promise.&lt;Object&gt;</code>
+### EventDefinition.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
 Retrieves Metadata of Event Definition.
 Endpoint /interaction/v1/EventDefinitions return all Event Definitions with all details.
 Currently it is not needed to loop over Imports with endpoint /interaction/v1/EventDefinitions/{id}
 
 **Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
-**Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of metadata  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1987,18 +2065,18 @@ Currently it is not needed to loop over Imports with endpoint /interaction/v1/Ev
 
 <a name="EventDefinition.retrieveForCache"></a>
 
-### EventDefinition.retrieveForCache() ⇒ <code>Promise.&lt;Object&gt;</code>
+### EventDefinition.retrieveForCache() ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
 Retrieves event definition metadata for caching
 
 **Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
-**Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of metadata  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of metadata  
 <a name="EventDefinition.retrieveAsTemplate"></a>
 
-### EventDefinition.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;Object&gt;</code>
+### EventDefinition.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
 Retrieve a specific Event Definition by Name
 
 **Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
-**Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of metadata  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2028,11 +2106,11 @@ Creates a single Event Definition
 
 | Param | Type | Description |
 | --- | --- | --- |
-| EventDefinition | <code>Object</code> | a single Event Definition |
+| EventDefinition | <code>Util.MetadataTypeItem</code> | a single Event Definition |
 
 <a name="EventDefinition.update"></a>
 
-### EventDefinition.update(EventDefinition) ⇒ <code>Promise</code>
+### EventDefinition.update(metadataEntry) ⇒ <code>Promise</code>
 Updates a single Event Definition (using PUT method since PATCH isn't supported)
 
 **Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
@@ -2040,7 +2118,7 @@ Updates a single Event Definition (using PUT method since PATCH isn't supported)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| EventDefinition | <code>Object</code> | a single Event Definition |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | a single Event Definition |
 
 <a name="EventDefinition.preDeployTasks"></a>
 
@@ -2075,9 +2153,9 @@ FileTransfer MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [FileTransfer](#FileTransfer) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir)](#FileTransfer.retrieve) ⇒ <code>Promise</code>
-    * [.retrieveForCache()](#FileTransfer.retrieveForCache) ⇒ <code>Promise</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#FileTransfer.retrieveAsTemplate) ⇒ <code>Promise</code>
+    * [.retrieve(retrieveDir)](#FileTransfer.retrieve) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveForCache()](#FileTransfer.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#FileTransfer.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
     * [.postRetrieveTasks(metadata)](#FileTransfer.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.create(fileTransfer)](#FileTransfer.create) ⇒ <code>Promise</code>
     * [.update(fileTransfer)](#FileTransfer.update) ⇒ <code>Promise</code>
@@ -2086,12 +2164,12 @@ FileTransfer MetadataType
 
 <a name="FileTransfer.retrieve"></a>
 
-### FileTransfer.retrieve(retrieveDir) ⇒ <code>Promise</code>
+### FileTransfer.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
 Retrieves Metadata of FileTransfer Activity.
 Endpoint /automation/v1/filetransfers/ returns all File Transfers
 
 **Kind**: static method of [<code>FileTransfer</code>](#FileTransfer)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2099,18 +2177,18 @@ Endpoint /automation/v1/filetransfers/ returns all File Transfers
 
 <a name="FileTransfer.retrieveForCache"></a>
 
-### FileTransfer.retrieveForCache() ⇒ <code>Promise</code>
+### FileTransfer.retrieveForCache() ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
 Retrieves Metadata of  FileTransfer Activity for caching
 
 **Kind**: static method of [<code>FileTransfer</code>](#FileTransfer)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise  
 <a name="FileTransfer.retrieveAsTemplate"></a>
 
-### FileTransfer.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise</code>
+### FileTransfer.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
 Retrieve a specific File Transfer Definition by Name
 
 **Kind**: static method of [<code>FileTransfer</code>](#FileTransfer)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2128,7 +2206,7 @@ manages post retrieve steps
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single fileTransfer activity definition |
+| metadata | <code>Util.MetadataTypeItem</code> | a single fileTransfer activity definition |
 
 <a name="FileTransfer.create"></a>
 
@@ -2140,7 +2218,7 @@ Creates a single File Transfer
 
 | Param | Type | Description |
 | --- | --- | --- |
-| fileTransfer | <code>Object</code> | a single File Transfer |
+| fileTransfer | <code>Util.MetadataTypeItem</code> | a single File Transfer |
 
 <a name="FileTransfer.update"></a>
 
@@ -2152,7 +2230,7 @@ Updates a single File Transfer
 
 | Param | Type | Description |
 | --- | --- | --- |
-| fileTransfer | <code>Object</code> | a single File Transfer |
+| fileTransfer | <code>Util.MetadataTypeItem</code> | a single File Transfer |
 
 <a name="FileTransfer.preDeployTasks"></a>
 
@@ -2164,7 +2242,7 @@ prepares a fileTransfer for deployment
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single fileTransfer activity definition |
+| metadata | <code>Util.MetadataTypeItem</code> | a single fileTransfer activity definition |
 
 <a name="FileTransfer.parseMetadata"></a>
 
@@ -2176,7 +2254,7 @@ parses retrieved Metadata before saving
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | a single fileTransfer activity definition |
+| metadata | <code>Util.MetadataTypeItem</code> | a single fileTransfer activity definition |
 
 <a name="Filter"></a>
 
@@ -2185,20 +2263,159 @@ Filter MetadataType
 
 **Kind**: global class  
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [Filter](#Filter) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir)](#Filter.retrieve) ⇒ <code>Promise.&lt;{metadata:FilterMap, type:string}&gt;</code>
+    * [.postRetrieveTasks(item)](#Filter.postRetrieveTasks) ⇒ <code>FilterItem</code>
+    * [.parseMetadata(metadata)](#Filter.parseMetadata) ⇒ <code>FilterItem</code>
+    * [.preDeployTasks(metadata)](#Filter.preDeployTasks) ⇒ <code>Promise.&lt;FilterItem&gt;</code>
+
 <a name="Filter.retrieve"></a>
 
-### Filter.retrieve(retrieveDir) ⇒ <code>Promise</code>
+### Filter.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata:FilterMap, type:string}&gt;</code>
 Retrieves Metadata of Filter.
 Endpoint /automation/v1/filters/ returns all Filters,
 but only with some of the fields. So it is needed to loop over
 Filters with the endpoint /automation/v1/filters/{id}
 
 **Kind**: static method of [<code>Filter</code>](#Filter)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata:FilterMap, type:string}&gt;</code> - Promise of items  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | retrieveDir | <code>String</code> | Directory where retrieved metadata directory will be saved |
+
+<a name="Filter.postRetrieveTasks"></a>
+
+### Filter.postRetrieveTasks(item) ⇒ <code>FilterItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>Filter</code>](#Filter)  
+**Returns**: <code>FilterItem</code> - parsed metadata definition  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| item | <code>FilterItem</code> | a single record |
+
+<a name="Filter.parseMetadata"></a>
+
+### Filter.parseMetadata(metadata) ⇒ <code>FilterItem</code>
+parses retrieved Metadata before saving
+
+**Kind**: static method of [<code>Filter</code>](#Filter)  
+**Returns**: <code>FilterItem</code> - parsed metadata definition  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>FilterItem</code> | a single record |
+
+<a name="Filter.preDeployTasks"></a>
+
+### Filter.preDeployTasks(metadata) ⇒ <code>Promise.&lt;FilterItem&gt;</code>
+prepares a record for deployment
+
+**Kind**: static method of [<code>Filter</code>](#Filter)  
+**Returns**: <code>Promise.&lt;FilterItem&gt;</code> - Promise of updated single record  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>FilterItem</code> | a single record |
+
+<a name="FilterDefinition"></a>
+
+## FilterDefinition ⇐ [<code>MetadataType</code>](#MetadataType)
+FilterDefinition MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [FilterDefinition](#FilterDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir)](#FilterDefinition.retrieve) ⇒ <code>Promise.&lt;{metadata:FilterDefinitionMap, type:string}&gt;</code>
+    * [.retrieveForCache()](#FilterDefinition.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:FilterDefinitionMap, type:string}&gt;</code>
+    * [.postRetrieveTasks(item)](#FilterDefinition.postRetrieveTasks) ⇒ <code>FilterDefinitionItem</code>
+    * [.parseMetadata(metadata)](#FilterDefinition.parseMetadata) ⇒ <code>FilterDefinitionItem</code>
+    * [.preDeployTasks(metadata)](#FilterDefinition.preDeployTasks) ⇒ <code>Promise.&lt;FilterDefinitionItem&gt;</code>
+    * [.create(metadata)](#FilterDefinition.create) ⇒ <code>Promise.&lt;FilterDefinitionItem&gt;</code>
+    * [.update(metadata)](#FilterDefinition.update) ⇒ <code>Promise.&lt;FilterDefinitionItem&gt;</code>
+
+<a name="FilterDefinition.retrieve"></a>
+
+### FilterDefinition.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata:FilterDefinitionMap, type:string}&gt;</code>
+Retrieves all records and saves it to disk
+
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+**Returns**: <code>Promise.&lt;{metadata:FilterDefinitionMap, type:string}&gt;</code> - Promise of items  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+
+<a name="FilterDefinition.retrieveForCache"></a>
+
+### FilterDefinition.retrieveForCache() ⇒ <code>Promise.&lt;{metadata:FilterDefinitionMap, type:string}&gt;</code>
+Retrieves all records for caching
+
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+**Returns**: <code>Promise.&lt;{metadata:FilterDefinitionMap, type:string}&gt;</code> - Promise of items  
+<a name="FilterDefinition.postRetrieveTasks"></a>
+
+### FilterDefinition.postRetrieveTasks(item) ⇒ <code>FilterDefinitionItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+**Returns**: <code>FilterDefinitionItem</code> - parsed metadata definition  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| item | <code>FilterDefinitionItem</code> | a single record |
+
+<a name="FilterDefinition.parseMetadata"></a>
+
+### FilterDefinition.parseMetadata(metadata) ⇒ <code>FilterDefinitionItem</code>
+parses retrieved Metadata before saving
+
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+**Returns**: <code>FilterDefinitionItem</code> - parsed metadata definition  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>FilterDefinitionItem</code> | a single record |
+
+<a name="FilterDefinition.preDeployTasks"></a>
+
+### FilterDefinition.preDeployTasks(metadata) ⇒ <code>Promise.&lt;FilterDefinitionItem&gt;</code>
+prepares a item for deployment
+
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+**Returns**: <code>Promise.&lt;FilterDefinitionItem&gt;</code> - Promise of updated single item  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>FilterDefinitionItem</code> | a single record |
+
+<a name="FilterDefinition.create"></a>
+
+### FilterDefinition.create(metadata) ⇒ <code>Promise.&lt;FilterDefinitionItem&gt;</code>
+Creates a single item
+
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+**Returns**: <code>Promise.&lt;FilterDefinitionItem&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>FilterDefinitionItem</code> | a single item |
+
+<a name="FilterDefinition.update"></a>
+
+### FilterDefinition.update(metadata) ⇒ <code>Promise.&lt;FilterDefinitionItem&gt;</code>
+Updates a single item
+
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+**Returns**: <code>Promise.&lt;FilterDefinitionItem&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>FilterDefinitionItem</code> | a single item |
 
 <a name="Folder"></a>
 
@@ -2212,8 +2429,8 @@ Folder MetadataType
     * [.retrieve(retrieveDir, [additionalFields], buObject)](#Folder.retrieve) ⇒ <code>Promise</code>
     * [.retrieveForCache(buObject)](#Folder.retrieveForCache) ⇒ <code>Promise</code>
     * [.upsert(metadata)](#Folder.upsert) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.create(metadata)](#Folder.create) ⇒ <code>Promise</code>
-    * [.update(metadata)](#Folder.update) ⇒ <code>Promise</code>
+    * [.create(metadataEntry)](#Folder.create) ⇒ <code>Promise</code>
+    * [.update(metadataEntry)](#Folder.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#Folder.preDeployTasks) ⇒ <code>Promise</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#Folder.getJsonFromFS) ⇒ <code>Object</code>
     * [.retrieveHelper([additionalFields], [queryAllAccounts])](#Folder.retrieveHelper) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -2258,11 +2475,11 @@ Copied due to having a dependency on itself, meaning the created need to be seri
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | metadata mapped by their keyField |
+| metadata | <code>Util.MetadataTypeMap</code> | metadata mapped by their keyField |
 
 <a name="Folder.create"></a>
 
-### Folder.create(metadata) ⇒ <code>Promise</code>
+### Folder.create(metadataEntry) ⇒ <code>Promise</code>
 creates a folder based on metatadata
 
 **Kind**: static method of [<code>Folder</code>](#Folder)  
@@ -2270,11 +2487,11 @@ creates a folder based on metatadata
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | metadata of the folder |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | metadata of the folder |
 
 <a name="Folder.update"></a>
 
-### Folder.update(metadata) ⇒ <code>Promise</code>
+### Folder.update(metadataEntry) ⇒ <code>Promise</code>
 Updates a single Folder.
 
 **Kind**: static method of [<code>Folder</code>](#Folder)  
@@ -2282,7 +2499,7 @@ Updates a single Folder.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>Object</code> | single metadata entry |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | single metadata entry |
 
 <a name="Folder.preDeployTasks"></a>
 
@@ -2389,9 +2606,9 @@ ImportFile MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [ImportFile](#ImportFile) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir)](#ImportFile.retrieve) ⇒ <code>Promise</code>
-    * [.retrieveForCache()](#ImportFile.retrieveForCache) ⇒ <code>Promise</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#ImportFile.retrieveAsTemplate) ⇒ <code>Promise</code>
+    * [.retrieve(retrieveDir)](#ImportFile.retrieve) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveForCache()](#ImportFile.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#ImportFile.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
     * [.postRetrieveTasks(importDef)](#ImportFile.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.create(importFile)](#ImportFile.create) ⇒ <code>Promise</code>
     * [.update(importFile)](#ImportFile.update) ⇒ <code>Promise</code>
@@ -2400,13 +2617,13 @@ ImportFile MetadataType
 
 <a name="ImportFile.retrieve"></a>
 
-### ImportFile.retrieve(retrieveDir) ⇒ <code>Promise</code>
+### ImportFile.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
 Retrieves Metadata of Import File.
 Endpoint /automation/v1/imports/ return all Import Files with all details.
 Currently it is not needed to loop over Imports with endpoint /automation/v1/imports/{id}
 
 **Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2414,18 +2631,18 @@ Currently it is not needed to loop over Imports with endpoint /automation/v1/imp
 
 <a name="ImportFile.retrieveForCache"></a>
 
-### ImportFile.retrieveForCache() ⇒ <code>Promise</code>
+### ImportFile.retrieveForCache() ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
 Retrieves import definition metadata for caching
 
 **Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise  
 <a name="ImportFile.retrieveAsTemplate"></a>
 
-### ImportFile.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise</code>
+### ImportFile.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
 Retrieve a specific Import Definition by Name
 
 **Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2524,6 +2741,7 @@ List MetadataType
 * [List](#List) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir)](#List.retrieve) ⇒ <code>Promise</code>
     * [.retrieveForCache()](#List.retrieveForCache) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.deleteByKey(buObject, customerKey)](#List.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postRetrieveTasks(list)](#List.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.parseMetadata(metadata, [parseForCache])](#List.parseMetadata) ⇒ <code>Array</code>
 
@@ -2546,6 +2764,19 @@ Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: static method of [<code>List</code>](#List)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of metadata  
+<a name="List.deleteByKey"></a>
+
+### List.deleteByKey(buObject, customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>List</code>](#List)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>Util.BuObject</code> | references credentials |
+| customerKey | <code>string</code> | Identifier of data extension |
+
 <a name="List.postRetrieveTasks"></a>
 
 ### List.postRetrieveTasks(list) ⇒ <code>Array.&lt;Object&gt;</code>
@@ -2580,31 +2811,31 @@ Provides default functionality that can be overwritten by child metadata type cl
 **Kind**: global class  
 
 * [MetadataType](#MetadataType)
-    * [new MetadataType(client, businessUnit, cache, properties, [subType])](#new_MetadataType_new)
     * [.client](#MetadataType.client) : <code>Util.SDK</code>
-    * [.cache](#MetadataType.cache) : [<code>MultiMetadataTypeMap</code>](#MultiMetadataTypeMap)
+    * [.properties](#MetadataType.properties) : <code>Util.MultiMetadataTypeMap</code>
+    * [.subType](#MetadataType.subType) : <code>string</code>
+    * [.buObject](#MetadataType.buObject) : <code>Object</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType.getJsonFromFS) ⇒ <code>Object</code>
     * [.getFieldNamesToRetrieve([additionalFields])](#MetadataType.getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
     * [.deploy(metadata, deployDir, retrieveDir, buObject)](#MetadataType.deploy) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.postDeployTasks(metadata, originalMetadata)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
-    * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>MetadataTypeItem</code>
+    * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>Util.MetadataTypeItem</code>
     * [.overrideKeyWithName(metadata, [warningMsg])](#MetadataType.overrideKeyWithName) ⇒ <code>void</code>
-    * [.retrieve(retrieveDir, [additionalFields], buObject, [subType])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
-    * [.retrieveChangelog([additionalFields], buObject, [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
-    * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
-    * [.preDeployTasks(metadata, deployDir)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;MetadataTypeItem&gt;</code>
+    * [.retrieve(retrieveDir, [additionalFields], buObject, [subType])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveChangelog([additionalFields], buObject, [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
+    * [.preDeployTasks(metadata, deployDir)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;Util.MetadataTypeItem&gt;</code>
     * [.create(metadata, deployDir)](#MetadataType.create) ⇒ <code>void</code>
     * [.update(metadata, [metadataBefore])](#MetadataType.update) ⇒ <code>void</code>
-    * [.upsert(metadata, deployDir, [buObject])](#MetadataType.upsert) ⇒ <code>Promise.&lt;MetadataTypeMap&gt;</code>
+    * [.upsert(metadata, deployDir, [buObject])](#MetadataType.upsert) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
     * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise</code>
     * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise</code>
     * [.updateREST(metadataEntry, uri)](#MetadataType.updateREST) ⇒ <code>Promise</code>
     * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
-    * [.retrieveSOAPgeneric(retrieveDir, buObject, [requestParams], [additionalFields], [overrideType])](#MetadataType.retrieveSOAPgeneric) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
-    * [.retrieveSOAPBody(fields, [options], [type])](#MetadataType.retrieveSOAPBody) ⇒ <code>Promise.&lt;MetadataTypeMap&gt;</code>
-    * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
-    * [.parseResponseBody(body)](#MetadataType.parseResponseBody) ⇒ <code>Promise.&lt;MetadataTypeMap&gt;</code>
+    * [.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (Util.MetadataTypeMap\|Util.MetadataTypeItem), type:string}&gt;</code>
+    * [.parseResponseBody(body)](#MetadataType.parseResponseBody) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
     * [.removeNotCreateableFields(metadataEntry)](#MetadataType.removeNotCreateableFields) ⇒ <code>void</code>
     * [.removeNotUpdateableFields(metadataEntry)](#MetadataType.removeNotUpdateableFields) ⇒ <code>void</code>
@@ -2612,37 +2843,33 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.keepRetrieveFields(metadataEntry)](#MetadataType.keepRetrieveFields) ⇒ <code>void</code>
     * [.isFiltered(metadataEntry, [include])](#MetadataType.isFiltered) ⇒ <code>boolean</code>
     * [.isFilteredFolder(metadataEntry, [include])](#MetadataType.isFilteredFolder) ⇒ <code>boolean</code>
-    * [.saveResults(results, retrieveDir, [overrideType], [templateVariables])](#MetadataType.saveResults) ⇒ <code>Promise.&lt;MetadataTypeMap&gt;</code>
+    * [.saveResults(results, retrieveDir, [overrideType], [templateVariables])](#MetadataType.saveResults) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
     * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#MetadataType.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.findSubType(templateDir, templateName)](#MetadataType.findSubType) ⇒ <code>string</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName, ex)](#MetadataType.readSecondaryFolder) ⇒ <code>Object</code>
-    * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType.buildDefinition) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
-    * [.checkForErrors(ex)](#MetadataType.checkForErrors) ⇒ <code>void</code>
+    * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType.buildDefinition) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.checkForErrors(ex)](#MetadataType.checkForErrors) ⇒ <code>string</code>
     * [.document([buObject], [metadata], [isDeploy])](#MetadataType.document) ⇒ <code>void</code>
-    * [.deleteByKey(buObject, customerKey)](#MetadataType.deleteByKey) ⇒ <code>void</code>
+    * [.deleteByKey(buObject, customerKey)](#MetadataType.deleteByKey) ⇒ <code>boolean</code>
+    * [.postDeleteTasks(buObject, customerKey)](#MetadataType.postDeleteTasks) ⇒ <code>void</code>
+    * [.deleteByKeySOAP(buObject, customerKey, [handleOutside])](#MetadataType.deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType.readBUMetadataForType) ⇒ <code>Object</code>
-
-<a name="new_MetadataType_new"></a>
-
-### new MetadataType(client, businessUnit, cache, properties, [subType])
-Instantiates a metadata constructor to avoid passing variables.
-
-
-| Param | Type | Description |
-| --- | --- | --- |
-| client | <code>Util.SDK</code> | client for sfmc fuelsdk |
-| businessUnit | <code>string</code> | Name of business unit (corresponding to their keys in 'properties.json' file). Used to access correct directories |
-| cache | <code>Object</code> | metadata cache |
-| properties | <code>Object</code> | mcdev config |
-| [subType] | <code>string</code> | limit retrieve to specific subType |
 
 <a name="MetadataType.client"></a>
 
 ### MetadataType.client : <code>Util.SDK</code>
 **Kind**: static property of [<code>MetadataType</code>](#MetadataType)  
-<a name="MetadataType.cache"></a>
+<a name="MetadataType.properties"></a>
 
-### MetadataType.cache : [<code>MultiMetadataTypeMap</code>](#MultiMetadataTypeMap)
+### MetadataType.properties : <code>Util.MultiMetadataTypeMap</code>
+**Kind**: static property of [<code>MetadataType</code>](#MetadataType)  
+<a name="MetadataType.subType"></a>
+
+### MetadataType.subType : <code>string</code>
+**Kind**: static property of [<code>MetadataType</code>](#MetadataType)  
+<a name="MetadataType.buObject"></a>
+
+### MetadataType.buObject : <code>Object</code>
 **Kind**: static property of [<code>MetadataType</code>](#MetadataType)  
 <a name="MetadataType.getJsonFromFS"></a>
 
@@ -2679,7 +2906,7 @@ Deploys metadata
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>MetadataTypeMap</code> | metadata mapped by their keyField |
+| metadata | <code>Util.MetadataTypeMap</code> | metadata mapped by their keyField |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 | retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
 | buObject | <code>Util.BuObject</code> | properties for auth |
@@ -2693,20 +2920,20 @@ Gets executed after deployment of metadata type
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>MetadataTypeMap</code> | metadata mapped by their keyField |
-| originalMetadata | <code>MetadataTypeMap</code> | metadata to be updated (contains additioanl fields) |
+| metadata | <code>Util.MetadataTypeMap</code> | metadata mapped by their keyField |
+| originalMetadata | <code>Util.MetadataTypeMap</code> | metadata to be updated (contains additioanl fields) |
 
 <a name="MetadataType.postRetrieveTasks"></a>
 
-### MetadataType.postRetrieveTasks(metadata, targetDir, [isTemplating]) ⇒ <code>MetadataTypeItem</code>
+### MetadataType.postRetrieveTasks(metadata, targetDir, [isTemplating]) ⇒ <code>Util.MetadataTypeItem</code>
 Gets executed after retreive of metadata type
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>MetadataTypeItem</code> - cloned metadata  
+**Returns**: <code>Util.MetadataTypeItem</code> - cloned metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>MetadataTypeItem</code> | a single item |
+| metadata | <code>Util.MetadataTypeItem</code> | a single item |
 | targetDir | <code>string</code> | folder where retrieves should be saved |
 | [isTemplating] | <code>boolean</code> | signals that we are retrieving templates |
 
@@ -2719,16 +2946,16 @@ used to synchronize name and external key during retrieveAsTemplate
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>MetadataTypeItem</code> | a single item |
+| metadata | <code>Util.MetadataTypeItem</code> | a single item |
 | [warningMsg] | <code>string</code> | optional msg to show the user |
 
 <a name="MetadataType.retrieve"></a>
 
-### MetadataType.retrieve(retrieveDir, [additionalFields], buObject, [subType]) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
+### MetadataType.retrieve(retrieveDir, [additionalFields], buObject, [subType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
 Gets metadata from Marketing Cloud
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code> - metadata  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2739,11 +2966,11 @@ Gets metadata from Marketing Cloud
 
 <a name="MetadataType.retrieveChangelog"></a>
 
-### MetadataType.retrieveChangelog([additionalFields], buObject, [subType]) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
+### MetadataType.retrieveChangelog([additionalFields], buObject, [subType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
 Gets metadata from Marketing Cloud
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code> - metadata  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2753,11 +2980,11 @@ Gets metadata from Marketing Cloud
 
 <a name="MetadataType.retrieveForCache"></a>
 
-### MetadataType.retrieveForCache(buObject, [subType]) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
+### MetadataType.retrieveForCache(buObject, [subType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code> - metadata  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2766,11 +2993,11 @@ Gets metadata cache with limited fields and does not store value to disk
 
 <a name="MetadataType.retrieveAsTemplate"></a>
 
-### MetadataType.retrieveAsTemplate(templateDir, name, templateVariables, [subType]) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
+### MetadataType.retrieveAsTemplate(templateDir, name, templateVariables, [subType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code> - metadata  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code> - metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2781,15 +3008,15 @@ Gets metadata cache with limited fields and does not store value to disk
 
 <a name="MetadataType.preDeployTasks"></a>
 
-### MetadataType.preDeployTasks(metadata, deployDir) ⇒ <code>Promise.&lt;MetadataTypeItem&gt;</code>
+### MetadataType.preDeployTasks(metadata, deployDir) ⇒ <code>Promise.&lt;Util.MetadataTypeItem&gt;</code>
 Gets executed before deploying metadata
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;MetadataTypeItem&gt;</code> - Promise of a single metadata item  
+**Returns**: <code>Promise.&lt;Util.MetadataTypeItem&gt;</code> - Promise of a single metadata item  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>MetadataTypeItem</code> | a single metadata item |
+| metadata | <code>Util.MetadataTypeItem</code> | a single metadata item |
 | deployDir | <code>string</code> | folder where files for deployment are stored |
 
 <a name="MetadataType.create"></a>
@@ -2801,7 +3028,7 @@ Abstract create method that needs to be implemented in child metadata type
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>MetadataTypeItem</code> | single metadata entry |
+| metadata | <code>Util.MetadataTypeItem</code> | single metadata entry |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 
 <a name="MetadataType.update"></a>
@@ -2813,20 +3040,20 @@ Abstract update method that needs to be implemented in child metadata type
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>MetadataTypeItem</code> | single metadata entry |
-| [metadataBefore] | <code>MetadataTypeItem</code> | metadata mapped by their keyField |
+| metadata | <code>Util.MetadataTypeItem</code> | single metadata entry |
+| [metadataBefore] | <code>Util.MetadataTypeItem</code> | metadata mapped by their keyField |
 
 <a name="MetadataType.upsert"></a>
 
-### MetadataType.upsert(metadata, deployDir, [buObject]) ⇒ <code>Promise.&lt;MetadataTypeMap&gt;</code>
+### MetadataType.upsert(metadata, deployDir, [buObject]) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;MetadataTypeMap&gt;</code> - keyField => metadata map  
+**Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>MetadataTypeMap</code> | metadata mapped by their keyField |
+| metadata | <code>Util.MetadataTypeMap</code> | metadata mapped by their keyField |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 | [buObject] | <code>Util.BuObject</code> | properties for auth |
 
@@ -2840,7 +3067,7 @@ Creates a single metadata entry via REST
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadataEntry | <code>MetadataTypeItem</code> | a single metadata Entry |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | a single metadata Entry |
 | uri | <code>string</code> | rest endpoint for POST |
 
 <a name="MetadataType.createSOAP"></a>
@@ -2853,7 +3080,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadataEntry | <code>MetadataTypeItem</code> | single metadata entry |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | single metadata entry |
 | [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
 | [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
@@ -2867,7 +3094,7 @@ Updates a single metadata entry via REST
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadataEntry | <code>MetadataTypeItem</code> | a single metadata Entry |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | a single metadata Entry |
 | uri | <code>string</code> | rest endpoint for PATCH |
 
 <a name="MetadataType.updateSOAP"></a>
@@ -2880,17 +3107,17 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadataEntry | <code>MetadataTypeItem</code> | single metadata entry |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | single metadata entry |
 | [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
 | [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
-<a name="MetadataType.retrieveSOAPgeneric"></a>
+<a name="MetadataType.retrieveSOAP"></a>
 
-### MetadataType.retrieveSOAPgeneric(retrieveDir, buObject, [requestParams], [additionalFields], [overrideType]) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
+### MetadataType.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2898,29 +3125,14 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 | buObject | <code>Util.BuObject</code> | properties for auth |
 | [requestParams] | <code>Object</code> | required for the specific request (filter for example) |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
-| [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
-
-<a name="MetadataType.retrieveSOAPBody"></a>
-
-### MetadataType.retrieveSOAPBody(fields, [options], [type]) ⇒ <code>Promise.&lt;MetadataTypeMap&gt;</code>
-helper that handles batched retrieve via SOAP
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;MetadataTypeMap&gt;</code> - keyField => metadata map  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| fields | <code>Array.&lt;string&gt;</code> | list of fields that we want to see retrieved |
-| [options] | <code>Object</code> | required for the specific request (filter for example) |
-| [type] | <code>string</code> | optionally overwrite the API type of the metadata here |
 
 <a name="MetadataType.retrieveREST"></a>
 
-### MetadataType.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables]) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
+### MetadataType.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables]) ⇒ <code>Promise.&lt;{metadata: (Util.MetadataTypeMap\|Util.MetadataTypeItem), type:string}&gt;</code>
 Retrieves Metadata for Rest Types
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
+**Returns**: <code>Promise.&lt;{metadata: (Util.MetadataTypeMap\|Util.MetadataTypeItem), type:string}&gt;</code> - Promise of item map (single item for templated result)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2931,11 +3143,11 @@ Retrieves Metadata for Rest Types
 
 <a name="MetadataType.parseResponseBody"></a>
 
-### MetadataType.parseResponseBody(body) ⇒ <code>Promise.&lt;MetadataTypeMap&gt;</code>
+### MetadataType.parseResponseBody(body) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;MetadataTypeMap&gt;</code> - keyField => metadata map  
+**Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2950,7 +3162,7 @@ Deletes a field in a metadata entry if the selected definition property equals f
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadataEntry | <code>MetadataTypeItem</code> | One entry of a metadataType |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | One entry of a metadataType |
 | fieldPath | <code>string</code> | field path to be checked if it conforms to the definition (dot seperated if nested): 'fuu.bar' |
 | definitionProperty | <code>&#x27;isCreateable&#x27;</code> \| <code>&#x27;isUpdateable&#x27;</code> \| <code>&#x27;retrieving&#x27;</code> \| <code>&#x27;templating&#x27;</code> | delete field if definitionProperty equals false for specified field. Options: [isCreateable | isUpdateable] |
 | origin | <code>string</code> | string of parent object, required when using arrays as these are parsed slightly differently. |
@@ -2969,7 +3181,7 @@ Remove fields from metadata entry that are not createable
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadataEntry | <code>MetadataTypeItem</code> | metadata entry |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | metadata entry |
 
 <a name="MetadataType.removeNotUpdateableFields"></a>
 
@@ -2980,7 +3192,7 @@ Remove fields from metadata entry that are not updateable
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadataEntry | <code>MetadataTypeItem</code> | metadata entry |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | metadata entry |
 
 <a name="MetadataType.keepTemplateFields"></a>
 
@@ -2991,7 +3203,7 @@ Remove fields from metadata entry that are not needed in the template
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadataEntry | <code>MetadataTypeItem</code> | metadata entry |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | metadata entry |
 
 <a name="MetadataType.keepRetrieveFields"></a>
 
@@ -3002,7 +3214,7 @@ Remove fields from metadata entry that are not needed in the stored metadata
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadataEntry | <code>MetadataTypeItem</code> | metadata entry |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | metadata entry |
 
 <a name="MetadataType.isFiltered"></a>
 
@@ -3014,7 +3226,7 @@ checks if the current metadata entry should be saved on retrieve or not
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| metadataEntry | <code>MetadataTypeItem</code> |  | metadata entry |
+| metadataEntry | <code>Util.MetadataTypeItem</code> |  | metadata entry |
 | [include] | <code>boolean</code> | <code>false</code> | true: use definition.include / options.include; false=exclude: use definition.filter / options.exclude |
 
 <a name="MetadataType.isFilteredFolder"></a>
@@ -3032,15 +3244,15 @@ optionally filter by what folder something is in
 
 <a name="MetadataType.saveResults"></a>
 
-### MetadataType.saveResults(results, retrieveDir, [overrideType], [templateVariables]) ⇒ <code>Promise.&lt;MetadataTypeMap&gt;</code>
+### MetadataType.saveResults(results, retrieveDir, [overrideType], [templateVariables]) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
 Helper for writing Metadata to disk, used for Retrieve and deploy
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;MetadataTypeMap&gt;</code> - Promise of saved metadata  
+**Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| results | <code>MetadataTypeMap</code> | metadata results from deploy |
+| results | <code>Util.MetadataTypeMap</code> | metadata results from deploy |
 | retrieveDir | <code>string</code> | directory where metadata should be stored after deploy/retrieve |
 | [overrideType] | <code>string</code> | for use when there is a subtype (such as folder-queries) |
 | [templateVariables] | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
@@ -3058,7 +3270,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 | --- | --- | --- |
 | templateDir | <code>string</code> | Directory where metadata templates are stored |
 | targetDir | <code>string</code> | Directory where built definitions will be saved |
-| metadata | <code>MetadataTypeItem</code> | main JSON file that was read from file system |
+| metadata | <code>Util.MetadataTypeItem</code> | main JSON file that was read from file system |
 | variables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
 
@@ -3093,13 +3305,13 @@ optional method used for some types to try a different folder structure
 
 <a name="MetadataType.buildDefinition"></a>
 
-### MetadataType.buildDefinition(templateDir, targetDir, templateName, variables) ⇒ <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code>
+### MetadataType.buildDefinition(templateDir, targetDir, templateName, variables) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
 Builds definition based on template
 NOTE: Most metadata files should use this generic method, unless custom
 parsing is required (for example scripts & queries)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{metadata:MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3110,8 +3322,11 @@ parsing is required (for example scripts & queries)
 
 <a name="MetadataType.checkForErrors"></a>
 
-### MetadataType.checkForErrors(ex) ⇒ <code>void</code>
+### MetadataType.checkForErrors(ex) ⇒ <code>string</code>
+Standardizes a check for multiple messages
+
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>string</code> - formatted Error Message  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3127,13 +3342,26 @@ Gets metadata cache with limited fields and does not store value to disk
 | Param | Type | Description |
 | --- | --- | --- |
 | [buObject] | <code>Util.BuObject</code> | properties for auth |
-| [metadata] | <code>MetadataTypeMap</code> | a list of type definitions |
+| [metadata] | <code>Util.MetadataTypeMap</code> | a list of type definitions |
 | [isDeploy] | <code>boolean</code> | used to skip non-supported message during deploy |
 
 <a name="MetadataType.deleteByKey"></a>
 
-### MetadataType.deleteByKey(buObject, customerKey) ⇒ <code>void</code>
-Delete a data extension from the specified business unit
+### MetadataType.deleteByKey(buObject, customerKey) ⇒ <code>boolean</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>boolean</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>Util.BuObject</code> | references credentials |
+| customerKey | <code>string</code> | Identifier of data extension |
+
+<a name="MetadataType.postDeleteTasks"></a>
+
+### MetadataType.postDeleteTasks(buObject, customerKey) ⇒ <code>void</code>
+clean up after deleting a metadata item
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>void</code> - -  
@@ -3141,7 +3369,21 @@ Delete a data extension from the specified business unit
 | Param | Type | Description |
 | --- | --- | --- |
 | buObject | <code>Util.BuObject</code> | references credentials |
-| customerKey | <code>string</code> | Identifier of data extension |
+| customerKey | <code>string</code> | Identifier of metadata item |
+
+<a name="MetadataType.deleteByKeySOAP"></a>
+
+### MetadataType.deleteByKeySOAP(buObject, customerKey, [handleOutside]) ⇒ <code>boolean</code>
+Delete a data extension from the specified business unit
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>boolean</code> - deletion success flag  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>Util.BuObject</code> | references credentials |
+| customerKey | <code>string</code> | Identifier of metadata |
+| [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
 <a name="MetadataType.readBUMetadataForType"></a>
 
@@ -3157,6 +3399,111 @@ Returns metadata of a business unit that is saved locally
 | [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
 | [buMetadata] | <code>Object</code> |  | Metadata of BU in local directory |
 
+<a name="MobileCode"></a>
+
+## MobileCode ⇐ [<code>MetadataType</code>](#MetadataType)
+MobileCode MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [MobileCode](#MobileCode) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir)](#MobileCode.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.retrieveForCache()](#MobileCode.retrieveForCache) ⇒ <code>Promise.&lt;Object&gt;</code>
+
+<a name="MobileCode.retrieve"></a>
+
+### MobileCode.retrieve(retrieveDir) ⇒ <code>Promise.&lt;Object&gt;</code>
+Retrieves Metadata of Mobile Keywords
+Endpoint /legacy/v1/beta/mobile/code/ return all Mobile Codes with all details.
+
+**Kind**: static method of [<code>MobileCode</code>](#MobileCode)  
+**Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>String</code> | Directory where retrieved metadata directory will be saved |
+
+<a name="MobileCode.retrieveForCache"></a>
+
+### MobileCode.retrieveForCache() ⇒ <code>Promise.&lt;Object&gt;</code>
+Retrieves event definition metadata for caching
+
+**Kind**: static method of [<code>MobileCode</code>](#MobileCode)  
+**Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of metadata  
+<a name="MobileKeyword"></a>
+
+## MobileKeyword ⇐ [<code>MetadataType</code>](#MetadataType)
+MobileKeyword MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [MobileKeyword](#MobileKeyword) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir)](#MobileKeyword.retrieve) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveForCache()](#MobileKeyword.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#MobileKeyword.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
+    * [.create(MobileKeyword)](#MobileKeyword.create) ⇒ <code>Promise</code>
+    * [.preDeployTasks(metadata)](#MobileKeyword.preDeployTasks) ⇒ <code>Promise</code>
+
+<a name="MobileKeyword.retrieve"></a>
+
+### MobileKeyword.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+Retrieves Metadata of Mobile Keywords
+Endpoint /legacy/v1/beta/mobile/keyword/ return all Mobile Keywords with all details.
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+
+<a name="MobileKeyword.retrieveForCache"></a>
+
+### MobileKeyword.retrieveForCache() ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+Retrieves event definition metadata for caching
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of metadata  
+<a name="MobileKeyword.retrieveAsTemplate"></a>
+
+### MobileKeyword.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
+Retrieve a specific keyword
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| name | <code>string</code> | name of the metadata file |
+| templateVariables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
+
+<a name="MobileKeyword.create"></a>
+
+### MobileKeyword.create(MobileKeyword) ⇒ <code>Promise</code>
+Creates a single Event Definition
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| MobileKeyword | <code>Object</code> | a single Event Definition |
+
+<a name="MobileKeyword.preDeployTasks"></a>
+
+### MobileKeyword.preDeployTasks(metadata) ⇒ <code>Promise</code>
+prepares an event definition for deployment
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>Object</code> | a single MobileKeyword |
+
 <a name="Query"></a>
 
 ## Query ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -3168,7 +3515,7 @@ Query MetadataType
 * [Query](#Query) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir)](#Query.retrieve) ⇒ <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code>
     * [.retrieveForCache()](#Query.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Query.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Query.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:Query, type:string}&gt;</code>
     * [.postRetrieveTasks(metadata, _, isTemplating)](#Query.postRetrieveTasks) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
     * [.create(query)](#Query.create) ⇒ <code>Promise</code>
     * [.update(query)](#Query.update) ⇒ <code>Promise</code>
@@ -3197,11 +3544,11 @@ Retrieves query metadata for caching
 **Returns**: <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code> - Promise of metadata  
 <a name="Query.retrieveAsTemplate"></a>
 
-### Query.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code>
+### Query.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:Query, type:string}&gt;</code>
 Retrieve a specific Query by Name
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>Promise.&lt;{metadata:QueryMap, type:string}&gt;</code> - Promise of metadata  
+**Returns**: <code>Promise.&lt;{metadata:Query, type:string}&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3393,7 +3740,7 @@ Script MetadataType
 * [Script](#Script) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir)](#Script.retrieve) ⇒ <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code>
     * [.retrieveForCache()](#Script.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Script.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Script.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:Script, type:string}&gt;</code>
     * [.postRetrieveTasks(metadata, [_], [isTemplating])](#Script.postRetrieveTasks) ⇒ [<code>CodeExtractItem</code>](#CodeExtractItem)
     * [.update(script)](#Script.update) ⇒ <code>Promise</code>
     * [.create(script)](#Script.create) ⇒ <code>Promise</code>
@@ -3424,11 +3771,11 @@ Retrieves script metadata for caching
 **Returns**: <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code> - Promise  
 <a name="Script.retrieveAsTemplate"></a>
 
-### Script.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code>
+### Script.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:Script, type:string}&gt;</code>
 Retrieve a specific Script by Name
 
 **Kind**: static method of [<code>Script</code>](#Script)  
-**Returns**: <code>Promise.&lt;{metadata:ScriptMap, type:string}&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata:Script, type:string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3573,6 +3920,7 @@ MessageSendActivity MetadataType
     * [.retrieve(retrieveDir)](#TriggeredSendDefinition.retrieve) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.create(metadata)](#TriggeredSendDefinition.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#TriggeredSendDefinition.update) ⇒ <code>Promise</code>
+    * [.deleteByKey(buObject, customerKey)](#TriggeredSendDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postRetrieveTasks(metadata)](#TriggeredSendDefinition.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.parseMetadata(metadata)](#TriggeredSendDefinition.parseMetadata) ⇒ <code>Array</code>
     * [.preDeployTasks(metadata)](#TriggeredSendDefinition.preDeployTasks) ⇒ <code>Object</code>
@@ -3612,6 +3960,19 @@ Updates a single TSD.
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>Object</code> | single metadata entry |
+
+<a name="TriggeredSendDefinition.deleteByKey"></a>
+
+### TriggeredSendDefinition.deleteByKey(buObject, customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>Util.BuObject</code> | references credentials |
+| customerKey | <code>string</code> | Identifier of data extension |
 
 <a name="TriggeredSendDefinition.postRetrieveTasks"></a>
 
@@ -3658,7 +4019,7 @@ Retrieves metadata from a business unit and saves it to the local filesystem.
 
 * [Retriever](#Retriever)
     * [new Retriever(properties, buObject, client)](#new_Retriever_new)
-    * [.retrieve(metadataTypes, [name], [templateVariables], [changelogOnly])](#Retriever+retrieve) ⇒ <code>Promise.&lt;Object.&lt;string, Object&gt;&gt;</code>
+    * [.retrieve(metadataTypes, [name], [templateVariables], [changelogOnly])](#Retriever+retrieve) ⇒ <code>Promise.&lt;Util.MultiMetadataTypeList&gt;</code>
 
 <a name="new_Retriever_new"></a>
 
@@ -3681,11 +4042,11 @@ Creates a Retriever, uses v2 auth if v2AuthOptions are passed.
 
 <a name="Retriever+retrieve"></a>
 
-### retriever.retrieve(metadataTypes, [name], [templateVariables], [changelogOnly]) ⇒ <code>Promise.&lt;Object.&lt;string, Object&gt;&gt;</code>
+### retriever.retrieve(metadataTypes, [name], [templateVariables], [changelogOnly]) ⇒ <code>Promise.&lt;Util.MultiMetadataTypeList&gt;</code>
 Retrieve metadata of specified types into local file system and Retriever.metadata
 
 **Kind**: instance method of [<code>Retriever</code>](#Retriever)  
-**Returns**: <code>Promise.&lt;Object.&lt;string, Object&gt;&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;Util.MultiMetadataTypeList&gt;</code> - Promise of a list of retrieved items grouped by type {automation:[...], query:[...]}  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3703,23 +4064,22 @@ CLI entry for SFMC DevTools
 
 * [Util](#Util)
     * [.logger](#Util.logger)
+    * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>boolean</code> \| <code>Array.&lt;String&gt;</code>
+    * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;String&gt;)&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>String</code> \| <code>Object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>String</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;String&gt;</code>
     * [.getETClient(buObject)](#Util.getETClient) ⇒ [<code>Promise.&lt;SDK&gt;</code>](#SDK)
         * [~sdk](#Util.getETClient..sdk) : [<code>SDK</code>](#SDK)
-    * [.getFromCache(cache, metadataType, searchValue, searchField, returnField)](#Util.getFromCache) ⇒ <code>String</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
-    * [.getListObjectIdFromCache(cache, listPathName, returnField)](#Util.getListObjectIdFromCache) ⇒ <code>String</code>
-    * [.getListPathNameFromCache(cache, searchValue, searchField)](#Util.getListPathNameFromCache) ⇒ <code>String</code>
-    * [.retryOnError(errorMsg, callback, [silentError], [retries])](#Util.retryOnError) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
+    * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>MetadataTypeItem</code>
+    * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
 
 <a name="Util.logger"></a>
 
@@ -3727,6 +4087,12 @@ CLI entry for SFMC DevTools
 Logger that creates timestamped log file in 'logs/' directory
 
 **Kind**: static property of [<code>Util</code>](#Util)  
+<a name="Util.signalFatalError"></a>
+
+### Util.signalFatalError() ⇒ <code>void</code>
+used to ensure the program tells surrounding software that an unrecoverable error occured
+
+**Kind**: static method of [<code>Util</code>](#Util)  
 <a name="Util.isTrue"></a>
 
 ### Util.isTrue(attrValue) ⇒ <code>boolean</code>
@@ -3768,11 +4134,11 @@ helper for getDefaultProperties()
 **Returns**: <code>Array.&lt;string&gt;</code> - type choices  
 <a name="Util.checkProperties"></a>
 
-### Util.checkProperties(properties, [silent]) ⇒ <code>boolean</code> \| <code>Array.&lt;String&gt;</code>
+### Util.checkProperties(properties, [silent]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;String&gt;)&gt;</code>
 check if the config file is correctly formatted and has values
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> \| <code>Array.&lt;String&gt;</code> - file structure ok OR list of fields to be fixed  
+**Returns**: <code>Promise.&lt;(boolean\|Array.&lt;String&gt;)&gt;</code> - file structure ok OR list of fields to be fixed  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3806,7 +4172,7 @@ key-value pairs (obj)
 | Param | Type | Description |
 | --- | --- | --- |
 | str | <code>String</code> \| <code>Object</code> | JSON object or its stringified version, which has values to be replaced |
-| obj | [<code>TemplateMap</code>](#TemplateMap) | key value object which contains keys to be replaced and values to be replaced with |
+| obj | <code>TemplateMap</code> | key value object which contains keys to be replaced and values to be replaced with |
 
 <a name="Util.inverseGet"></a>
 
@@ -3849,22 +4215,6 @@ signs in with SFMC
 
 #### getETClient~sdk : [<code>SDK</code>](#SDK)
 **Kind**: inner constant of [<code>getETClient</code>](#Util.getETClient)  
-<a name="Util.getFromCache"></a>
-
-### Util.getFromCache(cache, metadataType, searchValue, searchField, returnField) ⇒ <code>String</code>
-standardized method for getting data from cache.
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>String</code> - unique user definable metadata key (usually external/customer key)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| cache | <code>Object</code> | data retrieved from sfmc instance |
-| metadataType | <code>String</code> | metadata type ie. query |
-| searchValue | <code>String</code> | unique identifier of metadata being looked for |
-| searchField | <code>String</code> | field name (key in object) which contains the unique identifer |
-| returnField | <code>String</code> | field which should be returned |
-
 <a name="Util.resolveObjPath"></a>
 
 ### Util.resolveObjPath(path, obj) ⇒ <code>any</code>
@@ -3878,51 +4228,6 @@ let's you dynamically walk down an object and get a value
 | path | <code>String</code> | 'fieldA.fieldB.fieldC' |
 | obj | <code>Object</code> | some parent object |
 
-<a name="Util.getListObjectIdFromCache"></a>
-
-### Util.getListObjectIdFromCache(cache, listPathName, returnField) ⇒ <code>String</code>
-standardized method for getting data from cache - adapted for special case of lists
-! keeping this in util/util.js rather than in metadataTypes/List.js to avoid potential circular dependencies
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>String</code> - unique ObjectId of list  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| cache | <code>Object</code> | data retrieved from sfmc instance |
-| listPathName | <code>String</code> | folderPath/ListName combo of list |
-| returnField | <code>String</code> | ObjectID or ID |
-
-<a name="Util.getListPathNameFromCache"></a>
-
-### Util.getListPathNameFromCache(cache, searchValue, searchField) ⇒ <code>String</code>
-standardized method for getting data from cache - adapted for special case of lists
-! keeping this in util/util.js rather than in metadataTypes/List.js to avoid potential circular dependencies
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>String</code> - unique folderPath/ListName combo of list  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| cache | <code>Object</code> | data retrieved from sfmc instance |
-| searchValue | <code>String</code> | unique identifier of metadata being looked for |
-| searchField | <code>String</code> | ObjectID or ID |
-
-<a name="Util.retryOnError"></a>
-
-### Util.retryOnError(errorMsg, callback, [silentError], [retries]) ⇒ <code>Promise.&lt;void&gt;</code>
-retry on network issues
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| errorMsg | <code>String</code> |  | what to print behind "Connection error. " |
-| callback | <code>function</code> |  | what to try executing |
-| [silentError] | <code>Boolean</code> | <code>false</code> | prints retry messages to log only; default=false |
-| [retries] | <code>Number</code> | <code>1</code> | number of retries; default=1 |
-
 <a name="Util.execSync"></a>
 
 ### Util.execSync(cmd, [args]) ⇒ <code>undefined</code>
@@ -3934,6 +4239,34 @@ helper to run other commands as if run manually by user
 | --- | --- | --- |
 | cmd | <code>string</code> | to be executed command |
 | [args] | <code>Array.&lt;string&gt;</code> | list of arguments |
+
+<a name="Util.templateSearchResult"></a>
+
+### Util.templateSearchResult(results, keyToSearch, searchValue) ⇒ <code>MetadataTypeItem</code>
+standardize check to ensure only one result is returned from template search
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>MetadataTypeItem</code> - metadata to be used in building template  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| results | <code>Array.&lt;MetadataTypeItem&gt;</code> | array of metadata |
+| keyToSearch | <code>string</code> | the field which contains the searched value |
+| searchValue | <code>string</code> | the value which is being looked for |
+
+<a name="Util.setLoggingLevel"></a>
+
+### Util.setLoggingLevel(argv) ⇒ <code>void</code>
+configures what is displayed in the console
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| argv | <code>Object</code> | list of command line parameters given by user |
+| [argv.silent] | <code>boolean</code> | only errors printed to CLI |
+| [argv.verbose] | <code>boolean</code> | chatty user CLI output |
+| [argv.debug] | <code>boolean</code> | enables developer output & features |
 
 <a name="MetadataTypeDefinitions"></a>
 
@@ -4165,17 +4498,17 @@ DevOps helper class
 **Kind**: global constant  
 
 * [DevOps](#DevOps)
-    * [.createDeltaPkg(properties, [range], [saveToDeployDir], [filterPaths])](#DevOps.createDeltaPkg) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.createDeltaPkg(properties, [range], [saveToDeployDir], [filterPaths])](#DevOps.createDeltaPkg) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
     * [.document(directory, jsonReport)](#DevOps.document) ⇒ <code>void</code>
 
 <a name="DevOps.createDeltaPkg"></a>
 
-### DevOps.createDeltaPkg(properties, [range], [saveToDeployDir], [filterPaths]) ⇒ <code>Promise.&lt;Object&gt;</code>
+### DevOps.createDeltaPkg(properties, [range], [saveToDeployDir], [filterPaths]) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
 Extracts the delta between a commit and the current state for deployment.
 Interactive commit selection if no commits are passed.
 
 **Kind**: static method of [<code>DevOps</code>](#DevOps)  
-**Returns**: <code>Promise.&lt;Object&gt;</code> - -  
+**Returns**: <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4475,7 +4808,7 @@ CLI helper class
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [.createIdeConfigFiles()](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
-    * [._createIdeConfigFile(fileNameArr, [fileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+    * [._createIdeConfigFile(fileNameArr, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status:String, repoName:String}&gt;</code>
     * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
     * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>String</code>
@@ -4522,7 +4855,7 @@ recursive helper for _fixMcdevConfig that adds missing settings
 
 <a name="Init._createIdeConfigFile"></a>
 
-### Init.\_createIdeConfigFile(fileNameArr, [fileContent]) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+### Init.\_createIdeConfigFile(fileNameArr, [boilerplateFileContent]) ⇒ <code>Promise.&lt;Boolean&gt;</code>
 handles creation/update of one config file from the boilerplate at a time
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -4531,7 +4864,7 @@ handles creation/update of one config file from the boilerplate at a time
 | Param | Type | Description |
 | --- | --- | --- |
 | fileNameArr | <code>Array.&lt;String&gt;</code> | 0: path, 1: filename, 2: extension with dot |
-| [fileContent] | <code>String</code> | in case we cannot copy files 1:1 this can be used to pass in content |
+| [boilerplateFileContent] | <code>String</code> | in case we cannot copy files 1:1 this can be used to pass in content |
 
 <a name="Init.initGitRepo"></a>
 
@@ -4685,7 +5018,7 @@ CLI helper class
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [.createIdeConfigFiles()](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
-    * [._createIdeConfigFile(fileNameArr, [fileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+    * [._createIdeConfigFile(fileNameArr, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status:String, repoName:String}&gt;</code>
     * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
     * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>String</code>
@@ -4732,7 +5065,7 @@ recursive helper for _fixMcdevConfig that adds missing settings
 
 <a name="Init._createIdeConfigFile"></a>
 
-### Init.\_createIdeConfigFile(fileNameArr, [fileContent]) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+### Init.\_createIdeConfigFile(fileNameArr, [boilerplateFileContent]) ⇒ <code>Promise.&lt;Boolean&gt;</code>
 handles creation/update of one config file from the boilerplate at a time
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -4741,7 +5074,7 @@ handles creation/update of one config file from the boilerplate at a time
 | Param | Type | Description |
 | --- | --- | --- |
 | fileNameArr | <code>Array.&lt;String&gt;</code> | 0: path, 1: filename, 2: extension with dot |
-| [fileContent] | <code>String</code> | in case we cannot copy files 1:1 this can be used to pass in content |
+| [boilerplateFileContent] | <code>String</code> | in case we cannot copy files 1:1 this can be used to pass in content |
 
 <a name="Init.initGitRepo"></a>
 
@@ -4895,7 +5228,7 @@ CLI helper class
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [.createIdeConfigFiles()](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
-    * [._createIdeConfigFile(fileNameArr, [fileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+    * [._createIdeConfigFile(fileNameArr, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status:String, repoName:String}&gt;</code>
     * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
     * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>String</code>
@@ -4942,7 +5275,7 @@ recursive helper for _fixMcdevConfig that adds missing settings
 
 <a name="Init._createIdeConfigFile"></a>
 
-### Init.\_createIdeConfigFile(fileNameArr, [fileContent]) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+### Init.\_createIdeConfigFile(fileNameArr, [boilerplateFileContent]) ⇒ <code>Promise.&lt;Boolean&gt;</code>
 handles creation/update of one config file from the boilerplate at a time
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -4951,7 +5284,7 @@ handles creation/update of one config file from the boilerplate at a time
 | Param | Type | Description |
 | --- | --- | --- |
 | fileNameArr | <code>Array.&lt;String&gt;</code> | 0: path, 1: filename, 2: extension with dot |
-| [fileContent] | <code>String</code> | in case we cannot copy files 1:1 this can be used to pass in content |
+| [boilerplateFileContent] | <code>String</code> | in case we cannot copy files 1:1 this can be used to pass in content |
 
 <a name="Init.initGitRepo"></a>
 
@@ -5105,7 +5438,7 @@ CLI helper class
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [.createIdeConfigFiles()](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
-    * [._createIdeConfigFile(fileNameArr, [fileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+    * [._createIdeConfigFile(fileNameArr, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status:String, repoName:String}&gt;</code>
     * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
     * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>String</code>
@@ -5152,7 +5485,7 @@ recursive helper for _fixMcdevConfig that adds missing settings
 
 <a name="Init._createIdeConfigFile"></a>
 
-### Init.\_createIdeConfigFile(fileNameArr, [fileContent]) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+### Init.\_createIdeConfigFile(fileNameArr, [boilerplateFileContent]) ⇒ <code>Promise.&lt;Boolean&gt;</code>
 handles creation/update of one config file from the boilerplate at a time
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -5161,7 +5494,7 @@ handles creation/update of one config file from the boilerplate at a time
 | Param | Type | Description |
 | --- | --- | --- |
 | fileNameArr | <code>Array.&lt;String&gt;</code> | 0: path, 1: filename, 2: extension with dot |
-| [fileContent] | <code>String</code> | in case we cannot copy files 1:1 this can be used to pass in content |
+| [boilerplateFileContent] | <code>String</code> | in case we cannot copy files 1:1 this can be used to pass in content |
 
 <a name="Init.initGitRepo"></a>
 
@@ -5317,23 +5650,22 @@ Util that contains logger and simple util methods
 
 * [Util](#Util)
     * [.logger](#Util.logger)
+    * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>boolean</code> \| <code>Array.&lt;String&gt;</code>
+    * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;String&gt;)&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>String</code> \| <code>Object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>String</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;String&gt;</code>
     * [.getETClient(buObject)](#Util.getETClient) ⇒ [<code>Promise.&lt;SDK&gt;</code>](#SDK)
         * [~sdk](#Util.getETClient..sdk) : [<code>SDK</code>](#SDK)
-    * [.getFromCache(cache, metadataType, searchValue, searchField, returnField)](#Util.getFromCache) ⇒ <code>String</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
-    * [.getListObjectIdFromCache(cache, listPathName, returnField)](#Util.getListObjectIdFromCache) ⇒ <code>String</code>
-    * [.getListPathNameFromCache(cache, searchValue, searchField)](#Util.getListPathNameFromCache) ⇒ <code>String</code>
-    * [.retryOnError(errorMsg, callback, [silentError], [retries])](#Util.retryOnError) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
+    * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>MetadataTypeItem</code>
+    * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
 
 <a name="Util.logger"></a>
 
@@ -5341,6 +5673,12 @@ Util that contains logger and simple util methods
 Logger that creates timestamped log file in 'logs/' directory
 
 **Kind**: static property of [<code>Util</code>](#Util)  
+<a name="Util.signalFatalError"></a>
+
+### Util.signalFatalError() ⇒ <code>void</code>
+used to ensure the program tells surrounding software that an unrecoverable error occured
+
+**Kind**: static method of [<code>Util</code>](#Util)  
 <a name="Util.isTrue"></a>
 
 ### Util.isTrue(attrValue) ⇒ <code>boolean</code>
@@ -5382,11 +5720,11 @@ helper for getDefaultProperties()
 **Returns**: <code>Array.&lt;string&gt;</code> - type choices  
 <a name="Util.checkProperties"></a>
 
-### Util.checkProperties(properties, [silent]) ⇒ <code>boolean</code> \| <code>Array.&lt;String&gt;</code>
+### Util.checkProperties(properties, [silent]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;String&gt;)&gt;</code>
 check if the config file is correctly formatted and has values
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> \| <code>Array.&lt;String&gt;</code> - file structure ok OR list of fields to be fixed  
+**Returns**: <code>Promise.&lt;(boolean\|Array.&lt;String&gt;)&gt;</code> - file structure ok OR list of fields to be fixed  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5420,7 +5758,7 @@ key-value pairs (obj)
 | Param | Type | Description |
 | --- | --- | --- |
 | str | <code>String</code> \| <code>Object</code> | JSON object or its stringified version, which has values to be replaced |
-| obj | [<code>TemplateMap</code>](#TemplateMap) | key value object which contains keys to be replaced and values to be replaced with |
+| obj | <code>TemplateMap</code> | key value object which contains keys to be replaced and values to be replaced with |
 
 <a name="Util.inverseGet"></a>
 
@@ -5463,22 +5801,6 @@ signs in with SFMC
 
 #### getETClient~sdk : [<code>SDK</code>](#SDK)
 **Kind**: inner constant of [<code>getETClient</code>](#Util.getETClient)  
-<a name="Util.getFromCache"></a>
-
-### Util.getFromCache(cache, metadataType, searchValue, searchField, returnField) ⇒ <code>String</code>
-standardized method for getting data from cache.
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>String</code> - unique user definable metadata key (usually external/customer key)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| cache | <code>Object</code> | data retrieved from sfmc instance |
-| metadataType | <code>String</code> | metadata type ie. query |
-| searchValue | <code>String</code> | unique identifier of metadata being looked for |
-| searchField | <code>String</code> | field name (key in object) which contains the unique identifer |
-| returnField | <code>String</code> | field which should be returned |
-
 <a name="Util.resolveObjPath"></a>
 
 ### Util.resolveObjPath(path, obj) ⇒ <code>any</code>
@@ -5492,51 +5814,6 @@ let's you dynamically walk down an object and get a value
 | path | <code>String</code> | 'fieldA.fieldB.fieldC' |
 | obj | <code>Object</code> | some parent object |
 
-<a name="Util.getListObjectIdFromCache"></a>
-
-### Util.getListObjectIdFromCache(cache, listPathName, returnField) ⇒ <code>String</code>
-standardized method for getting data from cache - adapted for special case of lists
-! keeping this in util/util.js rather than in metadataTypes/List.js to avoid potential circular dependencies
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>String</code> - unique ObjectId of list  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| cache | <code>Object</code> | data retrieved from sfmc instance |
-| listPathName | <code>String</code> | folderPath/ListName combo of list |
-| returnField | <code>String</code> | ObjectID or ID |
-
-<a name="Util.getListPathNameFromCache"></a>
-
-### Util.getListPathNameFromCache(cache, searchValue, searchField) ⇒ <code>String</code>
-standardized method for getting data from cache - adapted for special case of lists
-! keeping this in util/util.js rather than in metadataTypes/List.js to avoid potential circular dependencies
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>String</code> - unique folderPath/ListName combo of list  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| cache | <code>Object</code> | data retrieved from sfmc instance |
-| searchValue | <code>String</code> | unique identifier of metadata being looked for |
-| searchField | <code>String</code> | ObjectID or ID |
-
-<a name="Util.retryOnError"></a>
-
-### Util.retryOnError(errorMsg, callback, [silentError], [retries]) ⇒ <code>Promise.&lt;void&gt;</code>
-retry on network issues
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| errorMsg | <code>String</code> |  | what to print behind "Connection error. " |
-| callback | <code>function</code> |  | what to try executing |
-| [silentError] | <code>Boolean</code> | <code>false</code> | prints retry messages to log only; default=false |
-| [retries] | <code>Number</code> | <code>1</code> | number of retries; default=1 |
-
 <a name="Util.execSync"></a>
 
 ### Util.execSync(cmd, [args]) ⇒ <code>undefined</code>
@@ -5548,6 +5825,34 @@ helper to run other commands as if run manually by user
 | --- | --- | --- |
 | cmd | <code>string</code> | to be executed command |
 | [args] | <code>Array.&lt;string&gt;</code> | list of arguments |
+
+<a name="Util.templateSearchResult"></a>
+
+### Util.templateSearchResult(results, keyToSearch, searchValue) ⇒ <code>MetadataTypeItem</code>
+standardize check to ensure only one result is returned from template search
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>MetadataTypeItem</code> - metadata to be used in building template  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| results | <code>Array.&lt;MetadataTypeItem&gt;</code> | array of metadata |
+| keyToSearch | <code>string</code> | the field which contains the searched value |
+| searchValue | <code>string</code> | the value which is being looked for |
+
+<a name="Util.setLoggingLevel"></a>
+
+### Util.setLoggingLevel(argv) ⇒ <code>void</code>
+configures what is displayed in the console
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| argv | <code>Object</code> | list of command line parameters given by user |
+| [argv.silent] | <code>boolean</code> | only errors printed to CLI |
+| [argv.verbose] | <code>boolean</code> | chatty user CLI output |
+| [argv.debug] | <code>boolean</code> | enables developer output & features |
 
 <a name="getUserName"></a>
 
@@ -5705,16 +6010,114 @@ REST format
 | FieldType | <code>&#x27;Text&#x27;</code> \| <code>&#x27;Number&#x27;</code> \| <code>&#x27;Date&#x27;</code> \| <code>&#x27;Boolean&#x27;</code> \| <code>&#x27;Decimal&#x27;</code> \| <code>&#x27;EmailAddress&#x27;</code> \| <code>&#x27;Phone&#x27;</code> \| <code>&#x27;Locale&#x27;</code> | can only be set on create |
 | Scale | <code>string</code> | the number of places after the decimal that the field can hold; example: "0","1", ... |
 
-<a name="MultiMetadataTypeMap"></a>
+<a name="FilterMap"></a>
 
-## MultiMetadataTypeMap : <code>Object.&lt;string, any&gt;</code>
+## FilterMap : <code>Object</code>
 **Kind**: global typedef  
 **Properties**
 
 | Name | Type | Description |
 | --- | --- | --- |
-| json | <code>MetadataTypeItem</code> | metadata of one item w/o code |
-| codeArr | <code>Array.&lt;CodeExtract&gt;</code> | list of code snippets in this item |
+| categoryId | <code>number</code> | folder id |
+| [createdDate] | <code>string</code> | - |
+| customerKey | <code>string</code> | key |
+| destinationObjectId | <code>string</code> | DE/List ID |
+| destinationTypeId | <code>1</code> \| <code>2</code> \| <code>3</code> \| <code>4</code> | 1:SubscriberList, 2:DataExtension, 3:GroupWizard, 4:BehavioralData |
+| filterActivityId | <code>string</code> | ? |
+| filterDefinitionId | <code>string</code> | ObjectID of filterDefinition |
+| modifiedDate | <code>string</code> | - |
+| name | <code>string</code> | name |
+| sourceObjectId | <code>string</code> | DE/List ID |
+| sourceTypeId | <code>1</code> \| <code>2</code> \| <code>3</code> \| <code>4</code> | 1:SubscriberList, 2:DataExtension, 3:GroupWizard, 4:BehavioralData |
+| statusId | <code>number</code> | ? |
+
+<a name="FilterDefinitionMap"></a>
+
+## FilterDefinitionMap : <code>Object</code>
+/automation/v1/filterdefinitions/<id> (not used)
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| ObjectID | <code>string</code> | id |
+| CustomerKey | <code>string</code> | key |
+| [DataFilter] | <code>Object</code> | most relevant part that defines the filter |
+| DataFilter.LeftOperand | <code>Object</code> | - |
+| DataFilter.LeftOperand.Property | <code>string</code> | - |
+| DataFilter.LeftOperand.SimpleOperator | <code>string</code> | - |
+| DataFilter.LeftOperand.Value | <code>string</code> | - |
+| DataFilter.LogicalOperator | <code>string</code> | - |
+| [DataFilter.RightOperand] | <code>Object</code> | - |
+| DataFilter.RightOperand.Property | <code>string</code> | - |
+| DataFilter.RightOperand.SimpleOperator | <code>string</code> | - |
+| DataFilter.RightOperand.Value | <code>string</code> | - |
+| Name | <code>string</code> | name |
+| Description | <code>string</code> | - |
+| [ObjectState] | <code>string</code> | returned from SOAP API; used to return error messages |
+| id | <code>string</code> | object id |
+| key | <code>string</code> | external key |
+| createdDate | <code>string</code> | - |
+| createdBy | <code>number</code> | user id |
+| createdName | <code>string</code> | - |
+| [description] | <code>string</code> | (omitted by API if empty) |
+| modifiedDate | <code>string</code> | - |
+| modifiedBy | <code>number</code> | user id |
+| modifiedName | <code>string</code> | - |
+| name | <code>string</code> | name |
+| categoryId | <code>string</code> | folder id |
+| filterDefinitionXml | <code>string</code> | from REST API defines the filter in XML form |
+| derivedFromType | <code>1</code> \| <code>2</code> | 1:list/profile attributes/measures, 2: dataExtension |
+| isSendable | <code>boolean</code> | ? |
+| [soap__DataFilter] | <code>Object</code> | copied from SOAP API, defines the filter in readable form |
+| soap__DataFilter.LeftOperand | <code>Object</code> | - |
+| soap__DataFilter.LeftOperand.Property | <code>string</code> | - |
+| soap__DataFilter.LeftOperand.SimpleOperator | <code>string</code> | - |
+| soap__DataFilter.LeftOperand.Value | <code>string</code> | - |
+| soap__DataFilter.LogicalOperator | <code>string</code> | - |
+| [soap__DataFilter.RightOperand] | <code>Object</code> | - |
+| soap__DataFilter.RightOperand.Property | <code>string</code> | - |
+| soap__DataFilter.RightOperand.SimpleOperator | <code>string</code> | - |
+| soap__DataFilter.RightOperand.Value | <code>string</code> | /email/v1/filters/filterdefinition/<id> |
+| id | <code>string</code> | object id |
+| key | <code>string</code> | external key |
+| createdDate | <code>string</code> | date |
+| createdBy | <code>number</code> | user id |
+| createdName | <code>string</code> | name |
+| [description] | <code>string</code> | (omitted by API if empty) |
+| lastUpdated | <code>string</code> | date |
+| lastUpdatedBy | <code>number</code> | user id |
+| lastUpdatedName | <code>string</code> | name |
+| name | <code>string</code> | name |
+| categoryId | <code>string</code> | folder id |
+| filterDefinitionXml | <code>string</code> | from REST API defines the filter in XML form |
+| derivedFromType | <code>1</code> \| <code>2</code> | 1:list/profile attributes/measures, 2: dataExtension |
+| derivedFromObjectId | <code>string</code> | Id of DataExtension - present if derivedFromType=2 |
+| derivedFromObjectTypeName | <code>&#x27;DataExtension&#x27;</code> \| <code>&#x27;SubscriberAttributes&#x27;</code> | - |
+| [derivedFromObjectName] | <code>string</code> | name of DataExtension |
+| isSendable | <code>boolean</code> | ? |
+| [soap__DataFilter] | <code>Object</code> | copied from SOAP API, defines the filter in readable form |
+| soap__DataFilter.LeftOperand | <code>Object</code> | - |
+| soap__DataFilter.LeftOperand.Property | <code>string</code> | - |
+| soap__DataFilter.LeftOperand.SimpleOperator | <code>string</code> | - |
+| soap__DataFilter.LeftOperand.Value | <code>string</code> | - |
+| soap__DataFilter.LogicalOperator | <code>string</code> | - |
+| [soap__DataFilter.RightOperand] | <code>Object</code> | - |
+| soap__DataFilter.RightOperand.Property | <code>string</code> | - |
+| soap__DataFilter.RightOperand.SimpleOperator | <code>string</code> | - |
+| soap__DataFilter.RightOperand.Value | <code>string</code> | - |
+
+<a name="CodeExtract"></a>
+
+## CodeExtract : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| json | <code>Util.MetadataTypeItem</code> | metadata of one item w/o code |
+| codeArr | [<code>Array.&lt;CodeExtract&gt;</code>](#CodeExtract) | list of code snippets in this item |
 | subFolder | <code>Array.&lt;string&gt;</code> | mostly set to null, otherwise list of subfolders |
 | subFolder | <code>Array.&lt;string&gt;</code> | mostly set to null, otherwise subfolders path split into elements |
 | fileName | <code>string</code> | name of file w/o extension |
@@ -5768,7 +6171,601 @@ REST format
 | codeArr | <code>Array.&lt;MetadataType.CodeExtract&gt;</code> | list of code snippets in this item |
 | subFolder | <code>Array.&lt;string&gt;</code> | mostly set to null, otherwise list of subfolders |
 
-<a name="TemplateMap"></a>
+<a name="MetadataType"></a>
 
-## TemplateMap : <code>Object.&lt;string, string&gt;</code>
+## MetadataType : <code>require(&#x27;../metadataTypes/MetadataType.js&#x27;)</code>
+**Kind**: global typedef  
+
+* [MetadataType](#MetadataType) : <code>require(&#x27;../metadataTypes/MetadataType.js&#x27;)</code>
+    * [.client](#MetadataType.client) : <code>Util.SDK</code>
+    * [.properties](#MetadataType.properties) : <code>Util.MultiMetadataTypeMap</code>
+    * [.subType](#MetadataType.subType) : <code>string</code>
+    * [.buObject](#MetadataType.buObject) : <code>Object</code>
+    * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType.getJsonFromFS) ⇒ <code>Object</code>
+    * [.getFieldNamesToRetrieve([additionalFields])](#MetadataType.getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.deploy(metadata, deployDir, retrieveDir, buObject)](#MetadataType.deploy) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.postDeployTasks(metadata, originalMetadata)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
+    * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>Util.MetadataTypeItem</code>
+    * [.overrideKeyWithName(metadata, [warningMsg])](#MetadataType.overrideKeyWithName) ⇒ <code>void</code>
+    * [.retrieve(retrieveDir, [additionalFields], buObject, [subType])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveChangelog([additionalFields], buObject, [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
+    * [.preDeployTasks(metadata, deployDir)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;Util.MetadataTypeItem&gt;</code>
+    * [.create(metadata, deployDir)](#MetadataType.create) ⇒ <code>void</code>
+    * [.update(metadata, [metadataBefore])](#MetadataType.update) ⇒ <code>void</code>
+    * [.upsert(metadata, deployDir, [buObject])](#MetadataType.upsert) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
+    * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise</code>
+    * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise</code>
+    * [.updateREST(metadataEntry, uri)](#MetadataType.updateREST) ⇒ <code>Promise</code>
+    * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
+    * [.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (Util.MetadataTypeMap\|Util.MetadataTypeItem), type:string}&gt;</code>
+    * [.parseResponseBody(body)](#MetadataType.parseResponseBody) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
+    * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
+    * [.removeNotCreateableFields(metadataEntry)](#MetadataType.removeNotCreateableFields) ⇒ <code>void</code>
+    * [.removeNotUpdateableFields(metadataEntry)](#MetadataType.removeNotUpdateableFields) ⇒ <code>void</code>
+    * [.keepTemplateFields(metadataEntry)](#MetadataType.keepTemplateFields) ⇒ <code>void</code>
+    * [.keepRetrieveFields(metadataEntry)](#MetadataType.keepRetrieveFields) ⇒ <code>void</code>
+    * [.isFiltered(metadataEntry, [include])](#MetadataType.isFiltered) ⇒ <code>boolean</code>
+    * [.isFilteredFolder(metadataEntry, [include])](#MetadataType.isFilteredFolder) ⇒ <code>boolean</code>
+    * [.saveResults(results, retrieveDir, [overrideType], [templateVariables])](#MetadataType.saveResults) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
+    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#MetadataType.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.findSubType(templateDir, templateName)](#MetadataType.findSubType) ⇒ <code>string</code>
+    * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName, ex)](#MetadataType.readSecondaryFolder) ⇒ <code>Object</code>
+    * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType.buildDefinition) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.checkForErrors(ex)](#MetadataType.checkForErrors) ⇒ <code>string</code>
+    * [.document([buObject], [metadata], [isDeploy])](#MetadataType.document) ⇒ <code>void</code>
+    * [.deleteByKey(buObject, customerKey)](#MetadataType.deleteByKey) ⇒ <code>boolean</code>
+    * [.postDeleteTasks(buObject, customerKey)](#MetadataType.postDeleteTasks) ⇒ <code>void</code>
+    * [.deleteByKeySOAP(buObject, customerKey, [handleOutside])](#MetadataType.deleteByKeySOAP) ⇒ <code>boolean</code>
+    * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType.readBUMetadataForType) ⇒ <code>Object</code>
+
+<a name="MetadataType.client"></a>
+
+### MetadataType.client : <code>Util.SDK</code>
+**Kind**: static property of [<code>MetadataType</code>](#MetadataType)  
+<a name="MetadataType.properties"></a>
+
+### MetadataType.properties : <code>Util.MultiMetadataTypeMap</code>
+**Kind**: static property of [<code>MetadataType</code>](#MetadataType)  
+<a name="MetadataType.subType"></a>
+
+### MetadataType.subType : <code>string</code>
+**Kind**: static property of [<code>MetadataType</code>](#MetadataType)  
+<a name="MetadataType.buObject"></a>
+
+### MetadataType.buObject : <code>Object</code>
+**Kind**: static property of [<code>MetadataType</code>](#MetadataType)  
+<a name="MetadataType.getJsonFromFS"></a>
+
+### MetadataType.getJsonFromFS(dir, [listBadKeys]) ⇒ <code>Object</code>
+Returns file contents mapped to their filename without '.json' ending
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Object</code> - fileName => fileContent map  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| dir | <code>string</code> |  | directory that contains '.json' files to be read |
+| [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
+
+<a name="MetadataType.getFieldNamesToRetrieve"></a>
+
+### MetadataType.getFieldNamesToRetrieve([additionalFields]) ⇒ <code>Array.&lt;string&gt;</code>
+Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
+
+<a name="MetadataType.deploy"></a>
+
+### MetadataType.deploy(metadata, deployDir, retrieveDir, buObject) ⇒ <code>Promise.&lt;Object&gt;</code>
+Deploys metadata
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;Object&gt;</code> - Promise of keyField => metadata map  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>Util.MetadataTypeMap</code> | metadata mapped by their keyField |
+| deployDir | <code>string</code> | directory where deploy metadata are saved |
+| retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
+| buObject | <code>Util.BuObject</code> | properties for auth |
+
+<a name="MetadataType.postDeployTasks"></a>
+
+### MetadataType.postDeployTasks(metadata, originalMetadata) ⇒ <code>void</code>
+Gets executed after deployment of metadata type
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>Util.MetadataTypeMap</code> | metadata mapped by their keyField |
+| originalMetadata | <code>Util.MetadataTypeMap</code> | metadata to be updated (contains additioanl fields) |
+
+<a name="MetadataType.postRetrieveTasks"></a>
+
+### MetadataType.postRetrieveTasks(metadata, targetDir, [isTemplating]) ⇒ <code>Util.MetadataTypeItem</code>
+Gets executed after retreive of metadata type
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Util.MetadataTypeItem</code> - cloned metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>Util.MetadataTypeItem</code> | a single item |
+| targetDir | <code>string</code> | folder where retrieves should be saved |
+| [isTemplating] | <code>boolean</code> | signals that we are retrieving templates |
+
+<a name="MetadataType.overrideKeyWithName"></a>
+
+### MetadataType.overrideKeyWithName(metadata, [warningMsg]) ⇒ <code>void</code>
+used to synchronize name and external key during retrieveAsTemplate
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>Util.MetadataTypeItem</code> | a single item |
+| [warningMsg] | <code>string</code> | optional msg to show the user |
+
+<a name="MetadataType.retrieve"></a>
+
+### MetadataType.retrieve(retrieveDir, [additionalFields], buObject, [subType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+Gets metadata from Marketing Cloud
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
+| buObject | <code>Util.BuObject</code> | properties for auth |
+| [subType] | <code>string</code> | optionally limit to a single subtype |
+
+<a name="MetadataType.retrieveChangelog"></a>
+
+### MetadataType.retrieveChangelog([additionalFields], buObject, [subType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+Gets metadata from Marketing Cloud
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
+| buObject | <code>Util.BuObject</code> | properties for auth |
+| [subType] | <code>string</code> | optionally limit to a single subtype |
+
+<a name="MetadataType.retrieveForCache"></a>
+
+### MetadataType.retrieveForCache(buObject, [subType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+Gets metadata cache with limited fields and does not store value to disk
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>Util.BuObject</code> | properties for auth |
+| [subType] | <code>string</code> | optionally limit to a single subtype |
+
+<a name="MetadataType.retrieveAsTemplate"></a>
+
+### MetadataType.retrieveAsTemplate(templateDir, name, templateVariables, [subType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
+Gets metadata cache with limited fields and does not store value to disk
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code> - metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| name | <code>string</code> | name of the metadata file |
+| templateVariables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
+| [subType] | <code>string</code> | optionally limit to a single subtype |
+
+<a name="MetadataType.preDeployTasks"></a>
+
+### MetadataType.preDeployTasks(metadata, deployDir) ⇒ <code>Promise.&lt;Util.MetadataTypeItem&gt;</code>
+Gets executed before deploying metadata
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;Util.MetadataTypeItem&gt;</code> - Promise of a single metadata item  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>Util.MetadataTypeItem</code> | a single metadata item |
+| deployDir | <code>string</code> | folder where files for deployment are stored |
+
+<a name="MetadataType.create"></a>
+
+### MetadataType.create(metadata, deployDir) ⇒ <code>void</code>
+Abstract create method that needs to be implemented in child metadata type
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>Util.MetadataTypeItem</code> | single metadata entry |
+| deployDir | <code>string</code> | directory where deploy metadata are saved |
+
+<a name="MetadataType.update"></a>
+
+### MetadataType.update(metadata, [metadataBefore]) ⇒ <code>void</code>
+Abstract update method that needs to be implemented in child metadata type
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>Util.MetadataTypeItem</code> | single metadata entry |
+| [metadataBefore] | <code>Util.MetadataTypeItem</code> | metadata mapped by their keyField |
+
+<a name="MetadataType.upsert"></a>
+
+### MetadataType.upsert(metadata, deployDir, [buObject]) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
+MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>Util.MetadataTypeMap</code> | metadata mapped by their keyField |
+| deployDir | <code>string</code> | directory where deploy metadata are saved |
+| [buObject] | <code>Util.BuObject</code> | properties for auth |
+
+<a name="MetadataType.createREST"></a>
+
+### MetadataType.createREST(metadataEntry, uri) ⇒ <code>Promise</code>
+Creates a single metadata entry via REST
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | a single metadata Entry |
+| uri | <code>string</code> | rest endpoint for POST |
+
+<a name="MetadataType.createSOAP"></a>
+
+### MetadataType.createSOAP(metadataEntry, [overrideType], [handleOutside]) ⇒ <code>Promise</code>
+Creates a single metadata entry via fuel-soap (generic lib not wrapper)
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | single metadata entry |
+| [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
+| [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
+
+<a name="MetadataType.updateREST"></a>
+
+### MetadataType.updateREST(metadataEntry, uri) ⇒ <code>Promise</code>
+Updates a single metadata entry via REST
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | a single metadata Entry |
+| uri | <code>string</code> | rest endpoint for PATCH |
+
+<a name="MetadataType.updateSOAP"></a>
+
+### MetadataType.updateSOAP(metadataEntry, [overrideType], [handleOutside]) ⇒ <code>Promise</code>
+Updates a single metadata entry via fuel-soap (generic lib not wrapper)
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | single metadata entry |
+| [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
+| [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
+
+<a name="MetadataType.retrieveSOAP"></a>
+
+### MetadataType.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| buObject | <code>Util.BuObject</code> | properties for auth |
+| [requestParams] | <code>Object</code> | required for the specific request (filter for example) |
+| [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
+
+<a name="MetadataType.retrieveREST"></a>
+
+### MetadataType.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables]) ⇒ <code>Promise.&lt;{metadata: (Util.MetadataTypeMap\|Util.MetadataTypeItem), type:string}&gt;</code>
+Retrieves Metadata for Rest Types
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;{metadata: (Util.MetadataTypeMap\|Util.MetadataTypeItem), type:string}&gt;</code> - Promise of item map (single item for templated result)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| uri | <code>string</code> | rest endpoint for GET |
+| [overrideType] | <code>string</code> | force a metadata type (mainly used for Folders) |
+| [templateVariables] | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
+
+<a name="MetadataType.parseResponseBody"></a>
+
+### MetadataType.parseResponseBody(body) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
+Builds map of metadata entries mapped to their keyfields
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| body | <code>Object</code> | json of response body |
+
+<a name="MetadataType.deleteFieldByDefinition"></a>
+
+### MetadataType.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin) ⇒ <code>void</code>
+Deletes a field in a metadata entry if the selected definition property equals false.
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | One entry of a metadataType |
+| fieldPath | <code>string</code> | field path to be checked if it conforms to the definition (dot seperated if nested): 'fuu.bar' |
+| definitionProperty | <code>&#x27;isCreateable&#x27;</code> \| <code>&#x27;isUpdateable&#x27;</code> \| <code>&#x27;retrieving&#x27;</code> \| <code>&#x27;templating&#x27;</code> | delete field if definitionProperty equals false for specified field. Options: [isCreateable | isUpdateable] |
+| origin | <code>string</code> | string of parent object, required when using arrays as these are parsed slightly differently. |
+
+**Example**  
+```js
+Removes field (or nested fields childs) that are not updateable
+deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
+```
+<a name="MetadataType.removeNotCreateableFields"></a>
+
+### MetadataType.removeNotCreateableFields(metadataEntry) ⇒ <code>void</code>
+Remove fields from metadata entry that are not createable
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | metadata entry |
+
+<a name="MetadataType.removeNotUpdateableFields"></a>
+
+### MetadataType.removeNotUpdateableFields(metadataEntry) ⇒ <code>void</code>
+Remove fields from metadata entry that are not updateable
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | metadata entry |
+
+<a name="MetadataType.keepTemplateFields"></a>
+
+### MetadataType.keepTemplateFields(metadataEntry) ⇒ <code>void</code>
+Remove fields from metadata entry that are not needed in the template
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | metadata entry |
+
+<a name="MetadataType.keepRetrieveFields"></a>
+
+### MetadataType.keepRetrieveFields(metadataEntry) ⇒ <code>void</code>
+Remove fields from metadata entry that are not needed in the stored metadata
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>Util.MetadataTypeItem</code> | metadata entry |
+
+<a name="MetadataType.isFiltered"></a>
+
+### MetadataType.isFiltered(metadataEntry, [include]) ⇒ <code>boolean</code>
+checks if the current metadata entry should be saved on retrieve or not
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| metadataEntry | <code>Util.MetadataTypeItem</code> |  | metadata entry |
+| [include] | <code>boolean</code> | <code>false</code> | true: use definition.include / options.include; false=exclude: use definition.filter / options.exclude |
+
+<a name="MetadataType.isFilteredFolder"></a>
+
+### MetadataType.isFilteredFolder(metadataEntry, [include]) ⇒ <code>boolean</code>
+optionally filter by what folder something is in
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| metadataEntry | <code>Object</code> |  | metadata entry |
+| [include] | <code>boolean</code> | <code>false</code> | true: use definition.include / options.include; false=exclude: use definition.filter / options.exclude |
+
+<a name="MetadataType.saveResults"></a>
+
+### MetadataType.saveResults(results, retrieveDir, [overrideType], [templateVariables]) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
+Helper for writing Metadata to disk, used for Retrieve and deploy
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| results | <code>Util.MetadataTypeMap</code> | metadata results from deploy |
+| retrieveDir | <code>string</code> | directory where metadata should be stored after deploy/retrieve |
+| [overrideType] | <code>string</code> | for use when there is a subtype (such as folder-queries) |
+| [templateVariables] | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
+
+<a name="MetadataType.buildDefinitionForExtracts"></a>
+
+### MetadataType.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+helper for buildDefinition
+handles extracted code if any are found for complex types (e.g script, asset, query)
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> | Directory where built definitions will be saved |
+| metadata | <code>Util.MetadataTypeItem</code> | main JSON file that was read from file system |
+| variables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
+| templateName | <code>string</code> | name of the template to be built |
+
+<a name="MetadataType.findSubType"></a>
+
+### MetadataType.findSubType(templateDir, templateName) ⇒ <code>string</code>
+check template directory for complex types that open subfolders for their subtypes
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>string</code> - subtype name  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| templateName | <code>string</code> | name of the metadata file |
+
+<a name="MetadataType.readSecondaryFolder"></a>
+
+### MetadataType.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName, ex) ⇒ <code>Object</code>
+optional method used for some types to try a different folder structure
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Object</code> - metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| typeDirArr | <code>Array.&lt;string&gt;</code> | current subdir for this type |
+| templateName | <code>string</code> | name of the metadata template |
+| fileName | <code>string</code> | name of the metadata template file w/o extension |
+| ex | <code>Error</code> | error from first attempt |
+
+<a name="MetadataType.buildDefinition"></a>
+
+### MetadataType.buildDefinition(templateDir, targetDir, templateName, variables) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+Builds definition based on template
+NOTE: Most metadata files should use this generic method, unless custom
+parsing is required (for example scripts & queries)
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>String</code> \| <code>Array.&lt;String&gt;</code> | (List of) Directory where built definitions will be saved |
+| templateName | <code>string</code> | name of the metadata file |
+| variables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
+
+<a name="MetadataType.checkForErrors"></a>
+
+### MetadataType.checkForErrors(ex) ⇒ <code>string</code>
+Standardizes a check for multiple messages
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>string</code> - formatted Error Message  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ex | <code>Object</code> | response payload from REST API |
+
+<a name="MetadataType.document"></a>
+
+### MetadataType.document([buObject], [metadata], [isDeploy]) ⇒ <code>void</code>
+Gets metadata cache with limited fields and does not store value to disk
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [buObject] | <code>Util.BuObject</code> | properties for auth |
+| [metadata] | <code>Util.MetadataTypeMap</code> | a list of type definitions |
+| [isDeploy] | <code>boolean</code> | used to skip non-supported message during deploy |
+
+<a name="MetadataType.deleteByKey"></a>
+
+### MetadataType.deleteByKey(buObject, customerKey) ⇒ <code>boolean</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>boolean</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>Util.BuObject</code> | references credentials |
+| customerKey | <code>string</code> | Identifier of data extension |
+
+<a name="MetadataType.postDeleteTasks"></a>
+
+### MetadataType.postDeleteTasks(buObject, customerKey) ⇒ <code>void</code>
+clean up after deleting a metadata item
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>void</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>Util.BuObject</code> | references credentials |
+| customerKey | <code>string</code> | Identifier of metadata item |
+
+<a name="MetadataType.deleteByKeySOAP"></a>
+
+### MetadataType.deleteByKeySOAP(buObject, customerKey, [handleOutside]) ⇒ <code>boolean</code>
+Delete a data extension from the specified business unit
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>boolean</code> - deletion success flag  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>Util.BuObject</code> | references credentials |
+| customerKey | <code>string</code> | Identifier of metadata |
+| [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
+
+<a name="MetadataType.readBUMetadataForType"></a>
+
+### MetadataType.readBUMetadataForType(readDir, [listBadKeys], [buMetadata]) ⇒ <code>Object</code>
+Returns metadata of a business unit that is saved locally
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Object</code> - Metadata of BU in local directory  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| readDir | <code>string</code> |  | root directory of metadata. |
+| [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
+| [buMetadata] | <code>Object</code> |  | Metadata of BU in local directory |
+
+<a name="MultiMetadataTypeList"></a>
+
+## MultiMetadataTypeList : <code>Object.&lt;string, string&gt;</code>
 **Kind**: global typedef  
