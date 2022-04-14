@@ -3917,7 +3917,6 @@ CLI entry for SFMC DevTools
 
 * [Util](#Util)
     * [.logger](#Util.logger)
-    * [.getMetadataMapToList(metadata)](#Util.getMetadataMapToList) ⇒ <code>Array.&lt;MetadataTypeItem&gt;</code>
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
@@ -3941,18 +3940,6 @@ CLI entry for SFMC DevTools
 Logger that creates timestamped log file in 'logs/' directory
 
 **Kind**: static property of [<code>Util</code>](#Util)  
-<a name="Util.getMetadataMapToList"></a>
-
-### Util.getMetadataMapToList(metadata) ⇒ <code>Array.&lt;MetadataTypeItem&gt;</code>
-helper to quickly ensure we are working with a flat Array of items
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Array.&lt;MetadataTypeItem&gt;</code> - Array of metadata items  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>MetadataTypeMap</code> \| <code>Array.&lt;MetadataTypeItem&gt;</code> | map or array of metadata |
-
 <a name="Util.signalFatalError"></a>
 
 ### Util.signalFatalError() ⇒ <code>void</code>
@@ -5516,7 +5503,6 @@ Util that contains logger and simple util methods
 
 * [Util](#Util)
     * [.logger](#Util.logger)
-    * [.getMetadataMapToList(metadata)](#Util.getMetadataMapToList) ⇒ <code>Array.&lt;MetadataTypeItem&gt;</code>
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
@@ -5540,18 +5526,6 @@ Util that contains logger and simple util methods
 Logger that creates timestamped log file in 'logs/' directory
 
 **Kind**: static property of [<code>Util</code>](#Util)  
-<a name="Util.getMetadataMapToList"></a>
-
-### Util.getMetadataMapToList(metadata) ⇒ <code>Array.&lt;MetadataTypeItem&gt;</code>
-helper to quickly ensure we are working with a flat Array of items
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Array.&lt;MetadataTypeItem&gt;</code> - Array of metadata items  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>MetadataTypeMap</code> \| <code>Array.&lt;MetadataTypeItem&gt;</code> | map or array of metadata |
-
 <a name="Util.signalFatalError"></a>
 
 ### Util.signalFatalError() ⇒ <code>void</code>
