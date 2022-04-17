@@ -6472,10 +6472,10 @@ Returns metadata of a business unit that is saved locally
 
 | Name | Type | Description |
 | --- | --- | --- |
-| client_id | <code>String</code> | client_id client_id for sfmc-sdk auth |
-| client_secret | <code>String</code> | client_secret for sfmc-sdk auth |
-| account_id | <code>Integer</code> | mid of business unit to auth against |
-| auth_url | <code>String</code> | authentication base url |
+| client_id | <code>string</code> | client_id client_id for sfmc-sdk auth |
+| client_secret | <code>string</code> | client_secret for sfmc-sdk auth |
+| account_id | <code>integer</code> | mid of business unit to auth against |
+| auth_url | <code>string</code> | authentication base url |
 
 <a name="MetadataType"></a>
 
