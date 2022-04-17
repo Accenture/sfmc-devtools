@@ -188,8 +188,6 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dd></dd>
 <dt><a href="#MetadataType">MetadataType</a> : <code>require(&#x27;../metadataTypes/MetadataType.js&#x27;)</code></dt>
 <dd></dd>
-<dt><a href="#BuObject">BuObject</a> : <code>Object</code></dt>
-<dd></dd>
 <dt><a href="#AuthObject">AuthObject</a> : <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#MetadataType">MetadataType</a> : <code>require(&#x27;../metadataTypes/MetadataType.js&#x27;)</code></dt>
@@ -225,7 +223,7 @@ Creates a Builder, uses v2 auth if v2AuthOptions are passed.
 | properties.directories.template | <code>String</code> | where templates are saved |
 | properties.directories.templateBuilds | <code>String</code> | where template-based deployment definitions are saved |
 | properties.businessUnits | <code>String</code> | ID of Business Unit to authenticate with |
-| buObject | <code>auth.BuObject</code> | properties for auth |
+| buObject | <code>Util.BuObject</code> | properties for auth |
 
 <a name="Builder+buildDefinition"></a>
 
@@ -284,7 +282,7 @@ Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 | --- | --- | --- |
 | properties | <code>Object</code> | General configuration to be used in retrieve |
 | properties.directories | <code>Object</code> | Directories to be used when interacting with FS |
-| buObject | <code>auth.BuObject</code> | properties for auth |
+| buObject | <code>Util.BuObject</code> | properties for auth |
 | [type] | <code>String</code> | limit deployment to given metadata type |
 
 <a name="Deployer+deploy"></a>
@@ -3876,7 +3874,7 @@ Creates a Retriever, uses v2 auth if v2AuthOptions are passed.
 | --- | --- | --- |
 | properties | <code>Object</code> | General configuration to be used in retrieve |
 | properties.directories | <code>Object</code> | Directories to be used when interacting with FS |
-| buObject | <code>auth.BuObject</code> | properties for auth |
+| buObject | <code>Util.BuObject</code> | properties for auth |
 
 <a name="Retriever+retrieve"></a>
 
@@ -4638,7 +4636,7 @@ CLI helper class
     * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>String</code>
     * [._updateGitConfigUser([skipInteraction])](#Init._updateGitConfigUser) ⇒ <code>void</code>
     * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: String, &#x27;user.email&#x27;: String}&gt;</code>
-    * [.initProject(properties, credentialsName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;String&gt;</code>
@@ -4747,7 +4745,7 @@ retrieves the global user.name and user.email values
 **Returns**: <code>Promise.&lt;{&#x27;user.name&#x27;: String, &#x27;user.email&#x27;: String}&gt;</code> - user.name and user.email  
 <a name="Init.initProject"></a>
 
-### Init.initProject(properties, credentialsName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Init.initProject(properties, credentialName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
 Creates template file for properties.json
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -4756,13 +4754,13 @@ Creates template file for properties.json
 | Param | Type | Description |
 | --- | --- | --- |
 | properties | <code>Object</code> | config file's json |
-| credentialsName | <code>string</code> | identifying name of the installed package / project |
+| credentialName | <code>string</code> | identifying name of the installed package / project |
 | [skipInteraction] | <code>Object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.clientId | <code>String</code> | client id of installed package |
-| skipInteraction.clientSecret | <code>String</code> | client secret of installed package |
-| skipInteraction.tenant | <code>String</code> | tenant of installed package |
-| skipInteraction.eid | <code>String</code> | MID of the Parent Business Unit |
-| skipInteraction.credentialsName | <code>String</code> | how you would like the credential to be named |
+| skipInteraction.client_id | <code>String</code> | client id of installed package |
+| skipInteraction.client_secret | <code>String</code> | client secret of installed package |
+| skipInteraction.auth_rul | <code>String</code> | tenant of installed package |
+| skipInteraction.account_url | <code>String</code> | MID of the Parent Business Unit |
+| skipInteraction.credentialName | <code>String</code> | how you would like the credential to be named |
 | skipInteraction.gitRemoteUrl | <code>String</code> | URL of Git remote server |
 
 <a name="Init._downloadAllBUs"></a>
@@ -4848,7 +4846,7 @@ CLI helper class
     * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>String</code>
     * [._updateGitConfigUser([skipInteraction])](#Init._updateGitConfigUser) ⇒ <code>void</code>
     * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: String, &#x27;user.email&#x27;: String}&gt;</code>
-    * [.initProject(properties, credentialsName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;String&gt;</code>
@@ -4957,7 +4955,7 @@ retrieves the global user.name and user.email values
 **Returns**: <code>Promise.&lt;{&#x27;user.name&#x27;: String, &#x27;user.email&#x27;: String}&gt;</code> - user.name and user.email  
 <a name="Init.initProject"></a>
 
-### Init.initProject(properties, credentialsName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Init.initProject(properties, credentialName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
 Creates template file for properties.json
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -4966,13 +4964,13 @@ Creates template file for properties.json
 | Param | Type | Description |
 | --- | --- | --- |
 | properties | <code>Object</code> | config file's json |
-| credentialsName | <code>string</code> | identifying name of the installed package / project |
+| credentialName | <code>string</code> | identifying name of the installed package / project |
 | [skipInteraction] | <code>Object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.clientId | <code>String</code> | client id of installed package |
-| skipInteraction.clientSecret | <code>String</code> | client secret of installed package |
-| skipInteraction.tenant | <code>String</code> | tenant of installed package |
-| skipInteraction.eid | <code>String</code> | MID of the Parent Business Unit |
-| skipInteraction.credentialsName | <code>String</code> | how you would like the credential to be named |
+| skipInteraction.client_id | <code>String</code> | client id of installed package |
+| skipInteraction.client_secret | <code>String</code> | client secret of installed package |
+| skipInteraction.auth_rul | <code>String</code> | tenant of installed package |
+| skipInteraction.account_url | <code>String</code> | MID of the Parent Business Unit |
+| skipInteraction.credentialName | <code>String</code> | how you would like the credential to be named |
 | skipInteraction.gitRemoteUrl | <code>String</code> | URL of Git remote server |
 
 <a name="Init._downloadAllBUs"></a>
@@ -5058,7 +5056,7 @@ CLI helper class
     * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>String</code>
     * [._updateGitConfigUser([skipInteraction])](#Init._updateGitConfigUser) ⇒ <code>void</code>
     * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: String, &#x27;user.email&#x27;: String}&gt;</code>
-    * [.initProject(properties, credentialsName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;String&gt;</code>
@@ -5167,7 +5165,7 @@ retrieves the global user.name and user.email values
 **Returns**: <code>Promise.&lt;{&#x27;user.name&#x27;: String, &#x27;user.email&#x27;: String}&gt;</code> - user.name and user.email  
 <a name="Init.initProject"></a>
 
-### Init.initProject(properties, credentialsName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Init.initProject(properties, credentialName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
 Creates template file for properties.json
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -5176,13 +5174,13 @@ Creates template file for properties.json
 | Param | Type | Description |
 | --- | --- | --- |
 | properties | <code>Object</code> | config file's json |
-| credentialsName | <code>string</code> | identifying name of the installed package / project |
+| credentialName | <code>string</code> | identifying name of the installed package / project |
 | [skipInteraction] | <code>Object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.clientId | <code>String</code> | client id of installed package |
-| skipInteraction.clientSecret | <code>String</code> | client secret of installed package |
-| skipInteraction.tenant | <code>String</code> | tenant of installed package |
-| skipInteraction.eid | <code>String</code> | MID of the Parent Business Unit |
-| skipInteraction.credentialsName | <code>String</code> | how you would like the credential to be named |
+| skipInteraction.client_id | <code>String</code> | client id of installed package |
+| skipInteraction.client_secret | <code>String</code> | client secret of installed package |
+| skipInteraction.auth_rul | <code>String</code> | tenant of installed package |
+| skipInteraction.account_url | <code>String</code> | MID of the Parent Business Unit |
+| skipInteraction.credentialName | <code>String</code> | how you would like the credential to be named |
 | skipInteraction.gitRemoteUrl | <code>String</code> | URL of Git remote server |
 
 <a name="Init._downloadAllBUs"></a>
@@ -5268,7 +5266,7 @@ CLI helper class
     * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>String</code>
     * [._updateGitConfigUser([skipInteraction])](#Init._updateGitConfigUser) ⇒ <code>void</code>
     * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: String, &#x27;user.email&#x27;: String}&gt;</code>
-    * [.initProject(properties, credentialsName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;String&gt;</code>
@@ -5377,7 +5375,7 @@ retrieves the global user.name and user.email values
 **Returns**: <code>Promise.&lt;{&#x27;user.name&#x27;: String, &#x27;user.email&#x27;: String}&gt;</code> - user.name and user.email  
 <a name="Init.initProject"></a>
 
-### Init.initProject(properties, credentialsName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Init.initProject(properties, credentialName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
 Creates template file for properties.json
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -5386,13 +5384,13 @@ Creates template file for properties.json
 | Param | Type | Description |
 | --- | --- | --- |
 | properties | <code>Object</code> | config file's json |
-| credentialsName | <code>string</code> | identifying name of the installed package / project |
+| credentialName | <code>string</code> | identifying name of the installed package / project |
 | [skipInteraction] | <code>Object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.clientId | <code>String</code> | client id of installed package |
-| skipInteraction.clientSecret | <code>String</code> | client secret of installed package |
-| skipInteraction.tenant | <code>String</code> | tenant of installed package |
-| skipInteraction.eid | <code>String</code> | MID of the Parent Business Unit |
-| skipInteraction.credentialsName | <code>String</code> | how you would like the credential to be named |
+| skipInteraction.client_id | <code>String</code> | client id of installed package |
+| skipInteraction.client_secret | <code>String</code> | client secret of installed package |
+| skipInteraction.auth_rul | <code>String</code> | tenant of installed package |
+| skipInteraction.account_url | <code>String</code> | MID of the Parent Business Unit |
+| skipInteraction.credentialName | <code>String</code> | how you would like the credential to be named |
 | skipInteraction.gitRemoteUrl | <code>String</code> | URL of Git remote server |
 
 <a name="Init._downloadAllBUs"></a>
@@ -6469,19 +6467,6 @@ Returns metadata of a business unit that is saved locally
 | readDir | <code>string</code> |  | root directory of metadata. |
 | [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
 | [buMetadata] | <code>Object</code> |  | Metadata of BU in local directory |
-
-<a name="BuObject"></a>
-
-## BuObject : <code>Object</code>
-**Kind**: global typedef  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| credential | <code>String</code> | instance identifier |
-| mid | <code>Integer</code> | ID of Business Unit to authenticate with |
-| eid | <code>Integer</code> | Parent ID of Business Unit to authenticate with |
-| businessUnit | <code>String</code> | name of Business Unit to authenticate with |
 
 <a name="AuthObject"></a>
 
