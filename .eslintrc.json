@@ -1,10 +1,17 @@
 {
     "env": {
         "es6": true,
-        "node": true
+        "node": true,
+        "mocha": true
     },
-    "extends": ["eslint:recommended", "prettier", "ssjs"],
-    "plugins": ["prettier"],
+    "extends": [
+        "eslint:recommended",
+        "prettier",
+        "ssjs",
+        "plugin:jsdoc/recommended",
+        "plugin:prettier/recommended"
+    ],
+    "plugins": ["prettier", "jsdoc"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -40,6 +47,12 @@
                 "prefer-const": "error",
                 "prettier/prettier": "warn"
             }
+        },
+        {
+            "files": ["test/*.js"],
+
+            "extends": ["plugin:mocha/recommended"],
+            "plugins": ["mocha"]
         }
     ]
 }
