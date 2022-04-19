@@ -107,6 +107,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Retriever">Retriever</a></dt>
 <dd><p>Retrieves metadata from a business unit and saves it to the local filesystem.</p>
 </dd>
+<dt><a href="#RetrieverLocal">RetrieverLocal</a></dt>
+<dd><p>Builds metadata from a template using market specific customisation</p>
+</dd>
 </dl>
 
 ## Constants
@@ -367,6 +370,7 @@ main class
     * [.deleteByKey(businessUnit, type, customerKey)](#Mcdev.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.badKeys(businessUnit)](#Mcdev.badKeys) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.retrieveAsTemplate(businessUnit, selectedType, name, market)](#Mcdev.retrieveAsTemplate) ⇒ <code>Promise.&lt;Util.MultiMetadataTypeList&gt;</code>
+    * [.buildTemplate(businessUnit, selectedType, name, market)](#Mcdev.buildTemplate) ⇒ <code>Promise.&lt;Util.MultiMetadataTypeList&gt;</code>
     * [.buildDefinition(businessUnit, type, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._checkMarket(market)](#Mcdev._checkMarket) ⇒ <code>Boolean</code>
     * [.buildDefinitionBulk(listName, type, name)](#Mcdev.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -555,6 +559,21 @@ Retrieve a specific metadata file and templatise.
 | selectedType | <code>String</code> | supported metadata type |
 | name | <code>String</code> | name of the metadata |
 | market | <code>String</code> | market which should be used to revert template |
+
+<a name="Mcdev.buildTemplate"></a>
+
+### Mcdev.buildTemplate(businessUnit, selectedType, name, market) ⇒ <code>Promise.&lt;Util.MultiMetadataTypeList&gt;</code>
+Retrieve a specific metadata file and templatise from a local folder.
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>Promise.&lt;Util.MultiMetadataTypeList&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| businessUnit | <code>String</code> | references credentials from properties.json |
+| selectedType | <code>String</code> | supported metadata type |
+| name | <code>String</code> | name of the metadata |
+| market | <code>String</code> | market localizations |
 
 <a name="Mcdev.buildDefinition"></a>
 
@@ -3910,6 +3929,75 @@ Retrieve metadata of specified types into local file system and Retriever.metada
 | [name] | <code>String</code> | name of Metadata to retrieve (in case of templating) |
 | [templateVariables] | <code>Object</code> | Object of values which can be replaced (in case of templating) |
 | [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
+
+<a name="RetrieverLocal"></a>
+
+## RetrieverLocal
+Builds metadata from a template using market specific customisation
+
+**Kind**: global class  
+
+* [RetrieverLocal](#RetrieverLocal)
+    * [new RetrieverLocal(properties, buObject, client)](#new_RetrieverLocal_new)
+    * _instance_
+        * [.buildDefinition(metadataType, name, variables)](#RetrieverLocal+buildDefinition) ⇒ <code>Promise</code>
+    * _static_
+        * [.verifyMarketList(mlName, properties)](#RetrieverLocal.verifyMarketList) ⇒ <code>void</code>
+
+<a name="new_RetrieverLocal_new"></a>
+
+### new RetrieverLocal(properties, buObject, client)
+Creates a retrieves from a local folder, uses v2 auth if v2AuthOptions are passed.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>Object</code> | properties for auth |
+| properties.clientId | <code>String</code> | clientId for FuelSDK auth |
+| properties.clientSecret | <code>String</code> | clientSecret for FuelSDK auth |
+| properties.directories | <code>Object</code> | list of default directories |
+| properties.directories.template | <code>String</code> | where templates are saved |
+| properties.directories.templateBuilds | <code>String</code> | where template-based deployment definitions are saved |
+| properties.tenant | <code>String</code> | v2 Auth Tenant Information |
+| properties.businessUnits | <code>String</code> | ID of Business Unit to authenticate with |
+| buObject | <code>Object</code> | properties for auth |
+| buObject.clientId | <code>String</code> | clientId for FuelSDK auth |
+| buObject.clientSecret | <code>String</code> | clientSecret for FuelSDK auth |
+| buObject.credential | <code>Object</code> | clientId for FuelSDK auth |
+| buObject.tenant | <code>String</code> | v2 Auth Tenant Information |
+| buObject.mid | <code>String</code> | ID of Business Unit to authenticate with |
+| buObject.businessUnit | <code>String</code> | name of Business Unit to authenticate with |
+| client | <code>Util.SDK</code> | fuel client |
+
+<a name="RetrieverLocal+buildDefinition"></a>
+
+### retrieverLocal.buildDefinition(metadataType, name, variables) ⇒ <code>Promise</code>
+Builds a specific metadata file by name
+
+**Kind**: instance method of [<code>RetrieverLocal</code>](#RetrieverLocal)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataType | <code>String</code> | metadata type to build |
+| name | <code>String</code> | name of metadata to build |
+| variables | <code>Object</code> | variables to be replaced in the metadata |
+
+<a name="RetrieverLocal.verifyMarketList"></a>
+
+### RetrieverLocal.verifyMarketList(mlName, properties) ⇒ <code>void</code>
+ensure provided MarketList exists and it's content including markets and BUs checks out
+
+**Kind**: static method of [<code>RetrieverLocal</code>](#RetrieverLocal)  
+**Returns**: <code>void</code> - throws errors if problems were found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| mlName | <code>String</code> | name of marketList |
+| properties | <code>Object</code> | General configuration to be used in retrieve |
+| properties.markets | <code>Object</code> | list of template variable combos |
+| properties.marketList | <code>Object</code> | list of bu-market combos |
+| properties.credentials | <code>Object</code> | list of credentials and their BUs |
 
 <a name="Util"></a>
 
