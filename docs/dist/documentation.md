@@ -733,7 +733,7 @@ FileTransfer MetadataType
 * [Asset](#Asset) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, _, __, [selectedSubType])](#Asset.retrieve) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
     * [.retrieveForCache(_, [selectedSubType])](#Asset.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType])](#Asset.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType])](#Asset.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:AssetItem, type:string}&gt;</code>
     * [.create(metadata)](#Asset.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#Asset.update) ⇒ <code>Promise</code>
     * [.requestSubType(subType, subTypeArray, [retrieveDir], [templateName], [templateVariables])](#Asset.requestSubType) ⇒ <code>Promise</code>
@@ -783,11 +783,11 @@ Retrieves asset metadata for caching
 
 <a name="Asset.retrieveAsTemplate"></a>
 
-### Asset.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code>
-Retrieves asset metadata for caching
+### Asset.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata:AssetItem, type:string}&gt;</code>
+Retrieves asset metadata for templating
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise.&lt;{metadata:AssetMap, type:string}&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata:AssetItem, type:string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
