@@ -37,7 +37,12 @@
             }
         ],
         "valid-jsdoc": "error",
-        "spaced-comment": ["warn", "always", { "block": { "exceptions": ["*"], "balanced": true } }]
+        "spaced-comment": [
+            "warn",
+            "always",
+            { "block": { "exceptions": ["*"], "balanced": true } }
+        ],
+        "prefer-arrow-callback": "error"
     },
     "overrides": [
         {
@@ -52,7 +57,10 @@
             "files": ["test/*.js"],
 
             "extends": ["plugin:mocha/recommended"],
-            "plugins": ["mocha"]
+            "plugins": ["mocha"],
+            "rules": {
+                "mocha/no-mocha-arrows": "off"
+            }
         }
     ]
 }
