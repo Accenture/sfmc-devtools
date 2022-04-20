@@ -4734,7 +4734,7 @@ handles creation/update of one config file from the boilerplate at a time
 
 | Param | Type | Description |
 | --- | --- | --- |
-| fileNameArr | <code>Array.&lt;string&gt;</code> | 0: path, 1: filename, 2: extension with dot |
+| fileNameArr | <code>Array.&lt;string&gt;</code> | paths and/or filenames to relevant files |
 | relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
 | [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
 
@@ -4963,7 +4963,7 @@ handles creation/update of one config file from the boilerplate at a time
 
 | Param | Type | Description |
 | --- | --- | --- |
-| fileNameArr | <code>Array.&lt;string&gt;</code> | 0: path, 1: filename, 2: extension with dot |
+| fileNameArr | <code>Array.&lt;string&gt;</code> | paths and/or filenames to relevant files |
 | relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
 | [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
 
@@ -5192,7 +5192,7 @@ handles creation/update of one config file from the boilerplate at a time
 
 | Param | Type | Description |
 | --- | --- | --- |
-| fileNameArr | <code>Array.&lt;string&gt;</code> | 0: path, 1: filename, 2: extension with dot |
+| fileNameArr | <code>Array.&lt;string&gt;</code> | paths and/or filenames to relevant files |
 | relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
 | [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
 
@@ -5421,7 +5421,7 @@ handles creation/update of one config file from the boilerplate at a time
 
 | Param | Type | Description |
 | --- | --- | --- |
-| fileNameArr | <code>Array.&lt;string&gt;</code> | 0: path, 1: filename, 2: extension with dot |
+| fileNameArr | <code>Array.&lt;string&gt;</code> | paths and/or filenames to relevant files |
 | relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
 | [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
 
