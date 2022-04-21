@@ -11,8 +11,9 @@
         "node_modules": true
     },
     "javascript.validate.enable": false,
-    "sql-formatter.indent": "    ",
-    "sql-formatter.uppercase": true,
+    "[sql]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
     "[html]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
