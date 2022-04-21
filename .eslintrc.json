@@ -5,12 +5,11 @@
     },
     "extends": [
         "eslint:recommended",
-        "prettier",
         "ssjs",
         "plugin:jsdoc/recommended",
         "plugin:prettier/recommended"
     ],
-    "plugins": ["prettier", "jsdoc"],
+    "plugins": [],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -44,8 +43,7 @@
             "rules": {
                 "no-var": "error",
                 "prefer-const": "error",
-                "prettier/prettier": "warn",
-                "prefer-arrow-callback": "error"
+                "prefer-arrow-callback": "warn"
             }
         }
     ]
