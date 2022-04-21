@@ -1,19 +1,19 @@
-<?xml version= \"1.0\" encoding= \"utf-8\"?>
-<soap:Envelope xmlns:soap= \"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsi= \"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd= \"http://www.w3.org/2001/XMLSchema\" xmlns:wsa= \"http://schemas.xmlsoap.org/ws/2004/08/addressing\" xmlns:wsse= \"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:wsu= \"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\">
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
     <soap:Header>
         <wsa:Action>RetrieveResponse</wsa:Action>
         <wsa:MessageID>urn:uuid:f36f3303-3b5a-4641-8109-b26447634d91</wsa:MessageID>
         <wsa:RelatesTo>urn:uuid:33983968-28c4-4379-bb5f-f80ae32eb988</wsa:RelatesTo>
         <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
         <wsse:Security>
-            <wsu:Timestamp wsu:Id= \"Timestamp-32ecc81b-6020-473c-9e99-4b5338921220\">
+            <wsu:Timestamp wsu:Id="Timestamp-32ecc81b-6020-473c-9e99-4b5338921220">
                 <wsu:Created>2022-04-19T20:03:41Z</wsu:Created>
                 <wsu:Expires>2022-04-19T20:08:41Z</wsu:Expires>
             </wsu:Timestamp>
         </wsse:Security>
     </soap:Header>
     <soap:Body>
-        <RetrieveResponseMsg xmlns= \"http://exacttarget.com/wsdl/partnerAPI\">
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
             <OverallStatus>OK</OverallStatus>
             <RequestID>02cd5ccb-8f84-4651-826f-71169eeecf05</RequestID>
         </RetrieveResponseMsg>
