@@ -25,10 +25,10 @@
         "node": ">=14.16"
     },
     "scripts": {
-        "start": "node lib/index.js",
-        "mcdev": "node lib/index.js",
+        "start": "node lib/cli.js",
+        "mcdev": "node lib/cli.js",
         "build": "run-s lint docs",
-        "debug": "node --nolazy --inspect-brk=9229 lib/index.js",
+        "debug": "node --nolazy --inspect-brk=9229 lib/cli.js",
         "docs": "jsdoc2md --files lib/**/*.js > docs/dist/documentation.md",
         "lint:fix": "eslint --fix lib/**/*.js && prettier --write lib/**/*.js",
         "lint": "eslint lib/**/*.js",
