@@ -15,7 +15,6 @@
         "editorconfig.editorconfig",
         "esbenp.prettier-vscode",
         "sergey-agadzhanov.ampscript",
-        "adpyke.vscode-sql-formatter",
 
         // Markdown / Readme.md
         "joernberkefeld.markdown-preview-bitbucket-innersource"

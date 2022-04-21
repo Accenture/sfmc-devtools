@@ -4397,7 +4397,6 @@ File extends fs-extra. It adds logger and util methods for file handling
     * [.normalizePath(denormalizedPath)](#File.normalizePath) ⇒ <code>String</code>
     * [.writeJSONToFile(directory, filename, content)](#File.writeJSONToFile) ⇒ <code>Promise</code>
     * [.writePrettyToFile(directory, filename, filetype, content, [templateVariables])](#File.writePrettyToFile) ⇒ <code>Promise.&lt;Boolean&gt;</code>
-    * [._beautify_sql(content)](#File._beautify_sql) ⇒ <code>String</code>
     * [._beautify_prettier(directory, filename, filetype, content)](#File._beautify_prettier) ⇒ <code>String</code>
     * [.writeToFile(directory, filename, filetype, content, [encoding])](#File.writeToFile) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [.readJSONFile(directory, filename, sync, cleanPath)](#File.readJSONFile) ⇒ <code>Promise</code> \| <code>Object</code>
@@ -4499,18 +4498,6 @@ Saves beautified files in the local file system. Will create the parent director
 | filetype | <code>String</code> | filetype ie. JSON or SSJS |
 | content | <code>String</code> | filecontent |
 | [templateVariables] | <code>Object</code> | templating variables to be replaced in the metadata |
-
-<a name="File._beautify_sql"></a>
-
-### File.\_beautify\_sql(content) ⇒ <code>String</code>
-helper for writePrettyToFile, applying sql formatting onto given stringified content
-
-**Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>String</code> - original string on error; formatted string on success  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| content | <code>String</code> | filecontent |
 
 <a name="File._beautify_prettier"></a>
 
