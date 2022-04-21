@@ -3,8 +3,14 @@
         "es6": true,
         "node": true
     },
-    "extends": ["eslint:recommended", "prettier", "ssjs"],
-    "plugins": ["prettier"],
+    "extends": [
+        "eslint:recommended",
+        "prettier",
+        "ssjs",
+        "plugin:jsdoc/recommended",
+        "plugin:prettier/recommended"
+    ],
+    "plugins": ["prettier", "jsdoc"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -38,7 +44,8 @@
             "rules": {
                 "no-var": "error",
                 "prefer-const": "error",
-                "prettier/prettier": "warn"
+                "prettier/prettier": "warn",
+                "prefer-arrow-callback": "error"
             }
         }
     ]
