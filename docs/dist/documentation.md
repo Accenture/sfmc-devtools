@@ -4659,9 +4659,10 @@ CLI helper class
 
 * [Init](#Init)
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;Boolean&gt;</code>
-    * [.createIdeConfigFiles()](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
-    * [._createIdeConfigFile(fileNameArr, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status:String, repoName:String}&gt;</code>
     * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
     * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>String</code>
@@ -4688,11 +4689,16 @@ helper method for this.upgradeProject that upgrades project config if needed
 
 <a name="Init.createIdeConfigFiles"></a>
 
-### Init.createIdeConfigFiles() ⇒ <code>Promise.&lt;Boolean&gt;</code>
+### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;Boolean&gt;</code>
 handles creation/update of all config file from the boilerplate
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 **Returns**: <code>Promise.&lt;Boolean&gt;</code> - status of config file creation  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
+
 <a name="Init._updateLeaf"></a>
 
 ### Init.\_updateLeaf(propertiersCur, defaultPropsCur, fieldName) ⇒ <code>void</code>
@@ -4706,9 +4712,21 @@ recursive helper for _fixMcdevConfig that adds missing settings
 | defaultPropsCur | <code>Object</code> | current sub-object of default settings |
 | fieldName | <code>String</code> | dot-concatenated object-path that needs adding |
 
+<a name="Init._getForcedUpdateList"></a>
+
+### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Array.&lt;string&gt;</code>
+returns list of files that need to be updated
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Array.&lt;string&gt;</code> - relevant files with path that need to be updated  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| projectVersion | <code>string</code> | version found in config file of the current project |
+
 <a name="Init._createIdeConfigFile"></a>
 
-### Init.\_createIdeConfigFile(fileNameArr, [boilerplateFileContent]) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+### Init.\_createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent]) ⇒ <code>Promise.&lt;Boolean&gt;</code>
 handles creation/update of one config file from the boilerplate at a time
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -4716,8 +4734,9 @@ handles creation/update of one config file from the boilerplate at a time
 
 | Param | Type | Description |
 | --- | --- | --- |
-| fileNameArr | <code>Array.&lt;String&gt;</code> | 0: path, 1: filename, 2: extension with dot |
-| [boilerplateFileContent] | <code>String</code> | in case we cannot copy files 1:1 this can be used to pass in content |
+| fileNameArr | <code>Array.&lt;string&gt;</code> | 0: path, 1: filename, 2: extension with dot |
+| relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
+| [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
 
 <a name="Init.initGitRepo"></a>
 
@@ -4869,9 +4888,10 @@ CLI helper class
 
 * [Init](#Init)
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;Boolean&gt;</code>
-    * [.createIdeConfigFiles()](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
-    * [._createIdeConfigFile(fileNameArr, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status:String, repoName:String}&gt;</code>
     * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
     * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>String</code>
@@ -4898,11 +4918,16 @@ helper method for this.upgradeProject that upgrades project config if needed
 
 <a name="Init.createIdeConfigFiles"></a>
 
-### Init.createIdeConfigFiles() ⇒ <code>Promise.&lt;Boolean&gt;</code>
+### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;Boolean&gt;</code>
 handles creation/update of all config file from the boilerplate
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 **Returns**: <code>Promise.&lt;Boolean&gt;</code> - status of config file creation  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
+
 <a name="Init._updateLeaf"></a>
 
 ### Init.\_updateLeaf(propertiersCur, defaultPropsCur, fieldName) ⇒ <code>void</code>
@@ -4916,9 +4941,21 @@ recursive helper for _fixMcdevConfig that adds missing settings
 | defaultPropsCur | <code>Object</code> | current sub-object of default settings |
 | fieldName | <code>String</code> | dot-concatenated object-path that needs adding |
 
+<a name="Init._getForcedUpdateList"></a>
+
+### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Array.&lt;string&gt;</code>
+returns list of files that need to be updated
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Array.&lt;string&gt;</code> - relevant files with path that need to be updated  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| projectVersion | <code>string</code> | version found in config file of the current project |
+
 <a name="Init._createIdeConfigFile"></a>
 
-### Init.\_createIdeConfigFile(fileNameArr, [boilerplateFileContent]) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+### Init.\_createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent]) ⇒ <code>Promise.&lt;Boolean&gt;</code>
 handles creation/update of one config file from the boilerplate at a time
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -4926,8 +4963,9 @@ handles creation/update of one config file from the boilerplate at a time
 
 | Param | Type | Description |
 | --- | --- | --- |
-| fileNameArr | <code>Array.&lt;String&gt;</code> | 0: path, 1: filename, 2: extension with dot |
-| [boilerplateFileContent] | <code>String</code> | in case we cannot copy files 1:1 this can be used to pass in content |
+| fileNameArr | <code>Array.&lt;string&gt;</code> | 0: path, 1: filename, 2: extension with dot |
+| relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
+| [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
 
 <a name="Init.initGitRepo"></a>
 
@@ -5079,9 +5117,10 @@ CLI helper class
 
 * [Init](#Init)
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;Boolean&gt;</code>
-    * [.createIdeConfigFiles()](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
-    * [._createIdeConfigFile(fileNameArr, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status:String, repoName:String}&gt;</code>
     * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
     * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>String</code>
@@ -5108,11 +5147,16 @@ helper method for this.upgradeProject that upgrades project config if needed
 
 <a name="Init.createIdeConfigFiles"></a>
 
-### Init.createIdeConfigFiles() ⇒ <code>Promise.&lt;Boolean&gt;</code>
+### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;Boolean&gt;</code>
 handles creation/update of all config file from the boilerplate
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 **Returns**: <code>Promise.&lt;Boolean&gt;</code> - status of config file creation  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
+
 <a name="Init._updateLeaf"></a>
 
 ### Init.\_updateLeaf(propertiersCur, defaultPropsCur, fieldName) ⇒ <code>void</code>
@@ -5126,9 +5170,21 @@ recursive helper for _fixMcdevConfig that adds missing settings
 | defaultPropsCur | <code>Object</code> | current sub-object of default settings |
 | fieldName | <code>String</code> | dot-concatenated object-path that needs adding |
 
+<a name="Init._getForcedUpdateList"></a>
+
+### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Array.&lt;string&gt;</code>
+returns list of files that need to be updated
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Array.&lt;string&gt;</code> - relevant files with path that need to be updated  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| projectVersion | <code>string</code> | version found in config file of the current project |
+
 <a name="Init._createIdeConfigFile"></a>
 
-### Init.\_createIdeConfigFile(fileNameArr, [boilerplateFileContent]) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+### Init.\_createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent]) ⇒ <code>Promise.&lt;Boolean&gt;</code>
 handles creation/update of one config file from the boilerplate at a time
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -5136,8 +5192,9 @@ handles creation/update of one config file from the boilerplate at a time
 
 | Param | Type | Description |
 | --- | --- | --- |
-| fileNameArr | <code>Array.&lt;String&gt;</code> | 0: path, 1: filename, 2: extension with dot |
-| [boilerplateFileContent] | <code>String</code> | in case we cannot copy files 1:1 this can be used to pass in content |
+| fileNameArr | <code>Array.&lt;string&gt;</code> | 0: path, 1: filename, 2: extension with dot |
+| relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
+| [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
 
 <a name="Init.initGitRepo"></a>
 
@@ -5289,9 +5346,10 @@ CLI helper class
 
 * [Init](#Init)
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;Boolean&gt;</code>
-    * [.createIdeConfigFiles()](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
-    * [._createIdeConfigFile(fileNameArr, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status:String, repoName:String}&gt;</code>
     * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
     * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>String</code>
@@ -5318,11 +5376,16 @@ helper method for this.upgradeProject that upgrades project config if needed
 
 <a name="Init.createIdeConfigFiles"></a>
 
-### Init.createIdeConfigFiles() ⇒ <code>Promise.&lt;Boolean&gt;</code>
+### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;Boolean&gt;</code>
 handles creation/update of all config file from the boilerplate
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 **Returns**: <code>Promise.&lt;Boolean&gt;</code> - status of config file creation  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
+
 <a name="Init._updateLeaf"></a>
 
 ### Init.\_updateLeaf(propertiersCur, defaultPropsCur, fieldName) ⇒ <code>void</code>
@@ -5336,9 +5399,21 @@ recursive helper for _fixMcdevConfig that adds missing settings
 | defaultPropsCur | <code>Object</code> | current sub-object of default settings |
 | fieldName | <code>String</code> | dot-concatenated object-path that needs adding |
 
+<a name="Init._getForcedUpdateList"></a>
+
+### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Array.&lt;string&gt;</code>
+returns list of files that need to be updated
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Array.&lt;string&gt;</code> - relevant files with path that need to be updated  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| projectVersion | <code>string</code> | version found in config file of the current project |
+
 <a name="Init._createIdeConfigFile"></a>
 
-### Init.\_createIdeConfigFile(fileNameArr, [boilerplateFileContent]) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+### Init.\_createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent]) ⇒ <code>Promise.&lt;Boolean&gt;</code>
 handles creation/update of one config file from the boilerplate at a time
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -5346,8 +5421,9 @@ handles creation/update of one config file from the boilerplate at a time
 
 | Param | Type | Description |
 | --- | --- | --- |
-| fileNameArr | <code>Array.&lt;String&gt;</code> | 0: path, 1: filename, 2: extension with dot |
-| [boilerplateFileContent] | <code>String</code> | in case we cannot copy files 1:1 this can be used to pass in content |
+| fileNameArr | <code>Array.&lt;string&gt;</code> | 0: path, 1: filename, 2: extension with dot |
+| relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
+| [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
 
 <a name="Init.initGitRepo"></a>
 
