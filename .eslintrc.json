@@ -43,6 +43,7 @@
             "rules": {
                 "no-var": "error",
                 "prefer-const": "error",
+                "prettier/prettier": "warn",
                 "prefer-arrow-callback": "warn"
             }
         }
