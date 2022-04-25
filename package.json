@@ -69,6 +69,6 @@
         "prettier-eslint": "13.0.0"
     },
     "lint-staged": {
-        "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"]
+        "*.{js,jsx,ts,tsx}": ["eslint --fix"]
     }
 }
