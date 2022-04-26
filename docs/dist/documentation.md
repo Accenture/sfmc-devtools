@@ -371,6 +371,7 @@ main class
     * [.badKeys(businessUnit)](#Mcdev.badKeys) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.retrieveAsTemplate(businessUnit, selectedType, name, market)](#Mcdev.retrieveAsTemplate) ⇒ <code>Promise.&lt;Util.MultiMetadataTypeList&gt;</code>
     * [.buildTemplate(businessUnit, selectedType, name, market)](#Mcdev.buildTemplate) ⇒ <code>Promise.&lt;Util.MultiMetadataTypeList&gt;</code>
+    * [._checkMarket1(market)](#Mcdev._checkMarket1) ⇒ <code>Boolean</code>
     * [.buildDefinition(businessUnit, type, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._checkMarket(market)](#Mcdev._checkMarket) ⇒ <code>Boolean</code>
     * [.buildDefinitionBulk(listName, type, name)](#Mcdev.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -573,6 +574,18 @@ Retrieve a specific metadata file and templatise from a local folder.
 | businessUnit | <code>String</code> | references credentials from properties.json |
 | selectedType | <code>String</code> | supported metadata type |
 | name | <code>String</code> | name of the metadata |
+| market | <code>String</code> | market localizations |
+
+<a name="Mcdev._checkMarket1"></a>
+
+### Mcdev.\_checkMarket1(market) ⇒ <code>Boolean</code>
+check if a market name exists in current mcdev config
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>Boolean</code> - found market or not  
+
+| Param | Type | Description |
+| --- | --- | --- |
 | market | <code>String</code> | market localizations |
 
 <a name="Mcdev.buildDefinition"></a>
@@ -1383,6 +1396,7 @@ DataExtension MetadataType
     * [.postDeleteTasks(buObject, customerKey)](#DataExtension.postDeleteTasks) ⇒ <code>void</code>
     * [.retrieveForCache(buObject, [_], [isDeploy])](#DataExtension.retrieveForCache) ⇒ <code>Promise</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtension.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
+    * [.buildTemplate(templateDir, name, templateVariables)](#DataExtension.buildTemplate) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
 
 <a name="DataExtension.upsert"></a>
 
@@ -1557,6 +1571,20 @@ Retrieves folder metadata into local filesystem. Also creates a uniquePath attri
 <a name="DataExtension.retrieveAsTemplate"></a>
 
 ### DataExtension.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
+Retrieves dataExtension metadata in template format.
+
+**Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
+**Returns**: <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code> - Promise of items  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| name | <code>string</code> | name of the metadata item |
+| templateVariables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
+
+<a name="DataExtension.buildTemplate"></a>
+
+### DataExtension.buildTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
 Retrieves dataExtension metadata in template format.
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -2169,6 +2197,7 @@ FileTransfer MetadataType
     * [.retrieve(retrieveDir)](#FileTransfer.retrieve) ⇒ <code>Promise</code>
     * [.retrieveForCache()](#FileTransfer.retrieveForCache) ⇒ <code>Promise</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#FileTransfer.retrieveAsTemplate) ⇒ <code>Promise</code>
+    * [.buildTemplate(templateDir, name, templateVariables, targetDir)](#FileTransfer.buildTemplate) ⇒ <code>Promise</code>
     * [.postRetrieveTasks(metadata)](#FileTransfer.postRetrieveTasks) ⇒ <code>Array.&lt;Object&gt;</code>
     * [.create(fileTransfer)](#FileTransfer.create) ⇒ <code>Promise</code>
     * [.update(fileTransfer)](#FileTransfer.update) ⇒ <code>Promise</code>
@@ -2208,6 +2237,23 @@ Retrieve a specific File Transfer Definition by Name
 | templateDir | <code>String</code> | Directory where retrieved metadata directory will be saved |
 | name | <code>String</code> | name of the metadata file |
 | templateVariables | <code>Object</code> | variables to be replaced in the metadata |
+
+<a name="FileTransfer.buildTemplate"></a>
+
+### FileTransfer.buildTemplate(templateDir, name, templateVariables, targetDir) ⇒ <code>Promise</code>
+Retrieve a specific File Transfer Definition by Name
+   //  * @param {string} dir directory that contains '.json' files to be read
+   //  * @param {boolean} [listBadKeys=false] do not print errors, used for badKeys()
+
+**Kind**: static method of [<code>FileTransfer</code>](#FileTransfer)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>String</code> | Directory where retrieved metadata directory will be saved |
+| name | <code>String</code> | name of the metadata file |
+| templateVariables | <code>Object</code> | variables to be replaced in the metadata |
+| targetDir | <code>String</code> | variables to be replaced in the metadata |
 
 <a name="FileTransfer.postRetrieveTasks"></a>
 
@@ -2699,6 +2745,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.retrieveChangelog([additionalFields], buObject, [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
     * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.buildTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.buildTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
     * [.preDeployTasks(metadata, deployDir)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;Util.MetadataTypeItem&gt;</code>
     * [.create(metadata, deployDir)](#MetadataType.create) ⇒ <code>void</code>
     * [.update(metadata, [metadataBefore])](#MetadataType.update) ⇒ <code>void</code>
@@ -2868,6 +2915,21 @@ Gets metadata cache with limited fields and does not store value to disk
 <a name="MetadataType.retrieveAsTemplate"></a>
 
 ### MetadataType.retrieveAsTemplate(templateDir, name, templateVariables, [subType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+Gets metadata cache with limited fields and does not store value to disk
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| name | <code>string</code> | name of the metadata file |
+| templateVariables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
+| [subType] | <code>string</code> | optionally limit to a single subtype |
+
+<a name="MetadataType.buildTemplate"></a>
+
+### MetadataType.buildTemplate(templateDir, name, templateVariables, [subType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3938,66 +4000,38 @@ Builds metadata from a template using market specific customisation
 **Kind**: global class  
 
 * [RetrieverLocal](#RetrieverLocal)
-    * [new RetrieverLocal(properties, buObject, client)](#new_RetrieverLocal_new)
-    * _instance_
-        * [.buildDefinition(metadataType, name, variables)](#RetrieverLocal+buildDefinition) ⇒ <code>Promise</code>
-    * _static_
-        * [.verifyMarketList(mlName, properties)](#RetrieverLocal.verifyMarketList) ⇒ <code>void</code>
+    * [new RetrieverLocal(properties, buObject)](#new_RetrieverLocal_new)
+    * [.retrieve(metadataTypes, name, [templateVariables])](#RetrieverLocal+retrieve) ⇒ <code>Promise.&lt;Util.MultiMetadataTypeList&gt;</code>
 
 <a name="new_RetrieverLocal_new"></a>
 
-### new RetrieverLocal(properties, buObject, client)
+### new RetrieverLocal(properties, buObject)
 Creates a retrieves from a local folder, uses v2 auth if v2AuthOptions are passed.
 
 
 | Param | Type | Description |
 | --- | --- | --- |
 | properties | <code>Object</code> | properties for auth |
-| properties.clientId | <code>String</code> | clientId for FuelSDK auth |
-| properties.clientSecret | <code>String</code> | clientSecret for FuelSDK auth |
 | properties.directories | <code>Object</code> | list of default directories |
 | properties.directories.template | <code>String</code> | where templates are saved |
-| properties.directories.templateBuilds | <code>String</code> | where template-based deployment definitions are saved |
-| properties.tenant | <code>String</code> | v2 Auth Tenant Information |
-| properties.businessUnits | <code>String</code> | ID of Business Unit to authenticate with |
+| properties.directories.templateBuilds | <code>Object</code> | where template-based deployment definitions are saved |
 | buObject | <code>Object</code> | properties for auth |
-| buObject.clientId | <code>String</code> | clientId for FuelSDK auth |
-| buObject.clientSecret | <code>String</code> | clientSecret for FuelSDK auth |
-| buObject.credential | <code>Object</code> | clientId for FuelSDK auth |
-| buObject.tenant | <code>String</code> | v2 Auth Tenant Information |
-| buObject.mid | <code>String</code> | ID of Business Unit to authenticate with |
 | buObject.businessUnit | <code>String</code> | name of Business Unit to authenticate with |
-| client | <code>Util.SDK</code> | fuel client |
+| buObject.credential | <code>String</code> | clientId for FuelSDK auth |
 
-<a name="RetrieverLocal+buildDefinition"></a>
+<a name="RetrieverLocal+retrieve"></a>
 
-### retrieverLocal.buildDefinition(metadataType, name, variables) ⇒ <code>Promise</code>
-Builds a specific metadata file by name
+### retrieverLocal.retrieve(metadataTypes, name, [templateVariables]) ⇒ <code>Promise.&lt;Util.MultiMetadataTypeList&gt;</code>
+Retrieve the local metadata of specified types into local file system and Retriever.metadata
 
 **Kind**: instance method of [<code>RetrieverLocal</code>](#RetrieverLocal)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;Util.MultiMetadataTypeList&gt;</code> - Promise of a list of retrieved items grouped by type {automation:[...], query:[...]}  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadataType | <code>String</code> | metadata type to build |
+| metadataTypes | <code>Array.&lt;String&gt;</code> | metadata type to build |
 | name | <code>String</code> | name of metadata to build |
-| variables | <code>Object</code> | variables to be replaced in the metadata |
-
-<a name="RetrieverLocal.verifyMarketList"></a>
-
-### RetrieverLocal.verifyMarketList(mlName, properties) ⇒ <code>void</code>
-ensure provided MarketList exists and it's content including markets and BUs checks out
-
-**Kind**: static method of [<code>RetrieverLocal</code>](#RetrieverLocal)  
-**Returns**: <code>void</code> - throws errors if problems were found  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| mlName | <code>String</code> | name of marketList |
-| properties | <code>Object</code> | General configuration to be used in retrieve |
-| properties.markets | <code>Object</code> | list of template variable combos |
-| properties.marketList | <code>Object</code> | list of bu-market combos |
-| properties.credentials | <code>Object</code> | list of credentials and their BUs |
+| [templateVariables] | <code>Object</code> | Object of values which can be replaced (in case of templating) |
 
 <a name="Util"></a>
 
@@ -6037,6 +6071,7 @@ REST format
     * [.retrieveChangelog([additionalFields], buObject, [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
     * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.buildTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.buildTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
     * [.preDeployTasks(metadata, deployDir)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;Util.MetadataTypeItem&gt;</code>
     * [.create(metadata, deployDir)](#MetadataType.create) ⇒ <code>void</code>
     * [.update(metadata, [metadataBefore])](#MetadataType.update) ⇒ <code>void</code>
@@ -6206,6 +6241,21 @@ Gets metadata cache with limited fields and does not store value to disk
 <a name="MetadataType.retrieveAsTemplate"></a>
 
 ### MetadataType.retrieveAsTemplate(templateDir, name, templateVariables, [subType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+Gets metadata cache with limited fields and does not store value to disk
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| name | <code>string</code> | name of the metadata file |
+| templateVariables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
+| [subType] | <code>string</code> | optionally limit to a single subtype |
+
+<a name="MetadataType.buildTemplate"></a>
+
+### MetadataType.buildTemplate(templateDir, name, templateVariables, [subType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
