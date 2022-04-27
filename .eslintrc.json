@@ -6,12 +6,11 @@
     },
     "extends": [
         "eslint:recommended",
-        "prettier",
         "ssjs",
         "plugin:jsdoc/recommended",
         "plugin:prettier/recommended"
     ],
-    "plugins": ["prettier", "jsdoc"],
+    "plugins": [],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -37,12 +36,7 @@
             }
         ],
         "valid-jsdoc": "error",
-        "spaced-comment": [
-            "warn",
-            "always",
-            { "block": { "exceptions": ["*"], "balanced": true } }
-        ],
-        "prefer-arrow-callback": "error"
+		"spaced-comment": ["warn", "always", { "block": { "exceptions": ["*"], "balanced": true } }]
     },
     "overrides": [
         {
@@ -50,7 +44,8 @@
             "rules": {
                 "no-var": "error",
                 "prefer-const": "error",
-                "prettier/prettier": "warn"
+                "prettier/prettier": "warn",
+                "prefer-arrow-callback": "warn"
             }
         },
         {

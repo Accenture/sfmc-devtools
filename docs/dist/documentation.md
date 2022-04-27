@@ -150,8 +150,6 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Init">Init</a></dt>
 <dd><p>CLI helper class</p>
 </dd>
-<dt><a href="#SDK">SDK</a> : <code><a href="#SDK">SDK</a></code></dt>
-<dd></dd>
 <dt><a href="#Util">Util</a></dt>
 <dd><p>Util that contains logger and simple util methods</p>
 </dd>
@@ -173,7 +171,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 ## Typedefs
 
 <dl>
-<dt><a href="#CodeExtractItem">CodeExtractItem</a> : <code>Object.&lt;string, any&gt;</code></dt>
+<dt><a href="#CodeExtractItem">CodeExtractItem</a> : <code>object.&lt;string, any&gt;</code></dt>
 <dd></dd>
 <dt><a href="#AutomationActivity">AutomationActivity</a> : <code>object</code></dt>
 <dd></dd>
@@ -187,7 +185,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 </dd>
 <dt><a href="#AutomationItem">AutomationItem</a> : <code>object</code></dt>
 <dd></dd>
-<dt><a href="#AutomationMap">AutomationMap</a> : <code>Object.&lt;string, AutomationItem&gt;</code></dt>
+<dt><a href="#AutomationMap">AutomationMap</a> : <code>object.&lt;string, AutomationItem&gt;</code></dt>
 <dd></dd>
 <dt><a href="#DataExtensionMap">DataExtensionMap</a> : <code>object</code></dt>
 <dd></dd>
@@ -205,9 +203,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dd></dd>
 <dt><a href="#AuthObject">AuthObject</a> : <code>object</code></dt>
 <dd></dd>
-<dt><a href="#MetadataType">MetadataType</a> : <code>require(&#x27;../metadataTypes/MetadataType.js&#x27;)</code></dt>
-<dd></dd>
-<dt><a href="#MultiMetadataTypeList">MultiMetadataTypeList</a> : <code>Object.&lt;string, string&gt;</code></dt>
+<dt><a href="#MultiMetadataTypeList">MultiMetadataTypeList</a> : <code>object.&lt;string, string&gt;</code></dt>
 <dd></dd>
 </dl>
 
@@ -374,7 +370,7 @@ main class
     * [.setSkipInteraction([skipInteraction])](#Mcdev.setSkipInteraction) ⇒ <code>void</code>
     * [.createDeltaPkg(argv)](#Mcdev.createDeltaPkg) ⇒ <code>void</code>
     * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
-    * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>Promise</code>
+    * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>void</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
     * [.retrieve(businessUnit, [selectedType], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
     * [._retrieveBU(cred, bu, [selectedType], [changelogOnly])](#Mcdev._retrieveBU) ⇒ <code>Promise.&lt;object&gt;</code>
@@ -427,9 +423,9 @@ handler for 'mcdev createDeltaPkg
 **Returns**: <code>Promise</code> - .  
 <a name="Mcdev.explainTypes"></a>
 
-### Mcdev.explainTypes() ⇒ <code>Promise</code>
+### Mcdev.explainTypes() ⇒ <code>void</code>
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise</code> - .  
+**Returns**: <code>void</code> - .  
 <a name="Mcdev.upgrade"></a>
 
 ### Mcdev.upgrade([skipInteraction]) ⇒ <code>Promise</code>
@@ -626,7 +622,7 @@ MessageSendActivity MetadataType
 
 * [AccountUser](#AccountUser) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, _, buObject)](#AccountUser.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [.timeSinceDate(date, date2)](#AccountUser.timeSinceDate) ⇒ <code>number</code>
+    * [.timeSinceDate(date)](#AccountUser.timeSinceDate) ⇒ <code>number</code>
     * [.getBuName(buObject, id)](#AccountUser.getBuName) ⇒ <code>string</code>
     * [.document(buObject, [metadata])](#AccountUser.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._generateDocMd(users, type, columnsToPrint, buObject)](#AccountUser._generateDocMd) ⇒ <code>string</code>
@@ -649,14 +645,13 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 
 <a name="AccountUser.timeSinceDate"></a>
 
-### AccountUser.timeSinceDate(date, date2) ⇒ <code>number</code>
+### AccountUser.timeSinceDate(date) ⇒ <code>number</code>
 **Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
 **Returns**: <code>number</code> - time difference  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | date | <code>string</code> | first date |
-| date2 | <code>string</code> | second date |
 
 <a name="AccountUser.getBuName"></a>
 
@@ -670,7 +665,7 @@ helper to print bu names
 | --- | --- | --- |
 | buObject | <code>Util.BuObject</code> | needed for eid |
 | buObject.eid | <code>string</code> | needed to check for parent bu |
-| id | <code>numeric</code> | bu id |
+| id | <code>number</code> | bu id |
 
 <a name="AccountUser.document"></a>
 
@@ -1582,7 +1577,7 @@ DataExtensionField MetadataType
     * [.convertToSortedArray(fieldsObj)](#DataExtensionField.convertToSortedArray) ⇒ <code>Array.&lt;DataExtensionFieldItem&gt;</code>
     * [.sortDeFields(a, b)](#DataExtensionField.sortDeFields) ⇒ <code>boolean</code>
     * [.postRetrieveTasks(metadata, forDataExtension)](#DataExtensionField.postRetrieveTasks) ⇒ <code>DataExtensionFieldItem</code>
-    * [.prepareDeployColumnsOnUpdate(deployColumns, deKey)](#DataExtensionField.prepareDeployColumnsOnUpdate) ⇒ <code>Object.&lt;string, DataExtensionFieldItem&gt;</code>
+    * [.prepareDeployColumnsOnUpdate(deployColumns, deKey)](#DataExtensionField.prepareDeployColumnsOnUpdate) ⇒ <code>object.&lt;string, DataExtensionFieldItem&gt;</code>
     * [.deleteByKey(buObject, customerKey)](#DataExtensionField.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.deleteByKeySOAP(buObject, customerKey, [handleOutside])](#DataExtensionField.deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#DataExtensionField.postDeleteTasks) ⇒ <code>void</code>
@@ -1654,12 +1649,12 @@ manages post retrieve steps
 
 <a name="DataExtensionField.prepareDeployColumnsOnUpdate"></a>
 
-### DataExtensionField.prepareDeployColumnsOnUpdate(deployColumns, deKey) ⇒ <code>Object.&lt;string, DataExtensionFieldItem&gt;</code>
+### DataExtensionField.prepareDeployColumnsOnUpdate(deployColumns, deKey) ⇒ <code>object.&lt;string, DataExtensionFieldItem&gt;</code>
 Mofifies passed deployColumns for update by mapping ObjectID to their target column's values.
 Removes FieldType field if its the same in deploy and target column, because it results in an error even if its of the same type
 
 **Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
-**Returns**: <code>Object.&lt;string, DataExtensionFieldItem&gt;</code> - existing fields by their original name to allow re-adding FieldType after update  
+**Returns**: <code>object.&lt;string, DataExtensionFieldItem&gt;</code> - existing fields by their original name to allow re-adding FieldType after update  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3947,7 +3942,6 @@ CLI entry for SFMC DevTools
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
     * [.getETClient(buObject)](#Util.getETClient) ⇒ [<code>Promise.&lt;SDK&gt;</code>](#SDK)
-        * [~sdk](#Util.getETClient..sdk) : [<code>SDK</code>](#SDK)
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
     * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>MetadataTypeItem</code>
@@ -4083,10 +4077,6 @@ signs in with SFMC
 | --- | --- | --- |
 | buObject | <code>BuObject</code> | properties for auth |
 
-<a name="Util.getETClient..sdk"></a>
-
-#### getETClient~sdk : [<code>SDK</code>](#SDK)
-**Kind**: inner constant of [<code>getETClient</code>](#Util.getETClient)  
 <a name="Util.resolveObjPath"></a>
 
 ### Util.resolveObjPath(path, obj) ⇒ <code>any</code>
@@ -4420,7 +4410,6 @@ File extends fs-extra. It adds logger and util methods for file handling
     * [.normalizePath(denormalizedPath)](#File.normalizePath) ⇒ <code>string</code>
     * [.writeJSONToFile(directory, filename, content)](#File.writeJSONToFile) ⇒ <code>Promise</code>
     * [.writePrettyToFile(directory, filename, filetype, content, [templateVariables])](#File.writePrettyToFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._beautify_sql(content)](#File._beautify_sql) ⇒ <code>string</code>
     * [._beautify_prettier(directory, filename, filetype, content)](#File._beautify_prettier) ⇒ <code>string</code>
     * [.writeToFile(directory, filename, filetype, content, [encoding])](#File.writeToFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.readJSONFile(directory, filename, sync, cleanPath)](#File.readJSONFile) ⇒ <code>Promise</code> \| <code>object</code>
@@ -4522,18 +4511,6 @@ Saves beautified files in the local file system. Will create the parent director
 | filetype | <code>string</code> | filetype ie. JSON or SSJS |
 | content | <code>string</code> | filecontent |
 | [templateVariables] | <code>object</code> | templating variables to be replaced in the metadata |
-
-<a name="File._beautify_sql"></a>
-
-### File.\_beautify\_sql(content) ⇒ <code>string</code>
-helper for writePrettyToFile, applying sql formatting onto given stringified content
-
-**Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>string</code> - original string on error; formatted string on success  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| content | <code>string</code> | filecontent |
 
 <a name="File._beautify_prettier"></a>
 
@@ -4682,9 +4659,10 @@ CLI helper class
 
 * [Init](#Init)
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.createIdeConfigFiles()](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
-    * [._createIdeConfigFile(fileNameArr, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
     * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
     * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>string</code>
@@ -4711,11 +4689,16 @@ helper method for this.upgradeProject that upgrades project config if needed
 
 <a name="Init.createIdeConfigFiles"></a>
 
-### Init.createIdeConfigFiles() ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
 handles creation/update of all config file from the boilerplate
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - status of config file creation  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
+
 <a name="Init._updateLeaf"></a>
 
 ### Init.\_updateLeaf(propertiersCur, defaultPropsCur, fieldName) ⇒ <code>void</code>
@@ -4729,9 +4712,21 @@ recursive helper for _fixMcdevConfig that adds missing settings
 | defaultPropsCur | <code>object</code> | current sub-object of default settings |
 | fieldName | <code>string</code> | dot-concatenated object-path that needs adding |
 
+<a name="Init._getForcedUpdateList"></a>
+
+### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Array.&lt;string&gt;</code>
+returns list of files that need to be updated
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Array.&lt;string&gt;</code> - relevant files with path that need to be updated  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| projectVersion | <code>string</code> | version found in config file of the current project |
+
 <a name="Init._createIdeConfigFile"></a>
 
-### Init.\_createIdeConfigFile(fileNameArr, [boilerplateFileContent]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Init.\_createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent]) ⇒ <code>Promise.&lt;boolean&gt;</code>
 handles creation/update of one config file from the boilerplate at a time
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -4740,6 +4735,7 @@ handles creation/update of one config file from the boilerplate at a time
 | Param | Type | Description |
 | --- | --- | --- |
 | fileNameArr | <code>Array.&lt;string&gt;</code> | 0: path, 1: filename, 2: extension with dot |
+| relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
 | [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
 
 <a name="Init.initGitRepo"></a>
@@ -4892,9 +4888,10 @@ CLI helper class
 
 * [Init](#Init)
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.createIdeConfigFiles()](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
-    * [._createIdeConfigFile(fileNameArr, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
     * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
     * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>string</code>
@@ -4921,11 +4918,16 @@ helper method for this.upgradeProject that upgrades project config if needed
 
 <a name="Init.createIdeConfigFiles"></a>
 
-### Init.createIdeConfigFiles() ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
 handles creation/update of all config file from the boilerplate
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - status of config file creation  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
+
 <a name="Init._updateLeaf"></a>
 
 ### Init.\_updateLeaf(propertiersCur, defaultPropsCur, fieldName) ⇒ <code>void</code>
@@ -4939,9 +4941,21 @@ recursive helper for _fixMcdevConfig that adds missing settings
 | defaultPropsCur | <code>object</code> | current sub-object of default settings |
 | fieldName | <code>string</code> | dot-concatenated object-path that needs adding |
 
+<a name="Init._getForcedUpdateList"></a>
+
+### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Array.&lt;string&gt;</code>
+returns list of files that need to be updated
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Array.&lt;string&gt;</code> - relevant files with path that need to be updated  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| projectVersion | <code>string</code> | version found in config file of the current project |
+
 <a name="Init._createIdeConfigFile"></a>
 
-### Init.\_createIdeConfigFile(fileNameArr, [boilerplateFileContent]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Init.\_createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent]) ⇒ <code>Promise.&lt;boolean&gt;</code>
 handles creation/update of one config file from the boilerplate at a time
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -4950,6 +4964,7 @@ handles creation/update of one config file from the boilerplate at a time
 | Param | Type | Description |
 | --- | --- | --- |
 | fileNameArr | <code>Array.&lt;string&gt;</code> | 0: path, 1: filename, 2: extension with dot |
+| relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
 | [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
 
 <a name="Init.initGitRepo"></a>
@@ -5102,9 +5117,10 @@ CLI helper class
 
 * [Init](#Init)
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.createIdeConfigFiles()](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
-    * [._createIdeConfigFile(fileNameArr, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
     * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
     * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>string</code>
@@ -5131,11 +5147,16 @@ helper method for this.upgradeProject that upgrades project config if needed
 
 <a name="Init.createIdeConfigFiles"></a>
 
-### Init.createIdeConfigFiles() ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
 handles creation/update of all config file from the boilerplate
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - status of config file creation  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
+
 <a name="Init._updateLeaf"></a>
 
 ### Init.\_updateLeaf(propertiersCur, defaultPropsCur, fieldName) ⇒ <code>void</code>
@@ -5149,9 +5170,21 @@ recursive helper for _fixMcdevConfig that adds missing settings
 | defaultPropsCur | <code>object</code> | current sub-object of default settings |
 | fieldName | <code>string</code> | dot-concatenated object-path that needs adding |
 
+<a name="Init._getForcedUpdateList"></a>
+
+### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Array.&lt;string&gt;</code>
+returns list of files that need to be updated
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Array.&lt;string&gt;</code> - relevant files with path that need to be updated  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| projectVersion | <code>string</code> | version found in config file of the current project |
+
 <a name="Init._createIdeConfigFile"></a>
 
-### Init.\_createIdeConfigFile(fileNameArr, [boilerplateFileContent]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Init.\_createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent]) ⇒ <code>Promise.&lt;boolean&gt;</code>
 handles creation/update of one config file from the boilerplate at a time
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -5160,6 +5193,7 @@ handles creation/update of one config file from the boilerplate at a time
 | Param | Type | Description |
 | --- | --- | --- |
 | fileNameArr | <code>Array.&lt;string&gt;</code> | 0: path, 1: filename, 2: extension with dot |
+| relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
 | [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
 
 <a name="Init.initGitRepo"></a>
@@ -5312,9 +5346,10 @@ CLI helper class
 
 * [Init](#Init)
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.createIdeConfigFiles()](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
-    * [._createIdeConfigFile(fileNameArr, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
     * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
     * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>string</code>
@@ -5341,11 +5376,16 @@ helper method for this.upgradeProject that upgrades project config if needed
 
 <a name="Init.createIdeConfigFiles"></a>
 
-### Init.createIdeConfigFiles() ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
 handles creation/update of all config file from the boilerplate
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - status of config file creation  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
+
 <a name="Init._updateLeaf"></a>
 
 ### Init.\_updateLeaf(propertiersCur, defaultPropsCur, fieldName) ⇒ <code>void</code>
@@ -5359,9 +5399,21 @@ recursive helper for _fixMcdevConfig that adds missing settings
 | defaultPropsCur | <code>object</code> | current sub-object of default settings |
 | fieldName | <code>string</code> | dot-concatenated object-path that needs adding |
 
+<a name="Init._getForcedUpdateList"></a>
+
+### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Array.&lt;string&gt;</code>
+returns list of files that need to be updated
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Array.&lt;string&gt;</code> - relevant files with path that need to be updated  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| projectVersion | <code>string</code> | version found in config file of the current project |
+
 <a name="Init._createIdeConfigFile"></a>
 
-### Init.\_createIdeConfigFile(fileNameArr, [boilerplateFileContent]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Init.\_createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent]) ⇒ <code>Promise.&lt;boolean&gt;</code>
 handles creation/update of one config file from the boilerplate at a time
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -5370,6 +5422,7 @@ handles creation/update of one config file from the boilerplate at a time
 | Param | Type | Description |
 | --- | --- | --- |
 | fileNameArr | <code>Array.&lt;string&gt;</code> | 0: path, 1: filename, 2: extension with dot |
+| relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
 | [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
 
 <a name="Init.initGitRepo"></a>
@@ -5513,10 +5566,6 @@ ensure we have certain default values in our config
 | --- | --- | --- |
 | [currentContent] | <code>object</code> | what was read from existing package.json file |
 
-<a name="SDK"></a>
-
-## SDK : [<code>SDK</code>](#SDK)
-**Kind**: global constant  
 <a name="Util"></a>
 
 ## Util
@@ -5537,7 +5586,6 @@ Util that contains logger and simple util methods
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
     * [.getETClient(buObject)](#Util.getETClient) ⇒ [<code>Promise.&lt;SDK&gt;</code>](#SDK)
-        * [~sdk](#Util.getETClient..sdk) : [<code>SDK</code>](#SDK)
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
     * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>MetadataTypeItem</code>
@@ -5673,10 +5721,6 @@ signs in with SFMC
 | --- | --- | --- |
 | buObject | <code>BuObject</code> | properties for auth |
 
-<a name="Util.getETClient..sdk"></a>
-
-#### getETClient~sdk : [<code>SDK</code>](#SDK)
-**Kind**: inner constant of [<code>getETClient</code>](#Util.getETClient)  
 <a name="Util.resolveObjPath"></a>
 
 ### Util.resolveObjPath(path, obj) ⇒ <code>any</code>
@@ -5757,7 +5801,7 @@ initiate winston logger
 **Kind**: global function  
 <a name="CodeExtractItem"></a>
 
-## CodeExtractItem : <code>Object.&lt;string, any&gt;</code>
+## CodeExtractItem : <code>object.&lt;string, any&gt;</code>
 **Kind**: global typedef  
 **Properties**
 
@@ -5880,7 +5924,7 @@ SOAP format
 
 <a name="AutomationMap"></a>
 
-## AutomationMap : <code>Object.&lt;string, AutomationItem&gt;</code>
+## AutomationMap : <code>object.&lt;string, AutomationItem&gt;</code>
 **Kind**: global typedef  
 <a name="DataExtensionMap"></a>
 
@@ -6607,601 +6651,7 @@ Returns metadata of a business unit that is saved locally
 | account_id | <code>integer</code> | mid of business unit to auth against |
 | auth_url | <code>string</code> | authentication base url |
 
-<a name="MetadataType"></a>
-
-## MetadataType : <code>require(&#x27;../metadataTypes/MetadataType.js&#x27;)</code>
-**Kind**: global typedef  
-
-* [MetadataType](#MetadataType) : <code>require(&#x27;../metadataTypes/MetadataType.js&#x27;)</code>
-    * [.client](#MetadataType.client) : <code>Util.SDK</code>
-    * [.properties](#MetadataType.properties) : <code>Util.MultiMetadataTypeMap</code>
-    * [.subType](#MetadataType.subType) : <code>string</code>
-    * [.buObject](#MetadataType.buObject) : <code>object</code>
-    * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType.getJsonFromFS) ⇒ <code>object</code>
-    * [.getFieldNamesToRetrieve([additionalFields])](#MetadataType.getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.deploy(metadata, deployDir, retrieveDir, buObject)](#MetadataType.deploy) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [.postDeployTasks(metadata, originalMetadata)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
-    * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>Util.MetadataTypeItem</code>
-    * [.overrideKeyWithName(metadata, [warningMsg])](#MetadataType.overrideKeyWithName) ⇒ <code>void</code>
-    * [.retrieve(retrieveDir, [additionalFields], buObject, [subType])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-    * [.retrieveChangelog([additionalFields], buObject, [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-    * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
-    * [.preDeployTasks(metadata, deployDir)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;Util.MetadataTypeItem&gt;</code>
-    * [.create(metadata, deployDir)](#MetadataType.create) ⇒ <code>void</code>
-    * [.update(metadata, [metadataBefore])](#MetadataType.update) ⇒ <code>void</code>
-    * [.upsert(metadata, deployDir, [buObject])](#MetadataType.upsert) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
-    * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise</code>
-    * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise</code>
-    * [.updateREST(metadataEntry, uri)](#MetadataType.updateREST) ⇒ <code>Promise</code>
-    * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
-    * [.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-    * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (Util.MetadataTypeMap\|Util.MetadataTypeItem), type:string}&gt;</code>
-    * [.parseResponseBody(body)](#MetadataType.parseResponseBody) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
-    * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
-    * [.removeNotCreateableFields(metadataEntry)](#MetadataType.removeNotCreateableFields) ⇒ <code>void</code>
-    * [.removeNotUpdateableFields(metadataEntry)](#MetadataType.removeNotUpdateableFields) ⇒ <code>void</code>
-    * [.keepTemplateFields(metadataEntry)](#MetadataType.keepTemplateFields) ⇒ <code>void</code>
-    * [.keepRetrieveFields(metadataEntry)](#MetadataType.keepRetrieveFields) ⇒ <code>void</code>
-    * [.isFiltered(metadataEntry, [include])](#MetadataType.isFiltered) ⇒ <code>boolean</code>
-    * [.isFilteredFolder(metadataEntry, [include])](#MetadataType.isFilteredFolder) ⇒ <code>boolean</code>
-    * [.saveResults(results, retrieveDir, [overrideType], [templateVariables])](#MetadataType.saveResults) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
-    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#MetadataType.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.findSubType(templateDir, templateName)](#MetadataType.findSubType) ⇒ <code>string</code>
-    * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName, ex)](#MetadataType.readSecondaryFolder) ⇒ <code>object</code>
-    * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType.buildDefinition) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-    * [.checkForErrors(ex)](#MetadataType.checkForErrors) ⇒ <code>string</code>
-    * [.document([buObject], [metadata], [isDeploy])](#MetadataType.document) ⇒ <code>void</code>
-    * [.deleteByKey(buObject, customerKey)](#MetadataType.deleteByKey) ⇒ <code>boolean</code>
-    * [.postDeleteTasks(buObject, customerKey)](#MetadataType.postDeleteTasks) ⇒ <code>void</code>
-    * [.deleteByKeySOAP(buObject, customerKey, [handleOutside])](#MetadataType.deleteByKeySOAP) ⇒ <code>boolean</code>
-    * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType.readBUMetadataForType) ⇒ <code>object</code>
-
-<a name="MetadataType.client"></a>
-
-### MetadataType.client : <code>Util.SDK</code>
-**Kind**: static property of [<code>MetadataType</code>](#MetadataType)  
-<a name="MetadataType.properties"></a>
-
-### MetadataType.properties : <code>Util.MultiMetadataTypeMap</code>
-**Kind**: static property of [<code>MetadataType</code>](#MetadataType)  
-<a name="MetadataType.subType"></a>
-
-### MetadataType.subType : <code>string</code>
-**Kind**: static property of [<code>MetadataType</code>](#MetadataType)  
-<a name="MetadataType.buObject"></a>
-
-### MetadataType.buObject : <code>object</code>
-**Kind**: static property of [<code>MetadataType</code>](#MetadataType)  
-<a name="MetadataType.getJsonFromFS"></a>
-
-### MetadataType.getJsonFromFS(dir, [listBadKeys]) ⇒ <code>object</code>
-Returns file contents mapped to their filename without '.json' ending
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>object</code> - fileName => fileContent map  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| dir | <code>string</code> |  | directory that contains '.json' files to be read |
-| [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
-
-<a name="MetadataType.getFieldNamesToRetrieve"></a>
-
-### MetadataType.getFieldNamesToRetrieve([additionalFields]) ⇒ <code>Array.&lt;string&gt;</code>
-Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Array.&lt;string&gt;</code> - Fieldnames  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
-
-<a name="MetadataType.deploy"></a>
-
-### MetadataType.deploy(metadata, deployDir, retrieveDir, buObject) ⇒ <code>Promise.&lt;object&gt;</code>
-Deploys metadata
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;object&gt;</code> - Promise of keyField => metadata map  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>Util.MetadataTypeMap</code> | metadata mapped by their keyField |
-| deployDir | <code>string</code> | directory where deploy metadata are saved |
-| retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
-| buObject | <code>Util.BuObject</code> | properties for auth |
-
-<a name="MetadataType.postDeployTasks"></a>
-
-### MetadataType.postDeployTasks(metadata, originalMetadata) ⇒ <code>void</code>
-Gets executed after deployment of metadata type
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>Util.MetadataTypeMap</code> | metadata mapped by their keyField |
-| originalMetadata | <code>Util.MetadataTypeMap</code> | metadata to be updated (contains additioanl fields) |
-
-<a name="MetadataType.postRetrieveTasks"></a>
-
-### MetadataType.postRetrieveTasks(metadata, targetDir, [isTemplating]) ⇒ <code>Util.MetadataTypeItem</code>
-Gets executed after retreive of metadata type
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Util.MetadataTypeItem</code> - cloned metadata  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>Util.MetadataTypeItem</code> | a single item |
-| targetDir | <code>string</code> | folder where retrieves should be saved |
-| [isTemplating] | <code>boolean</code> | signals that we are retrieving templates |
-
-<a name="MetadataType.overrideKeyWithName"></a>
-
-### MetadataType.overrideKeyWithName(metadata, [warningMsg]) ⇒ <code>void</code>
-used to synchronize name and external key during retrieveAsTemplate
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>Util.MetadataTypeItem</code> | a single item |
-| [warningMsg] | <code>string</code> | optional msg to show the user |
-
-<a name="MetadataType.retrieve"></a>
-
-### MetadataType.retrieve(retrieveDir, [additionalFields], buObject, [subType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-Gets metadata from Marketing Cloud
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
-| [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
-| buObject | <code>Util.BuObject</code> | properties for auth |
-| [subType] | <code>string</code> | optionally limit to a single subtype |
-
-<a name="MetadataType.retrieveChangelog"></a>
-
-### MetadataType.retrieveChangelog([additionalFields], buObject, [subType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-Gets metadata from Marketing Cloud
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
-| buObject | <code>Util.BuObject</code> | properties for auth |
-| [subType] | <code>string</code> | optionally limit to a single subtype |
-
-<a name="MetadataType.retrieveForCache"></a>
-
-### MetadataType.retrieveForCache(buObject, [subType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-Gets metadata cache with limited fields and does not store value to disk
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - metadata  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| buObject | <code>Util.BuObject</code> | properties for auth |
-| [subType] | <code>string</code> | optionally limit to a single subtype |
-
-<a name="MetadataType.retrieveAsTemplate"></a>
-
-### MetadataType.retrieveAsTemplate(templateDir, name, templateVariables, [subType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
-Gets metadata cache with limited fields and does not store value to disk
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code> - metadata  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
-| name | <code>string</code> | name of the metadata file |
-| templateVariables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
-| [subType] | <code>string</code> | optionally limit to a single subtype |
-
-<a name="MetadataType.preDeployTasks"></a>
-
-### MetadataType.preDeployTasks(metadata, deployDir) ⇒ <code>Promise.&lt;Util.MetadataTypeItem&gt;</code>
-Gets executed before deploying metadata
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;Util.MetadataTypeItem&gt;</code> - Promise of a single metadata item  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>Util.MetadataTypeItem</code> | a single metadata item |
-| deployDir | <code>string</code> | folder where files for deployment are stored |
-
-<a name="MetadataType.create"></a>
-
-### MetadataType.create(metadata, deployDir) ⇒ <code>void</code>
-Abstract create method that needs to be implemented in child metadata type
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>Util.MetadataTypeItem</code> | single metadata entry |
-| deployDir | <code>string</code> | directory where deploy metadata are saved |
-
-<a name="MetadataType.update"></a>
-
-### MetadataType.update(metadata, [metadataBefore]) ⇒ <code>void</code>
-Abstract update method that needs to be implemented in child metadata type
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>Util.MetadataTypeItem</code> | single metadata entry |
-| [metadataBefore] | <code>Util.MetadataTypeItem</code> | metadata mapped by their keyField |
-
-<a name="MetadataType.upsert"></a>
-
-### MetadataType.upsert(metadata, deployDir, [buObject]) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
-MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>Util.MetadataTypeMap</code> | metadata mapped by their keyField |
-| deployDir | <code>string</code> | directory where deploy metadata are saved |
-| [buObject] | <code>Util.BuObject</code> | properties for auth |
-
-<a name="MetadataType.createREST"></a>
-
-### MetadataType.createREST(metadataEntry, uri) ⇒ <code>Promise</code>
-Creates a single metadata entry via REST
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadataEntry | <code>Util.MetadataTypeItem</code> | a single metadata Entry |
-| uri | <code>string</code> | rest endpoint for POST |
-
-<a name="MetadataType.createSOAP"></a>
-
-### MetadataType.createSOAP(metadataEntry, [overrideType], [handleOutside]) ⇒ <code>Promise</code>
-Creates a single metadata entry via fuel-soap (generic lib not wrapper)
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadataEntry | <code>Util.MetadataTypeItem</code> | single metadata entry |
-| [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
-| [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
-
-<a name="MetadataType.updateREST"></a>
-
-### MetadataType.updateREST(metadataEntry, uri) ⇒ <code>Promise</code>
-Updates a single metadata entry via REST
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadataEntry | <code>Util.MetadataTypeItem</code> | a single metadata Entry |
-| uri | <code>string</code> | rest endpoint for PATCH |
-
-<a name="MetadataType.updateSOAP"></a>
-
-### MetadataType.updateSOAP(metadataEntry, [overrideType], [handleOutside]) ⇒ <code>Promise</code>
-Updates a single metadata entry via fuel-soap (generic lib not wrapper)
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadataEntry | <code>Util.MetadataTypeItem</code> | single metadata entry |
-| [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
-| [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
-
-<a name="MetadataType.retrieveSOAP"></a>
-
-### MetadataType.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
-| buObject | <code>Util.BuObject</code> | properties for auth |
-| [requestParams] | <code>object</code> | required for the specific request (filter for example) |
-| [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
-
-<a name="MetadataType.retrieveREST"></a>
-
-### MetadataType.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables]) ⇒ <code>Promise.&lt;{metadata: (Util.MetadataTypeMap\|Util.MetadataTypeItem), type:string}&gt;</code>
-Retrieves Metadata for Rest Types
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{metadata: (Util.MetadataTypeMap\|Util.MetadataTypeItem), type:string}&gt;</code> - Promise of item map (single item for templated result)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
-| uri | <code>string</code> | rest endpoint for GET |
-| [overrideType] | <code>string</code> | force a metadata type (mainly used for Folders) |
-| [templateVariables] | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
-
-<a name="MetadataType.parseResponseBody"></a>
-
-### MetadataType.parseResponseBody(body) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
-Builds map of metadata entries mapped to their keyfields
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - keyField => metadata map  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| body | <code>object</code> | json of response body |
-
-<a name="MetadataType.deleteFieldByDefinition"></a>
-
-### MetadataType.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin) ⇒ <code>void</code>
-Deletes a field in a metadata entry if the selected definition property equals false.
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadataEntry | <code>Util.MetadataTypeItem</code> | One entry of a metadataType |
-| fieldPath | <code>string</code> | field path to be checked if it conforms to the definition (dot seperated if nested): 'fuu.bar' |
-| definitionProperty | <code>&#x27;isCreateable&#x27;</code> \| <code>&#x27;isUpdateable&#x27;</code> \| <code>&#x27;retrieving&#x27;</code> \| <code>&#x27;templating&#x27;</code> | delete field if definitionProperty equals false for specified field. Options: [isCreateable | isUpdateable] |
-| origin | <code>string</code> | string of parent object, required when using arrays as these are parsed slightly differently. |
-
-**Example**  
-```js
-Removes field (or nested fields childs) that are not updateable
-deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
-```
-<a name="MetadataType.removeNotCreateableFields"></a>
-
-### MetadataType.removeNotCreateableFields(metadataEntry) ⇒ <code>void</code>
-Remove fields from metadata entry that are not createable
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadataEntry | <code>Util.MetadataTypeItem</code> | metadata entry |
-
-<a name="MetadataType.removeNotUpdateableFields"></a>
-
-### MetadataType.removeNotUpdateableFields(metadataEntry) ⇒ <code>void</code>
-Remove fields from metadata entry that are not updateable
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadataEntry | <code>Util.MetadataTypeItem</code> | metadata entry |
-
-<a name="MetadataType.keepTemplateFields"></a>
-
-### MetadataType.keepTemplateFields(metadataEntry) ⇒ <code>void</code>
-Remove fields from metadata entry that are not needed in the template
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadataEntry | <code>Util.MetadataTypeItem</code> | metadata entry |
-
-<a name="MetadataType.keepRetrieveFields"></a>
-
-### MetadataType.keepRetrieveFields(metadataEntry) ⇒ <code>void</code>
-Remove fields from metadata entry that are not needed in the stored metadata
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadataEntry | <code>Util.MetadataTypeItem</code> | metadata entry |
-
-<a name="MetadataType.isFiltered"></a>
-
-### MetadataType.isFiltered(metadataEntry, [include]) ⇒ <code>boolean</code>
-checks if the current metadata entry should be saved on retrieve or not
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| metadataEntry | <code>Util.MetadataTypeItem</code> |  | metadata entry |
-| [include] | <code>boolean</code> | <code>false</code> | true: use definition.include / options.include; false=exclude: use definition.filter / options.exclude |
-
-<a name="MetadataType.isFilteredFolder"></a>
-
-### MetadataType.isFilteredFolder(metadataEntry, [include]) ⇒ <code>boolean</code>
-optionally filter by what folder something is in
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| metadataEntry | <code>object</code> |  | metadata entry |
-| [include] | <code>boolean</code> | <code>false</code> | true: use definition.include / options.include; false=exclude: use definition.filter / options.exclude |
-
-<a name="MetadataType.saveResults"></a>
-
-### MetadataType.saveResults(results, retrieveDir, [overrideType], [templateVariables]) ⇒ <code>Promise.&lt;Util.MetadataTypeMap&gt;</code>
-Helper for writing Metadata to disk, used for Retrieve and deploy
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;Util.MetadataTypeMap&gt;</code> - Promise of saved metadata  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| results | <code>Util.MetadataTypeMap</code> | metadata results from deploy |
-| retrieveDir | <code>string</code> | directory where metadata should be stored after deploy/retrieve |
-| [overrideType] | <code>string</code> | for use when there is a subtype (such as folder-queries) |
-| [templateVariables] | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
-
-<a name="MetadataType.buildDefinitionForExtracts"></a>
-
-### MetadataType.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for buildDefinition
-handles extracted code if any are found for complex types (e.g script, asset, query)
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| templateDir | <code>string</code> | Directory where metadata templates are stored |
-| targetDir | <code>string</code> | Directory where built definitions will be saved |
-| metadata | <code>Util.MetadataTypeItem</code> | main JSON file that was read from file system |
-| variables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
-| templateName | <code>string</code> | name of the template to be built |
-
-<a name="MetadataType.findSubType"></a>
-
-### MetadataType.findSubType(templateDir, templateName) ⇒ <code>string</code>
-check template directory for complex types that open subfolders for their subtypes
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>string</code> - subtype name  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| templateDir | <code>string</code> | Directory where metadata templates are stored |
-| templateName | <code>string</code> | name of the metadata file |
-
-<a name="MetadataType.readSecondaryFolder"></a>
-
-### MetadataType.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName, ex) ⇒ <code>object</code>
-optional method used for some types to try a different folder structure
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>object</code> - metadata  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| templateDir | <code>string</code> | Directory where metadata templates are stored |
-| typeDirArr | <code>Array.&lt;string&gt;</code> | current subdir for this type |
-| templateName | <code>string</code> | name of the metadata template |
-| fileName | <code>string</code> | name of the metadata template file w/o extension |
-| ex | <code>Error</code> | error from first attempt |
-
-<a name="MetadataType.buildDefinition"></a>
-
-### MetadataType.buildDefinition(templateDir, targetDir, templateName, variables) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-Builds definition based on template
-NOTE: Most metadata files should use this generic method, unless custom
-parsing is required (for example scripts & queries)
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code> - Promise of item map  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| templateDir | <code>string</code> | Directory where metadata templates are stored |
-| targetDir | <code>string</code> \| <code>Array.&lt;string&gt;</code> | (List of) Directory where built definitions will be saved |
-| templateName | <code>string</code> | name of the metadata file |
-| variables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
-
-<a name="MetadataType.checkForErrors"></a>
-
-### MetadataType.checkForErrors(ex) ⇒ <code>string</code>
-Standardizes a check for multiple messages
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>string</code> - formatted Error Message  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| ex | <code>object</code> | response payload from REST API |
-
-<a name="MetadataType.document"></a>
-
-### MetadataType.document([buObject], [metadata], [isDeploy]) ⇒ <code>void</code>
-Gets metadata cache with limited fields and does not store value to disk
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [buObject] | <code>Util.BuObject</code> | properties for auth |
-| [metadata] | <code>Util.MetadataTypeMap</code> | a list of type definitions |
-| [isDeploy] | <code>boolean</code> | used to skip non-supported message during deploy |
-
-<a name="MetadataType.deleteByKey"></a>
-
-### MetadataType.deleteByKey(buObject, customerKey) ⇒ <code>boolean</code>
-Delete a metadata item from the specified business unit
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>boolean</code> - deletion success status  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| buObject | <code>Util.BuObject</code> | references credentials |
-| customerKey | <code>string</code> | Identifier of data extension |
-
-<a name="MetadataType.postDeleteTasks"></a>
-
-### MetadataType.postDeleteTasks(buObject, customerKey) ⇒ <code>void</code>
-clean up after deleting a metadata item
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>void</code> - -  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| buObject | <code>Util.BuObject</code> | references credentials |
-| customerKey | <code>string</code> | Identifier of metadata item |
-
-<a name="MetadataType.deleteByKeySOAP"></a>
-
-### MetadataType.deleteByKeySOAP(buObject, customerKey, [handleOutside]) ⇒ <code>boolean</code>
-Delete a data extension from the specified business unit
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>boolean</code> - deletion success flag  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| buObject | <code>Util.BuObject</code> | references credentials |
-| customerKey | <code>string</code> | Identifier of metadata |
-| [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
-
-<a name="MetadataType.readBUMetadataForType"></a>
-
-### MetadataType.readBUMetadataForType(readDir, [listBadKeys], [buMetadata]) ⇒ <code>object</code>
-Returns metadata of a business unit that is saved locally
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>object</code> - Metadata of BU in local directory  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| readDir | <code>string</code> |  | root directory of metadata. |
-| [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
-| [buMetadata] | <code>object</code> |  | Metadata of BU in local directory |
-
 <a name="MultiMetadataTypeList"></a>
 
-## MultiMetadataTypeList : <code>Object.&lt;string, string&gt;</code>
+## MultiMetadataTypeList : <code>object.&lt;string, string&gt;</code>
 **Kind**: global typedef  
