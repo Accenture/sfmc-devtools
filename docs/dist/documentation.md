@@ -616,6 +616,7 @@ MessageSendActivity MetadataType
 
 * [AccountUser](#AccountUser) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, _, buObject)](#AccountUser.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [.retrieveChangelog(retrieveDir, _, buObject)](#AccountUser.retrieveChangelog) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.timeSinceDate(date)](#AccountUser.timeSinceDate) ⇒ <code>number</code>
     * [.getBuName(buObject, id)](#AccountUser.getBuName) ⇒ <code>string</code>
     * [.document(buObject, [metadata])](#AccountUser.document) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -626,6 +627,20 @@ MessageSendActivity MetadataType
 <a name="AccountUser.retrieve"></a>
 
 ### AccountUser.retrieve(retrieveDir, _, buObject) ⇒ <code>Promise.&lt;object&gt;</code>
+Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
+
+**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
+**Returns**: <code>Promise.&lt;object&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| _ | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
+| buObject | <code>object</code> | properties for auth |
+
+<a name="AccountUser.retrieveChangelog"></a>
+
+### AccountUser.retrieveChangelog(retrieveDir, _, buObject) ⇒ <code>Promise.&lt;object&gt;</code>
 Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
