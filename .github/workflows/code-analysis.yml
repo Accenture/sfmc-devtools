@@ -19,8 +19,8 @@ on:
         branches: [main, develop]
 
 jobs:
-    analyze:
-        name: Analyze
+    analyzeAndTest:
+        name: Analyze & Test
         runs-on: ubuntu-latest
         permissions:
             actions: read
@@ -52,3 +52,6 @@ jobs:
                   languages: ${{ matrix.language }}
             - name: Perform CodeQL Analysis
               uses: github/codeql-action/analyze@v1
+
+            # Assuming code passes, run tests
+            - run: npm run lint

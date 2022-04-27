@@ -19,7 +19,7 @@
             <Results xsi:type="DataExtensionField">
                 <PartnerKey xsi:nil="true" />
                 <ObjectID>8018397d-880d-4f88-940e-3b4eca098a0c</ObjectID>
-                <CustomerKey>[CFC80FEB-4D29-4AD9-8481-4D42646743E5].[ContactKey]</CustomerKey>
+                <CustomerKey>[childBU_dataextension_test].[ContactKey]</CustomerKey>
                 <Name>ContactKey</Name>
                 <Scale>0</Scale>
                 <DefaultValue />
@@ -31,13 +31,13 @@
                 <DataExtension>
                     <PartnerKey xsi:nil="true" />
                     <ObjectID xsi:nil="true" />
-                    <CustomerKey>CFC80FEB-4D29-4AD9-8481-4D42646743E5</CustomerKey>
+                    <CustomerKey>childBU_dataextension_test</CustomerKey>
                 </DataExtension>
             </Results>
             <Results xsi:type="DataExtensionField">
                 <PartnerKey xsi:nil="true" />
                 <ObjectID>bea0e308-5d45-4181-a673-da9972a7c674</ObjectID>
-                <CustomerKey>[CFC80FEB-4D29-4AD9-8481-4D42646743E5].[LastName]</CustomerKey>
+                <CustomerKey>[childBU_dataextension_test].[LastName]</CustomerKey>
                 <Name>LastName</Name>
                 <Scale>0</Scale>
                 <DefaultValue />
@@ -49,13 +49,13 @@
                 <DataExtension>
                     <PartnerKey xsi:nil="true" />
                     <ObjectID xsi:nil="true" />
-                    <CustomerKey>CFC80FEB-4D29-4AD9-8481-4D42646743E5</CustomerKey>
+                    <CustomerKey>childBU_dataextension_test</CustomerKey>
                 </DataExtension>
             </Results>
             <Results xsi:type="DataExtensionField">
                 <PartnerKey xsi:nil="true" />
                 <ObjectID>2557b461-a699-4744-950d-e80a19afc2dc</ObjectID>
-                <CustomerKey>[CFC80FEB-4D29-4AD9-8481-4D42646743E5].[EmailAddress]</CustomerKey>
+                <CustomerKey>[childBU_dataextension_test].[EmailAddress]</CustomerKey>
                 <Name>EmailAddress</Name>
                 <Scale>0</Scale>
                 <DefaultValue />
@@ -67,13 +67,13 @@
                 <DataExtension>
                     <PartnerKey xsi:nil="true" />
                     <ObjectID xsi:nil="true" />
-                    <CustomerKey>CFC80FEB-4D29-4AD9-8481-4D42646743E5</CustomerKey>
+                    <CustomerKey>childBU_dataextension_test</CustomerKey>
                 </DataExtension>
             </Results>
             <Results xsi:type="DataExtensionField">
                 <PartnerKey xsi:nil="true" />
                 <ObjectID>42760528-a8c5-44dd-8c1d-ff34e5daee54</ObjectID>
-                <CustomerKey>[CFC80FEB-4D29-4AD9-8481-4D42646743E5].[FirstName]</CustomerKey>
+                <CustomerKey>[childBU_dataextension_test].[FirstName]</CustomerKey>
                 <Name>FirstName</Name>
                 <Scale>0</Scale>
                 <DefaultValue />
@@ -85,7 +85,7 @@
                 <DataExtension>
                     <PartnerKey xsi:nil="true" />
                     <ObjectID xsi:nil="true" />
-                    <CustomerKey>CFC80FEB-4D29-4AD9-8481-4D42646743E5</CustomerKey>
+                    <CustomerKey>childBU_dataextension_test</CustomerKey>
                 </DataExtension>
             </Results>
         </RetrieveResponseMsg>

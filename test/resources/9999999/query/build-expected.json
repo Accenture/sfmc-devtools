@@ -1,0 +1,11 @@
+{
+    "name": "testExistingQuery",
+    "key": "testExistingQuery",
+    "description": "updated",
+    "targetKey": "childBU_dataextension_test",
+    "createdDate": "2021-04-22T10:41:22.287",
+    "modifiedDate": "2021-04-22T10:43:27.603",
+    "targetUpdateTypeName": "Overwrite",
+    "isFrozen": false,
+    "r__folder_Path": "Query"
+}

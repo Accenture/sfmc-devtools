@@ -21,7 +21,7 @@
                 <CreatedDate>2022-04-21T06:56:27.927</CreatedDate>
                 <ModifiedDate>2022-04-21T06:56:27.927</ModifiedDate>
                 <ObjectID>21711373-72c1-ec11-b83b-48df37d1deb7</ObjectID>
-                <CustomerKey>CFC80FEB-4D29-4AD9-8481-4D42646743E5</CustomerKey>
+                <CustomerKey>childBU_dataextension_test</CustomerKey>
                 <Name>childBU_dataextension_test</Name>
                 <Description>Container for my test emails</Description>
                 <IsSendable>true</IsSendable>

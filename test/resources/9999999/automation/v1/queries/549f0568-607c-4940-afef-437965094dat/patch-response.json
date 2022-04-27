@@ -1,0 +1,18 @@
+{
+    "queryDefinitionId": "549f0568-607c-4940-afef-437965094dat",
+    "name": "testExistingQuery",
+    "key": "testExistingQuery",
+    "description": "updated",
+    "queryText": "SELECT\n    SubscriberKey as testField\nFROM\n    _Subscribers ",
+    "targetName": "childBU_dataextension_test",
+    "targetKey": "childBU_dataextension_test",
+    "targetId": "30400c03-0ec4-ec11-b83c-48df37d1de8a",
+    "targetDescription": "",
+    "createdDate": "2022-04-26T15:21:16.453",
+    "modifiedDate": "2022-04-26T16:04:15.88",
+    "targetUpdateTypeId": 0,
+    "targetUpdateTypeName": "Overwrite",
+    "validatedQueryText": "SET NOCOUNT ON; SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;\r\n\r\nINSERT INTO C518001158.[testDataExtension] ([testField])\r\nSELECT querydef.[testField]\r\nFROM (SELECT SubscriberKey as testField FROM C518001158._Subscribers ) AS querydef \r\nSELECT @rcInsert = @@ROWCOUNT;;\r\n",
+    "categoryId": 999,
+    "isFrozen": false
+}
