@@ -54,4 +54,4 @@ jobs:
               uses: github/codeql-action/analyze@v1
 
             # Assuming code passes, run tests
-            - run: npm run lint
+            - run: npm run test
