@@ -1,10 +1,16 @@
 {
     "env": {
         "es6": true,
-        "node": true
+        "node": true,
+        "mocha": true
     },
-    "extends": ["eslint:recommended", "prettier", "ssjs"],
-    "plugins": ["prettier"],
+    "extends": [
+        "eslint:recommended",
+        "ssjs",
+        "plugin:jsdoc/recommended",
+        "plugin:prettier/recommended"
+    ],
+    "plugins": [],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -30,7 +36,7 @@
             }
         ],
         "valid-jsdoc": "error",
-        "spaced-comment": ["warn", "always", { "block": { "exceptions": ["*"], "balanced": true } }]
+		"spaced-comment": ["warn", "always", { "block": { "exceptions": ["*"], "balanced": true } }]
     },
     "overrides": [
         {
@@ -38,7 +44,17 @@
             "rules": {
                 "no-var": "error",
                 "prefer-const": "error",
-                "prettier/prettier": "warn"
+                "prettier/prettier": "warn",
+                "prefer-arrow-callback": "warn"
+            }
+        },
+        {
+            "files": ["test/*.js"],
+
+            "extends": ["plugin:mocha/recommended"],
+            "plugins": ["mocha"],
+            "rules": {
+                "mocha/no-mocha-arrows": "off"
             }
         }
     ]

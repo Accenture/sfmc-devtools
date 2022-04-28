@@ -1,6 +1,7 @@
 [
     "eslint",
     "prettier",
+    "prettier-plugin-sql",
     "eslint-config-ssjs",
     "eslint-config-prettier",
     "eslint-plugin-prettier",
