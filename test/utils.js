@@ -64,7 +64,7 @@ exports.mockSetup = () => {
         .onPost(resourceFactory.soapUrl)
         .reply((config) => resourceFactory.handleSOAPRequest(config));
     apimock
-        .onAny(new RegExp(`^${resourceFactory.restUrl}`))
+        .onAny(new RegExp(`^${escapeRegExp(resourceFactory.restUrl)}`))
         .reply((config) => resourceFactory.handleRESTRequest(config));
     fsmock({
         '.mcdevrc.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdevrc.json')),
@@ -87,3 +87,13 @@ exports.mockReset = () => {
  * @returns {object} of API history
  */
 exports.getAPIHistory = () => apimock.history;
+
+/**
+ * escapes string for regex
+ *
+ * @param {string} str to escape
+ * @returns {string} escaped string
+ */
+function escapeRegExp(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
