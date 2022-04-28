@@ -169,7 +169,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 ## Typedefs
 
 <dl>
-<dt><a href="#CodeExtractItem">CodeExtractItem</a> : <code>object.&lt;string, any&gt;</code></dt>
+<dt><a href="#CodeExtractItem">CodeExtractItem</a> : <code>Object.&lt;string, any&gt;</code></dt>
 <dd></dd>
 <dt><a href="#AutomationActivity">AutomationActivity</a> : <code>object</code></dt>
 <dd></dd>
@@ -5790,7 +5790,7 @@ initiate winston logger
 **Kind**: global function  
 <a name="CodeExtractItem"></a>
 
-## CodeExtractItem : <code>object.&lt;string, any&gt;</code>
+## CodeExtractItem : <code>Object.&lt;string, any&gt;</code>
 **Kind**: global typedef  
 **Properties**
 
