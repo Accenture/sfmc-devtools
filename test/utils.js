@@ -67,9 +67,9 @@ exports.mockSetup = () => {
         .onAny(new RegExp(`^${resourceFactory.restUrl}`))
         .reply((config) => resourceFactory.handleRESTRequest(config));
     fsmock({
-        '.mcdevrc.json': fsmock.load(path.resolve(__dirname, 'workingDir/.mcdevrc.json')),
-        '.mcdev-auth.json': fsmock.load(path.resolve(__dirname, 'workingDir/.mcdev-auth.json')),
-        deploy: fsmock.load(path.resolve(__dirname, 'workingDir/deploy')),
+        '.mcdevrc.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdevrc.json')),
+        '.mcdev-auth.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdev-auth.json')),
+        deploy: fsmock.load(path.resolve(__dirname, 'mockRoot/deploy')),
         test: fsmock.load(path.resolve(__dirname)),
     });
 };

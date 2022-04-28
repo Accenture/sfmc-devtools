@@ -1,9 +1,6 @@
 const assert = require('chai').assert;
-
 const cache = require('../lib/util/cache');
-// test specific
 const testUtils = require('./utils');
-//
 const handler = require('../lib/index');
 
 describe('retrieve', () => {
@@ -29,37 +26,6 @@ describe('retrieve', () => {
             await testUtils.getExpectedFile('9999999', 'dataExtension', 'retrieve'),
             await testUtils.getActualFile('childBU_dataextension_test', 'dataExtension'),
             'returned metadata was not equal expected'
-        );
-        assert.equal(
-            Object.values(testUtils.getAPIHistory()).flat().length,
-            6,
-            'Unexpected number of requests made'
-        );
-        return;
-    });
-    it('Should retrieve a data extension as Template', async () => {
-        // WHEN
-        const result = await handler.retrieveAsTemplate(
-            'testInstance/testBU',
-            'dataExtension',
-            'testQuery',
-            'testMarket'
-        );
-        // THEN
-        assert.equal(
-            Object.keys(result.dataExtension).length,
-            1,
-            'only one data extension expected'
-        );
-        console.log(
-            JSON.stringify(
-                await testUtils.getActualTemplate('childBU_dataextension_test', 'dataExtension')
-            )
-        );
-        assert.deepEqual(
-            await testUtils.getExpectedFile('9999999', 'dataExtension', 'template'),
-            await testUtils.getActualTemplate('childBU_dataextension_test', 'dataExtension'),
-            'returned template was not equal expected'
         );
         assert.equal(
             Object.values(testUtils.getAPIHistory()).flat().length,
