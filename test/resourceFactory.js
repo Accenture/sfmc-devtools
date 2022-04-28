@@ -14,7 +14,6 @@ const attributeParser = new XMLParser({ ignoreAttributes: false });
 
 exports.loadSOAPRecords = async (mcdevAction, type, mid) => {
     type = type[0].toLowerCase() + type.substring(1);
-    console.log('LOAD', mcdevAction, type, mid);
     const testPath = path.join(
         'test',
         'resources',
@@ -27,7 +26,6 @@ exports.loadSOAPRecords = async (mcdevAction, type, mid) => {
             encoding: 'utf8',
         });
     } else {
-        console.log('TEST FALLBACK EMPTY', testPath);
         return fs.readFile(path.join('test', 'resources', mcdevAction + '-response.xml'), {
             encoding: 'utf8',
         });
@@ -63,7 +61,7 @@ exports.handleSOAPRequest = async (config) => {
             jObj.Envelope.Header.fueloauth
         );
     } else {
-        console.log('INVALID ACTION ', config.headers.SOAPAction);
+        throw Error('This SOAP Action is not supported by test handler');
     }
 
     return [200, responseXML];
@@ -117,7 +115,6 @@ exports.handleRESTRequest = async (config) => {
                 ];
             }
         } else {
-            console.log('TEST FALLBACK EMPTY', testPath);
             return [
                 404,
                 fs.readFile(path.join('test', 'resources', 'rest404-response.json'), {
@@ -126,7 +123,6 @@ exports.handleRESTRequest = async (config) => {
             ];
         }
     } catch (ex) {
-        console.log('ERROR-handleRest failed', ex);
         return [500, {}];
     }
 };

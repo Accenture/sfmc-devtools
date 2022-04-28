@@ -36,7 +36,6 @@ describe('retrieve', () => {
         // THEN
         // get results from cache
         const result = cache.getCache();
-        console.log(result);
         assert.equal(Object.keys(result.query).length, 2, 'two querys expected');
         assert.deepEqual(
             await testUtils.getExpectedFile('9999999', 'query', 'post'),
