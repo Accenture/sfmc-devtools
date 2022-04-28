@@ -66,7 +66,6 @@
         "eslint-plugin-jsdoc": "39.2.2",
         "eslint-plugin-mocha": "10.0.4",
         "eslint-plugin-prettier": "4.0.0",
-        "eslint-plugin-jsdoc": "38.0.8",
         "husky": "7.0.4",
         "jsdoc-to-markdown": "7.1.1",
         "lint-staged": "12.3.8",
