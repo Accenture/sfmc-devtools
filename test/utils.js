@@ -2,6 +2,8 @@ const File = require('../lib/util/file');
 const path = require('path');
 const axios = require('axios');
 const MockAdapter = require('axios-mock-adapter');
+const auth = require('../lib/util/auth');
+const Util = require('../lib/util/util');
 
 // for some reason doesnt realize below reference
 // eslint-disable-next-line no-unused-vars
@@ -54,6 +56,8 @@ exports.getExpectedFile = (mid, type, action) =>
  * @returns {void}
  */
 exports.mockSetup = () => {
+    //
+    Util.setLoggingLevel({ debug: true });
     apimock = new MockAdapter(axios, { onNoMatch: 'throwException' });
     // set access_token to mid to allow for autorouting of mock to correct resources
     apimock.onPost(authResources.success.url).reply((config) => {
@@ -79,6 +83,7 @@ exports.mockSetup = () => {
  * @returns {void}
  */
 exports.mockReset = () => {
+    auth.clearSessions();
     apimock.restore();
 };
 /**
