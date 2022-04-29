@@ -158,6 +158,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dl>
 <dt><a href="#getUserName">getUserName(userList, item, fieldname)</a> ⇒ <code>string</code></dt>
 <dd></dd>
+<dt><a href="#setupSDK">setupSDK(credentialKey, authObject)</a> ⇒ <code>SDK</code></dt>
+<dd><p>Returns an SDK instance to be used for API calls</p>
+</dd>
 <dt><a href="#createNewLoggerTransport">createNewLoggerTransport()</a> ⇒ <code>object</code></dt>
 <dd><p>wrapper around our standard winston logging to console and logfile</p>
 </dd>
@@ -4613,7 +4616,7 @@ CLI helper class
 
 * [Init](#Init)
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.createIdeConfigFiles(properties)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
     * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
     * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -4643,7 +4646,7 @@ helper method for this.upgradeProject that upgrades project config if needed
 
 <a name="Init.createIdeConfigFiles"></a>
 
-### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Init.createIdeConfigFiles(properties) ⇒ <code>Promise.&lt;boolean&gt;</code>
 handles creation/update of all config file from the boilerplate
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -4651,7 +4654,7 @@ handles creation/update of all config file from the boilerplate
 
 | Param | Type | Description |
 | --- | --- | --- |
-| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
+| properties | <code>string</code> | config file's json |
 
 <a name="Init._updateLeaf"></a>
 
@@ -4842,7 +4845,7 @@ CLI helper class
 
 * [Init](#Init)
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.createIdeConfigFiles(properties)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
     * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
     * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -4872,7 +4875,7 @@ helper method for this.upgradeProject that upgrades project config if needed
 
 <a name="Init.createIdeConfigFiles"></a>
 
-### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Init.createIdeConfigFiles(properties) ⇒ <code>Promise.&lt;boolean&gt;</code>
 handles creation/update of all config file from the boilerplate
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -4880,7 +4883,7 @@ handles creation/update of all config file from the boilerplate
 
 | Param | Type | Description |
 | --- | --- | --- |
-| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
+| properties | <code>string</code> | config file's json |
 
 <a name="Init._updateLeaf"></a>
 
@@ -5071,7 +5074,7 @@ CLI helper class
 
 * [Init](#Init)
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.createIdeConfigFiles(properties)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
     * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
     * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -5101,7 +5104,7 @@ helper method for this.upgradeProject that upgrades project config if needed
 
 <a name="Init.createIdeConfigFiles"></a>
 
-### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Init.createIdeConfigFiles(properties) ⇒ <code>Promise.&lt;boolean&gt;</code>
 handles creation/update of all config file from the boilerplate
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -5109,7 +5112,7 @@ handles creation/update of all config file from the boilerplate
 
 | Param | Type | Description |
 | --- | --- | --- |
-| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
+| properties | <code>string</code> | config file's json |
 
 <a name="Init._updateLeaf"></a>
 
@@ -5300,7 +5303,7 @@ CLI helper class
 
 * [Init](#Init)
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.createIdeConfigFiles(properties)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
     * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
     * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -5330,7 +5333,7 @@ helper method for this.upgradeProject that upgrades project config if needed
 
 <a name="Init.createIdeConfigFiles"></a>
 
-### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Init.createIdeConfigFiles(properties) ⇒ <code>Promise.&lt;boolean&gt;</code>
 handles creation/update of all config file from the boilerplate
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -5338,7 +5341,7 @@ handles creation/update of all config file from the boilerplate
 
 | Param | Type | Description |
 | --- | --- | --- |
-| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
+| properties | <code>string</code> | config file's json |
 
 <a name="Init._updateLeaf"></a>
 
@@ -5726,6 +5729,19 @@ configures what is displayed in the console
 | userList | <code>Object.&lt;string, string&gt;</code> | user-id > user-name map |
 | item | <code>Object.&lt;string, string&gt;</code> | single metadata item |
 | fieldname | <code>string</code> | name of field containing the info |
+
+<a name="setupSDK"></a>
+
+## setupSDK(credentialKey, authObject) ⇒ <code>SDK</code>
+Returns an SDK instance to be used for API calls
+
+**Kind**: global function  
+**Returns**: <code>SDK</code> - auth object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| credentialKey | <code>string</code> | key for specific BU |
+| authObject | [<code>AuthObject</code>](#AuthObject) | credentials for specific BU |
 
 <a name="createNewLoggerTransport"></a>
 
