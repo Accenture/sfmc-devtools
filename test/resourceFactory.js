@@ -11,7 +11,6 @@ const attributeParser = new XMLParser({ ignoreAttributes: false });
  * @param {string} mid of Business Unit
  * @returns {string} relevant metadata stringified
  */
-
 exports.loadSOAPRecords = async (mcdevAction, type, mid) => {
     type = type[0].toLowerCase() + type.substring(1);
     const testPath = path.join(
