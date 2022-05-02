@@ -22,7 +22,7 @@
         "arrow-body-style": ["error", "as-needed"],
         "curly": "error",
         "no-console": "off",
-        "require-jsdoc": [
+        "jsdoc/require-jsdoc": [
             "warn",
             {
                 "require": {
@@ -34,7 +34,6 @@
                 }
             }
         ],
-        "valid-jsdoc": "error",
         "spaced-comment": ["warn", "always", { "block": { "exceptions": ["*"], "balanced": true } }]
     },
     "overrides": [
