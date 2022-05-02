@@ -34,6 +34,7 @@
                 }
             }
         ],
+        "jsdoc/no-undefined-types": "off",
         "spaced-comment": ["warn", "always", { "block": { "exceptions": ["*"], "balanced": true } }]
     },
     "overrides": [
