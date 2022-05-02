@@ -279,7 +279,7 @@ Source and target business units are also compared before the deployment to appl
 **Kind**: global class  
 
 * [Deployer](#Deployer)
-    * [new Deployer(properties, buObject, client, [type])](#new_Deployer_new)
+    * [new Deployer(properties, buObject, client, [typeArr])](#new_Deployer_new)
     * _instance_
         * [.deploy()](#Deployer+deploy) ⇒ <code>Promise</code>
         * [.deployCallback(result, metadataType)](#Deployer+deployCallback) ⇒ <code>void</code>
@@ -289,7 +289,7 @@ Source and target business units are also compared before the deployment to appl
 
 <a name="new_Deployer_new"></a>
 
-### new Deployer(properties, buObject, client, [type])
+### new Deployer(properties, buObject, client, [typeArr])
 Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 
 
@@ -305,7 +305,7 @@ Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 | buObject.mid | <code>string</code> | ID of Business Unit to authenticate with |
 | buObject.businessUnit | <code>string</code> | name of Business Unit to authenticate with |
 | client | <code>Util.SDK</code> | fuel client |
-| [type] | <code>string</code> | limit deployment to given metadata type |
+| [typeArr] | <code>string</code> | limit deployment to given metadata type |
 
 <a name="Deployer+deploy"></a>
 
@@ -337,7 +337,7 @@ Returns metadata of a business unit that is saved locally
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | deployDir | <code>string</code> |  | root directory of metadata. |
-| [type] | <code>string</code> |  | limit deployment to given metadata type |
+| [type] | <code>Array.&lt;string&gt;</code> |  | limit deployment to given metadata type |
 | [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
 
 <a name="Deployer.createFolderDefinitions"></a>
@@ -367,8 +367,7 @@ main class
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>void</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
     * [.retrieve(businessUnit, [selectedType], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [._retrieveBU(cred, bu, [selectedType], [changelogOnly])](#Mcdev._retrieveBU) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [._deployBU(cred, bu, [type])](#Mcdev._deployBU) ⇒ <code>Promise</code>
+    * [._deployBU(cred, bu, [typeArr])](#Mcdev._deployBU) ⇒ <code>Promise</code>
     * [.deploy(businessUnit, [selectedType])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initProject([credentialsName], [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -444,24 +443,9 @@ Retrieve all metadata from the specified business unit into the local file syste
 | [selectedType] | <code>string</code> | limit retrieval to given metadata type |
 | [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
 
-<a name="Mcdev._retrieveBU"></a>
-
-### Mcdev.\_retrieveBU(cred, bu, [selectedType], [changelogOnly]) ⇒ <code>Promise.&lt;object&gt;</code>
-helper for retrieve()
-
-**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;object&gt;</code> - ensure that BUs are worked on sequentially  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| cred | <code>string</code> | name of Credential |
-| bu | <code>string</code> | name of BU |
-| [selectedType] | <code>string</code> | limit retrieval to given metadata type/subtype |
-| [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
-
 <a name="Mcdev._deployBU"></a>
 
-### Mcdev.\_deployBU(cred, bu, [type]) ⇒ <code>Promise</code>
+### Mcdev.\_deployBU(cred, bu, [typeArr]) ⇒ <code>Promise</code>
 helper for deploy()
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -471,7 +455,7 @@ helper for deploy()
 | --- | --- | --- |
 | cred | <code>string</code> | name of Credential |
 | bu | <code>string</code> | name of BU |
-| [type] | <code>string</code> | limit deployment to given metadata type |
+| [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
 
 <a name="Mcdev.deploy"></a>
 
