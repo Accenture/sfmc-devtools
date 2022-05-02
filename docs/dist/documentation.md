@@ -367,7 +367,6 @@ main class
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>void</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
     * [.retrieve(businessUnit, [selectedType], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [._retrieveBU(cred, bu, [selectedType], [changelogOnly])](#Mcdev._retrieveBU) ⇒ <code>Promise.&lt;object&gt;</code>
     * [._deployBU(cred, bu, [type])](#Mcdev._deployBU) ⇒ <code>Promise</code>
     * [.deploy(businessUnit, [selectedType])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initProject([credentialsName], [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -442,21 +441,6 @@ Retrieve all metadata from the specified business unit into the local file syste
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
 | [selectedType] | <code>string</code> | limit retrieval to given metadata type |
-| [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
-
-<a name="Mcdev._retrieveBU"></a>
-
-### Mcdev.\_retrieveBU(cred, bu, [selectedType], [changelogOnly]) ⇒ <code>Promise.&lt;object&gt;</code>
-helper for retrieve()
-
-**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;object&gt;</code> - ensure that BUs are worked on sequentially  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| cred | <code>string</code> | name of Credential |
-| bu | <code>string</code> | name of BU |
-| [selectedType] | <code>string</code> | limit retrieval to given metadata type/subtype |
 | [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
 
 <a name="Mcdev._deployBU"></a>
