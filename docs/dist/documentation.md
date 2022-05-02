@@ -616,7 +616,7 @@ MessageSendActivity MetadataType
 
 * [AccountUser](#AccountUser) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, _, buObject)](#AccountUser.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [.retrieveChangelog(retrieveDir, _, buObject)](#AccountUser.retrieveChangelog) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [.retrieveChangelog(buObject)](#AccountUser.retrieveChangelog) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.timeSinceDate(date)](#AccountUser.timeSinceDate) ⇒ <code>number</code>
     * [.getBuName(buObject, id)](#AccountUser.getBuName) ⇒ <code>string</code>
     * [.document(buObject, [metadata])](#AccountUser.document) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -640,7 +640,7 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 
 <a name="AccountUser.retrieveChangelog"></a>
 
-### AccountUser.retrieveChangelog(retrieveDir, _, buObject) ⇒ <code>Promise.&lt;object&gt;</code>
+### AccountUser.retrieveChangelog(buObject) ⇒ <code>Promise.&lt;object&gt;</code>
 Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
@@ -648,8 +648,6 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 
 | Param | Type | Description |
 | --- | --- | --- |
-| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
-| _ | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | buObject | <code>object</code> | properties for auth |
 
 <a name="AccountUser.timeSinceDate"></a>
@@ -1378,7 +1376,7 @@ DataExtension MetadataType
     * [.update(metadata)](#DataExtension.update) ⇒ <code>Promise</code>
     * [.postDeployTasks(upsertedMetadata)](#DataExtension.postDeployTasks) ⇒ <code>void</code>
     * [.retrieve(retrieveDir, [additionalFields], buObject, [_], [isDeploy])](#DataExtension.retrieve) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
-    * [.retrieveChangelog([additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
+    * [.retrieveChangelog([buObject], [additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
     * [.postRetrieveTasks(metadata, [_], [isTemplating])](#DataExtension.postRetrieveTasks) ⇒ <code>DataExtensionItem</code>
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;DataExtensionItem&gt;</code>
     * [.document(buObject, [metadata], [isDeploy])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -1467,7 +1465,7 @@ Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionCo
 
 <a name="DataExtension.retrieveChangelog"></a>
 
-### DataExtension.retrieveChangelog([additionalFields]) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
+### DataExtension.retrieveChangelog([buObject], [additionalFields]) ⇒ <code>Promise.&lt;{metadata:DataExtensionMap, type:string}&gt;</code>
 Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionColumn metadata retrieval
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -1475,6 +1473,7 @@ Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionCo
 
 | Param | Type | Description |
 | --- | --- | --- |
+| [buObject] | <code>Util.BuObject</code> | properties for auth |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 
 <a name="DataExtension.postRetrieveTasks"></a>
@@ -2697,7 +2696,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>Util.MetadataTypeItem</code>
     * [.overrideKeyWithName(metadata, [warningMsg])](#MetadataType.overrideKeyWithName) ⇒ <code>void</code>
     * [.retrieve(retrieveDir, [additionalFields], buObject, [subType])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
-    * [.retrieveChangelog([additionalFields], buObject, [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+    * [.retrieveChangelog([buObject], [additionalFields], [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
     * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
     * [.preDeployTasks(metadata, deployDir)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;Util.MetadataTypeItem&gt;</code>
@@ -2841,7 +2840,7 @@ Gets metadata from Marketing Cloud
 
 <a name="MetadataType.retrieveChangelog"></a>
 
-### MetadataType.retrieveChangelog([additionalFields], buObject, [subType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
+### MetadataType.retrieveChangelog([buObject], [additionalFields], [subType]) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
 Gets metadata from Marketing Cloud
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -2849,8 +2848,8 @@ Gets metadata from Marketing Cloud
 
 | Param | Type | Description |
 | --- | --- | --- |
+| [buObject] | <code>Util.BuObject</code> | properties for auth |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
-| buObject | <code>Util.BuObject</code> | properties for auth |
 | [subType] | <code>string</code> | optionally limit to a single subtype |
 
 <a name="MetadataType.retrieveForCache"></a>
