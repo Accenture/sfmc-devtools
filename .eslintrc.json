@@ -18,6 +18,7 @@
         "ecmaVersion": 2020,
         "sourceType": "module"
     },
+    "root": true,
     "rules": {
         "arrow-body-style": ["error", "as-needed"],
         "curly": "error",
