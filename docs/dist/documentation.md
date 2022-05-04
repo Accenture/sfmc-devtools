@@ -3677,7 +3677,7 @@ Script MetadataType
     * [._applyTemplateVariables(code, metadata, templateVariables)](#Script._applyTemplateVariables) ⇒ <code>string</code>
     * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildTemplateForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.buildXForExtracts(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Script.buildXForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._buildXForExtracts(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Script._buildXForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseMetadata(metadata)](#Script.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
 
 <a name="Script.retrieve"></a>
@@ -3843,9 +3843,9 @@ handles extracted code if any are found for complex types
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
 
-<a name="Script.buildXForExtracts"></a>
+<a name="Script._buildXForExtracts"></a>
 
-### Script.buildXForExtracts(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;void&gt;</code>
+### Script.\_buildXForExtracts(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for buildTemplateForExtracts / buildDefinitionForExtracts
 handles extracted code if any are found for complex types
 
