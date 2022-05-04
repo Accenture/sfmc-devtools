@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:c198cc12-c34c-4d1d-90b0-5b785a342efc</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:a0506b59-1847-4405-8231-6a15e26bbcc9</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-52fe9187-6f22-4701-bd57-d0eaa4aef215">
+                <wsu:Created>2022-04-21T19:21:50Z</wsu:Created>
+                <wsu:Expires>2022-04-21T19:26:50Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>d175de6e-c8e4-4f5d-9c1d-ad64426ff4b7</RequestID>
+            <Results xsi:type="DataExtension">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2022-04-21T06:56:27.927</CreatedDate>
+                <ModifiedDate>2022-04-21T06:56:27.927</ModifiedDate>
+                <ObjectID>21711373-72c1-ec11-b83b-48df37d1deb7</ObjectID>
+                <CustomerKey>childBU_dataextension_test</CustomerKey>
+                <Name>childBU_dataextension_test</Name>
+                <Description>Container for my test emails</Description>
+                <IsSendable>true</IsSendable>
+                <IsTestable>true</IsTestable>
+                <SendableDataExtensionField>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <Name>ContactKey</Name>
+                </SendableDataExtensionField>
+                <SendableSubscriberField>
+                    <Name>_SubscriberKey</Name>
+                </SendableSubscriberField>
+                <DataRetentionPeriodLength>6</DataRetentionPeriodLength>
+                <DataRetentionPeriodUnitOfMeasure>5</DataRetentionPeriodUnitOfMeasure>
+                <RowBasedRetention>true</RowBasedRetention>
+                <ResetRetentionPeriodOnImport>false</ResetRetentionPeriodOnImport>
+                <DeleteAtEndOfRetentionPeriod>false</DeleteAtEndOfRetentionPeriod>
+                <RetainUntil />
+                <CategoryID>2</CategoryID>
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>

@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:110bbc72-d639-4e67-ab93-68e081bcf3a0</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:753eed05-f925-4113-8a98-e81ca69c96fd</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-a81724ab-b6f6-4825-82e8-ec523642075e">
+                <wsu:Created>2022-04-21T19:21:49Z</wsu:Created>
+                <wsu:Expires>2022-04-21T19:26:49Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>82fd5f74-ad8c-49ad-958f-867d4a4b53b0</RequestID>
+            <Results xsi:type="DataExtensionTemplate">
+                <PartnerKey xsi:nil="true" />
+                <PartnerProperties>
+                    <Name>IsSendable</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>IsTestable</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>SendableCustomObjectField</Name>
+                    <Value />
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>SendableSubscriberField</Name>
+                    <Value />
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>DataRetentionPeriodLength</Name>
+                    <Value />
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>DataRetentionPeriodUnitOfMeasure</Name>
+                    <Value />
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>RowBasedRetention</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>ResetRetentionPeriodOnImport</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>DeleteAtEndOfRetentionPeriod</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>RetainUntil</Name>
+                    <Value />
+                </PartnerProperties>
+                <ObjectID>cfd6fc95-d594-ea11-a2e6-1402ec938a35</ObjectID>
+                <CustomerKey>086D14D3-5057-462B-AF33-01CA8D1FE87A</CustomerKey>
+                <Name>DomainExclusion</Name>
+                <Description>Domain Exclusion Data Extension Template</Description>
+            </Results>
+            <Results xsi:type="DataExtensionTemplate">
+                <PartnerKey xsi:nil="true" />
+                <PartnerProperties>
+                    <Name>IsSendable</Name>
+                    <Value>True</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>IsTestable</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>SendableCustomObjectField</Name>
+                    <Value>SubscriberKey</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>SendableSubscriberField</Name>
+                    <Value>_SubscriberKey</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>DataRetentionPeriodLength</Name>
+                    <Value />
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>DataRetentionPeriodUnitOfMeasure</Name>
+                    <Value />
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>RowBasedRetention</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>ResetRetentionPeriodOnImport</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>DeleteAtEndOfRetentionPeriod</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>RetainUntil</Name>
+                    <Value />
+                </PartnerProperties>
+                <ObjectID>1fd7fc95-d594-ea11-a2e6-1402ec938a35</ObjectID>
+                <CustomerKey>B6E8AE4C-3D93-49B1-B299-E0AE734213DD</CustomerKey>
+                <Name>TriggeredSendDataExtension</Name>
+                <Description>Triggered Send Source Data Extension Template</Description>
+            </Results>
+            <Results xsi:type="DataExtensionTemplate">
+                <PartnerKey xsi:nil="true" />
+                <PartnerProperties>
+                    <Name>IsSendable</Name>
+                    <Value>True</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>IsTestable</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>SendableCustomObjectField</Name>
+                    <Value>Email Address</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>SendableSubscriberField</Name>
+                    <Value>_EmailAddress</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>DataRetentionPeriodLength</Name>
+                    <Value />
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>DataRetentionPeriodUnitOfMeasure</Name>
+                    <Value />
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>RowBasedRetention</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>ResetRetentionPeriodOnImport</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>DeleteAtEndOfRetentionPeriod</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>RetainUntil</Name>
+                    <Value />
+                </PartnerProperties>
+                <ObjectID>bb1df59b-d594-ea11-a2e6-1402ec938a35</ObjectID>
+                <CustomerKey>23471ECA-8710-4512-9296-040CA86FBD9E</CustomerKey>
+                <Name>CONTEXTUAL_SUPPRESSION_LISTS</Name>
+                <Description>Used to create new auto-suppression lists</Description>
+            </Results>
+            <Results xsi:type="DataExtensionTemplate">
+                <PartnerKey xsi:nil="true" />
+                <PartnerProperties>
+                    <Name>IsSendable</Name>
+                    <Value>True</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>IsTestable</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>SendableCustomObjectField</Name>
+                    <Value>EmailAddress</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>SendableSubscriberField</Name>
+                    <Value>_SubscriberKey</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>DataRetentionPeriodLength</Name>
+                    <Value />
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>DataRetentionPeriodUnitOfMeasure</Name>
+                    <Value />
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>RowBasedRetention</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>ResetRetentionPeriodOnImport</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>DeleteAtEndOfRetentionPeriod</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>RetainUntil</Name>
+                    <Value />
+                </PartnerProperties>
+                <ObjectID>e61df59b-d594-ea11-a2e6-1402ec938a35</ObjectID>
+                <CustomerKey>00A4369E-0B57-4EF2-BFFA-E3F23B4D1098</CustomerKey>
+                <Name>SocialPages Default Template Extension</Name>
+                <Description>Required for contacts.  Used by Smart Capture for Social Pages.</Description>
+            </Results>
+            <Results xsi:type="DataExtensionTemplate">
+                <PartnerKey xsi:nil="true" />
+                <PartnerProperties>
+                    <Name>IsSendable</Name>
+                    <Value>True</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>IsTestable</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>SendableCustomObjectField</Name>
+                    <Value>SubscriberKey</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>SendableSubscriberField</Name>
+                    <Value>_SubscriberKey</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>DataRetentionPeriodLength</Name>
+                    <Value>6</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>DataRetentionPeriodUnitOfMeasure</Name>
+                    <Value>5</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>RowBasedRetention</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>ResetRetentionPeriodOnImport</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>DeleteAtEndOfRetentionPeriod</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>RetainUntil</Name>
+                    <Value />
+                </PartnerProperties>
+                <ObjectID>37d8c7f2-ad19-4084-8d18-4dda1dc36772</ObjectID>
+                <CustomerKey>DAE95D91-762C-4124-B082-0433165ADD30</CustomerKey>
+                <Name>AudienceBuilderResult</Name>
+                <Description>Used for creating audience builder result destinations.</Description>
+            </Results>
+            <Results xsi:type="DataExtensionTemplate">
+                <PartnerKey xsi:nil="true" />
+                <PartnerProperties>
+                    <Name>IsSendable</Name>
+                    <Value>True</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>IsTestable</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>SendableCustomObjectField</Name>
+                    <Value>ContactKey</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>SendableSubscriberField</Name>
+                    <Value>_SubscriberKey</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>DataRetentionPeriodLength</Name>
+                    <Value />
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>DataRetentionPeriodUnitOfMeasure</Name>
+                    <Value>0</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>RowBasedRetention</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>ResetRetentionPeriodOnImport</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>DeleteAtEndOfRetentionPeriod</Name>
+                    <Value>False</Value>
+                </PartnerProperties>
+                <PartnerProperties>
+                    <Name>RetainUntil</Name>
+                    <Value />
+                </PartnerProperties>
+                <ObjectID>941cf36b-f927-4674-8468-c9a3bed7cae4</ObjectID>
+                <CustomerKey>BE1B7591-BFA6-473F-A6CE-0E458204865B</CustomerKey>
+                <Name>Event DE Template</Name>
+                <Description>Event Data Extension Template</Description>
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>

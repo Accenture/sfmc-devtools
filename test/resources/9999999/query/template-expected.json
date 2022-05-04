@@ -1,0 +1,8 @@
+{
+    "name": "testExistingQuery",
+    "key": "testExistingQuery",
+    "description": "",
+    "targetKey": "childBU_dataextension{{{suffix}}}",
+    "targetUpdateTypeName": "Overwrite",
+    "r__folder_Path": "Query"
+}
