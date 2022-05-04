@@ -10,8 +10,6 @@
     "RetainUntil": "",
     "Fields": [
         {
-            "PartnerKey": "",
-            "ObjectID": "",
             "Name": "testField",
             "DefaultValue": "",
             "MaxLength": 254,
