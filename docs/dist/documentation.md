@@ -319,7 +319,6 @@ main class
     * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>void</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
-    * [._isValidType(selectedType)](#Mcdev._isValidType) ⇒ <code>boolean</code>
     * [.retrieve(businessUnit, [selectedTypesArr], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
     * [._deployBU(cred, bu, [typeArr])](#Mcdev._deployBU) ⇒ <code>Promise</code>
     * [.deploy(businessUnit, [selectedTypesArr])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -382,18 +381,6 @@ handler for 'mcdev createDeltaPkg
 | Param | Type | Description |
 | --- | --- | --- |
 | [skipInteraction] | <code>boolean</code> \| <code>object</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Mcdev._isValidType"></a>
-
-### Mcdev.\_isValidType(selectedType) ⇒ <code>boolean</code>
-helper for retrieve, retrieveAsTemplate and deploy
-
-**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>boolean</code> - type ok or not  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| selectedType | <code>string</code> | tyoe or type-subtype |
 
 <a name="Mcdev.retrieve"></a>
 
@@ -3887,6 +3874,7 @@ CLI entry for SFMC DevTools
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [.isNumeric(val)](#Util.isNumeric) ⇒ <code>boolean</code>
+    * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
     * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
@@ -3947,6 +3935,18 @@ helper to check if given value is a number
 | Param | Type | Description |
 | --- | --- | --- |
 | val | <code>\*</code> | test value thats test |
+
+<a name="Util._isValidType"></a>
+
+### Util.\_isValidType(selectedType) ⇒ <code>boolean</code>
+helper for retrieve, retrieveAsTemplate and deploy
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - type ok or not  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| selectedType | <code>string</code> | tyoe or type-subtype |
 
 <a name="Util.getDefaultProperties"></a>
 
@@ -5540,6 +5540,7 @@ Util that contains logger and simple util methods
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [.isNumeric(val)](#Util.isNumeric) ⇒ <code>boolean</code>
+    * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
     * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
@@ -5600,6 +5601,18 @@ helper to check if given value is a number
 | Param | Type | Description |
 | --- | --- | --- |
 | val | <code>\*</code> | test value thats test |
+
+<a name="Util._isValidType"></a>
+
+### Util.\_isValidType(selectedType) ⇒ <code>boolean</code>
+helper for retrieve, retrieveAsTemplate and deploy
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - type ok or not  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| selectedType | <code>string</code> | tyoe or type-subtype |
 
 <a name="Util.getDefaultProperties"></a>
 
