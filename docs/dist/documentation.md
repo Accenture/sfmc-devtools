@@ -212,7 +212,7 @@ Builds metadata from a template using market specific customisation
     * [new Builder(properties, buObject, client)](#new_Builder_new)
     * _instance_
         * [.buildDefinition(metadataType, name, variables)](#Builder+buildDefinition) ⇒ <code>Promise</code>
-        * [.buildTemplate(metadataType, name, variables)](#Builder+buildTemplate) ⇒ <code>Promise</code>
+        * [.buildTemplate(metadataType, key, templateVariables)](#Builder+buildTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
     * _static_
         * [.verifyMarketList(mlName, properties)](#Builder.verifyMarketList) ⇒ <code>void</code>
 
@@ -257,17 +257,17 @@ Builds a specific metadata file by name
 
 <a name="Builder+buildTemplate"></a>
 
-### builder.buildTemplate(metadataType, name, variables) ⇒ <code>Promise</code>
+### builder.buildTemplate(metadataType, key, templateVariables) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
 Builds a specific metadata file by name
 
 **Kind**: instance method of [<code>Builder</code>](#Builder)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadataType | <code>string</code> | metadata type to build |
-| name | <code>string</code> | name of metadata to build |
-| variables | <code>object</code> | variables to be replaced in the metadata |
+| metadataType | <code>string</code> | metadata type to create a template of |
+| key | <code>string</code> | customerkey of metadata to create a template of |
+| templateVariables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="Builder.verifyMarketList"></a>
 
