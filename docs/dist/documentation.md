@@ -3946,7 +3946,7 @@ helper for retrieve, retrieveAsTemplate and deploy
 
 | Param | Type | Description |
 | --- | --- | --- |
-| selectedType | <code>string</code> | tyoe or type-subtype |
+| selectedType | <code>string</code> | type or type-subtype |
 
 <a name="Util.getDefaultProperties"></a>
 
@@ -5612,7 +5612,7 @@ helper for retrieve, retrieveAsTemplate and deploy
 
 | Param | Type | Description |
 | --- | --- | --- |
-| selectedType | <code>string</code> | tyoe or type-subtype |
+| selectedType | <code>string</code> | type or type-subtype |
 
 <a name="Util.getDefaultProperties"></a>
 
