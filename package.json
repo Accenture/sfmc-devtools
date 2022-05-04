@@ -33,10 +33,10 @@
         "lint:fix": "eslint --fix lib/**/*.js",
         "lint": "eslint lib/**/*.js",
         "upgrade": "npm-check --update",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "test": "mocha"
     },
     "dependencies": {
-        "bluebird": "3.7.2",
         "cli-progress": "3.10.0",
         "command-exists": "1.2.9",
         "conf": "10.1.1",
@@ -45,6 +45,7 @@
         "inquirer": "8.2.2",
         "json-to-table": "4.2.1",
         "mustache": "4.2.0",
+        "p-limit": "3.1.0",
         "prettier": "2.6.1",
         "prettier-plugin-sql": "0.6.0",
         "semver": "7.3.5",
@@ -56,14 +57,20 @@
         "yargs": "17.4.0"
     },
     "devDependencies": {
+        "assert": "2.0.0",
+        "axios-mock-adapter": "1.20.0",
+        "chai": "4.3.6",
         "eslint": "8.12.0",
         "eslint-config-prettier": "8.5.0",
         "eslint-config-ssjs": "1.1.11",
-        "eslint-plugin-prettier": "4.0.0",
         "eslint-plugin-jsdoc": "38.0.8",
+        "eslint-plugin-mocha": "10.0.4",
+        "eslint-plugin-prettier": "4.0.0",
         "husky": "7.0.4",
         "jsdoc-to-markdown": "7.1.1",
         "lint-staged": "12.3.7",
+        "mocha": "9.2.2",
+        "mock-fs": "5.1.2",
         "npm-check": "5.9.2",
         "npm-run-all": "4.1.5",
         "prettier-eslint": "13.0.0"

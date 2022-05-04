@@ -9,3 +9,4 @@ tmp/
 .mcdev-auth.json
 .mcdevrc.json
 .vscode/tasks.json
+!test/mockRoot/*
