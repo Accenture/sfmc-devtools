@@ -212,6 +212,7 @@ Builds metadata from a template using market specific customisation
     * [new Builder(properties, buObject, client)](#new_Builder_new)
     * _instance_
         * [.buildDefinition(metadataType, name, variables)](#Builder+buildDefinition) ⇒ <code>Promise</code>
+        * [.buildTemplate(metadataType, name, variables)](#Builder+buildTemplate) ⇒ <code>Promise</code>
     * _static_
         * [.verifyMarketList(mlName, properties)](#Builder.verifyMarketList) ⇒ <code>void</code>
 
@@ -243,6 +244,20 @@ Creates a Builder, uses v2 auth if v2AuthOptions are passed.
 <a name="Builder+buildDefinition"></a>
 
 ### builder.buildDefinition(metadataType, name, variables) ⇒ <code>Promise</code>
+Builds a specific metadata file by name
+
+**Kind**: instance method of [<code>Builder</code>](#Builder)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataType | <code>string</code> | metadata type to build |
+| name | <code>string</code> | name of metadata to build |
+| variables | <code>object</code> | variables to be replaced in the metadata |
+
+<a name="Builder+buildTemplate"></a>
+
+### builder.buildTemplate(metadataType, name, variables) ⇒ <code>Promise</code>
 Builds a specific metadata file by name
 
 **Kind**: instance method of [<code>Builder</code>](#Builder)  
@@ -2683,6 +2698,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.retrieveChangelog([buObject], [additionalFields], [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
     * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeMap, type:string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
+    * [.buildTemplate(retrieveDir, templateDir, name, templateVariables)](#MetadataType.buildTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
     * [.preDeployTasks(metadata, deployDir)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;Util.MetadataTypeItem&gt;</code>
     * [.create(metadata, deployDir)](#MetadataType.create) ⇒ <code>void</code>
     * [.update(metadata, [metadataBefore])](#MetadataType.update) ⇒ <code>void</code>
@@ -2864,6 +2880,21 @@ Gets metadata cache with limited fields and does not store value to disk
 | name | <code>string</code> | name of the metadata file |
 | templateVariables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
 | [subType] | <code>string</code> | optionally limit to a single subtype |
+
+<a name="MetadataType.buildTemplate"></a>
+
+### MetadataType.buildTemplate(retrieveDir, templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
+Gets metadata cache with limited fields and does not store value to disk
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code> - metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| templateDir | <code>string</code> | (List of) Directory where built definitions will be saved |
+| name | <code>string</code> | name of the metadata file |
+| templateVariables | <code>Util.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="MetadataType.preDeployTasks"></a>
 
