@@ -321,7 +321,7 @@ main class
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
     * [.retrieve(businessUnit, [selectedTypesArr], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
     * [._deployBU(cred, bu, [typeArr])](#Mcdev._deployBU) ⇒ <code>Promise</code>
-    * [.deploy(businessUnit, [selectedType])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.deploy(businessUnit, [selectedTypesArr])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initProject([credentialsName], [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -412,8 +412,9 @@ helper for deploy()
 
 <a name="Mcdev.deploy"></a>
 
-### Mcdev.deploy(businessUnit, [selectedType]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.deploy(businessUnit, [selectedTypesArr]) ⇒ <code>Promise.&lt;void&gt;</code>
 Deploys all metadata located in the 'deploy' directory to the specified business unit
+! deploy does not support selecting subtypes yet
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
@@ -421,7 +422,7 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 | Param | Type | Description |
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
-| [selectedType] | <code>string</code> | limit deployment to given metadata type |
+| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
 
 <a name="Mcdev.initProject"></a>
 
