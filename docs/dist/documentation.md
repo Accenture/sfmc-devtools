@@ -319,7 +319,7 @@ main class
     * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>void</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
-    * [.retrieve(businessUnit, [selectedType], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [.retrieve(businessUnit, [selectedTypesArr], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
     * [._deployBU(cred, bu, [typeArr])](#Mcdev._deployBU) ⇒ <code>Promise</code>
     * [.deploy(businessUnit, [selectedType])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initProject([credentialsName], [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -384,7 +384,7 @@ handler for 'mcdev createDeltaPkg
 
 <a name="Mcdev.retrieve"></a>
 
-### Mcdev.retrieve(businessUnit, [selectedType], [changelogOnly]) ⇒ <code>Promise.&lt;object&gt;</code>
+### Mcdev.retrieve(businessUnit, [selectedTypesArr], [changelogOnly]) ⇒ <code>Promise.&lt;object&gt;</code>
 Retrieve all metadata from the specified business unit into the local file system.
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -393,7 +393,7 @@ Retrieve all metadata from the specified business unit into the local file syste
 | Param | Type | Description |
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
-| [selectedType] | <code>string</code> | limit retrieval to given metadata type |
+| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> | limit retrieval to given metadata type |
 | [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
 
 <a name="Mcdev._deployBU"></a>
