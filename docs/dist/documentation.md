@@ -343,7 +343,8 @@ main class
     * [.deleteByKey(businessUnit, type, customerKey)](#Mcdev.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.badKeys(businessUnit)](#Mcdev.badKeys) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.retrieveAsTemplate(businessUnit, selectedType, name, market)](#Mcdev.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
-    * [.buildDefinition(businessUnit, type, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildTemplate(businessUnit, selectedType, key, market)](#Mcdev.buildTemplate) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildDefinition(businessUnit, selectedType, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._checkMarket(market)](#Mcdev._checkMarket) ⇒ <code>boolean</code>
     * [.buildDefinitionBulk(listName, type, name)](#Mcdev.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
 
@@ -518,9 +519,9 @@ Retrieve a specific metadata file and templatise.
 | name | <code>string</code> | name of the metadata |
 | market | <code>string</code> | market which should be used to revert template |
 
-<a name="Mcdev.buildDefinition"></a>
+<a name="Mcdev.buildTemplate"></a>
 
-### Mcdev.buildDefinition(businessUnit, type, name, market) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.buildTemplate(businessUnit, selectedType, key, market) ⇒ <code>Promise.&lt;void&gt;</code>
 Build a specific metadata file based on a template.
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -529,7 +530,22 @@ Build a specific metadata file based on a template.
 | Param | Type | Description |
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
-| type | <code>string</code> | supported metadata type |
+| selectedType | <code>string</code> | supported metadata type |
+| key | <code>string</code> | customerkey of the metadata |
+| market | <code>string</code> | market localizations |
+
+<a name="Mcdev.buildDefinition"></a>
+
+### Mcdev.buildDefinition(businessUnit, selectedType, name, market) ⇒ <code>Promise.&lt;void&gt;</code>
+Build a specific metadata file based on a template.
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| businessUnit | <code>string</code> | references credentials from properties.json |
+| selectedType | <code>string</code> | supported metadata type |
 | name | <code>string</code> | name of the metadata |
 | market | <code>string</code> | market localizations |
 
