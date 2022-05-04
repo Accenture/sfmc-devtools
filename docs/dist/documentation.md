@@ -238,7 +238,7 @@ Source and target business units are also compared before the deployment to appl
 **Kind**: global class  
 
 * [Deployer](#Deployer)
-    * [new Deployer(properties, buObject, client, [type])](#new_Deployer_new)
+    * [new Deployer(properties, buObject, client, [typeArr])](#new_Deployer_new)
     * _instance_
         * [.deploy()](#Deployer+deploy) ⇒ <code>Promise</code>
         * [.deployCallback(result, metadataType)](#Deployer+deployCallback) ⇒ <code>void</code>
@@ -248,7 +248,7 @@ Source and target business units are also compared before the deployment to appl
 
 <a name="new_Deployer_new"></a>
 
-### new Deployer(properties, buObject, client, [type])
+### new Deployer(properties, buObject, client, [typeArr])
 Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 
 
@@ -258,7 +258,7 @@ Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 | properties.directories | <code>object</code> | Directories to be used when interacting with FS |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
 | client | <code>Util.SDK</code> | fuel client |
-| [type] | <code>string</code> | limit deployment to given metadata type |
+| [typeArr] | <code>string</code> | limit deployment to given metadata type |
 
 <a name="Deployer+deploy"></a>
 
@@ -290,7 +290,7 @@ Returns metadata of a business unit that is saved locally
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | deployDir | <code>string</code> |  | root directory of metadata. |
-| [type] | <code>string</code> |  | limit deployment to given metadata type |
+| [type] | <code>Array.&lt;string&gt;</code> |  | limit deployment to given metadata type |
 | [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
 
 <a name="Deployer.createFolderDefinitions"></a>
@@ -319,10 +319,9 @@ main class
     * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>void</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
-    * [.retrieve(businessUnit, [selectedType], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [._retrieveBU(cred, bu, [selectedType], [changelogOnly])](#Mcdev._retrieveBU) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [._deployBU(cred, bu, [type])](#Mcdev._deployBU) ⇒ <code>Promise</code>
-    * [.deploy(businessUnit, [selectedType])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.retrieve(businessUnit, [selectedTypesArr], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [._deployBU(cred, bu, [typeArr])](#Mcdev._deployBU) ⇒ <code>Promise</code>
+    * [.deploy(businessUnit, [selectedTypesArr])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initProject([credentialsName], [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -385,7 +384,7 @@ handler for 'mcdev createDeltaPkg
 
 <a name="Mcdev.retrieve"></a>
 
-### Mcdev.retrieve(businessUnit, [selectedType], [changelogOnly]) ⇒ <code>Promise.&lt;object&gt;</code>
+### Mcdev.retrieve(businessUnit, [selectedTypesArr], [changelogOnly]) ⇒ <code>Promise.&lt;object&gt;</code>
 Retrieve all metadata from the specified business unit into the local file system.
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -394,27 +393,12 @@ Retrieve all metadata from the specified business unit into the local file syste
 | Param | Type | Description |
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
-| [selectedType] | <code>string</code> | limit retrieval to given metadata type |
-| [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
-
-<a name="Mcdev._retrieveBU"></a>
-
-### Mcdev.\_retrieveBU(cred, bu, [selectedType], [changelogOnly]) ⇒ <code>Promise.&lt;object&gt;</code>
-helper for retrieve()
-
-**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;object&gt;</code> - ensure that BUs are worked on sequentially  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| cred | <code>string</code> | name of Credential |
-| bu | <code>string</code> | name of BU |
-| [selectedType] | <code>string</code> | limit retrieval to given metadata type/subtype |
+| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> | limit retrieval to given metadata type |
 | [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
 
 <a name="Mcdev._deployBU"></a>
 
-### Mcdev.\_deployBU(cred, bu, [type]) ⇒ <code>Promise</code>
+### Mcdev.\_deployBU(cred, bu, [typeArr]) ⇒ <code>Promise</code>
 helper for deploy()
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -424,12 +408,13 @@ helper for deploy()
 | --- | --- | --- |
 | cred | <code>string</code> | name of Credential |
 | bu | <code>string</code> | name of BU |
-| [type] | <code>string</code> | limit deployment to given metadata type |
+| [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
 
 <a name="Mcdev.deploy"></a>
 
-### Mcdev.deploy(businessUnit, [selectedType]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.deploy(businessUnit, [selectedTypesArr]) ⇒ <code>Promise.&lt;void&gt;</code>
 Deploys all metadata located in the 'deploy' directory to the specified business unit
+! deploy does not support selecting subtypes yet
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
@@ -437,7 +422,7 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 | Param | Type | Description |
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
-| [selectedType] | <code>string</code> | limit deployment to given metadata type |
+| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
 
 <a name="Mcdev.initProject"></a>
 
@@ -569,6 +554,7 @@ MessageSendActivity MetadataType
 
 * [AccountUser](#AccountUser) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, _, buObject)](#AccountUser.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveChangelog(buObject)](#AccountUser.retrieveChangelog) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.timeSinceDate(date)](#AccountUser.timeSinceDate) ⇒ <code>number</code>
     * [.getBuName(buObject, id)](#AccountUser.getBuName) ⇒ <code>string</code>
     * [.document(buObject, [metadata])](#AccountUser.document) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -589,6 +575,18 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 | retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | _ | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
+
+<a name="AccountUser.retrieveChangelog"></a>
+
+### AccountUser.retrieveChangelog(buObject) ⇒ <code>Promise.&lt;object&gt;</code>
+Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
+
+**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
+**Returns**: <code>Promise.&lt;object&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>object</code> | properties for auth |
 
 <a name="AccountUser.timeSinceDate"></a>
 
@@ -1316,7 +1314,7 @@ DataExtension MetadataType
     * [.update(metadata)](#DataExtension.update) ⇒ <code>Promise</code>
     * [.postDeployTasks(upsertedMetadata)](#DataExtension.postDeployTasks) ⇒ <code>void</code>
     * [.retrieve(retrieveDir, [additionalFields], buObject, [_], [isDeploy])](#DataExtension.retrieve) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code>
-    * [.retrieveChangelog([additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code>
+    * [.retrieveChangelog([buObject], [additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code>
     * [.postRetrieveTasks(metadata, [_], [isTemplating])](#DataExtension.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionItem</code>
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.DataExtensionItem&gt;</code>
     * [.document(buObject, [metadata], [isDeploy])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -1405,7 +1403,7 @@ Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionCo
 
 <a name="DataExtension.retrieveChangelog"></a>
 
-### DataExtension.retrieveChangelog([additionalFields]) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code>
+### DataExtension.retrieveChangelog([buObject], [additionalFields]) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code>
 Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionColumn metadata retrieval
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -1413,6 +1411,7 @@ Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionCo
 
 | Param | Type | Description |
 | --- | --- | --- |
+| [buObject] | <code>TYPE.BuObject</code> | properties for auth |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 
 <a name="DataExtension.postRetrieveTasks"></a>
@@ -2635,7 +2634,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.overrideKeyWithName(metadata, [warningMsg])](#MetadataType.overrideKeyWithName) ⇒ <code>void</code>
     * [.retrieve(retrieveDir, [additionalFields], buObject, [subType])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveChangelog([additionalFields], buObject, [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveChangelog([buObject], [additionalFields], [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.preDeployTasks(metadata, deployDir)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
@@ -2722,7 +2721,7 @@ Deploys metadata
 | metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 | retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
-| buObject | <code>Util.BuObject</code> | properties for auth |
+| buObject | <code>TYPE.BuObject</code> | properties for auth |
 
 <a name="MetadataType.postDeployTasks"></a>
 
@@ -2779,7 +2778,7 @@ Gets metadata from Marketing Cloud
 
 <a name="MetadataType.retrieveChangelog"></a>
 
-### MetadataType.retrieveChangelog([additionalFields], buObject, [subType]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MetadataType.retrieveChangelog([buObject], [additionalFields], [subType]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Gets metadata from Marketing Cloud
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -2787,8 +2786,8 @@ Gets metadata from Marketing Cloud
 
 | Param | Type | Description |
 | --- | --- | --- |
+| [buObject] | <code>TYPE.BuObject</code> | properties for auth |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
-| buObject | <code>TYPE.BuObject</code> | properties for auth |
 | [subType] | <code>string</code> | optionally limit to a single subtype |
 
 <a name="MetadataType.retrieveForCache"></a>
@@ -3875,6 +3874,7 @@ CLI entry for SFMC DevTools
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [.isNumeric(val)](#Util.isNumeric) ⇒ <code>boolean</code>
+    * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
     * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
@@ -3935,6 +3935,18 @@ helper to check if given value is a number
 | Param | Type | Description |
 | --- | --- | --- |
 | val | <code>\*</code> | test value thats test |
+
+<a name="Util._isValidType"></a>
+
+### Util.\_isValidType(selectedType) ⇒ <code>boolean</code>
+helper for retrieve, retrieveAsTemplate and deploy
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - type ok or not  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| selectedType | <code>string</code> | type or type-subtype |
 
 <a name="Util.getDefaultProperties"></a>
 
@@ -5528,6 +5540,7 @@ Util that contains logger and simple util methods
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [.isNumeric(val)](#Util.isNumeric) ⇒ <code>boolean</code>
+    * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
     * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
@@ -5588,6 +5601,18 @@ helper to check if given value is a number
 | Param | Type | Description |
 | --- | --- | --- |
 | val | <code>\*</code> | test value thats test |
+
+<a name="Util._isValidType"></a>
+
+### Util.\_isValidType(selectedType) ⇒ <code>boolean</code>
+helper for retrieve, retrieveAsTemplate and deploy
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - type ok or not  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| selectedType | <code>string</code> | type or type-subtype |
 
 <a name="Util.getDefaultProperties"></a>
 
