@@ -3927,6 +3927,7 @@ CLI entry for SFMC DevTools
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
+    * [.isNumeric(val)](#Util.isNumeric) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
     * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
@@ -3975,6 +3976,18 @@ SFMC accepts multiple false values for Boolean attributes for which we are check
 | Param | Type | Description |
 | --- | --- | --- |
 | attrValue | <code>\*</code> | value |
+
+<a name="Util.isNumeric"></a>
+
+### Util.isNumeric(val) ⇒ <code>boolean</code>
+helper to check if given value is a number
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - true: number found, false: not a number  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| val | <code>\*</code> | test value thats test |
 
 <a name="Util.getDefaultProperties"></a>
 
@@ -5567,6 +5580,7 @@ Util that contains logger and simple util methods
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
+    * [.isNumeric(val)](#Util.isNumeric) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
     * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
@@ -5615,6 +5629,18 @@ SFMC accepts multiple false values for Boolean attributes for which we are check
 | Param | Type | Description |
 | --- | --- | --- |
 | attrValue | <code>\*</code> | value |
+
+<a name="Util.isNumeric"></a>
+
+### Util.isNumeric(val) ⇒ <code>boolean</code>
+helper to check if given value is a number
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - true: number found, false: not a number  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| val | <code>\*</code> | test value thats test |
 
 <a name="Util.getDefaultProperties"></a>
 
