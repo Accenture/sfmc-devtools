@@ -4119,7 +4119,7 @@ CLI helper class
     * [.getCredentialObject(properties, target, [isCredentialOnly], [allowAll])](#Cli.getCredentialObject) ⇒ <code>Promise.&lt;TYPE.BuObject&gt;</code>
     * [._selectBU(properties, [credential], [isCredentialOnly], [allowAll])](#Cli._selectBU) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [._setCredential(properties, [credName], [skipInteraction])](#Cli._setCredential) ⇒ <code>Promise.&lt;(boolean\|string)&gt;</code>
-    * [._askCredentials(properties, credName)](#Cli._askCredentials) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [._askCredentials(properties, [credName])](#Cli._askCredentials) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.selectTypes(properties, [setTypesArr])](#Cli.selectTypes) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._summarizeSubtypes(responses, type)](#Cli._summarizeSubtypes) ⇒ <code>void</code>
     * [.explainTypes()](#Cli.explainTypes) ⇒ <code>void</code>
@@ -4212,7 +4212,7 @@ helper around _askCredentials
 
 <a name="Cli._askCredentials"></a>
 
-### Cli.\_askCredentials(properties, credName) ⇒ <code>Promise.&lt;object&gt;</code>
+### Cli.\_askCredentials(properties, [credName]) ⇒ <code>Promise.&lt;object&gt;</code>
 helper for addExtraCredential()
 
 **Kind**: static method of [<code>Cli</code>](#Cli)  
@@ -4221,7 +4221,7 @@ helper for addExtraCredential()
 | Param | Type | Description |
 | --- | --- | --- |
 | properties | <code>object</code> | from config file |
-| credName | <code>string</code> | name of credential that needs updating |
+| [credName] | <code>string</code> | name of credential that needs updating |
 
 <a name="Cli.selectTypes"></a>
 
@@ -4562,7 +4562,7 @@ CLI helper class
 
 * [Init](#Init)
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.createIdeConfigFiles(properties)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
     * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
     * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -4593,7 +4593,7 @@ helper method for this.upgradeProject that upgrades project config if needed
 
 <a name="Init.createIdeConfigFiles"></a>
 
-### Init.createIdeConfigFiles(properties) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
 handles creation/update of all config file from the boilerplate
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -4601,7 +4601,7 @@ handles creation/update of all config file from the boilerplate
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>string</code> | config file's json |
+| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
 
 <a name="Init._updateLeaf"></a>
 
@@ -4791,7 +4791,7 @@ CLI helper class
 
 * [Init](#Init)
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.createIdeConfigFiles(properties)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
     * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
     * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -4822,7 +4822,7 @@ helper method for this.upgradeProject that upgrades project config if needed
 
 <a name="Init.createIdeConfigFiles"></a>
 
-### Init.createIdeConfigFiles(properties) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
 handles creation/update of all config file from the boilerplate
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -4830,7 +4830,7 @@ handles creation/update of all config file from the boilerplate
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>string</code> | config file's json |
+| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
 
 <a name="Init._updateLeaf"></a>
 
@@ -5020,7 +5020,7 @@ CLI helper class
 
 * [Init](#Init)
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.createIdeConfigFiles(properties)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
     * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
     * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -5051,7 +5051,7 @@ helper method for this.upgradeProject that upgrades project config if needed
 
 <a name="Init.createIdeConfigFiles"></a>
 
-### Init.createIdeConfigFiles(properties) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
 handles creation/update of all config file from the boilerplate
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -5059,7 +5059,7 @@ handles creation/update of all config file from the boilerplate
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>string</code> | config file's json |
+| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
 
 <a name="Init._updateLeaf"></a>
 
@@ -5249,7 +5249,7 @@ CLI helper class
 
 * [Init](#Init)
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.createIdeConfigFiles(properties)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
     * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
     * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -5280,7 +5280,7 @@ helper method for this.upgradeProject that upgrades project config if needed
 
 <a name="Init.createIdeConfigFiles"></a>
 
-### Init.createIdeConfigFiles(properties) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
 handles creation/update of all config file from the boilerplate
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -5288,7 +5288,7 @@ handles creation/update of all config file from the boilerplate
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>string</code> | config file's json |
+| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
 
 <a name="Init._updateLeaf"></a>
 
