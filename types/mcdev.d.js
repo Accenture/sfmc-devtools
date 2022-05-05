@@ -214,4 +214,14 @@
  * @typedef {{metadata:AutomationMap,type:string}} AutomationMapObj
  * @typedef {{metadata:AutomationItem,type:string}} AutomationItemObj
  */
+
+/**
+ * @typedef {object} skipInteraction signals what to insert automatically for things usually asked via wizard
+ * @property {string} client_id client id of installed package
+ * @property {string} client_secret client secret of installed package
+ * @property {string} auth_url tenant specific auth url of installed package
+ * @property {number} account_id MID of the Parent Business Unit
+ * @property {string} credentialName how you would like the credential to be named
+ * @property {string} gitRemoteUrl URL of Git remote server
+ */
 module.exports = {};

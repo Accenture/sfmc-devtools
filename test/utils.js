@@ -73,6 +73,7 @@ exports.mockSetup = () => {
     fsmock({
         '.mcdevrc.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdevrc.json')),
         '.mcdev-auth.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdev-auth.json')),
+        '.prettierrc': fsmock.load(path.resolve(__dirname, 'mockRoot/.prettierrc')),
         deploy: fsmock.load(path.resolve(__dirname, 'mockRoot/deploy')),
         test: fsmock.load(path.resolve(__dirname)),
     });

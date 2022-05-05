@@ -347,12 +347,7 @@ helper method to use unattended mode when including mcdev as a package
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.client_id | <code>string</code> | client id of installed package |
-| skipInteraction.client_secret | <code>string</code> | client secret of installed package |
-| skipInteraction.auth_url | <code>string</code> | tenant of installed package |
-| skipInteraction.account_id | <code>string</code> | MID of the Parent Business Unit |
-| skipInteraction.credentialsName | <code>string</code> | how you would like the credential to be named |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Mcdev.createDeltaPkg"></a>
 
@@ -3878,7 +3873,6 @@ CLI entry for SFMC DevTools
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
-    * [.isNumeric(val)](#Util.isNumeric) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
     * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
@@ -3886,7 +3880,6 @@ CLI entry for SFMC DevTools
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.getETClient(buObject)](#Util.getETClient) ⇒ <code>Promise.&lt;SDK&gt;</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
     * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -3927,18 +3920,6 @@ SFMC accepts multiple false values for Boolean attributes for which we are check
 | Param | Type | Description |
 | --- | --- | --- |
 | attrValue | <code>\*</code> | value |
-
-<a name="Util.isNumeric"></a>
-
-### Util.isNumeric(val) ⇒ <code>boolean</code>
-helper to check if given value is a number
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> - true: number found, false: not a number  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| val | <code>\*</code> | test value thats test |
 
 <a name="Util.getDefaultProperties"></a>
 
@@ -4021,18 +4002,6 @@ Returns Order in which metadata needs to be retrieved/deployed
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataTypes | <code>Array.&lt;string&gt;</code> | which should be retrieved/deployed |
-
-<a name="Util.getETClient"></a>
-
-### Util.getETClient(buObject) ⇒ <code>Promise.&lt;SDK&gt;</code>
-signs in with SFMC
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Promise.&lt;SDK&gt;</code> - auth object  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | properties for auth |
 
 <a name="Util.resolveObjPath"></a>
 
@@ -4166,12 +4135,7 @@ loads default config and adds first credential
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.client_id | <code>string</code> | client id of installed package |
-| skipInteraction.client_secret | <code>string</code> | client secret of installed package |
-| skipInteraction.tenant | <code>string</code> | auth_url of installed package |
-| skipInteraction.eid | <code>string</code> | MID of the Parent Business Unit |
-| skipInteraction.credentialName | <code>string</code> | how you would like the credential to be named |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Cli.addExtraCredential"></a>
 
@@ -4185,12 +4149,7 @@ Extends template file for properties.json
 | --- | --- | --- |
 | properties | <code>object</code> | config file's json |
 | properties.credentials | <code>object</code> | list of existing credentials |
-| [skipInteraction] | <code>object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.client_id | <code>string</code> | client id of installed package |
-| skipInteraction.client_secret | <code>string</code> | client secret of installed package |
-| skipInteraction.auth_url | <code>string</code> | auth_url of installed package |
-| skipInteraction.eid | <code>string</code> | MID of the Parent Business Unit |
-| skipInteraction.credentialName | <code>string</code> | how you would like the credential to be named |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Cli.updateCredential"></a>
 
@@ -4205,12 +4164,7 @@ update credentials
 | --- | --- | --- |
 | properties | <code>object</code> | config file's json |
 | credName | <code>string</code> | name of credential that needs updating |
-| [skipInteraction] | <code>object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.client_id | <code>string</code> | client id of installed package |
-| skipInteraction.client_secret | <code>string</code> | client secret of installed package |
-| skipInteraction.auth_url | <code>string</code> | auth_url of installed package |
-| skipInteraction.eid | <code>string</code> | MID of the Parent Business Unit |
-| skipInteraction.credentialName | <code>string</code> | how you would like the credential to be named |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Cli.getCredentialObject"></a>
 
@@ -4254,11 +4208,7 @@ helper around _askCredentials
 | --- | --- | --- |
 | properties | <code>object</code> | from config file |
 | [credName] | <code>string</code> | name of credential that needs updating |
-| [skipInteraction] | <code>object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.client_id | <code>string</code> | client id of installed package |
-| skipInteraction.client_secret | <code>string</code> | client id of installed package |
-| skipInteraction.auth_url | <code>string</code> | client id of installed package |
-| skipInteraction.credentialName | <code>string</code> | how you would like the credential to be named |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Cli._askCredentials"></a>
 
@@ -4616,6 +4566,7 @@ CLI helper class
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
     * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
     * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.upgradeAuthFile()](#Init.upgradeAuthFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
     * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
     * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>string</code>
@@ -4691,6 +4642,13 @@ handles creation/update of one config file from the boilerplate at a time
 | relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
 | [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
 
+<a name="Init.upgradeAuthFile"></a>
+
+### Init.upgradeAuthFile() ⇒ <code>Promise.&lt;boolean&gt;</code>
+helper method for this.upgradeProject that upgrades project config if needed
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
 <a name="Init.initGitRepo"></a>
 
 ### Init.initGitRepo([skipInteraction]) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
@@ -4701,8 +4659,7 @@ check if git repo exists and otherwise create one
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.gitRemoteUrl | <code>string</code> | URL of Git remote server |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init.gitPush"></a>
 
@@ -4725,8 +4682,7 @@ offers to add the git remote origin
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.gitRemoteUrl | <code>string</code> | URL of Git remote server |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._updateGitConfigUser"></a>
 
@@ -4758,13 +4714,7 @@ Creates template file for properties.json
 | --- | --- | --- |
 | properties | <code>object</code> | config file's json |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
-| [skipInteraction] | <code>object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.client_id | <code>string</code> | client id of installed package |
-| skipInteraction.client_secret | <code>string</code> | client secret of installed package |
-| skipInteraction.auth_rul | <code>string</code> | tenant of installed package |
-| skipInteraction.account_url | <code>string</code> | MID of the Parent Business Unit |
-| skipInteraction.credentialName | <code>string</code> | how you would like the credential to be named |
-| skipInteraction.gitRemoteUrl | <code>string</code> | URL of Git remote server |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._downloadAllBUs"></a>
 
@@ -4845,6 +4795,7 @@ CLI helper class
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
     * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
     * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.upgradeAuthFile()](#Init.upgradeAuthFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
     * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
     * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>string</code>
@@ -4920,6 +4871,13 @@ handles creation/update of one config file from the boilerplate at a time
 | relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
 | [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
 
+<a name="Init.upgradeAuthFile"></a>
+
+### Init.upgradeAuthFile() ⇒ <code>Promise.&lt;boolean&gt;</code>
+helper method for this.upgradeProject that upgrades project config if needed
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
 <a name="Init.initGitRepo"></a>
 
 ### Init.initGitRepo([skipInteraction]) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
@@ -4930,8 +4888,7 @@ check if git repo exists and otherwise create one
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.gitRemoteUrl | <code>string</code> | URL of Git remote server |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init.gitPush"></a>
 
@@ -4954,8 +4911,7 @@ offers to add the git remote origin
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.gitRemoteUrl | <code>string</code> | URL of Git remote server |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._updateGitConfigUser"></a>
 
@@ -4987,13 +4943,7 @@ Creates template file for properties.json
 | --- | --- | --- |
 | properties | <code>object</code> | config file's json |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
-| [skipInteraction] | <code>object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.client_id | <code>string</code> | client id of installed package |
-| skipInteraction.client_secret | <code>string</code> | client secret of installed package |
-| skipInteraction.auth_rul | <code>string</code> | tenant of installed package |
-| skipInteraction.account_url | <code>string</code> | MID of the Parent Business Unit |
-| skipInteraction.credentialName | <code>string</code> | how you would like the credential to be named |
-| skipInteraction.gitRemoteUrl | <code>string</code> | URL of Git remote server |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._downloadAllBUs"></a>
 
@@ -5074,6 +5024,7 @@ CLI helper class
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
     * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
     * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.upgradeAuthFile()](#Init.upgradeAuthFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
     * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
     * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>string</code>
@@ -5149,6 +5100,13 @@ handles creation/update of one config file from the boilerplate at a time
 | relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
 | [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
 
+<a name="Init.upgradeAuthFile"></a>
+
+### Init.upgradeAuthFile() ⇒ <code>Promise.&lt;boolean&gt;</code>
+helper method for this.upgradeProject that upgrades project config if needed
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
 <a name="Init.initGitRepo"></a>
 
 ### Init.initGitRepo([skipInteraction]) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
@@ -5159,8 +5117,7 @@ check if git repo exists and otherwise create one
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.gitRemoteUrl | <code>string</code> | URL of Git remote server |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init.gitPush"></a>
 
@@ -5183,8 +5140,7 @@ offers to add the git remote origin
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.gitRemoteUrl | <code>string</code> | URL of Git remote server |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._updateGitConfigUser"></a>
 
@@ -5216,13 +5172,7 @@ Creates template file for properties.json
 | --- | --- | --- |
 | properties | <code>object</code> | config file's json |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
-| [skipInteraction] | <code>object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.client_id | <code>string</code> | client id of installed package |
-| skipInteraction.client_secret | <code>string</code> | client secret of installed package |
-| skipInteraction.auth_rul | <code>string</code> | tenant of installed package |
-| skipInteraction.account_url | <code>string</code> | MID of the Parent Business Unit |
-| skipInteraction.credentialName | <code>string</code> | how you would like the credential to be named |
-| skipInteraction.gitRemoteUrl | <code>string</code> | URL of Git remote server |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._downloadAllBUs"></a>
 
@@ -5303,6 +5253,7 @@ CLI helper class
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
     * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
     * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.upgradeAuthFile()](#Init.upgradeAuthFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
     * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
     * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>string</code>
@@ -5378,6 +5329,13 @@ handles creation/update of one config file from the boilerplate at a time
 | relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
 | [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
 
+<a name="Init.upgradeAuthFile"></a>
+
+### Init.upgradeAuthFile() ⇒ <code>Promise.&lt;boolean&gt;</code>
+helper method for this.upgradeProject that upgrades project config if needed
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
 <a name="Init.initGitRepo"></a>
 
 ### Init.initGitRepo([skipInteraction]) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
@@ -5388,8 +5346,7 @@ check if git repo exists and otherwise create one
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.gitRemoteUrl | <code>string</code> | URL of Git remote server |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init.gitPush"></a>
 
@@ -5412,8 +5369,7 @@ offers to add the git remote origin
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.gitRemoteUrl | <code>string</code> | URL of Git remote server |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._updateGitConfigUser"></a>
 
@@ -5445,13 +5401,7 @@ Creates template file for properties.json
 | --- | --- | --- |
 | properties | <code>object</code> | config file's json |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
-| [skipInteraction] | <code>object</code> | signals what to insert automatically for things usually asked via wizard |
-| skipInteraction.client_id | <code>string</code> | client id of installed package |
-| skipInteraction.client_secret | <code>string</code> | client secret of installed package |
-| skipInteraction.auth_rul | <code>string</code> | tenant of installed package |
-| skipInteraction.account_url | <code>string</code> | MID of the Parent Business Unit |
-| skipInteraction.credentialName | <code>string</code> | how you would like the credential to be named |
-| skipInteraction.gitRemoteUrl | <code>string</code> | URL of Git remote server |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._downloadAllBUs"></a>
 
@@ -5531,7 +5481,6 @@ Util that contains logger and simple util methods
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
-    * [.isNumeric(val)](#Util.isNumeric) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
     * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
@@ -5539,7 +5488,6 @@ Util that contains logger and simple util methods
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.getETClient(buObject)](#Util.getETClient) ⇒ <code>Promise.&lt;SDK&gt;</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
     * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -5580,18 +5528,6 @@ SFMC accepts multiple false values for Boolean attributes for which we are check
 | Param | Type | Description |
 | --- | --- | --- |
 | attrValue | <code>\*</code> | value |
-
-<a name="Util.isNumeric"></a>
-
-### Util.isNumeric(val) ⇒ <code>boolean</code>
-helper to check if given value is a number
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> - true: number found, false: not a number  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| val | <code>\*</code> | test value thats test |
 
 <a name="Util.getDefaultProperties"></a>
 
@@ -5674,18 +5610,6 @@ Returns Order in which metadata needs to be retrieved/deployed
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataTypes | <code>Array.&lt;string&gt;</code> | which should be retrieved/deployed |
-
-<a name="Util.getETClient"></a>
-
-### Util.getETClient(buObject) ⇒ <code>Promise.&lt;SDK&gt;</code>
-signs in with SFMC
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Promise.&lt;SDK&gt;</code> - auth object  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | properties for auth |
 
 <a name="Util.resolveObjPath"></a>
 
