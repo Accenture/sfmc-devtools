@@ -26,7 +26,10 @@
             "preferredTypes": {
                 "Object": "object",
                 "object<>": "Object.<>",
-                "Object<>": "Object.<>"
+                "Object<>": "Object.<>",
+                "promise": "Promise",
+                "promise<>": "Promise.<>",
+                "Promise<>": "Promise.<>"
             }
         }
     },

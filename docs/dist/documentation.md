@@ -740,9 +740,9 @@ FileTransfer MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Asset](#Asset) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, _, __, [selectedSubType])](#Asset.retrieve) ⇒ <code>Promise.&lt;{metadata:TYPE.AssetMap, type:string}&gt;</code>
-    * [.retrieveForCache(_, [selectedSubType])](#Asset.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:TYPE.AssetMap, type:string}&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType])](#Asset.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:TYPE.AssetItem, type:string}&gt;</code>
+    * [.retrieve(retrieveDir, _, __, [selectedSubType])](#Asset.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
+    * [.retrieveForCache(_, [selectedSubType])](#Asset.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType])](#Asset.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetItem, type: string}&gt;</code>
     * [.create(metadata)](#Asset.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#Asset.update) ⇒ <code>Promise</code>
     * [.requestSubType(subType, subTypeArray, [retrieveDir], [templateName], [templateVariables])](#Asset.requestSubType) ⇒ <code>Promise</code>
@@ -768,11 +768,11 @@ FileTransfer MetadataType
 
 <a name="Asset.retrieve"></a>
 
-### Asset.retrieve(retrieveDir, _, __, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata:TYPE.AssetMap, type:string}&gt;</code>
+### Asset.retrieve(retrieveDir, _, __, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
 Retrieves Metadata of Asset
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.AssetMap, type:string}&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -783,11 +783,11 @@ Retrieves Metadata of Asset
 
 <a name="Asset.retrieveForCache"></a>
 
-### Asset.retrieveForCache(_, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata:TYPE.AssetMap, type:string}&gt;</code>
+### Asset.retrieveForCache(_, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
 Retrieves asset metadata for caching
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.AssetMap, type:string}&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -796,11 +796,11 @@ Retrieves asset metadata for caching
 
 <a name="Asset.retrieveAsTemplate"></a>
 
-### Asset.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata:TYPE.AssetItem, type:string}&gt;</code>
+### Asset.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetItem, type: string}&gt;</code>
 Retrieves asset metadata for templating
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.AssetItem, type:string}&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.AssetItem, type: string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1450,15 +1450,15 @@ DataExtension MetadataType
     * [.create(metadata)](#DataExtension.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#DataExtension.update) ⇒ <code>Promise</code>
     * [.postDeployTasks(upsertedMetadata)](#DataExtension.postDeployTasks) ⇒ <code>void</code>
-    * [.retrieve(retrieveDir, [additionalFields], buObject, [_], [isDeploy])](#DataExtension.retrieve) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code>
-    * [.retrieveChangelog([buObject], [additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code>
+    * [.retrieve(retrieveDir, [additionalFields], buObject, [_], [isDeploy])](#DataExtension.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
+    * [.retrieveChangelog([buObject], [additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.postRetrieveTasks(metadata, [_], [isTemplating])](#DataExtension.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionItem</code>
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.DataExtensionItem&gt;</code>
     * [.document(buObject, [metadata], [isDeploy])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(buObject, customerKey)](#DataExtension.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postDeleteTasks(buObject, customerKey)](#DataExtension.postDeleteTasks) ⇒ <code>void</code>
-    * [.retrieveForCache(buObject, [_], [isDeploy])](#DataExtension.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtension.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:DataExtension, type:string}&gt;</code>
+    * [.retrieveForCache(buObject, [_], [isDeploy])](#DataExtension.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtension.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: DataExtension, type: string}&gt;</code>
 
 <a name="DataExtension.upsert"></a>
 
@@ -1524,11 +1524,11 @@ Gets executed after deployment of metadata type
 
 <a name="DataExtension.retrieve"></a>
 
-### DataExtension.retrieve(retrieveDir, [additionalFields], buObject, [_], [isDeploy]) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code>
+### DataExtension.retrieve(retrieveDir, [additionalFields], buObject, [_], [isDeploy]) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
 Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionColumn metadata retrieval
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code> - Promise of item map  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1540,11 +1540,11 @@ Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionCo
 
 <a name="DataExtension.retrieveChangelog"></a>
 
-### DataExtension.retrieveChangelog([buObject], [additionalFields]) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code>
+### DataExtension.retrieveChangelog([buObject], [additionalFields]) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
 Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionColumn metadata retrieval
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code> - Promise of item map  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1619,11 +1619,11 @@ clean up after deleting a metadata item
 
 <a name="DataExtension.retrieveForCache"></a>
 
-### DataExtension.retrieveForCache(buObject, [_], [isDeploy]) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code>
+### DataExtension.retrieveForCache(buObject, [_], [isDeploy]) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
 Retrieves folder metadata into local filesystem. Also creates a uniquePath attribute for each folder.
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1633,11 +1633,11 @@ Retrieves folder metadata into local filesystem. Also creates a uniquePath attri
 
 <a name="DataExtension.retrieveAsTemplate"></a>
 
-### DataExtension.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:DataExtension, type:string}&gt;</code>
+### DataExtension.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata: DataExtension, type: string}&gt;</code>
 Retrieves dataExtension metadata in template format.
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
-**Returns**: <code>Promise.&lt;{metadata:DataExtension, type:string}&gt;</code> - Promise of items  
+**Returns**: <code>Promise.&lt;{metadata: DataExtension, type: string}&gt;</code> - Promise of items  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1654,8 +1654,8 @@ DataExtensionField MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [DataExtensionField](#DataExtensionField) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [additionalFields], buObject)](#DataExtensionField.retrieve) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionFieldMap, type:string}&gt;</code>
-    * [.retrieveForCache([requestParams], [additionalFields])](#DataExtensionField.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionFieldMap, type:string}&gt;</code>
+    * [.retrieve(retrieveDir, [additionalFields], buObject)](#DataExtensionField.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionFieldMap, type: string}&gt;</code>
+    * [.retrieveForCache([requestParams], [additionalFields])](#DataExtensionField.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionFieldMap, type: string}&gt;</code>
     * [.convertToSortedArray(fieldsObj)](#DataExtensionField.convertToSortedArray) ⇒ <code>Array.&lt;TYPE.DataExtensionFieldItem&gt;</code>
     * [.sortDeFields(a, b)](#DataExtensionField.sortDeFields) ⇒ <code>boolean</code>
     * [.postRetrieveTasks(metadata, forDataExtension)](#DataExtensionField.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionFieldItem</code>
@@ -1666,11 +1666,11 @@ DataExtensionField MetadataType
 
 <a name="DataExtensionField.retrieve"></a>
 
-### DataExtensionField.retrieve(retrieveDir, [additionalFields], buObject) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionFieldMap, type:string}&gt;</code>
+### DataExtensionField.retrieve(retrieveDir, [additionalFields], buObject) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionFieldMap, type: string}&gt;</code>
 Retrieves all records and saves it to disk
 
 **Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.DataExtensionFieldMap, type:string}&gt;</code> - Promise of items  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.DataExtensionFieldMap, type: string}&gt;</code> - Promise of items  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1680,11 +1680,11 @@ Retrieves all records and saves it to disk
 
 <a name="DataExtensionField.retrieveForCache"></a>
 
-### DataExtensionField.retrieveForCache([requestParams], [additionalFields]) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionFieldMap, type:string}&gt;</code>
+### DataExtensionField.retrieveForCache([requestParams], [additionalFields]) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionFieldMap, type: string}&gt;</code>
 Retrieves all records for caching
 
 **Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.DataExtensionFieldMap, type:string}&gt;</code> - Promise of items  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.DataExtensionFieldMap, type: string}&gt;</code> - Promise of items  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2784,7 +2784,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.updateREST(metadataEntry, uri)](#MetadataType.updateREST) ⇒ <code>Promise</code>
     * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
     * [.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type:string}&gt;</code>
+    * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
     * [.parseResponseBody(body)](#MetadataType.parseResponseBody) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
     * [.removeNotCreateableFields(metadataEntry)](#MetadataType.removeNotCreateableFields) ⇒ <code>void</code>
@@ -3094,11 +3094,11 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 
 <a name="MetadataType.retrieveREST"></a>
 
-### MetadataType.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables]) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type:string}&gt;</code>
+### MetadataType.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables]) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
 Retrieves Metadata for Rest Types
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type:string}&gt;</code> - Promise of item map (single item for templated result)  
+**Returns**: <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code> - Promise of item map (single item for templated result)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3496,9 +3496,9 @@ Query MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Query](#Query) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir)](#Query.retrieve) ⇒ <code>Promise.&lt;{metadata:TYPE.QueryMap, type:string}&gt;</code>
-    * [.retrieveForCache()](#Query.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:TYPE.QueryMap, type:string}&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Query.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:Query, type:string}&gt;</code>
+    * [.retrieve(retrieveDir)](#Query.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code>
+    * [.retrieveForCache()](#Query.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Query.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: Query, type: string}&gt;</code>
     * [.postRetrieveTasks(metadata, _, isTemplating)](#Query.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.create(query)](#Query.create) ⇒ <code>Promise</code>
     * [.update(query)](#Query.update) ⇒ <code>Promise</code>
@@ -3511,11 +3511,11 @@ Query MetadataType
 
 <a name="Query.retrieve"></a>
 
-### Query.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata:TYPE.QueryMap, type:string}&gt;</code>
+### Query.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code>
 Retrieves Metadata of queries
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.QueryMap, type:string}&gt;</code> - Promise of metadata  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3523,18 +3523,18 @@ Retrieves Metadata of queries
 
 <a name="Query.retrieveForCache"></a>
 
-### Query.retrieveForCache() ⇒ <code>Promise.&lt;{metadata:TYPE.QueryMap, type:string}&gt;</code>
+### Query.retrieveForCache() ⇒ <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code>
 Retrieves query metadata for caching
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.QueryMap, type:string}&gt;</code> - Promise of metadata  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code> - Promise of metadata  
 <a name="Query.retrieveAsTemplate"></a>
 
-### Query.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:Query, type:string}&gt;</code>
+### Query.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata: Query, type: string}&gt;</code>
 Retrieve a specific Query by Name
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>Promise.&lt;{metadata:Query, type:string}&gt;</code> - Promise of metadata  
+**Returns**: <code>Promise.&lt;{metadata: Query, type: string}&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3769,9 +3769,9 @@ Script MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Script](#Script) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir)](#Script.retrieve) ⇒ <code>Promise.&lt;{metadata:TYPE.ScriptMap, type:string}&gt;</code>
-    * [.retrieveForCache()](#Script.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:TYPE.ScriptMap, type:string}&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Script.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:TYPE.Script, type:string}&gt;</code>
+    * [.retrieve(retrieveDir)](#Script.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.ScriptMap, type: string}&gt;</code>
+    * [.retrieveForCache()](#Script.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.ScriptMap, type: string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Script.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: TYPE.Script, type: string}&gt;</code>
     * [.postRetrieveTasks(metadata, [_], [isTemplating])](#Script.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.update(script)](#Script.update) ⇒ <code>Promise</code>
     * [.create(script)](#Script.create) ⇒ <code>Promise</code>
@@ -3786,12 +3786,12 @@ Script MetadataType
 
 <a name="Script.retrieve"></a>
 
-### Script.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata:TYPE.ScriptMap, type:string}&gt;</code>
+### Script.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata: TYPE.ScriptMap, type: string}&gt;</code>
 Retrieves Metadata of Script
 Endpoint /automation/v1/scripts/ return all Scripts with all details.
 
 **Kind**: static method of [<code>Script</code>](#Script)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.ScriptMap, type:string}&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.ScriptMap, type: string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3799,18 +3799,18 @@ Endpoint /automation/v1/scripts/ return all Scripts with all details.
 
 <a name="Script.retrieveForCache"></a>
 
-### Script.retrieveForCache() ⇒ <code>Promise.&lt;{metadata:TYPE.ScriptMap, type:string}&gt;</code>
+### Script.retrieveForCache() ⇒ <code>Promise.&lt;{metadata: TYPE.ScriptMap, type: string}&gt;</code>
 Retrieves script metadata for caching
 
 **Kind**: static method of [<code>Script</code>](#Script)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.ScriptMap, type:string}&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.ScriptMap, type: string}&gt;</code> - Promise  
 <a name="Script.retrieveAsTemplate"></a>
 
-### Script.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:TYPE.Script, type:string}&gt;</code>
+### Script.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata: TYPE.Script, type: string}&gt;</code>
 Retrieve a specific Script by Name
 
 **Kind**: static method of [<code>Script</code>](#Script)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.Script, type:string}&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.Script, type: string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |

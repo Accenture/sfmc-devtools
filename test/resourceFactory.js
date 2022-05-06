@@ -34,7 +34,7 @@ exports.loadSOAPRecords = async (mcdevAction, type, mid) => {
  * based on request, respond with different soap data
  *
  * @param {object} config mock api request object
- * @returns {Promise<Array>} status code plus response in string form
+ * @returns {Promise.<Array>} status code plus response in string form
  */
 exports.handleSOAPRequest = async (config) => {
     const jObj = parser.parse(config.data);
@@ -76,7 +76,7 @@ exports.soapUrl = 'https://mct0l7nxfq2r988t1kxfy8sc4xxx.soap.marketingcloudapis.
  * based on request, respond with different soap data
  *
  * @param {object} config mock api request object
- * @returns {Promise<Array>} status code plus response in string form
+ * @returns {Promise.<Array>} status code plus response in string form
  */
 exports.handleRESTRequest = async (config) => {
     try {

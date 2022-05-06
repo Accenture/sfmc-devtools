@@ -30,8 +30,8 @@
         "build": "run-s lint docs",
         "debug": "node --nolazy --inspect-brk=9229 lib/cli.js",
         "docs": "jsdoc2md --files lib/**/*.js types/**/*.js > docs/dist/documentation.md",
-        "lint:fix": "eslint --fix lib/**/*.js && eslint types/*.js",
-        "lint": "eslint lib/**/*.js && eslint types/*.js",
+        "lint:fix": "eslint --fix lib/**/*.js && eslint --fix types/*.js && eslint --fix test/**/*.js",
+        "lint": "eslint lib/**/*.js && eslint types/*.js && eslint test/**/*.js",
         "upgrade": "npm-check --update",
         "prepare": "husky install",
         "test": "mocha"
