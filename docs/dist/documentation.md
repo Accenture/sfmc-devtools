@@ -216,7 +216,7 @@ Builds metadata from a template using market specific customisation
     * [new Builder(properties, buObject, client)](#new_Builder_new)
     * _instance_
         * [.buildDefinition(metadataType, name, templateVariables)](#Builder+buildDefinition) ⇒ <code>Promise</code>
-        * [.buildTemplate(metadataType, key, templateVariables)](#Builder+buildTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
+        * [.buildTemplate(metadataType, key, templateVariables)](#Builder+buildTemplate) ⇒ <code>Promise.&lt;{metadata: Util.MetadataTypeItem, type: string}&gt;</code>
     * _static_
         * [.verifyMarketList(mlName, properties)](#Builder.verifyMarketList) ⇒ <code>void</code>
 
@@ -255,11 +255,11 @@ Builds a specific metadata file by name
 
 <a name="Builder+buildTemplate"></a>
 
-### builder.buildTemplate(metadataType, key, templateVariables) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
+### builder.buildTemplate(metadataType, key, templateVariables) ⇒ <code>Promise.&lt;{metadata: Util.MetadataTypeItem, type: string}&gt;</code>
 Builds a specific metadata file by name
 
 **Kind**: instance method of [<code>Builder</code>](#Builder)  
-**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata: Util.MetadataTypeItem, type: string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2774,7 +2774,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.retrieveChangelog([buObject], [additionalFields], [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
-    * [.buildTemplate(retrieveDir, templateDir, key, templateVariables)](#MetadataType.buildTemplate) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
+    * [.buildTemplate(retrieveDir, templateDir, key, templateVariables)](#MetadataType.buildTemplate) ⇒ <code>Promise.&lt;{metadata: Util.MetadataTypeItem, type: string}&gt;</code>
     * [.preDeployTasks(metadata, deployDir)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
     * [.create(metadata, deployDir)](#MetadataType.create) ⇒ <code>void</code>
     * [.update(metadata, [metadataBefore])](#MetadataType.update) ⇒ <code>void</code>
@@ -2959,11 +2959,11 @@ Gets metadata cache with limited fields and does not store value to disk
 
 <a name="MetadataType.buildTemplate"></a>
 
-### MetadataType.buildTemplate(retrieveDir, templateDir, key, templateVariables) ⇒ <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code>
+### MetadataType.buildTemplate(retrieveDir, templateDir, key, templateVariables) ⇒ <code>Promise.&lt;{metadata: Util.MetadataTypeItem, type: string}&gt;</code>
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{metadata:Util.MetadataTypeItem, type:string}&gt;</code> - metadata  
+**Returns**: <code>Promise.&lt;{metadata: Util.MetadataTypeItem, type: string}&gt;</code> - metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
