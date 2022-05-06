@@ -5,7 +5,7 @@
 _Please delete options that are not relevant._
 
 - [ ] Documentation update
-- [ ] Bug fix
+- [ ] Bugfix
 - [ ] New metadata support
 - [ ] Enhanced metadata
 - [ ] Add a CLI option
