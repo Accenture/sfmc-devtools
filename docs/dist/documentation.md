@@ -802,7 +802,7 @@ FileTransfer MetadataType
     * [.requestAndSaveExtended(items, subType, retrieveDir, [templateVariables])](#Asset.requestAndSaveExtended) ⇒ <code>Promise</code>
     * [._retrieveExtendedFile(metadata, subType, retrieveDir)](#Asset._retrieveExtendedFile) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._readExtendedFileFromFS(metadata, subType, deployDir)](#Asset._readExtendedFileFromFS) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.postRetrieveTasks(metadata, [_], isTemplating)](#Asset.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
+    * [.postRetrieveTasks(metadata)](#Asset.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.preDeployTasks(metadata, deployDir)](#Asset.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
     * [.getSubtype(metadata)](#Asset.getSubtype) ⇒ <code>TYPE.AssetSubType</code>
     * [._applyMarketValues(code, templateVariables)](#Asset._applyMarketValues) ⇒ <code>string</code>
@@ -950,7 +950,7 @@ This method reads these from the local FS stores them in the metadata object all
 
 <a name="Asset.postRetrieveTasks"></a>
 
-### Asset.postRetrieveTasks(metadata, [_], isTemplating) ⇒ <code>TYPE.CodeExtractItem</code>
+### Asset.postRetrieveTasks(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
 manages post retrieve steps
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -959,8 +959,6 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.AssetItem</code> | a single asset |
-| [_] | <code>string</code> | unused |
-| isTemplating | <code>boolean</code> | signals that we are retrieving templates |
 
 <a name="Asset.preDeployTasks"></a>
 
@@ -1221,7 +1219,7 @@ Automation MetadataType
     * [.retrieveChangelog()](#Automation.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveForCache()](#Automation.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Automation.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.AutomationItemObj&gt;</code>
-    * [.postRetrieveTasks(metadata, [_], [isTemplating])](#Automation.postRetrieveTasks) ⇒ <code>TYPE.AutomationItem</code>
+    * [.postRetrieveTasks(metadata)](#Automation.postRetrieveTasks) ⇒ <code>TYPE.AutomationItem</code>
     * [.deploy(metadata, targetBU, retrieveDir)](#Automation.deploy) ⇒ <code>Promise.&lt;TYPE.AutomationMap&gt;</code>
     * [.create(metadata)](#Automation.create) ⇒ <code>Promise</code>
     * [.update(metadata, metadataBefore)](#Automation.update) ⇒ <code>Promise</code>
@@ -1274,7 +1272,7 @@ Retrieve a specific Automation Definition by Name
 
 <a name="Automation.postRetrieveTasks"></a>
 
-### Automation.postRetrieveTasks(metadata, [_], [isTemplating]) ⇒ <code>TYPE.AutomationItem</code>
+### Automation.postRetrieveTasks(metadata) ⇒ <code>TYPE.AutomationItem</code>
 manages post retrieve steps
 
 **Kind**: static method of [<code>Automation</code>](#Automation)  
@@ -1283,8 +1281,6 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.AutomationItem</code> | a single automation |
-| [_] | <code>string</code> | unused |
-| [isTemplating] | <code>boolean</code> | signals that we are retrieving templates |
 
 <a name="Automation.deploy"></a>
 
@@ -1505,7 +1501,7 @@ DataExtension MetadataType
     * [.postDeployTasks(upsertedMetadata)](#DataExtension.postDeployTasks) ⇒ <code>void</code>
     * [.retrieve(retrieveDir, [additionalFields], buObject, [_], [isDeploy])](#DataExtension.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.retrieveChangelog([buObject], [additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
-    * [.postRetrieveTasks(metadata, [_], [isTemplating])](#DataExtension.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionItem</code>
+    * [.postRetrieveTasks(metadata)](#DataExtension.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionItem</code>
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.DataExtensionItem&gt;</code>
     * [.document(buObject, [metadata], [isDeploy])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(buObject, customerKey)](#DataExtension.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -1606,7 +1602,7 @@ Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionCo
 
 <a name="DataExtension.postRetrieveTasks"></a>
 
-### DataExtension.postRetrieveTasks(metadata, [_], [isTemplating]) ⇒ <code>TYPE.DataExtensionItem</code>
+### DataExtension.postRetrieveTasks(metadata) ⇒ <code>TYPE.DataExtensionItem</code>
 manages post retrieve steps
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -1615,8 +1611,6 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.DataExtensionItem</code> | a single dataExtension |
-| [_] | <code>string</code> | unused |
-| [isTemplating] | <code>boolean</code> | signals that we are retrieving templates |
 
 <a name="DataExtension.preDeployTasks"></a>
 
@@ -2822,7 +2816,6 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.deploy(metadata, deployDir, retrieveDir, buObject)](#MetadataType.deploy) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.postDeployTasks(metadata, originalMetadata)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.overrideKeyWithName(metadata, [warningMsg])](#MetadataType.overrideKeyWithName) ⇒ <code>void</code>
     * [.retrieve(retrieveDir, [additionalFields], buObject, [subType])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveChangelog([buObject], [additionalFields], [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -2940,18 +2933,6 @@ Gets executed after retreive of metadata type
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 | targetDir | <code>string</code> | folder where retrieves should be saved |
 | [isTemplating] | <code>boolean</code> | signals that we are retrieving templates |
-
-<a name="MetadataType.overrideKeyWithName"></a>
-
-### MetadataType.overrideKeyWithName(metadata, [warningMsg]) ⇒ <code>void</code>
-used to synchronize name and external key during retrieveAsTemplate
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
-| [warningMsg] | <code>string</code> | optional msg to show the user |
 
 <a name="MetadataType.retrieve"></a>
 
@@ -3552,7 +3533,7 @@ Query MetadataType
     * [.retrieve(retrieveDir)](#Query.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code>
     * [.retrieveForCache()](#Query.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Query.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: Query, type: string}&gt;</code>
-    * [.postRetrieveTasks(metadata, _, isTemplating)](#Query.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
+    * [.postRetrieveTasks(metadata)](#Query.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.create(query)](#Query.create) ⇒ <code>Promise</code>
     * [.update(query)](#Query.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata, deployDir)](#Query.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.QueryItem&gt;</code>
@@ -3597,7 +3578,7 @@ Retrieve a specific Query by Name
 
 <a name="Query.postRetrieveTasks"></a>
 
-### Query.postRetrieveTasks(metadata, _, isTemplating) ⇒ <code>TYPE.CodeExtractItem</code>
+### Query.postRetrieveTasks(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
 manages post retrieve steps
 
 **Kind**: static method of [<code>Query</code>](#Query)  
@@ -3606,8 +3587,6 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.QueryItem</code> | a single query |
-| _ | <code>string</code> | unused |
-| isTemplating | <code>boolean</code> | signals that we are retrieving templates |
 
 <a name="Query.create"></a>
 
@@ -3825,7 +3804,7 @@ Script MetadataType
     * [.retrieve(retrieveDir)](#Script.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.ScriptMap, type: string}&gt;</code>
     * [.retrieveForCache()](#Script.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.ScriptMap, type: string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Script.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: TYPE.Script, type: string}&gt;</code>
-    * [.postRetrieveTasks(metadata, [_], [isTemplating])](#Script.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
+    * [.postRetrieveTasks(metadata)](#Script.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.update(script)](#Script.update) ⇒ <code>Promise</code>
     * [.create(script)](#Script.create) ⇒ <code>Promise</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#Script._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
@@ -3873,7 +3852,7 @@ Retrieve a specific Script by Name
 
 <a name="Script.postRetrieveTasks"></a>
 
-### Script.postRetrieveTasks(metadata, [_], [isTemplating]) ⇒ <code>TYPE.CodeExtractItem</code>
+### Script.postRetrieveTasks(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
 manages post retrieve steps
 
 **Kind**: static method of [<code>Script</code>](#Script)  
@@ -3882,8 +3861,6 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.ScriptItem</code> | a single script |
-| [_] | <code>string</code> | unused |
-| [isTemplating] | <code>boolean</code> | signals that we are retrieving templates |
 
 <a name="Script.update"></a>
 
