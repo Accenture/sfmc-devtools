@@ -713,7 +713,11 @@ FileTransfer MetadataType
     * [.postRetrieveTasks(metadata, [_], isTemplating)](#Asset.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.preDeployTasks(metadata, deployDir)](#Asset.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
     * [.getSubtype(metadata)](#Asset.getSubtype) ⇒ <code>TYPE.AssetSubType</code>
-    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#Asset.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._applyMarketValues(code, templateVariables)](#Asset._applyMarketValues) ⇒ <code>string</code>
+    * [._applyTemplateVariables(code, templateVariables)](#Asset._applyTemplateVariables) ⇒ <code>string</code>
+    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildTemplateForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._buildXForExtracts(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Asset._buildXForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseMetadata(metadata)](#Asset.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
     * [._mergeCode(metadata, deployDir, subType, [templateName])](#Asset._mergeCode) ⇒ <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code>
     * [._mergeCode_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName])](#Asset._mergeCode_slots) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -891,9 +895,37 @@ determines the subtype of the current asset
 | --- | --- | --- |
 | metadata | <code>TYPE.AssetItem</code> | a single asset |
 
+<a name="Asset._applyMarketValues"></a>
+
+### Asset.\_applyMarketValues(code, templateVariables) ⇒ <code>string</code>
+helper for buildDefinitionForExtracts
+searches extracted extracted files for template variables and applies the market values
+
+**Kind**: static method of [<code>Asset</code>](#Asset)  
+**Returns**: <code>string</code> - code with markets applied  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| code | <code>string</code> | code from extracted code |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+
+<a name="Asset._applyTemplateVariables"></a>
+
+### Asset.\_applyTemplateVariables(code, templateVariables) ⇒ <code>string</code>
+helper for buildTemplateForExtracts
+searches extracted extracted files for template variables and applies the market variable names
+
+**Kind**: static method of [<code>Asset</code>](#Asset)  
+**Returns**: <code>string</code> - code with markets applied  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| code | <code>string</code> | code from extracted code |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+
 <a name="Asset.buildDefinitionForExtracts"></a>
 
-### Asset.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+### Asset.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for buildDefinition
 handles extracted code if any are found for complex types
 
@@ -905,8 +937,43 @@ handles extracted code if any are found for complex types
 | templateDir | <code>string</code> | Directory where metadata templates are stored |
 | targetDir | <code>string</code> | Directory where built definitions will be saved |
 | metadata | <code>TYPE.AssetItem</code> | main JSON file that was read from file system |
-| variables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
+
+<a name="Asset.buildTemplateForExtracts"></a>
+
+### Asset.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+helper for buildTemplate
+handles extracted code if any are found for complex types
+
+**Kind**: static method of [<code>Asset</code>](#Asset)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - void  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> \| <code>Array.&lt;string&gt;</code> | (List of) Directory where built definitions will be saved |
+| metadata | <code>TYPE.AssetItem</code> | main JSON file that was read from file system |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateName | <code>string</code> | name of the template to be built |
+
+<a name="Asset._buildXForExtracts"></a>
+
+### Asset.\_buildXForExtracts(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;void&gt;</code>
+helper for buildDefinition
+handles extracted code if any are found for complex types
+
+**Kind**: static method of [<code>Asset</code>](#Asset)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> | Directory where built definitions will be saved |
+| metadata | <code>TYPE.AssetItem</code> | main JSON file that was read from file system |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateName | <code>string</code> | name of the template to be built |
+| mode | <code>&#x27;definition&#x27;</code> \| <code>&#x27;template&#x27;</code> | defines what we use this helper for |
 
 <a name="Asset.parseMetadata"></a>
 
@@ -3397,8 +3464,8 @@ Query MetadataType
     * [.create(query)](#Query.create) ⇒ <code>Promise</code>
     * [.update(query)](#Query.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata, deployDir)](#Query.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.QueryItem&gt;</code>
-    * [._applyMarket(code, metadata, templateVariables)](#Query._applyMarket) ⇒ <code>string</code>
-    * [._applyTemplateVariables(code, metadata, templateVariables)](#Query._applyTemplateVariables) ⇒ <code>string</code>
+    * [._applyMarketValues(code, templateVariables)](#Query._applyMarketValues) ⇒ <code>string</code>
+    * [._applyTemplateVariables(code, templateVariables)](#Query._applyTemplateVariables) ⇒ <code>string</code>
     * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildTemplateForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseMetadata(metadata)](#Query.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
@@ -3487,9 +3554,9 @@ prepares a Query for deployment
 | metadata | <code>TYPE.QueryItem</code> | a single query activity |
 | deployDir | <code>string</code> | directory of deploy files |
 
-<a name="Query._applyMarket"></a>
+<a name="Query._applyMarketValues"></a>
 
-### Query.\_applyMarket(code, metadata, templateVariables) ⇒ <code>string</code>
+### Query.\_applyMarketValues(code, templateVariables) ⇒ <code>string</code>
 helper for buildDefinitionForExtracts
 searches extracted SQL file for template variables and applies the market values
 
@@ -3499,12 +3566,11 @@ searches extracted SQL file for template variables and applies the market values
 | Param | Type | Description |
 | --- | --- | --- |
 | code | <code>string</code> | code from extracted code |
-| metadata | <code>TYPE.QueryItem</code> | main JSON file that was read from file system |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="Query._applyTemplateVariables"></a>
 
-### Query.\_applyTemplateVariables(code, metadata, templateVariables) ⇒ <code>string</code>
+### Query.\_applyTemplateVariables(code, templateVariables) ⇒ <code>string</code>
 helper for buildTemplateForExtracts
 searches extracted SQL file for template variables and applies the market variable names
 
@@ -3514,7 +3580,6 @@ searches extracted SQL file for template variables and applies the market variab
 | Param | Type | Description |
 | --- | --- | --- |
 | code | <code>string</code> | code from extracted code |
-| metadata | <code>TYPE.QueryItem</code> | main JSON file that was read from file system |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="Query.buildDefinitionForExtracts"></a>
@@ -3673,8 +3738,8 @@ Script MetadataType
     * [.create(script)](#Script.create) ⇒ <code>Promise</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#Script._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.preDeployTasks(metadata, dir)](#Script.preDeployTasks) ⇒ <code>TYPE.ScriptItem</code>
-    * [._applyMarket(code, metadata, templateVariables)](#Script._applyMarket) ⇒ <code>string</code>
-    * [._applyTemplateVariables(code, metadata, templateVariables)](#Script._applyTemplateVariables) ⇒ <code>string</code>
+    * [._applyMarketValues(code, templateVariables)](#Script._applyMarketValues) ⇒ <code>string</code>
+    * [._applyTemplateVariables(code, templateVariables)](#Script._applyTemplateVariables) ⇒ <code>string</code>
     * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildTemplateForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._buildXForExtracts(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Script._buildXForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -3779,9 +3844,9 @@ prepares a Script for deployment
 | metadata | <code>TYPE.ScriptItem</code> | a single script activity definition |
 | dir | <code>string</code> | directory of deploy files |
 
-<a name="Script._applyMarket"></a>
+<a name="Script._applyMarketValues"></a>
 
-### Script.\_applyMarket(code, metadata, templateVariables) ⇒ <code>string</code>
+### Script.\_applyMarketValues(code, templateVariables) ⇒ <code>string</code>
 helper for buildDefinitionForExtracts
 searches extracted SQL file for template variables and applies the market values
 
@@ -3791,12 +3856,11 @@ searches extracted SQL file for template variables and applies the market values
 | Param | Type | Description |
 | --- | --- | --- |
 | code | <code>string</code> | code from extracted code |
-| metadata | <code>TYPE.ScriptItem</code> | main JSON file that was read from file system |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="Script._applyTemplateVariables"></a>
 
-### Script.\_applyTemplateVariables(code, metadata, templateVariables) ⇒ <code>string</code>
+### Script.\_applyTemplateVariables(code, templateVariables) ⇒ <code>string</code>
 helper for buildTemplateForExtracts
 searches extracted SQL file for template variables and applies the market variable names
 
@@ -3806,7 +3870,6 @@ searches extracted SQL file for template variables and applies the market variab
 | Param | Type | Description |
 | --- | --- | --- |
 | code | <code>string</code> | code from extracted code |
-| metadata | <code>TYPE.ScriptItem</code> | main JSON file that was read from file system |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="Script.buildDefinitionForExtracts"></a>
