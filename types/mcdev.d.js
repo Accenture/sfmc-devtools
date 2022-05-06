@@ -11,14 +11,14 @@ const SDK = require('sfmc-sdk');
  * @property {string} [credential] name of the credential to interact with
  */
 /**
- * @typedef {object<string, string>} TemplateMap
+ * @typedef {Object.<string, string>} TemplateMap
  */
 
 /**
- * @typedef {object<string, any>} MetadataTypeItem
- * @typedef {object<string, MetadataTypeItem>} MetadataTypeMap
- * @typedef {object<string, MetadataTypeMap>} MultiMetadataTypeMap
- * @typedef {object<string, MetadataTypeItem[]>} MultiMetadataTypeList
+ * @typedef {Object.<string, any>} MetadataTypeItem
+ * @typedef {Object.<string, MetadataTypeItem>} MetadataTypeMap
+ * @typedef {Object.<string, MetadataTypeMap>} MultiMetadataTypeMap
+ * @typedef {Object.<string, MetadataTypeItem[]>} MultiMetadataTypeList
  * @typedef {{metadata:MetadataTypeMap,type:string}} MetadataTypeMapObj
  * @typedef {{metadata:MetadataTypeItem,type:string}} MetadataTypeItemObj
  */
@@ -53,7 +53,7 @@ const SDK = require('sfmc-sdk');
  * @property {string} [queryText] contains SQL query with line breaks converted to '\n'. The content is extracted during retrieval and written into a separate *.sql file
  * @property {string} [categoryId] holds folder ID, replaced with r__folder_Path during retrieve
  * @property {string} r__folder_Path folder path in which this DE is saved
- * @typedef {object<string, QueryItem>} QueryMap
+ * @typedef {Object.<string, QueryItem>} QueryMap
  * @typedef {object} CodeExtractItem
  * @property {QueryItem} json metadata of one item w/o code
  * @property {CodeExtract[]} codeArr list of code snippets in this item
@@ -69,11 +69,11 @@ const SDK = require('sfmc-sdk');
  * @property {string} [script] contains script with line breaks converted to '\n'. The content is extracted during retrieval and written into a separate *.ssjs file
  * @property {string} [categoryId] holds folder ID, replaced with r__folder_Path during retrieve
  * @property {string} r__folder_Path folder path in which this DE is saved
- * @typedef {object<string, ScriptItem>} ScriptMap
+ * @typedef {Object.<string, ScriptItem>} ScriptMap
  */
 /**
- * @typedef {object<string, any>} AssetItem
- * @typedef {object<string, AssetItem>} AssetMap
+ * @typedef {Object.<string, any>} AssetItem
+ * @typedef {Object.<string, AssetItem>} AssetMap
  * @typedef {'archive'|'asset'|'audio'|'block'|'code'|'document'|'image'|'message'|'other'|'rawimage'|'template'|'textfile'|'video'} AssetSubType
  */
 /**
@@ -85,20 +85,20 @@ const SDK = require('sfmc-sdk');
  * @property {string} Name name of field
  * @property {string} [Name_new] custom attribute that is only used when trying to rename a field from Name to Name_new
  * @property {string} DefaultValue empty string for not set
- * @property {'true'|'false'} IsRequired -
- * @property {'true'|'false'} IsPrimaryKey -
+ * @property {true|false} IsRequired -
+ * @property {true|false} IsPrimaryKey -
  * @property {string} Ordinal 1, 2, 3, ...
  * @property {'Text'|'Number'|'Date'|'Boolean'|'Decimal'|'EmailAddress'|'Phone'|'Locale'} FieldType can only be set on create
  * @property {string} Scale the number of places after the decimal that the field can hold; example: "0","1", ...
- * @typedef {object<string, DataExtensionFieldItem>} DataExtensionFieldMap
+ * @typedef {Object.<string, DataExtensionFieldItem>} DataExtensionFieldMap
  */
 /**
  * @typedef {object} DataExtensionItem
  * @property {string} CustomerKey key
  * @property {string} Name name
  * @property {string} Description -
- * @property {'true'|'false'} IsSendable -
- * @property {'true'|'false'} IsTestable -
+ * @property {true|false} IsSendable -
+ * @property {true|false} IsTestable -
  * @property {object} SendableDataExtensionField -
  * @property {string} SendableDataExtensionField.Name -
  * @property {object} SendableSubscriberField -
@@ -110,27 +110,27 @@ const SDK = require('sfmc-sdk');
  * @property {string} [r__dataExtensionTemplate_Name] name of optionally associated DE template
  * @property {object} [Template] -
  * @property {string} [Template.CustomerKey] key of optionally associated DE teplate
- * @typedef {object<string, DataExtensionItem>} DataExtensionMap
+ * @typedef {Object.<string, DataExtensionItem>} DataExtensionMap
  */
 /**
  * @typedef {object} AccountUserDocument
- * @property {string} TYPE  user.type__c
- * @property {string} UserID  user.UserID
- * @property {string} AccountUserID  user.AccountUserID
- * @property {string} CustomerKey  user.CustomerKey
- * @property {string} Name  user.Name
- * @property {string} Email  user.Email
- * @property {string} NotificationEmailAddress  user.NotificationEmailAddress
- * @property {string} ActiveFlag  user.ActiveFlag === true ? '✓' : '-'
- * @property {string} IsAPIUser  user.IsAPIUser === true ? '✓' : '-'
- * @property {string} MustChangePassword  user.MustChangePassword === true ? '✓' : '-'
- * @property {string} DefaultBusinessUnit  defaultBUName
- * @property {string} AssociatedBusinessUnits__c  associatedBus
- * @property {string} Roles  roles
- * @property {string} UserPermissions  userPermissions
- * @property {string} LastSuccessfulLogin  this.timeSinceDate(user.LastSuccessfulLogin)
- * @property {string} CreatedDate  user.CreatedDate
- * @property {string} ModifiedDate  user.ModifiedDate
+ * @property {string} TYPE user.type__c
+ * @property {string} UserID user.UserID
+ * @property {string} AccountUserID user.AccountUserID
+ * @property {string} CustomerKey user.CustomerKey
+ * @property {string} Name user.Name
+ * @property {string} Email user.Email
+ * @property {string} NotificationEmailAddress user.NotificationEmailAddress
+ * @property {string} ActiveFlag user.ActiveFlag === true ? '✓' : '-'
+ * @property {string} IsAPIUser user.IsAPIUser === true ? '✓' : '-'
+ * @property {string} MustChangePassword user.MustChangePassword === true ? '✓' : '-'
+ * @property {string} DefaultBusinessUnit defaultBUName
+ * @property {string} AssociatedBusinessUnits__c associatedBus
+ * @property {string} Roles roles
+ * @property {string} UserPermissions userPermissions
+ * @property {string} LastSuccessfulLogin this.timeSinceDate(user.LastSuccessfulLogin)
+ * @property {string} CreatedDate user.CreatedDate
+ * @property {string} ModifiedDate user.ModifiedDate
  */
 
 /**
@@ -142,7 +142,7 @@ const SDK = require('sfmc-sdk');
  * @property {string} r__type see this.definition.activityTypeMapping
  */
 /**
- * @typedef {object} AutomationStep
+ * @typedef {object}  AutomationStep
  * @property {string} name description
  * @property {string} [annotation] equals AutomationStep.name
  * @property {number} step step iterator
@@ -211,7 +211,7 @@ const SDK = require('sfmc-sdk');
  * @property {string} [categoryId] holds folder ID, replaced with r__folder_Path during retrieve
  */
 /**
- * @typedef {object<string, AutomationItem>} AutomationMap
+ * @typedef {Object.<string, AutomationItem>} AutomationMap
  * @typedef {{metadata:AutomationMap,type:string}} AutomationMapObj
  * @typedef {{metadata:AutomationItem,type:string}} AutomationItemObj
  * @typedef {SDK} SDK
