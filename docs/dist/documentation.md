@@ -166,6 +166,45 @@ Provides default functionality that can be overwritten by child metadata type cl
 </dd>
 </dl>
 
+## Typedefs
+
+<dl>
+<dt><a href="#TemplateMap">TemplateMap</a> : <code>Object.&lt;string, string&gt;</code></dt>
+<dd></dd>
+<dt><a href="#MetadataTypeItemObj">MetadataTypeItemObj</a> : <code>Object.&lt;string, any&gt;</code></dt>
+<dd></dd>
+<dt><a href="#CodeExtractItem">CodeExtractItem</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#CodeExtract">CodeExtract</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#CodeExtractItem">CodeExtractItem</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#ScriptMap">ScriptMap</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#AssetSubType">AssetSubType</a> : <code>Object.&lt;string, any&gt;</code></dt>
+<dd></dd>
+<dt><a href="#DataExtensionFieldMap">DataExtensionFieldMap</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#DataExtensionMap">DataExtensionMap</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#AccountUserDocument">AccountUserDocument</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#AutomationActivity">AutomationActivity</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#AutomationStep">AutomationStep</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#AutomationSchedule">AutomationSchedule</a> : <code>object</code></dt>
+<dd><p>REST format</p>
+</dd>
+<dt><a href="#AutomationScheduleSoap">AutomationScheduleSoap</a> : <code>object</code></dt>
+<dd><p>SOAP format</p>
+</dd>
+<dt><a href="#AutomationItem">AutomationItem</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#AutomationItemObj">AutomationItemObj</a> : <code>Object.&lt;string, AutomationItem&gt;</code></dt>
+<dd></dd>
+</dl>
+
 <a name="Builder"></a>
 
 ## Builder
@@ -5786,3 +5825,271 @@ wrapper around our standard winston logging to console and logfile
 initiate winston logger
 
 **Kind**: global function  
+<a name="TemplateMap"></a>
+
+## TemplateMap : <code>Object.&lt;string, string&gt;</code>
+**Kind**: global typedef  
+<a name="MetadataTypeItemObj"></a>
+
+## MetadataTypeItemObj : <code>Object.&lt;string, any&gt;</code>
+**Kind**: global typedef  
+<a name="CodeExtractItem"></a>
+
+## CodeExtractItem : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| json | <code>MetadataTypeItem</code> | metadata of one item w/o code |
+| codeArr | [<code>Array.&lt;CodeExtract&gt;</code>](#CodeExtract) | list of code snippets in this item |
+| subFolder | <code>Array.&lt;string&gt;</code> | mostly set to null, otherwise list of subfolders |
+
+<a name="CodeExtract"></a>
+
+## CodeExtract : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| subFolder | <code>Array.&lt;string&gt;</code> | mostly set to null, otherwise subfolders path split into elements |
+| fileName | <code>string</code> | name of file w/o extension |
+| fileExt | <code>string</code> | file extension |
+| content | <code>string</code> | file content |
+| [encoding] | <code>&#x27;base64&#x27;</code> | optional for binary files |
+
+<a name="CodeExtractItem"></a>
+
+## CodeExtractItem : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | name |
+| key | <code>string</code> | key |
+| description | <code>string</code> | - |
+| targetKey | <code>string</code> | key of target data extension |
+| createdDate | <code>string</code> | e.g. "2020-09-14T01:42:03.017" |
+| modifiedDate | <code>string</code> | e.g. "2020-09-14T01:42:03.017" |
+| targetUpdateTypeName | <code>&#x27;Overwrite&#x27;</code> \| <code>&#x27;Update&#x27;</code> \| <code>&#x27;Append&#x27;</code> | defines how the query writes into the target data extension |
+| [targetUpdateTypeId] | <code>0</code> \| <code>1</code> \| <code>2</code> | mapped to targetUpdateTypeName via this.definition.targetUpdateTypeMapping |
+| [targetId] | <code>string</code> | Object ID of DE (removed before save) |
+| [targetDescription] | <code>string</code> | Description DE (removed before save) |
+| isFrozen | <code>boolean</code> | looks like this is always set to false |
+| [queryText] | <code>string</code> | contains SQL query with line breaks converted to '\n'. The content is extracted during retrieval and written into a separate *.sql file |
+| [categoryId] | <code>string</code> | holds folder ID, replaced with r__folder_Path during retrieve |
+| r__folder_Path | <code>string</code> | folder path in which this DE is saved |
+| json | <code>QueryItem</code> | metadata of one item w/o code |
+| codeArr | [<code>Array.&lt;CodeExtract&gt;</code>](#CodeExtract) | list of code snippets in this item |
+| subFolder | <code>Array.&lt;string&gt;</code> | mostly set to null, otherwise list of subfolders |
+
+<a name="ScriptMap"></a>
+
+## ScriptMap : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | name |
+| key | <code>string</code> | key |
+| description | <code>string</code> | - |
+| createdDate | <code>string</code> | e.g. "2020-09-14T01:42:03.017" |
+| modifiedDate | <code>string</code> | e.g. "2020-09-14T01:42:03.017" |
+| [script] | <code>string</code> | contains script with line breaks converted to '\n'. The content is extracted during retrieval and written into a separate *.ssjs file |
+| [categoryId] | <code>string</code> | holds folder ID, replaced with r__folder_Path during retrieve |
+| r__folder_Path | <code>string</code> | folder path in which this DE is saved |
+
+<a name="AssetSubType"></a>
+
+## AssetSubType : <code>Object.&lt;string, any&gt;</code>
+**Kind**: global typedef  
+<a name="DataExtensionFieldMap"></a>
+
+## DataExtensionFieldMap : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| [ObjectID] | <code>string</code> | id |
+| [CustomerKey] | <code>string</code> | key in format [DEkey].[FieldName] |
+| [DataExtension] | <code>object</code> | - |
+| DataExtension.CustomerKey | <code>string</code> | key of DE |
+| Name | <code>string</code> | name of field |
+| [Name_new] | <code>string</code> | custom attribute that is only used when trying to rename a field from Name to Name_new |
+| DefaultValue | <code>string</code> | empty string for not set |
+| IsRequired | <code>true</code> \| <code>false</code> | - |
+| IsPrimaryKey | <code>true</code> \| <code>false</code> | - |
+| Ordinal | <code>string</code> | 1, 2, 3, ... |
+| FieldType | <code>&#x27;Text&#x27;</code> \| <code>&#x27;Number&#x27;</code> \| <code>&#x27;Date&#x27;</code> \| <code>&#x27;Boolean&#x27;</code> \| <code>&#x27;Decimal&#x27;</code> \| <code>&#x27;EmailAddress&#x27;</code> \| <code>&#x27;Phone&#x27;</code> \| <code>&#x27;Locale&#x27;</code> | can only be set on create |
+| Scale | <code>string</code> | the number of places after the decimal that the field can hold; example: "0","1", ... |
+
+<a name="DataExtensionMap"></a>
+
+## DataExtensionMap : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| CustomerKey | <code>string</code> | key |
+| Name | <code>string</code> | name |
+| Description | <code>string</code> | - |
+| IsSendable | <code>true</code> \| <code>false</code> | - |
+| IsTestable | <code>true</code> \| <code>false</code> | - |
+| SendableDataExtensionField | <code>object</code> | - |
+| SendableDataExtensionField.Name | <code>string</code> | - |
+| SendableSubscriberField | <code>object</code> | - |
+| SendableSubscriberField.Name | <code>string</code> | - |
+| Fields | <code>Array.&lt;DataExtensionFieldItem&gt;</code> | list of DE fields |
+| r__folder_ContentType | <code>&#x27;dataextension&#x27;</code> \| <code>&#x27;salesforcedataextension&#x27;</code> \| <code>&#x27;synchronizeddataextension&#x27;</code> \| <code>&#x27;shared\_dataextension&#x27;</code> \| <code>&#x27;shared\_salesforcedataextension&#x27;</code> | retrieved from associated folder |
+| r__folder_Path | <code>string</code> | folder path in which this DE is saved |
+| [CategoryID] | <code>string</code> | holds folder ID, replaced with r__folder_Path during retrieve |
+| [r__dataExtensionTemplate_Name] | <code>string</code> | name of optionally associated DE template |
+| [Template] | <code>object</code> | - |
+| [Template.CustomerKey] | <code>string</code> | key of optionally associated DE teplate |
+
+<a name="AccountUserDocument"></a>
+
+## AccountUserDocument : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| TYPE | <code>string</code> | user.type__c |
+| UserID | <code>string</code> | user.UserID |
+| AccountUserID | <code>string</code> | user.AccountUserID |
+| CustomerKey | <code>string</code> | user.CustomerKey |
+| Name | <code>string</code> | user.Name |
+| Email | <code>string</code> | user.Email |
+| NotificationEmailAddress | <code>string</code> | user.NotificationEmailAddress |
+| ActiveFlag | <code>string</code> | user.ActiveFlag === true ? '✓' : '-' |
+| IsAPIUser | <code>string</code> | user.IsAPIUser === true ? '✓' : '-' |
+| MustChangePassword | <code>string</code> | user.MustChangePassword === true ? '✓' : '-' |
+| DefaultBusinessUnit | <code>string</code> | defaultBUName |
+| AssociatedBusinessUnits__c | <code>string</code> | associatedBus |
+| Roles | <code>string</code> | roles |
+| UserPermissions | <code>string</code> | userPermissions |
+| LastSuccessfulLogin | <code>string</code> | this.timeSinceDate(user.LastSuccessfulLogin) |
+| CreatedDate | <code>string</code> | user.CreatedDate |
+| ModifiedDate | <code>string</code> | user.ModifiedDate |
+
+<a name="AutomationActivity"></a>
+
+## AutomationActivity : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | name (not key) of activity |
+| [objectTypeId] | <code>string</code> | Id of assoicated activity type; see this.definition.activityTypeMapping |
+| [activityObjectId] | <code>string</code> | Object Id of assoicated metadata item |
+| displayOrder | <code>number</code> | order within step; starts with 1 or higher number |
+| r__type | <code>string</code> | see this.definition.activityTypeMapping |
+
+<a name="AutomationStep"></a>
+
+## AutomationStep : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | description |
+| [annotation] | <code>string</code> | equals AutomationStep.name |
+| step | <code>number</code> | step iterator |
+| [stepNumber] | <code>number</code> | step iterator, automatically set during deployment |
+| activities | [<code>Array.&lt;AutomationActivity&gt;</code>](#AutomationActivity) | - |
+
+<a name="AutomationSchedule"></a>
+
+## AutomationSchedule : <code>object</code>
+REST format
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| typeId | <code>number</code> | ? |
+| startDate | <code>string</code> | example: '2021-05-07T09:00:00' |
+| endDate | <code>string</code> | example: '2021-05-07T09:00:00' |
+| icalRecur | <code>string</code> | example: 'FREQ=DAILY;UNTIL=20790606T160000;INTERVAL=1' |
+| timezoneName | <code>string</code> | example: 'W. Europe Standard Time'; see this.definition.timeZoneMapping |
+| [timezoneId] | <code>number</code> | see this.definition.timeZoneMapping |
+
+<a name="AutomationScheduleSoap"></a>
+
+## AutomationScheduleSoap : <code>object</code>
+SOAP format
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| Recurrence | <code>object</code> | - |
+| Recurrence.$ | <code>object</code> | {'xsi:type': keyStem + 'lyRecurrence'} |
+| [Recurrence.YearlyRecurrencePatternType] | <code>&#x27;ByYear&#x27;</code> | * currently not supported by tool * |
+| [Recurrence.MonthlyRecurrencePatternType] | <code>&#x27;ByMonth&#x27;</code> | * currently not supported by tool * |
+| [Recurrence.WeeklyRecurrencePatternType] | <code>&#x27;ByWeek&#x27;</code> | * currently not supported by tool * |
+| [Recurrence.DailyRecurrencePatternType] | <code>&#x27;ByDay&#x27;</code> | - |
+| [Recurrence.MinutelyRecurrencePatternType] | <code>&#x27;Interval&#x27;</code> | - |
+| [Recurrence.HourlyRecurrencePatternType] | <code>&#x27;Interval&#x27;</code> | - |
+| [Recurrence.YearInterval] | <code>number</code> | 1..n * currently not supported by tool * |
+| [Recurrence.MonthInterval] | <code>number</code> | 1..n * currently not supported by tool * |
+| [Recurrence.WeekInterval] | <code>number</code> | 1..n * currently not supported by tool * |
+| [Recurrence.DayInterval] | <code>number</code> | 1..n |
+| [Recurrence.HourInterval] | <code>number</code> | 1..n |
+| [Recurrence.MinuteInterval] | <code>number</code> | 1..n |
+| _interval | <code>number</code> | internal variable for CLI output only |
+| TimeZone | <code>object</code> | - |
+| TimeZone.ID | <code>number</code> | AutomationSchedule.timezoneId |
+| _timezoneString | <code>string</code> | internal variable for CLI output only |
+| StartDateTime | <code>string</code> | AutomationSchedule.startDate |
+| EndDateTime | <code>string</code> | AutomationSchedule.endDate |
+| _StartDateTime | <code>string</code> | AutomationSchedule.startDate; internal variable for CLI output only |
+| RecurrenceRangeType | <code>&#x27;EndOn&#x27;</code> \| <code>&#x27;EndAfter&#x27;</code> | set to 'EndOn' if AutomationSchedule.icalRecur contains 'UNTIL'; otherwise to 'EndAfter' |
+| Occurrences | <code>number</code> | only exists if RecurrenceRangeType=='EndAfter' |
+
+<a name="AutomationItem"></a>
+
+## AutomationItem : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| [id] | <code>string</code> | Object Id |
+| key | <code>string</code> | key |
+| name | <code>string</code> | name |
+| description | <code>string</code> | - |
+| type | <code>&#x27;scheduled&#x27;</code> \| <code>&#x27;triggered&#x27;</code> | Starting Source = Schedule / File Drop |
+| status | <code>&#x27;Scheduled&#x27;</code> \| <code>&#x27;Running&#x27;</code> | - |
+| [schedule] | [<code>AutomationSchedule</code>](#AutomationSchedule) | only existing if type=scheduled |
+| [fileTrigger] | <code>object</code> | only existing if type=triggered |
+| fileTrigger.fileNamingPattern | <code>string</code> | - |
+| fileTrigger.fileNamePatternTypeId | <code>string</code> | - |
+| fileTrigger.folderLocationText | <code>string</code> | - |
+| fileTrigger.queueFiles | <code>string</code> | - |
+| [startSource] | <code>object</code> | - |
+| [startSource.schedule] | [<code>AutomationSchedule</code>](#AutomationSchedule) | rewritten to AutomationItem.schedule |
+| [startSource.fileDrop] | <code>object</code> | rewritten to AutomationItem.fileTrigger |
+| startSource.fileDrop.fileNamingPattern | <code>string</code> | - |
+| startSource.fileDrop.fileNamePatternTypeId | <code>string</code> | - |
+| startSource.fileDrop.folderLocation | <code>string</code> | - |
+| startSource.fileDrop.queueFiles | <code>string</code> | - |
+| startSource.typeId | <code>number</code> | - |
+| steps | [<code>Array.&lt;AutomationStep&gt;</code>](#AutomationStep) | - |
+| r__folder_Path | <code>string</code> | folder path |
+| [categoryId] | <code>string</code> | holds folder ID, replaced with r__folder_Path during retrieve |
+
+<a name="AutomationItemObj"></a>
+
+## AutomationItemObj : <code>Object.&lt;string, AutomationItem&gt;</code>
+**Kind**: global typedef  
