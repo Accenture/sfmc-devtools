@@ -6055,8 +6055,8 @@ configures what is displayed in the console
 
 | Param | Type | Description |
 | --- | --- | --- |
-| userList | <code>object.&lt;string, string&gt;</code> | user-id > user-name map |
-| item | <code>object.&lt;string, string&gt;</code> | single metadata item |
+| userList | <code>Object.&lt;string, string&gt;</code> | user-id > user-name map |
+| item | <code>Object.&lt;string, string&gt;</code> | single metadata item |
 | fieldname | <code>string</code> | name of field containing the info |
 
 <a name="createNewLoggerTransport"></a>
