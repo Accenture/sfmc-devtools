@@ -59,7 +59,7 @@ describe('retrieve', () => {
         );
         return;
     });
-    it('Should create a dataExtension template and build it', async () => {
+    it('Should create a dataExtension template via retrieveAsTemplate and build it', async () => {
         // GIVEN there is a template
         const result = await handler.retrieveAsTemplate(
             'testInstance/testBU',
@@ -84,6 +84,51 @@ describe('retrieve', () => {
             'dataExtension',
             'childBU_dataextension_test',
             'testMarket'
+        );
+
+        assert.deepEqual(
+            await testUtils.getExpectedFile('9999999', 'dataExtension', 'build'),
+            await testUtils.getActualDeployFile('childBU_dataextension_test', 'dataExtension'),
+            'returned deployment file was not equal expected'
+        );
+        assert.equal(
+            Object.values(testUtils.getAPIHistory()).flat().length,
+            6,
+            'Unexpected number of requests made'
+        );
+        return;
+    });
+    it('Should create a dataExtension template via buildTemplate and build it', async () => {
+        // download first before we test buildTemplate
+        await handler.retrieve('testInstance/testBU', ['dataExtension']);
+        // GIVEN there is a template
+        const result = await handler.buildTemplate(
+            'testInstance/testBU',
+            'dataExtension',
+            'childBU_dataextension_test',
+            'testMarket'
+        );
+        // WHEN
+        assert.equal(
+            Object.keys(result.dataExtension).length,
+            1,
+            'only one dataExtension expected'
+        );
+        assert.deepEqual(
+            await testUtils.getExpectedFile('9999999', 'dataExtension', 'template'),
+            await testUtils.getActualTemplate('childBU_dataextension_test', 'dataExtension'),
+            'returned template was not equal expected'
+        );
+        // THEN
+        await handler.buildDefinition(
+            'testInstance/testBU',
+            'dataExtension',
+            'childBU_dataextension_test',
+            'testMarket'
+        );
+        console.log(
+            await testUtils.getExpectedFile('9999999', 'dataExtension', 'build'),
+            await testUtils.getActualDeployFile('childBU_dataextension_test', 'dataExtension')
         );
 
         assert.deepEqual(
