@@ -169,10 +169,11 @@ Provides default functionality that can be overwritten by child metadata type cl
 ## Typedefs
 
 <dl>
-<dt><a href="#TemplateMap">TemplateMap</a> : <code>Object.&lt;string, string&gt;</code></dt>
+<dt><a href="#SupportedMetadataTypes">SupportedMetadataTypes</a> : <code>Object.&lt;string, string&gt;</code></dt>
 <dd></dd>
 <dt><a href="#MetadataTypeItemObj">MetadataTypeItemObj</a> : <code>Object.&lt;string, any&gt;</code></dt>
-<dd></dd>
+<dd><p>key=customer key</p>
+</dd>
 <dt><a href="#CodeExtractItem">CodeExtractItem</a> : <code>object</code></dt>
 <dd></dd>
 <dt><a href="#CodeExtract">CodeExtract</a> : <code>object</code></dt>
@@ -215,8 +216,9 @@ Builds metadata from a template using market specific customisation
 * [Builder](#Builder)
     * [new Builder(properties, buObject, client)](#new_Builder_new)
     * _instance_
+        * [.metadata](#Builder+metadata) : <code>TYPE.MultiMetadataTypeList</code>
         * [.buildDefinition(metadataType, name, templateVariables)](#Builder+buildDefinition) ⇒ <code>Promise</code>
-        * [.buildTemplate(metadataType, key, templateVariables)](#Builder+buildTemplate) ⇒ <code>Promise.&lt;{metadata: Util.MetadataTypeItem, type: string}&gt;</code>
+        * [.buildTemplate(metadataType, key, templateVariables)](#Builder+buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
     * _static_
         * [.verifyMarketList(mlName, properties)](#Builder.verifyMarketList) ⇒ <code>void</code>
 
@@ -239,6 +241,10 @@ Creates a Builder, uses v2 auth if v2AuthOptions are passed.
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
 | client | <code>TYPE.SDK</code> | fuel client |
 
+<a name="Builder+metadata"></a>
+
+### builder.metadata : <code>TYPE.MultiMetadataTypeList</code>
+**Kind**: instance property of [<code>Builder</code>](#Builder)  
 <a name="Builder+buildDefinition"></a>
 
 ### builder.buildDefinition(metadataType, name, templateVariables) ⇒ <code>Promise</code>
@@ -255,11 +261,11 @@ Builds a specific metadata file by name
 
 <a name="Builder+buildTemplate"></a>
 
-### builder.buildTemplate(metadataType, key, templateVariables) ⇒ <code>Promise.&lt;{metadata: Util.MetadataTypeItem, type: string}&gt;</code>
+### builder.buildTemplate(metadataType, key, templateVariables) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
 Builds a specific metadata file by name
 
 **Kind**: instance method of [<code>Builder</code>](#Builder)  
-**Returns**: <code>Promise.&lt;{metadata: Util.MetadataTypeItem, type: string}&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -381,8 +387,8 @@ main class
     * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(businessUnit, type, customerKey)](#Mcdev.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.badKeys(businessUnit)](#Mcdev.badKeys) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.retrieveAsTemplate(businessUnit, selectedType, name, market)](#Mcdev.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
-    * [.buildTemplate(businessUnit, selectedType, key, market)](#Mcdev.buildTemplate) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.retrieveAsTemplate(businessUnit, selectedType, name, market)](#Mcdev.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+    * [.buildTemplate(businessUnit, selectedType, key, market)](#Mcdev.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
     * [.buildDefinition(businessUnit, selectedType, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._checkMarket(market)](#Mcdev._checkMarket) ⇒ <code>boolean</code>
     * [.buildDefinitionBulk(listName, type, name)](#Mcdev.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -545,11 +551,11 @@ Converts metadata to legacy format. Output is saved in 'converted' directory
 
 <a name="Mcdev.retrieveAsTemplate"></a>
 
-### Mcdev.retrieveAsTemplate(businessUnit, selectedType, name, market) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
+### Mcdev.retrieveAsTemplate(businessUnit, selectedType, name, market) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
 Retrieve a specific metadata file and templatise.
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code> - -  
+**Returns**: <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -560,11 +566,11 @@ Retrieve a specific metadata file and templatise.
 
 <a name="Mcdev.buildTemplate"></a>
 
-### Mcdev.buildTemplate(businessUnit, selectedType, key, market) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.buildTemplate(businessUnit, selectedType, key, market) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
 Build a specific metadata file based on a template.
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+**Returns**: <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2774,7 +2780,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.retrieveChangelog([buObject], [additionalFields], [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
-    * [.buildTemplate(retrieveDir, templateDir, key, templateVariables)](#MetadataType.buildTemplate) ⇒ <code>Promise.&lt;{metadata: Util.MetadataTypeItem, type: string}&gt;</code>
+    * [.buildTemplate(retrieveDir, templateDir, key, templateVariables)](#MetadataType.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.preDeployTasks(metadata, deployDir)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
     * [.create(metadata, deployDir)](#MetadataType.create) ⇒ <code>void</code>
     * [.update(metadata, [metadataBefore])](#MetadataType.update) ⇒ <code>void</code>
@@ -2959,11 +2965,11 @@ Gets metadata cache with limited fields and does not store value to disk
 
 <a name="MetadataType.buildTemplate"></a>
 
-### MetadataType.buildTemplate(retrieveDir, templateDir, key, templateVariables) ⇒ <code>Promise.&lt;{metadata: Util.MetadataTypeItem, type: string}&gt;</code>
+### MetadataType.buildTemplate(retrieveDir, templateDir, key, templateVariables) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{metadata: Util.MetadataTypeItem, type: string}&gt;</code> - metadata  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code> - single metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6072,13 +6078,15 @@ wrapper around our standard winston logging to console and logfile
 initiate winston logger
 
 **Kind**: global function  
-<a name="TemplateMap"></a>
+<a name="SupportedMetadataTypes"></a>
 
-## TemplateMap : <code>Object.&lt;string, string&gt;</code>
+## SupportedMetadataTypes : <code>Object.&lt;string, string&gt;</code>
 **Kind**: global typedef  
 <a name="MetadataTypeItemObj"></a>
 
 ## MetadataTypeItemObj : <code>Object.&lt;string, any&gt;</code>
+key=customer key
+
 **Kind**: global typedef  
 <a name="CodeExtractItem"></a>
 
