@@ -1561,7 +1561,7 @@ DataExtensionField MetadataType
     * [.convertToSortedArray(fieldsObj)](#DataExtensionField.convertToSortedArray) ⇒ <code>Array.&lt;TYPE.DataExtensionFieldItem&gt;</code>
     * [.sortDeFields(a, b)](#DataExtensionField.sortDeFields) ⇒ <code>boolean</code>
     * [.postRetrieveTasks(metadata, forDataExtension)](#DataExtensionField.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionFieldItem</code>
-    * [.prepareDeployColumnsOnUpdate(deployColumns, deKey)](#DataExtensionField.prepareDeployColumnsOnUpdate) ⇒ <code>object.&lt;string, TYPE.DataExtensionFieldItem&gt;</code>
+    * [.prepareDeployColumnsOnUpdate(deployColumns, deKey)](#DataExtensionField.prepareDeployColumnsOnUpdate) ⇒ <code>Object.&lt;string, TYPE.DataExtensionFieldItem&gt;</code>
     * [.deleteByKey(buObject, customerKey)](#DataExtensionField.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.deleteByKeySOAP(buObject, customerKey, [handleOutside])](#DataExtensionField.deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#DataExtensionField.postDeleteTasks) ⇒ <code>void</code>
@@ -1633,12 +1633,12 @@ manages post retrieve steps
 
 <a name="DataExtensionField.prepareDeployColumnsOnUpdate"></a>
 
-### DataExtensionField.prepareDeployColumnsOnUpdate(deployColumns, deKey) ⇒ <code>object.&lt;string, TYPE.DataExtensionFieldItem&gt;</code>
+### DataExtensionField.prepareDeployColumnsOnUpdate(deployColumns, deKey) ⇒ <code>Object.&lt;string, TYPE.DataExtensionFieldItem&gt;</code>
 Mofifies passed deployColumns for update by mapping ObjectID to their target column's values.
 Removes FieldType field if its the same in deploy and target column, because it results in an error even if its of the same type
 
 **Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
-**Returns**: <code>object.&lt;string, TYPE.DataExtensionFieldItem&gt;</code> - existing fields by their original name to allow re-adding FieldType after update  
+**Returns**: <code>Object.&lt;string, TYPE.DataExtensionFieldItem&gt;</code> - existing fields by their original name to allow re-adding FieldType after update  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5808,8 +5808,8 @@ configures what is displayed in the console
 
 | Param | Type | Description |
 | --- | --- | --- |
-| userList | <code>object.&lt;string, string&gt;</code> | user-id > user-name map |
-| item | <code>object.&lt;string, string&gt;</code> | single metadata item |
+| userList | <code>Object.&lt;string, string&gt;</code> | user-id > user-name map |
+| item | <code>Object.&lt;string, string&gt;</code> | single metadata item |
 | fieldname | <code>string</code> | name of field containing the info |
 
 <a name="createNewLoggerTransport"></a>
