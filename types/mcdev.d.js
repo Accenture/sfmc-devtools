@@ -215,6 +215,20 @@ const SDK = require('sfmc-sdk');
  * @typedef {Object.<string, AutomationItem>} AutomationMap
  * @typedef {{metadata:AutomationMap,type:string}} AutomationMapObj
  * @typedef {{metadata:AutomationItem,type:string}} AutomationItemObj
+ * @typedef {object} DeltaPkgItem
+ * @property {string} file relative path to file
+ * @property {number} changes changed lines
+ * @property {number} insertions added lines
+ * @property {number} deletions deleted lines
+ * @property {boolean} binary is a binary file
+ * @property {boolean} moved git thinks this file was moved
+ * @property {string} [fromPath] git thinks this relative path is where the file was before
+ * @property {SupportedMetadataTypes} type metadata type
+ * @property {string} externalKey key
+ * @property {string} name name
+ * @property {'move'|'add/update'|'delete'} gitAction what git recognized as an action
+ * @property {string} _credential mcdev credential name
+ * @property {string} _businessUnit mcdev business unit name inside of _credential
  * @typedef {SDK} SDK
  */
 module.exports = {};

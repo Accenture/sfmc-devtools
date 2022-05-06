@@ -220,7 +220,11 @@ Builds metadata from a template using market specific customisation
         * [.buildDefinition(metadataType, name, templateVariables)](#Builder+buildDefinition) ⇒ <code>Promise</code>
         * [.buildTemplate(metadataType, key, templateVariables)](#Builder+buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
     * _static_
+        * [.buildTemplate(businessUnit, selectedType, key, market)](#Builder.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+        * [.buildDefinition(businessUnit, selectedType, name, market)](#Builder.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
+        * [.buildDefinitionBulk(listName, type, name)](#Builder.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
         * [.verifyMarketList(mlName, properties)](#Builder.verifyMarketList) ⇒ <code>void</code>
+        * [._checkMarket(market)](#Builder._checkMarket) ⇒ <code>boolean</code>
 
 <a name="new_Builder_new"></a>
 
@@ -273,6 +277,50 @@ Builds a specific metadata file by name
 | key | <code>string</code> | customerkey of metadata to create a template of |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
+<a name="Builder.buildTemplate"></a>
+
+### Builder.buildTemplate(businessUnit, selectedType, key, market) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+Build a specific metadata file based on a template.
+
+**Kind**: static method of [<code>Builder</code>](#Builder)  
+**Returns**: <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| businessUnit | <code>string</code> | references credentials from properties.json |
+| selectedType | <code>string</code> | supported metadata type |
+| key | <code>string</code> | customerkey of the metadata |
+| market | <code>string</code> | market localizations |
+
+<a name="Builder.buildDefinition"></a>
+
+### Builder.buildDefinition(businessUnit, selectedType, name, market) ⇒ <code>Promise.&lt;void&gt;</code>
+Build a specific metadata file based on a template.
+
+**Kind**: static method of [<code>Builder</code>](#Builder)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| businessUnit | <code>string</code> | references credentials from properties.json |
+| selectedType | <code>string</code> | supported metadata type |
+| name | <code>string</code> | name of the metadata |
+| market | <code>string</code> | market localizations |
+
+<a name="Builder.buildDefinitionBulk"></a>
+
+### Builder.buildDefinitionBulk(listName, type, name) ⇒ <code>Promise.&lt;void&gt;</code>
+Build a specific metadata file based on a template using a list of bu-market combos
+
+**Kind**: static method of [<code>Builder</code>](#Builder)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| listName | <code>string</code> | name of list of BU-market combos |
+| type | <code>string</code> | supported metadata type |
+| name | <code>string</code> | name of the metadata |
+
 <a name="Builder.verifyMarketList"></a>
 
 ### Builder.verifyMarketList(mlName, properties) ⇒ <code>void</code>
@@ -288,6 +336,18 @@ ensure provided MarketList exists and it's content including markets and BUs che
 | properties.markets | <code>object</code> | list of template variable combos |
 | properties.marketList | <code>object</code> | list of bu-market combos |
 | properties.credentials | <code>object</code> | list of credentials and their BUs |
+
+<a name="Builder._checkMarket"></a>
+
+### Builder.\_checkMarket(market) ⇒ <code>boolean</code>
+check if a market name exists in current mcdev config
+
+**Kind**: static method of [<code>Builder</code>](#Builder)  
+**Returns**: <code>boolean</code> - found market or not  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| market | <code>string</code> | market localizations |
 
 <a name="Deployer"></a>
 
@@ -390,7 +450,6 @@ main class
     * [.retrieveAsTemplate(businessUnit, selectedType, name, market)](#Mcdev.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
     * [.buildTemplate(businessUnit, selectedType, key, market)](#Mcdev.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
     * [.buildDefinition(businessUnit, selectedType, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._checkMarket(market)](#Mcdev._checkMarket) ⇒ <code>boolean</code>
     * [.buildDefinitionBulk(listName, type, name)](#Mcdev.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="Mcdev.setSkipInteraction"></a>
@@ -421,7 +480,7 @@ handler for 'mcdev createDeltaPkg
 | argv | <code>object</code> | yargs parameters |
 | [argv.range] | <code>string</code> | git commit range     into deploy directory |
 | [argv.filter] | <code>string</code> | filter file paths that start with any |
-| [argv.skipInteraction] | <code>boolean</code> | allows to skip interactive wizard |
+| [argv.skipInteraction] | <code>object</code> | allows to skip interactive wizard |
 
 <a name="Mcdev.selectTypes"></a>
 
@@ -592,18 +651,6 @@ Build a specific metadata file based on a template.
 | businessUnit | <code>string</code> | references credentials from properties.json |
 | selectedType | <code>string</code> | supported metadata type |
 | name | <code>string</code> | name of the metadata |
-| market | <code>string</code> | market localizations |
-
-<a name="Mcdev._checkMarket"></a>
-
-### Mcdev.\_checkMarket(market) ⇒ <code>boolean</code>
-check if a market name exists in current mcdev config
-
-**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>boolean</code> - found market or not  
-
-| Param | Type | Description |
-| --- | --- | --- |
 | market | <code>string</code> | market localizations |
 
 <a name="Mcdev.buildDefinitionBulk"></a>
@@ -4617,17 +4664,20 @@ DevOps helper class
 **Kind**: global constant  
 
 * [DevOps](#DevOps)
-    * [.createDeltaPkg(properties, [range], [saveToDeployDir], [filterPaths])](#DevOps.createDeltaPkg) ⇒ <code>Promise.&lt;Array.&lt;object&gt;&gt;</code>
+    * [.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths])](#DevOps.getDeltaList) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+        * [~delta](#DevOps.getDeltaList..delta) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
+        * [~copied](#DevOps.getDeltaList..copied) : <code>TYPE.DeltaPkgItem</code>
+    * [.buildDeltaDefinitions(properties, range, [skipInteraction])](#DevOps.buildDeltaDefinitions)
     * [.document(directory, jsonReport)](#DevOps.document) ⇒ <code>void</code>
 
-<a name="DevOps.createDeltaPkg"></a>
+<a name="DevOps.getDeltaList"></a>
 
-### DevOps.createDeltaPkg(properties, [range], [saveToDeployDir], [filterPaths]) ⇒ <code>Promise.&lt;Array.&lt;object&gt;&gt;</code>
+### DevOps.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
 Extracts the delta between a commit and the current state for deployment.
 Interactive commit selection if no commits are passed.
 
 **Kind**: static method of [<code>DevOps</code>](#DevOps)  
-**Returns**: <code>Promise.&lt;Array.&lt;object&gt;&gt;</code> - -  
+**Returns**: <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4635,6 +4685,32 @@ Interactive commit selection if no commits are passed.
 | [range] | <code>string</code> | git commit range |
 | [saveToDeployDir] | <code>boolean</code> | if true, copy metadata changes into deploy directory |
 | [filterPaths] | <code>string</code> | filter file paths that start with any specified path (comma separated) |
+
+
+* [.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths])](#DevOps.getDeltaList) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+    * [~delta](#DevOps.getDeltaList..delta) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
+    * [~copied](#DevOps.getDeltaList..copied) : <code>TYPE.DeltaPkgItem</code>
+
+<a name="DevOps.getDeltaList..delta"></a>
+
+#### getDeltaList~delta : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
+**Kind**: inner constant of [<code>getDeltaList</code>](#DevOps.getDeltaList)  
+<a name="DevOps.getDeltaList..copied"></a>
+
+#### getDeltaList~copied : <code>TYPE.DeltaPkgItem</code>
+**Kind**: inner constant of [<code>getDeltaList</code>](#DevOps.getDeltaList)  
+<a name="DevOps.buildDeltaDefinitions"></a>
+
+### DevOps.buildDeltaDefinitions(properties, range, [skipInteraction])
+wrapper around DevOps.getDeltaList, Builder.buildTemplate and M
+
+**Kind**: static method of [<code>DevOps</code>](#DevOps)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>object</code> | project config file |
+| range | <code>string</code> | git commit range |
+| [skipInteraction] | <code>TYPE.SkipInteraction</code> | allows to skip interactive wizard |
 
 <a name="DevOps.document"></a>
 
@@ -6348,3 +6424,21 @@ SOAP format
 
 ## SDK : <code>Object.&lt;string, AutomationItem&gt;</code>
 **Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| file | <code>string</code> | relative path to file |
+| changes | <code>number</code> | changed lines |
+| insertions | <code>number</code> | added lines |
+| deletions | <code>number</code> | deleted lines |
+| binary | <code>boolean</code> | is a binary file |
+| moved | <code>boolean</code> | git thinks this file was moved |
+| [fromPath] | <code>string</code> | git thinks this relative path is where the file was before |
+| type | [<code>SupportedMetadataTypes</code>](#SupportedMetadataTypes) | metadata type |
+| externalKey | <code>string</code> | key |
+| name | <code>string</code> | name |
+| gitAction | <code>&#x27;move&#x27;</code> \| <code>&#x27;add/update&#x27;</code> \| <code>&#x27;delete&#x27;</code> | what git recognized as an action |
+| _credential | <code>string</code> | mcdev credential name |
+| _businessUnit | <code>string</code> | mcdev business unit name inside of _credential |
+
