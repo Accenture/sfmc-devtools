@@ -45,9 +45,10 @@ Accenture Salesforce Marketing Cloud DevTools (mcdev) is a rapid deployment/roll
     - [6.2.2. deploy](#622-deploy)
     - [6.2.3. delete](#623-delete)
     - [6.2.4. retrieveAsTemplate](#624-retrieveastemplate)
-    - [6.2.5. buildDefinition](#625-builddefinition)
-    - [6.2.6. buildDefinitionBulk](#626-builddefinitionbulk)
-    - [6.2.7. createDeltaPkg](#627-createdeltapkg)
+    - [6.2.5. buildTemplate](#625-buildtemplate)
+    - [6.2.6. buildDefinition](#626-builddefinition)
+    - [6.2.7. buildDefinitionBulk](#627-builddefinitionbulk)
+    - [6.2.8. createDeltaPkg](#628-createdeltapkg)
 - [7. Advanced Configuration](#7-advanced-configuration)
   - [7.1. Config Options](#71-config-options)
   - [7.2. Metadata specific settings & options](#72-metadata-specific-settings--options)
@@ -766,7 +767,45 @@ This will result in the following files being created in your `template/` direct
 - `table2.dataExtension-meta.json`
 - `table3.dataExtension-meta.json`
 
-#### 6.2.5. buildDefinition
+#### 6.2.5. buildTemplate
+
+<a id="markdown-buildtemplate" name="buildtemplate"></a>
+
+_Command:_ `mcdev buildTemplate <business unit> <type> <name> <market>`
+
+_Alias:_ `mcdev bt`
+
+The `bt` command uses previously retrieved metadata on the your local computer and uses your `market` configuration in `.mcdevrc.json` to replace strings with variables. The result is then stored in your `template/` folder. Please note that files stored here will keep their original name, despite this possibly containing market-specific suffixes or similar. Also note, that contrary to the deploy & retrieve folders, you will not see credential- or Business Unit-sub-folders here.
+
+This command is a prerequisite for the `buildDefintion` command. Alternatively though, you can copy-paste retrieved metadata from your `retrieve/` folder to your `template/` folder and update it manually - or even create it from scratch.
+
+> **Note**: Before using this command, you need to configure your markets first! Check out our guide on [Market Configuration](#market-configuration) to understand how to use templating and prepare your market config.
+
+Currently supported types: Check out [Metadata Type Support](#metadata-type-support).
+
+_Example:_
+
+```bash
+mcdev bt MyProject/DEV dataExtension MyUserTable pilotMarketDEV1
+```
+
+This will result in `MyUserTable.dataExtension-meta.json` being created in your `template/` directory:
+
+**buildTemplate for multiple sources:**
+
+You can also create multiple templates with multiple sources at once. Simply specify them in a comma-separated list and put that list in quotes:
+
+```bash
+mcdev bt MyProject/DEV dataExtension "table1,table2,table3" pilotMarketDEV1
+```
+
+This will result in the following files being created in your `template/` directory:
+
+- `table1.dataExtension-meta.json`
+- `table2.dataExtension-meta.json`
+- `table3.dataExtension-meta.json`
+
+#### 6.2.6. buildDefinition
 
 <a id="markdown-builddefinition" name="builddefinition"></a>
 
@@ -807,7 +846,7 @@ This will result in the following files being created in your `retrieve/MyProjec
 - `table2.dataExtension-meta.json`
 - `table3.dataExtension-meta.json`
 
-#### 6.2.6. buildDefinitionBulk
+#### 6.2.7. buildDefinitionBulk
 
 <a id="markdown-builddefinitionbulk" name="builddefinitionbulk"></a>
 
@@ -827,7 +866,7 @@ _Example:_
 mcdev bdb pilotMarketsQA dataExtension MyUserTable
 ```
 
-#### 6.2.7. createDeltaPkg
+#### 6.2.8. createDeltaPkg
 
 <a id="markdown-createdeltapkg" name="createdeltapkg"></a>
 
