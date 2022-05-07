@@ -54,7 +54,7 @@ describe('retrieve', () => {
         );
         assert.equal(
             Object.values(testUtils.getAPIHistory()).flat().length,
-            15,
+            16,
             'Unexpected number of requests made'
         );
         return;
