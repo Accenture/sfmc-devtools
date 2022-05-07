@@ -20,10 +20,24 @@
         "sourceType": "module"
     },
     "root": true,
+    "settings": {
+        "jsdoc": {
+            "mode": "jsdoc",
+            "preferredTypes": {
+                "Object": "object",
+                "object<>": "Object.<>",
+                "Object<>": "Object.<>",
+                "promise": "Promise",
+                "promise<>": "Promise.<>",
+                "Promise<>": "Promise.<>"
+            }
+        }
+    },
     "rules": {
         "arrow-body-style": ["error", "as-needed"],
         "curly": "error",
         "no-console": "off",
+        "jsdoc/check-line-alignment": 2,
         "jsdoc/require-jsdoc": [
             "warn",
             {
