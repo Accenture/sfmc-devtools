@@ -13,7 +13,7 @@ describe('retrieve', () => {
 
     it('Should retrieve a query', async () => {
         // WHEN
-        await handler.retrieve('testInstance/testBU', 'query');
+        await handler.retrieve('testInstance/testBU', ['query']);
         // THEN
         // get results from cache
         const result = cache.getCache();
@@ -32,7 +32,7 @@ describe('retrieve', () => {
     });
     it('Should create & upsert a query', async () => {
         // WHEN
-        await handler.deploy('testInstance/testBU', 'query');
+        await handler.deploy('testInstance/testBU', ['query']);
         // THEN
         // get results from cache
         const result = cache.getCache();

@@ -174,6 +174,43 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dl>
 <dt><a href="#AuthObject">AuthObject</a> : <code>object</code></dt>
 <dd></dd>
+<dt><a href="#TemplateMap">TemplateMap</a> : <code>object.&lt;string, string&gt;</code></dt>
+<dd></dd>
+<dt><a href="#MetadataTypeItemObj">MetadataTypeItemObj</a> : <code>object.&lt;string, any&gt;</code></dt>
+<dd></dd>
+<dt><a href="#CodeExtractItem">CodeExtractItem</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#CodeExtract">CodeExtract</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#CodeExtractItem">CodeExtractItem</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#ScriptMap">ScriptMap</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#AssetSubType">AssetSubType</a> : <code>object.&lt;string, any&gt;</code></dt>
+<dd></dd>
+<dt><a href="#DataExtensionFieldMap">DataExtensionFieldMap</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#DataExtensionMap">DataExtensionMap</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#AccountUserDocument">AccountUserDocument</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#AutomationActivity">AutomationActivity</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#AutomationStep">AutomationStep</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#AutomationSchedule">AutomationSchedule</a> : <code>object</code></dt>
+<dd><p>REST format</p>
+</dd>
+<dt><a href="#AutomationScheduleSoap">AutomationScheduleSoap</a> : <code>object</code></dt>
+<dd><p>SOAP format</p>
+</dd>
+<dt><a href="#AutomationItem">AutomationItem</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#AutomationItemObj">AutomationItemObj</a> : <code>object.&lt;string, AutomationItem&gt;</code></dt>
+<dd></dd>
+<dt><a href="#skipInteraction">skipInteraction</a> : <code>object</code></dt>
+<dd><p>signals what to insert automatically for things usually asked via wizard</p>
+</dd>
 </dl>
 
 <a name="Builder"></a>
@@ -244,7 +281,7 @@ Source and target business units are also compared before the deployment to appl
 **Kind**: global class  
 
 * [Deployer](#Deployer)
-    * [new Deployer(properties, buObject, [type])](#new_Deployer_new)
+    * [new Deployer(properties, buObject, [typeArr])](#new_Deployer_new)
     * _instance_
         * [.deploy()](#Deployer+deploy) ⇒ <code>Promise</code>
         * [.deployCallback(result, metadataType)](#Deployer+deployCallback) ⇒ <code>void</code>
@@ -254,7 +291,7 @@ Source and target business units are also compared before the deployment to appl
 
 <a name="new_Deployer_new"></a>
 
-### new Deployer(properties, buObject, [type])
+### new Deployer(properties, buObject, [typeArr])
 Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 
 
@@ -263,7 +300,7 @@ Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 | properties | <code>object</code> | General configuration to be used in retrieve |
 | properties.directories | <code>object</code> | Directories to be used when interacting with FS |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
-| [type] | <code>string</code> | limit deployment to given metadata type |
+| [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
 
 <a name="Deployer+deploy"></a>
 
@@ -295,7 +332,7 @@ Returns metadata of a business unit that is saved locally
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | deployDir | <code>string</code> |  | root directory of metadata. |
-| [type] | <code>string</code> |  | limit deployment to given metadata type |
+| [type] | <code>Array.&lt;string&gt;</code> |  | limit deployment to given metadata type |
 | [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
 
 <a name="Deployer.createFolderDefinitions"></a>
@@ -324,10 +361,9 @@ main class
     * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>void</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
-    * [.retrieve(businessUnit, [selectedType], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [._retrieveBU(cred, bu, [selectedType], [changelogOnly])](#Mcdev._retrieveBU) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [._deployBU(cred, bu, [type])](#Mcdev._deployBU) ⇒ <code>Promise</code>
-    * [.deploy(businessUnit, [selectedType])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.retrieve(businessUnit, [selectedTypesArr], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [._deployBU(cred, bu, [typeArr])](#Mcdev._deployBU) ⇒ <code>Promise</code>
+    * [.deploy(businessUnit, [selectedTypesArr])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initProject([credentialsName], [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -385,7 +421,7 @@ handler for 'mcdev createDeltaPkg
 
 <a name="Mcdev.retrieve"></a>
 
-### Mcdev.retrieve(businessUnit, [selectedType], [changelogOnly]) ⇒ <code>Promise.&lt;object&gt;</code>
+### Mcdev.retrieve(businessUnit, [selectedTypesArr], [changelogOnly]) ⇒ <code>Promise.&lt;object&gt;</code>
 Retrieve all metadata from the specified business unit into the local file system.
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -394,27 +430,12 @@ Retrieve all metadata from the specified business unit into the local file syste
 | Param | Type | Description |
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
-| [selectedType] | <code>string</code> | limit retrieval to given metadata type |
-| [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
-
-<a name="Mcdev._retrieveBU"></a>
-
-### Mcdev.\_retrieveBU(cred, bu, [selectedType], [changelogOnly]) ⇒ <code>Promise.&lt;object&gt;</code>
-helper for retrieve()
-
-**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;object&gt;</code> - ensure that BUs are worked on sequentially  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| cred | <code>string</code> | name of Credential |
-| bu | <code>string</code> | name of BU |
-| [selectedType] | <code>string</code> | limit retrieval to given metadata type/subtype |
+| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> | limit retrieval to given metadata type |
 | [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
 
 <a name="Mcdev._deployBU"></a>
 
-### Mcdev.\_deployBU(cred, bu, [type]) ⇒ <code>Promise</code>
+### Mcdev.\_deployBU(cred, bu, [typeArr]) ⇒ <code>Promise</code>
 helper for deploy()
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -424,12 +445,13 @@ helper for deploy()
 | --- | --- | --- |
 | cred | <code>string</code> | name of Credential |
 | bu | <code>string</code> | name of BU |
-| [type] | <code>string</code> | limit deployment to given metadata type |
+| [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
 
 <a name="Mcdev.deploy"></a>
 
-### Mcdev.deploy(businessUnit, [selectedType]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.deploy(businessUnit, [selectedTypesArr]) ⇒ <code>Promise.&lt;void&gt;</code>
 Deploys all metadata located in the 'deploy' directory to the specified business unit
+! deploy does not support selecting subtypes yet
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
@@ -437,7 +459,7 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 | Param | Type | Description |
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
-| [selectedType] | <code>string</code> | limit deployment to given metadata type |
+| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
 
 <a name="Mcdev.initProject"></a>
 
@@ -569,6 +591,7 @@ MessageSendActivity MetadataType
 
 * [AccountUser](#AccountUser) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, _, buObject)](#AccountUser.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveChangelog(buObject)](#AccountUser.retrieveChangelog) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.timeSinceDate(date)](#AccountUser.timeSinceDate) ⇒ <code>number</code>
     * [.getBuName(buObject, id)](#AccountUser.getBuName) ⇒ <code>string</code>
     * [.document(buObject, [metadata])](#AccountUser.document) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -589,6 +612,18 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 | retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | _ | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
+
+<a name="AccountUser.retrieveChangelog"></a>
+
+### AccountUser.retrieveChangelog(buObject) ⇒ <code>Promise.&lt;object&gt;</code>
+Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
+
+**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
+**Returns**: <code>Promise.&lt;object&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>object</code> | properties for auth |
 
 <a name="AccountUser.timeSinceDate"></a>
 
@@ -672,9 +707,9 @@ FileTransfer MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Asset](#Asset) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, _, __, [selectedSubType])](#Asset.retrieve) ⇒ <code>Promise.&lt;{metadata:TYPE.AssetMap, type:string}&gt;</code>
-    * [.retrieveForCache(_, [selectedSubType])](#Asset.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:TYPE.AssetMap, type:string}&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType])](#Asset.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:TYPE.AssetItem, type:string}&gt;</code>
+    * [.retrieve(retrieveDir, _, __, [selectedSubType])](#Asset.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
+    * [.retrieveForCache(_, [selectedSubType])](#Asset.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType])](#Asset.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetItem, type: string}&gt;</code>
     * [.create(metadata)](#Asset.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#Asset.update) ⇒ <code>Promise</code>
     * [.requestSubType(subType, subTypeArray, [retrieveDir], [templateName], [templateVariables])](#Asset.requestSubType) ⇒ <code>Promise</code>
@@ -696,11 +731,11 @@ FileTransfer MetadataType
 
 <a name="Asset.retrieve"></a>
 
-### Asset.retrieve(retrieveDir, _, __, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata:TYPE.AssetMap, type:string}&gt;</code>
+### Asset.retrieve(retrieveDir, _, __, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
 Retrieves Metadata of Asset
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.AssetMap, type:string}&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -711,11 +746,11 @@ Retrieves Metadata of Asset
 
 <a name="Asset.retrieveForCache"></a>
 
-### Asset.retrieveForCache(_, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata:TYPE.AssetMap, type:string}&gt;</code>
+### Asset.retrieveForCache(_, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
 Retrieves asset metadata for caching
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.AssetMap, type:string}&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -724,11 +759,11 @@ Retrieves asset metadata for caching
 
 <a name="Asset.retrieveAsTemplate"></a>
 
-### Asset.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata:TYPE.AssetItem, type:string}&gt;</code>
+### Asset.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetItem, type: string}&gt;</code>
 Retrieves asset metadata for templating
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.AssetItem, type:string}&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.AssetItem, type: string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1315,15 +1350,15 @@ DataExtension MetadataType
     * [.create(metadata)](#DataExtension.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#DataExtension.update) ⇒ <code>Promise</code>
     * [.postDeployTasks(upsertedMetadata)](#DataExtension.postDeployTasks) ⇒ <code>void</code>
-    * [.retrieve(retrieveDir, [additionalFields], buObject, [_], [isDeploy])](#DataExtension.retrieve) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code>
-    * [.retrieveChangelog([additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code>
+    * [.retrieve(retrieveDir, [additionalFields], buObject, [_], [isDeploy])](#DataExtension.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
+    * [.retrieveChangelog([buObject], [additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.postRetrieveTasks(metadata, [_], [isTemplating])](#DataExtension.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionItem</code>
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.DataExtensionItem&gt;</code>
     * [.document(buObject, [metadata], [isDeploy])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(buObject, customerKey)](#DataExtension.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postDeleteTasks(buObject, customerKey)](#DataExtension.postDeleteTasks) ⇒ <code>void</code>
-    * [.retrieveForCache(buObject, [_], [isDeploy])](#DataExtension.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtension.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:DataExtension, type:string}&gt;</code>
+    * [.retrieveForCache(buObject, [_], [isDeploy])](#DataExtension.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtension.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: DataExtension, type: string}&gt;</code>
 
 <a name="DataExtension.upsert"></a>
 
@@ -1389,11 +1424,11 @@ Gets executed after deployment of metadata type
 
 <a name="DataExtension.retrieve"></a>
 
-### DataExtension.retrieve(retrieveDir, [additionalFields], buObject, [_], [isDeploy]) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code>
+### DataExtension.retrieve(retrieveDir, [additionalFields], buObject, [_], [isDeploy]) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
 Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionColumn metadata retrieval
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code> - Promise of item map  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1405,14 +1440,15 @@ Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionCo
 
 <a name="DataExtension.retrieveChangelog"></a>
 
-### DataExtension.retrieveChangelog([additionalFields]) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code>
+### DataExtension.retrieveChangelog([buObject], [additionalFields]) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
 Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionColumn metadata retrieval
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code> - Promise of item map  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code> - Promise of item map  
 
 | Param | Type | Description |
 | --- | --- | --- |
+| [buObject] | <code>TYPE.BuObject</code> | properties for auth |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 
 <a name="DataExtension.postRetrieveTasks"></a>
@@ -1483,11 +1519,11 @@ clean up after deleting a metadata item
 
 <a name="DataExtension.retrieveForCache"></a>
 
-### DataExtension.retrieveForCache(buObject, [_], [isDeploy]) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code>
+### DataExtension.retrieveForCache(buObject, [_], [isDeploy]) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
 Retrieves folder metadata into local filesystem. Also creates a uniquePath attribute for each folder.
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.DataExtensionMap, type:string}&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1497,11 +1533,11 @@ Retrieves folder metadata into local filesystem. Also creates a uniquePath attri
 
 <a name="DataExtension.retrieveAsTemplate"></a>
 
-### DataExtension.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:DataExtension, type:string}&gt;</code>
+### DataExtension.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata: DataExtension, type: string}&gt;</code>
 Retrieves dataExtension metadata in template format.
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
-**Returns**: <code>Promise.&lt;{metadata:DataExtension, type:string}&gt;</code> - Promise of items  
+**Returns**: <code>Promise.&lt;{metadata: DataExtension, type: string}&gt;</code> - Promise of items  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1518,8 +1554,8 @@ DataExtensionField MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [DataExtensionField](#DataExtensionField) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [additionalFields], buObject)](#DataExtensionField.retrieve) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionFieldMap, type:string}&gt;</code>
-    * [.retrieveForCache([requestParams], [additionalFields])](#DataExtensionField.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionFieldMap, type:string}&gt;</code>
+    * [.retrieve(retrieveDir, [additionalFields], buObject)](#DataExtensionField.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionFieldMap, type: string}&gt;</code>
+    * [.retrieveForCache([requestParams], [additionalFields])](#DataExtensionField.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionFieldMap, type: string}&gt;</code>
     * [.convertToSortedArray(fieldsObj)](#DataExtensionField.convertToSortedArray) ⇒ <code>Array.&lt;TYPE.DataExtensionFieldItem&gt;</code>
     * [.sortDeFields(a, b)](#DataExtensionField.sortDeFields) ⇒ <code>boolean</code>
     * [.postRetrieveTasks(metadata, forDataExtension)](#DataExtensionField.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionFieldItem</code>
@@ -1530,11 +1566,11 @@ DataExtensionField MetadataType
 
 <a name="DataExtensionField.retrieve"></a>
 
-### DataExtensionField.retrieve(retrieveDir, [additionalFields], buObject) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionFieldMap, type:string}&gt;</code>
+### DataExtensionField.retrieve(retrieveDir, [additionalFields], buObject) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionFieldMap, type: string}&gt;</code>
 Retrieves all records and saves it to disk
 
 **Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.DataExtensionFieldMap, type:string}&gt;</code> - Promise of items  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.DataExtensionFieldMap, type: string}&gt;</code> - Promise of items  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1544,11 +1580,11 @@ Retrieves all records and saves it to disk
 
 <a name="DataExtensionField.retrieveForCache"></a>
 
-### DataExtensionField.retrieveForCache([requestParams], [additionalFields]) ⇒ <code>Promise.&lt;{metadata:TYPE.DataExtensionFieldMap, type:string}&gt;</code>
+### DataExtensionField.retrieveForCache([requestParams], [additionalFields]) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionFieldMap, type: string}&gt;</code>
 Retrieves all records for caching
 
 **Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.DataExtensionFieldMap, type:string}&gt;</code> - Promise of items  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.DataExtensionFieldMap, type: string}&gt;</code> - Promise of items  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2635,7 +2671,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.overrideKeyWithName(metadata, [warningMsg])](#MetadataType.overrideKeyWithName) ⇒ <code>void</code>
     * [.retrieve(retrieveDir, [additionalFields], buObject, [subType])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveChangelog([additionalFields], buObject, [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveChangelog([buObject], [additionalFields], [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.preDeployTasks(metadata, deployDir)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
@@ -2647,7 +2683,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.updateREST(metadataEntry, uri)](#MetadataType.updateREST) ⇒ <code>Promise</code>
     * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
     * [.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type:string}&gt;</code>
+    * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
     * [.parseResponseBody(body)](#MetadataType.parseResponseBody) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
     * [.removeNotCreateableFields(metadataEntry)](#MetadataType.removeNotCreateableFields) ⇒ <code>void</code>
@@ -2722,7 +2758,7 @@ Deploys metadata
 | metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 | retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
-| buObject | <code>Util.BuObject</code> | properties for auth |
+| buObject | <code>TYPE.BuObject</code> | properties for auth |
 
 <a name="MetadataType.postDeployTasks"></a>
 
@@ -2779,7 +2815,7 @@ Gets metadata from Marketing Cloud
 
 <a name="MetadataType.retrieveChangelog"></a>
 
-### MetadataType.retrieveChangelog([additionalFields], buObject, [subType]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MetadataType.retrieveChangelog([buObject], [additionalFields], [subType]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Gets metadata from Marketing Cloud
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -2787,8 +2823,8 @@ Gets metadata from Marketing Cloud
 
 | Param | Type | Description |
 | --- | --- | --- |
+| [buObject] | <code>TYPE.BuObject</code> | properties for auth |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
-| buObject | <code>TYPE.BuObject</code> | properties for auth |
 | [subType] | <code>string</code> | optionally limit to a single subtype |
 
 <a name="MetadataType.retrieveForCache"></a>
@@ -2941,11 +2977,11 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 
 <a name="MetadataType.retrieveREST"></a>
 
-### MetadataType.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables]) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type:string}&gt;</code>
+### MetadataType.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables]) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
 Retrieves Metadata for Rest Types
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type:string}&gt;</code> - Promise of item map (single item for templated result)  
+**Returns**: <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code> - Promise of item map (single item for templated result)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3326,9 +3362,9 @@ Query MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Query](#Query) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir)](#Query.retrieve) ⇒ <code>Promise.&lt;{metadata:TYPE.QueryMap, type:string}&gt;</code>
-    * [.retrieveForCache()](#Query.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:TYPE.QueryMap, type:string}&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Query.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:Query, type:string}&gt;</code>
+    * [.retrieve(retrieveDir)](#Query.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code>
+    * [.retrieveForCache()](#Query.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Query.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: Query, type: string}&gt;</code>
     * [.postRetrieveTasks(metadata, _, isTemplating)](#Query.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.create(query)](#Query.create) ⇒ <code>Promise</code>
     * [.update(query)](#Query.update) ⇒ <code>Promise</code>
@@ -3338,11 +3374,11 @@ Query MetadataType
 
 <a name="Query.retrieve"></a>
 
-### Query.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata:TYPE.QueryMap, type:string}&gt;</code>
+### Query.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code>
 Retrieves Metadata of queries
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.QueryMap, type:string}&gt;</code> - Promise of metadata  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3350,18 +3386,18 @@ Retrieves Metadata of queries
 
 <a name="Query.retrieveForCache"></a>
 
-### Query.retrieveForCache() ⇒ <code>Promise.&lt;{metadata:TYPE.QueryMap, type:string}&gt;</code>
+### Query.retrieveForCache() ⇒ <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code>
 Retrieves query metadata for caching
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.QueryMap, type:string}&gt;</code> - Promise of metadata  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code> - Promise of metadata  
 <a name="Query.retrieveAsTemplate"></a>
 
-### Query.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:Query, type:string}&gt;</code>
+### Query.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata: Query, type: string}&gt;</code>
 Retrieve a specific Query by Name
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>Promise.&lt;{metadata:Query, type:string}&gt;</code> - Promise of metadata  
+**Returns**: <code>Promise.&lt;{metadata: Query, type: string}&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3551,9 +3587,9 @@ Script MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Script](#Script) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir)](#Script.retrieve) ⇒ <code>Promise.&lt;{metadata:TYPE.ScriptMap, type:string}&gt;</code>
-    * [.retrieveForCache()](#Script.retrieveForCache) ⇒ <code>Promise.&lt;{metadata:TYPE.ScriptMap, type:string}&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Script.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata:TYPE.Script, type:string}&gt;</code>
+    * [.retrieve(retrieveDir)](#Script.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.ScriptMap, type: string}&gt;</code>
+    * [.retrieveForCache()](#Script.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.ScriptMap, type: string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Script.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: TYPE.Script, type: string}&gt;</code>
     * [.postRetrieveTasks(metadata, [_], [isTemplating])](#Script.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.update(script)](#Script.update) ⇒ <code>Promise</code>
     * [.create(script)](#Script.create) ⇒ <code>Promise</code>
@@ -3564,12 +3600,12 @@ Script MetadataType
 
 <a name="Script.retrieve"></a>
 
-### Script.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata:TYPE.ScriptMap, type:string}&gt;</code>
+### Script.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata: TYPE.ScriptMap, type: string}&gt;</code>
 Retrieves Metadata of Script
 Endpoint /automation/v1/scripts/ return all Scripts with all details.
 
 **Kind**: static method of [<code>Script</code>](#Script)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.ScriptMap, type:string}&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.ScriptMap, type: string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3577,18 +3613,18 @@ Endpoint /automation/v1/scripts/ return all Scripts with all details.
 
 <a name="Script.retrieveForCache"></a>
 
-### Script.retrieveForCache() ⇒ <code>Promise.&lt;{metadata:TYPE.ScriptMap, type:string}&gt;</code>
+### Script.retrieveForCache() ⇒ <code>Promise.&lt;{metadata: TYPE.ScriptMap, type: string}&gt;</code>
 Retrieves script metadata for caching
 
 **Kind**: static method of [<code>Script</code>](#Script)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.ScriptMap, type:string}&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.ScriptMap, type: string}&gt;</code> - Promise  
 <a name="Script.retrieveAsTemplate"></a>
 
-### Script.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata:TYPE.Script, type:string}&gt;</code>
+### Script.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata: TYPE.Script, type: string}&gt;</code>
 Retrieve a specific Script by Name
 
 **Kind**: static method of [<code>Script</code>](#Script)  
-**Returns**: <code>Promise.&lt;{metadata:TYPE.Script, type:string}&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.Script, type: string}&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3873,6 +3909,7 @@ CLI entry for SFMC DevTools
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
+    * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
     * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
@@ -3920,6 +3957,18 @@ SFMC accepts multiple false values for Boolean attributes for which we are check
 | Param | Type | Description |
 | --- | --- | --- |
 | attrValue | <code>\*</code> | value |
+
+<a name="Util._isValidType"></a>
+
+### Util.\_isValidType(selectedType) ⇒ <code>boolean</code>
+helper for retrieve, retrieveAsTemplate and deploy
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - type ok or not  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| selectedType | <code>string</code> | type or type-subtype |
 
 <a name="Util.getDefaultProperties"></a>
 
@@ -5481,6 +5530,7 @@ Util that contains logger and simple util methods
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
+    * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
     * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
@@ -5528,6 +5578,18 @@ SFMC accepts multiple false values for Boolean attributes for which we are check
 | Param | Type | Description |
 | --- | --- | --- |
 | attrValue | <code>\*</code> | value |
+
+<a name="Util._isValidType"></a>
+
+### Util.\_isValidType(selectedType) ⇒ <code>boolean</code>
+helper for retrieve, retrieveAsTemplate and deploy
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - type ok or not  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| selectedType | <code>string</code> | type or type-subtype |
 
 <a name="Util.getDefaultProperties"></a>
 
@@ -5714,4 +5776,289 @@ initiate winston logger
 | client_secret | <code>string</code> | client_secret for sfmc-sdk auth |
 | account_id | <code>number</code> | mid of business unit to auth against |
 | auth_url | <code>string</code> | authentication base url |
+
+<a name="TemplateMap"></a>
+
+## TemplateMap : <code>object.&lt;string, string&gt;</code>
+**Kind**: global typedef  
+<a name="MetadataTypeItemObj"></a>
+
+## MetadataTypeItemObj : <code>object.&lt;string, any&gt;</code>
+**Kind**: global typedef  
+<a name="CodeExtractItem"></a>
+
+## CodeExtractItem : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| json | <code>MetadataTypeItem</code> | metadata of one item w/o code |
+| codeArr | [<code>Array.&lt;CodeExtract&gt;</code>](#CodeExtract) | list of code snippets in this item |
+| subFolder | <code>Array.&lt;string&gt;</code> | mostly set to null, otherwise list of subfolders |
+
+<a name="CodeExtract"></a>
+
+## CodeExtract : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| subFolder | <code>Array.&lt;string&gt;</code> | mostly set to null, otherwise subfolders path split into elements |
+| fileName | <code>string</code> | name of file w/o extension |
+| fileExt | <code>string</code> | file extension |
+| content | <code>string</code> | file content |
+| [encoding] | <code>&#x27;base64&#x27;</code> | optional for binary files |
+
+<a name="CodeExtractItem"></a>
+
+## CodeExtractItem : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | name |
+| key | <code>string</code> | key |
+| description | <code>string</code> | - |
+| targetKey | <code>string</code> | key of target data extension |
+| createdDate | <code>string</code> | e.g. "2020-09-14T01:42:03.017" |
+| modifiedDate | <code>string</code> | e.g. "2020-09-14T01:42:03.017" |
+| targetUpdateTypeName | <code>&#x27;Overwrite&#x27;</code> \| <code>&#x27;Update&#x27;</code> \| <code>&#x27;Append&#x27;</code> | defines how the query writes into the target data extension |
+| [targetUpdateTypeId] | <code>0</code> \| <code>1</code> \| <code>2</code> | mapped to targetUpdateTypeName via this.definition.targetUpdateTypeMapping |
+| [targetId] | <code>string</code> | Object ID of DE (removed before save) |
+| [targetDescription] | <code>string</code> | Description DE (removed before save) |
+| isFrozen | <code>boolean</code> | looks like this is always set to false |
+| [queryText] | <code>string</code> | contains SQL query with line breaks converted to '\n'. The content is extracted during retrieval and written into a separate *.sql file |
+| [categoryId] | <code>string</code> | holds folder ID, replaced with r__folder_Path during retrieve |
+| r__folder_Path | <code>string</code> | folder path in which this DE is saved |
+| json | <code>QueryItem</code> | metadata of one item w/o code |
+| codeArr | [<code>Array.&lt;CodeExtract&gt;</code>](#CodeExtract) | list of code snippets in this item |
+| subFolder | <code>Array.&lt;string&gt;</code> | mostly set to null, otherwise list of subfolders |
+
+<a name="ScriptMap"></a>
+
+## ScriptMap : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | name |
+| key | <code>string</code> | key |
+| description | <code>string</code> | - |
+| createdDate | <code>string</code> | e.g. "2020-09-14T01:42:03.017" |
+| modifiedDate | <code>string</code> | e.g. "2020-09-14T01:42:03.017" |
+| [script] | <code>string</code> | contains script with line breaks converted to '\n'. The content is extracted during retrieval and written into a separate *.ssjs file |
+| [categoryId] | <code>string</code> | holds folder ID, replaced with r__folder_Path during retrieve |
+| r__folder_Path | <code>string</code> | folder path in which this DE is saved |
+
+<a name="AssetSubType"></a>
+
+## AssetSubType : <code>object.&lt;string, any&gt;</code>
+**Kind**: global typedef  
+<a name="DataExtensionFieldMap"></a>
+
+## DataExtensionFieldMap : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| [ObjectID] | <code>string</code> | id |
+| [CustomerKey] | <code>string</code> | key in format [DEkey].[FieldName] |
+| [DataExtension] | <code>object</code> | - |
+| DataExtension.CustomerKey | <code>string</code> | key of DE |
+| Name | <code>string</code> | name of field |
+| [Name_new] | <code>string</code> | custom attribute that is only used when trying to rename a field from Name to Name_new |
+| DefaultValue | <code>string</code> | empty string for not set |
+| IsRequired | <code>true</code> \| <code>false</code> | - |
+| IsPrimaryKey | <code>true</code> \| <code>false</code> | - |
+| Ordinal | <code>string</code> | 1, 2, 3, ... |
+| FieldType | <code>&#x27;Text&#x27;</code> \| <code>&#x27;Number&#x27;</code> \| <code>&#x27;Date&#x27;</code> \| <code>&#x27;Boolean&#x27;</code> \| <code>&#x27;Decimal&#x27;</code> \| <code>&#x27;EmailAddress&#x27;</code> \| <code>&#x27;Phone&#x27;</code> \| <code>&#x27;Locale&#x27;</code> | can only be set on create |
+| Scale | <code>string</code> | the number of places after the decimal that the field can hold; example: "0","1", ... |
+
+<a name="DataExtensionMap"></a>
+
+## DataExtensionMap : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| CustomerKey | <code>string</code> | key |
+| Name | <code>string</code> | name |
+| Description | <code>string</code> | - |
+| IsSendable | <code>true</code> \| <code>false</code> | - |
+| IsTestable | <code>true</code> \| <code>false</code> | - |
+| SendableDataExtensionField | <code>object</code> | - |
+| SendableDataExtensionField.Name | <code>string</code> | - |
+| SendableSubscriberField | <code>object</code> | - |
+| SendableSubscriberField.Name | <code>string</code> | - |
+| Fields | <code>Array.&lt;DataExtensionFieldItem&gt;</code> | list of DE fields |
+| r__folder_ContentType | <code>&#x27;dataextension&#x27;</code> \| <code>&#x27;salesforcedataextension&#x27;</code> \| <code>&#x27;synchronizeddataextension&#x27;</code> \| <code>&#x27;shared\_dataextension&#x27;</code> \| <code>&#x27;shared\_salesforcedataextension&#x27;</code> | retrieved from associated folder |
+| r__folder_Path | <code>string</code> | folder path in which this DE is saved |
+| [CategoryID] | <code>string</code> | holds folder ID, replaced with r__folder_Path during retrieve |
+| [r__dataExtensionTemplate_Name] | <code>string</code> | name of optionally associated DE template |
+| [Template] | <code>object</code> | - |
+| [Template.CustomerKey] | <code>string</code> | key of optionally associated DE teplate |
+
+<a name="AccountUserDocument"></a>
+
+## AccountUserDocument : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| TYPE | <code>string</code> | user.type__c |
+| UserID | <code>string</code> | user.UserID |
+| AccountUserID | <code>string</code> | user.AccountUserID |
+| CustomerKey | <code>string</code> | user.CustomerKey |
+| Name | <code>string</code> | user.Name |
+| Email | <code>string</code> | user.Email |
+| NotificationEmailAddress | <code>string</code> | user.NotificationEmailAddress |
+| ActiveFlag | <code>string</code> | user.ActiveFlag === true ? '✓' : '-' |
+| IsAPIUser | <code>string</code> | user.IsAPIUser === true ? '✓' : '-' |
+| MustChangePassword | <code>string</code> | user.MustChangePassword === true ? '✓' : '-' |
+| DefaultBusinessUnit | <code>string</code> | defaultBUName |
+| AssociatedBusinessUnits__c | <code>string</code> | associatedBus |
+| Roles | <code>string</code> | roles |
+| UserPermissions | <code>string</code> | userPermissions |
+| LastSuccessfulLogin | <code>string</code> | this.timeSinceDate(user.LastSuccessfulLogin) |
+| CreatedDate | <code>string</code> | user.CreatedDate |
+| ModifiedDate | <code>string</code> | user.ModifiedDate |
+
+<a name="AutomationActivity"></a>
+
+## AutomationActivity : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | name (not key) of activity |
+| [objectTypeId] | <code>string</code> | Id of assoicated activity type; see this.definition.activityTypeMapping |
+| [activityObjectId] | <code>string</code> | Object Id of assoicated metadata item |
+| displayOrder | <code>number</code> | order within step; starts with 1 or higher number |
+| r__type | <code>string</code> | see this.definition.activityTypeMapping |
+
+<a name="AutomationStep"></a>
+
+## AutomationStep : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | description |
+| [annotation] | <code>string</code> | equals AutomationStep.name |
+| step | <code>number</code> | step iterator |
+| [stepNumber] | <code>number</code> | step iterator, automatically set during deployment |
+| activities | [<code>Array.&lt;AutomationActivity&gt;</code>](#AutomationActivity) | - |
+
+<a name="AutomationSchedule"></a>
+
+## AutomationSchedule : <code>object</code>
+REST format
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| typeId | <code>number</code> | ? |
+| startDate | <code>string</code> | example: '2021-05-07T09:00:00' |
+| endDate | <code>string</code> | example: '2021-05-07T09:00:00' |
+| icalRecur | <code>string</code> | example: 'FREQ=DAILY;UNTIL=20790606T160000;INTERVAL=1' |
+| timezoneName | <code>string</code> | example: 'W. Europe Standard Time'; see this.definition.timeZoneMapping |
+| [timezoneId] | <code>number</code> | see this.definition.timeZoneMapping |
+
+<a name="AutomationScheduleSoap"></a>
+
+## AutomationScheduleSoap : <code>object</code>
+SOAP format
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| Recurrence | <code>object</code> | - |
+| Recurrence.$ | <code>object</code> | {'xsi:type': keyStem + 'lyRecurrence'} |
+| [Recurrence.YearlyRecurrencePatternType] | <code>&#x27;ByYear&#x27;</code> | * currently not supported by tool * |
+| [Recurrence.MonthlyRecurrencePatternType] | <code>&#x27;ByMonth&#x27;</code> | * currently not supported by tool * |
+| [Recurrence.WeeklyRecurrencePatternType] | <code>&#x27;ByWeek&#x27;</code> | * currently not supported by tool * |
+| [Recurrence.DailyRecurrencePatternType] | <code>&#x27;ByDay&#x27;</code> | - |
+| [Recurrence.MinutelyRecurrencePatternType] | <code>&#x27;Interval&#x27;</code> | - |
+| [Recurrence.HourlyRecurrencePatternType] | <code>&#x27;Interval&#x27;</code> | - |
+| [Recurrence.YearInterval] | <code>number</code> | 1..n * currently not supported by tool * |
+| [Recurrence.MonthInterval] | <code>number</code> | 1..n * currently not supported by tool * |
+| [Recurrence.WeekInterval] | <code>number</code> | 1..n * currently not supported by tool * |
+| [Recurrence.DayInterval] | <code>number</code> | 1..n |
+| [Recurrence.HourInterval] | <code>number</code> | 1..n |
+| [Recurrence.MinuteInterval] | <code>number</code> | 1..n |
+| _interval | <code>number</code> | internal variable for CLI output only |
+| TimeZone | <code>object</code> | - |
+| TimeZone.ID | <code>number</code> | AutomationSchedule.timezoneId |
+| _timezoneString | <code>string</code> | internal variable for CLI output only |
+| StartDateTime | <code>string</code> | AutomationSchedule.startDate |
+| EndDateTime | <code>string</code> | AutomationSchedule.endDate |
+| _StartDateTime | <code>string</code> | AutomationSchedule.startDate; internal variable for CLI output only |
+| RecurrenceRangeType | <code>&#x27;EndOn&#x27;</code> \| <code>&#x27;EndAfter&#x27;</code> | set to 'EndOn' if AutomationSchedule.icalRecur contains 'UNTIL'; otherwise to 'EndAfter' |
+| Occurrences | <code>number</code> | only exists if RecurrenceRangeType=='EndAfter' |
+
+<a name="AutomationItem"></a>
+
+## AutomationItem : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| [id] | <code>string</code> | Object Id |
+| key | <code>string</code> | key |
+| name | <code>string</code> | name |
+| description | <code>string</code> | - |
+| type | <code>&#x27;scheduled&#x27;</code> \| <code>&#x27;triggered&#x27;</code> | Starting Source = Schedule / File Drop |
+| status | <code>&#x27;Scheduled&#x27;</code> \| <code>&#x27;Running&#x27;</code> | - |
+| [schedule] | [<code>AutomationSchedule</code>](#AutomationSchedule) | only existing if type=scheduled |
+| [fileTrigger] | <code>object</code> | only existing if type=triggered |
+| fileTrigger.fileNamingPattern | <code>string</code> | - |
+| fileTrigger.fileNamePatternTypeId | <code>string</code> | - |
+| fileTrigger.folderLocationText | <code>string</code> | - |
+| fileTrigger.queueFiles | <code>string</code> | - |
+| [startSource] | <code>object</code> | - |
+| [startSource.schedule] | [<code>AutomationSchedule</code>](#AutomationSchedule) | rewritten to AutomationItem.schedule |
+| [startSource.fileDrop] | <code>object</code> | rewritten to AutomationItem.fileTrigger |
+| startSource.fileDrop.fileNamingPattern | <code>string</code> | - |
+| startSource.fileDrop.fileNamePatternTypeId | <code>string</code> | - |
+| startSource.fileDrop.folderLocation | <code>string</code> | - |
+| startSource.fileDrop.queueFiles | <code>string</code> | - |
+| startSource.typeId | <code>number</code> | - |
+| steps | [<code>Array.&lt;AutomationStep&gt;</code>](#AutomationStep) | - |
+| r__folder_Path | <code>string</code> | folder path |
+| [categoryId] | <code>string</code> | holds folder ID, replaced with r__folder_Path during retrieve |
+
+<a name="AutomationItemObj"></a>
+
+## AutomationItemObj : <code>object.&lt;string, AutomationItem&gt;</code>
+**Kind**: global typedef  
+<a name="skipInteraction"></a>
+
+## skipInteraction : <code>object</code>
+signals what to insert automatically for things usually asked via wizard
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| client_id | <code>string</code> | client id of installed package |
+| client_secret | <code>string</code> | client secret of installed package |
+| auth_url | <code>string</code> | tenant specific auth url of installed package |
+| account_id | <code>number</code> | MID of the Parent Business Unit |
+| credentialName | <code>string</code> | how you would like the credential to be named |
+| gitRemoteUrl | <code>string</code> | URL of Git remote server |
 

@@ -626,12 +626,13 @@ mcdev retrieve MyProject
 
 **retrieve specific type:**
 
-If you want to retrieve only a certain metadata type, let's say `script`, then pass this type in as a second parameter. The other types will remain untouched and in place, if you've previously retrieved them.
+If you want to retrieve only a certain metadata type, let's say `script`, then pass this type in as a second parameter. The other types will remain untouched and in place, if you've previously retrieved them.<br>Similarly, you can pass in multiple comma-separated types but make sure to put them in double-quotes in order to work on all systems.
 
 _Example:_
 
 ```bash
 mcdev retrieve MyProject/DEV script
+mcdev retrieve MyProject/DEV "script,query,automation"
 ```
 
 **retrieve all BUs:**
@@ -672,12 +673,13 @@ Similarly to `mcdev retrieve` you can also use the interactive mode to select cr
 
 **deploy sepcific type:**
 
-If you want to deploy only a certain metadata type, let's say `dataExtension`, then pass this type in as a second parameter. If there are other types in the current BU's deploy folder, these will be ignored and hence _not_ uploaded.
+If you want to deploy only a certain metadata type, let's say `dataExtension`, then pass this type in as a second parameter. If there are other types in the current BU's deploy folder, these will be ignored and hence _not_ uploaded.<br>Similarly, you can pass in multiple comma-separated types but make sure to put them in double-quotes in order to work on all systems.
 
 _Example:_
 
 ```bash
 mcdev deploy MyProject/DEV dataExtension
+mcdev deploy MyProject/DEV "script,dataExtension,importFile"
 ```
 
 **deploy all BUs:**

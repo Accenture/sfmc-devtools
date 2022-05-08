@@ -17,7 +17,7 @@ const resourceFactory = require('./resourceFactory');
  *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
- * @returns {Promise<string>} file in string form
+ * @returns {Promise.<string>} file in string form
  */
 exports.getActualFile = (customerKey, type) =>
     File.readJSON(`./retrieve/testInstance/testBU/${type}/${customerKey}.${type}-meta.json`);
@@ -26,7 +26,7 @@ exports.getActualFile = (customerKey, type) =>
  *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
- * @returns {Promise<string>} file in string form
+ * @returns {Promise.<string>} file in string form
  */
 exports.getActualDeployFile = (customerKey, type) =>
     File.readJSON(`./deploy/testInstance/testBU/${type}/${customerKey}.${type}-meta.json`);
@@ -35,7 +35,7 @@ exports.getActualDeployFile = (customerKey, type) =>
  *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
- * @returns {Promise<string>} file in string form
+ * @returns {Promise.<string>} file in string form
  */
 exports.getActualTemplate = (customerKey, type) =>
     File.readJSON(`./template/${type}/${customerKey}.${type}-meta.json`);
@@ -46,7 +46,7 @@ exports.getActualTemplate = (customerKey, type) =>
  * @param {number} mid of Business Unit
  * @param {string} type of metadata
  * @param {string} action of SOAP request
- * @returns {Promise<string>} file in string form
+ * @returns {Promise.<string>} file in string form
  */
 exports.getExpectedFile = (mid, type, action) =>
     File.readJSON(path.join('test', 'resources', mid, type, action + '-expected.json'));

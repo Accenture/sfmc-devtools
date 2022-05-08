@@ -13,7 +13,7 @@ describe('retrieve', () => {
 
     it('Should retrieve a data extension', async () => {
         // WHEN
-        await handler.retrieve('testInstance/testBU', 'dataExtension');
+        await handler.retrieve('testInstance/testBU', ['dataExtension']);
         // THEN
         // get results from cache
         const result = cache.getCache();
@@ -36,7 +36,7 @@ describe('retrieve', () => {
     });
     it('Should create & upsert a data extension', async () => {
         // WHEN
-        await handler.deploy('testInstance/testBU', 'dataExtension');
+        await handler.deploy('testInstance/testBU', ['dataExtension']);
         // THEN
 
         // get results from cache
