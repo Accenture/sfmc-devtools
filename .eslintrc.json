@@ -25,9 +25,11 @@
             "mode": "jsdoc",
             "preferredTypes": {
                 "Object": "object",
+                "object.<>": "Object.<>",
                 "object<>": "Object.<>",
                 "Object<>": "Object.<>",
                 "promise": "Promise",
+                "promise.<>": "Promise.<>",
                 "promise<>": "Promise.<>",
                 "Promise<>": "Promise.<>"
             }
