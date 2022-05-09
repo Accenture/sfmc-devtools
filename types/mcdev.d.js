@@ -137,14 +137,14 @@
  * @property {string} name name (not key) of activity
  * @property {string} [objectTypeId] Id of assoicated activity type; see this.definition.activityTypeMapping
  * @property {string} [activityObjectId] Object Id of assoicated metadata item
- * @property {number} displayOrder order within step; starts with 1 or higher number
+ * @property {number} [displayOrder] order within step; starts with 1 or higher number
  * @property {string} r__type see this.definition.activityTypeMapping
  */
 /**
  * @typedef {object}  AutomationStep
  * @property {string} name description
  * @property {string} [annotation] equals AutomationStep.name
- * @property {number} step step iterator
+ * @property {number} [step] step iterator; starts with 1
  * @property {number} [stepNumber] step iterator, automatically set during deployment
  * @property {AutomationActivity[]} activities -
  */
@@ -190,7 +190,7 @@
  * @property {string} name name
  * @property {string} description -
  * @property {'scheduled'|'triggered'} type Starting Source = Schedule / File Drop
- * @property {'Scheduled'|'Running'} status -
+ * @property {'Scheduled'|'Running'|'PausedSchedule'} status -
  * @property {AutomationSchedule} [schedule] only existing if type=scheduled
  * @property {object} [fileTrigger] only existing if type=triggered
  * @property {string} fileTrigger.fileNamingPattern -
