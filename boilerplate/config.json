@@ -31,6 +31,7 @@
         "dataExtension": "docs/dataExtension/",
         "deltaPackage": "docs/deltaPackage/",
         "deploy": "deploy/",
+        "docs": "docs/",
         "retrieve": "retrieve/",
         "roles": "docs/roles/",
         "template": "template/",
@@ -80,7 +81,7 @@
         }
     },
     "metaDataTypes": {
-        "documentOnRetrieve": ["accountUser", "dataExtension", "role"],
+        "documentOnRetrieve": ["accountUser", "automation", "dataExtension", "role"],
         "retrieve": []
     }
 }
