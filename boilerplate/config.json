@@ -26,17 +26,13 @@
         "serverTimeOffset": -6
     },
     "directories": {
-        "badKeys": "docs/badKeys/",
         "businessUnits": "businessUnits/",
-        "dataExtension": "docs/dataExtension/",
         "deltaPackage": "docs/deltaPackage/",
         "deploy": "deploy/",
         "docs": "docs/",
         "retrieve": "retrieve/",
-        "roles": "docs/roles/",
         "template": "template/",
-        "templateBuilds": ["retrieve/", "deploy/"],
-        "users": "docs/users/"
+        "templateBuilds": ["retrieve/", "deploy/"]
     },
     "markets": {
         "DEV-NL": {
