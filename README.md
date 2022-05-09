@@ -544,6 +544,7 @@ Currently supported types:
 
 | Name           | CLI Argument    |
 | -------------- | --------------- |
+| Automation     | `automation`    |
 | Data Extension | `dataExtension` |
 | Role           | `role`          |
 | User           | `accountUser`   |
