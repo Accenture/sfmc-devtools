@@ -114,7 +114,7 @@ describe('dataExtension', () => {
             const result = await handler.buildTemplate(
                 'testInstance/testBU',
                 'dataExtension',
-                'childBU_dataextension_test',
+                ['childBU_dataextension_test'],
                 'testMarket'
             );
             // WHEN
