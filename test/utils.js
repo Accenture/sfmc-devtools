@@ -2,6 +2,7 @@ const File = require('../lib/util/file');
 const path = require('path');
 const axios = require('axios');
 const MockAdapter = require('axios-mock-adapter');
+const auth = require('../lib/util/auth');
 const Util = require('../lib/util/util');
 
 // for some reason doesnt realize below reference
@@ -85,6 +86,7 @@ exports.mockSetup = () => {
  * @returns {void}
  */
 exports.mockReset = () => {
+    auth.clearSessions();
     apimock.restore();
 };
 /**
