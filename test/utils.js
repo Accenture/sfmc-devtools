@@ -56,7 +56,6 @@ exports.getExpectedFile = (mid, type, action) =>
  * @returns {void}
  */
 exports.mockSetup = () => {
-    //
     Util.setLoggingLevel({ debug: true });
     apimock = new MockAdapter(axios, { onNoMatch: 'throwException' });
     // set access_token to mid to allow for autorouting of mock to correct resources

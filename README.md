@@ -145,7 +145,7 @@ After the successful installation, you will now need to setup the connection to 
    5. Make sure you grant all available rights.
    6. Go to the access tab and grant it access to all Business Units that you want to use it for, but ensure that the Parent/Global Business Unit is among these.
       - _Why?_ Shared Data Extensions, roles, users, Business Unit info and some other metadata is internally stored solely on the parent Business Unit and hence can only be retrieved and updated via that BU.
-   7. Note down _Parent MID_,  _Client Id_, _Client Secret_ and _Authentication Base URI_.
+   7. Note down _EID_ (Parent MID),  _Client Id_, _Client Secret_ and _Authentication Base URI_.
 2. In your project folder
    1. Open a CLI in your project folder (e.g. `C:\repos\MyProject\` on Windows or `~/repos/MyProject/` on Mac)
    2. Run `mcdev init` to start the interactive setup wizard.
