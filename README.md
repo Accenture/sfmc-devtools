@@ -145,14 +145,14 @@ After the successful installation, you will now need to setup the connection to 
    5. Make sure you grant all available rights.
    6. Go to the access tab and grant it access to all Business Units that you want to use it for, but ensure that the Parent/Global Business Unit is among these.
       - _Why?_ Shared Data Extensions, roles, users, Business Unit info and some other metadata is internally stored solely on the parent Business Unit and hence can only be retrieved and updated via that BU.
-   7. Note down _Client Id_, _Client Secret_ and _Authentication Base URI_.
+   7. Note down _EID_ (Parent MID),  _Client Id_, _Client Secret_ and _Authentication Base URI_.
 2. In your project folder
    1. Open a CLI in your project folder (e.g. `C:\repos\MyProject\` on Windows or `~/repos/MyProject/` on Mac)
    2. Run `mcdev init` to start the interactive setup wizard.
       1. If not found yet, default configuration files will be copied into your project folder, copied by initializing an npm project and a local Git repository.
       2. The wizard will ask you to name your credential. The name you choose here will be used by all team members because the config is shared via Git.
          > Being specific here reduces the chance of deploying to the wrong server (instance) in stressful situations. We suggest you use something like `ClientName`, or `ClientName-ProjectName` if you have multiple projects with the same client. In case your project uses multiples instances you might like to use something like `Client-ProjectName-Sandbox` and `Client-ProjectName-PROD`.
-      3. It will then continue to ask for the client ID, client secret and Authentication Base URI.
+      3. It will then continue to ask for the EID (Parent MID), client ID, client secret and Authentication Base URI.
       4. The credentials will be automatically tested & your list of BUs downloaded until finally the central configuration file `.mcdevrc.json` gets created in your project folder.
       5. Last step is to download an initial backup and commit it into git. No worries - the wizard does that for you!
    3. If this is the first time you set up Accenture SFMC DevTools or you recently upgraded Accenture SFMC DevTools, please restart VS Code now! A pop-up will likely appear in the lower right corner prompting you to install recommended extensions.
@@ -171,13 +171,13 @@ After the successful installation, you will now need to setup the connection to 
 If Accenture SFMC DevTools was already used to set up the project by somebody in your team, including all of the steps in the above chapter [Initial project configuration](#initial-project-setup), then basically you are in luck. Things are much faster from here on:
 
 1. Make sure you went through the chapters [Pre-requisites](#pre-requisites) and [Install Accenture SFMC DevTools](#install-mcdev). Do skip [Initial project configuration](#initial-project-setup)!
-2. Acquire the URL to your Git repo and Clone it to your computer. It should end on `.git`. Also ask your team lead for `Client ID`, `Client Secret` and the `Authentication Base URI`. You will need this later.
+2. Acquire the URL to your Git repo and Clone it to your computer. It should end on `.git`. Also ask your team lead for `EID (Parent MID)`, `Client ID`, `Client Secret` and the `Authentication Base URI`. You will need this later.
    > We recommend you create a folder like `C:\repos\` and clone the repo for your current project into that. By default, the repo name will be suggested as a sub-folder name which you should keep in place. That way you will always have one folder in which all your projects can be found in with their respective sub-folders.
 3. Open your main repo folder (e.g. `C:\repos\`) in the CLI of your choice (e.g. PowerShell on Windows)
 4. now execute `git clone YOUR-REPO-URL`. This will create a sub-folder with the name of the repo and download everything for you into it (e.g. `C:\repos\YOUR-REPO\`)
 5. Still in the command prompt, execute `cd YOUR-REPO`. This will switch your current folder (visible before the command prompt) to the new repo folder (`C:\repos\YOUR-REPO\`).
 6. Assuming you installed Accenture SFMC DevTools globally (recommended!), now execute `mcdev init`.
-7. At this point the system will recognize the previously set up project and ask you for `Client ID`, `Client Secret` and the `Authentication Base URI`.
+7. At this point the system will recognize the previously set up project and ask you for `EID (Parent MID)`, `Client ID`, `Client Secret` and the `Authentication Base URI`.
 8. Done.
 
 ### 2.5. Recommended additional installs
@@ -464,7 +464,7 @@ _Example - update credentials:_
 mcdev init yourCredentialName
 ```
 
-The interactive setup will ask you for a `Client ID` and `Client Secret` of an enhanced installed package (default since August 2019). It also asks for the `Authentication Base Uri`. Each installed package on a given SFMC instance shares the same tenant sub-domain and always shows you 3 domains (Auth, REST and SOAP).
+The interactive setup will ask you for an `EID (Parent MID)`, `Client ID` and `Client Secret` of an installed package. It also asks for the `Authentication Base Uri`. Each installed package on a given SFMC instance shares the same tenant sub-domain and always shows you 3 domains (Auth, REST and SOAP).
 
 Example url: `https://mcg123abcysykllg-0321cbs8bbt64.auth.marketingcloudapis.com`
 
@@ -473,10 +473,9 @@ Example url: `https://mcg123abcysykllg-0321cbs8bbt64.auth.marketingcloudapis.com
 > You can run this command without the interactive wizard asking questions using the `--skipInteraction` (or short`--yes`/`--y`) flag. In this case, you need to provide a few values in the command:
 >
 > ```bash
-> mcdev init --y.credentialsName "yourCustomCredentialName" --y.clientId "yourClientIdHere" --y.clientSecret "yourClientSecretHere" --y.tenant "yourTenantSubdomainHere" --y.gitRemoteUrl "https://my.git.server.com/myrepo.git"
+> mcdev init --y.credentialsName "yourCustomCredentialName" --y.client_id "yourClientIdHere" --y.client_secret "yourClientSecretHere" --y.auth_url "https://yourTenantSubdomainHere.auth.marketingcloudapis.com/" --y.gitRemoteUrl "https://my.git.server.com/myrepo.git" --y.account_id 00000000
 > ```
 >
-> To get the tenant subdomain, please take the Authentication Base Uri and extract the part after `https://` and before `.auth.marketingcloudapis.com`. In the above example this would therefore be `mcg123abcysykllg-0321cbs8bbt64`.
 
 #### 6.1.2. upgrade
 

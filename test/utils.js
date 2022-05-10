@@ -2,6 +2,7 @@ const File = require('../lib/util/file');
 const path = require('path');
 const axios = require('axios');
 const MockAdapter = require('axios-mock-adapter');
+const auth = require('../lib/util/auth');
 const Util = require('../lib/util/util');
 
 // for some reason doesnt realize below reference
@@ -69,8 +70,12 @@ exports.mockSetup = () => {
         .onAny(new RegExp(`^${escapeRegExp(resourceFactory.restUrl)}`))
         .reply((config) => resourceFactory.handleRESTRequest(config));
     fsmock({
+        '.prettierrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.prettierrc')),
         '.mcdevrc.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdevrc.json')),
         '.mcdev-auth.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdev-auth.json')),
+        'boilerplate/config.json': fsmock.load(
+            path.resolve(__dirname, '../boilerplate/config.json')
+        ),
         deploy: fsmock.load(path.resolve(__dirname, 'mockRoot/deploy')),
         test: fsmock.load(path.resolve(__dirname)),
     });
@@ -81,6 +86,7 @@ exports.mockSetup = () => {
  * @returns {void}
  */
 exports.mockReset = () => {
+    auth.clearSessions();
     apimock.restore();
 };
 /**
