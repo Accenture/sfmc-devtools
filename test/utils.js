@@ -71,9 +71,12 @@ exports.mockSetup = () => {
         .onAny(new RegExp(`^${escapeRegExp(resourceFactory.restUrl)}`))
         .reply((config) => resourceFactory.handleRESTRequest(config));
     fsmock({
+        '.prettierrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.prettierrc')),
         '.mcdevrc.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdevrc.json')),
         '.mcdev-auth.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdev-auth.json')),
-        '.prettierrc': fsmock.load(path.resolve(__dirname, 'mockRoot/.prettierrc')),
+        'boilerplate/config.json': fsmock.load(
+            path.resolve(__dirname, '../boilerplate/config.json')
+        ),
         deploy: fsmock.load(path.resolve(__dirname, 'mockRoot/deploy')),
         test: fsmock.load(path.resolve(__dirname)),
     });
