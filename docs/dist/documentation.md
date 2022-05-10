@@ -172,11 +172,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 ## Typedefs
 
 <dl>
-<dt><a href="#AuthObject">AuthObject</a> : <code>object</code></dt>
+<dt><a href="#TemplateMap">TemplateMap</a> : <code>Object.&lt;string, string&gt;</code></dt>
 <dd></dd>
-<dt><a href="#TemplateMap">TemplateMap</a> : <code>object.&lt;string, string&gt;</code></dt>
-<dd></dd>
-<dt><a href="#MetadataTypeItemObj">MetadataTypeItemObj</a> : <code>object.&lt;string, any&gt;</code></dt>
+<dt><a href="#MetadataTypeItemObj">MetadataTypeItemObj</a> : <code>Object.&lt;string, any&gt;</code></dt>
 <dd></dd>
 <dt><a href="#CodeExtractItem">CodeExtractItem</a> : <code>object</code></dt>
 <dd></dd>
@@ -186,7 +184,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dd></dd>
 <dt><a href="#ScriptMap">ScriptMap</a> : <code>object</code></dt>
 <dd></dd>
-<dt><a href="#AssetSubType">AssetSubType</a> : <code>object.&lt;string, any&gt;</code></dt>
+<dt><a href="#AssetSubType">AssetSubType</a> : <code>Object.&lt;string, any&gt;</code></dt>
 <dd></dd>
 <dt><a href="#DataExtensionFieldMap">DataExtensionFieldMap</a> : <code>object</code></dt>
 <dd></dd>
@@ -206,11 +204,13 @@ Provides default functionality that can be overwritten by child metadata type cl
 </dd>
 <dt><a href="#AutomationItem">AutomationItem</a> : <code>object</code></dt>
 <dd></dd>
-<dt><a href="#AutomationItemObj">AutomationItemObj</a> : <code>object.&lt;string, AutomationItem&gt;</code></dt>
+<dt><a href="#AutomationItemObj">AutomationItemObj</a> : <code>Object.&lt;string, AutomationItem&gt;</code></dt>
 <dd></dd>
 <dt><a href="#skipInteraction">skipInteraction</a> : <code>object</code></dt>
 <dd><p>signals what to insert automatically for things usually asked via wizard</p>
 </dd>
+<dt><a href="#AuthObject">AuthObject</a> : <code>object</code></dt>
+<dd></dd>
 </dl>
 
 <a name="Builder"></a>
@@ -1559,7 +1559,7 @@ DataExtensionField MetadataType
     * [.convertToSortedArray(fieldsObj)](#DataExtensionField.convertToSortedArray) ⇒ <code>Array.&lt;TYPE.DataExtensionFieldItem&gt;</code>
     * [.sortDeFields(a, b)](#DataExtensionField.sortDeFields) ⇒ <code>boolean</code>
     * [.postRetrieveTasks(metadata, forDataExtension)](#DataExtensionField.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionFieldItem</code>
-    * [.prepareDeployColumnsOnUpdate(deployColumns, deKey)](#DataExtensionField.prepareDeployColumnsOnUpdate) ⇒ <code>object.&lt;string, TYPE.DataExtensionFieldItem&gt;</code>
+    * [.prepareDeployColumnsOnUpdate(deployColumns, deKey)](#DataExtensionField.prepareDeployColumnsOnUpdate) ⇒ <code>Object.&lt;string, TYPE.DataExtensionFieldItem&gt;</code>
     * [.deleteByKey(buObject, customerKey)](#DataExtensionField.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.deleteByKeySOAP(buObject, customerKey, [handleOutside])](#DataExtensionField.deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#DataExtensionField.postDeleteTasks) ⇒ <code>void</code>
@@ -1631,12 +1631,12 @@ manages post retrieve steps
 
 <a name="DataExtensionField.prepareDeployColumnsOnUpdate"></a>
 
-### DataExtensionField.prepareDeployColumnsOnUpdate(deployColumns, deKey) ⇒ <code>object.&lt;string, TYPE.DataExtensionFieldItem&gt;</code>
+### DataExtensionField.prepareDeployColumnsOnUpdate(deployColumns, deKey) ⇒ <code>Object.&lt;string, TYPE.DataExtensionFieldItem&gt;</code>
 Mofifies passed deployColumns for update by mapping ObjectID to their target column's values.
 Removes FieldType field if its the same in deploy and target column, because it results in an error even if its of the same type
 
 **Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
-**Returns**: <code>object.&lt;string, TYPE.DataExtensionFieldItem&gt;</code> - existing fields by their original name to allow re-adding FieldType after update  
+**Returns**: <code>Object.&lt;string, TYPE.DataExtensionFieldItem&gt;</code> - existing fields by their original name to allow re-adding FieldType after update  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5734,8 +5734,8 @@ configures what is displayed in the console
 
 | Param | Type | Description |
 | --- | --- | --- |
-| userList | <code>object.&lt;string, string&gt;</code> | user-id > user-name map |
-| item | <code>object.&lt;string, string&gt;</code> | single metadata item |
+| userList | <code>Object.&lt;string, string&gt;</code> | user-id > user-name map |
+| item | <code>Object.&lt;string, string&gt;</code> | single metadata item |
 | fieldname | <code>string</code> | name of field containing the info |
 
 <a name="setupSDK"></a>
@@ -5749,7 +5749,7 @@ Returns an SDK instance to be used for API calls
 | Param | Type | Description |
 | --- | --- | --- |
 | credentialKey | <code>string</code> | key for specific BU |
-| authObject | [<code>AuthObject</code>](#AuthObject) | credentials for specific BU |
+| authObject | <code>TYPE.AuthObject</code> | credentials for specific BU |
 
 <a name="createNewLoggerTransport"></a>
 
@@ -5764,26 +5764,13 @@ wrapper around our standard winston logging to console and logfile
 initiate winston logger
 
 **Kind**: global function  
-<a name="AuthObject"></a>
-
-## AuthObject : <code>object</code>
-**Kind**: global typedef  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| client_id | <code>string</code> | client_id client_id for sfmc-sdk auth |
-| client_secret | <code>string</code> | client_secret for sfmc-sdk auth |
-| account_id | <code>number</code> | mid of business unit to auth against |
-| auth_url | <code>string</code> | authentication base url |
-
 <a name="TemplateMap"></a>
 
-## TemplateMap : <code>object.&lt;string, string&gt;</code>
+## TemplateMap : <code>Object.&lt;string, string&gt;</code>
 **Kind**: global typedef  
 <a name="MetadataTypeItemObj"></a>
 
-## MetadataTypeItemObj : <code>object.&lt;string, any&gt;</code>
+## MetadataTypeItemObj : <code>Object.&lt;string, any&gt;</code>
 **Kind**: global typedef  
 <a name="CodeExtractItem"></a>
 
@@ -5856,7 +5843,7 @@ initiate winston logger
 
 <a name="AssetSubType"></a>
 
-## AssetSubType : <code>object.&lt;string, any&gt;</code>
+## AssetSubType : <code>Object.&lt;string, any&gt;</code>
 **Kind**: global typedef  
 <a name="DataExtensionFieldMap"></a>
 
@@ -6043,7 +6030,7 @@ SOAP format
 
 <a name="AutomationItemObj"></a>
 
-## AutomationItemObj : <code>object.&lt;string, AutomationItem&gt;</code>
+## AutomationItemObj : <code>Object.&lt;string, AutomationItem&gt;</code>
 **Kind**: global typedef  
 <a name="skipInteraction"></a>
 
@@ -6061,4 +6048,17 @@ signals what to insert automatically for things usually asked via wizard
 | account_id | <code>number</code> | MID of the Parent Business Unit |
 | credentialName | <code>string</code> | how you would like the credential to be named |
 | gitRemoteUrl | <code>string</code> | URL of Git remote server |
+
+<a name="AuthObject"></a>
+
+## AuthObject : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| client_id | <code>string</code> | client_id client_id for sfmc-sdk auth |
+| client_secret | <code>string</code> | client_secret for sfmc-sdk auth |
+| account_id | <code>number</code> | mid of business unit to auth against |
+| auth_url | <code>string</code> | authentication base url |
 

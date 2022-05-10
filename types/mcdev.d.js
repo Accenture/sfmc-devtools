@@ -10,14 +10,14 @@
  * @property {string} [credential] name of the credential to interact with
  */
 /**
- * @typedef {object.<string, string>} TemplateMap
+ * @typedef {Object.<string, string>} TemplateMap
  */
 
 /**
- * @typedef {object.<string, any>} MetadataTypeItem
- * @typedef {object.<string, MetadataTypeItem>} MetadataTypeMap
- * @typedef {object.<string, MetadataTypeMap>} MultiMetadataTypeMap
- * @typedef {object.<string, MetadataTypeItem[]>} MultiMetadataTypeList
+ * @typedef {Object.<string, any>} MetadataTypeItem
+ * @typedef {Object.<string, MetadataTypeItem>} MetadataTypeMap
+ * @typedef {Object.<string, MetadataTypeMap>} MultiMetadataTypeMap
+ * @typedef {Object.<string, MetadataTypeItem[]>} MultiMetadataTypeList
  * @typedef {{metadata:MetadataTypeMap,type:string}} MetadataTypeMapObj
  * @typedef {{metadata:MetadataTypeItem,type:string}} MetadataTypeItemObj
  */
@@ -52,7 +52,7 @@
  * @property {string} [queryText] contains SQL query with line breaks converted to '\n'. The content is extracted during retrieval and written into a separate *.sql file
  * @property {string} [categoryId] holds folder ID, replaced with r__folder_Path during retrieve
  * @property {string} r__folder_Path folder path in which this DE is saved
- * @typedef {object.<string, QueryItem>} QueryMap
+ * @typedef {Object.<string, QueryItem>} QueryMap
  * @typedef {object} CodeExtractItem
  * @property {QueryItem} json metadata of one item w/o code
  * @property {CodeExtract[]} codeArr list of code snippets in this item
@@ -68,11 +68,11 @@
  * @property {string} [script] contains script with line breaks converted to '\n'. The content is extracted during retrieval and written into a separate *.ssjs file
  * @property {string} [categoryId] holds folder ID, replaced with r__folder_Path during retrieve
  * @property {string} r__folder_Path folder path in which this DE is saved
- * @typedef {object.<string, ScriptItem>} ScriptMap
+ * @typedef {Object.<string, ScriptItem>} ScriptMap
  */
 /**
- * @typedef {object.<string, any>} AssetItem
- * @typedef {object.<string, AssetItem>} AssetMap
+ * @typedef {Object.<string, any>} AssetItem
+ * @typedef {Object.<string, AssetItem>} AssetMap
  * @typedef {'archive'|'asset'|'audio'|'block'|'code'|'document'|'image'|'message'|'other'|'rawimage'|'template'|'textfile'|'video'} AssetSubType
  */
 /**
@@ -89,7 +89,7 @@
  * @property {string} Ordinal 1, 2, 3, ...
  * @property {'Text'|'Number'|'Date'|'Boolean'|'Decimal'|'EmailAddress'|'Phone'|'Locale'} FieldType can only be set on create
  * @property {string} Scale the number of places after the decimal that the field can hold; example: "0","1", ...
- * @typedef {object.<string, DataExtensionFieldItem>} DataExtensionFieldMap
+ * @typedef {Object.<string, DataExtensionFieldItem>} DataExtensionFieldMap
  */
 /**
  * @typedef {object} DataExtensionItem
@@ -109,7 +109,7 @@
  * @property {string} [r__dataExtensionTemplate_Name] name of optionally associated DE template
  * @property {object} [Template] -
  * @property {string} [Template.CustomerKey] key of optionally associated DE teplate
- * @typedef {object.<string, DataExtensionItem>} DataExtensionMap
+ * @typedef {Object.<string, DataExtensionItem>} DataExtensionMap
  */
 /**
  * @typedef {object} AccountUserDocument
@@ -210,7 +210,7 @@
  * @property {string} [categoryId] holds folder ID, replaced with r__folder_Path during retrieve
  */
 /**
- * @typedef {object.<string, AutomationItem>} AutomationMap
+ * @typedef {Object.<string, AutomationItem>} AutomationMap
  * @typedef {{metadata:AutomationMap,type:string}} AutomationMapObj
  * @typedef {{metadata:AutomationItem,type:string}} AutomationItemObj
  */
@@ -224,4 +224,13 @@
  * @property {string} credentialName how you would like the credential to be named
  * @property {string} gitRemoteUrl URL of Git remote server
  */
+
+/**
+ * @typedef {object} AuthObject
+ * @property {string} client_id client_id client_id for sfmc-sdk auth
+ * @property {string} client_secret client_secret for sfmc-sdk auth
+ * @property {number} account_id mid of business unit to auth against
+ * @property {string} auth_url authentication base url
+ */
+
 module.exports = {};
