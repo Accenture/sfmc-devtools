@@ -2810,8 +2810,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.saveResults(results, retrieveDir, [overrideType], [templateVariables])](#MetadataType.saveResults) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.applyTemplateValues(code, templateVariables)](#MetadataType.applyTemplateValues) ⇒ <code>string</code>
     * [.applyTemplateNames(code, templateVariables)](#MetadataType.applyTemplateNames) ⇒ <code>string</code>
-    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#MetadataType.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#MetadataType.buildTemplateForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#MetadataType.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#MetadataType.buildTemplateForExtracts) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.findSubType(templateDir, templateName)](#MetadataType.findSubType) ⇒ <code>string</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName, ex)](#MetadataType.readSecondaryFolder) ⇒ <code>object</code>
     * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType.buildDefinition) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -3257,12 +3257,12 @@ searches extracted file for template variable values and applies the market vari
 
 <a name="MetadataType.buildDefinitionForExtracts"></a>
 
-### MetadataType.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+### MetadataType.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
 helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code> - list of extracted files with path-parts provided as an array  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3274,12 +3274,12 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 
 <a name="MetadataType.buildTemplateForExtracts"></a>
 
-### MetadataType.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+### MetadataType.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
 helper for buildTemplate
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - void  
+**Returns**: <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code> - list of extracted files with path-parts provided as an array  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3536,8 +3536,8 @@ Query MetadataType
     * [.update(query)](#Query.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata, deployDir)](#Query.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.QueryItem&gt;</code>
     * [.applyTemplateValues(code, templateVariables)](#Query.applyTemplateValues) ⇒ <code>string</code>
-    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildTemplateForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildTemplateForExtracts) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.parseMetadata(metadata)](#Query.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
 
 <a name="Query.retrieve"></a>
@@ -3638,12 +3638,12 @@ searches extracted SQL file for template variables and applies the market values
 
 <a name="Query.buildDefinitionForExtracts"></a>
 
-### Query.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+### Query.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
 helper for buildDefinition
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - void  
+**Returns**: <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code> - list of extracted files with path-parts provided as an array  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3655,12 +3655,12 @@ handles extracted code if any are found for complex types
 
 <a name="Query.buildTemplateForExtracts"></a>
 
-### Query.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+### Query.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
 helper for buildTemplate
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - void  
+**Returns**: <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code> - list of extracted files with path-parts provided as an array  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3792,9 +3792,9 @@ Script MetadataType
     * [.create(script)](#Script.create) ⇒ <code>Promise</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#Script._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.preDeployTasks(metadata, dir)](#Script.preDeployTasks) ⇒ <code>TYPE.ScriptItem</code>
-    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildTemplateForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._buildXForExtracts(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Script._buildXForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildTemplateForExtracts) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [._buildXForExtracts(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Script._buildXForExtracts) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.parseMetadata(metadata)](#Script.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
 
 <a name="Script.retrieve"></a>
@@ -3896,12 +3896,12 @@ prepares a Script for deployment
 
 <a name="Script.buildDefinitionForExtracts"></a>
 
-### Script.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+### Script.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
 helper for buildDefinition
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Script</code>](#Script)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code> - list of extracted files with path-parts provided as an array  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3913,12 +3913,12 @@ handles extracted code if any are found for complex types
 
 <a name="Script.buildTemplateForExtracts"></a>
 
-### Script.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+### Script.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
 helper for buildTemplate
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Script</code>](#Script)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - void  
+**Returns**: <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code> - list of extracted files with path-parts provided as an array  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3930,12 +3930,12 @@ handles extracted code if any are found for complex types
 
 <a name="Script._buildXForExtracts"></a>
 
-### Script.\_buildXForExtracts(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;void&gt;</code>
+### Script.\_buildXForExtracts(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
 helper for buildTemplateForExtracts / buildDefinitionForExtracts
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Script</code>](#Script)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code> - list of extracted files with path-parts provided as an array  
 
 | Param | Type | Description |
 | --- | --- | --- |
