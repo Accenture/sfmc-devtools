@@ -231,4 +231,23 @@ const SDK = require('sfmc-sdk');
  * @property {string} _businessUnit mcdev business unit name inside of _credential
  * @typedef {SDK} SDK
  */
+
+/**
+ * @typedef {object} skipInteraction signals what to insert automatically for things usually asked via wizard
+ * @property {string} client_id client id of installed package
+ * @property {string} client_secret client secret of installed package
+ * @property {string} auth_url tenant specific auth url of installed package
+ * @property {number} account_id MID of the Parent Business Unit
+ * @property {string} credentialName how you would like the credential to be named
+ * @property {string} gitRemoteUrl URL of Git remote server
+ */
+
+/**
+ * @typedef {object} AuthObject
+ * @property {string} client_id client_id client_id for sfmc-sdk auth
+ * @property {string} client_secret client_secret for sfmc-sdk auth
+ * @property {number} account_id mid of business unit to auth against
+ * @property {string} auth_url authentication base url
+ */
+
 module.exports = {};
