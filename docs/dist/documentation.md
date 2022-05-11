@@ -362,17 +362,18 @@ Source and target business units are also compared before the deployment to appl
 **Kind**: global class  
 
 * [Deployer](#Deployer)
-    * [new Deployer(properties, buObject, [typeArr])](#new_Deployer_new)
+    * [new Deployer(properties, buObject)](#new_Deployer_new)
     * _instance_
-        * [.deploy()](#Deployer+deploy) ⇒ <code>Promise</code>
+        * [.metadata](#Deployer+metadata) : <code>TYPE.MultiMetadataTypeMap</code>
+        * [.deploy([typeArr], [keyArr])](#Deployer+deploy) ⇒ <code>Promise</code>
         * [.deployCallback(result, metadataType)](#Deployer+deployCallback) ⇒ <code>void</code>
     * _static_
-        * [.readBUMetadata(deployDir, [type], [listBadKeys])](#Deployer.readBUMetadata) ⇒ <code>object</code>
+        * [.readBUMetadata(deployDir, [typeArr], [listBadKeys])](#Deployer.readBUMetadata) ⇒ <code>TYPE.MultiMetadataTypeMap</code>
         * [.createFolderDefinitions(deployDir, metadata, metadataTypeArr)](#Deployer.createFolderDefinitions) ⇒ <code>void</code>
 
 <a name="new_Deployer_new"></a>
 
-### new Deployer(properties, buObject, [typeArr])
+### new Deployer(properties, buObject)
 Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 
 
@@ -381,15 +382,24 @@ Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 | properties | <code>object</code> | General configuration to be used in retrieve |
 | properties.directories | <code>object</code> | Directories to be used when interacting with FS |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
-| [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
 
+<a name="Deployer+metadata"></a>
+
+### deployer.metadata : <code>TYPE.MultiMetadataTypeMap</code>
+**Kind**: instance property of [<code>Deployer</code>](#Deployer)  
 <a name="Deployer+deploy"></a>
 
-### deployer.deploy() ⇒ <code>Promise</code>
+### deployer.deploy([typeArr], [keyArr]) ⇒ <code>Promise</code>
 Deploy all metadata that is located in the deployDir
 
 **Kind**: instance method of [<code>Deployer</code>](#Deployer)  
 **Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type (can include subtype) |
+| [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
+
 <a name="Deployer+deployCallback"></a>
 
 ### deployer.deployCallback(result, metadataType) ⇒ <code>void</code>
@@ -404,16 +414,16 @@ Gets called for every deployed metadata entry
 
 <a name="Deployer.readBUMetadata"></a>
 
-### Deployer.readBUMetadata(deployDir, [type], [listBadKeys]) ⇒ <code>object</code>
+### Deployer.readBUMetadata(deployDir, [typeArr], [listBadKeys]) ⇒ <code>TYPE.MultiMetadataTypeMap</code>
 Returns metadata of a business unit that is saved locally
 
 **Kind**: static method of [<code>Deployer</code>](#Deployer)  
-**Returns**: <code>object</code> - Metadata of BU in local directory  
+**Returns**: <code>TYPE.MultiMetadataTypeMap</code> - Metadata of BU in local directory  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | deployDir | <code>string</code> |  | root directory of metadata. |
-| [type] | <code>Array.&lt;string&gt;</code> |  | limit deployment to given metadata type |
+| [typeArr] | <code>Array.&lt;string&gt;</code> |  | limit deployment to given metadata type |
 | [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
 
 <a name="Deployer.createFolderDefinitions"></a>
@@ -443,8 +453,8 @@ main class
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>void</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
     * [.retrieve(businessUnit, [selectedTypesArr], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [._deployBU(cred, bu, [typeArr])](#Mcdev._deployBU) ⇒ <code>Promise</code>
-    * [.deploy(businessUnit, [selectedTypesArr])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._deployBU(cred, bu, [typeArr], [keyArr])](#Mcdev._deployBU) ⇒ <code>Promise</code>
+    * [.deploy(businessUnit, [selectedTypesArr], [keyArr])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initProject([credentialsName], [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -516,7 +526,7 @@ Retrieve all metadata from the specified business unit into the local file syste
 
 <a name="Mcdev._deployBU"></a>
 
-### Mcdev.\_deployBU(cred, bu, [typeArr]) ⇒ <code>Promise</code>
+### Mcdev.\_deployBU(cred, bu, [typeArr], [keyArr]) ⇒ <code>Promise</code>
 helper for deploy()
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -527,12 +537,12 @@ helper for deploy()
 | cred | <code>string</code> | name of Credential |
 | bu | <code>string</code> | name of BU |
 | [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
+| [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
 
 <a name="Mcdev.deploy"></a>
 
-### Mcdev.deploy(businessUnit, [selectedTypesArr]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.deploy(businessUnit, [selectedTypesArr], [keyArr]) ⇒ <code>Promise.&lt;void&gt;</code>
 Deploys all metadata located in the 'deploy' directory to the specified business unit
-! deploy does not support selecting subtypes yet
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
@@ -541,6 +551,7 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
 | [selectedTypesArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
+| [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
 
 <a name="Mcdev.initProject"></a>
 
@@ -811,7 +822,7 @@ FileTransfer MetadataType
     * [._mergeCode_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName])](#Asset._mergeCode_slots) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._extractCode(metadata)](#Asset._extractCode) ⇒ <code>TYPE.CodeExtractItem</code>
     * [._extractCode_slots(prefix, metadataSlots, codeArr)](#Asset._extractCode_slots) ⇒ <code>void</code>
-    * [.getJsonFromFS(dir)](#Asset.getJsonFromFS) ⇒ <code>object</code>
+    * [.getJsonFromFS(dir, _, selectedSubType)](#Asset.getJsonFromFS) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.findSubType(templateDir, templateName)](#Asset.findSubType) ⇒ <code>TYPE.AssetSubType</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName)](#Asset.readSecondaryFolder) ⇒ <code>TYPE.AssetItem</code>
 
@@ -1105,15 +1116,17 @@ to allow saving that separately and formatted
 
 <a name="Asset.getJsonFromFS"></a>
 
-### Asset.getJsonFromFS(dir) ⇒ <code>object</code>
+### Asset.getJsonFromFS(dir, _, selectedSubType) ⇒ <code>TYPE.MetadataTypeMap</code>
 Returns file contents mapped to their fileName without '.json' ending
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>object</code> - fileName => fileContent map  
+**Returns**: <code>TYPE.MetadataTypeMap</code> - fileName => fileContent map  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | dir | <code>string</code> | directory that contains '.json' files to be read |
+| _ | <code>void</code> | not used by type asset |
+| selectedSubType | <code>string</code> | asset, message, ... |
 
 <a name="Asset.findSubType"></a>
 
@@ -2396,7 +2409,7 @@ Folder MetadataType
     * [.create(metadataEntry)](#Folder.create) ⇒ <code>Promise</code>
     * [.update(metadataEntry)](#Folder.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#Folder.preDeployTasks) ⇒ <code>Promise</code>
-    * [.getJsonFromFS(dir, [listBadKeys])](#Folder.getJsonFromFS) ⇒ <code>object</code>
+    * [.getJsonFromFS(dir, [listBadKeys])](#Folder.getJsonFromFS) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.retrieveHelper([additionalFields], [queryAllAccounts])](#Folder.retrieveHelper) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.postRetrieveTasks(metadata)](#Folder.postRetrieveTasks) ⇒ <code>Array.&lt;object&gt;</code>
     * [.saveResults(results, retrieveDir, mid)](#Folder.saveResults) ⇒ <code>Promise.&lt;object&gt;</code>
@@ -2479,11 +2492,11 @@ prepares a folder for deployment
 
 <a name="Folder.getJsonFromFS"></a>
 
-### Folder.getJsonFromFS(dir, [listBadKeys]) ⇒ <code>object</code>
+### Folder.getJsonFromFS(dir, [listBadKeys]) ⇒ <code>TYPE.MetadataTypeMap</code>
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: static method of [<code>Folder</code>](#Folder)  
-**Returns**: <code>object</code> - fileName => fileContent map  
+**Returns**: <code>TYPE.MetadataTypeMap</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -2779,7 +2792,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.properties](#MetadataType.properties) : <code>TYPE.MultiMetadataTypeMap</code>
     * [.subType](#MetadataType.subType) : <code>string</code>
     * [.buObject](#MetadataType.buObject) : <code>object</code>
-    * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType.getJsonFromFS) ⇒ <code>object</code>
+    * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType.getJsonFromFS) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.getFieldNamesToRetrieve([additionalFields])](#MetadataType.getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
     * [.deploy(metadata, deployDir, retrieveDir, buObject)](#MetadataType.deploy) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.postDeployTasks(metadata, originalMetadata)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
@@ -2840,11 +2853,11 @@ Provides default functionality that can be overwritten by child metadata type cl
 **Kind**: static property of [<code>MetadataType</code>](#MetadataType)  
 <a name="MetadataType.getJsonFromFS"></a>
 
-### MetadataType.getJsonFromFS(dir, [listBadKeys]) ⇒ <code>object</code>
+### MetadataType.getJsonFromFS(dir, [listBadKeys]) ⇒ <code>TYPE.MetadataTypeMap</code>
 Returns file contents mapped to their filename without '.json' ending
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>object</code> - fileName => fileContent map  
+**Returns**: <code>TYPE.MetadataTypeMap</code> - fileName => fileContent map  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -4138,6 +4151,9 @@ CLI entry for SFMC DevTools
 
 * [Util](#Util)
     * [.logger](#Util.logger)
+    * [.filterObjByKeys(originalObj, [whitelistArr])](#Util.filterObjByKeys) ⇒ <code>Object.&lt;string, \*&gt;</code>
+    * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
+    * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
@@ -4160,6 +4176,45 @@ CLI entry for SFMC DevTools
 Logger that creates timestamped log file in 'logs/' directory
 
 **Kind**: static property of [<code>Util</code>](#Util)  
+<a name="Util.filterObjByKeys"></a>
+
+### Util.filterObjByKeys(originalObj, [whitelistArr]) ⇒ <code>Object.&lt;string, \*&gt;</code>
+helper that allows filtering an object by its keys
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>Object.&lt;string, \*&gt;</code> - filtered object that only contains keys you provided  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| originalObj | <code>Object.&lt;string, \*&gt;</code> | object that you want to filter |
+| [whitelistArr] | <code>Array.&lt;string&gt;</code> | positive filter. if not provided, returns originalObj without filter |
+
+<a name="Util.includesStartsWith"></a>
+
+### Util.includesStartsWith(arr, search) ⇒ <code>boolean</code>
+extended Array.includes method that allows check if an array-element starts with a certain string
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - found / not found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| arr | <code>Array.&lt;string&gt;</code> | your array of strigns |
+| search | <code>string</code> | the string you are looking for |
+
+<a name="Util.includesStartsWithIndex"></a>
+
+### Util.includesStartsWithIndex(arr, search) ⇒ <code>number</code>
+extended Array.includes method that allows check if an array-element starts with a certain string
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>number</code> - array index 0..n or -1 of not found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| arr | <code>Array.&lt;string&gt;</code> | your array of strigns |
+| search | <code>string</code> | the string you are looking for |
+
 <a name="Util.signalFatalError"></a>
 
 ### Util.signalFatalError() ⇒ <code>void</code>
@@ -5788,6 +5843,9 @@ Util that contains logger and simple util methods
 
 * [Util](#Util)
     * [.logger](#Util.logger)
+    * [.filterObjByKeys(originalObj, [whitelistArr])](#Util.filterObjByKeys) ⇒ <code>Object.&lt;string, \*&gt;</code>
+    * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
+    * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
@@ -5810,6 +5868,45 @@ Util that contains logger and simple util methods
 Logger that creates timestamped log file in 'logs/' directory
 
 **Kind**: static property of [<code>Util</code>](#Util)  
+<a name="Util.filterObjByKeys"></a>
+
+### Util.filterObjByKeys(originalObj, [whitelistArr]) ⇒ <code>Object.&lt;string, \*&gt;</code>
+helper that allows filtering an object by its keys
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>Object.&lt;string, \*&gt;</code> - filtered object that only contains keys you provided  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| originalObj | <code>Object.&lt;string, \*&gt;</code> | object that you want to filter |
+| [whitelistArr] | <code>Array.&lt;string&gt;</code> | positive filter. if not provided, returns originalObj without filter |
+
+<a name="Util.includesStartsWith"></a>
+
+### Util.includesStartsWith(arr, search) ⇒ <code>boolean</code>
+extended Array.includes method that allows check if an array-element starts with a certain string
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - found / not found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| arr | <code>Array.&lt;string&gt;</code> | your array of strigns |
+| search | <code>string</code> | the string you are looking for |
+
+<a name="Util.includesStartsWithIndex"></a>
+
+### Util.includesStartsWithIndex(arr, search) ⇒ <code>number</code>
+extended Array.includes method that allows check if an array-element starts with a certain string
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>number</code> - array index 0..n or -1 of not found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| arr | <code>Array.&lt;string&gt;</code> | your array of strigns |
+| search | <code>string</code> | the string you are looking for |
+
 <a name="Util.signalFatalError"></a>
 
 ### Util.signalFatalError() ⇒ <code>void</code>
