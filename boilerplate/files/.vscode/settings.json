@@ -13,6 +13,7 @@
         "*.html": "${capture}.asset-code-meta.json",
         "*-meta.sql": "${capture}-meta.json",
         "*-meta.ssjs": "${capture}-meta.json",
+        "*-meta.amp": "${capture}-meta.json",
         "*-meta.html": "${capture}-meta.json"
     },
     "editor.codeActionsOnSave": {
