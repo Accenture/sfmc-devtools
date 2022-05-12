@@ -1,4 +1,22 @@
 {
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": false,
+    "explorer.fileNesting.patterns": {
+        "*.ts": "${capture}.js",
+        "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+        "*.jsx": "${capture}.js",
+        "*.tsx": "${capture}.ts",
+        "tsconfig.json": "tsconfig.*.json",
+        "package.json": "package-lock.json, yarn.lock",
+        "*-doc.md": "${capture}-meta.json",
+        "*.asset-asset-meta.html": "${dirname}.asset-asset-meta.json",
+        "*.asset-message-meta.html": "${dirname}.asset-message-meta.json",
+        "*.html": "${capture}.asset-code-meta.json",
+        "*-meta.sql": "${capture}-meta.json",
+        "*-meta.ssjs": "${capture}-meta.json",
+        "*-meta.amp": "${capture}-meta.json",
+        "*-meta.html": "${capture}-meta.json"
+    },
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
