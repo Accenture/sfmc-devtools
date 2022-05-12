@@ -8,6 +8,7 @@
         "*.tsx": "${capture}.ts",
         "tsconfig.json": "tsconfig.*.json",
         "package.json": "package-lock.json, yarn.lock",
+        "*-doc.md": "${capture}-meta.json",
         "*.asset-asset-meta.html": "${dirname}.asset-asset-meta.json",
         "*.asset-message-meta.html": "${dirname}.asset-message-meta.json",
         "*.html": "${capture}.asset-code-meta.json",
