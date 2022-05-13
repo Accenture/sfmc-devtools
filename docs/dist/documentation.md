@@ -756,9 +756,9 @@ FileTransfer MetadataType
     * [.postRetrieveTasks(metadata, [_], isTemplating)](#Asset.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.preDeployTasks(metadata, deployDir)](#Asset.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
     * [.getSubtype(metadata)](#Asset.getSubtype) ⇒ <code>TYPE.AssetSubType</code>
-    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildTemplateForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._buildXForExtracts(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Asset._buildXForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildDefinitionForNested) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildTemplateForNested) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Asset._buildForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseMetadata(metadata)](#Asset.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
     * [._mergeCode(metadata, deployDir, subType, [templateName])](#Asset._mergeCode) ⇒ <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code>
     * [._mergeCode_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName])](#Asset._mergeCode_slots) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -936,9 +936,9 @@ determines the subtype of the current asset
 | --- | --- | --- |
 | metadata | <code>TYPE.AssetItem</code> | a single asset |
 
-<a name="Asset.buildDefinitionForExtracts"></a>
+<a name="Asset.buildDefinitionForNested"></a>
 
-### Asset.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+### Asset.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for buildDefinition
 handles extracted code if any are found for complex types
 
@@ -953,9 +953,9 @@ handles extracted code if any are found for complex types
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
 
-<a name="Asset.buildTemplateForExtracts"></a>
+<a name="Asset.buildTemplateForNested"></a>
 
-### Asset.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+### Asset.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for buildTemplate
 handles extracted code if any are found for complex types
 
@@ -970,9 +970,13 @@ handles extracted code if any are found for complex types
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
 
-<a name="Asset._buildXForExtracts"></a>
+**Example**  
+```js
+assets of type codesnippetblock will result in 1 json and 1 amp/html file. both files need to be run through templating
+```
+<a name="Asset._buildForNested"></a>
 
-### Asset.\_buildXForExtracts(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;void&gt;</code>
+### Asset.\_buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for buildDefinition
 handles extracted code if any are found for complex types
 
@@ -2770,8 +2774,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.saveResults(results, retrieveDir, [overrideType], [templateVariables])](#MetadataType.saveResults) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.applyTemplateValues(code, templateVariables)](#MetadataType.applyTemplateValues) ⇒ <code>string</code>
     * [.applyTemplateNames(code, templateVariables)](#MetadataType.applyTemplateNames) ⇒ <code>string</code>
-    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#MetadataType.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#MetadataType.buildTemplateForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildDefinitionForNested(templateDir, targetDir, metadata, variables, templateName)](#MetadataType.buildDefinitionForNested) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MetadataType.buildTemplateForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.findSubType(templateDir, templateName)](#MetadataType.findSubType) ⇒ <code>string</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName, ex)](#MetadataType.readSecondaryFolder) ⇒ <code>object</code>
     * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType.buildDefinition) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -3202,7 +3206,7 @@ Helper for writing Metadata to disk, used for Retrieve and deploy
 <a name="MetadataType.applyTemplateValues"></a>
 
 ### MetadataType.applyTemplateValues(code, templateVariables) ⇒ <code>string</code>
-helper for buildDefinitionForExtracts
+helper for buildDefinitionForNested
 searches extracted file for template variable names and applies the market values
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3216,7 +3220,7 @@ searches extracted file for template variable names and applies the market value
 <a name="MetadataType.applyTemplateNames"></a>
 
 ### MetadataType.applyTemplateNames(code, templateVariables) ⇒ <code>string</code>
-helper for buildTemplateForExtracts
+helper for buildTemplateForNested
 searches extracted file for template variable values and applies the market variable names
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3227,9 +3231,9 @@ searches extracted file for template variable values and applies the market vari
 | code | <code>string</code> | code from extracted code |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
-<a name="MetadataType.buildDefinitionForExtracts"></a>
+<a name="MetadataType.buildDefinitionForNested"></a>
 
-### MetadataType.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+### MetadataType.buildDefinitionForNested(templateDir, targetDir, metadata, variables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
@@ -3244,9 +3248,9 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 | variables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
 
-<a name="MetadataType.buildTemplateForExtracts"></a>
+<a name="MetadataType.buildTemplateForNested"></a>
 
-### MetadataType.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+### MetadataType.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for buildTemplate
 handles extracted code if any are found for complex types
 
@@ -3508,8 +3512,8 @@ Query MetadataType
     * [.update(query)](#Query.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata, deployDir)](#Query.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.QueryItem&gt;</code>
     * [.applyTemplateValues(code, templateVariables)](#Query.applyTemplateValues) ⇒ <code>string</code>
-    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildTemplateForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildDefinitionForNested) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildTemplateForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseMetadata(metadata)](#Query.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
 
 <a name="Query.retrieve"></a>
@@ -3599,7 +3603,7 @@ prepares a Query for deployment
 <a name="Query.applyTemplateValues"></a>
 
 ### Query.applyTemplateValues(code, templateVariables) ⇒ <code>string</code>
-helper for buildDefinitionForExtracts
+helper for buildDefinitionForNested
 searches extracted SQL file for template variables and applies the market values
 
 **Kind**: static method of [<code>Query</code>](#Query)  
@@ -3610,9 +3614,9 @@ searches extracted SQL file for template variables and applies the market values
 | code | <code>string</code> | code from extracted code |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
-<a name="Query.buildDefinitionForExtracts"></a>
+<a name="Query.buildDefinitionForNested"></a>
 
-### Query.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+### Query.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for buildDefinition
 handles extracted code if any are found for complex types
 
@@ -3627,9 +3631,9 @@ handles extracted code if any are found for complex types
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
 
-<a name="Query.buildTemplateForExtracts"></a>
+<a name="Query.buildTemplateForNested"></a>
 
-### Query.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+### Query.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for buildTemplate
 handles extracted code if any are found for complex types
 
@@ -3644,6 +3648,10 @@ handles extracted code if any are found for complex types
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
 
+**Example**  
+```js
+queries are saved as 1 json and 1 sql file. both files need to be run through templating
+```
 <a name="Query.parseMetadata"></a>
 
 ### Query.parseMetadata(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
@@ -3766,9 +3774,9 @@ Script MetadataType
     * [.create(script)](#Script.create) ⇒ <code>Promise</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#Script._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.preDeployTasks(metadata, dir)](#Script.preDeployTasks) ⇒ <code>TYPE.ScriptItem</code>
-    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildTemplateForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._buildXForExtracts(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Script._buildXForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildDefinitionForNested) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildTemplateForNested) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Script._buildForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseMetadata(metadata)](#Script.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
 
 <a name="Script.retrieve"></a>
@@ -3870,9 +3878,9 @@ prepares a Script for deployment
 | metadata | <code>TYPE.ScriptItem</code> | a single script activity definition |
 | dir | <code>string</code> | directory of deploy files |
 
-<a name="Script.buildDefinitionForExtracts"></a>
+<a name="Script.buildDefinitionForNested"></a>
 
-### Script.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+### Script.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for buildDefinition
 handles extracted code if any are found for complex types
 
@@ -3887,9 +3895,9 @@ handles extracted code if any are found for complex types
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
 
-<a name="Script.buildTemplateForExtracts"></a>
+<a name="Script.buildTemplateForNested"></a>
 
-### Script.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+### Script.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for buildTemplate
 handles extracted code if any are found for complex types
 
@@ -3904,10 +3912,14 @@ handles extracted code if any are found for complex types
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
 
-<a name="Script._buildXForExtracts"></a>
+**Example**  
+```js
+scripts are saved as 1 json and 1 ssjs file. both files need to be run through templating
+```
+<a name="Script._buildForNested"></a>
 
-### Script.\_buildXForExtracts(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for buildTemplateForExtracts / buildDefinitionForExtracts
+### Script.\_buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;void&gt;</code>
+helper for buildTemplateForNested / buildDefinitionForNested
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Script</code>](#Script)  
