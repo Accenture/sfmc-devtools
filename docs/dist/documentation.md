@@ -1078,7 +1078,7 @@ Automation MetadataType
     * [.parseMetadata(metadata)](#Automation.parseMetadata) ⇒ <code>TYPE.AutomationItem</code>
     * [._buildSchedule(scheduleObject)](#Automation._buildSchedule) ⇒ <code>TYPE.AutomationScheduleSoap</code>
     * [._calcTime(offsetServer, dateInput, [offsetInput])](#Automation._calcTime) ⇒ <code>string</code>
-    * [.document(buObject, [metadata], [isDeploy])](#Automation.document) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.document(buObject, [metadata])](#Automation.document) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="Automation.retrieve"></a>
 
@@ -1252,7 +1252,7 @@ used to convert dates to the system timezone required for startDate
 
 <a name="Automation.document"></a>
 
-### Automation.document(buObject, [metadata], [isDeploy]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Automation.document(buObject, [metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
 Parses metadata into a readable Markdown/HTML format then saves it
 
 **Kind**: static method of [<code>Automation</code>](#Automation)  
@@ -1262,7 +1262,6 @@ Parses metadata into a readable Markdown/HTML format then saves it
 | --- | --- | --- |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
 | [metadata] | <code>TYPE.AutomationMap</code> | a list of dataExtension definitions |
-| [isDeploy] | <code>boolean</code> | used to skip non-supported message during deploy |
 
 <a name="Campaign"></a>
 
