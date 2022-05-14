@@ -190,20 +190,22 @@
  * @property {string} name name
  * @property {string} description -
  * @property {'scheduled'|'triggered'} type Starting Source = Schedule / File Drop
- * @property {'Scheduled'|'Running'|'PausedSchedule'} status -
+ * @property {'Scheduled'|'Running'|'Ready'|'Building'|'PausedSchedule'|'InactiveTrigger'} status -
  * @property {AutomationSchedule} [schedule] only existing if type=scheduled
  * @property {object} [fileTrigger] only existing if type=triggered
- * @property {string} fileTrigger.fileNamingPattern -
- * @property {string} fileTrigger.fileNamePatternTypeId -
- * @property {string} fileTrigger.folderLocationText -
- * @property {string} fileTrigger.queueFiles -
+ * @property {string} fileTrigger.fileNamingPattern file name with placeholders
+ * @property {number} fileTrigger.fileNamePatternTypeId -
+ * @property {string} fileTrigger.folderLocationText where to look for the fileNamingPattern
+ * @property {boolean} fileTrigger.isPublished ?
+ * @property {boolean} fileTrigger.queueFiles ?
+ * @property {boolean} fileTrigger.triggerActive -
  * @property {object} [startSource] -
  * @property {AutomationSchedule} [startSource.schedule] rewritten to AutomationItem.schedule
  * @property {object} [startSource.fileDrop] rewritten to AutomationItem.fileTrigger
- * @property {string} startSource.fileDrop.fileNamingPattern -
+ * @property {string} startSource.fileDrop.fileNamingPattern file name with placeholders
  * @property {string} startSource.fileDrop.fileNamePatternTypeId -
  * @property {string} startSource.fileDrop.folderLocation -
- * @property {string} startSource.fileDrop.queueFiles -
+ * @property {boolean} startSource.fileDrop.queueFiles -
  * @property {number} startSource.typeId -
  * @property {AutomationStep[]} steps -
  * @property {string} r__folder_Path folder path
