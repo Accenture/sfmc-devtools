@@ -6022,20 +6022,22 @@ SOAP format
 | name | <code>string</code> | name |
 | description | <code>string</code> | - |
 | type | <code>&#x27;scheduled&#x27;</code> \| <code>&#x27;triggered&#x27;</code> | Starting Source = Schedule / File Drop |
-| status | <code>&#x27;Scheduled&#x27;</code> \| <code>&#x27;Running&#x27;</code> \| <code>&#x27;PausedSchedule&#x27;</code> | - |
+| status | <code>&#x27;Scheduled&#x27;</code> \| <code>&#x27;Running&#x27;</code> \| <code>&#x27;Ready&#x27;</code> \| <code>&#x27;Building&#x27;</code> \| <code>&#x27;PausedSchedule&#x27;</code> \| <code>&#x27;InactiveTrigger&#x27;</code> | - |
 | [schedule] | [<code>AutomationSchedule</code>](#AutomationSchedule) | only existing if type=scheduled |
 | [fileTrigger] | <code>object</code> | only existing if type=triggered |
-| fileTrigger.fileNamingPattern | <code>string</code> | - |
-| fileTrigger.fileNamePatternTypeId | <code>string</code> | - |
-| fileTrigger.folderLocationText | <code>string</code> | - |
-| fileTrigger.queueFiles | <code>string</code> | - |
+| fileTrigger.fileNamingPattern | <code>string</code> | file name with placeholders |
+| fileTrigger.fileNamePatternTypeId | <code>number</code> | - |
+| fileTrigger.folderLocationText | <code>string</code> | where to look for the fileNamingPattern |
+| fileTrigger.isPublished | <code>boolean</code> | ? |
+| fileTrigger.queueFiles | <code>boolean</code> | ? |
+| fileTrigger.triggerActive | <code>boolean</code> | - |
 | [startSource] | <code>object</code> | - |
 | [startSource.schedule] | [<code>AutomationSchedule</code>](#AutomationSchedule) | rewritten to AutomationItem.schedule |
 | [startSource.fileDrop] | <code>object</code> | rewritten to AutomationItem.fileTrigger |
-| startSource.fileDrop.fileNamingPattern | <code>string</code> | - |
+| startSource.fileDrop.fileNamingPattern | <code>string</code> | file name with placeholders |
 | startSource.fileDrop.fileNamePatternTypeId | <code>string</code> | - |
 | startSource.fileDrop.folderLocation | <code>string</code> | - |
-| startSource.fileDrop.queueFiles | <code>string</code> | - |
+| startSource.fileDrop.queueFiles | <code>boolean</code> | - |
 | startSource.typeId | <code>number</code> | - |
 | steps | [<code>Array.&lt;AutomationStep&gt;</code>](#AutomationStep) | - |
 | r__folder_Path | <code>string</code> | folder path |
