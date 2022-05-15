@@ -158,7 +158,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dl>
 <dt><a href="#getUserName">getUserName(userList, item, fieldname)</a> ⇒ <code>string</code></dt>
 <dd></dd>
-<dt><a href="#setupSDK">setupSDK(credentialKey, authObject)</a> ⇒ <code>SDK</code></dt>
+<dt><a href="#setupSDK">setupSDK(credentialKey, authObject)</a> ⇒ <code><a href="#SDK">SDK</a></code></dt>
 <dd><p>Returns an SDK instance to be used for API calls</p>
 </dd>
 <dt><a href="#createNewLoggerTransport">createNewLoggerTransport()</a> ⇒ <code>object</code></dt>
@@ -172,10 +172,11 @@ Provides default functionality that can be overwritten by child metadata type cl
 ## Typedefs
 
 <dl>
-<dt><a href="#TemplateMap">TemplateMap</a> : <code>Object.&lt;string, string&gt;</code></dt>
+<dt><a href="#SupportedMetadataTypes">SupportedMetadataTypes</a> : <code>Object.&lt;string, string&gt;</code></dt>
 <dd></dd>
 <dt><a href="#MetadataTypeItemObj">MetadataTypeItemObj</a> : <code>Object.&lt;string, any&gt;</code></dt>
-<dd></dd>
+<dd><p>key=customer key</p>
+</dd>
 <dt><a href="#CodeExtractItem">CodeExtractItem</a> : <code>object</code></dt>
 <dd></dd>
 <dt><a href="#CodeExtract">CodeExtract</a> : <code>object</code></dt>
@@ -204,7 +205,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 </dd>
 <dt><a href="#AutomationItem">AutomationItem</a> : <code>object</code></dt>
 <dd></dd>
-<dt><a href="#AutomationItemObj">AutomationItemObj</a> : <code>Object.&lt;string, AutomationItem&gt;</code></dt>
+<dt><a href="#SDK">SDK</a> : <code>Object.&lt;string, AutomationItem&gt;</code></dt>
 <dd></dd>
 <dt><a href="#skipInteraction">skipInteraction</a> : <code>object</code></dt>
 <dd><p>signals what to insert automatically for things usually asked via wizard</p>
@@ -223,7 +224,9 @@ Builds metadata from a template using market specific customisation
 * [Builder](#Builder)
     * [new Builder(properties, buObject)](#new_Builder_new)
     * _instance_
-        * [.buildDefinition(metadataType, name, variables)](#Builder+buildDefinition) ⇒ <code>Promise</code>
+        * [.metadata](#Builder+metadata) : <code>TYPE.MultiMetadataTypeList</code>
+        * [.buildDefinition(metadataType, name, templateVariables)](#Builder+buildDefinition) ⇒ <code>Promise</code>
+        * [.buildTemplate(metadataType, keyArr, templateVariables)](#Builder+buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
     * _static_
         * [.verifyMarketList(mlName, properties)](#Builder.verifyMarketList) ⇒ <code>void</code>
 
@@ -242,9 +245,13 @@ Creates a Builder, uses v2 auth if v2AuthOptions are passed.
 | properties.businessUnits | <code>string</code> | ID of Business Unit to authenticate with |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
 
+<a name="Builder+metadata"></a>
+
+### builder.metadata : <code>TYPE.MultiMetadataTypeList</code>
+**Kind**: instance property of [<code>Builder</code>](#Builder)  
 <a name="Builder+buildDefinition"></a>
 
-### builder.buildDefinition(metadataType, name, variables) ⇒ <code>Promise</code>
+### builder.buildDefinition(metadataType, name, templateVariables) ⇒ <code>Promise</code>
 Builds a specific metadata file by name
 
 **Kind**: instance method of [<code>Builder</code>](#Builder)  
@@ -254,7 +261,21 @@ Builds a specific metadata file by name
 | --- | --- | --- |
 | metadataType | <code>string</code> | metadata type to build |
 | name | <code>string</code> | name of metadata to build |
-| variables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+
+<a name="Builder+buildTemplate"></a>
+
+### builder.buildTemplate(metadataType, keyArr, templateVariables) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+Builds a specific metadata file by name
+
+**Kind**: instance method of [<code>Builder</code>](#Builder)  
+**Returns**: <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataType | <code>string</code> | metadata type to create a template of |
+| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of metadata to create a template of |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="Builder.verifyMarketList"></a>
 
@@ -369,8 +390,9 @@ main class
     * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(businessUnit, type, customerKey)](#Mcdev.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.badKeys(businessUnit)](#Mcdev.badKeys) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.retrieveAsTemplate(businessUnit, selectedType, name, market)](#Mcdev.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
-    * [.buildDefinition(businessUnit, type, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.retrieveAsTemplate(businessUnit, selectedType, name, market)](#Mcdev.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+    * [.buildTemplate(businessUnit, selectedType, keyArr, market)](#Mcdev.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+    * [.buildDefinition(businessUnit, selectedType, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._checkMarket(market)](#Mcdev._checkMarket) ⇒ <code>boolean</code>
     * [.buildDefinitionBulk(listName, type, name)](#Mcdev.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
 
@@ -527,11 +549,11 @@ Converts metadata to legacy format. Output is saved in 'converted' directory
 
 <a name="Mcdev.retrieveAsTemplate"></a>
 
-### Mcdev.retrieveAsTemplate(businessUnit, selectedType, name, market) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
+### Mcdev.retrieveAsTemplate(businessUnit, selectedType, name, market) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
 Retrieve a specific metadata file and templatise.
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code> - -  
+**Returns**: <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -540,9 +562,24 @@ Retrieve a specific metadata file and templatise.
 | name | <code>string</code> | name of the metadata |
 | market | <code>string</code> | market which should be used to revert template |
 
+<a name="Mcdev.buildTemplate"></a>
+
+### Mcdev.buildTemplate(businessUnit, selectedType, keyArr, market) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+Build a specific metadata file based on a template.
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| businessUnit | <code>string</code> | references credentials from properties.json |
+| selectedType | <code>string</code> | supported metadata type |
+| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+| market | <code>string</code> | market localizations |
+
 <a name="Mcdev.buildDefinition"></a>
 
-### Mcdev.buildDefinition(businessUnit, type, name, market) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.buildDefinition(businessUnit, selectedType, name, market) ⇒ <code>Promise.&lt;void&gt;</code>
 Build a specific metadata file based on a template.
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -551,7 +588,7 @@ Build a specific metadata file based on a template.
 | Param | Type | Description |
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
-| type | <code>string</code> | supported metadata type |
+| selectedType | <code>string</code> | supported metadata type |
 | name | <code>string</code> | name of the metadata |
 | market | <code>string</code> | market localizations |
 
@@ -719,7 +756,9 @@ FileTransfer MetadataType
     * [.postRetrieveTasks(metadata, [_], isTemplating)](#Asset.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.preDeployTasks(metadata, deployDir)](#Asset.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
     * [.getSubtype(metadata)](#Asset.getSubtype) ⇒ <code>TYPE.AssetSubType</code>
-    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#Asset.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildDefinitionForNested) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildTemplateForNested) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Asset._buildForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseMetadata(metadata)](#Asset.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
     * [._mergeCode(metadata, deployDir, subType, [templateName])](#Asset._mergeCode) ⇒ <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code>
     * [._mergeCode_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName])](#Asset._mergeCode_slots) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -897,9 +936,9 @@ determines the subtype of the current asset
 | --- | --- | --- |
 | metadata | <code>TYPE.AssetItem</code> | a single asset |
 
-<a name="Asset.buildDefinitionForExtracts"></a>
+<a name="Asset.buildDefinitionForNested"></a>
 
-### Asset.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+### Asset.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for buildDefinition
 handles extracted code if any are found for complex types
 
@@ -911,8 +950,47 @@ handles extracted code if any are found for complex types
 | templateDir | <code>string</code> | Directory where metadata templates are stored |
 | targetDir | <code>string</code> | Directory where built definitions will be saved |
 | metadata | <code>TYPE.AssetItem</code> | main JSON file that was read from file system |
-| variables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
+
+<a name="Asset.buildTemplateForNested"></a>
+
+### Asset.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+helper for buildTemplate
+handles extracted code if any are found for complex types
+
+**Kind**: static method of [<code>Asset</code>](#Asset)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - void  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> \| <code>Array.&lt;string&gt;</code> | (List of) Directory where built definitions will be saved |
+| metadata | <code>TYPE.AssetItem</code> | main JSON file that was read from file system |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateName | <code>string</code> | name of the template to be built |
+
+**Example**  
+```js
+assets of type codesnippetblock will result in 1 json and 1 amp/html file. both files need to be run through templating
+```
+<a name="Asset._buildForNested"></a>
+
+### Asset.\_buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;void&gt;</code>
+helper for buildDefinition
+handles extracted code if any are found for complex types
+
+**Kind**: static method of [<code>Asset</code>](#Asset)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> | Directory where built definitions will be saved |
+| metadata | <code>TYPE.AssetItem</code> | main JSON file that was read from file system |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateName | <code>string</code> | name of the template to be built |
+| mode | <code>&#x27;definition&#x27;</code> \| <code>&#x27;template&#x27;</code> | defines what we use this helper for |
 
 <a name="Asset.parseMetadata"></a>
 
@@ -2659,7 +2737,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 **Kind**: global class  
 
 * [MetadataType](#MetadataType)
-    * [.client](#MetadataType.client) : <code>Util.SDK</code>
+    * [.client](#MetadataType.client) : <code>TYPE.SDK</code>
     * [.properties](#MetadataType.properties) : <code>TYPE.MultiMetadataTypeMap</code>
     * [.subType](#MetadataType.subType) : <code>string</code>
     * [.buObject](#MetadataType.buObject) : <code>object</code>
@@ -2673,6 +2751,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.retrieveChangelog([buObject], [additionalFields], [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
+    * [.buildTemplate(retrieveDir, templateDir, key, templateVariables)](#MetadataType.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.preDeployTasks(metadata, deployDir)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
     * [.create(metadata, deployDir)](#MetadataType.create) ⇒ <code>void</code>
     * [.update(metadata, [metadataBefore])](#MetadataType.update) ⇒ <code>void</code>
@@ -2692,7 +2771,10 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.isFiltered(metadataEntry, [include])](#MetadataType.isFiltered) ⇒ <code>boolean</code>
     * [.isFilteredFolder(metadataEntry, [include])](#MetadataType.isFilteredFolder) ⇒ <code>boolean</code>
     * [.saveResults(results, retrieveDir, [overrideType], [templateVariables])](#MetadataType.saveResults) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
-    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#MetadataType.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.applyTemplateValues(code, templateVariables)](#MetadataType.applyTemplateValues) ⇒ <code>string</code>
+    * [.applyTemplateNames(code, templateVariables)](#MetadataType.applyTemplateNames) ⇒ <code>string</code>
+    * [.buildDefinitionForNested(templateDir, targetDir, metadata, variables, templateName)](#MetadataType.buildDefinitionForNested) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MetadataType.buildTemplateForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.findSubType(templateDir, templateName)](#MetadataType.findSubType) ⇒ <code>string</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName, ex)](#MetadataType.readSecondaryFolder) ⇒ <code>object</code>
     * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType.buildDefinition) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -2705,7 +2787,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 
 <a name="MetadataType.client"></a>
 
-### MetadataType.client : <code>Util.SDK</code>
+### MetadataType.client : <code>TYPE.SDK</code>
 **Kind**: static property of [<code>MetadataType</code>](#MetadataType)  
 <a name="MetadataType.properties"></a>
 
@@ -2853,6 +2935,21 @@ Gets metadata cache with limited fields and does not store value to disk
 | name | <code>string</code> | name of the metadata file |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | [subType] | <code>string</code> | optionally limit to a single subtype |
+
+<a name="MetadataType.buildTemplate"></a>
+
+### MetadataType.buildTemplate(retrieveDir, templateDir, key, templateVariables) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
+Gets metadata cache with limited fields and does not store value to disk
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code> - single metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| templateDir | <code>string</code> | (List of) Directory where built definitions will be saved |
+| key | <code>string</code> | name of the metadata file |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="MetadataType.preDeployTasks"></a>
 
@@ -3105,9 +3202,37 @@ Helper for writing Metadata to disk, used for Retrieve and deploy
 | [overrideType] | <code>string</code> | for use when there is a subtype (such as folder-queries) |
 | [templateVariables] | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
-<a name="MetadataType.buildDefinitionForExtracts"></a>
+<a name="MetadataType.applyTemplateValues"></a>
 
-### MetadataType.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+### MetadataType.applyTemplateValues(code, templateVariables) ⇒ <code>string</code>
+helper for buildDefinitionForNested
+searches extracted file for template variable names and applies the market values
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>string</code> - code with markets applied  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| code | <code>string</code> | code from extracted code |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+
+<a name="MetadataType.applyTemplateNames"></a>
+
+### MetadataType.applyTemplateNames(code, templateVariables) ⇒ <code>string</code>
+helper for buildTemplateForNested
+searches extracted file for template variable values and applies the market variable names
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>string</code> - code with markets applied  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| code | <code>string</code> | code from extracted code |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+
+<a name="MetadataType.buildDefinitionForNested"></a>
+
+### MetadataType.buildDefinitionForNested(templateDir, targetDir, metadata, variables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
@@ -3120,6 +3245,23 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 | targetDir | <code>string</code> | Directory where built definitions will be saved |
 | metadata | <code>TYPE.MetadataTypeItem</code> | main JSON file that was read from file system |
 | variables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateName | <code>string</code> | name of the template to be built |
+
+<a name="MetadataType.buildTemplateForNested"></a>
+
+### MetadataType.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+helper for buildTemplate
+handles extracted code if any are found for complex types
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - void  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> \| <code>Array.&lt;string&gt;</code> | (List of) Directory where built definitions will be saved |
+| metadata | <code>TYPE.MetadataTypeItem</code> | main JSON file that was read from file system |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
 
 <a name="MetadataType.findSubType"></a>
@@ -3368,7 +3510,9 @@ Query MetadataType
     * [.create(query)](#Query.create) ⇒ <code>Promise</code>
     * [.update(query)](#Query.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata, deployDir)](#Query.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.QueryItem&gt;</code>
-    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#Query.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.applyTemplateValues(code, templateVariables)](#Query.applyTemplateValues) ⇒ <code>string</code>
+    * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildDefinitionForNested) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildTemplateForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseMetadata(metadata)](#Query.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
 
 <a name="Query.retrieve"></a>
@@ -3455,23 +3599,58 @@ prepares a Query for deployment
 | metadata | <code>TYPE.QueryItem</code> | a single query activity |
 | deployDir | <code>string</code> | directory of deploy files |
 
-<a name="Query.buildDefinitionForExtracts"></a>
+<a name="Query.applyTemplateValues"></a>
 
-### Query.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+### Query.applyTemplateValues(code, templateVariables) ⇒ <code>string</code>
+helper for buildDefinitionForNested
+searches extracted SQL file for template variables and applies the market values
+
+**Kind**: static method of [<code>Query</code>](#Query)  
+**Returns**: <code>string</code> - code with markets applied  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| code | <code>string</code> | code from extracted code |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+
+<a name="Query.buildDefinitionForNested"></a>
+
+### Query.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for buildDefinition
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;void&gt;</code> - void  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | templateDir | <code>string</code> | Directory where metadata templates are stored |
 | targetDir | <code>string</code> \| <code>Array.&lt;string&gt;</code> | (List of) Directory where built definitions will be saved |
-| metadata | <code>TYPE.MetadataTypeItem</code> | main JSON file that was read from file system |
-| variables | <code>object</code> | variables to be replaced in the metadata |
+| metadata | <code>TYPE.QueryItem</code> | main JSON file that was read from file system |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
 
+<a name="Query.buildTemplateForNested"></a>
+
+### Query.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+helper for buildTemplate
+handles extracted code if any are found for complex types
+
+**Kind**: static method of [<code>Query</code>](#Query)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - void  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> \| <code>Array.&lt;string&gt;</code> | (List of) Directory where built definitions will be saved |
+| metadata | <code>TYPE.QueryItem</code> | main JSON file that was read from file system |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateName | <code>string</code> | name of the template to be built |
+
+**Example**  
+```js
+queries are saved as 1 json and 1 sql file. both files need to be run through templating
+```
 <a name="Query.parseMetadata"></a>
 
 ### Query.parseMetadata(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
@@ -3594,7 +3773,9 @@ Script MetadataType
     * [.create(script)](#Script.create) ⇒ <code>Promise</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#Script._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.preDeployTasks(metadata, dir)](#Script.preDeployTasks) ⇒ <code>TYPE.ScriptItem</code>
-    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#Script.buildDefinitionForExtracts) ⇒ <code>Promise</code>
+    * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildDefinitionForNested) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildTemplateForNested) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Script._buildForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseMetadata(metadata)](#Script.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
 
 <a name="Script.retrieve"></a>
@@ -3696,22 +3877,61 @@ prepares a Script for deployment
 | metadata | <code>TYPE.ScriptItem</code> | a single script activity definition |
 | dir | <code>string</code> | directory of deploy files |
 
-<a name="Script.buildDefinitionForExtracts"></a>
+<a name="Script.buildDefinitionForNested"></a>
 
-### Script.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName) ⇒ <code>Promise</code>
+### Script.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for buildDefinition
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Script</code>](#Script)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | templateDir | <code>string</code> | Directory where metadata templates are stored |
 | targetDir | <code>string</code> \| <code>Array.&lt;string&gt;</code> | (List of) Directory where built definitions will be saved |
 | metadata | <code>TYPE.ScriptItem</code> | main JSON file that was read from file system |
-| variables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
+
+<a name="Script.buildTemplateForNested"></a>
+
+### Script.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+helper for buildTemplate
+handles extracted code if any are found for complex types
+
+**Kind**: static method of [<code>Script</code>](#Script)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - void  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> \| <code>Array.&lt;string&gt;</code> | (List of) Directory where built definitions will be saved |
+| metadata | <code>TYPE.ScriptItem</code> | main JSON file that was read from file system |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateName | <code>string</code> | name of the template to be built |
+
+**Example**  
+```js
+scripts are saved as 1 json and 1 ssjs file. both files need to be run through templating
+```
+<a name="Script._buildForNested"></a>
+
+### Script.\_buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;void&gt;</code>
+helper for buildTemplateForNested / buildDefinitionForNested
+handles extracted code if any are found for complex types
+
+**Kind**: static method of [<code>Script</code>](#Script)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> \| <code>Array.&lt;string&gt;</code> | (List of) Directory where built definitions will be saved |
+| metadata | <code>TYPE.ScriptItem</code> | main JSON file that was read from file system |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateName | <code>string</code> | name of the template to be built |
+| mode | <code>&#x27;definition&#x27;</code> \| <code>&#x27;template&#x27;</code> | defines what we use this helper for |
 
 <a name="Script.parseMetadata"></a>
 
@@ -5739,11 +5959,11 @@ configures what is displayed in the console
 
 <a name="setupSDK"></a>
 
-## setupSDK(credentialKey, authObject) ⇒ <code>SDK</code>
+## setupSDK(credentialKey, authObject) ⇒ [<code>SDK</code>](#SDK)
 Returns an SDK instance to be used for API calls
 
 **Kind**: global function  
-**Returns**: <code>SDK</code> - auth object  
+**Returns**: [<code>SDK</code>](#SDK) - auth object  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5763,13 +5983,15 @@ wrapper around our standard winston logging to console and logfile
 initiate winston logger
 
 **Kind**: global function  
-<a name="TemplateMap"></a>
+<a name="SupportedMetadataTypes"></a>
 
-## TemplateMap : <code>Object.&lt;string, string&gt;</code>
+## SupportedMetadataTypes : <code>Object.&lt;string, string&gt;</code>
 **Kind**: global typedef  
 <a name="MetadataTypeItemObj"></a>
 
 ## MetadataTypeItemObj : <code>Object.&lt;string, any&gt;</code>
+key=customer key
+
 **Kind**: global typedef  
 <a name="CodeExtractItem"></a>
 
@@ -6027,9 +6249,9 @@ SOAP format
 | r__folder_Path | <code>string</code> | folder path |
 | [categoryId] | <code>string</code> | holds folder ID, replaced with r__folder_Path during retrieve |
 
-<a name="AutomationItemObj"></a>
+<a name="SDK"></a>
 
-## AutomationItemObj : <code>Object.&lt;string, AutomationItem&gt;</code>
+## SDK : <code>Object.&lt;string, AutomationItem&gt;</code>
 **Kind**: global typedef  
 <a name="skipInteraction"></a>
 

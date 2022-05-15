@@ -1,3 +1,4 @@
+const SDK = require('sfmc-sdk');
 /**
  * @ignore
  * @typedef {object} BuObject
@@ -11,15 +12,16 @@
  */
 /**
  * @typedef {Object.<string, string>} TemplateMap
+ * @typedef {'accountUser'|'asset'|'attributeGroup'|'automation'|'campaign'|'contentArea'|'dataExtension'|'dataExtensionField'|'dataExtensionTemplate'|'dataExtract'|'dataExtractType'|'discovery'|'email'|'emailSendDefinition'|'eventDefinition'|'fileTransfer'|'filter'|'folder'|'ftpLocation'|'importFile'|'interaction'|'list'|'mobileCode'|'mobileKeyword'|'query'|'role'|'script'|'setDefinition'|'triggeredSendDefinition'} SupportedMetadataTypes
  */
 
 /**
  * @typedef {Object.<string, any>} MetadataTypeItem
- * @typedef {Object.<string, MetadataTypeItem>} MetadataTypeMap
- * @typedef {Object.<string, MetadataTypeMap>} MultiMetadataTypeMap
- * @typedef {Object.<string, MetadataTypeItem[]>} MultiMetadataTypeList
- * @typedef {{metadata:MetadataTypeMap,type:string}} MetadataTypeMapObj
- * @typedef {{metadata:MetadataTypeItem,type:string}} MetadataTypeItemObj
+ * @typedef {Object.<string, MetadataTypeItem>} MetadataTypeMap key=customer key
+ * @typedef {Object.<string, MetadataTypeMap>} MultiMetadataTypeMap key=Supported MetadataType
+ * @typedef {Object.<string, MetadataTypeItem[]>} MultiMetadataTypeList key=Supported MetadataType
+ * @typedef {{metadata:MetadataTypeMap,type:SupportedMetadataTypes}} MetadataTypeMapObj
+ * @typedef {{metadata:MetadataTypeItem,type:SupportedMetadataTypes}} MetadataTypeItemObj
  */
 
 /**
@@ -213,6 +215,7 @@
  * @typedef {Object.<string, AutomationItem>} AutomationMap
  * @typedef {{metadata:AutomationMap,type:string}} AutomationMapObj
  * @typedef {{metadata:AutomationItem,type:string}} AutomationItemObj
+ * @typedef {SDK} SDK
  */
 
 /**
