@@ -1156,6 +1156,7 @@ Automation MetadataType
     * [.parseMetadata(metadata)](#Automation.parseMetadata) ⇒ <code>TYPE.AutomationItem</code>
     * [._buildSchedule(scheduleObject)](#Automation._buildSchedule) ⇒ <code>TYPE.AutomationScheduleSoap</code>
     * [._calcTime(offsetServer, dateInput, [offsetInput])](#Automation._calcTime) ⇒ <code>string</code>
+    * [.document(buObject, [metadata])](#Automation.document) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="Automation.retrieve"></a>
 
@@ -1326,6 +1327,19 @@ used to convert dates to the system timezone required for startDate
 | offsetServer | <code>number</code> | stack4: US Mountain time (UTC-7); other stacks: US Central (UTC-6) |
 | dateInput | <code>string</code> \| <code>Date</code> | date in ISO format (2021-12-05T20:00:00.983) |
 | [offsetInput] | <code>string</code> | timzone difference (+02:00) |
+
+<a name="Automation.document"></a>
+
+### Automation.document(buObject, [metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
+Parses metadata into a readable Markdown/HTML format then saves it
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>TYPE.BuObject</code> | properties for auth |
+| [metadata] | <code>TYPE.AutomationMap</code> | a list of dataExtension definitions |
 
 <a name="Campaign"></a>
 
@@ -6149,7 +6163,7 @@ key=customer key
 | name | <code>string</code> | name (not key) of activity |
 | [objectTypeId] | <code>string</code> | Id of assoicated activity type; see this.definition.activityTypeMapping |
 | [activityObjectId] | <code>string</code> | Object Id of assoicated metadata item |
-| displayOrder | <code>number</code> | order within step; starts with 1 or higher number |
+| [displayOrder] | <code>number</code> | order within step; starts with 1 or higher number |
 | r__type | <code>string</code> | see this.definition.activityTypeMapping |
 
 <a name="AutomationStep"></a>
@@ -6162,7 +6176,7 @@ key=customer key
 | --- | --- | --- |
 | name | <code>string</code> | description |
 | [annotation] | <code>string</code> | equals AutomationStep.name |
-| step | <code>number</code> | step iterator |
+| [step] | <code>number</code> | step iterator; starts with 1 |
 | [stepNumber] | <code>number</code> | step iterator, automatically set during deployment |
 | activities | [<code>Array.&lt;AutomationActivity&gt;</code>](#AutomationActivity) | - |
 
@@ -6230,20 +6244,22 @@ SOAP format
 | name | <code>string</code> | name |
 | description | <code>string</code> | - |
 | type | <code>&#x27;scheduled&#x27;</code> \| <code>&#x27;triggered&#x27;</code> | Starting Source = Schedule / File Drop |
-| status | <code>&#x27;Scheduled&#x27;</code> \| <code>&#x27;Running&#x27;</code> | - |
+| status | <code>&#x27;Scheduled&#x27;</code> \| <code>&#x27;Running&#x27;</code> \| <code>&#x27;Ready&#x27;</code> \| <code>&#x27;Building&#x27;</code> \| <code>&#x27;PausedSchedule&#x27;</code> \| <code>&#x27;InactiveTrigger&#x27;</code> | - |
 | [schedule] | [<code>AutomationSchedule</code>](#AutomationSchedule) | only existing if type=scheduled |
 | [fileTrigger] | <code>object</code> | only existing if type=triggered |
-| fileTrigger.fileNamingPattern | <code>string</code> | - |
-| fileTrigger.fileNamePatternTypeId | <code>string</code> | - |
-| fileTrigger.folderLocationText | <code>string</code> | - |
-| fileTrigger.queueFiles | <code>string</code> | - |
+| fileTrigger.fileNamingPattern | <code>string</code> | file name with placeholders |
+| fileTrigger.fileNamePatternTypeId | <code>number</code> | - |
+| fileTrigger.folderLocationText | <code>string</code> | where to look for the fileNamingPattern |
+| fileTrigger.isPublished | <code>boolean</code> | ? |
+| fileTrigger.queueFiles | <code>boolean</code> | ? |
+| fileTrigger.triggerActive | <code>boolean</code> | - |
 | [startSource] | <code>object</code> | - |
 | [startSource.schedule] | [<code>AutomationSchedule</code>](#AutomationSchedule) | rewritten to AutomationItem.schedule |
 | [startSource.fileDrop] | <code>object</code> | rewritten to AutomationItem.fileTrigger |
-| startSource.fileDrop.fileNamingPattern | <code>string</code> | - |
+| startSource.fileDrop.fileNamingPattern | <code>string</code> | file name with placeholders |
 | startSource.fileDrop.fileNamePatternTypeId | <code>string</code> | - |
 | startSource.fileDrop.folderLocation | <code>string</code> | - |
-| startSource.fileDrop.queueFiles | <code>string</code> | - |
+| startSource.fileDrop.queueFiles | <code>boolean</code> | - |
 | startSource.typeId | <code>number</code> | - |
 | steps | [<code>Array.&lt;AutomationStep&gt;</code>](#AutomationStep) | - |
 | r__folder_Path | <code>string</code> | folder path |

@@ -139,14 +139,14 @@ const SDK = require('sfmc-sdk');
  * @property {string} name name (not key) of activity
  * @property {string} [objectTypeId] Id of assoicated activity type; see this.definition.activityTypeMapping
  * @property {string} [activityObjectId] Object Id of assoicated metadata item
- * @property {number} displayOrder order within step; starts with 1 or higher number
+ * @property {number} [displayOrder] order within step; starts with 1 or higher number
  * @property {string} r__type see this.definition.activityTypeMapping
  */
 /**
  * @typedef {object}  AutomationStep
  * @property {string} name description
  * @property {string} [annotation] equals AutomationStep.name
- * @property {number} step step iterator
+ * @property {number} [step] step iterator; starts with 1
  * @property {number} [stepNumber] step iterator, automatically set during deployment
  * @property {AutomationActivity[]} activities -
  */
@@ -192,20 +192,22 @@ const SDK = require('sfmc-sdk');
  * @property {string} name name
  * @property {string} description -
  * @property {'scheduled'|'triggered'} type Starting Source = Schedule / File Drop
- * @property {'Scheduled'|'Running'} status -
+ * @property {'Scheduled'|'Running'|'Ready'|'Building'|'PausedSchedule'|'InactiveTrigger'} status -
  * @property {AutomationSchedule} [schedule] only existing if type=scheduled
  * @property {object} [fileTrigger] only existing if type=triggered
- * @property {string} fileTrigger.fileNamingPattern -
- * @property {string} fileTrigger.fileNamePatternTypeId -
- * @property {string} fileTrigger.folderLocationText -
- * @property {string} fileTrigger.queueFiles -
+ * @property {string} fileTrigger.fileNamingPattern file name with placeholders
+ * @property {number} fileTrigger.fileNamePatternTypeId -
+ * @property {string} fileTrigger.folderLocationText where to look for the fileNamingPattern
+ * @property {boolean} fileTrigger.isPublished ?
+ * @property {boolean} fileTrigger.queueFiles ?
+ * @property {boolean} fileTrigger.triggerActive -
  * @property {object} [startSource] -
  * @property {AutomationSchedule} [startSource.schedule] rewritten to AutomationItem.schedule
  * @property {object} [startSource.fileDrop] rewritten to AutomationItem.fileTrigger
- * @property {string} startSource.fileDrop.fileNamingPattern -
+ * @property {string} startSource.fileDrop.fileNamingPattern file name with placeholders
  * @property {string} startSource.fileDrop.fileNamePatternTypeId -
  * @property {string} startSource.fileDrop.folderLocation -
- * @property {string} startSource.fileDrop.queueFiles -
+ * @property {boolean} startSource.fileDrop.queueFiles -
  * @property {number} startSource.typeId -
  * @property {AutomationStep[]} steps -
  * @property {string} r__folder_Path folder path
