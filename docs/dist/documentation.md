@@ -814,9 +814,9 @@ FileTransfer MetadataType
     * [.postRetrieveTasks(metadata)](#Asset.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.preDeployTasks(metadata, deployDir)](#Asset.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
     * [.getSubtype(metadata)](#Asset.getSubtype) ⇒ <code>TYPE.AssetSubType</code>
-    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildTemplateForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._buildXForExtracts(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Asset._buildXForExtracts) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildDefinitionForNested) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildTemplateForNested) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Asset._buildForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseMetadata(metadata)](#Asset.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
     * [._mergeCode(metadata, deployDir, subType, [templateName])](#Asset._mergeCode) ⇒ <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code>
     * [._mergeCode_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName])](#Asset._mergeCode_slots) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -992,9 +992,9 @@ determines the subtype of the current asset
 | --- | --- | --- |
 | metadata | <code>TYPE.AssetItem</code> | a single asset |
 
-<a name="Asset.buildDefinitionForExtracts"></a>
+<a name="Asset.buildDefinitionForNested"></a>
 
-### Asset.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+### Asset.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for buildDefinition
 handles extracted code if any are found for complex types
 
@@ -1009,9 +1009,9 @@ handles extracted code if any are found for complex types
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
 
-<a name="Asset.buildTemplateForExtracts"></a>
+<a name="Asset.buildTemplateForNested"></a>
 
-### Asset.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
+### Asset.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for buildTemplate
 handles extracted code if any are found for complex types
 
@@ -1026,9 +1026,13 @@ handles extracted code if any are found for complex types
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
 
-<a name="Asset._buildXForExtracts"></a>
+**Example**  
+```js
+assets of type codesnippetblock will result in 1 json and 1 amp/html file. both files need to be run through templating
+```
+<a name="Asset._buildForNested"></a>
 
-### Asset.\_buildXForExtracts(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;void&gt;</code>
+### Asset.\_buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for buildDefinition
 handles extracted code if any are found for complex types
 
@@ -1210,6 +1214,7 @@ Automation MetadataType
     * [.parseMetadata(metadata)](#Automation.parseMetadata) ⇒ <code>TYPE.AutomationItem</code>
     * [._buildSchedule(scheduleObject)](#Automation._buildSchedule) ⇒ <code>TYPE.AutomationScheduleSoap</code>
     * [._calcTime(offsetServer, dateInput, [offsetInput])](#Automation._calcTime) ⇒ <code>string</code>
+    * [.document(buObject, [metadata])](#Automation.document) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="Automation.retrieve"></a>
 
@@ -1378,6 +1383,19 @@ used to convert dates to the system timezone required for startDate
 | offsetServer | <code>number</code> | stack4: US Mountain time (UTC-7); other stacks: US Central (UTC-6) |
 | dateInput | <code>string</code> \| <code>Date</code> | date in ISO format (2021-12-05T20:00:00.983) |
 | [offsetInput] | <code>string</code> | timzone difference (+02:00) |
+
+<a name="Automation.document"></a>
+
+### Automation.document(buObject, [metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
+Parses metadata into a readable Markdown/HTML format then saves it
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>TYPE.BuObject</code> | properties for auth |
+| [metadata] | <code>TYPE.AutomationMap</code> | a list of dataExtension definitions |
 
 <a name="Campaign"></a>
 
@@ -2822,8 +2840,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.saveResults(results, retrieveDir, [overrideType], [templateVariables])](#MetadataType.saveResults) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.applyTemplateValues(code, templateVariables)](#MetadataType.applyTemplateValues) ⇒ <code>string</code>
     * [.applyTemplateNames(code, templateVariables)](#MetadataType.applyTemplateNames) ⇒ <code>string</code>
-    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName)](#MetadataType.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-    * [.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#MetadataType.buildTemplateForExtracts) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [.buildDefinitionForNested(templateDir, targetDir, metadata, variables, templateName)](#MetadataType.buildDefinitionForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MetadataType.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.findSubType(templateDir, templateName)](#MetadataType.findSubType) ⇒ <code>string</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName, ex)](#MetadataType.readSecondaryFolder) ⇒ <code>object</code>
     * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType.buildDefinition) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -3242,7 +3260,7 @@ Helper for writing Metadata to disk, used for Retrieve and deploy
 <a name="MetadataType.applyTemplateValues"></a>
 
 ### MetadataType.applyTemplateValues(code, templateVariables) ⇒ <code>string</code>
-helper for buildDefinitionForExtracts
+helper for buildDefinitionForNested
 searches extracted file for template variable names and applies the market values
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3256,7 +3274,7 @@ searches extracted file for template variable names and applies the market value
 <a name="MetadataType.applyTemplateNames"></a>
 
 ### MetadataType.applyTemplateNames(code, templateVariables) ⇒ <code>string</code>
-helper for buildTemplateForExtracts
+helper for buildTemplateForNested
 searches extracted file for template variable values and applies the market variable names
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3267,9 +3285,9 @@ searches extracted file for template variable values and applies the market vari
 | code | <code>string</code> | code from extracted code |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
-<a name="MetadataType.buildDefinitionForExtracts"></a>
+<a name="MetadataType.buildDefinitionForNested"></a>
 
-### MetadataType.buildDefinitionForExtracts(templateDir, targetDir, metadata, variables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+### MetadataType.buildDefinitionForNested(templateDir, targetDir, metadata, variables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
 helper for buildDefinition
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
@@ -3284,9 +3302,9 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 | variables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
 
-<a name="MetadataType.buildTemplateForExtracts"></a>
+<a name="MetadataType.buildTemplateForNested"></a>
 
-### MetadataType.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+### MetadataType.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
 helper for buildTemplate
 handles extracted code if any are found for complex types
 
@@ -3548,8 +3566,8 @@ Query MetadataType
     * [.update(query)](#Query.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata, deployDir)](#Query.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.QueryItem&gt;</code>
     * [.applyTemplateValues(code, templateVariables)](#Query.applyTemplateValues) ⇒ <code>string</code>
-    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-    * [.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildTemplateForExtracts) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildDefinitionForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.parseMetadata(metadata)](#Query.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
 
 <a name="Query.retrieve"></a>
@@ -3637,7 +3655,7 @@ prepares a Query for deployment
 <a name="Query.applyTemplateValues"></a>
 
 ### Query.applyTemplateValues(code, templateVariables) ⇒ <code>string</code>
-helper for buildDefinitionForExtracts
+helper for buildDefinitionForNested
 searches extracted SQL file for template variables and applies the market values
 
 **Kind**: static method of [<code>Query</code>](#Query)  
@@ -3648,9 +3666,9 @@ searches extracted SQL file for template variables and applies the market values
 | code | <code>string</code> | code from extracted code |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
-<a name="Query.buildDefinitionForExtracts"></a>
+<a name="Query.buildDefinitionForNested"></a>
 
-### Query.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+### Query.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
 helper for buildDefinition
 handles extracted code if any are found for complex types
 
@@ -3665,9 +3683,9 @@ handles extracted code if any are found for complex types
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
 
-<a name="Query.buildTemplateForExtracts"></a>
+<a name="Query.buildTemplateForNested"></a>
 
-### Query.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+### Query.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
 helper for buildTemplate
 handles extracted code if any are found for complex types
 
@@ -3682,6 +3700,10 @@ handles extracted code if any are found for complex types
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
 
+**Example**  
+```js
+queries are saved as 1 json and 1 sql file. both files need to be run through templating
+```
 <a name="Query.parseMetadata"></a>
 
 ### Query.parseMetadata(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
@@ -3804,9 +3826,9 @@ Script MetadataType
     * [.create(script)](#Script.create) ⇒ <code>Promise</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#Script._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.preDeployTasks(metadata, dir)](#Script.preDeployTasks) ⇒ <code>TYPE.ScriptItem</code>
-    * [.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildDefinitionForExtracts) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-    * [.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildTemplateForExtracts) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-    * [._buildXForExtracts(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Script._buildXForExtracts) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildDefinitionForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Script._buildForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.parseMetadata(metadata)](#Script.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
 
 <a name="Script.retrieve"></a>
@@ -3906,9 +3928,9 @@ prepares a Script for deployment
 | metadata | <code>TYPE.ScriptItem</code> | a single script activity definition |
 | dir | <code>string</code> | directory of deploy files |
 
-<a name="Script.buildDefinitionForExtracts"></a>
+<a name="Script.buildDefinitionForNested"></a>
 
-### Script.buildDefinitionForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+### Script.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
 helper for buildDefinition
 handles extracted code if any are found for complex types
 
@@ -3923,9 +3945,9 @@ handles extracted code if any are found for complex types
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
 
-<a name="Script.buildTemplateForExtracts"></a>
+<a name="Script.buildTemplateForNested"></a>
 
-### Script.buildTemplateForExtracts(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+### Script.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
 helper for buildTemplate
 handles extracted code if any are found for complex types
 
@@ -3940,10 +3962,14 @@ handles extracted code if any are found for complex types
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | templateName | <code>string</code> | name of the template to be built |
 
-<a name="Script._buildXForExtracts"></a>
+**Example**  
+```js
+scripts are saved as 1 json and 1 ssjs file. both files need to be run through templating
+```
+<a name="Script._buildForNested"></a>
 
-### Script.\_buildXForExtracts(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for buildTemplateForExtracts / buildDefinitionForExtracts
+### Script.\_buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+helper for buildTemplateForNested / buildDefinitionForNested
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Script</code>](#Script)  
@@ -6287,7 +6313,7 @@ key=customer key
 | name | <code>string</code> | name (not key) of activity |
 | [objectTypeId] | <code>string</code> | Id of assoicated activity type; see this.definition.activityTypeMapping |
 | [activityObjectId] | <code>string</code> | Object Id of assoicated metadata item |
-| displayOrder | <code>number</code> | order within step; starts with 1 or higher number |
+| [displayOrder] | <code>number</code> | order within step; starts with 1 or higher number |
 | r__type | <code>string</code> | see this.definition.activityTypeMapping |
 
 <a name="AutomationStep"></a>
@@ -6300,7 +6326,7 @@ key=customer key
 | --- | --- | --- |
 | name | <code>string</code> | description |
 | [annotation] | <code>string</code> | equals AutomationStep.name |
-| step | <code>number</code> | step iterator |
+| [step] | <code>number</code> | step iterator; starts with 1 |
 | [stepNumber] | <code>number</code> | step iterator, automatically set during deployment |
 | activities | [<code>Array.&lt;AutomationActivity&gt;</code>](#AutomationActivity) | - |
 
@@ -6368,20 +6394,22 @@ SOAP format
 | name | <code>string</code> | name |
 | description | <code>string</code> | - |
 | type | <code>&#x27;scheduled&#x27;</code> \| <code>&#x27;triggered&#x27;</code> | Starting Source = Schedule / File Drop |
-| status | <code>&#x27;Scheduled&#x27;</code> \| <code>&#x27;Running&#x27;</code> | - |
+| status | <code>&#x27;Scheduled&#x27;</code> \| <code>&#x27;Running&#x27;</code> \| <code>&#x27;Ready&#x27;</code> \| <code>&#x27;Building&#x27;</code> \| <code>&#x27;PausedSchedule&#x27;</code> \| <code>&#x27;InactiveTrigger&#x27;</code> | - |
 | [schedule] | [<code>AutomationSchedule</code>](#AutomationSchedule) | only existing if type=scheduled |
 | [fileTrigger] | <code>object</code> | only existing if type=triggered |
-| fileTrigger.fileNamingPattern | <code>string</code> | - |
-| fileTrigger.fileNamePatternTypeId | <code>string</code> | - |
-| fileTrigger.folderLocationText | <code>string</code> | - |
-| fileTrigger.queueFiles | <code>string</code> | - |
+| fileTrigger.fileNamingPattern | <code>string</code> | file name with placeholders |
+| fileTrigger.fileNamePatternTypeId | <code>number</code> | - |
+| fileTrigger.folderLocationText | <code>string</code> | where to look for the fileNamingPattern |
+| fileTrigger.isPublished | <code>boolean</code> | ? |
+| fileTrigger.queueFiles | <code>boolean</code> | ? |
+| fileTrigger.triggerActive | <code>boolean</code> | - |
 | [startSource] | <code>object</code> | - |
 | [startSource.schedule] | [<code>AutomationSchedule</code>](#AutomationSchedule) | rewritten to AutomationItem.schedule |
 | [startSource.fileDrop] | <code>object</code> | rewritten to AutomationItem.fileTrigger |
-| startSource.fileDrop.fileNamingPattern | <code>string</code> | - |
+| startSource.fileDrop.fileNamingPattern | <code>string</code> | file name with placeholders |
 | startSource.fileDrop.fileNamePatternTypeId | <code>string</code> | - |
 | startSource.fileDrop.folderLocation | <code>string</code> | - |
-| startSource.fileDrop.queueFiles | <code>string</code> | - |
+| startSource.fileDrop.queueFiles | <code>boolean</code> | - |
 | startSource.typeId | <code>number</code> | - |
 | steps | [<code>Array.&lt;AutomationStep&gt;</code>](#AutomationStep) | - |
 | r__folder_Path | <code>string</code> | folder path |

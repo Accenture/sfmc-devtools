@@ -397,15 +397,15 @@ The following metadata types are currently supported:
 | Data Extension Template            | `dataExtensionTemplate`   | Yes      | -          | -          | -                    | OOTB Database table schemas used for special cases like Transactional Journeys.                                    |
 | Data Extract Type                  | `dataExtractType`         | Yes      | -          | -          | -                    | Types of Data Extracts enabled for a specific business unit. This normally should not be stored.                   |
 | E-Mail (Classic)                   | `email`                   | Yes      | -          | -          | -                    | **DEPRECATED**: Old way of saving E-Mails; please migrate these to new E-Mail (`Asset: message`).                  |
-| E-Mail Send Definition             | `emailSendDefinition`     | Yes      | Yes        | in backlog | Yes                  | Mainly used in Automations as "Send Email Activity".                                                               |
-| Folder                             | `folder`                  | Yes      | Yes        | in backlog | -                    | Used to structure all kinds of other metadata.                                                                     |
+| E-Mail Send Definition             | `emailSendDefinition`     | Yes      | Yes        | yes (`bt`) | Yes                  | Mainly used in Automations as "Send Email Activity".                                                               |
+| Folder                             | `folder`                  | Yes      | Yes        | yes (`bt`) | -                    | Used to structure all kinds of other metadata.                                                                     |
 | FTPLocation                        | `ftpLocation`             | Yes      | -          | -          | Yes                  | A File Location which can be used for export or import of files to/from Marketing Cloud.                           |
 | Journey                            | `interaction`             | Yes      | in backlog | in backlog | -                    | Journey from Builder (internally called "Interaction").                                                            |
 | Journey: Entry Event Definition    | `eventDefinition`         | Yes      | Yes        | Yes        | -                    | Used in Journeys (Interactions) to define Entry Events.                                                            |
 | List                               | `list`                    | Yes      | in backlog | -          | Yes                  | Old way of storing data. Still used for central Email Subscriber DB.                                               |
 | Mobile Connect Code                | `mobileCode`              | Yes      | No         | No         | -                    | Mobile Connect Shore or Long Codes used for sending. First 50 per BU are retrieved                                 |
 | Mobile Connect Keyword             | `mobileKeyword`           | Yes      | Yes        | Yes        | -                    | Mobile Connect keywords configured within the Business UNit. First 50 per BU are retrieved                         |
-| Role                               | `role`                    | Yes      | Yes        | -          | Yes                  | User Roles define groups that are used to grant users access to SFMC systems.                                      |
+| Role                               | `role`                    | Yes      | Yes        | yes (`bt`)          | Yes                  | User Roles define groups that are used to grant users access to SFMC systems.                                      |
 | Triggered Send                     | `triggeredSendDefinition` | Yes      | Yes        | -          | Yes                  | **DEPRECATED**: Sends emails via API or DataExtension Event.                                                       |
 | User                               | `accountUser`             | Yes      | in backlog | -          | -                    | Users and Installed Packages including their assigned Roles, BUs and personal permissions                          |
 
@@ -544,6 +544,7 @@ Currently supported types:
 
 | Name           | CLI Argument    |
 | -------------- | --------------- |
+| Automation     | `automation`    |
 | Data Extension | `dataExtension` |
 | Role           | `role`          |
 | User           | `accountUser`   |
