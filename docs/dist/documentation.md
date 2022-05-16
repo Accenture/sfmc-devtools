@@ -691,7 +691,7 @@ MessageSendActivity MetadataType
 
 * [AccountUser](#AccountUser) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, _, buObject)](#AccountUser.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveChangelog(buObject)](#AccountUser.retrieveChangelog) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [.retrieveChangelog(buObject)](#AccountUser.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.timeSinceDate(date)](#AccountUser.timeSinceDate) ⇒ <code>number</code>
     * [.getBuName(buObject, id)](#AccountUser.getBuName) ⇒ <code>string</code>
     * [.document(buObject, [metadata])](#AccountUser.document) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -715,11 +715,11 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 
 <a name="AccountUser.retrieveChangelog"></a>
 
-### AccountUser.retrieveChangelog(buObject) ⇒ <code>Promise.&lt;object&gt;</code>
+### AccountUser.retrieveChangelog(buObject) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>Promise.&lt;object&gt;</code> - Promise of metadata  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -760,7 +760,7 @@ Creates markdown documentation of all roles
 | Param | Type | Description |
 | --- | --- | --- |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
-| [metadata] | <code>object</code> | user list |
+| [metadata] | <code>TYPE.MetadataTypeMap</code> | user list |
 
 <a name="AccountUser._generateDocMd"></a>
 
@@ -823,8 +823,8 @@ FileTransfer MetadataType
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildTemplateForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Asset._buildForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseMetadata(metadata)](#Asset.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
-    * [._mergeCode(metadata, deployDir, subType, [templateName])](#Asset._mergeCode) ⇒ <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code>
-    * [._mergeCode_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName])](#Asset._mergeCode_slots) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._mergeCode(metadata, deployDir, subType, [templateName], [fileListOnly])](#Asset._mergeCode) ⇒ <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code>
+    * [._mergeCode_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName], [fileListOnly])](#Asset._mergeCode_slots) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._extractCode(metadata)](#Asset._extractCode) ⇒ <code>TYPE.CodeExtractItem</code>
     * [._extractCode_slots(prefix, metadataSlots, codeArr)](#Asset._extractCode_slots) ⇒ <code>void</code>
     * [.getJsonFromFS(dir)](#Asset.getJsonFromFS) ⇒ <code>object</code>
@@ -1068,37 +1068,39 @@ parses retrieved Metadata before saving
 
 <a name="Asset._mergeCode"></a>
 
-### Asset.\_mergeCode(metadata, deployDir, subType, [templateName]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code>
+### Asset.\_mergeCode(metadata, deployDir, subType, [templateName], [fileListOnly]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code>
 helper for this.preDeployTasks() that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
 **Returns**: <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code> - fileList for templating (disregarded during deployment)  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.AssetItem</code> | a single asset definition |
-| deployDir | <code>string</code> | directory of deploy files |
-| subType | <code>TYPE.AssetSubType</code> | asset-subtype name |
-| [templateName] | <code>string</code> | name of the template used to built defintion (prior applying templating) |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| metadata | <code>TYPE.AssetItem</code> |  | a single asset definition |
+| deployDir | <code>string</code> |  | directory of deploy files |
+| subType | <code>TYPE.AssetSubType</code> |  | asset-subtype name |
+| [templateName] | <code>string</code> |  | name of the template used to built defintion (prior applying templating) |
+| [fileListOnly] | <code>boolean</code> | <code>false</code> | does not read file contents nor update metadata if true |
 
 <a name="Asset._mergeCode_slots"></a>
 
-### Asset.\_mergeCode\_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Asset.\_mergeCode\_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName], [fileListOnly]) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for this.preDeployTasks() that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| prefix | <code>string</code> | usually the customerkey |
-| metadataSlots | <code>object</code> | metadata.views.html.slots or deeper slots.<>.blocks.<>.slots |
-| readDirArr | <code>Array.&lt;string&gt;</code> | directory of deploy files |
-| subtypeExtension | <code>string</code> | asset-subtype name ending on -meta |
-| subDirArr | <code>Array.&lt;string&gt;</code> | directory of files w/o leading deploy dir |
-| fileList | <code>Array.&lt;object&gt;</code> | directory of files w/o leading deploy dir |
-| customerKey | <code>string</code> | external key of template (could have been changed if used during templating) |
-| [templateName] | <code>string</code> | name of the template used to built defintion (prior applying templating) |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| prefix | <code>string</code> |  | usually the customerkey |
+| metadataSlots | <code>object</code> |  | metadata.views.html.slots or deeper slots.<>.blocks.<>.slots |
+| readDirArr | <code>Array.&lt;string&gt;</code> |  | directory of deploy files |
+| subtypeExtension | <code>string</code> |  | asset-subtype name ending on -meta |
+| subDirArr | <code>Array.&lt;string&gt;</code> |  | directory of files w/o leading deploy dir |
+| fileList | <code>Array.&lt;object&gt;</code> |  | directory of files w/o leading deploy dir |
+| customerKey | <code>string</code> |  | external key of template (could have been changed if used during templating) |
+| [templateName] | <code>string</code> |  | name of the template used to built defintion (prior applying templating) |
+| [fileListOnly] | <code>boolean</code> | <code>false</code> | does not read file contents nor update metadata if true |
 
 <a name="Asset._extractCode"></a>
 
@@ -3866,7 +3868,7 @@ Creates markdown documentation of all roles
 | Param | Type | Description |
 | --- | --- | --- |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
-| [metadata] | <code>object</code> | role definitions |
+| [metadata] | <code>TYPE.MetadataTypeMap</code> | role definitions |
 
 <a name="Role._traverseRoles"></a>
 
