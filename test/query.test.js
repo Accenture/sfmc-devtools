@@ -20,8 +20,8 @@ describe('query', () => {
             const result = cache.getCache();
             assert.equal(Object.keys(result.query).length, 1, 'only one query expected');
             assert.deepEqual(
-                await testUtils.getExpectedFile('9999999', 'query', 'get'),
                 await testUtils.getActualFile('testExistingQuery', 'query'),
+                await testUtils.getExpectedFile('9999999', 'query', 'get'),
                 'returned metadata was not equal expected'
             );
             assert.equal(
@@ -41,13 +41,13 @@ describe('query', () => {
             const result = cache.getCache();
             assert.equal(Object.keys(result.query).length, 2, 'two querys expected');
             assert.deepEqual(
-                await testUtils.getExpectedFile('9999999', 'query', 'post'),
                 await testUtils.getActualFile('testQuery', 'query'),
+                await testUtils.getExpectedFile('9999999', 'query', 'post'),
                 'returned metadata was not equal expected for insert query'
             );
             assert.deepEqual(
-                await testUtils.getExpectedFile('9999999', 'query', 'patch'),
                 await testUtils.getActualFile('testExistingQuery', 'query'),
+                await testUtils.getExpectedFile('9999999', 'query', 'patch'),
                 'returned metadata was not equal expected for insert query'
             );
             assert.equal(
@@ -70,8 +70,8 @@ describe('query', () => {
             // WHEN
             assert.equal(Object.keys(result.query).length, 1, 'only one query expected');
             assert.deepEqual(
-                await testUtils.getExpectedFile('9999999', 'query', 'template'),
                 await testUtils.getActualTemplate('testExistingQuery', 'query'),
+                await testUtils.getExpectedFile('9999999', 'query', 'template'),
                 'returned template was not equal expected'
             );
             // THEN
@@ -82,8 +82,8 @@ describe('query', () => {
                 'testMarket'
             );
             assert.deepEqual(
-                await testUtils.getExpectedFile('9999999', 'query', 'build'),
                 await testUtils.getActualDeployFile('testExistingQuery', 'query'),
+                await testUtils.getExpectedFile('9999999', 'query', 'build'),
                 'returned deployment file was not equal expected'
             );
             assert.equal(
@@ -106,8 +106,8 @@ describe('query', () => {
             // WHEN
             assert.equal(Object.keys(result.query).length, 1, 'only one query expected');
             assert.deepEqual(
-                await testUtils.getExpectedFile('9999999', 'query', 'template'),
                 await testUtils.getActualTemplate('testExistingQuery', 'query'),
+                await testUtils.getExpectedFile('9999999', 'query', 'template'),
                 'returned template was not equal expected'
             );
             // THEN
@@ -118,8 +118,8 @@ describe('query', () => {
                 'testMarket'
             );
             assert.deepEqual(
-                await testUtils.getExpectedFile('9999999', 'query', 'build'),
                 await testUtils.getActualDeployFile('testExistingQuery', 'query'),
+                await testUtils.getExpectedFile('9999999', 'query', 'build'),
                 'returned deployment file was not equal expected'
             );
             assert.equal(
