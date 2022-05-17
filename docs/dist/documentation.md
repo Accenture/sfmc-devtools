@@ -765,7 +765,7 @@ FileTransfer MetadataType
     * [._extractCode(metadata)](#Asset._extractCode) ⇒ <code>TYPE.CodeExtractItem</code>
     * [._extractCode_slots(prefix, metadataSlots, codeArr)](#Asset._extractCode_slots) ⇒ <code>void</code>
     * [.getJsonFromFS(dir)](#Asset.getJsonFromFS) ⇒ <code>object</code>
-    * [.findSubType(templateDir, templateName)](#Asset.findSubType) ⇒ <code>Promise.&lt;TYPE.AssetSubType&gt;</code>
+    * [.findSubType(templateDir, templateName)](#Asset.findSubType) ⇒ <code>TYPE.AssetSubType</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName)](#Asset.readSecondaryFolder) ⇒ <code>TYPE.AssetItem</code>
 
 <a name="Asset.retrieve"></a>
@@ -1076,11 +1076,11 @@ Returns file contents mapped to their fileName without '.json' ending
 
 <a name="Asset.findSubType"></a>
 
-### Asset.findSubType(templateDir, templateName) ⇒ <code>Promise.&lt;TYPE.AssetSubType&gt;</code>
+### Asset.findSubType(templateDir, templateName) ⇒ <code>TYPE.AssetSubType</code>
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise.&lt;TYPE.AssetSubType&gt;</code> - subtype name  
+**Returns**: <code>TYPE.AssetSubType</code> - subtype name  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2789,7 +2789,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.applyTemplateNames(code, templateVariables)](#MetadataType.applyTemplateNames) ⇒ <code>string</code>
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, variables, templateName)](#MetadataType.buildDefinitionForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MetadataType.buildTemplateForNested) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.findSubType(templateDir, templateName)](#MetadataType.findSubType) ⇒ <code>Promise.&lt;string&gt;</code>
+    * [.findSubType(templateDir, templateName)](#MetadataType.findSubType) ⇒ <code>string</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName, ex)](#MetadataType.readSecondaryFolder) ⇒ <code>object</code>
     * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType.buildDefinition) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.checkForErrors(ex)](#MetadataType.checkForErrors) ⇒ <code>string</code>
@@ -3280,11 +3280,11 @@ handles extracted code if any are found for complex types
 
 <a name="MetadataType.findSubType"></a>
 
-### MetadataType.findSubType(templateDir, templateName) ⇒ <code>Promise.&lt;string&gt;</code>
+### MetadataType.findSubType(templateDir, templateName) ⇒ <code>string</code>
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;string&gt;</code> - subtype name  
+**Returns**: <code>string</code> - subtype name  
 
 | Param | Type | Description |
 | --- | --- | --- |
