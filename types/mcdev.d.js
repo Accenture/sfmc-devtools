@@ -1,3 +1,4 @@
+const SDK = require('sfmc-sdk');
 /**
  * @ignore
  * @typedef {object} BuObject
@@ -11,15 +12,16 @@
  */
 /**
  * @typedef {Object.<string, string>} TemplateMap
+ * @typedef {'accountUser'|'asset'|'attributeGroup'|'automation'|'campaign'|'contentArea'|'dataExtension'|'dataExtensionField'|'dataExtensionTemplate'|'dataExtract'|'dataExtractType'|'discovery'|'email'|'emailSendDefinition'|'eventDefinition'|'fileTransfer'|'filter'|'folder'|'ftpLocation'|'importFile'|'interaction'|'list'|'mobileCode'|'mobileKeyword'|'query'|'role'|'script'|'setDefinition'|'triggeredSendDefinition'} SupportedMetadataTypes
  */
 
 /**
  * @typedef {Object.<string, any>} MetadataTypeItem
- * @typedef {Object.<string, MetadataTypeItem>} MetadataTypeMap
- * @typedef {Object.<string, MetadataTypeMap>} MultiMetadataTypeMap
- * @typedef {Object.<string, MetadataTypeItem[]>} MultiMetadataTypeList
- * @typedef {{metadata:MetadataTypeMap,type:string}} MetadataTypeMapObj
- * @typedef {{metadata:MetadataTypeItem,type:string}} MetadataTypeItemObj
+ * @typedef {Object.<string, MetadataTypeItem>} MetadataTypeMap key=customer key
+ * @typedef {Object.<string, MetadataTypeMap>} MultiMetadataTypeMap key=Supported MetadataType
+ * @typedef {Object.<string, MetadataTypeItem[]>} MultiMetadataTypeList key=Supported MetadataType
+ * @typedef {{metadata:MetadataTypeMap,type:SupportedMetadataTypes}} MetadataTypeMapObj
+ * @typedef {{metadata:MetadataTypeItem,type:SupportedMetadataTypes}} MetadataTypeItemObj
  */
 
 /**
@@ -137,14 +139,14 @@
  * @property {string} name name (not key) of activity
  * @property {string} [objectTypeId] Id of assoicated activity type; see this.definition.activityTypeMapping
  * @property {string} [activityObjectId] Object Id of assoicated metadata item
- * @property {number} displayOrder order within step; starts with 1 or higher number
+ * @property {number} [displayOrder] order within step; starts with 1 or higher number
  * @property {string} r__type see this.definition.activityTypeMapping
  */
 /**
  * @typedef {object}  AutomationStep
  * @property {string} name description
  * @property {string} [annotation] equals AutomationStep.name
- * @property {number} step step iterator
+ * @property {number} [step] step iterator; starts with 1
  * @property {number} [stepNumber] step iterator, automatically set during deployment
  * @property {AutomationActivity[]} activities -
  */
@@ -190,20 +192,22 @@
  * @property {string} name name
  * @property {string} description -
  * @property {'scheduled'|'triggered'} type Starting Source = Schedule / File Drop
- * @property {'Scheduled'|'Running'} status -
+ * @property {'Scheduled'|'Running'|'Ready'|'Building'|'PausedSchedule'|'InactiveTrigger'} status -
  * @property {AutomationSchedule} [schedule] only existing if type=scheduled
  * @property {object} [fileTrigger] only existing if type=triggered
- * @property {string} fileTrigger.fileNamingPattern -
- * @property {string} fileTrigger.fileNamePatternTypeId -
- * @property {string} fileTrigger.folderLocationText -
- * @property {string} fileTrigger.queueFiles -
+ * @property {string} fileTrigger.fileNamingPattern file name with placeholders
+ * @property {number} fileTrigger.fileNamePatternTypeId -
+ * @property {string} fileTrigger.folderLocationText where to look for the fileNamingPattern
+ * @property {boolean} fileTrigger.isPublished ?
+ * @property {boolean} fileTrigger.queueFiles ?
+ * @property {boolean} fileTrigger.triggerActive -
  * @property {object} [startSource] -
  * @property {AutomationSchedule} [startSource.schedule] rewritten to AutomationItem.schedule
  * @property {object} [startSource.fileDrop] rewritten to AutomationItem.fileTrigger
- * @property {string} startSource.fileDrop.fileNamingPattern -
+ * @property {string} startSource.fileDrop.fileNamingPattern file name with placeholders
  * @property {string} startSource.fileDrop.fileNamePatternTypeId -
  * @property {string} startSource.fileDrop.folderLocation -
- * @property {string} startSource.fileDrop.queueFiles -
+ * @property {boolean} startSource.fileDrop.queueFiles -
  * @property {number} startSource.typeId -
  * @property {AutomationStep[]} steps -
  * @property {string} r__folder_Path folder path
@@ -213,7 +217,33 @@
  * @typedef {Object.<string, AutomationItem>} AutomationMap
  * @typedef {{metadata:AutomationMap,type:string}} AutomationMapObj
  * @typedef {{metadata:AutomationItem,type:string}} AutomationItemObj
+ * @typedef {object} DeltaPkgItem
+ * @property {string} file relative path to file
+ * @property {number} changes changed lines
+ * @property {number} insertions added lines
+ * @property {number} deletions deleted lines
+ * @property {boolean} binary is a binary file
+ * @property {boolean} moved git thinks this file was moved
+ * @property {string} [fromPath] git thinks this relative path is where the file was before
+ * @property {SupportedMetadataTypes} type metadata type
+ * @property {string} externalKey key
+ * @property {string} name name
+ * @property {'move'|'add/update'|'delete'} gitAction what git recognized as an action
+ * @property {string} _credential mcdev credential name
+ * @property {string} _businessUnit mcdev business unit name inside of _credential
+ * @typedef {SDK} SDK
  */
+
+/**
+ * @typedef {object} skipInteraction signals what to insert automatically for things usually asked via wizard
+ * @property {string} client_id client id of installed package
+ * @property {string} client_secret client secret of installed package
+ * @property {string} auth_url tenant specific auth url of installed package
+ * @property {number} account_id MID of the Parent Business Unit
+ * @property {string} credentialName how you would like the credential to be named
+ * @property {string} gitRemoteUrl URL of Git remote server
+ */
+
 /**
  * @typedef {object} FilterItem
  * @property {number} categoryId folder id
@@ -230,4 +260,13 @@
  * @property {number} statusId ?
  * @typedef {Object.<string, FilterItem>} FilterMap
  */
+
+/**
+ * @typedef {object} AuthObject
+ * @property {string} client_id client_id client_id for sfmc-sdk auth
+ * @property {string} client_secret client_secret for sfmc-sdk auth
+ * @property {number} account_id mid of business unit to auth against
+ * @property {string} auth_url authentication base url
+ */
+
 module.exports = {};

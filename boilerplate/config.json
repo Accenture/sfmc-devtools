@@ -1,10 +1,7 @@
 {
     "credentials": {
         "default": {
-            "clientId": "--- update me ---",
-            "clientSecret": "--- update me ---",
-            "tenant": "--- update me ---",
-            "eid": "000000000",
+            "eid": 0,
             "businessUnits": {}
         }
     },
@@ -26,16 +23,12 @@
         "serverTimeOffset": -6
     },
     "directories": {
-        "badKeys": "docs/badKeys/",
         "businessUnits": "businessUnits/",
-        "dataExtension": "docs/dataExtension/",
-        "deltaPackage": "docs/deltaPackage/",
         "deploy": "deploy/",
+        "docs": "docs/",
         "retrieve": "retrieve/",
-        "roles": "docs/roles/",
         "template": "template/",
-        "templateBuilds": ["retrieve/", "deploy/"],
-        "users": "docs/users/"
+        "templateBuilds": ["retrieve/", "deploy/"]
     },
     "markets": {
         "DEV-NL": {
@@ -80,7 +73,7 @@
         }
     },
     "metaDataTypes": {
-        "documentOnRetrieve": ["accountUser", "dataExtension", "role"],
+        "documentOnRetrieve": ["accountUser", "automation", "dataExtension", "role"],
         "retrieve": []
     }
 }

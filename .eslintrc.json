@@ -29,6 +29,7 @@
                 "object<>": "Object.<>",
                 "Object<>": "Object.<>",
                 "promise": "Promise",
+                "promise.<>": "Promise.<>",
                 "promise<>": "Promise.<>",
                 "Promise<>": "Promise.<>"
             }
