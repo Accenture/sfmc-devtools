@@ -335,7 +335,7 @@ Source and target business units are also compared before the deployment to appl
 **Kind**: global class  
 
 * [Deployer](#Deployer)
-    * [new Deployer(properties, buObject)](#new_Deployer_new)
+    * [new Deployer(properties, buObject, [fromRetrieve], fromRetrieve)](#new_Deployer_new)
     * _instance_
         * [.metadata](#Deployer+metadata) : <code>TYPE.MultiMetadataTypeMap</code>
         * [.deploy([typeArr], [keyArr])](#Deployer+deploy) ⇒ <code>Promise</code>
@@ -346,7 +346,7 @@ Source and target business units are also compared before the deployment to appl
 
 <a name="new_Deployer_new"></a>
 
-### new Deployer(properties, buObject)
+### new Deployer(properties, buObject, [fromRetrieve], fromRetrieve)
 Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 
 
@@ -355,6 +355,8 @@ Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 | properties | <code>object</code> | General configuration to be used in retrieve |
 | properties.directories | <code>object</code> | Directories to be used when interacting with FS |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
+| [fromRetrieve] | <code>boolean</code> | optionally deploy whats defined via selectedTypesArr + keyArr directly from retrieve folder instead of from deploy folder |
+| fromRetrieve |  |  |
 
 <a name="Deployer+metadata"></a>
 
@@ -425,9 +427,9 @@ main class
     * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>void</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
-    * [.retrieve(businessUnit, [selectedTypesArr], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [._deployBU(cred, bu, [typeArr], [keyArr])](#Mcdev._deployBU) ⇒ <code>Promise</code>
-    * [.deploy(businessUnit, [selectedTypesArr], [keyArr])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.retrieve(businessUnit, [selectedTypesArr], [key], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [._deployBU(cred, bu, [typeArr], [keyArr], [fromRetrieve])](#Mcdev._deployBU) ⇒ <code>Promise</code>
+    * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initProject([credentialsName], [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -486,7 +488,7 @@ handler for 'mcdev createDeltaPkg
 
 <a name="Mcdev.retrieve"></a>
 
-### Mcdev.retrieve(businessUnit, [selectedTypesArr], [changelogOnly]) ⇒ <code>Promise.&lt;object&gt;</code>
+### Mcdev.retrieve(businessUnit, [selectedTypesArr], [key], [changelogOnly]) ⇒ <code>Promise.&lt;object&gt;</code>
 Retrieve all metadata from the specified business unit into the local file system.
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -496,11 +498,12 @@ Retrieve all metadata from the specified business unit into the local file syste
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
 | [selectedTypesArr] | <code>Array.&lt;string&gt;</code> | limit retrieval to given metadata type |
+| [key] | <code>string</code> | limit retrieval to given metadata key |
 | [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
 
 <a name="Mcdev._deployBU"></a>
 
-### Mcdev.\_deployBU(cred, bu, [typeArr], [keyArr]) ⇒ <code>Promise</code>
+### Mcdev.\_deployBU(cred, bu, [typeArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise</code>
 helper for deploy()
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -512,20 +515,22 @@ helper for deploy()
 | bu | <code>string</code> | name of BU |
 | [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
+| [fromRetrieve] | <code>boolean</code> | optionally deploy whats defined via selectedTypesArr + keyArr directly from retrieve folder instead of from deploy folder |
 
 <a name="Mcdev.deploy"></a>
 
-### Mcdev.deploy(businessUnit, [selectedTypesArr], [keyArr]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise.&lt;void&gt;</code>
 Deploys all metadata located in the 'deploy' directory to the specified business unit
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| businessUnit | <code>string</code> | references credentials from properties.json |
-| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
-| [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| businessUnit | <code>string</code> |  | references credentials from properties.json |
+| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> |  | limit deployment to given metadata type |
+| [keyArr] | <code>Array.&lt;string&gt;</code> |  | limit deployment to given metadata keys |
+| [fromRetrieve] | <code>boolean</code> | <code>false</code> | optionally deploy whats defined via selectedTypesArr + keyArr directly from retrieve folder instead of from deploy folder |
 
 <a name="Mcdev.initProject"></a>
 
@@ -788,12 +793,12 @@ FileTransfer MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Asset](#Asset) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, _, __, [selectedSubType])](#Asset.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
+    * [.retrieve(retrieveDir, _, __, [selectedSubType], [key])](#Asset.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
     * [.retrieveForCache(_, [selectedSubType])](#Asset.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType])](#Asset.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetItem, type: string}&gt;</code>
     * [.create(metadata)](#Asset.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#Asset.update) ⇒ <code>Promise</code>
-    * [.requestSubType(subType, subTypeArray, [retrieveDir], [templateName], [templateVariables])](#Asset.requestSubType) ⇒ <code>Promise</code>
+    * [.requestSubType(subType, subTypeArray, [retrieveDir], [templateName], [templateVariables], key)](#Asset.requestSubType) ⇒ <code>Promise</code>
     * [.requestAndSaveExtended(items, subType, retrieveDir, [templateVariables])](#Asset.requestAndSaveExtended) ⇒ <code>Promise</code>
     * [._retrieveExtendedFile(metadata, subType, retrieveDir)](#Asset._retrieveExtendedFile) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._readExtendedFileFromFS(metadata, subType, deployDir)](#Asset._readExtendedFileFromFS) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -815,7 +820,7 @@ FileTransfer MetadataType
 
 <a name="Asset.retrieve"></a>
 
-### Asset.retrieve(retrieveDir, _, __, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
+### Asset.retrieve(retrieveDir, _, __, [selectedSubType], [key]) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
 Retrieves Metadata of Asset
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -827,6 +832,7 @@ Retrieves Metadata of Asset
 | _ | <code>void</code> | - |
 | __ | <code>void</code> | - |
 | [selectedSubType] | <code>TYPE.AssetSubType</code> | optionally limit to a single subtype |
+| [key] | <code>string</code> | customer key |
 
 <a name="Asset.retrieveForCache"></a>
 
@@ -882,7 +888,7 @@ Updates a single asset
 
 <a name="Asset.requestSubType"></a>
 
-### Asset.requestSubType(subType, subTypeArray, [retrieveDir], [templateName], [templateVariables]) ⇒ <code>Promise</code>
+### Asset.requestSubType(subType, subTypeArray, [retrieveDir], [templateName], [templateVariables], key) ⇒ <code>Promise</code>
 Retrieves Metadata of a specific asset type
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -895,6 +901,7 @@ Retrieves Metadata of a specific asset type
 | [retrieveDir] | <code>string</code> | target directory for saving assets |
 | [templateName] | <code>string</code> | name of the metadata file |
 | [templateVariables] | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| key | <code>string</code> | customer key to filter by |
 
 <a name="Asset.requestAndSaveExtended"></a>
 
@@ -2844,7 +2851,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.deploy(metadata, deployDir, retrieveDir, buObject)](#MetadataType.deploy) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.postDeployTasks(metadata, originalMetadata)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.retrieve(retrieveDir, [additionalFields], buObject, [subType])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieve(retrieveDir, [additionalFields], buObject, [subType], key)](#MetadataType.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveChangelog([buObject], [additionalFields], [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
@@ -2967,7 +2974,7 @@ Gets executed after retreive of metadata type
 
 <a name="MetadataType.retrieve"></a>
 
-### MetadataType.retrieve(retrieveDir, [additionalFields], buObject, [subType]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MetadataType.retrieve(retrieveDir, [additionalFields], buObject, [subType], key) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Gets metadata from Marketing Cloud
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -2979,6 +2986,7 @@ Gets metadata from Marketing Cloud
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
 | [subType] | <code>string</code> | optionally limit to a single subtype |
+| key | <code>string</code> | customer key |
 
 <a name="MetadataType.retrieveChangelog"></a>
 
