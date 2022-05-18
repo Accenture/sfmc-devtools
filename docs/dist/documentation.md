@@ -234,8 +234,6 @@ Builds metadata from a template using market specific customisation
         * [.buildTemplate(businessUnit, selectedType, keyArr, market)](#Builder.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
         * [.buildDefinition(businessUnit, selectedType, name, market)](#Builder.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
         * [.buildDefinitionBulk(listName, type, name)](#Builder.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
-        * [.verifyMarketList(mlName, properties)](#Builder.verifyMarketList) ⇒ <code>void</code>
-        * [._checkMarket(market)](#Builder._checkMarket) ⇒ <code>boolean</code>
 
 <a name="new_Builder_new"></a>
 
@@ -327,34 +325,6 @@ Build a specific metadata file based on a template using a list of bu-market com
 | listName | <code>string</code> | name of list of BU-market combos |
 | type | <code>string</code> | supported metadata type |
 | name | <code>string</code> | name of the metadata |
-
-<a name="Builder.verifyMarketList"></a>
-
-### Builder.verifyMarketList(mlName, properties) ⇒ <code>void</code>
-ensure provided MarketList exists and it's content including markets and BUs checks out
-
-**Kind**: static method of [<code>Builder</code>](#Builder)  
-**Returns**: <code>void</code> - throws errors if problems were found  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| mlName | <code>string</code> | name of marketList |
-| properties | <code>object</code> | General configuration to be used in retrieve |
-| properties.markets | <code>object</code> | list of template variable combos |
-| properties.marketList | <code>object</code> | list of bu-market combos |
-| properties.credentials | <code>object</code> | list of credentials and their BUs |
-
-<a name="Builder._checkMarket"></a>
-
-### Builder.\_checkMarket(market) ⇒ <code>boolean</code>
-check if a market name exists in current mcdev config
-
-**Kind**: static method of [<code>Builder</code>](#Builder)  
-**Returns**: <code>boolean</code> - found market or not  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| market | <code>string</code> | market localizations |
 
 <a name="Deployer"></a>
 
@@ -4265,6 +4235,8 @@ CLI entry for SFMC DevTools
 
 * [Util](#Util)
     * [.logger](#Util.logger)
+    * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
+    * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList) ⇒ <code>void</code>
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
@@ -4287,6 +4259,35 @@ CLI entry for SFMC DevTools
 Logger that creates timestamped log file in 'logs/' directory
 
 **Kind**: static property of [<code>Util</code>](#Util)  
+<a name="Util.checkMarket"></a>
+
+### Util.checkMarket(market, properties) ⇒ <code>boolean</code>
+check if a market name exists in current mcdev config
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - found market or not  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| market | <code>string</code> | market localizations |
+| properties | <code>object</code> | local mcdev config |
+
+<a name="Util.verifyMarketList"></a>
+
+### Util.verifyMarketList(mlName, properties) ⇒ <code>void</code>
+ensure provided MarketList exists and it's content including markets and BUs checks out
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>void</code> - throws errors if problems were found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| mlName | <code>string</code> | name of marketList |
+| properties | <code>object</code> | General configuration to be used in retrieve |
+| properties.markets | <code>object</code> | list of template variable combos |
+| properties.marketList | <code>object</code> | list of bu-market combos |
+| properties.credentials | <code>object</code> | list of credentials and their BUs |
+
 <a name="Util.signalFatalError"></a>
 
 ### Util.signalFatalError() ⇒ <code>void</code>
@@ -5932,6 +5933,8 @@ Util that contains logger and simple util methods
 
 * [Util](#Util)
     * [.logger](#Util.logger)
+    * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
+    * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList) ⇒ <code>void</code>
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
@@ -5954,6 +5957,35 @@ Util that contains logger and simple util methods
 Logger that creates timestamped log file in 'logs/' directory
 
 **Kind**: static property of [<code>Util</code>](#Util)  
+<a name="Util.checkMarket"></a>
+
+### Util.checkMarket(market, properties) ⇒ <code>boolean</code>
+check if a market name exists in current mcdev config
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - found market or not  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| market | <code>string</code> | market localizations |
+| properties | <code>object</code> | local mcdev config |
+
+<a name="Util.verifyMarketList"></a>
+
+### Util.verifyMarketList(mlName, properties) ⇒ <code>void</code>
+ensure provided MarketList exists and it's content including markets and BUs checks out
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>void</code> - throws errors if problems were found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| mlName | <code>string</code> | name of marketList |
+| properties | <code>object</code> | General configuration to be used in retrieve |
+| properties.markets | <code>object</code> | list of template variable combos |
+| properties.marketList | <code>object</code> | list of bu-market combos |
+| properties.credentials | <code>object</code> | list of credentials and their BUs |
+
 <a name="Util.signalFatalError"></a>
 
 ### Util.signalFatalError() ⇒ <code>void</code>
