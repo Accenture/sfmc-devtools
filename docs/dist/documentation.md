@@ -335,7 +335,7 @@ Source and target business units are also compared before the deployment to appl
 **Kind**: global class  
 
 * [Deployer](#Deployer)
-    * [new Deployer(properties, buObject, [fromRetrieve], fromRetrieve)](#new_Deployer_new)
+    * [new Deployer(properties, buObject, [fromRetrieve])](#new_Deployer_new)
     * _instance_
         * [.metadata](#Deployer+metadata) : <code>TYPE.MultiMetadataTypeMap</code>
         * [.deploy([typeArr], [keyArr])](#Deployer+deploy) ⇒ <code>Promise</code>
@@ -346,7 +346,7 @@ Source and target business units are also compared before the deployment to appl
 
 <a name="new_Deployer_new"></a>
 
-### new Deployer(properties, buObject, [fromRetrieve], fromRetrieve)
+### new Deployer(properties, buObject, [fromRetrieve])
 Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 
 
@@ -356,7 +356,6 @@ Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 | properties.directories | <code>object</code> | Directories to be used when interacting with FS |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
 | [fromRetrieve] | <code>boolean</code> | optionally deploy whats defined via selectedTypesArr + keyArr directly from retrieve folder instead of from deploy folder |
-| fromRetrieve |  |  |
 
 <a name="Deployer+metadata"></a>
 
