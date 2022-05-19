@@ -10,7 +10,6 @@ describe('dataExtension', () => {
     afterEach(() => {
         testUtils.mockReset();
     });
-
     describe('Retrieve ================', () => {
         it('Should retrieve a data extension', async () => {
             // WHEN
@@ -77,6 +76,7 @@ describe('dataExtension', () => {
                 'childBU_dataextension_test',
                 'testMarket'
             );
+
             // WHEN
             assert.equal(
                 Object.keys(result.dataExtension).length,
@@ -95,7 +95,6 @@ describe('dataExtension', () => {
                 'childBU_dataextension_test',
                 'testMarket'
             );
-
             assert.deepEqual(
                 await testUtils.getActualDeployFile('childBU_dataextension_test', 'dataExtension'),
                 await testUtils.getExpectedFile('9999999', 'dataExtension', 'build'),
