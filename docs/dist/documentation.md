@@ -228,7 +228,9 @@ Builds metadata from a template using market specific customisation
         * [.buildDefinition(metadataType, name, templateVariables)](#Builder+buildDefinition) ⇒ <code>Promise</code>
         * [.buildTemplate(metadataType, keyArr, templateVariables)](#Builder+buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
     * _static_
-        * [.verifyMarketList(mlName, properties)](#Builder.verifyMarketList) ⇒ <code>void</code>
+        * [.buildTemplate(businessUnit, selectedType, keyArr, market)](#Builder.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+        * [.buildDefinition(businessUnit, selectedType, name, market)](#Builder.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
+        * [.buildDefinitionBulk(listName, type, name)](#Builder.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="new_Builder_new"></a>
 
@@ -266,7 +268,7 @@ Builds a specific metadata file by name
 <a name="Builder+buildTemplate"></a>
 
 ### builder.buildTemplate(metadataType, keyArr, templateVariables) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
-Builds a specific metadata file by name
+Build a template based on a list of metadata files in the retrieve folder.
 
 **Kind**: instance method of [<code>Builder</code>](#Builder)  
 **Returns**: <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code> - Promise  
@@ -277,21 +279,49 @@ Builds a specific metadata file by name
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of metadata to create a template of |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
-<a name="Builder.verifyMarketList"></a>
+<a name="Builder.buildTemplate"></a>
 
-### Builder.verifyMarketList(mlName, properties) ⇒ <code>void</code>
-ensure provided MarketList exists and it's content including markets and BUs checks out
+### Builder.buildTemplate(businessUnit, selectedType, keyArr, market) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+Build a template based on a list of metadata files in the retrieve folder.
 
 **Kind**: static method of [<code>Builder</code>](#Builder)  
-**Returns**: <code>void</code> - throws errors if problems were found  
+**Returns**: <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| mlName | <code>string</code> | name of marketList |
-| properties | <code>object</code> | General configuration to be used in retrieve |
-| properties.markets | <code>object</code> | list of template variable combos |
-| properties.marketList | <code>object</code> | list of bu-market combos |
-| properties.credentials | <code>object</code> | list of credentials and their BUs |
+| businessUnit | <code>string</code> | references credentials from properties.json |
+| selectedType | <code>string</code> | supported metadata type |
+| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+| market | <code>string</code> | market localizations |
+
+<a name="Builder.buildDefinition"></a>
+
+### Builder.buildDefinition(businessUnit, selectedType, name, market) ⇒ <code>Promise.&lt;void&gt;</code>
+Build a specific metadata file based on a template.
+
+**Kind**: static method of [<code>Builder</code>](#Builder)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| businessUnit | <code>string</code> | references credentials from properties.json |
+| selectedType | <code>string</code> | supported metadata type |
+| name | <code>string</code> | name of the metadata |
+| market | <code>string</code> | market localizations |
+
+<a name="Builder.buildDefinitionBulk"></a>
+
+### Builder.buildDefinitionBulk(listName, type, name) ⇒ <code>Promise.&lt;void&gt;</code>
+Build a specific metadata file based on a template using a list of bu-market combos
+
+**Kind**: static method of [<code>Builder</code>](#Builder)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| listName | <code>string</code> | name of list of BU-market combos |
+| type | <code>string</code> | supported metadata type |
+| name | <code>string</code> | name of the metadata |
 
 <a name="Deployer"></a>
 
@@ -393,7 +423,6 @@ main class
     * [.retrieveAsTemplate(businessUnit, selectedType, name, market)](#Mcdev.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
     * [.buildTemplate(businessUnit, selectedType, keyArr, market)](#Mcdev.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
     * [.buildDefinition(businessUnit, selectedType, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._checkMarket(market)](#Mcdev._checkMarket) ⇒ <code>boolean</code>
     * [.buildDefinitionBulk(listName, type, name)](#Mcdev.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="Mcdev.setSkipInteraction"></a>
@@ -419,7 +448,7 @@ handler for 'mcdev createDeltaPkg
 | argv | <code>object</code> | yargs parameters |
 | [argv.range] | <code>string</code> | git commit range     into deploy directory |
 | [argv.filter] | <code>string</code> | filter file paths that start with any |
-| [argv.skipInteraction] | <code>boolean</code> | allows to skip interactive wizard |
+| [argv.skipInteraction] | <code>object</code> | allows to skip interactive wizard |
 
 <a name="Mcdev.selectTypes"></a>
 
@@ -565,7 +594,7 @@ Retrieve a specific metadata file and templatise.
 <a name="Mcdev.buildTemplate"></a>
 
 ### Mcdev.buildTemplate(businessUnit, selectedType, keyArr, market) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
-Build a specific metadata file based on a template.
+Build a template based on a list of metadata files in the retrieve folder.
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 **Returns**: <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code> - -  
@@ -590,18 +619,6 @@ Build a specific metadata file based on a template.
 | businessUnit | <code>string</code> | references credentials from properties.json |
 | selectedType | <code>string</code> | supported metadata type |
 | name | <code>string</code> | name of the metadata |
-| market | <code>string</code> | market localizations |
-
-<a name="Mcdev._checkMarket"></a>
-
-### Mcdev.\_checkMarket(market) ⇒ <code>boolean</code>
-check if a market name exists in current mcdev config
-
-**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>boolean</code> - found market or not  
-
-| Param | Type | Description |
-| --- | --- | --- |
 | market | <code>string</code> | market localizations |
 
 <a name="Mcdev.buildDefinitionBulk"></a>
@@ -753,7 +770,7 @@ FileTransfer MetadataType
     * [.requestAndSaveExtended(items, subType, retrieveDir, [templateVariables])](#Asset.requestAndSaveExtended) ⇒ <code>Promise</code>
     * [._retrieveExtendedFile(metadata, subType, retrieveDir)](#Asset._retrieveExtendedFile) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._readExtendedFileFromFS(metadata, subType, deployDir)](#Asset._readExtendedFileFromFS) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.postRetrieveTasks(metadata, [_], isTemplating)](#Asset.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
+    * [.postRetrieveTasks(metadata)](#Asset.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.preDeployTasks(metadata, deployDir)](#Asset.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
     * [.getSubtype(metadata)](#Asset.getSubtype) ⇒ <code>TYPE.AssetSubType</code>
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildDefinitionForNested) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -899,7 +916,7 @@ This method reads these from the local FS stores them in the metadata object all
 
 <a name="Asset.postRetrieveTasks"></a>
 
-### Asset.postRetrieveTasks(metadata, [_], isTemplating) ⇒ <code>TYPE.CodeExtractItem</code>
+### Asset.postRetrieveTasks(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
 manages post retrieve steps
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -908,8 +925,6 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.AssetItem</code> | a single asset |
-| [_] | <code>string</code> | unused |
-| isTemplating | <code>boolean</code> | signals that we are retrieving templates |
 
 <a name="Asset.preDeployTasks"></a>
 
@@ -1146,7 +1161,7 @@ Automation MetadataType
     * [.retrieveChangelog()](#Automation.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveForCache()](#Automation.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Automation.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.AutomationItemObj&gt;</code>
-    * [.postRetrieveTasks(metadata, [_], [isTemplating])](#Automation.postRetrieveTasks) ⇒ <code>TYPE.AutomationItem</code>
+    * [.postRetrieveTasks(metadata)](#Automation.postRetrieveTasks) ⇒ <code>TYPE.AutomationItem</code>
     * [.deploy(metadata, targetBU, retrieveDir)](#Automation.deploy) ⇒ <code>Promise.&lt;TYPE.AutomationMap&gt;</code>
     * [.create(metadata)](#Automation.create) ⇒ <code>Promise</code>
     * [.update(metadata, metadataBefore)](#Automation.update) ⇒ <code>Promise</code>
@@ -1200,7 +1215,7 @@ Retrieve a specific Automation Definition by Name
 
 <a name="Automation.postRetrieveTasks"></a>
 
-### Automation.postRetrieveTasks(metadata, [_], [isTemplating]) ⇒ <code>TYPE.AutomationItem</code>
+### Automation.postRetrieveTasks(metadata) ⇒ <code>TYPE.AutomationItem</code>
 manages post retrieve steps
 
 **Kind**: static method of [<code>Automation</code>](#Automation)  
@@ -1209,8 +1224,6 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.AutomationItem</code> | a single automation |
-| [_] | <code>string</code> | unused |
-| [isTemplating] | <code>boolean</code> | signals that we are retrieving templates |
 
 <a name="Automation.deploy"></a>
 
@@ -1444,7 +1457,7 @@ DataExtension MetadataType
     * [.postDeployTasks(upsertedMetadata)](#DataExtension.postDeployTasks) ⇒ <code>void</code>
     * [.retrieve(retrieveDir, [additionalFields], buObject, [_], [isDeploy])](#DataExtension.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.retrieveChangelog([buObject], [additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
-    * [.postRetrieveTasks(metadata, [_], [isTemplating])](#DataExtension.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionItem</code>
+    * [.postRetrieveTasks(metadata)](#DataExtension.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionItem</code>
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.DataExtensionItem&gt;</code>
     * [.document(buObject, [metadata])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(buObject, customerKey)](#DataExtension.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -1545,7 +1558,7 @@ Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionCo
 
 <a name="DataExtension.postRetrieveTasks"></a>
 
-### DataExtension.postRetrieveTasks(metadata, [_], [isTemplating]) ⇒ <code>TYPE.DataExtensionItem</code>
+### DataExtension.postRetrieveTasks(metadata) ⇒ <code>TYPE.DataExtensionItem</code>
 manages post retrieve steps
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -1554,8 +1567,6 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.DataExtensionItem</code> | a single dataExtension |
-| [_] | <code>string</code> | unused |
-| [isTemplating] | <code>boolean</code> | signals that we are retrieving templates |
 
 <a name="DataExtension.preDeployTasks"></a>
 
@@ -2760,7 +2771,6 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.deploy(metadata, deployDir, retrieveDir, buObject)](#MetadataType.deploy) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.postDeployTasks(metadata, originalMetadata)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.overrideKeyWithName(metadata, [warningMsg])](#MetadataType.overrideKeyWithName) ⇒ <code>void</code>
     * [.retrieve(retrieveDir, [additionalFields], buObject, [subType])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveChangelog([buObject], [additionalFields], [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -2880,18 +2890,6 @@ Gets executed after retreive of metadata type
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 | targetDir | <code>string</code> | folder where retrieves should be saved |
 | [isTemplating] | <code>boolean</code> | signals that we are retrieving templates |
-
-<a name="MetadataType.overrideKeyWithName"></a>
-
-### MetadataType.overrideKeyWithName(metadata, [warningMsg]) ⇒ <code>void</code>
-used to synchronize name and external key during retrieveAsTemplate
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
-| [warningMsg] | <code>string</code> | optional msg to show the user |
 
 <a name="MetadataType.retrieve"></a>
 
@@ -3520,7 +3518,7 @@ Query MetadataType
     * [.retrieve(retrieveDir)](#Query.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code>
     * [.retrieveForCache()](#Query.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Query.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: Query, type: string}&gt;</code>
-    * [.postRetrieveTasks(metadata, _, isTemplating)](#Query.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
+    * [.postRetrieveTasks(metadata)](#Query.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.create(query)](#Query.create) ⇒ <code>Promise</code>
     * [.update(query)](#Query.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata, deployDir)](#Query.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.QueryItem&gt;</code>
@@ -3564,7 +3562,7 @@ Retrieve a specific Query by Name
 
 <a name="Query.postRetrieveTasks"></a>
 
-### Query.postRetrieveTasks(metadata, _, isTemplating) ⇒ <code>TYPE.CodeExtractItem</code>
+### Query.postRetrieveTasks(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
 manages post retrieve steps
 
 **Kind**: static method of [<code>Query</code>](#Query)  
@@ -3573,8 +3571,6 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.QueryItem</code> | a single query |
-| _ | <code>string</code> | unused |
-| isTemplating | <code>boolean</code> | signals that we are retrieving templates |
 
 <a name="Query.create"></a>
 
@@ -3782,7 +3778,7 @@ Script MetadataType
     * [.retrieve(retrieveDir)](#Script.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.ScriptMap, type: string}&gt;</code>
     * [.retrieveForCache()](#Script.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.ScriptMap, type: string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Script.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: TYPE.Script, type: string}&gt;</code>
-    * [.postRetrieveTasks(metadata, [_], [isTemplating])](#Script.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
+    * [.postRetrieveTasks(metadata)](#Script.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.update(script)](#Script.update) ⇒ <code>Promise</code>
     * [.create(script)](#Script.create) ⇒ <code>Promise</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#Script._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
@@ -3828,7 +3824,7 @@ Retrieve a specific Script by Name
 
 <a name="Script.postRetrieveTasks"></a>
 
-### Script.postRetrieveTasks(metadata, [_], [isTemplating]) ⇒ <code>TYPE.CodeExtractItem</code>
+### Script.postRetrieveTasks(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
 manages post retrieve steps
 
 **Kind**: static method of [<code>Script</code>](#Script)  
@@ -3837,8 +3833,6 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.ScriptItem</code> | a single script |
-| [_] | <code>string</code> | unused |
-| [isTemplating] | <code>boolean</code> | signals that we are retrieving templates |
 
 <a name="Script.update"></a>
 
@@ -4139,6 +4133,8 @@ CLI entry for SFMC DevTools
 
 * [Util](#Util)
     * [.logger](#Util.logger)
+    * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
+    * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList) ⇒ <code>void</code>
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
@@ -4161,6 +4157,35 @@ CLI entry for SFMC DevTools
 Logger that creates timestamped log file in 'logs/' directory
 
 **Kind**: static property of [<code>Util</code>](#Util)  
+<a name="Util.checkMarket"></a>
+
+### Util.checkMarket(market, properties) ⇒ <code>boolean</code>
+check if a market name exists in current mcdev config
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - found market or not  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| market | <code>string</code> | market localizations |
+| properties | <code>object</code> | local mcdev config |
+
+<a name="Util.verifyMarketList"></a>
+
+### Util.verifyMarketList(mlName, properties) ⇒ <code>void</code>
+ensure provided MarketList exists and it's content including markets and BUs checks out
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>void</code> - throws errors if problems were found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| mlName | <code>string</code> | name of marketList |
+| properties | <code>object</code> | General configuration to be used in retrieve |
+| properties.markets | <code>object</code> | list of template variable combos |
+| properties.marketList | <code>object</code> | list of bu-market combos |
+| properties.credentials | <code>object</code> | list of credentials and their BUs |
+
 <a name="Util.signalFatalError"></a>
 
 ### Util.signalFatalError() ⇒ <code>void</code>
@@ -4549,17 +4574,20 @@ DevOps helper class
 **Kind**: global constant  
 
 * [DevOps](#DevOps)
-    * [.createDeltaPkg(properties, [range], [saveToDeployDir], [filterPaths])](#DevOps.createDeltaPkg) ⇒ <code>Promise.&lt;Array.&lt;object&gt;&gt;</code>
+    * [.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths])](#DevOps.getDeltaList) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+        * [~delta](#DevOps.getDeltaList..delta) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
+        * [~copied](#DevOps.getDeltaList..copied) : <code>TYPE.DeltaPkgItem</code>
+    * [.buildDeltaDefinitions(properties, range, [skipInteraction])](#DevOps.buildDeltaDefinitions)
     * [.document(directory, jsonReport)](#DevOps.document) ⇒ <code>void</code>
 
-<a name="DevOps.createDeltaPkg"></a>
+<a name="DevOps.getDeltaList"></a>
 
-### DevOps.createDeltaPkg(properties, [range], [saveToDeployDir], [filterPaths]) ⇒ <code>Promise.&lt;Array.&lt;object&gt;&gt;</code>
+### DevOps.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
 Extracts the delta between a commit and the current state for deployment.
 Interactive commit selection if no commits are passed.
 
 **Kind**: static method of [<code>DevOps</code>](#DevOps)  
-**Returns**: <code>Promise.&lt;Array.&lt;object&gt;&gt;</code> - -  
+**Returns**: <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4567,6 +4595,32 @@ Interactive commit selection if no commits are passed.
 | [range] | <code>string</code> | git commit range |
 | [saveToDeployDir] | <code>boolean</code> | if true, copy metadata changes into deploy directory |
 | [filterPaths] | <code>string</code> | filter file paths that start with any specified path (comma separated) |
+
+
+* [.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths])](#DevOps.getDeltaList) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+    * [~delta](#DevOps.getDeltaList..delta) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
+    * [~copied](#DevOps.getDeltaList..copied) : <code>TYPE.DeltaPkgItem</code>
+
+<a name="DevOps.getDeltaList..delta"></a>
+
+#### getDeltaList~delta : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
+**Kind**: inner constant of [<code>getDeltaList</code>](#DevOps.getDeltaList)  
+<a name="DevOps.getDeltaList..copied"></a>
+
+#### getDeltaList~copied : <code>TYPE.DeltaPkgItem</code>
+**Kind**: inner constant of [<code>getDeltaList</code>](#DevOps.getDeltaList)  
+<a name="DevOps.buildDeltaDefinitions"></a>
+
+### DevOps.buildDeltaDefinitions(properties, range, [skipInteraction])
+wrapper around DevOps.getDeltaList, Builder.buildTemplate and M
+
+**Kind**: static method of [<code>DevOps</code>](#DevOps)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>object</code> | project config file |
+| range | <code>string</code> | git commit range |
+| [skipInteraction] | <code>TYPE.SkipInteraction</code> | allows to skip interactive wizard |
 
 <a name="DevOps.document"></a>
 
@@ -5760,6 +5814,8 @@ Util that contains logger and simple util methods
 
 * [Util](#Util)
     * [.logger](#Util.logger)
+    * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
+    * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList) ⇒ <code>void</code>
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
@@ -5782,6 +5838,35 @@ Util that contains logger and simple util methods
 Logger that creates timestamped log file in 'logs/' directory
 
 **Kind**: static property of [<code>Util</code>](#Util)  
+<a name="Util.checkMarket"></a>
+
+### Util.checkMarket(market, properties) ⇒ <code>boolean</code>
+check if a market name exists in current mcdev config
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - found market or not  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| market | <code>string</code> | market localizations |
+| properties | <code>object</code> | local mcdev config |
+
+<a name="Util.verifyMarketList"></a>
+
+### Util.verifyMarketList(mlName, properties) ⇒ <code>void</code>
+ensure provided MarketList exists and it's content including markets and BUs checks out
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>void</code> - throws errors if problems were found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| mlName | <code>string</code> | name of marketList |
+| properties | <code>object</code> | General configuration to be used in retrieve |
+| properties.markets | <code>object</code> | list of template variable combos |
+| properties.marketList | <code>object</code> | list of bu-market combos |
+| properties.credentials | <code>object</code> | list of credentials and their BUs |
+
 <a name="Util.signalFatalError"></a>
 
 ### Util.signalFatalError() ⇒ <code>void</code>
@@ -6269,6 +6354,24 @@ SOAP format
 
 ## SDK : <code>Object.&lt;string, AutomationItem&gt;</code>
 **Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| file | <code>string</code> | relative path to file |
+| changes | <code>number</code> | changed lines |
+| insertions | <code>number</code> | added lines |
+| deletions | <code>number</code> | deleted lines |
+| binary | <code>boolean</code> | is a binary file |
+| moved | <code>boolean</code> | git thinks this file was moved |
+| [fromPath] | <code>string</code> | git thinks this relative path is where the file was before |
+| type | [<code>SupportedMetadataTypes</code>](#SupportedMetadataTypes) | metadata type |
+| externalKey | <code>string</code> | key |
+| name | <code>string</code> | name |
+| gitAction | <code>&#x27;move&#x27;</code> \| <code>&#x27;add/update&#x27;</code> \| <code>&#x27;delete&#x27;</code> | what git recognized as an action |
+| _credential | <code>string</code> | mcdev credential name |
+| _businessUnit | <code>string</code> | mcdev business unit name inside of _credential |
+
 <a name="skipInteraction"></a>
 
 ## skipInteraction : <code>object</code>
