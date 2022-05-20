@@ -411,7 +411,7 @@ main class
 
 * [Mcdev](#Mcdev)
     * [.setSkipInteraction([skipInteraction])](#Mcdev.setSkipInteraction) ⇒ <code>void</code>
-    * [.createDeltaPkg(argv)](#Mcdev.createDeltaPkg) ⇒ <code>void</code>
+    * [.createDeltaPkg(argv)](#Mcdev.createDeltaPkg) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
     * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>void</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
@@ -442,10 +442,11 @@ helper method to use unattended mode when including mcdev as a package
 
 <a name="Mcdev.createDeltaPkg"></a>
 
-### Mcdev.createDeltaPkg(argv) ⇒ <code>void</code>
+### Mcdev.createDeltaPkg(argv) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
 handler for 'mcdev createDeltaPkg
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code> - list of changed items  
 
 | Param | Type | Description |
 | --- | --- | --- |
