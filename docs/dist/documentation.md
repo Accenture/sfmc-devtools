@@ -228,11 +228,11 @@ Builds metadata from a template using market specific customisation
     * [new Builder(properties, buObject)](#new_Builder_new)
     * _instance_
         * [.metadata](#Builder+metadata) : <code>TYPE.MultiMetadataTypeList</code>
-        * [.buildDefinition(metadataType, name, templateVariables)](#Builder+buildDefinition) ⇒ <code>Promise</code>
-        * [.buildTemplate(metadataType, keyArr, templateVariables)](#Builder+buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+        * [._buildDefinition(metadataType, name, templateVariables)](#Builder+_buildDefinition) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+        * [._buildTemplate(metadataType, keyArr, templateVariables)](#Builder+_buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
     * _static_
         * [.buildTemplate(businessUnit, selectedType, keyArr, market)](#Builder.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
-        * [.buildDefinition(businessUnit, selectedType, name, market)](#Builder.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
+        * [.buildDefinition(businessUnit, selectedType, name, market)](#Builder.buildDefinition) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
         * [.buildDefinitionBulk(listName, type, name)](#Builder.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="new_Builder_new"></a>
@@ -254,13 +254,13 @@ Creates a Builder, uses v2 auth if v2AuthOptions are passed.
 
 ### builder.metadata : <code>TYPE.MultiMetadataTypeList</code>
 **Kind**: instance property of [<code>Builder</code>](#Builder)  
-<a name="Builder+buildDefinition"></a>
+<a name="Builder+_buildDefinition"></a>
 
-### builder.buildDefinition(metadataType, name, templateVariables) ⇒ <code>Promise</code>
+### builder.\_buildDefinition(metadataType, name, templateVariables) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
 Builds a specific metadata file by name
 
 **Kind**: instance method of [<code>Builder</code>](#Builder)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -268,9 +268,9 @@ Builds a specific metadata file by name
 | name | <code>string</code> | name of metadata to build |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
-<a name="Builder+buildTemplate"></a>
+<a name="Builder+_buildTemplate"></a>
 
-### builder.buildTemplate(metadataType, keyArr, templateVariables) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+### builder.\_buildTemplate(metadataType, keyArr, templateVariables) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
 Build a template based on a list of metadata files in the retrieve folder.
 
 **Kind**: instance method of [<code>Builder</code>](#Builder)  
@@ -299,11 +299,11 @@ Build a template based on a list of metadata files in the retrieve folder.
 
 <a name="Builder.buildDefinition"></a>
 
-### Builder.buildDefinition(businessUnit, selectedType, name, market) ⇒ <code>Promise.&lt;void&gt;</code>
+### Builder.buildDefinition(businessUnit, selectedType, name, market) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
 Build a specific metadata file based on a template.
 
 **Kind**: static method of [<code>Builder</code>](#Builder)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+**Returns**: <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
