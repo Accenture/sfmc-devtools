@@ -228,11 +228,11 @@ Builds metadata from a template using market specific customisation
     * [new Builder(properties, buObject)](#new_Builder_new)
     * _instance_
         * [.metadata](#Builder+metadata) : <code>TYPE.MultiMetadataTypeList</code>
-        * [.buildDefinition(metadataType, name, templateVariables)](#Builder+buildDefinition) ⇒ <code>Promise</code>
-        * [.buildTemplate(metadataType, keyArr, templateVariables)](#Builder+buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+        * [._buildDefinition(metadataType, name, templateVariables)](#Builder+_buildDefinition) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+        * [._buildTemplate(metadataType, keyArr, templateVariables)](#Builder+_buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
     * _static_
         * [.buildTemplate(businessUnit, selectedType, keyArr, market)](#Builder.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
-        * [.buildDefinition(businessUnit, selectedType, name, market)](#Builder.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
+        * [.buildDefinition(businessUnit, selectedType, name, market)](#Builder.buildDefinition) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
         * [.buildDefinitionBulk(listName, type, name)](#Builder.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="new_Builder_new"></a>
@@ -254,13 +254,13 @@ Creates a Builder, uses v2 auth if v2AuthOptions are passed.
 
 ### builder.metadata : <code>TYPE.MultiMetadataTypeList</code>
 **Kind**: instance property of [<code>Builder</code>](#Builder)  
-<a name="Builder+buildDefinition"></a>
+<a name="Builder+_buildDefinition"></a>
 
-### builder.buildDefinition(metadataType, name, templateVariables) ⇒ <code>Promise</code>
+### builder.\_buildDefinition(metadataType, name, templateVariables) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
 Builds a specific metadata file by name
 
 **Kind**: instance method of [<code>Builder</code>](#Builder)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -268,9 +268,9 @@ Builds a specific metadata file by name
 | name | <code>string</code> | name of metadata to build |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
-<a name="Builder+buildTemplate"></a>
+<a name="Builder+_buildTemplate"></a>
 
-### builder.buildTemplate(metadataType, keyArr, templateVariables) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+### builder.\_buildTemplate(metadataType, keyArr, templateVariables) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
 Build a template based on a list of metadata files in the retrieve folder.
 
 **Kind**: instance method of [<code>Builder</code>](#Builder)  
@@ -299,11 +299,11 @@ Build a template based on a list of metadata files in the retrieve folder.
 
 <a name="Builder.buildDefinition"></a>
 
-### Builder.buildDefinition(businessUnit, selectedType, name, market) ⇒ <code>Promise.&lt;void&gt;</code>
+### Builder.buildDefinition(businessUnit, selectedType, name, market) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
 Build a specific metadata file based on a template.
 
 **Kind**: static method of [<code>Builder</code>](#Builder)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+**Returns**: <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -421,7 +421,7 @@ main class
 
 * [Mcdev](#Mcdev)
     * [.setSkipInteraction([skipInteraction])](#Mcdev.setSkipInteraction) ⇒ <code>void</code>
-    * [.createDeltaPkg(argv)](#Mcdev.createDeltaPkg) ⇒ <code>void</code>
+    * [.createDeltaPkg(argv)](#Mcdev.createDeltaPkg) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
     * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>void</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
@@ -452,10 +452,11 @@ helper method to use unattended mode when including mcdev as a package
 
 <a name="Mcdev.createDeltaPkg"></a>
 
-### Mcdev.createDeltaPkg(argv) ⇒ <code>void</code>
+### Mcdev.createDeltaPkg(argv) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
 handler for 'mcdev createDeltaPkg
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code> - list of changed items  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -809,7 +810,7 @@ FileTransfer MetadataType
     * [._extractCode(metadata)](#Asset._extractCode) ⇒ <code>TYPE.CodeExtractItem</code>
     * [._extractCode_slots(prefix, metadataSlots, codeArr)](#Asset._extractCode_slots) ⇒ <code>void</code>
     * [.getJsonFromFS(dir, _, selectedSubType)](#Asset.getJsonFromFS) ⇒ <code>TYPE.MetadataTypeMap</code>
-    * [.findSubType(templateDir, templateName)](#Asset.findSubType) ⇒ <code>TYPE.AssetSubType</code>
+    * [.findSubType(templateDir, templateName)](#Asset.findSubType) ⇒ <code>Promise.&lt;TYPE.AssetSubType&gt;</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName)](#Asset.readSecondaryFolder) ⇒ <code>TYPE.AssetItem</code>
     * [.getFilesToCommit(keyArr)](#Asset.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
 
@@ -1123,11 +1124,11 @@ Returns file contents mapped to their fileName without '.json' ending
 
 <a name="Asset.findSubType"></a>
 
-### Asset.findSubType(templateDir, templateName) ⇒ <code>TYPE.AssetSubType</code>
+### Asset.findSubType(templateDir, templateName) ⇒ <code>Promise.&lt;TYPE.AssetSubType&gt;</code>
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>TYPE.AssetSubType</code> - subtype name  
+**Returns**: <code>Promise.&lt;TYPE.AssetSubType&gt;</code> - subtype name  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2872,7 +2873,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.applyTemplateNames(code, templateVariables)](#MetadataType.applyTemplateNames) ⇒ <code>string</code>
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, variables, templateName)](#MetadataType.buildDefinitionForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MetadataType.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-    * [.findSubType(templateDir, templateName)](#MetadataType.findSubType) ⇒ <code>string</code>
+    * [.findSubType(templateDir, templateName)](#MetadataType.findSubType) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName, ex)](#MetadataType.readSecondaryFolder) ⇒ <code>object</code>
     * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType.buildDefinition) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.checkForErrors(ex)](#MetadataType.checkForErrors) ⇒ <code>string</code>
@@ -3352,11 +3353,11 @@ handles extracted code if any are found for complex types
 
 <a name="MetadataType.findSubType"></a>
 
-### MetadataType.findSubType(templateDir, templateName) ⇒ <code>string</code>
+### MetadataType.findSubType(templateDir, templateName) ⇒ <code>Promise.&lt;string&gt;</code>
 check template directory for complex types that open subfolders for their subtypes
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>string</code> - subtype name  
+**Returns**: <code>Promise.&lt;string&gt;</code> - subtype name  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5074,7 +5075,7 @@ CLI helper class
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
-    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.upgradeAuthFile()](#Init.upgradeAuthFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
@@ -5128,11 +5129,11 @@ recursive helper for _fixMcdevConfig that adds missing settings
 
 <a name="Init._getForcedUpdateList"></a>
 
-### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Array.&lt;string&gt;</code>
+### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 returns list of files that need to be updated
 
 **Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - relevant files with path that need to be updated  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - relevant files with path that need to be updated  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5303,7 +5304,7 @@ CLI helper class
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
-    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.upgradeAuthFile()](#Init.upgradeAuthFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
@@ -5357,11 +5358,11 @@ recursive helper for _fixMcdevConfig that adds missing settings
 
 <a name="Init._getForcedUpdateList"></a>
 
-### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Array.&lt;string&gt;</code>
+### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 returns list of files that need to be updated
 
 **Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - relevant files with path that need to be updated  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - relevant files with path that need to be updated  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5532,7 +5533,7 @@ CLI helper class
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
-    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.upgradeAuthFile()](#Init.upgradeAuthFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
@@ -5586,11 +5587,11 @@ recursive helper for _fixMcdevConfig that adds missing settings
 
 <a name="Init._getForcedUpdateList"></a>
 
-### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Array.&lt;string&gt;</code>
+### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 returns list of files that need to be updated
 
 **Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - relevant files with path that need to be updated  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - relevant files with path that need to be updated  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5761,7 +5762,7 @@ CLI helper class
     * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
-    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.upgradeAuthFile()](#Init.upgradeAuthFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
@@ -5815,11 +5816,11 @@ recursive helper for _fixMcdevConfig that adds missing settings
 
 <a name="Init._getForcedUpdateList"></a>
 
-### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Array.&lt;string&gt;</code>
+### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 returns list of files that need to be updated
 
 **Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - relevant files with path that need to be updated  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - relevant files with path that need to be updated  
 
 | Param | Type | Description |
 | --- | --- | --- |
