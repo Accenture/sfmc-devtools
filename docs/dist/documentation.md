@@ -130,6 +130,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Cli">Cli</a></dt>
 <dd><p>CLI helper class</p>
 </dd>
+<dt><a href="#Config">Config</a></dt>
+<dd><p>Central class for loading and validating properties from config and auth</p>
+</dd>
 <dt><a href="#DevOps">DevOps</a></dt>
 <dd><p>DevOps helper class</p>
 </dd>
@@ -4139,9 +4142,7 @@ CLI entry for SFMC DevTools
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
-    * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
@@ -4228,14 +4229,6 @@ helper for retrieve, retrieveAsTemplate and deploy
 | --- | --- | --- |
 | selectedType | <code>string</code> | type or type-subtype |
 
-<a name="Util.getDefaultProperties"></a>
-
-### Util.getDefaultProperties() ⇒ <code>object</code>
-defines how the properties.json should look like
-used for creating a template and for checking if variables are set
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>object</code> - default properties  
 <a name="Util.getRetrieveTypeChoices"></a>
 
 ### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;string&gt;</code>
@@ -4243,19 +4236,6 @@ helper for getDefaultProperties()
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>Array.&lt;string&gt;</code> - type choices  
-<a name="Util.checkProperties"></a>
-
-### Util.checkProperties(properties, [silent]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
-check if the config file is correctly formatted and has values
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code> - file structure ok OR list of fields to be fixed  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>object</code> | javascript object in .mcdevrc.json |
-| [silent] | <code>boolean</code> | set to true for internal use w/o cli output |
-
 <a name="Util.metadataLogger"></a>
 
 ### Util.metadataLogger(level, type, method, payload, [source]) ⇒ <code>void</code>
@@ -4566,6 +4546,51 @@ shows metadata type descriptions
 
 **Kind**: static method of [<code>Cli</code>](#Cli)  
 **Returns**: <code>void</code> - -  
+<a name="Config"></a>
+
+## Config
+Central class for loading and validating properties from config and auth
+
+**Kind**: global constant  
+
+* [Config](#Config)
+    * [.getProperties([silent])](#Config.getProperties) ⇒ <code>object</code>
+    * [.checkProperties(properties, [silent])](#Config.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
+    * [.getDefaultProperties()](#Config.getDefaultProperties) ⇒ <code>object</code>
+
+<a name="Config.getProperties"></a>
+
+### Config.getProperties([silent]) ⇒ <code>object</code>
+loads central properties from config file
+
+**Kind**: static method of [<code>Config</code>](#Config)  
+**Returns**: <code>object</code> - central properties object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [silent] | <code>boolean</code> | omit throwing errors and print messages; assuming not silent if not set |
+
+<a name="Config.checkProperties"></a>
+
+### Config.checkProperties(properties, [silent]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
+check if the config file is correctly formatted and has values
+
+**Kind**: static method of [<code>Config</code>](#Config)  
+**Returns**: <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code> - file structure ok OR list of fields to be fixed  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>object</code> | javascript object in .mcdevrc.json |
+| [silent] | <code>boolean</code> | set to true for internal use w/o cli output |
+
+<a name="Config.getDefaultProperties"></a>
+
+### Config.getDefaultProperties() ⇒ <code>object</code>
+defines how the properties.json should look like
+used for creating a template and for checking if variables are set
+
+**Kind**: static method of [<code>Config</code>](#Config)  
+**Returns**: <code>object</code> - default properties  
 <a name="DevOps"></a>
 
 ## DevOps
@@ -4655,7 +4680,6 @@ File extends fs-extra. It adds logger and util methods for file handling
     * [.readFile(directory, filename, filetype, [encoding])](#File.readFile) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.readDirectories(directory, depth, [includeStem], [_stemLength])](#File.readDirectories) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength])](#File.readDirectoriesSync) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.loadConfigFile([silent])](#File.loadConfigFile) ⇒ <code>object</code>
     * [.saveConfigFile(properties)](#File.saveConfigFile) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initPrettier([filetype])](#File.initPrettier) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
@@ -4853,18 +4877,6 @@ of file paths to be iterated over using sync api (required in constructors)
 ```js
 ['deploy/mcdev/bu1']
 ```
-<a name="File.loadConfigFile"></a>
-
-### File.loadConfigFile([silent]) ⇒ <code>object</code>
-loads central properties from config file
-
-**Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>object</code> - central properties object  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [silent] | <code>boolean</code> | omit throwing errors and print messages; assuming not silent if not set |
-
 <a name="File.saveConfigFile"></a>
 
 ### File.saveConfigFile(properties) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -5820,9 +5832,7 @@ Util that contains logger and simple util methods
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
-    * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
@@ -5909,14 +5919,6 @@ helper for retrieve, retrieveAsTemplate and deploy
 | --- | --- | --- |
 | selectedType | <code>string</code> | type or type-subtype |
 
-<a name="Util.getDefaultProperties"></a>
-
-### Util.getDefaultProperties() ⇒ <code>object</code>
-defines how the properties.json should look like
-used for creating a template and for checking if variables are set
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>object</code> - default properties  
 <a name="Util.getRetrieveTypeChoices"></a>
 
 ### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;string&gt;</code>
@@ -5924,19 +5926,6 @@ helper for getDefaultProperties()
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>Array.&lt;string&gt;</code> - type choices  
-<a name="Util.checkProperties"></a>
-
-### Util.checkProperties(properties, [silent]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
-check if the config file is correctly formatted and has values
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code> - file structure ok OR list of fields to be fixed  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>object</code> | javascript object in .mcdevrc.json |
-| [silent] | <code>boolean</code> | set to true for internal use w/o cli output |
-
 <a name="Util.metadataLogger"></a>
 
 ### Util.metadataLogger(level, type, method, payload, [source]) ⇒ <code>void</code>
