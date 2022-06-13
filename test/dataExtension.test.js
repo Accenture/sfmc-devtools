@@ -17,10 +17,11 @@ describe('dataExtension', () => {
             // THEN
             // get results from cache
             const result = cache.getCache();
+            console.log('result:::::', result);
             assert.equal(
-                Object.keys(result.dataExtension).length,
+                result.dataExtension ? Object.keys(result.dataExtension).length : 0,
                 1,
-                'only one data extension expected'
+                'only one dataExtension expected'
             );
             assert.deepEqual(
                 await testUtils.getActualFile('childBU_dataextension_test', 'dataExtension'),
@@ -45,7 +46,7 @@ describe('dataExtension', () => {
             // get results from cache
             const result = cache.getCache();
             assert.equal(
-                Object.keys(result.dataExtension).length,
+                result.dataExtension ? Object.keys(result.dataExtension).length : 0,
                 2,
                 'two data extensions expected'
             );
@@ -73,13 +74,13 @@ describe('dataExtension', () => {
             const result = await handler.retrieveAsTemplate(
                 'testInstance/testBU',
                 'dataExtension',
-                'childBU_dataextension_test',
+                ['childBU_dataextension_test'],
                 'testMarket'
             );
 
             // WHEN
             assert.equal(
-                Object.keys(result.dataExtension).length,
+                result.dataExtension ? Object.keys(result.dataExtension).length : 0,
                 1,
                 'only one dataExtension expected'
             );
@@ -119,7 +120,7 @@ describe('dataExtension', () => {
             );
             // WHEN
             assert.equal(
-                Object.keys(result.dataExtension).length,
+                result.dataExtension ? Object.keys(result.dataExtension).length : 0,
                 1,
                 'only one dataExtension expected'
             );

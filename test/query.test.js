@@ -18,7 +18,11 @@ describe('query', () => {
             // THEN
             // get results from cache
             const result = cache.getCache();
-            assert.equal(Object.keys(result.query).length, 1, 'only one query expected');
+            assert.equal(
+                result.query ? Object.keys(result.query).length : 0,
+                1,
+                'only one query expected'
+            );
             assert.deepEqual(
                 await testUtils.getActualFile('testExistingQuery', 'query'),
                 await testUtils.getExpectedFile('9999999', 'query', 'get'),
@@ -39,7 +43,11 @@ describe('query', () => {
             // THEN
             // get results from cache
             const result = cache.getCache();
-            assert.equal(Object.keys(result.query).length, 2, 'two querys expected');
+            assert.equal(
+                result.query ? Object.keys(result.query).length : 0,
+                2,
+                'two querys expected'
+            );
             assert.deepEqual(
                 await testUtils.getActualFile('testQuery', 'query'),
                 await testUtils.getExpectedFile('9999999', 'query', 'post'),
@@ -64,11 +72,15 @@ describe('query', () => {
             const result = await handler.retrieveAsTemplate(
                 'testInstance/testBU',
                 'query',
-                'testExistingQuery',
+                ['testExistingQuery'],
                 'testMarket'
             );
             // WHEN
-            assert.equal(Object.keys(result.query).length, 1, 'only one query expected');
+            assert.equal(
+                result.query ? Object.keys(result.query).length : 0,
+                1,
+                'only one query expected'
+            );
             assert.deepEqual(
                 await testUtils.getActualTemplate('testExistingQuery', 'query'),
                 await testUtils.getExpectedFile('9999999', 'query', 'template'),
@@ -104,7 +116,11 @@ describe('query', () => {
                 'testMarket'
             );
             // WHEN
-            assert.equal(Object.keys(result.query).length, 1, 'only one query expected');
+            assert.equal(
+                result.query ? Object.keys(result.query).length : 0,
+                1,
+                'only one query expected'
+            );
             assert.deepEqual(
                 await testUtils.getActualTemplate('testExistingQuery', 'query'),
                 await testUtils.getExpectedFile('9999999', 'query', 'template'),
