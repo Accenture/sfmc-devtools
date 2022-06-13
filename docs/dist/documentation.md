@@ -398,7 +398,7 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 | Param | Type | Description |
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
-| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> \| <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code> | limit deployment to given metadata type |
+| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
 
 <a name="Deployer._deployBU"></a>
@@ -540,7 +540,7 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 | Param | Type | Description |
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
-| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> \| <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code> | limit deployment to given metadata type |
+| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
 
 <a name="Mcdev.initProject"></a>
