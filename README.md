@@ -658,7 +658,7 @@ mcdev retrieve "*"
 
 <a id="markdown-deploy" name="deploy"></a>
 
-_Command:_ `mcdev deploy [business unit] [metadata type]`
+_Command:_ `mcdev deploy [business unit] [metadata type] [metadata key]`
 
 _Alias:_ `mcdev d`
 
@@ -682,6 +682,17 @@ _Example:_
 ```bash
 mcdev deploy MyProject/DEV dataExtension
 mcdev deploy MyProject/DEV "script,dataExtension,importFile"
+```
+
+**deploy sepcific type and key:**
+
+If you wish you may also specify exact keys that need to be deployed, filtering down on whats in your deploy folder even further. Specified keys apply as a filter for all types you specify. If your naming convention does not allow for such an aggregation then please run seperate commands for each type.
+
+_Example:_
+
+```bash
+mcdev deploy MyProject/DEV dataExtension "key1,key2"
+mcdev deploy MyProject/DEV "script,dataExtension,importFile" "key1,key2"
 ```
 
 **deploy all BUs:**
