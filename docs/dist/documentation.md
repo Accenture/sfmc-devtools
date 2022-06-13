@@ -338,9 +338,11 @@ Source and target business units are also compared before the deployment to appl
     * [new Deployer(properties, buObject)](#new_Deployer_new)
     * _instance_
         * [.metadata](#Deployer+metadata) : <code>TYPE.MultiMetadataTypeMap</code>
-        * [.deploy([typeArr], [keyArr])](#Deployer+deploy) ⇒ <code>Promise</code>
+        * [._deploy([typeArr], [keyArr])](#Deployer+_deploy) ⇒ <code>Promise</code>
         * [.deployCallback(result, metadataType)](#Deployer+deployCallback) ⇒ <code>void</code>
     * _static_
+        * [.deploy(businessUnit, [selectedTypesArr], [keyArr])](#Deployer.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
+        * [._deployBU(cred, bu, [typeArr], [keyArr])](#Deployer._deployBU) ⇒ <code>Promise</code>
         * [.readBUMetadata(deployDir, [typeArr], [listBadKeys])](#Deployer.readBUMetadata) ⇒ <code>TYPE.MultiMetadataTypeMap</code>
         * [.createFolderDefinitions(deployDir, metadata, metadataTypeArr)](#Deployer.createFolderDefinitions) ⇒ <code>void</code>
 
@@ -360,9 +362,9 @@ Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 
 ### deployer.metadata : <code>TYPE.MultiMetadataTypeMap</code>
 **Kind**: instance property of [<code>Deployer</code>](#Deployer)  
-<a name="Deployer+deploy"></a>
+<a name="Deployer+_deploy"></a>
 
-### deployer.deploy([typeArr], [keyArr]) ⇒ <code>Promise</code>
+### deployer.\_deploy([typeArr], [keyArr]) ⇒ <code>Promise</code>
 Deploy all metadata that is located in the deployDir
 
 **Kind**: instance method of [<code>Deployer</code>](#Deployer)  
@@ -384,6 +386,35 @@ Gets called for every deployed metadata entry
 | --- | --- | --- |
 | result | <code>object</code> | Deployment result |
 | metadataType | <code>string</code> | Name of metadata type |
+
+<a name="Deployer.deploy"></a>
+
+### Deployer.deploy(businessUnit, [selectedTypesArr], [keyArr]) ⇒ <code>Promise.&lt;void&gt;</code>
+Deploys all metadata located in the 'deploy' directory to the specified business unit
+
+**Kind**: static method of [<code>Deployer</code>](#Deployer)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| businessUnit | <code>string</code> | references credentials from properties.json |
+| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
+| [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
+
+<a name="Deployer._deployBU"></a>
+
+### Deployer.\_deployBU(cred, bu, [typeArr], [keyArr]) ⇒ <code>Promise</code>
+helper for deploy()
+
+**Kind**: static method of [<code>Deployer</code>](#Deployer)  
+**Returns**: <code>Promise</code> - ensure that BUs are worked on sequentially  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cred | <code>string</code> | name of Credential |
+| bu | <code>string</code> | name of BU |
+| [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
+| [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
 
 <a name="Deployer.readBUMetadata"></a>
 
@@ -426,7 +457,6 @@ main class
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>void</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
     * [.retrieve(businessUnit, [selectedTypesArr], [key], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [._deployBU(cred, bu, [typeArr], [keyArr])](#Mcdev._deployBU) ⇒ <code>Promise</code>
     * [.deploy(businessUnit, [selectedTypesArr], [keyArr])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initProject([credentialsName], [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -499,21 +529,6 @@ Retrieve all metadata from the specified business unit into the local file syste
 | [selectedTypesArr] | <code>Array.&lt;string&gt;</code> | limit retrieval to given metadata type |
 | [key] | <code>string</code> | limit retrieval to given metadata key |
 | [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
-
-<a name="Mcdev._deployBU"></a>
-
-### Mcdev.\_deployBU(cred, bu, [typeArr], [keyArr]) ⇒ <code>Promise</code>
-helper for deploy()
-
-**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise</code> - ensure that BUs are worked on sequentially  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| cred | <code>string</code> | name of Credential |
-| bu | <code>string</code> | name of BU |
-| [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
-| [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
 
 <a name="Mcdev.deploy"></a>
 
