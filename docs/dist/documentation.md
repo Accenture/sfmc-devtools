@@ -479,7 +479,7 @@ helper method to use unattended mode when including mcdev as a package
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Mcdev.setLoggingLevel"></a>
 
@@ -569,7 +569,7 @@ Creates template file for properties.json
 | Param | Type | Description |
 | --- | --- | --- |
 | [credentialsName] | <code>string</code> | identifying name of the installed package / project |
-| [skipInteraction] | <code>boolean</code> \| <code>object</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Mcdev.findBUs"></a>
 
@@ -4278,6 +4278,7 @@ CLI entry for SFMC DevTools
 **Kind**: global constant  
 
 * [Util](#Util)
+    * [.skipInteraction](#Util.skipInteraction) : <code>TYPE.skipInteraction</code>
     * [.logger](#Util.logger)
     * [.filterObjByKeys(originalObj, [whitelistArr])](#Util.filterObjByKeys) ⇒ <code>Object.&lt;string, \*&gt;</code>
     * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
@@ -4300,6 +4301,10 @@ CLI entry for SFMC DevTools
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
 
+<a name="Util.skipInteraction"></a>
+
+### Util.skipInteraction : <code>TYPE.skipInteraction</code>
+**Kind**: static property of [<code>Util</code>](#Util)  
 <a name="Util.logger"></a>
 
 ### Util.logger
@@ -6019,6 +6024,7 @@ Util that contains logger and simple util methods
 **Kind**: global constant  
 
 * [Util](#Util)
+    * [.skipInteraction](#Util.skipInteraction) : <code>TYPE.skipInteraction</code>
     * [.logger](#Util.logger)
     * [.filterObjByKeys(originalObj, [whitelistArr])](#Util.filterObjByKeys) ⇒ <code>Object.&lt;string, \*&gt;</code>
     * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
@@ -6041,6 +6047,10 @@ Util that contains logger and simple util methods
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
 
+<a name="Util.skipInteraction"></a>
+
+### Util.skipInteraction : <code>TYPE.skipInteraction</code>
+**Kind**: static property of [<code>Util</code>](#Util)  
 <a name="Util.logger"></a>
 
 ### Util.logger
