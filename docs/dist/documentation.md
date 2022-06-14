@@ -452,6 +452,7 @@ main class
 
 * [Mcdev](#Mcdev)
     * [.setSkipInteraction([skipInteraction])](#Mcdev.setSkipInteraction) ⇒ <code>void</code>
+    * [.setLoggingLevel(argv)](#Mcdev.setLoggingLevel) ⇒ <code>void</code>
     * [.createDeltaPkg(argv)](#Mcdev.createDeltaPkg) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
     * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>void</code>
@@ -479,6 +480,20 @@ helper method to use unattended mode when including mcdev as a package
 | Param | Type | Description |
 | --- | --- | --- |
 | [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Mcdev.setLoggingLevel"></a>
+
+### Mcdev.setLoggingLevel(argv) ⇒ <code>void</code>
+configures what is displayed in the console
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| argv | <code>object</code> | list of command line parameters given by user |
+| [argv.silent] | <code>boolean</code> | only errors printed to CLI |
+| [argv.verbose] | <code>boolean</code> | chatty user CLI output |
+| [argv.debug] | <code>boolean</code> | enables developer output & features |
 
 <a name="Mcdev.createDeltaPkg"></a>
 
