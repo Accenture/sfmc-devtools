@@ -456,7 +456,7 @@ main class
     * [.createDeltaPkg(argv)](#Mcdev.createDeltaPkg) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
     * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>void</code>
-    * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
+    * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.retrieve(businessUnit, [selectedTypesArr], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.deploy(businessUnit, [selectedTypesArr], [keyArr])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initProject([credentialsName], [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -522,9 +522,9 @@ handler for 'mcdev createDeltaPkg
 **Returns**: <code>void</code> - .  
 <a name="Mcdev.upgrade"></a>
 
-### Mcdev.upgrade([skipInteraction]) ⇒ <code>Promise</code>
+### Mcdev.upgrade([skipInteraction]) ⇒ <code>Promise.&lt;boolean&gt;</code>
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise</code> - .  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - success flag  
 
 | Param | Type | Description |
 | --- | --- | --- |
