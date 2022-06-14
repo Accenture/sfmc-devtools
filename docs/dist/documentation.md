@@ -4857,7 +4857,7 @@ File extends fs-extra. It adds logger and util methods for file handling
     * [._beautify_prettier(directory, filename, filetype, content)](#File._beautify_prettier) ⇒ <code>string</code>
     * [.writeToFile(directory, filename, filetype, content, [encoding])](#File.writeToFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.readJSONFile(directory, filename, sync, cleanPath)](#File.readJSONFile) ⇒ <code>Promise</code> \| <code>object</code>
-    * [.readFile(directory, filename, filetype, [encoding])](#File.readFile) ⇒ <code>Promise.&lt;string&gt;</code>
+    * [.readFilteredFilename(directory, filename, filetype, [encoding])](#File.readFilteredFilename) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.readDirectories(directory, depth, [includeStem], [_stemLength])](#File.readDirectories) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength])](#File.readDirectoriesSync) ⇒ <code>Array.&lt;string&gt;</code>
     * [.loadConfigFile([silent])](#File.loadConfigFile) ⇒ <code>object</code>
@@ -5003,9 +5003,9 @@ Saves json content to a file in the local file system. Will create the parent di
 | sync | <code>boolean</code> | should execute sync (default is async) |
 | cleanPath | <code>boolean</code> | should execute sync (default is true) |
 
-<a name="File.readFile"></a>
+<a name="File.readFilteredFilename"></a>
 
-### File.readFile(directory, filename, filetype, [encoding]) ⇒ <code>Promise.&lt;string&gt;</code>
+### File.readFilteredFilename(directory, filename, filetype, [encoding]) ⇒ <code>Promise.&lt;string&gt;</code>
 reads file from local file system.
 
 **Kind**: static method of [<code>File</code>](#File)  
