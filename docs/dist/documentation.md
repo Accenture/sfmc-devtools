@@ -5043,6 +5043,7 @@ of file paths to be iterated over
 ### File.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength]) ⇒ <code>Array.&lt;string&gt;</code>
 reads directories to a specific depth returning an array
 of file paths to be iterated over using sync api (required in constructors)
+TODO - merge with readDirectories. so far the logic is really different
 
 **Kind**: static method of [<code>File</code>](#File)  
 **Returns**: <code>Array.&lt;string&gt;</code> - array of fully defined file paths  
