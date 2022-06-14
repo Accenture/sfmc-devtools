@@ -508,7 +508,7 @@ handler for 'mcdev createDeltaPkg
 | argv | <code>object</code> | yargs parameters |
 | [argv.range] | <code>string</code> | git commit range     into deploy directory |
 | [argv.filter] | <code>string</code> | filter file paths that start with any |
-| [argv.skipInteraction] | <code>object</code> | allows to skip interactive wizard |
+| [argv.skipInteraction] | <code>TYPE.skipInteraction</code> | allows to skip interactive wizard |
 
 <a name="Mcdev.selectTypes"></a>
 
@@ -528,7 +528,7 @@ handler for 'mcdev createDeltaPkg
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>object</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Mcdev.retrieve"></a>
 
@@ -5211,7 +5211,7 @@ offer to push the new repo straight to the server
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>object</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._addGitRemote"></a>
 
@@ -5440,7 +5440,7 @@ offer to push the new repo straight to the server
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>object</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._addGitRemote"></a>
 
@@ -5669,7 +5669,7 @@ offer to push the new repo straight to the server
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>object</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._addGitRemote"></a>
 
@@ -5898,7 +5898,7 @@ offer to push the new repo straight to the server
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>object</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._addGitRemote"></a>
 
