@@ -16,6 +16,22 @@
             "IsRequired": true,
             "IsPrimaryKey": false,
             "FieldType": "Text"
+        },
+        {
+            "Name": "LastName",
+            "DefaultValue": "",
+            "MaxLength": 55,
+            "IsRequired": true,
+            "IsPrimaryKey": false,
+            "FieldType": "Text"
+        },
+        {
+            "Name": "ContactKey",
+            "DefaultValue": "",
+            "MaxLength": 40,
+            "IsRequired": true,
+            "IsPrimaryKey": true,
+            "FieldType": "Text"
         }
     ],
     "r__folder_ContentType": "dataextension",

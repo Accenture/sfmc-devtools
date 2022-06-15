@@ -61,7 +61,7 @@ describe('dataExtension', () => {
             );
             assert.equal(
                 Object.values(testUtils.getAPIHistory()).flat().length,
-                15,
+                14,
                 'Unexpected number of requests made'
             );
             return;

@@ -20,7 +20,7 @@
         {
             "Name": "LastName",
             "DefaultValue": "",
-            "MaxLength": 50,
+            "MaxLength": 55,
             "IsRequired": false,
             "IsPrimaryKey": false,
             "FieldType": "Text"
@@ -39,6 +39,14 @@
             "MaxLength": 50,
             "IsRequired": true,
             "IsPrimaryKey": true,
+            "FieldType": "Text"
+        },
+        {
+            "Name": "testField",
+            "DefaultValue": "",
+            "MaxLength": 254,
+            "IsRequired": false,
+            "IsPrimaryKey": false,
             "FieldType": "Text"
         }
     ],
