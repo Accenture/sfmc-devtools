@@ -27,7 +27,7 @@
     "scripts": {
         "start": "node lib/cli.js",
         "mcdev": "node lib/cli.js",
-        "build": "run-s lint docs",
+        "build": "run-s lint:fix docs test",
         "debug": "node --nolazy --inspect-brk=9229 lib/cli.js",
         "docs": "jsdoc2md --files lib/**/*.js types/**/*.js > docs/dist/documentation.md",
         "lint:fix": "eslint --fix lib/**/*.js && eslint --fix types/*.js && eslint --fix test/**/*.js",
