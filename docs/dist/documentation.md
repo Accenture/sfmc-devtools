@@ -1441,7 +1441,7 @@ DataExtension MetadataType
     * [._filterUpsertResults(res)](#DataExtension._filterUpsertResults) ⇒ <code>boolean</code>
     * [.create(metadata)](#DataExtension.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#DataExtension.update) ⇒ <code>Promise</code>
-    * [.postDeployTasks(upsertedMetadata)](#DataExtension.postDeployTasks) ⇒ <code>void</code>
+    * [.postDeployTasks(upsertedMetadata, originalMetadata)](#DataExtension.postDeployTasks) ⇒ <code>void</code>
     * [.retrieve(retrieveDir, [additionalFields], buObject, [_], [isDeploy])](#DataExtension.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.retrieveChangelog([buObject], [additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.postRetrieveTasks(metadata, [_], [isTemplating])](#DataExtension.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionItem</code>
@@ -1505,7 +1505,7 @@ Updates a single dataExtension. Also updates their columns in 'dataExtension.col
 
 <a name="DataExtension.postDeployTasks"></a>
 
-### DataExtension.postDeployTasks(upsertedMetadata) ⇒ <code>void</code>
+### DataExtension.postDeployTasks(upsertedMetadata, originalMetadata) ⇒ <code>void</code>
 Gets executed after deployment of metadata type
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -1513,6 +1513,7 @@ Gets executed after deployment of metadata type
 | Param | Type | Description |
 | --- | --- | --- |
 | upsertedMetadata | <code>TYPE.DataExtensionMap</code> | metadata mapped by their keyField |
+| originalMetadata | <code>TYPE.DataExtensionMap</code> | metadata to be updated (contains additioanl fields) |
 
 <a name="DataExtension.retrieve"></a>
 
