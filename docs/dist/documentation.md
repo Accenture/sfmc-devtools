@@ -452,10 +452,11 @@ main class
 
 * [Mcdev](#Mcdev)
     * [.setSkipInteraction([skipInteraction])](#Mcdev.setSkipInteraction) ⇒ <code>void</code>
+    * [.setLoggingLevel(argv)](#Mcdev.setLoggingLevel) ⇒ <code>void</code>
     * [.createDeltaPkg(argv)](#Mcdev.createDeltaPkg) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
     * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>void</code>
-    * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise</code>
+    * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.retrieve(businessUnit, [selectedTypesArr], [key], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.deploy(businessUnit, [selectedTypesArr], [keyArr])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initProject([credentialsName], [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -478,7 +479,21 @@ helper method to use unattended mode when including mcdev as a package
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Mcdev.setLoggingLevel"></a>
+
+### Mcdev.setLoggingLevel(argv) ⇒ <code>void</code>
+configures what is displayed in the console
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| argv | <code>object</code> | list of command line parameters given by user |
+| [argv.silent] | <code>boolean</code> | only errors printed to CLI |
+| [argv.verbose] | <code>boolean</code> | chatty user CLI output |
+| [argv.debug] | <code>boolean</code> | enables developer output & features |
 
 <a name="Mcdev.createDeltaPkg"></a>
 
@@ -493,7 +508,7 @@ handler for 'mcdev createDeltaPkg
 | argv | <code>object</code> | yargs parameters |
 | [argv.range] | <code>string</code> | git commit range     into deploy directory |
 | [argv.filter] | <code>string</code> | filter file paths that start with any |
-| [argv.skipInteraction] | <code>object</code> | allows to skip interactive wizard |
+| [argv.skipInteraction] | <code>TYPE.skipInteraction</code> | allows to skip interactive wizard |
 
 <a name="Mcdev.selectTypes"></a>
 
@@ -507,13 +522,13 @@ handler for 'mcdev createDeltaPkg
 **Returns**: <code>void</code> - .  
 <a name="Mcdev.upgrade"></a>
 
-### Mcdev.upgrade([skipInteraction]) ⇒ <code>Promise</code>
+### Mcdev.upgrade([skipInteraction]) ⇒ <code>Promise.&lt;boolean&gt;</code>
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise</code> - .  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - success flag  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>object</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Mcdev.retrieve"></a>
 
@@ -555,7 +570,7 @@ Creates template file for properties.json
 | Param | Type | Description |
 | --- | --- | --- |
 | [credentialsName] | <code>string</code> | identifying name of the installed package / project |
-| [skipInteraction] | <code>boolean</code> \| <code>object</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Mcdev.findBUs"></a>
 
@@ -1532,7 +1547,7 @@ DataExtension MetadataType
     * [._filterUpsertResults(res)](#DataExtension._filterUpsertResults) ⇒ <code>boolean</code>
     * [.create(metadata)](#DataExtension.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#DataExtension.update) ⇒ <code>Promise</code>
-    * [.postDeployTasks(upsertedMetadata)](#DataExtension.postDeployTasks) ⇒ <code>void</code>
+    * [.postDeployTasks(upsertedMetadata, originalMetadata)](#DataExtension.postDeployTasks) ⇒ <code>void</code>
     * [.retrieve(retrieveDir, [additionalFields], buObject, [_], key, [isDeploy])](#DataExtension.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.retrieveChangelog([buObject], [additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.postRetrieveTasks(metadata)](#DataExtension.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionItem</code>
@@ -1597,7 +1612,7 @@ Updates a single dataExtension. Also updates their columns in 'dataExtension.col
 
 <a name="DataExtension.postDeployTasks"></a>
 
-### DataExtension.postDeployTasks(upsertedMetadata) ⇒ <code>void</code>
+### DataExtension.postDeployTasks(upsertedMetadata, originalMetadata) ⇒ <code>void</code>
 Gets executed after deployment of metadata type
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -1605,6 +1620,7 @@ Gets executed after deployment of metadata type
 | Param | Type | Description |
 | --- | --- | --- |
 | upsertedMetadata | <code>TYPE.DataExtensionMap</code> | metadata mapped by their keyField |
+| originalMetadata | <code>TYPE.DataExtensionMap</code> | metadata to be updated (contains additioanl fields) |
 
 <a name="DataExtension.retrieve"></a>
 
@@ -4272,6 +4288,7 @@ CLI entry for SFMC DevTools
 **Kind**: global constant  
 
 * [Util](#Util)
+    * [.skipInteraction](#Util.skipInteraction) : <code>TYPE.skipInteraction</code>
     * [.logger](#Util.logger)
     * [.filterObjByKeys(originalObj, [whitelistArr])](#Util.filterObjByKeys) ⇒ <code>Object.&lt;string, \*&gt;</code>
     * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
@@ -4294,6 +4311,10 @@ CLI entry for SFMC DevTools
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
 
+<a name="Util.skipInteraction"></a>
+
+### Util.skipInteraction : <code>TYPE.skipInteraction</code>
+**Kind**: static property of [<code>Util</code>](#Util)  
 <a name="Util.logger"></a>
 
 ### Util.logger
@@ -4851,7 +4872,7 @@ File extends fs-extra. It adds logger and util methods for file handling
     * [._beautify_prettier(directory, filename, filetype, content)](#File._beautify_prettier) ⇒ <code>string</code>
     * [.writeToFile(directory, filename, filetype, content, [encoding])](#File.writeToFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.readJSONFile(directory, filename, sync, cleanPath)](#File.readJSONFile) ⇒ <code>Promise</code> \| <code>object</code>
-    * [.readFile(directory, filename, filetype, [encoding])](#File.readFile) ⇒ <code>Promise.&lt;string&gt;</code>
+    * [.readFilteredFilename(directory, filename, filetype, [encoding])](#File.readFilteredFilename) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.readDirectories(directory, depth, [includeStem], [_stemLength])](#File.readDirectories) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength])](#File.readDirectoriesSync) ⇒ <code>Array.&lt;string&gt;</code>
     * [.loadConfigFile([silent])](#File.loadConfigFile) ⇒ <code>object</code>
@@ -4997,9 +5018,9 @@ Saves json content to a file in the local file system. Will create the parent di
 | sync | <code>boolean</code> | should execute sync (default is async) |
 | cleanPath | <code>boolean</code> | should execute sync (default is true) |
 
-<a name="File.readFile"></a>
+<a name="File.readFilteredFilename"></a>
 
-### File.readFile(directory, filename, filetype, [encoding]) ⇒ <code>Promise.&lt;string&gt;</code>
+### File.readFilteredFilename(directory, filename, filetype, [encoding]) ⇒ <code>Promise.&lt;string&gt;</code>
 reads file from local file system.
 
 **Kind**: static method of [<code>File</code>](#File)  
@@ -5037,6 +5058,7 @@ of file paths to be iterated over
 ### File.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength]) ⇒ <code>Array.&lt;string&gt;</code>
 reads directories to a specific depth returning an array
 of file paths to be iterated over using sync api (required in constructors)
+TODO - merge with readDirectories. so far the logic is really different
 
 **Kind**: static method of [<code>File</code>](#File)  
 **Returns**: <code>Array.&lt;string&gt;</code> - array of fully defined file paths  
@@ -5205,7 +5227,7 @@ offer to push the new repo straight to the server
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>object</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._addGitRemote"></a>
 
@@ -5228,7 +5250,7 @@ checks global config and ask to config the user info and then store it locally
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>object</code> \| <code>boolean</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._getGitConfigUser"></a>
 
@@ -5263,7 +5285,7 @@ helper for this.initProject()
 | --- | --- | --- |
 | bu | <code>string</code> | cred/bu or cred/* or * |
 | gitStatus | <code>string</code> | signals what state the git repo is in |
-| [skipInteraction] | <code>boolean</code> \| <code>object</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init.upgradeProject"></a>
 
@@ -5434,7 +5456,7 @@ offer to push the new repo straight to the server
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>object</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._addGitRemote"></a>
 
@@ -5457,7 +5479,7 @@ checks global config and ask to config the user info and then store it locally
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>object</code> \| <code>boolean</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._getGitConfigUser"></a>
 
@@ -5492,7 +5514,7 @@ helper for this.initProject()
 | --- | --- | --- |
 | bu | <code>string</code> | cred/bu or cred/* or * |
 | gitStatus | <code>string</code> | signals what state the git repo is in |
-| [skipInteraction] | <code>boolean</code> \| <code>object</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init.upgradeProject"></a>
 
@@ -5663,7 +5685,7 @@ offer to push the new repo straight to the server
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>object</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._addGitRemote"></a>
 
@@ -5686,7 +5708,7 @@ checks global config and ask to config the user info and then store it locally
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>object</code> \| <code>boolean</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._getGitConfigUser"></a>
 
@@ -5721,7 +5743,7 @@ helper for this.initProject()
 | --- | --- | --- |
 | bu | <code>string</code> | cred/bu or cred/* or * |
 | gitStatus | <code>string</code> | signals what state the git repo is in |
-| [skipInteraction] | <code>boolean</code> \| <code>object</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init.upgradeProject"></a>
 
@@ -5892,7 +5914,7 @@ offer to push the new repo straight to the server
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>object</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._addGitRemote"></a>
 
@@ -5915,7 +5937,7 @@ checks global config and ask to config the user info and then store it locally
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [skipInteraction] | <code>object</code> \| <code>boolean</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._getGitConfigUser"></a>
 
@@ -5950,7 +5972,7 @@ helper for this.initProject()
 | --- | --- | --- |
 | bu | <code>string</code> | cred/bu or cred/* or * |
 | gitStatus | <code>string</code> | signals what state the git repo is in |
-| [skipInteraction] | <code>boolean</code> \| <code>object</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init.upgradeProject"></a>
 
@@ -6012,6 +6034,7 @@ Util that contains logger and simple util methods
 **Kind**: global constant  
 
 * [Util](#Util)
+    * [.skipInteraction](#Util.skipInteraction) : <code>TYPE.skipInteraction</code>
     * [.logger](#Util.logger)
     * [.filterObjByKeys(originalObj, [whitelistArr])](#Util.filterObjByKeys) ⇒ <code>Object.&lt;string, \*&gt;</code>
     * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
@@ -6034,6 +6057,10 @@ Util that contains logger and simple util methods
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
 
+<a name="Util.skipInteraction"></a>
+
+### Util.skipInteraction : <code>TYPE.skipInteraction</code>
+**Kind**: static property of [<code>Util</code>](#Util)  
 <a name="Util.logger"></a>
 
 ### Util.logger
