@@ -3294,7 +3294,7 @@ Retrieves Metadata for Rest Types
 | uri | <code>string</code> | rest endpoint for GET |
 | [overrideType] | <code>string</code> | force a metadata type (mainly used for Folders) |
 | [templateVariables] | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
-| [singleRetrieve] | <code>boolean</code> | tells parseResponseBody to expect a flat object |
+| [singleRetrieve] | <code>boolean</code> \| <code>string</code> \| <code>number</code> | expect a flat object OR key of single item to filter by |
 
 <a name="MetadataType.parseResponseBody"></a>
 
@@ -3307,7 +3307,7 @@ Builds map of metadata entries mapped to their keyfields
 | Param | Type | Description |
 | --- | --- | --- |
 | body | <code>object</code> | json of response body |
-| [singleRetrieve] | <code>boolean</code> | expect a flat object |
+| [singleRetrieve] | <code>boolean</code> \| <code>string</code> \| <code>number</code> | expect a flat object OR key of single item to filter by |
 
 <a name="MetadataType.deleteFieldByDefinition"></a>
 
