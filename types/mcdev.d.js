@@ -252,4 +252,18 @@ const SDK = require('sfmc-sdk');
  * @property {string} auth_url authentication base url
  */
 
+/**
+ * @typedef {object} SoapRequestParams
+ * @property {string} [continueRequest] request id
+ * @property {object} [options] additional options (CallsInConversation, Client, ConversationID, Priority, RequestType, SaveOptions, ScheduledTime, SendResponseTo, SequenceCode)
+ * @property {*} clientIDs ?
+ * @property {SoapFilter} [filter] simple or complex
+complex
+ * @property {boolean} [QueryAllAccounts] all BUs or just one
+ * @typedef {object} SoapFilter
+ * @property {string|SoapFilter} leftOperand string for simple or a new filter-object for complex
+ * @property {'AND'|'OR'|'equals'|'notEquals'|'isNull'|'isNotNull'|'greaterThan'|'lessThan'|'greaterThanOrEqual'|'lessThanOrEqual'|'between'|'IN'|'like'} operator various options
+ * @property {string|number|boolean|Array|SoapFilter} [rightOperand] string for simple or a new filter-object for complex; omit for isNull and isNotNull
+ */
+
 module.exports = {};
