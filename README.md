@@ -649,6 +649,8 @@ mcdev retrieve MyProject/DEV dataExtension "key1,key2"
 mcdev retrieve MyProject/DEV "script,dataExtension,importFile" "key1,key2"
 ```
 
+_Note:_ This is not supported by types `discovery` and `folder`.
+
 **retrieve all BUs:**
 
 A special variant of this command allows you to retrieve all Business Units of a given credential at once.
