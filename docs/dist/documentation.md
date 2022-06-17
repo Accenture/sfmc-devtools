@@ -2965,7 +2965,6 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.updateREST(metadataEntry, uri)](#MetadataType.updateREST) ⇒ <code>Promise</code>
     * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
     * [.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.getObjectIdForSingleRetrieve(key)](#MetadataType.getObjectIdForSingleRetrieve) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#MetadataType.parseResponseBody) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
@@ -3265,18 +3264,6 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
 | [requestParams] | <code>TYPE.SoapRequestParams</code> | required for the specific request (filter for example) |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
-
-<a name="MetadataType.getObjectIdForSingleRetrieve"></a>
-
-### MetadataType.getObjectIdForSingleRetrieve(key) ⇒ <code>Promise.&lt;string&gt;</code>
-helper to allow us to select single metadata entries via REST
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;string&gt;</code> - objectId or enpty string  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| key | <code>string</code> | customer key |
 
 <a name="MetadataType.retrieveREST"></a>
 
