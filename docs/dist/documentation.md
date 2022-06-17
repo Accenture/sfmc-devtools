@@ -725,7 +725,7 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 | Param | Type | Description |
 | --- | --- | --- |
 | retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
-| _ | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
+| _ | <code>void</code> | unused parameter |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
 | [___] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
@@ -2966,7 +2966,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.updateREST(metadataEntry, uri)](#MetadataType.updateREST) ⇒ <code>Promise</code>
     * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
     * [.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.getObjectIdForSingleRetrieve(metadataTypeSOAP, key)](#MetadataType.getObjectIdForSingleRetrieve) ⇒ <code>Promise.&lt;string&gt;</code>
+    * [.getObjectIdForSingleRetrieve(key)](#MetadataType.getObjectIdForSingleRetrieve) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#MetadataType.parseResponseBody) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
@@ -3269,7 +3269,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 
 <a name="MetadataType.getObjectIdForSingleRetrieve"></a>
 
-### MetadataType.getObjectIdForSingleRetrieve(metadataTypeSOAP, key) ⇒ <code>Promise.&lt;string&gt;</code>
+### MetadataType.getObjectIdForSingleRetrieve(key) ⇒ <code>Promise.&lt;string&gt;</code>
 helper to allow us to select single metadata entries via REST
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3277,7 +3277,6 @@ helper to allow us to select single metadata entries via REST
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadataTypeSOAP | <code>string</code> | type of metadata to retrieve (not always the same as this.defintion.type) |
 | key | <code>string</code> | customer key |
 
 <a name="MetadataType.retrieveREST"></a>
