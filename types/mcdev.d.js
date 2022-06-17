@@ -284,4 +284,15 @@ complex
  * @property {string[]} metaDataTypes.documentOnRetrieve which types should be parsed & documented after retrieve
  * @property {string} version mcdev version that last updated the config file
  */
+
+/**
+ * @typedef {object} Logger
+ * @property {Function} info print info message
+ * @property {Function} warn print warning message
+ * @property {Function} verbose additional messages that are not important
+ * @property {Function} debug print debug message
+ * @property {Function} error print error message
+ * @property {Function} errorStack print error with trace message
+ */
+
 module.exports = {};
