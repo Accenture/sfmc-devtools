@@ -24,6 +24,11 @@
         "jsdoc": {
             "mode": "jsdoc",
             "preferredTypes": {
+                "array": "Array",
+                "array.<>": "[]",
+                "Array.<>": "[]",
+                "array<>": "[]",
+                "Array<>": "[]",
                 "Object": "object",
                 "object.<>": "Object.<>",
                 "object<>": "Object.<>",
