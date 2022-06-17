@@ -442,7 +442,7 @@ parses asset metadata to auto-create folders in target folder
 | --- | --- | --- |
 | deployDir | <code>string</code> | root directory of metadata. |
 | metadata | <code>TYPE.MultiMetadataTypeMap</code> | list of metadata |
-| metadataTypeArr | [<code>Array.&lt;SupportedMetadataTypes&gt;</code>](#SupportedMetadataTypes) | list of metadata types |
+| metadataTypeArr | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | list of metadata types |
 
 <a name="Mcdev"></a>
 
