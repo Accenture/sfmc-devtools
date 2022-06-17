@@ -252,4 +252,36 @@ const SDK = require('sfmc-sdk');
  * @property {string} auth_url authentication base url
  */
 
+/**
+ * @typedef {object} SoapRequestParams
+ * @property {string} [continueRequest] request id
+ * @property {object} [options] additional options (CallsInConversation, Client, ConversationID, Priority, RequestType, SaveOptions, ScheduledTime, SendResponseTo, SequenceCode)
+ * @property {*} clientIDs ?
+ * @property {SoapFilter} [filter] simple or complex
+complex
+ * @property {boolean} [QueryAllAccounts] all BUs or just one
+ * @typedef {object} SoapFilter
+ * @property {string|SoapFilter} leftOperand string for simple or a new filter-object for complex
+ * @property {'AND'|'OR'|'equals'|'notEquals'|'isNull'|'isNotNull'|'greaterThan'|'lessThan'|'greaterThanOrEqual'|'lessThanOrEqual'|'between'|'IN'|'like'} operator various options
+ * @property {string|number|boolean|Array|SoapFilter} [rightOperand] string for simple or a new filter-object for complex; omit for isNull and isNotNull
+ */
+
+/**
+ * @typedef {object} Mcdevrc
+ * @property {object} credentials list of credentials
+ * @property {object} options configure options for mcdev
+ * @property {object} directories configure directories for mcdev to read/write to
+ * @property {string} directories.businessUnits "businessUnits/"
+ * @property {string} directories.deploy "deploy/"
+ * @property {string} directories.docs "docs/"
+ * @property {string} directories.retrieve "retrieve/"
+ * @property {string} directories.template "template/"
+ * @property {string} directories.templateBuilds ["retrieve/", "deploy/"]
+ * @property {Object.<string, object>} markets templating variables grouped by markets
+ * @property {object} marketList combination of markets and BUs for streamlined deployments
+ * @property {object} metaDataTypes templating variables grouped by markets
+ * @property {string[]} metaDataTypes.retrieve define what types shall be downloaded by default during retrieve
+ * @property {string[]} metaDataTypes.documentOnRetrieve which types should be parsed & documented after retrieve
+ * @property {string} version mcdev version that last updated the config file
+ */
 module.exports = {};
