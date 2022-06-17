@@ -10,7 +10,6 @@ describe('dataExtension', () => {
     afterEach(() => {
         testUtils.mockReset();
     });
-
     describe('Retrieve ================', () => {
         it('Should retrieve a data extension', async () => {
             // WHEN
@@ -18,14 +17,16 @@ describe('dataExtension', () => {
             // THEN
             // get results from cache
             const result = cache.getCache();
+            console.log('result:::::', result);
             assert.equal(
-                Object.keys(result.dataExtension).length,
+                result.dataExtension ? Object.keys(result.dataExtension).length : 0,
                 1,
-                'only one data extension expected'
+                'only one dataExtension expected'
             );
             assert.deepEqual(
-                await testUtils.getExpectedFile('9999999', 'dataExtension', 'retrieve'),
                 await testUtils.getActualFile('childBU_dataextension_test', 'dataExtension'),
+                await testUtils.getExpectedFile('9999999', 'dataExtension', 'retrieve'),
+
                 'returned metadata was not equal expected'
             );
             assert.equal(
@@ -45,23 +46,23 @@ describe('dataExtension', () => {
             // get results from cache
             const result = cache.getCache();
             assert.equal(
-                Object.keys(result.dataExtension).length,
+                result.dataExtension ? Object.keys(result.dataExtension).length : 0,
                 2,
                 'two data extensions expected'
             );
             assert.deepEqual(
-                await testUtils.getExpectedFile('9999999', 'dataExtension', 'create'),
                 await testUtils.getActualFile('testDataExtension', 'dataExtension'),
+                await testUtils.getExpectedFile('9999999', 'dataExtension', 'create'),
                 'returned metadata was not equal expected for create'
             );
             assert.deepEqual(
-                await testUtils.getExpectedFile('9999999', 'dataExtension', 'update'),
                 await testUtils.getActualFile('childBU_dataextension_test', 'dataExtension'),
+                await testUtils.getExpectedFile('9999999', 'dataExtension', 'update'),
                 'returned metadata was not equal expected for update'
             );
             assert.equal(
                 Object.values(testUtils.getAPIHistory()).flat().length,
-                15,
+                14,
                 'Unexpected number of requests made'
             );
             return;
@@ -73,18 +74,19 @@ describe('dataExtension', () => {
             const result = await handler.retrieveAsTemplate(
                 'testInstance/testBU',
                 'dataExtension',
-                'childBU_dataextension_test',
+                ['childBU_dataextension_test'],
                 'testMarket'
             );
+
             // WHEN
             assert.equal(
-                Object.keys(result.dataExtension).length,
+                result.dataExtension ? Object.keys(result.dataExtension).length : 0,
                 1,
                 'only one dataExtension expected'
             );
             assert.deepEqual(
-                await testUtils.getExpectedFile('9999999', 'dataExtension', 'template'),
                 await testUtils.getActualTemplate('childBU_dataextension_test', 'dataExtension'),
+                await testUtils.getExpectedFile('9999999', 'dataExtension', 'template'),
                 'returned template was not equal expected'
             );
             // THEN
@@ -94,10 +96,9 @@ describe('dataExtension', () => {
                 'childBU_dataextension_test',
                 'testMarket'
             );
-
             assert.deepEqual(
-                await testUtils.getExpectedFile('9999999', 'dataExtension', 'build'),
                 await testUtils.getActualDeployFile('childBU_dataextension_test', 'dataExtension'),
+                await testUtils.getExpectedFile('9999999', 'dataExtension', 'build'),
                 'returned deployment file was not equal expected'
             );
             assert.equal(
@@ -119,13 +120,13 @@ describe('dataExtension', () => {
             );
             // WHEN
             assert.equal(
-                Object.keys(result.dataExtension).length,
+                result.dataExtension ? Object.keys(result.dataExtension).length : 0,
                 1,
                 'only one dataExtension expected'
             );
             assert.deepEqual(
-                await testUtils.getExpectedFile('9999999', 'dataExtension', 'template'),
                 await testUtils.getActualTemplate('childBU_dataextension_test', 'dataExtension'),
+                await testUtils.getExpectedFile('9999999', 'dataExtension', 'template'),
                 'returned template was not equal expected'
             );
             // THEN
@@ -137,8 +138,8 @@ describe('dataExtension', () => {
             );
 
             assert.deepEqual(
-                await testUtils.getExpectedFile('9999999', 'dataExtension', 'build'),
                 await testUtils.getActualDeployFile('childBU_dataextension_test', 'dataExtension'),
+                await testUtils.getExpectedFile('9999999', 'dataExtension', 'build'),
                 'returned deployment file was not equal expected'
             );
             assert.equal(
