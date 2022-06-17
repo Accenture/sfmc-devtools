@@ -1209,16 +1209,9 @@ AttributeGroup MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [AttributeGroup](#AttributeGroup) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieveForCache()](#AttributeGroup.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieve(retrieveDir, [_], [__], [___], [key])](#AttributeGroup.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache()](#AttributeGroup.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 
-<a name="AttributeGroup.retrieveForCache"></a>
-
-### AttributeGroup.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves Metadata of schema attribute groups for caching.
-
-**Kind**: static method of [<code>AttributeGroup</code>](#AttributeGroup)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
 <a name="AttributeGroup.retrieve"></a>
 
 ### AttributeGroup.retrieve(retrieveDir, [_], [__], [___], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -1235,6 +1228,13 @@ Retrieves Metadata of schema attribute groups.
 | [___] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
+<a name="AttributeGroup.retrieveForCache"></a>
+
+### AttributeGroup.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of schema attribute groups for caching.
+
+**Kind**: static method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
 <a name="Automation"></a>
 
 ## Automation ⇐ [<code>MetadataType</code>](#MetadataType)
