@@ -266,4 +266,33 @@ complex
  * @property {string|number|boolean|Array|SoapFilter} [rightOperand] string for simple or a new filter-object for complex; omit for isNull and isNotNull
  */
 
+/**
+ * @typedef {object} Mcdevrc
+ * @property {object} credentials list of credentials
+ * @property {object} options configure options for mcdev
+ * @property {object} directories configure directories for mcdev to read/write to
+ * @property {string} directories.businessUnits "businessUnits/"
+ * @property {string} directories.deploy "deploy/"
+ * @property {string} directories.docs "docs/"
+ * @property {string} directories.retrieve "retrieve/"
+ * @property {string} directories.template "template/"
+ * @property {string} directories.templateBuilds ["retrieve/", "deploy/"]
+ * @property {Object.<string, object>} markets templating variables grouped by markets
+ * @property {object} marketList combination of markets and BUs for streamlined deployments
+ * @property {object} metaDataTypes templating variables grouped by markets
+ * @property {string[]} metaDataTypes.retrieve define what types shall be downloaded by default during retrieve
+ * @property {string[]} metaDataTypes.documentOnRetrieve which types should be parsed & documented after retrieve
+ * @property {string} version mcdev version that last updated the config file
+ */
+
+/**
+ * @typedef {object} Logger
+ * @property {Function} info print info message
+ * @property {Function} warn print warning message
+ * @property {Function} verbose additional messages that are not important
+ * @property {Function} debug print debug message
+ * @property {Function} error print error message
+ * @property {Function} errorStack print error with trace message
+ */
+
 module.exports = {};

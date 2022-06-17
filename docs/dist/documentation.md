@@ -217,6 +217,10 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dd></dd>
 <dt><a href="#SoapFilter">SoapFilter</a> : <code>object</code></dt>
 <dd></dd>
+<dt><a href="#Mcdevrc">Mcdevrc</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#Logger">Logger</a> : <code>object</code></dt>
+<dd></dd>
 </dl>
 
 <a name="Builder"></a>
@@ -245,11 +249,7 @@ Creates a Builder, uses v2 auth if v2AuthOptions are passed.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | properties for auth |
-| properties.directories | <code>object</code> | list of default directories |
-| properties.directories.template | <code>string</code> | where templates are saved |
-| properties.directories.templateBuilds | <code>string</code> | where template-based deployment definitions are saved |
-| properties.businessUnits | <code>string</code> | ID of Business Unit to authenticate with |
+| properties | <code>TYPE.Mcdevrc</code> | properties for auth saved |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
 
 <a name="Builder+metadata"></a>
@@ -356,8 +356,7 @@ Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | General configuration to be used in retrieve |
-| properties.directories | <code>object</code> | Directories to be used when interacting with FS |
+| properties | <code>TYPE.Mcdevrc</code> | General configuration to be used in retrieve |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
 
 <a name="Deployer+metadata"></a>
@@ -442,8 +441,8 @@ parses asset metadata to auto-create folders in target folder
 | Param | Type | Description |
 | --- | --- | --- |
 | deployDir | <code>string</code> | root directory of metadata. |
-| metadata | <code>object</code> | list of metadata |
-| metadataTypeArr | <code>string</code> | list of metadata types |
+| metadata | <code>TYPE.MultiMetadataTypeMap</code> | list of metadata |
+| metadataTypeArr | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | list of metadata types |
 
 <a name="Mcdev"></a>
 
@@ -740,7 +739,7 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>object</code> | properties for auth |
+| buObject | <code>TYPE.BuObject</code> | properties for auth |
 
 <a name="AccountUser.timeSinceDate"></a>
 
@@ -1591,7 +1590,7 @@ if create or update operation is needed.
 | Param | Type | Description |
 | --- | --- | --- |
 | desToDeploy | <code>TYPE.DataExtensionMap</code> | dataExtensions mapped by their customerKey |
-| _ | <code>object</code> | - |
+| _ | <code>void</code> | unused parameter |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
 
 <a name="DataExtension._filterUpsertResults"></a>
@@ -1745,7 +1744,7 @@ Retrieves folder metadata into local filesystem. Also creates a uniquePath attri
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>object</code> | properties for auth |
+| buObject | <code>TYPE.BuObject</code> | properties for auth |
 | [_] | <code>void</code> | - |
 | [isDeploy] | <code>boolean</code> | used to signal that fields shall be retrieve in caching mode |
 
@@ -1819,7 +1818,7 @@ Retrieves all records for caching
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [requestParams] | <code>object</code> | required for the specific request (filter for example) |
+| [requestParams] | <code>TYPE.SoapRequestParams</code> | required for the specific request (filter for example) |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 
 <a name="DataExtensionField.convertToSortedArray"></a>
@@ -1990,7 +1989,7 @@ Retrieve a specific dataExtract Definition by Name
 | --- | --- | --- |
 | templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | name | <code>string</code> | name of the metadata file |
-| templateVariables | <code>object</code> | variables to be replaced in the metadata |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="DataExtract.postRetrieveTasks"></a>
 
@@ -2284,11 +2283,11 @@ EventDefinition MetadataType
     * [.retrieve(retrieveDir, [_], [__], [___], [key])](#EventDefinition.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache()](#EventDefinition.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#EventDefinition.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
-    * [.postRetrieveTasks(eventDef)](#EventDefinition.postRetrieveTasks) ⇒ <code>Array.&lt;object&gt;</code>
+    * [.postRetrieveTasks(eventDef)](#EventDefinition.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.create(EventDefinition)](#EventDefinition.create) ⇒ <code>Promise</code>
     * [.update(metadataEntry)](#EventDefinition.update) ⇒ <code>Promise</code>
-    * [.preDeployTasks(metadata)](#EventDefinition.preDeployTasks) ⇒ <code>Promise</code>
-    * [.parseMetadata(metadata)](#EventDefinition.parseMetadata) ⇒ <code>Array</code>
+    * [.preDeployTasks(metadata)](#EventDefinition.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.parseMetadata(metadata)](#EventDefinition.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 
 <a name="EventDefinition.retrieve"></a>
 
@@ -2327,19 +2326,19 @@ Retrieve a specific Event Definition by Name
 | --- | --- | --- |
 | templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | name | <code>string</code> | name of the metadata file |
-| templateVariables | <code>object</code> | variables to be replaced in the metadata |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="EventDefinition.postRetrieveTasks"></a>
 
-### EventDefinition.postRetrieveTasks(eventDef) ⇒ <code>Array.&lt;object&gt;</code>
+### EventDefinition.postRetrieveTasks(eventDef) ⇒ <code>TYPE.MetadataTypeItem</code>
 manages post retrieve steps
 
 **Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
-**Returns**: <code>Array.&lt;object&gt;</code> - metadata  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| eventDef | <code>object</code> | a single importDef |
+| eventDef | <code>TYPE.MetadataTypeItem</code> | a single item of Event Definition |
 
 <a name="EventDefinition.create"></a>
 
@@ -2367,27 +2366,27 @@ Updates a single Event Definition (using PUT method since PATCH isn't supported)
 
 <a name="EventDefinition.preDeployTasks"></a>
 
-### EventDefinition.preDeployTasks(metadata) ⇒ <code>Promise</code>
+### EventDefinition.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 prepares an event definition for deployment
 
 **Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - parsed version  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>object</code> | a single eventDefinition |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single eventDefinition |
 
 <a name="EventDefinition.parseMetadata"></a>
 
-### EventDefinition.parseMetadata(metadata) ⇒ <code>Array</code>
+### EventDefinition.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 parses retrieved Metadata before saving
 
 **Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
-**Returns**: <code>Array</code> - Array with one metadata object and one sql string  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - parsed metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>object</code> | a single event definition |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single event definition |
 
 <a name="FileTransfer"></a>
 
@@ -2405,7 +2404,7 @@ FileTransfer MetadataType
     * [.create(fileTransfer)](#FileTransfer.create) ⇒ <code>Promise</code>
     * [.update(fileTransfer)](#FileTransfer.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#FileTransfer.preDeployTasks) ⇒ <code>Promise</code>
-    * [.parseMetadata(metadata)](#FileTransfer.parseMetadata) ⇒ <code>Array</code>
+    * [.parseMetadata(metadata)](#FileTransfer.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 
 <a name="FileTransfer.retrieve"></a>
 
@@ -2443,7 +2442,7 @@ Retrieve a specific File Transfer Definition by Name
 | --- | --- | --- |
 | templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | name | <code>string</code> | name of the metadata file |
-| templateVariables | <code>object</code> | variables to be replaced in the metadata |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="FileTransfer.postRetrieveTasks"></a>
 
@@ -2495,11 +2494,11 @@ prepares a fileTransfer for deployment
 
 <a name="FileTransfer.parseMetadata"></a>
 
-### FileTransfer.parseMetadata(metadata) ⇒ <code>Array</code>
+### FileTransfer.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 parses retrieved Metadata before saving
 
 **Kind**: static method of [<code>FileTransfer</code>](#FileTransfer)  
-**Returns**: <code>Array</code> - Array with one metadata object and one sql string  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - parsed metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2545,10 +2544,10 @@ Folder MetadataType
     * [.upsert(metadata)](#Folder.upsert) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.create(metadataEntry)](#Folder.create) ⇒ <code>Promise</code>
     * [.update(metadataEntry)](#Folder.update) ⇒ <code>Promise</code>
-    * [.preDeployTasks(metadata)](#Folder.preDeployTasks) ⇒ <code>Promise</code>
+    * [.preDeployTasks(metadata)](#Folder.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#Folder.getJsonFromFS) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.retrieveHelper([additionalFields], [queryAllAccounts])](#Folder.retrieveHelper) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [.postRetrieveTasks(metadata)](#Folder.postRetrieveTasks) ⇒ <code>Array.&lt;object&gt;</code>
+    * [.postRetrieveTasks(metadata)](#Folder.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.saveResults(results, retrieveDir, mid)](#Folder.saveResults) ⇒ <code>Promise.&lt;object&gt;</code>
 
 <a name="Folder.retrieve"></a>
@@ -2563,7 +2562,7 @@ Retrieves metadata of metadata type into local filesystem. executes callback wit
 | --- | --- | --- |
 | retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
-| buObject | <code>object</code> | properties for auth |
+| buObject | <code>TYPE.BuObject</code> | properties for auth |
 | [___] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
@@ -2577,7 +2576,7 @@ Retrieves folder metadata for caching
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>object</code> | properties for auth |
+| buObject | <code>TYPE.BuObject</code> | properties for auth |
 
 <a name="Folder.upsert"></a>
 
@@ -2619,15 +2618,15 @@ Updates a single Folder.
 
 <a name="Folder.preDeployTasks"></a>
 
-### Folder.preDeployTasks(metadata) ⇒ <code>Promise</code>
+### Folder.preDeployTasks(metadata) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
 prepares a folder for deployment
 
 **Kind**: static method of [<code>Folder</code>](#Folder)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code> - Promise of parsed folder metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>object</code> | a single folder definition |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single folder definition |
 
 <a name="Folder.getJsonFromFS"></a>
 
@@ -2657,15 +2656,15 @@ Helper to retrieve the folders as promise
 
 <a name="Folder.postRetrieveTasks"></a>
 
-### Folder.postRetrieveTasks(metadata) ⇒ <code>Array.&lt;object&gt;</code>
+### Folder.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 Gets executed after retreive of metadata type
 
 **Kind**: static method of [<code>Folder</code>](#Folder)  
-**Returns**: <code>Array.&lt;object&gt;</code> - cloned metadata  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - cloned metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>object</code> | metadata mapped by their keyField |
+| metadata | <code>TYPE.MetadataTypeItem</code> | metadata mapped by their keyField |
 
 <a name="Folder.saveResults"></a>
 
@@ -2729,7 +2728,7 @@ ImportFile MetadataType
     * [.retrieve(retrieveDir, [_], [__], [___], [key])](#ImportFile.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache()](#ImportFile.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#ImportFile.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
-    * [.postRetrieveTasks(importDef)](#ImportFile.postRetrieveTasks) ⇒ <code>Array.&lt;object&gt;</code>
+    * [.postRetrieveTasks(importDef)](#ImportFile.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.create(importFile)](#ImportFile.create) ⇒ <code>Promise</code>
     * [.update(importFile)](#ImportFile.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#ImportFile.preDeployTasks) ⇒ <code>Promise</code>
@@ -2772,19 +2771,19 @@ Retrieve a specific Import Definition by Name
 | --- | --- | --- |
 | templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | name | <code>string</code> | name of the metadata file |
-| templateVariables | <code>object</code> | variables to be replaced in the metadata |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="ImportFile.postRetrieveTasks"></a>
 
-### ImportFile.postRetrieveTasks(importDef) ⇒ <code>Array.&lt;object&gt;</code>
+### ImportFile.postRetrieveTasks(importDef) ⇒ <code>TYPE.MetadataTypeItem</code>
 manages post retrieve steps
 
 **Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
-**Returns**: <code>Array.&lt;object&gt;</code> - metadata  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| importDef | <code>object</code> | a single importDef |
+| importDef | <code>TYPE.MetadataTypeItem</code> | a single importDef |
 
 <a name="ImportFile.create"></a>
 
@@ -2796,7 +2795,7 @@ Creates a single Import File
 
 | Param | Type | Description |
 | --- | --- | --- |
-| importFile | <code>object</code> | a single Import File |
+| importFile | <code>TYPE.MetadataTypeItem</code> | a single Import File |
 
 <a name="ImportFile.update"></a>
 
@@ -2808,7 +2807,7 @@ Updates a single Import File
 
 | Param | Type | Description |
 | --- | --- | --- |
-| importFile | <code>object</code> | a single Import File |
+| importFile | <code>TYPE.MetadataTypeItem</code> | a single Import File |
 
 <a name="ImportFile.preDeployTasks"></a>
 
@@ -4088,7 +4087,7 @@ Updates a single Script
 
 | Param | Type | Description |
 | --- | --- | --- |
-| script | <code>object</code> | a single Script |
+| script | <code>TYPE.MetadataTypeItem</code> | a single Script |
 
 <a name="Script.create"></a>
 
@@ -4100,7 +4099,7 @@ Creates a single Script
 
 | Param | Type | Description |
 | --- | --- | --- |
-| script | <code>object</code> | a single Script |
+| script | <code>TYPE.MetadataTypeItem</code> | a single Script |
 
 <a name="Script._mergeCode"></a>
 
@@ -4370,8 +4369,7 @@ Creates a Retriever, uses v2 auth if v2AuthOptions are passed.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | General configuration to be used in retrieve |
-| properties.directories | <code>object</code> | Directories to be used when interacting with FS |
+| properties | <code>TYPE.Mcdevrc</code> | General configuration to be used in retrieve |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
 
 <a name="Retriever+retrieve"></a>
@@ -4398,7 +4396,7 @@ CLI entry for SFMC DevTools
 
 * [Util](#Util)
     * [.skipInteraction](#Util.skipInteraction) : <code>TYPE.skipInteraction</code>
-    * [.logger](#Util.logger)
+    * [.logger](#Util.logger) : <code>TYPE.Logger</code>
     * [.filterObjByKeys(originalObj, [whitelistArr])](#Util.filterObjByKeys) ⇒ <code>Object.&lt;string, \*&gt;</code>
     * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
     * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
@@ -4408,7 +4406,7 @@ CLI entry for SFMC DevTools
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
-    * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
+    * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>TYPE.Mcdevrc</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
     * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
@@ -4426,7 +4424,7 @@ CLI entry for SFMC DevTools
 **Kind**: static property of [<code>Util</code>](#Util)  
 <a name="Util.logger"></a>
 
-### Util.logger
+### Util.logger : <code>TYPE.Logger</code>
 Logger that creates timestamped log file in 'logs/' directory
 
 **Kind**: static property of [<code>Util</code>](#Util)  
@@ -4480,7 +4478,7 @@ check if a market name exists in current mcdev config
 | Param | Type | Description |
 | --- | --- | --- |
 | market | <code>string</code> | market localizations |
-| properties | <code>object</code> | local mcdev config |
+| properties | <code>TYPE.Mcdevrc</code> | local mcdev config |
 
 <a name="Util.verifyMarketList"></a>
 
@@ -4493,10 +4491,7 @@ ensure provided MarketList exists and it's content including markets and BUs che
 | Param | Type | Description |
 | --- | --- | --- |
 | mlName | <code>string</code> | name of marketList |
-| properties | <code>object</code> | General configuration to be used in retrieve |
-| properties.markets | <code>object</code> | list of template variable combos |
-| properties.marketList | <code>object</code> | list of bu-market combos |
-| properties.credentials | <code>object</code> | list of credentials and their BUs |
+| properties | <code>TYPE.Mcdevrc</code> | General configuration to be used in retrieve |
 
 <a name="Util.signalFatalError"></a>
 
@@ -4542,12 +4537,12 @@ helper for retrieve, retrieveAsTemplate and deploy
 
 <a name="Util.getDefaultProperties"></a>
 
-### Util.getDefaultProperties() ⇒ <code>object</code>
+### Util.getDefaultProperties() ⇒ <code>TYPE.Mcdevrc</code>
 defines how the properties.json should look like
 used for creating a template and for checking if variables are set
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>object</code> - default properties  
+**Returns**: <code>TYPE.Mcdevrc</code> - default properties  
 <a name="Util.getRetrieveTypeChoices"></a>
 
 ### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;string&gt;</code>
@@ -4565,7 +4560,7 @@ check if the config file is correctly formatted and has values
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | javascript object in .mcdevrc.json |
+| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
 | [silent] | <code>boolean</code> | set to true for internal use w/o cli output |
 
 <a name="Util.metadataLogger"></a>
@@ -4721,7 +4716,7 @@ Refreshes BU names and ID's from MC instance
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | current properties that have to be refreshed |
+| properties | <code>TYPE.Mcdevrc</code> | current properties that have to be refreshed |
 | credentialsName | <code>string</code> | identifying name of the installed package / project |
 
 <a name="Cli"></a>
@@ -4766,8 +4761,7 @@ Extends template file for properties.json
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | config file's json |
-| properties.credentials | <code>object</code> | list of existing credentials |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Cli.updateCredential"></a>
@@ -4781,7 +4775,7 @@ update credentials
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | config file's json |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | credName | <code>string</code> | name of credential that needs updating |
 | [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
@@ -4795,7 +4789,7 @@ Returns Object with parameters required for accessing API
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | object of all configuration including credentials |
+| properties | <code>TYPE.Mcdevrc</code> | object of all configuration including credentials |
 | target | <code>string</code> | code of BU to use |
 | [isCredentialOnly] | <code>boolean</code> \| <code>string</code> | true:don't ask for BU | string: name of BU |
 | [allowAll] | <code>boolean</code> | Offer ALL as option in BU selection |
@@ -4810,7 +4804,7 @@ helps select the right credential in case of bad initial input
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | config file's json |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | [credential] | <code>string</code> | name of valid credential |
 | [isCredentialOnly] | <code>boolean</code> | don't ask for BU if true |
 | [allowAll] | <code>boolean</code> | Offer ALL as option in BU selection |
@@ -4825,7 +4819,7 @@ helper around _askCredentials
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | from config file |
+| properties | <code>TYPE.Mcdevrc</code> | from config file |
 | [credName] | <code>string</code> | name of credential that needs updating |
 | [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
@@ -4839,7 +4833,7 @@ helper for addExtraCredential()
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | from config file |
+| properties | <code>TYPE.Mcdevrc</code> | from config file |
 | [credName] | <code>string</code> | name of credential that needs updating |
 
 <a name="Cli.selectTypes"></a>
@@ -4852,9 +4846,7 @@ allows updating the metadata types that shall be retrieved
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | config file's json |
-| properties.metaDataTypes | <code>object</code> | - |
-| properties.metaDataTypes.retrieve | <code>Array.&lt;string&gt;</code> | list of currently retrieved types |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | [setTypesArr] | <code>Array.&lt;string&gt;</code> | skip user prompt and overwrite with this list if given |
 
 <a name="Cli._summarizeSubtypes"></a>
@@ -4904,7 +4896,7 @@ Interactive commit selection if no commits are passed.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | central properties object |
+| properties | <code>TYPE.Mcdevrc</code> | central properties object |
 | [range] | <code>string</code> | git commit range |
 | [saveToDeployDir] | <code>boolean</code> | if true, copy metadata changes into deploy directory |
 | [filterPaths] | <code>string</code> | filter file paths that start with any specified path (comma separated) |
@@ -4931,7 +4923,7 @@ wrapper around DevOps.getDeltaList, Builder.buildTemplate and M
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | project config file |
+| properties | <code>TYPE.Mcdevrc</code> | project config file |
 | range | <code>string</code> | git commit range |
 | [skipInteraction] | <code>TYPE.SkipInteraction</code> | allows to skip interactive wizard |
 
@@ -4958,7 +4950,7 @@ additionally, the documentation for dataExtension and automation should be retur
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | central properties object |
+| properties | <code>TYPE.Mcdevrc</code> | central properties object |
 | buObject | <code>TYPE.BuObject</code> | references credentials |
 | metadataType | <code>string</code> | metadata type to build |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
@@ -4984,7 +4976,7 @@ File extends fs-extra. It adds logger and util methods for file handling
     * [.readFilteredFilename(directory, filename, filetype, [encoding])](#File.readFilteredFilename) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.readDirectories(directory, depth, [includeStem], [_stemLength])](#File.readDirectories) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength])](#File.readDirectoriesSync) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.loadConfigFile([silent])](#File.loadConfigFile) ⇒ <code>object</code>
+    * [.loadConfigFile([silent])](#File.loadConfigFile) ⇒ <code>TYPE.Mcdevrc</code>
     * [.saveConfigFile(properties)](#File.saveConfigFile) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initPrettier([filetype])](#File.initPrettier) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
@@ -5078,7 +5070,7 @@ Saves beautified files in the local file system. Will create the parent director
 | filename | <code>string</code> | name of the file without suffix |
 | filetype | <code>string</code> | filetype ie. JSON or SSJS |
 | content | <code>string</code> | filecontent |
-| [templateVariables] | <code>object</code> | templating variables to be replaced in the metadata |
+| [templateVariables] | <code>TYPE.TemplateMap</code> | templating variables to be replaced in the metadata |
 
 <a name="File._beautify_prettier"></a>
 
@@ -5185,11 +5177,11 @@ TODO - merge with readDirectories. so far the logic is really different
 ```
 <a name="File.loadConfigFile"></a>
 
-### File.loadConfigFile([silent]) ⇒ <code>object</code>
+### File.loadConfigFile([silent]) ⇒ <code>TYPE.Mcdevrc</code>
 loads central properties from config file
 
 **Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>object</code> - central properties object  
+**Returns**: <code>TYPE.Mcdevrc</code> - central properties object  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5205,7 +5197,7 @@ helper that splits the config back into auth & config parts to save them separat
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | central properties object |
+| properties | <code>TYPE.Mcdevrc</code> | central properties object |
 
 <a name="File.initPrettier"></a>
 
@@ -5255,7 +5247,7 @@ helper method for this.upgradeProject that upgrades project config if needed
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | config file's json |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
 
 <a name="Init.createIdeConfigFiles"></a>
 
@@ -5378,7 +5370,7 @@ Creates template file for properties.json
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | config file's json |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
 | [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
@@ -5406,7 +5398,7 @@ wrapper around npm dependency & configuration file setup
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | config file's json |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | [initial] | <code>boolean</code> | print message if not part of initial setup |
 | [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
 
@@ -5420,7 +5412,7 @@ finds credentials that are set up in config but not in auth file
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | javascript object in .mcdevrc.json |
+| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
 
 <a name="Init.installDependencies"></a>
 
@@ -5484,7 +5476,7 @@ helper method for this.upgradeProject that upgrades project config if needed
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | config file's json |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
 
 <a name="Init.createIdeConfigFiles"></a>
 
@@ -5607,7 +5599,7 @@ Creates template file for properties.json
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | config file's json |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
 | [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
@@ -5635,7 +5627,7 @@ wrapper around npm dependency & configuration file setup
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | config file's json |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | [initial] | <code>boolean</code> | print message if not part of initial setup |
 | [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
 
@@ -5649,7 +5641,7 @@ finds credentials that are set up in config but not in auth file
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | javascript object in .mcdevrc.json |
+| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
 
 <a name="Init.installDependencies"></a>
 
@@ -5713,7 +5705,7 @@ helper method for this.upgradeProject that upgrades project config if needed
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | config file's json |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
 
 <a name="Init.createIdeConfigFiles"></a>
 
@@ -5836,7 +5828,7 @@ Creates template file for properties.json
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | config file's json |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
 | [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
@@ -5864,7 +5856,7 @@ wrapper around npm dependency & configuration file setup
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | config file's json |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | [initial] | <code>boolean</code> | print message if not part of initial setup |
 | [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
 
@@ -5878,7 +5870,7 @@ finds credentials that are set up in config but not in auth file
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | javascript object in .mcdevrc.json |
+| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
 
 <a name="Init.installDependencies"></a>
 
@@ -5942,7 +5934,7 @@ helper method for this.upgradeProject that upgrades project config if needed
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | config file's json |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
 
 <a name="Init.createIdeConfigFiles"></a>
 
@@ -6065,7 +6057,7 @@ Creates template file for properties.json
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | config file's json |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
 | [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
@@ -6093,7 +6085,7 @@ wrapper around npm dependency & configuration file setup
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | config file's json |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | [initial] | <code>boolean</code> | print message if not part of initial setup |
 | [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
 
@@ -6107,7 +6099,7 @@ finds credentials that are set up in config but not in auth file
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | javascript object in .mcdevrc.json |
+| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
 
 <a name="Init.installDependencies"></a>
 
@@ -6144,7 +6136,7 @@ Util that contains logger and simple util methods
 
 * [Util](#Util)
     * [.skipInteraction](#Util.skipInteraction) : <code>TYPE.skipInteraction</code>
-    * [.logger](#Util.logger)
+    * [.logger](#Util.logger) : <code>TYPE.Logger</code>
     * [.filterObjByKeys(originalObj, [whitelistArr])](#Util.filterObjByKeys) ⇒ <code>Object.&lt;string, \*&gt;</code>
     * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
     * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
@@ -6154,7 +6146,7 @@ Util that contains logger and simple util methods
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
-    * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>object</code>
+    * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>TYPE.Mcdevrc</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
     * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
@@ -6172,7 +6164,7 @@ Util that contains logger and simple util methods
 **Kind**: static property of [<code>Util</code>](#Util)  
 <a name="Util.logger"></a>
 
-### Util.logger
+### Util.logger : <code>TYPE.Logger</code>
 Logger that creates timestamped log file in 'logs/' directory
 
 **Kind**: static property of [<code>Util</code>](#Util)  
@@ -6226,7 +6218,7 @@ check if a market name exists in current mcdev config
 | Param | Type | Description |
 | --- | --- | --- |
 | market | <code>string</code> | market localizations |
-| properties | <code>object</code> | local mcdev config |
+| properties | <code>TYPE.Mcdevrc</code> | local mcdev config |
 
 <a name="Util.verifyMarketList"></a>
 
@@ -6239,10 +6231,7 @@ ensure provided MarketList exists and it's content including markets and BUs che
 | Param | Type | Description |
 | --- | --- | --- |
 | mlName | <code>string</code> | name of marketList |
-| properties | <code>object</code> | General configuration to be used in retrieve |
-| properties.markets | <code>object</code> | list of template variable combos |
-| properties.marketList | <code>object</code> | list of bu-market combos |
-| properties.credentials | <code>object</code> | list of credentials and their BUs |
+| properties | <code>TYPE.Mcdevrc</code> | General configuration to be used in retrieve |
 
 <a name="Util.signalFatalError"></a>
 
@@ -6288,12 +6277,12 @@ helper for retrieve, retrieveAsTemplate and deploy
 
 <a name="Util.getDefaultProperties"></a>
 
-### Util.getDefaultProperties() ⇒ <code>object</code>
+### Util.getDefaultProperties() ⇒ <code>TYPE.Mcdevrc</code>
 defines how the properties.json should look like
 used for creating a template and for checking if variables are set
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>object</code> - default properties  
+**Returns**: <code>TYPE.Mcdevrc</code> - default properties  
 <a name="Util.getRetrieveTypeChoices"></a>
 
 ### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;string&gt;</code>
@@ -6311,7 +6300,7 @@ check if the config file is correctly formatted and has values
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | javascript object in .mcdevrc.json |
+| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
 | [silent] | <code>boolean</code> | set to true for internal use w/o cli output |
 
 <a name="Util.metadataLogger"></a>
@@ -6807,4 +6796,43 @@ signals what to insert automatically for things usually asked via wizard
 | leftOperand | <code>string</code> \| [<code>SoapFilter</code>](#SoapFilter) | string for simple or a new filter-object for complex |
 | operator | <code>&#x27;AND&#x27;</code> \| <code>&#x27;OR&#x27;</code> \| <code>&#x27;equals&#x27;</code> \| <code>&#x27;notEquals&#x27;</code> \| <code>&#x27;isNull&#x27;</code> \| <code>&#x27;isNotNull&#x27;</code> \| <code>&#x27;greaterThan&#x27;</code> \| <code>&#x27;lessThan&#x27;</code> \| <code>&#x27;greaterThanOrEqual&#x27;</code> \| <code>&#x27;lessThanOrEqual&#x27;</code> \| <code>&#x27;between&#x27;</code> \| <code>&#x27;IN&#x27;</code> \| <code>&#x27;like&#x27;</code> | various options |
 | [rightOperand] | <code>string</code> \| <code>number</code> \| <code>boolean</code> \| <code>Array</code> \| [<code>SoapFilter</code>](#SoapFilter) | string for simple or a new filter-object for complex; omit for isNull and isNotNull |
+
+<a name="Mcdevrc"></a>
+
+## Mcdevrc : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| credentials | <code>object</code> | list of credentials |
+| options | <code>object</code> | configure options for mcdev |
+| directories | <code>object</code> | configure directories for mcdev to read/write to |
+| directories.businessUnits | <code>string</code> | "businessUnits/" |
+| directories.deploy | <code>string</code> | "deploy/" |
+| directories.docs | <code>string</code> | "docs/" |
+| directories.retrieve | <code>string</code> | "retrieve/" |
+| directories.template | <code>string</code> | "template/" |
+| directories.templateBuilds | <code>string</code> | ["retrieve/", "deploy/"] |
+| markets | <code>Object.&lt;string, object&gt;</code> | templating variables grouped by markets |
+| marketList | <code>object</code> | combination of markets and BUs for streamlined deployments |
+| metaDataTypes | <code>object</code> | templating variables grouped by markets |
+| metaDataTypes.retrieve | <code>Array.&lt;string&gt;</code> | define what types shall be downloaded by default during retrieve |
+| metaDataTypes.documentOnRetrieve | <code>Array.&lt;string&gt;</code> | which types should be parsed & documented after retrieve |
+| version | <code>string</code> | mcdev version that last updated the config file |
+
+<a name="Logger"></a>
+
+## Logger : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| info | <code>function</code> | print info message |
+| warn | <code>function</code> | print warning message |
+| verbose | <code>function</code> | additional messages that are not important |
+| debug | <code>function</code> | print debug message |
+| error | <code>function</code> | print error message |
+| errorStack | <code>function</code> | print error with trace message |
 
