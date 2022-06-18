@@ -11,6 +11,14 @@
                 "parser": "babel",
                 "trailingComma": "none"
             }
+        },
+        {
+            "files": "*.sql",
+            "options": {
+                "formatter": "sql-formatter",
+                "language": "tsql",
+                "uppercase": true
+            }
         }
     ]
 }

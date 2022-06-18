@@ -1,10 +1,7 @@
 {
     "credentials": {
         "default": {
-            "clientId": "--- update me ---",
-            "clientSecret": "--- update me ---",
-            "tenant": "--- update me ---",
-            "eid": "000000000",
+            "eid": 0,
             "businessUnits": {}
         }
     },
@@ -20,18 +17,16 @@
             }
         },
         "documentType": "md",
+        "documentStandardRoles": false,
         "exclude": {},
         "include": {},
         "serverTimeOffset": -6
     },
     "directories": {
-        "badKeys": "docs/badKeys/",
         "businessUnits": "businessUnits/",
-        "dataExtension": "docs/dataExtension/",
-        "deltaPackage": "docs/deltaPackage/",
         "deploy": "deploy/",
+        "docs": "docs/",
         "retrieve": "retrieve/",
-        "roles": "docs/roles/",
         "template": "template/",
         "templateBuilds": ["retrieve/", "deploy/"]
     },
@@ -78,7 +73,7 @@
         }
     },
     "metaDataTypes": {
-        "documentOnRetrieve": ["role", "dataExtension"],
+        "documentOnRetrieve": ["accountUser", "automation", "dataExtension", "role"],
         "retrieve": []
     }
 }
