@@ -534,7 +534,7 @@ _Command:_ `mcdev document <business unit> <TYPE>`
 
 _Alias:_ `mcdev doc`
 
-Creates human readable documentation for your metadata. This command is executed by default unless you changed your config manually to set `options.documentOnRetrieve : false`. Therefore, running it manually is typically not required. You can choose to generate **HTML** (`html`) or **Markdown** (`md`) docs via `options.documentType`.
+Creates human readable documentation for your metadata. This command is executed by default for supported types unless you changed your config manually (`metaDataTypes.documentOnRetrieve`). Therefore, running it manually is typically not required. You can choose to generate **HTML** (`html`) or **Markdown** (`md`) docs via `options.documentType`.
 
 The default format is set to `md` as Markdown renders nicely in Git as well as in VSCode's Markdown preview and can be copied from there into Confluence and other applications without losing the formatting.
 
@@ -1069,18 +1069,15 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
     "serverTimeOffset": -6
   },
   "directories": {
-    "badKeys": "docs/badKeys/",
-    "businessUnits": "businessUnits/",
-    "dataExtension": "docs/dataExtension/",
-    "deltaPackage": "docs/deltaPackage/",
-    "deploy": "deploy/",
-    "retrieve": "retrieve/",
-    "roles": "docs/roles/",
-    "template": "template/",
-    "templateBuilds": ["retrieve/", "deploy/"]
+        "businessUnits": "businessUnits/",
+        "deploy": "deploy/",
+        "docs": "docs/",
+        "retrieve": "retrieve/",
+        "template": "template/",
+        "templateBuilds": ["retrieve/", "deploy/"]
   },
   "metaDataTypes": {
-    "documentOnRetrieve": ["role", "dataExtension"],
+    "documentOnRetrieve": ["accountUser", "automation", "dataExtension", "role"],
     "retrieve": [...]
   }
 }
@@ -1096,14 +1093,10 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
 | options.exclude.`type`.`field`           | []                                           | Allows you to filter out metadata on retrieve based on their field values, e.g. CustomerKey (previously `options.filter`)   |
 | options.include.`type`.`field`           | []                                           | Allows you to filter out metadata on retrieve based on their field values, e.g. CustomerKey                                 |
 | options.serverTimeOffset                 | -6                                           | Used to work around quirks in how SFMC handles timezones; For stack4: set to -7 (US Mountain time); others: -6 (US Central) |
-| directories.badKeys                      | 'docs/badKeys/'                              | Where the documentation for bad key-name combos is stored on retrieve                                                       |
 | directories.businessUnits                | 'businessUnits/'                             | Directory to save BU base details in                                                                                        |
-| directories.dataExtension                | 'docs/dataExtension/'                        | Directory for `document dataExtension` output                                                                               |
-| directories.deltaPackage                 | 'docs/deltaPackage/'                         | Where `createDeltaPkg` stores its log                                                                                       |
 | directories.deploy                       | 'deploy/'                                    | Where `deploy` searches for files to deploy                                                                                 |
+| directories.docs                        | 'docs/'                                | Directory for `document` output                                                                                        |
 | directories.retrieve                     | 'retrieve/'                                  | Where `retrieve` stores downloaded files                                                                                    |
-| directories.roles                        | 'docs/roles/'                                | Directory for `document role` output                                                                                        |
-| directories.users                        | 'docs/users/'                                | Directory for `document accountUser` output                                                                                 |
 | directories.template                     | 'template/'                                  | Where `rt` stores downloaded templates & `bd` retrieves them from                                                           |
 | directories.templateBuilds               | ['retrieve/','deploy/']                      | Where `bd` saves final deployment versions in. This can hold multiple directories, e.g. ['retrieve/','deploy/']             |
 | metaDataTypes.documentOnRetrieve         | ['role','dataExtension']                     | automatically executes `document` for selected types                                                                        |

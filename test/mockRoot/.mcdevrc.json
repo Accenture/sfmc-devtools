@@ -27,7 +27,6 @@
     },
     "directories": {
         "businessUnits": "businessUnits/",
-        "deltaPackage": "docs/deltaPackage/",
         "deploy": "deploy/",
         "docs": "docs/",
         "retrieve": "retrieve/",
@@ -45,7 +44,7 @@
     },
     "marketList": {},
     "metaDataTypes": {
-        "documentOnRetrieve": ["role", "dataExtension"],
+        "documentOnRetrieve": ["accountUser", "automation", "dataExtension", "role"],
         "retrieve": [
             "asset",
             "automation",
