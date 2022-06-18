@@ -2970,7 +2970,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
     * [.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
-    * [.parseResponseBody(body, [singleRetrieve])](#MetadataType.parseResponseBody) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.parseResponseBody(body, [singleRetrieve])](#MetadataType.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
     * [.removeNotCreateableFields(metadataEntry)](#MetadataType.removeNotCreateableFields) ⇒ <code>void</code>
     * [.removeNotUpdateableFields(metadataEntry)](#MetadataType.removeNotUpdateableFields) ⇒ <code>void</code>
@@ -3283,20 +3283,20 @@ Retrieves Metadata for Rest Types
 | uri | <code>string</code> | rest endpoint for GET |
 | [overrideType] | <code>string</code> | force a metadata type (mainly used for Folders) |
 | [templateVariables] | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
-| [singleRetrieve] | <code>boolean</code> \| <code>string</code> \| <code>number</code> | expect a flat object OR key of single item to filter by |
+| [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
 
 <a name="MetadataType.parseResponseBody"></a>
 
-### MetadataType.parseResponseBody(body, [singleRetrieve]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+### MetadataType.parseResponseBody(body, [singleRetrieve]) ⇒ <code>TYPE.MetadataTypeMap</code>
 Builds map of metadata entries mapped to their keyfields
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code> - keyField => metadata map  
+**Returns**: <code>TYPE.MetadataTypeMap</code> - keyField => metadata map  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | body | <code>object</code> | json of response body |
-| [singleRetrieve] | <code>boolean</code> \| <code>string</code> \| <code>number</code> | expect a flat object OR key of single item to filter by |
+| [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
 
 <a name="MetadataType.deleteFieldByDefinition"></a>
 
