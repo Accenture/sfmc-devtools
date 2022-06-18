@@ -3279,7 +3279,7 @@ Retrieves Metadata for Rest Types
 | uri | <code>string</code> | rest endpoint for GET |
 | [overrideType] | <code>string</code> | force a metadata type (mainly used for Folders) |
 | [templateVariables] | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
-| [singleRetrieve] | <code>boolean</code> \| <code>string</code> \| <code>number</code> | expect a flat object OR key of single item to filter by |
+| [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
 
 <a name="MetadataType.parseResponseBody"></a>
 
