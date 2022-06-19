@@ -672,7 +672,7 @@ mcdev retrieve "*"
 
 <a id="markdown-deploy" name="deploy"></a>
 
-_Command:_ `mcdev deploy [business unit] [metadata type] [metadata key]`
+_Command:_ `mcdev deploy [business unit] [metadata type] [metadata key] [deploy from retrieve]`
 
 _Alias:_ `mcdev d`
 
@@ -708,6 +708,18 @@ _Example:_
 mcdev deploy MyProject/DEV dataExtension "key1"
 mcdev deploy MyProject/DEV dataExtension "key1,key2"
 mcdev deploy MyProject/DEV "script,dataExtension,importFile" "key1,key2"
+```
+
+**deploy from retrieve folder:**
+
+Sometimes it's convenient to deploy right from the deploy folder when you are using mcdev as a developer tool and rather than only for deployments to other BUs. For this scenario we added the 4th parameter. In that case it does not look into `deploy/` but into `retrieve/` to find what it needs to deploy.
+
+_Example:_
+
+```bash
+mcdev deploy MyProject/DEV dataExtension "key1" true
+mcdev deploy MyProject/DEV dataExtension "key1,key2" true
+mcdev deploy MyProject/DEV "script,dataExtension,importFile" "key1,key2" true
 ```
 
 **deploy all BUs:**

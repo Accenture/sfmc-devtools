@@ -461,7 +461,7 @@ main class
     * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>void</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.retrieve(businessUnit, [selectedTypesArr], [key], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [.retrieve(businessUnit, [selectedTypesArr], [keys], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initProject([credentialsName], [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -536,7 +536,7 @@ handler for 'mcdev createDeltaPkg
 
 <a name="Mcdev.retrieve"></a>
 
-### Mcdev.retrieve(businessUnit, [selectedTypesArr], [key], [changelogOnly]) ⇒ <code>Promise.&lt;object&gt;</code>
+### Mcdev.retrieve(businessUnit, [selectedTypesArr], [keys], [changelogOnly]) ⇒ <code>Promise.&lt;object&gt;</code>
 Retrieve all metadata from the specified business unit into the local file system.
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -546,7 +546,7 @@ Retrieve all metadata from the specified business unit into the local file syste
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
 | [selectedTypesArr] | <code>Array.&lt;string&gt;</code> | limit retrieval to given metadata type |
-| [key] | <code>Array.&lt;string&gt;</code> | limit retrieval to given metadata key |
+| [keys] | <code>Array.&lt;string&gt;</code> | limit retrieval to given metadata key |
 | [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
 
 <a name="Mcdev.deploy"></a>
@@ -4350,7 +4350,7 @@ Retrieves metadata from a business unit and saves it to the local filesystem.
 
 * [Retriever](#Retriever)
     * [new Retriever(properties, buObject)](#new_Retriever_new)
-    * [.retrieve(metadataTypes, [nameOrKey], [templateVariables], [changelogOnly])](#Retriever+retrieve) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+    * [.retrieve(metadataTypes, [namesOrKeys], [templateVariables], [changelogOnly])](#Retriever+retrieve) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
 
 <a name="new_Retriever_new"></a>
 
@@ -4365,7 +4365,7 @@ Creates a Retriever, uses v2 auth if v2AuthOptions are passed.
 
 <a name="Retriever+retrieve"></a>
 
-### retriever.retrieve(metadataTypes, [nameOrKey], [templateVariables], [changelogOnly]) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+### retriever.retrieve(metadataTypes, [namesOrKeys], [templateVariables], [changelogOnly]) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
 Retrieve metadata of specified types into local file system and Retriever.metadata
 
 **Kind**: instance method of [<code>Retriever</code>](#Retriever)  
@@ -4374,7 +4374,7 @@ Retrieve metadata of specified types into local file system and Retriever.metada
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataTypes | <code>Array.&lt;string&gt;</code> | String list of metadata types to retrieve |
-| [nameOrKey] | <code>Array.&lt;string&gt;</code> | name of Metadata to retrieveAsTemplate or list of keys for normal retrieval |
+| [namesOrKeys] | <code>Array.&lt;string&gt;</code> | name of Metadata to retrieveAsTemplate or list of keys for normal retrieval |
 | [templateVariables] | <code>TYPE.TemplateMap</code> | Object of values which can be replaced (in case of templating) |
 | [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
 
