@@ -17,7 +17,6 @@ describe('dataExtension', () => {
             // THEN
             // get results from cache
             const result = cache.getCache();
-            console.log('result:::::', result);
             assert.equal(
                 result.dataExtension ? Object.keys(result.dataExtension).length : 0,
                 1,
