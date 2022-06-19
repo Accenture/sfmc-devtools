@@ -130,7 +130,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Cli">Cli</a></dt>
 <dd><p>CLI helper class</p>
 </dd>
-<dt><a href="#Config">Config</a></dt>
+<dt><a href="#config">config</a></dt>
 <dd><p>Central class for loading and validating properties from config and auth</p>
 </dd>
 <dt><a href="#DevOps">DevOps</a></dt>
@@ -4649,36 +4649,36 @@ shows metadata type descriptions
 
 **Kind**: static method of [<code>Cli</code>](#Cli)  
 **Returns**: <code>void</code> - -  
-<a name="Config"></a>
+<a name="config"></a>
 
-## Config
+## config
 Central class for loading and validating properties from config and auth
 
 **Kind**: global constant  
 
-* [Config](#Config)
-    * [.getProperties([silent])](#Config.getProperties) ⇒ <code>object</code>
-    * [.checkProperties(properties, [silent])](#Config.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
-    * [.getDefaultProperties()](#Config.getDefaultProperties) ⇒ <code>object</code>
+* [config](#config)
+    * [.getProperties([silent])](#config.getProperties) ⇒ <code>object</code>
+    * [.checkProperties(properties, [silent])](#config.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
+    * [.getDefaultProperties()](#config.getDefaultProperties) ⇒ <code>object</code>
 
-<a name="Config.getProperties"></a>
+<a name="config.getProperties"></a>
 
-### Config.getProperties([silent]) ⇒ <code>object</code>
+### config.getProperties([silent]) ⇒ <code>object</code>
 loads central properties from config file
 
-**Kind**: static method of [<code>Config</code>](#Config)  
+**Kind**: static method of [<code>config</code>](#config)  
 **Returns**: <code>object</code> - central properties object  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | [silent] | <code>boolean</code> | omit throwing errors and print messages; assuming not silent if not set |
 
-<a name="Config.checkProperties"></a>
+<a name="config.checkProperties"></a>
 
-### Config.checkProperties(properties, [silent]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
+### config.checkProperties(properties, [silent]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
 check if the config file is correctly formatted and has values
 
-**Kind**: static method of [<code>Config</code>](#Config)  
+**Kind**: static method of [<code>config</code>](#config)  
 **Returns**: <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code> - file structure ok OR list of fields to be fixed  
 
 | Param | Type | Description |
@@ -4686,13 +4686,13 @@ check if the config file is correctly formatted and has values
 | properties | <code>object</code> | javascript object in .mcdevrc.json |
 | [silent] | <code>boolean</code> | set to true for internal use w/o cli output |
 
-<a name="Config.getDefaultProperties"></a>
+<a name="config.getDefaultProperties"></a>
 
-### Config.getDefaultProperties() ⇒ <code>object</code>
+### config.getDefaultProperties() ⇒ <code>object</code>
 defines how the properties.json should look like
 used for creating a template and for checking if variables are set
 
-**Kind**: static method of [<code>Config</code>](#Config)  
+**Kind**: static method of [<code>config</code>](#config)  
 **Returns**: <code>object</code> - default properties  
 <a name="DevOps"></a>
 
