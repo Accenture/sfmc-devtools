@@ -838,6 +838,7 @@ FileTransfer MetadataType
     * [._readExtendedFileFromFS(metadata, subType, deployDir)](#Asset._readExtendedFileFromFS) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.postRetrieveTasks(metadata)](#Asset.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.preDeployTasks(metadata, deployDir, buObject)](#Asset.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
+    * [._getMainSubtype(extendedSubType)](#Asset._getMainSubtype) ⇒ <code>string</code>
     * [.getSubtype(metadata)](#Asset.getSubtype) ⇒ <code>TYPE.AssetSubType</code>
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildDefinitionForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildTemplateForNested) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -1008,6 +1009,18 @@ prepares an asset definition for deployment
 | metadata | <code>TYPE.AssetItem</code> | a single asset |
 | deployDir | <code>string</code> | directory of deploy files |
 | buObject | <code>TYPE.BuObject</code> | buObject properties for auth |
+
+<a name="Asset._getMainSubtype"></a>
+
+### Asset.\_getMainSubtype(extendedSubType) ⇒ <code>string</code>
+find the subType matching the extendedSubType
+
+**Kind**: static method of [<code>Asset</code>](#Asset)  
+**Returns**: <code>string</code> - subType: block, message, other, etc  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| extendedSubType | <code>string</code> | webpage, htmlblock, etc |
 
 <a name="Asset.getSubtype"></a>
 
