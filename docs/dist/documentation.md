@@ -839,7 +839,6 @@ FileTransfer MetadataType
     * [.postRetrieveTasks(metadata)](#Asset.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.preDeployTasks(metadata, deployDir, buObject)](#Asset.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
     * [._getMainSubtype(extendedSubType)](#Asset._getMainSubtype) ⇒ <code>string</code>
-    * [._getSubtype(metadata)](#Asset._getSubtype) ⇒ <code>TYPE.AssetSubType</code>
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildDefinitionForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildTemplateForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Asset._buildForNested) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -1021,18 +1020,6 @@ find the subType matching the extendedSubType
 | Param | Type | Description |
 | --- | --- | --- |
 | extendedSubType | <code>string</code> | webpage, htmlblock, etc |
-
-<a name="Asset._getSubtype"></a>
-
-### Asset.\_getSubtype(metadata) ⇒ <code>TYPE.AssetSubType</code>
-determines the subtype of the current asset
-
-**Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>TYPE.AssetSubType</code> - subtype  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.AssetItem</code> | a single asset |
 
 <a name="Asset.buildDefinitionForNested"></a>
 
