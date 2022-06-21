@@ -847,7 +847,7 @@ FileTransfer MetadataType
     * [._mergeCode_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName], [fileListOnly])](#Asset._mergeCode_slots) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._extractCode(metadata)](#Asset._extractCode) ⇒ <code>TYPE.CodeExtractItem</code>
     * [._extractCode_slots(prefix, metadataSlots, codeArr)](#Asset._extractCode_slots) ⇒ <code>void</code>
-    * [.getJsonFromFS(dir, _, selectedSubType)](#Asset.getJsonFromFS) ⇒ <code>TYPE.MetadataTypeMap</code>
+    * [.getJsonFromFS(dir, [_], selectedSubType)](#Asset.getJsonFromFS) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.findSubType(templateDir, templateName)](#Asset.findSubType) ⇒ <code>Promise.&lt;TYPE.AssetSubType&gt;</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName)](#Asset.readSecondaryFolder) ⇒ <code>TYPE.AssetItem</code>
     * [.getFilesToCommit(keyArr)](#Asset.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
@@ -1151,7 +1151,7 @@ to allow saving that separately and formatted
 
 <a name="Asset.getJsonFromFS"></a>
 
-### Asset.getJsonFromFS(dir, _, selectedSubType) ⇒ <code>TYPE.MetadataTypeMap</code>
+### Asset.getJsonFromFS(dir, [_], selectedSubType) ⇒ <code>TYPE.MetadataTypeMap</code>
 Returns file contents mapped to their fileName without '.json' ending
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -1160,8 +1160,8 @@ Returns file contents mapped to their fileName without '.json' ending
 | Param | Type | Description |
 | --- | --- | --- |
 | dir | <code>string</code> | directory that contains '.json' files to be read |
-| _ | <code>void</code> | not used by type asset |
-| selectedSubType | <code>string</code> | asset, message, ... |
+| [_] | <code>void</code> | unused parameter |
+| selectedSubType | <code>Array.&lt;string&gt;</code> | asset, message, ... |
 
 <a name="Asset.findSubType"></a>
 
