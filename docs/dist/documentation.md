@@ -2964,6 +2964,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.preDeployTasks(metadata, deployDir, buObject)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
     * [.create(metadata, deployDir)](#MetadataType.create) ⇒ <code>void</code>
     * [.update(metadata, [metadataBefore])](#MetadataType.update) ⇒ <code>void</code>
+    * [.hasChanged(cachedVersion, metadata, [fieldName])](#MetadataType.hasChanged) ⇒ <code>boolean</code>
+    * [.hasChanged_generic(cachedVersion, metadata, [fieldName], [silent])](#MetadataType.hasChanged_generic) ⇒ <code>boolean</code>
     * [.upsert(metadata, deployDir, [buObject])](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise</code>
     * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise</code>
@@ -3187,6 +3189,35 @@ Abstract update method that needs to be implemented in child metadata type
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
 | [metadataBefore] | <code>TYPE.MetadataTypeItem</code> | metadata mapped by their keyField |
+
+<a name="MetadataType.hasChanged"></a>
+
+### MetadataType.hasChanged(cachedVersion, metadata, [fieldName]) ⇒ <code>boolean</code>
+test if metadata was actually changed or not to potentially skip it during deployment
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>boolean</code> - true if metadata was changed  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cachedVersion | <code>TYPE.MetadataTypeItem</code> | cached version from the server |
+| metadata | <code>TYPE.MetadataTypeItem</code> | item to upload |
+| [fieldName] | <code>string</code> | optional field name to use for identifying the record in logs |
+
+<a name="MetadataType.hasChanged_generic"></a>
+
+### MetadataType.hasChanged\_generic(cachedVersion, metadata, [fieldName], [silent]) ⇒ <code>boolean</code>
+test if metadata was actually changed or not to potentially skip it during deployment
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>boolean</code> - true on first identified deviation or false if none are found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cachedVersion | <code>TYPE.MetadataTypeItem</code> | cached version from the server |
+| metadata | <code>TYPE.MetadataTypeItem</code> | item to upload |
+| [fieldName] | <code>string</code> | optional field name to use for identifying the record in logs |
+| [silent] | <code>boolean</code> | optionally suppress logging |
 
 <a name="MetadataType.upsert"></a>
 
@@ -4410,6 +4441,8 @@ CLI entry for SFMC DevTools
     * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
+    * [.isObjectChanged(oldItem, newItem, prop)](#Util.isObjectChanged) ⇒ <code>boolean</code>
+    * [.arrayEquals(arrayA, arrayB)](#Util.arrayEquals) ⇒ <code>boolean</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -4662,6 +4695,33 @@ configures what is displayed in the console
 | [argv.silent] | <code>boolean</code> | only errors printed to CLI |
 | [argv.verbose] | <code>boolean</code> | chatty user CLI output |
 | [argv.debug] | <code>boolean</code> | enables developer output & features |
+
+<a name="Util.isObjectChanged"></a>
+
+### Util.isObjectChanged(oldItem, newItem, prop) ⇒ <code>boolean</code>
+helper for hasChanged_generic
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - true if property has changed  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| oldItem | <code>\*</code> | old version of an object |
+| newItem | <code>\*</code> | new version of an object |
+| prop | <code>string</code> | property of object to be checked |
+
+<a name="Util.arrayEquals"></a>
+
+### Util.arrayEquals(arrayA, arrayB) ⇒ <code>boolean</code>
+compares to arrays and returns true if they are different
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - true if arrays are equal  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| arrayA | <code>Array</code> | first array to compare |
+| arrayB | <code>Array</code> | second array to compare |
 
 <a name="MetadataTypeDefinitions"></a>
 
@@ -6150,6 +6210,8 @@ Util that contains logger and simple util methods
     * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
+    * [.isObjectChanged(oldItem, newItem, prop)](#Util.isObjectChanged) ⇒ <code>boolean</code>
+    * [.arrayEquals(arrayA, arrayB)](#Util.arrayEquals) ⇒ <code>boolean</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -6402,6 +6464,33 @@ configures what is displayed in the console
 | [argv.silent] | <code>boolean</code> | only errors printed to CLI |
 | [argv.verbose] | <code>boolean</code> | chatty user CLI output |
 | [argv.debug] | <code>boolean</code> | enables developer output & features |
+
+<a name="Util.isObjectChanged"></a>
+
+### Util.isObjectChanged(oldItem, newItem, prop) ⇒ <code>boolean</code>
+helper for hasChanged_generic
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - true if property has changed  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| oldItem | <code>\*</code> | old version of an object |
+| newItem | <code>\*</code> | new version of an object |
+| prop | <code>string</code> | property of object to be checked |
+
+<a name="Util.arrayEquals"></a>
+
+### Util.arrayEquals(arrayA, arrayB) ⇒ <code>boolean</code>
+compares to arrays and returns true if they are different
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - true if arrays are equal  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| arrayA | <code>Array</code> | first array to compare |
+| arrayB | <code>Array</code> | second array to compare |
 
 <a name="csvToArray"></a>
 
@@ -6822,10 +6911,10 @@ signals what to insert automatically for things usually asked via wizard
 
 | Name | Type | Description |
 | --- | --- | --- |
-| info | <code>function</code> | print info message |
-| warn | <code>function</code> | print warning message |
-| verbose | <code>function</code> | additional messages that are not important |
-| debug | <code>function</code> | print debug message |
-| error | <code>function</code> | print error message |
-| errorStack | <code>function</code> | print error with trace message |
+| info | <code>function</code> | (msg) print info message |
+| warn | <code>function</code> | (msg) print warning message |
+| verbose | <code>function</code> | (msg) additional messages that are not important |
+| debug | <code>function</code> | (msg) print debug message |
+| error | <code>function</code> | (msg) print error message |
+| errorStack | <code>function</code> | (ex, msg) print error with trace message |
 

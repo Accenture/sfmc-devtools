@@ -287,12 +287,12 @@ complex
 
 /**
  * @typedef {object} Logger
- * @property {Function} info print info message
- * @property {Function} warn print warning message
- * @property {Function} verbose additional messages that are not important
- * @property {Function} debug print debug message
- * @property {Function} error print error message
- * @property {Function} errorStack print error with trace message
+ * @property {Function} info (msg) print info message
+ * @property {Function} warn (msg) print warning message
+ * @property {Function} verbose (msg) additional messages that are not important
+ * @property {Function} debug (msg) print debug message
+ * @property {Function} error (msg) print error message
+ * @property {Function} errorStack (ex, msg) print error with trace message
  */
 
 module.exports = {};
