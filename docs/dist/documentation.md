@@ -421,8 +421,8 @@ main class
     * [.retrieve(businessUnit, [selectedTypesArr], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
     * [._deployBU(cred, bu, [typeArr])](#Mcdev._deployBU) ⇒ <code>Promise</code>
     * [.deploy(businessUnit, [selectedTypesArr])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.initProject([credentialsName], [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.initProject([credentialName], credentialName, [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.findBUs(credentialName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(businessUnit, type, customerKey)](#Mcdev.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.badKeys(businessUnit)](#Mcdev.badKeys) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -522,7 +522,7 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 
 <a name="Mcdev.initProject"></a>
 
-### Mcdev.initProject([credentialsName], [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.initProject([credentialName], credentialName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
 Creates template file for properties.json
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -530,12 +530,13 @@ Creates template file for properties.json
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [credentialsName] | <code>string</code> | identifying name of the installed package / project |
+| [credentialName] | <code>string</code> | identifying name of the installed package / project |
+| credentialName |  |  |
 | [skipInteraction] | <code>boolean</code> \| <code>object</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Mcdev.findBUs"></a>
 
-### Mcdev.findBUs(credentialsName) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.findBUs(credentialName) ⇒ <code>Promise.&lt;void&gt;</code>
 Refreshes BU names and ID's from MC instance
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -543,7 +544,7 @@ Refreshes BU names and ID's from MC instance
 
 | Param | Type | Description |
 | --- | --- | --- |
-| credentialsName | <code>string</code> | identifying name of the installed package / project |
+| credentialName | <code>string</code> | identifying name of the installed package / project |
 
 <a name="Mcdev.document"></a>
 
@@ -4484,7 +4485,7 @@ Helper that handles retrieval of BU info
 **Kind**: global constant  
 <a name="BusinessUnit.refreshBUProperties"></a>
 
-### BusinessUnit.refreshBUProperties(properties, credentialsName) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### BusinessUnit.refreshBUProperties(properties, credentialName, credentialName) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Refreshes BU names and ID's from MC instance
 
 **Kind**: static method of [<code>BusinessUnit</code>](#BusinessUnit)  
@@ -4493,7 +4494,8 @@ Refreshes BU names and ID's from MC instance
 | Param | Type | Description |
 | --- | --- | --- |
 | properties | <code>object</code> | current properties that have to be refreshed |
-| credentialsName | <code>string</code> | identifying name of the installed package / project |
+| credentialName | <code>string</code> | identifying name of the installed package / project |
+| credentialName |  |  |
 
 <a name="Cli"></a>
 
@@ -5043,7 +5045,7 @@ CLI helper class
     * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
 
@@ -5214,11 +5216,11 @@ wrapper around npm dependency & configuration file setup
 
 <a name="Init._getMissingCredentials"></a>
 
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
+### Init.\_getMissingCredentials(properties) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 finds credentials that are set up in config but not in auth file
 
 **Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - list of credential names  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5272,7 +5274,7 @@ CLI helper class
     * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
 
@@ -5443,11 +5445,11 @@ wrapper around npm dependency & configuration file setup
 
 <a name="Init._getMissingCredentials"></a>
 
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
+### Init.\_getMissingCredentials(properties) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 finds credentials that are set up in config but not in auth file
 
 **Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - list of credential names  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5501,7 +5503,7 @@ CLI helper class
     * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
 
@@ -5672,11 +5674,11 @@ wrapper around npm dependency & configuration file setup
 
 <a name="Init._getMissingCredentials"></a>
 
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
+### Init.\_getMissingCredentials(properties) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 finds credentials that are set up in config but not in auth file
 
 **Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - list of credential names  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5730,7 +5732,7 @@ CLI helper class
     * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
 
@@ -5901,11 +5903,11 @@ wrapper around npm dependency & configuration file setup
 
 <a name="Init._getMissingCredentials"></a>
 
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
+### Init.\_getMissingCredentials(properties) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 finds credentials that are set up in config but not in auth file
 
 **Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - list of credential names  
 
 | Param | Type | Description |
 | --- | --- | --- |
