@@ -574,7 +574,7 @@ Creates template file for properties.json
 | Param | Type | Description |
 | --- | --- | --- |
 | [credentialName] | <code>string</code> | identifying name of the installed package / project |
-| [skipInteraction] | <code>boolean</code> \| <code>object</code> | signals what to insert automatically for things usually asked via wizard |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Mcdev.findBUs"></a>
 
@@ -4683,7 +4683,7 @@ Refreshes BU names and ID's from MC instance
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | current properties that have to be refreshed |
+| properties | <code>TYPE.Mcdevrc</code> | current properties that have to be refreshed |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
 
 <a name="Cli"></a>
