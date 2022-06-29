@@ -712,7 +712,7 @@ mcdev deploy MyProject/DEV "script,dataExtension,importFile" "key1,key2"
 
 **deploy from retrieve folder:**
 
-Sometimes it's convenient to deploy right from the deploy folder when you are using mcdev as a developer tool and rather than only for deployments to other BUs. For this scenario we added the 4th parameter. In that case it does not look into `deploy/` but into `retrieve/` to find what it needs to deploy.
+Sometimes it's convenient to deploy right from the retrieve folder when you are using mcdev as a developer tool rather than only for deployments to other BUs. For this scenario we added the 4th parameter. In that case it does not look into `deploy/` but into `retrieve/` to find what it needs to deploy.
 
 _Example:_
 
