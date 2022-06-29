@@ -337,20 +337,20 @@ Source and target business units are also compared before the deployment to appl
 **Kind**: global class  
 
 * [Deployer](#Deployer)
-    * [new Deployer(properties, buObject, [fromRetrieve])](#new_Deployer_new)
+    * [new Deployer(properties, buObject)](#new_Deployer_new)
     * _instance_
         * [.metadata](#Deployer+metadata) : <code>TYPE.MultiMetadataTypeMap</code>
-        * [._deploy([typeArr], [keyArr])](#Deployer+_deploy) ⇒ <code>Promise</code>
+        * [._deploy([typeArr], [keyArr], [fromRetrieve])](#Deployer+_deploy) ⇒ <code>Promise</code>
         * [.deployCallback(result, metadataType)](#Deployer+deployCallback) ⇒ <code>void</code>
     * _static_
         * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Deployer.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
-        * [._deployBU(cred, bu, [typeArr], [keyArr], [fromRetrieve])](#Deployer._deployBU) ⇒ <code>Promise</code>
+        * [._deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve])](#Deployer._deployBU) ⇒ <code>Promise</code>
         * [.readBUMetadata(deployDir, [typeArr], [listBadKeys])](#Deployer.readBUMetadata) ⇒ <code>TYPE.MultiMetadataTypeMap</code>
         * [.createFolderDefinitions(deployDir, metadata, metadataTypeArr)](#Deployer.createFolderDefinitions) ⇒ <code>void</code>
 
 <a name="new_Deployer_new"></a>
 
-### new Deployer(properties, buObject, [fromRetrieve])
+### new Deployer(properties, buObject)
 Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 
 
@@ -358,7 +358,6 @@ Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 | --- | --- | --- |
 | properties | <code>TYPE.Mcdevrc</code> | General configuration to be used in retrieve |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
-| [fromRetrieve] | <code>boolean</code> | optionally deploy whats defined via selectedTypesArr + keyArr directly from retrieve folder instead of from deploy folder |
 
 <a name="Deployer+metadata"></a>
 
@@ -366,7 +365,7 @@ Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 **Kind**: instance property of [<code>Deployer</code>](#Deployer)  
 <a name="Deployer+_deploy"></a>
 
-### deployer.\_deploy([typeArr], [keyArr]) ⇒ <code>Promise</code>
+### deployer.\_deploy([typeArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise</code>
 Deploy all metadata that is located in the deployDir
 
 **Kind**: instance method of [<code>Deployer</code>](#Deployer)  
@@ -376,6 +375,7 @@ Deploy all metadata that is located in the deployDir
 | --- | --- | --- |
 | [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type (can include subtype) |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
+| [fromRetrieve] | <code>boolean</code> | if true, no folders will be updated/created |
 
 <a name="Deployer+deployCallback"></a>
 
@@ -406,7 +406,7 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 
 <a name="Deployer._deployBU"></a>
 
-### Deployer.\_deployBU(cred, bu, [typeArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise</code>
+### Deployer.\_deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise</code>
 helper for deploy()
 
 **Kind**: static method of [<code>Deployer</code>](#Deployer)  
@@ -416,6 +416,7 @@ helper for deploy()
 | --- | --- | --- |
 | cred | <code>string</code> | name of Credential |
 | bu | <code>string</code> | name of BU |
+| properties | <code>TYPE.Mcdevrc</code> | General configuration to be used in retrieve |
 | [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
 | [fromRetrieve] | <code>boolean</code> | optionally deploy whats defined via selectedTypesArr + keyArr directly from retrieve folder instead of from deploy folder |
