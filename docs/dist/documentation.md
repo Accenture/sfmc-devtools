@@ -340,11 +340,11 @@ Source and target business units are also compared before the deployment to appl
     * [new Deployer(properties, buObject)](#new_Deployer_new)
     * _instance_
         * [.metadata](#Deployer+metadata) : <code>TYPE.MultiMetadataTypeMap</code>
-        * [._deploy([typeArr], [keyArr])](#Deployer+_deploy) ⇒ <code>Promise</code>
+        * [._deploy([typeArr], [keyArr], [fromRetrieve])](#Deployer+_deploy) ⇒ <code>Promise</code>
         * [.deployCallback(result, metadataType)](#Deployer+deployCallback) ⇒ <code>void</code>
     * _static_
-        * [.deploy(businessUnit, [selectedTypesArr], [keyArr])](#Deployer.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
-        * [._deployBU(cred, bu, [typeArr], [keyArr])](#Deployer._deployBU) ⇒ <code>Promise</code>
+        * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Deployer.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
+        * [._deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve])](#Deployer._deployBU) ⇒ <code>Promise</code>
         * [.readBUMetadata(deployDir, [typeArr], [listBadKeys])](#Deployer.readBUMetadata) ⇒ <code>TYPE.MultiMetadataTypeMap</code>
         * [.createFolderDefinitions(deployDir, metadata, metadataTypeArr)](#Deployer.createFolderDefinitions) ⇒ <code>void</code>
 
@@ -365,7 +365,7 @@ Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 **Kind**: instance property of [<code>Deployer</code>](#Deployer)  
 <a name="Deployer+_deploy"></a>
 
-### deployer.\_deploy([typeArr], [keyArr]) ⇒ <code>Promise</code>
+### deployer.\_deploy([typeArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise</code>
 Deploy all metadata that is located in the deployDir
 
 **Kind**: instance method of [<code>Deployer</code>](#Deployer)  
@@ -375,6 +375,7 @@ Deploy all metadata that is located in the deployDir
 | --- | --- | --- |
 | [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type (can include subtype) |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
+| [fromRetrieve] | <code>boolean</code> | if true, no folders will be updated/created |
 
 <a name="Deployer+deployCallback"></a>
 
@@ -390,7 +391,7 @@ Gets called for every deployed metadata entry
 
 <a name="Deployer.deploy"></a>
 
-### Deployer.deploy(businessUnit, [selectedTypesArr], [keyArr]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Deployer.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise.&lt;void&gt;</code>
 Deploys all metadata located in the 'deploy' directory to the specified business unit
 
 **Kind**: static method of [<code>Deployer</code>](#Deployer)  
@@ -401,10 +402,11 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 | businessUnit | <code>string</code> | references credentials from properties.json |
 | [selectedTypesArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
+| [fromRetrieve] | <code>boolean</code> | optionally deploy whats defined via selectedTypesArr + keyArr directly from retrieve folder instead of from deploy folder |
 
 <a name="Deployer._deployBU"></a>
 
-### Deployer.\_deployBU(cred, bu, [typeArr], [keyArr]) ⇒ <code>Promise</code>
+### Deployer.\_deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise</code>
 helper for deploy()
 
 **Kind**: static method of [<code>Deployer</code>](#Deployer)  
@@ -414,8 +416,10 @@ helper for deploy()
 | --- | --- | --- |
 | cred | <code>string</code> | name of Credential |
 | bu | <code>string</code> | name of BU |
+| properties | <code>TYPE.Mcdevrc</code> | General configuration to be used in retrieve |
 | [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
+| [fromRetrieve] | <code>boolean</code> | optionally deploy whats defined via selectedTypesArr + keyArr directly from retrieve folder instead of from deploy folder |
 
 <a name="Deployer.readBUMetadata"></a>
 
@@ -459,7 +463,7 @@ main class
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>void</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.retrieve(businessUnit, [selectedTypesArr], [keys], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [.deploy(businessUnit, [selectedTypesArr], [keyArr])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initProject([credentialsName], [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -548,17 +552,18 @@ Retrieve all metadata from the specified business unit into the local file syste
 
 <a name="Mcdev.deploy"></a>
 
-### Mcdev.deploy(businessUnit, [selectedTypesArr], [keyArr]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise.&lt;void&gt;</code>
 Deploys all metadata located in the 'deploy' directory to the specified business unit
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| businessUnit | <code>string</code> | references credentials from properties.json |
-| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
-| [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| businessUnit | <code>string</code> |  | references credentials from properties.json |
+| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> |  | limit deployment to given metadata type |
+| [keyArr] | <code>Array.&lt;string&gt;</code> |  | limit deployment to given metadata keys |
+| [fromRetrieve] | <code>boolean</code> | <code>false</code> | optionally deploy whats defined via selectedTypesArr + keyArr directly from retrieve folder instead of from deploy folder |
 
 <a name="Mcdev.initProject"></a>
 
@@ -833,8 +838,8 @@ FileTransfer MetadataType
     * [._retrieveExtendedFile(metadata, subType, retrieveDir)](#Asset._retrieveExtendedFile) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._readExtendedFileFromFS(metadata, subType, deployDir)](#Asset._readExtendedFileFromFS) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.postRetrieveTasks(metadata)](#Asset.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
-    * [.preDeployTasks(metadata, deployDir)](#Asset.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
-    * [.getSubtype(metadata)](#Asset.getSubtype) ⇒ <code>TYPE.AssetSubType</code>
+    * [.preDeployTasks(metadata, deployDir, buObject)](#Asset.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
+    * [._getMainSubtype(extendedSubType)](#Asset._getMainSubtype) ⇒ <code>string</code>
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildDefinitionForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildTemplateForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Asset._buildForNested) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -843,7 +848,7 @@ FileTransfer MetadataType
     * [._mergeCode_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName], [fileListOnly])](#Asset._mergeCode_slots) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._extractCode(metadata)](#Asset._extractCode) ⇒ <code>TYPE.CodeExtractItem</code>
     * [._extractCode_slots(prefix, metadataSlots, codeArr)](#Asset._extractCode_slots) ⇒ <code>void</code>
-    * [.getJsonFromFS(dir, _, selectedSubType)](#Asset.getJsonFromFS) ⇒ <code>TYPE.MetadataTypeMap</code>
+    * [.getJsonFromFS(dir, [_], selectedSubType)](#Asset.getJsonFromFS) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.findSubType(templateDir, templateName)](#Asset.findSubType) ⇒ <code>Promise.&lt;TYPE.AssetSubType&gt;</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName)](#Asset.readSecondaryFolder) ⇒ <code>TYPE.AssetItem</code>
     * [.getFilesToCommit(keyArr)](#Asset.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
@@ -993,7 +998,7 @@ manages post retrieve steps
 
 <a name="Asset.preDeployTasks"></a>
 
-### Asset.preDeployTasks(metadata, deployDir) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
+### Asset.preDeployTasks(metadata, deployDir, buObject) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
 prepares an asset definition for deployment
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -1003,18 +1008,19 @@ prepares an asset definition for deployment
 | --- | --- | --- |
 | metadata | <code>TYPE.AssetItem</code> | a single asset |
 | deployDir | <code>string</code> | directory of deploy files |
+| buObject | <code>TYPE.BuObject</code> | buObject properties for auth |
 
-<a name="Asset.getSubtype"></a>
+<a name="Asset._getMainSubtype"></a>
 
-### Asset.getSubtype(metadata) ⇒ <code>TYPE.AssetSubType</code>
-determines the subtype of the current asset
+### Asset.\_getMainSubtype(extendedSubType) ⇒ <code>string</code>
+find the subType matching the extendedSubType
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>TYPE.AssetSubType</code> - subtype  
+**Returns**: <code>string</code> - subType: block, message, other, etc  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.AssetItem</code> | a single asset |
+| extendedSubType | <code>string</code> | webpage, htmlblock, etc |
 
 <a name="Asset.buildDefinitionForNested"></a>
 
@@ -1146,7 +1152,7 @@ to allow saving that separately and formatted
 
 <a name="Asset.getJsonFromFS"></a>
 
-### Asset.getJsonFromFS(dir, _, selectedSubType) ⇒ <code>TYPE.MetadataTypeMap</code>
+### Asset.getJsonFromFS(dir, [_], selectedSubType) ⇒ <code>TYPE.MetadataTypeMap</code>
 Returns file contents mapped to their fileName without '.json' ending
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -1155,8 +1161,8 @@ Returns file contents mapped to their fileName without '.json' ending
 | Param | Type | Description |
 | --- | --- | --- |
 | dir | <code>string</code> | directory that contains '.json' files to be read |
-| _ | <code>void</code> | not used by type asset |
-| selectedSubType | <code>string</code> | asset, message, ... |
+| [_] | <code>void</code> | unused parameter |
+| selectedSubType | <code>Array.&lt;string&gt;</code> | asset, message, ... |
 
 <a name="Asset.findSubType"></a>
 
@@ -2956,7 +2962,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.buildTemplate(retrieveDir, templateDir, key, templateVariables)](#MetadataType.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
-    * [.preDeployTasks(metadata, deployDir)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
+    * [.preDeployTasks(metadata, deployDir, buObject)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
     * [.create(metadata, deployDir)](#MetadataType.create) ⇒ <code>void</code>
     * [.update(metadata, [metadataBefore])](#MetadataType.update) ⇒ <code>void</code>
     * [.upsert(metadata, deployDir, [buObject])](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
@@ -3147,7 +3153,7 @@ Gets metadata cache with limited fields and does not store value to disk
 
 <a name="MetadataType.preDeployTasks"></a>
 
-### MetadataType.preDeployTasks(metadata, deployDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
+### MetadataType.preDeployTasks(metadata, deployDir, buObject) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
 Gets executed before deploying metadata
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3157,6 +3163,7 @@ Gets executed before deploying metadata
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata item |
 | deployDir | <code>string</code> | folder where files for deployment are stored |
+| buObject | <code>TYPE.BuObject</code> | buObject properties for auth |
 
 <a name="MetadataType.create"></a>
 
