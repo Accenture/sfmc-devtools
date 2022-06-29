@@ -344,7 +344,7 @@ Source and target business units are also compared before the deployment to appl
         * [.deployCallback(result, metadataType)](#Deployer+deployCallback) ⇒ <code>void</code>
     * _static_
         * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Deployer.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
-        * [._deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve])](#Deployer._deployBU) ⇒ <code>Promise</code>
+        * [._deployBU(cred, bu, properties, [typeArr], [keyArr])](#Deployer._deployBU) ⇒ <code>Promise</code>
         * [.readBUMetadata(deployDir, [typeArr], [listBadKeys])](#Deployer.readBUMetadata) ⇒ <code>TYPE.MultiMetadataTypeMap</code>
         * [.createFolderDefinitions(deployDir, metadata, metadataTypeArr)](#Deployer.createFolderDefinitions) ⇒ <code>void</code>
 
@@ -405,7 +405,7 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 
 <a name="Deployer._deployBU"></a>
 
-### Deployer.\_deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise</code>
+### Deployer.\_deployBU(cred, bu, properties, [typeArr], [keyArr]) ⇒ <code>Promise</code>
 helper for deploy()
 
 **Kind**: static method of [<code>Deployer</code>](#Deployer)  
@@ -418,7 +418,6 @@ helper for deploy()
 | properties | <code>TYPE.Mcdevrc</code> | General configuration to be used in retrieve |
 | [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
-| [fromRetrieve] | <code>boolean</code> | optionally deploy whats defined via selectedTypesArr + keyArr directly from retrieve folder instead of from deploy folder |
 
 <a name="Deployer.readBUMetadata"></a>
 
