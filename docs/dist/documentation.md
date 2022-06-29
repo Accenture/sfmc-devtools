@@ -2966,7 +2966,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.create(metadata, deployDir)](#MetadataType.create) ⇒ <code>void</code>
     * [.update(metadata, [metadataBefore])](#MetadataType.update) ⇒ <code>void</code>
     * [.hasChanged(cachedVersion, metadata, [fieldName])](#MetadataType.hasChanged) ⇒ <code>boolean</code>
-    * [.hasChanged_generic(cachedVersion, metadata, [fieldName], [silent])](#MetadataType.hasChanged_generic) ⇒ <code>boolean</code>
+    * [.hasChangedGeneric(cachedVersion, metadata, [fieldName], [silent])](#MetadataType.hasChangedGeneric) ⇒ <code>boolean</code>
     * [.upsert(metadata, deployDir, [buObject])](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise</code>
     * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise</code>
@@ -3205,9 +3205,9 @@ test if metadata was actually changed or not to potentially skip it during deplo
 | metadata | <code>TYPE.MetadataTypeItem</code> | item to upload |
 | [fieldName] | <code>string</code> | optional field name to use for identifying the record in logs |
 
-<a name="MetadataType.hasChanged_generic"></a>
+<a name="MetadataType.hasChangedGeneric"></a>
 
-### MetadataType.hasChanged\_generic(cachedVersion, metadata, [fieldName], [silent]) ⇒ <code>boolean</code>
+### MetadataType.hasChangedGeneric(cachedVersion, metadata, [fieldName], [silent]) ⇒ <code>boolean</code>
 test if metadata was actually changed or not to potentially skip it during deployment
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -4700,7 +4700,7 @@ configures what is displayed in the console
 <a name="Util.isObjectChanged"></a>
 
 ### Util.isObjectChanged(oldItem, newItem, prop) ⇒ <code>boolean</code>
-helper for hasChanged_generic
+helper for hasChangedGeneric
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>boolean</code> - true if property has changed  
@@ -6469,7 +6469,7 @@ configures what is displayed in the console
 <a name="Util.isObjectChanged"></a>
 
 ### Util.isObjectChanged(oldItem, newItem, prop) ⇒ <code>boolean</code>
-helper for hasChanged_generic
+helper for hasChangedGeneric
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>boolean</code> - true if property has changed  
