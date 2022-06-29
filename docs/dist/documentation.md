@@ -161,7 +161,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 </dd>
 <dt><a href="#getUserName">getUserName(userList, item, fieldname)</a> ⇒ <code>string</code></dt>
 <dd></dd>
-<dt><a href="#setupSDK">setupSDK(credentialKey, authObject)</a> ⇒ <code><a href="#SDK">SDK</a></code></dt>
+<dt><a href="#setupSDK">setupSDK(sessionKey, authObject)</a> ⇒ <code><a href="#SDK">SDK</a></code></dt>
 <dd><p>Returns an SDK instance to be used for API calls</p>
 </dd>
 <dt><a href="#createNewLoggerTransport">createNewLoggerTransport()</a> ⇒ <code>object</code></dt>
@@ -6423,7 +6423,7 @@ helper to convert CSVs into an array. if only one value was given, it's also ret
 
 <a name="setupSDK"></a>
 
-## setupSDK(credentialKey, authObject) ⇒ [<code>SDK</code>](#SDK)
+## setupSDK(sessionKey, authObject) ⇒ [<code>SDK</code>](#SDK)
 Returns an SDK instance to be used for API calls
 
 **Kind**: global function  
@@ -6431,7 +6431,7 @@ Returns an SDK instance to be used for API calls
 
 | Param | Type | Description |
 | --- | --- | --- |
-| credentialKey | <code>string</code> | key for specific BU |
+| sessionKey | <code>string</code> | key for specific BU |
 | authObject | <code>TYPE.AuthObject</code> | credentials for specific BU |
 
 <a name="createNewLoggerTransport"></a>
