@@ -1574,14 +1574,14 @@ DataExtension MetadataType
     * [.create(metadata)](#DataExtension.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#DataExtension.update) ⇒ <code>Promise</code>
     * [.postDeployTasks(upsertedMetadata, originalMetadata)](#DataExtension.postDeployTasks) ⇒ <code>void</code>
-    * [.retrieve(retrieveDir, [additionalFields], buObject, [_], [key], [isDeploy])](#DataExtension.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
+    * [.retrieve(retrieveDir, [additionalFields], buObject, [_], [key])](#DataExtension.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.retrieveChangelog([buObject], [additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.postRetrieveTasks(metadata)](#DataExtension.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionItem</code>
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.DataExtensionItem&gt;</code>
     * [.document(buObject, [metadata])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(buObject, customerKey)](#DataExtension.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postDeleteTasks(buObject, customerKey)](#DataExtension.postDeleteTasks) ⇒ <code>void</code>
-    * [.retrieveForCache(buObject, [_], [isDeploy])](#DataExtension.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
+    * [.retrieveForCache(buObject)](#DataExtension.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtension.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.getFilesToCommit(keyArr)](#DataExtension.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
 
@@ -1650,7 +1650,7 @@ Gets executed after deployment of metadata type
 
 <a name="DataExtension.retrieve"></a>
 
-### DataExtension.retrieve(retrieveDir, [additionalFields], buObject, [_], [key], [isDeploy]) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
+### DataExtension.retrieve(retrieveDir, [additionalFields], buObject, [_], [key]) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
 Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionColumn metadata retrieval
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -1663,7 +1663,6 @@ Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionCo
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
 | [_] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
-| [isDeploy] | <code>boolean</code> | used to signal that fields shall be retrieve in caching mode |
 
 <a name="DataExtension.retrieveChangelog"></a>
 
@@ -1742,7 +1741,7 @@ clean up after deleting a metadata item
 
 <a name="DataExtension.retrieveForCache"></a>
 
-### DataExtension.retrieveForCache(buObject, [_], [isDeploy]) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
+### DataExtension.retrieveForCache(buObject) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
 Retrieves folder metadata into local filesystem. Also creates a uniquePath attribute for each folder.
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -1751,8 +1750,6 @@ Retrieves folder metadata into local filesystem. Also creates a uniquePath attri
 | Param | Type | Description |
 | --- | --- | --- |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
-| [_] | <code>void</code> | - |
-| [isDeploy] | <code>boolean</code> | used to signal that fields shall be retrieve in caching mode |
 
 <a name="DataExtension.retrieveAsTemplate"></a>
 
