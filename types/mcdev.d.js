@@ -99,6 +99,8 @@ const SDK = require('sfmc-sdk');
  * @property {string} CustomerKey key
  * @property {string} Name name
  * @property {string} Description -
+ * @property {string} [CreatedDate] iso format
+ * @property {string} [ModifiedDate] iso format
  * @property {true|false} IsSendable -
  * @property {true|false} IsTestable -
  * @property {object} SendableDataExtensionField -
