@@ -127,6 +127,8 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#BusinessUnit">BusinessUnit</a></dt>
 <dd><p>Helper that handles retrieval of BU info</p>
 </dd>
+<dt><a href="#dataStore">dataStore</a> : <code>TYPE.Cache</code></dt>
+<dd></dd>
 <dt><a href="#Cli">Cli</a></dt>
 <dd><p>CLI helper class</p>
 </dd>
@@ -161,7 +163,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 </dd>
 <dt><a href="#getUserName">getUserName(userList, item, fieldname)</a> ⇒ <code>string</code></dt>
 <dd></dd>
-<dt><a href="#setupSDK">setupSDK(credentialKey, authObject)</a> ⇒ <code><a href="#SDK">SDK</a></code></dt>
+<dt><a href="#setupSDK">setupSDK(sessionKey, authObject)</a> ⇒ <code><a href="#SDK">SDK</a></code></dt>
 <dd><p>Returns an SDK instance to be used for API calls</p>
 </dd>
 <dt><a href="#createNewLoggerTransport">createNewLoggerTransport()</a> ⇒ <code>object</code></dt>
@@ -177,7 +179,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dl>
 <dt><a href="#SupportedMetadataTypes">SupportedMetadataTypes</a> : <code>Object.&lt;string, string&gt;</code></dt>
 <dd></dd>
-<dt><a href="#MetadataTypeItemObj">MetadataTypeItemObj</a> : <code>Object.&lt;string, any&gt;</code></dt>
+<dt><a href="#Cache">Cache</a> : <code>Object.&lt;string, any&gt;</code></dt>
 <dd><p>key=customer key</p>
 </dd>
 <dt><a href="#CodeExtractItem">CodeExtractItem</a> : <code>object</code></dt>
@@ -524,7 +526,6 @@ handler for 'mcdev createDeltaPkg
 
 ### Mcdev.explainTypes() ⇒ <code>void</code>
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>void</code> - .  
 <a name="Mcdev.upgrade"></a>
 
 ### Mcdev.upgrade([skipInteraction]) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -1029,7 +1030,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1046,7 +1047,7 @@ helper for buildTemplate
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - void  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1067,7 +1068,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1573,15 +1574,15 @@ DataExtension MetadataType
     * [.create(metadata)](#DataExtension.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#DataExtension.update) ⇒ <code>Promise</code>
     * [.postDeployTasks(upsertedMetadata, originalMetadata)](#DataExtension.postDeployTasks) ⇒ <code>void</code>
-    * [.retrieve(retrieveDir, [additionalFields], buObject, [_], [key], [isDeploy])](#DataExtension.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
+    * [.retrieve(retrieveDir, [additionalFields], buObject, [_], [key])](#DataExtension.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.retrieveChangelog([buObject], [additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.postRetrieveTasks(metadata)](#DataExtension.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionItem</code>
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.DataExtensionItem&gt;</code>
     * [.document(buObject, [metadata])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(buObject, customerKey)](#DataExtension.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postDeleteTasks(buObject, customerKey)](#DataExtension.postDeleteTasks) ⇒ <code>void</code>
-    * [.retrieveForCache(buObject, [_], [isDeploy])](#DataExtension.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtension.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: DataExtension, type: string}&gt;</code>
+    * [.retrieveForCache(buObject)](#DataExtension.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtension.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.getFilesToCommit(keyArr)](#DataExtension.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="DataExtension.upsert"></a>
@@ -1649,7 +1650,7 @@ Gets executed after deployment of metadata type
 
 <a name="DataExtension.retrieve"></a>
 
-### DataExtension.retrieve(retrieveDir, [additionalFields], buObject, [_], [key], [isDeploy]) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
+### DataExtension.retrieve(retrieveDir, [additionalFields], buObject, [_], [key]) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
 Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionColumn metadata retrieval
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -1662,7 +1663,6 @@ Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionCo
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
 | [_] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
-| [isDeploy] | <code>boolean</code> | used to signal that fields shall be retrieve in caching mode |
 
 <a name="DataExtension.retrieveChangelog"></a>
 
@@ -1733,7 +1733,6 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
-**Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1742,7 +1741,7 @@ clean up after deleting a metadata item
 
 <a name="DataExtension.retrieveForCache"></a>
 
-### DataExtension.retrieveForCache(buObject, [_], [isDeploy]) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
+### DataExtension.retrieveForCache(buObject) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
 Retrieves folder metadata into local filesystem. Also creates a uniquePath attribute for each folder.
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -1751,16 +1750,14 @@ Retrieves folder metadata into local filesystem. Also creates a uniquePath attri
 | Param | Type | Description |
 | --- | --- | --- |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
-| [_] | <code>void</code> | - |
-| [isDeploy] | <code>boolean</code> | used to signal that fields shall be retrieve in caching mode |
 
 <a name="DataExtension.retrieveAsTemplate"></a>
 
-### DataExtension.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata: DataExtension, type: string}&gt;</code>
+### DataExtension.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
 Retrieves dataExtension metadata in template format.
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
-**Returns**: <code>Promise.&lt;{metadata: DataExtension, type: string}&gt;</code> - Promise of items  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code> - Promise of items  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1912,7 +1909,6 @@ Delete a data extension from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
-**Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3588,7 +3584,6 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4773,6 +4768,10 @@ Refreshes BU names and ID's from MC instance
 | properties | <code>TYPE.Mcdevrc</code> | current properties that have to be refreshed |
 | credentialsName | <code>string</code> | identifying name of the installed package / project |
 
+<a name="dataStore"></a>
+
+## dataStore : <code>TYPE.Cache</code>
+**Kind**: global constant  
 <a name="Cli"></a>
 
 ## Cli
@@ -4923,7 +4922,6 @@ this keeps the config automatically upgradable when we add new subtypes or chang
 shows metadata type descriptions
 
 **Kind**: static method of [<code>Cli</code>](#Cli)  
-**Returns**: <code>void</code> - -  
 <a name="DevOps"></a>
 
 ## DevOps
@@ -6519,7 +6517,7 @@ helper to convert CSVs into an array. if only one value was given, it's also ret
 
 <a name="setupSDK"></a>
 
-## setupSDK(credentialKey, authObject) ⇒ [<code>SDK</code>](#SDK)
+## setupSDK(sessionKey, authObject) ⇒ [<code>SDK</code>](#SDK)
 Returns an SDK instance to be used for API calls
 
 **Kind**: global function  
@@ -6527,7 +6525,7 @@ Returns an SDK instance to be used for API calls
 
 | Param | Type | Description |
 | --- | --- | --- |
-| credentialKey | <code>string</code> | key for specific BU |
+| sessionKey | <code>string</code> | key for specific BU |
 | authObject | <code>TYPE.AuthObject</code> | credentials for specific BU |
 
 <a name="createNewLoggerTransport"></a>
@@ -6547,9 +6545,9 @@ initiate winston logger
 
 ## SupportedMetadataTypes : <code>Object.&lt;string, string&gt;</code>
 **Kind**: global typedef  
-<a name="MetadataTypeItemObj"></a>
+<a name="Cache"></a>
 
-## MetadataTypeItemObj : <code>Object.&lt;string, any&gt;</code>
+## Cache : <code>Object.&lt;string, any&gt;</code>
 key=customer key
 
 **Kind**: global typedef  
@@ -6658,6 +6656,8 @@ key=customer key
 | CustomerKey | <code>string</code> | key |
 | Name | <code>string</code> | name |
 | Description | <code>string</code> | - |
+| [CreatedDate] | <code>string</code> | iso format |
+| [ModifiedDate] | <code>string</code> | iso format |
 | IsSendable | <code>true</code> \| <code>false</code> | - |
 | IsTestable | <code>true</code> \| <code>false</code> | - |
 | SendableDataExtensionField | <code>object</code> | - |

@@ -22,6 +22,7 @@ const SDK = require('sfmc-sdk');
  * @typedef {Object.<string, MetadataTypeItem[]>} MultiMetadataTypeList key=Supported MetadataType
  * @typedef {{metadata:MetadataTypeMap,type:SupportedMetadataTypes}} MetadataTypeMapObj
  * @typedef {{metadata:MetadataTypeItem,type:SupportedMetadataTypes}} MetadataTypeItemObj
+ * @typedef {Object.<number, MultiMetadataTypeMap>} Cache key=MID
  */
 
 /**
@@ -98,6 +99,8 @@ const SDK = require('sfmc-sdk');
  * @property {string} CustomerKey key
  * @property {string} Name name
  * @property {string} Description -
+ * @property {string} [CreatedDate] iso format
+ * @property {string} [ModifiedDate] iso format
  * @property {true|false} IsSendable -
  * @property {true|false} IsTestable -
  * @property {object} SendableDataExtensionField -
