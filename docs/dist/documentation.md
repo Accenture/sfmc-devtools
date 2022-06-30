@@ -127,6 +127,8 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#BusinessUnit">BusinessUnit</a></dt>
 <dd><p>Helper that handles retrieval of BU info</p>
 </dd>
+<dt><a href="#dataStore">dataStore</a> : <code>TYPE.Cache</code></dt>
+<dd></dd>
 <dt><a href="#Cli">Cli</a></dt>
 <dd><p>CLI helper class</p>
 </dd>
@@ -177,7 +179,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dl>
 <dt><a href="#SupportedMetadataTypes">SupportedMetadataTypes</a> : <code>Object.&lt;string, string&gt;</code></dt>
 <dd></dd>
-<dt><a href="#MetadataTypeItemObj">MetadataTypeItemObj</a> : <code>Object.&lt;string, any&gt;</code></dt>
+<dt><a href="#Cache">Cache</a> : <code>Object.&lt;string, any&gt;</code></dt>
 <dd><p>key=customer key</p>
 </dd>
 <dt><a href="#CodeExtractItem">CodeExtractItem</a> : <code>object</code></dt>
@@ -4713,6 +4715,10 @@ Refreshes BU names and ID's from MC instance
 | properties | <code>TYPE.Mcdevrc</code> | current properties that have to be refreshed |
 | credentialsName | <code>string</code> | identifying name of the installed package / project |
 
+<a name="dataStore"></a>
+
+## dataStore : <code>TYPE.Cache</code>
+**Kind**: global constant  
 <a name="Cli"></a>
 
 ## Cli
@@ -6458,9 +6464,9 @@ initiate winston logger
 
 ## SupportedMetadataTypes : <code>Object.&lt;string, string&gt;</code>
 **Kind**: global typedef  
-<a name="MetadataTypeItemObj"></a>
+<a name="Cache"></a>
 
-## MetadataTypeItemObj : <code>Object.&lt;string, any&gt;</code>
+## Cache : <code>Object.&lt;string, any&gt;</code>
 key=customer key
 
 **Kind**: global typedef  

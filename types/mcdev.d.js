@@ -22,6 +22,7 @@ const SDK = require('sfmc-sdk');
  * @typedef {Object.<string, MetadataTypeItem[]>} MultiMetadataTypeList key=Supported MetadataType
  * @typedef {{metadata:MetadataTypeMap,type:SupportedMetadataTypes}} MetadataTypeMapObj
  * @typedef {{metadata:MetadataTypeItem,type:SupportedMetadataTypes}} MetadataTypeItemObj
+ * @typedef {Object.<number, MultiMetadataTypeMap>} Cache key=MID
  */
 
 /**
