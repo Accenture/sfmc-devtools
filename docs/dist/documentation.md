@@ -526,7 +526,6 @@ handler for 'mcdev createDeltaPkg
 
 ### Mcdev.explainTypes() ⇒ <code>void</code>
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>void</code> - .  
 <a name="Mcdev.upgrade"></a>
 
 ### Mcdev.upgrade([skipInteraction]) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -1031,7 +1030,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1048,7 +1047,7 @@ helper for buildTemplate
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - void  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1069,7 +1068,7 @@ helper for buildDefinition
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1735,7 +1734,6 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
-**Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1914,7 +1912,6 @@ Delete a data extension from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
-**Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3559,7 +3556,6 @@ Delete a metadata item from the specified business unit
 clean up after deleting a metadata item
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>void</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4869,7 +4865,6 @@ this keeps the config automatically upgradable when we add new subtypes or chang
 shows metadata type descriptions
 
 **Kind**: static method of [<code>Cli</code>](#Cli)  
-**Returns**: <code>void</code> - -  
 <a name="DevOps"></a>
 
 ## DevOps
