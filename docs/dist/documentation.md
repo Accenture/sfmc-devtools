@@ -4398,7 +4398,7 @@ CLI entry for SFMC DevTools
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
-    * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
@@ -4523,15 +4523,15 @@ helper for retrieve, retrieveAsTemplate and deploy
 
 | Param | Type | Description |
 | --- | --- | --- |
-| selectedType | <code>string</code> | type or type-subtype |
+| selectedType | <code>TYPE.SupportedMetadataTypes</code> | type or type-subtype |
 
 <a name="Util.getRetrieveTypeChoices"></a>
 
-### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;string&gt;</code>
+### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
 helper for getDefaultProperties()
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Array.&lt;string&gt;</code> - type choices  
+**Returns**: <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> - type choices  
 <a name="Util.metadataLogger"></a>
 
 ### Util.metadataLogger(level, type, method, payload, [source]) ⇒ <code>void</code>
@@ -4852,7 +4852,7 @@ Central class for loading and validating properties from config and auth
 * [config](#config)
     * [.getProperties([silent])](#config.getProperties) ⇒ <code>object</code>
     * [.checkProperties(properties, [silent])](#config.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
-    * [.getDefaultProperties()](#config.getDefaultProperties) ⇒ <code>object</code>
+    * [.getDefaultProperties()](#config.getDefaultProperties) ⇒ <code>TYPE.Mcdevrc</code>
 
 <a name="config.getProperties"></a>
 
@@ -4876,17 +4876,17 @@ check if the config file is correctly formatted and has values
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>object</code> | javascript object in .mcdevrc.json |
+| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
 | [silent] | <code>boolean</code> | set to true for internal use w/o cli output |
 
 <a name="config.getDefaultProperties"></a>
 
-### config.getDefaultProperties() ⇒ <code>object</code>
+### config.getDefaultProperties() ⇒ <code>TYPE.Mcdevrc</code>
 defines how the properties.json should look like
 used for creating a template and for checking if variables are set
 
 **Kind**: static method of [<code>config</code>](#config)  
-**Returns**: <code>object</code> - default properties  
+**Returns**: <code>TYPE.Mcdevrc</code> - default properties  
 <a name="DevOps"></a>
 
 ## DevOps
@@ -6150,7 +6150,7 @@ Util that contains logger and simple util methods
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
-    * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
@@ -6275,15 +6275,15 @@ helper for retrieve, retrieveAsTemplate and deploy
 
 | Param | Type | Description |
 | --- | --- | --- |
-| selectedType | <code>string</code> | type or type-subtype |
+| selectedType | <code>TYPE.SupportedMetadataTypes</code> | type or type-subtype |
 
 <a name="Util.getRetrieveTypeChoices"></a>
 
-### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;string&gt;</code>
+### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
 helper for getDefaultProperties()
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Array.&lt;string&gt;</code> - type choices  
+**Returns**: <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> - type choices  
 <a name="Util.metadataLogger"></a>
 
 ### Util.metadataLogger(level, type, method, payload, [source]) ⇒ <code>void</code>
