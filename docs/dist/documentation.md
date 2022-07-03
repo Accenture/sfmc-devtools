@@ -4851,8 +4851,9 @@ Central class for loading and validating properties from config and auth
 
 * [config](#config)
     * [.getProperties([silent])](#config.getProperties) ⇒ <code>object</code>
-    * [.checkProperties(properties, [silent])](#config.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
+    * [.checkProperties(properties, [skipCredentialValidation])](#config.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
     * [.getDefaultProperties()](#config.getDefaultProperties) ⇒ <code>TYPE.Mcdevrc</code>
+    * [.getProblems(properties, [defaultProps], [skipCredentialValidation])](#config.getProblems) ⇒ <code>Promise.&lt;{missingFields: Array.&lt;string&gt;, errorMsgs: Array.&lt;string&gt;, solutionSet: Set.&lt;string&gt;}&gt;</code>
 
 <a name="config.getProperties"></a>
 
@@ -4868,7 +4869,7 @@ loads central properties from config file
 
 <a name="config.checkProperties"></a>
 
-### config.checkProperties(properties, [silent]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
+### config.checkProperties(properties, [skipCredentialValidation]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
 check if the config file is correctly formatted and has values
 
 **Kind**: static method of [<code>config</code>](#config)  
@@ -4877,7 +4878,7 @@ check if the config file is correctly formatted and has values
 | Param | Type | Description |
 | --- | --- | --- |
 | properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
-| [silent] | <code>boolean</code> | set to true for internal use w/o cli output |
+| [skipCredentialValidation] | <code>boolean</code> | set to true for internal use w/o cli output |
 
 <a name="config.getDefaultProperties"></a>
 
@@ -4887,6 +4888,18 @@ used for creating a template and for checking if variables are set
 
 **Kind**: static method of [<code>config</code>](#config)  
 **Returns**: <code>TYPE.Mcdevrc</code> - default properties  
+<a name="config.getProblems"></a>
+
+### config.getProblems(properties, [defaultProps], [skipCredentialValidation]) ⇒ <code>Promise.&lt;{missingFields: Array.&lt;string&gt;, errorMsgs: Array.&lt;string&gt;, solutionSet: Set.&lt;string&gt;}&gt;</code>
+**Kind**: static method of [<code>config</code>](#config)  
+**Returns**: <code>Promise.&lt;{missingFields: Array.&lt;string&gt;, errorMsgs: Array.&lt;string&gt;, solutionSet: Set.&lt;string&gt;}&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
+| [defaultProps] | <code>TYPE.Mcdevrc</code> | default properties |
+| [skipCredentialValidation] | <code>boolean</code> | used by init.config.js>fixMcdevConfig() to auto-fix the config file |
+
 <a name="DevOps"></a>
 
 ## DevOps
