@@ -4850,14 +4850,14 @@ Central class for loading and validating properties from config and auth
 **Kind**: global constant  
 
 * [config](#config)
-    * [.getProperties([silent])](#config.getProperties) ⇒ <code>object</code>
+    * [.getProperties([skipChecks])](#config.getProperties) ⇒ <code>object</code>
     * [.checkProperties(properties, [skipCredentialValidation])](#config.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
     * [.getDefaultProperties()](#config.getDefaultProperties) ⇒ <code>TYPE.Mcdevrc</code>
     * [.getProblems(properties, [defaultProps], [skipCredentialValidation])](#config.getProblems) ⇒ <code>Promise.&lt;{missingFields: Array.&lt;string&gt;, errorMsgs: Array.&lt;string&gt;, solutionSet: Set.&lt;string&gt;}&gt;</code>
 
 <a name="config.getProperties"></a>
 
-### config.getProperties([silent]) ⇒ <code>object</code>
+### config.getProperties([skipChecks]) ⇒ <code>object</code>
 loads central properties from config file
 
 **Kind**: static method of [<code>config</code>](#config)  
@@ -4865,7 +4865,7 @@ loads central properties from config file
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [silent] | <code>boolean</code> | omit throwing errors and print messages; assuming not silent if not set |
+| [skipChecks] | <code>boolean</code> | omit throwing errors and print messages |
 
 <a name="config.checkProperties"></a>
 
