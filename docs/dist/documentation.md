@@ -132,6 +132,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Cli">Cli</a></dt>
 <dd><p>CLI helper class</p>
 </dd>
+<dt><a href="#config">config</a></dt>
+<dd><p>Central class for loading and validating properties from config and auth</p>
+</dd>
 <dt><a href="#DevOps">DevOps</a></dt>
 <dd><p>DevOps helper class</p>
 </dd>
@@ -466,8 +469,8 @@ main class
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.retrieve(businessUnit, [selectedTypesArr], [keys], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.initProject([credentialsName], [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.initProject([credentialName], [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.findBUs(credentialName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(businessUnit, type, customerKey)](#Mcdev.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.badKeys(businessUnit)](#Mcdev.badKeys) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -568,7 +571,7 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 
 <a name="Mcdev.initProject"></a>
 
-### Mcdev.initProject([credentialsName], [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.initProject([credentialName], [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
 Creates template file for properties.json
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -576,12 +579,12 @@ Creates template file for properties.json
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [credentialsName] | <code>string</code> | identifying name of the installed package / project |
+| [credentialName] | <code>string</code> | identifying name of the installed package / project |
 | [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Mcdev.findBUs"></a>
 
-### Mcdev.findBUs(credentialsName) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.findBUs(credentialName) ⇒ <code>Promise.&lt;void&gt;</code>
 Refreshes BU names and ID's from MC instance
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -589,7 +592,7 @@ Refreshes BU names and ID's from MC instance
 
 | Param | Type | Description |
 | --- | --- | --- |
-| credentialsName | <code>string</code> | identifying name of the installed package / project |
+| credentialName | <code>string</code> | identifying name of the installed package / project |
 
 <a name="Mcdev.document"></a>
 
@@ -4426,9 +4429,7 @@ CLI entry for SFMC DevTools
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
-    * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>TYPE.Mcdevrc</code>
-    * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
+    * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
@@ -4553,36 +4554,15 @@ helper for retrieve, retrieveAsTemplate and deploy
 
 | Param | Type | Description |
 | --- | --- | --- |
-| selectedType | <code>string</code> | type or type-subtype |
+| selectedType | <code>TYPE.SupportedMetadataTypes</code> | type or type-subtype |
 
-<a name="Util.getDefaultProperties"></a>
-
-### Util.getDefaultProperties() ⇒ <code>TYPE.Mcdevrc</code>
-defines how the properties.json should look like
-used for creating a template and for checking if variables are set
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>TYPE.Mcdevrc</code> - default properties  
 <a name="Util.getRetrieveTypeChoices"></a>
 
-### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;string&gt;</code>
+### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
 helper for getDefaultProperties()
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Array.&lt;string&gt;</code> - type choices  
-<a name="Util.checkProperties"></a>
-
-### Util.checkProperties(properties, [silent]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
-check if the config file is correctly formatted and has values
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code> - file structure ok OR list of fields to be fixed  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
-| [silent] | <code>boolean</code> | set to true for internal use w/o cli output |
-
+**Returns**: <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> - type choices  
 <a name="Util.metadataLogger"></a>
 
 ### Util.metadataLogger(level, type, method, payload, [source]) ⇒ <code>void</code>
@@ -4728,7 +4708,7 @@ Helper that handles retrieval of BU info
 **Kind**: global constant  
 <a name="BusinessUnit.refreshBUProperties"></a>
 
-### BusinessUnit.refreshBUProperties(properties, credentialsName) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### BusinessUnit.refreshBUProperties(properties, credentialName) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Refreshes BU names and ID's from MC instance
 
 **Kind**: static method of [<code>BusinessUnit</code>](#BusinessUnit)  
@@ -4737,7 +4717,7 @@ Refreshes BU names and ID's from MC instance
 | Param | Type | Description |
 | --- | --- | --- |
 | properties | <code>TYPE.Mcdevrc</code> | current properties that have to be refreshed |
-| credentialsName | <code>string</code> | identifying name of the installed package / project |
+| credentialName | <code>string</code> | identifying name of the installed package / project |
 
 <a name="dataStore"></a>
 
@@ -4893,6 +4873,64 @@ this keeps the config automatically upgradable when we add new subtypes or chang
 shows metadata type descriptions
 
 **Kind**: static method of [<code>Cli</code>](#Cli)  
+<a name="config"></a>
+
+## config
+Central class for loading and validating properties from config and auth
+
+**Kind**: global constant  
+
+* [config](#config)
+    * [.getProperties([skipChecks])](#config.getProperties) ⇒ <code>object</code>
+    * [.checkProperties(properties, [skipCredentialValidation])](#config.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
+    * [.getDefaultProperties()](#config.getDefaultProperties) ⇒ <code>TYPE.Mcdevrc</code>
+    * [.getProblems(properties, [defaultProps], [skipCredentialValidation])](#config.getProblems) ⇒ <code>Promise.&lt;{missingFields: Array.&lt;string&gt;, errorMsgs: Array.&lt;string&gt;, solutionSet: Set.&lt;string&gt;}&gt;</code>
+
+<a name="config.getProperties"></a>
+
+### config.getProperties([skipChecks]) ⇒ <code>object</code>
+loads central properties from config file
+
+**Kind**: static method of [<code>config</code>](#config)  
+**Returns**: <code>object</code> - central properties object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [skipChecks] | <code>boolean</code> | omit throwing errors and print messages |
+
+<a name="config.checkProperties"></a>
+
+### config.checkProperties(properties, [skipCredentialValidation]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
+check if the config file is correctly formatted and has values
+
+**Kind**: static method of [<code>config</code>](#config)  
+**Returns**: <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code> - file structure ok OR list of fields to be fixed  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
+| [skipCredentialValidation] | <code>boolean</code> | set to true for internal use w/o cli output |
+
+<a name="config.getDefaultProperties"></a>
+
+### config.getDefaultProperties() ⇒ <code>TYPE.Mcdevrc</code>
+defines how the properties.json should look like
+used for creating a template and for checking if variables are set
+
+**Kind**: static method of [<code>config</code>](#config)  
+**Returns**: <code>TYPE.Mcdevrc</code> - default properties  
+<a name="config.getProblems"></a>
+
+### config.getProblems(properties, [defaultProps], [skipCredentialValidation]) ⇒ <code>Promise.&lt;{missingFields: Array.&lt;string&gt;, errorMsgs: Array.&lt;string&gt;, solutionSet: Set.&lt;string&gt;}&gt;</code>
+**Kind**: static method of [<code>config</code>](#config)  
+**Returns**: <code>Promise.&lt;{missingFields: Array.&lt;string&gt;, errorMsgs: Array.&lt;string&gt;, solutionSet: Set.&lt;string&gt;}&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
+| [defaultProps] | <code>TYPE.Mcdevrc</code> | default properties |
+| [skipCredentialValidation] | <code>boolean</code> | used by init.config.js>fixMcdevConfig() to auto-fix the config file |
+
 <a name="DevOps"></a>
 
 ## DevOps
@@ -4999,7 +5037,6 @@ File extends fs-extra. It adds logger and util methods for file handling
     * [.readFilteredFilename(directory, filename, filetype, [encoding])](#File.readFilteredFilename) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.readDirectories(directory, depth, [includeStem], [_stemLength])](#File.readDirectories) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength])](#File.readDirectoriesSync) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.loadConfigFile([silent])](#File.loadConfigFile) ⇒ <code>TYPE.Mcdevrc</code>
     * [.saveConfigFile(properties)](#File.saveConfigFile) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initPrettier([filetype])](#File.initPrettier) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
@@ -5198,18 +5235,6 @@ TODO - merge with readDirectories. so far the logic is really different
 ```js
 ['deploy/mcdev/bu1']
 ```
-<a name="File.loadConfigFile"></a>
-
-### File.loadConfigFile([silent]) ⇒ <code>TYPE.Mcdevrc</code>
-loads central properties from config file
-
-**Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>TYPE.Mcdevrc</code> - central properties object  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [silent] | <code>boolean</code> | omit throwing errors and print messages; assuming not silent if not set |
-
 <a name="File.saveConfigFile"></a>
 
 ### File.saveConfigFile(properties) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -5256,7 +5281,7 @@ CLI helper class
     * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
 
@@ -5427,15 +5452,15 @@ wrapper around npm dependency & configuration file setup
 
 <a name="Init._getMissingCredentials"></a>
 
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
+### Init.\_getMissingCredentials(properties) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 finds credentials that are set up in config but not in auth file
 
 **Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - list of credential names  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
+| properties | <code>object</code> | javascript object in .mcdevrc.json |
 
 <a name="Init.installDependencies"></a>
 
@@ -5485,7 +5510,7 @@ CLI helper class
     * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
 
@@ -5656,15 +5681,15 @@ wrapper around npm dependency & configuration file setup
 
 <a name="Init._getMissingCredentials"></a>
 
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
+### Init.\_getMissingCredentials(properties) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 finds credentials that are set up in config but not in auth file
 
 **Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - list of credential names  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
+| properties | <code>object</code> | javascript object in .mcdevrc.json |
 
 <a name="Init.installDependencies"></a>
 
@@ -5714,7 +5739,7 @@ CLI helper class
     * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
 
@@ -5885,15 +5910,15 @@ wrapper around npm dependency & configuration file setup
 
 <a name="Init._getMissingCredentials"></a>
 
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
+### Init.\_getMissingCredentials(properties) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 finds credentials that are set up in config but not in auth file
 
 **Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - list of credential names  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
+| properties | <code>object</code> | javascript object in .mcdevrc.json |
 
 <a name="Init.installDependencies"></a>
 
@@ -5943,7 +5968,7 @@ CLI helper class
     * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
 
@@ -6114,15 +6139,15 @@ wrapper around npm dependency & configuration file setup
 
 <a name="Init._getMissingCredentials"></a>
 
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
+### Init.\_getMissingCredentials(properties) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 finds credentials that are set up in config but not in auth file
 
 **Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - list of credential names  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
+| properties | <code>object</code> | javascript object in .mcdevrc.json |
 
 <a name="Init.installDependencies"></a>
 
@@ -6169,9 +6194,7 @@ Util that contains logger and simple util methods
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
-    * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>TYPE.Mcdevrc</code>
-    * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
+    * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
@@ -6296,36 +6319,15 @@ helper for retrieve, retrieveAsTemplate and deploy
 
 | Param | Type | Description |
 | --- | --- | --- |
-| selectedType | <code>string</code> | type or type-subtype |
+| selectedType | <code>TYPE.SupportedMetadataTypes</code> | type or type-subtype |
 
-<a name="Util.getDefaultProperties"></a>
-
-### Util.getDefaultProperties() ⇒ <code>TYPE.Mcdevrc</code>
-defines how the properties.json should look like
-used for creating a template and for checking if variables are set
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>TYPE.Mcdevrc</code> - default properties  
 <a name="Util.getRetrieveTypeChoices"></a>
 
-### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;string&gt;</code>
+### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
 helper for getDefaultProperties()
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Array.&lt;string&gt;</code> - type choices  
-<a name="Util.checkProperties"></a>
-
-### Util.checkProperties(properties, [silent]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
-check if the config file is correctly formatted and has values
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code> - file structure ok OR list of fields to be fixed  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
-| [silent] | <code>boolean</code> | set to true for internal use w/o cli output |
-
+**Returns**: <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> - type choices  
 <a name="Util.metadataLogger"></a>
 
 ### Util.metadataLogger(level, type, method, payload, [source]) ⇒ <code>void</code>
