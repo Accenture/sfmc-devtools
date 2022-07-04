@@ -132,6 +132,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Cli">Cli</a></dt>
 <dd><p>CLI helper class</p>
 </dd>
+<dt><a href="#config">config</a></dt>
+<dd><p>Central class for loading and validating properties from config and auth</p>
+</dd>
 <dt><a href="#DevOps">DevOps</a></dt>
 <dd><p>DevOps helper class</p>
 </dd>
@@ -4439,9 +4442,7 @@ CLI entry for SFMC DevTools
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
-    * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>TYPE.Mcdevrc</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
-    * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
@@ -4568,14 +4569,6 @@ helper for retrieve, retrieveAsTemplate and deploy
 | --- | --- | --- |
 | selectedType | <code>TYPE.SupportedMetadataTypes</code> | type or type-subtype |
 
-<a name="Util.getDefaultProperties"></a>
-
-### Util.getDefaultProperties() ⇒ <code>TYPE.Mcdevrc</code>
-defines how the properties.json should look like
-used for creating a template and for checking if variables are set
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>TYPE.Mcdevrc</code> - default properties  
 <a name="Util.getRetrieveTypeChoices"></a>
 
 ### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
@@ -4583,19 +4576,6 @@ helper for getDefaultProperties()
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> - type choices  
-<a name="Util.checkProperties"></a>
-
-### Util.checkProperties(properties, [silent]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
-check if the config file is correctly formatted and has values
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code> - file structure ok OR list of fields to be fixed  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
-| [silent] | <code>boolean</code> | set to true for internal use w/o cli output |
-
 <a name="Util.metadataLogger"></a>
 
 ### Util.metadataLogger(level, type, method, payload, [source]) ⇒ <code>void</code>
@@ -4906,6 +4886,51 @@ this keeps the config automatically upgradable when we add new subtypes or chang
 shows metadata type descriptions
 
 **Kind**: static method of [<code>Cli</code>](#Cli)  
+<a name="config"></a>
+
+## config
+Central class for loading and validating properties from config and auth
+
+**Kind**: global constant  
+
+* [config](#config)
+    * [.getProperties([silent])](#config.getProperties) ⇒ <code>TYPE.Mcdevrc</code>
+    * [.checkProperties(properties, [silent])](#config.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
+    * [.getDefaultProperties()](#config.getDefaultProperties) ⇒ <code>TYPE.Mcdevrc</code>
+
+<a name="config.getProperties"></a>
+
+### config.getProperties([silent]) ⇒ <code>TYPE.Mcdevrc</code>
+loads central properties from config file
+
+**Kind**: static method of [<code>config</code>](#config)  
+**Returns**: <code>TYPE.Mcdevrc</code> - central properties object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [silent] | <code>boolean</code> | omit throwing errors and print messages; assuming not silent if not set |
+
+<a name="config.checkProperties"></a>
+
+### config.checkProperties(properties, [silent]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
+check if the config file is correctly formatted and has values
+
+**Kind**: static method of [<code>config</code>](#config)  
+**Returns**: <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code> - file structure ok OR list of fields to be fixed  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
+| [silent] | <code>boolean</code> | set to true for internal use w/o cli output |
+
+<a name="config.getDefaultProperties"></a>
+
+### config.getDefaultProperties() ⇒ <code>TYPE.Mcdevrc</code>
+defines how the properties.json should look like
+used for creating a template and for checking if variables are set
+
+**Kind**: static method of [<code>config</code>](#config)  
+**Returns**: <code>TYPE.Mcdevrc</code> - default properties  
 <a name="DevOps"></a>
 
 ## DevOps
@@ -5012,7 +5037,6 @@ File extends fs-extra. It adds logger and util methods for file handling
     * [.readFilteredFilename(directory, filename, filetype, [encoding])](#File.readFilteredFilename) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.readDirectories(directory, depth, [includeStem], [_stemLength])](#File.readDirectories) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength])](#File.readDirectoriesSync) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.loadConfigFile([silent])](#File.loadConfigFile) ⇒ <code>TYPE.Mcdevrc</code>
     * [.saveConfigFile(properties)](#File.saveConfigFile) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initPrettier([filetype])](#File.initPrettier) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
@@ -5211,18 +5235,6 @@ TODO - merge with readDirectories. so far the logic is really different
 ```js
 ['deploy/mcdev/bu1']
 ```
-<a name="File.loadConfigFile"></a>
-
-### File.loadConfigFile([silent]) ⇒ <code>TYPE.Mcdevrc</code>
-loads central properties from config file
-
-**Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>TYPE.Mcdevrc</code> - central properties object  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [silent] | <code>boolean</code> | omit throwing errors and print messages; assuming not silent if not set |
-
 <a name="File.saveConfigFile"></a>
 
 ### File.saveConfigFile(properties) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -6182,9 +6194,7 @@ Util that contains logger and simple util methods
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
-    * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>TYPE.Mcdevrc</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
-    * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
@@ -6311,14 +6321,6 @@ helper for retrieve, retrieveAsTemplate and deploy
 | --- | --- | --- |
 | selectedType | <code>TYPE.SupportedMetadataTypes</code> | type or type-subtype |
 
-<a name="Util.getDefaultProperties"></a>
-
-### Util.getDefaultProperties() ⇒ <code>TYPE.Mcdevrc</code>
-defines how the properties.json should look like
-used for creating a template and for checking if variables are set
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>TYPE.Mcdevrc</code> - default properties  
 <a name="Util.getRetrieveTypeChoices"></a>
 
 ### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
@@ -6326,19 +6328,6 @@ helper for getDefaultProperties()
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> - type choices  
-<a name="Util.checkProperties"></a>
-
-### Util.checkProperties(properties, [silent]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
-check if the config file is correctly formatted and has values
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code> - file structure ok OR list of fields to be fixed  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
-| [silent] | <code>boolean</code> | set to true for internal use w/o cli output |
-
 <a name="Util.metadataLogger"></a>
 
 ### Util.metadataLogger(level, type, method, payload, [source]) ⇒ <code>void</code>
