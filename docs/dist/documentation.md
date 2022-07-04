@@ -4440,7 +4440,7 @@ CLI entry for SFMC DevTools
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>TYPE.Mcdevrc</code>
-    * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
     * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
@@ -4566,7 +4566,7 @@ helper for retrieve, retrieveAsTemplate and deploy
 
 | Param | Type | Description |
 | --- | --- | --- |
-| selectedType | <code>string</code> | type or type-subtype |
+| selectedType | <code>TYPE.SupportedMetadataTypes</code> | type or type-subtype |
 
 <a name="Util.getDefaultProperties"></a>
 
@@ -4578,11 +4578,11 @@ used for creating a template and for checking if variables are set
 **Returns**: <code>TYPE.Mcdevrc</code> - default properties  
 <a name="Util.getRetrieveTypeChoices"></a>
 
-### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;string&gt;</code>
+### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
 helper for getDefaultProperties()
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Array.&lt;string&gt;</code> - type choices  
+**Returns**: <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> - type choices  
 <a name="Util.checkProperties"></a>
 
 ### Util.checkProperties(properties, [silent]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
@@ -6183,7 +6183,7 @@ Util that contains logger and simple util methods
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
     * [.getDefaultProperties()](#Util.getDefaultProperties) ⇒ <code>TYPE.Mcdevrc</code>
-    * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
     * [.checkProperties(properties, [silent])](#Util.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
@@ -6309,7 +6309,7 @@ helper for retrieve, retrieveAsTemplate and deploy
 
 | Param | Type | Description |
 | --- | --- | --- |
-| selectedType | <code>string</code> | type or type-subtype |
+| selectedType | <code>TYPE.SupportedMetadataTypes</code> | type or type-subtype |
 
 <a name="Util.getDefaultProperties"></a>
 
@@ -6321,11 +6321,11 @@ used for creating a template and for checking if variables are set
 **Returns**: <code>TYPE.Mcdevrc</code> - default properties  
 <a name="Util.getRetrieveTypeChoices"></a>
 
-### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;string&gt;</code>
+### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
 helper for getDefaultProperties()
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Array.&lt;string&gt;</code> - type choices  
+**Returns**: <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> - type choices  
 <a name="Util.checkProperties"></a>
 
 ### Util.checkProperties(properties, [silent]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
