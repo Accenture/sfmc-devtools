@@ -2961,6 +2961,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.preDeployTasks(metadata, deployDir, buObject)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
     * [.create(metadata, deployDir)](#MetadataType.create) ⇒ <code>void</code>
     * [.update(metadata, [metadataBefore])](#MetadataType.update) ⇒ <code>void</code>
+    * [.hasChanged(cachedVersion, metadata, [fieldName])](#MetadataType.hasChanged) ⇒ <code>boolean</code>
+    * [.hasChangedGeneric(cachedVersion, metadata, [fieldName], [silent])](#MetadataType.hasChangedGeneric) ⇒ <code>boolean</code>
     * [.upsert(metadata, deployDir, [buObject])](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise</code>
     * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise</code>
@@ -3184,6 +3186,35 @@ Abstract update method that needs to be implemented in child metadata type
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
 | [metadataBefore] | <code>TYPE.MetadataTypeItem</code> | metadata mapped by their keyField |
+
+<a name="MetadataType.hasChanged"></a>
+
+### MetadataType.hasChanged(cachedVersion, metadata, [fieldName]) ⇒ <code>boolean</code>
+test if metadata was actually changed or not to potentially skip it during deployment
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>boolean</code> - true if metadata was changed  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cachedVersion | <code>TYPE.MetadataTypeItem</code> | cached version from the server |
+| metadata | <code>TYPE.MetadataTypeItem</code> | item to upload |
+| [fieldName] | <code>string</code> | optional field name to use for identifying the record in logs |
+
+<a name="MetadataType.hasChangedGeneric"></a>
+
+### MetadataType.hasChangedGeneric(cachedVersion, metadata, [fieldName], [silent]) ⇒ <code>boolean</code>
+test if metadata was actually changed or not to potentially skip it during deployment
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>boolean</code> - true on first identified deviation or false if none are found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cachedVersion | <code>TYPE.MetadataTypeItem</code> | cached version from the server |
+| metadata | <code>TYPE.MetadataTypeItem</code> | item to upload |
+| [fieldName] | <code>string</code> | optional field name to use for identifying the record in logs |
+| [silent] | <code>boolean</code> | optionally suppress logging |
 
 <a name="MetadataType.upsert"></a>
 
@@ -6823,10 +6854,10 @@ signals what to insert automatically for things usually asked via wizard
 
 | Name | Type | Description |
 | --- | --- | --- |
-| info | <code>function</code> | print info message |
-| warn | <code>function</code> | print warning message |
-| verbose | <code>function</code> | additional messages that are not important |
-| debug | <code>function</code> | print debug message |
-| error | <code>function</code> | print error message |
-| errorStack | <code>function</code> | print error with trace message |
+| info | <code>function</code> | (msg) print info message |
+| warn | <code>function</code> | (msg) print warning message |
+| verbose | <code>function</code> | (msg) additional messages that are not important |
+| debug | <code>function</code> | (msg) print debug message |
+| error | <code>function</code> | (msg) print error message |
+| errorStack | <code>function</code> | (ex, msg) print error with trace message |
 
