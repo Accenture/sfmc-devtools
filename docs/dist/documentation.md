@@ -4881,13 +4881,13 @@ Central class for loading and validating properties from config and auth
 **Kind**: global constant  
 
 * [config](#config)
-    * [.loadConfigFile([silent])](#config.loadConfigFile) ⇒ <code>TYPE.Mcdevrc</code>
+    * [.getProperties([silent])](#config.getProperties) ⇒ <code>TYPE.Mcdevrc</code>
     * [.checkProperties(properties, [silent])](#config.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
     * [.getDefaultProperties()](#config.getDefaultProperties) ⇒ <code>TYPE.Mcdevrc</code>
 
-<a name="config.loadConfigFile"></a>
+<a name="config.getProperties"></a>
 
-### config.loadConfigFile([silent]) ⇒ <code>TYPE.Mcdevrc</code>
+### config.getProperties([silent]) ⇒ <code>TYPE.Mcdevrc</code>
 loads central properties from config file
 
 **Kind**: static method of [<code>config</code>](#config)  
