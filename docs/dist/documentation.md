@@ -4437,8 +4437,6 @@ CLI entry for SFMC DevTools
     * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
-    * [.isObjectChanged(oldItem, newItem, prop)](#Util.isObjectChanged) ⇒ <code>boolean</code>
-    * [.arrayEquals(arrayA, arrayB)](#Util.arrayEquals) ⇒ <code>boolean</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -4691,33 +4689,6 @@ configures what is displayed in the console
 | [argv.silent] | <code>boolean</code> | only errors printed to CLI |
 | [argv.verbose] | <code>boolean</code> | chatty user CLI output |
 | [argv.debug] | <code>boolean</code> | enables developer output & features |
-
-<a name="Util.isObjectChanged"></a>
-
-### Util.isObjectChanged(oldItem, newItem, prop) ⇒ <code>boolean</code>
-helper for hasChangedGeneric
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> - true if property has changed  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| oldItem | <code>\*</code> | old version of an object |
-| newItem | <code>\*</code> | new version of an object |
-| prop | <code>string</code> | property of object to be checked |
-
-<a name="Util.arrayEquals"></a>
-
-### Util.arrayEquals(arrayA, arrayB) ⇒ <code>boolean</code>
-compares to arrays and returns true if they are different
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> - true if arrays are equal  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| arrayA | <code>Array</code> | first array to compare |
-| arrayB | <code>Array</code> | second array to compare |
 
 <a name="MetadataTypeDefinitions"></a>
 
@@ -6209,8 +6180,6 @@ Util that contains logger and simple util methods
     * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
-    * [.isObjectChanged(oldItem, newItem, prop)](#Util.isObjectChanged) ⇒ <code>boolean</code>
-    * [.arrayEquals(arrayA, arrayB)](#Util.arrayEquals) ⇒ <code>boolean</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -6463,33 +6432,6 @@ configures what is displayed in the console
 | [argv.silent] | <code>boolean</code> | only errors printed to CLI |
 | [argv.verbose] | <code>boolean</code> | chatty user CLI output |
 | [argv.debug] | <code>boolean</code> | enables developer output & features |
-
-<a name="Util.isObjectChanged"></a>
-
-### Util.isObjectChanged(oldItem, newItem, prop) ⇒ <code>boolean</code>
-helper for hasChangedGeneric
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> - true if property has changed  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| oldItem | <code>\*</code> | old version of an object |
-| newItem | <code>\*</code> | new version of an object |
-| prop | <code>string</code> | property of object to be checked |
-
-<a name="Util.arrayEquals"></a>
-
-### Util.arrayEquals(arrayA, arrayB) ⇒ <code>boolean</code>
-compares to arrays and returns true if they are different
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> - true if arrays are equal  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| arrayA | <code>Array</code> | first array to compare |
-| arrayB | <code>Array</code> | second array to compare |
 
 <a name="csvToArray"></a>
 
