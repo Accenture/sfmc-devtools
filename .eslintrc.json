@@ -8,7 +8,8 @@
         "eslint:recommended",
         "ssjs",
         "plugin:jsdoc/recommended",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
+        "plugin:unicorn/recommended"
     ],
     "plugins": [],
     "globals": {
@@ -41,6 +42,26 @@
         }
     },
     "rules": {
+        "unicorn/better-regex": "off",
+        "unicorn/catch-error-name": [
+            "error",
+            {
+                "name": "ex"
+            }
+        ],
+        "unicorn/explicit-length-check": "off",
+        "unicorn/no-null": "off",
+        "unicorn/prefer-module": "off",
+        "unicorn/prevent-abbreviations": "off",
+        "unicorn/filename-case": "off",
+        "unicorn/no-hex-escape": "off",
+        "unicorn/no-nested-ternary": "off",
+        "unicorn/no-static-only-class": "off",
+        "unicorn/no-unused-properties": "warn",
+        "unicorn/numeric-separators-style": "off",
+        "unicorn/prefer-set-has": "off",
+        "unicorn/prefer-spread": "off",
+        "unicorn/unicorn/no-lonely-if": "off",
         "arrow-body-style": ["error", "as-needed"],
         "curly": "error",
         "no-console": "error",
