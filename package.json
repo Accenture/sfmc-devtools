@@ -31,7 +31,7 @@
         "debug": "node --nolazy --inspect-brk=9229 lib/cli.js",
         "docs": "jsdoc2md --files lib/**/*.js types/**/*.js > docs/dist/documentation.md",
         "lint:fix": "eslint --fix lib/**/*.js && eslint --fix types/*.js && eslint --fix test/**/*.js",
-        "lint": "run-s -c lint-type lint-lib lint-test",
+        "lint": "run-p -c lint-type lint-lib lint-test",
         "lint-lib": "eslint lib/**/*.js",
         "lint-type": "eslint types/*.js",
         "lint-test": "eslint test/**/*.js",
