@@ -43,7 +43,7 @@
     "rules": {
         "arrow-body-style": ["error", "as-needed"],
         "curly": "error",
-        "no-console": "off",
+        "no-console": "error",
         "jsdoc/check-line-alignment": 2,
         "jsdoc/require-jsdoc": [
             "warn",
