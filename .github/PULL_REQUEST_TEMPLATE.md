@@ -10,6 +10,8 @@ _Please delete options that are not relevant._
 - [ ] Enhanced metadata
 - [ ] Add a CLI option
 - [ ] Add something to the core
+- [ ] Technical debt removed
+- [ ] Dependencies added / updated
 - [ ] Other, please explain:
 
 ## What changes did you make? (Give an overview)
