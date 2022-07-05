@@ -22,6 +22,7 @@ const SDK = require('sfmc-sdk');
  * @typedef {Object.<string, MetadataTypeItem[]>} MultiMetadataTypeList key=Supported MetadataType
  * @typedef {{metadata:MetadataTypeMap,type:SupportedMetadataTypes}} MetadataTypeMapObj
  * @typedef {{metadata:MetadataTypeItem,type:SupportedMetadataTypes}} MetadataTypeItemObj
+ * @typedef {Object.<number, MultiMetadataTypeMap>} Cache key=MID
  */
 
 /**
@@ -98,6 +99,8 @@ const SDK = require('sfmc-sdk');
  * @property {string} CustomerKey key
  * @property {string} Name name
  * @property {string} Description -
+ * @property {string} [CreatedDate] iso format
+ * @property {string} [ModifiedDate] iso format
  * @property {true|false} IsSendable -
  * @property {true|false} IsTestable -
  * @property {object} SendableDataExtensionField -
@@ -262,11 +265,136 @@ const SDK = require('sfmc-sdk');
  */
 
 /**
+ * @typedef {object} FilterDefinitionSOAPItem
+ * @property {string} ObjectID id
+ * @property {string} CustomerKey key
+ * @property {object} [DataFilter] most relevant part that defines the filter
+ * @property {object} DataFilter.LeftOperand -
+ * @property {string} DataFilter.LeftOperand.Property -
+ * @property {string} DataFilter.LeftOperand.SimpleOperator -
+ * @property {string} DataFilter.LeftOperand.Value -
+ * @property {string} DataFilter.LogicalOperator -
+ * @property {object} [DataFilter.RightOperand] -
+ * @property {string} DataFilter.RightOperand.Property -
+ * @property {string} DataFilter.RightOperand.SimpleOperator -
+ * @property {string} DataFilter.RightOperand.Value -
+ * @property {string} Name name
+ * @property {string} Description -
+ * @property {string} [ObjectState] returned from SOAP API; used to return error messages
+ * @typedef {Object.<string, FilterDefinitionSOAPItem>} FilterDefinitionSOAPItemMap
+ */
+/**
+ * /automation/v1/filterdefinitions/<id> (not used)
+ *
+ * @typedef {object} AutomationFilterDefinitionItem
+ * @property {string} id object id
+ * @property {string} key external key
+ * @property {string} createdDate -
+ * @property {number} createdBy user id
+ * @property {string} createdName -
+ * @property {string} [description] (omitted by API if empty)
+ * @property {string} modifiedDate -
+ * @property {number} modifiedBy user id
+ * @property {string} modifiedName -
+ * @property {string} name name
+ * @property {string} categoryId folder id
+ * @property {string} filterDefinitionXml from REST API defines the filter in XML form
+ * @property {1|2} derivedFromType 1:list/profile attributes/measures, 2: dataExtension
+ * @property {boolean} isSendable ?
+ * @property {object} [soap__DataFilter] copied from SOAP API, defines the filter in readable form
+ * @property {object} soap__DataFilter.LeftOperand -
+ * @property {string} soap__DataFilter.LeftOperand.Property -
+ * @property {string} soap__DataFilter.LeftOperand.SimpleOperator -
+ * @property {string} soap__DataFilter.LeftOperand.Value -
+ * @property {string} soap__DataFilter.LogicalOperator -
+ * @property {object} [soap__DataFilter.RightOperand] -
+ * @property {string} soap__DataFilter.RightOperand.Property -
+ * @property {string} soap__DataFilter.RightOperand.SimpleOperator -
+ * @property {string} soap__DataFilter.RightOperand.Value -
+ */
+/**
+ * /email/v1/filters/filterdefinition/<id>
+ *
+ * @typedef {object} FilterDefinitionItem
+ * @property {string} id object id
+ * @property {string} key external key
+ * @property {string} createdDate date
+ * @property {number} createdBy user id
+ * @property {string} createdName name
+ * @property {string} [description] (omitted by API if empty)
+ * @property {string} lastUpdated date
+ * @property {number} lastUpdatedBy user id
+ * @property {string} lastUpdatedName name
+ * @property {string} name name
+ * @property {string} categoryId folder id
+ * @property {string} filterDefinitionXml from REST API defines the filter in XML form
+ * @property {1|2} derivedFromType 1:list/profile attributes/measures, 2: dataExtension
+ * @property {string} derivedFromObjectId Id of DataExtension - present if derivedFromType=2
+ * @property {'DataExtension'|'SubscriberAttributes'} derivedFromObjectTypeName -
+ * @property {string} [derivedFromObjectName] name of DataExtension
+ * @property {boolean} isSendable ?
+ * @property {object} [soap__DataFilter] copied from SOAP API, defines the filter in readable form
+ * @property {object} soap__DataFilter.LeftOperand -
+ * @property {string} soap__DataFilter.LeftOperand.Property -
+ * @property {string} soap__DataFilter.LeftOperand.SimpleOperator -
+ * @property {string} soap__DataFilter.LeftOperand.Value -
+ * @property {string} soap__DataFilter.LogicalOperator -
+ * @property {object} [soap__DataFilter.RightOperand] -
+ * @property {string} soap__DataFilter.RightOperand.Property -
+ * @property {string} soap__DataFilter.RightOperand.SimpleOperator -
+ * @property {string} soap__DataFilter.RightOperand.Value -
+ * @typedef {Object.<string, FilterDefinitionItem>} FilterDefinitionMap
+ */
+
+/**
  * @typedef {object} AuthObject
  * @property {string} client_id client_id client_id for sfmc-sdk auth
  * @property {string} client_secret client_secret for sfmc-sdk auth
  * @property {number} account_id mid of business unit to auth against
  * @property {string} auth_url authentication base url
+ */
+
+/**
+ * @typedef {object} SoapRequestParams
+ * @property {string} [continueRequest] request id
+ * @property {object} [options] additional options (CallsInConversation, Client, ConversationID, Priority, RequestType, SaveOptions, ScheduledTime, SendResponseTo, SequenceCode)
+ * @property {*} clientIDs ?
+ * @property {SoapFilter} [filter] simple or complex
+complex
+ * @property {boolean} [QueryAllAccounts] all BUs or just one
+ * @typedef {object} SoapFilter
+ * @property {string|SoapFilter} leftOperand string for simple or a new filter-object for complex
+ * @property {'AND'|'OR'|'equals'|'notEquals'|'isNull'|'isNotNull'|'greaterThan'|'lessThan'|'greaterThanOrEqual'|'lessThanOrEqual'|'between'|'IN'|'like'} operator various options
+ * @property {string|number|boolean|Array|SoapFilter} [rightOperand] string for simple or a new filter-object for complex; omit for isNull and isNotNull
+ */
+
+/**
+ * @typedef {object} Mcdevrc
+ * @property {object} credentials list of credentials
+ * @property {object} options configure options for mcdev
+ * @property {object} directories configure directories for mcdev to read/write to
+ * @property {string} directories.businessUnits "businessUnits/"
+ * @property {string} directories.deploy "deploy/"
+ * @property {string} directories.docs "docs/"
+ * @property {string} directories.retrieve "retrieve/"
+ * @property {string} directories.template "template/"
+ * @property {string} directories.templateBuilds ["retrieve/", "deploy/"]
+ * @property {Object.<string, object>} markets templating variables grouped by markets
+ * @property {object} marketList combination of markets and BUs for streamlined deployments
+ * @property {object} metaDataTypes templating variables grouped by markets
+ * @property {string[]} metaDataTypes.retrieve define what types shall be downloaded by default during retrieve
+ * @property {string[]} metaDataTypes.documentOnRetrieve which types should be parsed & documented after retrieve
+ * @property {string} version mcdev version that last updated the config file
+ */
+
+/**
+ * @typedef {object} Logger
+ * @property {Function} info (msg) print info message
+ * @property {Function} warn (msg) print warning message
+ * @property {Function} verbose (msg) additional messages that are not important
+ * @property {Function} debug (msg) print debug message
+ * @property {Function} error (msg) print error message
+ * @property {Function} errorStack (ex, msg) print error with trace message
  */
 
 module.exports = {};

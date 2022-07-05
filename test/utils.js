@@ -1,5 +1,5 @@
 const File = require('../lib/util/file');
-const path = require('path');
+const path = require('node:path');
 const axios = require('axios');
 const MockAdapter = require('axios-mock-adapter');
 const auth = require('../lib/util/auth');
