@@ -1,5 +1,5 @@
 const fs = require('fs-extra');
-const path = require('path');
+const path = require('node:path');
 const { XMLParser } = require('fast-xml-parser');
 const parser = new XMLParser();
 const attributeParser = new XMLParser({ ignoreAttributes: false });
@@ -12,7 +12,7 @@ const attributeParser = new XMLParser({ ignoreAttributes: false });
  * @returns {string} relevant metadata stringified
  */
 exports.loadSOAPRecords = async (mcdevAction, type, mid) => {
-    type = type[0].toLowerCase() + type.substring(1);
+    type = type[0].toLowerCase() + type.slice(1);
     const testPath = path.join(
         'test',
         'resources',
@@ -20,15 +20,13 @@ exports.loadSOAPRecords = async (mcdevAction, type, mid) => {
         type,
         mcdevAction + '-response.xml'
     );
-    if (await fs.pathExists(testPath)) {
-        return fs.readFile(testPath, {
-            encoding: 'utf8',
-        });
-    } else {
-        return fs.readFile(path.join('test', 'resources', mcdevAction + '-response.xml'), {
-            encoding: 'utf8',
-        });
-    }
+    return (await fs.pathExists(testPath))
+        ? fs.readFile(testPath, {
+              encoding: 'utf8',
+          })
+        : fs.readFile(path.join('test', 'resources', mcdevAction + '-response.xml'), {
+              encoding: 'utf8',
+          });
 };
 /**
  * based on request, respond with different soap data
@@ -41,26 +39,37 @@ exports.handleSOAPRequest = async (config) => {
     const fullObj = attributeParser.parse(config.data);
     let responseXML;
 
-    if (config.headers.SOAPAction === 'Retrieve') {
-        responseXML = await this.loadSOAPRecords(
-            config.headers.SOAPAction.toLocaleLowerCase(),
-            jObj.Envelope.Body.RetrieveRequestMsg.RetrieveRequest.ObjectType,
-            jObj.Envelope.Header.fueloauth
-        );
-    } else if (config.headers.SOAPAction === 'Create') {
-        responseXML = await this.loadSOAPRecords(
-            config.headers.SOAPAction.toLocaleLowerCase(),
-            fullObj.Envelope.Body.CreateRequest.Objects['@_xsi:type'],
-            jObj.Envelope.Header.fueloauth
-        );
-    } else if (config.headers.SOAPAction === 'Update') {
-        responseXML = await this.loadSOAPRecords(
-            config.headers.SOAPAction.toLocaleLowerCase(),
-            fullObj.Envelope.Body.UpdateRequest.Objects['@_xsi:type'],
-            jObj.Envelope.Header.fueloauth
-        );
-    } else {
-        throw Error('This SOAP Action is not supported by test handler');
+    switch (config.headers.SOAPAction) {
+        case 'Retrieve': {
+            responseXML = await this.loadSOAPRecords(
+                config.headers.SOAPAction.toLocaleLowerCase(),
+                jObj.Envelope.Body.RetrieveRequestMsg.RetrieveRequest.ObjectType,
+                jObj.Envelope.Header.fueloauth
+            );
+
+            break;
+        }
+        case 'Create': {
+            responseXML = await this.loadSOAPRecords(
+                config.headers.SOAPAction.toLocaleLowerCase(),
+                fullObj.Envelope.Body.CreateRequest.Objects['@_xsi:type'],
+                jObj.Envelope.Header.fueloauth
+            );
+
+            break;
+        }
+        case 'Update': {
+            responseXML = await this.loadSOAPRecords(
+                config.headers.SOAPAction.toLocaleLowerCase(),
+                fullObj.Envelope.Body.UpdateRequest.Objects['@_xsi:type'],
+                jObj.Envelope.Header.fueloauth
+            );
+
+            break;
+        }
+        default: {
+            throw new Error('This SOAP Action is not supported by test handler');
+        }
     }
 
     return [200, responseXML];
@@ -121,7 +130,7 @@ exports.handleRESTRequest = async (config) => {
                 }),
             ];
         }
-    } catch (ex) {
+    } catch {
         return [500, {}];
     }
 };
