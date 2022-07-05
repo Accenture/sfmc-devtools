@@ -2948,7 +2948,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 
 * [MetadataType](#MetadataType)
     * [.client](#MetadataType.client) : <code>TYPE.SDK</code>
-    * [.properties](#MetadataType.properties) : <code>object</code>
+    * [.properties](#MetadataType.properties) : <code>TYPE.Mcdevrc</code>
     * [.subType](#MetadataType.subType) : <code>string</code>
     * [.buObject](#MetadataType.buObject) : <code>TYPE.BuObject</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType.getJsonFromFS) ⇒ <code>TYPE.MetadataTypeMap</code>
@@ -3003,7 +3003,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 **Kind**: static property of [<code>MetadataType</code>](#MetadataType)  
 <a name="MetadataType.properties"></a>
 
-### MetadataType.properties : <code>object</code>
+### MetadataType.properties : <code>TYPE.Mcdevrc</code>
 **Kind**: static property of [<code>MetadataType</code>](#MetadataType)  
 <a name="MetadataType.subType"></a>
 
