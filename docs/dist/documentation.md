@@ -4894,17 +4894,17 @@ Central class for loading and validating properties from config and auth
 **Kind**: global constant  
 
 * [config](#config)
-    * [.getProperties([silent])](#config.getProperties) ⇒ <code>TYPE.Mcdevrc</code>
+    * [.getProperties([silent])](#config.getProperties) ⇒ <code>Promise.&lt;TYPE.Mcdevrc&gt;</code>
     * [.checkProperties(properties, [silent])](#config.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
-    * [.getDefaultProperties()](#config.getDefaultProperties) ⇒ <code>TYPE.Mcdevrc</code>
+    * [.getDefaultProperties()](#config.getDefaultProperties) ⇒ <code>Promise.&lt;TYPE.Mcdevrc&gt;</code>
 
 <a name="config.getProperties"></a>
 
-### config.getProperties([silent]) ⇒ <code>TYPE.Mcdevrc</code>
+### config.getProperties([silent]) ⇒ <code>Promise.&lt;TYPE.Mcdevrc&gt;</code>
 loads central properties from config file
 
 **Kind**: static method of [<code>config</code>](#config)  
-**Returns**: <code>TYPE.Mcdevrc</code> - central properties object  
+**Returns**: <code>Promise.&lt;TYPE.Mcdevrc&gt;</code> - central properties object  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4925,12 +4925,12 @@ check if the config file is correctly formatted and has values
 
 <a name="config.getDefaultProperties"></a>
 
-### config.getDefaultProperties() ⇒ <code>TYPE.Mcdevrc</code>
+### config.getDefaultProperties() ⇒ <code>Promise.&lt;TYPE.Mcdevrc&gt;</code>
 defines how the properties.json should look like
 used for creating a template and for checking if variables are set
 
 **Kind**: static method of [<code>config</code>](#config)  
-**Returns**: <code>TYPE.Mcdevrc</code> - default properties  
+**Returns**: <code>Promise.&lt;TYPE.Mcdevrc&gt;</code> - default properties  
 <a name="DevOps"></a>
 
 ## DevOps
