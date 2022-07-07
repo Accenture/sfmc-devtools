@@ -5,11 +5,13 @@
 _Please delete options that are not relevant._
 
 - [ ] Documentation update
-- [ ] Bug fix
+- [ ] Bugfix
 - [ ] New metadata support
 - [ ] Enhanced metadata
 - [ ] Add a CLI option
 - [ ] Add something to the core
+- [ ] Technical debt removed
+- [ ] Dependencies added / updated
 - [ ] Other, please explain:
 
 ## What changes did you make? (Give an overview)
@@ -23,8 +25,8 @@ _Please delete options that are not relevant._
 ## Checklist
 
 - [ ] I have performed a self-review of my own code
+- [ ] ran `npm run test` to with 0 tests failing
 - [ ] I have commented my code, particularly in hard-to-understand areas
 - [ ] ESLint & Prettier are not outputting errors or warnings
 - [ ] README.md updated (if applicable)
-- [ ] CHANGELOG.md updated
-- [ ] ran `npm run docs` to update developer docs
+- [ ] Release Notes updated

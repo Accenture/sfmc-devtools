@@ -1,0 +1,67 @@
+{
+    "credentials": {
+        "testInstance": {
+            "eid": 1111111,
+            "businessUnits": {
+                "_ParentBU_": 1111111,
+                "testBU": 9999999
+            }
+        }
+    },
+    "options": {
+        "deployment": {
+            "commitHistory": 10,
+            "sourceTargetMapping": {
+                "deployment-source": "deployment-target"
+            },
+            "targetBranchBuMapping": {
+                "release/*": "MySandbox/QA-DE",
+                "master": ["MyProduction/PROD-DE", "MyProduction/PROD-NL"]
+            }
+        },
+        "documentType": "md",
+        "exclude": {},
+        "include": {},
+        "serverTimeOffset": -6,
+        "documentStandardRoles": false
+    },
+    "directories": {
+        "businessUnits": "businessUnits/",
+        "deploy": "deploy/",
+        "docs": "docs/",
+        "retrieve": "retrieve/",
+        "template": "template/",
+        "templateBuilds": ["retrieve/", "deploy/"]
+    },
+    "markets": {
+        "testMarket": {
+            "mid": "9999999",
+            "buName": "testBU",
+            "sharedFolder": "/Shared Data Extensions/test",
+            "suffix": "_test",
+            "countryCodeIn": "'test'"
+        }
+    },
+    "marketList": {},
+    "metaDataTypes": {
+        "documentOnRetrieve": ["accountUser", "automation", "dataExtension", "role"],
+        "retrieve": [
+            "asset",
+            "automation",
+            "dataExtension",
+            "dataExtract",
+            "emailSendDefinition",
+            "fileTransfer",
+            "ftpLocation",
+            "importFile",
+            "list",
+            "mobileCode",
+            "mobileKeyword",
+            "query",
+            "role",
+            "script",
+            "triggeredSendDefinition"
+        ]
+    },
+    "version": "4.0.0"
+}

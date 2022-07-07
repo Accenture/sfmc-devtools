@@ -1,0 +1,24 @@
+{
+    "count": 1,
+    "page": 1,
+    "pageSize": 50,
+    "items": [
+        {
+            "queryDefinitionId": "549f0568-607c-4940-afef-437965094dat",
+            "name": "testExistingQuery",
+            "key": "testExistingQuery",
+            "description": "",
+            "queryText": "SELECT\n    SubscriberKey as testField\nFROM\n    _Subscribers ",
+            "targetName": "childBU_dataextension_test",
+            "targetKey": "childBU_dataextension_test",
+            "targetId": "30400c03-0ec4-ec11-b83c-48df37d1de8a",
+            "targetDescription": "",
+            "createdDate": "2022-04-26T15:21:16.453",
+            "modifiedDate": "2022-04-26T16:02:44.01",
+            "targetUpdateTypeId": 0,
+            "targetUpdateTypeName": "Overwrite",
+            "categoryId": 999,
+            "isFrozen": false
+        }
+    ]
+}

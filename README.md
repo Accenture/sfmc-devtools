@@ -2,7 +2,12 @@
 
 <a id="markdown-accenture-sfmc-devtools" name="accenture-sfmc-devtools"></a>
 
-[![NPM](https://nodei.co/npm/mcdev.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/mcdev)
+[![view on npm](https://badgen.net/github/release/Accenture/sfmc-devtools)](https://www.npmjs.org/package/mcdev)
+[![view on npm](https://badgen.net/npm/node/mcdev)](https://www.npmjs.org/package/mcdev)
+[![license](https://badgen.net/npm/license/mcdev)](https://www.npmjs.org/package/mcdev)
+[![npm module downloads](https://badgen.net/npm/dt/mcdev)](https://www.npmjs.org/package/mcdev)
+[![GitHub closed issues](https://badgen.net/github/closed-issues/Accenture/sfmc-devtools)](https://github.com/Accenture/sfmc-devtools/issues?q=is%3Aissue+is%3Aclosed)
+[![GitHub releases](https://badgen.net/github/releases/Accenture/sfmc-devtools)](https://github.com/Accenture/sfmc-devtools/releases)
 
 Accenture Salesforce Marketing Cloud DevTools (mcdev) is a rapid deployment/rollout, backup and development tool for Salesforce Marketing Cloud. It allows you to retrieve and deploy configuration and code across Business Units and instances.
 
@@ -40,9 +45,10 @@ Accenture Salesforce Marketing Cloud DevTools (mcdev) is a rapid deployment/roll
     - [6.2.2. deploy](#622-deploy)
     - [6.2.3. delete](#623-delete)
     - [6.2.4. retrieveAsTemplate](#624-retrieveastemplate)
-    - [6.2.5. buildDefinition](#625-builddefinition)
-    - [6.2.6. buildDefinitionBulk](#626-builddefinitionbulk)
-    - [6.2.7. createDeltaPkg](#627-createdeltapkg)
+    - [6.2.5. buildTemplate](#625-buildtemplate)
+    - [6.2.6. buildDefinition](#626-builddefinition)
+    - [6.2.7. buildDefinitionBulk](#627-builddefinitionbulk)
+    - [6.2.8. createDeltaPkg](#628-createdeltapkg)
 - [7. Advanced Configuration](#7-advanced-configuration)
   - [7.1. Config Options](#71-config-options)
   - [7.2. Metadata specific settings & options](#72-metadata-specific-settings--options)
@@ -117,7 +123,7 @@ If you experience issues installing Accenture SFMC DevTools, please check out th
 1. Install Accenture SFMC DevTools by running `npm install -g mcdev` (prefix with `sudo` on MacOS)
    - If you get an error, please see the below troubleshooting section.
 
-When completed you will see `+ mcdev@3.0.0` printed to your screen (or the current version of it respectively).
+When completed you will see `+ mcdev@3.2.0` printed to your screen (or the current version of it respectively).
 
 > **_Side note for proud nerds_:**
 >
@@ -140,14 +146,14 @@ After the successful installation, you will now need to setup the connection to 
    5. Make sure you grant all available rights.
    6. Go to the access tab and grant it access to all Business Units that you want to use it for, but ensure that the Parent/Global Business Unit is among these.
       - _Why?_ Shared Data Extensions, roles, users, Business Unit info and some other metadata is internally stored solely on the parent Business Unit and hence can only be retrieved and updated via that BU.
-   7. Note down _Client Id_, _Client Secret_ and _Authentication Base URI_.
+   7. Note down _EID_ (Parent MID),  _Client Id_, _Client Secret_ and _Authentication Base URI_.
 2. In your project folder
    1. Open a CLI in your project folder (e.g. `C:\repos\MyProject\` on Windows or `~/repos/MyProject/` on Mac)
    2. Run `mcdev init` to start the interactive setup wizard.
       1. If not found yet, default configuration files will be copied into your project folder, copied by initializing an npm project and a local Git repository.
       2. The wizard will ask you to name your credential. The name you choose here will be used by all team members because the config is shared via Git.
          > Being specific here reduces the chance of deploying to the wrong server (instance) in stressful situations. We suggest you use something like `ClientName`, or `ClientName-ProjectName` if you have multiple projects with the same client. In case your project uses multiples instances you might like to use something like `Client-ProjectName-Sandbox` and `Client-ProjectName-PROD`.
-      3. It will then continue to ask for the client ID, client secret and Authentication Base URI.
+      3. It will then continue to ask for the EID (Parent MID), client ID, client secret and Authentication Base URI.
       4. The credentials will be automatically tested & your list of BUs downloaded until finally the central configuration file `.mcdevrc.json` gets created in your project folder.
       5. Last step is to download an initial backup and commit it into git. No worries - the wizard does that for you!
    3. If this is the first time you set up Accenture SFMC DevTools or you recently upgraded Accenture SFMC DevTools, please restart VS Code now! A pop-up will likely appear in the lower right corner prompting you to install recommended extensions.
@@ -166,13 +172,13 @@ After the successful installation, you will now need to setup the connection to 
 If Accenture SFMC DevTools was already used to set up the project by somebody in your team, including all of the steps in the above chapter [Initial project configuration](#initial-project-setup), then basically you are in luck. Things are much faster from here on:
 
 1. Make sure you went through the chapters [Pre-requisites](#pre-requisites) and [Install Accenture SFMC DevTools](#install-mcdev). Do skip [Initial project configuration](#initial-project-setup)!
-2. Acquire the URL to your Git repo and Clone it to your computer. It should end on `.git`. Also ask your team lead for `Client ID`, `Client Secret` and the `Authentication Base URI`. You will need this later.
+2. Acquire the URL to your Git repo and Clone it to your computer. It should end on `.git`. Also ask your team lead for `EID (Parent MID)`, `Client ID`, `Client Secret` and the `Authentication Base URI`. You will need this later.
    > We recommend you create a folder like `C:\repos\` and clone the repo for your current project into that. By default, the repo name will be suggested as a sub-folder name which you should keep in place. That way you will always have one folder in which all your projects can be found in with their respective sub-folders.
 3. Open your main repo folder (e.g. `C:\repos\`) in the CLI of your choice (e.g. PowerShell on Windows)
 4. now execute `git clone YOUR-REPO-URL`. This will create a sub-folder with the name of the repo and download everything for you into it (e.g. `C:\repos\YOUR-REPO\`)
 5. Still in the command prompt, execute `cd YOUR-REPO`. This will switch your current folder (visible before the command prompt) to the new repo folder (`C:\repos\YOUR-REPO\`).
 6. Assuming you installed Accenture SFMC DevTools globally (recommended!), now execute `mcdev init`.
-7. At this point the system will recognize the previously set up project and ask you for `Client ID`, `Client Secret` and the `Authentication Base URI`.
+7. At this point the system will recognize the previously set up project and ask you for `EID (Parent MID)`, `Client ID`, `Client Secret` and the `Authentication Base URI`.
 8. Done.
 
 ### 2.5. Recommended additional installs
@@ -269,10 +275,10 @@ npm install -g accenture/sfmc-devtools#develop
 **Install specific version (using a version tag on npm):**
 
 ```bash
-npm install -g mcdev@3.1.0
+npm install -g mcdev@3.2.0
 ```
 
-**Warning**: When you used the above method to install Accenture SFMC DevTools for a specific version or tag, trying to [update Accenture SFMC DevTools](#updating-mcdev) might not download the most recently published official version but instead stay on the version or branch you previously selected (in the above examples: develop, 3.1.0)!
+**Warning**: When you used the above method to install Accenture SFMC DevTools for a specific version or tag, trying to [update Accenture SFMC DevTools](#updating-mcdev) might not download the most recently published official version but instead stay on the version or branch you previously selected (in the above examples: develop, 3.2.0)!
 
 > **Note**: The version is currently _not_ updated on the developer branch until a new release is published. Hence, you will not see a change if you run `mcdev --version`.
 
@@ -391,13 +397,15 @@ The following metadata types are currently supported:
 | Data Extension Template            | `dataExtensionTemplate`   | Yes      | -          | -          | -                    | OOTB Database table schemas used for special cases like Transactional Journeys.                                    |
 | Data Extract Type                  | `dataExtractType`         | Yes      | -          | -          | -                    | Types of Data Extracts enabled for a specific business unit. This normally should not be stored.                   |
 | E-Mail (Classic)                   | `email`                   | Yes      | -          | -          | -                    | **DEPRECATED**: Old way of saving E-Mails; please migrate these to new E-Mail (`Asset: message`).                  |
-| E-Mail Send Definition             | `emailSendDefinition`     | Yes      | Yes        | in backlog | Yes                  | Mainly used in Automations as "Send Email Activity".                                                               |
-| Folder                             | `folder`                  | Yes      | Yes        | in backlog | -                    | Used to structure all kinds of other metadata.                                                                     |
+| E-Mail Send Definition             | `emailSendDefinition`     | Yes      | Yes        | yes (`bt`) | Yes                  | Mainly used in Automations as "Send Email Activity".                                                               |
+| Folder                             | `folder`                  | Yes      | Yes        | yes (`bt`) | -                    | Used to structure all kinds of other metadata.                                                                     |
 | FTPLocation                        | `ftpLocation`             | Yes      | -          | -          | Yes                  | A File Location which can be used for export or import of files to/from Marketing Cloud.                           |
 | Journey                            | `interaction`             | Yes      | in backlog | in backlog | -                    | Journey from Builder (internally called "Interaction").                                                            |
-| Journey: Entry Event Definition    | `eventDefinition`         | Yes      | Yes        | in backlog | -                    | Used in Journeys (Interactions) to define Entry Events.                                                            |
+| Journey: Entry Event Definition    | `eventDefinition`         | Yes      | Yes        | Yes        | -                    | Used in Journeys (Interactions) to define Entry Events.                                                            |
 | List                               | `list`                    | Yes      | in backlog | -          | Yes                  | Old way of storing data. Still used for central Email Subscriber DB.                                               |
-| Role                               | `role`                    | Yes      | Yes        | -          | Yes                  | User Roles define groups that are used to grant users access to SFMC systems.                                      |
+| Mobile Connect Code                | `mobileCode`              | Yes      | No         | No         | -                    | Mobile Connect Shore or Long Codes used for sending. First 50 per BU are retrieved                                 |
+| Mobile Connect Keyword             | `mobileKeyword`           | Yes      | Yes        | Yes        | -                    | Mobile Connect keywords configured within the Business UNit. First 50 per BU are retrieved                         |
+| Role                               | `role`                    | Yes      | Yes        | yes (`bt`)          | Yes                  | User Roles define groups that are used to grant users access to SFMC systems.                                      |
 | Triggered Send                     | `triggeredSendDefinition` | Yes      | Yes        | -          | Yes                  | **DEPRECATED**: Sends emails via API or DataExtension Event.                                                       |
 | User                               | `accountUser`             | Yes      | in backlog | -          | -                    | Users and Installed Packages including their assigned Roles, BUs and personal permissions                          |
 
@@ -457,7 +465,7 @@ _Example - update credentials:_
 mcdev init yourCredentialName
 ```
 
-The interactive setup will ask you for a `Client ID` and `Client Secret` of an enhanced installed package (default since August 2019). It also asks for the `Authentication Base Uri`. Each installed package on a given SFMC instance shares the same tenant sub-domain and always shows you 3 domains (Auth, REST and SOAP).
+The interactive setup will ask you for an `EID (Parent MID)`, `Client ID` and `Client Secret` of an installed package. It also asks for the `Authentication Base Uri`. Each installed package on a given SFMC instance shares the same tenant sub-domain and always shows you 3 domains (Auth, REST and SOAP).
 
 Example url: `https://mcg123abcysykllg-0321cbs8bbt64.auth.marketingcloudapis.com`
 
@@ -466,10 +474,9 @@ Example url: `https://mcg123abcysykllg-0321cbs8bbt64.auth.marketingcloudapis.com
 > You can run this command without the interactive wizard asking questions using the `--skipInteraction` (or short`--yes`/`--y`) flag. In this case, you need to provide a few values in the command:
 >
 > ```bash
-> mcdev init --y.credentialsName "yourCustomCredentialName" --y.clientId "yourClientIdHere" --y.clientSecret "yourClientSecretHere" --y.tenant "yourTenantSubdomainHere" --y.gitRemoteUrl "https://my.git.server.com/myrepo.git"
+> mcdev init --y.credentialsName "yourCustomCredentialName" --y.client_id "yourClientIdHere" --y.client_secret "yourClientSecretHere" --y.auth_url "https://yourTenantSubdomainHere.auth.marketingcloudapis.com/" --y.gitRemoteUrl "https://my.git.server.com/myrepo.git" --y.account_id 00000000
 > ```
 >
-> To get the tenant subdomain, please take the Authentication Base Uri and extract the part after `https://` and before `.auth.marketingcloudapis.com`. In the above example this would therefore be `mcg123abcysykllg-0321cbs8bbt64`.
 
 #### 6.1.2. upgrade
 
@@ -523,18 +530,21 @@ mcdev badKeys MyProject/DEV
 
 <a id="markdown-document" name="document"></a>
 
-_Command:_ `mcdev document <TYPE> <business unit>`
+_Command:_ `mcdev document <business unit> <TYPE>`
 
 _Alias:_ `mcdev doc`
 
-Creates human readable documentation for your metadata. This command is executed by default unless you changed your config manually to set `options.documentOnRetrieve : false`. Therefore, running it manually is typically not required. You can choose to generate **HTML** (`html`) or **Markdown** (`md`) docs via `options.documentType`.
+Creates human readable documentation for your metadata. This command is executed by default for supported types unless you changed your config manually (`metaDataTypes.documentOnRetrieve`). Therefore, running it manually is typically not required. You can choose to generate **HTML** (`html`) or **Markdown** (`md`) docs via `options.documentType`.
 
 The default format is set to `md` as Markdown renders nicely in Git as well as in VSCode's Markdown preview and can be copied from there into Confluence and other applications without losing the formatting.
+
+As standard roles are often not used by projects, we have the optional setting `options.documentStandardRoles` which is by default set to false
 
 Currently supported types:
 
 | Name           | CLI Argument    |
 | -------------- | --------------- |
+| Automation     | `automation`    |
 | Data Extension | `dataExtension` |
 | Role           | `role`          |
 | User           | `accountUser`   |
@@ -542,7 +552,7 @@ Currently supported types:
 _Example:_
 
 ```bash
-mcdev document role myServer
+mcdev document myServer role
 ```
 
 #### 6.1.6. selectTypes
@@ -589,7 +599,7 @@ mcdev explainTypes
 
 <a id="markdown-retrieve" name="retrieve"></a>
 
-_Command:_ `mcdev retrieve [business unit] [metadata type]`
+_Command:_ `mcdev retrieve [business unit] [metadata type] [metadata key]`
 
 _Alias:_ `mcdev r`
 
@@ -618,13 +628,28 @@ mcdev retrieve MyProject
 
 **retrieve specific type:**
 
-If you want to retrieve only a certain metadata type, let's say `script`, then pass this type in as a second parameter. The other types will remain untouched and in place, if you've previously retrieved them.
+If you want to retrieve only a certain metadata type, let's say `script`, then pass this type in as a second parameter. The other types will remain untouched and in place, if you've previously retrieved them.<br>Similarly, you can pass in multiple comma-separated types but make sure to put them in double-quotes in order to work on all systems.
 
 _Example:_
 
 ```bash
 mcdev retrieve MyProject/DEV script
+mcdev retrieve MyProject/DEV "script,query,automation"
 ```
+
+**retrieve sepcific type and key:**
+
+If you wish you may also specify exact keys that need to be retrieved, filtering down on whats in your retrieve folder even further. Specified keys apply as a filter for all types you specify. If your naming convention does not allow for such an aggregation then please run seperate commands for each type.
+
+_Example:_
+
+```bash
+mcdev retrieve MyProject/DEV dataExtension "key1"
+mcdev retrieve MyProject/DEV dataExtension "key1,key2"
+mcdev retrieve MyProject/DEV "script,dataExtension,importFile" "key1,key2"
+```
+
+_Note:_ This is not supported by types `discovery` and `folder`.
 
 **retrieve all BUs:**
 
@@ -647,7 +672,7 @@ mcdev retrieve "*"
 
 <a id="markdown-deploy" name="deploy"></a>
 
-_Command:_ `mcdev deploy [business unit] [metadata type]`
+_Command:_ `mcdev deploy [business unit] [metadata type] [metadata key] [deploy from retrieve]`
 
 _Alias:_ `mcdev d`
 
@@ -664,12 +689,37 @@ Similarly to `mcdev retrieve` you can also use the interactive mode to select cr
 
 **deploy sepcific type:**
 
-If you want to deploy only a certain metadata type, let's say `dataExtension`, then pass this type in as a second parameter. If there are other types in the current BU's deploy folder, these will be ignored and hence _not_ uploaded.
+If you want to deploy only a certain metadata type, let's say `dataExtension`, then pass this type in as a second parameter. If there are other types in the current BU's deploy folder, these will be ignored and hence _not_ uploaded.<br>Similarly, you can pass in multiple comma-separated types but make sure to put them in double-quotes in order to work on all systems.
 
 _Example:_
 
 ```bash
 mcdev deploy MyProject/DEV dataExtension
+mcdev deploy MyProject/DEV "script,dataExtension,importFile"
+```
+
+**deploy sepcific type and key:**
+
+If you wish you may also specify exact keys that need to be deployed, filtering down on whats in your deploy folder even further. Specified keys apply as a filter for all types you specify. If your naming convention does not allow for such an aggregation then please run seperate commands for each type.
+
+_Example:_
+
+```bash
+mcdev deploy MyProject/DEV dataExtension "key1"
+mcdev deploy MyProject/DEV dataExtension "key1,key2"
+mcdev deploy MyProject/DEV "script,dataExtension,importFile" "key1,key2"
+```
+
+**deploy from retrieve folder:**
+
+Sometimes it's convenient to deploy right from the retrieve folder when you are using mcdev as a developer tool rather than only for deployments to other BUs. For this scenario we added the 4th parameter. In that case it does not look into `deploy/` but into `retrieve/` to find what it needs to deploy.
+
+_Example:_
+
+```bash
+mcdev deploy MyProject/DEV dataExtension "key1" true
+mcdev deploy MyProject/DEV dataExtension "key1,key2" true
+mcdev deploy MyProject/DEV "script,dataExtension,importFile" "key1,key2" true
 ```
 
 **deploy all BUs:**
@@ -704,11 +754,17 @@ Currently supported types:
 | Name           | CLI Argument    |
 | -------------- | --------------- |
 | Data Extension | `dataExtension` |
+| Data Extension Field | `dataExtensionField` |
+| Email Send Definition | `Email Send Definition` |
+| List | `list` |
+| Triggered Send | `triggeredSendDefinition` |
 
 _Example:_
 
 ```bash
 mcdev delete MyProject/_ParentBU_ dataExtension MyUserTable
+
+mcdev delete MyProject/_ParentBU_ dataExtensionField MyUserTable.MyFieldName
 ```
 
 #### 6.2.4. retrieveAsTemplate
@@ -749,7 +805,45 @@ This will result in the following files being created in your `template/` direct
 - `table2.dataExtension-meta.json`
 - `table3.dataExtension-meta.json`
 
-#### 6.2.5. buildDefinition
+#### 6.2.5. buildTemplate
+
+<a id="markdown-buildtemplate" name="buildtemplate"></a>
+
+_Command:_ `mcdev buildTemplate <business unit> <type> <name> <market>`
+
+_Alias:_ `mcdev bt`
+
+The `bt` command uses previously retrieved metadata on the your local computer and uses your `market` configuration in `.mcdevrc.json` to replace strings with variables. The result is then stored in your `template/` folder. Please note that files stored here will keep their original name, despite this possibly containing market-specific suffixes or similar. Also note, that contrary to the deploy & retrieve folders, you will not see credential- or Business Unit-sub-folders here.
+
+This command is a prerequisite for the `buildDefintion` command. Alternatively though, you can copy-paste retrieved metadata from your `retrieve/` folder to your `template/` folder and update it manually - or even create it from scratch.
+
+> **Note**: Before using this command, you need to configure your markets first! Check out our guide on [Market Configuration](#market-configuration) to understand how to use templating and prepare your market config.
+
+Currently supported types: Check out [Metadata Type Support](#metadata-type-support).
+
+_Example:_
+
+```bash
+mcdev bt MyProject/DEV dataExtension MyUserTable pilotMarketDEV1
+```
+
+This will result in `MyUserTable.dataExtension-meta.json` being created in your `template/` directory:
+
+**buildTemplate for multiple sources:**
+
+You can also create multiple templates with multiple sources at once. Simply specify them in a comma-separated list and put that list in quotes:
+
+```bash
+mcdev bt MyProject/DEV dataExtension "table1,table2,table3" pilotMarketDEV1
+```
+
+This will result in the following files being created in your `template/` directory:
+
+- `table1.dataExtension-meta.json`
+- `table2.dataExtension-meta.json`
+- `table3.dataExtension-meta.json`
+
+#### 6.2.6. buildDefinition
 
 <a id="markdown-builddefinition" name="builddefinition"></a>
 
@@ -790,7 +884,7 @@ This will result in the following files being created in your `retrieve/MyProjec
 - `table2.dataExtension-meta.json`
 - `table3.dataExtension-meta.json`
 
-#### 6.2.6. buildDefinitionBulk
+#### 6.2.7. buildDefinitionBulk
 
 <a id="markdown-builddefinitionbulk" name="builddefinitionbulk"></a>
 
@@ -810,7 +904,7 @@ _Example:_
 mcdev bdb pilotMarketsQA dataExtension MyUserTable
 ```
 
-#### 6.2.7. createDeltaPkg
+#### 6.2.8. createDeltaPkg
 
 <a id="markdown-createdeltapkg" name="createdeltapkg"></a>
 
@@ -973,6 +1067,7 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
       }
     },
     "documentType": "md",
+    "documentStandardRoles": true,
     "exclude": {
       "role": {
         "CustomerKey": ["excludedRoleKey","excludedOtherRoleKey"]
@@ -986,18 +1081,15 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
     "serverTimeOffset": -6
   },
   "directories": {
-    "badKeys": "docs/badKeys/",
-    "businessUnits": "businessUnits/",
-    "dataExtension": "docs/dataExtension/",
-    "deltaPackage": "docs/deltaPackage/",
-    "deploy": "deploy/",
-    "retrieve": "retrieve/",
-    "roles": "docs/roles/",
-    "template": "template/",
-    "templateBuilds": ["retrieve/", "deploy/"]
+        "businessUnits": "businessUnits/",
+        "deploy": "deploy/",
+        "docs": "docs/",
+        "retrieve": "retrieve/",
+        "template": "template/",
+        "templateBuilds": ["retrieve/", "deploy/"]
   },
   "metaDataTypes": {
-    "documentOnRetrieve": ["role", "dataExtension"],
+    "documentOnRetrieve": ["accountUser", "automation", "dataExtension", "role"],
     "retrieve": [...]
   }
 }
@@ -1009,17 +1101,14 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
 | options.deployment.sourceTargetMapping   | `{"deployment-source": "deployment-target"}` | Configuration of 1 or many source-target marketList combos for `mcdev createDeltaPkg`                                       |
 | options.deployment.targetBranchBuMapping | `{"release/*": "...","master": ["..."]}`     | Can be used by CI/CD pipelines to know what BUs shall be deployed to upon a merge into one of the specified branches        |
 | options.documentType                     | 'md'                                         | Defines the format for documentation ('md', 'html', 'both')                                                                 |
+| options.documentStandardRoles            | false                                         | Optionally skip standard role documentation by setting to false                                                         |
 | options.exclude.`type`.`field`           | []                                           | Allows you to filter out metadata on retrieve based on their field values, e.g. CustomerKey (previously `options.filter`)   |
 | options.include.`type`.`field`           | []                                           | Allows you to filter out metadata on retrieve based on their field values, e.g. CustomerKey                                 |
 | options.serverTimeOffset                 | -6                                           | Used to work around quirks in how SFMC handles timezones; For stack4: set to -7 (US Mountain time); others: -6 (US Central) |
-| directories.badKeys                      | 'docs/badKeys/'                              | Where the documentation for bad key-name combos is stored on retrieve                                                       |
 | directories.businessUnits                | 'businessUnits/'                             | Directory to save BU base details in                                                                                        |
-| directories.dataExtension                | 'docs/dataExtension/'                        | Directory for `document dataExtension` output                                                                               |
-| directories.deltaPackage                 | 'docs/deltaPackage/'                         | Where `createDeltaPkg` stores its log                                                                                       |
 | directories.deploy                       | 'deploy/'                                    | Where `deploy` searches for files to deploy                                                                                 |
+| directories.docs                        | 'docs/'                                | Directory for `document` output                                                                                        |
 | directories.retrieve                     | 'retrieve/'                                  | Where `retrieve` stores downloaded files                                                                                    |
-| directories.roles                        | 'docs/roles/'                                | Directory for `document role` output                                                                                        |
-| directories.users                        | 'docs/users/'                                | Directory for `document accountUser` output                                                                                 |
 | directories.template                     | 'template/'                                  | Where `rt` stores downloaded templates & `bd` retrieves them from                                                           |
 | directories.templateBuilds               | ['retrieve/','deploy/']                      | Where `bd` saves final deployment versions in. This can hold multiple directories, e.g. ['retrieve/','deploy/']             |
 | metaDataTypes.documentOnRetrieve         | ['role','dataExtension']                     | automatically executes `document` for selected types                                                                        |
@@ -1420,7 +1509,7 @@ If you use Accenture SFMC DevTools in your team it is recommended to install you
 
 If you do need to install it locally, make sure you don't commit your project's package.json with this change or you might break mcdev for other developers in your team that either didn't clone the Accenture SFMC DevTools repo or stored in a different directory.
 
-To test your new **global** developer setup, run `mcdev --version` in CLI which should return the current version (e.g. `3.0.0`). Then, go into your mcdev repo and update the version with the suffix `-dev`, e.g. to `3.0.0-dev` and then run `mcdev --version` again to verify that your change propagates instantly.
+To test your new **global** developer setup, run `mcdev --version` in CLI which should return the current version (e.g. `3.2.0`). Then, go into your mcdev repo and update the version with the suffix `-dev`, e.g. to `3.2.0-dev` and then run `mcdev --version` again to verify that your change propagates instantly.
 
 <a name="local-install"></a>
 
@@ -1447,7 +1536,7 @@ The following explains how you _could_ install it locally for certain edge cases
 4. Afterwards, install Accenture SFMC DevTools by running `npm install --save-dev mcdev`
    - If you get an error, please see the below troubleshooting section.
 
-When completed you will see `+ mcdev@3.0.0` printed to your screen (or the current version of it respectively).
+When completed you will see `+ mcdev@3.2.0` printed to your screen (or the current version of it respectively).
 
 ### 9.3. NPM Scripts
 
