@@ -6184,7 +6184,7 @@ ensure we have certain default values in our config
 
 * [Timer](#Timer)
     * [.startTimer()](#Timer.startTimer) ⇒ <code>number</code>
-    * [.stopTimer(command)](#Timer.stopTimer)
+    * [.stopTimer(initTime, command)](#Timer.stopTimer)
 
 <a name="Timer.startTimer"></a>
 
@@ -6195,13 +6195,14 @@ calculates the runtime for a function
 **Returns**: <code>number</code> - - actual time in ms  
 <a name="Timer.stopTimer"></a>
 
-### Timer.stopTimer(command)
+### Timer.stopTimer(initTime, command)
 stops the timer and print the ms needed for the command
 
 **Kind**: static method of [<code>Timer</code>](#Timer)  
 
 | Param | Type | Description |
 | --- | --- | --- |
+| initTime | <code>number</code> | value in ms from startTimer() |
 | command | <code>string</code> | command that is being currently timed |
 
 <a name="Util"></a>
