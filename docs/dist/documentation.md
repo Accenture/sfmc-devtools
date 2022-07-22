@@ -153,8 +153,6 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Init">Init</a></dt>
 <dd><p>CLI helper class</p>
 </dd>
-<dt><a href="#Timer">Timer</a></dt>
-<dd></dd>
 <dt><a href="#Util">Util</a></dt>
 <dd><p>Util that contains logger and simple util methods</p>
 </dd>
@@ -4440,6 +4438,8 @@ CLI entry for SFMC DevTools
     * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
     * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
     * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList) ⇒ <code>void</code>
+    * [.startTimer()](#Util.startTimer) ⇒ <code>number</code>
+    * [.stopTimer(initTime, command)](#Util.stopTimer) ⇒ <code>void</code>
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
@@ -4528,6 +4528,25 @@ ensure provided MarketList exists and it's content including markets and BUs che
 | --- | --- | --- |
 | mlName | <code>string</code> | name of marketList |
 | properties | <code>TYPE.Mcdevrc</code> | General configuration to be used in retrieve |
+
+<a name="Util.startTimer"></a>
+
+### Util.startTimer() ⇒ <code>number</code>
+calculates the runtime for a function
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>number</code> - - actual time in ms  
+<a name="Util.stopTimer"></a>
+
+### Util.stopTimer(initTime, command) ⇒ <code>void</code>
+stops the timer and print the ms needed for the command
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| initTime | <code>number</code> | value in ms from startTimer() |
+| command | <code>string</code> | command that is being currently timed |
 
 <a name="Util.signalFatalError"></a>
 
@@ -6177,34 +6196,6 @@ ensure we have certain default values in our config
 | --- | --- | --- |
 | [currentContent] | <code>object</code> | what was read from existing package.json file |
 
-<a name="Timer"></a>
-
-## Timer
-**Kind**: global constant  
-
-* [Timer](#Timer)
-    * [.startTimer()](#Timer.startTimer) ⇒ <code>number</code>
-    * [.stopTimer(initTime, command)](#Timer.stopTimer)
-
-<a name="Timer.startTimer"></a>
-
-### Timer.startTimer() ⇒ <code>number</code>
-calculates the runtime for a function
-
-**Kind**: static method of [<code>Timer</code>](#Timer)  
-**Returns**: <code>number</code> - - actual time in ms  
-<a name="Timer.stopTimer"></a>
-
-### Timer.stopTimer(initTime, command)
-stops the timer and print the ms needed for the command
-
-**Kind**: static method of [<code>Timer</code>](#Timer)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| initTime | <code>number</code> | value in ms from startTimer() |
-| command | <code>string</code> | command that is being currently timed |
-
 <a name="Util"></a>
 
 ## Util
@@ -6220,6 +6211,8 @@ Util that contains logger and simple util methods
     * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
     * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
     * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList) ⇒ <code>void</code>
+    * [.startTimer()](#Util.startTimer) ⇒ <code>number</code>
+    * [.stopTimer(initTime, command)](#Util.stopTimer) ⇒ <code>void</code>
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
@@ -6308,6 +6301,25 @@ ensure provided MarketList exists and it's content including markets and BUs che
 | --- | --- | --- |
 | mlName | <code>string</code> | name of marketList |
 | properties | <code>TYPE.Mcdevrc</code> | General configuration to be used in retrieve |
+
+<a name="Util.startTimer"></a>
+
+### Util.startTimer() ⇒ <code>number</code>
+calculates the runtime for a function
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>number</code> - - actual time in ms  
+<a name="Util.stopTimer"></a>
+
+### Util.stopTimer(initTime, command) ⇒ <code>void</code>
+stops the timer and print the ms needed for the command
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| initTime | <code>number</code> | value in ms from startTimer() |
+| command | <code>string</code> | command that is being currently timed |
 
 <a name="Util.signalFatalError"></a>
 
