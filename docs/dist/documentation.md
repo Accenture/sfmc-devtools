@@ -153,6 +153,8 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Init">Init</a></dt>
 <dd><p>CLI helper class</p>
 </dd>
+<dt><a href="#Timer">Timer</a></dt>
+<dd></dd>
 <dt><a href="#Util">Util</a></dt>
 <dd><p>Util that contains logger and simple util methods</p>
 </dd>
@@ -6174,6 +6176,33 @@ ensure we have certain default values in our config
 | Param | Type | Description |
 | --- | --- | --- |
 | [currentContent] | <code>object</code> | what was read from existing package.json file |
+
+<a name="Timer"></a>
+
+## Timer
+**Kind**: global constant  
+
+* [Timer](#Timer)
+    * [.startTimer()](#Timer.startTimer) ⇒ <code>number</code>
+    * [.stopTimer(command)](#Timer.stopTimer)
+
+<a name="Timer.startTimer"></a>
+
+### Timer.startTimer() ⇒ <code>number</code>
+calculates the runtime for a function
+
+**Kind**: static method of [<code>Timer</code>](#Timer)  
+**Returns**: <code>number</code> - - actual time in ms  
+<a name="Timer.stopTimer"></a>
+
+### Timer.stopTimer(command)
+stops the timer and print the ms needed for the command
+
+**Kind**: static method of [<code>Timer</code>](#Timer)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| command | <code>string</code> | command that is being currently timed |
 
 <a name="Util"></a>
 
