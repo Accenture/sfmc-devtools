@@ -4445,6 +4445,7 @@ CLI entry for SFMC DevTools
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
+    * [.checkPathForCloud(absolutePath)](#Util.checkPathForCloud) ⇒ <code>void</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
@@ -4604,6 +4605,18 @@ key-value pairs (obj)
 | --- | --- | --- |
 | str | <code>string</code> \| <code>object</code> | JSON object or its stringified version, which has values to be replaced |
 | obj | <code>TYPE.TemplateMap</code> | key value object which contains keys to be replaced and values to be replaced with |
+
+<a name="Util.checkPathForCloud"></a>
+
+### Util.checkPathForCloud(absolutePath) ⇒ <code>void</code>
+check if git repo is being saved on a cloud service and warns the user
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>void</code> - throws errors if problems were found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| absolutePath | <code>string</code> | path from root to the project |
 
 <a name="Util.inverseGet"></a>
 
@@ -6197,6 +6210,7 @@ Util that contains logger and simple util methods
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
+    * [.checkPathForCloud(absolutePath)](#Util.checkPathForCloud) ⇒ <code>void</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
@@ -6356,6 +6370,18 @@ key-value pairs (obj)
 | --- | --- | --- |
 | str | <code>string</code> \| <code>object</code> | JSON object or its stringified version, which has values to be replaced |
 | obj | <code>TYPE.TemplateMap</code> | key value object which contains keys to be replaced and values to be replaced with |
+
+<a name="Util.checkPathForCloud"></a>
+
+### Util.checkPathForCloud(absolutePath) ⇒ <code>void</code>
+check if git repo is being saved on a cloud service and warns the user
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>void</code> - throws errors if problems were found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| absolutePath | <code>string</code> | path from root to the project |
 
 <a name="Util.inverseGet"></a>
 
