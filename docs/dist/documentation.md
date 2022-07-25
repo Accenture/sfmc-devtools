@@ -107,6 +107,33 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Retriever">Retriever</a></dt>
 <dd><p>Retrieves metadata from a business unit and saves it to the local filesystem.</p>
 </dd>
+<dt><a href="#Auth">Auth</a></dt>
+<dd></dd>
+<dt><a href="#BusinessUnit">BusinessUnit</a></dt>
+<dd><p>Helper that handles retrieval of BU info</p>
+</dd>
+<dt><a href="#Cli">Cli</a></dt>
+<dd><p>CLI helper class</p>
+</dd>
+<dt><a href="#config">config</a></dt>
+<dd><p>Central class for loading and validating properties from config and auth</p>
+</dd>
+<dt><a href="#DevOps">DevOps</a></dt>
+<dd></dd>
+<dt><a href="#File">File</a></dt>
+<dd><p>File extends fs-extra. It adds logger and util methods for file handling</p>
+</dd>
+<dt><a href="#Init">Init</a></dt>
+<dd></dd>
+<dt><a href="#Init">Init</a></dt>
+<dd></dd>
+<dt><a href="#Init">Init</a></dt>
+<dd></dd>
+<dt><a href="#Init">Init</a></dt>
+<dd></dd>
+<dt><a href="#Util">Util</a></dt>
+<dd><p>Util that contains logger and simple util methods</p>
+</dd>
 </dl>
 
 ## Constants
@@ -124,38 +151,8 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#mcdev">mcdev</a></dt>
 <dd><p>sample file on how to retrieve a simple changelog to use in GUIs or automated processing of any kind</p>
 </dd>
-<dt><a href="#BusinessUnit">BusinessUnit</a></dt>
-<dd><p>Helper that handles retrieval of BU info</p>
-</dd>
 <dt><a href="#dataStore">dataStore</a> : <code>TYPE.Cache</code></dt>
 <dd></dd>
-<dt><a href="#Cli">Cli</a></dt>
-<dd><p>CLI helper class</p>
-</dd>
-<dt><a href="#config">config</a></dt>
-<dd><p>Central class for loading and validating properties from config and auth</p>
-</dd>
-<dt><a href="#DevOps">DevOps</a></dt>
-<dd><p>DevOps helper class</p>
-</dd>
-<dt><a href="#File">File</a></dt>
-<dd><p>File extends fs-extra. It adds logger and util methods for file handling</p>
-</dd>
-<dt><a href="#Init">Init</a></dt>
-<dd><p>CLI helper class</p>
-</dd>
-<dt><a href="#Init">Init</a></dt>
-<dd><p>CLI helper class</p>
-</dd>
-<dt><a href="#Init">Init</a></dt>
-<dd><p>CLI helper class</p>
-</dd>
-<dt><a href="#Init">Init</a></dt>
-<dd><p>CLI helper class</p>
-</dd>
-<dt><a href="#Util">Util</a></dt>
-<dd><p>Util that contains logger and simple util methods</p>
-</dd>
 </dl>
 
 ## Functions
@@ -4423,6 +4420,1751 @@ Retrieve metadata of specified types into local file system and Retriever.metada
 | [templateVariables] | <code>TYPE.TemplateMap</code> | Object of values which can be replaced (in case of templating) |
 | [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
 
+<a name="Auth"></a>
+
+## Auth
+**Kind**: global class  
+
+* [Auth](#Auth)
+    * [.saveCredential(authObject, credential)](#Auth.saveCredential) ⇒ <code>void</code>
+    * [.getSDK(buObject)](#Auth.getSDK) ⇒ [<code>SDK</code>](#SDK)
+    * [.clearSessions()](#Auth.clearSessions) ⇒ <code>void</code>
+
+<a name="Auth.saveCredential"></a>
+
+### Auth.saveCredential(authObject, credential) ⇒ <code>void</code>
+For each business unit, set up base credentials to be used.
+
+**Kind**: static method of [<code>Auth</code>](#Auth)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| authObject | <code>TYPE.AuthObject</code> | details for |
+| credential | <code>string</code> | of the instance |
+
+<a name="Auth.getSDK"></a>
+
+### Auth.getSDK(buObject) ⇒ [<code>SDK</code>](#SDK)
+Returns an SDK instance to be used for API calls
+
+**Kind**: static method of [<code>Auth</code>](#Auth)  
+**Returns**: [<code>SDK</code>](#SDK) - auth object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>TYPE.BuObject</code> | information about current context |
+
+<a name="Auth.clearSessions"></a>
+
+### Auth.clearSessions() ⇒ <code>void</code>
+helper to clear all auth sessions
+
+**Kind**: static method of [<code>Auth</code>](#Auth)  
+<a name="BusinessUnit"></a>
+
+## BusinessUnit
+Helper that handles retrieval of BU info
+
+**Kind**: global class  
+<a name="BusinessUnit.refreshBUProperties"></a>
+
+### BusinessUnit.refreshBUProperties(properties, credentialsName) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Refreshes BU names and ID's from MC instance
+
+**Kind**: static method of [<code>BusinessUnit</code>](#BusinessUnit)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - success of refresh  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | current properties that have to be refreshed |
+| credentialsName | <code>string</code> | identifying name of the installed package / project |
+
+<a name="Cli"></a>
+
+## Cli
+CLI helper class
+
+**Kind**: global class  
+
+* [Cli](#Cli)
+    * [.initMcdevConfig([skipInteraction])](#Cli.initMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.addExtraCredential(properties, [skipInteraction])](#Cli.addExtraCredential) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.updateCredential(properties, credName, [skipInteraction])](#Cli.updateCredential) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.getCredentialObject(properties, target, [isCredentialOnly], [allowAll])](#Cli.getCredentialObject) ⇒ <code>Promise.&lt;TYPE.BuObject&gt;</code>
+    * [._selectBU(properties, [credential], [isCredentialOnly], [allowAll])](#Cli._selectBU) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [._setCredential(properties, [credName], [skipInteraction])](#Cli._setCredential) ⇒ <code>Promise.&lt;(boolean\|string)&gt;</code>
+    * [._askCredentials(properties, [credName])](#Cli._askCredentials) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [.selectTypes(properties, [setTypesArr])](#Cli.selectTypes) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._summarizeSubtypes(responses, type)](#Cli._summarizeSubtypes) ⇒ <code>void</code>
+    * [.explainTypes()](#Cli.explainTypes) ⇒ <code>void</code>
+
+<a name="Cli.initMcdevConfig"></a>
+
+### Cli.initMcdevConfig([skipInteraction]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+used when initially setting up a project.
+loads default config and adds first credential
+
+**Kind**: static method of [<code>Cli</code>](#Cli)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - success of init  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Cli.addExtraCredential"></a>
+
+### Cli.addExtraCredential(properties, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+Extends template file for properties.json
+
+**Kind**: static method of [<code>Cli</code>](#Cli)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Cli.updateCredential"></a>
+
+### Cli.updateCredential(properties, credName, [skipInteraction]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Extends template file for properties.json
+update credentials
+
+**Kind**: static method of [<code>Cli</code>](#Cli)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - success of update  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
+| credName | <code>string</code> | name of credential that needs updating |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Cli.getCredentialObject"></a>
+
+### Cli.getCredentialObject(properties, target, [isCredentialOnly], [allowAll]) ⇒ <code>Promise.&lt;TYPE.BuObject&gt;</code>
+Returns Object with parameters required for accessing API
+
+**Kind**: static method of [<code>Cli</code>](#Cli)  
+**Returns**: <code>Promise.&lt;TYPE.BuObject&gt;</code> - credential to be used for Business Unit  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | object of all configuration including credentials |
+| target | <code>string</code> | code of BU to use |
+| [isCredentialOnly] | <code>boolean</code> \| <code>string</code> | true:don't ask for BU | string: name of BU |
+| [allowAll] | <code>boolean</code> | Offer ALL as option in BU selection |
+
+<a name="Cli._selectBU"></a>
+
+### Cli.\_selectBU(properties, [credential], [isCredentialOnly], [allowAll]) ⇒ <code>Promise.&lt;Array&gt;</code>
+helps select the right credential in case of bad initial input
+
+**Kind**: static method of [<code>Cli</code>](#Cli)  
+**Returns**: <code>Promise.&lt;Array&gt;</code> - selected credential/BU combo  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
+| [credential] | <code>string</code> | name of valid credential |
+| [isCredentialOnly] | <code>boolean</code> | don't ask for BU if true |
+| [allowAll] | <code>boolean</code> | Offer ALL as option in BU selection |
+
+<a name="Cli._setCredential"></a>
+
+### Cli.\_setCredential(properties, [credName], [skipInteraction]) ⇒ <code>Promise.&lt;(boolean\|string)&gt;</code>
+helper around _askCredentials
+
+**Kind**: static method of [<code>Cli</code>](#Cli)  
+**Returns**: <code>Promise.&lt;(boolean\|string)&gt;</code> - success of refresh or credential name  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | from config file |
+| [credName] | <code>string</code> | name of credential that needs updating |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Cli._askCredentials"></a>
+
+### Cli.\_askCredentials(properties, [credName]) ⇒ <code>Promise.&lt;object&gt;</code>
+helper for addExtraCredential()
+
+**Kind**: static method of [<code>Cli</code>](#Cli)  
+**Returns**: <code>Promise.&lt;object&gt;</code> - credential info  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | from config file |
+| [credName] | <code>string</code> | name of credential that needs updating |
+
+<a name="Cli.selectTypes"></a>
+
+### Cli.selectTypes(properties, [setTypesArr]) ⇒ <code>Promise.&lt;void&gt;</code>
+allows updating the metadata types that shall be retrieved
+
+**Kind**: static method of [<code>Cli</code>](#Cli)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
+| [setTypesArr] | <code>Array.&lt;string&gt;</code> | skip user prompt and overwrite with this list if given |
+
+<a name="Cli._summarizeSubtypes"></a>
+
+### Cli.\_summarizeSubtypes(responses, type) ⇒ <code>void</code>
+helper for this.selectTypes() that converts subtypes back to main type if all and only defaults were selected
+this keeps the config automatically upgradable when we add new subtypes or change what is selected by default
+
+**Kind**: static method of [<code>Cli</code>](#Cli)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| responses | <code>object</code> | wrapper object for respones |
+| responses.selectedTypes | <code>Array.&lt;string&gt;</code> | what types the user selected |
+| type | <code>string</code> | metadata type |
+
+<a name="Cli.explainTypes"></a>
+
+### Cli.explainTypes() ⇒ <code>void</code>
+shows metadata type descriptions
+
+**Kind**: static method of [<code>Cli</code>](#Cli)  
+<a name="config"></a>
+
+## config
+Central class for loading and validating properties from config and auth
+
+**Kind**: global class  
+
+* [config](#config)
+    * _instance_
+        * [.properties()](#config+properties)
+    * _static_
+        * [.getProperties([silent])](#config.getProperties) ⇒ <code>Promise.&lt;TYPE.Mcdevrc&gt;</code>
+        * [.checkProperties(properties, [silent])](#config.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
+        * [.getDefaultProperties()](#config.getDefaultProperties) ⇒ <code>Promise.&lt;TYPE.Mcdevrc&gt;</code>
+
+<a name="config+properties"></a>
+
+### config.properties()
+**Kind**: instance method of [<code>config</code>](#config)  
+<a name="config.getProperties"></a>
+
+### config.getProperties([silent]) ⇒ <code>Promise.&lt;TYPE.Mcdevrc&gt;</code>
+loads central properties from config file
+
+**Kind**: static method of [<code>config</code>](#config)  
+**Returns**: <code>Promise.&lt;TYPE.Mcdevrc&gt;</code> - central properties object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [silent] | <code>boolean</code> | omit throwing errors and print messages; assuming not silent if not set |
+
+<a name="config.checkProperties"></a>
+
+### config.checkProperties(properties, [silent]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
+check if the config file is correctly formatted and has values
+
+**Kind**: static method of [<code>config</code>](#config)  
+**Returns**: <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code> - file structure ok OR list of fields to be fixed  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
+| [silent] | <code>boolean</code> | set to true for internal use w/o cli output |
+
+<a name="config.getDefaultProperties"></a>
+
+### config.getDefaultProperties() ⇒ <code>Promise.&lt;TYPE.Mcdevrc&gt;</code>
+defines how the properties.json should look like
+used for creating a template and for checking if variables are set
+
+**Kind**: static method of [<code>config</code>](#config)  
+**Returns**: <code>Promise.&lt;TYPE.Mcdevrc&gt;</code> - default properties  
+<a name="DevOps"></a>
+
+## DevOps
+**Kind**: global class  
+
+* [DevOps](#DevOps)
+    * [.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths])](#DevOps.getDeltaList) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+    * [.buildDeltaDefinitions(properties, range, [skipInteraction])](#DevOps.buildDeltaDefinitions)
+    * [.document(directory, jsonReport)](#DevOps.document) ⇒ <code>void</code>
+    * [.getFilesToCommit(properties, buObject, metadataType, keyArr)](#DevOps.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+
+<a name="DevOps.getDeltaList"></a>
+
+### DevOps.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+Extracts the delta between a commit and the current state for deployment.
+Interactive commit selection if no commits are passed.
+
+**Kind**: static method of [<code>DevOps</code>](#DevOps)  
+**Returns**: <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | central properties object |
+| [range] | <code>string</code> | git commit range |
+| [saveToDeployDir] | <code>boolean</code> | if true, copy metadata changes into deploy directory |
+| [filterPaths] | <code>string</code> | filter file paths that start with any specified path (comma separated) |
+
+<a name="DevOps.buildDeltaDefinitions"></a>
+
+### DevOps.buildDeltaDefinitions(properties, range, [skipInteraction])
+wrapper around DevOps.getDeltaList, Builder.buildTemplate and M
+
+**Kind**: static method of [<code>DevOps</code>](#DevOps)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | project config file |
+| range | <code>string</code> | git commit range |
+| [skipInteraction] | <code>TYPE.SkipInteraction</code> | allows to skip interactive wizard |
+
+<a name="DevOps.document"></a>
+
+### DevOps.document(directory, jsonReport) ⇒ <code>void</code>
+create markdown file for deployment listing
+
+**Kind**: static method of [<code>DevOps</code>](#DevOps)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| directory | <code>string</code> | - |
+| jsonReport | <code>object</code> | - |
+
+<a name="DevOps.getFilesToCommit"></a>
+
+### DevOps.getFilesToCommit(properties, buObject, metadataType, keyArr) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+should return only the json for all but asset, query and script that are saved as multiple files
+additionally, the documentation for dataExtension and automation should be returned
+
+**Kind**: static method of [<code>DevOps</code>](#DevOps)  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - list of all files that need to be committed in a flat array ['path/file1.ext', 'path/file2.ext']  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | central properties object |
+| buObject | <code>TYPE.BuObject</code> | references credentials |
+| metadataType | <code>string</code> | metadata type to build |
+| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="File"></a>
+
+## File
+File extends fs-extra. It adds logger and util methods for file handling
+
+**Kind**: global class  
+
+* [File](#File)
+    * [.copyFile(from, to)](#File.copyFile) ⇒ <code>object</code>
+    * [.filterIllegalPathChars(path)](#File.filterIllegalPathChars) ⇒ <code>string</code>
+    * [.filterIllegalFilenames(filename)](#File.filterIllegalFilenames) ⇒ <code>string</code>
+    * [.reverseFilterIllegalFilenames(filename)](#File.reverseFilterIllegalFilenames) ⇒ <code>string</code>
+    * [.normalizePath(denormalizedPath)](#File.normalizePath) ⇒ <code>string</code>
+    * [.writeJSONToFile(directory, filename, content)](#File.writeJSONToFile) ⇒ <code>Promise</code>
+    * [.writePrettyToFile(directory, filename, filetype, content, [templateVariables])](#File.writePrettyToFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._beautify_prettier(directory, filename, filetype, content)](#File._beautify_prettier) ⇒ <code>string</code>
+    * [.writeToFile(directory, filename, filetype, content, [encoding])](#File.writeToFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.readJSONFile(directory, filename, sync, cleanPath)](#File.readJSONFile) ⇒ <code>Promise</code> \| <code>object</code>
+    * [.readFilteredFilename(directory, filename, filetype, [encoding])](#File.readFilteredFilename) ⇒ <code>Promise.&lt;string&gt;</code>
+    * [.readDirectories(directory, depth, [includeStem], [_stemLength])](#File.readDirectories) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength])](#File.readDirectoriesSync) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.saveConfigFile(properties)](#File.saveConfigFile) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.initPrettier([filetype])](#File.initPrettier) ⇒ <code>Promise.&lt;boolean&gt;</code>
+
+<a name="File.copyFile"></a>
+
+### File.copyFile(from, to) ⇒ <code>object</code>
+copies a file from one path to another
+
+**Kind**: static method of [<code>File</code>](#File)  
+**Returns**: <code>object</code> - - results object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| from | <code>string</code> | full filepath including name of existing file |
+| to | <code>string</code> | full filepath including name where file should go |
+
+<a name="File.filterIllegalPathChars"></a>
+
+### File.filterIllegalPathChars(path) ⇒ <code>string</code>
+makes sure Windows accepts path names
+
+**Kind**: static method of [<code>File</code>](#File)  
+**Returns**: <code>string</code> - - corrected string  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| path | <code>string</code> | filename or path |
+
+<a name="File.filterIllegalFilenames"></a>
+
+### File.filterIllegalFilenames(filename) ⇒ <code>string</code>
+makes sure Windows accepts file names
+
+**Kind**: static method of [<code>File</code>](#File)  
+**Returns**: <code>string</code> - - corrected string  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| filename | <code>string</code> | filename or path |
+
+<a name="File.reverseFilterIllegalFilenames"></a>
+
+### File.reverseFilterIllegalFilenames(filename) ⇒ <code>string</code>
+makes sure Windows accepts file names
+
+**Kind**: static method of [<code>File</code>](#File)  
+**Returns**: <code>string</code> - - corrected string  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| filename | <code>string</code> | filename or path |
+
+<a name="File.normalizePath"></a>
+
+### File.normalizePath(denormalizedPath) ⇒ <code>string</code>
+Takes various types of path strings and formats into a platform specific path
+
+**Kind**: static method of [<code>File</code>](#File)  
+**Returns**: <code>string</code> - Path strings  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| denormalizedPath | <code>string</code> \| <code>Array.&lt;string&gt;</code> | directory the file will be written to |
+
+<a name="File.writeJSONToFile"></a>
+
+### File.writeJSONToFile(directory, filename, content) ⇒ <code>Promise</code>
+Saves json content to a file in the local file system. Will create the parent directory if it does not exist
+
+**Kind**: static method of [<code>File</code>](#File)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| directory | <code>string</code> \| <code>Array.&lt;string&gt;</code> | directory the file will be written to |
+| filename | <code>string</code> | name of the file without '.json' ending |
+| content | <code>object</code> | filecontent |
+
+<a name="File.writePrettyToFile"></a>
+
+### File.writePrettyToFile(directory, filename, filetype, content, [templateVariables]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Saves beautified files in the local file system. Will create the parent directory if it does not exist
+! Important: run 'await File.initPrettier()' in your MetadataType.retrieve() once before hitting this
+
+**Kind**: static method of [<code>File</code>](#File)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| directory | <code>string</code> \| <code>Array.&lt;string&gt;</code> | directory the file will be written to |
+| filename | <code>string</code> | name of the file without suffix |
+| filetype | <code>string</code> | filetype ie. JSON or SSJS |
+| content | <code>string</code> | filecontent |
+| [templateVariables] | <code>TYPE.TemplateMap</code> | templating variables to be replaced in the metadata |
+
+<a name="File._beautify_prettier"></a>
+
+### File.\_beautify\_prettier(directory, filename, filetype, content) ⇒ <code>string</code>
+helper for writePrettyToFile, applying prettier onto given stringified content
+! Important: run 'await File.initPrettier()' in your MetadataType.retrieve() once before hitting this
+
+**Kind**: static method of [<code>File</code>](#File)  
+**Returns**: <code>string</code> - original string on error; formatted string on success  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| directory | <code>string</code> \| <code>Array.&lt;string&gt;</code> | directory the file will be written to |
+| filename | <code>string</code> | name of the file without suffix |
+| filetype | <code>string</code> | filetype ie. JSON or SSJS |
+| content | <code>string</code> | filecontent |
+
+<a name="File.writeToFile"></a>
+
+### File.writeToFile(directory, filename, filetype, content, [encoding]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Saves text content to a file in the local file system. Will create the parent directory if it does not exist
+
+**Kind**: static method of [<code>File</code>](#File)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| directory | <code>string</code> \| <code>Array.&lt;string&gt;</code> | directory the file will be written to |
+| filename | <code>string</code> | name of the file without '.json' ending |
+| filetype | <code>string</code> | filetype suffix |
+| content | <code>string</code> | filecontent |
+| [encoding] | <code>object</code> | added for certain file types (like images) |
+
+<a name="File.readJSONFile"></a>
+
+### File.readJSONFile(directory, filename, sync, cleanPath) ⇒ <code>Promise</code> \| <code>object</code>
+Saves json content to a file in the local file system. Will create the parent directory if it does not exist
+
+**Kind**: static method of [<code>File</code>](#File)  
+**Returns**: <code>Promise</code> \| <code>object</code> - Promise or JSON object depending on if async or not  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| directory | <code>string</code> \| <code>Array.&lt;string&gt;</code> | directory where the file is stored |
+| filename | <code>string</code> | name of the file without '.json' ending |
+| sync | <code>boolean</code> | should execute sync (default is async) |
+| cleanPath | <code>boolean</code> | should execute sync (default is true) |
+
+<a name="File.readFilteredFilename"></a>
+
+### File.readFilteredFilename(directory, filename, filetype, [encoding]) ⇒ <code>Promise.&lt;string&gt;</code>
+reads file from local file system.
+
+**Kind**: static method of [<code>File</code>](#File)  
+**Returns**: <code>Promise.&lt;string&gt;</code> - file contents  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| directory | <code>string</code> \| <code>Array.&lt;string&gt;</code> |  | directory where the file is stored |
+| filename | <code>string</code> |  | name of the file without '.json' ending |
+| filetype | <code>string</code> |  | filetype suffix |
+| [encoding] | <code>string</code> | <code>&quot;&#x27;utf8&#x27;&quot;</code> | read file with encoding (defaults to utf-8) |
+
+<a name="File.readDirectories"></a>
+
+### File.readDirectories(directory, depth, [includeStem], [_stemLength]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+reads directories to a specific depth returning an array
+of file paths to be iterated over
+
+**Kind**: static method of [<code>File</code>](#File)  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - array of fully defined file paths  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| directory | <code>string</code> | directory to checkin |
+| depth | <code>number</code> | how many levels to check (1 base) |
+| [includeStem] | <code>boolean</code> | include the parent directory in the response |
+| [_stemLength] | <code>number</code> | set recursively for subfolders. do not set manually! |
+
+**Example**  
+```js
+['deploy/mcdev/bu1']
+```
+<a name="File.readDirectoriesSync"></a>
+
+### File.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength]) ⇒ <code>Array.&lt;string&gt;</code>
+reads directories to a specific depth returning an array
+of file paths to be iterated over using sync api (required in constructors)
+TODO - merge with readDirectories. so far the logic is really different
+
+**Kind**: static method of [<code>File</code>](#File)  
+**Returns**: <code>Array.&lt;string&gt;</code> - array of fully defined file paths  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| directory | <code>string</code> | directory to checkin |
+| [depth] | <code>number</code> | how many levels to check (1 base) |
+| [includeStem] | <code>boolean</code> | include the parent directory in the response |
+| [_stemLength] | <code>number</code> | set recursively for subfolders. do not set manually! |
+
+**Example**  
+```js
+['deploy/mcdev/bu1']
+```
+<a name="File.saveConfigFile"></a>
+
+### File.saveConfigFile(properties) ⇒ <code>Promise.&lt;void&gt;</code>
+helper that splits the config back into auth & config parts to save them separately
+
+**Kind**: static method of [<code>File</code>](#File)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | central properties object |
+
+<a name="File.initPrettier"></a>
+
+### File.initPrettier([filetype]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Initalises Prettier formatting lib async.
+
+**Kind**: static method of [<code>File</code>](#File)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - success of config load  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [filetype] | <code>string</code> | <code>&quot;&#x27;html&#x27;&quot;</code> | filetype ie. JSON or SSJS |
+
+<a name="Init"></a>
+
+## Init
+**Kind**: global class  
+
+* [Init](#Init)
+    * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
+    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.upgradeAuthFile()](#Init.upgradeAuthFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
+    * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
+    * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>string</code>
+    * [._updateGitConfigUser([skipInteraction])](#Init._updateGitConfigUser) ⇒ <code>void</code>
+    * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
+    * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
+
+<a name="Init.fixMcdevConfig"></a>
+
+### Init.fixMcdevConfig(properties) ⇒ <code>Promise.&lt;boolean&gt;</code>
+helper method for this.upgradeProject that upgrades project config if needed
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
+
+<a name="Init.createIdeConfigFiles"></a>
+
+### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
+handles creation/update of all config file from the boilerplate
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - status of config file creation  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
+
+<a name="Init._updateLeaf"></a>
+
+### Init.\_updateLeaf(propertiersCur, defaultPropsCur, fieldName) ⇒ <code>void</code>
+recursive helper for _fixMcdevConfig that adds missing settings
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| propertiersCur | <code>object</code> | current sub-object of project settings |
+| defaultPropsCur | <code>object</code> | current sub-object of default settings |
+| fieldName | <code>string</code> | dot-concatenated object-path that needs adding |
+
+<a name="Init._getForcedUpdateList"></a>
+
+### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+returns list of files that need to be updated
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - relevant files with path that need to be updated  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| projectVersion | <code>string</code> | version found in config file of the current project |
+
+<a name="Init._createIdeConfigFile"></a>
+
+### Init.\_createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+handles creation/update of one config file from the boilerplate at a time
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - install successful or error occured  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| fileNameArr | <code>Array.&lt;string&gt;</code> | 0: path, 1: filename, 2: extension with dot |
+| relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
+| [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
+
+<a name="Init.upgradeAuthFile"></a>
+
+### Init.upgradeAuthFile() ⇒ <code>Promise.&lt;boolean&gt;</code>
+helper method for this.upgradeProject that upgrades project config if needed
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
+<a name="Init.initGitRepo"></a>
+
+### Init.initGitRepo([skipInteraction]) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
+check if git repo exists and otherwise create one
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;{status: string, repoName: string}&gt;</code> - success flag  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init.gitPush"></a>
+
+### Init.gitPush([skipInteraction]) ⇒ <code>void</code>
+offer to push the new repo straight to the server
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init._addGitRemote"></a>
+
+### Init.\_addGitRemote([skipInteraction]) ⇒ <code>string</code>
+offers to add the git remote origin
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>string</code> - repo name (optionally)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init._updateGitConfigUser"></a>
+
+### Init.\_updateGitConfigUser([skipInteraction]) ⇒ <code>void</code>
+checks global config and ask to config the user info and then store it locally
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init._getGitConfigUser"></a>
+
+### Init.\_getGitConfigUser() ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
+retrieves the global user.name and user.email values
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code> - user.name and user.email  
+<a name="Init.initProject"></a>
+
+### Init.initProject(properties, credentialName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+Creates template file for properties.json
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
+| credentialName | <code>string</code> | identifying name of the installed package / project |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init._downloadAllBUs"></a>
+
+### Init.\_downloadAllBUs(bu, gitStatus, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+helper for this.initProject()
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| bu | <code>string</code> | cred/bu or cred/* or * |
+| gitStatus | <code>string</code> | signals what state the git repo is in |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init.upgradeProject"></a>
+
+### Init.upgradeProject(properties, [initial], [repoName]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+wrapper around npm dependency & configuration file setup
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - success flag  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
+| [initial] | <code>boolean</code> | print message if not part of initial setup |
+| [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
+
+<a name="Init._getMissingCredentials"></a>
+
+### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
+finds credentials that are set up in config but not in auth file
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
+
+<a name="Init.installDependencies"></a>
+
+### Init.installDependencies([repoName]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+initiates npm project and then
+takes care of loading the pre-configured dependency list
+from the boilerplate directory to them as dev-dependencies
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - install successful or error occured  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
+
+<a name="Init._getDefaultPackageJson"></a>
+
+### Init.\_getDefaultPackageJson([currentContent]) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
+ensure we have certain default values in our config
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code> - extended currentContent  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [currentContent] | <code>object</code> | what was read from existing package.json file |
+
+<a name="Init"></a>
+
+## Init
+**Kind**: global class  
+
+* [Init](#Init)
+    * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
+    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.upgradeAuthFile()](#Init.upgradeAuthFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
+    * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
+    * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>string</code>
+    * [._updateGitConfigUser([skipInteraction])](#Init._updateGitConfigUser) ⇒ <code>void</code>
+    * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
+    * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
+
+<a name="Init.fixMcdevConfig"></a>
+
+### Init.fixMcdevConfig(properties) ⇒ <code>Promise.&lt;boolean&gt;</code>
+helper method for this.upgradeProject that upgrades project config if needed
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
+
+<a name="Init.createIdeConfigFiles"></a>
+
+### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
+handles creation/update of all config file from the boilerplate
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - status of config file creation  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
+
+<a name="Init._updateLeaf"></a>
+
+### Init.\_updateLeaf(propertiersCur, defaultPropsCur, fieldName) ⇒ <code>void</code>
+recursive helper for _fixMcdevConfig that adds missing settings
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| propertiersCur | <code>object</code> | current sub-object of project settings |
+| defaultPropsCur | <code>object</code> | current sub-object of default settings |
+| fieldName | <code>string</code> | dot-concatenated object-path that needs adding |
+
+<a name="Init._getForcedUpdateList"></a>
+
+### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+returns list of files that need to be updated
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - relevant files with path that need to be updated  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| projectVersion | <code>string</code> | version found in config file of the current project |
+
+<a name="Init._createIdeConfigFile"></a>
+
+### Init.\_createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+handles creation/update of one config file from the boilerplate at a time
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - install successful or error occured  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| fileNameArr | <code>Array.&lt;string&gt;</code> | 0: path, 1: filename, 2: extension with dot |
+| relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
+| [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
+
+<a name="Init.upgradeAuthFile"></a>
+
+### Init.upgradeAuthFile() ⇒ <code>Promise.&lt;boolean&gt;</code>
+helper method for this.upgradeProject that upgrades project config if needed
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
+<a name="Init.initGitRepo"></a>
+
+### Init.initGitRepo([skipInteraction]) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
+check if git repo exists and otherwise create one
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;{status: string, repoName: string}&gt;</code> - success flag  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init.gitPush"></a>
+
+### Init.gitPush([skipInteraction]) ⇒ <code>void</code>
+offer to push the new repo straight to the server
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init._addGitRemote"></a>
+
+### Init.\_addGitRemote([skipInteraction]) ⇒ <code>string</code>
+offers to add the git remote origin
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>string</code> - repo name (optionally)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init._updateGitConfigUser"></a>
+
+### Init.\_updateGitConfigUser([skipInteraction]) ⇒ <code>void</code>
+checks global config and ask to config the user info and then store it locally
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init._getGitConfigUser"></a>
+
+### Init.\_getGitConfigUser() ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
+retrieves the global user.name and user.email values
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code> - user.name and user.email  
+<a name="Init.initProject"></a>
+
+### Init.initProject(properties, credentialName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+Creates template file for properties.json
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
+| credentialName | <code>string</code> | identifying name of the installed package / project |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init._downloadAllBUs"></a>
+
+### Init.\_downloadAllBUs(bu, gitStatus, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+helper for this.initProject()
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| bu | <code>string</code> | cred/bu or cred/* or * |
+| gitStatus | <code>string</code> | signals what state the git repo is in |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init.upgradeProject"></a>
+
+### Init.upgradeProject(properties, [initial], [repoName]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+wrapper around npm dependency & configuration file setup
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - success flag  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
+| [initial] | <code>boolean</code> | print message if not part of initial setup |
+| [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
+
+<a name="Init._getMissingCredentials"></a>
+
+### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
+finds credentials that are set up in config but not in auth file
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
+
+<a name="Init.installDependencies"></a>
+
+### Init.installDependencies([repoName]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+initiates npm project and then
+takes care of loading the pre-configured dependency list
+from the boilerplate directory to them as dev-dependencies
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - install successful or error occured  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
+
+<a name="Init._getDefaultPackageJson"></a>
+
+### Init.\_getDefaultPackageJson([currentContent]) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
+ensure we have certain default values in our config
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code> - extended currentContent  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [currentContent] | <code>object</code> | what was read from existing package.json file |
+
+<a name="Init"></a>
+
+## Init
+**Kind**: global class  
+
+* [Init](#Init)
+    * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
+    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.upgradeAuthFile()](#Init.upgradeAuthFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
+    * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
+    * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>string</code>
+    * [._updateGitConfigUser([skipInteraction])](#Init._updateGitConfigUser) ⇒ <code>void</code>
+    * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
+    * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
+
+<a name="Init.fixMcdevConfig"></a>
+
+### Init.fixMcdevConfig(properties) ⇒ <code>Promise.&lt;boolean&gt;</code>
+helper method for this.upgradeProject that upgrades project config if needed
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
+
+<a name="Init.createIdeConfigFiles"></a>
+
+### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
+handles creation/update of all config file from the boilerplate
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - status of config file creation  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
+
+<a name="Init._updateLeaf"></a>
+
+### Init.\_updateLeaf(propertiersCur, defaultPropsCur, fieldName) ⇒ <code>void</code>
+recursive helper for _fixMcdevConfig that adds missing settings
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| propertiersCur | <code>object</code> | current sub-object of project settings |
+| defaultPropsCur | <code>object</code> | current sub-object of default settings |
+| fieldName | <code>string</code> | dot-concatenated object-path that needs adding |
+
+<a name="Init._getForcedUpdateList"></a>
+
+### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+returns list of files that need to be updated
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - relevant files with path that need to be updated  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| projectVersion | <code>string</code> | version found in config file of the current project |
+
+<a name="Init._createIdeConfigFile"></a>
+
+### Init.\_createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+handles creation/update of one config file from the boilerplate at a time
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - install successful or error occured  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| fileNameArr | <code>Array.&lt;string&gt;</code> | 0: path, 1: filename, 2: extension with dot |
+| relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
+| [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
+
+<a name="Init.upgradeAuthFile"></a>
+
+### Init.upgradeAuthFile() ⇒ <code>Promise.&lt;boolean&gt;</code>
+helper method for this.upgradeProject that upgrades project config if needed
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
+<a name="Init.initGitRepo"></a>
+
+### Init.initGitRepo([skipInteraction]) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
+check if git repo exists and otherwise create one
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;{status: string, repoName: string}&gt;</code> - success flag  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init.gitPush"></a>
+
+### Init.gitPush([skipInteraction]) ⇒ <code>void</code>
+offer to push the new repo straight to the server
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init._addGitRemote"></a>
+
+### Init.\_addGitRemote([skipInteraction]) ⇒ <code>string</code>
+offers to add the git remote origin
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>string</code> - repo name (optionally)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init._updateGitConfigUser"></a>
+
+### Init.\_updateGitConfigUser([skipInteraction]) ⇒ <code>void</code>
+checks global config and ask to config the user info and then store it locally
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init._getGitConfigUser"></a>
+
+### Init.\_getGitConfigUser() ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
+retrieves the global user.name and user.email values
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code> - user.name and user.email  
+<a name="Init.initProject"></a>
+
+### Init.initProject(properties, credentialName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+Creates template file for properties.json
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
+| credentialName | <code>string</code> | identifying name of the installed package / project |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init._downloadAllBUs"></a>
+
+### Init.\_downloadAllBUs(bu, gitStatus, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+helper for this.initProject()
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| bu | <code>string</code> | cred/bu or cred/* or * |
+| gitStatus | <code>string</code> | signals what state the git repo is in |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init.upgradeProject"></a>
+
+### Init.upgradeProject(properties, [initial], [repoName]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+wrapper around npm dependency & configuration file setup
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - success flag  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
+| [initial] | <code>boolean</code> | print message if not part of initial setup |
+| [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
+
+<a name="Init._getMissingCredentials"></a>
+
+### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
+finds credentials that are set up in config but not in auth file
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
+
+<a name="Init.installDependencies"></a>
+
+### Init.installDependencies([repoName]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+initiates npm project and then
+takes care of loading the pre-configured dependency list
+from the boilerplate directory to them as dev-dependencies
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - install successful or error occured  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
+
+<a name="Init._getDefaultPackageJson"></a>
+
+### Init.\_getDefaultPackageJson([currentContent]) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
+ensure we have certain default values in our config
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code> - extended currentContent  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [currentContent] | <code>object</code> | what was read from existing package.json file |
+
+<a name="Init"></a>
+
+## Init
+**Kind**: global class  
+
+* [Init](#Init)
+    * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
+    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.upgradeAuthFile()](#Init.upgradeAuthFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
+    * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
+    * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>string</code>
+    * [._updateGitConfigUser([skipInteraction])](#Init._updateGitConfigUser) ⇒ <code>void</code>
+    * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
+    * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
+
+<a name="Init.fixMcdevConfig"></a>
+
+### Init.fixMcdevConfig(properties) ⇒ <code>Promise.&lt;boolean&gt;</code>
+helper method for this.upgradeProject that upgrades project config if needed
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
+
+<a name="Init.createIdeConfigFiles"></a>
+
+### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
+handles creation/update of all config file from the boilerplate
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - status of config file creation  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
+
+<a name="Init._updateLeaf"></a>
+
+### Init.\_updateLeaf(propertiersCur, defaultPropsCur, fieldName) ⇒ <code>void</code>
+recursive helper for _fixMcdevConfig that adds missing settings
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| propertiersCur | <code>object</code> | current sub-object of project settings |
+| defaultPropsCur | <code>object</code> | current sub-object of default settings |
+| fieldName | <code>string</code> | dot-concatenated object-path that needs adding |
+
+<a name="Init._getForcedUpdateList"></a>
+
+### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+returns list of files that need to be updated
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - relevant files with path that need to be updated  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| projectVersion | <code>string</code> | version found in config file of the current project |
+
+<a name="Init._createIdeConfigFile"></a>
+
+### Init.\_createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+handles creation/update of one config file from the boilerplate at a time
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - install successful or error occured  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| fileNameArr | <code>Array.&lt;string&gt;</code> | 0: path, 1: filename, 2: extension with dot |
+| relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
+| [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
+
+<a name="Init.upgradeAuthFile"></a>
+
+### Init.upgradeAuthFile() ⇒ <code>Promise.&lt;boolean&gt;</code>
+helper method for this.upgradeProject that upgrades project config if needed
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
+<a name="Init.initGitRepo"></a>
+
+### Init.initGitRepo([skipInteraction]) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
+check if git repo exists and otherwise create one
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;{status: string, repoName: string}&gt;</code> - success flag  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init.gitPush"></a>
+
+### Init.gitPush([skipInteraction]) ⇒ <code>void</code>
+offer to push the new repo straight to the server
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init._addGitRemote"></a>
+
+### Init.\_addGitRemote([skipInteraction]) ⇒ <code>string</code>
+offers to add the git remote origin
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>string</code> - repo name (optionally)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init._updateGitConfigUser"></a>
+
+### Init.\_updateGitConfigUser([skipInteraction]) ⇒ <code>void</code>
+checks global config and ask to config the user info and then store it locally
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init._getGitConfigUser"></a>
+
+### Init.\_getGitConfigUser() ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
+retrieves the global user.name and user.email values
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code> - user.name and user.email  
+<a name="Init.initProject"></a>
+
+### Init.initProject(properties, credentialName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+Creates template file for properties.json
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
+| credentialName | <code>string</code> | identifying name of the installed package / project |
+| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init._downloadAllBUs"></a>
+
+### Init.\_downloadAllBUs(bu, gitStatus, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+helper for this.initProject()
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| bu | <code>string</code> | cred/bu or cred/* or * |
+| gitStatus | <code>string</code> | signals what state the git repo is in |
+| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
+
+<a name="Init.upgradeProject"></a>
+
+### Init.upgradeProject(properties, [initial], [repoName]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+wrapper around npm dependency & configuration file setup
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - success flag  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
+| [initial] | <code>boolean</code> | print message if not part of initial setup |
+| [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
+
+<a name="Init._getMissingCredentials"></a>
+
+### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
+finds credentials that are set up in config but not in auth file
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
+
+<a name="Init.installDependencies"></a>
+
+### Init.installDependencies([repoName]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+initiates npm project and then
+takes care of loading the pre-configured dependency list
+from the boilerplate directory to them as dev-dependencies
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - install successful or error occured  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
+
+<a name="Init._getDefaultPackageJson"></a>
+
+### Init.\_getDefaultPackageJson([currentContent]) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
+ensure we have certain default values in our config
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code> - extended currentContent  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [currentContent] | <code>object</code> | what was read from existing package.json file |
+
+<a name="Util"></a>
+
+## Util
+Util that contains logger and simple util methods
+
+**Kind**: global class  
+
+* [Util](#Util)
+    * _instance_
+        * [.skipInteraction](#Util+skipInteraction) : <code>TYPE.skipInteraction</code>
+        * [.loggerTransports](#Util+loggerTransports) : <code>TYPE.Logger</code>
+    * _static_
+        * [.property()](#Util.property)
+        * [.filterObjByKeys(originalObj, [whitelistArr])](#Util.filterObjByKeys) ⇒ <code>Object.&lt;string, \*&gt;</code>
+        * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
+        * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
+        * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
+        * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList) ⇒ <code>void</code>
+        * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
+        * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
+        * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
+        * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
+        * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
+        * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
+        * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
+        * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
+        * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
+        * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
+        * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
+        * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
+        * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
+
+<a name="Util+skipInteraction"></a>
+
+### util.skipInteraction : <code>TYPE.skipInteraction</code>
+**Kind**: instance property of [<code>Util</code>](#Util)  
+<a name="Util+loggerTransports"></a>
+
+### util.loggerTransports : <code>TYPE.Logger</code>
+**Kind**: instance property of [<code>Util</code>](#Util)  
+<a name="Util.property"></a>
+
+### Util.property()
+**Kind**: static method of [<code>Util</code>](#Util)  
+<a name="Util.filterObjByKeys"></a>
+
+### Util.filterObjByKeys(originalObj, [whitelistArr]) ⇒ <code>Object.&lt;string, \*&gt;</code>
+helper that allows filtering an object by its keys
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>Object.&lt;string, \*&gt;</code> - filtered object that only contains keys you provided  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| originalObj | <code>Object.&lt;string, \*&gt;</code> | object that you want to filter |
+| [whitelistArr] | <code>Array.&lt;string&gt;</code> | positive filter. if not provided, returns originalObj without filter |
+
+<a name="Util.includesStartsWith"></a>
+
+### Util.includesStartsWith(arr, search) ⇒ <code>boolean</code>
+extended Array.includes method that allows check if an array-element starts with a certain string
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - found / not found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| arr | <code>Array.&lt;string&gt;</code> | your array of strigns |
+| search | <code>string</code> | the string you are looking for |
+
+<a name="Util.includesStartsWithIndex"></a>
+
+### Util.includesStartsWithIndex(arr, search) ⇒ <code>number</code>
+extended Array.includes method that allows check if an array-element starts with a certain string
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>number</code> - array index 0..n or -1 of not found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| arr | <code>Array.&lt;string&gt;</code> | your array of strigns |
+| search | <code>string</code> | the string you are looking for |
+
+<a name="Util.checkMarket"></a>
+
+### Util.checkMarket(market, properties) ⇒ <code>boolean</code>
+check if a market name exists in current mcdev config
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - found market or not  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| market | <code>string</code> | market localizations |
+| properties | <code>TYPE.Mcdevrc</code> | local mcdev config |
+
+<a name="Util.verifyMarketList"></a>
+
+### Util.verifyMarketList(mlName, properties) ⇒ <code>void</code>
+ensure provided MarketList exists and it's content including markets and BUs checks out
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>void</code> - throws errors if problems were found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| mlName | <code>string</code> | name of marketList |
+| properties | <code>TYPE.Mcdevrc</code> | General configuration to be used in retrieve |
+
+<a name="Util.signalFatalError"></a>
+
+### Util.signalFatalError() ⇒ <code>void</code>
+used to ensure the program tells surrounding software that an unrecoverable error occured
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+<a name="Util.isTrue"></a>
+
+### Util.isTrue(attrValue) ⇒ <code>boolean</code>
+SFMC accepts multiple true values for Boolean attributes for which we are checking here
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - attribute value == true ? true : false  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| attrValue | <code>\*</code> | value |
+
+<a name="Util.isFalse"></a>
+
+### Util.isFalse(attrValue) ⇒ <code>boolean</code>
+SFMC accepts multiple false values for Boolean attributes for which we are checking here
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - attribute value == false ? true : false  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| attrValue | <code>\*</code> | value |
+
+<a name="Util._isValidType"></a>
+
+### Util.\_isValidType(selectedType) ⇒ <code>boolean</code>
+helper for retrieve, retrieveAsTemplate and deploy
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - type ok or not  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| selectedType | <code>TYPE.SupportedMetadataTypes</code> | type or type-subtype |
+
+<a name="Util.getRetrieveTypeChoices"></a>
+
+### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
+helper for getDefaultProperties()
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> - type choices  
+<a name="Util.metadataLogger"></a>
+
+### Util.metadataLogger(level, type, method, payload, [source]) ⇒ <code>void</code>
+Logger helper for Metadata functions
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| level | <code>string</code> | of log (error, info, warn) |
+| type | <code>string</code> | of metadata being referenced |
+| method | <code>string</code> | name which log was called from |
+| payload | <code>\*</code> | generic object which details the error |
+| [source] | <code>string</code> | key/id of metadata which relates to error |
+
+<a name="Util.replaceByObject"></a>
+
+### Util.replaceByObject(str, obj) ⇒ <code>string</code> \| <code>object</code>
+replaces values in a JSON object string, based on a series of
+key-value pairs (obj)
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>string</code> \| <code>object</code> - replaced version of str  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| str | <code>string</code> \| <code>object</code> | JSON object or its stringified version, which has values to be replaced |
+| obj | <code>TYPE.TemplateMap</code> | key value object which contains keys to be replaced and values to be replaced with |
+
+<a name="Util.inverseGet"></a>
+
+### Util.inverseGet(objs, val) ⇒ <code>string</code>
+get key of an object based on the first matching value
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>string</code> - key  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| objs | <code>object</code> | object of objects to be searched |
+| val | <code>string</code> | value to be searched for |
+
+<a name="Util.getMetadataHierachy"></a>
+
+### Util.getMetadataHierachy(metadataTypes) ⇒ <code>Array.&lt;string&gt;</code>
+Returns Order in which metadata needs to be retrieved/deployed
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>Array.&lt;string&gt;</code> - retrieve/deploy order as array  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataTypes | <code>Array.&lt;string&gt;</code> | which should be retrieved/deployed |
+
+<a name="Util.resolveObjPath"></a>
+
+### Util.resolveObjPath(path, obj) ⇒ <code>any</code>
+let's you dynamically walk down an object and get a value
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>any</code> - value of obj.path  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| path | <code>string</code> | 'fieldA.fieldB.fieldC' |
+| obj | <code>object</code> | some parent object |
+
+<a name="Util.execSync"></a>
+
+### Util.execSync(cmd, [args]) ⇒ <code>undefined</code>
+helper to run other commands as if run manually by user
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cmd | <code>string</code> | to be executed command |
+| [args] | <code>Array.&lt;string&gt;</code> | list of arguments |
+
+<a name="Util.templateSearchResult"></a>
+
+### Util.templateSearchResult(results, keyToSearch, searchValue) ⇒ <code>TYPE.MetadataTypeItem</code>
+standardize check to ensure only one result is returned from template search
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - metadata to be used in building template  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| results | <code>Array.&lt;TYPE.MetadataTypeItem&gt;</code> | array of metadata |
+| keyToSearch | <code>string</code> | the field which contains the searched value |
+| searchValue | <code>string</code> | the value which is being looked for |
+
+<a name="Util.setLoggingLevel"></a>
+
+### Util.setLoggingLevel(argv) ⇒ <code>void</code>
+configures what is displayed in the console
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| argv | <code>object</code> | list of command line parameters given by user |
+| [argv.silent] | <code>boolean</code> | only errors printed to CLI |
+| [argv.verbose] | <code>boolean</code> | chatty user CLI output |
+| [argv.debug] | <code>boolean</code> | enables developer output & features |
+
 <a name="Util"></a>
 
 ## Util
@@ -4431,37 +6173,42 @@ CLI entry for SFMC DevTools
 **Kind**: global constant  
 
 * [Util](#Util)
-    * [.skipInteraction](#Util.skipInteraction) : <code>TYPE.skipInteraction</code>
-    * [.logger](#Util.logger) : <code>TYPE.Logger</code>
-    * [.filterObjByKeys(originalObj, [whitelistArr])](#Util.filterObjByKeys) ⇒ <code>Object.&lt;string, \*&gt;</code>
-    * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
-    * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
-    * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
-    * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList) ⇒ <code>void</code>
-    * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
-    * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
-    * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
-    * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
-    * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
-    * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
-    * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
-    * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
-    * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
-    * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
-    * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
+    * _instance_
+        * [.skipInteraction](#Util+skipInteraction) : <code>TYPE.skipInteraction</code>
+        * [.loggerTransports](#Util+loggerTransports) : <code>TYPE.Logger</code>
+    * _static_
+        * [.property()](#Util.property)
+        * [.filterObjByKeys(originalObj, [whitelistArr])](#Util.filterObjByKeys) ⇒ <code>Object.&lt;string, \*&gt;</code>
+        * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
+        * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
+        * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
+        * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList) ⇒ <code>void</code>
+        * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
+        * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
+        * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
+        * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
+        * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
+        * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
+        * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
+        * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
+        * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
+        * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
+        * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
+        * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
+        * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
 
-<a name="Util.skipInteraction"></a>
+<a name="Util+skipInteraction"></a>
 
-### Util.skipInteraction : <code>TYPE.skipInteraction</code>
-**Kind**: static property of [<code>Util</code>](#Util)  
-<a name="Util.logger"></a>
+### util.skipInteraction : <code>TYPE.skipInteraction</code>
+**Kind**: instance property of [<code>Util</code>](#Util)  
+<a name="Util+loggerTransports"></a>
 
-### Util.logger : <code>TYPE.Logger</code>
-Logger that creates timestamped log file in 'logs/' directory
+### util.loggerTransports : <code>TYPE.Logger</code>
+**Kind**: instance property of [<code>Util</code>](#Util)  
+<a name="Util.property"></a>
 
-**Kind**: static property of [<code>Util</code>](#Util)  
+### Util.property()
+**Kind**: static method of [<code>Util</code>](#Util)  
 <a name="Util.filterObjByKeys"></a>
 
 ### Util.filterObjByKeys(originalObj, [whitelistArr]) ⇒ <code>Object.&lt;string, \*&gt;</code>
@@ -4713,1728 +6460,10 @@ sample file on how to retrieve a simple changelog to use in GUIs or automated pr
     lb: 'name of lastmodified'
   }]
 ```
-<a name="BusinessUnit"></a>
-
-## BusinessUnit
-Helper that handles retrieval of BU info
-
-**Kind**: global constant  
-<a name="BusinessUnit.refreshBUProperties"></a>
-
-### BusinessUnit.refreshBUProperties(properties, credentialsName) ⇒ <code>Promise.&lt;boolean&gt;</code>
-Refreshes BU names and ID's from MC instance
-
-**Kind**: static method of [<code>BusinessUnit</code>](#BusinessUnit)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - success of refresh  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | current properties that have to be refreshed |
-| credentialsName | <code>string</code> | identifying name of the installed package / project |
-
 <a name="dataStore"></a>
 
 ## dataStore : <code>TYPE.Cache</code>
 **Kind**: global constant  
-<a name="Cli"></a>
-
-## Cli
-CLI helper class
-
-**Kind**: global constant  
-
-* [Cli](#Cli)
-    * [.initMcdevConfig([skipInteraction])](#Cli.initMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.addExtraCredential(properties, [skipInteraction])](#Cli.addExtraCredential) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.updateCredential(properties, credName, [skipInteraction])](#Cli.updateCredential) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.getCredentialObject(properties, target, [isCredentialOnly], [allowAll])](#Cli.getCredentialObject) ⇒ <code>Promise.&lt;TYPE.BuObject&gt;</code>
-    * [._selectBU(properties, [credential], [isCredentialOnly], [allowAll])](#Cli._selectBU) ⇒ <code>Promise.&lt;Array&gt;</code>
-    * [._setCredential(properties, [credName], [skipInteraction])](#Cli._setCredential) ⇒ <code>Promise.&lt;(boolean\|string)&gt;</code>
-    * [._askCredentials(properties, [credName])](#Cli._askCredentials) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [.selectTypes(properties, [setTypesArr])](#Cli.selectTypes) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._summarizeSubtypes(responses, type)](#Cli._summarizeSubtypes) ⇒ <code>void</code>
-    * [.explainTypes()](#Cli.explainTypes) ⇒ <code>void</code>
-
-<a name="Cli.initMcdevConfig"></a>
-
-### Cli.initMcdevConfig([skipInteraction]) ⇒ <code>Promise.&lt;boolean&gt;</code>
-used when initially setting up a project.
-loads default config and adds first credential
-
-**Kind**: static method of [<code>Cli</code>](#Cli)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - success of init  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Cli.addExtraCredential"></a>
-
-### Cli.addExtraCredential(properties, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
-Extends template file for properties.json
-
-**Kind**: static method of [<code>Cli</code>](#Cli)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | config file's json |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Cli.updateCredential"></a>
-
-### Cli.updateCredential(properties, credName, [skipInteraction]) ⇒ <code>Promise.&lt;boolean&gt;</code>
-Extends template file for properties.json
-update credentials
-
-**Kind**: static method of [<code>Cli</code>](#Cli)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - success of update  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | config file's json |
-| credName | <code>string</code> | name of credential that needs updating |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Cli.getCredentialObject"></a>
-
-### Cli.getCredentialObject(properties, target, [isCredentialOnly], [allowAll]) ⇒ <code>Promise.&lt;TYPE.BuObject&gt;</code>
-Returns Object with parameters required for accessing API
-
-**Kind**: static method of [<code>Cli</code>](#Cli)  
-**Returns**: <code>Promise.&lt;TYPE.BuObject&gt;</code> - credential to be used for Business Unit  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | object of all configuration including credentials |
-| target | <code>string</code> | code of BU to use |
-| [isCredentialOnly] | <code>boolean</code> \| <code>string</code> | true:don't ask for BU | string: name of BU |
-| [allowAll] | <code>boolean</code> | Offer ALL as option in BU selection |
-
-<a name="Cli._selectBU"></a>
-
-### Cli.\_selectBU(properties, [credential], [isCredentialOnly], [allowAll]) ⇒ <code>Promise.&lt;Array&gt;</code>
-helps select the right credential in case of bad initial input
-
-**Kind**: static method of [<code>Cli</code>](#Cli)  
-**Returns**: <code>Promise.&lt;Array&gt;</code> - selected credential/BU combo  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | config file's json |
-| [credential] | <code>string</code> | name of valid credential |
-| [isCredentialOnly] | <code>boolean</code> | don't ask for BU if true |
-| [allowAll] | <code>boolean</code> | Offer ALL as option in BU selection |
-
-<a name="Cli._setCredential"></a>
-
-### Cli.\_setCredential(properties, [credName], [skipInteraction]) ⇒ <code>Promise.&lt;(boolean\|string)&gt;</code>
-helper around _askCredentials
-
-**Kind**: static method of [<code>Cli</code>](#Cli)  
-**Returns**: <code>Promise.&lt;(boolean\|string)&gt;</code> - success of refresh or credential name  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | from config file |
-| [credName] | <code>string</code> | name of credential that needs updating |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Cli._askCredentials"></a>
-
-### Cli.\_askCredentials(properties, [credName]) ⇒ <code>Promise.&lt;object&gt;</code>
-helper for addExtraCredential()
-
-**Kind**: static method of [<code>Cli</code>](#Cli)  
-**Returns**: <code>Promise.&lt;object&gt;</code> - credential info  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | from config file |
-| [credName] | <code>string</code> | name of credential that needs updating |
-
-<a name="Cli.selectTypes"></a>
-
-### Cli.selectTypes(properties, [setTypesArr]) ⇒ <code>Promise.&lt;void&gt;</code>
-allows updating the metadata types that shall be retrieved
-
-**Kind**: static method of [<code>Cli</code>](#Cli)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | config file's json |
-| [setTypesArr] | <code>Array.&lt;string&gt;</code> | skip user prompt and overwrite with this list if given |
-
-<a name="Cli._summarizeSubtypes"></a>
-
-### Cli.\_summarizeSubtypes(responses, type) ⇒ <code>void</code>
-helper for this.selectTypes() that converts subtypes back to main type if all and only defaults were selected
-this keeps the config automatically upgradable when we add new subtypes or change what is selected by default
-
-**Kind**: static method of [<code>Cli</code>](#Cli)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| responses | <code>object</code> | wrapper object for respones |
-| responses.selectedTypes | <code>Array.&lt;string&gt;</code> | what types the user selected |
-| type | <code>string</code> | metadata type |
-
-<a name="Cli.explainTypes"></a>
-
-### Cli.explainTypes() ⇒ <code>void</code>
-shows metadata type descriptions
-
-**Kind**: static method of [<code>Cli</code>](#Cli)  
-<a name="config"></a>
-
-## config
-Central class for loading and validating properties from config and auth
-
-**Kind**: global constant  
-
-* [config](#config)
-    * [.getProperties([silent])](#config.getProperties) ⇒ <code>Promise.&lt;TYPE.Mcdevrc&gt;</code>
-    * [.checkProperties(properties, [silent])](#config.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
-    * [.getDefaultProperties()](#config.getDefaultProperties) ⇒ <code>Promise.&lt;TYPE.Mcdevrc&gt;</code>
-
-<a name="config.getProperties"></a>
-
-### config.getProperties([silent]) ⇒ <code>Promise.&lt;TYPE.Mcdevrc&gt;</code>
-loads central properties from config file
-
-**Kind**: static method of [<code>config</code>](#config)  
-**Returns**: <code>Promise.&lt;TYPE.Mcdevrc&gt;</code> - central properties object  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [silent] | <code>boolean</code> | omit throwing errors and print messages; assuming not silent if not set |
-
-<a name="config.checkProperties"></a>
-
-### config.checkProperties(properties, [silent]) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
-check if the config file is correctly formatted and has values
-
-**Kind**: static method of [<code>config</code>](#config)  
-**Returns**: <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code> - file structure ok OR list of fields to be fixed  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
-| [silent] | <code>boolean</code> | set to true for internal use w/o cli output |
-
-<a name="config.getDefaultProperties"></a>
-
-### config.getDefaultProperties() ⇒ <code>Promise.&lt;TYPE.Mcdevrc&gt;</code>
-defines how the properties.json should look like
-used for creating a template and for checking if variables are set
-
-**Kind**: static method of [<code>config</code>](#config)  
-**Returns**: <code>Promise.&lt;TYPE.Mcdevrc&gt;</code> - default properties  
-<a name="DevOps"></a>
-
-## DevOps
-DevOps helper class
-
-**Kind**: global constant  
-
-* [DevOps](#DevOps)
-    * [.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths])](#DevOps.getDeltaList) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
-        * [~delta](#DevOps.getDeltaList..delta) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
-        * [~copied](#DevOps.getDeltaList..copied) : <code>TYPE.DeltaPkgItem</code>
-    * [.buildDeltaDefinitions(properties, range, [skipInteraction])](#DevOps.buildDeltaDefinitions)
-    * [.document(directory, jsonReport)](#DevOps.document) ⇒ <code>void</code>
-    * [.getFilesToCommit(properties, buObject, metadataType, keyArr)](#DevOps.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-
-<a name="DevOps.getDeltaList"></a>
-
-### DevOps.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
-Extracts the delta between a commit and the current state for deployment.
-Interactive commit selection if no commits are passed.
-
-**Kind**: static method of [<code>DevOps</code>](#DevOps)  
-**Returns**: <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code> - -  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | central properties object |
-| [range] | <code>string</code> | git commit range |
-| [saveToDeployDir] | <code>boolean</code> | if true, copy metadata changes into deploy directory |
-| [filterPaths] | <code>string</code> | filter file paths that start with any specified path (comma separated) |
-
-
-* [.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths])](#DevOps.getDeltaList) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
-    * [~delta](#DevOps.getDeltaList..delta) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
-    * [~copied](#DevOps.getDeltaList..copied) : <code>TYPE.DeltaPkgItem</code>
-
-<a name="DevOps.getDeltaList..delta"></a>
-
-#### getDeltaList~delta : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
-**Kind**: inner constant of [<code>getDeltaList</code>](#DevOps.getDeltaList)  
-<a name="DevOps.getDeltaList..copied"></a>
-
-#### getDeltaList~copied : <code>TYPE.DeltaPkgItem</code>
-**Kind**: inner constant of [<code>getDeltaList</code>](#DevOps.getDeltaList)  
-<a name="DevOps.buildDeltaDefinitions"></a>
-
-### DevOps.buildDeltaDefinitions(properties, range, [skipInteraction])
-wrapper around DevOps.getDeltaList, Builder.buildTemplate and M
-
-**Kind**: static method of [<code>DevOps</code>](#DevOps)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | project config file |
-| range | <code>string</code> | git commit range |
-| [skipInteraction] | <code>TYPE.SkipInteraction</code> | allows to skip interactive wizard |
-
-<a name="DevOps.document"></a>
-
-### DevOps.document(directory, jsonReport) ⇒ <code>void</code>
-create markdown file for deployment listing
-
-**Kind**: static method of [<code>DevOps</code>](#DevOps)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| directory | <code>string</code> | - |
-| jsonReport | <code>object</code> | - |
-
-<a name="DevOps.getFilesToCommit"></a>
-
-### DevOps.getFilesToCommit(properties, buObject, metadataType, keyArr) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-should return only the json for all but asset, query and script that are saved as multiple files
-additionally, the documentation for dataExtension and automation should be returned
-
-**Kind**: static method of [<code>DevOps</code>](#DevOps)  
-**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - list of all files that need to be committed in a flat array ['path/file1.ext', 'path/file2.ext']  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | central properties object |
-| buObject | <code>TYPE.BuObject</code> | references credentials |
-| metadataType | <code>string</code> | metadata type to build |
-| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
-
-<a name="File"></a>
-
-## File
-File extends fs-extra. It adds logger and util methods for file handling
-
-**Kind**: global constant  
-
-* [File](#File)
-    * [.copyFile(from, to)](#File.copyFile) ⇒ <code>object</code>
-    * [.filterIllegalPathChars(path)](#File.filterIllegalPathChars) ⇒ <code>string</code>
-    * [.filterIllegalFilenames(filename)](#File.filterIllegalFilenames) ⇒ <code>string</code>
-    * [.reverseFilterIllegalFilenames(filename)](#File.reverseFilterIllegalFilenames) ⇒ <code>string</code>
-    * [.normalizePath(denormalizedPath)](#File.normalizePath) ⇒ <code>string</code>
-    * [.writeJSONToFile(directory, filename, content)](#File.writeJSONToFile) ⇒ <code>Promise</code>
-    * [.writePrettyToFile(directory, filename, filetype, content, [templateVariables])](#File.writePrettyToFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._beautify_prettier(directory, filename, filetype, content)](#File._beautify_prettier) ⇒ <code>string</code>
-    * [.writeToFile(directory, filename, filetype, content, [encoding])](#File.writeToFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.readJSONFile(directory, filename, sync, cleanPath)](#File.readJSONFile) ⇒ <code>Promise</code> \| <code>object</code>
-    * [.readFilteredFilename(directory, filename, filetype, [encoding])](#File.readFilteredFilename) ⇒ <code>Promise.&lt;string&gt;</code>
-    * [.readDirectories(directory, depth, [includeStem], [_stemLength])](#File.readDirectories) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-    * [.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength])](#File.readDirectoriesSync) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.saveConfigFile(properties)](#File.saveConfigFile) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.initPrettier([filetype])](#File.initPrettier) ⇒ <code>Promise.&lt;boolean&gt;</code>
-
-<a name="File.copyFile"></a>
-
-### File.copyFile(from, to) ⇒ <code>object</code>
-copies a file from one path to another
-
-**Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>object</code> - - results object  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| from | <code>string</code> | full filepath including name of existing file |
-| to | <code>string</code> | full filepath including name where file should go |
-
-<a name="File.filterIllegalPathChars"></a>
-
-### File.filterIllegalPathChars(path) ⇒ <code>string</code>
-makes sure Windows accepts path names
-
-**Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>string</code> - - corrected string  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| path | <code>string</code> | filename or path |
-
-<a name="File.filterIllegalFilenames"></a>
-
-### File.filterIllegalFilenames(filename) ⇒ <code>string</code>
-makes sure Windows accepts file names
-
-**Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>string</code> - - corrected string  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| filename | <code>string</code> | filename or path |
-
-<a name="File.reverseFilterIllegalFilenames"></a>
-
-### File.reverseFilterIllegalFilenames(filename) ⇒ <code>string</code>
-makes sure Windows accepts file names
-
-**Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>string</code> - - corrected string  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| filename | <code>string</code> | filename or path |
-
-<a name="File.normalizePath"></a>
-
-### File.normalizePath(denormalizedPath) ⇒ <code>string</code>
-Takes various types of path strings and formats into a platform specific path
-
-**Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>string</code> - Path strings  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| denormalizedPath | <code>string</code> \| <code>Array.&lt;string&gt;</code> | directory the file will be written to |
-
-<a name="File.writeJSONToFile"></a>
-
-### File.writeJSONToFile(directory, filename, content) ⇒ <code>Promise</code>
-Saves json content to a file in the local file system. Will create the parent directory if it does not exist
-
-**Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>Promise</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| directory | <code>string</code> \| <code>Array.&lt;string&gt;</code> | directory the file will be written to |
-| filename | <code>string</code> | name of the file without '.json' ending |
-| content | <code>object</code> | filecontent |
-
-<a name="File.writePrettyToFile"></a>
-
-### File.writePrettyToFile(directory, filename, filetype, content, [templateVariables]) ⇒ <code>Promise.&lt;boolean&gt;</code>
-Saves beautified files in the local file system. Will create the parent directory if it does not exist
-! Important: run 'await File.initPrettier()' in your MetadataType.retrieve() once before hitting this
-
-**Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| directory | <code>string</code> \| <code>Array.&lt;string&gt;</code> | directory the file will be written to |
-| filename | <code>string</code> | name of the file without suffix |
-| filetype | <code>string</code> | filetype ie. JSON or SSJS |
-| content | <code>string</code> | filecontent |
-| [templateVariables] | <code>TYPE.TemplateMap</code> | templating variables to be replaced in the metadata |
-
-<a name="File._beautify_prettier"></a>
-
-### File.\_beautify\_prettier(directory, filename, filetype, content) ⇒ <code>string</code>
-helper for writePrettyToFile, applying prettier onto given stringified content
-! Important: run 'await File.initPrettier()' in your MetadataType.retrieve() once before hitting this
-
-**Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>string</code> - original string on error; formatted string on success  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| directory | <code>string</code> \| <code>Array.&lt;string&gt;</code> | directory the file will be written to |
-| filename | <code>string</code> | name of the file without suffix |
-| filetype | <code>string</code> | filetype ie. JSON or SSJS |
-| content | <code>string</code> | filecontent |
-
-<a name="File.writeToFile"></a>
-
-### File.writeToFile(directory, filename, filetype, content, [encoding]) ⇒ <code>Promise.&lt;boolean&gt;</code>
-Saves text content to a file in the local file system. Will create the parent directory if it does not exist
-
-**Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| directory | <code>string</code> \| <code>Array.&lt;string&gt;</code> | directory the file will be written to |
-| filename | <code>string</code> | name of the file without '.json' ending |
-| filetype | <code>string</code> | filetype suffix |
-| content | <code>string</code> | filecontent |
-| [encoding] | <code>object</code> | added for certain file types (like images) |
-
-<a name="File.readJSONFile"></a>
-
-### File.readJSONFile(directory, filename, sync, cleanPath) ⇒ <code>Promise</code> \| <code>object</code>
-Saves json content to a file in the local file system. Will create the parent directory if it does not exist
-
-**Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>Promise</code> \| <code>object</code> - Promise or JSON object depending on if async or not  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| directory | <code>string</code> \| <code>Array.&lt;string&gt;</code> | directory where the file is stored |
-| filename | <code>string</code> | name of the file without '.json' ending |
-| sync | <code>boolean</code> | should execute sync (default is async) |
-| cleanPath | <code>boolean</code> | should execute sync (default is true) |
-
-<a name="File.readFilteredFilename"></a>
-
-### File.readFilteredFilename(directory, filename, filetype, [encoding]) ⇒ <code>Promise.&lt;string&gt;</code>
-reads file from local file system.
-
-**Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>Promise.&lt;string&gt;</code> - file contents  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| directory | <code>string</code> \| <code>Array.&lt;string&gt;</code> |  | directory where the file is stored |
-| filename | <code>string</code> |  | name of the file without '.json' ending |
-| filetype | <code>string</code> |  | filetype suffix |
-| [encoding] | <code>string</code> | <code>&quot;&#x27;utf8&#x27;&quot;</code> | read file with encoding (defaults to utf-8) |
-
-<a name="File.readDirectories"></a>
-
-### File.readDirectories(directory, depth, [includeStem], [_stemLength]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-reads directories to a specific depth returning an array
-of file paths to be iterated over
-
-**Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - array of fully defined file paths  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| directory | <code>string</code> | directory to checkin |
-| depth | <code>number</code> | how many levels to check (1 base) |
-| [includeStem] | <code>boolean</code> | include the parent directory in the response |
-| [_stemLength] | <code>number</code> | set recursively for subfolders. do not set manually! |
-
-**Example**  
-```js
-['deploy/mcdev/bu1']
-```
-<a name="File.readDirectoriesSync"></a>
-
-### File.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength]) ⇒ <code>Array.&lt;string&gt;</code>
-reads directories to a specific depth returning an array
-of file paths to be iterated over using sync api (required in constructors)
-TODO - merge with readDirectories. so far the logic is really different
-
-**Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>Array.&lt;string&gt;</code> - array of fully defined file paths  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| directory | <code>string</code> | directory to checkin |
-| [depth] | <code>number</code> | how many levels to check (1 base) |
-| [includeStem] | <code>boolean</code> | include the parent directory in the response |
-| [_stemLength] | <code>number</code> | set recursively for subfolders. do not set manually! |
-
-**Example**  
-```js
-['deploy/mcdev/bu1']
-```
-<a name="File.saveConfigFile"></a>
-
-### File.saveConfigFile(properties) ⇒ <code>Promise.&lt;void&gt;</code>
-helper that splits the config back into auth & config parts to save them separately
-
-**Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | central properties object |
-
-<a name="File.initPrettier"></a>
-
-### File.initPrettier([filetype]) ⇒ <code>Promise.&lt;boolean&gt;</code>
-Initalises Prettier formatting lib async.
-
-**Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - success of config load  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| [filetype] | <code>string</code> | <code>&quot;&#x27;html&#x27;&quot;</code> | filetype ie. JSON or SSJS |
-
-<a name="Init"></a>
-
-## Init
-CLI helper class
-
-**Kind**: global constant  
-
-* [Init](#Init)
-    * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
-    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-    * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.upgradeAuthFile()](#Init.upgradeAuthFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
-    * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
-    * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>string</code>
-    * [._updateGitConfigUser([skipInteraction])](#Init._updateGitConfigUser) ⇒ <code>void</code>
-    * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
-    * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
-
-<a name="Init.fixMcdevConfig"></a>
-
-### Init.fixMcdevConfig(properties) ⇒ <code>Promise.&lt;boolean&gt;</code>
-helper method for this.upgradeProject that upgrades project config if needed
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | config file's json |
-
-<a name="Init.createIdeConfigFiles"></a>
-
-### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
-handles creation/update of all config file from the boilerplate
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - status of config file creation  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
-
-<a name="Init._updateLeaf"></a>
-
-### Init.\_updateLeaf(propertiersCur, defaultPropsCur, fieldName) ⇒ <code>void</code>
-recursive helper for _fixMcdevConfig that adds missing settings
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| propertiersCur | <code>object</code> | current sub-object of project settings |
-| defaultPropsCur | <code>object</code> | current sub-object of default settings |
-| fieldName | <code>string</code> | dot-concatenated object-path that needs adding |
-
-<a name="Init._getForcedUpdateList"></a>
-
-### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-returns list of files that need to be updated
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - relevant files with path that need to be updated  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| projectVersion | <code>string</code> | version found in config file of the current project |
-
-<a name="Init._createIdeConfigFile"></a>
-
-### Init.\_createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent]) ⇒ <code>Promise.&lt;boolean&gt;</code>
-handles creation/update of one config file from the boilerplate at a time
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - install successful or error occured  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| fileNameArr | <code>Array.&lt;string&gt;</code> | 0: path, 1: filename, 2: extension with dot |
-| relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
-| [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
-
-<a name="Init.upgradeAuthFile"></a>
-
-### Init.upgradeAuthFile() ⇒ <code>Promise.&lt;boolean&gt;</code>
-helper method for this.upgradeProject that upgrades project config if needed
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
-<a name="Init.initGitRepo"></a>
-
-### Init.initGitRepo([skipInteraction]) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
-check if git repo exists and otherwise create one
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;{status: string, repoName: string}&gt;</code> - success flag  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init.gitPush"></a>
-
-### Init.gitPush([skipInteraction]) ⇒ <code>void</code>
-offer to push the new repo straight to the server
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init._addGitRemote"></a>
-
-### Init.\_addGitRemote([skipInteraction]) ⇒ <code>string</code>
-offers to add the git remote origin
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>string</code> - repo name (optionally)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init._updateGitConfigUser"></a>
-
-### Init.\_updateGitConfigUser([skipInteraction]) ⇒ <code>void</code>
-checks global config and ask to config the user info and then store it locally
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init._getGitConfigUser"></a>
-
-### Init.\_getGitConfigUser() ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
-retrieves the global user.name and user.email values
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code> - user.name and user.email  
-<a name="Init.initProject"></a>
-
-### Init.initProject(properties, credentialName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
-Creates template file for properties.json
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | config file's json |
-| credentialName | <code>string</code> | identifying name of the installed package / project |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init._downloadAllBUs"></a>
-
-### Init.\_downloadAllBUs(bu, gitStatus, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for this.initProject()
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| bu | <code>string</code> | cred/bu or cred/* or * |
-| gitStatus | <code>string</code> | signals what state the git repo is in |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init.upgradeProject"></a>
-
-### Init.upgradeProject(properties, [initial], [repoName]) ⇒ <code>Promise.&lt;boolean&gt;</code>
-wrapper around npm dependency & configuration file setup
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - success flag  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | config file's json |
-| [initial] | <code>boolean</code> | print message if not part of initial setup |
-| [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
-
-<a name="Init._getMissingCredentials"></a>
-
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
-finds credentials that are set up in config but not in auth file
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
-
-<a name="Init.installDependencies"></a>
-
-### Init.installDependencies([repoName]) ⇒ <code>Promise.&lt;boolean&gt;</code>
-initiates npm project and then
-takes care of loading the pre-configured dependency list
-from the boilerplate directory to them as dev-dependencies
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - install successful or error occured  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
-
-<a name="Init._getDefaultPackageJson"></a>
-
-### Init.\_getDefaultPackageJson([currentContent]) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
-ensure we have certain default values in our config
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code> - extended currentContent  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [currentContent] | <code>object</code> | what was read from existing package.json file |
-
-<a name="Init"></a>
-
-## Init
-CLI helper class
-
-**Kind**: global constant  
-
-* [Init](#Init)
-    * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
-    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-    * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.upgradeAuthFile()](#Init.upgradeAuthFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
-    * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
-    * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>string</code>
-    * [._updateGitConfigUser([skipInteraction])](#Init._updateGitConfigUser) ⇒ <code>void</code>
-    * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
-    * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
-
-<a name="Init.fixMcdevConfig"></a>
-
-### Init.fixMcdevConfig(properties) ⇒ <code>Promise.&lt;boolean&gt;</code>
-helper method for this.upgradeProject that upgrades project config if needed
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | config file's json |
-
-<a name="Init.createIdeConfigFiles"></a>
-
-### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
-handles creation/update of all config file from the boilerplate
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - status of config file creation  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
-
-<a name="Init._updateLeaf"></a>
-
-### Init.\_updateLeaf(propertiersCur, defaultPropsCur, fieldName) ⇒ <code>void</code>
-recursive helper for _fixMcdevConfig that adds missing settings
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| propertiersCur | <code>object</code> | current sub-object of project settings |
-| defaultPropsCur | <code>object</code> | current sub-object of default settings |
-| fieldName | <code>string</code> | dot-concatenated object-path that needs adding |
-
-<a name="Init._getForcedUpdateList"></a>
-
-### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-returns list of files that need to be updated
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - relevant files with path that need to be updated  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| projectVersion | <code>string</code> | version found in config file of the current project |
-
-<a name="Init._createIdeConfigFile"></a>
-
-### Init.\_createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent]) ⇒ <code>Promise.&lt;boolean&gt;</code>
-handles creation/update of one config file from the boilerplate at a time
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - install successful or error occured  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| fileNameArr | <code>Array.&lt;string&gt;</code> | 0: path, 1: filename, 2: extension with dot |
-| relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
-| [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
-
-<a name="Init.upgradeAuthFile"></a>
-
-### Init.upgradeAuthFile() ⇒ <code>Promise.&lt;boolean&gt;</code>
-helper method for this.upgradeProject that upgrades project config if needed
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
-<a name="Init.initGitRepo"></a>
-
-### Init.initGitRepo([skipInteraction]) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
-check if git repo exists and otherwise create one
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;{status: string, repoName: string}&gt;</code> - success flag  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init.gitPush"></a>
-
-### Init.gitPush([skipInteraction]) ⇒ <code>void</code>
-offer to push the new repo straight to the server
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init._addGitRemote"></a>
-
-### Init.\_addGitRemote([skipInteraction]) ⇒ <code>string</code>
-offers to add the git remote origin
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>string</code> - repo name (optionally)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init._updateGitConfigUser"></a>
-
-### Init.\_updateGitConfigUser([skipInteraction]) ⇒ <code>void</code>
-checks global config and ask to config the user info and then store it locally
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init._getGitConfigUser"></a>
-
-### Init.\_getGitConfigUser() ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
-retrieves the global user.name and user.email values
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code> - user.name and user.email  
-<a name="Init.initProject"></a>
-
-### Init.initProject(properties, credentialName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
-Creates template file for properties.json
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | config file's json |
-| credentialName | <code>string</code> | identifying name of the installed package / project |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init._downloadAllBUs"></a>
-
-### Init.\_downloadAllBUs(bu, gitStatus, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for this.initProject()
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| bu | <code>string</code> | cred/bu or cred/* or * |
-| gitStatus | <code>string</code> | signals what state the git repo is in |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init.upgradeProject"></a>
-
-### Init.upgradeProject(properties, [initial], [repoName]) ⇒ <code>Promise.&lt;boolean&gt;</code>
-wrapper around npm dependency & configuration file setup
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - success flag  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | config file's json |
-| [initial] | <code>boolean</code> | print message if not part of initial setup |
-| [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
-
-<a name="Init._getMissingCredentials"></a>
-
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
-finds credentials that are set up in config but not in auth file
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
-
-<a name="Init.installDependencies"></a>
-
-### Init.installDependencies([repoName]) ⇒ <code>Promise.&lt;boolean&gt;</code>
-initiates npm project and then
-takes care of loading the pre-configured dependency list
-from the boilerplate directory to them as dev-dependencies
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - install successful or error occured  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
-
-<a name="Init._getDefaultPackageJson"></a>
-
-### Init.\_getDefaultPackageJson([currentContent]) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
-ensure we have certain default values in our config
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code> - extended currentContent  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [currentContent] | <code>object</code> | what was read from existing package.json file |
-
-<a name="Init"></a>
-
-## Init
-CLI helper class
-
-**Kind**: global constant  
-
-* [Init](#Init)
-    * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
-    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-    * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.upgradeAuthFile()](#Init.upgradeAuthFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
-    * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
-    * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>string</code>
-    * [._updateGitConfigUser([skipInteraction])](#Init._updateGitConfigUser) ⇒ <code>void</code>
-    * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
-    * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
-
-<a name="Init.fixMcdevConfig"></a>
-
-### Init.fixMcdevConfig(properties) ⇒ <code>Promise.&lt;boolean&gt;</code>
-helper method for this.upgradeProject that upgrades project config if needed
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | config file's json |
-
-<a name="Init.createIdeConfigFiles"></a>
-
-### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
-handles creation/update of all config file from the boilerplate
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - status of config file creation  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
-
-<a name="Init._updateLeaf"></a>
-
-### Init.\_updateLeaf(propertiersCur, defaultPropsCur, fieldName) ⇒ <code>void</code>
-recursive helper for _fixMcdevConfig that adds missing settings
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| propertiersCur | <code>object</code> | current sub-object of project settings |
-| defaultPropsCur | <code>object</code> | current sub-object of default settings |
-| fieldName | <code>string</code> | dot-concatenated object-path that needs adding |
-
-<a name="Init._getForcedUpdateList"></a>
-
-### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-returns list of files that need to be updated
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - relevant files with path that need to be updated  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| projectVersion | <code>string</code> | version found in config file of the current project |
-
-<a name="Init._createIdeConfigFile"></a>
-
-### Init.\_createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent]) ⇒ <code>Promise.&lt;boolean&gt;</code>
-handles creation/update of one config file from the boilerplate at a time
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - install successful or error occured  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| fileNameArr | <code>Array.&lt;string&gt;</code> | 0: path, 1: filename, 2: extension with dot |
-| relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
-| [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
-
-<a name="Init.upgradeAuthFile"></a>
-
-### Init.upgradeAuthFile() ⇒ <code>Promise.&lt;boolean&gt;</code>
-helper method for this.upgradeProject that upgrades project config if needed
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
-<a name="Init.initGitRepo"></a>
-
-### Init.initGitRepo([skipInteraction]) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
-check if git repo exists and otherwise create one
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;{status: string, repoName: string}&gt;</code> - success flag  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init.gitPush"></a>
-
-### Init.gitPush([skipInteraction]) ⇒ <code>void</code>
-offer to push the new repo straight to the server
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init._addGitRemote"></a>
-
-### Init.\_addGitRemote([skipInteraction]) ⇒ <code>string</code>
-offers to add the git remote origin
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>string</code> - repo name (optionally)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init._updateGitConfigUser"></a>
-
-### Init.\_updateGitConfigUser([skipInteraction]) ⇒ <code>void</code>
-checks global config and ask to config the user info and then store it locally
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init._getGitConfigUser"></a>
-
-### Init.\_getGitConfigUser() ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
-retrieves the global user.name and user.email values
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code> - user.name and user.email  
-<a name="Init.initProject"></a>
-
-### Init.initProject(properties, credentialName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
-Creates template file for properties.json
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | config file's json |
-| credentialName | <code>string</code> | identifying name of the installed package / project |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init._downloadAllBUs"></a>
-
-### Init.\_downloadAllBUs(bu, gitStatus, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for this.initProject()
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| bu | <code>string</code> | cred/bu or cred/* or * |
-| gitStatus | <code>string</code> | signals what state the git repo is in |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init.upgradeProject"></a>
-
-### Init.upgradeProject(properties, [initial], [repoName]) ⇒ <code>Promise.&lt;boolean&gt;</code>
-wrapper around npm dependency & configuration file setup
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - success flag  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | config file's json |
-| [initial] | <code>boolean</code> | print message if not part of initial setup |
-| [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
-
-<a name="Init._getMissingCredentials"></a>
-
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
-finds credentials that are set up in config but not in auth file
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
-
-<a name="Init.installDependencies"></a>
-
-### Init.installDependencies([repoName]) ⇒ <code>Promise.&lt;boolean&gt;</code>
-initiates npm project and then
-takes care of loading the pre-configured dependency list
-from the boilerplate directory to them as dev-dependencies
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - install successful or error occured  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
-
-<a name="Init._getDefaultPackageJson"></a>
-
-### Init.\_getDefaultPackageJson([currentContent]) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
-ensure we have certain default values in our config
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code> - extended currentContent  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [currentContent] | <code>object</code> | what was read from existing package.json file |
-
-<a name="Init"></a>
-
-## Init
-CLI helper class
-
-**Kind**: global constant  
-
-* [Init](#Init)
-    * [.fixMcdevConfig(properties)](#Init.fixMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.createIdeConfigFiles(versionBeforeUpgrade)](#Init.createIdeConfigFiles) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._updateLeaf(propertiersCur, defaultPropsCur, fieldName)](#Init._updateLeaf) ⇒ <code>void</code>
-    * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-    * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.upgradeAuthFile()](#Init.upgradeAuthFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
-    * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
-    * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>string</code>
-    * [._updateGitConfigUser([skipInteraction])](#Init._updateGitConfigUser) ⇒ <code>void</code>
-    * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
-    * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
-
-<a name="Init.fixMcdevConfig"></a>
-
-### Init.fixMcdevConfig(properties) ⇒ <code>Promise.&lt;boolean&gt;</code>
-helper method for this.upgradeProject that upgrades project config if needed
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | config file's json |
-
-<a name="Init.createIdeConfigFiles"></a>
-
-### Init.createIdeConfigFiles(versionBeforeUpgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
-handles creation/update of all config file from the boilerplate
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - status of config file creation  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| versionBeforeUpgrade | <code>string</code> | 'x.y.z' |
-
-<a name="Init._updateLeaf"></a>
-
-### Init.\_updateLeaf(propertiersCur, defaultPropsCur, fieldName) ⇒ <code>void</code>
-recursive helper for _fixMcdevConfig that adds missing settings
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| propertiersCur | <code>object</code> | current sub-object of project settings |
-| defaultPropsCur | <code>object</code> | current sub-object of default settings |
-| fieldName | <code>string</code> | dot-concatenated object-path that needs adding |
-
-<a name="Init._getForcedUpdateList"></a>
-
-### Init.\_getForcedUpdateList(projectVersion) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-returns list of files that need to be updated
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - relevant files with path that need to be updated  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| projectVersion | <code>string</code> | version found in config file of the current project |
-
-<a name="Init._createIdeConfigFile"></a>
-
-### Init.\_createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent]) ⇒ <code>Promise.&lt;boolean&gt;</code>
-handles creation/update of one config file from the boilerplate at a time
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - install successful or error occured  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| fileNameArr | <code>Array.&lt;string&gt;</code> | 0: path, 1: filename, 2: extension with dot |
-| relevantForcedUpdates | <code>Array.&lt;string&gt;</code> | if fileNameArr is in this list we require an override |
-| [boilerplateFileContent] | <code>string</code> | in case we cannot copy files 1:1 this can be used to pass in content |
-
-<a name="Init.upgradeAuthFile"></a>
-
-### Init.upgradeAuthFile() ⇒ <code>Promise.&lt;boolean&gt;</code>
-helper method for this.upgradeProject that upgrades project config if needed
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
-<a name="Init.initGitRepo"></a>
-
-### Init.initGitRepo([skipInteraction]) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
-check if git repo exists and otherwise create one
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;{status: string, repoName: string}&gt;</code> - success flag  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init.gitPush"></a>
-
-### Init.gitPush([skipInteraction]) ⇒ <code>void</code>
-offer to push the new repo straight to the server
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init._addGitRemote"></a>
-
-### Init.\_addGitRemote([skipInteraction]) ⇒ <code>string</code>
-offers to add the git remote origin
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>string</code> - repo name (optionally)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init._updateGitConfigUser"></a>
-
-### Init.\_updateGitConfigUser([skipInteraction]) ⇒ <code>void</code>
-checks global config and ask to config the user info and then store it locally
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init._getGitConfigUser"></a>
-
-### Init.\_getGitConfigUser() ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
-retrieves the global user.name and user.email values
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code> - user.name and user.email  
-<a name="Init.initProject"></a>
-
-### Init.initProject(properties, credentialName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
-Creates template file for properties.json
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | config file's json |
-| credentialName | <code>string</code> | identifying name of the installed package / project |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init._downloadAllBUs"></a>
-
-### Init.\_downloadAllBUs(bu, gitStatus, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for this.initProject()
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| bu | <code>string</code> | cred/bu or cred/* or * |
-| gitStatus | <code>string</code> | signals what state the git repo is in |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
-<a name="Init.upgradeProject"></a>
-
-### Init.upgradeProject(properties, [initial], [repoName]) ⇒ <code>Promise.&lt;boolean&gt;</code>
-wrapper around npm dependency & configuration file setup
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - success flag  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | config file's json |
-| [initial] | <code>boolean</code> | print message if not part of initial setup |
-| [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
-
-<a name="Init._getMissingCredentials"></a>
-
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
-finds credentials that are set up in config but not in auth file
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
-
-<a name="Init.installDependencies"></a>
-
-### Init.installDependencies([repoName]) ⇒ <code>Promise.&lt;boolean&gt;</code>
-initiates npm project and then
-takes care of loading the pre-configured dependency list
-from the boilerplate directory to them as dev-dependencies
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - install successful or error occured  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
-
-<a name="Init._getDefaultPackageJson"></a>
-
-### Init.\_getDefaultPackageJson([currentContent]) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
-ensure we have certain default values in our config
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code> - extended currentContent  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [currentContent] | <code>object</code> | what was read from existing package.json file |
-
-<a name="Util"></a>
-
-## Util
-Util that contains logger and simple util methods
-
-**Kind**: global constant  
-
-* [Util](#Util)
-    * [.skipInteraction](#Util.skipInteraction) : <code>TYPE.skipInteraction</code>
-    * [.logger](#Util.logger) : <code>TYPE.Logger</code>
-    * [.filterObjByKeys(originalObj, [whitelistArr])](#Util.filterObjByKeys) ⇒ <code>Object.&lt;string, \*&gt;</code>
-    * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
-    * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
-    * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
-    * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList) ⇒ <code>void</code>
-    * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
-    * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
-    * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
-    * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
-    * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
-    * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
-    * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
-    * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
-    * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
-    * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
-    * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
-
-<a name="Util.skipInteraction"></a>
-
-### Util.skipInteraction : <code>TYPE.skipInteraction</code>
-**Kind**: static property of [<code>Util</code>](#Util)  
-<a name="Util.logger"></a>
-
-### Util.logger : <code>TYPE.Logger</code>
-Logger that creates timestamped log file in 'logs/' directory
-
-**Kind**: static property of [<code>Util</code>](#Util)  
-<a name="Util.filterObjByKeys"></a>
-
-### Util.filterObjByKeys(originalObj, [whitelistArr]) ⇒ <code>Object.&lt;string, \*&gt;</code>
-helper that allows filtering an object by its keys
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Object.&lt;string, \*&gt;</code> - filtered object that only contains keys you provided  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| originalObj | <code>Object.&lt;string, \*&gt;</code> | object that you want to filter |
-| [whitelistArr] | <code>Array.&lt;string&gt;</code> | positive filter. if not provided, returns originalObj without filter |
-
-<a name="Util.includesStartsWith"></a>
-
-### Util.includesStartsWith(arr, search) ⇒ <code>boolean</code>
-extended Array.includes method that allows check if an array-element starts with a certain string
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> - found / not found  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| arr | <code>Array.&lt;string&gt;</code> | your array of strigns |
-| search | <code>string</code> | the string you are looking for |
-
-<a name="Util.includesStartsWithIndex"></a>
-
-### Util.includesStartsWithIndex(arr, search) ⇒ <code>number</code>
-extended Array.includes method that allows check if an array-element starts with a certain string
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>number</code> - array index 0..n or -1 of not found  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| arr | <code>Array.&lt;string&gt;</code> | your array of strigns |
-| search | <code>string</code> | the string you are looking for |
-
-<a name="Util.checkMarket"></a>
-
-### Util.checkMarket(market, properties) ⇒ <code>boolean</code>
-check if a market name exists in current mcdev config
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> - found market or not  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| market | <code>string</code> | market localizations |
-| properties | <code>TYPE.Mcdevrc</code> | local mcdev config |
-
-<a name="Util.verifyMarketList"></a>
-
-### Util.verifyMarketList(mlName, properties) ⇒ <code>void</code>
-ensure provided MarketList exists and it's content including markets and BUs checks out
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>void</code> - throws errors if problems were found  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| mlName | <code>string</code> | name of marketList |
-| properties | <code>TYPE.Mcdevrc</code> | General configuration to be used in retrieve |
-
-<a name="Util.signalFatalError"></a>
-
-### Util.signalFatalError() ⇒ <code>void</code>
-used to ensure the program tells surrounding software that an unrecoverable error occured
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-<a name="Util.isTrue"></a>
-
-### Util.isTrue(attrValue) ⇒ <code>boolean</code>
-SFMC accepts multiple true values for Boolean attributes for which we are checking here
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> - attribute value == true ? true : false  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| attrValue | <code>\*</code> | value |
-
-<a name="Util.isFalse"></a>
-
-### Util.isFalse(attrValue) ⇒ <code>boolean</code>
-SFMC accepts multiple false values for Boolean attributes for which we are checking here
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> - attribute value == false ? true : false  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| attrValue | <code>\*</code> | value |
-
-<a name="Util._isValidType"></a>
-
-### Util.\_isValidType(selectedType) ⇒ <code>boolean</code>
-helper for retrieve, retrieveAsTemplate and deploy
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> - type ok or not  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| selectedType | <code>TYPE.SupportedMetadataTypes</code> | type or type-subtype |
-
-<a name="Util.getRetrieveTypeChoices"></a>
-
-### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
-helper for getDefaultProperties()
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> - type choices  
-<a name="Util.metadataLogger"></a>
-
-### Util.metadataLogger(level, type, method, payload, [source]) ⇒ <code>void</code>
-Logger helper for Metadata functions
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| level | <code>string</code> | of log (error, info, warn) |
-| type | <code>string</code> | of metadata being referenced |
-| method | <code>string</code> | name which log was called from |
-| payload | <code>\*</code> | generic object which details the error |
-| [source] | <code>string</code> | key/id of metadata which relates to error |
-
-<a name="Util.replaceByObject"></a>
-
-### Util.replaceByObject(str, obj) ⇒ <code>string</code> \| <code>object</code>
-replaces values in a JSON object string, based on a series of
-key-value pairs (obj)
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>string</code> \| <code>object</code> - replaced version of str  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| str | <code>string</code> \| <code>object</code> | JSON object or its stringified version, which has values to be replaced |
-| obj | <code>TYPE.TemplateMap</code> | key value object which contains keys to be replaced and values to be replaced with |
-
-<a name="Util.inverseGet"></a>
-
-### Util.inverseGet(objs, val) ⇒ <code>string</code>
-get key of an object based on the first matching value
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>string</code> - key  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| objs | <code>object</code> | object of objects to be searched |
-| val | <code>string</code> | value to be searched for |
-
-<a name="Util.getMetadataHierachy"></a>
-
-### Util.getMetadataHierachy(metadataTypes) ⇒ <code>Array.&lt;string&gt;</code>
-Returns Order in which metadata needs to be retrieved/deployed
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Array.&lt;string&gt;</code> - retrieve/deploy order as array  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadataTypes | <code>Array.&lt;string&gt;</code> | which should be retrieved/deployed |
-
-<a name="Util.resolveObjPath"></a>
-
-### Util.resolveObjPath(path, obj) ⇒ <code>any</code>
-let's you dynamically walk down an object and get a value
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>any</code> - value of obj.path  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| path | <code>string</code> | 'fieldA.fieldB.fieldC' |
-| obj | <code>object</code> | some parent object |
-
-<a name="Util.execSync"></a>
-
-### Util.execSync(cmd, [args]) ⇒ <code>undefined</code>
-helper to run other commands as if run manually by user
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| cmd | <code>string</code> | to be executed command |
-| [args] | <code>Array.&lt;string&gt;</code> | list of arguments |
-
-<a name="Util.templateSearchResult"></a>
-
-### Util.templateSearchResult(results, keyToSearch, searchValue) ⇒ <code>TYPE.MetadataTypeItem</code>
-standardize check to ensure only one result is returned from template search
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - metadata to be used in building template  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| results | <code>Array.&lt;TYPE.MetadataTypeItem&gt;</code> | array of metadata |
-| keyToSearch | <code>string</code> | the field which contains the searched value |
-| searchValue | <code>string</code> | the value which is being looked for |
-
-<a name="Util.setLoggingLevel"></a>
-
-### Util.setLoggingLevel(argv) ⇒ <code>void</code>
-configures what is displayed in the console
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| argv | <code>object</code> | list of command line parameters given by user |
-| [argv.silent] | <code>boolean</code> | only errors printed to CLI |
-| [argv.verbose] | <code>boolean</code> | chatty user CLI output |
-| [argv.debug] | <code>boolean</code> | enables developer output & features |
-
 <a name="csvToArray"></a>
 
 ## csvToArray(csv) ⇒ <code>Array.&lt;string&gt;</code>
