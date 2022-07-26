@@ -4438,7 +4438,6 @@ CLI entry for SFMC DevTools
     * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
     * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
     * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList) ⇒ <code>void</code>
-    * [.startTimer()](#Util.startTimer) ⇒ <code>number</code>
     * [.stopTimer(initTime, command)](#Util.stopTimer) ⇒ <code>void</code>
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
@@ -4529,13 +4528,6 @@ ensure provided MarketList exists and it's content including markets and BUs che
 | mlName | <code>string</code> | name of marketList |
 | properties | <code>TYPE.Mcdevrc</code> | General configuration to be used in retrieve |
 
-<a name="Util.startTimer"></a>
-
-### Util.startTimer() ⇒ <code>number</code>
-calculates the runtime for a function
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>number</code> - - actual time in ms  
 <a name="Util.stopTimer"></a>
 
 ### Util.stopTimer(initTime, command) ⇒ <code>void</code>
@@ -6211,7 +6203,6 @@ Util that contains logger and simple util methods
     * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
     * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
     * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList) ⇒ <code>void</code>
-    * [.startTimer()](#Util.startTimer) ⇒ <code>number</code>
     * [.stopTimer(initTime, command)](#Util.stopTimer) ⇒ <code>void</code>
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
@@ -6302,13 +6293,6 @@ ensure provided MarketList exists and it's content including markets and BUs che
 | mlName | <code>string</code> | name of marketList |
 | properties | <code>TYPE.Mcdevrc</code> | General configuration to be used in retrieve |
 
-<a name="Util.startTimer"></a>
-
-### Util.startTimer() ⇒ <code>number</code>
-calculates the runtime for a function
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>number</code> - - actual time in ms  
 <a name="Util.stopTimer"></a>
 
 ### Util.stopTimer(initTime, command) ⇒ <code>void</code>
