@@ -64,7 +64,7 @@
         "assert": "2.0.0",
         "axios-mock-adapter": "1.21.1",
         "chai": "4.3.6",
-        "eslint": "8.20.0",
+        "eslint": "8.21.0",
         "eslint-config-prettier": "8.5.0",
         "eslint-config-ssjs": "1.1.11",
         "eslint-plugin-jsdoc": "39.3.3",
