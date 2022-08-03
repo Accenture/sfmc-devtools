@@ -5901,25 +5901,37 @@ Util that contains logger and simple util methods
 **Kind**: global class  
 
 * [Util](#Util)
-    * [.filterObjByKeys(originalObj, [whitelistArr])](#Util.filterObjByKeys) ⇒ <code>Object.&lt;string, \*&gt;</code>
-    * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
-    * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
-    * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
-    * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList) ⇒ <code>void</code>
-    * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
-    * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
-    * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
-    * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
-    * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
-    * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
-    * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
-    * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
-    * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
-    * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
-    * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
+    * _instance_
+        * [.skipInteraction](#Util+skipInteraction) : <code>TYPE.skipInteraction</code>
+        * [.loggerTransports](#Util+loggerTransports) : <code>TYPE.Logger</code>
+    * _static_
+        * [.filterObjByKeys(originalObj, [whitelistArr])](#Util.filterObjByKeys) ⇒ <code>Object.&lt;string, \*&gt;</code>
+        * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
+        * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
+        * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
+        * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList) ⇒ <code>void</code>
+        * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
+        * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
+        * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
+        * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
+        * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
+        * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
+        * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
+        * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
+        * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
+        * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
+        * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
+        * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
+        * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
 
+<a name="Util+skipInteraction"></a>
+
+### util.skipInteraction : <code>TYPE.skipInteraction</code>
+**Kind**: instance property of [<code>Util</code>](#Util)  
+<a name="Util+loggerTransports"></a>
+
+### util.loggerTransports : <code>TYPE.Logger</code>
+**Kind**: instance property of [<code>Util</code>](#Util)  
 <a name="Util.filterObjByKeys"></a>
 
 ### Util.filterObjByKeys(originalObj, [whitelistArr]) ⇒ <code>Object.&lt;string, \*&gt;</code>
@@ -6149,25 +6161,37 @@ CLI entry for SFMC DevTools
 **Kind**: global constant  
 
 * [Util](#Util)
-    * [.filterObjByKeys(originalObj, [whitelistArr])](#Util.filterObjByKeys) ⇒ <code>Object.&lt;string, \*&gt;</code>
-    * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
-    * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
-    * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
-    * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList) ⇒ <code>void</code>
-    * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
-    * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
-    * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
-    * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
-    * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
-    * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
-    * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
-    * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
-    * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
-    * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
-    * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
+    * _instance_
+        * [.skipInteraction](#Util+skipInteraction) : <code>TYPE.skipInteraction</code>
+        * [.loggerTransports](#Util+loggerTransports) : <code>TYPE.Logger</code>
+    * _static_
+        * [.filterObjByKeys(originalObj, [whitelistArr])](#Util.filterObjByKeys) ⇒ <code>Object.&lt;string, \*&gt;</code>
+        * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
+        * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
+        * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
+        * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList) ⇒ <code>void</code>
+        * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
+        * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
+        * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
+        * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
+        * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
+        * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
+        * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
+        * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
+        * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
+        * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
+        * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
+        * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
+        * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
 
+<a name="Util+skipInteraction"></a>
+
+### util.skipInteraction : <code>TYPE.skipInteraction</code>
+**Kind**: instance property of [<code>Util</code>](#Util)  
+<a name="Util+loggerTransports"></a>
+
+### util.loggerTransports : <code>TYPE.Logger</code>
+**Kind**: instance property of [<code>Util</code>](#Util)  
 <a name="Util.filterObjByKeys"></a>
 
 ### Util.filterObjByKeys(originalObj, [whitelistArr]) ⇒ <code>Object.&lt;string, \*&gt;</code>

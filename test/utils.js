@@ -4,6 +4,7 @@ const axios = require('axios');
 const MockAdapter = require('axios-mock-adapter');
 const auth = require('../lib/util/auth');
 const Util = require('../lib/util/util');
+const fs = require('fs-extra');
 
 // for some reason doesnt realize below reference
 // eslint-disable-next-line no-unused-vars
@@ -20,7 +21,7 @@ const resourceFactory = require('./resourceFactory');
  * @returns {Promise.<string>} file in string form
  */
 exports.getActualFile = (customerKey, type) =>
-    File.readJSON(`./retrieve/testInstance/testBU/${type}/${customerKey}.${type}-meta.json`);
+    fs.readJSON(`./retrieve/testInstance/testBU/${type}/${customerKey}.${type}-meta.json`);
 /**
  * gets file from Deploy folder
  *
@@ -29,7 +30,7 @@ exports.getActualFile = (customerKey, type) =>
  * @returns {Promise.<string>} file in string form
  */
 exports.getActualDeployFile = (customerKey, type) =>
-    File.readJSON(`./deploy/testInstance/testBU/${type}/${customerKey}.${type}-meta.json`);
+    fs.readJSON(`./deploy/testInstance/testBU/${type}/${customerKey}.${type}-meta.json`);
 /**
  * gets file from Template folder
  *
@@ -38,7 +39,7 @@ exports.getActualDeployFile = (customerKey, type) =>
  * @returns {Promise.<string>} file in string form
  */
 exports.getActualTemplate = (customerKey, type) =>
-    File.readJSON(`./template/${type}/${customerKey}.${type}-meta.json`);
+    fs.readJSON(`./template/${type}/${customerKey}.${type}-meta.json`);
 
 /**
  * gets file from resources folder which should be used for comparison
@@ -49,7 +50,7 @@ exports.getActualTemplate = (customerKey, type) =>
  * @returns {Promise.<string>} file in string form
  */
 exports.getExpectedFile = (mid, type, action) =>
-    File.readJSON(path.join('test', 'resources', mid, type, action + '-expected.json'));
+    fs.readJSON(path.join('test', 'resources', mid, type, action + '-expected.json'));
 /**
  * setup mocks for API and FS
  *
