@@ -17,7 +17,7 @@
         "SharedArrayBuffer": "readonly"
     },
     "parserOptions": {
-        "ecmaVersion": "latest",
+        "ecmaVersion": 2022,
         "sourceType": "module"
     },
     "root": true,
