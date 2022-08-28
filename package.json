@@ -62,7 +62,7 @@
     },
     "devDependencies": {
         "assert": "2.0.0",
-        "axios-mock-adapter": "1.21.1",
+        "axios-mock-adapter": "1.21.2",
         "chai": "4.3.6",
         "eslint": "8.20.0",
         "eslint-config-prettier": "8.5.0",
