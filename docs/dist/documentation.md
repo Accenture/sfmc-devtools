@@ -244,7 +244,7 @@ Builds metadata from a template using market specific customisation
     * _static_
         * [.buildTemplate(businessUnit, selectedType, keyArr, market)](#Builder.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
         * [.buildDefinition(businessUnit, selectedType, name, market)](#Builder.buildDefinition) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
-        * [.buildDefinitionBulk(listName, type, name)](#Builder.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
+        * [.buildDefinitionBulk(listName, type, name)](#Builder.buildDefinitionBulk) ⇒ <code>Promise.&lt;Array.&lt;TYPE.MultiMetadataTypeList&gt;&gt;</code>
 
 <a name="new_Builder_new"></a>
 
@@ -321,11 +321,11 @@ Build a specific metadata file based on a template.
 
 <a name="Builder.buildDefinitionBulk"></a>
 
-### Builder.buildDefinitionBulk(listName, type, name) ⇒ <code>Promise.&lt;void&gt;</code>
+### Builder.buildDefinitionBulk(listName, type, name) ⇒ <code>Promise.&lt;Array.&lt;TYPE.MultiMetadataTypeList&gt;&gt;</code>
 Build a specific metadata file based on a template using a list of bu-market combos
 
 **Kind**: static method of [<code>Builder</code>](#Builder)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+**Returns**: <code>Promise.&lt;Array.&lt;TYPE.MultiMetadataTypeList&gt;&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
