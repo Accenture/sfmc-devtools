@@ -11,4 +11,4 @@ updates:
           interval: 'daily'
       target-branch: 'develop'
       labels:
-          - 'chore'
+          - 'dependencies'
