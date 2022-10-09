@@ -42,7 +42,7 @@
     "dependencies": {
         "cli-progress": "3.11.2",
         "command-exists": "1.2.9",
-        "conf": "10.1.2",
+        "conf": "10.2.0",
         "console.table": "0.10.0",
         "deep-equal": "2.0.5",
         "fs-extra": "10.1.0",
