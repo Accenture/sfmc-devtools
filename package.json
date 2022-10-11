@@ -36,7 +36,6 @@
         "lint-type": "eslint types/*.js",
         "lint-test": "eslint test/**/*.js",
         "upgrade": "npm-check --update",
-        "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\"",
         "test": "mocha"
     },
     "dependencies": {
