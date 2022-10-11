@@ -36,6 +36,7 @@
         "lint-type": "eslint types/*.js",
         "lint-test": "eslint test/**/*.js",
         "upgrade": "npm-check --update",
+        "prepare": "husky install",
         "test": "mocha"
     },
     "dependencies": {
