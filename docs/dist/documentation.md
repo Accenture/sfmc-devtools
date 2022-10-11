@@ -244,7 +244,7 @@ Builds metadata from a template using market specific customisation
     * _static_
         * [.buildTemplate(businessUnit, selectedType, keyArr, market)](#Builder.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
         * [.buildDefinition(businessUnit, selectedType, name, market)](#Builder.buildDefinition) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
-        * [.buildDefinitionBulk(listName, type, name)](#Builder.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
+        * [.buildDefinitionBulk(listName, type, name)](#Builder.buildDefinitionBulk) ⇒ <code>Promise.&lt;Array.&lt;TYPE.MultiMetadataTypeList&gt;&gt;</code>
 
 <a name="new_Builder_new"></a>
 
@@ -321,11 +321,11 @@ Build a specific metadata file based on a template.
 
 <a name="Builder.buildDefinitionBulk"></a>
 
-### Builder.buildDefinitionBulk(listName, type, name) ⇒ <code>Promise.&lt;void&gt;</code>
+### Builder.buildDefinitionBulk(listName, type, name) ⇒ <code>Promise.&lt;Array.&lt;TYPE.MultiMetadataTypeList&gt;&gt;</code>
 Build a specific metadata file based on a template using a list of bu-market combos
 
 **Kind**: static method of [<code>Builder</code>](#Builder)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+**Returns**: <code>Promise.&lt;Array.&lt;TYPE.MultiMetadataTypeList&gt;&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4942,7 +4942,8 @@ DevOps helper class
     * [.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths])](#DevOps.getDeltaList) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
         * [~delta](#DevOps.getDeltaList..delta) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
         * [~copied](#DevOps.getDeltaList..copied) : <code>TYPE.DeltaPkgItem</code>
-    * [.buildDeltaDefinitions(properties, range, [skipInteraction])](#DevOps.buildDeltaDefinitions)
+    * [.buildDeltaDefinitions(properties, range, [skipInteraction])](#DevOps.buildDeltaDefinitions) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+        * [~deltaDeployAll](#DevOps.buildDeltaDefinitions..deltaDeployAll) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
     * [.document(directory, jsonReport)](#DevOps.document) ⇒ <code>void</code>
     * [.getFilesToCommit(properties, buObject, metadataType, keyArr)](#DevOps.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 
@@ -4977,10 +4978,11 @@ Interactive commit selection if no commits are passed.
 **Kind**: inner constant of [<code>getDeltaList</code>](#DevOps.getDeltaList)  
 <a name="DevOps.buildDeltaDefinitions"></a>
 
-### DevOps.buildDeltaDefinitions(properties, range, [skipInteraction])
+### DevOps.buildDeltaDefinitions(properties, range, [skipInteraction]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
 wrapper around DevOps.getDeltaList, Builder.buildTemplate and M
 
 **Kind**: static method of [<code>DevOps</code>](#DevOps)  
+**Returns**: <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4988,6 +4990,10 @@ wrapper around DevOps.getDeltaList, Builder.buildTemplate and M
 | range | <code>string</code> | git commit range |
 | [skipInteraction] | <code>TYPE.SkipInteraction</code> | allows to skip interactive wizard |
 
+<a name="DevOps.buildDeltaDefinitions..deltaDeployAll"></a>
+
+#### buildDeltaDefinitions~deltaDeployAll : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
+**Kind**: inner constant of [<code>buildDeltaDefinitions</code>](#DevOps.buildDeltaDefinitions)  
 <a name="DevOps.document"></a>
 
 ### DevOps.document(directory, jsonReport) ⇒ <code>void</code>
