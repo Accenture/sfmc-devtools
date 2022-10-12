@@ -4449,7 +4449,7 @@ CLI entry for SFMC DevTools
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
-    * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
+    * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>undefined</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
 
@@ -4646,7 +4646,7 @@ let's you dynamically walk down an object and get a value
 
 <a name="Util.execSync"></a>
 
-### Util.execSync(cmd, [args]) ⇒ <code>undefined</code>
+### Util.execSync(cmd, [args], [hideOutput]) ⇒ <code>undefined</code>
 helper to run other commands as if run manually by user
 
 **Kind**: static method of [<code>Util</code>](#Util)  
@@ -4655,6 +4655,7 @@ helper to run other commands as if run manually by user
 | --- | --- | --- |
 | cmd | <code>string</code> | to be executed command |
 | [args] | <code>Array.&lt;string&gt;</code> | list of arguments |
+| [hideOutput] | <code>boolean</code> | if true, output of command will be hidden from CLI |
 
 <a name="Util.templateSearchResult"></a>
 
@@ -6208,7 +6209,7 @@ Util that contains logger and simple util methods
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
-    * [.execSync(cmd, [args])](#Util.execSync) ⇒ <code>undefined</code>
+    * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>undefined</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
 
@@ -6405,7 +6406,7 @@ let's you dynamically walk down an object and get a value
 
 <a name="Util.execSync"></a>
 
-### Util.execSync(cmd, [args]) ⇒ <code>undefined</code>
+### Util.execSync(cmd, [args], [hideOutput]) ⇒ <code>undefined</code>
 helper to run other commands as if run manually by user
 
 **Kind**: static method of [<code>Util</code>](#Util)  
@@ -6414,6 +6415,7 @@ helper to run other commands as if run manually by user
 | --- | --- | --- |
 | cmd | <code>string</code> | to be executed command |
 | [args] | <code>Array.&lt;string&gt;</code> | list of arguments |
+| [hideOutput] | <code>boolean</code> | if true, output of command will be hidden from CLI |
 
 <a name="Util.templateSearchResult"></a>
 
