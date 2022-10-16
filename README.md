@@ -1485,33 +1485,27 @@ If you want to enhance Accenture SFMC DevTools you are welcome to fork the repo 
 
 Instead of installing Accenture SFMC DevTools as a npm dependency from our git repo, we recommend cloning our repo and then linking it locally:
 
-Assuming you cloned Accenture SFMC DevTools into `C:\repos\sfmc-devtools\` (or `~/repos/sfmc-devtools/` on Mac) you can then go into your project directory, open a terminal there and run:
+Assuming you cloned Accenture SFMC DevTools into `C:\repos\sfmc-devtools\` (or `~/repos/sfmc-devtools/` on Mac):
 
-_Local install:_
-
-```bash
-npm install --save-dev "C:\repos\sfmc-devtools"
-```
-
-or
-
-_Global install **(recommended)**:_
-
-```bash
-npm install -g "C:\repos\sfmc-devtools"
-```
+1. Open a terminal in your repo folder (`repos/sfmc-devtools/`)
+2. Execute `npm install` to download all the dependencies.
+3. Execute `npx husky install` to enable our git hooks.
+4. Execute `npm install -g "C:\repos\sfmc-devtools"` (this installs mcdev globally on your computer based on your cloned repo folder. Any changes you make in there will take immediate effect without the need for publishing or re-installing it).
 
 This should tell npm to create a symlink to your cloned local directoty, allowing you to see updates you make in your mcdev repo instantly.
 
-> Note: on MacOS you might need to prepend `sudo` to elevate your command.
+To test your new **global** developer setup, run `mcdev --version` in CLI which should return the current version (e.g. `4.0.2`). Then, go into your mcdev repo and update the version with the suffix `-dev`, e.g. to `4.0.2-dev` and then run `mcdev --version` again to verify that your change propagates instantly.
+
+> **Not recommended:** Alternatively, you can install it locally only by opening a terminal in your project directory and executing `npm install --save-dev "C:\repos\sfmc-devtools"`
+> To run the local version you need to prepend "npx" before your commands, e.g. `npx mcdev --version`
+
+> **Note:** on MacOS you might need to prepend `sudo` to elevate your command.
 
 **Local vs. Global developer installation:**
 
 If you use Accenture SFMC DevTools in your team it is recommended to install your developer version **globally**, while the project's package.json should point to our Git repo in its devDependency section. Otherwise other team members would have trouble due to potentially different paths.
 
 If you do need to install it locally, make sure you don't commit your project's package.json with this change or you might break mcdev for other developers in your team that either didn't clone the Accenture SFMC DevTools repo or stored in a different directory.
-
-To test your new **global** developer setup, run `mcdev --version` in CLI which should return the current version (e.g. `4.0.2`). Then, go into your mcdev repo and update the version with the suffix `-dev`, e.g. to `4.0.2-dev` and then run `mcdev --version` again to verify that your change propagates instantly.
 
 <a name="local-install"></a>
 
