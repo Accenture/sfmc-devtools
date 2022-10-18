@@ -842,7 +842,7 @@ FileTransfer MetadataType
     * [.requestSubType(subType, subTypeArray, [retrieveDir], [templateName], [templateVariables], key)](#Asset.requestSubType) ⇒ <code>Promise</code>
     * [.requestAndSaveExtended(items, subType, retrieveDir, [templateVariables])](#Asset.requestAndSaveExtended) ⇒ <code>Promise</code>
     * [._retrieveExtendedFile(metadata, subType, retrieveDir)](#Asset._retrieveExtendedFile) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._readExtendedFileFromFS(metadata, subType, deployDir)](#Asset._readExtendedFileFromFS) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._readExtendedFileFromFS(metadata, subType, deployDir, [pathOnly])](#Asset._readExtendedFileFromFS) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.postRetrieveTasks(metadata)](#Asset.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.preDeployTasks(metadata, deployDir, buObject)](#Asset.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
     * [._getMainSubtype(extendedSubType)](#Asset._getMainSubtype) ⇒ <code>string</code>
@@ -976,19 +976,20 @@ This method retrieves these and saves them alongside the metadata json
 
 <a name="Asset._readExtendedFileFromFS"></a>
 
-### Asset.\_readExtendedFileFromFS(metadata, subType, deployDir) ⇒ <code>Promise.&lt;void&gt;</code>
+### Asset.\_readExtendedFileFromFS(metadata, subType, deployDir, [pathOnly]) ⇒ <code>Promise.&lt;string&gt;</code>
 helper for this.preDeployTasks()
 Some metadata types store their actual content as a separate file, e.g. images
 This method reads these from the local FS stores them in the metadata object allowing to deploy it
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+**Returns**: <code>Promise.&lt;string&gt;</code> - if found will return the path of the binary file  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.AssetItem</code> | a single asset |
-| subType | <code>TYPE.AssetSubType</code> | group of similar assets to put in a folder (ie. images) |
-| deployDir | <code>string</code> | directory of deploy files |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| metadata | <code>TYPE.AssetItem</code> |  | a single asset |
+| subType | <code>TYPE.AssetSubType</code> |  | group of similar assets to put in a folder (ie. images) |
+| deployDir | <code>string</code> |  | directory of deploy files |
+| [pathOnly] | <code>boolean</code> | <code>false</code> | used by getFilesToCommit which does not need the binary file to be actually read |
 
 <a name="Asset.postRetrieveTasks"></a>
 
