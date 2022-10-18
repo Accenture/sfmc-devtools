@@ -1499,7 +1499,7 @@ To test your new **global** developer setup, run `mcdev --version` in CLI which 
 > **Not recommended:** Alternatively, you can install it locally only by opening a terminal in your project directory and executing `npm install --save-dev "C:\repos\sfmc-devtools"`
 > To run the local version you need to prepend "npx" before your commands, e.g. `npx mcdev --version`
 
-> **Note:** on MacOS you might need to prepend `sudo` to elevate your command.
+**Note:** On MacOS you might need to prepend `sudo` to elevate your command.
 
 **Local vs. Global developer installation:**
 

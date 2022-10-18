@@ -180,8 +180,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 ## Typedefs
 
 <dl>
-<dt><a href="#SupportedMetadataTypes">SupportedMetadataTypes</a> : <code>Object.&lt;string, string&gt;</code></dt>
-<dd></dd>
+<dt><a href="#TypeKeyCombo">TypeKeyCombo</a> : <code>Object.&lt;string, string&gt;</code></dt>
+<dd><p>object-key=metadata type, value=array of external keys</p>
+</dd>
 <dt><a href="#Cache">Cache</a> : <code>Object.&lt;string, any&gt;</code></dt>
 <dd><p>key=customer key</p>
 </dd>
@@ -378,7 +379,7 @@ Deploy all metadata that is located in the deployDir
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type (can include subtype) |
+| [typeArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit deployment to given metadata type (can include subtype) |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
 | [fromRetrieve] | <code>boolean</code> | if true, no folders will be updated/created |
 
@@ -405,7 +406,7 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 | Param | Type | Description |
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
-| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
+| [selectedTypesArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit deployment to given metadata type |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
 | [fromRetrieve] | <code>boolean</code> | optionally deploy whats defined via selectedTypesArr + keyArr directly from retrieve folder instead of from deploy folder |
 
@@ -422,7 +423,7 @@ helper for deploy()
 | cred | <code>string</code> | name of Credential |
 | bu | <code>string</code> | name of BU |
 | properties | <code>TYPE.Mcdevrc</code> | General configuration to be used in retrieve |
-| [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
+| [typeArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit deployment to given metadata type |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
 | [fromRetrieve] | <code>boolean</code> | optionally deploy whats defined via selectedTypesArr + keyArr directly from retrieve folder instead of from deploy folder |
 
@@ -551,7 +552,7 @@ Retrieve all metadata from the specified business unit into the local file syste
 | Param | Type | Description |
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
-| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> | limit retrieval to given metadata type |
+| [selectedTypesArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> \| <code>TYPE.TypeKeyCombo</code> | limit retrieval to given metadata type |
 | [keys] | <code>Array.&lt;string&gt;</code> | limit retrieval to given metadata key |
 | [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
 
@@ -566,7 +567,7 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | businessUnit | <code>string</code> |  | references credentials from properties.json |
-| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> |  | limit deployment to given metadata type |
+| [selectedTypesArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> |  | limit deployment to given metadata type |
 | [keyArr] | <code>Array.&lt;string&gt;</code> |  | limit deployment to given metadata keys |
 | [fromRetrieve] | <code>boolean</code> | <code>false</code> | optionally deploy whats defined via selectedTypesArr + keyArr directly from retrieve folder instead of from deploy folder |
 
@@ -4419,8 +4420,8 @@ Retrieve metadata of specified types into local file system and Retriever.metada
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadataTypes | <code>Array.&lt;string&gt;</code> | String list of metadata types to retrieve |
-| [namesOrKeys] | <code>Array.&lt;string&gt;</code> | name of Metadata to retrieveAsTemplate or list of keys for normal retrieval |
+| metadataTypes | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | list of metadata types to retrieve; can include subtypes! |
+| [namesOrKeys] | <code>Array.&lt;string&gt;</code> \| <code>TYPE.TypeKeyCombo</code> | name of Metadata to retrieveAsTemplate or list of keys for normal retrieval |
 | [templateVariables] | <code>TYPE.TemplateMap</code> | Object of values which can be replaced (in case of templating) |
 | [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
 
@@ -6495,9 +6496,11 @@ wrapper around our standard winston logging to console and logfile
 initiate winston logger
 
 **Kind**: global function  
-<a name="SupportedMetadataTypes"></a>
+<a name="TypeKeyCombo"></a>
 
-## SupportedMetadataTypes : <code>Object.&lt;string, string&gt;</code>
+## TypeKeyCombo : <code>Object.&lt;string, string&gt;</code>
+object-key=metadata type, value=array of external keys
+
 **Kind**: global typedef  
 <a name="Cache"></a>
 
@@ -6780,7 +6783,7 @@ SOAP format
 | binary | <code>boolean</code> | is a binary file |
 | moved | <code>boolean</code> | git thinks this file was moved |
 | [fromPath] | <code>string</code> | git thinks this relative path is where the file was before |
-| type | [<code>SupportedMetadataTypes</code>](#SupportedMetadataTypes) | metadata type |
+| type | <code>SupportedMetadataTypes</code> | metadata type |
 | externalKey | <code>string</code> | key |
 | name | <code>string</code> | name |
 | gitAction | <code>&#x27;move&#x27;</code> \| <code>&#x27;add/update&#x27;</code> \| <code>&#x27;delete&#x27;</code> | what git recognized as an action |
