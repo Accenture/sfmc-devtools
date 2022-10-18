@@ -347,7 +347,6 @@ Source and target business units are also compared before the deployment to appl
     * _instance_
         * [.metadata](#Deployer+metadata) : <code>TYPE.MultiMetadataTypeMap</code>
         * [._deploy([typeArr], [keyArr], [fromRetrieve])](#Deployer+_deploy) ⇒ <code>Promise</code>
-        * [.deployCallback(result, metadataType)](#Deployer+deployCallback) ⇒ <code>void</code>
     * _static_
         * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Deployer.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
         * [._deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve])](#Deployer._deployBU) ⇒ <code>Promise</code>
@@ -382,18 +381,6 @@ Deploy all metadata that is located in the deployDir
 | [typeArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit deployment to given metadata type (can include subtype) |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
 | [fromRetrieve] | <code>boolean</code> | if true, no folders will be updated/created |
-
-<a name="Deployer+deployCallback"></a>
-
-### deployer.deployCallback(result, metadataType) ⇒ <code>void</code>
-Gets called for every deployed metadata entry
-
-**Kind**: instance method of [<code>Deployer</code>](#Deployer)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| result | <code>object</code> | Deployment result |
-| metadataType | <code>string</code> | Name of metadata type |
 
 <a name="Deployer.deploy"></a>
 
