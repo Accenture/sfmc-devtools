@@ -180,8 +180,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 ## Typedefs
 
 <dl>
-<dt><a href="#SupportedMetadataTypes">SupportedMetadataTypes</a> : <code>Object.&lt;string, string&gt;</code></dt>
-<dd></dd>
+<dt><a href="#TypeKeyCombo">TypeKeyCombo</a> : <code>Object.&lt;string, string&gt;</code></dt>
+<dd><p>object-key=metadata type, value=array of external keys</p>
+</dd>
 <dt><a href="#Cache">Cache</a> : <code>Object.&lt;string, any&gt;</code></dt>
 <dd><p>key=customer key</p>
 </dd>
@@ -346,7 +347,6 @@ Source and target business units are also compared before the deployment to appl
     * _instance_
         * [.metadata](#Deployer+metadata) : <code>TYPE.MultiMetadataTypeMap</code>
         * [._deploy([typeArr], [keyArr], [fromRetrieve])](#Deployer+_deploy) ⇒ <code>Promise</code>
-        * [.deployCallback(result, metadataType)](#Deployer+deployCallback) ⇒ <code>void</code>
     * _static_
         * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Deployer.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
         * [._deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve])](#Deployer._deployBU) ⇒ <code>Promise</code>
@@ -378,21 +378,9 @@ Deploy all metadata that is located in the deployDir
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type (can include subtype) |
+| [typeArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit deployment to given metadata type (can include subtype) |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
 | [fromRetrieve] | <code>boolean</code> | if true, no folders will be updated/created |
-
-<a name="Deployer+deployCallback"></a>
-
-### deployer.deployCallback(result, metadataType) ⇒ <code>void</code>
-Gets called for every deployed metadata entry
-
-**Kind**: instance method of [<code>Deployer</code>](#Deployer)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| result | <code>object</code> | Deployment result |
-| metadataType | <code>string</code> | Name of metadata type |
 
 <a name="Deployer.deploy"></a>
 
@@ -405,7 +393,7 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 | Param | Type | Description |
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
-| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
+| [selectedTypesArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit deployment to given metadata type |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
 | [fromRetrieve] | <code>boolean</code> | optionally deploy whats defined via selectedTypesArr + keyArr directly from retrieve folder instead of from deploy folder |
 
@@ -422,7 +410,7 @@ helper for deploy()
 | cred | <code>string</code> | name of Credential |
 | bu | <code>string</code> | name of BU |
 | properties | <code>TYPE.Mcdevrc</code> | General configuration to be used in retrieve |
-| [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
+| [typeArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit deployment to given metadata type |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
 | [fromRetrieve] | <code>boolean</code> | optionally deploy whats defined via selectedTypesArr + keyArr directly from retrieve folder instead of from deploy folder |
 
@@ -518,6 +506,7 @@ handler for 'mcdev createDeltaPkg
 | argv | <code>object</code> | yargs parameters |
 | [argv.range] | <code>string</code> | git commit range     into deploy directory |
 | [argv.filter] | <code>string</code> | filter file paths that start with any |
+| [argv.diffArr] | <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code> | list of files to include in delta package (skips git diff when provided) |
 | [argv.skipInteraction] | <code>TYPE.skipInteraction</code> | allows to skip interactive wizard |
 
 <a name="Mcdev.selectTypes"></a>
@@ -550,7 +539,7 @@ Retrieve all metadata from the specified business unit into the local file syste
 | Param | Type | Description |
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
-| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> | limit retrieval to given metadata type |
+| [selectedTypesArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> \| <code>TYPE.TypeKeyCombo</code> | limit retrieval to given metadata type |
 | [keys] | <code>Array.&lt;string&gt;</code> | limit retrieval to given metadata key |
 | [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
 
@@ -565,7 +554,7 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | businessUnit | <code>string</code> |  | references credentials from properties.json |
-| [selectedTypesArr] | <code>Array.&lt;string&gt;</code> |  | limit deployment to given metadata type |
+| [selectedTypesArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> |  | limit deployment to given metadata type |
 | [keyArr] | <code>Array.&lt;string&gt;</code> |  | limit deployment to given metadata keys |
 | [fromRetrieve] | <code>boolean</code> | <code>false</code> | optionally deploy whats defined via selectedTypesArr + keyArr directly from retrieve folder instead of from deploy folder |
 
@@ -840,7 +829,7 @@ FileTransfer MetadataType
     * [.requestSubType(subType, subTypeArray, [retrieveDir], [templateName], [templateVariables], key)](#Asset.requestSubType) ⇒ <code>Promise</code>
     * [.requestAndSaveExtended(items, subType, retrieveDir, [templateVariables])](#Asset.requestAndSaveExtended) ⇒ <code>Promise</code>
     * [._retrieveExtendedFile(metadata, subType, retrieveDir)](#Asset._retrieveExtendedFile) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._readExtendedFileFromFS(metadata, subType, deployDir)](#Asset._readExtendedFileFromFS) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._readExtendedFileFromFS(metadata, subType, deployDir, [pathOnly])](#Asset._readExtendedFileFromFS) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.postRetrieveTasks(metadata)](#Asset.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.preDeployTasks(metadata, deployDir, buObject)](#Asset.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
     * [._getMainSubtype(extendedSubType)](#Asset._getMainSubtype) ⇒ <code>string</code>
@@ -974,19 +963,20 @@ This method retrieves these and saves them alongside the metadata json
 
 <a name="Asset._readExtendedFileFromFS"></a>
 
-### Asset.\_readExtendedFileFromFS(metadata, subType, deployDir) ⇒ <code>Promise.&lt;void&gt;</code>
+### Asset.\_readExtendedFileFromFS(metadata, subType, deployDir, [pathOnly]) ⇒ <code>Promise.&lt;string&gt;</code>
 helper for this.preDeployTasks()
 Some metadata types store their actual content as a separate file, e.g. images
 This method reads these from the local FS stores them in the metadata object allowing to deploy it
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+**Returns**: <code>Promise.&lt;string&gt;</code> - if found will return the path of the binary file  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.AssetItem</code> | a single asset |
-| subType | <code>TYPE.AssetSubType</code> | group of similar assets to put in a folder (ie. images) |
-| deployDir | <code>string</code> | directory of deploy files |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| metadata | <code>TYPE.AssetItem</code> |  | a single asset |
+| subType | <code>TYPE.AssetSubType</code> |  | group of similar assets to put in a folder (ie. images) |
+| deployDir | <code>string</code> |  | directory of deploy files |
+| [pathOnly] | <code>boolean</code> | <code>false</code> | used by getFilesToCommit which does not need the binary file to be actually read |
 
 <a name="Asset.postRetrieveTasks"></a>
 
@@ -4418,8 +4408,8 @@ Retrieve metadata of specified types into local file system and Retriever.metada
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadataTypes | <code>Array.&lt;string&gt;</code> | String list of metadata types to retrieve |
-| [namesOrKeys] | <code>Array.&lt;string&gt;</code> | name of Metadata to retrieveAsTemplate or list of keys for normal retrieval |
+| metadataTypes | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | list of metadata types to retrieve; can include subtypes! |
+| [namesOrKeys] | <code>Array.&lt;string&gt;</code> \| <code>TYPE.TypeKeyCombo</code> | name of Metadata to retrieveAsTemplate or list of keys for normal retrieval |
 | [templateVariables] | <code>TYPE.TemplateMap</code> | Object of values which can be replaced (in case of templating) |
 | [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
 
@@ -4943,7 +4933,7 @@ DevOps helper class
     * [.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths])](#DevOps.getDeltaList) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
         * [~delta](#DevOps.getDeltaList..delta) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
         * [~copied](#DevOps.getDeltaList..copied) : <code>TYPE.DeltaPkgItem</code>
-    * [.buildDeltaDefinitions(properties, range, [skipInteraction])](#DevOps.buildDeltaDefinitions) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+    * [.buildDeltaDefinitions(properties, range, [diffArr], [skipInteraction])](#DevOps.buildDeltaDefinitions) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
         * [~deltaDeployAll](#DevOps.buildDeltaDefinitions..deltaDeployAll) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
     * [.document(directory, jsonReport)](#DevOps.document) ⇒ <code>void</code>
     * [.getFilesToCommit(properties, buObject, metadataType, keyArr)](#DevOps.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
@@ -4979,7 +4969,7 @@ Interactive commit selection if no commits are passed.
 **Kind**: inner constant of [<code>getDeltaList</code>](#DevOps.getDeltaList)  
 <a name="DevOps.buildDeltaDefinitions"></a>
 
-### DevOps.buildDeltaDefinitions(properties, range, [skipInteraction]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+### DevOps.buildDeltaDefinitions(properties, range, [diffArr], [skipInteraction]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
 wrapper around DevOps.getDeltaList, Builder.buildTemplate and M
 
 **Kind**: static method of [<code>DevOps</code>](#DevOps)  
@@ -4989,6 +4979,7 @@ wrapper around DevOps.getDeltaList, Builder.buildTemplate and M
 | --- | --- | --- |
 | properties | <code>TYPE.Mcdevrc</code> | project config file |
 | range | <code>string</code> | git commit range |
+| [diffArr] | <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code> | instead of running git diff the method can also get a list of files to process |
 | [skipInteraction] | <code>TYPE.SkipInteraction</code> | allows to skip interactive wizard |
 
 <a name="DevOps.buildDeltaDefinitions..deltaDeployAll"></a>
@@ -6493,9 +6484,11 @@ wrapper around our standard winston logging to console and logfile
 initiate winston logger
 
 **Kind**: global function  
-<a name="SupportedMetadataTypes"></a>
+<a name="TypeKeyCombo"></a>
 
-## SupportedMetadataTypes : <code>Object.&lt;string, string&gt;</code>
+## TypeKeyCombo : <code>Object.&lt;string, string&gt;</code>
+object-key=metadata type, value=array of external keys
+
 **Kind**: global typedef  
 <a name="Cache"></a>
 
@@ -6778,7 +6771,7 @@ SOAP format
 | binary | <code>boolean</code> | is a binary file |
 | moved | <code>boolean</code> | git thinks this file was moved |
 | [fromPath] | <code>string</code> | git thinks this relative path is where the file was before |
-| type | [<code>SupportedMetadataTypes</code>](#SupportedMetadataTypes) | metadata type |
+| type | <code>SupportedMetadataTypes</code> | metadata type |
 | externalKey | <code>string</code> | key |
 | name | <code>string</code> | name |
 | gitAction | <code>&#x27;move&#x27;</code> \| <code>&#x27;add/update&#x27;</code> \| <code>&#x27;delete&#x27;</code> | what git recognized as an action |
