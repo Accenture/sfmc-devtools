@@ -346,10 +346,10 @@ Source and target business units are also compared before the deployment to appl
     * [new Deployer(properties, buObject)](#new_Deployer_new)
     * _instance_
         * [.metadata](#Deployer+metadata) : <code>TYPE.MultiMetadataTypeMap</code>
-        * [._deploy([typeArr], [keyArr], [fromRetrieve])](#Deployer+_deploy) ⇒ <code>Promise</code>
+        * [._deploy([typeArr], [keyArr], [fromRetrieve])](#Deployer+_deploy) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
     * _static_
-        * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Deployer.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
-        * [._deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve])](#Deployer._deployBU) ⇒ <code>Promise</code>
+        * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Deployer.deploy) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
+        * [._deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve])](#Deployer._deployBU) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
         * [.readBUMetadata(deployDir, [typeArr], [listBadKeys])](#Deployer.readBUMetadata) ⇒ <code>TYPE.MultiMetadataTypeMap</code>
         * [.createFolderDefinitions(deployDir, metadata, metadataTypeArr)](#Deployer.createFolderDefinitions) ⇒ <code>void</code>
 
@@ -370,11 +370,11 @@ Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 **Kind**: instance property of [<code>Deployer</code>](#Deployer)  
 <a name="Deployer+_deploy"></a>
 
-### deployer.\_deploy([typeArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise</code>
+### deployer.\_deploy([typeArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
 Deploy all metadata that is located in the deployDir
 
 **Kind**: instance method of [<code>Deployer</code>](#Deployer)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code> - Promise of all deployed metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -384,11 +384,11 @@ Deploy all metadata that is located in the deployDir
 
 <a name="Deployer.deploy"></a>
 
-### Deployer.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Deployer.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
 Deploys all metadata located in the 'deploy' directory to the specified business unit
 
 **Kind**: static method of [<code>Deployer</code>](#Deployer)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+**Returns**: <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code> - deployed metadata per BU (first key: bu name, second key: metadata type)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -399,11 +399,11 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 
 <a name="Deployer._deployBU"></a>
 
-### Deployer.\_deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise</code>
+### Deployer.\_deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
 helper for deploy()
 
 **Kind**: static method of [<code>Deployer</code>](#Deployer)  
-**Returns**: <code>Promise</code> - ensure that BUs are worked on sequentially  
+**Returns**: <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code> - ensure that BUs are worked on sequentially  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -456,7 +456,7 @@ main class
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>void</code>
     * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.retrieve(businessUnit, [selectedTypesArr], [keys], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Mcdev.deploy) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Mcdev.deploy) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
     * [.initProject([credentialsName], [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -545,11 +545,11 @@ Retrieve all metadata from the specified business unit into the local file syste
 
 <a name="Mcdev.deploy"></a>
 
-### Mcdev.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
 Deploys all metadata located in the 'deploy' directory to the specified business unit
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+**Returns**: <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code> - deployed metadata per BU (first key: bu name, second key: metadata type)  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -2943,7 +2943,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.buObject](#MetadataType.buObject) : <code>TYPE.BuObject</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType.getJsonFromFS) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.getFieldNamesToRetrieve([additionalFields])](#MetadataType.getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.deploy(metadata, deployDir, retrieveDir, buObject)](#MetadataType.deploy) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [.deploy(metadata, deployDir, retrieveDir, buObject)](#MetadataType.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.postDeployTasks(metadata, originalMetadata)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.retrieve(retrieveDir, [additionalFields], buObject, [subType], [key])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -3030,11 +3030,11 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 
 <a name="MetadataType.deploy"></a>
 
-### MetadataType.deploy(metadata, deployDir, retrieveDir, buObject) ⇒ <code>Promise.&lt;object&gt;</code>
+### MetadataType.deploy(metadata, deployDir, retrieveDir, buObject) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
 Deploys metadata
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;object&gt;</code> - Promise of keyField => metadata map  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
 | --- | --- | --- |
