@@ -123,7 +123,7 @@ If you experience issues installing Accenture SFMC DevTools, please check out th
 1. Install Accenture SFMC DevTools by running `npm install -g mcdev` (prefix with `sudo` on MacOS)
    - If you get an error, please see the below troubleshooting section.
 
-When completed run `mcdev --version` and it will show you which version you installed (e.g. `4.1.1`).
+When completed run `mcdev --version` and it will show you which version you installed (e.g. `4.1.2`).
 
 > **_Side note for proud nerds_:**
 >
@@ -146,7 +146,7 @@ After the successful installation, you will now need to setup the connection to 
    5. Make sure you grant all available rights.
    6. Go to the access tab and grant it access to all Business Units that you want to use it for, but ensure that the Parent/Global Business Unit is among these.
       - _Why?_ Shared Data Extensions, roles, users, Business Unit info and some other metadata is internally stored solely on the parent Business Unit and hence can only be retrieved and updated via that BU.
-   7. Note down _EID_ (Parent MID),  _Client Id_, _Client Secret_ and _Authentication Base URI_.
+   7. Note down _EID_ (Parent MID), _Client Id_, _Client Secret_ and _Authentication Base URI_.
 2. In your project folder
    1. Open a CLI in your project folder (e.g. `C:\repos\MyProject\` on Windows or `~/repos/MyProject/` on Mac)
    2. Run `mcdev init` to start the interactive setup wizard.
@@ -277,10 +277,10 @@ _Note: Regardless of which tag or branch you install_
 **Install specific version (using a version tag on npm):**
 
 ```bash
-npm install -g mcdev@4.1.1
+npm install -g mcdev@4.1.2
 ```
 
-**Warning**: When you used the above method to install Accenture SFMC DevTools for a specific version or tag, trying to [update Accenture SFMC DevTools](#updating-mcdev) might not download the most recently published official version but instead stay on the version or branch you previously selected (in the above examples: develop, 4.1.1)!
+**Warning**: When you used the above method to install Accenture SFMC DevTools for a specific version or tag, trying to [update Accenture SFMC DevTools](#updating-mcdev) might not download the most recently published official version but instead stay on the version or branch you previously selected (in the above examples: develop, 4.1.2)!
 
 > **Note**: The version is currently _not_ updated on the developer branch until a new release is published. Hence, you will not see a change if you run `mcdev --version`.
 
@@ -407,7 +407,7 @@ The following metadata types are currently supported:
 | List                               | `list`                    | Yes      | in backlog | -          | Yes                  | Old way of storing data. Still used for central Email Subscriber DB.                                               |
 | Mobile Connect Code                | `mobileCode`              | Yes      | No         | No         | -                    | Mobile Connect Shore or Long Codes used for sending. First 50 per BU are retrieved                                 |
 | Mobile Connect Keyword             | `mobileKeyword`           | Yes      | Yes        | Yes        | -                    | Mobile Connect keywords configured within the Business UNit. First 50 per BU are retrieved                         |
-| Role                               | `role`                    | Yes      | Yes        | yes (`bt`)          | Yes                  | User Roles define groups that are used to grant users access to SFMC systems.                                      |
+| Role                               | `role`                    | Yes      | Yes        | yes (`bt`) | Yes                  | User Roles define groups that are used to grant users access to SFMC systems.                                      |
 | Triggered Send                     | `triggeredSendDefinition` | Yes      | Yes        | -          | Yes                  | **DEPRECATED**: Sends emails via API or DataExtension Event.                                                       |
 | User                               | `accountUser`             | Yes      | in backlog | -          | -                    | Users and Installed Packages including their assigned Roles, BUs and personal permissions                          |
 
@@ -478,7 +478,6 @@ Example url: `https://mcg123abcysykllg-0321cbs8bbt64.auth.marketingcloudapis.com
 > ```bash
 > mcdev init --y.credentialsName "yourCustomCredentialName" --y.client_id "yourClientIdHere" --y.client_secret "yourClientSecretHere" --y.auth_url "https://yourTenantSubdomainHere.auth.marketingcloudapis.com/" --y.gitRemoteUrl "https://my.git.server.com/myrepo.git" --y.account_id 00000000
 > ```
->
 
 #### 6.1.2. upgrade
 
@@ -753,13 +752,13 @@ Deletes the given metadata from your server. This needs to be run with care as a
 
 Currently supported types:
 
-| Name           | CLI Argument    |
-| -------------- | --------------- |
-| Data Extension | `dataExtension` |
-| Data Extension Field | `dataExtensionField` |
-| Email Send Definition | `Email Send Definition` |
-| List | `list` |
-| Triggered Send | `triggeredSendDefinition` |
+| Name                  | CLI Argument              |
+| --------------------- | ------------------------- |
+| Data Extension        | `dataExtension`           |
+| Data Extension Field  | `dataExtensionField`      |
+| Email Send Definition | `Email Send Definition`   |
+| List                  | `list`                    |
+| Triggered Send        | `triggeredSendDefinition` |
 
 _Example:_
 
@@ -1103,13 +1102,13 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
 | options.deployment.sourceTargetMapping   | `{"deployment-source": "deployment-target"}` | Configuration of 1 or many source-target marketList combos for `mcdev createDeltaPkg`                                       |
 | options.deployment.targetBranchBuMapping | `{"release/*": "...","master": ["..."]}`     | Can be used by CI/CD pipelines to know what BUs shall be deployed to upon a merge into one of the specified branches        |
 | options.documentType                     | 'md'                                         | Defines the format for documentation ('md', 'html', 'both')                                                                 |
-| options.documentStandardRoles            | false                                         | Optionally skip standard role documentation by setting to false                                                         |
+| options.documentStandardRoles            | false                                        | Optionally skip standard role documentation by setting to false                                                             |
 | options.exclude.`type`.`field`           | []                                           | Allows you to filter out metadata on retrieve based on their field values, e.g. CustomerKey (previously `options.filter`)   |
 | options.include.`type`.`field`           | []                                           | Allows you to filter out metadata on retrieve based on their field values, e.g. CustomerKey                                 |
 | options.serverTimeOffset                 | -6                                           | Used to work around quirks in how SFMC handles timezones; For stack4: set to -7 (US Mountain time); others: -6 (US Central) |
 | directories.businessUnits                | 'businessUnits/'                             | Directory to save BU base details in                                                                                        |
 | directories.deploy                       | 'deploy/'                                    | Where `deploy` searches for files to deploy                                                                                 |
-| directories.docs                        | 'docs/'                                | Directory for `document` output                                                                                        |
+| directories.docs                         | 'docs/'                                      | Directory for `document` output                                                                                             |
 | directories.retrieve                     | 'retrieve/'                                  | Where `retrieve` stores downloaded files                                                                                    |
 | directories.template                     | 'template/'                                  | Where `rt` stores downloaded templates & `bd` retrieves them from                                                           |
 | directories.templateBuilds               | ['retrieve/','deploy/']                      | Where `bd` saves final deployment versions in. This can hold multiple directories, e.g. ['retrieve/','deploy/']             |
@@ -1126,8 +1125,8 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
 
 The way retention policy is saved is a bit misleading and hence we wanted to provide a bit of guidance if you ever need to do a deep dive here.
 
-| Field | Description | Values |
-| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Field                                | Description                                                                                                                                                                                                                                                                                                                        | Values                                                                 |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------ |
 | **DataRetentionPeriod**              | this field should print the value of the unit of measure but it unfortunately is off by one (e.g. showing "weeks" instead of "months"). Also, it seems to have no impact on what's stored.<br> We therefore excluded it from retrieve/deploy                                                                                       | -                                                                      |
 | **DataRetentionPeriodUnitOfMeasure** | represents drop down for "period after" selection                                                                                                                                                                                                                                                                                  | 6: years<br>5: months<br>4: weeks<br>2: days                           |
 | **DataRetentionPeriodLength**        | represents number field for "period after" selection                                                                                                                                                                                                                                                                               | min: 1<br>max: 999                                                     |
@@ -1494,7 +1493,7 @@ Assuming you cloned Accenture SFMC DevTools into `C:\repos\sfmc-devtools\` (or `
 
 This should tell npm to create a symlink to your cloned local directoty, allowing you to see updates you make in your mcdev repo instantly.
 
-To test your new **global** developer setup, run `mcdev --version` in CLI which should return the current version (e.g. `4.1.1`). Then, go into your mcdev repo and update the version with the suffix `-dev`, e.g. to `4.1.1-dev` and then run `mcdev --version` again to verify that your change propagates instantly.
+To test your new **global** developer setup, run `mcdev --version` in CLI which should return the current version (e.g. `4.1.2`). Then, go into your mcdev repo and update the version with the suffix `-dev`, e.g. to `4.1.2-dev` and then run `mcdev --version` again to verify that your change propagates instantly.
 
 > **Not recommended:** Alternatively, you can install it locally only by opening a terminal in your project directory and executing `npm install --save-dev "C:\repos\sfmc-devtools"`
 > To run the local version you need to prepend "npx" before your commands, e.g. `npx mcdev --version`
@@ -1532,7 +1531,7 @@ The following explains how you _could_ install it locally for certain edge cases
 4. Afterwards, install Accenture SFMC DevTools by running `npm install --save-dev mcdev`
    - If you get an error, please see the below troubleshooting section.
 
-When completed run `mcdev --version` and it will show you which version you installed (e.g. `4.1.1`).
+When completed run `mcdev --version` and it will show you which version you installed (e.g. `4.1.2`).
 
 ### 9.3. NPM Scripts
 
