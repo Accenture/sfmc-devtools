@@ -836,6 +836,7 @@ FileTransfer MetadataType
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildDefinitionForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildTemplateForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Asset._buildForNested) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.setFolderPath(metadata)](#Asset.setFolderPath)
     * [.parseMetadata(metadata)](#Asset.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
     * [._mergeCode(metadata, deployDir, subType, [templateName], [fileListOnly])](#Asset._mergeCode) ⇒ <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code>
     * [._mergeCode_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName], [fileListOnly])](#Asset._mergeCode_slots) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -1072,6 +1073,17 @@ handles extracted code if any are found for complex types
 | templateName | <code>string</code> | name of the template to be built |
 | mode | <code>&#x27;definition&#x27;</code> \| <code>&#x27;template&#x27;</code> | defines what we use this helper for |
 
+<a name="Asset.setFolderPath"></a>
+
+### Asset.setFolderPath(metadata)
+generic script that retrieves the folder path from cache and updates the given metadata with it after retrieve
+
+**Kind**: static method of [<code>Asset</code>](#Asset)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single script activity definition |
+
 <a name="Asset.parseMetadata"></a>
 
 ### Asset.parseMetadata(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
@@ -1254,6 +1266,7 @@ Automation MetadataType
     * [.preDeployTasks(metadata)](#Automation.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AutomationItem&gt;</code>
     * [.validateDeployMetadata(metadata)](#Automation.validateDeployMetadata) ⇒ <code>boolean</code>
     * [.postDeployTasks(metadata, originalMetadata)](#Automation.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.setFolderPath(metadata)](#Automation.setFolderPath)
     * [.parseMetadata(metadata)](#Automation.parseMetadata) ⇒ <code>TYPE.AutomationItem</code>
     * [._buildSchedule(scheduleObject)](#Automation._buildSchedule) ⇒ <code>TYPE.AutomationScheduleSoap</code>
     * [._calcTime(offsetServer, dateInput, [offsetInput])](#Automation._calcTime) ⇒ <code>string</code>
@@ -1393,6 +1406,17 @@ Gets executed after deployment of metadata type
 | metadata | <code>TYPE.AutomationMap</code> | metadata mapped by their keyField |
 | originalMetadata | <code>TYPE.AutomationMap</code> | metadata to be updated (contains additioanl fields) |
 
+<a name="Automation.setFolderPath"></a>
+
+### Automation.setFolderPath(metadata)
+generic script that retrieves the folder path from cache and updates the given metadata with it after retrieve
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single script activity definition |
+
 <a name="Automation.parseMetadata"></a>
 
 ### Automation.parseMetadata(metadata) ⇒ <code>TYPE.AutomationItem</code>
@@ -1511,6 +1535,7 @@ ContentArea MetadataType
 * [ContentArea](#ContentArea) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [___], [key])](#ContentArea.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.postRetrieveTasks(metadata)](#ContentArea.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.setFolderPath(metadata)](#ContentArea.setFolderPath)
     * [.parseMetadata(metadata)](#ContentArea.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 
 <a name="ContentArea.retrieve"></a>
@@ -1540,6 +1565,17 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="ContentArea.setFolderPath"></a>
+
+### ContentArea.setFolderPath(metadata)
+generic script that retrieves the folder path from cache and updates the given metadata with it after retrieve
+
+**Kind**: static method of [<code>ContentArea</code>](#ContentArea)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single script activity definition |
 
 <a name="ContentArea.parseMetadata"></a>
 
@@ -1576,6 +1612,7 @@ DataExtension MetadataType
     * [.postDeleteTasks(buObject, customerKey)](#DataExtension.postDeleteTasks) ⇒ <code>void</code>
     * [.retrieveForCache(buObject)](#DataExtension.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtension.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
+    * [.setFolderPath(metadata)](#DataExtension.setFolderPath)
     * [.getFilesToCommit(keyArr)](#DataExtension.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="DataExtension.upsert"></a>
@@ -1757,6 +1794,18 @@ Retrieves dataExtension metadata in template format.
 | templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | name | <code>string</code> | name of the metadata item |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+
+<a name="DataExtension.setFolderPath"></a>
+
+### DataExtension.setFolderPath(metadata)
+dataExtension logic that retrieves the folder path from cache and updates the given metadata with it after retrieve
+it also sets the content type which is basically the subtype
+
+**Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single script activity definition |
 
 <a name="DataExtension.getFilesToCommit"></a>
 
@@ -2946,6 +2995,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.deploy(metadata, deployDir, retrieveDir, buObject)](#MetadataType.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.postDeployTasks(metadata, originalMetadata)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.setFolderPath(metadata)](#MetadataType.setFolderPath)
     * [.retrieve(retrieveDir, [additionalFields], buObject, [subType], [key])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveChangelog([buObject], [additionalFields], [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -3068,6 +3118,17 @@ Gets executed after retreive of metadata type
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 | targetDir | <code>string</code> | folder where retrieves should be saved |
 | [isTemplating] | <code>boolean</code> | signals that we are retrieving templates |
+
+<a name="MetadataType.setFolderPath"></a>
+
+### MetadataType.setFolderPath(metadata)
+generic script that retrieves the folder path from cache and updates the given metadata with it after retrieve
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single script activity definition |
 
 <a name="MetadataType.retrieve"></a>
 
