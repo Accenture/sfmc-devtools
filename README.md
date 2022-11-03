@@ -123,7 +123,7 @@ If you experience issues installing Accenture SFMC DevTools, please check out th
 1. Install Accenture SFMC DevTools by running `npm install -g mcdev` (prefix with `sudo` on MacOS)
    - If you get an error, please see the below troubleshooting section.
 
-When completed run `mcdev --version` and it will show you which version you installed (e.g. `4.1.4`).
+When completed run `mcdev --version` and it will show you which version you installed (e.g. `4.1.5`).
 
 > **_Side note for proud nerds_:**
 >
@@ -277,10 +277,10 @@ _Note: Regardless of which tag or branch you install_
 **Install specific version (using a version tag on npm):**
 
 ```bash
-npm install -g mcdev@4.1.4
+npm install -g mcdev@4.1.5
 ```
 
-**Warning**: When you used the above method to install Accenture SFMC DevTools for a specific version or tag, trying to [update Accenture SFMC DevTools](#updating-mcdev) might not download the most recently published official version but instead stay on the version or branch you previously selected (in the above examples: develop, 4.1.4)!
+**Warning**: When you used the above method to install Accenture SFMC DevTools for a specific version or tag, trying to [update Accenture SFMC DevTools](#updating-mcdev) might not download the most recently published official version but instead stay on the version or branch you previously selected (in the above examples: develop, 4.1.5)!
 
 > **Note**: The version is currently _not_ updated on the developer branch until a new release is published. Hence, you will not see a change if you run `mcdev --version`.
 
@@ -476,7 +476,7 @@ Example url: `https://mcg123abcysykllg-0321cbs8bbt64.auth.marketingcloudapis.com
 > You can run this command without the interactive wizard asking questions using the `--skipInteraction` (or short`--yes`/`--y`) flag. In this case, you need to provide a few values in the command:
 >
 > ```bash
-> mcdev init --y.credentialsName "yourCustomCredentialName" --y.client_id "yourClientIdHere" --y.client_secret "yourClientSecretHere" --y.auth_url "https://yourTenantSubdomainHere.auth.marketingcloudapis.com/" --y.gitRemoteUrl "https://my.git.server.com/myrepo.git" --y.account_id 00000000
+> mcdev init --y.credentialName "yourCustomCredentialName" --y.client_id "yourClientIdHere" --y.client_secret "yourClientSecretHere" --y.auth_url "https://yourTenantSubdomainHere.auth.marketingcloudapis.com/" --y.gitRemoteUrl "https://my.git.server.com/myrepo.git" --y.account_id 00000000 --y.backupBUs "yes" --y.gitPush "yes"
 > ```
 
 #### 6.1.2. upgrade
@@ -1493,7 +1493,7 @@ Assuming you cloned Accenture SFMC DevTools into `C:\repos\sfmc-devtools\` (or `
 
 This should tell npm to create a symlink to your cloned local directoty, allowing you to see updates you make in your mcdev repo instantly.
 
-To test your new **global** developer setup, run `mcdev --version` in CLI which should return the current version (e.g. `4.1.4`). Then, go into your mcdev repo and update the version with the suffix `-dev`, e.g. to `4.1.4-dev` and then run `mcdev --version` again to verify that your change propagates instantly.
+To test your new **global** developer setup, run `mcdev --version` in CLI which should return the current version (e.g. `4.1.5`). Then, go into your mcdev repo and update the version with the suffix `-dev`, e.g. to `4.1.5-dev` and then run `mcdev --version` again to verify that your change propagates instantly.
 
 > **Not recommended:** Alternatively, you can install it locally only by opening a terminal in your project directory and executing `npm install --save-dev "C:\repos\sfmc-devtools"`
 > To run the local version you need to prepend "npx" before your commands, e.g. `npx mcdev --version`
@@ -1531,7 +1531,7 @@ The following explains how you _could_ install it locally for certain edge cases
 4. Afterwards, install Accenture SFMC DevTools by running `npm install --save-dev mcdev`
    - If you get an error, please see the below troubleshooting section.
 
-When completed run `mcdev --version` and it will show you which version you installed (e.g. `4.1.4`).
+When completed run `mcdev --version` and it will show you which version you installed (e.g. `4.1.5`).
 
 ### 9.3. NPM Scripts
 
