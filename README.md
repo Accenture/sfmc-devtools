@@ -476,7 +476,7 @@ Example url: `https://mcg123abcysykllg-0321cbs8bbt64.auth.marketingcloudapis.com
 > You can run this command without the interactive wizard asking questions using the `--skipInteraction` (or short`--yes`/`--y`) flag. In this case, you need to provide a few values in the command:
 >
 > ```bash
-> mcdev init --y.credentialsName "yourCustomCredentialName" --y.client_id "yourClientIdHere" --y.client_secret "yourClientSecretHere" --y.auth_url "https://yourTenantSubdomainHere.auth.marketingcloudapis.com/" --y.gitRemoteUrl "https://my.git.server.com/myrepo.git" --y.account_id 00000000
+> mcdev init --y.credentialName "yourCustomCredentialName" --y.client_id "yourClientIdHere" --y.client_secret "yourClientSecretHere" --y.auth_url "https://yourTenantSubdomainHere.auth.marketingcloudapis.com/" --y.gitRemoteUrl "https://my.git.server.com/myrepo.git" --y.account_id 00000000
 > ```
 
 #### 6.1.2. upgrade
