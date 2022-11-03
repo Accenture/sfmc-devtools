@@ -4790,7 +4790,8 @@ CLI helper class
 
 * [Cli](#Cli)
     * [.initMcdevConfig()](#Cli.initMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.addExtraCredential(properties)](#Cli.addExtraCredential) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.addExtraCredential(properties)](#Cli.addExtraCredential) ⇒ <code>Promise.&lt;(boolean\|string)&gt;</code>
+    * [.logExistingCredentials(properties)](#Cli.logExistingCredentials) ⇒ <code>void</code>
     * [.updateCredential(properties, credName)](#Cli.updateCredential) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.getCredentialObject(properties, target, [isCredentialOnly], [allowAll])](#Cli.getCredentialObject) ⇒ <code>Promise.&lt;TYPE.BuObject&gt;</code>
     * [._selectBU(properties, [credential], [isCredentialOnly], [allowAll])](#Cli._selectBU) ⇒ <code>Promise.&lt;Array&gt;</code>
@@ -4810,11 +4811,22 @@ loads default config and adds first credential
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - success of init  
 <a name="Cli.addExtraCredential"></a>
 
-### Cli.addExtraCredential(properties) ⇒ <code>Promise.&lt;void&gt;</code>
+### Cli.addExtraCredential(properties) ⇒ <code>Promise.&lt;(boolean\|string)&gt;</code>
 Extends template file for properties.json
 
 **Kind**: static method of [<code>Cli</code>](#Cli)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+**Returns**: <code>Promise.&lt;(boolean\|string)&gt;</code> - status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| properties | <code>TYPE.Mcdevrc</code> | config file's json |
+
+<a name="Cli.logExistingCredentials"></a>
+
+### Cli.logExistingCredentials(properties) ⇒ <code>void</code>
+helper that logs to cli which credentials are already existing in our config file
+
+**Kind**: static method of [<code>Cli</code>](#Cli)  
 
 | Param | Type | Description |
 | --- | --- | --- |
