@@ -454,10 +454,10 @@ main class
     * [.createDeltaPkg(argv)](#Mcdev.createDeltaPkg) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
     * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>void</code>
-    * [.upgrade([skipInteraction])](#Mcdev.upgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.upgrade()](#Mcdev.upgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.retrieve(businessUnit, [selectedTypesArr], [keys], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Mcdev.deploy) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
-    * [.initProject([credentialsName], [skipInteraction])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.initProject([credentialsName])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(businessUnit, type, customerKey)](#Mcdev.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -507,7 +507,6 @@ handler for 'mcdev createDeltaPkg
 | [argv.range] | <code>string</code> | git commit range     into deploy directory |
 | [argv.filter] | <code>string</code> | filter file paths that start with any |
 | [argv.diffArr] | <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code> | list of files to include in delta package (skips git diff when provided) |
-| [argv.skipInteraction] | <code>TYPE.skipInteraction</code> | allows to skip interactive wizard |
 
 <a name="Mcdev.selectTypes"></a>
 
@@ -520,14 +519,9 @@ handler for 'mcdev createDeltaPkg
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 <a name="Mcdev.upgrade"></a>
 
-### Mcdev.upgrade([skipInteraction]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Mcdev.upgrade() ⇒ <code>Promise.&lt;boolean&gt;</code>
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - success flag  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
 <a name="Mcdev.retrieve"></a>
 
 ### Mcdev.retrieve(businessUnit, [selectedTypesArr], [keys], [changelogOnly]) ⇒ <code>Promise.&lt;object&gt;</code>
@@ -560,7 +554,7 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 
 <a name="Mcdev.initProject"></a>
 
-### Mcdev.initProject([credentialsName], [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.initProject([credentialsName]) ⇒ <code>Promise.&lt;void&gt;</code>
 Creates template file for properties.json
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -569,7 +563,6 @@ Creates template file for properties.json
 | Param | Type | Description |
 | --- | --- | --- |
 | [credentialsName] | <code>string</code> | identifying name of the installed package / project |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Mcdev.findBUs"></a>
 
@@ -4796,12 +4789,12 @@ CLI helper class
 **Kind**: global constant  
 
 * [Cli](#Cli)
-    * [.initMcdevConfig([skipInteraction])](#Cli.initMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.addExtraCredential(properties, [skipInteraction])](#Cli.addExtraCredential) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.updateCredential(properties, credName, [skipInteraction])](#Cli.updateCredential) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.initMcdevConfig()](#Cli.initMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.addExtraCredential(properties)](#Cli.addExtraCredential) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.updateCredential(properties, credName)](#Cli.updateCredential) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.getCredentialObject(properties, target, [isCredentialOnly], [allowAll])](#Cli.getCredentialObject) ⇒ <code>Promise.&lt;TYPE.BuObject&gt;</code>
     * [._selectBU(properties, [credential], [isCredentialOnly], [allowAll])](#Cli._selectBU) ⇒ <code>Promise.&lt;Array&gt;</code>
-    * [._setCredential(properties, [credName], [skipInteraction])](#Cli._setCredential) ⇒ <code>Promise.&lt;(boolean\|string)&gt;</code>
+    * [._setCredential(properties, [credName])](#Cli._setCredential) ⇒ <code>Promise.&lt;(boolean\|string)&gt;</code>
     * [._askCredentials(properties, [credName])](#Cli._askCredentials) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.selectTypes(properties, [setTypesArr])](#Cli.selectTypes) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._summarizeSubtypes(responses, type)](#Cli._summarizeSubtypes) ⇒ <code>void</code>
@@ -4809,20 +4802,15 @@ CLI helper class
 
 <a name="Cli.initMcdevConfig"></a>
 
-### Cli.initMcdevConfig([skipInteraction]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Cli.initMcdevConfig() ⇒ <code>Promise.&lt;boolean&gt;</code>
 used when initially setting up a project.
 loads default config and adds first credential
 
 **Kind**: static method of [<code>Cli</code>](#Cli)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - success of init  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
 <a name="Cli.addExtraCredential"></a>
 
-### Cli.addExtraCredential(properties, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Cli.addExtraCredential(properties) ⇒ <code>Promise.&lt;void&gt;</code>
 Extends template file for properties.json
 
 **Kind**: static method of [<code>Cli</code>](#Cli)  
@@ -4831,11 +4819,10 @@ Extends template file for properties.json
 | Param | Type | Description |
 | --- | --- | --- |
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Cli.updateCredential"></a>
 
-### Cli.updateCredential(properties, credName, [skipInteraction]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Cli.updateCredential(properties, credName) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Extends template file for properties.json
 update credentials
 
@@ -4846,7 +4833,6 @@ update credentials
 | --- | --- | --- |
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | credName | <code>string</code> | name of credential that needs updating |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Cli.getCredentialObject"></a>
 
@@ -4880,7 +4866,7 @@ helps select the right credential in case of bad initial input
 
 <a name="Cli._setCredential"></a>
 
-### Cli.\_setCredential(properties, [credName], [skipInteraction]) ⇒ <code>Promise.&lt;(boolean\|string)&gt;</code>
+### Cli.\_setCredential(properties, [credName]) ⇒ <code>Promise.&lt;(boolean\|string)&gt;</code>
 helper around _askCredentials
 
 **Kind**: static method of [<code>Cli</code>](#Cli)  
@@ -4890,7 +4876,6 @@ helper around _askCredentials
 | --- | --- | --- |
 | properties | <code>TYPE.Mcdevrc</code> | from config file |
 | [credName] | <code>string</code> | name of credential that needs updating |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Cli._askCredentials"></a>
 
@@ -4994,7 +4979,7 @@ DevOps helper class
     * [.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths])](#DevOps.getDeltaList) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
         * [~delta](#DevOps.getDeltaList..delta) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
         * [~copied](#DevOps.getDeltaList..copied) : <code>TYPE.DeltaPkgItem</code>
-    * [.buildDeltaDefinitions(properties, range, [diffArr], [skipInteraction])](#DevOps.buildDeltaDefinitions) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+    * [.buildDeltaDefinitions(properties, range, [diffArr])](#DevOps.buildDeltaDefinitions) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
         * [~deltaDeployAll](#DevOps.buildDeltaDefinitions..deltaDeployAll) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
     * [.document(directory, jsonReport)](#DevOps.document) ⇒ <code>void</code>
     * [.getFilesToCommit(properties, buObject, metadataType, keyArr)](#DevOps.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
@@ -5030,7 +5015,7 @@ Interactive commit selection if no commits are passed.
 **Kind**: inner constant of [<code>getDeltaList</code>](#DevOps.getDeltaList)  
 <a name="DevOps.buildDeltaDefinitions"></a>
 
-### DevOps.buildDeltaDefinitions(properties, range, [diffArr], [skipInteraction]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+### DevOps.buildDeltaDefinitions(properties, range, [diffArr]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
 wrapper around DevOps.getDeltaList, Builder.buildTemplate and M
 
 **Kind**: static method of [<code>DevOps</code>](#DevOps)  
@@ -5041,7 +5026,6 @@ wrapper around DevOps.getDeltaList, Builder.buildTemplate and M
 | properties | <code>TYPE.Mcdevrc</code> | project config file |
 | range | <code>string</code> | git commit range |
 | [diffArr] | <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code> | instead of running git diff the method can also get a list of files to process |
-| [skipInteraction] | <code>TYPE.SkipInteraction</code> | allows to skip interactive wizard |
 
 <a name="DevOps.buildDeltaDefinitions..deltaDeployAll"></a>
 
@@ -5332,13 +5316,13 @@ CLI helper class
     * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.upgradeAuthFile()](#Init.upgradeAuthFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
-    * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
-    * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>string</code>
-    * [._updateGitConfigUser([skipInteraction])](#Init._updateGitConfigUser) ⇒ <code>void</code>
+    * [.initGitRepo()](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
+    * [.gitPush()](#Init.gitPush) ⇒ <code>void</code>
+    * [._addGitRemote()](#Init._addGitRemote) ⇒ <code>string</code>
+    * [._updateGitConfigUser()](#Init._updateGitConfigUser) ⇒ <code>void</code>
     * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
-    * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.initProject(properties, credentialName)](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -5416,50 +5400,30 @@ helper method for this.upgradeProject that upgrades project config if needed
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
 <a name="Init.initGitRepo"></a>
 
-### Init.initGitRepo([skipInteraction]) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
+### Init.initGitRepo() ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
 check if git repo exists and otherwise create one
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 **Returns**: <code>Promise.&lt;{status: string, repoName: string}&gt;</code> - success flag  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
 <a name="Init.gitPush"></a>
 
-### Init.gitPush([skipInteraction]) ⇒ <code>void</code>
+### Init.gitPush() ⇒ <code>void</code>
 offer to push the new repo straight to the server
 
 **Kind**: static method of [<code>Init</code>](#Init)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
 <a name="Init._addGitRemote"></a>
 
-### Init.\_addGitRemote([skipInteraction]) ⇒ <code>string</code>
+### Init.\_addGitRemote() ⇒ <code>string</code>
 offers to add the git remote origin
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 **Returns**: <code>string</code> - repo name (optionally)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
 <a name="Init._updateGitConfigUser"></a>
 
-### Init.\_updateGitConfigUser([skipInteraction]) ⇒ <code>void</code>
+### Init.\_updateGitConfigUser() ⇒ <code>void</code>
 checks global config and ask to config the user info and then store it locally
 
 **Kind**: static method of [<code>Init</code>](#Init)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
 <a name="Init._getGitConfigUser"></a>
 
 ### Init.\_getGitConfigUser() ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
@@ -5469,7 +5433,7 @@ retrieves the global user.name and user.email values
 **Returns**: <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code> - user.name and user.email  
 <a name="Init.initProject"></a>
 
-### Init.initProject(properties, credentialName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Init.initProject(properties, credentialName) ⇒ <code>Promise.&lt;void&gt;</code>
 Creates template file for properties.json
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -5479,11 +5443,10 @@ Creates template file for properties.json
 | --- | --- | --- |
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._downloadAllBUs"></a>
 
-### Init.\_downloadAllBUs(bu, gitStatus, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Init.\_downloadAllBUs(bu, gitStatus) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for this.initProject()
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -5493,7 +5456,6 @@ helper for this.initProject()
 | --- | --- | --- |
 | bu | <code>string</code> | cred/bu or cred/* or * |
 | gitStatus | <code>string</code> | signals what state the git repo is in |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init.upgradeProject"></a>
 
@@ -5561,13 +5523,13 @@ CLI helper class
     * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.upgradeAuthFile()](#Init.upgradeAuthFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
-    * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
-    * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>string</code>
-    * [._updateGitConfigUser([skipInteraction])](#Init._updateGitConfigUser) ⇒ <code>void</code>
+    * [.initGitRepo()](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
+    * [.gitPush()](#Init.gitPush) ⇒ <code>void</code>
+    * [._addGitRemote()](#Init._addGitRemote) ⇒ <code>string</code>
+    * [._updateGitConfigUser()](#Init._updateGitConfigUser) ⇒ <code>void</code>
     * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
-    * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.initProject(properties, credentialName)](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -5645,50 +5607,30 @@ helper method for this.upgradeProject that upgrades project config if needed
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
 <a name="Init.initGitRepo"></a>
 
-### Init.initGitRepo([skipInteraction]) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
+### Init.initGitRepo() ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
 check if git repo exists and otherwise create one
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 **Returns**: <code>Promise.&lt;{status: string, repoName: string}&gt;</code> - success flag  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
 <a name="Init.gitPush"></a>
 
-### Init.gitPush([skipInteraction]) ⇒ <code>void</code>
+### Init.gitPush() ⇒ <code>void</code>
 offer to push the new repo straight to the server
 
 **Kind**: static method of [<code>Init</code>](#Init)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
 <a name="Init._addGitRemote"></a>
 
-### Init.\_addGitRemote([skipInteraction]) ⇒ <code>string</code>
+### Init.\_addGitRemote() ⇒ <code>string</code>
 offers to add the git remote origin
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 **Returns**: <code>string</code> - repo name (optionally)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
 <a name="Init._updateGitConfigUser"></a>
 
-### Init.\_updateGitConfigUser([skipInteraction]) ⇒ <code>void</code>
+### Init.\_updateGitConfigUser() ⇒ <code>void</code>
 checks global config and ask to config the user info and then store it locally
 
 **Kind**: static method of [<code>Init</code>](#Init)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
 <a name="Init._getGitConfigUser"></a>
 
 ### Init.\_getGitConfigUser() ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
@@ -5698,7 +5640,7 @@ retrieves the global user.name and user.email values
 **Returns**: <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code> - user.name and user.email  
 <a name="Init.initProject"></a>
 
-### Init.initProject(properties, credentialName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Init.initProject(properties, credentialName) ⇒ <code>Promise.&lt;void&gt;</code>
 Creates template file for properties.json
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -5708,11 +5650,10 @@ Creates template file for properties.json
 | --- | --- | --- |
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._downloadAllBUs"></a>
 
-### Init.\_downloadAllBUs(bu, gitStatus, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Init.\_downloadAllBUs(bu, gitStatus) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for this.initProject()
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -5722,7 +5663,6 @@ helper for this.initProject()
 | --- | --- | --- |
 | bu | <code>string</code> | cred/bu or cred/* or * |
 | gitStatus | <code>string</code> | signals what state the git repo is in |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init.upgradeProject"></a>
 
@@ -5790,13 +5730,13 @@ CLI helper class
     * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.upgradeAuthFile()](#Init.upgradeAuthFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
-    * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
-    * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>string</code>
-    * [._updateGitConfigUser([skipInteraction])](#Init._updateGitConfigUser) ⇒ <code>void</code>
+    * [.initGitRepo()](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
+    * [.gitPush()](#Init.gitPush) ⇒ <code>void</code>
+    * [._addGitRemote()](#Init._addGitRemote) ⇒ <code>string</code>
+    * [._updateGitConfigUser()](#Init._updateGitConfigUser) ⇒ <code>void</code>
     * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
-    * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.initProject(properties, credentialName)](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -5874,50 +5814,30 @@ helper method for this.upgradeProject that upgrades project config if needed
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
 <a name="Init.initGitRepo"></a>
 
-### Init.initGitRepo([skipInteraction]) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
+### Init.initGitRepo() ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
 check if git repo exists and otherwise create one
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 **Returns**: <code>Promise.&lt;{status: string, repoName: string}&gt;</code> - success flag  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
 <a name="Init.gitPush"></a>
 
-### Init.gitPush([skipInteraction]) ⇒ <code>void</code>
+### Init.gitPush() ⇒ <code>void</code>
 offer to push the new repo straight to the server
 
 **Kind**: static method of [<code>Init</code>](#Init)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
 <a name="Init._addGitRemote"></a>
 
-### Init.\_addGitRemote([skipInteraction]) ⇒ <code>string</code>
+### Init.\_addGitRemote() ⇒ <code>string</code>
 offers to add the git remote origin
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 **Returns**: <code>string</code> - repo name (optionally)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
 <a name="Init._updateGitConfigUser"></a>
 
-### Init.\_updateGitConfigUser([skipInteraction]) ⇒ <code>void</code>
+### Init.\_updateGitConfigUser() ⇒ <code>void</code>
 checks global config and ask to config the user info and then store it locally
 
 **Kind**: static method of [<code>Init</code>](#Init)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
 <a name="Init._getGitConfigUser"></a>
 
 ### Init.\_getGitConfigUser() ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
@@ -5927,7 +5847,7 @@ retrieves the global user.name and user.email values
 **Returns**: <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code> - user.name and user.email  
 <a name="Init.initProject"></a>
 
-### Init.initProject(properties, credentialName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Init.initProject(properties, credentialName) ⇒ <code>Promise.&lt;void&gt;</code>
 Creates template file for properties.json
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -5937,11 +5857,10 @@ Creates template file for properties.json
 | --- | --- | --- |
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._downloadAllBUs"></a>
 
-### Init.\_downloadAllBUs(bu, gitStatus, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Init.\_downloadAllBUs(bu, gitStatus) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for this.initProject()
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -5951,7 +5870,6 @@ helper for this.initProject()
 | --- | --- | --- |
 | bu | <code>string</code> | cred/bu or cred/* or * |
 | gitStatus | <code>string</code> | signals what state the git repo is in |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init.upgradeProject"></a>
 
@@ -6019,13 +5937,13 @@ CLI helper class
     * [._getForcedUpdateList(projectVersion)](#Init._getForcedUpdateList) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [._createIdeConfigFile(fileNameArr, relevantForcedUpdates, [boilerplateFileContent])](#Init._createIdeConfigFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.upgradeAuthFile()](#Init.upgradeAuthFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.initGitRepo([skipInteraction])](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
-    * [.gitPush([skipInteraction])](#Init.gitPush) ⇒ <code>void</code>
-    * [._addGitRemote([skipInteraction])](#Init._addGitRemote) ⇒ <code>string</code>
-    * [._updateGitConfigUser([skipInteraction])](#Init._updateGitConfigUser) ⇒ <code>void</code>
+    * [.initGitRepo()](#Init.initGitRepo) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
+    * [.gitPush()](#Init.gitPush) ⇒ <code>void</code>
+    * [._addGitRemote()](#Init._addGitRemote) ⇒ <code>string</code>
+    * [._updateGitConfigUser()](#Init._updateGitConfigUser) ⇒ <code>void</code>
     * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
-    * [.initProject(properties, credentialName, [skipInteraction])](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._downloadAllBUs(bu, gitStatus, [skipInteraction])](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.initProject(properties, credentialName)](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -6103,50 +6021,30 @@ helper method for this.upgradeProject that upgrades project config if needed
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - returns true if worked without errors  
 <a name="Init.initGitRepo"></a>
 
-### Init.initGitRepo([skipInteraction]) ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
+### Init.initGitRepo() ⇒ <code>Promise.&lt;{status: string, repoName: string}&gt;</code>
 check if git repo exists and otherwise create one
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 **Returns**: <code>Promise.&lt;{status: string, repoName: string}&gt;</code> - success flag  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
 <a name="Init.gitPush"></a>
 
-### Init.gitPush([skipInteraction]) ⇒ <code>void</code>
+### Init.gitPush() ⇒ <code>void</code>
 offer to push the new repo straight to the server
 
 **Kind**: static method of [<code>Init</code>](#Init)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
 <a name="Init._addGitRemote"></a>
 
-### Init.\_addGitRemote([skipInteraction]) ⇒ <code>string</code>
+### Init.\_addGitRemote() ⇒ <code>string</code>
 offers to add the git remote origin
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 **Returns**: <code>string</code> - repo name (optionally)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
 <a name="Init._updateGitConfigUser"></a>
 
-### Init.\_updateGitConfigUser([skipInteraction]) ⇒ <code>void</code>
+### Init.\_updateGitConfigUser() ⇒ <code>void</code>
 checks global config and ask to config the user info and then store it locally
 
 **Kind**: static method of [<code>Init</code>](#Init)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
-
 <a name="Init._getGitConfigUser"></a>
 
 ### Init.\_getGitConfigUser() ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
@@ -6156,7 +6054,7 @@ retrieves the global user.name and user.email values
 **Returns**: <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code> - user.name and user.email  
 <a name="Init.initProject"></a>
 
-### Init.initProject(properties, credentialName, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Init.initProject(properties, credentialName) ⇒ <code>Promise.&lt;void&gt;</code>
 Creates template file for properties.json
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -6166,11 +6064,10 @@ Creates template file for properties.json
 | --- | --- | --- |
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
-| [skipInteraction] | <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init._downloadAllBUs"></a>
 
-### Init.\_downloadAllBUs(bu, gitStatus, [skipInteraction]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Init.\_downloadAllBUs(bu, gitStatus) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for this.initProject()
 
 **Kind**: static method of [<code>Init</code>](#Init)  
@@ -6180,7 +6077,6 @@ helper for this.initProject()
 | --- | --- | --- |
 | bu | <code>string</code> | cred/bu or cred/* or * |
 | gitStatus | <code>string</code> | signals what state the git repo is in |
-| [skipInteraction] | <code>boolean</code> \| <code>TYPE.skipInteraction</code> | signals what to insert automatically for things usually asked via wizard |
 
 <a name="Init.upgradeProject"></a>
 
