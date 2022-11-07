@@ -25,7 +25,7 @@ Accenture Salesforce Marketing Cloud DevTools (mcdev) is a rapid deployment/roll
   - [2.6 Using mcdev in other node packages](#26-using-mcdev-in-other-node-packages)
 - [3. Updating Accenture SFMC DevTools](#3-updating-accenture-sfmc-devtools)
 - [4. Troubleshoot Install/Update](#4-troubleshoot-installupdate)
-  - [4.1. Installing specific version](#41-installing-specific-version)
+  - [4.1. Installing a specific version](#41-installing-a-specific-version)
   - [4.2. Using custom CLIs](#42-using-custom-clis)
   - [4.3. Missing write access to...on MacOS](#43-missing-write-access-toon-macos)
   - [4.4. ...running scripts is disabled on this system](#44-running-scripts-is-disabled-on-this-system)
@@ -51,7 +51,7 @@ Accenture Salesforce Marketing Cloud DevTools (mcdev) is a rapid deployment/roll
     - [6.2.8. createDeltaPkg](#628-createdeltapkg)
 - [7. Advanced Configuration](#7-advanced-configuration)
   - [7.1. Config Options](#71-config-options)
-  - [7.2. Metadata specific settings & options](#72-metadata-specific-settings--options)
+  - [7.2. Metadata-specific settings & options](#72-metadata-specific-settings--options)
     - [7.2.1. Retention Policy fields in Data Extensions](#721-retention-policy-fields-in-data-extensions)
     - [7.2.2. Adding/Updating Fields on existing Data Extensions](#722-addingupdating-fields-on-existing-data-extensions)
     - [7.2.3. Renaming fields of a Data Extensions](#723-renaming-fields-of-a-data-extensions)
@@ -123,7 +123,7 @@ If you experience issues installing Accenture SFMC DevTools, please check out th
 1. Install Accenture SFMC DevTools by running `npm install -g mcdev` (prefix with `sudo` on MacOS)
    - If you get an error, please see the below troubleshooting section.
 
-When completed run `mcdev --version` and it will show you which version you installed (e.g. `4.1.6`).
+When completed run `mcdev --version` and it will show you which version you installed (e.g. `4.1.9`).
 
 > **_Side note for proud nerds_:**
 >
@@ -135,12 +135,12 @@ When completed run `mcdev --version` and it will show you which version you inst
 
 <a id="markdown-initial-project-setup" name="initial-project-setup"></a>
 
-After the successful installation, you will now need to setup the connection to your Marketing Cloud instance.
+After the successful installation, you will now need to set up the connection to your Marketing Cloud instance.
 
 1. In your Marketing Cloud instance
    1. Ensure that you **selected** your **Parent/Global Business Unit**.
    2. Go to `Setup -> Apps -> Installed Packages`.
-   3. Create a new installed package and name it "Accenture SFMC DevTools Deployment Tool"
+   3. Create a new "installed package" and name it "Accenture SFMC DevTools Deployment Tool"
       > Note: On some older SFMC instances it will ask you if you want the enhanced version. Please enable this option.
    4. Click on the _Add Component_ button and select `API Integration` with `Server-To-Server` mode.
    5. Make sure you grant all available rights.
@@ -155,15 +155,15 @@ After the successful installation, you will now need to setup the connection to 
          > Being specific here reduces the chance of deploying to the wrong server (instance) in stressful situations. We suggest you use something like `ClientName`, or `ClientName-ProjectName` if you have multiple projects with the same client. In case your project uses multiples instances you might like to use something like `Client-ProjectName-Sandbox` and `Client-ProjectName-PROD`.
       3. It will then continue to ask for the EID (Parent MID), client ID, client secret and Authentication Base URI.
       4. The credentials will be automatically tested & your list of BUs downloaded until finally the central configuration file `.mcdevrc.json` gets created in your project folder.
-      5. Last step is to download an initial backup and commit it into git. No worries - the wizard does that for you!
+      5. The last step is to download an initial backup and commit it into git. No worries - the wizard does that for you!
    3. If this is the first time you set up Accenture SFMC DevTools or you recently upgraded Accenture SFMC DevTools, please restart VS Code now! A pop-up will likely appear in the lower right corner prompting you to install recommended extensions.
    4. Done.
 3. Sharing the project with your team
    1. Make sure you have a Git repo (Bitbucket, GitHub, GitLab) set up somewhere. If you are an SI partner, usually, your client will have to do this for you.
       > While running `mcdev init`, the tool already made sure to set up a local Git repo for you. Now, you need to upload ("push") it to the online repo:
    2. Open the URL of your online repo and find the "CLONE" button. This will likely show you a normal URL, ending on ".git"
-   3. Add this as your repository remote named "origin". If you use a GUI based tool, that should be fairly simple, otherwise execute `git remote add origin YOUR-URL` in your project folder.
-   4. Now run `git push -u origin master` to actually start the upload.
+   3. Add this as your repository remote named "origin". If you use a GUI-based tool, that should be fairly simple, otherwise, execute `git remote add origin YOUR-URL` in your project folder.
+   4. Now run `git push -u origin master` to start the upload.
 
 ### 2.4. Joining a project that was set up before
 
@@ -178,14 +178,14 @@ If Accenture SFMC DevTools was already used to set up the project by somebody in
 4. now execute `git clone YOUR-REPO-URL`. This will create a sub-folder with the name of the repo and download everything for you into it (e.g. `C:\repos\YOUR-REPO\`)
 5. Still in the command prompt, execute `cd YOUR-REPO`. This will switch your current folder (visible before the command prompt) to the new repo folder (`C:\repos\YOUR-REPO\`).
 6. Assuming you installed Accenture SFMC DevTools globally (recommended!), now execute `mcdev init`.
-7. At this point the system will recognize the previously set up project and ask you for `EID (Parent MID)`, `Client ID`, `Client Secret` and the `Authentication Base URI`.
+7. At this point, the system will recognize the previously set up project and ask you for `EID (Parent MID)`, `Client ID`, `Client Secret` and the `Authentication Base URI`.
 8. Done.
 
 ### 2.5. Recommended additional installs
 
 <a id="markdown-recommended-additional-installs" name="recommended-additional-installs"></a>
 
-The following seeks to enhance your daily process. Our guide assumes that you are using [Visual Studio Code](https://code.visualstudio.com/download) to develop, backup and deploy your project. For smooth operations we highly recommend the following Marketing Cloud specific plugins for it.
+The following seeks to enhance your daily process. Our guide assumes that you are using [Visual Studio Code](https://code.visualstudio.com/download) to develop, backup and deploy your project. For smooth operations, we highly recommend the following Marketing Cloud specific plugins for it.
 
 Nevertheless, Accenture SFMC DevTools will run without them and is not associated with the development of these publicly available apps & plugins.
 
@@ -203,20 +203,20 @@ Click on `Install All` to quickly get things ready or review the recommendations
 
 ![Recommended extension prompt](img/README.md/vscode-recommendations-2.png)
 
-The "Workspace Recommendations" were defined by Accenture SFMC DevTools. Clicking on the little cloud icon will install all at once. The "Other Recommendations" are auto-generated by VS Code and are not controlled by Accenture SFMC DevTools. You _may_ look through those as well, but they might also be completely irrelevant for you.
+The "Workspace Recommendations" were defined by Accenture SFMC DevTools. Clicking on the little cloud icon will install all at once. The "Other Recommendations" are auto-generated by VS Code and are not controlled by Accenture SFMC DevTools. You _may_ look through those as well, but they might also be completely irrelevant to you.
 
 **Node modules:**
 
 - [eslint](https://npmjs.com/package/eslint): code linting
-- [eslint-config-prettier](http://npmjs.com/package/eslint-config-prettier): ensures that prettier and eslint dont have conflicting rules
+- [eslint-config-prettier](http://npmjs.com/package/eslint-config-prettier): ensures that prettier and eslint do not have conflicting rules
 - [eslint-config-ssjs](http://npmjs.com/package/eslint-config-ssjs): allows you to have accurate code linting in \*.SSJS files
 - [eslint-plugin-jsdoc](http://npmjs.com/package/eslint-plugin-jsdoc): will help you write proper jsdoc comments in your SSJS code
-- [eslint-plugin-prettier](http://npmjs.com/package/eslint-plugin-prettier): runs prettier and eslint together
+- [eslint-plugin-prettier](http://npmjs.com/package/eslint-plugin-prettier): runs prettier and ESlint together
 - [prettier](https://prettier.io): opinionated code formatter
 - [npm-check](http://npmjs.com/package/npm-check): makes it easier to keep your node modules up-to-date
 - [sfmc-boilerplate](http://npmjs.com/package/sfmc-boilerplate): build tool for your more complex email, cloudpage and automation code.
 
-Please note that Visual Studio Code might warn you about using the local installation of ESLint with a pop up like the following. Please confirm this with `Allow` or, if you are certain about what you are doing, with `Allow Everywhere`. Inside of Accenture SFMC DevTools project folders this warning is normal, because we ask to install the VSCode extension and the node module for ESLint.
+Please note that Visual Studio Code might warn you about using the local installation of ESLint with a pop-up like the following. Please confirm this with `Allow` or, if you are certain about what you are doing, with `Allow Everywhere`. Inside of Accenture SFMC DevTools project folders this warning is normal because we ask to install the VSCode extension and the node module for ESLint.
 
 ![VSCode Eslint install warning](img/README.md/vscode-eslint-allow_everywhere.jpg)
 
@@ -260,7 +260,7 @@ npm update -g mcdev
 
 <a id="markdown-troubleshoot-install%2Fupdate" name="troubleshoot-install%2Fupdate"></a>
 
-### 4.1. Installing specific version
+### 4.1. Installing a specific version
 
 <a id="installing-specific-version" name="installing-specific-version"></a>
 
@@ -277,10 +277,10 @@ _Note: Regardless of which tag or branch you install_
 **Install specific version (using a version tag on npm):**
 
 ```bash
-npm install -g mcdev@4.1.6
+npm install -g mcdev@4.1.9
 ```
 
-**Warning**: When you used the above method to install Accenture SFMC DevTools for a specific version or tag, trying to [update Accenture SFMC DevTools](#updating-mcdev) might not download the most recently published official version but instead stay on the version or branch you previously selected (in the above examples: develop, 4.1.6)!
+**Warning**: When you used the above method to install Accenture SFMC DevTools for a specific version or tag, trying to [update Accenture SFMC DevTools](#updating-mcdev) might not download the most recently published official version but instead stay on the version or branch you previously selected (in the above examples: develop, 4.1.9)!
 
 > **Note**: The version is currently _not_ updated on the developer branch until a new release is published. Hence, you will not see a change if you run `mcdev --version`.
 
@@ -288,9 +288,9 @@ npm install -g mcdev@4.1.6
 
 <a id="markdown-using-custom-clis" name="using-custom-clis"></a>
 
-Some users of Accenture SFMC DevTools prefer to use git bash or other CLIs instead of the operating system's default. Please note that some of the functionality of Accenture SFMC DevTools but also of other tools like the Node package manager (npm) do not necessarily function properly in these.
+Some users of Accenture SFMC DevTools prefer to use git bash or other CLIs instead of the operating system's default. Please note that some of the functionality of Accenture SFMC DevTools but also other tools like the Node package manager (npm) do not necessarily function properly in these.
 
-If you encounter problems, we strongly recommend to first try it in the default CLI.
+If you encounter problems, we strongly recommend first trying it in the default CLI.
 
 <a name="missing-write-access-toon-macos"></a>
 
@@ -298,7 +298,7 @@ If you encounter problems, we strongly recommend to first try it in the default 
 
 <a id="markdown-missing-write-access-to...on-macos" name="missing-write-access-to...on-macos"></a>
 
-Depending on your setup, the default global installs & updates might error out with "Missing write access to /usr/local/lib/node_modules". In this case prefix your command with `sudo`:
+Depending on your setup, the default global installs & updates might error out with "Missing write access to /usr/local/lib/node_modules". In this case, prefix your command with `sudo`:
 
 ```bash
 sudo npm install -g mcdev
@@ -322,7 +322,7 @@ Steps to solve this:
 
 1. Start Windows PowerShell with the "Run as Administrator" option.
 2. Input the following and then hit ENTER: `set-executionpolicy remotesigned`
-3. This will likely show a lenghty message with a question to confirm the change (screenshot below). Please type `y` (="yes") and confirm with `Enter`.
+3. This will likely show a lengthy message with a question to confirm the change (screenshot below). Please type `y` (="yes") and confirm with `Enter`.
 
 ![Execution Policy](img/README.md/troubleshoot-execution_policy-2.png)
 
@@ -435,7 +435,7 @@ The following description will assume a global installation for simplicity reaso
 
 _Note:_ Parameters listed below in between square brackets = `[...]` are optional parameters. Required parameters are listed in between less-than / greater-than signs = `<...>`.
 
-_Note:_ Credentials and Business Unit names can always be selected interactively. Try inputing a questionmark = `?` in their place if more parameters follow, or omit them completely if no other parameters are required for a command.
+_Note:_ Credentials and Business Unit names can always be selected interactively. Try inputting a question mark = `?` in their place if more parameters follow, or omit them completely if no other parameters are required for a command.
 
 ### 6.1. Maintenance and setup commands
 
@@ -449,11 +449,11 @@ _Command:_ `mcdev init`
 
 _Alias:_ -
 
-Creates the basic configuration file `.mcdevrc.json` and `.mcdev-auth.json` in your project directory. You may add more credentials by re-running the same command again, e.g. to add produciton and sandbox credentials next to each other.
+Creates the basic configuration file `.mcdevrc.json` and `.mcdev-auth.json` in your project directory. You may add more credentials by re-running the same command again, e.g. to add production and sandbox credentials next to each other.
 
-In addition, it initializes an npm package for your, installs recommended npm dependencies and places our default IDE configuration files for ESLint, Prettier, Git and VSCode into your project directory.
+In addition, it initializes an npm package for you, installs recommended npm dependencies and places our default IDE configuration files for ESLint, Prettier, Git and VSCode into your project directory.
 
-The initialization ends with the creation of your Git repository and a first backup of your SFMC instance.
+The initialization ends with the creation of your Git repository and the first backup of your SFMC instance.
 
 _Example - initialize project / add additional credentials:_
 
@@ -469,7 +469,7 @@ mcdev init yourCredentialName
 
 The interactive setup will ask you for an `EID (Parent MID)`, `Client ID` and `Client Secret` of an installed package. It also asks for the `Authentication Base Uri`. Each installed package on a given SFMC instance shares the same tenant sub-domain and always shows you 3 domains (Auth, REST and SOAP).
 
-Example url: `https://mcg123abcysykllg-0321cbs8bbt64.auth.marketingcloudapis.com`
+Example URL: `https://mcg123abcysykllg-0321cbs8bbt64.auth.marketingcloudapis.com`
 
 > **Note to CLI experts:**
 >
@@ -498,7 +498,7 @@ _Command:_ `mcdev upgrade`
 
 _Alias:_ `mcdev up`
 
-This upgrades older Accenture SFMC DevTools projects to the newest standard: Outdated Accenture SFMC DevTools configuration files are upgraded and the right npm dependencies are installed. It also copies in the right IDE configuration files. See [init](#init) for more details.
+This upgrades older Accenture SFMC DevTools projects to the newest standard: Outdated Accenture SFMC DevTools configuration files are upgraded and the right npm dependencies are installed. It also copies the right IDE configuration files into your project folder. See [init](#init) for more details.
 
 _Example:_
 
@@ -530,7 +530,7 @@ _Command:_ `mcdev badKeys [business unit]`
 
 _Alias:_ -
 
-Lists all metadata for which the External key is not in synch with the name to enable you to update them quickly.
+Lists all metadata for which the External key is not in sync with the name to enable you to update them quickly.
 
 _Example:_
 
@@ -546,7 +546,7 @@ _Command:_ `mcdev document <business unit> <TYPE>`
 
 _Alias:_ `mcdev doc`
 
-Creates human readable documentation for your metadata. This command is executed by default for supported types unless you changed your config manually (`metaDataTypes.documentOnRetrieve`). Therefore, running it manually is typically not required. You can choose to generate **HTML** (`html`) or **Markdown** (`md`) docs via `options.documentType`.
+Creates human-readable documentation for your metadata. This command is executed by default for supported types unless you changed your config manually (`metaDataTypes.documentOnRetrieve`). Therefore, running it manually is typically not required. You can choose to generate **HTML** (`html`) or **Markdown** (`md`) docs via `options.documentType`.
 
 The default format is set to `md` as Markdown renders nicely in Git as well as in VSCode's Markdown preview and can be copied from there into Confluence and other applications without losing the formatting.
 
@@ -575,7 +575,7 @@ _Command:_ `mcdev selectTypes`
 
 _Alias:_ `mcdev st`
 
-Allows you to interactive select which metadata is retrieved when you run the `retrieve` command. Try out `explainTypes` first to understand what each type means.
+Allows you to interactively select which metadata is retrieved when you run the `retrieve` command. Try out `explainTypes` first to understand what each type means.
 
 _Example:_
 
@@ -593,7 +593,7 @@ _Command:_ `mcdev explainTypes`
 
 _Alias:_ `mcdev et`
 
-A helper command for `selectTypes` that prints out a table that defines what the various types actually are.
+A helper command for `selectTypes`. It prints out a table that defines what the various types are.
 
 Types marked as not-default should be ignored. These are either under development or merely meant to support contributing to Accenture SFMC DevTools.
 
@@ -623,7 +623,7 @@ _Example:_
 mcdev retrieve MyProject/DEV
 ```
 
-You can ommit the Business Unit which will trigger and interactive mode based on your config:
+You can omit the Business Unit which will trigger an interactive mode based on your config:
 
 _Example:_
 
@@ -640,7 +640,9 @@ mcdev retrieve MyProject
 
 **retrieve specific type:**
 
-If you want to retrieve only a certain metadata type, let's say `script`, then pass this type in as a second parameter. The other types will remain untouched and in place, if you've previously retrieved them.<br>Similarly, you can pass in multiple comma-separated types but make sure to put them in double-quotes in order to work on all systems.
+If you want to retrieve only a certain metadata type, let's say `script`, then pass this type in as a second parameter. The other types will remain untouched and in place, if you've previously retrieved them.
+
+Similarly, you can pass in multiple comma-separated types but make sure to put them in double quotes to work on all systems.
 
 _Example:_
 
@@ -649,9 +651,9 @@ mcdev retrieve MyProject/DEV script
 mcdev retrieve MyProject/DEV "script,query,automation"
 ```
 
-**retrieve sepcific type and key:**
+**retrieve specific type and key:**
 
-If you wish you may also specify exact keys that need to be retrieved, filtering down on whats in your retrieve folder even further. Specified keys apply as a filter for all types you specify. If your naming convention does not allow for such an aggregation then please run seperate commands for each type.
+If you wish you may also specify the exact keys that need to be retrieved, filtering down on what's in your retrieve folder even further. Specified keys apply as a filter for all types you specify. If your naming convention does not allow for such an aggregation then please run separate commands for each type.
 
 _Example:_
 
@@ -695,13 +697,15 @@ _Example:_
 mcdev deploy MyProject/DEV
 ```
 
-Only metadata that you copied into the **deploy** directory will be deployed. Please keek in mind that the folder structure needs to be similar to what the retrieve command creates in the retrieve folder, including the credentials and Business Unit name.
+Only metadata that you copied into the **deploy** directory will be deployed. Please keep in mind that the folder structure needs to be similar to what the retrieve command creates in the retrieve folder, including the credentials and Business Unit name.
 
 Similarly to `mcdev retrieve` you can also use the interactive mode to select credential and/or Business Unit.
 
 **deploy sepcific type:**
 
-If you want to deploy only a certain metadata type, let's say `dataExtension`, then pass this type in as a second parameter. If there are other types in the current BU's deploy folder, these will be ignored and hence _not_ uploaded.<br>Similarly, you can pass in multiple comma-separated types but make sure to put them in double-quotes in order to work on all systems.
+If you want to deploy only a certain metadata type, let's say `dataExtension`, then pass this type in as a second parameter. If there are other types in the current BU's deploy folder, these will be ignored and hence _not_ uploaded.
+
+Similarly, you can pass in multiple comma-separated types but make sure to put them in double quotes to work on all systems.
 
 _Example:_
 
@@ -710,9 +714,9 @@ mcdev deploy MyProject/DEV dataExtension
 mcdev deploy MyProject/DEV "script,dataExtension,importFile"
 ```
 
-**deploy sepcific type and key:**
+**deploy specific type and key:**
 
-If you wish you may also specify exact keys that need to be deployed, filtering down on whats in your deploy folder even further. Specified keys apply as a filter for all types you specify. If your naming convention does not allow for such an aggregation then please run seperate commands for each type.
+If you wish you may also specify the exact keys that need to be deployed, filtering down on what's in your deploy folder even further. Specified keys apply as a filter for all types you specify. If your naming convention does not allow for such an aggregation then please run separate commands for each type.
 
 _Example:_
 
@@ -724,7 +728,7 @@ mcdev deploy MyProject/DEV "script,dataExtension,importFile" "key1,key2"
 
 **deploy from retrieve folder:**
 
-Sometimes it's convenient to deploy right from the retrieve folder when you are using mcdev as a developer tool rather than only for deployments to other BUs. For this scenario we added the 4th parameter. In that case it does not look into `deploy/` but into `retrieve/` to find what it needs to deploy.
+Sometimes it's convenient to deploy right from the retrieve folder when you are using mcdev as a developer tool rather than only for deployments to other BUs. For this scenario we added the 4th parameter. In that case, it does not look into `deploy/` but into `retrieve/` finding what it needs to deploy.
 
 _Example:_
 
@@ -736,7 +740,7 @@ mcdev deploy MyProject/DEV "script,dataExtension,importFile" "key1,key2" true
 
 **deploy all BUs:**
 
-A special variant of this command allows you to dpeloy all Business Units of a given credential at once.
+A special variant of this command allows you to deploy all Business Units of a given credential at once.
 _Example:_
 
 ```bash
@@ -789,7 +793,7 @@ _Alias:_ `mcdev rt`
 
 The `rt` command retrieves metadata from the server and uses your `market` configuration in `.mcdevrc.json` to replace strings with variables. The result is then stored in your `template/` folder. Please note that files stored here will keep their original name, despite this possibly containing market-specific suffixes or similar. Also note, that contrary to the deploy & retrieve folders, you will not see credential- or Business Unit-sub-folders here.
 
-This command is a prerequisite for the `buildDefintion` command. Alternatively though, you can copy-paste retrieved metadata from your `retrieve/` folder to your `template/` folder and update it manually - or even create it from scratch.
+This command is a prerequisite for the `buildDefintion` command. Alternatively, you can copy-paste retrieved metadata from your `retrieve/` folder to your `template/` folder and update it manually - or even create it from scratch.
 
 > **Note**: Before using this command, you need to configure your markets first! Check out our guide on [Market Configuration](#market-configuration) to understand how to use templating and prepare your market config.
 
@@ -825,9 +829,9 @@ _Command:_ `mcdev buildTemplate <business unit> <type> <name> <market>`
 
 _Alias:_ `mcdev bt`
 
-The `bt` command uses previously retrieved metadata on the your local computer and uses your `market` configuration in `.mcdevrc.json` to replace strings with variables. The result is then stored in your `template/` folder. Please note that files stored here will keep their original name, despite this possibly containing market-specific suffixes or similar. Also note, that contrary to the deploy & retrieve folders, you will not see credential- or Business Unit-sub-folders here.
+The `bt` command uses previously retrieved metadata on your local computer and uses your `market` configuration in `.mcdevrc.json` to replace strings with variables. The result is then stored in your `template/` folder. Please note that files stored here will keep their original name, despite this possibly containing market-specific suffixes or similar. Also note, that contrary to the deploy & retrieve folders, you will not see credential- or Business Unit-sub-folders here.
 
-This command is a prerequisite for the `buildDefintion` command. Alternatively though, you can copy-paste retrieved metadata from your `retrieve/` folder to your `template/` folder and update it manually - or even create it from scratch.
+This command is a prerequisite for the `buildDefintion` command. Alternatively, you can copy-paste retrieved metadata from your `retrieve/` folder to your `template/` folder and update it manually - or even create it from scratch.
 
 > **Note**: Before using this command, you need to configure your markets first! Check out our guide on [Market Configuration](#market-configuration) to understand how to use templating and prepare your market config.
 
@@ -863,10 +867,10 @@ _Command:_ `mcdev buildDefinition <business unit> <type> <name> <market>`
 
 _Alias:_ `mcdev bd`
 
-The `buildDefinition` command allows to prepare deployments to one or multiple targets based on templates and [Market Configuration](#market-configuration).
+The `buildDefinition` command allows to prepare the deployments to one or multiple targets based on templates and [Market Configuration](#market-configuration).
 After you have created your templates via `retrieveAsTemplate` (or manually) in your `template/dataExtension/` folder run this command to create the final deployable files in your respective `retrieve/<business unit>/` folder.
 
-This allows you to double-check if you actually changed something by comparing the before and after using your favorite Git client. You then have to manually copy files you want to deploy into the respective `deploy/` folder.
+This allows you to double-check if you changed something by comparing the before and after using your favorite Git client. You then have to manually copy the files you want to deploy into the respective `deploy/` folder.
 
 > **Note**: Before using this command, you need to configure your markets first! Check out our guide on [Market Configuration](#market-configuration) to understand how to use templating and prepare your market config.
 
@@ -884,7 +888,7 @@ This will result in the following files being created in your `retrieve/MyProjec
 
 **buildDefinition for multiple sources:**
 
-You can also create defintions based on multiple templates at once. Simply specify them in a comma-separated list and put that list in quotes:
+You can also create definitions based on multiple templates at once. Simply specify them in a comma-separated list and put that list in quotes:
 
 ```bash
 mcdev bd MyProject/QA dataExtension "table1,table2,table3" pilotMarketDEV1
@@ -924,7 +928,7 @@ _Command:_ `mcdev createDeltaPkg [range] [filter]`
 
 _Alias:_ `mcdev cdp`
 
-This command is rather versitile and hence can be used in multiple ways. The most powerful option presents itself when you configure `options.deployment.sourceTargetMapping` to point to a source `marketList` (usually for DEV-BU with a DEV market) and a target `marketList` (e.g. to a QA BU-market combo and a Production BU-market combo). Given this is configured, it can create all deployable files using Accenture SFMC DevTools's templating engine on the fly for you.
+This command is rather versatile and hence can be used in multiple ways. The most powerful option presents itself when you configure `options.deployment.sourceTargetMapping` to point to a source `marketList` (usually for DEV-BU with a DEV market) and a target `marketList` (e.g. to a QA BU-market combo and a Production BU-market combo). Given this is configured, it can create all deployable files using Accenture SFMC DevTools's templating engine on the fly for you.
 
 The **minimum configuration** you need to have in your config could look something like the following:
 
@@ -983,7 +987,7 @@ The **minimum configuration** you need to have in your config could look somethi
 
 **Interactive commit selection:**
 
-This allows you to compare your latest commit (**not** what's still only unstaged/staged) with previous commits. This approach is especially useful if you are a in charge of the deployment and simply want to compare the latest commits to your master / release branch with the commit that was last deployed.
+This allows you to compare your latest commit (**not** what's still only unstaged/staged) with previous commits. This approach is especially useful if you are in charge of the deployment and simply want to compare the latest commits to your master / release branch with the commit that was last deployed.
 
 > **Important**: Make sure you are on the branch corresponding to the environment you want to deploy to, e.g. the master branch.
 
@@ -1051,13 +1055,13 @@ mcdev createDeltaPkg d21b4221..HEAD 'MyProject/BU1,MyProject/BU3'
 
 <a id="markdown-advanced-configuration" name="advanced-configuration"></a>
 
-The tools confiuration can be changed in the file `.mcdevrc.json` located in the root of your project folder.
+The tool's configuration can be changed in the file `.mcdevrc.json` located in the root of your project folder.
 
 It contains [Market Configuration](#market-configuration) (`markets: { ... }`), [Market List Configuration](#market-list-configuration) (`marketList: { ... }`) the list of usable Business Units per credentials, `directories`, as well as other `options`.
 
 You will also find the configuration for what metadata shall be retrieved here in `metaDataTypes.retrieve: [ ... ]`.
 
-You will also find a secondary file named `.mcdev-auth.json` containing your credentials. **Do not commit this to your repository!** You should only commit `.mcdevrc.json` as this file contains project wide settings that do not compromise security.
+You will also find a secondary file named `.mcdev-auth.json` containing your credentials. **Do not commit this to your repository!** You should only commit `.mcdevrc.json` as this file contains project-wide settings that do not compromise security.
 
 ### 7.1. Config Options
 
@@ -1126,20 +1130,18 @@ The central config in `.mcdevrc.json` holds multiple adjustable settings:
 | metaDataTypes.documentOnRetrieve         | ['role','dataExtension']                     | automatically executes `document` for selected types                                                                        |
 | metaDataTypes.retrieve                   | _changes with each release_                  | check [Metadata Type Support](#metadata-type-support) for current list                                                      |
 
-### 7.2. Metadata specific settings & options
+### 7.2. Metadata-specific settings & options
 
 <a id="markdown-metadata-specific-settings" name="metadata-specific-settings"></a>
 
 #### 7.2.1. Retention Policy fields in Data Extensions
 
-<a id="markdown-retention-policy-fields-in-data-extensions" name="retention-policy-fields-in-data-extensions"></a>
-
-The way retention policy is saved is a bit misleading and hence we wanted to provide a bit of guidance if you ever need to do a deep dive here.
+The way the retention policy is saved is a bit misleading and hence we wanted to provide a bit of guidance if you ever need to do a deep dive here.
 
 | Field                                | Description                                                                                                                                                                                                                                                                                                                        | Values                                                                 |
 | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------ |
 | **DataRetentionPeriod**              | this field should print the value of the unit of measure but it unfortunately is off by one (e.g. showing "weeks" instead of "months"). Also, it seems to have no impact on what's stored.<br> We therefore excluded it from retrieve/deploy                                                                                       | -                                                                      |
-| **DataRetentionPeriodUnitOfMeasure** | represents drop down for "period after" selection                                                                                                                                                                                                                                                                                  | 6: years<br>5: months<br>4: weeks<br>2: days                           |
+| **DataRetentionPeriodUnitOfMeasure** | represents drop-down for "period after" selection                                                                                                                                                                                                                                                                                  | 6: years<br>5: months<br>4: weeks<br>2: days                           |
 | **DataRetentionPeriodLength**        | represents number field for "period after" selection                                                                                                                                                                                                                                                                               | min: 1<br>max: 999                                                     |
 | **RowBasedRetention**                | only true if "delete individual records" is selected, otherwise false                                                                                                                                                                                                                                                              | true / false                                                           |
 | **ResetRetentionPeriodOnImport**     | true if "Reset period on import" is checked.                                                                                                                                                                                                                                                                                       | This option is always false if "delete individual records" is selected | true / false |
@@ -1167,7 +1169,7 @@ There are a few rules to keep in mind when playing with Data Extensions fields:
 
 #### 7.2.3. Renaming fields of a Data Extensions
 
-With a small addition to the Data Extension's JSON it is possible to rename fields via MC DevTools. Imagine the following Data Extension:
+With a small addition to the Data Extension's JSON, it is possible to rename fields via MC DevTools. Imagine the following Data Extension:
 
 ```json
 {
@@ -1240,13 +1242,13 @@ All you have to do is deploy the data extension again with Name_new specified fo
 
 <a id="markdown-market-configuration" name="market-configuration"></a>
 
-You will want to setup configs for variable parts that change inbetween Business Units. We advise starting this _after_ you've first run the `retrieveAsTemplate` command. This might sound counterintuitive but when you review what was copied into your template folder you will likely spot these variable parts the fastest and can then start setting up your market config. Please consider this an iterative process as you will likely run `rt` followed by another update of your config multiple times until you got it right.
+You will want to set up configs for variable parts that change in between Business Units. We advise starting this _after_ you've first run the `retrieveAsTemplate` command. This might sound counterintuitive but when you review what was copied into your template folder you will likely spot these variable parts the fastest and can then start setting up your market config. Please consider this an iterative process as you will likely run `rt` followed by another update of your config multiple times until you got it right.
 
-We advise clustering your logical approach into variable things on the **instance parent** (=`_ParentBU_` in Accenture SFMC DevTools), the **environment parent** (under which you cluster your child Business Units for DEV, QA and PROD respectively), and **child Business Units**. Ideally, the instance parent is only used to deploy _Shared Data Extensions_, the environent parent is used for integrations with external services and to separate incoming data via Automations into the respective _Shared Data Extensions_. The child Business Units are then reserved for everything that is run on a market-by-market basis.
+We advise clustering your logical approach into variable things on the **instance parent** (=`_ParentBU_` in Accenture SFMC DevTools), the **environment parent** (under which you cluster your child Business Units for DEV, QA and PROD respectively), and **child Business Units**. Ideally, the instance parent is only used to deploy _Shared Data Extensions_, the environment parent is used for integrations with external services and to separate incoming data via Automations into the respective _Shared Data Extensions_. The child Business Units are then reserved for everything that is run on a market-by-market basis.
 
-_Note:_ We do see it often that instance parent and environment parent are one and the same. This is depending on your client's setup, since Business Units are not for free and clients sometimes decide to save the extra money. Sometimes, you even end up with only one BU for DEV activities, no QA environment - and share the instance parent between DEV and production... This is not the recommnded approach for multiple reasons, including security, but it is the reality in some of our projects.
+_Note:_ We do see it often that instance parent and environment parent are the same. This is depending on your client's setup since Business Units are not for free and clients sometimes decide to save the extra money. Sometimes, you even end up with only one BU for DEV activities, no QA environment - and share the instance parent between DEV and production... This is not the recommended approach for multiple reasons, including security, but it is the reality in some of our projects.
 
-Here a simple example with one DEV BU, 1 QA BU and 2 PROD BUs:
+Here is a simple example with one DEV BU, 1 QA BU and 2 PROD BUs:
 
 ```json
 // example market config in your .mcdevrc.json
@@ -1282,7 +1284,7 @@ Here a simple example with one DEV BU, 1 QA BU and 2 PROD BUs:
 }
 ```
 
-Way more complex example with dedicated "Parent" BUs per enviroment (DEV, QA, PROD) and multiple country-specific BUs for QA and for PROD:
+Way more complex example with dedicated "Parent" BUs per environment (DEV, QA, PROD) and multiple country-specific BUs for QA and PROD:
 
 ```json
 // example market config in your .mcdevrc.json
@@ -1364,7 +1366,7 @@ Way more complex example with dedicated "Parent" BUs per enviroment (DEV, QA, PR
 
 <a id="markdown-market-list-configuration" name="market-list-configuration"></a>
 
-Market Lists are very powerful and you will quickly notice how much time they can safe you during your deployment preparation.
+Market Lists are very powerful and you will quickly notice how much time they can save you during your deployment preparation.
 Let's first look at an example list config:
 
 ```json
@@ -1435,13 +1437,12 @@ Way more complex example:
 ```
 
 First off, we don't see DEV in here. If you have more than one market in DEV then this might deviate but in general, you don't want to bulk-deploy to DEV as this is your single source of truth.
-
-Apart from that we can see 4 types of lists here:
+Apart from that, we can see 4 types of lists here:
 
 1. `Parent-shared` (_instance parent_): This would be used to deploy the Shared Data Extensions to the instance parent. The child-configs are listed in an array to ensure we end up with one file per child in our parent BU folder.
 2. `Parent-medium`/`Parent-large` (medium:_instance parent_; large:_environment parent_): A 1:1 config that handles automations and the part of your solution that only runs on the parent.
 3. `Parent-medium-multi`/`Parent-large-multi` (medium:_instance parent_; large:_environment parent_): Any scripts, queries, automations that are executed on the parent but require one per child (e.g. query to fill country-specific Shared Data Extensions)
-4. `Children` (_child BUs_): everything that is needed on the market specific Business Units.
+4. `Children` (_child BUs_): everything that is needed on the market-specific Business Units.
 
 ## 8. Examples
 
@@ -1469,13 +1470,13 @@ where `<BU>` needs to be replaced with `credentialName/businessUnit-Name` that i
 
 Run this command for each of your defined Business Units and this will result in a **retrieve** directory with a sub-directory for each Business Unit. Each sub-directory contains the metadata from this Business Unit that is currently supported to **retrieve**.
 
-This folder structure can be commited into a git repository and used as backup.
+This folder structure can be committed into a git repository and used as a backup.
 
 ### 8.3. Automation Deployment
 
 <a id="markdown-automation-deployment" name="automation-deployment"></a>
 
-Now we want to deploy an Automation with it's related metadata. Select a retrieved Automation and copy it into the deploy folder. (`deploy/<credential>/<BU-Name>/automation/myAutomation.meta-automation.json`)
+Now we want to deploy an Automation with its related metadata. Select a retrieved Automation and copy it into the deploy folder. (`deploy/<credential>/<BU-Name>/automation/myAutomation.meta-automation.json`)
 
 Copy all related activity metadata of this automation into the deploy folder. (_Example:_ `deploy/<credential>/<BU-Name>/query/myquery.meta-query.json` and `deploy/<credential>/<BU-Name>/query/myquery.meta-query.sql`)
 
@@ -1493,7 +1494,7 @@ If you want to enhance Accenture SFMC DevTools you are welcome to fork the repo 
 
 <a id="markdown-install-guide-for-developers" name="install-guide-for-developers"></a>
 
-Instead of installing Accenture SFMC DevTools as a npm dependency from our git repo, we recommend cloning our repo and then linking it locally:
+Instead of installing Accenture SFMC DevTools as an npm dependency from our git repo, we recommend cloning our repo and then linking it locally:
 
 Assuming you cloned Accenture SFMC DevTools into `C:\repos\sfmc-devtools\` (or `~/repos/sfmc-devtools/` on Mac):
 
@@ -1502,9 +1503,9 @@ Assuming you cloned Accenture SFMC DevTools into `C:\repos\sfmc-devtools\` (or `
 3. Execute `npx husky install` to enable our git hooks.
 4. Execute `npm install -g "C:\repos\sfmc-devtools"` (this installs mcdev globally on your computer based on your cloned repo folder. Any changes you make in there will take immediate effect without the need for publishing or re-installing it).
 
-This should tell npm to create a symlink to your cloned local directoty, allowing you to see updates you make in your mcdev repo instantly.
+This should tell npm to create a symlink to your cloned local directory, allowing you to see updates you make in your mcdev repo instantly.
 
-To test your new **global** developer setup, run `mcdev --version` in CLI which should return the current version (e.g. `4.1.6`). Then, go into your mcdev repo and update the version with the suffix `-dev`, e.g. to `4.1.6-dev` and then run `mcdev --version` again to verify that your change propagates instantly.
+To test your new **global** developer setup, run `mcdev --version` in CLI which should return the current version (e.g. `4.1.9`). Then, go into your mcdev repo and update the version with the suffix `-dev`, e.g. to `4.1.9-dev` and then run `mcdev --version` again to verify that your change propagates instantly.
 
 > **Not recommended:** Alternatively, you can install it locally only by opening a terminal in your project directory and executing `npm install --save-dev "C:\repos\sfmc-devtools"`
 > To run the local version you need to prepend "npx" before your commands, e.g. `npx mcdev --version`
@@ -1513,9 +1514,9 @@ To test your new **global** developer setup, run `mcdev --version` in CLI which 
 
 **Local vs. Global developer installation:**
 
-If you use Accenture SFMC DevTools in your team it is recommended to install your developer version **globally**, while the project's package.json should point to our Git repo in its devDependency section. Otherwise other team members would have trouble due to potentially different paths.
+If you use Accenture SFMC DevTools in your team it is recommended to install your developer version **globally**, while the project's package.json should point to our Git repo in its devDependency section. Otherwise, other team members would have trouble due to potentially different paths.
 
-If you do need to install it locally, make sure you don't commit your project's package.json with this change or you might break mcdev for other developers in your team that either didn't clone the Accenture SFMC DevTools repo or stored in a different directory.
+If you do need to install it locally, make sure you don't commit your project's package.json with this change or you might break mcdev for other developers in your team who either didn't clone the Accenture SFMC DevTools repo or stored it in a different directory.
 
 <a name="local-install"></a>
 
@@ -1531,7 +1532,7 @@ The following explains how you _could_ install it locally for certain edge cases
 1. Create a new folder for your upcoming SFMC project. Let's assume you named it `MyProject/`
    > _Note:_ It is best practice to create a separate project folder for each of your client projects to avoid accidentally overwriting the wrong BU.
 2. Now, open a command line interface (CLI) for that folder.
-   - In Windows, you can easily do that by pressing SHIFT + Right click into that folder and then selecting the option "Open PowerShell window here".
+   - In Windows, you can easily do that by pressing SHIFT + Right-click into that folder and then selecting the option "Open PowerShell window here".
    - Alternatively, you could use any other CLI. We recommend opting for [Visual Studio Code](https://code.visualstudio.com/download)'s "Terminal" as you can benefit from this later.
    - Your CLI prompt should look something like `PS C:\repos\MyProject>` on Windows or `~/repos/MyProject/` on Mac.
 3. Initialize your new SFMC project by running `npm init`.
@@ -1542,7 +1543,7 @@ The following explains how you _could_ install it locally for certain edge cases
 4. Afterwards, install Accenture SFMC DevTools by running `npm install --save-dev mcdev`
    - If you get an error, please see the below troubleshooting section.
 
-When completed run `mcdev --version` and it will show you which version you installed (e.g. `4.1.6`).
+When completed run `mcdev --version` and it will show you which version you installed (e.g. `4.1.9`).
 
 ### 9.3. NPM Scripts
 

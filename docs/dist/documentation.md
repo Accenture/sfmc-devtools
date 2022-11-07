@@ -400,7 +400,7 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 <a name="Deployer._deployBU"></a>
 
 ### Deployer.\_deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
-helper for deploy()
+helper for [deploy](deploy)
 
 **Kind**: static method of [<code>Deployer</code>](#Deployer)  
 **Returns**: <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code> - ensure that BUs are worked on sequentially  
@@ -958,7 +958,7 @@ This method retrieves these and saves them alongside the metadata json
 <a name="Asset._readExtendedFileFromFS"></a>
 
 ### Asset.\_readExtendedFileFromFS(metadata, subType, deployDir, [pathOnly]) ⇒ <code>Promise.&lt;string&gt;</code>
-helper for this.preDeployTasks()
+helper for [preDeployTasks](preDeployTasks)
 Some metadata types store their actual content as a separate file, e.g. images
 This method reads these from the local FS stores them in the metadata object allowing to deploy it
 
@@ -1013,7 +1013,7 @@ find the subType matching the extendedSubType
 <a name="Asset.buildDefinitionForNested"></a>
 
 ### Asset.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for buildDefinition
+helper for [buildDefinition](#MetadataType.buildDefinition)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -1030,7 +1030,7 @@ handles extracted code if any are found for complex types
 <a name="Asset.buildTemplateForNested"></a>
 
 ### Asset.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for buildTemplate
+helper for [buildTemplate](#MetadataType.buildTemplate)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -1051,7 +1051,7 @@ assets of type codesnippetblock will result in 1 json and 1 amp/html file. both 
 <a name="Asset._buildForNested"></a>
 
 ### Asset.\_buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for buildDefinition
+helper for [buildDefinition](#MetadataType.buildDefinition)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -1092,7 +1092,7 @@ parses retrieved Metadata before saving
 <a name="Asset._mergeCode"></a>
 
 ### Asset.\_mergeCode(metadata, deployDir, subType, [templateName], [fileListOnly]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code>
-helper for this.preDeployTasks() that loads extracted code content back into JSON
+helper for [preDeployTasks](preDeployTasks) that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
 **Returns**: <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code> - fileList for templating (disregarded during deployment)  
@@ -1108,7 +1108,7 @@ helper for this.preDeployTasks() that loads extracted code content back into JSO
 <a name="Asset._mergeCode_slots"></a>
 
 ### Asset.\_mergeCode\_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName], [fileListOnly]) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for this.preDeployTasks() that loads extracted code content back into JSON
+helper for [preDeployTasks](preDeployTasks) that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
@@ -1128,7 +1128,7 @@ helper for this.preDeployTasks() that loads extracted code content back into JSO
 <a name="Asset._extractCode"></a>
 
 ### Asset.\_extractCode(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
-helper for this.parseMetadata() that finds code content in JSON and extracts it
+helper for [parseMetadata](parseMetadata) that finds code content in JSON and extracts it
 to allow saving that separately and formatted
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -1626,7 +1626,7 @@ if create or update operation is needed.
 <a name="DataExtension._filterUpsertResults"></a>
 
 ### DataExtension.\_filterUpsertResults(res) ⇒ <code>boolean</code>
-helper for upsert()
+helper for [upsert](upsert)
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
 **Returns**: <code>boolean</code> - true: keep, false: discard  
@@ -1862,7 +1862,7 @@ Retrieves all records for caching
 <a name="DataExtensionField.convertToSortedArray"></a>
 
 ### DataExtensionField.convertToSortedArray(fieldsObj) ⇒ <code>Array.&lt;TYPE.DataExtensionFieldItem&gt;</code>
-helper for DataExtension.js that sorts the fields into an array
+helper for [DataExtension._retrieveFieldsForSingleDe](DataExtension._retrieveFieldsForSingleDe) that sorts the fields into an array
 
 **Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
 **Returns**: <code>Array.&lt;TYPE.DataExtensionFieldItem&gt;</code> - sorted array of field objects  
@@ -3482,7 +3482,7 @@ Helper for writing Metadata to disk, used for Retrieve and deploy
 <a name="MetadataType.applyTemplateValues"></a>
 
 ### MetadataType.applyTemplateValues(code, templateVariables) ⇒ <code>string</code>
-helper for buildDefinitionForNested
+helper for [buildDefinitionForNested](buildDefinitionForNested)
 searches extracted file for template variable names and applies the market values
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3496,7 +3496,7 @@ searches extracted file for template variable names and applies the market value
 <a name="MetadataType.applyTemplateNames"></a>
 
 ### MetadataType.applyTemplateNames(code, templateVariables) ⇒ <code>string</code>
-helper for buildTemplateForNested
+helper for [buildTemplateForNested](buildTemplateForNested)
 searches extracted file for template variable values and applies the market variable names
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3510,7 +3510,7 @@ searches extracted file for template variable values and applies the market vari
 <a name="MetadataType.buildDefinitionForNested"></a>
 
 ### MetadataType.buildDefinitionForNested(templateDir, targetDir, metadata, variables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for buildDefinition
+helper for [buildDefinition](buildDefinition)
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3527,7 +3527,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 <a name="MetadataType.buildTemplateForNested"></a>
 
 ### MetadataType.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for buildTemplate
+helper for [buildTemplate](buildTemplate)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3903,7 +3903,7 @@ prepares a Query for deployment
 <a name="Query.applyTemplateValues"></a>
 
 ### Query.applyTemplateValues(code, templateVariables) ⇒ <code>string</code>
-helper for buildDefinitionForNested
+helper for [buildDefinitionForNested](buildDefinitionForNested)
 searches extracted SQL file for template variables and applies the market values
 
 **Kind**: static method of [<code>Query</code>](#Query)  
@@ -3917,7 +3917,7 @@ searches extracted SQL file for template variables and applies the market values
 <a name="Query.buildDefinitionForNested"></a>
 
 ### Query.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for buildDefinition
+helper for [buildDefinition](#MetadataType.buildDefinition)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Query</code>](#Query)  
@@ -3934,7 +3934,7 @@ handles extracted code if any are found for complex types
 <a name="Query.buildTemplateForNested"></a>
 
 ### Query.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for buildTemplate
+helper for [buildTemplate](#MetadataType.buildTemplate)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Query</code>](#Query)  
@@ -4184,7 +4184,7 @@ Creates a single Script
 <a name="Script._mergeCode"></a>
 
 ### Script.\_mergeCode(metadata, deployDir, [templateName]) ⇒ <code>Promise.&lt;string&gt;</code>
-helper for this.preDeployTasks() that loads extracted code content back into JSON
+helper for [preDeployTasks](preDeployTasks) that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>Script</code>](#Script)  
 **Returns**: <code>Promise.&lt;string&gt;</code> - content for metadata.script  
@@ -4211,7 +4211,7 @@ prepares a Script for deployment
 <a name="Script.buildDefinitionForNested"></a>
 
 ### Script.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for buildDefinition
+helper for [buildDefinition](#MetadataType.buildDefinition)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Script</code>](#Script)  
@@ -4228,7 +4228,7 @@ handles extracted code if any are found for complex types
 <a name="Script.buildTemplateForNested"></a>
 
 ### Script.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for buildTemplate
+helper for [buildTemplate](#MetadataType.buildTemplate)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Script</code>](#Script)  
@@ -4249,7 +4249,7 @@ scripts are saved as 1 json and 1 ssjs file. both files need to be run through t
 <a name="Script._buildForNested"></a>
 
 ### Script.\_buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for buildTemplateForNested / buildDefinitionForNested
+helper for [buildTemplateForNested](buildTemplateForNested) / [buildDefinitionForNested](buildDefinitionForNested)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Script</code>](#Script)  
@@ -4440,6 +4440,7 @@ Retrieves metadata from a business unit and saves it to the local filesystem.
 * [Retriever](#Retriever)
     * [new Retriever(properties, buObject)](#new_Retriever_new)
     * [.retrieve(metadataTypes, [namesOrKeys], [templateVariables], [changelogOnly])](#Retriever+retrieve) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+    * [._getTypeDependencies(metadataTypes)](#Retriever+_getTypeDependencies) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
 
 <a name="new_Retriever_new"></a>
 
@@ -4466,6 +4467,18 @@ Retrieve metadata of specified types into local file system and Retriever.metada
 | [namesOrKeys] | <code>Array.&lt;string&gt;</code> \| <code>TYPE.TypeKeyCombo</code> | name of Metadata to retrieveAsTemplate or list of keys for normal retrieval |
 | [templateVariables] | <code>TYPE.TemplateMap</code> | Object of values which can be replaced (in case of templating) |
 | [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
+
+<a name="Retriever+_getTypeDependencies"></a>
+
+### retriever.\_getTypeDependencies(metadataTypes) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
+helper for [retrieve](retrieve) to get all dependencies of the given types
+
+**Kind**: instance method of [<code>Retriever</code>](#Retriever)  
+**Returns**: <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> - unique list dependent metadata types  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataTypes | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | list of metadata types to retrieve; can include subtypes! |
 
 <a name="Util"></a>
 
@@ -4604,7 +4617,7 @@ SFMC accepts multiple false values for Boolean attributes for which we are check
 <a name="Util._isValidType"></a>
 
 ### Util.\_isValidType(selectedType) ⇒ <code>boolean</code>
-helper for retrieve, retrieveAsTemplate and deploy
+helper for [retrieve](#Mcdev.retrieve), [retrieveAsTemplate](#Mcdev.retrieveAsTemplate) and [deploy](#Mcdev.deploy)
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>boolean</code> - type ok or not  
@@ -4892,7 +4905,7 @@ helper around _askCredentials
 <a name="Cli._askCredentials"></a>
 
 ### Cli.\_askCredentials(properties, [credName]) ⇒ <code>Promise.&lt;object&gt;</code>
-helper for addExtraCredential()
+helper for [addExtraCredential](#Cli.addExtraCredential)
 
 **Kind**: static method of [<code>Cli</code>](#Cli)  
 **Returns**: <code>Promise.&lt;object&gt;</code> - credential info  
@@ -4918,7 +4931,7 @@ allows updating the metadata types that shall be retrieved
 <a name="Cli._summarizeSubtypes"></a>
 
 ### Cli.\_summarizeSubtypes(responses, type) ⇒ <code>void</code>
-helper for this.selectTypes() that converts subtypes back to main type if all and only defaults were selected
+helper for [selectTypes](#Cli.selectTypes) that converts subtypes back to main type if all and only defaults were selected
 this keeps the config automatically upgradable when we add new subtypes or change what is selected by default
 
 **Kind**: static method of [<code>Cli</code>](#Cli)  
@@ -5190,7 +5203,7 @@ Saves beautified files in the local file system. Will create the parent director
 <a name="File._beautify_prettier"></a>
 
 ### File.\_beautify\_prettier(directory, filename, filetype, content) ⇒ <code>string</code>
-helper for writePrettyToFile, applying prettier onto given stringified content
+helper for [writePrettyToFile](#File.writePrettyToFile), applying prettier onto given stringified content
 ! Important: run 'await File.initPrettier()' in your MetadataType.retrieve() once before hitting this
 
 **Kind**: static method of [<code>File</code>](#File)  
@@ -5367,7 +5380,7 @@ handles creation/update of all config file from the boilerplate
 <a name="Init._updateLeaf"></a>
 
 ### Init.\_updateLeaf(propertiersCur, defaultPropsCur, fieldName) ⇒ <code>void</code>
-recursive helper for _fixMcdevConfig that adds missing settings
+recursive helper for [fixMcdevConfig](#Init.fixMcdevConfig) that adds missing settings
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 
@@ -5459,7 +5472,7 @@ Creates template file for properties.json
 <a name="Init._downloadAllBUs"></a>
 
 ### Init.\_downloadAllBUs(bu, gitStatus) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for this.initProject()
+helper for [initProject](#Init.initProject)
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
@@ -5574,7 +5587,7 @@ handles creation/update of all config file from the boilerplate
 <a name="Init._updateLeaf"></a>
 
 ### Init.\_updateLeaf(propertiersCur, defaultPropsCur, fieldName) ⇒ <code>void</code>
-recursive helper for _fixMcdevConfig that adds missing settings
+recursive helper for [fixMcdevConfig](#Init.fixMcdevConfig) that adds missing settings
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 
@@ -5666,7 +5679,7 @@ Creates template file for properties.json
 <a name="Init._downloadAllBUs"></a>
 
 ### Init.\_downloadAllBUs(bu, gitStatus) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for this.initProject()
+helper for [initProject](#Init.initProject)
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
@@ -5781,7 +5794,7 @@ handles creation/update of all config file from the boilerplate
 <a name="Init._updateLeaf"></a>
 
 ### Init.\_updateLeaf(propertiersCur, defaultPropsCur, fieldName) ⇒ <code>void</code>
-recursive helper for _fixMcdevConfig that adds missing settings
+recursive helper for [fixMcdevConfig](#Init.fixMcdevConfig) that adds missing settings
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 
@@ -5873,7 +5886,7 @@ Creates template file for properties.json
 <a name="Init._downloadAllBUs"></a>
 
 ### Init.\_downloadAllBUs(bu, gitStatus) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for this.initProject()
+helper for [initProject](#Init.initProject)
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
@@ -5988,7 +6001,7 @@ handles creation/update of all config file from the boilerplate
 <a name="Init._updateLeaf"></a>
 
 ### Init.\_updateLeaf(propertiersCur, defaultPropsCur, fieldName) ⇒ <code>void</code>
-recursive helper for _fixMcdevConfig that adds missing settings
+recursive helper for [fixMcdevConfig](#Init.fixMcdevConfig) that adds missing settings
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 
@@ -6080,7 +6093,7 @@ Creates template file for properties.json
 <a name="Init._downloadAllBUs"></a>
 
 ### Init.\_downloadAllBUs(bu, gitStatus) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for this.initProject()
+helper for [initProject](#Init.initProject)
 
 **Kind**: static method of [<code>Init</code>](#Init)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
@@ -6279,7 +6292,7 @@ SFMC accepts multiple false values for Boolean attributes for which we are check
 <a name="Util._isValidType"></a>
 
 ### Util.\_isValidType(selectedType) ⇒ <code>boolean</code>
-helper for retrieve, retrieveAsTemplate and deploy
+helper for [retrieve](#Mcdev.retrieve), [retrieveAsTemplate](#Mcdev.retrieveAsTemplate) and [deploy](#Mcdev.deploy)
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>boolean</code> - type ok or not  
