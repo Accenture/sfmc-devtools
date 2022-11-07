@@ -4440,6 +4440,7 @@ Retrieves metadata from a business unit and saves it to the local filesystem.
 * [Retriever](#Retriever)
     * [new Retriever(properties, buObject)](#new_Retriever_new)
     * [.retrieve(metadataTypes, [namesOrKeys], [templateVariables], [changelogOnly])](#Retriever+retrieve) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+    * [._getTypeDependencies(metadataTypes)](#Retriever+_getTypeDependencies) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
 
 <a name="new_Retriever_new"></a>
 
@@ -4466,6 +4467,18 @@ Retrieve metadata of specified types into local file system and Retriever.metada
 | [namesOrKeys] | <code>Array.&lt;string&gt;</code> \| <code>TYPE.TypeKeyCombo</code> | name of Metadata to retrieveAsTemplate or list of keys for normal retrieval |
 | [templateVariables] | <code>TYPE.TemplateMap</code> | Object of values which can be replaced (in case of templating) |
 | [changelogOnly] | <code>boolean</code> | skip saving, only create json in memory |
+
+<a name="Retriever+_getTypeDependencies"></a>
+
+### retriever.\_getTypeDependencies(metadataTypes) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
+helper for [retrieve](retrieve) to get all dependencies of the given types
+
+**Kind**: instance method of [<code>Retriever</code>](#Retriever)  
+**Returns**: <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> - unique list dependent metadata types  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataTypes | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | list of metadata types to retrieve; can include subtypes! |
 
 <a name="Util"></a>
 
