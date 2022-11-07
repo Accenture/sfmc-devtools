@@ -476,8 +476,19 @@ Example URL: `https://mcg123abcysykllg-0321cbs8bbt64.auth.marketingcloudapis.com
 > You can run this command without the interactive wizard asking questions using the `--skipInteraction` (or short`--yes`/`--y`) flag. In this case, you need to provide a few values in the command:
 >
 > ```bash
-> mcdev init --y.credentialName "yourCustomCredentialName" --y.client_id "yourClientIdHere" --y.client_secret "yourClientSecretHere" --y.auth_url "https://yourTenantSubdomainHere.auth.marketingcloudapis.com/" --y.gitRemoteUrl "https://my.git.server.com/myrepo.git" --y.account_id 00000000 --y.backupBUs "yes" --y.gitPush "yes"
+> mcdev init --y.credentialName "yourCustomCredentialName" --y.client_id "yourClientIdHere" --y.client_secret "yourClientSecretHere" --y.auth_url "https://yourTenantSubdomainHere.auth.marketingcloudapis.com/" --y.gitRemoteUrl "https://my.git.server.com/myrepo.git" --y.account_id 00000000 --y.downloadBUs "true" --y.gitPush "true"
 > ```
+
+| CLI Argument         | Description                              |
+| -------------------- | ---------------------------------------- |
+| `--y.credentialName` | Credential name of your Business Unit    |
+| `--y.client_id`      | Salesforce Marketing Cloud client ID     |
+| `--y.client_secret`  | Salesforce Marketing Cloud client secret |
+| `--y.auth_url`       | Marketing cloud auth url                 |
+| `--y.gitRemoteUrl`   | URL of your git remote repo              |
+| `--y.account_id`     | MID of the parent BU                     |
+| `--y.downloadBUs`    | Download all the BUs: `true` or `false`  |
+| `--y.gitPush`        | Do the first git push: `true` or `false` |
 
 #### 6.1.2. upgrade
 
