@@ -4105,7 +4105,7 @@ Script MetadataType
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Script._buildForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.parseMetadata(metadata)](#Script.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
-    * [.extractCodeFromJson(metadataScript, metadataName)](#Script.extractCodeFromJson) ⇒ <code>Object</code>
+    * [.prepExtractedCode(metadataScript, metadataName)](#Script.prepExtractedCode) ⇒ <code>Object</code>
     * [.getFilesToCommit(keyArr)](#Script.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="Script.retrieve"></a>
@@ -4277,9 +4277,9 @@ Splits the script metadata into two parts and parses in a standard manner
 | --- | --- | --- |
 | metadata | <code>TYPE.ScriptItem</code> | a single script activity definition |
 
-<a name="Script.extractCodeFromJson"></a>
+<a name="Script.prepExtractedCode"></a>
 
-### Script.extractCodeFromJson(metadataScript, metadataName) ⇒ <code>Object</code>
+### Script.prepExtractedCode(metadataScript, metadataName) ⇒ <code>Object</code>
 helper for [parseMetadata](parseMetadata) and [_buildForNested](_buildForNested)
 
 **Kind**: static method of [<code>Script</code>](#Script)  
