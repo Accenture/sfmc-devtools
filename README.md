@@ -409,6 +409,7 @@ The following metadata types are currently supported:
 | Mobile Connect Keyword             | `mobileKeyword`           | Yes      | Yes        | Yes        | -                    | Mobile Connect keywords configured within the Business UNit. First 50 per BU are retrieved                         |
 | Role                               | `role`                    | Yes      | Yes        | Yes (`bt`) | Yes                  | User Roles define groups that are used to grant users access to SFMC systems.                                      |
 | Transactional Email                | `transactionalEmail`      | Yes      | Yes        | Yes        | Yes                  | Lets you send immediate Email messages via API events                                                              |
+| Transactional Push                 | `transactionalPush`       | Yes      | Yes        | Yes        | Yes                  | Lets you send immediate Push messages via API events                                                               |
 | Transactional SMS                  | `transactionalSMS`        | Yes      | Yes        | Yes        | Yes                  | Lets you send immediate SMS messages via API events                                                                |
 | Triggered Send                     | `triggeredSendDefinition` | Yes      | Yes        | Yes (`bt`) | Yes                  | **DEPRECATED**: Sends emails via API or DataExtension Event.                                                       |
 | User                               | `accountUser`             | Yes      | in backlog | -          | -                    | Users and Installed Packages including their assigned Roles, BUs and personal permissions                          |
@@ -776,6 +777,7 @@ Currently supported types:
 | Email Send Definition | `Email Send Definition`   |
 | List                  | `list`                    |
 | Transactional Email   | `transactionalEmail`      |
+| Transactional Push    | `transactionalPush`       |
 | Transactional SMS     | `transactionalSMS`        |
 | Triggered Send        | `triggeredSendDefinition` |
 
