@@ -4377,6 +4377,8 @@ TransactionalEmail MetadataType
     * [.update(metadata)](#TransactionalEmail.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#TransactionalEmail.create) ⇒ <code>Promise</code>
     * [.deleteByKey(buObject, key)](#TransactionalEmail.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.preDeployTasks(metadata)](#TransactionalEmail.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.postRetrieveTasks(metadata)](#TransactionalEmail.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
 
 <a name="TransactionalEmail.retrieve"></a>
 
@@ -4438,6 +4440,30 @@ Delete a metadata item from the specified business unit
 | --- | --- | --- |
 | buObject | <code>TYPE.BuObject</code> | references credentials |
 | key | <code>string</code> | Identifier of item |
+
+<a name="TransactionalEmail.preDeployTasks"></a>
+
+### TransactionalEmail.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+prepares for deployment
+
+**Kind**: static method of [<code>TransactionalEmail</code>](#TransactionalEmail)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="TransactionalEmail.postRetrieveTasks"></a>
+
+### TransactionalEmail.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>TransactionalEmail</code>](#TransactionalEmail)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - a single item  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
 <a name="TransactionalPush"></a>
 
@@ -4533,8 +4559,8 @@ TransactionalSMS MetadataType
     * [.preDeployTasks(metadata, dir)](#TransactionalSMS.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#TransactionalSMS._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.postRetrieveTasks(metadata)](#TransactionalSMS.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
-    * [.parseMetadata(metadata)](#TransactionalSMS.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.prepExtractedCode(metadataScript)](#TransactionalSMS.prepExtractedCode) ⇒ <code>Object</code>
+    * [._isHTML(code)](#TransactionalSMS._isHTML) ⇒ <code>boolean</code>
     * [.getFilesToCommit(keyArr)](#TransactionalSMS.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="TransactionalSMS.retrieve"></a>
@@ -4649,18 +4675,6 @@ manages post retrieve steps
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
-<a name="TransactionalSMS.parseMetadata"></a>
-
-### TransactionalSMS.parseMetadata(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
-Splits the metadata into two parts and parses in a standard manner
-
-**Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
-**Returns**: <code>TYPE.CodeExtractItem</code> - a single item with code parts extracted  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.ScripMetadataTypeItemtItem</code> | a single item |
-
 <a name="TransactionalSMS.prepExtractedCode"></a>
 
 ### TransactionalSMS.prepExtractedCode(metadataScript) ⇒ <code>Object</code>
@@ -4672,6 +4686,18 @@ helper for [parseMetadata](parseMetadata) and [_buildForNested](_buildForNested)
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataScript | <code>string</code> | the code of the file |
+
+<a name="TransactionalSMS._isHTML"></a>
+
+### TransactionalSMS.\_isHTML(code) ⇒ <code>boolean</code>
+very simplified test for HTML code in our SMS
+
+**Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
+**Returns**: <code>boolean</code> - true if HTML is found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| code | <code>string</code> | sms source code |
 
 <a name="TransactionalSMS.getFilesToCommit"></a>
 
