@@ -4580,7 +4580,7 @@ Splits the metadata into two parts and parses in a standard manner
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.ScripMetadataTypeItemtItem</code> | a single item |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
 <a name="TransactionalSMS.prepExtractedCode"></a>
 
