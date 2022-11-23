@@ -4481,6 +4481,7 @@ TransactionalSMS MetadataType
     * [._mergeCode(metadata, deployDir, [templateName])](#TransactionalSMS._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.postRetrieveTasks(metadata)](#TransactionalSMS.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.prepExtractedCode(metadataScript)](#TransactionalSMS.prepExtractedCode) ⇒ <code>Object</code>
+    * [._isHTML(code)](#TransactionalSMS._isHTML) ⇒ <code>boolean</code>
     * [.getFilesToCommit(keyArr)](#TransactionalSMS.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="TransactionalSMS.retrieve"></a>
@@ -4606,6 +4607,18 @@ helper for [parseMetadata](parseMetadata) and [_buildForNested](_buildForNested)
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataScript | <code>string</code> | the code of the file |
+
+<a name="TransactionalSMS._isHTML"></a>
+
+### TransactionalSMS.\_isHTML(code) ⇒ <code>boolean</code>
+very simplified test for HTML code in our SMS
+
+**Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
+**Returns**: <code>boolean</code> - true if HTML is found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| code | <code>string</code> | sms source code |
 
 <a name="TransactionalSMS.getFilesToCommit"></a>
 
