@@ -104,6 +104,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#TransactionalEmail">TransactionalEmail</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>TransactionalEmail MetadataType</p>
 </dd>
+<dt><a href="#TransactionalMessage">TransactionalMessage</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>TransactionalMessage MetadataType</p>
+</dd>
 <dt><a href="#TransactionalSMS">TransactionalSMS</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>TransactionalSMS MetadataType</p>
 </dd>
@@ -4462,35 +4465,28 @@ manages post retrieve steps
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
-<a name="TransactionalSMS"></a>
+<a name="TransactionalMessage"></a>
 
-## TransactionalSMS ⇐ [<code>MetadataType</code>](#MetadataType)
-TransactionalSMS MetadataType
+## TransactionalMessage ⇐ [<code>MetadataType</code>](#MetadataType)
+TransactionalMessage MetadataType
 
 **Kind**: global class  
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
-* [TransactionalSMS](#TransactionalSMS) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [_], [__], [___], [key])](#TransactionalSMS.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache()](#TransactionalSMS.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.update(metadata)](#TransactionalSMS.update) ⇒ <code>Promise</code>
-    * [.create(metadata)](#TransactionalSMS.create) ⇒ <code>Promise</code>
-    * [.deleteByKey(buObject, key)](#TransactionalSMS.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.postDeleteTasks(buObject, customerKey)](#TransactionalSMS.postDeleteTasks) ⇒ <code>void</code>
-    * [.preDeployTasks(metadata, dir)](#TransactionalSMS.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [._mergeCode(metadata, deployDir, [templateName])](#TransactionalSMS._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
-    * [.postRetrieveTasks(metadata)](#TransactionalSMS.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
-    * [.prepExtractedCode(metadataScript)](#TransactionalSMS.prepExtractedCode) ⇒ <code>Object</code>
-    * [._isHTML(code)](#TransactionalSMS._isHTML) ⇒ <code>boolean</code>
-    * [.getFilesToCommit(keyArr)](#TransactionalSMS.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
+* [TransactionalMessage](#TransactionalMessage) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [___], [key])](#TransactionalMessage.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache()](#TransactionalMessage.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.update(metadata)](#TransactionalMessage.update) ⇒ <code>Promise</code>
+    * [.create(metadata)](#TransactionalMessage.create) ⇒ <code>Promise</code>
+    * [.deleteByKey(buObject, key)](#TransactionalMessage.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
-<a name="TransactionalSMS.retrieve"></a>
+<a name="TransactionalMessage.retrieve"></a>
 
-### TransactionalSMS.retrieve(retrieveDir, [_], [__], [___], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### TransactionalMessage.retrieve(retrieveDir, [_], [__], [___], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves Metadata of Mobile Keywords
 Endpoint /legacy/v1/beta/mobile/code/ return all Mobile Codes with all details.
 
-**Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
+**Kind**: static method of [<code>TransactionalMessage</code>](#TransactionalMessage)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
@@ -4501,49 +4497,66 @@ Endpoint /legacy/v1/beta/mobile/code/ return all Mobile Codes with all details.
 | [___] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
-<a name="TransactionalSMS.retrieveForCache"></a>
+<a name="TransactionalMessage.retrieveForCache"></a>
 
-### TransactionalSMS.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### TransactionalMessage.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves event definition metadata for caching
 
-**Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
+**Kind**: static method of [<code>TransactionalMessage</code>](#TransactionalMessage)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
-<a name="TransactionalSMS.update"></a>
+<a name="TransactionalMessage.update"></a>
 
-### TransactionalSMS.update(metadata) ⇒ <code>Promise</code>
+### TransactionalMessage.update(metadata) ⇒ <code>Promise</code>
 Updates a single item
 
-**Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
+**Kind**: static method of [<code>TransactionalMessage</code>](#TransactionalMessage)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
-<a name="TransactionalSMS.create"></a>
+<a name="TransactionalMessage.create"></a>
 
-### TransactionalSMS.create(metadata) ⇒ <code>Promise</code>
+### TransactionalMessage.create(metadata) ⇒ <code>Promise</code>
 Creates a single item
 
-**Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
+**Kind**: static method of [<code>TransactionalMessage</code>](#TransactionalMessage)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
-<a name="TransactionalSMS.deleteByKey"></a>
+<a name="TransactionalMessage.deleteByKey"></a>
 
-### TransactionalSMS.deleteByKey(buObject, key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### TransactionalMessage.deleteByKey(buObject, key) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
-**Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
+**Kind**: static method of [<code>TransactionalMessage</code>](#TransactionalMessage)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | buObject | <code>TYPE.BuObject</code> | references credentials |
 | key | <code>string</code> | Identifier of item |
+
+<a name="TransactionalSMS"></a>
+
+## TransactionalSMS ⇐ [<code>MetadataType</code>](#MetadataType)
+TransactionalSMS MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [TransactionalSMS](#TransactionalSMS) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.postDeleteTasks(buObject, customerKey)](#TransactionalSMS.postDeleteTasks) ⇒ <code>void</code>
+    * [.preDeployTasks(metadata, dir)](#TransactionalSMS.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [._mergeCode(metadata, deployDir, [templateName])](#TransactionalSMS._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
+    * [.postRetrieveTasks(metadata)](#TransactionalSMS.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
+    * [.prepExtractedCode(metadataScript)](#TransactionalSMS.prepExtractedCode) ⇒ <code>Object</code>
+    * [._isHTML(code)](#TransactionalSMS._isHTML) ⇒ <code>boolean</code>
+    * [.getFilesToCommit(keyArr)](#TransactionalSMS.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="TransactionalSMS.postDeleteTasks"></a>
 
