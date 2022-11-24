@@ -830,7 +830,6 @@ FileTransfer MetadataType
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildTemplateForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Asset._buildForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.setFolderPath(metadata)](#Asset.setFolderPath)
-    * [.parseMetadata(metadata)](#Asset.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
     * [._mergeCode(metadata, deployDir, subType, [templateName], [fileListOnly])](#Asset._mergeCode) ⇒ <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code>
     * [._mergeCode_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName], [fileListOnly])](#Asset._mergeCode_slots) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._extractCode(metadata)](#Asset._extractCode) ⇒ <code>TYPE.CodeExtractItem</code>
@@ -1077,18 +1076,6 @@ generic script that retrieves the folder path from cache and updates the given m
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single script activity definition |
 
-<a name="Asset.parseMetadata"></a>
-
-### Asset.parseMetadata(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
-parses retrieved Metadata before saving
-
-**Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>TYPE.CodeExtractItem</code> - parsed metadata definition  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.AssetItem</code> | a single asset definition |
-
 <a name="Asset._mergeCode"></a>
 
 ### Asset.\_mergeCode(metadata, deployDir, subType, [templateName], [fileListOnly]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code>
@@ -1128,7 +1115,7 @@ helper for [preDeployTasks](preDeployTasks) that loads extracted code content ba
 <a name="Asset._extractCode"></a>
 
 ### Asset.\_extractCode(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
-helper for [parseMetadata](parseMetadata) that finds code content in JSON and extracts it
+helper for [postRetrieveTasks](postRetrieveTasks) that finds code content in JSON and extracts it
 to allow saving that separately and formatted
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
