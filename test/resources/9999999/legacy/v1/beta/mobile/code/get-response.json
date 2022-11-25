@@ -1,0 +1,32 @@
+{
+    "startIndex": 0,
+    "itemsPerPage": 50,
+    "totalResults": 1,
+    "entry": [
+        {
+            "id": "RXBwc0JoNk9jVTY0YWJNWFZDaGxvdzo4MTow",
+            "createdDate": "2017-05-05T10:33:15.953Z",
+            "lastUpdated": "2022-11-25T15:51:14.225Z",
+            "code": "4912312345678",
+            "countryCode": "HK",
+            "startDate": "2017-05-05T06:00:00Z",
+            "endDate": "2047-05-05T06:00:00Z",
+            "keywordLimit": "Unlimited",
+            "keywordsUsed": "0",
+            "codeType": "PRIVATE",
+            "isShortCode": false,
+            "keywordsUsedOther": "0",
+            "isGsmCharacterSetOnly": false,
+            "isMms": false,
+            "isStackIndependant": false,
+            "dipSwitches": 1,
+            "moEngineVersion": 1,
+            "sendableCountries": [
+                { "countryCode": "HK", "vendor": "CLX", "fromNameSupported": true }
+            ],
+            "supportsConcatenation": true,
+            "isClientOwned": false,
+            "isOwner": false
+        }
+    ]
+}
