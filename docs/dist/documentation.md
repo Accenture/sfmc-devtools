@@ -2585,20 +2585,20 @@ Folder MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Folder](#Folder) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [additionalFields], buObject, [___], [key])](#Folder.retrieve) ⇒ <code>Promise</code>
-    * [.retrieveForCache(buObject)](#Folder.retrieveForCache) ⇒ <code>Promise</code>
+    * [.retrieve(retrieveDir, [additionalFields], buObject, [___], [key], [contentTypeList])](#Folder.retrieve) ⇒ <code>Promise</code>
+    * [.retrieveForCache(buObject, [contentTypeList])](#Folder.retrieveForCache) ⇒ <code>Promise</code>
     * [.upsert(metadata)](#Folder.upsert) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.create(metadataEntry)](#Folder.create) ⇒ <code>Promise</code>
     * [.update(metadataEntry)](#Folder.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#Folder.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#Folder.getJsonFromFS) ⇒ <code>TYPE.MetadataTypeMap</code>
-    * [.retrieveHelper([additionalFields], [queryAllAccounts])](#Folder.retrieveHelper) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [.retrieveHelper([additionalFields], [queryAllAccounts], [contentTypeList])](#Folder.retrieveHelper) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.postRetrieveTasks(metadata)](#Folder.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.saveResults(results, retrieveDir, mid)](#Folder.saveResults) ⇒ <code>Promise.&lt;object&gt;</code>
 
 <a name="Folder.retrieve"></a>
 
-### Folder.retrieve(retrieveDir, [additionalFields], buObject, [___], [key]) ⇒ <code>Promise</code>
+### Folder.retrieve(retrieveDir, [additionalFields], buObject, [___], [key], [contentTypeList]) ⇒ <code>Promise</code>
 Retrieves metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: static method of [<code>Folder</code>](#Folder)  
@@ -2611,10 +2611,11 @@ Retrieves metadata of metadata type into local filesystem. executes callback wit
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
 | [___] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
+| [contentTypeList] | <code>Array.&lt;string&gt;</code> | content type of folder |
 
 <a name="Folder.retrieveForCache"></a>
 
-### Folder.retrieveForCache(buObject) ⇒ <code>Promise</code>
+### Folder.retrieveForCache(buObject, [contentTypeList]) ⇒ <code>Promise</code>
 Retrieves folder metadata for caching
 
 **Kind**: static method of [<code>Folder</code>](#Folder)  
@@ -2623,6 +2624,7 @@ Retrieves folder metadata for caching
 | Param | Type | Description |
 | --- | --- | --- |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
+| [contentTypeList] | <code>Array.&lt;string&gt;</code> | content type of folder |
 
 <a name="Folder.upsert"></a>
 
@@ -2689,7 +2691,7 @@ Returns file contents mapped to their filename without '.json' ending
 
 <a name="Folder.retrieveHelper"></a>
 
-### Folder.retrieveHelper([additionalFields], [queryAllAccounts]) ⇒ <code>Promise.&lt;object&gt;</code>
+### Folder.retrieveHelper([additionalFields], [queryAllAccounts], [contentTypeList]) ⇒ <code>Promise.&lt;object&gt;</code>
 Helper to retrieve the folders as promise
 
 **Kind**: static method of [<code>Folder</code>](#Folder)  
@@ -2699,6 +2701,7 @@ Helper to retrieve the folders as promise
 | --- | --- | --- |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | [queryAllAccounts] | <code>boolean</code> | which queryAllAccounts setting to use |
+| [contentTypeList] | <code>Array.&lt;string&gt;</code> | content type of folder |
 
 <a name="Folder.postRetrieveTasks"></a>
 
@@ -2913,7 +2916,7 @@ List MetadataType
 
 * [List](#List) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [___], [key])](#List.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache()](#List.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache(buObject)](#List.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.deleteByKey(buObject, customerKey)](#List.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postRetrieveTasks(list)](#List.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.parseMetadata(metadata, [parseForCache])](#List.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -2936,11 +2939,16 @@ Retrieves Metadata of Lists
 
 <a name="List.retrieveForCache"></a>
 
-### List.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### List.retrieveForCache(buObject) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: static method of [<code>List</code>](#List)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>TYPE.BuObject</code> | properties for auth |
+
 <a name="List.deleteByKey"></a>
 
 ### List.deleteByKey(buObject, customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
