@@ -84,6 +84,7 @@ describe('transactionalSMS', () => {
                 ),
                 'returned AMPscript was not equal expected for update transactionalSMS'
             );
+            // check number of API calls
             assert.equal(
                 Object.values(testUtils.getAPIHistory()).flat().length,
                 5,

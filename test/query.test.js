@@ -48,16 +48,29 @@ describe('query', () => {
                 2,
                 'two querys expected'
             );
+            // confirm created item
             assert.deepEqual(
                 await testUtils.getActualFile('testNewQuery', 'query'),
                 await testUtils.getExpectedFile('9999999', 'query', 'post'),
                 'returned metadata was not equal expected for insert query'
             );
             assert.deepEqual(
+                await testUtils.getActualFileGeneric('testNewQuery', 'query', 'sql'),
+                await testUtils.getExpectedFileGeneric('9999999', 'query', 'post', 'sql'),
+                'returned SQL was not equal expected for insert query'
+            );
+            // confirm updated item
+            assert.deepEqual(
                 await testUtils.getActualFile('testExistingQuery', 'query'),
                 await testUtils.getExpectedFile('9999999', 'query', 'patch'),
                 'returned metadata was not equal expected for insert query'
             );
+            assert.deepEqual(
+                await testUtils.getActualFileGeneric('testExistingQuery', 'query', 'sql'),
+                await testUtils.getExpectedFileGeneric('9999999', 'query', 'patch', 'sql'),
+                'returned SQL was not equal expected for insert query'
+            );
+            // check number of API calls
             assert.equal(
                 Object.values(testUtils.getAPIHistory()).flat().length,
                 8,
