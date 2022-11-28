@@ -1,13 +1,12 @@
 {
-    "requestId": "ae8511d0-9bf0-42d0-af4f-bd9c1218c812",
-    "name": "testExisting_tsms",
-    "definitionKey": "testExisting_tsms",
-    "definitionId": "0a650d90-755e-ed11-b852-48df37d1df5b",
-    "description": "bla bla",
+    "requestId": "582bec09-6d04-4222-bbba-cea616495596",
+    "name": "testNew_tsms",
+    "definitionKey": "testNew_tsms",
+    "description": "created on deploy",
     "status": "Active",
     "createdDate": "2022-11-07T02:24:00",
     "modifiedDate": "2022-11-07T02:25:00",
-    "content": { "message": "%%[ SET @key = 'secret' ]%%" },
+    "content": { "message": "\n%%[\n    SET @key = 'secret'\n]%%\n" },
     "subscriptions": {
         "shortCode": "4912312345678",
         "countryCode": "",

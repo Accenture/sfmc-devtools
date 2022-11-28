@@ -22,6 +22,16 @@ const resourceFactory = require('./resourceFactory');
 exports.getActualFile = (customerKey, type) =>
     File.readJSON(`./retrieve/testInstance/testBU/${type}/${customerKey}.${type}-meta.json`);
 /**
+ * gets file from Retrieve folder
+ *
+ * @param {string} customerKey of metadata
+ * @param {string} type of metadata
+ * @param {string} ext file extension
+ * @returns {Promise.<string>} file in string form
+ */
+exports.getActualFileGeneric = (customerKey, type, ext) =>
+    File.readFile(`./retrieve/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`);
+/**
  * gets file from Deploy folder
  *
  * @param {string} customerKey of metadata
@@ -50,6 +60,17 @@ exports.getActualTemplate = (customerKey, type) =>
  */
 exports.getExpectedFile = (mid, type, action) =>
     File.readJSON(path.join('test', 'resources', mid, type, action + '-expected.json'));
+/**
+ * gets file from resources folder which should be used for comparison
+ *
+ * @param {number} mid of Business Unit
+ * @param {string} type of metadata
+ * @param {string} action of SOAP request
+ * @param {string} ext file extension
+ * @returns {Promise.<string>} file in string form
+ */
+exports.getExpectedFileGeneric = (mid, type, action, ext) =>
+    File.readFile(path.join('test', 'resources', mid, type, action + '-expected.' + ext));
 /**
  * setup mocks for API and FS
  *
