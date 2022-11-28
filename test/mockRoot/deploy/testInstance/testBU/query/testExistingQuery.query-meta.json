@@ -1,7 +1,7 @@
 {
     "name": "testExistingQuery",
     "key": "testExistingQuery",
-    "description": "updated",
+    "description": "updated on deploy",
     "targetKey": "childBU_dataextension_test",
     "createdDate": "2022-04-26T15:21:16.453",
     "modifiedDate": "2022-04-26T16:04:15.88",

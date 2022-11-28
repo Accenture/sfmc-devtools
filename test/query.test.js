@@ -49,7 +49,7 @@ describe('query', () => {
                 'two querys expected'
             );
             assert.deepEqual(
-                await testUtils.getActualFile('testQuery', 'query'),
+                await testUtils.getActualFile('testNewQuery', 'query'),
                 await testUtils.getExpectedFile('9999999', 'query', 'post'),
                 'returned metadata was not equal expected for insert query'
             );
