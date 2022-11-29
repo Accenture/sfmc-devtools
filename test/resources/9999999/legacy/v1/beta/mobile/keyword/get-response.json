@@ -1,0 +1,46 @@
+{
+    "startIndex": 0,
+    "itemsPerPage": 50,
+    "totalResults": 1,
+    "entry": [
+        {
+            "id": "cTVJaG5oSDJPVUNHcUh6Z3pQT2tVdzo4Njow",
+            "createdDate": "2018-03-27T12:37:18.12Z",
+            "lastUpdated": "2018-03-27T12:37:18.167Z",
+            "code": {
+                "id": "RXBwc0JoNk9jVTY0YWJNWFZDaGxvdzo4MTow",
+                "createdDate": "2017-05-05T10:33:15.953Z",
+                "lastUpdated": "2022-11-25T15:51:14.225Z",
+                "code": "4912312345678",
+                "countryCode": "HK",
+                "startDate": "2017-05-05T06:00:00Z",
+                "endDate": "2047-05-05T06:00:00Z",
+                "keywordLimit": "Unlimited",
+                "keywordsUsed": "0",
+                "codeType": "PRIVATE",
+                "isShortCode": false,
+                "keywordsUsedOther": "0",
+                "isGsmCharacterSetOnly": false,
+                "isMms": false,
+                "isStackIndependant": false,
+                "dipSwitches": 1,
+                "moEngineVersion": 1,
+                "sendableCountries": [
+                    { "countryCode": "HK", "vendor": "CLX", "fromNameSupported": true }
+                ],
+                "supportsConcatenation": true,
+                "isClientOwned": false,
+                "isOwner": false
+            },
+            "keyword": "testExisting_keyword",
+            "startDate": "2018-03-27T12:37:18.197Z",
+            "endDate": "2038-03-27T12:37:18.197Z",
+            "status": "Active",
+            "createdBy": { "id": "abcabcabc", "name": "xyz app user" },
+            "restriction": "NONE",
+            "keywordType": "NORMAL",
+            "isInherited": false,
+            "decodedId": "9e2192ab-f611-4039-86a8-7ce0ccf3a453"
+        }
+    ]
+}
