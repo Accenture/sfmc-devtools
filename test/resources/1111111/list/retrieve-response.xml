@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:26648e52-3bac-4eca-a5e1-ad71d38b56fe</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:8552cfbd-466c-447e-a232-13d945e44a5c</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-c80ba907-ecc4-447d-8418-140c4ca108de">
+                <wsu:Created>2022-11-29T19:42:21Z</wsu:Created>
+                <wsu:Expires>2022-11-29T19:47:21Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>11e9f8a8-e5e6-4082-93bd-5840060512ce</RequestID>
+            <Results xsi:type="List">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2017-01-24T06:32:34.453</CreatedDate>
+                <ModifiedDate>2017-01-24T06:32:34.453</ModifiedDate>
+                <ID>15</ID>
+                <ObjectID>1f793b8b-cb23-4bb4-9ec4-1e0bf9511960</ObjectID>
+                <CustomerKey>All Subscribers - 277</CustomerKey>
+                <ListName>All Subscribers</ListName>
+                <Category>277</Category>
+                <Type>Private</Type>
+                <Description>Contains all subscribers</Description>
+                <ListClassification>ExactTargetList</ListClassification>
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>

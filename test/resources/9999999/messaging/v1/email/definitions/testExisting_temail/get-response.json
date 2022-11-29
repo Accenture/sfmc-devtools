@@ -1,0 +1,26 @@
+{
+    "requestId": "ae8511d0-9bf0-42d0-af4f-bd9c1218c812",
+    "name": "testExisting_temail",
+    "definitionKey": "testExisting_temail",
+    "definitionId": "0a650d90-755e-ed11-b852-48df37d1df5b",
+    "description": "bla bla",
+    "classification": "Default Transactional",
+    "status": "Active",
+    "createdDate": "2020-09-10T03:29:00",
+    "modifiedDate": "2020-09-10T03:29:00",
+    "content": {
+        "customerKey": "testExisting_asset_message"
+    },
+    "subscriptions": {
+        "dataExtension": "childBU_dataextension_test",
+        "autoAddSubscriber": true,
+        "updateSubscriber": true,
+        "r__list_PathName": "my subscribers/All Subscribers"
+    },
+    "options": {
+        "trackLinks": true
+    },
+    "journey": {
+        "interactionKey": "testExisting_journey"
+    }
+}
