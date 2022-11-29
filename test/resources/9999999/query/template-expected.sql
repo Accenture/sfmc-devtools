@@ -1,4 +1,6 @@
 SELECT
     SubscriberKey as testField
 FROM
-    _Subscribers 
+    _Subscribers
+WHERE
+    country IN ({{{countryCodeIn}}})

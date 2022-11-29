@@ -3,7 +3,7 @@
     "name": "testExistingQuery",
     "key": "testExistingQuery",
     "description": "updated on deploy",
-    "queryText": "SELECT\n    SubscriberKey as testField\nFROM\n    _Subscribers ",
+    "queryText": "SELECT\n    SubscriberKey as testField\nFROM\n    _Subscribers\nWHERE\n    country IN ('test')\n",
     "targetName": "childBU_dataextension_test",
     "targetKey": "childBU_dataextension_test",
     "targetId": "30400c03-0ec4-ec11-b83c-48df37d1de8a",

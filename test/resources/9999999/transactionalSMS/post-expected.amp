@@ -1,4 +1,4 @@
 
 %%[
-    SET @key = 'secret'
+    SET @key = 'new secret'
 ]%%

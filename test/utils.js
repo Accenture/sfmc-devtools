@@ -30,7 +30,7 @@ exports.getActualJson = (customerKey, type) =>
  * @returns {Promise.<string>} file in string form
  */
 exports.getActualFile = (customerKey, type, ext) =>
-    File.readFile(`./retrieve/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`);
+    `./retrieve/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`;
 /**
  * gets file from Deploy folder
  *
@@ -49,7 +49,7 @@ exports.getActualDeployJson = (customerKey, type) =>
  * @returns {Promise.<string>} file in string form
  */
 exports.getActualDeployFile = (customerKey, type, ext) =>
-    File.readFile(`./deploy/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`);
+    `./deploy/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`;
 /**
  * gets file from Template folder
  *
@@ -68,7 +68,7 @@ exports.getActualTemplateJson = (customerKey, type) =>
  * @returns {Promise.<string>} file in string form
  */
 exports.getActualTemplateFile = (customerKey, type, ext) =>
-    File.readFile(`./template/${type}/${customerKey}.${type}-meta.${ext}`);
+    `./template/${type}/${customerKey}.${type}-meta.${ext}`;
 
 /**
  * gets file from resources folder which should be used for comparison
@@ -90,7 +90,7 @@ exports.getExpectedJson = (mid, type, action) =>
  * @returns {Promise.<string>} file in string form
  */
 exports.getExpectedFile = (mid, type, action, ext) =>
-    File.readFile(path.join('test', 'resources', mid, type, action + '-expected.' + ext));
+    path.join('test', 'resources', mid, type, action + '-expected.' + ext);
 /**
  * setup mocks for API and FS
  *
