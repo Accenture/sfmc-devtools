@@ -96,6 +96,15 @@ exports.getExpectedFile = (mid, type, action, ext) =>
  *
  * @returns {void}
  */
+
+const fsMockConf = {
+    '.prettierrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.prettierrc')),
+    '.mcdevrc.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdevrc.json')),
+    '.mcdev-auth.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdev-auth.json')),
+    'boilerplate/config.json': fsmock.load(path.resolve(__dirname, '../boilerplate/config.json')),
+    // deploy: fsmock.load(path.resolve(__dirname, 'mockRoot/deploy')),
+    test: fsmock.load(path.resolve(__dirname)),
+};
 exports.mockSetup = () => {
     Util.setLoggingLevel({ debug: true });
     apimock = new MockAdapter(axios, { onNoMatch: 'throwException' });
@@ -110,16 +119,18 @@ exports.mockSetup = () => {
     apimock
         .onAny(new RegExp(`^${escapeRegExp(resourceFactory.restUrl)}`))
         .reply((config) => resourceFactory.handleRESTRequest(config));
-    fsmock({
-        '.prettierrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.prettierrc')),
-        '.mcdevrc.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdevrc.json')),
-        '.mcdev-auth.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdev-auth.json')),
-        'boilerplate/config.json': fsmock.load(
-            path.resolve(__dirname, '../boilerplate/config.json')
-        ),
-        deploy: fsmock.load(path.resolve(__dirname, 'mockRoot/deploy')),
-        test: fsmock.load(path.resolve(__dirname)),
-    });
+    fsmock(fsMockConf);
+};
+
+/**
+ * setup mocks for deploy test
+ *
+ * @returns {void}
+ */
+exports.mockSetupDeploy = () => {
+    const fsMockConfDeploy = { ...fsMockConf };
+    fsMockConfDeploy.deploy = fsmock.load(path.resolve(__dirname, 'mockRoot/deploy'));
+    fsmock(fsMockConfDeploy);
 };
 /**
  * resets mocks for API and FS
@@ -128,6 +139,7 @@ exports.mockSetup = () => {
  */
 exports.mockReset = () => {
     auth.clearSessions();
+    fsmock.restore();
     apimock.restore();
 };
 /**

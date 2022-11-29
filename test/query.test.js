@@ -46,6 +46,9 @@ describe('query', () => {
         });
     });
     describe('Deploy ================', () => {
+        beforeEach(() => {
+            testUtils.mockSetupDeploy();
+        });
         it('Should create & upsert a query', async () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['query']);

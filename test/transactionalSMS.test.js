@@ -48,6 +48,9 @@ describe('transactionalSMS', () => {
         });
     });
     describe('Deploy ================', () => {
+        beforeEach(() => {
+            testUtils.mockSetupDeploy();
+        });
         it('Should create & upsert a transactionalSMS', async () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['transactionalSMS']);
