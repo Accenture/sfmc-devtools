@@ -24,8 +24,8 @@ describe('transactionalSMS', () => {
                 'only one transactionalSMS expected'
             );
             assert.deepEqual(
-                await testUtils.getActualFile('testExisting_tsms', 'transactionalSMS'),
-                await testUtils.getExpectedFile('9999999', 'transactionalSMS', 'get'),
+                await testUtils.getActualJson('testExisting_tsms', 'transactionalSMS'),
+                await testUtils.getExpectedJson('9999999', 'transactionalSMS', 'get'),
                 'returned metadata was not equal expected'
             );
             assert.equal(
@@ -50,38 +50,24 @@ describe('transactionalSMS', () => {
             );
             // confirm created item
             assert.deepEqual(
-                await testUtils.getActualFile('testNew_tsms', 'transactionalSMS'),
-                await testUtils.getExpectedFile('9999999', 'transactionalSMS', 'post'),
+                await testUtils.getActualJson('testNew_tsms', 'transactionalSMS'),
+                await testUtils.getExpectedJson('9999999', 'transactionalSMS', 'post'),
                 'returned metadata was not equal expected for insert transactionalSMS'
             );
             assert.deepEqual(
-                await testUtils.getActualFileGeneric('testNew_tsms', 'transactionalSMS', 'amp'),
-                await testUtils.getExpectedFileGeneric(
-                    '9999999',
-                    'transactionalSMS',
-                    'post',
-                    'amp'
-                ),
+                await testUtils.getActualFile('testNew_tsms', 'transactionalSMS', 'amp'),
+                await testUtils.getExpectedFile('9999999', 'transactionalSMS', 'post', 'amp'),
                 'returned AMPscript was not equal expected for insert transactionalSMS'
             );
             // confirm updated item
             assert.deepEqual(
-                await testUtils.getActualFile('testExisting_tsms', 'transactionalSMS'),
-                await testUtils.getExpectedFile('9999999', 'transactionalSMS', 'patch'),
+                await testUtils.getActualJson('testExisting_tsms', 'transactionalSMS'),
+                await testUtils.getExpectedJson('9999999', 'transactionalSMS', 'patch'),
                 'returned metadata was not equal expected for update transactionalSMS'
             );
             assert.deepEqual(
-                await testUtils.getActualFileGeneric(
-                    'testExisting_tsms',
-                    'transactionalSMS',
-                    'amp'
-                ),
-                await testUtils.getExpectedFileGeneric(
-                    '9999999',
-                    'transactionalSMS',
-                    'patch',
-                    'amp'
-                ),
+                await testUtils.getActualFile('testExisting_tsms', 'transactionalSMS', 'amp'),
+                await testUtils.getExpectedFile('9999999', 'transactionalSMS', 'patch', 'amp'),
                 'returned AMPscript was not equal expected for update transactionalSMS'
             );
             // check number of API calls
