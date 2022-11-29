@@ -49,7 +49,7 @@ exports.getActualDeployJson = (customerKey, type) =>
  * @returns {Promise.<string>} file in string form
  */
 exports.getActualDeployFile = (customerKey, type, ext) =>
-    File.readJSON(`./deploy/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`);
+    File.readFile(`./deploy/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`);
 /**
  * gets file from Template folder
  *

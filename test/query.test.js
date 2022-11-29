@@ -28,6 +28,11 @@ describe('query', () => {
                 await testUtils.getExpectedJson('9999999', 'query', 'get'),
                 'returned metadata was not equal expected'
             );
+            assert.deepEqual(
+                await testUtils.getActualFile('testExistingQuery', 'query', 'sql'),
+                await testUtils.getExpectedFile('9999999', 'query', 'get', 'sql'),
+                'returned SQL was not equal expected'
+            );
             assert.equal(
                 Object.values(testUtils.getAPIHistory()).flat().length,
                 6,
@@ -97,7 +102,12 @@ describe('query', () => {
             assert.deepEqual(
                 await testUtils.getActualTemplateJson('testExistingQuery', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                'returned template was not equal expected'
+                'returned template JSON was not equal expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualTemplateFile('testExistingQuery', 'query', 'sql'),
+                await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'),
+                'returned template SQL was not equal expected'
             );
             // THEN
             await handler.buildDefinition(
@@ -109,7 +119,12 @@ describe('query', () => {
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testExistingQuery', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'build'),
-                'returned deployment file was not equal expected'
+                'returned deployment JSON was not equal expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualDeployFile('testExistingQuery', 'query', 'sql'),
+                await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'),
+                'returned deployment SQL was not equal expected'
             );
             assert.equal(
                 Object.values(testUtils.getAPIHistory()).flat().length,
@@ -137,7 +152,12 @@ describe('query', () => {
             assert.deepEqual(
                 await testUtils.getActualTemplateJson('testExistingQuery', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                'returned template was not equal expected'
+                'returned template JSON was not equal expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualTemplateFile('testExistingQuery', 'query', 'sql'),
+                await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'),
+                'returned template SQL was not equal expected'
             );
             // THEN
             await handler.buildDefinition(
@@ -149,7 +169,12 @@ describe('query', () => {
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testExistingQuery', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'build'),
-                'returned deployment file was not equal expected'
+                'returned deployment JSON was not equal expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualDeployFile('testExistingQuery', 'query', 'sql'),
+                await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'),
+                'returned deployment SQL was not equal expected'
             );
             assert.equal(
                 Object.values(testUtils.getAPIHistory()).flat().length,
