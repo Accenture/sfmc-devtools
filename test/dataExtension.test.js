@@ -52,11 +52,13 @@ describe('dataExtension', () => {
                 2,
                 'two data extensions expected'
             );
+            // insert
             assert.deepEqual(
                 await testUtils.getActualJson('testDataExtension', 'dataExtension'),
                 await testUtils.getExpectedJson('9999999', 'dataExtension', 'create'),
                 'returned metadata was not equal expected for create'
             );
+            // update
             assert.deepEqual(
                 await testUtils.getActualJson('childBU_dataextension_test', 'dataExtension'),
                 await testUtils.getExpectedJson('9999999', 'dataExtension', 'update'),
@@ -77,7 +79,7 @@ describe('dataExtension', () => {
                 'testInstance/testBU',
                 'dataExtension',
                 ['childBU_dataextension_test'],
-                'testMarket'
+                'testSourceMarket'
             );
 
             // WHEN
@@ -99,10 +101,13 @@ describe('dataExtension', () => {
                 'testInstance/testBU',
                 'dataExtension',
                 'childBU_dataextension_test',
-                'testMarket'
+                'testTargetMarket'
             );
             assert.deepEqual(
-                await testUtils.getActualDeployJson('childBU_dataextension_test', 'dataExtension'),
+                await testUtils.getActualDeployJson(
+                    'childBU_dataextension_testTarget',
+                    'dataExtension'
+                ),
                 await testUtils.getExpectedJson('9999999', 'dataExtension', 'build'),
                 'returned deployment file was not equal expected'
             );
@@ -121,7 +126,7 @@ describe('dataExtension', () => {
                 'testInstance/testBU',
                 'dataExtension',
                 ['childBU_dataextension_test'],
-                'testMarket'
+                'testSourceMarket'
             );
             // WHEN
             assert.equal(
@@ -142,11 +147,14 @@ describe('dataExtension', () => {
                 'testInstance/testBU',
                 'dataExtension',
                 'childBU_dataextension_test',
-                'testMarket'
+                'testTargetMarket'
             );
 
             assert.deepEqual(
-                await testUtils.getActualDeployJson('childBU_dataextension_test', 'dataExtension'),
+                await testUtils.getActualDeployJson(
+                    'childBU_dataextension_testTarget',
+                    'dataExtension'
+                ),
                 await testUtils.getExpectedJson('9999999', 'dataExtension', 'build'),
                 'returned deployment file was not equal expected'
             );
