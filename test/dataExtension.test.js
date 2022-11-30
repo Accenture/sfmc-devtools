@@ -38,7 +38,7 @@ describe('dataExtension', () => {
     });
     describe('Deploy ================', () => {
         beforeEach(() => {
-            testUtils.mockSetupDeploy();
+            testUtils.mockSetup(true);
         });
         it('Should create & upsert a data extension', async () => {
             // WHEN
