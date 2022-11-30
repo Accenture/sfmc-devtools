@@ -102,7 +102,6 @@ const fsMockConf = {
     '.mcdevrc.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdevrc.json')),
     '.mcdev-auth.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdev-auth.json')),
     'boilerplate/config.json': fsmock.load(path.resolve(__dirname, '../boilerplate/config.json')),
-    // deploy: fsmock.load(path.resolve(__dirname, 'mockRoot/deploy')),
     test: fsmock.load(path.resolve(__dirname)),
 };
 exports.mockSetup = () => {
