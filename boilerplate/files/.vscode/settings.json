@@ -59,5 +59,8 @@
     },
     "[markdown]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[AMPscript]": {
+        "editor.defaultFormatter": "FiB.beautyAmp"
     }
 }
