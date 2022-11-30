@@ -19,6 +19,6 @@
         "trackLinks": true
     },
     "journey": {
-        "interactionKey": "testExisting_journey"
+        "interactionKey": "testExisting_interaction"
     }
 }
