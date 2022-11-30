@@ -4,7 +4,6 @@ const assert = chai.assert;
 chai.use(chaiFiles);
 const expect = chai.expect;
 const file = chaiFiles.file;
-// const dir = chaiFiles.dir;
 const cache = require('../lib/util/cache');
 const testUtils = require('./utils');
 const handler = require('../lib/index');
@@ -49,7 +48,7 @@ describe('transactionalSMS', () => {
     });
     describe('Deploy ================', () => {
         beforeEach(() => {
-            testUtils.mockSetupDeploy();
+            testUtils.mockSetup(true);
         });
         it('Should create & upsert a transactionalSMS', async () => {
             // WHEN
