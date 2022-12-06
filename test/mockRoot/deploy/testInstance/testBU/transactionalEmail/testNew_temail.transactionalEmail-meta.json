@@ -1,0 +1,24 @@
+{
+    "name": "testNew_temail",
+    "definitionKey": "testNew_temail",
+    "description": "created on deploy",
+    "classification": "Default Transactional",
+    "status": "Active",
+    "createdDate": "2020-09-10T03:29:00",
+    "modifiedDate": "2020-09-10T03:29:00",
+    "content": {
+        "customerKey": "testExisting_asset_message"
+    },
+    "subscriptions": {
+        "dataExtension": "childBU_dataextension_test",
+        "autoAddSubscriber": true,
+        "updateSubscriber": true,
+        "r__list_PathName": "my subscribers/All Subscribers"
+    },
+    "options": {
+        "trackLinks": true
+    },
+    "journey": {
+        "interactionKey": "testExisting_interaction"
+    }
+}

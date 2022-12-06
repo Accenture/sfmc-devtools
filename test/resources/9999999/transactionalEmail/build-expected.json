@@ -1,0 +1,22 @@
+{
+    "name": "testExisting_temail",
+    "definitionKey": "testExisting_temail",
+    "description": "foobar",
+    "classification": "Default Transactional",
+    "status": "Active",
+    "content": {
+        "customerKey": "testExisting_asset_message"
+    },
+    "subscriptions": {
+        "dataExtension": "childBU_dataextension_testTarget",
+        "autoAddSubscriber": true,
+        "updateSubscriber": true,
+        "r__list_PathName": "my subscribers/All Subscribers"
+    },
+    "options": {
+        "trackLinks": true
+    },
+    "journey": {
+        "interactionKey": "testExisting_interaction"
+    }
+}

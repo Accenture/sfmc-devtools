@@ -1,0 +1,24 @@
+{
+    "name": "testNew_temail",
+    "definitionKey": "testNew_temail",
+    "description": "created on deploy",
+    "classification": "Default Transactional",
+    "status": "Active",
+    "createdDate": "2022-12-06T06:08:00",
+    "modifiedDate": "2022-12-06T06:08:00",
+    "content": {
+        "customerKey": "testExisting_asset_message"
+    },
+    "subscriptions": {
+        "dataExtension": "childBU_dataextension_test",
+        "autoAddSubscriber": true,
+        "updateSubscriber": true,
+        "r__list_PathName": "my subscribers/All Subscribers"
+    },
+    "options": {
+        "trackLinks": true
+    },
+    "journey": {
+        "interactionKey": "1f936b41-cf1b-4207-aa33-715b3bf9eab7"
+    }
+}
