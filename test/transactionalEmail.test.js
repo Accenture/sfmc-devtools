@@ -39,4 +39,40 @@ describe('transactionalEmail', () => {
             return;
         });
     });
+    describe('Deploy ================', () => {
+        beforeEach(() => {
+            testUtils.mockSetup(true);
+        });
+        it('Should create & upsert a transactionalEmail', async () => {
+            // WHEN
+            await handler.deploy('testInstance/testBU', ['transactionalEmail']);
+            // THEN
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.transactionalEmail ? Object.keys(result.transactionalEmail).length : 0,
+                2,
+                'two transactionalEmails expected'
+            );
+            // confirm created item
+            assert.deepEqual(
+                await testUtils.getActualJson('testNew_temail', 'transactionalEmail'),
+                await testUtils.getExpectedJson('9999999', 'transactionalEmail', 'post'),
+                'returned JSON was not equal expected for insert transactionalEmail'
+            );
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_temail', 'transactionalEmail'),
+                await testUtils.getExpectedJson('9999999', 'transactionalEmail', 'patch'),
+                'returned JSON was not equal expected for update transactionalEmail'
+            );
+            // check number of API calls
+            assert.equal(
+                Object.values(testUtils.getAPIHistory()).flat().length,
+                13,
+                'Unexpected number of requests made'
+            );
+            return;
+        });
+    });
 });

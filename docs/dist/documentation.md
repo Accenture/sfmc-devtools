@@ -4367,8 +4367,21 @@ TransactionalEmail MetadataType
 **Extends**: [<code>TransactionalMessage</code>](#TransactionalMessage)  
 
 * [TransactionalEmail](#TransactionalEmail) ⇐ [<code>TransactionalMessage</code>](#TransactionalMessage)
+    * [.update(metadata)](#TransactionalEmail.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#TransactionalEmail.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.postRetrieveTasks(metadata)](#TransactionalEmail.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+
+<a name="TransactionalEmail.update"></a>
+
+### TransactionalEmail.update(metadata) ⇒ <code>Promise</code>
+Updates a single item
+
+**Kind**: static method of [<code>TransactionalEmail</code>](#TransactionalEmail)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
 <a name="TransactionalEmail.preDeployTasks"></a>
 

@@ -1,11 +1,11 @@
 {
-    "name": "testExisting_temail",
-    "definitionKey": "testExisting_temail",
-    "description": "updated via deploy",
+    "name": "testNew_temail",
+    "definitionKey": "testNew_temail",
+    "description": "created on deploy",
     "classification": "Default Transactional",
     "status": "Active",
-    "createdDate": "2020-09-10T03:29:00",
-    "modifiedDate": "2020-09-10T03:29:00",
+    "createdDate": "2022-12-06T06:08:00",
+    "modifiedDate": "2022-12-06T06:08:00",
     "content": {
         "customerKey": "testExisting_asset_message"
     },
@@ -19,6 +19,6 @@
         "trackLinks": true
     },
     "journey": {
-        "interactionKey": "testExisting_interaction"
+        "interactionKey": "1f936b41-cf1b-4207-aa33-715b3bf9eab7"
     }
 }
