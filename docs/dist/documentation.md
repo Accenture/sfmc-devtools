@@ -101,10 +101,13 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#SetDefinition">SetDefinition</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>SetDefinition MetadataType</p>
 </dd>
+<dt><a href="#TransactionalEmail">TransactionalEmail</a> ⇐ <code><a href="#TransactionalMessage">TransactionalMessage</a></code></dt>
+<dd><p>TransactionalEmail MetadataType</p>
+</dd>
 <dt><a href="#TransactionalMessage">TransactionalMessage</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>TransactionalMessage MetadataType</p>
 </dd>
-<dt><a href="#TransactionalSMS">TransactionalSMS</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dt><a href="#TransactionalSMS">TransactionalSMS</a> ⇐ <code><a href="#TransactionalMessage">TransactionalMessage</a></code></dt>
 <dd><p>TransactionalSMS MetadataType</p>
 </dd>
 <dt><a href="#TriggeredSendDefinition">TriggeredSendDefinition</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
@@ -4355,6 +4358,55 @@ Retrieves Metadata of schema set definitions for caching.
 
 **Kind**: static method of [<code>SetDefinition</code>](#SetDefinition)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+<a name="TransactionalEmail"></a>
+
+## TransactionalEmail ⇐ [<code>TransactionalMessage</code>](#TransactionalMessage)
+TransactionalEmail MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>TransactionalMessage</code>](#TransactionalMessage)  
+
+* [TransactionalEmail](#TransactionalEmail) ⇐ [<code>TransactionalMessage</code>](#TransactionalMessage)
+    * [.update(metadata)](#TransactionalEmail.update) ⇒ <code>Promise</code>
+    * [.preDeployTasks(metadata)](#TransactionalEmail.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.postRetrieveTasks(metadata)](#TransactionalEmail.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+
+<a name="TransactionalEmail.update"></a>
+
+### TransactionalEmail.update(metadata) ⇒ <code>Promise</code>
+Updates a single item
+
+**Kind**: static method of [<code>TransactionalEmail</code>](#TransactionalEmail)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | how the item shall look after the update |
+
+<a name="TransactionalEmail.preDeployTasks"></a>
+
+### TransactionalEmail.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+prepares for deployment
+
+**Kind**: static method of [<code>TransactionalEmail</code>](#TransactionalEmail)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="TransactionalEmail.postRetrieveTasks"></a>
+
+### TransactionalEmail.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>TransactionalEmail</code>](#TransactionalEmail)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - a single item  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
 <a name="TransactionalMessage"></a>
 
 ## TransactionalMessage ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -4433,13 +4485,13 @@ Delete a metadata item from the specified business unit
 
 <a name="TransactionalSMS"></a>
 
-## TransactionalSMS ⇐ [<code>MetadataType</code>](#MetadataType)
+## TransactionalSMS ⇐ [<code>TransactionalMessage</code>](#TransactionalMessage)
 TransactionalSMS MetadataType
 
 **Kind**: global class  
-**Extends**: [<code>MetadataType</code>](#MetadataType)  
+**Extends**: [<code>TransactionalMessage</code>](#TransactionalMessage)  
 
-* [TransactionalSMS](#TransactionalSMS) ⇐ [<code>MetadataType</code>](#MetadataType)
+* [TransactionalSMS](#TransactionalSMS) ⇐ [<code>TransactionalMessage</code>](#TransactionalMessage)
     * [.postDeleteTasks(buObject, customerKey)](#TransactionalSMS.postDeleteTasks) ⇒ <code>void</code>
     * [.preDeployTasks(metadata, dir)](#TransactionalSMS.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#TransactionalSMS._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
