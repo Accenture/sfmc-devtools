@@ -1,8 +1,8 @@
 {
     "name": "testExistingQuery",
     "key": "testExistingQuery",
-    "description": "",
-    "targetKey": "childBU_dataextension_test",
+    "description": "foobar",
+    "targetKey": "childBU_dataextension_testTarget",
     "targetUpdateTypeName": "Overwrite",
     "r__folder_Path": "Query"
 }

@@ -1,0 +1,13 @@
+{
+    "name": "testExisting_tsms",
+    "definitionKey": "testExisting_tsms",
+    "description": "foobar",
+    "status": "Active",
+    "subscriptions": {
+        "shortCode": "4912312345678",
+        "countryCode": "",
+        "autoAddSubscriber": true,
+        "updateSubscriber": true,
+        "keyword": "testExisting_keyword"
+    }
+}
