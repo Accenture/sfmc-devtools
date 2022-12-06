@@ -107,8 +107,8 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#TransactionalMessage">TransactionalMessage</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>TransactionalMessage MetadataType</p>
 </dd>
-<dt><a href="#TransactionalPush">TransactionalPush</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
-<dd><p>TransactionalPush MetadataType</p>
+<dt><a href="#TransactionalPush">TransactionalPush</a> ⇐ <code><a href="#TransactionalMessage">TransactionalMessage</a></code></dt>
+<dd><p>TransactionalPush TransactionalMessage</p>
 </dd>
 <dt><a href="#TransactionalSMS">TransactionalSMS</a> ⇐ <code><a href="#TransactionalMessage">TransactionalMessage</a></code></dt>
 <dd><p>TransactionalSMS MetadataType</p>
@@ -4488,80 +4488,11 @@ Delete a metadata item from the specified business unit
 
 <a name="TransactionalPush"></a>
 
-## TransactionalPush ⇐ [<code>MetadataType</code>](#MetadataType)
-TransactionalPush MetadataType
+## TransactionalPush ⇐ [<code>TransactionalMessage</code>](#TransactionalMessage)
+TransactionalPush TransactionalMessage
 
 **Kind**: global class  
-**Extends**: [<code>MetadataType</code>](#MetadataType)  
-
-* [TransactionalPush](#TransactionalPush) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [_], [__], [___], [key])](#TransactionalPush.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache()](#TransactionalPush.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.update(metadata)](#TransactionalPush.update) ⇒ <code>Promise</code>
-    * [.create(metadata)](#TransactionalPush.create) ⇒ <code>Promise</code>
-    * [.deleteByKey(buObject, key)](#TransactionalPush.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-
-<a name="TransactionalPush.retrieve"></a>
-
-### TransactionalPush.retrieve(retrieveDir, [_], [__], [___], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves Metadata of Mobile Keywords
-Endpoint /legacy/v1/beta/mobile/code/ return all Mobile Codes with all details.
-
-**Kind**: static method of [<code>TransactionalPush</code>](#TransactionalPush)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
-| [_] | <code>void</code> | unused parameter |
-| [__] | <code>void</code> | unused parameter |
-| [___] | <code>void</code> | unused parameter |
-| [key] | <code>string</code> | customer key of single item to retrieve |
-
-<a name="TransactionalPush.retrieveForCache"></a>
-
-### TransactionalPush.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves event definition metadata for caching
-
-**Kind**: static method of [<code>TransactionalPush</code>](#TransactionalPush)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
-<a name="TransactionalPush.update"></a>
-
-### TransactionalPush.update(metadata) ⇒ <code>Promise</code>
-Updates a single item
-
-**Kind**: static method of [<code>TransactionalPush</code>](#TransactionalPush)  
-**Returns**: <code>Promise</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
-
-<a name="TransactionalPush.create"></a>
-
-### TransactionalPush.create(metadata) ⇒ <code>Promise</code>
-Creates a single item
-
-**Kind**: static method of [<code>TransactionalPush</code>](#TransactionalPush)  
-**Returns**: <code>Promise</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
-
-<a name="TransactionalPush.deleteByKey"></a>
-
-### TransactionalPush.deleteByKey(buObject, key) ⇒ <code>Promise.&lt;boolean&gt;</code>
-Delete a metadata item from the specified business unit
-
-**Kind**: static method of [<code>TransactionalPush</code>](#TransactionalPush)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | references credentials |
-| key | <code>string</code> | Identifier of item |
-
+**Extends**: [<code>TransactionalMessage</code>](#TransactionalMessage)  
 <a name="TransactionalSMS"></a>
 
 ## TransactionalSMS ⇐ [<code>TransactionalMessage</code>](#TransactionalMessage)
