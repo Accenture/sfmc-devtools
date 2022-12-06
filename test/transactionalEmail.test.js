@@ -75,4 +75,46 @@ describe('transactionalEmail', () => {
             return;
         });
     });
+    describe('Templating ================', () => {
+        // it.skip('Should create a transactionalEmail template via retrieveAsTemplate and build it');
+        it('Should create a transactionalEmail template via buildTemplate and build it', async () => {
+            // download first before we test buildTemplate
+            await handler.retrieve('testInstance/testBU', ['transactionalEmail']);
+            // buildTemplate
+            const result = await handler.buildTemplate(
+                'testInstance/testBU',
+                'transactionalEmail',
+                ['testExisting_temail'],
+                'testSourceMarket'
+            );
+            assert.equal(
+                result.transactionalEmail ? Object.keys(result.transactionalEmail).length : 0,
+                1,
+                'only one transactionalEmail expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualTemplateJson('testExisting_temail', 'transactionalEmail'),
+                await testUtils.getExpectedJson('9999999', 'transactionalEmail', 'template'),
+                'returned template JSON was not equal expected'
+            );
+            // buildDefinition
+            await handler.buildDefinition(
+                'testInstance/testBU',
+                'transactionalEmail',
+                'testExisting_temail',
+                'testTargetMarket'
+            );
+            assert.deepEqual(
+                await testUtils.getActualDeployJson('testExisting_temail', 'transactionalEmail'),
+                await testUtils.getExpectedJson('9999999', 'transactionalEmail', 'build'),
+                'returned deployment JSON was not equal expected'
+            );
+            assert.equal(
+                Object.values(testUtils.getAPIHistory()).flat().length,
+                12,
+                'Unexpected number of requests made'
+            );
+            return;
+        });
+    });
 });

@@ -4381,7 +4381,7 @@ Updates a single item
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+| metadata | <code>TYPE.MetadataTypeItem</code> | how the item shall look after the update |
 
 <a name="TransactionalEmail.preDeployTasks"></a>
 
