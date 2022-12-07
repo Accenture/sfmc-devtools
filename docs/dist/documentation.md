@@ -4493,6 +4493,35 @@ TransactionalPush TransactionalMessage
 
 **Kind**: global class  
 **Extends**: [<code>TransactionalMessage</code>](#TransactionalMessage)  
+
+* [TransactionalPush](#TransactionalPush) ⇐ [<code>TransactionalMessage</code>](#TransactionalMessage)
+    * [.preDeployTasks(metadata)](#TransactionalPush.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.postRetrieveTasks(metadata)](#TransactionalPush.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+
+<a name="TransactionalPush.preDeployTasks"></a>
+
+### TransactionalPush.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+prepares for deployment
+
+**Kind**: static method of [<code>TransactionalPush</code>](#TransactionalPush)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="TransactionalPush.postRetrieveTasks"></a>
+
+### TransactionalPush.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>TransactionalPush</code>](#TransactionalPush)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - a single item  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
 <a name="TransactionalSMS"></a>
 
 ## TransactionalSMS ⇐ [<code>TransactionalMessage</code>](#TransactionalMessage)
