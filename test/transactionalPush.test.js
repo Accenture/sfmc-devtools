@@ -14,31 +14,31 @@ describe('transactionalPush', () => {
         testUtils.mockReset();
     });
 
-    // describe('Retrieve ================', () => {
-    //     it('Should retrieve a transactionalPush', async () => {
-    //         // WHEN
-    //         await handler.retrieve('testInstance/testBU', ['transactionalPush']);
-    //         // THEN
-    //         // get results from cache
-    //         const result = cache.getCache();
-    //         assert.equal(
-    //             result.transactionalPush ? Object.keys(result.transactionalPush).length : 0,
-    //             1,
-    //             'only one transactionalPush expected'
-    //         );
-    //         assert.deepEqual(
-    //             await testUtils.getActualJson('testExisting_tpush', 'transactionalPush'),
-    //             await testUtils.getExpectedJson('9999999', 'transactionalPush', 'get'),
-    //             'returned JSON was not equal expected'
-    //         );
-    //         assert.equal(
-    //             Object.values(testUtils.getAPIHistory()).flat().length,
-    //             12,
-    //             'Unexpected number of requests made'
-    //         );
-    //         return;
-    //     });
-    // });
+    describe('Retrieve ================', () => {
+        it('Should retrieve a transactionalPush', async () => {
+            // WHEN
+            await handler.retrieve('testInstance/testBU', ['transactionalPush']);
+            // THEN
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.transactionalPush ? Object.keys(result.transactionalPush).length : 0,
+                1,
+                'only one transactionalPush expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_tpush', 'transactionalPush'),
+                await testUtils.getExpectedJson('9999999', 'transactionalPush', 'get'),
+                'returned JSON was not equal expected'
+            );
+            assert.equal(
+                Object.values(testUtils.getAPIHistory()).flat().length,
+                3,
+                'Unexpected number of requests made'
+            );
+            return;
+        });
+    });
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);

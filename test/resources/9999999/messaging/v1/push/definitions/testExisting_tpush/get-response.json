@@ -1,0 +1,13 @@
+{
+    "requestId": "64dac58f-f6d0-4bea-9489-eb058c491a87",
+    "name": "testExisting_tpush",
+    "definitionKey": "testExisting_tpush",
+    "definitionId": "2106d3f9-0c76-ed11-b849-48df37d1de8b",
+    "description": "note that applicationId can only be manually set up in Setup - Mobile Push",
+    "applicationId": "ffbab4c9-fbf6-4b87-9c9a-10c6ce86e81d",
+    "status": "Active",
+    "createdDate": "2022-12-07T02:56:00",
+    "modifiedDate": "2022-12-07T02:56:00",
+    "content": { "customerKey": "mobileMessage_test" },
+    "options": { "sound": "temp.wmv", "badge": "1" }
+}
