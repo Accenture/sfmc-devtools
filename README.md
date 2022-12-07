@@ -33,18 +33,40 @@ You can then include it in your code with:
 const mcdev = require('mcdev');
 ```
 
-That will load `node_packages/mcdev/lib/index.js`. It can make sense to directly include other files if you have a special scenario. We've done that in our example for [retrieveChangelog.js](/Accenture/sfmc-devtools/blob/main/lib/retrieveChangelog.js) or in more detail, in our child-project [sfmc-devtools-copado](/Accenture/sfmc-devtools-copado) to get full control over certain aspects.
+That will load `node_packages/mcdev/lib/index.js`. It can make sense to directly include other files if you have a special scenario. We've done that in our example for [retrieveChangelog.js](https://github.com/Accenture/sfmc-devtools/blob/main/lib/retrieveChangelog.js) or in more detail, in our child-project [sfmc-devtools-copado](https://github.com/Accenture/sfmc-devtools-copado) to get full control over certain aspects.
 
 ## Documentation
 
-Please checkout the [GitHub wiki](/Accenture/sfmc-devtools/wiki) for the full documentation.
+Please checkout the [GitHub wiki](https://github.com/Accenture/sfmc-devtools/wiki) for the full documentation.
 
 ## Changelog
 
-Find info on the latest releases with a detailed changelog in the [GitHub Releases tab](/Accenture/sfmc-devtools/releases).
+Find info on the latest releases with a detailed changelog in the [GitHub Releases tab](https://github.com/Accenture/sfmc-devtools/releases).
 
 ## Contribute
 
 If you want to enhance Accenture SFMC DevTools you are welcome to fork the repo and create a pull request. Please understand that we will have to conduct a code review before accepting your changes.
 
-More details on how to best do that are described in our [wiki](/Accenture/sfmc-devtools/wiki/9.-Contribute).
+More details on how to best do that are described in our [wiki](https://github.com/Accenture/sfmc-devtools/wiki/9.-Contribute).
+
+## Main Contacts
+
+The people that lead this project:
+
+<table><tbody><tr><td align="center" valign="top" width="11%">
+<a href="https://www.linkedin.com/in/joernberkefeld/">
+<img src="https://github.com/JoernBerkefeld.png" width="250" height="250"><br />
+<b>Jörn Berkefeld</b>
+</a><br>
+<a href="https://github.com/JoernBerkefeld">GitHub profile</a>
+</td><td align="center" valign="top" width="11%">
+<a href="https://www.linkedin.com/in/douglasmidgley/">
+<img src="https://github.com/DougMidgley.png" width="250" height="250"><br />
+<b>Doug Midgley</b>
+</a><br>
+<a href="https://github.com/DougMidgley">GitHub profile</a>
+</td></tr></tbody></table>
+
+## Copyright
+
+Copyright (c) 2020-2022 Accenture. [MIT licensed](https://github.com/Accenture/sfmc-devtools/blob/main/LICENSE).
