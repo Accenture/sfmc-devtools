@@ -11,11 +11,29 @@ Accenture Salesforce Marketing Cloud DevTools (mcdev) is a rapid deployment/roll
 
 ## Quick start
 
+### Install
+
 Run the following to install Accenture SFMC DevTools on your computer:
 
 ```bash
 npm install -g mcdev
 ```
+
+### Include in your package
+
+First, install it as dependency:
+
+```bash
+npm install mcdev --save
+```
+
+You can then include it in your code with:
+
+```javascript
+const mcdev = require('mcdev');
+```
+
+That will load `node_packages/mcdev/lib/index.js`. It can make sense to directly include other files if you have a special scenario. We've done that in our example for [retrieveChangelog.js](/Accenture/sfmc-devtools/blob/main/lib/retrieveChangelog.js) or in more detail, in our child-project [sfmc-devtools-copado](/Accenture/sfmc-devtools-copado) to get full control over certain aspects.
 
 ## Documentation
 
