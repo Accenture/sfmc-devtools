@@ -107,6 +107,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#TransactionalMessage">TransactionalMessage</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>TransactionalMessage MetadataType</p>
 </dd>
+<dt><a href="#TransactionalPush">TransactionalPush</a> ⇐ <code><a href="#TransactionalMessage">TransactionalMessage</a></code></dt>
+<dd><p>TransactionalPush TransactionalMessage</p>
+</dd>
 <dt><a href="#TransactionalSMS">TransactionalSMS</a> ⇐ <code><a href="#TransactionalMessage">TransactionalMessage</a></code></dt>
 <dd><p>TransactionalSMS MetadataType</p>
 </dd>
@@ -4482,6 +4485,42 @@ Delete a metadata item from the specified business unit
 | --- | --- | --- |
 | buObject | <code>TYPE.BuObject</code> | references credentials |
 | key | <code>string</code> | Identifier of item |
+
+<a name="TransactionalPush"></a>
+
+## TransactionalPush ⇐ [<code>TransactionalMessage</code>](#TransactionalMessage)
+TransactionalPush TransactionalMessage
+
+**Kind**: global class  
+**Extends**: [<code>TransactionalMessage</code>](#TransactionalMessage)  
+
+* [TransactionalPush](#TransactionalPush) ⇐ [<code>TransactionalMessage</code>](#TransactionalMessage)
+    * [.preDeployTasks(metadata)](#TransactionalPush.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.postRetrieveTasks(metadata)](#TransactionalPush.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+
+<a name="TransactionalPush.preDeployTasks"></a>
+
+### TransactionalPush.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+prepares for deployment
+
+**Kind**: static method of [<code>TransactionalPush</code>](#TransactionalPush)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="TransactionalPush.postRetrieveTasks"></a>
+
+### TransactionalPush.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>TransactionalPush</code>](#TransactionalPush)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - a single item  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
 <a name="TransactionalSMS"></a>
 

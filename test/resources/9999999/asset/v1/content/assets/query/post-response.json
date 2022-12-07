@@ -1,5 +1,5 @@
 {
-    "count": 1,
+    "count": 2,
     "page": 1,
     "pageSize": 50,
     "links": {},
@@ -42,6 +42,30 @@
                 "legacyType": "email",
                 "legacyCategoryId": 290835
             },
+            "modelVersion": 2
+        },
+        {
+            "id": 1209971,
+            "customerKey": "mobileMessage_test",
+            "assetType": { "id": 230, "name": "jsonmessage", "displayName": "JSON Message" },
+            "name": "mobileMessage_test",
+            "createdDate": "2022-12-07T02:49:36.857-06:00",
+            "createdBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "J├Ârn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "modifiedDate": "2022-12-07T02:49:57.44-06:00",
+            "modifiedBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "J├Ârn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "status": { "id": 1, "name": "Draft" },
+            "category": { "id": 283608, "name": "Content Builder", "parentId": 0 },
+            "availableViews": ["push"],
             "modelVersion": 2
         }
     ]
