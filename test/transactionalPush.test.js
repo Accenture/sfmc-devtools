@@ -75,46 +75,46 @@ describe('transactionalPush', () => {
             return;
         });
     });
-    // describe('Templating ================', () => {
-    //     // it.skip('Should create a transactionalPush template via retrieveAsTemplate and build it');
-    //     it('Should create a transactionalPush template via buildTemplate and build it', async () => {
-    //         // download first before we test buildTemplate
-    //         await handler.retrieve('testInstance/testBU', ['transactionalPush']);
-    //         // buildTemplate
-    //         const result = await handler.buildTemplate(
-    //             'testInstance/testBU',
-    //             'transactionalPush',
-    //             ['testExisting_tpush'],
-    //             'testSourceMarket'
-    //         );
-    //         assert.equal(
-    //             result.transactionalPush ? Object.keys(result.transactionalPush).length : 0,
-    //             1,
-    //             'only one transactionalPush expected'
-    //         );
-    //         assert.deepEqual(
-    //             await testUtils.getActualTemplateJson('testExisting_tpush', 'transactionalPush'),
-    //             await testUtils.getExpectedJson('9999999', 'transactionalPush', 'template'),
-    //             'returned template JSON was not equal expected'
-    //         );
-    //         // buildDefinition
-    //         await handler.buildDefinition(
-    //             'testInstance/testBU',
-    //             'transactionalPush',
-    //             'testExisting_tpush',
-    //             'testTargetMarket'
-    //         );
-    //         assert.deepEqual(
-    //             await testUtils.getActualDeployJson('testExisting_tpush', 'transactionalPush'),
-    //             await testUtils.getExpectedJson('9999999', 'transactionalPush', 'build'),
-    //             'returned deployment JSON was not equal expected'
-    //         );
-    //         assert.equal(
-    //             Object.values(testUtils.getAPIHistory()).flat().length,
-    //             12,
-    //             'Unexpected number of requests made'
-    //         );
-    //         return;
-    //     });
-    // });
+    describe('Templating ================', () => {
+        // it.skip('Should create a transactionalPush template via retrieveAsTemplate and build it');
+        it('Should create a transactionalPush template via buildTemplate and build it', async () => {
+            // download first before we test buildTemplate
+            await handler.retrieve('testInstance/testBU', ['transactionalPush']);
+            // buildTemplate
+            const result = await handler.buildTemplate(
+                'testInstance/testBU',
+                'transactionalPush',
+                ['testExisting_tpush'],
+                'testSourceMarket'
+            );
+            assert.equal(
+                result.transactionalPush ? Object.keys(result.transactionalPush).length : 0,
+                1,
+                'only one transactionalPush expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualTemplateJson('testExisting_tpush', 'transactionalPush'),
+                await testUtils.getExpectedJson('9999999', 'transactionalPush', 'template'),
+                'returned template JSON was not equal expected'
+            );
+            // buildDefinition
+            await handler.buildDefinition(
+                'testInstance/testBU',
+                'transactionalPush',
+                'testExisting_tpush',
+                'testTargetMarket'
+            );
+            assert.deepEqual(
+                await testUtils.getActualDeployJson('testExisting_tpush', 'transactionalPush'),
+                await testUtils.getExpectedJson('9999999', 'transactionalPush', 'build'),
+                'returned deployment JSON was not equal expected'
+            );
+            assert.equal(
+                Object.values(testUtils.getAPIHistory()).flat().length,
+                3,
+                'Unexpected number of requests made'
+            );
+            return;
+        });
+    });
 });

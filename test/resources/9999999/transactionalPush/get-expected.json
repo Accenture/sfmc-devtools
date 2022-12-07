@@ -1,7 +1,7 @@
 {
     "name": "testExisting_tpush",
     "definitionKey": "testExisting_tpush",
-    "description": "note that applicationId can only be manually set up in Setup - Mobile Push",
+    "description": "bla bla. note that applicationId can only be manually set up in Setup - Mobile Push",
     "applicationId": "ffbab4c9-fbf6-4b87-9c9a-10c6ce86e81d",
     "status": "Active",
     "createdDate": "2022-12-07T02:56:00",
