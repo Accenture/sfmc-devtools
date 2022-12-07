@@ -51,10 +51,11 @@ Accenture Salesforce Marketing Cloud DevTools (mcdev) is a rapid deployment/roll
     - [6.2.8. createDeltaPkg](#628-createdeltapkg)
 - [7. Advanced Configuration](#7-advanced-configuration)
   - [7.1. Config Options](#71-config-options)
-  - [7.2. Metadata-specific settings & options](#72-metadata-specific-settings--options)
+  - [7.2. Metadata-specific settings \& options](#72-metadata-specific-settings--options)
     - [7.2.1. Retention Policy fields in Data Extensions](#721-retention-policy-fields-in-data-extensions)
     - [7.2.2. Adding/Updating Fields on existing Data Extensions](#722-addingupdating-fields-on-existing-data-extensions)
     - [7.2.3. Renaming fields of a Data Extensions](#723-renaming-fields-of-a-data-extensions)
+    - [7.2.4. Mobile Push Application](#724-mobile-push-application)
   - [7.3. Market Configuration](#73-market-configuration)
   - [7.4. Market List Configuration](#74-market-list-configuration)
 - [8. Examples](#8-examples)
@@ -1243,6 +1244,12 @@ Imagine you wanted to rename `BillingCountry` to `BillingZip` for some reason. P
 ```
 
 All you have to do is deploy the data extension again with Name_new specified for each field that needs to be renamed.
+
+#### 7.2.4. Mobile Push Application
+
+When creating / updating `transactionalPush` you will notice that there is a field for the Mobile Application ID (`applicationId`). This cannot be found in your downloaded BUs but only in SFMC Setup > Mobile Push. Mobile Applications can be created and maintained solely via GUI and not via API.
+
+If you plan to deploy `transactionalPush` messages to another BU, ensure that as a pre-deployment step, you created the respective Mobile App on the target BU and that you replaced the application ID in your deployment package with that new ID. In a CI/CD environment where the deployment would happen automatically based on your development version, you will have to create a new variable in your source & target market which stores the application Id for the respective BUs.
 
 ### 7.3. Market Configuration
 
