@@ -4867,7 +4867,7 @@ CLI entry for SFMC DevTools
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
-    * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>undefined</code>
+    * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
 
@@ -5064,10 +5064,11 @@ let's you dynamically walk down an object and get a value
 
 <a name="Util.execSync"></a>
 
-### Util.execSync(cmd, [args], [hideOutput]) ⇒ <code>undefined</code>
+### Util.execSync(cmd, [args], [hideOutput]) ⇒ <code>string</code>
 helper to run other commands as if run manually by user
 
 **Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>string</code> - output of command if hideOutput is true  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5709,6 +5710,7 @@ CLI helper class
     * [._updateGitConfigUser()](#Init._updateGitConfigUser) ⇒ <code>void</code>
     * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
     * [.initProject(properties, credentialName)](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._initMarkets()](#Init._initMarkets)
     * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
@@ -5831,6 +5833,12 @@ Creates template file for properties.json
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
 
+<a name="Init._initMarkets"></a>
+
+### Init.\_initMarkets()
+helper for @initProject that optionally creates markets and market lists for all BUs
+
+**Kind**: static method of [<code>Init</code>](#Init)  
 <a name="Init._downloadAllBUs"></a>
 
 ### Init.\_downloadAllBUs(bu, gitStatus) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -5916,6 +5924,7 @@ CLI helper class
     * [._updateGitConfigUser()](#Init._updateGitConfigUser) ⇒ <code>void</code>
     * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
     * [.initProject(properties, credentialName)](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._initMarkets()](#Init._initMarkets)
     * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
@@ -6038,6 +6047,12 @@ Creates template file for properties.json
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
 
+<a name="Init._initMarkets"></a>
+
+### Init.\_initMarkets()
+helper for @initProject that optionally creates markets and market lists for all BUs
+
+**Kind**: static method of [<code>Init</code>](#Init)  
 <a name="Init._downloadAllBUs"></a>
 
 ### Init.\_downloadAllBUs(bu, gitStatus) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -6123,6 +6138,7 @@ CLI helper class
     * [._updateGitConfigUser()](#Init._updateGitConfigUser) ⇒ <code>void</code>
     * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
     * [.initProject(properties, credentialName)](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._initMarkets()](#Init._initMarkets)
     * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
@@ -6245,6 +6261,12 @@ Creates template file for properties.json
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
 
+<a name="Init._initMarkets"></a>
+
+### Init.\_initMarkets()
+helper for @initProject that optionally creates markets and market lists for all BUs
+
+**Kind**: static method of [<code>Init</code>](#Init)  
 <a name="Init._downloadAllBUs"></a>
 
 ### Init.\_downloadAllBUs(bu, gitStatus) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -6330,6 +6352,7 @@ CLI helper class
     * [._updateGitConfigUser()](#Init._updateGitConfigUser) ⇒ <code>void</code>
     * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
     * [.initProject(properties, credentialName)](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._initMarkets()](#Init._initMarkets)
     * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
@@ -6452,6 +6475,12 @@ Creates template file for properties.json
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
 
+<a name="Init._initMarkets"></a>
+
+### Init.\_initMarkets()
+helper for @initProject that optionally creates markets and market lists for all BUs
+
+**Kind**: static method of [<code>Init</code>](#Init)  
 <a name="Init._downloadAllBUs"></a>
 
 ### Init.\_downloadAllBUs(bu, gitStatus) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -6542,7 +6571,7 @@ Util that contains logger and simple util methods
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
-    * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>undefined</code>
+    * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
 
@@ -6739,10 +6768,11 @@ let's you dynamically walk down an object and get a value
 
 <a name="Util.execSync"></a>
 
-### Util.execSync(cmd, [args], [hideOutput]) ⇒ <code>undefined</code>
+### Util.execSync(cmd, [args], [hideOutput]) ⇒ <code>string</code>
 helper to run other commands as if run manually by user
 
 **Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>string</code> - output of command if hideOutput is true  
 
 | Param | Type | Description |
 | --- | --- | --- |
