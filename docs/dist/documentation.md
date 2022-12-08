@@ -3011,6 +3011,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise</code>
     * [.updateREST(metadataEntry, uri)](#MetadataType.updateREST) ⇒ <code>Promise</code>
     * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
+    * [._handleSOAPErrors(ex, metadataEntry, msg, [handleOutside])](#MetadataType._handleSOAPErrors)
     * [.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#MetadataType.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
@@ -3337,6 +3338,18 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 | --- | --- | --- |
 | metadataEntry | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
 | [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
+| [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
+
+<a name="MetadataType._handleSOAPErrors"></a>
+
+### MetadataType.\_handleSOAPErrors(ex, metadataEntry, msg, [handleOutside])
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ex | <code>Error</code> | error that occured |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
+| msg | <code>&#x27;creating&#x27;</code> \| <code>&#x27;updating&#x27;</code> | what to print in the log |
 | [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
 <a name="MetadataType.retrieveSOAP"></a>
