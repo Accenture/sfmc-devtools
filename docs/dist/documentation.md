@@ -176,8 +176,6 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#csvToArray">csvToArray(csv)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
 <dd><p>helper to convert CSVs into an array. if only one value was given, it&#39;s also returned as an array</p>
 </dd>
-<dt><a href="#systemSync">systemSync(cmd)</a></dt>
-<dd></dd>
 <dt><a href="#getUserName">getUserName(userList, item, fieldname)</a> ⇒ <code>string</code></dt>
 <dd></dd>
 <dt><a href="#setupSDK">setupSDK(sessionKey, authObject)</a> ⇒ <code><a href="#SDK">SDK</a></code></dt>
@@ -6821,15 +6819,6 @@ helper to convert CSVs into an array. if only one value was given, it's also ret
 | Param | Type | Description |
 | --- | --- | --- |
 | csv | <code>string</code> | potentially comma-separated value or null |
-
-<a name="systemSync"></a>
-
-## systemSync(cmd)
-**Kind**: global function  
-
-| Param |
-| --- |
-| cmd | 
 
 <a name="getUserName"></a>
 
