@@ -2905,15 +2905,16 @@ List MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [List](#List) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [_], [__], [___], [key])](#List.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieve(retrieveDir, [_], buObject, [___], [key])](#List.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache(buObject)](#List.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [._retrieveParentAllSubs(buObject, results)](#List._retrieveParentAllSubs) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.deleteByKey(buObject, customerKey)](#List.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postRetrieveTasks(list)](#List.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.parseMetadata(metadata, [parseForCache])](#List.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 
 <a name="List.retrieve"></a>
 
-### List.retrieve(retrieveDir, [_], [__], [___], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### List.retrieve(retrieveDir, [_], buObject, [___], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves Metadata of Lists
 
 **Kind**: static method of [<code>List</code>](#List)  
@@ -2923,7 +2924,7 @@ Retrieves Metadata of Lists
 | --- | --- | --- |
 | retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | [_] | <code>void</code> | unused parameter |
-| [__] | <code>void</code> | unused parameter |
+| buObject | <code>TYPE.BuObject</code> | properties for auth |
 | [___] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
@@ -2938,6 +2939,19 @@ Gets metadata cache with limited fields and does not store value to disk
 | Param | Type | Description |
 | --- | --- | --- |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
+
+<a name="List._retrieveParentAllSubs"></a>
+
+### List.\_retrieveParentAllSubs(buObject, results) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+helper for @link retrieveForCache and @link retrieve
+
+**Kind**: static method of [<code>List</code>](#List)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>TYPE.BuObject</code> | properties for auth |
+| results | <code>TYPE.MetadataTypeMapObj</code> | metadata from retrieve for current BU |
 
 <a name="List.deleteByKey"></a>
 
