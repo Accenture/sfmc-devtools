@@ -1,0 +1,5 @@
+{
+    "all": true,
+    "include": ["lib/**"],
+    "exclude": ["lib/metadataTypes/definitions/*.js", "test/**", "types/**"]
+}

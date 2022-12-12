@@ -10,3 +10,4 @@ tmp/
 .mcdevrc.json
 .vscode/tasks.json
 !test/mockRoot/*
+/.nyc_output/
