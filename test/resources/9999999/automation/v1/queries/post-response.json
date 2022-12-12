@@ -1,8 +1,8 @@
 {
     "queryDefinitionId": "549f0568-607c-4940-afef-437965094dae",
-    "name": "testQuery",
-    "key": "testQuery",
-    "description": "",
+    "name": "testNewQuery",
+    "key": "testNewQuery",
+    "description": "created on deploy",
     "queryText": "SELECT\n    SubscriberKey as testField\nFROM\n    _Subscribers ",
     "targetName": "childBU_dataextension_test",
     "targetKey": "childBU_dataextension_test",

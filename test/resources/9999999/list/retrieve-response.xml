@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:fc7c8368-c8f0-4b86-a4ac-c420bb2517cf</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:eaad475d-1129-4cf5-bbe6-a1d90a80f6da</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-e7686d6f-36cb-4c39-b845-f4a4ae521504">
+                <wsu:Created>2022-11-29T19:42:18Z</wsu:Created>
+                <wsu:Expires>2022-11-29T19:47:18Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>e5b8151e-8780-4543-9856-971f3023769f</RequestID>
+            <Results xsi:type="List">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2017-02-16T01:59:27.29</CreatedDate>
+                <ModifiedDate>2017-02-16T01:59:27.29</ModifiedDate>
+                <ID>23</ID>
+                <ObjectID>95e7f560-dca9-4ad2-8bc6-850ea7506e88</ObjectID>
+                <CustomerKey>All Subscribers - 412</CustomerKey>
+                <ListName>All Subscribers</ListName>
+                <Category>412</Category>
+                <Type>Private</Type>
+                <Description>Contains all subscribers</Description>
+                <ListClassification>ExactTargetList</ListClassification>
+            </Results>
+            <Results xsi:type="List">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2017-06-13T06:03:10.8</CreatedDate>
+                <ModifiedDate>2017-06-13T06:03:10.8</ModifiedDate>
+                <ID>109</ID>
+                <ObjectID>3d03a584-453e-41e0-9ed7-3ef418d5f79c</ObjectID>
+                <CustomerKey>Test_List - 404</CustomerKey>
+                <ListName>Test_List</ListName>
+                <Category>404</Category>
+                <Type>Private</Type>
+                <Description>Test_List</Description>
+                <ListClassification>ExactTargetList</ListClassification>
+            </Results>
+            <Results xsi:type="List">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2017-06-26T04:46:40.887</CreatedDate>
+                <ModifiedDate>2017-06-26T04:46:40.887</ModifiedDate>
+                <ID>114</ID>
+                <ObjectID>b3e9f648-0588-4cc4-90a5-26624cdd2e1e</ObjectID>
+                <CustomerKey>Demo Publication List - 424</CustomerKey>
+                <ListName>Demo Publication List</ListName>
+                <Category>424</Category>
+                <Type>Public</Type>
+                <Description />
+                <ListClassification>PublicationList</ListClassification>
+            </Results>
+            <Results xsi:type="List">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2022-02-17T11:58:08.273</CreatedDate>
+                <ModifiedDate>2022-02-17T11:59:40.01</ModifiedDate>
+                <ID>1120</ID>
+                <ObjectID>ebe40007-8776-46d7-9c9f-dc4578ac08b7</ObjectID>
+                <CustomerKey>sfmcTest - 419</CustomerKey>
+                <ListName>sfmcTest</ListName>
+                <Category>419</Category>
+                <Type>Private</Type>
+                <Description />
+                <ListClassification>SuppressionList</ListClassification>
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>
