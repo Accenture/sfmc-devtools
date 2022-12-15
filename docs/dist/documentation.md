@@ -5346,13 +5346,13 @@ Central class for loading and validating properties from config and auth
 **Kind**: global constant  
 
 * [config](#config)
-    * [.getProperties([silent])](#config.getProperties) ⇒ <code>Promise.&lt;TYPE.Mcdevrc&gt;</code>
+    * [.getProperties([silent], [isInit])](#config.getProperties) ⇒ <code>Promise.&lt;TYPE.Mcdevrc&gt;</code>
     * [.checkProperties(properties, [silent])](#config.checkProperties) ⇒ <code>Promise.&lt;(boolean\|Array.&lt;string&gt;)&gt;</code>
     * [.getDefaultProperties()](#config.getDefaultProperties) ⇒ <code>Promise.&lt;TYPE.Mcdevrc&gt;</code>
 
 <a name="config.getProperties"></a>
 
-### config.getProperties([silent]) ⇒ <code>Promise.&lt;TYPE.Mcdevrc&gt;</code>
+### config.getProperties([silent], [isInit]) ⇒ <code>Promise.&lt;TYPE.Mcdevrc&gt;</code>
 loads central properties from config file
 
 **Kind**: static method of [<code>config</code>](#config)  
@@ -5361,6 +5361,7 @@ loads central properties from config file
 | Param | Type | Description |
 | --- | --- | --- |
 | [silent] | <code>boolean</code> | omit throwing errors and print messages; assuming not silent if not set |
+| [isInit] | <code>boolean</code> | don't tell the user to run init |
 
 <a name="config.checkProperties"></a>
 
