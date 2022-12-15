@@ -15,6 +15,7 @@
         "editorconfig.editorconfig",
         "esbenp.prettier-vscode",
         "sergey-agadzhanov.ampscript",
+        "FiB.beautyAmp",
 
         // Markdown / Readme.md
         "joernberkefeld.markdown-preview-bitbucket-innersource"

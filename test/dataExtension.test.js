@@ -23,8 +23,8 @@ describe('dataExtension', () => {
                 'only one dataExtension expected'
             );
             assert.deepEqual(
-                await testUtils.getActualFile('childBU_dataextension_test', 'dataExtension'),
-                await testUtils.getExpectedFile('9999999', 'dataExtension', 'retrieve'),
+                await testUtils.getActualJson('childBU_dataextension_test', 'dataExtension'),
+                await testUtils.getExpectedJson('9999999', 'dataExtension', 'retrieve'),
 
                 'returned metadata was not equal expected'
             );
@@ -37,6 +37,9 @@ describe('dataExtension', () => {
         });
     });
     describe('Deploy ================', () => {
+        beforeEach(() => {
+            testUtils.mockSetup(true);
+        });
         it('Should create & upsert a data extension', async () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['dataExtension']);
@@ -49,19 +52,21 @@ describe('dataExtension', () => {
                 2,
                 'two data extensions expected'
             );
+            // insert
             assert.deepEqual(
-                await testUtils.getActualFile('testDataExtension', 'dataExtension'),
-                await testUtils.getExpectedFile('9999999', 'dataExtension', 'create'),
+                await testUtils.getActualJson('testDataExtension', 'dataExtension'),
+                await testUtils.getExpectedJson('9999999', 'dataExtension', 'create'),
                 'returned metadata was not equal expected for create'
             );
+            // update
             assert.deepEqual(
-                await testUtils.getActualFile('childBU_dataextension_test', 'dataExtension'),
-                await testUtils.getExpectedFile('9999999', 'dataExtension', 'update'),
+                await testUtils.getActualJson('childBU_dataextension_test', 'dataExtension'),
+                await testUtils.getExpectedJson('9999999', 'dataExtension', 'update'),
                 'returned metadata was not equal expected for update'
             );
             assert.equal(
                 Object.values(testUtils.getAPIHistory()).flat().length,
-                11,
+                12,
                 'Unexpected number of requests made'
             );
             return;
@@ -74,7 +79,7 @@ describe('dataExtension', () => {
                 'testInstance/testBU',
                 'dataExtension',
                 ['childBU_dataextension_test'],
-                'testMarket'
+                'testSourceMarket'
             );
 
             // WHEN
@@ -84,8 +89,11 @@ describe('dataExtension', () => {
                 'only one dataExtension expected'
             );
             assert.deepEqual(
-                await testUtils.getActualTemplate('childBU_dataextension_test', 'dataExtension'),
-                await testUtils.getExpectedFile('9999999', 'dataExtension', 'template'),
+                await testUtils.getActualTemplateJson(
+                    'childBU_dataextension_test',
+                    'dataExtension'
+                ),
+                await testUtils.getExpectedJson('9999999', 'dataExtension', 'template'),
                 'returned template was not equal expected'
             );
             // THEN
@@ -93,11 +101,14 @@ describe('dataExtension', () => {
                 'testInstance/testBU',
                 'dataExtension',
                 'childBU_dataextension_test',
-                'testMarket'
+                'testTargetMarket'
             );
             assert.deepEqual(
-                await testUtils.getActualDeployFile('childBU_dataextension_test', 'dataExtension'),
-                await testUtils.getExpectedFile('9999999', 'dataExtension', 'build'),
+                await testUtils.getActualDeployJson(
+                    'childBU_dataextension_testTarget',
+                    'dataExtension'
+                ),
+                await testUtils.getExpectedJson('9999999', 'dataExtension', 'build'),
                 'returned deployment file was not equal expected'
             );
             assert.equal(
@@ -115,7 +126,7 @@ describe('dataExtension', () => {
                 'testInstance/testBU',
                 'dataExtension',
                 ['childBU_dataextension_test'],
-                'testMarket'
+                'testSourceMarket'
             );
             // WHEN
             assert.equal(
@@ -124,8 +135,11 @@ describe('dataExtension', () => {
                 'only one dataExtension expected'
             );
             assert.deepEqual(
-                await testUtils.getActualTemplate('childBU_dataextension_test', 'dataExtension'),
-                await testUtils.getExpectedFile('9999999', 'dataExtension', 'template'),
+                await testUtils.getActualTemplateJson(
+                    'childBU_dataextension_test',
+                    'dataExtension'
+                ),
+                await testUtils.getExpectedJson('9999999', 'dataExtension', 'template'),
                 'returned template was not equal expected'
             );
             // THEN
@@ -133,12 +147,15 @@ describe('dataExtension', () => {
                 'testInstance/testBU',
                 'dataExtension',
                 'childBU_dataextension_test',
-                'testMarket'
+                'testTargetMarket'
             );
 
             assert.deepEqual(
-                await testUtils.getActualDeployFile('childBU_dataextension_test', 'dataExtension'),
-                await testUtils.getExpectedFile('9999999', 'dataExtension', 'build'),
+                await testUtils.getActualDeployJson(
+                    'childBU_dataextension_testTarget',
+                    'dataExtension'
+                ),
+                await testUtils.getExpectedJson('9999999', 'dataExtension', 'build'),
                 'returned deployment file was not equal expected'
             );
             assert.equal(
