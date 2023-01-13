@@ -2879,6 +2879,13 @@ Script MetadataType
 
 **Kind**: global class  
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [Interaction](#Interaction) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [___], [key])](#Interaction.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.deleteByKey(buObject, key)](#Interaction.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.update(metadata)](#Interaction.update) ⇒ <code>Promise</code>
+    * [.create(metadata)](#Interaction.create) ⇒ <code>Promise</code>
+
 <a name="Interaction.retrieve"></a>
 
 ### Interaction.retrieve(retrieveDir, [_], [__], [___], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -2895,6 +2902,43 @@ Endpoint /interaction/v1/interactions?extras=all&pageSize=50000 return 50000 Scr
 | [__] | <code>void</code> | unused parameter |
 | [___] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="Interaction.deleteByKey"></a>
+
+### Interaction.deleteByKey(buObject, key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>Interaction</code>](#Interaction)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>TYPE.BuObject</code> | references credentials |
+| key | <code>string</code> | Identifier of item |
+
+<a name="Interaction.update"></a>
+
+### Interaction.update(metadata) ⇒ <code>Promise</code>
+Updates a single item
+
+**Kind**: static method of [<code>Interaction</code>](#Interaction)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="Interaction.create"></a>
+
+### Interaction.create(metadata) ⇒ <code>Promise</code>
+Creates a single item
+
+**Kind**: static method of [<code>Interaction</code>](#Interaction)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
 <a name="List"></a>
 
