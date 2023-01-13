@@ -3067,7 +3067,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.upsert(metadata, deployDir, [buObject])](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise</code>
     * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise</code>
-    * [.updateREST(metadataEntry, uri)](#MetadataType.updateREST) ⇒ <code>Promise</code>
+    * [.updateREST(metadataEntry, uri, [usePut])](#MetadataType.updateREST) ⇒ <code>Promise</code>
     * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
     * [._handleSOAPErrors(ex, msg, [metadataEntry], [handleOutside])](#MetadataType._handleSOAPErrors)
     * [.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -3373,7 +3373,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 <a name="MetadataType.updateREST"></a>
 
-### MetadataType.updateREST(metadataEntry, uri) ⇒ <code>Promise</code>
+### MetadataType.updateREST(metadataEntry, uri, [usePut]) ⇒ <code>Promise</code>
 Updates a single metadata entry via REST
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3383,6 +3383,7 @@ Updates a single metadata entry via REST
 | --- | --- | --- |
 | metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
 | uri | <code>string</code> | rest endpoint for PATCH |
+| [usePut] | <code>boolean</code> | some update requests require PUT instead of PATCH |
 
 <a name="MetadataType.updateSOAP"></a>
 
