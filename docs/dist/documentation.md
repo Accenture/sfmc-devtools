@@ -842,6 +842,7 @@ FileTransfer MetadataType
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildTemplateForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Asset._buildForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.setFolderPath(metadata)](#Asset.setFolderPath)
+    * [.setFolderId(metadata)](#Asset.setFolderId)
     * [._mergeCode(metadata, deployDir, subType, [templateName], [fileListOnly])](#Asset._mergeCode) ⇒ <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code>
     * [._mergeCode_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName], [fileListOnly])](#Asset._mergeCode_slots) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._extractCode(metadata)](#Asset._extractCode) ⇒ <code>TYPE.CodeExtractItem</code>
@@ -1088,6 +1089,17 @@ generic script that retrieves the folder path from cache and updates the given m
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single script activity definition |
 
+<a name="Asset.setFolderId"></a>
+
+### Asset.setFolderId(metadata)
+Asset-specific script that retrieves the folder ID from cache and updates the given metadata with it before deploy
+
+**Kind**: static method of [<code>Asset</code>](#Asset)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
 <a name="Asset._mergeCode"></a>
 
 ### Asset.\_mergeCode(metadata, deployDir, subType, [templateName], [fileListOnly]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code>
@@ -1259,6 +1271,7 @@ Automation MetadataType
     * [.validateDeployMetadata(metadata)](#Automation.validateDeployMetadata) ⇒ <code>boolean</code>
     * [.postDeployTasks(metadata, originalMetadata)](#Automation.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.setFolderPath(metadata)](#Automation.setFolderPath)
+    * [.setFolderId(metadata)](#Automation.setFolderId)
     * [.parseMetadata(metadata)](#Automation.parseMetadata) ⇒ <code>TYPE.AutomationItem</code>
     * [._buildSchedule(scheduleObject)](#Automation._buildSchedule) ⇒ <code>TYPE.AutomationScheduleSoap</code>
     * [._calcTime(offsetServer, dateInput, [offsetInput])](#Automation._calcTime) ⇒ <code>string</code>
@@ -1408,6 +1421,17 @@ generic script that retrieves the folder path from cache and updates the given m
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single script activity definition |
+
+<a name="Automation.setFolderId"></a>
+
+### Automation.setFolderId(metadata)
+automation-specific script that retrieves the folder ID from cache and updates the given metadata with it before deploy
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
 <a name="Automation.parseMetadata"></a>
 
@@ -3220,7 +3244,7 @@ generic script that retrieves the folder path from cache and updates the given m
 <a name="MetadataType.setFolderId"></a>
 
 ### MetadataType.setFolderId(metadata)
-generic script that retrieves the folder path from cache and updates the given metadata with it after retrieve
+generic script that retrieves the folder ID from cache and updates the given metadata with it before deploy
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 
