@@ -195,7 +195,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#TypeKeyCombo">TypeKeyCombo</a> : <code>Object.&lt;string, string&gt;</code></dt>
 <dd><p>object-key=metadata type, value=array of external keys</p>
 </dd>
-<dt><a href="#Cache">Cache</a> : <code>Object.&lt;string, any&gt;</code></dt>
+<dt><a href="#MetadataTypeItemDiff">MetadataTypeItemDiff</a> : <code>Object.&lt;string, any&gt;</code></dt>
 <dd><p>key=customer key</p>
 </dd>
 <dt><a href="#CodeExtractItem">CodeExtractItem</a> : <code>object</code></dt>
@@ -2921,11 +2921,12 @@ Script MetadataType
 
 * [Interaction](#Interaction) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [___], [key])](#Interaction.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.deleteByKey(buObject, key, [version])](#Interaction.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deleteByKey(buObject, key, version)](#Interaction.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.update(metadata)](#Interaction.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#Interaction.create) ⇒ <code>Promise</code>
     * [.postRetrieveTasks(metadata)](#Interaction.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.preDeployTasks(metadata)](#Interaction.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#Interaction.createOrUpdate)
 
 <a name="Interaction.retrieve"></a>
 
@@ -2946,7 +2947,7 @@ Endpoint /interaction/v1/interactions?extras=all&pageSize=50000 return 50000 Scr
 
 <a name="Interaction.deleteByKey"></a>
 
-### Interaction.deleteByKey(buObject, key, [version]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Interaction.deleteByKey(buObject, key, version) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>Interaction</code>](#Interaction)  
@@ -2956,7 +2957,7 @@ Delete a metadata item from the specified business unit
 | --- | --- | --- |
 | buObject | <code>TYPE.BuObject</code> | references credentials |
 | key | <code>string</code> | Identifier of item |
-| [version] | <code>number</code> | optional version of metadata |
+| version | <code>number</code> | required version of metadata |
 
 <a name="Interaction.update"></a>
 
@@ -3005,6 +3006,19 @@ prepares a TSD for deployment
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | of a single TSD |
+
+<a name="Interaction.createOrUpdate"></a>
+
+### Interaction.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)
+**Kind**: static method of [<code>Interaction</code>](#Interaction)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata itme |
+| metadataKey | <code>string</code> | key of item we are looking at |
+| hasError | <code>boolean</code> | error flag from previous code |
+| metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
+| metadataToCreate | <code>Array.&lt;TYPE.MetadataTypeItem&gt;</code> | list of items to create |
 
 <a name="List"></a>
 
@@ -3132,6 +3146,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.hasChanged(cachedVersion, metadata, [fieldName])](#MetadataType.hasChanged) ⇒ <code>boolean</code>
     * [.hasChangedGeneric(cachedVersion, metadata, [fieldName], [silent])](#MetadataType.hasChangedGeneric) ⇒ <code>boolean</code>
     * [.upsert(metadata, deployDir, [buObject])](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MetadataType.createOrUpdate) ⇒ <code>void</code>
     * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise</code>
     * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise</code>
     * [.updateREST(metadataEntry, uri, [usePut])](#MetadataType.updateREST) ⇒ <code>Promise</code>
@@ -3421,6 +3436,19 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 | metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 | [buObject] | <code>TYPE.BuObject</code> | properties for auth |
+
+<a name="MetadataType.createOrUpdate"></a>
+
+### MetadataType.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>void</code>
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata itme |
+| metadataKey | <code>string</code> | key of item we are looking at |
+| hasError | <code>boolean</code> | error flag from previous code |
+| metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
+| metadataToCreate | <code>Array.&lt;TYPE.MetadataTypeItem&gt;</code> | list of items to create |
 
 <a name="MetadataType.createREST"></a>
 
@@ -7016,9 +7044,9 @@ initiate winston logger
 object-key=metadata type, value=array of external keys
 
 **Kind**: global typedef  
-<a name="Cache"></a>
+<a name="MetadataTypeItemDiff"></a>
 
-## Cache : <code>Object.&lt;string, any&gt;</code>
+## MetadataTypeItemDiff : <code>Object.&lt;string, any&gt;</code>
 key=customer key
 
 **Kind**: global typedef  
