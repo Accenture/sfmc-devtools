@@ -2344,6 +2344,7 @@ EventDefinition MetadataType
     * [.retrieveForCache()](#EventDefinition.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#EventDefinition.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.postRetrieveTasks(eventDef)](#EventDefinition.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.deleteByKey(buObject, key)](#EventDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.create(EventDefinition)](#EventDefinition.create) ⇒ <code>Promise</code>
     * [.update(metadataEntry)](#EventDefinition.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#EventDefinition.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -2399,6 +2400,19 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | eventDef | <code>TYPE.MetadataTypeItem</code> | a single item of Event Definition |
+
+<a name="EventDefinition.deleteByKey"></a>
+
+### EventDefinition.deleteByKey(buObject, key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>TYPE.BuObject</code> | references credentials |
+| key | <code>string</code> | Identifier of item |
 
 <a name="EventDefinition.create"></a>
 
