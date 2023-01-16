@@ -2885,6 +2885,8 @@ Script MetadataType
     * [.deleteByKey(buObject, key)](#Interaction.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.update(metadata)](#Interaction.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#Interaction.create) ⇒ <code>Promise</code>
+    * [.postRetrieveTasks(metadata)](#Interaction.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.preDeployTasks(metadata)](#Interaction.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
 
 <a name="Interaction.retrieve"></a>
 
@@ -2939,6 +2941,30 @@ Creates a single item
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="Interaction.postRetrieveTasks"></a>
+
+### Interaction.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>Interaction</code>](#Interaction)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one query string  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
+
+<a name="Interaction.preDeployTasks"></a>
+
+### Interaction.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+prepares a TSD for deployment
+
+**Kind**: static method of [<code>Interaction</code>](#Interaction)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - metadata object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | of a single TSD |
 
 <a name="List"></a>
 
@@ -3054,6 +3080,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.postDeployTasks(metadata, originalMetadata)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setFolderPath(metadata)](#MetadataType.setFolderPath)
+    * [.setFolderId(metadata)](#MetadataType.setFolderId)
     * [.retrieve(retrieveDir, [additionalFields], buObject, [subType], [key])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveChangelog([buObject], [additionalFields], [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -3188,7 +3215,18 @@ generic script that retrieves the folder path from cache and updates the given m
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single script activity definition |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="MetadataType.setFolderId"></a>
+
+### MetadataType.setFolderId(metadata)
+generic script that retrieves the folder path from cache and updates the given metadata with it after retrieve
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
 <a name="MetadataType.retrieve"></a>
 
