@@ -195,7 +195,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#TypeKeyCombo">TypeKeyCombo</a> : <code>Object.&lt;string, string&gt;</code></dt>
 <dd><p>object-key=metadata type, value=array of external keys</p>
 </dd>
-<dt><a href="#Cache">Cache</a> : <code>Object.&lt;string, any&gt;</code></dt>
+<dt><a href="#MetadataTypeItemDiff">MetadataTypeItemDiff</a> : <code>Object.&lt;string, any&gt;</code></dt>
 <dd><p>key=customer key</p>
 </dd>
 <dt><a href="#CodeExtractItem">CodeExtractItem</a> : <code>object</code></dt>
@@ -472,7 +472,7 @@ main class
     * [.initProject([credentialsName])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.deleteByKey(businessUnit, type, customerKey)](#Mcdev.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.deleteByKey(businessUnit, type, customerKey, [version])](#Mcdev.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.refresh(businessUnit, type)](#Mcdev.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.badKeys(businessUnit)](#Mcdev.badKeys) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.retrieveAsTemplate(businessUnit, selectedType, name, market)](#Mcdev.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
@@ -604,7 +604,7 @@ Creates docs for supported metadata types in Markdown and/or HTML format
 
 <a name="Mcdev.deleteByKey"></a>
 
-### Mcdev.deleteByKey(businessUnit, type, customerKey) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.deleteByKey(businessUnit, type, customerKey, [version]) ⇒ <code>Promise.&lt;void&gt;</code>
 deletes metadata from MC instance by key
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -614,7 +614,8 @@ deletes metadata from MC instance by key
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
 | type | <code>string</code> | supported metadata type |
-| customerKey | <code>string</code> | Identifier of data extension |
+| customerKey | <code>string</code> | Identifier of metadata |
+| [version] | <code>number</code> | optional version of metadata |
 
 <a name="Mcdev.refresh"></a>
 
@@ -856,6 +857,7 @@ FileTransfer MetadataType
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildTemplateForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Asset._buildForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.setFolderPath(metadata)](#Asset.setFolderPath)
+    * [.setFolderId(metadata)](#Asset.setFolderId)
     * [._mergeCode(metadata, deployDir, subType, [templateName], [fileListOnly])](#Asset._mergeCode) ⇒ <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code>
     * [._mergeCode_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName], [fileListOnly])](#Asset._mergeCode_slots) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._extractCode(metadata)](#Asset._extractCode) ⇒ <code>TYPE.CodeExtractItem</code>
@@ -1102,6 +1104,17 @@ generic script that retrieves the folder path from cache and updates the given m
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single script activity definition |
 
+<a name="Asset.setFolderId"></a>
+
+### Asset.setFolderId(metadata)
+Asset-specific script that retrieves the folder ID from cache and updates the given metadata with it before deploy
+
+**Kind**: static method of [<code>Asset</code>](#Asset)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
 <a name="Asset._mergeCode"></a>
 
 ### Asset.\_mergeCode(metadata, deployDir, subType, [templateName], [fileListOnly]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code>
@@ -1273,6 +1286,7 @@ Automation MetadataType
     * [.validateDeployMetadata(metadata)](#Automation.validateDeployMetadata) ⇒ <code>boolean</code>
     * [.postDeployTasks(metadata, originalMetadata)](#Automation.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.setFolderPath(metadata)](#Automation.setFolderPath)
+    * [.setFolderId(metadata)](#Automation.setFolderId)
     * [.parseMetadata(metadata)](#Automation.parseMetadata) ⇒ <code>TYPE.AutomationItem</code>
     * [._buildSchedule(scheduleObject)](#Automation._buildSchedule) ⇒ <code>TYPE.AutomationScheduleSoap</code>
     * [._calcTime(offsetServer, dateInput, [offsetInput])](#Automation._calcTime) ⇒ <code>string</code>
@@ -1422,6 +1436,17 @@ generic script that retrieves the folder path from cache and updates the given m
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single script activity definition |
+
+<a name="Automation.setFolderId"></a>
+
+### Automation.setFolderId(metadata)
+automation-specific script that retrieves the folder ID from cache and updates the given metadata with it before deploy
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
 <a name="Automation.parseMetadata"></a>
 
@@ -2334,6 +2359,7 @@ EventDefinition MetadataType
     * [.retrieveForCache()](#EventDefinition.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#EventDefinition.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.postRetrieveTasks(eventDef)](#EventDefinition.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.deleteByKey(buObject, key)](#EventDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.create(EventDefinition)](#EventDefinition.create) ⇒ <code>Promise</code>
     * [.update(metadataEntry)](#EventDefinition.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#EventDefinition.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -2389,6 +2415,19 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | eventDef | <code>TYPE.MetadataTypeItem</code> | a single item of Event Definition |
+
+<a name="EventDefinition.deleteByKey"></a>
+
+### EventDefinition.deleteByKey(buObject, key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>TYPE.BuObject</code> | references credentials |
+| key | <code>string</code> | Identifier of item |
 
 <a name="EventDefinition.create"></a>
 
@@ -2893,6 +2932,16 @@ Script MetadataType
 
 **Kind**: global class  
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [Interaction](#Interaction) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [___], [key])](#Interaction.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.deleteByKey(buObject, key, version)](#Interaction.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.update(metadata)](#Interaction.update) ⇒ <code>Promise</code>
+    * [.create(metadata)](#Interaction.create) ⇒ <code>Promise</code>
+    * [.postRetrieveTasks(metadata)](#Interaction.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.preDeployTasks(metadata)](#Interaction.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#Interaction.createOrUpdate)
+
 <a name="Interaction.retrieve"></a>
 
 ### Interaction.retrieve(retrieveDir, [_], [__], [___], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -2909,6 +2958,81 @@ Endpoint /interaction/v1/interactions?extras=all&pageSize=50000 return 50000 Scr
 | [__] | <code>void</code> | unused parameter |
 | [___] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="Interaction.deleteByKey"></a>
+
+### Interaction.deleteByKey(buObject, key, version) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>Interaction</code>](#Interaction)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObject | <code>TYPE.BuObject</code> | references credentials |
+| key | <code>string</code> | Identifier of item |
+| version | <code>number</code> | required version of metadata |
+
+<a name="Interaction.update"></a>
+
+### Interaction.update(metadata) ⇒ <code>Promise</code>
+Updates a single item
+
+**Kind**: static method of [<code>Interaction</code>](#Interaction)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="Interaction.create"></a>
+
+### Interaction.create(metadata) ⇒ <code>Promise</code>
+Creates a single item
+
+**Kind**: static method of [<code>Interaction</code>](#Interaction)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="Interaction.postRetrieveTasks"></a>
+
+### Interaction.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>Interaction</code>](#Interaction)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one query string  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
+
+<a name="Interaction.preDeployTasks"></a>
+
+### Interaction.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+prepares a TSD for deployment
+
+**Kind**: static method of [<code>Interaction</code>](#Interaction)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - metadata object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | of a single TSD |
+
+<a name="Interaction.createOrUpdate"></a>
+
+### Interaction.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)
+**Kind**: static method of [<code>Interaction</code>](#Interaction)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata itme |
+| metadataKey | <code>string</code> | key of item we are looking at |
+| hasError | <code>boolean</code> | error flag from previous code |
+| metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
+| metadataToCreate | <code>Array.&lt;TYPE.MetadataTypeItem&gt;</code> | list of items to create |
 
 <a name="List"></a>
 
@@ -3024,6 +3148,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.postDeployTasks(metadata, originalMetadata)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setFolderPath(metadata)](#MetadataType.setFolderPath)
+    * [.setFolderId(metadata)](#MetadataType.setFolderId)
     * [.retrieve(retrieveDir, [additionalFields], buObject, [subType], [key])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveChangelog([buObject], [additionalFields], [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -3036,9 +3161,10 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.hasChanged(cachedVersion, metadata, [fieldName])](#MetadataType.hasChanged) ⇒ <code>boolean</code>
     * [.hasChangedGeneric(cachedVersion, metadata, [fieldName], [silent])](#MetadataType.hasChangedGeneric) ⇒ <code>boolean</code>
     * [.upsert(metadata, deployDir, [buObject])](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MetadataType.createOrUpdate) ⇒ <code>void</code>
     * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise</code>
     * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise</code>
-    * [.updateREST(metadataEntry, uri)](#MetadataType.updateREST) ⇒ <code>Promise</code>
+    * [.updateREST(metadataEntry, uri, [usePut])](#MetadataType.updateREST) ⇒ <code>Promise</code>
     * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
     * [._handleSOAPErrors(ex, msg, [metadataEntry], [handleOutside])](#MetadataType._handleSOAPErrors)
     * [.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -3061,7 +3187,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType.buildDefinition) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.checkForErrors(ex)](#MetadataType.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code>
     * [.document([buObject], [metadata], [isDeploy])](#MetadataType.document) ⇒ <code>void</code>
-    * [.deleteByKey(buObject, customerKey)](#MetadataType.deleteByKey) ⇒ <code>boolean</code>
+    * [.deleteByKey(buObject, customerKey, [version])](#MetadataType.deleteByKey) ⇒ <code>boolean</code>
     * [.postDeleteTasks(buObject, customerKey)](#MetadataType.postDeleteTasks) ⇒ <code>void</code>
     * [.deleteByKeySOAP(buObject, customerKey, [handleOutside])](#MetadataType.deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.deleteByKeyREST(buObject, url, key, [handleOutside])](#MetadataType.deleteByKeyREST) ⇒ <code>boolean</code>
@@ -3159,7 +3285,18 @@ generic script that retrieves the folder path from cache and updates the given m
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single script activity definition |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="MetadataType.setFolderId"></a>
+
+### MetadataType.setFolderId(metadata)
+generic script that retrieves the folder ID from cache and updates the given metadata with it before deploy
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
 <a name="MetadataType.retrieve"></a>
 
@@ -3321,6 +3458,19 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 | [buObject] | <code>TYPE.BuObject</code> | properties for auth |
 
+<a name="MetadataType.createOrUpdate"></a>
+
+### MetadataType.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>void</code>
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata itme |
+| metadataKey | <code>string</code> | key of item we are looking at |
+| hasError | <code>boolean</code> | error flag from previous code |
+| metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
+| metadataToCreate | <code>Array.&lt;TYPE.MetadataTypeItem&gt;</code> | list of items to create |
+
 <a name="MetadataType.createREST"></a>
 
 ### MetadataType.createREST(metadataEntry, uri) ⇒ <code>Promise</code>
@@ -3350,7 +3500,7 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 <a name="MetadataType.updateREST"></a>
 
-### MetadataType.updateREST(metadataEntry, uri) ⇒ <code>Promise</code>
+### MetadataType.updateREST(metadataEntry, uri, [usePut]) ⇒ <code>Promise</code>
 Updates a single metadata entry via REST
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3360,6 +3510,7 @@ Updates a single metadata entry via REST
 | --- | --- | --- |
 | metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
 | uri | <code>string</code> | rest endpoint for PATCH |
+| [usePut] | <code>boolean</code> | some update requests require PUT instead of PATCH |
 
 <a name="MetadataType.updateSOAP"></a>
 
@@ -3670,7 +3821,7 @@ Gets metadata cache with limited fields and does not store value to disk
 
 <a name="MetadataType.deleteByKey"></a>
 
-### MetadataType.deleteByKey(buObject, customerKey) ⇒ <code>boolean</code>
+### MetadataType.deleteByKey(buObject, customerKey, [version]) ⇒ <code>boolean</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3680,6 +3831,7 @@ Delete a metadata item from the specified business unit
 | --- | --- | --- |
 | buObject | <code>TYPE.BuObject</code> | references credentials |
 | customerKey | <code>string</code> | Identifier of data extension |
+| [version] | <code>number</code> | optional version of metadata |
 
 <a name="MetadataType.postDeleteTasks"></a>
 
@@ -6925,9 +7077,9 @@ initiate winston logger
 object-key=metadata type, value=array of external keys
 
 **Kind**: global typedef  
-<a name="Cache"></a>
+<a name="MetadataTypeItemDiff"></a>
 
-## Cache : <code>Object.&lt;string, any&gt;</code>
+## MetadataTypeItemDiff : <code>Object.&lt;string, any&gt;</code>
 key=customer key
 
 **Kind**: global typedef  
