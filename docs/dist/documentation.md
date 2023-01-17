@@ -473,7 +473,7 @@ main class
     * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(businessUnit, type, customerKey, [version])](#Mcdev.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.refresh(businessUnit, type)](#Mcdev.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.refresh(businessUnit, type, [keyArr])](#Mcdev.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.badKeys(businessUnit)](#Mcdev.badKeys) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.retrieveAsTemplate(businessUnit, selectedType, name, market)](#Mcdev.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
     * [.buildTemplate(businessUnit, selectedType, keyArr, market)](#Mcdev.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
@@ -619,7 +619,7 @@ deletes metadata from MC instance by key
 
 <a name="Mcdev.refresh"></a>
 
-### Mcdev.refresh(businessUnit, type) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.refresh(businessUnit, type, [keyArr]) ⇒ <code>Promise.&lt;void&gt;</code>
 ensures triggered sends are restarted to ensure they pick up on changes of the underlying emails
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -629,6 +629,7 @@ ensures triggered sends are restarted to ensure they pick up on changes of the u
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
 | type | <code>string</code> | references credentials from properties.json |
+| [keyArr] | <code>Array.&lt;string&gt;</code> | metadata keys |
 
 <a name="Mcdev.badKeys"></a>
 
@@ -4889,7 +4890,7 @@ MessageSendActivity MetadataType
     * [.setFolderPath(metadata)](#TriggeredSendDefinition.setFolderPath)
     * [.parseMetadata(metadata)](#TriggeredSendDefinition.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
     * [.preDeployTasks(metadata)](#TriggeredSendDefinition.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.refresh()](#TriggeredSendDefinition.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.refresh([keyArr])](#TriggeredSendDefinition.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._refreshItem(key)](#TriggeredSendDefinition._refreshItem) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="TriggeredSendDefinition.retrieve"></a>
@@ -4993,11 +4994,16 @@ prepares a TSD for deployment
 
 <a name="TriggeredSendDefinition.refresh"></a>
 
-### TriggeredSendDefinition.refresh() ⇒ <code>Promise.&lt;void&gt;</code>
+### TriggeredSendDefinition.refresh([keyArr]) ⇒ <code>Promise.&lt;void&gt;</code>
 TSD-specific refresh method that finds active TSDs and refreshes them
 
 **Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [keyArr] | <code>Array.&lt;string&gt;</code> | metadata keys |
+
 <a name="TriggeredSendDefinition._refreshItem"></a>
 
 ### TriggeredSendDefinition.\_refreshItem(key) ⇒ <code>Promise.&lt;void&gt;</code>
