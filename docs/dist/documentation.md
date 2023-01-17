@@ -473,6 +473,7 @@ main class
     * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(businessUnit, type, customerKey)](#Mcdev.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.refresh(businessUnit, type)](#Mcdev.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.badKeys(businessUnit)](#Mcdev.badKeys) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.retrieveAsTemplate(businessUnit, selectedType, name, market)](#Mcdev.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
     * [.buildTemplate(businessUnit, selectedType, keyArr, market)](#Mcdev.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
@@ -604,7 +605,7 @@ Creates docs for supported metadata types in Markdown and/or HTML format
 <a name="Mcdev.deleteByKey"></a>
 
 ### Mcdev.deleteByKey(businessUnit, type, customerKey) ⇒ <code>Promise.&lt;void&gt;</code>
-Creates docs for supported metadata types in Markdown and/or HTML format
+deletes metadata from MC instance by key
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
@@ -614,6 +615,19 @@ Creates docs for supported metadata types in Markdown and/or HTML format
 | businessUnit | <code>string</code> | references credentials from properties.json |
 | type | <code>string</code> | supported metadata type |
 | customerKey | <code>string</code> | Identifier of data extension |
+
+<a name="Mcdev.refresh"></a>
+
+### Mcdev.refresh(businessUnit, type) ⇒ <code>Promise.&lt;void&gt;</code>
+ensures triggered sends are restarted to ensure they pick up on changes of the underlying emails
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| businessUnit | <code>string</code> | references credentials from properties.json |
+| type | <code>string</code> | references credentials from properties.json |
 
 <a name="Mcdev.badKeys"></a>
 
@@ -3018,6 +3032,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.preDeployTasks(metadata, deployDir, buObject)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
     * [.create(metadata, deployDir)](#MetadataType.create) ⇒ <code>void</code>
     * [.update(metadata, [metadataBefore])](#MetadataType.update) ⇒ <code>void</code>
+    * [.refresh()](#MetadataType.refresh) ⇒ <code>void</code>
     * [.hasChanged(cachedVersion, metadata, [fieldName])](#MetadataType.hasChanged) ⇒ <code>boolean</code>
     * [.hasChangedGeneric(cachedVersion, metadata, [fieldName], [silent])](#MetadataType.hasChangedGeneric) ⇒ <code>boolean</code>
     * [.upsert(metadata, deployDir, [buObject])](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
@@ -3257,6 +3272,12 @@ Abstract update method that needs to be implemented in child metadata type
 | metadata | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
 | [metadataBefore] | <code>TYPE.MetadataTypeItem</code> | metadata mapped by their keyField |
 
+<a name="MetadataType.refresh"></a>
+
+### MetadataType.refresh() ⇒ <code>void</code>
+Abstract refresh method that needs to be implemented in child metadata type
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 <a name="MetadataType.hasChanged"></a>
 
 ### MetadataType.hasChanged(cachedVersion, metadata, [fieldName]) ⇒ <code>boolean</code>
