@@ -4889,6 +4889,8 @@ MessageSendActivity MetadataType
     * [.setFolderPath(metadata)](#TriggeredSendDefinition.setFolderPath)
     * [.parseMetadata(metadata)](#TriggeredSendDefinition.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
     * [.preDeployTasks(metadata)](#TriggeredSendDefinition.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.refresh()](#TriggeredSendDefinition.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._refreshItem(key)](#TriggeredSendDefinition._refreshItem) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="TriggeredSendDefinition.retrieve"></a>
 
@@ -4988,6 +4990,25 @@ prepares a TSD for deployment
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | of a single TSD |
+
+<a name="TriggeredSendDefinition.refresh"></a>
+
+### TriggeredSendDefinition.refresh() ⇒ <code>Promise.&lt;void&gt;</code>
+TSD-specific refresh method that finds active TSDs and refreshes them
+
+**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+<a name="TriggeredSendDefinition._refreshItem"></a>
+
+### TriggeredSendDefinition.\_refreshItem(key) ⇒ <code>Promise.&lt;void&gt;</code>
+helper for [refresh](refresh) that pauses, publishes and starts a triggered send
+
+**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| key | <code>string</code> | external key of triggered send item |
 
 <a name="Retriever"></a>
 
