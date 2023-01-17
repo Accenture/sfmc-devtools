@@ -1639,8 +1639,8 @@ DataExtension MetadataType
     * [.postRetrieveTasks(metadata)](#DataExtension.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionItem</code>
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.DataExtensionItem&gt;</code>
     * [.document(buObject, [metadata])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.deleteByKey(buObject, customerKey)](#DataExtension.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.postDeleteTasks(buObject, customerKey)](#DataExtension.postDeleteTasks) ⇒ <code>void</code>
+    * [.deleteByKey(customerKey)](#DataExtension.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.postDeleteTasks(customerKey)](#DataExtension.postDeleteTasks) ⇒ <code>void</code>
     * [.retrieveForCache(buObject)](#DataExtension.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtension.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.setFolderPath(metadata)](#DataExtension.setFolderPath)
@@ -1777,7 +1777,7 @@ Parses metadata into a readable Markdown/HTML format then saves it
 
 <a name="DataExtension.deleteByKey"></a>
 
-### DataExtension.deleteByKey(buObject, customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### DataExtension.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -1785,19 +1785,17 @@ Delete a metadata item from the specified business unit
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | references credentials |
 | customerKey | <code>string</code> | Identifier of data extension |
 
 <a name="DataExtension.postDeleteTasks"></a>
 
-### DataExtension.postDeleteTasks(buObject, customerKey) ⇒ <code>void</code>
+### DataExtension.postDeleteTasks(customerKey) ⇒ <code>void</code>
 clean up after deleting a metadata item
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | references credentials |
 | customerKey | <code>string</code> | Identifier of metadata item |
 
 <a name="DataExtension.retrieveForCache"></a>
@@ -1866,8 +1864,8 @@ DataExtensionField MetadataType
     * [.sortDeFields(a, b)](#DataExtensionField.sortDeFields) ⇒ <code>boolean</code>
     * [.postRetrieveTasks(metadata, forDataExtension)](#DataExtensionField.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionFieldItem</code>
     * [.prepareDeployColumnsOnUpdate(deployColumns, deKey)](#DataExtensionField.prepareDeployColumnsOnUpdate) ⇒ <code>Object.&lt;string, TYPE.DataExtensionFieldItem&gt;</code>
-    * [.deleteByKey(buObject, customerKey)](#DataExtensionField.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.deleteByKeySOAP(buObject, customerKey, [handleOutside])](#DataExtensionField.deleteByKeySOAP) ⇒ <code>boolean</code>
+    * [.deleteByKey(customerKey)](#DataExtensionField.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deleteByKeySOAP(customerKey, [handleOutside])](#DataExtensionField.deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#DataExtensionField.postDeleteTasks) ⇒ <code>void</code>
 
 <a name="DataExtensionField.retrieve"></a>
@@ -1951,7 +1949,7 @@ Removes FieldType field if its the same in deploy and target column, because it 
 
 <a name="DataExtensionField.deleteByKey"></a>
 
-### DataExtensionField.deleteByKey(buObject, customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### DataExtensionField.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
@@ -1959,12 +1957,11 @@ Delete a metadata item from the specified business unit
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | references credentials |
 | customerKey | <code>string</code> | Identifier of data extension |
 
 <a name="DataExtensionField.deleteByKeySOAP"></a>
 
-### DataExtensionField.deleteByKeySOAP(buObject, customerKey, [handleOutside]) ⇒ <code>boolean</code>
+### DataExtensionField.deleteByKeySOAP(customerKey, [handleOutside]) ⇒ <code>boolean</code>
 Delete a data extension from the specified business unit
 
 **Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
@@ -1972,7 +1969,6 @@ Delete a data extension from the specified business unit
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | references credentials |
 | customerKey | <code>string</code> | Identifier of metadata |
 | [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
@@ -2252,7 +2248,7 @@ MessageSendActivity MetadataType
     * [.retrieve(retrieveDir, [_], [__], [___], [key])](#EmailSendDefinition.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.update(metadataItem)](#EmailSendDefinition.update) ⇒ <code>Promise</code>
     * [.create(metadataItem)](#EmailSendDefinition.create) ⇒ <code>Promise</code>
-    * [.deleteByKey(buObject, customerKey)](#EmailSendDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deleteByKey(customerKey)](#EmailSendDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.preDeployTasks(metadata)](#EmailSendDefinition.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
     * [.postRetrieveTasks(metadata)](#EmailSendDefinition.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.parseMetadata(metadata)](#EmailSendDefinition.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -2299,7 +2295,7 @@ Creates a single item
 
 <a name="EmailSendDefinition.deleteByKey"></a>
 
-### EmailSendDefinition.deleteByKey(buObject, customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### EmailSendDefinition.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
@@ -2307,7 +2303,6 @@ Delete a metadata item from the specified business unit
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | references credentials |
 | customerKey | <code>string</code> | Identifier of data extension |
 
 <a name="EmailSendDefinition.preDeployTasks"></a>
@@ -2359,7 +2354,7 @@ EventDefinition MetadataType
     * [.retrieveForCache()](#EventDefinition.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#EventDefinition.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.postRetrieveTasks(eventDef)](#EventDefinition.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.deleteByKey(buObject, key)](#EventDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deleteByKey(key)](#EventDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.create(EventDefinition)](#EventDefinition.create) ⇒ <code>Promise</code>
     * [.update(metadataEntry)](#EventDefinition.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#EventDefinition.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -2418,7 +2413,7 @@ manages post retrieve steps
 
 <a name="EventDefinition.deleteByKey"></a>
 
-### EventDefinition.deleteByKey(buObject, key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### EventDefinition.deleteByKey(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
@@ -2426,7 +2421,6 @@ Delete a metadata item from the specified business unit
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | references credentials |
 | key | <code>string</code> | Identifier of item |
 
 <a name="EventDefinition.create"></a>
@@ -2935,7 +2929,7 @@ Script MetadataType
 
 * [Interaction](#Interaction) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [___], [key])](#Interaction.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.deleteByKey(buObject, key, version)](#Interaction.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deleteByKey(key, version)](#Interaction.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.update(metadata)](#Interaction.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#Interaction.create) ⇒ <code>Promise</code>
     * [.postRetrieveTasks(metadata)](#Interaction.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -2961,7 +2955,7 @@ Endpoint /interaction/v1/interactions?extras=all&pageSize=50000 return 50000 Scr
 
 <a name="Interaction.deleteByKey"></a>
 
-### Interaction.deleteByKey(buObject, key, version) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Interaction.deleteByKey(key, version) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>Interaction</code>](#Interaction)  
@@ -2969,7 +2963,6 @@ Delete a metadata item from the specified business unit
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | references credentials |
 | key | <code>string</code> | Identifier of item |
 | version | <code>number</code> | required version of metadata |
 
@@ -3046,7 +3039,7 @@ List MetadataType
     * [.retrieve(retrieveDir, [_], buObject, [___], [key])](#List.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache(buObject)](#List.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [._retrieveParentAllSubs(buObject, results)](#List._retrieveParentAllSubs) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.deleteByKey(buObject, customerKey)](#List.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deleteByKey(customerKey)](#List.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postRetrieveTasks(list)](#List.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.parseMetadata(metadata, [parseForCache])](#List.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 
@@ -3093,7 +3086,7 @@ helper for @link retrieveForCache and @link retrieve
 
 <a name="List.deleteByKey"></a>
 
-### List.deleteByKey(buObject, customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### List.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>List</code>](#List)  
@@ -3101,7 +3094,6 @@ Delete a metadata item from the specified business unit
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | references credentials |
 | customerKey | <code>string</code> | Identifier of data extension |
 
 <a name="List.postRetrieveTasks"></a>
@@ -3187,10 +3179,10 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType.buildDefinition) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.checkForErrors(ex)](#MetadataType.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code>
     * [.document([buObject], [metadata], [isDeploy])](#MetadataType.document) ⇒ <code>void</code>
-    * [.deleteByKey(buObject, customerKey, [version])](#MetadataType.deleteByKey) ⇒ <code>boolean</code>
-    * [.postDeleteTasks(buObject, customerKey)](#MetadataType.postDeleteTasks) ⇒ <code>void</code>
-    * [.deleteByKeySOAP(buObject, customerKey, [handleOutside])](#MetadataType.deleteByKeySOAP) ⇒ <code>boolean</code>
-    * [.deleteByKeyREST(buObject, url, key, [handleOutside])](#MetadataType.deleteByKeyREST) ⇒ <code>boolean</code>
+    * [.deleteByKey(customerKey, [version])](#MetadataType.deleteByKey) ⇒ <code>boolean</code>
+    * [.postDeleteTasks(customerKey)](#MetadataType.postDeleteTasks) ⇒ <code>void</code>
+    * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType.deleteByKeySOAP) ⇒ <code>boolean</code>
+    * [.deleteByKeyREST(url, key, [handleOutside])](#MetadataType.deleteByKeyREST) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType.readBUMetadataForType) ⇒ <code>object</code>
     * [.getFilesToCommit(keyArr)](#MetadataType.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 
@@ -3821,7 +3813,7 @@ Gets metadata cache with limited fields and does not store value to disk
 
 <a name="MetadataType.deleteByKey"></a>
 
-### MetadataType.deleteByKey(buObject, customerKey, [version]) ⇒ <code>boolean</code>
+### MetadataType.deleteByKey(customerKey, [version]) ⇒ <code>boolean</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3829,25 +3821,23 @@ Delete a metadata item from the specified business unit
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | references credentials |
 | customerKey | <code>string</code> | Identifier of data extension |
 | [version] | <code>number</code> | optional version of metadata |
 
 <a name="MetadataType.postDeleteTasks"></a>
 
-### MetadataType.postDeleteTasks(buObject, customerKey) ⇒ <code>void</code>
+### MetadataType.postDeleteTasks(customerKey) ⇒ <code>void</code>
 clean up after deleting a metadata item
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | references credentials |
 | customerKey | <code>string</code> | Identifier of metadata item |
 
 <a name="MetadataType.deleteByKeySOAP"></a>
 
-### MetadataType.deleteByKeySOAP(buObject, customerKey, [handleOutside]) ⇒ <code>boolean</code>
+### MetadataType.deleteByKeySOAP(customerKey, [handleOutside]) ⇒ <code>boolean</code>
 Delete a data extension from the specified business unit
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3855,13 +3845,12 @@ Delete a data extension from the specified business unit
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | references credentials |
 | customerKey | <code>string</code> | Identifier of metadata |
 | [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
 <a name="MetadataType.deleteByKeyREST"></a>
 
-### MetadataType.deleteByKeyREST(buObject, url, key, [handleOutside]) ⇒ <code>boolean</code>
+### MetadataType.deleteByKeyREST(url, key, [handleOutside]) ⇒ <code>boolean</code>
 Delete a data extension from the specified business unit
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3869,7 +3858,6 @@ Delete a data extension from the specified business unit
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | references credentials |
 | url | <code>string</code> | endpoint |
 | key | <code>string</code> | Identifier of metadata |
 | [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
@@ -4623,7 +4611,7 @@ TransactionalMessage MetadataType
     * [.retrieveForCache()](#TransactionalMessage.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.update(metadata)](#TransactionalMessage.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#TransactionalMessage.create) ⇒ <code>Promise</code>
-    * [.deleteByKey(buObject, key)](#TransactionalMessage.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deleteByKey(key)](#TransactionalMessage.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="TransactionalMessage.retrieve"></a>
 
@@ -4675,7 +4663,7 @@ Creates a single item
 
 <a name="TransactionalMessage.deleteByKey"></a>
 
-### TransactionalMessage.deleteByKey(buObject, key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### TransactionalMessage.deleteByKey(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>TransactionalMessage</code>](#TransactionalMessage)  
@@ -4683,7 +4671,6 @@ Delete a metadata item from the specified business unit
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | references credentials |
 | key | <code>string</code> | Identifier of item |
 
 <a name="TransactionalPush"></a>
@@ -4731,7 +4718,7 @@ TransactionalSMS MetadataType
 **Extends**: [<code>TransactionalMessage</code>](#TransactionalMessage)  
 
 * [TransactionalSMS](#TransactionalSMS) ⇐ [<code>TransactionalMessage</code>](#TransactionalMessage)
-    * [.postDeleteTasks(buObject, customerKey)](#TransactionalSMS.postDeleteTasks) ⇒ <code>void</code>
+    * [.postDeleteTasks(customerKey)](#TransactionalSMS.postDeleteTasks) ⇒ <code>void</code>
     * [.preDeployTasks(metadata, dir)](#TransactionalSMS.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#TransactionalSMS._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.postRetrieveTasks(metadata)](#TransactionalSMS.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
@@ -4744,14 +4731,13 @@ TransactionalSMS MetadataType
 
 <a name="TransactionalSMS.postDeleteTasks"></a>
 
-### TransactionalSMS.postDeleteTasks(buObject, customerKey) ⇒ <code>void</code>
+### TransactionalSMS.postDeleteTasks(customerKey) ⇒ <code>void</code>
 clean up after deleting a metadata item
 
 **Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | references credentials |
 | customerKey | <code>string</code> | Identifier of metadata item |
 
 <a name="TransactionalSMS.preDeployTasks"></a>
@@ -4898,7 +4884,7 @@ MessageSendActivity MetadataType
     * [.retrieve(retrieveDir, [_], [__], [___], [key])](#TriggeredSendDefinition.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.create(metadata)](#TriggeredSendDefinition.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#TriggeredSendDefinition.update) ⇒ <code>Promise</code>
-    * [.deleteByKey(buObject, customerKey)](#TriggeredSendDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deleteByKey(customerKey)](#TriggeredSendDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postRetrieveTasks(metadata)](#TriggeredSendDefinition.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setFolderPath(metadata)](#TriggeredSendDefinition.setFolderPath)
     * [.parseMetadata(metadata)](#TriggeredSendDefinition.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -4946,7 +4932,7 @@ Updates a single TSD.
 
 <a name="TriggeredSendDefinition.deleteByKey"></a>
 
-### TriggeredSendDefinition.deleteByKey(buObject, customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### TriggeredSendDefinition.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
@@ -4954,7 +4940,6 @@ Delete a metadata item from the specified business unit
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | references credentials |
 | customerKey | <code>string</code> | Identifier of data extension |
 
 <a name="TriggeredSendDefinition.postRetrieveTasks"></a>
