@@ -5057,7 +5057,7 @@ CLI entry for SFMC DevTools
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
-    * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
+    * [._isValidType(selectedType, [handleOutside])](#Util._isValidType) ⇒ <code>boolean</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
@@ -5175,7 +5175,7 @@ SFMC accepts multiple false values for Boolean attributes for which we are check
 
 <a name="Util._isValidType"></a>
 
-### Util.\_isValidType(selectedType) ⇒ <code>boolean</code>
+### Util.\_isValidType(selectedType, [handleOutside]) ⇒ <code>boolean</code>
 helper for [retrieve](#Mcdev.retrieve), [retrieveAsTemplate](#Mcdev.retrieveAsTemplate) and [deploy](#Mcdev.deploy)
 
 **Kind**: static method of [<code>Util</code>](#Util)  
@@ -5184,6 +5184,7 @@ helper for [retrieve](#Mcdev.retrieve), [retrieveAsTemplate](#Mcdev.retrieveAsTe
 | Param | Type | Description |
 | --- | --- | --- |
 | selectedType | <code>TYPE.SupportedMetadataTypes</code> | type or type-subtype |
+| [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
 <a name="Util.getRetrieveTypeChoices"></a>
 
@@ -6762,7 +6763,7 @@ Util that contains logger and simple util methods
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
-    * [._isValidType(selectedType)](#Util._isValidType) ⇒ <code>boolean</code>
+    * [._isValidType(selectedType, [handleOutside])](#Util._isValidType) ⇒ <code>boolean</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
@@ -6880,7 +6881,7 @@ SFMC accepts multiple false values for Boolean attributes for which we are check
 
 <a name="Util._isValidType"></a>
 
-### Util.\_isValidType(selectedType) ⇒ <code>boolean</code>
+### Util.\_isValidType(selectedType, [handleOutside]) ⇒ <code>boolean</code>
 helper for [retrieve](#Mcdev.retrieve), [retrieveAsTemplate](#Mcdev.retrieveAsTemplate) and [deploy](#Mcdev.deploy)
 
 **Kind**: static method of [<code>Util</code>](#Util)  
@@ -6889,6 +6890,7 @@ helper for [retrieve](#Mcdev.retrieve), [retrieveAsTemplate](#Mcdev.retrieveAsTe
 | Param | Type | Description |
 | --- | --- | --- |
 | selectedType | <code>TYPE.SupportedMetadataTypes</code> | type or type-subtype |
+| [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
 <a name="Util.getRetrieveTypeChoices"></a>
 
