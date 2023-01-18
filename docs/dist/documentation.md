@@ -5058,7 +5058,7 @@ CLI entry for SFMC DevTools
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
-    * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
     * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -5232,11 +5232,11 @@ get key of an object based on the first matching value
 
 <a name="Util.getMetadataHierachy"></a>
 
-### Util.getMetadataHierachy(metadataTypes) ⇒ <code>Array.&lt;string&gt;</code>
+### Util.getMetadataHierachy(metadataTypes) ⇒ <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
 Returns Order in which metadata needs to be retrieved/deployed
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Array.&lt;string&gt;</code> - retrieve/deploy order as array  
+**Returns**: <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code> - retrieve/deploy order as array  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6763,7 +6763,7 @@ Util that contains logger and simple util methods
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
-    * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
     * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -6937,11 +6937,11 @@ get key of an object based on the first matching value
 
 <a name="Util.getMetadataHierachy"></a>
 
-### Util.getMetadataHierachy(metadataTypes) ⇒ <code>Array.&lt;string&gt;</code>
+### Util.getMetadataHierachy(metadataTypes) ⇒ <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
 Returns Order in which metadata needs to be retrieved/deployed
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Array.&lt;string&gt;</code> - retrieve/deploy order as array  
+**Returns**: <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code> - retrieve/deploy order as array  
 
 | Param | Type | Description |
 | --- | --- | --- |
