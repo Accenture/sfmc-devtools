@@ -38,9 +38,9 @@ describe('query', () => {
                 file(testUtils.getExpectedFile('9999999', 'query', 'get', 'sql'))
             );
             assert.equal(
-                Object.values(testUtils.getAPIHistory()).flat().length,
+                testUtils.getAPIHistoryLength(),
                 6,
-                'Unexpected number of requests made'
+                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -80,9 +80,9 @@ describe('query', () => {
             );
             // check number of API calls
             assert.equal(
-                Object.values(testUtils.getAPIHistory()).flat().length,
+                testUtils.getAPIHistoryLength(),
                 8,
-                'Unexpected number of requests made'
+                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -126,9 +126,9 @@ describe('query', () => {
                 file(testUtils.getActualDeployFile('testExistingQuery', 'query', 'sql'))
             ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'build', 'sql')));
             assert.equal(
-                Object.values(testUtils.getAPIHistory()).flat().length,
+                testUtils.getAPIHistoryLength(),
                 6,
-                'Unexpected number of requests made'
+                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -173,9 +173,9 @@ describe('query', () => {
             ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'build', 'sql')));
 
             assert.equal(
-                Object.values(testUtils.getAPIHistory()).flat().length,
+                testUtils.getAPIHistoryLength(),
                 6,
-                'Unexpected number of requests made'
+                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
             );
             return;
         });
