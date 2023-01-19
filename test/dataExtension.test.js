@@ -29,9 +29,9 @@ describe('dataExtension', () => {
                 'returned metadata was not equal expected'
             );
             assert.equal(
-                Object.values(testUtils.getAPIHistory()).flat().length,
-                6,
-                'Unexpected number of requests made'
+                testUtils.getAPIHistoryLength(),
+                5,
+                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -65,9 +65,9 @@ describe('dataExtension', () => {
                 'returned metadata was not equal expected for update'
             );
             assert.equal(
-                Object.values(testUtils.getAPIHistory()).flat().length,
-                12,
-                'Unexpected number of requests made'
+                testUtils.getAPIHistoryLength(),
+                11,
+                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -112,9 +112,9 @@ describe('dataExtension', () => {
                 'returned deployment file was not equal expected'
             );
             assert.equal(
-                Object.values(testUtils.getAPIHistory()).flat().length,
+                testUtils.getAPIHistoryLength(),
                 5,
-                'Unexpected number of requests made'
+                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -159,9 +159,9 @@ describe('dataExtension', () => {
                 'returned deployment file was not equal expected'
             );
             assert.equal(
-                Object.values(testUtils.getAPIHistory()).flat().length,
+                testUtils.getAPIHistoryLength(),
                 5,
-                'Unexpected number of requests made'
+                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
             );
             return;
         });
