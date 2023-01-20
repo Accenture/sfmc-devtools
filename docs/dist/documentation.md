@@ -4904,7 +4904,8 @@ MessageSendActivity MetadataType
     * [.parseMetadata(metadata)](#TriggeredSendDefinition.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
     * [.preDeployTasks(metadata)](#TriggeredSendDefinition.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.refresh([keyArr])](#TriggeredSendDefinition.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._refreshItem(key)](#TriggeredSendDefinition._refreshItem) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._findRefreshableItems()](#TriggeredSendDefinition._findRefreshableItems) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [._refreshItem(key, checkKey)](#TriggeredSendDefinition._refreshItem) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="TriggeredSendDefinition.retrieve"></a>
 
@@ -5018,9 +5019,14 @@ TSD-specific refresh method that finds active TSDs and refreshes them
 | --- | --- | --- |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | metadata keys |
 
+<a name="TriggeredSendDefinition._findRefreshableItems"></a>
+
+### TriggeredSendDefinition.\_findRefreshableItems() ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - keyArr  
 <a name="TriggeredSendDefinition._refreshItem"></a>
 
-### TriggeredSendDefinition.\_refreshItem(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### TriggeredSendDefinition.\_refreshItem(key, checkKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 helper for [refresh](refresh) that pauses, publishes and starts a triggered send
 
 **Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
@@ -5029,6 +5035,7 @@ helper for [refresh](refresh) that pauses, publishes and starts a triggered send
 | Param | Type | Description |
 | --- | --- | --- |
 | key | <code>string</code> | external key of triggered send item |
+| checkKey | <code>boolean</code> | whether to check if key exists on the server |
 
 <a name="Retriever"></a>
 
