@@ -3160,6 +3160,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.updateREST(metadataEntry, uri, [usePut])](#MetadataType.updateREST) ⇒ <code>Promise</code>
     * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
     * [._handleSOAPErrors(ex, msg, [metadataEntry], [handleOutside])](#MetadataType._handleSOAPErrors)
+    * [.getSOAPErrorMsg(ex)](#MetadataType.getSOAPErrorMsg) ⇒ <code>string</code>
     * [.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#MetadataType.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
@@ -3530,6 +3531,18 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 | msg | <code>&#x27;creating&#x27;</code> \| <code>&#x27;updating&#x27;</code> | what to print in the log |
 | [metadataEntry] | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
 | [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
+
+<a name="MetadataType.getSOAPErrorMsg"></a>
+
+### MetadataType.getSOAPErrorMsg(ex) ⇒ <code>string</code>
+helper for [_handleSOAPErrors](_handleSOAPErrors)
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>string</code> - error message  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ex | <code>Error</code> | error that occured |
 
 <a name="MetadataType.retrieveSOAP"></a>
 
@@ -4884,14 +4897,14 @@ MessageSendActivity MetadataType
 * [TriggeredSendDefinition](#TriggeredSendDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [___], [key])](#TriggeredSendDefinition.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.create(metadata)](#TriggeredSendDefinition.create) ⇒ <code>Promise</code>
-    * [.update(metadata)](#TriggeredSendDefinition.update) ⇒ <code>Promise</code>
+    * [.update(metadata, [handleOutside])](#TriggeredSendDefinition.update) ⇒ <code>Promise</code>
     * [.deleteByKey(customerKey)](#TriggeredSendDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postRetrieveTasks(metadata)](#TriggeredSendDefinition.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setFolderPath(metadata)](#TriggeredSendDefinition.setFolderPath)
     * [.parseMetadata(metadata)](#TriggeredSendDefinition.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
     * [.preDeployTasks(metadata)](#TriggeredSendDefinition.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.refresh([keyArr])](#TriggeredSendDefinition.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._refreshItem(key)](#TriggeredSendDefinition._refreshItem) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._refreshItem(key)](#TriggeredSendDefinition._refreshItem) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="TriggeredSendDefinition.retrieve"></a>
 
@@ -4923,7 +4936,7 @@ Create a single TSD.
 
 <a name="TriggeredSendDefinition.update"></a>
 
-### TriggeredSendDefinition.update(metadata) ⇒ <code>Promise</code>
+### TriggeredSendDefinition.update(metadata, [handleOutside]) ⇒ <code>Promise</code>
 Updates a single TSD.
 
 **Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
@@ -4932,6 +4945,7 @@ Updates a single TSD.
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
+| [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
 <a name="TriggeredSendDefinition.deleteByKey"></a>
 
@@ -5006,11 +5020,11 @@ TSD-specific refresh method that finds active TSDs and refreshes them
 
 <a name="TriggeredSendDefinition._refreshItem"></a>
 
-### TriggeredSendDefinition.\_refreshItem(key) ⇒ <code>Promise.&lt;void&gt;</code>
+### TriggeredSendDefinition.\_refreshItem(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
 helper for [refresh](refresh) that pauses, publishes and starts a triggered send
 
 **Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if refresh was successful  
 
 | Param | Type | Description |
 | --- | --- | --- |
