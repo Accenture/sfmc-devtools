@@ -5022,6 +5022,8 @@ TSD-specific refresh method that finds active TSDs and refreshes them
 <a name="TriggeredSendDefinition._findRefreshableItems"></a>
 
 ### TriggeredSendDefinition.\_findRefreshableItems() ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+helper for [refresh](refresh) that finds active TSDs on the server and filters it by the same rules that [retrieve](retrieve) is using to avoid refreshing TSDs with broken dependencies
+
 **Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
 **Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - keyArr  
 <a name="TriggeredSendDefinition._refreshItem"></a>
