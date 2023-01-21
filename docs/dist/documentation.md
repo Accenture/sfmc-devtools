@@ -3155,10 +3155,10 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.hasChangedGeneric(cachedVersion, metadata, [fieldName], [silent])](#MetadataType.hasChangedGeneric) ⇒ <code>boolean</code>
     * [.upsert(metadata, deployDir, [buObject])](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MetadataType.createOrUpdate) ⇒ <code>void</code>
-    * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise</code>
-    * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise</code>
-    * [.updateREST(metadataEntry, uri, [usePut])](#MetadataType.updateREST) ⇒ <code>Promise</code>
-    * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise</code>
+    * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
+    * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
+    * [.updateREST(metadataEntry, uri, [usePut])](#MetadataType.updateREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
+    * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [._handleSOAPErrors(ex, msg, [metadataEntry], [handleOutside])](#MetadataType._handleSOAPErrors)
     * [.getSOAPErrorMsg(ex)](#MetadataType.getSOAPErrorMsg) ⇒ <code>string</code>
     * [.retrieveSOAP(retrieveDir, buObject, [requestParams], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -3467,11 +3467,11 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 
 <a name="MetadataType.createREST"></a>
 
-### MetadataType.createREST(metadataEntry, uri) ⇒ <code>Promise</code>
+### MetadataType.createREST(metadataEntry, uri) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
 Creates a single metadata entry via REST
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;object&gt;</code> \| <code>null</code> - Promise of API response or null in case of an error  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3480,11 +3480,11 @@ Creates a single metadata entry via REST
 
 <a name="MetadataType.createSOAP"></a>
 
-### MetadataType.createSOAP(metadataEntry, [overrideType], [handleOutside]) ⇒ <code>Promise</code>
+### MetadataType.createSOAP(metadataEntry, [overrideType], [handleOutside]) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;object&gt;</code> \| <code>null</code> - Promise of API response or null in case of an error  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3494,11 +3494,11 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 <a name="MetadataType.updateREST"></a>
 
-### MetadataType.updateREST(metadataEntry, uri, [usePut]) ⇒ <code>Promise</code>
+### MetadataType.updateREST(metadataEntry, uri, [usePut]) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
 Updates a single metadata entry via REST
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;object&gt;</code> \| <code>null</code> - Promise of API response or null in case of an error  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3508,11 +3508,11 @@ Updates a single metadata entry via REST
 
 <a name="MetadataType.updateSOAP"></a>
 
-### MetadataType.updateSOAP(metadataEntry, [overrideType], [handleOutside]) ⇒ <code>Promise</code>
+### MetadataType.updateSOAP(metadataEntry, [overrideType], [handleOutside]) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise</code> - Promise  
+**Returns**: <code>Promise.&lt;object&gt;</code> \| <code>null</code> - Promise of API response or null in case of an error  
 
 | Param | Type | Description |
 | --- | --- | --- |
