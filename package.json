@@ -17,6 +17,19 @@
         "type": "corporate",
         "url": "https://github.com/Accenture/sfmc-devtools"
     },
+    "keywords": [
+        "sfmc",
+        "ide",
+        "devops",
+        "developer",
+        "exacttarget",
+        "salesforce",
+        "marketing cloud",
+        "package manager",
+        "fuel",
+        "soap",
+        "rest"
+    ],
     "main": "./lib/index.js",
     "bin": {
         "mcdev": "./lib/cli.js"
