@@ -139,11 +139,35 @@ exports.mockReset = () => {
     apimock.restore();
 };
 /**
+ * helper to return amount of api callouts
+ *
+ * @param {boolean} [includeToken] if true, will include token calls in count
+ * @returns {object} of API history
+ */
+exports.getAPIHistoryLength = (includeToken) => {
+    const historyArr = Object.values(apimock.history).flat();
+    if (includeToken) {
+        return historyArr.length;
+    }
+    return historyArr.filter((item) => item.url !== '/v2/token').length;
+};
+/**
  * helper to return api history
  *
  * @returns {object} of API history
  */
 exports.getAPIHistory = () => apimock.history;
+/**
+ * helper to return most important fields for each api call
+ *
+ * @returns {object} of API history
+ */
+exports.getAPIHistoryDebug = () => {
+    const historyArr = Object.values(apimock.history)
+        .flat()
+        .map((item) => ({ url: item.url, data: item.data }));
+    return historyArr;
+};
 
 /**
  * escapes string for regex

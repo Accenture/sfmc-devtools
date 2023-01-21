@@ -39,9 +39,9 @@ describe('transactionalSMS', () => {
                 file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'get', 'amp'))
             );
             assert.equal(
-                Object.values(testUtils.getAPIHistory()).flat().length,
+                testUtils.getAPIHistoryLength(),
                 4,
-                'Unexpected number of requests made'
+                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -85,9 +85,9 @@ describe('transactionalSMS', () => {
             );
             // check number of API calls
             assert.equal(
-                Object.values(testUtils.getAPIHistory()).flat().length,
+                testUtils.getAPIHistoryLength(),
                 5,
-                'Unexpected number of requests made'
+                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -139,9 +139,9 @@ describe('transactionalSMS', () => {
                 file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'build', 'amp'))
             );
             assert.equal(
-                Object.values(testUtils.getAPIHistory()).flat().length,
+                testUtils.getAPIHistoryLength(),
                 4,
-                'Unexpected number of requests made'
+                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
             );
             return;
         });
