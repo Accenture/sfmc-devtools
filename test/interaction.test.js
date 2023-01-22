@@ -77,4 +77,47 @@ describe('interaction', () => {
             return;
         });
     });
+    describe('Templating ================', () => {
+        it('Should create a interaction template via buildTemplate and build it', async () => {
+            // download first before we test buildTemplate
+            await handler.retrieve('testInstance/testBU', ['interaction']);
+            // buildTemplate
+            const result = await handler.buildTemplate(
+                'testInstance/testBU',
+                'interaction',
+                ['testExisting_interaction'],
+                'testSourceMarket'
+            );
+            assert.equal(
+                result.interaction ? Object.keys(result.interaction).length : 0,
+                1,
+                'only one interaction expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualTemplateJson('testExisting_interaction', 'interaction'),
+                await testUtils.getExpectedJson('9999999', 'interaction', 'template'),
+                'returned template JSON was not equal expected'
+            );
+
+            // buildDefinition
+            await handler.buildDefinition(
+                'testInstance/testBU',
+                'interaction',
+                'testExisting_interaction',
+                'testTargetMarket'
+            );
+            assert.deepEqual(
+                await testUtils.getActualDeployJson('testExisting_interaction', 'interaction'),
+                await testUtils.getExpectedJson('9999999', 'interaction', 'build'),
+                'returned deployment JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                5,
+                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
 });
