@@ -470,6 +470,7 @@ main class
     * [.retrieve(businessUnit, [selectedTypesArr], [keys], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Mcdev.deploy) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
     * [.initProject([credentialsName])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.joinProject()](#Mcdev.joinProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(businessUnit, type, customerKey)](#Mcdev.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -576,6 +577,13 @@ Creates template file for properties.json
 | --- | --- | --- |
 | [credentialsName] | <code>string</code> | identifying name of the installed package / project |
 
+<a name="Mcdev.joinProject"></a>
+
+### Mcdev.joinProject() ⇒ <code>Promise.&lt;void&gt;</code>
+Clones an existing project from git repository and installs it
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
 <a name="Mcdev.findBUs"></a>
 
 ### Mcdev.findBUs(credentialsName) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -5750,6 +5758,7 @@ CLI helper class
     * [._updateGitConfigUser()](#Init._updateGitConfigUser) ⇒ <code>void</code>
     * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
     * [.initProject(properties, credentialName)](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.joinProject()](#Init.joinProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._initMarkets()](#Init._initMarkets)
     * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -5873,6 +5882,13 @@ Creates template file for properties.json
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
 
+<a name="Init.joinProject"></a>
+
+### Init.joinProject() ⇒ <code>Promise.&lt;void&gt;</code>
+Creates template file for properties.json
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
 <a name="Init._initMarkets"></a>
 
 ### Init.\_initMarkets()
@@ -5964,6 +5980,7 @@ CLI helper class
     * [._updateGitConfigUser()](#Init._updateGitConfigUser) ⇒ <code>void</code>
     * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
     * [.initProject(properties, credentialName)](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.joinProject()](#Init.joinProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._initMarkets()](#Init._initMarkets)
     * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -6087,6 +6104,13 @@ Creates template file for properties.json
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
 
+<a name="Init.joinProject"></a>
+
+### Init.joinProject() ⇒ <code>Promise.&lt;void&gt;</code>
+Creates template file for properties.json
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
 <a name="Init._initMarkets"></a>
 
 ### Init.\_initMarkets()
@@ -6178,6 +6202,7 @@ CLI helper class
     * [._updateGitConfigUser()](#Init._updateGitConfigUser) ⇒ <code>void</code>
     * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
     * [.initProject(properties, credentialName)](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.joinProject()](#Init.joinProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._initMarkets()](#Init._initMarkets)
     * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -6301,6 +6326,13 @@ Creates template file for properties.json
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
 
+<a name="Init.joinProject"></a>
+
+### Init.joinProject() ⇒ <code>Promise.&lt;void&gt;</code>
+Creates template file for properties.json
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
 <a name="Init._initMarkets"></a>
 
 ### Init.\_initMarkets()
@@ -6392,6 +6424,7 @@ CLI helper class
     * [._updateGitConfigUser()](#Init._updateGitConfigUser) ⇒ <code>void</code>
     * [._getGitConfigUser()](#Init._getGitConfigUser) ⇒ <code>Promise.&lt;{&#x27;user.name&#x27;: string, &#x27;user.email&#x27;: string}&gt;</code>
     * [.initProject(properties, credentialName)](#Init.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.joinProject()](#Init.joinProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._initMarkets()](#Init._initMarkets)
     * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -6515,6 +6548,13 @@ Creates template file for properties.json
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | credentialName | <code>string</code> | identifying name of the installed package / project |
 
+<a name="Init.joinProject"></a>
+
+### Init.joinProject() ⇒ <code>Promise.&lt;void&gt;</code>
+Creates template file for properties.json
+
+**Kind**: static method of [<code>Init</code>](#Init)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
 <a name="Init._initMarkets"></a>
 
 ### Init.\_initMarkets()
