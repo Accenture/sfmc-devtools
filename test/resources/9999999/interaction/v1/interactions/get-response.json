@@ -15,7 +15,7 @@
             "key": "testExisting_interaction",
             "name": "testExisting_interaction",
             "lastPublishedDate": "2017-04-12T08:07:48",
-            "description": "",
+            "description": "bla bla",
             "version": 1,
             "workflowApiVersion": 1,
             "createdDate": "2017-04-12T05:38:05.837",
@@ -288,7 +288,7 @@
             "metaData": {},
             "executionMode": "Production",
             "categoryId": 6298,
-            "status": "Published",
+            "status": "Draft",
             "definitionId": "233d4413-922c-4568-85a5-e5cc77efc3be",
             "scheduledStatus": "Draft"
         }
