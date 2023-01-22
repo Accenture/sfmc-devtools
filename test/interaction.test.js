@@ -39,4 +39,42 @@ describe('interaction', () => {
             return;
         });
     });
+    describe('Deploy ================', () => {
+        beforeEach(() => {
+            testUtils.mockSetup(true);
+        });
+        it('Should create & upsert a interaction', async () => {
+            // WHEN
+            await handler.deploy('testInstance/testBU', ['interaction']);
+            // THEN
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.interaction ? Object.keys(result.interaction).length : 0,
+                2,
+                'two interactions expected'
+            );
+            // confirm created item
+            assert.deepEqual(
+                await testUtils.getActualJson('testNew_interaction', 'interaction'),
+                await testUtils.getExpectedJson('9999999', 'interaction', 'post'),
+                'returned JSON was not equal expected for insert interaction'
+            );
+
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_interaction', 'interaction'),
+                await testUtils.getExpectedJson('9999999', 'interaction', 'put'), // watch out - interaction api wants put instead of patch for updates
+                'returned JSON was not equal expected for update interaction'
+            );
+
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                7,
+                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
 });

@@ -1,8 +1,9 @@
 {
-    "key": "testExisting_interaction",
-    "name": "testExisting_interaction",
+    "id": "233d4413-922c-4568-85a5-e5cc77efc3be",
+    "key": "testNew_interaction",
+    "name": "testNew_interaction",
     "lastPublishedDate": "2017-04-12T08:07:48",
-    "description": "bla bla",
+    "description": "created on deploy",
     "version": 1,
     "workflowApiVersion": 1,
     "createdDate": "2017-04-12T05:38:05.837",
@@ -221,6 +222,7 @@
     ],
     "triggers": [
         {
+            "id": "a7f8cd93-e0a6-40a5-8557-5bd6fa76c0ea",
             "key": "TRIGGER",
             "name": "test_TESTDataentry",
             "description": "",
@@ -250,6 +252,18 @@
     "goals": [],
     "exits": [],
     "notifiers": [],
+    "stats": {
+        "currentPopulation": 5848,
+        "cumulativePopulation": 3019,
+        "metGoal": 0,
+        "metExitCriteria": 0,
+        "goalPerformance": 0
+    },
+    "healthStats": {
+        "currentlyInCount": 0,
+        "delayedContactCount": 0,
+        "delayedMinuteInterval": 60
+    },
     "entryMode": "OnceAndDone",
     "definitionType": "Multistep",
     "channel": "",
@@ -259,8 +273,8 @@
     },
     "metaData": {},
     "executionMode": "Production",
+    "categoryId": 6298,
     "status": "Draft",
     "definitionId": "233d4413-922c-4568-85a5-e5cc77efc3be",
-    "scheduledStatus": "Draft",
-    "r__folder_Path": "my journeys"
+    "scheduledStatus": "Draft"
 }

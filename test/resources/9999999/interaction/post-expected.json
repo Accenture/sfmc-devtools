@@ -1,8 +1,8 @@
 {
-    "key": "testExisting_interaction",
-    "name": "testExisting_interaction",
+    "key": "testNew_interaction",
+    "name": "testNew_interaction",
     "lastPublishedDate": "2017-04-12T08:07:48",
-    "description": "bla bla",
+    "description": "created on deploy",
     "version": 1,
     "workflowApiVersion": 1,
     "createdDate": "2017-04-12T05:38:05.837",
