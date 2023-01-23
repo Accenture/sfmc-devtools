@@ -476,7 +476,7 @@ main class
     * [.initProject([credentialsName])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.deleteByKey(businessUnit, type, customerKey, [version])](#Mcdev.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.deleteByKey(businessUnit, type, customerKey)](#Mcdev.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.badKeys(businessUnit)](#Mcdev.badKeys) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.retrieveAsTemplate(businessUnit, selectedType, name, market)](#Mcdev.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
     * [.buildTemplate(businessUnit, selectedType, keyArr, market)](#Mcdev.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
@@ -607,7 +607,7 @@ Creates docs for supported metadata types in Markdown and/or HTML format
 
 <a name="Mcdev.deleteByKey"></a>
 
-### Mcdev.deleteByKey(businessUnit, type, customerKey, [version]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.deleteByKey(businessUnit, type, customerKey) ⇒ <code>Promise.&lt;void&gt;</code>
 Creates docs for supported metadata types in Markdown and/or HTML format
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -618,7 +618,6 @@ Creates docs for supported metadata types in Markdown and/or HTML format
 | businessUnit | <code>string</code> | references credentials from properties.json |
 | type | <code>string</code> | supported metadata type |
 | customerKey | <code>string</code> | Identifier of metadata |
-| [version] | <code>number</code> | optional version of metadata |
 
 <a name="Mcdev.badKeys"></a>
 
@@ -2929,7 +2928,7 @@ definitionId: A unique UUID provided by Salesforce Marketing Cloud. Each version
 
 * [Interaction](#Interaction) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [___], [key])](#Interaction.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.deleteByKey(buObject, key, version)](#Interaction.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deleteByKey(buObject, key)](#Interaction.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.update(metadata)](#Interaction.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#Interaction.create) ⇒ <code>Promise</code>
     * [.postRetrieveTasks(metadata)](#Interaction.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -2954,7 +2953,7 @@ Retrieves Metadata of Interaction
 
 <a name="Interaction.deleteByKey"></a>
 
-### Interaction.deleteByKey(buObject, key, version) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Interaction.deleteByKey(buObject, key) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>Interaction</code>](#Interaction)  
@@ -2964,7 +2963,6 @@ Delete a metadata item from the specified business unit
 | --- | --- | --- |
 | buObject | <code>TYPE.BuObject</code> | references credentials |
 | key | <code>string</code> | Identifier of item |
-| version | <code>number</code> | required version of metadata |
 
 <a name="Interaction.update"></a>
 
