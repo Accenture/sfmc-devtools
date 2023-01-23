@@ -234,7 +234,6 @@
             "metaData": {
                 "scheduleState": "No Schedule",
                 "sourceInteractionId": "00000000-0000-0000-0000-000000000000",
-                "eventDefinitionId": "33b4dbc5-4b58-4a54-ab57-24388f1eefe4",
                 "eventDefinitionKey": "APIEvent-60130566-e2fe-eb29-4140-15c27093a80b",
                 "chainType": "None",
                 "configurationRequired": false,
@@ -256,7 +255,6 @@
     },
     "metaData": {},
     "executionMode": "Production",
-    "definitionId": "233d4413-922c-4568-85a5-e5cc77efc3be",
     "scheduledStatus": "Draft",
     "r__folder_Path": "my journeys"
 }
