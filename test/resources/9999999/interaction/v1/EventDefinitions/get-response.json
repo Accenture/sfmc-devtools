@@ -5,6 +5,7 @@
     "links": {},
     "items": [
         {
+            "id": "33b4dbc5-4b58-4a54-ab57-24388f1eefe4",
             "type": "APIEvent",
             "name": "TestContact_Event",
             "description": "",
