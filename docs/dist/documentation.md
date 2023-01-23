@@ -1292,7 +1292,7 @@ Automation MetadataType
     * [.postDeployTasks(metadata, originalMetadata)](#Automation.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.setFolderPath(metadata)](#Automation.setFolderPath)
     * [.setFolderId(metadata)](#Automation.setFolderId)
-    * [.parseMetadata(metadata)](#Automation.parseMetadata) ⇒ <code>TYPE.AutomationItem</code>
+    * [.parseMetadata(metadata)](#Automation.parseMetadata) ⇒ <code>TYPE.AutomationItem</code> \| <code>void</code>
     * [._buildSchedule(scheduleObject)](#Automation._buildSchedule) ⇒ <code>TYPE.AutomationScheduleSoap</code>
     * [._calcTime(offsetServer, dateInput, [offsetInput])](#Automation._calcTime) ⇒ <code>string</code>
     * [.document(buObject, [metadata])](#Automation.document) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -1455,11 +1455,11 @@ automation-specific script that retrieves the folder ID from cache and updates t
 
 <a name="Automation.parseMetadata"></a>
 
-### Automation.parseMetadata(metadata) ⇒ <code>TYPE.AutomationItem</code>
+### Automation.parseMetadata(metadata) ⇒ <code>TYPE.AutomationItem</code> \| <code>void</code>
 parses retrieved Metadata before saving
 
 **Kind**: static method of [<code>Automation</code>](#Automation)  
-**Returns**: <code>TYPE.AutomationItem</code> - parsed item  
+**Returns**: <code>TYPE.AutomationItem</code> \| <code>void</code> - parsed item  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4045,7 +4045,7 @@ Query MetadataType
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.parseMetadata(metadata)](#Query.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.getFilesToCommit(keyArr)](#Query.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.checkForErrors(ex)](#Query.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.checkForErrors(ex)](#Query.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
 
 <a name="Query.retrieve"></a>
 
@@ -4212,11 +4212,11 @@ additionally, the documentation for dataExtension and automation should be retur
 
 <a name="Query.checkForErrors"></a>
 
-### Query.checkForErrors(ex) ⇒ <code>Array.&lt;string&gt;</code>
+### Query.checkForErrors(ex) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
 Standardizes a check for multiple messages but adds query specific filters to error texts
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>Array.&lt;string&gt;</code> - formatted Error Message  
+**Returns**: <code>Array.&lt;string&gt;</code> \| <code>void</code> - formatted Error Message  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5747,10 +5747,10 @@ File extends fs-extra. It adds logger and util methods for file handling
     * [.writePrettyToFile(directory, filename, filetype, content, [templateVariables])](#File.writePrettyToFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._beautify_prettier(directory, filename, filetype, content)](#File._beautify_prettier) ⇒ <code>string</code>
     * [.writeToFile(directory, filename, filetype, content, [encoding])](#File.writeToFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.readJSONFile(directory, filename, sync, cleanPath)](#File.readJSONFile) ⇒ <code>Promise</code> \| <code>object</code>
-    * [.readFilteredFilename(directory, filename, filetype, [encoding])](#File.readFilteredFilename) ⇒ <code>Promise.&lt;string&gt;</code>
+    * [.readJSONFile(directory, filename, sync, cleanPath)](#File.readJSONFile) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>object</code> \| <code>void</code>
+    * [.readFilteredFilename(directory, filename, filetype, [encoding])](#File.readFilteredFilename) ⇒ <code>Promise.&lt;string&gt;</code> \| <code>void</code>
     * [.readDirectories(directory, depth, [includeStem], [_stemLength])](#File.readDirectories) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-    * [.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength])](#File.readDirectoriesSync) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength])](#File.readDirectoriesSync) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
     * [.saveConfigFile(properties)](#File.saveConfigFile) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initPrettier([filetype])](#File.initPrettier) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
@@ -5880,11 +5880,11 @@ Saves text content to a file in the local file system. Will create the parent di
 
 <a name="File.readJSONFile"></a>
 
-### File.readJSONFile(directory, filename, sync, cleanPath) ⇒ <code>Promise</code> \| <code>object</code>
+### File.readJSONFile(directory, filename, sync, cleanPath) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>object</code> \| <code>void</code>
 Saves json content to a file in the local file system. Will create the parent directory if it does not exist
 
 **Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>Promise</code> \| <code>object</code> - Promise or JSON object depending on if async or not  
+**Returns**: <code>Promise.&lt;object&gt;</code> \| <code>object</code> \| <code>void</code> - Promise or JSON object depending on if async or not; void on error  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5895,11 +5895,11 @@ Saves json content to a file in the local file system. Will create the parent di
 
 <a name="File.readFilteredFilename"></a>
 
-### File.readFilteredFilename(directory, filename, filetype, [encoding]) ⇒ <code>Promise.&lt;string&gt;</code>
+### File.readFilteredFilename(directory, filename, filetype, [encoding]) ⇒ <code>Promise.&lt;string&gt;</code> \| <code>void</code>
 reads file from local file system.
 
 **Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>Promise.&lt;string&gt;</code> - file contents  
+**Returns**: <code>Promise.&lt;string&gt;</code> \| <code>void</code> - file contents; void on error  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -5930,13 +5930,13 @@ of file paths to be iterated over
 ```
 <a name="File.readDirectoriesSync"></a>
 
-### File.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength]) ⇒ <code>Array.&lt;string&gt;</code>
+### File.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength]) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
 reads directories to a specific depth returning an array
 of file paths to be iterated over using sync api (required in constructors)
 TODO - merge with readDirectories. so far the logic is really different
 
 **Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>Array.&lt;string&gt;</code> - array of fully defined file paths  
+**Returns**: <code>Array.&lt;string&gt;</code> \| <code>void</code> - array of fully defined file paths; void on error  
 
 | Param | Type | Description |
 | --- | --- | --- |
