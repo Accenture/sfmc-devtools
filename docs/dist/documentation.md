@@ -3179,7 +3179,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType.buildDefinition) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.checkForErrors(ex)](#MetadataType.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code>
     * [.document([buObject], [metadata], [isDeploy])](#MetadataType.document) ⇒ <code>void</code>
-    * [.deleteByKey(buObject, customerKey, [version])](#MetadataType.deleteByKey) ⇒ <code>boolean</code>
+    * [.deleteByKey(buObject, customerKey)](#MetadataType.deleteByKey) ⇒ <code>boolean</code>
     * [.postDeleteTasks(buObject, customerKey)](#MetadataType.postDeleteTasks) ⇒ <code>void</code>
     * [.deleteByKeySOAP(buObject, customerKey, [handleOutside])](#MetadataType.deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.deleteByKeyREST(buObject, url, key, [handleOutside])](#MetadataType.deleteByKeyREST) ⇒ <code>boolean</code>
@@ -3807,7 +3807,7 @@ Gets metadata cache with limited fields and does not store value to disk
 
 <a name="MetadataType.deleteByKey"></a>
 
-### MetadataType.deleteByKey(buObject, customerKey, [version]) ⇒ <code>boolean</code>
+### MetadataType.deleteByKey(buObject, customerKey) ⇒ <code>boolean</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3817,7 +3817,6 @@ Delete a metadata item from the specified business unit
 | --- | --- | --- |
 | buObject | <code>TYPE.BuObject</code> | references credentials |
 | customerKey | <code>string</code> | Identifier of data extension |
-| [version] | <code>number</code> | optional version of metadata |
 
 <a name="MetadataType.postDeleteTasks"></a>
 
