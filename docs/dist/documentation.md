@@ -845,8 +845,8 @@ FileTransfer MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Asset](#Asset) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, _, __, [selectedSubType], [key])](#Asset.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
-    * [.retrieveForCache(_, [selectedSubType])](#Asset.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
+    * [.retrieve(retrieveDir, _, __, [subTypeArr], [key])](#Asset.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
+    * [.retrieveForCache(_, __, [subTypeArr])](#Asset.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType])](#Asset.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetItem, type: string}&gt;</code>
     * [.create(metadata)](#Asset.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#Asset.update) ⇒ <code>Promise</code>
@@ -873,7 +873,7 @@ FileTransfer MetadataType
 
 <a name="Asset.retrieve"></a>
 
-### Asset.retrieve(retrieveDir, _, __, [selectedSubType], [key]) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
+### Asset.retrieve(retrieveDir, _, __, [subTypeArr], [key]) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
 Retrieves Metadata of Asset
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -884,12 +884,12 @@ Retrieves Metadata of Asset
 | retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | _ | <code>void</code> | - |
 | __ | <code>void</code> | - |
-| [selectedSubType] | <code>TYPE.AssetSubType</code> | optionally limit to a single subtype |
+| [subTypeArr] | <code>Array.&lt;TYPE.AssetSubType&gt;</code> | optionally limit to a single subtype |
 | [key] | <code>string</code> | customer key |
 
 <a name="Asset.retrieveForCache"></a>
 
-### Asset.retrieveForCache(_, [selectedSubType]) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
+### Asset.retrieveForCache(_, __, [subTypeArr]) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
 Retrieves asset metadata for caching
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -897,8 +897,9 @@ Retrieves asset metadata for caching
 
 | Param | Type | Description |
 | --- | --- | --- |
-| _ | <code>void</code> | - |
-| [selectedSubType] | <code>string</code> | optionally limit to a single subtype |
+| _ | <code>void</code> | unused |
+| __ | <code>void</code> | unused |
+| [subTypeArr] | <code>Array.&lt;string&gt;</code> | optionally limit to a single subtype |
 
 <a name="Asset.retrieveAsTemplate"></a>
 
@@ -1291,7 +1292,7 @@ Automation MetadataType
     * [.postDeployTasks(metadata, originalMetadata)](#Automation.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.setFolderPath(metadata)](#Automation.setFolderPath)
     * [.setFolderId(metadata)](#Automation.setFolderId)
-    * [.parseMetadata(metadata)](#Automation.parseMetadata) ⇒ <code>TYPE.AutomationItem</code>
+    * [.parseMetadata(metadata)](#Automation.parseMetadata) ⇒ <code>TYPE.AutomationItem</code> \| <code>void</code>
     * [._buildSchedule(scheduleObject)](#Automation._buildSchedule) ⇒ <code>TYPE.AutomationScheduleSoap</code>
     * [._calcTime(offsetServer, dateInput, [offsetInput])](#Automation._calcTime) ⇒ <code>string</code>
     * [.document(buObject, [metadata])](#Automation.document) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -1454,11 +1455,11 @@ automation-specific script that retrieves the folder ID from cache and updates t
 
 <a name="Automation.parseMetadata"></a>
 
-### Automation.parseMetadata(metadata) ⇒ <code>TYPE.AutomationItem</code>
+### Automation.parseMetadata(metadata) ⇒ <code>TYPE.AutomationItem</code> \| <code>void</code>
 parses retrieved Metadata before saving
 
 **Kind**: static method of [<code>Automation</code>](#Automation)  
-**Returns**: <code>TYPE.AutomationItem</code> - parsed item  
+**Returns**: <code>TYPE.AutomationItem</code> \| <code>void</code> - parsed item  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2626,8 +2627,8 @@ Folder MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Folder](#Folder) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [additionalFields], buObject, [___], [key], [contentTypeList])](#Folder.retrieve) ⇒ <code>Promise</code>
-    * [.retrieveForCache(buObject, [contentTypeList])](#Folder.retrieveForCache) ⇒ <code>Promise</code>
+    * [.retrieve(retrieveDir, [additionalFields], buObject, [subTypeArr], [key])](#Folder.retrieve) ⇒ <code>Promise</code>
+    * [.retrieveForCache(buObject, _, [subTypeArr])](#Folder.retrieveForCache) ⇒ <code>Promise</code>
     * [.upsert(metadata)](#Folder.upsert) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.create(metadataEntry)](#Folder.create) ⇒ <code>Promise</code>
     * [.update(metadataEntry)](#Folder.update) ⇒ <code>Promise</code>
@@ -2639,7 +2640,7 @@ Folder MetadataType
 
 <a name="Folder.retrieve"></a>
 
-### Folder.retrieve(retrieveDir, [additionalFields], buObject, [___], [key], [contentTypeList]) ⇒ <code>Promise</code>
+### Folder.retrieve(retrieveDir, [additionalFields], buObject, [subTypeArr], [key]) ⇒ <code>Promise</code>
 Retrieves metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: static method of [<code>Folder</code>](#Folder)  
@@ -2650,13 +2651,12 @@ Retrieves metadata of metadata type into local filesystem. executes callback wit
 | retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
-| [___] | <code>void</code> | unused parameter |
+| [subTypeArr] | <code>Array.&lt;string&gt;</code> | content type of folder |
 | [key] | <code>string</code> | customer key of single item to retrieve |
-| [contentTypeList] | <code>Array.&lt;string&gt;</code> | content type of folder |
 
 <a name="Folder.retrieveForCache"></a>
 
-### Folder.retrieveForCache(buObject, [contentTypeList]) ⇒ <code>Promise</code>
+### Folder.retrieveForCache(buObject, _, [subTypeArr]) ⇒ <code>Promise</code>
 Retrieves folder metadata for caching
 
 **Kind**: static method of [<code>Folder</code>](#Folder)  
@@ -2665,7 +2665,8 @@ Retrieves folder metadata for caching
 | Param | Type | Description |
 | --- | --- | --- |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
-| [contentTypeList] | <code>Array.&lt;string&gt;</code> | content type of folder |
+| _ | <code>void</code> | unused |
+| [subTypeArr] | <code>Array.&lt;string&gt;</code> | content type of folder |
 
 <a name="Folder.upsert"></a>
 
@@ -3149,9 +3150,9 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setFolderPath(metadata)](#MetadataType.setFolderPath)
     * [.setFolderId(metadata)](#MetadataType.setFolderId)
-    * [.retrieve(retrieveDir, [additionalFields], buObject, [subType], [key])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveChangelog([buObject], [additionalFields], [subType])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache(buObject, [subType])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieve(retrieveDir, [additionalFields], buObject, [subTypeArr], [key])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveChangelog([buObject], [additionalFields], [subTypeArr])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache(buObject, [additionalFields], [subTypeArr])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.buildTemplate(retrieveDir, templateDir, key, templateVariables)](#MetadataType.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.preDeployTasks(metadata, deployDir, buObject)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
@@ -3301,7 +3302,7 @@ generic script that retrieves the folder ID from cache and updates the given met
 
 <a name="MetadataType.retrieve"></a>
 
-### MetadataType.retrieve(retrieveDir, [additionalFields], buObject, [subType], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MetadataType.retrieve(retrieveDir, [additionalFields], buObject, [subTypeArr], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Gets metadata from Marketing Cloud
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3312,12 +3313,12 @@ Gets metadata from Marketing Cloud
 | retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
-| [subType] | <code>string</code> | optionally limit to a single subtype |
+| [subTypeArr] | <code>Array.&lt;string&gt;</code> | optionally limit to a single subtype |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
 <a name="MetadataType.retrieveChangelog"></a>
 
-### MetadataType.retrieveChangelog([buObject], [additionalFields], [subType]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MetadataType.retrieveChangelog([buObject], [additionalFields], [subTypeArr]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Gets metadata from Marketing Cloud
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3327,11 +3328,11 @@ Gets metadata from Marketing Cloud
 | --- | --- | --- |
 | [buObject] | <code>TYPE.BuObject</code> | properties for auth |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
-| [subType] | <code>string</code> | optionally limit to a single subtype |
+| [subTypeArr] | <code>Array.&lt;string&gt;</code> | optionally limit to a single subtype |
 
 <a name="MetadataType.retrieveForCache"></a>
 
-### MetadataType.retrieveForCache(buObject, [subType]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MetadataType.retrieveForCache(buObject, [additionalFields], [subTypeArr]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3340,7 +3341,8 @@ Gets metadata cache with limited fields and does not store value to disk
 | Param | Type | Description |
 | --- | --- | --- |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
-| [subType] | <code>string</code> | optionally limit to a single subtype |
+| [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
+| [subTypeArr] | <code>Array.&lt;string&gt;</code> | optionally limit to a single subtype |
 
 <a name="MetadataType.retrieveAsTemplate"></a>
 
@@ -4043,7 +4045,7 @@ Query MetadataType
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.parseMetadata(metadata)](#Query.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.getFilesToCommit(keyArr)](#Query.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.checkForErrors(ex)](#Query.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.checkForErrors(ex)](#Query.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
 
 <a name="Query.retrieve"></a>
 
@@ -4210,11 +4212,11 @@ additionally, the documentation for dataExtension and automation should be retur
 
 <a name="Query.checkForErrors"></a>
 
-### Query.checkForErrors(ex) ⇒ <code>Array.&lt;string&gt;</code>
+### Query.checkForErrors(ex) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
 Standardizes a check for multiple messages but adds query specific filters to error texts
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>Array.&lt;string&gt;</code> - formatted Error Message  
+**Returns**: <code>Array.&lt;string&gt;</code> \| <code>void</code> - formatted Error Message  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5118,11 +5120,13 @@ CLI entry for SFMC DevTools
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
-    * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
     * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
+    * [.logSubtypes(subTypeArr)](#Util.logSubtypes) ⇒ <code>void</code>
+    * [.getKeysString(keyArr, [isId])](#Util.getKeysString) ⇒ <code>string</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -5293,11 +5297,11 @@ get key of an object based on the first matching value
 
 <a name="Util.getMetadataHierachy"></a>
 
-### Util.getMetadataHierachy(metadataTypes) ⇒ <code>Array.&lt;string&gt;</code>
+### Util.getMetadataHierachy(metadataTypes) ⇒ <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
 Returns Order in which metadata needs to be retrieved/deployed
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Array.&lt;string&gt;</code> - retrieve/deploy order as array  
+**Returns**: <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code> - retrieve/deploy order as array  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5357,6 +5361,30 @@ configures what is displayed in the console
 | [argv.silent] | <code>boolean</code> | only errors printed to CLI |
 | [argv.verbose] | <code>boolean</code> | chatty user CLI output |
 | [argv.debug] | <code>boolean</code> | enables developer output & features |
+
+<a name="Util.logSubtypes"></a>
+
+### Util.logSubtypes(subTypeArr) ⇒ <code>void</code>
+helper to print the subtypes we filtered by
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| subTypeArr | <code>Array.&lt;string&gt;</code> | list of subtypes to be printed |
+
+<a name="Util.getKeysString"></a>
+
+### Util.getKeysString(keyArr, [isId]) ⇒ <code>string</code>
+helper to print the subtypes we filtered by
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>string</code> - string to be appended to log message  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| keyArr | <code>Array.&lt;string&gt;</code> \| <code>string</code> | list of subtypes to be printed |
+| [isId] | <code>boolean</code> | optional flag to indicate if key is an id |
 
 <a name="MetadataTypeDefinitions"></a>
 
@@ -5719,10 +5747,10 @@ File extends fs-extra. It adds logger and util methods for file handling
     * [.writePrettyToFile(directory, filename, filetype, content, [templateVariables])](#File.writePrettyToFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._beautify_prettier(directory, filename, filetype, content)](#File._beautify_prettier) ⇒ <code>string</code>
     * [.writeToFile(directory, filename, filetype, content, [encoding])](#File.writeToFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.readJSONFile(directory, filename, sync, cleanPath)](#File.readJSONFile) ⇒ <code>Promise</code> \| <code>object</code>
-    * [.readFilteredFilename(directory, filename, filetype, [encoding])](#File.readFilteredFilename) ⇒ <code>Promise.&lt;string&gt;</code>
+    * [.readJSONFile(directory, filename, sync, cleanPath)](#File.readJSONFile) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>object</code> \| <code>void</code>
+    * [.readFilteredFilename(directory, filename, filetype, [encoding])](#File.readFilteredFilename) ⇒ <code>Promise.&lt;string&gt;</code> \| <code>void</code>
     * [.readDirectories(directory, depth, [includeStem], [_stemLength])](#File.readDirectories) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-    * [.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength])](#File.readDirectoriesSync) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength])](#File.readDirectoriesSync) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
     * [.saveConfigFile(properties)](#File.saveConfigFile) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.initPrettier([filetype])](#File.initPrettier) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
@@ -5852,11 +5880,11 @@ Saves text content to a file in the local file system. Will create the parent di
 
 <a name="File.readJSONFile"></a>
 
-### File.readJSONFile(directory, filename, sync, cleanPath) ⇒ <code>Promise</code> \| <code>object</code>
+### File.readJSONFile(directory, filename, sync, cleanPath) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>object</code> \| <code>void</code>
 Saves json content to a file in the local file system. Will create the parent directory if it does not exist
 
 **Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>Promise</code> \| <code>object</code> - Promise or JSON object depending on if async or not  
+**Returns**: <code>Promise.&lt;object&gt;</code> \| <code>object</code> \| <code>void</code> - Promise or JSON object depending on if async or not; void on error  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5867,11 +5895,11 @@ Saves json content to a file in the local file system. Will create the parent di
 
 <a name="File.readFilteredFilename"></a>
 
-### File.readFilteredFilename(directory, filename, filetype, [encoding]) ⇒ <code>Promise.&lt;string&gt;</code>
+### File.readFilteredFilename(directory, filename, filetype, [encoding]) ⇒ <code>Promise.&lt;string&gt;</code> \| <code>void</code>
 reads file from local file system.
 
 **Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>Promise.&lt;string&gt;</code> - file contents  
+**Returns**: <code>Promise.&lt;string&gt;</code> \| <code>void</code> - file contents; void on error  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -5902,13 +5930,13 @@ of file paths to be iterated over
 ```
 <a name="File.readDirectoriesSync"></a>
 
-### File.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength]) ⇒ <code>Array.&lt;string&gt;</code>
+### File.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength]) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
 reads directories to a specific depth returning an array
 of file paths to be iterated over using sync api (required in constructors)
 TODO - merge with readDirectories. so far the logic is really different
 
 **Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>Array.&lt;string&gt;</code> - array of fully defined file paths  
+**Returns**: <code>Array.&lt;string&gt;</code> \| <code>void</code> - array of fully defined file paths; void on error  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6824,11 +6852,13 @@ Util that contains logger and simple util methods
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
-    * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
     * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
+    * [.logSubtypes(subTypeArr)](#Util.logSubtypes) ⇒ <code>void</code>
+    * [.getKeysString(keyArr, [isId])](#Util.getKeysString) ⇒ <code>string</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -6999,11 +7029,11 @@ get key of an object based on the first matching value
 
 <a name="Util.getMetadataHierachy"></a>
 
-### Util.getMetadataHierachy(metadataTypes) ⇒ <code>Array.&lt;string&gt;</code>
+### Util.getMetadataHierachy(metadataTypes) ⇒ <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
 Returns Order in which metadata needs to be retrieved/deployed
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Array.&lt;string&gt;</code> - retrieve/deploy order as array  
+**Returns**: <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code> - retrieve/deploy order as array  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7063,6 +7093,30 @@ configures what is displayed in the console
 | [argv.silent] | <code>boolean</code> | only errors printed to CLI |
 | [argv.verbose] | <code>boolean</code> | chatty user CLI output |
 | [argv.debug] | <code>boolean</code> | enables developer output & features |
+
+<a name="Util.logSubtypes"></a>
+
+### Util.logSubtypes(subTypeArr) ⇒ <code>void</code>
+helper to print the subtypes we filtered by
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| subTypeArr | <code>Array.&lt;string&gt;</code> | list of subtypes to be printed |
+
+<a name="Util.getKeysString"></a>
+
+### Util.getKeysString(keyArr, [isId]) ⇒ <code>string</code>
+helper to print the subtypes we filtered by
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>string</code> - string to be appended to log message  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| keyArr | <code>Array.&lt;string&gt;</code> \| <code>string</code> | list of subtypes to be printed |
+| [isId] | <code>boolean</code> | optional flag to indicate if key is an id |
 
 <a name="csvToArray"></a>
 
