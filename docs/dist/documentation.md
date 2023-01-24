@@ -5135,6 +5135,7 @@ CLI entry for SFMC DevTools
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
     * [.logSubtypes(subTypeArr)](#Util.logSubtypes) ⇒ <code>void</code>
     * [.getKeysString(keyArr, [isId])](#Util.getKeysString) ⇒ <code>string</code>
+    * [.sleep(ms)](#Util.sleep) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -5393,6 +5394,18 @@ helper to print the subtypes we filtered by
 | --- | --- | --- |
 | keyArr | <code>Array.&lt;string&gt;</code> \| <code>string</code> | list of subtypes to be printed |
 | [isId] | <code>boolean</code> | optional flag to indicate if key is an id |
+
+<a name="Util.sleep"></a>
+
+### Util.sleep(ms) ⇒ <code>Promise.&lt;void&gt;</code>
+pause execution of code; useful when multiple server calls are dependent on each other and might not be executed right away
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - - promise to wait for  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ms | <code>number</code> | time in miliseconds to wait |
 
 <a name="MetadataTypeDefinitions"></a>
 
@@ -6899,6 +6912,7 @@ Util that contains logger and simple util methods
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
     * [.logSubtypes(subTypeArr)](#Util.logSubtypes) ⇒ <code>void</code>
     * [.getKeysString(keyArr, [isId])](#Util.getKeysString) ⇒ <code>string</code>
+    * [.sleep(ms)](#Util.sleep) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -7157,6 +7171,18 @@ helper to print the subtypes we filtered by
 | --- | --- | --- |
 | keyArr | <code>Array.&lt;string&gt;</code> \| <code>string</code> | list of subtypes to be printed |
 | [isId] | <code>boolean</code> | optional flag to indicate if key is an id |
+
+<a name="Util.sleep"></a>
+
+### Util.sleep(ms) ⇒ <code>Promise.&lt;void&gt;</code>
+pause execution of code; useful when multiple server calls are dependent on each other and might not be executed right away
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - - promise to wait for  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ms | <code>number</code> | time in miliseconds to wait |
 
 <a name="csvToArray"></a>
 
