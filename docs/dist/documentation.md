@@ -2368,6 +2368,7 @@ EventDefinition MetadataType
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#EventDefinition.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.postRetrieveTasks(eventDef)](#EventDefinition.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.deleteByKey(key)](#EventDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deploy(metadata, deployDir, retrieveDir, buObject)](#EventDefinition.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.create(EventDefinition)](#EventDefinition.create) ⇒ <code>Promise</code>
     * [.update(metadataEntry)](#EventDefinition.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#EventDefinition.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -2435,6 +2436,21 @@ Delete a metadata item from the specified business unit
 | Param | Type | Description |
 | --- | --- | --- |
 | key | <code>string</code> | Identifier of item |
+
+<a name="EventDefinition.deploy"></a>
+
+### EventDefinition.deploy(metadata, deployDir, retrieveDir, buObject) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+Deploys metadata - merely kept here to be able to print [logBeta](#Util.logBeta) once per deploy
+
+**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code> - Promise of keyField => metadata map  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
+| deployDir | <code>string</code> | directory where deploy metadata are saved |
+| retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
+| buObject | <code>TYPE.BuObject</code> | properties for auth |
 
 <a name="EventDefinition.create"></a>
 
@@ -2947,6 +2963,7 @@ definitionId: A unique UUID provided by Salesforce Marketing Cloud. Each version
 * [Interaction](#Interaction) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [___], [key])](#Interaction.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.deleteByKey(key)](#Interaction.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deploy(metadata, deployDir, retrieveDir, buObject)](#Interaction.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.update(metadata)](#Interaction.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#Interaction.create) ⇒ <code>Promise</code>
     * [.postRetrieveTasks(metadata)](#Interaction.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -2980,6 +2997,21 @@ Delete a metadata item from the specified business unit
 | Param | Type | Description |
 | --- | --- | --- |
 | key | <code>string</code> | Identifier of item |
+
+<a name="Interaction.deploy"></a>
+
+### Interaction.deploy(metadata, deployDir, retrieveDir, buObject) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+Deploys metadata - merely kept here to be able to print [logBeta](#Util.logBeta) once per deploy
+
+**Kind**: static method of [<code>Interaction</code>](#Interaction)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code> - Promise of keyField => metadata map  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
+| deployDir | <code>string</code> | directory where deploy metadata are saved |
+| retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
+| buObject | <code>TYPE.BuObject</code> | properties for auth |
 
 <a name="Interaction.update"></a>
 
