@@ -5133,6 +5133,7 @@ CLI entry for SFMC DevTools
     * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
+    * [.logBeta(type)](#Util.logBeta)
     * [.logSubtypes(subTypeArr)](#Util.logSubtypes) ⇒ <code>void</code>
     * [.getKeysString(keyArr, [isId])](#Util.getKeysString) ⇒ <code>string</code>
 
@@ -5369,6 +5370,17 @@ configures what is displayed in the console
 | [argv.silent] | <code>boolean</code> | only errors printed to CLI |
 | [argv.verbose] | <code>boolean</code> | chatty user CLI output |
 | [argv.debug] | <code>boolean</code> | enables developer output & features |
+
+<a name="Util.logBeta"></a>
+
+### Util.logBeta(type)
+outputs a warning that the given type is still in beta
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| type | <code>string</code> | api name of the type thats in beta |
 
 <a name="Util.logSubtypes"></a>
 
@@ -6897,6 +6909,7 @@ Util that contains logger and simple util methods
     * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
+    * [.logBeta(type)](#Util.logBeta)
     * [.logSubtypes(subTypeArr)](#Util.logSubtypes) ⇒ <code>void</code>
     * [.getKeysString(keyArr, [isId])](#Util.getKeysString) ⇒ <code>string</code>
 
@@ -7133,6 +7146,17 @@ configures what is displayed in the console
 | [argv.silent] | <code>boolean</code> | only errors printed to CLI |
 | [argv.verbose] | <code>boolean</code> | chatty user CLI output |
 | [argv.debug] | <code>boolean</code> | enables developer output & features |
+
+<a name="Util.logBeta"></a>
+
+### Util.logBeta(type)
+outputs a warning that the given type is still in beta
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| type | <code>string</code> | api name of the type thats in beta |
 
 <a name="Util.logSubtypes"></a>
 
