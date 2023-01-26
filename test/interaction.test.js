@@ -33,8 +33,8 @@ describe('interaction', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                5,
-                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
+                7,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -71,8 +71,8 @@ describe('interaction', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                7,
-                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
+                9,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -114,8 +114,8 @@ describe('interaction', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                5,
-                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
+                7,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
