@@ -5166,6 +5166,7 @@ CLI entry for SFMC DevTools
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
     * [.logBeta(type)](#Util.logBeta)
+    * [.getGrayMsg(msg)](#Util.getGrayMsg) ⇒ <code>string</code>
     * [.logSubtypes(subTypeArr)](#Util.logSubtypes) ⇒ <code>void</code>
     * [.getKeysString(keyArr, [isId])](#Util.getKeysString) ⇒ <code>string</code>
 
@@ -5413,6 +5414,18 @@ outputs a warning that the given type is still in beta
 | Param | Type | Description |
 | --- | --- | --- |
 | type | <code>string</code> | api name of the type thats in beta |
+
+<a name="Util.getGrayMsg"></a>
+
+### Util.getGrayMsg(msg) ⇒ <code>string</code>
+helper that wraps a message in the correct color codes to have them printed gray
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>string</code> - gray msg  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| msg | <code>string</code> | log message that should be wrapped with color codes |
 
 <a name="Util.logSubtypes"></a>
 
@@ -6942,6 +6955,7 @@ Util that contains logger and simple util methods
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
     * [.logBeta(type)](#Util.logBeta)
+    * [.getGrayMsg(msg)](#Util.getGrayMsg) ⇒ <code>string</code>
     * [.logSubtypes(subTypeArr)](#Util.logSubtypes) ⇒ <code>void</code>
     * [.getKeysString(keyArr, [isId])](#Util.getKeysString) ⇒ <code>string</code>
 
@@ -7189,6 +7203,18 @@ outputs a warning that the given type is still in beta
 | Param | Type | Description |
 | --- | --- | --- |
 | type | <code>string</code> | api name of the type thats in beta |
+
+<a name="Util.getGrayMsg"></a>
+
+### Util.getGrayMsg(msg) ⇒ <code>string</code>
+helper that wraps a message in the correct color codes to have them printed gray
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>string</code> - gray msg  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| msg | <code>string</code> | log message that should be wrapped with color codes |
 
 <a name="Util.logSubtypes"></a>
 
