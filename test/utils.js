@@ -179,11 +179,20 @@ exports.getAPIHistory = () => apimock.history;
  *
  * @returns {object} of API history
  */
-exports.getAPIHistoryDebug = () => {
+function getAPIHistoryDebug() {
     const historyArr = Object.values(apimock.history)
         .flat()
         .map((item) => ({ url: item.url, data: item.data }));
     return historyArr;
+}
+exports.getAPIHistoryDebug = getAPIHistoryDebug;
+/**
+ * helper to return most important fields for each api call
+ *
+ * @returns {void} of API history
+ */
+exports.logAPIHistoryDebug = () => {
+    console.log(getAPIHistoryDebug()); // eslint-disable-line no-console
 };
 
 /**

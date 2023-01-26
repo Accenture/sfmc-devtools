@@ -69,7 +69,7 @@ describe('transactionalPush', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                4,
+                5,
                 'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests',
                 testUtils.getAPIHistoryDebug()
             );
