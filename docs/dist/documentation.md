@@ -737,8 +737,8 @@ MessageSendActivity MetadataType
     * [.retrieve(retrieveDir, _, buObject, [___], [key])](#AccountUser.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveChangelog(buObject)](#AccountUser.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.timeSinceDate(date)](#AccountUser.timeSinceDate) ⇒ <code>number</code>
-    * [.getBuName(buObject, id)](#AccountUser.getBuName) ⇒ <code>string</code>
-    * [.document(buObject, [metadata])](#AccountUser.document) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.getBuName(id)](#AccountUser.getBuName) ⇒ <code>string</code>
+    * [.document([metadata])](#AccountUser.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._generateDocMd(users, type, columnsToPrint)](#AccountUser._generateDocMd) ⇒ <code>string</code>
     * [.postRetrieveTasks(metadata)](#AccountUser.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.parseMetadata(metadata)](#AccountUser.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -783,7 +783,7 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 
 <a name="AccountUser.getBuName"></a>
 
-### AccountUser.getBuName(buObject, id) ⇒ <code>string</code>
+### AccountUser.getBuName(id) ⇒ <code>string</code>
 helper to print bu names
 
 **Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
@@ -791,13 +791,11 @@ helper to print bu names
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | needed for eid |
-| buObject.eid | <code>string</code> | needed to check for parent bu |
 | id | <code>number</code> | bu id |
 
 <a name="AccountUser.document"></a>
 
-### AccountUser.document(buObject, [metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
+### AccountUser.document([metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
 Creates markdown documentation of all roles
 
 **Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
@@ -805,7 +803,6 @@ Creates markdown documentation of all roles
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | properties for auth |
 | [metadata] | <code>TYPE.MetadataTypeMap</code> | user list |
 
 <a name="AccountUser._generateDocMd"></a>
@@ -1303,7 +1300,7 @@ Automation MetadataType
     * [.parseMetadata(metadata)](#Automation.parseMetadata) ⇒ <code>TYPE.AutomationItem</code> \| <code>void</code>
     * [._buildSchedule(scheduleObject)](#Automation._buildSchedule) ⇒ <code>TYPE.AutomationScheduleSoap</code>
     * [._calcTime(offsetServer, dateInput, [offsetInput])](#Automation._calcTime) ⇒ <code>string</code>
-    * [.document(buObject, [metadata])](#Automation.document) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.document([metadata])](#Automation.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getFilesToCommit(keyArr)](#Automation.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="Automation.retrieve"></a>
@@ -1502,7 +1499,7 @@ used to convert dates to the system timezone required for startDate
 
 <a name="Automation.document"></a>
 
-### Automation.document(buObject, [metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Automation.document([metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
 Parses metadata into a readable Markdown/HTML format then saves it
 
 **Kind**: static method of [<code>Automation</code>](#Automation)  
@@ -1510,7 +1507,6 @@ Parses metadata into a readable Markdown/HTML format then saves it
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | properties for auth |
 | [metadata] | <code>TYPE.AutomationMap</code> | a list of dataExtension definitions |
 
 <a name="Automation.getFilesToCommit"></a>
@@ -1651,7 +1647,7 @@ DataExtension MetadataType
     * [.retrieveChangelog([buObject], [additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.postRetrieveTasks(metadata)](#DataExtension.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionItem</code>
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.DataExtensionItem&gt;</code>
-    * [.document(buObject, [metadata])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.document([metadata])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(customerKey)](#DataExtension.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postDeleteTasks(customerKey)](#DataExtension.postDeleteTasks) ⇒ <code>void</code>
     * [.retrieveForCache(buObject)](#DataExtension.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
@@ -1777,7 +1773,7 @@ prepares a DataExtension for deployment
 
 <a name="DataExtension.document"></a>
 
-### DataExtension.document(buObject, [metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
+### DataExtension.document([metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
 Parses metadata into a readable Markdown/HTML format then saves it
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -1785,7 +1781,6 @@ Parses metadata into a readable Markdown/HTML format then saves it
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | properties for auth |
 | [metadata] | <code>TYPE.DataExtensionMap</code> | a list of dataExtension definitions |
 
 <a name="DataExtension.deleteByKey"></a>
@@ -3256,7 +3251,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName, ex)](#MetadataType.readSecondaryFolder) ⇒ <code>object</code>
     * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType.buildDefinition) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.checkForErrors(ex)](#MetadataType.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
-    * [.document([buObject], [metadata], [isDeploy])](#MetadataType.document) ⇒ <code>void</code>
+    * [.document([metadata], [isDeploy])](#MetadataType.document) ⇒ <code>void</code>
     * [.deleteByKey(customerKey)](#MetadataType.deleteByKey) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#MetadataType.postDeleteTasks) ⇒ <code>void</code>
     * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType.deleteByKeySOAP) ⇒ <code>boolean</code>
@@ -3891,14 +3886,13 @@ Standardizes a check for multiple messages
 
 <a name="MetadataType.document"></a>
 
-### MetadataType.document([buObject], [metadata], [isDeploy]) ⇒ <code>void</code>
+### MetadataType.document([metadata], [isDeploy]) ⇒ <code>void</code>
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [buObject] | <code>TYPE.BuObject</code> | properties for auth |
 | [metadata] | <code>TYPE.MetadataTypeMap</code> | a list of type definitions |
 | [isDeploy] | <code>boolean</code> | used to skip non-supported message during deploy |
 
@@ -4303,7 +4297,7 @@ ImportFile MetadataType
     * [.preDeployTasks(metadata)](#Role.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.create(metadata)](#Role.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#Role.update) ⇒ <code>Promise</code>
-    * [.document(buObject, [metadata])](#Role.document) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.document([metadata])](#Role.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._traverseRoles(role, element, [permission], [isAllowed])](#Role._traverseRoles) ⇒ <code>void</code>
 
 <a name="Role.retrieve"></a>
@@ -4360,7 +4354,7 @@ Updates a single Role.
 
 <a name="Role.document"></a>
 
-### Role.document(buObject, [metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Role.document([metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
 Creates markdown documentation of all roles
 
 **Kind**: static method of [<code>Role</code>](#Role)  
@@ -4368,7 +4362,6 @@ Creates markdown documentation of all roles
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | properties for auth |
 | [metadata] | <code>TYPE.MetadataTypeMap</code> | role definitions |
 
 <a name="Role._traverseRoles"></a>
