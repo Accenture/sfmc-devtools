@@ -34,7 +34,7 @@ describe('transactionalEmail', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 12,
-                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -70,7 +70,7 @@ describe('transactionalEmail', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 14,
-                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -112,7 +112,7 @@ describe('transactionalEmail', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 12,
-                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
