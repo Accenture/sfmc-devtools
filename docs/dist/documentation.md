@@ -2966,6 +2966,8 @@ definitionId: A unique UUID provided by Salesforce Marketing Cloud. Each version
     * [.deploy(metadata, deployDir, retrieveDir, buObject)](#Interaction.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.update(metadata)](#Interaction.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#Interaction.create) ⇒ <code>Promise</code>
+    * [.saveResults(results, retrieveDir, [overrideType], [templateVariables])](#Interaction.saveResults) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [._postRetrieveTasksBulk(metadataMap)](#Interaction._postRetrieveTasksBulk)
     * [.postRetrieveTasks(metadata)](#Interaction.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.preDeployTasks(metadata)](#Interaction.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#Interaction.createOrUpdate)
@@ -3036,6 +3038,32 @@ Creates a single item
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="Interaction.saveResults"></a>
+
+### Interaction.saveResults(results, retrieveDir, [overrideType], [templateVariables]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+Helper for writing Metadata to disk, used for Retrieve and deploy
+
+**Kind**: static method of [<code>Interaction</code>](#Interaction)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code> - Promise of saved metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| results | <code>TYPE.MetadataTypeMap</code> | metadata results from deploy |
+| retrieveDir | <code>string</code> | directory where metadata should be stored after deploy/retrieve |
+| [overrideType] | <code>string</code> | for use when there is a subtype (such as folder-queries) |
+| [templateVariables] | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+
+<a name="Interaction._postRetrieveTasksBulk"></a>
+
+### Interaction.\_postRetrieveTasksBulk(metadataMap)
+helper for Interaction's [saveResults](saveResults). Gets executed after retreive of metadata type and
+
+**Kind**: static method of [<code>Interaction</code>](#Interaction)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | key=customer key, value=metadata |
 
 <a name="Interaction.postRetrieveTasks"></a>
 

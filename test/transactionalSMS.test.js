@@ -41,7 +41,7 @@ describe('transactionalSMS', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 4,
-                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -86,8 +86,8 @@ describe('transactionalSMS', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                5,
-                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
+                6,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -141,7 +141,7 @@ describe('transactionalSMS', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 4,
-                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });

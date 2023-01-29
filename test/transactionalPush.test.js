@@ -34,7 +34,7 @@ describe('transactionalPush', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 3,
-                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -69,9 +69,8 @@ describe('transactionalPush', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                4,
-                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests',
-                testUtils.getAPIHistoryDebug()
+                5,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -113,8 +112,7 @@ describe('transactionalPush', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 3,
-                'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests',
-                testUtils.getAPIHistoryDebug()
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
