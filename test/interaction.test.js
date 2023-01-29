@@ -23,8 +23,8 @@ describe('interaction', () => {
             const result = cache.getCache();
             assert.equal(
                 result.interaction ? Object.keys(result.interaction).length : 0,
-                1,
-                'only one interaction expected'
+                2,
+                'only 2 interactions expected'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_interaction', 'interaction'),
@@ -51,8 +51,8 @@ describe('interaction', () => {
             const result = cache.getCache();
             assert.equal(
                 result.interaction ? Object.keys(result.interaction).length : 0,
-                2,
-                'two interactions expected'
+                3,
+                '3 interactions expected'
             );
             // confirm created item
             assert.deepEqual(
@@ -71,7 +71,7 @@ describe('interaction', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                9,
+                7,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
