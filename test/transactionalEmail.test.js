@@ -69,7 +69,7 @@ describe('transactionalEmail', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                13,
+                14,
                 'Unexpected number of requests made. Run testUtils.getAPIHistoryDebug() to see the requests'
             );
             return;
