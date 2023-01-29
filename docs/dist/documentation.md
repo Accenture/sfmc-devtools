@@ -2966,7 +2966,8 @@ definitionId: A unique UUID provided by Salesforce Marketing Cloud. Each version
     * [.deploy(metadata, deployDir, retrieveDir, buObject)](#Interaction.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.update(metadata)](#Interaction.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#Interaction.create) ⇒ <code>Promise</code>
-    * [.postRetrieveTasksBulk(metadataMap)](#Interaction.postRetrieveTasksBulk)
+    * [.saveResults(results, retrieveDir, [overrideType], [templateVariables])](#Interaction.saveResults) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [._postRetrieveTasksBulk(metadataMap)](#Interaction._postRetrieveTasksBulk)
     * [.postRetrieveTasks(metadata)](#Interaction.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.preDeployTasks(metadata)](#Interaction.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#Interaction.createOrUpdate)
@@ -3038,10 +3039,25 @@ Creates a single item
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
-<a name="Interaction.postRetrieveTasksBulk"></a>
+<a name="Interaction.saveResults"></a>
 
-### Interaction.postRetrieveTasksBulk(metadataMap)
-Gets executed after retreive of metadata type and
+### Interaction.saveResults(results, retrieveDir, [overrideType], [templateVariables]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+Helper for writing Metadata to disk, used for Retrieve and deploy
+
+**Kind**: static method of [<code>Interaction</code>](#Interaction)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code> - Promise of saved metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| results | <code>TYPE.MetadataTypeMap</code> | metadata results from deploy |
+| retrieveDir | <code>string</code> | directory where metadata should be stored after deploy/retrieve |
+| [overrideType] | <code>string</code> | for use when there is a subtype (such as folder-queries) |
+| [templateVariables] | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+
+<a name="Interaction._postRetrieveTasksBulk"></a>
+
+### Interaction.\_postRetrieveTasksBulk(metadataMap)
+helper for Interaction's [saveResults](saveResults). Gets executed after retreive of metadata type and
 
 **Kind**: static method of [<code>Interaction</code>](#Interaction)  
 
@@ -3199,7 +3215,6 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.getFieldNamesToRetrieve([additionalFields])](#MetadataType.getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
     * [.deploy(metadata, deployDir, retrieveDir, buObject)](#MetadataType.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.postDeployTasks(metadata, originalMetadata)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
-    * [.postRetrieveTasksBulk(metadataMap)](#MetadataType.postRetrieveTasksBulk)
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setFolderPath(metadata)](#MetadataType.setFolderPath)
     * [.setFolderId(metadata)](#MetadataType.setFolderId)
@@ -3316,17 +3331,6 @@ Gets executed after deployment of metadata type
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | originalMetadata | <code>TYPE.MetadataTypeMap</code> | metadata to be updated (contains additioanl fields) |
-
-<a name="MetadataType.postRetrieveTasksBulk"></a>
-
-### MetadataType.postRetrieveTasksBulk(metadataMap)
-Gets executed after retreive of metadata type and
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadataMap | <code>TYPE.MetadataTypeMap</code> | key=customer key, value=metadata |
 
 <a name="MetadataType.postRetrieveTasks"></a>
 
