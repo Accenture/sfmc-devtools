@@ -854,7 +854,7 @@ FileTransfer MetadataType
     * [._retrieveExtendedFile(metadata, subType, retrieveDir)](#Asset._retrieveExtendedFile) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._readExtendedFileFromFS(metadata, subType, deployDir, [pathOnly])](#Asset._readExtendedFileFromFS) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.postRetrieveTasks(metadata)](#Asset.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
-    * [.preDeployTasks(metadata, deployDir, buObject)](#Asset.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
+    * [.preDeployTasks(metadata, deployDir)](#Asset.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
     * [._getMainSubtype(extendedSubType)](#Asset._getMainSubtype) ⇒ <code>string</code>
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildDefinitionForNested) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildTemplateForNested) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -1015,7 +1015,7 @@ manages post retrieve steps
 
 <a name="Asset.preDeployTasks"></a>
 
-### Asset.preDeployTasks(metadata, deployDir, buObject) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
+### Asset.preDeployTasks(metadata, deployDir) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
 prepares an asset definition for deployment
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -1025,7 +1025,6 @@ prepares an asset definition for deployment
 | --- | --- | --- |
 | metadata | <code>TYPE.AssetItem</code> | a single asset |
 | deployDir | <code>string</code> | directory of deploy files |
-| buObject | <code>TYPE.BuObject</code> | buObject properties for auth |
 
 <a name="Asset._getMainSubtype"></a>
 
@@ -3160,7 +3159,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.retrieveForCache([additionalFields], [subTypeArr])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.buildTemplate(retrieveDir, templateDir, key, templateVariables)](#MetadataType.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
-    * [.preDeployTasks(metadata, deployDir, buObject)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
+    * [.preDeployTasks(metadata, deployDir)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
     * [.create(metadata, deployDir)](#MetadataType.create) ⇒ <code>void</code>
     * [.update(metadata, [metadataBefore])](#MetadataType.update) ⇒ <code>void</code>
     * [.refresh()](#MetadataType.refresh) ⇒ <code>void</code>
@@ -3377,7 +3376,7 @@ Gets metadata cache with limited fields and does not store value to disk
 
 <a name="MetadataType.preDeployTasks"></a>
 
-### MetadataType.preDeployTasks(metadata, deployDir, buObject) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
+### MetadataType.preDeployTasks(metadata, deployDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
 Gets executed before deploying metadata
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3387,7 +3386,6 @@ Gets executed before deploying metadata
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata item |
 | deployDir | <code>string</code> | folder where files for deployment are stored |
-| buObject | <code>TYPE.BuObject</code> | buObject properties for auth |
 
 <a name="MetadataType.create"></a>
 
