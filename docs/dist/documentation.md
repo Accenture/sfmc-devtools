@@ -851,7 +851,7 @@ FileTransfer MetadataType
 
 * [Asset](#Asset) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, _, __, [subTypeArr], [key])](#Asset.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
-    * [.retrieveForCache(_, __, [subTypeArr])](#Asset.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
+    * [.retrieveForCache(_, [subTypeArr])](#Asset.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType])](#Asset.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetItem, type: string}&gt;</code>
     * [.create(metadata)](#Asset.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#Asset.update) ⇒ <code>Promise</code>
@@ -894,7 +894,7 @@ Retrieves Metadata of Asset
 
 <a name="Asset.retrieveForCache"></a>
 
-### Asset.retrieveForCache(_, __, [subTypeArr]) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
+### Asset.retrieveForCache(_, [subTypeArr]) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
 Retrieves asset metadata for caching
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -903,7 +903,6 @@ Retrieves asset metadata for caching
 | Param | Type | Description |
 | --- | --- | --- |
 | _ | <code>void</code> | unused |
-| __ | <code>void</code> | unused |
 | [subTypeArr] | <code>Array.&lt;string&gt;</code> | optionally limit to a single subtype |
 
 <a name="Asset.retrieveAsTemplate"></a>
@@ -1650,7 +1649,7 @@ DataExtension MetadataType
     * [.document([metadata])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(customerKey)](#DataExtension.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postDeleteTasks(customerKey)](#DataExtension.postDeleteTasks) ⇒ <code>void</code>
-    * [.retrieveForCache(buObject)](#DataExtension.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
+    * [.retrieveForCache()](#DataExtension.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtension.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.setFolderPath(metadata)](#DataExtension.setFolderPath)
     * [.getFilesToCommit(keyArr)](#DataExtension.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
@@ -1808,16 +1807,11 @@ clean up after deleting a metadata item
 
 <a name="DataExtension.retrieveForCache"></a>
 
-### DataExtension.retrieveForCache(buObject) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
+### DataExtension.retrieveForCache() ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
 Retrieves folder metadata into local filesystem. Also creates a uniquePath attribute for each folder.
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
 **Returns**: <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | properties for auth |
-
 <a name="DataExtension.retrieveAsTemplate"></a>
 
 ### DataExtension.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
@@ -2647,7 +2641,7 @@ Folder MetadataType
 
 * [Folder](#Folder) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [additionalFields], buObject, [subTypeArr], [key])](#Folder.retrieve) ⇒ <code>Promise</code>
-    * [.retrieveForCache(buObject, _, [subTypeArr])](#Folder.retrieveForCache) ⇒ <code>Promise</code>
+    * [.retrieveForCache(_, [subTypeArr])](#Folder.retrieveForCache) ⇒ <code>Promise</code>
     * [.upsert(metadata)](#Folder.upsert) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.create(metadataEntry)](#Folder.create) ⇒ <code>Promise</code>
     * [.update(metadataEntry)](#Folder.update) ⇒ <code>Promise</code>
@@ -2675,7 +2669,7 @@ Retrieves metadata of metadata type into local filesystem. executes callback wit
 
 <a name="Folder.retrieveForCache"></a>
 
-### Folder.retrieveForCache(buObject, _, [subTypeArr]) ⇒ <code>Promise</code>
+### Folder.retrieveForCache(_, [subTypeArr]) ⇒ <code>Promise</code>
 Retrieves folder metadata for caching
 
 **Kind**: static method of [<code>Folder</code>](#Folder)  
@@ -2683,7 +2677,6 @@ Retrieves folder metadata for caching
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | properties for auth |
 | _ | <code>void</code> | unused |
 | [subTypeArr] | <code>Array.&lt;string&gt;</code> | content type of folder |
 
@@ -3109,7 +3102,7 @@ List MetadataType
 
 * [List](#List) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], buObject, [___], [key])](#List.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache(buObject)](#List.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache()](#List.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [._retrieveParentAllSubs(buObject, results)](#List._retrieveParentAllSubs) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.deleteByKey(customerKey)](#List.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postRetrieveTasks(list)](#List.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -3133,16 +3126,11 @@ Retrieves Metadata of Lists
 
 <a name="List.retrieveForCache"></a>
 
-### List.retrieveForCache(buObject) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### List.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: static method of [<code>List</code>](#List)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | properties for auth |
-
 <a name="List._retrieveParentAllSubs"></a>
 
 ### List.\_retrieveParentAllSubs(buObject, results) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -3214,8 +3202,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.setFolderPath(metadata)](#MetadataType.setFolderPath)
     * [.setFolderId(metadata)](#MetadataType.setFolderId)
     * [.retrieve(retrieveDir, [additionalFields], buObject, [subTypeArr], [key])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveChangelog([buObject], [additionalFields], [subTypeArr])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache(buObject, [additionalFields], [subTypeArr])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveChangelog([_], [additionalFields], [subTypeArr])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache([additionalFields], [subTypeArr])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.buildTemplate(retrieveDir, templateDir, key, templateVariables)](#MetadataType.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.preDeployTasks(metadata, deployDir, buObject)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
@@ -3381,7 +3369,7 @@ Gets metadata from Marketing Cloud
 
 <a name="MetadataType.retrieveChangelog"></a>
 
-### MetadataType.retrieveChangelog([buObject], [additionalFields], [subTypeArr]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MetadataType.retrieveChangelog([_], [additionalFields], [subTypeArr]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Gets metadata from Marketing Cloud
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3389,13 +3377,13 @@ Gets metadata from Marketing Cloud
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [buObject] | <code>TYPE.BuObject</code> | properties for auth |
+| [_] | <code>void</code> | unused parameter (buObject) |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | [subTypeArr] | <code>Array.&lt;string&gt;</code> | optionally limit to a single subtype |
 
 <a name="MetadataType.retrieveForCache"></a>
 
-### MetadataType.retrieveForCache(buObject, [additionalFields], [subTypeArr]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MetadataType.retrieveForCache([additionalFields], [subTypeArr]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3403,7 +3391,6 @@ Gets metadata cache with limited fields and does not store value to disk
 
 | Param | Type | Description |
 | --- | --- | --- |
-| buObject | <code>TYPE.BuObject</code> | properties for auth |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | [subTypeArr] | <code>Array.&lt;string&gt;</code> | optionally limit to a single subtype |
 
