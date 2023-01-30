@@ -20,13 +20,16 @@ exports.loadSOAPRecords = async (mcdevAction, type, mid) => {
         type,
         mcdevAction + '-response.xml'
     );
-    return (await fs.pathExists(testPath))
-        ? fs.readFile(testPath, {
-              encoding: 'utf8',
-          })
-        : fs.readFile(path.join('test', 'resources', mcdevAction + '-response.xml'), {
-              encoding: 'utf8',
-          });
+    if (await fs.pathExists(testPath)) {
+        return fs.readFile(testPath, {
+            encoding: 'utf8',
+        });
+    }
+    console.log(`error: Please create file ${testPath}`); // eslint-disable-line no-console
+
+    return fs.readFile(path.join('test', 'resources', mcdevAction + '-response.xml'), {
+        encoding: 'utf8',
+    });
 };
 /**
  * based on request, respond with different soap data
@@ -123,6 +126,8 @@ exports.handleRESTRequest = async (config) => {
                 ];
             }
         } else {
+            console.log(`error: Please create file ${testPath}`); // eslint-disable-line no-console
+
             return [
                 404,
                 fs.readFile(path.join('test', 'resources', 'rest404-response.json'), {

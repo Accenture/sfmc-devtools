@@ -32,9 +32,9 @@ describe('transactionalPush', () => {
                 'returned JSON was not equal expected'
             );
             assert.equal(
-                Object.values(testUtils.getAPIHistory()).flat().length,
+                testUtils.getAPIHistoryLength(),
                 3,
-                'Unexpected number of requests made'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -68,9 +68,9 @@ describe('transactionalPush', () => {
             );
             // check number of API calls
             assert.equal(
-                Object.values(testUtils.getAPIHistory()).flat().length,
-                4,
-                'Unexpected number of requests made'
+                testUtils.getAPIHistoryLength(),
+                5,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -110,9 +110,9 @@ describe('transactionalPush', () => {
                 'returned deployment JSON was not equal expected'
             );
             assert.equal(
-                Object.values(testUtils.getAPIHistory()).flat().length,
+                testUtils.getAPIHistoryLength(),
                 3,
-                'Unexpected number of requests made'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
