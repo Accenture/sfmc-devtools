@@ -2174,6 +2174,7 @@ Email MetadataType
 
 * [Email](#Email) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#Email.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.saveResults(results, retrieveDir, [overrideType], [templateVariables])](#Email.saveResults) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.postRetrieveTasks(metadata)](#Email.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.parseMetadata(metadata)](#Email.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 
@@ -2191,6 +2192,21 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 | [_] | <code>void</code> | unused parameter |
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="Email.saveResults"></a>
+
+### Email.saveResults(results, retrieveDir, [overrideType], [templateVariables]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+Helper for writing Metadata to disk, used for Retrieve and deploy
+
+**Kind**: static method of [<code>Email</code>](#Email)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code> - Promise of saved metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| results | <code>TYPE.MetadataTypeMap</code> | metadata results from deploy |
+| retrieveDir | <code>string</code> | directory where metadata should be stored after deploy/retrieve |
+| [overrideType] | <code>string</code> | for use when there is a subtype (such as folder-queries) |
+| [templateVariables] | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="Email.postRetrieveTasks"></a>
 
