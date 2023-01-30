@@ -5119,6 +5119,7 @@ CLI entry for SFMC DevTools
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [._isValidType(selectedType, [handleOutside])](#Util._isValidType) ⇒ <code>boolean</code>
+    * [.getTypeAndSubType(selectedType)](#Util.getTypeAndSubType) ⇒ <code>Array.&lt;string&gt;</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
@@ -5251,6 +5252,18 @@ helper for [retrieve](#Mcdev.retrieve), [retrieveAsTemplate](#Mcdev.retrieveAsTe
 | --- | --- | --- |
 | selectedType | <code>TYPE.SupportedMetadataTypes</code> | type or type-subtype |
 | [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
+
+<a name="Util.getTypeAndSubType"></a>
+
+### Util.getTypeAndSubType(selectedType) ⇒ <code>Array.&lt;string&gt;</code>
+helper that deals with extracting type and subtype
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>Array.&lt;string&gt;</code> - first elem is type, second elem is subType  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| selectedType | <code>string</code> | "type" or "type-subtype" |
 
 <a name="Util.getRetrieveTypeChoices"></a>
 
@@ -6921,6 +6934,7 @@ Util that contains logger and simple util methods
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [._isValidType(selectedType, [handleOutside])](#Util._isValidType) ⇒ <code>boolean</code>
+    * [.getTypeAndSubType(selectedType)](#Util.getTypeAndSubType) ⇒ <code>Array.&lt;string&gt;</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
@@ -7053,6 +7067,18 @@ helper for [retrieve](#Mcdev.retrieve), [retrieveAsTemplate](#Mcdev.retrieveAsTe
 | --- | --- | --- |
 | selectedType | <code>TYPE.SupportedMetadataTypes</code> | type or type-subtype |
 | [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
+
+<a name="Util.getTypeAndSubType"></a>
+
+### Util.getTypeAndSubType(selectedType) ⇒ <code>Array.&lt;string&gt;</code>
+helper that deals with extracting type and subtype
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>Array.&lt;string&gt;</code> - first elem is type, second elem is subType  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| selectedType | <code>string</code> | "type" or "type-subtype" |
 
 <a name="Util.getRetrieveTypeChoices"></a>
 
