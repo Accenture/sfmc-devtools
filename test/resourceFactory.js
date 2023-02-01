@@ -26,9 +26,11 @@ exports.loadSOAPRecords = async (mcdevAction, type, mid) => {
             encoding: 'utf8',
         });
     }
+    /* eslint-disable no-console */
     console.log(
         `${color.bgRed}${color.fgBlack}test-error${color.reset}: Please create file ${testPath}`
-    ); // eslint-disable-line no-console
+    );
+    /* eslint-enable no-console */
 
     return fs.readFile(path.join('test', 'resources', mcdevAction + '-response.xml'), {
         encoding: 'utf8',
@@ -131,9 +133,11 @@ exports.handleRESTRequest = async (config) => {
                 ];
             }
         } else {
+            /* eslint-disable no-console */
             console.log(
                 `${color.bgRed}${color.fgBlack}test-error${color.reset}: Please create file ${testPath}`
-            ); // eslint-disable-line no-console
+            );
+            /* eslint-enable no-console */
 
             return [
                 404,
