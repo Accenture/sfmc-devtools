@@ -849,7 +849,7 @@ FileTransfer MetadataType
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType])](#Asset.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetItem, type: string}&gt;</code>
     * [.create(metadata)](#Asset.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#Asset.update) ⇒ <code>Promise</code>
-    * [.requestSubType(subType, subTypeArray, [retrieveDir], [templateName], [templateVariables], key)](#Asset.requestSubType) ⇒ <code>Promise</code>
+    * [.requestSubType(subType, [retrieveDir], [templateName], [templateVariables], key)](#Asset.requestSubType) ⇒ <code>Promise</code>
     * [.requestAndSaveExtended(items, subType, retrieveDir, [templateVariables])](#Asset.requestAndSaveExtended) ⇒ <code>Promise</code>
     * [._retrieveExtendedFile(metadata, subType, retrieveDir)](#Asset._retrieveExtendedFile) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._readExtendedFileFromFS(metadata, subType, deployDir, [pathOnly])](#Asset._readExtendedFileFromFS) ⇒ <code>Promise.&lt;string&gt;</code>
@@ -939,7 +939,7 @@ Updates a single asset
 
 <a name="Asset.requestSubType"></a>
 
-### Asset.requestSubType(subType, subTypeArray, [retrieveDir], [templateName], [templateVariables], key) ⇒ <code>Promise</code>
+### Asset.requestSubType(subType, [retrieveDir], [templateName], [templateVariables], key) ⇒ <code>Promise</code>
 Retrieves Metadata of a specific asset type
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -948,7 +948,6 @@ Retrieves Metadata of a specific asset type
 | Param | Type | Description |
 | --- | --- | --- |
 | subType | <code>TYPE.AssetSubType</code> | group of similar assets to put in a folder (ie. images) |
-| subTypeArray | <code>Array.&lt;TYPE.AssetSubType&gt;</code> | list of all asset types within this subtype |
 | [retrieveDir] | <code>string</code> | target directory for saving assets |
 | [templateName] | <code>string</code> | name of the metadata file |
 | [templateVariables] | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
