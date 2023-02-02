@@ -1,6 +1,6 @@
 {
     "name": "mcdev",
-    "version": "4.3.0",
+    "version": "4.3.1",
     "description": "Accenture Salesforce Marketing Cloud DevTools",
     "author": "Accenture: joern.berkefeld, douglas.midgley, robert.zimmermann, maciej.barnas",
     "license": "MIT",
@@ -50,6 +50,7 @@
         "lint-test": "eslint test/**/*.js",
         "upgrade": "npm-check --update",
         "manual-prepare": "husky install",
+        "lint-and-test": "run-s lint test",
         "test": "mocha",
         "coverage": "nyc mocha",
         "version:major": "npm version --no-commit-hooks major",
