@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Create PR to develop branch",
+    "target": "ref",
+    "refTargets": [
+      "localbranch",
+      "remotebranch"
+    ],
+    "action": {
+      "type": "url",
+      "url": "https://github.com/Accenture/sfmc-devtools/compare/develop...$shortname?expand=1"
+    }
+  }
+]
