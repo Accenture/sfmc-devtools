@@ -737,7 +737,6 @@ MessageSendActivity MetadataType
     * [.retrieve(retrieveDir, _, [__], [key])](#AccountUser.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveChangelog()](#AccountUser.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.document([metadata])](#AccountUser.document) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._generateDocMd(users, type, columnsToPrint)](#AccountUser._generateDocMd) ⇒ <code>string</code>
     * [.postRetrieveTasks(metadata)](#AccountUser.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.parseMetadata(metadata)](#AccountUser.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 
@@ -774,18 +773,6 @@ Creates markdown documentation of all roles
 | Param | Type | Description |
 | --- | --- | --- |
 | [metadata] | <code>TYPE.MetadataTypeMap</code> | user list |
-
-<a name="AccountUser._generateDocMd"></a>
-
-### AccountUser.\_generateDocMd(users, type, columnsToPrint) ⇒ <code>string</code>
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>string</code> - markdown  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| users | <code>Array.&lt;object&gt;</code> | list of users and installed package |
-| type | <code>&#x27;Installed Package&#x27;</code> \| <code>&#x27;User&#x27;</code> | choose what sub type to print |
-| columnsToPrint | <code>Array.&lt;Array&gt;</code> | helper array |
 
 <a name="AccountUser.postRetrieveTasks"></a>
 
