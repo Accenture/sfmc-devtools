@@ -738,6 +738,7 @@ MessageSendActivity MetadataType
     * [.retrieveChangelog()](#AccountUser.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.timeSinceDate(date)](#AccountUser.timeSinceDate) ⇒ <code>number</code>
     * [.getBuName(id)](#AccountUser.getBuName) ⇒ <code>string</code>
+    * [.getBuNames()](#AccountUser.getBuNames)
     * [.document([metadata])](#AccountUser.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._generateDocMd(users, type, columnsToPrint)](#AccountUser._generateDocMd) ⇒ <code>string</code>
     * [.postRetrieveTasks(metadata)](#AccountUser.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -787,6 +788,12 @@ helper to print bu names
 | --- | --- | --- |
 | id | <code>number</code> | bu id |
 
+<a name="AccountUser.getBuNames"></a>
+
+### AccountUser.getBuNames()
+helper that gets BU names from config
+
+**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
 <a name="AccountUser.document"></a>
 
 ### AccountUser.document([metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
