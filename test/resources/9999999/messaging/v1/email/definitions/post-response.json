@@ -15,5 +15,5 @@
         "updateSubscriber": true
     },
     "options": { "trackLinks": true },
-    "journey": { "interactionKey": "1f936b41-cf1b-4207-aa33-715b3bf9eab7" }
+    "journey": { "interactionKey": "testExisting_interaction" }
 }

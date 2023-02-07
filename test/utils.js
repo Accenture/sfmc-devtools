@@ -114,12 +114,29 @@ exports.mockSetup = (isDeploy) => {
         .reply((config) => resourceFactory.handleRESTRequest(config));
     const fsMockConf = {
         '.prettierrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.prettierrc')),
+        '.eslintrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.eslintrc')),
+        '.eslintignore': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.eslintignore')),
         '.mcdevrc.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdevrc.json')),
         '.mcdev-auth.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdev-auth.json')),
         'boilerplate/config.json': fsmock.load(
             path.resolve(__dirname, '../boilerplate/config.json')
         ),
         test: fsmock.load(path.resolve(__dirname)),
+        // the following node_modules are required for prettier's SQL parser to work
+        'node_modules/prettier': fsmock.load(path.resolve(__dirname, '../node_modules/prettier')),
+        'node_modules/prettier-plugin-sql': fsmock.load(
+            path.resolve(__dirname, '../node_modules/prettier-plugin-sql')
+        ),
+        'node_modules/node-sql-parser': fsmock.load(
+            path.resolve(__dirname, '../node_modules/node-sql-parser')
+        ),
+        'node_modules/big-integer': fsmock.load(
+            path.resolve(__dirname, '../node_modules/big-integer')
+        ),
+        'node_modules/sql-formatter': fsmock.load(
+            path.resolve(__dirname, '../node_modules/sql-formatter')
+        ),
+        'node_modules/nearley': fsmock.load(path.resolve(__dirname, '../node_modules/nearley')),
     };
     if (isDeploy) {
         // load files we manually prepared for a direct test of `deploy` command
@@ -139,11 +156,44 @@ exports.mockReset = () => {
     apimock.restore();
 };
 /**
+ * helper to return amount of api callouts
+ *
+ * @param {boolean} [includeToken] if true, will include token calls in count
+ * @returns {object} of API history
+ */
+exports.getAPIHistoryLength = (includeToken) => {
+    const historyArr = Object.values(apimock.history).flat();
+    if (includeToken) {
+        return historyArr.length;
+    }
+    return historyArr.filter((item) => item.url !== '/v2/token').length;
+};
+/**
  * helper to return api history
  *
  * @returns {object} of API history
  */
 exports.getAPIHistory = () => apimock.history;
+/**
+ * helper to return most important fields for each api call
+ *
+ * @returns {object} of API history
+ */
+function getAPIHistoryDebug() {
+    const historyArr = Object.values(apimock.history)
+        .flat()
+        .map((item) => ({ url: item.url, data: item.data }));
+    return historyArr;
+}
+exports.getAPIHistoryDebug = getAPIHistoryDebug;
+/**
+ * helper to return most important fields for each api call
+ *
+ * @returns {void} of API history
+ */
+exports.logAPIHistoryDebug = () => {
+    console.log(getAPIHistoryDebug()); // eslint-disable-line no-console
+};
 
 /**
  * escapes string for regex

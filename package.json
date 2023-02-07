@@ -1,6 +1,6 @@
 {
     "name": "mcdev",
-    "version": "4.1.12",
+    "version": "4.3.1",
     "description": "Accenture Salesforce Marketing Cloud DevTools",
     "author": "Accenture: joern.berkefeld, douglas.midgley, robert.zimmermann, maciej.barnas",
     "license": "MIT",
@@ -17,6 +17,19 @@
         "type": "corporate",
         "url": "https://github.com/Accenture/sfmc-devtools"
     },
+    "keywords": [
+        "sfmc",
+        "ide",
+        "devops",
+        "developer",
+        "exacttarget",
+        "salesforce",
+        "marketing cloud",
+        "package manager",
+        "fuel",
+        "soap",
+        "rest"
+    ],
     "main": "./lib/index.js",
     "bin": {
         "mcdev": "./lib/cli.js"
@@ -37,7 +50,12 @@
         "lint-test": "eslint test/**/*.js",
         "upgrade": "npm-check --update",
         "manual-prepare": "husky install",
-        "test": "mocha"
+        "lint-and-test": "run-s lint test",
+        "test": "mocha",
+        "coverage": "nyc mocha",
+        "version:major": "npm version --no-commit-hooks major",
+        "version:minor": "npm version --no-commit-hooks minor",
+        "version:patch": "npm version --no-commit-hooks patch"
     },
     "dependencies": {
         "beauty-amp-core": "0.3.7",
@@ -51,11 +69,11 @@
         "json-to-table": "4.2.1",
         "mustache": "4.2.0",
         "p-limit": "3.1.0",
-        "prettier": "2.8.0",
+        "prettier": "2.8.3",
         "prettier-plugin-sql": "0.12.1",
         "semver": "7.3.8",
-        "sfmc-sdk": "0.6.1",
-        "simple-git": "3.15.1",
+        "sfmc-sdk": "0.6.3",
+        "simple-git": "3.16.0",
         "toposort": "2.0.2",
         "update-notifier": "5.1.0",
         "winston": "3.8.2",
@@ -66,20 +84,21 @@
         "axios-mock-adapter": "1.21.2",
         "chai": "4.3.7",
         "chai-files": "1.4.0",
-        "eslint": "8.29.0",
-        "eslint-config-prettier": "8.5.0",
+        "eslint": "8.32.0",
+        "eslint-config-prettier": "8.6.0",
         "eslint-config-ssjs": "1.1.11",
         "eslint-plugin-jsdoc": "39.6.4",
         "eslint-plugin-mocha": "10.1.0",
         "eslint-plugin-prettier": "4.2.1",
-        "eslint-plugin-unicorn": "45.0.1",
-        "husky": "8.0.1",
+        "eslint-plugin-unicorn": "45.0.2",
+        "husky": "8.0.3",
         "jsdoc-to-markdown": "8.0.0",
         "lint-staged": "13.1.0",
-        "mocha": "10.1.0",
+        "mocha": "10.2.0",
         "mock-fs": "5.2.0",
         "npm-check": "6.0.1",
         "npm-run-all": "4.1.5",
+        "nyc": "15.1.0",
         "prettier-eslint": "15.0.1"
     },
     "optionalDependencies": {

@@ -69,4 +69,4 @@ The people that lead this project:
 
 ## Copyright
 
-Copyright (c) 2020-2022 Accenture. [MIT licensed](https://github.com/Accenture/sfmc-devtools/blob/main/LICENSE).
+Copyright (c) 2020-2023 Accenture. [MIT licensed](https://github.com/Accenture/sfmc-devtools/blob/main/LICENSE).

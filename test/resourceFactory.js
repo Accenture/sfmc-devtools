@@ -1,6 +1,7 @@
 const fs = require('fs-extra');
 const path = require('node:path');
 const { XMLParser } = require('fast-xml-parser');
+const { color } = require('../lib/util/util');
 const parser = new XMLParser();
 const attributeParser = new XMLParser({ ignoreAttributes: false });
 /**
@@ -20,13 +21,20 @@ exports.loadSOAPRecords = async (mcdevAction, type, mid) => {
         type,
         mcdevAction + '-response.xml'
     );
-    return (await fs.pathExists(testPath))
-        ? fs.readFile(testPath, {
-              encoding: 'utf8',
-          })
-        : fs.readFile(path.join('test', 'resources', mcdevAction + '-response.xml'), {
-              encoding: 'utf8',
-          });
+    if (await fs.pathExists(testPath)) {
+        return fs.readFile(testPath, {
+            encoding: 'utf8',
+        });
+    }
+    /* eslint-disable no-console */
+    console.log(
+        `${color.bgRed}${color.fgBlack}test-error${color.reset}: Please create file ${testPath}`
+    );
+    /* eslint-enable no-console */
+
+    return fs.readFile(path.join('test', 'resources', mcdevAction + '-response.xml'), {
+        encoding: 'utf8',
+    });
 };
 /**
  * based on request, respond with different soap data
@@ -95,13 +103,15 @@ exports.handleRESTRequest = async (config) => {
         if (urlObj.searchParams.get('$filter')) {
             filterName = urlObj.searchParams.get('$filter').split(' eq ')[1];
         }
-        const testPath = path.join(
-            'test',
-            'resources',
-            config.headers.Authorization.replace('Bearer ', ''),
-            urlObj.pathname,
-            config.method + '-response.json'
-        );
+        const testPath = path
+            .join(
+                'test',
+                'resources',
+                config.headers.Authorization.replace('Bearer ', ''),
+                urlObj.pathname,
+                config.method + '-response.json'
+            )
+            .replace(':', '_'); // replace : with _ for Windows
 
         if (await fs.pathExists(testPath)) {
             // build filter logic to ensure templating works
@@ -123,6 +133,12 @@ exports.handleRESTRequest = async (config) => {
                 ];
             }
         } else {
+            /* eslint-disable no-console */
+            console.log(
+                `${color.bgRed}${color.fgBlack}test-error${color.reset}: Please create file ${testPath}`
+            );
+            /* eslint-enable no-console */
+
             return [
                 404,
                 fs.readFile(path.join('test', 'resources', 'rest404-response.json'), {
