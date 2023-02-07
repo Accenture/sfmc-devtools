@@ -102,6 +102,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Script">Script</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>Script MetadataType</p>
 </dd>
+<dt><a href="#SendClassification">SendClassification</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>SendClassification MetadataType</p>
+</dd>
 <dt><a href="#SetDefinition">SetDefinition</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>SetDefinition MetadataType</p>
 </dd>
@@ -4503,6 +4506,28 @@ additionally, the documentation for dataExtension and automation should be retur
 | Param | Type | Description |
 | --- | --- | --- |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="SendClassification"></a>
+
+## SendClassification ⇐ [<code>MetadataType</code>](#MetadataType)
+SendClassification MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+<a name="SendClassification.retrieve"></a>
+
+### SendClassification.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
+
+**Kind**: static method of [<code>SendClassification</code>](#SendClassification)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [_] | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| [key] | <code>string</code> | customer key of single item to retrieve |
 
 <a name="SetDefinition"></a>
 
