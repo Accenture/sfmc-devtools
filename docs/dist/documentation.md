@@ -2207,7 +2207,7 @@ MessageSendActivity MetadataType
     * [.update(metadataItem)](#EmailSendDefinition.update) ⇒ <code>Promise</code>
     * [.create(metadataItem)](#EmailSendDefinition.create) ⇒ <code>Promise</code>
     * [.deleteByKey(customerKey)](#EmailSendDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.preDeployTasks(metadata, [_], buObject)](#EmailSendDefinition.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
+    * [.preDeployTasks(metadata)](#EmailSendDefinition.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
     * [.postRetrieveTasks(metadata)](#EmailSendDefinition.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.parseMetadata(metadata)](#EmailSendDefinition.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 
@@ -2264,7 +2264,7 @@ Delete a metadata item from the specified business unit
 
 <a name="EmailSendDefinition.preDeployTasks"></a>
 
-### EmailSendDefinition.preDeployTasks(metadata, [_], buObject) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
+### EmailSendDefinition.preDeployTasks(metadata) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
 prepares a single item for deployment
 
 **Kind**: static method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
@@ -2273,8 +2273,6 @@ prepares a single item for deployment
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single script activity definition |
-| [_] | <code>void</code> | unused parameter |
-| buObject | <code>TYPE.BuObject</code> | buObject properties for auth |
 
 <a name="EmailSendDefinition.postRetrieveTasks"></a>
 
