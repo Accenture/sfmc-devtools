@@ -736,10 +736,7 @@ MessageSendActivity MetadataType
 * [AccountUser](#AccountUser) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, _, [__], [key])](#AccountUser.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveChangelog()](#AccountUser.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.timeSinceDate(date)](#AccountUser.timeSinceDate) ⇒ <code>number</code>
-    * [.getBuName(id)](#AccountUser.getBuName) ⇒ <code>string</code>
     * [.document([metadata])](#AccountUser.document) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._generateDocMd(users, type, columnsToPrint)](#AccountUser._generateDocMd) ⇒ <code>string</code>
     * [.postRetrieveTasks(metadata)](#AccountUser.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.parseMetadata(metadata)](#AccountUser.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 
@@ -765,28 +762,6 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 
 **Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
-<a name="AccountUser.timeSinceDate"></a>
-
-### AccountUser.timeSinceDate(date) ⇒ <code>number</code>
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>number</code> - time difference  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| date | <code>string</code> | first date |
-
-<a name="AccountUser.getBuName"></a>
-
-### AccountUser.getBuName(id) ⇒ <code>string</code>
-helper to print bu names
-
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>string</code> - "bu name (bu id)""  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| id | <code>number</code> | bu id |
-
 <a name="AccountUser.document"></a>
 
 ### AccountUser.document([metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -798,18 +773,6 @@ Creates markdown documentation of all roles
 | Param | Type | Description |
 | --- | --- | --- |
 | [metadata] | <code>TYPE.MetadataTypeMap</code> | user list |
-
-<a name="AccountUser._generateDocMd"></a>
-
-### AccountUser.\_generateDocMd(users, type, columnsToPrint) ⇒ <code>string</code>
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>string</code> - markdown  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| users | <code>Array.&lt;object&gt;</code> | list of users and installed package |
-| type | <code>&#x27;Installed Package&#x27;</code> \| <code>&#x27;User&#x27;</code> | choose what sub type to print |
-| columnsToPrint | <code>Array.&lt;Array&gt;</code> | helper array |
 
 <a name="AccountUser.postRetrieveTasks"></a>
 
