@@ -365,7 +365,7 @@ Source and target business units are also compared before the deployment to appl
     * [new Deployer(properties, buObject)](#new_Deployer_new)
     * _instance_
         * [.metadata](#Deployer+metadata) : <code>TYPE.MultiMetadataTypeMap</code>
-        * [._deploy([typeArr], [keyArr], [fromRetrieve])](#Deployer+_deploy) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
+        * [._deploy([typeArr], [keyArr], [fromRetrieve], [isRefresh])](#Deployer+_deploy) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
     * _static_
         * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Deployer.deploy) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
         * [._deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve])](#Deployer._deployBU) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
@@ -389,7 +389,7 @@ Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 **Kind**: instance property of [<code>Deployer</code>](#Deployer)  
 <a name="Deployer+_deploy"></a>
 
-### deployer.\_deploy([typeArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
+### deployer.\_deploy([typeArr], [keyArr], [fromRetrieve], [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
 Deploy all metadata that is located in the deployDir
 
 **Kind**: instance method of [<code>Deployer</code>](#Deployer)  
@@ -400,6 +400,7 @@ Deploy all metadata that is located in the deployDir
 | [typeArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit deployment to given metadata type (can include subtype) |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
 | [fromRetrieve] | <code>boolean</code> | if true, no folders will be updated/created |
+| [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="Deployer.deploy"></a>
 
@@ -820,6 +821,7 @@ FileTransfer MetadataType
     * [._retrieveExtendedFile(metadata, subType, retrieveDir)](#Asset._retrieveExtendedFile) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._readExtendedFileFromFS(metadata, subType, deployDir, [pathOnly])](#Asset._readExtendedFileFromFS) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.postRetrieveTasks(metadata)](#Asset.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
+    * [.postDeployTasks(metadata, _, [isRefresh])](#Asset.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.preDeployTasks(metadata, deployDir)](#Asset.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
     * [._getMainSubtype(extendedSubType)](#Asset._getMainSubtype) ⇒ <code>string</code>
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildDefinitionForNested) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -977,6 +979,20 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.AssetItem</code> | a single asset |
+
+<a name="Asset.postDeployTasks"></a>
+
+### Asset.postDeployTasks(metadata, _, [isRefresh]) ⇒ <code>Promise.&lt;void&gt;</code>
+Gets executed after deployment of metadata type
+
+**Kind**: static method of [<code>Asset</code>](#Asset)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
+| _ | <code>TYPE.MetadataTypeMap</code> | originalMetadata to be updated (contains additioanl fields) |
+| [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="Asset.preDeployTasks"></a>
 
@@ -3130,8 +3146,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.buObject](#MetadataType.buObject) : <code>TYPE.BuObject</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType.getJsonFromFS) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.getFieldNamesToRetrieve([additionalFields])](#MetadataType.getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.deploy(metadata, deployDir, retrieveDir)](#MetadataType.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
-    * [.postDeployTasks(metadata, originalMetadata)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
+    * [.deploy(metadata, deployDir, retrieveDir, [isRefresh])](#MetadataType.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.postDeployTasks(metadata, originalMetadata, [isRefresh])](#MetadataType.postDeployTasks) ⇒ <code>void</code>
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setFolderPath(metadata)](#MetadataType.setFolderPath)
     * [.setFolderId(metadata)](#MetadataType.setFolderId)
@@ -3224,7 +3240,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 
 <a name="MetadataType.deploy"></a>
 
-### MetadataType.deploy(metadata, deployDir, retrieveDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+### MetadataType.deploy(metadata, deployDir, retrieveDir, [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
 Deploys metadata
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3235,10 +3251,11 @@ Deploys metadata
 | metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 | retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
+| [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="MetadataType.postDeployTasks"></a>
 
-### MetadataType.postDeployTasks(metadata, originalMetadata) ⇒ <code>void</code>
+### MetadataType.postDeployTasks(metadata, originalMetadata, [isRefresh]) ⇒ <code>void</code>
 Gets executed after deployment of metadata type
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3247,6 +3264,7 @@ Gets executed after deployment of metadata type
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | originalMetadata | <code>TYPE.MetadataTypeMap</code> | metadata to be updated (contains additioanl fields) |
+| [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="MetadataType.postRetrieveTasks"></a>
 
@@ -4902,8 +4920,9 @@ MessageSendActivity MetadataType
     * [.setFolderPath(metadata)](#TriggeredSendDefinition.setFolderPath)
     * [.parseMetadata(metadata)](#TriggeredSendDefinition.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
     * [.preDeployTasks(metadata)](#TriggeredSendDefinition.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.refresh([keyArr])](#TriggeredSendDefinition.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._findRefreshableItems()](#TriggeredSendDefinition._findRefreshableItems) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [.refresh([keyArr], [checkKey])](#TriggeredSendDefinition.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.getKeysForValidTSDs(metadata)](#TriggeredSendDefinition.getKeysForValidTSDs) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [.findRefreshableItems()](#TriggeredSendDefinition.findRefreshableItems) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [._refreshItem(key, checkKey)](#TriggeredSendDefinition._refreshItem) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="TriggeredSendDefinition.retrieve"></a>
@@ -5007,23 +5026,36 @@ prepares a TSD for deployment
 
 <a name="TriggeredSendDefinition.refresh"></a>
 
-### TriggeredSendDefinition.refresh([keyArr]) ⇒ <code>Promise.&lt;void&gt;</code>
+### TriggeredSendDefinition.refresh([keyArr], [checkKey]) ⇒ <code>Promise.&lt;void&gt;</code>
 TSD-specific refresh method that finds active TSDs and refreshes them
 
 **Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| [keyArr] | <code>Array.&lt;string&gt;</code> | metadata keys |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [keyArr] | <code>Array.&lt;string&gt;</code> |  | metadata keys |
+| [checkKey] | <code>boolean</code> | <code>true</code> | whether to check if the key is valid |
 
-<a name="TriggeredSendDefinition._findRefreshableItems"></a>
+<a name="TriggeredSendDefinition.getKeysForValidTSDs"></a>
 
-### TriggeredSendDefinition.\_findRefreshableItems() ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-helper for [refresh](refresh) that finds active TSDs on the server and filters it by the same rules that [retrieve](retrieve) is using to avoid refreshing TSDs with broken dependencies
+### TriggeredSendDefinition.getKeysForValidTSDs(metadata) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+helper for [refresh](refresh) that extracts the keys from the TSD item map and eli
 
 **Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
 **Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - keyArr  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeMapObj</code> | TSD item map |
+
+<a name="TriggeredSendDefinition.findRefreshableItems"></a>
+
+### TriggeredSendDefinition.findRefreshableItems() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+helper for [refresh](refresh) that finds active TSDs on the server and filters it by the same rules that [retrieve](retrieve) is using to avoid refreshing TSDs with broken dependencies
+
+**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of TSD item map  
 <a name="TriggeredSendDefinition._refreshItem"></a>
 
 ### TriggeredSendDefinition.\_refreshItem(key, checkKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
