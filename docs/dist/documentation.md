@@ -5663,17 +5663,17 @@ DevOps helper class
 **Kind**: global constant  
 
 * [DevOps](#DevOps)
-    * [.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths])](#DevOps.getDeltaList) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+    * [.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths], [commitHistory])](#DevOps.getDeltaList) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
         * [~delta](#DevOps.getDeltaList..delta) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
         * [~copied](#DevOps.getDeltaList..copied) : <code>TYPE.DeltaPkgItem</code>
-    * [.buildDeltaDefinitions(properties, range, [diffArr])](#DevOps.buildDeltaDefinitions) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+    * [.buildDeltaDefinitions(properties, range, [diffArr], [commitHistory])](#DevOps.buildDeltaDefinitions) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
         * [~deltaDeployAll](#DevOps.buildDeltaDefinitions..deltaDeployAll) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
     * [.document(directory, jsonReport)](#DevOps.document) ⇒ <code>void</code>
     * [.getFilesToCommit(properties, buObject, metadataType, keyArr)](#DevOps.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 
 <a name="DevOps.getDeltaList"></a>
 
-### DevOps.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+### DevOps.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths], [commitHistory]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
 Extracts the delta between a commit and the current state for deployment.
 Interactive commit selection if no commits are passed.
 
@@ -5686,9 +5686,10 @@ Interactive commit selection if no commits are passed.
 | [range] | <code>string</code> | git commit range |
 | [saveToDeployDir] | <code>boolean</code> | if true, copy metadata changes into deploy directory |
 | [filterPaths] | <code>string</code> | filter file paths that start with any specified path (comma separated) |
+| [commitHistory] | <code>number</code> | cli option to override default commit history value in config |
 
 
-* [.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths])](#DevOps.getDeltaList) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+* [.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths], [commitHistory])](#DevOps.getDeltaList) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
     * [~delta](#DevOps.getDeltaList..delta) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
     * [~copied](#DevOps.getDeltaList..copied) : <code>TYPE.DeltaPkgItem</code>
 
@@ -5702,7 +5703,7 @@ Interactive commit selection if no commits are passed.
 **Kind**: inner constant of [<code>getDeltaList</code>](#DevOps.getDeltaList)  
 <a name="DevOps.buildDeltaDefinitions"></a>
 
-### DevOps.buildDeltaDefinitions(properties, range, [diffArr]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+### DevOps.buildDeltaDefinitions(properties, range, [diffArr], [commitHistory]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
 wrapper around DevOps.getDeltaList, Builder.buildTemplate and M
 
 **Kind**: static method of [<code>DevOps</code>](#DevOps)  
@@ -5713,6 +5714,7 @@ wrapper around DevOps.getDeltaList, Builder.buildTemplate and M
 | properties | <code>TYPE.Mcdevrc</code> | project config file |
 | range | <code>string</code> | git commit range |
 | [diffArr] | <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code> | instead of running git diff the method can also get a list of files to process |
+| [commitHistory] | <code>number</code> | cli option to override default commit history value in config |
 
 <a name="DevOps.buildDeltaDefinitions..deltaDeployAll"></a>
 
