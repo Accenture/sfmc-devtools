@@ -102,6 +102,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Script">Script</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>Script MetadataType</p>
 </dd>
+<dt><a href="#SendClassification">SendClassification</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>SendClassification MetadataType</p>
+</dd>
 <dt><a href="#SetDefinition">SetDefinition</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>SetDefinition MetadataType</p>
 </dd>
@@ -736,10 +739,7 @@ MessageSendActivity MetadataType
 * [AccountUser](#AccountUser) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, _, [__], [key])](#AccountUser.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveChangelog()](#AccountUser.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.timeSinceDate(date)](#AccountUser.timeSinceDate) ⇒ <code>number</code>
-    * [.getBuName(id)](#AccountUser.getBuName) ⇒ <code>string</code>
     * [.document([metadata])](#AccountUser.document) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._generateDocMd(users, type, columnsToPrint)](#AccountUser._generateDocMd) ⇒ <code>string</code>
     * [.postRetrieveTasks(metadata)](#AccountUser.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.parseMetadata(metadata)](#AccountUser.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 
@@ -765,28 +765,6 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 
 **Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
-<a name="AccountUser.timeSinceDate"></a>
-
-### AccountUser.timeSinceDate(date) ⇒ <code>number</code>
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>number</code> - time difference  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| date | <code>string</code> | first date |
-
-<a name="AccountUser.getBuName"></a>
-
-### AccountUser.getBuName(id) ⇒ <code>string</code>
-helper to print bu names
-
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>string</code> - "bu name (bu id)""  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| id | <code>number</code> | bu id |
-
 <a name="AccountUser.document"></a>
 
 ### AccountUser.document([metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -798,18 +776,6 @@ Creates markdown documentation of all roles
 | Param | Type | Description |
 | --- | --- | --- |
 | [metadata] | <code>TYPE.MetadataTypeMap</code> | user list |
-
-<a name="AccountUser._generateDocMd"></a>
-
-### AccountUser.\_generateDocMd(users, type, columnsToPrint) ⇒ <code>string</code>
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>string</code> - markdown  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| users | <code>Array.&lt;object&gt;</code> | list of users and installed package |
-| type | <code>&#x27;Installed Package&#x27;</code> \| <code>&#x27;User&#x27;</code> | choose what sub type to print |
-| columnsToPrint | <code>Array.&lt;Array&gt;</code> | helper array |
 
 <a name="AccountUser.postRetrieveTasks"></a>
 
@@ -4541,6 +4507,28 @@ additionally, the documentation for dataExtension and automation should be retur
 | --- | --- | --- |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
+<a name="SendClassification"></a>
+
+## SendClassification ⇐ [<code>MetadataType</code>](#MetadataType)
+SendClassification MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+<a name="SendClassification.retrieve"></a>
+
+### SendClassification.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
+
+**Kind**: static method of [<code>SendClassification</code>](#SendClassification)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [_] | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
 <a name="SetDefinition"></a>
 
 ## SetDefinition ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -5700,17 +5688,17 @@ DevOps helper class
 **Kind**: global constant  
 
 * [DevOps](#DevOps)
-    * [.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths])](#DevOps.getDeltaList) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+    * [.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths], [commitHistory])](#DevOps.getDeltaList) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
         * [~delta](#DevOps.getDeltaList..delta) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
         * [~copied](#DevOps.getDeltaList..copied) : <code>TYPE.DeltaPkgItem</code>
-    * [.buildDeltaDefinitions(properties, range, [diffArr])](#DevOps.buildDeltaDefinitions) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+    * [.buildDeltaDefinitions(properties, range, [diffArr], [commitHistory])](#DevOps.buildDeltaDefinitions) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
         * [~deltaDeployAll](#DevOps.buildDeltaDefinitions..deltaDeployAll) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
     * [.document(directory, jsonReport)](#DevOps.document) ⇒ <code>void</code>
     * [.getFilesToCommit(properties, buObject, metadataType, keyArr)](#DevOps.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 
 <a name="DevOps.getDeltaList"></a>
 
-### DevOps.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+### DevOps.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths], [commitHistory]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
 Extracts the delta between a commit and the current state for deployment.
 Interactive commit selection if no commits are passed.
 
@@ -5723,9 +5711,10 @@ Interactive commit selection if no commits are passed.
 | [range] | <code>string</code> | git commit range |
 | [saveToDeployDir] | <code>boolean</code> | if true, copy metadata changes into deploy directory |
 | [filterPaths] | <code>string</code> | filter file paths that start with any specified path (comma separated) |
+| [commitHistory] | <code>number</code> | cli option to override default commit history value in config |
 
 
-* [.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths])](#DevOps.getDeltaList) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+* [.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths], [commitHistory])](#DevOps.getDeltaList) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
     * [~delta](#DevOps.getDeltaList..delta) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
     * [~copied](#DevOps.getDeltaList..copied) : <code>TYPE.DeltaPkgItem</code>
 
@@ -5739,7 +5728,7 @@ Interactive commit selection if no commits are passed.
 **Kind**: inner constant of [<code>getDeltaList</code>](#DevOps.getDeltaList)  
 <a name="DevOps.buildDeltaDefinitions"></a>
 
-### DevOps.buildDeltaDefinitions(properties, range, [diffArr]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+### DevOps.buildDeltaDefinitions(properties, range, [diffArr], [commitHistory]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
 wrapper around DevOps.getDeltaList, Builder.buildTemplate and M
 
 **Kind**: static method of [<code>DevOps</code>](#DevOps)  
@@ -5750,6 +5739,7 @@ wrapper around DevOps.getDeltaList, Builder.buildTemplate and M
 | properties | <code>TYPE.Mcdevrc</code> | project config file |
 | range | <code>string</code> | git commit range |
 | [diffArr] | <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code> | instead of running git diff the method can also get a list of files to process |
+| [commitHistory] | <code>number</code> | cli option to override default commit history value in config |
 
 <a name="DevOps.buildDeltaDefinitions..deltaDeployAll"></a>
 
