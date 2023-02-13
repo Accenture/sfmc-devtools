@@ -1601,7 +1601,7 @@ DataExtension MetadataType
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.DataExtensionItem&gt;</code>
     * [.document([metadata])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(customerKey)](#DataExtension.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.postDeleteTasks(customerKey)](#DataExtension.postDeleteTasks) ⇒ <code>void</code>
+    * [.postDeleteTasks(customerKey)](#DataExtension.postDeleteTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.retrieveForCache()](#DataExtension.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtension.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.setFolderPath(metadata)](#DataExtension.setFolderPath)
@@ -1745,10 +1745,11 @@ Delete a metadata item from the specified business unit
 
 <a name="DataExtension.postDeleteTasks"></a>
 
-### DataExtension.postDeleteTasks(customerKey) ⇒ <code>void</code>
+### DataExtension.postDeleteTasks(customerKey) ⇒ <code>Promise.&lt;void&gt;</code>
 clean up after deleting a metadata item
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - - promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3176,7 +3177,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.checkForErrors(ex)](#MetadataType.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
     * [.document([metadata], [isDeploy])](#MetadataType.document) ⇒ <code>void</code>
     * [.deleteByKey(customerKey)](#MetadataType.deleteByKey) ⇒ <code>boolean</code>
-    * [.postDeleteTasks(customerKey)](#MetadataType.postDeleteTasks) ⇒ <code>void</code>
+    * [.postDeleteTasks(customerKey, [additionalExtensions])](#MetadataType.postDeleteTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKeySOAP(customerKey, [overrideType], [handleOutside])](#MetadataType.deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.deleteByKeyREST(url, key, [handleOutside])](#MetadataType.deleteByKeyREST) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType.readBUMetadataForType) ⇒ <code>object</code>
@@ -3826,14 +3827,16 @@ Delete a metadata item from the specified business unit
 
 <a name="MetadataType.postDeleteTasks"></a>
 
-### MetadataType.postDeleteTasks(customerKey) ⇒ <code>void</code>
+### MetadataType.postDeleteTasks(customerKey, [additionalExtensions]) ⇒ <code>Promise.&lt;void&gt;</code>
 clean up after deleting a metadata item
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | customerKey | <code>string</code> | Identifier of metadata item |
+| [additionalExtensions] | <code>Array.&lt;string&gt;</code> | additional file extensions to delete on top of `${this.definition.type}-meta.json` |
 
 <a name="MetadataType.deleteByKeySOAP"></a>
 
@@ -4024,6 +4027,7 @@ Query MetadataType
     * [.getFilesToCommit(keyArr)](#Query.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
     * [.checkForErrors(ex)](#Query.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
     * [.deleteByKey(customerKey)](#Query.deleteByKey) ⇒ <code>boolean</code>
+    * [.postDeleteTasks(customerKey)](#Query.postDeleteTasks) ⇒ <code>void</code>
 
 <a name="Query.retrieve"></a>
 
@@ -4210,6 +4214,17 @@ Delete a metadata item from the specified business unit
 | Param | Type | Description |
 | --- | --- | --- |
 | customerKey | <code>string</code> | Identifier of data extension |
+
+<a name="Query.postDeleteTasks"></a>
+
+### Query.postDeleteTasks(customerKey) ⇒ <code>void</code>
+clean up after deleting a metadata item
+
+**Kind**: static method of [<code>Query</code>](#Query)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of metadata item |
 
 <a name="Role"></a>
 
