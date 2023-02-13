@@ -5,6 +5,7 @@ on:
     types: [closed]
     branches:
       - develop
+      - hotfix
 
 jobs:
   closeIssueOnPrMergeTrigger:
