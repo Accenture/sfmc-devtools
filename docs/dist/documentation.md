@@ -1257,6 +1257,8 @@ Automation MetadataType
     * [._calcTime(offsetServer, dateInput, [offsetInput])](#Automation._calcTime) ⇒ <code>string</code>
     * [.document([metadata])](#Automation.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getFilesToCommit(keyArr)](#Automation.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.deleteByKey(customerKey)](#Automation.deleteByKey) ⇒ <code>boolean</code>
+    * [.postDeleteTasks(customerKey)](#Automation.postDeleteTasks) ⇒ <code>void</code>
 
 <a name="Automation.retrieve"></a>
 
@@ -1475,6 +1477,29 @@ additionally, the documentation for dataExtension and automation should be retur
 | Param | Type | Description |
 | --- | --- | --- |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Automation.deleteByKey"></a>
+
+### Automation.deleteByKey(customerKey) ⇒ <code>boolean</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+**Returns**: <code>boolean</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of data extension |
+
+<a name="Automation.postDeleteTasks"></a>
+
+### Automation.postDeleteTasks(customerKey) ⇒ <code>void</code>
+clean up after deleting a metadata item
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of metadata item |
 
 <a name="Campaign"></a>
 
