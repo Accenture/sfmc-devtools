@@ -1,19 +1,5 @@
 # PR details
 
-## What is the purpose of this pull request? (put an "X" next to an item)
-
-_Please delete options that are not relevant._
-
-- [ ] Documentation update
-- [ ] Bugfix
-- [ ] New metadata support
-- [ ] Enhanced metadata
-- [ ] Add a CLI option
-- [ ] Add something to the core
-- [ ] Technical debt removed
-- [ ] Dependencies added / updated
-- [ ] Other, please explain:
-
 ## What changes did you make? (Give an overview)
 
 ...
