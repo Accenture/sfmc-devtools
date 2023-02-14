@@ -738,7 +738,13 @@ MessageSendActivity MetadataType
 
 * [AccountUser](#AccountUser) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, _, [__], [key])](#AccountUser.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache()](#AccountUser.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.create(metadata)](#AccountUser.create) ⇒ <code>Promise</code>
+    * [.update(metadata)](#AccountUser.update) ⇒ <code>Promise</code>
+    * [.preDeployTasks(metadata)](#AccountUser.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#AccountUser.createOrUpdate) ⇒ <code>void</code>
     * [.retrieveChangelog()](#AccountUser.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.generatePassword([length])](#AccountUser.generatePassword) ⇒ <code>string</code>
     * [.document([metadata])](#AccountUser.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.postRetrieveTasks(metadata)](#AccountUser.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.parseMetadata(metadata)](#AccountUser.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -758,6 +764,64 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
+<a name="AccountUser.retrieveForCache"></a>
+
+### AccountUser.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves import definition metadata for caching
+
+**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+<a name="AccountUser.create"></a>
+
+### AccountUser.create(metadata) ⇒ <code>Promise</code>
+Create a single item.
+
+**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
+
+<a name="AccountUser.update"></a>
+
+### AccountUser.update(metadata) ⇒ <code>Promise</code>
+Updates a single item.
+
+**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
+
+<a name="AccountUser.preDeployTasks"></a>
+
+### AccountUser.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+prepares a item for deployment
+
+**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - metadata object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | of a single item |
+
+<a name="AccountUser.createOrUpdate"></a>
+
+### AccountUser.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>void</code>
+helper for [upsert](#MetadataType.upsert)
+
+**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata itme |
+| metadataKey | <code>string</code> | key of item we are looking at |
+| hasError | <code>boolean</code> | error flag from previous code |
+| metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
+| metadataToCreate | <code>Array.&lt;TYPE.MetadataTypeItem&gt;</code> | list of items to create |
+
 <a name="AccountUser.retrieveChangelog"></a>
 
 ### AccountUser.retrieveChangelog() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -765,6 +829,18 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 
 **Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+<a name="AccountUser.generatePassword"></a>
+
+### AccountUser.generatePassword([length]) ⇒ <code>string</code>
+helper for [createOrUpdate](createOrUpdate) to generate a random initial password for new users
+
+**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
+**Returns**: <code>string</code> - random password  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [length] | <code>number</code> | <code>15</code> | length of password |
+
 <a name="AccountUser.document"></a>
 
 ### AccountUser.document([metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -3468,6 +3544,8 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 <a name="MetadataType.createOrUpdate"></a>
 
 ### MetadataType.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>void</code>
+helper for [upsert](#MetadataType.upsert)
+
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 
 | Param | Type | Description |
@@ -4949,7 +5027,7 @@ MessageSendActivity MetadataType
 * [TriggeredSendDefinition](#TriggeredSendDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#TriggeredSendDefinition.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.create(metadata)](#TriggeredSendDefinition.create) ⇒ <code>Promise</code>
-    * [.update(metadata, [handleOutside])](#TriggeredSendDefinition.update) ⇒ <code>Promise</code>
+    * [.update(metadata)](#TriggeredSendDefinition.update) ⇒ <code>Promise</code>
     * [.deleteByKey(customerKey)](#TriggeredSendDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postRetrieveTasks(metadata)](#TriggeredSendDefinition.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setFolderPath(metadata)](#TriggeredSendDefinition.setFolderPath)
@@ -4988,7 +5066,7 @@ Create a single TSD.
 
 <a name="TriggeredSendDefinition.update"></a>
 
-### TriggeredSendDefinition.update(metadata, [handleOutside]) ⇒ <code>Promise</code>
+### TriggeredSendDefinition.update(metadata) ⇒ <code>Promise</code>
 Updates a single TSD.
 
 **Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
@@ -4997,7 +5075,6 @@ Updates a single TSD.
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
-| [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
 <a name="TriggeredSendDefinition.deleteByKey"></a>
 
