@@ -747,7 +747,6 @@ MessageSendActivity MetadataType
     * [.generatePassword([length])](#AccountUser.generatePassword) ⇒ <code>string</code>
     * [.document([metadata])](#AccountUser.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.postRetrieveTasks(metadata)](#AccountUser.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.parseMetadata(metadata)](#AccountUser.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 
 <a name="AccountUser.retrieve"></a>
 
@@ -833,13 +832,14 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 
 ### AccountUser.generatePassword([length]) ⇒ <code>string</code>
 helper for [createOrUpdate](createOrUpdate) to generate a random initial password for new users
+note: possible minimum length values in SFMC are 6, 8, 10, 15 chars. Therefore we should default here to 15 chars.
 
 **Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
 **Returns**: <code>string</code> - random password  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| [length] | <code>number</code> | <code>15</code> | length of password |
+| [length] | <code>number</code> | <code>15</code> | length of password; defaults to 15 |
 
 <a name="AccountUser.document"></a>
 
@@ -864,18 +864,6 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
-
-<a name="AccountUser.parseMetadata"></a>
-
-### AccountUser.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
-parses retrieved Metadata before saving
-
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one sql string  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single query activity definition |
 
 <a name="Asset"></a>
 
