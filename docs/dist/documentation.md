@@ -5096,7 +5096,7 @@ CLI entry for SFMC DevTools
     * [.logSubtypes(subTypeArr)](#Util.logSubtypes) ⇒ <code>void</code>
     * [.getKeysString(keyArr, [isId])](#Util.getKeysString) ⇒ <code>string</code>
     * [.sleep(ms)](#Util.sleep) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.isSsjsBlock(code)](#Util.isSsjsBlock) ⇒ <code>string</code>
+    * [.getSsjs(code)](#Util.getSsjs) ⇒ <code>string</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -5403,13 +5403,13 @@ pause execution of code; useful when multiple server calls are dependent on each
 | --- | --- | --- |
 | ms | <code>number</code> | time in miliseconds to wait |
 
-<a name="Util.isSsjsBlock"></a>
+<a name="Util.getSsjs"></a>
 
-### Util.isSsjsBlock(code) ⇒ <code>string</code>
+### Util.getSsjs(code) ⇒ <code>string</code>
 helper for [_extractCode](#Asset._extractCode) and [prepExtractedCode](#Script.prepExtractedCode) to determine if a code block is a valid SSJS block
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>string</code> - the code if code block is a valid SSJS block, otherwise null  
+**Returns**: <code>string</code> - the SSJS code if code block is a valid SSJS block, otherwise null  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6939,7 +6939,7 @@ Util that contains logger and simple util methods
     * [.logSubtypes(subTypeArr)](#Util.logSubtypes) ⇒ <code>void</code>
     * [.getKeysString(keyArr, [isId])](#Util.getKeysString) ⇒ <code>string</code>
     * [.sleep(ms)](#Util.sleep) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.isSsjsBlock(code)](#Util.isSsjsBlock) ⇒ <code>string</code>
+    * [.getSsjs(code)](#Util.getSsjs) ⇒ <code>string</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -7246,13 +7246,13 @@ pause execution of code; useful when multiple server calls are dependent on each
 | --- | --- | --- |
 | ms | <code>number</code> | time in miliseconds to wait |
 
-<a name="Util.isSsjsBlock"></a>
+<a name="Util.getSsjs"></a>
 
-### Util.isSsjsBlock(code) ⇒ <code>string</code>
+### Util.getSsjs(code) ⇒ <code>string</code>
 helper for [_extractCode](#Asset._extractCode) and [prepExtractedCode](#Script.prepExtractedCode) to determine if a code block is a valid SSJS block
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>string</code> - the code if code block is a valid SSJS block, otherwise null  
+**Returns**: <code>string</code> - the SSJS code if code block is a valid SSJS block, otherwise null  
 
 | Param | Type | Description |
 | --- | --- | --- |
