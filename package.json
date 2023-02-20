@@ -59,7 +59,7 @@
     },
     "dependencies": {
         "beauty-amp-core": "0.3.7",
-        "cli-progress": "3.11.2",
+        "cli-progress": "3.12.0",
         "command-exists": "1.2.9",
         "conf": "10.2.0",
         "console.table": "0.10.0",
