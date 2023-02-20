@@ -1274,6 +1274,8 @@ Automation MetadataType
     * [._calcTime(offsetServer, dateInput, [offsetInput])](#Automation._calcTime) ⇒ <code>string</code>
     * [.document([metadata])](#Automation.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getFilesToCommit(keyArr)](#Automation.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.deleteByKey(customerKey)](#Automation.deleteByKey) ⇒ <code>boolean</code>
+    * [.postDeleteTasks(customerKey)](#Automation.postDeleteTasks) ⇒ <code>void</code>
 
 <a name="Automation.retrieve"></a>
 
@@ -1494,6 +1496,29 @@ additionally, the documentation for dataExtension and automation should be retur
 | --- | --- | --- |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
+<a name="Automation.deleteByKey"></a>
+
+### Automation.deleteByKey(customerKey) ⇒ <code>boolean</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+**Returns**: <code>boolean</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of data extension |
+
+<a name="Automation.postDeleteTasks"></a>
+
+### Automation.postDeleteTasks(customerKey) ⇒ <code>void</code>
+clean up after deleting a metadata item
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of metadata item |
+
 <a name="Campaign"></a>
 
 ## Campaign ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -1619,7 +1644,7 @@ DataExtension MetadataType
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.DataExtensionItem&gt;</code>
     * [.document([metadata])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(customerKey)](#DataExtension.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.postDeleteTasks(customerKey)](#DataExtension.postDeleteTasks) ⇒ <code>void</code>
+    * [.postDeleteTasks(customerKey)](#DataExtension.postDeleteTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.retrieveForCache()](#DataExtension.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtension.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.setFolderPath(metadata)](#DataExtension.setFolderPath)
@@ -1764,10 +1789,11 @@ Delete a metadata item from the specified business unit
 
 <a name="DataExtension.postDeleteTasks"></a>
 
-### DataExtension.postDeleteTasks(customerKey) ⇒ <code>void</code>
+### DataExtension.postDeleteTasks(customerKey) ⇒ <code>Promise.&lt;void&gt;</code>
 clean up after deleting a metadata item
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - - promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1835,7 +1861,7 @@ DataExtensionField MetadataType
     * [.postRetrieveTasks(metadata, forDataExtension)](#DataExtensionField.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionFieldItem</code>
     * [.prepareDeployColumnsOnUpdate(deployColumns, deKey)](#DataExtensionField.prepareDeployColumnsOnUpdate) ⇒ <code>Object.&lt;string, TYPE.DataExtensionFieldItem&gt;</code>
     * [.deleteByKey(customerKey)](#DataExtensionField.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.deleteByKeySOAP(customerKey, [handleOutside])](#DataExtensionField.deleteByKeySOAP) ⇒ <code>boolean</code>
+    * [.deleteByKeySOAP(customerKey)](#DataExtensionField.deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#DataExtensionField.postDeleteTasks) ⇒ <code>void</code>
 
 <a name="DataExtensionField.retrieve"></a>
@@ -1930,7 +1956,7 @@ Delete a metadata item from the specified business unit
 
 <a name="DataExtensionField.deleteByKeySOAP"></a>
 
-### DataExtensionField.deleteByKeySOAP(customerKey, [handleOutside]) ⇒ <code>boolean</code>
+### DataExtensionField.deleteByKeySOAP(customerKey) ⇒ <code>boolean</code>
 Delete a data extension from the specified business unit
 
 **Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
@@ -1939,7 +1965,6 @@ Delete a data extension from the specified business unit
 | Param | Type | Description |
 | --- | --- | --- |
 | customerKey | <code>string</code> | Identifier of metadata |
-| [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
 <a name="DataExtensionField.postDeleteTasks"></a>
 
@@ -3196,8 +3221,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.checkForErrors(ex)](#MetadataType.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
     * [.document([metadata], [isDeploy])](#MetadataType.document) ⇒ <code>void</code>
     * [.deleteByKey(customerKey)](#MetadataType.deleteByKey) ⇒ <code>boolean</code>
-    * [.postDeleteTasks(customerKey)](#MetadataType.postDeleteTasks) ⇒ <code>void</code>
-    * [.deleteByKeySOAP(customerKey, [handleOutside])](#MetadataType.deleteByKeySOAP) ⇒ <code>boolean</code>
+    * [.postDeleteTasks(customerKey, [additionalExtensions])](#MetadataType.postDeleteTasks) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.deleteByKeySOAP(customerKey, [overrideKeyField], [handleOutside])](#MetadataType.deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.deleteByKeyREST(url, key, [handleOutside])](#MetadataType.deleteByKeyREST) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType.readBUMetadataForType) ⇒ <code>object</code>
     * [.getFilesToCommit(keyArr)](#MetadataType.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
@@ -3850,18 +3875,20 @@ Delete a metadata item from the specified business unit
 
 <a name="MetadataType.postDeleteTasks"></a>
 
-### MetadataType.postDeleteTasks(customerKey) ⇒ <code>void</code>
+### MetadataType.postDeleteTasks(customerKey, [additionalExtensions]) ⇒ <code>Promise.&lt;void&gt;</code>
 clean up after deleting a metadata item
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | customerKey | <code>string</code> | Identifier of metadata item |
+| [additionalExtensions] | <code>Array.&lt;string&gt;</code> | additional file extensions to delete on top of `${this.definition.type}-meta.json` |
 
 <a name="MetadataType.deleteByKeySOAP"></a>
 
-### MetadataType.deleteByKeySOAP(customerKey, [handleOutside]) ⇒ <code>boolean</code>
+### MetadataType.deleteByKeySOAP(customerKey, [overrideKeyField], [handleOutside]) ⇒ <code>boolean</code>
 Delete a data extension from the specified business unit
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3870,6 +3897,7 @@ Delete a data extension from the specified business unit
 | Param | Type | Description |
 | --- | --- | --- |
 | customerKey | <code>string</code> | Identifier of metadata |
+| [overrideKeyField] | <code>string</code> | optionally change the name of the key field if the api uses a different name |
 | [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
 <a name="MetadataType.deleteByKeyREST"></a>
@@ -4046,6 +4074,8 @@ Query MetadataType
     * [.parseMetadata(metadata)](#Query.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.getFilesToCommit(keyArr)](#Query.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
     * [.checkForErrors(ex)](#Query.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
+    * [.deleteByKey(customerKey)](#Query.deleteByKey) ⇒ <code>boolean</code>
+    * [.postDeleteTasks(customerKey)](#Query.postDeleteTasks) ⇒ <code>void</code>
 
 <a name="Query.retrieve"></a>
 
@@ -4220,6 +4250,29 @@ Standardizes a check for multiple messages but adds query specific filters to er
 | Param | Type | Description |
 | --- | --- | --- |
 | ex | <code>object</code> | response payload from REST API |
+
+<a name="Query.deleteByKey"></a>
+
+### Query.deleteByKey(customerKey) ⇒ <code>boolean</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>Query</code>](#Query)  
+**Returns**: <code>boolean</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of data extension |
+
+<a name="Query.postDeleteTasks"></a>
+
+### Query.postDeleteTasks(customerKey) ⇒ <code>void</code>
+clean up after deleting a metadata item
+
+**Kind**: static method of [<code>Query</code>](#Query)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of metadata item |
 
 <a name="Role"></a>
 
