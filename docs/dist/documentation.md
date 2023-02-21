@@ -5782,7 +5782,8 @@ DevOps helper class
 * [DevOps](#DevOps)
     * [.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths], [commitHistory])](#DevOps.getDeltaList) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
         * [~delta](#DevOps.getDeltaList..delta) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
-        * [~copied](#DevOps.getDeltaList..copied) : <code>TYPE.DeltaPkgItem</code>
+        * [~buObjects](#DevOps.getDeltaList..buObjects) : <code>Object.&lt;string, TYPE.BuObject&gt;</code>
+        * [~copied](#DevOps.getDeltaList..copied) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
     * [.buildDeltaDefinitions(properties, range, [diffArr], [commitHistory])](#DevOps.buildDeltaDefinitions) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
         * [~deltaDeployAll](#DevOps.buildDeltaDefinitions..deltaDeployAll) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
     * [.document(directory, jsonReport)](#DevOps.document) ⇒ <code>void</code>
@@ -5808,15 +5809,20 @@ Interactive commit selection if no commits are passed.
 
 * [.getDeltaList(properties, [range], [saveToDeployDir], [filterPaths], [commitHistory])](#DevOps.getDeltaList) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
     * [~delta](#DevOps.getDeltaList..delta) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
-    * [~copied](#DevOps.getDeltaList..copied) : <code>TYPE.DeltaPkgItem</code>
+    * [~buObjects](#DevOps.getDeltaList..buObjects) : <code>Object.&lt;string, TYPE.BuObject&gt;</code>
+    * [~copied](#DevOps.getDeltaList..copied) : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
 
 <a name="DevOps.getDeltaList..delta"></a>
 
 #### getDeltaList~delta : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
 **Kind**: inner constant of [<code>getDeltaList</code>](#DevOps.getDeltaList)  
+<a name="DevOps.getDeltaList..buObjects"></a>
+
+#### getDeltaList~buObjects : <code>Object.&lt;string, TYPE.BuObject&gt;</code>
+**Kind**: inner constant of [<code>getDeltaList</code>](#DevOps.getDeltaList)  
 <a name="DevOps.getDeltaList..copied"></a>
 
-#### getDeltaList~copied : <code>TYPE.DeltaPkgItem</code>
+#### getDeltaList~copied : <code>Array.&lt;TYPE.DeltaPkgItem&gt;</code>
 **Kind**: inner constant of [<code>getDeltaList</code>](#DevOps.getDeltaList)  
 <a name="DevOps.buildDeltaDefinitions"></a>
 
