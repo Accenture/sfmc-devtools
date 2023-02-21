@@ -18,6 +18,7 @@
         "*-meta.ssjs": "${capture}-meta.json",
         "*.asset-asset-meta.html": "${dirname}.asset-asset-meta.json",
         "*.asset-message-meta.html": "${dirname}.asset-message-meta.json",
+        "*.asset-template-meta.html": "${dirname}.asset-template-meta.json",
         "*.css": "${capture}.asset-code-meta.json",
         "*.docx": "${capture}.asset-document-meta.json",
         "*.eps": "${capture}.asset-image-meta.json",

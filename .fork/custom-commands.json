@@ -10,5 +10,17 @@
       "type": "url",
       "url": "https://github.com/Accenture/sfmc-devtools/compare/develop...$shortname?expand=1"
     }
+  },
+  {
+    "name": "Create PR to hotfix branch",
+    "target": "ref",
+    "refTargets": [
+      "localbranch",
+      "remotebranch"
+    ],
+    "action": {
+      "type": "url",
+      "url": "https://github.com/Accenture/sfmc-devtools/compare/hotfix...$shortname?expand=1"
+    }
   }
 ]
