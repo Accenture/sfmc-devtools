@@ -137,6 +137,7 @@ const SDK = require('sfmc-sdk');
  * @property {string} LastSuccessfulLogin this.timeSinceDate(user.LastSuccessfulLogin)
  * @property {string} CreatedDate user.CreatedDate
  * @property {string} ModifiedDate user.ModifiedDate
+ * @typedef {{before:AccountUserDocument,after:AccountUserDocument}} beforeAfterAccountUserDocument
  */
 
 /**

@@ -219,7 +219,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dd></dd>
 <dt><a href="#DataExtensionMap">DataExtensionMap</a> : <code>object</code></dt>
 <dd></dd>
-<dt><a href="#AccountUserDocument">AccountUserDocument</a> : <code>object</code></dt>
+<dt><a href="#beforeAfterAccountUserDocument">beforeAfterAccountUserDocument</a> : <code>object</code></dt>
 <dd></dd>
 <dt><a href="#AutomationActivity">AutomationActivity</a> : <code>object</code></dt>
 <dd></dd>
@@ -744,7 +744,6 @@ MessageSendActivity MetadataType
     * [.preDeployTasks(metadata)](#AccountUser.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#AccountUser.createOrUpdate) ⇒ <code>void</code>
     * [.retrieveChangelog()](#AccountUser.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.generatePassword([length])](#AccountUser.generatePassword) ⇒ <code>string</code>
     * [.document([metadata])](#AccountUser.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.postRetrieveTasks(metadata)](#AccountUser.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
 
@@ -828,19 +827,6 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 
 **Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
-<a name="AccountUser.generatePassword"></a>
-
-### AccountUser.generatePassword([length]) ⇒ <code>string</code>
-helper for [createOrUpdate](createOrUpdate) to generate a random initial password for new users
-note: possible minimum length values in SFMC are 6, 8, 10, 15 chars. Therefore we should default here to 15 chars.
-
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>string</code> - random password  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| [length] | <code>number</code> | <code>15</code> | length of password; defaults to 15 |
-
 <a name="AccountUser.document"></a>
 
 ### AccountUser.document([metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -7607,9 +7593,9 @@ key=customer key
 | [Template] | <code>object</code> | - |
 | [Template.CustomerKey] | <code>string</code> | key of optionally associated DE teplate |
 
-<a name="AccountUserDocument"></a>
+<a name="beforeAfterAccountUserDocument"></a>
 
-## AccountUserDocument : <code>object</code>
+## beforeAfterAccountUserDocument : <code>object</code>
 **Kind**: global typedef  
 **Properties**
 
