@@ -5213,6 +5213,7 @@ CLI entry for SFMC DevTools
     * [.logSubtypes(subTypeArr)](#Util.logSubtypes) ⇒ <code>void</code>
     * [.getKeysString(keyArr, [isId])](#Util.getKeysString) ⇒ <code>string</code>
     * [.sleep(ms)](#Util.sleep) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.getSsjs(code)](#Util.getSsjs) ⇒ <code>string</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -5519,6 +5520,33 @@ pause execution of code; useful when multiple server calls are dependent on each
 | --- | --- | --- |
 | ms | <code>number</code> | time in miliseconds to wait |
 
+<a name="Util.getSsjs"></a>
+
+### Util.getSsjs(code) ⇒ <code>string</code>
+helper for [_extractCode](#Asset._extractCode) and [prepExtractedCode](#Script.prepExtractedCode) to determine if a code block is a valid SSJS block
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>string</code> - the SSJS code if code block is a valid SSJS block, otherwise null  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| code | <code>string</code> | code block to check |
+
+**Example**  
+```js
+the following is invalid:
+<script runat="server">
+      // 1
+  </script>
+  <script runat="server">
+      // 2
+  </script>
+
+  the following is valid:
+  <script runat="server">
+      // 3
+  </script>
+```
 <a name="MetadataTypeDefinitions"></a>
 
 ## MetadataTypeDefinitions
@@ -7036,6 +7064,7 @@ Util that contains logger and simple util methods
     * [.logSubtypes(subTypeArr)](#Util.logSubtypes) ⇒ <code>void</code>
     * [.getKeysString(keyArr, [isId])](#Util.getKeysString) ⇒ <code>string</code>
     * [.sleep(ms)](#Util.sleep) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.getSsjs(code)](#Util.getSsjs) ⇒ <code>string</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -7342,6 +7371,33 @@ pause execution of code; useful when multiple server calls are dependent on each
 | --- | --- | --- |
 | ms | <code>number</code> | time in miliseconds to wait |
 
+<a name="Util.getSsjs"></a>
+
+### Util.getSsjs(code) ⇒ <code>string</code>
+helper for [_extractCode](#Asset._extractCode) and [prepExtractedCode](#Script.prepExtractedCode) to determine if a code block is a valid SSJS block
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>string</code> - the SSJS code if code block is a valid SSJS block, otherwise null  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| code | <code>string</code> | code block to check |
+
+**Example**  
+```js
+the following is invalid:
+<script runat="server">
+      // 1
+  </script>
+  <script runat="server">
+      // 2
+  </script>
+
+  the following is valid:
+  <script runat="server">
+      // 3
+  </script>
+```
 <a name="csvToArray"></a>
 
 ## csvToArray(csv) ⇒ <code>Array.&lt;string&gt;</code>
