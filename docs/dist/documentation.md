@@ -219,7 +219,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dd></dd>
 <dt><a href="#DataExtensionMap">DataExtensionMap</a> : <code>object</code></dt>
 <dd></dd>
-<dt><a href="#beforeAfterAccountUserDocument">beforeAfterAccountUserDocument</a> : <code>object</code></dt>
+<dt><a href="#AccountUserDocumentDiff">AccountUserDocumentDiff</a> : <code>object</code></dt>
 <dd></dd>
 <dt><a href="#AutomationActivity">AutomationActivity</a> : <code>object</code></dt>
 <dd></dd>
@@ -7593,9 +7593,9 @@ key=customer key
 | [Template] | <code>object</code> | - |
 | [Template.CustomerKey] | <code>string</code> | key of optionally associated DE teplate |
 
-<a name="beforeAfterAccountUserDocument"></a>
+<a name="AccountUserDocumentDiff"></a>
 
-## beforeAfterAccountUserDocument : <code>object</code>
+## AccountUserDocumentDiff : <code>object</code>
 **Kind**: global typedef  
 **Properties**
 
