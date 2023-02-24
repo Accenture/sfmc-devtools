@@ -219,7 +219,10 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dd></dd>
 <dt><a href="#DataExtensionMap">DataExtensionMap</a> : <code>object</code></dt>
 <dd></dd>
-<dt><a href="#AccountUserDocumentDiff">AccountUserDocumentDiff</a> : <code>object</code></dt>
+<dt><a href="#AccountUserDocumentMap">AccountUserDocumentMap</a> : <code>object</code></dt>
+<dd><p>key=customer key</p>
+</dd>
+<dt><a href="#BusinessUnitAssignmentConfiguration">BusinessUnitAssignmentConfiguration</a> : <code>object</code></dt>
 <dd></dd>
 <dt><a href="#AutomationActivity">AutomationActivity</a> : <code>object</code></dt>
 <dd></dd>
@@ -741,8 +744,10 @@ MessageSendActivity MetadataType
     * [.retrieveForCache()](#AccountUser.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.create(metadata)](#AccountUser.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#AccountUser.update) ⇒ <code>Promise</code>
-    * [.preDeployTasks(metadata)](#AccountUser.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.preDeployTasks(metadata)](#AccountUser.preDeployTasks) ⇒ <code>TYPE.AccountUserDocument</code>
     * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#AccountUser.createOrUpdate) ⇒ <code>void</code>
+    * [.prepareBuAssignments(metadataToUpdate, metadataToCreate, metadata)](#AccountUser.prepareBuAssignments)
+    * [.postDeployTasks(metadata)](#AccountUser.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.retrieveChangelog()](#AccountUser.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.document([metadata])](#AccountUser.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.postRetrieveTasks(metadata)](#AccountUser.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -795,15 +800,15 @@ Updates a single item.
 
 <a name="AccountUser.preDeployTasks"></a>
 
-### AccountUser.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### AccountUser.preDeployTasks(metadata) ⇒ <code>TYPE.AccountUserDocument</code>
 prepares a item for deployment
 
 **Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - metadata object  
+**Returns**: <code>TYPE.AccountUserDocument</code> - metadata object  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | of a single item |
+| metadata | <code>TYPE.AccountUserDocument</code> | of a single item |
 
 <a name="AccountUser.createOrUpdate"></a>
 
@@ -817,8 +822,31 @@ helper for [upsert](#MetadataType.upsert)
 | metadata | <code>TYPE.MetadataTypeItem</code> | single metadata itme |
 | metadataKey | <code>string</code> | key of item we are looking at |
 | hasError | <code>boolean</code> | error flag from previous code |
-| metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
-| metadataToCreate | <code>Array.&lt;TYPE.MetadataTypeItem&gt;</code> | list of items to create |
+| metadataToUpdate | <code>Array.&lt;TYPE.AccountUserDocumentDiff&gt;</code> | list of items to update |
+| metadataToCreate | <code>Array.&lt;TYPE.AccountUserDocument&gt;</code> | list of items to create |
+
+<a name="AccountUser.prepareBuAssignments"></a>
+
+### AccountUser.prepareBuAssignments(metadataToUpdate, metadataToCreate, metadata)
+**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataToUpdate | <code>Array.&lt;TYPE.AccountUserDocumentDiff&gt;</code> | list of items to update |
+| metadataToCreate | <code>Array.&lt;TYPE.AccountUserDocument&gt;</code> | list of items to create |
+| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata itme |
+
+<a name="AccountUser.postDeployTasks"></a>
+
+### AccountUser.postDeployTasks(metadata) ⇒ <code>Promise.&lt;void&gt;</code>
+Gets executed after deployment of metadata type
+
+**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.AccountUserDocumentMap</code> | metadata mapped by their keyField |
 
 <a name="AccountUser.retrieveChangelog"></a>
 
@@ -7593,31 +7621,54 @@ key=customer key
 | [Template] | <code>object</code> | - |
 | [Template.CustomerKey] | <code>string</code> | key of optionally associated DE teplate |
 
-<a name="AccountUserDocumentDiff"></a>
+<a name="AccountUserDocumentMap"></a>
 
-## AccountUserDocumentDiff : <code>object</code>
+## AccountUserDocumentMap : <code>object</code>
+key=customer key
+
 **Kind**: global typedef  
 **Properties**
 
 | Name | Type | Description |
 | --- | --- | --- |
-| TYPE | <code>string</code> | user.type__c |
-| UserID | <code>string</code> | user.UserID |
-| AccountUserID | <code>string</code> | user.AccountUserID |
+| [ID] | <code>string</code> | equal to UserID; optional in update/create calls |
+| UserID | <code>string</code> | equal to ID; required in update/create calls |
+| AccountUserID | <code>number</code> | user.AccountUserID |
 | CustomerKey | <code>string</code> | user.CustomerKey |
 | Name | <code>string</code> | user.Name |
 | Email | <code>string</code> | user.Email |
 | NotificationEmailAddress | <code>string</code> | user.NotificationEmailAddress |
-| ActiveFlag | <code>string</code> | user.ActiveFlag === true ? '✓' : '-' |
-| IsAPIUser | <code>string</code> | user.IsAPIUser === true ? '✓' : '-' |
-| MustChangePassword | <code>string</code> | user.MustChangePassword === true ? '✓' : '-' |
-| DefaultBusinessUnit | <code>string</code> | defaultBUName |
-| AssociatedBusinessUnits__c | <code>string</code> | associatedBus |
-| Roles | <code>string</code> | roles |
-| UserPermissions | <code>string</code> | userPermissions |
+| ActiveFlag | <code>boolean</code> | user.ActiveFlag === true ? '✓' : '-' |
+| IsAPIUser | <code>boolean</code> | user.IsAPIUser === true ? '✓' : '-' |
+| MustChangePassword | <code>boolean</code> | user.MustChangePassword === true ? '✓' : '-' |
+| DefaultBusinessUnit | <code>boolean</code> | defaultBUName |
+| AssociatedBusinessUnits__c | <code>Array.&lt;number&gt;</code> | associatedBus |
+| [Roles] | <code>object</code> | roles (API only) |
+| RoleNamesGlobal__c | <code>Array.&lt;string&gt;</code> | roles |
+| type__c | <code>&#x27;User&#x27;</code> \| <code>&#x27;Installed Package&#x27;</code> | roles |
+| UserPermissions | <code>Array.&lt;string&gt;</code> | userPermissions |
 | LastSuccessfulLogin | <code>string</code> | this.timeSinceDate(user.LastSuccessfulLogin) |
 | CreatedDate | <code>string</code> | user.CreatedDate |
 | ModifiedDate | <code>string</code> | user.ModifiedDate |
+
+<a name="BusinessUnitAssignmentConfiguration"></a>
+
+## BusinessUnitAssignmentConfiguration : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| Client | <code>object</code> | wrapper |
+| Client.ID | <code>number</code> | EID e.g:7281698 |
+| [PartnerKey] | <code>string</code> | empty string |
+| ID | <code>number</code> | User ID e.g:717133502 |
+| [ObjectID] | <code>string</code> | empty string |
+| [Delete] | <code>number</code> | 0,1 |
+| BusinessUnitAssignmentConfiguration | [<code>BusinessUnitAssignmentConfiguration</code>](#BusinessUnitAssignmentConfiguration) | - |
+| BusinessUnitIds | <code>object</code> | wrapper |
+| BusinessUnitIds.BusinessUnitId | <code>Array.&lt;number&gt;</code> \| <code>number</code> | e.g:[518003624] |
+| IsDelete | <code>boolean</code> | assign BU if false, remove assignment if true |
 
 <a name="AutomationActivity"></a>
 

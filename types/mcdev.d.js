@@ -24,7 +24,7 @@ const SDK = require('sfmc-sdk');
  * @typedef {{metadata:MetadataTypeMap,type:SupportedMetadataTypes}} MetadataTypeMapObj
  * @typedef {{metadata:MetadataTypeItem,type:SupportedMetadataTypes}} MetadataTypeItemObj
  * @typedef {Object.<number, MultiMetadataTypeMap>} Cache key=MID
- * @typedef {{before: TYPE.MetadataTypeItem, after: TYPE.MetadataTypeItem}} MetadataTypeItemDiff used during update
+ * @typedef {{before: MetadataTypeItem, after: MetadataTypeItem}} MetadataTypeItemDiff used during update
  */
 
 /**
@@ -120,24 +120,41 @@ const SDK = require('sfmc-sdk');
  */
 /**
  * @typedef {object} AccountUserDocument
- * @property {string} TYPE user.type__c
- * @property {string} UserID user.UserID
- * @property {string} AccountUserID user.AccountUserID
+ * @property {string} [ID] equal to UserID; optional in update/create calls
+ * @property {string} UserID equal to ID; required in update/create calls
+ * @property {number} AccountUserID user.AccountUserID
  * @property {string} CustomerKey user.CustomerKey
  * @property {string} Name user.Name
  * @property {string} Email user.Email
  * @property {string} NotificationEmailAddress user.NotificationEmailAddress
- * @property {string} ActiveFlag user.ActiveFlag === true ? '✓' : '-'
- * @property {string} IsAPIUser user.IsAPIUser === true ? '✓' : '-'
- * @property {string} MustChangePassword user.MustChangePassword === true ? '✓' : '-'
- * @property {string} DefaultBusinessUnit defaultBUName
- * @property {string} AssociatedBusinessUnits__c associatedBus
- * @property {string} Roles roles
- * @property {string} UserPermissions userPermissions
+ * @property {boolean} ActiveFlag user.ActiveFlag === true ? '✓' : '-'
+ * @property {boolean} IsAPIUser user.IsAPIUser === true ? '✓' : '-'
+ * @property {boolean} MustChangePassword user.MustChangePassword === true ? '✓' : '-'
+ * @property {boolean} DefaultBusinessUnit defaultBUName
+ * @property {number[]} AssociatedBusinessUnits__c associatedBus
+ * @property {object} [Roles] roles (API only)
+ * @property {string[]} RoleNamesGlobal__c roles
+ * @property {'User'|'Installed Package'} type__c roles
+ * @property {string[]} UserPermissions userPermissions
  * @property {string} LastSuccessfulLogin this.timeSinceDate(user.LastSuccessfulLogin)
  * @property {string} CreatedDate user.CreatedDate
  * @property {string} ModifiedDate user.ModifiedDate
  * @typedef {{before:AccountUserDocument,after:AccountUserDocument}} AccountUserDocumentDiff
+ * @typedef {Object.<string, AccountUserDocument>} AccountUserDocumentMap key=customer key
+ */
+/**
+ * @typedef {object} AccountUserConfiguration
+ * @property {object} Client wrapper
+ * @property {number} Client.ID EID e.g:7281698
+ * @property {string} [PartnerKey] empty string
+ * @property {number} ID User ID e.g:717133502
+ * @property {string} [ObjectID] empty string
+ * @property {number} [Delete] 0,1
+ * @property {BusinessUnitAssignmentConfiguration} BusinessUnitAssignmentConfiguration -
+ * @typedef {object} BusinessUnitAssignmentConfiguration
+ * @property {object} BusinessUnitIds wrapper
+ * @property {number[]|number} BusinessUnitIds.BusinessUnitId e.g:[518003624]
+ * @property {boolean} IsDelete assign BU if false, remove assignment if true
  */
 
 /**
