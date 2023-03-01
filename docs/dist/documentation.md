@@ -1207,6 +1207,8 @@ AttributeGroup MetadataType
 * [AttributeGroup](#AttributeGroup) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#AttributeGroup.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache()](#AttributeGroup.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.postRetrieveTasks(metadata)](#AttributeGroup.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.preDeployTasks(metadata)](#AttributeGroup.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
 
 <a name="AttributeGroup.retrieve"></a>
 
@@ -1230,6 +1232,30 @@ Retrieves Metadata of schema attribute groups for caching.
 
 **Kind**: static method of [<code>AttributeGroup</code>](#AttributeGroup)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+<a name="AttributeGroup.postRetrieveTasks"></a>
+
+### AttributeGroup.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata |
+
+<a name="AttributeGroup.preDeployTasks"></a>
+
+### AttributeGroup.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+prepares for deployment
+
+**Kind**: static method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
 <a name="AttributeSetDefinition"></a>
 
 ## AttributeSetDefinition ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -1241,6 +1267,9 @@ AttributeSetDefinition MetadataType
 * [AttributeSetDefinition](#AttributeSetDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#AttributeSetDefinition.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache()](#AttributeSetDefinition.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.parseResponseBody(body, [singleRetrieve])](#AttributeSetDefinition.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
+    * [.postRetrieveTasks(metadata)](#AttributeSetDefinition.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.preDeployTasks(metadata)](#AttributeSetDefinition.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
 
 <a name="AttributeSetDefinition.retrieve"></a>
 
@@ -1264,6 +1293,43 @@ Retrieves Metadata of schema set definitions for caching.
 
 **Kind**: static method of [<code>AttributeSetDefinition</code>](#AttributeSetDefinition)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+<a name="AttributeSetDefinition.parseResponseBody"></a>
+
+### AttributeSetDefinition.parseResponseBody(body, [singleRetrieve]) ⇒ <code>TYPE.MetadataTypeMap</code>
+Builds map of metadata entries mapped to their keyfields
+
+**Kind**: static method of [<code>AttributeSetDefinition</code>](#AttributeSetDefinition)  
+**Returns**: <code>TYPE.MetadataTypeMap</code> - keyField => metadata map  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| body | <code>object</code> | json of response body |
+| [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
+
+<a name="AttributeSetDefinition.postRetrieveTasks"></a>
+
+### AttributeSetDefinition.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>AttributeSetDefinition</code>](#AttributeSetDefinition)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata |
+
+<a name="AttributeSetDefinition.preDeployTasks"></a>
+
+### AttributeSetDefinition.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+prepares for deployment
+
+**Kind**: static method of [<code>AttributeSetDefinition</code>](#AttributeSetDefinition)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
 <a name="Automation"></a>
 
 ## Automation ⇐ [<code>MetadataType</code>](#MetadataType)
