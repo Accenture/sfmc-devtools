@@ -20,6 +20,9 @@ Source and target business units are also compared before the deployment to appl
 <dt><a href="#AttributeGroup">AttributeGroup</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>AttributeGroup MetadataType</p>
 </dd>
+<dt><a href="#AttributeSetDefinition">AttributeSetDefinition</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>AttributeSetDefinition MetadataType</p>
+</dd>
 <dt><a href="#Automation">Automation</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>Automation MetadataType</p>
 </dd>
@@ -104,9 +107,6 @@ Provides default functionality that can be overwritten by child metadata type cl
 </dd>
 <dt><a href="#SendClassification">SendClassification</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>SendClassification MetadataType</p>
-</dd>
-<dt><a href="#SetDefinition">SetDefinition</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
-<dd><p>SetDefinition MetadataType</p>
 </dd>
 <dt><a href="#TransactionalEmail">TransactionalEmail</a> ⇐ <code><a href="#TransactionalMessage">TransactionalMessage</a></code></dt>
 <dd><p>TransactionalEmail MetadataType</p>
@@ -1230,6 +1230,40 @@ Retrieves Metadata of schema attribute groups for caching.
 
 **Kind**: static method of [<code>AttributeGroup</code>](#AttributeGroup)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+<a name="AttributeSetDefinition"></a>
+
+## AttributeSetDefinition ⇐ [<code>MetadataType</code>](#MetadataType)
+AttributeSetDefinition MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [AttributeSetDefinition](#AttributeSetDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [key])](#AttributeSetDefinition.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache()](#AttributeSetDefinition.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+
+<a name="AttributeSetDefinition.retrieve"></a>
+
+### AttributeSetDefinition.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of schema set Definitions.
+
+**Kind**: static method of [<code>AttributeSetDefinition</code>](#AttributeSetDefinition)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [_] | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="AttributeSetDefinition.retrieveForCache"></a>
+
+### AttributeSetDefinition.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of schema set definitions for caching.
+
+**Kind**: static method of [<code>AttributeSetDefinition</code>](#AttributeSetDefinition)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
 <a name="Automation"></a>
 
 ## Automation ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -4582,40 +4616,6 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
-<a name="SetDefinition"></a>
-
-## SetDefinition ⇐ [<code>MetadataType</code>](#MetadataType)
-SetDefinition MetadataType
-
-**Kind**: global class  
-**Extends**: [<code>MetadataType</code>](#MetadataType)  
-
-* [SetDefinition](#SetDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [_], [__], [key])](#SetDefinition.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache()](#SetDefinition.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-
-<a name="SetDefinition.retrieve"></a>
-
-### SetDefinition.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves Metadata of schema set Definitions.
-
-**Kind**: static method of [<code>SetDefinition</code>](#SetDefinition)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
-| [_] | <code>void</code> | unused parameter |
-| [__] | <code>void</code> | unused parameter |
-| [key] | <code>string</code> | customer key of single item to retrieve |
-
-<a name="SetDefinition.retrieveForCache"></a>
-
-### SetDefinition.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves Metadata of schema set definitions for caching.
-
-**Kind**: static method of [<code>SetDefinition</code>](#SetDefinition)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
 <a name="TransactionalEmail"></a>
 
 ## TransactionalEmail ⇐ [<code>TransactionalMessage</code>](#TransactionalMessage)
