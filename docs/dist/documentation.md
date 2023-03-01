@@ -20,8 +20,8 @@ Source and target business units are also compared before the deployment to appl
 <dt><a href="#AttributeGroup">AttributeGroup</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>AttributeGroup MetadataType</p>
 </dd>
-<dt><a href="#AttributeSetDefinition">AttributeSetDefinition</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
-<dd><p>AttributeSetDefinition MetadataType</p>
+<dt><a href="#AttributeSet">AttributeSet</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>AttributeSet MetadataType</p>
 </dd>
 <dt><a href="#Automation">Automation</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>Automation MetadataType</p>
@@ -1256,27 +1256,27 @@ prepares for deployment
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
-<a name="AttributeSetDefinition"></a>
+<a name="AttributeSet"></a>
 
-## AttributeSetDefinition ⇐ [<code>MetadataType</code>](#MetadataType)
-AttributeSetDefinition MetadataType
+## AttributeSet ⇐ [<code>MetadataType</code>](#MetadataType)
+AttributeSet MetadataType
 
 **Kind**: global class  
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
-* [AttributeSetDefinition](#AttributeSetDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [_], [__], [key])](#AttributeSetDefinition.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache()](#AttributeSetDefinition.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.parseResponseBody(body, [singleRetrieve])](#AttributeSetDefinition.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
-    * [.postRetrieveTasks(metadata)](#AttributeSetDefinition.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.preDeployTasks(metadata)](#AttributeSetDefinition.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+* [AttributeSet](#AttributeSet) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [key])](#AttributeSet.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache()](#AttributeSet.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.parseResponseBody(body, [singleRetrieve])](#AttributeSet.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
+    * [.postRetrieveTasks(metadata)](#AttributeSet.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.preDeployTasks(metadata)](#AttributeSet.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
 
-<a name="AttributeSetDefinition.retrieve"></a>
+<a name="AttributeSet.retrieve"></a>
 
-### AttributeSetDefinition.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### AttributeSet.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves Metadata of schema set Definitions.
 
-**Kind**: static method of [<code>AttributeSetDefinition</code>](#AttributeSetDefinition)  
+**Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
 
 | Param | Type | Description |
@@ -1286,19 +1286,19 @@ Retrieves Metadata of schema set Definitions.
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
-<a name="AttributeSetDefinition.retrieveForCache"></a>
+<a name="AttributeSet.retrieveForCache"></a>
 
-### AttributeSetDefinition.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### AttributeSet.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves Metadata of schema set definitions for caching.
 
-**Kind**: static method of [<code>AttributeSetDefinition</code>](#AttributeSetDefinition)  
+**Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
-<a name="AttributeSetDefinition.parseResponseBody"></a>
+<a name="AttributeSet.parseResponseBody"></a>
 
-### AttributeSetDefinition.parseResponseBody(body, [singleRetrieve]) ⇒ <code>TYPE.MetadataTypeMap</code>
+### AttributeSet.parseResponseBody(body, [singleRetrieve]) ⇒ <code>TYPE.MetadataTypeMap</code>
 Builds map of metadata entries mapped to their keyfields
 
-**Kind**: static method of [<code>AttributeSetDefinition</code>](#AttributeSetDefinition)  
+**Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
 **Returns**: <code>TYPE.MetadataTypeMap</code> - keyField => metadata map  
 
 | Param | Type | Description |
@@ -1306,24 +1306,24 @@ Builds map of metadata entries mapped to their keyfields
 | body | <code>object</code> | json of response body |
 | [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
 
-<a name="AttributeSetDefinition.postRetrieveTasks"></a>
+<a name="AttributeSet.postRetrieveTasks"></a>
 
-### AttributeSetDefinition.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### AttributeSet.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 manages post retrieve steps
 
-**Kind**: static method of [<code>AttributeSetDefinition</code>](#AttributeSetDefinition)  
+**Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
 **Returns**: <code>TYPE.MetadataTypeItem</code> - metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata |
 
-<a name="AttributeSetDefinition.preDeployTasks"></a>
+<a name="AttributeSet.preDeployTasks"></a>
 
-### AttributeSetDefinition.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### AttributeSet.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 prepares for deployment
 
-**Kind**: static method of [<code>AttributeSetDefinition</code>](#AttributeSetDefinition)  
+**Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
 **Returns**: <code>TYPE.MetadataTypeItem</code> - Promise  
 
 | Param | Type | Description |
