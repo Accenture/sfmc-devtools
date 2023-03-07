@@ -3178,7 +3178,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MetadataType.createOrUpdate) ⇒ <code>void</code>
     * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
-    * [.updateREST(metadataEntry, uri, [usePut])](#MetadataType.updateREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
+    * [.updateREST(metadataEntry, uri, [httpMethod])](#MetadataType.updateREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [._handleSOAPErrors(ex, msg, [metadataEntry], [handleOutside])](#MetadataType._handleSOAPErrors)
     * [.getSOAPErrorMsg(ex)](#MetadataType.getSOAPErrorMsg) ⇒ <code>string</code>
@@ -3510,17 +3510,17 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 <a name="MetadataType.updateREST"></a>
 
-### MetadataType.updateREST(metadataEntry, uri, [usePut]) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
+### MetadataType.updateREST(metadataEntry, uri, [httpMethod]) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
 Updates a single metadata entry via REST
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>Promise.&lt;object&gt;</code> \| <code>null</code> - Promise of API response or null in case of an error  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
-| uri | <code>string</code> | rest endpoint for PATCH |
-| [usePut] | <code>boolean</code> | some update requests require PUT instead of PATCH |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> |  | a single metadata Entry |
+| uri | <code>string</code> |  | rest endpoint for PATCH |
+| [httpMethod] | <code>&#x27;patch&#x27;</code> \| <code>&#x27;post&#x27;</code> \| <code>&#x27;put&#x27;</code> | <code>&#x27;patch&#x27;</code> | defaults to 'patch'; some update requests require PUT instead of PATCH |
 
 <a name="MetadataType.updateSOAP"></a>
 
