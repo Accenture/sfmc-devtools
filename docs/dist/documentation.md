@@ -93,6 +93,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#MobileKeyword">MobileKeyword</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>MobileKeyword MetadataType</p>
 </dd>
+<dt><a href="#MobileMessage">MobileMessage</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>MobileMessage MetadataType</p>
+</dd>
 <dt><a href="#Query">Query</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>Query MetadataType</p>
 </dd>
@@ -4026,6 +4029,127 @@ prepares an event definition for deployment
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single MobileKeyword |
+
+<a name="MobileMessage"></a>
+
+## MobileMessage ⇐ [<code>MetadataType</code>](#MetadataType)
+MobileMessage MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [MobileMessage](#MobileMessage) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [key])](#MobileMessage.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> \| <code>void</code>
+    * [.retrieveForCache()](#MobileMessage.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [._upgradeGetBulk()](#MobileMessage._upgradeGetBulk)
+    * [.getBulkForMobileApi(url, [pageSize], [iteratorField])](#MobileMessage.getBulkForMobileApi) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [.update(metadata)](#MobileMessage.update) ⇒ <code>Promise</code>
+    * [.create(metadata)](#MobileMessage.create) ⇒ <code>Promise</code>
+    * [.postRetrieveTasks(metadata)](#MobileMessage.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.preDeployTasks(metadata)](#MobileMessage.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.deleteByKey(key)](#MobileMessage.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+
+<a name="MobileMessage.retrieve"></a>
+
+### MobileMessage.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> \| <code>void</code>
+Retrieves Metadata of Mobile Keywords
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> \| <code>void</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [_] | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="MobileMessage.retrieveForCache"></a>
+
+### MobileMessage.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves event definition metadata for caching
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+<a name="MobileMessage._upgradeGetBulk"></a>
+
+### MobileMessage.\_upgradeGetBulk()
+helper for [retrieve](#MobileMessage.retrieve) and [retrieveForCache](#MobileMessage.retrieveForCache)
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+<a name="MobileMessage.getBulkForMobileApi"></a>
+
+### MobileMessage.getBulkForMobileApi(url, [pageSize], [iteratorField]) ⇒ <code>Promise.&lt;object&gt;</code>
+Method that makes paginated GET API Requests using $pageSize and $page parameters
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Promise.&lt;object&gt;</code> - API response combined items  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| url | <code>string</code> | of the resource to retrieve |
+| [pageSize] | <code>number</code> | of the response, defaults to 50 |
+| [iteratorField] | <code>&#x27;items&#x27;</code> \| <code>&#x27;definitions&#x27;</code> \| <code>&#x27;entry&#x27;</code> | attribute of the response to iterate over |
+
+<a name="MobileMessage.update"></a>
+
+### MobileMessage.update(metadata) ⇒ <code>Promise</code>
+Updates a single item
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="MobileMessage.create"></a>
+
+### MobileMessage.create(metadata) ⇒ <code>Promise</code>
+Creates a single Event Definition
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single Event Definition |
+
+<a name="MobileMessage.postRetrieveTasks"></a>
+
+### MobileMessage.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one query string  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
+
+<a name="MobileMessage.preDeployTasks"></a>
+
+### MobileMessage.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+prepares an event definition for deployment
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single MobileMessage |
+
+<a name="MobileMessage.deleteByKey"></a>
+
+### MobileMessage.deleteByKey(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| key | <code>string</code> | Identifier of item |
 
 <a name="Query"></a>
 
