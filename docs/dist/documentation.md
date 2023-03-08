@@ -3159,7 +3159,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType.getJsonFromFS) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.getFieldNamesToRetrieve([additionalFields])](#MetadataType.getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
     * [.deploy(metadata, deployDir, retrieveDir)](#MetadataType.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
-    * [.postDeployTasks(metadata, originalMetadata)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
+    * [.postDeployTasks(upsertResults, originalMetadata)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
+    * [.postCreateTasks(metadataEntry, apiResponse)](#MetadataType.postCreateTasks) ⇒ <code>void</code>
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setFolderPath(metadata)](#MetadataType.setFolderPath)
     * [.setFolderId(metadata)](#MetadataType.setFolderId)
@@ -3266,15 +3267,27 @@ Deploys metadata
 
 <a name="MetadataType.postDeployTasks"></a>
 
-### MetadataType.postDeployTasks(metadata, originalMetadata) ⇒ <code>void</code>
+### MetadataType.postDeployTasks(upsertResults, originalMetadata) ⇒ <code>void</code>
 Gets executed after deployment of metadata type
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
+| upsertResults | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField as returned by update/create |
 | originalMetadata | <code>TYPE.MetadataTypeMap</code> | metadata to be updated (contains additioanl fields) |
+
+<a name="MetadataType.postCreateTasks"></a>
+
+### MetadataType.postCreateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
+helper for [createREST](createREST)
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
+| apiResponse | <code>object</code> | varies depending on the API call |
 
 <a name="MetadataType.postRetrieveTasks"></a>
 
@@ -4047,6 +4060,7 @@ MobileMessage MetadataType
     * [.create(metadata)](#MobileMessage.create) ⇒ <code>Promise</code>
     * [.postRetrieveTasks(metadata)](#MobileMessage.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.preDeployTasks(metadata)](#MobileMessage.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.postCreateTasks(metadataEntry, apiResponse)](#MobileMessage.postCreateTasks) ⇒ <code>void</code>
     * [.deleteByKey(key)](#MobileMessage.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="MobileMessage.retrieve"></a>
@@ -4138,6 +4152,18 @@ prepares an event definition for deployment
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single MobileMessage |
+
+<a name="MobileMessage.postCreateTasks"></a>
+
+### MobileMessage.postCreateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
+helper for [createREST](createREST)
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
+| apiResponse | <code>object</code> | varies depending on the API call |
 
 <a name="MobileMessage.deleteByKey"></a>
 
