@@ -58,6 +58,9 @@ as this is a configuration in the EID</p>
 <dt><a href="#EventDefinition">EventDefinition</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>EventDefinition MetadataType</p>
 </dd>
+<dt><a href="#FtpLocation">FtpLocation</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>ImportFile MetadataType</p>
+</dd>
 <dt><a href="#FileTransfer">FileTransfer</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>FileTransfer MetadataType</p>
 </dd>
@@ -66,9 +69,6 @@ as this is a configuration in the EID</p>
 </dd>
 <dt><a href="#Folder">Folder</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>Folder MetadataType</p>
-</dd>
-<dt><a href="#FtpLocation">FtpLocation</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
-<dd><p>ImportFile MetadataType</p>
 </dd>
 <dt><a href="#ImportFile">ImportFile</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>ImportFile MetadataType</p>
@@ -2470,6 +2470,41 @@ parses retrieved Metadata before saving
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single event definition |
 
+<a name="FtpLocation"></a>
+
+## FtpLocation ⇐ [<code>MetadataType</code>](#MetadataType)
+ImportFile MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [FtpLocation](#FtpLocation) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [key])](#FtpLocation.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache()](#FtpLocation.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+
+<a name="FtpLocation.retrieve"></a>
+
+### FtpLocation.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of FtpLocation
+Endpoint /automation/v1/ftplocations/ return all FtpLocations
+
+**Kind**: static method of [<code>FtpLocation</code>](#FtpLocation)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [_] | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="FtpLocation.retrieveForCache"></a>
+
+### FtpLocation.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves folder metadata into local filesystem. Also creates a uniquePath attribute for each folder.
+
+**Kind**: static method of [<code>FtpLocation</code>](#FtpLocation)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
 <a name="FileTransfer"></a>
 
 ## FileTransfer ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -2761,41 +2796,6 @@ Helper for writing Metadata to disk, used for Retrieve and deploy
 | retrieveDir | <code>string</code> | directory where metadata should be stored after deploy/retrieve |
 | mid | <code>number</code> | current mid for this credential / business unit |
 
-<a name="FtpLocation"></a>
-
-## FtpLocation ⇐ [<code>MetadataType</code>](#MetadataType)
-ImportFile MetadataType
-
-**Kind**: global class  
-**Extends**: [<code>MetadataType</code>](#MetadataType)  
-
-* [FtpLocation](#FtpLocation) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [_], [__], [key])](#FtpLocation.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache()](#FtpLocation.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-
-<a name="FtpLocation.retrieve"></a>
-
-### FtpLocation.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves Metadata of FtpLocation
-Endpoint /automation/v1/ftplocations/ return all FtpLocations
-
-**Kind**: static method of [<code>FtpLocation</code>](#FtpLocation)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
-| [_] | <code>void</code> | unused parameter |
-| [__] | <code>void</code> | unused parameter |
-| [key] | <code>string</code> | customer key of single item to retrieve |
-
-<a name="FtpLocation.retrieveForCache"></a>
-
-### FtpLocation.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves folder metadata into local filesystem. Also creates a uniquePath attribute for each folder.
-
-**Kind**: static method of [<code>FtpLocation</code>](#FtpLocation)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
 <a name="ImportFile"></a>
 
 ## ImportFile ⇐ [<code>MetadataType</code>](#MetadataType)
