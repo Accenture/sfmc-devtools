@@ -61,7 +61,7 @@
             "automation",
             "dataExtension",
             "dataExtract",
-            "emailSendDefinition",
+            "emailSend",
             "fileTransfer",
             "fileLocation",
             "importFile",
