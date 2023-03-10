@@ -63,7 +63,7 @@
             "dataExtract",
             "emailSendDefinition",
             "fileTransfer",
-            "ftpLocation",
+            "fileLocation",
             "importFile",
             "list",
             "mobileCode",
@@ -71,7 +71,7 @@
             "query",
             "role",
             "script",
-            "triggeredSendDefinition"
+            "triggeredSend"
         ]
     },
     "version": "4.3.4"

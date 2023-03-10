@@ -120,7 +120,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#TransactionalSMS">TransactionalSMS</a> ⇐ <code><a href="#TransactionalMessage">TransactionalMessage</a></code></dt>
 <dd><p>TransactionalSMS MetadataType</p>
 </dd>
-<dt><a href="#TriggeredSendDefinition">TriggeredSendDefinition</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dt><a href="#TriggeredSend">TriggeredSend</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>MessageSendActivity MetadataType</p>
 </dd>
 <dt><a href="#Retriever">Retriever</a></dt>
@@ -4938,33 +4938,33 @@ additionally, the documentation for dataExtension and automation should be retur
 | --- | --- | --- |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
-<a name="TriggeredSendDefinition"></a>
+<a name="TriggeredSend"></a>
 
-## TriggeredSendDefinition ⇐ [<code>MetadataType</code>](#MetadataType)
+## TriggeredSend ⇐ [<code>MetadataType</code>](#MetadataType)
 MessageSendActivity MetadataType
 
 **Kind**: global class  
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
-* [TriggeredSendDefinition](#TriggeredSendDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [_], [__], [key])](#TriggeredSendDefinition.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.create(metadata)](#TriggeredSendDefinition.create) ⇒ <code>Promise</code>
-    * [.update(metadata, [handleOutside])](#TriggeredSendDefinition.update) ⇒ <code>Promise</code>
-    * [.deleteByKey(customerKey)](#TriggeredSendDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.postRetrieveTasks(metadata)](#TriggeredSendDefinition.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.setFolderPath(metadata)](#TriggeredSendDefinition.setFolderPath)
-    * [.parseMetadata(metadata)](#TriggeredSendDefinition.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
-    * [.preDeployTasks(metadata)](#TriggeredSendDefinition.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.refresh([keyArr])](#TriggeredSendDefinition.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._findRefreshableItems()](#TriggeredSendDefinition._findRefreshableItems) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-    * [._refreshItem(key, checkKey)](#TriggeredSendDefinition._refreshItem) ⇒ <code>Promise.&lt;boolean&gt;</code>
+* [TriggeredSend](#TriggeredSend) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [key])](#TriggeredSend.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.create(metadata)](#TriggeredSend.create) ⇒ <code>Promise</code>
+    * [.update(metadata, [handleOutside])](#TriggeredSend.update) ⇒ <code>Promise</code>
+    * [.deleteByKey(customerKey)](#TriggeredSend.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.postRetrieveTasks(metadata)](#TriggeredSend.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.setFolderPath(metadata)](#TriggeredSend.setFolderPath)
+    * [.parseMetadata(metadata)](#TriggeredSend.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
+    * [.preDeployTasks(metadata)](#TriggeredSend.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.refresh([keyArr])](#TriggeredSend.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._findRefreshableItems()](#TriggeredSend._findRefreshableItems) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [._refreshItem(key, checkKey)](#TriggeredSend._refreshItem) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
-<a name="TriggeredSendDefinition.retrieve"></a>
+<a name="TriggeredSend.retrieve"></a>
 
-### TriggeredSendDefinition.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### TriggeredSend.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
@@ -4974,24 +4974,24 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
-<a name="TriggeredSendDefinition.create"></a>
+<a name="TriggeredSend.create"></a>
 
-### TriggeredSendDefinition.create(metadata) ⇒ <code>Promise</code>
+### TriggeredSend.create(metadata) ⇒ <code>Promise</code>
 Create a single TSD.
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
 
-<a name="TriggeredSendDefinition.update"></a>
+<a name="TriggeredSend.update"></a>
 
-### TriggeredSendDefinition.update(metadata, [handleOutside]) ⇒ <code>Promise</code>
+### TriggeredSend.update(metadata, [handleOutside]) ⇒ <code>Promise</code>
 Updates a single TSD.
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
@@ -4999,90 +4999,90 @@ Updates a single TSD.
 | metadata | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
 | [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
-<a name="TriggeredSendDefinition.deleteByKey"></a>
+<a name="TriggeredSend.deleteByKey"></a>
 
-### TriggeredSendDefinition.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### TriggeredSend.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | customerKey | <code>string</code> | Identifier of data extension |
 
-<a name="TriggeredSendDefinition.postRetrieveTasks"></a>
+<a name="TriggeredSend.postRetrieveTasks"></a>
 
-### TriggeredSendDefinition.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### TriggeredSend.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 manages post retrieve steps
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one query string  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
 
-<a name="TriggeredSendDefinition.setFolderPath"></a>
+<a name="TriggeredSend.setFolderPath"></a>
 
-### TriggeredSendDefinition.setFolderPath(metadata)
+### TriggeredSend.setFolderPath(metadata)
 generic script that retrieves the folder path from cache and updates the given metadata with it after retrieve
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single script activity definition |
 
-<a name="TriggeredSendDefinition.parseMetadata"></a>
+<a name="TriggeredSend.parseMetadata"></a>
 
-### TriggeredSendDefinition.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
+### TriggeredSend.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
 parses retrieved Metadata before saving
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>TYPE.MetadataTypeItem</code> \| <code>void</code> - Array with one metadata object and one sql string  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single query activity definition |
 
-<a name="TriggeredSendDefinition.preDeployTasks"></a>
+<a name="TriggeredSend.preDeployTasks"></a>
 
-### TriggeredSendDefinition.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### TriggeredSend.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 prepares a TSD for deployment
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>TYPE.MetadataTypeItem</code> - metadata object  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | of a single TSD |
 
-<a name="TriggeredSendDefinition.refresh"></a>
+<a name="TriggeredSend.refresh"></a>
 
-### TriggeredSendDefinition.refresh([keyArr]) ⇒ <code>Promise.&lt;void&gt;</code>
+### TriggeredSend.refresh([keyArr]) ⇒ <code>Promise.&lt;void&gt;</code>
 TSD-specific refresh method that finds active TSDs and refreshes them
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | metadata keys |
 
-<a name="TriggeredSendDefinition._findRefreshableItems"></a>
+<a name="TriggeredSend._findRefreshableItems"></a>
 
-### TriggeredSendDefinition.\_findRefreshableItems() ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+### TriggeredSend.\_findRefreshableItems() ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 helper for [refresh](refresh) that finds active TSDs on the server and filters it by the same rules that [retrieve](retrieve) is using to avoid refreshing TSDs with broken dependencies
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - keyArr  
-<a name="TriggeredSendDefinition._refreshItem"></a>
+<a name="TriggeredSend._refreshItem"></a>
 
-### TriggeredSendDefinition.\_refreshItem(key, checkKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### TriggeredSend.\_refreshItem(key, checkKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 helper for [refresh](refresh) that pauses, publishes and starts a triggered send
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - true if refresh was successful  
 
 | Param | Type | Description |
