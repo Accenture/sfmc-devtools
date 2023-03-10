@@ -3174,9 +3174,9 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.upsert(metadata, deployDir)](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MetadataType.createOrUpdate) ⇒ <code>void</code>
     * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
-    * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
+    * [.createSOAP(metadataEntry, [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [.updateREST(metadataEntry, uri, [usePut])](#MetadataType.updateREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
-    * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
+    * [.updateSOAP(metadataEntry, [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [._handleSOAPErrors(ex, msg, [metadataEntry], [handleOutside])](#MetadataType._handleSOAPErrors)
     * [.getSOAPErrorMsg(ex)](#MetadataType.getSOAPErrorMsg) ⇒ <code>string</code>
     * [.retrieveSOAP(retrieveDir, [requestParams], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -3493,7 +3493,7 @@ Creates a single metadata entry via REST
 
 <a name="MetadataType.createSOAP"></a>
 
-### MetadataType.createSOAP(metadataEntry, [overrideType], [handleOutside]) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
+### MetadataType.createSOAP(metadataEntry, [handleOutside]) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3502,7 +3502,6 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataEntry | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
-| [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
 | [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
 <a name="MetadataType.updateREST"></a>
@@ -3521,7 +3520,7 @@ Updates a single metadata entry via REST
 
 <a name="MetadataType.updateSOAP"></a>
 
-### MetadataType.updateSOAP(metadataEntry, [overrideType], [handleOutside]) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
+### MetadataType.updateSOAP(metadataEntry, [handleOutside]) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3530,7 +3529,6 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataEntry | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
-| [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
 | [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
 <a name="MetadataType._handleSOAPErrors"></a>
