@@ -3180,7 +3180,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [._handleSOAPErrors(ex, msg, [metadataEntry], [handleOutside])](#MetadataType._handleSOAPErrors)
     * [.getSOAPErrorMsg(ex)](#MetadataType.getSOAPErrorMsg) ⇒ <code>string</code>
     * [.retrieveSOAP(retrieveDir, [requestParams], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
+    * [.retrieveREST(retrieveDir, uri, [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#MetadataType.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
     * [.removeNotCreateableFields(metadataEntry)](#MetadataType.removeNotCreateableFields) ⇒ <code>void</code>
@@ -3571,7 +3571,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 
 <a name="MetadataType.retrieveREST"></a>
 
-### MetadataType.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables], [singleRetrieve]) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
+### MetadataType.retrieveREST(retrieveDir, uri, [templateVariables], [singleRetrieve]) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
 Retrieves Metadata for Rest Types
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3581,7 +3581,6 @@ Retrieves Metadata for Rest Types
 | --- | --- | --- |
 | retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | uri | <code>string</code> | rest endpoint for GET |
-| [overrideType] | <code>string</code> | force a metadata type (mainly used for Folders) |
 | [templateVariables] | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
 
