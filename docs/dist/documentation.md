@@ -52,7 +52,7 @@ as this is a configuration in the EID</p>
 <dt><a href="#Email">Email</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>Email MetadataType</p>
 </dd>
-<dt><a href="#EmailSendDefinition">EmailSendDefinition</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dt><a href="#EmailSend">EmailSend</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>MessageSendActivity MetadataType</p>
 </dd>
 <dt><a href="#Event">Event</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
@@ -2222,29 +2222,29 @@ parses retrieved Metadata before saving
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single query activity definition |
 
-<a name="EmailSendDefinition"></a>
+<a name="EmailSend"></a>
 
-## EmailSendDefinition ⇐ [<code>MetadataType</code>](#MetadataType)
+## EmailSend ⇐ [<code>MetadataType</code>](#MetadataType)
 MessageSendActivity MetadataType
 
 **Kind**: global class  
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
-* [EmailSendDefinition](#EmailSendDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [_], [__], [key])](#EmailSendDefinition.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.update(metadataItem)](#EmailSendDefinition.update) ⇒ <code>Promise</code>
-    * [.create(metadataItem)](#EmailSendDefinition.create) ⇒ <code>Promise</code>
-    * [.deleteByKey(customerKey)](#EmailSendDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.preDeployTasks(metadata)](#EmailSendDefinition.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
-    * [.postRetrieveTasks(metadata)](#EmailSendDefinition.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.parseMetadata(metadata)](#EmailSendDefinition.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+* [EmailSend](#EmailSend) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [key])](#EmailSend.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.update(metadataItem)](#EmailSend.update) ⇒ <code>Promise</code>
+    * [.create(metadataItem)](#EmailSend.create) ⇒ <code>Promise</code>
+    * [.deleteByKey(customerKey)](#EmailSend.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.preDeployTasks(metadata)](#EmailSend.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
+    * [.postRetrieveTasks(metadata)](#EmailSend.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.parseMetadata(metadata)](#EmailSend.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 
-<a name="EmailSendDefinition.retrieve"></a>
+<a name="EmailSend.retrieve"></a>
 
-### EmailSendDefinition.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### EmailSend.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
-**Kind**: static method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Kind**: static method of [<code>EmailSend</code>](#EmailSend)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
@@ -2254,72 +2254,72 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
-<a name="EmailSendDefinition.update"></a>
+<a name="EmailSend.update"></a>
 
-### EmailSendDefinition.update(metadataItem) ⇒ <code>Promise</code>
+### EmailSend.update(metadataItem) ⇒ <code>Promise</code>
 Updates a single item
 
-**Kind**: static method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Kind**: static method of [<code>EmailSend</code>](#EmailSend)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataItem | <code>TYPE.MetadataTypeItem</code> | a single item |
 
-<a name="EmailSendDefinition.create"></a>
+<a name="EmailSend.create"></a>
 
-### EmailSendDefinition.create(metadataItem) ⇒ <code>Promise</code>
+### EmailSend.create(metadataItem) ⇒ <code>Promise</code>
 Creates a single item
 
-**Kind**: static method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Kind**: static method of [<code>EmailSend</code>](#EmailSend)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataItem | <code>TYPE.MetadataTypeItem</code> | a single item |
 
-<a name="EmailSendDefinition.deleteByKey"></a>
+<a name="EmailSend.deleteByKey"></a>
 
-### EmailSendDefinition.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### EmailSend.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
-**Kind**: static method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Kind**: static method of [<code>EmailSend</code>](#EmailSend)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | customerKey | <code>string</code> | Identifier of data extension |
 
-<a name="EmailSendDefinition.preDeployTasks"></a>
+<a name="EmailSend.preDeployTasks"></a>
 
-### EmailSendDefinition.preDeployTasks(metadata) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
+### EmailSend.preDeployTasks(metadata) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
 prepares a single item for deployment
 
-**Kind**: static method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Kind**: static method of [<code>EmailSend</code>](#EmailSend)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single script activity definition |
 
-<a name="EmailSendDefinition.postRetrieveTasks"></a>
+<a name="EmailSend.postRetrieveTasks"></a>
 
-### EmailSendDefinition.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### EmailSend.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 manages post retrieve steps
 
-**Kind**: static method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Kind**: static method of [<code>EmailSend</code>](#EmailSend)  
 **Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one query string  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
 
-<a name="EmailSendDefinition.parseMetadata"></a>
+<a name="EmailSend.parseMetadata"></a>
 
-### EmailSendDefinition.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### EmailSend.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 parses retrieved Metadata before saving
 
-**Kind**: static method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Kind**: static method of [<code>EmailSend</code>](#EmailSend)  
 **Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one sql string  
 
 | Param | Type | Description |
