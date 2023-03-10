@@ -55,8 +55,8 @@ as this is a configuration in the EID</p>
 <dt><a href="#EmailSendDefinition">EmailSendDefinition</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>MessageSendActivity MetadataType</p>
 </dd>
-<dt><a href="#EventDefinition">EventDefinition</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
-<dd><p>EventDefinition MetadataType</p>
+<dt><a href="#Event">Event</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>Event MetadataType</p>
 </dd>
 <dt><a href="#FtpLocation">FtpLocation</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>ImportFile MetadataType</p>
@@ -2326,34 +2326,34 @@ parses retrieved Metadata before saving
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single query activity definition |
 
-<a name="EventDefinition"></a>
+<a name="Event"></a>
 
-## EventDefinition ⇐ [<code>MetadataType</code>](#MetadataType)
-EventDefinition MetadataType
+## Event ⇐ [<code>MetadataType</code>](#MetadataType)
+Event MetadataType
 
 **Kind**: global class  
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
-* [EventDefinition](#EventDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [_], [__], [key])](#EventDefinition.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache()](#EventDefinition.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#EventDefinition.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
-    * [.postRetrieveTasks(eventDef)](#EventDefinition.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.deleteByKey(key)](#EventDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.deploy(metadata, deployDir, retrieveDir)](#EventDefinition.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
-    * [.create(EventDefinition)](#EventDefinition.create) ⇒ <code>Promise</code>
-    * [.update(metadataEntry)](#EventDefinition.update) ⇒ <code>Promise</code>
-    * [.preDeployTasks(metadata)](#EventDefinition.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.parseMetadata(metadata)](#EventDefinition.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+* [Event](#Event) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [key])](#Event.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache()](#Event.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Event.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
+    * [.postRetrieveTasks(eventDef)](#Event.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.deleteByKey(key)](#Event.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deploy(metadata, deployDir, retrieveDir)](#Event.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.create(metadata)](#Event.create) ⇒ <code>Promise</code>
+    * [.update(metadataEntry)](#Event.update) ⇒ <code>Promise</code>
+    * [.preDeployTasks(metadata)](#Event.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.parseMetadata(metadata)](#Event.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 
-<a name="EventDefinition.retrieve"></a>
+<a name="Event.retrieve"></a>
 
-### EventDefinition.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### Event.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves Metadata of Event Definition.
 Endpoint /interaction/v1/EventDefinitions return all Event Definitions with all details.
 Currently it is not needed to loop over Imports with endpoint /interaction/v1/EventDefinitions/{id}
 
-**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Kind**: static method of [<code>Event</code>](#Event)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
@@ -2363,19 +2363,19 @@ Currently it is not needed to loop over Imports with endpoint /interaction/v1/Ev
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
-<a name="EventDefinition.retrieveForCache"></a>
+<a name="Event.retrieveForCache"></a>
 
-### EventDefinition.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### Event.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves event definition metadata for caching
 
-**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Kind**: static method of [<code>Event</code>](#Event)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
-<a name="EventDefinition.retrieveAsTemplate"></a>
+<a name="Event.retrieveAsTemplate"></a>
 
-### EventDefinition.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
+### Event.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
 Retrieve a specific Event Definition by Name
 
-**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Kind**: static method of [<code>Event</code>](#Event)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
@@ -2384,36 +2384,36 @@ Retrieve a specific Event Definition by Name
 | name | <code>string</code> | name of the metadata file |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
-<a name="EventDefinition.postRetrieveTasks"></a>
+<a name="Event.postRetrieveTasks"></a>
 
-### EventDefinition.postRetrieveTasks(eventDef) ⇒ <code>TYPE.MetadataTypeItem</code>
+### Event.postRetrieveTasks(eventDef) ⇒ <code>TYPE.MetadataTypeItem</code>
 manages post retrieve steps
 
-**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Kind**: static method of [<code>Event</code>](#Event)  
 **Returns**: <code>TYPE.MetadataTypeItem</code> - metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | eventDef | <code>TYPE.MetadataTypeItem</code> | a single item of Event Definition |
 
-<a name="EventDefinition.deleteByKey"></a>
+<a name="Event.deleteByKey"></a>
 
-### EventDefinition.deleteByKey(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Event.deleteByKey(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
-**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Kind**: static method of [<code>Event</code>](#Event)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | key | <code>string</code> | Identifier of item |
 
-<a name="EventDefinition.deploy"></a>
+<a name="Event.deploy"></a>
 
-### EventDefinition.deploy(metadata, deployDir, retrieveDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+### Event.deploy(metadata, deployDir, retrieveDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
 Deploys metadata - merely kept here to be able to print [logBeta](#Util.logBeta) once per deploy
 
-**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Kind**: static method of [<code>Event</code>](#Event)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -2422,48 +2422,48 @@ Deploys metadata - merely kept here to be able to print [logBeta](#Util.logBeta)
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 | retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
 
-<a name="EventDefinition.create"></a>
+<a name="Event.create"></a>
 
-### EventDefinition.create(EventDefinition) ⇒ <code>Promise</code>
+### Event.create(metadata) ⇒ <code>Promise</code>
 Creates a single Event Definition
 
-**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Kind**: static method of [<code>Event</code>](#Event)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| EventDefinition | <code>TYPE.MetadataTypeItem</code> | a single Event Definition |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single Event Definition |
 
-<a name="EventDefinition.update"></a>
+<a name="Event.update"></a>
 
-### EventDefinition.update(metadataEntry) ⇒ <code>Promise</code>
+### Event.update(metadataEntry) ⇒ <code>Promise</code>
 Updates a single Event Definition (using PUT method since PATCH isn't supported)
 
-**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Kind**: static method of [<code>Event</code>](#Event)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single Event Definition |
 
-<a name="EventDefinition.preDeployTasks"></a>
+<a name="Event.preDeployTasks"></a>
 
-### EventDefinition.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### Event.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 prepares an event definition for deployment
 
-**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Kind**: static method of [<code>Event</code>](#Event)  
 **Returns**: <code>TYPE.MetadataTypeItem</code> - parsed version  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single eventDefinition |
 
-<a name="EventDefinition.parseMetadata"></a>
+<a name="Event.parseMetadata"></a>
 
-### EventDefinition.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### Event.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 parses retrieved Metadata before saving
 
-**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Kind**: static method of [<code>Event</code>](#Event)  
 **Returns**: <code>TYPE.MetadataTypeItem</code> - parsed metadata  
 
 | Param | Type | Description |
