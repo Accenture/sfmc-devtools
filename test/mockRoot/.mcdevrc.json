@@ -55,7 +55,7 @@
     },
     "marketList": {},
     "metaDataTypes": {
-        "documentOnRetrieve": ["accountUser", "automation", "dataExtension", "role"],
+        "documentOnRetrieve": ["user", "automation", "dataExtension", "role"],
         "retrieve": [
             "asset",
             "automation",

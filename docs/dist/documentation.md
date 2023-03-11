@@ -11,9 +11,6 @@ Source and target business units are also compared before the deployment to appl
 <dt><a href="#Mcdev">Mcdev</a></dt>
 <dd><p>main class</p>
 </dd>
-<dt><a href="#AccountUser">AccountUser</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
-<dd><p>MessageSendActivity MetadataType</p>
-</dd>
 <dt><a href="#Asset">Asset</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>FileTransfer MetadataType</p>
 </dd>
@@ -122,6 +119,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 </dd>
 <dt><a href="#TriggeredSend">TriggeredSend</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>MessageSendActivity MetadataType</p>
+</dd>
+<dt><a href="#User">User</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>MetadataType</p>
 </dd>
 <dt><a href="#Retriever">Retriever</a></dt>
 <dd><p>Retrieves metadata from a business unit and saves it to the local filesystem.</p>
@@ -730,154 +730,6 @@ Build a specific metadata file based on a template using a list of bu-market com
 | businessUnit | <code>string</code> | references credentials from properties.json |
 | selectedType | <code>string</code> | supported metadata type |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
-
-<a name="AccountUser"></a>
-
-## AccountUser ⇐ [<code>MetadataType</code>](#MetadataType)
-MessageSendActivity MetadataType
-
-**Kind**: global class  
-**Extends**: [<code>MetadataType</code>](#MetadataType)  
-
-* [AccountUser](#AccountUser) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, _, [__], [key])](#AccountUser.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache()](#AccountUser.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.create(metadata)](#AccountUser.create) ⇒ <code>Promise</code>
-    * [.update(metadata)](#AccountUser.update) ⇒ <code>Promise</code>
-    * [.preDeployTasks(metadata)](#AccountUser.preDeployTasks) ⇒ <code>TYPE.AccountUserDocument</code>
-    * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#AccountUser.createOrUpdate) ⇒ <code>void</code>
-    * [.prepareBuAssignments(metadataToUpdate, metadataToCreate, metadata)](#AccountUser.prepareBuAssignments)
-    * [.postDeployTasks(metadata)](#AccountUser.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.retrieveChangelog()](#AccountUser.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.document([metadata])](#AccountUser.document) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.postRetrieveTasks(metadata)](#AccountUser.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-
-<a name="AccountUser.retrieve"></a>
-
-### AccountUser.retrieve(retrieveDir, _, [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
-
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
-| _ | <code>void</code> | unused parameter |
-| [__] | <code>void</code> | unused parameter |
-| [key] | <code>string</code> | customer key of single item to retrieve |
-
-<a name="AccountUser.retrieveForCache"></a>
-
-### AccountUser.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves import definition metadata for caching
-
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
-<a name="AccountUser.create"></a>
-
-### AccountUser.create(metadata) ⇒ <code>Promise</code>
-Create a single item.
-
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>Promise</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
-
-<a name="AccountUser.update"></a>
-
-### AccountUser.update(metadata) ⇒ <code>Promise</code>
-Updates a single item.
-
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>Promise</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
-
-<a name="AccountUser.preDeployTasks"></a>
-
-### AccountUser.preDeployTasks(metadata) ⇒ <code>TYPE.AccountUserDocument</code>
-prepares a item for deployment
-
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>TYPE.AccountUserDocument</code> - metadata object  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.AccountUserDocument</code> | of a single item |
-
-<a name="AccountUser.createOrUpdate"></a>
-
-### AccountUser.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>void</code>
-helper for [upsert](#MetadataType.upsert)
-
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata itme |
-| metadataKey | <code>string</code> | key of item we are looking at |
-| hasError | <code>boolean</code> | error flag from previous code |
-| metadataToUpdate | <code>Array.&lt;TYPE.AccountUserDocumentDiff&gt;</code> | list of items to update |
-| metadataToCreate | <code>Array.&lt;TYPE.AccountUserDocument&gt;</code> | list of items to create |
-
-<a name="AccountUser.prepareBuAssignments"></a>
-
-### AccountUser.prepareBuAssignments(metadataToUpdate, metadataToCreate, metadata)
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadataToUpdate | <code>Array.&lt;TYPE.AccountUserDocumentDiff&gt;</code> | list of items to update |
-| metadataToCreate | <code>Array.&lt;TYPE.AccountUserDocument&gt;</code> | list of items to create |
-| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata itme |
-
-<a name="AccountUser.postDeployTasks"></a>
-
-### AccountUser.postDeployTasks(metadata) ⇒ <code>Promise.&lt;void&gt;</code>
-Gets executed after deployment of metadata type
-
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.AccountUserDocumentMap</code> | metadata mapped by their keyField |
-
-<a name="AccountUser.retrieveChangelog"></a>
-
-### AccountUser.retrieveChangelog() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
-
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
-<a name="AccountUser.document"></a>
-
-### AccountUser.document([metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
-Creates markdown documentation of all roles
-
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [metadata] | <code>TYPE.MetadataTypeMap</code> | user list |
-
-<a name="AccountUser.postRetrieveTasks"></a>
-
-### AccountUser.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
-manages post retrieve steps
-
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one query string  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
 
 <a name="Asset"></a>
 
@@ -5165,6 +5017,154 @@ helper for [refresh](refresh) that pauses, publishes and starts a triggered send
 | --- | --- | --- |
 | key | <code>string</code> | external key of triggered send item |
 | checkKey | <code>boolean</code> | whether to check if key exists on the server |
+
+<a name="User"></a>
+
+## User ⇐ [<code>MetadataType</code>](#MetadataType)
+MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [User](#User) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, _, [__], [key])](#User.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache()](#User.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.create(metadata)](#User.create) ⇒ <code>Promise</code>
+    * [.update(metadata)](#User.update) ⇒ <code>Promise</code>
+    * [.preDeployTasks(metadata)](#User.preDeployTasks) ⇒ <code>TYPE.UserDocument</code>
+    * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#User.createOrUpdate) ⇒ <code>void</code>
+    * [.prepareBuAssignments(metadataToUpdate, metadataToCreate, metadata)](#User.prepareBuAssignments)
+    * [.postDeployTasks(metadata)](#User.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.retrieveChangelog()](#User.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.document([metadata])](#User.document) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.postRetrieveTasks(metadata)](#User.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+
+<a name="User.retrieve"></a>
+
+### User.retrieve(retrieveDir, _, [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| _ | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="User.retrieveForCache"></a>
+
+### User.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves import definition metadata for caching
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+<a name="User.create"></a>
+
+### User.create(metadata) ⇒ <code>Promise</code>
+Create a single item.
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
+
+<a name="User.update"></a>
+
+### User.update(metadata) ⇒ <code>Promise</code>
+Updates a single item.
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
+
+<a name="User.preDeployTasks"></a>
+
+### User.preDeployTasks(metadata) ⇒ <code>TYPE.UserDocument</code>
+prepares a item for deployment
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>TYPE.UserDocument</code> - metadata object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.UserDocument</code> | of a single item |
+
+<a name="User.createOrUpdate"></a>
+
+### User.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>void</code>
+helper for [upsert](#MetadataType.upsert)
+
+**Kind**: static method of [<code>User</code>](#User)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata itme |
+| metadataKey | <code>string</code> | key of item we are looking at |
+| hasError | <code>boolean</code> | error flag from previous code |
+| metadataToUpdate | <code>Array.&lt;TYPE.UserDocumentDiff&gt;</code> | list of items to update |
+| metadataToCreate | <code>Array.&lt;TYPE.UserDocument&gt;</code> | list of items to create |
+
+<a name="User.prepareBuAssignments"></a>
+
+### User.prepareBuAssignments(metadataToUpdate, metadataToCreate, metadata)
+**Kind**: static method of [<code>User</code>](#User)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataToUpdate | <code>Array.&lt;TYPE.UserDocumentDiff&gt;</code> | list of items to update |
+| metadataToCreate | <code>Array.&lt;TYPE.UserDocument&gt;</code> | list of items to create |
+| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata itme |
+
+<a name="User.postDeployTasks"></a>
+
+### User.postDeployTasks(metadata) ⇒ <code>Promise.&lt;void&gt;</code>
+Gets executed after deployment of metadata type
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.UserDocumentMap</code> | metadata mapped by their keyField |
+
+<a name="User.retrieveChangelog"></a>
+
+### User.retrieveChangelog() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+<a name="User.document"></a>
+
+### User.document([metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
+Creates markdown documentation of all roles
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [metadata] | <code>TYPE.MetadataTypeMap</code> | user list |
+
+<a name="User.postRetrieveTasks"></a>
+
+### User.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one query string  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
 
 <a name="Retriever"></a>
 
