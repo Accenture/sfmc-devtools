@@ -52,11 +52,14 @@ as this is a configuration in the EID</p>
 <dt><a href="#Email">Email</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>Email MetadataType</p>
 </dd>
-<dt><a href="#EmailSendDefinition">EmailSendDefinition</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dt><a href="#EmailSend">EmailSend</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>MessageSendActivity MetadataType</p>
 </dd>
-<dt><a href="#EventDefinition">EventDefinition</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
-<dd><p>EventDefinition MetadataType</p>
+<dt><a href="#Event">Event</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>Event MetadataType</p>
+</dd>
+<dt><a href="#FtpLocation">FtpLocation</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>ImportFile MetadataType</p>
 </dd>
 <dt><a href="#FileTransfer">FileTransfer</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>FileTransfer MetadataType</p>
@@ -66,9 +69,6 @@ as this is a configuration in the EID</p>
 </dd>
 <dt><a href="#Folder">Folder</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>Folder MetadataType</p>
-</dd>
-<dt><a href="#FtpLocation">FtpLocation</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
-<dd><p>ImportFile MetadataType</p>
 </dd>
 <dt><a href="#ImportFile">ImportFile</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>ImportFile MetadataType</p>
@@ -120,7 +120,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#TransactionalSMS">TransactionalSMS</a> ⇐ <code><a href="#TransactionalMessage">TransactionalMessage</a></code></dt>
 <dd><p>TransactionalSMS MetadataType</p>
 </dd>
-<dt><a href="#TriggeredSendDefinition">TriggeredSendDefinition</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dt><a href="#TriggeredSend">TriggeredSend</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>MessageSendActivity MetadataType</p>
 </dd>
 <dt><a href="#Retriever">Retriever</a></dt>
@@ -2300,29 +2300,29 @@ parses retrieved Metadata before saving
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single query activity definition |
 
-<a name="EmailSendDefinition"></a>
+<a name="EmailSend"></a>
 
-## EmailSendDefinition ⇐ [<code>MetadataType</code>](#MetadataType)
+## EmailSend ⇐ [<code>MetadataType</code>](#MetadataType)
 MessageSendActivity MetadataType
 
 **Kind**: global class  
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
-* [EmailSendDefinition](#EmailSendDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [_], [__], [key])](#EmailSendDefinition.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.update(metadataItem)](#EmailSendDefinition.update) ⇒ <code>Promise</code>
-    * [.create(metadataItem)](#EmailSendDefinition.create) ⇒ <code>Promise</code>
-    * [.deleteByKey(customerKey)](#EmailSendDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.preDeployTasks(metadata)](#EmailSendDefinition.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
-    * [.postRetrieveTasks(metadata)](#EmailSendDefinition.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.parseMetadata(metadata)](#EmailSendDefinition.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+* [EmailSend](#EmailSend) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [key])](#EmailSend.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.update(metadataItem)](#EmailSend.update) ⇒ <code>Promise</code>
+    * [.create(metadataItem)](#EmailSend.create) ⇒ <code>Promise</code>
+    * [.deleteByKey(customerKey)](#EmailSend.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.preDeployTasks(metadata)](#EmailSend.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
+    * [.postRetrieveTasks(metadata)](#EmailSend.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.parseMetadata(metadata)](#EmailSend.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 
-<a name="EmailSendDefinition.retrieve"></a>
+<a name="EmailSend.retrieve"></a>
 
-### EmailSendDefinition.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### EmailSend.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
-**Kind**: static method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Kind**: static method of [<code>EmailSend</code>](#EmailSend)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
@@ -2332,106 +2332,106 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
-<a name="EmailSendDefinition.update"></a>
+<a name="EmailSend.update"></a>
 
-### EmailSendDefinition.update(metadataItem) ⇒ <code>Promise</code>
+### EmailSend.update(metadataItem) ⇒ <code>Promise</code>
 Updates a single item
 
-**Kind**: static method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Kind**: static method of [<code>EmailSend</code>](#EmailSend)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataItem | <code>TYPE.MetadataTypeItem</code> | a single item |
 
-<a name="EmailSendDefinition.create"></a>
+<a name="EmailSend.create"></a>
 
-### EmailSendDefinition.create(metadataItem) ⇒ <code>Promise</code>
+### EmailSend.create(metadataItem) ⇒ <code>Promise</code>
 Creates a single item
 
-**Kind**: static method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Kind**: static method of [<code>EmailSend</code>](#EmailSend)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataItem | <code>TYPE.MetadataTypeItem</code> | a single item |
 
-<a name="EmailSendDefinition.deleteByKey"></a>
+<a name="EmailSend.deleteByKey"></a>
 
-### EmailSendDefinition.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### EmailSend.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
-**Kind**: static method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Kind**: static method of [<code>EmailSend</code>](#EmailSend)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | customerKey | <code>string</code> | Identifier of data extension |
 
-<a name="EmailSendDefinition.preDeployTasks"></a>
+<a name="EmailSend.preDeployTasks"></a>
 
-### EmailSendDefinition.preDeployTasks(metadata) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
+### EmailSend.preDeployTasks(metadata) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
 prepares a single item for deployment
 
-**Kind**: static method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Kind**: static method of [<code>EmailSend</code>](#EmailSend)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single script activity definition |
 
-<a name="EmailSendDefinition.postRetrieveTasks"></a>
+<a name="EmailSend.postRetrieveTasks"></a>
 
-### EmailSendDefinition.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### EmailSend.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 manages post retrieve steps
 
-**Kind**: static method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Kind**: static method of [<code>EmailSend</code>](#EmailSend)  
 **Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one query string  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
 
-<a name="EmailSendDefinition.parseMetadata"></a>
+<a name="EmailSend.parseMetadata"></a>
 
-### EmailSendDefinition.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### EmailSend.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 parses retrieved Metadata before saving
 
-**Kind**: static method of [<code>EmailSendDefinition</code>](#EmailSendDefinition)  
+**Kind**: static method of [<code>EmailSend</code>](#EmailSend)  
 **Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one sql string  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single query activity definition |
 
-<a name="EventDefinition"></a>
+<a name="Event"></a>
 
-## EventDefinition ⇐ [<code>MetadataType</code>](#MetadataType)
-EventDefinition MetadataType
+## Event ⇐ [<code>MetadataType</code>](#MetadataType)
+Event MetadataType
 
 **Kind**: global class  
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
-* [EventDefinition](#EventDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [_], [__], [key])](#EventDefinition.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache()](#EventDefinition.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#EventDefinition.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
-    * [.postRetrieveTasks(eventDef)](#EventDefinition.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.deleteByKey(key)](#EventDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.deploy(metadata, deployDir, retrieveDir)](#EventDefinition.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
-    * [.create(EventDefinition)](#EventDefinition.create) ⇒ <code>Promise</code>
-    * [.update(metadataEntry)](#EventDefinition.update) ⇒ <code>Promise</code>
-    * [.preDeployTasks(metadata)](#EventDefinition.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.parseMetadata(metadata)](#EventDefinition.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+* [Event](#Event) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [key])](#Event.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache()](#Event.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Event.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
+    * [.postRetrieveTasks(eventDef)](#Event.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.deleteByKey(key)](#Event.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deploy(metadata, deployDir, retrieveDir)](#Event.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.create(metadata)](#Event.create) ⇒ <code>Promise</code>
+    * [.update(metadataEntry)](#Event.update) ⇒ <code>Promise</code>
+    * [.preDeployTasks(metadata)](#Event.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.parseMetadata(metadata)](#Event.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 
-<a name="EventDefinition.retrieve"></a>
+<a name="Event.retrieve"></a>
 
-### EventDefinition.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### Event.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves Metadata of Event Definition.
 Endpoint /interaction/v1/EventDefinitions return all Event Definitions with all details.
 Currently it is not needed to loop over Imports with endpoint /interaction/v1/EventDefinitions/{id}
 
-**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Kind**: static method of [<code>Event</code>](#Event)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
@@ -2441,19 +2441,19 @@ Currently it is not needed to loop over Imports with endpoint /interaction/v1/Ev
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
-<a name="EventDefinition.retrieveForCache"></a>
+<a name="Event.retrieveForCache"></a>
 
-### EventDefinition.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### Event.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves event definition metadata for caching
 
-**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Kind**: static method of [<code>Event</code>](#Event)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
-<a name="EventDefinition.retrieveAsTemplate"></a>
+<a name="Event.retrieveAsTemplate"></a>
 
-### EventDefinition.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
+### Event.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
 Retrieve a specific Event Definition by Name
 
-**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Kind**: static method of [<code>Event</code>](#Event)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
@@ -2462,36 +2462,36 @@ Retrieve a specific Event Definition by Name
 | name | <code>string</code> | name of the metadata file |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
-<a name="EventDefinition.postRetrieveTasks"></a>
+<a name="Event.postRetrieveTasks"></a>
 
-### EventDefinition.postRetrieveTasks(eventDef) ⇒ <code>TYPE.MetadataTypeItem</code>
+### Event.postRetrieveTasks(eventDef) ⇒ <code>TYPE.MetadataTypeItem</code>
 manages post retrieve steps
 
-**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Kind**: static method of [<code>Event</code>](#Event)  
 **Returns**: <code>TYPE.MetadataTypeItem</code> - metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | eventDef | <code>TYPE.MetadataTypeItem</code> | a single item of Event Definition |
 
-<a name="EventDefinition.deleteByKey"></a>
+<a name="Event.deleteByKey"></a>
 
-### EventDefinition.deleteByKey(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Event.deleteByKey(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
-**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Kind**: static method of [<code>Event</code>](#Event)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | key | <code>string</code> | Identifier of item |
 
-<a name="EventDefinition.deploy"></a>
+<a name="Event.deploy"></a>
 
-### EventDefinition.deploy(metadata, deployDir, retrieveDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+### Event.deploy(metadata, deployDir, retrieveDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
 Deploys metadata - merely kept here to be able to print [logBeta](#Util.logBeta) once per deploy
 
-**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Kind**: static method of [<code>Event</code>](#Event)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code> - Promise of keyField => metadata map  
 
 | Param | Type | Description |
@@ -2500,54 +2500,89 @@ Deploys metadata - merely kept here to be able to print [logBeta](#Util.logBeta)
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 | retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
 
-<a name="EventDefinition.create"></a>
+<a name="Event.create"></a>
 
-### EventDefinition.create(EventDefinition) ⇒ <code>Promise</code>
+### Event.create(metadata) ⇒ <code>Promise</code>
 Creates a single Event Definition
 
-**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Kind**: static method of [<code>Event</code>](#Event)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| EventDefinition | <code>TYPE.MetadataTypeItem</code> | a single Event Definition |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single Event Definition |
 
-<a name="EventDefinition.update"></a>
+<a name="Event.update"></a>
 
-### EventDefinition.update(metadataEntry) ⇒ <code>Promise</code>
+### Event.update(metadataEntry) ⇒ <code>Promise</code>
 Updates a single Event Definition (using PUT method since PATCH isn't supported)
 
-**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Kind**: static method of [<code>Event</code>](#Event)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single Event Definition |
 
-<a name="EventDefinition.preDeployTasks"></a>
+<a name="Event.preDeployTasks"></a>
 
-### EventDefinition.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### Event.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 prepares an event definition for deployment
 
-**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Kind**: static method of [<code>Event</code>](#Event)  
 **Returns**: <code>TYPE.MetadataTypeItem</code> - parsed version  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single eventDefinition |
 
-<a name="EventDefinition.parseMetadata"></a>
+<a name="Event.parseMetadata"></a>
 
-### EventDefinition.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### Event.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 parses retrieved Metadata before saving
 
-**Kind**: static method of [<code>EventDefinition</code>](#EventDefinition)  
+**Kind**: static method of [<code>Event</code>](#Event)  
 **Returns**: <code>TYPE.MetadataTypeItem</code> - parsed metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single event definition |
 
+<a name="FtpLocation"></a>
+
+## FtpLocation ⇐ [<code>MetadataType</code>](#MetadataType)
+ImportFile MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [FtpLocation](#FtpLocation) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [key])](#FtpLocation.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache()](#FtpLocation.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+
+<a name="FtpLocation.retrieve"></a>
+
+### FtpLocation.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of FtpLocation
+Endpoint /automation/v1/ftplocations/ return all FtpLocations
+
+**Kind**: static method of [<code>FtpLocation</code>](#FtpLocation)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [_] | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="FtpLocation.retrieveForCache"></a>
+
+### FtpLocation.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves folder metadata into local filesystem. Also creates a uniquePath attribute for each folder.
+
+**Kind**: static method of [<code>FtpLocation</code>](#FtpLocation)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
 <a name="FileTransfer"></a>
 
 ## FileTransfer ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -2839,41 +2874,6 @@ Helper for writing Metadata to disk, used for Retrieve and deploy
 | retrieveDir | <code>string</code> | directory where metadata should be stored after deploy/retrieve |
 | mid | <code>number</code> | current mid for this credential / business unit |
 
-<a name="FtpLocation"></a>
-
-## FtpLocation ⇐ [<code>MetadataType</code>](#MetadataType)
-ImportFile MetadataType
-
-**Kind**: global class  
-**Extends**: [<code>MetadataType</code>](#MetadataType)  
-
-* [FtpLocation](#FtpLocation) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [_], [__], [key])](#FtpLocation.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache()](#FtpLocation.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-
-<a name="FtpLocation.retrieve"></a>
-
-### FtpLocation.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves Metadata of FtpLocation
-Endpoint /automation/v1/ftplocations/ return all FtpLocations
-
-**Kind**: static method of [<code>FtpLocation</code>](#FtpLocation)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
-| [_] | <code>void</code> | unused parameter |
-| [__] | <code>void</code> | unused parameter |
-| [key] | <code>string</code> | customer key of single item to retrieve |
-
-<a name="FtpLocation.retrieveForCache"></a>
-
-### FtpLocation.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves folder metadata into local filesystem. Also creates a uniquePath attribute for each folder.
-
-**Kind**: static method of [<code>FtpLocation</code>](#FtpLocation)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
 <a name="ImportFile"></a>
 
 ## ImportFile ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -3252,13 +3252,13 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.upsert(metadata, deployDir)](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MetadataType.createOrUpdate) ⇒ <code>void</code>
     * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
-    * [.createSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
+    * [.createSOAP(metadataEntry, [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [.updateREST(metadataEntry, uri, [usePut])](#MetadataType.updateREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
-    * [.updateSOAP(metadataEntry, [overrideType], [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
+    * [.updateSOAP(metadataEntry, [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [._handleSOAPErrors(ex, msg, [metadataEntry], [handleOutside])](#MetadataType._handleSOAPErrors)
     * [.getSOAPErrorMsg(ex)](#MetadataType.getSOAPErrorMsg) ⇒ <code>string</code>
     * [.retrieveSOAP(retrieveDir, [requestParams], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
+    * [.retrieveREST(retrieveDir, uri, [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#MetadataType.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
     * [.removeNotCreateableFields(metadataEntry)](#MetadataType.removeNotCreateableFields) ⇒ <code>void</code>
@@ -3573,7 +3573,7 @@ Creates a single metadata entry via REST
 
 <a name="MetadataType.createSOAP"></a>
 
-### MetadataType.createSOAP(metadataEntry, [overrideType], [handleOutside]) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
+### MetadataType.createSOAP(metadataEntry, [handleOutside]) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
 Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3582,7 +3582,6 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataEntry | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
-| [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
 | [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
 <a name="MetadataType.updateREST"></a>
@@ -3601,7 +3600,7 @@ Updates a single metadata entry via REST
 
 <a name="MetadataType.updateSOAP"></a>
 
-### MetadataType.updateSOAP(metadataEntry, [overrideType], [handleOutside]) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
+### MetadataType.updateSOAP(metadataEntry, [handleOutside]) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
 Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3610,7 +3609,6 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataEntry | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
-| [overrideType] | <code>string</code> | can be used if the API type differs from the otherwise used type identifier |
 | [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
 <a name="MetadataType._handleSOAPErrors"></a>
@@ -3653,7 +3651,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 
 <a name="MetadataType.retrieveREST"></a>
 
-### MetadataType.retrieveREST(retrieveDir, uri, [overrideType], [templateVariables], [singleRetrieve]) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
+### MetadataType.retrieveREST(retrieveDir, uri, [templateVariables], [singleRetrieve]) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
 Retrieves Metadata for Rest Types
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3663,7 +3661,6 @@ Retrieves Metadata for Rest Types
 | --- | --- | --- |
 | retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | uri | <code>string</code> | rest endpoint for GET |
-| [overrideType] | <code>string</code> | force a metadata type (mainly used for Folders) |
 | [templateVariables] | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
 
@@ -5018,33 +5015,33 @@ additionally, the documentation for dataExtension and automation should be retur
 | --- | --- | --- |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
-<a name="TriggeredSendDefinition"></a>
+<a name="TriggeredSend"></a>
 
-## TriggeredSendDefinition ⇐ [<code>MetadataType</code>](#MetadataType)
+## TriggeredSend ⇐ [<code>MetadataType</code>](#MetadataType)
 MessageSendActivity MetadataType
 
 **Kind**: global class  
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
-* [TriggeredSendDefinition](#TriggeredSendDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [_], [__], [key])](#TriggeredSendDefinition.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.create(metadata)](#TriggeredSendDefinition.create) ⇒ <code>Promise</code>
-    * [.update(metadata)](#TriggeredSendDefinition.update) ⇒ <code>Promise</code>
-    * [.deleteByKey(customerKey)](#TriggeredSendDefinition.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.postRetrieveTasks(metadata)](#TriggeredSendDefinition.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.setFolderPath(metadata)](#TriggeredSendDefinition.setFolderPath)
-    * [.parseMetadata(metadata)](#TriggeredSendDefinition.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
-    * [.preDeployTasks(metadata)](#TriggeredSendDefinition.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.refresh([keyArr])](#TriggeredSendDefinition.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._findRefreshableItems()](#TriggeredSendDefinition._findRefreshableItems) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-    * [._refreshItem(key, checkKey)](#TriggeredSendDefinition._refreshItem) ⇒ <code>Promise.&lt;boolean&gt;</code>
+* [TriggeredSend](#TriggeredSend) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [key])](#TriggeredSend.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.create(metadata)](#TriggeredSend.create) ⇒ <code>Promise</code>
+    * [.update(metadata)](#TriggeredSend.update) ⇒ <code>Promise</code>
+    * [.deleteByKey(customerKey)](#TriggeredSend.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.postRetrieveTasks(metadata)](#TriggeredSend.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.setFolderPath(metadata)](#TriggeredSend.setFolderPath)
+    * [.parseMetadata(metadata)](#TriggeredSend.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
+    * [.preDeployTasks(metadata)](#TriggeredSend.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.refresh([keyArr])](#TriggeredSend.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._findRefreshableItems()](#TriggeredSend._findRefreshableItems) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [._refreshItem(key, checkKey)](#TriggeredSend._refreshItem) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
-<a name="TriggeredSendDefinition.retrieve"></a>
+<a name="TriggeredSend.retrieve"></a>
 
-### TriggeredSendDefinition.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### TriggeredSend.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
 
 | Param | Type | Description |
@@ -5054,114 +5051,114 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
-<a name="TriggeredSendDefinition.create"></a>
+<a name="TriggeredSend.create"></a>
 
-### TriggeredSendDefinition.create(metadata) ⇒ <code>Promise</code>
+### TriggeredSend.create(metadata) ⇒ <code>Promise</code>
 Create a single TSD.
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
 
-<a name="TriggeredSendDefinition.update"></a>
+<a name="TriggeredSend.update"></a>
 
-### TriggeredSendDefinition.update(metadata) ⇒ <code>Promise</code>
+### TriggeredSend.update(metadata) ⇒ <code>Promise</code>
 Updates a single TSD.
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
 
-<a name="TriggeredSendDefinition.deleteByKey"></a>
+<a name="TriggeredSend.deleteByKey"></a>
 
-### TriggeredSendDefinition.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### TriggeredSend.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | customerKey | <code>string</code> | Identifier of data extension |
 
-<a name="TriggeredSendDefinition.postRetrieveTasks"></a>
+<a name="TriggeredSend.postRetrieveTasks"></a>
 
-### TriggeredSendDefinition.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### TriggeredSend.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 manages post retrieve steps
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one query string  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
 
-<a name="TriggeredSendDefinition.setFolderPath"></a>
+<a name="TriggeredSend.setFolderPath"></a>
 
-### TriggeredSendDefinition.setFolderPath(metadata)
+### TriggeredSend.setFolderPath(metadata)
 generic script that retrieves the folder path from cache and updates the given metadata with it after retrieve
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single script activity definition |
 
-<a name="TriggeredSendDefinition.parseMetadata"></a>
+<a name="TriggeredSend.parseMetadata"></a>
 
-### TriggeredSendDefinition.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
+### TriggeredSend.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
 parses retrieved Metadata before saving
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>TYPE.MetadataTypeItem</code> \| <code>void</code> - Array with one metadata object and one sql string  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single query activity definition |
 
-<a name="TriggeredSendDefinition.preDeployTasks"></a>
+<a name="TriggeredSend.preDeployTasks"></a>
 
-### TriggeredSendDefinition.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### TriggeredSend.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 prepares a TSD for deployment
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>TYPE.MetadataTypeItem</code> - metadata object  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | of a single TSD |
 
-<a name="TriggeredSendDefinition.refresh"></a>
+<a name="TriggeredSend.refresh"></a>
 
-### TriggeredSendDefinition.refresh([keyArr]) ⇒ <code>Promise.&lt;void&gt;</code>
+### TriggeredSend.refresh([keyArr]) ⇒ <code>Promise.&lt;void&gt;</code>
 TSD-specific refresh method that finds active TSDs and refreshes them
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | metadata keys |
 
-<a name="TriggeredSendDefinition._findRefreshableItems"></a>
+<a name="TriggeredSend._findRefreshableItems"></a>
 
-### TriggeredSendDefinition.\_findRefreshableItems() ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+### TriggeredSend.\_findRefreshableItems() ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 helper for [refresh](refresh) that finds active TSDs on the server and filters it by the same rules that [retrieve](retrieve) is using to avoid refreshing TSDs with broken dependencies
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - keyArr  
-<a name="TriggeredSendDefinition._refreshItem"></a>
+<a name="TriggeredSend._refreshItem"></a>
 
-### TriggeredSendDefinition.\_refreshItem(key, checkKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### TriggeredSend.\_refreshItem(key, checkKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 helper for [refresh](refresh) that pauses, publishes and starts a triggered send
 
-**Kind**: static method of [<code>TriggeredSendDefinition</code>](#TriggeredSendDefinition)  
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - true if refresh was successful  
 
 | Param | Type | Description |
