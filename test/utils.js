@@ -17,10 +17,11 @@ const resourceFactory = require('./resourceFactory');
  *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
+ * @param {string} [buName] used when we need to test on ParentBU
  * @returns {Promise.<string>} file in string form
  */
-exports.getActualJson = (customerKey, type) =>
-    File.readJSON(`./retrieve/testInstance/testBU/${type}/${customerKey}.${type}-meta.json`);
+exports.getActualJson = (customerKey, type, buName = 'testBU') =>
+    File.readJSON(`./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-meta.json`);
 /**
  * gets file from Retrieve folder
  *

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:1babdae0-9282-4bba-b69f-2f1843deaf11</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:39d1c021-b3df-49f9-a8f7-bb444172d2d3</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-291db2ee-625d-49f7-8f6f-110317b081a5">
+                <wsu:Created>2023-03-11T13:53:00Z</wsu:Created>
+                <wsu:Expires>2023-03-11T13:58:00Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>5347bf1d-e801-486a-b4a9-c2d46a8909b6</RequestID>
+            <Results xsi:type="AccountUser">
+                <Client>
+                    <ID>1111111</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2019-09-06T01:59:07.097</CreatedDate>
+                <ModifiedDate>2022-06-21T01:43:02.64</ModifiedDate>
+                <ID>700301950</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>testExisting_user</CustomerKey>
+                <AccountUserID>700301950</AccountUserID>
+                <UserID>user_test@accenture.asgr</UserID>
+                <Name>user test</Name>
+                <Email>user_test@accenture.com</Email>
+                <MustChangePassword>false</MustChangePassword>
+                <ActiveFlag>true</ActiveFlag>
+                <UserPermissions>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>2</ID>
+                    <ObjectID xsi:nil="true" />
+                    <Name xsi:nil="true" />
+                    <Value xsi:nil="true" />
+                    <Description xsi:nil="true" />
+                    <Delete>0</Delete>
+                </UserPermissions>
+                <UserPermissions>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>3</ID>
+                    <ObjectID xsi:nil="true" />
+                    <Name xsi:nil="true" />
+                    <Value xsi:nil="true" />
+                    <Description xsi:nil="true" />
+                    <Delete>0</Delete>
+                </UserPermissions>
+                <Delete>0</Delete>
+                <LastSuccessfulLogin>2023-02-23T10:14:11.443</LastSuccessfulLogin>
+                <IsAPIUser>false</IsAPIUser>
+                <NotificationEmailAddress>user_test@accenture.com</NotificationEmailAddress>
+                <IsLocked>false</IsLocked>
+                <DefaultBusinessUnit>1111111</DefaultBusinessUnit>
+                <DefaultBusinessUnitObject>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>1111111</ID>
+                    <ObjectID xsi:nil="true" />
+                    <AccountType>None</AccountType>
+                    <Subscription xsi:nil="true" />
+                </DefaultBusinessUnitObject>
+                <Roles>
+                    <Role>
+                        <Client>
+                            <ID>1111111</ID>
+                            <CreatedBy>-1000</CreatedBy>
+                            <ModifiedBy>-1000</ModifiedBy>
+                            <EnterpriseID>1111111</EnterpriseID>
+                        </Client>
+                        <PartnerKey xsi:nil="true" />
+                        <CreatedDate>2016-07-22T17:52:36.93</CreatedDate>
+                        <ModifiedDate>2016-07-22T17:52:36.93</ModifiedDate>
+                        <ObjectID>f1cfb80f-3550-e611-96fe-38eaa7142c61</ObjectID>
+                        <CustomerKey>SYS_DEF_ADMIN</CustomerKey>
+                        <Name>Administrator</Name>
+                        <Description>Administrator</Description>
+                        <IsPrivate>false</IsPrivate>
+                        <IsSystemDefined>true</IsSystemDefined>
+                    </Role>
+                    <Role>
+                        <Client>
+                            <ID>1111111</ID>
+                            <CreatedBy>-1000</CreatedBy>
+                            <ModifiedBy>-1000</ModifiedBy>
+                            <EnterpriseID>1111111</EnterpriseID>
+                        </Client>
+                        <PartnerKey xsi:nil="true" />
+                        <CreatedDate>2016-07-22T17:52:36.93</CreatedDate>
+                        <ModifiedDate>2016-07-22T17:52:36.93</ModifiedDate>
+                        <ObjectID>f1cfb80f-3550-e611-96fe-38eaa7142c61</ObjectID>
+                        <CustomerKey>SYS_DEF_CONTENT</CustomerKey>
+                        <Name>Content Creator</Name>
+                        <Description>Content Creator</Description>
+                        <IsPrivate>false</IsPrivate>
+                        <IsSystemDefined>true</IsSystemDefined>
+                    </Role>
+                    <Role>
+                        <Client>
+                            <ID>7281698</ID>
+                            <CreatedBy>7730152</CreatedBy>
+                            <ModifiedBy>7730152</ModifiedBy>
+                            <EnterpriseID>7281698</EnterpriseID>
+                        </Client>
+                        <PartnerKey xsi:nil="true" />
+                        <CreatedDate>2019-09-06T07:59:07.8</CreatedDate>
+                        <ModifiedDate>2019-09-06T07:59:07.8</ModifiedDate>
+                        <ObjectID>bd251431-7cd0-e911-a2d3-1402ec936979</ObjectID>
+                        <CustomerKey>Individual role for 700301950</CustomerKey>
+                        <Name>Individual role for 700301950</Name>
+                        <Description>Individual role for 700301950</Description>
+                        <IsPrivate>true</IsPrivate>
+                        <IsSystemDefined>false</IsSystemDefined>
+                    </Role>
+                    <Role>
+                        <Client>
+                            <ID>0</ID>
+                            <CreatedBy>0</CreatedBy>
+                            <ModifiedBy>0</ModifiedBy>
+                            <EnterpriseID>0</EnterpriseID>
+                        </Client>
+                        <PartnerKey xsi:nil="true" />
+                        <CreatedDate>2012-02-21T02:09:19.983</CreatedDate>
+                        <ModifiedDate>2013-12-23T16:48:50.533</ModifiedDate>
+                        <ObjectID>63a50610-315c-e111-beee-8e001800001f</ObjectID>
+                        <CustomerKey>SYS_DEF_IMHADMIN</CustomerKey>
+                        <Name>Marketing Cloud Administrator</Name>
+                        <Description>Assign Marketing Cloud roles to users and manage Mobile, Social and Sites Channels, Hub Apps and Marketing Cloud Tools</Description>
+                        <IsPrivate>false</IsPrivate>
+                        <IsSystemDefined>true</IsSystemDefined>
+                    </Role>
+                </Roles>
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>
