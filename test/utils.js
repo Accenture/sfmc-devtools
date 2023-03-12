@@ -37,10 +37,11 @@ exports.getActualFile = (customerKey, type, ext) =>
  *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
+ * @param {string} [buName] used when we need to test on ParentBU
  * @returns {Promise.<string>} file in string form
  */
-exports.getActualDeployJson = (customerKey, type) =>
-    File.readJSON(`./deploy/testInstance/testBU/${type}/${customerKey}.${type}-meta.json`);
+exports.getActualDeployJson = (customerKey, type, buName = 'testBU') =>
+    File.readJSON(`./deploy/testInstance/${buName}/${type}/${customerKey}.${type}-meta.json`);
 /**
  * gets file from Deploy folder
  *

@@ -1,0 +1,20 @@
+{
+    "CustomerKey": "testExisting_user",
+    "UserID": "user_testTarget@accenture.asgr",
+    "Name": "user test",
+    "Email": "user_testTarget@accenture.com",
+    "MustChangePassword": false,
+    "ActiveFlag": true,
+    "IsAPIUser": false,
+    "NotificationEmailAddress": "user_testTarget@accenture.com",
+    "IsLocked": false,
+    "DefaultBusinessUnit": "1111111",
+    "type__c": "User",
+    "AssociatedBusinessUnits__c": ["1111111", "1111111"],
+    "RoleNamesGlobal__c": [
+        "Administrator",
+        "Content Creator",
+        "Individual role for 700301950",
+        "Marketing Cloud Administrator"
+    ]
+}
