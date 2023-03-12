@@ -219,7 +219,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dd></dd>
 <dt><a href="#DataExtensionMap">DataExtensionMap</a> : <code>object</code></dt>
 <dd></dd>
-<dt><a href="#AccountUserDocumentMap">AccountUserDocumentMap</a> : <code>object</code></dt>
+<dt><a href="#UserDocumentMap">UserDocumentMap</a> : <code>object</code></dt>
 <dd><p>key=customer key</p>
 </dd>
 <dt><a href="#BusinessUnitAssignmentConfiguration">BusinessUnitAssignmentConfiguration</a> : <code>object</code></dt>
@@ -3102,7 +3102,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.hasChanged(cachedVersion, metadata, [fieldName])](#MetadataType.hasChanged) ⇒ <code>boolean</code>
     * [.hasChangedGeneric(cachedVersion, metadata, [fieldName], [silent])](#MetadataType.hasChangedGeneric) ⇒ <code>boolean</code>
     * [.upsert(metadata, deployDir)](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
-    * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MetadataType.createOrUpdate) ⇒ <code>void</code>
+    * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MetadataType.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
     * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [.createSOAP(metadataEntry, [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [.updateREST(metadataEntry, uri, [usePut])](#MetadataType.updateREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
@@ -3397,10 +3397,11 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 
 <a name="MetadataType.createOrUpdate"></a>
 
-### MetadataType.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>void</code>
+### MetadataType.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
 helper for [upsert](#MetadataType.upsert)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code> - action to take  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5033,7 +5034,7 @@ MetadataType
     * [.update(metadata)](#User.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#User.preDeployTasks) ⇒ <code>TYPE.UserDocument</code>
     * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#User.createOrUpdate) ⇒ <code>void</code>
-    * [.prepareBuAssignments(metadataToUpdate, metadataToCreate, metadata)](#User.prepareBuAssignments)
+    * [.prepareBuAssignments(metadata, [updateItem], [createItem])](#User.prepareBuAssignments)
     * [.postDeployTasks(metadata)](#User.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.retrieveChangelog()](#User.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.document([metadata])](#User.document) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -5106,7 +5107,7 @@ helper for [upsert](#MetadataType.upsert)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata itme |
+| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata item |
 | metadataKey | <code>string</code> | key of item we are looking at |
 | hasError | <code>boolean</code> | error flag from previous code |
 | metadataToUpdate | <code>Array.&lt;TYPE.UserDocumentDiff&gt;</code> | list of items to update |
@@ -5114,14 +5115,14 @@ helper for [upsert](#MetadataType.upsert)
 
 <a name="User.prepareBuAssignments"></a>
 
-### User.prepareBuAssignments(metadataToUpdate, metadataToCreate, metadata)
+### User.prepareBuAssignments(metadata, [updateItem], [createItem])
 **Kind**: static method of [<code>User</code>](#User)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadataToUpdate | <code>Array.&lt;TYPE.UserDocumentDiff&gt;</code> | list of items to update |
-| metadataToCreate | <code>Array.&lt;TYPE.UserDocument&gt;</code> | list of items to create |
 | metadata | <code>TYPE.MetadataTypeItem</code> | single metadata itme |
+| [updateItem] | <code>TYPE.UserDocumentDiff</code> | item to update |
+| [createItem] | <code>TYPE.UserDocument</code> | item to create |
 
 <a name="User.postDeployTasks"></a>
 
@@ -7618,9 +7619,9 @@ key=customer key
 | [Template] | <code>object</code> | - |
 | [Template.CustomerKey] | <code>string</code> | key of optionally associated DE teplate |
 
-<a name="AccountUserDocumentMap"></a>
+<a name="UserDocumentMap"></a>
 
-## AccountUserDocumentMap : <code>object</code>
+## UserDocumentMap : <code>object</code>
 key=customer key
 
 **Kind**: global typedef  
