@@ -78,7 +78,7 @@ exports.handleSOAPRequest = async (config) => {
         case 'Configure': {
             responseXML = await this.loadSOAPRecords(
                 config.headers.SOAPAction.toLocaleLowerCase(),
-                fullObj.Envelope.Body.ConfigureRequestMsg.Configurations.Configuration[
+                fullObj.Envelope.Body.ConfigureRequestMsg.Configurations.Configuration[0][
                     '@_xsi:type'
                 ],
                 jObj.Envelope.Header.fueloauth

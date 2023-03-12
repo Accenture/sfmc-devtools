@@ -42,7 +42,7 @@
                     <IsAPIUser>false</IsAPIUser>
                     <NotificationEmailAddress>user_test@accenture.com</NotificationEmailAddress>
                     <IsLocked>false</IsLocked>
-                    <DefaultBusinessUnit>1111111</DefaultBusinessUnit>
+                    <DefaultBusinessUnit>9999999</DefaultBusinessUnit>
                     <Roles>
                         <Role>
                             <Client>

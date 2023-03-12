@@ -8,7 +8,7 @@
     "IsAPIUser": false,
     "NotificationEmailAddress": "user_test@accenture.com",
     "IsLocked": false,
-    "DefaultBusinessUnit": 1111111,
+    "DefaultBusinessUnit": 9999999,
     "type__c": "User",
     "AssociatedBusinessUnits__c": [1111111, 9999999],
     "RoleNamesGlobal__c": [
