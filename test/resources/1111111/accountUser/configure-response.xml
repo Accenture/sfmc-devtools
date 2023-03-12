@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>ConfigureResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:ba94993c-4dcc-4bf4-8eec-41abdef2aa68</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:091ac6ad-8954-41c3-91ba-e23471a1c9c1</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-a1d2e672-d0b6-44a3-a439-97eda1a85a1a">
+                <wsu:Created>2023-03-12T00:55:04Z</wsu:Created>
+                <wsu:Expires>2023-03-12T01:00:04Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <ConfigureResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <Results>
+                <Result>
+                    <StatusCode>OK</StatusCode>
+                    <StatusMessage>User Business Unit assignments successfully updated</StatusMessage>
+                    <OrdinalID>0</OrdinalID>
+                    <Object xsi:type="AccountUser">
+                        <Client>
+                            <ID>7281698</ID>
+                        </Client>
+                        <PartnerKey xsi:nil="true" />
+                        <ID>717510285</ID>
+                        <ObjectID xsi:nil="true" />
+                        <Delete>0</Delete>
+                        <BusinessUnitAssignmentConfiguration>
+                            <BusinessUnitIds>
+                                <BusinessUnitId>1111111</BusinessUnitId>
+                                <BusinessUnitId>9999999</BusinessUnitId>
+                            </BusinessUnitIds>
+                            <IsDelete>false</IsDelete>
+                        </BusinessUnitAssignmentConfiguration>
+                    </Object>
+                </Result>
+            </Results>
+            <OverallStatus>OK</OverallStatus>
+            <OverallStatusMessage />
+            <RequestID>4bc43ab1-9422-4d7b-8c4b-b93d85ad767b</RequestID>
+        </ConfigureResponseMsg>
+    </soap:Body>
+</soap:Envelope>

@@ -1,0 +1,19 @@
+{
+    "CustomerKey": "testNew_user",
+    "UserID": "testNew_user@accenture.asgr",
+    "Name": "new user",
+    "Email": "testNew_user@accenture.com",
+    "MustChangePassword": false,
+    "ActiveFlag": true,
+    "IsAPIUser": false,
+    "NotificationEmailAddress": "testNew_user@accenture.com",
+    "IsLocked": false,
+    "DefaultBusinessUnit": 1111111,
+    "type__c": "User",
+    "AssociatedBusinessUnits__c": [1111111],
+    "RoleNamesGlobal__c": [
+        "Administrator",
+        "Distributed Sending User",
+        "Marketing Cloud Administrator"
+    ]
+}

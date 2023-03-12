@@ -1,0 +1,31 @@
+{
+    "CreatedDate": "2019-09-06T01:59:07.097",
+    "ModifiedDate": "2022-06-21T01:43:02.64",
+    "CustomerKey": "testExisting_user",
+    "UserID": "user_test@accenture.asgr",
+    "Name": "user test",
+    "Email": "user_test@accenture.com",
+    "MustChangePassword": false,
+    "ActiveFlag": true,
+    "UserPermissions": [
+        {
+            "ID": 2
+        },
+        {
+            "ID": 3
+        }
+    ],
+    "LastSuccessfulLogin": "2023-02-23T10:14:11.443",
+    "IsAPIUser": false,
+    "NotificationEmailAddress": "user_test@accenture.com",
+    "IsLocked": false,
+    "DefaultBusinessUnit": 1111111,
+    "type__c": "User",
+    "AssociatedBusinessUnits__c": [1111111, 9999999],
+    "RoleNamesGlobal__c": [
+        "Administrator",
+        "Distributed Sending User",
+        "Individual role for 700301950",
+        "Marketing Cloud Administrator"
+    ]
+}

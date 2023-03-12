@@ -81,6 +81,16 @@
                 <Description>Individual role for 700301950</Description>
                 <IsSystemDefined>false</IsSystemDefined>
             </Results>
+            <Results xsi:type="Role">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2019-09-06T07:59:07.8</CreatedDate>
+                <ModifiedDate>2019-09-06T07:59:07.8</ModifiedDate>
+                <ObjectID>bd251431-7cd0-e911-a2d3-1402ec936971</ObjectID>
+                <CustomerKey>Individual role for 700301951</CustomerKey>
+                <Name>Individual role for 700301951</Name>
+                <Description>Individual role for 700301951</Description>
+                <IsSystemDefined>false</IsSystemDefined>
+            </Results>
         </RetrieveResponseMsg>
     </soap:Body>
 </soap:Envelope>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>CreateResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:545e5b90-8e55-4c57-ac1d-5d675fe15041</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:9c5f9d10-a638-41d2-ad35-b1d1cdc097a8</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-19e06319-84b9-4b38-a12c-7c40b1eb5f3e">
+                <wsu:Created>2023-03-12T00:40:30Z</wsu:Created>
+                <wsu:Expires>2023-03-12T00:45:30Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <CreateResponse xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <Results>
+                <StatusCode>OK</StatusCode>
+                <StatusMessage>Account User Updated / Created</StatusMessage>
+                <OrdinalID>0</OrdinalID>
+                <NewID>0</NewID>
+                <Object xsi:type="AccountUser">
+                    <Client>
+                        <ID>1111111</ID>
+                    </Client>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>717510285</ID>
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_user</CustomerKey>
+                    <UserID>testNew_user@accenture.asgr</UserID>
+                    <Password />
+                    <Name>new user</Name>
+                    <Email>testNew_user@accenture.com</Email>
+                    <MustChangePassword>false</MustChangePassword>
+                    <ActiveFlag>true</ActiveFlag>
+                    <Delete>0</Delete>
+                    <IsAPIUser>false</IsAPIUser>
+                    <NotificationEmailAddress>testNew_user@accenture.com</NotificationEmailAddress>
+                    <IsLocked>false</IsLocked>
+                    <DefaultBusinessUnit>1111111</DefaultBusinessUnit>
+                    <Roles>
+                        <Role>
+                            <Client>
+                                <ID>1111111</ID>
+                                <EnterpriseID>1111111</EnterpriseID>
+                            </Client>
+                            <PartnerKey xsi:nil="true" />
+                            <ObjectID>f1cfb80f-3550-e611-96fe-38eaa7142c61</ObjectID>
+                            <Name>Administrator</Name>
+                            <AssignmentConfigurations>
+                                <AssignmentConfiguration>
+                                    <AccountUserId>717510285</AccountUserId>
+                                    <AssignmentConfigureType>RoleUser</AssignmentConfigureType>
+                                </AssignmentConfiguration>
+                            </AssignmentConfigurations>
+                        </Role>
+                        <Role>
+                            <Client>
+                                <ID>1111111</ID>
+                                <EnterpriseID>1111111</EnterpriseID>
+                            </Client>
+                            <PartnerKey xsi:nil="true" />
+                            <ObjectID>fdcfb80f-3550-e611-96fe-38eaa7142c61</ObjectID>
+                            <Name>Distributed Sending User</Name>
+                            <AssignmentConfigurations>
+                                <AssignmentConfiguration>
+                                    <AccountUserId>717510285</AccountUserId>
+                                    <AssignmentConfigureType>RoleUser</AssignmentConfigureType>
+                                </AssignmentConfiguration>
+                            </AssignmentConfigurations>
+                        </Role>
+                        <Role>
+                            <Client>
+                                <ID>1111111</ID>
+                                <EnterpriseID>1111111</EnterpriseID>
+                            </Client>
+                            <PartnerKey xsi:nil="true" />
+                            <ObjectID>63a50610-315c-e111-beee-8e001800001f</ObjectID>
+                            <Name>Marketing Cloud Administrator</Name>
+                            <AssignmentConfigurations>
+                                <AssignmentConfiguration>
+                                    <AccountUserId>717510285</AccountUserId>
+                                    <AssignmentConfigureType>RoleUser</AssignmentConfigureType>
+                                </AssignmentConfiguration>
+                            </AssignmentConfigurations>
+                        </Role>
+                    </Roles>
+                </Object>
+            </Results>
+            <RequestID>84d01639-9b81-4a45-9928-bf438c0f86bf</RequestID>
+            <OverallStatus>OK</OverallStatus>
+        </CreateResponse>
+    </soap:Body>
+</soap:Envelope>

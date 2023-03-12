@@ -27,6 +27,23 @@
                 <AccountUser>
                     <PartnerKey xsi:nil="true" />
                     <ObjectID xsi:nil="true" />
+                    <AccountUserID>717510285</AccountUserID>
+                    <Delete>0</Delete>
+                </AccountUser>
+                <Account>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>1111111</ID>
+                    <ObjectID xsi:nil="true" />
+                    <AccountType>None</AccountType>
+                    <Subscription xsi:nil="true" />
+                </Account>
+            </Results>
+            <Results xsi:type="AccountUserAccount">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID xsi:nil="true" />
+                <AccountUser>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
                     <AccountUserID>700301950</AccountUserID>
                     <Delete>0</Delete>
                 </AccountUser>
