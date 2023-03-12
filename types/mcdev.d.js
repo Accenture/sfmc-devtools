@@ -119,7 +119,7 @@ const SDK = require('sfmc-sdk');
  * @typedef {Object.<string, DataExtensionItem>} DataExtensionMap
  */
 /**
- * @typedef {object} AccountUserDocument
+ * @typedef {object} UserDocument
  * @property {string} [ID] equal to UserID; optional in update/create calls
  * @property {string} UserID equal to ID; required in update/create calls
  * @property {number} AccountUserID user.AccountUserID
@@ -139,8 +139,8 @@ const SDK = require('sfmc-sdk');
  * @property {string} LastSuccessfulLogin this.timeSinceDate(user.LastSuccessfulLogin)
  * @property {string} CreatedDate user.CreatedDate
  * @property {string} ModifiedDate user.ModifiedDate
- * @typedef {{before:AccountUserDocument,after:AccountUserDocument}} AccountUserDocumentDiff
- * @typedef {Object.<string, AccountUserDocument>} AccountUserDocumentMap key=customer key
+ * @typedef {{before:UserDocument,after:UserDocument}} UserDocumentDiff
+ * @typedef {Object.<string, UserDocument>} UserDocumentMap key=customer key
  */
 /**
  * @typedef {object} AccountUserConfiguration
