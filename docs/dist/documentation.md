@@ -5035,7 +5035,7 @@ MetadataType
     * [.preDeployTasks(metadata)](#User.preDeployTasks) ⇒ <code>TYPE.UserDocument</code>
     * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#User.createOrUpdate) ⇒ <code>void</code>
     * [.prepareBuAssignments(metadata, [updateItem], [createItem])](#User.prepareBuAssignments)
-    * [.postDeployTasks(metadata)](#User.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.postDeployTasks(upsertResults)](#User.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.retrieveChangelog()](#User.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.document([metadata])](#User.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.postRetrieveTasks(metadata)](#User.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -5126,7 +5126,7 @@ helper for [upsert](#MetadataType.upsert)
 
 <a name="User.postDeployTasks"></a>
 
-### User.postDeployTasks(metadata) ⇒ <code>Promise.&lt;void&gt;</code>
+### User.postDeployTasks(upsertResults) ⇒ <code>Promise.&lt;void&gt;</code>
 Gets executed after deployment of metadata type
 
 **Kind**: static method of [<code>User</code>](#User)  
@@ -5134,7 +5134,7 @@ Gets executed after deployment of metadata type
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.UserDocumentMap</code> | metadata mapped by their keyField |
+| upsertResults | <code>TYPE.UserDocumentMap</code> | metadata mapped by their keyField |
 
 <a name="User.retrieveChangelog"></a>
 
