@@ -3472,7 +3472,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata itme |
+| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata item |
 | metadataKey | <code>string</code> | key of item we are looking at |
 | hasError | <code>boolean</code> | error flag from previous code |
 | metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
