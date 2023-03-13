@@ -3405,7 +3405,7 @@ helper for [upsert](#MetadataType.upsert)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata item |
+| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata itme |
 | metadataKey | <code>string</code> | key of item we are looking at |
 | hasError | <code>boolean</code> | error flag from previous code |
 | metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
