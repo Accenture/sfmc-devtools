@@ -10,7 +10,7 @@
     "IsLocked": false,
     "DefaultBusinessUnit": 9999999,
     "type__c": "User",
-    "AssociatedBusinessUnits__c": [1111111, 9999999],
+    "AssociatedBusinessUnits__c": [9999999],
     "RoleNamesGlobal__c": [
         "Administrator",
         "Distributed Sending User",

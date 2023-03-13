@@ -3405,7 +3405,7 @@ helper for [upsert](#MetadataType.upsert)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata itme |
+| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata item |
 | metadataKey | <code>string</code> | key of item we are looking at |
 | hasError | <code>boolean</code> | error flag from previous code |
 | metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
@@ -5034,7 +5034,6 @@ MetadataType
     * [.update(metadata)](#User.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#User.preDeployTasks) ⇒ <code>TYPE.UserDocument</code>
     * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#User.createOrUpdate) ⇒ <code>void</code>
-    * [.prepareBuAssignments(metadata, [updateItem], [createItem])](#User.prepareBuAssignments)
     * [.postDeployTasks(upsertResults)](#User.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._getRoleObjectForDeploy(roleId, roleName, userId, assignmentOnly, [isRoleRemovale])](#User._getRoleObjectForDeploy) ⇒ <code>object</code>
     * [.retrieveChangelog()](#User.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -5114,17 +5113,6 @@ helper for [upsert](#MetadataType.upsert)
 | metadataToUpdate | <code>Array.&lt;TYPE.UserDocumentDiff&gt;</code> | list of items to update |
 | metadataToCreate | <code>Array.&lt;TYPE.UserDocument&gt;</code> | list of items to create |
 
-<a name="User.prepareBuAssignments"></a>
-
-### User.prepareBuAssignments(metadata, [updateItem], [createItem])
-**Kind**: static method of [<code>User</code>](#User)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata itme |
-| [updateItem] | <code>TYPE.UserDocumentDiff</code> | item to update |
-| [createItem] | <code>TYPE.UserDocument</code> | item to create |
-
 <a name="User.postDeployTasks"></a>
 
 ### User.postDeployTasks(upsertResults) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -5140,7 +5128,7 @@ Gets executed after deployment of metadata type
 <a name="User._getRoleObjectForDeploy"></a>
 
 ### User.\_getRoleObjectForDeploy(roleId, roleName, userId, assignmentOnly, [isRoleRemovale]) ⇒ <code>object</code>
-helper for [User._handleRoleAssignments](User._handleRoleAssignments)
+helper for [User._prepareRoleAssignments](User._prepareRoleAssignments)
 
 **Kind**: static method of [<code>User</code>](#User)  
 **Returns**: <code>object</code> - format needed by API  

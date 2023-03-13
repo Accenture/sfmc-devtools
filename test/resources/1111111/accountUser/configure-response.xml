@@ -7,13 +7,13 @@
     xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
     <soap:Header>
         <wsa:Action>ConfigureResponse</wsa:Action>
-        <wsa:MessageID>urn:uuid:ba94993c-4dcc-4bf4-8eec-41abdef2aa68</wsa:MessageID>
-        <wsa:RelatesTo>urn:uuid:091ac6ad-8954-41c3-91ba-e23471a1c9c1</wsa:RelatesTo>
+        <wsa:MessageID>urn:uuid:4838c660-b4cd-48fe-99c9-27972a520184</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:ec22f28d-4bc7-4ffc-b3e9-4e731f82c095</wsa:RelatesTo>
         <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
         <wsse:Security>
-            <wsu:Timestamp wsu:Id="Timestamp-a1d2e672-d0b6-44a3-a439-97eda1a85a1a">
-                <wsu:Created>2023-03-12T00:55:04Z</wsu:Created>
-                <wsu:Expires>2023-03-12T01:00:04Z</wsu:Expires>
+            <wsu:Timestamp wsu:Id="Timestamp-419f984d-fb1b-49eb-a090-b0c08d8b11f9">
+                <wsu:Created>2023-03-13T15:58:44Z</wsu:Created>
+                <wsu:Expires>2023-03-13T16:03:44Z</wsu:Expires>
             </wsu:Timestamp>
         </wsse:Security>
     </soap:Header>
@@ -40,6 +40,11 @@
                             <IsDelete>false</IsDelete>
                         </BusinessUnitAssignmentConfiguration>
                     </Object>
+                </Result>
+                <Result>
+                    <StatusCode>OK</StatusCode>
+                    <StatusMessage>User Business Unit assignments successfully updated</StatusMessage>
+                    <OrdinalID>1</OrdinalID>
                     <Object xsi:type="AccountUser">
                         <Client>
                             <ID>1111111</ID>
@@ -59,7 +64,7 @@
             </Results>
             <OverallStatus>OK</OverallStatus>
             <OverallStatusMessage />
-            <RequestID>4bc43ab1-9422-4d7b-8c4b-b93d85ad767b</RequestID>
+            <RequestID>abc28dae-6dfb-4ae9-ad07-63c74963c6d9</RequestID>
         </ConfigureResponseMsg>
     </soap:Body>
 </soap:Envelope>
