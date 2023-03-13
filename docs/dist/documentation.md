@@ -5036,6 +5036,7 @@ MetadataType
     * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#User.createOrUpdate) ⇒ <code>void</code>
     * [.prepareBuAssignments(metadata, [updateItem], [createItem])](#User.prepareBuAssignments)
     * [.postDeployTasks(upsertResults)](#User.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._getRoleObjectForDeploy(roleId, roleName, userId, assignmentOnly, [isRoleRemovale])](#User._getRoleObjectForDeploy) ⇒ <code>object</code>
     * [.retrieveChangelog()](#User.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.document([metadata])](#User.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.postRetrieveTasks(metadata)](#User.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -5135,6 +5136,22 @@ Gets executed after deployment of metadata type
 | Param | Type | Description |
 | --- | --- | --- |
 | upsertResults | <code>TYPE.UserDocumentMap</code> | metadata mapped by their keyField |
+
+<a name="User._getRoleObjectForDeploy"></a>
+
+### User.\_getRoleObjectForDeploy(roleId, roleName, userId, assignmentOnly, [isRoleRemovale]) ⇒ <code>object</code>
+helper for [User._handleRoleAssignments](User._handleRoleAssignments)
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>object</code> - format needed by API  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| roleId | <code>string</code> |  | role.ObjectID |
+| roleName | <code>string</code> |  | role.Name |
+| userId | <code>number</code> |  | user.AccountUserID |
+| assignmentOnly | <code>boolean</code> |  | if true, only assignment configuration will be returned |
+| [isRoleRemovale] | <code>boolean</code> | <code>false</code> | if true, role will be removed from user; otherwise added |
 
 <a name="User.retrieveChangelog"></a>
 
