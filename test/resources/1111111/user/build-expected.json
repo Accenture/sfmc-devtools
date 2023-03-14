@@ -11,10 +11,5 @@
     "DefaultBusinessUnit": "1111111",
     "type__c": "User",
     "AssociatedBusinessUnits__c": ["1111111", "1111111"],
-    "RoleNamesGlobal__c": [
-        "Administrator",
-        "Content Creator",
-        "Individual role for 700301950",
-        "Marketing Cloud Administrator"
-    ]
+    "RoleNamesGlobal__c": ["Administrator", "Content Creator", "Marketing Cloud Administrator"]
 }
