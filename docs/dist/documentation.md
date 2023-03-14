@@ -11,9 +11,6 @@ Source and target business units are also compared before the deployment to appl
 <dt><a href="#Mcdev">Mcdev</a></dt>
 <dd><p>main class</p>
 </dd>
-<dt><a href="#AccountUser">AccountUser</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
-<dd><p>MessageSendActivity MetadataType</p>
-</dd>
 <dt><a href="#Asset">Asset</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>FileTransfer MetadataType</p>
 </dd>
@@ -123,6 +120,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#TriggeredSend">TriggeredSend</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>MessageSendActivity MetadataType</p>
 </dd>
+<dt><a href="#User">User</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>MetadataType</p>
+</dd>
 <dt><a href="#Retriever">Retriever</a></dt>
 <dd><p>Retrieves metadata from a business unit and saves it to the local filesystem.</p>
 </dd>
@@ -219,7 +219,10 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dd></dd>
 <dt><a href="#DataExtensionMap">DataExtensionMap</a> : <code>object</code></dt>
 <dd></dd>
-<dt><a href="#AccountUserDocument">AccountUserDocument</a> : <code>object</code></dt>
+<dt><a href="#UserDocumentMap">UserDocumentMap</a> : <code>object</code></dt>
+<dd><p>key=customer key</p>
+</dd>
+<dt><a href="#BusinessUnitAssignmentConfiguration">BusinessUnitAssignmentConfiguration</a> : <code>object</code></dt>
 <dd></dd>
 <dt><a href="#AutomationActivity">AutomationActivity</a> : <code>object</code></dt>
 <dd></dd>
@@ -727,79 +730,6 @@ Build a specific metadata file based on a template using a list of bu-market com
 | businessUnit | <code>string</code> | references credentials from properties.json |
 | selectedType | <code>string</code> | supported metadata type |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
-
-<a name="AccountUser"></a>
-
-## AccountUser ⇐ [<code>MetadataType</code>](#MetadataType)
-MessageSendActivity MetadataType
-
-**Kind**: global class  
-**Extends**: [<code>MetadataType</code>](#MetadataType)  
-
-* [AccountUser](#AccountUser) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, _, [__], [key])](#AccountUser.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveChangelog()](#AccountUser.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.document([metadata])](#AccountUser.document) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.postRetrieveTasks(metadata)](#AccountUser.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.parseMetadata(metadata)](#AccountUser.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
-
-<a name="AccountUser.retrieve"></a>
-
-### AccountUser.retrieve(retrieveDir, _, [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
-
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
-| _ | <code>void</code> | unused parameter |
-| [__] | <code>void</code> | unused parameter |
-| [key] | <code>string</code> | customer key of single item to retrieve |
-
-<a name="AccountUser.retrieveChangelog"></a>
-
-### AccountUser.retrieveChangelog() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
-
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
-<a name="AccountUser.document"></a>
-
-### AccountUser.document([metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
-Creates markdown documentation of all roles
-
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [metadata] | <code>TYPE.MetadataTypeMap</code> | user list |
-
-<a name="AccountUser.postRetrieveTasks"></a>
-
-### AccountUser.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
-manages post retrieve steps
-
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one query string  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
-
-<a name="AccountUser.parseMetadata"></a>
-
-### AccountUser.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
-parses retrieved Metadata before saving
-
-**Kind**: static method of [<code>AccountUser</code>](#AccountUser)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one sql string  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single query activity definition |
 
 <a name="Asset"></a>
 
@@ -3154,7 +3084,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.subType](#MetadataType.subType) : <code>string</code>
     * [.buObject](#MetadataType.buObject) : <code>TYPE.BuObject</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType.getJsonFromFS) ⇒ <code>TYPE.MetadataTypeMap</code>
-    * [.getFieldNamesToRetrieve([additionalFields])](#MetadataType.getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.getFieldNamesToRetrieve([additionalFields], [isCaching])](#MetadataType.getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
     * [.deploy(metadata, deployDir, retrieveDir)](#MetadataType.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.postDeployTasks(metadata, originalMetadata)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -3172,7 +3102,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.hasChanged(cachedVersion, metadata, [fieldName])](#MetadataType.hasChanged) ⇒ <code>boolean</code>
     * [.hasChangedGeneric(cachedVersion, metadata, [fieldName], [silent])](#MetadataType.hasChangedGeneric) ⇒ <code>boolean</code>
     * [.upsert(metadata, deployDir)](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
-    * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MetadataType.createOrUpdate) ⇒ <code>void</code>
+    * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MetadataType.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
     * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [.createSOAP(metadataEntry, [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [.updateREST(metadataEntry, uri, [usePut])](#MetadataType.updateREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
@@ -3237,7 +3167,7 @@ Returns file contents mapped to their filename without '.json' ending
 
 <a name="MetadataType.getFieldNamesToRetrieve"></a>
 
-### MetadataType.getFieldNamesToRetrieve([additionalFields]) ⇒ <code>Array.&lt;string&gt;</code>
+### MetadataType.getFieldNamesToRetrieve([additionalFields], [isCaching]) ⇒ <code>Array.&lt;string&gt;</code>
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3246,6 +3176,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 | Param | Type | Description |
 | --- | --- | --- |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
+| [isCaching] | <code>boolean</code> | if true, then check if field should be skipped for caching |
 
 <a name="MetadataType.deploy"></a>
 
@@ -3467,8 +3398,11 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 
 <a name="MetadataType.createOrUpdate"></a>
 
-### MetadataType.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>void</code>
+### MetadataType.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
+helper for [upsert](#MetadataType.upsert)
+
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code> - action to take  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4946,7 +4880,7 @@ MessageSendActivity MetadataType
 * [TriggeredSend](#TriggeredSend) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#TriggeredSend.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.create(metadata)](#TriggeredSend.create) ⇒ <code>Promise</code>
-    * [.update(metadata, [handleOutside])](#TriggeredSend.update) ⇒ <code>Promise</code>
+    * [.update(metadata)](#TriggeredSend.update) ⇒ <code>Promise</code>
     * [.deleteByKey(customerKey)](#TriggeredSend.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postRetrieveTasks(metadata)](#TriggeredSend.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setFolderPath(metadata)](#TriggeredSend.setFolderPath)
@@ -4985,7 +4919,7 @@ Create a single TSD.
 
 <a name="TriggeredSend.update"></a>
 
-### TriggeredSend.update(metadata, [handleOutside]) ⇒ <code>Promise</code>
+### TriggeredSend.update(metadata) ⇒ <code>Promise</code>
 Updates a single TSD.
 
 **Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
@@ -4994,7 +4928,6 @@ Updates a single TSD.
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
-| [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
 
 <a name="TriggeredSend.deleteByKey"></a>
 
@@ -5086,6 +5019,159 @@ helper for [refresh](refresh) that pauses, publishes and starts a triggered send
 | --- | --- | --- |
 | key | <code>string</code> | external key of triggered send item |
 | checkKey | <code>boolean</code> | whether to check if key exists on the server |
+
+<a name="User"></a>
+
+## User ⇐ [<code>MetadataType</code>](#MetadataType)
+MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [User](#User) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, _, [__], [key])](#User.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache()](#User.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.create(metadata)](#User.create) ⇒ <code>Promise</code>
+    * [.update(metadata)](#User.update) ⇒ <code>Promise</code>
+    * [.preDeployTasks(metadata)](#User.preDeployTasks) ⇒ <code>TYPE.UserDocument</code>
+    * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#User.createOrUpdate) ⇒ <code>void</code>
+    * [.postDeployTasks(upsertResults)](#User.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [._getRoleObjectForDeploy(roleId, roleName, userId, assignmentOnly, [isRoleRemovale])](#User._getRoleObjectForDeploy) ⇒ <code>object</code>
+    * [.retrieveChangelog()](#User.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.document([metadata])](#User.document) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.postRetrieveTasks(metadata)](#User.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+
+<a name="User.retrieve"></a>
+
+### User.retrieve(retrieveDir, _, [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| _ | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="User.retrieveForCache"></a>
+
+### User.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves import definition metadata for caching
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+<a name="User.create"></a>
+
+### User.create(metadata) ⇒ <code>Promise</code>
+Create a single item.
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
+
+<a name="User.update"></a>
+
+### User.update(metadata) ⇒ <code>Promise</code>
+Updates a single item.
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
+
+<a name="User.preDeployTasks"></a>
+
+### User.preDeployTasks(metadata) ⇒ <code>TYPE.UserDocument</code>
+prepares a item for deployment
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>TYPE.UserDocument</code> - metadata object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.UserDocument</code> | of a single item |
+
+<a name="User.createOrUpdate"></a>
+
+### User.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>void</code>
+helper for [upsert](#MetadataType.upsert)
+
+**Kind**: static method of [<code>User</code>](#User)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata item |
+| metadataKey | <code>string</code> | key of item we are looking at |
+| hasError | <code>boolean</code> | error flag from previous code |
+| metadataToUpdate | <code>Array.&lt;TYPE.UserDocumentDiff&gt;</code> | list of items to update |
+| metadataToCreate | <code>Array.&lt;TYPE.UserDocument&gt;</code> | list of items to create |
+
+<a name="User.postDeployTasks"></a>
+
+### User.postDeployTasks(upsertResults) ⇒ <code>Promise.&lt;void&gt;</code>
+Gets executed after deployment of metadata type
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| upsertResults | <code>TYPE.UserDocumentMap</code> | metadata mapped by their keyField |
+
+<a name="User._getRoleObjectForDeploy"></a>
+
+### User.\_getRoleObjectForDeploy(roleId, roleName, userId, assignmentOnly, [isRoleRemovale]) ⇒ <code>object</code>
+helper for [User._prepareRoleAssignments](User._prepareRoleAssignments)
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>object</code> - format needed by API  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| roleId | <code>string</code> |  | role.ObjectID |
+| roleName | <code>string</code> |  | role.Name |
+| userId | <code>number</code> |  | user.AccountUserID |
+| assignmentOnly | <code>boolean</code> |  | if true, only assignment configuration will be returned |
+| [isRoleRemovale] | <code>boolean</code> | <code>false</code> | if true, role will be removed from user; otherwise added |
+
+<a name="User.retrieveChangelog"></a>
+
+### User.retrieveChangelog() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+<a name="User.document"></a>
+
+### User.document([metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
+Creates markdown documentation of all roles
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [metadata] | <code>TYPE.MetadataTypeMap</code> | user list |
+
+<a name="User.postRetrieveTasks"></a>
+
+### User.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one query string  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
 
 <a name="Retriever"></a>
 
@@ -7539,31 +7625,54 @@ key=customer key
 | [Template] | <code>object</code> | - |
 | [Template.CustomerKey] | <code>string</code> | key of optionally associated DE teplate |
 
-<a name="AccountUserDocument"></a>
+<a name="UserDocumentMap"></a>
 
-## AccountUserDocument : <code>object</code>
+## UserDocumentMap : <code>object</code>
+key=customer key
+
 **Kind**: global typedef  
 **Properties**
 
 | Name | Type | Description |
 | --- | --- | --- |
-| TYPE | <code>string</code> | user.type__c |
-| UserID | <code>string</code> | user.UserID |
-| AccountUserID | <code>string</code> | user.AccountUserID |
+| [ID] | <code>string</code> | equal to UserID; optional in update/create calls |
+| UserID | <code>string</code> | equal to ID; required in update/create calls |
+| AccountUserID | <code>number</code> | user.AccountUserID |
 | CustomerKey | <code>string</code> | user.CustomerKey |
 | Name | <code>string</code> | user.Name |
 | Email | <code>string</code> | user.Email |
 | NotificationEmailAddress | <code>string</code> | user.NotificationEmailAddress |
-| ActiveFlag | <code>string</code> | user.ActiveFlag === true ? '✓' : '-' |
-| IsAPIUser | <code>string</code> | user.IsAPIUser === true ? '✓' : '-' |
-| MustChangePassword | <code>string</code> | user.MustChangePassword === true ? '✓' : '-' |
-| DefaultBusinessUnit | <code>string</code> | defaultBUName |
-| AssociatedBusinessUnits__c | <code>string</code> | associatedBus |
-| Roles | <code>string</code> | roles |
-| UserPermissions | <code>string</code> | userPermissions |
+| ActiveFlag | <code>boolean</code> | user.ActiveFlag === true ? '✓' : '-' |
+| IsAPIUser | <code>boolean</code> | user.IsAPIUser === true ? '✓' : '-' |
+| MustChangePassword | <code>boolean</code> | user.MustChangePassword === true ? '✓' : '-' |
+| DefaultBusinessUnit | <code>boolean</code> | defaultBUName |
+| AssociatedBusinessUnits__c | <code>Array.&lt;number&gt;</code> | associatedBus |
+| [Roles] | <code>object</code> | roles (API only) |
+| RoleNamesGlobal__c | <code>Array.&lt;string&gt;</code> | roles |
+| type__c | <code>&#x27;User&#x27;</code> \| <code>&#x27;Installed Package&#x27;</code> | roles |
+| UserPermissions | <code>Array.&lt;string&gt;</code> | userPermissions |
 | LastSuccessfulLogin | <code>string</code> | this.timeSinceDate(user.LastSuccessfulLogin) |
 | CreatedDate | <code>string</code> | user.CreatedDate |
 | ModifiedDate | <code>string</code> | user.ModifiedDate |
+
+<a name="BusinessUnitAssignmentConfiguration"></a>
+
+## BusinessUnitAssignmentConfiguration : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| Client | <code>object</code> | wrapper |
+| Client.ID | <code>number</code> | EID e.g:7281698 |
+| [PartnerKey] | <code>string</code> | empty string |
+| ID | <code>number</code> | User ID e.g:717133502 |
+| [ObjectID] | <code>string</code> | empty string |
+| [Delete] | <code>number</code> | 0,1 |
+| BusinessUnitAssignmentConfiguration | [<code>BusinessUnitAssignmentConfiguration</code>](#BusinessUnitAssignmentConfiguration) | - |
+| BusinessUnitIds | <code>object</code> | wrapper |
+| BusinessUnitIds.BusinessUnitId | <code>Array.&lt;number&gt;</code> \| <code>number</code> | e.g:[518003624] |
+| IsDelete | <code>boolean</code> | assign BU if false, remove assignment if true |
 
 <a name="AutomationActivity"></a>
 
