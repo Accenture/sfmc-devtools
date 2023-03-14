@@ -3084,7 +3084,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.subType](#MetadataType.subType) : <code>string</code>
     * [.buObject](#MetadataType.buObject) : <code>TYPE.BuObject</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType.getJsonFromFS) ⇒ <code>TYPE.MetadataTypeMap</code>
-    * [.getFieldNamesToRetrieve([additionalFields])](#MetadataType.getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.getFieldNamesToRetrieve([additionalFields], [isCaching])](#MetadataType.getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
     * [.deploy(metadata, deployDir, retrieveDir)](#MetadataType.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.postDeployTasks(metadata, originalMetadata)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -3167,7 +3167,7 @@ Returns file contents mapped to their filename without '.json' ending
 
 <a name="MetadataType.getFieldNamesToRetrieve"></a>
 
-### MetadataType.getFieldNamesToRetrieve([additionalFields]) ⇒ <code>Array.&lt;string&gt;</code>
+### MetadataType.getFieldNamesToRetrieve([additionalFields], [isCaching]) ⇒ <code>Array.&lt;string&gt;</code>
 Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3176,6 +3176,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 | Param | Type | Description |
 | --- | --- | --- |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
+| [isCaching] | <code>boolean</code> | if true, then check if field should be skipped for caching |
 
 <a name="MetadataType.deploy"></a>
 
