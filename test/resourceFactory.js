@@ -75,6 +75,17 @@ exports.handleSOAPRequest = async (config) => {
 
             break;
         }
+        case 'Configure': {
+            responseXML = await this.loadSOAPRecords(
+                config.headers.SOAPAction.toLocaleLowerCase(),
+                fullObj.Envelope.Body.ConfigureRequestMsg.Configurations.Configuration[0][
+                    '@_xsi:type'
+                ],
+                jObj.Envelope.Header.fueloauth
+            );
+
+            break;
+        }
         default: {
             throw new Error('This SOAP Action is not supported by test handler');
         }
