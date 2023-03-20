@@ -482,7 +482,7 @@ main class
     * [.initProject([credentialsName])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.joinProject()](#Mcdev.joinProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.document(businessUnit, type, [format])](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(businessUnit, type, customerKey)](#Mcdev.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.refresh(businessUnit, type, [keyArr])](#Mcdev.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.badKeys(businessUnit)](#Mcdev.badKeys) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -609,7 +609,7 @@ Refreshes BU names and ID's from MC instance
 
 <a name="Mcdev.document"></a>
 
-### Mcdev.document(businessUnit, type) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.document(businessUnit, type, [format]) ⇒ <code>Promise.&lt;void&gt;</code>
 Creates docs for supported metadata types in Markdown and/or HTML format
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -619,6 +619,7 @@ Creates docs for supported metadata types in Markdown and/or HTML format
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
 | type | <code>string</code> | metadata type |
+| [format] | <code>&#x27;md&#x27;</code> \| <code>&#x27;html&#x27;</code> \| <code>&#x27;csv&#x27;</code> | output format |
 
 <a name="Mcdev.deleteByKey"></a>
 
@@ -3128,7 +3129,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName, ex)](#MetadataType.readSecondaryFolder) ⇒ <code>object</code>
     * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType.buildDefinition) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.checkForErrors(ex)](#MetadataType.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
-    * [.document([metadata], [isDeploy])](#MetadataType.document) ⇒ <code>void</code>
+    * [.document([metadata], [isDeploy], [format])](#MetadataType.document) ⇒ <code>void</code>
     * [.deleteByKey(customerKey)](#MetadataType.deleteByKey) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey, [additionalExtensions])](#MetadataType.postDeleteTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKeySOAP(customerKey, [overrideKeyField], [handleOutside])](#MetadataType.deleteByKeySOAP) ⇒ <code>boolean</code>
@@ -3757,7 +3758,7 @@ Standardizes a check for multiple messages
 
 <a name="MetadataType.document"></a>
 
-### MetadataType.document([metadata], [isDeploy]) ⇒ <code>void</code>
+### MetadataType.document([metadata], [isDeploy], [format]) ⇒ <code>void</code>
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3766,6 +3767,7 @@ Gets metadata cache with limited fields and does not store value to disk
 | --- | --- | --- |
 | [metadata] | <code>TYPE.MetadataTypeMap</code> | a list of type definitions |
 | [isDeploy] | <code>boolean</code> | used to skip non-supported message during deploy |
+| [format] | <code>&#x27;md&#x27;</code> \| <code>&#x27;html&#x27;</code> \| <code>&#x27;csv&#x27;</code> | output format |
 
 <a name="MetadataType.deleteByKey"></a>
 
