@@ -1444,6 +1444,7 @@ Campaign MetadataType
 
 * [Campaign](#Campaign) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#Campaign.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache()](#Campaign.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.getAssetTags(retrieveDir, id, name)](#Campaign.getAssetTags) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 
 <a name="Campaign.retrieve"></a>
@@ -1461,6 +1462,13 @@ Retrieves Metadata of campaigns. Afterwards, starts metadata retrieval for their
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
+<a name="Campaign.retrieveForCache"></a>
+
+### Campaign.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves event definition metadata for caching
+
+**Kind**: static method of [<code>Campaign</code>](#Campaign)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
 <a name="Campaign.getAssetTags"></a>
 
 ### Campaign.getAssetTags(retrieveDir, id, name) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -3989,9 +3997,15 @@ MobileMessage MetadataType
     * [.getBulkForMobileApi(url, [pageSize], [iteratorField])](#MobileMessage.getBulkForMobileApi) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.update(metadata)](#MobileMessage.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#MobileMessage.create) ⇒ <code>Promise</code>
-    * [.postRetrieveTasks(metadata)](#MobileMessage.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.preDeployTasks(metadata)](#MobileMessage.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [._mergeCode(metadata, deployDir, [templateName])](#MobileMessage._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
+    * [.prepExtractedCode(code)](#MobileMessage.prepExtractedCode) ⇒ <code>Object</code>
+    * [.getFilesToCommit(keyArr)](#MobileMessage.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.postRetrieveTasks(metadata)](#MobileMessage.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
+    * [.preDeployTasks(metadata, deployDir)](#MobileMessage.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.postCreateTasks(metadataEntry, apiResponse)](#MobileMessage.postCreateTasks) ⇒ <code>void</code>
+    * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MobileMessage.buildDefinitionForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MobileMessage.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#MobileMessage._buildForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.deleteByKey(key)](#MobileMessage.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="MobileMessage.retrieve"></a>
@@ -4051,22 +4065,61 @@ Updates a single item
 <a name="MobileMessage.create"></a>
 
 ### MobileMessage.create(metadata) ⇒ <code>Promise</code>
-Creates a single Event Definition
+Creates a single item
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single Event Definition |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="MobileMessage._mergeCode"></a>
+
+### MobileMessage.\_mergeCode(metadata, deployDir, [templateName]) ⇒ <code>Promise.&lt;string&gt;</code>
+helper for [preDeployTasks](preDeployTasks) that loads extracted code content back into JSON
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Promise.&lt;string&gt;</code> - code  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single definition |
+| deployDir | <code>string</code> | directory of deploy files |
+| [templateName] | <code>string</code> | name of the template used to built defintion (prior applying templating) |
+
+<a name="MobileMessage.prepExtractedCode"></a>
+
+### MobileMessage.prepExtractedCode(code) ⇒ <code>Object</code>
+helper for [parseMetadata](parseMetadata) and [_buildForNested](_buildForNested)
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Object</code> - returns found extension and file content  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| code | <code>string</code> | the code of the file |
+
+<a name="MobileMessage.getFilesToCommit"></a>
+
+### MobileMessage.getFilesToCommit(keyArr) ⇒ <code>Array.&lt;string&gt;</code>
+should return only the json for all but asset, query and script that are saved as multiple files
+additionally, the documentation for dataExtension and automation should be returned
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of all files that need to be committed in a flat array ['path/file1.ext', 'path/file2.ext']  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="MobileMessage.postRetrieveTasks"></a>
 
-### MobileMessage.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### MobileMessage.postRetrieveTasks(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
 manages post retrieve steps
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one query string  
+**Returns**: <code>TYPE.CodeExtractItem</code> - Array with one metadata object and one query string  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4074,7 +4127,7 @@ manages post retrieve steps
 
 <a name="MobileMessage.preDeployTasks"></a>
 
-### MobileMessage.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### MobileMessage.preDeployTasks(metadata, deployDir) ⇒ <code>TYPE.MetadataTypeItem</code>
 prepares an event definition for deployment
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
@@ -4083,6 +4136,7 @@ prepares an event definition for deployment
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single MobileMessage |
+| deployDir | <code>string</code> | directory of deploy files |
 
 <a name="MobileMessage.postCreateTasks"></a>
 
@@ -4095,6 +4149,62 @@ helper for [createREST](createREST)
 | --- | --- | --- |
 | metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
 | apiResponse | <code>object</code> | varies depending on the API call |
+
+<a name="MobileMessage.buildDefinitionForNested"></a>
+
+### MobileMessage.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+helper for [buildDefinition](#MetadataType.buildDefinition)
+handles extracted code if any are found for complex types
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code> - list of extracted files with path-parts provided as an array  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> \| <code>Array.&lt;string&gt;</code> | (List of) Directory where built definitions will be saved |
+| metadata | <code>TYPE.MetadataTypeItem</code> | main JSON file that was read from file system |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateName | <code>string</code> | name of the template to be built |
+
+<a name="MobileMessage.buildTemplateForNested"></a>
+
+### MobileMessage.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+helper for [buildTemplate](#MetadataType.buildTemplate)
+handles extracted code if any are found for complex types
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code> - list of extracted files with path-parts provided as an array  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> \| <code>Array.&lt;string&gt;</code> | (List of) Directory where built definitions will be saved |
+| metadata | <code>TYPE.MetadataTypeItem</code> | main JSON file that was read from file system |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateName | <code>string</code> | name of the template to be built |
+
+**Example**  
+```js
+scripts are saved as 1 json and 1 ssjs file. both files need to be run through templating
+```
+<a name="MobileMessage._buildForNested"></a>
+
+### MobileMessage.\_buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+helper for [buildTemplateForNested](buildTemplateForNested) / [buildDefinitionForNested](buildDefinitionForNested)
+handles extracted code if any are found for complex types
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code> - list of extracted files with path-parts provided as an array  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> \| <code>Array.&lt;string&gt;</code> | (List of) Directory where built definitions will be saved |
+| metadata | <code>TYPE.MetadataTypeItem</code> | main JSON file that was read from file system |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateName | <code>string</code> | name of the template to be built |
+| mode | <code>&#x27;definition&#x27;</code> \| <code>&#x27;template&#x27;</code> | defines what we use this helper for |
 
 <a name="MobileMessage.deleteByKey"></a>
 
