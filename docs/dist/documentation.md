@@ -2975,11 +2975,11 @@ manages post retrieve steps
 ! BETA RELEASE of journey support (v4.3.0); it so far only resolves a limited amount of dependencies and will likely break during cross-BU deployments!
 
 **Kind**: static method of [<code>Interaction</code>](#Interaction)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one query string  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
 <a name="Interaction.preDeployTasks"></a>
 
