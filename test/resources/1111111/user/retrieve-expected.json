@@ -12,7 +12,7 @@
     "NotificationEmailAddress": "user_test@accenture.com",
     "IsLocked": false,
     "DefaultBusinessUnit": 1111111,
-    "type__c": "User",
-    "AssociatedBusinessUnits__c": [1111111, 9999999],
-    "RoleNamesGlobal__c": ["Administrator", "Content Creator", "Marketing Cloud Administrator"]
+    "c__type": "User",
+    "c__AssociatedBusinessUnits": [1111111, 9999999],
+    "c__RoleNamesGlobal": ["Administrator", "Content Creator", "Marketing Cloud Administrator"]
 }

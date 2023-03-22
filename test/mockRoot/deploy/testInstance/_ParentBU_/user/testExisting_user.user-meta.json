@@ -20,9 +20,9 @@
     "NotificationEmailAddress": "user_test@accenture.com",
     "IsLocked": false,
     "DefaultBusinessUnit": 9999999,
-    "type__c": "User",
-    "AssociatedBusinessUnits__c": [9999999],
-    "RoleNamesGlobal__c": [
+    "c__type": "User",
+    "c__AssociatedBusinessUnits": [9999999],
+    "c__RoleNamesGlobal": [
         "Administrator",
         "Distributed Sending User",
         "Individual role for 700301950",

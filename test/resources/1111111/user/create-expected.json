@@ -9,9 +9,9 @@
     "NotificationEmailAddress": "testNew_user@accenture.com",
     "IsLocked": false,
     "DefaultBusinessUnit": 1111111,
-    "type__c": "User",
-    "AssociatedBusinessUnits__c": [1111111, 9999999],
-    "RoleNamesGlobal__c": [
+    "c__type": "User",
+    "c__AssociatedBusinessUnits": [1111111, 9999999],
+    "c__RoleNamesGlobal": [
         "Administrator",
         "Distributed Sending User",
         "Marketing Cloud Administrator"
