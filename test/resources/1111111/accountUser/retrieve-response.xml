@@ -68,6 +68,17 @@
                     <AccountType>None</AccountType>
                     <Subscription xsi:nil="true" />
                 </DefaultBusinessUnitObject>
+                <Locale>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <LocaleCode>en-GB</LocaleCode>
+                </Locale>
+                <TimeZone>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>5</ID>
+                    <ObjectID xsi:nil="true" />
+                    <Name>(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna *</Name>
+                </TimeZone>
                 <Roles>
                     <Role>
                         <Client>
@@ -119,23 +130,6 @@
                         <Description>Individual role for 700301950</Description>
                         <IsPrivate>true</IsPrivate>
                         <IsSystemDefined>false</IsSystemDefined>
-                    </Role>
-                    <Role>
-                        <Client>
-                            <ID>0</ID>
-                            <CreatedBy>0</CreatedBy>
-                            <ModifiedBy>0</ModifiedBy>
-                            <EnterpriseID>0</EnterpriseID>
-                        </Client>
-                        <PartnerKey xsi:nil="true" />
-                        <CreatedDate>2012-02-21T02:09:19.983</CreatedDate>
-                        <ModifiedDate>2013-12-23T16:48:50.533</ModifiedDate>
-                        <ObjectID>63a50610-315c-e111-beee-8e001800001f</ObjectID>
-                        <CustomerKey>SYS_DEF_IMHADMIN</CustomerKey>
-                        <Name>Marketing Cloud Administrator</Name>
-                        <Description>Assign Marketing Cloud roles to users and manage Mobile, Social and Sites Channels, Hub Apps and Marketing Cloud Tools</Description>
-                        <IsPrivate>false</IsPrivate>
-                        <IsSystemDefined>true</IsSystemDefined>
                     </Role>
                 </Roles>
             </Results>

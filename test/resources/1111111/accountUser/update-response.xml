@@ -43,6 +43,17 @@
                     <NotificationEmailAddress>user_test@accenture.com</NotificationEmailAddress>
                     <IsLocked>false</IsLocked>
                     <DefaultBusinessUnit>9999999</DefaultBusinessUnit>
+                    <Locale>
+                        <PartnerKey xsi:nil="true" />
+                        <ObjectID xsi:nil="true" />
+                        <LocaleCode>en-GB</LocaleCode>
+                    </Locale>
+                    <TimeZone>
+                        <PartnerKey xsi:nil="true" />
+                        <ID>5</ID>
+                        <ObjectID xsi:nil="true" />
+                        <Name>(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna *</Name>
+                    </TimeZone>
                     <Roles>
                         <Role>
                             <Client>
@@ -82,21 +93,6 @@
                             <PartnerKey xsi:nil="true" />
                             <ObjectID>bd251431-7cd0-e911-a2d3-1402ec936979</ObjectID>
                             <Name>Individual role for 700301950</Name>
-                            <AssignmentConfigurations>
-                                <AssignmentConfiguration>
-                                    <AccountUserId>700301950</AccountUserId>
-                                    <AssignmentConfigureType>RoleUser</AssignmentConfigureType>
-                                </AssignmentConfiguration>
-                            </AssignmentConfigurations>
-                        </Role>
-                        <Role>
-                            <Client>
-                                <ID>1111111</ID>
-                                <EnterpriseID>1111111</EnterpriseID>
-                            </Client>
-                            <PartnerKey xsi:nil="true" />
-                            <ObjectID>63a50610-315c-e111-beee-8e001800001f</ObjectID>
-                            <Name>Marketing Cloud Administrator</Name>
                             <AssignmentConfigurations>
                                 <AssignmentConfiguration>
                                     <AccountUserId>700301950</AccountUserId>

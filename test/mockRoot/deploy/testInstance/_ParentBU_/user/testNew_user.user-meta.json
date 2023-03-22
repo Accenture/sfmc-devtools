@@ -22,9 +22,7 @@
     "DefaultBusinessUnit": 1111111,
     "c__type": "User",
     "c__AssociatedBusinessUnits": [1111111, 9999999],
-    "c__RoleNamesGlobal": [
-        "Administrator",
-        "Distributed Sending User",
-        "Marketing Cloud Administrator"
-    ]
+    "c__RoleNamesGlobal": ["Administrator", "Distributed Sending User"],
+    "c__TimeZoneName": "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna *",
+    "c__LocaleCode": "en-GB"
 }
