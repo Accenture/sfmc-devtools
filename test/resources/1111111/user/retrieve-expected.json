@@ -7,14 +7,6 @@
     "Email": "user_test@accenture.com",
     "MustChangePassword": false,
     "ActiveFlag": true,
-    "UserPermissions": [
-        {
-            "ID": 2
-        },
-        {
-            "ID": 3
-        }
-    ],
     "LastSuccessfulLogin": "2023-02-23T10:14:11.443",
     "IsAPIUser": false,
     "NotificationEmailAddress": "user_test@accenture.com",
