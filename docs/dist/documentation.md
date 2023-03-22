@@ -3109,7 +3109,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.updateSOAP(metadataEntry, [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [._handleSOAPErrors(ex, msg, [metadataEntry], [handleOutside])](#MetadataType._handleSOAPErrors)
     * [.getSOAPErrorMsg(ex)](#MetadataType.getSOAPErrorMsg) ⇒ <code>string</code>
-    * [.retrieveSOAP(retrieveDir, [requestParams], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveSOAP(retrieveDir, [requestParams], [singleRetrieve], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#MetadataType.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
@@ -3491,7 +3491,7 @@ helper for [_handleSOAPErrors](_handleSOAPErrors)
 
 <a name="MetadataType.retrieveSOAP"></a>
 
-### MetadataType.retrieveSOAP(retrieveDir, [requestParams], [additionalFields]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MetadataType.retrieveSOAP(retrieveDir, [requestParams], [singleRetrieve], [additionalFields]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3501,6 +3501,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 | --- | --- | --- |
 | retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | [requestParams] | <code>TYPE.SoapRequestParams</code> | required for the specific request (filter for example) |
+| [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 
 <a name="MetadataType.retrieveREST"></a>
@@ -5038,8 +5039,9 @@ MetadataType
     * [.postDeployTasks(upsertResults)](#User.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._getRoleObjectForDeploy(roleId, roleName, userId, assignmentOnly, [isRoleRemovale])](#User._getRoleObjectForDeploy) ⇒ <code>object</code>
     * [.retrieveChangelog()](#User.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveSOAP(retrieveDir, [requestParams], [singleRetrieve], [additionalFields])](#User.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.document([metadata])](#User.document) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.postRetrieveTasks(metadata)](#User.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.postRetrieveTasks(metadata)](#User.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
 
 <a name="User.retrieve"></a>
 
@@ -5149,6 +5151,21 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 
 **Kind**: static method of [<code>User</code>](#User)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+<a name="User.retrieveSOAP"></a>
+
+### User.retrieveSOAP(retrieveDir, [requestParams], [singleRetrieve], [additionalFields]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of item map  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [requestParams] | <code>TYPE.SoapRequestParams</code> | required for the specific request (filter for example) |
+| [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
+| [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
+
 <a name="User.document"></a>
 
 ### User.document([metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -5163,15 +5180,15 @@ Creates markdown documentation of all roles
 
 <a name="User.postRetrieveTasks"></a>
 
-### User.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### User.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
 manages post retrieve steps
 
 **Kind**: static method of [<code>User</code>](#User)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one query string  
+**Returns**: <code>TYPE.MetadataTypeItem</code> \| <code>void</code> - a single item  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
 <a name="Retriever"></a>
 
