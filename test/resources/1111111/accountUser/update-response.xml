@@ -26,6 +26,7 @@
                 <Object xsi:type="AccountUser">
                     <Client>
                         <ID>1111111</ID>
+                        <ModifiedBy>123456</ModifiedBy>
                     </Client>
                     <PartnerKey xsi:nil="true" />
                     <ID>700301950</ID>

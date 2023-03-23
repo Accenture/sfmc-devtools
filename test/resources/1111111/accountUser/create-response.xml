@@ -27,11 +27,13 @@
                 <Object xsi:type="AccountUser">
                     <Client>
                         <ID>1111111</ID>
+                        <ModifiedBy>123456</ModifiedBy>
                     </Client>
                     <PartnerKey xsi:nil="true" />
                     <ID>717510285</ID>
                     <ObjectID xsi:nil="true" />
                     <CustomerKey>testNew_user</CustomerKey>
+                    <AccountUserID>700301950</AccountUserID>
                     <UserID>testNew_user@accenture.asgr</UserID>
                     <Password />
                     <Name>new user</Name>

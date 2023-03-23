@@ -1,4 +1,5 @@
 {
+    "Client": {},
     "CustomerKey": "testExisting_user",
     "UserID": "user{{{suffix}}}@accenture.asgr",
     "Name": "user test",
@@ -7,9 +8,7 @@
     "ActiveFlag": true,
     "IsAPIUser": false,
     "NotificationEmailAddress": "user{{{suffix}}}@accenture.com",
-    "IsLocked": false,
     "DefaultBusinessUnit": "1111111",
-    "c__type": "User",
     "c__AssociatedBusinessUnits": ["1111111", "{{{mid}}}"],
     "c__RoleNamesGlobal": ["Administrator", "Content Creator"],
     "c__TimeZoneName": "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna *",
