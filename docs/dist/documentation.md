@@ -7654,7 +7654,8 @@ key=customer key
 | --- | --- | --- |
 | [ID] | <code>string</code> | equal to UserID; optional in update/create calls |
 | UserID | <code>string</code> | equal to ID; required in update/create calls |
-| AccountUserID | <code>number</code> | user.AccountUserID |
+| [AccountUserID] | <code>number</code> | user.AccountUserID |
+| c__AccountUserID | <code>number</code> | copy of AccountUserID |
 | CustomerKey | <code>string</code> | user.CustomerKey |
 | Name | <code>string</code> | user.Name |
 | Email | <code>string</code> | user.Email |
@@ -7662,15 +7663,30 @@ key=customer key
 | ActiveFlag | <code>boolean</code> | user.ActiveFlag === true ? '✓' : '-' |
 | IsAPIUser | <code>boolean</code> | user.IsAPIUser === true ? '✓' : '-' |
 | MustChangePassword | <code>boolean</code> | user.MustChangePassword === true ? '✓' : '-' |
-| DefaultBusinessUnit | <code>boolean</code> | defaultBUName |
+| DefaultBusinessUnit | <code>number</code> | defaultBUName |
 | AssociatedBusinessUnits__c | <code>Array.&lt;number&gt;</code> | associatedBus |
-| [Roles] | <code>object</code> | roles (API only) |
-| RoleNamesGlobal__c | <code>Array.&lt;string&gt;</code> | roles |
+| [Roles] | <code>object</code> | (API only) |
+| [Roles.Role] | <code>Array.&lt;object&gt;</code> | roles (API only) |
+| c__RoleNamesGlobal | <code>Array.&lt;string&gt;</code> | roles |
 | type__c | <code>&#x27;User&#x27;</code> \| <code>&#x27;Installed Package&#x27;</code> | roles |
 | UserPermissions | <code>Array.&lt;string&gt;</code> | userPermissions |
 | LastSuccessfulLogin | <code>string</code> | this.timeSinceDate(user.LastSuccessfulLogin) |
 | CreatedDate | <code>string</code> | user.CreatedDate |
 | ModifiedDate | <code>string</code> | user.ModifiedDate |
+| Client | <code>object</code> | - |
+| [Client.ID] | <code>number</code> | EID e.g:7281698 |
+| Client.ModifiedBy | <code>number</code> | AccountUserID of user who last modified this user |
+| c__type | <code>&#x27;User&#x27;</code> \| <code>&#x27;Installed Package&#x27;</code> | - |
+| [IsLocked] | <code>boolean</code> | (API only) |
+| [Unlock] | <code>boolean</code> | used to unlock a user that has IsLocked === true |
+| c__IsLocked_readOnly | <code>boolean</code> | copy of IsLocked |
+| c__TimeZoneName | <code>string</code> | name of timezone |
+| [TimeZone] | <code>object</code> | (API only) |
+| [TimeZone.Name] | <code>string</code> | (API only) |
+| [TimeZone.ID] | <code>string</code> | (API only) |
+| c__LocaleCode | <code>&#x27;en-US&#x27;</code> \| <code>&#x27;fr-CA&#x27;</code> \| <code>&#x27;fr-FR&#x27;</code> \| <code>&#x27;de-DE&#x27;</code> \| <code>&#x27;it-IT&#x27;</code> \| <code>&#x27;ja-JP&#x27;</code> \| <code>&#x27;pt-BR&#x27;</code> \| <code>&#x27;es-419&#x27;</code> \| <code>&#x27;es-ES&#x27;</code> | fr-CA, en-US, ... |
+| [Locale] | <code>object</code> | (API only) |
+| [Locale.LocaleCode] | <code>&#x27;en-US&#x27;</code> \| <code>&#x27;fr-CA&#x27;</code> \| <code>&#x27;fr-FR&#x27;</code> \| <code>&#x27;de-DE&#x27;</code> \| <code>&#x27;it-IT&#x27;</code> \| <code>&#x27;ja-JP&#x27;</code> \| <code>&#x27;pt-BR&#x27;</code> \| <code>&#x27;es-419&#x27;</code> \| <code>&#x27;es-ES&#x27;</code> | (API only) |
 
 <a name="BusinessUnitAssignmentConfiguration"></a>
 
