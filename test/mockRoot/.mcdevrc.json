@@ -55,15 +55,15 @@
     },
     "marketList": {},
     "metaDataTypes": {
-        "documentOnRetrieve": ["accountUser", "automation", "dataExtension", "role"],
+        "documentOnRetrieve": ["user", "automation", "dataExtension", "role"],
         "retrieve": [
             "asset",
             "automation",
             "dataExtension",
             "dataExtract",
-            "emailSendDefinition",
+            "emailSend",
             "fileTransfer",
-            "ftpLocation",
+            "fileLocation",
             "importFile",
             "list",
             "mobileCode",
@@ -71,7 +71,7 @@
             "query",
             "role",
             "script",
-            "triggeredSendDefinition"
+            "triggeredSend"
         ]
     },
     "version": "4.3.4"

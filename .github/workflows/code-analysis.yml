@@ -52,6 +52,8 @@ jobs:
                   languages: ${{ matrix.language }}
             - name: Perform CodeQL Analysis
               uses: github/codeql-action/analyze@v2
+              with:
+                category: "/language:${{matrix.language}}"
 
             # Assuming code passes, run tests
             - run: npm run test
