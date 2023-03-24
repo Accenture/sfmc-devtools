@@ -371,7 +371,7 @@ Source and target business units are also compared before the deployment to appl
     * [new Deployer(properties, buObject)](#new_Deployer_new)
     * _instance_
         * [.metadata](#Deployer+metadata) : <code>TYPE.MultiMetadataTypeMap</code>
-        * [._deploy([typeArr], [keyArr], [fromRetrieve])](#Deployer+_deploy) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
+        * [._deploy([typeArr], [keyArr], [fromRetrieve], [isRefresh])](#Deployer+_deploy) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
     * _static_
         * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Deployer.deploy) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
         * [._deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve])](#Deployer._deployBU) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
@@ -395,7 +395,7 @@ Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 **Kind**: instance property of [<code>Deployer</code>](#Deployer)  
 <a name="Deployer+_deploy"></a>
 
-### deployer.\_deploy([typeArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
+### deployer.\_deploy([typeArr], [keyArr], [fromRetrieve], [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
 Deploy all metadata that is located in the deployDir
 
 **Kind**: instance method of [<code>Deployer</code>](#Deployer)  
@@ -406,6 +406,7 @@ Deploy all metadata that is located in the deployDir
 | [typeArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit deployment to given metadata type (can include subtype) |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
 | [fromRetrieve] | <code>boolean</code> | if true, no folders will be updated/created |
+| [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="Deployer.deploy"></a>
 
@@ -753,6 +754,7 @@ FileTransfer MetadataType
     * [._retrieveExtendedFile(metadata, subType, retrieveDir)](#Asset._retrieveExtendedFile) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._readExtendedFileFromFS(metadata, subType, deployDir, [pathOnly])](#Asset._readExtendedFileFromFS) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.postRetrieveTasks(metadata)](#Asset.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
+    * [.postDeployTasks(metadata, _, createdUpdated, [isRefresh])](#Asset.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.preDeployTasks(metadata, deployDir)](#Asset.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
     * [._getMainSubtype(extendedSubType)](#Asset._getMainSubtype) ⇒ <code>string</code>
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildDefinitionForNested) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -910,6 +912,21 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.AssetItem</code> | a single asset |
+
+<a name="Asset.postDeployTasks"></a>
+
+### Asset.postDeployTasks(metadata, _, createdUpdated, [isRefresh]) ⇒ <code>Promise.&lt;void&gt;</code>
+Gets executed after deployment of metadata type
+
+**Kind**: static method of [<code>Asset</code>](#Asset)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
+| _ | <code>TYPE.MetadataTypeMap</code> | originalMetadata to be updated (contains additioanl fields) |
+| createdUpdated | <code>Object</code> | counter representing successful creates/updates |
+| [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="Asset.preDeployTasks"></a>
 
@@ -1177,7 +1194,7 @@ Automation MetadataType
     * [.retrieveForCache()](#Automation.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Automation.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.AutomationItemObj&gt;</code>
     * [.postRetrieveTasks(metadata)](#Automation.postRetrieveTasks) ⇒ <code>TYPE.AutomationItem</code>
-    * [.deploy(metadata, targetBU, retrieveDir)](#Automation.deploy) ⇒ <code>Promise.&lt;TYPE.AutomationMap&gt;</code>
+    * [.deploy(metadata, targetBU, retrieveDir, [isRefresh])](#Automation.deploy) ⇒ <code>Promise.&lt;TYPE.AutomationMap&gt;</code>
     * [.create(metadata)](#Automation.create) ⇒ <code>Promise</code>
     * [.update(metadata, metadataBefore)](#Automation.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#Automation.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AutomationItem&gt;</code>
@@ -1250,7 +1267,7 @@ manages post retrieve steps
 
 <a name="Automation.deploy"></a>
 
-### Automation.deploy(metadata, targetBU, retrieveDir) ⇒ <code>Promise.&lt;TYPE.AutomationMap&gt;</code>
+### Automation.deploy(metadata, targetBU, retrieveDir, [isRefresh]) ⇒ <code>Promise.&lt;TYPE.AutomationMap&gt;</code>
 Deploys automation - the saved file is the original one due to large differences required for deployment
 
 **Kind**: static method of [<code>Automation</code>](#Automation)  
@@ -1261,6 +1278,7 @@ Deploys automation - the saved file is the original one due to large differences
 | metadata | <code>TYPE.AutomationMap</code> | metadata mapped by their keyField |
 | targetBU | <code>string</code> | name/shorthand of target businessUnit for mapping |
 | retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
+| [isRefresh] | <code>boolean</code> | optional flag - so far not used by automation |
 
 <a name="Automation.create"></a>
 
@@ -1560,7 +1578,7 @@ DataExtension MetadataType
     * [._filterUpsertResults(res)](#DataExtension._filterUpsertResults) ⇒ <code>boolean</code>
     * [.create(metadata)](#DataExtension.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#DataExtension.update) ⇒ <code>Promise</code>
-    * [.postDeployTasks(upsertedMetadata, originalMetadata)](#DataExtension.postDeployTasks) ⇒ <code>void</code>
+    * [.postDeployTasks(upsertedMetadata, originalMetadata, createdUpdated)](#DataExtension.postDeployTasks) ⇒ <code>void</code>
     * [.retrieve(retrieveDir, [additionalFields], [_], [key])](#DataExtension.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.retrieveChangelog([additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.postRetrieveTasks(metadata)](#DataExtension.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionItem</code>
@@ -1624,7 +1642,7 @@ Updates a single dataExtension. Also updates their columns in 'dataExtension.col
 
 <a name="DataExtension.postDeployTasks"></a>
 
-### DataExtension.postDeployTasks(upsertedMetadata, originalMetadata) ⇒ <code>void</code>
+### DataExtension.postDeployTasks(upsertedMetadata, originalMetadata, createdUpdated) ⇒ <code>void</code>
 Gets executed after deployment of metadata type
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -1633,6 +1651,7 @@ Gets executed after deployment of metadata type
 | --- | --- | --- |
 | upsertedMetadata | <code>TYPE.DataExtensionMap</code> | metadata mapped by their keyField |
 | originalMetadata | <code>TYPE.DataExtensionMap</code> | metadata to be updated (contains additioanl fields) |
+| createdUpdated | <code>Object</code> | counter representing successful creates/updates |
 
 <a name="DataExtension.retrieve"></a>
 
@@ -2281,7 +2300,7 @@ Event MetadataType
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Event.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.postRetrieveTasks(eventDef)](#Event.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.deleteByKey(key)](#Event.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.deploy(metadata, deployDir, retrieveDir)](#Event.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.deploy(metadata, deployDir, retrieveDir, [isRefresh])](#Event.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.create(metadata)](#Event.create) ⇒ <code>Promise</code>
     * [.update(metadataEntry)](#Event.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#Event.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -2351,7 +2370,7 @@ Delete a metadata item from the specified business unit
 
 <a name="Event.deploy"></a>
 
-### Event.deploy(metadata, deployDir, retrieveDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+### Event.deploy(metadata, deployDir, retrieveDir, [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
 Deploys metadata - merely kept here to be able to print [logBeta](#Util.logBeta) once per deploy
 
 **Kind**: static method of [<code>Event</code>](#Event)  
@@ -2362,6 +2381,7 @@ Deploys metadata - merely kept here to be able to print [logBeta](#Util.logBeta)
 | metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 | retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
+| [isRefresh] | <code>boolean</code> | optional flag - so far not used by eventDefinition |
 
 <a name="Event.create"></a>
 
@@ -2868,7 +2888,7 @@ definitionId: A unique UUID provided by Salesforce Marketing Cloud. Each version
 * [Interaction](#Interaction) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#Interaction.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.deleteByKey(key)](#Interaction.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.deploy(metadata, deployDir, retrieveDir)](#Interaction.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.deploy(metadata, deployDir, retrieveDir, [isRefresh])](#Interaction.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.update(metadata)](#Interaction.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#Interaction.create) ⇒ <code>Promise</code>
     * [.saveResults(results, retrieveDir, [overrideType], [templateVariables])](#Interaction.saveResults) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
@@ -2906,7 +2926,7 @@ Delete a metadata item from the specified business unit
 
 <a name="Interaction.deploy"></a>
 
-### Interaction.deploy(metadata, deployDir, retrieveDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+### Interaction.deploy(metadata, deployDir, retrieveDir, [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
 Deploys metadata - merely kept here to be able to print [logBeta](#Util.logBeta) once per deploy
 
 **Kind**: static method of [<code>Interaction</code>](#Interaction)  
@@ -2917,6 +2937,7 @@ Deploys metadata - merely kept here to be able to print [logBeta](#Util.logBeta)
 | metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 | retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
+| [isRefresh] | <code>boolean</code> | optional flag - so far not used by interaction |
 
 <a name="Interaction.update"></a>
 
@@ -3096,8 +3117,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.buObject](#MetadataType.buObject) : <code>TYPE.BuObject</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType.getJsonFromFS) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.getFieldNamesToRetrieve([additionalFields], [isCaching])](#MetadataType.getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.deploy(metadata, deployDir, retrieveDir)](#MetadataType.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
-    * [.postDeployTasks(upsertResults, originalMetadata)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
+    * [.deploy(metadata, deployDir, retrieveDir, [isRefresh])](#MetadataType.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.postDeployTasks(upsertResults, originalMetadata, createdUpdated, [isRefresh])](#MetadataType.postDeployTasks) ⇒ <code>void</code>
     * [.postCreateTasks(metadataEntry, apiResponse)](#MetadataType.postCreateTasks) ⇒ <code>void</code>
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setFolderPath(metadata)](#MetadataType.setFolderPath)
@@ -3113,7 +3134,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.refresh()](#MetadataType.refresh) ⇒ <code>void</code>
     * [.hasChanged(cachedVersion, metadata, [fieldName])](#MetadataType.hasChanged) ⇒ <code>boolean</code>
     * [.hasChangedGeneric(cachedVersion, metadata, [fieldName], [silent])](#MetadataType.hasChangedGeneric) ⇒ <code>boolean</code>
-    * [.upsert(metadata, deployDir)](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.upsert(metadata, deployDir, [isRefresh])](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MetadataType.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
     * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [.createSOAP(metadataEntry, [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
@@ -3192,7 +3213,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 
 <a name="MetadataType.deploy"></a>
 
-### MetadataType.deploy(metadata, deployDir, retrieveDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+### MetadataType.deploy(metadata, deployDir, retrieveDir, [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
 Deploys metadata
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3203,10 +3224,11 @@ Deploys metadata
 | metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 | retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
+| [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="MetadataType.postDeployTasks"></a>
 
-### MetadataType.postDeployTasks(upsertResults, originalMetadata) ⇒ <code>void</code>
+### MetadataType.postDeployTasks(upsertResults, originalMetadata, createdUpdated, [isRefresh]) ⇒ <code>void</code>
 Gets executed after deployment of metadata type
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3215,6 +3237,8 @@ Gets executed after deployment of metadata type
 | --- | --- | --- |
 | upsertResults | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField as returned by update/create |
 | originalMetadata | <code>TYPE.MetadataTypeMap</code> | metadata to be updated (contains additioanl fields) |
+| createdUpdated | <code>Object</code> | counter representing successful creates/updates |
+| [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="MetadataType.postCreateTasks"></a>
 
@@ -3409,7 +3433,7 @@ test if metadata was actually changed or not to potentially skip it during deplo
 
 <a name="MetadataType.upsert"></a>
 
-### MetadataType.upsert(metadata, deployDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+### MetadataType.upsert(metadata, deployDir, [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3419,6 +3443,7 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
+| [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="MetadataType.createOrUpdate"></a>
 
@@ -5146,8 +5171,9 @@ MessageSendActivity MetadataType
     * [.setFolderPath(metadata)](#TriggeredSend.setFolderPath)
     * [.parseMetadata(metadata)](#TriggeredSend.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
     * [.preDeployTasks(metadata)](#TriggeredSend.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.refresh([keyArr])](#TriggeredSend.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [._findRefreshableItems()](#TriggeredSend._findRefreshableItems) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [.refresh([keyArr], [checkKey])](#TriggeredSend.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.getKeysForValidTSDs(metadata)](#TriggeredSend.getKeysForValidTSDs) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [.findRefreshableItems()](#TriggeredSend.findRefreshableItems) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [._refreshItem(key, checkKey)](#TriggeredSend._refreshItem) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="TriggeredSend.retrieve"></a>
@@ -5250,23 +5276,36 @@ prepares a TSD for deployment
 
 <a name="TriggeredSend.refresh"></a>
 
-### TriggeredSend.refresh([keyArr]) ⇒ <code>Promise.&lt;void&gt;</code>
+### TriggeredSend.refresh([keyArr], [checkKey]) ⇒ <code>Promise.&lt;void&gt;</code>
 TSD-specific refresh method that finds active TSDs and refreshes them
 
 **Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| [keyArr] | <code>Array.&lt;string&gt;</code> | metadata keys |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [keyArr] | <code>Array.&lt;string&gt;</code> |  | metadata keys |
+| [checkKey] | <code>boolean</code> | <code>true</code> | whether to check if the key is valid |
 
-<a name="TriggeredSend._findRefreshableItems"></a>
+<a name="TriggeredSend.getKeysForValidTSDs"></a>
 
-### TriggeredSend.\_findRefreshableItems() ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-helper for [refresh](refresh) that finds active TSDs on the server and filters it by the same rules that [retrieve](retrieve) is using to avoid refreshing TSDs with broken dependencies
+### TriggeredSend.getKeysForValidTSDs(metadata) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+helper for [refresh](refresh) that extracts the keys from the TSD item map and eli
 
 **Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - keyArr  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeMapObj</code> | TSD item map |
+
+<a name="TriggeredSend.findRefreshableItems"></a>
+
+### TriggeredSend.findRefreshableItems() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+helper for [refresh](refresh) that finds active TSDs on the server and filters it by the same rules that [retrieve](retrieve) is using to avoid refreshing TSDs with broken dependencies
+
+**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of TSD item map  
 <a name="TriggeredSend._refreshItem"></a>
 
 ### TriggeredSend.\_refreshItem(key, checkKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
