@@ -4,113 +4,126 @@
     "totalResults": 1,
     "entry": [
         {
-            id: 'NTIzOjc4OjA',
-            lastUpdated: '2023-03-08T16:30:00Z',
-            type: 'ExactTarget.Mobile.Sms.Core.Entities.SmsMessageEntity',
-            name: 'test-jb-new',
-            text: 'test message jb new',
-            origin: 'SMS Send',
-            code: {
-              id: 'N3Y3RTN6aXBWVUtmdUtGWEpfNW5yUTo4MTow',
-              createdDate: '2017-05-05T10:32:41.537Z',
-              lastUpdated: '2017-05-05T10:38:07.217Z',
-              code: '491771783703',
-              countryCode: 'DE',
-              startDate: '2017-05-05T06:00:00Z',
-              endDate: '2047-05-05T06:00:00Z',
-              keywordLimit: '1000',
-              keywordsUsed: '9',
-              codeType: 'SHARED',
-              isShortCode: false,
-              keywordsUsedOther: '0',
-              isGsmCharacterSetOnly: false,
-              isMms: false,
-              isStackIndependant: false,
-              dipSwitches: 1,
-              moEngineVersion: 1,
-              sendableCountries: [Array],
-              supportsConcatenation: true,
-              isClientOwned: false,
-              isOwner: false
+            "id": "NTIzOjc4OjA",
+            "lastUpdated": "2023-03-08T16:30:00Z",
+            "type": "ExactTarget.Mobile.Sms.Core.Entities.SmsMessageEntity",
+            "name": "testExisting_SMS",
+            "text": "test message jb new",
+            "origin": "SMS Send",
+            "code": {
+                "id": "RXBwc0JoNk9jVTY0YWJNWFZDaGxvdzo4MTow",
+                "code": "4912312345678",
+                "codeType": "PRIVATE",
+                "isShortCode": false,
+                "isGsmCharacterSetOnly": false,
+                "isMms": false,
+                "isStackIndependant": false,
+                "dipSwitches": 0,
+                "moEngineVersion": 0,
+                "sendableCountries": [
+                    {
+                        "countryCode": "AE",
+                        "vendor": "CLX",
+                        "fromNameSupported": true
+                    },
+                    {
+                        "countryCode": "AL",
+                        "vendor": "CLX",
+                        "fromNameSupported": true
+                    },
+                    {
+                        "countryCode": "AM",
+                        "vendor": "CLX",
+                        "fromNameSupported": true
+                    }
+                ],
+                "supportsConcatenation": true,
+                "isClientOwned": false,
+                "isOwner": false
             },
-            mtSendDate: '2023-03-07T20:18:00Z',
-            template: {
-              id: 'Mzo4MDow',
-              lastUpdated: '2023-03-08T16:30:30.536Z',
-              name: 'Outbound',
-              description: 'Send a SMS message to your subscribers',
-              icon: 'outbound.png'
+            "campaigns": [
+                {
+                    "id": "MjMxOjQ2OjA",
+                    "name": "testExisting_campaign",
+                    "display": {
+                        "name": "color",
+                        "value": "f6efb6"
+                    }
+                }
+            ],
+
+            "mtSendDate": "2020-07-16T22:46:00Z",
+            "template": {
+                "id": "Mzo4MDow",
+                "name": "Outbound"
             },
-            status: 'Active/Scheduled',
-            invalidMessage: '',
-            responseMessage: '',
-            publishedMessage: "Text '<keyword>'  to 491771783703.",
-            nextJob: {
-              id: 'NTIzOjc5OjA',
-              lastUpdated: '2023-03-08T16:30:30.521Z',
-              type: 'ExactTarget.Mobile.Sms.Core.Entities.SmsJobEntity',
-              message: [Object],
-              isTest: false
+            "status": "Active/Scheduled",
+            "invalidMessage": "",
+            "responseMessage": "",
+            "publishedMessage": "Text '<keyword>'  to 4912312345678.",
+            "nextJob": {
+                "id": "MjY3Ojc5OjA",
+                "type": "ExactTarget.Mobile.Sms.Core.Entities.SmsJobEntity",
+                "isTest": false,
+                "sendDate": "2020-07-16T22:46:00Z"
             },
-            isTest: false,
-            currentEditStep: 13,
-            moTimezone: {
-              offset: 1,
-              name: '(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna *'
+            "isTest": false,
+            "currentEditStep": 13,
+            "moTimezone": {
+                "offset": 1,
+                "name": "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna *"
             },
-            optinType: 'NO_OPTIN',
-            doubleOptinInitialMessage: '',
-            doubleOptinConfirmMessage: '',
-            optinMinimumAge: 0,
-            optinInvalidAgeMessage: '',
-            numberMessagesPerPeriod: 0,
-            periodType: 'NO_PERIOD',
-            optinErrorMessage: '',
-            triggeredSendId: '00000000-0000-0000-0000-000000000000',
-            isDuplicationAllowed: true,
-            triggeredSendName: 'test-jb-3 - 519',
-            isTimeZoneBased: false,
-            surveyType: 'NO_SURVEY',
-            surveyCorrectResponseMessage: '',
-            surveyTooManyEntriesMessage: '',
-            isExpireSet: false,
-            expireHours: 0,
-            surveyIncorrectResponseMessage: '',
-            statusId: 2,
-            doubleOptinValidResponses: 'y|yes',
-            messagesPerPeriod: 0,
-            minutesPerPeriod: 0,
-            subscriberResponseMessage: '',
-            isSubscriberResponseToAnySubscriptionForShortCode: false,
-            sendMethod: 'API',
-            messageObjectId: 'Y3l5cm50Y3EwVWlEQW1od1NZZnIwUTo2MjU6MA',
-            allowSingleOptin: false,
-            duplicateOptInResponseMessage: '',
-            isSentImmediately: true,
-            nextKeyword: {
-              id: 'Y0ZDXzVjVHdYVUNlQVJlT2U2dzVKZzo4Njow',
-              createdDate: '2017-07-05T09:49:59.363Z',
-              lastUpdated: '2023-03-08T16:30:30.536Z',
-              code: [Object],
-              keyword: 'ONEDEVICE_DEV',
-              startDate: '2017-07-05T09:49:59.257Z',
-              endDate: '2037-07-05T09:49:59.257Z',
-              status: 'Active',
-              createdBy: [Object],
-              restriction: 'NONE',
-              keywordType: 'NORMAL',
-              isInherited: false,
-              dipSwitches: 0
+            "optinType": "NO_OPTIN",
+            "doubleOptinInitialMessage": "",
+            "doubleOptinConfirmMessage": "",
+            "optinMinimumAge": 0,
+            "optinInvalidAgeMessage": "",
+            "numberMessagesPerPeriod": 0,
+            "periodType": "NO_PERIOD",
+            "optinErrorMessage": "",
+            "triggeredSendId": "00000000-0000-0000-0000-000000000000",
+            "isDuplicationAllowed": true,
+            "triggeredSendName": "DEV_InformUserAboutProposal - 267",
+            "isTimeZoneBased": false,
+            "surveyType": "NO_SURVEY",
+            "surveyCorrectResponseMessage": "",
+            "surveyTooManyEntriesMessage": "",
+            "isExpireSet": false,
+            "expireHours": 0,
+            "surveyIncorrectResponseMessage": "",
+            "statistics": {
+                "outbound": {
+                    "sent": 45,
+                    "delivered": 33,
+                    "undelivered": 0,
+                    "unknown": 0
+                }
             },
-            isSuppressMt: false,
-            smsTriggeredSendDefinitionId: '01cd6436-25bd-ed11-b859-48df37d1dca1',
-            fromName: '',
-            concatenateMessage: true,
-            isFromNameCertificationAccepted: false,
-            isCertified: false,
-            outboundSendTypeFlag: 'Audience',
-            programId: '00000000-0000-0000-0000-000000000000',
-            outboundSendBehaviorFlag: 'AutoAddSubscribers'
-          }
+            "statusId": 2,
+            "doubleOptinValidResponses": "y|yes",
+            "messagesPerPeriod": 0,
+            "minutesPerPeriod": 0,
+            "subscriberResponseMessage": "",
+            "isSubscriberResponseToAnySubscriptionForShortCode": false,
+            "sendMethod": "API",
+            "messageObjectId": "MzN3MUV5YVpmRVMtV1R1UXJUR3NzUTo2MjU6MA",
+            "allowSingleOptin": false,
+            "isSentImmediately": true,
+            "nextKeyword": {
+                "id": "cTVJaG5oSDJPVUNHcUh6Z3pQT2tVdzo4Njow",
+                "keyword": "testExisting_keyword",
+                "restriction": "NONE",
+                "isInherited": false
+            },
+            "isSuppressMt": false,
+            "smsTriggeredSendDefinitionId": "39d0e022-b6c7-ea11-a2e9-1402ec938719",
+            "fromName": "4912312345678",
+            "concatenateMessage": true,
+            "isFromNameCertificationAccepted": false,
+            "isCertified": false,
+            "outboundSendTypeFlag": "Audience",
+            "programId": "00000000-0000-0000-0000-000000000000",
+            "outboundSendBehaviorFlag": "AutoAddSubscribers"
+        }
     ]
 }
