@@ -24,6 +24,7 @@
             <Results xsi:type="AccountUser">
                 <Client>
                     <ID>1111111</ID>
+                    <ModifiedBy>123456</ModifiedBy>
                 </Client>
                 <PartnerKey xsi:nil="true" />
                 <CreatedDate>2019-09-06T01:59:07.097</CreatedDate>
@@ -68,6 +69,17 @@
                     <AccountType>None</AccountType>
                     <Subscription xsi:nil="true" />
                 </DefaultBusinessUnitObject>
+                <Locale>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <LocaleCode>en-GB</LocaleCode>
+                </Locale>
+                <TimeZone>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>5</ID>
+                    <ObjectID xsi:nil="true" />
+                    <Name>(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna *</Name>
+                </TimeZone>
                 <Roles>
                     <Role>
                         <Client>

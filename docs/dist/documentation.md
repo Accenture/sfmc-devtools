@@ -3130,7 +3130,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.updateSOAP(metadataEntry, [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [._handleSOAPErrors(ex, msg, [metadataEntry], [handleOutside])](#MetadataType._handleSOAPErrors)
     * [.getSOAPErrorMsg(ex)](#MetadataType.getSOAPErrorMsg) ⇒ <code>string</code>
-    * [.retrieveSOAP(retrieveDir, [requestParams], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveSOAP(retrieveDir, [requestParams], [singleRetrieve], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#MetadataType.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
@@ -3431,7 +3431,7 @@ helper for [upsert](#MetadataType.upsert)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata itme |
+| metadata | <code>TYPE.MetadataTypeMap</code> | list of metadata |
 | metadataKey | <code>string</code> | key of item we are looking at |
 | hasError | <code>boolean</code> | error flag from previous code |
 | metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
@@ -3516,7 +3516,7 @@ helper for [_handleSOAPErrors](_handleSOAPErrors)
 
 <a name="MetadataType.retrieveSOAP"></a>
 
-### MetadataType.retrieveSOAP(retrieveDir, [requestParams], [additionalFields]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MetadataType.retrieveSOAP(retrieveDir, [requestParams], [singleRetrieve], [additionalFields]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3526,6 +3526,7 @@ Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type int
 | --- | --- | --- |
 | retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | [requestParams] | <code>TYPE.SoapRequestParams</code> | required for the specific request (filter for example) |
+| [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 
 <a name="MetadataType.retrieveREST"></a>
@@ -5077,8 +5078,9 @@ MetadataType
     * [.postDeployTasks(upsertResults)](#User.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._getRoleObjectForDeploy(roleId, roleName, userId, assignmentOnly, [isRoleRemovale])](#User._getRoleObjectForDeploy) ⇒ <code>object</code>
     * [.retrieveChangelog()](#User.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveSOAP(retrieveDir, [requestParams], [singleRetrieve], [additionalFields])](#User.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.document([metadata])](#User.document) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.postRetrieveTasks(metadata)](#User.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.postRetrieveTasks(metadata)](#User.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
 
 <a name="User.retrieve"></a>
 
@@ -5147,7 +5149,7 @@ helper for [upsert](#MetadataType.upsert)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata item |
+| metadata | <code>TYPE.MetadataTypeMap</code> | list of metadata |
 | metadataKey | <code>string</code> | key of item we are looking at |
 | hasError | <code>boolean</code> | error flag from previous code |
 | metadataToUpdate | <code>Array.&lt;TYPE.UserDocumentDiff&gt;</code> | list of items to update |
@@ -5188,6 +5190,21 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 
 **Kind**: static method of [<code>User</code>](#User)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+<a name="User.retrieveSOAP"></a>
+
+### User.retrieveSOAP(retrieveDir, [requestParams], [singleRetrieve], [additionalFields]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
+
+**Kind**: static method of [<code>User</code>](#User)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of item map  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [requestParams] | <code>TYPE.SoapRequestParams</code> | required for the specific request (filter for example) |
+| [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
+| [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
+
 <a name="User.document"></a>
 
 ### User.document([metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -5202,15 +5219,15 @@ Creates markdown documentation of all roles
 
 <a name="User.postRetrieveTasks"></a>
 
-### User.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### User.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
 manages post retrieve steps
 
 **Kind**: static method of [<code>User</code>](#User)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one query string  
+**Returns**: <code>TYPE.MetadataTypeItem</code> \| <code>void</code> - a single item  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
 <a name="Retriever"></a>
 
@@ -7676,7 +7693,8 @@ key=customer key
 | --- | --- | --- |
 | [ID] | <code>string</code> | equal to UserID; optional in update/create calls |
 | UserID | <code>string</code> | equal to ID; required in update/create calls |
-| AccountUserID | <code>number</code> | user.AccountUserID |
+| [AccountUserID] | <code>number</code> | user.AccountUserID |
+| c__AccountUserID | <code>number</code> | copy of AccountUserID |
 | CustomerKey | <code>string</code> | user.CustomerKey |
 | Name | <code>string</code> | user.Name |
 | Email | <code>string</code> | user.Email |
@@ -7684,15 +7702,29 @@ key=customer key
 | ActiveFlag | <code>boolean</code> | user.ActiveFlag === true ? '✓' : '-' |
 | IsAPIUser | <code>boolean</code> | user.IsAPIUser === true ? '✓' : '-' |
 | MustChangePassword | <code>boolean</code> | user.MustChangePassword === true ? '✓' : '-' |
-| DefaultBusinessUnit | <code>boolean</code> | defaultBUName |
-| AssociatedBusinessUnits__c | <code>Array.&lt;number&gt;</code> | associatedBus |
-| [Roles] | <code>object</code> | roles (API only) |
-| RoleNamesGlobal__c | <code>Array.&lt;string&gt;</code> | roles |
-| type__c | <code>&#x27;User&#x27;</code> \| <code>&#x27;Installed Package&#x27;</code> | roles |
+| DefaultBusinessUnit | <code>number</code> | defaultBUName |
+| c__AssociatedBusinessUnits | <code>Array.&lt;number&gt;</code> | associatedBus |
+| [Roles] | <code>object</code> | (API only) |
+| [Roles.Role] | <code>Array.&lt;object&gt;</code> | roles (API only) |
+| c__RoleNamesGlobal | <code>Array.&lt;string&gt;</code> | roles |
 | UserPermissions | <code>Array.&lt;string&gt;</code> | userPermissions |
 | LastSuccessfulLogin | <code>string</code> | this.timeSinceDate(user.LastSuccessfulLogin) |
 | CreatedDate | <code>string</code> | user.CreatedDate |
 | ModifiedDate | <code>string</code> | user.ModifiedDate |
+| Client | <code>object</code> | - |
+| [Client.ID] | <code>number</code> | EID e.g:7281698 |
+| Client.ModifiedBy | <code>number</code> | AccountUserID of user who last modified this user |
+| c__type | <code>&#x27;User&#x27;</code> \| <code>&#x27;Installed Package&#x27;</code> | - |
+| [IsLocked] | <code>boolean</code> | (API only) |
+| [Unlock] | <code>boolean</code> | used to unlock a user that has IsLocked === true |
+| c__IsLocked_readOnly | <code>boolean</code> | copy of IsLocked |
+| c__TimeZoneName | <code>string</code> | name of timezone |
+| [TimeZone] | <code>object</code> | (API only) |
+| [TimeZone.Name] | <code>string</code> | (API only) |
+| [TimeZone.ID] | <code>string</code> | (API only) |
+| c__LocaleCode | <code>&#x27;en-US&#x27;</code> \| <code>&#x27;fr-CA&#x27;</code> \| <code>&#x27;fr-FR&#x27;</code> \| <code>&#x27;de-DE&#x27;</code> \| <code>&#x27;it-IT&#x27;</code> \| <code>&#x27;ja-JP&#x27;</code> \| <code>&#x27;pt-BR&#x27;</code> \| <code>&#x27;es-419&#x27;</code> \| <code>&#x27;es-ES&#x27;</code> | fr-CA, en-US, ... |
+| [Locale] | <code>object</code> | (API only) |
+| [Locale.LocaleCode] | <code>&#x27;en-US&#x27;</code> \| <code>&#x27;fr-CA&#x27;</code> \| <code>&#x27;fr-FR&#x27;</code> \| <code>&#x27;de-DE&#x27;</code> \| <code>&#x27;it-IT&#x27;</code> \| <code>&#x27;ja-JP&#x27;</code> \| <code>&#x27;pt-BR&#x27;</code> \| <code>&#x27;es-419&#x27;</code> \| <code>&#x27;es-ES&#x27;</code> | (API only) |
 
 <a name="BusinessUnitAssignmentConfiguration"></a>
 

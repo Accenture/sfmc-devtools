@@ -15,6 +15,7 @@ describe('user', () => {
             // WHEN
             await handler.retrieve('testInstance/_ParentBU_', ['user']);
             // THEN
+            assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -30,7 +31,7 @@ describe('user', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                4,
+                6,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -42,8 +43,10 @@ describe('user', () => {
         });
         it('Should create & upsert a user', async () => {
             // WHEN
-            await handler.deploy('testInstance/_ParentBU_', ['user']);
+            const expectedCache = ['testNew_user', 'testExisting_user'];
+            await handler.deploy('testInstance/_ParentBU_', ['user'], expectedCache);
             // THEN
+            assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
 
             // get results from cache
             const result = cache.getCache();
@@ -52,6 +55,13 @@ describe('user', () => {
                 2,
                 'two users expected'
             );
+            // confirm if result.user only includes values from expectedCache
+            assert.deepEqual(
+                Object.keys(result.user),
+                expectedCache,
+                'returned user keys were not equal expected'
+            );
+
             // insert
             assert.deepEqual(
                 await testUtils.getActualJson('testNew_user', 'user', '_ParentBU_'),
@@ -66,7 +76,31 @@ describe('user', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                7,
+                9,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should not deploy user with Marketing Cloud role', async () => {
+            // WHEN
+            const expectedCache = ['testExisting_user'];
+            await handler.deploy('testInstance/_ParentBU_', ['user'], ['testBlocked_user']);
+            // THEN
+            assert.equal(process.exitCode, 1, 'Deployment should have thrown an error');
+
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(result.user ? Object.keys(result.user).length : 0, 1, '1 user expected');
+            // confirm if result.user only includes values from expectedCache
+            assert.deepEqual(
+                Object.keys(result.user),
+                expectedCache,
+                'returned user keys were not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                6,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -83,6 +117,11 @@ describe('user', () => {
                 'user',
                 ['testExisting_user'],
                 'testSourceMarket'
+            );
+            assert.equal(
+                !!process.exitCode,
+                false,
+                'buildTemplate should not have thrown an error'
             );
             // WHEN
             assert.equal(
@@ -102,6 +141,11 @@ describe('user', () => {
                 'testExisting_user',
                 'testTargetMarket'
             );
+            assert.equal(
+                !!process.exitCode,
+                false,
+                'buildDefinition should not have thrown an error'
+            );
 
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testExisting_user', 'user', '_ParentBU_'),
@@ -110,7 +154,7 @@ describe('user', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                4,
+                6,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

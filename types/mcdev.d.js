@@ -122,7 +122,8 @@ const SDK = require('sfmc-sdk');
  * @typedef {object} UserDocument
  * @property {string} [ID] equal to UserID; optional in update/create calls
  * @property {string} UserID equal to ID; required in update/create calls
- * @property {number} AccountUserID user.AccountUserID
+ * @property {number} [AccountUserID] user.AccountUserID
+ * @property {number} c__AccountUserID copy of AccountUserID
  * @property {string} CustomerKey user.CustomerKey
  * @property {string} Name user.Name
  * @property {string} Email user.Email
@@ -130,15 +131,29 @@ const SDK = require('sfmc-sdk');
  * @property {boolean} ActiveFlag user.ActiveFlag === true ? '✓' : '-'
  * @property {boolean} IsAPIUser user.IsAPIUser === true ? '✓' : '-'
  * @property {boolean} MustChangePassword user.MustChangePassword === true ? '✓' : '-'
- * @property {boolean} DefaultBusinessUnit defaultBUName
- * @property {number[]} AssociatedBusinessUnits__c associatedBus
- * @property {object} [Roles] roles (API only)
- * @property {string[]} RoleNamesGlobal__c roles
- * @property {'User'|'Installed Package'} type__c roles
+ * @property {number} DefaultBusinessUnit defaultBUName
+ * @property {number[]} c__AssociatedBusinessUnits associatedBus
+ * @property {object} [Roles] (API only)
+ * @property {object[]} [Roles.Role] roles (API only)
+ * @property {string[]} c__RoleNamesGlobal roles
  * @property {string[]} UserPermissions userPermissions
  * @property {string} LastSuccessfulLogin this.timeSinceDate(user.LastSuccessfulLogin)
  * @property {string} CreatedDate user.CreatedDate
  * @property {string} ModifiedDate user.ModifiedDate
+ * @property {object} Client -
+ * @property {number} [Client.ID] EID e.g:7281698
+ * @property {number} Client.ModifiedBy AccountUserID of user who last modified this user
+ * @property {'User'|'Installed Package'} c__type -
+ * @property {boolean} [IsLocked] (API only)
+ * @property {boolean} [Unlock] used to unlock a user that has IsLocked === true
+ * @property {boolean} c__IsLocked_readOnly copy of IsLocked
+ * @property {string} c__TimeZoneName name of timezone
+ * @property {object} [TimeZone] (API only)
+ * @property {string} [TimeZone.Name] (API only)
+ * @property {string} [TimeZone.ID] (API only)
+ * @property {'en-US'|'fr-CA'|'fr-FR'|'de-DE'|'it-IT'|'ja-JP'|'pt-BR'|'es-419'|'es-ES'} c__LocaleCode fr-CA, en-US, ...
+ * @property {object} [Locale] (API only)
+ * @property {'en-US'|'fr-CA'|'fr-FR'|'de-DE'|'it-IT'|'ja-JP'|'pt-BR'|'es-419'|'es-ES'} [Locale.LocaleCode] (API only)
  * @typedef {{before:UserDocument,after:UserDocument}} UserDocumentDiff
  * @typedef {Object.<string, UserDocument>} UserDocumentMap key=customer key
  */
