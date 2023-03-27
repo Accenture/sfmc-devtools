@@ -10,7 +10,7 @@
     "NotificationEmailAddress": "user_testTarget@accenture.com",
     "DefaultBusinessUnit": "1111111",
     "c__AssociatedBusinessUnits": ["1111111", "1111111"],
-    "c__RoleNamesGlobal": ["Administrator", "Content Creator"],
+    "c__RoleNamesGlobal": ["Administrator", "Content Creator", "Marketing Cloud Administrator"],
     "c__TimeZoneName": "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna *",
     "c__LocaleCode": "en-GB"
 }

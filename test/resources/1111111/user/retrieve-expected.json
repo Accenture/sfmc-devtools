@@ -18,7 +18,7 @@
     "c__AccountUserID": 700301950,
     "c__IsLocked_readOnly": false,
     "c__AssociatedBusinessUnits": [1111111, 9999999],
-    "c__RoleNamesGlobal": ["Administrator", "Content Creator"],
+    "c__RoleNamesGlobal": ["Administrator", "Content Creator", "Marketing Cloud Administrator"],
     "c__TimeZoneName": "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna *",
     "c__LocaleCode": "en-GB"
 }
