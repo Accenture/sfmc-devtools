@@ -42,7 +42,8 @@ describe('user', () => {
         });
         it('Should create & upsert a user', async () => {
             // WHEN
-            await handler.deploy('testInstance/_ParentBU_', ['user']);
+            const expectedCache = ['testNew_user', 'testExisting_user'];
+            await handler.deploy('testInstance/_ParentBU_', ['user'], expectedCache);
             // THEN
 
             // get results from cache
@@ -52,6 +53,15 @@ describe('user', () => {
                 2,
                 'two users expected'
             );
+            // confirm if result.user only includes values from expectedCache
+            assert.deepEqual(
+                Object.keys(result.user),
+                expectedCache,
+                'returned user keys were not equal expected'
+            );
+
+            assert.equal(!!process.exitCode, false, 'Deployment should not have thrown an error');
+
             // insert
             assert.deepEqual(
                 await testUtils.getActualJson('testNew_user', 'user', '_ParentBU_'),
@@ -67,6 +77,30 @@ describe('user', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 9,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should not deploy user with Marketing Cloud role', async () => {
+            // WHEN
+            const expectedCache = ['testExisting_user'];
+            await handler.deploy('testInstance/_ParentBU_', ['user'], ['testBlocked_user']);
+            // THEN
+
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(result.user ? Object.keys(result.user).length : 0, 1, '1 user expected');
+            // confirm if result.user only includes values from expectedCache
+            assert.deepEqual(
+                Object.keys(result.user),
+                expectedCache,
+                'returned user keys were not equal expected'
+            );
+
+            assert.equal(process.exitCode, 1, 'Deployment should have thrown an error');
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                6,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
