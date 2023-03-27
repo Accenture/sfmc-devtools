@@ -132,11 +132,10 @@ const SDK = require('sfmc-sdk');
  * @property {boolean} IsAPIUser user.IsAPIUser === true ? '✓' : '-'
  * @property {boolean} MustChangePassword user.MustChangePassword === true ? '✓' : '-'
  * @property {number} DefaultBusinessUnit defaultBUName
- * @property {number[]} AssociatedBusinessUnits__c associatedBus
+ * @property {number[]} c__AssociatedBusinessUnits associatedBus
  * @property {object} [Roles] (API only)
  * @property {object[]} [Roles.Role] roles (API only)
  * @property {string[]} c__RoleNamesGlobal roles
- * @property {'User'|'Installed Package'} type__c roles
  * @property {string[]} UserPermissions userPermissions
  * @property {string} LastSuccessfulLogin this.timeSinceDate(user.LastSuccessfulLogin)
  * @property {string} CreatedDate user.CreatedDate

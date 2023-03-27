@@ -7703,11 +7703,10 @@ key=customer key
 | IsAPIUser | <code>boolean</code> | user.IsAPIUser === true ? '✓' : '-' |
 | MustChangePassword | <code>boolean</code> | user.MustChangePassword === true ? '✓' : '-' |
 | DefaultBusinessUnit | <code>number</code> | defaultBUName |
-| AssociatedBusinessUnits__c | <code>Array.&lt;number&gt;</code> | associatedBus |
+| c__AssociatedBusinessUnits | <code>Array.&lt;number&gt;</code> | associatedBus |
 | [Roles] | <code>object</code> | (API only) |
 | [Roles.Role] | <code>Array.&lt;object&gt;</code> | roles (API only) |
 | c__RoleNamesGlobal | <code>Array.&lt;string&gt;</code> | roles |
-| type__c | <code>&#x27;User&#x27;</code> \| <code>&#x27;Installed Package&#x27;</code> | roles |
 | UserPermissions | <code>Array.&lt;string&gt;</code> | userPermissions |
 | LastSuccessfulLogin | <code>string</code> | this.timeSinceDate(user.LastSuccessfulLogin) |
 | CreatedDate | <code>string</code> | user.CreatedDate |
