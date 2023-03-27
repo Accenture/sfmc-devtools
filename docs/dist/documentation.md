@@ -3933,7 +3933,15 @@ MobileKeyword MetadataType
     * [.retrieveForCache()](#MobileKeyword.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#MobileKeyword.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.create(MobileKeyword)](#MobileKeyword.create) ⇒ <code>Promise</code>
-    * [.preDeployTasks(metadata)](#MobileKeyword.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.postRetrieveTasks(metadata)](#MobileKeyword.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code> \| <code>TYPE.MetadataTypeItem</code>
+    * [.prepExtractedCode(metadataScript)](#MobileKeyword.prepExtractedCode) ⇒ <code>Object</code>
+    * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MobileKeyword.buildDefinitionForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MobileKeyword.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#MobileKeyword._buildForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [.preDeployTasks(metadata, deployDir)](#MobileKeyword.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
+    * [._mergeCode(metadata, deployDir, [templateName])](#MobileKeyword._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
+    * [.postDeleteTasks(customerKey)](#MobileKeyword.postDeleteTasks) ⇒ <code>void</code>
+    * [.getFilesToCommit(keyArr)](#MobileKeyword.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="MobileKeyword.retrieve"></a>
 
@@ -3984,17 +3992,136 @@ Creates a single Event Definition
 | --- | --- | --- |
 | MobileKeyword | <code>TYPE.MetadataTypeItem</code> | a single Event Definition |
 
+<a name="MobileKeyword.postRetrieveTasks"></a>
+
+### MobileKeyword.postRetrieveTasks(metadata) ⇒ <code>TYPE.CodeExtractItem</code> \| <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>TYPE.CodeExtractItem</code> \| <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one ssjs string  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="MobileKeyword.prepExtractedCode"></a>
+
+### MobileKeyword.prepExtractedCode(metadataScript) ⇒ <code>Object</code>
+helper for [parseMetadata](parseMetadata) and [_buildForNested](_buildForNested)
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>Object</code> - returns found extension and file content  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataScript | <code>string</code> | the code of the file |
+
+<a name="MobileKeyword.buildDefinitionForNested"></a>
+
+### MobileKeyword.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+helper for [buildDefinition](#MetadataType.buildDefinition)
+handles extracted code if any are found for complex types
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code> - list of extracted files with path-parts provided as an array  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> \| <code>Array.&lt;string&gt;</code> | (List of) Directory where built definitions will be saved |
+| metadata | <code>TYPE.MetadataTypeItem</code> | main JSON file that was read from file system |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateName | <code>string</code> | name of the template to be built |
+
+<a name="MobileKeyword.buildTemplateForNested"></a>
+
+### MobileKeyword.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+helper for [buildTemplate](#MetadataType.buildTemplate)
+handles extracted code if any are found for complex types
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code> - list of extracted files with path-parts provided as an array  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> \| <code>Array.&lt;string&gt;</code> | (List of) Directory where built definitions will be saved |
+| metadata | <code>TYPE.MetadataTypeItem</code> | main JSON file that was read from file system |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateName | <code>string</code> | name of the template to be built |
+
+**Example**  
+```js
+scripts are saved as 1 json and 1 ssjs file. both files need to be run through templating
+```
+<a name="MobileKeyword._buildForNested"></a>
+
+### MobileKeyword.\_buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+helper for [buildTemplateForNested](buildTemplateForNested) / [buildDefinitionForNested](buildDefinitionForNested)
+handles extracted code if any are found for complex types
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code> - list of extracted files with path-parts provided as an array  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> \| <code>Array.&lt;string&gt;</code> | (List of) Directory where built definitions will be saved |
+| metadata | <code>TYPE.MetadataTypeItem</code> | main JSON file that was read from file system |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateName | <code>string</code> | name of the template to be built |
+| mode | <code>&#x27;definition&#x27;</code> \| <code>&#x27;template&#x27;</code> | defines what we use this helper for |
+
 <a name="MobileKeyword.preDeployTasks"></a>
 
-### MobileKeyword.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### MobileKeyword.preDeployTasks(metadata, deployDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
 prepares an event definition for deployment
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - Promise  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single MobileKeyword |
+| deployDir | <code>string</code> | directory of deploy files |
+
+<a name="MobileKeyword._mergeCode"></a>
+
+### MobileKeyword.\_mergeCode(metadata, deployDir, [templateName]) ⇒ <code>Promise.&lt;string&gt;</code>
+helper for [preDeployTasks](preDeployTasks) that loads extracted code content back into JSON
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>Promise.&lt;string&gt;</code> - content for metadata.script  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single definition |
+| deployDir | <code>string</code> | directory of deploy files |
+| [templateName] | <code>string</code> | name of the template used to built defintion (prior applying templating) |
+
+<a name="MobileKeyword.postDeleteTasks"></a>
+
+### MobileKeyword.postDeleteTasks(customerKey) ⇒ <code>void</code>
+clean up after deleting a metadata item
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of metadata item |
+
+<a name="MobileKeyword.getFilesToCommit"></a>
+
+### MobileKeyword.getFilesToCommit(keyArr) ⇒ <code>Array.&lt;string&gt;</code>
+should return only the json for all but asset, query and script that are saved as multiple files
+additionally, the documentation for dataExtension and automation should be returned
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of all files that need to be committed in a flat array ['path/file1.ext', 'path/file2.ext']  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Query"></a>
 
@@ -4754,7 +4881,7 @@ TransactionalSMS MetadataType
 
 * [TransactionalSMS](#TransactionalSMS) ⇐ [<code>TransactionalMessage</code>](#TransactionalMessage)
     * [.postDeleteTasks(customerKey)](#TransactionalSMS.postDeleteTasks) ⇒ <code>void</code>
-    * [.preDeployTasks(metadata, dir)](#TransactionalSMS.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.preDeployTasks(metadata, deployDir)](#TransactionalSMS.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#TransactionalSMS._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.postRetrieveTasks(metadata)](#TransactionalSMS.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.prepExtractedCode(metadataScript)](#TransactionalSMS.prepExtractedCode) ⇒ <code>Object</code>
@@ -4777,16 +4904,16 @@ clean up after deleting a metadata item
 
 <a name="TransactionalSMS.preDeployTasks"></a>
 
-### TransactionalSMS.preDeployTasks(metadata, dir) ⇒ <code>TYPE.MetadataTypeItem</code>
+### TransactionalSMS.preDeployTasks(metadata, deployDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
 prepares for deployment
 
 **Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - Promise  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
-| dir | <code>string</code> | directory of deploy files |
+| deployDir | <code>string</code> | directory of deploy files |
 
 <a name="TransactionalSMS._mergeCode"></a>
 
