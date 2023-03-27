@@ -19,6 +19,7 @@ describe('interaction', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['interaction']);
             // THEN
+            assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -47,6 +48,7 @@ describe('interaction', () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['interaction']);
             // THEN
+            assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -89,6 +91,11 @@ describe('interaction', () => {
                 'testSourceMarket'
             );
             assert.equal(
+                !!process.exitCode,
+                false,
+                'buildTemplate should not have thrown an error'
+            );
+            assert.equal(
                 result.interaction ? Object.keys(result.interaction).length : 0,
                 1,
                 'only one interaction expected'
@@ -105,6 +112,11 @@ describe('interaction', () => {
                 'interaction',
                 'testExisting_interaction',
                 'testTargetMarket'
+            );
+            assert.equal(
+                !!process.exitCode,
+                false,
+                'buildDefinition should not have thrown an error'
             );
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testExisting_interaction', 'interaction'),

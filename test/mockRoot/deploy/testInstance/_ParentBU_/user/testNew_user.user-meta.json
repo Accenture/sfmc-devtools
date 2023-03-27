@@ -18,13 +18,10 @@
     "LastSuccessfulLogin": "2023-02-23T10:14:11.443",
     "IsAPIUser": false,
     "NotificationEmailAddress": "testNew_user@accenture.com",
-    "IsLocked": false,
     "DefaultBusinessUnit": 1111111,
-    "type__c": "User",
-    "AssociatedBusinessUnits__c": [1111111, 9999999],
-    "RoleNamesGlobal__c": [
-        "Administrator",
-        "Distributed Sending User",
-        "Marketing Cloud Administrator"
-    ]
+    "c__type": "User",
+    "c__AssociatedBusinessUnits": [1111111, 9999999],
+    "c__RoleNamesGlobal": ["Administrator", "Distributed Sending User"],
+    "c__TimeZoneName": "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna *",
+    "c__LocaleCode": "en-GB"
 }

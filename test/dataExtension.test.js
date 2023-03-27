@@ -15,6 +15,7 @@ describe('dataExtension', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['dataExtension']);
             // THEN
+            assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -44,6 +45,7 @@ describe('dataExtension', () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['dataExtension']);
             // THEN
+            assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
 
             // get results from cache
             const result = cache.getCache();
@@ -81,6 +83,11 @@ describe('dataExtension', () => {
                 ['childBU_dataextension_test'],
                 'testSourceMarket'
             );
+            assert.equal(
+                !!process.exitCode,
+                false,
+                'retrieveAsTemplate should not have thrown an error'
+            );
 
             // WHEN
             assert.equal(
@@ -102,6 +109,11 @@ describe('dataExtension', () => {
                 'dataExtension',
                 'childBU_dataextension_test',
                 'testTargetMarket'
+            );
+            assert.equal(
+                !!process.exitCode,
+                false,
+                'buildDefinition should not have thrown an error'
             );
             assert.deepEqual(
                 await testUtils.getActualDeployJson(
@@ -128,6 +140,11 @@ describe('dataExtension', () => {
                 ['childBU_dataextension_test'],
                 'testSourceMarket'
             );
+            assert.equal(
+                !!process.exitCode,
+                false,
+                'buildTemplate should not have thrown an error'
+            );
             // WHEN
             assert.equal(
                 result.dataExtension ? Object.keys(result.dataExtension).length : 0,
@@ -148,6 +165,11 @@ describe('dataExtension', () => {
                 'dataExtension',
                 'childBU_dataextension_test',
                 'testTargetMarket'
+            );
+            assert.equal(
+                !!process.exitCode,
+                false,
+                'buildDefinition should not have thrown an error'
             );
 
             assert.deepEqual(

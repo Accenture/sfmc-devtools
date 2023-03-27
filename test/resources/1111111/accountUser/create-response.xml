@@ -27,11 +27,13 @@
                 <Object xsi:type="AccountUser">
                     <Client>
                         <ID>1111111</ID>
+                        <ModifiedBy>123456</ModifiedBy>
                     </Client>
                     <PartnerKey xsi:nil="true" />
                     <ID>717510285</ID>
                     <ObjectID xsi:nil="true" />
                     <CustomerKey>testNew_user</CustomerKey>
+                    <AccountUserID>700301950</AccountUserID>
                     <UserID>testNew_user@accenture.asgr</UserID>
                     <Password />
                     <Name>new user</Name>
@@ -43,6 +45,17 @@
                     <NotificationEmailAddress>testNew_user@accenture.com</NotificationEmailAddress>
                     <IsLocked>false</IsLocked>
                     <DefaultBusinessUnit>1111111</DefaultBusinessUnit>
+                    <Locale>
+                        <PartnerKey xsi:nil="true" />
+                        <ObjectID xsi:nil="true" />
+                        <LocaleCode>en-GB</LocaleCode>
+                    </Locale>
+                    <TimeZone>
+                        <PartnerKey xsi:nil="true" />
+                        <ID>5</ID>
+                        <ObjectID xsi:nil="true" />
+                        <Name>(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna *</Name>
+                    </TimeZone>
                     <Roles>
                         <Role>
                             <Client>
@@ -67,21 +80,6 @@
                             <PartnerKey xsi:nil="true" />
                             <ObjectID>fdcfb80f-3550-e611-96fe-38eaa7142c61</ObjectID>
                             <Name>Distributed Sending User</Name>
-                            <AssignmentConfigurations>
-                                <AssignmentConfiguration>
-                                    <AccountUserId>717510285</AccountUserId>
-                                    <AssignmentConfigureType>RoleUser</AssignmentConfigureType>
-                                </AssignmentConfiguration>
-                            </AssignmentConfigurations>
-                        </Role>
-                        <Role>
-                            <Client>
-                                <ID>1111111</ID>
-                                <EnterpriseID>1111111</EnterpriseID>
-                            </Client>
-                            <PartnerKey xsi:nil="true" />
-                            <ObjectID>63a50610-315c-e111-beee-8e001800001f</ObjectID>
-                            <Name>Marketing Cloud Administrator</Name>
                             <AssignmentConfigurations>
                                 <AssignmentConfiguration>
                                     <AccountUserId>717510285</AccountUserId>
