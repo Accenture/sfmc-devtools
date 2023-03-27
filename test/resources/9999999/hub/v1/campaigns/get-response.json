@@ -1,0 +1,22 @@
+{
+    "count": 1,
+    "page": 1,
+    "pageSize": 100,
+    "links": {
+        "self": {
+            "href": "/v1/campaigns?$page=1&$pagesize=100"
+        }
+    },
+    "items": [
+        {
+            "createdDate": "2021-05-17T05:52:40",
+            "modifiedDate": "2021-05-17T05:52:52",
+            "id": "231",
+            "name": "testExisting_campaign",
+            "description": "Test Campaign",
+            "campaignCode": "TEST CAMPAIGN",
+            "color": "f6efb6",
+            "favorite": false
+        }
+    ]
+}

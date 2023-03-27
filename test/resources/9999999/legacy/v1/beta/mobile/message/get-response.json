@@ -7,7 +7,7 @@
             "id": "NTIzOjc4OjA",
             "lastUpdated": "2023-03-08T16:30:00Z",
             "type": "ExactTarget.Mobile.Sms.Core.Entities.SmsMessageEntity",
-            "name": "testExisting_SMS",
+            "name": "testExisting_mobileMessage",
             "text": "test message jb new",
             "origin": "SMS Send",
             "code": {

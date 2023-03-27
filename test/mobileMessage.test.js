@@ -1,8 +1,10 @@
 const chai = require('chai');
 const chaiFiles = require('chai-files');
-// const assert = chai.assert;
+const assert = chai.assert;
 chai.use(chaiFiles);
-// const cache = require('../lib/util/cache');
+const expect = chai.expect;
+const file = chaiFiles.file;
+const cache = require('../lib/util/cache');
 const testUtils = require('./utils');
 const handler = require('../lib/index');
 
@@ -20,22 +22,25 @@ describe('mobileMessage', () => {
             await handler.retrieve('testInstance/testBU', ['mobileMessage']);
             // THEN
             // get results from cache
-            // const result = cache.getCache();
-            // assert.equal(
-            //     result.mobileMessage ? Object.keys(result.mobileMessage).length : 0,
-            //     2,
-            //     'only 2 mobileMessages expected'
-            // );
-            // assert.deepEqual(
-            //     await testUtils.getActualJson('testExisting_mobileMessage', 'mobileMessage'),
-            //     await testUtils.getExpectedJson('9999999', 'mobileMessage', 'get'),
-            //     'returned JSON was not equal expected'
-            // );
-            // assert.equal(
-            //     testUtils.getAPIHistoryLength(),
-            //     9,
-            //     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            // );
+            const result = cache.getCache();
+            assert.equal(
+                result.mobileMessage ? Object.keys(result.mobileMessage).length : 0,
+                1,
+                'only 1 mobileMessages expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('NTIzOjc4OjA', 'mobileMessage'),
+                await testUtils.getExpectedJson('9999999', 'mobileMessage', 'get'),
+                'saved JSON was not equal expected'
+            );
+            expect(file(testUtils.getActualFile('NTIzOjc4OjA', 'mobileMessage', 'amp'))).to.equal(
+                file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'get', 'amp'))
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                4,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
             return;
         });
     });
