@@ -22,6 +22,7 @@ describe('query', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['query']);
             // THEN
+            assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -53,6 +54,7 @@ describe('query', () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['query']);
             // THEN
+            assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -98,6 +100,11 @@ describe('query', () => {
             );
             // WHEN
             assert.equal(
+                !!process.exitCode,
+                false,
+                'retrieveAsTemplate should not have thrown an error'
+            );
+            assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
                 1,
                 'only one query expected'
@@ -117,6 +124,12 @@ describe('query', () => {
                 'testExistingQuery',
                 'testTargetMarket'
             );
+            assert.equal(
+                !!process.exitCode,
+                false,
+                'buildDefinition should not have thrown an error'
+            );
+
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testExistingQuery', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'build'),
@@ -144,6 +157,12 @@ describe('query', () => {
             );
             // WHEN
             assert.equal(
+                !!process.exitCode,
+                false,
+                'buildTemplate should not have thrown an error'
+            );
+
+            assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
                 1,
                 'only one query expected'
@@ -163,6 +182,12 @@ describe('query', () => {
                 'testExistingQuery',
                 'testTargetMarket'
             );
+            assert.equal(
+                !!process.exitCode,
+                false,
+                'buildDefinition should not have thrown an error'
+            );
+
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testExistingQuery', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'build'),

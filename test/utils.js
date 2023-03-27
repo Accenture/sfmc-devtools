@@ -145,6 +145,9 @@ exports.mockSetup = (isDeploy) => {
         fsMockConf.deploy = fsmock.load(path.resolve(__dirname, 'mockRoot/deploy'));
     }
     fsmock(fsMockConf);
+
+    // ! reset exitCode or else tests could influence each other
+    process.exitCode = 0;
 };
 
 /**
