@@ -21,6 +21,7 @@ describe('mobileMessage', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['mobileMessage']);
             // THEN
+            assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -52,6 +53,7 @@ describe('mobileMessage', () => {
     //         // WHEN
     //         await handler.deploy('testInstance/testBU', ['mobileMessage']);
     //         // THEN
+    //         assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
     //         // get results from cache
     //         const result = cache.getCache();
     //         assert.equal(
@@ -94,6 +96,12 @@ describe('mobileMessage', () => {
     //             'testSourceMarket'
     //         );
     //         assert.equal(
+    //             !!process.exitCode,
+    //             false,
+    //             'buildTemplate should not have thrown an error'
+    //         );
+
+    //         assert.equal(
     //             result.mobileMessage ? Object.keys(result.mobileMessage).length : 0,
     //             1,
     //             'only one mobileMessage expected'
@@ -113,6 +121,11 @@ describe('mobileMessage', () => {
     //             'mobileMessage',
     //             'testExisting_mobileMessage',
     //             'testTargetMarket'
+    //         );
+    //         assert.equal(
+    //             !!process.exitCode,
+    //             false,
+    //             'buildDefinition should not have thrown an error'
     //         );
     //         assert.deepEqual(
     //             await testUtils.getActualDeployJson('testExisting_mobileMessage', 'mobileMessage'),
