@@ -1475,7 +1475,9 @@ Campaign MetadataType
 * [Campaign](#Campaign) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#Campaign.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache()](#Campaign.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.getAssetTags(retrieveDir, id, name)](#Campaign.getAssetTags) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.upgradeGetBulk()](#Campaign.upgradeGetBulk)
+    * [.getBulkForMobileApi(url, [pageSize], [iteratorField])](#Campaign.getBulkForMobileApi) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [.getAssetTags(retrieveDir, campaignId, name)](#Campaign.getAssetTags) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 
 <a name="Campaign.retrieve"></a>
 
@@ -1499,9 +1501,29 @@ Retrieves event definition metadata for caching
 
 **Kind**: static method of [<code>Campaign</code>](#Campaign)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+<a name="Campaign.upgradeGetBulk"></a>
+
+### Campaign.upgradeGetBulk()
+helper for [retrieve](#MobileMessage.retrieve) and [retrieveForCache](#MobileMessage.retrieveForCache)
+
+**Kind**: static method of [<code>Campaign</code>](#Campaign)  
+<a name="Campaign.getBulkForMobileApi"></a>
+
+### Campaign.getBulkForMobileApi(url, [pageSize], [iteratorField]) ⇒ <code>Promise.&lt;object&gt;</code>
+Method that makes paginated GET API Requests using $pageSize and $page parameters
+
+**Kind**: static method of [<code>Campaign</code>](#Campaign)  
+**Returns**: <code>Promise.&lt;object&gt;</code> - API response combined items  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| url | <code>string</code> | of the resource to retrieve |
+| [pageSize] | <code>number</code> | of the response, defaults to 50 |
+| [iteratorField] | <code>&#x27;items&#x27;</code> \| <code>&#x27;definitions&#x27;</code> \| <code>&#x27;entry&#x27;</code> | attribute of the response to iterate over |
+
 <a name="Campaign.getAssetTags"></a>
 
-### Campaign.getAssetTags(retrieveDir, id, name) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### Campaign.getAssetTags(retrieveDir, campaignId, name) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Parses campaign asset response body and returns metadata entries mapped to their id
 
 **Kind**: static method of [<code>Campaign</code>](#Campaign)  
@@ -1510,7 +1532,7 @@ Parses campaign asset response body and returns metadata entries mapped to their
 | Param | Type | Description |
 | --- | --- | --- |
 | retrieveDir | <code>string</code> | folder where to save |
-| id | <code>string</code> | of camapaign to retrieve |
+| campaignId | <code>string</code> | of camapaign to retrieve |
 | name | <code>string</code> | of camapaign for saving |
 
 <a name="ContentArea"></a>
@@ -4031,7 +4053,7 @@ MobileMessage MetadataType
 * [MobileMessage](#MobileMessage) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#MobileMessage.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> \| <code>void</code>
     * [.retrieveForCache()](#MobileMessage.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [._upgradeGetBulk()](#MobileMessage._upgradeGetBulk)
+    * [.upgradeGetBulk()](#MobileMessage.upgradeGetBulk)
     * [.getBulkForMobileApi(url, [pageSize], [iteratorField])](#MobileMessage.getBulkForMobileApi) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.update(metadata)](#MobileMessage.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#MobileMessage.create) ⇒ <code>Promise</code>
@@ -4068,9 +4090,9 @@ Retrieves event definition metadata for caching
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
-<a name="MobileMessage._upgradeGetBulk"></a>
+<a name="MobileMessage.upgradeGetBulk"></a>
 
-### MobileMessage.\_upgradeGetBulk()
+### MobileMessage.upgradeGetBulk()
 helper for [retrieve](#MobileMessage.retrieve) and [retrieveForCache](#MobileMessage.retrieveForCache)
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
@@ -4912,8 +4934,7 @@ TransactionalMessage MetadataType
 <a name="TransactionalMessage.retrieve"></a>
 
 ### TransactionalMessage.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves Metadata of Mobile Keywords
-Endpoint /legacy/v1/beta/mobile/code/ return all Mobile Codes with all details.
+Retrieves Metadata
 
 **Kind**: static method of [<code>TransactionalMessage</code>](#TransactionalMessage)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
