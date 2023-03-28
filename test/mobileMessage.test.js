@@ -90,61 +90,66 @@ describe('mobileMessage', () => {
             return;
         });
     });
-    // describe('Templating ================', () => {
-    //     it('Should create a mobileMessage template via buildTemplate and build it', async () => {
-    //         // download first before we test buildTemplate
-    //         await handler.retrieve('testInstance/testBU', ['mobileMessage']);
-    //         // buildTemplate
-    //         const result = await handler.buildTemplate(
-    //             'testInstance/testBU',
-    //             'mobileMessage',
-    //             ['testExisting_mobileMessage'],
-    //             'testSourceMarket'
-    //         );
-    //         assert.equal(
-    //             !!process.exitCode,
-    //             false,
-    //             'buildTemplate should not have thrown an error'
-    //         );
+    describe('Templating ================', () => {
+        it('Should create a mobileMessage template via buildTemplate and build it', async () => {
+            // download first before we test buildTemplate
+            await handler.retrieve('testInstance/testBU', ['mobileMessage']);
+            // buildTemplate
+            const result = await handler.buildTemplate(
+                'testInstance/testBU',
+                'mobileMessage',
+                ['NTIzOjc4OjA'],
+                'testSourceMarket'
+            );
+            assert.equal(
+                !!process.exitCode,
+                false,
+                'buildTemplate should not have thrown an error'
+            );
 
-    //         assert.equal(
-    //             result.mobileMessage ? Object.keys(result.mobileMessage).length : 0,
-    //             1,
-    //             'only one mobileMessage expected'
-    //         );
-    //         assert.deepEqual(
-    //             await testUtils.getActualTemplateJson(
-    //                 'testExisting_mobileMessage',
-    //                 'mobileMessage'
-    //             ),
-    //             await testUtils.getExpectedJson('9999999', 'mobileMessage', 'template'),
-    //             'returned template JSON was not equal expected'
-    //         );
+            assert.equal(
+                result.mobileMessage ? Object.keys(result.mobileMessage).length : 0,
+                1,
+                'only one mobileMessage expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualTemplateJson('NTIzOjc4OjA', 'mobileMessage'),
+                await testUtils.getExpectedJson('9999999', 'mobileMessage', 'template'),
+                'returned template JSON was not equal expected'
+            );
+            expect(
+                file(testUtils.getActualTemplateFile('NTIzOjc4OjA', 'mobileMessage', 'amp'))
+            ).to.equal(
+                file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'template', 'amp'))
+            );
 
-    //         // buildDefinition
-    //         await handler.buildDefinition(
-    //             'testInstance/testBU',
-    //             'mobileMessage',
-    //             'testExisting_mobileMessage',
-    //             'testTargetMarket'
-    //         );
-    //         assert.equal(
-    //             !!process.exitCode,
-    //             false,
-    //             'buildDefinition should not have thrown an error'
-    //         );
-    //         assert.deepEqual(
-    //             await testUtils.getActualDeployJson('testExisting_mobileMessage', 'mobileMessage'),
-    //             await testUtils.getExpectedJson('9999999', 'mobileMessage', 'build'),
-    //             'returned deployment JSON was not equal expected'
-    //         );
+            // buildDefinition
+            await handler.buildDefinition(
+                'testInstance/testBU',
+                'mobileMessage',
+                'NTIzOjc4OjA',
+                'testTargetMarket'
+            );
+            assert.equal(
+                !!process.exitCode,
+                false,
+                'buildDefinition should not have thrown an error'
+            );
+            assert.deepEqual(
+                await testUtils.getActualDeployJson('NTIzOjc4OjA', 'mobileMessage'),
+                await testUtils.getExpectedJson('9999999', 'mobileMessage', 'build'),
+                'returned deployment JSON was not equal expected'
+            );
+            expect(
+                file(testUtils.getActualDeployFile('NTIzOjc4OjA', 'mobileMessage', 'amp'))
+            ).to.equal(file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'build', 'amp')));
 
-    //         assert.equal(
-    //             testUtils.getAPIHistoryLength(),
-    //             9,
-    //             'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-    //         );
-    //         return;
-    //     });
-    // });
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                4,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
 });

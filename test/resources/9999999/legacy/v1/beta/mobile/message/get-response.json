@@ -8,7 +8,7 @@
             "lastUpdated": "2023-03-08T16:30:00Z",
             "type": "ExactTarget.Mobile.Sms.Core.Entities.SmsMessageEntity",
             "name": "testExisting_mobileMessage",
-            "text": "test message jb new",
+            "text": "test message jb secret",
             "origin": "SMS Send",
             "code": {
                 "id": "RXBwc0JoNk9jVTY0YWJNWFZDaGxvdzo4MTow",
@@ -59,7 +59,7 @@
             },
             "status": "Active/Scheduled",
             "invalidMessage": "",
-            "responseMessage": "",
+            "responseMessage": "bla bla",
             "publishedMessage": "Text '<keyword>'  to 4912312345678.",
             "nextJob": {
                 "id": "MjY3Ojc5OjA",

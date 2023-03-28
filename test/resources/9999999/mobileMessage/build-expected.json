@@ -1,6 +1,5 @@
 {
     "id": "NTIzOjc4OjA",
-    "lastUpdated": "2023-03-08T16:30:00Z",
     "type": "ExactTarget.Mobile.Sms.Core.Entities.SmsMessageEntity",
     "name": "testExisting_mobileMessage",
     "origin": "SMS Send",
@@ -16,7 +15,7 @@
     },
     "status": "Active/Scheduled",
     "invalidMessage": "",
-    "responseMessage": "bla bla",
+    "responseMessage": "foobar",
     "publishedMessage": "Text '<keyword>'  to 4912312345678.",
     "isTest": false,
     "moTimezone": {
