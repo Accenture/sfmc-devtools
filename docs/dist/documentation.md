@@ -1511,6 +1511,7 @@ helper for [retrieve](#MobileMessage.retrieve) and [retrieveForCache](#MobileMes
 
 ### Campaign.getBulkForLegacyApi(url, [pageSize], [iteratorField]) ⇒ <code>Promise.&lt;object&gt;</code>
 Method that makes paginated GET API Requests using $pageSize and $page parameters
+TODO: remove before release in favor of upgrading SFMC-SDK
 
 **Kind**: static method of [<code>Campaign</code>](#Campaign)  
 **Returns**: <code>Promise.&lt;object&gt;</code> - API response combined items  
@@ -4100,6 +4101,7 @@ helper for [retrieve](#MobileMessage.retrieve) and [retrieveForCache](#MobileMes
 
 ### MobileMessage.getBulkForLegacyApi(url, [pageSize], [iteratorField]) ⇒ <code>Promise.&lt;object&gt;</code>
 Method that makes paginated GET API Requests using $pageSize and $page parameters
+TODO: remove before release in favor of upgrading SFMC-SDK
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
 **Returns**: <code>Promise.&lt;object&gt;</code> - API response combined items  
