@@ -45,45 +45,51 @@ describe('mobileMessage', () => {
             return;
         });
     });
-    // describe('Deploy ================', () => {
-    //     beforeEach(() => {
-    //         testUtils.mockSetup(true);
-    //     });
-    //     it('Should create & upsert a mobileMessage', async () => {
-    //         // WHEN
-    //         await handler.deploy('testInstance/testBU', ['mobileMessage']);
-    //         // THEN
-    //         assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
-    //         // get results from cache
-    //         const result = cache.getCache();
-    //         assert.equal(
-    //             result.mobileMessage ? Object.keys(result.mobileMessage).length : 0,
-    //             3,
-    //             '3 mobileMessages expected'
-    //         );
-    //         // confirm created item
-    //         assert.deepEqual(
-    //             await testUtils.getActualJson('testNew_mobileMessage', 'mobileMessage'),
-    //             await testUtils.getExpectedJson('9999999', 'mobileMessage', 'post'),
-    //             'returned JSON was not equal expected for insert mobileMessage'
-    //         );
+    describe('Deploy ================', () => {
+        beforeEach(() => {
+            testUtils.mockSetup(true);
+        });
+        it('Should create & upsert a mobileMessage', async () => {
+            // WHEN
+            await handler.deploy('testInstance/testBU', ['mobileMessage']);
+            // THEN
+            assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.mobileMessage ? Object.keys(result.mobileMessage).length : 0,
+                2,
+                '2 mobileMessages expected'
+            );
+            // confirm created item
+            assert.deepEqual(
+                await testUtils.getActualJson('NTQ3Ojc4OjA', 'mobileMessage'),
+                await testUtils.getExpectedJson('9999999', 'mobileMessage', 'post-create'),
+                'returned JSON was not equal expected for insert mobileMessage'
+            );
+            expect(file(testUtils.getActualFile('NTQ3Ojc4OjA', 'mobileMessage', 'amp'))).to.equal(
+                file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'post-create', 'amp'))
+            );
 
-    //         // confirm updated item
-    //         assert.deepEqual(
-    //             await testUtils.getActualJson('testExisting_mobileMessage', 'mobileMessage'),
-    //             await testUtils.getExpectedJson('9999999', 'mobileMessage', 'put'), // watch out - mobileMessage api wants put instead of patch for updates
-    //             'returned JSON was not equal expected for update mobileMessage'
-    //         );
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson('NTIzOjc4OjA', 'mobileMessage'),
+                await testUtils.getExpectedJson('9999999', 'mobileMessage', 'post-update'), // watch out - mobileMessage api wants put instead of patch for updates
+                'returned JSON was not equal expected for update mobileMessage'
+            );
+            expect(file(testUtils.getActualFile('NTIzOjc4OjA', 'mobileMessage', 'amp'))).to.equal(
+                file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'post-update', 'amp'))
+            );
 
-    //         // check number of API calls
-    //         assert.equal(
-    //             testUtils.getAPIHistoryLength(),
-    //             7,
-    //             'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-    //         );
-    //         return;
-    //     });
-    // });
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                7,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
     // describe('Templating ================', () => {
     //     it('Should create a mobileMessage template via buildTemplate and build it', async () => {
     //         // download first before we test buildTemplate
