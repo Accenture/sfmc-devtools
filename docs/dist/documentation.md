@@ -1476,7 +1476,7 @@ Campaign MetadataType
     * [.retrieve(retrieveDir, [_], [__], [key])](#Campaign.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache()](#Campaign.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.upgradeGetBulk()](#Campaign.upgradeGetBulk)
-    * [.getBulkForMobileApi(url, [pageSize], [iteratorField])](#Campaign.getBulkForMobileApi) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [.getBulkForLegacyApi(url, [pageSize], [iteratorField])](#Campaign.getBulkForLegacyApi) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.getAssetTags(retrieveDir, campaignId, name)](#Campaign.getAssetTags) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 
 <a name="Campaign.retrieve"></a>
@@ -1507,9 +1507,9 @@ Retrieves event definition metadata for caching
 helper for [retrieve](#MobileMessage.retrieve) and [retrieveForCache](#MobileMessage.retrieveForCache)
 
 **Kind**: static method of [<code>Campaign</code>](#Campaign)  
-<a name="Campaign.getBulkForMobileApi"></a>
+<a name="Campaign.getBulkForLegacyApi"></a>
 
-### Campaign.getBulkForMobileApi(url, [pageSize], [iteratorField]) ⇒ <code>Promise.&lt;object&gt;</code>
+### Campaign.getBulkForLegacyApi(url, [pageSize], [iteratorField]) ⇒ <code>Promise.&lt;object&gt;</code>
 Method that makes paginated GET API Requests using $pageSize and $page parameters
 
 **Kind**: static method of [<code>Campaign</code>](#Campaign)  
@@ -4054,7 +4054,7 @@ MobileMessage MetadataType
     * [.retrieve(retrieveDir, [_], [__], [key])](#MobileMessage.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> \| <code>void</code>
     * [.retrieveForCache()](#MobileMessage.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.upgradeGetBulk()](#MobileMessage.upgradeGetBulk)
-    * [.getBulkForMobileApi(url, [pageSize], [iteratorField])](#MobileMessage.getBulkForMobileApi) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [.getBulkForLegacyApi(url, [pageSize], [iteratorField])](#MobileMessage.getBulkForLegacyApi) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.update(metadata)](#MobileMessage.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#MobileMessage.create) ⇒ <code>Promise</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#MobileMessage._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
@@ -4096,9 +4096,9 @@ Retrieves event definition metadata for caching
 helper for [retrieve](#MobileMessage.retrieve) and [retrieveForCache](#MobileMessage.retrieveForCache)
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
-<a name="MobileMessage.getBulkForMobileApi"></a>
+<a name="MobileMessage.getBulkForLegacyApi"></a>
 
-### MobileMessage.getBulkForMobileApi(url, [pageSize], [iteratorField]) ⇒ <code>Promise.&lt;object&gt;</code>
+### MobileMessage.getBulkForLegacyApi(url, [pageSize], [iteratorField]) ⇒ <code>Promise.&lt;object&gt;</code>
 Method that makes paginated GET API Requests using $pageSize and $page parameters
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
