@@ -1,0 +1,106 @@
+{
+    "id": "NTIzOjc4OjA",
+    "lastUpdated": "2023-03-08T16:30:00Z",
+    "type": "ExactTarget.Mobile.Sms.Core.Entities.SmsMessageEntity",
+    "name": "testExisting_mobileMessage",
+    "text": "test message jb new",
+    "origin": "SMS Send",
+    "code": {
+        "id": "RXBwc0JoNk9jVTY0YWJNWFZDaGxvdzo4MTow",
+        "code": "4912312345678",
+        "codeType": "PRIVATE",
+        "isShortCode": false,
+        "isGsmCharacterSetOnly": false,
+        "isMms": false,
+        "isStackIndependant": false,
+        "dipSwitches": 0,
+        "moEngineVersion": 0,
+        "sendableCountries": [{ "countryCode": "HK", "vendor": "CLX", "fromNameSupported": true }],
+        "supportsConcatenation": true,
+        "isClientOwned": false,
+        "isOwner": false
+    },
+    "campaigns": [
+        {
+            "id": "MjMxOjQ2OjA",
+            "name": "testExisting_campaign",
+            "display": {
+                "name": "color",
+                "value": "f6efb6"
+            }
+        }
+    ],
+
+    "mtSendDate": "2020-07-16T22:46:00Z",
+    "template": {
+        "id": "Mzo4MDow",
+        "name": "Outbound"
+    },
+    "status": "Active/Scheduled",
+    "invalidMessage": "",
+    "responseMessage": "",
+    "publishedMessage": "Text '<keyword>'  to 4912312345678.",
+    "nextJob": {
+        "id": "MjY3Ojc5OjA",
+        "type": "ExactTarget.Mobile.Sms.Core.Entities.SmsJobEntity",
+        "isTest": false,
+        "sendDate": "2020-07-16T22:46:00Z"
+    },
+    "isTest": false,
+    "currentEditStep": 13,
+    "moTimezone": {
+        "offset": 1,
+        "name": "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna *"
+    },
+    "optinType": "NO_OPTIN",
+    "doubleOptinInitialMessage": "",
+    "doubleOptinConfirmMessage": "",
+    "optinMinimumAge": 0,
+    "optinInvalidAgeMessage": "",
+    "numberMessagesPerPeriod": 0,
+    "periodType": "NO_PERIOD",
+    "optinErrorMessage": "",
+    "triggeredSendId": "00000000-0000-0000-0000-000000000000",
+    "isDuplicationAllowed": true,
+    "triggeredSendName": "DEV_InformUserAboutProposal - 267",
+    "isTimeZoneBased": false,
+    "surveyType": "NO_SURVEY",
+    "surveyCorrectResponseMessage": "",
+    "surveyTooManyEntriesMessage": "",
+    "isExpireSet": false,
+    "expireHours": 0,
+    "surveyIncorrectResponseMessage": "",
+    "statistics": {
+        "outbound": {
+            "sent": 45,
+            "delivered": 33,
+            "undelivered": 0,
+            "unknown": 0
+        }
+    },
+    "statusId": 2,
+    "doubleOptinValidResponses": "y|yes",
+    "messagesPerPeriod": 0,
+    "minutesPerPeriod": 0,
+    "subscriberResponseMessage": "",
+    "isSubscriberResponseToAnySubscriptionForShortCode": false,
+    "sendMethod": "API",
+    "messageObjectId": "MzN3MUV5YVpmRVMtV1R1UXJUR3NzUTo2MjU6MA",
+    "allowSingleOptin": false,
+    "isSentImmediately": true,
+    "nextKeyword": {
+        "id": "cTVJaG5oSDJPVUNHcUh6Z3pQT2tVdzo4Njow",
+        "keyword": "testExisting_keyword",
+        "restriction": "NONE",
+        "isInherited": false
+    },
+    "isSuppressMt": false,
+    "smsTriggeredSendDefinitionId": "39d0e022-b6c7-ea11-a2e9-1402ec938719",
+    "fromName": "4912312345678",
+    "concatenateMessage": true,
+    "isFromNameCertificationAccepted": false,
+    "isCertified": false,
+    "outboundSendTypeFlag": "Audience",
+    "programId": "00000000-0000-0000-0000-000000000000",
+    "outboundSendBehaviorFlag": "AutoAddSubscribers"
+}

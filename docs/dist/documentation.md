@@ -90,6 +90,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#MobileKeyword">MobileKeyword</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>MobileKeyword MetadataType</p>
 </dd>
+<dt><a href="#MobileMessage">MobileMessage</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>MobileMessage MetadataType</p>
+</dd>
 <dt><a href="#Query">Query</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>Query MetadataType</p>
 </dd>
@@ -1471,7 +1474,10 @@ Campaign MetadataType
 
 * [Campaign](#Campaign) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#Campaign.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.getAssetTags(retrieveDir, id, name)](#Campaign.getAssetTags) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache()](#Campaign.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.upgradeGetBulk()](#Campaign.upgradeGetBulk)
+    * [.getBulkForLegacyApi(url, [pageSize], [iteratorField])](#Campaign.getBulkForLegacyApi) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [.getAssetTags(retrieveDir, campaignId, name)](#Campaign.getAssetTags) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 
 <a name="Campaign.retrieve"></a>
 
@@ -1488,9 +1494,37 @@ Retrieves Metadata of campaigns. Afterwards, starts metadata retrieval for their
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
+<a name="Campaign.retrieveForCache"></a>
+
+### Campaign.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves event definition metadata for caching
+
+**Kind**: static method of [<code>Campaign</code>](#Campaign)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+<a name="Campaign.upgradeGetBulk"></a>
+
+### Campaign.upgradeGetBulk()
+helper for [retrieve](#MobileMessage.retrieve) and [retrieveForCache](#MobileMessage.retrieveForCache)
+
+**Kind**: static method of [<code>Campaign</code>](#Campaign)  
+<a name="Campaign.getBulkForLegacyApi"></a>
+
+### Campaign.getBulkForLegacyApi(url, [pageSize], [iteratorField]) ⇒ <code>Promise.&lt;object&gt;</code>
+Method that makes paginated GET API Requests using $pageSize and $page parameters
+TODO: remove before release in favor of upgrading SFMC-SDK
+
+**Kind**: static method of [<code>Campaign</code>](#Campaign)  
+**Returns**: <code>Promise.&lt;object&gt;</code> - API response combined items  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| url | <code>string</code> | of the resource to retrieve |
+| [pageSize] | <code>number</code> | of the response, defaults to 50 |
+| [iteratorField] | <code>&#x27;items&#x27;</code> \| <code>&#x27;definitions&#x27;</code> \| <code>&#x27;entry&#x27;</code> | attribute of the response to iterate over |
+
 <a name="Campaign.getAssetTags"></a>
 
-### Campaign.getAssetTags(retrieveDir, id, name) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### Campaign.getAssetTags(retrieveDir, campaignId, name) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Parses campaign asset response body and returns metadata entries mapped to their id
 
 **Kind**: static method of [<code>Campaign</code>](#Campaign)  
@@ -1499,7 +1533,7 @@ Parses campaign asset response body and returns metadata entries mapped to their
 | Param | Type | Description |
 | --- | --- | --- |
 | retrieveDir | <code>string</code> | folder where to save |
-| id | <code>string</code> | of camapaign to retrieve |
+| campaignId | <code>string</code> | of camapaign to retrieve |
 | name | <code>string</code> | of camapaign for saving |
 
 <a name="ContentArea"></a>
@@ -2997,11 +3031,11 @@ manages post retrieve steps
 ! BETA RELEASE of journey support (v4.3.0); it so far only resolves a limited amount of dependencies and will likely break during cross-BU deployments!
 
 **Kind**: static method of [<code>Interaction</code>](#Interaction)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one query string  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
 <a name="Interaction.preDeployTasks"></a>
 
@@ -3119,7 +3153,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType.getJsonFromFS) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.getFieldNamesToRetrieve([additionalFields], [isCaching])](#MetadataType.getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
     * [.deploy(metadata, deployDir, retrieveDir, [isRefresh])](#MetadataType.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
-    * [.postDeployTasks(metadata, originalMetadata, createdUpdated, [isRefresh])](#MetadataType.postDeployTasks) ⇒ <code>void</code>
+    * [.postDeployTasks(upsertResults, originalMetadata, createdUpdated, [isRefresh])](#MetadataType.postDeployTasks) ⇒ <code>void</code>
+    * [.postCreateTasks(metadataEntry, apiResponse)](#MetadataType.postCreateTasks) ⇒ <code>void</code>
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setFolderPath(metadata)](#MetadataType.setFolderPath)
     * [.setFolderId(metadata)](#MetadataType.setFolderId)
@@ -3138,7 +3173,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MetadataType.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
     * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [.createSOAP(metadataEntry, [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
-    * [.updateREST(metadataEntry, uri, [usePut])](#MetadataType.updateREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
+    * [.updateREST(metadataEntry, uri, [httpMethod])](#MetadataType.updateREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [.updateSOAP(metadataEntry, [handleOutside])](#MetadataType.updateSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [._handleSOAPErrors(ex, msg, [metadataEntry], [handleOutside])](#MetadataType._handleSOAPErrors)
     * [.getSOAPErrorMsg(ex)](#MetadataType.getSOAPErrorMsg) ⇒ <code>string</code>
@@ -3228,17 +3263,29 @@ Deploys metadata
 
 <a name="MetadataType.postDeployTasks"></a>
 
-### MetadataType.postDeployTasks(metadata, originalMetadata, createdUpdated, [isRefresh]) ⇒ <code>void</code>
+### MetadataType.postDeployTasks(upsertResults, originalMetadata, createdUpdated, [isRefresh]) ⇒ <code>void</code>
 Gets executed after deployment of metadata type
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
+| upsertResults | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField as returned by update/create |
 | originalMetadata | <code>TYPE.MetadataTypeMap</code> | metadata to be updated (contains additioanl fields) |
 | createdUpdated | <code>Object</code> | counter representing successful creates/updates |
 | [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
+
+<a name="MetadataType.postCreateTasks"></a>
+
+### MetadataType.postCreateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
+helper for [createREST](createREST)
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
+| apiResponse | <code>object</code> | varies depending on the API call |
 
 <a name="MetadataType.postRetrieveTasks"></a>
 
@@ -3477,17 +3524,17 @@ Creates a single metadata entry via fuel-soap (generic lib not wrapper)
 
 <a name="MetadataType.updateREST"></a>
 
-### MetadataType.updateREST(metadataEntry, uri, [usePut]) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
+### MetadataType.updateREST(metadataEntry, uri, [httpMethod]) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
 Updates a single metadata entry via REST
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>Promise.&lt;object&gt;</code> \| <code>null</code> - Promise of API response or null in case of an error  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
-| uri | <code>string</code> | rest endpoint for PATCH |
-| [usePut] | <code>boolean</code> | some update requests require PUT instead of PATCH |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> |  | a single metadata Entry |
+| uri | <code>string</code> |  | rest endpoint for PATCH |
+| [httpMethod] | <code>&#x27;patch&#x27;</code> \| <code>&#x27;post&#x27;</code> \| <code>&#x27;put&#x27;</code> | <code>&#x27;patch&#x27;</code> | defaults to 'patch'; some update requests require PUT instead of PATCH |
 
 <a name="MetadataType.updateSOAP"></a>
 
@@ -4122,6 +4169,243 @@ additionally, the documentation for dataExtension and automation should be retur
 | Param | Type | Description |
 | --- | --- | --- |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="MobileMessage"></a>
+
+## MobileMessage ⇐ [<code>MetadataType</code>](#MetadataType)
+MobileMessage MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [MobileMessage](#MobileMessage) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [key])](#MobileMessage.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> \| <code>void</code>
+    * [.retrieveForCache()](#MobileMessage.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.upgradeGetBulk()](#MobileMessage.upgradeGetBulk)
+    * [.getBulkForLegacyApi(url, [pageSize], [iteratorField])](#MobileMessage.getBulkForLegacyApi) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [.update(metadata)](#MobileMessage.update) ⇒ <code>Promise</code>
+    * [.create(metadata)](#MobileMessage.create) ⇒ <code>Promise</code>
+    * [._mergeCode(metadata, deployDir, [templateName])](#MobileMessage._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
+    * [.prepExtractedCode(code)](#MobileMessage.prepExtractedCode) ⇒ <code>Object</code>
+    * [.getFilesToCommit(keyArr)](#MobileMessage.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.postRetrieveTasks(metadata)](#MobileMessage.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
+    * [.preDeployTasks(metadata, deployDir)](#MobileMessage.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.postCreateTasks(metadataEntry, apiResponse)](#MobileMessage.postCreateTasks) ⇒ <code>void</code>
+    * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MobileMessage.buildDefinitionForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MobileMessage.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#MobileMessage._buildForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [.deleteByKey(key)](#MobileMessage.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+
+<a name="MobileMessage.retrieve"></a>
+
+### MobileMessage.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> \| <code>void</code>
+Retrieves Metadata of Mobile Keywords
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> \| <code>void</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [_] | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="MobileMessage.retrieveForCache"></a>
+
+### MobileMessage.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves event definition metadata for caching
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+<a name="MobileMessage.upgradeGetBulk"></a>
+
+### MobileMessage.upgradeGetBulk()
+helper for [retrieve](#MobileMessage.retrieve) and [retrieveForCache](#MobileMessage.retrieveForCache)
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+<a name="MobileMessage.getBulkForLegacyApi"></a>
+
+### MobileMessage.getBulkForLegacyApi(url, [pageSize], [iteratorField]) ⇒ <code>Promise.&lt;object&gt;</code>
+Method that makes paginated GET API Requests using $pageSize and $page parameters
+TODO: remove before release in favor of upgrading SFMC-SDK
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Promise.&lt;object&gt;</code> - API response combined items  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| url | <code>string</code> | of the resource to retrieve |
+| [pageSize] | <code>number</code> | of the response, defaults to 50 |
+| [iteratorField] | <code>&#x27;items&#x27;</code> \| <code>&#x27;definitions&#x27;</code> \| <code>&#x27;entry&#x27;</code> | attribute of the response to iterate over |
+
+<a name="MobileMessage.update"></a>
+
+### MobileMessage.update(metadata) ⇒ <code>Promise</code>
+Updates a single item
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="MobileMessage.create"></a>
+
+### MobileMessage.create(metadata) ⇒ <code>Promise</code>
+Creates a single item
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="MobileMessage._mergeCode"></a>
+
+### MobileMessage.\_mergeCode(metadata, deployDir, [templateName]) ⇒ <code>Promise.&lt;string&gt;</code>
+helper for [preDeployTasks](preDeployTasks) that loads extracted code content back into JSON
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Promise.&lt;string&gt;</code> - code  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single definition |
+| deployDir | <code>string</code> | directory of deploy files |
+| [templateName] | <code>string</code> | name of the template used to built defintion (prior applying templating) |
+
+<a name="MobileMessage.prepExtractedCode"></a>
+
+### MobileMessage.prepExtractedCode(code) ⇒ <code>Object</code>
+helper for [parseMetadata](parseMetadata) and [_buildForNested](_buildForNested)
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Object</code> - returns found extension and file content  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| code | <code>string</code> | the code of the file |
+
+<a name="MobileMessage.getFilesToCommit"></a>
+
+### MobileMessage.getFilesToCommit(keyArr) ⇒ <code>Array.&lt;string&gt;</code>
+should return only the json for all but asset, query and script that are saved as multiple files
+additionally, the documentation for dataExtension and automation should be returned
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of all files that need to be committed in a flat array ['path/file1.ext', 'path/file2.ext']  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="MobileMessage.postRetrieveTasks"></a>
+
+### MobileMessage.postRetrieveTasks(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>TYPE.CodeExtractItem</code> - Array with one metadata object and one query string  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
+
+<a name="MobileMessage.preDeployTasks"></a>
+
+### MobileMessage.preDeployTasks(metadata, deployDir) ⇒ <code>TYPE.MetadataTypeItem</code>
+prepares an event definition for deployment
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single MobileMessage |
+| deployDir | <code>string</code> | directory of deploy files |
+
+<a name="MobileMessage.postCreateTasks"></a>
+
+### MobileMessage.postCreateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
+helper for [createREST](createREST)
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
+| apiResponse | <code>object</code> | varies depending on the API call |
+
+<a name="MobileMessage.buildDefinitionForNested"></a>
+
+### MobileMessage.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+helper for [buildDefinition](#MetadataType.buildDefinition)
+handles extracted code if any are found for complex types
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code> - list of extracted files with path-parts provided as an array  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> \| <code>Array.&lt;string&gt;</code> | (List of) Directory where built definitions will be saved |
+| metadata | <code>TYPE.MetadataTypeItem</code> | main JSON file that was read from file system |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateName | <code>string</code> | name of the template to be built |
+
+<a name="MobileMessage.buildTemplateForNested"></a>
+
+### MobileMessage.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+helper for [buildTemplate](#MetadataType.buildTemplate)
+handles extracted code if any are found for complex types
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code> - list of extracted files with path-parts provided as an array  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> \| <code>Array.&lt;string&gt;</code> | (List of) Directory where built definitions will be saved |
+| metadata | <code>TYPE.MetadataTypeItem</code> | main JSON file that was read from file system |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateName | <code>string</code> | name of the template to be built |
+
+**Example**  
+```js
+scripts are saved as 1 json and 1 ssjs file. both files need to be run through templating
+```
+<a name="MobileMessage._buildForNested"></a>
+
+### MobileMessage.\_buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+helper for [buildTemplateForNested](buildTemplateForNested) / [buildDefinitionForNested](buildDefinitionForNested)
+handles extracted code if any are found for complex types
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code> - list of extracted files with path-parts provided as an array  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where metadata templates are stored |
+| targetDir | <code>string</code> \| <code>Array.&lt;string&gt;</code> | (List of) Directory where built definitions will be saved |
+| metadata | <code>TYPE.MetadataTypeItem</code> | main JSON file that was read from file system |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| templateName | <code>string</code> | name of the template to be built |
+| mode | <code>&#x27;definition&#x27;</code> \| <code>&#x27;template&#x27;</code> | defines what we use this helper for |
+
+<a name="MobileMessage.deleteByKey"></a>
+
+### MobileMessage.deleteByKey(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| key | <code>string</code> | Identifier of item |
 
 <a name="Query"></a>
 
@@ -4779,8 +5063,7 @@ TransactionalMessage MetadataType
 <a name="TransactionalMessage.retrieve"></a>
 
 ### TransactionalMessage.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves Metadata of Mobile Keywords
-Endpoint /legacy/v1/beta/mobile/code/ return all Mobile Codes with all details.
+Retrieves Metadata
 
 **Kind**: static method of [<code>TransactionalMessage</code>](#TransactionalMessage)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
