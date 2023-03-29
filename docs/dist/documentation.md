@@ -3980,6 +3980,7 @@ MobileKeyword MetadataType
     * [.retrieveForCache()](#MobileKeyword.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#MobileKeyword.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.create(MobileKeyword)](#MobileKeyword.create) ⇒ <code>Promise</code>
+    * [.update(metadata)](#MobileKeyword.update) ⇒ <code>Promise</code>
     * [.postRetrieveTasks(metadata)](#MobileKeyword.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code> \| <code>TYPE.MetadataTypeItem</code>
     * [.prepExtractedCode(metadataScript)](#MobileKeyword.prepExtractedCode) ⇒ <code>Object</code>
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MobileKeyword.buildDefinitionForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
@@ -3987,6 +3988,7 @@ MobileKeyword MetadataType
     * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#MobileKeyword._buildForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.preDeployTasks(metadata, deployDir)](#MobileKeyword.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#MobileKeyword._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
+    * [.deleteByKey(key)](#MobileKeyword.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postDeleteTasks(customerKey)](#MobileKeyword.postDeleteTasks) ⇒ <code>void</code>
     * [.getFilesToCommit(keyArr)](#MobileKeyword.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
 
@@ -4038,6 +4040,18 @@ Creates a single Event Definition
 | Param | Type | Description |
 | --- | --- | --- |
 | MobileKeyword | <code>TYPE.MetadataTypeItem</code> | a single Event Definition |
+
+<a name="MobileKeyword.update"></a>
+
+### MobileKeyword.update(metadata) ⇒ <code>Promise</code>
+Updates a single item
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
 <a name="MobileKeyword.postRetrieveTasks"></a>
 
@@ -4145,6 +4159,18 @@ helper for [preDeployTasks](preDeployTasks) that loads extracted code content ba
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single definition |
 | deployDir | <code>string</code> | directory of deploy files |
 | [templateName] | <code>string</code> | name of the template used to built defintion (prior applying templating) |
+
+<a name="MobileKeyword.deleteByKey"></a>
+
+### MobileKeyword.deleteByKey(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| key | <code>string</code> | Identifier of item |
 
 <a name="MobileKeyword.postDeleteTasks"></a>
 
