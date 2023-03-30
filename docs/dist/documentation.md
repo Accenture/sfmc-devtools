@@ -3977,7 +3977,7 @@ MobileKeyword MetadataType
 
 * [MobileKeyword](#MobileKeyword) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#MobileKeyword.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache()](#MobileKeyword.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache([key])](#MobileKeyword.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#MobileKeyword.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.create(MobileKeyword)](#MobileKeyword.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#MobileKeyword.update) ⇒ <code>Promise</code>
@@ -4010,11 +4010,16 @@ Endpoint /legacy/v1/beta/mobile/keyword/ return all Mobile Keywords with all det
 
 <a name="MobileKeyword.retrieveForCache"></a>
 
-### MobileKeyword.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MobileKeyword.retrieveForCache([key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves event definition metadata for caching
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
 <a name="MobileKeyword.retrieveAsTemplate"></a>
 
 ### MobileKeyword.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
@@ -4220,7 +4225,7 @@ MobileMessage MetadataType
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MobileMessage.buildDefinitionForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MobileMessage.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#MobileMessage._buildForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-    * [.deleteByKey(key)](#MobileMessage.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deleteByKey(id)](#MobileMessage.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="MobileMessage.retrieve"></a>
 
@@ -4423,15 +4428,16 @@ handles extracted code if any are found for complex types
 
 <a name="MobileMessage.deleteByKey"></a>
 
-### MobileMessage.deleteByKey(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### MobileMessage.deleteByKey(id) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
+! the endpoint expects the ID and not a key but for mcdev in this case key==id
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| key | <code>string</code> | Identifier of item |
+| id | <code>string</code> | Identifier of item |
 
 <a name="Query"></a>
 
