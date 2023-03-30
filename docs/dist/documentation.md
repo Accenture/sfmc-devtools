@@ -3155,12 +3155,13 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.deploy(metadata, deployDir, retrieveDir, [isRefresh])](#MetadataType.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.postDeployTasks(upsertResults, originalMetadata, createdUpdated, [isRefresh])](#MetadataType.postDeployTasks) ⇒ <code>void</code>
     * [.postCreateTasks(metadataEntry, apiResponse)](#MetadataType.postCreateTasks) ⇒ <code>void</code>
+    * [.postCreateTasks_legacyApi(metadataEntry, apiResponse)](#MetadataType.postCreateTasks_legacyApi) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setFolderPath(metadata)](#MetadataType.setFolderPath)
     * [.setFolderId(metadata)](#MetadataType.setFolderId)
     * [.retrieve(retrieveDir, [additionalFields], [subTypeArr], [key])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveChangelog([additionalFields], [subTypeArr])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache([additionalFields], [subTypeArr])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache([additionalFields], [subTypeArr], [key])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.buildTemplate(retrieveDir, templateDir, key, templateVariables)](#MetadataType.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.preDeployTasks(metadata, deployDir)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
@@ -3287,6 +3288,19 @@ helper for [createREST](createREST)
 | metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
 | apiResponse | <code>object</code> | varies depending on the API call |
 
+<a name="MetadataType.postCreateTasks_legacyApi"></a>
+
+### MetadataType.postCreateTasks\_legacyApi(metadataEntry, apiResponse) ⇒ <code>Promise.&lt;void&gt;</code>
+helper for [createREST](createREST) when legacy API endpoints as these do not return the created item but only their new id
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
+| apiResponse | <code>object</code> | varies depending on the API call |
+
 <a name="MetadataType.postRetrieveTasks"></a>
 
 ### MetadataType.postRetrieveTasks(metadata, targetDir, [isTemplating]) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -3353,7 +3367,7 @@ Gets metadata from Marketing Cloud
 
 <a name="MetadataType.retrieveForCache"></a>
 
-### MetadataType.retrieveForCache([additionalFields], [subTypeArr]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MetadataType.retrieveForCache([additionalFields], [subTypeArr], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3363,6 +3377,7 @@ Gets metadata cache with limited fields and does not store value to disk
 | --- | --- | --- |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | [subTypeArr] | <code>Array.&lt;string&gt;</code> | optionally limit to a single subtype |
+| [key] | <code>string</code> | customer key of single item to retrieve |
 
 <a name="MetadataType.retrieveAsTemplate"></a>
 
@@ -4053,7 +4068,7 @@ MobileMessage MetadataType
 
 * [MobileMessage](#MobileMessage) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#MobileMessage.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> \| <code>void</code>
-    * [.retrieveForCache()](#MobileMessage.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache(_, __, [key])](#MobileMessage.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.upgradeGetBulk()](#MobileMessage.upgradeGetBulk)
     * [.getBulkForLegacyApi(url, [pageSize], [iteratorField])](#MobileMessage.getBulkForLegacyApi) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.update(metadata)](#MobileMessage.update) ⇒ <code>Promise</code>
@@ -4067,7 +4082,7 @@ MobileMessage MetadataType
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MobileMessage.buildDefinitionForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MobileMessage.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#MobileMessage._buildForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-    * [.deleteByKey(key)](#MobileMessage.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deleteByKey(id)](#MobileMessage.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="MobileMessage.retrieve"></a>
 
@@ -4086,11 +4101,18 @@ Retrieves Metadata of Mobile Keywords
 
 <a name="MobileMessage.retrieveForCache"></a>
 
-### MobileMessage.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MobileMessage.retrieveForCache(_, __, [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves event definition metadata for caching
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| _ | <code>void</code> | parameter not used |
+| __ | <code>void</code> | parameter not used |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
 <a name="MobileMessage.upgradeGetBulk"></a>
 
 ### MobileMessage.upgradeGetBulk()
@@ -4270,15 +4292,16 @@ handles extracted code if any are found for complex types
 
 <a name="MobileMessage.deleteByKey"></a>
 
-### MobileMessage.deleteByKey(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### MobileMessage.deleteByKey(id) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
+! the endpoint expects the ID and not a key but for mcdev in this case key==id
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| key | <code>string</code> | Identifier of item |
+| id | <code>string</code> | Identifier of item |
 
 <a name="Query"></a>
 
