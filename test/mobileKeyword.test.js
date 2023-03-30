@@ -45,51 +45,49 @@ describe('mobileKeyword', () => {
             return;
         });
     });
-    // describe('Deploy ================', () => {
-    //     beforeEach(() => {
-    //         testUtils.mockSetup(true);
-    //     });
-    //     it('Should create & upsert a mobileKeyword', async () => {
-    //         // WHEN
-    //         await handler.deploy('testInstance/testBU', ['mobileKeyword']);
-    //         // THEN
-    //         assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
-    //         // get results from cache
-    //         const result = cache.getCache();
-    //         assert.equal(
-    //             result.mobileKeyword ? Object.keys(result.mobileKeyword).length : 0,
-    //             2,
-    //             '2 mobileKeywords expected'
-    //         );
-    //         // confirm created item
-    //         assert.deepEqual(
-    //             await testUtils.getActualJson('NTQ3Ojc4OjA', 'mobileKeyword'),
-    //             await testUtils.getExpectedJson('9999999', 'mobileKeyword', 'post-create'),
-    //             'returned JSON was not equal expected for insert mobileKeyword'
-    //         );
-    //         expect(file(testUtils.getActualFile('NTQ3Ojc4OjA', 'mobileKeyword', 'amp'))).to.equal(
-    //             file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'post-create', 'amp'))
-    //         );
+    describe('Deploy ================', () => {
+        beforeEach(() => {
+            testUtils.mockSetup(true);
+        });
+        it('Should create (but not update) a mobileKeyword', async () => {
+            // WHEN
+            await handler.deploy('testInstance/testBU', ['mobileKeyword']);
+            // THEN
+            assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.mobileKeyword ? Object.keys(result.mobileKeyword).length : 0,
+                2,
+                '2 mobileKeywords expected'
+            );
+            // confirm created item
+            assert.deepEqual(
+                await testUtils.getActualJson('testNew_keyword', 'mobileKeyword'),
+                await testUtils.getExpectedJson('9999999', 'mobileKeyword', 'post-create'),
+                'returned JSON was not equal expected for insert mobileKeyword'
+            );
+            expect(
+                file(testUtils.getActualFile('testNew_keyword', 'mobileKeyword', 'amp'))
+            ).to.equal(
+                file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'post-create', 'amp'))
+            );
 
-    //         // confirm updated item
-    //         assert.deepEqual(
-    //             await testUtils.getActualJson('NTIzOjc4OjA', 'mobileKeyword'),
-    //             await testUtils.getExpectedJson('9999999', 'mobileKeyword', 'post-update'), // watch out - mobileKeyword api wants put instead of patch for updates
-    //             'returned JSON was not equal expected for update mobileKeyword'
-    //         );
-    //         expect(file(testUtils.getActualFile('NTIzOjc4OjA', 'mobileKeyword', 'amp'))).to.equal(
-    //             file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'post-update', 'amp'))
-    //         );
+            // confirm updated item
+            // eslint-disable-next-line no-console
+            console.log(
+                'Not testing UPDATE because the API only responds with an empty body unless there are errors in the request body'
+            );
 
-    //         // check number of API calls
-    //         assert.equal(
-    //             testUtils.getAPIHistoryLength(),
-    //             7,
-    //             'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-    //         );
-    //         return;
-    //     });
-    // });
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                4,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
     // describe('Templating ================', () => {
     //     it('Should create a mobileKeyword template via buildTemplate and build it', async () => {
     //         // download first before we test buildTemplate

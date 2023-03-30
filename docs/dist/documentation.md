@@ -3991,8 +3991,8 @@ MobileKeyword MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [MobileKeyword](#MobileKeyword) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [_], [__], [key])](#MobileKeyword.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache()](#MobileKeyword.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieve(retrieveDir, [_], [__], [key])](#MobileKeyword.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> \| <code>void</code>
+    * [.retrieveForCache(_, __, [key])](#MobileKeyword.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#MobileKeyword.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.create(MobileKeyword)](#MobileKeyword.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#MobileKeyword.update) ⇒ <code>Promise</code>
@@ -4002,6 +4002,7 @@ MobileKeyword MetadataType
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MobileKeyword.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#MobileKeyword._buildForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.preDeployTasks(metadata, deployDir)](#MobileKeyword.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
+    * [.postCreateTasks(metadataEntry, apiResponse)](#MobileKeyword.postCreateTasks) ⇒ <code>void</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#MobileKeyword._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.deleteByKey(key)](#MobileKeyword.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postDeleteTasks(customerKey)](#MobileKeyword.postDeleteTasks) ⇒ <code>void</code>
@@ -4009,12 +4010,12 @@ MobileKeyword MetadataType
 
 <a name="MobileKeyword.retrieve"></a>
 
-### MobileKeyword.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MobileKeyword.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> \| <code>void</code>
 Retrieves Metadata of Mobile Keywords
 Endpoint /legacy/v1/beta/mobile/keyword/ return all Mobile Keywords with all details.
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> \| <code>void</code> - Promise of metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4025,11 +4026,18 @@ Endpoint /legacy/v1/beta/mobile/keyword/ return all Mobile Keywords with all det
 
 <a name="MobileKeyword.retrieveForCache"></a>
 
-### MobileKeyword.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MobileKeyword.retrieveForCache(_, __, [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves event definition metadata for caching
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| _ | <code>void</code> | parameter not used |
+| __ | <code>void</code> | parameter not used |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
 <a name="MobileKeyword.retrieveAsTemplate"></a>
 
 ### MobileKeyword.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
@@ -4160,6 +4168,18 @@ prepares an event definition for deployment
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single MobileKeyword |
 | deployDir | <code>string</code> | directory of deploy files |
+
+<a name="MobileKeyword.postCreateTasks"></a>
+
+### MobileKeyword.postCreateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
+helper for [createREST](createREST)
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
+| apiResponse | <code>object</code> | varies depending on the API call |
 
 <a name="MobileKeyword._mergeCode"></a>
 
