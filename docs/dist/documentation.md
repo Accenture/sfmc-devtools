@@ -4015,7 +4015,6 @@ Query MetadataType
     * [.applyTemplateValues(code, templateVariables)](#Query.applyTemplateValues) ⇒ <code>string</code>
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildDefinitionForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-    * [.parseMetadata(metadata)](#Query.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.getFilesToCommit(keyArr)](#Query.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
     * [.checkForErrors(ex)](#Query.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
     * [.deleteByKey(customerKey)](#Query.deleteByKey) ⇒ <code>boolean</code>
@@ -4158,18 +4157,6 @@ handles extracted code if any are found for complex types
 ```js
 queries are saved as 1 json and 1 sql file. both files need to be run through templating
 ```
-<a name="Query.parseMetadata"></a>
-
-### Query.parseMetadata(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
-parses retrieved Metadata before saving
-
-**Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>TYPE.CodeExtractItem</code> - a single item with code parts extracted  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.QueryItem</code> | a single query activity definition |
-
 <a name="Query.getFilesToCommit"></a>
 
 ### Query.getFilesToCommit(keyArr) ⇒ <code>Array.&lt;string&gt;</code>
