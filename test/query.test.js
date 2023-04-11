@@ -18,7 +18,7 @@ describe('query', () => {
     });
 
     describe('Retrieve ================', () => {
-        it('Should retrieve a query', async () => {
+        it('Should retrieve all queries', async () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['query']);
             // THEN
@@ -41,6 +41,33 @@ describe('query', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 6,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should retrieve one specific query', async () => {
+            // WHEN
+            await handler.retrieve('testInstance/testBU', ['query'], ['testExistingQuery']);
+            // THEN
+            assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.query ? Object.keys(result.query).length : 0,
+                1,
+                'only one query expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExistingQuery', 'query'),
+                await testUtils.getExpectedJson('9999999', 'query', 'get'),
+                'returned metadata was not equal expected'
+            );
+            expect(file(testUtils.getActualFile('testExistingQuery', 'query', 'sql'))).to.equal(
+                file(testUtils.getExpectedFile('9999999', 'query', 'get', 'sql'))
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                7,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

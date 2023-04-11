@@ -11,7 +11,7 @@
             "queryText": "SELECT\n    SubscriberKey as testField\nFROM\n    _Subscribers\nWHERE\n    country IN ('test')\n",
             "targetName": "childBU_dataextension_test",
             "targetKey": "childBU_dataextension_test",
-            "targetId": "30400c03-0ec4-ec11-b83c-48df37d1de8a",
+            "targetId": "21711373-72c1-ec11-b83b-48df37d1deb7",
             "targetDescription": "",
             "createdDate": "2022-04-26T15:21:16.453",
             "modifiedDate": "2022-04-26T16:02:44.01",
