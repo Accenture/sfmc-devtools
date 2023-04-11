@@ -240,6 +240,18 @@ describe('query', () => {
             return;
         });
     });
+    describe('Delete ================', () => {
+        it('Should delete the item', async () => {
+            // WHEN
+            const result = await handler.deleteByKey('testInstance/testBU', 'query', [
+                'testExistingQuery',
+            ]);
+            // THEN
+
+            assert.equal(result, true, 'should have deleted the item');
+            return;
+        });
+    });
     describe('CI/CD ================', () => {
         it('Should return a list of files based on their type and key', async () => {
             // WHEN
