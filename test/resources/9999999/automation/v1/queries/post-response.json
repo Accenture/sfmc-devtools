@@ -3,7 +3,7 @@
     "name": "testNewQuery",
     "key": "testNewQuery",
     "description": "created on deploy",
-    "queryText": "SELECT\n    SubscriberKey as testField\nFROM\n    _Subscribers ",
+    "queryText": "SELECT\n    SubscriberKey as testField\nFROM\n    _Subscribers\n",
     "targetName": "childBU_dataextension_test",
     "targetKey": "childBU_dataextension_test",
     "targetId": "21711373-72c1-ec11-b83b-48df37d1deb7",
