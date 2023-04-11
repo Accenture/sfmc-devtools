@@ -89,6 +89,44 @@ describe('mobileKeyword', () => {
         });
     });
     describe('Templating ================', () => {
+        it('Should create a mobileKeyword template via retrieveAsTemplate and build it', async () => {
+            // GIVEN there is a template
+            const result = await handler.retrieveAsTemplate(
+                'testInstance/testBU',
+                'mobileKeyword',
+                ['testExisting_keyword'],
+                'testSourceMarket'
+            );
+            // WHEN
+            assert.equal(
+                !!process.exitCode,
+                false,
+                'retrieveAsTemplate should not have thrown an error'
+            );
+            assert.equal(
+                result.mobileKeyword ? Object.keys(result.mobileKeyword).length : 0,
+                1,
+                'only one item expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualTemplateJson('testExisting_keyword', 'mobileKeyword'),
+                await testUtils.getExpectedJson('9999999', 'mobileKeyword', 'template'),
+                'returned template JSON was not equal expected'
+            );
+            expect(
+                file(
+                    testUtils.getActualTemplateFile('testExisting_keyword', 'mobileKeyword', 'amp')
+                )
+            ).to.equal(
+                file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'template', 'amp'))
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                6,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
         it('Should create a mobileKeyword template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['mobileKeyword']);
