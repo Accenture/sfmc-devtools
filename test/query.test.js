@@ -18,9 +18,44 @@ describe('query', () => {
     });
 
     describe('Retrieve ================', () => {
-        it('Should retrieve a query', async () => {
+        it('Should retrieve all queries', async () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['query']);
+            // THEN
+            assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.query ? Object.keys(result.query).length : 0,
+                2,
+                'only two queries expected'
+            );
+            // normal test
+            assert.deepEqual(
+                await testUtils.getActualJson('testExistingQuery', 'query'),
+                await testUtils.getExpectedJson('9999999', 'query', 'get'),
+                'returned metadata with correct key was not equal expected'
+            );
+            expect(file(testUtils.getActualFile('testExistingQuery', 'query', 'sql'))).to.equal(
+                file(testUtils.getExpectedFile('9999999', 'query', 'get', 'sql'))
+            );
+            // check if targetKey was overwritten
+            assert.deepEqual(
+                await testUtils.getActualJson('testExistingQuery2', 'query'),
+                await testUtils.getExpectedJson('9999999', 'query', 'get2'),
+                'returned metadata with wrong key was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                6,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should retrieve one specific query', async () => {
+            // WHEN
+            await handler.retrieve('testInstance/testBU', ['query'], ['testExistingQuery']);
             // THEN
             assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
@@ -40,7 +75,7 @@ describe('query', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                6,
+                7,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -59,8 +94,8 @@ describe('query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                2,
-                'two querys expected'
+                3,
+                'three queries expected'
             );
             // confirm created item
             assert.deepEqual(
@@ -201,6 +236,40 @@ describe('query', () => {
                 testUtils.getAPIHistoryLength(),
                 6,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
+    describe('Delete ================', () => {
+        it('Should delete the item', async () => {
+            // WHEN
+            const result = await handler.deleteByKey('testInstance/testBU', 'query', [
+                'testExistingQuery',
+            ]);
+            // THEN
+
+            assert.equal(result, true, 'should have deleted the item');
+            return;
+        });
+    });
+    describe('CI/CD ================', () => {
+        it('Should return a list of files based on their type and key', async () => {
+            // WHEN
+            const fileList = await handler.getFilesToCommit('testInstance/testBU', 'query', [
+                'testExistingQuery',
+            ]);
+            // THEN
+            assert.equal(fileList.length, 2, 'expected only 2 file paths');
+
+            assert.equal(
+                fileList[0].split('\\').join('/'),
+                'retrieve/testInstance/testBU/query/testExistingQuery.query-meta.json',
+                'wrong JSON path'
+            );
+            assert.equal(
+                fileList[1].split('\\').join('/'),
+                'retrieve/testInstance/testBU/query/testExistingQuery.query-meta.sql',
+                'wrong JSON path'
             );
             return;
         });
