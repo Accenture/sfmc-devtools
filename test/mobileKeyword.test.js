@@ -157,6 +157,7 @@ describe('mobileKeyword', () => {
                 'testExisting_keyword',
             ]);
             // THEN
+            assert.equal(!!process.exitCode, false, 'delete should not have thrown an error');
 
             assert.equal(result, true, 'should have deleted the item');
             return;
@@ -171,6 +172,11 @@ describe('mobileKeyword', () => {
                 ['testExisting_keyword']
             );
             // THEN
+            assert.equal(
+                !!process.exitCode,
+                false,
+                'getFilesToCommit should not have thrown an error'
+            );
             assert.equal(fileList.length, 2, 'expected only 2 file paths');
 
             assert.equal(
