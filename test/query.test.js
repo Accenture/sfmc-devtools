@@ -27,17 +27,25 @@ describe('query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                1,
-                'only one query expected'
+                2,
+                'only two queries expected'
             );
+            // normal test
             assert.deepEqual(
                 await testUtils.getActualJson('testExistingQuery', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'get'),
-                'returned metadata was not equal expected'
+                'returned metadata with correct key was not equal expected'
             );
             expect(file(testUtils.getActualFile('testExistingQuery', 'query', 'sql'))).to.equal(
                 file(testUtils.getExpectedFile('9999999', 'query', 'get', 'sql'))
             );
+            // check if targetKey was overwritten
+            assert.deepEqual(
+                await testUtils.getActualJson('testExistingQuery2', 'query'),
+                await testUtils.getExpectedJson('9999999', 'query', 'get2'),
+                'returned metadata with wrong key was not equal expected'
+            );
+
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 6,
@@ -86,8 +94,8 @@ describe('query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                2,
-                'two querys expected'
+                3,
+                'three queries expected'
             );
             // confirm created item
             assert.deepEqual(
