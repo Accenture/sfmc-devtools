@@ -240,4 +240,26 @@ describe('query', () => {
             return;
         });
     });
+    describe('CI/CD ================', () => {
+        it('Should return a list of files based on their type and key', async () => {
+            // WHEN
+            const fileList = await handler.getFilesToCommit('testInstance/testBU', 'query', [
+                'testExistingQuery',
+            ]);
+            // THEN
+            assert.equal(fileList.length, 2, 'expected only 2 file paths');
+
+            assert.equal(
+                fileList[0].split('\\').join('/'),
+                'retrieve/testInstance/testBU/query/testExistingQuery.query-meta.json',
+                'wrong JSON path'
+            );
+            assert.equal(
+                fileList[1].split('\\').join('/'),
+                'retrieve/testInstance/testBU/query/testExistingQuery.query-meta.sql',
+                'wrong JSON path'
+            );
+            return;
+        });
+    });
 });

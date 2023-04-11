@@ -485,7 +485,7 @@ main class
     * [.joinProject()](#Mcdev.joinProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.deleteByKey(businessUnit, type, customerKey)](#Mcdev.deleteByKey) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.deleteByKey(businessUnit, type, customerKey)](#Mcdev.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.refresh(businessUnit, type, [keyArr])](#Mcdev.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.badKeys(businessUnit)](#Mcdev.badKeys) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.retrieveAsTemplate(businessUnit, selectedType, name, market)](#Mcdev.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
@@ -635,11 +635,11 @@ Creates docs for supported metadata types in Markdown and/or HTML format
 
 <a name="Mcdev.deleteByKey"></a>
 
-### Mcdev.deleteByKey(businessUnit, type, customerKey) ⇒ <code>Promise.&lt;void&gt;</code>
+### Mcdev.deleteByKey(businessUnit, type, customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 deletes metadata from MC instance by key
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if successful, false otherwise  
 
 | Param | Type | Description |
 | --- | --- | --- |
