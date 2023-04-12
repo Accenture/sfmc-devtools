@@ -6,7 +6,7 @@ const cache = require('../lib/util/cache');
 const testUtils = require('./utils');
 const handler = require('../lib/index');
 
-describe('interaction', () => {
+describe('journey', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
@@ -15,21 +15,21 @@ describe('interaction', () => {
     });
 
     describe('Retrieve ================', () => {
-        it('Should retrieve a interaction', async () => {
+        it('Should retrieve a journey', async () => {
             // WHEN
-            await handler.retrieve('testInstance/testBU', ['interaction']);
+            await handler.retrieve('testInstance/testBU', ['journey']);
             // THEN
             assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
-                result.interaction ? Object.keys(result.interaction).length : 0,
+                result.journey ? Object.keys(result.journey).length : 0,
                 2,
-                'only 2 interactions expected'
+                'only 2 journeys expected'
             );
             assert.deepEqual(
-                await testUtils.getActualJson('testExisting_interaction', 'interaction'),
-                await testUtils.getExpectedJson('9999999', 'interaction', 'get'),
+                await testUtils.getActualJson('testExisting_interaction', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get'),
                 'returned JSON was not equal expected'
             );
             assert.equal(
@@ -44,30 +44,30 @@ describe('interaction', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
-        it('Should create & upsert a interaction', async () => {
+        it('Should create & upsert a journey', async () => {
             // WHEN
-            await handler.deploy('testInstance/testBU', ['interaction']);
+            await handler.deploy('testInstance/testBU', ['journey']);
             // THEN
             assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
-                result.interaction ? Object.keys(result.interaction).length : 0,
+                result.journey ? Object.keys(result.journey).length : 0,
                 3,
-                '3 interactions expected'
+                '3 journeys expected'
             );
             // confirm created item
             assert.deepEqual(
-                await testUtils.getActualJson('testNew_interaction', 'interaction'),
-                await testUtils.getExpectedJson('9999999', 'interaction', 'post'),
-                'returned JSON was not equal expected for insert interaction'
+                await testUtils.getActualJson('testNew_interaction', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'post'),
+                'returned JSON was not equal expected for insert journey'
             );
 
             // confirm updated item
             assert.deepEqual(
-                await testUtils.getActualJson('testExisting_interaction', 'interaction'),
-                await testUtils.getExpectedJson('9999999', 'interaction', 'put'), // watch out - interaction api wants put instead of patch for updates
-                'returned JSON was not equal expected for update interaction'
+                await testUtils.getActualJson('testExisting_interaction', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'put'), // watch out - journey api wants put instead of patch for updates
+                'returned JSON was not equal expected for update journey'
             );
 
             // check number of API calls
@@ -80,13 +80,13 @@ describe('interaction', () => {
         });
     });
     describe('Templating ================', () => {
-        it('Should create a interaction template via buildTemplate and build it', async () => {
+        it('Should create a journey template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
-            await handler.retrieve('testInstance/testBU', ['interaction']);
+            await handler.retrieve('testInstance/testBU', ['journey']);
             // buildTemplate
             const result = await handler.buildTemplate(
                 'testInstance/testBU',
-                'interaction',
+                'journey',
                 ['testExisting_interaction'],
                 'testSourceMarket'
             );
@@ -96,20 +96,20 @@ describe('interaction', () => {
                 'buildTemplate should not have thrown an error'
             );
             assert.equal(
-                result.interaction ? Object.keys(result.interaction).length : 0,
+                result.journey ? Object.keys(result.journey).length : 0,
                 1,
-                'only one interaction expected'
+                'only one journey expected'
             );
             assert.deepEqual(
-                await testUtils.getActualTemplateJson('testExisting_interaction', 'interaction'),
-                await testUtils.getExpectedJson('9999999', 'interaction', 'template'),
+                await testUtils.getActualTemplateJson('testExisting_interaction', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'template'),
                 'returned template JSON was not equal expected'
             );
 
             // buildDefinition
             await handler.buildDefinition(
                 'testInstance/testBU',
-                'interaction',
+                'journey',
                 'testExisting_interaction',
                 'testTargetMarket'
             );
@@ -119,8 +119,8 @@ describe('interaction', () => {
                 'buildDefinition should not have thrown an error'
             );
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testExisting_interaction', 'interaction'),
-                await testUtils.getExpectedJson('9999999', 'interaction', 'build'),
+                await testUtils.getActualDeployJson('testExisting_interaction', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'build'),
                 'returned deployment JSON was not equal expected'
             );
 
