@@ -122,7 +122,7 @@ describe('mobileKeyword', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                6,
+                2,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
