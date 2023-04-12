@@ -3163,6 +3163,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.retrieveChangelog([additionalFields], [subTypeArr])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache([additionalFields], [subTypeArr], [key])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
+    * [.retrieveTemplateREST(templateDir, uri, templateVariables, name)](#MetadataType.retrieveTemplateREST) ⇒ <code>Promise.&lt;{metadata: TYPE.MetadataTypeItem, type: string}&gt;</code>
     * [.buildTemplate(retrieveDir, templateDir, key, templateVariables)](#MetadataType.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.preDeployTasks(metadata, deployDir)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
     * [.create(metadata, deployDir)](#MetadataType.create) ⇒ <code>void</code>
@@ -3393,6 +3394,21 @@ Gets metadata cache with limited fields and does not store value to disk
 | name | <code>string</code> | name of the metadata file |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | [subType] | <code>string</code> | optionally limit to a single subtype |
+
+<a name="MetadataType.retrieveTemplateREST"></a>
+
+### MetadataType.retrieveTemplateREST(templateDir, uri, templateVariables, name) ⇒ <code>Promise.&lt;{metadata: TYPE.MetadataTypeItem, type: string}&gt;</code>
+Retrieve a specific Script by Name
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.MetadataTypeItem, type: string}&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| uri | <code>string</code> | rest endpoint for GET |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+| name | <code>string</code> | name (not key) of the metadata item |
 
 <a name="MetadataType.buildTemplate"></a>
 
