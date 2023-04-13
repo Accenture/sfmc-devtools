@@ -34,7 +34,7 @@ describe('journey', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                13,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -73,7 +73,7 @@ describe('journey', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                8,
+                11,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -126,7 +126,7 @@ describe('journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                13,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
