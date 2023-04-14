@@ -42,6 +42,7 @@
         }
     },
     "rules": {
+        "logical-assignment-operators": ["error", "always"],
         "unicorn/better-regex": "off",
         "unicorn/catch-error-name": [
             "error",
