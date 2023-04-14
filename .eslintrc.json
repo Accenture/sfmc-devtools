@@ -66,6 +66,7 @@
         "unicorn/prefer-array-some": "off",
         "unicorn/prefer-set-has": "off",
         "unicorn/prefer-spread": "off",
+        "unicorn/prefer-string-replace-all": "error",
         "unicorn/unicorn/no-lonely-if": "off",
         "arrow-body-style": ["error", "as-needed"],
         "curly": "error",
