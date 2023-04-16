@@ -1475,8 +1475,6 @@ Campaign MetadataType
 * [Campaign](#Campaign) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#Campaign.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache()](#Campaign.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.upgradeGetBulk()](#Campaign.upgradeGetBulk)
-    * [.getBulkForLegacyApi(url, [pageSize], [iteratorField])](#Campaign.getBulkForLegacyApi) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.getAssetTags(retrieveDir, campaignId, name)](#Campaign.getAssetTags) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 
 <a name="Campaign.retrieve"></a>
@@ -1501,27 +1499,6 @@ Retrieves event definition metadata for caching
 
 **Kind**: static method of [<code>Campaign</code>](#Campaign)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
-<a name="Campaign.upgradeGetBulk"></a>
-
-### Campaign.upgradeGetBulk()
-helper for [retrieve](#MobileMessage.retrieve) and [retrieveForCache](#MobileMessage.retrieveForCache)
-
-**Kind**: static method of [<code>Campaign</code>](#Campaign)  
-<a name="Campaign.getBulkForLegacyApi"></a>
-
-### Campaign.getBulkForLegacyApi(url, [pageSize], [iteratorField]) ⇒ <code>Promise.&lt;object&gt;</code>
-Method that makes paginated GET API Requests using $pageSize and $page parameters
-TODO: remove before release in favor of upgrading SFMC-SDK
-
-**Kind**: static method of [<code>Campaign</code>](#Campaign)  
-**Returns**: <code>Promise.&lt;object&gt;</code> - API response combined items  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| url | <code>string</code> | of the resource to retrieve |
-| [pageSize] | <code>number</code> | of the response, defaults to 50 |
-| [iteratorField] | <code>&#x27;items&#x27;</code> \| <code>&#x27;definitions&#x27;</code> \| <code>&#x27;entry&#x27;</code> | attribute of the response to iterate over |
-
 <a name="Campaign.getAssetTags"></a>
 
 ### Campaign.getAssetTags(retrieveDir, campaignId, name) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -4069,8 +4046,6 @@ MobileMessage MetadataType
 * [MobileMessage](#MobileMessage) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#MobileMessage.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> \| <code>void</code>
     * [.retrieveForCache(_, __, [key])](#MobileMessage.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.upgradeGetBulk()](#MobileMessage.upgradeGetBulk)
-    * [.getBulkForLegacyApi(url, [pageSize], [iteratorField])](#MobileMessage.getBulkForLegacyApi) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.update(metadata)](#MobileMessage.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#MobileMessage.create) ⇒ <code>Promise</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#MobileMessage._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
@@ -4112,27 +4087,6 @@ Retrieves event definition metadata for caching
 | _ | <code>void</code> | parameter not used |
 | __ | <code>void</code> | parameter not used |
 | [key] | <code>string</code> | customer key of single item to retrieve |
-
-<a name="MobileMessage.upgradeGetBulk"></a>
-
-### MobileMessage.upgradeGetBulk()
-helper for [retrieve](#MobileMessage.retrieve) and [retrieveForCache](#MobileMessage.retrieveForCache)
-
-**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
-<a name="MobileMessage.getBulkForLegacyApi"></a>
-
-### MobileMessage.getBulkForLegacyApi(url, [pageSize], [iteratorField]) ⇒ <code>Promise.&lt;object&gt;</code>
-Method that makes paginated GET API Requests using $pageSize and $page parameters
-TODO: remove before release in favor of upgrading SFMC-SDK
-
-**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
-**Returns**: <code>Promise.&lt;object&gt;</code> - API response combined items  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| url | <code>string</code> | of the resource to retrieve |
-| [pageSize] | <code>number</code> | of the response, defaults to 50 |
-| [iteratorField] | <code>&#x27;items&#x27;</code> \| <code>&#x27;definitions&#x27;</code> \| <code>&#x27;entry&#x27;</code> | attribute of the response to iterate over |
 
 <a name="MobileMessage.update"></a>
 
