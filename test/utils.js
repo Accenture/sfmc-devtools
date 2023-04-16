@@ -207,5 +207,5 @@ exports.logAPIHistoryDebug = () => {
  * @returns {string} escaped string
  */
 function escapeRegExp(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+    return str.replaceAll(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 }
