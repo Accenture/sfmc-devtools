@@ -1,0 +1,42 @@
+{
+    "id": "NXV4ZFMwTEFwRVczd3RaLUF5X3p5dzo4Njow",
+    "createdDate": "2023-03-30T14:00:11.907Z",
+    "lastUpdated": "2023-03-30T14:00:12.295Z",
+    "code": {
+        "id": "RXBwc0JoNk9jVTY0YWJNWFZDaGxvdzo4MTow",
+        "createdDate": "2017-05-05T10:33:15.953Z",
+        "lastUpdated": "2022-11-25T15:51:14.225Z",
+        "code": "4912312345678",
+        "countryCode": "HK",
+        "startDate": "2017-05-05T06:00:00Z",
+        "endDate": "2047-05-05T06:00:00Z",
+        "keywordLimit": "Unlimited",
+        "keywordsUsed": "0",
+        "codeType": "PRIVATE",
+        "isShortCode": false,
+        "keywordsUsedOther": "0",
+        "isGsmCharacterSetOnly": false,
+        "isMms": false,
+        "isStackIndependant": false,
+        "dipSwitches": 1,
+        "moEngineVersion": 1,
+        "sendableCountries": [{ "countryCode": "HK", "vendor": "CLX", "fromNameSupported": true }],
+        "supportsConcatenation": true,
+        "isClientOwned": false,
+        "isOwner": false
+    },
+    "keyword": "testNew_keyword",
+    "startDate": "2023-03-30T14:00:11.843Z",
+    "endDate": "2043-03-30T14:00:11.843Z",
+    "status": "Active",
+    "createdBy": {
+        "id": "NzE3NDkxNDI2OjQ6MA",
+        "lastUpdated": "2023-03-30T14:00:12.733Z",
+        "name": "API_JornBerkefeld app user"
+    },
+    "restriction": "NONE",
+    "keywordType": "NORMAL",
+    "responseMessage": "line1\nline2",
+    "isInherited": false,
+    "dipSwitches": 0
+}
