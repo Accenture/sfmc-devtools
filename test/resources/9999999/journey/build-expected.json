@@ -1,7 +1,7 @@
 {
     "key": "testExisting_interaction",
     "name": "testExisting_interaction",
-    "description": "{{{description}}}",
+    "description": "foobar",
     "workflowApiVersion": 1,
     "modifiedDate": "2017-04-12T08:07:48.333",
     "activities": [
@@ -323,7 +323,7 @@
             },
             "configurationArguments": {
                 "c__mobileMessage_id": "NTIzOjc4OjA",
-                "keywordId": "cTVJaG5oSDJPVUNHcUh6Z3pQT2tVdzo4Njow",
+                "c__mobileKeyword": "testExisting_keyword",
                 "isOptIn": false,
                 "honorBlackoutWindowEnum": 0,
                 "mobileBlackoutWindowStartTime": "",

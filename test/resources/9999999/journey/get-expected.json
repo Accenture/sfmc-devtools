@@ -1,8 +1,11 @@
 {
     "key": "testExisting_interaction",
     "name": "testExisting_interaction",
-    "description": "foobar",
+    "lastPublishedDate": "2017-04-12T08:07:48",
+    "description": "bla bla",
+    "version": 1,
     "workflowApiVersion": 1,
+    "createdDate": "2017-04-12T05:38:05.837",
     "modifiedDate": "2017-04-12T08:07:48.333",
     "activities": [
         {
@@ -323,7 +326,7 @@
             },
             "configurationArguments": {
                 "c__mobileMessage_id": "NTIzOjc4OjA",
-                "keywordId": "cTVJaG5oSDJPVUNHcUh6Z3pQT2tVdzo4Njow",
+                "c__mobileKeyword": "testExisting_keyword",
                 "isOptIn": false,
                 "honorBlackoutWindowEnum": 0,
                 "mobileBlackoutWindowStartTime": "",
@@ -567,6 +570,7 @@
     },
     "metaData": {},
     "executionMode": "Production",
+    "status": "Draft",
     "scheduledStatus": "Draft",
     "r__folder_Path": "my journeys"
 }
