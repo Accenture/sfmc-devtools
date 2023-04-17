@@ -43,12 +43,12 @@ jobs:
             - name: Get Run ID
               id: get_run_id
               run: |
-                  echo "::set-output name=run_id::$(\
+                  echo "name=run_id::$(\
                     gh run list \
                       --workflow "${{ github.event.pull_request.base.ref == 'main' && 'coverage-main-branch.yml' || github.event.pull_request.base.ref == 'develop' && 'coverage-develop-branch.yml' || 'coverage.yml' }}" \
                       --json conclusion,headSha,status,databaseId \
                       --jq ".[] | select( .conclusion == \"success\" and .headSha == \"${{github.event.pull_request.base.sha}}\") | .databaseId" \
-                  )"
+                  )" >> $GITHUB_OUTPUT
               env:
                   GITHUB_TOKEN: ${{ github.token }}
 
