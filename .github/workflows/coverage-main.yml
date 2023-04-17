@@ -1,0 +1,67 @@
+on: [pull_request]
+
+jobs:
+    hello_world_job:
+        runs-on: ubuntu-latest
+        name: Test and report
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                  ref: ${{ github.event.pull_request.head.sha }}
+                  fetch-depth: 1000
+
+            - name: Fetch base
+              run: git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
+
+            - name: Run tests
+              run: |
+                  npm i
+                  npm run test
+
+            - name: Upload coverage artifact
+              uses: actions/upload-artifact@v2
+              with:
+                  name: test-coverage-output
+                  path: coverage
+
+            - name: Download coverage artifact
+              uses: actions/download-artifact@v2
+              with:
+                  path: artifacts
+
+            - name: Get Run ID
+              id: get_run_id
+              run: |
+                  echo "::set-output name=run_id::$(\
+                    gh run list \
+                      --workflow "${{ github.event.pull_request.base.ref == 'main' && 'coverage-default-branch.yml' || 'coverage-main.yml' }}" \
+                      --json conclusion,headSha,status,databaseId \
+                      --jq ".[] | select( .conclusion == \"success\" and .headSha == \"${{github.event.pull_request.base.sha}}\") | .databaseId" \
+                  )"
+              env:
+                  GITHUB_TOKEN: ${{ github.token }}
+
+            - name: Download artifact
+              uses: dawidd6/action-download-artifact@v2
+              continue-on-error: true
+              with:
+                  workflow: ${{ github.event.pull_request.base.ref == 'main' && 'coverage-default-branch.yml' || 'coverage-main.yml' }}
+                  run_id: ${{steps.get_run_id.outputs.run_id}}
+                  name: 'test-coverage-output'
+                  path: base-artifacts
+                  search_artifacts: 'test-coverage-output'
+
+            - name: Check file existence
+              id: check_files
+              uses: andstor/file-existence-action@v1
+              with:
+                  files: 'base-artifacts/coverage-summary.json'
+
+            - name: Report coverage
+              uses: ./
+              id: report
+              with:
+                  coverage_file: 'artifacts/test-coverage-output/coverage-summary.json'
+                  base_coverage_file: ${{steps.check_files.outputs.files_exists == 'true' && 'base-artifacts/coverage-summary.json' || ''}}
+                  comment_template_file: 'comment-template.svelte'

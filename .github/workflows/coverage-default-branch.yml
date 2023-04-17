@@ -1,0 +1,31 @@
+name: Test coverage for main branch
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    hello_world_job:
+        runs-on: ubuntu-latest
+        name: Test and report
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                  ref: ${{ github.event.pull_request.head.sha }}
+                  fetch-depth: 1000
+
+            - name: Fetch base
+              run: git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
+
+            - name: Run tests
+              run: |
+                  npm i
+                  npm run test
+
+            - name: Upload coverage artifact
+              uses: actions/upload-artifact@v2
+              with:
+                  name: test-coverage-output
+                  path: coverage

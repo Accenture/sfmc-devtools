@@ -1,0 +1,55 @@
+name: Update coverage comment
+on:
+    pull_request:
+        types: [edited]
+
+jobs:
+    hello_world_job:
+        runs-on: ubuntu-latest
+        name: Test and report
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                  ref: ${{ github.event.pull_request.head.sha }}
+                  fetch-depth: 1000
+
+            - name: Fetch base
+              run: git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
+
+            - name: Download artifact
+              uses: dawidd6/action-download-artifact@v2
+              continue-on-error: true
+              with:
+                  workflow: ${{ github.event.pull_request.base.ref == 'main' && 'coverage-default-branch.yml' || 'coverage-main.yml' }}
+                  workflow_conclusion: success
+                  commit: ${{github.event.pull_request.base.sha}}
+                  name: 'test-coverage-output'
+                  path: base-artifacts
+                  search_artifacts: 'test-coverage-output'
+
+            - name: Download artifact
+              uses: dawidd6/action-download-artifact@v2
+              continue-on-error: true
+              with:
+                  workflow: 'main.yml'
+                  workflow_conclusion: success
+                  commit: ${{github.event.pull_request.head.sha}}
+                  name: 'test-coverage-output'
+                  path: artifacts
+                  search_artifacts: 'test-coverage-output'
+
+            - name: Check file existence
+              id: check_files
+              uses: andstor/file-existence-action@v1
+              with:
+                  files: 'base-artifacts/coverage-summary.json, artifacts/coverage-summary.json'
+
+            - name: File exists
+              uses: ./
+              if: steps.check_files.outputs.files_exists == 'true'
+              # Only runs if all of the files exists
+              with:
+                  coverage_file: 'artifacts/coverage-summary.json'
+                  base_coverage_file: 'base-artifacts/coverage-summary.json'
+                  comment_template_file: 'comment-template.svelte'
