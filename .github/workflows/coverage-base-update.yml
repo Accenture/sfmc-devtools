@@ -26,7 +26,7 @@ jobs:
                   commit: ${{github.event.pull_request.base.sha}}
                   name: 'test-coverage-output'
                   path: base-artifacts
-                  search_artifacts: 'test-coverage-output'
+                  search_artifacts: true
 
             - name: Download artifact
               uses: dawidd6/action-download-artifact@v2
@@ -37,7 +37,7 @@ jobs:
                   commit: ${{github.event.pull_request.head.sha}}
                   name: 'test-coverage-output'
                   path: artifacts
-                  search_artifacts: 'test-coverage-output'
+                  search_artifacts: true
 
             - name: Check file existence
               id: check_files

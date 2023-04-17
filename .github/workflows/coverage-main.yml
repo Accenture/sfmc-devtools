@@ -52,7 +52,7 @@ jobs:
                   run_id: ${{steps.get_run_id.outputs.run_id}}
                   name: 'test-coverage-output'
                   path: base-artifacts
-                  search_artifacts: 'test-coverage-output'
+                  search_artifacts: true
 
             - name: Check file existence
               id: check_files
