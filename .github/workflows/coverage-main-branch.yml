@@ -23,10 +23,16 @@ jobs:
               with:
                   node-version: 16
 
-            - name: Run tests
+            - run: npm ci --ignore-scripts
+
+            - run: npm run lint
+
+            - name: Run mcdev-tests with coverage
+              run: npm run coverage
+
+            - name: Prepare for Report Coverage (mini)
               run: |
-                  npm ci --ignore-scripts
-                  npm run coverage
+                  npx nyc report --reporter json-summary --exclude-after-remap false
 
             - name: Upload coverage artifact
               uses: actions/upload-artifact@v3
