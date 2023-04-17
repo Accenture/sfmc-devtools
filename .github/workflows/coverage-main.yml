@@ -23,6 +23,12 @@ jobs:
             - name: Run mcdev-tests with coverage
               run: npm run coverage
 
+            - name: Prepare for Report Coverage
+              run: |
+                  npx nyc report --reporter json-summary --exclude-after-remap false
+                  npm i svelte-to-html@1.0.9
+                  git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
+
             - name: Upload coverage artifact
               uses: actions/upload-artifact@v3
               with:
@@ -61,12 +67,6 @@ jobs:
               uses: andstor/file-existence-action@v2
               with:
                   files: 'base-artifacts/coverage-summary.json'
-
-            - name: Prepare for Report Coverage
-              run: |
-                  npx nyc report --reporter json-summary --exclude-after-remap false
-                  npm i svelte-to-html@1.0.9
-                  git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
 
             - name: Report coverage
               uses: sidx1024/report-nyc-coverage-github-action@v1.2.6
