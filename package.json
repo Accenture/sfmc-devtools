@@ -52,7 +52,7 @@
         "manual-prepare": "husky install",
         "lint-and-test": "run-s lint test",
         "test": "mocha --reporter-option maxDiffSize=25000",
-        "coverage": "nyc mocha",
+        "coverage": "nyc npm run test",
         "version:major": "npm version --no-commit-hooks major",
         "version:minor": "npm version --no-commit-hooks minor",
         "version:patch": "npm version --no-commit-hooks patch"
