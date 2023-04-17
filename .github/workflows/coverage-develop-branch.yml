@@ -1,4 +1,4 @@
-name: Test coverage for develop branch 1
+name: Test coverage for develop branch
 
 on:
     push:
