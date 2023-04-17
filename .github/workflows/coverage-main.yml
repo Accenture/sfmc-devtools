@@ -16,12 +16,12 @@ jobs:
               with:
                   node-version: 16
 
-            - name: Run tests
-              run: |
-                  npm ci --ignore-scripts
-                  npm i svelte-to-html@1.0.9
-                  npm run coverage
-                  npx nyc report --reporter json-summary --exclude-after-remap false
+            - run: npm ci --ignore-scripts
+
+            - run: npm run lint
+
+            - name: Run mcdev-tests with coverage
+              run: npm run coverage
 
             - name: Upload coverage artifact
               uses: actions/upload-artifact@v3
@@ -64,6 +64,7 @@ jobs:
 
             - name: Prepare for Report Coverage
               run: |
+                  npx nyc report --reporter json-summary --exclude-after-remap false
                   npm i svelte-to-html@1.0.9
                   git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
 
