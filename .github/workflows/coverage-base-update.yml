@@ -21,7 +21,7 @@ jobs:
               uses: dawidd6/action-download-artifact@v2
               continue-on-error: true
               with:
-                  workflow: ${{ github.event.pull_request.base.ref == 'main' && 'coverage-default-branch.yml' || 'coverage-main.yml' }}
+                  workflow: ${{ github.event.pull_request.base.ref == 'main' && 'coverage-main-branch.yml' || github.event.pull_request.base.ref == 'develop' && 'coverage-develop-branch.yml' || 'coverage.yml' }}
                   workflow_conclusion: success
                   commit: ${{github.event.pull_request.base.sha}}
                   name: 'test-coverage-output'
@@ -32,7 +32,7 @@ jobs:
               uses: dawidd6/action-download-artifact@v2
               continue-on-error: true
               with:
-                  workflow: 'coverage-main.yml'
+                  workflow: 'coverage.yml'
                   workflow_conclusion: success
                   commit: ${{github.event.pull_request.head.sha}}
                   name: 'test-coverage-output'
@@ -46,7 +46,7 @@ jobs:
                   files: 'base-artifacts/coverage-summary.json, artifacts/coverage-summary.json'
 
             - name: File exists
-              uses: ./
+              uses: sidx1024/report-nyc-coverage-github-action@v1.2.6
               if: steps.check_files.outputs.files_exists == 'true'
               # Only runs if all of the files exists
               with:
