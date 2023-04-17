@@ -12,9 +12,6 @@ jobs:
                   ref: ${{ github.event.pull_request.head.sha }}
                   fetch-depth: 1000
 
-            - name: Fetch base
-              run: git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
-
             - uses: actions/setup-node@v3
               with:
                   node-version: 16
@@ -65,10 +62,15 @@ jobs:
               with:
                   files: 'base-artifacts/coverage-summary.json'
 
+            - name: Prepare for Report Coverage
+              run: |
+                  npm i svelte-to-html@1.0.9
+                  git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
+
             - name: Report coverage
               uses: sidx1024/report-nyc-coverage-github-action@v1.2.6
               id: report
               with:
                   coverage_file: 'artifacts/test-coverage-output/coverage-summary.json'
                   base_coverage_file: ${{steps.check_files.outputs.files_exists == 'true' && 'base-artifacts/coverage-summary.json' || ''}}
-                  comment_template_file: '.comment-template.svelte'
+                  comment_template_file: '.coverage-comment-template.svelte'
