@@ -12,8 +12,8 @@ jobs:
                   ref: ${{ github.event.pull_request.head.sha }}
                   fetch-depth: 1000
 
-            - name: Fetch base
-              run: git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
+            #- name: Fetch base
+            #  run: git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
 
             - uses: actions/setup-node@v3
               with:
@@ -48,7 +48,7 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ github.token }}
 
-            - name: Download artifact
+            - name: Download main-branch artifact
               uses: dawidd6/action-download-artifact@v2
               continue-on-error: true
               with:
@@ -58,7 +58,7 @@ jobs:
                   path: base-artifacts
                   search_artifacts: true
 
-            - name: Check file existence
+            - name: Check if main-branch artifact was available
               id: check_files
               uses: andstor/file-existence-action@v2
               with:
