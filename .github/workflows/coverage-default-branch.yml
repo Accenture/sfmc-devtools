@@ -21,8 +21,8 @@ jobs:
 
             - name: Run tests
               run: |
-                  npm i
-                  npm run test
+                  npm ci --ignore-scripts
+                  npm run coverage
 
             - name: Upload coverage artifact
               uses: actions/upload-artifact@v2

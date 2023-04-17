@@ -1,5 +1,6 @@
 on: [pull_request]
 
+name: Test coverage report
 jobs:
     hello_world_job:
         runs-on: ubuntu-latest
@@ -16,8 +17,8 @@ jobs:
 
             - name: Run tests
               run: |
-                  npm i
-                  npm run test
+                  npm ci --ignore-scripts
+                  npm run coverage
 
             - name: Upload coverage artifact
               uses: actions/upload-artifact@v2

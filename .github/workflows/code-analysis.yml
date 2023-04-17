@@ -47,7 +47,7 @@ jobs:
 
             # Assuming code passes, run tests
             - name: Run mcdev-tests
-              run: npm run list
+              run: npm run test
             # - name: Generate NYC report
             #   run: |
             #       npx nyc report \
