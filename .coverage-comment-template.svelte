@@ -141,7 +141,7 @@ Base: <a href="{base_commit_link}">{base_ref}@{base_short_commit_sha}</a><br><br
 </table>
 
 <details>
-  <summary>Details (changed files):</summary><br>
+  <summary>Details (changed testable files):</summary><br>
   <table>
     <thead>
       <th>File</th>

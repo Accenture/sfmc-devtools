@@ -12,4 +12,3 @@ node_modules/
 .mcdevrc.json
 .vscode/tasks.json
 !test/mockRoot/*
-
