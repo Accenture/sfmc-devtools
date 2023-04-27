@@ -30,15 +30,22 @@ describe('GENERAL', () => {
                 false,
                 'explainTypes --json should not have thrown an error'
             );
+
+            // check if properties are all there
+            expect(typeArr[0]).to.have.all.keys(
+                'name',
+                'apiName',
+                'default',
+                'description',
+                'supports'
+            );
+
             // check if certain types were returned
             assert.equal(
                 typeArr.find((type) => type.apiName === 'dataExtension').apiName,
                 'dataExtension',
                 'Expected to find dataExtension type'
             );
-
-            // check if properties are all there
-            expect(typeArr[0]).to.have.all.keys('name', 'apiName', 'default', 'description');
 
             return;
         });
