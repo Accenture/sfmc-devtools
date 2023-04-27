@@ -480,7 +480,7 @@ main class
     * [.setOptions(argv)](#Mcdev.setOptions) ⇒ <code>void</code>
     * [.createDeltaPkg(argv)](#Mcdev.createDeltaPkg) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
     * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
-    * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>void</code>
+    * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>Array.&lt;object&gt;</code>
     * [.upgrade()](#Mcdev.upgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.retrieve(businessUnit, [selectedTypesArr], [keys], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Mcdev.deploy) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
@@ -555,8 +555,9 @@ handler for 'mcdev createDeltaPkg
 **Returns**: <code>Promise</code> - .  
 <a name="Mcdev.explainTypes"></a>
 
-### Mcdev.explainTypes() ⇒ <code>void</code>
+### Mcdev.explainTypes() ⇒ <code>Array.&lt;object&gt;</code>
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>Array.&lt;object&gt;</code> - list of supported types with their apiNames  
 <a name="Mcdev.upgrade"></a>
 
 ### Mcdev.upgrade() ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -6166,7 +6167,7 @@ CLI helper class
     * [._askCredentials(properties, [credName])](#Cli._askCredentials) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.selectTypes(properties, [setTypesArr])](#Cli.selectTypes) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._summarizeSubtypes(responses, type)](#Cli._summarizeSubtypes) ⇒ <code>void</code>
-    * [.explainTypes()](#Cli.explainTypes) ⇒ <code>void</code>
+    * [.explainTypes()](#Cli.explainTypes) ⇒ <code>Array.&lt;object&gt;</code>
 
 <a name="Cli.initMcdevConfig"></a>
 
@@ -6298,10 +6299,11 @@ this keeps the config automatically upgradable when we add new subtypes or chang
 
 <a name="Cli.explainTypes"></a>
 
-### Cli.explainTypes() ⇒ <code>void</code>
+### Cli.explainTypes() ⇒ <code>Array.&lt;object&gt;</code>
 shows metadata type descriptions
 
 **Kind**: static method of [<code>Cli</code>](#Cli)  
+**Returns**: <code>Array.&lt;object&gt;</code> - list of supported types with their apiNames  
 <a name="config"></a>
 
 ## config
