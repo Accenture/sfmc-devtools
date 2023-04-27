@@ -1587,7 +1587,7 @@ DataExtension MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [DataExtension](#DataExtension) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.upsert(desToDeploy)](#DataExtension.upsert) ⇒ <code>Promise</code>
+    * [.upsert(metadataMap)](#DataExtension.upsert) ⇒ <code>Promise</code>
     * [._filterUpsertResults(res)](#DataExtension._filterUpsertResults) ⇒ <code>boolean</code>
     * [.create(metadata)](#DataExtension.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#DataExtension.update) ⇒ <code>Promise</code>
@@ -1606,7 +1606,7 @@ DataExtension MetadataType
 
 <a name="DataExtension.upsert"></a>
 
-### DataExtension.upsert(desToDeploy) ⇒ <code>Promise</code>
+### DataExtension.upsert(metadataMap) ⇒ <code>Promise</code>
 Upserts dataExtensions after retrieving them from source and target to compare
 if create or update operation is needed.
 
@@ -1615,7 +1615,7 @@ if create or update operation is needed.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| desToDeploy | <code>TYPE.DataExtensionMap</code> | dataExtensions mapped by their customerKey |
+| metadataMap | <code>TYPE.DataExtensionMap</code> | dataExtensions mapped by their customerKey |
 
 <a name="DataExtension._filterUpsertResults"></a>
 
@@ -3149,8 +3149,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.refresh()](#MetadataType.refresh) ⇒ <code>void</code>
     * [.hasChanged(cachedVersion, metadata, [fieldName])](#MetadataType.hasChanged) ⇒ <code>boolean</code>
     * [.hasChangedGeneric(cachedVersion, metadata, [fieldName], [silent])](#MetadataType.hasChangedGeneric) ⇒ <code>boolean</code>
-    * [.upsert(metadata, deployDir, [isRefresh])](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
-    * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MetadataType.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
+    * [.upsert(metadataMap, deployDir, [isRefresh])](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MetadataType.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
     * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [.createSOAP(metadataEntry, [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [.updateREST(metadataEntry, uri, [httpMethod])](#MetadataType.updateREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
@@ -3477,7 +3477,7 @@ test if metadata was actually changed or not to potentially skip it during deplo
 
 <a name="MetadataType.upsert"></a>
 
-### MetadataType.upsert(metadata, deployDir, [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+### MetadataType.upsert(metadataMap, deployDir, [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3485,13 +3485,13 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 | [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="MetadataType.createOrUpdate"></a>
 
-### MetadataType.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
+### MetadataType.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
 helper for [upsert](#MetadataType.upsert)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3499,7 +3499,7 @@ helper for [upsert](#MetadataType.upsert)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeMap</code> | list of metadata |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | list of metadata |
 | metadataKey | <code>string</code> | key of item we are looking at |
 | hasError | <code>boolean</code> | error flag from previous code |
 | metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
