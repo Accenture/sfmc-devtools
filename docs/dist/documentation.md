@@ -1589,7 +1589,6 @@ DataExtension MetadataType
 * [DataExtension](#DataExtension) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.upsert(metadataMap)](#DataExtension.upsert) ⇒ <code>Promise</code>
     * [.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#DataExtension.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
-    * [._filterUpsertResults(res)](#DataExtension._filterUpsertResults) ⇒ <code>boolean</code>
     * [.create(metadata)](#DataExtension.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#DataExtension.update) ⇒ <code>Promise</code>
     * [.postDeployTasks(upsertedMetadata, originalMetadata, createdUpdated)](#DataExtension.postDeployTasks) ⇒ <code>void</code>
@@ -1633,18 +1632,6 @@ helper for [upsert](#MetadataType.upsert)
 | hasError | <code>boolean</code> | error flag from previous code |
 | metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
 | metadataToCreate | <code>Array.&lt;TYPE.MetadataTypeItem&gt;</code> | list of items to create |
-
-<a name="DataExtension._filterUpsertResults"></a>
-
-### DataExtension.\_filterUpsertResults(res) ⇒ <code>boolean</code>
-helper for [upsert](upsert)
-
-**Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
-**Returns**: <code>boolean</code> - true: keep, false: discard  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| res | <code>object</code> | - |
 
 <a name="DataExtension.create"></a>
 
