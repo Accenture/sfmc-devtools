@@ -126,4 +126,18 @@ describe('type: transactionalPush', () => {
             return;
         });
     });
+    describe('Delete ================', () => {
+        // TODO: add this test
+        it('Should delete the item'); // , async () => {
+        //     // WHEN
+        //     const result = await handler.deleteByKey('testInstance/testBU', 'mobileKeyword', [
+        //         'testExisting_keyword',
+        //     ]);
+        //     // THEN
+        //     assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+
+        //     assert.equal(result, true, 'should have deleted the item');
+        //     return;
+        // });
+    });
 });

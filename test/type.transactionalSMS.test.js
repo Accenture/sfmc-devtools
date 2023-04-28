@@ -156,4 +156,48 @@ describe('type: transactionalSMS', () => {
             return;
         });
     });
+    describe('Delete ================', () => {
+        // TODO: add this test
+        it('Should delete the item'); // , async () => {
+        //     // WHEN
+        //     const result = await handler.deleteByKey('testInstance/testBU', 'mobileKeyword', [
+        //         'testExisting_keyword',
+        //     ]);
+        //     // THEN
+        //     assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+
+        //     assert.equal(result, true, 'should have deleted the item');
+        //     return;
+        // });
+    });
+    describe('CI/CD ================', () => {
+        // TODO: add this test
+        it('Should return a list of files based on their type and key'); // , async () => {
+        //     // WHEN
+        //     const fileList = await handler.getFilesToCommit(
+        //         'testInstance/testBU',
+        //         'mobileKeyword',
+        //         ['testExisting_keyword']
+        //     );
+        //     // THEN
+        //     assert.equal(
+        //         process.exitCode,
+        //         false,
+        //         'getFilesToCommit should not have thrown an error'
+        //     );
+        //     assert.equal(fileList.length, 2, 'expected only 2 file paths');
+
+        //     assert.equal(
+        //         fileList[0].split('\\').join('/'),
+        //         'retrieve/testInstance/testBU/mobileKeyword/testExisting_keyword.mobileKeyword-meta.json',
+        //         'wrong JSON path'
+        //     );
+        //     assert.equal(
+        //         fileList[1].split('\\').join('/'),
+        //         'retrieve/testInstance/testBU/mobileKeyword/testExisting_keyword.mobileKeyword-meta.amp',
+        //         'wrong AMP path'
+        //     );
+        //     return;
+        // });
+    });
 });
