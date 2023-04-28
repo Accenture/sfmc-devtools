@@ -1588,6 +1588,7 @@ DataExtension MetadataType
 
 * [DataExtension](#DataExtension) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.upsert(metadataMap)](#DataExtension.upsert) ⇒ <code>Promise</code>
+    * [.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#DataExtension.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
     * [._filterUpsertResults(res)](#DataExtension._filterUpsertResults) ⇒ <code>boolean</code>
     * [.create(metadata)](#DataExtension.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#DataExtension.update) ⇒ <code>Promise</code>
@@ -1616,6 +1617,22 @@ if create or update operation is needed.
 | Param | Type | Description |
 | --- | --- | --- |
 | metadataMap | <code>TYPE.DataExtensionMap</code> | dataExtensions mapped by their customerKey |
+
+<a name="DataExtension.createOrUpdate"></a>
+
+### DataExtension.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
+helper for [upsert](#MetadataType.upsert)
+
+**Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
+**Returns**: <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code> - action to take  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | list of metadata |
+| metadataKey | <code>string</code> | key of item we are looking at |
+| hasError | <code>boolean</code> | error flag from previous code |
+| metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
+| metadataToCreate | <code>Array.&lt;TYPE.MetadataTypeItem&gt;</code> | list of items to create |
 
 <a name="DataExtension._filterUpsertResults"></a>
 
@@ -1813,7 +1830,7 @@ DataExtensionField MetadataType
     * [.convertToSortedArray(fieldsObj)](#DataExtensionField.convertToSortedArray) ⇒ <code>Array.&lt;TYPE.DataExtensionFieldItem&gt;</code>
     * [.sortDeFields(a, b)](#DataExtensionField.sortDeFields) ⇒ <code>boolean</code>
     * [.postRetrieveTasks(metadata, forDataExtension)](#DataExtensionField.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionFieldItem</code>
-    * [.prepareDeployColumnsOnUpdate(deployColumns, deKey)](#DataExtensionField.prepareDeployColumnsOnUpdate) ⇒ <code>Object.&lt;string, TYPE.DataExtensionFieldItem&gt;</code>
+    * [.prepareDeployColumnsOnUpdate(deployColumns, deKey)](#DataExtensionField.prepareDeployColumnsOnUpdate) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.DataExtensionFieldItem&gt;&gt;</code>
     * [.deleteByKey(customerKey)](#DataExtensionField.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.deleteByKeySOAP(customerKey)](#DataExtensionField.deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#DataExtensionField.postDeleteTasks) ⇒ <code>void</code>
@@ -1884,12 +1901,12 @@ manages post retrieve steps
 
 <a name="DataExtensionField.prepareDeployColumnsOnUpdate"></a>
 
-### DataExtensionField.prepareDeployColumnsOnUpdate(deployColumns, deKey) ⇒ <code>Object.&lt;string, TYPE.DataExtensionFieldItem&gt;</code>
+### DataExtensionField.prepareDeployColumnsOnUpdate(deployColumns, deKey) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.DataExtensionFieldItem&gt;&gt;</code>
 Mofifies passed deployColumns for update by mapping ObjectID to their target column's values.
 Removes FieldType field if its the same in deploy and target column, because it results in an error even if its of the same type
 
 **Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
-**Returns**: <code>Object.&lt;string, TYPE.DataExtensionFieldItem&gt;</code> - existing fields by their original name to allow re-adding FieldType after update  
+**Returns**: <code>Promise.&lt;Object.&lt;string, TYPE.DataExtensionFieldItem&gt;&gt;</code> - existing fields by their original name to allow re-adding FieldType after update  
 
 | Param | Type | Description |
 | --- | --- | --- |
