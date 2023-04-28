@@ -2912,7 +2912,7 @@ definitionId: A unique UUID provided by Salesforce Marketing Cloud. Each version
     * [._postRetrieveTasksBulk(metadataMap)](#Journey._postRetrieveTasksBulk)
     * [.postRetrieveTasks(metadata)](#Journey.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.preDeployTasks(metadata)](#Journey.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#Journey.createOrUpdate)
+    * [.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#Journey.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
 
 <a name="Journey.retrieve"></a>
 
@@ -3034,12 +3034,15 @@ prepares a TSD for deployment
 
 <a name="Journey.createOrUpdate"></a>
 
-### Journey.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)
+### Journey.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
+helper for [upsert](#MetadataType.upsert)
+
 **Kind**: static method of [<code>Journey</code>](#Journey)  
+**Returns**: <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code> - action to take  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata itme |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | list of metadata |
 | metadataKey | <code>string</code> | key of item we are looking at |
 | hasError | <code>boolean</code> | error flag from previous code |
 | metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
