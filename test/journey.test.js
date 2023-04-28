@@ -119,7 +119,7 @@ describe('journey', () => {
                 'buildDefinition should not have thrown an error'
             );
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testExisting_interaction', 'journey'),
+                await testUtils.getActualDeployJson('testTemplated_interaction', 'journey'),
                 await testUtils.getExpectedJson('9999999', 'journey', 'build'),
                 'returned deployment JSON was not equal expected'
             );

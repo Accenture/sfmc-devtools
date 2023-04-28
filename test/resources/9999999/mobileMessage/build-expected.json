@@ -1,12 +1,12 @@
 {
     "id": "NTIzOjc4OjA",
     "type": "ExactTarget.Mobile.Sms.Core.Entities.SmsMessageEntity",
-    "name": "testExisting_mobileMessage",
+    "name": "testTemplated_mobileMessage",
     "origin": "SMS Send",
     "code": {
         "code": "4912312345678"
     },
-    "c__campaignNames": ["testExisting_campaign"],
+    "c__campaignNames": ["testTemplated_campaign"],
 
     "mtSendDate": "2020-07-16T22:46:00Z",
     "template": {

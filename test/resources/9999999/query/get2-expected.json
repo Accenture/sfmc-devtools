@@ -2,7 +2,7 @@
     "name": "testExistingQuery2",
     "key": "testExistingQuery2",
     "description": "bla bla",
-    "targetKey": "childBU_dataextension_test",
+    "targetKey": "testExisting_dataExtension",
     "createdDate": "2022-04-26T15:21:16.453",
     "modifiedDate": "2022-04-26T16:02:44.01",
     "targetUpdateTypeName": "Overwrite",

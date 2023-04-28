@@ -174,12 +174,12 @@ describe('mobileKeyword', () => {
                 'buildDefinition should not have thrown an error'
             );
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testExisting_keyword', 'mobileKeyword'),
+                await testUtils.getActualDeployJson('testTemplated_keyword', 'mobileKeyword'),
                 await testUtils.getExpectedJson('9999999', 'mobileKeyword', 'build'),
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualDeployFile('testExisting_keyword', 'mobileKeyword', 'amp'))
+                file(testUtils.getActualDeployFile('testTemplated_keyword', 'mobileKeyword', 'amp'))
             ).to.equal(file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'build', 'amp')));
 
             assert.equal(

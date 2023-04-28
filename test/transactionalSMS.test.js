@@ -143,12 +143,12 @@ describe('transactionalSMS', () => {
             );
 
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testExisting_tsms', 'transactionalSMS'),
+                await testUtils.getActualDeployJson('testTemplated_tsms', 'transactionalSMS'),
                 await testUtils.getExpectedJson('9999999', 'transactionalSMS', 'build'),
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualDeployFile('testExisting_tsms', 'transactionalSMS', 'amp'))
+                file(testUtils.getActualDeployFile('testTemplated_tsms', 'transactionalSMS', 'amp'))
             ).to.equal(
                 file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'build', 'amp'))
             );

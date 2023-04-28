@@ -117,7 +117,7 @@ describe('transactionalEmail', () => {
                 'buildDefinition should not have thrown an error'
             );
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testExisting_temail', 'transactionalEmail'),
+                await testUtils.getActualDeployJson('testTemplated_temail', 'transactionalEmail'),
                 await testUtils.getExpectedJson('9999999', 'transactionalEmail', 'build'),
                 'returned deployment JSON was not equal expected'
             );

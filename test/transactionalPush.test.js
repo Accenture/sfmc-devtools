@@ -118,7 +118,7 @@ describe('transactionalPush', () => {
             );
 
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testExisting_tpush', 'transactionalPush'),
+                await testUtils.getActualDeployJson('testTemplated_tpush', 'transactionalPush'),
                 await testUtils.getExpectedJson('9999999', 'transactionalPush', 'build'),
                 'returned deployment JSON was not equal expected'
             );

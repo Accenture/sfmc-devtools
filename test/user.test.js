@@ -148,7 +148,7 @@ describe('user', () => {
             );
 
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testExisting_user', 'user', '_ParentBU_'),
+                await testUtils.getActualDeployJson('testTemplated_user', 'user', '_ParentBU_'),
                 await testUtils.getExpectedJson('1111111', 'user', 'build'),
                 'returned deployment file was not equal expected'
             );
