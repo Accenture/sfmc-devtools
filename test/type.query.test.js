@@ -9,7 +9,7 @@ const cache = require('../lib/util/cache');
 const testUtils = require('./utils');
 const handler = require('../lib/index');
 
-describe('query', () => {
+describe('type: query', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });

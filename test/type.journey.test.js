@@ -6,7 +6,7 @@ const cache = require('../lib/util/cache');
 const testUtils = require('./utils');
 const handler = require('../lib/index');
 
-describe('transactionalPush', () => {
+describe('type: journey', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
@@ -15,26 +15,26 @@ describe('transactionalPush', () => {
     });
 
     describe('Retrieve ================', () => {
-        it('Should retrieve a transactionalPush', async () => {
+        it('Should retrieve a journey', async () => {
             // WHEN
-            await handler.retrieve('testInstance/testBU', ['transactionalPush']);
+            await handler.retrieve('testInstance/testBU', ['journey']);
             // THEN
             assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
-                result.transactionalPush ? Object.keys(result.transactionalPush).length : 0,
-                1,
-                'only one transactionalPush expected'
+                result.journey ? Object.keys(result.journey).length : 0,
+                2,
+                'only 2 journeys expected'
             );
             assert.deepEqual(
-                await testUtils.getActualJson('testExisting_tpush', 'transactionalPush'),
-                await testUtils.getExpectedJson('9999999', 'transactionalPush', 'get'),
+                await testUtils.getActualJson('testExisting_interaction', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get'),
                 'returned JSON was not equal expected'
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                3,
+                13,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -44,67 +44,69 @@ describe('transactionalPush', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
-        it('Should create & upsert a transactionalPush', async () => {
+        it('Should create & upsert a journey', async () => {
             // WHEN
-            await handler.deploy('testInstance/testBU', ['transactionalPush']);
+            await handler.deploy('testInstance/testBU', ['journey']);
             // THEN
             assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
-                result.transactionalPush ? Object.keys(result.transactionalPush).length : 0,
-                2,
-                'two transactionalPushs expected'
+                result.journey ? Object.keys(result.journey).length : 0,
+                3,
+                '3 journeys expected'
             );
             // confirm created item
             assert.deepEqual(
-                await testUtils.getActualJson('testNew_tpush', 'transactionalPush'),
-                await testUtils.getExpectedJson('9999999', 'transactionalPush', 'post'),
-                'returned JSON was not equal expected for insert transactionalPush'
+                await testUtils.getActualJson('testNew_interaction', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'post'),
+                'returned JSON was not equal expected for insert journey'
             );
+
             // confirm updated item
             assert.deepEqual(
-                await testUtils.getActualJson('testExisting_tpush', 'transactionalPush'),
-                await testUtils.getExpectedJson('9999999', 'transactionalPush', 'patch'),
-                'returned JSON was not equal expected for update transactionalPush'
+                await testUtils.getActualJson('testExisting_interaction', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'put'), // watch out - journey api wants put instead of patch for updates
+                'returned JSON was not equal expected for update journey'
             );
+
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                5,
+                11,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
     });
     describe('Templating ================', () => {
-        // it.skip('Should create a transactionalPush template via retrieveAsTemplate and build it');
-        it('Should create a transactionalPush template via buildTemplate and build it', async () => {
+        it('Should create a journey template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
-            await handler.retrieve('testInstance/testBU', ['transactionalPush']);
+            await handler.retrieve('testInstance/testBU', ['journey']);
             // buildTemplate
             const result = await handler.buildTemplate(
                 'testInstance/testBU',
-                'transactionalPush',
-                ['testExisting_tpush'],
+                'journey',
+                ['testExisting_interaction'],
                 'testSourceMarket'
             );
             assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
             assert.equal(
-                result.transactionalPush ? Object.keys(result.transactionalPush).length : 0,
+                result.journey ? Object.keys(result.journey).length : 0,
                 1,
-                'only one transactionalPush expected'
+                'only one journey expected'
             );
             assert.deepEqual(
-                await testUtils.getActualTemplateJson('testExisting_tpush', 'transactionalPush'),
-                await testUtils.getExpectedJson('9999999', 'transactionalPush', 'template'),
+                await testUtils.getActualTemplateJson('testExisting_interaction', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'template'),
                 'returned template JSON was not equal expected'
             );
+
             // buildDefinition
             await handler.buildDefinition(
                 'testInstance/testBU',
-                'transactionalPush',
-                'testExisting_tpush',
+                'journey',
+                'testExisting_interaction',
                 'testTargetMarket'
             );
             assert.equal(
@@ -112,15 +114,15 @@ describe('transactionalPush', () => {
                 false,
                 'buildDefinition should not have thrown an error'
             );
-
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testTemplated_tpush', 'transactionalPush'),
-                await testUtils.getExpectedJson('9999999', 'transactionalPush', 'build'),
+                await testUtils.getActualDeployJson('testTemplated_interaction', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'build'),
                 'returned deployment JSON was not equal expected'
             );
+
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                3,
+                13,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

@@ -8,7 +8,7 @@ const cache = require('../lib/util/cache');
 const testUtils = require('./utils');
 const handler = require('../lib/index');
 
-describe('mobileKeyword', () => {
+describe('type: mobileKeyword', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });

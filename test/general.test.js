@@ -17,7 +17,7 @@ describe('GENERAL', () => {
     describe('explainTypes ================', () => {
         it('without options', () => {
             handler.explainTypes();
-            assert.equal(!!process.exitCode, false, 'explainTypes should not have thrown an error');
+            assert.equal(process.exitCode, false, 'explainTypes should not have thrown an error');
 
             return;
         });
@@ -26,7 +26,7 @@ describe('GENERAL', () => {
             const typeArr = handler.explainTypes();
 
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'explainTypes --json should not have thrown an error'
             );

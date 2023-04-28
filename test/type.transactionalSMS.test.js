@@ -8,7 +8,7 @@ const cache = require('../lib/util/cache');
 const testUtils = require('./utils');
 const handler = require('../lib/index');
 
-describe('transactionalSMS', () => {
+describe('type: transactionalSMS', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });

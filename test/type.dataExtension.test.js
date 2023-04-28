@@ -3,7 +3,7 @@ const cache = require('../lib/util/cache');
 const testUtils = require('./utils');
 const handler = require('../lib/index');
 
-describe('dataExtension', () => {
+describe('type: dataExtension', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });

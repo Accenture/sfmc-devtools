@@ -3,7 +3,7 @@ const cache = require('../lib/util/cache');
 const testUtils = require('./utils');
 const handler = require('../lib/index');
 
-describe('user', () => {
+describe('type: user', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });

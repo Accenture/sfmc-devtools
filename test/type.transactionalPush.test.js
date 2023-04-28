@@ -6,7 +6,7 @@ const cache = require('../lib/util/cache');
 const testUtils = require('./utils');
 const handler = require('../lib/index');
 
-describe('transactionalEmail', () => {
+describe('type: transactionalPush', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
@@ -15,26 +15,26 @@ describe('transactionalEmail', () => {
     });
 
     describe('Retrieve ================', () => {
-        it('Should retrieve a transactionalEmail', async () => {
+        it('Should retrieve a transactionalPush', async () => {
             // WHEN
-            await handler.retrieve('testInstance/testBU', ['transactionalEmail']);
+            await handler.retrieve('testInstance/testBU', ['transactionalPush']);
             // THEN
             assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
-                result.transactionalEmail ? Object.keys(result.transactionalEmail).length : 0,
+                result.transactionalPush ? Object.keys(result.transactionalPush).length : 0,
                 1,
-                'only one transactionalEmail expected'
+                'only one transactionalPush expected'
             );
             assert.deepEqual(
-                await testUtils.getActualJson('testExisting_temail', 'transactionalEmail'),
-                await testUtils.getExpectedJson('9999999', 'transactionalEmail', 'get'),
+                await testUtils.getActualJson('testExisting_tpush', 'transactionalPush'),
+                await testUtils.getExpectedJson('9999999', 'transactionalPush', 'get'),
                 'returned JSON was not equal expected'
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                12,
+                3,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -44,67 +44,67 @@ describe('transactionalEmail', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
-        it('Should create & upsert a transactionalEmail', async () => {
+        it('Should create & upsert a transactionalPush', async () => {
             // WHEN
-            await handler.deploy('testInstance/testBU', ['transactionalEmail']);
+            await handler.deploy('testInstance/testBU', ['transactionalPush']);
             // THEN
             assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
-                result.transactionalEmail ? Object.keys(result.transactionalEmail).length : 0,
+                result.transactionalPush ? Object.keys(result.transactionalPush).length : 0,
                 2,
-                'two transactionalEmails expected'
+                'two transactionalPushs expected'
             );
             // confirm created item
             assert.deepEqual(
-                await testUtils.getActualJson('testNew_temail', 'transactionalEmail'),
-                await testUtils.getExpectedJson('9999999', 'transactionalEmail', 'post'),
-                'returned JSON was not equal expected for insert transactionalEmail'
+                await testUtils.getActualJson('testNew_tpush', 'transactionalPush'),
+                await testUtils.getExpectedJson('9999999', 'transactionalPush', 'post'),
+                'returned JSON was not equal expected for insert transactionalPush'
             );
             // confirm updated item
             assert.deepEqual(
-                await testUtils.getActualJson('testExisting_temail', 'transactionalEmail'),
-                await testUtils.getExpectedJson('9999999', 'transactionalEmail', 'patch'),
-                'returned JSON was not equal expected for update transactionalEmail'
+                await testUtils.getActualJson('testExisting_tpush', 'transactionalPush'),
+                await testUtils.getExpectedJson('9999999', 'transactionalPush', 'patch'),
+                'returned JSON was not equal expected for update transactionalPush'
             );
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                14,
+                5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
     });
     describe('Templating ================', () => {
-        // it.skip('Should create a transactionalEmail template via retrieveAsTemplate and build it');
-        it('Should create a transactionalEmail template via buildTemplate and build it', async () => {
+        // it.skip('Should create a transactionalPush template via retrieveAsTemplate and build it');
+        it('Should create a transactionalPush template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
-            await handler.retrieve('testInstance/testBU', ['transactionalEmail']);
+            await handler.retrieve('testInstance/testBU', ['transactionalPush']);
             // buildTemplate
             const result = await handler.buildTemplate(
                 'testInstance/testBU',
-                'transactionalEmail',
-                ['testExisting_temail'],
+                'transactionalPush',
+                ['testExisting_tpush'],
                 'testSourceMarket'
             );
             assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
             assert.equal(
-                result.transactionalEmail ? Object.keys(result.transactionalEmail).length : 0,
+                result.transactionalPush ? Object.keys(result.transactionalPush).length : 0,
                 1,
-                'only one transactionalEmail expected'
+                'only one transactionalPush expected'
             );
             assert.deepEqual(
-                await testUtils.getActualTemplateJson('testExisting_temail', 'transactionalEmail'),
-                await testUtils.getExpectedJson('9999999', 'transactionalEmail', 'template'),
+                await testUtils.getActualTemplateJson('testExisting_tpush', 'transactionalPush'),
+                await testUtils.getExpectedJson('9999999', 'transactionalPush', 'template'),
                 'returned template JSON was not equal expected'
             );
             // buildDefinition
             await handler.buildDefinition(
                 'testInstance/testBU',
-                'transactionalEmail',
-                'testExisting_temail',
+                'transactionalPush',
+                'testExisting_tpush',
                 'testTargetMarket'
             );
             assert.equal(
@@ -112,14 +112,15 @@ describe('transactionalEmail', () => {
                 false,
                 'buildDefinition should not have thrown an error'
             );
+
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testTemplated_temail', 'transactionalEmail'),
-                await testUtils.getExpectedJson('9999999', 'transactionalEmail', 'build'),
+                await testUtils.getActualDeployJson('testTemplated_tpush', 'transactionalPush'),
+                await testUtils.getExpectedJson('9999999', 'transactionalPush', 'build'),
                 'returned deployment JSON was not equal expected'
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                12,
+                3,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
