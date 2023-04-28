@@ -21,7 +21,7 @@ describe('mobileKeyword', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['mobileKeyword']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -53,7 +53,7 @@ describe('mobileKeyword', () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['mobileKeyword']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -99,7 +99,7 @@ describe('mobileKeyword', () => {
             );
             // WHEN
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'retrieveAsTemplate should not have thrown an error'
             );
@@ -137,11 +137,7 @@ describe('mobileKeyword', () => {
                 ['testExisting_keyword'],
                 'testSourceMarket'
             );
-            assert.equal(
-                !!process.exitCode,
-                false,
-                'buildTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
 
             assert.equal(
                 result.mobileKeyword ? Object.keys(result.mobileKeyword).length : 0,
@@ -169,7 +165,7 @@ describe('mobileKeyword', () => {
                 'testTargetMarket'
             );
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'buildDefinition should not have thrown an error'
             );
@@ -197,7 +193,7 @@ describe('mobileKeyword', () => {
                 'testExisting_keyword',
             ]);
             // THEN
-            assert.equal(!!process.exitCode, false, 'delete should not have thrown an error');
+            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
 
             assert.equal(result, true, 'should have deleted the item');
             return;
@@ -213,7 +209,7 @@ describe('mobileKeyword', () => {
             );
             // THEN
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'getFilesToCommit should not have thrown an error'
             );

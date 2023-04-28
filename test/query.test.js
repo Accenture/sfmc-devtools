@@ -22,7 +22,7 @@ describe('query', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['query']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -57,7 +57,7 @@ describe('query', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['query'], ['testExistingQuery']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -89,7 +89,7 @@ describe('query', () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['query']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -135,7 +135,7 @@ describe('query', () => {
             );
             // WHEN
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'retrieveAsTemplate should not have thrown an error'
             );
@@ -160,7 +160,7 @@ describe('query', () => {
                 'testTargetMarket'
             );
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'buildDefinition should not have thrown an error'
             );
@@ -191,11 +191,7 @@ describe('query', () => {
                 'testSourceMarket'
             );
             // WHEN
-            assert.equal(
-                !!process.exitCode,
-                false,
-                'buildTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
 
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
@@ -218,7 +214,7 @@ describe('query', () => {
                 'testTargetMarket'
             );
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'buildDefinition should not have thrown an error'
             );
@@ -247,7 +243,7 @@ describe('query', () => {
                 'testExistingQuery',
             ]);
             // THEN
-            assert.equal(!!process.exitCode, false, 'delete should not have thrown an error');
+            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
 
             assert.equal(result, true, 'should have deleted the item');
             return;
@@ -261,7 +257,7 @@ describe('query', () => {
             ]);
             // THEN
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'getFilesToCommit should not have thrown an error'
             );

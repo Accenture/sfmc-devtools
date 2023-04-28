@@ -15,7 +15,7 @@ describe('user', () => {
             // WHEN
             await handler.retrieve('testInstance/_ParentBU_', ['user']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -46,7 +46,7 @@ describe('user', () => {
             const expectedCache = ['testNew_user', 'testExisting_user'];
             await handler.deploy('testInstance/_ParentBU_', ['user'], expectedCache);
             // THEN
-            assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
 
             // get results from cache
             const result = cache.getCache();
@@ -118,11 +118,7 @@ describe('user', () => {
                 ['testExisting_user'],
                 'testSourceMarket'
             );
-            assert.equal(
-                !!process.exitCode,
-                false,
-                'buildTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
             // WHEN
             assert.equal(
                 result.user ? Object.keys(result.user).length : 0,
@@ -142,7 +138,7 @@ describe('user', () => {
                 'testTargetMarket'
             );
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'buildDefinition should not have thrown an error'
             );

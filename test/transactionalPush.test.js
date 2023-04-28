@@ -19,7 +19,7 @@ describe('transactionalPush', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['transactionalPush']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -48,7 +48,7 @@ describe('transactionalPush', () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['transactionalPush']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -89,11 +89,7 @@ describe('transactionalPush', () => {
                 ['testExisting_tpush'],
                 'testSourceMarket'
             );
-            assert.equal(
-                !!process.exitCode,
-                false,
-                'buildTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.transactionalPush ? Object.keys(result.transactionalPush).length : 0,
                 1,
@@ -112,7 +108,7 @@ describe('transactionalPush', () => {
                 'testTargetMarket'
             );
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'buildDefinition should not have thrown an error'
             );
