@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
     <soap:Header>
         <wsa:Action>RetrieveResponse</wsa:Action>
         <wsa:MessageID>urn:uuid:c198cc12-c34c-4d1d-90b0-5b785a342efc</wsa:MessageID>
@@ -21,9 +26,9 @@
                 <CreatedDate>2022-04-21T06:56:27.927</CreatedDate>
                 <ModifiedDate>2022-04-21T06:56:27.927</ModifiedDate>
                 <ObjectID>21711373-72c1-ec11-b83b-48df37d1deb7</ObjectID>
-                <CustomerKey>childBU_dataextension_test</CustomerKey>
-                <Name>childBU_dataextension_test</Name>
-                <Description>Container for my test emails</Description>
+                <CustomerKey>testExisting_dataExtension</CustomerKey>
+                <Name>testExisting_dataExtension</Name>
+                <Description>bla bla</Description>
                 <IsSendable>true</IsSendable>
                 <IsTestable>true</IsTestable>
                 <SendableDataExtensionField>
