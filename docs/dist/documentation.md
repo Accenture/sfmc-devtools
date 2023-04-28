@@ -1596,7 +1596,7 @@ DataExtension MetadataType
     * [.retrieveChangelog([additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.postRetrieveTasks(metadata)](#DataExtension.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionItem</code>
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.DataExtensionItem&gt;</code>
-    * [.document([metadata])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.document([metadataMap])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(customerKey)](#DataExtension.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postDeleteTasks(customerKey)](#DataExtension.postDeleteTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.retrieveForCache()](#DataExtension.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
@@ -1723,7 +1723,7 @@ prepares a DataExtension for deployment
 
 <a name="DataExtension.document"></a>
 
-### DataExtension.document([metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
+### DataExtension.document([metadataMap]) ⇒ <code>Promise.&lt;void&gt;</code>
 Parses metadata into a readable Markdown/HTML format then saves it
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -1731,7 +1731,7 @@ Parses metadata into a readable Markdown/HTML format then saves it
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [metadata] | <code>TYPE.DataExtensionMap</code> | a list of dataExtension definitions |
+| [metadataMap] | <code>TYPE.DataExtensionMap</code> | a list of dataExtension definitions |
 
 <a name="DataExtension.deleteByKey"></a>
 
