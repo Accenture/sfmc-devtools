@@ -3140,7 +3140,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.deploy(metadata, deployDir, retrieveDir, [isRefresh])](#MetadataType.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.postDeployTasks(upsertResults, originalMetadata, createdUpdated, [isRefresh])](#MetadataType.postDeployTasks) ⇒ <code>void</code>
     * [.postCreateTasks(metadataEntry, apiResponse)](#MetadataType.postCreateTasks) ⇒ <code>void</code>
-    * [.postCreateTasks_legacyApi(metadataEntry, apiResponse)](#MetadataType.postCreateTasks_legacyApi) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.postUpdateTasks(metadataEntry, apiResponse)](#MetadataType.postUpdateTasks) ⇒ <code>void</code>
+    * [.postDeployTasks_legacyApi(metadataEntry, apiResponse)](#MetadataType.postDeployTasks_legacyApi) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setFolderPath(metadata)](#MetadataType.setFolderPath)
     * [.setFolderId(metadata)](#MetadataType.setFolderId)
@@ -3274,9 +3275,21 @@ helper for [createREST](createREST)
 | metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
 | apiResponse | <code>object</code> | varies depending on the API call |
 
-<a name="MetadataType.postCreateTasks_legacyApi"></a>
+<a name="MetadataType.postUpdateTasks"></a>
 
-### MetadataType.postCreateTasks\_legacyApi(metadataEntry, apiResponse) ⇒ <code>Promise.&lt;void&gt;</code>
+### MetadataType.postUpdateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
+helper for [updateREST](updateREST)
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
+| apiResponse | <code>object</code> | varies depending on the API call |
+
+<a name="MetadataType.postDeployTasks_legacyApi"></a>
+
+### MetadataType.postDeployTasks\_legacyApi(metadataEntry, apiResponse) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for [createREST](createREST) when legacy API endpoints as these do not return the created item but only their new id
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -4004,6 +4017,7 @@ MobileKeyword MetadataType
     * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#MobileKeyword._buildForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.preDeployTasks(metadata, deployDir)](#MobileKeyword.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
     * [.postCreateTasks(metadataEntry, apiResponse)](#MobileKeyword.postCreateTasks) ⇒ <code>void</code>
+    * [.postUpdateTasks(metadataEntry, apiResponse)](#MobileKeyword.postUpdateTasks) ⇒ <code>void</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#MobileKeyword._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.deleteByKey(key)](#MobileKeyword.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postDeleteTasks(customerKey)](#MobileKeyword.postDeleteTasks) ⇒ <code>void</code>
@@ -4182,6 +4196,18 @@ helper for [createREST](createREST)
 | metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
 | apiResponse | <code>object</code> | varies depending on the API call |
 
+<a name="MobileKeyword.postUpdateTasks"></a>
+
+### MobileKeyword.postUpdateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
+helper for [updateREST](updateREST)
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
+| apiResponse | <code>object</code> | varies depending on the API call |
+
 <a name="MobileKeyword._mergeCode"></a>
 
 ### MobileKeyword.\_mergeCode(metadata, deployDir, [templateName]) ⇒ <code>Promise.&lt;string&gt;</code>
@@ -4251,6 +4277,7 @@ MobileMessage MetadataType
     * [.postRetrieveTasks(metadata)](#MobileMessage.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.preDeployTasks(metadata, deployDir)](#MobileMessage.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.postCreateTasks(metadataEntry, apiResponse)](#MobileMessage.postCreateTasks) ⇒ <code>void</code>
+    * [.postUpdateTasks(metadataEntry, apiResponse)](#MobileMessage.postUpdateTasks) ⇒ <code>void</code>
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MobileMessage.buildDefinitionForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MobileMessage.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#MobileMessage._buildForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
@@ -4377,6 +4404,18 @@ prepares an event definition for deployment
 
 ### MobileMessage.postCreateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
 helper for [createREST](createREST)
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
+| apiResponse | <code>object</code> | varies depending on the API call |
+
+<a name="MobileMessage.postUpdateTasks"></a>
+
+### MobileMessage.postUpdateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
+helper for [updateREST](updateREST)
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
 

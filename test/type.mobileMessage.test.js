@@ -84,7 +84,7 @@ describe('type: mobileMessage', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                7,
+                8,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

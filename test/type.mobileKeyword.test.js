@@ -51,7 +51,7 @@ describe('type: mobileKeyword', () => {
         });
         it('Should create (but not update) a mobileKeyword', async () => {
             // WHEN
-            await handler.deploy('testInstance/testBU', ['mobileKeyword']);
+            await handler.deploy('testInstance/testBU', ['mobileKeyword'], ['testNew_keyword']);
             // THEN
             assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
             // get results from cache
@@ -83,6 +83,24 @@ describe('type: mobileKeyword', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 4,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should not create a mobileKeyword with wrong type', async () => {
+            // WHEN
+            await handler.deploy(
+                'testInstance/testBU',
+                ['mobileKeyword'],
+                ['testNew_keyword_blocked']
+            );
+            // THEN
+            assert.equal(process.exitCode, true, 'deploy should have thrown an error');
+
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                2,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
