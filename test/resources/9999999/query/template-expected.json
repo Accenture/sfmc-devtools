@@ -2,7 +2,7 @@
     "name": "testExistingQuery",
     "key": "testExistingQuery",
     "description": "{{{description}}}",
-    "targetKey": "childBU_dataextension{{{suffix}}}",
+    "targetKey": "{{{prefix}}}dataExtension",
     "targetUpdateTypeName": "Overwrite",
     "r__folder_Path": "Query"
 }

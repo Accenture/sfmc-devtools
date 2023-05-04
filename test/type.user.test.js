@@ -3,7 +3,7 @@ const cache = require('../lib/util/cache');
 const testUtils = require('./utils');
 const handler = require('../lib/index');
 
-describe('user', () => {
+describe('type: user', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
@@ -15,7 +15,7 @@ describe('user', () => {
             // WHEN
             await handler.retrieve('testInstance/_ParentBU_', ['user']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -46,7 +46,7 @@ describe('user', () => {
             const expectedCache = ['testNew_user', 'testExisting_user'];
             await handler.deploy('testInstance/_ParentBU_', ['user'], expectedCache);
             // THEN
-            assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
 
             // get results from cache
             const result = cache.getCache();
@@ -105,6 +105,7 @@ describe('user', () => {
             );
             return;
         });
+        it('Should change the key during update with --changeKeyValue');
     });
     describe('Templating ================', () => {
         // it('Should create a user template via retrieveAsTemplate and build it', async () => {});
@@ -118,11 +119,7 @@ describe('user', () => {
                 ['testExisting_user'],
                 'testSourceMarket'
             );
-            assert.equal(
-                !!process.exitCode,
-                false,
-                'buildTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
             // WHEN
             assert.equal(
                 result.user ? Object.keys(result.user).length : 0,
@@ -142,13 +139,13 @@ describe('user', () => {
                 'testTargetMarket'
             );
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'buildDefinition should not have thrown an error'
             );
 
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testExisting_user', 'user', '_ParentBU_'),
+                await testUtils.getActualDeployJson('testTemplated_user', 'user', '_ParentBU_'),
                 await testUtils.getExpectedJson('1111111', 'user', 'build'),
                 'returned deployment file was not equal expected'
             );

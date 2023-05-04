@@ -1,6 +1,6 @@
 {
     "Client": {},
-    "CustomerKey": "testExisting_user",
+    "CustomerKey": "testTemplated_user",
     "UserID": "user_testTarget@accenture.asgr",
     "Name": "user test",
     "Email": "user_testTarget@accenture.com",

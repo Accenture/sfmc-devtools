@@ -8,7 +8,7 @@ const cache = require('../lib/util/cache');
 const testUtils = require('./utils');
 const handler = require('../lib/index');
 
-describe('mobileKeyword', () => {
+describe('type: mobileKeyword', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
@@ -21,7 +21,7 @@ describe('mobileKeyword', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['mobileKeyword']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -51,9 +51,9 @@ describe('mobileKeyword', () => {
         });
         it('Should create (but not update) a mobileKeyword', async () => {
             // WHEN
-            await handler.deploy('testInstance/testBU', ['mobileKeyword']);
+            await handler.deploy('testInstance/testBU', ['mobileKeyword'], ['testNew_keyword']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -87,6 +87,25 @@ describe('mobileKeyword', () => {
             );
             return;
         });
+        it('Should not create a mobileKeyword with wrong type', async () => {
+            // WHEN
+            await handler.deploy(
+                'testInstance/testBU',
+                ['mobileKeyword'],
+                ['testNew_keyword_blocked']
+            );
+            // THEN
+            assert.equal(process.exitCode, true, 'deploy should have thrown an error');
+
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                2,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should change the key during update via --changeKeyValue');
     });
     describe('Templating ================', () => {
         it('Should create a mobileKeyword template via retrieveAsTemplate and build it', async () => {
@@ -99,7 +118,7 @@ describe('mobileKeyword', () => {
             );
             // WHEN
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'retrieveAsTemplate should not have thrown an error'
             );
@@ -137,11 +156,7 @@ describe('mobileKeyword', () => {
                 ['testExisting_keyword'],
                 'testSourceMarket'
             );
-            assert.equal(
-                !!process.exitCode,
-                false,
-                'buildTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
 
             assert.equal(
                 result.mobileKeyword ? Object.keys(result.mobileKeyword).length : 0,
@@ -169,17 +184,17 @@ describe('mobileKeyword', () => {
                 'testTargetMarket'
             );
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'buildDefinition should not have thrown an error'
             );
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testExisting_keyword', 'mobileKeyword'),
+                await testUtils.getActualDeployJson('testTemplated_keyword', 'mobileKeyword'),
                 await testUtils.getExpectedJson('9999999', 'mobileKeyword', 'build'),
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualDeployFile('testExisting_keyword', 'mobileKeyword', 'amp'))
+                file(testUtils.getActualDeployFile('testTemplated_keyword', 'mobileKeyword', 'amp'))
             ).to.equal(file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'build', 'amp')));
 
             assert.equal(
@@ -197,7 +212,7 @@ describe('mobileKeyword', () => {
                 'testExisting_keyword',
             ]);
             // THEN
-            assert.equal(!!process.exitCode, false, 'delete should not have thrown an error');
+            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
 
             assert.equal(result, true, 'should have deleted the item');
             return;
@@ -213,7 +228,7 @@ describe('mobileKeyword', () => {
             );
             // THEN
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'getFilesToCommit should not have thrown an error'
             );

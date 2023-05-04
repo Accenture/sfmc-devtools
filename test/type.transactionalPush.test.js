@@ -6,7 +6,7 @@ const cache = require('../lib/util/cache');
 const testUtils = require('./utils');
 const handler = require('../lib/index');
 
-describe('transactionalPush', () => {
+describe('type: transactionalPush', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
@@ -19,7 +19,7 @@ describe('transactionalPush', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['transactionalPush']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -48,7 +48,7 @@ describe('transactionalPush', () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['transactionalPush']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -76,6 +76,22 @@ describe('transactionalPush', () => {
             );
             return;
         });
+        it('Should NOT change the key during update with --changeKeyValue and instead fail due to missing support', async () => {
+            // WHEN
+            handler.setOptions({ changeKeyValue: 'updatedKey' });
+            await handler.deploy(
+                'testInstance/testBU',
+                ['transactionalPush'],
+                ['testExisting_tpush']
+            );
+            // THEN
+            assert.equal(
+                process.exitCode,
+                1,
+                'deploy should have thrown an error due to lack of support'
+            );
+            return;
+        });
     });
     describe('Templating ================', () => {
         // it.skip('Should create a transactionalPush template via retrieveAsTemplate and build it');
@@ -89,11 +105,7 @@ describe('transactionalPush', () => {
                 ['testExisting_tpush'],
                 'testSourceMarket'
             );
-            assert.equal(
-                !!process.exitCode,
-                false,
-                'buildTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.transactionalPush ? Object.keys(result.transactionalPush).length : 0,
                 1,
@@ -112,13 +124,13 @@ describe('transactionalPush', () => {
                 'testTargetMarket'
             );
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'buildDefinition should not have thrown an error'
             );
 
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testExisting_tpush', 'transactionalPush'),
+                await testUtils.getActualDeployJson('testTemplated_tpush', 'transactionalPush'),
                 await testUtils.getExpectedJson('9999999', 'transactionalPush', 'build'),
                 'returned deployment JSON was not equal expected'
             );
@@ -129,5 +141,19 @@ describe('transactionalPush', () => {
             );
             return;
         });
+    });
+    describe('Delete ================', () => {
+        // TODO: add this test
+        it('Should delete the item'); // , async () => {
+        //     // WHEN
+        //     const result = await handler.deleteByKey('testInstance/testBU', 'mobileKeyword', [
+        //         'testExisting_keyword',
+        //     ]);
+        //     // THEN
+        //     assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+
+        //     assert.equal(result, true, 'should have deleted the item');
+        //     return;
+        // });
     });
 });

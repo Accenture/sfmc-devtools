@@ -6,7 +6,7 @@ const cache = require('../lib/util/cache');
 const testUtils = require('./utils');
 const handler = require('../lib/index');
 
-describe('journey', () => {
+describe('type: journey', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
@@ -19,7 +19,7 @@ describe('journey', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['journey']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -48,7 +48,7 @@ describe('journey', () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['journey']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -78,6 +78,18 @@ describe('journey', () => {
             );
             return;
         });
+        it('Should NOT change the key during update with --changeKeyValue and instead fail due to missing support', async () => {
+            // WHEN
+            handler.setOptions({ changeKeyValue: 'updatedKey' });
+            await handler.deploy('testInstance/testBU', ['journey'], ['testExisting_interaction']);
+            // THEN
+            assert.equal(
+                process.exitCode,
+                1,
+                'deploy should have thrown an error due to lack of support'
+            );
+            return;
+        });
     });
     describe('Templating ================', () => {
         it('Should create a journey template via buildTemplate and build it', async () => {
@@ -90,11 +102,7 @@ describe('journey', () => {
                 ['testExisting_interaction'],
                 'testSourceMarket'
             );
-            assert.equal(
-                !!process.exitCode,
-                false,
-                'buildTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.journey ? Object.keys(result.journey).length : 0,
                 1,
@@ -114,12 +122,12 @@ describe('journey', () => {
                 'testTargetMarket'
             );
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'buildDefinition should not have thrown an error'
             );
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testExisting_interaction', 'journey'),
+                await testUtils.getActualDeployJson('testTemplated_interaction', 'journey'),
                 await testUtils.getExpectedJson('9999999', 'journey', 'build'),
                 'returned deployment JSON was not equal expected'
             );
@@ -131,5 +139,19 @@ describe('journey', () => {
             );
             return;
         });
+    });
+    describe('Delete ================', () => {
+        // TODO: add this test
+        it('Should delete the item'); // , async () => {
+        //     // WHEN
+        //     const result = await handler.deleteByKey('testInstance/testBU', 'mobileKeyword', [
+        //         'testExisting_keyword',
+        //     ]);
+        //     // THEN
+        //     assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+
+        //     assert.equal(result, true, 'should have deleted the item');
+        //     return;
+        // });
     });
 });

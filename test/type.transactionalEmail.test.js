@@ -6,7 +6,7 @@ const cache = require('../lib/util/cache');
 const testUtils = require('./utils');
 const handler = require('../lib/index');
 
-describe('transactionalEmail', () => {
+describe('type: transactionalEmail', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
@@ -19,7 +19,7 @@ describe('transactionalEmail', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['transactionalEmail']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -48,7 +48,7 @@ describe('transactionalEmail', () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['transactionalEmail']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -76,6 +76,22 @@ describe('transactionalEmail', () => {
             );
             return;
         });
+        it('Should NOT change the key during update with --changeKeyValue and instead fail due to missing support', async () => {
+            // WHEN
+            handler.setOptions({ changeKeyValue: 'updatedKey' });
+            await handler.deploy(
+                'testInstance/testBU',
+                ['transactionalEmail'],
+                ['testExisting_temail']
+            );
+            // THEN
+            assert.equal(
+                process.exitCode,
+                1,
+                'deploy should have thrown an error due to lack of support'
+            );
+            return;
+        });
     });
     describe('Templating ================', () => {
         // it.skip('Should create a transactionalEmail template via retrieveAsTemplate and build it');
@@ -89,11 +105,7 @@ describe('transactionalEmail', () => {
                 ['testExisting_temail'],
                 'testSourceMarket'
             );
-            assert.equal(
-                !!process.exitCode,
-                false,
-                'buildTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.transactionalEmail ? Object.keys(result.transactionalEmail).length : 0,
                 1,
@@ -112,12 +124,12 @@ describe('transactionalEmail', () => {
                 'testTargetMarket'
             );
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'buildDefinition should not have thrown an error'
             );
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testExisting_temail', 'transactionalEmail'),
+                await testUtils.getActualDeployJson('testTemplated_temail', 'transactionalEmail'),
                 await testUtils.getExpectedJson('9999999', 'transactionalEmail', 'build'),
                 'returned deployment JSON was not equal expected'
             );
@@ -128,5 +140,19 @@ describe('transactionalEmail', () => {
             );
             return;
         });
+    });
+    describe('Delete ================', () => {
+        // TODO: add this test
+        it('Should delete the item'); // , async () => {
+        //     // WHEN
+        //     const result = await handler.deleteByKey('testInstance/testBU', 'mobileKeyword', [
+        //         'testExisting_keyword',
+        //     ]);
+        //     // THEN
+        //     assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+
+        //     assert.equal(result, true, 'should have deleted the item');
+        //     return;
+        // });
     });
 });

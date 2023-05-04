@@ -2,9 +2,9 @@
     "code": {
         "code": "4912312345678"
     },
-    "keyword": "testNew_keyword",
+    "keyword": "testNew_keyword_blocked",
     "status": "Active",
     "restriction": "NONE",
-    "keywordType": "STOP",
+    "keywordType": "NORMAL",
     "isInherited": false
 }

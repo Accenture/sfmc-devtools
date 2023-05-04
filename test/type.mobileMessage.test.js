@@ -8,7 +8,7 @@ const cache = require('../lib/util/cache');
 const testUtils = require('./utils');
 const handler = require('../lib/index');
 
-describe('mobileMessage', () => {
+describe('type: mobileMessage', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
@@ -21,7 +21,7 @@ describe('mobileMessage', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['mobileMessage']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -49,11 +49,11 @@ describe('mobileMessage', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
-        it('Should create & upsert a mobileMessage', async () => {
+        it('Should create & update items', async () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['mobileMessage']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -84,8 +84,20 @@ describe('mobileMessage', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                7,
+                8,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should NOT change the key during update with --changeKeyValue and instead fail due to missing support', async () => {
+            // WHEN
+            handler.setOptions({ changeKeyValue: 'updatedKey' });
+            await handler.deploy('testInstance/testBU', ['mobileMessage'], ['NTIzOjc4OjA']);
+            // THEN
+            assert.equal(
+                process.exitCode,
+                1,
+                'deploy should have thrown an error due to lack of support'
             );
             return;
         });
@@ -101,11 +113,7 @@ describe('mobileMessage', () => {
                 ['NTIzOjc4OjA'],
                 'testSourceMarket'
             );
-            assert.equal(
-                !!process.exitCode,
-                false,
-                'buildTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
 
             assert.equal(
                 result.mobileMessage ? Object.keys(result.mobileMessage).length : 0,
@@ -131,7 +139,7 @@ describe('mobileMessage', () => {
                 'testTargetMarket'
             );
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'buildDefinition should not have thrown an error'
             );
@@ -159,7 +167,7 @@ describe('mobileMessage', () => {
                 'NTIzOjc4OjA',
             ]);
             // THEN
-            assert.equal(!!process.exitCode, false, 'delete should not have thrown an error');
+            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
 
             assert.equal(result, true, 'should have deleted the item');
             return;
@@ -175,7 +183,7 @@ describe('mobileMessage', () => {
             );
             // THEN
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'getFilesToCommit should not have thrown an error'
             );

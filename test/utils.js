@@ -146,7 +146,7 @@ exports.mockSetup = (isDeploy) => {
     }
     fsmock(fsMockConf);
 
-    // ! reset exitCode or else tests could influence each other
+    // ! reset exitCode or else tests could influence each other; do this in mockSetup to to ensure correct starting value
     process.exitCode = 0;
 };
 
@@ -156,6 +156,13 @@ exports.mockSetup = (isDeploy) => {
  * @returns {void}
  */
 exports.mockReset = () => {
+    // remove all options that might have been set by previous tests
+    for (const key in Util.OPTIONS) {
+        if (Object.prototype.hasOwnProperty.call(Util.OPTIONS, key)) {
+            delete Util.OPTIONS[key];
+        }
+    }
+    // reset sfmc login
     auth.clearSessions();
     fsmock.restore();
     apimock.restore();
