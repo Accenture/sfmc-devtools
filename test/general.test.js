@@ -35,9 +35,18 @@ describe('GENERAL', () => {
             expect(typeArr[0]).to.have.all.keys(
                 'name',
                 'apiName',
-                'default',
+                'retrieveByDefault',
                 'description',
                 'supports'
+            );
+            expect(typeArr[0].supports).to.have.all.keys(
+                'retrieve',
+                'create',
+                'update',
+                'delete',
+                'changeKey',
+                'buildTemplate',
+                'retrieveAsTemplate'
             );
 
             // check if certain types were returned
