@@ -1,5 +1,9 @@
 [
     {
+        "version": "5.0.0",
+        "files": [".vscode/settings.json", ".prettierrc"]
+    },
+    {
         "version": "4.3.4",
         "files": [".vscode/settings.json"]
     },

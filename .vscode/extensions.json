@@ -5,7 +5,6 @@
     // List of extensions which should be recommended for users of this workspace.
     "recommendations": [
         // collaboration
-        "gruntfuggly.todo-tree",
         "aaron-bond.better-comments",
         "github.vscode-pull-request-github",
 
@@ -15,11 +14,8 @@
         // Formatting & colors
         "editorconfig.editorconfig",
         "esbenp.prettier-vscode",
-        "sergey-agadzhanov.ampscript",
 
         // Markdown / Readme.md
-        "yzhang.markdown-all-in-one",
-        "davidanson.vscode-markdownlint",
         "joernberkefeld.markdown-preview-bitbucket-innersource"
     ]
 }

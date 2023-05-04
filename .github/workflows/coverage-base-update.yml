@@ -14,10 +14,12 @@ jobs:
                   ref: ${{ github.event.pull_request.head.sha }}
                   fetch-depth: 1000
 
-            - name: Fetch base for git diff
-              run: git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
+            - name: Prepare for Report Coverage (without nyc run)
+              run: |
+                  npm i svelte-to-html@1.0.9
+                  git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
 
-            - name: Download artifact
+            - name: Download artifact for base branch
               uses: dawidd6/action-download-artifact@v2
               continue-on-error: true
               with:
@@ -28,7 +30,7 @@ jobs:
                   path: base-artifacts
                   search_artifacts: true
 
-            - name: Download artifact
+            - name: Download artifact for to be merged branch
               uses: dawidd6/action-download-artifact@v2
               continue-on-error: true
               with:
@@ -45,7 +47,7 @@ jobs:
               with:
                   files: 'base-artifacts/coverage-summary.json, artifacts/coverage-summary.json'
 
-            - name: File exists
+            - name: Update Coverage comment
               uses: sidx1024/report-nyc-coverage-github-action@v1.2.6
               if: steps.check_files.outputs.files_exists == 'true'
               # Only runs if all of the files exists

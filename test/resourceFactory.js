@@ -31,6 +31,7 @@ exports.loadSOAPRecords = async (mcdevAction, type, mid) => {
         `${color.bgRed}${color.fgBlack}test-error${color.reset}: Please create file ${testPath}`
     );
     /* eslint-enable no-console */
+    process.exitCode = 404;
 
     return fs.readFile(path.join('test', 'resources', mcdevAction + '-response.xml'), {
         encoding: 'utf8',
@@ -70,6 +71,17 @@ exports.handleSOAPRequest = async (config) => {
             responseXML = await this.loadSOAPRecords(
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.UpdateRequest.Objects['@_xsi:type'],
+                jObj.Envelope.Header.fueloauth
+            );
+
+            break;
+        }
+        case 'Configure': {
+            responseXML = await this.loadSOAPRecords(
+                config.headers.SOAPAction.toLocaleLowerCase(),
+                fullObj.Envelope.Body.ConfigureRequestMsg.Configurations.Configuration[0][
+                    '@_xsi:type'
+                ],
                 jObj.Envelope.Header.fueloauth
             );
 
@@ -138,6 +150,7 @@ exports.handleRESTRequest = async (config) => {
                 `${color.bgRed}${color.fgBlack}test-error${color.reset}: Please create file ${testPath}`
             );
             /* eslint-enable no-console */
+            process.exitCode = 404;
 
             return [
                 404,
