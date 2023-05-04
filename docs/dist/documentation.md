@@ -525,7 +525,7 @@ configures what is displayed in the console
 <a name="Mcdev.setOptions"></a>
 
 ### Mcdev.setOptions(argv) ⇒ <code>void</code>
-configures what is displayed in the console
+allows setting system wide / command related options
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 

@@ -49,7 +49,7 @@ describe('type: mobileMessage', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
-        it('Should create & upsert a mobileMessage', async () => {
+        it('Should create & update items', async () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['mobileMessage']);
             // THEN
@@ -86,6 +86,18 @@ describe('type: mobileMessage', () => {
                 testUtils.getAPIHistoryLength(),
                 8,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should NOT change the key during update with --changeKeyValue and instead fail due to missing support', async () => {
+            // WHEN
+            handler.setOptions({ changeKeyValue: 'updatedKey' });
+            await handler.deploy('testInstance/testBU', ['mobileMessage'], ['NTIzOjc4OjA']);
+            // THEN
+            assert.equal(
+                process.exitCode,
+                1,
+                'deploy should have thrown an error due to lack of support'
             );
             return;
         });

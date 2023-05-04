@@ -123,6 +123,7 @@ describe('type: query', () => {
             );
             return;
         });
+        it('Should change the key during update with --changeKeyValue');
     });
     describe('Templating ================', () => {
         it('Should create a query template via retrieveAsTemplate and build it', async () => {

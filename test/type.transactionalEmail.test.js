@@ -76,6 +76,22 @@ describe('type: transactionalEmail', () => {
             );
             return;
         });
+        it('Should NOT change the key during update with --changeKeyValue and instead fail due to missing support', async () => {
+            // WHEN
+            handler.setOptions({ changeKeyValue: 'updatedKey' });
+            await handler.deploy(
+                'testInstance/testBU',
+                ['transactionalEmail'],
+                ['testExisting_temail']
+            );
+            // THEN
+            assert.equal(
+                process.exitCode,
+                1,
+                'deploy should have thrown an error due to lack of support'
+            );
+            return;
+        });
     });
     describe('Templating ================', () => {
         // it.skip('Should create a transactionalEmail template via retrieveAsTemplate and build it');

@@ -76,6 +76,22 @@ describe('type: transactionalPush', () => {
             );
             return;
         });
+        it('Should NOT change the key during update with --changeKeyValue and instead fail due to missing support', async () => {
+            // WHEN
+            handler.setOptions({ changeKeyValue: 'updatedKey' });
+            await handler.deploy(
+                'testInstance/testBU',
+                ['transactionalPush'],
+                ['testExisting_tpush']
+            );
+            // THEN
+            assert.equal(
+                process.exitCode,
+                1,
+                'deploy should have thrown an error due to lack of support'
+            );
+            return;
+        });
     });
     describe('Templating ================', () => {
         // it.skip('Should create a transactionalPush template via retrieveAsTemplate and build it');

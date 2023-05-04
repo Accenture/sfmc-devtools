@@ -11,7 +11,7 @@ describe('type: dataExtension', () => {
         testUtils.mockReset();
     });
     describe('Retrieve ================', () => {
-        it('Should retrieve a data extension', async () => {
+        it('Should retrieve a dataExtension', async () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['dataExtension']);
             // THEN
@@ -41,7 +41,7 @@ describe('type: dataExtension', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
-        it('Should create & upsert a data extension', async () => {
+        it('Should create & update a dataExtension', async () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['dataExtension']);
             // THEN
@@ -52,7 +52,7 @@ describe('type: dataExtension', () => {
             assert.equal(
                 result.dataExtension ? Object.keys(result.dataExtension).length : 0,
                 2,
-                'two data extensions expected'
+                'two dataExtensions expected'
             );
             // insert
             assert.deepEqual(
@@ -73,6 +73,7 @@ describe('type: dataExtension', () => {
             );
             return;
         });
+        it('Should change the key during update via --changeKeyValue');
     });
     describe('Templating ================', () => {
         it('Should create a dataExtension template via retrieveAsTemplate and build it', async () => {

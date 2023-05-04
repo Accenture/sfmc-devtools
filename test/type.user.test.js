@@ -105,6 +105,7 @@ describe('type: user', () => {
             );
             return;
         });
+        it('Should change the key during update with --changeKeyValue');
     });
     describe('Templating ================', () => {
         // it('Should create a user template via retrieveAsTemplate and build it', async () => {});
