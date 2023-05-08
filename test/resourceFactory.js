@@ -1,9 +1,10 @@
-const fs = require('fs-extra');
-const path = require('node:path');
-const { XMLParser } = require('fast-xml-parser');
-const { color } = require('../lib/util/util');
+import fs from 'fs-extra';
+import path from 'node:path';
+import { XMLParser } from 'fast-xml-parser';
+import { color } from '../lib/util/util';
 const parser = new XMLParser();
 const attributeParser = new XMLParser({ ignoreAttributes: false });
+
 /**
  * gets mock SOAP metadata for responding
  *
@@ -12,7 +13,7 @@ const attributeParser = new XMLParser({ ignoreAttributes: false });
  * @param {string} mid of Business Unit
  * @returns {string} relevant metadata stringified
  */
-exports.loadSOAPRecords = async (mcdevAction, type, mid) => {
+export const loadSOAPRecords = async (mcdevAction, type, mid) => {
     type = type[0].toLowerCase() + type.slice(1);
     const testPath = path.join(
         'test',
@@ -36,13 +37,14 @@ exports.loadSOAPRecords = async (mcdevAction, type, mid) => {
         encoding: 'utf8',
     });
 };
+
 /**
  * based on request, respond with different soap data
  *
  * @param {object} config mock api request object
  * @returns {Promise.<Array>} status code plus response in string form
  */
-exports.handleSOAPRequest = async (config) => {
+export const handleSOAPRequest = async (config) => {
     const jObj = parser.parse(config.data);
     const fullObj = attributeParser.parse(config.data);
     let responseXML;
@@ -93,12 +95,13 @@ exports.handleSOAPRequest = async (config) => {
 
     return [200, responseXML];
 };
+
 /**
  * helper to return soap base URL
  *
  * @returns {string} soap URL
  */
-exports.soapUrl = 'https://mct0l7nxfq2r988t1kxfy8sc4xxx.soap.marketingcloudapis.com/Service.asmx';
+export const soapUrl = 'https://mct0l7nxfq2r988t1kxfy8sc4xxx.soap.marketingcloudapis.com/Service.asmx';
 
 /**
  * based on request, respond with different soap data
@@ -106,7 +109,7 @@ exports.soapUrl = 'https://mct0l7nxfq2r988t1kxfy8sc4xxx.soap.marketingcloudapis.
  * @param {object} config mock api request object
  * @returns {Promise.<Array>} status code plus response in string form
  */
-exports.handleRESTRequest = async (config) => {
+export const handleRESTRequest = async (config) => {
     try {
         // check if filtered
         const urlObj = new URL(config.baseURL + config.url.slice(1));
@@ -161,9 +164,10 @@ exports.handleRESTRequest = async (config) => {
         return [500, {}];
     }
 };
+
 /**
  * helper to return rest base URL
  *
  * @returns {string} test URL
  */
-exports.restUrl = 'https://mct0l7nxfq2r988t1kxfy8sc4xxx.rest.marketingcloudapis.com/';
+export const restUrl = 'https://mct0l7nxfq2r988t1kxfy8sc4xxx.rest.marketingcloudapis.com/';

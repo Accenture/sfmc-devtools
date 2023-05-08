@@ -1,7 +1,7 @@
-const assert = require('chai').assert;
-const cache = require('../lib/util/cache');
-const testUtils = require('./utils');
-const handler = require('../lib/index');
+import { assert } from 'chai';
+import cache from '../lib/util/cache';
+import testUtils from './utils';
+import handler from '../lib/index';
 
 describe('user', () => {
     beforeEach(() => {

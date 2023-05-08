@@ -1,12 +1,12 @@
-const chai = require('chai');
-const chaiFiles = require('chai-files');
+import chai from 'chai';
+import chaiFiles from 'chai-files';
 const assert = chai.assert;
 chai.use(chaiFiles);
 const expect = chai.expect;
 const file = chaiFiles.file;
-const cache = require('../lib/util/cache');
-const testUtils = require('./utils');
-const handler = require('../lib/index');
+import cache from '../lib/util/cache';
+import testUtils from './utils';
+import handler from '../lib/index';
 
 describe('transactionalSMS', () => {
     beforeEach(() => {

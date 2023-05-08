@@ -1,16 +1,19 @@
-const File = require('../lib/util/file');
-const path = require('node:path');
-const axios = require('axios');
-const MockAdapter = require('axios-mock-adapter');
-const auth = require('../lib/util/auth');
-const Util = require('../lib/util/util');
+import File from '../lib/util/file';
+import path from 'node:path';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
+import auth from '../lib/util/auth';
+import Util from '../lib/util/util';
+import { fileURLToPath } from 'node:url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // for some reason doesnt realize below reference
 // eslint-disable-next-line no-unused-vars
-const fsmock = require('mock-fs');
+import fsmock from 'mock-fs';
+
 let apimock;
-const authResources = require('./resources/auth.json');
-const resourceFactory = require('./resourceFactory');
+import authResources from './resources/auth.json';
+import resourceFactory from './resourceFactory';
 
 /**
  * gets file from Retrieve folder
