@@ -5794,7 +5794,7 @@ CLI entry for SFMC DevTools
     * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
     * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
     * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
-    * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList) ⇒ <code>void</code>
+    * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList)
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
@@ -5806,7 +5806,7 @@ CLI entry for SFMC DevTools
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
-    * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code>
+    * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code> \| <code>void</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
     * [.logBeta(type)](#Util.logBeta)
@@ -5880,11 +5880,10 @@ check if a market name exists in current mcdev config
 
 <a name="Util.verifyMarketList"></a>
 
-### Util.verifyMarketList(mlName, properties) ⇒ <code>void</code>
+### Util.verifyMarketList(mlName, properties)
 ensure provided MarketList exists and it's content including markets and BUs checks out
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>void</code> - throws errors if problems were found  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6022,11 +6021,11 @@ let's you dynamically walk down an object and get a value
 
 <a name="Util.execSync"></a>
 
-### Util.execSync(cmd, [args], [hideOutput]) ⇒ <code>string</code>
+### Util.execSync(cmd, [args], [hideOutput]) ⇒ <code>string</code> \| <code>void</code>
 helper to run other commands as if run manually by user
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>string</code> - output of command if hideOutput is true  
+**Returns**: <code>string</code> \| <code>void</code> - output of command if hideOutput is true  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7659,7 +7658,7 @@ Util that contains logger and simple util methods
     * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
     * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
     * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
-    * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList) ⇒ <code>void</code>
+    * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList)
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
@@ -7671,7 +7670,7 @@ Util that contains logger and simple util methods
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
-    * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code>
+    * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code> \| <code>void</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
     * [.logBeta(type)](#Util.logBeta)
@@ -7745,11 +7744,10 @@ check if a market name exists in current mcdev config
 
 <a name="Util.verifyMarketList"></a>
 
-### Util.verifyMarketList(mlName, properties) ⇒ <code>void</code>
+### Util.verifyMarketList(mlName, properties)
 ensure provided MarketList exists and it's content including markets and BUs checks out
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>void</code> - throws errors if problems were found  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7887,11 +7885,11 @@ let's you dynamically walk down an object and get a value
 
 <a name="Util.execSync"></a>
 
-### Util.execSync(cmd, [args], [hideOutput]) ⇒ <code>string</code>
+### Util.execSync(cmd, [args], [hideOutput]) ⇒ <code>string</code> \| <code>void</code>
 helper to run other commands as if run manually by user
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>string</code> - output of command if hideOutput is true  
+**Returns**: <code>string</code> \| <code>void</code> - output of command if hideOutput is true  
 
 | Param | Type | Description |
 | --- | --- | --- |

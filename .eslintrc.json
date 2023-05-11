@@ -84,6 +84,7 @@
                 }
             }
         ],
+        "jsdoc/tag-lines": ["warn", "any", { "startLines": 1 }],
         "spaced-comment": ["warn", "always", { "block": { "exceptions": ["*"], "balanced": true } }]
     },
     "overrides": [
