@@ -186,10 +186,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#csvToArray">csvToArray(csv)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
 <dd><p>helper to convert CSVs into an array. if only one value was given, it&#39;s also returned as an array</p>
 </dd>
-<dt><a href="#Automation.">Automation.(metadata, key)</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
-<dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
-</dd>
-<dt><a href="#Automation.">Automation.(metadata, key)</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
+<dt><a href="#Automation.">Automation.(metadataMap, key)</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
 <dt><a href="#Automation.">Automation.(metadata, originalMetadata, key)</a></dt>
@@ -1211,7 +1208,6 @@ Automation MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Automation](#Automation) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve_new(retrieveDir, [_], [__], [key])](#Automation.retrieve_new) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieve(retrieveDir, [_], [__], [key])](#Automation.retrieve) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveChangelog()](#Automation.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveForCache()](#Automation.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
@@ -1222,7 +1218,7 @@ Automation MetadataType
     * [.update(metadata, metadataBefore)](#Automation.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#Automation.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AutomationItem&gt;</code>
     * [.validateDeployMetadata(metadata)](#Automation.validateDeployMetadata) ⇒ <code>boolean</code>
-    * [.postDeployTasks(metadata, originalMetadata)](#Automation.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.postDeployTasks(metadata, originalMetadata, createdUpdated)](#Automation.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.setFolderPath(metadata)](#Automation.setFolderPath)
     * [.setFolderId(metadata)](#Automation.setFolderId)
     * [.parseMetadata(metadata)](#Automation.parseMetadata) ⇒ <code>TYPE.AutomationItem</code> \| <code>void</code>
@@ -1232,21 +1228,6 @@ Automation MetadataType
     * [.getFilesToCommit(keyArr)](#Automation.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
     * [.deleteByKey(customerKey)](#Automation.deleteByKey) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#Automation.postDeleteTasks) ⇒ <code>void</code>
-
-<a name="Automation.retrieve_new"></a>
-
-### Automation.retrieve\_new(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
-Retrieves Metadata of Automation
-
-**Kind**: static method of [<code>Automation</code>](#Automation)  
-**Returns**: <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code> - Promise of metadata  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
-| [_] | <code>void</code> | unused parameter |
-| [__] | <code>void</code> | unused parameter |
-| [key] | <code>string</code> | customer key of single item to retrieve |
 
 <a name="Automation.retrieve"></a>
 
@@ -1370,7 +1351,7 @@ Whitelisted Activites are deployed but require configuration
 
 <a name="Automation.postDeployTasks"></a>
 
-### Automation.postDeployTasks(metadata, originalMetadata) ⇒ <code>Promise.&lt;void&gt;</code>
+### Automation.postDeployTasks(metadata, originalMetadata, createdUpdated) ⇒ <code>Promise.&lt;void&gt;</code>
 Gets executed after deployment of metadata type
 
 **Kind**: static method of [<code>Automation</code>](#Automation)  
@@ -1380,6 +1361,7 @@ Gets executed after deployment of metadata type
 | --- | --- | --- |
 | metadata | <code>TYPE.AutomationMap</code> | metadata mapped by their keyField |
 | originalMetadata | <code>TYPE.AutomationMap</code> | metadata to be updated (contains additioanl fields) |
+| createdUpdated | <code>Object</code> | counter representing successful creates/updates |
 
 <a name="Automation.setFolderPath"></a>
 
@@ -8046,7 +8028,7 @@ helper to convert CSVs into an array. if only one value was given, it's also ret
 
 <a name="Automation."></a>
 
-## Automation.(metadata, key) ⇒ <code>Promise.&lt;void&gt;</code>
+## Automation.(metadataMap, key) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for [postDeployTasks](#Automation.postDeployTasks)
 
 **Kind**: global function  
@@ -8054,20 +8036,7 @@ helper for [postDeployTasks](#Automation.postDeployTasks)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.AutomationMap</code> | metadata mapped by their keyField |
-| key | <code>string</code> | current customer key |
-
-<a name="Automation."></a>
-
-## Automation.(metadata, key) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for [postDeployTasks](#Automation.postDeployTasks)
-
-**Kind**: global function  
-**Returns**: <code>Promise.&lt;void&gt;</code> - -  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.AutomationMap</code> | metadata mapped by their keyField |
+| metadataMap | <code>TYPE.AutomationMap</code> | metadata mapped by their keyField |
 | key | <code>string</code> | current customer key |
 
 <a name="Automation."></a>
