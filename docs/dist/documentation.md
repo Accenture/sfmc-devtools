@@ -1218,7 +1218,7 @@ Automation MetadataType
     * [.update(metadata, metadataBefore)](#Automation.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#Automation.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AutomationItem&gt;</code>
     * [.validateDeployMetadata(metadata)](#Automation.validateDeployMetadata) ⇒ <code>boolean</code>
-    * [.postDeployTasks(metadata, originalMetadata, createdUpdated)](#Automation.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.postDeployTasks(metadata, originalMetadata)](#Automation.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.setFolderPath(metadata)](#Automation.setFolderPath)
     * [.setFolderId(metadata)](#Automation.setFolderId)
     * [.parseMetadata(metadata)](#Automation.parseMetadata) ⇒ <code>TYPE.AutomationItem</code> \| <code>void</code>
@@ -1351,7 +1351,7 @@ Whitelisted Activites are deployed but require configuration
 
 <a name="Automation.postDeployTasks"></a>
 
-### Automation.postDeployTasks(metadata, originalMetadata, createdUpdated) ⇒ <code>Promise.&lt;void&gt;</code>
+### Automation.postDeployTasks(metadata, originalMetadata) ⇒ <code>Promise.&lt;void&gt;</code>
 Gets executed after deployment of metadata type
 
 **Kind**: static method of [<code>Automation</code>](#Automation)  
@@ -1361,7 +1361,6 @@ Gets executed after deployment of metadata type
 | --- | --- | --- |
 | metadata | <code>TYPE.AutomationMap</code> | metadata mapped by their keyField |
 | originalMetadata | <code>TYPE.AutomationMap</code> | metadata to be updated (contains additioanl fields) |
-| createdUpdated | <code>Object</code> | counter representing successful creates/updates |
 
 <a name="Automation.setFolderPath"></a>
 
