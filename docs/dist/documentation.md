@@ -186,6 +186,15 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#csvToArray">csvToArray(csv)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
 <dd><p>helper to convert CSVs into an array. if only one value was given, it&#39;s also returned as an array</p>
 </dd>
+<dt><a href="#Automation.">Automation.(metadata, key)</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
+<dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
+</dd>
+<dt><a href="#Automation.">Automation.(metadata, key)</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
+<dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
+</dd>
+<dt><a href="#Automation.">Automation.(metadata, originalMetadata, key)</a></dt>
+<dd><p>helper for <a href="postDeployTasks">postDeployTasks</a></p>
+</dd>
 <dt><a href="#getUserName">getUserName(userList, item, fieldname)</a> ⇒ <code>string</code></dt>
 <dd></dd>
 <dt><a href="#setupSDK">setupSDK(sessionKey, authObject)</a> ⇒ <code><a href="#SDK">SDK</a></code></dt>
@@ -1202,6 +1211,7 @@ Automation MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [Automation](#Automation) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve_new(retrieveDir, [_], [__], [key])](#Automation.retrieve_new) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieve(retrieveDir, [_], [__], [key])](#Automation.retrieve) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveChangelog()](#Automation.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveForCache()](#Automation.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
@@ -1222,6 +1232,21 @@ Automation MetadataType
     * [.getFilesToCommit(keyArr)](#Automation.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
     * [.deleteByKey(customerKey)](#Automation.deleteByKey) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#Automation.postDeleteTasks) ⇒ <code>void</code>
+
+<a name="Automation.retrieve_new"></a>
+
+### Automation.retrieve\_new(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
+Retrieves Metadata of Automation
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+**Returns**: <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [_] | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| [key] | <code>string</code> | customer key of single item to retrieve |
 
 <a name="Automation.retrieve"></a>
 
@@ -8018,6 +8043,45 @@ helper to convert CSVs into an array. if only one value was given, it's also ret
 | Param | Type | Description |
 | --- | --- | --- |
 | csv | <code>string</code> | potentially comma-separated value or null |
+
+<a name="Automation."></a>
+
+## Automation.(metadata, key) ⇒ <code>Promise.&lt;void&gt;</code>
+helper for [postDeployTasks](#Automation.postDeployTasks)
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.AutomationMap</code> | metadata mapped by their keyField |
+| key | <code>string</code> | current customer key |
+
+<a name="Automation."></a>
+
+## Automation.(metadata, key) ⇒ <code>Promise.&lt;void&gt;</code>
+helper for [postDeployTasks](#Automation.postDeployTasks)
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.AutomationMap</code> | metadata mapped by their keyField |
+| key | <code>string</code> | current customer key |
+
+<a name="Automation."></a>
+
+## Automation.(metadata, originalMetadata, key)
+helper for [postDeployTasks](postDeployTasks)
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.AutomationMap</code> | metadata mapped by their keyField |
+| originalMetadata | <code>TYPE.AutomationMap</code> | metadata to be updated (contains additioanl fields) |
+| key | <code>string</code> | current customer key |
 
 <a name="getUserName"></a>
 
