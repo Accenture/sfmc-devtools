@@ -4007,7 +4007,6 @@ MobileKeyword MetadataType
 * [MobileKeyword](#MobileKeyword) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#MobileKeyword.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> \| <code>void</code>
     * [.retrieveForCache(_, __, [key])](#MobileKeyword.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#MobileKeyword.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.create(MobileKeyword)](#MobileKeyword.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#MobileKeyword.update) ⇒ <code>Promise</code>
     * [.postRetrieveTasks(metadata)](#MobileKeyword.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code> \| <code>TYPE.MetadataTypeItem</code>
@@ -4019,7 +4018,7 @@ MobileKeyword MetadataType
     * [.postCreateTasks(metadataEntry, apiResponse)](#MobileKeyword.postCreateTasks) ⇒ <code>void</code>
     * [.postUpdateTasks(metadataEntry, apiResponse)](#MobileKeyword.postUpdateTasks) ⇒ <code>void</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#MobileKeyword._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
-    * [.deleteByKey(key)](#MobileKeyword.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deleteByKey(id)](#MobileKeyword.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postDeleteTasks(customerKey)](#MobileKeyword.postDeleteTasks) ⇒ <code>void</code>
     * [.getFilesToCommit(keyArr)](#MobileKeyword.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
 
@@ -4052,20 +4051,6 @@ Retrieves event definition metadata for caching
 | _ | <code>void</code> | parameter not used |
 | __ | <code>void</code> | parameter not used |
 | [key] | <code>string</code> | customer key of single item to retrieve |
-
-<a name="MobileKeyword.retrieveAsTemplate"></a>
-
-### MobileKeyword.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
-Retrieve a specific keyword
-
-**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code> - Promise of metadata  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
-| name | <code>string</code> | name of the metadata file |
-| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="MobileKeyword.create"></a>
 
@@ -4224,7 +4209,7 @@ helper for [preDeployTasks](preDeployTasks) that loads extracted code content ba
 
 <a name="MobileKeyword.deleteByKey"></a>
 
-### MobileKeyword.deleteByKey(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### MobileKeyword.deleteByKey(id) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
@@ -4232,7 +4217,7 @@ Delete a metadata item from the specified business unit
 
 | Param | Type | Description |
 | --- | --- | --- |
-| key | <code>string</code> | Identifier of item |
+| id | <code>string</code> | Identifier of item |
 
 <a name="MobileKeyword.postDeleteTasks"></a>
 
