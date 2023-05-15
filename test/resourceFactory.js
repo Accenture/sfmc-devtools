@@ -1,13 +1,12 @@
 import fs from 'fs-extra';
 import path from 'node:path';
 import { XMLParser } from 'fast-xml-parser';
-import { color } from '../lib/util/util';
+import { Util } from '../lib/util/util.js';
 const parser = new XMLParser();
 const attributeParser = new XMLParser({ ignoreAttributes: false });
-
+const color = Util.color;
 /**
  * gets mock SOAP metadata for responding
- *
  * @param {string} mcdevAction SOAP action
  * @param {string} type metadata Type
  * @param {string} mid of Business Unit
@@ -40,7 +39,6 @@ export const loadSOAPRecords = async (mcdevAction, type, mid) => {
 
 /**
  * based on request, respond with different soap data
- *
  * @param {object} config mock api request object
  * @returns {Promise.<Array>} status code plus response in string form
  */
@@ -98,14 +96,13 @@ export const handleSOAPRequest = async (config) => {
 
 /**
  * helper to return soap base URL
- *
  * @returns {string} soap URL
  */
-export const soapUrl = 'https://mct0l7nxfq2r988t1kxfy8sc4xxx.soap.marketingcloudapis.com/Service.asmx';
+export const soapUrl =
+    'https://mct0l7nxfq2r988t1kxfy8sc4xxx.soap.marketingcloudapis.com/Service.asmx';
 
 /**
  * based on request, respond with different soap data
- *
  * @param {object} config mock api request object
  * @returns {Promise.<Array>} status code plus response in string form
  */
@@ -167,7 +164,6 @@ export const handleRESTRequest = async (config) => {
 
 /**
  * helper to return rest base URL
- *
  * @returns {string} test URL
  */
 export const restUrl = 'https://mct0l7nxfq2r988t1kxfy8sc4xxx.rest.marketingcloudapis.com/';

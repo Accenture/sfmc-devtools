@@ -3,8 +3,8 @@ import chaiFiles from 'chai-files';
 const assert = chai.assert;
 const expect = chai.expect;
 chai.use(chaiFiles);
-import testUtils from './utils';
-import handler from '../lib/index';
+import * as testUtils from './utils.js';
+import handler from '../lib/index.js';
 
 describe('GENERAL', () => {
     beforeEach(() => {

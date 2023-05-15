@@ -4,9 +4,9 @@ const assert = chai.assert;
 chai.use(chaiFiles);
 const expect = chai.expect;
 const file = chaiFiles.file;
-import cache from '../lib/util/cache';
-import testUtils from './utils';
-import handler from '../lib/index';
+import cache from '../lib/util/cache.js';
+import * as testUtils from './utils.js';
+import handler from '../lib/index.js';
 
 describe('transactionalSMS', () => {
     beforeEach(() => {

@@ -2,9 +2,9 @@ import chai from 'chai';
 import chaiFiles from 'chai-files';
 const assert = chai.assert;
 chai.use(chaiFiles);
-import cache from '../lib/util/cache';
-import testUtils from './utils';
-import handler from '../lib/index';
+import cache from '../lib/util/cache.js';
+import * as testUtils from './utils.js';
+import handler from '../lib/index.js';
 
 describe('journey', () => {
     beforeEach(() => {

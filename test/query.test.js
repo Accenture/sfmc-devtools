@@ -6,10 +6,10 @@ const expect = chai.expect;
 const file = chaiFiles.file;
 
 // const dir = chaiFiles.dir;
-import cache from '../lib/util/cache';
+import cache from '../lib/util/cache.js';
 
-import testUtils from './utils';
-import handler from '../lib/index';
+import * as testUtils from './utils.js';
+import handler from '../lib/index.js';
 
 describe('query', () => {
     beforeEach(() => {

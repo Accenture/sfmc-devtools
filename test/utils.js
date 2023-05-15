@@ -1,9 +1,9 @@
-import File from '../lib/util/file';
+import File from '../lib/util/file.js';
 import path from 'node:path';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import auth from '../lib/util/auth';
-import Util from '../lib/util/util';
+import auth from '../lib/util/auth.js';
+import { Util } from '../lib/util/util.js';
 import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -12,98 +12,100 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 import fsmock from 'mock-fs';
 
 let apimock;
-import authResources from './resources/auth.json';
-import resourceFactory from './resourceFactory';
+import { handleSOAPRequest, handleRESTRequest, soapUrl, restUrl } from './resourceFactory.js';
+const authResources = File.readJsonSync(path.join(__dirname, './resources/auth.json'));
 
 /**
  * gets file from Retrieve folder
- *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} [buName] used when we need to test on ParentBU
  * @returns {Promise.<string>} file in string form
  */
-exports.getActualJson = (customerKey, type, buName = 'testBU') =>
-    File.readJSON(`./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-meta.json`);
+export function getActualJson(customerKey, type, buName = 'testBU') {
+    return File.readJSON(
+        `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-meta.json`
+    );
+}
+
 /**
  * gets file from Retrieve folder
- *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
  * @returns {Promise.<string>} file in string form
  */
-exports.getActualFile = (customerKey, type, ext) =>
-    `./retrieve/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`;
+export function getActualFile(customerKey, type, ext) {
+    return `./retrieve/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`;
+}
 /**
  * gets file from Deploy folder
- *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} [buName] used when we need to test on ParentBU
  * @returns {Promise.<string>} file in string form
  */
-exports.getActualDeployJson = (customerKey, type, buName = 'testBU') =>
-    File.readJSON(`./deploy/testInstance/${buName}/${type}/${customerKey}.${type}-meta.json`);
+export function getActualDeployJson(customerKey, type, buName = 'testBU') {
+    return File.readJSON(
+        `./deploy/testInstance/${buName}/${type}/${customerKey}.${type}-meta.json`
+    );
+}
 /**
  * gets file from Deploy folder
- *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
  * @returns {Promise.<string>} file in string form
  */
-exports.getActualDeployFile = (customerKey, type, ext) =>
-    `./deploy/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`;
+export function getActualDeployFile(customerKey, type, ext) {
+    return `./deploy/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`;
+}
 /**
  * gets file from Template folder
- *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @returns {Promise.<string>} file in string form
  */
-exports.getActualTemplateJson = (customerKey, type) =>
-    File.readJSON(`./template/${type}/${customerKey}.${type}-meta.json`);
+export function getActualTemplateJson(customerKey, type) {
+    return File.readJSON(`./template/${type}/${customerKey}.${type}-meta.json`);
+}
 /**
  * gets file from Template folder
- *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
  * @returns {Promise.<string>} file in string form
  */
-exports.getActualTemplateFile = (customerKey, type, ext) =>
-    `./template/${type}/${customerKey}.${type}-meta.${ext}`;
-
+export function getActualTemplateFile(customerKey, type, ext) {
+    return `./template/${type}/${customerKey}.${type}-meta.${ext}`;
+}
 /**
  * gets file from resources folder which should be used for comparison
- *
  * @param {number} mid of Business Unit
  * @param {string} type of metadata
  * @param {string} action of SOAP request
  * @returns {Promise.<string>} file in string form
  */
-exports.getExpectedJson = (mid, type, action) =>
-    File.readJSON(path.join('test', 'resources', mid, type, action + '-expected.json'));
+export function getExpectedJson(mid, type, action) {
+    return File.readJSON(path.join('test', 'resources', mid, type, action + '-expected.json'));
+}
 /**
  * gets file from resources folder which should be used for comparison
- *
  * @param {number} mid of Business Unit
  * @param {string} type of metadata
  * @param {string} action of SOAP request
  * @param {string} ext file extension
  * @returns {Promise.<string>} file in string form
  */
-exports.getExpectedFile = (mid, type, action, ext) =>
-    path.join('test', 'resources', mid, type, action + '-expected.' + ext);
+export function getExpectedFile(mid, type, action, ext) {
+    return path.join('test', 'resources', mid, type, action + '-expected.' + ext);
+}
 /**
  * setup mocks for API and FS
- *
  * @param {boolean} [isDeploy] if true, will mock deploy folder
  * @returns {void}
  */
-
-exports.mockSetup = (isDeploy) => {
+export function mockSetup(isDeploy) {
     Util.setLoggingLevel({ debug: true });
     apimock = new MockAdapter(axios, { onNoMatch: 'throwException' });
     // set access_token to mid to allow for autorouting of mock to correct resources
@@ -111,12 +113,10 @@ exports.mockSetup = (isDeploy) => {
         authResources.success.response.access_token = JSON.parse(config.data).account_id;
         return [authResources.success.status, authResources.success.response];
     });
+    apimock.onPost(soapUrl).reply((config) => handleSOAPRequest(config));
     apimock
-        .onPost(resourceFactory.soapUrl)
-        .reply((config) => resourceFactory.handleSOAPRequest(config));
-    apimock
-        .onAny(new RegExp(`^${escapeRegExp(resourceFactory.restUrl)}`))
-        .reply((config) => resourceFactory.handleRESTRequest(config));
+        .onAny(new RegExp(`^${escapeRegExp(restUrl)}`))
+        .reply((config) => handleRESTRequest(config));
     const fsMockConf = {
         '.prettierrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.prettierrc')),
         '.eslintrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.eslintrc')),
@@ -148,64 +148,58 @@ exports.mockSetup = (isDeploy) => {
         fsMockConf.deploy = fsmock.load(path.resolve(__dirname, 'mockRoot/deploy'));
     }
     fsmock(fsMockConf);
-
     // ! reset exitCode or else tests could influence each other
     process.exitCode = 0;
-};
+}
 
 /**
  * resets mocks for API and FS
- *
  * @returns {void}
  */
-exports.mockReset = () => {
+export function mockReset() {
     auth.clearSessions();
     fsmock.restore();
     apimock.restore();
-};
+}
 /**
  * helper to return amount of api callouts
- *
  * @param {boolean} [includeToken] if true, will include token calls in count
  * @returns {object} of API history
  */
-exports.getAPIHistoryLength = (includeToken) => {
+export function getAPIHistoryLength(includeToken) {
     const historyArr = Object.values(apimock.history).flat();
     if (includeToken) {
         return historyArr.length;
     }
     return historyArr.filter((item) => item.url !== '/v2/token').length;
-};
+}
 /**
  * helper to return api history
- *
  * @returns {object} of API history
  */
-exports.getAPIHistory = () => apimock.history;
+export function getAPIHistory() {
+    return apimock.history;
+}
 /**
  * helper to return most important fields for each api call
- *
  * @returns {object} of API history
  */
-function getAPIHistoryDebug() {
+export function getAPIHistoryDebug() {
     const historyArr = Object.values(apimock.history)
         .flat()
         .map((item) => ({ url: item.url, data: item.data }));
     return historyArr;
 }
-exports.getAPIHistoryDebug = getAPIHistoryDebug;
 /**
  * helper to return most important fields for each api call
- *
  * @returns {void} of API history
  */
-exports.logAPIHistoryDebug = () => {
+export function logAPIHistoryDebug() {
     console.log(getAPIHistoryDebug()); // eslint-disable-line no-console
-};
+}
 
 /**
  * escapes string for regex
- *
  * @param {string} str to escape
  * @returns {string} escaped string
  */
