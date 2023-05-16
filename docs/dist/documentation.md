@@ -475,6 +475,27 @@ main class
 **Kind**: global class  
 
 * [Mcdev](#Mcdev)
+    * [.setSkipInteraction([skipInteraction])](#Mcdev.setSkipInteraction) Ôçĺ <code>void</code>
+    * [.setLoggingLevel(argv)](#Mcdev.setLoggingLevel) Ôçĺ <code>void</code>
+    * [.setOptions(argv)](#Mcdev.setOptions) Ôçĺ <code>void</code>
+    * [.createDeltaPkg(argv)](#Mcdev.createDeltaPkg) Ôçĺ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
+    * [.selectTypes()](#Mcdev.selectTypes) Ôçĺ <code>Promise</code>
+    * [.explainTypes()](#Mcdev.explainTypes) Ôçĺ <code>Array.&lt;object&gt;</code>
+    * [.upgrade()](#Mcdev.upgrade) Ôçĺ <code>Promise.&lt;boolean&gt;</code>
+    * [.retrieve(businessUnit, [selectedTypesArr], [keys], [changelogOnly])](#Mcdev.retrieve) Ôçĺ <code>Promise.&lt;object&gt;</code>
+    * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Mcdev.deploy) Ôçĺ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
+    * [.initProject([credentialsName])](#Mcdev.initProject) Ôçĺ <code>Promise.&lt;void&gt;</code>
+    * [.joinProject()](#Mcdev.joinProject) Ôçĺ <code>Promise.&lt;void&gt;</code>
+    * [.findBUs(credentialsName)](#Mcdev.findBUs) Ôçĺ <code>Promise.&lt;void&gt;</code>
+    * [.document(businessUnit, type)](#Mcdev.document) Ôçĺ <code>Promise.&lt;void&gt;</code>
+    * [.deleteByKey(businessUnit, type, customerKey)](#Mcdev.deleteByKey) Ôçĺ <code>Promise.&lt;boolean&gt;</code>
+    * [.refresh(businessUnit, type, [keyArr])](#Mcdev.refresh) Ôçĺ <code>Promise.&lt;void&gt;</code>
+    * [.badKeys(businessUnit)](#Mcdev.badKeys) Ôçĺ <code>Promise.&lt;void&gt;</code>
+    * [.retrieveAsTemplate(businessUnit, selectedType, name, market)](#Mcdev.retrieveAsTemplate) Ôçĺ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+    * [.buildTemplate(businessUnit, selectedType, keyArr, market)](#Mcdev.buildTemplate) Ôçĺ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
+    * [.buildDefinition(businessUnit, selectedType, name, market)](#Mcdev.buildDefinition) Ôçĺ <code>Promise.&lt;void&gt;</code>
+    * [.buildDefinitionBulk(listName, type, name)](#Mcdev.buildDefinitionBulk) Ôçĺ <code>Promise.&lt;void&gt;</code>
+    * [.getFilesToCommit(businessUnit, selectedType, keyArr)](#Mcdev.getFilesToCommit) Ôçĺ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.start(cred, bu, [selectedTypesArr], keyArr)](#Mcdev.start)
     * [._startBU(cred, bu, [selectedTypesArr], keyArr)](#Mcdev._startBU)
 
@@ -4510,7 +4531,22 @@ Query MetadataType
 **Kind**: global class  
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
+* [Query](#Query) ÔçÉ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [key])](#Query.retrieve) Ôçĺ <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code>
     * [.start(keyArr)](#Query.start)
+    * [.retrieveForCache()](#Query.retrieveForCache) Ôçĺ <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Query.retrieveAsTemplate) Ôçĺ <code>Promise.&lt;{metadata: Query, type: string}&gt;</code>
+    * [.postRetrieveTasks(metadata)](#Query.postRetrieveTasks) Ôçĺ <code>TYPE.CodeExtractItem</code>
+    * [.create(query)](#Query.create) Ôçĺ <code>Promise</code>
+    * [.update(query)](#Query.update) Ôçĺ <code>Promise</code>
+    * [.preDeployTasks(metadata, deployDir)](#Query.preDeployTasks) Ôçĺ <code>Promise.&lt;TYPE.QueryItem&gt;</code>
+    * [.applyTemplateValues(code, templateVariables)](#Query.applyTemplateValues) Ôçĺ <code>string</code>
+    * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildDefinitionForNested) Ôçĺ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildTemplateForNested) Ôçĺ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [.getFilesToCommit(keyArr)](#Query.getFilesToCommit) Ôçĺ <code>Array.&lt;string&gt;</code>
+    * [.checkForErrors(ex)](#Query.checkForErrors) Ôçĺ <code>Array.&lt;string&gt;</code> \| <code>void</code>
+    * [.deleteByKey(customerKey)](#Query.deleteByKey) Ôçĺ <code>boolean</code>
+    * [.postDeleteTasks(customerKey)](#Query.postDeleteTasks) Ôçĺ <code>void</code>
 
 <a name="Query.retrieve"></a>
 
