@@ -475,27 +475,8 @@ main class
 **Kind**: global class  
 
 * [Mcdev](#Mcdev)
-    * [.setSkipInteraction([skipInteraction])](#Mcdev.setSkipInteraction) ⇒ <code>void</code>
-    * [.setLoggingLevel(argv)](#Mcdev.setLoggingLevel) ⇒ <code>void</code>
-    * [.setOptions(argv)](#Mcdev.setOptions) ⇒ <code>void</code>
-    * [.createDeltaPkg(argv)](#Mcdev.createDeltaPkg) ⇒ <code>Promise.&lt;Array.&lt;TYPE.DeltaPkgItem&gt;&gt;</code>
-    * [.selectTypes()](#Mcdev.selectTypes) ⇒ <code>Promise</code>
-    * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>Array.&lt;object&gt;</code>
-    * [.upgrade()](#Mcdev.upgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.retrieve(businessUnit, [selectedTypesArr], [keys], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Mcdev.deploy) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
-    * [.initProject([credentialsName])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.joinProject()](#Mcdev.joinProject) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.deleteByKey(businessUnit, type, customerKey)](#Mcdev.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.refresh(businessUnit, type, [keyArr])](#Mcdev.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.badKeys(businessUnit)](#Mcdev.badKeys) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.retrieveAsTemplate(businessUnit, selectedType, name, market)](#Mcdev.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
-    * [.buildTemplate(businessUnit, selectedType, keyArr, market)](#Mcdev.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
-    * [.buildDefinition(businessUnit, selectedType, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.buildDefinitionBulk(listName, type, name)](#Mcdev.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.getFilesToCommit(businessUnit, selectedType, keyArr)](#Mcdev.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [.start(cred, bu, [selectedTypesArr], keyArr)](#Mcdev.start)
+    * [._startBU(cred, bu, [selectedTypesArr], keyArr)](#Mcdev._startBU)
 
 <a name="Mcdev.setSkipInteraction"></a>
 
@@ -746,6 +727,34 @@ Build a specific metadata file based on a template using a list of bu-market com
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
 | selectedType | <code>string</code> | supported metadata type |
+| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Mcdev.start"></a>
+
+### Mcdev.start(cred, bu, [selectedTypesArr], keyArr)
+Start an item (query)
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cred | <code>string</code> | name of Credential |
+| bu | <code>string</code> | name of BU |
+| [selectedTypesArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> \| <code>TYPE.TypeKeyCombo</code> | limit to given metadata types |
+| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Mcdev._startBU"></a>
+
+### Mcdev.\_startBU(cred, bu, [selectedTypesArr], keyArr)
+helper for @link start
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cred | <code>string</code> | name of Credential |
+| bu | <code>string</code> | name of BU |
+| [selectedTypesArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> \| <code>TYPE.TypeKeyCombo</code> | limit retrieval to given metadata type/subtype |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Asset"></a>
@@ -4501,21 +4510,7 @@ Query MetadataType
 **Kind**: global class  
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
-* [Query](#Query) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [_], [__], [key])](#Query.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code>
-    * [.retrieveForCache()](#Query.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Query.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: Query, type: string}&gt;</code>
-    * [.postRetrieveTasks(metadata)](#Query.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
-    * [.create(query)](#Query.create) ⇒ <code>Promise</code>
-    * [.update(query)](#Query.update) ⇒ <code>Promise</code>
-    * [.preDeployTasks(metadata, deployDir)](#Query.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.QueryItem&gt;</code>
-    * [.applyTemplateValues(code, templateVariables)](#Query.applyTemplateValues) ⇒ <code>string</code>
-    * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildDefinitionForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-    * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-    * [.getFilesToCommit(keyArr)](#Query.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.checkForErrors(ex)](#Query.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
-    * [.deleteByKey(customerKey)](#Query.deleteByKey) ⇒ <code>boolean</code>
-    * [.postDeleteTasks(customerKey)](#Query.postDeleteTasks) ⇒ <code>void</code>
+    * [.start(keyArr)](#Query.start)
 
 <a name="Query.retrieve"></a>
 
@@ -4531,6 +4526,17 @@ Retrieves Metadata of queries
 | [_] | <code>void</code> | unused parameter |
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="Query.start"></a>
+
+### Query.start(keyArr)
+a function to start query execution via API
+
+**Kind**: static method of [<code>Query</code>](#Query)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Query.retrieveForCache"></a>
 
