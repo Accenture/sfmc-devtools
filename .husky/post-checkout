@@ -10,12 +10,9 @@ echo "#$TICKETID: " > ".git/templatemessage"
 
 
 # ### run npm install ###
-echo "[POST-CHECKOUT-1]"
 IFS=$'\n'
-echo "[POST-CHECKOUT-2]"
 # regex supports mono-repos with a package.json at root-level and at package-level
 PACKAGE_LOCK_REGEX="(^packages\/.*\/package-lock\.json)|(^package-lock\.json)"
-echo "[POST-CHECKOUT-3]"
 # extract all paths to package-lock.json files 
 PACKAGES=("git diff --name-only HEAD@{1} HEAD | grep -E "$PACKAGE_LOCK_REGEX)
 echo "[POST-CHECKOUT-4]"
@@ -27,6 +24,7 @@ if [[ ${PACKAGES[@]} ]]; then
     # DIR=$(dirname package)
     # cd "$DIR" && npm install
   done
+  echo "[POST-MERGE] Running npm install to update your dependencies..."
   npm install
 else
   echo "📦 All packages up-to-date. No need to run npm install."
