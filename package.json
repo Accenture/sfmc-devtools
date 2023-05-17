@@ -92,6 +92,7 @@
         "eslint-plugin-prettier": "4.2.1",
         "eslint-plugin-unicorn": "46.0.0",
         "fast-xml-parser": "4.2.2",
+        "git-pull-run": "1.4.0",
         "husky": "8.0.3",
         "jsdoc-to-markdown": "8.0.0",
         "lint-staged": "13.2.2",
