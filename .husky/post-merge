@@ -1,12 +1,16 @@
 #!/bin/sh -xv
 # ### run npm install ###
 . "$(dirname "$0")/_/husky.sh"
+echo "[POST-MERGE-1]"
 
 IFS=$'\n'
+echo "[POST-MERGE-2]"
 # regex supports mono-repos with a package.json at root-level and at package-level
 PACKAGE_LOCK_REGEX="(^packages\/.*\/package-lock\.json)|(^package-lock\.json)"
+echo "[POST-MERGE-3]"
 # extract all paths to package-lock.json files 
 PACKAGES=("$(git diff --name-only HEAD@{1} HEAD | grep -E "$PACKAGE_LOCK_REGEX")")
+echo "[POST-MERGE-4]"
 
 if [[ ${PACKAGES[@]} ]]; then
   for package in $PACKAGES; do
