@@ -17,8 +17,14 @@ echo $3
 # ### run npm install ###
 IFS=$'\n'
 # extract all paths to package-lock.json files 
-PACKAGES=`git diff --name-only $1 HEAD | grep -E '(^package-lock\.json)'`
-echo "[POST-CHECKOUT-4]"
+# $1 is the new HEAD pointer
+# $2 is the previous HEAD pointer
+echo "[POST-CHECKOUT-#4]"
+echo "git diff --name-only `$1 $2` | grep -E '(^package-lock\.json)'"
+echo "[POST-CHECKOUT-5]"
+
+PACKAGES=`git diff --name-only `$1 $2` | grep -E '(^package-lock\.json)'`
+echo "[POST-CHECKOUT-6]"
 
 if [[ ${PACKAGES[@]} ]]; then
   for package in $PACKAGES; do
