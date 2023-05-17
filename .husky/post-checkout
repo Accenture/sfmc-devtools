@@ -20,10 +20,10 @@ IFS=$'\n'
 # $1 is the new HEAD pointer
 # $2 is the previous HEAD pointer
 echo "[POST-CHECKOUT-#4]"
-echo "git diff --name-only `$1 $2` | grep -E '(^package-lock\.json)'"
+echo "git diff --name-only $1 $2 | grep -E '(^package-lock\.json)'"
 echo "[POST-CHECKOUT-5]"
 
-PACKAGES=`git diff --name-only `$1 $2` | grep -E '(^package-lock\.json)'`
+PACKAGES=`git diff --name-only $1 $2 | grep -E '(^package-lock\.json)'`
 echo "[POST-CHECKOUT-6]"
 
 if [[ ${PACKAGES[@]} ]]; then
