@@ -1,5 +1,31 @@
 #!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# ### git commit message template ###
 git config commit.template .git/templatemessage
 TICKETID=`git rev-parse --abbrev-ref HEAD | LC_ALL=en_US.utf8 grep -oP '((feature|bug|bugfix|fix|hotfix|task|chore)\/)\K\d{1,7}'`
 echo "[POST_CHECKOUT] Setting template commit to $TICKETID"
 echo "#$TICKETID: " > ".git/templatemessage"
+
+
+# ### run npm install ###
+echo "[POST-CHECKOUT] 📦 Checking for changes to dependencies"
+# define how to split strings into array elements
+IFS=$'\n'
+# $1 is the new HEAD pointer
+NEWHEAD=$1
+# $2 is the previous HEAD pointer
+OLDHEAD=$2
+# extract all paths to package-lock.json files 
+PACKAGE_LOCK_REGEX="(^package-lock\.json)"
+PACKAGES=$(git diff --name-only $NEWHEAD $OLDHEAD | grep -E $PACKAGE_LOCK_REGEX || true)
+
+if [[ ${PACKAGES[@]} ]]; then
+  for package in $PACKAGES; do
+    echo "📦 $package was changed."
+  done
+  echo "📦 Running npm install to update your dependencies..."
+  npm install
+else
+  echo "📦 All packages up-to-date. No need to run npm install."
+fi
