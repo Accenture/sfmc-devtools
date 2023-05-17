@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -xv
 # ### run npm install ###
 . "$(dirname "$0")/_/husky.sh"
 
