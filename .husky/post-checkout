@@ -1,4 +1,4 @@
-#!/bin/sh -xv
+#!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
 # ### git commit message template ###
@@ -28,4 +28,6 @@ if [[ ${PACKAGES[@]} ]]; then
     # cd "$DIR" && npm install
   done
   npm install
+else
+  echo "📦 All packages up-to-date. No need to run npm install."
 fi

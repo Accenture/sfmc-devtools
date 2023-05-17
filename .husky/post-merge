@@ -1,4 +1,4 @@
-#!/bin/sh -xv
+#!/bin/sh
 # ### run npm install ###
 . "$(dirname "$0")/_/husky.sh"
 echo "[POST-MERGE-1]"
@@ -20,4 +20,6 @@ if [[ ${PACKAGES[@]} ]]; then
     # cd "$DIR" && npm install
   done
   npm install
+else
+  echo "📦 All packages up-to-date. No need to run npm install."
 fi
