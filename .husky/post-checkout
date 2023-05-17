@@ -22,7 +22,7 @@ IFS=$'\n'
 echo "[POST-CHECKOUT-#4]"
 echo "git diff --name-only $1 $2 | grep -E '(^package-lock\.json)'"
 echo "[POST-CHECKOUT-#5]"
-PACKAGES=("git diff --name-only $1 $2 | grep -E '(^package-lock\.json)'")
+PACKAGES=("$(git diff --name-only $1 $2 | grep -E '(^package-lock\.json)')")
 echo "[POST-CHECKOUT-6]"
 
 if [[ ${PACKAGES[@]} ]]; then
