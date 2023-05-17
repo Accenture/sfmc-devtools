@@ -1,12 +1,4 @@
 #!/bin/sh
-# ### git commit message template ###
-git config commit.template .git/templatemessage
-TICKETID=`git rev-parse --abbrev-ref HEAD | LC_ALL=en_US.utf8 grep -oP '((feature|bug|bugfix|fix|hotfix|task|chore)\/)\K\d{1,7}'`
-echo "[POST_CHECKOUT] Setting template commit to $TICKETID"
-echo "#$TICKETID: " > ".git/templatemessage"
-
-
-
 # ### run npm install ###
 . "$(dirname "$0")/_/husky.sh"
 
@@ -18,7 +10,7 @@ PACKAGES=("$(git diff --name-only HEAD@{1} HEAD | grep -E "$PACKAGE_LOCK_REGEX")
 
 if [[ ${PACKAGES[@]} ]]; then
   for package in $PACKAGES; do
-    echo "[POST-CHECKOUT]"
+    echo "[POST-MERGE]"
     echo "📦 $package was changed. Running npm install to update your dependencies..."
     DIR=$(dirname package)
     cd "$DIR" && npm install
