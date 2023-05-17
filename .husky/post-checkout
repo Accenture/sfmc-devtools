@@ -7,30 +7,29 @@ TICKETID=`git rev-parse --abbrev-ref HEAD | LC_ALL=en_US.utf8 grep -oP '((featur
 echo "[POST_CHECKOUT] Setting template commit to $TICKETID"
 echo "#$TICKETID: " > ".git/templatemessage"
 
-echo "[POST-CHECKOUT-#1]"
-echo $1
-echo "[POST-CHECKOUT-#2]"
-echo $2
-echo "[POST-CHECKOUT-#3]"
-echo $3
 
 # ### run npm install ###
+echo "[POST-CHECKOUT] 📦 Checking for changes to dependencies"
+# set -x
+# NEWHEAD="5c279fb876053499698b996b10447a367cd05b95"
+# $1 is the new HEAD pointer
+NEWHEAD=$1
+# OLDHEAD="16d12bd271e22a1e0b5dc3a8dcbb4bf3327cb867"
+# $2 is the previous HEAD pointer
+OLDHEAD=$2
+# define how to split strings into array elements
 IFS=$'\n'
 # extract all paths to package-lock.json files 
-# $1 is the new HEAD pointer
-# $2 is the previous HEAD pointer
-echo "[POST-CHECKOUT-#4]"
-echo "git diff --name-only $1 $2 | grep -E '(^package-lock\.json)'"
-echo "[POST-CHECKOUT-#5]"
-PACKAGES=("$(git diff --name-only $1 $2 | grep -E '(^package-lock\.json)')")
-echo "[POST-CHECKOUT-6]"
+PACKAGE_LOCK_REGEX="(^package-lock\.json)"
+PACKAGES=$(git diff --name-only $NEWHEAD $OLDHEAD | grep -E $PACKAGE_LOCK_REGEX || true)
 
 if [[ ${PACKAGES[@]} ]]; then
   for package in $PACKAGES; do
-    echo "[POST-CHECKOUT]"
-    echo "📦 $package was changed. Running npm install to update your dependencies..."
-    npm install
+    echo "📦 $package was changed."
   done
+  echo "📦 Running npm install to update your dependencies..."
+  npm install
 else
   echo "📦 All packages up-to-date. No need to run npm install."
 fi
+# set +x
