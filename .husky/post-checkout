@@ -7,7 +7,12 @@ TICKETID=`git rev-parse --abbrev-ref HEAD | LC_ALL=en_US.utf8 grep -oP '((featur
 echo "[POST_CHECKOUT] Setting template commit to $TICKETID"
 echo "#$TICKETID: " > ".git/templatemessage"
 
-
+echo "[POST-CHECKOUT-#1]"
+echo $1
+echo "[POST-CHECKOUT-#2]"
+echo $2
+echo "[POST-CHECKOUT-#3]"
+echo $3
 
 # ### run npm install ###
 IFS=$'\n'
