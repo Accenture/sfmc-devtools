@@ -1,4 +1,6 @@
 #!/bin/sh -xv
+. "$(dirname "$0")/_/husky.sh"
+
 # ### git commit message template ###
 git config commit.template .git/templatemessage
 TICKETID=`git rev-parse --abbrev-ref HEAD | LC_ALL=en_US.utf8 grep -oP '((feature|bug|bugfix|fix|hotfix|task|chore)\/)\K\d{1,7}'`
@@ -8,7 +10,6 @@ echo "#$TICKETID: " > ".git/templatemessage"
 
 
 # ### run npm install ###
-. "$(dirname "$0")/_/husky.sh"
 
 IFS=$'\n'
 # regex supports mono-repos with a package.json at root-level and at package-level
