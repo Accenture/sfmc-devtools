@@ -47,7 +47,7 @@ Find info on the latest releases with a detailed changelog in the [GitHub Releas
 
 If you want to enhance Accenture SFMC DevTools you are welcome to fork the repo and create a pull request. Please understand that we will have to conduct a code review before accepting your changes.
 
-More details on how to best do that are described in our [wiki](https://github.com/Accenture/sfmc-devtools/wiki/9.-Contribute).
+More details on how to best do that are described in our [wiki](https://github.com/Accenture/sfmc-devtools/wiki/10.-Contribute).
 
 ## Main Contacts
 

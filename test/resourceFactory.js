@@ -7,6 +7,7 @@ const attributeParser = new XMLParser({ ignoreAttributes: false });
 const color = Util.color;
 /**
  * gets mock SOAP metadata for responding
+ *
  * @param {string} mcdevAction SOAP action
  * @param {string} type metadata Type
  * @param {string} mid of Business Unit
@@ -31,6 +32,7 @@ async function loadSOAPRecords(mcdevAction, type, mid) {
         `${color.bgRed}${color.fgBlack}test-error${color.reset}: Please create file ${testPath}`
     );
     /* eslint-enable no-console */
+    process.exitCode = 404;
 
     return fs.readFile(path.join('test', 'resources', mcdevAction + '-response.xml'), {
         encoding: 'utf8',
@@ -39,6 +41,7 @@ async function loadSOAPRecords(mcdevAction, type, mid) {
 
 /**
  * based on request, respond with different soap data
+ *
  * @param {object} config mock api request object
  * @returns {Promise.<Array>} status code plus response in string form
  */
@@ -96,6 +99,7 @@ export const handleSOAPRequest = async (config) => {
 
 /**
  * helper to return soap base URL
+ *
  * @returns {string} soap URL
  */
 export const soapUrl =
@@ -103,6 +107,7 @@ export const soapUrl =
 
 /**
  * based on request, respond with different soap data
+ *
  * @param {object} config mock api request object
  * @returns {Promise.<Array>} status code plus response in string form
  */
@@ -149,6 +154,7 @@ export const handleRESTRequest = async (config) => {
                 `${color.bgRed}${color.fgBlack}test-error${color.reset}: Please create file ${testPath}`
             );
             /* eslint-enable no-console */
+            process.exitCode = 404;
 
             return [
                 404,
@@ -164,6 +170,7 @@ export const handleRESTRequest = async (config) => {
 
 /**
  * helper to return rest base URL
+ *
  * @returns {string} test URL
  */
 export const restUrl = 'https://mct0l7nxfq2r988t1kxfy8sc4xxx.rest.marketingcloudapis.com/';

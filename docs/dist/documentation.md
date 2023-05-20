@@ -516,7 +516,7 @@ configures what is displayed in the console
 <a name="Mcdev.setOptions"></a>
 
 ### Mcdev.setOptions(argv) ⇒ <code>void</code>
-configures what is displayed in the console
+allows setting system wide / command related options
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 
@@ -1579,7 +1579,7 @@ DataExtension MetadataType
 
 * [DataExtension](#DataExtension) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.upsert(desToDeploy)](#DataExtension.upsert) ⇒ <code>Promise</code>
-    * [._filterUpsertResults(res)](#DataExtension._filterUpsertResults) ⇒ <code>boolean</code>
+    * [.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#DataExtension.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
     * [.create(metadata)](#DataExtension.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#DataExtension.update) ⇒ <code>Promise</code>
     * [.postDeployTasks(upsertedMetadata, originalMetadata, createdUpdated)](#DataExtension.postDeployTasks) ⇒ <code>void</code>
@@ -1608,17 +1608,21 @@ if create or update operation is needed.
 | --- | --- | --- |
 | desToDeploy | <code>TYPE.DataExtensionMap</code> | dataExtensions mapped by their customerKey |
 
-<a name="DataExtension._filterUpsertResults"></a>
+<a name="DataExtension.createOrUpdate"></a>
 
-### DataExtension.\_filterUpsertResults(res) ⇒ <code>boolean</code>
-helper for [upsert](upsert)
+### DataExtension.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
+helper for [upsert](#MetadataType.upsert)
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
-**Returns**: <code>boolean</code> - true: keep, false: discard  
+**Returns**: <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code> - action to take  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| res | <code>object</code> | - |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | list of metadata |
+| metadataKey | <code>string</code> | key of item we are looking at |
+| hasError | <code>boolean</code> | error flag from previous code |
+| metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
+| metadataToCreate | <code>Array.&lt;TYPE.MetadataTypeItem&gt;</code> | list of items to create |
 
 <a name="DataExtension.create"></a>
 
@@ -1804,7 +1808,7 @@ DataExtensionField MetadataType
     * [.convertToSortedArray(fieldsObj)](#DataExtensionField.convertToSortedArray) ⇒ <code>Array.&lt;TYPE.DataExtensionFieldItem&gt;</code>
     * [.sortDeFields(a, b)](#DataExtensionField.sortDeFields) ⇒ <code>boolean</code>
     * [.postRetrieveTasks(metadata, forDataExtension)](#DataExtensionField.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionFieldItem</code>
-    * [.prepareDeployColumnsOnUpdate(deployColumns, deKey)](#DataExtensionField.prepareDeployColumnsOnUpdate) ⇒ <code>Object.&lt;string, TYPE.DataExtensionFieldItem&gt;</code>
+    * [.prepareDeployColumnsOnUpdate(deployColumns, deKey)](#DataExtensionField.prepareDeployColumnsOnUpdate) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.DataExtensionFieldItem&gt;&gt;</code>
     * [.deleteByKey(customerKey)](#DataExtensionField.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.deleteByKeySOAP(customerKey)](#DataExtensionField.deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#DataExtensionField.postDeleteTasks) ⇒ <code>void</code>
@@ -1875,12 +1879,12 @@ manages post retrieve steps
 
 <a name="DataExtensionField.prepareDeployColumnsOnUpdate"></a>
 
-### DataExtensionField.prepareDeployColumnsOnUpdate(deployColumns, deKey) ⇒ <code>Object.&lt;string, TYPE.DataExtensionFieldItem&gt;</code>
+### DataExtensionField.prepareDeployColumnsOnUpdate(deployColumns, deKey) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.DataExtensionFieldItem&gt;&gt;</code>
 Mofifies passed deployColumns for update by mapping ObjectID to their target column's values.
 Removes FieldType field if its the same in deploy and target column, because it results in an error even if its of the same type
 
 **Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
-**Returns**: <code>Object.&lt;string, TYPE.DataExtensionFieldItem&gt;</code> - existing fields by their original name to allow re-adding FieldType after update  
+**Returns**: <code>Promise.&lt;Object.&lt;string, TYPE.DataExtensionFieldItem&gt;&gt;</code> - existing fields by their original name to allow re-adding FieldType after update  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2899,7 +2903,7 @@ definitionId: A unique UUID provided by Salesforce Marketing Cloud. Each version
     * [._postRetrieveTasksBulk(metadataMap)](#Journey._postRetrieveTasksBulk)
     * [.postRetrieveTasks(metadata)](#Journey.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.preDeployTasks(metadata)](#Journey.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#Journey.createOrUpdate)
+    * [.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#Journey.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
 
 <a name="Journey.retrieve"></a>
 
@@ -3021,12 +3025,15 @@ prepares a TSD for deployment
 
 <a name="Journey.createOrUpdate"></a>
 
-### Journey.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)
+### Journey.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
+helper for [upsert](#MetadataType.upsert)
+
 **Kind**: static method of [<code>Journey</code>](#Journey)  
+**Returns**: <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code> - action to take  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | single metadata itme |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | list of metadata |
 | metadataKey | <code>string</code> | key of item we are looking at |
 | hasError | <code>boolean</code> | error flag from previous code |
 | metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
@@ -3124,7 +3131,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.deploy(metadata, deployDir, retrieveDir, [isRefresh])](#MetadataType.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.postDeployTasks(upsertResults, originalMetadata, createdUpdated, [isRefresh])](#MetadataType.postDeployTasks) ⇒ <code>void</code>
     * [.postCreateTasks(metadataEntry, apiResponse)](#MetadataType.postCreateTasks) ⇒ <code>void</code>
-    * [.postCreateTasks_legacyApi(metadataEntry, apiResponse)](#MetadataType.postCreateTasks_legacyApi) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.postUpdateTasks(metadataEntry, apiResponse)](#MetadataType.postUpdateTasks) ⇒ <code>void</code>
+    * [.postDeployTasks_legacyApi(metadataEntry, apiResponse)](#MetadataType.postDeployTasks_legacyApi) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setFolderPath(metadata)](#MetadataType.setFolderPath)
     * [.setFolderId(metadata)](#MetadataType.setFolderId)
@@ -3140,8 +3148,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.refresh()](#MetadataType.refresh) ⇒ <code>void</code>
     * [.hasChanged(cachedVersion, metadata, [fieldName])](#MetadataType.hasChanged) ⇒ <code>boolean</code>
     * [.hasChangedGeneric(cachedVersion, metadata, [fieldName], [silent])](#MetadataType.hasChangedGeneric) ⇒ <code>boolean</code>
-    * [.upsert(metadata, deployDir, [isRefresh])](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
-    * [.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MetadataType.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
+    * [.upsert(metadataMap, deployDir, [isRefresh])](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MetadataType.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
     * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [.createSOAP(metadataEntry, [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [.updateREST(metadataEntry, uri, [httpMethod])](#MetadataType.updateREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
@@ -3258,9 +3266,21 @@ helper for [createREST](createREST)
 | metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
 | apiResponse | <code>object</code> | varies depending on the API call |
 
-<a name="MetadataType.postCreateTasks_legacyApi"></a>
+<a name="MetadataType.postUpdateTasks"></a>
 
-### MetadataType.postCreateTasks\_legacyApi(metadataEntry, apiResponse) ⇒ <code>Promise.&lt;void&gt;</code>
+### MetadataType.postUpdateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
+helper for [updateREST](updateREST)
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
+| apiResponse | <code>object</code> | varies depending on the API call |
+
+<a name="MetadataType.postDeployTasks_legacyApi"></a>
+
+### MetadataType.postDeployTasks\_legacyApi(metadataEntry, apiResponse) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for [createREST](createREST) when legacy API endpoints as these do not return the created item but only their new id
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3468,7 +3488,7 @@ test if metadata was actually changed or not to potentially skip it during deplo
 
 <a name="MetadataType.upsert"></a>
 
-### MetadataType.upsert(metadata, deployDir, [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+### MetadataType.upsert(metadataMap, deployDir, [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3476,13 +3496,13 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 | [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="MetadataType.createOrUpdate"></a>
 
-### MetadataType.createOrUpdate(metadata, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
+### MetadataType.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
 helper for [upsert](#MetadataType.upsert)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3490,7 +3510,7 @@ helper for [upsert](#MetadataType.upsert)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeMap</code> | list of metadata |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | list of metadata |
 | metadataKey | <code>string</code> | key of item we are looking at |
 | hasError | <code>boolean</code> | error flag from previous code |
 | metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
@@ -3988,6 +4008,7 @@ MobileKeyword MetadataType
     * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#MobileKeyword._buildForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.preDeployTasks(metadata, deployDir)](#MobileKeyword.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
     * [.postCreateTasks(metadataEntry, apiResponse)](#MobileKeyword.postCreateTasks) ⇒ <code>void</code>
+    * [.postUpdateTasks(metadataEntry, apiResponse)](#MobileKeyword.postUpdateTasks) ⇒ <code>void</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#MobileKeyword._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.deleteByKey(key)](#MobileKeyword.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postDeleteTasks(customerKey)](#MobileKeyword.postDeleteTasks) ⇒ <code>void</code>
@@ -4166,6 +4187,18 @@ helper for [createREST](createREST)
 | metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
 | apiResponse | <code>object</code> | varies depending on the API call |
 
+<a name="MobileKeyword.postUpdateTasks"></a>
+
+### MobileKeyword.postUpdateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
+helper for [updateREST](updateREST)
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
+| apiResponse | <code>object</code> | varies depending on the API call |
+
 <a name="MobileKeyword._mergeCode"></a>
 
 ### MobileKeyword.\_mergeCode(metadata, deployDir, [templateName]) ⇒ <code>Promise.&lt;string&gt;</code>
@@ -4235,6 +4268,7 @@ MobileMessage MetadataType
     * [.postRetrieveTasks(metadata)](#MobileMessage.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.preDeployTasks(metadata, deployDir)](#MobileMessage.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.postCreateTasks(metadataEntry, apiResponse)](#MobileMessage.postCreateTasks) ⇒ <code>void</code>
+    * [.postUpdateTasks(metadataEntry, apiResponse)](#MobileMessage.postUpdateTasks) ⇒ <code>void</code>
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MobileMessage.buildDefinitionForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MobileMessage.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#MobileMessage._buildForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
@@ -4361,6 +4395,18 @@ prepares an event definition for deployment
 
 ### MobileMessage.postCreateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
 helper for [createREST](createREST)
+
+**Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
+| apiResponse | <code>object</code> | varies depending on the API call |
+
+<a name="MobileMessage.postUpdateTasks"></a>
+
+### MobileMessage.postUpdateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
+helper for [updateREST](updateREST)
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
 

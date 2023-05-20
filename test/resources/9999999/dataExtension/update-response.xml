@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
     <soap:Header>
         <wsa:Action>UpdateResponse</wsa:Action>
         <wsa:MessageID>urn:uuid:994e213d-1125-450d-b187-32e3870147d1</wsa:MessageID>
@@ -21,9 +26,9 @@
                 <Object xsi:type="DataExtension">
                     <PartnerKey xsi:nil="true" />
                     <ObjectID>30400c03-0ec4-ec11-b83c-48df37d1de8b</ObjectID>
-                    <CustomerKey>childBU_dataextension_test</CustomerKey>
-                    <Name>childBU_dataextension_test</Name>
-                    <Description />
+                    <CustomerKey>testExisting_dataExtension</CustomerKey>
+                    <Name>testExisting_dataExtension</Name>
+                    <Description>Container for my test emails</Description>
                     <IsSendable>false</IsSendable>
                     <IsTestable>false</IsTestable>
                     <RowBasedRetention>false</RowBasedRetention>

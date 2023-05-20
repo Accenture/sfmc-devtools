@@ -1,6 +1,6 @@
 {
-    "name": "testExisting_tsms",
-    "definitionKey": "testExisting_tsms",
+    "name": "testTemplated_tsms",
+    "definitionKey": "testTemplated_tsms",
     "description": "foobar",
     "status": "Active",
     "subscriptions": {
@@ -8,6 +8,6 @@
         "countryCode": "",
         "autoAddSubscriber": true,
         "updateSubscriber": true,
-        "keyword": "testExisting_keyword"
+        "keyword": "testTemplated_keyword"
     }
 }

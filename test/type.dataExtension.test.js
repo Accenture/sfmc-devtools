@@ -3,7 +3,7 @@ import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 
-describe('dataExtension', () => {
+describe('type: dataExtension', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
@@ -11,11 +11,11 @@ describe('dataExtension', () => {
         testUtils.mockReset();
     });
     describe('Retrieve ================', () => {
-        it('Should retrieve a data extension', async () => {
+        it('Should retrieve a dataExtension', async () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['dataExtension']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -24,7 +24,7 @@ describe('dataExtension', () => {
                 'only one dataExtension expected'
             );
             assert.deepEqual(
-                await testUtils.getActualJson('childBU_dataextension_test', 'dataExtension'),
+                await testUtils.getActualJson('testExisting_dataExtension', 'dataExtension'),
                 await testUtils.getExpectedJson('9999999', 'dataExtension', 'retrieve'),
 
                 'returned metadata was not equal expected'
@@ -41,28 +41,28 @@ describe('dataExtension', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
-        it('Should create & upsert a data extension', async () => {
+        it('Should create & update a dataExtension', async () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['dataExtension']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
 
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.dataExtension ? Object.keys(result.dataExtension).length : 0,
                 2,
-                'two data extensions expected'
+                'two dataExtensions expected'
             );
             // insert
             assert.deepEqual(
-                await testUtils.getActualJson('testDataExtension', 'dataExtension'),
+                await testUtils.getActualJson('testNew_dataExtension', 'dataExtension'),
                 await testUtils.getExpectedJson('9999999', 'dataExtension', 'create'),
                 'returned metadata was not equal expected for create'
             );
             // update
             assert.deepEqual(
-                await testUtils.getActualJson('childBU_dataextension_test', 'dataExtension'),
+                await testUtils.getActualJson('testExisting_dataExtension', 'dataExtension'),
                 await testUtils.getExpectedJson('9999999', 'dataExtension', 'update'),
                 'returned metadata was not equal expected for update'
             );
@@ -73,6 +73,7 @@ describe('dataExtension', () => {
             );
             return;
         });
+        it('Should change the key during update via --changeKeyValue');
     });
     describe('Templating ================', () => {
         it('Should create a dataExtension template via retrieveAsTemplate and build it', async () => {
@@ -80,11 +81,11 @@ describe('dataExtension', () => {
             const result = await handler.retrieveAsTemplate(
                 'testInstance/testBU',
                 'dataExtension',
-                ['childBU_dataextension_test'],
+                ['testExisting_dataExtension'],
                 'testSourceMarket'
             );
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'retrieveAsTemplate should not have thrown an error'
             );
@@ -97,7 +98,7 @@ describe('dataExtension', () => {
             );
             assert.deepEqual(
                 await testUtils.getActualTemplateJson(
-                    'childBU_dataextension_test',
+                    'testExisting_dataExtension',
                     'dataExtension'
                 ),
                 await testUtils.getExpectedJson('9999999', 'dataExtension', 'template'),
@@ -107,19 +108,16 @@ describe('dataExtension', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'dataExtension',
-                'childBU_dataextension_test',
+                'testExisting_dataExtension',
                 'testTargetMarket'
             );
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'buildDefinition should not have thrown an error'
             );
             assert.deepEqual(
-                await testUtils.getActualDeployJson(
-                    'childBU_dataextension_testTarget',
-                    'dataExtension'
-                ),
+                await testUtils.getActualDeployJson('testTemplated_dataExtension', 'dataExtension'),
                 await testUtils.getExpectedJson('9999999', 'dataExtension', 'build'),
                 'returned deployment file was not equal expected'
             );
@@ -137,14 +135,10 @@ describe('dataExtension', () => {
             const result = await handler.buildTemplate(
                 'testInstance/testBU',
                 'dataExtension',
-                ['childBU_dataextension_test'],
+                ['testExisting_dataExtension'],
                 'testSourceMarket'
             );
-            assert.equal(
-                !!process.exitCode,
-                false,
-                'buildTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
             // WHEN
             assert.equal(
                 result.dataExtension ? Object.keys(result.dataExtension).length : 0,
@@ -153,7 +147,7 @@ describe('dataExtension', () => {
             );
             assert.deepEqual(
                 await testUtils.getActualTemplateJson(
-                    'childBU_dataextension_test',
+                    'testExisting_dataExtension',
                     'dataExtension'
                 ),
                 await testUtils.getExpectedJson('9999999', 'dataExtension', 'template'),
@@ -163,20 +157,17 @@ describe('dataExtension', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'dataExtension',
-                'childBU_dataextension_test',
+                'testExisting_dataExtension',
                 'testTargetMarket'
             );
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'buildDefinition should not have thrown an error'
             );
 
             assert.deepEqual(
-                await testUtils.getActualDeployJson(
-                    'childBU_dataextension_testTarget',
-                    'dataExtension'
-                ),
+                await testUtils.getActualDeployJson('testTemplated_dataExtension', 'dataExtension'),
                 await testUtils.getExpectedJson('9999999', 'dataExtension', 'build'),
                 'returned deployment file was not equal expected'
             );
@@ -187,5 +178,49 @@ describe('dataExtension', () => {
             );
             return;
         });
+    });
+    describe('Delete ================', () => {
+        // TODO: add this test
+        it('Should delete the item'); // , async () => {
+        //     // WHEN
+        //     const result = await handler.deleteByKey('testInstance/testBU', 'mobileKeyword', [
+        //         'testExisting_keyword',
+        //     ]);
+        //     // THEN
+        //     assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+
+        //     assert.equal(result, true, 'should have deleted the item');
+        //     return;
+        // });
+    });
+    describe('CI/CD ================', () => {
+        // TODO: add this test
+        it('Should return a list of files based on their type and key'); // , async () => {
+        //     // WHEN
+        //     const fileList = await handler.getFilesToCommit(
+        //         'testInstance/testBU',
+        //         'mobileKeyword',
+        //         ['testExisting_keyword']
+        //     );
+        //     // THEN
+        //     assert.equal(
+        //         process.exitCode,
+        //         false,
+        //         'getFilesToCommit should not have thrown an error'
+        //     );
+        //     assert.equal(fileList.length, 2, 'expected only 2 file paths');
+
+        //     assert.equal(
+        //         fileList[0].split('\\').join('/'),
+        //         'retrieve/testInstance/testBU/mobileKeyword/testExisting_keyword.mobileKeyword-meta.json',
+        //         'wrong JSON path'
+        //     );
+        //     assert.equal(
+        //         fileList[1].split('\\').join('/'),
+        //         'retrieve/testInstance/testBU/mobileKeyword/testExisting_keyword.mobileKeyword-meta.amp',
+        //         'wrong AMP path'
+        //     );
+        //     return;
+        // });
     });
 });

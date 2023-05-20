@@ -8,7 +8,7 @@ import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 
-describe('transactionalSMS', () => {
+describe('type: transactionalSMS', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
@@ -21,7 +21,7 @@ describe('transactionalSMS', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['transactionalSMS']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -55,7 +55,7 @@ describe('transactionalSMS', () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['transactionalSMS']);
             // THEN
-            assert.equal(!!process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -93,6 +93,22 @@ describe('transactionalSMS', () => {
             );
             return;
         });
+        it('Should NOT change the key during update with --changeKeyValue and instead fail due to missing support', async () => {
+            // WHEN
+            handler.setOptions({ changeKeyValue: 'updatedKey' });
+            await handler.deploy(
+                'testInstance/testBU',
+                ['transactionalSMS'],
+                ['testExisting_tsms']
+            );
+            // THEN
+            assert.equal(
+                process.exitCode,
+                1,
+                'deploy should have thrown an error due to lack of support'
+            );
+            return;
+        });
     });
     describe('Templating ================', () => {
         // it.skip('Should create a transactionalSMS template via retrieveAsTemplate and build it');
@@ -106,11 +122,7 @@ describe('transactionalSMS', () => {
                 ['testExisting_tsms'],
                 'testSourceMarket'
             );
-            assert.equal(
-                !!process.exitCode,
-                false,
-                'buildTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
 
             assert.equal(
                 result.transactionalSMS ? Object.keys(result.transactionalSMS).length : 0,
@@ -137,18 +149,18 @@ describe('transactionalSMS', () => {
                 'testTargetMarket'
             );
             assert.equal(
-                !!process.exitCode,
+                process.exitCode,
                 false,
                 'buildDefinition should not have thrown an error'
             );
 
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testExisting_tsms', 'transactionalSMS'),
+                await testUtils.getActualDeployJson('testTemplated_tsms', 'transactionalSMS'),
                 await testUtils.getExpectedJson('9999999', 'transactionalSMS', 'build'),
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualDeployFile('testExisting_tsms', 'transactionalSMS', 'amp'))
+                file(testUtils.getActualDeployFile('testTemplated_tsms', 'transactionalSMS', 'amp'))
             ).to.equal(
                 file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'build', 'amp'))
             );
@@ -159,5 +171,49 @@ describe('transactionalSMS', () => {
             );
             return;
         });
+    });
+    describe('Delete ================', () => {
+        // TODO: add this test
+        it('Should delete the item'); // , async () => {
+        //     // WHEN
+        //     const result = await handler.deleteByKey('testInstance/testBU', 'mobileKeyword', [
+        //         'testExisting_keyword',
+        //     ]);
+        //     // THEN
+        //     assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+
+        //     assert.equal(result, true, 'should have deleted the item');
+        //     return;
+        // });
+    });
+    describe('CI/CD ================', () => {
+        // TODO: add this test
+        it('Should return a list of files based on their type and key'); // , async () => {
+        //     // WHEN
+        //     const fileList = await handler.getFilesToCommit(
+        //         'testInstance/testBU',
+        //         'mobileKeyword',
+        //         ['testExisting_keyword']
+        //     );
+        //     // THEN
+        //     assert.equal(
+        //         process.exitCode,
+        //         false,
+        //         'getFilesToCommit should not have thrown an error'
+        //     );
+        //     assert.equal(fileList.length, 2, 'expected only 2 file paths');
+
+        //     assert.equal(
+        //         fileList[0].split('\\').join('/'),
+        //         'retrieve/testInstance/testBU/mobileKeyword/testExisting_keyword.mobileKeyword-meta.json',
+        //         'wrong JSON path'
+        //     );
+        //     assert.equal(
+        //         fileList[1].split('\\').join('/'),
+        //         'retrieve/testInstance/testBU/mobileKeyword/testExisting_keyword.mobileKeyword-meta.amp',
+        //         'wrong AMP path'
+        //     );
+        //     return;
+        // });
     });
 });

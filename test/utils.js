@@ -17,6 +17,7 @@ const authResources = File.readJsonSync(path.join(__dirname, './resources/auth.j
 
 /**
  * gets file from Retrieve folder
+ *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} [buName] used when we need to test on ParentBU
@@ -30,6 +31,7 @@ export function getActualJson(customerKey, type, buName = 'testBU') {
 
 /**
  * gets file from Retrieve folder
+ *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
@@ -40,6 +42,7 @@ export function getActualFile(customerKey, type, ext) {
 }
 /**
  * gets file from Deploy folder
+ *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} [buName] used when we need to test on ParentBU
@@ -52,6 +55,7 @@ export function getActualDeployJson(customerKey, type, buName = 'testBU') {
 }
 /**
  * gets file from Deploy folder
+ *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
@@ -62,6 +66,7 @@ export function getActualDeployFile(customerKey, type, ext) {
 }
 /**
  * gets file from Template folder
+ *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @returns {Promise.<string>} file in string form
@@ -71,6 +76,7 @@ export function getActualTemplateJson(customerKey, type) {
 }
 /**
  * gets file from Template folder
+ *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
@@ -81,6 +87,7 @@ export function getActualTemplateFile(customerKey, type, ext) {
 }
 /**
  * gets file from resources folder which should be used for comparison
+ *
  * @param {number} mid of Business Unit
  * @param {string} type of metadata
  * @param {string} action of SOAP request
@@ -91,6 +98,7 @@ export function getExpectedJson(mid, type, action) {
 }
 /**
  * gets file from resources folder which should be used for comparison
+ *
  * @param {number} mid of Business Unit
  * @param {string} type of metadata
  * @param {string} action of SOAP request
@@ -102,6 +110,7 @@ export function getExpectedFile(mid, type, action, ext) {
 }
 /**
  * setup mocks for API and FS
+ *
  * @param {boolean} [isDeploy] if true, will mock deploy folder
  * @returns {void}
  */
@@ -148,21 +157,31 @@ export function mockSetup(isDeploy) {
         fsMockConf.deploy = fsmock.load(path.resolve(__dirname, 'mockRoot/deploy'));
     }
     fsmock(fsMockConf);
-    // ! reset exitCode or else tests could influence each other
+
+    // ! reset exitCode or else tests could influence each other; do this in mockSetup to to ensure correct starting value
     process.exitCode = 0;
 }
 
 /**
  * resets mocks for API and FS
+ *
  * @returns {void}
  */
-export function mockReset() {
+exports.mockReset = () => {
+    // remove all options that might have been set by previous tests
+    for (const key in Util.OPTIONS) {
+        if (Object.prototype.hasOwnProperty.call(Util.OPTIONS, key)) {
+            delete Util.OPTIONS[key];
+        }
+    }
+    // reset sfmc login
     auth.clearSessions();
     fsmock.restore();
     apimock.restore();
-}
+};
 /**
  * helper to return amount of api callouts
+ *
  * @param {boolean} [includeToken] if true, will include token calls in count
  * @returns {object} of API history
  */
@@ -175,6 +194,7 @@ export function getAPIHistoryLength(includeToken) {
 }
 /**
  * helper to return api history
+ *
  * @returns {object} of API history
  */
 export function getAPIHistory() {
@@ -182,6 +202,7 @@ export function getAPIHistory() {
 }
 /**
  * helper to return most important fields for each api call
+ *
  * @returns {object} of API history
  */
 export function getAPIHistoryDebug() {
@@ -192,6 +213,7 @@ export function getAPIHistoryDebug() {
 }
 /**
  * helper to return most important fields for each api call
+ *
  * @returns {void} of API history
  */
 export function logAPIHistoryDebug() {
@@ -200,6 +222,7 @@ export function logAPIHistoryDebug() {
 
 /**
  * escapes string for regex
+ *
  * @param {string} str to escape
  * @returns {string} escaped string
  */
