@@ -12,7 +12,7 @@ const color = Util.color;
  * @param {string} mid of Business Unit
  * @returns {string} relevant metadata stringified
  */
-export const loadSOAPRecords = async (mcdevAction, type, mid) => {
+async function loadSOAPRecords(mcdevAction, type, mid) {
     type = type[0].toLowerCase() + type.slice(1);
     const testPath = path.join(
         'test',
@@ -35,7 +35,7 @@ export const loadSOAPRecords = async (mcdevAction, type, mid) => {
     return fs.readFile(path.join('test', 'resources', mcdevAction + '-response.xml'), {
         encoding: 'utf8',
     });
-};
+}
 
 /**
  * based on request, respond with different soap data
@@ -49,7 +49,7 @@ export const handleSOAPRequest = async (config) => {
 
     switch (config.headers.SOAPAction) {
         case 'Retrieve': {
-            responseXML = await this.loadSOAPRecords(
+            responseXML = await loadSOAPRecords(
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 jObj.Envelope.Body.RetrieveRequestMsg.RetrieveRequest.ObjectType,
                 jObj.Envelope.Header.fueloauth
@@ -58,7 +58,7 @@ export const handleSOAPRequest = async (config) => {
             break;
         }
         case 'Create': {
-            responseXML = await this.loadSOAPRecords(
+            responseXML = await loadSOAPRecords(
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.CreateRequest.Objects['@_xsi:type'],
                 jObj.Envelope.Header.fueloauth
@@ -67,7 +67,7 @@ export const handleSOAPRequest = async (config) => {
             break;
         }
         case 'Update': {
-            responseXML = await this.loadSOAPRecords(
+            responseXML = await loadSOAPRecords(
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.UpdateRequest.Objects['@_xsi:type'],
                 jObj.Envelope.Header.fueloauth
@@ -76,7 +76,7 @@ export const handleSOAPRequest = async (config) => {
             break;
         }
         case 'Configure': {
-            responseXML = await this.loadSOAPRecords(
+            responseXML = await loadSOAPRecords(
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.ConfigureRequestMsg.Configurations.Configuration[0][
                     '@_xsi:type'

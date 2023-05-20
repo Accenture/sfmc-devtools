@@ -6151,7 +6151,8 @@ Saves json content to a file in the local file system. Will create the parent di
 <a name="File.writePrettyToFile"></a>
 
 ### File.writePrettyToFile(directory, filename, filetype, content, [templateVariables]) ⇒ <code>Promise.&lt;boolean&gt;</code>
-Saves beautified files in the local file system. Will create the parent directory if it does not exist! Important: run 'await File.initPrettier()' in your MetadataType.retrieve() once before hitting this
+Saves beautified files in the local file system. Will create the parent directory if it does not exist
+! Important: run 'await File.initPrettier()' in your MetadataType.retrieve() once before hitting this
 
 **Kind**: static method of [<code>File</code>](#File)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - Promise  
@@ -6179,7 +6180,8 @@ helper for [writePrettyToFile](#File.writePrettyToFile), applying beautyAmp onto
 <a name="File._beautify_prettier"></a>
 
 ### File.\_beautify\_prettier(directory, filename, filetype, content) ⇒ <code>string</code>
-helper for [writePrettyToFile](#File.writePrettyToFile), applying prettier onto given stringified content! Important: run 'await File.initPrettier()' in your MetadataType.retrieve() once before hitting this
+helper for [writePrettyToFile](#File.writePrettyToFile), applying prettier onto given stringified content
+! Important: run 'await File.initPrettier()' in your MetadataType.retrieve() once before hitting this
 
 **Kind**: static method of [<code>File</code>](#File)  
 **Returns**: <code>string</code> - original string on error; formatted string on success  
@@ -6240,7 +6242,8 @@ reads file from local file system.
 <a name="File.readDirectories"></a>
 
 ### File.readDirectories(directory, depth, [includeStem], [_stemLength]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-reads directories to a specific depth returning an arrayof file paths to be iterated over
+reads directories to a specific depth returning an array
+of file paths to be iterated over
 
 **Kind**: static method of [<code>File</code>](#File)  
 **Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - array of fully defined file paths  
@@ -6259,7 +6262,9 @@ reads directories to a specific depth returning an arrayof file paths to be ite
 <a name="File.readDirectoriesSync"></a>
 
 ### File.readDirectoriesSync(directory, [depth], [includeStem], [_stemLength]) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
-reads directories to a specific depth returning an arrayof file paths to be iterated over using sync api (required in constructors)TODO - merge with readDirectories. so far the logic is really different
+reads directories to a specific depth returning an array
+of file paths to be iterated over using sync api (required in constructors)
+TODO - merge with readDirectories. so far the logic is really different
 
 **Kind**: static method of [<code>File</code>](#File)  
 **Returns**: <code>Array.&lt;string&gt;</code> \| <code>void</code> - array of fully defined file paths; void on error  

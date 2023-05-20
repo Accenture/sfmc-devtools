@@ -1,7 +1,7 @@
 import File from '../lib/util/file.js';
 import path from 'node:path';
-import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import { axiosInstance } from '../node_modules/sfmc-sdk/lib/util.js';
 import auth from '../lib/util/auth.js';
 import { Util } from '../lib/util/util.js';
 import { fileURLToPath } from 'node:url';
@@ -107,7 +107,7 @@ export function getExpectedFile(mid, type, action, ext) {
  */
 export function mockSetup(isDeploy) {
     Util.setLoggingLevel({ debug: true });
-    apimock = new MockAdapter(axios, { onNoMatch: 'throwException' });
+    apimock = new MockAdapter(axiosInstance, { onNoMatch: 'throwException' });
     // set access_token to mid to allow for autorouting of mock to correct resources
     apimock.onPost(authResources.success.url).reply((config) => {
         authResources.success.response.access_token = JSON.parse(config.data).account_id;
