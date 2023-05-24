@@ -74,6 +74,7 @@ describe('type: dataExtension', () => {
             return;
         });
         it('Should change the key during update via --changeKeyValue');
+        it('Should rename fields');
     });
     describe('Templating ================', () => {
         it('Should create a dataExtension template via retrieveAsTemplate and build it', async () => {
