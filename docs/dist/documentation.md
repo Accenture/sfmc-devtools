@@ -4007,7 +4007,7 @@ MobileKeyword MetadataType
 * [MobileKeyword](#MobileKeyword) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#MobileKeyword.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> \| <code>void</code>
     * [.retrieveForCache(_, __, [key])](#MobileKeyword.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.create(MobileKeyword)](#MobileKeyword.create) ⇒ <code>Promise</code>
+    * [.create(metadata)](#MobileKeyword.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#MobileKeyword.update) ⇒ <code>Promise</code>
     * [.postRetrieveTasks(metadata)](#MobileKeyword.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code> \| <code>TYPE.MetadataTypeItem</code>
     * [.prepExtractedCode(metadataScript)](#MobileKeyword.prepExtractedCode) ⇒ <code>Object</code>
@@ -4054,15 +4054,16 @@ Retrieves event definition metadata for caching
 
 <a name="MobileKeyword.create"></a>
 
-### MobileKeyword.create(MobileKeyword) ⇒ <code>Promise</code>
-Creates a single Event Definition
+### MobileKeyword.create(metadata) ⇒ <code>Promise</code>
+/**
+Creates a single item
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| MobileKeyword | <code>TYPE.MetadataTypeItem</code> | a single Event Definition |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
 <a name="MobileKeyword.update"></a>
 
