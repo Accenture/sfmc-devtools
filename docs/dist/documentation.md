@@ -4009,7 +4009,7 @@ MobileKeyword MetadataType
     * [.retrieveForCache(_, __, [key])](#MobileKeyword.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.create(metadata)](#MobileKeyword.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#MobileKeyword.update) ⇒ <code>Promise</code>
-    * [.postRetrieveTasks(metadata)](#MobileKeyword.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code> \| <code>TYPE.MetadataTypeItem</code>
+    * [.postRetrieveTasks(metadata)](#MobileKeyword.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code> \| <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
     * [.prepExtractedCode(metadataScript)](#MobileKeyword.prepExtractedCode) ⇒ <code>Object</code>
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MobileKeyword.buildDefinitionForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MobileKeyword.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
@@ -4079,11 +4079,11 @@ Updates a single item
 
 <a name="MobileKeyword.postRetrieveTasks"></a>
 
-### MobileKeyword.postRetrieveTasks(metadata) ⇒ <code>TYPE.CodeExtractItem</code> \| <code>TYPE.MetadataTypeItem</code>
+### MobileKeyword.postRetrieveTasks(metadata) ⇒ <code>TYPE.CodeExtractItem</code> \| <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
 manages post retrieve steps
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
-**Returns**: <code>TYPE.CodeExtractItem</code> \| <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one ssjs string  
+**Returns**: <code>TYPE.CodeExtractItem</code> \| <code>TYPE.MetadataTypeItem</code> \| <code>void</code> - Array with one metadata object and one ssjs string; or single metadata object; nothing if filtered  
 
 | Param | Type | Description |
 | --- | --- | --- |
