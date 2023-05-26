@@ -4009,6 +4009,7 @@ MobileKeyword MetadataType
     * [.parseResponseBody(body, [singleRetrieve])](#MobileKeyword.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MobileKeyword.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
     * [.retrieveForCache(_, __, [key])](#MobileKeyword.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#MobileKeyword.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.create(metadata)](#MobileKeyword.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#MobileKeyword.update) ⇒ <code>Promise</code>
     * [.postRetrieveTasks(metadata)](#MobileKeyword.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code> \| <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
@@ -4083,10 +4084,23 @@ Retrieves event definition metadata for caching
 | __ | <code>void</code> | parameter not used |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
+<a name="MobileKeyword.retrieveAsTemplate"></a>
+
+### MobileKeyword.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
+retrieve an item and create a template from it
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| name | <code>string</code> | name of the metadata file |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+
 <a name="MobileKeyword.create"></a>
 
 ### MobileKeyword.create(metadata) ⇒ <code>Promise</code>
-/**
 Creates a single item
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
