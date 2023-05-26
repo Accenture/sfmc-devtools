@@ -4006,6 +4006,7 @@ MobileKeyword MetadataType
 
 * [MobileKeyword](#MobileKeyword) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#MobileKeyword.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> \| <code>void</code>
+    * [.parseResponseBody(body, [singleRetrieve])](#MobileKeyword.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.retrieveForCache(_, __, [key])](#MobileKeyword.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.create(metadata)](#MobileKeyword.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#MobileKeyword.update) ⇒ <code>Promise</code>
@@ -4037,6 +4038,19 @@ Endpoint /legacy/v1/beta/mobile/keyword/ return all Mobile Keywords with all det
 | [_] | <code>void</code> | unused parameter |
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="MobileKeyword.parseResponseBody"></a>
+
+### MobileKeyword.parseResponseBody(body, [singleRetrieve]) ⇒ <code>TYPE.MetadataTypeMap</code>
+Builds map of metadata entries mapped to their keyfields
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>TYPE.MetadataTypeMap</code> - keyField => metadata map  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| body | <code>object</code> | json of response body |
+| [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
 
 <a name="MobileKeyword.retrieveForCache"></a>
 
