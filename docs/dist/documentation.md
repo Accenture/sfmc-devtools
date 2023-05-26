@@ -4019,7 +4019,7 @@ MobileKeyword MetadataType
     * [.postCreateTasks(metadataEntry, apiResponse)](#MobileKeyword.postCreateTasks) ⇒ <code>void</code>
     * [.postUpdateTasks(metadataEntry, apiResponse)](#MobileKeyword.postUpdateTasks) ⇒ <code>void</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#MobileKeyword._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
-    * [.deleteByKey(id)](#MobileKeyword.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deleteByKey(key)](#MobileKeyword.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postDeleteTasks(customerKey)](#MobileKeyword.postDeleteTasks) ⇒ <code>void</code>
     * [.getFilesToCommit(keyArr)](#MobileKeyword.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
 
@@ -4224,7 +4224,7 @@ helper for [preDeployTasks](preDeployTasks) that loads extracted code content ba
 
 <a name="MobileKeyword.deleteByKey"></a>
 
-### MobileKeyword.deleteByKey(id) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### MobileKeyword.deleteByKey(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
@@ -4232,7 +4232,7 @@ Delete a metadata item from the specified business unit
 
 | Param | Type | Description |
 | --- | --- | --- |
-| id | <code>string</code> | Identifier of item |
+| key | <code>string</code> | Identifier of item |
 
 <a name="MobileKeyword.postDeleteTasks"></a>
 
