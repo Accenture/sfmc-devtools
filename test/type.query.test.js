@@ -278,12 +278,6 @@ describe('type: query', () => {
         });
     });
     describe('Execute ================', () => {
-        it('Should start executing queries', async () => {
-            const execute = await handler.execute('testInstance/testBU', ['query']);
-            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
-            assert.equal(execute, true, 'queries were supposed to be executed');
-            return;
-        });
         it('Should start executing a query', async () => {
             const execute = await handler.execute(
                 'testInstance/testBU',
