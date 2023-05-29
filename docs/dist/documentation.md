@@ -496,8 +496,8 @@ main class
     * [.buildDefinition(businessUnit, selectedType, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.buildDefinitionBulk(listName, type, name)](#Mcdev.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getFilesToCommit(businessUnit, selectedType, keyArr)](#Mcdev.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-    * [.execute(businessUnit, [selectedTypesArr], keys)](#Mcdev.execute) ⇒ <code>Promise.&lt;Boolean&gt;</code>
-    * [._executeBU(cred, bu, [selectedTypesArr], keyArr)](#Mcdev._executeBU) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+    * [.execute(businessUnit, [selectedTypesArr], keys)](#Mcdev.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._executeBU(cred, bu, [selectedTypesArr], keyArr)](#Mcdev._executeBU) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="Mcdev.setSkipInteraction"></a>
 
@@ -752,11 +752,11 @@ Build a specific metadata file based on a template using a list of bu-market com
 
 <a name="Mcdev.execute"></a>
 
-### Mcdev.execute(businessUnit, [selectedTypesArr], keys) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+### Mcdev.execute(businessUnit, [selectedTypesArr], keys) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Start an item (query)
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;Boolean&gt;</code> - true if all started successfully, false if not  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all started successfully, false if not  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -766,11 +766,11 @@ Start an item (query)
 
 <a name="Mcdev._executeBU"></a>
 
-### Mcdev.\_executeBU(cred, bu, [selectedTypesArr], keyArr) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+### Mcdev.\_executeBU(cred, bu, [selectedTypesArr], keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
 helper for @link execute
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;Boolean&gt;</code> - true if all items were executed, false otherwise  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all items were executed, false otherwise  
 
 | Param | Type | Description |
 | --- | --- | --- |
