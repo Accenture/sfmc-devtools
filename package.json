@@ -77,17 +77,17 @@
         "toposort": "2.0.2",
         "update-notifier": "5.1.0",
         "winston": "3.8.2",
-        "yargs": "17.6.0"
+        "yargs": "17.7.2"
     },
     "devDependencies": {
         "assert": "2.0.0",
         "axios-mock-adapter": "1.21.3",
         "chai": "4.3.7",
         "chai-files": "1.4.0",
-        "eslint": "8.39.0",
+        "eslint": "8.41.0",
         "eslint-config-prettier": "8.7.0",
         "eslint-config-ssjs": "1.1.11",
-        "eslint-plugin-jsdoc": "44.2.4",
+        "eslint-plugin-jsdoc": "45.0.0",
         "eslint-plugin-mocha": "10.1.0",
         "eslint-plugin-prettier": "4.2.1",
         "eslint-plugin-unicorn": "47.0.0",
