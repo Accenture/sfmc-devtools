@@ -3151,6 +3151,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.retrieveTemplateREST(templateDir, uri, templateVariables, name)](#MetadataType.retrieveTemplateREST) ⇒ <code>Promise.&lt;{metadata: TYPE.MetadataTypeItem, type: string}&gt;</code>
     * [.buildTemplate(retrieveDir, templateDir, key, templateVariables)](#MetadataType.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
+    * [.stringifyFieldsBeforeTemplate(metadataStr)](#MetadataType.stringifyFieldsBeforeTemplate) ⇒ <code>string</code>
+    * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
     * [.preDeployTasks(metadata, deployDir)](#MetadataType.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
     * [.create(metadata, deployDir)](#MetadataType.create) ⇒ <code>void</code>
     * [.update(metadata, [metadataBefore])](#MetadataType.update) ⇒ <code>void</code>
@@ -3424,6 +3426,37 @@ Gets metadata cache with limited fields and does not store value to disk
 | key | <code>string</code> | name of the metadata file |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
+<a name="MetadataType.stringifyFieldsBeforeTemplate"></a>
+
+### MetadataType.stringifyFieldsBeforeTemplate(metadataStr) ⇒ <code>string</code>
+helper for [buildTemplate](buildTemplate)
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>string</code> - metadataStr with specified fields converted that need to be stringified before templating  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataStr | <code>string</code> | single metadata item as string |
+
+<a name="MetadataType.deleteFieldByDefinition"></a>
+
+### MetadataType.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin) ⇒ <code>void</code>
+Deletes a field in a metadata entry if the selected definition property equals false.
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> | One entry of a metadataType |
+| fieldPath | <code>string</code> | field path to be checked if it conforms to the definition (dot seperated if nested): 'fuu.bar' |
+| definitionProperty | <code>&#x27;isCreateable&#x27;</code> \| <code>&#x27;isUpdateable&#x27;</code> \| <code>&#x27;retrieving&#x27;</code> \| <code>&#x27;templating&#x27;</code> | delete field if definitionProperty equals false for specified field. Options: [isCreateable | isUpdateable] |
+| origin | <code>string</code> | string of parent object, required when using arrays as these are parsed slightly differently. |
+
+**Example**  
+```js
+Removes field (or nested fields childs) that are not updateable
+deleteFieldByDefinition(metadataEntry, 'CustomerKey', 'isUpdateable');
+```
 <a name="MetadataType.preDeployTasks"></a>
 
 ### MetadataType.preDeployTasks(metadata, deployDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
