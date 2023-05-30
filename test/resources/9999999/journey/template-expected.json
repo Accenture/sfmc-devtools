@@ -323,7 +323,7 @@
             },
             "configurationArguments": {
                 "c__mobileMessage_id": "NTIzOjc4OjA",
-                "c__mobileKeyword": "{{{prefix}}}keyword",
+                "r__mobileKeyword_codeKeyword": "4912312345678.{{{prefixUpper}}}KEYWORD",
                 "isOptIn": false,
                 "honorBlackoutWindowEnum": 0,
                 "mobileBlackoutWindowStartTime": "",

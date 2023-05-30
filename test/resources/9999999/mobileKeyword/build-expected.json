@@ -1,8 +1,5 @@
 {
-    "code": {
-        "code": "4912312345678"
-    },
-    "keyword": "testTemplated_keyword",
+    "c__codeKeyword": "4912312345678.TESTTEMPLATED_KEYWORD",
     "keywordType": "NORMAL",
     "isInherited": false,
     "restriction": "NONE"
