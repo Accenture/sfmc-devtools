@@ -30,12 +30,21 @@ describe('type: mobileKeyword', () => {
                 'only 1 mobileKeywords expected'
             );
             assert.deepEqual(
-                await testUtils.getActualJson('testExisting_keyword', 'mobileKeyword'),
+                await testUtils.getActualJson(
+                    '4912312345678.TESTEXISTING_KEYWORD',
+                    'mobileKeyword'
+                ),
                 await testUtils.getExpectedJson('9999999', 'mobileKeyword', 'get'),
                 'saved JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_keyword', 'mobileKeyword', 'amp'))
+                file(
+                    testUtils.getActualFile(
+                        '4912312345678.TESTEXISTING_KEYWORD',
+                        'mobileKeyword',
+                        'amp'
+                    )
+                )
             ).to.equal(file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'get', 'amp')));
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -51,7 +60,11 @@ describe('type: mobileKeyword', () => {
         });
         it('Should create (but not update) a mobileKeyword', async () => {
             // WHEN
-            await handler.deploy('testInstance/testBU', ['mobileKeyword'], ['testNew_keyword']);
+            await handler.deploy(
+                'testInstance/testBU',
+                ['mobileKeyword'],
+                ['4912312345678.TESTNEW_KEYWORD']
+            );
             // THEN
             assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
             // get results from cache
@@ -63,12 +76,14 @@ describe('type: mobileKeyword', () => {
             );
             // confirm created item
             assert.deepEqual(
-                await testUtils.getActualJson('testNew_keyword', 'mobileKeyword'),
+                await testUtils.getActualJson('4912312345678.TESTNEW_KEYWORD', 'mobileKeyword'),
                 await testUtils.getExpectedJson('9999999', 'mobileKeyword', 'post-create'),
                 'returned JSON was not equal expected for insert mobileKeyword'
             );
             expect(
-                file(testUtils.getActualFile('testNew_keyword', 'mobileKeyword', 'amp'))
+                file(
+                    testUtils.getActualFile('4912312345678.TESTNEW_KEYWORD', 'mobileKeyword', 'amp')
+                )
             ).to.equal(
                 file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'post-create', 'amp'))
             );
@@ -92,7 +107,7 @@ describe('type: mobileKeyword', () => {
             await handler.deploy(
                 'testInstance/testBU',
                 ['mobileKeyword'],
-                ['testNew_keyword_blocked']
+                ['4912312345678.TESTNEW_KEYWORD_BLOCKED']
             );
             // THEN
             assert.equal(process.exitCode, true, 'deploy should have thrown an error');
@@ -113,7 +128,7 @@ describe('type: mobileKeyword', () => {
             const result = await handler.retrieveAsTemplate(
                 'testInstance/testBU',
                 'mobileKeyword',
-                ['testExisting_keyword'],
+                ['4912312345678.TESTEXISTING_KEYWORD'],
                 'testSourceMarket'
             );
             // WHEN
@@ -128,13 +143,20 @@ describe('type: mobileKeyword', () => {
                 'only one item expected'
             );
             assert.deepEqual(
-                await testUtils.getActualTemplateJson('testExisting_keyword', 'mobileKeyword'),
+                await testUtils.getActualTemplateJson(
+                    '4912312345678.TESTEXISTING_KEYWORD',
+                    'mobileKeyword'
+                ),
                 await testUtils.getExpectedJson('9999999', 'mobileKeyword', 'template'),
                 'returned template JSON was not equal expected'
             );
             expect(
                 file(
-                    testUtils.getActualTemplateFile('testExisting_keyword', 'mobileKeyword', 'amp')
+                    testUtils.getActualTemplateFile(
+                        '4912312345678.TESTEXISTING_KEYWORD',
+                        'mobileKeyword',
+                        'amp'
+                    )
                 )
             ).to.equal(
                 file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'template', 'amp'))
@@ -153,7 +175,7 @@ describe('type: mobileKeyword', () => {
             const result = await handler.buildTemplate(
                 'testInstance/testBU',
                 'mobileKeyword',
-                ['testExisting_keyword'],
+                ['4912312345678.TESTEXISTING_KEYWORD'],
                 'testSourceMarket'
             );
             assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
@@ -164,13 +186,20 @@ describe('type: mobileKeyword', () => {
                 'only one mobileKeyword expected'
             );
             assert.deepEqual(
-                await testUtils.getActualTemplateJson('testExisting_keyword', 'mobileKeyword'),
+                await testUtils.getActualTemplateJson(
+                    '4912312345678.TESTEXISTING_KEYWORD',
+                    'mobileKeyword'
+                ),
                 await testUtils.getExpectedJson('9999999', 'mobileKeyword', 'template'),
                 'returned template JSON was not equal expected'
             );
             expect(
                 file(
-                    testUtils.getActualTemplateFile('testExisting_keyword', 'mobileKeyword', 'amp')
+                    testUtils.getActualTemplateFile(
+                        '4912312345678.TESTEXISTING_KEYWORD',
+                        'mobileKeyword',
+                        'amp'
+                    )
                 )
             ).to.equal(
                 file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'template', 'amp'))
@@ -180,7 +209,7 @@ describe('type: mobileKeyword', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'mobileKeyword',
-                'testExisting_keyword',
+                '4912312345678.TESTEXISTING_KEYWORD',
                 'testTargetMarket'
             );
             assert.equal(
@@ -189,12 +218,21 @@ describe('type: mobileKeyword', () => {
                 'buildDefinition should not have thrown an error'
             );
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testTemplated_keyword', 'mobileKeyword'),
+                await testUtils.getActualDeployJson(
+                    '4912312345678.TESTTEMPLATED_KEYWORD',
+                    'mobileKeyword'
+                ),
                 await testUtils.getExpectedJson('9999999', 'mobileKeyword', 'build'),
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualDeployFile('testTemplated_keyword', 'mobileKeyword', 'amp'))
+                file(
+                    testUtils.getActualDeployFile(
+                        '4912312345678.TESTTEMPLATED_KEYWORD',
+                        'mobileKeyword',
+                        'amp'
+                    )
+                )
             ).to.equal(file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'build', 'amp')));
 
             assert.equal(
@@ -209,7 +247,7 @@ describe('type: mobileKeyword', () => {
         it('Should delete the item', async () => {
             // WHEN
             const result = await handler.deleteByKey('testInstance/testBU', 'mobileKeyword', [
-                'testExisting_keyword',
+                '4912312345678.TESTEXISTING_KEYWORD',
             ]);
             // THEN
             assert.equal(process.exitCode, false, 'delete should not have thrown an error');
@@ -224,7 +262,7 @@ describe('type: mobileKeyword', () => {
             const fileList = await handler.getFilesToCommit(
                 'testInstance/testBU',
                 'mobileKeyword',
-                ['testExisting_keyword']
+                ['4912312345678.TESTEXISTING_KEYWORD']
             );
             // THEN
             assert.equal(
@@ -236,12 +274,12 @@ describe('type: mobileKeyword', () => {
 
             assert.equal(
                 fileList[0].split('\\').join('/'),
-                'retrieve/testInstance/testBU/mobileKeyword/testExisting_keyword.mobileKeyword-meta.json',
+                'retrieve/testInstance/testBU/mobileKeyword/4912312345678.TESTEXISTING_KEYWORD.mobileKeyword-meta.json',
                 'wrong JSON path'
             );
             assert.equal(
                 fileList[1].split('\\').join('/'),
-                'retrieve/testInstance/testBU/mobileKeyword/testExisting_keyword.mobileKeyword-meta.amp',
+                'retrieve/testInstance/testBU/mobileKeyword/4912312345678.TESTEXISTING_KEYWORD.mobileKeyword-meta.amp',
                 'wrong AMP path'
             );
             return;

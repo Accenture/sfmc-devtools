@@ -32,7 +32,7 @@
                 "isClientOwned": false,
                 "isOwner": false
             },
-            "keyword": "testExisting_keyword",
+            "keyword": "TESTEXISTING_KEYWORD",
             "startDate": "2018-03-27T12:37:18.197Z",
             "endDate": "2038-03-27T12:37:18.197Z",
             "status": "Active",
