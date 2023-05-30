@@ -1,4 +1,9 @@
-const assert = require('chai').assert;
+const chai = require('chai');
+const chaiFiles = require('chai-files');
+const assert = chai.assert;
+chai.use(chaiFiles);
+const expect = chai.expect;
+const file = chaiFiles.file;
 const cache = require('../lib/util/cache');
 const testUtils = require('./utils');
 const handler = require('../lib/index');
@@ -29,9 +34,30 @@ describe('type: user', () => {
 
                 'returned metadata was not equal expected'
             );
+            // check if MD file was created and equals expectations
+            expect(file(`./docs/user/testInstance.users.md`)).to.equal(
+                file(testUtils.getExpectedFile('1111111', 'user', 'retrieve', 'md'))
+            );
+
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 6,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should retrieve a specific user but not run document', async () => {
+            // WHEN
+            await handler.retrieve('testInstance/_ParentBU_', ['user'], ['testExisting_user']);
+            // THEN
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+
+            // because user is single-document-type we would not want to find an md file when we retrieve specific keys. only the generic retrieve updates it
+            expect(file(`./docs/user/testInstance.users.md`)).to.not.exist;
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                4,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -74,6 +100,9 @@ describe('type: user', () => {
                 await testUtils.getExpectedJson('1111111', 'user', 'update'),
                 'returned metadata was not equal expected for update'
             );
+            // because user is single-document-type we would not want to find an md file getting created by deploy. only retrieve updates it
+            expect(file(`./docs/user/testInstance.users.md`)).to.not.exist;
+
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 9,
