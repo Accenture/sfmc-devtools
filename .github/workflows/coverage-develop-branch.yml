@@ -1,0 +1,41 @@
+name: Test coverage for develop branch
+
+on:
+    push:
+        branches:
+            - develop
+
+jobs:
+    hello_world_job:
+        runs-on: ubuntu-latest
+        name: Test and report
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                  ref: ${{ github.event.pull_request.head.sha }}
+                  fetch-depth: 1000
+
+            - name: Fetch base
+              run: git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
+
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+
+            - run: npm ci --ignore-scripts
+
+            - run: npm run lint
+
+            - name: Run mcdev-tests with coverage
+              run: npm run coverage
+
+            - name: Prepare for Report Coverage (mini)
+              run: |
+                  npx nyc report --reporter json-summary --exclude-after-remap false
+
+            - name: Upload coverage artifact
+              uses: actions/upload-artifact@v3
+              with:
+                  name: test-coverage-output
+                  path: coverage

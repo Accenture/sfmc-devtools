@@ -2,7 +2,7 @@
     "name": "testExistingQuery",
     "key": "testExistingQuery",
     "description": "foobar",
-    "targetKey": "childBU_dataextension_testTarget",
+    "targetKey": "testTemplated_dataExtension",
     "targetUpdateTypeName": "Overwrite",
     "r__folder_Path": "Query"
 }

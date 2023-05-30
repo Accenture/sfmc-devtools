@@ -1,6 +1,6 @@
 {
-    "name": "testExisting_tpush",
-    "definitionKey": "testExisting_tpush",
+    "name": "{{{prefix}}}tpush",
+    "definitionKey": "{{{prefix}}}tpush",
     "description": "{{{description}}}. note that applicationId can only be manually set up in Setup - Mobile Push",
     "applicationId": "ffbab4c9-fbf6-4b87-9c9a-10c6ce86e81d",
     "content": { "customerKey": "mobileMessage{{{suffix}}}" },

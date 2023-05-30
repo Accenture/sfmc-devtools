@@ -14,7 +14,7 @@
         // Formatting & colors
         "editorconfig.editorconfig",
         "esbenp.prettier-vscode",
-        "sergey-agadzhanov.ampscript",
+        "xnerd.ampscript-language",
         "FiB.beautyAmp",
 
         // Markdown / Readme.md
