@@ -1,5 +1,6 @@
 {
-    "CustomerKey": "testExisting_user",
+    "Client": {},
+    "CustomerKey": "{{{prefix}}}user",
     "UserID": "user{{{suffix}}}@accenture.asgr",
     "Name": "user test",
     "Email": "user{{{suffix}}}@accenture.com",
@@ -7,9 +8,9 @@
     "ActiveFlag": true,
     "IsAPIUser": false,
     "NotificationEmailAddress": "user{{{suffix}}}@accenture.com",
-    "IsLocked": false,
     "DefaultBusinessUnit": "1111111",
-    "type__c": "User",
-    "AssociatedBusinessUnits__c": ["1111111", "{{{mid}}}"],
-    "RoleNamesGlobal__c": ["Administrator", "Content Creator", "Marketing Cloud Administrator"]
+    "c__AssociatedBusinessUnits": ["1111111", "{{{mid}}}"],
+    "c__RoleNamesGlobal": ["Administrator", "Content Creator", "Marketing Cloud Administrator"],
+    "c__TimeZoneName": "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna *",
+    "c__LocaleCode": "en-GB"
 }

@@ -2,7 +2,7 @@
 . "$(dirname "$0")/_/husky.sh"
 INPUT_FILE=$1
 START_LINE=`head -n1 $INPUT_FILE`
-PATTERN="^(#[[:digit:]]|Merge)"
+PATTERN="^(#[[:digit:]]|Merge|Revert)"
 
 if ! [[ "$START_LINE" =~ $PATTERN ]] ; then
   echo "Bad commit message, see example: \"#431 commit message\", you provided: \"$START_LINE\""

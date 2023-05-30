@@ -1,0 +1,29 @@
+{
+    "startIndex": 0,
+    "itemsPerPage": 50,
+    "totalResults": 1,
+    "entry": [
+        {
+            "id": "MjMxOjQ2OjA",
+            "type": "Campaign",
+            "createdDate": "2021-05-17T11:52:40Z",
+            "lastUpdated": "2023-03-28T14:35:34.213Z",
+            "createdBy": "https://mcabcdefghijkl-mnopqrs.rest.marketingcloudapis.com/legacy/v1/beta/organization/user/Nzc1MTU2ODo0OjA",
+            "name": "testExisting_campaign",
+            "description": "Test Campaign",
+            "externalKey": "TEST CAMPAIGN",
+            "campaignCode": "",
+            "ownerId": "https://mcabcdefghijkl-mnopqrs.rest.marketingcloudapis.com/legacy/v1/beta/organization/user/NzI5NzMwMTo0OjA",
+            "display": {
+                "name": "color",
+                "value": "f6efb6"
+            },
+            "isFavorite": false,
+            "plannedDeploymentDate": "2021-05-16T22:00:00Z",
+            "campaignOwnerName": "Jörn Berkefeld",
+            "campaignId": 231,
+            "campaignStatus": "InProcess",
+            "campaignOwner": "MDo0OjE"
+        }
+    ]
+}

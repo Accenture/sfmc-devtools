@@ -27,6 +27,16 @@ exports.getActualJson = (customerKey, type, buName = 'testBU') =>
  *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
+ * @param {string} [buName] used when we need to test on ParentBU
+ * @returns {Promise.<string>} file in string form
+ */
+exports.getActualDoc = (customerKey, type, buName = 'testBU') =>
+    `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-doc.md`;
+/**
+ * gets file from Retrieve folder
+ *
+ * @param {string} customerKey of metadata
+ * @param {string} type of metadata
  * @param {string} ext file extension
  * @returns {Promise.<string>} file in string form
  */
@@ -145,6 +155,9 @@ exports.mockSetup = (isDeploy) => {
         fsMockConf.deploy = fsmock.load(path.resolve(__dirname, 'mockRoot/deploy'));
     }
     fsmock(fsMockConf);
+
+    // ! reset exitCode or else tests could influence each other; do this in mockSetup to to ensure correct starting value
+    process.exitCode = 0;
 };
 
 /**
@@ -153,6 +166,13 @@ exports.mockSetup = (isDeploy) => {
  * @returns {void}
  */
 exports.mockReset = () => {
+    // remove all options that might have been set by previous tests
+    for (const key in Util.OPTIONS) {
+        if (Object.prototype.hasOwnProperty.call(Util.OPTIONS, key)) {
+            delete Util.OPTIONS[key];
+        }
+    }
+    // reset sfmc login
     auth.clearSessions();
     fsmock.restore();
     apimock.restore();
@@ -204,5 +224,5 @@ exports.logAPIHistoryDebug = () => {
  * @returns {string} escaped string
  */
 function escapeRegExp(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+    return str.replaceAll(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 }

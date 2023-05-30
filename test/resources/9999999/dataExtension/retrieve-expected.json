@@ -1,7 +1,7 @@
 {
-    "CustomerKey": "childBU_dataextension_test",
-    "Name": "childBU_dataextension_test",
-    "Description": "Container for my test emails",
+    "CustomerKey": "testExisting_dataExtension",
+    "Name": "testExisting_dataExtension",
+    "Description": "bla bla",
     "IsSendable": true,
     "IsTestable": true,
     "SendableDataExtensionField": { "Name": "ContactKey" },
