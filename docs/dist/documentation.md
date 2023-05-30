@@ -1212,7 +1212,7 @@ Automation MetadataType
     * [.update(metadata, metadataBefore)](#Automation.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#Automation.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AutomationItem&gt;</code>
     * [.validateDeployMetadata(metadata)](#Automation.validateDeployMetadata) ⇒ <code>boolean</code>
-    * [.postDeployTasks(metadata, originalMetadata)](#Automation.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.postDeployTasks(metadataMap, originalMetadataMap)](#Automation.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.setFolderPath(metadata)](#Automation.setFolderPath)
     * [.setFolderId(metadata)](#Automation.setFolderId)
     * [.parseMetadata(metadata)](#Automation.parseMetadata) ⇒ <code>TYPE.AutomationItem</code> \| <code>void</code>
@@ -1345,7 +1345,7 @@ Whitelisted Activites are deployed but require configuration
 
 <a name="Automation.postDeployTasks"></a>
 
-### Automation.postDeployTasks(metadata, originalMetadata) ⇒ <code>Promise.&lt;void&gt;</code>
+### Automation.postDeployTasks(metadataMap, originalMetadataMap) ⇒ <code>Promise.&lt;void&gt;</code>
 Gets executed after deployment of metadata type
 
 **Kind**: static method of [<code>Automation</code>](#Automation)  
@@ -1353,8 +1353,8 @@ Gets executed after deployment of metadata type
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.AutomationMap</code> | metadata mapped by their keyField |
-| originalMetadata | <code>TYPE.AutomationMap</code> | metadata to be updated (contains additioanl fields) |
+| metadataMap | <code>TYPE.AutomationMap</code> | metadata mapped by their keyField |
+| originalMetadataMap | <code>TYPE.AutomationMap</code> | metadata to be updated (contains additioanl fields) |
 
 <a name="Automation.setFolderPath"></a>
 
@@ -3167,6 +3167,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.getSOAPErrorMsg(ex)](#MetadataType.getSOAPErrorMsg) ⇒ <code>string</code>
     * [.retrieveSOAP(retrieveDir, [requestParams], [singleRetrieve], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
+    * [.runDocumentOnRetrieve([singleRetrieve], metadataMap)](#MetadataType.runDocumentOnRetrieve) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#MetadataType.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
     * [.removeNotCreateableFields(metadataEntry)](#MetadataType.removeNotCreateableFields) ⇒ <code>void</code>
@@ -3632,6 +3633,19 @@ Retrieves Metadata for Rest Types
 | [templateVariables] | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
 
+<a name="MetadataType.runDocumentOnRetrieve"></a>
+
+### MetadataType.runDocumentOnRetrieve([singleRetrieve], metadataMap) ⇒ <code>Promise.&lt;void&gt;</code>
+helper for [retrieveREST](retrieveREST) and [retrieveSOAP](retrieveSOAP)
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | saved metadata |
+
 <a name="MetadataType.parseResponseBody"></a>
 
 ### MetadataType.parseResponseBody(body, [singleRetrieve]) ⇒ <code>TYPE.MetadataTypeMap</code>
@@ -4006,11 +4020,13 @@ MobileKeyword MetadataType
 
 * [MobileKeyword](#MobileKeyword) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#MobileKeyword.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> \| <code>void</code>
+    * [.parseResponseBody(body, [singleRetrieve])](#MobileKeyword.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
+    * [.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MobileKeyword.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
     * [.retrieveForCache(_, __, [key])](#MobileKeyword.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#MobileKeyword.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
-    * [.create(MobileKeyword)](#MobileKeyword.create) ⇒ <code>Promise</code>
+    * [.retrieveAsTemplate(templateDir, key, templateVariables)](#MobileKeyword.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
+    * [.create(metadata)](#MobileKeyword.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#MobileKeyword.update) ⇒ <code>Promise</code>
-    * [.postRetrieveTasks(metadata)](#MobileKeyword.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code> \| <code>TYPE.MetadataTypeItem</code>
+    * [.postRetrieveTasks(metadata)](#MobileKeyword.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code> \| <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
     * [.prepExtractedCode(metadataScript)](#MobileKeyword.prepExtractedCode) ⇒ <code>Object</code>
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MobileKeyword.buildDefinitionForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#MobileKeyword.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
@@ -4039,6 +4055,35 @@ Endpoint /legacy/v1/beta/mobile/keyword/ return all Mobile Keywords with all det
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
+<a name="MobileKeyword.parseResponseBody"></a>
+
+### MobileKeyword.parseResponseBody(body, [singleRetrieve]) ⇒ <code>TYPE.MetadataTypeMap</code>
+Builds map of metadata entries mapped to their keyfields
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>TYPE.MetadataTypeMap</code> - keyField => metadata map  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| body | <code>object</code> | json of response body |
+| [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
+
+<a name="MobileKeyword.createOrUpdate"></a>
+
+### MobileKeyword.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
+helper for [upsert](#MetadataType.upsert)
+
+**Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
+**Returns**: <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code> - action to take  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | list of metadata |
+| metadataKey | <code>string</code> | key of item we are looking at |
+| hasError | <code>boolean</code> | error flag from previous code |
+| metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
+| metadataToCreate | <code>Array.&lt;TYPE.MetadataTypeItem&gt;</code> | list of items to create |
+
 <a name="MobileKeyword.retrieveForCache"></a>
 
 ### MobileKeyword.retrieveForCache(_, __, [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
@@ -4055,8 +4100,8 @@ Retrieves event definition metadata for caching
 
 <a name="MobileKeyword.retrieveAsTemplate"></a>
 
-### MobileKeyword.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
-Retrieve a specific keyword
+### MobileKeyword.retrieveAsTemplate(templateDir, key, templateVariables) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
+retrieve an item and create a template from it
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code> - Promise of metadata  
@@ -4064,20 +4109,20 @@ Retrieve a specific keyword
 | Param | Type | Description |
 | --- | --- | --- |
 | templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
-| name | <code>string</code> | name of the metadata file |
+| key | <code>string</code> | name of the metadata file |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
 <a name="MobileKeyword.create"></a>
 
-### MobileKeyword.create(MobileKeyword) ⇒ <code>Promise</code>
-Creates a single Event Definition
+### MobileKeyword.create(metadata) ⇒ <code>Promise</code>
+Creates a single item
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
 **Returns**: <code>Promise</code> - Promise  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| MobileKeyword | <code>TYPE.MetadataTypeItem</code> | a single Event Definition |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
 <a name="MobileKeyword.update"></a>
 
@@ -4093,11 +4138,11 @@ Updates a single item
 
 <a name="MobileKeyword.postRetrieveTasks"></a>
 
-### MobileKeyword.postRetrieveTasks(metadata) ⇒ <code>TYPE.CodeExtractItem</code> \| <code>TYPE.MetadataTypeItem</code>
+### MobileKeyword.postRetrieveTasks(metadata) ⇒ <code>TYPE.CodeExtractItem</code> \| <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
 manages post retrieve steps
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
-**Returns**: <code>TYPE.CodeExtractItem</code> \| <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one ssjs string  
+**Returns**: <code>TYPE.CodeExtractItem</code> \| <code>TYPE.MetadataTypeItem</code> \| <code>void</code> - Array with one metadata object and one ssjs string; or single metadata object; nothing if filtered  
 
 | Param | Type | Description |
 | --- | --- | --- |

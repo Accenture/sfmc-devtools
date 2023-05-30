@@ -111,7 +111,7 @@
             "isSentImmediately": true,
             "nextKeyword": {
                 "id": "cTVJaG5oSDJPVUNHcUh6Z3pQT2tVdzo4Njow",
-                "keyword": "testExisting_keyword",
+                "keyword": "TESTEXISTING_KEYWORD",
                 "restriction": "NONE",
                 "isInherited": false
             },
