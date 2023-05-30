@@ -1,4 +1,8 @@
-const assert = require('chai').assert;
+const chai = require('chai');
+const chaiFiles = require('chai-files');
+const assert = chai.assert;
+const expect = chai.expect;
+const file = chaiFiles.file;
 const cache = require('../lib/util/cache');
 const testUtils = require('./utils');
 const handler = require('../lib/index');
@@ -29,6 +33,13 @@ describe('type: dataExtension', () => {
 
                 'returned metadata was not equal expected'
             );
+            // check if MD file was created and equals expectations
+            expect(
+                file(testUtils.getActualDoc('testExisting_dataExtension', 'dataExtension'))
+            ).to.equal(
+                file(testUtils.getExpectedFile('9999999', 'dataExtension', 'retrieve', 'md'))
+            );
+
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 5,

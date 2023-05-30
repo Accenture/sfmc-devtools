@@ -8,6 +8,6 @@
         "countryCode": "",
         "autoAddSubscriber": true,
         "updateSubscriber": true,
-        "keyword": "{{{prefix}}}keyword"
+        "keyword": "{{{prefixUpper}}}KEYWORD"
     }
 }

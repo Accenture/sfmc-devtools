@@ -27,6 +27,16 @@ exports.getActualJson = (customerKey, type, buName = 'testBU') =>
  *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
+ * @param {string} [buName] used when we need to test on ParentBU
+ * @returns {Promise.<string>} file in string form
+ */
+exports.getActualDoc = (customerKey, type, buName = 'testBU') =>
+    `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-doc.md`;
+/**
+ * gets file from Retrieve folder
+ *
+ * @param {string} customerKey of metadata
+ * @param {string} type of metadata
  * @param {string} ext file extension
  * @returns {Promise.<string>} file in string form
  */
