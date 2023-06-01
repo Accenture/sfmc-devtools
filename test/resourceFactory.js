@@ -154,7 +154,7 @@ exports.handleRESTRequest = async (config) => {
         } else {
             /* eslint-disable no-console */
             console.log(
-                `${color.bgRed}${color.fgBlack}test-error${color.reset}: Please create file ${testPath}`
+                `${color.bgRed}${color.fgBlack}test-error${color.reset}: Please create file ${testPath}.json/.txt`
             );
             /* eslint-enable no-console */
             process.exitCode = 404;
