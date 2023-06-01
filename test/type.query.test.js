@@ -32,16 +32,16 @@ describe('type: query', () => {
             );
             // normal test
             assert.deepEqual(
-                await testUtils.getActualJson('testExistingQuery', 'query'),
+                await testUtils.getActualJson('testExisting_query', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'get'),
                 'returned metadata with correct key was not equal expected'
             );
-            expect(file(testUtils.getActualFile('testExistingQuery', 'query', 'sql'))).to.equal(
+            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
                 file(testUtils.getExpectedFile('9999999', 'query', 'get', 'sql'))
             );
             // check if targetKey was overwritten
             assert.deepEqual(
-                await testUtils.getActualJson('testExistingQuery2', 'query'),
+                await testUtils.getActualJson('testExisting_query2', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'get2'),
                 'returned metadata with wrong key was not equal expected'
             );
@@ -55,7 +55,7 @@ describe('type: query', () => {
         });
         it('Should retrieve one specific query', async () => {
             // WHEN
-            await handler.retrieve('testInstance/testBU', ['query'], ['testExistingQuery']);
+            await handler.retrieve('testInstance/testBU', ['query'], ['testExisting_query']);
             // THEN
             assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
             // get results from cache
@@ -66,11 +66,11 @@ describe('type: query', () => {
                 'only one query expected'
             );
             assert.deepEqual(
-                await testUtils.getActualJson('testExistingQuery', 'query'),
+                await testUtils.getActualJson('testExisting_query', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'get'),
                 'returned metadata was not equal expected'
             );
-            expect(file(testUtils.getActualFile('testExistingQuery', 'query', 'sql'))).to.equal(
+            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
                 file(testUtils.getExpectedFile('9999999', 'query', 'get', 'sql'))
             );
             assert.equal(
@@ -99,20 +99,20 @@ describe('type: query', () => {
             );
             // confirm created item
             assert.deepEqual(
-                await testUtils.getActualJson('testNewQuery', 'query'),
+                await testUtils.getActualJson('testNew_query', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'post'),
                 'returned metadata was not equal expected for insert query'
             );
-            expect(file(testUtils.getActualFile('testNewQuery', 'query', 'sql'))).to.equal(
+            expect(file(testUtils.getActualFile('testNew_query', 'query', 'sql'))).to.equal(
                 file(testUtils.getExpectedFile('9999999', 'query', 'post', 'sql'))
             );
             // confirm updated item
             assert.deepEqual(
-                await testUtils.getActualJson('testExistingQuery', 'query'),
+                await testUtils.getActualJson('testExisting_query', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'patch'),
                 'returned metadata was not equal expected for insert query'
             );
-            expect(file(testUtils.getActualFile('testExistingQuery', 'query', 'sql'))).to.equal(
+            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
                 file(testUtils.getExpectedFile('9999999', 'query', 'patch', 'sql'))
             );
             // check number of API calls
@@ -131,7 +131,7 @@ describe('type: query', () => {
             const result = await handler.retrieveAsTemplate(
                 'testInstance/testBU',
                 'query',
-                ['testExistingQuery'],
+                ['testExisting_query'],
                 'testSourceMarket'
             );
             // WHEN
@@ -146,18 +146,18 @@ describe('type: query', () => {
                 'only one query expected'
             );
             assert.deepEqual(
-                await testUtils.getActualTemplateJson('testExistingQuery', 'query'),
+                await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'template'),
                 'returned template JSON of retrieveAsTemplate was not equal expected'
             );
             expect(
-                file(testUtils.getActualTemplateFile('testExistingQuery', 'query', 'sql'))
+                file(testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql'))
             ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'template', 'sql')));
             // THEN
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'query',
-                'testExistingQuery',
+                'testExisting_query',
                 'testTargetMarket'
             );
             assert.equal(
@@ -167,12 +167,12 @@ describe('type: query', () => {
             );
 
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testExistingQuery', 'query'),
+                await testUtils.getActualDeployJson('testExisting_query', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'build'),
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualDeployFile('testExistingQuery', 'query', 'sql'))
+                file(testUtils.getActualDeployFile('testExisting_query', 'query', 'sql'))
             ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'build', 'sql')));
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -188,7 +188,7 @@ describe('type: query', () => {
             const result = await handler.buildTemplate(
                 'testInstance/testBU',
                 'query',
-                ['testExistingQuery'],
+                ['testExisting_query'],
                 'testSourceMarket'
             );
             // WHEN
@@ -200,18 +200,18 @@ describe('type: query', () => {
                 'only one query expected'
             );
             assert.deepEqual(
-                await testUtils.getActualTemplateJson('testExistingQuery', 'query'),
+                await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'template'),
                 'returned template JSON of buildTemplate was not equal expected'
             );
             expect(
-                file(testUtils.getActualTemplateFile('testExistingQuery', 'query', 'sql'))
+                file(testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql'))
             ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'template', 'sql')));
             // THEN
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'query',
-                'testExistingQuery',
+                'testExisting_query',
                 'testTargetMarket'
             );
             assert.equal(
@@ -221,12 +221,12 @@ describe('type: query', () => {
             );
 
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testExistingQuery', 'query'),
+                await testUtils.getActualDeployJson('testExisting_query', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'build'),
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualDeployFile('testExistingQuery', 'query', 'sql'))
+                file(testUtils.getActualDeployFile('testExisting_query', 'query', 'sql'))
             ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'build', 'sql')));
 
             assert.equal(
@@ -241,7 +241,7 @@ describe('type: query', () => {
         it('Should delete the item', async () => {
             // WHEN
             const result = await handler.deleteByKey('testInstance/testBU', 'query', [
-                'testExistingQuery',
+                'testExisting_query',
             ]);
             // THEN
             assert.equal(process.exitCode, false, 'delete should not have thrown an error');
@@ -254,7 +254,7 @@ describe('type: query', () => {
         it('Should return a list of files based on their type and key', async () => {
             // WHEN
             const fileList = await handler.getFilesToCommit('testInstance/testBU', 'query', [
-                'testExistingQuery',
+                'testExisting_query',
             ]);
             // THEN
             assert.equal(
@@ -266,12 +266,12 @@ describe('type: query', () => {
 
             assert.equal(
                 fileList[0].split('\\').join('/'),
-                'retrieve/testInstance/testBU/query/testExistingQuery.query-meta.json',
+                'retrieve/testInstance/testBU/query/testExisting_query.query-meta.json',
                 'wrong JSON path'
             );
             assert.equal(
                 fileList[1].split('\\').join('/'),
-                'retrieve/testInstance/testBU/query/testExistingQuery.query-meta.sql',
+                'retrieve/testInstance/testBU/query/testExisting_query.query-meta.sql',
                 'wrong JSON path'
             );
             return;
@@ -282,7 +282,7 @@ describe('type: query', () => {
             const execute = await handler.execute(
                 'testInstance/testBU',
                 ['query'],
-                ['testExistingQuery']
+                ['testExisting_query']
             );
             assert.equal(process.exitCode, false, 'execute should not have thrown an error');
             assert.equal(execute, true, 'query was supposed to be executed');
