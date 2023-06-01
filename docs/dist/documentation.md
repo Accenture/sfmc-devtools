@@ -767,7 +767,7 @@ Start an item (query)
 <a name="Mcdev._executeBU"></a>
 
 ### Mcdev.\_executeBU(cred, bu, [selectedTypesArr], keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
-helper for @link execute
+helper for [execute](execute)
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all items were executed, false otherwise  

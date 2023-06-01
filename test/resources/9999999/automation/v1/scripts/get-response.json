@@ -1,0 +1,17 @@
+{
+    "count": 1,
+    "page": 1,
+    "pageSize": 500,
+    "items": [
+        {
+            "ssjsActivityId": "39f6a488-20eb-4ba0-b0b9-023725b574e4",
+            "name": "testExisting_script",
+            "key": "testExisting_script",
+            "description": "",
+            "script": "<script runat=\"server\">\n//dummy\n</script",
+            "categoryId": 290828,
+            "createdDate": "2022-10-20T00:41:26.163",
+            "modifiedDate": "2022-10-20T00:41:26.163"
+        }
+    ]
+}
