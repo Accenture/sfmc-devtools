@@ -496,6 +496,8 @@ main class
     * [.buildDefinition(businessUnit, selectedType, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.buildDefinitionBulk(listName, type, name)](#Mcdev.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getFilesToCommit(businessUnit, selectedType, keyArr)](#Mcdev.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [.execute(businessUnit, [selectedTypesArr], keys)](#Mcdev.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._executeBU(cred, bu, [selectedTypesArr], keyArr)](#Mcdev._executeBU) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="Mcdev.setSkipInteraction"></a>
 
@@ -746,6 +748,35 @@ Build a specific metadata file based on a template using a list of bu-market com
 | --- | --- | --- |
 | businessUnit | <code>string</code> | references credentials from properties.json |
 | selectedType | <code>string</code> | supported metadata type |
+| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Mcdev.execute"></a>
+
+### Mcdev.execute(businessUnit, [selectedTypesArr], keys) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Start an item (query)
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all started successfully, false if not  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| businessUnit | <code>string</code> | name of BU |
+| [selectedTypesArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit to given metadata types |
+| keys | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Mcdev._executeBU"></a>
+
+### Mcdev.\_executeBU(cred, bu, [selectedTypesArr], keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
+helper for @link execute
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all items were executed, false otherwise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cred | <code>string</code> | name of Credential |
+| bu | <code>string</code> | name of BU |
+| [selectedTypesArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit execution to given metadata type |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Asset"></a>
@@ -3155,6 +3186,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.create(metadata, deployDir)](#MetadataType.create) ⇒ <code>void</code>
     * [.update(metadata, [metadataBefore])](#MetadataType.update) ⇒ <code>void</code>
     * [.refresh()](#MetadataType.refresh) ⇒ <code>void</code>
+    * [.execute()](#MetadataType.execute) ⇒ <code>void</code>
     * [.hasChanged(cachedVersion, metadata, [fieldName])](#MetadataType.hasChanged) ⇒ <code>boolean</code>
     * [.hasChangedGeneric(cachedVersion, metadata, [fieldName], [silent])](#MetadataType.hasChangedGeneric) ⇒ <code>boolean</code>
     * [.upsert(metadataMap, deployDir, [isRefresh])](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
@@ -3167,6 +3199,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.getSOAPErrorMsg(ex)](#MetadataType.getSOAPErrorMsg) ⇒ <code>string</code>
     * [.retrieveSOAP(retrieveDir, [requestParams], [singleRetrieve], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
+    * [.executeREST(uri, key)](#MetadataType.executeREST) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.runDocumentOnRetrieve([singleRetrieve], metadataMap)](#MetadataType.runDocumentOnRetrieve) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#MetadataType.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
@@ -3467,6 +3500,12 @@ Abstract update method that needs to be implemented in child metadata type
 Abstract refresh method that needs to be implemented in child metadata type
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+<a name="MetadataType.execute"></a>
+
+### MetadataType.execute() ⇒ <code>void</code>
+Abstract execute method that needs to be implemented in child metadata type
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 <a name="MetadataType.hasChanged"></a>
 
 ### MetadataType.hasChanged(cachedVersion, metadata, [fieldName]) ⇒ <code>boolean</code>
@@ -3632,6 +3671,19 @@ Retrieves Metadata for Rest Types
 | uri | <code>string</code> | rest endpoint for GET |
 | [templateVariables] | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
+
+<a name="MetadataType.executeREST"></a>
+
+### MetadataType.executeREST(uri, key) ⇒ <code>Promise.&lt;string&gt;</code>
+Used to execute a query/automation etc.
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;string&gt;</code> - 'OK' if started execution successfully, otherwise - 'Error'  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| uri | <code>string</code> | REST endpoint where the POST request should be sent |
+| key | <code>string</code> | item key |
 
 <a name="MetadataType.runDocumentOnRetrieve"></a>
 
@@ -4548,6 +4600,7 @@ Query MetadataType
 
 * [Query](#Query) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#Query.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code>
+    * [.execute(keyArr)](#Query.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.retrieveForCache()](#Query.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Query.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: Query, type: string}&gt;</code>
     * [.postRetrieveTasks(metadata)](#Query.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
@@ -4576,6 +4629,18 @@ Retrieves Metadata of queries
 | [_] | <code>void</code> | unused parameter |
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="Query.execute"></a>
+
+### Query.execute(keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
+a function to start query execution via API
+
+**Kind**: static method of [<code>Query</code>](#Query)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - Returns true if all items were executed successfully, otherwise false  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Query.retrieveForCache"></a>
 
