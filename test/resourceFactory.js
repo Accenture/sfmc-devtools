@@ -121,15 +121,15 @@ exports.handleRESTRequest = async (config) => {
                 'resources',
                 config.headers.Authorization.replace('Bearer ', ''),
                 urlObj.pathname,
-                config.method + '-response.json'
+                config.method + '-response'
             )
             .replace(':', '_'); // replace : with _ for Windows
 
-        if (await fs.pathExists(testPath)) {
+        if (await fs.pathExists(testPath + '.json')) {
             // build filter logic to ensure templating works
             if (filterName) {
                 const response = JSON.parse(
-                    await fs.readFile(testPath, {
+                    await fs.readFile(testPath + '.json', {
                         encoding: 'utf8',
                     })
                 );
@@ -139,11 +139,18 @@ exports.handleRESTRequest = async (config) => {
             } else {
                 return [
                     200,
-                    await fs.readFile(testPath, {
+                    await fs.readFile(testPath + '.json', {
                         encoding: 'utf8',
                     }),
                 ];
             }
+        } else if (await fs.pathExists(testPath + '.txt')) {
+            return [
+                200,
+                await fs.readFile(testPath + '.txt', {
+                    encoding: 'utf8',
+                }),
+            ];
         } else {
             /* eslint-disable no-console */
             console.log(

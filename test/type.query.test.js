@@ -277,4 +277,16 @@ describe('type: query', () => {
             return;
         });
     });
+    describe('Execute ================', () => {
+        it('Should start executing a query', async () => {
+            const execute = await handler.execute(
+                'testInstance/testBU',
+                ['query'],
+                ['testExistingQuery']
+            );
+            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(execute, true, 'query was supposed to be executed');
+            return;
+        });
+    });
 });
