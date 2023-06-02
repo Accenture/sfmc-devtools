@@ -86,7 +86,7 @@ exports.handleSOAPRequest = async (config) => {
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.CreateRequest.Objects['@_xsi:type'],
                 jObj.Envelope.Header.fueloauth,
-                jObj.Envelope.Body.RetrieveRequestMsg.RetrieveRequest.Filter
+                null
             );
 
             break;
@@ -96,7 +96,7 @@ exports.handleSOAPRequest = async (config) => {
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.UpdateRequest.Objects['@_xsi:type'],
                 jObj.Envelope.Header.fueloauth,
-                jObj.Envelope.Body.RetrieveRequestMsg.RetrieveRequest.Filter
+                null
             );
 
             break;
@@ -108,7 +108,7 @@ exports.handleSOAPRequest = async (config) => {
                     '@_xsi:type'
                 ],
                 jObj.Envelope.Header.fueloauth,
-                jObj.Envelope.Body.RetrieveRequestMsg.RetrieveRequest.Filter
+                null
             );
 
             break;
