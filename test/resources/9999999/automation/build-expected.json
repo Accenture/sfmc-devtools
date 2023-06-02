@@ -42,5 +42,17 @@
             "name": ""
         }
     ],
-    "type": "scheduled"
+    "type": "scheduled",
+    "notifications": [
+        {
+            "email": ["joern.berkefeld+complete@accenture.com"],
+            "message": "",
+            "type": "Complete"
+        },
+        {
+            "email": ["joern.berkefeld+error@accenture.com"],
+            "message": "test",
+            "type": "Error"
+        }
+    ]
 }
