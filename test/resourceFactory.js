@@ -113,6 +113,16 @@ exports.handleSOAPRequest = async (config) => {
 
             break;
         }
+        case 'Delete': {
+            responseXML = await this.loadSOAPRecords(
+                config.headers.SOAPAction.toLocaleLowerCase(),
+                fullObj.Envelope.Body.DeleteRequest.Objects['@_xsi:type'],
+                jObj.Envelope.Header.fueloauth,
+                null
+            );
+
+            break;
+        }
         default: {
             throw new Error('This SOAP Action is not supported by test handler');
         }

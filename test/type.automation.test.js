@@ -217,18 +217,17 @@ describe('type: automation', () => {
         });
     });
     describe('Delete ================', () => {
-        // TODO: add this test
-        it('Should delete the item'); // , async () => {
-        //     // WHEN
-        //     const result = await handler.deleteByKey('testInstance/testBU', 'mobileKeyword', [
-        //         'testExisting_keyword',
-        //     ]);
-        //     // THEN
-        //     assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+        it('Should delete the item', async () => {
+            // WHEN
+            const result = await handler.deleteByKey('testInstance/testBU', 'automation', [
+                'testExisting_automation',
+            ]);
+            // THEN
+            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
 
-        //     assert.equal(result, true, 'should have deleted the item');
-        //     return;
-        // });
+            assert.equal(result, true, 'should have deleted the item');
+            return;
+        });
     });
     describe('CI/CD ================', () => {
         it('Should return a list of files based on their type and key', async () => {
