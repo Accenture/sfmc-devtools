@@ -1,6 +1,6 @@
-## testExisting_automation
+## testNew_automation
 
-**Description:** bla bla
+**Description:** created on deploy
 
 **Folder:** my automations/
 
