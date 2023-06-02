@@ -119,102 +119,102 @@ describe('type: automation', () => {
         it('Should change the key during update via --changeKeyValue');
     });
     describe('Templating ================', () => {
-        it('Should create a automation template via retrieveAsTemplate and build it'); // , async () => {
-        //     // GIVEN there is a template
-        //     const result = await handler.retrieveAsTemplate(
-        //         'testInstance/testBU',
-        //         'automation',
-        //         ['testExisting_automation'],
-        //         'testSourceMarket'
-        //     );
-        //     assert.equal(
-        //         process.exitCode,
-        //         false,
-        //         'retrieveAsTemplate should not have thrown an error'
-        //     );
+        it('Should create a automation template via retrieveAsTemplate and build it', async () => {
+            // GIVEN there is a template
+            const result = await handler.retrieveAsTemplate(
+                'testInstance/testBU',
+                'automation',
+                ['testExisting_automation'],
+                'testSourceMarket'
+            );
+            assert.equal(
+                process.exitCode,
+                false,
+                'retrieveAsTemplate should not have thrown an error'
+            );
 
-        //     // WHEN
-        //     assert.equal(
-        //         result.automation ? Object.keys(result.automation).length : 0,
-        //         1,
-        //         'only one automation expected'
-        //     );
-        //     assert.deepEqual(
-        //         await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
-        //         await testUtils.getExpectedJson('9999999', 'automation', 'template'),
-        //         'returned template was not equal expected'
-        //     );
-        //     // THEN
-        //     await handler.buildDefinition(
-        //         'testInstance/testBU',
-        //         'automation',
-        //         'testExisting_automation',
-        //         'testTargetMarket'
-        //     );
-        //     assert.equal(
-        //         process.exitCode,
-        //         false,
-        //         'buildDefinition should not have thrown an error'
-        //     );
-        //     assert.deepEqual(
-        //         await testUtils.getActualDeployJson('testTemplated_automation', 'automation'),
-        //         await testUtils.getExpectedJson('9999999', 'automation', 'build'),
-        //         'returned deployment file was not equal expected'
-        //     );
-        //     assert.equal(
-        //         testUtils.getAPIHistoryLength(),
-        //         5,
-        //         'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-        //     );
-        //     return;
-        // });
-        it('Should create a automation template via buildTemplate and build it'); // , async () => {
-        //     // download first before we test buildTemplate
-        //     await handler.retrieve('testInstance/testBU', ['automation']);
-        //     // GIVEN there is a template
-        //     const result = await handler.buildTemplate(
-        //         'testInstance/testBU',
-        //         'automation',
-        //         ['testExisting_automation'],
-        //         'testSourceMarket'
-        //     );
-        //     assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
-        //     // WHEN
-        //     assert.equal(
-        //         result.automation ? Object.keys(result.automation).length : 0,
-        //         1,
-        //         'only one automation expected'
-        //     );
-        //     assert.deepEqual(
-        //         await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
-        //         await testUtils.getExpectedJson('9999999', 'automation', 'template'),
-        //         'returned template was not equal expected'
-        //     );
-        //     // THEN
-        //     await handler.buildDefinition(
-        //         'testInstance/testBU',
-        //         'automation',
-        //         'testExisting_automation',
-        //         'testTargetMarket'
-        //     );
-        //     assert.equal(
-        //         process.exitCode,
-        //         false,
-        //         'buildDefinition should not have thrown an error'
-        //     );
+            // WHEN
+            assert.equal(
+                result.automation ? Object.keys(result.automation).length : 0,
+                1,
+                'only one automation expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
+                await testUtils.getExpectedJson('9999999', 'automation', 'template'),
+                'returned template was not equal expected'
+            );
+            // THEN
+            await handler.buildDefinition(
+                'testInstance/testBU',
+                'automation',
+                'testExisting_automation',
+                'testTargetMarket'
+            );
+            assert.equal(
+                process.exitCode,
+                false,
+                'buildDefinition should not have thrown an error'
+            );
+            assert.deepEqual(
+                await testUtils.getActualDeployJson('testTemplated_automation', 'automation'),
+                await testUtils.getExpectedJson('9999999', 'automation', 'build'),
+                'returned deployment file was not equal expected'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                12,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should create a automation template via buildTemplate and build it', async () => {
+            // download first before we test buildTemplate
+            await handler.retrieve('testInstance/testBU', ['automation']);
+            // GIVEN there is a template
+            const result = await handler.buildTemplate(
+                'testInstance/testBU',
+                'automation',
+                ['testExisting_automation'],
+                'testSourceMarket'
+            );
+            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            // WHEN
+            assert.equal(
+                result.automation ? Object.keys(result.automation).length : 0,
+                1,
+                'only one automation expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
+                await testUtils.getExpectedJson('9999999', 'automation', 'template'),
+                'returned template was not equal expected'
+            );
+            // THEN
+            await handler.buildDefinition(
+                'testInstance/testBU',
+                'automation',
+                'testExisting_automation',
+                'testTargetMarket'
+            );
+            assert.equal(
+                process.exitCode,
+                false,
+                'buildDefinition should not have thrown an error'
+            );
 
-        //     assert.deepEqual(
-        //         await testUtils.getActualDeployJson('testTemplated_automation', 'automation'),
-        //         await testUtils.getExpectedJson('9999999', 'automation', 'build'),
-        //         'returned deployment file was not equal expected'
-        //     );
-        //     assert.equal(
-        //         testUtils.getAPIHistoryLength(),
-        //         5,
-        //         'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-        //     );
-        //     return;
-        // });
+            assert.deepEqual(
+                await testUtils.getActualDeployJson('testTemplated_automation', 'automation'),
+                await testUtils.getExpectedJson('9999999', 'automation', 'build'),
+                'returned deployment file was not equal expected'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                12,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
     describe('Delete ================', () => {
         // TODO: add this test
