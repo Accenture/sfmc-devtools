@@ -1,5 +1,8 @@
 const chai = require('chai');
 const chaiFiles = require('chai-files');
+
+chai.use(chaiFiles);
+
 const assert = chai.assert;
 const expect = chai.expect;
 const file = chaiFiles.file;

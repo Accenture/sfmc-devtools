@@ -1,0 +1,46 @@
+{
+    "description": "foobar",
+    "key": "testTemplated_automation",
+    "name": "testTemplated_automation",
+    "r__folder_Path": "my automations",
+    "schedule": {
+        "endDate": "2022-07-30T00:00:00",
+        "icalRecur": "FREQ=DAILY;COUNT=1;INTERVAL=1",
+        "startDate": "2022-07-30T00:00:00",
+        "timezoneName": "W. Europe Standard Time",
+        "typeId": 3
+    },
+    "status": "PausedSchedule",
+    "steps": [
+        {
+            "activities": [
+                {
+                    "name": "testTemplated_dataExtract",
+                    "r__type": "dataExtract"
+                },
+                {
+                    "name": "testTemplated_emailSend",
+                    "r__type": "emailSend"
+                },
+                {
+                    "name": "testTemplated_fileTransfer",
+                    "r__type": "fileTransfer"
+                },
+                {
+                    "name": "testTemplated_importFile",
+                    "r__type": "importFile"
+                },
+                {
+                    "name": "testTemplated_query",
+                    "r__type": "query"
+                },
+                {
+                    "name": "testTemplated_script",
+                    "r__type": "script"
+                }
+            ],
+            "name": ""
+        }
+    ],
+    "type": "scheduled"
+}

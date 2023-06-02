@@ -1,6 +1,6 @@
 {
-    "name": "testExistingQuery2",
-    "key": "testExistingQuery2",
+    "name": "testExisting_query2",
+    "key": "testExisting_query2",
     "description": "bla bla",
     "targetKey": "testExisting_dataExtension",
     "createdDate": "2022-04-26T15:21:16.453",
