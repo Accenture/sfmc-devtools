@@ -38,7 +38,14 @@ describe('type: automation', () => {
             );
             // check if MD file was created and equals expectations
             expect(file(testUtils.getActualDoc('testExisting_automation', 'automation'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'automation', 'retrieve', 'md'))
+                file(
+                    testUtils.getExpectedFile(
+                        '9999999',
+                        'automation',
+                        'retrieve-testExisting_automation',
+                        'md'
+                    )
+                )
             );
 
             assert.equal(
@@ -53,38 +60,38 @@ describe('type: automation', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
-        it('Should create & update a automation'); // , async () => {
-        //     // WHEN
-        //     await handler.deploy('testInstance/testBU', ['automation']);
-        //     // THEN
-        //     assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+        it('Should create & update a automation', async () => {
+            // WHEN
+            await handler.deploy('testInstance/testBU', ['automation']);
+            // THEN
+            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
 
-        //     // get results from cache
-        //     const result = cache.getCache();
-        //     assert.equal(
-        //         result.automation ? Object.keys(result.automation).length : 0,
-        //         2,
-        //         'two automations expected'
-        //     );
-        //     // insert
-        //     assert.deepEqual(
-        //         await testUtils.getActualJson('testNew_automation', 'automation'),
-        //         await testUtils.getExpectedJson('9999999', 'automation', 'create'),
-        //         'returned metadata was not equal expected for create'
-        //     );
-        //     // update
-        //     assert.deepEqual(
-        //         await testUtils.getActualJson('testExisting_automation', 'automation'),
-        //         await testUtils.getExpectedJson('9999999', 'automation', 'update'),
-        //         'returned metadata was not equal expected for update'
-        //     );
-        //     assert.equal(
-        //         testUtils.getAPIHistoryLength(),
-        //         11,
-        //         'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-        //     );
-        //     return;
-        // });
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.automation ? Object.keys(result.automation).length : 0,
+                2,
+                'two automations expected'
+            );
+            // insert
+            assert.deepEqual(
+                await testUtils.getActualJson('testNew_automation', 'automation'),
+                await testUtils.getExpectedJson('9999999', 'automation', 'create'),
+                'returned metadata was not equal expected for create'
+            );
+            // update
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_automation', 'automation'),
+                await testUtils.getExpectedJson('9999999', 'automation', 'update'),
+                'returned metadata was not equal expected for update'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                17,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
         it('Should change the key during update via --changeKeyValue');
     });
     describe('Templating ================', () => {

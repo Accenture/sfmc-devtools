@@ -24,6 +24,8 @@
             <Results xsi:type="Program">
                 <PartnerKey xsi:nil="true" />
                 <ObjectID>08afb0e2-b00a-4c88-ad2e-1f7f8788c560</ObjectID>
+                <Name>testExisting_automation</Name><!--only retrieved for cache-->
+                <CustomerKey>testExisting_automation</CustomerKey><!--only retrieved for cache-->
             </Results>
         </RetrieveResponseMsg>
     </soap:Body>
