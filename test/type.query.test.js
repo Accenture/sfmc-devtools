@@ -167,13 +167,14 @@ describe('type: query', () => {
             );
 
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testExisting_query', 'query'),
+                await testUtils.getActualDeployJson('testTemplated_query', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'build'),
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualDeployFile('testExisting_query', 'query', 'sql'))
+                file(testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql'))
             ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'build', 'sql')));
+
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 6,
@@ -221,12 +222,12 @@ describe('type: query', () => {
             );
 
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testExisting_query', 'query'),
+                await testUtils.getActualDeployJson('testTemplated_query', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'build'),
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualDeployFile('testExisting_query', 'query', 'sql'))
+                file(testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql'))
             ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'build', 'sql')));
 
             assert.equal(

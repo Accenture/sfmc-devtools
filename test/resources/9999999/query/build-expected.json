@@ -1,6 +1,6 @@
 {
-    "name": "testExisting_query",
-    "key": "testExisting_query",
+    "name": "testTemplated_query",
+    "key": "testTemplated_query",
     "description": "foobar",
     "targetKey": "testTemplated_dataExtension",
     "targetUpdateTypeName": "Overwrite",

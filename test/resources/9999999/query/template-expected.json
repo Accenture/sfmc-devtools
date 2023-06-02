@@ -1,6 +1,6 @@
 {
-    "name": "testExisting_query",
-    "key": "testExisting_query",
+    "name": "{{{prefix}}}query",
+    "key": "{{{prefix}}}query",
     "description": "{{{description}}}",
     "targetKey": "{{{prefix}}}dataExtension",
     "targetUpdateTypeName": "Overwrite",
