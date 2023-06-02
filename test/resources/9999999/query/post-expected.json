@@ -1,6 +1,6 @@
 {
-    "name": "testNewQuery",
-    "key": "testNewQuery",
+    "name": "testNew_query",
+    "key": "testNew_query",
     "description": "created on deploy",
     "targetKey": "testExisting_dataExtension",
     "createdDate": "2022-04-26T15:21:16.453",

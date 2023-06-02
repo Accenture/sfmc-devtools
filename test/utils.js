@@ -28,7 +28,7 @@ exports.getActualJson = (customerKey, type, buName = 'testBU') =>
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} [buName] used when we need to test on ParentBU
- * @returns {Promise.<string>} file in string form
+ * @returns {string} file path
  */
 exports.getActualDoc = (customerKey, type, buName = 'testBU') =>
     `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-doc.md`;
@@ -38,7 +38,7 @@ exports.getActualDoc = (customerKey, type, buName = 'testBU') =>
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
- * @returns {Promise.<string>} file in string form
+ * @returns {string} file path
  */
 exports.getActualFile = (customerKey, type, ext) =>
     `./retrieve/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`;
@@ -58,7 +58,7 @@ exports.getActualDeployJson = (customerKey, type, buName = 'testBU') =>
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
- * @returns {Promise.<string>} file in string form
+ * @returns {string} file path
  */
 exports.getActualDeployFile = (customerKey, type, ext) =>
     `./deploy/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`;
@@ -77,7 +77,7 @@ exports.getActualTemplateJson = (customerKey, type) =>
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
- * @returns {Promise.<string>} file in string form
+ * @returns {string} file path
  */
 exports.getActualTemplateFile = (customerKey, type, ext) =>
     `./template/${type}/${customerKey}.${type}-meta.${ext}`;
@@ -99,7 +99,7 @@ exports.getExpectedJson = (mid, type, action) =>
  * @param {string} type of metadata
  * @param {string} action of SOAP request
  * @param {string} ext file extension
- * @returns {Promise.<string>} file in string form
+ * @returns {string} file path
  */
 exports.getExpectedFile = (mid, type, action, ext) =>
     path.join('test', 'resources', mid, type, action + '-expected.' + ext);

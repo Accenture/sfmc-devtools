@@ -1,0 +1,15 @@
+{
+    "page": 1,
+    "pageSize": 500,
+    "count": 1,
+    "items": [
+        {
+            "id": "72c328ac-f5b0-4e37-91d3-a775666f15a6",
+            "name": "testExisting_fileTransfer",
+            "description": "17.11.2022",
+            "customerKey": "testExisting_fileTransfer",
+            "createdDate": "2022-11-09T05:31:56.477",
+            "modifiedDate": "2022-11-17T07:13:20.05"
+        }
+    ]
+}

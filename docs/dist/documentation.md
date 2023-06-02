@@ -767,7 +767,7 @@ Start an item (query)
 <a name="Mcdev._executeBU"></a>
 
 ### Mcdev.\_executeBU(cred, bu, [selectedTypesArr], keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
-helper for @link execute
+helper for [execute](execute)
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all items were executed, false otherwise  
@@ -1237,7 +1237,7 @@ Automation MetadataType
     * [.retrieveChangelog()](#Automation.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveForCache()](#Automation.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Automation.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.AutomationItemObj&gt;</code>
-    * [.postRetrieveTasks(metadata)](#Automation.postRetrieveTasks) ⇒ <code>TYPE.AutomationItem</code>
+    * [.postRetrieveTasks(metadata)](#Automation.postRetrieveTasks) ⇒ <code>TYPE.AutomationItem</code> \| <code>void</code>
     * [.deploy(metadata, targetBU, retrieveDir, [isRefresh])](#Automation.deploy) ⇒ <code>Promise.&lt;TYPE.AutomationMap&gt;</code>
     * [.create(metadata)](#Automation.create) ⇒ <code>Promise</code>
     * [.update(metadata, metadataBefore)](#Automation.update) ⇒ <code>Promise</code>
@@ -1246,7 +1246,6 @@ Automation MetadataType
     * [.postDeployTasks(metadataMap, originalMetadataMap)](#Automation.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.setFolderPath(metadata)](#Automation.setFolderPath)
     * [.setFolderId(metadata)](#Automation.setFolderId)
-    * [.parseMetadata(metadata)](#Automation.parseMetadata) ⇒ <code>TYPE.AutomationItem</code> \| <code>void</code>
     * [._buildSchedule(scheduleObject)](#Automation._buildSchedule) ⇒ <code>TYPE.AutomationScheduleSoap</code>
     * [._calcTime(offsetServer, dateInput, [offsetInput])](#Automation._calcTime) ⇒ <code>string</code>
     * [.document([metadata])](#Automation.document) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -1299,11 +1298,11 @@ Retrieve a specific Automation Definition by Name
 
 <a name="Automation.postRetrieveTasks"></a>
 
-### Automation.postRetrieveTasks(metadata) ⇒ <code>TYPE.AutomationItem</code>
+### Automation.postRetrieveTasks(metadata) ⇒ <code>TYPE.AutomationItem</code> \| <code>void</code>
 manages post retrieve steps
 
 **Kind**: static method of [<code>Automation</code>](#Automation)  
-**Returns**: <code>TYPE.AutomationItem</code> - metadata  
+**Returns**: <code>TYPE.AutomationItem</code> \| <code>void</code> - parsed item  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1408,18 +1407,6 @@ automation-specific script that retrieves the folder ID from cache and updates t
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
-
-<a name="Automation.parseMetadata"></a>
-
-### Automation.parseMetadata(metadata) ⇒ <code>TYPE.AutomationItem</code> \| <code>void</code>
-parses retrieved Metadata before saving
-
-**Kind**: static method of [<code>Automation</code>](#Automation)  
-**Returns**: <code>TYPE.AutomationItem</code> \| <code>void</code> - parsed item  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.AutomationItem</code> | a single automation definition |
 
 <a name="Automation._buildSchedule"></a>
 
