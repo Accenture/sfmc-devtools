@@ -85,6 +85,30 @@ describe('type: automation', () => {
                 await testUtils.getExpectedJson('9999999', 'automation', 'update'),
                 'returned metadata was not equal expected for update'
             );
+            // check if MD file was created and equals expectations
+            expect(file(testUtils.getActualDoc('testExisting_automation', 'automation'))).to.equal(
+                file(
+                    testUtils.getExpectedFile(
+                        '9999999',
+                        'automation',
+                        'retrieve-testExisting_automation',
+                        'md'
+                    )
+                )
+            );
+
+            // check if MD file was created and equals expectations
+            expect(file(testUtils.getActualDoc('testNew_automation', 'automation'))).to.equal(
+                file(
+                    testUtils.getExpectedFile(
+                        '9999999',
+                        'automation',
+                        'retrieve-testNew_automation',
+                        'md'
+                    )
+                )
+            );
+
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 17,
