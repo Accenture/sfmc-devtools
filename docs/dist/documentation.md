@@ -439,11 +439,11 @@ Returns metadata of a business unit that is saved locally
 **Kind**: static method of [<code>Deployer</code>](#Deployer)  
 **Returns**: <code>TYPE.MultiMetadataTypeMap</code> - Metadata of BU in local directory  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| deployDir | <code>string</code> |  | root directory of metadata. |
-| [typeArr] | <code>Array.&lt;string&gt;</code> |  | limit deployment to given metadata type |
-| [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
+| Param | Type | Description |
+| --- | --- | --- |
+| deployDir | <code>string</code> | root directory of metadata. |
+| [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
+| [listBadKeys] | <code>boolean</code> | do not print errors, used for badKeys() |
 
 <a name="Deployer.createFolderDefinitions"></a>
 
@@ -2740,10 +2740,10 @@ Returns file contents mapped to their filename without '.json' ending
 **Kind**: static method of [<code>Folder</code>](#Folder)  
 **Returns**: <code>TYPE.MetadataTypeMap</code> - fileName => fileContent map  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| dir | <code>string</code> |  | directory that contains '.json' files to be read |
-| [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
+| Param | Type | Description |
+| --- | --- | --- |
+| dir | <code>string</code> | directory that contains '.json' files to be read |
+| [listBadKeys] | <code>boolean</code> | do not print errors, used for badKeys() |
 
 <a name="Folder.retrieveHelper"></a>
 
@@ -3230,10 +3230,10 @@ Returns file contents mapped to their filename without '.json' ending
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>TYPE.MetadataTypeMap</code> - fileName => fileContent map  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| dir | <code>string</code> |  | directory that contains '.json' files to be read |
-| [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
+| Param | Type | Description |
+| --- | --- | --- |
+| dir | <code>string</code> | directory that contains '.json' files to be read |
+| [listBadKeys] | <code>boolean</code> | do not print errors, used for badKeys() |
 
 <a name="MetadataType.getFieldNamesToRetrieve"></a>
 
@@ -3583,7 +3583,7 @@ Updates a single metadata entry via REST
 | --- | --- | --- | --- |
 | metadataEntry | <code>TYPE.MetadataTypeItem</code> |  | a single metadata Entry |
 | uri | <code>string</code> |  | rest endpoint for PATCH |
-| [httpMethod] | <code>&#x27;patch&#x27;</code> \| <code>&#x27;post&#x27;</code> \| <code>&#x27;put&#x27;</code> | <code>&#x27;patch&#x27;</code> | defaults to 'patch'; some update requests require PUT instead of PATCH |
+| [httpMethod] | <code>&#x27;patch&#x27;</code> \| <code>&#x27;post&#x27;</code> \| <code>&#x27;put&#x27;</code> | <code>patch</code> | defaults to 'patch'; some update requests require PUT instead of PATCH |
 
 <a name="MetadataType.updateSOAP"></a>
 
@@ -3762,10 +3762,10 @@ checks if the current metadata entry should be saved on retrieve or not
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| metadataEntry | <code>TYPE.MetadataTypeItem</code> |  | metadata entry |
-| [include] | <code>boolean</code> | <code>false</code> | true: use definition.include / options.include; false=exclude: use definition.filter / options.exclude |
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> | metadata entry |
+| [include] | <code>boolean</code> | true: use definition.include / options.include; false=exclude: use definition.filter / options.exclude |
 
 <a name="MetadataType.isFilteredFolder"></a>
 
@@ -3775,10 +3775,10 @@ optionally filter by what folder something is in
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| metadataEntry | <code>object</code> |  | metadata entry |
-| [include] | <code>boolean</code> | <code>false</code> | true: use definition.include / options.include; false=exclude: use definition.filter / options.exclude |
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>object</code> | metadata entry |
+| [include] | <code>boolean</code> | true: use definition.include / options.include; false=exclude: use definition.filter / options.exclude |
 
 <a name="MetadataType.saveResults"></a>
 
@@ -3988,11 +3988,11 @@ Returns metadata of a business unit that is saved locally
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>object</code> - Metadata of BU in local directory  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| readDir | <code>string</code> |  | root directory of metadata. |
-| [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
-| [buMetadata] | <code>object</code> |  | Metadata of BU in local directory |
+| Param | Type | Description |
+| --- | --- | --- |
+| readDir | <code>string</code> | root directory of metadata. |
+| [listBadKeys] | <code>boolean</code> | do not print errors, used for badKeys() |
+| [buMetadata] | <code>object</code> | Metadata of BU in local directory |
 
 <a name="MetadataType.getFilesToCommit"></a>
 
@@ -6377,12 +6377,12 @@ reads file from local file system.
 **Kind**: static method of [<code>File</code>](#File)  
 **Returns**: <code>Promise.&lt;string&gt;</code> \| <code>void</code> - file contents; void on error  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| directory | <code>string</code> \| <code>Array.&lt;string&gt;</code> |  | directory where the file is stored |
-| filename | <code>string</code> |  | name of the file without '.json' ending |
-| filetype | <code>string</code> |  | filetype suffix |
-| [encoding] | <code>string</code> | <code>&quot;&#x27;utf8&#x27;&quot;</code> | read file with encoding (defaults to utf-8) |
+| Param | Type | Description |
+| --- | --- | --- |
+| directory | <code>string</code> \| <code>Array.&lt;string&gt;</code> | directory where the file is stored |
+| filename | <code>string</code> | name of the file without '.json' ending |
+| filetype | <code>string</code> | filetype suffix |
+| [encoding] | <code>string</code> | read file with encoding (defaults to utf-8) |
 
 <a name="File.readDirectories"></a>
 
@@ -6445,9 +6445,9 @@ Initalises Prettier formatting lib async.
 **Kind**: static method of [<code>File</code>](#File)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - success of config load  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| [filetype] | <code>string</code> | <code>&quot;&#x27;html&#x27;&quot;</code> | filetype ie. JSON or SSJS |
+| Param | Type | Description |
+| --- | --- | --- |
+| [filetype] | <code>string</code> | filetype ie. JSON or SSJS |
 
 <a name="Init"></a>
 
