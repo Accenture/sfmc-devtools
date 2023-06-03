@@ -1578,7 +1578,7 @@ DataExtension MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [DataExtension](#DataExtension) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.upsert(desToDeploy)](#DataExtension.upsert) ⇒ <code>Promise</code>
+    * [.upsert(desToDeploy, metadataMap)](#DataExtension.upsert) ⇒ <code>Promise</code>
     * [.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#DataExtension.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
     * [.create(metadata)](#DataExtension.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#DataExtension.update) ⇒ <code>Promise</code>
@@ -1587,7 +1587,7 @@ DataExtension MetadataType
     * [.retrieveChangelog([additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.postRetrieveTasks(metadata)](#DataExtension.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionItem</code>
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.DataExtensionItem&gt;</code>
-    * [.document([metadata])](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.document([metadata], metadataMap)](#DataExtension.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(customerKey)](#DataExtension.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postDeleteTasks(customerKey)](#DataExtension.postDeleteTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.retrieveForCache()](#DataExtension.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
@@ -1597,7 +1597,7 @@ DataExtension MetadataType
 
 <a name="DataExtension.upsert"></a>
 
-### DataExtension.upsert(desToDeploy) ⇒ <code>Promise</code>
+### DataExtension.upsert(desToDeploy, metadataMap) ⇒ <code>Promise</code>
 Upserts dataExtensions after retrieving them from source and target to compare
 if create or update operation is needed.
 
@@ -1607,6 +1607,7 @@ if create or update operation is needed.
 | Param | Type | Description |
 | --- | --- | --- |
 | desToDeploy | <code>TYPE.DataExtensionMap</code> | dataExtensions mapped by their customerKey |
+| metadataMap |  |  |
 
 <a name="DataExtension.createOrUpdate"></a>
 
@@ -1714,7 +1715,7 @@ prepares a DataExtension for deployment
 
 <a name="DataExtension.document"></a>
 
-### DataExtension.document([metadata]) ⇒ <code>Promise.&lt;void&gt;</code>
+### DataExtension.document([metadata], metadataMap) ⇒ <code>Promise.&lt;void&gt;</code>
 Parses metadata into a readable Markdown/HTML format then saves it
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -1723,6 +1724,7 @@ Parses metadata into a readable Markdown/HTML format then saves it
 | Param | Type | Description |
 | --- | --- | --- |
 | [metadata] | <code>TYPE.DataExtensionMap</code> | a list of dataExtension definitions |
+| metadataMap |  |  |
 
 <a name="DataExtension.deleteByKey"></a>
 
