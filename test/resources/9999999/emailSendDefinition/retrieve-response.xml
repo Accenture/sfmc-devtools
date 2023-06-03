@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:e0ba7da7-7e82-42db-a166-42a488ac375b</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:17a3f405-6bd8-4b30-9230-44fea1749b96</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-96902d78-e86f-4361-855e-c37e2e3b4b58">
+                <wsu:Created>2023-06-01T12:04:17Z</wsu:Created>
+                <wsu:Expires>2023-06-01T12:09:17Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>687d0584-acbe-4bac-bfc2-4c41b73b5a32</RequestID>
+            <Results xsi:type="EmailSendDefinition">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2022-11-14T12:27:29.963</CreatedDate>
+                <ModifiedDate>2022-11-14T12:27:29.963</ModifiedDate>
+                <ObjectID>9b1c7bf9-4964-ed11-b849-48df37d1de8b</ObjectID>
+                <CustomerKey>testExisting_emailSend</CustomerKey>
+                <IsPlatformObject>false</IsPlatformObject>
+                <Name>testExisting_emailSend</Name>
+                <Description>some description</Description>
+                <CategoryID>290820</CategoryID>
+                <SendClassification>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>test_send_classification</CustomerKey>
+                </SendClassification>
+                <SenderProfile>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>Test_sender</CustomerKey>
+                </SenderProfile>
+                <DeliveryProfile>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>Default</CustomerKey>
+                </DeliveryProfile>
+                <SuppressTracking>false</SuppressTracking>
+                <IsSendLogging>false</IsSendLogging>
+                <SendDefinitionList>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID>9d1c7bf9-4964-ed11-b849-48df37d1de8b</ObjectID>
+                    <List>
+                        <PartnerKey xsi:nil="true" />
+                        <ID>32308</ID>
+                        <ObjectID xsi:nil="true" />
+                    </List>
+                    <SendDefinitionListType>SourceList</SendDefinitionListType>
+                    <CustomObjectID>2c19d707-743e-ed11-b848-48df37b24911</CustomObjectID>
+                    <DataSourceTypeID>CustomObject</DataSourceTypeID>
+                    <IsTestObject>false</IsTestObject>
+                    <SalesForceObjectID />
+                    <Name />
+                </SendDefinitionList>
+                <Email>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>676709</ID>
+                    <ObjectID xsi:nil="true" />
+                </Email>
+                <BccEmail />
+                <AutoBccEmail />
+                <TestEmailAddr />
+                <EmailSubject>someSubject</EmailSubject>
+                <DynamicEmailSubject>someSubject</DynamicEmailSubject>
+                <IsMultipart>true</IsMultipart>
+                <IsWrapped>true</IsWrapped>
+                <DeduplicateByEmail>false</DeduplicateByEmail>
+                <ExclusionFilter />
+                <Additional />
+                <CCEmail />
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>

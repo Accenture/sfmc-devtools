@@ -13,6 +13,6 @@
         "countryCode": "",
         "autoAddSubscriber": true,
         "updateSubscriber": true,
-        "keyword": "testExisting_keyword"
+        "keyword": "TESTEXISTING_KEYWORD"
     }
 }

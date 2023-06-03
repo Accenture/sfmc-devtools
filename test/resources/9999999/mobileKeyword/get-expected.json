@@ -1,10 +1,7 @@
 {
     "createdDate": "2018-03-27T12:37:18.12Z",
     "lastUpdated": "2018-03-27T12:37:18.167Z",
-    "code": {
-        "code": "4912312345678"
-    },
-    "keyword": "testExisting_keyword",
+    "c__codeKeyword": "4912312345678.TESTEXISTING_KEYWORD",
     "startDate": "2018-03-27T12:37:18.197Z",
     "endDate": "2038-03-27T12:37:18.197Z",
     "status": "Active",

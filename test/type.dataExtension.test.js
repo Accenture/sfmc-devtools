@@ -1,7 +1,12 @@
 import { assert } from 'chai';
+import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
+chai.use(chaiFiles);
+const assert = chai.assert;
+const expect = chai.expect;
+const file = chaiFiles.file;
 
 describe('type: dataExtension', () => {
     beforeEach(() => {
@@ -29,6 +34,13 @@ describe('type: dataExtension', () => {
 
                 'returned metadata was not equal expected'
             );
+            // check if MD file was created and equals expectations
+            expect(
+                file(testUtils.getActualDoc('testExisting_dataExtension', 'dataExtension'))
+            ).to.equal(
+                file(testUtils.getExpectedFile('9999999', 'dataExtension', 'retrieve', 'md'))
+            );
+
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 5,
@@ -74,6 +86,7 @@ describe('type: dataExtension', () => {
             return;
         });
         it('Should change the key during update via --changeKeyValue');
+        it('Should rename fields');
     });
     describe('Templating ================', () => {
         it('Should create a dataExtension template via retrieveAsTemplate and build it', async () => {

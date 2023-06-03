@@ -1,7 +1,13 @@
 import { assert } from 'chai';
+import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
+const assert = chai.assert;
+chai.use(chaiFiles);
+const expect = chai.expect;
+const file = chaiFiles.file;
+import File from '../lib/util/file.js';
 
 describe('type: user', () => {
     beforeEach(() => {
@@ -29,9 +35,43 @@ describe('type: user', () => {
 
                 'returned metadata was not equal expected'
             );
+            // check if MD file was created and equals expectations
+            // ! this test needs to update the lastLoginDate counter because it changes with every passing day
+            const expectedFile = await File.readFile(
+                testUtils.getExpectedFile('1111111', 'user', 'retrieve', 'md'),
+                { encoding: 'utf8' }
+            );
+            const regexFindDaysSinceLogin =
+                /\| (\d*) (seconds|minutes|days|weeks|months|years){1} \|/gm;
+            // fetch expected time since last login
+            const expectedDaysSinceLogin = expectedFile.match(regexFindDaysSinceLogin);
+            // load actual file and replace days since last login with expected value
+            const actualFile = (
+                await File.readFile(`./docs/user/testInstance.users.md`, {
+                    encoding: 'utf8',
+                })
+            ).replaceAll(regexFindDaysSinceLogin, expectedDaysSinceLogin);
+            expect(actualFile).to.equal(expectedFile);
+
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 6,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should retrieve a specific user but not run document', async () => {
+            // WHEN
+            await handler.retrieve('testInstance/_ParentBU_', ['user'], ['testExisting_user']);
+            // THEN
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+
+            // because user is single-document-type we would not want to find an md file when we retrieve specific keys. only the generic retrieve updates it
+            expect(file(`./docs/user/testInstance.users.md`)).to.not.exist;
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                4,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -74,6 +114,9 @@ describe('type: user', () => {
                 await testUtils.getExpectedJson('1111111', 'user', 'update'),
                 'returned metadata was not equal expected for update'
             );
+            // because user is single-document-type we would not want to find an md file getting created by deploy. only retrieve updates it
+            expect(file(`./docs/user/testInstance.users.md`)).to.not.exist;
+
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 9,

@@ -11,34 +11,55 @@ const color = Util.color;
  * @param {string} mcdevAction SOAP action
  * @param {string} type metadata Type
  * @param {string} mid of Business Unit
+ * @param {object} filter likely for customer key
  * @returns {string} relevant metadata stringified
  */
-async function loadSOAPRecords(mcdevAction, type, mid) {
+async function loadSOAPRecords(mcdevAction, type, mid, filter) {
     type = type[0].toLowerCase() + type.slice(1);
-    const testPath = path.join(
-        'test',
-        'resources',
-        mid.toString(),
-        type,
-        mcdevAction + '-response.xml'
-    );
-    if (await fs.pathExists(testPath)) {
-        return fs.readFile(testPath, {
+    const testPath = path.join('test', 'resources', mid.toString(), type, mcdevAction);
+    const filterPath = this.filterToPath(filter);
+    if (await fs.pathExists(testPath + filterPath + '-response.xml')) {
+        return fs.readFile(testPath + filterPath + '-response.xml', {
+            encoding: 'utf8',
+        });
+    } else if (await fs.pathExists(testPath + '-response.xml')) {
+        if (filterPath) {
+            /* eslint-disable no-console */
+            console.log(
+                `${color.bgYellow}${color.fgBlack}test-warning${
+                    color.reset
+                }: You are loading your reponse from ${
+                    testPath + '-response.xml'
+                } instead of the more specific ${
+                    testPath + filterPath + '-response.xml'
+                }. Make sure this is intended`
+            );
+            /* eslint-enable no-console */
+        }
+        return fs.readFile(testPath + '-response.xml', {
             encoding: 'utf8',
         });
     }
     /* eslint-disable no-console */
     console.log(
-        `${color.bgRed}${color.fgBlack}test-error${color.reset}: Please create file ${testPath}`
+        `${color.bgRed}${color.fgBlack}test-error${color.reset}: Please create file ${
+            testPath + filterPath + '-response.xml'
+        } or ${testPath + '-response.xml'}`
     );
     /* eslint-enable no-console */
-    process.exitCode = 404;
 
+    // return error
+    process.exitCode = 404;
     return fs.readFile(path.join('test', 'resources', mcdevAction + '-response.xml'), {
         encoding: 'utf8',
     });
-}
-
+};
+export function filterToPath (filter) {
+    if (filter && filter.Property && filter.SimpleOperator && filter.Value) {
+        return `-${filter.Property}${filter.SimpleOperator.replace('equals', '=')}${filter.Value}`;
+    }
+    return '';
+};
 /**
  * based on request, respond with different soap data
  *
@@ -55,7 +76,8 @@ export const handleSOAPRequest = async (config) => {
             responseXML = await loadSOAPRecords(
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 jObj.Envelope.Body.RetrieveRequestMsg.RetrieveRequest.ObjectType,
-                jObj.Envelope.Header.fueloauth
+                jObj.Envelope.Header.fueloauth,
+                jObj.Envelope.Body.RetrieveRequestMsg.RetrieveRequest.Filter
             );
 
             break;
@@ -64,7 +86,8 @@ export const handleSOAPRequest = async (config) => {
             responseXML = await loadSOAPRecords(
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.CreateRequest.Objects['@_xsi:type'],
-                jObj.Envelope.Header.fueloauth
+                jObj.Envelope.Header.fueloauth,
+                null
             );
 
             break;
@@ -73,7 +96,8 @@ export const handleSOAPRequest = async (config) => {
             responseXML = await loadSOAPRecords(
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.UpdateRequest.Objects['@_xsi:type'],
-                jObj.Envelope.Header.fueloauth
+                jObj.Envelope.Header.fueloauth,
+                null
             );
 
             break;
@@ -84,7 +108,18 @@ export const handleSOAPRequest = async (config) => {
                 fullObj.Envelope.Body.ConfigureRequestMsg.Configurations.Configuration[0][
                     '@_xsi:type'
                 ],
-                jObj.Envelope.Header.fueloauth
+                jObj.Envelope.Header.fueloauth,
+                null
+            );
+
+            break;
+        }
+        case 'Delete': {
+            responseXML = await this.loadSOAPRecords(
+                config.headers.SOAPAction.toLocaleLowerCase(),
+                fullObj.Envelope.Body.DeleteRequest.Objects['@_xsi:type'],
+                jObj.Envelope.Header.fueloauth,
+                null
             );
 
             break;
@@ -125,15 +160,15 @@ export const handleRESTRequest = async (config) => {
                 'resources',
                 config.headers.Authorization.replace('Bearer ', ''),
                 urlObj.pathname,
-                config.method + '-response.json'
+                config.method + '-response'
             )
             .replace(':', '_'); // replace : with _ for Windows
 
-        if (await fs.pathExists(testPath)) {
+        if (await fs.pathExists(testPath + '.json')) {
             // build filter logic to ensure templating works
             if (filterName) {
                 const response = JSON.parse(
-                    await fs.readFile(testPath, {
+                    await fs.readFile(testPath + '.json', {
                         encoding: 'utf8',
                     })
                 );
@@ -143,15 +178,22 @@ export const handleRESTRequest = async (config) => {
             } else {
                 return [
                     200,
-                    await fs.readFile(testPath, {
+                    await fs.readFile(testPath + '.json', {
                         encoding: 'utf8',
                     }),
                 ];
             }
+        } else if (await fs.pathExists(testPath + '.txt')) {
+            return [
+                200,
+                await fs.readFile(testPath + '.txt', {
+                    encoding: 'utf8',
+                }),
+            ];
         } else {
             /* eslint-disable no-console */
             console.log(
-                `${color.bgRed}${color.fgBlack}test-error${color.reset}: Please create file ${testPath}`
+                `${color.bgRed}${color.fgBlack}test-error${color.reset}: Please create file ${testPath}.json/.txt`
             );
             /* eslint-enable no-console */
             process.exitCode = 404;

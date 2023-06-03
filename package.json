@@ -1,6 +1,6 @@
 {
     "name": "mcdev",
-    "version": "5.0.1",
+    "version": "5.0.2",
     "description": "Accenture Salesforce Marketing Cloud DevTools",
     "author": "Accenture: joern.berkefeld, douglas.midgley, robert.zimmermann, maciej.barnas",
     "license": "MIT",
@@ -87,7 +87,7 @@
         "eslint": "8.41.0",
         "eslint-config-prettier": "8.8.0",
         "eslint-config-ssjs": "1.1.11",
-        "eslint-plugin-jsdoc": "44.2.4",
+        "eslint-plugin-jsdoc": "45.0.0",
         "eslint-plugin-mocha": "10.1.0",
         "eslint-plugin-prettier": "4.2.1",
         "eslint-plugin-unicorn": "47.0.0",
