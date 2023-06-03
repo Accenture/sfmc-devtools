@@ -17,7 +17,7 @@ const color = Util.color;
 async function loadSOAPRecords(mcdevAction, type, mid, filter) {
     type = type[0].toLowerCase() + type.slice(1);
     const testPath = path.join('test', 'resources', mid.toString(), type, mcdevAction);
-    const filterPath = this.filterToPath(filter);
+    const filterPath = filterToPath(filter);
     if (await fs.pathExists(testPath + filterPath + '-response.xml')) {
         return fs.readFile(testPath + filterPath + '-response.xml', {
             encoding: 'utf8',
@@ -59,7 +59,7 @@ export function filterToPath (filter) {
         return `-${filter.Property}${filter.SimpleOperator.replace('equals', '=')}${filter.Value}`;
     }
     return '';
-};
+}
 /**
  * based on request, respond with different soap data
  *
@@ -115,7 +115,7 @@ export const handleSOAPRequest = async (config) => {
             break;
         }
         case 'Delete': {
-            responseXML = await this.loadSOAPRecords(
+            responseXML = await loadSOAPRecords(
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.DeleteRequest.Objects['@_xsi:type'],
                 jObj.Envelope.Header.fueloauth,

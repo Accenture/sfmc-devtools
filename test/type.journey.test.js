@@ -1,10 +1,9 @@
-import chai from 'chai';
+import chai, { assert } from 'chai';
 import chaiFiles from 'chai-files';
-const assert = chai.assert;
-chai.use(chaiFiles);
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
+chai.use(chaiFiles);
 
 describe('type: journey', () => {
     beforeEach(() => {

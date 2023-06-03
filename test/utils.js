@@ -37,8 +37,9 @@ export function getActualJson(customerKey, type, buName = 'testBU') {
  * @param {string} [buName] used when we need to test on ParentBU
  * @returns {string} file path
  */
-exports.getActualDoc = (customerKey, type, buName = 'testBU') =>
-    `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-doc.md`;
+export function getActualDoc(customerKey, type, buName = 'testBU') {
+    return `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-doc.md`;
+}
 /**
  * gets file from Retrieve folder
  *
@@ -177,7 +178,7 @@ export function mockSetup(isDeploy) {
  *
  * @returns {void}
  */
-exports.mockReset = () => {
+export function mockReset() {
     // remove all options that might have been set by previous tests
     for (const key in Util.OPTIONS) {
         if (Object.prototype.hasOwnProperty.call(Util.OPTIONS, key)) {
@@ -188,7 +189,7 @@ exports.mockReset = () => {
     auth.clearSessions();
     fsmock.restore();
     apimock.restore();
-};
+}
 /**
  * helper to return amount of api callouts
  *

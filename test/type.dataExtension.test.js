@@ -1,11 +1,9 @@
-import { assert } from 'chai';
+import chai, { assert, expect } from 'chai';
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const assert = chai.assert;
-const expect = chai.expect;
 const file = chaiFiles.file;
 
 describe('type: dataExtension', () => {

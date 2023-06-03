@@ -103,7 +103,8 @@
             "extends": ["plugin:mocha/recommended"],
             "plugins": ["mocha"],
             "rules": {
-                "mocha/no-mocha-arrows": "off"
+                "mocha/no-mocha-arrows": "off",
+                "mocha/no-pending-tests": "error"
             }
         }
     ]

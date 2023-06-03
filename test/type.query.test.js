@@ -1,15 +1,10 @@
-import chai from 'chai';
+import chai, { assert, expect } from 'chai';
 import chaiFiles from 'chai-files';
-const assert = chai.assert;
-chai.use(chaiFiles);
-const expect = chai.expect;
-const file = chaiFiles.file;
-
-// const dir = chaiFiles.dir;
 import cache from '../lib/util/cache.js';
-
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
+chai.use(chaiFiles);
+const file = chaiFiles.file;
 
 describe('type: query', () => {
     beforeEach(() => {
