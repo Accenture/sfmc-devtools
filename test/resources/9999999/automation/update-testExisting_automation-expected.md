@@ -1,6 +1,6 @@
-## testNew_automation
+## testExisting_automation
 
-**Description:** created on deploy
+**Description:** updated on deploy
 
 **Folder:** my automations/
 
@@ -14,6 +14,9 @@
 * End: 2022-07-30 00:00:00 +01:00
 * Timezone:  W. Europe Standard Time
 * Recurrance: every  day for 1 times
+
+**Notifications:** _none_
+
 
 | Step 1<br>_<small>-</small>_ |
 | --- |

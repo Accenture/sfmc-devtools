@@ -1,6 +1,6 @@
-## testExisting_automation
+## testNew_automation
 
-**Description:** bla bla
+**Description:** created on deploy
 
 **Folder:** my automations/
 
@@ -15,10 +15,8 @@
 * Timezone:  W. Europe Standard Time
 * Recurrance: every  day for 1 times
 
-**Notifications:**
+**Notifications:** _none_
 
-* Complete: complete@test.accenture.com
-* Error: error@test.accenture.com ("test")
 
 | Step 1<br>_<small>-</small>_ |
 | --- |

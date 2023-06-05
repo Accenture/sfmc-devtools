@@ -186,6 +186,12 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#csvToArray">csvToArray(csv)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
 <dd><p>helper to convert CSVs into an array. if only one value was given, it&#39;s also returned as an array</p>
 </dd>
+<dt><a href="#Automation.">Automation.(metadataMap, key)</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
+<dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
+</dd>
+<dt><a href="#Automation.">Automation.(metadataMap, originalMetadataMap, key)</a></dt>
+<dd><p>helper for <a href="postDeployTasks">postDeployTasks</a></p>
+</dd>
 <dt><a href="#getUserName">getUserName(userList, item, fieldname)</a> ⇒ <code>string</code></dt>
 <dd></dd>
 <dt><a href="#setupSDK">setupSDK(sessionKey, authObject)</a> ⇒ <code><a href="#SDK">SDK</a></code></dt>
@@ -5885,7 +5891,7 @@ CLI entry for SFMC DevTools
     * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
     * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
     * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
-    * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList) ⇒ <code>void</code>
+    * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList)
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
@@ -5897,7 +5903,7 @@ CLI entry for SFMC DevTools
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
-    * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code>
+    * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code> \| <code>void</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
     * [.logBeta(type)](#Util.logBeta)
@@ -5971,11 +5977,10 @@ check if a market name exists in current mcdev config
 
 <a name="Util.verifyMarketList"></a>
 
-### Util.verifyMarketList(mlName, properties) ⇒ <code>void</code>
+### Util.verifyMarketList(mlName, properties)
 ensure provided MarketList exists and it's content including markets and BUs checks out
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>void</code> - throws errors if problems were found  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6113,11 +6118,11 @@ let's you dynamically walk down an object and get a value
 
 <a name="Util.execSync"></a>
 
-### Util.execSync(cmd, [args], [hideOutput]) ⇒ <code>string</code>
+### Util.execSync(cmd, [args], [hideOutput]) ⇒ <code>string</code> \| <code>void</code>
 helper to run other commands as if run manually by user
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>string</code> - output of command if hideOutput is true  
+**Returns**: <code>string</code> \| <code>void</code> - output of command if hideOutput is true  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7750,7 +7755,7 @@ Util that contains logger and simple util methods
     * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
     * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
     * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
-    * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList) ⇒ <code>void</code>
+    * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList)
     * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
     * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
@@ -7762,7 +7767,7 @@ Util that contains logger and simple util methods
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
-    * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code>
+    * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code> \| <code>void</code>
     * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
     * [.logBeta(type)](#Util.logBeta)
@@ -7836,11 +7841,10 @@ check if a market name exists in current mcdev config
 
 <a name="Util.verifyMarketList"></a>
 
-### Util.verifyMarketList(mlName, properties) ⇒ <code>void</code>
+### Util.verifyMarketList(mlName, properties)
 ensure provided MarketList exists and it's content including markets and BUs checks out
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>void</code> - throws errors if problems were found  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -7978,11 +7982,11 @@ let's you dynamically walk down an object and get a value
 
 <a name="Util.execSync"></a>
 
-### Util.execSync(cmd, [args], [hideOutput]) ⇒ <code>string</code>
+### Util.execSync(cmd, [args], [hideOutput]) ⇒ <code>string</code> \| <code>void</code>
 helper to run other commands as if run manually by user
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>string</code> - output of command if hideOutput is true  
+**Returns**: <code>string</code> \| <code>void</code> - output of command if hideOutput is true  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8115,6 +8119,32 @@ helper to convert CSVs into an array. if only one value was given, it's also ret
 | Param | Type | Description |
 | --- | --- | --- |
 | csv | <code>string</code> | potentially comma-separated value or null |
+
+<a name="Automation."></a>
+
+## Automation.(metadataMap, key) ⇒ <code>Promise.&lt;void&gt;</code>
+helper for [postDeployTasks](#Automation.postDeployTasks)
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;void&gt;</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.AutomationMap</code> | metadata mapped by their keyField |
+| key | <code>string</code> | current customer key |
+
+<a name="Automation."></a>
+
+## Automation.(metadataMap, originalMetadataMap, key)
+helper for [postDeployTasks](postDeployTasks)
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.AutomationMap</code> | metadata mapped by their keyField |
+| originalMetadataMap | <code>TYPE.AutomationMap</code> | metadata to be updated (contains additioanl fields) |
+| key | <code>string</code> | current customer key |
 
 <a name="getUserName"></a>
 
