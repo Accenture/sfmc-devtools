@@ -42,5 +42,17 @@
             "name": ""
         }
     ],
-    "type": "scheduled"
+    "type": "scheduled",
+    "notifications": [
+        {
+            "email": ["complete@test.accenture.com"],
+            "message": "",
+            "type": "Complete"
+        },
+        {
+            "email": ["error@test.accenture.com"],
+            "message": "test",
+            "type": "Error"
+        }
+    ]
 }

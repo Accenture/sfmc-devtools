@@ -46,7 +46,7 @@ describe('type: automation', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                12,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -87,7 +87,7 @@ describe('type: automation', () => {
                     testUtils.getExpectedFile(
                         '9999999',
                         'automation',
-                        'retrieve-testExisting_automation',
+                        'update-testExisting_automation',
                         'md'
                     )
                 )
@@ -99,7 +99,7 @@ describe('type: automation', () => {
                     testUtils.getExpectedFile(
                         '9999999',
                         'automation',
-                        'retrieve-testNew_automation',
+                        'create-testNew_automation',
                         'md'
                     )
                 )
@@ -107,7 +107,7 @@ describe('type: automation', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                17,
+                15,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -159,7 +159,7 @@ describe('type: automation', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                12,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -206,7 +206,7 @@ describe('type: automation', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                12,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
