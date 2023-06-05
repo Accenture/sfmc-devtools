@@ -15,6 +15,11 @@
 * Timezone:  W. Europe Standard Time
 * Recurrance: every  day for 1 times
 
+**Notifications:**
+
+* Complete: complete@test.accenture.com
+* Error: error@test.accenture.com ("test")
+
 | Step 1<br>_<small>-</small>_ |
 | --- |
 | _1.1: dataExtract_<br>testExisting_dataExtract |

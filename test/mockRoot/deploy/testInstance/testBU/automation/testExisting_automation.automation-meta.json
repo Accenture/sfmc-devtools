@@ -42,5 +42,12 @@
             "name": ""
         }
     ],
+    "notifications": [
+        {
+            "email": ["error-updated@test.accenture.com"],
+            "message": "test updated",
+            "type": "Error"
+        }
+    ],
     "type": "scheduled"
 }
