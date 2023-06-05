@@ -45,12 +45,12 @@
     "type": "scheduled",
     "notifications": [
         {
-            "email": ["joern.berkefeld+complete@accenture.com"],
+            "email": ["complete@test.accenture.com"],
             "message": "",
             "type": "Complete"
         },
         {
-            "email": ["joern.berkefeld+error@accenture.com"],
+            "email": ["error@test.accenture.com"],
             "message": "test",
             "type": "Error"
         }
