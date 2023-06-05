@@ -52,7 +52,7 @@
         "manual-prepare": "husky install",
         "lint-and-test": "run-s lint test",
         "test": "mocha --reporter-option maxDiffSize=25000",
-        "coverage": "nyc npm run test",
+        "coverage": "c8 npm run test",
         "version:major": "npm version --no-commit-hooks major",
         "version:minor": "npm version --no-commit-hooks minor",
         "version:patch": "npm version --no-commit-hooks patch"
@@ -82,6 +82,7 @@
     "devDependencies": {
         "assert": "2.0.0",
         "axios-mock-adapter": "1.21.4",
+        "c8": "7.14.0",
         "chai": "4.3.7",
         "chai-files": "1.4.0",
         "eslint": "8.42.0",
@@ -99,7 +100,6 @@
         "mock-fs": "5.2.0",
         "npm-check": "6.0.1",
         "npm-run-all": "4.1.5",
-        "nyc": "15.1.0",
         "prettier-eslint": "15.0.1"
     },
     "optionalDependencies": {
