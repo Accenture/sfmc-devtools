@@ -4,6 +4,7 @@ const axios = require('axios');
 const MockAdapter = require('axios-mock-adapter');
 const auth = require('../lib/util/auth');
 const Util = require('../lib/util/util');
+const handler = require('../lib/index');
 
 // for some reason doesnt realize below reference
 // eslint-disable-next-line no-unused-vars
@@ -28,7 +29,7 @@ exports.getActualJson = (customerKey, type, buName = 'testBU') =>
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} [buName] used when we need to test on ParentBU
- * @returns {Promise.<string>} file in string form
+ * @returns {string} file path
  */
 exports.getActualDoc = (customerKey, type, buName = 'testBU') =>
     `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-doc.md`;
@@ -38,7 +39,7 @@ exports.getActualDoc = (customerKey, type, buName = 'testBU') =>
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
- * @returns {Promise.<string>} file in string form
+ * @returns {string} file path
  */
 exports.getActualFile = (customerKey, type, ext) =>
     `./retrieve/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`;
@@ -58,7 +59,7 @@ exports.getActualDeployJson = (customerKey, type, buName = 'testBU') =>
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
- * @returns {Promise.<string>} file in string form
+ * @returns {string} file path
  */
 exports.getActualDeployFile = (customerKey, type, ext) =>
     `./deploy/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`;
@@ -77,7 +78,7 @@ exports.getActualTemplateJson = (customerKey, type) =>
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
- * @returns {Promise.<string>} file in string form
+ * @returns {string} file path
  */
 exports.getActualTemplateFile = (customerKey, type, ext) =>
     `./template/${type}/${customerKey}.${type}-meta.${ext}`;
@@ -99,7 +100,7 @@ exports.getExpectedJson = (mid, type, action) =>
  * @param {string} type of metadata
  * @param {string} action of SOAP request
  * @param {string} ext file extension
- * @returns {Promise.<string>} file in string form
+ * @returns {string} file path
  */
 exports.getExpectedFile = (mid, type, action, ext) =>
     path.join('test', 'resources', mid, type, action + '-expected.' + ext);
@@ -111,7 +112,7 @@ exports.getExpectedFile = (mid, type, action, ext) =>
  */
 
 exports.mockSetup = (isDeploy) => {
-    Util.setLoggingLevel({ debug: true });
+    handler.setOptions({ debug: true, noLogFile: true });
     apimock = new MockAdapter(axios, { onNoMatch: 'throwException' });
     // set access_token to mid to allow for autorouting of mock to correct resources
     apimock.onPost(authResources.success.url).reply((config) => {

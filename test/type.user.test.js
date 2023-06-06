@@ -7,6 +7,7 @@ const file = chaiFiles.file;
 const cache = require('../lib/util/cache');
 const testUtils = require('./utils');
 const handler = require('../lib/index');
+const File = require('../lib/util/file');
 
 describe('type: user', () => {
     beforeEach(() => {
@@ -35,9 +36,22 @@ describe('type: user', () => {
                 'returned metadata was not equal expected'
             );
             // check if MD file was created and equals expectations
-            expect(file(`./docs/user/testInstance.users.md`)).to.equal(
-                file(testUtils.getExpectedFile('1111111', 'user', 'retrieve', 'md'))
+            // ! this test needs to update the lastLoginDate counter because it changes with every passing day
+            const expectedFile = await File.readFile(
+                testUtils.getExpectedFile('1111111', 'user', 'retrieve', 'md'),
+                { encoding: 'utf8' }
             );
+            const regexFindDaysSinceLogin =
+                /\| (\d*) (seconds|minutes|days|weeks|months|years){1} \|/gm;
+            // fetch expected time since last login
+            const expectedDaysSinceLogin = expectedFile.match(regexFindDaysSinceLogin);
+            // load actual file and replace days since last login with expected value
+            const actualFile = (
+                await File.readFile(`./docs/user/testInstance.users.md`, {
+                    encoding: 'utf8',
+                })
+            ).replaceAll(regexFindDaysSinceLogin, expectedDaysSinceLogin);
+            expect(actualFile).to.equal(expectedFile);
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),

@@ -1,23 +1,24 @@
-name: Test coverage for develop branch
+name: Test coverage for develop branch # default-branch.yml
 
 on:
     push:
         branches:
             - develop
 
+permissions:
+    # allow dependabot to execute this workflow
+    pull-requests: write
+
 jobs:
     hello_world_job:
         runs-on: ubuntu-latest
-        name: Test and report
+        name: Test and upload coverage
         steps:
             - name: Checkout
               uses: actions/checkout@v3
               with:
-                  ref: ${{ github.event.pull_request.head.sha }}
+                  ref: ${{ github.event.ref }}
                   fetch-depth: 1000
-
-            - name: Fetch base
-              run: git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
 
             - uses: actions/setup-node@v3
               with:

@@ -10,7 +10,8 @@ then
 fi
 TEMPLATE="#$TICKETID: "
 echo "[POST_CHECKOUT] Setting template commit to '$TEMPLATE'"
-echo $TEMPLATE > ".git/templatemessage"
+# wrap $TEMPLATE in quotes or else it is trimmed automatically
+echo "$TEMPLATE" > ".git/templatemessage"
 
 
 # ### run npm install ###
@@ -21,7 +22,7 @@ IFS=$'\n'
 NEWHEAD=$1
 # $2 is the previous HEAD pointer
 OLDHEAD=$2
-# extract all paths to package-lock.json files 
+# extract all paths to package-lock.json files
 PACKAGE_LOCK_REGEX="(^package-lock\.json)"
 PACKAGES=$(git diff --name-only $NEWHEAD $OLDHEAD | grep -E $PACKAGE_LOCK_REGEX || true)
 
