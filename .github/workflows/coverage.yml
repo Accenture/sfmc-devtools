@@ -69,7 +69,7 @@ jobs:
                   files: 'base-artifacts/coverage-summary.json'
 
             - name: Report coverage
-              uses: sidx1024/report-nyc-coverage-github-action@v1.2.6
+              uses: sidx1024/report-nyc-coverage-github-action@v1.2.7
               id: report
               with:
                   coverage_file: 'artifacts/test-coverage-output/coverage-summary.json'
