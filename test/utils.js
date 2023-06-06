@@ -4,6 +4,7 @@ const axios = require('axios');
 const MockAdapter = require('axios-mock-adapter');
 const auth = require('../lib/util/auth');
 const Util = require('../lib/util/util');
+const handler = require('../lib/index');
 
 // for some reason doesnt realize below reference
 // eslint-disable-next-line no-unused-vars
@@ -111,7 +112,7 @@ exports.getExpectedFile = (mid, type, action, ext) =>
  */
 
 exports.mockSetup = (isDeploy) => {
-    Util.setLoggingLevel({ debug: true });
+    handler.setOptions({ debug: true, noLogFile: true });
     apimock = new MockAdapter(axios, { onNoMatch: 'throwException' });
     // set access_token to mid to allow for autorouting of mock to correct resources
     apimock.onPost(authResources.success.url).reply((config) => {
