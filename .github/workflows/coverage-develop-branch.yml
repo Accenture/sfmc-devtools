@@ -1,4 +1,4 @@
-name: Test coverage for develop branch (default-branch.yml)
+name: Test coverage for develop branch # default-branch.yml
 
 on:
     push:

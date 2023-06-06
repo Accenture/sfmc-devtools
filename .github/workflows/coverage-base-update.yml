@@ -1,4 +1,4 @@
-name: Update coverage comment (base-update.yml)
+name: Update coverage comment # base-update.yml
 on:
     pull_request:
         types: [edited]
