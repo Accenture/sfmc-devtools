@@ -197,9 +197,6 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#setupSDK">setupSDK(sessionKey, authObject)</a> ⇒ <code><a href="#SDK">SDK</a></code></dt>
 <dd><p>Returns an SDK instance to be used for API calls</p>
 </dd>
-<dt><a href="#_createNewLoggerTransport">_createNewLoggerTransport([noLogFile])</a> ⇒ <code>object</code></dt>
-<dd><p>wrapper around our standard winston logging to console and logfile</p>
-</dd>
 </dl>
 
 ## Typedefs
@@ -5895,7 +5892,8 @@ CLI entry for SFMC DevTools
     * [._isValidType(selectedType, [handleOutside])](#Util._isValidType) ⇒ <code>boolean</code>
     * [.getTypeAndSubType(selectedType)](#Util.getTypeAndSubType) ⇒ <code>Array.&lt;string&gt;</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
-    * [.startLogger([restart])](#Util.startLogger) ⇒ <code>void</code>
+    * [._createNewLoggerTransport([noLogFile])](#Util._createNewLoggerTransport) ⇒ <code>object</code>
+    * [.startLogger([restart], [noLogFile])](#Util.startLogger) ⇒ <code>void</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
@@ -6047,9 +6045,21 @@ helper for getDefaultProperties()
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> - type choices  
+<a name="Util._createNewLoggerTransport"></a>
+
+### Util.\_createNewLoggerTransport([noLogFile]) ⇒ <code>object</code>
+wrapper around our standard winston logging to console and logfile
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>object</code> - initiated logger for console and file  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [noLogFile] | <code>boolean</code> | <code>false</code> | optional flag to indicate if we should log to file; CLI logs are always on |
+
 <a name="Util.startLogger"></a>
 
-### Util.startLogger([restart]) ⇒ <code>void</code>
+### Util.startLogger([restart], [noLogFile]) ⇒ <code>void</code>
 initiate winston logger
 
 **Kind**: static method of [<code>Util</code>](#Util)  
@@ -6057,6 +6067,7 @@ initiate winston logger
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | [restart] | <code>boolean</code> | <code>false</code> | if true, logger will be restarted; otherwise, an existing logger will be used |
+| [noLogFile] | <code>boolean</code> | <code>false</code> | if false, logger will log to file; otherwise, only to console |
 
 <a name="Util.metadataLogger"></a>
 
@@ -7771,7 +7782,8 @@ Util that contains logger and simple util methods
     * [._isValidType(selectedType, [handleOutside])](#Util._isValidType) ⇒ <code>boolean</code>
     * [.getTypeAndSubType(selectedType)](#Util.getTypeAndSubType) ⇒ <code>Array.&lt;string&gt;</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
-    * [.startLogger([restart])](#Util.startLogger) ⇒ <code>void</code>
+    * [._createNewLoggerTransport([noLogFile])](#Util._createNewLoggerTransport) ⇒ <code>object</code>
+    * [.startLogger([restart], [noLogFile])](#Util.startLogger) ⇒ <code>void</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
@@ -7923,9 +7935,21 @@ helper for getDefaultProperties()
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> - type choices  
+<a name="Util._createNewLoggerTransport"></a>
+
+### Util.\_createNewLoggerTransport([noLogFile]) ⇒ <code>object</code>
+wrapper around our standard winston logging to console and logfile
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>object</code> - initiated logger for console and file  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [noLogFile] | <code>boolean</code> | <code>false</code> | optional flag to indicate if we should log to file; CLI logs are always on |
+
 <a name="Util.startLogger"></a>
 
-### Util.startLogger([restart]) ⇒ <code>void</code>
+### Util.startLogger([restart], [noLogFile]) ⇒ <code>void</code>
 initiate winston logger
 
 **Kind**: static method of [<code>Util</code>](#Util)  
@@ -7933,6 +7957,7 @@ initiate winston logger
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | [restart] | <code>boolean</code> | <code>false</code> | if true, logger will be restarted; otherwise, an existing logger will be used |
+| [noLogFile] | <code>boolean</code> | <code>false</code> | if false, logger will log to file; otherwise, only to console |
 
 <a name="Util.metadataLogger"></a>
 
@@ -8191,18 +8216,6 @@ Returns an SDK instance to be used for API calls
 | --- | --- | --- |
 | sessionKey | <code>string</code> | key for specific BU |
 | authObject | <code>TYPE.AuthObject</code> | credentials for specific BU |
-
-<a name="_createNewLoggerTransport"></a>
-
-## \_createNewLoggerTransport([noLogFile]) ⇒ <code>object</code>
-wrapper around our standard winston logging to console and logfile
-
-**Kind**: global function  
-**Returns**: <code>object</code> - initiated logger for console and file  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| [noLogFile] | <code>boolean</code> | <code>false</code> | optional flag to indicate if we should log to file; CLI logs are always on |
 
 <a name="TypeKeyCombo"></a>
 
