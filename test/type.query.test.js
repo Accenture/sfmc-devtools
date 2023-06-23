@@ -124,6 +124,18 @@ describe('type: query', () => {
             return;
         });
         it('Should change the key during update with --changeKeyValue');
+        it('Should deploy and execute with --execute', async () => {
+            handler.setOptions({ execute: true });
+            // WHEN
+            await handler.deploy('testInstance/testBU', ['query'], ['testNew_query']);
+            // THEN
+            assert.equal(
+                process.exitCode,
+                false,
+                'deploy with --execute should not have thrown an error'
+            );
+            return;
+        });
     });
     describe('Templating ================', () => {
         it('Should create a query template via retrieveAsTemplate and build it', async () => {
