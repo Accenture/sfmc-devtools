@@ -5496,7 +5496,7 @@ MessageSendActivity MetadataType
     * [.preDeployTasks(metadata)](#TriggeredSend.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.refresh([keyArr], [checkKey])](#TriggeredSend.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getKeysForValidTSDs(metadata)](#TriggeredSend.getKeysForValidTSDs) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-    * [.findRefreshableItems()](#TriggeredSend.findRefreshableItems) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.findRefreshableItems([assetLoaded])](#TriggeredSend.findRefreshableItems) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [._refreshItem(key, checkKey)](#TriggeredSend._refreshItem) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="TriggeredSend.retrieve"></a>
@@ -5601,11 +5601,16 @@ helper for [refresh](refresh) that extracts the keys from the TSD item map and e
 
 <a name="TriggeredSend.findRefreshableItems"></a>
 
-### TriggeredSend.findRefreshableItems() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### TriggeredSend.findRefreshableItems([assetLoaded]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 helper for [refresh](refresh) that finds active TSDs on the server and filters it by the same rules that [retrieve](retrieve) is using to avoid refreshing TSDs with broken dependencies
 
 **Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of TSD item map  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [assetLoaded] | <code>boolean</code> | <code>false</code> | if run after Asset.deploy via --refresh option this will skip caching assets |
+
 <a name="TriggeredSend._refreshItem"></a>
 
 ### TriggeredSend.\_refreshItem(key, checkKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
