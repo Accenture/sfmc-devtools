@@ -5881,7 +5881,7 @@ CLI entry for SFMC DevTools
     * [.sleep(ms)](#Util.sleep) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getSsjs(code)](#Util.getSsjs) ⇒ <code>string</code>
     * [.stringLike(testString, search)](#Util.stringLike) ⇒ <code>boolean</code>
-    * [.fieldsLike(metadata)](#Util.fieldsLike) ⇒ <code>boolean</code>
+    * [.fieldsLike(metadata, [filters])](#Util.fieldsLike) ⇒ <code>boolean</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -6253,7 +6253,7 @@ allows us to filter just like with SQL's LIKE operator
 
 <a name="Util.fieldsLike"></a>
 
-### Util.fieldsLike(metadata) ⇒ <code>boolean</code>
+### Util.fieldsLike(metadata, [filters]) ⇒ <code>boolean</code>
 returns true if no LIKE filter is defined or if all filters match
 
 **Kind**: static method of [<code>Util</code>](#Util)  
@@ -6262,6 +6262,7 @@ returns true if no LIKE filter is defined or if all filters match
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata item |
+| [filters] | <code>object</code> | only used in recursive calls |
 
 <a name="MetadataTypeDefinitions"></a>
 
@@ -7798,7 +7799,7 @@ Util that contains logger and simple util methods
     * [.sleep(ms)](#Util.sleep) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getSsjs(code)](#Util.getSsjs) ⇒ <code>string</code>
     * [.stringLike(testString, search)](#Util.stringLike) ⇒ <code>boolean</code>
-    * [.fieldsLike(metadata)](#Util.fieldsLike) ⇒ <code>boolean</code>
+    * [.fieldsLike(metadata, [filters])](#Util.fieldsLike) ⇒ <code>boolean</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -8170,7 +8171,7 @@ allows us to filter just like with SQL's LIKE operator
 
 <a name="Util.fieldsLike"></a>
 
-### Util.fieldsLike(metadata) ⇒ <code>boolean</code>
+### Util.fieldsLike(metadata, [filters]) ⇒ <code>boolean</code>
 returns true if no LIKE filter is defined or if all filters match
 
 **Kind**: static method of [<code>Util</code>](#Util)  
@@ -8179,6 +8180,7 @@ returns true if no LIKE filter is defined or if all filters match
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata item |
+| [filters] | <code>object</code> | only used in recursive calls |
 
 <a name="csvToArray"></a>
 
