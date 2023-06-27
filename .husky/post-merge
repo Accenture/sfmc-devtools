@@ -16,6 +16,7 @@ if [[ ${PACKAGES[@]} ]]; then
   done
   echo "📦 Running npm install to update your dependencies..."
   npm install
+  npm run lint:fix
 else
   echo "📦 All packages up-to-date. No need to run npm install."
 fi
