@@ -5880,6 +5880,8 @@ CLI entry for SFMC DevTools
     * [.getKeysString(keyArr, [isId])](#Util.getKeysString) ⇒ <code>string</code>
     * [.sleep(ms)](#Util.sleep) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getSsjs(code)](#Util.getSsjs) ⇒ <code>string</code>
+    * [.stringLike(testString, search)](#Util.stringLike) ⇒ <code>boolean</code>
+    * [.fieldsLike(metadata)](#Util.fieldsLike) ⇒ <code>boolean</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -6236,6 +6238,31 @@ the following is invalid:
       // 3
   </script>
 ```
+<a name="Util.stringLike"></a>
+
+### Util.stringLike(testString, search) ⇒ <code>boolean</code>
+allows us to filter just like with SQL's LIKE operator
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - true if testString matches search  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| testString | <code>string</code> | field value to test |
+| search | <code>string</code> | search string in SQL LIKE format |
+
+<a name="Util.fieldsLike"></a>
+
+### Util.fieldsLike(metadata) ⇒ <code>boolean</code>
+returns true if no LIKE filter is defined or if all filters match
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - true if no LIKE filter is defined or if all filters match  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata item |
+
 <a name="MetadataTypeDefinitions"></a>
 
 ## MetadataTypeDefinitions
@@ -7770,6 +7797,8 @@ Util that contains logger and simple util methods
     * [.getKeysString(keyArr, [isId])](#Util.getKeysString) ⇒ <code>string</code>
     * [.sleep(ms)](#Util.sleep) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getSsjs(code)](#Util.getSsjs) ⇒ <code>string</code>
+    * [.stringLike(testString, search)](#Util.stringLike) ⇒ <code>boolean</code>
+    * [.fieldsLike(metadata)](#Util.fieldsLike) ⇒ <code>boolean</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -8126,6 +8155,31 @@ the following is invalid:
       // 3
   </script>
 ```
+<a name="Util.stringLike"></a>
+
+### Util.stringLike(testString, search) ⇒ <code>boolean</code>
+allows us to filter just like with SQL's LIKE operator
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - true if testString matches search  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| testString | <code>string</code> | field value to test |
+| search | <code>string</code> | search string in SQL LIKE format |
+
+<a name="Util.fieldsLike"></a>
+
+### Util.fieldsLike(metadata) ⇒ <code>boolean</code>
+returns true if no LIKE filter is defined or if all filters match
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - true if no LIKE filter is defined or if all filters match  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata item |
+
 <a name="csvToArray"></a>
 
 ## csvToArray(csv) ⇒ <code>Array.&lt;string&gt;</code>
