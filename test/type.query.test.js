@@ -279,14 +279,28 @@ describe('type: query', () => {
         });
     });
     describe('Execute ================', () => {
-        it('Should start executing a query', async () => {
-            const execute = await handler.execute(
-                'testInstance/testBU',
-                ['query'],
-                ['testExisting_query']
-            );
+        it('Should start a query by key', async () => {
+            const execute = await handler.execute('testInstance/testBU', 'query', [
+                'testExisting_query',
+            ]);
             assert.equal(process.exitCode, false, 'execute should not have thrown an error');
             assert.equal(execute, true, 'query was supposed to be executed');
+            return;
+        });
+        it('Should start a query selected via --like', async () => {
+            handler.setOptions({ like: { key: 'testExisting%' } });
+            const execute = await handler.execute('testInstance/testBU', 'query');
+            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(execute, true, 'query was supposed to be executed');
+            return;
+        });
+        it('Should not start executing a query because key and --like was specified', async () => {
+            handler.setOptions({ like: { key: 'testExisting%' } });
+            const execute = await handler.execute('testInstance/testBU', 'query', [
+                'testExisting_query',
+            ]);
+            assert.equal(process.exitCode, true, 'execute should not have thrown an error');
+            assert.equal(execute, false, 'query was not supposed to be executed');
             return;
         });
     });
