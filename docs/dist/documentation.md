@@ -495,8 +495,9 @@ main class
     * [.buildDefinition(businessUnit, selectedType, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.buildDefinitionBulk(listName, type, name)](#Mcdev.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getFilesToCommit(businessUnit, selectedType, keyArr)](#Mcdev.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-    * [.execute(businessUnit, [selectedTypesArr], keys)](#Mcdev.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._executeBU(cred, bu, [selectedTypesArr], keyArr)](#Mcdev._executeBU) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.execute(businessUnit, [selectedType], [keys])](#Mcdev.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._executeBU(cred, bu, [type], keyArr)](#Mcdev._executeBU) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._getKeysWithLike(selectedType, buObject)](#Mcdev._getKeysWithLike) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="Mcdev.setSkipInteraction"></a>
 
@@ -751,7 +752,7 @@ Build a specific metadata file based on a template using a list of bu-market com
 
 <a name="Mcdev.execute"></a>
 
-### Mcdev.execute(businessUnit, [selectedTypesArr], keys) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Mcdev.execute(businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Start an item (query)
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -760,13 +761,13 @@ Start an item (query)
 | Param | Type | Description |
 | --- | --- | --- |
 | businessUnit | <code>string</code> | name of BU |
-| [selectedTypesArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit to given metadata types |
-| keys | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+| [selectedType] | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
+| [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Mcdev._executeBU"></a>
 
-### Mcdev.\_executeBU(cred, bu, [selectedTypesArr], keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
-helper for [execute](execute)
+### Mcdev.\_executeBU(cred, bu, [type], keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
+helper for [execute](#Mcdev.execute)
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all items were executed, false otherwise  
@@ -775,8 +776,21 @@ helper for [execute](execute)
 | --- | --- | --- |
 | cred | <code>string</code> | name of Credential |
 | bu | <code>string</code> | name of BU |
-| [selectedTypesArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit execution to given metadata type |
+| [type] | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Mcdev._getKeysWithLike"></a>
+
+### Mcdev.\_getKeysWithLike(selectedType, buObject) ⇒ <code>Array.&lt;string&gt;</code>
+helper for [_executeBU](#Mcdev._executeBU)
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>Array.&lt;string&gt;</code> - keyArr  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| selectedType | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| buObject | <code>TYPE.BuObject</code> | properties for auth |
 
 <a name="Asset"></a>
 
