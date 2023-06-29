@@ -371,7 +371,7 @@ Source and target business units are also compared before the deployment to appl
     * [new Deployer(properties, buObject)](#new_Deployer_new)
     * _instance_
         * [.metadata](#Deployer+metadata) : <code>TYPE.MultiMetadataTypeMap</code>
-        * [._deploy([typeArr], [keyArr], [fromRetrieve], [isRefresh])](#Deployer+_deploy) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
+        * [._deploy([typeArr], [keyArr], [fromRetrieve])](#Deployer+_deploy) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
     * _static_
         * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Deployer.deploy) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
         * [._deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve])](#Deployer._deployBU) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
@@ -395,7 +395,7 @@ Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 **Kind**: instance property of [<code>Deployer</code>](#Deployer)  
 <a name="Deployer+_deploy"></a>
 
-### deployer.\_deploy([typeArr], [keyArr], [fromRetrieve], [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
+### deployer.\_deploy([typeArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
 Deploy all metadata that is located in the deployDir
 
 **Kind**: instance method of [<code>Deployer</code>](#Deployer)  
@@ -406,7 +406,6 @@ Deploy all metadata that is located in the deployDir
 | [typeArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit deployment to given metadata type (can include subtype) |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
 | [fromRetrieve] | <code>boolean</code> | if true, no folders will be updated/created |
-| [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="Deployer.deploy"></a>
 
@@ -448,11 +447,11 @@ Returns metadata of a business unit that is saved locally
 **Kind**: static method of [<code>Deployer</code>](#Deployer)  
 **Returns**: <code>TYPE.MultiMetadataTypeMap</code> - Metadata of BU in local directory  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| deployDir | <code>string</code> |  | root directory of metadata. |
-| [typeArr] | <code>Array.&lt;string&gt;</code> |  | limit deployment to given metadata type |
-| [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
+| Param | Type | Description |
+| --- | --- | --- |
+| deployDir | <code>string</code> | root directory of metadata. |
+| [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
+| [listBadKeys] | <code>boolean</code> | do not print errors, used for badKeys() |
 
 <a name="Deployer.createFolderDefinitions"></a>
 
@@ -798,7 +797,7 @@ FileTransfer MetadataType
     * [._retrieveExtendedFile(metadata, subType, retrieveDir)](#Asset._retrieveExtendedFile) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._readExtendedFileFromFS(metadata, subType, deployDir, [pathOnly])](#Asset._readExtendedFileFromFS) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.postRetrieveTasks(metadata)](#Asset.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
-    * [.postDeployTasks(metadata, _, createdUpdated, [isRefresh])](#Asset.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.postDeployTasks(metadata, _, createdUpdated)](#Asset.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.preDeployTasks(metadata, deployDir)](#Asset.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
     * [._getMainSubtype(extendedSubType)](#Asset._getMainSubtype) ⇒ <code>string</code>
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildDefinitionForNested) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -959,7 +958,7 @@ manages post retrieve steps
 
 <a name="Asset.postDeployTasks"></a>
 
-### Asset.postDeployTasks(metadata, _, createdUpdated, [isRefresh]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Asset.postDeployTasks(metadata, _, createdUpdated) ⇒ <code>Promise.&lt;void&gt;</code>
 Gets executed after deployment of metadata type
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -970,7 +969,6 @@ Gets executed after deployment of metadata type
 | metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | _ | <code>TYPE.MetadataTypeMap</code> | originalMetadata to be updated (contains additioanl fields) |
 | createdUpdated | <code>Object</code> | counter representing successful creates/updates |
-| [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="Asset.preDeployTasks"></a>
 
@@ -1238,7 +1236,7 @@ Automation MetadataType
     * [.retrieveForCache()](#Automation.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Automation.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.AutomationItemObj&gt;</code>
     * [.postRetrieveTasks(metadata)](#Automation.postRetrieveTasks) ⇒ <code>TYPE.AutomationItem</code> \| <code>void</code>
-    * [.deploy(metadata, targetBU, retrieveDir, [isRefresh])](#Automation.deploy) ⇒ <code>Promise.&lt;TYPE.AutomationMap&gt;</code>
+    * [.deploy(metadata, targetBU, retrieveDir)](#Automation.deploy) ⇒ <code>Promise.&lt;TYPE.AutomationMap&gt;</code>
     * [.create(metadata)](#Automation.create) ⇒ <code>Promise</code>
     * [.update(metadata, metadataBefore)](#Automation.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#Automation.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AutomationItem&gt;</code>
@@ -1310,7 +1308,7 @@ manages post retrieve steps
 
 <a name="Automation.deploy"></a>
 
-### Automation.deploy(metadata, targetBU, retrieveDir, [isRefresh]) ⇒ <code>Promise.&lt;TYPE.AutomationMap&gt;</code>
+### Automation.deploy(metadata, targetBU, retrieveDir) ⇒ <code>Promise.&lt;TYPE.AutomationMap&gt;</code>
 Deploys automation - the saved file is the original one due to large differences required for deployment
 
 **Kind**: static method of [<code>Automation</code>](#Automation)  
@@ -1321,7 +1319,6 @@ Deploys automation - the saved file is the original one due to large differences
 | metadata | <code>TYPE.AutomationMap</code> | metadata mapped by their keyField |
 | targetBU | <code>string</code> | name/shorthand of target businessUnit for mapping |
 | retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
-| [isRefresh] | <code>boolean</code> | optional flag - so far not used by automation |
 
 <a name="Automation.create"></a>
 
@@ -2335,7 +2332,7 @@ Event MetadataType
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Event.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.postRetrieveTasks(eventDef)](#Event.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.deleteByKey(key)](#Event.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.deploy(metadata, deployDir, retrieveDir, [isRefresh])](#Event.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.deploy(metadata, deployDir, retrieveDir)](#Event.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.create(metadata)](#Event.create) ⇒ <code>Promise</code>
     * [.update(metadataEntry)](#Event.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#Event.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -2405,7 +2402,7 @@ Delete a metadata item from the specified business unit
 
 <a name="Event.deploy"></a>
 
-### Event.deploy(metadata, deployDir, retrieveDir, [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+### Event.deploy(metadata, deployDir, retrieveDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
 Deploys metadata - merely kept here to be able to print [logBeta](#Util.logBeta) once per deploy
 
 **Kind**: static method of [<code>Event</code>](#Event)  
@@ -2416,7 +2413,6 @@ Deploys metadata - merely kept here to be able to print [logBeta](#Util.logBeta)
 | metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 | retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
-| [isRefresh] | <code>boolean</code> | optional flag - so far not used by eventDefinition |
 
 <a name="Event.create"></a>
 
@@ -2747,10 +2743,10 @@ Returns file contents mapped to their filename without '.json' ending
 **Kind**: static method of [<code>Folder</code>](#Folder)  
 **Returns**: <code>TYPE.MetadataTypeMap</code> - fileName => fileContent map  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| dir | <code>string</code> |  | directory that contains '.json' files to be read |
-| [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
+| Param | Type | Description |
+| --- | --- | --- |
+| dir | <code>string</code> | directory that contains '.json' files to be read |
+| [listBadKeys] | <code>boolean</code> | do not print errors, used for badKeys() |
 
 <a name="Folder.retrieveHelper"></a>
 
@@ -2923,7 +2919,7 @@ definitionId: A unique UUID provided by Salesforce Marketing Cloud. Each version
 * [Journey](#Journey) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#Journey.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.deleteByKey(key)](#Journey.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.deploy(metadata, deployDir, retrieveDir, [isRefresh])](#Journey.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.deploy(metadata, deployDir, retrieveDir)](#Journey.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.update(metadata)](#Journey.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#Journey.create) ⇒ <code>Promise</code>
     * [.saveResults(results, retrieveDir, [overrideType], [templateVariables])](#Journey.saveResults) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
@@ -2961,7 +2957,7 @@ Delete a metadata item from the specified business unit
 
 <a name="Journey.deploy"></a>
 
-### Journey.deploy(metadata, deployDir, retrieveDir, [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+### Journey.deploy(metadata, deployDir, retrieveDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
 Deploys metadata - merely kept here to be able to print [logBeta](#Util.logBeta) once per deploy
 
 **Kind**: static method of [<code>Journey</code>](#Journey)  
@@ -2972,7 +2968,6 @@ Deploys metadata - merely kept here to be able to print [logBeta](#Util.logBeta)
 | metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 | retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
-| [isRefresh] | <code>boolean</code> | optional flag - so far not used by interaction |
 
 <a name="Journey.update"></a>
 
@@ -3155,8 +3150,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.buObject](#MetadataType.buObject) : <code>TYPE.BuObject</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType.getJsonFromFS) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.getFieldNamesToRetrieve([additionalFields], [isCaching])](#MetadataType.getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.deploy(metadata, deployDir, retrieveDir, [isRefresh])](#MetadataType.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
-    * [.postDeployTasks(upsertResults, originalMetadata, createdUpdated, [isRefresh])](#MetadataType.postDeployTasks) ⇒ <code>void</code>
+    * [.deploy(metadata, deployDir, retrieveDir)](#MetadataType.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.postDeployTasks(upsertResults, originalMetadata, createdUpdated)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
     * [.postCreateTasks(metadataEntry, apiResponse)](#MetadataType.postCreateTasks) ⇒ <code>void</code>
     * [.postUpdateTasks(metadataEntry, apiResponse)](#MetadataType.postUpdateTasks) ⇒ <code>void</code>
     * [.postDeployTasks_legacyApi(metadataEntry, apiResponse)](#MetadataType.postDeployTasks_legacyApi) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -3176,7 +3171,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.execute()](#MetadataType.execute) ⇒ <code>void</code>
     * [.hasChanged(cachedVersion, metadata, [fieldName])](#MetadataType.hasChanged) ⇒ <code>boolean</code>
     * [.hasChangedGeneric(cachedVersion, metadata, [fieldName], [silent])](#MetadataType.hasChangedGeneric) ⇒ <code>boolean</code>
-    * [.upsert(metadataMap, deployDir, [isRefresh])](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.upsert(metadataMap, deployDir)](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MetadataType.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
     * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [.createSOAP(metadataEntry, [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
@@ -3237,10 +3232,10 @@ Returns file contents mapped to their filename without '.json' ending
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>TYPE.MetadataTypeMap</code> - fileName => fileContent map  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| dir | <code>string</code> |  | directory that contains '.json' files to be read |
-| [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
+| Param | Type | Description |
+| --- | --- | --- |
+| dir | <code>string</code> | directory that contains '.json' files to be read |
+| [listBadKeys] | <code>boolean</code> | do not print errors, used for badKeys() |
 
 <a name="MetadataType.getFieldNamesToRetrieve"></a>
 
@@ -3257,7 +3252,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 
 <a name="MetadataType.deploy"></a>
 
-### MetadataType.deploy(metadata, deployDir, retrieveDir, [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+### MetadataType.deploy(metadata, deployDir, retrieveDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
 Deploys metadata
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3268,11 +3263,10 @@ Deploys metadata
 | metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 | retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
-| [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="MetadataType.postDeployTasks"></a>
 
-### MetadataType.postDeployTasks(upsertResults, originalMetadata, createdUpdated, [isRefresh]) ⇒ <code>void</code>
+### MetadataType.postDeployTasks(upsertResults, originalMetadata, createdUpdated) ⇒ <code>void</code>
 Gets executed after deployment of metadata type
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3282,7 +3276,6 @@ Gets executed after deployment of metadata type
 | upsertResults | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField as returned by update/create |
 | originalMetadata | <code>TYPE.MetadataTypeMap</code> | metadata to be updated (contains additioanl fields) |
 | createdUpdated | <code>Object</code> | counter representing successful creates/updates |
-| [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="MetadataType.postCreateTasks"></a>
 
@@ -3524,7 +3517,7 @@ test if metadata was actually changed or not to potentially skip it during deplo
 
 <a name="MetadataType.upsert"></a>
 
-### MetadataType.upsert(metadataMap, deployDir, [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+### MetadataType.upsert(metadataMap, deployDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3534,7 +3527,6 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 | --- | --- | --- |
 | metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
-| [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="MetadataType.createOrUpdate"></a>
 
@@ -3590,7 +3582,7 @@ Updates a single metadata entry via REST
 | --- | --- | --- | --- |
 | metadataEntry | <code>TYPE.MetadataTypeItem</code> |  | a single metadata Entry |
 | uri | <code>string</code> |  | rest endpoint for PATCH |
-| [httpMethod] | <code>&#x27;patch&#x27;</code> \| <code>&#x27;post&#x27;</code> \| <code>&#x27;put&#x27;</code> | <code>&#x27;patch&#x27;</code> | defaults to 'patch'; some update requests require PUT instead of PATCH |
+| [httpMethod] | <code>&#x27;patch&#x27;</code> \| <code>&#x27;post&#x27;</code> \| <code>&#x27;put&#x27;</code> | <code>patch</code> | defaults to 'patch'; some update requests require PUT instead of PATCH |
 
 <a name="MetadataType.updateSOAP"></a>
 
@@ -3769,10 +3761,10 @@ checks if the current metadata entry should be saved on retrieve or not
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| metadataEntry | <code>TYPE.MetadataTypeItem</code> |  | metadata entry |
-| [include] | <code>boolean</code> | <code>false</code> | true: use definition.include / options.include; false=exclude: use definition.filter / options.exclude |
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> | metadata entry |
+| [include] | <code>boolean</code> | true: use definition.include / options.include; false=exclude: use definition.filter / options.exclude |
 
 <a name="MetadataType.isFilteredFolder"></a>
 
@@ -3782,10 +3774,10 @@ optionally filter by what folder something is in
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| metadataEntry | <code>object</code> |  | metadata entry |
-| [include] | <code>boolean</code> | <code>false</code> | true: use definition.include / options.include; false=exclude: use definition.filter / options.exclude |
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>object</code> | metadata entry |
+| [include] | <code>boolean</code> | true: use definition.include / options.include; false=exclude: use definition.filter / options.exclude |
 
 <a name="MetadataType.saveResults"></a>
 
@@ -3995,11 +3987,11 @@ Returns metadata of a business unit that is saved locally
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>object</code> - Metadata of BU in local directory  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| readDir | <code>string</code> |  | root directory of metadata. |
-| [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
-| [buMetadata] | <code>object</code> |  | Metadata of BU in local directory |
+| Param | Type | Description |
+| --- | --- | --- |
+| readDir | <code>string</code> | root directory of metadata. |
+| [listBadKeys] | <code>boolean</code> | do not print errors, used for badKeys() |
+| [buMetadata] | <code>object</code> | Metadata of BU in local directory |
 
 <a name="MetadataType.getFilesToCommit"></a>
 
@@ -5500,13 +5492,11 @@ MessageSendActivity MetadataType
     * [.create(metadata)](#TriggeredSend.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#TriggeredSend.update) ⇒ <code>Promise</code>
     * [.deleteByKey(customerKey)](#TriggeredSend.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.postRetrieveTasks(metadata)](#TriggeredSend.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.setFolderPath(metadata)](#TriggeredSend.setFolderPath)
-    * [.parseMetadata(metadata)](#TriggeredSend.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
+    * [.postRetrieveTasks(metadata)](#TriggeredSend.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
     * [.preDeployTasks(metadata)](#TriggeredSend.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.refresh([keyArr], [checkKey])](#TriggeredSend.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getKeysForValidTSDs(metadata)](#TriggeredSend.getKeysForValidTSDs) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-    * [.findRefreshableItems()](#TriggeredSend.findRefreshableItems) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.findRefreshableItems([assetLoaded])](#TriggeredSend.findRefreshableItems) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [._refreshItem(key, checkKey)](#TriggeredSend._refreshItem) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="TriggeredSend.retrieve"></a>
@@ -5562,30 +5552,7 @@ Delete a metadata item from the specified business unit
 
 <a name="TriggeredSend.postRetrieveTasks"></a>
 
-### TriggeredSend.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
-manages post retrieve steps
-
-**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one query string  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
-
-<a name="TriggeredSend.setFolderPath"></a>
-
-### TriggeredSend.setFolderPath(metadata)
-generic script that retrieves the folder path from cache and updates the given metadata with it after retrieve
-
-**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single script activity definition |
-
-<a name="TriggeredSend.parseMetadata"></a>
-
-### TriggeredSend.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
+### TriggeredSend.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
 parses retrieved Metadata before saving
 
 **Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
@@ -5593,7 +5560,7 @@ parses retrieved Metadata before saving
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single query activity definition |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
 <a name="TriggeredSend.preDeployTasks"></a>
 
@@ -5634,11 +5601,16 @@ helper for [refresh](refresh) that extracts the keys from the TSD item map and e
 
 <a name="TriggeredSend.findRefreshableItems"></a>
 
-### TriggeredSend.findRefreshableItems() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### TriggeredSend.findRefreshableItems([assetLoaded]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 helper for [refresh](refresh) that finds active TSDs on the server and filters it by the same rules that [retrieve](retrieve) is using to avoid refreshing TSDs with broken dependencies
 
 **Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of TSD item map  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [assetLoaded] | <code>boolean</code> | <code>false</code> | if run after Asset.deploy via --refresh option this will skip caching assets |
+
 <a name="TriggeredSend._refreshItem"></a>
 
 ### TriggeredSend.\_refreshItem(key, checkKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -6053,9 +6025,9 @@ wrapper around our standard winston logging to console and logfile
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>object</code> - initiated logger for console and file  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| [noLogFile] | <code>boolean</code> | <code>false</code> | optional flag to indicate if we should log to file; CLI logs are always on |
+| Param | Type | Description |
+| --- | --- | --- |
+| [noLogFile] | <code>boolean</code> | optional flag to indicate if we should log to file; CLI logs are always on |
 
 <a name="Util.startLogger"></a>
 
@@ -6064,10 +6036,10 @@ initiate winston logger
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| [restart] | <code>boolean</code> | <code>false</code> | if true, logger will be restarted; otherwise, an existing logger will be used |
-| [noLogFile] | <code>boolean</code> | <code>false</code> | if false, logger will log to file; otherwise, only to console |
+| Param | Type | Description |
+| --- | --- | --- |
+| [restart] | <code>boolean</code> | if true, logger will be restarted; otherwise, an existing logger will be used |
+| [noLogFile] | <code>boolean</code> | if false, logger will log to file; otherwise, only to console |
 
 <a name="Util.metadataLogger"></a>
 
@@ -6801,12 +6773,12 @@ reads file from local file system.
 **Kind**: static method of [<code>File</code>](#File)  
 **Returns**: <code>Promise.&lt;string&gt;</code> \| <code>void</code> - file contents; void on error  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| directory | <code>string</code> \| <code>Array.&lt;string&gt;</code> |  | directory where the file is stored |
-| filename | <code>string</code> |  | name of the file without '.json' ending |
-| filetype | <code>string</code> |  | filetype suffix |
-| [encoding] | <code>string</code> | <code>&quot;&#x27;utf8&#x27;&quot;</code> | read file with encoding (defaults to utf-8) |
+| Param | Type | Description |
+| --- | --- | --- |
+| directory | <code>string</code> \| <code>Array.&lt;string&gt;</code> | directory where the file is stored |
+| filename | <code>string</code> | name of the file without '.json' ending |
+| filetype | <code>string</code> | filetype suffix |
+| [encoding] | <code>string</code> | read file with encoding (defaults to utf-8) |
 
 <a name="File.readDirectories"></a>
 
@@ -6869,9 +6841,9 @@ Initalises Prettier formatting lib async.
 **Kind**: static method of [<code>File</code>](#File)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - success of config load  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| [filetype] | <code>string</code> | <code>&quot;&#x27;html&#x27;&quot;</code> | filetype ie. JSON or SSJS |
+| Param | Type | Description |
+| --- | --- | --- |
+| [filetype] | <code>string</code> | filetype ie. JSON or SSJS |
 
 <a name="Init"></a>
 
@@ -7943,9 +7915,9 @@ wrapper around our standard winston logging to console and logfile
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>object</code> - initiated logger for console and file  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| [noLogFile] | <code>boolean</code> | <code>false</code> | optional flag to indicate if we should log to file; CLI logs are always on |
+| Param | Type | Description |
+| --- | --- | --- |
+| [noLogFile] | <code>boolean</code> | optional flag to indicate if we should log to file; CLI logs are always on |
 
 <a name="Util.startLogger"></a>
 
@@ -7954,10 +7926,10 @@ initiate winston logger
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| [restart] | <code>boolean</code> | <code>false</code> | if true, logger will be restarted; otherwise, an existing logger will be used |
-| [noLogFile] | <code>boolean</code> | <code>false</code> | if false, logger will log to file; otherwise, only to console |
+| Param | Type | Description |
+| --- | --- | --- |
+| [restart] | <code>boolean</code> | if true, logger will be restarted; otherwise, an existing logger will be used |
+| [noLogFile] | <code>boolean</code> | if false, logger will log to file; otherwise, only to console |
 
 <a name="Util.metadataLogger"></a>
 
