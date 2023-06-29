@@ -124,6 +124,33 @@ describe('type: query', () => {
             return;
         });
         it('Should change the key during update with --changeKeyValue');
+        it('Should deploy and execute with --execute', async () => {
+            handler.setOptions({ execute: true });
+            // WHEN
+            await handler.deploy('testInstance/testBU', ['query']);
+            // THEN
+            assert.equal(
+                process.exitCode,
+                false,
+                'deploy with --execute should not have thrown an error'
+            );
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_query', 'query'),
+                await testUtils.getExpectedJson('9999999', 'query', 'patch'),
+                'returned metadata was not equal expected for insert query'
+            );
+            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
+                file(testUtils.getExpectedFile('9999999', 'query', 'patch', 'sql'))
+            );
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                12,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
     describe('Templating ================', () => {
         it('Should create a query template via retrieveAsTemplate and build it', async () => {
