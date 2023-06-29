@@ -54,10 +54,21 @@ exports.loadSOAPRecords = async (mcdevAction, type, mid, filter) => {
     });
 };
 exports.filterToPath = (filter) => {
-    if (filter && filter.Property && filter.SimpleOperator && filter.Value) {
-        return `-${filter.Property}${filter.SimpleOperator.replace('equals', '=')}${filter.Value}`;
+    if (filter) {
+        return '-' + this._filterToPath(filter);
     }
     return '';
+};
+exports._filterToPath = (filter) => {
+    if (filter.Property && filter.SimpleOperator && filter.Value) {
+        return `${filter.Property}${filter.SimpleOperator.replace('equals', '=')}${filter.Value}`;
+    } else if (filter.LeftOperand && filter.LogicalOperator && filter.RightOperand) {
+        return (
+            this._filterToPath(filter.LeftOperand) +
+            filter.LogicalOperator +
+            this._filterToPath(filter.RightOperand)
+        );
+    }
 };
 /**
  * based on request, respond with different soap data
@@ -197,7 +208,7 @@ exports.handleRESTRequest = async (config) => {
 
             return [
                 404,
-                fs.readFile(path.join('test', 'resources', 'rest404-response.json'), {
+                await fs.readFile(path.join('test', 'resources', 'rest404-response.json'), {
                     encoding: 'utf8',
                 }),
             ];

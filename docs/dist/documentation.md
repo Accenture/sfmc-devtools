@@ -4601,6 +4601,7 @@ Query MetadataType
     * [.checkForErrors(ex)](#Query.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
     * [.deleteByKey(customerKey)](#Query.deleteByKey) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#Query.postDeleteTasks) ⇒ <code>void</code>
+    * [.postDeployTasks(metadata)](#Query.postDeployTasks)
 
 <a name="Query.retrieve"></a>
 
@@ -4798,6 +4799,17 @@ clean up after deleting a metadata item
 | Param | Type | Description |
 | --- | --- | --- |
 | customerKey | <code>string</code> | Identifier of metadata item |
+
+<a name="Query.postDeployTasks"></a>
+
+### Query.postDeployTasks(metadata)
+Gets executed after deployment of metadata type
+
+**Kind**: static method of [<code>Query</code>](#Query)  
+
+| Param | Description |
+| --- | --- |
+| metadata | metadata mapped by their keyField |
 
 <a name="Role"></a>
 
