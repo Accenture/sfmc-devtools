@@ -127,7 +127,7 @@ describe('type: query', () => {
         it('Should deploy and execute with --execute', async () => {
             handler.setOptions({ execute: true });
             // WHEN
-            await handler.deploy('testInstance/testBU', ['query'], ['testExisting_query']);
+            await handler.deploy('testInstance/testBU', ['query']);
             // THEN
             assert.equal(
                 process.exitCode,
@@ -146,7 +146,7 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                9,
+                12,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
