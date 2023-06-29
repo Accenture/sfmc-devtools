@@ -134,10 +134,19 @@ describe('type: query', () => {
                 false,
                 'deploy with --execute should not have thrown an error'
             );
+            // confirm created item
+            assert.deepEqual(
+                await testUtils.getActualJson('testNew_query', 'query'),
+                await testUtils.getExpectedJson('9999999', 'query', 'post'),
+                'returned metadata was not equal expected for insert query'
+            );
+            expect(file(testUtils.getActualFile('testNew_query', 'query', 'sql'))).to.equal(
+                file(testUtils.getExpectedFile('9999999', 'query', 'post', 'sql'))
+            );
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                11,
+                12,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
