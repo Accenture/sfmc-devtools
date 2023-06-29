@@ -497,7 +497,7 @@ main class
     * [.getFilesToCommit(businessUnit, selectedType, keyArr)](#Mcdev.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.execute(businessUnit, [selectedType], [keys])](#Mcdev.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._executeBU(cred, bu, [type], keyArr)](#Mcdev._executeBU) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getKeysWithLike(selectedType, buObject)](#Mcdev._getKeysWithLike) ⇒ <code>Array.&lt;string&gt;</code>
+    * [._retrieveKeysWithLike(selectedType, buObject)](#Mcdev._retrieveKeysWithLike) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="Mcdev.setSkipInteraction"></a>
 
@@ -779,9 +779,9 @@ helper for [execute](#Mcdev.execute)
 | [type] | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
-<a name="Mcdev._getKeysWithLike"></a>
+<a name="Mcdev._retrieveKeysWithLike"></a>
 
-### Mcdev.\_getKeysWithLike(selectedType, buObject) ⇒ <code>Array.&lt;string&gt;</code>
+### Mcdev.\_retrieveKeysWithLike(selectedType, buObject) ⇒ <code>Array.&lt;string&gt;</code>
 helper for [_executeBU](#Mcdev._executeBU)
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
