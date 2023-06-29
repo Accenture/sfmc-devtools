@@ -370,7 +370,7 @@ describe('type: query', () => {
             return;
         });
         it('Should start a query selected via --like', async () => {
-            handler.setOptions({ like: { key: 'testExisting%' } });
+            handler.setOptions({ like: { key: 'testExist%query' } });
             const execute = await handler.execute('testInstance/testBU', 'query');
             assert.equal(process.exitCode, false, 'execute should not have thrown an error');
             assert.equal(execute, true, 'query was supposed to be executed');
