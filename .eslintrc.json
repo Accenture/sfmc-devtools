@@ -84,6 +84,7 @@
                 }
             }
         ],
+        "jsdoc/require-param-type": "error",
         "jsdoc/tag-lines": ["warn", "any", { "startLines": 1 }],
         "spaced-comment": ["warn", "always", { "block": { "exceptions": ["*"], "balanced": true } }]
     },
