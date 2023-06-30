@@ -83,7 +83,7 @@ describe('type: user', () => {
         });
         it('Should create & upsert a user', async () => {
             // WHEN
-            const expectedCache = ['testNew_user', 'testExisting_user'];
+            const expectedCache = ['testExisting_user', 'testNew_user'];
             await handler.deploy('testInstance/_ParentBU_', ['user'], expectedCache);
             // THEN
             assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
