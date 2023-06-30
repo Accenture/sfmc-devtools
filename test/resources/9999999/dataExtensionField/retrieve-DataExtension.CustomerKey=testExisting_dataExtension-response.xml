@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:6d2f81c8-80ab-44d5-8664-206753e7ac8d</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:a7354389-079e-4844-93b5-af6b7bf1d535</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-468a08b7-c8fd-44bf-a2c8-fd6063127ca6">
+                <wsu:Created>2022-04-21T19:21:52Z</wsu:Created>
+                <wsu:Expires>2022-04-21T19:26:52Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>cfe51e71-6a2b-4cb4-aecd-3777076d63bc</RequestID>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>8018397d-880d-4f88-940e-3b4eca098a0c</ObjectID>
+                <CustomerKey>[testExisting_dataExtension].[ContactKey]</CustomerKey>
+                <Name>ContactKey</Name>
+                <Scale>0</Scale>
+                <DefaultValue />
+                <MaxLength>50</MaxLength>
+                <IsRequired>true</IsRequired>
+                <Ordinal>3</Ordinal>
+                <IsPrimaryKey>true</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testExisting_dataExtension</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>bea0e308-5d45-4181-a673-da9972a7c674</ObjectID>
+                <CustomerKey>[testExisting_dataExtension].[LastName]</CustomerKey>
+                <Name>LastName</Name>
+                <Scale>0</Scale>
+                <DefaultValue />
+                <MaxLength>50</MaxLength>
+                <IsRequired>false</IsRequired>
+                <Ordinal>1</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testExisting_dataExtension</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>2557b461-a699-4744-950d-e80a19afc2dc</ObjectID>
+                <CustomerKey>[testExisting_dataExtension].[EmailAddress]</CustomerKey>
+                <Name>EmailAddress</Name>
+                <Scale>0</Scale>
+                <DefaultValue />
+                <MaxLength>254</MaxLength>
+                <IsRequired>true</IsRequired>
+                <Ordinal>2</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>EmailAddress</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testExisting_dataExtension</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>42760528-a8c5-44dd-8c1d-ff34e5daee54</ObjectID>
+                <CustomerKey>[testExisting_dataExtension].[FirstName]</CustomerKey>
+                <Name>FirstName</Name>
+                <Scale>0</Scale>
+                <DefaultValue />
+                <MaxLength>50</MaxLength>
+                <IsRequired>false</IsRequired>
+                <Ordinal>0</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testExisting_dataExtension</CustomerKey>
+                </DataExtension>
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>

@@ -60,14 +60,18 @@ exports.filterToPath = (filter) => {
     return '';
 };
 exports._filterToPath = (filter) => {
-    if (filter.Property && filter.SimpleOperator && filter.Value) {
-        return `${filter.Property}${filter.SimpleOperator.replace('equals', '=')}${filter.Value}`;
+    if (filter.Property && filter.SimpleOperator) {
+        return `${filter.Property}${filter.SimpleOperator.replace('equals', '=')}${
+            filter.Value === undefined ? '' : filter.Value
+        }`;
     } else if (filter.LeftOperand && filter.LogicalOperator && filter.RightOperand) {
         return (
             this._filterToPath(filter.LeftOperand) +
             filter.LogicalOperator +
             this._filterToPath(filter.RightOperand)
         );
+    } else {
+        throw new Error('unknown filter type');
     }
 };
 /**
