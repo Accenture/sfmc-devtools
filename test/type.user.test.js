@@ -26,8 +26,8 @@ describe('type: user', () => {
             const result = cache.getCache();
             assert.equal(
                 result.user ? Object.keys(result.user).length : 0,
-                2,
-                'only two users expected'
+                3,
+                'only three users expected'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_user', 'user', '_ParentBU_'),
@@ -86,6 +86,7 @@ describe('type: user', () => {
             const expectedCache = [
                 'testExisting_user',
                 'testExisting_user_inactive',
+                '45372cbb-06e0-438e-88d8-008981f7a18b',
                 'testNew_user',
             ];
             await handler.deploy('testInstance/_ParentBU_', ['user'], expectedCache);
@@ -96,8 +97,8 @@ describe('type: user', () => {
             const result = cache.getCache();
             assert.equal(
                 result.user ? Object.keys(result.user).length : 0,
-                3,
-                'three users expected'
+                4,
+                'four users expected'
             );
             // confirm if result.user only includes values from expectedCache
             assert.deepEqual(
@@ -130,7 +131,11 @@ describe('type: user', () => {
         });
         it('Should not deploy user with Marketing Cloud role', async () => {
             // WHEN
-            const expectedCache = ['testExisting_user', 'testExisting_user_inactive'];
+            const expectedCache = [
+                'testExisting_user',
+                'testExisting_user_inactive',
+                '45372cbb-06e0-438e-88d8-008981f7a18b',
+            ];
             await handler.deploy('testInstance/_ParentBU_', ['user'], ['testBlocked_user']);
             // THEN
             assert.equal(process.exitCode, 1, 'Deployment should have thrown an error');
@@ -139,8 +144,8 @@ describe('type: user', () => {
             const result = cache.getCache();
             assert.equal(
                 result.user ? Object.keys(result.user).length : 0,
-                2,
-                'two users expected'
+                3,
+                'three users expected'
             );
             // confirm if result.user only includes values from expectedCache
             assert.deepEqual(
