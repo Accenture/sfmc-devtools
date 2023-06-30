@@ -186,11 +186,17 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#csvToArray">csvToArray(csv)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
 <dd><p>helper to convert CSVs into an array. if only one value was given, it&#39;s also returned as an array</p>
 </dd>
+<dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>boolean</code></dt>
+<dd><p>helper for <a href="#Automation.postRetrieveTasks">postRetrieveTasks</a> and <a href="#Automation.execute">execute</a></p>
+</dd>
+<dt><a href="#Automation.">Automation.(metadata)</a></dt>
+<dd><p>helper for <a href="#Automation.preDeployTasks">preDeployTasks</a> and <a href="#Automation.execute">execute</a></p>
+</dd>
 <dt><a href="#Automation.">Automation.(metadataMap, key)</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
 <dt><a href="#Automation.">Automation.(metadataMap, originalMetadataMap, key)</a></dt>
-<dd><p>helper for <a href="postDeployTasks">postDeployTasks</a></p>
+<dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
 <dt><a href="#getUserName">getUserName(userList, item, fieldname)</a> ⇒ <code>string</code></dt>
 <dd></dd>
@@ -1250,6 +1256,7 @@ Automation MetadataType
     * [.retrieveForCache()](#Automation.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Automation.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.AutomationItemObj&gt;</code>
     * [.postRetrieveTasks(metadata)](#Automation.postRetrieveTasks) ⇒ <code>TYPE.AutomationItem</code> \| <code>void</code>
+    * [.execute(keyArr)](#Automation.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.deploy(metadata, targetBU, retrieveDir)](#Automation.deploy) ⇒ <code>Promise.&lt;TYPE.AutomationMap&gt;</code>
     * [.create(metadata)](#Automation.create) ⇒ <code>Promise</code>
     * [.update(metadata, metadataBefore)](#Automation.update) ⇒ <code>Promise</code>
@@ -1319,6 +1326,18 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.AutomationItem</code> | a single automation |
+
+<a name="Automation.execute"></a>
+
+### Automation.execute(keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
+a function to start query execution via API
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - Returns true if all items were executed successfully, otherwise false  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Automation.deploy"></a>
 
@@ -8222,6 +8241,29 @@ helper to convert CSVs into an array. if only one value was given, it's also ret
 
 <a name="Automation."></a>
 
+## Automation.(metadata) ⇒ <code>boolean</code>
+helper for [postRetrieveTasks](#Automation.postRetrieveTasks) and [execute](#Automation.execute)
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - true if the automation schedule is valid  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.AutomationItem</code> | a single automation |
+
+<a name="Automation."></a>
+
+## Automation.(metadata)
+helper for [preDeployTasks](#Automation.preDeployTasks) and [execute](#Automation.execute)
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.AutomationItem</code> | metadata mapped by their keyField |
+
+<a name="Automation."></a>
+
 ## Automation.(metadataMap, key) ⇒ <code>Promise.&lt;void&gt;</code>
 helper for [postDeployTasks](#Automation.postDeployTasks)
 
@@ -8236,7 +8278,7 @@ helper for [postDeployTasks](#Automation.postDeployTasks)
 <a name="Automation."></a>
 
 ## Automation.(metadataMap, originalMetadataMap, key)
-helper for [postDeployTasks](postDeployTasks)
+helper for [postDeployTasks](#Automation.postDeployTasks)
 
 **Kind**: global function  
 
