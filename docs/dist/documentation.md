@@ -189,13 +189,19 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>boolean</code></dt>
 <dd><p>helper for <a href="#Automation.postRetrieveTasks">postRetrieveTasks</a> and <a href="#Automation.execute">execute</a></p>
 </dd>
+<dt><a href="#Automation.">Automation.(metadataMap, key)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
+<dd><p>helper for <a href="#Automation.execute">execute</a></p>
+</dd>
+<dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
+<dd><p>helper for <a href="#Automation.pause">pause</a></p>
+</dd>
 <dt><a href="#Automation.">Automation.(metadata)</a></dt>
 <dd><p>helper for <a href="#Automation.preDeployTasks">preDeployTasks</a> and <a href="#Automation.execute">execute</a></p>
 </dd>
 <dt><a href="#Automation.">Automation.(metadataMap, key)</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
-<dt><a href="#Automation.">Automation.(metadataMap, originalMetadataMap, key)</a></dt>
+<dt><a href="#Automation.">Automation.(metadataMap, originalMetadataMap, key)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
 <dt><a href="#getUserName">getUserName(userList, item, fieldname)</a> ⇒ <code>string</code></dt>
@@ -501,8 +507,8 @@ main class
     * [.buildDefinition(businessUnit, selectedType, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.buildDefinitionBulk(listName, type, name)](#Mcdev.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getFilesToCommit(businessUnit, selectedType, keyArr)](#Mcdev.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-    * [.execute(businessUnit, [selectedType], [keys])](#Mcdev.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._executeBU(cred, bu, [type], keyArr)](#Mcdev._executeBU) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.runMethod(methodName, businessUnit, [selectedType], [keys])](#Mcdev.runMethod) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [._runOnBU(methodName, cred, bu, [type], keyArr)](#Mcdev._runOnBU) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._retrieveKeysWithLike(selectedType, buObject)](#Mcdev._retrieveKeysWithLike) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="Mcdev.setSkipInteraction"></a>
@@ -756,9 +762,9 @@ Build a specific metadata file based on a template using a list of bu-market com
 | selectedType | <code>string</code> | supported metadata type |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
-<a name="Mcdev.execute"></a>
+<a name="Mcdev.runMethod"></a>
 
-### Mcdev.execute(businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Mcdev.runMethod(methodName, businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Start an item (query)
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -766,20 +772,22 @@ Start an item (query)
 
 | Param | Type | Description |
 | --- | --- | --- |
+| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> | what to run |
 | businessUnit | <code>string</code> | name of BU |
 | [selectedType] | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
 | [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
-<a name="Mcdev._executeBU"></a>
+<a name="Mcdev._runOnBU"></a>
 
-### Mcdev.\_executeBU(cred, bu, [type], keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
-helper for [execute](#Mcdev.execute)
+### Mcdev.\_runOnBU(methodName, cred, bu, [type], keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
+helper for [runMethod](#Mcdev.runMethod)
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all items were executed, false otherwise  
 
 | Param | Type | Description |
 | --- | --- | --- |
+| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> | what to run |
 | cred | <code>string</code> | name of Credential |
 | bu | <code>string</code> | name of BU |
 | [type] | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
@@ -788,7 +796,7 @@ helper for [execute](#Mcdev.execute)
 <a name="Mcdev._retrieveKeysWithLike"></a>
 
 ### Mcdev.\_retrieveKeysWithLike(selectedType, buObject) ⇒ <code>Array.&lt;string&gt;</code>
-helper for [_executeBU](#Mcdev._executeBU)
+helper for [_runOnBU](#Mcdev._runOnBU)
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 **Returns**: <code>Array.&lt;string&gt;</code> - keyArr  
@@ -1257,6 +1265,7 @@ Automation MetadataType
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Automation.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.AutomationItemObj&gt;</code>
     * [.postRetrieveTasks(metadata)](#Automation.postRetrieveTasks) ⇒ <code>TYPE.AutomationItem</code> \| <code>void</code>
     * [.execute(keyArr)](#Automation.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.pause(keyArr)](#Automation.pause) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.deploy(metadata, targetBU, retrieveDir)](#Automation.deploy) ⇒ <code>Promise.&lt;TYPE.AutomationMap&gt;</code>
     * [.create(metadata)](#Automation.create) ⇒ <code>Promise</code>
     * [.update(metadata, metadataBefore)](#Automation.update) ⇒ <code>Promise</code>
@@ -1330,6 +1339,18 @@ manages post retrieve steps
 <a name="Automation.execute"></a>
 
 ### Automation.execute(keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
+a function to start query execution via API
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - Returns true if all items were executed successfully, otherwise false  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Automation.pause"></a>
+
+### Automation.pause(keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
 a function to start query execution via API
 
 **Kind**: static method of [<code>Automation</code>](#Automation)  
@@ -3202,6 +3223,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.update(metadata, [metadataBefore])](#MetadataType.update) ⇒ <code>void</code>
     * [.refresh()](#MetadataType.refresh) ⇒ <code>void</code>
     * [.execute()](#MetadataType.execute) ⇒ <code>void</code>
+    * [.pause()](#MetadataType.pause) ⇒ <code>void</code>
     * [.hasChanged(cachedVersion, metadata, [fieldName])](#MetadataType.hasChanged) ⇒ <code>boolean</code>
     * [.hasChangedGeneric(cachedVersion, metadata, [fieldName], [silent])](#MetadataType.hasChangedGeneric) ⇒ <code>boolean</code>
     * [.upsert(metadataMap, deployDir)](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
@@ -3519,6 +3541,12 @@ Abstract refresh method that needs to be implemented in child metadata type
 Abstract execute method that needs to be implemented in child metadata type
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+<a name="MetadataType.pause"></a>
+
+### MetadataType.pause() ⇒ <code>void</code>
+Abstract pause method that needs to be implemented in child metadata type
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 <a name="MetadataType.hasChanged"></a>
 
 ### MetadataType.hasChanged(cachedVersion, metadata, [fieldName]) ⇒ <code>boolean</code>
@@ -3645,7 +3673,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 <a name="MetadataType.getSOAPErrorMsg"></a>
 
 ### MetadataType.getSOAPErrorMsg(ex) ⇒ <code>string</code>
-helper for [_handleSOAPErrors](_handleSOAPErrors)
+helper for [_handleSOAPErrors](#MetadataType._handleSOAPErrors)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>string</code> - error message  
@@ -8253,6 +8281,31 @@ helper for [postRetrieveTasks](#Automation.postRetrieveTasks) and [execute](#Aut
 
 <a name="Automation."></a>
 
+## Automation.(metadataMap, key) ⇒ <code>Promise.&lt;object&gt;</code>
+helper for [execute](#Automation.execute)
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;object&gt;</code> - Returns the result of the API call  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.AutomationMap</code> | map of metadata |
+| key | <code>string</code> | key of the metadata |
+
+<a name="Automation."></a>
+
+## Automation.(metadata) ⇒ <code>Promise.&lt;object&gt;</code>
+helper for [pause](#Automation.pause)
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;object&gt;</code> - schedule reponse  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.AutomationItem</code> | automation metadata |
+
+<a name="Automation."></a>
+
 ## Automation.(metadata)
 helper for [preDeployTasks](#Automation.preDeployTasks) and [execute](#Automation.execute)
 
@@ -8277,10 +8330,11 @@ helper for [postDeployTasks](#Automation.postDeployTasks)
 
 <a name="Automation."></a>
 
-## Automation.(metadataMap, originalMetadataMap, key)
+## Automation.(metadataMap, originalMetadataMap, key) ⇒ <code>Promise.&lt;object&gt;</code>
 helper for [postDeployTasks](#Automation.postDeployTasks)
 
 **Kind**: global function  
+**Returns**: <code>Promise.&lt;object&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |
