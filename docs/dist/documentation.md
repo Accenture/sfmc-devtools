@@ -3335,7 +3335,7 @@ Gets executed after deployment of metadata type
 <a name="MetadataType.postCreateTasks"></a>
 
 ### MetadataType.postCreateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
-helper for [createREST](createREST)
+helper for [createREST](#MetadataType.createREST)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 
@@ -3347,7 +3347,7 @@ helper for [createREST](createREST)
 <a name="MetadataType.postUpdateTasks"></a>
 
 ### MetadataType.postUpdateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
-helper for [updateREST](updateREST)
+helper for [updateREST](#MetadataType.updateREST)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 
@@ -3359,7 +3359,7 @@ helper for [updateREST](updateREST)
 <a name="MetadataType.postDeployTasks_legacyApi"></a>
 
 ### MetadataType.postDeployTasks\_legacyApi(metadataEntry, apiResponse) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for [createREST](createREST) when legacy API endpoints as these do not return the created item but only their new id
+helper for [createREST](#MetadataType.createREST) when legacy API endpoints as these do not return the created item but only their new id
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
@@ -3728,7 +3728,7 @@ Used to execute a query/automation etc.
 <a name="MetadataType.runDocumentOnRetrieve"></a>
 
 ### MetadataType.runDocumentOnRetrieve([singleRetrieve], metadataMap) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for [retrieveREST](retrieveREST) and [retrieveSOAP](retrieveSOAP)
+helper for [retrieveREST](#MetadataType.retrieveREST) and [retrieveSOAP](#MetadataType.retrieveSOAP)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
@@ -3858,7 +3858,7 @@ Helper for writing Metadata to disk, used for Retrieve and deploy
 <a name="MetadataType.applyTemplateValues"></a>
 
 ### MetadataType.applyTemplateValues(code, templateVariables) ⇒ <code>string</code>
-helper for [buildDefinitionForNested](buildDefinitionForNested)
+helper for [buildDefinitionForNested](#MetadataType.buildDefinitionForNested)
 searches extracted file for template variable names and applies the market values
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3872,7 +3872,7 @@ searches extracted file for template variable names and applies the market value
 <a name="MetadataType.applyTemplateNames"></a>
 
 ### MetadataType.applyTemplateNames(code, templateVariables) ⇒ <code>string</code>
-helper for [buildTemplateForNested](buildTemplateForNested)
+helper for [buildTemplateForNested](#MetadataType.buildTemplateForNested)
 searches extracted file for template variable values and applies the market variable names
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3886,7 +3886,7 @@ searches extracted file for template variable values and applies the market vari
 <a name="MetadataType.buildDefinitionForNested"></a>
 
 ### MetadataType.buildDefinitionForNested(templateDir, targetDir, metadata, variables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for [buildDefinition](buildDefinition)
+helper for [buildDefinition](#MetadataType.buildDefinition)
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3903,7 +3903,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 <a name="MetadataType.buildTemplateForNested"></a>
 
 ### MetadataType.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for [buildTemplate](buildTemplate)
+helper for [buildTemplate](#MetadataType.buildTemplate)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -5663,7 +5663,7 @@ TSD-specific refresh method that finds active TSDs and refreshes them
 <a name="TriggeredSend.getKeysForValidTSDs"></a>
 
 ### TriggeredSend.getKeysForValidTSDs(metadata) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-helper for [refresh](refresh) that extracts the keys from the TSD item map and eli
+helper for [refresh](#TriggeredSend.refresh) that extracts the keys from the TSD item map and eli
 
 **Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - keyArr  
@@ -5675,7 +5675,7 @@ helper for [refresh](refresh) that extracts the keys from the TSD item map and e
 <a name="TriggeredSend.findRefreshableItems"></a>
 
 ### TriggeredSend.findRefreshableItems([assetLoaded]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-helper for [refresh](refresh) that finds active TSDs on the server and filters it by the same rules that [retrieve](retrieve) is using to avoid refreshing TSDs with broken dependencies
+helper for [refresh](#TriggeredSend.refresh) that finds active TSDs on the server and filters it by the same rules that [retrieve](#TriggeredSend.retrieve) is using to avoid refreshing TSDs with broken dependencies
 
 **Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of TSD item map  
@@ -5687,7 +5687,7 @@ helper for [refresh](refresh) that finds active TSDs on the server and filters i
 <a name="TriggeredSend._refreshItem"></a>
 
 ### TriggeredSend.\_refreshItem(key, checkKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-helper for [refresh](refresh) that pauses, publishes and starts a triggered send
+helper for [refresh](#TriggeredSend.refresh) that pauses, publishes and starts a triggered send
 
 **Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - true if refresh was successful  
