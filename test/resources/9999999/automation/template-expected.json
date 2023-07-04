@@ -7,8 +7,7 @@
         "endDate": "2022-07-30T00:00:00",
         "icalRecur": "FREQ=DAILY;COUNT=1;INTERVAL=1",
         "startDate": "2022-07-30T00:00:00",
-        "timezoneName": "W. Europe Standard Time",
-        "typeId": 3
+        "timezoneName": "W. Europe Standard Time"
     },
     "status": "PausedSchedule",
     "steps": [
