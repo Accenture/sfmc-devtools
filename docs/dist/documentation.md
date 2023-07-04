@@ -437,7 +437,7 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 <a name="Deployer._deployBU"></a>
 
 ### Deployer.\_deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
-helper for [deploy](deploy)
+helper for [deploy](#Deployer.deploy)
 
 **Kind**: static method of [<code>Deployer</code>](#Deployer)  
 **Returns**: <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code> - ensure that BUs are worked on sequentially  
@@ -958,7 +958,7 @@ This method retrieves these and saves them alongside the metadata json
 <a name="Asset._readExtendedFileFromFS"></a>
 
 ### Asset.\_readExtendedFileFromFS(metadata, subType, deployDir, [pathOnly]) ⇒ <code>Promise.&lt;string&gt;</code>
-helper for [preDeployTasks](preDeployTasks)
+helper for [preDeployTasks](#Asset.preDeployTasks)
 Some metadata types store their actual content as a separate file, e.g. images
 This method reads these from the local FS stores them in the metadata object allowing to deploy it
 
@@ -1104,7 +1104,7 @@ Asset-specific script that retrieves the folder ID from cache and updates the gi
 <a name="Asset._mergeCode"></a>
 
 ### Asset.\_mergeCode(metadata, deployDir, subType, [templateName], [fileListOnly]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code>
-helper for [preDeployTasks](preDeployTasks) that loads extracted code content back into JSON
+helper for [preDeployTasks](#Asset.preDeployTasks) that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
 **Returns**: <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code> - fileList for templating (disregarded during deployment)  
@@ -1120,7 +1120,7 @@ helper for [preDeployTasks](preDeployTasks) that loads extracted code content ba
 <a name="Asset._mergeCode_slots"></a>
 
 ### Asset.\_mergeCode\_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName], [fileListOnly]) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for [preDeployTasks](preDeployTasks) that loads extracted code content back into JSON
+helper for [preDeployTasks](#Asset.preDeployTasks) that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
@@ -1140,7 +1140,7 @@ helper for [preDeployTasks](preDeployTasks) that loads extracted code content ba
 <a name="Asset._extractCode"></a>
 
 ### Asset.\_extractCode(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
-helper for [postRetrieveTasks](postRetrieveTasks) that finds code content in JSON and extracts it
+helper for [postRetrieveTasks](#Asset.postRetrieveTasks) that finds code content in JSON and extracts it
 to allow saving that separately and formatted
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -3065,7 +3065,7 @@ Helper for writing Metadata to disk, used for Retrieve and deploy
 <a name="Journey._postRetrieveTasksBulk"></a>
 
 ### Journey.\_postRetrieveTasksBulk(metadataMap)
-helper for Journey's [saveResults](saveResults). Gets executed after retreive of metadata type and
+helper for Journey's [saveResults](#Journey.saveResults). Gets executed after retreive of metadata type and
 
 **Kind**: static method of [<code>Journey</code>](#Journey)  
 
@@ -4243,7 +4243,7 @@ manages post retrieve steps
 <a name="MobileKeyword.prepExtractedCode"></a>
 
 ### MobileKeyword.prepExtractedCode(metadataScript) ⇒ <code>Object</code>
-helper for [parseMetadata](parseMetadata) and [_buildForNested](_buildForNested)
+helper for [postRetrieveTasks](#MobileKeyword.postRetrieveTasks) and [_buildForNested](#MobileKeyword._buildForNested)
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
 **Returns**: <code>Object</code> - returns found extension and file content  
@@ -4293,7 +4293,7 @@ scripts are saved as 1 json and 1 ssjs file. both files need to be run through t
 <a name="MobileKeyword._buildForNested"></a>
 
 ### MobileKeyword.\_buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for [buildTemplateForNested](buildTemplateForNested) / [buildDefinitionForNested](buildDefinitionForNested)
+helper for [buildTemplateForNested](#MobileKeyword.buildTemplateForNested) / [buildDefinitionForNested](#MobileKeyword.buildDefinitionForNested)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
@@ -4324,7 +4324,7 @@ prepares an event definition for deployment
 <a name="MobileKeyword.postCreateTasks"></a>
 
 ### MobileKeyword.postCreateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
-helper for [createREST](createREST)
+helper for [createREST](#MetadataType.createREST)
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
 
@@ -4336,7 +4336,7 @@ helper for [createREST](createREST)
 <a name="MobileKeyword.postUpdateTasks"></a>
 
 ### MobileKeyword.postUpdateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
-helper for [updateREST](updateREST)
+helper for [updateREST](#MetadataType.updateREST)
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
 
@@ -4348,7 +4348,7 @@ helper for [updateREST](updateREST)
 <a name="MobileKeyword._mergeCode"></a>
 
 ### MobileKeyword.\_mergeCode(metadata, deployDir, [templateName]) ⇒ <code>Promise.&lt;string&gt;</code>
-helper for [preDeployTasks](preDeployTasks) that loads extracted code content back into JSON
+helper for [preDeployTasks](#MobileKeyword.preDeployTasks) that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
 **Returns**: <code>Promise.&lt;string&gt;</code> - content for metadata.script  
@@ -4476,7 +4476,7 @@ Creates a single item
 <a name="MobileMessage._mergeCode"></a>
 
 ### MobileMessage.\_mergeCode(metadata, deployDir, [templateName]) ⇒ <code>Promise.&lt;string&gt;</code>
-helper for [preDeployTasks](preDeployTasks) that loads extracted code content back into JSON
+helper for [preDeployTasks](#MobileMessage.preDeployTasks) that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
 **Returns**: <code>Promise.&lt;string&gt;</code> - code  
@@ -4490,7 +4490,7 @@ helper for [preDeployTasks](preDeployTasks) that loads extracted code content ba
 <a name="MobileMessage.prepExtractedCode"></a>
 
 ### MobileMessage.prepExtractedCode(code) ⇒ <code>Object</code>
-helper for [parseMetadata](parseMetadata) and [_buildForNested](_buildForNested)
+helper for [postRetrieveTasks](#MobileMessage.postRetrieveTasks) and [_buildForNested](#MobileMessage._buildForNested)
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
 **Returns**: <code>Object</code> - returns found extension and file content  
@@ -4540,7 +4540,7 @@ prepares an event definition for deployment
 <a name="MobileMessage.postCreateTasks"></a>
 
 ### MobileMessage.postCreateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
-helper for [createREST](createREST)
+helper for [createREST](#MetadataType.createREST)
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
 
@@ -4552,7 +4552,7 @@ helper for [createREST](createREST)
 <a name="MobileMessage.postUpdateTasks"></a>
 
 ### MobileMessage.postUpdateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
-helper for [updateREST](updateREST)
+helper for [updateREST](#MetadataType.updateREST)
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
 
@@ -4602,7 +4602,7 @@ scripts are saved as 1 json and 1 ssjs file. both files need to be run through t
 <a name="MobileMessage._buildForNested"></a>
 
 ### MobileMessage.\_buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for [buildTemplateForNested](buildTemplateForNested) / [buildDefinitionForNested](buildDefinitionForNested)
+helper for [buildTemplateForNested](#MobileMessage.buildTemplateForNested) / [buildDefinitionForNested](#MobileMessage.buildDefinitionForNested)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
@@ -4756,7 +4756,7 @@ prepares a Query for deployment
 <a name="Query.applyTemplateValues"></a>
 
 ### Query.applyTemplateValues(code, templateVariables) ⇒ <code>string</code>
-helper for [buildDefinitionForNested](buildDefinitionForNested)
+helper for [buildDefinitionForNested](#Query.buildDefinitionForNested)
 searches extracted SQL file for template variables and applies the market values
 
 **Kind**: static method of [<code>Query</code>](#Query)  
@@ -5057,7 +5057,7 @@ Creates a single Script
 <a name="Script._mergeCode"></a>
 
 ### Script.\_mergeCode(metadata, deployDir, [templateName]) ⇒ <code>Promise.&lt;string&gt;</code>
-helper for [preDeployTasks](preDeployTasks) that loads extracted code content back into JSON
+helper for [preDeployTasks](#Script.preDeployTasks) that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>Script</code>](#Script)  
 **Returns**: <code>Promise.&lt;string&gt;</code> - content for metadata.script  
@@ -5122,7 +5122,7 @@ scripts are saved as 1 json and 1 ssjs file. both files need to be run through t
 <a name="Script._buildForNested"></a>
 
 ### Script.\_buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for [buildTemplateForNested](buildTemplateForNested) / [buildDefinitionForNested](buildDefinitionForNested)
+helper for [buildTemplateForNested](#Script.buildTemplateForNested) / [buildDefinitionForNested](#Script.buildDefinitionForNested)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Script</code>](#Script)  
@@ -5152,7 +5152,7 @@ Splits the script metadata into two parts and parses in a standard manner
 <a name="Script.prepExtractedCode"></a>
 
 ### Script.prepExtractedCode(metadataScript, metadataName) ⇒ <code>Object</code>
-helper for [parseMetadata](parseMetadata) and [_buildForNested](_buildForNested)
+helper for [parseMetadata](#Script.parseMetadata) and [_buildForNested](#Script._buildForNested)
 
 **Kind**: static method of [<code>Script</code>](#Script)  
 **Returns**: <code>Object</code> - returns found extension and file content  
@@ -5436,7 +5436,7 @@ prepares for deployment
 <a name="TransactionalSMS._mergeCode"></a>
 
 ### TransactionalSMS.\_mergeCode(metadata, deployDir, [templateName]) ⇒ <code>Promise.&lt;string&gt;</code>
-helper for [preDeployTasks](preDeployTasks) that loads extracted code content back into JSON
+helper for [preDeployTasks](#TransactionalSMS.preDeployTasks) that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
 **Returns**: <code>Promise.&lt;string&gt;</code> - content for metadata.script  
@@ -5462,7 +5462,7 @@ manages post retrieve steps
 <a name="TransactionalSMS.prepExtractedCode"></a>
 
 ### TransactionalSMS.prepExtractedCode(metadataScript) ⇒ <code>Object</code>
-helper for [parseMetadata](parseMetadata) and [_buildForNested](_buildForNested)
+helper for [postRetrieveTasks](#TransactionalSMS.postRetrieveTasks) and [_buildForNested](#TransactionalSMS._buildForNested)
 
 **Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
 **Returns**: <code>Object</code> - returns found extension and file content  
@@ -5474,7 +5474,7 @@ helper for [parseMetadata](parseMetadata) and [_buildForNested](_buildForNested)
 <a name="TransactionalSMS.buildDefinitionForNested"></a>
 
 ### TransactionalSMS.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for [buildDefinition](#MetadataType.buildDefinition)
+helper for [TransactionalMessage.buildDefinition](TransactionalMessage.buildDefinition)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
@@ -5491,7 +5491,7 @@ handles extracted code if any are found for complex types
 <a name="TransactionalSMS.buildTemplateForNested"></a>
 
 ### TransactionalSMS.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for [buildTemplate](#MetadataType.buildTemplate)
+helper for [TransactionalMessage.buildTemplate](TransactionalMessage.buildTemplate)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
@@ -5512,7 +5512,7 @@ scripts are saved as 1 json and 1 ssjs file. both files need to be run through t
 <a name="TransactionalSMS._buildForNested"></a>
 
 ### TransactionalSMS.\_buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for [buildTemplateForNested](buildTemplateForNested) / [buildDefinitionForNested](buildDefinitionForNested)
+helper for [buildTemplateForNested](#TransactionalSMS.buildTemplateForNested) / [buildDefinitionForNested](#TransactionalSMS.buildDefinitionForNested)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
@@ -5907,7 +5907,7 @@ Retrieve metadata of specified types into local file system and Retriever.metada
 <a name="Retriever+_getTypeDependencies"></a>
 
 ### retriever.\_getTypeDependencies(metadataTypes) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
-helper for [retrieve](retrieve) to get all dependencies of the given types
+helper for [Retriever.retrieve](Retriever.retrieve) to get all dependencies of the given types
 
 **Kind**: instance method of [<code>Retriever</code>](#Retriever)  
 **Returns**: <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> - unique list dependent metadata types  
