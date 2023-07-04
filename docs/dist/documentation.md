@@ -186,6 +186,15 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#csvToArray">csvToArray(csv)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
 <dd><p>helper to convert CSVs into an array. if only one value was given, it&#39;s also returned as an array</p>
 </dd>
+<dt><a href="#Mcdev.">Mcdev.(methodName, businessUnit, [selectedType], [keys])</a> ⇒ <code>Promise.&lt;boolean&gt;</code></dt>
+<dd><p>run a method across BUs</p>
+</dd>
+<dt><a href="#Mcdev.">Mcdev.(methodName, cred, bu, [type], keyArr)</a> ⇒ <code>Promise.&lt;boolean&gt;</code></dt>
+<dd><p>helper for <a href="Mcdev.#runMethod">Mcdev.#runMethod</a></p>
+</dd>
+<dt><a href="#Mcdev.">Mcdev.(selectedType, buObject)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
+<dd><p>helper for <a href="Mcdev.#runOnBU">Mcdev.#runOnBU</a></p>
+</dd>
 <dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>boolean</code></dt>
 <dd><p>helper for <a href="#Automation.postRetrieveTasks">postRetrieveTasks</a> and <a href="#Automation.execute">execute</a></p>
 </dd>
@@ -507,9 +516,8 @@ main class
     * [.buildDefinition(businessUnit, selectedType, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.buildDefinitionBulk(listName, type, name)](#Mcdev.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getFilesToCommit(businessUnit, selectedType, keyArr)](#Mcdev.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-    * [.runMethod(methodName, businessUnit, [selectedType], [keys])](#Mcdev.runMethod) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._runOnBU(methodName, cred, bu, [type], keyArr)](#Mcdev._runOnBU) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._retrieveKeysWithLike(selectedType, buObject)](#Mcdev._retrieveKeysWithLike) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.execute(businessUnit, [selectedType], [keys])](#Mcdev.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.pause(businessUnit, [selectedType], [keys])](#Mcdev.pause) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="Mcdev.setSkipInteraction"></a>
 
@@ -762,49 +770,33 @@ Build a specific metadata file based on a template using a list of bu-market com
 | selectedType | <code>string</code> | supported metadata type |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
-<a name="Mcdev.runMethod"></a>
+<a name="Mcdev.execute"></a>
 
-### Mcdev.runMethod(methodName, businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;boolean&gt;</code>
-Start an item (query)
+### Mcdev.execute(businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Start/execute an item
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all started successfully, false if not  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> | what to run |
 | businessUnit | <code>string</code> | name of BU |
 | [selectedType] | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
 | [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
-<a name="Mcdev._runOnBU"></a>
+<a name="Mcdev.pause"></a>
 
-### Mcdev.\_runOnBU(methodName, cred, bu, [type], keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
-helper for [runMethod](#Mcdev.runMethod)
+### Mcdev.pause(businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+pause an item
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all items were executed, false otherwise  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all started successfully, false if not  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> | what to run |
-| cred | <code>string</code> | name of Credential |
-| bu | <code>string</code> | name of BU |
-| [type] | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
-| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
-
-<a name="Mcdev._retrieveKeysWithLike"></a>
-
-### Mcdev.\_retrieveKeysWithLike(selectedType, buObject) ⇒ <code>Array.&lt;string&gt;</code>
-helper for [_runOnBU](#Mcdev._runOnBU)
-
-**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Array.&lt;string&gt;</code> - keyArr  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| selectedType | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
-| buObject | <code>TYPE.BuObject</code> | properties for auth |
+| businessUnit | <code>string</code> | name of BU |
+| [selectedType] | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
+| [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Asset"></a>
 
@@ -8266,6 +8258,50 @@ helper to convert CSVs into an array. if only one value was given, it's also ret
 | Param | Type | Description |
 | --- | --- | --- |
 | csv | <code>string</code> | potentially comma-separated value or null |
+
+<a name="Mcdev."></a>
+
+## Mcdev.(methodName, businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+run a method across BUs
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all started successfully, false if not  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> | what to run |
+| businessUnit | <code>string</code> | name of BU |
+| [selectedType] | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
+| [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Mcdev."></a>
+
+## Mcdev.(methodName, cred, bu, [type], keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
+helper for [Mcdev.#runMethod](Mcdev.#runMethod)
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all items were executed, false otherwise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> | what to run |
+| cred | <code>string</code> | name of Credential |
+| bu | <code>string</code> | name of BU |
+| [type] | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Mcdev."></a>
+
+## Mcdev.(selectedType, buObject) ⇒ <code>Array.&lt;string&gt;</code>
+helper for [Mcdev.#runOnBU](Mcdev.#runOnBU)
+
+**Kind**: global function  
+**Returns**: <code>Array.&lt;string&gt;</code> - keyArr  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| selectedType | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| buObject | <code>TYPE.BuObject</code> | properties for auth |
 
 <a name="Automation."></a>
 
