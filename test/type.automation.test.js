@@ -97,13 +97,49 @@ describe('type: automation', () => {
                 )
             );
 
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                16,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should update & start an automation with --execute option', async () => {
+            // WHEN
+            handler.setOptions({ execute: true });
+            await handler.deploy(
+                'testInstance/testBU',
+                ['automation'],
+                ['testExisting_automation']
+            );
+            // THEN
+            assert.equal(
+                process.exitCode,
+                false,
+                'deploy with --execute should not have thrown an error'
+            );
+
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.automation ? Object.keys(result.automation).length : 0,
+                1,
+                'one automation expected'
+            );
+
+            // update
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_automation', 'automation'),
+                await testUtils.getExpectedJson('9999999', 'automation', 'update'),
+                'returned metadata was not equal expected for update'
+            );
             // check if MD file was created and equals expectations
-            expect(file(testUtils.getActualDoc('testNew_automation', 'automation'))).to.equal(
+            expect(file(testUtils.getActualDoc('testExisting_automation', 'automation'))).to.equal(
                 file(
                     testUtils.getExpectedFile(
                         '9999999',
                         'automation',
-                        'create-testNew_automation',
+                        'update-testExisting_automation',
                         'md'
                     )
                 )
@@ -111,7 +147,7 @@ describe('type: automation', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                16,
+                19,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -253,6 +289,32 @@ describe('type: automation', () => {
                 'retrieve/testInstance/testBU/automation/testExisting_automation.automation-doc.md',
                 'wrong MD path'
             );
+            return;
+        });
+    });
+    describe('Execute ================', () => {
+        it('Should start an automation by key', async () => {
+            const execute = await handler.execute('testInstance/testBU', 'automation', [
+                'testExisting_automation',
+            ]);
+            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(execute, true, 'automation was supposed to be executed');
+            return;
+        });
+        it('Should start an automation selected via --like', async () => {
+            handler.setOptions({ like: { key: 'testExist%automation' } });
+            const execute = await handler.execute('testInstance/testBU', 'automation');
+            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(execute, true, 'automation was supposed to be executed');
+            return;
+        });
+        it('Should not start executing an automation because key and --like was specified', async () => {
+            handler.setOptions({ like: { key: 'testExisting%' } });
+            const execute = await handler.execute('testInstance/testBU', 'automation', [
+                'testExisting_automation',
+            ]);
+            assert.equal(process.exitCode, true, 'execute should not have thrown an error');
+            assert.equal(execute, false, 'automation was not supposed to be executed');
             return;
         });
     });
