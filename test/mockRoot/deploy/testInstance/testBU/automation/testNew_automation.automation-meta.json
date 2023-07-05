@@ -4,13 +4,12 @@
     "name": "testNew_automation",
     "r__folder_Path": "my automations",
     "schedule": {
-        "endDate": "2022-07-30T00:00:00",
-        "icalRecur": "FREQ=DAILY;COUNT=1;INTERVAL=1",
-        "startDate": "2022-07-30T00:00:00",
-        "timezoneName": "W. Europe Standard Time",
-        "typeId": 3
+        "startDate": "2020-05-14T02:30:32.11",
+        "endDate": "2079-06-06T21:00:00",
+        "icalRecur": "FREQ=MINUTELY;UNTIL=20790607T050000;INTERVAL=5",
+        "timezoneName": "W. Europe Standard Time"
     },
-    "status": "PausedSchedule",
+    "status": "Scheduled",
     "steps": [
         {
             "activities": [

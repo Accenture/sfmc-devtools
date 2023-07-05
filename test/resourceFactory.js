@@ -10,13 +10,14 @@ const attributeParser = new XMLParser({ ignoreAttributes: false });
  * @param {string} mcdevAction SOAP action
  * @param {string} type metadata Type
  * @param {string} mid of Business Unit
- * @param {object} filter likely for customer key
+ * @param {object|string} filter likely for customer key
  * @returns {string} relevant metadata stringified
  */
 exports.loadSOAPRecords = async (mcdevAction, type, mid, filter) => {
     type = type[0].toLowerCase() + type.slice(1);
     const testPath = path.join('test', 'resources', mid.toString(), type, mcdevAction);
-    const filterPath = this.filterToPath(filter);
+    const filterPath =
+        typeof filter === 'string' && filter ? '-' + filter : this.filterToPath(filter);
     if (await fs.pathExists(testPath + filterPath + '-response.xml')) {
         return fs.readFile(testPath + filterPath + '-response.xml', {
             encoding: 'utf8',
@@ -42,8 +43,8 @@ exports.loadSOAPRecords = async (mcdevAction, type, mid, filter) => {
     /* eslint-disable no-console */
     console.log(
         `${color.bgRed}${color.fgBlack}test-error${color.reset}: Please create file ${
-            testPath + filterPath + '-response.xml'
-        } or ${testPath + '-response.xml'}`
+            filterPath ? testPath + filterPath + '-response.xml or ' : ''
+        }${testPath + '-response.xml'}`
     );
     /* eslint-enable no-console */
 
@@ -138,8 +139,20 @@ exports.handleSOAPRequest = async (config) => {
 
             break;
         }
+        case 'Schedule': {
+            responseXML = await this.loadSOAPRecords(
+                config.headers.SOAPAction.toLocaleLowerCase(),
+                fullObj.Envelope.Body.ScheduleRequestMsg.Interactions.Interaction['@_xsi:type'],
+                jObj.Envelope.Header.fueloauth,
+                fullObj.Envelope.Body.ScheduleRequestMsg.Interactions.Interaction.ObjectID
+            );
+
+            break;
+        }
         default: {
-            throw new Error('This SOAP Action is not supported by test handler');
+            throw new Error(
+                `The SOAP Action ${config.headers.SOAPAction} is not supported by test handler`
+            );
         }
     }
 

@@ -3,13 +3,14 @@
     "key": "testNew_automation",
     "name": "testNew_automation",
     "r__folder_Path": "my automations",
-    "schedule": {
-        "endDate": "2022-07-30T00:00:00",
-        "icalRecur": "FREQ=DAILY;COUNT=1;INTERVAL=1",
-        "startDate": "2022-07-30T00:00:00",
+    "type": "scheduled",
+    "status": "PausedSchedule",
+        "schedule": {
+        "endDate": "2079-06-06T21:00:00-06:00",
+        "icalRecur": "FREQ=MINUTELY;UNTIL=20790607T050000;INTERVAL=5",
+        "startDate": "2020-05-13T18:30:32.11-06:00",
         "timezoneName": "W. Europe Standard Time"
     },
-    "status": "PausedSchedule",
     "steps": [
         {
             "activities": [
@@ -40,6 +41,5 @@
             ],
             "name": ""
         }
-    ],
-    "type": "scheduled"
+    ]
 }
