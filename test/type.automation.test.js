@@ -97,6 +97,18 @@ describe('type: automation', () => {
                 )
             );
 
+            // check if MD file was created and equals expectations
+            expect(file(testUtils.getActualDoc('testNew_automation', 'automation'))).to.equal(
+                file(
+                    testUtils.getExpectedFile(
+                        '9999999',
+                        'automation',
+                        'create-testNew_automation',
+                        'md'
+                    )
+                )
+            );
+
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 16,
