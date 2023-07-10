@@ -31,7 +31,7 @@
                     "r__type": "importFile"
                 },
                 {
-                    "name": "testExisting_query",
+                    "name": "testExisting_query1",
                     "r__type": "query"
                 },
                 {

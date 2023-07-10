@@ -27,7 +27,7 @@ describe('type: query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                3,
+                2,
                 'only two queries expected'
             );
             // normal test
@@ -87,18 +87,14 @@ describe('type: query', () => {
         });
         it('Should create & upsert a query', async () => {
             // WHEN
-            await handler.deploy(
-                'testInstance/testBU',
-                ['query'],
-                ['testNew_query', 'testExisting_query']
-            );
+            await handler.deploy('testInstance/testBU', ['query']);
             // THEN
             assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                4,
+                3,
                 'three queries expected'
             );
             // confirm created item
@@ -133,42 +129,33 @@ describe('type: query', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
-        it('Should create & upsert a query', async () => {
+        it('Should update the key and re-deploy', async () => {
             // WHEN
-            await handler.deploy('testInstance/testBU', ['query']);
+            await handler.fixKeys('testInstance/testBU', ['query']);
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                4,
-                'three queries expected'
+                2,
+                'two queries expected'
             );
-            // confirm created item
-            // assert.deepEqual(
-            //     await testUtils.getActualJson('testNew_query', 'query'),
-            //     await testUtils.getExpectedJson('9999999', 'query', 'post'),
-            //     'returned metadata was not equal expected for insert query'
-            // );
-            // expect(file(testUtils.getActualFile('testNew_query', 'query', 'sql'))).to.equal(
-            //     file(testUtils.getExpectedFile('9999999', 'query', 'post', 'sql'))
-            // );
-            // // confirm updated item
-            // assert.deepEqual(
-            //     await testUtils.getActualJson('testExisting_query', 'query'),
-            //     await testUtils.getExpectedJson('9999999', 'query', 'patch'),
-            //     'returned metadata was not equal expected for insert query'
-            // );
-            // expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
-            //     file(testUtils.getExpectedFile('9999999', 'query', 'patch', 'sql'))
-            // );
-            // // check number of API calls
-            // assert.equal(
-            //     testUtils.getAPIHistoryLength(),
-            //     8,
-            //     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            // );
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_query', 'query'),
+                await testUtils.getExpectedJson('9999999', 'query', 'patch1'),
+                'returned metadata was not equal expected for insert query'
+            );
+            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
+                file(testUtils.getExpectedFile('9999999', 'query', 'patch1', 'sql'))
+            );
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                27,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
             return;
         });
         it('Should change the key during update with --changeKeyValue');
@@ -179,7 +166,7 @@ describe('type: query', () => {
             const result = await handler.retrieveAsTemplate(
                 'testInstance/testBU',
                 'query',
-                ['testExisting_query'],
+                ['testExisting_query1'],
                 'testSourceMarket'
             );
             // WHEN

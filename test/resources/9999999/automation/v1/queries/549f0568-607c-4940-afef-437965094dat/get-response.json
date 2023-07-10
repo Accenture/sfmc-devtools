@@ -1,6 +1,6 @@
 {
     "queryDefinitionId": "549f0568-607c-4940-afef-437965094dat",
-    "name": "testExisting_query",
+    "name": "testExisting_query1",
     "key": "testExisting_query",
     "description": "bla bla",
     "queryText": "SELECT\n    SubscriberKey as testField\nFROM\n    _Subscribers\nWHERE\n    country IN ('test')\n",
