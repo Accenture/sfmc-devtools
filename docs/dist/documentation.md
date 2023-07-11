@@ -17,6 +17,9 @@ Source and target business units are also compared before the deployment to appl
 <dt><a href="#AttributeGroup">AttributeGroup</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>AttributeGroup MetadataType</p>
 </dd>
+<dt><a href="#AttributeRelationship">AttributeRelationship</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>AttributeRelationship MetadataType</p>
+</dd>
 <dt><a href="#AttributeSet">AttributeSet</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>AttributeSet MetadataType</p>
 </dd>
@@ -1280,6 +1283,62 @@ prepares for deployment
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="AttributeRelationship"></a>
+
+## AttributeRelationship ⇐ [<code>MetadataType</code>](#MetadataType)
+AttributeRelationship MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [AttributeRelationship](#AttributeRelationship) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [relationshipID], attributeSetId)](#AttributeRelationship.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache(_, __, attributeSetId, relationshipID)](#AttributeRelationship.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.postRetrieveTasks(metadata)](#AttributeRelationship.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+
+<a name="AttributeRelationship.retrieve"></a>
+
+### AttributeRelationship.retrieve(retrieveDir, [_], [__], [relationshipID], attributeSetId) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of schema attribute groups.
+
+**Kind**: static method of [<code>AttributeRelationship</code>](#AttributeRelationship)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [_] | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| [relationshipID] | <code>string</code> | customer key of single item to retrieve |
+| attributeSetId | <code>string</code> | CUSTOM: Id of the attribute set for which these relationships are defined |
+
+<a name="AttributeRelationship.retrieveForCache"></a>
+
+### AttributeRelationship.retrieveForCache(_, __, attributeSetId, relationshipID) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of schema attribute groups for caching.
+
+**Kind**: static method of [<code>AttributeRelationship</code>](#AttributeRelationship)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| _ | <code>void</code> | unused parameter |
+| __ | <code>void</code> | unused parameter |
+| attributeSetId | <code>string</code> | CUSTOM: Id of the attribute set for which these relationships are defined |
+| relationshipID | <code>string</code> | CUSTOM: customer key of single item to retrieve |
+
+<a name="AttributeRelationship.postRetrieveTasks"></a>
+
+### AttributeRelationship.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>AttributeRelationship</code>](#AttributeRelationship)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata |
 
 <a name="AttributeSet"></a>
 
