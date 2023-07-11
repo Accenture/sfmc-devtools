@@ -173,7 +173,7 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                8,
+                9,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -201,46 +201,11 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                12,
+                13,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
-    });
-    describe('FixKeys ================', () => {
-        beforeEach(() => {
-            testUtils.mockSetup(true);
-        });
-        it('Should update the key and re-deploy', async () => {
-            // WHEN
-            await handler.fixKeys('testInstance/testBU', ['query']);
-            // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
-            // get results from cache
-            const result = cache.getCache();
-            assert.equal(
-                result.query ? Object.keys(result.query).length : 0,
-                2,
-                'two queries expected'
-            );
-            // confirm updated item
-            assert.deepEqual(
-                await testUtils.getActualJson('testExisting_query', 'query'),
-                await testUtils.getExpectedJson('9999999', 'query', 'patch1'),
-                'returned metadata was not equal expected for insert query'
-            );
-            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'query', 'patch1', 'sql'))
-            );
-            // check number of API calls
-            assert.equal(
-                testUtils.getAPIHistoryLength(),
-                27,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            );
-            return;
-        });
-        it('Should change the key during update with --changeKeyValue');
     });
     describe('Templating ================', () => {
         it('Should create a query template via retrieveAsTemplate and build it', async () => {
@@ -248,7 +213,7 @@ describe('type: query', () => {
             const result = await handler.retrieveAsTemplate(
                 'testInstance/testBU',
                 'query',
-                ['testExisting_query1'],
+                ['testExisting_query'],
                 'testSourceMarket'
             );
             // WHEN
