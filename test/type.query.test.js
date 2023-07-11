@@ -53,7 +53,7 @@ describe('type: query', () => {
             );
             return;
         });
-        it('Should retrieve one specific query', async () => {
+        it('Should retrieve one specific query by key', async () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['query'], ['testExisting_query']);
             // THEN
@@ -76,6 +76,61 @@ describe('type: query', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 7,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should retrieve one specific query via --like', async () => {
+            // WHEN
+            handler.setOptions({ like: { key: '%Existing_query' } });
+            await handler.retrieve('testInstance/testBU', ['query']);
+            // THEN
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.query ? Object.keys(result.query).length : 0,
+                2,
+                'two queries in cache expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_query', 'query'),
+                await testUtils.getExpectedJson('9999999', 'query', 'get'),
+                'returned metadata was not equal expected'
+            );
+            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
+                file(testUtils.getExpectedFile('9999999', 'query', 'get', 'sql'))
+            );
+            expect(file(testUtils.getActualFile('testExisting_query2', 'query', 'sql'))).to.not
+                .exist;
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                6,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should not retrieve any query via --like and key due to a mismatching filter', async () => {
+            // WHEN
+            handler.setOptions({ like: { key: 'NotExisting_query' } });
+            await handler.retrieve('testInstance/testBU', ['query']);
+            // THEN
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.query ? Object.keys(result.query).length : 0,
+                2,
+                'two queries in cache expected'
+            );
+
+            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.not
+                .exist;
+            expect(file(testUtils.getActualFile('testExisting_query2', 'query', 'sql'))).to.not
+                .exist;
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                6,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -124,6 +179,33 @@ describe('type: query', () => {
             return;
         });
         it('Should change the key during update with --changeKeyValue');
+        it('Should deploy and execute with --execute', async () => {
+            handler.setOptions({ execute: true });
+            // WHEN
+            await handler.deploy('testInstance/testBU', ['query']);
+            // THEN
+            assert.equal(
+                process.exitCode,
+                false,
+                'deploy with --execute should not have thrown an error'
+            );
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_query', 'query'),
+                await testUtils.getExpectedJson('9999999', 'query', 'patch'),
+                'returned metadata was not equal expected for insert query'
+            );
+            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
+                file(testUtils.getExpectedFile('9999999', 'query', 'patch', 'sql'))
+            );
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                12,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
     describe('FixKeys ================', () => {
         beforeEach(() => {
@@ -314,14 +396,28 @@ describe('type: query', () => {
         });
     });
     describe('Execute ================', () => {
-        it('Should start executing a query', async () => {
-            const execute = await handler.execute(
-                'testInstance/testBU',
-                ['query'],
-                ['testExisting_query']
-            );
+        it('Should start a query by key', async () => {
+            const execute = await handler.execute('testInstance/testBU', 'query', [
+                'testExisting_query',
+            ]);
             assert.equal(process.exitCode, false, 'execute should not have thrown an error');
             assert.equal(execute, true, 'query was supposed to be executed');
+            return;
+        });
+        it('Should start a query selected via --like', async () => {
+            handler.setOptions({ like: { key: 'testExist%query' } });
+            const execute = await handler.execute('testInstance/testBU', 'query');
+            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(execute, true, 'query was supposed to be executed');
+            return;
+        });
+        it('Should not start executing a query because key and --like was specified', async () => {
+            handler.setOptions({ like: { key: 'testExisting%' } });
+            const execute = await handler.execute('testInstance/testBU', 'query', [
+                'testExisting_query',
+            ]);
+            assert.equal(process.exitCode, true, 'execute should not have thrown an error');
+            assert.equal(execute, false, 'query was not supposed to be executed');
             return;
         });
     });

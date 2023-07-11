@@ -186,11 +186,32 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#csvToArray">csvToArray(csv)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
 <dd><p>helper to convert CSVs into an array. if only one value was given, it&#39;s also returned as an array</p>
 </dd>
+<dt><a href="#Mcdev.">Mcdev.(methodName, businessUnit, [selectedType], [keys])</a> ⇒ <code>Promise.&lt;boolean&gt;</code></dt>
+<dd><p>run a method across BUs</p>
+</dd>
+<dt><a href="#Mcdev.">Mcdev.(methodName, cred, bu, [type], keyArr)</a> ⇒ <code>Promise.&lt;boolean&gt;</code></dt>
+<dd><p>helper for <a href="Mcdev.#runMethod">Mcdev.#runMethod</a></p>
+</dd>
+<dt><a href="#Mcdev.">Mcdev.(selectedType, buObject)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
+<dd><p>helper for <a href="Mcdev.#runOnBU">Mcdev.#runOnBU</a></p>
+</dd>
+<dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>boolean</code></dt>
+<dd><p>helper for <a href="#Automation.postRetrieveTasks">postRetrieveTasks</a> and <a href="#Automation.execute">execute</a></p>
+</dd>
+<dt><a href="#Automation.">Automation.(metadataMap, key)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
+<dd><p>helper for <a href="#Automation.execute">execute</a></p>
+</dd>
+<dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
+<dd><p>helper for <a href="#Automation.pause">pause</a></p>
+</dd>
+<dt><a href="#Automation.">Automation.(metadata)</a></dt>
+<dd><p>helper for <a href="#Automation.preDeployTasks">preDeployTasks</a> and <a href="#Automation.execute">execute</a></p>
+</dd>
 <dt><a href="#Automation.">Automation.(metadataMap, key)</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
-<dt><a href="#Automation.">Automation.(metadataMap, originalMetadataMap, key)</a></dt>
-<dd><p>helper for <a href="postDeployTasks">postDeployTasks</a></p>
+<dt><a href="#Automation.">Automation.(metadataMap, originalMetadataMap, key)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
+<dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
 <dt><a href="#getUserName">getUserName(userList, item, fieldname)</a> ⇒ <code>string</code></dt>
 <dd></dd>
@@ -371,7 +392,7 @@ Source and target business units are also compared before the deployment to appl
     * [new Deployer(properties, buObject)](#new_Deployer_new)
     * _instance_
         * [.metadata](#Deployer+metadata) : <code>TYPE.MultiMetadataTypeMap</code>
-        * [._deploy([typeArr], [keyArr], [fromRetrieve], [isRefresh])](#Deployer+_deploy) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
+        * [._deploy([typeArr], [keyArr], [fromRetrieve])](#Deployer+_deploy) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
     * _static_
         * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Deployer.deploy) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
         * [._deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve])](#Deployer._deployBU) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
@@ -395,7 +416,7 @@ Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 **Kind**: instance property of [<code>Deployer</code>](#Deployer)  
 <a name="Deployer+_deploy"></a>
 
-### deployer.\_deploy([typeArr], [keyArr], [fromRetrieve], [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
+### deployer.\_deploy([typeArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
 Deploy all metadata that is located in the deployDir
 
 **Kind**: instance method of [<code>Deployer</code>](#Deployer)  
@@ -406,7 +427,6 @@ Deploy all metadata that is located in the deployDir
 | [typeArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit deployment to given metadata type (can include subtype) |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
 | [fromRetrieve] | <code>boolean</code> | if true, no folders will be updated/created |
-| [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="Deployer.deploy"></a>
 
@@ -426,7 +446,7 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 <a name="Deployer._deployBU"></a>
 
 ### Deployer.\_deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
-helper for [deploy](deploy)
+helper for [deploy](#Deployer.deploy)
 
 **Kind**: static method of [<code>Deployer</code>](#Deployer)  
 **Returns**: <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code> - ensure that BUs are worked on sequentially  
@@ -448,11 +468,11 @@ Returns metadata of a business unit that is saved locally
 **Kind**: static method of [<code>Deployer</code>](#Deployer)  
 **Returns**: <code>TYPE.MultiMetadataTypeMap</code> - Metadata of BU in local directory  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| deployDir | <code>string</code> |  | root directory of metadata. |
-| [typeArr] | <code>Array.&lt;string&gt;</code> |  | limit deployment to given metadata type |
-| [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
+| Param | Type | Description |
+| --- | --- | --- |
+| deployDir | <code>string</code> | root directory of metadata. |
+| [typeArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata type |
+| [listBadKeys] | <code>boolean</code> | do not print errors, used for badKeys() |
 
 <a name="Deployer.createFolderDefinitions"></a>
 
@@ -496,8 +516,8 @@ main class
     * [.buildDefinition(businessUnit, selectedType, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.buildDefinitionBulk(listName, type, name)](#Mcdev.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getFilesToCommit(businessUnit, selectedType, keyArr)](#Mcdev.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-    * [.execute(businessUnit, [selectedTypesArr], keys)](#Mcdev.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._executeBU(cred, bu, [selectedTypesArr], keyArr)](#Mcdev._executeBU) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.execute(businessUnit, [selectedType], [keys])](#Mcdev.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.pause(businessUnit, [selectedType], [keys])](#Mcdev.pause) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="Mcdev.setSkipInteraction"></a>
 
@@ -752,8 +772,8 @@ Build a specific metadata file based on a template using a list of bu-market com
 
 <a name="Mcdev.execute"></a>
 
-### Mcdev.execute(businessUnit, [selectedTypesArr], keys) ⇒ <code>Promise.&lt;boolean&gt;</code>
-Start an item (query)
+### Mcdev.execute(businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Start/execute an item
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all started successfully, false if not  
@@ -761,23 +781,22 @@ Start an item (query)
 | Param | Type | Description |
 | --- | --- | --- |
 | businessUnit | <code>string</code> | name of BU |
-| [selectedTypesArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit to given metadata types |
-| keys | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+| [selectedType] | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
+| [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
-<a name="Mcdev._executeBU"></a>
+<a name="Mcdev.pause"></a>
 
-### Mcdev.\_executeBU(cred, bu, [selectedTypesArr], keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
-helper for [execute](execute)
+### Mcdev.pause(businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+pause an item
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all items were executed, false otherwise  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all started successfully, false if not  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| cred | <code>string</code> | name of Credential |
-| bu | <code>string</code> | name of BU |
-| [selectedTypesArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit execution to given metadata type |
-| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+| businessUnit | <code>string</code> | name of BU |
+| [selectedType] | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
+| [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Asset"></a>
 
@@ -798,7 +817,7 @@ FileTransfer MetadataType
     * [._retrieveExtendedFile(metadata, subType, retrieveDir)](#Asset._retrieveExtendedFile) ⇒ <code>Promise.&lt;void&gt;</code>
     * [._readExtendedFileFromFS(metadata, subType, deployDir, [pathOnly])](#Asset._readExtendedFileFromFS) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.postRetrieveTasks(metadata)](#Asset.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
-    * [.postDeployTasks(metadata, _, createdUpdated, [isRefresh])](#Asset.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
+    * [.postDeployTasks(metadata, _, createdUpdated)](#Asset.postDeployTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.preDeployTasks(metadata, deployDir)](#Asset.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AssetItem&gt;</code>
     * [._getMainSubtype(extendedSubType)](#Asset._getMainSubtype) ⇒ <code>string</code>
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Asset.buildDefinitionForNested) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -931,7 +950,7 @@ This method retrieves these and saves them alongside the metadata json
 <a name="Asset._readExtendedFileFromFS"></a>
 
 ### Asset.\_readExtendedFileFromFS(metadata, subType, deployDir, [pathOnly]) ⇒ <code>Promise.&lt;string&gt;</code>
-helper for [preDeployTasks](preDeployTasks)
+helper for [preDeployTasks](#Asset.preDeployTasks)
 Some metadata types store their actual content as a separate file, e.g. images
 This method reads these from the local FS stores them in the metadata object allowing to deploy it
 
@@ -959,7 +978,7 @@ manages post retrieve steps
 
 <a name="Asset.postDeployTasks"></a>
 
-### Asset.postDeployTasks(metadata, _, createdUpdated, [isRefresh]) ⇒ <code>Promise.&lt;void&gt;</code>
+### Asset.postDeployTasks(metadata, _, createdUpdated) ⇒ <code>Promise.&lt;void&gt;</code>
 Gets executed after deployment of metadata type
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -970,7 +989,6 @@ Gets executed after deployment of metadata type
 | metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | _ | <code>TYPE.MetadataTypeMap</code> | originalMetadata to be updated (contains additioanl fields) |
 | createdUpdated | <code>Object</code> | counter representing successful creates/updates |
-| [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="Asset.preDeployTasks"></a>
 
@@ -1078,7 +1096,7 @@ Asset-specific script that retrieves the folder ID from cache and updates the gi
 <a name="Asset._mergeCode"></a>
 
 ### Asset.\_mergeCode(metadata, deployDir, subType, [templateName], [fileListOnly]) ⇒ <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code>
-helper for [preDeployTasks](preDeployTasks) that loads extracted code content back into JSON
+helper for [preDeployTasks](#Asset.preDeployTasks) that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
 **Returns**: <code>Promise.&lt;Array.&lt;TYPE.CodeExtract&gt;&gt;</code> - fileList for templating (disregarded during deployment)  
@@ -1094,7 +1112,7 @@ helper for [preDeployTasks](preDeployTasks) that loads extracted code content ba
 <a name="Asset._mergeCode_slots"></a>
 
 ### Asset.\_mergeCode\_slots(prefix, metadataSlots, readDirArr, subtypeExtension, subDirArr, fileList, customerKey, [templateName], [fileListOnly]) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for [preDeployTasks](preDeployTasks) that loads extracted code content back into JSON
+helper for [preDeployTasks](#Asset.preDeployTasks) that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
@@ -1114,7 +1132,7 @@ helper for [preDeployTasks](preDeployTasks) that loads extracted code content ba
 <a name="Asset._extractCode"></a>
 
 ### Asset.\_extractCode(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
-helper for [postRetrieveTasks](postRetrieveTasks) that finds code content in JSON and extracts it
+helper for [postRetrieveTasks](#Asset.postRetrieveTasks) that finds code content in JSON and extracts it
 to allow saving that separately and formatted
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -1238,7 +1256,9 @@ Automation MetadataType
     * [.retrieveForCache()](#Automation.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Automation.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.AutomationItemObj&gt;</code>
     * [.postRetrieveTasks(metadata)](#Automation.postRetrieveTasks) ⇒ <code>TYPE.AutomationItem</code> \| <code>void</code>
-    * [.deploy(metadata, targetBU, retrieveDir, [isRefresh])](#Automation.deploy) ⇒ <code>Promise.&lt;TYPE.AutomationMap&gt;</code>
+    * [.execute(keyArr)](#Automation.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.pause(keyArr)](#Automation.pause) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deploy(metadata, targetBU, retrieveDir)](#Automation.deploy) ⇒ <code>Promise.&lt;TYPE.AutomationMap&gt;</code>
     * [.create(metadata)](#Automation.create) ⇒ <code>Promise</code>
     * [.update(metadata, metadataBefore)](#Automation.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#Automation.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.AutomationItem&gt;</code>
@@ -1308,9 +1328,33 @@ manages post retrieve steps
 | --- | --- | --- |
 | metadata | <code>TYPE.AutomationItem</code> | a single automation |
 
+<a name="Automation.execute"></a>
+
+### Automation.execute(keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
+a function to start query execution via API
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - Returns true if all items were executed successfully, otherwise false  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Automation.pause"></a>
+
+### Automation.pause(keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
+a function to start query execution via API
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - Returns true if all items were executed successfully, otherwise false  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
 <a name="Automation.deploy"></a>
 
-### Automation.deploy(metadata, targetBU, retrieveDir, [isRefresh]) ⇒ <code>Promise.&lt;TYPE.AutomationMap&gt;</code>
+### Automation.deploy(metadata, targetBU, retrieveDir) ⇒ <code>Promise.&lt;TYPE.AutomationMap&gt;</code>
 Deploys automation - the saved file is the original one due to large differences required for deployment
 
 **Kind**: static method of [<code>Automation</code>](#Automation)  
@@ -1321,7 +1365,6 @@ Deploys automation - the saved file is the original one due to large differences
 | metadata | <code>TYPE.AutomationMap</code> | metadata mapped by their keyField |
 | targetBU | <code>string</code> | name/shorthand of target businessUnit for mapping |
 | retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
-| [isRefresh] | <code>boolean</code> | optional flag - so far not used by automation |
 
 <a name="Automation.create"></a>
 
@@ -2335,7 +2378,7 @@ Event MetadataType
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Event.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.postRetrieveTasks(eventDef)](#Event.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.deleteByKey(key)](#Event.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.deploy(metadata, deployDir, retrieveDir, [isRefresh])](#Event.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.deploy(metadata, deployDir, retrieveDir)](#Event.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.create(metadata)](#Event.create) ⇒ <code>Promise</code>
     * [.update(metadataEntry)](#Event.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#Event.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -2405,7 +2448,7 @@ Delete a metadata item from the specified business unit
 
 <a name="Event.deploy"></a>
 
-### Event.deploy(metadata, deployDir, retrieveDir, [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+### Event.deploy(metadata, deployDir, retrieveDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
 Deploys metadata - merely kept here to be able to print [logBeta](#Util.logBeta) once per deploy
 
 **Kind**: static method of [<code>Event</code>](#Event)  
@@ -2416,7 +2459,6 @@ Deploys metadata - merely kept here to be able to print [logBeta](#Util.logBeta)
 | metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 | retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
-| [isRefresh] | <code>boolean</code> | optional flag - so far not used by eventDefinition |
 
 <a name="Event.create"></a>
 
@@ -2747,10 +2789,10 @@ Returns file contents mapped to their filename without '.json' ending
 **Kind**: static method of [<code>Folder</code>](#Folder)  
 **Returns**: <code>TYPE.MetadataTypeMap</code> - fileName => fileContent map  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| dir | <code>string</code> |  | directory that contains '.json' files to be read |
-| [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
+| Param | Type | Description |
+| --- | --- | --- |
+| dir | <code>string</code> | directory that contains '.json' files to be read |
+| [listBadKeys] | <code>boolean</code> | do not print errors, used for badKeys() |
 
 <a name="Folder.retrieveHelper"></a>
 
@@ -2923,7 +2965,7 @@ definitionId: A unique UUID provided by Salesforce Marketing Cloud. Each version
 * [Journey](#Journey) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#Journey.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.deleteByKey(key)](#Journey.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.deploy(metadata, deployDir, retrieveDir, [isRefresh])](#Journey.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.deploy(metadata, deployDir, retrieveDir)](#Journey.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.update(metadata)](#Journey.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#Journey.create) ⇒ <code>Promise</code>
     * [.saveResults(results, retrieveDir, [overrideType], [templateVariables])](#Journey.saveResults) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
@@ -2961,7 +3003,7 @@ Delete a metadata item from the specified business unit
 
 <a name="Journey.deploy"></a>
 
-### Journey.deploy(metadata, deployDir, retrieveDir, [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+### Journey.deploy(metadata, deployDir, retrieveDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
 Deploys metadata - merely kept here to be able to print [logBeta](#Util.logBeta) once per deploy
 
 **Kind**: static method of [<code>Journey</code>](#Journey)  
@@ -2972,7 +3014,6 @@ Deploys metadata - merely kept here to be able to print [logBeta](#Util.logBeta)
 | metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 | retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
-| [isRefresh] | <code>boolean</code> | optional flag - so far not used by interaction |
 
 <a name="Journey.update"></a>
 
@@ -3016,7 +3057,7 @@ Helper for writing Metadata to disk, used for Retrieve and deploy
 <a name="Journey._postRetrieveTasksBulk"></a>
 
 ### Journey.\_postRetrieveTasksBulk(metadataMap)
-helper for Journey's [saveResults](saveResults). Gets executed after retreive of metadata type and
+helper for Journey's [saveResults](#Journey.saveResults). Gets executed after retreive of metadata type and
 
 **Kind**: static method of [<code>Journey</code>](#Journey)  
 
@@ -3155,8 +3196,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.buObject](#MetadataType.buObject) : <code>TYPE.BuObject</code>
     * [.getJsonFromFS(dir, [listBadKeys])](#MetadataType.getJsonFromFS) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.getFieldNamesToRetrieve([additionalFields], [isCaching])](#MetadataType.getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.deploy(metadata, deployDir, retrieveDir, [isRefresh])](#MetadataType.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
-    * [.postDeployTasks(upsertResults, originalMetadata, createdUpdated, [isRefresh])](#MetadataType.postDeployTasks) ⇒ <code>void</code>
+    * [.deploy(metadata, deployDir, retrieveDir)](#MetadataType.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.postDeployTasks(upsertResults, originalMetadata, createdUpdated)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
     * [.postCreateTasks(metadataEntry, apiResponse)](#MetadataType.postCreateTasks) ⇒ <code>void</code>
     * [.postUpdateTasks(metadataEntry, apiResponse)](#MetadataType.postUpdateTasks) ⇒ <code>void</code>
     * [.postDeployTasks_legacyApi(metadataEntry, apiResponse)](#MetadataType.postDeployTasks_legacyApi) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -3174,9 +3215,10 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.update(metadata, [metadataBefore])](#MetadataType.update) ⇒ <code>void</code>
     * [.refresh()](#MetadataType.refresh) ⇒ <code>void</code>
     * [.execute()](#MetadataType.execute) ⇒ <code>void</code>
+    * [.pause()](#MetadataType.pause) ⇒ <code>void</code>
     * [.hasChanged(cachedVersion, metadata, [fieldName])](#MetadataType.hasChanged) ⇒ <code>boolean</code>
     * [.hasChangedGeneric(cachedVersion, metadata, [fieldName], [silent])](#MetadataType.hasChangedGeneric) ⇒ <code>boolean</code>
-    * [.upsert(metadataMap, deployDir, [isRefresh])](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.upsert(metadataMap, deployDir)](#MetadataType.upsert) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MetadataType.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
     * [.createREST(metadataEntry, uri)](#MetadataType.createREST) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
     * [.createSOAP(metadataEntry, [handleOutside])](#MetadataType.createSOAP) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>null</code>
@@ -3237,10 +3279,10 @@ Returns file contents mapped to their filename without '.json' ending
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>TYPE.MetadataTypeMap</code> - fileName => fileContent map  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| dir | <code>string</code> |  | directory that contains '.json' files to be read |
-| [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
+| Param | Type | Description |
+| --- | --- | --- |
+| dir | <code>string</code> | directory that contains '.json' files to be read |
+| [listBadKeys] | <code>boolean</code> | do not print errors, used for badKeys() |
 
 <a name="MetadataType.getFieldNamesToRetrieve"></a>
 
@@ -3257,7 +3299,7 @@ Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set 
 
 <a name="MetadataType.deploy"></a>
 
-### MetadataType.deploy(metadata, deployDir, retrieveDir, [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+### MetadataType.deploy(metadata, deployDir, retrieveDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
 Deploys metadata
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3268,11 +3310,10 @@ Deploys metadata
 | metadata | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
 | retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
-| [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="MetadataType.postDeployTasks"></a>
 
-### MetadataType.postDeployTasks(upsertResults, originalMetadata, createdUpdated, [isRefresh]) ⇒ <code>void</code>
+### MetadataType.postDeployTasks(upsertResults, originalMetadata, createdUpdated) ⇒ <code>void</code>
 Gets executed after deployment of metadata type
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3282,12 +3323,11 @@ Gets executed after deployment of metadata type
 | upsertResults | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField as returned by update/create |
 | originalMetadata | <code>TYPE.MetadataTypeMap</code> | metadata to be updated (contains additioanl fields) |
 | createdUpdated | <code>Object</code> | counter representing successful creates/updates |
-| [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="MetadataType.postCreateTasks"></a>
 
 ### MetadataType.postCreateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
-helper for [createREST](createREST)
+helper for [createREST](#MetadataType.createREST)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 
@@ -3299,7 +3339,7 @@ helper for [createREST](createREST)
 <a name="MetadataType.postUpdateTasks"></a>
 
 ### MetadataType.postUpdateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
-helper for [updateREST](updateREST)
+helper for [updateREST](#MetadataType.updateREST)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 
@@ -3311,7 +3351,7 @@ helper for [updateREST](updateREST)
 <a name="MetadataType.postDeployTasks_legacyApi"></a>
 
 ### MetadataType.postDeployTasks\_legacyApi(metadataEntry, apiResponse) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for [createREST](createREST) when legacy API endpoints as these do not return the created item but only their new id
+helper for [createREST](#MetadataType.createREST) when legacy API endpoints as these do not return the created item but only their new id
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
@@ -3493,6 +3533,12 @@ Abstract refresh method that needs to be implemented in child metadata type
 Abstract execute method that needs to be implemented in child metadata type
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+<a name="MetadataType.pause"></a>
+
+### MetadataType.pause() ⇒ <code>void</code>
+Abstract pause method that needs to be implemented in child metadata type
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 <a name="MetadataType.hasChanged"></a>
 
 ### MetadataType.hasChanged(cachedVersion, metadata, [fieldName]) ⇒ <code>boolean</code>
@@ -3524,7 +3570,7 @@ test if metadata was actually changed or not to potentially skip it during deplo
 
 <a name="MetadataType.upsert"></a>
 
-### MetadataType.upsert(metadataMap, deployDir, [isRefresh]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+### MetadataType.upsert(metadataMap, deployDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
 MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3534,7 +3580,6 @@ MetadataType upsert, after retrieving from target and comparing to check if crea
 | --- | --- | --- |
 | metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 | deployDir | <code>string</code> | directory where deploy metadata are saved |
-| [isRefresh] | <code>boolean</code> | optional flag to indicate that triggeredSend should be refreshed after deployment of assets |
 
 <a name="MetadataType.createOrUpdate"></a>
 
@@ -3590,7 +3635,7 @@ Updates a single metadata entry via REST
 | --- | --- | --- | --- |
 | metadataEntry | <code>TYPE.MetadataTypeItem</code> |  | a single metadata Entry |
 | uri | <code>string</code> |  | rest endpoint for PATCH |
-| [httpMethod] | <code>&#x27;patch&#x27;</code> \| <code>&#x27;post&#x27;</code> \| <code>&#x27;put&#x27;</code> | <code>&#x27;patch&#x27;</code> | defaults to 'patch'; some update requests require PUT instead of PATCH |
+| [httpMethod] | <code>&#x27;patch&#x27;</code> \| <code>&#x27;post&#x27;</code> \| <code>&#x27;put&#x27;</code> | <code>patch</code> | defaults to 'patch'; some update requests require PUT instead of PATCH |
 
 <a name="MetadataType.updateSOAP"></a>
 
@@ -3620,7 +3665,7 @@ Updates a single metadata entry via fuel-soap (generic lib not wrapper)
 <a name="MetadataType.getSOAPErrorMsg"></a>
 
 ### MetadataType.getSOAPErrorMsg(ex) ⇒ <code>string</code>
-helper for [_handleSOAPErrors](_handleSOAPErrors)
+helper for [_handleSOAPErrors](#MetadataType._handleSOAPErrors)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>string</code> - error message  
@@ -3675,7 +3720,7 @@ Used to execute a query/automation etc.
 <a name="MetadataType.runDocumentOnRetrieve"></a>
 
 ### MetadataType.runDocumentOnRetrieve([singleRetrieve], metadataMap) ⇒ <code>Promise.&lt;void&gt;</code>
-helper for [retrieveREST](retrieveREST) and [retrieveSOAP](retrieveSOAP)
+helper for [retrieveREST](#MetadataType.retrieveREST) and [retrieveSOAP](#MetadataType.retrieveSOAP)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>Promise.&lt;void&gt;</code> - -  
@@ -3769,10 +3814,10 @@ checks if the current metadata entry should be saved on retrieve or not
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>boolean</code> - true: skip saving == filtered; false: continue with saving  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| metadataEntry | <code>TYPE.MetadataTypeItem</code> |  | metadata entry |
-| [include] | <code>boolean</code> | <code>false</code> | true: use definition.include / options.include; false=exclude: use definition.filter / options.exclude |
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> | metadata entry |
+| [include] | <code>boolean</code> | true: use definition.include / options.include; false=exclude: use definition.filter / options.exclude |
 
 <a name="MetadataType.isFilteredFolder"></a>
 
@@ -3782,10 +3827,10 @@ optionally filter by what folder something is in
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>boolean</code> - true: filtered == do NOT save; false: not filtered == do save  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| metadataEntry | <code>object</code> |  | metadata entry |
-| [include] | <code>boolean</code> | <code>false</code> | true: use definition.include / options.include; false=exclude: use definition.filter / options.exclude |
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>object</code> | metadata entry |
+| [include] | <code>boolean</code> | true: use definition.include / options.include; false=exclude: use definition.filter / options.exclude |
 
 <a name="MetadataType.saveResults"></a>
 
@@ -3805,7 +3850,7 @@ Helper for writing Metadata to disk, used for Retrieve and deploy
 <a name="MetadataType.applyTemplateValues"></a>
 
 ### MetadataType.applyTemplateValues(code, templateVariables) ⇒ <code>string</code>
-helper for [buildDefinitionForNested](buildDefinitionForNested)
+helper for [buildDefinitionForNested](#MetadataType.buildDefinitionForNested)
 searches extracted file for template variable names and applies the market values
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3819,7 +3864,7 @@ searches extracted file for template variable names and applies the market value
 <a name="MetadataType.applyTemplateNames"></a>
 
 ### MetadataType.applyTemplateNames(code, templateVariables) ⇒ <code>string</code>
-helper for [buildTemplateForNested](buildTemplateForNested)
+helper for [buildTemplateForNested](#MetadataType.buildTemplateForNested)
 searches extracted file for template variable values and applies the market variable names
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3833,7 +3878,7 @@ searches extracted file for template variable values and applies the market vari
 <a name="MetadataType.buildDefinitionForNested"></a>
 
 ### MetadataType.buildDefinitionForNested(templateDir, targetDir, metadata, variables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for [buildDefinition](buildDefinition)
+helper for [buildDefinition](#MetadataType.buildDefinition)
 handles extracted code if any are found for complex types (e.g script, asset, query)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3850,7 +3895,7 @@ handles extracted code if any are found for complex types (e.g script, asset, qu
 <a name="MetadataType.buildTemplateForNested"></a>
 
 ### MetadataType.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for [buildTemplate](buildTemplate)
+helper for [buildTemplate](#MetadataType.buildTemplate)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3995,11 +4040,11 @@ Returns metadata of a business unit that is saved locally
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>object</code> - Metadata of BU in local directory  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| readDir | <code>string</code> |  | root directory of metadata. |
-| [listBadKeys] | <code>boolean</code> | <code>false</code> | do not print errors, used for badKeys() |
-| [buMetadata] | <code>object</code> |  | Metadata of BU in local directory |
+| Param | Type | Description |
+| --- | --- | --- |
+| readDir | <code>string</code> | root directory of metadata. |
+| [listBadKeys] | <code>boolean</code> | do not print errors, used for badKeys() |
+| [buMetadata] | <code>object</code> | Metadata of BU in local directory |
 
 <a name="MetadataType.getFilesToCommit"></a>
 
@@ -4190,7 +4235,7 @@ manages post retrieve steps
 <a name="MobileKeyword.prepExtractedCode"></a>
 
 ### MobileKeyword.prepExtractedCode(metadataScript) ⇒ <code>Object</code>
-helper for [parseMetadata](parseMetadata) and [_buildForNested](_buildForNested)
+helper for [postRetrieveTasks](#MobileKeyword.postRetrieveTasks) and [_buildForNested](#MobileKeyword._buildForNested)
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
 **Returns**: <code>Object</code> - returns found extension and file content  
@@ -4240,7 +4285,7 @@ scripts are saved as 1 json and 1 ssjs file. both files need to be run through t
 <a name="MobileKeyword._buildForNested"></a>
 
 ### MobileKeyword.\_buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for [buildTemplateForNested](buildTemplateForNested) / [buildDefinitionForNested](buildDefinitionForNested)
+helper for [buildTemplateForNested](#MobileKeyword.buildTemplateForNested) / [buildDefinitionForNested](#MobileKeyword.buildDefinitionForNested)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
@@ -4271,7 +4316,7 @@ prepares an event definition for deployment
 <a name="MobileKeyword.postCreateTasks"></a>
 
 ### MobileKeyword.postCreateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
-helper for [createREST](createREST)
+helper for [createREST](#MetadataType.createREST)
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
 
@@ -4283,7 +4328,7 @@ helper for [createREST](createREST)
 <a name="MobileKeyword.postUpdateTasks"></a>
 
 ### MobileKeyword.postUpdateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
-helper for [updateREST](updateREST)
+helper for [updateREST](#MetadataType.updateREST)
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
 
@@ -4295,7 +4340,7 @@ helper for [updateREST](updateREST)
 <a name="MobileKeyword._mergeCode"></a>
 
 ### MobileKeyword.\_mergeCode(metadata, deployDir, [templateName]) ⇒ <code>Promise.&lt;string&gt;</code>
-helper for [preDeployTasks](preDeployTasks) that loads extracted code content back into JSON
+helper for [preDeployTasks](#MobileKeyword.preDeployTasks) that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
 **Returns**: <code>Promise.&lt;string&gt;</code> - content for metadata.script  
@@ -4423,7 +4468,7 @@ Creates a single item
 <a name="MobileMessage._mergeCode"></a>
 
 ### MobileMessage.\_mergeCode(metadata, deployDir, [templateName]) ⇒ <code>Promise.&lt;string&gt;</code>
-helper for [preDeployTasks](preDeployTasks) that loads extracted code content back into JSON
+helper for [preDeployTasks](#MobileMessage.preDeployTasks) that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
 **Returns**: <code>Promise.&lt;string&gt;</code> - code  
@@ -4437,7 +4482,7 @@ helper for [preDeployTasks](preDeployTasks) that loads extracted code content ba
 <a name="MobileMessage.prepExtractedCode"></a>
 
 ### MobileMessage.prepExtractedCode(code) ⇒ <code>Object</code>
-helper for [parseMetadata](parseMetadata) and [_buildForNested](_buildForNested)
+helper for [postRetrieveTasks](#MobileMessage.postRetrieveTasks) and [_buildForNested](#MobileMessage._buildForNested)
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
 **Returns**: <code>Object</code> - returns found extension and file content  
@@ -4487,7 +4532,7 @@ prepares an event definition for deployment
 <a name="MobileMessage.postCreateTasks"></a>
 
 ### MobileMessage.postCreateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
-helper for [createREST](createREST)
+helper for [createREST](#MetadataType.createREST)
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
 
@@ -4499,7 +4544,7 @@ helper for [createREST](createREST)
 <a name="MobileMessage.postUpdateTasks"></a>
 
 ### MobileMessage.postUpdateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
-helper for [updateREST](updateREST)
+helper for [updateREST](#MetadataType.updateREST)
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
 
@@ -4549,7 +4594,7 @@ scripts are saved as 1 json and 1 ssjs file. both files need to be run through t
 <a name="MobileMessage._buildForNested"></a>
 
 ### MobileMessage.\_buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for [buildTemplateForNested](buildTemplateForNested) / [buildDefinitionForNested](buildDefinitionForNested)
+helper for [buildTemplateForNested](#MobileMessage.buildTemplateForNested) / [buildDefinitionForNested](#MobileMessage.buildDefinitionForNested)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
@@ -4601,6 +4646,7 @@ Query MetadataType
     * [.checkForErrors(ex)](#Query.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
     * [.deleteByKey(customerKey)](#Query.deleteByKey) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#Query.postDeleteTasks) ⇒ <code>void</code>
+    * [.postDeployTasks(upsertResults)](#Query.postDeployTasks)
 
 <a name="Query.retrieve"></a>
 
@@ -4702,7 +4748,7 @@ prepares a Query for deployment
 <a name="Query.applyTemplateValues"></a>
 
 ### Query.applyTemplateValues(code, templateVariables) ⇒ <code>string</code>
-helper for [buildDefinitionForNested](buildDefinitionForNested)
+helper for [buildDefinitionForNested](#Query.buildDefinitionForNested)
 searches extracted SQL file for template variables and applies the market values
 
 **Kind**: static method of [<code>Query</code>](#Query)  
@@ -4798,6 +4844,17 @@ clean up after deleting a metadata item
 | Param | Type | Description |
 | --- | --- | --- |
 | customerKey | <code>string</code> | Identifier of metadata item |
+
+<a name="Query.postDeployTasks"></a>
+
+### Query.postDeployTasks(upsertResults)
+Gets executed after deployment of metadata type
+
+**Kind**: static method of [<code>Query</code>](#Query)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| upsertResults | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField as returned by update/create |
 
 <a name="Role"></a>
 
@@ -4992,7 +5049,7 @@ Creates a single Script
 <a name="Script._mergeCode"></a>
 
 ### Script.\_mergeCode(metadata, deployDir, [templateName]) ⇒ <code>Promise.&lt;string&gt;</code>
-helper for [preDeployTasks](preDeployTasks) that loads extracted code content back into JSON
+helper for [preDeployTasks](#Script.preDeployTasks) that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>Script</code>](#Script)  
 **Returns**: <code>Promise.&lt;string&gt;</code> - content for metadata.script  
@@ -5057,7 +5114,7 @@ scripts are saved as 1 json and 1 ssjs file. both files need to be run through t
 <a name="Script._buildForNested"></a>
 
 ### Script.\_buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for [buildTemplateForNested](buildTemplateForNested) / [buildDefinitionForNested](buildDefinitionForNested)
+helper for [buildTemplateForNested](#Script.buildTemplateForNested) / [buildDefinitionForNested](#Script.buildDefinitionForNested)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>Script</code>](#Script)  
@@ -5087,7 +5144,7 @@ Splits the script metadata into two parts and parses in a standard manner
 <a name="Script.prepExtractedCode"></a>
 
 ### Script.prepExtractedCode(metadataScript, metadataName) ⇒ <code>Object</code>
-helper for [parseMetadata](parseMetadata) and [_buildForNested](_buildForNested)
+helper for [parseMetadata](#Script.parseMetadata) and [_buildForNested](#Script._buildForNested)
 
 **Kind**: static method of [<code>Script</code>](#Script)  
 **Returns**: <code>Object</code> - returns found extension and file content  
@@ -5371,7 +5428,7 @@ prepares for deployment
 <a name="TransactionalSMS._mergeCode"></a>
 
 ### TransactionalSMS.\_mergeCode(metadata, deployDir, [templateName]) ⇒ <code>Promise.&lt;string&gt;</code>
-helper for [preDeployTasks](preDeployTasks) that loads extracted code content back into JSON
+helper for [preDeployTasks](#TransactionalSMS.preDeployTasks) that loads extracted code content back into JSON
 
 **Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
 **Returns**: <code>Promise.&lt;string&gt;</code> - content for metadata.script  
@@ -5397,7 +5454,7 @@ manages post retrieve steps
 <a name="TransactionalSMS.prepExtractedCode"></a>
 
 ### TransactionalSMS.prepExtractedCode(metadataScript) ⇒ <code>Object</code>
-helper for [parseMetadata](parseMetadata) and [_buildForNested](_buildForNested)
+helper for [postRetrieveTasks](#TransactionalSMS.postRetrieveTasks) and [_buildForNested](#TransactionalSMS._buildForNested)
 
 **Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
 **Returns**: <code>Object</code> - returns found extension and file content  
@@ -5409,7 +5466,7 @@ helper for [parseMetadata](parseMetadata) and [_buildForNested](_buildForNested)
 <a name="TransactionalSMS.buildDefinitionForNested"></a>
 
 ### TransactionalSMS.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for [buildDefinition](#MetadataType.buildDefinition)
+helper for [TransactionalMessage.buildDefinition](TransactionalMessage.buildDefinition)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
@@ -5426,7 +5483,7 @@ handles extracted code if any are found for complex types
 <a name="TransactionalSMS.buildTemplateForNested"></a>
 
 ### TransactionalSMS.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for [buildTemplate](#MetadataType.buildTemplate)
+helper for [TransactionalMessage.buildTemplate](TransactionalMessage.buildTemplate)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
@@ -5447,7 +5504,7 @@ scripts are saved as 1 json and 1 ssjs file. both files need to be run through t
 <a name="TransactionalSMS._buildForNested"></a>
 
 ### TransactionalSMS.\_buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-helper for [buildTemplateForNested](buildTemplateForNested) / [buildDefinitionForNested](buildDefinitionForNested)
+helper for [buildTemplateForNested](#TransactionalSMS.buildTemplateForNested) / [buildDefinitionForNested](#TransactionalSMS.buildDefinitionForNested)
 handles extracted code if any are found for complex types
 
 **Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
@@ -5500,13 +5557,11 @@ MessageSendActivity MetadataType
     * [.create(metadata)](#TriggeredSend.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#TriggeredSend.update) ⇒ <code>Promise</code>
     * [.deleteByKey(customerKey)](#TriggeredSend.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.postRetrieveTasks(metadata)](#TriggeredSend.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.setFolderPath(metadata)](#TriggeredSend.setFolderPath)
-    * [.parseMetadata(metadata)](#TriggeredSend.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
+    * [.postRetrieveTasks(metadata)](#TriggeredSend.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
     * [.preDeployTasks(metadata)](#TriggeredSend.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.refresh([keyArr], [checkKey])](#TriggeredSend.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getKeysForValidTSDs(metadata)](#TriggeredSend.getKeysForValidTSDs) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-    * [.findRefreshableItems()](#TriggeredSend.findRefreshableItems) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.findRefreshableItems([assetLoaded])](#TriggeredSend.findRefreshableItems) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [._refreshItem(key, checkKey)](#TriggeredSend._refreshItem) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="TriggeredSend.retrieve"></a>
@@ -5562,30 +5617,7 @@ Delete a metadata item from the specified business unit
 
 <a name="TriggeredSend.postRetrieveTasks"></a>
 
-### TriggeredSend.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
-manages post retrieve steps
-
-**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one query string  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
-
-<a name="TriggeredSend.setFolderPath"></a>
-
-### TriggeredSend.setFolderPath(metadata)
-generic script that retrieves the folder path from cache and updates the given metadata with it after retrieve
-
-**Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single script activity definition |
-
-<a name="TriggeredSend.parseMetadata"></a>
-
-### TriggeredSend.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
+### TriggeredSend.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code> \| <code>void</code>
 parses retrieved Metadata before saving
 
 **Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
@@ -5593,7 +5625,7 @@ parses retrieved Metadata before saving
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single query activity definition |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
 <a name="TriggeredSend.preDeployTasks"></a>
 
@@ -5623,7 +5655,7 @@ TSD-specific refresh method that finds active TSDs and refreshes them
 <a name="TriggeredSend.getKeysForValidTSDs"></a>
 
 ### TriggeredSend.getKeysForValidTSDs(metadata) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-helper for [refresh](refresh) that extracts the keys from the TSD item map and eli
+helper for [refresh](#TriggeredSend.refresh) that extracts the keys from the TSD item map and eli
 
 **Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - keyArr  
@@ -5634,15 +5666,20 @@ helper for [refresh](refresh) that extracts the keys from the TSD item map and e
 
 <a name="TriggeredSend.findRefreshableItems"></a>
 
-### TriggeredSend.findRefreshableItems() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-helper for [refresh](refresh) that finds active TSDs on the server and filters it by the same rules that [retrieve](retrieve) is using to avoid refreshing TSDs with broken dependencies
+### TriggeredSend.findRefreshableItems([assetLoaded]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+helper for [refresh](#TriggeredSend.refresh) that finds active TSDs on the server and filters it by the same rules that [retrieve](#TriggeredSend.retrieve) is using to avoid refreshing TSDs with broken dependencies
 
 **Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of TSD item map  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [assetLoaded] | <code>boolean</code> | <code>false</code> | if run after Asset.deploy via --refresh option this will skip caching assets |
+
 <a name="TriggeredSend._refreshItem"></a>
 
 ### TriggeredSend.\_refreshItem(key, checkKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-helper for [refresh](refresh) that pauses, publishes and starts a triggered send
+helper for [refresh](#TriggeredSend.refresh) that pauses, publishes and starts a triggered send
 
 **Kind**: static method of [<code>TriggeredSend</code>](#TriggeredSend)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - true if refresh was successful  
@@ -5862,7 +5899,7 @@ Retrieve metadata of specified types into local file system and Retriever.metada
 <a name="Retriever+_getTypeDependencies"></a>
 
 ### retriever.\_getTypeDependencies(metadataTypes) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
-helper for [retrieve](retrieve) to get all dependencies of the given types
+helper for [Retriever.retrieve](Retriever.retrieve) to get all dependencies of the given types
 
 **Kind**: instance method of [<code>Retriever</code>](#Retriever)  
 **Returns**: <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> - unique list dependent metadata types  
@@ -5908,6 +5945,8 @@ CLI entry for SFMC DevTools
     * [.getKeysString(keyArr, [isId])](#Util.getKeysString) ⇒ <code>string</code>
     * [.sleep(ms)](#Util.sleep) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getSsjs(code)](#Util.getSsjs) ⇒ <code>string</code>
+    * [.stringLike(testString, search)](#Util.stringLike) ⇒ <code>boolean</code>
+    * [.fieldsLike(metadata, [filters])](#Util.fieldsLike) ⇒ <code>boolean</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -6053,9 +6092,9 @@ wrapper around our standard winston logging to console and logfile
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>object</code> - initiated logger for console and file  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| [noLogFile] | <code>boolean</code> | <code>false</code> | optional flag to indicate if we should log to file; CLI logs are always on |
+| Param | Type | Description |
+| --- | --- | --- |
+| [noLogFile] | <code>boolean</code> | optional flag to indicate if we should log to file; CLI logs are always on |
 
 <a name="Util.startLogger"></a>
 
@@ -6064,10 +6103,10 @@ initiate winston logger
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| [restart] | <code>boolean</code> | <code>false</code> | if true, logger will be restarted; otherwise, an existing logger will be used |
-| [noLogFile] | <code>boolean</code> | <code>false</code> | if false, logger will log to file; otherwise, only to console |
+| Param | Type | Description |
+| --- | --- | --- |
+| [restart] | <code>boolean</code> | if true, logger will be restarted; otherwise, an existing logger will be used |
+| [noLogFile] | <code>boolean</code> | if false, logger will log to file; otherwise, only to console |
 
 <a name="Util.metadataLogger"></a>
 
@@ -6264,6 +6303,32 @@ the following is invalid:
       // 3
   </script>
 ```
+<a name="Util.stringLike"></a>
+
+### Util.stringLike(testString, search) ⇒ <code>boolean</code>
+allows us to filter just like with SQL's LIKE operator
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - true if testString matches search  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| testString | <code>string</code> | field value to test |
+| search | <code>string</code> | search string in SQL LIKE format |
+
+<a name="Util.fieldsLike"></a>
+
+### Util.fieldsLike(metadata, [filters]) ⇒ <code>boolean</code>
+returns true if no LIKE filter is defined or if all filters match
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - true if no LIKE filter is defined or if all filters match  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata item |
+| [filters] | <code>object</code> | only used in recursive calls |
+
 <a name="MetadataTypeDefinitions"></a>
 
 ## MetadataTypeDefinitions
@@ -6801,12 +6866,12 @@ reads file from local file system.
 **Kind**: static method of [<code>File</code>](#File)  
 **Returns**: <code>Promise.&lt;string&gt;</code> \| <code>void</code> - file contents; void on error  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| directory | <code>string</code> \| <code>Array.&lt;string&gt;</code> |  | directory where the file is stored |
-| filename | <code>string</code> |  | name of the file without '.json' ending |
-| filetype | <code>string</code> |  | filetype suffix |
-| [encoding] | <code>string</code> | <code>&quot;&#x27;utf8&#x27;&quot;</code> | read file with encoding (defaults to utf-8) |
+| Param | Type | Description |
+| --- | --- | --- |
+| directory | <code>string</code> \| <code>Array.&lt;string&gt;</code> | directory where the file is stored |
+| filename | <code>string</code> | name of the file without '.json' ending |
+| filetype | <code>string</code> | filetype suffix |
+| [encoding] | <code>string</code> | read file with encoding (defaults to utf-8) |
 
 <a name="File.readDirectories"></a>
 
@@ -6869,9 +6934,9 @@ Initalises Prettier formatting lib async.
 **Kind**: static method of [<code>File</code>](#File)  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - success of config load  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| [filetype] | <code>string</code> | <code>&quot;&#x27;html&#x27;&quot;</code> | filetype ie. JSON or SSJS |
+| Param | Type | Description |
+| --- | --- | --- |
+| [filetype] | <code>string</code> | filetype ie. JSON or SSJS |
 
 <a name="Init"></a>
 
@@ -7798,6 +7863,8 @@ Util that contains logger and simple util methods
     * [.getKeysString(keyArr, [isId])](#Util.getKeysString) ⇒ <code>string</code>
     * [.sleep(ms)](#Util.sleep) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getSsjs(code)](#Util.getSsjs) ⇒ <code>string</code>
+    * [.stringLike(testString, search)](#Util.stringLike) ⇒ <code>boolean</code>
+    * [.fieldsLike(metadata, [filters])](#Util.fieldsLike) ⇒ <code>boolean</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -7943,9 +8010,9 @@ wrapper around our standard winston logging to console and logfile
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>object</code> - initiated logger for console and file  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| [noLogFile] | <code>boolean</code> | <code>false</code> | optional flag to indicate if we should log to file; CLI logs are always on |
+| Param | Type | Description |
+| --- | --- | --- |
+| [noLogFile] | <code>boolean</code> | optional flag to indicate if we should log to file; CLI logs are always on |
 
 <a name="Util.startLogger"></a>
 
@@ -7954,10 +8021,10 @@ initiate winston logger
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| [restart] | <code>boolean</code> | <code>false</code> | if true, logger will be restarted; otherwise, an existing logger will be used |
-| [noLogFile] | <code>boolean</code> | <code>false</code> | if false, logger will log to file; otherwise, only to console |
+| Param | Type | Description |
+| --- | --- | --- |
+| [restart] | <code>boolean</code> | if true, logger will be restarted; otherwise, an existing logger will be used |
+| [noLogFile] | <code>boolean</code> | if false, logger will log to file; otherwise, only to console |
 
 <a name="Util.metadataLogger"></a>
 
@@ -8154,6 +8221,32 @@ the following is invalid:
       // 3
   </script>
 ```
+<a name="Util.stringLike"></a>
+
+### Util.stringLike(testString, search) ⇒ <code>boolean</code>
+allows us to filter just like with SQL's LIKE operator
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - true if testString matches search  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| testString | <code>string</code> | field value to test |
+| search | <code>string</code> | search string in SQL LIKE format |
+
+<a name="Util.fieldsLike"></a>
+
+### Util.fieldsLike(metadata, [filters]) ⇒ <code>boolean</code>
+returns true if no LIKE filter is defined or if all filters match
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - true if no LIKE filter is defined or if all filters match  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata item |
+| [filters] | <code>object</code> | only used in recursive calls |
+
 <a name="csvToArray"></a>
 
 ## csvToArray(csv) ⇒ <code>Array.&lt;string&gt;</code>
@@ -8165,6 +8258,98 @@ helper to convert CSVs into an array. if only one value was given, it's also ret
 | Param | Type | Description |
 | --- | --- | --- |
 | csv | <code>string</code> | potentially comma-separated value or null |
+
+<a name="Mcdev."></a>
+
+## Mcdev.(methodName, businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+run a method across BUs
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all started successfully, false if not  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> | what to run |
+| businessUnit | <code>string</code> | name of BU |
+| [selectedType] | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
+| [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Mcdev."></a>
+
+## Mcdev.(methodName, cred, bu, [type], keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
+helper for [Mcdev.#runMethod](Mcdev.#runMethod)
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all items were executed, false otherwise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> | what to run |
+| cred | <code>string</code> | name of Credential |
+| bu | <code>string</code> | name of BU |
+| [type] | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Mcdev."></a>
+
+## Mcdev.(selectedType, buObject) ⇒ <code>Array.&lt;string&gt;</code>
+helper for [Mcdev.#runOnBU](Mcdev.#runOnBU)
+
+**Kind**: global function  
+**Returns**: <code>Array.&lt;string&gt;</code> - keyArr  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| selectedType | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| buObject | <code>TYPE.BuObject</code> | properties for auth |
+
+<a name="Automation."></a>
+
+## Automation.(metadata) ⇒ <code>boolean</code>
+helper for [postRetrieveTasks](#Automation.postRetrieveTasks) and [execute](#Automation.execute)
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - true if the automation schedule is valid  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.AutomationItem</code> | a single automation |
+
+<a name="Automation."></a>
+
+## Automation.(metadataMap, key) ⇒ <code>Promise.&lt;object&gt;</code>
+helper for [execute](#Automation.execute)
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;object&gt;</code> - Returns the result of the API call  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.AutomationMap</code> | map of metadata |
+| key | <code>string</code> | key of the metadata |
+
+<a name="Automation."></a>
+
+## Automation.(metadata) ⇒ <code>Promise.&lt;object&gt;</code>
+helper for [pause](#Automation.pause)
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;object&gt;</code> - schedule reponse  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.AutomationItem</code> | automation metadata |
+
+<a name="Automation."></a>
+
+## Automation.(metadata)
+helper for [preDeployTasks](#Automation.preDeployTasks) and [execute](#Automation.execute)
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.AutomationItem</code> | metadata mapped by their keyField |
 
 <a name="Automation."></a>
 
@@ -8181,10 +8366,11 @@ helper for [postDeployTasks](#Automation.postDeployTasks)
 
 <a name="Automation."></a>
 
-## Automation.(metadataMap, originalMetadataMap, key)
-helper for [postDeployTasks](postDeployTasks)
+## Automation.(metadataMap, originalMetadataMap, key) ⇒ <code>Promise.&lt;object&gt;</code>
+helper for [postDeployTasks](#Automation.postDeployTasks)
 
 **Kind**: global function  
+**Returns**: <code>Promise.&lt;object&gt;</code> - -  
 
 | Param | Type | Description |
 | --- | --- | --- |

@@ -2,9 +2,9 @@
 
 ## What changes did you make? (Give an overview)
 
-...
+- closes #1234
 
-## Is there anything you'd like reviewers to focus on?
+## Further details (optional)
 
 ...
 
