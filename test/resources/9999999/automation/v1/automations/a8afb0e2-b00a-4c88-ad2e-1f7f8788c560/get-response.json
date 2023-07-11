@@ -1,0 +1,85 @@
+{
+    "id": "a8afb0e2-b00a-4c88-ad2e-1f7f8788c560",
+    "name": "testNew_automation",
+    "description": "created on deploy",
+    "key": "testNew_automation",
+    "typeId": 1,
+    "type": "scheduled",
+    "statusId": 4,
+    "status": "Scheduled",
+    "categoryId": 290937,
+    "schedule": {
+        "id": "b393aa6c-a4a8-4c0f-a148-9250258a7339",
+        "typeId": 3,
+        "startDate": "2022-07-30T00:00:00",
+        "endDate": "2022-07-30T00:00:00",
+        "scheduledTime": "0001-01-01T07:00:00",
+        "rangeTypeId": 0,
+        "occurrences": 1,
+        "pattern": "<Pattern><PatternType>0</PatternType><DayInterval>1</DayInterval></Pattern>",
+        "icalRecur": "FREQ=DAILY;COUNT=1;INTERVAL=1",
+        "timezoneName": "W. Europe Standard Time",
+        "scheduleStatus": "paused",
+        "timezoneId": 5
+    },
+    "steps": [
+        {
+            "id": "13fda077-0e82-4936-b936-a36b0997fc44",
+            "name": "",
+            "step": 1,
+            "activities": [
+                {
+                    "id": "8081a992-a27d-4a43-984a-d60114ea1025",
+                    "name": "testExisting_dataExtract",
+                    "activityObjectId": "56c5370a-f988-4f36-b0ee-0f876573f6d7",
+                    "objectTypeId": 73,
+                    "displayOrder": 1
+                },
+                {
+                    "id": "d3774dc2-a271-4a44-8cbe-f630a6d6545e",
+                    "name": "testExisting_emailSend",
+                    "activityObjectId": "9b1c7bf9-4964-ed11-b849-48df37d1de8b",
+                    "objectTypeId": 42,
+                    "displayOrder": 2
+                },
+                {
+                    "id": "2c77fc42-85eb-4611-98f9-223d29d89d72",
+                    "name": "testExisting_fileTransfer",
+                    "activityObjectId": "72c328ac-f5b0-4e37-91d3-a775666f15a6",
+                    "objectTypeId": 53,
+                    "displayOrder": 3
+                },
+                {
+                    "id": "298b2794-28cb-4c70-b7ad-58b2c8cf48f7",
+                    "name": "testExisting_importFile",
+                    "activityObjectId": "9d16f42c-2260-ed11-b849-48df37d1de8b",
+                    "objectTypeId": 43,
+                    "displayOrder": 4,
+                    "targetDataExtensions": [
+                        {
+                            "id": "21711373-72c1-ec11-b83b-48df37d1deb7",
+                            "name": "testExisting_dataExtension",
+                            "key": "testExisting_dataExtension",
+                            "description": "bla bla",
+                            "rowCount": 0
+                        }
+                    ]
+                },
+                {
+                    "id": "e3774dc2-a271-4a44-8cbe-f630a6d6545e",
+                    "name": "testExisting_query_WRONG_NAME",
+                    "activityObjectId": "549f0568-607c-4940-afef-437965094dat",
+                    "objectTypeId": 300,
+                    "displayOrder": 5
+                },
+                {
+                    "id": "g3774dc2-a271-4a44-8cbe-f630a6d6545e",
+                    "name": "testExisting_script",
+                    "activityObjectId": "39f6a488-20eb-4ba0-b0b9-023725b574e4",
+                    "objectTypeId": 423,
+                    "displayOrder": 6
+                }
+            ]
+        }
+    ]
+}

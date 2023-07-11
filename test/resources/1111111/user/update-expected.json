@@ -1,0 +1,21 @@
+{
+    "Client": {
+        "ModifiedBy": 123456
+    },
+    "CustomerKey": "testExisting_user",
+    "UserID": "user_test@accenture.asgr",
+    "Name": "user test",
+    "Email": "user_test@accenture.com",
+    "MustChangePassword": false,
+    "ActiveFlag": true,
+    "IsAPIUser": false,
+    "NotificationEmailAddress": "user_test@accenture.com",
+    "DefaultBusinessUnit": 9999999,
+    "c__type": "User",
+    "c__AccountUserID": 700301950,
+    "c__IsLocked_readOnly": false,
+    "c__AssociatedBusinessUnits": [9999999],
+    "c__RoleNamesGlobal": ["Administrator", "Distributed Sending User"],
+    "c__TimeZoneName": "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna *",
+    "c__LocaleCode": "en-GB"
+}
