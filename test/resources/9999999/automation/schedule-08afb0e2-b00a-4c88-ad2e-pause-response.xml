@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>ScheduleResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:b58a82d9-a251-4be4-b50c-bd300d71601d</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:9d3dbeb3-68b7-4f0a-b0af-04855dc0fd1e</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-5ff54ff3-2408-496a-b4ea-6df5e9ebee03">
+                <wsu:Created>2023-07-05T10:29:58Z</wsu:Created>
+                <wsu:Expires>2023-07-05T10:34:58Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <ScheduleResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <Results>
+                <Result>
+                    <StatusCode>OK</StatusCode>
+                    <StatusMessage>Schedule Paused. To reactivate the schedule use proxy.Schedule with the action 'start'.</StatusMessage>
+                    <Object>
+                        <PartnerKey xsi:nil="true" />
+                        <ObjectID xsi:nil="true" />
+                    </Object>
+                    <Task />
+                </Result>
+            </Results>
+            <OverallStatus>OK</OverallStatus>
+            <OverallStatusMessage />
+            <RequestID>cfe97488-3c5e-49a9-b338-c0e9f6b6f684</RequestID>
+        </ScheduleResponseMsg>
+    </soap:Body>
+</soap:Envelope>

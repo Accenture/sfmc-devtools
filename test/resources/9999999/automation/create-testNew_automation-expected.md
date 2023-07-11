@@ -10,10 +10,10 @@
 
 **Schedule:**
 
-* Start: 2022-07-30 00:00:00 +01:00
-* End: 2022-07-30 00:00:00 +01:00
-* Timezone:  W. Europe Standard Time
-* Recurrance: every  day for 1 times
+* Start: 2020-05-13 18:30:32.11-06:00 +01:00
+* End: 2079-06-06 21:00:00-06:00 +01:00
+* Timezone: W. Europe Standard Time
+* Recurrance: every 5 minutes
 
 **Notifications:** _none_
 
