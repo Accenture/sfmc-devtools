@@ -27,7 +27,7 @@ describe('type: query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                2,
+                3,
                 'only two queries expected'
             );
             // normal test
@@ -142,14 +142,18 @@ describe('type: query', () => {
         });
         it('Should create & upsert a query', async () => {
             // WHEN
-            await handler.deploy('testInstance/testBU', ['query']);
+            await handler.deploy(
+                'testInstance/testBU',
+                ['query'],
+                ['testNew_query', 'testExisting_query']
+            );
             // THEN
             assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                3,
+                4,
                 'three queries expected'
             );
             // confirm created item
@@ -183,6 +187,7 @@ describe('type: query', () => {
             handler.setOptions({ execute: true });
             // WHEN
             await handler.deploy('testInstance/testBU', ['query']);
+            await handler.deploy('testInstance/testBU', ['query']);
             // THEN
             assert.equal(
                 process.exitCode,
@@ -213,6 +218,7 @@ describe('type: query', () => {
             const result = await handler.retrieveAsTemplate(
                 'testInstance/testBU',
                 'query',
+                ['testExisting_query'],
                 ['testExisting_query'],
                 'testSourceMarket'
             );

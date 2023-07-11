@@ -30,7 +30,7 @@
                     "r__type": "importFile"
                 },
                 {
-                    "name": "{{{prefix}}}query1",
+                    "name": "{{{prefix}}}query",
                     "r__type": "query"
                 },
                 {

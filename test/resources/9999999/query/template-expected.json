@@ -1,5 +1,5 @@
 {
-    "name": "{{{prefix}}}query1",
+    "name": "{{{prefix}}}query",
     "key": "{{{prefix}}}query",
     "description": "{{{description}}}",
     "targetKey": "{{{prefix}}}dataExtension",

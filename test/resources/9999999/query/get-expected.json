@@ -1,5 +1,5 @@
 {
-    "name": "testExisting_query1",
+    "name": "testExisting_query",
     "key": "testExisting_query",
     "description": "bla bla",
     "targetKey": "testExisting_dataExtension",

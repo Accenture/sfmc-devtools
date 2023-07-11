@@ -1,5 +1,5 @@
 {
-    "name": "testTemplated_query1",
+    "name": "testTemplated_query",
     "key": "testTemplated_query",
     "description": "foobar",
     "targetKey": "testTemplated_dataExtension",

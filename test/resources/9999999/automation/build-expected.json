@@ -30,7 +30,7 @@
                     "r__type": "importFile"
                 },
                 {
-                    "name": "testTemplated_query1",
+                    "name": "testTemplated_query",
                     "r__type": "query"
                 },
                 {

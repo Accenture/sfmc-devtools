@@ -1,5 +1,5 @@
 {
-    "name": "testExisting_query1",
+    "name": "testExisting_query",
     "key": "testExisting_query",
     "description": "updated on deploy",
     "targetKey": "testExisting_dataExtension",
