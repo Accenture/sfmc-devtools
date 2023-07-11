@@ -27,7 +27,7 @@ describe('type: query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                3,
+                2,
                 'only two queries expected'
             );
             // normal test
@@ -142,18 +142,14 @@ describe('type: query', () => {
         });
         it('Should create & upsert a query', async () => {
             // WHEN
-            await handler.deploy(
-                'testInstance/testBU',
-                ['query'],
-                ['testNew_query', 'testExisting_query']
-            );
+            await handler.deploy('testInstance/testBU', ['query']);
             // THEN
             assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                4,
+                3,
                 'three queries expected'
             );
             // confirm created item
@@ -177,7 +173,7 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                9,
+                8,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -186,7 +182,6 @@ describe('type: query', () => {
         it('Should deploy and execute with --execute', async () => {
             handler.setOptions({ execute: true });
             // WHEN
-            await handler.deploy('testInstance/testBU', ['query']);
             await handler.deploy('testInstance/testBU', ['query']);
             // THEN
             assert.equal(
@@ -206,7 +201,7 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                13,
+                12,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -218,7 +213,6 @@ describe('type: query', () => {
             const result = await handler.retrieveAsTemplate(
                 'testInstance/testBU',
                 'query',
-                ['testExisting_query'],
                 ['testExisting_query'],
                 'testSourceMarket'
             );
