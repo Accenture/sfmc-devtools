@@ -518,6 +518,8 @@ main class
     * [.getFilesToCommit(businessUnit, selectedType, keyArr)](#Mcdev.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.execute(businessUnit, [selectedType], [keys])](#Mcdev.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.pause(businessUnit, [selectedType], [keys])](#Mcdev.pause) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.fixKeys(businessUnit, type, [keys])](#Mcdev.fixKeys) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
+    * [._fixKeysBU(cred, bu, type, [keyArr])](#Mcdev._fixKeysBU) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="Mcdev.setSkipInteraction"></a>
 
@@ -797,6 +799,35 @@ pause an item
 | businessUnit | <code>string</code> | name of BU |
 | [selectedType] | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
 | [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Mcdev.fixKeys"></a>
+
+### Mcdev.fixKeys(businessUnit, type, [keys]) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
+Updates the key to match the name field
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code> - deployed metadata per BU (first key: bu name, second key: metadata type)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| businessUnit | <code>string</code> | name of BU |
+| type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Mcdev._fixKeysBU"></a>
+
+### Mcdev.\_fixKeysBU(cred, bu, type, [keyArr]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+helper for [fixKeys](#Mcdev.fixKeys)
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all  successfully, false if not  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cred | <code>string</code> | name of Credential |
+| bu | <code>string</code> | name of BU |
+| type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| [keyArr] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Asset"></a>
 
@@ -3254,6 +3285,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.deleteByKeyREST(url, key, [handleOutside])](#MetadataType.deleteByKeyREST) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType.readBUMetadataForType) ⇒ <code>object</code>
     * [.getFilesToCommit(keyArr)](#MetadataType.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [.getKeysForFixing(metadataMap)](#MetadataType.getKeysForFixing) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="MetadataType.client"></a>
 
@@ -4058,6 +4090,16 @@ additionally, the documentation for dataExtension and automation should be retur
 | Param | Type | Description |
 | --- | --- | --- |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="MetadataType.getKeysForFixing"></a>
+
+### MetadataType.getKeysForFixing(metadataMap) ⇒ <code>Array.&lt;string&gt;</code>
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of keys  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 
 <a name="MobileCode"></a>
 

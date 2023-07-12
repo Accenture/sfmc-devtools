@@ -158,7 +158,6 @@ describe('type: query', () => {
             );
             // get results from cache
             const result = cache.getCache();
-            console.log(result.query);
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
                 4,
@@ -229,7 +228,7 @@ describe('type: query', () => {
         });
         it('Should not fixKeys and deploy', async () => {
             // WHEN
-            await handler.fixKeys('testInstance/testBU', ['query'], ['testExisting_query']);
+            await handler.fixKeys('testInstance/testBU', 'query', ['testExisting_query']);
             // THEN
             assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
             // get results from cache
@@ -239,24 +238,6 @@ describe('type: query', () => {
                 1,
                 'one query expected'
             );
-            // confirm created item
-            // assert.deepEqual(
-            //     await testUtils.getActualJson('testNew_query', 'query'),
-            //     await testUtils.getExpectedJson('9999999', 'query', 'post'),
-            //     'returned metadata was not equal expected for insert query'
-            // );
-            // expect(file(testUtils.getActualFile('testNew_query', 'query', 'sql'))).to.equal(
-            //     file(testUtils.getExpectedFile('9999999', 'query', 'post', 'sql'))
-            // );
-            // // confirm updated item
-            // assert.deepEqual(
-            //     await testUtils.getActualJson('testExisting_query', 'query'),
-            //     await testUtils.getExpectedJson('9999999', 'query', 'patch'),
-            //     'returned metadata was not equal expected for insert query'
-            // );
-            // expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
-            //     file(testUtils.getExpectedFile('9999999', 'query', 'patch', 'sql'))
-            // );
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
