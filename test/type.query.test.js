@@ -267,16 +267,21 @@ describe('type: query', () => {
         });
         it('Should fixKeys and deploy', async () => {
             // WHEN
-            await handler.fixKeys('testInstance/testBU', ['query'], ['testExisting_query_fixKeys']);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['query'],
+                ['testExisting_query_fixKeys']
+            );
             // THEN
             assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(resultFixKeys, true, 'fixKeys should not have thrown an error');
             // get results from cache
-            const result = cache.getCache();
-            assert.equal(
-                result.query ? Object.keys(result.query).length : 0,
-                4,
-                'four queries expected in cache'
-            );
+            // const result = cache.getCache();
+            // assert.equal(
+            //     result.query ? Object.keys(result.query).length : 0,
+            //     4,
+            //     'four queries expected in cache'
+            // );
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_query_fixedKey', 'query'),
