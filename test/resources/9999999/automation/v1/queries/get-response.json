@@ -1,5 +1,5 @@
 {
-    "count": 2,
+    "count": 3,
     "page": 1,
     "pageSize": 50,
     "items": [
@@ -28,6 +28,23 @@
             "queryText": "SELECT\n    SubscriberKey as testField\nFROM\n    _Subscribers\nWHERE\n    country IN ('test')\n",
             "targetName": "testExisting_dataExtension",
             "targetKey": "testExisting_dataExtension-WRONG",
+            "targetId": "21711373-72c1-ec11-b83b-48df37d1deb7",
+            "targetDescription": "",
+            "createdDate": "2022-04-26T15:21:16.453",
+            "modifiedDate": "2022-04-26T16:02:44.01",
+            "targetUpdateTypeId": 0,
+            "targetUpdateTypeName": "Overwrite",
+            "categoryId": 999,
+            "isFrozen": false
+        },
+        {
+            "queryDefinitionId": "549f0568-607c-4940-afef-437965094dat_fixKeys",
+            "name": "testExisting_query_fixedKey",
+            "key": "testExisting_query_fixKeys",
+            "description": "bla bla",
+            "queryText": "SELECT\n    SubscriberKey as testField\nFROM\n    _Subscribers\nWHERE\n    country IN ('test')\n",
+            "targetName": "testExisting_dataExtension",
+            "targetKey": "testExisting_dataExtension",
             "targetId": "21711373-72c1-ec11-b83b-48df37d1deb7",
             "targetDescription": "",
             "createdDate": "2022-04-26T15:21:16.453",

@@ -27,8 +27,8 @@ describe('type: query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                2,
-                'only two queries expected'
+                3,
+                'only three queries expected'
             );
             // normal test
             assert.deepEqual(
@@ -90,8 +90,8 @@ describe('type: query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                2,
-                'two queries in cache expected'
+                3,
+                'three queries in cache expected'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_query', 'query'),
@@ -120,8 +120,8 @@ describe('type: query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                2,
-                'two queries in cache expected'
+                3,
+                'three queries in cache expected'
             );
 
             expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.not
@@ -142,15 +142,27 @@ describe('type: query', () => {
         });
         it('Should create & upsert a query', async () => {
             // WHEN
-            await handler.deploy('testInstance/testBU', ['query']);
+            const resultDeploy = await handler.deploy(
+                'testInstance/testBU',
+                ['query'],
+                ['testNew_query', 'testExisting_query']
+            );
             // THEN
             assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(
+                resultDeploy['testInstance/testBU']?.query
+                    ? Object.keys(resultDeploy['testInstance/testBU']?.query).length
+                    : 0,
+                2,
+                'two queries to be deployed'
+            );
             // get results from cache
             const result = cache.getCache();
+            console.log(result.query);
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                3,
-                'three queries expected'
+                4,
+                'four queries expected in cache'
             );
             // confirm created item
             assert.deepEqual(
@@ -182,7 +194,11 @@ describe('type: query', () => {
         it('Should deploy and execute with --execute', async () => {
             handler.setOptions({ execute: true });
             // WHEN
-            await handler.deploy('testInstance/testBU', ['query']);
+            await handler.deploy(
+                'testInstance/testBU',
+                ['query'],
+                ['testExisting_query', 'testNew_query']
+            );
             // THEN
             assert.equal(
                 process.exitCode,
@@ -206,6 +222,106 @@ describe('type: query', () => {
             );
             return;
         });
+    });
+    describe('FixKeys ================', () => {
+        beforeEach(() => {
+            testUtils.mockSetup(true);
+        });
+        it('Should not fixKeys and deploy', async () => {
+            // WHEN
+            await handler.fixKeys('testInstance/testBU', ['query'], ['testExisting_query']);
+            // THEN
+            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.query ? Object.keys(result.query).length : 0,
+                1,
+                'one query expected'
+            );
+            // confirm created item
+            // assert.deepEqual(
+            //     await testUtils.getActualJson('testNew_query', 'query'),
+            //     await testUtils.getExpectedJson('9999999', 'query', 'post'),
+            //     'returned metadata was not equal expected for insert query'
+            // );
+            // expect(file(testUtils.getActualFile('testNew_query', 'query', 'sql'))).to.equal(
+            //     file(testUtils.getExpectedFile('9999999', 'query', 'post', 'sql'))
+            // );
+            // // confirm updated item
+            // assert.deepEqual(
+            //     await testUtils.getActualJson('testExisting_query', 'query'),
+            //     await testUtils.getExpectedJson('9999999', 'query', 'patch'),
+            //     'returned metadata was not equal expected for insert query'
+            // );
+            // expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
+            //     file(testUtils.getExpectedFile('9999999', 'query', 'patch', 'sql'))
+            // );
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                7,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should fixKeys and deploy', async () => {
+            // WHEN
+            await handler.fixKeys('testInstance/testBU', ['query'], ['testExisting_query_fixKeys']);
+            // THEN
+            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.query ? Object.keys(result.query).length : 0,
+                4,
+                'four queries expected in cache'
+            );
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_query_fixedKey', 'query'),
+                await testUtils.getExpectedJson('9999999', 'query', 'patch_fixKey'),
+                'returned metadata was not equal expected for insert query'
+            );
+            expect(
+                file(testUtils.getActualFile('testExisting_query_fixedKey', 'query', 'sql'))
+            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKey', 'sql')));
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                14,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        // it('Should change the key during update with --changeKeyValue');
+        // it('Should deploy and execute with --execute', async () => {
+        //     handler.setOptions({ execute: true });
+        //     // WHEN
+        //     await handler.deploy('testInstance/testBU', ['query']);
+        //     // THEN
+        //     assert.equal(
+        //         process.exitCode,
+        //         false,
+        //         'deploy with --execute should not have thrown an error'
+        //     );
+        //     // confirm updated item
+        //     assert.deepEqual(
+        //         await testUtils.getActualJson('testExisting_query', 'query'),
+        //         await testUtils.getExpectedJson('9999999', 'query', 'patch'),
+        //         'returned metadata was not equal expected for insert query'
+        //     );
+        //     expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
+        //         file(testUtils.getExpectedFile('9999999', 'query', 'patch', 'sql'))
+        //     );
+        //     // check number of API calls
+        //     assert.equal(
+        //         testUtils.getAPIHistoryLength(),
+        //         12,
+        //         'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+        //     );
+        //     return;
+        // });
     });
     describe('Templating ================', () => {
         it('Should create a query template via retrieveAsTemplate and build it', async () => {
