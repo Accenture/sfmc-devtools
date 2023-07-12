@@ -1,5 +1,5 @@
 {
-    "name": "testExisting_query_fixedKey",
+    "name": "testExisting_query_fixedKeys",
     "key": "testExisting_query_fixKeys",
     "description": "updated on deploy",
     "targetKey": "testExisting_dataExtension",

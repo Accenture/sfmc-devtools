@@ -39,7 +39,7 @@
         },
         {
             "queryDefinitionId": "549f0568-607c-4940-afef-437965094dat_fixKeys",
-            "name": "testExisting_query_fixedKey",
+            "name": "testExisting_query_fixedKeys",
             "key": "testExisting_query_fixKeys",
             "description": "bla bla",
             "queryText": "SELECT\n    SubscriberKey as testField\nFROM\n    _Subscribers\nWHERE\n    country IN ('test')\n",
