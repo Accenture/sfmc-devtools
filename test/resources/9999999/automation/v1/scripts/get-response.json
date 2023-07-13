@@ -8,8 +8,18 @@
             "name": "testExisting_script",
             "key": "testExisting_script",
             "description": "",
-            "script": "<script runat=\"server\">\n//dummy\n</script",
-            "categoryId": 290828,
+            "script": "<script runat=\"server\">\n//dummy\n</script>",
+            "categoryId": 304,
+            "createdDate": "2022-10-20T00:41:26.163",
+            "modifiedDate": "2022-10-20T00:41:26.163"
+        },
+        {
+            "ssjsActivityId": "39f6a488-20eb-4ba0-b0b9-noScriptTag",
+            "name": "testExisting_script_noScriptTag",
+            "key": "testExisting_script_noScriptTag",
+            "description": "",
+            "script": "// no script tag\n",
+            "categoryId": 304,
             "createdDate": "2022-10-20T00:41:26.163",
             "modifiedDate": "2022-10-20T00:41:26.163"
         }
