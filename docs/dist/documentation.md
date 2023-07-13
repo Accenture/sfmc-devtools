@@ -1220,7 +1220,6 @@ AttributeGroup MetadataType
     * [.retrieve(retrieveDir, [_], [__], [key])](#AttributeGroup.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache()](#AttributeGroup.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.postRetrieveTasks(metadata)](#AttributeGroup.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.preDeployTasks(metadata)](#AttributeGroup.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
 
 <a name="AttributeGroup.retrieve"></a>
 
@@ -1256,18 +1255,6 @@ manages post retrieve steps
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata |
 
-<a name="AttributeGroup.preDeployTasks"></a>
-
-### AttributeGroup.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
-prepares for deployment
-
-**Kind**: static method of [<code>AttributeGroup</code>](#AttributeGroup)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
-
 <a name="AttributeSet"></a>
 
 ## AttributeSet ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -1282,7 +1269,6 @@ AttributeSet MetadataType
     * [.parseResponseBody(body, [singleRetrieve])](#AttributeSet.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.postRetrieveTasks(metadata)](#AttributeSet.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [._getSystemValueDefinitions()](#AttributeSet._getSystemValueDefinitions) ⇒ <code>Array.&lt;object&gt;</code>
-    * [.preDeployTasks(metadata)](#AttributeSet.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
 
 <a name="AttributeSet.retrieve"></a>
 
@@ -1338,18 +1324,6 @@ helper for [postRetrieveTasks](#AttributeSet.postRetrieveTasks)
 
 **Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
 **Returns**: <code>Array.&lt;object&gt;</code> - all system value definitions  
-<a name="AttributeSet.preDeployTasks"></a>
-
-### AttributeSet.preDeployTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
-prepares for deployment
-
-**Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
-
 <a name="Automation"></a>
 
 ## Automation ⇐ [<code>MetadataType</code>](#MetadataType)
