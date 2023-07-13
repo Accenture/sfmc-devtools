@@ -1,0 +1,167 @@
+{
+    "applicationID": "ce703ed3-e01f-4f5f-900d-76a95b363e29",
+    "applicationKey": "com.exacttarget.contacts",
+    "attributeCount": 0,
+    "canAddValues": false,
+    "canChangeValues": false,
+    "canModify": false,
+    "canRemove": false,
+    "createDate": "2017-01-24T06:33:00",
+    "createdBy": -1000,
+    "definitionKey": "Contact",
+    "isCustomObjectBacked": false,
+    "isEvent": false,
+    "isHidden": false,
+    "isReadOnly": true,
+    "isRoot": false,
+    "isSendable": false,
+    "isSystemDefined": true,
+    "localizedDescription": {},
+    "name": "Contact",
+    "parentID": "00000000-0000-0000-0000-000000000000",
+    "relationshipCount": 1,
+    "relationships": [
+        {
+            "canModify": false,
+            "canRemove": false,
+            "isGroupToSetRelationship": true,
+            "isHidden": false,
+            "isSystemDefined": false,
+            "leftItem": {
+                "cardinality": "One",
+                "r__attributeGroup_definitionKey": "ETSystem",
+                "relationshipType": "AttributeGroup"
+            },
+            "leftRelationshipIDs": [
+                {
+                    "type": "int16",
+                    "value": "2"
+                }
+            ],
+            "leftRelationshipReferenceType": "CustomerData",
+            "relationshipAttributes": [
+                {
+                    "c__leftFullyQualifiedName": "Contact.Contact ID",
+                    "c__rightFullyQualifiedName": "Contact.Contact ID"
+                }
+            ],
+            "relationshipID": "9893dc39-31e2-e611-80cc-1402ec7222b4",
+            "rightItem": {
+                "cardinality": "One",
+                "r__attributeSet_definitionKey": "Contact",
+                "relationshipType": "AttributeSet"
+            }
+        }
+    ],
+    "setDefinitionID": "9093dc39-31e2-e611-80cc-1402ec7222b4",
+    "setDefinitionKey": "Contact",
+    "storageObjectIDs": ["2ba72136-9f31-4a79-ab62-4ba5d19cd759"],
+    "valueDefinitions": [
+        {
+            "baseType": "Numeric",
+            "connectingID": {
+                "identifierType": "FullyQualifiedName"
+            },
+            "customerDataID": 2,
+            "dataSourceID": 1,
+            "dataSourceName": {},
+            "dataType": "Number",
+            "definitionID": "9293dc39-31e2-e611-80cc-1402ec7222b4",
+            "definitionKey": "ContactID",
+            "definitionName": {
+                "value": "Contact ID"
+            },
+            "description": "",
+            "fullyQualifiedName": "Contact.Contact ID",
+            "isHidden": false,
+            "isIdentityValue": false,
+            "isNullable": false,
+            "isPrimaryKey": true,
+            "isReadOnly": true,
+            "isSystemDefined": true,
+            "isUpdateable": false,
+            "localizedDescription": {
+                "value": ""
+            },
+            "name": "Contact ID",
+            "parentType": "Set",
+            "setDefinitionName": {
+                "value": "Contact"
+            },
+            "storageName": "SubscriberID",
+            "valueDefinitionID": "9293dc39-31e2-e611-80cc-1402ec7222b4",
+            "valueDefinitionKey": "ContactID"
+        },
+        {
+            "baseType": "Text",
+            "connectingID": {
+                "identifierType": "FullyQualifiedName"
+            },
+            "customerDataID": 3,
+            "dataSourceID": 1,
+            "dataSourceName": {},
+            "dataType": "Text",
+            "definitionID": "9393dc39-31e2-e611-80cc-1402ec7222b4",
+            "definitionKey": "ContactKey",
+            "definitionName": {
+                "value": "Contact Key"
+            },
+            "description": "",
+            "fullyQualifiedName": "Contact.Contact Key",
+            "isHidden": false,
+            "isIdentityValue": false,
+            "isNullable": false,
+            "isPrimaryKey": false,
+            "isReadOnly": true,
+            "isSystemDefined": true,
+            "isUpdateable": false,
+            "length": -1,
+            "localizedDescription": {
+                "value": ""
+            },
+            "name": "Contact Key",
+            "parentType": "Set",
+            "setDefinitionName": {
+                "value": "Contact"
+            },
+            "storageName": "SubscriberKey",
+            "valueDefinitionID": "9393dc39-31e2-e611-80cc-1402ec7222b4",
+            "valueDefinitionKey": "ContactKey"
+        },
+        {
+            "baseType": "Numeric",
+            "connectingID": {
+                "identifierType": "FullyQualifiedName"
+            },
+            "customerDataID": 1,
+            "dataSourceID": 1,
+            "dataSourceName": {},
+            "dataType": "Number",
+            "definitionID": "9193dc39-31e2-e611-80cc-1402ec7222b4",
+            "definitionKey": "BusinessUnitID",
+            "definitionName": {
+                "value": "Business Unit ID"
+            },
+            "description": "",
+            "fullyQualifiedName": "Contact.Business Unit ID",
+            "isHidden": true,
+            "isIdentityValue": false,
+            "isNullable": false,
+            "isPrimaryKey": true,
+            "isReadOnly": true,
+            "isSystemDefined": true,
+            "isUpdateable": false,
+            "localizedDescription": {
+                "value": ""
+            },
+            "name": "Business Unit ID",
+            "parentType": "Set",
+            "setDefinitionName": {
+                "value": "Contact"
+            },
+            "storageName": "ClientID",
+            "valueDefinitionID": "9193dc39-31e2-e611-80cc-1402ec7222b4",
+            "valueDefinitionKey": "BusinessUnitID"
+        }
+    ]
+}
