@@ -519,7 +519,6 @@ main class
     * [.execute(businessUnit, [selectedType], [keys])](#Mcdev.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.pause(businessUnit, [selectedType], [keys])](#Mcdev.pause) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.fixKeys(businessUnit, type, [keys])](#Mcdev.fixKeys) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
-    * [._fixKeysBU(cred, bu, type, [keyArr])](#Mcdev._fixKeysBU) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="Mcdev.setSkipInteraction"></a>
 
@@ -813,21 +812,6 @@ Updates the key to match the name field
 | businessUnit | <code>string</code> | name of BU |
 | type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
 | [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
-
-<a name="Mcdev._fixKeysBU"></a>
-
-### Mcdev.\_fixKeysBU(cred, bu, type, [keyArr]) ⇒ <code>Promise.&lt;boolean&gt;</code>
-helper for [fixKeys](#Mcdev.fixKeys)
-
-**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all  successfully, false if not  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| cred | <code>string</code> | name of Credential |
-| bu | <code>string</code> | name of BU |
-| type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
-| [keyArr] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Asset"></a>
 
