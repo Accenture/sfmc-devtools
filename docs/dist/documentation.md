@@ -17,6 +17,9 @@ Source and target business units are also compared before the deployment to appl
 <dt><a href="#AttributeGroup">AttributeGroup</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>AttributeGroup MetadataType</p>
 </dd>
+<dt><a href="#AttributeSet">AttributeSet</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>AttributeSet MetadataType</p>
+</dd>
 <dt><a href="#Automation">Automation</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>Automation MetadataType</p>
 </dd>
@@ -104,9 +107,6 @@ Provides default functionality that can be overwritten by child metadata type cl
 </dd>
 <dt><a href="#SendClassification">SendClassification</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>SendClassification MetadataType</p>
-</dd>
-<dt><a href="#SetDefinition">SetDefinition</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
-<dd><p>SetDefinition MetadataType</p>
 </dd>
 <dt><a href="#TransactionalEmail">TransactionalEmail</a> ⇐ <code><a href="#TransactionalMessage">TransactionalMessage</a></code></dt>
 <dd><p>TransactionalEmail MetadataType</p>
@@ -1219,6 +1219,7 @@ AttributeGroup MetadataType
 * [AttributeGroup](#AttributeGroup) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#AttributeGroup.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache()](#AttributeGroup.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.postRetrieveTasks(metadata)](#AttributeGroup.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
 
 <a name="AttributeGroup.retrieve"></a>
 
@@ -1242,6 +1243,87 @@ Retrieves Metadata of schema attribute groups for caching.
 
 **Kind**: static method of [<code>AttributeGroup</code>](#AttributeGroup)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+<a name="AttributeGroup.postRetrieveTasks"></a>
+
+### AttributeGroup.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata |
+
+<a name="AttributeSet"></a>
+
+## AttributeSet ⇐ [<code>MetadataType</code>](#MetadataType)
+AttributeSet MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [AttributeSet](#AttributeSet) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [key])](#AttributeSet.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache()](#AttributeSet.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.parseResponseBody(body, [singleRetrieve])](#AttributeSet.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
+    * [.postRetrieveTasks(metadata)](#AttributeSet.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [._getSystemValueDefinitions()](#AttributeSet._getSystemValueDefinitions) ⇒ <code>Array.&lt;object&gt;</code>
+
+<a name="AttributeSet.retrieve"></a>
+
+### AttributeSet.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of schema set Definitions.
+
+**Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [_] | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="AttributeSet.retrieveForCache"></a>
+
+### AttributeSet.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of schema set definitions for caching.
+
+**Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+<a name="AttributeSet.parseResponseBody"></a>
+
+### AttributeSet.parseResponseBody(body, [singleRetrieve]) ⇒ <code>TYPE.MetadataTypeMap</code>
+Builds map of metadata entries mapped to their keyfields
+
+**Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
+**Returns**: <code>TYPE.MetadataTypeMap</code> - keyField => metadata map  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| body | <code>object</code> | json of response body |
+| [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
+
+<a name="AttributeSet.postRetrieveTasks"></a>
+
+### AttributeSet.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata |
+
+<a name="AttributeSet._getSystemValueDefinitions"></a>
+
+### AttributeSet.\_getSystemValueDefinitions() ⇒ <code>Array.&lt;object&gt;</code>
+helper for [postRetrieveTasks](#AttributeSet.postRetrieveTasks)
+
+**Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
+**Returns**: <code>Array.&lt;object&gt;</code> - all system value definitions  
 <a name="Automation"></a>
 
 ## Automation ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -5189,40 +5271,6 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
-<a name="SetDefinition"></a>
-
-## SetDefinition ⇐ [<code>MetadataType</code>](#MetadataType)
-SetDefinition MetadataType
-
-**Kind**: global class  
-**Extends**: [<code>MetadataType</code>](#MetadataType)  
-
-* [SetDefinition](#SetDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [_], [__], [key])](#SetDefinition.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache()](#SetDefinition.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-
-<a name="SetDefinition.retrieve"></a>
-
-### SetDefinition.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves Metadata of schema set Definitions.
-
-**Kind**: static method of [<code>SetDefinition</code>](#SetDefinition)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
-| [_] | <code>void</code> | unused parameter |
-| [__] | <code>void</code> | unused parameter |
-| [key] | <code>string</code> | customer key of single item to retrieve |
-
-<a name="SetDefinition.retrieveForCache"></a>
-
-### SetDefinition.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves Metadata of schema set definitions for caching.
-
-**Kind**: static method of [<code>SetDefinition</code>](#SetDefinition)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
 <a name="TransactionalEmail"></a>
 
 ## TransactionalEmail ⇐ [<code>TransactionalMessage</code>](#TransactionalMessage)
