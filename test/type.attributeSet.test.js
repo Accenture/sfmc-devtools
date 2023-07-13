@@ -36,8 +36,9 @@ describe('type: attributeSet', () => {
                 27,
                 'only 27 attributeSets expected in cache'
             );
+
             assert.deepEqual(
-                await testUtils.getActualJson('Contact', 'attributeSet'),
+                await testUtils.getActualJson('MobileSubscriptions', 'attributeSet'),
                 await testUtils.getExpectedJson('9999999', 'attributeSet', 'retrieve'),
 
                 'returned metadata was not equal expected'
