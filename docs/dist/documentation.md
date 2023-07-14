@@ -17,6 +17,9 @@ Source and target business units are also compared before the deployment to appl
 <dt><a href="#AttributeGroup">AttributeGroup</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>AttributeGroup MetadataType</p>
 </dd>
+<dt><a href="#AttributeSet">AttributeSet</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>AttributeSet MetadataType</p>
+</dd>
 <dt><a href="#Automation">Automation</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>Automation MetadataType</p>
 </dd>
@@ -104,9 +107,6 @@ Provides default functionality that can be overwritten by child metadata type cl
 </dd>
 <dt><a href="#SendClassification">SendClassification</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>SendClassification MetadataType</p>
-</dd>
-<dt><a href="#SetDefinition">SetDefinition</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
-<dd><p>SetDefinition MetadataType</p>
 </dd>
 <dt><a href="#TransactionalEmail">TransactionalEmail</a> ⇐ <code><a href="#TransactionalMessage">TransactionalMessage</a></code></dt>
 <dd><p>TransactionalEmail MetadataType</p>
@@ -199,6 +199,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dd><p>helper for <a href="#Automation.postRetrieveTasks">postRetrieveTasks</a> and <a href="#Automation.execute">execute</a></p>
 </dd>
 <dt><a href="#Automation.">Automation.(metadataMap, key)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
+<dd><p>helper for <a href="#Automation.execute">execute</a></p>
+</dd>
+<dt><a href="#Automation.">Automation.(metadataEntry)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.execute">execute</a></p>
 </dd>
 <dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
@@ -516,6 +519,7 @@ main class
     * [.buildDefinition(businessUnit, selectedType, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.buildDefinitionBulk(listName, type, name)](#Mcdev.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getFilesToCommit(businessUnit, selectedType, keyArr)](#Mcdev.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [.schedule(businessUnit, [selectedType], [keys])](#Mcdev.schedule) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.execute(businessUnit, [selectedType], [keys])](#Mcdev.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.pause(businessUnit, [selectedType], [keys])](#Mcdev.pause) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.fixKeys(businessUnit, type, [keys])](#Mcdev.fixKeys) ⇒ <code>Array</code>
@@ -770,6 +774,20 @@ Build a specific metadata file based on a template using a list of bu-market com
 | businessUnit | <code>string</code> | references credentials from properties.json |
 | selectedType | <code>string</code> | supported metadata type |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Mcdev.schedule"></a>
+
+### Mcdev.schedule(businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Schedule an item (shortcut for execute --schedule)
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all started successfully, false if not  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| businessUnit | <code>string</code> | name of BU |
+| [selectedType] | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
+| [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Mcdev.execute"></a>
 
@@ -1234,6 +1252,7 @@ AttributeGroup MetadataType
 * [AttributeGroup](#AttributeGroup) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#AttributeGroup.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache()](#AttributeGroup.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.postRetrieveTasks(metadata)](#AttributeGroup.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
 
 <a name="AttributeGroup.retrieve"></a>
 
@@ -1257,6 +1276,87 @@ Retrieves Metadata of schema attribute groups for caching.
 
 **Kind**: static method of [<code>AttributeGroup</code>](#AttributeGroup)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+<a name="AttributeGroup.postRetrieveTasks"></a>
+
+### AttributeGroup.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>AttributeGroup</code>](#AttributeGroup)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata |
+
+<a name="AttributeSet"></a>
+
+## AttributeSet ⇐ [<code>MetadataType</code>](#MetadataType)
+AttributeSet MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [AttributeSet](#AttributeSet) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [key])](#AttributeSet.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache()](#AttributeSet.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.parseResponseBody(body, [singleRetrieve])](#AttributeSet.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
+    * [.postRetrieveTasks(metadata)](#AttributeSet.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [._getSystemValueDefinitions()](#AttributeSet._getSystemValueDefinitions) ⇒ <code>Array.&lt;object&gt;</code>
+
+<a name="AttributeSet.retrieve"></a>
+
+### AttributeSet.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of schema set Definitions.
+
+**Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [_] | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="AttributeSet.retrieveForCache"></a>
+
+### AttributeSet.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of schema set definitions for caching.
+
+**Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+<a name="AttributeSet.parseResponseBody"></a>
+
+### AttributeSet.parseResponseBody(body, [singleRetrieve]) ⇒ <code>TYPE.MetadataTypeMap</code>
+Builds map of metadata entries mapped to their keyfields
+
+**Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
+**Returns**: <code>TYPE.MetadataTypeMap</code> - keyField => metadata map  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| body | <code>object</code> | json of response body |
+| [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
+
+<a name="AttributeSet.postRetrieveTasks"></a>
+
+### AttributeSet.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata |
+
+<a name="AttributeSet._getSystemValueDefinitions"></a>
+
+### AttributeSet.\_getSystemValueDefinitions() ⇒ <code>Array.&lt;object&gt;</code>
+helper for [postRetrieveTasks](#AttributeSet.postRetrieveTasks)
+
+**Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
+**Returns**: <code>Array.&lt;object&gt;</code> - all system value definitions  
 <a name="Automation"></a>
 
 ## Automation ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -1272,6 +1372,7 @@ Automation MetadataType
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Automation.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.AutomationItemObj&gt;</code>
     * [.postRetrieveTasks(metadata)](#Automation.postRetrieveTasks) ⇒ <code>TYPE.AutomationItem</code> \| <code>void</code>
     * [.execute(keyArr)](#Automation.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.getErrorsREST(ex)](#Automation.getErrorsREST) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
     * [.pause(keyArr)](#Automation.pause) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.deploy(metadata, targetBU, retrieveDir)](#Automation.deploy) ⇒ <code>Promise.&lt;TYPE.AutomationMap&gt;</code>
     * [.create(metadata)](#Automation.create) ⇒ <code>Promise</code>
@@ -1354,6 +1455,18 @@ a function to start query execution via API
 | Param | Type | Description |
 | --- | --- | --- |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Automation.getErrorsREST"></a>
+
+### Automation.getErrorsREST(ex) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
+Standardizes a check for multiple messages but adds query specific filters to error texts
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+**Returns**: <code>Array.&lt;string&gt;</code> \| <code>void</code> - formatted Error Message  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ex | <code>object</code> | response payload from REST API |
 
 <a name="Automation.pause"></a>
 
@@ -3244,6 +3357,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.retrieveSOAP(retrieveDir, [requestParams], [singleRetrieve], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
     * [.executeREST(uri, key)](#MetadataType.executeREST) ⇒ <code>Promise.&lt;string&gt;</code>
+    * [.executeSOAP([metadataEntry])](#MetadataType.executeSOAP) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.runDocumentOnRetrieve([singleRetrieve], metadataMap)](#MetadataType.runDocumentOnRetrieve) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#MetadataType.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
@@ -3261,7 +3375,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.findSubType(templateDir, templateName)](#MetadataType.findSubType) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName, ex)](#MetadataType.readSecondaryFolder) ⇒ <code>object</code>
     * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType.buildDefinition) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.checkForErrors(ex)](#MetadataType.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
+    * [.getErrorsREST(ex)](#MetadataType.getErrorsREST) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
     * [.document([metadata], [isDeploy])](#MetadataType.document) ⇒ <code>void</code>
     * [.deleteByKey(customerKey)](#MetadataType.deleteByKey) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey, [additionalExtensions])](#MetadataType.postDeleteTasks) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -3733,6 +3847,18 @@ Used to execute a query/automation etc.
 | uri | <code>string</code> | REST endpoint where the POST request should be sent |
 | key | <code>string</code> | item key |
 
+<a name="MetadataType.executeSOAP"></a>
+
+### MetadataType.executeSOAP([metadataEntry]) ⇒ <code>Promise.&lt;object&gt;</code>
+Used to execute a query/automation etc.
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;object&gt;</code> - api response  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [metadataEntry] | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
+
 <a name="MetadataType.runDocumentOnRetrieve"></a>
 
 ### MetadataType.runDocumentOnRetrieve([singleRetrieve], metadataMap) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -3971,9 +4097,9 @@ parsing is required (for example scripts & queries)
 | templateName | <code>string</code> | name of the metadata file |
 | variables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
-<a name="MetadataType.checkForErrors"></a>
+<a name="MetadataType.getErrorsREST"></a>
 
-### MetadataType.checkForErrors(ex) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
+### MetadataType.getErrorsREST(ex) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
 Standardizes a check for multiple messages
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -4669,7 +4795,7 @@ Query MetadataType
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildDefinitionForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.getFilesToCommit(keyArr)](#Query.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.checkForErrors(ex)](#Query.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
+    * [.getErrorsREST(ex)](#Query.getErrorsREST) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
     * [.deleteByKey(customerKey)](#Query.deleteByKey) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#Query.postDeleteTasks) ⇒ <code>void</code>
     * [.postDeployTasks(upsertResults)](#Query.postDeployTasks)
@@ -4836,9 +4962,9 @@ additionally, the documentation for dataExtension and automation should be retur
 | --- | --- | --- |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
-<a name="Query.checkForErrors"></a>
+<a name="Query.getErrorsREST"></a>
 
-### Query.checkForErrors(ex) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
+### Query.getErrorsREST(ex) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
 Standardizes a check for multiple messages but adds query specific filters to error texts
 
 **Kind**: static method of [<code>Query</code>](#Query)  
@@ -5215,40 +5341,6 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
-<a name="SetDefinition"></a>
-
-## SetDefinition ⇐ [<code>MetadataType</code>](#MetadataType)
-SetDefinition MetadataType
-
-**Kind**: global class  
-**Extends**: [<code>MetadataType</code>](#MetadataType)  
-
-* [SetDefinition](#SetDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [_], [__], [key])](#SetDefinition.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache()](#SetDefinition.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-
-<a name="SetDefinition.retrieve"></a>
-
-### SetDefinition.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves Metadata of schema set Definitions.
-
-**Kind**: static method of [<code>SetDefinition</code>](#SetDefinition)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
-| [_] | <code>void</code> | unused parameter |
-| [__] | <code>void</code> | unused parameter |
-| [key] | <code>string</code> | customer key of single item to retrieve |
-
-<a name="SetDefinition.retrieveForCache"></a>
-
-### SetDefinition.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves Metadata of schema set definitions for caching.
-
-**Kind**: static method of [<code>SetDefinition</code>](#SetDefinition)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
 <a name="TransactionalEmail"></a>
 
 ## TransactionalEmail ⇐ [<code>TransactionalMessage</code>](#TransactionalMessage)
@@ -5973,6 +6065,7 @@ CLI entry for SFMC DevTools
     * [.getSsjs(code)](#Util.getSsjs) ⇒ <code>string</code>
     * [.stringLike(testString, search)](#Util.stringLike) ⇒ <code>boolean</code>
     * [.fieldsLike(metadata, [filters])](#Util.fieldsLike) ⇒ <code>boolean</code>
+    * [.capitalizeFirstLetter(str)](#Util.capitalizeFirstLetter) ⇒ <code>string</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -6354,6 +6447,18 @@ returns true if no LIKE filter is defined or if all filters match
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata item |
 | [filters] | <code>object</code> | only used in recursive calls |
+
+<a name="Util.capitalizeFirstLetter"></a>
+
+### Util.capitalizeFirstLetter(str) ⇒ <code>string</code>
+helper used by SOAP methods to ensure the type always uses an upper-cased first letter
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>string</code> - str with first letter capitalized  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| str | <code>string</code> | string to capitalize |
 
 <a name="MetadataTypeDefinitions"></a>
 
@@ -7891,6 +7996,7 @@ Util that contains logger and simple util methods
     * [.getSsjs(code)](#Util.getSsjs) ⇒ <code>string</code>
     * [.stringLike(testString, search)](#Util.stringLike) ⇒ <code>boolean</code>
     * [.fieldsLike(metadata, [filters])](#Util.fieldsLike) ⇒ <code>boolean</code>
+    * [.capitalizeFirstLetter(str)](#Util.capitalizeFirstLetter) ⇒ <code>string</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -8273,6 +8379,18 @@ returns true if no LIKE filter is defined or if all filters match
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata item |
 | [filters] | <code>object</code> | only used in recursive calls |
 
+<a name="Util.capitalizeFirstLetter"></a>
+
+### Util.capitalizeFirstLetter(str) ⇒ <code>string</code>
+helper used by SOAP methods to ensure the type always uses an upper-cased first letter
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>string</code> - str with first letter capitalized  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| str | <code>string</code> | string to capitalize |
+
 <a name="csvToArray"></a>
 
 ## csvToArray(csv) ⇒ <code>Array.&lt;string&gt;</code>
@@ -8353,6 +8471,18 @@ helper for [execute](#Automation.execute)
 | --- | --- | --- |
 | metadataMap | <code>TYPE.AutomationMap</code> | map of metadata |
 | key | <code>string</code> | key of the metadata |
+
+<a name="Automation."></a>
+
+## Automation.(metadataEntry) ⇒ <code>Promise.&lt;object&gt;</code>
+helper for [execute](#Automation.execute)
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;object&gt;</code> - Returns the result of the API call  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>TYPE.AutomationItem</code> | metadata object |
 
 <a name="Automation."></a>
 
