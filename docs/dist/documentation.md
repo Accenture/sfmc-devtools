@@ -519,6 +519,7 @@ main class
     * [.buildDefinition(businessUnit, selectedType, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.buildDefinitionBulk(listName, type, name)](#Mcdev.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getFilesToCommit(businessUnit, selectedType, keyArr)](#Mcdev.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [.schedule(businessUnit, [selectedType], [keys])](#Mcdev.schedule) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.execute(businessUnit, [selectedType], [keys])](#Mcdev.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.pause(businessUnit, [selectedType], [keys])](#Mcdev.pause) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
@@ -772,6 +773,20 @@ Build a specific metadata file based on a template using a list of bu-market com
 | businessUnit | <code>string</code> | references credentials from properties.json |
 | selectedType | <code>string</code> | supported metadata type |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Mcdev.schedule"></a>
+
+### Mcdev.schedule(businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Schedule an item (shortcut for execute --schedule)
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all started successfully, false if not  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| businessUnit | <code>string</code> | name of BU |
+| [selectedType] | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
+| [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Mcdev.execute"></a>
 

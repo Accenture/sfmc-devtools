@@ -118,7 +118,7 @@ describe('type: automation', () => {
         });
         it('Should update & schedule an automation with --execute option', async () => {
             // WHEN
-            handler.setOptions({ execute: 'schedule' });
+            handler.setOptions({ schedule: true });
             const deployed = await handler.deploy(
                 'testInstance/testBU',
                 ['automation'],
@@ -382,6 +382,30 @@ describe('type: automation', () => {
     });
     describe('Execute ================', () => {
         it('Should schedule an automation by key', async () => {
+            const execute = await handler.schedule('testInstance/testBU', 'automation', [
+                'testExisting_automation',
+            ]);
+            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(execute, true, 'automation was supposed to be executed');
+            return;
+        });
+        it('Should schedule an automation selected via --like', async () => {
+            handler.setOptions({ like: { key: 'testExist%automation' } });
+            const execute = await handler.schedule('testInstance/testBU', 'automation');
+            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(execute, true, 'automation was supposed to be executed');
+            return;
+        });
+        it('Should not schedule executing an automation because key and --like was specified', async () => {
+            handler.setOptions({ like: { key: 'testExisting%' } });
+            const execute = await handler.schedule('testInstance/testBU', 'automation', [
+                'testExisting_automation',
+            ]);
+            assert.equal(process.exitCode, true, 'execute should not have thrown an error');
+            assert.equal(execute, false, 'automation was not supposed to be executed');
+            return;
+        });
+        it('Should execute --schedule an automation by key', async () => {
             handler.setOptions({ schedule: true });
             const execute = await handler.execute('testInstance/testBU', 'automation', [
                 'testExisting_automation',
@@ -390,14 +414,14 @@ describe('type: automation', () => {
             assert.equal(execute, true, 'automation was supposed to be executed');
             return;
         });
-        it('Should schedule an automation selected via --like', async () => {
+        it('Should execute --schedule an automation selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExist%automation' }, schedule: true });
             const execute = await handler.execute('testInstance/testBU', 'automation');
             assert.equal(process.exitCode, false, 'execute should not have thrown an error');
             assert.equal(execute, true, 'automation was supposed to be executed');
             return;
         });
-        it('Should not schedule executing an automation because key and --like was specified', async () => {
+        it('Should not execute --schedule executing an automation because key and --like was specified', async () => {
             handler.setOptions({ like: { key: 'testExisting%' }, schedule: true });
             const execute = await handler.execute('testInstance/testBU', 'automation', [
                 'testExisting_automation',
