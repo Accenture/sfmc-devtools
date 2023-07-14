@@ -518,7 +518,7 @@ main class
     * [.getFilesToCommit(businessUnit, selectedType, keyArr)](#Mcdev.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.execute(businessUnit, [selectedType], [keys])](#Mcdev.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.pause(businessUnit, [selectedType], [keys])](#Mcdev.pause) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.fixKeys(businessUnit, type, [keys])](#Mcdev.fixKeys) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
+    * [.fixKeys(businessUnit, type, [keys])](#Mcdev.fixKeys) ⇒ <code>Array</code>
 
 <a name="Mcdev.setSkipInteraction"></a>
 
@@ -801,11 +801,11 @@ pause an item
 
 <a name="Mcdev.fixKeys"></a>
 
-### Mcdev.fixKeys(businessUnit, type, [keys]) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
+### Mcdev.fixKeys(businessUnit, type, [keys]) ⇒ <code>Array</code>
 Updates the key to match the name field
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code> - deployed metadata per BU (first key: bu name, second key: metadata type)  
+**Returns**: <code>Array</code> - array of fixedKeys  
 
 | Param | Type | Description |
 | --- | --- | --- |

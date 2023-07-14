@@ -252,14 +252,23 @@ describe('type: query', () => {
                 'testExisting_query_fixKeys',
                 'testExisting_query',
             ]);
-            assert.equal(resultFixKeys.length, 1, 'returned keys do not correspond to expected');
+            assert.equal(
+                resultFixKeys.length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            assert.equal(
+                resultFixKeys[0],
+                'testExisting_query_fixedKeys',
+                'returned keys do not correspond to expected fixed keys'
+            );
             // THEN
             assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_query_fixedKeys', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'patch_fixKeys'),
-                'returned metadata was not equal expected for insert query'
+                'returned metadata was not equal expected for update query'
             );
             expect(
                 file(testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql'))
@@ -267,7 +276,7 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                47,
+                33,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
