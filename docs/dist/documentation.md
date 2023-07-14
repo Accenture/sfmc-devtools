@@ -201,7 +201,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Automation.">Automation.(metadataMap, key)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.execute">execute</a></p>
 </dd>
-<dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
+<dt><a href="#Automation.">Automation.(metadataEntry)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.execute">execute</a></p>
 </dd>
 <dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
@@ -3314,6 +3314,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.retrieveSOAP(retrieveDir, [requestParams], [singleRetrieve], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
     * [.executeREST(uri, key)](#MetadataType.executeREST) ⇒ <code>Promise.&lt;string&gt;</code>
+    * [.executeSOAP([metadataEntry])](#MetadataType.executeSOAP) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.runDocumentOnRetrieve([singleRetrieve], metadataMap)](#MetadataType.runDocumentOnRetrieve) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#MetadataType.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
@@ -3801,6 +3802,18 @@ Used to execute a query/automation etc.
 | --- | --- | --- |
 | uri | <code>string</code> | REST endpoint where the POST request should be sent |
 | key | <code>string</code> | item key |
+
+<a name="MetadataType.executeSOAP"></a>
+
+### MetadataType.executeSOAP([metadataEntry]) ⇒ <code>Promise.&lt;object&gt;</code>
+Used to execute a query/automation etc.
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;object&gt;</code> - api response  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [metadataEntry] | <code>TYPE.MetadataTypeItem</code> | single metadata entry |
 
 <a name="MetadataType.runDocumentOnRetrieve"></a>
 
@@ -5998,6 +6011,7 @@ CLI entry for SFMC DevTools
     * [.getSsjs(code)](#Util.getSsjs) ⇒ <code>string</code>
     * [.stringLike(testString, search)](#Util.stringLike) ⇒ <code>boolean</code>
     * [.fieldsLike(metadata, [filters])](#Util.fieldsLike) ⇒ <code>boolean</code>
+    * [.capitalizeFirstLetter(str)](#Util.capitalizeFirstLetter) ⇒ <code>string</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -6379,6 +6393,18 @@ returns true if no LIKE filter is defined or if all filters match
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata item |
 | [filters] | <code>object</code> | only used in recursive calls |
+
+<a name="Util.capitalizeFirstLetter"></a>
+
+### Util.capitalizeFirstLetter(str) ⇒ <code>string</code>
+helper used by SOAP methods to ensure the type always uses an upper-cased first letter
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>string</code> - str with first letter capitalized  
+
+| Param | Type |
+| --- | --- |
+| str | <code>string</code> | 
 
 <a name="MetadataTypeDefinitions"></a>
 
@@ -7916,6 +7942,7 @@ Util that contains logger and simple util methods
     * [.getSsjs(code)](#Util.getSsjs) ⇒ <code>string</code>
     * [.stringLike(testString, search)](#Util.stringLike) ⇒ <code>boolean</code>
     * [.fieldsLike(metadata, [filters])](#Util.fieldsLike) ⇒ <code>boolean</code>
+    * [.capitalizeFirstLetter(str)](#Util.capitalizeFirstLetter) ⇒ <code>string</code>
 
 <a name="Util.skipInteraction"></a>
 
@@ -8298,6 +8325,18 @@ returns true if no LIKE filter is defined or if all filters match
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata item |
 | [filters] | <code>object</code> | only used in recursive calls |
 
+<a name="Util.capitalizeFirstLetter"></a>
+
+### Util.capitalizeFirstLetter(str) ⇒ <code>string</code>
+helper used by SOAP methods to ensure the type always uses an upper-cased first letter
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>string</code> - str with first letter capitalized  
+
+| Param | Type |
+| --- | --- |
+| str | <code>string</code> | 
+
 <a name="csvToArray"></a>
 
 ## csvToArray(csv) ⇒ <code>Array.&lt;string&gt;</code>
@@ -8381,7 +8420,7 @@ helper for [execute](#Automation.execute)
 
 <a name="Automation."></a>
 
-## Automation.(metadata) ⇒ <code>Promise.&lt;object&gt;</code>
+## Automation.(metadataEntry) ⇒ <code>Promise.&lt;object&gt;</code>
 helper for [execute](#Automation.execute)
 
 **Kind**: global function  
@@ -8389,7 +8428,7 @@ helper for [execute](#Automation.execute)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.AutomationItem</code> | metadata json |
+| metadataEntry | <code>TYPE.AutomationItem</code> | metadata object |
 
 <a name="Automation."></a>
 

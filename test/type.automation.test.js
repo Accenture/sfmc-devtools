@@ -178,8 +178,68 @@ describe('type: automation', () => {
             );
             return;
         });
-        it('Should update & runOnce an automation with --execute option');
+        it('Should update & runOnce an automation with --execute option', async () => {
+            // WHEN
+            handler.setOptions({ execute: true });
+            const deployed = await handler.deploy(
+                'testInstance/testBU',
+                ['automation'],
+                ['testExisting_automation']
+            );
+            // THEN
+            assert.equal(
+                process.exitCode,
+                false,
+                'deploy with --execute should not have thrown an error'
+            );
 
+            // get results from cache
+            const cached = cache.getCache();
+            assert.equal(
+                cached.automation ? Object.keys(cached.automation).length : 0,
+                2,
+                'two cached automation expected'
+            );
+            assert.equal(
+                deployed['testInstance/testBU'].automation
+                    ? Object.keys(deployed['testInstance/testBU'].automation).length
+                    : 0,
+                1,
+                'one deployed automation expected'
+            );
+            assert.equal(
+                deployed['testInstance/testBU'].automation
+                    ? Object.keys(deployed['testInstance/testBU'].automation)[0]
+                    : null,
+                'testExisting_automation',
+                'expected specific automation to have been deployed'
+            );
+
+            // update
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_automation', 'automation'),
+                await testUtils.getExpectedJson('9999999', 'automation', 'update'),
+                'returned metadata was not equal expected for update'
+            );
+            // check if MD file was created and equals expectations
+            expect(file(testUtils.getActualDoc('testExisting_automation', 'automation'))).to.equal(
+                file(
+                    testUtils.getExpectedFile(
+                        '9999999',
+                        'automation',
+                        'update-testExisting_automation',
+                        'md'
+                    )
+                )
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                16,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
         it('Should change the key during update via --changeKeyValue');
     });
     describe('Templating ================', () => {
@@ -347,28 +407,28 @@ describe('type: automation', () => {
             return;
         });
         it('Should runOnce an automation by key', async () => {
-            // const execute = await handler.execute('testInstance/testBU', 'automation', [
-            //     'testExisting_automation',
-            // ]);
-            // assert.equal(process.exitCode, false, 'execute should not have thrown an error');
-            // assert.equal(execute, true, 'automation was supposed to be executed');
-            // return;
+            const execute = await handler.execute('testInstance/testBU', 'automation', [
+                'testExisting_automation',
+            ]);
+            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(execute, true, 'automation was supposed to be executed');
+            return;
         });
         it('Should runOnce an automation selected via --like', async () => {
-            // handler.setOptions({ like: { key: 'testExist%automation' } });
-            // const execute = await handler.execute('testInstance/testBU', 'automation');
-            // assert.equal(process.exitCode, false, 'execute should not have thrown an error');
-            // assert.equal(execute, true, 'automation was supposed to be executed');
-            // return;
+            handler.setOptions({ like: { key: 'testExist%automation' } });
+            const execute = await handler.execute('testInstance/testBU', 'automation');
+            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(execute, true, 'automation was supposed to be executed');
+            return;
         });
         it('Should not runOnce executing an automation because key and --like was specified', async () => {
-            // handler.setOptions({ like: { key: 'testExisting%' }});
-            // const execute = await handler.execute('testInstance/testBU', 'automation', [
-            //     'testExisting_automation',
-            // ]);
-            // assert.equal(process.exitCode, true, 'execute should not have thrown an error');
-            // assert.equal(execute, false, 'automation was not supposed to be executed');
-            // return;
+            handler.setOptions({ like: { key: 'testExisting%' } });
+            const execute = await handler.execute('testInstance/testBU', 'automation', [
+                'testExisting_automation',
+            ]);
+            assert.equal(process.exitCode, true, 'execute should not have thrown an error');
+            assert.equal(execute, false, 'automation was not supposed to be executed');
+            return;
         });
     });
     describe('Pause ================', () => {
