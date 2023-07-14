@@ -8,6 +8,7 @@ const file = chaiFiles.file;
 const cache = require('../lib/util/cache');
 const testUtils = require('./utils');
 const handler = require('../lib/index');
+const config = require('./../lib/util/config');
 
 describe('type: query', () => {
     beforeEach(() => {
@@ -247,6 +248,8 @@ describe('type: query', () => {
             return;
         });
         it('Should fixKeys and deploy', async () => {
+            const properties = await config.getProperties();
+            const deployDir = properties.directories.deploy;
             // WHEN
             const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
                 'testExisting_query_fixKeys',
@@ -279,6 +282,7 @@ describe('type: query', () => {
                 16,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
+            properties.directories.deploy = deployDir;
             return;
         });
     });
