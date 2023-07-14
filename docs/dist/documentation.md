@@ -202,6 +202,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dd><p>helper for <a href="#Automation.execute">execute</a></p>
 </dd>
 <dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
+<dd><p>helper for <a href="#Automation.execute">execute</a></p>
+</dd>
+<dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.pause">pause</a></p>
 </dd>
 <dt><a href="#Automation.">Automation.(metadata)</a></dt>
@@ -8375,6 +8378,18 @@ helper for [execute](#Automation.execute)
 | --- | --- | --- |
 | metadataMap | <code>TYPE.AutomationMap</code> | map of metadata |
 | key | <code>string</code> | key of the metadata |
+
+<a name="Automation."></a>
+
+## Automation.(metadata) ⇒ <code>Promise.&lt;object&gt;</code>
+helper for [execute](#Automation.execute)
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;object&gt;</code> - Returns the result of the API call  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.AutomationItem</code> | metadata json |
 
 <a name="Automation."></a>
 
