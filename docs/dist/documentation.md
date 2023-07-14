@@ -1342,6 +1342,7 @@ Automation MetadataType
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Automation.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.AutomationItemObj&gt;</code>
     * [.postRetrieveTasks(metadata)](#Automation.postRetrieveTasks) ⇒ <code>TYPE.AutomationItem</code> \| <code>void</code>
     * [.execute(keyArr)](#Automation.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.getErrorsREST(ex)](#Automation.getErrorsREST) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
     * [.pause(keyArr)](#Automation.pause) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.deploy(metadata, targetBU, retrieveDir)](#Automation.deploy) ⇒ <code>Promise.&lt;TYPE.AutomationMap&gt;</code>
     * [.create(metadata)](#Automation.create) ⇒ <code>Promise</code>
@@ -1424,6 +1425,18 @@ a function to start query execution via API
 | Param | Type | Description |
 | --- | --- | --- |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Automation.getErrorsREST"></a>
+
+### Automation.getErrorsREST(ex) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
+Standardizes a check for multiple messages but adds query specific filters to error texts
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+**Returns**: <code>Array.&lt;string&gt;</code> \| <code>void</code> - formatted Error Message  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ex | <code>object</code> | response payload from REST API |
 
 <a name="Automation.pause"></a>
 
@@ -3332,7 +3345,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.findSubType(templateDir, templateName)](#MetadataType.findSubType) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName, ex)](#MetadataType.readSecondaryFolder) ⇒ <code>object</code>
     * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType.buildDefinition) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.checkForErrors(ex)](#MetadataType.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
+    * [.getErrorsREST(ex)](#MetadataType.getErrorsREST) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
     * [.document([metadata], [isDeploy])](#MetadataType.document) ⇒ <code>void</code>
     * [.deleteByKey(customerKey)](#MetadataType.deleteByKey) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey, [additionalExtensions])](#MetadataType.postDeleteTasks) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -4053,9 +4066,9 @@ parsing is required (for example scripts & queries)
 | templateName | <code>string</code> | name of the metadata file |
 | variables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
-<a name="MetadataType.checkForErrors"></a>
+<a name="MetadataType.getErrorsREST"></a>
 
-### MetadataType.checkForErrors(ex) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
+### MetadataType.getErrorsREST(ex) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
 Standardizes a check for multiple messages
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -4741,7 +4754,7 @@ Query MetadataType
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildDefinitionForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.getFilesToCommit(keyArr)](#Query.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.checkForErrors(ex)](#Query.checkForErrors) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
+    * [.getErrorsREST(ex)](#Query.getErrorsREST) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
     * [.deleteByKey(customerKey)](#Query.deleteByKey) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#Query.postDeleteTasks) ⇒ <code>void</code>
     * [.postDeployTasks(upsertResults)](#Query.postDeployTasks)
@@ -4908,9 +4921,9 @@ additionally, the documentation for dataExtension and automation should be retur
 | --- | --- | --- |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
-<a name="Query.checkForErrors"></a>
+<a name="Query.getErrorsREST"></a>
 
-### Query.checkForErrors(ex) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
+### Query.getErrorsREST(ex) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
 Standardizes a check for multiple messages but adds query specific filters to error texts
 
 **Kind**: static method of [<code>Query</code>](#Query)  
@@ -6402,9 +6415,9 @@ helper used by SOAP methods to ensure the type always uses an upper-cased first 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>string</code> - str with first letter capitalized  
 
-| Param | Type |
-| --- | --- |
-| str | <code>string</code> | 
+| Param | Type | Description |
+| --- | --- | --- |
+| str | <code>string</code> | string to capitalize |
 
 <a name="MetadataTypeDefinitions"></a>
 
@@ -8333,9 +8346,9 @@ helper used by SOAP methods to ensure the type always uses an upper-cased first 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>string</code> - str with first letter capitalized  
 
-| Param | Type |
-| --- | --- |
-| str | <code>string</code> | 
+| Param | Type | Description |
+| --- | --- | --- |
+| str | <code>string</code> | string to capitalize |
 
 <a name="csvToArray"></a>
 
