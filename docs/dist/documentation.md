@@ -522,7 +522,7 @@ main class
     * [.schedule(businessUnit, [selectedType], [keys])](#Mcdev.schedule) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.execute(businessUnit, [selectedType], [keys])](#Mcdev.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.pause(businessUnit, [selectedType], [keys])](#Mcdev.pause) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.fixKeys(businessUnit, type, [keys])](#Mcdev.fixKeys) ⇒ <code>Array</code>
+    * [.fixKeys(businessUnit, type, [keys])](#Mcdev.fixKeys) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="Mcdev.setSkipInteraction"></a>
 
@@ -819,11 +819,11 @@ pause an item
 
 <a name="Mcdev.fixKeys"></a>
 
-### Mcdev.fixKeys(businessUnit, type, [keys]) ⇒ <code>Array</code>
+### Mcdev.fixKeys(businessUnit, type, [keys]) ⇒ <code>Array.&lt;string&gt;</code>
 Updates the key to match the name field
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Array</code> - array of fixedKeys  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of fixedKeys  
 
 | Param | Type | Description |
 | --- | --- | --- |
