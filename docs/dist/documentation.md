@@ -395,10 +395,10 @@ Source and target business units are also compared before the deployment to appl
     * [new Deployer(properties, buObject)](#new_Deployer_new)
     * _instance_
         * [.metadata](#Deployer+metadata) : <code>TYPE.MultiMetadataTypeMap</code>
-        * [._deploy([typeArr], [keyArr], [fromRetrieve])](#Deployer+_deploy) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
+        * [._deploy([typeArr], [keyArr])](#Deployer+_deploy) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
     * _static_
-        * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Deployer.deploy) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
-        * [._deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve])](#Deployer._deployBU) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
+        * [.deploy(businessUnit, [selectedTypesArr], [keyArr])](#Deployer.deploy) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
+        * [._deployBU(cred, bu, properties, [typeArr], [keyArr])](#Deployer._deployBU) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
         * [.readBUMetadata(deployDir, [typeArr], [listBadKeys])](#Deployer.readBUMetadata) ⇒ <code>TYPE.MultiMetadataTypeMap</code>
         * [.createFolderDefinitions(deployDir, metadata, metadataTypeArr)](#Deployer.createFolderDefinitions) ⇒ <code>void</code>
 
@@ -419,7 +419,7 @@ Creates a Deployer, uses v2 auth if v2AuthOptions are passed.
 **Kind**: instance property of [<code>Deployer</code>](#Deployer)  
 <a name="Deployer+_deploy"></a>
 
-### deployer.\_deploy([typeArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
+### deployer.\_deploy([typeArr], [keyArr]) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
 Deploy all metadata that is located in the deployDir
 
 **Kind**: instance method of [<code>Deployer</code>](#Deployer)  
@@ -429,11 +429,10 @@ Deploy all metadata that is located in the deployDir
 | --- | --- | --- |
 | [typeArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit deployment to given metadata type (can include subtype) |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
-| [fromRetrieve] | <code>boolean</code> | if true, no folders will be updated/created |
 
 <a name="Deployer.deploy"></a>
 
-### Deployer.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
+### Deployer.deploy(businessUnit, [selectedTypesArr], [keyArr]) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
 Deploys all metadata located in the 'deploy' directory to the specified business unit
 
 **Kind**: static method of [<code>Deployer</code>](#Deployer)  
@@ -444,11 +443,10 @@ Deploys all metadata located in the 'deploy' directory to the specified business
 | businessUnit | <code>string</code> | references credentials from properties.json |
 | [selectedTypesArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit deployment to given metadata type |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
-| [fromRetrieve] | <code>boolean</code> | optionally deploy whats defined via selectedTypesArr + keyArr directly from retrieve folder instead of from deploy folder |
 
 <a name="Deployer._deployBU"></a>
 
-### Deployer.\_deployBU(cred, bu, properties, [typeArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
+### Deployer.\_deployBU(cred, bu, properties, [typeArr], [keyArr]) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeMap&gt;</code>
 helper for [deploy](#Deployer.deploy)
 
 **Kind**: static method of [<code>Deployer</code>](#Deployer)  
@@ -461,7 +459,6 @@ helper for [deploy](#Deployer.deploy)
 | properties | <code>TYPE.Mcdevrc</code> | General configuration to be used in retrieve |
 | [typeArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit deployment to given metadata type |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
-| [fromRetrieve] | <code>boolean</code> | optionally deploy whats defined via selectedTypesArr + keyArr directly from retrieve folder instead of from deploy folder |
 
 <a name="Deployer.readBUMetadata"></a>
 
@@ -506,7 +503,7 @@ main class
     * [.explainTypes()](#Mcdev.explainTypes) ⇒ <code>Array.&lt;object&gt;</code>
     * [.upgrade()](#Mcdev.upgrade) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.retrieve(businessUnit, [selectedTypesArr], [keys], [changelogOnly])](#Mcdev.retrieve) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve])](#Mcdev.deploy) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
+    * [.deploy(businessUnit, [selectedTypesArr], [keyArr])](#Mcdev.deploy) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
     * [.initProject([credentialsName])](#Mcdev.initProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.joinProject()](#Mcdev.joinProject) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -606,18 +603,17 @@ Retrieve all metadata from the specified business unit into the local file syste
 
 <a name="Mcdev.deploy"></a>
 
-### Mcdev.deploy(businessUnit, [selectedTypesArr], [keyArr], [fromRetrieve]) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
+### Mcdev.deploy(businessUnit, [selectedTypesArr], [keyArr]) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code>
 Deploys all metadata located in the 'deploy' directory to the specified business unit
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
 **Returns**: <code>Promise.&lt;Object.&lt;string, TYPE.MultiMetadataTypeMap&gt;&gt;</code> - deployed metadata per BU (first key: bu name, second key: metadata type)  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| businessUnit | <code>string</code> |  | references credentials from properties.json |
-| [selectedTypesArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> |  | limit deployment to given metadata type |
-| [keyArr] | <code>Array.&lt;string&gt;</code> |  | limit deployment to given metadata keys |
-| [fromRetrieve] | <code>boolean</code> | <code>false</code> | optionally deploy whats defined via selectedTypesArr + keyArr directly from retrieve folder instead of from deploy folder |
+| Param | Type | Description |
+| --- | --- | --- |
+| businessUnit | <code>string</code> | references credentials from properties.json |
+| [selectedTypesArr] | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | limit deployment to given metadata type |
+| [keyArr] | <code>Array.&lt;string&gt;</code> | limit deployment to given metadata keys |
 
 <a name="Mcdev.initProject"></a>
 
