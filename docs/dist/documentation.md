@@ -2036,7 +2036,7 @@ Retrieves all records for caching
 <a name="DataExtensionField.convertToSortedArray"></a>
 
 ### DataExtensionField.convertToSortedArray(fieldsObj) ⇒ <code>Array.&lt;TYPE.DataExtensionFieldItem&gt;</code>
-helper for [DataExtension._retrieveFieldsForSingleDe](DataExtension._retrieveFieldsForSingleDe) that sorts the fields into an array
+helper for DataExtension.retrieveFieldsForSingleDe that sorts the fields into an array
 
 **Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
 **Returns**: <code>Array.&lt;TYPE.DataExtensionFieldItem&gt;</code> - sorted array of field objects  
@@ -6170,7 +6170,7 @@ SFMC accepts multiple false values for Boolean attributes for which we are check
 <a name="Util._isValidType"></a>
 
 ### Util.\_isValidType(selectedType, [handleOutside]) ⇒ <code>boolean</code>
-helper for [retrieve](#Mcdev.retrieve), [retrieveAsTemplate](#Mcdev.retrieveAsTemplate) and [deploy](#Mcdev.deploy)
+helper for Mcdev.retrieve, Mcdev.retrieveAsTemplate and Mcdev.deploy
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>boolean</code> - type ok or not  
@@ -6394,7 +6394,7 @@ pause execution of code; useful when multiple server calls are dependent on each
 <a name="Util.getSsjs"></a>
 
 ### Util.getSsjs(code) ⇒ <code>string</code>
-helper for [_extractCode](#Asset._extractCode) and [prepExtractedCode](#Script.prepExtractedCode) to determine if a code block is a valid SSJS block
+helper for Asset.extractCode and Script.prepExtractedCode to determine if a code block is a valid SSJS block
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>string</code> - the SSJS code if code block is a valid SSJS block, otherwise null  
@@ -8101,7 +8101,7 @@ SFMC accepts multiple false values for Boolean attributes for which we are check
 <a name="Util._isValidType"></a>
 
 ### Util.\_isValidType(selectedType, [handleOutside]) ⇒ <code>boolean</code>
-helper for [retrieve](#Mcdev.retrieve), [retrieveAsTemplate](#Mcdev.retrieveAsTemplate) and [deploy](#Mcdev.deploy)
+helper for Mcdev.retrieve, Mcdev.retrieveAsTemplate and Mcdev.deploy
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>boolean</code> - type ok or not  
@@ -8325,7 +8325,7 @@ pause execution of code; useful when multiple server calls are dependent on each
 <a name="Util.getSsjs"></a>
 
 ### Util.getSsjs(code) ⇒ <code>string</code>
-helper for [_extractCode](#Asset._extractCode) and [prepExtractedCode](#Script.prepExtractedCode) to determine if a code block is a valid SSJS block
+helper for Asset.extractCode and Script.prepExtractedCode to determine if a code block is a valid SSJS block
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>string</code> - the SSJS code if code block is a valid SSJS block, otherwise null  
