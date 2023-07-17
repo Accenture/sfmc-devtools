@@ -246,7 +246,7 @@ describe('type: query', () => {
             );
             return;
         });
-        it('Should fixKeys and deploy', async () => {
+        it('Should fixKeys and deploy by key', async () => {
             // WHEN
             const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
                 'testExisting_query_fixKeys',
@@ -277,6 +277,39 @@ describe('type: query', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 16,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should fixKeys and deploy via --like', async () => {
+            // WHEN
+            handler.setOptions({ like: { key: 'testExisting_query%' } });
+            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query');
+            assert.equal(
+                resultFixKeys.length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            assert.equal(
+                resultFixKeys[0],
+                'testExisting_query_fixedKeys',
+                'returned keys do not correspond to expected fixed keys'
+            );
+            // THEN
+            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_query_fixedKeys', 'query'),
+                await testUtils.getExpectedJson('9999999', 'query', 'patch_fixKeys'),
+                'returned metadata was not equal expected for update query'
+            );
+            expect(
+                file(testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql'))
+            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql')));
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                13,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
