@@ -3352,7 +3352,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.getSOAPErrorMsg(ex)](#MetadataType.getSOAPErrorMsg) ⇒ <code>string</code>
     * [.retrieveSOAP(retrieveDir, [requestParams], [singleRetrieve], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
-    * [.executeREST(uri, key)](#MetadataType.executeREST) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
+    * [.executeREST(uri, key)](#MetadataType.executeREST) ⇒ <code>Promise.&lt;{key:string, response:string}&gt;</code>
     * [.executeSOAP([metadataEntry])](#MetadataType.executeSOAP) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
     * [.runDocumentOnRetrieve([singleRetrieve], metadataMap)](#MetadataType.runDocumentOnRetrieve) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#MetadataType.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
@@ -3832,11 +3832,11 @@ Retrieves Metadata for Rest Types
 
 <a name="MetadataType.executeREST"></a>
 
-### MetadataType.executeREST(uri, key) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
+### MetadataType.executeREST(uri, key) ⇒ <code>Promise.&lt;{key:string, response:string}&gt;</code>
 Used to execute a query/automation etc.
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{key:string, response:object}&gt;</code> - metadata key and API response  
+**Returns**: <code>Promise.&lt;{key:string, response:string}&gt;</code> - metadata key and API response (OK or error)  
 
 | Param | Type | Description |
 | --- | --- | --- |
