@@ -228,9 +228,18 @@ describe('type: query', () => {
         });
         it('Should not fixKeys and deploy', async () => {
             // WHEN
-            await handler.fixKeys('testInstance/testBU', 'query', ['testExisting_query']);
+            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
+                'testExisting_query',
+            ]);
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(
+                process.exitCode,
+                true,
+                'fixKeys should have thrown an error because it could not find anything to update'
+            );
+            // check which keys were fixed
+            assert.equal(resultFixKeys.length, 0, 'expected to find no keys to be fixed');
+
             // get results from cache
             const result = cache.getCache();
             assert.equal(
