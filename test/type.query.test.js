@@ -238,7 +238,11 @@ describe('type: query', () => {
                 'fixKeys should have thrown an error because it could not find anything to update'
             );
             // check which keys were fixed
-            assert.equal(resultFixKeys.length, 0, 'expected to find no keys to be fixed');
+            assert.equal(
+                resultFixKeys['testInstance/testBU'].length,
+                0,
+                'expected to find no keys to be fixed'
+            );
 
             // get results from cache
             const result = cache.getCache();
@@ -262,12 +266,12 @@ describe('type: query', () => {
                 'testExisting_query',
             ]);
             assert.equal(
-                resultFixKeys.length,
+                resultFixKeys['testInstance/testBU'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys[0],
+                resultFixKeys['testInstance/testBU'][0],
                 'testExisting_query_fixedKeys',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -295,12 +299,12 @@ describe('type: query', () => {
             handler.setOptions({ like: { key: 'testExisting_query%' } });
             const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query');
             assert.equal(
-                resultFixKeys.length,
+                resultFixKeys['testInstance/testBU'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys[0],
+                resultFixKeys['testInstance/testBU'][0],
                 'testExisting_query_fixedKeys',
                 'returned keys do not correspond to expected fixed keys'
             );
