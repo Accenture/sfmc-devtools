@@ -1,0 +1,15 @@
+{
+    "customerKey": "testTemplated_fileTransfer",
+    "description": "17.11.2022",
+    "fileSpec": "%%Year%%",
+    "isCompressed": false,
+    "isEncrypted": false,
+    "isFileSpecLocalized": false,
+    "isPgp": false,
+    "isUpload": true,
+    "maxFileAge": 0,
+    "maxFileAgeScheduleOffset": 0,
+    "maxImportFrequency": 0,
+    "name": "testTemplated_fileTransfer",
+    "r__fileLocation_name": "ExactTarget Enhanced FTP"
+}
