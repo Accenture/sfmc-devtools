@@ -169,7 +169,7 @@ describe('type: fileTransfer', () => {
         });
     });
     describe('Delete ================', () => {
-        it('Should delete the item', async () => {
+        it('Should NOT delete the item', async () => {
             // WHEN
             await handler.deleteByKey('testInstance/testBU', 'fileTransfer', [
                 'testExisting_fileTranfer',
