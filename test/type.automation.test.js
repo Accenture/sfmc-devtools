@@ -382,102 +382,192 @@ describe('type: automation', () => {
     });
     describe('Execute ================', () => {
         it('Should schedule an automation by key', async () => {
-            const execute = await handler.schedule('testInstance/testBU', 'automation', [
+            const executedKeys = await handler.schedule('testInstance/testBU', 'automation', [
                 'testExisting_automation',
             ]);
             assert.equal(process.exitCode, false, 'execute should not have thrown an error');
-            assert.equal(execute, true, 'automation was supposed to be executed');
+            assert.equal(
+                executedKeys['testInstance/testBU']?.length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            assert.equal(
+                executedKeys['testInstance/testBU'][0],
+                'testExisting_automation',
+                'returned keys do not correspond to expected fixed keys'
+            );
             return;
         });
         it('Should schedule an automation selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExist%automation' } });
-            const execute = await handler.schedule('testInstance/testBU', 'automation');
+            const executedKeys = await handler.schedule('testInstance/testBU', 'automation');
             assert.equal(process.exitCode, false, 'execute should not have thrown an error');
-            assert.equal(execute, true, 'automation was supposed to be executed');
+            assert.equal(
+                executedKeys['testInstance/testBU']?.length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            assert.equal(
+                executedKeys['testInstance/testBU'][0],
+                'testExisting_automation',
+                'returned keys do not correspond to expected fixed keys'
+            );
             return;
         });
         it('Should not schedule executing an automation because key and --like was specified', async () => {
             handler.setOptions({ like: { key: 'testExisting%' } });
-            const execute = await handler.schedule('testInstance/testBU', 'automation', [
+            const executedKeys = await handler.schedule('testInstance/testBU', 'automation', [
                 'testExisting_automation',
             ]);
-            assert.equal(process.exitCode, true, 'execute should not have thrown an error');
-            assert.equal(execute, false, 'automation was not supposed to be executed');
+            assert.equal(process.exitCode, true, 'execute should have thrown an error');
+            assert.equal(
+                Object.keys(executedKeys).length,
+                0,
+                'automation was not supposed to be executed'
+            );
             return;
         });
         it('Should execute --schedule an automation by key', async () => {
             handler.setOptions({ schedule: true });
-            const execute = await handler.execute('testInstance/testBU', 'automation', [
+            const executedKeys = await handler.execute('testInstance/testBU', 'automation', [
                 'testExisting_automation',
             ]);
             assert.equal(process.exitCode, false, 'execute should not have thrown an error');
-            assert.equal(execute, true, 'automation was supposed to be executed');
+            assert.equal(
+                executedKeys['testInstance/testBU']?.length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            assert.equal(
+                executedKeys['testInstance/testBU'][0],
+                'testExisting_automation',
+                'returned keys do not correspond to expected fixed keys'
+            );
             return;
         });
         it('Should execute --schedule an automation selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExist%automation' }, schedule: true });
-            const execute = await handler.execute('testInstance/testBU', 'automation');
+            const executedKeys = await handler.execute('testInstance/testBU', 'automation');
             assert.equal(process.exitCode, false, 'execute should not have thrown an error');
-            assert.equal(execute, true, 'automation was supposed to be executed');
+            assert.equal(
+                executedKeys['testInstance/testBU']?.length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            assert.equal(
+                executedKeys['testInstance/testBU'][0],
+                'testExisting_automation',
+                'returned keys do not correspond to expected fixed keys'
+            );
             return;
         });
         it('Should not execute --schedule executing an automation because key and --like was specified', async () => {
             handler.setOptions({ like: { key: 'testExisting%' }, schedule: true });
-            const execute = await handler.execute('testInstance/testBU', 'automation', [
+            const executedKeys = await handler.execute('testInstance/testBU', 'automation', [
                 'testExisting_automation',
             ]);
-            assert.equal(process.exitCode, true, 'execute should not have thrown an error');
-            assert.equal(execute, false, 'automation was not supposed to be executed');
+            assert.equal(process.exitCode, true, 'execute should have thrown an error');
+            assert.equal(
+                Object.keys(executedKeys).length,
+                0,
+                'automation was not supposed to be executed'
+            );
             return;
         });
         it('Should runOnce an automation by key', async () => {
-            const execute = await handler.execute('testInstance/testBU', 'automation', [
+            const executedKeys = await handler.execute('testInstance/testBU', 'automation', [
                 'testExisting_automation',
             ]);
             assert.equal(process.exitCode, false, 'execute should not have thrown an error');
-            assert.equal(execute, true, 'automation was supposed to be executed');
+            assert.equal(
+                executedKeys['testInstance/testBU']?.length,
+                1,
+                'automation was supposed to be executed'
+            );
+            assert.equal(
+                executedKeys['testInstance/testBU'][0],
+                'testExisting_automation',
+                'returned keys do not correspond to expected fixed keys'
+            );
             return;
         });
         it('Should runOnce an automation selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExist%automation' } });
-            const execute = await handler.execute('testInstance/testBU', 'automation');
+            const executedKeys = await handler.execute('testInstance/testBU', 'automation');
             assert.equal(process.exitCode, false, 'execute should not have thrown an error');
-            assert.equal(execute, true, 'automation was supposed to be executed');
+            assert.equal(
+                executedKeys['testInstance/testBU']?.length,
+                1,
+                'automation was supposed to be executed'
+            );
+            assert.equal(
+                executedKeys['testInstance/testBU'][0],
+                'testExisting_automation',
+                'returned keys do not correspond to expected fixed keys'
+            );
+
             return;
         });
         it('Should not runOnce executing an automation because key and --like was specified', async () => {
             handler.setOptions({ like: { key: 'testExisting%' } });
-            const execute = await handler.execute('testInstance/testBU', 'automation', [
+            const executedKeys = await handler.execute('testInstance/testBU', 'automation', [
                 'testExisting_automation',
             ]);
-            assert.equal(process.exitCode, true, 'execute should not have thrown an error');
-            assert.equal(execute, false, 'automation was not supposed to be executed');
+            assert.equal(process.exitCode, true, 'execute should have thrown an error');
+            assert.equal(
+                Object.keys(executedKeys).length,
+                0,
+                'automation was not supposed to be executed'
+            );
+
             return;
         });
     });
     describe('Pause ================', () => {
         it('Should pause a automation by key', async () => {
-            const pause = await handler.pause('testInstance/testBU', 'automation', [
+            const pausedKeys = await handler.pause('testInstance/testBU', 'automation', [
                 'testExisting_automation_pause',
             ]);
             assert.equal(process.exitCode, false, 'pause should not have thrown an error');
-            assert.equal(pause, true, 'automation was supposed to be paused');
+            assert.equal(
+                pausedKeys['testInstance/testBU']?.length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            assert.equal(
+                pausedKeys['testInstance/testBU'][0],
+                'testExisting_automation_pause',
+                'returned keys do not correspond to expected fixed keys'
+            );
             return;
         });
         it('Should pause a automation selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExisting_a%n_pause' } });
-            const pause = await handler.pause('testInstance/testBU', 'automation');
+            const pausedKeys = await handler.pause('testInstance/testBU', 'automation');
             assert.equal(process.exitCode, false, 'pause should not have thrown an error');
-            assert.equal(pause, true, 'automation was supposed to be paused');
+            assert.equal(
+                pausedKeys['testInstance/testBU']?.length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            assert.equal(
+                pausedKeys['testInstance/testBU'][0],
+                'testExisting_automation_pause',
+                'returned keys do not correspond to expected fixed keys'
+            );
             return;
         });
         it('Should not pause automation because key and --like was specified', async () => {
             handler.setOptions({ like: { key: 'testExisting_a%n_pause' } });
-            const pause = await handler.pause('testInstance/testBU', 'automation', [
+            const pausedKeys = await handler.pause('testInstance/testBU', 'automation', [
                 'testExisting_automation_pause',
             ]);
             assert.equal(process.exitCode, true, 'pause should have thrown an error');
-            assert.equal(pause, false, 'automation was not supposed to be paused');
+            assert.equal(
+                Object.keys(pausedKeys).length,
+                0,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
             return;
         });
     });
