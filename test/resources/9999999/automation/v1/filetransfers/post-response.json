@@ -1,0 +1,18 @@
+{
+    "id": "72c328ac-f5b0-4e37-91d3-a775666f15a6",
+    "name": "testNew_fileTransfer",
+    "description": "17.11.2022",
+    "customerKey": "testNew_fileTransfer",
+    "fileSpec": "%%Year%% created on deploy",
+    "isEncrypted": false,
+    "isCompressed": false,
+    "maxFileAge": 0,
+    "maxFileAgeScheduleOffset": 0,
+    "maxImportFrequency": 0,
+    "fileTransferLocationId": "41a5ded7-0d98-4910-a15f-d09e7ab0af24",
+    "isUpload": true,
+    "isPgp": false,
+    "isFileSpecLocalized": false,
+    "createdDate": "2022-11-09T05:31:56.477",
+    "modifiedDate": "2022-11-17T07:13:20.05"
+}
