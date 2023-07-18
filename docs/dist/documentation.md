@@ -186,7 +186,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#csvToArray">csvToArray(csv)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
 <dd><p>helper to convert CSVs into an array. if only one value was given, it&#39;s also returned as an array</p>
 </dd>
-<dt><a href="#Mcdev.">Mcdev.(methodName, businessUnit, [selectedType], [keys])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
+<dt><a href="#Mcdev.">Mcdev.(methodName, businessUnit, [selectedType], [keys])</a> ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code></dt>
 <dd><p>run a method across BUs</p>
 </dd>
 <dt><a href="#Mcdev.">Mcdev.(methodName, cred, bu, [type], keyArr)</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
@@ -516,9 +516,9 @@ main class
     * [.buildDefinition(businessUnit, selectedType, name, market)](#Mcdev.buildDefinition) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.buildDefinitionBulk(listName, type, name)](#Mcdev.buildDefinitionBulk) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.getFilesToCommit(businessUnit, selectedType, keyArr)](#Mcdev.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-    * [.schedule(businessUnit, [selectedType], [keys])](#Mcdev.schedule) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.execute(businessUnit, [selectedType], [keys])](#Mcdev.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.pause(businessUnit, [selectedType], [keys])](#Mcdev.pause) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.schedule(businessUnit, [selectedType], [keys])](#Mcdev.schedule) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
+    * [.execute(businessUnit, [selectedType], [keys])](#Mcdev.execute) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
+    * [.pause(businessUnit, [selectedType], [keys])](#Mcdev.pause) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
     * [.fixKeys(businessUnit, type, [keys])](#Mcdev.fixKeys) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="Mcdev.setSkipInteraction"></a>
@@ -773,11 +773,11 @@ Build a specific metadata file based on a template using a list of bu-market com
 
 <a name="Mcdev.schedule"></a>
 
-### Mcdev.schedule(businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Mcdev.schedule(businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
 Schedule an item (shortcut for execute --schedule)
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all started successfully, false if not  
+**Returns**: <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code> - key: business unit name, value: list of scheduled item keys  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -787,11 +787,11 @@ Schedule an item (shortcut for execute --schedule)
 
 <a name="Mcdev.execute"></a>
 
-### Mcdev.execute(businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Mcdev.execute(businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
 Start/execute an item
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all started successfully, false if not  
+**Returns**: <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code> - key: business unit name, value: list of executed item keys  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -801,11 +801,11 @@ Start/execute an item
 
 <a name="Mcdev.pause"></a>
 
-### Mcdev.pause(businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Mcdev.pause(businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
 pause an item
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all started successfully, false if not  
+**Returns**: <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code> - key: business unit name, value: list of paused item keys  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8427,11 +8427,11 @@ helper to convert CSVs into an array. if only one value was given, it's also ret
 
 <a name="Mcdev."></a>
 
-## Mcdev.(methodName, businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+## Mcdev.(methodName, businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
 run a method across BUs
 
 **Kind**: global function  
-**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - list of keys that were affected  
+**Returns**: <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code> - key: business unit name, value: list of affected item keys  
 
 | Param | Type | Description |
 | --- | --- | --- |
