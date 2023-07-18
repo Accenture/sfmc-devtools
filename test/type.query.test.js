@@ -479,27 +479,49 @@ describe('type: query', () => {
     });
     describe('Execute ================', () => {
         it('Should start a query by key', async () => {
-            const execute = await handler.execute('testInstance/testBU', 'query', [
+            const executedKeys = await handler.execute('testInstance/testBU', 'query', [
                 'testExisting_query',
             ]);
             assert.equal(process.exitCode, false, 'execute should not have thrown an error');
-            assert.equal(execute, true, 'query was supposed to be executed');
+            assert.equal(
+                executedKeys['testInstance/testBU']?.length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            assert.equal(
+                executedKeys['testInstance/testBU'][0],
+                'testExisting_query',
+                'returned keys do not correspond to expected fixed keys'
+            );
             return;
         });
         it('Should start a query selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExist%query' } });
-            const execute = await handler.execute('testInstance/testBU', 'query');
+            const executedKeys = await handler.execute('testInstance/testBU', 'query');
             assert.equal(process.exitCode, false, 'execute should not have thrown an error');
-            assert.equal(execute, true, 'query was supposed to be executed');
+            assert.equal(
+                executedKeys['testInstance/testBU']?.length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            assert.equal(
+                executedKeys['testInstance/testBU'][0],
+                'testExisting_query',
+                'returned keys do not correspond to expected fixed keys'
+            );
             return;
         });
         it('Should not start executing a query because key and --like was specified', async () => {
             handler.setOptions({ like: { key: 'testExisting%' } });
-            const execute = await handler.execute('testInstance/testBU', 'query', [
+            const executedKeys = await handler.execute('testInstance/testBU', 'query', [
                 'testExisting_query',
             ]);
-            assert.equal(process.exitCode, true, 'execute should not have thrown an error');
-            assert.equal(execute, false, 'query was not supposed to be executed');
+            assert.equal(process.exitCode, true, 'execute should have thrown an error');
+            assert.equal(
+                Object.keys(executedKeys).length,
+                0,
+                'query was not supposed to be executed'
+            );
             return;
         });
     });

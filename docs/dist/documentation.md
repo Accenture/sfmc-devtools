@@ -186,10 +186,10 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#csvToArray">csvToArray(csv)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
 <dd><p>helper to convert CSVs into an array. if only one value was given, it&#39;s also returned as an array</p>
 </dd>
-<dt><a href="#Mcdev.">Mcdev.(methodName, businessUnit, [selectedType], [keys])</a> ⇒ <code>Promise.&lt;boolean&gt;</code></dt>
+<dt><a href="#Mcdev.">Mcdev.(methodName, businessUnit, [selectedType], [keys])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
 <dd><p>run a method across BUs</p>
 </dd>
-<dt><a href="#Mcdev.">Mcdev.(methodName, cred, bu, [type], keyArr)</a> ⇒ <code>Promise.&lt;boolean&gt;</code></dt>
+<dt><a href="#Mcdev.">Mcdev.(methodName, cred, bu, [type], keyArr)</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
 <dd><p>helper for <a href="Mcdev.#runMethod">Mcdev.#runMethod</a></p>
 </dd>
 <dt><a href="#Mcdev.">Mcdev.(selectedType, buObject)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
@@ -198,13 +198,13 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>boolean</code></dt>
 <dd><p>helper for <a href="#Automation.postRetrieveTasks">postRetrieveTasks</a> and <a href="#Automation.execute">execute</a></p>
 </dd>
-<dt><a href="#Automation.">Automation.(metadataMap, key)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
+<dt><a href="#Automation.">Automation.(metadataMap, key)</a> ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.execute">execute</a></p>
 </dd>
-<dt><a href="#Automation.">Automation.(metadataEntry)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
+<dt><a href="#Automation.">Automation.(metadataEntry)</a> ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.execute">execute</a></p>
 </dd>
-<dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
+<dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.pause">pause</a></p>
 </dd>
 <dt><a href="#Automation.">Automation.(metadata)</a></dt>
@@ -213,7 +213,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Automation.">Automation.(metadataMap, key)</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
-<dt><a href="#Automation.">Automation.(metadataMap, originalMetadataMap, key)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
+<dt><a href="#Automation.">Automation.(metadataMap, originalMetadataMap, key)</a> ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
 <dt><a href="#getUserName">getUserName(userList, item, fieldname)</a> ⇒ <code>string</code></dt>
@@ -1367,9 +1367,9 @@ Automation MetadataType
     * [.retrieveForCache()](#Automation.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Automation.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.AutomationItemObj&gt;</code>
     * [.postRetrieveTasks(metadata)](#Automation.postRetrieveTasks) ⇒ <code>TYPE.AutomationItem</code> \| <code>void</code>
-    * [.execute(keyArr)](#Automation.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.execute(keyArr)](#Automation.execute) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.getErrorsREST(ex)](#Automation.getErrorsREST) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
-    * [.pause(keyArr)](#Automation.pause) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.pause(keyArr)](#Automation.pause) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.deploy(metadata, targetBU, retrieveDir)](#Automation.deploy) ⇒ <code>Promise.&lt;TYPE.AutomationMap&gt;</code>
     * [.create(metadata)](#Automation.create) ⇒ <code>Promise</code>
     * [.update(metadata, metadataBefore)](#Automation.update) ⇒ <code>Promise</code>
@@ -1442,11 +1442,11 @@ manages post retrieve steps
 
 <a name="Automation.execute"></a>
 
-### Automation.execute(keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Automation.execute(keyArr) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 a function to start query execution via API
 
 **Kind**: static method of [<code>Automation</code>](#Automation)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - Returns true if all items were executed successfully, otherwise false  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - Returns list of keys that were executed  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1466,11 +1466,11 @@ Standardizes a check for multiple messages but adds query specific filters to er
 
 <a name="Automation.pause"></a>
 
-### Automation.pause(keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Automation.pause(keyArr) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 a function to start query execution via API
 
 **Kind**: static method of [<code>Automation</code>](#Automation)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - Returns true if all items were executed successfully, otherwise false  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - Returns list of keys that were paused  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3352,8 +3352,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.getSOAPErrorMsg(ex)](#MetadataType.getSOAPErrorMsg) ⇒ <code>string</code>
     * [.retrieveSOAP(retrieveDir, [requestParams], [singleRetrieve], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
-    * [.executeREST(uri, key)](#MetadataType.executeREST) ⇒ <code>Promise.&lt;string&gt;</code>
-    * [.executeSOAP([metadataEntry])](#MetadataType.executeSOAP) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [.executeREST(uri, key)](#MetadataType.executeREST) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
+    * [.executeSOAP([metadataEntry])](#MetadataType.executeSOAP) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
     * [.runDocumentOnRetrieve([singleRetrieve], metadataMap)](#MetadataType.runDocumentOnRetrieve) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#MetadataType.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.deleteFieldByDefinition(metadataEntry, fieldPath, definitionProperty, origin)](#MetadataType.deleteFieldByDefinition) ⇒ <code>void</code>
@@ -3832,11 +3832,11 @@ Retrieves Metadata for Rest Types
 
 <a name="MetadataType.executeREST"></a>
 
-### MetadataType.executeREST(uri, key) ⇒ <code>Promise.&lt;string&gt;</code>
+### MetadataType.executeREST(uri, key) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
 Used to execute a query/automation etc.
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;string&gt;</code> - 'OK' if started execution successfully, otherwise - 'Error'  
+**Returns**: <code>Promise.&lt;{key:string, response:object}&gt;</code> - metadata key and API response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3845,11 +3845,11 @@ Used to execute a query/automation etc.
 
 <a name="MetadataType.executeSOAP"></a>
 
-### MetadataType.executeSOAP([metadataEntry]) ⇒ <code>Promise.&lt;object&gt;</code>
+### MetadataType.executeSOAP([metadataEntry]) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
 Used to execute a query/automation etc.
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;object&gt;</code> - api response  
+**Returns**: <code>Promise.&lt;{key:string, response:object}&gt;</code> - metadata key and API response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4780,7 +4780,7 @@ Query MetadataType
 
 * [Query](#Query) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#Query.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code>
-    * [.execute(keyArr)](#Query.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.execute(keyArr)](#Query.execute) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.retrieveForCache()](#Query.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.QueryMap, type: string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Query.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: Query, type: string}&gt;</code>
     * [.postRetrieveTasks(metadata)](#Query.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
@@ -4813,11 +4813,11 @@ Retrieves Metadata of queries
 
 <a name="Query.execute"></a>
 
-### Query.execute(keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Query.execute(keyArr) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 a function to start query execution via API
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - Returns true if all items were executed successfully, otherwise false  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - Returns list of keys that were executed successfully  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8427,11 +8427,11 @@ helper to convert CSVs into an array. if only one value was given, it's also ret
 
 <a name="Mcdev."></a>
 
-## Mcdev.(methodName, businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;boolean&gt;</code>
+## Mcdev.(methodName, businessUnit, [selectedType], [keys]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 run a method across BUs
 
 **Kind**: global function  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all started successfully, false if not  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - list of keys that were affected  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8442,11 +8442,11 @@ run a method across BUs
 
 <a name="Mcdev."></a>
 
-## Mcdev.(methodName, cred, bu, [type], keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
+## Mcdev.(methodName, cred, bu, [type], keyArr) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 helper for [Mcdev.#runMethod](Mcdev.#runMethod)
 
 **Kind**: global function  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if all items were executed, false otherwise  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - list of keys that were affected  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8483,11 +8483,11 @@ helper for [postRetrieveTasks](#Automation.postRetrieveTasks) and [execute](#Aut
 
 <a name="Automation."></a>
 
-## Automation.(metadataMap, key) ⇒ <code>Promise.&lt;object&gt;</code>
+## Automation.(metadataMap, key) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
 helper for [execute](#Automation.execute)
 
 **Kind**: global function  
-**Returns**: <code>Promise.&lt;object&gt;</code> - Returns the result of the API call  
+**Returns**: <code>Promise.&lt;{key:string, response:object}&gt;</code> - metadata key and API response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8496,11 +8496,11 @@ helper for [execute](#Automation.execute)
 
 <a name="Automation."></a>
 
-## Automation.(metadataEntry) ⇒ <code>Promise.&lt;object&gt;</code>
+## Automation.(metadataEntry) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
 helper for [execute](#Automation.execute)
 
 **Kind**: global function  
-**Returns**: <code>Promise.&lt;object&gt;</code> - Returns the result of the API call  
+**Returns**: <code>Promise.&lt;{key:string, response:object}&gt;</code> - metadata key and API response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8508,11 +8508,11 @@ helper for [execute](#Automation.execute)
 
 <a name="Automation."></a>
 
-## Automation.(metadata) ⇒ <code>Promise.&lt;object&gt;</code>
+## Automation.(metadata) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
 helper for [pause](#Automation.pause)
 
 **Kind**: global function  
-**Returns**: <code>Promise.&lt;object&gt;</code> - schedule reponse  
+**Returns**: <code>Promise.&lt;{key:string, response:object}&gt;</code> - metadata key and API response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8544,11 +8544,11 @@ helper for [postDeployTasks](#Automation.postDeployTasks)
 
 <a name="Automation."></a>
 
-## Automation.(metadataMap, originalMetadataMap, key) ⇒ <code>Promise.&lt;object&gt;</code>
+## Automation.(metadataMap, originalMetadataMap, key) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
 helper for [postDeployTasks](#Automation.postDeployTasks)
 
 **Kind**: global function  
-**Returns**: <code>Promise.&lt;object&gt;</code> - -  
+**Returns**: <code>Promise.&lt;{key:string, response:object}&gt;</code> - metadata key and API response  
 
 | Param | Type | Description |
 | --- | --- | --- |
