@@ -519,6 +519,7 @@ main class
     * [.schedule(businessUnit, [selectedType], [keys])](#Mcdev.schedule) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.execute(businessUnit, [selectedType], [keys])](#Mcdev.execute) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.pause(businessUnit, [selectedType], [keys])](#Mcdev.pause) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.fixKeys(businessUnit, type, [keys])](#Mcdev.fixKeys) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="Mcdev.setSkipInteraction"></a>
 
@@ -810,6 +811,20 @@ pause an item
 | --- | --- | --- |
 | businessUnit | <code>string</code> | name of BU |
 | [selectedType] | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
+| [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Mcdev.fixKeys"></a>
+
+### Mcdev.fixKeys(businessUnit, type, [keys]) ⇒ <code>Array.&lt;string&gt;</code>
+Updates the key to match the name field
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of fixedKeys  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| businessUnit | <code>string</code> | name of BU |
+| type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
 | [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Asset"></a>
@@ -2021,7 +2036,7 @@ Retrieves all records for caching
 <a name="DataExtensionField.convertToSortedArray"></a>
 
 ### DataExtensionField.convertToSortedArray(fieldsObj) ⇒ <code>Array.&lt;TYPE.DataExtensionFieldItem&gt;</code>
-helper for [DataExtension._retrieveFieldsForSingleDe](DataExtension._retrieveFieldsForSingleDe) that sorts the fields into an array
+helper for DataExtension.retrieveFieldsForSingleDe that sorts the fields into an array
 
 **Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
 **Returns**: <code>Array.&lt;TYPE.DataExtensionFieldItem&gt;</code> - sorted array of field objects  
@@ -3364,6 +3379,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.deleteByKeyREST(url, key, [handleOutside])](#MetadataType.deleteByKeyREST) ⇒ <code>boolean</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType.readBUMetadataForType) ⇒ <code>object</code>
     * [.getFilesToCommit(keyArr)](#MetadataType.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [.getKeysForFixing(metadataMap)](#MetadataType.getKeysForFixing) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="MetadataType.client"></a>
 
@@ -4180,6 +4196,16 @@ additionally, the documentation for dataExtension and automation should be retur
 | Param | Type | Description |
 | --- | --- | --- |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="MetadataType.getKeysForFixing"></a>
+
+### MetadataType.getKeysForFixing(metadataMap) ⇒ <code>Array.&lt;string&gt;</code>
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of keys  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 
 <a name="MobileCode"></a>
 
@@ -6022,6 +6048,7 @@ CLI entry for SFMC DevTools
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
+    * [.getDependentMetadata(fixedType)](#Util.getDependentMetadata) ⇒ <code>Array.&lt;string&gt;</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
     * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code> \| <code>void</code>
@@ -6144,7 +6171,7 @@ SFMC accepts multiple false values for Boolean attributes for which we are check
 <a name="Util._isValidType"></a>
 
 ### Util.\_isValidType(selectedType, [handleOutside]) ⇒ <code>boolean</code>
-helper for [retrieve](#Mcdev.retrieve), [retrieveAsTemplate](#Mcdev.retrieveAsTemplate) and [deploy](#Mcdev.deploy)
+helper for Mcdev.retrieve, Mcdev.retrieveAsTemplate and Mcdev.deploy
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>boolean</code> - type ok or not  
@@ -6238,6 +6265,18 @@ get key of an object based on the first matching value
 | --- | --- | --- |
 | objs | <code>object</code> | object of objects to be searched |
 | val | <code>string</code> | value to be searched for |
+
+<a name="Util.getDependentMetadata"></a>
+
+### Util.getDependentMetadata(fixedType) ⇒ <code>Array.&lt;string&gt;</code>
+helper for Mcdev.fixKeys. Retrieve dependent metadata
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>Array.&lt;string&gt;</code> - array of types that depend on the given type  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| fixedType | <code>string</code> | type of the metadata passed as a parameter to fixKeys function |
 
 <a name="Util.getMetadataHierachy"></a>
 
@@ -6368,7 +6407,7 @@ pause execution of code; useful when multiple server calls are dependent on each
 <a name="Util.getSsjs"></a>
 
 ### Util.getSsjs(code) ⇒ <code>string</code>
-helper for [_extractCode](#Asset._extractCode) and [prepExtractedCode](#Script.prepExtractedCode) to determine if a code block is a valid SSJS block
+helper for Asset.extractCode and Script.prepExtractedCode to determine if a code block is a valid SSJS block
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>string</code> - the SSJS code if code block is a valid SSJS block, otherwise null  
@@ -7953,6 +7992,7 @@ Util that contains logger and simple util methods
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
+    * [.getDependentMetadata(fixedType)](#Util.getDependentMetadata) ⇒ <code>Array.&lt;string&gt;</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
     * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code> \| <code>void</code>
@@ -8075,7 +8115,7 @@ SFMC accepts multiple false values for Boolean attributes for which we are check
 <a name="Util._isValidType"></a>
 
 ### Util.\_isValidType(selectedType, [handleOutside]) ⇒ <code>boolean</code>
-helper for [retrieve](#Mcdev.retrieve), [retrieveAsTemplate](#Mcdev.retrieveAsTemplate) and [deploy](#Mcdev.deploy)
+helper for Mcdev.retrieve, Mcdev.retrieveAsTemplate and Mcdev.deploy
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>boolean</code> - type ok or not  
@@ -8169,6 +8209,18 @@ get key of an object based on the first matching value
 | --- | --- | --- |
 | objs | <code>object</code> | object of objects to be searched |
 | val | <code>string</code> | value to be searched for |
+
+<a name="Util.getDependentMetadata"></a>
+
+### Util.getDependentMetadata(fixedType) ⇒ <code>Array.&lt;string&gt;</code>
+helper for Mcdev.fixKeys. Retrieve dependent metadata
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>Array.&lt;string&gt;</code> - array of types that depend on the given type  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| fixedType | <code>string</code> | type of the metadata passed as a parameter to fixKeys function |
 
 <a name="Util.getMetadataHierachy"></a>
 
@@ -8299,7 +8351,7 @@ pause execution of code; useful when multiple server calls are dependent on each
 <a name="Util.getSsjs"></a>
 
 ### Util.getSsjs(code) ⇒ <code>string</code>
-helper for [_extractCode](#Asset._extractCode) and [prepExtractedCode](#Script.prepExtractedCode) to determine if a code block is a valid SSJS block
+helper for Asset.extractCode and Script.prepExtractedCode to determine if a code block is a valid SSJS block
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>string</code> - the SSJS code if code block is a valid SSJS block, otherwise null  
