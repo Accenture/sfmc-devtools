@@ -6048,6 +6048,7 @@ CLI entry for SFMC DevTools
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
+    * [.getDependentMetadata(fixedType)](#Util.getDependentMetadata) ⇒ <code>Array.&lt;string&gt;</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
     * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code> \| <code>void</code>
@@ -6264,6 +6265,18 @@ get key of an object based on the first matching value
 | --- | --- | --- |
 | objs | <code>object</code> | object of objects to be searched |
 | val | <code>string</code> | value to be searched for |
+
+<a name="Util.getDependentMetadata"></a>
+
+### Util.getDependentMetadata(fixedType) ⇒ <code>Array.&lt;string&gt;</code>
+helper for Mcdev.fixKeys. Retrieve dependent metadata
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>Array.&lt;string&gt;</code> - array of types that depend on the given type  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| fixedType | <code>string</code> | type of the metadata passed as a parameter to fixKeys function |
 
 <a name="Util.getMetadataHierachy"></a>
 
@@ -7979,6 +7992,7 @@ Util that contains logger and simple util methods
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
+    * [.getDependentMetadata(fixedType)](#Util.getDependentMetadata) ⇒ <code>Array.&lt;string&gt;</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
     * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
     * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code> \| <code>void</code>
@@ -8195,6 +8209,18 @@ get key of an object based on the first matching value
 | --- | --- | --- |
 | objs | <code>object</code> | object of objects to be searched |
 | val | <code>string</code> | value to be searched for |
+
+<a name="Util.getDependentMetadata"></a>
+
+### Util.getDependentMetadata(fixedType) ⇒ <code>Array.&lt;string&gt;</code>
+helper for Mcdev.fixKeys. Retrieve dependent metadata
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>Array.&lt;string&gt;</code> - array of types that depend on the given type  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| fixedType | <code>string</code> | type of the metadata passed as a parameter to fixKeys function |
 
 <a name="Util.getMetadataHierachy"></a>
 
