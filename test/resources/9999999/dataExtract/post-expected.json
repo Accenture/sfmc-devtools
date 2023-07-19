@@ -1,0 +1,37 @@
+{
+    "createdBy": 700304523,
+    "dataFields": [
+        {
+            "name": "ColumnDelimiter",
+            "type": "string",
+            "value": ","
+        },
+        {
+            "name": "DECustomerKey",
+            "type": "string",
+            "value": "testExisting_dataExtension"
+        },
+        {
+            "name": "HasColumnHeaders",
+            "type": "bool",
+            "value": "False"
+        },
+        {
+            "name": "TextQualified",
+            "type": "bool",
+            "value": "False"
+        },
+        {
+            "name": "UsesLineFeed",
+            "type": "bool",
+            "value": "False"
+        }
+    ],
+    "description": "blabla",
+    "fileSpec": "testNew-%%Year%%-%%Month%%-%%Day%%",
+    "intervalType": 0,
+    "key": "testNew_dataExtract",
+    "modifiedBy": 700304523,
+    "name": "testNew_dataExtract",
+    "r__dataExtractType_name": "Data Extension Extract"
+}
