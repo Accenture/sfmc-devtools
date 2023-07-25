@@ -6044,7 +6044,6 @@ CLI entry for SFMC DevTools
     * [.getTypeAndSubType(selectedType)](#Util.getTypeAndSubType) ⇒ <code>Array.&lt;string&gt;</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
     * [._createNewLoggerTransport([noLogFile])](#Util._createNewLoggerTransport) ⇒ <code>object</code>
-    * [.deleteEmptyLogFile([noLogFile])](#Util.deleteEmptyLogFile)
     * [.startLogger([restart], [noLogFile])](#Util.startLogger) ⇒ <code>void</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
@@ -6212,17 +6211,6 @@ wrapper around our standard winston logging to console and logfile
 | Param | Type | Description |
 | --- | --- | --- |
 | [noLogFile] | <code>boolean</code> | optional flag to indicate if we should log to file; CLI logs are always on |
-
-<a name="Util.deleteEmptyLogFile"></a>
-
-### Util.deleteEmptyLogFile([noLogFile])
-helper for [startLogger](#Util.startLogger)
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [noLogFile] | <code>boolean</code> | if false, logger will log to file; otherwise, only to console |
 
 <a name="Util.startLogger"></a>
 
@@ -8000,7 +7988,6 @@ Util that contains logger and simple util methods
     * [.getTypeAndSubType(selectedType)](#Util.getTypeAndSubType) ⇒ <code>Array.&lt;string&gt;</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
     * [._createNewLoggerTransport([noLogFile])](#Util._createNewLoggerTransport) ⇒ <code>object</code>
-    * [.deleteEmptyLogFile([noLogFile])](#Util.deleteEmptyLogFile)
     * [.startLogger([restart], [noLogFile])](#Util.startLogger) ⇒ <code>void</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
@@ -8168,17 +8155,6 @@ wrapper around our standard winston logging to console and logfile
 | Param | Type | Description |
 | --- | --- | --- |
 | [noLogFile] | <code>boolean</code> | optional flag to indicate if we should log to file; CLI logs are always on |
-
-<a name="Util.deleteEmptyLogFile"></a>
-
-### Util.deleteEmptyLogFile([noLogFile])
-helper for [startLogger](#Util.startLogger)
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [noLogFile] | <code>boolean</code> | if false, logger will log to file; otherwise, only to console |
 
 <a name="Util.startLogger"></a>
 
