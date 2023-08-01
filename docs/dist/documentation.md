@@ -195,6 +195,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Mcdev.">Mcdev.(selectedType, buObject)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
 <dd><p>helper for <a href="Mcdev.#runOnBU">Mcdev.#runOnBU</a></p>
 </dd>
+<dt><a href="#Mcdev.">Mcdev.(cred, bu, type, [keyArr])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
+<dd><p>Updates the key to match the name field</p>
+</dd>
 <dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>boolean</code></dt>
 <dd><p>helper for <a href="#Automation.postRetrieveTasks">postRetrieveTasks</a> and <a href="#Automation.execute">execute</a></p>
 </dd>
@@ -519,7 +522,7 @@ main class
     * [.schedule(businessUnit, [selectedType], [keys])](#Mcdev.schedule) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
     * [.execute(businessUnit, [selectedType], [keys])](#Mcdev.execute) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
     * [.pause(businessUnit, [selectedType], [keys])](#Mcdev.pause) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
-    * [.fixKeys(businessUnit, type, [keys])](#Mcdev.fixKeys) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
+    * [.fixKeys(businessUnit, selectedType, [keys])](#Mcdev.fixKeys) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
 
 <a name="Mcdev.setSkipInteraction"></a>
 
@@ -815,16 +818,16 @@ pause an item
 
 <a name="Mcdev.fixKeys"></a>
 
-### Mcdev.fixKeys(businessUnit, type, [keys]) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
+### Mcdev.fixKeys(businessUnit, selectedType, [keys]) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
 Updates the key to match the name field
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code> - key: business unit name, value: list of affected item keys  
+**Returns**: <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code> - key: business unit name, value: list of paused item keys  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | businessUnit | <code>string</code> | name of BU |
-| type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| selectedType | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
 | [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Asset"></a>
@@ -8435,7 +8438,7 @@ run a method across BUs
 
 | Param | Type | Description |
 | --- | --- | --- |
-| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> | what to run |
+| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> \| <code>&#x27;fixKeys&#x27;</code> | what to run |
 | businessUnit | <code>string</code> | name of BU |
 | [selectedType] | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
 | [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
@@ -8450,7 +8453,7 @@ helper for [Mcdev.#runMethod](Mcdev.#runMethod)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> | what to run |
+| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> \| <code>&#x27;fixKeys&#x27;</code> | what to run |
 | cred | <code>string</code> | name of Credential |
 | bu | <code>string</code> | name of BU |
 | [type] | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
@@ -8468,6 +8471,21 @@ helper for [Mcdev.#runOnBU](Mcdev.#runOnBU)
 | --- | --- | --- |
 | selectedType | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
+
+<a name="Mcdev."></a>
+
+## Mcdev.(cred, bu, type, [keyArr]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+Updates the key to match the name field
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - list of keys that were affected  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cred | <code>string</code> | name of Credential |
+| bu | <code>string</code> | name of BU |
+| type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| [keyArr] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Automation."></a>
 
