@@ -321,7 +321,7 @@ describe('type: query', () => {
             );
             return;
         });
-        it('Should not fixKeys and deploy', async () => {
+        it('Should NOT fixKeys and deploy', async () => {
             // WHEN
             const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
                 'testExisting_query',
@@ -391,7 +391,7 @@ describe('type: query', () => {
         });
         it('Should fixKeys and deploy via --like', async () => {
             // WHEN
-            handler.setOptions({ like: { key: 'testExisting_query%' } });
+            handler.setOptions({ like: { key: 'testExisting_query_f%' } });
             const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query');
             assert.equal(
                 resultFixKeys['testInstance/testBU'].length,
