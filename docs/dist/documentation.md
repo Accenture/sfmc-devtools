@@ -520,6 +520,7 @@ main class
     * [.execute(businessUnit, [selectedType], [keys])](#Mcdev.execute) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
     * [.pause(businessUnit, [selectedType], [keys])](#Mcdev.pause) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
     * [.fixKeys(businessUnit, type, [keys])](#Mcdev.fixKeys) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
+    * [.setNotifEmailAddr(businessUnit, type, keys, emailFailed, emailComplete)](#Mcdev.setNotifEmailAddr) ⇒ <code>Promise.&lt;string&gt;</code>
 
 <a name="Mcdev.setSkipInteraction"></a>
 
@@ -826,6 +827,19 @@ Updates the key to match the name field
 | businessUnit | <code>string</code> | name of BU |
 | type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
 | [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Mcdev.setNotifEmailAddr"></a>
+
+### Mcdev.setNotifEmailAddr(businessUnit, type, keys, emailFailed, emailComplete) ⇒ <code>Promise.&lt;string&gt;</code>
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+
+| Param | Type |
+| --- | --- |
+| businessUnit | <code>\*</code> | 
+| type | <code>\*</code> | 
+| keys | <code>\*</code> | 
+| emailFailed | <code>\*</code> | 
+| emailComplete | <code>\*</code> | 
 
 <a name="Asset"></a>
 
@@ -1384,6 +1398,7 @@ Automation MetadataType
     * [.getFilesToCommit(keyArr)](#Automation.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
     * [.deleteByKey(customerKey)](#Automation.deleteByKey) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#Automation.postDeleteTasks) ⇒ <code>void</code>
+    * [.setNotifEmailAddr(keys, emailFailed, emailComplete)](#Automation.setNotifEmailAddr) ⇒ <code>string</code>
 
 <a name="Automation.retrieve"></a>
 
@@ -1649,6 +1664,17 @@ clean up after deleting a metadata item
 | Param | Type | Description |
 | --- | --- | --- |
 | customerKey | <code>string</code> | Identifier of metadata item |
+
+<a name="Automation.setNotifEmailAddr"></a>
+
+### Automation.setNotifEmailAddr(keys, emailFailed, emailComplete) ⇒ <code>string</code>
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+
+| Param | Type |
+| --- | --- |
+| keys | <code>\*</code> | 
+| emailFailed | <code>\*</code> | 
+| emailComplete | <code>\*</code> | 
 
 <a name="Campaign"></a>
 
@@ -3380,6 +3406,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType.readBUMetadataForType) ⇒ <code>object</code>
     * [.getFilesToCommit(keyArr)](#MetadataType.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.getKeysForFixing(metadataMap)](#MetadataType.getKeysForFixing) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.setNotifEmailAddr()](#MetadataType.setNotifEmailAddr) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="MetadataType.client"></a>
 
@@ -4207,6 +4234,13 @@ additionally, the documentation for dataExtension and automation should be retur
 | --- | --- | --- |
 | metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 
+<a name="MetadataType.setNotifEmailAddr"></a>
+
+### MetadataType.setNotifEmailAddr() ⇒ <code>Array.&lt;string&gt;</code>
+Abstract setNotifEmailAddr method that needs to be implemented in child metadata type
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Array.&lt;string&gt;</code> - returns keys of items where notification email address was set  
 <a name="MobileCode"></a>
 
 ## MobileCode ⇐ [<code>MetadataType</code>](#MetadataType)
