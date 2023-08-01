@@ -7102,7 +7102,6 @@ CLI helper class
     * [._initMarkets()](#Init._initMarkets)
     * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
 
@@ -7261,18 +7260,6 @@ wrapper around npm dependency & configuration file setup
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | [initial] | <code>boolean</code> | print message if not part of initial setup |
 | [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
-
-<a name="Init._getMissingCredentials"></a>
-
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
-finds credentials that are set up in config but not in auth file
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
 
 <a name="Init.installDependencies"></a>
 
@@ -7324,7 +7311,6 @@ CLI helper class
     * [._initMarkets()](#Init._initMarkets)
     * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
 
@@ -7483,18 +7469,6 @@ wrapper around npm dependency & configuration file setup
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | [initial] | <code>boolean</code> | print message if not part of initial setup |
 | [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
-
-<a name="Init._getMissingCredentials"></a>
-
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
-finds credentials that are set up in config but not in auth file
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
 
 <a name="Init.installDependencies"></a>
 
@@ -7546,7 +7520,6 @@ CLI helper class
     * [._initMarkets()](#Init._initMarkets)
     * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
 
@@ -7705,18 +7678,6 @@ wrapper around npm dependency & configuration file setup
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | [initial] | <code>boolean</code> | print message if not part of initial setup |
 | [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
-
-<a name="Init._getMissingCredentials"></a>
-
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
-finds credentials that are set up in config but not in auth file
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
 
 <a name="Init.installDependencies"></a>
 
@@ -7768,7 +7729,6 @@ CLI helper class
     * [._initMarkets()](#Init._initMarkets)
     * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
 
@@ -7927,18 +7887,6 @@ wrapper around npm dependency & configuration file setup
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | [initial] | <code>boolean</code> | print message if not part of initial setup |
 | [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
-
-<a name="Init._getMissingCredentials"></a>
-
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
-finds credentials that are set up in config but not in auth file
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
 
 <a name="Init.installDependencies"></a>
 
