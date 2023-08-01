@@ -6047,7 +6047,6 @@ CLI entry for SFMC DevTools
     * [.startLogger([restart], [noLogFile])](#Util.startLogger) ⇒ <code>void</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
-    * [.checkPathForCloud()](#Util.checkPathForCloud) ⇒ <code>void</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
     * [.getDependentMetadata(fixedType)](#Util.getDependentMetadata) ⇒ <code>Array.&lt;string&gt;</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
@@ -6254,13 +6253,6 @@ key-value pairs (obj)
 | str | <code>string</code> \| <code>object</code> | JSON object or its stringified version, which has values to be replaced |
 | obj | <code>TYPE.TemplateMap</code> | key value object which contains keys to be replaced and values to be replaced with |
 
-<a name="Util.checkPathForCloud"></a>
-
-### Util.checkPathForCloud() ⇒ <code>void</code>
-check if git repo is being saved on a cloud service and warns the user
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>void</code> - throws errors if problems were found  
 <a name="Util.inverseGet"></a>
 
 ### Util.inverseGet(objs, val) ⇒ <code>string</code>
@@ -7110,7 +7102,6 @@ CLI helper class
     * [._initMarkets()](#Init._initMarkets)
     * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
 
@@ -7269,18 +7260,6 @@ wrapper around npm dependency & configuration file setup
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | [initial] | <code>boolean</code> | print message if not part of initial setup |
 | [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
-
-<a name="Init._getMissingCredentials"></a>
-
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
-finds credentials that are set up in config but not in auth file
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
 
 <a name="Init.installDependencies"></a>
 
@@ -7332,7 +7311,6 @@ CLI helper class
     * [._initMarkets()](#Init._initMarkets)
     * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
 
@@ -7491,18 +7469,6 @@ wrapper around npm dependency & configuration file setup
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | [initial] | <code>boolean</code> | print message if not part of initial setup |
 | [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
-
-<a name="Init._getMissingCredentials"></a>
-
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
-finds credentials that are set up in config but not in auth file
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
 
 <a name="Init.installDependencies"></a>
 
@@ -7554,7 +7520,6 @@ CLI helper class
     * [._initMarkets()](#Init._initMarkets)
     * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
 
@@ -7713,18 +7678,6 @@ wrapper around npm dependency & configuration file setup
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | [initial] | <code>boolean</code> | print message if not part of initial setup |
 | [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
-
-<a name="Init._getMissingCredentials"></a>
-
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
-finds credentials that are set up in config but not in auth file
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
 
 <a name="Init.installDependencies"></a>
 
@@ -7776,7 +7729,6 @@ CLI helper class
     * [._initMarkets()](#Init._initMarkets)
     * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
 
@@ -7935,18 +7887,6 @@ wrapper around npm dependency & configuration file setup
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | [initial] | <code>boolean</code> | print message if not part of initial setup |
 | [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
-
-<a name="Init._getMissingCredentials"></a>
-
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
-finds credentials that are set up in config but not in auth file
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
 
 <a name="Init.installDependencies"></a>
 
@@ -7999,7 +7939,6 @@ Util that contains logger and simple util methods
     * [.startLogger([restart], [noLogFile])](#Util.startLogger) ⇒ <code>void</code>
     * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
     * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
-    * [.checkPathForCloud()](#Util.checkPathForCloud) ⇒ <code>void</code>
     * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
     * [.getDependentMetadata(fixedType)](#Util.getDependentMetadata) ⇒ <code>Array.&lt;string&gt;</code>
     * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
@@ -8206,13 +8145,6 @@ key-value pairs (obj)
 | str | <code>string</code> \| <code>object</code> | JSON object or its stringified version, which has values to be replaced |
 | obj | <code>TYPE.TemplateMap</code> | key value object which contains keys to be replaced and values to be replaced with |
 
-<a name="Util.checkPathForCloud"></a>
-
-### Util.checkPathForCloud() ⇒ <code>void</code>
-check if git repo is being saved on a cloud service and warns the user
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>void</code> - throws errors if problems were found  
 <a name="Util.inverseGet"></a>
 
 ### Util.inverseGet(objs, val) ⇒ <code>string</code>
