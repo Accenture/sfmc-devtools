@@ -1,0 +1,19 @@
+{
+    "requestId": "51f09ca1-1e5e-444a-8ddc-8e4ff80a9fa1",
+    "name": "testNew_temail",
+    "definitionKey": "testNew_temail",
+    "description": "created on deploy",
+    "classification": "Default Transactional",
+    "status": "Active",
+    "createdDate": "2022-12-06T06:08:00",
+    "modifiedDate": "2022-12-06T06:08:00",
+    "content": { "customerKey": "testExisting_asset_message" },
+    "subscriptions": {
+        "dataExtension": "testExisting_dataExtension",
+        "list": "All Subscribers - 277",
+        "autoAddSubscriber": true,
+        "updateSubscriber": true
+    },
+    "options": { "trackLinks": true },
+    "journey": { "interactionKey": "testExisting_interaction" }
+}

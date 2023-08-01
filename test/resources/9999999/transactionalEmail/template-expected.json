@@ -1,0 +1,22 @@
+{
+    "name": "{{{prefix}}}temail",
+    "definitionKey": "{{{prefix}}}temail",
+    "description": "{{{description}}}",
+    "classification": "Default Transactional",
+    "status": "Active",
+    "content": {
+        "customerKey": "{{{prefix}}}asset_message"
+    },
+    "subscriptions": {
+        "dataExtension": "{{{prefix}}}dataExtension",
+        "autoAddSubscriber": true,
+        "updateSubscriber": true,
+        "r__list_PathName": "my subscribers/All Subscribers"
+    },
+    "options": {
+        "trackLinks": true
+    },
+    "journey": {
+        "interactionKey": "{{{prefix}}}interaction"
+    }
+}

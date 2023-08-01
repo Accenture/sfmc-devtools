@@ -1,8 +1,8 @@
 {
     "name": "mcdev",
-    "version": "4.0.0",
+    "version": "5.1.0",
     "description": "Accenture Salesforce Marketing Cloud DevTools",
-    "author": "joern.berkefeld, douglas.midgley, robert.zimmermann, maciej.barnas",
+    "author": "Accenture: joern.berkefeld, douglas.midgley, robert.zimmermann, maciej.barnas",
     "license": "MIT",
     "repository": {
         "type": "git",
@@ -17,12 +17,25 @@
         "type": "corporate",
         "url": "https://github.com/Accenture/sfmc-devtools"
     },
+    "keywords": [
+        "sfmc",
+        "ide",
+        "devops",
+        "developer",
+        "exacttarget",
+        "salesforce",
+        "marketing cloud",
+        "package manager",
+        "fuel",
+        "soap",
+        "rest"
+    ],
     "main": "./lib/index.js",
     "bin": {
         "mcdev": "./lib/cli.js"
     },
     "engines": {
-        "node": ">=14.16"
+        "node": ">=15.0.0"
     },
     "scripts": {
         "start": "node lib/cli.js",
@@ -36,49 +49,61 @@
         "lint-type": "eslint types/*.js",
         "lint-test": "eslint test/**/*.js",
         "upgrade": "npm-check --update",
-        "prepare": "husky install",
-        "test": "mocha"
+        "manual-prepare": "husky install",
+        "lint-and-test": "run-s lint test",
+        "test": "mocha --reporter-option maxDiffSize=25000",
+        "coverage": "nyc npm run test",
+        "version:major": "npm version --no-commit-hooks major",
+        "version:minor": "npm version --no-commit-hooks minor",
+        "version:patch": "npm version --no-commit-hooks patch"
     },
     "dependencies": {
+        "beauty-amp-core": "0.3.7",
         "cli-progress": "3.11.2",
         "command-exists": "1.2.9",
-        "conf": "10.1.2",
+        "conf": "10.2.0",
         "console.table": "0.10.0",
-        "deep-equal": "2.0.5",
-        "fs-extra": "10.1.0",
-        "inquirer": "8.2.2",
+        "deep-equal": "2.2.2",
+        "fs-extra": "11.1.0",
+        "inquirer": "8.2.5",
         "json-to-table": "4.2.1",
         "mustache": "4.2.0",
         "p-limit": "3.1.0",
-        "prettier": "2.7.1",
-        "prettier-plugin-sql": "0.10.0",
-        "semver": "7.3.7",
-        "sfmc-sdk": "0.6.1",
-        "simple-git": "3.10.0",
+        "prettier": "2.8.8",
+        "prettier-plugin-sql": "0.14.0",
+        "semver": "7.5.4",
+        "sfmc-sdk": "1.0.1",
+        "simple-git": "3.18.0",
         "toposort": "2.0.2",
         "update-notifier": "5.1.0",
-        "winston": "3.8.1",
-        "yargs": "17.5.1"
+        "winston": "3.10.0",
+        "yargs": "17.7.2"
     },
     "devDependencies": {
         "assert": "2.0.0",
-        "axios-mock-adapter": "1.21.1",
-        "chai": "4.3.6",
-        "eslint": "8.19.0",
-        "eslint-config-prettier": "8.5.0",
+        "axios-mock-adapter": "1.21.5",
+        "chai": "4.3.7",
+        "chai-files": "1.4.0",
+        "eslint": "8.45.0",
+        "eslint-config-prettier": "8.7.0",
         "eslint-config-ssjs": "1.1.11",
-        "eslint-plugin-jsdoc": "39.3.3",
+        "eslint-plugin-jsdoc": "46.4.4",
         "eslint-plugin-mocha": "10.1.0",
         "eslint-plugin-prettier": "4.2.1",
-        "eslint-plugin-unicorn": "43.0.2",
-        "husky": "8.0.1",
-        "jsdoc-to-markdown": "7.1.1",
-        "lint-staged": "13.0.3",
-        "mocha": "10.0.0",
-        "mock-fs": "5.1.2",
+        "eslint-plugin-unicorn": "48.0.0",
+        "fast-xml-parser": "4.2.6",
+        "husky": "8.0.3",
+        "jsdoc-to-markdown": "8.0.0",
+        "lint-staged": "13.2.3",
+        "mocha": "10.2.0",
+        "mock-fs": "5.2.0",
         "npm-check": "6.0.1",
         "npm-run-all": "4.1.5",
+        "nyc": "15.1.0",
         "prettier-eslint": "15.0.1"
+    },
+    "optionalDependencies": {
+        "fsevents": "*"
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx}": [

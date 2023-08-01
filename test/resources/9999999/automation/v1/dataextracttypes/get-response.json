@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Audit Trail Activity Log",
+        "extractId": "d804ddf9-feda-4495-8e7e-069a14f5d248"
+    },
+    {
+        "name": "Zip",
+        "extractId": "9a487c7d-96bd-484c-ad80-0f0bcbb91ca7"
+    },
+    {
+        "name": "Tracking Extract",
+        "extractId": "c7219016-a7f0-4c72-8657-1ec12c28a0db"
+    },
+    {
+        "name": "Mobile Push Detail Extract Report",
+        "extractId": "e6647310-ac95-4f32-a639-2a6b145c83f1"
+    },
+    {
+        "name": "UTF16 to ASCII Converter",
+        "extractId": "e7e14f95-b925-462d-b6b4-4a6b1dca7ca1"
+    },
+    {
+        "name": "Contacts Without Channel Addresses",
+        "extractId": "f2500d28-b3cb-42b9-ad31-361123ec1222"
+    },
+    {
+        "name": "Convert XML",
+        "extractId": "805dfb29-82cb-43dc-989b-53ef5d181920"
+    },
+    {
+        "name": "GZip",
+        "extractId": "7e7d322a-88ca-499a-9fb3-90e72fcf00af"
+    },
+    {
+        "name": "XmlToTextMapper",
+        "extractId": "cf2cd221-fc3c-4d9f-90b4-a4e879a51ab6"
+    },
+    {
+        "name": "Enhanced FTP File Move and Copy",
+        "extractId": "90d90e0a-fd9a-4d35-b471-cde0d17c91d4"
+    },
+    {
+        "name": "Data Extension Extract",
+        "extractId": "bb94a04d-9632-4623-be47-daabc3f588a6"
+    },
+    {
+        "name": "Audit Trail Access Log",
+        "extractId": "382b94bd-bd1b-45e1-864f-eb824841885a"
+    }
+]

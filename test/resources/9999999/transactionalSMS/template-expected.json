@@ -1,0 +1,13 @@
+{
+    "name": "{{{prefix}}}tsms",
+    "definitionKey": "{{{prefix}}}tsms",
+    "description": "{{{description}}}",
+    "status": "Active",
+    "subscriptions": {
+        "shortCode": "4912312345678",
+        "countryCode": "",
+        "autoAddSubscriber": true,
+        "updateSubscriber": true,
+        "keyword": "{{{prefixUpper}}}KEYWORD"
+    }
+}

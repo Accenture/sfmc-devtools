@@ -8,7 +8,15 @@ updates:
     - package-ecosystem: 'npm' # See documentation for possible values
       directory: '/' # Location of package manifests
       schedule:
-          interval: 'daily'
+          interval: 'weekly'
       target-branch: 'develop'
       labels:
-          - 'chore'
+          - 'dependencies'
+    - package-ecosystem: 'github-actions'
+      directory: '/'
+      schedule:
+          interval: 'weekly'
+      target-branch: 'main'
+      labels:
+          - 'dependencies'
+          - 'github-action'

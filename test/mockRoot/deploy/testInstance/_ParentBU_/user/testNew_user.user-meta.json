@@ -1,0 +1,27 @@
+{
+    "CreatedDate": "2019-09-06T01:59:07.097",
+    "ModifiedDate": "2022-06-21T01:43:02.64",
+    "CustomerKey": "testNew_user",
+    "UserID": "testNew_user@accenture.asgr",
+    "Name": "new user",
+    "Email": "testNew_user@accenture.com",
+    "MustChangePassword": false,
+    "ActiveFlag": true,
+    "UserPermissions": [
+        {
+            "ID": 2
+        },
+        {
+            "ID": 3
+        }
+    ],
+    "LastSuccessfulLogin": "2023-02-23T10:14:11.443",
+    "IsAPIUser": false,
+    "NotificationEmailAddress": "testNew_user@accenture.com",
+    "DefaultBusinessUnit": 1111111,
+    "c__type": "User",
+    "c__AssociatedBusinessUnits": [1111111, 9999999],
+    "c__RoleNamesGlobal": ["Administrator", "Distributed Sending User"],
+    "c__TimeZoneName": "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna *",
+    "c__LocaleCode": "en-GB"
+}

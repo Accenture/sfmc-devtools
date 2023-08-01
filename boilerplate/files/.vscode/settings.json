@@ -1,4 +1,7 @@
 {
+    "workbench.editorAssociations": {
+        "*.md": "vscode.markdown.preview.editor"
+    },
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.expand": false,
     "explorer.fileNesting.patterns": {
@@ -9,20 +12,24 @@
         "tsconfig.json": "tsconfig.*.json",
         "package.json": "package-lock.json, yarn.lock",
         "*-doc.md": "${capture}-meta.json",
-        "*.asset-asset-meta.html": "${dirname}.asset-asset-meta.json",
-        "*.asset-message-meta.html": "${dirname}.asset-message-meta.json",
-        "*.html": "${capture}.asset-code-meta.json",
-        "*.css": "${capture}.asset-code-meta.json",
-        "*.docx": "${capture}.asset-document-meta.json",
-        "*.ics": "${capture}.asset-document-meta.json",
-        "*.pdf": "${capture}.asset-document-meta.json",
-        "*.jpg": "${capture}.asset-image-meta.json",
-        "*.png": "${capture}.asset-image-meta.json",
-        "*.gif": "${capture}.asset-image-meta.json",
+        "*-meta.amp": "${capture}-meta.json",
+        "*-meta.html": "${capture}-meta.json",
         "*-meta.sql": "${capture}-meta.json",
         "*-meta.ssjs": "${capture}-meta.json",
-        "*-meta.amp": "${capture}-meta.json",
-        "*-meta.html": "${capture}-meta.json"
+        "*.asset-asset-meta.html": "${dirname}.asset-asset-meta.json",
+        "*.asset-message-meta.html": "${dirname}.asset-message-meta.json",
+        "*.asset-template-meta.html": "${dirname}.asset-template-meta.json",
+        "*.css": "${capture}.asset-code-meta.json",
+        "*.docx": "${capture}.asset-document-meta.json",
+        "*.eps": "${capture}.asset-image-meta.json",
+        "*.gif": "${capture}.asset-image-meta.json",
+        "*.html": "${capture}.asset-code-meta.json",
+        "*.ics": "${capture}.asset-document-meta.json",
+        "*.jpeg": "${capture}.asset-image-meta.json",
+        "*.jpg": "${capture}.asset-image-meta.json",
+        "*.pdf": "${capture}.asset-document-meta.json",
+        "*.png": "${capture}.asset-image-meta.json",
+        "*.txt": "${capture}.asset-textfile-meta.json"
     },
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
@@ -53,5 +60,8 @@
     },
     "[markdown]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[AMPscript]": {
+        "editor.defaultFormatter": "FiB.beautyAmp"
     }
 }

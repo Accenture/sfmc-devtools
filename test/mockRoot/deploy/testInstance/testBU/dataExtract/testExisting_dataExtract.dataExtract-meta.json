@@ -1,0 +1,35 @@
+{
+    "name": "testExisting_dataExtract",
+    "key": "testExisting_dataExtract",
+    "description": "updated on deploy",
+    "r__dataExtractType_name": "Data Extension Extract",
+    "fileSpec": "testExisting-%%Year%%-%%Month%%-%%Day%%",
+    "intervalType": 0,
+    "dataFields": [
+        {
+            "name": "ColumnDelimiter",
+            "type": "string",
+            "value": ","
+        },
+        {
+            "name": "DECustomerKey",
+            "type": "string",
+            "value": "testExisting_dataExtension"
+        },
+        {
+            "name": "HasColumnHeaders",
+            "type": "bool",
+            "value": "False"
+        },
+        {
+            "name": "TextQualified",
+            "type": "bool",
+            "value": "False"
+        },
+        {
+            "name": "UsesLineFeed",
+            "type": "bool",
+            "value": "False"
+        }
+    ]
+}

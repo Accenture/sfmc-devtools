@@ -1,0 +1,18 @@
+{
+    "page": 1,
+    "pageSize": 2,
+    "count": 2,
+    "items": [
+        {
+            "name": "Salesforce Objects & Reports",
+            "id": "a4a0aff9-ddc5-4608-b0e1-40d0a5133d8f",
+            "locationTypeId": 4
+        },
+        {
+            "name": "ExactTarget Enhanced FTP",
+            "id": "41a5ded7-0d98-4910-a15f-d09e7ab0af24",
+            "locationTypeId": 0,
+            "relPath": "ExactTarget Enhanced FTP"
+        }
+    ]
+}

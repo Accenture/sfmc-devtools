@@ -1,0 +1,35 @@
+{
+    "dataFields": [
+        {
+            "name": "ColumnDelimiter",
+            "type": "string",
+            "value": ","
+        },
+        {
+            "name": "DECustomerKey",
+            "type": "string",
+            "value": "{{{prefix}}}dataExtension"
+        },
+        {
+            "name": "HasColumnHeaders",
+            "type": "bool",
+            "value": "False"
+        },
+        {
+            "name": "TextQualified",
+            "type": "bool",
+            "value": "False"
+        },
+        {
+            "name": "UsesLineFeed",
+            "type": "bool",
+            "value": "False"
+        }
+    ],
+    "description": "blabla",
+    "fileSpec": "testExisting-%%Year%%-%%Month%%-%%Day%%",
+    "intervalType": 0,
+    "key": "{{{prefix}}}dataExtract",
+    "name": "{{{prefix}}}dataExtract",
+    "r__dataExtractType_name": "Data Extension Extract"
+}

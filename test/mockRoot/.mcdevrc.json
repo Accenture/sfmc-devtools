@@ -34,25 +34,40 @@
         "templateBuilds": ["retrieve/", "deploy/"]
     },
     "markets": {
-        "testMarket": {
+        "testSourceMarket": {
             "mid": "9999999",
             "buName": "testBU",
+            "secret": "secret",
             "sharedFolder": "/Shared Data Extensions/test",
             "suffix": "_test",
+            "prefix": "testExisting_",
+            "prefixUpper": "TESTEXISTING_",
+            "description": "bla bla",
             "countryCodeIn": "'test'"
+        },
+        "testTargetMarket": {
+            "mid": "1111111",
+            "buName": "testBUTarget",
+            "secret": "target secret",
+            "sharedFolder": "/Shared Data Extensions/test target",
+            "suffix": "_testTarget",
+            "prefix": "testTemplated_",
+            "prefixUpper": "TESTTEMPLATED_",
+            "description": "foobar",
+            "countryCodeIn": "'testTarget'"
         }
     },
     "marketList": {},
     "metaDataTypes": {
-        "documentOnRetrieve": ["accountUser", "automation", "dataExtension", "role"],
+        "documentOnRetrieve": ["user", "automation", "dataExtension", "role"],
         "retrieve": [
             "asset",
             "automation",
             "dataExtension",
             "dataExtract",
-            "emailSendDefinition",
+            "emailSend",
             "fileTransfer",
-            "ftpLocation",
+            "fileLocation",
             "importFile",
             "list",
             "mobileCode",
@@ -60,8 +75,8 @@
             "query",
             "role",
             "script",
-            "triggeredSendDefinition"
+            "triggeredSend"
         ]
     },
-    "version": "4.0.0"
+    "version": "5.1.0"
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>ScheduleResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:6c743640-b80f-456a-abed-b542247f2414</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:29fc6536-3c75-4e07-a05d-e63f7ee520d3</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-49e9b916-1ac1-4cb0-bacc-d0060fdca2ec">
+                <wsu:Created>2023-07-04T13:13:15Z</wsu:Created>
+                <wsu:Expires>2023-07-04T13:18:15Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <ScheduleResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <Results>
+                <Result>
+                    <StatusCode>OK</StatusCode>
+                    <StatusMessage>Program scheduled.</StatusMessage>
+                    <RequestID>89cd977a-3927-49fa-b8e5-47c7e6093bef</RequestID>
+                    <Object>
+                        <PartnerKey xsi:nil="true" />
+                        <ObjectID xsi:nil="true" />
+                        <Recurrence xsi:type="MinutelyRecurrence">
+                            <MinutelyRecurrencePatternType>Interval</MinutelyRecurrencePatternType>
+                            <MinuteInterval>5</MinuteInterval>
+                        </Recurrence>
+                        <RecurrenceType>Minutely</RecurrenceType>
+                        <RecurrenceRangeType>EndOn</RecurrenceRangeType>
+                        <StartDateTime>2023-07-04T06:21:14.408</StartDateTime>
+                        <EndDateTime>2079-06-06T20:00:00</EndDateTime>
+                        <TimeZone>
+                            <PartnerKey xsi:nil="true" />
+                            <ID>5</ID>
+                            <ObjectID xsi:nil="true" />
+                        </TimeZone>
+                    </Object>
+                    <Task />
+                </Result>
+            </Results>
+            <OverallStatus>OK</OverallStatus>
+            <OverallStatusMessage />
+            <RequestID>3b03417b-649e-4a1d-963d-05f42fc8f1b5</RequestID>
+        </ScheduleResponseMsg>
+    </soap:Body>
+</soap:Envelope>

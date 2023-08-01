@@ -1,0 +1,455 @@
+{
+    "languages": [
+        {
+            "Key": "en-US",
+            "Value": "English (United States)"
+        },
+        {
+            "Key": "fr-CA",
+            "Value": "French (Canada)"
+        },
+        {
+            "Key": "fr-FR",
+            "Value": "French (France)"
+        },
+        {
+            "Key": "de-DE",
+            "Value": "German (Germany)"
+        },
+        {
+            "Key": "it-IT",
+            "Value": "Italian (Italy)"
+        },
+        {
+            "Key": "ja-JP",
+            "Value": "Japanese (Japan)"
+        },
+        {
+            "Key": "pt-BR",
+            "Value": "Portuguese (Brazil)"
+        },
+        {
+            "Key": "es-419",
+            "Value": "Spanish (Latin America)"
+        },
+        {
+            "Key": "es-ES",
+            "Value": "Spanish (Spain)"
+        }
+    ],
+    "roles": [
+        {
+            "roleID": "f1cfb80f-3550-e611-96fe-38eaa7142c61",
+            "roleName": "Administrator",
+            "description": "Administrator"
+        },
+        {
+            "roleID": "facfb80f-3550-e611-96fe-38eaa7142c61",
+            "roleName": "Analyst",
+            "description": "Analyst"
+        },
+        {
+            "roleID": "f4cfb80f-3550-e611-96fe-38eaa7142c61",
+            "roleName": "Content Creator",
+            "description": "Content Creator"
+        },
+        {
+            "roleID": "1c564845-32d5-eb11-b82a-48df37d1deb7",
+            "roleName": "Custom Connector",
+            "description": "Custom Connector"
+        },
+        {
+            "roleID": "f6cfb80f-3550-e611-96fe-38eaa7142c61",
+            "roleName": "Data Manager",
+            "description": "Data Manager"
+        },
+        {
+            "roleID": "fdcfb80f-3550-e611-96fe-38eaa7142c61",
+            "roleName": "Distributed Sending User",
+            "description": "Distributed Sending User"
+        },
+        {
+            "roleID": "63a50610-315c-e111-beee-8e001800001f",
+            "roleName": "Marketing Cloud Administrator",
+            "description": "Assign Marketing Cloud roles to users and manage Mobile, Social and Sites Channels, Marketing Cloud Apps and Tools."
+        },
+        {
+            "roleID": "66a50610-315c-e111-beee-8e001800001f",
+            "roleName": "Marketing Cloud Channel Manager",
+            "description": "Create and execute cross-channel interactive marketing campaigns and administer Social and Mobile Channels"
+        },
+        {
+            "roleID": "64a50610-315c-e111-beee-8e001800001f",
+            "roleName": "Marketing Cloud Content Editor/Publisher",
+            "description": "Create and deliver messages through Mobile and Sites Channel Apps"
+        },
+        {
+            "roleID": "67a50610-315c-e111-beee-8e001800001f",
+            "roleName": "Marketing Cloud Security Administrator",
+            "description": "Maintain Watchdog security settings and manage user activity and alerts"
+        },
+        {
+            "roleID": "65a50610-315c-e111-beee-8e001800001f",
+            "roleName": "Marketing Cloud Viewer",
+            "description": "View cross-channel marketing activity and results within the Marketing Cloud"
+        }
+    ],
+    "timeZones": [
+        {
+            "id": "2",
+            "description": "(GMT) Casablanca *"
+        },
+        {
+            "id": "3",
+            "description": "(GMT) Dublin, Edinburgh, Lisbon, London *"
+        },
+        {
+            "id": "4",
+            "description": "(GMT) Monrovia, Reykjavik"
+        },
+        {
+            "id": "5",
+            "description": "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna *"
+        },
+        {
+            "id": "6",
+            "description": "(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague *"
+        },
+        {
+            "id": "7",
+            "description": "(GMT+01:00) Brussels, Copenhagen, Madrid, Paris *"
+        },
+        {
+            "id": "8",
+            "description": "(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb *"
+        },
+        {
+            "id": "9",
+            "description": "(GMT+01:00) West Central Africa"
+        },
+        {
+            "id": "18",
+            "description": "(GMT+01:00) Windhoek *"
+        },
+        {
+            "id": "10",
+            "description": "(GMT+02:00) Amman *"
+        },
+        {
+            "id": "11",
+            "description": "(GMT+02:00) Athens, Bucharest *"
+        },
+        {
+            "id": "12",
+            "description": "(GMT+02:00) Beirut *"
+        },
+        {
+            "id": "13",
+            "description": "(GMT+02:00) Cairo "
+        },
+        {
+            "id": "17",
+            "description": "(GMT+02:00) E. Europe *"
+        },
+        {
+            "id": "14",
+            "description": "(GMT+02:00) Harare, Pretoria"
+        },
+        {
+            "id": "15",
+            "description": "(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius *"
+        },
+        {
+            "id": "16",
+            "description": "(GMT+02:00) Jerusalem *"
+        },
+        {
+            "id": "19",
+            "description": "(GMT+03:00) Baghdad *"
+        },
+        {
+            "id": "20",
+            "description": "(GMT+03:00) Kuwait, Riyadh"
+        },
+        {
+            "id": "21",
+            "description": "(GMT+03:00) Moscow, St. Petersburg, Volgograd (RTZ 2)"
+        },
+        {
+            "id": "22",
+            "description": "(GMT+03:00) Nairobi"
+        },
+        {
+            "id": "24",
+            "description": "(GMT+03:30) Tehran *"
+        },
+        {
+            "id": "25",
+            "description": "(GMT+04:00) Abu Dhabi, Muscat"
+        },
+        {
+            "id": "26",
+            "description": "(GMT+04:00) Baku *"
+        },
+        {
+            "id": "27",
+            "description": "(GMT+04:00) Yerevan *"
+        },
+        {
+            "id": "28",
+            "description": "(GMT+04:00) Port Louis *"
+        },
+        {
+            "id": "23",
+            "description": "(GMT+04:00) Tbilisi"
+        },
+        {
+            "id": "30",
+            "description": "(GMT+04:30) Kabul"
+        },
+        {
+            "id": "31",
+            "description": "(GMT+05:00) Ekaterinburg (RTZ 4)"
+        },
+        {
+            "id": "33",
+            "description": "(GMT+05:00) Ashgabat, Tashkent"
+        },
+        {
+            "id": "32",
+            "description": "(GMT+05:00) Islamabad, Karachi *"
+        },
+        {
+            "id": "34",
+            "description": "(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi"
+        },
+        {
+            "id": "35",
+            "description": "(GMT+05:30) Sri Jayawardenepura"
+        },
+        {
+            "id": "36",
+            "description": "(GMT+05:45) Kathmandu"
+        },
+        {
+            "id": "38",
+            "description": "(GMT+06:00) Astana"
+        },
+        {
+            "id": "37",
+            "description": "(GMT+06:00) Novosibirsk (RTZ 5)"
+        },
+        {
+            "id": "39",
+            "description": "(GMT+06:30) Yangon (Rangoon)"
+        },
+        {
+            "id": "40",
+            "description": "(GMT+07:00) Bangkok, Hanoi, Jakarta"
+        },
+        {
+            "id": "41",
+            "description": "(GMT+07:00) Krasnoyarsk (RTZ 6)"
+        },
+        {
+            "id": "42",
+            "description": "(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi"
+        },
+        {
+            "id": "43",
+            "description": "(GMT+08:00) Irkutsk (RTZ 7)"
+        },
+        {
+            "id": "44",
+            "description": "(GMT+08:00) Kuala Lumpur, Singapore"
+        },
+        {
+            "id": "45",
+            "description": "(GMT+08:00) Perth *"
+        },
+        {
+            "id": "46",
+            "description": "(GMT+08:00) Taipei"
+        },
+        {
+            "id": "47",
+            "description": "(GMT+09:00) Osaka, Sapporo, Tokyo"
+        },
+        {
+            "id": "48",
+            "description": "(GMT+09:00) Seoul"
+        },
+        {
+            "id": "49",
+            "description": "(GMT+09:00) Yakutsk (RTZ 8)"
+        },
+        {
+            "id": "50",
+            "description": "(GMT+09:30) Adelaide *"
+        },
+        {
+            "id": "51",
+            "description": "(GMT+09:30) Darwin"
+        },
+        {
+            "id": "52",
+            "description": "(GMT+10:00) Brisbane"
+        },
+        {
+            "id": "53",
+            "description": "(GMT+10:00) Canberra, Melbourne, Sydney *"
+        },
+        {
+            "id": "54",
+            "description": "(GMT+10:00) Guam, Port Moresby"
+        },
+        {
+            "id": "55",
+            "description": "(GMT+10:00) Hobart *"
+        },
+        {
+            "id": "56",
+            "description": "(GMT+10:00) Vladivostok, Magadan (RTZ 9)"
+        },
+        {
+            "id": "57",
+            "description": "(GMT+11:00) Solomon Is., New Caledonia"
+        },
+        {
+            "id": "58",
+            "description": "(GMT+12:00) Auckland, Wellington *"
+        },
+        {
+            "id": "59",
+            "description": "(GMT+12:00) Fiji *"
+        },
+        {
+            "id": "60",
+            "description": "(GMT+13:00) Nukualofa"
+        },
+        {
+            "id": "91",
+            "description": "(GMT+13:00)Samoa *"
+        },
+        {
+            "id": "61",
+            "description": "(GMT-01:00) Azores *"
+        },
+        {
+            "id": "62",
+            "description": "(GMT-01:00) Cabo Verde Is."
+        },
+        {
+            "id": "63",
+            "description": "(GMT-02:00) Mid-Atlantic - Old *"
+        },
+        {
+            "id": "64",
+            "description": "(GMT-03:00) Brasilia"
+        },
+        {
+            "id": "65",
+            "description": "(GMT-03:00) Buenos Aires *"
+        },
+        {
+            "id": "67",
+            "description": "(GMT-03:00) Greenland *"
+        },
+        {
+            "id": "68",
+            "description": "(GMT-03:00) Montevideo *"
+        },
+        {
+            "id": "69",
+            "description": "(GMT-03:30) Newfoundland *"
+        },
+        {
+            "id": "70",
+            "description": "(GMT-04:00) Atlantic Time (Canada) *"
+        },
+        {
+            "id": "72",
+            "description": "(GMT-04:00) Cuiaba "
+        },
+        {
+            "id": "66",
+            "description": "(GMT-04:00) Georgetown, La Paz, Manaus, San Juan"
+        },
+        {
+            "id": "73",
+            "description": "(GMT-04:00) Santiago * "
+        },
+        {
+            "id": "74",
+            "description": "(GMT-04:30) Caracas"
+        },
+        {
+            "id": "75",
+            "description": "(GMT-05:00) Bogota, Lima, Quito, Rio Branco"
+        },
+        {
+            "id": "76",
+            "description": "(GMT-05:00) Eastern Time (US & Canada) *"
+        },
+        {
+            "id": "77",
+            "description": "(GMT-05:00) Indiana (East) *"
+        },
+        {
+            "id": "78",
+            "description": "(GMT-06:00) Central America"
+        },
+        {
+            "id": "79",
+            "description": "(GMT-06:00) Central Time (US & Canada) *"
+        },
+        {
+            "id": "1",
+            "description": "(GMT-06:00) Central Time (No Daylight Savings)"
+        },
+        {
+            "id": "80",
+            "description": "(GMT-06:00) Guadalajara, Mexico City, Monterrey *"
+        },
+        {
+            "id": "82",
+            "description": "(GMT-06:00) Saskatchewan"
+        },
+        {
+            "id": "83",
+            "description": "(GMT-07:00) Arizona"
+        },
+        {
+            "id": "84",
+            "description": "(GMT-07:00) Chihuahua, La Paz, Mazatlan *"
+        },
+        {
+            "id": "86",
+            "description": "(GMT-07:00) Mountain Time (US & Canada) *"
+        },
+        {
+            "id": "88",
+            "description": "(GMT-08:00) Baja California *"
+        },
+        {
+            "id": "87",
+            "description": "(GMT-08:00) Pacific Time (US & Canada) *"
+        },
+        {
+            "id": "89",
+            "description": "(GMT-09:00) Alaska *"
+        },
+        {
+            "id": "90",
+            "description": "(GMT-10:00) Hawaii"
+        },
+        {
+            "id": "92",
+            "description": "(GMT-12:00) International Date Line West"
+        }
+    ],
+    "defaultUserData": {
+        "defaultTimeZone": "5",
+        "defaultLanguage": "en-GB"
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "requestId": "582bec09-6d04-4222-bbba-cea616495596",
+    "name": "testNew_tsms",
+    "definitionKey": "testNew_tsms",
+    "description": "created on deploy",
+    "status": "Active",
+    "createdDate": "2022-11-07T02:24:00",
+    "modifiedDate": "2022-11-07T02:25:00",
+    "content": { "message": "\n%%[\n    SET @key = 'new secret'\n]%%\n" },
+    "subscriptions": {
+        "shortCode": "4912312345678",
+        "countryCode": "",
+        "autoAddSubscriber": true,
+        "updateSubscriber": true,
+        "keyword": "TESTEXISTING_KEYWORD"
+    }
+}

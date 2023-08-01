@@ -27,7 +27,7 @@
             "options": {
                 "formatter": "sql-formatter",
                 "language": "tsql",
-                "uppercase": true
+                "keywordCase": "upper"
             }
         }
     ]
