@@ -321,18 +321,14 @@ describe('type: query', () => {
             );
             return;
         });
-        it('Should NOT fixKeys and deploy', async () => {
+        it('Should run fixKeys but not find fixable keys and hence stop', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false } });
             const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
                 'testExisting_query',
             ]);
             // THEN
-            assert.equal(
-                process.exitCode,
-                true,
-                'fixKeys should have thrown an error because it could not find anything to update'
-            );
+            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
             // check which keys were fixed
             assert.equal(
                 resultFixKeys['testInstance/testBU'].length,
