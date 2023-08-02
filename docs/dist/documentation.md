@@ -6535,6 +6535,7 @@ CLI helper class
 * [Cli](#Cli)
     * [.initMcdevConfig()](#Cli.initMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.addExtraCredential(properties)](#Cli.addExtraCredential) ⇒ <code>Promise.&lt;(boolean\|string)&gt;</code>
+    * [.postFixKeysReretrieve(type, dependentTypes)](#Cli.postFixKeysReretrieve) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.logExistingCredentials(properties)](#Cli.logExistingCredentials) ⇒ <code>void</code>
     * [.updateCredential(properties, credName)](#Cli.updateCredential) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.getCredentialObject(properties, target, [isCredentialOnly], [allowAll])](#Cli.getCredentialObject) ⇒ <code>Promise.&lt;TYPE.BuObject&gt;</code>
@@ -6564,6 +6565,17 @@ Extends template file for properties.json
 | Param | Type | Description |
 | --- | --- | --- |
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
+
+<a name="Cli.postFixKeysReretrieve"></a>
+
+### Cli.postFixKeysReretrieve(type, dependentTypes) ⇒ <code>Promise.&lt;boolean&gt;</code>
+**Kind**: static method of [<code>Cli</code>](#Cli)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if user wants to continue with retrieve  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| dependentTypes | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | types that depent on type |
 
 <a name="Cli.logExistingCredentials"></a>
 
