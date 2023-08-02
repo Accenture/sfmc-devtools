@@ -240,7 +240,6 @@ describe('type: automation', () => {
             );
             return;
         });
-        it('Should change the key during update via --changeKeyValue');
     });
     describe('Templating ================', () => {
         it('Should create a automation template via retrieveAsTemplate and build it', async () => {
