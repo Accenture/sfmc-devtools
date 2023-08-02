@@ -6150,7 +6150,8 @@ used to ensure the program tells surrounding software that an unrecoverable erro
 <a name="Util.isTrue"></a>
 
 ### Util.isTrue(attrValue) ⇒ <code>boolean</code>
-SFMC accepts multiple true values for Boolean attributes for which we are checking here
+SFMC accepts multiple true values for Boolean attributes for which we are checking here.
+The same problem occurs when evaluating boolean CLI flags
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>boolean</code> - attribute value == true ? true : false  
@@ -6162,7 +6163,8 @@ SFMC accepts multiple true values for Boolean attributes for which we are checki
 <a name="Util.isFalse"></a>
 
 ### Util.isFalse(attrValue) ⇒ <code>boolean</code>
-SFMC accepts multiple false values for Boolean attributes for which we are checking here
+SFMC accepts multiple false values for Boolean attributes for which we are checking here.
+The same problem occurs when evaluating boolean CLI flags
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>boolean</code> - attribute value == false ? true : false  
@@ -8054,7 +8056,8 @@ used to ensure the program tells surrounding software that an unrecoverable erro
 <a name="Util.isTrue"></a>
 
 ### Util.isTrue(attrValue) ⇒ <code>boolean</code>
-SFMC accepts multiple true values for Boolean attributes for which we are checking here
+SFMC accepts multiple true values for Boolean attributes for which we are checking here.
+The same problem occurs when evaluating boolean CLI flags
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>boolean</code> - attribute value == true ? true : false  
@@ -8066,7 +8069,8 @@ SFMC accepts multiple true values for Boolean attributes for which we are checki
 <a name="Util.isFalse"></a>
 
 ### Util.isFalse(attrValue) ⇒ <code>boolean</code>
-SFMC accepts multiple false values for Boolean attributes for which we are checking here
+SFMC accepts multiple false values for Boolean attributes for which we are checking here.
+The same problem occurs when evaluating boolean CLI flags
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>boolean</code> - attribute value == false ? true : false  
