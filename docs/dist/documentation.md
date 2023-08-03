@@ -216,7 +216,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Automation.">Automation.(metadataMap, key)</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
-<dt><a href="#Automation.">Automation.(metadataMap, originalMetadataMap, key)</a> ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code></dt>
+<dt><a href="#Automation.">Automation.(metadataMap, originalMetadataMap, key, [oldKey])</a> ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
 <dt><a href="#getUserName">getUserName(userList, item, fieldname)</a> ⇒ <code>string</code></dt>
@@ -8526,7 +8526,7 @@ helper for [postDeployTasks](#Automation.postDeployTasks)
 
 <a name="Automation."></a>
 
-## Automation.(metadataMap, originalMetadataMap, key) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
+## Automation.(metadataMap, originalMetadataMap, key, [oldKey]) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
 helper for [postDeployTasks](#Automation.postDeployTasks)
 
 **Kind**: global function  
@@ -8537,6 +8537,7 @@ helper for [postDeployTasks](#Automation.postDeployTasks)
 | metadataMap | <code>TYPE.AutomationMap</code> | metadata mapped by their keyField |
 | originalMetadataMap | <code>TYPE.AutomationMap</code> | metadata to be updated (contains additioanl fields) |
 | key | <code>string</code> | current customer key |
+| [oldKey] | <code>string</code> | old customer key before fixKey / changeKeyValue / changeKeyField |
 
 <a name="getUserName"></a>
 
