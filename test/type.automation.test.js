@@ -122,7 +122,7 @@ describe('type: automation', () => {
             const deployed = await handler.deploy(
                 'testInstance/testBU',
                 ['automation'],
-                ['testExisting_automation']
+                ['testExisting_automation', 'testNew_automation']
             );
             // THEN
             assert.equal(
@@ -135,19 +135,26 @@ describe('type: automation', () => {
             const cached = cache.getCache();
             assert.equal(
                 cached.automation ? Object.keys(cached.automation).length : 0,
-                2,
-                'two cached automation expected'
+                3,
+                'three cached automation expected'
             );
             assert.equal(
                 deployed['testInstance/testBU'].automation
                     ? Object.keys(deployed['testInstance/testBU'].automation).length
                     : 0,
-                1,
-                'one deployed automation expected'
+                2,
+                'two deployed automation expected'
             );
             assert.equal(
                 deployed['testInstance/testBU'].automation
                     ? Object.keys(deployed['testInstance/testBU'].automation)[0]
+                    : null,
+                'testNew_automation',
+                'expected specific automation to have been deployed'
+            );
+            assert.equal(
+                deployed['testInstance/testBU'].automation
+                    ? Object.keys(deployed['testInstance/testBU'].automation)[1]
                     : null,
                 'testExisting_automation',
                 'expected specific automation to have been deployed'
@@ -173,7 +180,7 @@ describe('type: automation', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                19,
+                24,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -184,7 +191,7 @@ describe('type: automation', () => {
             const deployed = await handler.deploy(
                 'testInstance/testBU',
                 ['automation'],
-                ['testExisting_automation']
+                ['testExisting_automation', 'testNew_automation']
             );
             // THEN
             assert.equal(
@@ -197,24 +204,30 @@ describe('type: automation', () => {
             const cached = cache.getCache();
             assert.equal(
                 cached.automation ? Object.keys(cached.automation).length : 0,
-                2,
-                'two cached automation expected'
+                3,
+                'three cached automation expected'
             );
             assert.equal(
                 deployed['testInstance/testBU'].automation
                     ? Object.keys(deployed['testInstance/testBU'].automation).length
                     : 0,
-                1,
-                'one deployed automation expected'
+                2,
+                'two deployed automation expected'
             );
             assert.equal(
                 deployed['testInstance/testBU'].automation
                     ? Object.keys(deployed['testInstance/testBU'].automation)[0]
                     : null,
+                'testNew_automation',
+                'expected specific automation to have been deployed'
+            );
+            assert.equal(
+                deployed['testInstance/testBU'].automation
+                    ? Object.keys(deployed['testInstance/testBU'].automation)[1]
+                    : null,
                 'testExisting_automation',
                 'expected specific automation to have been deployed'
             );
-
             // update
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_automation', 'automation'),
@@ -235,7 +248,7 @@ describe('type: automation', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                16,
+                20,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
