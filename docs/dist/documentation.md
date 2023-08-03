@@ -195,6 +195,8 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Mcdev.">Mcdev.(selectedType, buObject)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
 <dd><p>helper for <a href="Mcdev.#runOnBU">Mcdev.#runOnBU</a></p>
 </dd>
+<dt><a href="#Mcdev.">Mcdev.(cred, bu, type, [keys])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
+<dd></dd>
 <dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>boolean</code></dt>
 <dd><p>helper for <a href="#Automation.postRetrieveTasks">postRetrieveTasks</a> and <a href="#Automation.execute">execute</a></p>
 </dd>
@@ -215,6 +217,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 </dd>
 <dt><a href="#Automation.">Automation.(metadataMap, originalMetadataMap, key)</a> ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
+</dd>
+<dt><a href="#Automation.">Automation.()</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
+<dd><p>helper function to retrieve data about all automations in the BU</p>
 </dd>
 <dt><a href="#getUserName">getUserName(userList, item, fieldname)</a> ⇒ <code>string</code></dt>
 <dd></dd>
@@ -520,7 +525,7 @@ main class
     * [.execute(businessUnit, [selectedType], [keys])](#Mcdev.execute) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
     * [.pause(businessUnit, [selectedType], [keys])](#Mcdev.pause) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
     * [.fixKeys(businessUnit, type, [keys])](#Mcdev.fixKeys) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
-    * [.setNotifEmailAddr(businessUnit, type, keys, emailFailed, emailComplete)](#Mcdev.setNotifEmailAddr) ⇒ <code>Promise.&lt;string&gt;</code>
+    * [.updateNotifications(businessUnit, type, [keys])](#Mcdev.updateNotifications) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
 
 <a name="Mcdev.setSkipInteraction"></a>
 
@@ -828,18 +833,19 @@ Updates the key to match the name field
 | type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
 | [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
-<a name="Mcdev.setNotifEmailAddr"></a>
+<a name="Mcdev.updateNotifications"></a>
 
-### Mcdev.setNotifEmailAddr(businessUnit, type, keys, emailFailed, emailComplete) ⇒ <code>Promise.&lt;string&gt;</code>
+### Mcdev.updateNotifications(businessUnit, type, [keys]) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
+Updates notification email address field
+
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code> - key: business unit name, value: list of affected item keys  
 
-| Param | Type |
-| --- | --- |
-| businessUnit | <code>\*</code> | 
-| type | <code>\*</code> | 
-| keys | <code>\*</code> | 
-| emailFailed | <code>\*</code> | 
-| emailComplete | <code>\*</code> | 
+| Param | Type | Description |
+| --- | --- | --- |
+| businessUnit | <code>string</code> | name of BU |
+| type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Asset"></a>
 
@@ -1398,7 +1404,7 @@ Automation MetadataType
     * [.getFilesToCommit(keyArr)](#Automation.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
     * [.deleteByKey(customerKey)](#Automation.deleteByKey) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#Automation.postDeleteTasks) ⇒ <code>void</code>
-    * [.setNotifEmailAddr(keys, emailFailed, emailComplete)](#Automation.setNotifEmailAddr) ⇒ <code>string</code>
+    * [.updateNotifications(keys)](#Automation.updateNotifications) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 
 <a name="Automation.retrieve"></a>
 
@@ -1665,16 +1671,17 @@ clean up after deleting a metadata item
 | --- | --- | --- |
 | customerKey | <code>string</code> | Identifier of metadata item |
 
-<a name="Automation.setNotifEmailAddr"></a>
+<a name="Automation.updateNotifications"></a>
 
-### Automation.setNotifEmailAddr(keys, emailFailed, emailComplete) ⇒ <code>string</code>
+### Automation.updateNotifications(keys) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+A function to update automation email notifications
+
 **Kind**: static method of [<code>Automation</code>](#Automation)  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - keys of the automations where notifications were updated  
 
-| Param | Type |
-| --- | --- |
-| keys | <code>\*</code> | 
-| emailFailed | <code>\*</code> | 
-| emailComplete | <code>\*</code> | 
+| Param | Type | Description |
+| --- | --- | --- |
+| keys | <code>string</code> | metadata keys |
 
 <a name="Campaign"></a>
 
@@ -8503,6 +8510,19 @@ helper for [Mcdev.#runOnBU](Mcdev.#runOnBU)
 | selectedType | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
 
+<a name="Mcdev."></a>
+
+## Mcdev.(cred, bu, type, [keys]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - keys of the automations where notifications were updated  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cred | <code>string</code> | name of Credential |
+| bu | <code>string</code> | name of BU |
+| type | <code>string</code> | metadata type |
+| [keys] | <code>Array.&lt;string&gt;</code> | limit retrieval to given metadata keys |
+
 <a name="Automation."></a>
 
 ## Automation.(metadata) ⇒ <code>boolean</code>
@@ -8590,6 +8610,13 @@ helper for [postDeployTasks](#Automation.postDeployTasks)
 | originalMetadataMap | <code>TYPE.AutomationMap</code> | metadata to be updated (contains additioanl fields) |
 | key | <code>string</code> | current customer key |
 
+<a name="Automation."></a>
+
+## Automation.() ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+helper function to retrieve data about all automations in the BU
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - returns data about automations with the legacy key  
 <a name="getUserName"></a>
 
 ## getUserName(userList, item, fieldname) ⇒ <code>string</code>
