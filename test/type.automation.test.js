@@ -254,6 +254,41 @@ describe('type: automation', () => {
             return;
         });
     });
+    describe('FixKeys ================', () => {
+        beforeEach(() => {
+            testUtils.mockSetup(true);
+        });
+        it('Should run fixKeys but not find fixable keys and hence stop', async () => {
+            // WHEN
+            handler.setOptions({ skipInteraction: { fixKeysReretrieve: false } });
+            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'automation', [
+                'testExisting_automation',
+            ]);
+            // THEN
+            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            // check which keys were fixed
+            assert.equal(
+                resultFixKeys['testInstance/testBU'].length,
+                0,
+                'expected to find no keys to be fixed'
+            );
+
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.automation ? Object.keys(result.automation).length : 0,
+                1,
+                'one automation expected'
+            );
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                14,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
     describe('Templating ================', () => {
         it('Should create a automation template via retrieveAsTemplate and build it', async () => {
             // GIVEN there is a template
