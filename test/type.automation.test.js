@@ -116,7 +116,7 @@ describe('type: automation', () => {
             );
             return;
         });
-        it('Should update & schedule an automation with --execute option', async () => {
+        it('Should update & schedule an automation with --schedule option', async () => {
             // WHEN
             handler.setOptions({ schedule: true });
             const deployed = await handler.deploy(
