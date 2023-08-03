@@ -4,9 +4,6 @@
 
     // List of extensions which should be recommended for users of this workspace.
     "recommendations": [
-        // mcdev vscode extension
-        "IBM.output-colorizer",
-
         // collaboration
         "gruntfuggly.todo-tree",
         "aaron-bond.better-comments",
