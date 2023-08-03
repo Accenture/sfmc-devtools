@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>PerformResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:cc45bb83-15a3-4a82-ba48-47ac4fb13000</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:29986848-a0c3-4f3b-bf5a-91151f784449</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-4e8dad58-7a68-4653-8406-a172d1960c8a">
+                <wsu:Created>2023-06-02T13:41:30Z</wsu:Created>
+                <wsu:Expires>2023-06-02T13:46:30Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <PerformResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <Results>
+                <Result>
+                    <StatusCode>OK</StatusCode>
+                    <StatusMessage>Performed Activity</StatusMessage>
+                    <Object xsi:type="Automation">
+                        <PartnerKey xsi:nil="true" />
+                        <ObjectID>08afb0e2-b00a-4c88-ad2e-pause</ObjectID>
+                        <CustomerKey>testExisting_automation_paused</CustomerKey>
+                        <IsPlatformObject>false</IsPlatformObject>
+                        <Name />
+                        <Description />
+                        <IsActive>true</IsActive>
+                    </Object>
+                </Result>
+            </Results>
+            <OverallStatus>OK</OverallStatus>
+            <OverallStatusMessage />
+            <RequestID>898702fc-a432-4176-8130-5d6dd5ad9ca6</RequestID>
+        </PerformResponseMsg>
+    </soap:Body>
+</soap:Envelope>

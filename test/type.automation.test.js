@@ -288,7 +288,7 @@ describe('type: automation', () => {
             );
             return;
         });
-        it('Should fixKeys by key WITHOUT re-retrieving dependent types and schedule one automation', async () => {
+        it('Should fixKeys by key w/o re-retrieving, auto-schedule', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false } });
             const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'automation', [
@@ -319,6 +319,76 @@ describe('type: automation', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 29,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should fixKeys by key w/o re-retrieving, auto-schedule and then --execute', async () => {
+            // WHEN
+            handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, execute: true });
+            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'automation', [
+                'testExisting_automation_pause',
+                'testExisting_automation',
+            ]);
+            assert.equal(
+                resultFixKeys['testInstance/testBU'].length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            assert.equal(
+                resultFixKeys['testInstance/testBU'][0],
+                'testExisting_automation_paused',
+                'returned keys do not correspond to expected fixed keys'
+            );
+            // THEN
+            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_automation_paused', 'automation'),
+                await testUtils.getExpectedJson('9999999', 'automation', 'patch_fixKeys'),
+                'returned metadata was not equal expected for update automation'
+            );
+            expect(file(testUtils.getActualDoc('testExisting_automation_paused', 'automation'))).to
+                .exist;
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                31,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should fixKeys by key w/o re-retrieving, auto-schedule and then --schedule', async () => {
+            // WHEN
+            handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, schedule: true });
+            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'automation', [
+                'testExisting_automation_pause',
+                'testExisting_automation',
+            ]);
+            assert.equal(
+                resultFixKeys['testInstance/testBU'].length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            assert.equal(
+                resultFixKeys['testInstance/testBU'][0],
+                'testExisting_automation_paused',
+                'returned keys do not correspond to expected fixed keys'
+            );
+            // THEN
+            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_automation_paused', 'automation'),
+                await testUtils.getExpectedJson('9999999', 'automation', 'patch_fixKeys'),
+                'returned metadata was not equal expected for update automation'
+            );
+            expect(file(testUtils.getActualDoc('testExisting_automation_paused', 'automation'))).to
+                .exist;
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                32,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
