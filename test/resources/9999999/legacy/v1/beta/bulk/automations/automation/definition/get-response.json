@@ -25,6 +25,29 @@
             "isPlatformObject": false,
             "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoxMjow",
             "automationType": "scheduled"
+        },
+        {
+            "id": "RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow_updateNotifications",
+            "key": "testExisting_automation_updateNotifications",
+            "createdDate": "2022-01-12T08:41:35.773Z",
+            "name": "testExisting_automation_updateNotifications",
+            "description": "bla bla",
+            "clientId": 9999999,
+            "status": "Building",
+            "createdBy": {
+                "id": "NzE3MzUzNDA1OjQ6MA",
+                "name": "Tom Tester",
+                "email": "tom.tester@accenture.com"
+            },
+            "modifiedDate": "2022-11-11T16:42:36.513Z",
+            "modifiedBy": {
+                "id": "NzE3MzUzNDA1OjQ6MA",
+                "name": "Tom Tester",
+                "email": "tom.tester@accenture.com"
+            },
+            "isPlatformObject": false,
+            "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoxMjow_updateNotifications",
+            "automationType": "scheduled"
         }
     ]
 }
