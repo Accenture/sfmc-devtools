@@ -213,8 +213,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Automation.">Automation.(metadataMap, key)</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
-<dt><a href="#Automation.">Automation.()</a> ⇒ <code>string</code></dt>
-<dd></dd>
+<dt><a href="#Automation.">Automation.(key, programId, notificationBody)</a> ⇒ <code>string</code></dt>
+<dd><p>helper function to send POST request to update notifications</p>
+</dd>
 <dt><a href="#Automation.">Automation.(metadataMap, originalMetadataMap, key)</a> ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
@@ -8585,8 +8586,18 @@ helper for [postDeployTasks](#Automation.postDeployTasks)
 
 <a name="Automation."></a>
 
-## Automation.() ⇒ <code>string</code>
+## Automation.(key, programId, notificationBody) ⇒ <code>string</code>
+helper function to send POST request to update notifications
+
 **Kind**: global function  
+**Returns**: <code>string</code> - returns "OK" or "Error"  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| key | <code>string</code> | current customer key |
+| programId | <code>string</code> | legacy automation id |
+| notificationBody | <code>string</code> | notification payload |
+
 <a name="Automation."></a>
 
 ## Automation.(metadataMap, originalMetadataMap, key) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
