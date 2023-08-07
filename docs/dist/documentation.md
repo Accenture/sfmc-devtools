@@ -195,8 +195,6 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Mcdev.">Mcdev.(selectedType, buObject)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
 <dd><p>helper for <a href="Mcdev.#runOnBU">Mcdev.#runOnBU</a></p>
 </dd>
-<dt><a href="#Mcdev.">Mcdev.(cred, bu, type, [keys])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
-<dd></dd>
 <dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>boolean</code></dt>
 <dd><p>helper for <a href="#Automation.postRetrieveTasks">postRetrieveTasks</a> and <a href="#Automation.execute">execute</a></p>
 </dd>
@@ -215,6 +213,8 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Automation.">Automation.(metadataMap, key)</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
+<dt><a href="#Automation.">Automation.()</a> ⇒ <code>string</code></dt>
+<dd></dd>
 <dt><a href="#Automation.">Automation.(metadataMap, originalMetadataMap, key)</a> ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
@@ -525,7 +525,7 @@ main class
     * [.execute(businessUnit, [selectedType], [keys])](#Mcdev.execute) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
     * [.pause(businessUnit, [selectedType], [keys])](#Mcdev.pause) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
     * [.fixKeys(businessUnit, type, [keys])](#Mcdev.fixKeys) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
-    * [.updateNotifications(businessUnit, type, [keys])](#Mcdev.updateNotifications) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
+    * [.updateNotifications(businessUnit, selectedType, [keys])](#Mcdev.updateNotifications) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
 
 <a name="Mcdev.setSkipInteraction"></a>
 
@@ -835,7 +835,7 @@ Updates the key to match the name field
 
 <a name="Mcdev.updateNotifications"></a>
 
-### Mcdev.updateNotifications(businessUnit, type, [keys]) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
+### Mcdev.updateNotifications(businessUnit, selectedType, [keys]) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
 Updates notification email address field
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
@@ -844,7 +844,7 @@ Updates notification email address field
 | Param | Type | Description |
 | --- | --- | --- |
 | businessUnit | <code>string</code> | name of BU |
-| type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| selectedType | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
 | [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Asset"></a>
@@ -8476,7 +8476,7 @@ run a method across BUs
 
 | Param | Type | Description |
 | --- | --- | --- |
-| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> | what to run |
+| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> \| <code>&#x27;updateNotifications&#x27;</code> | what to run |
 | businessUnit | <code>string</code> | name of BU |
 | [selectedType] | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
 | [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
@@ -8491,7 +8491,7 @@ helper for [Mcdev.#runMethod](Mcdev.#runMethod)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> | what to run |
+| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> \| <code>&#x27;updateNotifications&#x27;</code> | what to run |
 | cred | <code>string</code> | name of Credential |
 | bu | <code>string</code> | name of BU |
 | [type] | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
@@ -8509,19 +8509,6 @@ helper for [Mcdev.#runOnBU](Mcdev.#runOnBU)
 | --- | --- | --- |
 | selectedType | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
-
-<a name="Mcdev."></a>
-
-## Mcdev.(cred, bu, type, [keys]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-**Kind**: global function  
-**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - keys of the automations where notifications were updated  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| cred | <code>string</code> | name of Credential |
-| bu | <code>string</code> | name of BU |
-| type | <code>string</code> | metadata type |
-| [keys] | <code>Array.&lt;string&gt;</code> | limit retrieval to given metadata keys |
 
 <a name="Automation."></a>
 
@@ -8596,6 +8583,10 @@ helper for [postDeployTasks](#Automation.postDeployTasks)
 | metadataMap | <code>TYPE.AutomationMap</code> | metadata mapped by their keyField |
 | key | <code>string</code> | current customer key |
 
+<a name="Automation."></a>
+
+## Automation.() ⇒ <code>string</code>
+**Kind**: global function  
 <a name="Automation."></a>
 
 ## Automation.(metadataMap, originalMetadataMap, key) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
