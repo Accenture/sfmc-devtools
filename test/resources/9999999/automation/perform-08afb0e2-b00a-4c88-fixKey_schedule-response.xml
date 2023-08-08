@@ -25,8 +25,8 @@
                     <StatusMessage>Performed Activity</StatusMessage>
                     <Object xsi:type="Automation">
                         <PartnerKey xsi:nil="true" />
-                        <ObjectID>08afb0e2-b00a-4c88-ad2e-pause</ObjectID>
-                        <CustomerKey>testExisting_automation_paused</CustomerKey>
+                        <ObjectID>08afb0e2-b00a-4c88-fixKey_schedule</ObjectID>
+                        <CustomerKey>testExisting_automation_fixedKey_scheduled</CustomerKey>
                         <IsPlatformObject>false</IsPlatformObject>
                         <Name />
                         <Description />

@@ -1,7 +1,7 @@
 {
-    "description": "updated on deploy",
-    "key": "testExisting_automation_paused",
-    "name": "testExisting_automation_paused",
+    "description": "testing fixKey on an a paused automation",
+    "key": "testExisting_automation_fixedKey_paused",
+    "name": "testExisting_automation_fixedKey_paused",
     "r__folder_Path": "my automations",
     "schedule": {
         "endDate": "2022-07-30T00:00:00",
@@ -9,7 +9,7 @@
         "startDate": "2022-07-30T00:00:00",
         "timezoneName": "W. Europe Standard Time"
     },
-    "status": "Scheduled",
+    "status": "PausedSchedule",
     "steps": [
         {
             "activities": [
@@ -37,8 +37,7 @@
                     "name": "testExisting_script",
                     "r__type": "script"
                 }
-            ],
-            "name": ""
+            ]
         }
     ],
     "type": "scheduled"

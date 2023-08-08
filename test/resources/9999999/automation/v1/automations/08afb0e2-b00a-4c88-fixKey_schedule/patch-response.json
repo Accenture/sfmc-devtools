@@ -1,12 +1,13 @@
 {
-    "legacyId": "RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow-PAUSED",
-    "name": "testExisting_automation_pause",
-    "description": "updated on deploy",
-    "key": "testExisting_automation_pause",
+    "id": "08afb0e2-b00a-4c88-fixKey_schedule",
+    "name": "testExisting_automation_fixedKey_scheduled",
+    "description": "testing fixKey on an a scheduled automation",
+    "key": "testExisting_automation_fixedKey_scheduled",
     "typeId": 1,
     "type": "scheduled",
     "statusId": 4,
     "status": "Scheduled",
+    "categoryId": 290937,
     "schedule": {
         "id": "b393aa6c-a4a8-4c0f-a148-9250258a7339",
         "typeId": 3,
@@ -18,11 +19,14 @@
         "pattern": "<Pattern><PatternType>0</PatternType><DayInterval>1</DayInterval></Pattern>",
         "icalRecur": "FREQ=DAILY;COUNT=1;INTERVAL=1",
         "timezoneName": "W. Europe Standard Time",
-        "scheduleStatus": "scheduled",
+        "scheduleStatus": "paused",
         "timezoneId": 5
     },
     "steps": [
         {
+            "id": "13fda077-0e82-4936-b936-a36b0997fc44",
+            "name": "",
+            "step": 1,
             "activities": [
                 {
                     "id": "8081a992-a27d-4a43-984a-d60114ea1025",
@@ -75,11 +79,7 @@
                     "objectTypeId": 423,
                     "displayOrder": 6
                 }
-            ],
-            "annotation": "",
-            "stepNumber": 0
+            ]
         }
-    ],
-    "categoryId": 290937,
-    "id": "08afb0e2-b00a-4c88-ad2e-1f7f8788c560"
+    ]
 }

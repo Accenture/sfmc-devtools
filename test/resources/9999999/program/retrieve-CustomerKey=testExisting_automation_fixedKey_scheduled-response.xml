@@ -23,27 +23,9 @@
             <RequestID>3b1c8cee-b270-49cb-b77b-e7b33934d1b6</RequestID>
             <Results xsi:type="Program">
                 <PartnerKey xsi:nil="true" />
-                <ObjectID>08afb0e2-b00a-4c88-ad2e-1f7f8788c560</ObjectID>
-                <Name>testExisting_automation</Name>                <!--only retrieved for cache-->
-                <CustomerKey>testExisting_automation</CustomerKey>                <!--only retrieved for cache-->
-            </Results>
-            <Results xsi:type="Program">
-                <PartnerKey xsi:nil="true" />
-                <ObjectID>08afb0e2-b00a-4c88-ad2e-pause</ObjectID>
-                <Name>testExisting_automation_pause</Name>                <!--only retrieved for cache-->
-                <CustomerKey>testExisting_automation_pause</CustomerKey>                <!--only retrieved for cache-->
-            </Results>
-            <Results xsi:type="Program">
-                <PartnerKey xsi:nil="true" />
                 <ObjectID>08afb0e2-b00a-4c88-fixKey_schedule</ObjectID>
                 <Name>testExisting_automation_fixedKey_scheduled</Name>                <!--only retrieved for cache-->
-                <CustomerKey>testExisting_automation_fixKey_schedule</CustomerKey>                <!--only retrieved for cache-->
-            </Results>
-            <Results xsi:type="Program">
-                <PartnerKey xsi:nil="true" />
-                <ObjectID>08afb0e2-b00a-4c88-fixKey_pause</ObjectID>
-                <Name>testExisting_automation_fixedKey_paused</Name>                <!--only retrieved for cache-->
-                <CustomerKey>testExisting_automation_fixKey_pause</CustomerKey>                <!--only retrieved for cache-->
+                <CustomerKey>testExisting_automation_fixedKey_scheduled</CustomerKey>                <!--only retrieved for cache-->
             </Results>
         </RetrieveResponseMsg>
     </soap:Body>
