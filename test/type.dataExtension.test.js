@@ -87,7 +87,6 @@ describe('type: dataExtension', () => {
             );
             return;
         });
-        it('Should change the key during update via --changeKeyValue');
         it('Should rename fields');
     });
     describe('Templating ================', () => {

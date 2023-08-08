@@ -1,0 +1,10 @@
+{
+    "ssjsActivityId": "39f6a488-20eb-4ba0-b0b9-new",
+    "name": "testNew_script",
+    "key": "testNew_script",
+    "description": "created on deploy",
+    "script": "<script runat=\"server\">\n// dummy created\n</script>",
+    "categoryId": 304,
+    "createdDate": "2022-10-20T00:41:26.163",
+    "modifiedDate": "2022-10-20T00:41:26.163"
+}

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:d626d883-8ca4-4cd1-b4ea-cb399015e275</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:b1d23385-97c0-4bc8-b0fe-b54e3310ae6b</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-a9582e47-b23f-4956-85b1-fe0b7fa73cf2">
+                <wsu:Created>2023-08-08T12:49:16Z</wsu:Created>
+                <wsu:Expires>2023-08-08T12:54:16Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>6e8873dd-03e2-47b6-823a-fb8681d93d78</RequestID>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-22T11:52:19.28</CreatedDate>
+                <ModifiedDate>2016-07-22T11:52:19.28</ModifiedDate>
+                <ID>89348</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>triggered_send_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Triggered Sends</Name>
+                <Description />
+                <ContentType>triggered_send</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-22T11:52:34.983</CreatedDate>
+                <ModifiedDate>2016-07-22T11:52:34.983</ModifiedDate>
+                <ID>89396</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>triggered_send_journeybuilder</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Journey Builder Sends</Name>
+                <Description />
+                <ContentType>triggered_send_journeybuilder</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-29T12:13:27.28</CreatedDate>
+                <ModifiedDate>2016-07-29T12:13:27.28</ModifiedDate>
+                <ID>90889</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>HiddenCategory_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>HiddenCategory</Name>
+                <Description>Hidden folder to store Hidden items</Description>
+                <ContentType>Hidden</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-08-25T10:04:09.12</CreatedDate>
+                <ModifiedDate>2016-08-25T10:04:09.12</ModifiedDate>
+                <ID>94030</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey />
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>89396</ID>
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>triggered_send_journeybuilder</CustomerKey>
+                </ParentFolder>
+                <Name>Satisfaction Score Survey</Name>
+                <Description />
+                <ContentType>triggered_send_journeybuilder</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>true</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-08-25T10:04:09.133</CreatedDate>
+                <ModifiedDate>2016-08-25T10:04:09.133</ModifiedDate>
+                <ID>94031</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey />
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>94030</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Version 1</Name>
+                <Description />
+                <ContentType>triggered_send_journeybuilder</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>true</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2021-06-09T10:17:06.27</CreatedDate>
+                <ModifiedDate>2021-06-09T10:17:06.27</ModifiedDate>
+                <ID>664654</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>6aa28490-6577-4cb2-8eac-fd5e4f983cae</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>317169</ID>
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>HiddenJourneyBuilderTriggeredSends_d</CustomerKey>
+                </ParentFolder>
+                <Name>6aa28490-6577-4cb2-8eac-fd5e4f983cae_V9</Name>
+                <Description>triggered_send folder to store triggered_send items</Description>
+                <ContentType>triggered_send</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>true</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2022-07-31T19:55:31.657</CreatedDate>
+                <ModifiedDate>2022-07-31T19:55:31.657</ModifiedDate>
+                <ID>742869</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>77211381-9967-4472-bd12-f58d4d5952a1</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>317169</ID>
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>HiddenJourneyBuilderTriggeredSends_d</CustomerKey>
+                </ParentFolder>
+                <Name>77211381-9967-4472-bd12-f58d4d5952a1_V1</Name>
+                <Description>triggered_send folder to store triggered_send items</Description>
+                <ContentType>triggered_send</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>true</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2022-07-31T19:56:51.297</CreatedDate>
+                <ModifiedDate>2022-07-31T19:56:51.297</ModifiedDate>
+                <ID>742871</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>HiddenJourneyBuilderSimulationTrigge</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>90889</ID>
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>HiddenCategory_default</CustomerKey>
+                </ParentFolder>
+                <Name>HiddenJourneyBuilderSimulationTriggeredSends</Name>
+                <Description>triggered_send_journeybuilder folder to store triggered_send_journeybuilder items</Description>
+                <ContentType>triggered_send_journeybuilder</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>true</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2023-03-08T10:26:55.787</CreatedDate>
+                <ModifiedDate>2023-03-08T10:26:55.787</ModifiedDate>
+                <ID>771879</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>8c24f428-4da8-4df6-97a7-beba5166c3c7</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>317169</ID>
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>HiddenJourneyBuilderTriggeredSends_d</CustomerKey>
+                </ParentFolder>
+                <Name>8c24f428-4da8-4df6-97a7-beba5166c3c7_V1</Name>
+                <Description>triggered_send folder to store triggered_send items</Description>
+                <ContentType>triggered_send</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>true</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2023-04-10T15:46:09.947</CreatedDate>
+                <ModifiedDate>2023-04-10T15:46:09.947</ModifiedDate>
+                <ID>776623</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>0a85b483-4208-4377-87fb-25794f5df244</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>317169</ID>
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>HiddenJourneyBuilderTriggeredSends_d</CustomerKey>
+                </ParentFolder>
+                <Name>0a85b483-4208-4377-87fb-25794f5df244_V1</Name>
+                <Description>triggered_send folder to store triggered_send items</Description>
+                <ContentType>triggered_send</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>true</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2020-03-06T07:57:37.633</CreatedDate>
+                <ModifiedDate>2020-03-06T07:57:37.633</ModifiedDate>
+                <ID>317169</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>HiddenJourneyBuilderTriggeredSends_d</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>90889</ID>
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>HiddenCategory_default</CustomerKey>
+                </ParentFolder>
+                <Name>HiddenJourneyBuilderTriggeredSends</Name>
+                <Description>triggered_send folder to store triggered_send items</Description>
+                <ContentType>triggered_send</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>true</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>

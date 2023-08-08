@@ -6,7 +6,7 @@
     "typeId": 1,
     "type": "scheduled",
     "statusId": 4,
-    "status": "PausedSchedule",
+    "status": "Scheduled",
     "categoryId": 290937,
     "schedule": {
         "id": "b393aa6c-a4a8-4c0f-a148-9250258a7339",

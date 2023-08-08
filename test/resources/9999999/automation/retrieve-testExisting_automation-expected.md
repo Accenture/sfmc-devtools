@@ -12,8 +12,8 @@
 
 * Start: 2022-07-30 00:00:00 +01:00
 * End: 2022-07-30 00:00:00 +01:00
-* Timezone:  W. Europe Standard Time
-* Recurrance: every  day for 1 times
+* Timezone: W. Europe Standard Time
+* Recurrance: run only once
 
 **Notifications:**
 

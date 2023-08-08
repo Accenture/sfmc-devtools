@@ -112,7 +112,10 @@ exports.getExpectedFile = (mid, type, action, ext) =>
  */
 
 exports.mockSetup = (isDeploy) => {
-    handler.setOptions({ debug: true, noLogFile: true });
+    if (!isDeploy) {
+        // no need to execute this again - already done in standard setup
+        handler.setOptions({ debug: true, noLogFile: true });
+    }
     apimock = new MockAdapter(axios, { onNoMatch: 'throwException' });
     // set access_token to mid to allow for autorouting of mock to correct resources
     apimock.onPost(authResources.success.url).reply((config) => {

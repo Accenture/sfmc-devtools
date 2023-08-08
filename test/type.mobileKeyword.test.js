@@ -120,7 +120,6 @@ describe('type: mobileKeyword', () => {
             );
             return;
         });
-        it('Should change the key during update via --changeKeyValue');
     });
     describe('Templating ================', () => {
         it('Should create a mobileKeyword template via retrieveAsTemplate and build it', async () => {

@@ -1,25 +1,28 @@
 {
+    "id": "a8afb0e2-b00a-4c88-ad2e-1f7f8788c560",
     "legacyId": "NewRkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow",
     "name": "testNew_automation",
     "description": "created on deploy",
     "key": "testNew_automation",
-    "typeId": 1,
-    "type": "scheduled",
+    "categoryId": 290937,
     "statusId": 4,
-    "status": "PausedSchedule",
-    "schedule": {
-        "id": "b393aa6c-a4a8-4c0f-a148-9250258a7339",
-        "typeId": 3,
-        "startDate": "2022-07-30T00:00:00",
-        "endDate": "2022-07-30T00:00:00",
-        "scheduledTime": "0001-01-01T07:00:00",
-        "rangeTypeId": 0,
-        "occurrences": 1,
-        "pattern": "<Pattern><PatternType>0</PatternType><DayInterval>1</DayInterval></Pattern>",
-        "icalRecur": "FREQ=DAILY;COUNT=1;INTERVAL=1",
-        "timezoneName": "W. Europe Standard Time",
-        "scheduleStatus": "paused",
-        "timezoneId": 5
+    "lastSavedDate": "2023-07-04T07:49:08.577",
+    "lastSavedByName": "SFMC DevTools app user",
+    "createdDate": "2023-07-04T07:49:08.297",
+    "createdByName": "SFMC DevTools app user",
+    "updateInProgress": false,
+    "startSource": {
+        "typeId": 1,
+        "schedule": {
+            "scheduleTypeId": 1,
+            "startDate": "2020-05-13T18:30:32.11-06:00",
+            "endDate": "2079-06-06T21:00:00-06:00",
+            "rangeTypeId": 1,
+            "occurrences": 6213054,
+            "icalRecur": "FREQ=MINUTELY;UNTIL=20790607T050000;INTERVAL=5",
+            "timezoneId": 5,
+            "statusId": 0
+        }
     },
     "steps": [
         {
@@ -79,7 +82,5 @@
             "annotation": "",
             "stepNumber": 0
         }
-    ],
-    "categoryId": 290937,
-    "id": "a8afb0e2-b00a-4c88-ad2e-1f7f8788c560"
+    ]
 }
