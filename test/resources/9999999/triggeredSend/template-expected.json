@@ -1,0 +1,29 @@
+{
+    "AllowedSlots": 0,
+    "AutoAddSubscribers": false,
+    "AutoUpdateSubscribers": false,
+    "BatchInterval": 0,
+    "BccEmail": "",
+    "CreatedDate": "2018-06-25T05:58:00",
+    "CustomerKey": "{{{prefix}}}triggeredSend",
+    "Description": "Unsubscribe_Email",
+    "DynamicEmailSubject": "You are successfully unsubscribed",
+    "EmailSubject": "You are successfully unsubscribed",
+    "FromAddress": "unsubscribe@emails.mcdev.accenture.com",
+    "FromName": "unsubscribe",
+    "IsMultipart": false,
+    "IsWrapped": true,
+    "Keyword": "",
+    "ModifiedDate": "2018-06-25T05:58:00",
+    "Name": "{{{prefix}}}triggeredSend",
+    "NewSlotTrigger": 0,
+    "Priority": 4,
+    "SendClassification": {
+        "CustomerKey": "Default Transactional"
+    },
+    "SuppressTracking": false,
+    "TriggeredSendStatus": "New",
+    "TriggeredSendType": "Continuous",
+    "r__email_Name": "Sporting Goods for September",
+    "r__folder_Path": "Triggered Sends"
+}

@@ -690,7 +690,7 @@ describe('type: automation', () => {
             return;
         });
     });
-    describe('Execute ================', () => {
+    describe('Schedule ================', () => {
         it('Should schedule an automation by key', async () => {
             const executedKeys = await handler.schedule('testInstance/testBU', 'automation', [
                 'testExisting_automation',
@@ -737,6 +737,8 @@ describe('type: automation', () => {
             );
             return;
         });
+    });
+    describe('Execute ================', () => {
         it('Should execute --schedule an automation by key', async () => {
             handler.setOptions({ schedule: true });
             const executedKeys = await handler.execute('testInstance/testBU', 'automation', [
