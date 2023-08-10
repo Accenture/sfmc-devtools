@@ -3009,6 +3009,7 @@ ImportFile MetadataType
     * [.update(importFile)](#ImportFile.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#ImportFile.preDeployTasks) ⇒ <code>Promise</code>
     * [.parseMetadata(metadata)](#ImportFile.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.updateNotifications()](#ImportFile.updateNotifications) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 
 <a name="ImportFile.retrieve"></a>
 
@@ -3108,6 +3109,11 @@ parses retrieved Metadata before saving
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single import definition |
 
+<a name="ImportFile.updateNotifications"></a>
+
+### ImportFile.updateNotifications() ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - keys of the importFiles where notifications were updated  
 <a name="Journey"></a>
 
 ## Journey ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -3414,7 +3420,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType.readBUMetadataForType) ⇒ <code>object</code>
     * [.getFilesToCommit(keyArr)](#MetadataType.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.getKeysForFixing(metadataMap)](#MetadataType.getKeysForFixing) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.setNotifEmailAddr()](#MetadataType.setNotifEmailAddr) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.updateNotifications()](#MetadataType.updateNotifications) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="MetadataType.client"></a>
 
@@ -4242,10 +4248,10 @@ additionally, the documentation for dataExtension and automation should be retur
 | --- | --- | --- |
 | metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 
-<a name="MetadataType.setNotifEmailAddr"></a>
+<a name="MetadataType.updateNotifications"></a>
 
-### MetadataType.setNotifEmailAddr() ⇒ <code>Array.&lt;string&gt;</code>
-Abstract setNotifEmailAddr method that needs to be implemented in child metadata type
+### MetadataType.updateNotifications() ⇒ <code>Array.&lt;string&gt;</code>
+Abstract updateNotifications method that needs to be implemented in child metadata type
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>Array.&lt;string&gt;</code> - returns keys of items where notification email address was set  
