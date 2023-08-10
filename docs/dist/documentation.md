@@ -1301,6 +1301,7 @@ AttributeSet MetadataType
 * [AttributeSet](#AttributeSet) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#AttributeSet.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache()](#AttributeSet.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForSharedDEs([deKeys])](#AttributeSet.retrieveForSharedDEs) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#AttributeSet.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.postRetrieveTasks(metadata)](#AttributeSet.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [._getSystemValueDefinitions()](#AttributeSet._getSystemValueDefinitions) ⇒ <code>Array.&lt;object&gt;</code>
@@ -1327,6 +1328,18 @@ Retrieves Metadata of schema set definitions for caching.
 
 **Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+<a name="AttributeSet.retrieveForSharedDEs"></a>
+
+### AttributeSet.retrieveForSharedDEs([deKeys]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of schema set definitions for caching.
+
+**Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [deKeys] | <code>Array.&lt;string&gt;</code> | if provided, only shared DEs with these keys will be returned |
+
 <a name="AttributeSet.parseResponseBody"></a>
 
 ### AttributeSet.parseResponseBody(body, [singleRetrieve]) ⇒ <code>TYPE.MetadataTypeMap</code>
@@ -1784,6 +1797,7 @@ DataExtension MetadataType
     * [.update(metadata)](#DataExtension.update) ⇒ <code>Promise</code>
     * [.postDeployTasks(upsertedMetadata, originalMetadata, createdUpdated)](#DataExtension.postDeployTasks) ⇒ <code>void</code>
     * [.retrieve(retrieveDir, [additionalFields], [_], [key])](#DataExtension.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
+    * [.retrieveSharedForCache([additionalFields])](#DataExtension.retrieveSharedForCache) ⇒ <code>Promise.&lt;TYPE.DataExtensionMap&gt;</code>
     * [.retrieveChangelog([additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.postRetrieveTasks(metadata)](#DataExtension.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionItem</code>
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.DataExtensionItem&gt;</code>
@@ -1875,6 +1889,18 @@ Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionCo
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | [_] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="DataExtension.retrieveSharedForCache"></a>
+
+### DataExtension.retrieveSharedForCache([additionalFields]) ⇒ <code>Promise.&lt;TYPE.DataExtensionMap&gt;</code>
+helper for [retrieve](#DataExtension.retrieve) and for AttributeSet.retrieveForSharedDEs
+
+**Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
+**Returns**: <code>Promise.&lt;TYPE.DataExtensionMap&gt;</code> - keyField => metadata map  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 
 <a name="DataExtension.retrieveChangelog"></a>
 
