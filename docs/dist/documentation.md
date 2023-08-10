@@ -219,6 +219,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Automation.">Automation.(metadataMap, originalMetadataMap, key, [oldKey])</a> ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
+<dt><a href="#DataExtension.">DataExtension.(upsertedMetadata, originalMetadata, createdUpdated)</a> ⇒ <code>void</code></dt>
+<dd><p>helper for <a href="#DataExtension.postDeployTasks">postDeployTasks</a></p>
+</dd>
 <dt><a href="#getUserName">getUserName(userList, item, fieldname)</a> ⇒ <code>string</code></dt>
 <dd></dd>
 <dt><a href="#setupSDK">setupSDK(sessionKey, authObject)</a> ⇒ <code><a href="#SDK">SDK</a></code></dt>
@@ -8538,6 +8541,19 @@ helper for [postDeployTasks](#Automation.postDeployTasks)
 | originalMetadataMap | <code>TYPE.AutomationMap</code> | metadata to be updated (contains additioanl fields) |
 | key | <code>string</code> | current customer key |
 | [oldKey] | <code>string</code> | old customer key before fixKey / changeKeyValue / changeKeyField |
+
+<a name="DataExtension."></a>
+
+## DataExtension.(upsertedMetadata, originalMetadata, createdUpdated) ⇒ <code>void</code>
+helper for [postDeployTasks](#DataExtension.postDeployTasks)
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| upsertedMetadata | <code>TYPE.DataExtensionMap</code> | metadata mapped by their keyField |
+| originalMetadata | <code>TYPE.DataExtensionMap</code> | metadata to be updated (contains additioanl fields) |
+| createdUpdated | <code>Object</code> | counter representing successful creates/updates |
 
 <a name="getUserName"></a>
 
