@@ -358,7 +358,12 @@ describe('type: script', () => {
             assert.equal(
                 fileList[1].split('\\').join('/'),
                 'retrieve/testInstance/testBU/script/testExisting_script.script-meta.ssjs',
-                'wrong JSON path'
+                'wrong SSJS path'
+            );
+            assert.equal(
+                fileList[2].split('\\').join('/'),
+                'retrieve/testInstance/testBU/script/testExisting_script.script-meta.html',
+                'wrong HTML path'
             );
             return;
         });
