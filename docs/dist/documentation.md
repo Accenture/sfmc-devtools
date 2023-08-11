@@ -220,7 +220,8 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
 <dt><a href="#DataExtension.">DataExtension.(upsertedMetadata, originalMetadata, createdUpdated)</a> ⇒ <code>void</code></dt>
-<dd><p>helper for <a href="#DataExtension.postDeployTasks">postDeployTasks</a></p>
+<dd><p>helper for <a href="#DataExtension.postDeployTasks">postDeployTasks</a>
+fixes an issue where shared data extensions are not visible in data designer on child BU; SF known issue: <a href="https://issues.salesforce.com/#q=W-11031095">https://issues.salesforce.com/#q=W-11031095</a></p>
 </dd>
 <dt><a href="#DataExtension.">DataExtension.(childBuName, buObjectParent, clientParent, sharedDataExtensions)</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
 <dd><p>helper for <a href="DataExtension.#postDeployFixShared">DataExtension.#postDeployFixShared</a></p>
@@ -8589,6 +8590,7 @@ helper for [postDeployTasks](#Automation.postDeployTasks)
 
 ## DataExtension.(upsertedMetadata, originalMetadata, createdUpdated) ⇒ <code>void</code>
 helper for [postDeployTasks](#DataExtension.postDeployTasks)
+fixes an issue where shared data extensions are not visible in data designer on child BU; SF known issue: https://issues.salesforce.com/#q=W-11031095
 
 **Kind**: global function  
 

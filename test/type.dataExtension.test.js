@@ -197,46 +197,60 @@ describe('type: dataExtension', () => {
     });
     describe('Delete ================', () => {
         // TODO: add this test
-        it('Should delete the item'); // , async () => {
-        //     // WHEN
-        //     const result = await handler.deleteByKey('testInstance/testBU', 'mobileKeyword', [
-        //         'testExisting_keyword',
-        //     ]);
-        //     // THEN
-        //     assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+        it('Should delete the dataExtension', async () => {
+            // WHEN
+            const result = await handler.deleteByKey(
+                'testInstance/testBU',
+                'dataExtension',
+                'testExisting_dataExtension'
+            );
+            // THEN
+            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
 
-        //     assert.equal(result, true, 'should have deleted the item');
-        //     return;
-        // });
+            assert.equal(result, true, 'should have deleted the item');
+            return;
+        });
+        it('Should delete the dataExtensionField', async () => {
+            // WHEN
+            const result = await handler.deleteByKey(
+                'testInstance/testBU',
+                'dataExtensionField',
+                'testExisting_dataExtension.LastName'
+            );
+            // THEN
+            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+
+            assert.equal(result, true, 'should have deleted the item');
+            return;
+        });
     });
     describe('CI/CD ================', () => {
-        // TODO: add this test
-        it('Should return a list of files based on their type and key'); // , async () => {
-        //     // WHEN
-        //     const fileList = await handler.getFilesToCommit(
-        //         'testInstance/testBU',
-        //         'mobileKeyword',
-        //         ['testExisting_keyword']
-        //     );
-        //     // THEN
-        //     assert.equal(
-        //         process.exitCode,
-        //         false,
-        //         'getFilesToCommit should not have thrown an error'
-        //     );
-        //     assert.equal(fileList.length, 2, 'expected only 2 file paths');
+        it('Should return a list of files based on their type and key', async () => {
+            // WHEN
+            const fileList = await handler.getFilesToCommit(
+                'testInstance/testBU',
+                'dataExtension',
+                ['testExisting_dataExtension']
+            );
+            // THEN
+            assert.equal(
+                process.exitCode,
+                false,
+                'getFilesToCommit should not have thrown an error'
+            );
+            assert.equal(fileList.length, 2, 'expected only 2 file paths (json, md)');
 
-        //     assert.equal(
-        //         fileList[0].split('\\').join('/'),
-        //         'retrieve/testInstance/testBU/mobileKeyword/testExisting_keyword.mobileKeyword-meta.json',
-        //         'wrong JSON path'
-        //     );
-        //     assert.equal(
-        //         fileList[1].split('\\').join('/'),
-        //         'retrieve/testInstance/testBU/mobileKeyword/testExisting_keyword.mobileKeyword-meta.amp',
-        //         'wrong AMP path'
-        //     );
-        //     return;
-        // });
+            assert.equal(
+                fileList[0].split('\\').join('/'),
+                'retrieve/testInstance/testBU/dataExtension/testExisting_dataExtension.dataExtension-meta.json',
+                'wrong JSON path'
+            );
+            assert.equal(
+                fileList[1].split('\\').join('/'),
+                'retrieve/testInstance/testBU/dataExtension/testExisting_dataExtension.dataExtension-doc.md',
+                'wrong MD path'
+            );
+            return;
+        });
     });
 });
