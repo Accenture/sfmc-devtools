@@ -222,6 +222,22 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#DataExtension.">DataExtension.(upsertedMetadata, originalMetadata, createdUpdated)</a> ⇒ <code>void</code></dt>
 <dd><p>helper for <a href="#DataExtension.postDeployTasks">postDeployTasks</a></p>
 </dd>
+<dt><a href="#DataExtension.">DataExtension.(childBuName, buObjectParent, clientParent, sharedDataExtensions)</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
+<dd><p>helper for <a href="DataExtension.#postDeployFixShared">DataExtension.#postDeployFixShared</a></p>
+</dd>
+<dt><a href="#DataExtension.">DataExtension.(deId, deKey, buObjectChildBu, clientChildBu, buObjectParent, clientParent)</a> ⇒ <code>Promise</code></dt>
+<dd></dd>
+<dt><a href="#DataExtension.">DataExtension.(randomSuffix, buObjectChildBu, clientChildBu, deKey, fieldObjectID)</a> ⇒ <code>Promise</code></dt>
+<dd></dd>
+<dt><a href="#DataExtension.">DataExtension.(buObjectChildBu, clientChildBu, deKey, deId)</a> ⇒ <code>Promise.&lt;string&gt;</code></dt>
+<dd><p>helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item</a></p>
+</dd>
+<dt><a href="#DataExtension.">DataExtension.(randomSuffix, buObjectParent, clientParent, deKey)</a> ⇒ <code>Promise.&lt;string&gt;</code></dt>
+<dd><p>helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item</a></p>
+</dd>
+<dt><a href="#DataExtension.">DataExtension.()</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
+<dd><p>helper for <a href="DataExtension.#postDeployFixShared">DataExtension.#postDeployFixShared</a></p>
+</dd>
 <dt><a href="#getUserName">getUserName(userList, item, fieldname)</a> ⇒ <code>string</code></dt>
 <dd></dd>
 <dt><a href="#setupSDK">setupSDK(sessionKey, authObject)</a> ⇒ <code><a href="#SDK">SDK</a></code></dt>
@@ -1301,7 +1317,7 @@ AttributeSet MetadataType
 * [AttributeSet](#AttributeSet) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#AttributeSet.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache()](#AttributeSet.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForSharedDEs([deKeys])](#AttributeSet.retrieveForSharedDEs) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForSharedDEs(sharedDataExtensions)](#AttributeSet.retrieveForSharedDEs) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#AttributeSet.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.postRetrieveTasks(metadata)](#AttributeSet.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [._getSystemValueDefinitions()](#AttributeSet._getSystemValueDefinitions) ⇒ <code>Array.&lt;object&gt;</code>
@@ -1330,15 +1346,15 @@ Retrieves Metadata of schema set definitions for caching.
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
 <a name="AttributeSet.retrieveForSharedDEs"></a>
 
-### AttributeSet.retrieveForSharedDEs([deKeys]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### AttributeSet.retrieveForSharedDEs(sharedDataExtensions) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 Retrieves Metadata of schema set definitions for caching.
 
 **Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - Promise of list of shared dataExtension IDs  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [deKeys] | <code>Array.&lt;string&gt;</code> | if provided, only shared DEs with these keys will be returned |
+| sharedDataExtensions | <code>object</code> | list of IDs of shared data extensions |
 
 <a name="AttributeSet.parseResponseBody"></a>
 
@@ -2036,7 +2052,7 @@ DataExtensionField MetadataType
     * [.postRetrieveTasks(metadata, forDataExtension)](#DataExtensionField.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionFieldItem</code>
     * [.prepareDeployColumnsOnUpdate(deployColumns, deKey)](#DataExtensionField.prepareDeployColumnsOnUpdate) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.DataExtensionFieldItem&gt;&gt;</code>
     * [.deleteByKey(customerKey)](#DataExtensionField.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.deleteByKeySOAP(customerKey)](#DataExtensionField.deleteByKeySOAP) ⇒ <code>boolean</code>
+    * [.deleteByKeySOAP(customerKey, [fieldId])](#DataExtensionField.deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#DataExtensionField.postDeleteTasks) ⇒ <code>void</code>
 
 <a name="DataExtensionField.retrieve"></a>
@@ -2131,7 +2147,7 @@ Delete a metadata item from the specified business unit
 
 <a name="DataExtensionField.deleteByKeySOAP"></a>
 
-### DataExtensionField.deleteByKeySOAP(customerKey) ⇒ <code>boolean</code>
+### DataExtensionField.deleteByKeySOAP(customerKey, [fieldId]) ⇒ <code>boolean</code>
 Delete a data extension from the specified business unit
 
 **Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
@@ -2140,6 +2156,7 @@ Delete a data extension from the specified business unit
 | Param | Type | Description |
 | --- | --- | --- |
 | customerKey | <code>string</code> | Identifier of metadata |
+| [fieldId] | <code>string</code> | for programmatic deletes only one can pass in the ID directly |
 
 <a name="DataExtensionField.postDeleteTasks"></a>
 
@@ -8581,6 +8598,87 @@ helper for [postDeployTasks](#DataExtension.postDeployTasks)
 | originalMetadata | <code>TYPE.DataExtensionMap</code> | metadata to be updated (contains additioanl fields) |
 | createdUpdated | <code>Object</code> | counter representing successful creates/updates |
 
+<a name="DataExtension."></a>
+
+## DataExtension.(childBuName, buObjectParent, clientParent, sharedDataExtensions) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+helper for [DataExtension.#postDeployFixShared](DataExtension.#postDeployFixShared)
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - updated shared DE keys on BU  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| childBuName | <code>string</code> | name of child BU to fix |
+| buObjectParent | <code>TYPE.BuObject</code> | bu object for parent BU |
+| clientParent | <code>object</code> | SDK for parent BU |
+| sharedDataExtensions | <code>object</code> | list of IDs of shared data extensions |
+
+<a name="DataExtension."></a>
+
+## DataExtension.(deId, deKey, buObjectChildBu, clientChildBu, buObjectParent, clientParent) ⇒ <code>Promise</code>
+**Kind**: global function  
+**Returns**: <code>Promise</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| deId | <code>string</code> | data extension ObjectID |
+| deKey | <code>string</code> | dataExtension key |
+| buObjectChildBu | <code>TYPE.BuObject</code> | BU object for Child BU |
+| clientChildBu | <code>object</code> | SDK for child BU |
+| buObjectParent | <code>TYPE.BuObject</code> | BU object for Parent BU |
+| clientParent | <code>object</code> | SDK for parent BU |
+
+<a name="DataExtension."></a>
+
+## DataExtension.(randomSuffix, buObjectChildBu, clientChildBu, deKey, fieldObjectID) ⇒ <code>Promise</code>
+**Kind**: global function  
+**Returns**: <code>Promise</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| randomSuffix | <code>string</code> | - |
+| buObjectChildBu | <code>TYPE.BuObject</code> | BU object for Child BU |
+| clientChildBu | <code>object</code> | SDK for child BU |
+| deKey | <code>string</code> | dataExtension key |
+| fieldObjectID | <code>string</code> | field ObjectID |
+
+<a name="DataExtension."></a>
+
+## DataExtension.(buObjectChildBu, clientChildBu, deKey, deId) ⇒ <code>Promise.&lt;string&gt;</code>
+helper for [DataExtension.#fixShared_item](DataExtension.#fixShared_item)
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;string&gt;</code> - randomSuffix  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObjectChildBu | <code>TYPE.BuObject</code> | BU object for Child BU |
+| clientChildBu | <code>object</code> | SDK for child BU |
+| deKey | <code>string</code> | dataExtension key |
+| deId | <code>string</code> | dataExtension ObjectID |
+
+<a name="DataExtension."></a>
+
+## DataExtension.(randomSuffix, buObjectParent, clientParent, deKey) ⇒ <code>Promise.&lt;string&gt;</code>
+helper for [DataExtension.#fixShared_item](DataExtension.#fixShared_item)
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;string&gt;</code> - fieldObjectID  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| randomSuffix | <code>string</code> | - |
+| buObjectParent | <code>TYPE.BuObject</code> | BU object for Parent BU |
+| clientParent | <code>object</code> | SDK for parent BU |
+| deKey | <code>string</code> | dataExtension key |
+
+<a name="DataExtension."></a>
+
+## DataExtension.() ⇒ <code>Array.&lt;string&gt;</code>
+helper for [DataExtension.#postDeployFixShared](DataExtension.#postDeployFixShared)
+
+**Kind**: global function  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of selected BU names  
 <a name="getUserName"></a>
 
 ## getUserName(userList, item, fieldname) ⇒ <code>string</code>
