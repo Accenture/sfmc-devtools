@@ -23,8 +23,8 @@
             <RequestID>cfe51e71-6a2b-4cb4-aecd-3777076d63bc</RequestID>
             <Results xsi:type="DataExtensionField">
                 <PartnerKey xsi:nil="true" />
-                <ObjectID>8018397d-880d-4f88-940e-3b4eca098a0c</ObjectID>
-                <CustomerKey>[testExisting_dataExtension].[ContactKey]</CustomerKey>
+                <ObjectID>shared-8018397d-880d-4f88-940e-3b4eca098a0c</ObjectID>
+                <CustomerKey>[testExisting_dataExtensionShared].[ContactKey]</CustomerKey>
                 <Name>ContactKey</Name>
                 <Scale>0</Scale>
                 <DefaultValue />
@@ -36,13 +36,13 @@
                 <DataExtension>
                     <PartnerKey xsi:nil="true" />
                     <ObjectID xsi:nil="true" />
-                    <CustomerKey>testExisting_dataExtension</CustomerKey>
+                    <CustomerKey>testExisting_dataExtensionShared</CustomerKey>
                 </DataExtension>
             </Results>
             <Results xsi:type="DataExtensionField">
                 <PartnerKey xsi:nil="true" />
-                <ObjectID>bea0e308-5d45-4181-a673-da9972a7c674</ObjectID>
-                <CustomerKey>[testExisting_dataExtension].[LastName]</CustomerKey>
+                <ObjectID>shared-bea0e308-5d45-4181-a673-da9972a7c674</ObjectID>
+                <CustomerKey>[testExisting_dataExtensionShared].[LastName]</CustomerKey>
                 <Name>LastName</Name>
                 <Scale>0</Scale>
                 <DefaultValue />
@@ -54,13 +54,13 @@
                 <DataExtension>
                     <PartnerKey xsi:nil="true" />
                     <ObjectID xsi:nil="true" />
-                    <CustomerKey>testExisting_dataExtension</CustomerKey>
+                    <CustomerKey>testExisting_dataExtensionShared</CustomerKey>
                 </DataExtension>
             </Results>
             <Results xsi:type="DataExtensionField">
                 <PartnerKey xsi:nil="true" />
-                <ObjectID>2557b461-a699-4744-950d-e80a19afc2dc</ObjectID>
-                <CustomerKey>[testExisting_dataExtension].[EmailAddress]</CustomerKey>
+                <ObjectID>shared-2557b461-a699-4744-950d-e80a19afc2dc</ObjectID>
+                <CustomerKey>[testExisting_dataExtensionShared].[EmailAddress]</CustomerKey>
                 <Name>EmailAddress</Name>
                 <Scale>0</Scale>
                 <DefaultValue />
@@ -72,13 +72,13 @@
                 <DataExtension>
                     <PartnerKey xsi:nil="true" />
                     <ObjectID xsi:nil="true" />
-                    <CustomerKey>testExisting_dataExtension</CustomerKey>
+                    <CustomerKey>testExisting_dataExtensionShared</CustomerKey>
                 </DataExtension>
             </Results>
             <Results xsi:type="DataExtensionField">
                 <PartnerKey xsi:nil="true" />
-                <ObjectID>42760528-a8c5-44dd-8c1d-ff34e5daee54</ObjectID>
-                <CustomerKey>[testExisting_dataExtension].[FirstName]</CustomerKey>
+                <ObjectID>shared-42760528-a8c5-44dd-8c1d-ff34e5daee54</ObjectID>
+                <CustomerKey>[testExisting_dataExtensionShared].[FirstName]</CustomerKey>
                 <Name>FirstName</Name>
                 <Scale>0</Scale>
                 <DefaultValue />
@@ -90,7 +90,7 @@
                 <DataExtension>
                     <PartnerKey xsi:nil="true" />
                     <ObjectID xsi:nil="true" />
-                    <CustomerKey>testExisting_dataExtension</CustomerKey>
+                    <CustomerKey>testExisting_dataExtensionShared</CustomerKey>
                 </DataExtension>
             </Results>
         </RetrieveResponseMsg>

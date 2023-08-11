@@ -50,6 +50,48 @@ describe('type: dataExtension', () => {
             );
             return;
         });
+        it('Should retrieve a shared dataExtension', async () => {
+            // WHEN
+            await handler.retrieve('testInstance/_ParentBU_', ['dataExtension']);
+            // THEN
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.dataExtension ? Object.keys(result.dataExtension).length : 0,
+                1,
+                'only one dataExtension expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    'testExisting_dataExtensionShared',
+                    'dataExtension',
+                    '_ParentBU_'
+                ),
+                await testUtils.getExpectedJson('1111111', 'dataExtension', 'retrieve'),
+
+                'returned metadata was not equal expected'
+            );
+            // check if MD file was created and equals expectations
+            expect(
+                file(
+                    testUtils.getActualDoc(
+                        'testExisting_dataExtensionShared',
+                        'dataExtension',
+                        '_ParentBU_'
+                    )
+                )
+            ).to.equal(
+                file(testUtils.getExpectedFile('1111111', 'dataExtension', 'retrieve', 'md'))
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                4,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
     describe('Deploy ================', () => {
         beforeEach(() => {
@@ -65,8 +107,8 @@ describe('type: dataExtension', () => {
             const result = cache.getCache();
             assert.equal(
                 result.dataExtension ? Object.keys(result.dataExtension).length : 0,
-                2,
-                'two dataExtensions expected'
+                3,
+                'three dataExtensions expected'
             );
             // insert
             assert.deepEqual(
