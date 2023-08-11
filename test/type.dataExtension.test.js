@@ -99,9 +99,17 @@ describe('type: dataExtension', () => {
         });
         it('Should create & update a dataExtension', async () => {
             // WHEN
-            await handler.deploy('testInstance/testBU', ['dataExtension']);
+            const deployResult = await handler.deploy('testInstance/testBU', ['dataExtension']);
             // THEN
             assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+
+            assert.equal(
+                deployResult['testInstance/testBU']?.dataExtension
+                    ? Object.keys(deployResult['testInstance/testBU']?.dataExtension).length
+                    : 0,
+                2,
+                'two dataExtensions to be deployed'
+            );
 
             // get results from cache
             const result = cache.getCache();
@@ -129,8 +137,104 @@ describe('type: dataExtension', () => {
             );
             return;
         });
-        it('Should create & update a shared dataExtension');
-        it('Should create & update a shared dataExtension with --fixShared');
+        it('Should create & update a shared dataExtension', async () => {
+            // WHEN
+            const deployResult = await handler.deploy('testInstance/_ParentBU_', ['dataExtension']);
+            // THEN
+            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+
+            assert.equal(
+                deployResult['testInstance/_ParentBU_']?.dataExtension
+                    ? Object.keys(deployResult['testInstance/_ParentBU_']?.dataExtension).length
+                    : 0,
+                2,
+                'two dataExtensions to be deployed'
+            );
+
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.dataExtension ? Object.keys(result.dataExtension).length : 0,
+                2,
+                'two dataExtensions expected'
+            );
+            // insert
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    'testNew_dataExtensionShared',
+                    'dataExtension',
+                    '_ParentBU_'
+                ),
+                await testUtils.getExpectedJson('1111111', 'dataExtension', 'create'),
+                'returned metadata was not equal expected for create'
+            );
+            // update
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    'testExisting_dataExtensionShared',
+                    'dataExtension',
+                    '_ParentBU_'
+                ),
+                await testUtils.getExpectedJson('1111111', 'dataExtension', 'update'),
+                'returned metadata was not equal expected for update'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                8,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should create & update a shared dataExtension with --fixShared & --skipInteraction', async () => {
+            // WHEN
+            handler.setOptions({ fixShared: 'testBU', skipInteraction: true, _runningTest: true });
+
+            const deployResult = await handler.deploy('testInstance/_ParentBU_', ['dataExtension']);
+            // THEN
+            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+
+            assert.equal(
+                deployResult['testInstance/_ParentBU_']?.dataExtension
+                    ? Object.keys(deployResult['testInstance/_ParentBU_']?.dataExtension).length
+                    : 0,
+                2,
+                'two dataExtensions to be deployed'
+            );
+
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.dataExtension ? Object.keys(result.dataExtension).length : 0,
+                2,
+                'two dataExtensions expected'
+            );
+            // insert
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    'testNew_dataExtensionShared',
+                    'dataExtension',
+                    '_ParentBU_'
+                ),
+                await testUtils.getExpectedJson('1111111', 'dataExtension', 'create'),
+                'returned metadata was not equal expected for create'
+            );
+            // update
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    'testExisting_dataExtensionShared',
+                    'dataExtension',
+                    '_ParentBU_'
+                ),
+                await testUtils.getExpectedJson('1111111', 'dataExtension', 'update'),
+                'returned metadata was not equal expected for update'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                12,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
         it('Should rename fields');
     });
     describe('Templating ================', () => {
