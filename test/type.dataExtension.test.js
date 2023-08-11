@@ -87,6 +87,8 @@ describe('type: dataExtension', () => {
             );
             return;
         });
+        it('Should create & update a shared dataExtension');
+        it('Should create & update a shared dataExtension with --fixShared');
         it('Should rename fields');
     });
     describe('Templating ================', () => {
