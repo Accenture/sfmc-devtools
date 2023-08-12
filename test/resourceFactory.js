@@ -1,9 +1,36 @@
 const fs = require('fs-extra');
 const path = require('node:path');
 const { XMLParser } = require('fast-xml-parser');
-const { color } = require('../lib/util/util');
+const Util = require('../lib/util/util');
 const parser = new XMLParser();
 const attributeParser = new XMLParser({ ignoreAttributes: false });
+let color;
+
+/* eslint-disable unicorn/prefer-ternary */
+if (
+    process.env.VSCODE_AMD_ENTRYPOINT === 'vs/workbench/api/node/extensionHostProcess' ||
+    process.env.VSCODE_CRASH_REPORTER_PROCESS_TYPE === 'extensionHost'
+) {
+    // when we execute the test in a VSCode extension host, we don't want CLI color codes.
+    color = new Proxy(
+        {},
+        {
+            /**
+             * catch-all for color
+             *
+             * @returns {string} empty string
+             */
+            get() {
+                return '';
+            },
+        }
+    );
+} else {
+    // test is executed directly in a command prompt. Use colors.
+    color = Util.color;
+}
+/* eslint-enable unicorn/prefer-ternary */
+
 /**
  * gets mock SOAP metadata for responding
  *
@@ -26,7 +53,7 @@ exports.loadSOAPRecords = async (mcdevAction, type, mid, filter) => {
         if (filterPath) {
             /* eslint-disable no-console */
             console.log(
-                `${color.bgYellow}${color.fgBlack}test-warning${
+                `${color.bgYellow}${color.fgBlack}TEST-WARNING${
                     color.reset
                 }: You are loading your reponse from ${
                     testPath + '-response.xml'
@@ -42,7 +69,7 @@ exports.loadSOAPRecords = async (mcdevAction, type, mid, filter) => {
     }
     /* eslint-disable no-console */
     console.log(
-        `${color.bgRed}${color.fgBlack}test-error${color.reset}: Please create file ${
+        `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}: Please create file ${
             filterPath ? testPath + filterPath + '-response.xml or ' : ''
         }${testPath + '-response.xml'}`
     );
@@ -228,7 +255,7 @@ exports.handleRESTRequest = async (config) => {
         } else {
             /* eslint-disable no-console */
             console.log(
-                `${color.bgRed}${color.fgBlack}test-error${color.reset}: Please create file ${testPath}.json/.txt`
+                `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}: Please create file ${testPath}.json/.txt`
             );
             /* eslint-enable no-console */
             process.exitCode = 404;

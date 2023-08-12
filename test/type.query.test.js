@@ -321,17 +321,14 @@ describe('type: query', () => {
             );
             return;
         });
-        it('Should not fixKeys and deploy', async () => {
+        it('Should run fixKeys but not find fixable keys and hence stop', async () => {
             // WHEN
+            handler.setOptions({ skipInteraction: { fixKeysReretrieve: false } });
             const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
                 'testExisting_query',
             ]);
             // THEN
-            assert.equal(
-                process.exitCode,
-                true,
-                'fixKeys should have thrown an error because it could not find anything to update'
-            );
+            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
             // check which keys were fixed
             assert.equal(
                 resultFixKeys['testInstance/testBU'].length,
@@ -354,8 +351,9 @@ describe('type: query', () => {
             );
             return;
         });
-        it('Should fixKeys and deploy by key', async () => {
+        it('Should fixKeys by key WITHOUT re-retrieving dependent types', async () => {
             // WHEN
+            handler.setOptions({ skipInteraction: { fixKeysReretrieve: false } });
             const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
                 'testExisting_query_fixKeys',
                 'testExisting_query',
@@ -389,9 +387,128 @@ describe('type: query', () => {
             );
             return;
         });
-        it('Should fixKeys and deploy via --like', async () => {
+        it('Should fixKeys by key WITHOUT re-retrieving dependent types and then --execute', async () => {
             // WHEN
-            handler.setOptions({ like: { key: 'testExisting_query%' } });
+            handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, execute: true });
+            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
+                'testExisting_query_fixKeys',
+                'testExisting_query',
+            ]);
+            assert.equal(
+                resultFixKeys['testInstance/testBU'].length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            assert.equal(
+                resultFixKeys['testInstance/testBU'][0],
+                'testExisting_query_fixedKeys',
+                'returned keys do not correspond to expected fixed keys'
+            );
+            // THEN
+            assert.equal(
+                process.exitCode,
+                false,
+                'fixKeys with --execute should not have thrown an error'
+            );
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_query_fixedKeys', 'query'),
+                await testUtils.getExpectedJson('9999999', 'query', 'patch_fixKeys'),
+                'returned metadata was not equal expected for update query'
+            );
+            expect(
+                file(testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql'))
+            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql')));
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                18,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should fixKeys by key AND re-retrieve dependent types', async () => {
+            // WHEN
+            handler.setOptions({ skipInteraction: { fixKeysReretrieve: true } });
+            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
+                'testExisting_query_fixKeys',
+                'testExisting_query',
+            ]);
+            assert.equal(
+                resultFixKeys['testInstance/testBU'].length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            assert.equal(
+                resultFixKeys['testInstance/testBU'][0],
+                'testExisting_query_fixedKeys',
+                'returned keys do not correspond to expected fixed keys'
+            );
+            // THEN
+            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_query_fixedKeys', 'query'),
+                await testUtils.getExpectedJson('9999999', 'query', 'patch_fixKeys'),
+                'returned metadata was not equal expected for update query'
+            );
+            expect(
+                file(testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql'))
+            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql')));
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                33,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should fixKeys by key AND re-retrieve dependent types and then --execute', async () => {
+            // WHEN
+            handler.setOptions({ skipInteraction: { fixKeysReretrieve: true }, execute: true });
+            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
+                'testExisting_query_fixKeys',
+                'testExisting_query',
+            ]);
+            assert.equal(
+                resultFixKeys['testInstance/testBU'].length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            assert.equal(
+                resultFixKeys['testInstance/testBU'][0],
+                'testExisting_query_fixedKeys',
+                'returned keys do not correspond to expected fixed keys'
+            );
+            // THEN
+            assert.equal(
+                process.exitCode,
+                false,
+                'fixKeys with --execute should not have thrown an error'
+            );
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_query_fixedKeys', 'query'),
+                await testUtils.getExpectedJson('9999999', 'query', 'patch_fixKeys'),
+                'returned metadata was not equal expected for update query'
+            );
+            expect(
+                file(testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql'))
+            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql')));
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                35,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should fixKeys via --like WITHOUT re-retrieving dependent types', async () => {
+            // WHEN
+            handler.setOptions({
+                like: { key: 'testExisting_query_f%' },
+                skipInteraction: { fixKeysReretrieve: false },
+            });
             const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query');
             assert.equal(
                 resultFixKeys['testInstance/testBU'].length,

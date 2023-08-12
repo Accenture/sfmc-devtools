@@ -195,6 +195,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Mcdev.">Mcdev.(selectedType, buObject)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
 <dd><p>helper for <a href="Mcdev.#runOnBU">Mcdev.#runOnBU</a></p>
 </dd>
+<dt><a href="#Mcdev.">Mcdev.(cred, bu, type, [keyArr])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
+<dd><p>Updates the key to match the name field</p>
+</dd>
 <dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>boolean</code></dt>
 <dd><p>helper for <a href="#Automation.postRetrieveTasks">postRetrieveTasks</a> and <a href="#Automation.execute">execute</a></p>
 </dd>
@@ -216,7 +219,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Automation.">Automation.(key, programId, notificationBody)</a> ⇒ <code>string</code></dt>
 <dd><p>helper function to send POST request to update notifications</p>
 </dd>
-<dt><a href="#Automation.">Automation.(metadataMap, originalMetadataMap, key)</a> ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code></dt>
+<dt><a href="#Automation.">Automation.(metadataMap, originalMetadataMap, key, [oldKey])</a> ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
 <dt><a href="#Automation.">Automation.()</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
@@ -525,7 +528,7 @@ main class
     * [.schedule(businessUnit, [selectedType], [keys])](#Mcdev.schedule) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
     * [.execute(businessUnit, [selectedType], [keys])](#Mcdev.execute) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
     * [.pause(businessUnit, [selectedType], [keys])](#Mcdev.pause) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
-    * [.fixKeys(businessUnit, type, [keys])](#Mcdev.fixKeys) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
+    * [.fixKeys(businessUnit, selectedType, [keys])](#Mcdev.fixKeys) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
     * [.updateNotifications(businessUnit, selectedType, [keys])](#Mcdev.updateNotifications) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
 
 <a name="Mcdev.setSkipInteraction"></a>
@@ -822,16 +825,16 @@ pause an item
 
 <a name="Mcdev.fixKeys"></a>
 
-### Mcdev.fixKeys(businessUnit, type, [keys]) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
+### Mcdev.fixKeys(businessUnit, selectedType, [keys]) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
 Updates the key to match the name field
 
 **Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
-**Returns**: <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code> - key: business unit name, value: list of affected item keys  
+**Returns**: <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code> - key: business unit name, value: list of paused item keys  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | businessUnit | <code>string</code> | name of BU |
-| type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| selectedType | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
 | [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Mcdev.updateNotifications"></a>
@@ -6189,7 +6192,8 @@ used to ensure the program tells surrounding software that an unrecoverable erro
 <a name="Util.isTrue"></a>
 
 ### Util.isTrue(attrValue) ⇒ <code>boolean</code>
-SFMC accepts multiple true values for Boolean attributes for which we are checking here
+SFMC accepts multiple true values for Boolean attributes for which we are checking here.
+The same problem occurs when evaluating boolean CLI flags
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>boolean</code> - attribute value == true ? true : false  
@@ -6201,7 +6205,8 @@ SFMC accepts multiple true values for Boolean attributes for which we are checki
 <a name="Util.isFalse"></a>
 
 ### Util.isFalse(attrValue) ⇒ <code>boolean</code>
-SFMC accepts multiple false values for Boolean attributes for which we are checking here
+SFMC accepts multiple false values for Boolean attributes for which we are checking here.
+The same problem occurs when evaluating boolean CLI flags
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>boolean</code> - attribute value == false ? true : false  
@@ -6574,6 +6579,7 @@ CLI helper class
 * [Cli](#Cli)
     * [.initMcdevConfig()](#Cli.initMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.addExtraCredential(properties)](#Cli.addExtraCredential) ⇒ <code>Promise.&lt;(boolean\|string)&gt;</code>
+    * [.postFixKeysReretrieve(type, dependentTypes)](#Cli.postFixKeysReretrieve) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.logExistingCredentials(properties)](#Cli.logExistingCredentials) ⇒ <code>void</code>
     * [.updateCredential(properties, credName)](#Cli.updateCredential) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.getCredentialObject(properties, target, [isCredentialOnly], [allowAll])](#Cli.getCredentialObject) ⇒ <code>Promise.&lt;TYPE.BuObject&gt;</code>
@@ -6603,6 +6609,17 @@ Extends template file for properties.json
 | Param | Type | Description |
 | --- | --- | --- |
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
+
+<a name="Cli.postFixKeysReretrieve"></a>
+
+### Cli.postFixKeysReretrieve(type, dependentTypes) ⇒ <code>Promise.&lt;boolean&gt;</code>
+**Kind**: static method of [<code>Cli</code>](#Cli)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - true if user wants to continue with retrieve  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| dependentTypes | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | types that depent on type |
 
 <a name="Cli.logExistingCredentials"></a>
 
@@ -7144,7 +7161,6 @@ CLI helper class
     * [._initMarkets()](#Init._initMarkets)
     * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
 
@@ -7303,18 +7319,6 @@ wrapper around npm dependency & configuration file setup
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | [initial] | <code>boolean</code> | print message if not part of initial setup |
 | [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
-
-<a name="Init._getMissingCredentials"></a>
-
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
-finds credentials that are set up in config but not in auth file
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
 
 <a name="Init.installDependencies"></a>
 
@@ -7366,7 +7370,6 @@ CLI helper class
     * [._initMarkets()](#Init._initMarkets)
     * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
 
@@ -7525,18 +7528,6 @@ wrapper around npm dependency & configuration file setup
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | [initial] | <code>boolean</code> | print message if not part of initial setup |
 | [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
-
-<a name="Init._getMissingCredentials"></a>
-
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
-finds credentials that are set up in config but not in auth file
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
 
 <a name="Init.installDependencies"></a>
 
@@ -7588,7 +7579,6 @@ CLI helper class
     * [._initMarkets()](#Init._initMarkets)
     * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
 
@@ -7747,18 +7737,6 @@ wrapper around npm dependency & configuration file setup
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | [initial] | <code>boolean</code> | print message if not part of initial setup |
 | [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
-
-<a name="Init._getMissingCredentials"></a>
-
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
-finds credentials that are set up in config but not in auth file
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
 
 <a name="Init.installDependencies"></a>
 
@@ -7810,7 +7788,6 @@ CLI helper class
     * [._initMarkets()](#Init._initMarkets)
     * [._downloadAllBUs(bu, gitStatus)](#Init._downloadAllBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.upgradeProject(properties, [initial], [repoName])](#Init.upgradeProject) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._getMissingCredentials(properties)](#Init._getMissingCredentials) ⇒ <code>Array.&lt;string&gt;</code>
     * [.installDependencies([repoName])](#Init.installDependencies) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._getDefaultPackageJson([currentContent])](#Init._getDefaultPackageJson) ⇒ <code>Promise.&lt;{script: object, author: string, license: string}&gt;</code>
 
@@ -7969,18 +7946,6 @@ wrapper around npm dependency & configuration file setup
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
 | [initial] | <code>boolean</code> | print message if not part of initial setup |
 | [repoName] | <code>string</code> | if git URL was provided earlier, the repo name was extracted to use it for npm init |
-
-<a name="Init._getMissingCredentials"></a>
-
-### Init.\_getMissingCredentials(properties) ⇒ <code>Array.&lt;string&gt;</code>
-finds credentials that are set up in config but not in auth file
-
-**Kind**: static method of [<code>Init</code>](#Init)  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of credential names  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| properties | <code>TYPE.Mcdevrc</code> | javascript object in .mcdevrc.json |
 
 <a name="Init.installDependencies"></a>
 
@@ -8133,7 +8098,8 @@ used to ensure the program tells surrounding software that an unrecoverable erro
 <a name="Util.isTrue"></a>
 
 ### Util.isTrue(attrValue) ⇒ <code>boolean</code>
-SFMC accepts multiple true values for Boolean attributes for which we are checking here
+SFMC accepts multiple true values for Boolean attributes for which we are checking here.
+The same problem occurs when evaluating boolean CLI flags
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>boolean</code> - attribute value == true ? true : false  
@@ -8145,7 +8111,8 @@ SFMC accepts multiple true values for Boolean attributes for which we are checki
 <a name="Util.isFalse"></a>
 
 ### Util.isFalse(attrValue) ⇒ <code>boolean</code>
-SFMC accepts multiple false values for Boolean attributes for which we are checking here
+SFMC accepts multiple false values for Boolean attributes for which we are checking here.
+The same problem occurs when evaluating boolean CLI flags
 
 **Kind**: static method of [<code>Util</code>](#Util)  
 **Returns**: <code>boolean</code> - attribute value == false ? true : false  
@@ -8477,7 +8444,7 @@ run a method across BUs
 
 | Param | Type | Description |
 | --- | --- | --- |
-| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> \| <code>&#x27;updateNotifications&#x27;</code> | what to run |
+| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> \| <code>&#x27;fixKeys&#x27;</code> \| <code>&#x27;updateNotifications&#x27;</code> | what to run |
 | businessUnit | <code>string</code> | name of BU |
 | [selectedType] | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
 | [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
@@ -8492,7 +8459,7 @@ helper for [Mcdev.#runMethod](Mcdev.#runMethod)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> \| <code>&#x27;updateNotifications&#x27;</code> | what to run |
+| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> \| <code>&#x27;fixKeys&#x27;</code> \| <code>&#x27;updateNotifications&#x27;</code> | what to run |
 | cred | <code>string</code> | name of Credential |
 | bu | <code>string</code> | name of BU |
 | [type] | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
@@ -8510,6 +8477,21 @@ helper for [Mcdev.#runOnBU](Mcdev.#runOnBU)
 | --- | --- | --- |
 | selectedType | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
 | buObject | <code>TYPE.BuObject</code> | properties for auth |
+
+<a name="Mcdev."></a>
+
+## Mcdev.(cred, bu, type, [keyArr]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+Updates the key to match the name field
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - list of keys that were affected  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cred | <code>string</code> | name of Credential |
+| bu | <code>string</code> | name of BU |
+| type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| [keyArr] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Automation."></a>
 
@@ -8600,7 +8582,7 @@ helper function to send POST request to update notifications
 
 <a name="Automation."></a>
 
-## Automation.(metadataMap, originalMetadataMap, key) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
+## Automation.(metadataMap, originalMetadataMap, key, [oldKey]) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
 helper for [postDeployTasks](#Automation.postDeployTasks)
 
 **Kind**: global function  
@@ -8611,6 +8593,7 @@ helper for [postDeployTasks](#Automation.postDeployTasks)
 | metadataMap | <code>TYPE.AutomationMap</code> | metadata mapped by their keyField |
 | originalMetadataMap | <code>TYPE.AutomationMap</code> | metadata to be updated (contains additioanl fields) |
 | key | <code>string</code> | current customer key |
+| [oldKey] | <code>string</code> | old customer key before fixKey / changeKeyValue / changeKeyField |
 
 <a name="Automation."></a>
 
