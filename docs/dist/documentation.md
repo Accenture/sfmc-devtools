@@ -3009,7 +3009,6 @@ ImportFile MetadataType
     * [.update(importFile)](#ImportFile.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#ImportFile.preDeployTasks) ⇒ <code>Promise</code>
     * [.parseMetadata(metadata)](#ImportFile.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.updateNotifications()](#ImportFile.updateNotifications) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 
 <a name="ImportFile.retrieve"></a>
 
@@ -3109,11 +3108,6 @@ parses retrieved Metadata before saving
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single import definition |
 
-<a name="ImportFile.updateNotifications"></a>
-
-### ImportFile.updateNotifications() ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
-**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - keys of the importFiles where notifications were updated  
 <a name="Journey"></a>
 
 ## Journey ⇐ [<code>MetadataType</code>](#MetadataType)

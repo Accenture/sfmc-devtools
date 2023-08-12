@@ -583,12 +583,6 @@ describe('type: automation', () => {
                 'automation',
                 ['testExisting_automation_updateNotifications']
             );
-            // need to retrieve first (will be removed once the function updates the automation in retrieve dir)
-            await handler.retrieve(
-                'testInstance/testBU',
-                ['automation'],
-                ['testExisting_automation_updateNotifications']
-            );
             assert.equal(
                 process.exitCode,
                 false,
