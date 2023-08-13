@@ -1412,6 +1412,7 @@ Automation MetadataType
     * [.deleteByKey(customerKey)](#Automation.deleteByKey) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#Automation.postDeleteTasks) ⇒ <code>void</code>
     * [.updateNotifications(keys)](#Automation.updateNotifications) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [.clearNotifications(keys)](#Automation.clearNotifications) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 
 <a name="Automation.retrieve"></a>
 
@@ -1682,6 +1683,18 @@ clean up after deleting a metadata item
 
 ### Automation.updateNotifications(keys) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 A function to update automation email notifications
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - keys of the automations where notifications were updated  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| keys | <code>string</code> | metadata keys |
+
+<a name="Automation.clearNotifications"></a>
+
+### Automation.clearNotifications(keys) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+A function to remove automation email notifications and/or notes
 
 **Kind**: static method of [<code>Automation</code>](#Automation)  
 **Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - keys of the automations where notifications were updated  
@@ -3422,6 +3435,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.getKeysForFixing(metadataMap)](#MetadataType.getKeysForFixing) ⇒ <code>Array.&lt;string&gt;</code>
     * [.getKeysToSetNotifications(metadataMap)](#MetadataType.getKeysToSetNotifications) ⇒ <code>Array.&lt;string&gt;</code>
     * [.updateNotifications()](#MetadataType.updateNotifications) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.clearNotifications()](#MetadataType.clearNotifications) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="MetadataType.client"></a>
 
@@ -4268,6 +4282,13 @@ Abstract updateNotifications method that needs to be implemented in child metada
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>Array.&lt;string&gt;</code> - returns keys of items where notification email address was set  
+<a name="MetadataType.clearNotifications"></a>
+
+### MetadataType.clearNotifications() ⇒ <code>Array.&lt;string&gt;</code>
+Abstract clearNotifications method that needs to be implemented in child metadata type
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Array.&lt;string&gt;</code> - returns keys of items where notification email address/notes were removed  
 <a name="MobileCode"></a>
 
 ## MobileCode ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -8473,7 +8494,7 @@ run a method across BUs
 
 | Param | Type | Description |
 | --- | --- | --- |
-| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> \| <code>&#x27;fixKeys&#x27;</code> \| <code>&#x27;updateNotifications&#x27;</code> | what to run |
+| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> \| <code>&#x27;fixKeys&#x27;</code> \| <code>&#x27;updateNotifications&#x27;</code> \| <code>&#x27;clearNotifications&#x27;</code> | what to run |
 | businessUnit | <code>string</code> | name of BU |
 | [selectedType] | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
 | [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
