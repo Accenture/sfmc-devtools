@@ -915,12 +915,12 @@ describe('type: automation', () => {
             );
             return;
         });
-        it('Should NOT update run completion note', async () => {
-            handler.setOptions({ completionNote: 'test' });
+        it('Should NOT update run failure email address', async () => {
+            handler.setOptions({ errorEmail: 'error@test.accenture.com' });
             const updatedNotifications = await handler.updateNotifications(
                 'testInstance/testBU',
                 'automation',
-                ['testExisting_automation_updateNotifications']
+                ['testExisting_automation']
             );
             assert.equal(
                 process.exitCode,
