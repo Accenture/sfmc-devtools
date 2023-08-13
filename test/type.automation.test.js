@@ -27,7 +27,7 @@ describe('type: automation', () => {
             const result = cache.getCache();
             assert.equal(
                 result.automation ? Object.keys(result.automation).length : 0,
-                4,
+                5,
                 'only four automations expected'
             );
             assert.deepEqual(
@@ -50,7 +50,7 @@ describe('type: automation', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                17,
+                19,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -79,8 +79,8 @@ describe('type: automation', () => {
             const cacheResult = cache.getCache();
             assert.equal(
                 cacheResult.automation ? Object.keys(cacheResult.automation).length : 0,
-                5,
-                'three automations expected'
+                6,
+                'six automations expected'
             );
             // insert
             assert.deepEqual(
@@ -144,8 +144,8 @@ describe('type: automation', () => {
             const cached = cache.getCache();
             assert.equal(
                 cached.automation ? Object.keys(cached.automation).length : 0,
-                5,
-                'five cached automation expected'
+                6,
+                'six cached automation expected'
             );
             assert.equal(
                 deployed['testInstance/testBU'].automation
@@ -213,8 +213,8 @@ describe('type: automation', () => {
             const cached = cache.getCache();
             assert.equal(
                 cached.automation ? Object.keys(cached.automation).length : 0,
-                5,
-                'five cached automation expected'
+                6,
+                'six cached automation expected'
             );
             assert.equal(
                 deployed['testInstance/testBU'].automation
@@ -648,7 +648,7 @@ describe('type: automation', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                17,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -920,12 +920,6 @@ describe('type: automation', () => {
             const updatedNotifications = await handler.updateNotifications(
                 'testInstance/testBU',
                 'automation',
-                ['testExisting_automation_updateNotifications']
-            );
-            // need to retrieve first
-            await handler.retrieve(
-                'testInstance/testBU',
-                ['automation'],
                 ['testExisting_automation_updateNotifications']
             );
             assert.equal(

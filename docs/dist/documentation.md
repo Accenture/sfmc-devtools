@@ -198,6 +198,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Mcdev.">Mcdev.(cred, bu, type, [keyArr])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
 <dd><p>Updates the key to match the name field</p>
 </dd>
+<dt><a href="#Mcdev.">Mcdev.(type, [keyArr])</a> ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code></dt>
+<dd><p>Updates notification email address field</p>
+</dd>
 <dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>boolean</code></dt>
 <dd><p>helper for <a href="#Automation.postRetrieveTasks">postRetrieveTasks</a> and <a href="#Automation.execute">execute</a></p>
 </dd>
@@ -3417,6 +3420,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType.readBUMetadataForType) ⇒ <code>object</code>
     * [.getFilesToCommit(keyArr)](#MetadataType.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.getKeysForFixing(metadataMap)](#MetadataType.getKeysForFixing) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.getKeysToSetNotifications(metadataMap)](#MetadataType.getKeysToSetNotifications) ⇒ <code>Array.&lt;string&gt;</code>
     * [.updateNotifications()](#MetadataType.updateNotifications) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="MetadataType.client"></a>
@@ -4238,6 +4242,18 @@ additionally, the documentation for dataExtension and automation should be retur
 <a name="MetadataType.getKeysForFixing"></a>
 
 ### MetadataType.getKeysForFixing(metadataMap) ⇒ <code>Array.&lt;string&gt;</code>
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of keys  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
+
+<a name="MetadataType.getKeysToSetNotifications"></a>
+
+### MetadataType.getKeysToSetNotifications(metadataMap) ⇒ <code>Array.&lt;string&gt;</code>
+helper function to get a list of keys where notification email address should be updated
+
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>Array.&lt;string&gt;</code> - list of keys  
 
@@ -8490,6 +8506,19 @@ Updates the key to match the name field
 | --- | --- | --- |
 | cred | <code>string</code> | name of Credential |
 | bu | <code>string</code> | name of BU |
+| type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| [keyArr] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Mcdev."></a>
+
+## Mcdev.(type, [keyArr]) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
+Updates notification email address field
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code> - key: business unit name, value: list of affected item keys  
+
+| Param | Type | Description |
+| --- | --- | --- |
 | type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 

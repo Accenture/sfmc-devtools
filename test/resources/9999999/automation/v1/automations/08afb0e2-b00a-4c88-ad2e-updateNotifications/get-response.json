@@ -81,5 +81,12 @@
                 }
             ]
         }
+    ],
+    "notifications": [
+        {
+            "email": ["test@test.com"],
+            "message": "",
+            "type": "Error"
+        }
     ]
 }
