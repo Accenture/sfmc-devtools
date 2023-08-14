@@ -6124,7 +6124,7 @@ CLI entry for SFMC DevTools
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [._isValidType(selectedType, [handleOutside])](#Util._isValidType) ⇒ <code>boolean</code>
     * [.getTypeAndSubType(selectedType)](#Util.getTypeAndSubType) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.emailValidator(email)](#Util.emailValidator) ⇒ <code>Boolean</code>
+    * [.emailValidator(email)](#Util.emailValidator) ⇒ <code>boolean</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
     * [._createNewLoggerTransport([noLogFile])](#Util._createNewLoggerTransport) ⇒ <code>object</code>
     * [.startLogger([restart], [noLogFile])](#Util.startLogger) ⇒ <code>void</code>
@@ -6280,11 +6280,11 @@ helper that deals with extracting type and subtype
 
 <a name="Util.emailValidator"></a>
 
-### Util.emailValidator(email) ⇒ <code>Boolean</code>
+### Util.emailValidator(email) ⇒ <code>boolean</code>
 helper that validates email address
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Boolean</code> - first elem is type, second elem is subType  
+**Returns**: <code>boolean</code> - first elem is type, second elem is subType  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8056,7 +8056,7 @@ Util that contains logger and simple util methods
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [._isValidType(selectedType, [handleOutside])](#Util._isValidType) ⇒ <code>boolean</code>
     * [.getTypeAndSubType(selectedType)](#Util.getTypeAndSubType) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.emailValidator(email)](#Util.emailValidator) ⇒ <code>Boolean</code>
+    * [.emailValidator(email)](#Util.emailValidator) ⇒ <code>boolean</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
     * [._createNewLoggerTransport([noLogFile])](#Util._createNewLoggerTransport) ⇒ <code>object</code>
     * [.startLogger([restart], [noLogFile])](#Util.startLogger) ⇒ <code>void</code>
@@ -8212,11 +8212,11 @@ helper that deals with extracting type and subtype
 
 <a name="Util.emailValidator"></a>
 
-### Util.emailValidator(email) ⇒ <code>Boolean</code>
+### Util.emailValidator(email) ⇒ <code>boolean</code>
 helper that validates email address
 
 **Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Boolean</code> - first elem is type, second elem is subType  
+**Returns**: <code>boolean</code> - first elem is type, second elem is subType  
 
 | Param | Type | Description |
 | --- | --- | --- |

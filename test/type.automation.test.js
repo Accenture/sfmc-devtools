@@ -913,6 +913,11 @@ describe('type: automation', () => {
                 await testUtils.getExpectedJson('9999999', 'automation', 'updateNotifications'),
                 'returned metadata was not equal expected for update'
             );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                17,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
             return;
         });
         it('Should NOT update run failure email address', async () => {
