@@ -220,24 +220,28 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
 <dt><a href="#DataExtension.">DataExtension.(upsertedMetadata, originalMetadata, createdUpdated)</a> ⇒ <code>void</code></dt>
-<dd><p>helper for <a href="#DataExtension.postDeployTasks">postDeployTasks</a>
+<dd><p>takes care of updating attribute groups on child BUs after an update to Shared DataExtensions
+helper for <a href="#DataExtension.postDeployTasks">postDeployTasks</a>
 fixes an issue where shared data extensions are not visible in data designer on child BU; SF known issue: <a href="https://issues.salesforce.com/#q=W-11031095">https://issues.salesforce.com/#q=W-11031095</a></p>
 </dd>
-<dt><a href="#DataExtension.">DataExtension.(childBuName, buObjectParent, clientParent, sharedDataExtensions)</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
-<dd><p>helper for <a href="DataExtension.#postDeployFixShared">DataExtension.#postDeployFixShared</a></p>
+<dt><a href="#DataExtension.">DataExtension.()</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
+<dd><p>helper for <a href="DataExtension.#fixShared">DataExtension.#fixShared</a></p>
 </dd>
-<dt><a href="#DataExtension.">DataExtension.(deId, deKey, buObjectChildBu, clientChildBu, buObjectParent, clientParent)</a> ⇒ <code>Promise</code></dt>
-<dd></dd>
-<dt><a href="#DataExtension.">DataExtension.(randomSuffix, buObjectChildBu, clientChildBu, deKey, fieldObjectID)</a> ⇒ <code>Promise</code></dt>
-<dd></dd>
+<dt><a href="#DataExtension.">DataExtension.(childBuName, buObjectParent, clientParent, sharedDataExtensionMap)</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
+<dd><p>helper for <a href="DataExtension.#fixShared">DataExtension.#fixShared</a></p>
+</dd>
+<dt><a href="#DataExtension.">DataExtension.(deId, deKey, buObjectChildBu, clientChildBu, buObjectParent, clientParent)</a> ⇒ <code>Promise.&lt;boolean&gt;</code></dt>
+<dd><p>method that actually takes care of triggering the update for a particular BU-sharedDe combo
+helper for <a href="DataExtension.#fixShared_onBU">DataExtension.#fixShared_onBU</a></p>
+</dd>
 <dt><a href="#DataExtension.">DataExtension.(buObjectChildBu, clientChildBu, deKey, deId)</a> ⇒ <code>Promise.&lt;string&gt;</code></dt>
 <dd><p>helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item</a></p>
 </dd>
 <dt><a href="#DataExtension.">DataExtension.(randomSuffix, buObjectParent, clientParent, deKey)</a> ⇒ <code>Promise.&lt;string&gt;</code></dt>
 <dd><p>helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item</a></p>
 </dd>
-<dt><a href="#DataExtension.">DataExtension.()</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
-<dd><p>helper for <a href="DataExtension.#postDeployFixShared">DataExtension.#postDeployFixShared</a></p>
+<dt><a href="#DataExtension.">DataExtension.(randomSuffix, buObjectChildBu, clientChildBu, deKey, fieldObjectID)</a> ⇒ <code>Promise</code></dt>
+<dd><p>helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item</a></p>
 </dd>
 <dt><a href="#getUserName">getUserName(userList, item, fieldname)</a> ⇒ <code>string</code></dt>
 <dd></dd>
@@ -8589,6 +8593,7 @@ helper for [postDeployTasks](#Automation.postDeployTasks)
 <a name="DataExtension."></a>
 
 ## DataExtension.(upsertedMetadata, originalMetadata, createdUpdated) ⇒ <code>void</code>
+takes care of updating attribute groups on child BUs after an update to Shared DataExtensions
 helper for [postDeployTasks](#DataExtension.postDeployTasks)
 fixes an issue where shared data extensions are not visible in data designer on child BU; SF known issue: https://issues.salesforce.com/#q=W-11031095
 
@@ -8602,8 +8607,15 @@ fixes an issue where shared data extensions are not visible in data designer on 
 
 <a name="DataExtension."></a>
 
-## DataExtension.(childBuName, buObjectParent, clientParent, sharedDataExtensions) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-helper for [DataExtension.#postDeployFixShared](DataExtension.#postDeployFixShared)
+## DataExtension.() ⇒ <code>Array.&lt;string&gt;</code>
+helper for [DataExtension.#fixShared](DataExtension.#fixShared)
+
+**Kind**: global function  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of selected BU names  
+<a name="DataExtension."></a>
+
+## DataExtension.(childBuName, buObjectParent, clientParent, sharedDataExtensionMap) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+helper for [DataExtension.#fixShared](DataExtension.#fixShared)
 
 **Kind**: global function  
 **Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - updated shared DE keys on BU  
@@ -8613,13 +8625,16 @@ helper for [DataExtension.#postDeployFixShared](DataExtension.#postDeployFixShar
 | childBuName | <code>string</code> | name of child BU to fix |
 | buObjectParent | <code>TYPE.BuObject</code> | bu object for parent BU |
 | clientParent | <code>object</code> | SDK for parent BU |
-| sharedDataExtensions | <code>object</code> | list of IDs of shared data extensions |
+| sharedDataExtensionMap | <code>Object.&lt;string, string&gt;</code> | ID-Key relationship of shared data extensions |
 
 <a name="DataExtension."></a>
 
-## DataExtension.(deId, deKey, buObjectChildBu, clientChildBu, buObjectParent, clientParent) ⇒ <code>Promise</code>
+## DataExtension.(deId, deKey, buObjectChildBu, clientChildBu, buObjectParent, clientParent) ⇒ <code>Promise.&lt;boolean&gt;</code>
+method that actually takes care of triggering the update for a particular BU-sharedDe combo
+helper for [DataExtension.#fixShared_onBU](DataExtension.#fixShared_onBU)
+
 **Kind**: global function  
-**Returns**: <code>Promise</code> - -  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - flag that signals if the fix was successful  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -8629,20 +8644,6 @@ helper for [DataExtension.#postDeployFixShared](DataExtension.#postDeployFixShar
 | clientChildBu | <code>object</code> | SDK for child BU |
 | buObjectParent | <code>TYPE.BuObject</code> | BU object for Parent BU |
 | clientParent | <code>object</code> | SDK for parent BU |
-
-<a name="DataExtension."></a>
-
-## DataExtension.(randomSuffix, buObjectChildBu, clientChildBu, deKey, fieldObjectID) ⇒ <code>Promise</code>
-**Kind**: global function  
-**Returns**: <code>Promise</code> - -  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| randomSuffix | <code>string</code> | - |
-| buObjectChildBu | <code>TYPE.BuObject</code> | BU object for Child BU |
-| clientChildBu | <code>object</code> | SDK for child BU |
-| deKey | <code>string</code> | dataExtension key |
-| fieldObjectID | <code>string</code> | field ObjectID |
 
 <a name="DataExtension."></a>
 
@@ -8676,11 +8677,20 @@ helper for [DataExtension.#fixShared_item](DataExtension.#fixShared_item)
 
 <a name="DataExtension."></a>
 
-## DataExtension.() ⇒ <code>Array.&lt;string&gt;</code>
-helper for [DataExtension.#postDeployFixShared](DataExtension.#postDeployFixShared)
+## DataExtension.(randomSuffix, buObjectChildBu, clientChildBu, deKey, fieldObjectID) ⇒ <code>Promise</code>
+helper for [DataExtension.#fixShared_item](DataExtension.#fixShared_item)
 
 **Kind**: global function  
-**Returns**: <code>Array.&lt;string&gt;</code> - list of selected BU names  
+**Returns**: <code>Promise</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| randomSuffix | <code>string</code> | - |
+| buObjectChildBu | <code>TYPE.BuObject</code> | BU object for Child BU |
+| clientChildBu | <code>object</code> | SDK for child BU |
+| deKey | <code>string</code> | dataExtension key |
+| fieldObjectID | <code>string</code> | field ObjectID |
+
 <a name="getUserName"></a>
 
 ## getUserName(userList, item, fieldname) ⇒ <code>string</code>
