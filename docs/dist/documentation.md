@@ -1325,7 +1325,7 @@ AttributeSet MetadataType
 * [AttributeSet](#AttributeSet) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#AttributeSet.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache()](#AttributeSet.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForSharedDEs(sharedDataExtensions)](#AttributeSet.retrieveForSharedDEs) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [.retrieveForSharedDEs(sharedDataExtensionIds)](#AttributeSet.retrieveForSharedDEs) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#AttributeSet.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.postRetrieveTasks(metadata)](#AttributeSet.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [._getSystemValueDefinitions()](#AttributeSet._getSystemValueDefinitions) ⇒ <code>Array.&lt;object&gt;</code>
@@ -1354,7 +1354,7 @@ Retrieves Metadata of schema set definitions for caching.
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
 <a name="AttributeSet.retrieveForSharedDEs"></a>
 
-### AttributeSet.retrieveForSharedDEs(sharedDataExtensions) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+### AttributeSet.retrieveForSharedDEs(sharedDataExtensionIds) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 Retrieves Metadata of schema set definitions for caching.
 
 **Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
@@ -1362,7 +1362,7 @@ Retrieves Metadata of schema set definitions for caching.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| sharedDataExtensions | <code>object</code> | list of IDs of shared data extensions |
+| sharedDataExtensionIds | <code>Array.&lt;string&gt;</code> | ID array for shared data extensions |
 
 <a name="AttributeSet.parseResponseBody"></a>
 
