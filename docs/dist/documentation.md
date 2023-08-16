@@ -235,13 +235,16 @@ fixes an issue where shared data extensions are not visible in data designer on 
 helper for <a href="DataExtension.#fixShared_onBU">DataExtension.#fixShared_onBU</a></p>
 </dd>
 <dt><a href="#DataExtension.">DataExtension.(buObjectChildBu, clientChildBu, deKey, deId)</a> ⇒ <code>Promise.&lt;string&gt;</code></dt>
-<dd><p>helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item</a></p>
+<dd><p>add a new field to the shared DE to trigger an update to the data model
+helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item</a></p>
 </dd>
 <dt><a href="#DataExtension.">DataExtension.(randomSuffix, buObjectParent, clientParent, deKey)</a> ⇒ <code>Promise.&lt;string&gt;</code></dt>
-<dd><p>helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item</a></p>
+<dd><p>get ID of the field added by <a href="DataExtension.#fixShared_item_addField">DataExtension.#fixShared_item_addField</a> on the shared DE via parent BU
+helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item</a></p>
 </dd>
 <dt><a href="#DataExtension.">DataExtension.(randomSuffix, buObjectChildBu, clientChildBu, deKey, fieldObjectID)</a> ⇒ <code>Promise</code></dt>
-<dd><p>helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item</a></p>
+<dd><p>delete the field added by <a href="DataExtension.#fixShared_item_addField">DataExtension.#fixShared_item_addField</a>
+helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item</a></p>
 </dd>
 <dt><a href="#getUserName">getUserName(userList, item, fieldname)</a> ⇒ <code>string</code></dt>
 <dd></dd>
@@ -1914,6 +1917,7 @@ Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionCo
 <a name="DataExtension.retrieveSharedForCache"></a>
 
 ### DataExtension.retrieveSharedForCache([additionalFields]) ⇒ <code>Promise.&lt;TYPE.DataExtensionMap&gt;</code>
+get shared dataExtensions from parent BU and merge them into the cache
 helper for [retrieve](#DataExtension.retrieve) and for AttributeSet.retrieveForSharedDEs
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
@@ -8648,6 +8652,7 @@ helper for [DataExtension.#fixShared_onBU](DataExtension.#fixShared_onBU)
 <a name="DataExtension."></a>
 
 ## DataExtension.(buObjectChildBu, clientChildBu, deKey, deId) ⇒ <code>Promise.&lt;string&gt;</code>
+add a new field to the shared DE to trigger an update to the data model
 helper for [DataExtension.#fixShared_item](DataExtension.#fixShared_item)
 
 **Kind**: global function  
@@ -8663,6 +8668,7 @@ helper for [DataExtension.#fixShared_item](DataExtension.#fixShared_item)
 <a name="DataExtension."></a>
 
 ## DataExtension.(randomSuffix, buObjectParent, clientParent, deKey) ⇒ <code>Promise.&lt;string&gt;</code>
+get ID of the field added by [DataExtension.#fixShared_item_addField](DataExtension.#fixShared_item_addField) on the shared DE via parent BU
 helper for [DataExtension.#fixShared_item](DataExtension.#fixShared_item)
 
 **Kind**: global function  
@@ -8678,6 +8684,7 @@ helper for [DataExtension.#fixShared_item](DataExtension.#fixShared_item)
 <a name="DataExtension."></a>
 
 ## DataExtension.(randomSuffix, buObjectChildBu, clientChildBu, deKey, fieldObjectID) ⇒ <code>Promise</code>
+delete the field added by [DataExtension.#fixShared_item_addField](DataExtension.#fixShared_item_addField)
 helper for [DataExtension.#fixShared_item](DataExtension.#fixShared_item)
 
 **Kind**: global function  
