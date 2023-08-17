@@ -97,7 +97,7 @@ describe('type: dataExtension', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
-        it('Should create & update a dataExtension', async () => {
+        it('Should create & update a dataExtension including a field rename', async () => {
             // WHEN
             const deployResult = await handler.deploy('testInstance/testBU', ['dataExtension']);
             // THEN
@@ -235,7 +235,6 @@ describe('type: dataExtension', () => {
             );
             return;
         });
-        it('Should rename fields');
     });
     describe('Templating ================', () => {
         it('Should create a dataExtension template via retrieveAsTemplate and build it', async () => {

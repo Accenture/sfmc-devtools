@@ -1325,7 +1325,7 @@ AttributeSet MetadataType
 * [AttributeSet](#AttributeSet) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#AttributeSet.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache()](#AttributeSet.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.fixShared_retrieve(sharedDataExtensionMap, fixShared_fieldChange)](#AttributeSet.fixShared_retrieve) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [.fixShared_retrieve(sharedDataExtensionMap, fixShared_fields)](#AttributeSet.fixShared_retrieve) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#AttributeSet.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.postRetrieveTasks(metadata)](#AttributeSet.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [._getSystemValueDefinitions()](#AttributeSet._getSystemValueDefinitions) ⇒ <code>Array.&lt;object&gt;</code>
@@ -1354,7 +1354,7 @@ Retrieves Metadata of schema set definitions for caching.
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
 <a name="AttributeSet.fixShared_retrieve"></a>
 
-### AttributeSet.fixShared\_retrieve(sharedDataExtensionMap, fixShared_fieldChange) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+### AttributeSet.fixShared\_retrieve(sharedDataExtensionMap, fixShared_fields) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 used to identify updated shared data extensions that are used in attributeSets.
 helper for DataExtension.#fixShared_onBU
 
@@ -1364,7 +1364,7 @@ helper for DataExtension.#fixShared_onBU
 | Param | Type | Description |
 | --- | --- | --- |
 | sharedDataExtensionMap | <code>Object.&lt;string, string&gt;</code> | ID-Key relationship of shared data extensions |
-| fixShared_fieldChange | <code>object</code> | DataExtensionField.fixShared_fieldChange |
+| fixShared_fields | <code>object</code> | DataExtensionField.fixShared_fields |
 
 <a name="AttributeSet.parseResponseBody"></a>
 
