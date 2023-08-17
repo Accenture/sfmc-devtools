@@ -38,7 +38,7 @@
             "FieldType": "EmailAddress"
         },
         {
-            "Name": "testField",
+            "Name": "newField",
             "DefaultValue": "",
             "MaxLength": 254,
             "IsRequired": false,

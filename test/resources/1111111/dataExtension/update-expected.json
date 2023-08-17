@@ -41,7 +41,7 @@
             "IsPrimaryKey": false,
             "IsRequired": false,
             "MaxLength": 254,
-            "Name": "testField"
+            "Name": "newField"
         }
     ],
     "IsSendable": false,

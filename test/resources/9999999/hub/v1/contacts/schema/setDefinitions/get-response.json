@@ -20083,66 +20083,6 @@
                     "localizedDescription": {
                         "value": ""
                     },
-                    "definitionID": "538b787a-5238-ee11-b85a-48df37d1de8a",
-                    "definitionKey": "testField",
-                    "definitionName": {
-                        "value": "testField"
-                    },
-                    "connectingID": {
-                        "identifierType": "FullyQualifiedName"
-                    },
-                    "displayOrder": 3,
-                    "fullyQualifiedName": "testExisting_dataExtensionShared.testField",
-                    "isHidden": false,
-                    "isIdentityValue": false,
-                    "isNullable": true,
-                    "isPrimaryKey": false,
-                    "isReadOnly": false,
-                    "isSystemDefined": false,
-                    "isUpdateable": true,
-                    "length": 254,
-                    "obfuscationProperties": {
-                        "maskType": "None",
-                        "maskTypeID": 0,
-                        "storageTypeID": 1,
-                        "storageType": "Plain",
-                        "valueDefinitionID": "538b787a-5238-ee11-b85a-48df37d1de8a"
-                    },
-                    "ordinal": 3,
-                    "parentDefinition": {
-                        "definitionID": "528b787a-5238-ee11-b85a-48df37d1de8a",
-                        "definitionKey": "testExisting_dataExtensionShared",
-                        "definitionName": {
-                            "value": "testExisting_dataExtensionShared"
-                        },
-                        "connectingID": {
-                            "identifierType": "FullyQualifiedName"
-                        }
-                    },
-                    "parentType": "Set",
-                    "storageName": "testField",
-                    "storageFieldReferenceID": {
-                        "type": "guid",
-                        "value": "ec7a606d-f38e-4c91-a5f2-02bf231a0954"
-                    },
-                    "valueDefinitionID": "538b787a-5238-ee11-b85a-48df37d1de8a",
-                    "valueDefinitionKey": "testField",
-                    "name": "testField",
-                    "setDefinitionID": "528b787a-5238-ee11-b85a-48df37d1de8a",
-                    "setDefinitionKey": "testExisting_dataExtensionShared",
-                    "setDefinitionName": {
-                        "value": "testExisting_dataExtensionShared"
-                    },
-                    "parentIdentifier": "528b787a-5238-ee11-b85a-48df37d1de8a"
-                },
-                {
-                    "baseType": "Text",
-                    "dataSourceName": {},
-                    "dataType": "Text",
-                    "description": "",
-                    "localizedDescription": {
-                        "value": ""
-                    },
                     "definitionID": "558b787a-5238-ee11-b85a-48df37d1de8a",
                     "definitionKey": "ContactKey",
                     "definitionName": {
