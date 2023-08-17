@@ -342,7 +342,6 @@ describe('type: dataExtension', () => {
         });
     });
     describe('Delete ================', () => {
-        // TODO: add this test
         it('Should delete the dataExtension', async () => {
             // WHEN
             const result = await handler.deleteByKey(
