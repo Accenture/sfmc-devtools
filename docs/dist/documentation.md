@@ -1355,7 +1355,8 @@ Retrieves Metadata of schema set definitions for caching.
 <a name="AttributeSet.fixShared_retrieve"></a>
 
 ### AttributeSet.fixShared\_retrieve(sharedDataExtensionMap, fixShared_fieldChange) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
-Retrieves Metadata of schema set definitions for caching.
+used to identify updated shared data extensions that are used in attributeSets.
+helper for DataExtension.#fixShared_onBU
 
 **Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
 **Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - Promise of list of shared dataExtension IDs  
