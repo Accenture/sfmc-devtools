@@ -26,15 +26,15 @@ describe('type: attributeSet', () => {
                 retrieve['testInstance/testBU'].attributeSet
                     ? Object.keys(retrieve['testInstance/testBU'].attributeSet).length
                     : 0,
-                27,
-                'only 27 attributeSets expected in retrieve response'
+                28,
+                'only 28 attributeSets expected in retrieve response'
             );
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.attributeSet ? Object.keys(result.attributeSet).length : 0,
-                27,
-                'only 27 attributeSets expected in cache'
+                28,
+                'only 28 attributeSets expected in cache'
             );
 
             assert.deepEqual(

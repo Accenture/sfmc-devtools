@@ -571,6 +571,49 @@
                 "identifierType": "FullyQualifiedName"
             },
             "namespace": ""
+        },
+        {
+            "mID": 7330928,
+            "objectState": "Created",
+            "attributeSetIdentifiers": [
+                {
+                    "definitionID": "528b787a-5238-ee11-b85a-48df37d1de8a",
+                    "definitionName": {
+                        "value": "testExisting_dataExtensionShared"
+                    },
+                    "definitionKey": "testExisting_dataExtensionShared",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                }
+            ],
+            "isOwner": true,
+            "isPrimary": false,
+            "isSystemDefined": false,
+            "isHidden": false,
+            "canAddProperties": true,
+            "canAddRelationships": true,
+            "containsSchemaAttributes": false,
+            "canRemove": true,
+            "canChangeProperties": true,
+            "displayOrder": 8,
+            "requiredRelationships": [],
+            "canModify": true,
+            "attributeGroupIconKey": "et-icon-databas",
+            "fullyQualifiedName": "testExisting_attributeGroup",
+            "attributeGroupType": "Standard",
+            "localizedDescription": {},
+            "attributeCount": 6,
+            "definitionID": "79846c6e-5238-ee11-b85a-48df37d1de8a",
+            "definitionName": {
+                "value": "testExisting_attributeGroup"
+            },
+            "definitionKey": "testExisting_attributeGroup",
+            "connectingID": {
+                "identifierType": "FullyQualifiedName"
+            },
+            "namespace": ""
         }
     ],
     "responseContext": {
