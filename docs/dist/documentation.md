@@ -1325,7 +1325,7 @@ AttributeSet MetadataType
 * [AttributeSet](#AttributeSet) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#AttributeSet.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache()](#AttributeSet.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForSharedDEs(sharedDataExtensionIds)](#AttributeSet.retrieveForSharedDEs) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [.fixShared_retrieve(sharedDataExtensionMap, fixShared_fieldChange)](#AttributeSet.fixShared_retrieve) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#AttributeSet.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.postRetrieveTasks(metadata)](#AttributeSet.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [._getSystemValueDefinitions()](#AttributeSet._getSystemValueDefinitions) ⇒ <code>Array.&lt;object&gt;</code>
@@ -1352,9 +1352,9 @@ Retrieves Metadata of schema set definitions for caching.
 
 **Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
-<a name="AttributeSet.retrieveForSharedDEs"></a>
+<a name="AttributeSet.fixShared_retrieve"></a>
 
-### AttributeSet.retrieveForSharedDEs(sharedDataExtensionIds) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+### AttributeSet.fixShared\_retrieve(sharedDataExtensionMap, fixShared_fieldChange) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 Retrieves Metadata of schema set definitions for caching.
 
 **Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
@@ -1362,7 +1362,8 @@ Retrieves Metadata of schema set definitions for caching.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| sharedDataExtensionIds | <code>Array.&lt;string&gt;</code> | ID array for shared data extensions |
+| sharedDataExtensionMap | <code>Object.&lt;string, string&gt;</code> | ID-Key relationship of shared data extensions |
+| fixShared_fieldChange | <code>object</code> | DataExtensionField.fixShared_fieldChange |
 
 <a name="AttributeSet.parseResponseBody"></a>
 
@@ -1918,7 +1919,7 @@ Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionCo
 
 ### DataExtension.retrieveSharedForCache([additionalFields]) ⇒ <code>Promise.&lt;TYPE.DataExtensionMap&gt;</code>
 get shared dataExtensions from parent BU and merge them into the cache
-helper for [retrieve](#DataExtension.retrieve) and for AttributeSet.retrieveForSharedDEs
+helper for [retrieve](#DataExtension.retrieve) and for AttributeSet.fixShared_retrieve
 
 **Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
 **Returns**: <code>Promise.&lt;TYPE.DataExtensionMap&gt;</code> - keyField => metadata map  
