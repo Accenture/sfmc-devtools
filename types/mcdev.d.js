@@ -252,6 +252,20 @@ const SDK = require('sfmc-sdk');
  * @property {string} [categoryId] holds folder ID, replaced with r__folder_Path during retrieve
  */
 /**
+ * @typedef {object} DataVerificationItem
+ * @property {string} dataVerificationDefinitionId ID / Key
+ * @property {'IsEqualTo'|'IsLessThan'|'IsGreaterThan'|'IsOutsideRange'|'IsInsideRange'|'IsNotEqualTo'|'IsNotLessThan'|'IsNotGreaterThan'|'IsNotOutsideRange'|'IsNotInsideRange'} verificationType key
+ * @property {number} value1 used for all verificationTypes; lower value for IsOutsideRange, IsInsideRange, IsNotOutsideRange, IsNotInsideRange
+ * @property {number} value2 only used for IsOutsideRange, IsInsideRange, IsNotOutsideRange, IsNotInsideRange; otherwise set to 0
+ * @property {boolean} shouldStopOnFailure flag to stop automation if verification fails
+ * @property {boolean} shouldEmailOnFailure flag to send email if verification fails
+ * @property {string} notificationEmailAddress email address to send notification to; empty string if shouldEmailOnFailure=false
+ * @property {string} notificationEmailMessage email message to send; empty string if shouldEmailOnFailure=false
+ * @property {number} createdBy user id of creator
+ * @property {string} r__dataExtension_CustomerKey key of target data extension
+ */
+
+/**
  * @typedef {Object.<string, AutomationItem>} AutomationMap
  * @typedef {{metadata:AutomationMap,type:string}} AutomationMapObj
  * @typedef {{metadata:AutomationItem,type:string}} AutomationItemObj
