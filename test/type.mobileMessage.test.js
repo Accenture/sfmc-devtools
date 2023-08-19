@@ -163,9 +163,11 @@ describe('type: mobileMessage', () => {
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN
-            const result = await handler.deleteByKey('testInstance/testBU', 'mobileMessage', [
-                'NTIzOjc4OjA',
-            ]);
+            const result = await handler.deleteByKey(
+                'testInstance/testBU',
+                'mobileMessage',
+                'NTIzOjc4OjA'
+            );
             // THEN
             assert.equal(process.exitCode, false, 'delete should not have thrown an error');
 

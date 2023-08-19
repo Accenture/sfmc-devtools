@@ -130,9 +130,11 @@ describe('type: triggeredSend', () => {
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN
-            const result = await handler.deleteByKey('testInstance/testBU', 'triggeredSend', [
-                'testExisting_triggeredSend',
-            ]);
+            const result = await handler.deleteByKey(
+                'testInstance/testBU',
+                'triggeredSend',
+                'testExisting_triggeredSend'
+            );
             // THEN
             assert.equal(process.exitCode, false, 'delete should not have thrown an error');
 

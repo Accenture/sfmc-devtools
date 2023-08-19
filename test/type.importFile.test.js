@@ -171,9 +171,11 @@ describe('type: importFile', () => {
     describe('Delete ================', () => {
         it('Should NOT delete the item', async () => {
             // WHEN
-            await handler.deleteByKey('testInstance/testBU', 'importFile', [
-                'testExisting_fileTranfer',
-            ]);
+            await handler.deleteByKey(
+                'testInstance/testBU',
+                'importFile',
+                'testExisting_fileTranfer'
+            );
             // THEN
             assert.equal(
                 process.exitCode,
