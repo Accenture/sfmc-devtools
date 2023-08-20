@@ -11,8 +11,7 @@
     "dataRetentionProperties": {
         "isDeleteAtEndOfRetentionPeriod": false,
         "isResetRetentionPeriodOnImport": false,
-        "isRowBasedRetention": false,
-        "setDefinitionID": "3152de3f-31e2-e611-80cc-1402ec7222b4"
+        "isRowBasedRetention": false
     },
     "definitionKey": "MobileSubscriptions",
     "isCustomObjectBacked": true,
@@ -29,7 +28,6 @@
     "parentID": "00000000-0000-0000-0000-000000000000",
     "r__folder_Path": "Data Extensions",
     "relationshipCount": 0,
-    "setDefinitionID": "3152de3f-31e2-e611-80cc-1402ec7222b4",
     "setDefinitionKey": "MobileSubscriptions",
     "storageLogicalType": "DataExtension",
     "storageName": "_MobileSubscription",

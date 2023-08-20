@@ -26,16 +26,16 @@ describe('type: attributeGroup', () => {
                 retrieve['testInstance/testBU'].attributeGroup
                     ? Object.keys(retrieve['testInstance/testBU'].attributeGroup).length
                     : 0,
-                7,
-                'only 7 attributeGroups expected in retrieve response'
+                8,
+                'only 8 attributeGroups expected in retrieve response'
             );
 
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.attributeGroup ? Object.keys(result.attributeGroup).length : 0,
-                7,
-                'only 7 attributeGroups expected in cache'
+                8,
+                'only 8 attributeGroups expected in cache'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('ETMobileConnect', 'attributeGroup'),
