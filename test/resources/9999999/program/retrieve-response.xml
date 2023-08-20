@@ -51,6 +51,12 @@
                 <Name>testExisting_automation_updateNotifications</Name>                <!--only retrieved for cache-->
                 <CustomerKey>testExisting_automation_updateNotifications</CustomerKey>                <!--only retrieved for cache-->
             </Results>
+            <Results xsi:type="Program">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>08afb0e2-b00a-4c88-ad2e-clearNotifications</ObjectID>
+                <Name>testExisting_automation_clearNotifications</Name>                <!--only retrieved for cache-->
+                <CustomerKey>testExisting_automation_clearNotifications</CustomerKey>                <!--only retrieved for cache-->
+            </Results>
         </RetrieveResponseMsg>
     </soap:Body>
 </soap:Envelope>

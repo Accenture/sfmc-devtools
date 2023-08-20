@@ -920,7 +920,7 @@ describe('type: automation', () => {
             );
             return;
         });
-        it('Should NOT update run failure email address', async () => {
+        it('Should NOT update run error email address', async () => {
             handler.setOptions({ errorEmail: 'error@test.accenture.com' });
             const updatedNotifications = await handler.updateNotifications(
                 'testInstance/testBU',
@@ -936,6 +936,38 @@ describe('type: automation', () => {
                 updatedNotifications['testInstance/testBU'].length,
                 0,
                 'zero automation keys expected'
+            );
+            return;
+        });
+        it('Should clear all notification email addresses', async () => {
+            handler.setOptions({ clear: 'all' });
+            const updatedNotifications = await handler.updateNotifications(
+                'testInstance/testBU',
+                'automation',
+                ['testExisting_automation_clearNotifications']
+            );
+            assert.equal(
+                process.exitCode,
+                false,
+                'update notifications --clear should not have thrown an error'
+            );
+            assert.equal(
+                updatedNotifications['testInstance/testBU'].length,
+                1,
+                'one automation key expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    'testExisting_automation_clearNotifications',
+                    'automation'
+                ),
+                await testUtils.getExpectedJson('9999999', 'automation', 'clearNotifications'),
+                'returned metadata was not equal expected for update'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                24,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
