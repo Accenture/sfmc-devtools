@@ -27,8 +27,8 @@ describe('type: automation', () => {
             const result = cache.getCache();
             assert.equal(
                 result.automation ? Object.keys(result.automation).length : 0,
-                5,
-                'only four automations expected'
+                6,
+                'only six automations expected'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_automation', 'automation'),
@@ -50,7 +50,7 @@ describe('type: automation', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                19,
+                21,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -79,8 +79,8 @@ describe('type: automation', () => {
             const cacheResult = cache.getCache();
             assert.equal(
                 cacheResult.automation ? Object.keys(cacheResult.automation).length : 0,
-                6,
-                'six automations expected'
+                7,
+                'seven automations expected'
             );
             // insert
             assert.deepEqual(
@@ -144,8 +144,8 @@ describe('type: automation', () => {
             const cached = cache.getCache();
             assert.equal(
                 cached.automation ? Object.keys(cached.automation).length : 0,
-                6,
-                'six cached automation expected'
+                7,
+                'seven cached automation expected'
             );
             assert.equal(
                 deployed['testInstance/testBU'].automation
@@ -213,8 +213,8 @@ describe('type: automation', () => {
             const cached = cache.getCache();
             assert.equal(
                 cached.automation ? Object.keys(cached.automation).length : 0,
-                6,
-                'six cached automation expected'
+                7,
+                'seven cached automation expected'
             );
             assert.equal(
                 deployed['testInstance/testBU'].automation
