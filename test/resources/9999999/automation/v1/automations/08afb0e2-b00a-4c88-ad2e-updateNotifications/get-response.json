@@ -87,6 +87,11 @@
             "email": ["test@test.com"],
             "message": "",
             "type": "Error"
+        },
+        {
+            "email": ["test@test.com"],
+            "message": "",
+            "type": "Complete"
         }
     ]
 }

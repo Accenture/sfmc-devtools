@@ -888,8 +888,8 @@ describe('type: automation', () => {
         });
     });
     describe('Update notifications ================', () => {
-        it('Should update run failure email address', async () => {
-            handler.setOptions({ errorEmail: 'test@test.com' });
+        it('Should update run error email address and completion email address', async () => {
+            handler.setOptions({ errorEmail: 'test@test.com', completionEmail: 'test@test.com' });
             const updatedNotifications = await handler.updateNotifications(
                 'testInstance/testBU',
                 'automation',
