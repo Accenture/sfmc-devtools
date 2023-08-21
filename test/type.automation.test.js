@@ -922,7 +922,7 @@ describe('type: automation', () => {
         });
         it('Should NOT update run error email address', async () => {
             handler.setOptions({ errorEmail: 'error@test.accenture.com' });
-            const updatedNotifications = await handler.updateNotifications(
+            const updatedNotificationsError = await handler.updateNotifications(
                 'testInstance/testBU',
                 'automation',
                 ['testExisting_automation']
@@ -930,10 +930,42 @@ describe('type: automation', () => {
             assert.equal(
                 process.exitCode,
                 false,
-                'update notifications should not have thrown an error'
+                'update error notifications should not have thrown an error'
             );
             assert.equal(
-                updatedNotifications['testInstance/testBU'].length,
+                updatedNotificationsError['testInstance/testBU'].length,
+                0,
+                'zero automation keys expected'
+            );
+            handler.setOptions({ completionEmail: 'complete@test.accenture.com' });
+            const updatedNotificationsComplete = await handler.updateNotifications(
+                'testInstance/testBU',
+                'automation',
+                ['testExisting_automation']
+            );
+            assert.equal(
+                process.exitCode,
+                false,
+                'update completion notifications should not have thrown an error'
+            );
+            assert.equal(
+                updatedNotificationsComplete['testInstance/testBU'].length,
+                0,
+                'zero automation keys expected'
+            );
+            handler.setOptions({ errorNote: 'test' });
+            const updatedNotificationsNote = await handler.updateNotifications(
+                'testInstance/testBU',
+                'automation',
+                ['testExisting_automation']
+            );
+            assert.equal(
+                process.exitCode,
+                false,
+                'update error notifications should not have thrown an error'
+            );
+            assert.equal(
+                updatedNotificationsNote['testInstance/testBU'].length,
                 0,
                 'zero automation keys expected'
             );
