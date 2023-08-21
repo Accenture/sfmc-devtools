@@ -46,9 +46,6 @@ Source and target business units are also compared before the deployment to appl
 Only for Caching No retrieve/upsert is required
 as this is a configuration in the EID</p>
 </dd>
-<dt><a href="#DataVerification">DataVerification</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
-<dd><p>DataVerification MetadataType</p>
-</dd>
 <dt><a href="#Discovery">Discovery</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>ImportFile MetadataType</p>
 </dd>
@@ -128,6 +125,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 </dd>
 <dt><a href="#User">User</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>MetadataType</p>
+</dd>
+<dt><a href="#Verification">Verification</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>Verification MetadataType</p>
 </dd>
 <dt><a href="#Retriever">Retriever</a></dt>
 <dd><p>Retrieves metadata from a business unit and saves it to the local filesystem.</p>
@@ -296,7 +296,7 @@ helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item
 </dd>
 <dt><a href="#AutomationItem">AutomationItem</a> : <code>object</code></dt>
 <dd></dd>
-<dt><a href="#DataVerificationItem">DataVerificationItem</a> : <code>object</code></dt>
+<dt><a href="#VerificationItem">VerificationItem</a> : <code>object</code></dt>
 <dd></dd>
 <dt><a href="#SDK">SDK</a> : <code>Object.&lt;string, AutomationItem&gt;</code></dt>
 <dd></dd>
@@ -2358,126 +2358,6 @@ Retrieves Metadata of  Data Extract Type for caching.
 
 **Kind**: static method of [<code>DataExtractType</code>](#DataExtractType)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
-<a name="DataVerification"></a>
-
-## DataVerification ⇐ [<code>MetadataType</code>](#MetadataType)
-DataVerification MetadataType
-
-**Kind**: global class  
-**Extends**: [<code>MetadataType</code>](#MetadataType)  
-
-* [DataVerification](#DataVerification) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir, [_], [__], key)](#DataVerification.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache([_], [__], [keyArr])](#DataVerification.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.create(metadata)](#DataVerification.create) ⇒ <code>Promise</code>
-    * [.postCreateTasks(metadataEntry, apiResponse, metadataEntryWithAllFields)](#DataVerification.postCreateTasks) ⇒ <code>void</code>
-    * [.update(metadata)](#DataVerification.update) ⇒ <code>Promise</code>
-    * [.preDeployTasks(metadata)](#DataVerification.preDeployTasks) ⇒ <code>TYPE.DataVerificationItem</code>
-    * [.postRetrieveTasks(metadata)](#DataVerification.postRetrieveTasks) ⇒ <code>TYPE.DataVerificationItem</code>
-    * [.deleteByKey(key)](#DataVerification.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-
-<a name="DataVerification.retrieve"></a>
-
-### DataVerification.retrieve(retrieveDir, [_], [__], key) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves Metadata of Data Verification Activity.
-
-**Kind**: static method of [<code>DataVerification</code>](#DataVerification)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
-| [_] | <code>void</code> | unused parameter |
-| [__] | <code>void</code> | unused parameter |
-| key | <code>string</code> | customer key of single item to retrieve |
-
-<a name="DataVerification.retrieveForCache"></a>
-
-### DataVerification.retrieveForCache([_], [__], [keyArr]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-Retrieves Metadata of  Data Extract Activity for caching
-
-**Kind**: static method of [<code>DataVerification</code>](#DataVerification)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [_] | <code>void</code> | not used |
-| [__] | <code>void</code> | not used |
-| [keyArr] | <code>Array.&lt;string&gt;</code> | customer key of single item to retrieve |
-
-<a name="DataVerification.create"></a>
-
-### DataVerification.create(metadata) ⇒ <code>Promise</code>
-Creates a single Data Extract
-
-**Kind**: static method of [<code>DataVerification</code>](#DataVerification)  
-**Returns**: <code>Promise</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.DataVerificationItem</code> | a single Data Extract |
-
-<a name="DataVerification.postCreateTasks"></a>
-
-### DataVerification.postCreateTasks(metadataEntry, apiResponse, metadataEntryWithAllFields) ⇒ <code>void</code>
-helper for [createREST](#MetadataType.createREST)
-
-**Kind**: static method of [<code>DataVerification</code>](#DataVerification)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
-| apiResponse | <code>object</code> | varies depending on the API call |
-| metadataEntryWithAllFields | <code>TYPE.MetadataTypeItem</code> | like metadataEntry but before non-creatable fields were stripped |
-
-<a name="DataVerification.update"></a>
-
-### DataVerification.update(metadata) ⇒ <code>Promise</code>
-Updates a single Data Extract
-
-**Kind**: static method of [<code>DataVerification</code>](#DataVerification)  
-**Returns**: <code>Promise</code> - Promise  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.DataVerificationItem</code> | a single Data Extract |
-
-<a name="DataVerification.preDeployTasks"></a>
-
-### DataVerification.preDeployTasks(metadata) ⇒ <code>TYPE.DataVerificationItem</code>
-prepares a dataVerification for deployment
-
-**Kind**: static method of [<code>DataVerification</code>](#DataVerification)  
-**Returns**: <code>TYPE.DataVerificationItem</code> - metadata object  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.DataVerificationItem</code> | a single dataVerification activity definition |
-
-<a name="DataVerification.postRetrieveTasks"></a>
-
-### DataVerification.postRetrieveTasks(metadata) ⇒ <code>TYPE.DataVerificationItem</code>
-parses retrieved Metadata before saving
-
-**Kind**: static method of [<code>DataVerification</code>](#DataVerification)  
-**Returns**: <code>TYPE.DataVerificationItem</code> - Array with one metadata object and one sql string  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.DataVerificationItem</code> | a single dataVerification activity definition |
-
-<a name="DataVerification.deleteByKey"></a>
-
-### DataVerification.deleteByKey(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
-Delete a metadata item from the specified business unit
-
-**Kind**: static method of [<code>DataVerification</code>](#DataVerification)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| key | <code>string</code> | Identifier of item |
-
 <a name="Discovery"></a>
 
 ## Discovery ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -6158,6 +6038,126 @@ manages post retrieve steps
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
+<a name="Verification"></a>
+
+## Verification ⇐ [<code>MetadataType</code>](#MetadataType)
+Verification MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [Verification](#Verification) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], key)](#Verification.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache([_], [__], [keyArr])](#Verification.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.create(metadata)](#Verification.create) ⇒ <code>Promise</code>
+    * [.postCreateTasks(metadataEntry, apiResponse, metadataEntryWithAllFields)](#Verification.postCreateTasks) ⇒ <code>void</code>
+    * [.update(metadata)](#Verification.update) ⇒ <code>Promise</code>
+    * [.preDeployTasks(metadata)](#Verification.preDeployTasks) ⇒ <code>TYPE.VerificationItem</code>
+    * [.postRetrieveTasks(metadata)](#Verification.postRetrieveTasks) ⇒ <code>TYPE.VerificationItem</code>
+    * [.deleteByKey(key)](#Verification.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+
+<a name="Verification.retrieve"></a>
+
+### Verification.retrieve(retrieveDir, [_], [__], key) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of Data Verification Activity.
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [_] | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| key | <code>string</code> | customer key of single item to retrieve |
+
+<a name="Verification.retrieveForCache"></a>
+
+### Verification.retrieveForCache([_], [__], [keyArr]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of  Data Extract Activity for caching
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [_] | <code>void</code> | not used |
+| [__] | <code>void</code> | not used |
+| [keyArr] | <code>Array.&lt;string&gt;</code> | customer key of single item to retrieve |
+
+<a name="Verification.create"></a>
+
+### Verification.create(metadata) ⇒ <code>Promise</code>
+Creates a single Data Extract
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.VerificationItem</code> | a single Data Extract |
+
+<a name="Verification.postCreateTasks"></a>
+
+### Verification.postCreateTasks(metadataEntry, apiResponse, metadataEntryWithAllFields) ⇒ <code>void</code>
+helper for [createREST](#MetadataType.createREST)
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
+| apiResponse | <code>object</code> | varies depending on the API call |
+| metadataEntryWithAllFields | <code>TYPE.MetadataTypeItem</code> | like metadataEntry but before non-creatable fields were stripped |
+
+<a name="Verification.update"></a>
+
+### Verification.update(metadata) ⇒ <code>Promise</code>
+Updates a single Data Extract
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.VerificationItem</code> | a single Data Extract |
+
+<a name="Verification.preDeployTasks"></a>
+
+### Verification.preDeployTasks(metadata) ⇒ <code>TYPE.VerificationItem</code>
+prepares a verification for deployment
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>TYPE.VerificationItem</code> - metadata object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.VerificationItem</code> | a single verification activity definition |
+
+<a name="Verification.postRetrieveTasks"></a>
+
+### Verification.postRetrieveTasks(metadata) ⇒ <code>TYPE.VerificationItem</code>
+parses retrieved Metadata before saving
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>TYPE.VerificationItem</code> - Array with one metadata object and one sql string  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.VerificationItem</code> | a single verification activity definition |
+
+<a name="Verification.deleteByKey"></a>
+
+### Verification.deleteByKey(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| key | <code>string</code> | Identifier of item |
+
 <a name="Retriever"></a>
 
 ## Retriever
@@ -9161,9 +9161,9 @@ SOAP format
 | r__folder_Path | <code>string</code> | folder path |
 | [categoryId] | <code>string</code> | holds folder ID, replaced with r__folder_Path during retrieve |
 
-<a name="DataVerificationItem"></a>
+<a name="VerificationItem"></a>
 
-## DataVerificationItem : <code>object</code>
+## VerificationItem : <code>object</code>
 **Kind**: global typedef  
 **Properties**
 

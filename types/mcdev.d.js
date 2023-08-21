@@ -252,7 +252,7 @@ const SDK = require('sfmc-sdk');
  * @property {string} [categoryId] holds folder ID, replaced with r__folder_Path during retrieve
  */
 /**
- * @typedef {object} DataVerificationItem
+ * @typedef {object} VerificationItem
  * @property {string} dataVerificationDefinitionId ID / Key
  * @property {'IsEqualTo'|'IsLessThan'|'IsGreaterThan'|'IsOutsideRange'|'IsInsideRange'|'IsNotEqualTo'|'IsNotLessThan'|'IsNotGreaterThan'|'IsNotOutsideRange'|'IsNotInsideRange'} verificationType key
  * @property {number} value1 used for all verificationTypes; lower value for IsOutsideRange, IsInsideRange, IsNotOutsideRange, IsNotInsideRange
