@@ -3417,6 +3417,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.getSOAPErrorMsg(ex)](#MetadataType.getSOAPErrorMsg) ⇒ <code>string</code>
     * [.retrieveSOAP(retrieveDir, [requestParams], [singleRetrieve], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
+    * [.retrieveRESTcollection(urlArray, [concurrentRequests])](#MetadataType.retrieveRESTcollection) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
+    * [.handleRESTErrors(ex, id)](#MetadataType.handleRESTErrors) ⇒ <code>null</code>
     * [.executeREST(uri, key)](#MetadataType.executeREST) ⇒ <code>Promise.&lt;{key:string, response:string}&gt;</code>
     * [.executeSOAP([metadataEntry])](#MetadataType.executeSOAP) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
     * [.runDocumentOnRetrieve([singleRetrieve], metadataMap)](#MetadataType.runDocumentOnRetrieve) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -3895,6 +3897,30 @@ Retrieves Metadata for Rest Types
 | uri | <code>string</code> | rest endpoint for GET |
 | [templateVariables] | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
+
+<a name="MetadataType.retrieveRESTcollection"></a>
+
+### MetadataType.retrieveRESTcollection(urlArray, [concurrentRequests]) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code> - Promise of item map (single item for templated result)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| urlArray | <code>Array.&lt;object&gt;</code> | {uri: string, id: string} combo of URL and ID/key of metadata |
+| [concurrentRequests] | <code>number</code> | optionally set a different amount of concurrent requests |
+
+<a name="MetadataType.handleRESTErrors"></a>
+
+### MetadataType.handleRESTErrors(ex, id) ⇒ <code>null</code>
+helper for [this.retrieveRESTcollection](this.retrieveRESTcollection)
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>null</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ex | <code>Error</code> | exception |
+| id | <code>string</code> | id or key of item |
 
 <a name="MetadataType.executeREST"></a>
 
@@ -6048,6 +6074,7 @@ Verification MetadataType
 
 * [Verification](#Verification) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], key)](#Verification.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.handleRESTErrors(ex, id)](#Verification.handleRESTErrors) ⇒ <code>null</code>
     * [.retrieveForCache([_], [__], [keyArr])](#Verification.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.create(metadata)](#Verification.create) ⇒ <code>Promise</code>
     * [.postCreateTasks(metadataEntry, apiResponse, metadataEntryWithAllFields)](#Verification.postCreateTasks) ⇒ <code>void</code>
@@ -6070,6 +6097,19 @@ Retrieves Metadata of Data Verification Activity.
 | [_] | <code>void</code> | unused parameter |
 | [__] | <code>void</code> | unused parameter |
 | key | <code>string</code> | customer key of single item to retrieve |
+
+<a name="Verification.handleRESTErrors"></a>
+
+### Verification.handleRESTErrors(ex, id) ⇒ <code>null</code>
+helper for [this.retrieveRESTcollection](this.retrieveRESTcollection)
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>null</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ex | <code>Error</code> | exception |
+| id | <code>string</code> | id or key of item |
 
 <a name="Verification.retrieveForCache"></a>
 
