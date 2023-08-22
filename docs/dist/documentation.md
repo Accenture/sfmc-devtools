@@ -1413,6 +1413,7 @@ Automation MetadataType
 
 * [Automation](#Automation) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#Automation.retrieve) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
+    * [.handleRESTErrors(ex, id)](#Automation.handleRESTErrors) ⇒ <code>null</code>
     * [.retrieveChangelog()](#Automation.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveForCache()](#Automation.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Automation.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.AutomationItemObj&gt;</code>
@@ -1449,6 +1450,19 @@ Retrieves Metadata of Automation
 | [_] | <code>void</code> | unused parameter |
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="Automation.handleRESTErrors"></a>
+
+### Automation.handleRESTErrors(ex, id) ⇒ <code>null</code>
+helper for [this.retrieveRESTcollection](this.retrieveRESTcollection)
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+**Returns**: <code>null</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ex | <code>Error</code> | exception |
+| id | <code>string</code> | id or key of item |
 
 <a name="Automation.retrieveChangelog"></a>
 
