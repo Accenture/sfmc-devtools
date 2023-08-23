@@ -1,8 +1,8 @@
 {
-    "id": "08afb0e2-b00a-4c88-ad2e-updateNotifications",
-    "name": "testExisting_automation_updateNotifications",
+    "id": "08afb0e2-b00a-4c88-ad2e-updateNotifications_errorEmailCompletionNoteErrorNote",
+    "name": "testExisting_automation_updateNotifications_errorEmailCompletionNoteErrorNote",
     "description": "bla bla",
-    "key": "testExisting_automation_updateNotifications",
+    "key": "testExisting_automation_updateNotifications_errorEmailCompletionNoteErrorNote",
     "typeId": 1,
     "type": "scheduled",
     "statusId": 4,
@@ -85,13 +85,13 @@
     "notifications": [
         {
             "email": ["test@test.com"],
-            "message": "",
-            "type": "Error"
+            "message": "test",
+            "type": "Complete"
         },
         {
             "email": ["test@test.com"],
-            "message": "",
-            "type": "Complete"
+            "message": "test",
+            "type": "Error"
         }
     ]
 }

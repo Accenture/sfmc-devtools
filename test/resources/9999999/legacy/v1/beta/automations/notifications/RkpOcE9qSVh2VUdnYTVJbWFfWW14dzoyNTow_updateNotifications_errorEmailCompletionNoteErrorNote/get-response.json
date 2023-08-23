@@ -1,0 +1,17 @@
+{
+    "programId": "ZGQ4N2M2ZjEtYjJlZi00MDljLTg3MDctYzYwNWQ0MzdiYWI4OjI1OjA_updateNotifications_errorEmailCompletionNoteErrorNote",
+    "workers": [
+        {
+            "programId": "ZGQ4N2M2ZjEtYjJlZi00MDljLTg3MDctYzYwNWQ0MzdiYWI4OjI1OjA_updateNotifications_errorEmailCompletionNoteErrorNote",
+            "id": "NGIzZGQ5N2EtMDI0ZS00MzFiLTg5ZWYtNTdjYTI4ODVjMjQ0OjEyOjA",
+            "notificationType": "Complete",
+            "definition": "test@test.com",
+            "body": "",
+            "channelType": "Account"
+        },
+        {
+            "programId": "ZGQ4N2M2ZjEtYjJlZi00MDljLTg3MDctYzYwNWQ0MzdiYWI4OjI1OjA_updateNotifications_errorEmailCompletionNoteErrorNote",
+            "id": "NGIzZGQ5N2EtMDI0ZS00MzFiLTg5ZWYtNTdjYTI4ODVjMjQ0OjEyOjA"
+        }
+    ]
+}

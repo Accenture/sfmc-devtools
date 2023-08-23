@@ -27,10 +27,10 @@
             "automationType": "scheduled"
         },
         {
-            "id": "RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow_updateNotifications",
-            "key": "testExisting_automation_updateNotifications",
+            "id": "RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow_updateNotifications_errorEmailCompletionEmail",
+            "key": "testExisting_automation_updateNotifications_errorEmailCompletionEmail",
             "createdDate": "2022-01-12T08:41:35.773Z",
-            "name": "testExisting_automation_updateNotifications",
+            "name": "testExisting_automation_updateNotifications_errorEmailCompletionEmail",
             "description": "bla bla",
             "clientId": 9999999,
             "status": "Building",
@@ -46,7 +46,7 @@
                 "email": "tom.tester@accenture.com"
             },
             "isPlatformObject": false,
-            "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoxMjow_updateNotifications",
+            "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoxMjow_updateNotifications_errorEmailCompletionEmail",
             "automationType": "scheduled"
         },
         {
@@ -69,7 +69,214 @@
                 "email": "tom.tester@accenture.com"
             },
             "isPlatformObject": false,
-            "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoxMjow_updateNotifications",
+            "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoxMjow_updateNotifications_errorEmailCompletionEmail",
+            "automationType": "scheduled"
+        },
+        {
+            "id": "RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow_updateNotifications_errorEmailErrorNote",
+            "key": "testExisting_automation_updateNotifications_errorEmailErrorNote",
+            "createdDate": "2022-01-12T08:41:35.773Z",
+            "name": "testExisting_automation_updateNotifications_errorEmailErrorNote",
+            "description": "bla bla",
+            "clientId": 9999999,
+            "status": "Building",
+            "createdBy": {
+                "id": "NzE3MzUzNDA1OjQ6MA",
+                "name": "Tom Tester",
+                "email": "tom.tester@accenture.com"
+            },
+            "modifiedDate": "2022-11-11T16:42:36.513Z",
+            "modifiedBy": {
+                "id": "NzE3MzUzNDA1OjQ6MA",
+                "name": "Tom Tester",
+                "email": "tom.tester@accenture.com"
+            },
+            "isPlatformObject": false,
+            "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoxMjow_updateNotifications_errorEmailErrorNote",
+            "automationType": "scheduled"
+        },
+        {
+            "id": "RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow_updateNotifications_completionEmailCompletionNote",
+            "key": "testExisting_automation_updateNotifications_completionEmailCompletionNote",
+            "createdDate": "2022-01-12T08:41:35.773Z",
+            "name": "testExisting_automation_updateNotifications_completionEmailCompletionNote",
+            "description": "bla bla",
+            "clientId": 9999999,
+            "status": "Building",
+            "createdBy": {
+                "id": "NzE3MzUzNDA1OjQ6MA",
+                "name": "Tom Tester",
+                "email": "tom.tester@accenture.com"
+            },
+            "modifiedDate": "2022-11-11T16:42:36.513Z",
+            "modifiedBy": {
+                "id": "NzE3MzUzNDA1OjQ6MA",
+                "name": "Tom Tester",
+                "email": "tom.tester@accenture.com"
+            },
+            "isPlatformObject": false,
+            "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoxMjow_updateNotifications_completionEmailCompletionNote",
+            "automationType": "scheduled"
+        },
+        {
+            "id": "RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow_updateNotifications_completionEmailErrorNote",
+            "key": "testExisting_automation_updateNotifications_completionEmailErrorNote",
+            "createdDate": "2022-01-12T08:41:35.773Z",
+            "name": "testExisting_automation_updateNotifications_completionEmailErrorNote",
+            "description": "bla bla",
+            "clientId": 9999999,
+            "status": "Building",
+            "createdBy": {
+                "id": "NzE3MzUzNDA1OjQ6MA",
+                "name": "Tom Tester",
+                "email": "tom.tester@accenture.com"
+            },
+            "modifiedDate": "2022-11-11T16:42:36.513Z",
+            "modifiedBy": {
+                "id": "NzE3MzUzNDA1OjQ6MA",
+                "name": "Tom Tester",
+                "email": "tom.tester@accenture.com"
+            },
+            "isPlatformObject": false,
+            "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoxMjow_updateNotifications_completionEmailErrorNote",
+            "automationType": "scheduled"
+        },
+        {
+            "id": "RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow_updateNotifications_errorEmailCompletionNote",
+            "key": "testExisting_automation_updateNotifications_errorEmailCompletionNote",
+            "createdDate": "2022-01-12T08:41:35.773Z",
+            "name": "testExisting_automation_updateNotifications_errorEmailCompletionNote",
+            "description": "bla bla",
+            "clientId": 9999999,
+            "status": "Building",
+            "createdBy": {
+                "id": "NzE3MzUzNDA1OjQ6MA",
+                "name": "Tom Tester",
+                "email": "tom.tester@accenture.com"
+            },
+            "modifiedDate": "2022-11-11T16:42:36.513Z",
+            "modifiedBy": {
+                "id": "NzE3MzUzNDA1OjQ6MA",
+                "name": "Tom Tester",
+                "email": "tom.tester@accenture.com"
+            },
+            "isPlatformObject": false,
+            "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoxMjow_updateNotifications_errorEmailCompletionNote",
+            "automationType": "scheduled"
+        },
+        {
+            "id": "RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow_updateNotifications_errorEmailCompletionNoteCompletionEmail",
+            "key": "testExisting_automation_updateNotifications_errorEmailCompletionNoteCompletionEmail",
+            "createdDate": "2022-01-12T08:41:35.773Z",
+            "name": "testExisting_automation_updateNotifications_errorEmailCompletionNoteCompletionEmail",
+            "description": "bla bla",
+            "clientId": 9999999,
+            "status": "Building",
+            "createdBy": {
+                "id": "NzE3MzUzNDA1OjQ6MA",
+                "name": "Tom Tester",
+                "email": "tom.tester@accenture.com"
+            },
+            "modifiedDate": "2022-11-11T16:42:36.513Z",
+            "modifiedBy": {
+                "id": "NzE3MzUzNDA1OjQ6MA",
+                "name": "Tom Tester",
+                "email": "tom.tester@accenture.com"
+            },
+            "isPlatformObject": false,
+            "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoxMjow_updateNotifications_errorEmailCompletionNoteCompletionEmail",
+            "automationType": "scheduled"
+        },
+        {
+            "id": "RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow_updateNotifications_errorEmailErrorNoteCompletionEmail",
+            "key": "testExisting_automation_updateNotifications_errorEmailErrorNoteCompletionEmail",
+            "createdDate": "2022-01-12T08:41:35.773Z",
+            "name": "testExisting_automation_updateNotifications_errorEmailErrorNoteCompletionEmail",
+            "description": "bla bla",
+            "clientId": 9999999,
+            "status": "Building",
+            "createdBy": {
+                "id": "NzE3MzUzNDA1OjQ6MA",
+                "name": "Tom Tester",
+                "email": "tom.tester@accenture.com"
+            },
+            "modifiedDate": "2022-11-11T16:42:36.513Z",
+            "modifiedBy": {
+                "id": "NzE3MzUzNDA1OjQ6MA",
+                "name": "Tom Tester",
+                "email": "tom.tester@accenture.com"
+            },
+            "isPlatformObject": false,
+            "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoxMjow_updateNotifications_errorEmailErrorNoteCompletionEmail",
+            "automationType": "scheduled"
+        },
+        {
+            "id": "RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow_updateNotifications_errorEmailCompletionNoteErrorNote",
+            "key": "testExisting_automation_updateNotifications_errorEmailCompletionNoteErrorNote",
+            "createdDate": "2022-01-12T08:41:35.773Z",
+            "name": "testExisting_automation_updateNotifications_errorEmailCompletionNoteErrorNote",
+            "description": "bla bla",
+            "clientId": 9999999,
+            "status": "Building",
+            "createdBy": {
+                "id": "NzE3MzUzNDA1OjQ6MA",
+                "name": "Tom Tester",
+                "email": "tom.tester@accenture.com"
+            },
+            "modifiedDate": "2022-11-11T16:42:36.513Z",
+            "modifiedBy": {
+                "id": "NzE3MzUzNDA1OjQ6MA",
+                "name": "Tom Tester",
+                "email": "tom.tester@accenture.com"
+            },
+            "isPlatformObject": false,
+            "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoxMjow_errorEmailCompletionNoteErrorNote",
+            "automationType": "scheduled"
+        },
+        {
+            "id": "RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow_updateNotifications_completionEmailCompletionNoteErrorNote",
+            "key": "testExisting_automation_updateNotifications_completionEmailCompletionNoteErrorNote",
+            "createdDate": "2022-01-12T08:41:35.773Z",
+            "name": "testExisting_automation_updateNotifications_completionEmailCompletionNoteErrorNote",
+            "description": "bla bla",
+            "clientId": 9999999,
+            "status": "Building",
+            "createdBy": {
+                "id": "NzE3MzUzNDA1OjQ6MA",
+                "name": "Tom Tester",
+                "email": "tom.tester@accenture.com"
+            },
+            "modifiedDate": "2022-11-11T16:42:36.513Z",
+            "modifiedBy": {
+                "id": "NzE3MzUzNDA1OjQ6MA",
+                "name": "Tom Tester",
+                "email": "tom.tester@accenture.com"
+            },
+            "isPlatformObject": false,
+            "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoxMjow_updateNotifications_completionEmailCompletionNoteErrorNote",
+            "automationType": "scheduled"
+        },
+        {
+            "id": "RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow_updateNotifications_completionEmailNoteErrorEmailNote",
+            "key": "testExisting_automation_updateNotifications_completionEmailNoteErrorEmailNote",
+            "createdDate": "2022-01-12T08:41:35.773Z",
+            "name": "testExisting_automation_updateNotifications_completionEmailNoteErrorEmailNote",
+            "description": "bla bla",
+            "clientId": 9999999,
+            "status": "Building",
+            "createdBy": {
+                "id": "NzE3MzUzNDA1OjQ6MA",
+                "name": "Tom Tester",
+                "email": "tom.tester@accenture.com"
+            },
+            "modifiedDate": "2022-11-11T16:42:36.513Z",
+            "modifiedBy": {
+                "id": "NzE3MzUzNDA1OjQ6MA",
+                "name": "Tom Tester",
+                "email": "tom.tester@accenture.com"
+            },
+            "isPlatformObject": false,
+            "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoxMjow_updateNotifications_completionEmailNoteErrorEmailNote",
             "automationType": "scheduled"
         }
     ]

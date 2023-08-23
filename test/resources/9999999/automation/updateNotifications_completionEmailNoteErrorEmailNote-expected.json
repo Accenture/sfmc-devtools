@@ -1,7 +1,7 @@
 {
     "description": "bla bla",
-    "key": "testExisting_automation_updateNotifications",
-    "name": "testExisting_automation_updateNotifications",
+    "key": "testExisting_automation_updateNotifications_completionEmailNoteErrorEmailNote",
+    "name": "testExisting_automation_updateNotifications_completionEmailNoteErrorEmailNote",
     "r__folder_Path": "my automations",
     "schedule": {
         "endDate": "2022-07-30T00:00:00",
@@ -45,13 +45,13 @@
     "notifications": [
         {
             "email": ["test@test.com"],
-            "message": "",
-            "type": "Error"
+            "message": "test",
+            "type": "Complete"
         },
         {
             "email": ["test@test.com"],
-            "message": "",
-            "type": "Complete"
+            "message": "test",
+            "type": "Error"
         }
     ]
 }

@@ -1,7 +1,7 @@
 {
     "description": "bla bla",
-    "key": "testExisting_automation_clearNotifications",
-    "name": "testExisting_automation_clearNotifications",
+    "key": "testExisting_automation_updateNotifications_errorEmailCompletionNoteCompletionEmail",
+    "name": "testExisting_automation_updateNotifications_errorEmailCompletionNoteCompletionEmail",
     "r__folder_Path": "my automations",
     "schedule": {
         "endDate": "2022-07-30T00:00:00",
@@ -41,5 +41,17 @@
             "name": ""
         }
     ],
-    "type": "scheduled"
+    "type": "scheduled",
+    "notifications": [
+        {
+            "email": ["test@test.com"],
+            "message": "test",
+            "type": "Complete"
+        },
+        {
+            "email": ["test@test.com"],
+            "message": "",
+            "type": "Error"
+        }
+    ]
 }
