@@ -3409,7 +3409,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.setFolderId(metadata)](#MetadataType.setFolderId)
     * [.retrieve(retrieveDir, [additionalFields], [subTypeArr], [key])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveChangelog([additionalFields], [subTypeArr])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache([additionalFields], [subTypeArr], [keyArr])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache([additionalFields], [subTypeArr])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.retrieveTemplateREST(templateDir, uri, templateVariables, name)](#MetadataType.retrieveTemplateREST) ⇒ <code>Promise.&lt;{metadata: TYPE.MetadataTypeItem, type: string}&gt;</code>
     * [.buildTemplate(retrieveDir, templateDir, key, templateVariables)](#MetadataType.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
@@ -3635,7 +3635,7 @@ Gets metadata from Marketing Cloud
 
 <a name="MetadataType.retrieveForCache"></a>
 
-### MetadataType.retrieveForCache([additionalFields], [subTypeArr], [keyArr]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MetadataType.retrieveForCache([additionalFields], [subTypeArr]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3645,7 +3645,6 @@ Gets metadata cache with limited fields and does not store value to disk
 | --- | --- | --- |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | [subTypeArr] | <code>Array.&lt;string&gt;</code> | optionally limit to a single subtype |
-| [keyArr] | <code>Array.&lt;string&gt;</code> | customer key of single item to retrieve |
 
 <a name="MetadataType.retrieveAsTemplate"></a>
 
@@ -6089,7 +6088,7 @@ Verification MetadataType
 * [Verification](#Verification) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], key)](#Verification.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.handleRESTErrors(ex, id)](#Verification.handleRESTErrors) ⇒ <code>null</code>
-    * [.retrieveForCache([_], [__], [keyArr])](#Verification.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache()](#Verification.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.create(metadata)](#Verification.create) ⇒ <code>Promise</code>
     * [.postCreateTasks(metadataEntry, apiResponse, metadataEntryWithAllFields)](#Verification.postCreateTasks) ⇒ <code>void</code>
     * [.update(metadata)](#Verification.update) ⇒ <code>Promise</code>
@@ -6127,18 +6126,11 @@ helper for [this.retrieveRESTcollection](this.retrieveRESTcollection)
 
 <a name="Verification.retrieveForCache"></a>
 
-### Verification.retrieveForCache([_], [__], [keyArr]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### Verification.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves Metadata of  Data Extract Activity for caching
 
 **Kind**: static method of [<code>Verification</code>](#Verification)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [_] | <code>void</code> | not used |
-| [__] | <code>void</code> | not used |
-| [keyArr] | <code>Array.&lt;string&gt;</code> | customer key of single item to retrieve |
-
 <a name="Verification.create"></a>
 
 ### Verification.create(metadata) ⇒ <code>Promise</code>
