@@ -187,7 +187,7 @@ describe('type: importFile', () => {
             return;
         });
     });
-    describe('Update email notifications for an importFile ================', () => {
+    describe('Update notifications ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });

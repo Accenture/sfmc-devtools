@@ -1329,7 +1329,7 @@ describe('type: automation', () => {
             assert.equal(
                 process.exitCode,
                 false,
-                'update notifications --clear should not have thrown an error'
+                'updateNotifications --clear should not have thrown an error'
             );
             assert.equal(
                 updatedNotifications['testInstance/testBU'].length,
