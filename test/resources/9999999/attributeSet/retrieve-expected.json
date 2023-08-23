@@ -52,11 +52,8 @@
             "leftRelationshipReferenceType": "CustomerData",
             "relationshipAttributes": [
                 {
-                    "c__rightFullyQualifiedName": "testExisting_dataExtensionShared.ContactKey",
-                    "leftAttributeID": "37778523-13f7-e911-a2d8-1402ec938a35",
-                    "leftConnectingID": {
-                        "identifierType": "FullyQualifiedName"
-                    }
+                    "c__leftFullyQualifiedName": "Contact.Contact Key",
+                    "c__rightFullyQualifiedName": "testExisting_dataExtensionShared.ContactKey"
                 }
             ],
             "relationshipID": "598b787a-5238-ee11-b85a-48df37d1de8a",
