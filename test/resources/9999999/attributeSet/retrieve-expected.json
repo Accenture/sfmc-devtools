@@ -74,19 +74,10 @@
     "storageObjectIDs": ["5b8b787a-5238-ee11-b85a-48df37d1de8a"],
     "valueDefinitions": [
         {
-            "baseType": "Numeric",
-            "connectingID": {
-                "identifierType": "FullyQualifiedName"
-            },
-            "dataSourceName": {},
             "dataType": "LongNumber",
             "definitionID": "548b787a-5238-ee11-b85a-48df37d1de8a",
             "definitionKey": "CustomObjectKey",
-            "definitionName": {
-                "value": "Custom Object Key"
-            },
             "description": "",
-            "fullyQualifiedName": "testExisting_dataExtensionShared.Custom Object Key",
             "isHidden": true,
             "isIdentityValue": true,
             "isNullable": false,
@@ -94,33 +85,14 @@
             "isReadOnly": true,
             "isSystemDefined": true,
             "isUpdateable": true,
-            "localizedDescription": {
-                "value": ""
-            },
             "name": "Custom Object Key",
-            "parentType": "Set",
-            "setDefinitionName": {
-                "value": "testExisting_dataExtensionShared"
-            },
-            "storageName": "_CustomObjectKey",
-            "valueDefinitionID": "548b787a-5238-ee11-b85a-48df37d1de8a",
-            "valueDefinitionKey": "CustomObjectKey"
+            "storageName": "_CustomObjectKey"
         },
         {
-            "baseType": "Text",
-            "connectingID": {
-                "identifierType": "FullyQualifiedName"
-            },
-            "dataSourceName": {},
             "dataType": "Text",
             "definitionID": "588b787a-5238-ee11-b85a-48df37d1de8a",
             "definitionKey": "FirstName",
-            "definitionName": {
-                "value": "FirstName"
-            },
             "description": "",
-            "displayOrder": 0,
-            "fullyQualifiedName": "testExisting_dataExtensionShared.FirstName",
             "isHidden": false,
             "isIdentityValue": false,
             "isNullable": true,
@@ -129,45 +101,18 @@
             "isSystemDefined": false,
             "isUpdateable": true,
             "length": 50,
-            "localizedDescription": {
-                "value": ""
-            },
             "name": "FirstName",
-            "obfuscationProperties": {
-                "maskType": "None",
-                "maskTypeID": 0,
-                "storageType": "Plain",
-                "storageTypeID": 1,
-                "valueDefinitionID": "588b787a-5238-ee11-b85a-48df37d1de8a"
-            },
-            "ordinal": 0,
-            "parentType": "Set",
-            "setDefinitionName": {
-                "value": "testExisting_dataExtensionShared"
-            },
             "storageFieldReferenceID": {
                 "type": "guid",
                 "value": "391bfc9e-ea85-4610-a24b-d8400a36cdfc"
             },
-            "storageName": "FirstName",
-            "valueDefinitionID": "588b787a-5238-ee11-b85a-48df37d1de8a",
-            "valueDefinitionKey": "FirstName"
+            "storageName": "FirstName"
         },
         {
-            "baseType": "Text",
-            "connectingID": {
-                "identifierType": "FullyQualifiedName"
-            },
-            "dataSourceName": {},
             "dataType": "Text",
             "definitionID": "578b787a-5238-ee11-b85a-48df37d1de8a",
             "definitionKey": "LastName",
-            "definitionName": {
-                "value": "LastName"
-            },
             "description": "",
-            "displayOrder": 1,
-            "fullyQualifiedName": "testExisting_dataExtensionShared.LastName",
             "isHidden": false,
             "isIdentityValue": false,
             "isNullable": true,
@@ -176,45 +121,18 @@
             "isSystemDefined": false,
             "isUpdateable": true,
             "length": 55,
-            "localizedDescription": {
-                "value": ""
-            },
             "name": "LastName",
-            "obfuscationProperties": {
-                "maskType": "None",
-                "maskTypeID": 0,
-                "storageType": "Plain",
-                "storageTypeID": 1,
-                "valueDefinitionID": "578b787a-5238-ee11-b85a-48df37d1de8a"
-            },
-            "ordinal": 1,
-            "parentType": "Set",
-            "setDefinitionName": {
-                "value": "testExisting_dataExtensionShared"
-            },
             "storageFieldReferenceID": {
                 "type": "guid",
                 "value": "3f80ba1f-f957-400f-88cb-a9303491026d"
             },
-            "storageName": "LastName",
-            "valueDefinitionID": "578b787a-5238-ee11-b85a-48df37d1de8a",
-            "valueDefinitionKey": "LastName"
+            "storageName": "LastName"
         },
         {
-            "baseType": "Text",
-            "connectingID": {
-                "identifierType": "FullyQualifiedName"
-            },
-            "dataSourceName": {},
             "dataType": "EmailAddress",
             "definitionID": "568b787a-5238-ee11-b85a-48df37d1de8a",
             "definitionKey": "EmailAddress",
-            "definitionName": {
-                "value": "EmailAddress"
-            },
             "description": "",
-            "displayOrder": 2,
-            "fullyQualifiedName": "testExisting_dataExtensionShared.EmailAddress",
             "isHidden": false,
             "isIdentityValue": false,
             "isNullable": false,
@@ -223,45 +141,18 @@
             "isSystemDefined": false,
             "isUpdateable": true,
             "length": 254,
-            "localizedDescription": {
-                "value": ""
-            },
             "name": "EmailAddress",
-            "obfuscationProperties": {
-                "maskType": "None",
-                "maskTypeID": 0,
-                "storageType": "Plain",
-                "storageTypeID": 1,
-                "valueDefinitionID": "568b787a-5238-ee11-b85a-48df37d1de8a"
-            },
-            "ordinal": 2,
-            "parentType": "Set",
-            "setDefinitionName": {
-                "value": "testExisting_dataExtensionShared"
-            },
             "storageFieldReferenceID": {
                 "type": "guid",
                 "value": "41b9575b-da06-41ed-8551-f76868451a51"
             },
-            "storageName": "EmailAddress",
-            "valueDefinitionID": "568b787a-5238-ee11-b85a-48df37d1de8a",
-            "valueDefinitionKey": "EmailAddress"
+            "storageName": "EmailAddress"
         },
         {
-            "baseType": "Text",
-            "connectingID": {
-                "identifierType": "FullyQualifiedName"
-            },
-            "dataSourceName": {},
             "dataType": "Text",
             "definitionID": "558b787a-5238-ee11-b85a-48df37d1de8a",
             "definitionKey": "ContactKey",
-            "definitionName": {
-                "value": "ContactKey"
-            },
             "description": "",
-            "displayOrder": 4,
-            "fullyQualifiedName": "testExisting_dataExtensionShared.ContactKey",
             "isHidden": false,
             "isIdentityValue": false,
             "isNullable": false,
@@ -270,29 +161,12 @@
             "isSystemDefined": false,
             "isUpdateable": true,
             "length": 50,
-            "localizedDescription": {
-                "value": ""
-            },
             "name": "ContactKey",
-            "obfuscationProperties": {
-                "maskType": "None",
-                "maskTypeID": 0,
-                "storageType": "Plain",
-                "storageTypeID": 1,
-                "valueDefinitionID": "558b787a-5238-ee11-b85a-48df37d1de8a"
-            },
-            "ordinal": 4,
-            "parentType": "Set",
-            "setDefinitionName": {
-                "value": "testExisting_dataExtensionShared"
-            },
             "storageFieldReferenceID": {
                 "type": "guid",
                 "value": "49d0db37-dff0-49d9-9d82-eb29b345f238"
             },
-            "storageName": "ContactKey",
-            "valueDefinitionID": "558b787a-5238-ee11-b85a-48df37d1de8a",
-            "valueDefinitionKey": "ContactKey"
+            "storageName": "ContactKey"
         }
     ]
 }
