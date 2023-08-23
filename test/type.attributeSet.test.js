@@ -38,7 +38,7 @@ describe('type: attributeSet', () => {
             );
 
             assert.deepEqual(
-                await testUtils.getActualJson('MobileSubscriptions', 'attributeSet'),
+                await testUtils.getActualJson('testExisting_dataExtensionShared', 'attributeSet'),
                 await testUtils.getExpectedJson('9999999', 'attributeSet', 'retrieve'),
 
                 'returned metadata was not equal expected'
