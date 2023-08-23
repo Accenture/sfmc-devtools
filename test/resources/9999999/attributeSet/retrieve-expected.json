@@ -72,7 +72,6 @@
     "valueDefinitions": [
         {
             "dataType": "LongNumber",
-            "definitionID": "548b787a-5238-ee11-b85a-48df37d1de8a",
             "definitionKey": "CustomObjectKey",
             "description": "",
             "isHidden": true,
@@ -82,12 +81,10 @@
             "isReadOnly": true,
             "isSystemDefined": true,
             "isUpdateable": true,
-            "name": "Custom Object Key",
-            "storageName": "_CustomObjectKey"
+            "name": "Custom Object Key"
         },
         {
             "dataType": "Text",
-            "definitionID": "588b787a-5238-ee11-b85a-48df37d1de8a",
             "definitionKey": "FirstName",
             "description": "",
             "isHidden": false,
@@ -98,16 +95,10 @@
             "isSystemDefined": false,
             "isUpdateable": true,
             "length": 50,
-            "name": "FirstName",
-            "storageFieldReferenceID": {
-                "type": "guid",
-                "value": "391bfc9e-ea85-4610-a24b-d8400a36cdfc"
-            },
-            "storageName": "FirstName"
+            "name": "FirstName"
         },
         {
             "dataType": "Text",
-            "definitionID": "578b787a-5238-ee11-b85a-48df37d1de8a",
             "definitionKey": "LastName",
             "description": "",
             "isHidden": false,
@@ -118,16 +109,10 @@
             "isSystemDefined": false,
             "isUpdateable": true,
             "length": 55,
-            "name": "LastName",
-            "storageFieldReferenceID": {
-                "type": "guid",
-                "value": "3f80ba1f-f957-400f-88cb-a9303491026d"
-            },
-            "storageName": "LastName"
+            "name": "LastName"
         },
         {
             "dataType": "EmailAddress",
-            "definitionID": "568b787a-5238-ee11-b85a-48df37d1de8a",
             "definitionKey": "EmailAddress",
             "description": "",
             "isHidden": false,
@@ -138,16 +123,10 @@
             "isSystemDefined": false,
             "isUpdateable": true,
             "length": 254,
-            "name": "EmailAddress",
-            "storageFieldReferenceID": {
-                "type": "guid",
-                "value": "41b9575b-da06-41ed-8551-f76868451a51"
-            },
-            "storageName": "EmailAddress"
+            "name": "EmailAddress"
         },
         {
             "dataType": "Text",
-            "definitionID": "558b787a-5238-ee11-b85a-48df37d1de8a",
             "definitionKey": "ContactKey",
             "description": "",
             "isHidden": false,
@@ -158,12 +137,7 @@
             "isSystemDefined": false,
             "isUpdateable": true,
             "length": 50,
-            "name": "ContactKey",
-            "storageFieldReferenceID": {
-                "type": "guid",
-                "value": "49d0db37-dff0-49d9-9d82-eb29b345f238"
-            },
-            "storageName": "ContactKey"
+            "name": "ContactKey"
         }
     ]
 }
