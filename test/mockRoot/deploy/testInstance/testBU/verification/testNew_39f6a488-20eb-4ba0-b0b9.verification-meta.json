@@ -1,0 +1,11 @@
+{
+    "dataVerificationDefinitionId": "testNew_39f6a488-20eb-4ba0-b0b9",
+    "notificationEmailAddress": "",
+    "notificationEmailMessage": "",
+    "r__dataExtension_CustomerKey": "testExisting_dataExtension",
+    "shouldEmailOnFailure": false,
+    "shouldStopOnFailure": false,
+    "value1": 2,
+    "value2": 0,
+    "verificationType": "IsEqualTo"
+}

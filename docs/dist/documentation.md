@@ -3431,7 +3431,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.getSOAPErrorMsg(ex)](#MetadataType.getSOAPErrorMsg) ⇒ <code>string</code>
     * [.retrieveSOAP(retrieveDir, [requestParams], [singleRetrieve], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
-    * [.retrieveRESTcollection(urlArray, [concurrentRequests])](#MetadataType.retrieveRESTcollection) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
+    * [.retrieveRESTcollection(urlArray, [concurrentRequests], [logAmountOfUrls])](#MetadataType.retrieveRESTcollection) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
     * [.handleRESTErrors(ex, id)](#MetadataType.handleRESTErrors) ⇒ <code>null</code>
     * [.executeREST(uri, key)](#MetadataType.executeREST) ⇒ <code>Promise.&lt;{key:string, response:string}&gt;</code>
     * [.executeSOAP([metadataEntry])](#MetadataType.executeSOAP) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
@@ -3913,14 +3913,15 @@ Retrieves Metadata for Rest Types
 
 <a name="MetadataType.retrieveRESTcollection"></a>
 
-### MetadataType.retrieveRESTcollection(urlArray, [concurrentRequests]) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
+### MetadataType.retrieveRESTcollection(urlArray, [concurrentRequests], [logAmountOfUrls]) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code> - Promise of item map (single item for templated result)  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| urlArray | <code>Array.&lt;object&gt;</code> | {uri: string, id: string} combo of URL and ID/key of metadata |
-| [concurrentRequests] | <code>number</code> | optionally set a different amount of concurrent requests |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| urlArray | <code>Array.&lt;object&gt;</code> |  | {uri: string, id: string} combo of URL and ID/key of metadata |
+| [concurrentRequests] | <code>number</code> | <code>10</code> | optionally set a different amount of concurrent requests |
+| [logAmountOfUrls] | <code>boolean</code> | <code>true</code> | if true, prints an info message about to-be loaded amount of metadata |
 
 <a name="MetadataType.handleRESTErrors"></a>
 
