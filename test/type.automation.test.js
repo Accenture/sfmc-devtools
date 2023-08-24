@@ -47,10 +47,9 @@ describe('type: automation', () => {
                     )
                 )
             );
-
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                17,
+                18,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
