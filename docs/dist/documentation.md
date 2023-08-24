@@ -198,7 +198,7 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Mcdev.">Mcdev.(cred, bu, type, [keyArr])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
 <dd><p>Updates the key to match the name field</p>
 </dd>
-<dt><a href="#Mcdev.">Mcdev.(type, [keyArr])</a> ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code></dt>
+<dt><a href="#Mcdev.">Mcdev.(type, [keyArr], buObject)</a> ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code></dt>
 <dd><p>Updates notification email address field</p>
 </dd>
 <dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>boolean</code></dt>
@@ -8628,7 +8628,7 @@ Updates the key to match the name field
 
 <a name="Mcdev."></a>
 
-## Mcdev.(type, [keyArr]) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
+## Mcdev.(type, [keyArr], buObject) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
 Updates notification email address field
 
 **Kind**: global function  
@@ -8638,6 +8638,7 @@ Updates notification email address field
 | --- | --- | --- |
 | type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+| buObject | <code>TYPE.BuObject</code> | properties for auth |
 
 <a name="Automation."></a>
 
