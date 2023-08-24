@@ -1351,5 +1351,30 @@ describe('type: automation', () => {
             );
             return;
         });
+        it('Should NOT update run ERROR EMAIL address and COMPLETION EMAIL address', async () => {
+            handler.setOptions({ errorEmail: 'test', completionEmail: 'test' });
+            const updatedNotifications = await handler.updateNotifications(
+                'testInstance/testBU',
+                'automation',
+                ['testExisting_automation_NOTupdateNotifications_InvalidEmails']
+            );
+            assert.equal(
+                process.exitCode,
+                false,
+                'update notifications should not have thrown an error'
+            );
+            assert.equal(
+                updatedNotifications['testInstance/testBU'].length,
+                0,
+                'zero automations expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                2,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 });
