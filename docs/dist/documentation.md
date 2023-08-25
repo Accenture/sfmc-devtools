@@ -126,6 +126,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#User">User</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>MetadataType</p>
 </dd>
+<dt><a href="#Verification">Verification</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>Verification MetadataType</p>
+</dd>
 <dt><a href="#Retriever">Retriever</a></dt>
 <dd><p>Retrieves metadata from a business unit and saves it to the local filesystem.</p>
 </dd>
@@ -292,6 +295,8 @@ helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item
 <dd><p>SOAP format</p>
 </dd>
 <dt><a href="#AutomationItem">AutomationItem</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#VerificationItem">VerificationItem</a> : <code>object</code></dt>
 <dd></dd>
 <dt><a href="#SDK">SDK</a> : <code>Object.&lt;string, AutomationItem&gt;</code></dt>
 <dd></dd>
@@ -1408,6 +1413,7 @@ Automation MetadataType
 
 * [Automation](#Automation) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#Automation.retrieve) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
+    * [.handleRESTErrors(ex, id)](#Automation.handleRESTErrors) ⇒ <code>null</code>
     * [.retrieveChangelog()](#Automation.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveForCache()](#Automation.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Automation.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.AutomationItemObj&gt;</code>
@@ -1444,6 +1450,19 @@ Retrieves Metadata of Automation
 | [_] | <code>void</code> | unused parameter |
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="Automation.handleRESTErrors"></a>
+
+### Automation.handleRESTErrors(ex, id) ⇒ <code>null</code>
+helper for [this.retrieveRESTcollection](this.retrieveRESTcollection)
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+**Returns**: <code>null</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ex | <code>Error</code> | exception |
+| id | <code>string</code> | id or key of item |
 
 <a name="Automation.retrieveChangelog"></a>
 
@@ -3382,7 +3401,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.getFieldNamesToRetrieve([additionalFields], [isCaching])](#MetadataType.getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
     * [.deploy(metadata, deployDir, retrieveDir)](#MetadataType.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.postDeployTasks(upsertResults, originalMetadata, createdUpdated)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
-    * [.postCreateTasks(metadataEntry, apiResponse)](#MetadataType.postCreateTasks) ⇒ <code>void</code>
+    * [.postCreateTasks(metadataEntry, apiResponse, metadataEntryWithAllFields)](#MetadataType.postCreateTasks) ⇒ <code>void</code>
     * [.postUpdateTasks(metadataEntry, apiResponse)](#MetadataType.postUpdateTasks) ⇒ <code>void</code>
     * [.postDeployTasks_legacyApi(metadataEntry, apiResponse)](#MetadataType.postDeployTasks_legacyApi) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -3390,7 +3409,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.setFolderId(metadata)](#MetadataType.setFolderId)
     * [.retrieve(retrieveDir, [additionalFields], [subTypeArr], [key])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveChangelog([additionalFields], [subTypeArr])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache([additionalFields], [subTypeArr], [key])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache([additionalFields], [subTypeArr])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.retrieveTemplateREST(templateDir, uri, templateVariables, name)](#MetadataType.retrieveTemplateREST) ⇒ <code>Promise.&lt;{metadata: TYPE.MetadataTypeItem, type: string}&gt;</code>
     * [.buildTemplate(retrieveDir, templateDir, key, templateVariables)](#MetadataType.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
@@ -3412,6 +3431,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.getSOAPErrorMsg(ex)](#MetadataType.getSOAPErrorMsg) ⇒ <code>string</code>
     * [.retrieveSOAP(retrieveDir, [requestParams], [singleRetrieve], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
+    * [.retrieveRESTcollection(urlArray, [concurrentRequests], [logAmountOfUrls])](#MetadataType.retrieveRESTcollection) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
+    * [.handleRESTErrors(ex, id)](#MetadataType.handleRESTErrors) ⇒ <code>null</code>
     * [.executeREST(uri, key)](#MetadataType.executeREST) ⇒ <code>Promise.&lt;{key:string, response:string}&gt;</code>
     * [.executeSOAP([metadataEntry])](#MetadataType.executeSOAP) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
     * [.runDocumentOnRetrieve([singleRetrieve], metadataMap)](#MetadataType.runDocumentOnRetrieve) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -3512,7 +3533,7 @@ Gets executed after deployment of metadata type
 
 <a name="MetadataType.postCreateTasks"></a>
 
-### MetadataType.postCreateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
+### MetadataType.postCreateTasks(metadataEntry, apiResponse, metadataEntryWithAllFields) ⇒ <code>void</code>
 helper for [createREST](#MetadataType.createREST)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3521,6 +3542,7 @@ helper for [createREST](#MetadataType.createREST)
 | --- | --- | --- |
 | metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
 | apiResponse | <code>object</code> | varies depending on the API call |
+| metadataEntryWithAllFields | <code>TYPE.MetadataTypeItem</code> | like metadataEntry but before non-creatable fields were stripped |
 
 <a name="MetadataType.postUpdateTasks"></a>
 
@@ -3613,7 +3635,7 @@ Gets metadata from Marketing Cloud
 
 <a name="MetadataType.retrieveForCache"></a>
 
-### MetadataType.retrieveForCache([additionalFields], [subTypeArr], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MetadataType.retrieveForCache([additionalFields], [subTypeArr]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3623,7 +3645,6 @@ Gets metadata cache with limited fields and does not store value to disk
 | --- | --- | --- |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | [subTypeArr] | <code>Array.&lt;string&gt;</code> | optionally limit to a single subtype |
-| [key] | <code>string</code> | customer key of single item to retrieve |
 
 <a name="MetadataType.retrieveAsTemplate"></a>
 
@@ -3889,6 +3910,31 @@ Retrieves Metadata for Rest Types
 | uri | <code>string</code> | rest endpoint for GET |
 | [templateVariables] | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
+
+<a name="MetadataType.retrieveRESTcollection"></a>
+
+### MetadataType.retrieveRESTcollection(urlArray, [concurrentRequests], [logAmountOfUrls]) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code> - Promise of item map (single item for templated result)  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| urlArray | <code>Array.&lt;object&gt;</code> |  | {uri: string, id: string} combo of URL and ID/key of metadata |
+| [concurrentRequests] | <code>number</code> | <code>10</code> | optionally set a different amount of concurrent requests |
+| [logAmountOfUrls] | <code>boolean</code> | <code>true</code> | if true, prints an info message about to-be loaded amount of metadata |
+
+<a name="MetadataType.handleRESTErrors"></a>
+
+### MetadataType.handleRESTErrors(ex, id) ⇒ <code>null</code>
+helper for [this.retrieveRESTcollection](this.retrieveRESTcollection)
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>null</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ex | <code>Error</code> | exception |
+| id | <code>string</code> | id or key of item |
 
 <a name="MetadataType.executeREST"></a>
 
@@ -5408,7 +5454,10 @@ TransactionalEmail MetadataType
 * [TransactionalEmail](#TransactionalEmail) ⇐ [<code>TransactionalMessage</code>](#TransactionalMessage)
     * [.update(metadata)](#TransactionalEmail.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#TransactionalEmail.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.postCreateTasks(_, apiResponse)](#TransactionalEmail.postCreateTasks) ⇒ <code>void</code>
+    * [.postDeployTasks()](#TransactionalEmail.postDeployTasks) ⇒ <code>void</code>
     * [.postRetrieveTasks(metadata)](#TransactionalEmail.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.deleteByKey(key)](#TransactionalEmail.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="TransactionalEmail.update"></a>
 
@@ -5434,6 +5483,24 @@ prepares for deployment
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
+<a name="TransactionalEmail.postCreateTasks"></a>
+
+### TransactionalEmail.postCreateTasks(_, apiResponse) ⇒ <code>void</code>
+helper for [TransactionalEmail.createREST](TransactionalEmail.createREST)
+
+**Kind**: static method of [<code>TransactionalEmail</code>](#TransactionalEmail)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| _ | <code>TYPE.MetadataTypeItem</code> | not used |
+| apiResponse | <code>object</code> | varies depending on the API call |
+
+<a name="TransactionalEmail.postDeployTasks"></a>
+
+### TransactionalEmail.postDeployTasks() ⇒ <code>void</code>
+Gets executed after deployment of metadata type
+
+**Kind**: static method of [<code>TransactionalEmail</code>](#TransactionalEmail)  
 <a name="TransactionalEmail.postRetrieveTasks"></a>
 
 ### TransactionalEmail.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -5446,6 +5513,18 @@ manages post retrieve steps
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
+<a name="TransactionalEmail.deleteByKey"></a>
+
+### TransactionalEmail.deleteByKey(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>TransactionalEmail</code>](#TransactionalEmail)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| key | <code>string</code> | Identifier of item |
+
 <a name="TransactionalMessage"></a>
 
 ## TransactionalMessage ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -5456,7 +5535,7 @@ TransactionalMessage MetadataType
 
 * [TransactionalMessage](#TransactionalMessage) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#TransactionalMessage.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache()](#TransactionalMessage.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache([key])](#TransactionalMessage.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.update(metadata)](#TransactionalMessage.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#TransactionalMessage.create) ⇒ <code>Promise</code>
     * [.deleteByKey(key)](#TransactionalMessage.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -5478,11 +5557,16 @@ Retrieves Metadata
 
 <a name="TransactionalMessage.retrieveForCache"></a>
 
-### TransactionalMessage.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### TransactionalMessage.retrieveForCache([key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves event definition metadata for caching
 
 **Kind**: static method of [<code>TransactionalMessage</code>](#TransactionalMessage)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [key] | <code>string</code> | customer key of single item to cache |
+
 <a name="TransactionalMessage.update"></a>
 
 ### TransactionalMessage.update(metadata) ⇒ <code>Promise</code>
@@ -6031,6 +6115,133 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="Verification"></a>
+
+## Verification ⇐ [<code>MetadataType</code>](#MetadataType)
+Verification MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [Verification](#Verification) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], key)](#Verification.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.handleRESTErrors(ex, id)](#Verification.handleRESTErrors) ⇒ <code>null</code>
+    * [.retrieveForCache()](#Verification.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.create(metadata)](#Verification.create) ⇒ <code>Promise</code>
+    * [.postCreateTasks(metadataEntry, apiResponse, metadataEntryWithAllFields)](#Verification.postCreateTasks) ⇒ <code>void</code>
+    * [.update(metadata)](#Verification.update) ⇒ <code>Promise</code>
+    * [.preDeployTasks(metadata)](#Verification.preDeployTasks) ⇒ <code>TYPE.VerificationItem</code>
+    * [.postRetrieveTasks(metadata)](#Verification.postRetrieveTasks) ⇒ <code>TYPE.VerificationItem</code>
+    * [.deleteByKey(key)](#Verification.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+
+<a name="Verification.retrieve"></a>
+
+### Verification.retrieve(retrieveDir, [_], [__], key) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of Data Verification Activity.
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [_] | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| key | <code>string</code> | customer key of single item to retrieve |
+
+<a name="Verification.handleRESTErrors"></a>
+
+### Verification.handleRESTErrors(ex, id) ⇒ <code>null</code>
+helper for [this.retrieveRESTcollection](this.retrieveRESTcollection)
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>null</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ex | <code>Error</code> | exception |
+| id | <code>string</code> | id or key of item |
+
+<a name="Verification.retrieveForCache"></a>
+
+### Verification.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of  Data Extract Activity for caching
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+<a name="Verification.create"></a>
+
+### Verification.create(metadata) ⇒ <code>Promise</code>
+Creates a single Data Extract
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.VerificationItem</code> | a single Data Extract |
+
+<a name="Verification.postCreateTasks"></a>
+
+### Verification.postCreateTasks(metadataEntry, apiResponse, metadataEntryWithAllFields) ⇒ <code>void</code>
+helper for [createREST](#MetadataType.createREST)
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
+| apiResponse | <code>object</code> | varies depending on the API call |
+| metadataEntryWithAllFields | <code>TYPE.MetadataTypeItem</code> | like metadataEntry but before non-creatable fields were stripped |
+
+<a name="Verification.update"></a>
+
+### Verification.update(metadata) ⇒ <code>Promise</code>
+Updates a single Data Extract
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.VerificationItem</code> | a single Data Extract |
+
+<a name="Verification.preDeployTasks"></a>
+
+### Verification.preDeployTasks(metadata) ⇒ <code>TYPE.VerificationItem</code>
+prepares a verification for deployment
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>TYPE.VerificationItem</code> - metadata object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.VerificationItem</code> | a single verification activity definition |
+
+<a name="Verification.postRetrieveTasks"></a>
+
+### Verification.postRetrieveTasks(metadata) ⇒ <code>TYPE.VerificationItem</code>
+parses retrieved Metadata before saving
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>TYPE.VerificationItem</code> - Array with one metadata object and one sql string  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.VerificationItem</code> | a single verification activity definition |
+
+<a name="Verification.deleteByKey"></a>
+
+### Verification.deleteByKey(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| key | <code>string</code> | Identifier of item |
 
 <a name="Retriever"></a>
 
@@ -9034,6 +9245,25 @@ SOAP format
 | steps | [<code>Array.&lt;AutomationStep&gt;</code>](#AutomationStep) | - |
 | r__folder_Path | <code>string</code> | folder path |
 | [categoryId] | <code>string</code> | holds folder ID, replaced with r__folder_Path during retrieve |
+
+<a name="VerificationItem"></a>
+
+## VerificationItem : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| dataVerificationDefinitionId | <code>string</code> | ID / Key |
+| verificationType | <code>&#x27;IsEqualTo&#x27;</code> \| <code>&#x27;IsLessThan&#x27;</code> \| <code>&#x27;IsGreaterThan&#x27;</code> \| <code>&#x27;IsOutsideRange&#x27;</code> \| <code>&#x27;IsInsideRange&#x27;</code> \| <code>&#x27;IsNotEqualTo&#x27;</code> \| <code>&#x27;IsNotLessThan&#x27;</code> \| <code>&#x27;IsNotGreaterThan&#x27;</code> \| <code>&#x27;IsNotOutsideRange&#x27;</code> \| <code>&#x27;IsNotInsideRange&#x27;</code> | key |
+| value1 | <code>number</code> | used for all verificationTypes; lower value for IsOutsideRange, IsInsideRange, IsNotOutsideRange, IsNotInsideRange |
+| value2 | <code>number</code> | only used for IsOutsideRange, IsInsideRange, IsNotOutsideRange, IsNotInsideRange; otherwise set to 0 |
+| shouldStopOnFailure | <code>boolean</code> | flag to stop automation if verification fails |
+| shouldEmailOnFailure | <code>boolean</code> | flag to send email if verification fails |
+| notificationEmailAddress | <code>string</code> | email address to send notification to; empty string if shouldEmailOnFailure=false |
+| notificationEmailMessage | <code>string</code> | email message to send; empty string if shouldEmailOnFailure=false |
+| createdBy | <code>number</code> | user id of creator |
+| r__dataExtension_CustomerKey | <code>string</code> | key of target data extension |
 
 <a name="SDK"></a>
 

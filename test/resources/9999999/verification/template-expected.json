@@ -1,0 +1,11 @@
+{
+    "dataVerificationDefinitionId": "{{{prefix}}}39f6a488-20eb-4ba0-b0b9",
+    "notificationEmailAddress": "",
+    "notificationEmailMessage": "",
+    "r__dataExtension_CustomerKey": "{{{prefix}}}dataExtension",
+    "shouldEmailOnFailure": false,
+    "shouldStopOnFailure": true,
+    "value1": 1,
+    "value2": 0,
+    "verificationType": "IsEqualTo"
+}

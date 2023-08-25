@@ -4,11 +4,8 @@
     "description": "foobar",
     "classification": "Default Transactional",
     "status": "Active",
-    "content": {
-        "customerKey": "testTemplated_asset_message"
-    },
     "subscriptions": {
-        "dataExtension": "testTemplated_dataExtension",
+        "r__dataExtension_CustomerKey": "testTemplated_dataExtension",
         "autoAddSubscriber": true,
         "updateSubscriber": true,
         "r__list_PathName": "my subscribers/All Subscribers"
@@ -16,7 +13,6 @@
     "options": {
         "trackLinks": true
     },
-    "journey": {
-        "interactionKey": "testTemplated_interaction"
-    }
+    "r__asset_customerKey": "testTemplated_asset_message",
+    "r__journey_key": "testTemplated_interaction"
 }

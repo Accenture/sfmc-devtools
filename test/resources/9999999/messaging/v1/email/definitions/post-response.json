@@ -15,5 +15,5 @@
         "updateSubscriber": true
     },
     "options": { "trackLinks": true },
-    "journey": { "interactionKey": "testExisting_interaction" }
+    "journey": { "interactionKey": "testNew_RANDOM_interaction" }
 }
