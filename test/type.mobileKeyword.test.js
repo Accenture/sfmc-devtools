@@ -245,7 +245,7 @@ describe('type: mobileKeyword', () => {
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN
-            const result = await handler.deleteByKey(
+            const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'mobileKeyword',
                 '4912312345678.TESTEXISTING_KEYWORD'
@@ -253,7 +253,7 @@ describe('type: mobileKeyword', () => {
             // THEN
             assert.equal(process.exitCode, false, 'delete should not have thrown an error');
 
-            assert.equal(result, true, 'should have deleted the item');
+            assert.equal(isDeleted, true, 'should have deleted the item');
             return;
         });
     });

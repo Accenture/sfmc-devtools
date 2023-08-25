@@ -653,7 +653,7 @@ describe('type: automation', () => {
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN
-            const result = await handler.deleteByKey(
+            const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'automation',
                 'testExisting_automation'
@@ -661,7 +661,7 @@ describe('type: automation', () => {
             // THEN
             assert.equal(process.exitCode, false, 'delete should not have thrown an error');
 
-            assert.equal(result, true, 'should have deleted the item');
+            assert.equal(isDeleted, true, 'should have deleted the item');
             return;
         });
     });

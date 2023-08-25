@@ -155,9 +155,11 @@ describe('type: verification', () => {
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN
-            const isDeleted = await handler.deleteByKey('testInstance/testBU', 'verification', [
-                'testExisting_39f6a488-20eb-4ba0-b0b9',
-            ]);
+            const isDeleted = await handler.deleteByKey(
+                'testInstance/testBU',
+                'verification',
+                'testExisting_39f6a488-20eb-4ba0-b0b9'
+            );
             // THEN
             assert.equal(
                 process.exitCode,

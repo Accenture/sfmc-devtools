@@ -171,7 +171,7 @@ describe('type: importFile', () => {
     describe('Delete ================', () => {
         it('Should NOT delete the item', async () => {
             // WHEN
-            await handler.deleteByKey(
+            const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'importFile',
                 'testExisting_fileTranfer'
@@ -181,6 +181,11 @@ describe('type: importFile', () => {
                 process.exitCode,
                 1,
                 'deleteByKey should have thrown an error due to lack of support'
+            );
+            assert.equal(
+                isDeleted,
+                false,
+                'deleteByKey should have returned false due to lack of support'
             );
             return;
         });
