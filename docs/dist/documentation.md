@@ -5454,7 +5454,10 @@ TransactionalEmail MetadataType
 * [TransactionalEmail](#TransactionalEmail) ⇐ [<code>TransactionalMessage</code>](#TransactionalMessage)
     * [.update(metadata)](#TransactionalEmail.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#TransactionalEmail.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.postCreateTasks(_, apiResponse)](#TransactionalEmail.postCreateTasks) ⇒ <code>void</code>
+    * [.postDeployTasks()](#TransactionalEmail.postDeployTasks) ⇒ <code>void</code>
     * [.postRetrieveTasks(metadata)](#TransactionalEmail.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.deleteByKey(key)](#TransactionalEmail.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="TransactionalEmail.update"></a>
 
@@ -5480,6 +5483,24 @@ prepares for deployment
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
+<a name="TransactionalEmail.postCreateTasks"></a>
+
+### TransactionalEmail.postCreateTasks(_, apiResponse) ⇒ <code>void</code>
+helper for [TransactionalEmail.createREST](TransactionalEmail.createREST)
+
+**Kind**: static method of [<code>TransactionalEmail</code>](#TransactionalEmail)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| _ | <code>TYPE.MetadataTypeItem</code> | not used |
+| apiResponse | <code>object</code> | varies depending on the API call |
+
+<a name="TransactionalEmail.postDeployTasks"></a>
+
+### TransactionalEmail.postDeployTasks() ⇒ <code>void</code>
+Gets executed after deployment of metadata type
+
+**Kind**: static method of [<code>TransactionalEmail</code>](#TransactionalEmail)  
 <a name="TransactionalEmail.postRetrieveTasks"></a>
 
 ### TransactionalEmail.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -5492,6 +5513,18 @@ manages post retrieve steps
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
+<a name="TransactionalEmail.deleteByKey"></a>
+
+### TransactionalEmail.deleteByKey(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>TransactionalEmail</code>](#TransactionalEmail)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| key | <code>string</code> | Identifier of item |
+
 <a name="TransactionalMessage"></a>
 
 ## TransactionalMessage ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -5502,7 +5535,7 @@ TransactionalMessage MetadataType
 
 * [TransactionalMessage](#TransactionalMessage) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#TransactionalMessage.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache()](#TransactionalMessage.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache([key])](#TransactionalMessage.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.update(metadata)](#TransactionalMessage.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#TransactionalMessage.create) ⇒ <code>Promise</code>
     * [.deleteByKey(key)](#TransactionalMessage.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -5524,11 +5557,16 @@ Retrieves Metadata
 
 <a name="TransactionalMessage.retrieveForCache"></a>
 
-### TransactionalMessage.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### TransactionalMessage.retrieveForCache([key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves event definition metadata for caching
 
 **Kind**: static method of [<code>TransactionalMessage</code>](#TransactionalMessage)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [key] | <code>string</code> | customer key of single item to cache |
+
 <a name="TransactionalMessage.update"></a>
 
 ### TransactionalMessage.update(metadata) ⇒ <code>Promise</code>
