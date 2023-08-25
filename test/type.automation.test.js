@@ -61,7 +61,11 @@ describe('type: automation', () => {
         });
         it('Should create & update a automation', async () => {
             // WHEN
-            const deployResult = await handler.deploy('testInstance/testBU', ['automation']);
+            const deployResult = await handler.deploy(
+                'testInstance/testBU',
+                ['automation', 'verification'],
+                ['testExisting_automation', 'testNew_automation', 'testNew_39f6a488-20eb-4ba0-b0b9']
+            );
             // THEN
             assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
 
@@ -119,7 +123,7 @@ describe('type: automation', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                21,
+                25,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -129,8 +133,8 @@ describe('type: automation', () => {
             handler.setOptions({ schedule: true });
             const deployed = await handler.deploy(
                 'testInstance/testBU',
-                ['automation'],
-                ['testExisting_automation', 'testNew_automation']
+                ['automation', 'verification'],
+                ['testExisting_automation', 'testNew_automation', 'testNew_39f6a488-20eb-4ba0-b0b9']
             );
             // THEN
             assert.equal(
@@ -168,6 +172,74 @@ describe('type: automation', () => {
                 'expected specific automation to have been deployed'
             );
 
+            // update
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_automation', 'automation'),
+                await testUtils.getExpectedJson('9999999', 'automation', 'update'),
+                'returned metadata was not equal expected for update'
+            );
+            // check if MD file was created and equals expectations
+            expect(file(testUtils.getActualDoc('testExisting_automation', 'automation'))).to.equal(
+                file(
+                    testUtils.getExpectedFile(
+                        '9999999',
+                        'automation',
+                        'update-testExisting_automation',
+                        'md'
+                    )
+                )
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                33,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should update & runOnce an automation with --execute option', async () => {
+            // WHEN
+            handler.setOptions({ execute: true });
+            const deployed = await handler.deploy(
+                'testInstance/testBU',
+                ['automation', 'verification'],
+                ['testExisting_automation', 'testNew_automation', 'testNew_39f6a488-20eb-4ba0-b0b9']
+            );
+            // THEN
+            assert.equal(
+                process.exitCode,
+                false,
+                'deploy with --execute should not have thrown an error'
+            );
+
+            // get results from cache
+            const cached = cache.getCache();
+            assert.equal(
+                cached.automation ? Object.keys(cached.automation).length : 0,
+                5,
+                'five cached automation expected'
+            );
+            assert.equal(
+                deployed['testInstance/testBU'].automation
+                    ? Object.keys(deployed['testInstance/testBU'].automation).length
+                    : 0,
+                2,
+                'two deployed automation expected'
+            );
+            assert.equal(
+                deployed['testInstance/testBU'].automation
+                    ? Object.keys(deployed['testInstance/testBU'].automation)[0]
+                    : null,
+                'testNew_automation',
+                'expected specific automation to have been deployed'
+            );
+            assert.equal(
+                deployed['testInstance/testBU'].automation
+                    ? Object.keys(deployed['testInstance/testBU'].automation)[1]
+                    : null,
+                'testExisting_automation',
+                'expected specific automation to have been deployed'
+            );
             // update
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_automation', 'automation'),
@@ -189,74 +261,6 @@ describe('type: automation', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 29,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            );
-            return;
-        });
-        it('Should update & runOnce an automation with --execute option', async () => {
-            // WHEN
-            handler.setOptions({ execute: true });
-            const deployed = await handler.deploy(
-                'testInstance/testBU',
-                ['automation'],
-                ['testExisting_automation', 'testNew_automation']
-            );
-            // THEN
-            assert.equal(
-                process.exitCode,
-                false,
-                'deploy with --execute should not have thrown an error'
-            );
-
-            // get results from cache
-            const cached = cache.getCache();
-            assert.equal(
-                cached.automation ? Object.keys(cached.automation).length : 0,
-                5,
-                'five cached automation expected'
-            );
-            assert.equal(
-                deployed['testInstance/testBU'].automation
-                    ? Object.keys(deployed['testInstance/testBU'].automation).length
-                    : 0,
-                2,
-                'two deployed automation expected'
-            );
-            assert.equal(
-                deployed['testInstance/testBU'].automation
-                    ? Object.keys(deployed['testInstance/testBU'].automation)[0]
-                    : null,
-                'testNew_automation',
-                'expected specific automation to have been deployed'
-            );
-            assert.equal(
-                deployed['testInstance/testBU'].automation
-                    ? Object.keys(deployed['testInstance/testBU'].automation)[1]
-                    : null,
-                'testExisting_automation',
-                'expected specific automation to have been deployed'
-            );
-            // update
-            assert.deepEqual(
-                await testUtils.getActualJson('testExisting_automation', 'automation'),
-                await testUtils.getExpectedJson('9999999', 'automation', 'update'),
-                'returned metadata was not equal expected for update'
-            );
-            // check if MD file was created and equals expectations
-            expect(file(testUtils.getActualDoc('testExisting_automation', 'automation'))).to.equal(
-                file(
-                    testUtils.getExpectedFile(
-                        '9999999',
-                        'automation',
-                        'update-testExisting_automation',
-                        'md'
-                    )
-                )
-            );
-
-            assert.equal(
-                testUtils.getAPIHistoryLength(),
-                25,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

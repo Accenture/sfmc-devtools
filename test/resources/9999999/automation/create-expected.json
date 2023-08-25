@@ -37,6 +37,10 @@
                 {
                     "name": "testExisting_script",
                     "r__type": "script"
+                },
+                {
+                    "name": "testNew_RANDOM_NEW_GUID",
+                    "r__type": "verification"
                 }
             ],
             "name": ""
