@@ -3084,6 +3084,7 @@ ImportFile MetadataType
     * [.create(importFile)](#ImportFile.create) ⇒ <code>Promise</code>
     * [.update(importFile)](#ImportFile.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#ImportFile.preDeployTasks) ⇒ <code>Promise</code>
+    * [.getKeysToSetNotifications(metadataMap)](#ImportFile.getKeysToSetNotifications) ⇒ <code>Array.&lt;string&gt;</code>
     * [.parseMetadata(metadata)](#ImportFile.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 
 <a name="ImportFile.retrieve"></a>
@@ -3171,6 +3172,18 @@ prepares a import definition for deployment
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single importDef |
+
+<a name="ImportFile.getKeysToSetNotifications"></a>
+
+### ImportFile.getKeysToSetNotifications(metadataMap) ⇒ <code>Array.&lt;string&gt;</code>
+helper function to get a list of keys where notification email address should be updated
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of keys  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 
 <a name="ImportFile.parseMetadata"></a>
 
@@ -4323,7 +4336,7 @@ additionally, the documentation for dataExtension and automation should be retur
 <a name="MetadataType.getKeysToSetNotifications"></a>
 
 ### MetadataType.getKeysToSetNotifications(metadataMap) ⇒ <code>Array.&lt;string&gt;</code>
-helper function to get a list of keys where notification email address should be updated
+Abstract function to get a list of keys where notification email address should be updated
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>Array.&lt;string&gt;</code> - list of keys  
