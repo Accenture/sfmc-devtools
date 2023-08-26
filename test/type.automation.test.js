@@ -1268,7 +1268,7 @@ describe('type: automation', () => {
             );
             return;
         });
-        it('Should NOT update run error email address', async () => {
+        it('Should NOT update already existing error email address', async () => {
             handler.setOptions({ errorEmail: 'error@test.accenture.com' });
             const updatedNotificationsError = await handler.updateNotifications(
                 'testInstance/testBU',
@@ -1351,7 +1351,7 @@ describe('type: automation', () => {
             );
             return;
         });
-        it('Should NOT update run ERROR EMAIL address and COMPLETION EMAIL address', async () => {
+        it('Should NOT update email addresses. Invalid email address', async () => {
             handler.setOptions({ errorEmail: 'test', completionEmail: 'test' });
             const updatedNotifications = await handler.updateNotifications(
                 'testInstance/testBU',
