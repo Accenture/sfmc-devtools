@@ -888,7 +888,7 @@ describe('type: automation', () => {
         });
     });
     describe('Update notifications ================', () => {
-        it('Should update run ERROR EMAIL address and COMPLETION EMAIL address', async () => {
+        it('Should update ERROR EMAIL address and COMPLETION EMAIL address', async () => {
             handler.setOptions({ errorEmail: 'test@test.com', completionEmail: 'test@test.com' });
             const updatedNotifications = await handler.updateNotifications(
                 'testInstance/testBU',
@@ -924,7 +924,7 @@ describe('type: automation', () => {
             );
             return;
         });
-        it('Should update run ERROR NOTE and run ERROR EMAIL address', async () => {
+        it('Should update ERROR NOTE and ERROR EMAIL address', async () => {
             handler.setOptions({ errorEmail: 'test@test.com', errorNote: 'test' });
             const updatedNotifications = await handler.updateNotifications(
                 'testInstance/testBU',
@@ -960,7 +960,7 @@ describe('type: automation', () => {
             );
             return;
         });
-        it('Should update run COMPLETION NOTE and run COMPLETION EMAIL address', async () => {
+        it('Should update COMPLETION NOTE and COMPLETION EMAIL address', async () => {
             handler.setOptions({ completionEmail: 'test@test.com', completionNote: 'test' });
             const updatedNotifications = await handler.updateNotifications(
                 'testInstance/testBU',
@@ -996,7 +996,7 @@ describe('type: automation', () => {
             );
             return;
         });
-        it('Should update run COMPLETION EMAIL and run ERROR NOTE', async () => {
+        it('Should update COMPLETION EMAIL and ERROR NOTE', async () => {
             handler.setOptions({ completionEmail: 'test@test.com', errorNote: 'test' });
             const updatedNotifications = await handler.updateNotifications(
                 'testInstance/testBU',
@@ -1032,7 +1032,7 @@ describe('type: automation', () => {
             );
             return;
         });
-        it('Should update run ERROR EMAIL and run COMPLETION NOTE', async () => {
+        it('Should update ERROR EMAIL and COMPLETION NOTE', async () => {
             handler.setOptions({ errorEmail: 'test@test.com', completionNote: 'test' });
             const updatedNotifications = await handler.updateNotifications(
                 'testInstance/testBU',
@@ -1068,7 +1068,7 @@ describe('type: automation', () => {
             );
             return;
         });
-        it('Should update run ERROR EMAIL, COMPLETION EMAIL and run COMPLETION NOTE', async () => {
+        it('Should update ERROR EMAIL, COMPLETION EMAIL and COMPLETION NOTE', async () => {
             handler.setOptions({
                 errorEmail: 'test@test.com',
                 completionEmail: 'test@test.com',
@@ -1110,7 +1110,7 @@ describe('type: automation', () => {
             );
             return;
         });
-        it('Should update run ERROR EMAIL, COMPLETION EMAIL and run ERROR NOTE', async () => {
+        it('Should update ERROR EMAIL, COMPLETION EMAIL and ERROR NOTE', async () => {
             handler.setOptions({
                 errorEmail: 'test@test.com',
                 errorNote: 'test',
@@ -1150,7 +1150,7 @@ describe('type: automation', () => {
             );
             return;
         });
-        it('Should update run ERROR EMAIL, COMPLETION NOTE and run ERROR NOTE', async () => {
+        it('Should update ERROR EMAIL, COMPLETION NOTE and ERROR NOTE', async () => {
             handler.setOptions({
                 errorEmail: 'test@test.com',
                 errorNote: 'test',
@@ -1190,7 +1190,7 @@ describe('type: automation', () => {
             );
             return;
         });
-        it('Should update run COMPLETION EMAIL, COMPLETION NOTE and run ERROR NOTE', async () => {
+        it('Should update COMPLETION EMAIL, COMPLETION NOTE and ERROR NOTE', async () => {
             handler.setOptions({
                 errorEmail: 'test@test.com',
                 errorNote: 'test',
@@ -1232,7 +1232,7 @@ describe('type: automation', () => {
             );
             return;
         });
-        it('Should update all NOTES and both run ERROR EMAIL and run COMPLETION EMAIL', async () => {
+        it('Should update all NOTES and both ERROR EMAIL and COMPLETION EMAIL', async () => {
             handler.setOptions({ errorEmail: 'test@test.com', errorNote: 'test' });
             const updatedNotifications = await handler.updateNotifications(
                 'testInstance/testBU',
