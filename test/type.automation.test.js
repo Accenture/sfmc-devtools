@@ -1304,6 +1304,9 @@ describe('type: automation', () => {
                 0,
                 'zero automation keys expected'
             );
+            return;
+        });
+        it('Should NOT update an already existing error note', async () => {
             handler.setOptions({ errorNote: 'test' });
             const updatedNotificationsNote = await handler.updateNotifications(
                 'testInstance/testBU',
