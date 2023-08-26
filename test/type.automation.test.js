@@ -1268,7 +1268,7 @@ describe('type: automation', () => {
             );
             return;
         });
-        it('Should NOT update already existing error email address', async () => {
+        it('Should NOT update an already existing error email address', async () => {
             handler.setOptions({ errorEmail: 'error@test.accenture.com' });
             const updatedNotificationsError = await handler.updateNotifications(
                 'testInstance/testBU',
