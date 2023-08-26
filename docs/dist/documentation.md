@@ -3505,7 +3505,6 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.getKeysForFixing(metadataMap)](#MetadataType.getKeysForFixing) ⇒ <code>Array.&lt;string&gt;</code>
     * [.getKeysToSetNotifications(metadataMap)](#MetadataType.getKeysToSetNotifications) ⇒ <code>Array.&lt;string&gt;</code>
     * [.updateNotifications()](#MetadataType.updateNotifications) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.clearNotifications()](#MetadataType.clearNotifications) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="MetadataType.client"></a>
 
@@ -4352,13 +4351,6 @@ Abstract updateNotifications method that needs to be implemented in child metada
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
 **Returns**: <code>Array.&lt;string&gt;</code> - returns keys of items where notification email address was set  
-<a name="MetadataType.clearNotifications"></a>
-
-### MetadataType.clearNotifications() ⇒ <code>Array.&lt;string&gt;</code>
-Abstract clearNotifications method that needs to be implemented in child metadata type
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Array.&lt;string&gt;</code> - returns keys of items where notification email address/notes were removed  
 <a name="MobileCode"></a>
 
 ## MobileCode ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -8590,7 +8582,7 @@ run a method across BUs
 
 | Param | Type | Description |
 | --- | --- | --- |
-| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> \| <code>&#x27;fixKeys&#x27;</code> \| <code>&#x27;updateNotifications&#x27;</code> \| <code>&#x27;clearNotifications&#x27;</code> | what to run |
+| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> \| <code>&#x27;fixKeys&#x27;</code> \| <code>&#x27;updateNotifications&#x27;</code> | what to run |
 | businessUnit | <code>string</code> | name of BU |
 | [selectedType] | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
 | [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
