@@ -1285,6 +1285,9 @@ describe('type: automation', () => {
                 0,
                 'zero automation keys expected'
             );
+            return;
+        });
+        it('Should NOT update an already existing completion email address', async () => {
             handler.setOptions({ completionEmail: 'complete@test.accenture.com' });
             const updatedNotificationsComplete = await handler.updateNotifications(
                 'testInstance/testBU',
