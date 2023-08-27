@@ -53,10 +53,28 @@
             </Results>
             <Results xsi:type="Program">
                 <PartnerKey xsi:nil="true" />
-                <ObjectID>08afb0e2-b00a-4c88-ad2e-clearNotifications</ObjectID>
-                <Name>testExisting_automation_clearNotifications</Name>                <!--only retrieved for cache-->
-                <CustomerKey>testExisting_automation_clearNotifications</CustomerKey>                <!--only retrieved for cache-->
+                <ObjectID>08afb0e2-b00a-4c88-ad2e-clearNotificationsAll</ObjectID>
+                <Name>testExisting_automation_clearNotificationsAll</Name>                <!--only retrieved for cache-->
+                <CustomerKey>testExisting_automation_clearNotificationsAll</CustomerKey>                <!--only retrieved for cache-->
             </Results>
+            <Results xsi:type="Program">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>08afb0e2-b00a-4c88-ad2e-clearNotificationsCompletionEmail</ObjectID>
+                <Name>testExisting_automation_clearNotificationsCompletionEmail</Name>                <!--only retrieved for cache-->
+                <CustomerKey>testExisting_automation_clearNotificationsCompletionEmail</CustomerKey>                <!--only retrieved for cache-->
+            </Results>
+            <Results xsi:type="Program">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>08afb0e2-b00a-4c88-ad2e-clearNotificationsErrorEmail</ObjectID>
+                <Name>testExisting_automation_clearNotificationsErrorEmail</Name>                <!--only retrieved for cache-->
+                <CustomerKey>testExisting_automation_clearNotificationsErrorEmail</CustomerKey>                <!--only retrieved for cache-->
+            </Results>
+             <Results xsi:type="Program">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>08afb0e2-b00a-4c88-ad2e-clearNotificationsNotes</ObjectID>
+                <Name>testExisting_automation_clearNotificationsNotes</Name>                <!-- only retrieved for cache  -->
+                <CustomerKey>testExisting_automation_clearNotificationsNotes</CustomerKey>             <!--   only retrieved for cache-->
+         </Results>
             <Results xsi:type="Program">
                 <PartnerKey xsi:nil="true" />
                 <ObjectID>08afb0e2-b00a-4c88-ad2e-updateNotifications_errorEmailErrorNote</ObjectID>
