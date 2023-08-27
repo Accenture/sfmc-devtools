@@ -3086,6 +3086,7 @@ ImportFile MetadataType
     * [.preDeployTasks(metadata)](#ImportFile.preDeployTasks) ⇒ <code>Promise</code>
     * [.getKeysToSetNotifications(metadataMap)](#ImportFile.getKeysToSetNotifications) ⇒ <code>Array.&lt;string&gt;</code>
     * [.parseMetadata(metadata)](#ImportFile.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#ImportFile.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
 
 <a name="ImportFile.retrieve"></a>
 
@@ -3196,6 +3197,22 @@ parses retrieved Metadata before saving
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single import definition |
+
+<a name="ImportFile.createOrUpdate"></a>
+
+### ImportFile.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
+helper for [upsert](#MetadataType.upsert)
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code> - action to take  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | list of metadata |
+| metadataKey | <code>string</code> | key of item we are looking at |
+| hasError | <code>boolean</code> | error flag from previous code |
+| metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
+| metadataToCreate | <code>Array.&lt;TYPE.MetadataTypeItem&gt;</code> | list of items to create |
 
 <a name="Journey"></a>
 
