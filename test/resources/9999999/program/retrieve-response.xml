@@ -125,6 +125,12 @@
             </Results>
             <Results xsi:type="Program">
                 <PartnerKey xsi:nil="true" />
+                <ObjectID>08afb0e2-b00a-4c88-ad2e-updateNotifications_completionNote</ObjectID>
+                <Name>testExisting_automation_updateNotifications_completionNote</Name>                <!--only retrieved for cache-->
+                <CustomerKey>testExisting_automation_updateNotifications_completionNote</CustomerKey>                <!--only retrieved for cache-->
+            </Results>
+            <Results xsi:type="Program">
+                <PartnerKey xsi:nil="true" />
                 <ObjectID>08afb0e2-b00a-4c88-ad2e-updateNotifications_completionEmailNoteErrorEmailNote</ObjectID>
                 <Name>testExisting_automation_updateNotifications_completionEmailNoteErrorEmailNote</Name>                <!--only retrieved for cache-->
                 <CustomerKey>testExisting_automation_updateNotifications_completionEmailNoteErrorEmailNote</CustomerKey>                <!--only retrieved for cache-->

@@ -1232,6 +1232,44 @@ describe('type: automation', () => {
             );
             return;
         });
+        it('Should update COMPLETION NOTE', async () => {
+            handler.setOptions({
+                completionNote: 'test',
+            });
+            const updatedNotifications = await handler.updateNotifications(
+                'testInstance/testBU',
+                'automation',
+                ['testExisting_automation_updateNotifications_completionNote']
+            );
+            assert.equal(
+                process.exitCode,
+                false,
+                'update notifications should not have thrown an error'
+            );
+            assert.equal(
+                updatedNotifications['testInstance/testBU'].length,
+                1,
+                'one automation expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    'testExisting_automation_updateNotifications_completionNote',
+                    'automation'
+                ),
+                await testUtils.getExpectedJson(
+                    '9999999',
+                    'automation',
+                    'updateNotifications_completionNote'
+                ),
+                'returned metadata was not equal expected for update'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                17,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
         it('Should update all NOTES and both ERROR EMAIL and COMPLETION EMAIL', async () => {
             handler.setOptions({ errorEmail: 'test@test.com', errorNote: 'test' });
             const updatedNotifications = await handler.updateNotifications(
