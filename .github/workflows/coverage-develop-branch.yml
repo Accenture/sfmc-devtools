@@ -1,0 +1,40 @@
+name: Test coverage for develop branch # default-branch.yml
+
+on:
+    push:
+        branches:
+            - develop
+
+permissions:
+    # allow dependabot to execute this workflow
+    pull-requests: write
+
+jobs:
+    hello_world_job:
+        runs-on: ubuntu-latest
+        name: Test and upload coverage
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                  ref: ${{ github.event.ref }}
+                  fetch-depth: 1000
+
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+
+            - run: npm ci --ignore-scripts
+
+            - name: Run mcdev-tests with coverage
+              run: npm run coverage
+
+            - name: Prepare for Report Coverage (mini)
+              run: |
+                  npx nyc report --reporter json-summary --exclude-after-remap false
+
+            - name: Upload coverage artifact
+              uses: actions/upload-artifact@v3
+              with:
+                  name: test-coverage-output
+                  path: coverage

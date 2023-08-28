@@ -1,14 +1,11 @@
 {
-    "name": "testExisting_temail",
-    "definitionKey": "testExisting_temail",
+    "name": "{{{prefix}}}temail",
+    "definitionKey": "{{{prefix}}}temail",
     "description": "{{{description}}}",
     "classification": "Default Transactional",
     "status": "Active",
-    "content": {
-        "customerKey": "testExisting_asset_message"
-    },
     "subscriptions": {
-        "dataExtension": "childBU_dataextension{{{suffix}}}",
+        "r__dataExtension_CustomerKey": "{{{prefix}}}dataExtension",
         "autoAddSubscriber": true,
         "updateSubscriber": true,
         "r__list_PathName": "my subscribers/All Subscribers"
@@ -16,7 +13,6 @@
     "options": {
         "trackLinks": true
     },
-    "journey": {
-        "interactionKey": "testExisting_interaction"
-    }
+    "r__asset_customerKey": "{{{prefix}}}asset_message",
+    "r__journey_key": "{{{prefix}}}interaction"
 }

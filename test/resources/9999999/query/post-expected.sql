@@ -1,4 +1,4 @@
 SELECT
-    SubscriberKey as testField
+    SubscriberKey AS testField
 FROM
-    _Subscribers 
+    _Subscribers

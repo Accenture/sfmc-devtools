@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:b9fbc10c-2775-48d0-b9bb-fddf1ed90616</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:11d44cfe-e1d7-4fc2-b6ad-a2c806573859</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-d8079cba-e093-43dc-9f6c-0e7d50ec95dd">
+                <wsu:Created>2023-03-11T13:52:52Z</wsu:Created>
+                <wsu:Expires>2023-03-11T13:57:52Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>f4057c93-40e3-47d6-a953-06839e221d40</RequestID>
+            <Results xsi:type="AccountUserAccount">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID xsi:nil="true" />
+                <AccountUser>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <AccountUserID>717510285</AccountUserID>
+                    <Delete>0</Delete>
+                </AccountUser>
+                <Account>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>1111111</ID>
+                    <ObjectID xsi:nil="true" />
+                    <AccountType>None</AccountType>
+                    <Subscription xsi:nil="true" />
+                </Account>
+            </Results>
+            <Results xsi:type="AccountUserAccount">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID xsi:nil="true" />
+                <AccountUser>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <AccountUserID>700301950</AccountUserID>
+                    <Delete>0</Delete>
+                </AccountUser>
+                <Account>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>1111111</ID>
+                    <ObjectID xsi:nil="true" />
+                    <AccountType>None</AccountType>
+                    <Subscription xsi:nil="true" />
+                </Account>
+            </Results>
+            <Results xsi:type="AccountUserAccount">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID xsi:nil="true" />
+                <AccountUser>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <AccountUserID>700301950</AccountUserID>
+                    <Delete>0</Delete>
+                </AccountUser>
+                <Account>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>9999999</ID>
+                    <ObjectID xsi:nil="true" />
+                    <AccountType>None</AccountType>
+                    <Subscription xsi:nil="true" />
+                </Account>
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>

@@ -1,0 +1,55 @@
+{
+    "CustomerKey": "testExisting_dataExtensionShared",
+    "DataRetentionPeriodLength": 6,
+    "DataRetentionPeriodUnitOfMeasure": 5,
+    "DeleteAtEndOfRetentionPeriod": false,
+    "Description": "bla bla",
+    "Fields": [
+        {
+            "DefaultValue": "",
+            "FieldType": "Text",
+            "IsPrimaryKey": false,
+            "IsRequired": false,
+            "MaxLength": 50,
+            "Name": "FirstName"
+        },
+        {
+            "DefaultValue": "",
+            "FieldType": "Text",
+            "IsPrimaryKey": false,
+            "IsRequired": false,
+            "MaxLength": 50,
+            "Name": "LastName"
+        },
+        {
+            "DefaultValue": "",
+            "FieldType": "EmailAddress",
+            "IsPrimaryKey": false,
+            "IsRequired": true,
+            "MaxLength": 254,
+            "Name": "EmailAddress"
+        },
+        {
+            "DefaultValue": "",
+            "FieldType": "Text",
+            "IsPrimaryKey": true,
+            "IsRequired": true,
+            "MaxLength": 50,
+            "Name": "ContactKey"
+        }
+    ],
+    "IsSendable": true,
+    "IsTestable": true,
+    "Name": "testExisting_dataExtensionShared",
+    "ResetRetentionPeriodOnImport": false,
+    "RetainUntil": "",
+    "RowBasedRetention": true,
+    "SendableDataExtensionField": {
+        "Name": "ContactKey"
+    },
+    "SendableSubscriberField": {
+        "Name": "Subscriber Key"
+    },
+    "r__folder_ContentType": "shared_dataextension",
+    "r__folder_Path": "Shared Items/Shared Data Extensions"
+}

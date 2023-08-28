@@ -153,6 +153,73 @@
                 <IsEditable>false</IsEditable>
                 <AllowChildren>true</AllowChildren>
             </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2017-02-16T01:59:32.323</CreatedDate>
+                <ModifiedDate>2017-02-16T01:59:32.323</ModifiedDate>
+                <ID>6298</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>journey_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>my journeys</Name>
+                <Description>The root folder for Journeys</Description>
+                <ContentType>journey</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2019-10-25T05:35:17.337</CreatedDate>
+                <ModifiedDate>2019-10-25T05:35:17.337</ModifiedDate>
+                <ID>290937</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey />
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>my automations</Name>
+                <Description />
+                <ContentType>automations</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>true</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2017-02-08T10:19:37.123</CreatedDate>
+                <ModifiedDate>2017-02-08T10:19:37.123</ModifiedDate>
+                <ID>386</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey />
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>2</ID>
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>dataextension_default</CustomerKey>
+                </ParentFolder>
+                <Name>Einstein</Name>
+                <Description />
+                <ContentType>dataextension</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>true</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
         </RetrieveResponseMsg>
     </soap:Body>
 </soap:Envelope>

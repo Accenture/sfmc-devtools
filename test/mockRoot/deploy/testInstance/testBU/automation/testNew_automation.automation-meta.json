@@ -1,0 +1,49 @@
+{
+    "description": "created on deploy",
+    "key": "testNew_automation",
+    "name": "testNew_automation",
+    "r__folder_Path": "my automations",
+    "schedule": {
+        "startDate": "2020-05-14T02:30:32.11",
+        "endDate": "2079-06-06T21:00:00",
+        "icalRecur": "FREQ=MINUTELY;UNTIL=20790607T050000;INTERVAL=5",
+        "timezoneName": "W. Europe Standard Time"
+    },
+    "status": "Scheduled",
+    "steps": [
+        {
+            "activities": [
+                {
+                    "name": "testExisting_dataExtract",
+                    "r__type": "dataExtract"
+                },
+                {
+                    "name": "testExisting_emailSend",
+                    "r__type": "emailSend"
+                },
+                {
+                    "name": "testExisting_fileTransfer",
+                    "r__type": "fileTransfer"
+                },
+                {
+                    "name": "testExisting_importFile",
+                    "r__type": "importFile"
+                },
+                {
+                    "name": "testExisting_query",
+                    "r__type": "query"
+                },
+                {
+                    "name": "testExisting_script",
+                    "r__type": "script"
+                },
+                {
+                    "name": "testNew_39f6a488-20eb-4ba0-b0b9",
+                    "r__type": "verification"
+                }
+            ],
+            "name": ""
+        }
+    ],
+    "type": "scheduled"
+}

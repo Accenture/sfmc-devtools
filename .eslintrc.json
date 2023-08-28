@@ -1,8 +1,7 @@
 {
     "env": {
         "es6": true,
-        "node": true,
-        "mocha": true
+        "node": true
     },
     "extends": [
         "eslint:recommended",
@@ -42,6 +41,7 @@
         }
     },
     "rules": {
+        "logical-assignment-operators": ["error", "always"],
         "unicorn/better-regex": "off",
         "unicorn/catch-error-name": [
             "error",
@@ -65,7 +65,7 @@
         "unicorn/prefer-array-some": "off",
         "unicorn/prefer-set-has": "off",
         "unicorn/prefer-spread": "off",
-        "unicorn/unicorn/no-lonely-if": "off",
+        "unicorn/prefer-string-replace-all": "error",
         "arrow-body-style": ["error", "as-needed"],
         "curly": "error",
         "no-console": "error",
@@ -82,6 +82,8 @@
                 }
             }
         ],
+        "jsdoc/require-param-type": "error",
+        "jsdoc/tag-lines": ["warn", "any", { "startLines": 1 }],
         "spaced-comment": ["warn", "always", { "block": { "exceptions": ["*"], "balanced": true } }]
     },
     "overrides": [
@@ -100,7 +102,8 @@
             "extends": ["plugin:mocha/recommended"],
             "plugins": ["mocha"],
             "rules": {
-                "mocha/no-mocha-arrows": "off"
+                "mocha/no-mocha-arrows": "off",
+                "mocha/no-pending-tests": "off"
             }
         }
     ]
