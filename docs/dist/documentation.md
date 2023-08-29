@@ -2951,17 +2951,16 @@ FilterDefinition MetadataType
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
 
 * [FilterDefinition](#FilterDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
-    * [.retrieve(retrieveDir)](#FilterDefinition.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.FilterDefinitionMap, type: string}&gt;</code>
+    * [.retrieve(retrieveDir, [_], [__], [key])](#FilterDefinition.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.FilterDefinitionMap, type: string}&gt;</code>
     * [.retrieveForCache()](#FilterDefinition.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.FilterDefinitionMap, type: string}&gt;</code>
-    * [.postRetrieveTasks(item)](#FilterDefinition.postRetrieveTasks) ⇒ <code>TYPE.FilterDefinitionItem</code>
-    * [.parseMetadata(metadata)](#FilterDefinition.parseMetadata) ⇒ <code>TYPE.FilterDefinitionItem</code>
+    * [.postRetrieveTasks(metadata)](#FilterDefinition.postRetrieveTasks) ⇒ <code>TYPE.FilterDefinitionItem</code>
     * [.preDeployTasks(metadata)](#FilterDefinition.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.FilterDefinitionItem&gt;</code>
     * [.create(metadata)](#FilterDefinition.create) ⇒ <code>Promise.&lt;TYPE.FilterDefinitionItem&gt;</code>
     * [.update(metadata)](#FilterDefinition.update) ⇒ <code>Promise.&lt;TYPE.FilterDefinitionItem&gt;</code>
 
 <a name="FilterDefinition.retrieve"></a>
 
-### FilterDefinition.retrieve(retrieveDir) ⇒ <code>Promise.&lt;{metadata: TYPE.FilterDefinitionMap, type: string}&gt;</code>
+### FilterDefinition.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;{metadata: TYPE.FilterDefinitionMap, type: string}&gt;</code>
 Retrieves all records and saves it to disk
 
 **Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
@@ -2970,6 +2969,9 @@ Retrieves all records and saves it to disk
 | Param | Type | Description |
 | --- | --- | --- |
 | retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [_] | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| [key] | <code>string</code> | customer key of single item to retrieve |
 
 <a name="FilterDefinition.retrieveForCache"></a>
 
@@ -2980,19 +2982,7 @@ Retrieves all records for caching
 **Returns**: <code>Promise.&lt;{metadata: TYPE.FilterDefinitionMap, type: string}&gt;</code> - Promise of items  
 <a name="FilterDefinition.postRetrieveTasks"></a>
 
-### FilterDefinition.postRetrieveTasks(item) ⇒ <code>TYPE.FilterDefinitionItem</code>
-manages post retrieve steps
-
-**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
-**Returns**: <code>TYPE.FilterDefinitionItem</code> - parsed metadata definition  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| item | <code>TYPE.FilterDefinitionItem</code> | a single record |
-
-<a name="FilterDefinition.parseMetadata"></a>
-
-### FilterDefinition.parseMetadata(metadata) ⇒ <code>TYPE.FilterDefinitionItem</code>
+### FilterDefinition.postRetrieveTasks(metadata) ⇒ <code>TYPE.FilterDefinitionItem</code>
 parses retrieved Metadata before saving
 
 **Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
