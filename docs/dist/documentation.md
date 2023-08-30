@@ -198,7 +198,13 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Mcdev.">Mcdev.(cred, bu, type, [keyArr])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
 <dd><p>Updates the key to match the name field</p>
 </dd>
-<dt><a href="#Mcdev.">Mcdev.(type, [keyArr], buObject)</a> ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code></dt>
+<dt><a href="#Mcdev.">Mcdev.(cred, bu, type, [keyArr], methodName)</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
+<dd><p>A function to retrieve, update and deploy items</p>
+</dd>
+<dt><a href="#Mcdev.">Mcdev.(type, metadataMap, methodName)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
+<dd><p>helper function to get keys of items to update</p>
+</dd>
+<dt><a href="#Mcdev.">Mcdev.(cred, bu, type, [keyArr])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
 <dd><p>Updates notification email address field</p>
 </dd>
 <dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>boolean</code></dt>
@@ -8650,17 +8656,48 @@ Updates the key to match the name field
 
 <a name="Mcdev."></a>
 
-## Mcdev.(type, [keyArr], buObject) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
-Updates notification email address field
+## Mcdev.(cred, bu, type, [keyArr], methodName) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+A function to retrieve, update and deploy items
 
 **Kind**: global function  
-**Returns**: <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code> - key: business unit name, value: list of affected item keys  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - list of keys that were affected  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cred | <code>string</code> | name of Credential |
+| bu | <code>string</code> | name of BU |
+| type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| [keyArr] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+| methodName | <code>string</code> | name of the function to execute |
+
+<a name="Mcdev."></a>
+
+## Mcdev.(type, metadataMap, methodName) ⇒ <code>Array.&lt;string&gt;</code>
+helper function to get keys of items to update
+
+**Kind**: global function  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of keys  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
+| methodName | <code>string</code> | name of the method to execute |
+
+<a name="Mcdev."></a>
+
+## Mcdev.(cred, bu, type, [keyArr]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+Updates notification email address field
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - list of keys that were affected  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cred | <code>string</code> | name of Credential |
+| bu | <code>string</code> | name of BU |
+| type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
 | [keyArr] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
-| buObject | <code>TYPE.BuObject</code> | properties for auth |
 
 <a name="Automation."></a>
 
