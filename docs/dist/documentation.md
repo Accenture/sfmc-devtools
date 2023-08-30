@@ -6714,7 +6714,7 @@ CLI helper class
 * [Cli](#Cli)
     * [.initMcdevConfig()](#Cli.initMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.addExtraCredential(properties)](#Cli.addExtraCredential) ⇒ <code>Promise.&lt;(boolean\|string)&gt;</code>
-    * [.updateNotificationEmails(type)](#Cli.updateNotificationEmails) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [.updateNotificationEmails(noteType)](#Cli.updateNotificationEmails) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.postFixKeysReretrieve(type, dependentTypes)](#Cli.postFixKeysReretrieve) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.logExistingCredentials(properties)](#Cli.logExistingCredentials) ⇒ <code>void</code>
     * [.updateCredential(properties, credName)](#Cli.updateCredential) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -6748,7 +6748,7 @@ Extends template file for properties.json
 
 <a name="Cli.updateNotificationEmails"></a>
 
-### Cli.updateNotificationEmails(type) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+### Cli.updateNotificationEmails(noteType) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 interactive helper to set automation run completion/error note
 
 **Kind**: static method of [<code>Cli</code>](#Cli)  
@@ -6756,7 +6756,7 @@ interactive helper to set automation run completion/error note
 
 | Param | Type | Description |
 | --- | --- | --- |
-| type | <code>TYPE.SupportedMetadataTypes</code> | note type (error/completion) |
+| noteType | <code>TYPE.SupportedMetadataTypes</code> | note type (error/completion) |
 
 <a name="Cli.postFixKeysReretrieve"></a>
 
