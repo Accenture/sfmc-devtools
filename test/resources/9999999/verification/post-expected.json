@@ -6,6 +6,6 @@
     "value2": 0,
     "shouldStopOnFailure": false,
     "shouldEmailOnFailure": false,
-    "notificationEmailAddress": "",
+    "notificationEmailAddress": [""],
     "notificationEmailMessage": ""
 }
