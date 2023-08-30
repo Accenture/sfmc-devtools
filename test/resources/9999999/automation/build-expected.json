@@ -36,6 +36,10 @@
                 {
                     "name": "testTemplated_script",
                     "r__type": "script"
+                },
+                {
+                    "name": "testTemplated_39f6a488-20eb-4ba0-b0b9",
+                    "r__type": "verification"
                 }
             ],
             "name": ""

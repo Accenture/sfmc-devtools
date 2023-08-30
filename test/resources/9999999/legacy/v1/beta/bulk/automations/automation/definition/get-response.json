@@ -10,7 +10,7 @@
             "name": "testExisting_automation",
             "description": "bla bla",
             "clientId": 9999999,
-            "status": "Building",
+            "status": "Scheduled",
             "createdBy": {
                 "id": "NzE3MzUzNDA1OjQ6MA",
                 "name": "Tom Tester",

@@ -343,7 +343,7 @@ describe('type: dataExtension', () => {
     describe('Delete ================', () => {
         it('Should delete the dataExtension', async () => {
             // WHEN
-            const result = await handler.deleteByKey(
+            const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'dataExtension',
                 'testExisting_dataExtension'
@@ -351,12 +351,12 @@ describe('type: dataExtension', () => {
             // THEN
             assert.equal(process.exitCode, false, 'delete should not have thrown an error');
 
-            assert.equal(result, true, 'should have deleted the item');
+            assert.equal(isDeleted, true, 'should have deleted the item');
             return;
         });
         it('Should delete the dataExtensionField', async () => {
             // WHEN
-            const result = await handler.deleteByKey(
+            const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'dataExtensionField',
                 'testExisting_dataExtension.LastName'
@@ -364,7 +364,7 @@ describe('type: dataExtension', () => {
             // THEN
             assert.equal(process.exitCode, false, 'delete should not have thrown an error');
 
-            assert.equal(result, true, 'should have deleted the item');
+            assert.equal(isDeleted, true, 'should have deleted the item');
             return;
         });
     });

@@ -172,14 +172,21 @@ describe('type: dataExtract', () => {
     describe('Delete ================', () => {
         it('Should NOT delete the item', async () => {
             // WHEN
-            await handler.deleteByKey('testInstance/testBU', 'dataExtract', [
-                'testExisting_fileTranfer',
-            ]);
+            const isDeleted = await handler.deleteByKey(
+                'testInstance/testBU',
+                'dataExtract',
+                'testExisting_fileTranfer'
+            );
             // THEN
             assert.equal(
                 process.exitCode,
                 1,
                 'deleteByKey should have thrown an error due to lack of support'
+            );
+            assert.equal(
+                isDeleted,
+                false,
+                'deleteByKey should have returned false due to lack of support'
             );
             return;
         });
