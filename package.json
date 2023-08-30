@@ -83,9 +83,9 @@
     "devDependencies": {
         "assert": "2.0.0",
         "axios-mock-adapter": "1.21.5",
-        "chai": "4.3.7",
+        "chai": "4.3.8",
         "chai-files": "1.4.0",
-        "eslint": "8.47.0",
+        "eslint": "8.48.0",
         "eslint-config-prettier": "9.0.0",
         "eslint-config-ssjs": "1.1.11",
         "eslint-plugin-jsdoc": "46.5.0",
