@@ -70,6 +70,9 @@ as this is a configuration in the EID</p>
 <dt><a href="#FilterDefinition">FilterDefinition</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>FilterDefinition MetadataType</p>
 </dd>
+<dt><a href="#FilterDefinitionHidden">FilterDefinitionHidden</a> ⇐ <code><a href="#FilterDefinitionHidden">FilterDefinitionHidden</a></code></dt>
+<dd><p>FilterDefinitionHidden MetadataType</p>
+</dd>
 <dt><a href="#Folder">Folder</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>Folder MetadataType</p>
 </dd>
@@ -2884,8 +2887,7 @@ Filter MetadataType
 
 * [Filter](#Filter) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#Filter.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.FilterMap, type: string}&gt;</code>
-    * [.postRetrieveTasks(item)](#Filter.postRetrieveTasks) ⇒ <code>TYPE.FilterItem</code>
-    * [.parseMetadata(metadata)](#Filter.parseMetadata) ⇒ <code>TYPE.FilterItem</code>
+    * [.postRetrieveTasks(metadata)](#Filter.postRetrieveTasks) ⇒ <code>TYPE.FilterItem</code>
     * [.preDeployTasks(metadata)](#Filter.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.FilterItem&gt;</code>
 
 <a name="Filter.retrieve"></a>
@@ -2908,19 +2910,7 @@ Filters with the endpoint /automation/v1/filters/{id}
 
 <a name="Filter.postRetrieveTasks"></a>
 
-### Filter.postRetrieveTasks(item) ⇒ <code>TYPE.FilterItem</code>
-manages post retrieve steps
-
-**Kind**: static method of [<code>Filter</code>](#Filter)  
-**Returns**: <code>TYPE.FilterItem</code> - parsed metadata definition  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| item | <code>TYPE.FilterItem</code> | a single record |
-
-<a name="Filter.parseMetadata"></a>
-
-### Filter.parseMetadata(metadata) ⇒ <code>TYPE.FilterItem</code>
+### Filter.postRetrieveTasks(metadata) ⇒ <code>TYPE.FilterItem</code>
 parses retrieved Metadata before saving
 
 **Kind**: static method of [<code>Filter</code>](#Filter)  
@@ -2952,8 +2942,15 @@ FilterDefinition MetadataType
 
 * [FilterDefinition](#FilterDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#FilterDefinition.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.FilterDefinitionMap, type: string}&gt;</code>
+    * [.getFilterFolderIds([hidden])](#FilterDefinition.getFilterFolderIds) ⇒ <code>Array.&lt;number&gt;</code>
+    * [.getMeasureFolderIds()](#FilterDefinition.getMeasureFolderIds) ⇒ <code>Array.&lt;number&gt;</code>
+    * [.cacheDeFields(metadataTypeMapObj)](#FilterDefinition.cacheDeFields)
+    * [.cacheContactAttributes(metadataTypeMapObj)](#FilterDefinition.cacheContactAttributes)
+    * [.cacheMeasures(metadataTypeMapObj)](#FilterDefinition.cacheMeasures)
     * [.retrieveForCache()](#FilterDefinition.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.FilterDefinitionMap, type: string}&gt;</code>
     * [.postRetrieveTasks(metadata)](#FilterDefinition.postRetrieveTasks) ⇒ <code>TYPE.FilterDefinitionItem</code>
+    * [.resolveFieldIds(metadata, [fieldCache], [filter])](#FilterDefinition.resolveFieldIds) ⇒ <code>void</code>
+    * [.resolveAttributeIds(metadata, [filter])](#FilterDefinition.resolveAttributeIds) ⇒ <code>void</code>
     * [.preDeployTasks(metadata)](#FilterDefinition.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.FilterDefinitionItem&gt;</code>
     * [.create(metadata)](#FilterDefinition.create) ⇒ <code>Promise.&lt;TYPE.FilterDefinitionItem&gt;</code>
     * [.update(metadata)](#FilterDefinition.update) ⇒ <code>Promise.&lt;TYPE.FilterDefinitionItem&gt;</code>
@@ -2973,6 +2970,52 @@ Retrieves all records and saves it to disk
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
+<a name="FilterDefinition.getFilterFolderIds"></a>
+
+### FilterDefinition.getFilterFolderIds([hidden]) ⇒ <code>Array.&lt;number&gt;</code>
+helper for [retrieve](#FilterDefinition.retrieve)
+
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+**Returns**: <code>Array.&lt;number&gt;</code> - Array of folder IDs  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [hidden] | <code>boolean</code> | <code>false</code> | used to filter out hidden or non-hidden filterDefinitions |
+
+<a name="FilterDefinition.getMeasureFolderIds"></a>
+
+### FilterDefinition.getMeasureFolderIds() ⇒ <code>Array.&lt;number&gt;</code>
+helper for [retrieve](#FilterDefinition.retrieve)
+
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+**Returns**: <code>Array.&lt;number&gt;</code> - Array of folder IDs  
+<a name="FilterDefinition.cacheDeFields"></a>
+
+### FilterDefinition.cacheDeFields(metadataTypeMapObj)
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataTypeMapObj | <code>TYPE.MultiMetadataTypeMap</code> | - |
+
+<a name="FilterDefinition.cacheContactAttributes"></a>
+
+### FilterDefinition.cacheContactAttributes(metadataTypeMapObj)
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataTypeMapObj | <code>TYPE.MultiMetadataTypeMap</code> | - |
+
+<a name="FilterDefinition.cacheMeasures"></a>
+
+### FilterDefinition.cacheMeasures(metadataTypeMapObj)
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataTypeMapObj | <code>TYPE.MultiMetadataTypeMap</code> | - |
+
 <a name="FilterDefinition.retrieveForCache"></a>
 
 ### FilterDefinition.retrieveForCache() ⇒ <code>Promise.&lt;{metadata: TYPE.FilterDefinitionMap, type: string}&gt;</code>
@@ -2991,6 +3034,27 @@ parses retrieved Metadata before saving
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.FilterDefinitionItem</code> | a single record |
+
+<a name="FilterDefinition.resolveFieldIds"></a>
+
+### FilterDefinition.resolveFieldIds(metadata, [fieldCache], [filter]) ⇒ <code>void</code>
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.FilterDefinitionItem</code> | - |
+| [fieldCache] | <code>Array.&lt;object&gt;</code> | - |
+| [filter] | <code>object</code> | - |
+
+<a name="FilterDefinition.resolveAttributeIds"></a>
+
+### FilterDefinition.resolveAttributeIds(metadata, [filter]) ⇒ <code>void</code>
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.FilterDefinitionItem</code> | - |
+| [filter] | <code>object</code> | - |
 
 <a name="FilterDefinition.preDeployTasks"></a>
 
@@ -3028,6 +3092,20 @@ Updates a single item
 | --- | --- | --- |
 | metadata | <code>TYPE.FilterDefinitionItem</code> | a single item |
 
+<a name="FilterDefinitionHidden"></a>
+
+## FilterDefinitionHidden ⇐ [<code>FilterDefinitionHidden</code>](#FilterDefinitionHidden)
+FilterDefinitionHidden MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>FilterDefinitionHidden</code>](#FilterDefinitionHidden)  
+<a name="FilterDefinitionHidden.getFilterFolderIds"></a>
+
+### FilterDefinitionHidden.getFilterFolderIds() ⇒ <code>Array.&lt;number&gt;</code>
+helper for [retrieve](#FilterDefinition.retrieve)
+
+**Kind**: static method of [<code>FilterDefinitionHidden</code>](#FilterDefinitionHidden)  
+**Returns**: <code>Array.&lt;number&gt;</code> - Array of folder IDs  
 <a name="Folder"></a>
 
 ## Folder ⇐ [<code>MetadataType</code>](#MetadataType)
