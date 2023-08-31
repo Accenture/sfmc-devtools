@@ -1,748 +1,143 @@
 {
-    "applicationID": "e25893f9-08f3-480f-8def-7f8ab0583611",
-    "applicationKey": "com.exacttarget.mobileconnect",
     "attributeCount": 0,
-    "canAddValues": false,
-    "canChangeValues": false,
-    "canModify": false,
-    "canRemove": false,
-    "createDate": "2017-01-24T06:33:00",
-    "createdBy": -1000,
+    "canAddValues": true,
+    "canChangeValues": true,
+    "canModify": true,
+    "canRemove": true,
+    "createDate": "2023-08-11T08:22:00",
+    "createdBy": 700301950,
     "dataRetentionProperties": {
         "isDeleteAtEndOfRetentionPeriod": false,
         "isResetRetentionPeriodOnImport": false,
-        "isRowBasedRetention": false,
-        "setDefinitionID": "3152de3f-31e2-e611-80cc-1402ec7222b4"
+        "isRowBasedRetention": true,
+        "periodLength": 6,
+        "periodUnitOfMeasure": 5
     },
-    "definitionKey": "MobileSubscriptions",
+    "definitionKey": "testExisting_dataExtensionShared",
     "isCustomObjectBacked": true,
     "isEvent": false,
     "isHidden": false,
     "isReadOnly": false,
     "isRoot": false,
-    "isSendable": false,
-    "isShared": false,
-    "isSystemDefined": true,
-    "isTestaable": false,
-    "localizedDescription": {},
-    "name": "MobileConnect Subscriptions",
-    "parentID": "00000000-0000-0000-0000-000000000000",
-    "r__folder_Path": "Data Extensions",
-    "relationshipCount": 0,
-    "setDefinitionID": "3152de3f-31e2-e611-80cc-1402ec7222b4",
-    "setDefinitionKey": "MobileSubscriptions",
-    "storageLogicalType": "DataExtension",
-    "storageName": "_MobileSubscription",
-    "storageObjectIDs": ["2252de3f-31e2-e611-80cc-1402ec7222b4"],
-    "storageReferenceID": {
-        "type": "guid",
-        "value": "7793dc39-31e2-e611-80cc-1402ec7222b4"
+    "isSendable": true,
+    "isShared": true,
+    "isSystemDefined": false,
+    "isTestaable": true,
+    "localizedDescription": {
+        "value": "Container for my test emails"
     },
+    "name": "testExisting_dataExtensionShared",
+    "parentID": "00000000-0000-0000-0000-000000000000",
+    "r__dataExtension_CustomerKey": "testExisting_dataExtensionShared",
+    "r__folder_Path": "Shared Items/Shared Data Extensions",
+    "relationshipCount": 1,
+    "relationships": [
+        {
+            "canModify": true,
+            "canRemove": true,
+            "isGroupToSetRelationship": true,
+            "isHidden": false,
+            "isSystemDefined": false,
+            "leftItem": {
+                "cardinality": "One",
+                "r__attributeGroup_definitionKey": "testExisting_attributeGroup",
+                "relationshipType": "AttributeGroup"
+            },
+            "leftRelationshipIDs": [
+                {
+                    "type": "int16",
+                    "value": "3"
+                }
+            ],
+            "leftRelationshipReferenceType": "CustomerData",
+            "relationshipAttributes": [
+                {
+                    "c__leftFullyQualifiedName": "Contact.Contact Key",
+                    "c__rightFullyQualifiedName": "testExisting_dataExtensionShared.ContactKey"
+                }
+            ],
+            "relationshipID": "598b787a-5238-ee11-b85a-48df37d1de8a",
+            "rightItem": {
+                "cardinality": "One",
+                "r__attributeSet_definitionKey": "testExisting_dataExtensionShared",
+                "relationshipType": "AttributeSet"
+            }
+        }
+    ],
+    "sendAttributeStorageName": "ContactKey",
+    "sendContactKeyStorageName": "_SubscriberKey",
+    "setDefinitionKey": "testExisting_dataExtensionShared",
+    "storageLogicalType": "DataExtension",
+    "storageObjectIDs": ["5b8b787a-5238-ee11-b85a-48df37d1de8a"],
     "valueDefinitions": [
         {
-            "baseType": "Numeric",
-            "connectingID": {
-                "identifierType": "FullyQualifiedName"
-            },
-            "dataSourceID": 3,
-            "dataSourceName": {},
             "dataType": "LongNumber",
-            "definitionID": "3252de3f-31e2-e611-80cc-1402ec7222b4",
-            "definitionKey": "CreatedBy",
-            "definitionName": {
-                "value": "Created By"
-            },
+            "definitionKey": "CustomObjectKey",
             "description": "",
-            "displayOrder": 1,
-            "fullyQualifiedName": "MobileConnect Subscriptions.Created By",
-            "isHidden": true,
-            "isIdentityValue": false,
-            "isNullable": true,
-            "isPrimaryKey": false,
-            "isReadOnly": true,
-            "isSystemDefined": true,
-            "isUpdateable": false,
-            "localizedDescription": {
-                "value": ""
-            },
-            "name": "Created By",
-            "obfuscationProperties": {
-                "maskType": "None",
-                "maskTypeID": 0,
-                "storageType": "Plain",
-                "storageTypeID": 1,
-                "valueDefinitionID": "3252de3f-31e2-e611-80cc-1402ec7222b4"
-            },
-            "ordinal": 1,
-            "parentType": "Set",
-            "setDefinitionName": {
-                "value": "MobileConnect Subscriptions"
-            },
-            "storageFieldReferenceID": {
-                "type": "guid",
-                "value": "a64a3ed9-b8fd-46cc-a10b-1d5fdf074ce6"
-            },
-            "storageName": "_CreatedBy",
-            "valueDefinitionID": "3252de3f-31e2-e611-80cc-1402ec7222b4",
-            "valueDefinitionKey": "CreatedBy"
-        },
-        {
-            "baseType": "Date",
-            "connectingID": {
-                "identifierType": "FullyQualifiedName"
-            },
-            "dataSourceID": 3,
-            "dataSourceName": {},
-            "dataType": "Date",
-            "defaultValue": "GETDATE()",
-            "definitionID": "3352de3f-31e2-e611-80cc-1402ec7222b4",
-            "definitionKey": "CreatedDate",
-            "definitionName": {
-                "value": "Created Date"
-            },
-            "description": "",
-            "displayOrder": 2,
-            "fullyQualifiedName": "MobileConnect Subscriptions.Created Date",
-            "isHidden": false,
-            "isIdentityValue": false,
-            "isNullable": false,
-            "isPrimaryKey": false,
-            "isReadOnly": true,
-            "isSystemDefined": true,
-            "isUpdateable": false,
-            "localizedDescription": {
-                "value": ""
-            },
-            "name": "Created Date",
-            "obfuscationProperties": {
-                "maskType": "None",
-                "maskTypeID": 0,
-                "storageType": "Plain",
-                "storageTypeID": 1,
-                "valueDefinitionID": "3352de3f-31e2-e611-80cc-1402ec7222b4"
-            },
-            "ordinal": 2,
-            "parentType": "Set",
-            "setDefinitionName": {
-                "value": "MobileConnect Subscriptions"
-            },
-            "storageFieldReferenceID": {
-                "type": "guid",
-                "value": "dfc3f6fb-a250-4ef8-93ed-bb079ced468d"
-            },
-            "storageName": "_CreatedDate",
-            "valueDefinitionID": "3352de3f-31e2-e611-80cc-1402ec7222b4",
-            "valueDefinitionKey": "CreatedDate"
-        },
-        {
-            "baseType": "Text",
-            "connectingID": {
-                "identifierType": "FullyQualifiedName"
-            },
-            "dataSourceID": 3,
-            "dataSourceName": {},
-            "dataType": "Text",
-            "definitionID": "3f52de3f-31e2-e611-80cc-1402ec7222b4",
-            "definitionKey": "SubscriptionDefinitionID",
-            "definitionName": {
-                "value": "Keyword"
-            },
-            "description": "",
-            "displayOrder": 3,
-            "fullyQualifiedName": "MobileConnect Subscriptions.Keyword",
-            "isHidden": false,
-            "isIdentityValue": false,
-            "isNullable": false,
-            "isPrimaryKey": true,
-            "isReadOnly": false,
-            "isSystemDefined": true,
-            "isUpdateable": false,
-            "length": 200,
-            "localizedDescription": {
-                "value": ""
-            },
-            "name": "Keyword",
-            "obfuscationProperties": {
-                "maskType": "None",
-                "maskTypeID": 0,
-                "storageType": "Plain",
-                "storageTypeID": 1,
-                "valueDefinitionID": "3f52de3f-31e2-e611-80cc-1402ec7222b4"
-            },
-            "ordinal": 3,
-            "parentType": "Set",
-            "restrictionLookupListID": 7,
-            "setDefinitionName": {
-                "value": "MobileConnect Subscriptions"
-            },
-            "storageFieldReferenceID": {
-                "type": "guid",
-                "value": "c13ab46d-6e65-475a-990d-291bd43e5063"
-            },
-            "storageName": "_SubscriptionDefinitionID",
-            "valueDefinitionID": "3f52de3f-31e2-e611-80cc-1402ec7222b4",
-            "valueDefinitionKey": "SubscriptionDefinitionID"
-        },
-        {
-            "baseType": "Text",
-            "connectingID": {
-                "identifierType": "FullyQualifiedName"
-            },
-            "dataSourceID": 3,
-            "dataSourceName": {},
-            "dataType": "Phone",
-            "definitionID": "3452de3f-31e2-e611-80cc-1402ec7222b4",
-            "definitionKey": "MobileNumber",
-            "definitionName": {
-                "value": "Mobile Number"
-            },
-            "description": "",
-            "displayOrder": 4,
-            "fullyQualifiedName": "MobileConnect Subscriptions.Mobile Number",
-            "isHidden": false,
-            "isIdentityValue": false,
-            "isNullable": false,
-            "isPrimaryKey": true,
-            "isReadOnly": true,
-            "isSystemDefined": true,
-            "isUpdateable": false,
-            "length": 15,
-            "localizedDescription": {
-                "value": ""
-            },
-            "name": "Mobile Number",
-            "obfuscationProperties": {
-                "maskType": "None",
-                "maskTypeID": 0,
-                "storageType": "Plain",
-                "storageTypeID": 1,
-                "valueDefinitionID": "3452de3f-31e2-e611-80cc-1402ec7222b4"
-            },
-            "ordinal": 4,
-            "parentType": "Set",
-            "setDefinitionName": {
-                "value": "MobileConnect Subscriptions"
-            },
-            "storageFieldReferenceID": {
-                "type": "guid",
-                "value": "ead8a6d2-bc6c-4768-a6e3-c3cc749bfc1d"
-            },
-            "storageName": "_MobileNumber",
-            "valueDefinitionID": "3452de3f-31e2-e611-80cc-1402ec7222b4",
-            "valueDefinitionKey": "MobileNumber"
-        },
-        {
-            "baseType": "Numeric",
-            "connectingID": {
-                "identifierType": "FullyQualifiedName"
-            },
-            "dataSourceID": 3,
-            "dataSourceName": {},
-            "dataType": "LongNumber",
-            "definitionID": "53dd5f89-bca1-ed11-b852-48df37d1df5b",
-            "definitionKey": "MobileSubscriptionID",
-            "definitionName": {
-                "value": "Mobile Subscription ID"
-            },
-            "description": "",
-            "displayOrder": 5,
-            "fullyQualifiedName": "MobileConnect Subscriptions.Mobile Subscription ID",
             "isHidden": true,
             "isIdentityValue": true,
             "isNullable": false,
             "isPrimaryKey": false,
             "isReadOnly": true,
             "isSystemDefined": true,
-            "isUpdateable": false,
-            "localizedDescription": {
-                "value": ""
-            },
-            "name": "Mobile Subscription ID",
-            "ordinal": 5,
-            "parentType": "Set",
-            "setDefinitionName": {
-                "value": "MobileConnect Subscriptions"
-            },
-            "storageName": "_MobileSubscriptionID",
-            "valueDefinitionID": "53dd5f89-bca1-ed11-b852-48df37d1df5b",
-            "valueDefinitionKey": "MobileSubscriptionID"
+            "isUpdateable": true,
+            "name": "Custom Object Key"
         },
         {
-            "baseType": "Numeric",
-            "connectingID": {
-                "identifierType": "FullyQualifiedName"
-            },
-            "dataSourceID": 3,
-            "dataSourceName": {},
-            "dataType": "LongNumber",
-            "definitionID": "3552de3f-31e2-e611-80cc-1402ec7222b4",
-            "definitionKey": "ModifiedBy",
-            "definitionName": {
-                "value": "Modified By"
-            },
-            "description": "",
-            "displayOrder": 6,
-            "fullyQualifiedName": "MobileConnect Subscriptions.Modified By",
-            "isHidden": true,
-            "isIdentityValue": false,
-            "isNullable": true,
-            "isPrimaryKey": false,
-            "isReadOnly": true,
-            "isSystemDefined": true,
-            "isUpdateable": false,
-            "localizedDescription": {
-                "value": ""
-            },
-            "name": "Modified By",
-            "obfuscationProperties": {
-                "maskType": "None",
-                "maskTypeID": 0,
-                "storageType": "Plain",
-                "storageTypeID": 1,
-                "valueDefinitionID": "3552de3f-31e2-e611-80cc-1402ec7222b4"
-            },
-            "ordinal": 6,
-            "parentType": "Set",
-            "setDefinitionName": {
-                "value": "MobileConnect Subscriptions"
-            },
-            "storageFieldReferenceID": {
-                "type": "guid",
-                "value": "30d7ec39-85d1-46dc-9888-771f11ffe10d"
-            },
-            "storageName": "_ModifiedBy",
-            "valueDefinitionID": "3552de3f-31e2-e611-80cc-1402ec7222b4",
-            "valueDefinitionKey": "ModifiedBy"
-        },
-        {
-            "baseType": "Date",
-            "connectingID": {
-                "identifierType": "FullyQualifiedName"
-            },
-            "dataSourceID": 3,
-            "dataSourceName": {},
-            "dataType": "Date",
-            "defaultValue": "GETDATE()",
-            "definitionID": "3652de3f-31e2-e611-80cc-1402ec7222b4",
-            "definitionKey": "ModifiedDate",
-            "definitionName": {
-                "value": "Modified Date"
-            },
-            "description": "",
-            "displayOrder": 7,
-            "fullyQualifiedName": "MobileConnect Subscriptions.Modified Date",
-            "isHidden": false,
-            "isIdentityValue": false,
-            "isNullable": false,
-            "isPrimaryKey": false,
-            "isReadOnly": true,
-            "isSystemDefined": true,
-            "isUpdateable": false,
-            "localizedDescription": {
-                "value": ""
-            },
-            "name": "Modified Date",
-            "obfuscationProperties": {
-                "maskType": "None",
-                "maskTypeID": 0,
-                "storageType": "Plain",
-                "storageTypeID": 1,
-                "valueDefinitionID": "3652de3f-31e2-e611-80cc-1402ec7222b4"
-            },
-            "ordinal": 7,
-            "parentType": "Set",
-            "setDefinitionName": {
-                "value": "MobileConnect Subscriptions"
-            },
-            "storageFieldReferenceID": {
-                "type": "guid",
-                "value": "b68155cc-e483-4949-82f9-fb47cbd59764"
-            },
-            "storageName": "_ModifiedDate",
-            "valueDefinitionID": "3652de3f-31e2-e611-80cc-1402ec7222b4",
-            "valueDefinitionKey": "ModifiedDate"
-        },
-        {
-            "baseType": "Date",
-            "connectingID": {
-                "identifierType": "FullyQualifiedName"
-            },
-            "dataSourceID": 3,
-            "dataSourceName": {},
-            "dataType": "Date",
-            "definitionID": "3752de3f-31e2-e611-80cc-1402ec7222b4",
-            "definitionKey": "OptInDate",
-            "definitionName": {
-                "value": "Opt In Date"
-            },
-            "description": "",
-            "displayOrder": 8,
-            "fullyQualifiedName": "MobileConnect Subscriptions.Opt In Date",
-            "isHidden": false,
-            "isIdentityValue": false,
-            "isNullable": true,
-            "isPrimaryKey": false,
-            "isReadOnly": true,
-            "isSystemDefined": true,
-            "isUpdateable": false,
-            "localizedDescription": {
-                "value": ""
-            },
-            "name": "Opt In Date",
-            "obfuscationProperties": {
-                "maskType": "None",
-                "maskTypeID": 0,
-                "storageType": "Plain",
-                "storageTypeID": 1,
-                "valueDefinitionID": "3752de3f-31e2-e611-80cc-1402ec7222b4"
-            },
-            "ordinal": 8,
-            "parentType": "Set",
-            "setDefinitionName": {
-                "value": "MobileConnect Subscriptions"
-            },
-            "storageFieldReferenceID": {
-                "type": "guid",
-                "value": "8da557ee-7ba7-44f4-99ba-0681cbeb1ba1"
-            },
-            "storageName": "_OptInDate",
-            "valueDefinitionID": "3752de3f-31e2-e611-80cc-1402ec7222b4",
-            "valueDefinitionKey": "OptInDate"
-        },
-        {
-            "baseType": "Numeric",
-            "connectingID": {
-                "identifierType": "FullyQualifiedName"
-            },
-            "dataSourceID": 3,
-            "dataSourceName": {},
-            "dataType": "Byte",
-            "definitionID": "3852de3f-31e2-e611-80cc-1402ec7222b4",
-            "definitionKey": "OptInMethodID",
-            "definitionName": {
-                "value": "Opt In Method"
-            },
-            "description": "",
-            "displayOrder": 9,
-            "fullyQualifiedName": "MobileConnect Subscriptions.Opt In Method",
-            "isHidden": false,
-            "isIdentityValue": false,
-            "isNullable": true,
-            "isPrimaryKey": false,
-            "isReadOnly": true,
-            "isSystemDefined": true,
-            "isUpdateable": false,
-            "localizedDescription": {
-                "value": ""
-            },
-            "name": "Opt In Method",
-            "obfuscationProperties": {
-                "maskType": "None",
-                "maskTypeID": 0,
-                "storageType": "Plain",
-                "storageTypeID": 1,
-                "valueDefinitionID": "3852de3f-31e2-e611-80cc-1402ec7222b4"
-            },
-            "ordinal": 9,
-            "parentType": "Set",
-            "restrictionLookupListID": 2,
-            "setDefinitionName": {
-                "value": "MobileConnect Subscriptions"
-            },
-            "storageFieldReferenceID": {
-                "type": "guid",
-                "value": "da2713ab-a802-4cd6-9e05-0a7444d62388"
-            },
-            "storageName": "_OptInMethodID",
-            "valueDefinitionID": "3852de3f-31e2-e611-80cc-1402ec7222b4",
-            "valueDefinitionKey": "OptInMethodID"
-        },
-        {
-            "baseType": "Numeric",
-            "connectingID": {
-                "identifierType": "FullyQualifiedName"
-            },
-            "dataSourceID": 3,
-            "dataSourceName": {},
-            "dataType": "Byte",
-            "definitionID": "3952de3f-31e2-e611-80cc-1402ec7222b4",
-            "definitionKey": "OptInStatusID",
-            "definitionName": {
-                "value": "Opt In Status"
-            },
-            "description": "",
-            "displayOrder": 10,
-            "fullyQualifiedName": "MobileConnect Subscriptions.Opt In Status",
-            "isHidden": false,
-            "isIdentityValue": false,
-            "isNullable": false,
-            "isPrimaryKey": false,
-            "isReadOnly": false,
-            "isSystemDefined": true,
-            "isUpdateable": false,
-            "localizedDescription": {
-                "value": ""
-            },
-            "name": "Opt In Status",
-            "obfuscationProperties": {
-                "maskType": "None",
-                "maskTypeID": 0,
-                "storageType": "Plain",
-                "storageTypeID": 1,
-                "valueDefinitionID": "3952de3f-31e2-e611-80cc-1402ec7222b4"
-            },
-            "ordinal": 10,
-            "parentType": "Set",
-            "restrictionLookupListID": 1,
-            "setDefinitionName": {
-                "value": "MobileConnect Subscriptions"
-            },
-            "storageFieldReferenceID": {
-                "type": "guid",
-                "value": "c733b80d-2ed5-4fb6-94a3-9c996cbae558"
-            },
-            "storageName": "_OptInStatusID",
-            "valueDefinitionID": "3952de3f-31e2-e611-80cc-1402ec7222b4",
-            "valueDefinitionKey": "OptInStatusID"
-        },
-        {
-            "baseType": "Date",
-            "connectingID": {
-                "identifierType": "FullyQualifiedName"
-            },
-            "dataSourceID": 3,
-            "dataSourceName": {},
-            "dataType": "Date",
-            "definitionID": "3a52de3f-31e2-e611-80cc-1402ec7222b4",
-            "definitionKey": "OptOutDate",
-            "definitionName": {
-                "value": "Opt Out Date"
-            },
-            "description": "",
-            "displayOrder": 11,
-            "fullyQualifiedName": "MobileConnect Subscriptions.Opt Out Date",
-            "isHidden": false,
-            "isIdentityValue": false,
-            "isNullable": true,
-            "isPrimaryKey": false,
-            "isReadOnly": true,
-            "isSystemDefined": true,
-            "isUpdateable": false,
-            "localizedDescription": {
-                "value": ""
-            },
-            "name": "Opt Out Date",
-            "obfuscationProperties": {
-                "maskType": "None",
-                "maskTypeID": 0,
-                "storageType": "Plain",
-                "storageTypeID": 1,
-                "valueDefinitionID": "3a52de3f-31e2-e611-80cc-1402ec7222b4"
-            },
-            "ordinal": 11,
-            "parentType": "Set",
-            "setDefinitionName": {
-                "value": "MobileConnect Subscriptions"
-            },
-            "storageFieldReferenceID": {
-                "type": "guid",
-                "value": "27c3ccec-47ad-4578-9051-a41f85178049"
-            },
-            "storageName": "_OptOutDate",
-            "valueDefinitionID": "3a52de3f-31e2-e611-80cc-1402ec7222b4",
-            "valueDefinitionKey": "OptOutDate"
-        },
-        {
-            "baseType": "Numeric",
-            "connectingID": {
-                "identifierType": "FullyQualifiedName"
-            },
-            "dataSourceID": 3,
-            "dataSourceName": {},
-            "dataType": "Byte",
-            "definitionID": "3b52de3f-31e2-e611-80cc-1402ec7222b4",
-            "definitionKey": "OptOutMethodID",
-            "definitionName": {
-                "value": "Opt Out Method"
-            },
-            "description": "",
-            "displayOrder": 12,
-            "fullyQualifiedName": "MobileConnect Subscriptions.Opt Out Method",
-            "isHidden": false,
-            "isIdentityValue": false,
-            "isNullable": true,
-            "isPrimaryKey": false,
-            "isReadOnly": true,
-            "isSystemDefined": true,
-            "isUpdateable": false,
-            "localizedDescription": {
-                "value": ""
-            },
-            "name": "Opt Out Method",
-            "obfuscationProperties": {
-                "maskType": "None",
-                "maskTypeID": 0,
-                "storageType": "Plain",
-                "storageTypeID": 1,
-                "valueDefinitionID": "3b52de3f-31e2-e611-80cc-1402ec7222b4"
-            },
-            "ordinal": 12,
-            "parentType": "Set",
-            "restrictionLookupListID": 4,
-            "setDefinitionName": {
-                "value": "MobileConnect Subscriptions"
-            },
-            "storageFieldReferenceID": {
-                "type": "guid",
-                "value": "089b96fc-bfc6-402e-a481-1e18d3e18a8d"
-            },
-            "storageName": "_OptOutMethodID",
-            "valueDefinitionID": "3b52de3f-31e2-e611-80cc-1402ec7222b4",
-            "valueDefinitionKey": "OptOutMethodID"
-        },
-        {
-            "baseType": "Numeric",
-            "connectingID": {
-                "identifierType": "FullyQualifiedName"
-            },
-            "dataSourceID": 3,
-            "dataSourceName": {},
-            "dataType": "Byte",
-            "definitionID": "3c52de3f-31e2-e611-80cc-1402ec7222b4",
-            "definitionKey": "OptOutStatusID",
-            "definitionName": {
-                "value": "Opt Out Status"
-            },
-            "description": "",
-            "displayOrder": 13,
-            "fullyQualifiedName": "MobileConnect Subscriptions.Opt Out Status",
-            "isHidden": false,
-            "isIdentityValue": false,
-            "isNullable": true,
-            "isPrimaryKey": false,
-            "isReadOnly": false,
-            "isSystemDefined": true,
-            "isUpdateable": false,
-            "localizedDescription": {
-                "value": ""
-            },
-            "name": "Opt Out Status",
-            "obfuscationProperties": {
-                "maskType": "None",
-                "maskTypeID": 0,
-                "storageType": "Plain",
-                "storageTypeID": 1,
-                "valueDefinitionID": "3c52de3f-31e2-e611-80cc-1402ec7222b4"
-            },
-            "ordinal": 13,
-            "parentType": "Set",
-            "restrictionLookupListID": 3,
-            "setDefinitionName": {
-                "value": "MobileConnect Subscriptions"
-            },
-            "storageFieldReferenceID": {
-                "type": "guid",
-                "value": "67194503-acd8-4c1c-b042-9dfb3f3ebd44"
-            },
-            "storageName": "_OptOutStatusID",
-            "valueDefinitionID": "3c52de3f-31e2-e611-80cc-1402ec7222b4",
-            "valueDefinitionKey": "OptOutStatusID"
-        },
-        {
-            "baseType": "Numeric",
-            "connectingID": {
-                "identifierType": "FullyQualifiedName"
-            },
-            "dataSourceID": 3,
-            "dataSourceName": {},
-            "dataType": "Byte",
-            "definitionID": "3d52de3f-31e2-e611-80cc-1402ec7222b4",
-            "definitionKey": "Source",
-            "definitionName": {
-                "value": "Source"
-            },
-            "description": "",
-            "displayOrder": 14,
-            "fullyQualifiedName": "MobileConnect Subscriptions.Source",
-            "isHidden": false,
-            "isIdentityValue": false,
-            "isNullable": true,
-            "isPrimaryKey": false,
-            "isReadOnly": true,
-            "isSystemDefined": true,
-            "isUpdateable": false,
-            "localizedDescription": {
-                "value": ""
-            },
-            "name": "Source",
-            "obfuscationProperties": {
-                "maskType": "None",
-                "maskTypeID": 0,
-                "storageType": "Plain",
-                "storageTypeID": 1,
-                "valueDefinitionID": "3d52de3f-31e2-e611-80cc-1402ec7222b4"
-            },
-            "ordinal": 14,
-            "parentType": "Set",
-            "restrictionLookupListID": 5,
-            "setDefinitionName": {
-                "value": "MobileConnect Subscriptions"
-            },
-            "storageFieldReferenceID": {
-                "type": "guid",
-                "value": "2e903257-43e8-4a7b-8ed4-757ca772ddbb"
-            },
-            "storageName": "_Source",
-            "valueDefinitionID": "3d52de3f-31e2-e611-80cc-1402ec7222b4",
-            "valueDefinitionKey": "Source"
-        },
-        {
-            "baseType": "Text",
-            "connectingID": {
-                "identifierType": "FullyQualifiedName"
-            },
-            "dataSourceID": 3,
-            "dataSourceName": {},
             "dataType": "Text",
-            "definitionID": "3e52de3f-31e2-e611-80cc-1402ec7222b4",
-            "definitionKey": "SourceObjectID",
-            "definitionName": {
-                "value": "Source Object ID"
-            },
+            "definitionKey": "FirstName",
             "description": "",
-            "displayOrder": 15,
-            "fullyQualifiedName": "MobileConnect Subscriptions.Source Object ID",
             "isHidden": false,
             "isIdentityValue": false,
             "isNullable": true,
             "isPrimaryKey": false,
-            "isReadOnly": true,
-            "isSystemDefined": true,
-            "isUpdateable": false,
-            "length": 200,
-            "localizedDescription": {
-                "value": ""
-            },
-            "name": "Source Object ID",
-            "obfuscationProperties": {
-                "maskType": "None",
-                "maskTypeID": 0,
-                "storageType": "Plain",
-                "storageTypeID": 1,
-                "valueDefinitionID": "3e52de3f-31e2-e611-80cc-1402ec7222b4"
-            },
-            "ordinal": 15,
-            "parentType": "Set",
-            "setDefinitionName": {
-                "value": "MobileConnect Subscriptions"
-            },
-            "storageFieldReferenceID": {
-                "type": "guid",
-                "value": "1d4f26f5-ec91-46de-9fc1-d819832f07e7"
-            },
-            "storageName": "_SourceObjectId",
-            "valueDefinitionID": "3e52de3f-31e2-e611-80cc-1402ec7222b4",
-            "valueDefinitionKey": "SourceObjectID"
+            "isReadOnly": false,
+            "isSystemDefined": false,
+            "isUpdateable": true,
+            "length": 50,
+            "name": "FirstName"
+        },
+        {
+            "dataType": "Text",
+            "definitionKey": "LastName",
+            "description": "",
+            "isHidden": false,
+            "isIdentityValue": false,
+            "isNullable": true,
+            "isPrimaryKey": false,
+            "isReadOnly": false,
+            "isSystemDefined": false,
+            "isUpdateable": true,
+            "length": 55,
+            "name": "LastName"
+        },
+        {
+            "dataType": "EmailAddress",
+            "definitionKey": "EmailAddress",
+            "description": "",
+            "isHidden": false,
+            "isIdentityValue": false,
+            "isNullable": false,
+            "isPrimaryKey": false,
+            "isReadOnly": false,
+            "isSystemDefined": false,
+            "isUpdateable": true,
+            "length": 254,
+            "name": "EmailAddress"
+        },
+        {
+            "dataType": "Text",
+            "definitionKey": "ContactKey",
+            "description": "",
+            "isHidden": false,
+            "isIdentityValue": false,
+            "isNullable": false,
+            "isPrimaryKey": true,
+            "isReadOnly": false,
+            "isSystemDefined": false,
+            "isUpdateable": true,
+            "length": 50,
+            "name": "ContactKey"
         }
     ]
 }

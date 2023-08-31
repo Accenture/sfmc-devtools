@@ -19793,6 +19793,393 @@
             "setDefinitionID": "f452de3f-31e2-e611-80cc-1402ec7222b4",
             "setDefinitionKey": "PredictiveIntelProfiles",
             "name": "Predictive Intelligence Profiles"
+        },
+        {
+            "definitionID": "528b787a-5238-ee11-b85a-48df37d1de8a",
+            "definitionKey": "testExisting_dataExtensionShared",
+            "definitionName": {
+                "value": "testExisting_dataExtensionShared"
+            },
+            "connectingID": {
+                "identifierType": "FullyQualifiedName"
+            },
+            "relationships": [
+                {
+                    "canModify": true,
+                    "canRemove": true,
+                    "isHidden": false,
+                    "isSystemDefined": false,
+                    "isGroupToSetRelationship": true,
+                    "leftItem": {
+                        "cardinality": "One",
+                        "connectingID": {
+                            "identifierType": "FullyQualifiedName"
+                        },
+                        "identifier": "79846c6e-5238-ee11-b85a-48df37d1de8a",
+                        "relationshipType": "AttributeGroup"
+                    },
+                    "leftRelationshipIDs": [
+                        {
+                            "type": "int16",
+                            "value": "3"
+                        }
+                    ],
+                    "leftRelationshipReferenceType": "CustomerData",
+                    "relationshipAttributes": [
+                        {
+                            "leftAttributeID": "9393dc39-31e2-e611-80cc-1402ec7222b4",
+                            "leftConnectingID": {
+                                "identifierType": "FullyQualifiedName"
+                            },
+                            "rightAttributeID": "558b787a-5238-ee11-b85a-48df37d1de8a",
+                            "rightConnectingID": {
+                                "identifierType": "FullyQualifiedName"
+                            }
+                        }
+                    ],
+                    "relationshipID": "598b787a-5238-ee11-b85a-48df37d1de8a",
+                    "rightItem": {
+                        "cardinality": "One",
+                        "connectingID": {
+                            "identifierType": "FullyQualifiedName"
+                        },
+                        "identifier": "528b787a-5238-ee11-b85a-48df37d1de8a",
+                        "relationshipType": "AttributeSet"
+                    }
+                }
+            ],
+            "valueDefinitions": [
+                {
+                    "baseType": "Numeric",
+                    "dataSourceName": {},
+                    "dataType": "LongNumber",
+                    "description": "",
+                    "localizedDescription": {
+                        "value": ""
+                    },
+                    "definitionID": "548b787a-5238-ee11-b85a-48df37d1de8a",
+                    "definitionKey": "CustomObjectKey",
+                    "definitionName": {
+                        "value": "Custom Object Key"
+                    },
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "fullyQualifiedName": "testExisting_dataExtensionShared.Custom Object Key",
+                    "isHidden": true,
+                    "isIdentityValue": true,
+                    "isNullable": false,
+                    "isPrimaryKey": false,
+                    "isReadOnly": true,
+                    "isSystemDefined": true,
+                    "isUpdateable": true,
+                    "parentDefinition": {
+                        "definitionID": "528b787a-5238-ee11-b85a-48df37d1de8a",
+                        "definitionKey": "testExisting_dataExtensionShared",
+                        "definitionName": {
+                            "value": "testExisting_dataExtensionShared"
+                        },
+                        "connectingID": {
+                            "identifierType": "FullyQualifiedName"
+                        }
+                    },
+                    "parentType": "Set",
+                    "storageName": "_CustomObjectKey",
+                    "valueDefinitionID": "548b787a-5238-ee11-b85a-48df37d1de8a",
+                    "valueDefinitionKey": "CustomObjectKey",
+                    "name": "Custom Object Key",
+                    "setDefinitionID": "528b787a-5238-ee11-b85a-48df37d1de8a",
+                    "setDefinitionKey": "testExisting_dataExtensionShared",
+                    "setDefinitionName": {
+                        "value": "testExisting_dataExtensionShared"
+                    },
+                    "parentIdentifier": "528b787a-5238-ee11-b85a-48df37d1de8a"
+                },
+                {
+                    "baseType": "Text",
+                    "dataSourceName": {},
+                    "dataType": "Text",
+                    "description": "",
+                    "localizedDescription": {
+                        "value": ""
+                    },
+                    "definitionID": "588b787a-5238-ee11-b85a-48df37d1de8a",
+                    "definitionKey": "FirstName",
+                    "definitionName": {
+                        "value": "FirstName"
+                    },
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "displayOrder": 0,
+                    "fullyQualifiedName": "testExisting_dataExtensionShared.FirstName",
+                    "isHidden": false,
+                    "isIdentityValue": false,
+                    "isNullable": true,
+                    "isPrimaryKey": false,
+                    "isReadOnly": false,
+                    "isSystemDefined": false,
+                    "isUpdateable": true,
+                    "length": 50,
+                    "obfuscationProperties": {
+                        "maskType": "None",
+                        "maskTypeID": 0,
+                        "storageTypeID": 1,
+                        "storageType": "Plain",
+                        "valueDefinitionID": "588b787a-5238-ee11-b85a-48df37d1de8a"
+                    },
+                    "ordinal": 0,
+                    "parentDefinition": {
+                        "definitionID": "528b787a-5238-ee11-b85a-48df37d1de8a",
+                        "definitionKey": "testExisting_dataExtensionShared",
+                        "definitionName": {
+                            "value": "testExisting_dataExtensionShared"
+                        },
+                        "connectingID": {
+                            "identifierType": "FullyQualifiedName"
+                        }
+                    },
+                    "parentType": "Set",
+                    "storageName": "FirstName",
+                    "storageFieldReferenceID": {
+                        "type": "guid",
+                        "value": "391bfc9e-ea85-4610-a24b-d8400a36cdfc"
+                    },
+                    "valueDefinitionID": "588b787a-5238-ee11-b85a-48df37d1de8a",
+                    "valueDefinitionKey": "FirstName",
+                    "name": "FirstName",
+                    "setDefinitionID": "528b787a-5238-ee11-b85a-48df37d1de8a",
+                    "setDefinitionKey": "testExisting_dataExtensionShared",
+                    "setDefinitionName": {
+                        "value": "testExisting_dataExtensionShared"
+                    },
+                    "parentIdentifier": "528b787a-5238-ee11-b85a-48df37d1de8a"
+                },
+                {
+                    "baseType": "Text",
+                    "dataSourceName": {},
+                    "dataType": "Text",
+                    "description": "",
+                    "localizedDescription": {
+                        "value": ""
+                    },
+                    "definitionID": "578b787a-5238-ee11-b85a-48df37d1de8a",
+                    "definitionKey": "LastName",
+                    "definitionName": {
+                        "value": "LastName"
+                    },
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "displayOrder": 1,
+                    "fullyQualifiedName": "testExisting_dataExtensionShared.LastName",
+                    "isHidden": false,
+                    "isIdentityValue": false,
+                    "isNullable": true,
+                    "isPrimaryKey": false,
+                    "isReadOnly": false,
+                    "isSystemDefined": false,
+                    "isUpdateable": true,
+                    "length": 55,
+                    "obfuscationProperties": {
+                        "maskType": "None",
+                        "maskTypeID": 0,
+                        "storageTypeID": 1,
+                        "storageType": "Plain",
+                        "valueDefinitionID": "578b787a-5238-ee11-b85a-48df37d1de8a"
+                    },
+                    "ordinal": 1,
+                    "parentDefinition": {
+                        "definitionID": "528b787a-5238-ee11-b85a-48df37d1de8a",
+                        "definitionKey": "testExisting_dataExtensionShared",
+                        "definitionName": {
+                            "value": "testExisting_dataExtensionShared"
+                        },
+                        "connectingID": {
+                            "identifierType": "FullyQualifiedName"
+                        }
+                    },
+                    "parentType": "Set",
+                    "storageName": "LastName",
+                    "storageFieldReferenceID": {
+                        "type": "guid",
+                        "value": "3f80ba1f-f957-400f-88cb-a9303491026d"
+                    },
+                    "valueDefinitionID": "578b787a-5238-ee11-b85a-48df37d1de8a",
+                    "valueDefinitionKey": "LastName",
+                    "name": "LastName",
+                    "setDefinitionID": "528b787a-5238-ee11-b85a-48df37d1de8a",
+                    "setDefinitionKey": "testExisting_dataExtensionShared",
+                    "setDefinitionName": {
+                        "value": "testExisting_dataExtensionShared"
+                    },
+                    "parentIdentifier": "528b787a-5238-ee11-b85a-48df37d1de8a"
+                },
+                {
+                    "baseType": "Text",
+                    "dataSourceName": {},
+                    "dataType": "EmailAddress",
+                    "description": "",
+                    "localizedDescription": {
+                        "value": ""
+                    },
+                    "definitionID": "568b787a-5238-ee11-b85a-48df37d1de8a",
+                    "definitionKey": "EmailAddress",
+                    "definitionName": {
+                        "value": "EmailAddress"
+                    },
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "displayOrder": 2,
+                    "fullyQualifiedName": "testExisting_dataExtensionShared.EmailAddress",
+                    "isHidden": false,
+                    "isIdentityValue": false,
+                    "isNullable": false,
+                    "isPrimaryKey": false,
+                    "isReadOnly": false,
+                    "isSystemDefined": false,
+                    "isUpdateable": true,
+                    "length": 254,
+                    "obfuscationProperties": {
+                        "maskType": "None",
+                        "maskTypeID": 0,
+                        "storageTypeID": 1,
+                        "storageType": "Plain",
+                        "valueDefinitionID": "568b787a-5238-ee11-b85a-48df37d1de8a"
+                    },
+                    "ordinal": 2,
+                    "parentDefinition": {
+                        "definitionID": "528b787a-5238-ee11-b85a-48df37d1de8a",
+                        "definitionKey": "testExisting_dataExtensionShared",
+                        "definitionName": {
+                            "value": "testExisting_dataExtensionShared"
+                        },
+                        "connectingID": {
+                            "identifierType": "FullyQualifiedName"
+                        }
+                    },
+                    "parentType": "Set",
+                    "storageName": "EmailAddress",
+                    "storageFieldReferenceID": {
+                        "type": "guid",
+                        "value": "41b9575b-da06-41ed-8551-f76868451a51"
+                    },
+                    "valueDefinitionID": "568b787a-5238-ee11-b85a-48df37d1de8a",
+                    "valueDefinitionKey": "EmailAddress",
+                    "name": "EmailAddress",
+                    "setDefinitionID": "528b787a-5238-ee11-b85a-48df37d1de8a",
+                    "setDefinitionKey": "testExisting_dataExtensionShared",
+                    "setDefinitionName": {
+                        "value": "testExisting_dataExtensionShared"
+                    },
+                    "parentIdentifier": "528b787a-5238-ee11-b85a-48df37d1de8a"
+                },
+                {
+                    "baseType": "Text",
+                    "dataSourceName": {},
+                    "dataType": "Text",
+                    "description": "",
+                    "localizedDescription": {
+                        "value": ""
+                    },
+                    "definitionID": "558b787a-5238-ee11-b85a-48df37d1de8a",
+                    "definitionKey": "ContactKey",
+                    "definitionName": {
+                        "value": "ContactKey"
+                    },
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "displayOrder": 4,
+                    "fullyQualifiedName": "testExisting_dataExtensionShared.ContactKey",
+                    "isHidden": false,
+                    "isIdentityValue": false,
+                    "isNullable": false,
+                    "isPrimaryKey": true,
+                    "isReadOnly": false,
+                    "isSystemDefined": false,
+                    "isUpdateable": true,
+                    "length": 50,
+                    "obfuscationProperties": {
+                        "maskType": "None",
+                        "maskTypeID": 0,
+                        "storageTypeID": 1,
+                        "storageType": "Plain",
+                        "valueDefinitionID": "558b787a-5238-ee11-b85a-48df37d1de8a"
+                    },
+                    "ordinal": 4,
+                    "parentDefinition": {
+                        "definitionID": "528b787a-5238-ee11-b85a-48df37d1de8a",
+                        "definitionKey": "testExisting_dataExtensionShared",
+                        "definitionName": {
+                            "value": "testExisting_dataExtensionShared"
+                        },
+                        "connectingID": {
+                            "identifierType": "FullyQualifiedName"
+                        }
+                    },
+                    "parentType": "Set",
+                    "storageName": "ContactKey",
+                    "storageFieldReferenceID": {
+                        "type": "guid",
+                        "value": "49d0db37-dff0-49d9-9d82-eb29b345f238"
+                    },
+                    "valueDefinitionID": "558b787a-5238-ee11-b85a-48df37d1de8a",
+                    "valueDefinitionKey": "ContactKey",
+                    "name": "ContactKey",
+                    "setDefinitionID": "528b787a-5238-ee11-b85a-48df37d1de8a",
+                    "setDefinitionKey": "testExisting_dataExtensionShared",
+                    "setDefinitionName": {
+                        "value": "testExisting_dataExtensionShared"
+                    },
+                    "parentIdentifier": "528b787a-5238-ee11-b85a-48df37d1de8a"
+                }
+            ],
+            "attributeCount": 0,
+            "canAddValues": true,
+            "canChangeValues": true,
+            "canModify": true,
+            "canRemove": true,
+            "categoryID": 89356,
+            "createdBy": 700301950,
+            "createDate": "2023-08-11T08:22:00",
+            "customObjectOwnerMID": 7281698,
+            "dataRetentionProperties": {
+                "isRowBasedRetention": true,
+                "isResetRetentionPeriodOnImport": false,
+                "isDeleteAtEndOfRetentionPeriod": false,
+                "periodLength": 6,
+                "periodUnitOfMeasure": 5,
+                "setDefinitionID": "528b787a-5238-ee11-b85a-48df37d1de8a"
+            },
+            "localizedDescription": {
+                "value": "Container for my test emails"
+            },
+            "fullyQualifiedName": "testExisting_dataExtensionShared",
+            "isCustomObjectBacked": true,
+            "isEvent": false,
+            "isHidden": false,
+            "isReadOnly": false,
+            "isRoot": false,
+            "isSendable": true,
+            "isShared": true,
+            "isSystemDefined": false,
+            "isTestaable": true,
+            "parentID": "00000000-0000-0000-0000-000000000000",
+            "relationshipCount": 1,
+            "sendAttributeStorageName": "ContactKey",
+            "sendContactKeyStorageName": "_SubscriberKey",
+            "storageLogicalType": "DataExtension",
+            "storageName": "testExisting_dataExtensionShared",
+            "storageObjectIDs": ["5b8b787a-5238-ee11-b85a-48df37d1de8a"],
+            "storageReferenceID": {
+                "type": "guid",
+                "value": "21711373-72c1-ec11-b83b-shared"
+            },
+            "setDefinitionID": "528b787a-5238-ee11-b85a-48df37d1de8a",
+            "setDefinitionKey": "testExisting_dataExtensionShared",
+            "name": "testExisting_dataExtensionShared"
         }
     ],
     "responseContext": {

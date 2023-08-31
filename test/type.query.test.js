@@ -458,7 +458,7 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                33,
+                34,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -498,7 +498,7 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                35,
+                36,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -656,13 +656,15 @@ describe('type: query', () => {
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN
-            const result = await handler.deleteByKey('testInstance/testBU', 'query', [
-                'testExisting_query',
-            ]);
+            const isDeleted = await handler.deleteByKey(
+                'testInstance/testBU',
+                'query',
+                'testExisting_query'
+            );
             // THEN
             assert.equal(process.exitCode, false, 'delete should not have thrown an error');
 
-            assert.equal(result, true, 'should have deleted the item');
+            assert.equal(isDeleted, true, 'should have deleted the item');
             return;
         });
     });

@@ -126,6 +126,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#User">User</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>MetadataType</p>
 </dd>
+<dt><a href="#Verification">Verification</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>Verification MetadataType</p>
+</dd>
 <dt><a href="#Retriever">Retriever</a></dt>
 <dd><p>Retrieves metadata from a business unit and saves it to the local filesystem.</p>
 </dd>
@@ -219,6 +222,33 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Automation.">Automation.(metadataMap, originalMetadataMap, key, [oldKey])</a> ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
+<dt><a href="#DataExtension.">DataExtension.(upsertedMetadata, originalMetadata, createdUpdated)</a> ⇒ <code>void</code></dt>
+<dd><p>takes care of updating attribute groups on child BUs after an update to Shared DataExtensions
+helper for <a href="#DataExtension.postDeployTasks">postDeployTasks</a>
+fixes an issue where shared data extensions are not visible in data designer on child BU; SF known issue: <a href="https://issues.salesforce.com/#q=W-11031095">https://issues.salesforce.com/#q=W-11031095</a></p>
+</dd>
+<dt><a href="#DataExtension.">DataExtension.()</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
+<dd><p>helper for <a href="DataExtension.#fixShared">DataExtension.#fixShared</a></p>
+</dd>
+<dt><a href="#DataExtension.">DataExtension.(childBuName, buObjectParent, clientParent, sharedDataExtensionMap)</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
+<dd><p>helper for <a href="DataExtension.#fixShared">DataExtension.#fixShared</a></p>
+</dd>
+<dt><a href="#DataExtension.">DataExtension.(deId, deKey, buObjectChildBu, clientChildBu, buObjectParent, clientParent)</a> ⇒ <code>Promise.&lt;boolean&gt;</code></dt>
+<dd><p>method that actually takes care of triggering the update for a particular BU-sharedDe combo
+helper for <a href="DataExtension.#fixShared_onBU">DataExtension.#fixShared_onBU</a></p>
+</dd>
+<dt><a href="#DataExtension.">DataExtension.(buObjectChildBu, clientChildBu, deKey, deId)</a> ⇒ <code>Promise.&lt;string&gt;</code></dt>
+<dd><p>add a new field to the shared DE to trigger an update to the data model
+helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item</a></p>
+</dd>
+<dt><a href="#DataExtension.">DataExtension.(randomSuffix, buObjectParent, clientParent, deKey)</a> ⇒ <code>Promise.&lt;string&gt;</code></dt>
+<dd><p>get ID of the field added by <a href="DataExtension.#fixShared_item_addField">DataExtension.#fixShared_item_addField</a> on the shared DE via parent BU
+helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item</a></p>
+</dd>
+<dt><a href="#DataExtension.">DataExtension.(randomSuffix, buObjectChildBu, clientChildBu, deKey, fieldObjectID)</a> ⇒ <code>Promise</code></dt>
+<dd><p>delete the field added by <a href="DataExtension.#fixShared_item_addField">DataExtension.#fixShared_item_addField</a>
+helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item</a></p>
+</dd>
 <dt><a href="#getUserName">getUserName(userList, item, fieldname)</a> ⇒ <code>string</code></dt>
 <dd></dd>
 <dt><a href="#setupSDK">setupSDK(sessionKey, authObject)</a> ⇒ <code><a href="#SDK">SDK</a></code></dt>
@@ -265,6 +295,8 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dd><p>SOAP format</p>
 </dd>
 <dt><a href="#AutomationItem">AutomationItem</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#VerificationItem">VerificationItem</a> : <code>object</code></dt>
 <dd></dd>
 <dt><a href="#SDK">SDK</a> : <code>Object.&lt;string, AutomationItem&gt;</code></dt>
 <dd></dd>
@@ -1298,6 +1330,7 @@ AttributeSet MetadataType
 * [AttributeSet](#AttributeSet) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#AttributeSet.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache()](#AttributeSet.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.fixShared_retrieve(sharedDataExtensionMap, fixShared_fields)](#AttributeSet.fixShared_retrieve) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#AttributeSet.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.postRetrieveTasks(metadata)](#AttributeSet.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [._getSystemValueDefinitions()](#AttributeSet._getSystemValueDefinitions) ⇒ <code>Array.&lt;object&gt;</code>
@@ -1324,6 +1357,20 @@ Retrieves Metadata of schema set definitions for caching.
 
 **Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+<a name="AttributeSet.fixShared_retrieve"></a>
+
+### AttributeSet.fixShared\_retrieve(sharedDataExtensionMap, fixShared_fields) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+used to identify updated shared data extensions that are used in attributeSets.
+helper for DataExtension.#fixShared_onBU
+
+**Kind**: static method of [<code>AttributeSet</code>](#AttributeSet)  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - Promise of list of shared dataExtension IDs  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| sharedDataExtensionMap | <code>Object.&lt;string, string&gt;</code> | ID-Key relationship of shared data extensions |
+| fixShared_fields | <code>object</code> | DataExtensionField.fixShared_fields |
+
 <a name="AttributeSet.parseResponseBody"></a>
 
 ### AttributeSet.parseResponseBody(body, [singleRetrieve]) ⇒ <code>TYPE.MetadataTypeMap</code>
@@ -1366,6 +1413,7 @@ Automation MetadataType
 
 * [Automation](#Automation) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#Automation.retrieve) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
+    * [.handleRESTErrors(ex, id)](#Automation.handleRESTErrors) ⇒ <code>null</code>
     * [.retrieveChangelog()](#Automation.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveForCache()](#Automation.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.AutomationMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Automation.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.AutomationItemObj&gt;</code>
@@ -1402,6 +1450,19 @@ Retrieves Metadata of Automation
 | [_] | <code>void</code> | unused parameter |
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="Automation.handleRESTErrors"></a>
+
+### Automation.handleRESTErrors(ex, id) ⇒ <code>null</code>
+helper for [this.retrieveRESTcollection](this.retrieveRESTcollection)
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+**Returns**: <code>null</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ex | <code>Error</code> | exception |
+| id | <code>string</code> | id or key of item |
 
 <a name="Automation.retrieveChangelog"></a>
 
@@ -1781,6 +1842,7 @@ DataExtension MetadataType
     * [.update(metadata)](#DataExtension.update) ⇒ <code>Promise</code>
     * [.postDeployTasks(upsertedMetadata, originalMetadata, createdUpdated)](#DataExtension.postDeployTasks) ⇒ <code>void</code>
     * [.retrieve(retrieveDir, [additionalFields], [_], [key])](#DataExtension.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
+    * [.retrieveSharedForCache([additionalFields])](#DataExtension.retrieveSharedForCache) ⇒ <code>Promise.&lt;TYPE.DataExtensionMap&gt;</code>
     * [.retrieveChangelog([additionalFields])](#DataExtension.retrieveChangelog) ⇒ <code>Promise.&lt;{metadata: TYPE.DataExtensionMap, type: string}&gt;</code>
     * [.postRetrieveTasks(metadata)](#DataExtension.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionItem</code>
     * [.preDeployTasks(metadata)](#DataExtension.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.DataExtensionItem&gt;</code>
@@ -1872,6 +1934,19 @@ Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionCo
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | [_] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="DataExtension.retrieveSharedForCache"></a>
+
+### DataExtension.retrieveSharedForCache([additionalFields]) ⇒ <code>Promise.&lt;TYPE.DataExtensionMap&gt;</code>
+get shared dataExtensions from parent BU and merge them into the cache
+helper for [retrieve](#DataExtension.retrieve) and for AttributeSet.fixShared_retrieve
+
+**Kind**: static method of [<code>DataExtension</code>](#DataExtension)  
+**Returns**: <code>Promise.&lt;TYPE.DataExtensionMap&gt;</code> - keyField => metadata map  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 
 <a name="DataExtension.retrieveChangelog"></a>
 
@@ -2007,7 +2082,7 @@ DataExtensionField MetadataType
     * [.postRetrieveTasks(metadata, forDataExtension)](#DataExtensionField.postRetrieveTasks) ⇒ <code>TYPE.DataExtensionFieldItem</code>
     * [.prepareDeployColumnsOnUpdate(deployColumns, deKey)](#DataExtensionField.prepareDeployColumnsOnUpdate) ⇒ <code>Promise.&lt;Object.&lt;string, TYPE.DataExtensionFieldItem&gt;&gt;</code>
     * [.deleteByKey(customerKey)](#DataExtensionField.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.deleteByKeySOAP(customerKey)](#DataExtensionField.deleteByKeySOAP) ⇒ <code>boolean</code>
+    * [.deleteByKeySOAP(customerKey, [fieldId])](#DataExtensionField.deleteByKeySOAP) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#DataExtensionField.postDeleteTasks) ⇒ <code>void</code>
 
 <a name="DataExtensionField.retrieve"></a>
@@ -2102,7 +2177,7 @@ Delete a metadata item from the specified business unit
 
 <a name="DataExtensionField.deleteByKeySOAP"></a>
 
-### DataExtensionField.deleteByKeySOAP(customerKey) ⇒ <code>boolean</code>
+### DataExtensionField.deleteByKeySOAP(customerKey, [fieldId]) ⇒ <code>boolean</code>
 Delete a data extension from the specified business unit
 
 **Kind**: static method of [<code>DataExtensionField</code>](#DataExtensionField)  
@@ -2111,6 +2186,7 @@ Delete a data extension from the specified business unit
 | Param | Type | Description |
 | --- | --- | --- |
 | customerKey | <code>string</code> | Identifier of metadata |
+| [fieldId] | <code>string</code> | for programmatic deletes only one can pass in the ID directly |
 
 <a name="DataExtensionField.postDeleteTasks"></a>
 
@@ -3325,7 +3401,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.getFieldNamesToRetrieve([additionalFields], [isCaching])](#MetadataType.getFieldNamesToRetrieve) ⇒ <code>Array.&lt;string&gt;</code>
     * [.deploy(metadata, deployDir, retrieveDir)](#MetadataType.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.postDeployTasks(upsertResults, originalMetadata, createdUpdated)](#MetadataType.postDeployTasks) ⇒ <code>void</code>
-    * [.postCreateTasks(metadataEntry, apiResponse)](#MetadataType.postCreateTasks) ⇒ <code>void</code>
+    * [.postCreateTasks(metadataEntry, apiResponse, metadataEntryWithAllFields)](#MetadataType.postCreateTasks) ⇒ <code>void</code>
     * [.postUpdateTasks(metadataEntry, apiResponse)](#MetadataType.postUpdateTasks) ⇒ <code>void</code>
     * [.postDeployTasks_legacyApi(metadataEntry, apiResponse)](#MetadataType.postDeployTasks_legacyApi) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.postRetrieveTasks(metadata, targetDir, [isTemplating])](#MetadataType.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -3333,7 +3409,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.setFolderId(metadata)](#MetadataType.setFolderId)
     * [.retrieve(retrieveDir, [additionalFields], [subTypeArr], [key])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveChangelog([additionalFields], [subTypeArr])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache([additionalFields], [subTypeArr], [key])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache([additionalFields], [subTypeArr])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.retrieveTemplateREST(templateDir, uri, templateVariables, name)](#MetadataType.retrieveTemplateREST) ⇒ <code>Promise.&lt;{metadata: TYPE.MetadataTypeItem, type: string}&gt;</code>
     * [.buildTemplate(retrieveDir, templateDir, key, templateVariables)](#MetadataType.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
@@ -3355,6 +3431,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.getSOAPErrorMsg(ex)](#MetadataType.getSOAPErrorMsg) ⇒ <code>string</code>
     * [.retrieveSOAP(retrieveDir, [requestParams], [singleRetrieve], [additionalFields])](#MetadataType.retrieveSOAP) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveREST(retrieveDir, uri, [templateVariables], [singleRetrieve])](#MetadataType.retrieveREST) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
+    * [.retrieveRESTcollection(urlArray, [concurrentRequests], [logAmountOfUrls])](#MetadataType.retrieveRESTcollection) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
+    * [.handleRESTErrors(ex, id)](#MetadataType.handleRESTErrors) ⇒ <code>null</code>
     * [.executeREST(uri, key)](#MetadataType.executeREST) ⇒ <code>Promise.&lt;{key:string, response:string}&gt;</code>
     * [.executeSOAP([metadataEntry])](#MetadataType.executeSOAP) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
     * [.runDocumentOnRetrieve([singleRetrieve], metadataMap)](#MetadataType.runDocumentOnRetrieve) ⇒ <code>Promise.&lt;void&gt;</code>
@@ -3455,7 +3533,7 @@ Gets executed after deployment of metadata type
 
 <a name="MetadataType.postCreateTasks"></a>
 
-### MetadataType.postCreateTasks(metadataEntry, apiResponse) ⇒ <code>void</code>
+### MetadataType.postCreateTasks(metadataEntry, apiResponse, metadataEntryWithAllFields) ⇒ <code>void</code>
 helper for [createREST](#MetadataType.createREST)
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3464,6 +3542,7 @@ helper for [createREST](#MetadataType.createREST)
 | --- | --- | --- |
 | metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
 | apiResponse | <code>object</code> | varies depending on the API call |
+| metadataEntryWithAllFields | <code>TYPE.MetadataTypeItem</code> | like metadataEntry but before non-creatable fields were stripped |
 
 <a name="MetadataType.postUpdateTasks"></a>
 
@@ -3556,7 +3635,7 @@ Gets metadata from Marketing Cloud
 
 <a name="MetadataType.retrieveForCache"></a>
 
-### MetadataType.retrieveForCache([additionalFields], [subTypeArr], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MetadataType.retrieveForCache([additionalFields], [subTypeArr]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3566,7 +3645,6 @@ Gets metadata cache with limited fields and does not store value to disk
 | --- | --- | --- |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | [subTypeArr] | <code>Array.&lt;string&gt;</code> | optionally limit to a single subtype |
-| [key] | <code>string</code> | customer key of single item to retrieve |
 
 <a name="MetadataType.retrieveAsTemplate"></a>
 
@@ -3832,6 +3910,31 @@ Retrieves Metadata for Rest Types
 | uri | <code>string</code> | rest endpoint for GET |
 | [templateVariables] | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 | [singleRetrieve] | <code>string</code> \| <code>number</code> | key of single item to filter by |
+
+<a name="MetadataType.retrieveRESTcollection"></a>
+
+### MetadataType.retrieveRESTcollection(urlArray, [concurrentRequests], [logAmountOfUrls]) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code> - Promise of item map (single item for templated result)  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| urlArray | <code>Array.&lt;object&gt;</code> |  | {uri: string, id: string} combo of URL and ID/key of metadata |
+| [concurrentRequests] | <code>number</code> | <code>10</code> | optionally set a different amount of concurrent requests |
+| [logAmountOfUrls] | <code>boolean</code> | <code>true</code> | if true, prints an info message about to-be loaded amount of metadata |
+
+<a name="MetadataType.handleRESTErrors"></a>
+
+### MetadataType.handleRESTErrors(ex, id) ⇒ <code>null</code>
+helper for [this.retrieveRESTcollection](this.retrieveRESTcollection)
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>null</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ex | <code>Error</code> | exception |
+| id | <code>string</code> | id or key of item |
 
 <a name="MetadataType.executeREST"></a>
 
@@ -5351,7 +5454,10 @@ TransactionalEmail MetadataType
 * [TransactionalEmail](#TransactionalEmail) ⇐ [<code>TransactionalMessage</code>](#TransactionalMessage)
     * [.update(metadata)](#TransactionalEmail.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#TransactionalEmail.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.postCreateTasks(_, apiResponse)](#TransactionalEmail.postCreateTasks) ⇒ <code>void</code>
+    * [.postDeployTasks()](#TransactionalEmail.postDeployTasks) ⇒ <code>void</code>
     * [.postRetrieveTasks(metadata)](#TransactionalEmail.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.deleteByKey(key)](#TransactionalEmail.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="TransactionalEmail.update"></a>
 
@@ -5377,6 +5483,24 @@ prepares for deployment
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
+<a name="TransactionalEmail.postCreateTasks"></a>
+
+### TransactionalEmail.postCreateTasks(_, apiResponse) ⇒ <code>void</code>
+helper for [TransactionalEmail.createREST](TransactionalEmail.createREST)
+
+**Kind**: static method of [<code>TransactionalEmail</code>](#TransactionalEmail)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| _ | <code>TYPE.MetadataTypeItem</code> | not used |
+| apiResponse | <code>object</code> | varies depending on the API call |
+
+<a name="TransactionalEmail.postDeployTasks"></a>
+
+### TransactionalEmail.postDeployTasks() ⇒ <code>void</code>
+Gets executed after deployment of metadata type
+
+**Kind**: static method of [<code>TransactionalEmail</code>](#TransactionalEmail)  
 <a name="TransactionalEmail.postRetrieveTasks"></a>
 
 ### TransactionalEmail.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -5389,6 +5513,18 @@ manages post retrieve steps
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
+<a name="TransactionalEmail.deleteByKey"></a>
+
+### TransactionalEmail.deleteByKey(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>TransactionalEmail</code>](#TransactionalEmail)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| key | <code>string</code> | Identifier of item |
+
 <a name="TransactionalMessage"></a>
 
 ## TransactionalMessage ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -5399,7 +5535,7 @@ TransactionalMessage MetadataType
 
 * [TransactionalMessage](#TransactionalMessage) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#TransactionalMessage.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache()](#TransactionalMessage.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache([key])](#TransactionalMessage.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.update(metadata)](#TransactionalMessage.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#TransactionalMessage.create) ⇒ <code>Promise</code>
     * [.deleteByKey(key)](#TransactionalMessage.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -5421,11 +5557,16 @@ Retrieves Metadata
 
 <a name="TransactionalMessage.retrieveForCache"></a>
 
-### TransactionalMessage.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### TransactionalMessage.retrieveForCache([key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves event definition metadata for caching
 
 **Kind**: static method of [<code>TransactionalMessage</code>](#TransactionalMessage)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [key] | <code>string</code> | customer key of single item to cache |
+
 <a name="TransactionalMessage.update"></a>
 
 ### TransactionalMessage.update(metadata) ⇒ <code>Promise</code>
@@ -5974,6 +6115,133 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="Verification"></a>
+
+## Verification ⇐ [<code>MetadataType</code>](#MetadataType)
+Verification MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [Verification](#Verification) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], key)](#Verification.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.handleRESTErrors(ex, id)](#Verification.handleRESTErrors) ⇒ <code>null</code>
+    * [.retrieveForCache()](#Verification.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.create(metadata)](#Verification.create) ⇒ <code>Promise</code>
+    * [.postCreateTasks(metadataEntry, apiResponse, metadataEntryWithAllFields)](#Verification.postCreateTasks) ⇒ <code>void</code>
+    * [.update(metadata)](#Verification.update) ⇒ <code>Promise</code>
+    * [.preDeployTasks(metadata)](#Verification.preDeployTasks) ⇒ <code>TYPE.VerificationItem</code>
+    * [.postRetrieveTasks(metadata)](#Verification.postRetrieveTasks) ⇒ <code>TYPE.VerificationItem</code>
+    * [.deleteByKey(key)](#Verification.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+
+<a name="Verification.retrieve"></a>
+
+### Verification.retrieve(retrieveDir, [_], [__], key) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of Data Verification Activity.
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [_] | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| key | <code>string</code> | customer key of single item to retrieve |
+
+<a name="Verification.handleRESTErrors"></a>
+
+### Verification.handleRESTErrors(ex, id) ⇒ <code>null</code>
+helper for [this.retrieveRESTcollection](this.retrieveRESTcollection)
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>null</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ex | <code>Error</code> | exception |
+| id | <code>string</code> | id or key of item |
+
+<a name="Verification.retrieveForCache"></a>
+
+### Verification.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of  Data Extract Activity for caching
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise of metadata  
+<a name="Verification.create"></a>
+
+### Verification.create(metadata) ⇒ <code>Promise</code>
+Creates a single Data Extract
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.VerificationItem</code> | a single Data Extract |
+
+<a name="Verification.postCreateTasks"></a>
+
+### Verification.postCreateTasks(metadataEntry, apiResponse, metadataEntryWithAllFields) ⇒ <code>void</code>
+helper for [createREST](#MetadataType.createREST)
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataEntry | <code>TYPE.MetadataTypeItem</code> | a single metadata Entry |
+| apiResponse | <code>object</code> | varies depending on the API call |
+| metadataEntryWithAllFields | <code>TYPE.MetadataTypeItem</code> | like metadataEntry but before non-creatable fields were stripped |
+
+<a name="Verification.update"></a>
+
+### Verification.update(metadata) ⇒ <code>Promise</code>
+Updates a single Data Extract
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.VerificationItem</code> | a single Data Extract |
+
+<a name="Verification.preDeployTasks"></a>
+
+### Verification.preDeployTasks(metadata) ⇒ <code>TYPE.VerificationItem</code>
+prepares a verification for deployment
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>TYPE.VerificationItem</code> - metadata object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.VerificationItem</code> | a single verification activity definition |
+
+<a name="Verification.postRetrieveTasks"></a>
+
+### Verification.postRetrieveTasks(metadata) ⇒ <code>TYPE.VerificationItem</code>
+parses retrieved Metadata before saving
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>TYPE.VerificationItem</code> - Array with one metadata object and one sql string  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.VerificationItem</code> | a single verification activity definition |
+
+<a name="Verification.deleteByKey"></a>
+
+### Verification.deleteByKey(key) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| key | <code>string</code> | Identifier of item |
 
 <a name="Retriever"></a>
 
@@ -8539,6 +8807,110 @@ helper for [postDeployTasks](#Automation.postDeployTasks)
 | key | <code>string</code> | current customer key |
 | [oldKey] | <code>string</code> | old customer key before fixKey / changeKeyValue / changeKeyField |
 
+<a name="DataExtension."></a>
+
+## DataExtension.(upsertedMetadata, originalMetadata, createdUpdated) ⇒ <code>void</code>
+takes care of updating attribute groups on child BUs after an update to Shared DataExtensions
+helper for [postDeployTasks](#DataExtension.postDeployTasks)
+fixes an issue where shared data extensions are not visible in data designer on child BU; SF known issue: https://issues.salesforce.com/#q=W-11031095
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| upsertedMetadata | <code>TYPE.DataExtensionMap</code> | metadata mapped by their keyField |
+| originalMetadata | <code>TYPE.DataExtensionMap</code> | metadata to be updated (contains additioanl fields) |
+| createdUpdated | <code>Object</code> | counter representing successful creates/updates |
+
+<a name="DataExtension."></a>
+
+## DataExtension.() ⇒ <code>Array.&lt;string&gt;</code>
+helper for [DataExtension.#fixShared](DataExtension.#fixShared)
+
+**Kind**: global function  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of selected BU names  
+<a name="DataExtension."></a>
+
+## DataExtension.(childBuName, buObjectParent, clientParent, sharedDataExtensionMap) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+helper for [DataExtension.#fixShared](DataExtension.#fixShared)
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - updated shared DE keys on BU  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| childBuName | <code>string</code> | name of child BU to fix |
+| buObjectParent | <code>TYPE.BuObject</code> | bu object for parent BU |
+| clientParent | <code>object</code> | SDK for parent BU |
+| sharedDataExtensionMap | <code>Object.&lt;string, string&gt;</code> | ID-Key relationship of shared data extensions |
+
+<a name="DataExtension."></a>
+
+## DataExtension.(deId, deKey, buObjectChildBu, clientChildBu, buObjectParent, clientParent) ⇒ <code>Promise.&lt;boolean&gt;</code>
+method that actually takes care of triggering the update for a particular BU-sharedDe combo
+helper for [DataExtension.#fixShared_onBU](DataExtension.#fixShared_onBU)
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - flag that signals if the fix was successful  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| deId | <code>string</code> | data extension ObjectID |
+| deKey | <code>string</code> | dataExtension key |
+| buObjectChildBu | <code>TYPE.BuObject</code> | BU object for Child BU |
+| clientChildBu | <code>object</code> | SDK for child BU |
+| buObjectParent | <code>TYPE.BuObject</code> | BU object for Parent BU |
+| clientParent | <code>object</code> | SDK for parent BU |
+
+<a name="DataExtension."></a>
+
+## DataExtension.(buObjectChildBu, clientChildBu, deKey, deId) ⇒ <code>Promise.&lt;string&gt;</code>
+add a new field to the shared DE to trigger an update to the data model
+helper for [DataExtension.#fixShared_item](DataExtension.#fixShared_item)
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;string&gt;</code> - randomSuffix  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| buObjectChildBu | <code>TYPE.BuObject</code> | BU object for Child BU |
+| clientChildBu | <code>object</code> | SDK for child BU |
+| deKey | <code>string</code> | dataExtension key |
+| deId | <code>string</code> | dataExtension ObjectID |
+
+<a name="DataExtension."></a>
+
+## DataExtension.(randomSuffix, buObjectParent, clientParent, deKey) ⇒ <code>Promise.&lt;string&gt;</code>
+get ID of the field added by [DataExtension.#fixShared_item_addField](DataExtension.#fixShared_item_addField) on the shared DE via parent BU
+helper for [DataExtension.#fixShared_item](DataExtension.#fixShared_item)
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;string&gt;</code> - fieldObjectID  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| randomSuffix | <code>string</code> | - |
+| buObjectParent | <code>TYPE.BuObject</code> | BU object for Parent BU |
+| clientParent | <code>object</code> | SDK for parent BU |
+| deKey | <code>string</code> | dataExtension key |
+
+<a name="DataExtension."></a>
+
+## DataExtension.(randomSuffix, buObjectChildBu, clientChildBu, deKey, fieldObjectID) ⇒ <code>Promise</code>
+delete the field added by [DataExtension.#fixShared_item_addField](DataExtension.#fixShared_item_addField)
+helper for [DataExtension.#fixShared_item](DataExtension.#fixShared_item)
+
+**Kind**: global function  
+**Returns**: <code>Promise</code> - -  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| randomSuffix | <code>string</code> | - |
+| buObjectChildBu | <code>TYPE.BuObject</code> | BU object for Child BU |
+| clientChildBu | <code>object</code> | SDK for child BU |
+| deKey | <code>string</code> | dataExtension key |
+| fieldObjectID | <code>string</code> | field ObjectID |
+
 <a name="getUserName"></a>
 
 ## getUserName(userList, item, fieldname) ⇒ <code>string</code>
@@ -8873,6 +9245,25 @@ SOAP format
 | steps | [<code>Array.&lt;AutomationStep&gt;</code>](#AutomationStep) | - |
 | r__folder_Path | <code>string</code> | folder path |
 | [categoryId] | <code>string</code> | holds folder ID, replaced with r__folder_Path during retrieve |
+
+<a name="VerificationItem"></a>
+
+## VerificationItem : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| dataVerificationDefinitionId | <code>string</code> | ID / Key |
+| verificationType | <code>&#x27;IsEqualTo&#x27;</code> \| <code>&#x27;IsLessThan&#x27;</code> \| <code>&#x27;IsGreaterThan&#x27;</code> \| <code>&#x27;IsOutsideRange&#x27;</code> \| <code>&#x27;IsInsideRange&#x27;</code> \| <code>&#x27;IsNotEqualTo&#x27;</code> \| <code>&#x27;IsNotLessThan&#x27;</code> \| <code>&#x27;IsNotGreaterThan&#x27;</code> \| <code>&#x27;IsNotOutsideRange&#x27;</code> \| <code>&#x27;IsNotInsideRange&#x27;</code> | key |
+| value1 | <code>number</code> | used for all verificationTypes; lower value for IsOutsideRange, IsInsideRange, IsNotOutsideRange, IsNotInsideRange |
+| value2 | <code>number</code> | only used for IsOutsideRange, IsInsideRange, IsNotOutsideRange, IsNotInsideRange; otherwise set to 0 |
+| shouldStopOnFailure | <code>boolean</code> | flag to stop automation if verification fails |
+| shouldEmailOnFailure | <code>boolean</code> | flag to send email if verification fails |
+| notificationEmailAddress | <code>string</code> | email address to send notification to; empty string if shouldEmailOnFailure=false |
+| notificationEmailMessage | <code>string</code> | email message to send; empty string if shouldEmailOnFailure=false |
+| createdBy | <code>number</code> | user id of creator |
+| r__dataExtension_CustomerKey | <code>string</code> | key of target data extension |
 
 <a name="SDK"></a>
 

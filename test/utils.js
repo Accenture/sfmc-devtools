@@ -208,7 +208,13 @@ exports.getAPIHistory = () => apimock.history;
 function getAPIHistoryDebug() {
     const historyArr = Object.values(apimock.history)
         .flat()
-        .map((item) => ({ url: item.url, data: item.data }));
+        .map((item) => {
+            const log = { method: item.method, url: item.url };
+            if (item.data) {
+                log.body = item.data;
+            }
+            return log;
+        });
     return historyArr;
 }
 exports.getAPIHistoryDebug = getAPIHistoryDebug;

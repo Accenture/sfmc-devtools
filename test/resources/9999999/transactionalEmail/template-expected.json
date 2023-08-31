@@ -4,11 +4,8 @@
     "description": "{{{description}}}",
     "classification": "Default Transactional",
     "status": "Active",
-    "content": {
-        "customerKey": "{{{prefix}}}asset_message"
-    },
     "subscriptions": {
-        "dataExtension": "{{{prefix}}}dataExtension",
+        "r__dataExtension_CustomerKey": "{{{prefix}}}dataExtension",
         "autoAddSubscriber": true,
         "updateSubscriber": true,
         "r__list_PathName": "my subscribers/All Subscribers"
@@ -16,7 +13,6 @@
     "options": {
         "trackLinks": true
     },
-    "journey": {
-        "interactionKey": "{{{prefix}}}interaction"
-    }
+    "r__asset_customerKey": "{{{prefix}}}asset_message",
+    "r__journey_key": "{{{prefix}}}interaction"
 }

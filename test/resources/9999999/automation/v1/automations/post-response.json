@@ -77,6 +77,13 @@
                     "activityObjectId": "39f6a488-20eb-4ba0-b0b9-023725b574e4",
                     "objectTypeId": 423,
                     "displayOrder": 6
+                },
+                {
+                    "id": "f3774dc2-a271-4a44-8cbe-f630a6d6545e",
+                    "name": "testExisting_dataExtension",
+                    "activityObjectId": "testNew_RANDOM_NEW_GUID",
+                    "objectTypeId": 1000,
+                    "displayOrder": 7
                 }
             ],
             "annotation": "",
