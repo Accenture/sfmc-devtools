@@ -16,5 +16,5 @@
 | LastName | Text | 50 | - | + |  |
 | EmailAddress | EmailAddress | 254 | - | - |  |
 | ContactKey | Text | 50 | + | - |  |
-| decimalField | Decimal | 6 | - | - |  |
+| decimalField | Decimal | 6,3 | - | - |  |
 | numberField | Number |  | - | - |  |
