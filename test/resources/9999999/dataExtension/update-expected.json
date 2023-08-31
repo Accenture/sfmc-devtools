@@ -42,6 +42,22 @@
             "FieldType": "Text"
         },
         {
+            "Name": "decimalField",
+            "DefaultValue": "",
+            "MaxLength": 6,
+            "Scale": 3,
+            "IsPrimaryKey": false,
+            "IsRequired": true,
+            "FieldType": "Decimal"
+        },
+        {
+            "Name": "numberField",
+            "DefaultValue": "",
+            "IsPrimaryKey": false,
+            "IsRequired": true,
+            "FieldType": "Number"
+        },
+        {
             "Name": "testField",
             "DefaultValue": "",
             "MaxLength": 254,
