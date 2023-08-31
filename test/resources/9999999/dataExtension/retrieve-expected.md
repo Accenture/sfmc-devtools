@@ -4,7 +4,7 @@
 
 **Folder:** Data Extensions/
 
-**Fields in table:** 4
+**Fields in table:** 6
 
 **Sendable:** Yes (`ContactKey` to `Subscriber Key`)
 
@@ -16,3 +16,5 @@
 | LastName | Text | 50 | - | + |  |
 | EmailAddress | EmailAddress | 254 | - | - |  |
 | ContactKey | Text | 50 | + | - |  |
+| decimalField | Decimal | 6,3 | - | - |  |
+| numberField | Number |  | - | - |  |
