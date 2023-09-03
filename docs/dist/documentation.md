@@ -6241,6 +6241,8 @@ Verification MetadataType
     * [.preDeployTasks(metadata)](#Verification.preDeployTasks) ⇒ <code>TYPE.VerificationItem</code>
     * [.postRetrieveTasks(metadata)](#Verification.postRetrieveTasks) ⇒ <code>TYPE.VerificationItem</code>
     * [.deleteByKey(key)](#Verification.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.getKeysToSetNotifications(metadataMap)](#Verification.getKeysToSetNotifications) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#Verification.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
 
 <a name="Verification.retrieve"></a>
 
@@ -6349,6 +6351,34 @@ Delete a metadata item from the specified business unit
 | Param | Type | Description |
 | --- | --- | --- |
 | key | <code>string</code> | Identifier of item |
+
+<a name="Verification.getKeysToSetNotifications"></a>
+
+### Verification.getKeysToSetNotifications(metadataMap) ⇒ <code>Array.&lt;string&gt;</code>
+helper function to get a list of keys where notification email addresses or notes should be updated
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of keys  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
+
+<a name="Verification.createOrUpdate"></a>
+
+### Verification.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
+helper for [upsert](#MetadataType.upsert)
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code> - action to take  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | list of metadata |
+| metadataKey | <code>string</code> | key of item we are looking at |
+| hasError | <code>boolean</code> | error flag from previous code |
+| metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
+| metadataToCreate | <code>Array.&lt;TYPE.MetadataTypeItem&gt;</code> | list of items to create |
 
 <a name="Retriever"></a>
 
