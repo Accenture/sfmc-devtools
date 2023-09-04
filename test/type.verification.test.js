@@ -170,4 +170,47 @@ describe('type: verification', () => {
             return;
         });
     });
+    describe('UpdateNotifications ================', () => {
+        it('Should update notification email', async () => {
+            handler.setOptions({ completionEmail: 'test@test.com' });
+            // WHEN
+            const updatedNotifications = await handler.updateNotifications(
+                'testInstance/testBU',
+                'verification',
+                ['testExisting_verification_updateNotificationsEmail']
+            );
+            // THEN
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.verification ? Object.keys(result.verification).length : 0,
+                2,
+                'only two verifications expected'
+            );
+            assert.equal(
+                updatedNotifications['testInstance/testBU'].length,
+                1,
+                'one automation key expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    'testExisting_verification_updateNotificationsEmail',
+                    'verification'
+                ),
+                await testUtils.getExpectedJson(
+                    '9999999',
+                    'verification',
+                    'updateNotificationsEmail'
+                ),
+                'returned JSON was not equal expected'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                29,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
 });

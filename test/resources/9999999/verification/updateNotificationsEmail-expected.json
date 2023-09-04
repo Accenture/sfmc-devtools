@@ -1,0 +1,11 @@
+﻿{
+    "dataVerificationDefinitionId": "testExisting_verification_updateNotificationsEmail",
+    "notificationEmailAddress": "test@test.com",
+    "notificationEmailMessage": "",
+    "r__dataExtension_CustomerKey": "testExisting_dataExtension",
+    "shouldEmailOnFailure": false,
+    "shouldStopOnFailure": true,
+    "value1": 1,
+    "value2": 0,
+    "verificationType": "IsEqualTo"
+}
