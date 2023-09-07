@@ -29,3 +29,5 @@
 | _1.5: query_<br>testExisting_query |
 | _1.6: script_<br>testExisting_script |
 | _1.7: verification_<br>testExisting_39f6a488-20eb-4ba0-b0b9 |
+| _1.8: verification_<br>testExisting_verification_updateNotificationsNote |
+| _1.9: verification_<br>testExisting_verification_updateNotificationsEmail |

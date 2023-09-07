@@ -5,8 +5,8 @@
     "value1": 1,
     "value2": 0,
     "shouldStopOnFailure": true,
-    "shouldEmailOnFailure": false,
-    "notificationEmailAddress": "",
+    "shouldEmailOnFailure": true,
+    "notificationEmailAddress": "test@test.com",
     "notificationEmailMessage": "",
     "createdBy": 700301950
 }

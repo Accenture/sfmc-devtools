@@ -40,6 +40,14 @@
                 {
                     "name": "testTemplated_39f6a488-20eb-4ba0-b0b9",
                     "r__type": "verification"
+                },
+                {
+                    "name": "testTemplated_verification_updateNotificationsNote",
+                    "r__type": "verification"
+                },
+                {
+                    "name": "testTemplated_verification_updateNotificationsEmail",
+                    "r__type": "verification"
                 }
             ],
             "name": ""
