@@ -48,6 +48,18 @@
                 {
                     "name": "testTemplated_verification_updateNotificationsEmail",
                     "r__type": "verification"
+                },
+                {
+                    "name": "testTemplated_verification_NOTupdateNotificationsEmail",
+                    "r__type": "verification"
+                },
+                {
+                    "name": "testTemplated_verification_NOTupdateNotificationsNote",
+                    "r__type": "verification"
+                },
+                {
+                    "name": "testTemplated_verification_clear",
+                    "r__type": "verification"
                 }
             ],
             "name": ""

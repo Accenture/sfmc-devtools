@@ -48,6 +48,18 @@
                 {
                     "name": "{{{prefix}}}verification_updateNotificationsEmail",
                     "r__type": "verification"
+                },
+                {
+                    "name": "{{{prefix}}}verification_NOTupdateNotificationsEmail",
+                    "r__type": "verification"
+                },
+                {
+                    "name": "{{{prefix}}}verification_NOTupdateNotificationsNote",
+                    "r__type": "verification"
+                },
+                {
+                    "name": "{{{prefix}}}verification_clear",
+                    "r__type": "verification"
                 }
             ],
             "name": ""

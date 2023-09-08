@@ -1,9 +1,9 @@
-{
-    "dataVerificationDefinitionId": "testExisting_verification_updateNotificationsEmail",
+﻿{
+    "dataVerificationDefinitionId": "testExisting_verification_NOTupdateNotificationsEmail",
     "notificationEmailAddress": "",
     "notificationEmailMessage": "",
     "r__dataExtension_CustomerKey": "testExisting_dataExtension",
-    "shouldEmailOnFailure": true,
+    "shouldEmailOnFailure": false,
     "shouldStopOnFailure": true,
     "value1": 1,
     "value2": 0,

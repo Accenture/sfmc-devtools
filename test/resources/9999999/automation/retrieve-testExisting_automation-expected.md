@@ -31,3 +31,6 @@
 | _1.7: verification_<br>testExisting_39f6a488-20eb-4ba0-b0b9 |
 | _1.8: verification_<br>testExisting_verification_updateNotificationsNote |
 | _1.9: verification_<br>testExisting_verification_updateNotificationsEmail |
+| _1.10: verification_<br>testExisting_verification_NOTupdateNotificationsEmail |
+| _1.11: verification_<br>testExisting_verification_NOTupdateNotificationsNote |
+| _1.12: verification_<br>testExisting_verification_clear |

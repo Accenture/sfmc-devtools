@@ -99,6 +99,27 @@
                     "activityObjectId": "testExisting_verification_updateNotificationsEmail",
                     "objectTypeId": 1000,
                     "displayOrder": 9
+                },
+                {
+                    "id": "f3774dc2-a271-4a44-8cbe-f630a6d6545e",
+                    "name": "testExisting_dataExtension",
+                    "activityObjectId": "testExisting_verification_NOTupdateNotificationsEmail",
+                    "objectTypeId": 1000,
+                    "displayOrder": 10
+                },
+                {
+                    "id": "f3774dc2-a271-4a44-8cbe-f630a6d6545e",
+                    "name": "testExisting_dataExtension",
+                    "activityObjectId": "testExisting_verification_NOTupdateNotificationsNote",
+                    "objectTypeId": 1000,
+                    "displayOrder": 11
+                },
+                {
+                    "id": "f3774dc2-a271-4a44-8cbe-f630a6d6545e",
+                    "name": "testExisting_dataExtension",
+                    "activityObjectId": "testExisting_verification_clear",
+                    "objectTypeId": 1000,
+                    "displayOrder": 12
                 }
             ]
         }

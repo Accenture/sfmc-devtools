@@ -24,15 +24,15 @@ describe('type: verification', () => {
             const result = cache.getCache();
             assert.equal(
                 result.verification ? Object.keys(result.verification).length : 0,
-                3,
-                'only 3 verifications expected'
+                6,
+                'only 6 verifications expected'
             );
             assert.equal(
                 retrieved['testInstance/testBU']?.verification
                     ? Object.keys(retrieved['testInstance/testBU']?.verification).length
                     : 0,
-                3,
-                '3 verifications to be retrieved'
+                6,
+                '6 verifications to be retrieved'
             );
 
             assert.deepEqual(
@@ -45,7 +45,7 @@ describe('type: verification', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                26,
+                29,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -65,15 +65,15 @@ describe('type: verification', () => {
             const result = cache.getCache();
             assert.equal(
                 result.verification ? Object.keys(result.verification).length : 0,
-                4,
-                '4 verifications expected'
+                7,
+                '7 verifications expected'
             );
             assert.equal(
                 deployed['testInstance/testBU']?.verification
                     ? Object.keys(deployed['testInstance/testBU']?.verification).length
                     : 0,
-                3,
-                '3 verifications to be deployed'
+                2,
+                '2 verifications to be deployed'
             );
             // confirm created item
             assert.deepEqual(
@@ -93,7 +93,7 @@ describe('type: verification', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                29,
+                31,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -146,7 +146,7 @@ describe('type: verification', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                26,
+                29,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -188,8 +188,8 @@ describe('type: verification', () => {
             const result = cache.getCache();
             assert.equal(
                 result.verification ? Object.keys(result.verification).length : 0,
-                3,
-                'only one verification expected'
+                6,
+                'only 6 verification expected'
             );
             assert.equal(
                 updatedNotifications['testInstance/testBU'].length,
@@ -210,7 +210,7 @@ describe('type: verification', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                31,
+                34,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -229,8 +229,8 @@ describe('type: verification', () => {
             const result = cache.getCache();
             assert.equal(
                 result.verification ? Object.keys(result.verification).length : 0,
-                3,
-                'only 3 verifications expected'
+                6,
+                'only 6 verifications expected'
             );
             assert.equal(
                 updatedNotifications['testInstance/testBU'].length,
@@ -251,7 +251,111 @@ describe('type: verification', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                31,
+                34,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should NOT update notification email', async () => {
+            handler.setOptions({ completionEmail: 'notAnEmail' });
+            // WHEN
+            const updatedNotifications = await handler.updateNotifications(
+                'testInstance/testBU',
+                'verification',
+                ['testExisting_verification_NOTupdateNotificationsEmail']
+            );
+            // THEN
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.verification ? Object.keys(result.verification).length : 0,
+                6,
+                'only 6 verification expected'
+            );
+            assert.equal(
+                updatedNotifications['testInstance/testBU'].length,
+                1,
+                'one automation key expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    'testExisting_verification_NOTupdateNotificationsEmail',
+                    'verification'
+                ),
+                await testUtils.getExpectedJson(
+                    '9999999',
+                    'verification',
+                    'NOTupdateNotificationsEmail'
+                ),
+                'returned metadata was not equal expected for update query'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                34,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should NOT update notification note', async () => {
+            handler.setOptions({ completionNote: 'test' });
+            // WHEN
+            const updatedNotifications = await handler.updateNotifications(
+                'testInstance/testBU',
+                'verification',
+                ['testExisting_verification_NOTupdateNotificationsNote']
+            );
+            // THEN
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.verification ? Object.keys(result.verification).length : 0,
+                1,
+                'only 1 verifications expected'
+            );
+            assert.equal(
+                updatedNotifications['testInstance/testBU'].length,
+                0,
+                '0 automation key expected'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                4,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should clear notifications', async () => {
+            handler.setOptions({ clear: 'true' });
+            // WHEN
+            const updatedNotifications = await handler.updateNotifications(
+                'testInstance/testBU',
+                'verification',
+                ['testExisting_verification_clear']
+            );
+            // THEN
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.verification ? Object.keys(result.verification).length : 0,
+                6,
+                'only 6 verifications expected'
+            );
+            assert.equal(
+                updatedNotifications['testInstance/testBU'].length,
+                1,
+                '1 automation key expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_verification_clear', 'verification'),
+                await testUtils.getExpectedJson('9999999', 'verification', 'clear'),
+                'returned metadata was not equal expected for update query'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                34,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
