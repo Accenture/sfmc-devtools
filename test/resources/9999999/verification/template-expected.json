@@ -1,6 +1,6 @@
 {
     "dataVerificationDefinitionId": "{{{prefix}}}39f6a488-20eb-4ba0-b0b9",
-    "notificationEmailAddress": "",
+    "notificationEmailAddress": [""],
     "notificationEmailMessage": "",
     "r__dataExtension_CustomerKey": "{{{prefix}}}dataExtension",
     "shouldEmailOnFailure": false,

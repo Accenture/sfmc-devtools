@@ -297,6 +297,105 @@ const SDK = require('sfmc-sdk');
  */
 
 /**
+ * @typedef {object} FilterItem
+ * @property {number} categoryId folder id
+ * @property {string} [createdDate] -
+ * @property {string} customerKey key
+ * @property {string} destinationObjectId DE/List ID
+ * @property {1|2|3|4} destinationTypeId 1:SubscriberList, 2:DataExtension, 3:GroupWizard, 4:BehavioralData
+ * @property {string} filterActivityId ?
+ * @property {string} filterDefinitionId ObjectID of filterDefinition
+ * @property {string} modifiedDate -
+ * @property {string} name name
+ * @property {string} sourceObjectId DE/List ID
+ * @property {1|2|3|4} sourceTypeId 1:SubscriberList, 2:DataExtension, 3:GroupWizard, 4:BehavioralData
+ * @property {number} statusId ?
+ * @typedef {Object.<string, FilterItem>} FilterMap
+ */
+
+/**
+ * @typedef {object} FilterDefinitionSOAPItem
+ * @property {string} ObjectID id
+ * @property {string} CustomerKey key
+ * @property {object} [DataFilter] most relevant part that defines the filter
+ * @property {object} DataFilter.LeftOperand -
+ * @property {string} DataFilter.LeftOperand.Property -
+ * @property {string} DataFilter.LeftOperand.SimpleOperator -
+ * @property {string} DataFilter.LeftOperand.Value -
+ * @property {string} DataFilter.LogicalOperator -
+ * @property {object} [DataFilter.RightOperand] -
+ * @property {string} DataFilter.RightOperand.Property -
+ * @property {string} DataFilter.RightOperand.SimpleOperator -
+ * @property {string} DataFilter.RightOperand.Value -
+ * @property {string} Name name
+ * @property {string} Description -
+ * @property {string} [ObjectState] returned from SOAP API; used to return error messages
+ * @typedef {Object.<string, FilterDefinitionSOAPItem>} FilterDefinitionSOAPItemMap
+ */
+/**
+ * /automation/v1/filterdefinitions/<id> (not used)
+ *
+ * @typedef {object} AutomationFilterDefinitionItem
+ * @property {string} id object id
+ * @property {string} key external key
+ * @property {string} createdDate -
+ * @property {number} createdBy user id
+ * @property {string} createdName -
+ * @property {string} [description] (omitted by API if empty)
+ * @property {string} modifiedDate -
+ * @property {number} modifiedBy user id
+ * @property {string} modifiedName -
+ * @property {string} name name
+ * @property {string} categoryId folder id
+ * @property {string} filterDefinitionXml from REST API defines the filter in XML form
+ * @property {1|2} derivedFromType 1:list/profile attributes/measures, 2: dataExtension
+ * @property {boolean} isSendable ?
+ * @property {object} [soap__DataFilter] copied from SOAP API, defines the filter in readable form
+ * @property {object} soap__DataFilter.LeftOperand -
+ * @property {string} soap__DataFilter.LeftOperand.Property -
+ * @property {string} soap__DataFilter.LeftOperand.SimpleOperator -
+ * @property {string} soap__DataFilter.LeftOperand.Value -
+ * @property {string} soap__DataFilter.LogicalOperator -
+ * @property {object} [soap__DataFilter.RightOperand] -
+ * @property {string} soap__DataFilter.RightOperand.Property -
+ * @property {string} soap__DataFilter.RightOperand.SimpleOperator -
+ * @property {string} soap__DataFilter.RightOperand.Value -
+ */
+/**
+ * /email/v1/filters/filterdefinition/<id>
+ *
+ * @typedef {object} FilterDefinitionItem
+ * @property {string} id object id
+ * @property {string} key external key
+ * @property {string} createdDate date
+ * @property {number} createdBy user id
+ * @property {string} createdName name
+ * @property {string} [description] (omitted by API if empty)
+ * @property {string} lastUpdated date
+ * @property {number} lastUpdatedBy user id
+ * @property {string} lastUpdatedName name
+ * @property {string} name name
+ * @property {string} categoryId folder id
+ * @property {string} filterDefinitionXml from REST API defines the filter in XML form
+ * @property {1|2} derivedFromType 1:list/profile attributes/measures, 2: dataExtension
+ * @property {string} derivedFromObjectId Id of DataExtension - present if derivedFromType=2
+ * @property {'DataExtension'|'SubscriberAttributes'} derivedFromObjectTypeName -
+ * @property {string} [derivedFromObjectName] name of DataExtension
+ * @property {boolean} isSendable ?
+ * @property {object} [soap__DataFilter] copied from SOAP API, defines the filter in readable form
+ * @property {object} soap__DataFilter.LeftOperand -
+ * @property {string} soap__DataFilter.LeftOperand.Property -
+ * @property {string} soap__DataFilter.LeftOperand.SimpleOperator -
+ * @property {string} soap__DataFilter.LeftOperand.Value -
+ * @property {string} soap__DataFilter.LogicalOperator -
+ * @property {object} [soap__DataFilter.RightOperand] -
+ * @property {string} soap__DataFilter.RightOperand.Property -
+ * @property {string} soap__DataFilter.RightOperand.SimpleOperator -
+ * @property {string} soap__DataFilter.RightOperand.Value -
+ * @typedef {Object.<string, FilterDefinitionItem>} FilterDefinitionMap
+ */
+
+/**
  * @typedef {object} AuthObject
  * @property {string} client_id client_id client_id for sfmc-sdk auth
  * @property {string} client_secret client_secret for sfmc-sdk auth

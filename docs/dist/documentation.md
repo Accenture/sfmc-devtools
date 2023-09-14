@@ -67,6 +67,12 @@ as this is a configuration in the EID</p>
 <dt><a href="#Filter">Filter</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>Filter MetadataType</p>
 </dd>
+<dt><a href="#FilterDefinition">FilterDefinition</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>FilterDefinition MetadataType</p>
+</dd>
+<dt><a href="#FilterDefinitionHidden">FilterDefinitionHidden</a> ⇐ <code><a href="#FilterDefinitionHidden">FilterDefinitionHidden</a></code></dt>
+<dd><p>FilterDefinitionHidden MetadataType</p>
+</dd>
 <dt><a href="#Folder">Folder</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
 <dd><p>Folder MetadataType</p>
 </dd>
@@ -302,6 +308,16 @@ helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item
 <dd></dd>
 <dt><a href="#skipInteraction">skipInteraction</a> : <code>object</code></dt>
 <dd><p>signals what to insert automatically for things usually asked via wizard</p>
+</dd>
+<dt><a href="#FilterMap">FilterMap</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#FilterDefinitionSOAPItemMap">FilterDefinitionSOAPItemMap</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#AutomationFilterDefinitionItem">AutomationFilterDefinitionItem</a> : <code>object</code></dt>
+<dd><p>/automation/v1/filterdefinitions/<id> (not used)</p>
+</dd>
+<dt><a href="#FilterDefinitionMap">FilterDefinitionMap</a> : <code>object</code></dt>
+<dd><p>/email/v1/filters/filterdefinition/<id></p>
 </dd>
 <dt><a href="#AuthObject">AuthObject</a> : <code>object</code></dt>
 <dd></dd>
@@ -2868,16 +2884,22 @@ Filter MetadataType
 
 **Kind**: global class  
 **Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [Filter](#Filter) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [key])](#Filter.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.FilterMap, type: string}&gt;</code>
+    * [.postRetrieveTasks(metadata)](#Filter.postRetrieveTasks) ⇒ <code>TYPE.FilterItem</code>
+    * [.preDeployTasks(metadata)](#Filter.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.FilterItem&gt;</code>
+
 <a name="Filter.retrieve"></a>
 
-### Filter.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### Filter.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;{metadata: TYPE.FilterMap, type: string}&gt;</code>
 Retrieves Metadata of Filter.
 Endpoint /automation/v1/filters/ returns all Filters,
 but only with some of the fields. So it is needed to loop over
 Filters with the endpoint /automation/v1/filters/{id}
 
 **Kind**: static method of [<code>Filter</code>](#Filter)  
-**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.FilterMap, type: string}&gt;</code> - Promise of items  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2886,6 +2908,204 @@ Filters with the endpoint /automation/v1/filters/{id}
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
+<a name="Filter.postRetrieveTasks"></a>
+
+### Filter.postRetrieveTasks(metadata) ⇒ <code>TYPE.FilterItem</code>
+parses retrieved Metadata before saving
+
+**Kind**: static method of [<code>Filter</code>](#Filter)  
+**Returns**: <code>TYPE.FilterItem</code> - parsed metadata definition  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.FilterItem</code> | a single record |
+
+<a name="Filter.preDeployTasks"></a>
+
+### Filter.preDeployTasks(metadata) ⇒ <code>Promise.&lt;TYPE.FilterItem&gt;</code>
+prepares a record for deployment
+
+**Kind**: static method of [<code>Filter</code>](#Filter)  
+**Returns**: <code>Promise.&lt;TYPE.FilterItem&gt;</code> - Promise of updated single record  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.FilterItem</code> | a single record |
+
+<a name="FilterDefinition"></a>
+
+## FilterDefinition ⇐ [<code>MetadataType</code>](#MetadataType)
+FilterDefinition MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [FilterDefinition](#FilterDefinition) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [key])](#FilterDefinition.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.FilterDefinitionMap, type: string}&gt;</code>
+    * [.getFilterFolderIds([hidden])](#FilterDefinition.getFilterFolderIds) ⇒ <code>Array.&lt;number&gt;</code>
+    * [.getMeasureFolderIds()](#FilterDefinition.getMeasureFolderIds) ⇒ <code>Array.&lt;number&gt;</code>
+    * [.cacheDeFields(metadataTypeMapObj)](#FilterDefinition.cacheDeFields)
+    * [.cacheContactAttributes(metadataTypeMapObj)](#FilterDefinition.cacheContactAttributes)
+    * [.cacheMeasures(metadataTypeMapObj)](#FilterDefinition.cacheMeasures)
+    * [.retrieveForCache()](#FilterDefinition.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.FilterDefinitionMap, type: string}&gt;</code>
+    * [.postRetrieveTasks(metadata)](#FilterDefinition.postRetrieveTasks) ⇒ <code>TYPE.FilterDefinitionItem</code>
+    * [.resolveFieldIds(metadata, [fieldCache], [filter])](#FilterDefinition.resolveFieldIds) ⇒ <code>void</code>
+    * [.resolveAttributeIds(metadata, [filter])](#FilterDefinition.resolveAttributeIds) ⇒ <code>void</code>
+    * [.preDeployTasks(metadata)](#FilterDefinition.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.FilterDefinitionItem&gt;</code>
+    * [.create(metadata)](#FilterDefinition.create) ⇒ <code>Promise.&lt;TYPE.FilterDefinitionItem&gt;</code>
+    * [.update(metadata)](#FilterDefinition.update) ⇒ <code>Promise.&lt;TYPE.FilterDefinitionItem&gt;</code>
+
+<a name="FilterDefinition.retrieve"></a>
+
+### FilterDefinition.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;{metadata: TYPE.FilterDefinitionMap, type: string}&gt;</code>
+Retrieves all records and saves it to disk
+
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.FilterDefinitionMap, type: string}&gt;</code> - Promise of items  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [_] | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="FilterDefinition.getFilterFolderIds"></a>
+
+### FilterDefinition.getFilterFolderIds([hidden]) ⇒ <code>Array.&lt;number&gt;</code>
+helper for [retrieve](#FilterDefinition.retrieve)
+
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+**Returns**: <code>Array.&lt;number&gt;</code> - Array of folder IDs  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [hidden] | <code>boolean</code> | <code>false</code> | used to filter out hidden or non-hidden filterDefinitions |
+
+<a name="FilterDefinition.getMeasureFolderIds"></a>
+
+### FilterDefinition.getMeasureFolderIds() ⇒ <code>Array.&lt;number&gt;</code>
+helper for [retrieve](#FilterDefinition.retrieve)
+
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+**Returns**: <code>Array.&lt;number&gt;</code> - Array of folder IDs  
+<a name="FilterDefinition.cacheDeFields"></a>
+
+### FilterDefinition.cacheDeFields(metadataTypeMapObj)
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataTypeMapObj | <code>TYPE.MultiMetadataTypeMap</code> | - |
+
+<a name="FilterDefinition.cacheContactAttributes"></a>
+
+### FilterDefinition.cacheContactAttributes(metadataTypeMapObj)
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataTypeMapObj | <code>TYPE.MultiMetadataTypeMap</code> | - |
+
+<a name="FilterDefinition.cacheMeasures"></a>
+
+### FilterDefinition.cacheMeasures(metadataTypeMapObj)
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataTypeMapObj | <code>TYPE.MultiMetadataTypeMap</code> | - |
+
+<a name="FilterDefinition.retrieveForCache"></a>
+
+### FilterDefinition.retrieveForCache() ⇒ <code>Promise.&lt;{metadata: TYPE.FilterDefinitionMap, type: string}&gt;</code>
+Retrieves all records for caching
+
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+**Returns**: <code>Promise.&lt;{metadata: TYPE.FilterDefinitionMap, type: string}&gt;</code> - Promise of items  
+<a name="FilterDefinition.postRetrieveTasks"></a>
+
+### FilterDefinition.postRetrieveTasks(metadata) ⇒ <code>TYPE.FilterDefinitionItem</code>
+parses retrieved Metadata before saving
+
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+**Returns**: <code>TYPE.FilterDefinitionItem</code> - parsed metadata definition  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.FilterDefinitionItem</code> | a single record |
+
+<a name="FilterDefinition.resolveFieldIds"></a>
+
+### FilterDefinition.resolveFieldIds(metadata, [fieldCache], [filter]) ⇒ <code>void</code>
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.FilterDefinitionItem</code> | - |
+| [fieldCache] | <code>Array.&lt;object&gt;</code> | - |
+| [filter] | <code>object</code> | - |
+
+<a name="FilterDefinition.resolveAttributeIds"></a>
+
+### FilterDefinition.resolveAttributeIds(metadata, [filter]) ⇒ <code>void</code>
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.FilterDefinitionItem</code> | - |
+| [filter] | <code>object</code> | - |
+
+<a name="FilterDefinition.preDeployTasks"></a>
+
+### FilterDefinition.preDeployTasks(metadata) ⇒ <code>Promise.&lt;TYPE.FilterDefinitionItem&gt;</code>
+prepares a item for deployment
+
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+**Returns**: <code>Promise.&lt;TYPE.FilterDefinitionItem&gt;</code> - Promise of updated single item  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.FilterDefinitionItem</code> | a single record |
+
+<a name="FilterDefinition.create"></a>
+
+### FilterDefinition.create(metadata) ⇒ <code>Promise.&lt;TYPE.FilterDefinitionItem&gt;</code>
+Creates a single item
+
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+**Returns**: <code>Promise.&lt;TYPE.FilterDefinitionItem&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.FilterDefinitionItem</code> | a single item |
+
+<a name="FilterDefinition.update"></a>
+
+### FilterDefinition.update(metadata) ⇒ <code>Promise.&lt;TYPE.FilterDefinitionItem&gt;</code>
+Updates a single item
+
+**Kind**: static method of [<code>FilterDefinition</code>](#FilterDefinition)  
+**Returns**: <code>Promise.&lt;TYPE.FilterDefinitionItem&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.FilterDefinitionItem</code> | a single item |
+
+<a name="FilterDefinitionHidden"></a>
+
+## FilterDefinitionHidden ⇐ [<code>FilterDefinitionHidden</code>](#FilterDefinitionHidden)
+FilterDefinitionHidden MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>FilterDefinitionHidden</code>](#FilterDefinitionHidden)  
+<a name="FilterDefinitionHidden.getFilterFolderIds"></a>
+
+### FilterDefinitionHidden.getFilterFolderIds() ⇒ <code>Array.&lt;number&gt;</code>
+helper for [retrieve](#FilterDefinition.retrieve)
+
+**Kind**: static method of [<code>FilterDefinitionHidden</code>](#FilterDefinitionHidden)  
+**Returns**: <code>Array.&lt;number&gt;</code> - Array of folder IDs  
 <a name="Folder"></a>
 
 ## Folder ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -9303,6 +9523,124 @@ signals what to insert automatically for things usually asked via wizard
 | account_id | <code>number</code> | MID of the Parent Business Unit |
 | credentialName | <code>string</code> | how you would like the credential to be named |
 | gitRemoteUrl | <code>string</code> | URL of Git remote server |
+
+<a name="FilterMap"></a>
+
+## FilterMap : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| categoryId | <code>number</code> | folder id |
+| [createdDate] | <code>string</code> | - |
+| customerKey | <code>string</code> | key |
+| destinationObjectId | <code>string</code> | DE/List ID |
+| destinationTypeId | <code>1</code> \| <code>2</code> \| <code>3</code> \| <code>4</code> | 1:SubscriberList, 2:DataExtension, 3:GroupWizard, 4:BehavioralData |
+| filterActivityId | <code>string</code> | ? |
+| filterDefinitionId | <code>string</code> | ObjectID of filterDefinition |
+| modifiedDate | <code>string</code> | - |
+| name | <code>string</code> | name |
+| sourceObjectId | <code>string</code> | DE/List ID |
+| sourceTypeId | <code>1</code> \| <code>2</code> \| <code>3</code> \| <code>4</code> | 1:SubscriberList, 2:DataExtension, 3:GroupWizard, 4:BehavioralData |
+| statusId | <code>number</code> | ? |
+
+<a name="FilterDefinitionSOAPItemMap"></a>
+
+## FilterDefinitionSOAPItemMap : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| ObjectID | <code>string</code> | id |
+| CustomerKey | <code>string</code> | key |
+| [DataFilter] | <code>object</code> | most relevant part that defines the filter |
+| DataFilter.LeftOperand | <code>object</code> | - |
+| DataFilter.LeftOperand.Property | <code>string</code> | - |
+| DataFilter.LeftOperand.SimpleOperator | <code>string</code> | - |
+| DataFilter.LeftOperand.Value | <code>string</code> | - |
+| DataFilter.LogicalOperator | <code>string</code> | - |
+| [DataFilter.RightOperand] | <code>object</code> | - |
+| DataFilter.RightOperand.Property | <code>string</code> | - |
+| DataFilter.RightOperand.SimpleOperator | <code>string</code> | - |
+| DataFilter.RightOperand.Value | <code>string</code> | - |
+| Name | <code>string</code> | name |
+| Description | <code>string</code> | - |
+| [ObjectState] | <code>string</code> | returned from SOAP API; used to return error messages |
+
+<a name="AutomationFilterDefinitionItem"></a>
+
+## AutomationFilterDefinitionItem : <code>object</code>
+/automation/v1/filterdefinitions/<id> (not used)
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| id | <code>string</code> | object id |
+| key | <code>string</code> | external key |
+| createdDate | <code>string</code> | - |
+| createdBy | <code>number</code> | user id |
+| createdName | <code>string</code> | - |
+| [description] | <code>string</code> | (omitted by API if empty) |
+| modifiedDate | <code>string</code> | - |
+| modifiedBy | <code>number</code> | user id |
+| modifiedName | <code>string</code> | - |
+| name | <code>string</code> | name |
+| categoryId | <code>string</code> | folder id |
+| filterDefinitionXml | <code>string</code> | from REST API defines the filter in XML form |
+| derivedFromType | <code>1</code> \| <code>2</code> | 1:list/profile attributes/measures, 2: dataExtension |
+| isSendable | <code>boolean</code> | ? |
+| [soap__DataFilter] | <code>object</code> | copied from SOAP API, defines the filter in readable form |
+| soap__DataFilter.LeftOperand | <code>object</code> | - |
+| soap__DataFilter.LeftOperand.Property | <code>string</code> | - |
+| soap__DataFilter.LeftOperand.SimpleOperator | <code>string</code> | - |
+| soap__DataFilter.LeftOperand.Value | <code>string</code> | - |
+| soap__DataFilter.LogicalOperator | <code>string</code> | - |
+| [soap__DataFilter.RightOperand] | <code>object</code> | - |
+| soap__DataFilter.RightOperand.Property | <code>string</code> | - |
+| soap__DataFilter.RightOperand.SimpleOperator | <code>string</code> | - |
+| soap__DataFilter.RightOperand.Value | <code>string</code> | - |
+
+<a name="FilterDefinitionMap"></a>
+
+## FilterDefinitionMap : <code>object</code>
+/email/v1/filters/filterdefinition/<id>
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| id | <code>string</code> | object id |
+| key | <code>string</code> | external key |
+| createdDate | <code>string</code> | date |
+| createdBy | <code>number</code> | user id |
+| createdName | <code>string</code> | name |
+| [description] | <code>string</code> | (omitted by API if empty) |
+| lastUpdated | <code>string</code> | date |
+| lastUpdatedBy | <code>number</code> | user id |
+| lastUpdatedName | <code>string</code> | name |
+| name | <code>string</code> | name |
+| categoryId | <code>string</code> | folder id |
+| filterDefinitionXml | <code>string</code> | from REST API defines the filter in XML form |
+| derivedFromType | <code>1</code> \| <code>2</code> | 1:list/profile attributes/measures, 2: dataExtension |
+| derivedFromObjectId | <code>string</code> | Id of DataExtension - present if derivedFromType=2 |
+| derivedFromObjectTypeName | <code>&#x27;DataExtension&#x27;</code> \| <code>&#x27;SubscriberAttributes&#x27;</code> | - |
+| [derivedFromObjectName] | <code>string</code> | name of DataExtension |
+| isSendable | <code>boolean</code> | ? |
+| [soap__DataFilter] | <code>object</code> | copied from SOAP API, defines the filter in readable form |
+| soap__DataFilter.LeftOperand | <code>object</code> | - |
+| soap__DataFilter.LeftOperand.Property | <code>string</code> | - |
+| soap__DataFilter.LeftOperand.SimpleOperator | <code>string</code> | - |
+| soap__DataFilter.LeftOperand.Value | <code>string</code> | - |
+| soap__DataFilter.LogicalOperator | <code>string</code> | - |
+| [soap__DataFilter.RightOperand] | <code>object</code> | - |
+| soap__DataFilter.RightOperand.Property | <code>string</code> | - |
+| soap__DataFilter.RightOperand.SimpleOperator | <code>string</code> | - |
+| soap__DataFilter.RightOperand.Value | <code>string</code> | - |
 
 <a name="AuthObject"></a>
 
