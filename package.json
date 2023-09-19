@@ -48,7 +48,6 @@
         "lint-lib": "eslint lib/**/*.js",
         "lint-type": "eslint types/*.js",
         "lint-test": "eslint test/**/*.js",
-        "upgrade": "npm-check --update",
         "manual-prepare": "husky install",
         "lint-and-test": "run-s lint test",
         "test": "mocha --reporter-option maxDiffSize=25000",
@@ -98,7 +97,6 @@
         "lint-staged": "14.0.1",
         "mocha": "10.2.0",
         "mock-fs": "5.2.0",
-        "npm-check": "6.0.1",
         "npm-run-all": "4.1.5",
         "prettier-eslint": "15.0.1"
     },
