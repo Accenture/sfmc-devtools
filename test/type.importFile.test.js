@@ -24,17 +24,17 @@ describe('type: importFile', () => {
             assert.equal(
                 result.importFile ? Object.keys(result.importFile).length : 0,
                 1,
-                'only one importFile expected'
+                'only one importFile expected',
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_importFile', 'importFile'),
                 await testUtils.getExpectedJson('9999999', 'importFile', 'get'),
-                'returned JSON was not equal expected'
+                'returned JSON was not equal expected',
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 10,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
             );
             return;
         });
@@ -54,25 +54,25 @@ describe('type: importFile', () => {
             assert.equal(
                 result.importFile ? Object.keys(result.importFile).length : 0,
                 2,
-                'two importFiles expected'
+                'two importFiles expected',
             );
             // confirm created item
             assert.deepEqual(
                 await testUtils.getActualJson('testNew_importFile', 'importFile'),
                 await testUtils.getExpectedJson('9999999', 'importFile', 'post'),
-                'returned new-JSON was not equal expected for insert importFile'
+                'returned new-JSON was not equal expected for insert importFile',
             );
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_importFile', 'importFile'),
                 await testUtils.getExpectedJson('9999999', 'importFile', 'patch'),
-                'returned existing-JSON was not equal expected for update importFile'
+                'returned existing-JSON was not equal expected for update importFile',
             );
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 12,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
             );
             return;
         });
@@ -84,40 +84,40 @@ describe('type: importFile', () => {
                 'testInstance/testBU',
                 'importFile',
                 ['testExisting_importFile'],
-                'testSourceMarket'
+                'testSourceMarket',
             );
             assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.importFile ? Object.keys(result.importFile).length : 0,
                 1,
-                'only one importFile expected'
+                'only one importFile expected',
             );
             assert.deepEqual(
                 await testUtils.getActualTemplateJson('testExisting_importFile', 'importFile'),
                 await testUtils.getExpectedJson('9999999', 'importFile', 'template'),
-                'returned template JSON was not equal expected'
+                'returned template JSON was not equal expected',
             );
             // buildDefinition
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'importFile',
                 'testExisting_importFile',
-                'testTargetMarket'
+                'testTargetMarket',
             );
             assert.equal(
                 process.exitCode,
                 false,
-                'buildDefinition should not have thrown an error'
+                'buildDefinition should not have thrown an error',
             );
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_importFile', 'importFile'),
                 await testUtils.getExpectedJson('9999999', 'importFile', 'build'),
-                'returned deployment JSON was not equal expected'
+                'returned deployment JSON was not equal expected',
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 10,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
             );
             return;
         });
@@ -129,40 +129,40 @@ describe('type: importFile', () => {
                 'testInstance/testBU',
                 'importFile',
                 ['testExisting_importFile'],
-                'testSourceMarket'
+                'testSourceMarket',
             );
             assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.importFile ? Object.keys(result.importFile).length : 0,
                 1,
-                'only one importFile expected'
+                'only one importFile expected',
             );
             assert.deepEqual(
                 await testUtils.getActualTemplateJson('testExisting_importFile', 'importFile'),
                 await testUtils.getExpectedJson('9999999', 'importFile', 'template'),
-                'returned template JSON was not equal expected'
+                'returned template JSON was not equal expected',
             );
             // buildDefinition
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'importFile',
                 'testExisting_importFile',
-                'testTargetMarket'
+                'testTargetMarket',
             );
             assert.equal(
                 process.exitCode,
                 false,
-                'buildDefinition should not have thrown an error'
+                'buildDefinition should not have thrown an error',
             );
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_importFile', 'importFile'),
                 await testUtils.getExpectedJson('9999999', 'importFile', 'build'),
-                'returned deployment JSON was not equal expected'
+                'returned deployment JSON was not equal expected',
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 10,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
             );
             return;
         });
@@ -173,18 +173,18 @@ describe('type: importFile', () => {
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'importFile',
-                'testExisting_fileTranfer'
+                'testExisting_fileTranfer',
             );
             // THEN
             assert.equal(
                 process.exitCode,
                 1,
-                'deleteByKey should have thrown an error due to lack of support'
+                'deleteByKey should have thrown an error due to lack of support',
             );
             assert.equal(
                 isDeleted,
                 false,
-                'deleteByKey should have returned false due to lack of support'
+                'deleteByKey should have returned false due to lack of support',
             );
             return;
         });

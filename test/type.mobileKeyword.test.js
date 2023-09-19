@@ -25,29 +25,29 @@ describe('type: mobileKeyword', () => {
             assert.equal(
                 result.mobileKeyword ? Object.keys(result.mobileKeyword).length : 0,
                 1,
-                'only 1 mobileKeywords expected'
+                'only 1 mobileKeywords expected',
             );
             assert.deepEqual(
                 await testUtils.getActualJson(
                     '4912312345678.TESTEXISTING_KEYWORD',
-                    'mobileKeyword'
+                    'mobileKeyword',
                 ),
                 await testUtils.getExpectedJson('9999999', 'mobileKeyword', 'get'),
-                'saved JSON was not equal expected'
+                'saved JSON was not equal expected',
             );
             expect(
                 file(
                     testUtils.getActualFile(
                         '4912312345678.TESTEXISTING_KEYWORD',
                         'mobileKeyword',
-                        'amp'
-                    )
-                )
+                        'amp',
+                    ),
+                ),
             ).to.equal(file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'get', 'amp')));
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 2,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
             );
             return;
         });
@@ -61,7 +61,7 @@ describe('type: mobileKeyword', () => {
             await handler.deploy(
                 'testInstance/testBU',
                 ['mobileKeyword'],
-                ['4912312345678.TESTNEW_KEYWORD']
+                ['4912312345678.TESTNEW_KEYWORD'],
             );
             // THEN
             assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
@@ -70,33 +70,37 @@ describe('type: mobileKeyword', () => {
             assert.equal(
                 result.mobileKeyword ? Object.keys(result.mobileKeyword).length : 0,
                 2,
-                '2 mobileKeywords expected'
+                '2 mobileKeywords expected',
             );
             // confirm created item
             assert.deepEqual(
                 await testUtils.getActualJson('4912312345678.TESTNEW_KEYWORD', 'mobileKeyword'),
                 await testUtils.getExpectedJson('9999999', 'mobileKeyword', 'post-create'),
-                'returned JSON was not equal expected for insert mobileKeyword'
+                'returned JSON was not equal expected for insert mobileKeyword',
             );
             expect(
                 file(
-                    testUtils.getActualFile('4912312345678.TESTNEW_KEYWORD', 'mobileKeyword', 'amp')
-                )
+                    testUtils.getActualFile(
+                        '4912312345678.TESTNEW_KEYWORD',
+                        'mobileKeyword',
+                        'amp',
+                    ),
+                ),
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'post-create', 'amp'))
+                file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'post-create', 'amp')),
             );
 
             // confirm updated item
             // eslint-disable-next-line no-console
             console.log(
-                'Not testing UPDATE because the API only responds with an empty body unless there are errors in the request body'
+                'Not testing UPDATE because the API only responds with an empty body unless there are errors in the request body',
             );
 
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 4,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
             );
             return;
         });
@@ -105,7 +109,7 @@ describe('type: mobileKeyword', () => {
             await handler.deploy(
                 'testInstance/testBU',
                 ['mobileKeyword'],
-                ['4912312345678.TESTNEW_KEYWORD_BLOCKED']
+                ['4912312345678.TESTNEW_KEYWORD_BLOCKED'],
             );
             // THEN
             assert.equal(process.exitCode, true, 'deploy should have thrown an error');
@@ -114,7 +118,7 @@ describe('type: mobileKeyword', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 2,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
             );
             return;
         });
@@ -126,42 +130,42 @@ describe('type: mobileKeyword', () => {
                 'testInstance/testBU',
                 'mobileKeyword',
                 ['4912312345678.TESTEXISTING_KEYWORD'],
-                'testSourceMarket'
+                'testSourceMarket',
             );
             // WHEN
             assert.equal(
                 process.exitCode,
                 false,
-                'retrieveAsTemplate should not have thrown an error'
+                'retrieveAsTemplate should not have thrown an error',
             );
             assert.equal(
                 result.mobileKeyword ? Object.keys(result.mobileKeyword).length : 0,
                 1,
-                'only one item expected'
+                'only one item expected',
             );
             assert.deepEqual(
                 await testUtils.getActualTemplateJson(
                     '4912312345678.TESTEXISTING_KEYWORD',
-                    'mobileKeyword'
+                    'mobileKeyword',
                 ),
                 await testUtils.getExpectedJson('9999999', 'mobileKeyword', 'template'),
-                'returned template JSON was not equal expected'
+                'returned template JSON was not equal expected',
             );
             expect(
                 file(
                     testUtils.getActualTemplateFile(
                         '4912312345678.TESTEXISTING_KEYWORD',
                         'mobileKeyword',
-                        'amp'
-                    )
-                )
+                        'amp',
+                    ),
+                ),
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'template', 'amp'))
+                file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'template', 'amp')),
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 2,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
             );
             return;
         });
@@ -173,33 +177,33 @@ describe('type: mobileKeyword', () => {
                 'testInstance/testBU',
                 'mobileKeyword',
                 ['4912312345678.TESTEXISTING_KEYWORD'],
-                'testSourceMarket'
+                'testSourceMarket',
             );
             assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
 
             assert.equal(
                 result.mobileKeyword ? Object.keys(result.mobileKeyword).length : 0,
                 1,
-                'only one mobileKeyword expected'
+                'only one mobileKeyword expected',
             );
             assert.deepEqual(
                 await testUtils.getActualTemplateJson(
                     '4912312345678.TESTEXISTING_KEYWORD',
-                    'mobileKeyword'
+                    'mobileKeyword',
                 ),
                 await testUtils.getExpectedJson('9999999', 'mobileKeyword', 'template'),
-                'returned template JSON was not equal expected'
+                'returned template JSON was not equal expected',
             );
             expect(
                 file(
                     testUtils.getActualTemplateFile(
                         '4912312345678.TESTEXISTING_KEYWORD',
                         'mobileKeyword',
-                        'amp'
-                    )
-                )
+                        'amp',
+                    ),
+                ),
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'template', 'amp'))
+                file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'template', 'amp')),
             );
 
             // buildDefinition
@@ -207,35 +211,35 @@ describe('type: mobileKeyword', () => {
                 'testInstance/testBU',
                 'mobileKeyword',
                 '4912312345678.TESTEXISTING_KEYWORD',
-                'testTargetMarket'
+                'testTargetMarket',
             );
             assert.equal(
                 process.exitCode,
                 false,
-                'buildDefinition should not have thrown an error'
+                'buildDefinition should not have thrown an error',
             );
             assert.deepEqual(
                 await testUtils.getActualDeployJson(
                     '4912312345678.TESTTEMPLATED_KEYWORD',
-                    'mobileKeyword'
+                    'mobileKeyword',
                 ),
                 await testUtils.getExpectedJson('9999999', 'mobileKeyword', 'build'),
-                'returned deployment JSON was not equal expected'
+                'returned deployment JSON was not equal expected',
             );
             expect(
                 file(
                     testUtils.getActualDeployFile(
                         '4912312345678.TESTTEMPLATED_KEYWORD',
                         'mobileKeyword',
-                        'amp'
-                    )
-                )
+                        'amp',
+                    ),
+                ),
             ).to.equal(file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'build', 'amp')));
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 2,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
             );
             return;
         });
@@ -246,7 +250,7 @@ describe('type: mobileKeyword', () => {
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'mobileKeyword',
-                '4912312345678.TESTEXISTING_KEYWORD'
+                '4912312345678.TESTEXISTING_KEYWORD',
             );
             // THEN
             assert.equal(process.exitCode, false, 'delete should not have thrown an error');
@@ -261,25 +265,25 @@ describe('type: mobileKeyword', () => {
             const fileList = await handler.getFilesToCommit(
                 'testInstance/testBU',
                 'mobileKeyword',
-                ['4912312345678.TESTEXISTING_KEYWORD']
+                ['4912312345678.TESTEXISTING_KEYWORD'],
             );
             // THEN
             assert.equal(
                 process.exitCode,
                 false,
-                'getFilesToCommit should not have thrown an error'
+                'getFilesToCommit should not have thrown an error',
             );
             assert.equal(fileList.length, 2, 'expected only 2 file paths');
 
             assert.equal(
                 fileList[0].split('\\').join('/'),
                 'retrieve/testInstance/testBU/mobileKeyword/4912312345678.TESTEXISTING_KEYWORD.mobileKeyword-meta.json',
-                'wrong JSON path'
+                'wrong JSON path',
             );
             assert.equal(
                 fileList[1].split('\\').join('/'),
                 'retrieve/testInstance/testBU/mobileKeyword/4912312345678.TESTEXISTING_KEYWORD.mobileKeyword-meta.amp',
-                'wrong AMP path'
+                'wrong AMP path',
             );
             return;
         });

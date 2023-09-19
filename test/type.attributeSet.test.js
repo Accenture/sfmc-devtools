@@ -24,27 +24,27 @@ describe('type: attributeSet', () => {
                     ? Object.keys(retrieve['testInstance/testBU'].attributeSet).length
                     : 0,
                 28,
-                'only 28 attributeSets expected in retrieve response'
+                'only 28 attributeSets expected in retrieve response',
             );
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.attributeSet ? Object.keys(result.attributeSet).length : 0,
                 28,
-                'only 28 attributeSets expected in cache'
+                'only 28 attributeSets expected in cache',
             );
 
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_dataExtensionShared', 'attributeSet'),
                 await testUtils.getExpectedJson('9999999', 'attributeSet', 'retrieve'),
 
-                'returned metadata was not equal expected'
+                'returned metadata was not equal expected',
             );
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 7,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
             );
             return;
         });

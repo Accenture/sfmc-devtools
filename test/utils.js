@@ -26,7 +26,7 @@ const authResources = File.readJsonSync(path.join(__dirname, './resources/auth.j
  */
 export function getActualJson(customerKey, type, buName = 'testBU') {
     return File.readJSON(
-        `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-meta.json`
+        `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-meta.json`,
     );
 }
 
@@ -62,7 +62,7 @@ export function getActualFile(customerKey, type, ext) {
  */
 export function getActualDeployJson(customerKey, type, buName = 'testBU') {
     return File.readJSON(
-        `./deploy/testInstance/${buName}/${type}/${customerKey}.${type}-meta.json`
+        `./deploy/testInstance/${buName}/${type}/${customerKey}.${type}-meta.json`,
     );
 }
 /**
@@ -148,22 +148,22 @@ export function mockSetup(isDeploy) {
         '.mcdevrc.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdevrc.json')),
         '.mcdev-auth.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdev-auth.json')),
         'boilerplate/config.json': fsmock.load(
-            path.resolve(__dirname, '../boilerplate/config.json')
+            path.resolve(__dirname, '../boilerplate/config.json'),
         ),
         test: fsmock.load(path.resolve(__dirname)),
         // the following node_modules are required for prettier's SQL parser to work
         'node_modules/prettier': fsmock.load(path.resolve(__dirname, '../node_modules/prettier')),
         'node_modules/prettier-plugin-sql': fsmock.load(
-            path.resolve(__dirname, '../node_modules/prettier-plugin-sql')
+            path.resolve(__dirname, '../node_modules/prettier-plugin-sql'),
         ),
         'node_modules/node-sql-parser': fsmock.load(
-            path.resolve(__dirname, '../node_modules/node-sql-parser')
+            path.resolve(__dirname, '../node_modules/node-sql-parser'),
         ),
         'node_modules/big-integer': fsmock.load(
-            path.resolve(__dirname, '../node_modules/big-integer')
+            path.resolve(__dirname, '../node_modules/big-integer'),
         ),
         'node_modules/sql-formatter': fsmock.load(
-            path.resolve(__dirname, '../node_modules/sql-formatter')
+            path.resolve(__dirname, '../node_modules/sql-formatter'),
         ),
         'node_modules/nearley': fsmock.load(path.resolve(__dirname, '../node_modules/nearley')),
     };

@@ -25,20 +25,20 @@ describe('type: mobileMessage', () => {
             assert.equal(
                 result.mobileMessage ? Object.keys(result.mobileMessage).length : 0,
                 1,
-                'only 1 mobileMessages expected'
+                'only 1 mobileMessages expected',
             );
             assert.deepEqual(
                 await testUtils.getActualJson('NTIzOjc4OjA', 'mobileMessage'),
                 await testUtils.getExpectedJson('9999999', 'mobileMessage', 'get'),
-                'saved JSON was not equal expected'
+                'saved JSON was not equal expected',
             );
             expect(file(testUtils.getActualFile('NTIzOjc4OjA', 'mobileMessage', 'amp'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'get', 'amp'))
+                file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'get', 'amp')),
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 4,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
             );
             return;
         });
@@ -57,33 +57,33 @@ describe('type: mobileMessage', () => {
             assert.equal(
                 result.mobileMessage ? Object.keys(result.mobileMessage).length : 0,
                 2,
-                '2 mobileMessages expected'
+                '2 mobileMessages expected',
             );
             // confirm created item
             assert.deepEqual(
                 await testUtils.getActualJson('NTQ3Ojc4OjA', 'mobileMessage'),
                 await testUtils.getExpectedJson('9999999', 'mobileMessage', 'post-create'),
-                'returned JSON was not equal expected for insert mobileMessage'
+                'returned JSON was not equal expected for insert mobileMessage',
             );
             expect(file(testUtils.getActualFile('NTQ3Ojc4OjA', 'mobileMessage', 'amp'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'post-create', 'amp'))
+                file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'post-create', 'amp')),
             );
 
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson('NTIzOjc4OjA', 'mobileMessage'),
                 await testUtils.getExpectedJson('9999999', 'mobileMessage', 'post-update'), // watch out - mobileMessage api wants put instead of patch for updates
-                'returned JSON was not equal expected for update mobileMessage'
+                'returned JSON was not equal expected for update mobileMessage',
             );
             expect(file(testUtils.getActualFile('NTIzOjc4OjA', 'mobileMessage', 'amp'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'post-update', 'amp'))
+                file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'post-update', 'amp')),
             );
 
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 8,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
             );
             return;
         });
@@ -95,7 +95,7 @@ describe('type: mobileMessage', () => {
             assert.equal(
                 process.exitCode,
                 1,
-                'deploy should have thrown an error due to lack of support'
+                'deploy should have thrown an error due to lack of support',
             );
             return;
         });
@@ -109,24 +109,24 @@ describe('type: mobileMessage', () => {
                 'testInstance/testBU',
                 'mobileMessage',
                 ['NTIzOjc4OjA'],
-                'testSourceMarket'
+                'testSourceMarket',
             );
             assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
 
             assert.equal(
                 result.mobileMessage ? Object.keys(result.mobileMessage).length : 0,
                 1,
-                'only one mobileMessage expected'
+                'only one mobileMessage expected',
             );
             assert.deepEqual(
                 await testUtils.getActualTemplateJson('NTIzOjc4OjA', 'mobileMessage'),
                 await testUtils.getExpectedJson('9999999', 'mobileMessage', 'template'),
-                'returned template JSON was not equal expected'
+                'returned template JSON was not equal expected',
             );
             expect(
-                file(testUtils.getActualTemplateFile('NTIzOjc4OjA', 'mobileMessage', 'amp'))
+                file(testUtils.getActualTemplateFile('NTIzOjc4OjA', 'mobileMessage', 'amp')),
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'template', 'amp'))
+                file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'template', 'amp')),
             );
 
             // buildDefinition
@@ -134,26 +134,26 @@ describe('type: mobileMessage', () => {
                 'testInstance/testBU',
                 'mobileMessage',
                 'NTIzOjc4OjA',
-                'testTargetMarket'
+                'testTargetMarket',
             );
             assert.equal(
                 process.exitCode,
                 false,
-                'buildDefinition should not have thrown an error'
+                'buildDefinition should not have thrown an error',
             );
             assert.deepEqual(
                 await testUtils.getActualDeployJson('NTIzOjc4OjA', 'mobileMessage'),
                 await testUtils.getExpectedJson('9999999', 'mobileMessage', 'build'),
-                'returned deployment JSON was not equal expected'
+                'returned deployment JSON was not equal expected',
             );
             expect(
-                file(testUtils.getActualDeployFile('NTIzOjc4OjA', 'mobileMessage', 'amp'))
+                file(testUtils.getActualDeployFile('NTIzOjc4OjA', 'mobileMessage', 'amp')),
             ).to.equal(file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'build', 'amp')));
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 4,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
             );
             return;
         });
@@ -164,7 +164,7 @@ describe('type: mobileMessage', () => {
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'mobileMessage',
-                'NTIzOjc4OjA'
+                'NTIzOjc4OjA',
             );
             // THEN
             assert.equal(process.exitCode, false, 'delete should not have thrown an error');
@@ -179,25 +179,25 @@ describe('type: mobileMessage', () => {
             const fileList = await handler.getFilesToCommit(
                 'testInstance/testBU',
                 'mobileMessage',
-                ['NTIzOjc4OjA']
+                ['NTIzOjc4OjA'],
             );
             // THEN
             assert.equal(
                 process.exitCode,
                 false,
-                'getFilesToCommit should not have thrown an error'
+                'getFilesToCommit should not have thrown an error',
             );
             assert.equal(fileList.length, 2, 'expected only 2 file paths');
 
             assert.equal(
                 fileList[0].split('\\').join('/'),
                 'retrieve/testInstance/testBU/mobileMessage/NTIzOjc4OjA.mobileMessage-meta.json',
-                'wrong JSON path'
+                'wrong JSON path',
             );
             assert.equal(
                 fileList[1].split('\\').join('/'),
                 'retrieve/testInstance/testBU/mobileMessage/NTIzOjc4OjA.mobileMessage-meta.amp',
-                'wrong AMP path'
+                'wrong AMP path',
             );
             return;
         });

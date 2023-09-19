@@ -23,7 +23,7 @@ if (
             get() {
                 return '';
             },
-        }
+        },
     );
 } else {
     // test is executed directly in a command prompt. Use colors.
@@ -58,7 +58,7 @@ async function loadSOAPRecords(mcdevAction, type, mid, filter) {
                     testPath + '-response.xml'
                 } instead of the more specific ${
                     testPath + filterPath + '-response.xml'
-                }. Make sure this is intended`
+                }. Make sure this is intended`,
             );
             /* eslint-enable no-console */
         }
@@ -70,7 +70,7 @@ async function loadSOAPRecords(mcdevAction, type, mid, filter) {
     console.log(
         `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}: Please create file ${
             filterPath ? testPath + filterPath + '-response.xml or ' : ''
-        }${testPath + '-response.xml'}`
+        }${testPath + '-response.xml'}`,
     );
     /* eslint-enable no-console */
 
@@ -142,7 +142,7 @@ export const handleSOAPRequest = async (config) => {
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 jObj.Envelope.Body.RetrieveRequestMsg.RetrieveRequest.ObjectType,
                 jObj.Envelope.Header.fueloauth,
-                jObj.Envelope.Body.RetrieveRequestMsg.RetrieveRequest.Filter
+                jObj.Envelope.Body.RetrieveRequestMsg.RetrieveRequest.Filter,
             );
 
             break;
@@ -152,7 +152,7 @@ export const handleSOAPRequest = async (config) => {
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.CreateRequest.Objects['@_xsi:type'],
                 jObj.Envelope.Header.fueloauth,
-                null
+                null,
             );
 
             break;
@@ -162,7 +162,7 @@ export const handleSOAPRequest = async (config) => {
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.UpdateRequest.Objects['@_xsi:type'],
                 jObj.Envelope.Header.fueloauth,
-                null
+                null,
             );
 
             break;
@@ -174,7 +174,7 @@ export const handleSOAPRequest = async (config) => {
                     '@_xsi:type'
                 ],
                 jObj.Envelope.Header.fueloauth,
-                null
+                null,
             );
 
             break;
@@ -184,7 +184,7 @@ export const handleSOAPRequest = async (config) => {
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.DeleteRequest.Objects['@_xsi:type'],
                 jObj.Envelope.Header.fueloauth,
-                null
+                null,
             );
 
             break;
@@ -194,7 +194,7 @@ export const handleSOAPRequest = async (config) => {
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.ScheduleRequestMsg.Interactions.Interaction['@_xsi:type'],
                 jObj.Envelope.Header.fueloauth,
-                fullObj.Envelope.Body.ScheduleRequestMsg.Interactions.Interaction.ObjectID
+                fullObj.Envelope.Body.ScheduleRequestMsg.Interactions.Interaction.ObjectID,
             );
 
             break;
@@ -204,14 +204,14 @@ export const handleSOAPRequest = async (config) => {
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.PerformRequestMsg.Definitions.Definition['@_xsi:type'],
                 jObj.Envelope.Header.fueloauth,
-                fullObj.Envelope.Body.PerformRequestMsg.Definitions.Definition.ObjectID
+                fullObj.Envelope.Body.PerformRequestMsg.Definitions.Definition.ObjectID,
             );
 
             break;
         }
         default: {
             throw new Error(
-                `The SOAP Action ${config.headers.SOAPAction} is not supported by test handler`
+                `The SOAP Action ${config.headers.SOAPAction} is not supported by test handler`,
             );
         }
     }
@@ -247,7 +247,7 @@ export const handleRESTRequest = async (config) => {
                 'resources',
                 config.headers.Authorization.replace('Bearer ', ''),
                 urlObj.pathname,
-                config.method + '-response'
+                config.method + '-response',
             )
             .replace(':', '_'); // replace : with _ for Windows
 
@@ -257,7 +257,7 @@ export const handleRESTRequest = async (config) => {
                 const response = JSON.parse(
                     await fs.readFile(testPath + '.json', {
                         encoding: 'utf8',
-                    })
+                    }),
                 );
                 response.items = response.items.filter((def) => def.name == filterName);
                 response.count = response.items.length;
@@ -280,7 +280,7 @@ export const handleRESTRequest = async (config) => {
         } else {
             /* eslint-disable no-console */
             console.log(
-                `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}: Please create file ${testPath}.json/.txt`
+                `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}: Please create file ${testPath}.json/.txt`,
             );
             /* eslint-enable no-console */
             process.exitCode = 404;

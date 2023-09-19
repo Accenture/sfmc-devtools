@@ -24,17 +24,17 @@ describe('type: journey', () => {
             assert.equal(
                 result.journey ? Object.keys(result.journey).length : 0,
                 2,
-                'only 2 journeys expected'
+                'only 2 journeys expected',
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_interaction', 'journey'),
                 await testUtils.getExpectedJson('9999999', 'journey', 'get'),
-                'returned JSON was not equal expected'
+                'returned JSON was not equal expected',
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 13,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
             );
             return;
         });
@@ -53,27 +53,27 @@ describe('type: journey', () => {
             assert.equal(
                 result.journey ? Object.keys(result.journey).length : 0,
                 3,
-                '3 journeys expected'
+                '3 journeys expected',
             );
             // confirm created item
             assert.deepEqual(
                 await testUtils.getActualJson('testNew_interaction', 'journey'),
                 await testUtils.getExpectedJson('9999999', 'journey', 'post'),
-                'returned JSON was not equal expected for insert journey'
+                'returned JSON was not equal expected for insert journey',
             );
 
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_interaction', 'journey'),
                 await testUtils.getExpectedJson('9999999', 'journey', 'put'), // watch out - journey api wants put instead of patch for updates
-                'returned JSON was not equal expected for update journey'
+                'returned JSON was not equal expected for update journey',
             );
 
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 11,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
             );
             return;
         });
@@ -85,7 +85,7 @@ describe('type: journey', () => {
             assert.equal(
                 process.exitCode,
                 1,
-                'deploy should have thrown an error due to lack of support'
+                'deploy should have thrown an error due to lack of support',
             );
             return;
         });
@@ -99,18 +99,18 @@ describe('type: journey', () => {
                 'testInstance/testBU',
                 'journey',
                 ['testExisting_interaction'],
-                'testSourceMarket'
+                'testSourceMarket',
             );
             assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.journey ? Object.keys(result.journey).length : 0,
                 1,
-                'only one journey expected'
+                'only one journey expected',
             );
             assert.deepEqual(
                 await testUtils.getActualTemplateJson('testExisting_interaction', 'journey'),
                 await testUtils.getExpectedJson('9999999', 'journey', 'template'),
-                'returned template JSON was not equal expected'
+                'returned template JSON was not equal expected',
             );
 
             // buildDefinition
@@ -118,23 +118,23 @@ describe('type: journey', () => {
                 'testInstance/testBU',
                 'journey',
                 'testExisting_interaction',
-                'testTargetMarket'
+                'testTargetMarket',
             );
             assert.equal(
                 process.exitCode,
                 false,
-                'buildDefinition should not have thrown an error'
+                'buildDefinition should not have thrown an error',
             );
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_interaction', 'journey'),
                 await testUtils.getExpectedJson('9999999', 'journey', 'build'),
-                'returned deployment JSON was not equal expected'
+                'returned deployment JSON was not equal expected',
             );
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 13,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
             );
             return;
         });
@@ -145,7 +145,7 @@ describe('type: journey', () => {
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'journey',
-                'testExisting_interaction'
+                'testExisting_interaction',
             );
             // THEN
             assert.equal(process.exitCode, true, 'delete should have thrown an error');
@@ -158,7 +158,7 @@ describe('type: journey', () => {
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'journey',
-                'testExisting_interaction/2'
+                'testExisting_interaction/2',
             );
             // THEN
             assert.equal(process.exitCode, true, 'delete should have thrown an error');
@@ -171,7 +171,7 @@ describe('type: journey', () => {
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'journey',
-                'testExisting_interaction/1'
+                'testExisting_interaction/1',
             );
             // THEN
             assert.equal(process.exitCode, false, 'delete should not have thrown an error');
