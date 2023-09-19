@@ -1,10 +1,8 @@
-import chai from 'chai';
+import chai, { assert, expect } from 'chai';
 import chaiFiles from 'chai-files';
-const assert = chai.assert;
-const expect = chai.expect;
-chai.use(chaiFiles);
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
+chai.use(chaiFiles);
 
 describe('GENERAL', () => {
     beforeEach(() => {
