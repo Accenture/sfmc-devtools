@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:bda830a5-f8a8-4555-a0f0-9b3cdae02f9f</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:afa5fcc9-c276-4f3d-9796-6b31a2b55721</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-1332843c-2deb-4570-822f-502889ddd5c9">
+                <wsu:Created>2023-08-08T12:49:19Z</wsu:Created>
+                <wsu:Expires>2023-08-08T12:54:19Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>e25a4055-f1b6-4fcd-a771-76bcb1cff6a9</RequestID>
+            <Results xsi:type="Email">
+                <PartnerKey />
+                <CreatedDate>2020-08-13T10:16:59</CreatedDate>
+                <ModifiedDate>2020-11-09T13:33:30.15</ModifiedDate>
+                <ID>483943</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>255f0e7c-cd37-452b-ba59-cd802359f199</CustomerKey>
+                <Name>Sporting Goods for September</Name>
+                <Folder>my emails</Folder>
+                <CategoryID>283575</CategoryID>
+                <HTMLBody>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" /&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /&gt;
+&lt;style type="text/css"&gt;
+ReadMsgBody{ width: 100%;}
+.ExternalClass {width: 100%;}
+.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;}
+body {-webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;margin:0 !important; padding:0 !important;}
+p { margin: 1em 0;}
+table td { border-collapse: collapse;}
+img {outline:0;}
+a img {border:none;}
+p {margin: 1em 0;}
+@-ms-viewport{ width: device-width;}
+@media only screen and (max-width: 480px) {
+body[yahoo] .container { width:100% !important; }
+body[yahoo] .footer { width:auto !important; margin-left:0; }
+body[yahoo] .content-padding{ padding:4px !important; }
+body[yahoo] .mobile-hidden { display:none !important; }
+body[yahoo] .logo { display:block !important; padding:0 !important; }
+body[yahoo] img { width:auto !important; max-width:308px !important; height:auto !important; max-height:auto !important;}
+body[yahoo] .header img { width:auto !important; max-width:316px !important; height:auto !important; max-height:auto !important;}
+body[yahoo] .photo img { width:100% !important; max-width:100% !important; height:auto !important;}
+body[yahoo] .drop { display:block !important; width: 100% !important; float:left; clear:both;}
+body[yahoo] .footerlogo { display:block !important; width: 100% !important; padding-top:15px; float:left; clear:both;}
+body[yahoo] .nav4, body[yahoo] .nav5, body[yahoo] .nav6 { display: none !important; }
+}
+@media only screen and (max-width: 640px) {
+body[yahoo] .container { width:100% !important; }
+body[yahoo] .mobile-hidden { display:none !important; }
+body[yahoo] .logo { display:block !important; padding:0 !important; }
+body[yahoo] .photo img { width:100% !important; height:auto !important;}
+body[yahoo] .nav5, body[yahoo] .nav6 { display: none !important;}
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body bgcolor="#ffffff" text="#000000" style="background-color: #FFFFFF; color: #000000; margin: 0px; padding:0px; -webkit-text-size-adjust:none;" yahoo="fix"&gt;
+	&lt;table width="100%" border="0" cellpadding="0" cellspacing="0" align="center"&gt;
+		&lt;tr&gt;
+            &lt;td align="center" valign="top"&gt;&lt;custom type="header" name="header"&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td align="center"&gt;
+                &lt;table cellspacing="0" cellpadding="0" border="0" width="600" class="container" align="center"&gt;
+                    &lt;tr&gt;
+                        &lt;td&gt;
+                            &lt;table cellspacing="0" cellpadding="0" border="1" bordercolor="#000000" bgcolor="#ffffff" width="100%"&gt;
+                                &lt;tr&gt;
+                                    &lt;td align="center" class="header" valign="top"&gt;&lt;/td&gt;
+                                &lt;/tr&gt;
+                                &lt;tr&gt;
+                                    &lt;td align="center" valign="top"&gt;&lt;table cellspacing="0" cellpadding="0" border="0" width="100%" align="left"&gt;
+	&lt;tr&gt;
+		&lt;td class="content-padding" style="padding:10px;"&gt;
+			&lt;table cellspacing="0" cellpadding="0" border="0" width="100%"&gt;
+				&lt;tr&gt;
+					&lt;td class="drop" valign="top" width="33%" align="left"&gt;
+						&lt;custom type="content" name="left"&gt;
+					&lt;/td&gt;
+					&lt;td class="drop" valign="top" width="2%" height="10"&gt;&lt;img alt="" src="https://image.s7.sfmc-content.com/lib/ffcf14/m/1/spacer.gif" height="10" width="10" style="display: block;"/&gt;&lt;/td&gt;
+					&lt;td class="drop" valign="top" width="65%"&gt;
+						&lt;table border="0" cellpadding="0" cellspacing="0" width="100%"&gt;
+							&lt;tr&gt;
+								&lt;td align="left" valign="top"&gt;
+									&lt;custom type="content" name="right1"&gt;
+								&lt;/td&gt;
+							&lt;/tr&gt;
+							&lt;tr&gt;
+								&lt;td align="left" valign="top" style="padding-top: 10px;"&gt;
+									&lt;custom type="content" name="right2"&gt;
+								&lt;/td&gt;
+							&lt;/tr&gt;
+						&lt;/table&gt;
+					&lt;/td&gt;
+				&lt;/tr&gt;
+				&lt;tr&gt;
+					&lt;td align="left" colspan="3" valign="top" class="drop" style="padding-top:10px;"&gt;
+						&lt;custom type="content" name="bottom"&gt;
+					&lt;/td&gt;
+				&lt;/tr&gt;
+			&lt;/table&gt;
+		&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/td&gt;
+                                &lt;/tr&gt;
+                            &lt;/table&gt;
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+        	&lt;td valign="top"&gt;&lt;custom type="footer" name="footer"&gt;&lt;/td&gt;
+    	&lt;/tr&gt;
+	&lt;/table&gt;
+	&lt;custom name="opencounter" type="tracking"&gt;
+&lt;/body&gt;
+&lt;/html&gt;</HTMLBody>
+                <TextBody />
+                <ContentAreas>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>934961</ID>
+                    <ObjectID>5E999EA7-97D8-4910-91B3-ED29B16567DA</ObjectID>
+                    <CustomerKey>36D85559-5345-41CB-9E8E-A6B7675E4A6F</CustomerKey>
+                    <Key>left</Key>
+                    <Content>&lt;table width="100%" bgcolor="" border="0" bordercolor="" cellpadding="0" cellspacing="0"&gt;&lt;tr&gt;&lt;td style="font-family:Arial;font-size:13px;"&gt;%%First Name%%&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</Content>
+                    <IsBlank>false</IsBlank>
+                    <CategoryID>0</CategoryID>
+                    <Name />
+                    <IsDynamicContent>false</IsDynamicContent>
+                    <IsSurvey>false</IsSurvey>
+                    <IsLocked>false</IsLocked>
+                </ContentAreas>
+                <ContentAreas>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>934962</ID>
+                    <ObjectID>9FA2FEE0-8439-4475-B990-BBC95CB30E31</ObjectID>
+                    <CustomerKey>68DC9A04-6662-4A23-912A-4A349A1EF040</CustomerKey>
+                    <Key>right1</Key>
+                    <Content>&lt;table width="100%" bgcolor="" border="0" bordercolor="" cellpadding="0" cellspacing="0"&gt;&lt;tr&gt;&lt;td style="font-family:Arial;font-size:13px;"&gt;%%Last Name%%&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</Content>
+                    <IsBlank>false</IsBlank>
+                    <CategoryID>0</CategoryID>
+                    <Name />
+                    <IsDynamicContent>false</IsDynamicContent>
+                    <IsSurvey>false</IsSurvey>
+                    <IsLocked>false</IsLocked>
+                </ContentAreas>
+                <ContentAreas>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>934963</ID>
+                    <ObjectID>5CE10FC0-CE06-40CC-8BE4-14583E2D02B3</ObjectID>
+                    <CustomerKey>AB7920D1-AE37-4137-9BB9-77B746D4A66C</CustomerKey>
+                    <Key>right2</Key>
+                    <Content>&lt;table width="100%" bgcolor="" border="0" bordercolor="" cellpadding="0" cellspacing="0"&gt;&lt;tr&gt;&lt;td style="font-family:Arial;font-size:13px;"&gt;%%emailname_%%&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</Content>
+                    <IsBlank>false</IsBlank>
+                    <CategoryID>0</CategoryID>
+                    <Name />
+                    <IsDynamicContent>false</IsDynamicContent>
+                    <IsSurvey>false</IsSurvey>
+                    <IsLocked>false</IsLocked>
+                </ContentAreas>
+                <ContentAreas>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>934964</ID>
+                    <ObjectID>AF6501E0-8367-4121-9142-ADAFD632FBE7</ObjectID>
+                    <CustomerKey>84B63EB0-E248-42D4-B6A6-716C18D2718D</CustomerKey>
+                    <Key>bottom</Key>
+                    <Content>&lt;table width="100%" bgcolor="" border="0" bordercolor="" cellpadding="0" cellspacing="0"&gt;&lt;tr&gt;&lt;td style="font-family:Arial;font-size:13px;"&gt;%%emailaddr%%&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</Content>
+                    <IsBlank>false</IsBlank>
+                    <CategoryID>0</CategoryID>
+                    <Name />
+                    <IsDynamicContent>false</IsDynamicContent>
+                    <IsSurvey>false</IsSurvey>
+                    <IsLocked>false</IsLocked>
+                </ContentAreas>
+                <Subject>Sporting Goods for September</Subject>
+                <IsActive>true</IsActive>
+                <IsHTMLPaste>false</IsHTMLPaste>
+                <Status>New</Status>
+                <EmailType>Normal</EmailType>
+                <CharacterSet>utf-8</CharacterSet>
+                <HasDynamicSubjectLine>false</HasDynamicSubjectLine>
+                <ContentCheckStatus>Not Checked</ContentCheckStatus>
+                <PreHeader />
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>

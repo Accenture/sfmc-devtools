@@ -44,6 +44,22 @@
             "IsRequired": true,
             "IsPrimaryKey": true,
             "FieldType": "Text"
+        },
+        {
+            "Name": "decimalField",
+            "DefaultValue": "",
+            "MaxLength": 6,
+            "Scale": 3,
+            "IsPrimaryKey": false,
+            "IsRequired": true,
+            "FieldType": "Decimal"
+        },
+        {
+            "Name": "numberField",
+            "DefaultValue": "",
+            "IsPrimaryKey": false,
+            "IsRequired": true,
+            "FieldType": "Number"
         }
     ],
     "r__folder_ContentType": "dataextension",

@@ -24,8 +24,8 @@ describe('type: user', () => {
             const result = cache.getCache();
             assert.equal(
                 result.user ? Object.keys(result.user).length : 0,
-                1,
-                'only one user expected'
+                3,
+                'only three users expected'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_user', 'user', '_ParentBU_'),
@@ -40,7 +40,7 @@ describe('type: user', () => {
                 { encoding: 'utf8' }
             );
             const regexFindDaysSinceLogin =
-                /\| (\d*) (seconds|minutes|days|weeks|months|years){1} \|/gm;
+                /\| (\d*) (seconds|minutes|days|weeks|months|years){1} \|/g;
             // fetch expected time since last login
             const expectedDaysSinceLogin = expectedFile.match(regexFindDaysSinceLogin);
             // load actual file and replace days since last login with expected value
@@ -48,7 +48,7 @@ describe('type: user', () => {
                 await File.readFile(`./docs/user/testInstance.users.md`, {
                     encoding: 'utf8',
                 })
-            ).replaceAll(regexFindDaysSinceLogin, expectedDaysSinceLogin);
+            ).replaceAll(regexFindDaysSinceLogin, [expectedDaysSinceLogin[0]]);
             expect(actualFile).to.equal(expectedFile);
 
             assert.equal(
@@ -81,7 +81,12 @@ describe('type: user', () => {
         });
         it('Should create & upsert a user', async () => {
             // WHEN
-            const expectedCache = ['testNew_user', 'testExisting_user'];
+            const expectedCache = [
+                'testExisting_user',
+                'testExisting_user_inactive',
+                '45372cbb-06e0-438e-88d8-008981f7a18b',
+                'testNew_user',
+            ];
             await handler.deploy('testInstance/_ParentBU_', ['user'], expectedCache);
             // THEN
             assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
@@ -90,8 +95,8 @@ describe('type: user', () => {
             const result = cache.getCache();
             assert.equal(
                 result.user ? Object.keys(result.user).length : 0,
-                2,
-                'two users expected'
+                4,
+                'four users expected'
             );
             // confirm if result.user only includes values from expectedCache
             assert.deepEqual(
@@ -124,14 +129,22 @@ describe('type: user', () => {
         });
         it('Should not deploy user with Marketing Cloud role', async () => {
             // WHEN
-            const expectedCache = ['testExisting_user'];
+            const expectedCache = [
+                'testExisting_user',
+                'testExisting_user_inactive',
+                '45372cbb-06e0-438e-88d8-008981f7a18b',
+            ];
             await handler.deploy('testInstance/_ParentBU_', ['user'], ['testBlocked_user']);
             // THEN
             assert.equal(process.exitCode, 1, 'Deployment should have thrown an error');
 
             // get results from cache
             const result = cache.getCache();
-            assert.equal(result.user ? Object.keys(result.user).length : 0, 1, '1 user expected');
+            assert.equal(
+                result.user ? Object.keys(result.user).length : 0,
+                3,
+                'three users expected'
+            );
             // confirm if result.user only includes values from expectedCache
             assert.deepEqual(
                 Object.keys(result.user),
@@ -146,7 +159,6 @@ describe('type: user', () => {
             );
             return;
         });
-        it('Should change the key during update with --changeKeyValue');
     });
     describe('Templating ================', () => {
         // it('Should create a user template via retrieveAsTemplate and build it', async () => {});

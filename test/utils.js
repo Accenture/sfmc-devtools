@@ -2,6 +2,7 @@ import File from '../lib/util/file.js';
 import path from 'node:path';
 import MockAdapter from 'axios-mock-adapter';
 import { axiosInstance } from '../node_modules/sfmc-sdk/lib/util.js';
+import handler from '../lib/index.js';
 import auth from '../lib/util/auth.js';
 import { Util } from '../lib/util/util.js';
 import { fileURLToPath } from 'node:url';
@@ -126,7 +127,10 @@ export function getExpectedFile(mid, type, action, ext) {
  * @returns {void}
  */
 export function mockSetup(isDeploy) {
-    Util.setLoggingLevel({ debug: true });
+    if (!isDeploy) {
+        // no need to execute this again - already done in standard setup
+        handler.setOptions({ debug: true, noLogFile: true });
+    }
     apimock = new MockAdapter(axiosInstance, { onNoMatch: 'throwException' });
     // set access_token to mid to allow for autorouting of mock to correct resources
     apimock.onPost(authResources.success.url).reply((config) => {
@@ -219,7 +223,13 @@ export function getAPIHistory() {
 export function getAPIHistoryDebug() {
     const historyArr = Object.values(apimock.history)
         .flat()
-        .map((item) => ({ url: item.url, data: item.data }));
+        .map((item) => {
+            const log = { method: item.method, url: item.url };
+            if (item.data) {
+                log.body = item.data;
+            }
+            return log;
+        });
     return historyArr;
 }
 /**

@@ -14,6 +14,22 @@ describe('GENERAL', () => {
         testUtils.mockReset();
     });
 
+    describe('init ================', () => {
+        it('should init a local project without downloading BUs');
+        it('should init a local project and download all BUs');
+    });
+    describe('join ================', () => {
+        it('should clone a project from git');
+    });
+    describe('upgrade ================', () => {
+        it('should upgrade a project to the latest version');
+    });
+    describe('reloadBUs ================', () => {
+        it('should load all BUs from the server and refresh the config');
+    });
+    describe('selectTypes ================', () => {
+        it('should change which types are selected for default retrieval');
+    });
     describe('explainTypes ================', () => {
         it('without options', () => {
             handler.explainTypes();
@@ -58,5 +74,15 @@ describe('GENERAL', () => {
 
             return;
         });
+    });
+    describe('createDeltaPkg ================', () => {
+        it('should show diff to master branch');
+        // mcdev createDeltaPkg master # resolves to master..HEAD
+        it('should show diff between master and develop branch');
+        // mcdev createDeltaPkg master..develop
+        it(
+            'should show diff between master and develop branch and filter the results to only show MyProject/BU1'
+        );
+        // mcdev createDeltaPkg master..develop --filter 'MyProject/BU1'
     });
 });

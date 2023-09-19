@@ -1,0 +1,11 @@
+{
+    "dataVerificationDefinitionId": "testNew_RANDOM_NEW_GUID",
+    "r__dataExtension_CustomerKey": "testExisting_dataExtension",
+    "verificationType": "IsEqualTo",
+    "value1": 2,
+    "value2": 0,
+    "shouldStopOnFailure": false,
+    "shouldEmailOnFailure": false,
+    "notificationEmailAddress": "",
+    "notificationEmailMessage": ""
+}

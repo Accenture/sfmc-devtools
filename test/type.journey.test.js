@@ -140,17 +140,44 @@ describe('type: journey', () => {
         });
     });
     describe('Delete ================', () => {
-        // TODO: add this test
-        it('Should delete the item'); // , async () => {
-        //     // WHEN
-        //     const result = await handler.deleteByKey('testInstance/testBU', 'mobileKeyword', [
-        //         'testExisting_keyword',
-        //     ]);
-        //     // THEN
-        //     assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+        it('Should NOT delete the item due to missing version', async () => {
+            // WHEN
+            const isDeleted = await handler.deleteByKey(
+                'testInstance/testBU',
+                'journey',
+                'testExisting_interaction'
+            );
+            // THEN
+            assert.equal(process.exitCode, true, 'delete should have thrown an error');
 
-        //     assert.equal(result, true, 'should have deleted the item');
-        //     return;
-        // });
+            assert.equal(isDeleted, false, 'should not have deleted the item');
+            return;
+        });
+        it('Should NOT delete the item due to unknown version', async () => {
+            // WHEN
+            const isDeleted = await handler.deleteByKey(
+                'testInstance/testBU',
+                'journey',
+                'testExisting_interaction/2'
+            );
+            // THEN
+            assert.equal(process.exitCode, true, 'delete should have thrown an error');
+
+            assert.equal(isDeleted, false, 'should not have deleted the item');
+            return;
+        });
+        it('Should delete the item with version', async () => {
+            // WHEN
+            const isDeleted = await handler.deleteByKey(
+                'testInstance/testBU',
+                'journey',
+                'testExisting_interaction/1'
+            );
+            // THEN
+            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+
+            assert.equal(isDeleted, true, 'should have deleted the item');
+            return;
+        });
     });
 });

@@ -1,0 +1,628 @@
+{
+    "attributeGroupDefinitions": [
+        {
+            "mID": 1111111,
+            "objectState": "Created",
+            "attributeSetIdentifiers": [
+                {
+                    "definitionID": "1051de3f-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "Email Addresses"
+                    },
+                    "definitionKey": "EmailAddresses",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                },
+                {
+                    "definitionID": "9093dc39-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "Contact"
+                    },
+                    "definitionKey": "Contact",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                }
+            ],
+            "isOwner": true,
+            "isPrimary": false,
+            "isSystemDefined": true,
+            "isHidden": false,
+            "canAddProperties": false,
+            "canAddRelationships": false,
+            "containsSchemaAttributes": true,
+            "canRemove": false,
+            "canChangeProperties": false,
+            "displayOrder": 0,
+            "requiredRelationships": [
+                "0e51de3f-31e2-e611-80cc-1402ec7222b4",
+                "1451de3f-31e2-e611-80cc-1402ec7222b4",
+                "9893dc39-31e2-e611-80cc-1402ec7222b4"
+            ],
+            "applicationID": "ce703ed3-e01f-4f5f-900d-76a95b363e29",
+            "canModify": false,
+            "applicationKey": "com.exacttarget.contacts",
+            "attributeGroupIconKey": "People",
+            "fullyQualifiedName": "System Data",
+            "attributeGroupType": "Standard",
+            "localizedDescription": {},
+            "attributeCount": 7,
+            "definitionID": "8f93dc39-31e2-e611-80cc-1402ec7222b4",
+            "definitionName": {
+                "value": "System Data"
+            },
+            "definitionKey": "ETSystem",
+            "connectingID": {
+                "identifierType": "FullyQualifiedName"
+            },
+            "namespace": ""
+        },
+        {
+            "mID": 1111111,
+            "objectState": "Created",
+            "attributeSetIdentifiers": [
+                {
+                    "definitionID": "c9e9847d-696d-eb11-b81e-48df37d1df5a",
+                    "definitionName": {
+                        "value": "Chat Message Demographics"
+                    },
+                    "definitionKey": "ChatMessageDemographics",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                },
+                {
+                    "definitionID": "f2e9847d-696d-eb11-b81e-48df37d1df5a",
+                    "definitionName": {
+                        "value": "Chat Message Subscriptions"
+                    },
+                    "definitionKey": "ChatMessageSubscriptions",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                }
+            ],
+            "isOwner": true,
+            "isPrimary": false,
+            "isSystemDefined": true,
+            "isHidden": false,
+            "canAddProperties": true,
+            "canAddRelationships": true,
+            "containsSchemaAttributes": false,
+            "canRemove": false,
+            "canChangeProperties": true,
+            "displayOrder": 1,
+            "requiredRelationships": [
+                "9a42dcad-ae72-4cde-9937-193e17485ad6",
+                "04ea847d-696d-eb11-b81e-48df37d1df5a"
+            ],
+            "canModify": true,
+            "fullyQualifiedName": "Chat Message Data",
+            "attributeGroupType": "Standard",
+            "localizedDescription": {},
+            "attributeCount": 37,
+            "definitionID": "cae9847d-696d-eb11-b81e-48df37d1df5a",
+            "definitionName": {
+                "value": "Chat Message Data"
+            },
+            "definitionKey": "ETChatMessage",
+            "connectingID": {
+                "identifierType": "FullyQualifiedName"
+            },
+            "namespace": ""
+        },
+        {
+            "mID": 1111111,
+            "objectState": "Created",
+            "attributeSetIdentifiers": [
+                {
+                    "definitionID": "b151de3f-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "Email Demographics"
+                    },
+                    "definitionKey": "EmailDemographics",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                }
+            ],
+            "isOwner": true,
+            "isPrimary": false,
+            "isSystemDefined": true,
+            "isHidden": false,
+            "canAddProperties": false,
+            "canAddRelationships": true,
+            "containsSchemaAttributes": false,
+            "canRemove": false,
+            "canChangeProperties": false,
+            "displayOrder": 2,
+            "requiredRelationships": ["b751de3f-31e2-e611-80cc-1402ec7222b4"],
+            "applicationID": "b2ca1f50-3cc4-4fd7-a3a3-88bf09fb59fa",
+            "canModify": false,
+            "applicationKey": "com.exacttarget.email",
+            "attributeGroupIconKey": "Email",
+            "fullyQualifiedName": "Email Data",
+            "attributeGroupType": "Standard",
+            "localizedDescription": {},
+            "attributeCount": 16,
+            "definitionID": "b451de3f-31e2-e611-80cc-1402ec7222b4",
+            "definitionName": {
+                "value": "Email Data"
+            },
+            "definitionKey": "ETEmail",
+            "connectingID": {
+                "identifierType": "FullyQualifiedName"
+            },
+            "namespace": ""
+        },
+        {
+            "mID": 1111111,
+            "objectState": "Created",
+            "attributeSetIdentifiers": [
+                {
+                    "definitionID": "7a86d247-3045-ea11-a2e0-1402ec94ec41",
+                    "definitionName": {
+                        "value": "GroupConnect LINE Addresses"
+                    },
+                    "definitionKey": "GroupConnectLineAddress",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                },
+                {
+                    "definitionID": "a151de3f-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "GroupConnect LINE Demographics"
+                    },
+                    "definitionKey": "GroupConnectLineDemographics",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                },
+                {
+                    "definitionID": "e551de3f-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "GroupConnect LINE Subscriptions"
+                    },
+                    "definitionKey": "GroupConnectLineSubscriptions",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                }
+            ],
+            "isOwner": true,
+            "isPrimary": false,
+            "isSystemDefined": true,
+            "isHidden": false,
+            "canAddProperties": false,
+            "canAddRelationships": true,
+            "containsSchemaAttributes": false,
+            "canRemove": false,
+            "canChangeProperties": false,
+            "displayOrder": 3,
+            "requiredRelationships": [
+                "8686d247-3045-ea11-a2e0-1402ec94ec41",
+                "a686d247-3045-ea11-a2e0-1402ec94ec41",
+                "9386d247-3045-ea11-a2e0-1402ec94ec41"
+            ],
+            "applicationID": "4e9519db-ad21-483a-a3fc-8ab4557eded1",
+            "canModify": false,
+            "applicationKey": "com.exacttarget.GroupConnect",
+            "attributeGroupIconKey": "Mobile",
+            "fullyQualifiedName": "GroupConnect LINE Data",
+            "attributeGroupType": "Standard",
+            "localizedDescription": {},
+            "attributeCount": 23,
+            "definitionID": "ab51de3f-31e2-e611-80cc-1402ec7222b4",
+            "definitionName": {
+                "value": "GroupConnect LINE Data"
+            },
+            "definitionKey": "ETGroupConnectLine",
+            "connectingID": {
+                "identifierType": "FullyQualifiedName"
+            },
+            "namespace": ""
+        },
+        {
+            "mID": 1111111,
+            "objectState": "Created",
+            "attributeSetIdentifiers": [
+                {
+                    "definitionID": "2b51de3f-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "MobileConnect Demographics"
+                    },
+                    "definitionKey": "MobileDemographics",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                },
+                {
+                    "definitionID": "3152de3f-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "MobileConnect Subscriptions"
+                    },
+                    "definitionKey": "MobileSubscriptions",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                }
+            ],
+            "isOwner": true,
+            "isPrimary": false,
+            "isSystemDefined": true,
+            "isHidden": false,
+            "canAddProperties": false,
+            "canAddRelationships": true,
+            "containsSchemaAttributes": false,
+            "canRemove": false,
+            "canChangeProperties": false,
+            "displayOrder": 4,
+            "requiredRelationships": [
+                "4651de3f-31e2-e611-80cc-1402ec7222b4",
+                "4352de3f-31e2-e611-80cc-1402ec7222b4"
+            ],
+            "applicationID": "e25893f9-08f3-480f-8def-7f8ab0583611",
+            "canModify": false,
+            "applicationKey": "com.exacttarget.mobileconnect",
+            "attributeGroupIconKey": "Mobile",
+            "fullyQualifiedName": "MobileConnect Data",
+            "attributeGroupType": "Standard",
+            "localizedDescription": {},
+            "attributeCount": 37,
+            "definitionID": "4351de3f-31e2-e611-80cc-1402ec7222b4",
+            "definitionName": {
+                "value": "MobileConnect Data"
+            },
+            "definitionKey": "ETMobileConnect",
+            "connectingID": {
+                "identifierType": "FullyQualifiedName"
+            },
+            "namespace": ""
+        },
+        {
+            "mID": 1111111,
+            "objectState": "Created",
+            "attributeSetIdentifiers": [
+                {
+                    "definitionID": "6d51de3f-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "MobilePush Demographics"
+                    },
+                    "definitionKey": "PushDemographics",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                },
+                {
+                    "definitionID": "b352de3f-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "MobilePush Subscriptions"
+                    },
+                    "definitionKey": "PushSubscriptions",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                },
+                {
+                    "definitionID": "c652de3f-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "MobilePush Tags"
+                    },
+                    "definitionKey": "PushTags",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                }
+            ],
+            "isOwner": true,
+            "isPrimary": false,
+            "isSystemDefined": true,
+            "isHidden": false,
+            "canAddProperties": false,
+            "canAddRelationships": true,
+            "containsSchemaAttributes": false,
+            "canRemove": false,
+            "canChangeProperties": false,
+            "displayOrder": 5,
+            "requiredRelationships": [
+                "9651de3f-31e2-e611-80cc-1402ec7222b4",
+                "d052de3f-31e2-e611-80cc-1402ec7222b4",
+                "bc52de3f-31e2-e611-80cc-1402ec7222b4"
+            ],
+            "applicationID": "2051892d-5de2-4ecf-98af-8ca9a40d2c9c",
+            "canModify": false,
+            "applicationKey": "com.exacttarget.mobilepush",
+            "attributeGroupIconKey": "Mobile",
+            "fullyQualifiedName": "MobilePush Data",
+            "attributeGroupType": "Standard",
+            "localizedDescription": {},
+            "attributeCount": 65,
+            "definitionID": "9351de3f-31e2-e611-80cc-1402ec7222b4",
+            "definitionName": {
+                "value": "MobilePush Data"
+            },
+            "definitionKey": "ETMobilePush",
+            "connectingID": {
+                "identifierType": "FullyQualifiedName"
+            },
+            "namespace": ""
+        },
+        {
+            "mID": 1111111,
+            "objectState": "Created",
+            "attributeSetIdentifiers": [
+                {
+                    "definitionID": "0b86d645-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "Predictive Intelligence Product Sessions"
+                    },
+                    "definitionKey": "PredictiveIntelProductSessions",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                },
+                {
+                    "definitionID": "1e86d645-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "Predictive Intelligence Content Views"
+                    },
+                    "definitionKey": "PredictiveIntelContentViews",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                },
+                {
+                    "definitionID": "2e86d645-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "Predictive Intelligence Content"
+                    },
+                    "definitionKey": "PredictiveIntelContent",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                },
+                {
+                    "definitionID": "3e86d645-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "Predictive Intelligence Content Attributes"
+                    },
+                    "definitionKey": "PredictiveIntelContentAttribs",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                },
+                {
+                    "definitionID": "5286d645-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "Predictive Intelligence AbandonedCartEvents"
+                    },
+                    "definitionKey": "PredictiveIntelAbandonedCartEvents",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                },
+                {
+                    "definitionID": "6586d645-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "Predictive Intelligence AbandonedCartItems"
+                    },
+                    "definitionKey": "PredictiveIntelAbandonedCartItems",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                },
+                {
+                    "definitionID": "7586d645-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "Predictive Intelligence Session Ends"
+                    },
+                    "definitionKey": "PredictiveIntelSessionEnds",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                },
+                {
+                    "definitionID": "8574266c-c416-ec11-b839-48df37d1dc79",
+                    "definitionName": {
+                        "value": "Einstein MC Predictive Scores"
+                    },
+                    "definitionKey": "EinsteinMCPredictiveScores",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                },
+                {
+                    "definitionID": "a185d645-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "Predictive Scores"
+                    },
+                    "definitionKey": "PredictiveIntelScores",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                },
+                {
+                    "definitionID": "b285d645-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "Predictive Intelligence Product Views"
+                    },
+                    "definitionKey": "PredictiveIntelProductViews",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                },
+                {
+                    "definitionID": "c485d645-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "Predictive Intelligence Products"
+                    },
+                    "definitionKey": "PredictiveIntelProducts",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                },
+                {
+                    "definitionID": "d685d645-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "Predictive Intelligence Product Attributes"
+                    },
+                    "definitionKey": "PredictiveIntelProductAttribs",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                },
+                {
+                    "definitionID": "ee85d645-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "Predictive Intelligence Product Purchases"
+                    },
+                    "definitionKey": "PredictiveIntelProductPurchases",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                },
+                {
+                    "definitionID": "f452de3f-31e2-e611-80cc-1402ec7222b4",
+                    "definitionName": {
+                        "value": "Predictive Intelligence Profiles"
+                    },
+                    "definitionKey": "PredictiveIntelProfiles",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                }
+            ],
+            "isOwner": true,
+            "isPrimary": false,
+            "isSystemDefined": true,
+            "isHidden": false,
+            "canAddProperties": true,
+            "canAddRelationships": false,
+            "containsSchemaAttributes": false,
+            "canRemove": false,
+            "canChangeProperties": true,
+            "displayOrder": 7,
+            "requiredRelationships": [
+                "1586d645-31e2-e611-80cc-1402ec7222b4",
+                "2686d645-31e2-e611-80cc-1402ec7222b4",
+                "3586d645-31e2-e611-80cc-1402ec7222b4",
+                "4686d645-31e2-e611-80cc-1402ec7222b4",
+                "5d86d645-31e2-e611-80cc-1402ec7222b4",
+                "6c86d645-31e2-e611-80cc-1402ec7222b4",
+                "7887d645-31e2-e611-80cc-1402ec7222b4",
+                "7d86d645-31e2-e611-80cc-1402ec7222b4",
+                "c80f6472-c416-ec11-b839-48df37d1dc79",
+                "a985d645-31e2-e611-80cc-1402ec7222b4",
+                "ba85d645-31e2-e611-80cc-1402ec7222b4",
+                "cd85d645-31e2-e611-80cc-1402ec7222b4",
+                "0086d645-31e2-e611-80cc-1402ec7222b4",
+                "de85d645-31e2-e611-80cc-1402ec7222b4",
+                "fd85d645-31e2-e611-80cc-1402ec7222b4",
+                "9885d645-31e2-e611-80cc-1402ec7222b4"
+            ],
+            "applicationID": "aed181bc-d7b7-465e-a3dd-9cdfb13943e2",
+            "canModify": false,
+            "applicationKey": "com.sfmc-einstein.Einstein Engagement Scoring",
+            "attributeGroupIconKey": "PredictiveIntel",
+            "fullyQualifiedName": "Predictive Intelligence Data",
+            "attributeGroupType": "Standard",
+            "description": "Attribute Group for Einstein Engagement Scoring",
+            "localizedDescription": {
+                "resourceSetKey": "ContactsMeta.SystemAttributeGroupDescriptions",
+                "resourceValueKey": "ATTR_GROUP_DESC_ETPredictiveIntel",
+                "value": "Attribute Group for Einstein Engagement Scoring"
+            },
+            "attributeCount": 112,
+            "definitionID": "e152de3f-31e2-e611-80cc-1402ec7222b4",
+            "definitionName": {
+                "value": "Predictive Intelligence Data"
+            },
+            "definitionKey": "ETPredictiveIntel",
+            "connectingID": {
+                "identifierType": "FullyQualifiedName"
+            },
+            "namespace": ""
+        },
+        {
+            "mID": 7330928,
+            "objectState": "Created",
+            "attributeSetIdentifiers": [
+                {
+                    "definitionID": "528b787a-5238-ee11-b85a-48df37d1de8a",
+                    "definitionName": {
+                        "value": "testExisting_dataExtensionShared"
+                    },
+                    "definitionKey": "testExisting_dataExtensionShared",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "namespace": ""
+                }
+            ],
+            "isOwner": true,
+            "isPrimary": false,
+            "isSystemDefined": false,
+            "isHidden": false,
+            "canAddProperties": true,
+            "canAddRelationships": true,
+            "containsSchemaAttributes": false,
+            "canRemove": true,
+            "canChangeProperties": true,
+            "displayOrder": 8,
+            "requiredRelationships": [],
+            "canModify": true,
+            "attributeGroupIconKey": "et-icon-databas",
+            "fullyQualifiedName": "testExisting_attributeGroup",
+            "attributeGroupType": "Standard",
+            "localizedDescription": {},
+            "attributeCount": 6,
+            "definitionID": "79846c6e-5238-ee11-b85a-48df37d1de8a",
+            "definitionName": {
+                "value": "testExisting_attributeGroup"
+            },
+            "definitionKey": "testExisting_attributeGroup",
+            "connectingID": {
+                "identifierType": "FullyQualifiedName"
+            },
+            "namespace": ""
+        }
+    ],
+    "responseContext": {
+        "operationStatus": "OK",
+        "schemaType": "Contacts",
+        "populateInternalProperties": false
+    },
+    "requestServiceMessageID": "9dac2279-40db-4e67-a862-d6ecbadf109a",
+    "responseDateTime": "2023-07-12T09:17:31.8837381-06:00",
+    "resultMessages": [],
+    "serviceMessageID": "92930c00-cacf-41e1-ba8d-04ad4d903f65"
+}

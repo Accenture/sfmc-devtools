@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>DeleteResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:cbcad7ed-d768-4dbd-b2b9-230cc05dca1b</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:545315fb-1e5b-4b6b-a17a-da1fcac3524f</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-cd8b5c6b-0bc1-45e1-8df0-4c61bf120d0e">
+                <wsu:Created>2023-08-11T12:34:31Z</wsu:Created>
+                <wsu:Expires>2023-08-11T12:39:31Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <DeleteResponse xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <Results>
+                <StatusCode>OK</StatusCode>
+                <StatusMessage>Data Extension deleted. / Data Extension Fields deleted</StatusMessage>
+                <OrdinalID>0</OrdinalID>
+                <Object xsi:type="DataExtension">
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID>21711373-72c1-ec11-b83b-48df37d1deb7</ObjectID>
+                    <CustomerKey>testExisting_dataExtension</CustomerKey>
+                    <!-- <Fields>
+                        <Field>
+                            <PartnerKey xsi:nil="true" />
+                            <ObjectID>d26f1b9c-fb30-4a91-9fe8-e2495cffbd74</ObjectID>
+                        </Field>
+                    </Fields> -->
+                </Object>
+            </Results>
+            <RequestID>5c0faaa8-81db-4530-8b47-c56432f68543</RequestID>
+            <OverallStatus>OK</OverallStatus>
+        </DeleteResponse>
+    </soap:Body>
+</soap:Envelope>
