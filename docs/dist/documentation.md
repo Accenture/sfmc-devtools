@@ -6641,7 +6641,7 @@ File extends fs-extra. It adds logger and util methods for file handling
     * [.writeJSONToFile(directory, filename, content)](#File.writeJSONToFile) ⇒ <code>Promise</code>
     * [.writePrettyToFile(directory, filename, filetype, content, [templateVariables])](#File.writePrettyToFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._beautify_beautyAmp(content)](#File._beautify_beautyAmp) ⇒ <code>string</code>
-    * [._beautify_prettier(directory, filename, filetype, content)](#File._beautify_prettier) ⇒ <code>string</code>
+    * [._beautify_prettier(directory, filename, filetype, content)](#File._beautify_prettier) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.writeToFile(directory, filename, filetype, content, [encoding])](#File.writeToFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.readJSONFile(directory, filename, sync, cleanPath)](#File.readJSONFile) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>object</code> \| <code>void</code>
     * [.readFilteredFilename(directory, filename, filetype, [encoding])](#File.readFilteredFilename) ⇒ <code>Promise.&lt;string&gt;</code> \| <code>void</code>
@@ -6756,12 +6756,12 @@ helper for [writePrettyToFile](#File.writePrettyToFile), applying beautyAmp onto
 
 <a name="File._beautify_prettier"></a>
 
-### File.\_beautify\_prettier(directory, filename, filetype, content) ⇒ <code>string</code>
+### File.\_beautify\_prettier(directory, filename, filetype, content) ⇒ <code>Promise.&lt;string&gt;</code>
 helper for [writePrettyToFile](#File.writePrettyToFile), applying prettier onto given stringified content
 ! Important: run 'await File.initPrettier()' in your MetadataType.retrieve() once before hitting this
 
 **Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>string</code> - original string on error; formatted string on success  
+**Returns**: <code>Promise.&lt;string&gt;</code> - original string on error; formatted string on success  
 
 | Param | Type | Description |
 | --- | --- | --- |
