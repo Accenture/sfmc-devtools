@@ -25,19 +25,19 @@ describe('type: user', () => {
             assert.equal(
                 result.user ? Object.keys(result.user).length : 0,
                 3,
-                'only three users expected',
+                'only three users expected'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_user', 'user', '_ParentBU_'),
                 await testUtils.getExpectedJson('1111111', 'user', 'retrieve'),
 
-                'returned metadata was not equal expected',
+                'returned metadata was not equal expected'
             );
             // check if MD file was created and equals expectations
             // ! this test needs to update the lastLoginDate counter because it changes with every passing day
             const expectedFile = await File.readFile(
                 testUtils.getExpectedFile('1111111', 'user', 'retrieve', 'md'),
-                { encoding: 'utf8' },
+                { encoding: 'utf8' }
             );
             const regexFindDaysSinceLogin =
                 /\| (\d*) (seconds|minutes|days|weeks|months|years){1} \|/g;
@@ -54,7 +54,7 @@ describe('type: user', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 6,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -70,7 +70,7 @@ describe('type: user', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 4,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -96,26 +96,26 @@ describe('type: user', () => {
             assert.equal(
                 result.user ? Object.keys(result.user).length : 0,
                 4,
-                'four users expected',
+                'four users expected'
             );
             // confirm if result.user only includes values from expectedCache
             assert.deepEqual(
                 Object.keys(result.user),
                 expectedCache,
-                'returned user keys were not equal expected',
+                'returned user keys were not equal expected'
             );
 
             // insert
             assert.deepEqual(
                 await testUtils.getActualJson('testNew_user', 'user', '_ParentBU_'),
                 await testUtils.getExpectedJson('1111111', 'user', 'create'),
-                'returned metadata was not equal expected for create',
+                'returned metadata was not equal expected for create'
             );
             // update
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_user', 'user', '_ParentBU_'),
                 await testUtils.getExpectedJson('1111111', 'user', 'update'),
-                'returned metadata was not equal expected for update',
+                'returned metadata was not equal expected for update'
             );
             // because user is single-document-type we would not want to find an md file getting created by deploy. only retrieve updates it
             expect(file(`./docs/user/testInstance.users.md`)).to.not.exist;
@@ -123,7 +123,7 @@ describe('type: user', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 9,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -143,19 +143,19 @@ describe('type: user', () => {
             assert.equal(
                 result.user ? Object.keys(result.user).length : 0,
                 3,
-                'three users expected',
+                'three users expected'
             );
             // confirm if result.user only includes values from expectedCache
             assert.deepEqual(
                 Object.keys(result.user),
                 expectedCache,
-                'returned user keys were not equal expected',
+                'returned user keys were not equal expected'
             );
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 6,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -170,42 +170,42 @@ describe('type: user', () => {
                 'testInstance/_ParentBU_',
                 'user',
                 ['testExisting_user'],
-                'testSourceMarket',
+                'testSourceMarket'
             );
             assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
             // WHEN
             assert.equal(
                 result.user ? Object.keys(result.user).length : 0,
                 1,
-                'only one user expected',
+                'only one user expected'
             );
             assert.deepEqual(
                 await testUtils.getActualTemplateJson('testExisting_user', 'user'),
                 await testUtils.getExpectedJson('1111111', 'user', 'template'),
-                'returned template was not equal expected',
+                'returned template was not equal expected'
             );
             // THEN
             await handler.buildDefinition(
                 'testInstance/_ParentBU_',
                 'user',
                 'testExisting_user',
-                'testTargetMarket',
+                'testTargetMarket'
             );
             assert.equal(
                 process.exitCode,
                 false,
-                'buildDefinition should not have thrown an error',
+                'buildDefinition should not have thrown an error'
             );
 
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_user', 'user', '_ParentBU_'),
                 await testUtils.getExpectedJson('1111111', 'user', 'build'),
-                'returned deployment file was not equal expected',
+                'returned deployment file was not equal expected'
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 6,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });

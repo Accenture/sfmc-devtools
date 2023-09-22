@@ -42,7 +42,7 @@ describe('GENERAL', () => {
             assert.equal(
                 process.exitCode,
                 false,
-                'explainTypes --json should not have thrown an error',
+                'explainTypes --json should not have thrown an error'
             );
 
             // check if properties are all there
@@ -51,7 +51,7 @@ describe('GENERAL', () => {
                 'apiName',
                 'retrieveByDefault',
                 'description',
-                'supports',
+                'supports'
             );
             expect(typeArr[0].supports).to.have.all.keys(
                 'retrieve',
@@ -60,14 +60,14 @@ describe('GENERAL', () => {
                 'delete',
                 'changeKey',
                 'buildTemplate',
-                'retrieveAsTemplate',
+                'retrieveAsTemplate'
             );
 
             // check if certain types were returned
             assert.equal(
                 typeArr.find((type) => type.apiName === 'dataExtension').apiName,
                 'dataExtension',
-                'Expected to find dataExtension type',
+                'Expected to find dataExtension type'
             );
 
             return;
@@ -79,7 +79,7 @@ describe('GENERAL', () => {
         it('should show diff between master and develop branch');
         // mcdev createDeltaPkg master..develop
         it(
-            'should show diff between master and develop branch and filter the results to only show MyProject/BU1',
+            'should show diff between master and develop branch and filter the results to only show MyProject/BU1'
         );
         // mcdev createDeltaPkg master..develop --filter 'MyProject/BU1'
     });

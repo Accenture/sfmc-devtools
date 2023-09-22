@@ -24,13 +24,13 @@ describe('type: automation', () => {
             assert.equal(
                 result.automation ? Object.keys(result.automation).length : 0,
                 4,
-                'only four automations expected',
+                'only four automations expected'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_automation', 'automation'),
                 await testUtils.getExpectedJson('9999999', 'automation', 'retrieve'),
 
-                'returned metadata was not equal expected',
+                'returned metadata was not equal expected'
             );
             // check if MD file was created and equals expectations
             expect(file(testUtils.getActualDoc('testExisting_automation', 'automation'))).to.equal(
@@ -39,14 +39,14 @@ describe('type: automation', () => {
                         '9999999',
                         'automation',
                         'retrieve-testExisting_automation',
-                        'md',
-                    ),
-                ),
+                        'md'
+                    )
+                )
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 18,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -60,11 +60,7 @@ describe('type: automation', () => {
             const deployResult = await handler.deploy(
                 'testInstance/testBU',
                 ['automation', 'verification'],
-                [
-                    'testExisting_automation',
-                    'testNew_automation',
-                    'testNew_39f6a488-20eb-4ba0-b0b9',
-                ],
+                ['testExisting_automation', 'testNew_automation', 'testNew_39f6a488-20eb-4ba0-b0b9']
             );
             // THEN
             assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
@@ -75,7 +71,7 @@ describe('type: automation', () => {
                     ? Object.keys(deployResult['testInstance/testBU']?.automation).length
                     : 0,
                 2,
-                'two automations to be deployed',
+                'two automations to be deployed'
             );
 
             // get results from cache
@@ -83,19 +79,19 @@ describe('type: automation', () => {
             assert.equal(
                 cacheResult.automation ? Object.keys(cacheResult.automation).length : 0,
                 5,
-                'three automations expected',
+                'three automations expected'
             );
             // insert
             assert.deepEqual(
                 await testUtils.getActualJson('testNew_automation', 'automation'),
                 await testUtils.getExpectedJson('9999999', 'automation', 'create'),
-                'returned metadata was not equal expected for create',
+                'returned metadata was not equal expected for create'
             );
             // update
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_automation', 'automation'),
                 await testUtils.getExpectedJson('9999999', 'automation', 'update'),
-                'returned metadata was not equal expected for update',
+                'returned metadata was not equal expected for update'
             );
             // check if MD file was created and equals expectations
             expect(file(testUtils.getActualDoc('testExisting_automation', 'automation'))).to.equal(
@@ -104,9 +100,9 @@ describe('type: automation', () => {
                         '9999999',
                         'automation',
                         'update-testExisting_automation',
-                        'md',
-                    ),
-                ),
+                        'md'
+                    )
+                )
             );
 
             // check if MD file was created and equals expectations
@@ -116,15 +112,15 @@ describe('type: automation', () => {
                         '9999999',
                         'automation',
                         'create-testNew_automation',
-                        'md',
-                    ),
-                ),
+                        'md'
+                    )
+                )
             );
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 25,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -134,17 +130,13 @@ describe('type: automation', () => {
             const deployed = await handler.deploy(
                 'testInstance/testBU',
                 ['automation', 'verification'],
-                [
-                    'testExisting_automation',
-                    'testNew_automation',
-                    'testNew_39f6a488-20eb-4ba0-b0b9',
-                ],
+                ['testExisting_automation', 'testNew_automation', 'testNew_39f6a488-20eb-4ba0-b0b9']
             );
             // THEN
             assert.equal(
                 process.exitCode,
                 false,
-                'deploy with --execute should not have thrown an error',
+                'deploy with --execute should not have thrown an error'
             );
 
             // get results from cache
@@ -152,35 +144,35 @@ describe('type: automation', () => {
             assert.equal(
                 cached.automation ? Object.keys(cached.automation).length : 0,
                 5,
-                'five cached automation expected',
+                'five cached automation expected'
             );
             assert.equal(
                 deployed['testInstance/testBU'].automation
                     ? Object.keys(deployed['testInstance/testBU'].automation).length
                     : 0,
                 2,
-                'two deployed automation expected',
+                'two deployed automation expected'
             );
             assert.equal(
                 deployed['testInstance/testBU'].automation
                     ? Object.keys(deployed['testInstance/testBU'].automation)[0]
                     : null,
                 'testNew_automation',
-                'expected specific automation to have been deployed',
+                'expected specific automation to have been deployed'
             );
             assert.equal(
                 deployed['testInstance/testBU'].automation
                     ? Object.keys(deployed['testInstance/testBU'].automation)[1]
                     : null,
                 'testExisting_automation',
-                'expected specific automation to have been deployed',
+                'expected specific automation to have been deployed'
             );
 
             // update
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_automation', 'automation'),
                 await testUtils.getExpectedJson('9999999', 'automation', 'update'),
-                'returned metadata was not equal expected for update',
+                'returned metadata was not equal expected for update'
             );
             // check if MD file was created and equals expectations
             expect(file(testUtils.getActualDoc('testExisting_automation', 'automation'))).to.equal(
@@ -189,15 +181,15 @@ describe('type: automation', () => {
                         '9999999',
                         'automation',
                         'update-testExisting_automation',
-                        'md',
-                    ),
-                ),
+                        'md'
+                    )
+                )
             );
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 33,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -207,17 +199,13 @@ describe('type: automation', () => {
             const deployed = await handler.deploy(
                 'testInstance/testBU',
                 ['automation', 'verification'],
-                [
-                    'testExisting_automation',
-                    'testNew_automation',
-                    'testNew_39f6a488-20eb-4ba0-b0b9',
-                ],
+                ['testExisting_automation', 'testNew_automation', 'testNew_39f6a488-20eb-4ba0-b0b9']
             );
             // THEN
             assert.equal(
                 process.exitCode,
                 false,
-                'deploy with --execute should not have thrown an error',
+                'deploy with --execute should not have thrown an error'
             );
 
             // get results from cache
@@ -225,34 +213,34 @@ describe('type: automation', () => {
             assert.equal(
                 cached.automation ? Object.keys(cached.automation).length : 0,
                 5,
-                'five cached automation expected',
+                'five cached automation expected'
             );
             assert.equal(
                 deployed['testInstance/testBU'].automation
                     ? Object.keys(deployed['testInstance/testBU'].automation).length
                     : 0,
                 2,
-                'two deployed automation expected',
+                'two deployed automation expected'
             );
             assert.equal(
                 deployed['testInstance/testBU'].automation
                     ? Object.keys(deployed['testInstance/testBU'].automation)[0]
                     : null,
                 'testNew_automation',
-                'expected specific automation to have been deployed',
+                'expected specific automation to have been deployed'
             );
             assert.equal(
                 deployed['testInstance/testBU'].automation
                     ? Object.keys(deployed['testInstance/testBU'].automation)[1]
                     : null,
                 'testExisting_automation',
-                'expected specific automation to have been deployed',
+                'expected specific automation to have been deployed'
             );
             // update
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_automation', 'automation'),
                 await testUtils.getExpectedJson('9999999', 'automation', 'update'),
-                'returned metadata was not equal expected for update',
+                'returned metadata was not equal expected for update'
             );
             // check if MD file was created and equals expectations
             expect(file(testUtils.getActualDoc('testExisting_automation', 'automation'))).to.equal(
@@ -261,15 +249,15 @@ describe('type: automation', () => {
                         '9999999',
                         'automation',
                         'update-testExisting_automation',
-                        'md',
-                    ),
-                ),
+                        'md'
+                    )
+                )
             );
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 29,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -290,7 +278,7 @@ describe('type: automation', () => {
             assert.equal(
                 resultFixKeys['testInstance/testBU'].length,
                 0,
-                'expected to find no keys to be fixed',
+                'expected to find no keys to be fixed'
             );
 
             // get results from cache
@@ -298,14 +286,14 @@ describe('type: automation', () => {
             assert.equal(
                 result.automation ? Object.keys(result.automation).length : 0,
                 1,
-                'one automation expected',
+                'one automation expected'
             );
             testUtils.logAPIHistoryDebug();
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 18,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -319,12 +307,12 @@ describe('type: automation', () => {
             assert.equal(
                 resultFixKeys['testInstance/testBU'].length,
                 1,
-                'returned number of keys does not correspond to number of expected fixed keys',
+                'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
                 resultFixKeys['testInstance/testBU'][0],
                 'testExisting_automation_fixedKey_scheduled',
-                'returned keys do not correspond to expected fixed keys',
+                'returned keys do not correspond to expected fixed keys'
             );
             // THEN
             assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
@@ -332,24 +320,24 @@ describe('type: automation', () => {
             assert.deepEqual(
                 await testUtils.getActualJson(
                     'testExisting_automation_fixedKey_scheduled',
-                    'automation',
+                    'automation'
                 ),
                 await testUtils.getExpectedJson('9999999', 'automation', 'patch_fixKeys-schedule'),
-                'returned metadata was not equal expected for update automation',
+                'returned metadata was not equal expected for update automation'
             );
             expect(
                 file(
                     testUtils.getActualDoc(
                         'testExisting_automation_fixedKey_scheduled',
-                        'automation',
-                    ),
-                ),
+                        'automation'
+                    )
+                )
             ).to.exist;
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 40,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -363,12 +351,12 @@ describe('type: automation', () => {
             assert.equal(
                 resultFixKeys['testInstance/testBU'].length,
                 1,
-                'returned number of keys does not correspond to number of expected fixed keys',
+                'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
                 resultFixKeys['testInstance/testBU'][0],
                 'testExisting_automation_fixedKey_scheduled',
-                'returned keys do not correspond to expected fixed keys',
+                'returned keys do not correspond to expected fixed keys'
             );
             // THEN
             assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
@@ -376,24 +364,24 @@ describe('type: automation', () => {
             assert.deepEqual(
                 await testUtils.getActualJson(
                     'testExisting_automation_fixedKey_scheduled',
-                    'automation',
+                    'automation'
                 ),
                 await testUtils.getExpectedJson('9999999', 'automation', 'patch_fixKeys-schedule'),
-                'returned metadata was not equal expected for update automation',
+                'returned metadata was not equal expected for update automation'
             );
             expect(
                 file(
                     testUtils.getActualDoc(
                         'testExisting_automation_fixedKey_scheduled',
-                        'automation',
-                    ),
-                ),
+                        'automation'
+                    )
+                )
             ).to.exist;
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 42,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -407,12 +395,12 @@ describe('type: automation', () => {
             assert.equal(
                 resultFixKeys['testInstance/testBU'].length,
                 1,
-                'returned number of keys does not correspond to number of expected fixed keys',
+                'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
                 resultFixKeys['testInstance/testBU'][0],
                 'testExisting_automation_fixedKey_scheduled',
-                'returned keys do not correspond to expected fixed keys',
+                'returned keys do not correspond to expected fixed keys'
             );
             // THEN
             assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
@@ -420,24 +408,24 @@ describe('type: automation', () => {
             assert.deepEqual(
                 await testUtils.getActualJson(
                     'testExisting_automation_fixedKey_scheduled',
-                    'automation',
+                    'automation'
                 ),
                 await testUtils.getExpectedJson('9999999', 'automation', 'patch_fixKeys-schedule'),
-                'returned metadata was not equal expected for update automation',
+                'returned metadata was not equal expected for update automation'
             );
             expect(
                 file(
                     testUtils.getActualDoc(
                         'testExisting_automation_fixedKey_scheduled',
-                        'automation',
-                    ),
-                ),
+                        'automation'
+                    )
+                )
             ).to.exist;
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 43,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -450,12 +438,12 @@ describe('type: automation', () => {
             assert.equal(
                 resultFixKeys['testInstance/testBU'].length,
                 1,
-                'returned number of keys does not correspond to number of expected fixed keys',
+                'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
                 resultFixKeys['testInstance/testBU'][0],
                 'testExisting_automation_fixedKey_paused',
-                'returned keys do not correspond to expected fixed keys',
+                'returned keys do not correspond to expected fixed keys'
             );
             // THEN
             assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
@@ -463,21 +451,21 @@ describe('type: automation', () => {
             assert.deepEqual(
                 await testUtils.getActualJson(
                     'testExisting_automation_fixedKey_paused',
-                    'automation',
+                    'automation'
                 ),
                 await testUtils.getExpectedJson('9999999', 'automation', 'patch_fixKeys-pause'),
-                'returned metadata was not equal expected for update automation',
+                'returned metadata was not equal expected for update automation'
             );
             expect(
                 file(
-                    testUtils.getActualDoc('testExisting_automation_fixedKey_paused', 'automation'),
-                ),
+                    testUtils.getActualDoc('testExisting_automation_fixedKey_paused', 'automation')
+                )
             ).to.exist;
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 35,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -491,12 +479,12 @@ describe('type: automation', () => {
             assert.equal(
                 resultFixKeys['testInstance/testBU'].length,
                 1,
-                'returned number of keys does not correspond to number of expected fixed keys',
+                'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
                 resultFixKeys['testInstance/testBU'][0],
                 'testExisting_automation_fixedKey_paused',
-                'returned keys do not correspond to expected fixed keys',
+                'returned keys do not correspond to expected fixed keys'
             );
             // THEN
             assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
@@ -504,21 +492,21 @@ describe('type: automation', () => {
             assert.deepEqual(
                 await testUtils.getActualJson(
                     'testExisting_automation_fixedKey_paused',
-                    'automation',
+                    'automation'
                 ),
                 await testUtils.getExpectedJson('9999999', 'automation', 'patch_fixKeys-pause'),
-                'returned metadata was not equal expected for update automation',
+                'returned metadata was not equal expected for update automation'
             );
             expect(
                 file(
-                    testUtils.getActualDoc('testExisting_automation_fixedKey_paused', 'automation'),
-                ),
+                    testUtils.getActualDoc('testExisting_automation_fixedKey_paused', 'automation')
+                )
             ).to.exist;
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 41,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -532,12 +520,12 @@ describe('type: automation', () => {
             assert.equal(
                 resultFixKeys['testInstance/testBU'].length,
                 1,
-                'returned number of keys does not correspond to number of expected fixed keys',
+                'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
                 resultFixKeys['testInstance/testBU'][0],
                 'testExisting_automation_fixedKey_paused',
-                'returned keys do not correspond to expected fixed keys',
+                'returned keys do not correspond to expected fixed keys'
             );
             // THEN
             assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
@@ -545,21 +533,21 @@ describe('type: automation', () => {
             assert.deepEqual(
                 await testUtils.getActualJson(
                     'testExisting_automation_fixedKey_paused',
-                    'automation',
+                    'automation'
                 ),
                 await testUtils.getExpectedJson('9999999', 'automation', 'patch_fixKeys-pause'),
-                'returned metadata was not equal expected for update automation',
+                'returned metadata was not equal expected for update automation'
             );
             expect(
                 file(
-                    testUtils.getActualDoc('testExisting_automation_fixedKey_paused', 'automation'),
-                ),
+                    testUtils.getActualDoc('testExisting_automation_fixedKey_paused', 'automation')
+                )
             ).to.exist;
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 43,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -571,46 +559,46 @@ describe('type: automation', () => {
                 'testInstance/testBU',
                 'automation',
                 ['testExisting_automation'],
-                'testSourceMarket',
+                'testSourceMarket'
             );
             assert.equal(
                 process.exitCode,
                 false,
-                'retrieveAsTemplate should not have thrown an error',
+                'retrieveAsTemplate should not have thrown an error'
             );
 
             // WHEN
             assert.equal(
                 result.automation ? Object.keys(result.automation).length : 0,
                 1,
-                'only one automation expected',
+                'only one automation expected'
             );
             assert.deepEqual(
                 await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
                 await testUtils.getExpectedJson('9999999', 'automation', 'template'),
-                'returned template was not equal expected',
+                'returned template was not equal expected'
             );
             // THEN
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'automation',
                 'testExisting_automation',
-                'testTargetMarket',
+                'testTargetMarket'
             );
             assert.equal(
                 process.exitCode,
                 false,
-                'buildDefinition should not have thrown an error',
+                'buildDefinition should not have thrown an error'
             );
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_automation', 'automation'),
                 await testUtils.getExpectedJson('9999999', 'automation', 'build'),
-                'returned deployment file was not equal expected',
+                'returned deployment file was not equal expected'
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 20,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -622,42 +610,42 @@ describe('type: automation', () => {
                 'testInstance/testBU',
                 'automation',
                 ['testExisting_automation'],
-                'testSourceMarket',
+                'testSourceMarket'
             );
             assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
             // WHEN
             assert.equal(
                 result.automation ? Object.keys(result.automation).length : 0,
                 1,
-                'only one automation expected',
+                'only one automation expected'
             );
             assert.deepEqual(
                 await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
                 await testUtils.getExpectedJson('9999999', 'automation', 'template'),
-                'returned template was not equal expected',
+                'returned template was not equal expected'
             );
             // THEN
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'automation',
                 'testExisting_automation',
-                'testTargetMarket',
+                'testTargetMarket'
             );
             assert.equal(
                 process.exitCode,
                 false,
-                'buildDefinition should not have thrown an error',
+                'buildDefinition should not have thrown an error'
             );
 
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_automation', 'automation'),
                 await testUtils.getExpectedJson('9999999', 'automation', 'build'),
-                'returned deployment file was not equal expected',
+                'returned deployment file was not equal expected'
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 18,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -668,7 +656,7 @@ describe('type: automation', () => {
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'automation',
-                'testExisting_automation',
+                'testExisting_automation'
             );
             // THEN
             assert.equal(process.exitCode, false, 'delete should not have thrown an error');
@@ -687,19 +675,19 @@ describe('type: automation', () => {
             assert.equal(
                 process.exitCode,
                 false,
-                'getFilesToCommit should not have thrown an error',
+                'getFilesToCommit should not have thrown an error'
             );
             assert.equal(fileList.length, 2, 'expected only 2 file paths');
 
             assert.equal(
                 fileList[0].split('\\').join('/'),
                 'retrieve/testInstance/testBU/automation/testExisting_automation.automation-meta.json',
-                'wrong JSON path',
+                'wrong JSON path'
             );
             assert.equal(
                 fileList[1].split('\\').join('/'),
                 'retrieve/testInstance/testBU/automation/testExisting_automation.automation-doc.md',
-                'wrong MD path',
+                'wrong MD path'
             );
             return;
         });
@@ -713,12 +701,12 @@ describe('type: automation', () => {
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
-                'returned number of keys does not correspond to number of expected fixed keys',
+                'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
                 executedKeys['testInstance/testBU'][0],
                 'testExisting_automation',
-                'returned keys do not correspond to expected fixed keys',
+                'returned keys do not correspond to expected fixed keys'
             );
             return;
         });
@@ -729,12 +717,12 @@ describe('type: automation', () => {
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
-                'returned number of keys does not correspond to number of expected fixed keys',
+                'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
                 executedKeys['testInstance/testBU'][0],
                 'testExisting_automation',
-                'returned keys do not correspond to expected fixed keys',
+                'returned keys do not correspond to expected fixed keys'
             );
             return;
         });
@@ -747,7 +735,7 @@ describe('type: automation', () => {
             assert.equal(
                 Object.keys(executedKeys).length,
                 0,
-                'automation was not supposed to be executed',
+                'automation was not supposed to be executed'
             );
             return;
         });
@@ -762,12 +750,12 @@ describe('type: automation', () => {
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
-                'returned number of keys does not correspond to number of expected fixed keys',
+                'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
                 executedKeys['testInstance/testBU'][0],
                 'testExisting_automation',
-                'returned keys do not correspond to expected fixed keys',
+                'returned keys do not correspond to expected fixed keys'
             );
             return;
         });
@@ -778,12 +766,12 @@ describe('type: automation', () => {
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
-                'returned number of keys does not correspond to number of expected fixed keys',
+                'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
                 executedKeys['testInstance/testBU'][0],
                 'testExisting_automation',
-                'returned keys do not correspond to expected fixed keys',
+                'returned keys do not correspond to expected fixed keys'
             );
             return;
         });
@@ -796,7 +784,7 @@ describe('type: automation', () => {
             assert.equal(
                 Object.keys(executedKeys).length,
                 0,
-                'automation was not supposed to be executed',
+                'automation was not supposed to be executed'
             );
             return;
         });
@@ -808,12 +796,12 @@ describe('type: automation', () => {
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
-                'automation was supposed to be executed',
+                'automation was supposed to be executed'
             );
             assert.equal(
                 executedKeys['testInstance/testBU'][0],
                 'testExisting_automation',
-                'returned keys do not correspond to expected fixed keys',
+                'returned keys do not correspond to expected fixed keys'
             );
             return;
         });
@@ -824,12 +812,12 @@ describe('type: automation', () => {
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
-                'automation was supposed to be executed',
+                'automation was supposed to be executed'
             );
             assert.equal(
                 executedKeys['testInstance/testBU'][0],
                 'testExisting_automation',
-                'returned keys do not correspond to expected fixed keys',
+                'returned keys do not correspond to expected fixed keys'
             );
 
             return;
@@ -843,7 +831,7 @@ describe('type: automation', () => {
             assert.equal(
                 Object.keys(executedKeys).length,
                 0,
-                'automation was not supposed to be executed',
+                'automation was not supposed to be executed'
             );
 
             return;
@@ -858,12 +846,12 @@ describe('type: automation', () => {
             assert.equal(
                 pausedKeys['testInstance/testBU']?.length,
                 1,
-                'returned number of keys does not correspond to number of expected fixed keys',
+                'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
                 pausedKeys['testInstance/testBU'][0],
                 'testExisting_automation_pause',
-                'returned keys do not correspond to expected fixed keys',
+                'returned keys do not correspond to expected fixed keys'
             );
             return;
         });
@@ -874,12 +862,12 @@ describe('type: automation', () => {
             assert.equal(
                 pausedKeys['testInstance/testBU']?.length,
                 1,
-                'returned number of keys does not correspond to number of expected fixed keys',
+                'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
                 pausedKeys['testInstance/testBU'][0],
                 'testExisting_automation_pause',
-                'returned keys do not correspond to expected fixed keys',
+                'returned keys do not correspond to expected fixed keys'
             );
             return;
         });
@@ -892,7 +880,7 @@ describe('type: automation', () => {
             assert.equal(
                 Object.keys(pausedKeys).length,
                 0,
-                'returned number of keys does not correspond to number of expected fixed keys',
+                'returned number of keys does not correspond to number of expected fixed keys'
             );
             return;
         });

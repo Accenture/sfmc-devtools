@@ -25,22 +25,22 @@ describe('type: transactionalSMS', () => {
             assert.equal(
                 result.transactionalSMS ? Object.keys(result.transactionalSMS).length : 0,
                 1,
-                'only one transactionalSMS expected',
+                'only one transactionalSMS expected'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_tsms', 'transactionalSMS'),
                 await testUtils.getExpectedJson('9999999', 'transactionalSMS', 'get'),
-                'returned JSON was not equal expected',
+                'returned JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_tsms', 'transactionalSMS', 'amp')),
+                file(testUtils.getActualFile('testExisting_tsms', 'transactionalSMS', 'amp'))
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'get', 'amp')),
+                file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'get', 'amp'))
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 4,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -59,35 +59,35 @@ describe('type: transactionalSMS', () => {
             assert.equal(
                 result.transactionalSMS ? Object.keys(result.transactionalSMS).length : 0,
                 2,
-                'two transactionalSMSs expected',
+                'two transactionalSMSs expected'
             );
             // confirm created item
             assert.deepEqual(
                 await testUtils.getActualJson('testNew_tsms', 'transactionalSMS'),
                 await testUtils.getExpectedJson('9999999', 'transactionalSMS', 'post'),
-                'returned JSON was not equal expected for insert transactionalSMS',
+                'returned JSON was not equal expected for insert transactionalSMS'
             );
             expect(
-                file(testUtils.getActualFile('testNew_tsms', 'transactionalSMS', 'amp')),
+                file(testUtils.getActualFile('testNew_tsms', 'transactionalSMS', 'amp'))
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'post', 'amp')),
+                file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'post', 'amp'))
             );
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_tsms', 'transactionalSMS'),
                 await testUtils.getExpectedJson('9999999', 'transactionalSMS', 'patch'),
-                'returned JSON was not equal expected for update transactionalSMS',
+                'returned JSON was not equal expected for update transactionalSMS'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_tsms', 'transactionalSMS', 'amp')),
+                file(testUtils.getActualFile('testExisting_tsms', 'transactionalSMS', 'amp'))
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'patch', 'amp')),
+                file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'patch', 'amp'))
             );
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 6,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
@@ -97,13 +97,13 @@ describe('type: transactionalSMS', () => {
             await handler.deploy(
                 'testInstance/testBU',
                 ['transactionalSMS'],
-                ['testExisting_tsms'],
+                ['testExisting_tsms']
             );
             // THEN
             assert.equal(
                 process.exitCode,
                 1,
-                'deploy should have thrown an error due to lack of support',
+                'deploy should have thrown an error due to lack of support'
             );
             return;
         });
@@ -118,56 +118,54 @@ describe('type: transactionalSMS', () => {
                 'testInstance/testBU',
                 'transactionalSMS',
                 ['testExisting_tsms'],
-                'testSourceMarket',
+                'testSourceMarket'
             );
             assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
 
             assert.equal(
                 result.transactionalSMS ? Object.keys(result.transactionalSMS).length : 0,
                 1,
-                'only one transactionalSMS expected',
+                'only one transactionalSMS expected'
             );
             assert.deepEqual(
                 await testUtils.getActualTemplateJson('testExisting_tsms', 'transactionalSMS'),
                 await testUtils.getExpectedJson('9999999', 'transactionalSMS', 'template'),
-                'returned template JSON was not equal expected',
+                'returned template JSON was not equal expected'
             );
             expect(
                 file(
-                    testUtils.getActualTemplateFile('testExisting_tsms', 'transactionalSMS', 'amp'),
-                ),
+                    testUtils.getActualTemplateFile('testExisting_tsms', 'transactionalSMS', 'amp')
+                )
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'template', 'amp')),
+                file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'template', 'amp'))
             );
             // buildDefinition
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'transactionalSMS',
                 'testExisting_tsms',
-                'testTargetMarket',
+                'testTargetMarket'
             );
             assert.equal(
                 process.exitCode,
                 false,
-                'buildDefinition should not have thrown an error',
+                'buildDefinition should not have thrown an error'
             );
 
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_tsms', 'transactionalSMS'),
                 await testUtils.getExpectedJson('9999999', 'transactionalSMS', 'build'),
-                'returned deployment JSON was not equal expected',
+                'returned deployment JSON was not equal expected'
             );
             expect(
-                file(
-                    testUtils.getActualDeployFile('testTemplated_tsms', 'transactionalSMS', 'amp'),
-                ),
+                file(testUtils.getActualDeployFile('testTemplated_tsms', 'transactionalSMS', 'amp'))
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'build', 'amp')),
+                file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'build', 'amp'))
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 4,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests',
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
