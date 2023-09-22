@@ -10,7 +10,7 @@
         "plugin:prettier/recommended",
         "plugin:unicorn/recommended"
     ],
-    "plugins": [],
+    "plugins": ["prettier"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
