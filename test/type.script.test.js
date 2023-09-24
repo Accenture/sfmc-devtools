@@ -1,13 +1,10 @@
-const chai = require('chai');
-const chaiFiles = require('chai-files');
-const assert = chai.assert;
+import chai, { assert, expect } from 'chai';
+import chaiFiles from 'chai-files';
+import cache from '../lib/util/cache.js';
+import * as testUtils from './utils.js';
+import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const expect = chai.expect;
 const file = chaiFiles.file;
-// const dir = chaiFiles.dir;
-const cache = require('../lib/util/cache');
-const testUtils = require('./utils');
-const handler = require('../lib/index');
 
 describe('type: script', () => {
     beforeEach(() => {

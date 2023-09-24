@@ -15,7 +15,7 @@ jobs:
         name: Test and upload coverage
         steps:
             - name: Checkout
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
               with:
                   ref: ${{ github.event.ref }}
                   fetch-depth: 1000
@@ -31,7 +31,7 @@ jobs:
 
             - name: Prepare for Report Coverage (mini)
               run: |
-                  npx nyc report --reporter json-summary --exclude-after-remap false
+                  npx c8 report --reporter json-summary --exclude-after-remap false
 
             - name: Upload coverage artifact
               uses: actions/upload-artifact@v3
