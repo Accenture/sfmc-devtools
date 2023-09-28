@@ -31,6 +31,10 @@
         "rest"
     ],
     "main": "./lib/index.js",
+    "exports": {
+        ".": { "default": "./lib/index.js" },
+        "./*": "./*"
+    },
     "bin": {
         "mcdev": "./lib/cli.js"
     },

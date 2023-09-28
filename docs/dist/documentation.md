@@ -521,6 +521,7 @@ main class
 **Kind**: global class  
 
 * [Mcdev](#Mcdev)
+    * [.version()](#Mcdev.version) ⇒ <code>string</code>
     * [.setSkipInteraction([skipInteraction])](#Mcdev.setSkipInteraction) ⇒ <code>void</code>
     * [.setLoggingLevel(argv)](#Mcdev.setLoggingLevel) ⇒ <code>void</code>
     * [.setOptions(argv)](#Mcdev.setOptions) ⇒ <code>void</code>
@@ -547,6 +548,11 @@ main class
     * [.pause(businessUnit, [selectedType], [keys])](#Mcdev.pause) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
     * [.fixKeys(businessUnit, selectedType, [keys])](#Mcdev.fixKeys) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
 
+<a name="Mcdev.version"></a>
+
+### Mcdev.version() ⇒ <code>string</code>
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>string</code> - current version of mcdev  
 <a name="Mcdev.setSkipInteraction"></a>
 
 ### Mcdev.setSkipInteraction([skipInteraction]) ⇒ <code>void</code>
