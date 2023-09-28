@@ -32,7 +32,9 @@
     ],
     "main": "./lib/index.js",
     "exports": {
-        ".": { "default": "./lib/index.js" },
+        ".": {
+            "default": "./lib/index.js"
+        },
         "./*": "./*"
     },
     "bin": {
@@ -108,7 +110,9 @@
         "fsevents": "*"
     },
     "lint-staged": {
-        "*.{js,jsx,ts,tsx}": ["eslint --fix"]
+        "*.{js,jsx,ts,tsx}": [
+            "eslint --fix"
+        ]
     },
     "type": "module"
 }
