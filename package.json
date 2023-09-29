@@ -97,7 +97,7 @@
         "eslint-plugin-mocha": "10.1.0",
         "eslint-plugin-prettier": "5.0.0",
         "eslint-plugin-unicorn": "48.0.0",
-        "fast-xml-parser": "4.2.7",
+        "fast-xml-parser": "4.3.1",
         "husky": "8.0.3",
         "jsdoc-to-markdown": "8.0.0",
         "lint-staged": "14.0.1",
