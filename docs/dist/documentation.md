@@ -137,9 +137,6 @@ Provides default functionality that can be overwritten by child metadata type cl
 ## Constants
 
 <dl>
-<dt><a href="#MetadataTypeInfo">MetadataTypeInfo</a></dt>
-<dd><p>Provides access to all metadataType classes</p>
-</dd>
 <dt><a href="#BusinessUnit">BusinessUnit</a></dt>
 <dd><p>Helper that handles retrieval of BU info</p>
 </dd>
@@ -521,6 +518,7 @@ main class
 **Kind**: global class  
 
 * [Mcdev](#Mcdev)
+    * [.version()](#Mcdev.version) ⇒ <code>string</code>
     * [.setSkipInteraction([skipInteraction])](#Mcdev.setSkipInteraction) ⇒ <code>void</code>
     * [.setLoggingLevel(argv)](#Mcdev.setLoggingLevel) ⇒ <code>void</code>
     * [.setOptions(argv)](#Mcdev.setOptions) ⇒ <code>void</code>
@@ -547,6 +545,11 @@ main class
     * [.pause(businessUnit, [selectedType], [keys])](#Mcdev.pause) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
     * [.fixKeys(businessUnit, selectedType, [keys])](#Mcdev.fixKeys) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
 
+<a name="Mcdev.version"></a>
+
+### Mcdev.version() ⇒ <code>string</code>
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>string</code> - current version of mcdev  
 <a name="Mcdev.setSkipInteraction"></a>
 
 ### Mcdev.setSkipInteraction([skipInteraction]) ⇒ <code>void</code>
@@ -6284,12 +6287,6 @@ helper for [Retriever.retrieve](Retriever.retrieve) to get all dependencies of t
 | --- | --- | --- |
 | metadataTypes | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | list of metadata types to retrieve; can include subtypes! |
 
-<a name="MetadataTypeInfo"></a>
-
-## MetadataTypeInfo
-Provides access to all metadataType classes
-
-**Kind**: global constant  
 <a name="BusinessUnit"></a>
 
 ## BusinessUnit
