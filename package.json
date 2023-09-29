@@ -85,7 +85,7 @@
         "yargs": "17.7.2"
     },
     "devDependencies": {
-        "assert": "2.0.0",
+        "assert": "2.1.0",
         "axios-mock-adapter": "1.22.0",
         "c8": "7.14.0",
         "chai": "4.3.8",
