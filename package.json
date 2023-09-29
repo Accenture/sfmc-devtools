@@ -35,7 +35,7 @@
         ".": {
             "default": "./lib/index.js"
         },
-        "./*": "./*"
+        "./*": "./*.js"
     },
     "bin": {
         "mcdev": "./lib/cli.js"

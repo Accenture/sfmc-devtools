@@ -137,9 +137,6 @@ Provides default functionality that can be overwritten by child metadata type cl
 ## Constants
 
 <dl>
-<dt><a href="#MetadataTypeInfo">MetadataTypeInfo</a></dt>
-<dd><p>Provides access to all metadataType classes</p>
-</dd>
 <dt><a href="#BusinessUnit">BusinessUnit</a></dt>
 <dd><p>Helper that handles retrieval of BU info</p>
 </dd>
@@ -6290,12 +6287,6 @@ helper for [Retriever.retrieve](Retriever.retrieve) to get all dependencies of t
 | --- | --- | --- |
 | metadataTypes | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | list of metadata types to retrieve; can include subtypes! |
 
-<a name="MetadataTypeInfo"></a>
-
-## MetadataTypeInfo
-Provides access to all metadataType classes
-
-**Kind**: global constant  
 <a name="BusinessUnit"></a>
 
 ## BusinessUnit
