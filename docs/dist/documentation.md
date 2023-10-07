@@ -213,6 +213,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Automation.">Automation.(metadataMap, originalMetadataMap, key)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
+<dt><a href="#Journey.">Journey.(metadata, definitionKey, versionNumber)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
+<dd><p>helper for <a href="#Journey.pause">pause</a></p>
+</dd>
 <dt><a href="#getUserName">getUserName(userList, item, fieldname)</a> ⇒ <code>string</code></dt>
 <dd></dd>
 <dt><a href="#setupSDK">setupSDK(sessionKey, authObject)</a> ⇒ <code><a href="#SDK">SDK</a></code></dt>
@@ -2973,6 +2976,7 @@ definitionId: A unique UUID provided by Salesforce Marketing Cloud. Each version
     * [.postRetrieveTasks(metadata)](#Journey.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.preDeployTasks(metadata)](#Journey.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#Journey.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
+    * [.pause(keyArr)](#Journey.pause) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="Journey.retrieve"></a>
 
@@ -3106,6 +3110,18 @@ helper for [upsert](#MetadataType.upsert)
 | hasError | <code>boolean</code> | error flag from previous code |
 | metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
 | metadataToCreate | <code>Array.&lt;TYPE.MetadataTypeItem&gt;</code> | list of items to create |
+
+<a name="Journey.pause"></a>
+
+### Journey.pause(keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
+a function to pause journey via API
+
+**Kind**: static method of [<code>Journey</code>](#Journey)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - Returns true if all items were executed successfully, otherwise false  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="List"></a>
 
@@ -8377,6 +8393,20 @@ helper for [postDeployTasks](#Automation.postDeployTasks)
 | metadataMap | <code>TYPE.AutomationMap</code> | metadata mapped by their keyField |
 | originalMetadataMap | <code>TYPE.AutomationMap</code> | metadata to be updated (contains additioanl fields) |
 | key | <code>string</code> | current customer key |
+
+<a name="Journey."></a>
+
+## Journey.(metadata, definitionKey, versionNumber) ⇒ <code>Promise.&lt;object&gt;</code>
+helper for [pause](#Journey.pause)
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;object&gt;</code> - response: no errors in case of success  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.JourneyItem</code> | journey metadata |
+| definitionKey | <code>TYPE.JourneyItem</code> | journey definitionKey |
+| versionNumber | <code>TYPE.JourneyItem</code> | journey versionNumber |
 
 <a name="getUserName"></a>
 
