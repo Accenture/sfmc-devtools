@@ -1,10 +1,9 @@
-const chai = require('chai');
-const chaiFiles = require('chai-files');
-const assert = chai.assert;
+import chai, { assert } from 'chai';
+import chaiFiles from 'chai-files';
+import cache from '../lib/util/cache.js';
+import * as testUtils from './utils.js';
+import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const cache = require('../lib/util/cache');
-const testUtils = require('./utils');
-const handler = require('../lib/index');
 
 describe('type: transactionalEmail', () => {
     beforeEach(() => {
@@ -142,17 +141,18 @@ describe('type: transactionalEmail', () => {
         });
     });
     describe('Delete ================', () => {
-        // TODO: add this test
-        it('Should delete the item'); // , async () => {
-        //     // WHEN
-        //     const result = await handler.deleteByKey('testInstance/testBU', 'mobileKeyword', [
-        //         'testExisting_keyword',
-        //     ]);
-        //     // THEN
-        //     assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+        it('Should delete the item', async () => {
+            // WHEN
+            const isDeleted = await handler.deleteByKey(
+                'testInstance/testBU',
+                'transactionalEmail',
+                'testExisting_temail'
+            );
+            // THEN
+            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
 
-        //     assert.equal(result, true, 'should have deleted the item');
-        //     return;
-        // });
+            assert.equal(isDeleted, true, 'should have deleted the item');
+            return;
+        });
     });
 });

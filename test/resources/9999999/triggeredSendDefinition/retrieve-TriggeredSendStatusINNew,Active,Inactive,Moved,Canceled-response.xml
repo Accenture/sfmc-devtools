@@ -30,12 +30,12 @@
                 <CreatedDate>2018-06-25T05:58:00</CreatedDate>
                 <ModifiedDate>2018-06-25T05:58:00</ModifiedDate>
                 <ObjectID>b3150cf0-6e78-e811-80d4-1402ec721c9d</ObjectID>
-                <CustomerKey>2621</CustomerKey>
+                <CustomerKey>testExisting_triggeredSend</CustomerKey>
                 <IsPlatformObject>false</IsPlatformObject>
-                <Name>Unsubscribe_Email</Name>
+                <Name>testExisting_triggeredSend</Name>
                 <Description>Unsubscribe_Email</Description>
                 <Keyword />
-                <CategoryID>5654</CategoryID>
+                <CategoryID>89348</CategoryID>
                 <SendClassification>
                     <PartnerKey xsi:nil="true" />
                     <ObjectID xsi:nil="true" />
@@ -48,7 +48,7 @@
                 <TriggeredSendStatus>New</TriggeredSendStatus>
                 <Email>
                     <PartnerKey xsi:nil="true" />
-                    <ID>1960</ID>
+                    <ID>483943</ID>
                     <ObjectID xsi:nil="true" />
                 </Email>
                 <AutoAddSubscribers>false</AutoAddSubscribers>

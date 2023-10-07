@@ -1,12 +1,10 @@
-const chai = require('chai');
-const chaiFiles = require('chai-files');
-const assert = chai.assert;
+import chai, { assert, expect } from 'chai';
+import chaiFiles from 'chai-files';
+import cache from '../lib/util/cache.js';
+import * as testUtils from './utils.js';
+import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const expect = chai.expect;
 const file = chaiFiles.file;
-const cache = require('../lib/util/cache');
-const testUtils = require('./utils');
-const handler = require('../lib/index');
 
 describe('type: mobileKeyword', () => {
     beforeEach(() => {
@@ -120,7 +118,6 @@ describe('type: mobileKeyword', () => {
             );
             return;
         });
-        it('Should change the key during update via --changeKeyValue');
     });
     describe('Templating ================', () => {
         it('Should create a mobileKeyword template via retrieveAsTemplate and build it', async () => {
@@ -246,13 +243,15 @@ describe('type: mobileKeyword', () => {
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN
-            const result = await handler.deleteByKey('testInstance/testBU', 'mobileKeyword', [
-                '4912312345678.TESTEXISTING_KEYWORD',
-            ]);
+            const isDeleted = await handler.deleteByKey(
+                'testInstance/testBU',
+                'mobileKeyword',
+                '4912312345678.TESTEXISTING_KEYWORD'
+            );
             // THEN
             assert.equal(process.exitCode, false, 'delete should not have thrown an error');
 
-            assert.equal(result, true, 'should have deleted the item');
+            assert.equal(isDeleted, true, 'should have deleted the item');
             return;
         });
     });

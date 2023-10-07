@@ -13,7 +13,7 @@
 * Start: 2022-07-30 00:00:00 +01:00
 * End: 2022-07-30 00:00:00 +01:00
 * Timezone: W. Europe Standard Time
-* Recurrance: every  day for 1 times
+* Recurrance: run only once
 
 **Notifications:**
 
@@ -28,3 +28,4 @@
 | _1.4: importFile_<br>testExisting_importFile |
 | _1.5: query_<br>testExisting_query |
 | _1.6: script_<br>testExisting_script |
+| _1.7: verification_<br>testExisting_39f6a488-20eb-4ba0-b0b9 |

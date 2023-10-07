@@ -12,7 +12,7 @@ jobs:
         name: Test and report
         steps:
             - name: Checkout
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
               with:
                   ref: ${{ github.event.pull_request.head.sha }}
                   fetch-depth: 1000
@@ -23,14 +23,12 @@ jobs:
 
             - run: npm ci --ignore-scripts
 
-            - run: npm run lint
-
             - name: Run mcdev-tests with coverage
               run: npm run coverage
 
             - name: Prepare for Report Coverage
               run: |
-                  npx nyc report --reporter json-summary --exclude-after-remap false
+                  npx c8 report --reporter json-summary --exclude-after-remap false
                   npm i svelte-to-html@1.0.9
                   git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
 

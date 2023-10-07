@@ -22,5 +22,17 @@
       "type": "url",
       "url": "https://github.com/Accenture/sfmc-devtools/compare/hotfix...$shortname?expand=1"
     }
+  },
+  {
+    "name": "Create Release-PR to master branch",
+    "target": "ref",
+    "refTargets": [
+      "localbranch",
+      "remotebranch"
+    ],
+    "action": {
+      "type": "url",
+      "url": "https://github.com/Accenture/sfmc-devtools/compare/main...$shortname?expand=1&template=pr_template_release.md"
+    }
   }
 ]

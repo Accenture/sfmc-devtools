@@ -1,9 +1,36 @@
-const fs = require('fs-extra');
-const path = require('node:path');
-const { XMLParser } = require('fast-xml-parser');
-const { color } = require('../lib/util/util');
+import fs from 'fs-extra';
+import path from 'node:path';
+import { XMLParser } from 'fast-xml-parser';
+import { Util } from '../lib/util/util.js';
 const parser = new XMLParser();
 const attributeParser = new XMLParser({ ignoreAttributes: false });
+let color;
+
+/* eslint-disable unicorn/prefer-ternary */
+if (
+    process.env.VSCODE_AMD_ENTRYPOINT === 'vs/workbench/api/node/extensionHostProcess' ||
+    process.env.VSCODE_CRASH_REPORTER_PROCESS_TYPE === 'extensionHost'
+) {
+    // when we execute the test in a VSCode extension host, we don't want CLI color codes.
+    color = new Proxy(
+        {},
+        {
+            /**
+             * catch-all for color
+             *
+             * @returns {string} empty string
+             */
+            get() {
+                return '';
+            },
+        }
+    );
+} else {
+    // test is executed directly in a command prompt. Use colors.
+    color = Util.color;
+}
+/* eslint-enable unicorn/prefer-ternary */
+
 /**
  * gets mock SOAP metadata for responding
  *
@@ -13,11 +40,10 @@ const attributeParser = new XMLParser({ ignoreAttributes: false });
  * @param {object|string} filter likely for customer key
  * @returns {string} relevant metadata stringified
  */
-exports.loadSOAPRecords = async (mcdevAction, type, mid, filter) => {
+async function loadSOAPRecords(mcdevAction, type, mid, filter) {
     type = type[0].toLowerCase() + type.slice(1);
     const testPath = path.join('test', 'resources', mid.toString(), type, mcdevAction);
-    const filterPath =
-        typeof filter === 'string' && filter ? '-' + filter : this.filterToPath(filter);
+    const filterPath = typeof filter === 'string' && filter ? '-' + filter : filterToPath(filter);
     if (await fs.pathExists(testPath + filterPath + '-response.xml')) {
         return fs.readFile(testPath + filterPath + '-response.xml', {
             encoding: 'utf8',
@@ -26,7 +52,7 @@ exports.loadSOAPRecords = async (mcdevAction, type, mid, filter) => {
         if (filterPath) {
             /* eslint-disable no-console */
             console.log(
-                `${color.bgYellow}${color.fgBlack}test-warning${
+                `${color.bgYellow}${color.fgBlack}TEST-WARNING${
                     color.reset
                 }: You are loading your reponse from ${
                     testPath + '-response.xml'
@@ -42,7 +68,7 @@ exports.loadSOAPRecords = async (mcdevAction, type, mid, filter) => {
     }
     /* eslint-disable no-console */
     console.log(
-        `${color.bgRed}${color.fgBlack}test-error${color.reset}: Please create file ${
+        `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}: Please create file ${
             filterPath ? testPath + filterPath + '-response.xml or ' : ''
         }${testPath + '-response.xml'}`
     );
@@ -53,42 +79,66 @@ exports.loadSOAPRecords = async (mcdevAction, type, mid, filter) => {
     return fs.readFile(path.join('test', 'resources', mcdevAction + '-response.xml'), {
         encoding: 'utf8',
     });
-};
-exports.filterToPath = (filter) => {
+}
+/**
+ * main filter to path function
+ *
+ * @param {object} filter main filter object
+ * @param {string} filter.Property field name
+ * @param {string} filter.SimpleOperator string representation of the comparison method
+ * @param {string} filter.Value field value to check for
+ * @param {object} filter.LeftOperand contains a filter object itself
+ * @param {'AND'|'OR'} filter.LogicalOperator string representation of the comparison method
+ * @param {object} filter.RightOperand field value to check for
+ * @returns {string} string represenation of the entire filter
+ */
+export function filterToPath(filter) {
     if (filter) {
-        return '-' + this._filterToPath(filter);
+        return '-' + _filterToPath(filter);
     }
     return '';
-};
-exports._filterToPath = (filter) => {
+}
+/**
+ * helper for filterToPath
+ *
+ * @param {object} filter main filter object
+ * @param {string} filter.Property field name
+ * @param {string} filter.SimpleOperator string representation of the comparison method
+ * @param {string} filter.Value field value to check for
+ * @param {object} filter.LeftOperand contains a filter object itself
+ * @param {'AND'|'OR'} filter.LogicalOperator string representation of the comparison method
+ * @param {object} filter.RightOperand field value to check for
+ * @returns {string} string represenation of the entire filter
+ */
+function _filterToPath(filter) {
     if (filter.Property && filter.SimpleOperator) {
         return `${filter.Property}${filter.SimpleOperator.replace('equals', '=')}${
             filter.Value === undefined ? '' : filter.Value
         }`;
     } else if (filter.LeftOperand && filter.LogicalOperator && filter.RightOperand) {
         return (
-            this._filterToPath(filter.LeftOperand) +
+            _filterToPath(filter.LeftOperand) +
             filter.LogicalOperator +
-            this._filterToPath(filter.RightOperand)
+            _filterToPath(filter.RightOperand)
         );
     } else {
         throw new Error('unknown filter type');
     }
-};
+}
 /**
  * based on request, respond with different soap data
  *
  * @param {object} config mock api request object
  * @returns {Promise.<Array>} status code plus response in string form
  */
-exports.handleSOAPRequest = async (config) => {
+export const handleSOAPRequest = async (config) => {
     const jObj = parser.parse(config.data);
     const fullObj = attributeParser.parse(config.data);
     let responseXML;
 
     switch (config.headers.SOAPAction) {
         case 'Retrieve': {
-            responseXML = await this.loadSOAPRecords(
+            responseXML = await loadSOAPRecords(
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 jObj.Envelope.Body.RetrieveRequestMsg.RetrieveRequest.ObjectType,
                 jObj.Envelope.Header.fueloauth,
@@ -98,7 +148,7 @@ exports.handleSOAPRequest = async (config) => {
             break;
         }
         case 'Create': {
-            responseXML = await this.loadSOAPRecords(
+            responseXML = await loadSOAPRecords(
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.CreateRequest.Objects['@_xsi:type'],
                 jObj.Envelope.Header.fueloauth,
@@ -108,7 +158,7 @@ exports.handleSOAPRequest = async (config) => {
             break;
         }
         case 'Update': {
-            responseXML = await this.loadSOAPRecords(
+            responseXML = await loadSOAPRecords(
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.UpdateRequest.Objects['@_xsi:type'],
                 jObj.Envelope.Header.fueloauth,
@@ -118,7 +168,7 @@ exports.handleSOAPRequest = async (config) => {
             break;
         }
         case 'Configure': {
-            responseXML = await this.loadSOAPRecords(
+            responseXML = await loadSOAPRecords(
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.ConfigureRequestMsg.Configurations.Configuration[0][
                     '@_xsi:type'
@@ -130,7 +180,7 @@ exports.handleSOAPRequest = async (config) => {
             break;
         }
         case 'Delete': {
-            responseXML = await this.loadSOAPRecords(
+            responseXML = await loadSOAPRecords(
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.DeleteRequest.Objects['@_xsi:type'],
                 jObj.Envelope.Header.fueloauth,
@@ -140,11 +190,21 @@ exports.handleSOAPRequest = async (config) => {
             break;
         }
         case 'Schedule': {
-            responseXML = await this.loadSOAPRecords(
+            responseXML = await loadSOAPRecords(
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.ScheduleRequestMsg.Interactions.Interaction['@_xsi:type'],
                 jObj.Envelope.Header.fueloauth,
                 fullObj.Envelope.Body.ScheduleRequestMsg.Interactions.Interaction.ObjectID
+            );
+
+            break;
+        }
+        case 'Perform': {
+            responseXML = await loadSOAPRecords(
+                config.headers.SOAPAction.toLocaleLowerCase(),
+                fullObj.Envelope.Body.PerformRequestMsg.Definitions.Definition['@_xsi:type'],
+                jObj.Envelope.Header.fueloauth,
+                fullObj.Envelope.Body.PerformRequestMsg.Definitions.Definition.ObjectID
             );
 
             break;
@@ -158,12 +218,14 @@ exports.handleSOAPRequest = async (config) => {
 
     return [200, responseXML];
 };
+
 /**
  * helper to return soap base URL
  *
  * @returns {string} soap URL
  */
-exports.soapUrl = 'https://mct0l7nxfq2r988t1kxfy8sc4xxx.soap.marketingcloudapis.com/Service.asmx';
+export const soapUrl =
+    'https://mct0l7nxfq2r988t1kxfy8sc4xxx.soap.marketingcloudapis.com/Service.asmx';
 
 /**
  * based on request, respond with different soap data
@@ -171,7 +233,7 @@ exports.soapUrl = 'https://mct0l7nxfq2r988t1kxfy8sc4xxx.soap.marketingcloudapis.
  * @param {object} config mock api request object
  * @returns {Promise.<Array>} status code plus response in string form
  */
-exports.handleRESTRequest = async (config) => {
+export const handleRESTRequest = async (config) => {
     try {
         // check if filtered
         const urlObj = new URL(config.baseURL + config.url.slice(1));
@@ -218,7 +280,7 @@ exports.handleRESTRequest = async (config) => {
         } else {
             /* eslint-disable no-console */
             console.log(
-                `${color.bgRed}${color.fgBlack}test-error${color.reset}: Please create file ${testPath}.json/.txt`
+                `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}: Please create file ${testPath}.json/.txt`
             );
             /* eslint-enable no-console */
             process.exitCode = 404;
@@ -234,9 +296,10 @@ exports.handleRESTRequest = async (config) => {
         return [500, {}];
     }
 };
+
 /**
  * helper to return rest base URL
  *
  * @returns {string} test URL
  */
-exports.restUrl = 'https://mct0l7nxfq2r988t1kxfy8sc4xxx.rest.marketingcloudapis.com/';
+export const restUrl = 'https://mct0l7nxfq2r988t1kxfy8sc4xxx.rest.marketingcloudapis.com/';

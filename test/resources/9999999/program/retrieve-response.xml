@@ -33,6 +33,18 @@
                 <Name>testExisting_automation_pause</Name>                <!--only retrieved for cache-->
                 <CustomerKey>testExisting_automation_pause</CustomerKey>                <!--only retrieved for cache-->
             </Results>
+            <Results xsi:type="Program">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>08afb0e2-b00a-4c88-fixKey_schedule</ObjectID>
+                <Name>testExisting_automation_fixedKey_scheduled</Name>                <!--only retrieved for cache-->
+                <CustomerKey>testExisting_automation_fixKey_schedule</CustomerKey>                <!--only retrieved for cache-->
+            </Results>
+            <Results xsi:type="Program">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>08afb0e2-b00a-4c88-fixKey_pause</ObjectID>
+                <Name>testExisting_automation_fixedKey_paused</Name>                <!--only retrieved for cache-->
+                <CustomerKey>testExisting_automation_fixKey_pause</CustomerKey>                <!--only retrieved for cache-->
+            </Results>
         </RetrieveResponseMsg>
     </soap:Body>
 </soap:Envelope>

@@ -1,0 +1,12 @@
+{
+    "dataVerificationDefinitionId": "testNew_RANDOM_NEW_GUID",
+    "targetObjectId": "21711373-72c1-ec11-b83b-48df37d1deb7",
+    "verificationType": "IsEqualTo",
+    "value1": 2,
+    "value2": 0,
+    "shouldStopOnFailure": false,
+    "shouldEmailOnFailure": false,
+    "notificationEmailAddress": "",
+    "notificationEmailMessage": "",
+    "createdBy": 700301950
+}
