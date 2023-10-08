@@ -240,9 +240,6 @@ helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item
 <dd><p>delete the field added by <a href="DataExtension.#fixShared_item_addField">DataExtension.#fixShared_item_addField</a>
 helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item</a></p>
 </dd>
-<dt><a href="#Journey.">Journey.(metadata, definitionKey, versionNumber)</a> ⇒ <code>Promise.&lt;object&gt;</code></dt>
-<dd><p>helper for <a href="#Journey.pause">pause</a></p>
-</dd>
 <dt><a href="#getUserName">getUserName(userList, item, fieldname)</a> ⇒ <code>string</code></dt>
 <dd></dd>
 <dt><a href="#setupSDK">setupSDK(sessionKey, authObject)</a> ⇒ <code><a href="#SDK">SDK</a></code></dt>
@@ -3170,7 +3167,7 @@ definitionId: A unique UUID provided by Salesforce Marketing Cloud. Each version
     * [.postRetrieveTasks(metadata)](#Journey.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.preDeployTasks(metadata)](#Journey.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#Journey.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
-    * [.pause(keyArr)](#Journey.pause) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.pause(definitionIDs, versionNumber)](#Journey.pause) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="Journey.retrieve"></a>
 
@@ -3307,7 +3304,7 @@ helper for [upsert](#MetadataType.upsert)
 
 <a name="Journey.pause"></a>
 
-### Journey.pause(keyArr) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### Journey.pause(definitionIDs, versionNumber) ⇒ <code>Promise.&lt;boolean&gt;</code>
 a function to pause journey via API
 
 **Kind**: static method of [<code>Journey</code>](#Journey)  
@@ -3315,7 +3312,8 @@ a function to pause journey via API
 
 | Param | Type | Description |
 | --- | --- | --- |
-| keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+| definitionIDs | <code>Array.&lt;string&gt;</code> | definitionIDs of the metadata |
+| versionNumber | <code>string</code> | versionNumber of the journey |
 
 <a name="List"></a>
 
@@ -3441,6 +3439,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.retrieveRESTcollection(urlArray, [concurrentRequests], [logAmountOfUrls])](#MetadataType.retrieveRESTcollection) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
     * [.handleRESTErrors(ex, id)](#MetadataType.handleRESTErrors) ⇒ <code>null</code>
     * [.executeREST(uri, key)](#MetadataType.executeREST) ⇒ <code>Promise.&lt;{key:string, response:string}&gt;</code>
+    * [.pauseREST(uri, id)](#MetadataType.pauseREST) ⇒ <code>Promise.&lt;{key:string, response:string}&gt;</code>
     * [.executeSOAP([metadataEntry])](#MetadataType.executeSOAP) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
     * [.runDocumentOnRetrieve([singleRetrieve], metadataMap)](#MetadataType.runDocumentOnRetrieve) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#MetadataType.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
@@ -3955,6 +3954,19 @@ Used to execute a query/automation etc.
 | --- | --- | --- |
 | uri | <code>string</code> | REST endpoint where the POST request should be sent |
 | key | <code>string</code> | item key |
+
+<a name="MetadataType.pauseREST"></a>
+
+### MetadataType.pauseREST(uri, id) ⇒ <code>Promise.&lt;{key:string, response:string}&gt;</code>
+Used to pause a journey etc.
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;{key:string, response:string}&gt;</code> - metadata id and API response (OK or error)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| uri | <code>string</code> | REST endpoint where the POST request should be sent |
+| id | <code>string</code> | item id |
 
 <a name="MetadataType.executeSOAP"></a>
 
@@ -8444,20 +8456,6 @@ helper for [DataExtension.#fixShared_item](DataExtension.#fixShared_item)
 | clientChildBu | <code>object</code> | SDK for child BU |
 | deKey | <code>string</code> | dataExtension key |
 | fieldObjectID | <code>string</code> | field ObjectID |
-
-<a name="Journey."></a>
-
-## Journey.(metadata, definitionKey, versionNumber) ⇒ <code>Promise.&lt;object&gt;</code>
-helper for [pause](#Journey.pause)
-
-**Kind**: global function  
-**Returns**: <code>Promise.&lt;object&gt;</code> - response: no errors in case of success  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.JourneyItem</code> | journey metadata |
-| definitionKey | <code>TYPE.JourneyItem</code> | journey definitionKey |
-| versionNumber | <code>TYPE.JourneyItem</code> | journey versionNumber |
 
 <a name="getUserName"></a>
 
