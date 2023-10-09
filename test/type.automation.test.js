@@ -288,7 +288,6 @@ describe('type: automation', () => {
                 1,
                 'one automation expected'
             );
-            testUtils.logAPIHistoryDebug();
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
