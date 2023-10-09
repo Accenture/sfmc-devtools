@@ -1,4 +1,4 @@
-const SDK = require('sfmc-sdk');
+import SDK from 'sfmc-sdk';
 /**
  * @ignore
  * @typedef {object} BuObject
@@ -347,4 +347,4 @@ complex
  * @property {Function} errorStack (ex, msg) print error with trace message
  */
 
-module.exports = {};
+export default {};

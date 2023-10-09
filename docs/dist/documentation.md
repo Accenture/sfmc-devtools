@@ -137,18 +137,6 @@ Provides default functionality that can be overwritten by child metadata type cl
 ## Constants
 
 <dl>
-<dt><a href="#Util">Util</a></dt>
-<dd><p>CLI entry for SFMC DevTools</p>
-</dd>
-<dt><a href="#MetadataTypeDefinitions">MetadataTypeDefinitions</a></dt>
-<dd><p>Provides access to all metadataType classes</p>
-</dd>
-<dt><a href="#MetadataTypeInfo">MetadataTypeInfo</a></dt>
-<dd><p>Provides access to all metadataType classes</p>
-</dd>
-<dt><a href="#mcdev">mcdev</a></dt>
-<dd><p>sample file on how to retrieve a simple changelog to use in GUIs or automated processing of any kind</p>
-</dd>
 <dt><a href="#BusinessUnit">BusinessUnit</a></dt>
 <dd><p>Helper that handles retrieval of BU info</p>
 </dd>
@@ -530,6 +518,7 @@ main class
 **Kind**: global class  
 
 * [Mcdev](#Mcdev)
+    * [.version()](#Mcdev.version) ⇒ <code>string</code>
     * [.setSkipInteraction([skipInteraction])](#Mcdev.setSkipInteraction) ⇒ <code>void</code>
     * [.setLoggingLevel(argv)](#Mcdev.setLoggingLevel) ⇒ <code>void</code>
     * [.setOptions(argv)](#Mcdev.setOptions) ⇒ <code>void</code>
@@ -556,6 +545,11 @@ main class
     * [.pause(businessUnit, [selectedType], [keys])](#Mcdev.pause) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
     * [.fixKeys(businessUnit, selectedType, [keys])](#Mcdev.fixKeys) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
 
+<a name="Mcdev.version"></a>
+
+### Mcdev.version() ⇒ <code>string</code>
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>string</code> - current version of mcdev  
 <a name="Mcdev.setSkipInteraction"></a>
 
 ### Mcdev.setSkipInteraction([skipInteraction]) ⇒ <code>void</code>
@@ -6293,485 +6287,6 @@ helper for [Retriever.retrieve](Retriever.retrieve) to get all dependencies of t
 | --- | --- | --- |
 | metadataTypes | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | list of metadata types to retrieve; can include subtypes! |
 
-<a name="Util"></a>
-
-## Util
-CLI entry for SFMC DevTools
-
-**Kind**: global constant  
-
-* [Util](#Util)
-    * [.skipInteraction](#Util.skipInteraction) : <code>TYPE.skipInteraction</code>
-    * [.logger](#Util.logger) : <code>TYPE.Logger</code>
-    * [.filterObjByKeys(originalObj, [whitelistArr])](#Util.filterObjByKeys) ⇒ <code>Object.&lt;string, \*&gt;</code>
-    * [.includesStartsWith(arr, search)](#Util.includesStartsWith) ⇒ <code>boolean</code>
-    * [.includesStartsWithIndex(arr, search)](#Util.includesStartsWithIndex) ⇒ <code>number</code>
-    * [.checkMarket(market, properties)](#Util.checkMarket) ⇒ <code>boolean</code>
-    * [.verifyMarketList(mlName, properties)](#Util.verifyMarketList)
-    * [.signalFatalError()](#Util.signalFatalError) ⇒ <code>void</code>
-    * [.isTrue(attrValue)](#Util.isTrue) ⇒ <code>boolean</code>
-    * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
-    * [._isValidType(selectedType, [handleOutside])](#Util._isValidType) ⇒ <code>boolean</code>
-    * [.getTypeAndSubType(selectedType)](#Util.getTypeAndSubType) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
-    * [._createNewLoggerTransport([noLogFile])](#Util._createNewLoggerTransport) ⇒ <code>object</code>
-    * [.startLogger([restart], [noLogFile])](#Util.startLogger) ⇒ <code>void</code>
-    * [.metadataLogger(level, type, method, payload, [source])](#Util.metadataLogger) ⇒ <code>void</code>
-    * [.replaceByObject(str, obj)](#Util.replaceByObject) ⇒ <code>string</code> \| <code>object</code>
-    * [.inverseGet(objs, val)](#Util.inverseGet) ⇒ <code>string</code>
-    * [.getDependentMetadata(fixedType)](#Util.getDependentMetadata) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.getMetadataHierachy(metadataTypes)](#Util.getMetadataHierachy) ⇒ <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
-    * [.resolveObjPath(path, obj)](#Util.resolveObjPath) ⇒ <code>any</code>
-    * [.execSync(cmd, [args], [hideOutput])](#Util.execSync) ⇒ <code>string</code> \| <code>void</code>
-    * [.templateSearchResult(results, keyToSearch, searchValue)](#Util.templateSearchResult) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.setLoggingLevel(argv)](#Util.setLoggingLevel) ⇒ <code>void</code>
-    * [.logBeta(type)](#Util.logBeta)
-    * [.getGrayMsg(msg)](#Util.getGrayMsg) ⇒ <code>string</code>
-    * [.logSubtypes(subTypeArr)](#Util.logSubtypes) ⇒ <code>void</code>
-    * [.getKeysString(keyArr, [isId])](#Util.getKeysString) ⇒ <code>string</code>
-    * [.sleep(ms)](#Util.sleep) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.getSsjs(code)](#Util.getSsjs) ⇒ <code>string</code>
-    * [.stringLike(testString, search)](#Util.stringLike) ⇒ <code>boolean</code>
-    * [.fieldsLike(metadata, [filters])](#Util.fieldsLike) ⇒ <code>boolean</code>
-    * [.capitalizeFirstLetter(str)](#Util.capitalizeFirstLetter) ⇒ <code>string</code>
-
-<a name="Util.skipInteraction"></a>
-
-### Util.skipInteraction : <code>TYPE.skipInteraction</code>
-**Kind**: static property of [<code>Util</code>](#Util)  
-<a name="Util.logger"></a>
-
-### Util.logger : <code>TYPE.Logger</code>
-Logger that creates timestamped log file in 'logs/' directory
-
-**Kind**: static property of [<code>Util</code>](#Util)  
-<a name="Util.filterObjByKeys"></a>
-
-### Util.filterObjByKeys(originalObj, [whitelistArr]) ⇒ <code>Object.&lt;string, \*&gt;</code>
-helper that allows filtering an object by its keys
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Object.&lt;string, \*&gt;</code> - filtered object that only contains keys you provided  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| originalObj | <code>Object.&lt;string, \*&gt;</code> | object that you want to filter |
-| [whitelistArr] | <code>Array.&lt;string&gt;</code> | positive filter. if not provided, returns originalObj without filter |
-
-<a name="Util.includesStartsWith"></a>
-
-### Util.includesStartsWith(arr, search) ⇒ <code>boolean</code>
-extended Array.includes method that allows check if an array-element starts with a certain string
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> - found / not found  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| arr | <code>Array.&lt;string&gt;</code> | your array of strigns |
-| search | <code>string</code> | the string you are looking for |
-
-<a name="Util.includesStartsWithIndex"></a>
-
-### Util.includesStartsWithIndex(arr, search) ⇒ <code>number</code>
-extended Array.includes method that allows check if an array-element starts with a certain string
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>number</code> - array index 0..n or -1 of not found  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| arr | <code>Array.&lt;string&gt;</code> | your array of strigns |
-| search | <code>string</code> | the string you are looking for |
-
-<a name="Util.checkMarket"></a>
-
-### Util.checkMarket(market, properties) ⇒ <code>boolean</code>
-check if a market name exists in current mcdev config
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> - found market or not  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| market | <code>string</code> | market localizations |
-| properties | <code>TYPE.Mcdevrc</code> | local mcdev config |
-
-<a name="Util.verifyMarketList"></a>
-
-### Util.verifyMarketList(mlName, properties)
-ensure provided MarketList exists and it's content including markets and BUs checks out
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| mlName | <code>string</code> | name of marketList |
-| properties | <code>TYPE.Mcdevrc</code> | General configuration to be used in retrieve |
-
-<a name="Util.signalFatalError"></a>
-
-### Util.signalFatalError() ⇒ <code>void</code>
-used to ensure the program tells surrounding software that an unrecoverable error occured
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-<a name="Util.isTrue"></a>
-
-### Util.isTrue(attrValue) ⇒ <code>boolean</code>
-SFMC accepts multiple true values for Boolean attributes for which we are checking here.
-The same problem occurs when evaluating boolean CLI flags
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> - attribute value == true ? true : false  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| attrValue | <code>\*</code> | value |
-
-<a name="Util.isFalse"></a>
-
-### Util.isFalse(attrValue) ⇒ <code>boolean</code>
-SFMC accepts multiple false values for Boolean attributes for which we are checking here.
-The same problem occurs when evaluating boolean CLI flags
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> - attribute value == false ? true : false  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| attrValue | <code>\*</code> | value |
-
-<a name="Util._isValidType"></a>
-
-### Util.\_isValidType(selectedType, [handleOutside]) ⇒ <code>boolean</code>
-helper for Mcdev.retrieve, Mcdev.retrieveAsTemplate and Mcdev.deploy
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> - type ok or not  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| selectedType | <code>TYPE.SupportedMetadataTypes</code> | type or type-subtype |
-| [handleOutside] | <code>boolean</code> | if the API reponse is irregular this allows you to handle it outside of this generic method |
-
-<a name="Util.getTypeAndSubType"></a>
-
-### Util.getTypeAndSubType(selectedType) ⇒ <code>Array.&lt;string&gt;</code>
-helper that deals with extracting type and subtype
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Array.&lt;string&gt;</code> - first elem is type, second elem is subType  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| selectedType | <code>string</code> | "type" or "type-subtype" |
-
-<a name="Util.getRetrieveTypeChoices"></a>
-
-### Util.getRetrieveTypeChoices() ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
-helper for getDefaultProperties()
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> - type choices  
-<a name="Util._createNewLoggerTransport"></a>
-
-### Util.\_createNewLoggerTransport([noLogFile]) ⇒ <code>object</code>
-wrapper around our standard winston logging to console and logfile
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>object</code> - initiated logger for console and file  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [noLogFile] | <code>boolean</code> | optional flag to indicate if we should log to file; CLI logs are always on |
-
-<a name="Util.startLogger"></a>
-
-### Util.startLogger([restart], [noLogFile]) ⇒ <code>void</code>
-initiate winston logger
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [restart] | <code>boolean</code> | if true, logger will be restarted; otherwise, an existing logger will be used |
-| [noLogFile] | <code>boolean</code> | if false, logger will log to file; otherwise, only to console |
-
-<a name="Util.metadataLogger"></a>
-
-### Util.metadataLogger(level, type, method, payload, [source]) ⇒ <code>void</code>
-Logger helper for Metadata functions
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| level | <code>string</code> | of log (error, info, warn) |
-| type | <code>string</code> | of metadata being referenced |
-| method | <code>string</code> | name which log was called from |
-| payload | <code>\*</code> | generic object which details the error |
-| [source] | <code>string</code> | key/id of metadata which relates to error |
-
-<a name="Util.replaceByObject"></a>
-
-### Util.replaceByObject(str, obj) ⇒ <code>string</code> \| <code>object</code>
-replaces values in a JSON object string, based on a series of
-key-value pairs (obj)
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>string</code> \| <code>object</code> - replaced version of str  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| str | <code>string</code> \| <code>object</code> | JSON object or its stringified version, which has values to be replaced |
-| obj | <code>TYPE.TemplateMap</code> | key value object which contains keys to be replaced and values to be replaced with |
-
-<a name="Util.inverseGet"></a>
-
-### Util.inverseGet(objs, val) ⇒ <code>string</code>
-get key of an object based on the first matching value
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>string</code> - key  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| objs | <code>object</code> | object of objects to be searched |
-| val | <code>string</code> | value to be searched for |
-
-<a name="Util.getDependentMetadata"></a>
-
-### Util.getDependentMetadata(fixedType) ⇒ <code>Array.&lt;string&gt;</code>
-helper for Mcdev.fixKeys. Retrieve dependent metadata
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Array.&lt;string&gt;</code> - array of types that depend on the given type  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| fixedType | <code>string</code> | type of the metadata passed as a parameter to fixKeys function |
-
-<a name="Util.getMetadataHierachy"></a>
-
-### Util.getMetadataHierachy(metadataTypes) ⇒ <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
-Returns Order in which metadata needs to be retrieved/deployed
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code> - retrieve/deploy order as array  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadataTypes | <code>Array.&lt;string&gt;</code> | which should be retrieved/deployed |
-
-<a name="Util.resolveObjPath"></a>
-
-### Util.resolveObjPath(path, obj) ⇒ <code>any</code>
-let's you dynamically walk down an object and get a value
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>any</code> - value of obj.path  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| path | <code>string</code> | 'fieldA.fieldB.fieldC' |
-| obj | <code>object</code> | some parent object |
-
-<a name="Util.execSync"></a>
-
-### Util.execSync(cmd, [args], [hideOutput]) ⇒ <code>string</code> \| <code>void</code>
-helper to run other commands as if run manually by user
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>string</code> \| <code>void</code> - output of command if hideOutput is true  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| cmd | <code>string</code> | to be executed command |
-| [args] | <code>Array.&lt;string&gt;</code> | list of arguments |
-| [hideOutput] | <code>boolean</code> | if true, output of command will be hidden from CLI |
-
-<a name="Util.templateSearchResult"></a>
-
-### Util.templateSearchResult(results, keyToSearch, searchValue) ⇒ <code>TYPE.MetadataTypeItem</code>
-standardize check to ensure only one result is returned from template search
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - metadata to be used in building template  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| results | <code>Array.&lt;TYPE.MetadataTypeItem&gt;</code> | array of metadata |
-| keyToSearch | <code>string</code> | the field which contains the searched value |
-| searchValue | <code>string</code> | the value which is being looked for |
-
-<a name="Util.setLoggingLevel"></a>
-
-### Util.setLoggingLevel(argv) ⇒ <code>void</code>
-configures what is displayed in the console
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| argv | <code>object</code> | list of command line parameters given by user |
-| [argv.silent] | <code>boolean</code> | only errors printed to CLI |
-| [argv.verbose] | <code>boolean</code> | chatty user CLI output |
-| [argv.debug] | <code>boolean</code> | enables developer output & features |
-
-<a name="Util.logBeta"></a>
-
-### Util.logBeta(type)
-outputs a warning that the given type is still in beta
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| type | <code>string</code> | api name of the type thats in beta |
-
-<a name="Util.getGrayMsg"></a>
-
-### Util.getGrayMsg(msg) ⇒ <code>string</code>
-helper that wraps a message in the correct color codes to have them printed gray
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>string</code> - gray msg  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| msg | <code>string</code> | log message that should be wrapped with color codes |
-
-<a name="Util.logSubtypes"></a>
-
-### Util.logSubtypes(subTypeArr) ⇒ <code>void</code>
-helper to print the subtypes we filtered by
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| subTypeArr | <code>Array.&lt;string&gt;</code> | list of subtypes to be printed |
-
-<a name="Util.getKeysString"></a>
-
-### Util.getKeysString(keyArr, [isId]) ⇒ <code>string</code>
-helper to print the subtypes we filtered by
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>string</code> - string to be appended to log message  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| keyArr | <code>Array.&lt;string&gt;</code> \| <code>string</code> | list of subtypes to be printed |
-| [isId] | <code>boolean</code> | optional flag to indicate if key is an id |
-
-<a name="Util.sleep"></a>
-
-### Util.sleep(ms) ⇒ <code>Promise.&lt;void&gt;</code>
-pause execution of code; useful when multiple server calls are dependent on each other and might not be executed right away
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>Promise.&lt;void&gt;</code> - - promise to wait for  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| ms | <code>number</code> | time in miliseconds to wait |
-
-<a name="Util.getSsjs"></a>
-
-### Util.getSsjs(code) ⇒ <code>string</code>
-helper for Asset.extractCode and Script.prepExtractedCode to determine if a code block is a valid SSJS block
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>string</code> - the SSJS code if code block is a valid SSJS block, otherwise null  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| code | <code>string</code> | code block to check |
-
-**Example**  
-```js
-the following is invalid:
-<script runat="server">
-      // 1
-  </script>
-  <script runat="server">
-      // 2
-  </script>
-
-  the following is valid:
-  <script runat="server">
-      // 3
-  </script>
-```
-<a name="Util.stringLike"></a>
-
-### Util.stringLike(testString, search) ⇒ <code>boolean</code>
-allows us to filter just like with SQL's LIKE operator
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> - true if testString matches search  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| testString | <code>string</code> | field value to test |
-| search | <code>string</code> | search string in SQL LIKE format |
-
-<a name="Util.fieldsLike"></a>
-
-### Util.fieldsLike(metadata, [filters]) ⇒ <code>boolean</code>
-returns true if no LIKE filter is defined or if all filters match
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>boolean</code> - true if no LIKE filter is defined or if all filters match  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single metadata item |
-| [filters] | <code>object</code> | only used in recursive calls |
-
-<a name="Util.capitalizeFirstLetter"></a>
-
-### Util.capitalizeFirstLetter(str) ⇒ <code>string</code>
-helper used by SOAP methods to ensure the type always uses an upper-cased first letter
-
-**Kind**: static method of [<code>Util</code>](#Util)  
-**Returns**: <code>string</code> - str with first letter capitalized  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| str | <code>string</code> | string to capitalize |
-
-<a name="MetadataTypeDefinitions"></a>
-
-## MetadataTypeDefinitions
-Provides access to all metadataType classes
-
-**Kind**: global constant  
-<a name="MetadataTypeInfo"></a>
-
-## MetadataTypeInfo
-Provides access to all metadataType classes
-
-**Kind**: global constant  
-<a name="mcdev"></a>
-
-## mcdev
-sample file on how to retrieve a simple changelog to use in GUIs or automated processing of any kind
-
-**Kind**: global constant  
-**Example**  
-```js
-[{
-    name: 'deName',
-    key: 'deKey',
-    t: 'dataExtension',
-    cd: '2020-05-06T00:16:00.737',
-    cb: 'name of creator',
-    ld: '2020-05-06T00:16:00.737',
-    lb: 'name of lastmodified'
-  }]
-```
 <a name="BusinessUnit"></a>
 
 ## BusinessUnit
@@ -7123,7 +6638,7 @@ File extends fs-extra. It adds logger and util methods for file handling
     * [.writeJSONToFile(directory, filename, content)](#File.writeJSONToFile) ⇒ <code>Promise</code>
     * [.writePrettyToFile(directory, filename, filetype, content, [templateVariables])](#File.writePrettyToFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [._beautify_beautyAmp(content)](#File._beautify_beautyAmp) ⇒ <code>string</code>
-    * [._beautify_prettier(directory, filename, filetype, content)](#File._beautify_prettier) ⇒ <code>string</code>
+    * [._beautify_prettier(directory, filename, filetype, content)](#File._beautify_prettier) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.writeToFile(directory, filename, filetype, content, [encoding])](#File.writeToFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.readJSONFile(directory, filename, sync, cleanPath)](#File.readJSONFile) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>object</code> \| <code>void</code>
     * [.readFilteredFilename(directory, filename, filetype, [encoding])](#File.readFilteredFilename) ⇒ <code>Promise.&lt;string&gt;</code> \| <code>void</code>
@@ -7238,12 +6753,12 @@ helper for [writePrettyToFile](#File.writePrettyToFile), applying beautyAmp onto
 
 <a name="File._beautify_prettier"></a>
 
-### File.\_beautify\_prettier(directory, filename, filetype, content) ⇒ <code>string</code>
+### File.\_beautify\_prettier(directory, filename, filetype, content) ⇒ <code>Promise.&lt;string&gt;</code>
 helper for [writePrettyToFile](#File.writePrettyToFile), applying prettier onto given stringified content
 ! Important: run 'await File.initPrettier()' in your MetadataType.retrieve() once before hitting this
 
 **Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>string</code> - original string on error; formatted string on success  
+**Returns**: <code>Promise.&lt;string&gt;</code> - original string on error; formatted string on success  
 
 | Param | Type | Description |
 | --- | --- | --- |
