@@ -1,6 +1,6 @@
 {
     "name": "mcdev",
-    "version": "5.3.0",
+    "version": "6.0.0",
     "description": "Accenture Salesforce Marketing Cloud DevTools",
     "author": "Accenture: joern.berkefeld, douglas.midgley, robert.zimmermann, maciej.barnas",
     "license": "MIT",
@@ -31,6 +31,12 @@
         "rest"
     ],
     "main": "./lib/index.js",
+    "exports": {
+        ".": {
+            "default": "./lib/index.js"
+        },
+        "./*": "./*.js"
+    },
     "bin": {
         "mcdev": "./lib/cli.js"
     },
@@ -72,26 +78,26 @@
         "prettier-plugin-sql": "0.15.1",
         "semver": "7.5.4",
         "sfmc-sdk": "2.0.1",
-        "simple-git": "3.19.0",
+        "simple-git": "3.20.0",
         "toposort": "2.0.2",
         "update-notifier": "6.0.2",
         "winston": "3.10.0",
         "yargs": "17.7.2"
     },
     "devDependencies": {
-        "assert": "2.0.0",
+        "assert": "2.1.0",
         "axios-mock-adapter": "1.22.0",
-        "c8": "7.14.0",
-        "chai": "4.3.8",
+        "c8": "8.0.1",
+        "chai": "4.3.10",
         "chai-files": "1.4.0",
-        "eslint": "8.49.0",
+        "eslint": "8.50.0",
         "eslint-config-prettier": "9.0.0",
         "eslint-config-ssjs": "1.1.11",
-        "eslint-plugin-jsdoc": "46.8.1",
-        "eslint-plugin-mocha": "10.1.0",
+        "eslint-plugin-jsdoc": "46.8.2",
+        "eslint-plugin-mocha": "10.2.0",
         "eslint-plugin-prettier": "5.0.0",
         "eslint-plugin-unicorn": "48.0.0",
-        "fast-xml-parser": "4.2.7",
+        "fast-xml-parser": "4.3.2",
         "husky": "8.0.3",
         "jsdoc-to-markdown": "8.0.0",
         "lint-staged": "14.0.1",
@@ -104,7 +110,9 @@
         "fsevents": "*"
     },
     "lint-staged": {
-        "*.{js,jsx,ts,tsx}": ["eslint --fix"]
+        "*.{js,jsx,ts,tsx}": [
+            "eslint --fix"
+        ]
     },
     "type": "module"
 }
