@@ -87,7 +87,7 @@
     "devDependencies": {
         "assert": "2.1.0",
         "axios-mock-adapter": "1.22.0",
-        "c8": "7.14.0",
+        "c8": "8.0.1",
         "chai": "4.3.8",
         "chai-files": "1.4.0",
         "eslint": "8.50.0",
