@@ -197,7 +197,7 @@ describe('type: importFile', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
-        it('Should update email notifications', async () => {
+        it('Should set email notification address and activate it', async () => {
             handler.setOptions({ completionEmail: 'test@test.com' });
             // WHEN
             await handler.updateNotifications('testInstance/testBU', 'importFile', [
