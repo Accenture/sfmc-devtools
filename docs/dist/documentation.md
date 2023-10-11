@@ -189,6 +189,15 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Mcdev.">Mcdev.(cred, bu, type, [keyArr])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
 <dd><p>Updates the key to match the name field</p>
 </dd>
+<dt><a href="#Mcdev.">Mcdev.(cred, bu, type, [keyArr], methodName)</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
+<dd><p>A function to retrieve, update and deploy items</p>
+</dd>
+<dt><a href="#Mcdev.">Mcdev.(type, metadataMap, methodName)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
+<dd><p>helper function to get keys of items to update</p>
+</dd>
+<dt><a href="#Mcdev.">Mcdev.(cred, bu, type, [keyArr])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
+<dd><p>Updates notification email address field</p>
+</dd>
 <dt><a href="#Automation.">Automation.(metadata)</a> ⇒ <code>boolean</code></dt>
 <dd><p>helper for <a href="#Automation.postRetrieveTasks">postRetrieveTasks</a> and <a href="#Automation.execute">execute</a></p>
 </dd>
@@ -207,8 +216,14 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Automation.">Automation.(metadataMap, key)</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
 </dd>
+<dt><a href="#Automation.">Automation.(key, programId, notificationBody)</a> ⇒ <code>string</code></dt>
+<dd><p>helper function to send POST request to update notifications</p>
+</dd>
 <dt><a href="#Automation.">Automation.(metadataMap, originalMetadataMap, key, [oldKey])</a> ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code></dt>
 <dd><p>helper for <a href="#Automation.postDeployTasks">postDeployTasks</a></p>
+</dd>
+<dt><a href="#Automation.">Automation.()</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code></dt>
+<dd><p>helper function to retrieve data about all automations in the BU</p>
 </dd>
 <dt><a href="#DataExtension.">DataExtension.(upsertedMetadata, originalMetadata, createdUpdated)</a> ⇒ <code>void</code></dt>
 <dd><p>takes care of updating attribute groups on child BUs after an update to Shared DataExtensions
@@ -544,6 +559,7 @@ main class
     * [.execute(businessUnit, [selectedType], [keys])](#Mcdev.execute) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
     * [.pause(businessUnit, [selectedType], [keys])](#Mcdev.pause) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
     * [.fixKeys(businessUnit, selectedType, [keys])](#Mcdev.fixKeys) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
+    * [.updateNotifications(businessUnit, selectedType, [keys])](#Mcdev.updateNotifications) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
 
 <a name="Mcdev.version"></a>
 
@@ -854,6 +870,20 @@ Updates the key to match the name field
 | --- | --- | --- |
 | businessUnit | <code>string</code> | name of BU |
 | selectedType | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
+| [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Mcdev.updateNotifications"></a>
+
+### Mcdev.updateNotifications(businessUnit, selectedType, [keys]) ⇒ <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code>
+Updates notification email address field
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>Promise.&lt;Object.&lt;string, Array.&lt;string&gt;&gt;&gt;</code> - key: business unit name, value: list of affected item keys  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| businessUnit | <code>string</code> | name of BU |
+| selectedType | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
 | [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
 
 <a name="Asset"></a>
@@ -1429,6 +1459,8 @@ Automation MetadataType
     * [.getFilesToCommit(keyArr)](#Automation.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
     * [.deleteByKey(customerKey)](#Automation.deleteByKey) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey)](#Automation.postDeleteTasks) ⇒ <code>void</code>
+    * [.updateNotifications(keys)](#Automation.updateNotifications) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+    * [.clearNotifications(keys)](#Automation.clearNotifications) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 
 <a name="Automation.retrieve"></a>
 
@@ -1707,6 +1739,30 @@ clean up after deleting a metadata item
 | Param | Type | Description |
 | --- | --- | --- |
 | customerKey | <code>string</code> | Identifier of metadata item |
+
+<a name="Automation.updateNotifications"></a>
+
+### Automation.updateNotifications(keys) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+A function to update automation email notifications
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - keys of the automations where notifications were updated  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| keys | <code>string</code> | metadata keys |
+
+<a name="Automation.clearNotifications"></a>
+
+### Automation.clearNotifications(keys) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+A function to remove automation email notifications and/or notes
+
+**Kind**: static method of [<code>Automation</code>](#Automation)  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - keys of the automations where notifications were updated  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| keys | <code>string</code> | metadata keys |
 
 <a name="Campaign"></a>
 
@@ -3047,7 +3103,9 @@ ImportFile MetadataType
     * [.create(importFile)](#ImportFile.create) ⇒ <code>Promise</code>
     * [.update(importFile)](#ImportFile.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#ImportFile.preDeployTasks) ⇒ <code>Promise</code>
+    * [.getKeysToSetNotifications(metadataMap)](#ImportFile.getKeysToSetNotifications) ⇒ <code>Array.&lt;string&gt;</code>
     * [.parseMetadata(metadata)](#ImportFile.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#ImportFile.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
 
 <a name="ImportFile.retrieve"></a>
 
@@ -3135,6 +3193,18 @@ prepares a import definition for deployment
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single importDef |
 
+<a name="ImportFile.getKeysToSetNotifications"></a>
+
+### ImportFile.getKeysToSetNotifications(metadataMap) ⇒ <code>Array.&lt;string&gt;</code>
+helper function to get a list of keys where notification email address should be updated
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of keys  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
+
 <a name="ImportFile.parseMetadata"></a>
 
 ### ImportFile.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
@@ -3146,6 +3216,22 @@ parses retrieved Metadata before saving
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single import definition |
+
+<a name="ImportFile.createOrUpdate"></a>
+
+### ImportFile.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
+helper for [upsert](#MetadataType.upsert)
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code> - action to take  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | list of metadata |
+| metadataKey | <code>string</code> | key of item we are looking at |
+| hasError | <code>boolean</code> | error flag from previous code |
+| metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
+| metadataToCreate | <code>Array.&lt;TYPE.MetadataTypeItem&gt;</code> | list of items to create |
 
 <a name="Journey"></a>
 
@@ -3455,6 +3541,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType.readBUMetadataForType) ⇒ <code>object</code>
     * [.getFilesToCommit(keyArr)](#MetadataType.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.getKeysForFixing(metadataMap)](#MetadataType.getKeysForFixing) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.getKeysToSetNotifications(metadataMap)](#MetadataType.getKeysToSetNotifications) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.updateNotifications()](#MetadataType.updateNotifications) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="MetadataType.client"></a>
 
@@ -4307,6 +4395,25 @@ additionally, the documentation for dataExtension and automation should be retur
 | --- | --- | --- |
 | metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
 
+<a name="MetadataType.getKeysToSetNotifications"></a>
+
+### MetadataType.getKeysToSetNotifications(metadataMap) ⇒ <code>Array.&lt;string&gt;</code>
+Abstract function to get a list of keys where notification email address should be updated
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of keys  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
+
+<a name="MetadataType.updateNotifications"></a>
+
+### MetadataType.updateNotifications() ⇒ <code>Array.&lt;string&gt;</code>
+Abstract updateNotifications method that needs to be implemented in child metadata type
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Array.&lt;string&gt;</code> - returns keys of items where notification email address was set  
 <a name="MobileCode"></a>
 
 ## MobileCode ⇐ [<code>MetadataType</code>](#MetadataType)
@@ -6128,6 +6235,8 @@ Verification MetadataType
     * [.preDeployTasks(metadata)](#Verification.preDeployTasks) ⇒ <code>TYPE.VerificationItem</code>
     * [.postRetrieveTasks(metadata)](#Verification.postRetrieveTasks) ⇒ <code>TYPE.VerificationItem</code>
     * [.deleteByKey(key)](#Verification.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.getKeysToSetNotifications(metadataMap)](#Verification.getKeysToSetNotifications) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#Verification.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
 
 <a name="Verification.retrieve"></a>
 
@@ -6237,6 +6346,34 @@ Delete a metadata item from the specified business unit
 | --- | --- | --- |
 | key | <code>string</code> | Identifier of item |
 
+<a name="Verification.getKeysToSetNotifications"></a>
+
+### Verification.getKeysToSetNotifications(metadataMap) ⇒ <code>Array.&lt;string&gt;</code>
+helper function to get a list of keys where notification email addresses or notes should be updated
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of keys  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
+
+<a name="Verification.createOrUpdate"></a>
+
+### Verification.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
+helper for [upsert](#MetadataType.upsert)
+
+**Kind**: static method of [<code>Verification</code>](#Verification)  
+**Returns**: <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code> - action to take  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | list of metadata |
+| metadataKey | <code>string</code> | key of item we are looking at |
+| hasError | <code>boolean</code> | error flag from previous code |
+| metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
+| metadataToCreate | <code>Array.&lt;TYPE.MetadataTypeItem&gt;</code> | list of items to create |
+
 <a name="Retriever"></a>
 
 ## Retriever
@@ -6320,6 +6457,7 @@ CLI helper class
 * [Cli](#Cli)
     * [.initMcdevConfig()](#Cli.initMcdevConfig) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.addExtraCredential(properties)](#Cli.addExtraCredential) ⇒ <code>Promise.&lt;(boolean\|string)&gt;</code>
+    * [.updateNotificationEmails(noteType)](#Cli.updateNotificationEmails) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.postFixKeysReretrieve(type, dependentTypes)](#Cli.postFixKeysReretrieve) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.logExistingCredentials(properties)](#Cli.logExistingCredentials) ⇒ <code>void</code>
     * [.updateCredential(properties, credName)](#Cli.updateCredential) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -6350,6 +6488,18 @@ Extends template file for properties.json
 | Param | Type | Description |
 | --- | --- | --- |
 | properties | <code>TYPE.Mcdevrc</code> | config file's json |
+
+<a name="Cli.updateNotificationEmails"></a>
+
+### Cli.updateNotificationEmails(noteType) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+interactive helper to set automation run completion/error note
+
+**Kind**: static method of [<code>Cli</code>](#Cli)  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - responses  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| noteType | <code>TYPE.SupportedMetadataTypes</code> | note type (error/completion) |
 
 <a name="Cli.postFixKeysReretrieve"></a>
 
@@ -7734,6 +7884,7 @@ Util that contains logger and simple util methods
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [._isValidType(selectedType, [handleOutside])](#Util._isValidType) ⇒ <code>boolean</code>
     * [.getTypeAndSubType(selectedType)](#Util.getTypeAndSubType) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.emailValidator(email)](#Util.emailValidator) ⇒ <code>boolean</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
     * [._createNewLoggerTransport([noLogFile])](#Util._createNewLoggerTransport) ⇒ <code>object</code>
     * [.startLogger([restart], [noLogFile])](#Util.startLogger) ⇒ <code>void</code>
@@ -7886,6 +8037,18 @@ helper that deals with extracting type and subtype
 | Param | Type | Description |
 | --- | --- | --- |
 | selectedType | <code>string</code> | "type" or "type-subtype" |
+
+<a name="Util.emailValidator"></a>
+
+### Util.emailValidator(email) ⇒ <code>boolean</code>
+helper that validates email address
+
+**Kind**: static method of [<code>Util</code>](#Util)  
+**Returns**: <code>boolean</code> - first elem is type, second elem is subType  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| email | <code>string</code> | email to validate |
 
 <a name="Util.getRetrieveTypeChoices"></a>
 
@@ -8185,7 +8348,7 @@ run a method across BUs
 
 | Param | Type | Description |
 | --- | --- | --- |
-| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> \| <code>&#x27;fixKeys&#x27;</code> | what to run |
+| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> \| <code>&#x27;fixKeys&#x27;</code> \| <code>&#x27;updateNotifications&#x27;</code> | what to run |
 | businessUnit | <code>string</code> | name of BU |
 | [selectedType] | <code>TYPE.SupportedMetadataTypes</code> | limit to given metadata types |
 | [keys] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
@@ -8200,7 +8363,7 @@ helper for [Mcdev.#runMethod](Mcdev.#runMethod)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> \| <code>&#x27;fixKeys&#x27;</code> | what to run |
+| methodName | <code>&#x27;execute&#x27;</code> \| <code>&#x27;pause&#x27;</code> \| <code>&#x27;fixKeys&#x27;</code> \| <code>&#x27;updateNotifications&#x27;</code> | what to run |
 | cred | <code>string</code> | name of Credential |
 | bu | <code>string</code> | name of BU |
 | [type] | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
@@ -8223,6 +8386,51 @@ helper for [Mcdev.#runOnBU](Mcdev.#runOnBU)
 
 ## Mcdev.(cred, bu, type, [keyArr]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
 Updates the key to match the name field
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - list of keys that were affected  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cred | <code>string</code> | name of Credential |
+| bu | <code>string</code> | name of BU |
+| type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| [keyArr] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Mcdev."></a>
+
+## Mcdev.(cred, bu, type, [keyArr], methodName) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+A function to retrieve, update and deploy items
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - list of keys that were affected  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cred | <code>string</code> | name of Credential |
+| bu | <code>string</code> | name of BU |
+| type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| [keyArr] | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+| methodName | <code>string</code> | name of the function to execute |
+
+<a name="Mcdev."></a>
+
+## Mcdev.(type, metadataMap, methodName) ⇒ <code>Array.&lt;string&gt;</code>
+helper function to get keys of items to update
+
+**Kind**: global function  
+**Returns**: <code>Array.&lt;string&gt;</code> - list of keys  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| type | <code>TYPE.SupportedMetadataTypes</code> | limit execution to given metadata type |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
+| methodName | <code>string</code> | name of the method to execute |
+
+<a name="Mcdev."></a>
+
+## Mcdev.(cred, bu, type, [keyArr]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+Updates notification email address field
 
 **Kind**: global function  
 **Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - list of keys that were affected  
@@ -8309,6 +8517,20 @@ helper for [postDeployTasks](#Automation.postDeployTasks)
 
 <a name="Automation."></a>
 
+## Automation.(key, programId, notificationBody) ⇒ <code>string</code>
+helper function to send POST request to update notifications
+
+**Kind**: global function  
+**Returns**: <code>string</code> - returns "OK" or "Error"  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| key | <code>string</code> | current customer key |
+| programId | <code>string</code> | legacy automation id |
+| notificationBody | <code>string</code> | notification payload |
+
+<a name="Automation."></a>
+
 ## Automation.(metadataMap, originalMetadataMap, key, [oldKey]) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
 helper for [postDeployTasks](#Automation.postDeployTasks)
 
@@ -8322,6 +8544,13 @@ helper for [postDeployTasks](#Automation.postDeployTasks)
 | key | <code>string</code> | current customer key |
 | [oldKey] | <code>string</code> | old customer key before fixKey / changeKeyValue / changeKeyField |
 
+<a name="Automation."></a>
+
+## Automation.() ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
+helper function to retrieve data about all automations in the BU
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - returns data about automations with the legacy key  
 <a name="DataExtension."></a>
 
 ## DataExtension.(upsertedMetadata, originalMetadata, createdUpdated) ⇒ <code>void</code>

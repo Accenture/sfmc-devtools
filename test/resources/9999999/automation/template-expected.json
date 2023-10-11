@@ -40,6 +40,26 @@
                 {
                     "name": "{{{prefix}}}39f6a488-20eb-4ba0-b0b9",
                     "r__type": "verification"
+                },
+                {
+                    "name": "{{{prefix}}}verification_updateNotificationsNote",
+                    "r__type": "verification"
+                },
+                {
+                    "name": "{{{prefix}}}verification_updateNotificationsEmail",
+                    "r__type": "verification"
+                },
+                {
+                    "name": "{{{prefix}}}verification_NOTupdateNotificationsEmail",
+                    "r__type": "verification"
+                },
+                {
+                    "name": "{{{prefix}}}verification_NOTupdateNotificationsNote",
+                    "r__type": "verification"
+                },
+                {
+                    "name": "{{{prefix}}}verification_clear",
+                    "r__type": "verification"
                 }
             ],
             "name": ""

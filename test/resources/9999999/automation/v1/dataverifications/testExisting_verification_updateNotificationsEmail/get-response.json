@@ -1,0 +1,12 @@
+{
+    "dataVerificationDefinitionId": "testExisting_verification_updateNotificationsEmail",
+    "targetObjectId": "21711373-72c1-ec11-b83b-48df37d1deb7",
+    "verificationType": "IsEqualTo",
+    "value1": 1,
+    "value2": 0,
+    "shouldStopOnFailure": true,
+    "shouldEmailOnFailure": false,
+    "notificationEmailAddress": "",
+    "notificationEmailMessage": "",
+    "createdBy": 700301950
+}
