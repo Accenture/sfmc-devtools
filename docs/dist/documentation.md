@@ -7837,7 +7837,7 @@ Util that contains logger and simple util methods
     * [.isFalse(attrValue)](#Util.isFalse) ⇒ <code>boolean</code>
     * [._isValidType(selectedType, [handleOutside])](#Util._isValidType) ⇒ <code>boolean</code>
     * [.getTypeAndSubType(selectedType)](#Util.getTypeAndSubType) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.emailValidator(email)](#Util.emailValidator) ⇒ <code>boolean</code>
+    * [.isEmailValid(email)](#Util.isEmailValid) ⇒ <code>boolean</code>
     * [.getRetrieveTypeChoices()](#Util.getRetrieveTypeChoices) ⇒ <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code>
     * [._createNewLoggerTransport([noLogFile])](#Util._createNewLoggerTransport) ⇒ <code>object</code>
     * [.startLogger([restart], [noLogFile])](#Util.startLogger) ⇒ <code>void</code>
@@ -7991,9 +7991,9 @@ helper that deals with extracting type and subtype
 | --- | --- | --- |
 | selectedType | <code>string</code> | "type" or "type-subtype" |
 
-<a name="Util.emailValidator"></a>
+<a name="Util.isEmailValid"></a>
 
-### Util.emailValidator(email) ⇒ <code>boolean</code>
+### Util.isEmailValid(email) ⇒ <code>boolean</code>
 helper that validates email address
 
 **Kind**: static method of [<code>Util</code>](#Util)  
