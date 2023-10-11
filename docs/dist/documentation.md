@@ -3425,7 +3425,6 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.retrieveRESTcollection(urlArray, [concurrentRequests], [logAmountOfUrls])](#MetadataType.retrieveRESTcollection) ⇒ <code>Promise.&lt;{metadata: (TYPE.MetadataTypeMap\|TYPE.MetadataTypeItem), type: string}&gt;</code>
     * [.handleRESTErrors(ex, id)](#MetadataType.handleRESTErrors) ⇒ <code>null</code>
     * [.executeREST(uri, key)](#MetadataType.executeREST) ⇒ <code>Promise.&lt;{key:string, response:string}&gt;</code>
-    * [.pauseREST(uri, id)](#MetadataType.pauseREST) ⇒ <code>Promise.&lt;{key:string, response:string}&gt;</code>
     * [.executeSOAP([metadataEntry])](#MetadataType.executeSOAP) ⇒ <code>Promise.&lt;{key:string, response:object}&gt;</code>
     * [.runDocumentOnRetrieve([singleRetrieve], metadataMap)](#MetadataType.runDocumentOnRetrieve) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.parseResponseBody(body, [singleRetrieve])](#MetadataType.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
@@ -3940,19 +3939,6 @@ Used to execute a query/automation etc.
 | --- | --- | --- |
 | uri | <code>string</code> | REST endpoint where the POST request should be sent |
 | key | <code>string</code> | item key |
-
-<a name="MetadataType.pauseREST"></a>
-
-### MetadataType.pauseREST(uri, id) ⇒ <code>Promise.&lt;{key:string, response:string}&gt;</code>
-Used to pause a journey etc.
-
-**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>Promise.&lt;{key:string, response:string}&gt;</code> - metadata id and API response (OK or error)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| uri | <code>string</code> | REST endpoint where the POST request should be sent |
-| id | <code>string</code> | item id |
 
 <a name="MetadataType.executeSOAP"></a>
 
