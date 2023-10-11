@@ -3167,7 +3167,6 @@ definitionId: A unique UUID provided by Salesforce Marketing Cloud. Each version
     * [.postRetrieveTasks(metadata)](#Journey.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.preDeployTasks(metadata)](#Journey.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#Journey.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
-    * [.pause(definitionIDs, versionNumber)](#Journey.pause) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="Journey.retrieve"></a>
 
@@ -3301,19 +3300,6 @@ helper for [upsert](#MetadataType.upsert)
 | hasError | <code>boolean</code> | error flag from previous code |
 | metadataToUpdate | <code>Array.&lt;TYPE.MetadataTypeItemDiff&gt;</code> | list of items to update |
 | metadataToCreate | <code>Array.&lt;TYPE.MetadataTypeItem&gt;</code> | list of items to create |
-
-<a name="Journey.pause"></a>
-
-### Journey.pause(definitionIDs, versionNumber) ⇒ <code>Promise.&lt;boolean&gt;</code>
-a function to pause journey via API
-
-**Kind**: static method of [<code>Journey</code>](#Journey)  
-**Returns**: <code>Promise.&lt;boolean&gt;</code> - Returns true if all items were executed successfully, otherwise false  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| definitionIDs | <code>Array.&lt;string&gt;</code> | definitionIDs of the metadata |
-| versionNumber | <code>string</code> | versionNumber of the journey |
 
 <a name="List"></a>
 
