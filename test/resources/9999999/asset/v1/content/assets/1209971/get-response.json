@@ -1,0 +1,61 @@
+{
+    "customerKey": "mobileMessage_test",
+    "assetType": {
+        "name": "jsonmessage",
+        "displayName": "JSON Message"
+    },
+    "name": "Mobile Message November 22, 2021(4:20:55 PM)",
+    "owner": {
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld"
+    },
+    "createdDate": "2021-11-22T09:21:11.933-06:00",
+    "createdBy": {
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld"
+    },
+    "modifiedDate": "2021-12-16T02:56:24.29-06:00",
+    "modifiedBy": {
+        "name": "SFMC DEVOPS app user"
+    },
+    "memberId": 9999999,
+    "status": {
+        "name": "Draft"
+    },
+    "views": {
+        "push": {
+            "thumbnail": {},
+            "content": "<!doctype html>\n<html>\n\t<head>\n\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\t\t<meta name=\"description\" content=\"Push Preview\">\n\t\t<style>\n\thtml,\n\tbody {\n\t\tmargin: 0;\n\t\tpadding: 0;\n\t\theight: 100%;\n\t\twidth: 100%;\n\t\tline-height: 1.4;\n\t}\n\n\t.push-previewer {\n\t\twidth: inherit;\n\t\theight: inherit;\n\t\tposition: relative;\n\t}\n\n\t.device {\n\t\theight: inherit;\n\t\twidth: inherit;\n\t\tbackground-size: cover;\n\t\tbackground-repeat: no-repeat;\n\t}\n</style> <style>\n\t@font-face {\n\t\tfont-family: 'SF Pro Text - Regular';\n\t\tsrc: url('https://mobilepush-device-previewer.s7.marketingcloudapps.com/fonts/SFProText-Regular.woff') format('woff');\n\t\tfont-weight: normal;\n\t\tfont-style: normal;\n\t}\n\t\n\t@font-face {\n\t\tfont-family: 'Helvetica Neue - Roman';\n\t\tsrc: url('https://mobilepush-device-previewer.s7.marketingcloudapps.com/fonts/HelveticaNeue-Roman.woff') format('woff');\n\t\tfont-weight: normal;\n\t\tfont-style: normal;\n\t}\n\t\n\t@font-face {\n\t\tfont-family: 'SF Compact Text - Light';\n\t\tsrc: url('https://mobilepush-device-previewer.s7.marketingcloudapps.com/fonts/SFCompactText-Light.woff') format('woff');\n\t\tfont-weight: normal;\n\t\tfont-style: normal;\n\t}\n\t\n\t.device.iphone.lock-screen {\n\t\tfont-family: 'SF Pro Text - Regular';\n\t\tbackground-image: url('https://image.s8.exacttarget.com/lib/fe8e1c72746d057a70/m/1/d1948d1e-93af-4b9d-8b28-a087a351e8a8.jpg');\n\t}\n\t\n\t.device.iphone.lock-screen .header {\n\t\ttext-align: center;\n\t\tmargin-bottom: 20px;\n\t}\n\t\n\t.device.iphone.lock-screen .header .time {\n\t\tcolor: #FFFFFF;\n\t\tfont-family: 'SF Compact Text - Light';\n\t\tfont-size: 60px;\n\t\theight: 70px;\n\t}\n\n\t.device.iphone.lock-screen .header .date {\n\t\tcolor: #FFFFFF;\n\t\tfont-family: 'Helvetica Neue - Roman';\n\t\tfont-size: 17px;\n\t}\n\t\n\t.device.iphone.lock-screen .body {\n\t\tbackground: rgba(240, 240, 240, 0.97);\n\t\tborder-radius: 12px;\n\t\tpadding: 10px;\n\t\tmargin: 0 4px;\n\t\topacity: 1;\n\t\tposition: relative;\n\t}\n\t\n\t.device.iphone.lock-screen .body .application {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t\tborder-radius: 12px 12px 0 0;\n\t\tbackground: #F0F0F0;\n\t\tmargin: -10px -10px 0 -10px;\n\t\tpadding: 10px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .application .icon {\n\t\t\n\t}\n\t\n\t.device.iphone.lock-screen .body .application .icon .icon-placeholder {\n\t\theight: 17px;\n\t\twidth: 17px;\n\t\tborder-radius: 3px;\n\t\tbackground-color: grey;\n\t\tdisplay: inline-block;\n\t\tvertical-align: middle;\n\t}\n\t\n\t.device.iphone.lock-screen .body .application .name {\n\t\tcolor: #000000;\n\t\topacity: .50;\n\t\tfont-size: 12px;\n\t\ttext-overflow: ellipsis;\n\t\toverflow: hidden;\n\t\twhite-space: nowrap;\n\t\twidth: 100%;\n\t\tpadding: 2px 5px 0 10px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .application .timestamp {\n\t\tfont-size: 11px;\n\t\topacity: .50;\n\t\tfont-weight: bold;\n\t\tmargin-left: auto;\n\t}\n\t\n\t.device.iphone.lock-screen .body .media {\n\t\tborder-radius: 3px;\n\t\twidth: 26px;\n\t\theight: 26px;\n\t\tposition: absolute;\n\t\tright: 10px;\n\t\tbottom: 10px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .media img {\n\t\theight: 100%;\n\t\tmax-height: 26px;\n\t\twidth: 100%;\n\t\tmax-width: 26px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content {\n\t\tcolor: #000000;\n\t\tfont-size: 13px;\n\t\tpadding-top: 5px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content > div {\n\t\ttext-overflow: ellipsis;\n\t\toverflow: hidden;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content .title {\n\t\tfont-weight: bold;\n\t\twhite-space: nowrap;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content .subtitle {\n\t\tfont-weight: bold;\n\t\twhite-space: nowrap;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content .message {\n\t\twhite-space: pre-wrap;\n\t\tdisplay: -webkit-box;\n\t\t-webkit-line-clamp: 4;\n\t\t-webkit-box-orient: vertical;\n\t\ttext-overflow: ellipsis;\n\t\t-o-text-overflow: ellipsis;\n\t\t-ms-text-overflow: ellipsis;\n\t\tword-break: break-word;\n\t\t-ms-word-wrap: break-word;\n\t\tword-wrap: break-word;\n\t\tmax-height: 75px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content .message.hasTitle {\n\t\tmax-height: 55px;\n\t\t-webkit-line-clamp: 3;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content .message.hasSubtitle {\n\t\tmax-height: 35px;\n\t\t-webkit-line-clamp: 2;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content.hasMedia .message {\n\t\tpadding-right: 50px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .action {\n\t\tcolor: #157EBF;\n\t\tfont-size: 11px;\n\t\topacity: .3;\n\t\tmargin-top: 5px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .buttons {\n\t\tdisplay: none;\n\t}\n\t\n\t.device.iphone.lock-screen .footer {\n\t\tdisplay: none;\n\t}\n</style>\n\t</head>\n\t<body>\n\t\t<div class=\"push-previewer\">\n\t\t\t<div class=\"device iphone lock-screen\">\n\t\t\t\t<div class=\"header\">\n\t\t\t\t\t<div class=\"time\">12:00 AM</div>\n\t\t\t\t\t<div class=\"date\">January 1, 2020</div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"body\">\n\t\t\t\t\t<div class=\"application\">\n\t\t\t\t\t\t<div class=\"icon\">\n\t\t\t\t\t\t\t<div class=\"icon-placeholder\"></div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"name\">App Name</div>\n\t\t\t\t\t\t<div class=\"timestamp\">now</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"media\"></div>\n\t\t\t\t\t<div class=\"content \">\n\t\t\t\t\t\t<div class=\"title\">test</div>\n\t\t\t\t\t\t<div class=\"subtitle\"></div>\n\t\t\t\t\t\t<div class=\"message hasTitle \">asdfasf </div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"action\"></div>\n\t\t\t\t\t<div class=\"buttons\">\n\t\t\t\t\t\t<div class=\"button1\"></div>\n\t\t\t\t\t\t<div class=\"button2\"></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"footer\"></div>\n\t\t\t</div>\n\t\t</div>\n\t</body>\n</html>",
+            "meta": {
+                "options": {
+                    "customBlockData": {
+                        "display:title": "test",
+                        "channel": "push",
+                        "showTemplatePicker": false,
+                        "display:title:display": "test",
+                        "stack": "S7",
+                        "openBehavior:actionType": {
+                            "label": "Open the App",
+                            "value": "openApp",
+                            "id": "openApp_0",
+                            "localizedLabel": "Open the App"
+                        },
+                        "display:message": "asdfasf ",
+                        "currentColumn": 0,
+                        "display:message:display": "asdfasf ",
+                        "template": "push",
+                        "uncheckedPanels": ["pushmedia", "subtitle"]
+                    }
+                }
+            },
+            "modelVersion": 2
+        }
+    },
+    "availableViews": ["push"],
+    "modelVersion": 2,
+    "category": {
+        "id": 89397,
+        "name": "Content Builder",
+        "parentId": 0
+    }
+}
