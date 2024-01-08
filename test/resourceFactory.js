@@ -236,7 +236,9 @@ export const soapUrl =
 export const handleRESTRequest = async (config) => {
     try {
         // check if filtered
-        const urlObj = new URL(config.baseURL + config.url.slice(1));
+        const urlObj = new URL(
+            config.baseURL + (config.url.startsWith('/') ? config.url.slice(1) : config.url)
+        );
         let filterName;
         if (urlObj.searchParams.get('$filter')) {
             filterName = urlObj.searchParams.get('$filter').split(' eq ')[1];
