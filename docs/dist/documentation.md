@@ -2472,7 +2472,6 @@ MessageSendActivity MetadataType
     * [.deleteByKey(customerKey)](#EmailSend.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.preDeployTasks(metadata)](#EmailSend.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
     * [.postRetrieveTasks(metadata)](#EmailSend.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.parseMetadata(metadata)](#EmailSend.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 
 <a name="EmailSend.retrieve"></a>
 
@@ -2548,18 +2547,6 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
-
-<a name="EmailSend.parseMetadata"></a>
-
-### EmailSend.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
-parses retrieved Metadata before saving
-
-**Kind**: static method of [<code>EmailSend</code>](#EmailSend)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one sql string  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single query activity definition |
 
 <a name="Event"></a>
 
