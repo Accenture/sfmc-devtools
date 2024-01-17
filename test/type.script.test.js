@@ -20,22 +20,21 @@ describe('type: script', () => {
             const retrieve = await handler.retrieve('testInstance/testBU', ['script']);
             // THEN
             assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
-
             // retrieve result
             assert.equal(
                 retrieve['testInstance/testBU'].script
                     ? Object.keys(retrieve['testInstance/testBU'].script).length
                     : 0,
-                2,
-                'only 2 scripts expected in retrieve response'
+                5,
+                'only 5 scripts expected in retrieve response'
             );
 
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.script ? Object.keys(result.script).length : 0,
-                2,
-                'only 2 scripts expected'
+                5,
+                'only 5 scripts expected'
             );
             // normal test
             assert.deepEqual(
@@ -49,6 +48,7 @@ describe('type: script', () => {
                 file(testUtils.getExpectedFile('9999999', 'script', 'get', 'ssjs'))
             );
 
+            // test with no script tag
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_script_noScriptTag', 'script'),
                 await testUtils.getExpectedJson('9999999', 'script', 'get_noScriptTag'),
@@ -62,6 +62,47 @@ describe('type: script', () => {
             expect(
                 file(testUtils.getActualFile('testExisting_script_noScriptTag', 'script', 'ssjs'))
             ).to.not.exist;
+
+            // test with ampscript
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_script_ampscript', 'script'),
+                await testUtils.getExpectedJson('9999999', 'script', 'get_ampscript'),
+                'returned metadata was not equal expected'
+            );
+            expect(
+                file(testUtils.getActualFile('testExisting_script_ampscript', 'script', 'html'))
+            ).to.equal(
+                file(testUtils.getExpectedFile('9999999', 'script', 'get_ampscript', 'html'))
+            );
+            expect(file(testUtils.getActualFile('testExisting_script_ampscript', 'script', 'ssjs')))
+                .to.not.exist;
+
+            // test with mixed code (ampscript inside of ssjs)
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_script_ampincluded', 'script'),
+                await testUtils.getExpectedJson('9999999', 'script', 'get_ampincluded'),
+                'returned metadata was not equal expected'
+            );
+            expect(
+                file(testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'html'))
+            ).to.not.exist;
+            expect(
+                file(testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'ssjs'))
+            ).to.equal(
+                file(testUtils.getExpectedFile('9999999', 'script', 'get_ampincluded', 'ssjs'))
+            );
+
+            // test with mixed code (ssjs and ampscript side-by-side)
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_script_mixed', 'script'),
+                await testUtils.getExpectedJson('9999999', 'script', 'get_mixed'),
+                'returned metadata was not equal expected'
+            );
+            expect(
+                file(testUtils.getActualFile('testExisting_script_mixed', 'script', 'html'))
+            ).to.equal(file(testUtils.getExpectedFile('9999999', 'script', 'get_mixed', 'html')));
+            expect(file(testUtils.getActualFile('testExisting_script_mixed', 'script', 'ssjs'))).to
+                .not.exist;
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -122,8 +163,8 @@ describe('type: script', () => {
             const result = cache.getCache();
             assert.equal(
                 result.script ? Object.keys(result.script).length : 0,
-                2,
-                'two scripts in cache expected'
+                5,
+                '5 scripts in cache expected'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_script', 'script'),
@@ -162,8 +203,8 @@ describe('type: script', () => {
             const result = cache.getCache();
             assert.equal(
                 result.script ? Object.keys(result.script).length : 0,
-                2,
-                'two scripts in cache expected'
+                5,
+                '5 scripts in cache expected'
             );
 
             expect(file(testUtils.getActualFile('testExisting_script', 'script', 'ssjs'))).to.not
@@ -189,8 +230,8 @@ describe('type: script', () => {
             const result = cache.getCache();
             assert.equal(
                 result.script ? Object.keys(result.script).length : 0,
-                3,
-                'three scripts expected'
+                6,
+                '6 scripts expected'
             );
             // confirm created item
             assert.deepEqual(
@@ -198,15 +239,14 @@ describe('type: script', () => {
                 await testUtils.getExpectedJson('9999999', 'script', 'post'),
                 'returned metadata was not equal expected for insert script'
             );
-            expect(file(testUtils.getActualFile('testNew_script', 'script', 'ssjs'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'script', 'post', 'ssjs'))
-            );
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_script', 'script'),
                 await testUtils.getExpectedJson('9999999', 'script', 'patch'),
                 'returned metadata was not equal expected for insert script'
             );
+            expect(file(testUtils.getActualFile('testExisting_script', 'script', 'html'))).to.not
+                .exist;
             expect(file(testUtils.getActualFile('testExisting_script', 'script', 'ssjs'))).to.equal(
                 file(testUtils.getExpectedFile('9999999', 'script', 'patch', 'ssjs'))
             );

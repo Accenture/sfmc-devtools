@@ -1,9 +1,6 @@
 line1
-line2 %%[
-    SET @test = 1
-]%% still line2
-line3
 %%[
-    SET @test = 2
+    SET @test = 'bla bla'
 ]%%
-line4
+line2 %%= v(@test) =%% still line2
+line3

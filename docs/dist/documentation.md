@@ -6637,7 +6637,7 @@ File extends fs-extra. It adds logger and util methods for file handling
     * [.normalizePath(denormalizedPath)](#File.normalizePath) ⇒ <code>string</code>
     * [.writeJSONToFile(directory, filename, content)](#File.writeJSONToFile) ⇒ <code>Promise</code>
     * [.writePrettyToFile(directory, filename, filetype, content, [templateVariables])](#File.writePrettyToFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [.beautify_beautyAmp(content)](#File.beautify_beautyAmp) ⇒ <code>Promise.&lt;string&gt;</code>
+    * [.beautify_beautyAmp(content, formatHTML)](#File.beautify_beautyAmp) ⇒ <code>Promise.&lt;string&gt;</code>
     * [._beautify_prettier(directory, filename, filetype, content)](#File._beautify_prettier) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.writeToFile(directory, filename, filetype, content, [encoding])](#File.writeToFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.readJSONFile(directory, filename, sync, cleanPath)](#File.readJSONFile) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>object</code> \| <code>void</code>
@@ -6741,7 +6741,7 @@ Saves beautified files in the local file system. Will create the parent director
 
 <a name="File.beautify_beautyAmp"></a>
 
-### File.beautify\_beautyAmp(content) ⇒ <code>Promise.&lt;string&gt;</code>
+### File.beautify\_beautyAmp(content, formatHTML) ⇒ <code>Promise.&lt;string&gt;</code>
 helper for [writePrettyToFile](#File.writePrettyToFile), applying beautyAmp onto given stringified content
 
 **Kind**: static method of [<code>File</code>](#File)  
@@ -6750,6 +6750,7 @@ helper for [writePrettyToFile](#File.writePrettyToFile), applying beautyAmp onto
 | Param | Type | Description |
 | --- | --- | --- |
 | content | <code>string</code> | filecontent |
+| formatHTML | <code>boolean</code> | should we format HTML or not via prettier included in beautyAmp |
 
 <a name="File._beautify_prettier"></a>
 

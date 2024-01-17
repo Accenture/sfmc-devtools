@@ -1,5 +1,5 @@
 {
-    "count": 1,
+    "count": 5,
     "page": 1,
     "pageSize": 500,
     "items": [
@@ -8,7 +8,7 @@
             "name": "testExisting_script",
             "key": "testExisting_script",
             "description": "",
-            "script": "<script runat=\"server\">\n//dummy\n</script>",
+            "script": " <script runat=\"server\">\n//dummy\n</script>",
             "categoryId": 304,
             "createdDate": "2022-10-20T00:41:26.163",
             "modifiedDate": "2022-10-20T00:41:26.163"
@@ -19,6 +19,36 @@
             "key": "testExisting_script_noScriptTag",
             "description": "",
             "script": "// no script tag\n",
+            "categoryId": 304,
+            "createdDate": "2022-10-20T00:41:26.163",
+            "modifiedDate": "2022-10-20T00:41:26.163"
+        },
+        {
+            "ssjsActivityId": "39f6a488-20eb-4ba0-b0b9-ampscript",
+            "name": "testExisting_script_ampscript",
+            "key": "testExisting_script_ampscript",
+            "description": "",
+            "script": "line1 %%[ SET @test='bla bla' ]%% line2 %%= v(@test) =%% still line2\nline3",
+            "categoryId": 304,
+            "createdDate": "2022-10-20T00:41:26.163",
+            "modifiedDate": "2022-10-20T00:41:26.163"
+        },
+        {
+            "ssjsActivityId": "39f6a488-20eb-4ba0-b0b9-ampincluded",
+            "name": "testExisting_script_ampincluded",
+            "key": "testExisting_script_ampincluded",
+            "description": "",
+            "script": " <script runat=\"server\">line1 %%[ SET @test='bla bla' ]%% line2 %%= v(@test) =%% still line2\nline3\n</script>",
+            "categoryId": 304,
+            "createdDate": "2022-10-20T00:41:26.163",
+            "modifiedDate": "2022-10-20T00:41:26.163"
+        },
+        {
+            "ssjsActivityId": "39f6a488-20eb-4ba0-b0b9-mixed",
+            "name": "testExisting_script_mixed",
+            "key": "testExisting_script_mixed",
+            "description": "",
+            "script": " <script runat=\"server\">//dummy\n</script>line1 %%[ SET @test='bla bla' ]%% line2 %%= v(@test) =%% still line2;\n collapsed to line2 because it's assumed HTML\n",
             "categoryId": 304,
             "createdDate": "2022-10-20T00:41:26.163",
             "modifiedDate": "2022-10-20T00:41:26.163"

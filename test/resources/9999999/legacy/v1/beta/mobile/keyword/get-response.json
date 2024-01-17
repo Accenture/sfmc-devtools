@@ -39,7 +39,7 @@
             "createdBy": { "id": "abcabcabc", "name": "xyz app user" },
             "restriction": "NONE",
             "keywordType": "NORMAL",
-            "responseMessage": "line1\nline2 %%[ SET @test=1 ]%% still line2\nline3\n%%[ SET @test=2 ]%%\nline4",
+            "responseMessage": "line1 %%[ SET @test='bla bla' ]%% line2 %%= v(@test) =%% still line2\nline3",
             "isInherited": false,
             "decodedId": "9e2192ab-f611-4039-86a8-7ce0ccf3a453"
         }
