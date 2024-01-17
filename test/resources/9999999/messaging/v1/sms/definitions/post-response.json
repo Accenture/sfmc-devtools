@@ -6,7 +6,9 @@
     "status": "Active",
     "createdDate": "2022-11-07T02:24:00",
     "modifiedDate": "2022-11-07T02:25:00",
-    "content": { "message": "\n%%[\n    SET @key = 'new secret'\n]%%\n" },
+    "content": {
+        "message": "\n%%[\n    SET @key = 'new secret'\n]%%\n%%[\n\nSET @unsubMessages = 'UnsubscribeSMSMessages_DEV'\nSET @unsubEvents = 'UnsubscribeSMS_DEV'\n\nSET @num = concat('+',[MOBILE_NUMBER])\nSET @rs= RetrieveSalesforceObjects('Contact','Id,et4ae5__HasOptedOutOfMobile__c', 'MobilePhone', '=',@num) \nSET @count = rowCount(@rs)\nVAR @response\nSET @rx = '^\\+((?:9[679]\\d8[035789]\\d|6[789]\\d|5[90]\\d|42\\d|3[578]\\d|2[1-689]\\d)|9[0-58]|8[1246]|6[0-6]|5[1-8]|4[013-9]|3[0-469]|2[70]|7|1)'\nSET @prefix = concat('+',RegExMatch(@num, @rx, 1))\nIF @count>0 THEN\n\tFOR @i = 1 TO @count DO\n\t\tSET @sk = Field(Row(@rs,@i),'Id')\n\t\tIF Field(Row(@rs,1),'et4ae5__HasOptedOutOfMobile__c') == 'false' THEN\n\t\t\tSET @result = UpdateSingleSalesforceObject('Contact',@sk,'et4ae5__HasOptedOutOfMobile__c','true')\n\t\t\tIF @result == 0 THEN \n\t\t\t\tInsertData(@unsubEvents,'MobileNumber',@num,'Message',[MSG(0).NOUNS],'ContactId',@sk,'Status', 'Error Updating')\n\t\t\tELSE \n\t\t\t\tInsertData(@unsubEvents,'MobileNumber',@num,'Message',[MSG(0).NOUNS],'ContactId',@sk,'Status', 'Successfully Unsubscribed')\n\t\t\tENDIF\n\t\tELSE \n\t\t\tInsertData(@unsubEvents,'MobileNumber',@num,'Message',[MSG(0).NOUNS],'ContactId',@sk,'Status', 'Already Unsubscribed')\n\t\tENDIF\n\n\tNEXT @i\n\n\tSET @msg = Lookup(@unsubMessages,'Message','Prefix',@prefix,'Type', 'Found')\n\tIF Length(@msg) == 0 THEN\n\t\tSET @response ='You have unsubscribed and will no longer receive any messages.|'\n\tELSE \n\t\tSET @response = @msg\n\tENDIF\nELSE \n\tInsertData(@unsubEvents,'MobileNumber',@num,'Message',[MSG(0).NOUNS],'Status', 'Not Found') \n\tSET @msg = Lookup(@unsubMessages,'Message','Prefix',@prefix,'Type', 'NotFound')\n\tIF Length(@msg) == 0 THEN\n\t\tSET @response ='Sorry, we could not find you'\n\tELSE \n\t\tSET @response = @msg\n\tENDIF\nENDIF\n]%%\n%%=v(@response)=%%"
+    },
     "subscriptions": {
         "shortCode": "4912312345678",
         "countryCode": "",

@@ -5645,8 +5645,8 @@ TransactionalSMS MetadataType
     * [.postDeleteTasks(customerKey)](#TransactionalSMS.postDeleteTasks) ⇒ <code>void</code>
     * [.preDeployTasks(metadata, deployDir)](#TransactionalSMS.preDeployTasks) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItem&gt;</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#TransactionalSMS._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
-    * [.postRetrieveTasks(metadata)](#TransactionalSMS.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
-    * [.prepExtractedCode(metadataScript)](#TransactionalSMS.prepExtractedCode) ⇒ <code>Object</code>
+    * [.postRetrieveTasks(metadata)](#TransactionalSMS.postRetrieveTasks) ⇒ <code>Promise.&lt;TYPE.CodeExtractItem&gt;</code>
+    * [.prepExtractedCode(metadataScript)](#TransactionalSMS.prepExtractedCode) ⇒ <code>Promise.&lt;{fileExt:string, code:string}&gt;</code>
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#TransactionalSMS.buildDefinitionForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#TransactionalSMS.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#TransactionalSMS._buildForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
@@ -5693,11 +5693,11 @@ helper for [preDeployTasks](#TransactionalSMS.preDeployTasks) that loads extract
 
 <a name="TransactionalSMS.postRetrieveTasks"></a>
 
-### TransactionalSMS.postRetrieveTasks(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
+### TransactionalSMS.postRetrieveTasks(metadata) ⇒ <code>Promise.&lt;TYPE.CodeExtractItem&gt;</code>
 manages post retrieve steps
 
 **Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
-**Returns**: <code>TYPE.CodeExtractItem</code> - Array with one metadata object and one ssjs string  
+**Returns**: <code>Promise.&lt;TYPE.CodeExtractItem&gt;</code> - Array with one metadata object and one ssjs string  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5705,11 +5705,11 @@ manages post retrieve steps
 
 <a name="TransactionalSMS.prepExtractedCode"></a>
 
-### TransactionalSMS.prepExtractedCode(metadataScript) ⇒ <code>Object</code>
+### TransactionalSMS.prepExtractedCode(metadataScript) ⇒ <code>Promise.&lt;{fileExt:string, code:string}&gt;</code>
 helper for [postRetrieveTasks](#TransactionalSMS.postRetrieveTasks) and [_buildForNested](#TransactionalSMS._buildForNested)
 
 **Kind**: static method of [<code>TransactionalSMS</code>](#TransactionalSMS)  
-**Returns**: <code>Object</code> - returns found extension and file content  
+**Returns**: <code>Promise.&lt;{fileExt:string, code:string}&gt;</code> - returns found extension and file content  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -6637,7 +6637,7 @@ File extends fs-extra. It adds logger and util methods for file handling
     * [.normalizePath(denormalizedPath)](#File.normalizePath) ⇒ <code>string</code>
     * [.writeJSONToFile(directory, filename, content)](#File.writeJSONToFile) ⇒ <code>Promise</code>
     * [.writePrettyToFile(directory, filename, filetype, content, [templateVariables])](#File.writePrettyToFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
-    * [._beautify_beautyAmp(content)](#File._beautify_beautyAmp) ⇒ <code>string</code>
+    * [.beautify_beautyAmp(content, formatHTML)](#File.beautify_beautyAmp) ⇒ <code>Promise.&lt;string&gt;</code>
     * [._beautify_prettier(directory, filename, filetype, content)](#File._beautify_prettier) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.writeToFile(directory, filename, filetype, content, [encoding])](#File.writeToFile) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.readJSONFile(directory, filename, sync, cleanPath)](#File.readJSONFile) ⇒ <code>Promise.&lt;object&gt;</code> \| <code>object</code> \| <code>void</code>
@@ -6739,17 +6739,18 @@ Saves beautified files in the local file system. Will create the parent director
 | content | <code>string</code> | filecontent |
 | [templateVariables] | <code>TYPE.TemplateMap</code> | templating variables to be replaced in the metadata |
 
-<a name="File._beautify_beautyAmp"></a>
+<a name="File.beautify_beautyAmp"></a>
 
-### File.\_beautify\_beautyAmp(content) ⇒ <code>string</code>
+### File.beautify\_beautyAmp(content, formatHTML) ⇒ <code>Promise.&lt;string&gt;</code>
 helper for [writePrettyToFile](#File.writePrettyToFile), applying beautyAmp onto given stringified content
 
 **Kind**: static method of [<code>File</code>](#File)  
-**Returns**: <code>string</code> - original string on error; formatted string on success  
+**Returns**: <code>Promise.&lt;string&gt;</code> - original string on error; formatted string on success  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | content | <code>string</code> | filecontent |
+| formatHTML | <code>boolean</code> | should we format HTML or not via prettier included in beautyAmp |
 
 <a name="File._beautify_prettier"></a>
 

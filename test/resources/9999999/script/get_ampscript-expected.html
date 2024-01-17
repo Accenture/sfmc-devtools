@@ -1,0 +1,5 @@
+line1
+%%[
+    SET @test = 'bla bla'
+]%%
+line2 %%= v(@test) =%% still line2 line3

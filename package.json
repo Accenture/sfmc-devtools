@@ -63,7 +63,7 @@
         "version:patch": "npm version --no-commit-hooks patch"
     },
     "dependencies": {
-        "beauty-amp-core": "0.3.7",
+        "beauty-amp-core2": "0.4.5",
         "cli-progress": "3.12.0",
         "command-exists": "1.2.9",
         "conf": "11.0.1",
