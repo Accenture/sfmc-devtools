@@ -68,7 +68,7 @@
         "command-exists": "1.2.9",
         "conf": "11.0.1",
         "console.table": "0.10.0",
-        "deep-equal": "2.2.2",
+        "deep-equal": "2.2.3",
         "fs-extra": "11.1.1",
         "inquirer": "9.2.6",
         "json-to-table": "4.2.1",
