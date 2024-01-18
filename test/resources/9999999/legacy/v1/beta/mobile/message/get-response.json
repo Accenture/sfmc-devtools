@@ -8,7 +8,7 @@
             "lastUpdated": "2023-03-08T16:30:00Z",
             "type": "ExactTarget.Mobile.Sms.Core.Entities.SmsMessageEntity",
             "name": "testExisting_mobileMessage",
-            "text": "test message jb secret",
+            "text": "line1 %%[ SET @test='bla bla' ]%% line2 %%= v(@test) =%% still line2\nline3",
             "origin": "SMS Send",
             "code": {
                 "id": "RXBwc0JoNk9jVTY0YWJNWFZDaGxvdzo4MTow",
