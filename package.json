@@ -80,7 +80,7 @@
         "sfmc-sdk": "2.0.1",
         "simple-git": "3.22.0",
         "toposort": "2.0.2",
-        "update-notifier": "6.0.2",
+        "update-notifier": "7.0.0",
         "winston": "3.11.0",
         "yargs": "17.7.2"
     },
