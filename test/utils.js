@@ -168,6 +168,7 @@ export function mockSetup(isDeploy) {
         'node_modules/sql-formatter': fsmock.load(
             path.resolve(__dirname, '../node_modules/sql-formatter')
         ),
+        'node_modules/jsox': fsmock.load(path.resolve(__dirname, '../node_modules/jsox')),
         'node_modules/nearley': fsmock.load(path.resolve(__dirname, '../node_modules/nearley')),
     };
     if (isDeploy) {
