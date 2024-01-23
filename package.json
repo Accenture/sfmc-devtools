@@ -75,7 +75,7 @@
         "mustache": "4.2.0",
         "p-limit": "4.0.0",
         "prettier": "3.2.4",
-        "prettier-plugin-sql": "0.15.1",
+        "prettier-plugin-sql": "0.18.0",
         "semver": "7.5.4",
         "sfmc-sdk": "2.0.1",
         "simple-git": "3.22.0",
