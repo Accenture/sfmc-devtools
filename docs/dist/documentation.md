@@ -3035,6 +3035,7 @@ ImportFile MetadataType
     * [.update(importFile)](#ImportFile.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#ImportFile.preDeployTasks) ⇒ <code>Promise</code>
     * [.parseMetadata(metadata)](#ImportFile.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.deleteByKey(customerKey)](#ImportFile.deleteByKey) ⇒ <code>boolean</code>
 
 <a name="ImportFile.retrieve"></a>
 
@@ -3133,6 +3134,18 @@ parses retrieved Metadata before saving
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single import definition |
+
+<a name="ImportFile.deleteByKey"></a>
+
+### ImportFile.deleteByKey(customerKey) ⇒ <code>boolean</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>boolean</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of data extension |
 
 <a name="Journey"></a>
 
