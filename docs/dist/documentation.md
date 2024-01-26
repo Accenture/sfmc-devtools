@@ -2744,6 +2744,7 @@ FileTransfer MetadataType
     * [.update(fileTransfer)](#FileTransfer.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#FileTransfer.preDeployTasks) ⇒ <code>Promise</code>
     * [.parseMetadata(metadata)](#FileTransfer.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.deleteByKey(customerKey)](#FileTransfer.deleteByKey) ⇒ <code>boolean</code>
 
 <a name="FileTransfer.retrieve"></a>
 
@@ -2841,6 +2842,18 @@ parses retrieved Metadata before saving
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single fileTransfer activity definition |
+
+<a name="FileTransfer.deleteByKey"></a>
+
+### FileTransfer.deleteByKey(customerKey) ⇒ <code>boolean</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>FileTransfer</code>](#FileTransfer)  
+**Returns**: <code>boolean</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of data extension |
 
 <a name="Filter"></a>
 
