@@ -1,12 +1,17 @@
 {
     "allowErrors": true,
+    "c__blankFileProcessing": "Skip",
+    "c__dataAction": "AddUpdate",
+    "c__destinationType": "DataExtension",
+    "c__subscriberImportType": "DataExtension",
     "createdDate": "2022-11-09T05:32:30.533",
     "customerKey": "testExisting_importFile",
     "dateFormatLocale": "en-US",
     "deleteFile": false,
     "description": "17.11.2022",
-    "fieldMappingType": "InferFromColumnHeadings",
+    "encodingName": "utf-8",
     "fieldMappings": [],
+    "fieldMappingType": "InferFromColumnHeadings",
     "fileNamingPattern": "blabla",
     "fileTransferLocationTypeId": 0,
     "fileType": "CSV",
@@ -19,11 +24,8 @@
     "maxImportFrequencyHours": 0,
     "modifiedDate": "2022-11-17T07:13:03.95",
     "name": "testExisting_importFile",
-    "sendEmailNotification": false,
-    "standardQuotedStrings": true,
-    "c__dataAction": "AddUpdate",
-    "c__destinationType": "DataExtension",
-    "c__subscriberImportType": "DataExtension",
     "r__dataExtension_CustomerKey": "testExisting_dataExtension",
-    "r__fileLocation_name": "ExactTarget Enhanced FTP"
+    "r__fileLocation_name": "ExactTarget Enhanced FTP",
+    "sendEmailNotification": false,
+    "standardQuotedStrings": true
 }

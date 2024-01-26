@@ -33,7 +33,35 @@ describe('type: importFile', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                11,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+        it('Should retrieve a importFile by key', async () => {
+            // WHEN
+            await handler.retrieve(
+                'testInstance/testBU',
+                ['importFile'],
+                ['testExisting_importFile']
+            );
+            // THEN
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.importFile ? Object.keys(result.importFile).length : 0,
+                1,
+                'only one importFile expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_importFile', 'importFile'),
+                await testUtils.getExpectedJson('9999999', 'importFile', 'get'),
+                'returned JSON was not equal expected'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                11,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -71,7 +99,7 @@ describe('type: importFile', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                12,
+                13,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -116,7 +144,7 @@ describe('type: importFile', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                11,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -161,7 +189,7 @@ describe('type: importFile', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                11,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -173,7 +201,7 @@ describe('type: importFile', () => {
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'importFile',
-                'testExisting_fileTranfer'
+                'testExisting_importFile'
             );
             // THEN
             assert.equal(
