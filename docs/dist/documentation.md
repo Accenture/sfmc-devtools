@@ -2232,6 +2232,7 @@ DataExtract MetadataType
     * [.update(dataExtract)](#DataExtract.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#DataExtract.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.parseMetadata(metadata)](#DataExtract.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.deleteByKey(customerKey)](#DataExtract.deleteByKey) ⇒ <code>boolean</code>
 
 <a name="DataExtract.retrieve"></a>
 
@@ -2329,6 +2330,18 @@ parses retrieved Metadata before saving
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single dataExtract activity definition |
+
+<a name="DataExtract.deleteByKey"></a>
+
+### DataExtract.deleteByKey(customerKey) ⇒ <code>boolean</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>DataExtract</code>](#DataExtract)  
+**Returns**: <code>boolean</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of data extension |
 
 <a name="DataExtractType"></a>
 
