@@ -169,7 +169,7 @@ describe('type: dataExtract', () => {
         });
     });
     describe('Delete ================', () => {
-        it('Should NOT delete the item', async () => {
+        it('Should delete the item', async () => {
             // WHEN
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
