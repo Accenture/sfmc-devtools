@@ -5254,6 +5254,8 @@ Script MetadataType
     * [.parseMetadata(metadata)](#Script.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.prepExtractedCode(metadataScript, metadataName)](#Script.prepExtractedCode) ⇒ <code>Object</code>
     * [.getFilesToCommit(keyArr)](#Script.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.deleteByKey(customerKey)](#Script.deleteByKey) ⇒ <code>boolean</code>
+    * [.postDeleteTasks(customerKey)](#Script.postDeleteTasks) ⇒ <code>void</code>
 
 <a name="Script.retrieve"></a>
 
@@ -5448,6 +5450,29 @@ additionally, the documentation for dataExtension and automation should be retur
 | Param | Type | Description |
 | --- | --- | --- |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Script.deleteByKey"></a>
+
+### Script.deleteByKey(customerKey) ⇒ <code>boolean</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>Script</code>](#Script)  
+**Returns**: <code>boolean</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of data extension |
+
+<a name="Script.postDeleteTasks"></a>
+
+### Script.postDeleteTasks(customerKey) ⇒ <code>void</code>
+clean up after deleting a metadata item
+
+**Kind**: static method of [<code>Script</code>](#Script)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of metadata item |
 
 <a name="SendClassification"></a>
 

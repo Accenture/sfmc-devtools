@@ -372,7 +372,20 @@ describe('type: script', () => {
             return;
         });
     });
-    describe('Delete ================', () => {});
+    describe('Delete ================', () => {
+        it('Should delete the item', async () => {
+            // WHEN
+            const isDeleted = await handler.deleteByKey(
+                'testInstance/testBU',
+                'script',
+                'testExisting_script'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'deleteByKey should not have thrown an error');
+            assert.equal(isDeleted, true, 'deleteByKey should have returned true');
+            return;
+        });
+    });
     describe('CI/CD ================', () => {
         it('Should return a list of files based on their type and key', async () => {
             // WHEN
