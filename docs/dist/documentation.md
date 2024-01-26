@@ -866,7 +866,7 @@ FileTransfer MetadataType
 
 * [Asset](#Asset) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, _, [subTypeArr], [key])](#Asset.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
-    * [.retrieveForCache(_, [subTypeArr])](#Asset.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
+    * [.retrieveForCache([_], [subTypeArr])](#Asset.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [selectedSubType])](#Asset.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetItem, type: string}&gt;</code>
     * [.create(metadata)](#Asset.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#Asset.update) ⇒ <code>Promise</code>
@@ -909,7 +909,7 @@ Retrieves Metadata of Asset
 
 <a name="Asset.retrieveForCache"></a>
 
-### Asset.retrieveForCache(_, [subTypeArr]) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
+### Asset.retrieveForCache([_], [subTypeArr]) ⇒ <code>Promise.&lt;{metadata: TYPE.AssetMap, type: string}&gt;</code>
 Retrieves asset metadata for caching
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
@@ -917,7 +917,7 @@ Retrieves asset metadata for caching
 
 | Param | Type | Description |
 | --- | --- | --- |
-| _ | <code>void</code> | unused |
+| [_] | <code>void</code> | parameter not used |
 | [subTypeArr] | <code>Array.&lt;string&gt;</code> | optionally limit to a single subtype |
 
 <a name="Asset.retrieveAsTemplate"></a>
@@ -2877,7 +2877,7 @@ Folder MetadataType
 
 * [Folder](#Folder) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [additionalFields], [subTypeArr], [key])](#Folder.retrieve) ⇒ <code>Promise</code>
-    * [.retrieveForCache(_, [subTypeArr])](#Folder.retrieveForCache) ⇒ <code>Promise</code>
+    * [.retrieveForCache([_], [subTypeArr])](#Folder.retrieveForCache) ⇒ <code>Promise</code>
     * [.upsert(metadata)](#Folder.upsert) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.create(metadataEntry)](#Folder.create) ⇒ <code>Promise</code>
     * [.update(metadataEntry)](#Folder.update) ⇒ <code>Promise</code>
@@ -2904,7 +2904,7 @@ Retrieves metadata of metadata type into local filesystem. executes callback wit
 
 <a name="Folder.retrieveForCache"></a>
 
-### Folder.retrieveForCache(_, [subTypeArr]) ⇒ <code>Promise</code>
+### Folder.retrieveForCache([_], [subTypeArr]) ⇒ <code>Promise</code>
 Retrieves folder metadata for caching
 
 **Kind**: static method of [<code>Folder</code>](#Folder)  
@@ -2912,7 +2912,7 @@ Retrieves folder metadata for caching
 
 | Param | Type | Description |
 | --- | --- | --- |
-| _ | <code>void</code> | unused |
+| [_] | <code>void</code> | parameter not used |
 | [subTypeArr] | <code>Array.&lt;string&gt;</code> | content type of folder |
 
 <a name="Folder.upsert"></a>
@@ -3028,13 +3028,14 @@ ImportFile MetadataType
 
 * [ImportFile](#ImportFile) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#ImportFile.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache()](#ImportFile.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache([_], [__], [key])](#ImportFile.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#ImportFile.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.postRetrieveTasks(importDef)](#ImportFile.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.create(importFile)](#ImportFile.create) ⇒ <code>Promise</code>
     * [.update(importFile)](#ImportFile.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#ImportFile.preDeployTasks) ⇒ <code>Promise</code>
     * [.parseMetadata(metadata)](#ImportFile.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.deleteByKey(customerKey)](#ImportFile.deleteByKey) ⇒ <code>boolean</code>
 
 <a name="ImportFile.retrieve"></a>
 
@@ -3055,11 +3056,18 @@ Currently it is not needed to loop over Imports with endpoint /automation/v1/imp
 
 <a name="ImportFile.retrieveForCache"></a>
 
-### ImportFile.retrieveForCache() ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### ImportFile.retrieveForCache([_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves import definition metadata for caching
 
 **Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
 **Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [_] | <code>void</code> | parameter not used |
+| [__] | <code>void</code> | parameter not used |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
 <a name="ImportFile.retrieveAsTemplate"></a>
 
 ### ImportFile.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
@@ -3133,6 +3141,18 @@ parses retrieved Metadata before saving
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single import definition |
+
+<a name="ImportFile.deleteByKey"></a>
+
+### ImportFile.deleteByKey(customerKey) ⇒ <code>boolean</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>boolean</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of data extension |
 
 <a name="Journey"></a>
 
@@ -3390,7 +3410,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.setFolderId(metadata)](#MetadataType.setFolderId)
     * [.retrieve(retrieveDir, [additionalFields], [subTypeArr], [key])](#MetadataType.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveChangelog([additionalFields], [subTypeArr])](#MetadataType.retrieveChangelog) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache([additionalFields], [subTypeArr])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache([additionalFields], [subTypeArr], [key])](#MetadataType.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables, [subType])](#MetadataType.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.retrieveTemplateREST(templateDir, uri, templateVariables, name)](#MetadataType.retrieveTemplateREST) ⇒ <code>Promise.&lt;{metadata: TYPE.MetadataTypeItem, type: string}&gt;</code>
     * [.buildTemplate(retrieveDir, templateDir, key, templateVariables)](#MetadataType.buildTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
@@ -3616,7 +3636,7 @@ Gets metadata from Marketing Cloud
 
 <a name="MetadataType.retrieveForCache"></a>
 
-### MetadataType.retrieveForCache([additionalFields], [subTypeArr]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MetadataType.retrieveForCache([additionalFields], [subTypeArr], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Gets metadata cache with limited fields and does not store value to disk
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
@@ -3626,6 +3646,7 @@ Gets metadata cache with limited fields and does not store value to disk
 | --- | --- | --- |
 | [additionalFields] | <code>Array.&lt;string&gt;</code> | Returns specified fields even if their retrieve definition is not set to true |
 | [subTypeArr] | <code>Array.&lt;string&gt;</code> | optionally limit to a single subtype |
+| [key] | <code>string</code> | customer key of single item to retrieve |
 
 <a name="MetadataType.retrieveAsTemplate"></a>
 
@@ -4341,7 +4362,7 @@ MobileKeyword MetadataType
     * [.retrieve(retrieveDir, [_], [__], [key])](#MobileKeyword.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> \| <code>void</code>
     * [.parseResponseBody(body, [singleRetrieve])](#MobileKeyword.parseResponseBody) ⇒ <code>TYPE.MetadataTypeMap</code>
     * [.createOrUpdate(metadataMap, metadataKey, hasError, metadataToUpdate, metadataToCreate)](#MobileKeyword.createOrUpdate) ⇒ <code>&#x27;create&#x27;</code> \| <code>&#x27;update&#x27;</code> \| <code>&#x27;skip&#x27;</code>
-    * [.retrieveForCache(_, __, [key])](#MobileKeyword.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache([_], [__], [key])](#MobileKeyword.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, key, templateVariables)](#MobileKeyword.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.create(metadata)](#MobileKeyword.create) ⇒ <code>Promise</code>
     * [.update(metadata)](#MobileKeyword.update) ⇒ <code>Promise</code>
@@ -4405,7 +4426,7 @@ helper for [upsert](#MetadataType.upsert)
 
 <a name="MobileKeyword.retrieveForCache"></a>
 
-### MobileKeyword.retrieveForCache(_, __, [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MobileKeyword.retrieveForCache([_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves event definition metadata for caching
 
 **Kind**: static method of [<code>MobileKeyword</code>](#MobileKeyword)  
@@ -4413,8 +4434,8 @@ Retrieves event definition metadata for caching
 
 | Param | Type | Description |
 | --- | --- | --- |
-| _ | <code>void</code> | parameter not used |
-| __ | <code>void</code> | parameter not used |
+| [_] | <code>void</code> | parameter not used |
+| [__] | <code>void</code> | parameter not used |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
 <a name="MobileKeyword.retrieveAsTemplate"></a>
@@ -4632,7 +4653,7 @@ MobileMessage MetadataType
 
 * [MobileMessage](#MobileMessage) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#MobileMessage.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> \| <code>void</code>
-    * [.retrieveForCache(_, __, [key])](#MobileMessage.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache([_], [__], [key])](#MobileMessage.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.update(metadata)](#MobileMessage.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#MobileMessage.create) ⇒ <code>Promise</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#MobileMessage._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
@@ -4664,7 +4685,7 @@ Retrieves Metadata of Mobile Keywords
 
 <a name="MobileMessage.retrieveForCache"></a>
 
-### MobileMessage.retrieveForCache(_, __, [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### MobileMessage.retrieveForCache([_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves event definition metadata for caching
 
 **Kind**: static method of [<code>MobileMessage</code>](#MobileMessage)  
@@ -4672,8 +4693,8 @@ Retrieves event definition metadata for caching
 
 | Param | Type | Description |
 | --- | --- | --- |
-| _ | <code>void</code> | parameter not used |
-| __ | <code>void</code> | parameter not used |
+| [_] | <code>void</code> | parameter not used |
+| [__] | <code>void</code> | parameter not used |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
 <a name="MobileMessage.update"></a>
@@ -5516,7 +5537,7 @@ TransactionalMessage MetadataType
 
 * [TransactionalMessage](#TransactionalMessage) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#TransactionalMessage.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.retrieveForCache([key])](#TransactionalMessage.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache([_], [__], [key])](#TransactionalMessage.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.update(metadata)](#TransactionalMessage.update) ⇒ <code>Promise</code>
     * [.create(metadata)](#TransactionalMessage.create) ⇒ <code>Promise</code>
     * [.deleteByKey(key)](#TransactionalMessage.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -5538,7 +5559,7 @@ Retrieves Metadata
 
 <a name="TransactionalMessage.retrieveForCache"></a>
 
-### TransactionalMessage.retrieveForCache([key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+### TransactionalMessage.retrieveForCache([_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
 Retrieves event definition metadata for caching
 
 **Kind**: static method of [<code>TransactionalMessage</code>](#TransactionalMessage)  
@@ -5546,6 +5567,8 @@ Retrieves event definition metadata for caching
 
 | Param | Type | Description |
 | --- | --- | --- |
+| [_] | <code>void</code> | parameter not used |
+| [__] | <code>void</code> | parameter not used |
 | [key] | <code>string</code> | customer key of single item to cache |
 
 <a name="TransactionalMessage.update"></a>

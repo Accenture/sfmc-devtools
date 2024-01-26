@@ -1,5 +1,6 @@
 {
     "allowErrors": true,
+    "c__blankFileProcessing": "Skip",
     "c__dataAction": "AddUpdate",
     "c__destinationType": "DataExtension",
     "c__subscriberImportType": "DataExtension",
@@ -7,6 +8,7 @@
     "dateFormatLocale": "en-US",
     "deleteFile": false,
     "description": "17.11.2022",
+    "encodingName": "utf-8",
     "fieldMappingType": "InferFromColumnHeadings",
     "fieldMappings": [],
     "fileNamingPattern": "blabla",
