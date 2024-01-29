@@ -891,6 +891,8 @@ FileTransfer MetadataType
     * [.findSubType(templateDir, templateName)](#Asset.findSubType) ⇒ <code>Promise.&lt;TYPE.AssetSubType&gt;</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName)](#Asset.readSecondaryFolder) ⇒ <code>TYPE.AssetItem</code>
     * [.getFilesToCommit(keyArr)](#Asset.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.deleteByKey(customerKey)](#Asset.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.postDeleteTasks(customerKey)](#Asset.postDeleteTasks) ⇒ <code>void</code>
 
 <a name="Asset.retrieve"></a>
 
@@ -1265,6 +1267,30 @@ additionally, the documentation for dataExtension and automation should be retur
 | Param | Type | Description |
 | --- | --- | --- |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Asset.deleteByKey"></a>
+
+### Asset.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>Asset</code>](#Asset)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success flag  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of data extension |
+
+<a name="Asset.postDeleteTasks"></a>
+
+### Asset.postDeleteTasks(customerKey) ⇒ <code>void</code>
+clean up after deleting a metadata item
+cannot use the generic method due to the complexity of how assets are saved to disk
+
+**Kind**: static method of [<code>Asset</code>](#Asset)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of metadata item |
 
 <a name="AttributeGroup"></a>
 
@@ -1767,9 +1793,8 @@ ContentArea MetadataType
 
 * [ContentArea](#ContentArea) ⇐ [<code>MetadataType</code>](#MetadataType)
     * [.retrieve(retrieveDir, [_], [__], [key])](#ContentArea.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
-    * [.postRetrieveTasks(metadata)](#ContentArea.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.setFolderPath(metadata)](#ContentArea.setFolderPath)
-    * [.parseMetadata(metadata)](#ContentArea.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.postRetrieveTasks(metadata)](#ContentArea.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
 
 <a name="ContentArea.retrieve"></a>
 
@@ -1786,18 +1811,6 @@ Retrieves SOAP based metadata of metadata type into local filesystem. executes c
 | [__] | <code>void</code> | unused parameter |
 | [key] | <code>string</code> | customer key of single item to retrieve |
 
-<a name="ContentArea.postRetrieveTasks"></a>
-
-### ContentArea.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
-manages post retrieve steps
-
-**Kind**: static method of [<code>ContentArea</code>](#ContentArea)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - parsed item  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
-
 <a name="ContentArea.setFolderPath"></a>
 
 ### ContentArea.setFolderPath(metadata)
@@ -1809,9 +1822,9 @@ generic script that retrieves the folder path from cache and updates the given m
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single script activity definition |
 
-<a name="ContentArea.parseMetadata"></a>
+<a name="ContentArea.postRetrieveTasks"></a>
 
-### ContentArea.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+### ContentArea.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 parses retrieved Metadata before saving
 
 **Kind**: static method of [<code>ContentArea</code>](#ContentArea)  
@@ -2227,11 +2240,11 @@ DataExtract MetadataType
     * [.retrieve(retrieveDir, [_], [__], [key])](#DataExtract.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache()](#DataExtract.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#DataExtract.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
-    * [.postRetrieveTasks(fileTransfer)](#DataExtract.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.create(dataExtract)](#DataExtract.create) ⇒ <code>Promise</code>
     * [.update(dataExtract)](#DataExtract.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#DataExtract.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.parseMetadata(metadata)](#DataExtract.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.postRetrieveTasks(metadata)](#DataExtract.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.deleteByKey(customerKey)](#DataExtract.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="DataExtract.retrieve"></a>
 
@@ -2270,18 +2283,6 @@ Retrieve a specific dataExtract Definition by Name
 | name | <code>string</code> | name of the metadata file |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
-<a name="DataExtract.postRetrieveTasks"></a>
-
-### DataExtract.postRetrieveTasks(fileTransfer) ⇒ <code>TYPE.MetadataTypeItem</code>
-manages post retrieve steps
-
-**Kind**: static method of [<code>DataExtract</code>](#DataExtract)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - metadata  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| fileTransfer | <code>TYPE.MetadataTypeItem</code> | a single fileTransfer |
-
 <a name="DataExtract.create"></a>
 
 ### DataExtract.create(dataExtract) ⇒ <code>Promise</code>
@@ -2318,17 +2319,29 @@ prepares a dataExtract for deployment
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single dataExtract activity definition |
 
-<a name="DataExtract.parseMetadata"></a>
+<a name="DataExtract.postRetrieveTasks"></a>
 
-### DataExtract.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
-parses retrieved Metadata before saving
+### DataExtract.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
 
 **Kind**: static method of [<code>DataExtract</code>](#DataExtract)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one sql string  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single dataExtract activity definition |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="DataExtract.deleteByKey"></a>
+
+### DataExtract.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>DataExtract</code>](#DataExtract)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success flag  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of data extension |
 
 <a name="DataExtractType"></a>
 
@@ -2401,7 +2414,6 @@ Email MetadataType
     * [.retrieve(retrieveDir, [_], [__], [key])](#Email.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.saveResults(results, retrieveDir, [overrideType], [templateVariables])](#Email.saveResults) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.postRetrieveTasks(metadata)](#Email.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.parseMetadata(metadata)](#Email.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
 
 <a name="Email.retrieve"></a>
 
@@ -2444,18 +2456,6 @@ manages post retrieve steps
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single query |
-
-<a name="Email.parseMetadata"></a>
-
-### Email.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
-parses retrieved Metadata before saving
-
-**Kind**: static method of [<code>Email</code>](#Email)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - Array with one metadata object and one sql string  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single query activity definition |
 
 <a name="EmailSend"></a>
 
@@ -2739,11 +2739,11 @@ FileTransfer MetadataType
     * [.retrieve(retrieveDir, [_], [__], [key])](#FileTransfer.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache()](#FileTransfer.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#FileTransfer.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
-    * [.postRetrieveTasks(metadata)](#FileTransfer.postRetrieveTasks) ⇒ <code>Array.&lt;object&gt;</code>
     * [.create(fileTransfer)](#FileTransfer.create) ⇒ <code>Promise</code>
     * [.update(fileTransfer)](#FileTransfer.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#FileTransfer.preDeployTasks) ⇒ <code>Promise</code>
-    * [.parseMetadata(metadata)](#FileTransfer.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.postRetrieveTasks(metadata)](#FileTransfer.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.deleteByKey(customerKey)](#FileTransfer.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="FileTransfer.retrieve"></a>
 
@@ -2782,18 +2782,6 @@ Retrieve a specific File Transfer Definition by Name
 | name | <code>string</code> | name of the metadata file |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
-<a name="FileTransfer.postRetrieveTasks"></a>
-
-### FileTransfer.postRetrieveTasks(metadata) ⇒ <code>Array.&lt;object&gt;</code>
-manages post retrieve steps
-
-**Kind**: static method of [<code>FileTransfer</code>](#FileTransfer)  
-**Returns**: <code>Array.&lt;object&gt;</code> - metadata  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single fileTransfer activity definition |
-
 <a name="FileTransfer.create"></a>
 
 ### FileTransfer.create(fileTransfer) ⇒ <code>Promise</code>
@@ -2830,10 +2818,10 @@ prepares a fileTransfer for deployment
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single fileTransfer activity definition |
 
-<a name="FileTransfer.parseMetadata"></a>
+<a name="FileTransfer.postRetrieveTasks"></a>
 
-### FileTransfer.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
-parses retrieved Metadata before saving
+### FileTransfer.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
 
 **Kind**: static method of [<code>FileTransfer</code>](#FileTransfer)  
 **Returns**: <code>TYPE.MetadataTypeItem</code> - parsed metadata  
@@ -2841,6 +2829,18 @@ parses retrieved Metadata before saving
 | Param | Type | Description |
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single fileTransfer activity definition |
+
+<a name="FileTransfer.deleteByKey"></a>
+
+### FileTransfer.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>FileTransfer</code>](#FileTransfer)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success flag  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of data extension |
 
 <a name="Filter"></a>
 
@@ -3030,12 +3030,11 @@ ImportFile MetadataType
     * [.retrieve(retrieveDir, [_], [__], [key])](#ImportFile.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveForCache([_], [__], [key])](#ImportFile.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#ImportFile.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
-    * [.postRetrieveTasks(importDef)](#ImportFile.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.create(importFile)](#ImportFile.create) ⇒ <code>Promise</code>
     * [.update(importFile)](#ImportFile.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#ImportFile.preDeployTasks) ⇒ <code>Promise</code>
-    * [.parseMetadata(metadata)](#ImportFile.parseMetadata) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.deleteByKey(customerKey)](#ImportFile.deleteByKey) ⇒ <code>boolean</code>
+    * [.postRetrieveTasks(metadata)](#ImportFile.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.deleteByKey(customerKey)](#ImportFile.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="ImportFile.retrieve"></a>
 
@@ -3082,18 +3081,6 @@ Retrieve a specific Import Definition by Name
 | name | <code>string</code> | name of the metadata file |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
 
-<a name="ImportFile.postRetrieveTasks"></a>
-
-### ImportFile.postRetrieveTasks(importDef) ⇒ <code>TYPE.MetadataTypeItem</code>
-manages post retrieve steps
-
-**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - metadata  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| importDef | <code>TYPE.MetadataTypeItem</code> | a single importDef |
-
 <a name="ImportFile.create"></a>
 
 ### ImportFile.create(importFile) ⇒ <code>Promise</code>
@@ -3130,25 +3117,25 @@ prepares a import definition for deployment
 | --- | --- | --- |
 | metadata | <code>TYPE.MetadataTypeItem</code> | a single importDef |
 
-<a name="ImportFile.parseMetadata"></a>
+<a name="ImportFile.postRetrieveTasks"></a>
 
-### ImportFile.parseMetadata(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
-parses retrieved Metadata before saving
+### ImportFile.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
 
 **Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
-**Returns**: <code>TYPE.MetadataTypeItem</code> - parsed metadata definition  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - parsed metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.MetadataTypeItem</code> | a single import definition |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
 
 <a name="ImportFile.deleteByKey"></a>
 
-### ImportFile.deleteByKey(customerKey) ⇒ <code>boolean</code>
+### ImportFile.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
-**Returns**: <code>boolean</code> - deletion success status  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success flag  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3457,8 +3444,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.document([metadata], [isDeploy])](#MetadataType.document) ⇒ <code>void</code>
     * [.deleteByKey(customerKey)](#MetadataType.deleteByKey) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey, [additionalExtensions])](#MetadataType.postDeleteTasks) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.deleteByKeySOAP(customerKey, [overrideKeyField], [handleOutside])](#MetadataType.deleteByKeySOAP) ⇒ <code>boolean</code>
-    * [.deleteByKeyREST(url, key, [handleOutside])](#MetadataType.deleteByKeyREST) ⇒ <code>boolean</code>
+    * [.deleteByKeySOAP(customerKey, [overrideKeyField], [handleOutside])](#MetadataType.deleteByKeySOAP) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deleteByKeyREST(url, key, [handleOutside])](#MetadataType.deleteByKeyREST) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType.readBUMetadataForType) ⇒ <code>object</code>
     * [.getFilesToCommit(keyArr)](#MetadataType.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.getKeysForFixing(metadataMap)](#MetadataType.getKeysForFixing) ⇒ <code>Array.&lt;string&gt;</code>
@@ -4252,11 +4239,11 @@ clean up after deleting a metadata item
 
 <a name="MetadataType.deleteByKeySOAP"></a>
 
-### MetadataType.deleteByKeySOAP(customerKey, [overrideKeyField], [handleOutside]) ⇒ <code>boolean</code>
+### MetadataType.deleteByKeySOAP(customerKey, [overrideKeyField], [handleOutside]) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a data extension from the specified business unit
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>boolean</code> - deletion success flag  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success flag  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4266,11 +4253,11 @@ Delete a data extension from the specified business unit
 
 <a name="MetadataType.deleteByKeyREST"></a>
 
-### MetadataType.deleteByKeyREST(url, key, [handleOutside]) ⇒ <code>boolean</code>
+### MetadataType.deleteByKeyREST(url, key, [handleOutside]) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a data extension from the specified business unit
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>boolean</code> - deletion success flag  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success flag  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4900,7 +4887,7 @@ Query MetadataType
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.getFilesToCommit(keyArr)](#Query.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
     * [.getErrorsREST(ex)](#Query.getErrorsREST) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
-    * [.deleteByKey(customerKey)](#Query.deleteByKey) ⇒ <code>boolean</code>
+    * [.deleteByKey(customerKey)](#Query.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postDeleteTasks(customerKey)](#Query.postDeleteTasks) ⇒ <code>void</code>
     * [.postDeployTasks(upsertResults)](#Query.postDeployTasks)
 
@@ -5080,11 +5067,11 @@ Standardizes a check for multiple messages but adds query specific filters to er
 
 <a name="Query.deleteByKey"></a>
 
-### Query.deleteByKey(customerKey) ⇒ <code>boolean</code>
+### Query.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>boolean</code> - deletion success status  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success flag  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5217,7 +5204,6 @@ Script MetadataType
     * [.retrieve(retrieveDir, [_], [__], [key])](#Script.retrieve) ⇒ <code>Promise.&lt;{metadata: TYPE.ScriptMap, type: string}&gt;</code>
     * [.retrieveForCache()](#Script.retrieveForCache) ⇒ <code>Promise.&lt;{metadata: TYPE.ScriptMap, type: string}&gt;</code>
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#Script.retrieveAsTemplate) ⇒ <code>Promise.&lt;{metadata: TYPE.Script, type: string}&gt;</code>
-    * [.postRetrieveTasks(metadata)](#Script.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.update(script)](#Script.update) ⇒ <code>Promise</code>
     * [.create(script)](#Script.create) ⇒ <code>Promise</code>
     * [._mergeCode(metadata, deployDir, [templateName])](#Script._mergeCode) ⇒ <code>Promise.&lt;string&gt;</code>
@@ -5225,9 +5211,11 @@ Script MetadataType
     * [.buildDefinitionForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildDefinitionForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Script.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [._buildForNested(templateDir, targetDir, metadata, templateVariables, templateName, mode)](#Script._buildForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-    * [.parseMetadata(metadata)](#Script.parseMetadata) ⇒ <code>TYPE.CodeExtractItem</code>
+    * [.postRetrieveTasks(metadata)](#Script.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.prepExtractedCode(metadataScript, metadataName)](#Script.prepExtractedCode) ⇒ <code>Object</code>
     * [.getFilesToCommit(keyArr)](#Script.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.deleteByKey(customerKey)](#Script.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.postDeleteTasks(customerKey)](#Script.postDeleteTasks) ⇒ <code>void</code>
 
 <a name="Script.retrieve"></a>
 
@@ -5265,18 +5253,6 @@ Retrieve a specific Script by Name
 | templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
 | name | <code>string</code> | name of the metadata file |
 | templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
-
-<a name="Script.postRetrieveTasks"></a>
-
-### Script.postRetrieveTasks(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
-manages post retrieve steps
-
-**Kind**: static method of [<code>Script</code>](#Script)  
-**Returns**: <code>TYPE.CodeExtractItem</code> - Array with one metadata object and one ssjs string  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| metadata | <code>TYPE.ScriptItem</code> | a single script |
 
 <a name="Script.update"></a>
 
@@ -5385,22 +5361,22 @@ handles extracted code if any are found for complex types
 | templateName | <code>string</code> | name of the template to be built |
 | mode | <code>&#x27;definition&#x27;</code> \| <code>&#x27;template&#x27;</code> | defines what we use this helper for |
 
-<a name="Script.parseMetadata"></a>
+<a name="Script.postRetrieveTasks"></a>
 
-### Script.parseMetadata(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
-Splits the script metadata into two parts and parses in a standard manner
+### Script.postRetrieveTasks(metadata) ⇒ <code>TYPE.CodeExtractItem</code>
+manages post retrieve steps
 
 **Kind**: static method of [<code>Script</code>](#Script)  
 **Returns**: <code>TYPE.CodeExtractItem</code> - a single item with code parts extracted  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| metadata | <code>TYPE.ScriptItem</code> | a single script activity definition |
+| metadata | <code>TYPE.ScriptItem</code> | a single item |
 
 <a name="Script.prepExtractedCode"></a>
 
 ### Script.prepExtractedCode(metadataScript, metadataName) ⇒ <code>Object</code>
-helper for [parseMetadata](#Script.parseMetadata) and [_buildForNested](#Script._buildForNested)
+helper for [postRetrieveTasks](#Script.postRetrieveTasks) and [_buildForNested](#Script._buildForNested)
 
 **Kind**: static method of [<code>Script</code>](#Script)  
 **Returns**: <code>Object</code> - returns found extension and file content  
@@ -5422,6 +5398,29 @@ additionally, the documentation for dataExtension and automation should be retur
 | Param | Type | Description |
 | --- | --- | --- |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Script.deleteByKey"></a>
+
+### Script.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>Script</code>](#Script)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success flag  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of data extension |
+
+<a name="Script.postDeleteTasks"></a>
+
+### Script.postDeleteTasks(customerKey) ⇒ <code>void</code>
+clean up after deleting a metadata item
+
+**Kind**: static method of [<code>Script</code>](#Script)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of metadata item |
 
 <a name="SendClassification"></a>
 
