@@ -1,0 +1,105 @@
+{
+    "count": 1,
+    "page": 1,
+    "pageSize": 50,
+    "links": {},
+    "items": [
+        {
+            "id": 950143,
+            "customerKey": "testExisting_asset",
+            "objectID": "198ad191-59ae-44d1-9981-ffa71b076ad9",
+            "contentType": "text/html",
+            "assetType": {
+                "id": 205,
+                "name": "webpage",
+                "displayName": "Web Page"
+            },
+            "version": 1,
+            "name": "testExisting_asset",
+            "owner": {
+                "id": 717319337,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "717319337"
+            },
+            "createdDate": "2021-09-13T12:14:02.32-06:00",
+            "createdBy": {
+                "id": 717319337,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "717319337"
+            },
+            "modifiedDate": "2023-08-02T07:10:29.553-06:00",
+            "modifiedBy": {
+                "id": 700304523,
+                "name": "SFMC DEVOPS app user",
+                "userId": "700304523"
+            },
+            "enterpriseId": 111111,
+            "memberId": 999999,
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "thumbnail": {
+                "thumbnailUrl": "/v1/assets/950143/thumbnail"
+            },
+            "category": {
+                "id": 667369
+            },
+            "meta": {
+                "globalStyles": {
+                    "isLocked": false,
+                    "body": {
+                        "max-width": "1280px",
+                        "color": "#000000",
+                        "font-family": "Arial",
+                        "font-size": "12px",
+                        "margin": "0px auto"
+                    },
+                    "template": {
+                        "background-color": "#FFFFFF",
+                        "border": "none",
+                        "box-sizing": "border-box",
+                        "padding": "0px",
+                        "width": "100%"
+                    }
+                }
+            },
+            "views": {
+                "html": {
+                    "thumbnail": {},
+                    "content": "<!DOCTYPE html>\n<html>\n    <head>\n        <meta\n            name=\"viewport\"\n            content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0\"\n        />\n        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n        <style class=\"main_style\">\n            .layout-canvas-g {\n                background-color: #ffffff;\n                border: none;\n                box-sizing: border-box;\n                padding: 0px;\n                width: 100%;\n            }\n            .layout-canvas-g > .header,\n            .layout-canvas-g > .section,\n            .layout-canvas-g > .footer {\n                position: relative;\n                overflow: hidden;\n                width: 100%;\n                overflow-wrap: break-word;\n            }\n            .layout-canvas-g > .section {\n                margin: 10px 0px;\n            }\n            .layout-canvas-g > .section > .columns {\n                box-sizing: border-box;\n                overflow-wrap: break-word;\n            }\n            body {\n                color: #000000;\n                font-family: Arial;\n                font-size: 12px;\n                margin: 0px auto;\n                max-width: 1280px;\n            }\n            @media only screen and (max-width: 480px) {\n                .mobile-hidden {\n                    display: none !important;\n                }\n                .responsive-td {\n                    width: 100% !important;\n                    display: block !important;\n                    padding: 0px !important;\n                }\n            }\n            .layout-canvas-g > .section > .columns {\n                width: 100%;\n            }\n        </style>\n    </head>\n    <body>\n        <div class=\"layout layout-canvas-g\">\n            <div class=\"section\">\n                <div class=\"columns col1\">\n                    <div data-type=\"slot\" data-key=\"col1\"></div>\n                </div>\n            </div>\n        </div>\n    </body>\n</html>\n",
+                    "slots": {
+                        "col1": {
+                            "content": "<div data-type=\"block\" data-key=\"bgbqbbx4we9\"></div>",
+                            "design": "<p style=\"font-family:arial;color:#ccc;font-size:11px;text-align:center;vertical-align:middle;font-weight:bold;padding:10px;margin:0;border:#ccc dashed 1px;\">Drop blocks or content here</p>",
+                            "blocks": {
+                                "bgbqbbx4we9": {
+                                    "assetType": {
+                                        "id": 197,
+                                        "name": "htmlblock"
+                                    },
+                                    "content": "<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" role=\"presentation\" style=\"min-width: 100%; \" class=\"stylingblock-content-wrapper\"><tr><td class=\"stylingblock-content-wrapper camarker-inner\">\n%%[FOR @I=1 TO 1000 DO\n    SET @a = CONCAT(IIF(MOD(@i, 3)==0, \"Fizz\", \"\"), IIF(MOD(@i,5)==0,\"Buzz\",\"\"), IIF(MOD(@i, 7)==0, \"Boing\", \"\"), IIF(MOD(@i,11)==0,\"Bang\",\"\"))\nOUTPUT(CONCAT(@a, IIF(LENGTH(@a)>0, \"\", @i), \"<br>\"))NEXT @i\n]%%\n</td></tr></table>",
+                                    "design": "<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" role=\"presentation\" style=\"min-width: 100%; \" class=\"stylingblock-content-wrapper\"><tr><td class=\"stylingblock-content-wrapper camarker-inner\"><div class=\"default-design\"><div style=\"width:100%;height:150px;background: url(data:image/png;base64,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) repeat-x 0 0\"></div></div></td></tr></table>",
+                                    "meta": {
+                                        "wrapperStyles": {
+                                            "mobile": {
+                                                "visible": true
+                                            }
+                                        }
+                                    },
+                                    "modelVersion": 2
+                                }
+                            },
+                            "modelVersion": 2
+                        }
+                    },
+                    "modelVersion": 2
+                }
+            },
+            "availableViews": ["html"],
+            "modelVersion": 2
+        }
+    ]
+}

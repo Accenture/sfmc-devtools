@@ -891,6 +891,8 @@ FileTransfer MetadataType
     * [.findSubType(templateDir, templateName)](#Asset.findSubType) ⇒ <code>Promise.&lt;TYPE.AssetSubType&gt;</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName)](#Asset.readSecondaryFolder) ⇒ <code>TYPE.AssetItem</code>
     * [.getFilesToCommit(keyArr)](#Asset.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.deleteByKey(customerKey)](#Asset.deleteByKey) ⇒ <code>boolean</code>
+    * [.postDeleteTasks(customerKey)](#Asset.postDeleteTasks) ⇒ <code>void</code>
 
 <a name="Asset.retrieve"></a>
 
@@ -1265,6 +1267,30 @@ additionally, the documentation for dataExtension and automation should be retur
 | Param | Type | Description |
 | --- | --- | --- |
 | keyArr | <code>Array.&lt;string&gt;</code> | customerkey of the metadata |
+
+<a name="Asset.deleteByKey"></a>
+
+### Asset.deleteByKey(customerKey) ⇒ <code>boolean</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>Asset</code>](#Asset)  
+**Returns**: <code>boolean</code> - deletion success status  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of data extension |
+
+<a name="Asset.postDeleteTasks"></a>
+
+### Asset.postDeleteTasks(customerKey) ⇒ <code>void</code>
+clean up after deleting a metadata item
+cannot use the generic method due to the complexity of how assets are saved to disk
+
+**Kind**: static method of [<code>Asset</code>](#Asset)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of metadata item |
 
 <a name="AttributeGroup"></a>
 

@@ -81,4 +81,18 @@ describe('type: asset', () => {
             return;
         });
     });
+    describe('Delete ================', () => {
+        it('Should delete the item', async () => {
+            // WHEN
+            const isDeleted = await handler.deleteByKey(
+                'testInstance/testBU',
+                'asset',
+                'testExisting_asset'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'deleteByKey should not have thrown an error');
+            assert.equal(isDeleted, true, 'deleteByKey should have returned true');
+            return;
+        });
+    });
 });
