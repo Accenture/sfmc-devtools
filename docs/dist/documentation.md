@@ -891,7 +891,7 @@ FileTransfer MetadataType
     * [.findSubType(templateDir, templateName)](#Asset.findSubType) ⇒ <code>Promise.&lt;TYPE.AssetSubType&gt;</code>
     * [.readSecondaryFolder(templateDir, typeDirArr, templateName, fileName)](#Asset.readSecondaryFolder) ⇒ <code>TYPE.AssetItem</code>
     * [.getFilesToCommit(keyArr)](#Asset.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.deleteByKey(customerKey)](#Asset.deleteByKey) ⇒ <code>boolean</code>
+    * [.deleteByKey(customerKey)](#Asset.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postDeleteTasks(customerKey)](#Asset.postDeleteTasks) ⇒ <code>void</code>
 
 <a name="Asset.retrieve"></a>
@@ -1270,11 +1270,11 @@ additionally, the documentation for dataExtension and automation should be retur
 
 <a name="Asset.deleteByKey"></a>
 
-### Asset.deleteByKey(customerKey) ⇒ <code>boolean</code>
+### Asset.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>Asset</code>](#Asset)  
-**Returns**: <code>boolean</code> - deletion success status  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success flag  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2244,7 +2244,7 @@ DataExtract MetadataType
     * [.update(dataExtract)](#DataExtract.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#DataExtract.preDeployTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.postRetrieveTasks(metadata)](#DataExtract.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.deleteByKey(customerKey)](#DataExtract.deleteByKey) ⇒ <code>boolean</code>
+    * [.deleteByKey(customerKey)](#DataExtract.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="DataExtract.retrieve"></a>
 
@@ -2333,11 +2333,11 @@ manages post retrieve steps
 
 <a name="DataExtract.deleteByKey"></a>
 
-### DataExtract.deleteByKey(customerKey) ⇒ <code>boolean</code>
+### DataExtract.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>DataExtract</code>](#DataExtract)  
-**Returns**: <code>boolean</code> - deletion success status  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success flag  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2743,7 +2743,7 @@ FileTransfer MetadataType
     * [.update(fileTransfer)](#FileTransfer.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#FileTransfer.preDeployTasks) ⇒ <code>Promise</code>
     * [.postRetrieveTasks(metadata)](#FileTransfer.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.deleteByKey(customerKey)](#FileTransfer.deleteByKey) ⇒ <code>boolean</code>
+    * [.deleteByKey(customerKey)](#FileTransfer.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="FileTransfer.retrieve"></a>
 
@@ -2832,11 +2832,11 @@ manages post retrieve steps
 
 <a name="FileTransfer.deleteByKey"></a>
 
-### FileTransfer.deleteByKey(customerKey) ⇒ <code>boolean</code>
+### FileTransfer.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>FileTransfer</code>](#FileTransfer)  
-**Returns**: <code>boolean</code> - deletion success status  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success flag  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3034,7 +3034,7 @@ ImportFile MetadataType
     * [.update(importFile)](#ImportFile.update) ⇒ <code>Promise</code>
     * [.preDeployTasks(metadata)](#ImportFile.preDeployTasks) ⇒ <code>Promise</code>
     * [.postRetrieveTasks(metadata)](#ImportFile.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
-    * [.deleteByKey(customerKey)](#ImportFile.deleteByKey) ⇒ <code>boolean</code>
+    * [.deleteByKey(customerKey)](#ImportFile.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="ImportFile.retrieve"></a>
 
@@ -3131,11 +3131,11 @@ manages post retrieve steps
 
 <a name="ImportFile.deleteByKey"></a>
 
-### ImportFile.deleteByKey(customerKey) ⇒ <code>boolean</code>
+### ImportFile.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
-**Returns**: <code>boolean</code> - deletion success status  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success flag  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3444,8 +3444,8 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.document([metadata], [isDeploy])](#MetadataType.document) ⇒ <code>void</code>
     * [.deleteByKey(customerKey)](#MetadataType.deleteByKey) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey, [additionalExtensions])](#MetadataType.postDeleteTasks) ⇒ <code>Promise.&lt;void&gt;</code>
-    * [.deleteByKeySOAP(customerKey, [overrideKeyField], [handleOutside])](#MetadataType.deleteByKeySOAP) ⇒ <code>boolean</code>
-    * [.deleteByKeyREST(url, key, [handleOutside])](#MetadataType.deleteByKeyREST) ⇒ <code>boolean</code>
+    * [.deleteByKeySOAP(customerKey, [overrideKeyField], [handleOutside])](#MetadataType.deleteByKeySOAP) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.deleteByKeyREST(url, key, [handleOutside])](#MetadataType.deleteByKeyREST) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.readBUMetadataForType(readDir, [listBadKeys], [buMetadata])](#MetadataType.readBUMetadataForType) ⇒ <code>object</code>
     * [.getFilesToCommit(keyArr)](#MetadataType.getFilesToCommit) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code>
     * [.getKeysForFixing(metadataMap)](#MetadataType.getKeysForFixing) ⇒ <code>Array.&lt;string&gt;</code>
@@ -4239,11 +4239,11 @@ clean up after deleting a metadata item
 
 <a name="MetadataType.deleteByKeySOAP"></a>
 
-### MetadataType.deleteByKeySOAP(customerKey, [overrideKeyField], [handleOutside]) ⇒ <code>boolean</code>
+### MetadataType.deleteByKeySOAP(customerKey, [overrideKeyField], [handleOutside]) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a data extension from the specified business unit
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>boolean</code> - deletion success flag  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success flag  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4253,11 +4253,11 @@ Delete a data extension from the specified business unit
 
 <a name="MetadataType.deleteByKeyREST"></a>
 
-### MetadataType.deleteByKeyREST(url, key, [handleOutside]) ⇒ <code>boolean</code>
+### MetadataType.deleteByKeyREST(url, key, [handleOutside]) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a data extension from the specified business unit
 
 **Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
-**Returns**: <code>boolean</code> - deletion success flag  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success flag  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4887,7 +4887,7 @@ Query MetadataType
     * [.buildTemplateForNested(templateDir, targetDir, metadata, templateVariables, templateName)](#Query.buildTemplateForNested) ⇒ <code>Promise.&lt;Array.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.getFilesToCommit(keyArr)](#Query.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
     * [.getErrorsREST(ex)](#Query.getErrorsREST) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
-    * [.deleteByKey(customerKey)](#Query.deleteByKey) ⇒ <code>boolean</code>
+    * [.deleteByKey(customerKey)](#Query.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postDeleteTasks(customerKey)](#Query.postDeleteTasks) ⇒ <code>void</code>
     * [.postDeployTasks(upsertResults)](#Query.postDeployTasks)
 
@@ -5067,11 +5067,11 @@ Standardizes a check for multiple messages but adds query specific filters to er
 
 <a name="Query.deleteByKey"></a>
 
-### Query.deleteByKey(customerKey) ⇒ <code>boolean</code>
+### Query.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>Query</code>](#Query)  
-**Returns**: <code>boolean</code> - deletion success status  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success flag  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -5214,7 +5214,7 @@ Script MetadataType
     * [.postRetrieveTasks(metadata)](#Script.postRetrieveTasks) ⇒ <code>TYPE.CodeExtractItem</code>
     * [.prepExtractedCode(metadataScript, metadataName)](#Script.prepExtractedCode) ⇒ <code>Object</code>
     * [.getFilesToCommit(keyArr)](#Script.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.deleteByKey(customerKey)](#Script.deleteByKey) ⇒ <code>boolean</code>
+    * [.deleteByKey(customerKey)](#Script.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postDeleteTasks(customerKey)](#Script.postDeleteTasks) ⇒ <code>void</code>
 
 <a name="Script.retrieve"></a>
@@ -5401,11 +5401,11 @@ additionally, the documentation for dataExtension and automation should be retur
 
 <a name="Script.deleteByKey"></a>
 
-### Script.deleteByKey(customerKey) ⇒ <code>boolean</code>
+### Script.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Delete a metadata item from the specified business unit
 
 **Kind**: static method of [<code>Script</code>](#Script)  
-**Returns**: <code>boolean</code> - deletion success status  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success flag  
 
 | Param | Type | Description |
 | --- | --- | --- |
