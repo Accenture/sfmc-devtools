@@ -1,5 +1,5 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+npm test
 
 npm run docs
 git update-index --add docs/dist/documentation.md

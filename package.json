@@ -54,7 +54,7 @@
         "lint-lib": "eslint lib/**/*.js",
         "lint-type": "eslint types/*.js",
         "lint-test": "eslint test/**/*.js",
-        "manual-prepare": "husky install",
+        "prepare": "husky || true",
         "lint-and-test": "run-s lint test",
         "test": "mocha --reporter-option maxDiffSize=25000",
         "coverage": "c8 npm run test",
