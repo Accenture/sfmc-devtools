@@ -73,7 +73,7 @@
         "inquirer": "9.2.6",
         "json-to-table": "4.2.1",
         "mustache": "4.2.0",
-        "p-limit": "4.0.0",
+        "p-limit": "5.0.0",
         "prettier": "3.2.4",
         "prettier-plugin-sql": "0.18.0",
         "semver": "7.5.4",
