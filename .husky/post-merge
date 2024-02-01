@@ -1,0 +1,22 @@
+#!/bin/sh
+# ### run npm install ###
+. "$(dirname "$0")/_/husky.sh"
+
+
+echo "[POST-MERGE] 📦 Checking for changes to dependencies"
+
+IFS=$'\n'
+# extract all paths to package-lock.json files 
+PACKAGE_LOCK_REGEX="(^package-lock\.json)"
+PACKAGES=$(git diff --name-only HEAD^1 HEAD | grep -E $PACKAGE_LOCK_REGEX || true)
+
+if [[ ${PACKAGES[@]} ]]; then
+  for package in $PACKAGES; do
+    echo "📦 $package was changed."
+  done
+  echo "📦 Running npm install to update your dependencies..."
+  npm install
+  npm run lint:fix
+else
+  echo "📦 All packages up-to-date. No need to run npm install."
+fi

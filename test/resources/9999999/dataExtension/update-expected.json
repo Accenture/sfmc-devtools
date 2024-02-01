@@ -1,7 +1,7 @@
 {
-    "CustomerKey": "childBU_dataextension_test",
-    "Name": "childBU_dataextension_test",
-    "Description": "",
+    "CustomerKey": "testExisting_dataExtension",
+    "Name": "testExisting_dataExtension",
+    "Description": "Container for my test emails",
     "IsSendable": false,
     "IsTestable": false,
     "RowBasedRetention": true,
@@ -26,7 +26,7 @@
             "FieldType": "Text"
         },
         {
-            "Name": "EmailAddress",
+            "Name": "Email",
             "DefaultValue": "",
             "MaxLength": 254,
             "IsRequired": true,
@@ -40,6 +40,22 @@
             "IsRequired": true,
             "IsPrimaryKey": true,
             "FieldType": "Text"
+        },
+        {
+            "Name": "decimalField",
+            "DefaultValue": "",
+            "MaxLength": 6,
+            "Scale": 3,
+            "IsPrimaryKey": false,
+            "IsRequired": true,
+            "FieldType": "Decimal"
+        },
+        {
+            "Name": "numberField",
+            "DefaultValue": "",
+            "IsPrimaryKey": false,
+            "IsRequired": true,
+            "FieldType": "Number"
         },
         {
             "Name": "testField",

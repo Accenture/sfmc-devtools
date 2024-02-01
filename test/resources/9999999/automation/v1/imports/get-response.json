@@ -1,0 +1,38 @@
+{
+    "page": 1,
+    "pageSize": 500,
+    "count": 1,
+    "items": [
+        {
+            "allowErrors": true,
+            "customerKey": "testExisting_importFile",
+            "createdDate": "2022-11-09T05:32:30.533",
+            "modifiedDate": "2022-11-17T07:13:03.95",
+            "dateFormatLocale": "en-US",
+            "deleteFile": false,
+            "description": "17.11.2022",
+            "destinationObjectId": "21711373-72c1-ec11-b83b-48df37d1deb7",
+            "destinationId": 0,
+            "destinationObjectTypeId": 310,
+            "fieldMappings": [],
+            "fieldMappingType": "InferFromColumnHeadings",
+            "fileNamingPattern": "blabla",
+            "fileTransferLocationId": "41a5ded7-0d98-4910-a15f-d09e7ab0af24",
+            "fileType": "CSV",
+            "filter": "",
+            "hasColumnHeader": true,
+            "importDefinitionId": "9d16f42c-2260-ed11-b849-48df37d1de8b",
+            "isOrderedImport": true,
+            "isSequential": true,
+            "maxFileAgeHours": 0,
+            "maxImportFrequencyHours": 0,
+            "maxFileAgeScheduleOffsetHours": 0,
+            "name": "testExisting_importFile",
+            "sendEmailNotification": false,
+            "standardQuotedStrings": true,
+            "subscriberImportTypeId": 255,
+            "updateTypeId": 0,
+            "fileTransferLocationTypeId": 0
+        }
+    ]
+}

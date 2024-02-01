@@ -1,4 +1,4 @@
-const SDK = require('sfmc-sdk');
+import SDK from 'sfmc-sdk';
 /**
  * @ignore
  * @typedef {object} BuObject
@@ -12,7 +12,7 @@ const SDK = require('sfmc-sdk');
  */
 /**
  * @typedef {Object.<string, string>} TemplateMap
- * @typedef {'accountUser'|'asset'|'asset-archive'|'asset-asset'|'asset-audio'|'asset-block'|'asset-code'|'asset-document'|'asset-image'|'asset-message'|'asset-other'|'asset-rawimage'|'asset-template'|'asset-textfile'|'asset-video'|'attributeGroup'|'automation'|'campaign'|'contentArea'|'dataExtension'|'dataExtensionField'|'dataExtensionTemplate'|'dataExtract'|'dataExtractType'|'discovery'|'email'|'emailSendDefinition'|'eventDefinition'|'fileTransfer'|'filter'|'folder'|'ftpLocation'|'importFile'|'interaction'|'list'|'mobileCode'|'mobileKeyword'|'query'|'role'|'script'|'setDefinition'|'triggeredSendDefinition'} SupportedMetadataTypes
+ * @typedef {'accountUser'|'asset'|'asset-archive'|'asset-asset'|'asset-audio'|'asset-block'|'asset-code'|'asset-document'|'asset-image'|'asset-message'|'asset-other'|'asset-rawimage'|'asset-template'|'asset-textfile'|'asset-video'|'attributeGroup'|'automation'|'campaign'|'contentArea'|'dataExtension'|'dataExtensionField'|'dataExtensionTemplate'|'dataExtract'|'dataExtractType'|'discovery'|'email'|'emailSend'|'event'|'fileTransfer'|'filter'|'folder'|'fileLocation'|'importFile'|'interaction'|'list'|'mobileCode'|'mobileKeyword'|'query'|'role'|'script'|'setDefinition'|'triggeredSend'} SupportedMetadataTypes
  * @typedef {Object.<SupportedMetadataTypes, string[]>} TypeKeyCombo object-key=metadata type, value=array of external keys
  */
 
@@ -21,10 +21,10 @@ const SDK = require('sfmc-sdk');
  * @typedef {Object.<string, MetadataTypeItem>} MetadataTypeMap key=customer key
  * @typedef {Object.<string, MetadataTypeMap>} MultiMetadataTypeMap key=Supported MetadataType
  * @typedef {Object.<string, MetadataTypeItem[]>} MultiMetadataTypeList key=Supported MetadataType
- * @typedef {{metadata:MetadataTypeMap,type:SupportedMetadataTypes}} MetadataTypeMapObj
- * @typedef {{metadata:MetadataTypeItem,type:SupportedMetadataTypes}} MetadataTypeItemObj
+ * @typedef {{metadata: MetadataTypeMap, type: SupportedMetadataTypes}} MetadataTypeMapObj
+ * @typedef {{metadata: MetadataTypeItem, type: SupportedMetadataTypes}} MetadataTypeItemObj
  * @typedef {Object.<number, MultiMetadataTypeMap>} Cache key=MID
- * @typedef {{before: TYPE.MetadataTypeItem, after: TYPE.MetadataTypeItem}} MetadataTypeItemDiff used during update
+ * @typedef {{before: MetadataTypeItem, after: MetadataTypeItem}} MetadataTypeItemDiff used during update
  */
 
 /**
@@ -119,24 +119,57 @@ const SDK = require('sfmc-sdk');
  * @typedef {Object.<string, DataExtensionItem>} DataExtensionMap
  */
 /**
- * @typedef {object} AccountUserDocument
- * @property {string} TYPE user.type__c
- * @property {string} UserID user.UserID
- * @property {string} AccountUserID user.AccountUserID
+ * @typedef {object} UserDocument
+ * @property {string} [ID] equal to UserID; optional in update/create calls
+ * @property {string} UserID equal to ID; required in update/create calls
+ * @property {number} [AccountUserID] user.AccountUserID
+ * @property {number} c__AccountUserID copy of AccountUserID
  * @property {string} CustomerKey user.CustomerKey
  * @property {string} Name user.Name
  * @property {string} Email user.Email
  * @property {string} NotificationEmailAddress user.NotificationEmailAddress
- * @property {string} ActiveFlag user.ActiveFlag === true ? '✓' : '-'
- * @property {string} IsAPIUser user.IsAPIUser === true ? '✓' : '-'
- * @property {string} MustChangePassword user.MustChangePassword === true ? '✓' : '-'
- * @property {string} DefaultBusinessUnit defaultBUName
- * @property {string} AssociatedBusinessUnits__c associatedBus
- * @property {string} Roles roles
- * @property {string} UserPermissions userPermissions
+ * @property {boolean} ActiveFlag user.ActiveFlag === true ? '✓' : '-'
+ * @property {boolean} IsAPIUser user.IsAPIUser === true ? '✓' : '-'
+ * @property {boolean} MustChangePassword user.MustChangePassword === true ? '✓' : '-'
+ * @property {number} DefaultBusinessUnit defaultBUName
+ * @property {number[]} c__AssociatedBusinessUnits associatedBus
+ * @property {object} [Roles] (API only)
+ * @property {object[]} [Roles.Role] roles (API only)
+ * @property {string[]} c__RoleNamesGlobal roles
+ * @property {string[]} UserPermissions userPermissions
  * @property {string} LastSuccessfulLogin this.timeSinceDate(user.LastSuccessfulLogin)
  * @property {string} CreatedDate user.CreatedDate
  * @property {string} ModifiedDate user.ModifiedDate
+ * @property {object} Client -
+ * @property {number} [Client.ID] EID e.g:7281698
+ * @property {number} Client.ModifiedBy AccountUserID of user who last modified this user
+ * @property {'User'|'Installed Package'} c__type -
+ * @property {boolean} [IsLocked] (API only)
+ * @property {boolean} [Unlock] used to unlock a user that has IsLocked === true
+ * @property {boolean} c__IsLocked_readOnly copy of IsLocked
+ * @property {string} c__TimeZoneName name of timezone
+ * @property {object} [TimeZone] (API only)
+ * @property {string} [TimeZone.Name] (API only)
+ * @property {string} [TimeZone.ID] (API only)
+ * @property {'en-US'|'fr-CA'|'fr-FR'|'de-DE'|'it-IT'|'ja-JP'|'pt-BR'|'es-419'|'es-ES'} c__LocaleCode fr-CA, en-US, ...
+ * @property {object} [Locale] (API only)
+ * @property {'en-US'|'fr-CA'|'fr-FR'|'de-DE'|'it-IT'|'ja-JP'|'pt-BR'|'es-419'|'es-ES'} [Locale.LocaleCode] (API only)
+ * @typedef {{before:UserDocument,after:UserDocument}} UserDocumentDiff
+ * @typedef {Object.<string, UserDocument>} UserDocumentMap key=customer key
+ */
+/**
+ * @typedef {object} AccountUserConfiguration
+ * @property {object} Client wrapper
+ * @property {number} Client.ID EID e.g:7281698
+ * @property {string} [PartnerKey] empty string
+ * @property {number} ID User ID e.g:717133502
+ * @property {string} [ObjectID] empty string
+ * @property {number} [Delete] 0,1
+ * @property {BusinessUnitAssignmentConfiguration} BusinessUnitAssignmentConfiguration -
+ * @typedef {object} BusinessUnitAssignmentConfiguration
+ * @property {object} BusinessUnitIds wrapper
+ * @property {number[]|number} BusinessUnitIds.BusinessUnitId e.g:[518003624]
+ * @property {boolean} IsDelete assign BU if false, remove assignment if true
  */
 
 /**
@@ -219,6 +252,20 @@ const SDK = require('sfmc-sdk');
  * @property {string} [categoryId] holds folder ID, replaced with r__folder_Path during retrieve
  */
 /**
+ * @typedef {object} VerificationItem
+ * @property {string} dataVerificationDefinitionId ID / Key
+ * @property {'IsEqualTo'|'IsLessThan'|'IsGreaterThan'|'IsOutsideRange'|'IsInsideRange'|'IsNotEqualTo'|'IsNotLessThan'|'IsNotGreaterThan'|'IsNotOutsideRange'|'IsNotInsideRange'} verificationType key
+ * @property {number} value1 used for all verificationTypes; lower value for IsOutsideRange, IsInsideRange, IsNotOutsideRange, IsNotInsideRange
+ * @property {number} value2 only used for IsOutsideRange, IsInsideRange, IsNotOutsideRange, IsNotInsideRange; otherwise set to 0
+ * @property {boolean} shouldStopOnFailure flag to stop automation if verification fails
+ * @property {boolean} shouldEmailOnFailure flag to send email if verification fails
+ * @property {string} notificationEmailAddress email address to send notification to; empty string if shouldEmailOnFailure=false
+ * @property {string} notificationEmailMessage email message to send; empty string if shouldEmailOnFailure=false
+ * @property {number} createdBy user id of creator
+ * @property {string} r__dataExtension_CustomerKey key of target data extension
+ */
+
+/**
  * @typedef {Object.<string, AutomationItem>} AutomationMap
  * @typedef {{metadata:AutomationMap,type:string}} AutomationMapObj
  * @typedef {{metadata:AutomationItem,type:string}} AutomationItemObj
@@ -300,4 +347,4 @@ complex
  * @property {Function} errorStack (ex, msg) print error with trace message
  */
 
-module.exports = {};
+export default {};

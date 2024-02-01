@@ -1,0 +1,61 @@
+name: Update coverage comment # base-update.yml
+on:
+    pull_request:
+        types: [edited]
+
+permissions:
+    # allow dependabot to execute this workflow
+    pull-requests: write
+
+jobs:
+    hello_world_job:
+        runs-on: ubuntu-latest
+        name: Test and report
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  ref: ${{ github.event.pull_request.head.sha }}
+                  fetch-depth: 1000
+
+            - name: Prepare for Report Coverage (without nyc run)
+              run: |
+                  npm i svelte-to-html@1.0.9
+                  git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
+
+            - name: Download artifact for base branch
+              uses: dawidd6/action-download-artifact@v3
+              continue-on-error: true
+              with:
+                  workflow: ${{ github.event.pull_request.base.ref == 'main' && 'coverage-main-branch.yml' || github.event.pull_request.base.ref == 'develop' && 'coverage-develop-branch.yml' || 'coverage.yml' }}
+                  workflow_conclusion: success
+                  commit: ${{github.event.pull_request.base.sha}}
+                  name: 'test-coverage-output'
+                  path: base-artifacts
+                  search_artifacts: true
+
+            - name: Download artifact for to be merged branch
+              uses: dawidd6/action-download-artifact@v3
+              continue-on-error: true
+              with:
+                  workflow: 'coverage.yml'
+                  workflow_conclusion: success
+                  commit: ${{github.event.pull_request.head.sha}}
+                  name: 'test-coverage-output'
+                  path: artifacts
+                  search_artifacts: true
+
+            - name: Check file existence
+              id: check_files
+              uses: andstor/file-existence-action@v2
+              with:
+                  files: 'base-artifacts/coverage-summary.json, artifacts/coverage-summary.json'
+
+            - name: Update Coverage comment
+              uses: sidx1024/report-nyc-coverage-github-action@v1.2.7
+              if: steps.check_files.outputs.files_exists == 'true'
+              # Only runs if all of the files exists
+              with:
+                  coverage_file: 'artifacts/coverage-summary.json'
+                  base_coverage_file: 'base-artifacts/coverage-summary.json'
+                  comment_template_file: '.coverage-comment-template.svelte'

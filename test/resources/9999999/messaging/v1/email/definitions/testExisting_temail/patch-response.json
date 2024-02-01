@@ -13,7 +13,7 @@
     },
     "subscriptions": {
         "list": "All Subscribers - 277",
-        "dataExtension": "childBU_dataextension_test",
+        "dataExtension": "testExisting_dataExtension",
         "autoAddSubscriber": true,
         "updateSubscriber": true
     },

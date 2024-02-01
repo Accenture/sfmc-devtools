@@ -32,13 +32,14 @@
                 "isClientOwned": false,
                 "isOwner": false
             },
-            "keyword": "testExisting_keyword",
+            "keyword": "TESTEXISTING_KEYWORD",
             "startDate": "2018-03-27T12:37:18.197Z",
             "endDate": "2038-03-27T12:37:18.197Z",
             "status": "Active",
             "createdBy": { "id": "abcabcabc", "name": "xyz app user" },
             "restriction": "NONE",
             "keywordType": "NORMAL",
+            "responseMessage": "line1 %%[ SET @test='bla bla' ]%% line2 %%= v(@test) =%% still line2\nline3",
             "isInherited": false,
             "decodedId": "9e2192ab-f611-4039-86a8-7ce0ccf3a453"
         }

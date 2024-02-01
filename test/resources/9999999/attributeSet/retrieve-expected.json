@@ -1,0 +1,143 @@
+{
+    "attributeCount": 0,
+    "canAddValues": true,
+    "canChangeValues": true,
+    "canModify": true,
+    "canRemove": true,
+    "createDate": "2023-08-11T08:22:00",
+    "createdBy": 700301950,
+    "dataRetentionProperties": {
+        "isDeleteAtEndOfRetentionPeriod": false,
+        "isResetRetentionPeriodOnImport": false,
+        "isRowBasedRetention": true,
+        "periodLength": 6,
+        "periodUnitOfMeasure": 5
+    },
+    "definitionKey": "testExisting_dataExtensionShared",
+    "isCustomObjectBacked": true,
+    "isEvent": false,
+    "isHidden": false,
+    "isReadOnly": false,
+    "isRoot": false,
+    "isSendable": true,
+    "isShared": true,
+    "isSystemDefined": false,
+    "isTestaable": true,
+    "localizedDescription": {
+        "value": "Container for my test emails"
+    },
+    "name": "testExisting_dataExtensionShared",
+    "parentID": "00000000-0000-0000-0000-000000000000",
+    "r__dataExtension_CustomerKey": "testExisting_dataExtensionShared",
+    "r__folder_Path": "Shared Items/Shared Data Extensions",
+    "relationshipCount": 1,
+    "relationships": [
+        {
+            "canModify": true,
+            "canRemove": true,
+            "isGroupToSetRelationship": true,
+            "isHidden": false,
+            "isSystemDefined": false,
+            "leftItem": {
+                "cardinality": "One",
+                "r__attributeGroup_definitionKey": "testExisting_attributeGroup",
+                "relationshipType": "AttributeGroup"
+            },
+            "leftRelationshipIDs": [
+                {
+                    "type": "int16",
+                    "value": "3"
+                }
+            ],
+            "leftRelationshipReferenceType": "CustomerData",
+            "relationshipAttributes": [
+                {
+                    "c__leftFullyQualifiedName": "Contact.Contact Key",
+                    "c__rightFullyQualifiedName": "testExisting_dataExtensionShared.ContactKey"
+                }
+            ],
+            "relationshipID": "598b787a-5238-ee11-b85a-48df37d1de8a",
+            "rightItem": {
+                "cardinality": "One",
+                "r__attributeSet_definitionKey": "testExisting_dataExtensionShared",
+                "relationshipType": "AttributeSet"
+            }
+        }
+    ],
+    "sendAttributeStorageName": "ContactKey",
+    "sendContactKeyStorageName": "_SubscriberKey",
+    "setDefinitionKey": "testExisting_dataExtensionShared",
+    "storageLogicalType": "DataExtension",
+    "storageObjectIDs": ["5b8b787a-5238-ee11-b85a-48df37d1de8a"],
+    "valueDefinitions": [
+        {
+            "dataType": "LongNumber",
+            "definitionKey": "CustomObjectKey",
+            "description": "",
+            "isHidden": true,
+            "isIdentityValue": true,
+            "isNullable": false,
+            "isPrimaryKey": false,
+            "isReadOnly": true,
+            "isSystemDefined": true,
+            "isUpdateable": true,
+            "name": "Custom Object Key"
+        },
+        {
+            "dataType": "Text",
+            "definitionKey": "FirstName",
+            "description": "",
+            "isHidden": false,
+            "isIdentityValue": false,
+            "isNullable": true,
+            "isPrimaryKey": false,
+            "isReadOnly": false,
+            "isSystemDefined": false,
+            "isUpdateable": true,
+            "length": 50,
+            "name": "FirstName"
+        },
+        {
+            "dataType": "Text",
+            "definitionKey": "LastName",
+            "description": "",
+            "isHidden": false,
+            "isIdentityValue": false,
+            "isNullable": true,
+            "isPrimaryKey": false,
+            "isReadOnly": false,
+            "isSystemDefined": false,
+            "isUpdateable": true,
+            "length": 55,
+            "name": "LastName"
+        },
+        {
+            "dataType": "EmailAddress",
+            "definitionKey": "EmailAddress",
+            "description": "",
+            "isHidden": false,
+            "isIdentityValue": false,
+            "isNullable": false,
+            "isPrimaryKey": false,
+            "isReadOnly": false,
+            "isSystemDefined": false,
+            "isUpdateable": true,
+            "length": 254,
+            "name": "EmailAddress"
+        },
+        {
+            "dataType": "Text",
+            "definitionKey": "ContactKey",
+            "description": "",
+            "isHidden": false,
+            "isIdentityValue": false,
+            "isNullable": false,
+            "isPrimaryKey": true,
+            "isReadOnly": false,
+            "isSystemDefined": false,
+            "isUpdateable": true,
+            "length": 50,
+            "name": "ContactKey"
+        }
+    ]
+}

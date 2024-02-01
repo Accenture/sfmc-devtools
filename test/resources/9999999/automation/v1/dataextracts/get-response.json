@@ -1,0 +1,20 @@
+{
+    "count": 1,
+    "page": 1,
+    "pageSize": 500,
+    "items": [
+        {
+            "dataExtractDefinitionId": "56c5370a-f988-4f36-b0ee-0f876573f6d7",
+            "name": "testExisting_dataExtract",
+            "key": "testExisting_dataExtract",
+            "description": "bla bla",
+            "dataExtractTypeId": "bb94a04d-9632-4623-be47-daabc3f588a6",
+            "fileSpec": "testExisting-%%Year%%-%%Month%%-%%Day%%",
+            "createdDate": "2022-11-09T05:31:21.667",
+            "modifiedDate": "2022-11-17T07:13:36.9",
+            "createdBy": 700301950,
+            "modifiedBy": 700301950,
+            "intervalType": 0
+        }
+    ]
+}

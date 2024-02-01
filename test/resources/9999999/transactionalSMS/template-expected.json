@@ -1,6 +1,6 @@
 {
-    "name": "testExisting_tsms",
-    "definitionKey": "testExisting_tsms",
+    "name": "{{{prefix}}}tsms",
+    "definitionKey": "{{{prefix}}}tsms",
     "description": "{{{description}}}",
     "status": "Active",
     "subscriptions": {
@@ -8,6 +8,6 @@
         "countryCode": "",
         "autoAddSubscriber": true,
         "updateSubscriber": true,
-        "keyword": "testExisting_keyword"
+        "keyword": "{{{prefixUpper}}}KEYWORD"
     }
 }

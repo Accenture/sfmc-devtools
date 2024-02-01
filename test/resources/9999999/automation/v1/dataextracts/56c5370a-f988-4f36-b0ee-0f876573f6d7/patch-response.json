@@ -1,0 +1,38 @@
+{
+    "dataExtractDefinitionId": "56c5370a-f988-4f36-b0ee-0f876573f6d7",
+    "name": "testExisting_dataExtract",
+    "key": "testExisting_dataExtract",
+    "description": "created via deploy",
+    "dataExtractTypeId": "bb94a04d-9632-4623-be47-daabc3f588a6",
+    "fileSpec": "testExisting-%%Year%%-%%Month%%-%%Day%%",
+    "createdBy": 700304523,
+    "modifiedBy": 700304523,
+    "intervalType": 0,
+    "dataFields": [
+        {
+            "name": "ColumnDelimiter",
+            "type": "string",
+            "value": ","
+        },
+        {
+            "name": "DECustomerKey",
+            "type": "string",
+            "value": "testExisting_dataExtension"
+        },
+        {
+            "name": "HasColumnHeaders",
+            "type": "bool",
+            "value": "False"
+        },
+        {
+            "name": "TextQualified",
+            "type": "bool",
+            "value": "False"
+        },
+        {
+            "name": "UsesLineFeed",
+            "type": "bool",
+            "value": "False"
+        }
+    ]
+}

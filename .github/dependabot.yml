@@ -12,3 +12,11 @@ updates:
       target-branch: 'develop'
       labels:
           - 'dependencies'
+    - package-ecosystem: 'github-actions'
+      directory: '/'
+      schedule:
+          interval: 'weekly'
+      target-branch: 'main'
+      labels:
+          - 'dependencies'
+          - 'github-action'

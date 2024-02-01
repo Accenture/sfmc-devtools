@@ -40,6 +40,8 @@
             "secret": "secret",
             "sharedFolder": "/Shared Data Extensions/test",
             "suffix": "_test",
+            "prefix": "testExisting_",
+            "prefixUpper": "TESTEXISTING_",
             "description": "bla bla",
             "countryCodeIn": "'test'"
         },
@@ -49,21 +51,23 @@
             "secret": "target secret",
             "sharedFolder": "/Shared Data Extensions/test target",
             "suffix": "_testTarget",
+            "prefix": "testTemplated_",
+            "prefixUpper": "TESTTEMPLATED_",
             "description": "foobar",
             "countryCodeIn": "'testTarget'"
         }
     },
     "marketList": {},
     "metaDataTypes": {
-        "documentOnRetrieve": ["accountUser", "automation", "dataExtension", "role"],
+        "documentOnRetrieve": ["user", "automation", "dataExtension", "role"],
         "retrieve": [
             "asset",
             "automation",
             "dataExtension",
             "dataExtract",
-            "emailSendDefinition",
+            "emailSend",
             "fileTransfer",
-            "ftpLocation",
+            "fileLocation",
             "importFile",
             "list",
             "mobileCode",
@@ -71,8 +75,8 @@
             "query",
             "role",
             "script",
-            "triggeredSendDefinition"
+            "triggeredSend"
         ]
     },
-    "version": "4.3.4"
+    "version": "6.0.2"
 }

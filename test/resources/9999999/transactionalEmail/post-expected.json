@@ -6,11 +6,8 @@
     "status": "Active",
     "createdDate": "2022-12-06T06:08:00",
     "modifiedDate": "2022-12-06T06:08:00",
-    "content": {
-        "customerKey": "testExisting_asset_message"
-    },
     "subscriptions": {
-        "dataExtension": "childBU_dataextension_test",
+        "r__dataExtension_CustomerKey": "testExisting_dataExtension",
         "autoAddSubscriber": true,
         "updateSubscriber": true,
         "r__list_PathName": "my subscribers/All Subscribers"
@@ -18,7 +15,6 @@
     "options": {
         "trackLinks": true
     },
-    "journey": {
-        "interactionKey": "testExisting_interaction"
-    }
+    "r__asset_customerKey": "testExisting_asset_message",
+    "r__journey_key": "testNew_RANDOM_interaction"
 }

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:016c1c21-3227-4e9c-9497-33b0c15d971b</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:f559d162-26ae-4a2c-8bfe-0abaa0be36aa</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-9215e989-d752-4c92-914c-5d254c377f41">
+                <wsu:Created>2023-08-08T12:49:25Z</wsu:Created>
+                <wsu:Expires>2023-08-08T12:54:25Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>01c5259b-174e-4c70-9fa7-f5cd984b28c6</RequestID>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2017-02-16T01:59:27.177</CreatedDate>
+                <ModifiedDate>2017-02-16T01:59:27.177</ModifiedDate>
+                <ID>404</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>list_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>my lists</Name>
+                <Description />
+                <ContentType>list</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-22T11:52:17.55</CreatedDate>
+                <ModifiedDate>2016-07-22T11:52:17.55</ModifiedDate>
+                <ID>89332</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>mysubs_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>my subscribers</Name>
+                <Description />
+                <ContentType>mysubs</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2017-02-16T01:59:32.323</CreatedDate>
+                <ModifiedDate>2017-02-16T01:59:32.323</ModifiedDate>
+                <ID>419</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>suppression_list_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Suppression Lists</Name>
+                <Description />
+                <ContentType>suppression_list</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2017-02-16T01:59:34.023</CreatedDate>
+                <ModifiedDate>2017-02-16T01:59:34.023</ModifiedDate>
+                <ID>424</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>publication_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Publication Lists</Name>
+                <Description />
+                <ContentType>publication</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-22T11:52:24.417</CreatedDate>
+                <ModifiedDate>2016-07-22T11:52:24.417</ModifiedDate>
+                <ID>89373</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>contextual_suppression_list_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Auto-Suppression Configuration</Name>
+                <Description />
+                <ContentType>contextual_suppression_list</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>

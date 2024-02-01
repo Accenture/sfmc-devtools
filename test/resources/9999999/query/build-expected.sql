@@ -1,5 +1,6 @@
 SELECT
-    SubscriberKey as testField
+    SubscriberKey AS testField,
+    TRIM(last_name) AS name
 FROM
     _Subscribers
 WHERE

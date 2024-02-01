@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:e45d2dee-e7c7-4c09-a6fe-887dd4021950</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:5f970206-bed2-4006-8590-e3aa52133e4c</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-c1c19a43-2495-43e6-81f4-a86863f894aa">
+                <wsu:Created>2023-03-11T13:52:51Z</wsu:Created>
+                <wsu:Expires>2023-03-11T13:57:51Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>e4b2d26e-c429-4856-a410-eeb2951e84e0</RequestID>
+            <Results xsi:type="Role">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-22T17:52:36.93</CreatedDate>
+                <ModifiedDate>2016-07-22T17:52:36.93</ModifiedDate>
+                <ObjectID>f1cfb80f-3550-e611-96fe-38eaa7142c61</ObjectID>
+                <CustomerKey>SYS_DEF_ADMIN</CustomerKey>
+                <Name>Administrator</Name>
+                <Description>Administrator</Description>
+                <IsSystemDefined>true</IsSystemDefined>
+            </Results>
+            <Results xsi:type="Role">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-22T17:52:36.953</CreatedDate>
+                <ModifiedDate>2016-07-22T17:52:36.953</ModifiedDate>
+                <ObjectID>f4cfb80f-3550-e611-96fe-38eaa7142c61</ObjectID>
+                <CustomerKey>SYS_DEF_CONTENT</CustomerKey>
+                <Name>Content Creator</Name>
+                <Description>Content Creator</Description>
+                <IsSystemDefined>true</IsSystemDefined>
+            </Results>
+            <Results xsi:type="Role">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-22T17:52:36.97</CreatedDate>
+                <ModifiedDate>2016-07-22T17:52:36.97</ModifiedDate>
+                <ObjectID>f6cfb80f-3550-e611-96fe-38eaa7142c61</ObjectID>
+                <CustomerKey>SYS_DEF_DATA</CustomerKey>
+                <Name>Data Manager</Name>
+                <Description>Data Manager</Description>
+                <IsSystemDefined>true</IsSystemDefined>
+            </Results>
+            <Results xsi:type="Role">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-22T17:52:36.98</CreatedDate>
+                <ModifiedDate>2016-07-22T17:52:36.98</ModifiedDate>
+                <ObjectID>facfb80f-3550-e611-96fe-38eaa7142c61</ObjectID>
+                <CustomerKey>SYS_DEF_ANALYST</CustomerKey>
+                <Name>Analyst</Name>
+                <Description>Analyst</Description>
+                <IsSystemDefined>true</IsSystemDefined>
+            </Results>
+            <Results xsi:type="Role">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-22T17:52:36.993</CreatedDate>
+                <ModifiedDate>2016-07-22T17:52:36.993</ModifiedDate>
+                <ObjectID>fdcfb80f-3550-e611-96fe-38eaa7142c61</ObjectID>
+                <CustomerKey>SYS_DEF_DS_USER</CustomerKey>
+                <Name>Distributed Sending User</Name>
+                <Description>Distributed Sending User</Description>
+                <IsSystemDefined>true</IsSystemDefined>
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>

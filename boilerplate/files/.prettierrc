@@ -17,7 +17,10 @@
             "options": {
                 "formatter": "sql-formatter",
                 "language": "tsql",
-                "uppercase": true
+                "identifierCase": "preserve",
+                "dataTypeCase": "preserve",
+                "functionCase": "upper",
+                "keywordCase": "upper"
             }
         }
     ]
