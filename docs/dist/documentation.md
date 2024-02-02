@@ -3032,6 +3032,7 @@ ImportFile MetadataType
     * [.retrieveAsTemplate(templateDir, name, templateVariables)](#ImportFile.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
     * [.create(importFile)](#ImportFile.create) ⇒ <code>Promise</code>
     * [.update(importFile)](#ImportFile.update) ⇒ <code>Promise</code>
+    * [.deploy(metadataMap, deployDir, retrieveDir)](#ImportFile.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
     * [.preDeployTasks(metadata)](#ImportFile.preDeployTasks) ⇒ <code>Promise</code>
     * [.postRetrieveTasks(metadata)](#ImportFile.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.deleteByKey(customerKey)](#ImportFile.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -3104,6 +3105,20 @@ Updates a single Import File
 | Param | Type | Description |
 | --- | --- | --- |
 | importFile | <code>TYPE.MetadataTypeItem</code> | a single Import File |
+
+<a name="ImportFile.deploy"></a>
+
+### ImportFile.deploy(metadataMap, deployDir, retrieveDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+Deploys metadata
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code> - Promise of keyField => metadata map  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
+| deployDir | <code>string</code> | directory where deploy metadata are saved |
+| retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
 
 <a name="ImportFile.preDeployTasks"></a>
 
