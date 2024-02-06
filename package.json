@@ -76,7 +76,7 @@
         "p-limit": "5.0.0",
         "prettier": "3.2.4",
         "prettier-plugin-sql": "0.18.0",
-        "semver": "7.5.4",
+        "semver": "7.6.0",
         "sfmc-sdk": "2.0.1",
         "simple-git": "3.22.0",
         "toposort": "2.0.2",
