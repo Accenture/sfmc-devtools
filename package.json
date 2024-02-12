@@ -96,7 +96,7 @@
         "eslint-plugin-jsdoc": "48.0.5",
         "eslint-plugin-mocha": "10.2.0",
         "eslint-plugin-prettier": "5.1.2",
-        "eslint-plugin-unicorn": "50.0.1",
+        "eslint-plugin-unicorn": "51.0.1",
         "fast-xml-parser": "4.3.4",
         "husky": "9.0.7",
         "jsdoc-to-markdown": "8.0.1",
