@@ -1,3 +1,3 @@
-npm run docs
-git update-index --add docs/dist/documentation.md
+#npm run docs
+#git update-index --add docs/dist/documentation.md
 npx --no lint-staged
