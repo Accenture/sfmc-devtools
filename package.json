@@ -111,7 +111,9 @@
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx}": [
-            "eslint --fix"
+            "eslint --fix",
+            "npm run docs",
+            "git update-index --add docs/dist/documentation.md"
         ]
     },
     "type": "module"
