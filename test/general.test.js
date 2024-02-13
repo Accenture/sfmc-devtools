@@ -1,4 +1,7 @@
-import chai, { assert, expect } from 'chai';
+import * as chai from 'chai';
+const assert = chai.assert;
+const expect = chai.expect;
+
 import chaiFiles from 'chai-files';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
