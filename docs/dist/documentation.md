@@ -132,6 +132,9 @@ Provides default functionality that can be overwritten by child metadata type cl
 <dt><a href="#Retriever">Retriever</a></dt>
 <dd><p>Retrieves metadata from a business unit and saves it to the local filesystem.</p>
 </dd>
+<dt><a href="#ImportFile">ImportFile</a> ⇐ <code><a href="#MetadataType">MetadataType</a></code></dt>
+<dd><p>ImportFile MetadataType</p>
+</dd>
 </dl>
 
 ## Constants
@@ -241,12 +244,6 @@ helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item
 <dd></dd>
 <dt><a href="#setupSDK">setupSDK(sessionKey, authObject)</a> ⇒ <code><a href="#SDK">SDK</a></code></dt>
 <dd><p>Returns an SDK instance to be used for API calls</p>
-</dd>
-<dt><a href="#getActualJson">getActualJson(customerKey, type, subtype, [buName])</a> ⇒ <code>Promise.&lt;string&gt;</code></dt>
-<dd><p>gets file from Retrieve folder</p>
-</dd>
-<dt><a href="#getActualFile">getActualFile(customerKey, type, subtype, ext)</a> ⇒ <code>string</code></dt>
-<dd><p>gets file from Retrieve folder</p>
 </dd>
 </dl>
 
@@ -3042,6 +3039,134 @@ ImportFile MetadataType
     * [.preDeployTasks(metadata)](#ImportFile.preDeployTasks) ⇒ <code>Promise</code>
     * [.postRetrieveTasks(metadata)](#ImportFile.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
     * [.deleteByKey(customerKey)](#ImportFile.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.retrieve(retrieveDir, [_], [__], [key])](#ImportFile.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache([_], [__], [key])](#ImportFile.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#ImportFile.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
+    * [.create(importFile)](#ImportFile.create) ⇒ <code>Promise</code>
+    * [.update(importFile)](#ImportFile.update) ⇒ <code>Promise</code>
+    * [.deploy(metadataMap, deployDir, retrieveDir)](#ImportFile.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.preDeployTasks(metadata)](#ImportFile.preDeployTasks) ⇒ <code>Promise</code>
+    * [.postRetrieveTasks(metadata)](#ImportFile.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.deleteByKey(customerKey)](#ImportFile.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+
+<a name="ImportFile.retrieve"></a>
+
+### ImportFile.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of Import File.
+Endpoint /automation/v1/imports/ return all Import Files with all details.
+Currently it is not needed to loop over Imports with endpoint /automation/v1/imports/{id}
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [_] | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="ImportFile.retrieveForCache"></a>
+
+### ImportFile.retrieveForCache([_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves import definition metadata for caching
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [_] | <code>void</code> | parameter not used |
+| [__] | <code>void</code> | parameter not used |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="ImportFile.retrieveAsTemplate"></a>
+
+### ImportFile.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
+Retrieve a specific Import Definition by Name
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| name | <code>string</code> | name of the metadata file |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+
+<a name="ImportFile.create"></a>
+
+### ImportFile.create(importFile) ⇒ <code>Promise</code>
+Creates a single Import File
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| importFile | <code>TYPE.MetadataTypeItem</code> | a single Import File |
+
+<a name="ImportFile.update"></a>
+
+### ImportFile.update(importFile) ⇒ <code>Promise</code>
+Updates a single Import File
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| importFile | <code>TYPE.MetadataTypeItem</code> | a single Import File |
+
+<a name="ImportFile.deploy"></a>
+
+### ImportFile.deploy(metadataMap, deployDir, retrieveDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+Deploys metadata
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code> - Promise of keyField => metadata map  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
+| deployDir | <code>string</code> | directory where deploy metadata are saved |
+| retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
+
+<a name="ImportFile.preDeployTasks"></a>
+
+### ImportFile.preDeployTasks(metadata) ⇒ <code>Promise</code>
+prepares a import definition for deployment
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single importDef |
+
+<a name="ImportFile.postRetrieveTasks"></a>
+
+### ImportFile.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - parsed metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="ImportFile.deleteByKey"></a>
+
+### ImportFile.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success flag  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of data extension |
 
 <a name="ImportFile.retrieve"></a>
 
@@ -6317,6 +6442,272 @@ helper for [Retriever.retrieve](Retriever.retrieve) to get all dependencies of t
 | --- | --- | --- |
 | metadataTypes | <code>Array.&lt;TYPE.SupportedMetadataTypes&gt;</code> | list of metadata types to retrieve; can include subtypes! |
 
+<a name="ImportFile"></a>
+
+## ImportFile ⇐ [<code>MetadataType</code>](#MetadataType)
+ImportFile MetadataType
+
+**Kind**: global class  
+**Extends**: [<code>MetadataType</code>](#MetadataType)  
+
+* [ImportFile](#ImportFile) ⇐ [<code>MetadataType</code>](#MetadataType)
+    * [.retrieve(retrieveDir, [_], [__], [key])](#ImportFile.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache([_], [__], [key])](#ImportFile.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#ImportFile.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
+    * [.create(importFile)](#ImportFile.create) ⇒ <code>Promise</code>
+    * [.update(importFile)](#ImportFile.update) ⇒ <code>Promise</code>
+    * [.deploy(metadataMap, deployDir, retrieveDir)](#ImportFile.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.preDeployTasks(metadata)](#ImportFile.preDeployTasks) ⇒ <code>Promise</code>
+    * [.postRetrieveTasks(metadata)](#ImportFile.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.deleteByKey(customerKey)](#ImportFile.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.retrieve(retrieveDir, [_], [__], [key])](#ImportFile.retrieve) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveForCache([_], [__], [key])](#ImportFile.retrieveForCache) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+    * [.retrieveAsTemplate(templateDir, name, templateVariables)](#ImportFile.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
+    * [.create(importFile)](#ImportFile.create) ⇒ <code>Promise</code>
+    * [.update(importFile)](#ImportFile.update) ⇒ <code>Promise</code>
+    * [.deploy(metadataMap, deployDir, retrieveDir)](#ImportFile.deploy) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+    * [.preDeployTasks(metadata)](#ImportFile.preDeployTasks) ⇒ <code>Promise</code>
+    * [.postRetrieveTasks(metadata)](#ImportFile.postRetrieveTasks) ⇒ <code>TYPE.MetadataTypeItem</code>
+    * [.deleteByKey(customerKey)](#ImportFile.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+
+<a name="ImportFile.retrieve"></a>
+
+### ImportFile.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of Import File.
+Endpoint /automation/v1/imports/ return all Import Files with all details.
+Currently it is not needed to loop over Imports with endpoint /automation/v1/imports/{id}
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [_] | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="ImportFile.retrieveForCache"></a>
+
+### ImportFile.retrieveForCache([_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves import definition metadata for caching
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [_] | <code>void</code> | parameter not used |
+| [__] | <code>void</code> | parameter not used |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="ImportFile.retrieveAsTemplate"></a>
+
+### ImportFile.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
+Retrieve a specific Import Definition by Name
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| name | <code>string</code> | name of the metadata file |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+
+<a name="ImportFile.create"></a>
+
+### ImportFile.create(importFile) ⇒ <code>Promise</code>
+Creates a single Import File
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| importFile | <code>TYPE.MetadataTypeItem</code> | a single Import File |
+
+<a name="ImportFile.update"></a>
+
+### ImportFile.update(importFile) ⇒ <code>Promise</code>
+Updates a single Import File
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| importFile | <code>TYPE.MetadataTypeItem</code> | a single Import File |
+
+<a name="ImportFile.deploy"></a>
+
+### ImportFile.deploy(metadataMap, deployDir, retrieveDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+Deploys metadata
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code> - Promise of keyField => metadata map  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
+| deployDir | <code>string</code> | directory where deploy metadata are saved |
+| retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
+
+<a name="ImportFile.preDeployTasks"></a>
+
+### ImportFile.preDeployTasks(metadata) ⇒ <code>Promise</code>
+prepares a import definition for deployment
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single importDef |
+
+<a name="ImportFile.postRetrieveTasks"></a>
+
+### ImportFile.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - parsed metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="ImportFile.deleteByKey"></a>
+
+### ImportFile.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success flag  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of data extension |
+
+<a name="ImportFile.retrieve"></a>
+
+### ImportFile.retrieve(retrieveDir, [_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves Metadata of Import File.
+Endpoint /automation/v1/imports/ return all Import Files with all details.
+Currently it is not needed to loop over Imports with endpoint /automation/v1/imports/{id}
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| retrieveDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| [_] | <code>void</code> | unused parameter |
+| [__] | <code>void</code> | unused parameter |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="ImportFile.retrieveForCache"></a>
+
+### ImportFile.retrieveForCache([_], [__], [key]) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
+Retrieves import definition metadata for caching
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [_] | <code>void</code> | parameter not used |
+| [__] | <code>void</code> | parameter not used |
+| [key] | <code>string</code> | customer key of single item to retrieve |
+
+<a name="ImportFile.retrieveAsTemplate"></a>
+
+### ImportFile.retrieveAsTemplate(templateDir, name, templateVariables) ⇒ <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code>
+Retrieve a specific Import Definition by Name
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeItemObj&gt;</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| templateDir | <code>string</code> | Directory where retrieved metadata directory will be saved |
+| name | <code>string</code> | name of the metadata file |
+| templateVariables | <code>TYPE.TemplateMap</code> | variables to be replaced in the metadata |
+
+<a name="ImportFile.create"></a>
+
+### ImportFile.create(importFile) ⇒ <code>Promise</code>
+Creates a single Import File
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| importFile | <code>TYPE.MetadataTypeItem</code> | a single Import File |
+
+<a name="ImportFile.update"></a>
+
+### ImportFile.update(importFile) ⇒ <code>Promise</code>
+Updates a single Import File
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| importFile | <code>TYPE.MetadataTypeItem</code> | a single Import File |
+
+<a name="ImportFile.deploy"></a>
+
+### ImportFile.deploy(metadataMap, deployDir, retrieveDir) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code>
+Deploys metadata
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise.&lt;TYPE.MetadataTypeMap&gt;</code> - Promise of keyField => metadata map  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadataMap | <code>TYPE.MetadataTypeMap</code> | metadata mapped by their keyField |
+| deployDir | <code>string</code> | directory where deploy metadata are saved |
+| retrieveDir | <code>string</code> | directory where metadata after deploy should be saved |
+
+<a name="ImportFile.preDeployTasks"></a>
+
+### ImportFile.preDeployTasks(metadata) ⇒ <code>Promise</code>
+prepares a import definition for deployment
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise</code> - Promise  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single importDef |
+
+<a name="ImportFile.postRetrieveTasks"></a>
+
+### ImportFile.postRetrieveTasks(metadata) ⇒ <code>TYPE.MetadataTypeItem</code>
+manages post retrieve steps
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>TYPE.MetadataTypeItem</code> - parsed metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| metadata | <code>TYPE.MetadataTypeItem</code> | a single item |
+
+<a name="ImportFile.deleteByKey"></a>
+
+### ImportFile.deleteByKey(customerKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Delete a metadata item from the specified business unit
+
+**Kind**: static method of [<code>ImportFile</code>](#ImportFile)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - deletion success flag  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | Identifier of data extension |
+
 <a name="BusinessUnit"></a>
 
 ## BusinessUnit
@@ -8481,36 +8872,6 @@ Returns an SDK instance to be used for API calls
 | --- | --- | --- |
 | sessionKey | <code>string</code> | key for specific BU |
 | authObject | <code>TYPE.AuthObject</code> | credentials for specific BU |
-
-<a name="getActualJson"></a>
-
-## getActualJson(customerKey, type, subtype, [buName]) ⇒ <code>Promise.&lt;string&gt;</code>
-gets file from Retrieve folder
-
-**Kind**: global function  
-**Returns**: <code>Promise.&lt;string&gt;</code> - file in string form  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| customerKey | <code>string</code> |  | of metadata |
-| type | <code>string</code> |  | of metadata |
-| subtype | <code>string</code> |  | of metadata |
-| [buName] | <code>string</code> | <code>&quot;testBU&quot;</code> | used when we need to test on ParentBU |
-
-<a name="getActualFile"></a>
-
-## getActualFile(customerKey, type, subtype, ext) ⇒ <code>string</code>
-gets file from Retrieve folder
-
-**Kind**: global function  
-**Returns**: <code>string</code> - file path  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| customerKey | <code>string</code> | of metadata |
-| type | <code>string</code> | of metadata |
-| subtype | <code>string</code> | of metadata |
-| ext | <code>string</code> | file extension |
 
 <a name="TypeKeyCombo"></a>
 
