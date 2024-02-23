@@ -42,9 +42,11 @@ describe('type: asset', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
+
     describe('Retrieve ================', () => {
         it('Should retrieve a asset & ensure non-ssjs code is not removed', async () => {
             // WHEN
@@ -84,6 +86,7 @@ describe('type: asset', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN

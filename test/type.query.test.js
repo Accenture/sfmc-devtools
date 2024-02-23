@@ -13,6 +13,7 @@ describe('type: query', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
@@ -53,6 +54,7 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should retrieve one specific query by key', async () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['query'], ['testExisting_query']);
@@ -80,6 +82,7 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should retrieve one specific query via --like', async () => {
             // WHEN
             handler.setOptions({ like: { key: '%Existing_query' } });
@@ -110,6 +113,7 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should not retrieve any query via --like and key due to a mismatching filter', async () => {
             // WHEN
             handler.setOptions({ like: { key: 'NotExisting_query' } });
@@ -136,10 +140,12 @@ describe('type: query', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & upsert a query', async () => {
             // WHEN
             const resultDeploy = await handler.deploy(
@@ -189,6 +195,7 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should deploy and execute with --execute', async () => {
             handler.setOptions({ execute: true });
             // WHEN
@@ -221,10 +228,12 @@ describe('type: query', () => {
             return;
         });
     });
+
     describe('FixKeys ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should change the key during update with --changeKeyValue', async () => {
             // WHEN
             await handler.retrieve(
@@ -275,6 +284,7 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should change the key during update with --changeKeyField', async () => {
             // WHEN
             await handler.retrieve(
@@ -321,6 +331,7 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should run fixKeys but not find fixable keys and hence stop', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false } });
@@ -351,6 +362,7 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should fixKeys by key WITHOUT re-retrieving dependent types', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false } });
@@ -387,6 +399,7 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should fixKeys by key WITHOUT re-retrieving dependent types and then --execute', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, execute: true });
@@ -427,6 +440,7 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should fixKeys by key AND re-retrieve dependent types', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: true } });
@@ -463,6 +477,7 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should fixKeys by key AND re-retrieve dependent types and then --execute', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: true }, execute: true });
@@ -503,6 +518,7 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should fixKeys via --like WITHOUT re-retrieving dependent types', async () => {
             // WHEN
             handler.setOptions({
@@ -540,6 +556,7 @@ describe('type: query', () => {
             return;
         });
     });
+
     describe('Templating ================', () => {
         it('Should create a query template via retrieveAsTemplate and build it', async () => {
             // GIVEN there is a template
@@ -597,6 +614,7 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should create a query template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['query']);
@@ -653,6 +671,7 @@ describe('type: query', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN
@@ -668,6 +687,7 @@ describe('type: query', () => {
             return;
         });
     });
+
     describe('CI/CD ================', () => {
         it('Should return a list of files based on their type and key', async () => {
             // WHEN
@@ -695,6 +715,7 @@ describe('type: query', () => {
             return;
         });
     });
+
     describe('Execute ================', () => {
         it('Should start a query by key', async () => {
             const executedKeys = await handler.execute('testInstance/testBU', 'query', [
@@ -713,6 +734,7 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should start a query selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExist%query' } });
             const executedKeys = await handler.execute('testInstance/testBU', 'query');
@@ -729,6 +751,7 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should not start executing a query because key and --like was specified', async () => {
             handler.setOptions({ like: { key: 'testExisting%' } });
             const executedKeys = await handler.execute('testInstance/testBU', 'query', [

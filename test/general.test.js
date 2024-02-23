@@ -11,26 +11,33 @@ describe('GENERAL', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
 
     describe('init ================', () => {
         it('should init a local project without downloading BUs');
+
         it('should init a local project and download all BUs');
     });
+
     describe('join ================', () => {
         it('should clone a project from git');
     });
+
     describe('upgrade ================', () => {
         it('should upgrade a project to the latest version');
     });
+
     describe('reloadBUs ================', () => {
         it('should load all BUs from the server and refresh the config');
     });
+
     describe('selectTypes ================', () => {
         it('should change which types are selected for default retrieval');
     });
+
     describe('explainTypes ================', () => {
         it('without options', () => {
             handler.explainTypes();
@@ -38,6 +45,7 @@ describe('GENERAL', () => {
 
             return;
         });
+
         it('with --json set', () => {
             handler.setOptions({ json: true });
             const typeArr = handler.explainTypes();
@@ -76,6 +84,7 @@ describe('GENERAL', () => {
             return;
         });
     });
+
     describe('createDeltaPkg ================', () => {
         it('should show diff to master branch');
         // mcdev createDeltaPkg master # resolves to master..HEAD

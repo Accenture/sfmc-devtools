@@ -11,9 +11,11 @@ describe('type: attributeSet', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
+
     describe('Retrieve ================', () => {
         it('Should retrieve a attributeSet', async () => {
             // WHEN

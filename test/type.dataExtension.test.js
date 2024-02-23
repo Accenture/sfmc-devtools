@@ -13,9 +13,11 @@ describe('type: dataExtension', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
+
     describe('Retrieve ================', () => {
         it('Should retrieve a dataExtension', async () => {
             // WHEN
@@ -49,6 +51,7 @@ describe('type: dataExtension', () => {
             );
             return;
         });
+
         it('Should retrieve a shared dataExtension', async () => {
             // WHEN
             await handler.retrieve('testInstance/_ParentBU_', ['dataExtension']);
@@ -92,10 +95,12 @@ describe('type: dataExtension', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & update a dataExtension including a field rename', async () => {
             // WHEN
             const deployResult = await handler.deploy('testInstance/testBU', ['dataExtension']);
@@ -136,6 +141,7 @@ describe('type: dataExtension', () => {
             );
             return;
         });
+
         it('Should create & update a shared dataExtension', async () => {
             // WHEN
             const deployResult = await handler.deploy('testInstance/_ParentBU_', ['dataExtension']);
@@ -184,6 +190,7 @@ describe('type: dataExtension', () => {
             );
             return;
         });
+
         it('Should create & update a shared dataExtension with --fixShared & --skipInteraction', async () => {
             // WHEN
             handler.setOptions({ fixShared: 'testBU', skipInteraction: true, _runningTest: true });
@@ -235,6 +242,7 @@ describe('type: dataExtension', () => {
             return;
         });
     });
+
     describe('Templating ================', () => {
         it('Should create a dataExtension template via retrieveAsTemplate and build it', async () => {
             // GIVEN there is a template
@@ -288,6 +296,7 @@ describe('type: dataExtension', () => {
             );
             return;
         });
+
         it('Should create a dataExtension template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['dataExtension']);
@@ -339,6 +348,7 @@ describe('type: dataExtension', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
         it('Should delete the dataExtension', async () => {
             // WHEN
@@ -353,6 +363,7 @@ describe('type: dataExtension', () => {
             assert.equal(isDeleted, true, 'should have deleted the item');
             return;
         });
+
         it('Should delete the dataExtensionField', async () => {
             // WHEN
             const isDeleted = await handler.deleteByKey(
@@ -367,6 +378,7 @@ describe('type: dataExtension', () => {
             return;
         });
     });
+
     describe('CI/CD ================', () => {
         it('Should return a list of files based on their type and key', async () => {
             // WHEN

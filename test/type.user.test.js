@@ -14,9 +14,11 @@ describe('type: user', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
+
     describe('Retrieve ================', () => {
         it('Should retrieve a user', async () => {
             // WHEN
@@ -61,6 +63,7 @@ describe('type: user', () => {
             );
             return;
         });
+
         it('Should retrieve a specific user but not run document', async () => {
             // WHEN
             await handler.retrieve('testInstance/_ParentBU_', ['user'], ['testExisting_user']);
@@ -78,10 +81,12 @@ describe('type: user', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & upsert a user', async () => {
             // WHEN
             const expectedCache = [
@@ -130,6 +135,7 @@ describe('type: user', () => {
             );
             return;
         });
+
         it('Should not deploy user with Marketing Cloud role', async () => {
             // WHEN
             const expectedCache = [
@@ -163,6 +169,7 @@ describe('type: user', () => {
             return;
         });
     });
+
     describe('Templating ================', () => {
         // it('Should create a user template via retrieveAsTemplate and build it', async () => {});
         it('Should create a user template via buildTemplate and build it', async () => {

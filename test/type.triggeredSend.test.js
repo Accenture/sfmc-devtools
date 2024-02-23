@@ -11,6 +11,7 @@ describe('type: triggeredSend', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
@@ -41,10 +42,12 @@ describe('type: triggeredSend', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & upsert a triggeredSend', async () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['triggeredSend']);
@@ -78,6 +81,7 @@ describe('type: triggeredSend', () => {
             return;
         });
     });
+
     describe('Templating ================', () => {
         it('Should create a triggeredSend template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
@@ -128,6 +132,7 @@ describe('type: triggeredSend', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN
@@ -143,12 +148,15 @@ describe('type: triggeredSend', () => {
             return;
         });
     });
+
     describe('Refresh ================', () => {
         it('Should refresh a triggeredSend by key');
     });
+
     describe('Start (Execute) ================', () => {
         it('Should start a triggeredSend by key');
     });
+
     describe('Pause ================', () => {
         it('Should pause a triggeredSend by key');
     });

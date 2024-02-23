@@ -13,6 +13,7 @@ describe('type: mobileKeyword', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
@@ -55,10 +56,12 @@ describe('type: mobileKeyword', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create (but not update) a mobileKeyword', async () => {
             // WHEN
             await handler.deploy(
@@ -103,6 +106,7 @@ describe('type: mobileKeyword', () => {
             );
             return;
         });
+
         it('Should not create a mobileKeyword with wrong type', async () => {
             // WHEN
             await handler.deploy(
@@ -122,6 +126,7 @@ describe('type: mobileKeyword', () => {
             return;
         });
     });
+
     describe('Templating ================', () => {
         it('Should create a mobileKeyword template via retrieveAsTemplate and build it', async () => {
             // GIVEN there is a template
@@ -168,6 +173,7 @@ describe('type: mobileKeyword', () => {
             );
             return;
         });
+
         it('Should create a mobileKeyword template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['mobileKeyword']);
@@ -243,6 +249,7 @@ describe('type: mobileKeyword', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN
@@ -258,6 +265,7 @@ describe('type: mobileKeyword', () => {
             return;
         });
     });
+
     describe('CI/CD ================', () => {
         it('Should return a list of files based on their type and key', async () => {
             // WHEN

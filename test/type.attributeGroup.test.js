@@ -11,9 +11,11 @@ describe('type: attributeGroup', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
+
     describe('Retrieve ================', () => {
         it('Should retrieve a attributeGroup', async () => {
             // WHEN

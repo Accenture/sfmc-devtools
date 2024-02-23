@@ -13,6 +13,7 @@ describe('type: mobileMessage', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
@@ -46,10 +47,12 @@ describe('type: mobileMessage', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & update items', async () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['mobileMessage']);
@@ -90,6 +93,7 @@ describe('type: mobileMessage', () => {
             );
             return;
         });
+
         it('Should NOT change the key during update with --changeKeyValue and instead fail due to missing support', async () => {
             // WHEN
             handler.setOptions({ changeKeyValue: 'updatedKey' });
@@ -103,6 +107,7 @@ describe('type: mobileMessage', () => {
             return;
         });
     });
+
     describe('Templating ================', () => {
         it('Should create a mobileMessage template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
@@ -161,6 +166,7 @@ describe('type: mobileMessage', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN
@@ -176,6 +182,7 @@ describe('type: mobileMessage', () => {
             return;
         });
     });
+
     describe('CI/CD ================', () => {
         it('Should return a list of files based on their type and key', async () => {
             // WHEN
