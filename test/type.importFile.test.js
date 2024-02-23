@@ -26,17 +26,22 @@ describe('type: importFile', () => {
             const result = cache.getCache();
             assert.equal(
                 result.importFile ? Object.keys(result.importFile).length : 0,
-                1,
-                'only one importFile expected'
+                2,
+                'only 2 importFile expected'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_importFile', 'importFile'),
                 await testUtils.getExpectedJson('9999999', 'importFile', 'get'),
                 'returned JSON was not equal expected'
             );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_importFileSMS', 'importFile'),
+                await testUtils.getExpectedJson('9999999', 'importFile', 'get-sms'),
+                'returned JSON was not equal expected'
+            );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                11,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -65,7 +70,7 @@ describe('type: importFile', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                11,
+                13,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -87,8 +92,8 @@ describe('type: importFile', () => {
             const result = cache.getCache();
             assert.equal(
                 result.importFile ? Object.keys(result.importFile).length : 0,
-                2,
-                'two importFiles expected'
+                3,
+                '3 importFiles expected'
             );
             // confirm created item
             assert.deepEqual(
@@ -105,7 +110,7 @@ describe('type: importFile', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                13,
+                16,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -151,7 +156,7 @@ describe('type: importFile', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                11,
+                13,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -197,7 +202,7 @@ describe('type: importFile', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                11,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

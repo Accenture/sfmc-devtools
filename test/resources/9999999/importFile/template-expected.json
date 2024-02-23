@@ -12,7 +12,6 @@
     "fieldMappingType": "InferFromColumnHeadings",
     "fieldMappings": [],
     "fileNamingPattern": "blabla",
-    "fileTransferLocationTypeId": 0,
     "fileType": "CSV",
     "filter": "",
     "hasColumnHeader": true,
