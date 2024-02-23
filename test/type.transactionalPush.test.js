@@ -11,6 +11,7 @@ describe('type: transactionalPush', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
@@ -41,10 +42,12 @@ describe('type: transactionalPush', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & upsert a transactionalPush', async () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['transactionalPush']);
@@ -77,6 +80,7 @@ describe('type: transactionalPush', () => {
             );
             return;
         });
+
         it('Should NOT change the key during update with --changeKeyValue and instead fail due to missing support', async () => {
             // WHEN
             handler.setOptions({ changeKeyValue: 'updatedKey' });
@@ -94,6 +98,7 @@ describe('type: transactionalPush', () => {
             return;
         });
     });
+
     describe('Templating ================', () => {
         // it.skip('Should create a transactionalPush template via retrieveAsTemplate and build it');
         it('Should create a transactionalPush template via buildTemplate and build it', async () => {
@@ -143,6 +148,7 @@ describe('type: transactionalPush', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
         // TODO: add this test
         it('Should delete the item'); // , async () => {

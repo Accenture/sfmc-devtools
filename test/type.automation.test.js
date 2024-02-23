@@ -13,9 +13,11 @@ describe('type: automation', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
+
     describe('Retrieve ================', () => {
         it('Should retrieve a automation', async () => {
             // WHEN
@@ -54,10 +56,12 @@ describe('type: automation', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & update a automation', async () => {
             // WHEN
             const deployResult = await handler.deploy(
@@ -127,6 +131,7 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should update & schedule an automation with --schedule option', async () => {
             // WHEN
             handler.setOptions({ schedule: true });
@@ -196,6 +201,7 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should update & runOnce an automation with --execute option', async () => {
             // WHEN
             handler.setOptions({ execute: true });
@@ -265,10 +271,12 @@ describe('type: automation', () => {
             return;
         });
     });
+
     describe('FixKeys ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should run fixKeys but not find fixable keys and hence stop', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false } });
@@ -299,6 +307,7 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should fixKeys by key w/o re-retrieving, auto-schedule', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false } });
@@ -343,6 +352,7 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should fixKeys by key w/o re-retrieving, auto-schedule and then --execute', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, execute: true });
@@ -387,6 +397,7 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should fixKeys by key w/o re-retrieving, auto-schedule and then --schedule', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, schedule: true });
@@ -431,6 +442,7 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should fixKeys by key w/o re-retrieving, deploy paused', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false } });
@@ -471,6 +483,7 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should fixKeys by key w/o re-retrieving, deploy paused and then --execute', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, execute: true });
@@ -512,6 +525,7 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should fixKeys by key w/o re-retrieving, deploy paused and then --schedule', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, schedule: true });
@@ -554,6 +568,7 @@ describe('type: automation', () => {
             return;
         });
     });
+
     describe('Templating ================', () => {
         it('Should create a automation template via retrieveAsTemplate and build it', async () => {
             // GIVEN there is a template
@@ -604,6 +619,7 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should create a automation template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['automation']);
@@ -652,6 +668,7 @@ describe('type: automation', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN
@@ -667,6 +684,7 @@ describe('type: automation', () => {
             return;
         });
     });
+
     describe('CI/CD ================', () => {
         it('Should return a list of files based on their type and key', async () => {
             // WHEN
@@ -694,6 +712,7 @@ describe('type: automation', () => {
             return;
         });
     });
+
     describe('Schedule ================', () => {
         it('Should schedule an automation by key', async () => {
             const executedKeys = await handler.schedule('testInstance/testBU', 'automation', [
@@ -712,6 +731,7 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should schedule an automation selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExist%automation' } });
             const executedKeys = await handler.schedule('testInstance/testBU', 'automation');
@@ -728,6 +748,7 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should not schedule executing an automation because key and --like was specified', async () => {
             handler.setOptions({ like: { key: 'testExisting%' } });
             const executedKeys = await handler.schedule('testInstance/testBU', 'automation', [
@@ -742,6 +763,7 @@ describe('type: automation', () => {
             return;
         });
     });
+
     describe('Execute ================', () => {
         it('Should execute --schedule an automation by key', async () => {
             handler.setOptions({ schedule: true });
@@ -761,6 +783,7 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should execute --schedule an automation selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExist%automation' }, schedule: true });
             const executedKeys = await handler.execute('testInstance/testBU', 'automation');
@@ -777,6 +800,7 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should not execute --schedule executing an automation because key and --like was specified', async () => {
             handler.setOptions({ like: { key: 'testExisting%' }, schedule: true });
             const executedKeys = await handler.execute('testInstance/testBU', 'automation', [
@@ -790,6 +814,7 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should runOnce an automation by key', async () => {
             const executedKeys = await handler.execute('testInstance/testBU', 'automation', [
                 'testExisting_automation',
@@ -807,6 +832,7 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should runOnce an automation selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExist%automation' } });
             const executedKeys = await handler.execute('testInstance/testBU', 'automation');
@@ -824,6 +850,7 @@ describe('type: automation', () => {
 
             return;
         });
+
         it('Should not runOnce executing an automation because key and --like was specified', async () => {
             handler.setOptions({ like: { key: 'testExisting%' } });
             const executedKeys = await handler.execute('testInstance/testBU', 'automation', [
@@ -839,6 +866,7 @@ describe('type: automation', () => {
             return;
         });
     });
+
     describe('Pause ================', () => {
         it('Should pause a automation by key', async () => {
             const pausedKeys = await handler.pause('testInstance/testBU', 'automation', [
@@ -857,6 +885,7 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should pause a automation selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExisting_a%n_pause' } });
             const pausedKeys = await handler.pause('testInstance/testBU', 'automation');
@@ -873,6 +902,7 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should not pause automation because key and --like was specified', async () => {
             handler.setOptions({ like: { key: 'testExisting_a%n_pause' } });
             const pausedKeys = await handler.pause('testInstance/testBU', 'automation', [

@@ -11,6 +11,7 @@ describe('type: journey', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
@@ -41,10 +42,12 @@ describe('type: journey', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & upsert a journey', async () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['journey']);
@@ -79,6 +82,7 @@ describe('type: journey', () => {
             );
             return;
         });
+
         it('Should NOT change the key during update with --changeKeyValue and instead fail due to missing support', async () => {
             // WHEN
             handler.setOptions({ changeKeyValue: 'updatedKey' });
@@ -92,6 +96,7 @@ describe('type: journey', () => {
             return;
         });
     });
+
     describe('Templating ================', () => {
         it('Should create a journey template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
@@ -141,6 +146,7 @@ describe('type: journey', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
         it('Should NOT delete the item due to missing version', async () => {
             // WHEN
@@ -155,6 +161,7 @@ describe('type: journey', () => {
             assert.equal(isDeleted, false, 'should not have deleted the item');
             return;
         });
+
         it('Should NOT delete the item due to unknown version', async () => {
             // WHEN
             const isDeleted = await handler.deleteByKey(
@@ -168,6 +175,7 @@ describe('type: journey', () => {
             assert.equal(isDeleted, false, 'should not have deleted the item');
             return;
         });
+
         it('Should delete the item with version', async () => {
             // WHEN
             const isDeleted = await handler.deleteByKey(

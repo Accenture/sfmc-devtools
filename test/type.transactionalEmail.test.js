@@ -11,6 +11,7 @@ describe('type: transactionalEmail', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
@@ -41,10 +42,12 @@ describe('type: transactionalEmail', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & upsert a transactionalEmail', async () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['transactionalEmail']);
@@ -77,6 +80,7 @@ describe('type: transactionalEmail', () => {
             );
             return;
         });
+
         it('Should NOT change the key during update with --changeKeyValue and instead fail due to missing support', async () => {
             // WHEN
             handler.setOptions({ changeKeyValue: 'updatedKey' });
@@ -94,6 +98,7 @@ describe('type: transactionalEmail', () => {
             return;
         });
     });
+
     describe('Templating ================', () => {
         // it.skip('Should create a transactionalEmail template via retrieveAsTemplate and build it');
         it('Should create a transactionalEmail template via buildTemplate and build it', async () => {
@@ -142,6 +147,7 @@ describe('type: transactionalEmail', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN
