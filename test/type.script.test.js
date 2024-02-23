@@ -1,4 +1,7 @@
-import chai, { assert, expect } from 'chai';
+import * as chai from 'chai';
+const assert = chai.assert;
+const expect = chai.expect;
+
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
@@ -10,6 +13,7 @@ describe('type: script', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
@@ -111,6 +115,7 @@ describe('type: script', () => {
             );
             return;
         });
+
         it('Should retrieve one specific script by key', async () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['script'], ['testExisting_script']);
@@ -151,6 +156,7 @@ describe('type: script', () => {
             );
             return;
         });
+
         it('Should retrieve one specific script via --like', async () => {
             // WHEN
             handler.setOptions({ like: { key: '%Existing_script' } });
@@ -192,6 +198,7 @@ describe('type: script', () => {
             );
             return;
         });
+
         it('Should not retrieve any script via --like and key due to a mismatching filter', async () => {
             // WHEN
             handler.setOptions({ like: { key: 'NotExisting_script' } });
@@ -217,10 +224,12 @@ describe('type: script', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & upsert a script', async () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['script']);
@@ -259,6 +268,7 @@ describe('type: script', () => {
             return;
         });
     });
+
     describe('Templating ================', () => {
         it('Should create a script template via retrieveAsTemplate and build it', async () => {
             // GIVEN there is a template
@@ -316,6 +326,7 @@ describe('type: script', () => {
             );
             return;
         });
+
         it('Should create a script template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['script']);
@@ -372,6 +383,7 @@ describe('type: script', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN
@@ -386,6 +398,7 @@ describe('type: script', () => {
             return;
         });
     });
+
     describe('CI/CD ================', () => {
         it('Should return a list of files based on their type and key', async () => {
             // WHEN
@@ -418,5 +431,6 @@ describe('type: script', () => {
             return;
         });
     });
+
     describe('Execute ================', () => {});
 });

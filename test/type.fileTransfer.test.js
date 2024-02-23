@@ -1,4 +1,6 @@
-import chai, { assert } from 'chai';
+import * as chai from 'chai';
+const assert = chai.assert;
+
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
@@ -9,6 +11,7 @@ describe('type: fileTransfer', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
@@ -39,10 +42,12 @@ describe('type: fileTransfer', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & upsert a fileTransfer', async () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['fileTransfer']);
@@ -76,6 +81,7 @@ describe('type: fileTransfer', () => {
             return;
         });
     });
+
     describe('Templating ================', () => {
         it('Should create a fileTransfer template via retrieveAsTemplate and build it', async () => {
             // buildTemplate
@@ -120,6 +126,7 @@ describe('type: fileTransfer', () => {
             );
             return;
         });
+
         it('Should create a fileTransfer template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['fileTransfer']);
@@ -166,6 +173,7 @@ describe('type: fileTransfer', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN

@@ -242,6 +242,12 @@ helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item
 <dt><a href="#setupSDK">setupSDK(sessionKey, authObject)</a> ⇒ <code><a href="#SDK">SDK</a></code></dt>
 <dd><p>Returns an SDK instance to be used for API calls</p>
 </dd>
+<dt><a href="#getActualJson">getActualJson(customerKey, type, subtype, [buName])</a> ⇒ <code>Promise.&lt;string&gt;</code></dt>
+<dd><p>gets file from Retrieve folder</p>
+</dd>
+<dt><a href="#getActualFile">getActualFile(customerKey, type, subtype, ext)</a> ⇒ <code>string</code></dt>
+<dd><p>gets file from Retrieve folder</p>
+</dd>
 </dl>
 
 ## Typedefs
@@ -8475,6 +8481,36 @@ Returns an SDK instance to be used for API calls
 | --- | --- | --- |
 | sessionKey | <code>string</code> | key for specific BU |
 | authObject | <code>TYPE.AuthObject</code> | credentials for specific BU |
+
+<a name="getActualJson"></a>
+
+## getActualJson(customerKey, type, subtype, [buName]) ⇒ <code>Promise.&lt;string&gt;</code>
+gets file from Retrieve folder
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;string&gt;</code> - file in string form  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| customerKey | <code>string</code> |  | of metadata |
+| type | <code>string</code> |  | of metadata |
+| subtype | <code>string</code> |  | of metadata |
+| [buName] | <code>string</code> | <code>&quot;testBU&quot;</code> | used when we need to test on ParentBU |
+
+<a name="getActualFile"></a>
+
+## getActualFile(customerKey, type, subtype, ext) ⇒ <code>string</code>
+gets file from Retrieve folder
+
+**Kind**: global function  
+**Returns**: <code>string</code> - file path  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | of metadata |
+| type | <code>string</code> | of metadata |
+| subtype | <code>string</code> | of metadata |
+| ext | <code>string</code> | file extension |
 
 <a name="TypeKeyCombo"></a>
 
