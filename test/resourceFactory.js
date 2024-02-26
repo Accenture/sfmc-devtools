@@ -236,7 +236,9 @@ export const soapUrl =
 export const handleRESTRequest = async (config) => {
     try {
         // check if filtered
-        const urlObj = new URL(config.baseURL + config.url.slice(1));
+        const urlObj = new URL(
+            config.baseURL + (config.url.startsWith('/') ? config.url.slice(1) : config.url)
+        );
         let filterName;
         if (urlObj.searchParams.get('$filter')) {
             filterName = urlObj.searchParams.get('$filter').split(' eq ')[1];
@@ -250,8 +252,52 @@ export const handleRESTRequest = async (config) => {
                 config.method + '-response'
             )
             .replace(':', '_'); // replace : with _ for Windows
+        const testPathFilter = filterName
+            ? testPath +
+              '-' +
+              urlObj.searchParams.get('$filter').replaceAll(' eq ', '=').replaceAll(' ', '')
+            : null;
+        if (testPathFilter && (await fs.pathExists(testPathFilter + '.json'))) {
+            // build filter logic to ensure templating works
+            if (filterName) {
+                const response = JSON.parse(
+                    await fs.readFile(testPathFilter + '.json', {
+                        encoding: 'utf8',
+                    })
+                );
+                response.items = response.items.filter((def) => def.name == filterName);
+                response.count = response.items.length;
+                return [200, JSON.stringify(response)];
+            } else {
+                return [
+                    200,
+                    await fs.readFile(testPathFilter + '.json', {
+                        encoding: 'utf8',
+                    }),
+                ];
+            }
+        } else if (testPathFilter && (await fs.pathExists(testPathFilter + '.txt'))) {
+            return [
+                200,
+                await fs.readFile(testPathFilter + '.txt', {
+                    encoding: 'utf8',
+                }),
+            ];
+        } else if (await fs.pathExists(testPath + '.json')) {
+            if (testPathFilter) {
+                /* eslint-disable no-console */
+                console.log(
+                    `${color.bgYellow}${color.fgBlack}TEST-WARNING${
+                        color.reset
+                    }: You are loading your reponse from ${
+                        testPath + '.json'
+                    } instead of the more specific ${
+                        testPathFilter + '.json'
+                    }. Make sure this is intended`
+                );
+                /* eslint-enable no-console */
+            }
 
-        if (await fs.pathExists(testPath + '.json')) {
             // build filter logic to ensure templating works
             if (filterName) {
                 const response = JSON.parse(
@@ -271,6 +317,20 @@ export const handleRESTRequest = async (config) => {
                 ];
             }
         } else if (await fs.pathExists(testPath + '.txt')) {
+            if (testPathFilter) {
+                /* eslint-disable no-console */
+                console.log(
+                    `${color.bgYellow}${color.fgBlack}TEST-WARNING${
+                        color.reset
+                    }: You are loading your reponse from ${
+                        testPath + '.txt'
+                    } instead of the more specific ${
+                        testPathFilter + '.txt'
+                    }. Make sure this is intended`
+                );
+                /* eslint-enable no-console */
+            }
+
             return [
                 200,
                 await fs.readFile(testPath + '.txt', {
@@ -280,7 +340,7 @@ export const handleRESTRequest = async (config) => {
         } else {
             /* eslint-disable no-console */
             console.log(
-                `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}: Please create file ${testPath}.json/.txt`
+                `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}: Please create file ${testPath}.json/.txt${filterName ? ` or ${testPathFilter}.json/.txt` : ''}`
             );
             /* eslint-enable no-console */
             process.exitCode = 404;

@@ -1,4 +1,7 @@
-import chai, { assert, expect } from 'chai';
+import * as chai from 'chai';
+const assert = chai.assert;
+const expect = chai.expect;
+
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
@@ -10,6 +13,7 @@ describe('type: transactionalSMS', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
@@ -45,10 +49,12 @@ describe('type: transactionalSMS', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & upsert a transactionalSMS', async () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['transactionalSMS']);
@@ -91,6 +97,7 @@ describe('type: transactionalSMS', () => {
             );
             return;
         });
+
         it('Should NOT change the key during update with --changeKeyValue and instead fail due to missing support', async () => {
             // WHEN
             handler.setOptions({ changeKeyValue: 'updatedKey' });
@@ -108,6 +115,7 @@ describe('type: transactionalSMS', () => {
             return;
         });
     });
+
     describe('Templating ================', () => {
         // it.skip('Should create a transactionalSMS template via retrieveAsTemplate and build it');
         it('Should create a transactionalSMS template via buildTemplate and build it', async () => {
@@ -170,6 +178,7 @@ describe('type: transactionalSMS', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
         // TODO: add this test
         it('Should delete the item'); // , async () => {
@@ -182,6 +191,7 @@ describe('type: transactionalSMS', () => {
         //     return;
         // });
     });
+
     describe('CI/CD ================', () => {
         // TODO: add this test
         it('Should return a list of files based on their type and key'); // , async () => {

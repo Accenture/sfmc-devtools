@@ -1,6 +1,3 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 # ### git commit message template ###
 git config commit.template .git/templatemessage
 TICKETID=`git rev-parse --abbrev-ref HEAD | LC_ALL=en_US.utf8 grep -oP '^((feature|bug|bugfix|fix|hotfix|task|chore)\/)?\K\d{1,7}' || true`
