@@ -1,4 +1,6 @@
+echo "[PRE-COMMIT] Re-creating documentation..."
 npm run docs
 git update-index --add docs/dist/documentation.md
 
+echo "[PRE-COMMIT] Running lint-staged..."
 npx --no lint-staged
