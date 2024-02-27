@@ -1,0 +1,9 @@
+<script runat="server">
+    //dummy
+</script>
+line1
+%%[
+    SET @test = 'bla bla'
+]%%
+line2 %%= v(@test) =%% still line2; collapsed to line2 because
+it's assumed HTML

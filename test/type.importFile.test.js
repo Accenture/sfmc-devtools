@@ -1,4 +1,6 @@
-import chai, { assert } from 'chai';
+import * as chai from 'chai';
+const assert = chai.assert;
+
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
@@ -9,12 +11,43 @@ describe('type: importFile', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
 
     describe('Retrieve ================', () => {
         it('Should retrieve a importFile', async () => {
+            // WHEN
+            await handler.retrieve('testInstance/testBU', ['importFile']);
+            // THEN
+            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.importFile ? Object.keys(result.importFile).length : 0,
+                2,
+                'only 2 importFile expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_importFile', 'importFile'),
+                await testUtils.getExpectedJson('9999999', 'importFile', 'get'),
+                'returned JSON was not equal expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_importFileSMS', 'importFile'),
+                await testUtils.getExpectedJson('9999999', 'importFile', 'get-sms'),
+                'returned JSON was not equal expected'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                14,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should retrieve a importFile by key', async () => {
             // WHEN
             await handler.retrieve(
                 'testInstance/testBU',
@@ -37,16 +70,18 @@ describe('type: importFile', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                13,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & upsert a importFile', async () => {
             // WHEN
 
@@ -58,7 +93,7 @@ describe('type: importFile', () => {
             assert.equal(
                 result.importFile ? Object.keys(result.importFile).length : 0,
                 3,
-                'three importFiles expected'
+                '3 importFiles expected'
             );
             // confirm created item
             assert.deepEqual(
@@ -75,12 +110,13 @@ describe('type: importFile', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                13,
+                16,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
     });
+
     describe('Templating ================', () => {
         it('Should create a importFile template via retrieveAsTemplate and build it', async () => {
             // buildTemplate
@@ -120,11 +156,12 @@ describe('type: importFile', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                13,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
+
         it('Should create a importFile template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['importFile']);
@@ -165,38 +202,33 @@ describe('type: importFile', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
     });
+
     describe('Delete ================', () => {
-        it('Should NOT delete the item', async () => {
+        it('Should delete the item', async () => {
             // WHEN
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'importFile',
-                'testExisting_fileTranfer'
+                'testExisting_importFile'
             );
             // THEN
-            assert.equal(
-                process.exitCode,
-                1,
-                'deleteByKey should have thrown an error due to lack of support'
-            );
-            assert.equal(
-                isDeleted,
-                false,
-                'deleteByKey should have returned false due to lack of support'
-            );
+            assert.equal(process.exitCode, 0, 'deleteByKey should not have thrown an error');
+            assert.equal(isDeleted, true, 'deleteByKey should have returned true');
             return;
         });
     });
+
     describe('Update notifications ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should set email notification address and activate it', async () => {
             handler.setOptions({ completionEmail: 'test@test.com' });
             // WHEN

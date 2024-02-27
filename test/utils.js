@@ -156,6 +156,9 @@ export function mockSetup(isDeploy) {
         'node_modules/prettier-plugin-sql': fsmock.load(
             path.resolve(__dirname, '../node_modules/prettier-plugin-sql')
         ),
+        'node_modules/beauty-amp-core2': fsmock.load(
+            path.resolve(__dirname, '../node_modules/beauty-amp-core2')
+        ),
         'node_modules/node-sql-parser': fsmock.load(
             path.resolve(__dirname, '../node_modules/node-sql-parser')
         ),
@@ -165,6 +168,7 @@ export function mockSetup(isDeploy) {
         'node_modules/sql-formatter': fsmock.load(
             path.resolve(__dirname, '../node_modules/sql-formatter')
         ),
+        'node_modules/jsox': fsmock.load(path.resolve(__dirname, '../node_modules/jsox')),
         'node_modules/nearley': fsmock.load(path.resolve(__dirname, '../node_modules/nearley')),
     };
     if (isDeploy) {
