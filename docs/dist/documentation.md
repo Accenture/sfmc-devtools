@@ -242,6 +242,12 @@ helper for <a href="DataExtension.#fixShared_item">DataExtension.#fixShared_item
 <dt><a href="#setupSDK">setupSDK(sessionKey, authObject)</a> ⇒ <code><a href="#SDK">SDK</a></code></dt>
 <dd><p>Returns an SDK instance to be used for API calls</p>
 </dd>
+<dt><a href="#getActualJson">getActualJson(customerKey, type, subtype, [buName])</a> ⇒ <code>Promise.&lt;string&gt;</code></dt>
+<dd><p>gets file from Retrieve folder</p>
+</dd>
+<dt><a href="#getActualFile">getActualFile(customerKey, type, subtype, ext)</a> ⇒ <code>string</code></dt>
+<dd><p>gets file from Retrieve folder</p>
+</dd>
 </dl>
 
 ## Typedefs
@@ -533,6 +539,7 @@ main class
     * [.findBUs(credentialsName)](#Mcdev.findBUs) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.document(businessUnit, type)](#Mcdev.document) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKey(businessUnit, type, customerKey)](#Mcdev.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.resolveId(businessUnit, type, id)](#Mcdev.resolveId) ⇒ <code>Promise.&lt;{key:string, name:string, path:string}&gt;</code>
     * [.refresh(businessUnit, type, [keyArr])](#Mcdev.refresh) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.badKeys(businessUnit)](#Mcdev.badKeys) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.retrieveAsTemplate(businessUnit, selectedType, name, market)](#Mcdev.retrieveAsTemplate) ⇒ <code>Promise.&lt;TYPE.MultiMetadataTypeList&gt;</code>
@@ -702,6 +709,20 @@ deletes metadata from MC instance by key
 | businessUnit | <code>string</code> | references credentials from properties.json |
 | type | <code>string</code> | supported metadata type |
 | customerKey | <code>string</code> | Identifier of metadata |
+
+<a name="Mcdev.resolveId"></a>
+
+### Mcdev.resolveId(businessUnit, type, id) ⇒ <code>Promise.&lt;{key:string, name:string, path:string}&gt;</code>
+get name & key for provided id
+
+**Kind**: static method of [<code>Mcdev</code>](#Mcdev)  
+**Returns**: <code>Promise.&lt;{key:string, name:string, path:string}&gt;</code> - key, name and path of metadata; null if not found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| businessUnit | <code>string</code> | references credentials from properties.json |
+| type | <code>string</code> | supported metadata type |
+| id | <code>string</code> | Identifier of metadata |
 
 <a name="Mcdev.refresh"></a>
 
@@ -893,6 +914,7 @@ FileTransfer MetadataType
     * [.getFilesToCommit(keyArr)](#Asset.getFilesToCommit) ⇒ <code>Array.&lt;string&gt;</code>
     * [.deleteByKey(customerKey)](#Asset.deleteByKey) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.postDeleteTasks(customerKey)](#Asset.postDeleteTasks) ⇒ <code>void</code>
+    * [.resolveId(id)](#Asset.resolveId) ⇒ <code>Promise.&lt;{key:string, name:string, path:string}&gt;</code>
 
 <a name="Asset.retrieve"></a>
 
@@ -1291,6 +1313,18 @@ cannot use the generic method due to the complexity of how assets are saved to d
 | Param | Type | Description |
 | --- | --- | --- |
 | customerKey | <code>string</code> | Identifier of metadata item |
+
+<a name="Asset.resolveId"></a>
+
+### Asset.resolveId(id) ⇒ <code>Promise.&lt;{key:string, name:string, path:string}&gt;</code>
+get name & key for provided id
+
+**Kind**: static method of [<code>Asset</code>](#Asset)  
+**Returns**: <code>Promise.&lt;{key:string, name:string, path:string}&gt;</code> - key, name and path of metadata; null if not found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| id | <code>string</code> | Identifier of metadata |
 
 <a name="AttributeGroup"></a>
 
@@ -3457,6 +3491,7 @@ Provides default functionality that can be overwritten by child metadata type cl
     * [.buildDefinition(templateDir, targetDir, templateName, variables)](#MetadataType.buildDefinition) ⇒ <code>Promise.&lt;TYPE.MetadataTypeMapObj&gt;</code>
     * [.getErrorsREST(ex)](#MetadataType.getErrorsREST) ⇒ <code>Array.&lt;string&gt;</code> \| <code>void</code>
     * [.document([metadata], [isDeploy])](#MetadataType.document) ⇒ <code>void</code>
+    * [.resolveId(id)](#MetadataType.resolveId) ⇒ <code>Promise.&lt;string&gt;</code>
     * [.deleteByKey(customerKey)](#MetadataType.deleteByKey) ⇒ <code>boolean</code>
     * [.postDeleteTasks(customerKey, [additionalExtensions])](#MetadataType.postDeleteTasks) ⇒ <code>Promise.&lt;void&gt;</code>
     * [.deleteByKeySOAP(customerKey, [overrideKeyField], [handleOutside])](#MetadataType.deleteByKeySOAP) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -4226,6 +4261,18 @@ Gets metadata cache with limited fields and does not store value to disk
 | --- | --- | --- |
 | [metadata] | <code>TYPE.MetadataTypeMap</code> | a list of type definitions |
 | [isDeploy] | <code>boolean</code> | used to skip non-supported message during deploy |
+
+<a name="MetadataType.resolveId"></a>
+
+### MetadataType.resolveId(id) ⇒ <code>Promise.&lt;string&gt;</code>
+get name & key for provided id
+
+**Kind**: static method of [<code>MetadataType</code>](#MetadataType)  
+**Returns**: <code>Promise.&lt;string&gt;</code> - key of metadata  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| id | <code>string</code> | Identifier of metadata |
 
 <a name="MetadataType.deleteByKey"></a>
 
@@ -8475,6 +8522,36 @@ Returns an SDK instance to be used for API calls
 | --- | --- | --- |
 | sessionKey | <code>string</code> | key for specific BU |
 | authObject | <code>TYPE.AuthObject</code> | credentials for specific BU |
+
+<a name="getActualJson"></a>
+
+## getActualJson(customerKey, type, subtype, [buName]) ⇒ <code>Promise.&lt;string&gt;</code>
+gets file from Retrieve folder
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;string&gt;</code> - file in string form  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| customerKey | <code>string</code> |  | of metadata |
+| type | <code>string</code> |  | of metadata |
+| subtype | <code>string</code> |  | of metadata |
+| [buName] | <code>string</code> | <code>&quot;testBU&quot;</code> | used when we need to test on ParentBU |
+
+<a name="getActualFile"></a>
+
+## getActualFile(customerKey, type, subtype, ext) ⇒ <code>string</code>
+gets file from Retrieve folder
+
+**Kind**: global function  
+**Returns**: <code>string</code> - file path  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| customerKey | <code>string</code> | of metadata |
+| type | <code>string</code> | of metadata |
+| subtype | <code>string</code> | of metadata |
+| ext | <code>string</code> | file extension |
 
 <a name="TypeKeyCombo"></a>
 

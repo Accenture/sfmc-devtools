@@ -101,4 +101,65 @@ describe('type: asset', () => {
             return;
         });
     });
+
+    describe('ResolveID ================', () => {
+        it('Should resolve the id of the item but NOT find the asset locally', async () => {
+            // WHEN
+            const resolveIdJson = await handler.resolveId(
+                'testInstance/testBU',
+                'asset',
+                '1295064'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'resolveId should not have thrown an error');
+            assert.deepEqual(
+                resolveIdJson,
+                await testUtils.getExpectedJson('9999999', 'asset', 'resolveId-1295064-noPath'),
+                'returned response was not equal expected'
+            );
+            return;
+        });
+
+        it('Should resolve the id with --json option enabled', async () => {
+            handler.setOptions({ json: true });
+            // WHEN
+            await handler.resolveId('testInstance/testBU', 'asset', '1295064');
+            // THEN
+            assert.equal(process.exitCode, 0, 'resolveId should not have thrown an error');
+            return;
+        });
+
+        it('Should resolve the id of the item AND find the asset locally', async () => {
+            // prep test by retrieving the file
+            await handler.retrieve('testInstance/testBU', ['asset-block'], ['mcdev-issue-1157']);
+            // WHEN
+            const resolveIdJson = await handler.resolveId(
+                'testInstance/testBU',
+                'asset',
+                '1295064'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'resolveId should not have thrown an error');
+            assert.deepEqual(
+                resolveIdJson,
+                await testUtils.getExpectedJson('9999999', 'asset', 'resolveId-1295064-withPath'),
+                'returned response was not equal expected'
+            );
+            return;
+        });
+
+        it('Should NOT resolve the id of the item', async () => {
+            // WHEN
+            const resolveIdJson = await handler.resolveId('testInstance/testBU', 'asset', '-1234');
+            // THEN
+            assert.equal(process.exitCode, 404, 'resolveId should have thrown an error');
+            // IMPORTANT: this will throw a false "TEST-ERROR" but our testing framework currently needs to not find the file to throw a 404
+            assert.deepEqual(
+                resolveIdJson,
+                await testUtils.getExpectedJson('9999999', 'asset', 'resolveId-1234-notFound'),
+                'returned response was not equal expected'
+            );
+            return;
+        });
+    });
 });
