@@ -1,4 +1,6 @@
-import chai, { assert } from 'chai';
+import * as chai from 'chai';
+const assert = chai.assert;
+
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
@@ -9,6 +11,7 @@ describe('type: dataExtract', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
@@ -39,10 +42,12 @@ describe('type: dataExtract', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & upsert a dataExtract', async () => {
             // WHEN
 
@@ -76,8 +81,10 @@ describe('type: dataExtract', () => {
             );
             return;
         });
+
         it('Should change the key during update via --changeKeyValue ');
     });
+
     describe('Templating ================', () => {
         it('Should create a dataExtract template via retrieveAsTemplate and build it', async () => {
             // buildTemplate
@@ -122,6 +129,7 @@ describe('type: dataExtract', () => {
             );
             return;
         });
+
         it('Should create a dataExtract template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['dataExtract']);
@@ -168,25 +176,18 @@ describe('type: dataExtract', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
-        it('Should NOT delete the item', async () => {
+        it('Should delete the item', async () => {
             // WHEN
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'dataExtract',
-                'testExisting_fileTranfer'
+                'testExisting_dataExtract'
             );
             // THEN
-            assert.equal(
-                process.exitCode,
-                1,
-                'deleteByKey should have thrown an error due to lack of support'
-            );
-            assert.equal(
-                isDeleted,
-                false,
-                'deleteByKey should have returned false due to lack of support'
-            );
+            assert.equal(process.exitCode, 0, 'deleteByKey should not have thrown an error');
+            assert.equal(isDeleted, true, 'deleteByKey should have returned true');
             return;
         });
     });

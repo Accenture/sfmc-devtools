@@ -1,0 +1,73 @@
+{
+    "allowErrors": true,
+    "c__dataAction": "AddUpdate",
+    "c__destinationType": "SMS",
+    "c__subscriberImportType": "DataExtension",
+    "createdDate": "2022-11-24T03:29:01.05",
+    "customerKey": "testExisting_importFileSMS",
+    "dateFormatLocale": "en-US",
+    "deleteFile": false,
+    "description": "Unsub for Keyword",
+    "fieldMappingType": "ManualMap",
+    "fieldMappings": [
+        {
+            "destinationFieldName": "_CountryCode",
+            "sourceFieldName": "Locale"
+        },
+        {
+            "destinationFieldName": "_FirstName",
+            "sourceFieldName": "FirstName"
+        },
+        {
+            "destinationFieldName": "_IsHonorDST",
+            "sourceFieldName": "IsHonorDST"
+        },
+        {
+            "destinationFieldName": "_LastName",
+            "sourceFieldName": "LastName"
+        },
+        {
+            "destinationFieldName": "_MobileNumber",
+            "sourceFieldName": "MobileNumber"
+        },
+        {
+            "destinationFieldName": "_Status",
+            "sourceFieldName": "Status"
+        },
+        {
+            "destinationFieldName": "_SubscriberKey",
+            "sourceFieldName": "ContactKey"
+        },
+        {
+            "destinationFieldName": "_UTCOffset",
+            "sourceFieldName": "UTCoffset"
+        },
+        {
+            "destinationFieldName": "Action",
+            "sourceFieldName": "Action"
+        },
+        {
+            "destinationFieldName": "SalesforceModified",
+            "sourceFieldName": "ModifiedDate"
+        },
+        {
+            "destinationFieldName": "SFContactID",
+            "sourceFieldName": "SFContactID"
+        }
+    ],
+    "fileNamingPattern": "_CustomObject",
+    "fileType": "CSV",
+    "filter": "",
+    "hasColumnHeader": true,
+    "isOrderedImport": false,
+    "isSequential": true,
+    "maxFileAgeHours": 0,
+    "maxFileAgeScheduleOffsetHours": 0,
+    "maxImportFrequencyHours": 0,
+    "modifiedDate": "2023-07-19T23:06:33.577",
+    "name": "testExisting_importFileSMS",
+    "notificationEmailAddress": "joern.berkefeld@accenture.com",
+    "r__fileLocation_name": "ExactTarget Enhanced FTP",
+    "sendEmailNotification": true,
+    "standardQuotedStrings": false
+}

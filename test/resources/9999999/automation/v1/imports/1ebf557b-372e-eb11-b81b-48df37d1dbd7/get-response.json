@@ -1,0 +1,78 @@
+{
+    "allowErrors": true,
+    "customerKey": "testExisting_importFileSMS",
+    "createdDate": "2022-11-24T03:29:01.05",
+    "modifiedDate": "2023-07-19T23:06:33.577",
+    "dateFormatLocale": "en-US",
+    "deleteFile": false,
+    "description": "Unsub for Keyword",
+    "destinationObjectId": "00000000-0000-0000-0000-000000000000",
+    "destinationId": 0,
+    "destinationObjectTypeId": 584,
+    "fieldMappings": [
+        {
+            "sourceFieldName": "Locale",
+            "destinationFieldName": "_CountryCode"
+        },
+        {
+            "sourceFieldName": "FirstName",
+            "destinationFieldName": "_FirstName"
+        },
+        {
+            "sourceFieldName": "IsHonorDST",
+            "destinationFieldName": "_IsHonorDST"
+        },
+        {
+            "sourceFieldName": "LastName",
+            "destinationFieldName": "_LastName"
+        },
+        {
+            "sourceFieldName": "MobileNumber",
+            "destinationFieldName": "_MobileNumber"
+        },
+        {
+            "sourceFieldName": "Status",
+            "destinationFieldName": "_Status"
+        },
+        {
+            "sourceFieldName": "ContactKey",
+            "destinationFieldName": "_SubscriberKey"
+        },
+        {
+            "sourceFieldName": "UTCoffset",
+            "destinationFieldName": "_UTCOffset"
+        },
+        {
+            "sourceFieldName": "Action",
+            "destinationFieldName": "Action"
+        },
+        {
+            "sourceFieldName": "ModifiedDate",
+            "destinationFieldName": "SalesforceModified"
+        },
+        {
+            "sourceFieldName": "SFContactID",
+            "destinationFieldName": "SFContactID"
+        }
+    ],
+    "fieldMappingType": "ManualMap",
+    "fileNamingPattern": "_CustomObject",
+    "fileTransferLocationId": "41a5ded7-0d98-4910-a15f-d09e7ab0af24",
+    "fileTransferLocationName": "ExactTarget Enhanced FTP",
+    "fileType": "CSV",
+    "filter": "",
+    "hasColumnHeader": true,
+    "importDefinitionId": "1ebf557b-372e-eb11-b81b-48df37d1dbd7",
+    "isOrderedImport": false,
+    "isSequential": true,
+    "maxFileAgeHours": 0,
+    "maxImportFrequencyHours": 0,
+    "maxFileAgeScheduleOffsetHours": 0,
+    "name": "testExisting_importFileSMS",
+    "notificationEmailAddress": "joern.berkefeld@accenture.com",
+    "sendEmailNotification": true,
+    "standardQuotedStrings": false,
+    "subscriberImportTypeId": 255,
+    "updateTypeId": 0,
+    "fileTransferLocationTypeId": 0
+}

@@ -18,7 +18,7 @@
     SET @rx = '^\+((?:9[679]\d8[035789]\d|6[789]\d|5[90]\d|42\d|3[578]\d|2[1-689]\d)|9[0-58]|8[1246]|6[0-6]|5[1-8]|4[013-9]|3[0-469]|2[70]|7|1)'
     SET @prefix = concat('+', RegExMatch(@num, @rx, 1))
     IF @count>0 THEN
-        FOR @I = 1 TO @COUNT DO
+        FOR @i = 1 TO @count DO
             SET @sk = Field(Row(@rs, @i), 'Id')
             IF Field(Row(@rs, 1), 'et4ae5__HasOptedOutOfMobile__c') == 'false' THEN
                 SET @result = UpdateSingleSalesforceObject('Contact', @sk, 'et4ae5__HasOptedOutOfMobile__c', 'true')

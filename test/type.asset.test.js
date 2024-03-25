@@ -1,6 +1,9 @@
 import File from '../lib/util/file.js';
 
-import chai, { assert, expect } from 'chai';
+import * as chai from 'chai';
+const assert = chai.assert;
+const expect = chai.expect;
+
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
@@ -39,9 +42,11 @@ describe('type: asset', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
+
     describe('Retrieve ================', () => {
         it('Should retrieve a asset & ensure non-ssjs code is not removed', async () => {
             // WHEN
@@ -77,6 +82,82 @@ describe('type: asset', () => {
                 testUtils.getAPIHistoryLength(),
                 30,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
+
+    describe('Delete ================', () => {
+        it('Should delete the item', async () => {
+            // WHEN
+            const isDeleted = await handler.deleteByKey(
+                'testInstance/testBU',
+                'asset',
+                'testExisting_asset'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'deleteByKey should not have thrown an error');
+            assert.equal(isDeleted, true, 'deleteByKey should have returned true');
+            return;
+        });
+    });
+
+    describe('ResolveID ================', () => {
+        it('Should resolve the id of the item but NOT find the asset locally', async () => {
+            // WHEN
+            const resolveIdJson = await handler.resolveId(
+                'testInstance/testBU',
+                'asset',
+                '1295064'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'resolveId should not have thrown an error');
+            assert.deepEqual(
+                resolveIdJson,
+                await testUtils.getExpectedJson('9999999', 'asset', 'resolveId-1295064-noPath'),
+                'returned response was not equal expected'
+            );
+            return;
+        });
+
+        it('Should resolve the id with --json option enabled', async () => {
+            handler.setOptions({ json: true });
+            // WHEN
+            await handler.resolveId('testInstance/testBU', 'asset', '1295064');
+            // THEN
+            assert.equal(process.exitCode, 0, 'resolveId should not have thrown an error');
+            return;
+        });
+
+        it('Should resolve the id of the item AND find the asset locally', async () => {
+            // prep test by retrieving the file
+            await handler.retrieve('testInstance/testBU', ['asset-block'], ['mcdev-issue-1157']);
+            // WHEN
+            const resolveIdJson = await handler.resolveId(
+                'testInstance/testBU',
+                'asset',
+                '1295064'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'resolveId should not have thrown an error');
+            assert.deepEqual(
+                resolveIdJson,
+                await testUtils.getExpectedJson('9999999', 'asset', 'resolveId-1295064-withPath'),
+                'returned response was not equal expected'
+            );
+            return;
+        });
+
+        it('Should NOT resolve the id of the item', async () => {
+            // WHEN
+            const resolveIdJson = await handler.resolveId('testInstance/testBU', 'asset', '-1234');
+            // THEN
+            assert.equal(process.exitCode, 404, 'resolveId should have thrown an error');
+            // IMPORTANT: this will throw a false "TEST-ERROR" but our testing framework currently needs to not find the file to throw a 404
+            assert.deepEqual(
+                resolveIdJson,
+                await testUtils.getExpectedJson('9999999', 'asset', 'resolveId-1234-notFound'),
+                'returned response was not equal expected'
             );
             return;
         });

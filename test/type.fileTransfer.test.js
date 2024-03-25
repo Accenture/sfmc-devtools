@@ -1,4 +1,6 @@
-import chai, { assert } from 'chai';
+import * as chai from 'chai';
+const assert = chai.assert;
+
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
@@ -9,6 +11,7 @@ describe('type: fileTransfer', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
@@ -39,10 +42,12 @@ describe('type: fileTransfer', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & upsert a fileTransfer', async () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['fileTransfer']);
@@ -76,6 +81,7 @@ describe('type: fileTransfer', () => {
             return;
         });
     });
+
     describe('Templating ================', () => {
         it('Should create a fileTransfer template via retrieveAsTemplate and build it', async () => {
             // buildTemplate
@@ -120,6 +126,7 @@ describe('type: fileTransfer', () => {
             );
             return;
         });
+
         it('Should create a fileTransfer template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['fileTransfer']);
@@ -166,25 +173,18 @@ describe('type: fileTransfer', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
-        it('Should NOT delete the item', async () => {
+        it('Should delete the item', async () => {
             // WHEN
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'fileTransfer',
-                'testExisting_fileTranfer'
+                'testExisting_fileTransfer'
             );
             // THEN
-            assert.equal(
-                process.exitCode,
-                1,
-                'deleteByKey should have thrown an error due to lack of support'
-            );
-            assert.equal(
-                isDeleted,
-                false,
-                'deleteByKey should have returned false due to lack of support'
-            );
+            assert.equal(process.exitCode, 0, 'deleteByKey should not have thrown an error');
+            assert.equal(isDeleted, true, 'deleteByKey should have returned true');
             return;
         });
     });

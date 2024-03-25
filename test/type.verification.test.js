@@ -1,4 +1,6 @@
-import chai, { assert } from 'chai';
+import * as chai from 'chai';
+const assert = chai.assert;
+
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
@@ -9,6 +11,7 @@ describe('type: verification', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
@@ -50,10 +53,12 @@ describe('type: verification', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & upsert a verification', async () => {
             // WHEN
 
@@ -98,6 +103,7 @@ describe('type: verification', () => {
             return;
         });
     });
+
     describe('Templating ================', () => {
         it('Should create a verification template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
@@ -151,6 +157,7 @@ describe('type: verification', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN
