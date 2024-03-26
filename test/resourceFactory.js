@@ -340,7 +340,11 @@ export const handleRESTRequest = async (config) => {
         } else {
             /* eslint-disable no-console */
             console.log(
-                `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}: Please create file ${testPath}.json/.txt${filterName ? ` or ${testPathFilter}.json/.txt` : ''}`
+                `${color.bgRed}${color.fgBlack}TEST-ERROR${
+                    color.reset
+                }: Please create file ${testPath}.json/.txt${
+                    filterName ? ` or ${testPathFilter}.json/.txt` : ''
+                }`
             );
             /* eslint-enable no-console */
             process.exitCode = 404;

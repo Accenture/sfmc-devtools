@@ -26,8 +26,8 @@ describe('type: importFile', () => {
             const result = cache.getCache();
             assert.equal(
                 result.importFile ? Object.keys(result.importFile).length : 0,
-                2,
-                'only 2 importFile expected'
+                3,
+                'only 3 importFile expected'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_importFile', 'importFile'),
@@ -41,7 +41,7 @@ describe('type: importFile', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                14,
+                15,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -92,8 +92,8 @@ describe('type: importFile', () => {
             const result = cache.getCache();
             assert.equal(
                 result.importFile ? Object.keys(result.importFile).length : 0,
-                3,
-                '3 importFiles expected'
+                4,
+                '4 importFiles expected'
             );
             // confirm created item
             assert.deepEqual(
@@ -110,7 +110,7 @@ describe('type: importFile', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                16,
+                18,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -202,7 +202,7 @@ describe('type: importFile', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                14,
+                15,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -220,6 +220,44 @@ describe('type: importFile', () => {
             // THEN
             assert.equal(process.exitCode, 0, 'deleteByKey should not have thrown an error');
             assert.equal(isDeleted, true, 'deleteByKey should have returned true');
+            return;
+        });
+    });
+
+    describe('Update notifications ================', () => {
+        beforeEach(() => {
+            testUtils.mockSetup(true);
+        });
+
+        it('Should set email notification address and activate it', async () => {
+            handler.setOptions({ completionEmail: 'test@test.com' });
+            // WHEN
+            await handler.updateNotifications('testInstance/testBU', 'importFile', [
+                'testExisting_importFile_updateNotifications',
+            ]);
+            // THEN
+            assert.equal(
+                process.exitCode,
+                false,
+                'updateNotifications should not have thrown an error'
+            );
+            assert.deepEqual(
+                await testUtils.getActualDeployJson(
+                    'testExisting_importFile_updateNotifications',
+                    'importFile'
+                ),
+                await testUtils.getExpectedJson(
+                    '9999999',
+                    'importFile',
+                    'patch_updateNotifications'
+                ),
+                'returned deployment JSON was not equal expected'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                29,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
             return;
         });
     });
