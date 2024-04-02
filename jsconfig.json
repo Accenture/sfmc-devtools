@@ -2,6 +2,7 @@
     "include": ["lib/**/*.js", "types/**/*.js", "test/**/*.js"],
     "compilerOptions": {
         "module": "es6",
-        "target": "esnext"
+        "target": "es2022",
+        "checkJs": false
     }
 }

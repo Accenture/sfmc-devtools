@@ -1,6 +1,5 @@
 import SDK from 'sfmc-sdk';
 /**
- * @ignore
  * @typedef {object} BuObject
  * @property {string} clientId installed package client id
  * @property {string} clientSecret installed package client secret
@@ -287,7 +286,7 @@ import SDK from 'sfmc-sdk';
  */
 
 /**
- * @typedef {object} skipInteraction signals what to insert automatically for things usually asked via wizard
+ * @typedef {object} SkipInteraction signals what to insert automatically for things usually asked via wizard
  * @property {string} client_id client id of installed package
  * @property {string} client_secret client secret of installed package
  * @property {string} auth_url tenant specific auth url of installed package

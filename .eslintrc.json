@@ -22,7 +22,7 @@
     "root": true,
     "settings": {
         "jsdoc": {
-            "mode": "jsdoc",
+            "mode": "typescript",
             "preferredTypes": {
                 "array": "Array",
                 "array.<>": "[]",
@@ -84,6 +84,8 @@
         ],
         "jsdoc/require-param-type": "error",
         "jsdoc/tag-lines": ["warn", "any", { "startLines": 1 }],
+        "jsdoc/no-undefined-types": "error",
+        "valid-jsdoc": "off",
         "spaced-comment": ["warn", "always", { "block": { "exceptions": ["*"], "balanced": true } }]
     },
     "overrides": [
