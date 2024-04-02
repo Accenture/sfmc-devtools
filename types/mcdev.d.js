@@ -1,6 +1,5 @@
 import SDK from 'sfmc-sdk';
 /**
- * @ignore
  * @typedef {object} BuObject
  * @property {string} clientId installed package client id
  * @property {string} clientSecret installed package client secret
