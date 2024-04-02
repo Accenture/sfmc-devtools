@@ -98,7 +98,6 @@
         "eslint-plugin-unicorn": "51.0.1",
         "fast-xml-parser": "4.3.6",
         "husky": "9.0.11",
-        "jsdoc-to-markdown": "8.0.1",
         "lint-staged": "15.2.2",
         "mocha": "10.4.0",
         "mock-fs": "5.2.0",
