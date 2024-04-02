@@ -48,7 +48,6 @@
         "mcdev": "node lib/cli.js",
         "build": "run-s lint:fix docs test",
         "debug": "node --nolazy --inspect-brk=9229 lib/cli.js",
-        "docs": "jsdoc2md --files lib/**/*.js types/**/*.js > docs/dist/documentation.md",
         "lint:fix": "eslint --fix lib/**/*.js && eslint --fix types/*.js && eslint --fix test/**/*.js",
         "lint": "run-p -c lint-type lint-lib lint-test",
         "lint-lib": "eslint lib/**/*.js",
@@ -111,9 +110,7 @@
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx}": [
-            "eslint --fix",
-            "npm run docs",
-            "git update-index --add docs/dist/documentation.md"
+            "eslint --fix"
         ]
     },
     "type": "module"
