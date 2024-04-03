@@ -2,7 +2,8 @@
     "include": ["lib/**/*.js", "types/**/*.js", "test/**/*.js"],
     "compilerOptions": {
         "module": "es6",
+        "moduleResolution": "node",
         "target": "es2022",
-        "checkJs": false
+        "checkJs": true
     }
 }
