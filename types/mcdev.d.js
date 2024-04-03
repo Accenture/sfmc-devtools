@@ -281,11 +281,11 @@
  */
 /**
  * @typedef {import('sfmc-sdk').default} SDK
- * @typedef {import('sfmc-sdk/lib/auth').default} SDKauth
- * @typedef {import('sfmc-sdk/lib/rest').default} SDKrest
- * @typedef {import('sfmc-sdk/lib/soap').default} SDKsoap
- * @typedef {import('sfmc-sdk/lib/util').RestError} RestError
- * @typedef {import('sfmc-sdk/lib/util').SOAPError} SOAPError
+ * @typedef {import('sfmc-sdk/auth').default} SDKauth
+ * @typedef {import('sfmc-sdk/rest').default} SDKrest
+ * @typedef {import('sfmc-sdk/soap').default} SDKsoap
+ * @typedef {import('sfmc-sdk/util').RestError} RestError
+ * @typedef {import('sfmc-sdk/util').SOAPError} SOAPError
  * @typedef {SOAPError & RestError} SDKError
  */
 
@@ -298,6 +298,9 @@
  * @property {string} [credentialName] how you would like the credential to be named
  * @property {string} [gitRemoteUrl] URL of Git remote server
  * @property {boolean} [fixKeysReretrieve] will trigger re-downloading latest versions of dependent types after fixing keys
+ * @property {string} [gitPush] used by mcdev init to directly push to a remote
+ * @property {string} [developmentBu] used by mcdev init to directly push to a remote
+ * @property {string} [downloadBUs] used by mcdev init to directly push to a remote
  */
 
 /**
@@ -336,10 +339,9 @@ complex
  * @property {Object.<string, object>} markets templating variables grouped by markets
  * @property {object} marketList combination of markets and BUs for streamlined deployments
  * @property {object} metaDataTypes templating variables grouped by markets
- * @property {string[]} metaDataTypes.retrieve define what types shall be downloaded by default during retrieve
+ * @property {SupportedMetadataTypes[]} metaDataTypes.retrieve define what types shall be downloaded by default during retrieve
  * @property {string[]} metaDataTypes.documentOnRetrieve which types should be parsed & documented after retrieve
  * @property {string} version mcdev version that last updated the config file
- * @property {object} [marketBulk] deprecated in favor of marketList
  */
 
 /**
