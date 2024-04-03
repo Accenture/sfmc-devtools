@@ -1,9 +1,8 @@
-import SDK from 'sfmc-sdk';
 /**
  * @typedef {object} BuObject
- * @property {string} clientId installed package client id
- * @property {string} clientSecret installed package client secret
- * @property {string} tenant subdomain part of Authentication Base Uri
+ * @property {string} [clientId] installed package client id
+ * @property {string} [clientSecret] installed package client secret
+ * @property {string} [tenant] subdomain part of Authentication Base Uri
  * @property {string} [eid] Enterprise ID = MID of the parent BU
  * @property {string} [mid] MID of the BU to work with
  * @property {string} [businessUnit] name of the BU to interact with
@@ -57,10 +56,6 @@ import SDK from 'sfmc-sdk';
  * @property {string} [categoryId] holds folder ID, replaced with r__folder_Path during retrieve
  * @property {string} r__folder_Path folder path in which this DE is saved
  * @typedef {Object.<string, QueryItem>} QueryMap
- * @typedef {object} CodeExtractItem
- * @property {QueryItem} json metadata of one item w/o code
- * @property {CodeExtract[]} codeArr list of code snippets in this item
- * @property {string[]} subFolder mostly set to null, otherwise list of subfolders
  */
 /**
  * @typedef {object} ScriptItem
@@ -268,7 +263,7 @@ import SDK from 'sfmc-sdk';
  * @typedef {Object.<string, AutomationItem>} AutomationMap
  * @typedef {{metadata:AutomationMap,type:string}} AutomationMapObj
  * @typedef {{metadata:AutomationItem,type:string}} AutomationItemObj
- * @typedef {object} DeltaPkgItem
+ * @typedef {object} McdevDeltaPkgItem
  * @property {string} file relative path to file
  * @property {number} changes changed lines
  * @property {number} insertions added lines
@@ -282,17 +277,27 @@ import SDK from 'sfmc-sdk';
  * @property {'move'|'add/update'|'delete'} gitAction what git recognized as an action
  * @property {string} _credential mcdev credential name
  * @property {string} _businessUnit mcdev business unit name inside of _credential
- * @typedef {SDK} SDK
+ * @typedef {import('simple-git').DiffResultTextFile & McdevDeltaPkgItem} DeltaPkgItem
+ */
+/**
+ * @typedef {import('sfmc-sdk').default} SDK
+ * @typedef {import('sfmc-sdk/lib/auth').default} SDKauth
+ * @typedef {import('sfmc-sdk/lib/rest').default} SDKrest
+ * @typedef {import('sfmc-sdk/lib/soap').default} SDKsoap
+ * @typedef {import('sfmc-sdk/lib/util').RestError} RestError
+ * @typedef {import('sfmc-sdk/lib/util').SOAPError} SOAPError
+ * @typedef {SOAPError & RestError} SDKError
  */
 
 /**
  * @typedef {object} SkipInteraction signals what to insert automatically for things usually asked via wizard
- * @property {string} client_id client id of installed package
- * @property {string} client_secret client secret of installed package
- * @property {string} auth_url tenant specific auth url of installed package
- * @property {number} account_id MID of the Parent Business Unit
- * @property {string} credentialName how you would like the credential to be named
- * @property {string} gitRemoteUrl URL of Git remote server
+ * @property {string} [client_id] client id of installed package
+ * @property {string} [client_secret] client secret of installed package
+ * @property {string} [auth_url] tenant specific auth url of installed package
+ * @property {number} [account_id] MID of the Parent Business Unit
+ * @property {string} [credentialName] how you would like the credential to be named
+ * @property {string} [gitRemoteUrl] URL of Git remote server
+ * @property {boolean} [fixKeysReretrieve] will trigger re-downloading latest versions of dependent types after fixing keys
  */
 
 /**
@@ -334,16 +339,16 @@ complex
  * @property {string[]} metaDataTypes.retrieve define what types shall be downloaded by default during retrieve
  * @property {string[]} metaDataTypes.documentOnRetrieve which types should be parsed & documented after retrieve
  * @property {string} version mcdev version that last updated the config file
+ * @property {object} [marketBulk] deprecated in favor of marketList
  */
 
 /**
- * @typedef {object} Logger
- * @property {Function} info (msg) print info message
- * @property {Function} warn (msg) print warning message
- * @property {Function} verbose (msg) additional messages that are not important
- * @property {Function} debug (msg) print debug message
+ * @typedef {'error'|'verbose'|'info'|'debug'} LoggerLevel
+ * @typedef {object} McdevLogger
+ * @property {LoggerLevel} [level] (msg) print info message
  * @property {Function} error (msg) print error message
  * @property {Function} errorStack (ex, msg) print error with trace message
+ * @typedef {import('winston').Logger & McdevLogger} Logger
  */
 
 export default {};
