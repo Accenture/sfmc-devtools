@@ -19,8 +19,8 @@
  * @typedef {Object.<string, MetadataTypeItem>} MetadataTypeMap key=customer key
  * @typedef {Object.<string, MetadataTypeMap>} MultiMetadataTypeMap key=Supported MetadataType
  * @typedef {Object.<string, MetadataTypeItem[]>} MultiMetadataTypeList key=Supported MetadataType
- * @typedef {{metadata: MetadataTypeMap, type: SupportedMetadataTypes}} MetadataTypeMapObj
- * @typedef {{metadata: MetadataTypeItem, type: SupportedMetadataTypes}} MetadataTypeItemObj
+ * @typedef {{metadata: MetadataTypeMap, type: string}} MetadataTypeMapObj
+ * @typedef {{metadata: MetadataTypeItem, type: string}} MetadataTypeItemObj
  * @typedef {Object.<number, MultiMetadataTypeMap>} Cache key=MID
  * @typedef {{before: MetadataTypeItem, after: MetadataTypeItem}} MetadataTypeItemDiff used during update
  */
@@ -271,7 +271,7 @@
  * @property {boolean} binary is a binary file
  * @property {boolean} moved git thinks this file was moved
  * @property {string} [fromPath] git thinks this relative path is where the file was before
- * @property {SupportedMetadataTypes} type metadata type
+ * @property {string} type metadata type
  * @property {string} externalKey key
  * @property {string} name name
  * @property {'move'|'add/update'|'delete'} gitAction what git recognized as an action
@@ -339,7 +339,7 @@ complex
  * @property {Object.<string, object>} markets templating variables grouped by markets
  * @property {object} marketList combination of markets and BUs for streamlined deployments
  * @property {object} metaDataTypes templating variables grouped by markets
- * @property {SupportedMetadataTypes[]} metaDataTypes.retrieve define what types shall be downloaded by default during retrieve
+ * @property {string[]} metaDataTypes.retrieve define what types shall be downloaded by default during retrieve
  * @property {string[]} metaDataTypes.documentOnRetrieve which types should be parsed & documented after retrieve
  * @property {string} version mcdev version that last updated the config file
  */
