@@ -15,7 +15,7 @@
  */
 
 /**
- * @typedef {Object.<string, any>} MetadataTypeItem
+ * @typedef {object} MetadataTypeItem
  * @typedef {Object.<string, MetadataTypeItem>} MetadataTypeMap key=customer key
  * @typedef {Object.<string, MetadataTypeMap>} MultiMetadataTypeMap key=Supported MetadataType
  * @typedef {Object.<string, MetadataTypeItem[]>} MultiMetadataTypeList key=Supported MetadataType
@@ -23,6 +23,7 @@
  * @typedef {{metadata: MetadataTypeItem, type: string}} MetadataTypeItemObj
  * @typedef {Object.<number, MultiMetadataTypeMap>} Cache key=MID
  * @typedef {{before: MetadataTypeItem, after: MetadataTypeItem}} MetadataTypeItemDiff used during update
+ * @property
  */
 
 /**
@@ -222,6 +223,7 @@
  * @property {string} [id] Object Id
  * @property {string} key key
  * @property {string} name name
+ * @property {any} notifications notifications
  * @property {string} description -
  * @property {'scheduled'|'triggered'} type Starting Source = Schedule / File Drop
  * @property {'Scheduled'|'Running'|'Ready'|'Building'|'PausedSchedule'|'InactiveTrigger'} status -
@@ -236,7 +238,7 @@
  * @property {object} [startSource] -
  * @property {AutomationSchedule} [startSource.schedule] rewritten to AutomationItem.schedule
  * @property {object} [startSource.fileDrop] rewritten to AutomationItem.fileTrigger
- * @property {string} startSource.fileDrop.fileNamingPattern file name with placeholders
+ * @property {string} startSource.fileDrop.fileNamePattern file name with placeholders
  * @property {string} startSource.fileDrop.fileNamePatternTypeId -
  * @property {string} startSource.fileDrop.folderLocation -
  * @property {boolean} startSource.fileDrop.queueFiles -
@@ -280,13 +282,16 @@
  * @typedef {import('simple-git').DiffResultTextFile & McdevDeltaPkgItem} DeltaPkgItem
  */
 /**
- * @typedef {import('sfmc-sdk').default} SDK
  * @typedef {import('sfmc-sdk/auth').default} SDKauth
  * @typedef {import('sfmc-sdk/rest').default} SDKrest
  * @typedef {import('sfmc-sdk/soap').default} SDKsoap
  * @typedef {import('sfmc-sdk/util').RestError} RestError
  * @typedef {import('sfmc-sdk/util').SOAPError} SOAPError
  * @typedef {SOAPError & RestError} SDKError
+ * @typedef {object} SDK
+ * @property {SDKauth} auth SDKauth
+ * @property {SDKrest} rest SDKrest
+ * @property {SDKsoap} soap SDKsoap
  */
 
 /**
@@ -315,7 +320,7 @@
  * @typedef {object} SoapRequestParams
  * @property {string} [continueRequest] request id
  * @property {object} [options] additional options (CallsInConversation, Client, ConversationID, Priority, RequestType, SaveOptions, ScheduledTime, SendResponseTo, SequenceCode)
- * @property {*} clientIDs ?
+ * @property {*} [clientIDs] ?
  * @property {SoapFilter} [filter] simple or complex
 complex
  * @property {boolean} [QueryAllAccounts] all BUs or just one
