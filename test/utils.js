@@ -142,6 +142,9 @@ export function mockSetup(isDeploy) {
         .onAny(new RegExp(`^${escapeRegExp(restUrl)}`))
         .reply((config) => handleRESTRequest(config));
     const fsMockConf = {
+        '.beautyamp.json': fsmock.load(
+            path.resolve(__dirname, '../boilerplate/files/.beautyamp.json')
+        ),
         '.prettierrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.prettierrc')),
         '.eslintrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.eslintrc')),
         '.eslintignore': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.eslintignore')),
