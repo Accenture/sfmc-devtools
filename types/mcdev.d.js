@@ -3,8 +3,8 @@
  * @property {string} [clientId] installed package client id
  * @property {string} [clientSecret] installed package client secret
  * @property {string} [tenant] subdomain part of Authentication Base Uri
- * @property {string} [eid] Enterprise ID = MID of the parent BU
- * @property {string} [mid] MID of the BU to work with
+ * @property {number} [eid] Enterprise ID = MID of the parent BU
+ * @property {number} [mid] MID of the BU to work with
  * @property {string} [businessUnit] name of the BU to interact with
  * @property {string} [credential] name of the credential to interact with
  */
@@ -15,7 +15,7 @@
  */
 
 /**
- * @typedef {object} MetadataTypeItem
+ * @typedef {Object.<any, any>} MetadataTypeItem generic metadata item
  * @typedef {Object.<string, MetadataTypeItem>} MetadataTypeMap key=customer key
  * @typedef {Object.<string, MetadataTypeMap>} MultiMetadataTypeMap key=Supported MetadataType
  * @typedef {Object.<string, MetadataTypeItem[]>} MultiMetadataTypeList key=Supported MetadataType
@@ -23,7 +23,6 @@
  * @typedef {{metadata: MetadataTypeItem, type: string}} MetadataTypeItemObj
  * @typedef {Object.<number, MultiMetadataTypeMap>} Cache key=MID
  * @typedef {{before: MetadataTypeItem, after: MetadataTypeItem}} MetadataTypeItemDiff used during update
- * @property
  */
 
 /**
@@ -115,6 +114,7 @@
  */
 /**
  * @typedef {object} UserDocument
+ * @property {'User'|'Installed Package'|'Inactivated User'} TYPE -
  * @property {string} [ID] equal to UserID; optional in update/create calls
  * @property {string} UserID equal to ID; required in update/create calls
  * @property {number} [AccountUserID] user.AccountUserID
@@ -126,7 +126,7 @@
  * @property {boolean} ActiveFlag user.ActiveFlag === true ? '✓' : '-'
  * @property {boolean} IsAPIUser user.IsAPIUser === true ? '✓' : '-'
  * @property {boolean} MustChangePassword user.MustChangePassword === true ? '✓' : '-'
- * @property {number} DefaultBusinessUnit defaultBUName
+ * @property {number} DefaultBusinessUnit default MID; BUName after we resolved it
  * @property {number[]} c__AssociatedBusinessUnits associatedBus
  * @property {object} [Roles] (API only)
  * @property {object[]} [Roles.Role] roles (API only)
@@ -137,27 +137,39 @@
  * @property {string} ModifiedDate user.ModifiedDate
  * @property {object} Client -
  * @property {number} [Client.ID] EID e.g:7281698
- * @property {number} Client.ModifiedBy AccountUserID of user who last modified this user
+ * @property {number} [Client.ModifiedBy] AccountUserID of user who last modified this user
  * @property {'User'|'Installed Package'} c__type -
- * @property {boolean} [IsLocked] (API only)
+ * @property {boolean|string} [IsLocked] (API only)
  * @property {boolean} [Unlock] used to unlock a user that has IsLocked === true
  * @property {boolean} c__IsLocked_readOnly copy of IsLocked
  * @property {string} c__TimeZoneName name of timezone
  * @property {object} [TimeZone] (API only)
  * @property {string} [TimeZone.Name] (API only)
  * @property {string} [TimeZone.ID] (API only)
+ * @property {string} [Password] only used to set the password. cannot be retrieved
  * @property {'en-US'|'fr-CA'|'fr-FR'|'de-DE'|'it-IT'|'ja-JP'|'pt-BR'|'es-419'|'es-ES'} c__LocaleCode fr-CA, en-US, ...
  * @property {object} [Locale] (API only)
  * @property {'en-US'|'fr-CA'|'fr-FR'|'de-DE'|'it-IT'|'ja-JP'|'pt-BR'|'es-419'|'es-ES'} [Locale.LocaleCode] (API only)
+ * @property {object} [SsoIdentity] -
+ * @property {Array|object} [SsoIdentities] -
+ */
+/**
  * @typedef {{before:UserDocument,after:UserDocument}} UserDocumentDiff
  * @typedef {Object.<string, UserDocument>} UserDocumentMap key=customer key
+ */
+/**
+ * @typedef {UserDocument & object} UserDocumentDocument
+ * @property {boolean | string} ActiveFlag user.ActiveFlag === true ? '✓' : '-'
+ * @property {boolean | string} IsAPIUser user.IsAPIUser === true ? '✓' : '-'
+ * @property {boolean | string} MustChangePassword user.MustChangePassword === true ? '✓' : '-'
+ * @property {number | string} DefaultBusinessUnit default MID; BUName after we resolved it
  */
 /**
  * @typedef {object} AccountUserConfiguration
  * @property {object} Client wrapper
  * @property {number} Client.ID EID e.g:7281698
  * @property {string} [PartnerKey] empty string
- * @property {number} ID User ID e.g:717133502
+ * @property {number | string} ID User ID e.g:717133502
  * @property {string} [ObjectID] empty string
  * @property {number} [Delete] 0,1
  * @property {BusinessUnitAssignmentConfiguration} BusinessUnitAssignmentConfiguration -
@@ -321,13 +333,46 @@
  * @property {string} [continueRequest] request id
  * @property {object} [options] additional options (CallsInConversation, Client, ConversationID, Priority, RequestType, SaveOptions, ScheduledTime, SendResponseTo, SequenceCode)
  * @property {*} [clientIDs] ?
- * @property {SoapFilter} [filter] simple or complex
+ * @property {SoapFilter | SoapFilterSimple} [filter] simple or complex
 complex
  * @property {boolean} [QueryAllAccounts] all BUs or just one
+ */
+/**
+ * @typedef {object} SoapFilterSimple
+ * @property {string} property field
+ * @property {'equals'|'equal'|'notEquals'|'isNull'|'isNotNull'|'greaterThan'|'lessThan'|'greaterThanOrEqual'|'lessThanOrEqual'|'between'|'IN'|'in'|'like'} simpleOperator various options
+ * @property {string | number | boolean | Array} [value] field value
+ */
+/**
  * @typedef {object} SoapFilter
- * @property {string|SoapFilter} leftOperand string for simple or a new filter-object for complex
- * @property {'AND'|'OR'|'equals'|'notEquals'|'isNull'|'isNotNull'|'greaterThan'|'lessThan'|'greaterThanOrEqual'|'lessThanOrEqual'|'between'|'IN'|'like'} operator various options
- * @property {string|number|boolean|Array|SoapFilter} [rightOperand] string for simple or a new filter-object for complex; omit for isNull and isNotNull
+ * @property {SoapFilter | SoapFilterSimple} leftOperand string for simple or a new filter-object for complex
+ * @property {'AND'|'OR'} operator various options
+ * @property {SoapFilter | SoapFilterSimple} [rightOperand] string for simple or a new filter-object for complex; omit for isNull and isNotNull
+ */
+
+/**
+ * @typedef {object} AssetRequestParams
+ * @property {string} [continueRequest] request id
+ * @property {object} [options] additional options (CallsInConversation, Client, ConversationID, Priority, RequestType, SaveOptions, ScheduledTime, SendResponseTo, SequenceCode)
+ * @property {*} [clientIDs] ?
+complex
+ * @property {object} [page] pagination
+ * @property {string[]} [fields] list of fields we want returned
+ * @property {{property:string, direction: 'ASC'|'DESC'}[]} [sort] pagination
+ * @property {AssetFilter | AssetFilterSimple} [query] simple or complex filter
+ */
+
+/**
+ * @typedef {object} AssetFilter
+ * @property {AssetFilter | AssetFilterSimple} leftOperand string for simple or a new filter-object for complex
+ * @property {'AND'|'OR'} logicalOperator various options
+ * @property {SoapFilter | AssetFilterSimple} [rightOperand] string for simple or a new filter-object for complex; omit for isNull and isNotNull
+ */
+/**
+ * @typedef {object} AssetFilterSimple
+ * @property {string} property field
+ * @property {'equal'|'notEquals'|'isNull'|'isNotNull'|'greaterThan'|'lessThan'|'greaterThanOrEqual'|'lessThanOrEqual'|'between'|'IN'|'in'|'like'} simpleOperator various options
+ * @property {string | number | boolean | Array} value field value
  */
 
 /**
