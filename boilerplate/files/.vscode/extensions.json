@@ -17,6 +17,9 @@
         "xnerd.ampscript-language",
         "FiB.beautyAmp",
 
+        // coding helper
+        "MarketingThibs.ampscriptsnippets",
+
         // file icons for ampscript
         "vscode-icons-team.vscode-icons",
 
