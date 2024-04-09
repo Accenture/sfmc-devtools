@@ -1,7 +1,7 @@
 [
     {
         "version": "6.1.0",
-        "files": [".vscode/settings.json", ".beautyamp.json"]
+        "files": [".vscode/settings.json", ".beautyamp.json", ".vscode/extensions.json"]
     },
     {
         "version": "6.0.3",

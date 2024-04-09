@@ -64,5 +64,16 @@
     },
     "[AMPscript]": {
         "editor.defaultFormatter": "FiB.beautyAmp"
-    }
+    },
+    "vsicons.associations.files": [
+        {
+            "icon": "apex",
+            "languages": [
+                { "ids": "ampscript", "defaultExtension": "amp" },
+                { "ids": "AMPscript", "defaultExtension": "amp" }
+            ],
+            "light": true,
+            "format": "FileFormat.svg"
+        }
+    ]
 }
