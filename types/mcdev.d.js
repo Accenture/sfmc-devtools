@@ -48,13 +48,14 @@
  * @property {string} createdDate e.g. "2020-09-14T01:42:03.017"
  * @property {string} modifiedDate e.g. "2020-09-14T01:42:03.017"
  * @property {'Overwrite'|'Update'|'Append'} targetUpdateTypeName defines how the query writes into the target data extension
- * @property {0|1|2} [targetUpdateTypeId] mapped to targetUpdateTypeName via this.definition.targetUpdateTypeMapping
+ * @property {number} [targetUpdateTypeId] 0|1|2, mapped to targetUpdateTypeName via this.definition.targetUpdateTypeMapping
  * @property {string} [targetId] Object ID of DE (removed before save)
  * @property {string} [targetDescription] Description DE (removed before save)
  * @property {boolean} isFrozen looks like this is always set to false
  * @property {string} [queryText] contains SQL query with line breaks converted to '\n'. The content is extracted during retrieval and written into a separate *.sql file
  * @property {string} [categoryId] holds folder ID, replaced with r__folder_Path during retrieve
  * @property {string} r__folder_Path folder path in which this DE is saved
+ * @property {string} [queryDefinitionId] Object ID of query
  * @typedef {Object.<string, QueryItem>} QueryMap
  */
 /**
@@ -85,9 +86,12 @@
  * @property {string} DefaultValue empty string for not set
  * @property {true|false} IsRequired -
  * @property {true|false} IsPrimaryKey -
- * @property {string} Ordinal 1, 2, 3, ...
+ * @property {number} Ordinal 1, 2, 3, ...
  * @property {'Text'|'Number'|'Date'|'Boolean'|'Decimal'|'EmailAddress'|'Phone'|'Locale'} FieldType can only be set on create
+ * @property {number} MaxLength field length
  * @property {string} Scale the number of places after the decimal that the field can hold; example: "0","1", ...
+ */
+/**
  * @typedef {Object.<string, DataExtensionFieldItem>} DataExtensionFieldMap
  */
 /**
@@ -355,7 +359,7 @@ complex
  * @typedef {object} SoapFilterSimple
  * @property {string} property field
  * @property {'equals'|'notEquals'|'isNull'|'isNotNull'|'greaterThan'|'lessThan'|'greaterThanOrEqual'|'lessThanOrEqual'|'between'|'IN'|'in'|'like'} simpleOperator various options
- * @property {string | number | boolean | Array} [value] field value
+ * @property {string | number | boolean | string[] | number[]} [value] field value
  */
 /**
  * @typedef {object} SoapFilterComplex
