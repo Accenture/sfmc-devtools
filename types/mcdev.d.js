@@ -85,10 +85,11 @@
  * @property {string} [Name_new] custom attribute that is only used when trying to rename a field from Name to Name_new
  * @property {string} DefaultValue empty string for not set
  * @property {true|false} IsRequired -
+ * @property {true|false} [IsNullable] opposite of IsRequired
  * @property {true|false} IsPrimaryKey -
  * @property {number} Ordinal 1, 2, 3, ...
  * @property {'Text'|'Number'|'Date'|'Boolean'|'Decimal'|'EmailAddress'|'Phone'|'Locale'} FieldType can only be set on create
- * @property {number} MaxLength field length
+ * @property {number|string} MaxLength field length
  * @property {string} Scale the number of places after the decimal that the field can hold; example: "0","1", ...
  */
 /**
@@ -114,6 +115,14 @@
  * @property {string} [r__dataExtensionTemplate_Name] name of optionally associated DE template
  * @property {object} [Template] -
  * @property {string} [Template.CustomerKey] key of optionally associated DE teplate
+ * @property {string} [RetainUntil] ?
+ * @property {any} [DataRetentionPeriodLength] ?
+ * @property {any} [DataRetentionPeriodUnitOfMeasure] ?
+ * @property {any} [RowBasedRetention] ?
+ * @property {any} [ResetRetentionPeriodOnImport] ?
+ * @property {any} [DeleteAtEndOfRetentionPeriod] ?
+ */
+/**
  * @typedef {Object.<string, DataExtensionItem>} DataExtensionMap
  */
 /**
