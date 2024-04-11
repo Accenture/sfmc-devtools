@@ -53,7 +53,7 @@ describe('type: asset', () => {
             const retrieve = await handler.retrieve('testInstance/testBU', ['asset']);
 
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             assert.equal(
                 retrieve['testInstance/testBU'].asset
                     ? Object.keys(retrieve['testInstance/testBU'].asset).length

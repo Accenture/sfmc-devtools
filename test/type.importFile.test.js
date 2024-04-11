@@ -21,7 +21,7 @@ describe('type: importFile', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['importFile']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -55,7 +55,7 @@ describe('type: importFile', () => {
                 ['testExisting_importFile']
             );
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -87,7 +87,7 @@ describe('type: importFile', () => {
 
             await handler.deploy('testInstance/testBU', ['importFile']);
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -126,7 +126,7 @@ describe('type: importFile', () => {
                 ['testExisting_importFile'],
                 'testSourceMarket'
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.importFile ? Object.keys(result.importFile).length : 0,
                 1,
@@ -144,11 +144,7 @@ describe('type: importFile', () => {
                 'testExisting_importFile',
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_importFile', 'importFile'),
                 await testUtils.getExpectedJson('9999999', 'importFile', 'build'),
@@ -172,7 +168,7 @@ describe('type: importFile', () => {
                 ['testExisting_importFile'],
                 'testSourceMarket'
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.importFile ? Object.keys(result.importFile).length : 0,
                 1,
@@ -190,11 +186,7 @@ describe('type: importFile', () => {
                 'testExisting_importFile',
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_importFile', 'importFile'),
                 await testUtils.getExpectedJson('9999999', 'importFile', 'build'),

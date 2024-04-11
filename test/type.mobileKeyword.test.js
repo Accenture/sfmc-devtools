@@ -23,7 +23,7 @@ describe('type: mobileKeyword', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['mobileKeyword']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -70,7 +70,7 @@ describe('type: mobileKeyword', () => {
                 ['4912312345678.TESTNEW_KEYWORD']
             );
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -137,11 +137,7 @@ describe('type: mobileKeyword', () => {
                 'testSourceMarket'
             );
             // WHEN
-            assert.equal(
-                process.exitCode,
-                false,
-                'retrieveAsTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'retrieveAsTemplate should not have thrown an error');
             assert.equal(
                 result.mobileKeyword ? Object.keys(result.mobileKeyword).length : 0,
                 1,
@@ -184,7 +180,7 @@ describe('type: mobileKeyword', () => {
                 ['4912312345678.TESTEXISTING_KEYWORD'],
                 'testSourceMarket'
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
 
             assert.equal(
                 result.mobileKeyword ? Object.keys(result.mobileKeyword).length : 0,
@@ -218,11 +214,7 @@ describe('type: mobileKeyword', () => {
                 '4912312345678.TESTEXISTING_KEYWORD',
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
                 await testUtils.getActualDeployJson(
                     '4912312345678.TESTTEMPLATED_KEYWORD',
@@ -259,7 +251,7 @@ describe('type: mobileKeyword', () => {
                 '4912312345678.TESTEXISTING_KEYWORD'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
 
             assert.equal(isDeleted, true, 'should have deleted the item');
             return;
@@ -275,11 +267,7 @@ describe('type: mobileKeyword', () => {
                 ['4912312345678.TESTEXISTING_KEYWORD']
             );
             // THEN
-            assert.equal(
-                process.exitCode,
-                false,
-                'getFilesToCommit should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'getFilesToCommit should not have thrown an error');
             assert.equal(fileList.length, 2, 'expected only 2 file paths');
 
             assert.equal(

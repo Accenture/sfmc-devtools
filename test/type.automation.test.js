@@ -23,7 +23,7 @@ describe('type: automation', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['automation']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -70,7 +70,7 @@ describe('type: automation', () => {
                 ['testExisting_automation', 'testNew_automation', 'testNew_39f6a488-20eb-4ba0-b0b9']
             );
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
 
             // check how many items were deployed
             assert.equal(
@@ -143,7 +143,7 @@ describe('type: automation', () => {
             // THEN
             assert.equal(
                 process.exitCode,
-                false,
+                0,
                 'deploy with --execute should not have thrown an error'
             );
 
@@ -213,7 +213,7 @@ describe('type: automation', () => {
             // THEN
             assert.equal(
                 process.exitCode,
-                false,
+                0,
                 'deploy with --execute should not have thrown an error'
             );
 
@@ -284,7 +284,7 @@ describe('type: automation', () => {
                 'testExisting_automation',
             ]);
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // check which keys were fixed
             assert.equal(
                 resultFixKeys['testInstance/testBU'].length,
@@ -326,7 +326,7 @@ describe('type: automation', () => {
                 'returned keys do not correspond to expected fixed keys'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson(
@@ -371,7 +371,7 @@ describe('type: automation', () => {
                 'returned keys do not correspond to expected fixed keys'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson(
@@ -416,7 +416,7 @@ describe('type: automation', () => {
                 'returned keys do not correspond to expected fixed keys'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson(
@@ -460,7 +460,7 @@ describe('type: automation', () => {
                 'returned keys do not correspond to expected fixed keys'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson(
@@ -502,7 +502,7 @@ describe('type: automation', () => {
                 'returned keys do not correspond to expected fixed keys'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson(
@@ -544,7 +544,7 @@ describe('type: automation', () => {
                 'returned keys do not correspond to expected fixed keys'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson(
@@ -578,11 +578,7 @@ describe('type: automation', () => {
                 ['testExisting_automation'],
                 'testSourceMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'retrieveAsTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'retrieveAsTemplate should not have thrown an error');
 
             // WHEN
             assert.equal(
@@ -602,11 +598,7 @@ describe('type: automation', () => {
                 'testExisting_automation',
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_automation', 'automation'),
                 await testUtils.getExpectedJson('9999999', 'automation', 'build'),
@@ -630,7 +622,7 @@ describe('type: automation', () => {
                 ['testExisting_automation'],
                 'testSourceMarket'
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             // WHEN
             assert.equal(
                 result.automation ? Object.keys(result.automation).length : 0,
@@ -649,11 +641,7 @@ describe('type: automation', () => {
                 'testExisting_automation',
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_automation', 'automation'),
@@ -678,7 +666,7 @@ describe('type: automation', () => {
                 'testExisting_automation'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
 
             assert.equal(isDeleted, true, 'should have deleted the item');
             return;
@@ -692,11 +680,7 @@ describe('type: automation', () => {
                 'testExisting_automation',
             ]);
             // THEN
-            assert.equal(
-                process.exitCode,
-                false,
-                'getFilesToCommit should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'getFilesToCommit should not have thrown an error');
             assert.equal(fileList.length, 2, 'expected only 2 file paths');
 
             assert.equal(
@@ -718,7 +702,7 @@ describe('type: automation', () => {
             const executedKeys = await handler.schedule('testInstance/testBU', 'automation', [
                 'testExisting_automation',
             ]);
-            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
@@ -735,7 +719,7 @@ describe('type: automation', () => {
         it('Should schedule an automation selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExist%automation' } });
             const executedKeys = await handler.schedule('testInstance/testBU', 'automation');
-            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
@@ -770,7 +754,7 @@ describe('type: automation', () => {
             const executedKeys = await handler.execute('testInstance/testBU', 'automation', [
                 'testExisting_automation',
             ]);
-            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
@@ -787,7 +771,7 @@ describe('type: automation', () => {
         it('Should execute --schedule an automation selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExist%automation' }, schedule: true });
             const executedKeys = await handler.execute('testInstance/testBU', 'automation');
-            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
@@ -819,7 +803,7 @@ describe('type: automation', () => {
             const executedKeys = await handler.execute('testInstance/testBU', 'automation', [
                 'testExisting_automation',
             ]);
-            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
@@ -836,7 +820,7 @@ describe('type: automation', () => {
         it('Should runOnce an automation selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExist%automation' } });
             const executedKeys = await handler.execute('testInstance/testBU', 'automation');
-            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
@@ -872,7 +856,7 @@ describe('type: automation', () => {
             const pausedKeys = await handler.pause('testInstance/testBU', 'automation', [
                 'testExisting_automation_pause',
             ]);
-            assert.equal(process.exitCode, false, 'pause should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'pause should not have thrown an error');
             assert.equal(
                 pausedKeys['testInstance/testBU']?.length,
                 1,
@@ -889,7 +873,7 @@ describe('type: automation', () => {
         it('Should pause a automation selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExisting_a%n_pause' } });
             const pausedKeys = await handler.pause('testInstance/testBU', 'automation');
-            assert.equal(process.exitCode, false, 'pause should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'pause should not have thrown an error');
             assert.equal(
                 pausedKeys['testInstance/testBU']?.length,
                 1,
