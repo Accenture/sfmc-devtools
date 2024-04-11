@@ -115,7 +115,7 @@ describe('type: mobileKeyword', () => {
                 ['4912312345678.TESTNEW_KEYWORD_BLOCKED']
             );
             // THEN
-            assert.equal(process.exitCode, true, 'deploy should have thrown an error');
+            assert.equal(process.exitCode, 1, 'deploy should have thrown an error');
 
             // check number of API calls
             assert.equal(

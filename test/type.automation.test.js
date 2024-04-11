@@ -738,7 +738,7 @@ describe('type: automation', () => {
             const executedKeys = await handler.schedule('testInstance/testBU', 'automation', [
                 'testExisting_automation',
             ]);
-            assert.equal(process.exitCode, true, 'execute should have thrown an error');
+            assert.equal(process.exitCode, 1, 'execute should have thrown an error');
             assert.equal(
                 Object.keys(executedKeys).length,
                 0,
@@ -790,7 +790,7 @@ describe('type: automation', () => {
             const executedKeys = await handler.execute('testInstance/testBU', 'automation', [
                 'testExisting_automation',
             ]);
-            assert.equal(process.exitCode, true, 'execute should have thrown an error');
+            assert.equal(process.exitCode, 1, 'execute should have thrown an error');
             assert.equal(
                 Object.keys(executedKeys).length,
                 0,
@@ -840,7 +840,7 @@ describe('type: automation', () => {
             const executedKeys = await handler.execute('testInstance/testBU', 'automation', [
                 'testExisting_automation',
             ]);
-            assert.equal(process.exitCode, true, 'execute should have thrown an error');
+            assert.equal(process.exitCode, 1, 'execute should have thrown an error');
             assert.equal(
                 Object.keys(executedKeys).length,
                 0,
@@ -892,7 +892,7 @@ describe('type: automation', () => {
             const pausedKeys = await handler.pause('testInstance/testBU', 'automation', [
                 'testExisting_automation_pause',
             ]);
-            assert.equal(process.exitCode, true, 'pause should have thrown an error');
+            assert.equal(process.exitCode, 1, 'pause should have thrown an error');
             assert.equal(
                 Object.keys(pausedKeys).length,
                 0,

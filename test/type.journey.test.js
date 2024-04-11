@@ -152,7 +152,7 @@ describe('type: journey', () => {
                 'testExisting_interaction'
             );
             // THEN
-            assert.equal(process.exitCode, true, 'delete should have thrown an error');
+            assert.equal(process.exitCode, 1, 'delete should have thrown an error');
 
             assert.equal(isDeleted, false, 'should not have deleted the item');
             return;
@@ -166,7 +166,7 @@ describe('type: journey', () => {
                 'testExisting_interaction/2'
             );
             // THEN
-            assert.equal(process.exitCode, true, 'delete should have thrown an error');
+            assert.equal(process.exitCode, 1, 'delete should have thrown an error');
 
             assert.equal(isDeleted, false, 'should not have deleted the item');
             return;

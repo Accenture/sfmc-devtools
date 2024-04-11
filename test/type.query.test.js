@@ -741,7 +741,7 @@ describe('type: query', () => {
             const executedKeys = await handler.execute('testInstance/testBU', 'query', [
                 'testExisting_query',
             ]);
-            assert.equal(process.exitCode, true, 'execute should have thrown an error');
+            assert.equal(process.exitCode, 1, 'execute should have thrown an error');
             assert.equal(
                 Object.keys(executedKeys).length,
                 0,
