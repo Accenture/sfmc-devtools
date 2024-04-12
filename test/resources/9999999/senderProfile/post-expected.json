@@ -1,0 +1,14 @@
+{
+    "AutoForwardToEmailAddress": "joern.berkefeld@accenture.com",
+    "AutoForwardToName": "Jörn Berkefeld",
+    "AutoReply": false,
+    "CustomerKey": "testNew_senderProfile",
+    "Description": "created on deploy",
+    "DirectForward": false,
+    "FromAddress": "joern.berkefeld@accenture.com",
+    "FromName": "Jörn Berkefeld",
+    "Name": "testNew_senderProfile",
+    "SenderHeaderEmailAddress": "",
+    "SenderHeaderName": "",
+    "UseDefaultRMMRules": false
+}

@@ -1,0 +1,14 @@
+{
+    "CustomerKey": "testExisting_senderProfile",
+    "Name": "testExisting_senderProfile",
+    "Description": "updated via deploy",
+    "FromName": "Jörn Berkefeld",
+    "FromAddress": "joern.berkefeld@accenture.com",
+    "UseDefaultRMMRules": false,
+    "AutoForwardToEmailAddress": "joern.berkefeld@accenture.com",
+    "AutoForwardToName": "Jörn Berkefeld",
+    "DirectForward": false,
+    "AutoReply": false,
+    "SenderHeaderEmailAddress": "",
+    "SenderHeaderName": ""
+}
