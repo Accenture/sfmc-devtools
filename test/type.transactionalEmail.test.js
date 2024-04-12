@@ -21,7 +21,7 @@ describe('type: transactionalEmail', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['transactionalEmail']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -52,7 +52,7 @@ describe('type: transactionalEmail', () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['transactionalEmail']);
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -111,7 +111,7 @@ describe('type: transactionalEmail', () => {
                 ['testExisting_temail'],
                 'testSourceMarket'
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.transactionalEmail ? Object.keys(result.transactionalEmail).length : 0,
                 1,
@@ -129,11 +129,7 @@ describe('type: transactionalEmail', () => {
                 'testExisting_temail',
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_temail', 'transactionalEmail'),
                 await testUtils.getExpectedJson('9999999', 'transactionalEmail', 'build'),
@@ -157,7 +153,7 @@ describe('type: transactionalEmail', () => {
                 'testExisting_temail'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
 
             assert.equal(isDeleted, true, 'should have deleted the item');
             return;

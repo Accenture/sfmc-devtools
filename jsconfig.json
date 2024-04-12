@@ -1,8 +1,12 @@
 {
     "include": ["lib/**/*.js", "types/**/*.js", "test/**/*.js"],
+    "exclude": ["node_modules"],
     "compilerOptions": {
-        "module": "es6",
+        "module": "NodeNext",
+        "moduleResolution": "nodenext",
         "target": "es2022",
-        "checkJs": false
+        "checkJs": true,
+        "skipLibCheck": true,
+        "noEmit": true
     }
 }

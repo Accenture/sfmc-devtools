@@ -22,7 +22,7 @@ describe('type: attributeGroup', () => {
             const retrieve = await handler.retrieve('testInstance/testBU', ['attributeGroup']);
 
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             assert.equal(
                 retrieve['testInstance/testBU'].attributeGroup
                     ? Object.keys(retrieve['testInstance/testBU'].attributeGroup).length

@@ -9,7 +9,7 @@
     },
     "files.eol": "\n",
     "js/ts.implicitProjectConfig.checkJs": true,
-    "javascript.validate.enable": false,
+    "javascript.validate.enable": true,
     "markdown.extension.italic.indicator": "_",
     "markdown.extension.list.indentationSize": "adaptive",
     "markdown.extension.toc.levels": "2..6",

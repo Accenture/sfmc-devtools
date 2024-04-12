@@ -115,11 +115,7 @@ describe('type: senderProfile', () => {
                 'testExisting_senderProfile',
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_senderProfile', 'senderProfile'),
                 await testUtils.getExpectedJson('9999999', 'senderProfile', 'build'),
