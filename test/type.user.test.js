@@ -24,7 +24,7 @@ describe('type: user', () => {
             // WHEN
             await handler.retrieve('testInstance/_ParentBU_', ['user']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -68,7 +68,7 @@ describe('type: user', () => {
             // WHEN
             await handler.retrieve('testInstance/_ParentBU_', ['user'], ['testExisting_user']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
 
             // because user is single-document-type we would not want to find an md file when we retrieve specific keys. only the generic retrieve updates it
             expect(file(`./docs/user/testInstance.users.md`)).to.not.exist;
@@ -97,7 +97,7 @@ describe('type: user', () => {
             ];
             await handler.deploy('testInstance/_ParentBU_', ['user'], expectedCache);
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
 
             // get results from cache
             const result = cache.getCache();
@@ -182,7 +182,7 @@ describe('type: user', () => {
                 ['testExisting_user'],
                 'testSourceMarket'
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             // WHEN
             assert.equal(
                 result.user ? Object.keys(result.user).length : 0,
@@ -201,11 +201,7 @@ describe('type: user', () => {
                 'testExisting_user',
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_user', 'user', '_ParentBU_'),

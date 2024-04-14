@@ -23,7 +23,7 @@ describe('type: mobileMessage', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['mobileMessage']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -57,7 +57,7 @@ describe('type: mobileMessage', () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['mobileMessage']);
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -119,7 +119,7 @@ describe('type: mobileMessage', () => {
                 ['NTIzOjc4OjA'],
                 'testSourceMarket'
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
 
             assert.equal(
                 result.mobileMessage ? Object.keys(result.mobileMessage).length : 0,
@@ -144,11 +144,7 @@ describe('type: mobileMessage', () => {
                 'NTIzOjc4OjA',
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
                 await testUtils.getActualDeployJson('NTIzOjc4OjA', 'mobileMessage'),
                 await testUtils.getExpectedJson('9999999', 'mobileMessage', 'build'),
@@ -176,7 +172,7 @@ describe('type: mobileMessage', () => {
                 'NTIzOjc4OjA'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
 
             assert.equal(isDeleted, true, 'should have deleted the item');
             return;
@@ -192,11 +188,7 @@ describe('type: mobileMessage', () => {
                 ['NTIzOjc4OjA']
             );
             // THEN
-            assert.equal(
-                process.exitCode,
-                false,
-                'getFilesToCommit should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'getFilesToCommit should not have thrown an error');
             assert.equal(fileList.length, 2, 'expected only 2 file paths');
 
             assert.equal(

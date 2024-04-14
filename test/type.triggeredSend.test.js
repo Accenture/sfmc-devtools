@@ -21,7 +21,7 @@ describe('type: triggeredSend', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['triggeredSend']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -52,7 +52,7 @@ describe('type: triggeredSend', () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['triggeredSend']);
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -93,7 +93,7 @@ describe('type: triggeredSend', () => {
                 ['testExisting_triggeredSend'],
                 'testSourceMarket'
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.triggeredSend ? Object.keys(result.triggeredSend).length : 0,
                 1,
@@ -114,11 +114,7 @@ describe('type: triggeredSend', () => {
                 'testExisting_triggeredSend',
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_triggeredSend', 'triggeredSend'),
                 await testUtils.getExpectedJson('9999999', 'triggeredSend', 'build'),
@@ -142,7 +138,7 @@ describe('type: triggeredSend', () => {
                 'testExisting_triggeredSend'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
 
             assert.equal(isDeleted, true, 'should have deleted the item');
             return;
