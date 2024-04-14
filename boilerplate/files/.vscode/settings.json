@@ -32,11 +32,12 @@
         "*.txt": "${capture}.asset-textfile-meta.json"
     },
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": "explicit"
     },
     "editor.formatOnSave": true,
     "files.associations": {
-        "*.ssjs": "javascript"
+        "*.ssjs": "javascript",
+        "*.html": "AMPscript"
     },
     "files.eol": "\n",
     "files.exclude": {
@@ -63,5 +64,16 @@
     },
     "[AMPscript]": {
         "editor.defaultFormatter": "FiB.beautyAmp"
-    }
+    },
+    "vsicons.associations.files": [
+        {
+            "icon": "apex",
+            "languages": [
+                { "ids": "ampscript", "defaultExtension": "amp" },
+                { "ids": "AMPscript", "defaultExtension": "amp" }
+            ],
+            "light": true,
+            "format": "FileFormat.svg"
+        }
+    ]
 }

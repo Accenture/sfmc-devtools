@@ -28,14 +28,6 @@
             "options": {
                 "tabWidth": 2
             }
-        },
-        {
-            "files": "*.sql",
-            "options": {
-                "formatter": "sql-formatter",
-                "language": "tsql",
-                "keywordCase": "upper"
-            }
         }
     ]
 }
