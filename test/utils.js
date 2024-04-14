@@ -100,7 +100,7 @@ export function getActualTemplateFile(customerKey, type, ext) {
 /**
  * gets file from resources folder which should be used for comparison
  *
- * @param {number} mid of Business Unit
+ * @param {string} mid of Business Unit
  * @param {string} type of metadata
  * @param {string} action of SOAP request
  * @returns {Promise.<string>} file in string form
@@ -111,7 +111,7 @@ export function getExpectedJson(mid, type, action) {
 /**
  * gets file from resources folder which should be used for comparison
  *
- * @param {number} mid of Business Unit
+ * @param {string} mid of Business Unit
  * @param {string} type of metadata
  * @param {string} action of SOAP request
  * @param {string} ext file extension
@@ -131,6 +131,7 @@ export function mockSetup(isDeploy) {
         // no need to execute this again - already done in standard setup
         handler.setOptions({ debug: true, noLogFile: true });
     }
+    // @ts-expect-error somehow, MockAdapter does not expect type AxiosInstance
     apimock = new MockAdapter(axiosInstance, { onNoMatch: 'throwException' });
     // set access_token to mid to allow for autorouting of mock to correct resources
     apimock.onPost(authResources.success.url).reply((config) => {

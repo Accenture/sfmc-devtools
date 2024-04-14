@@ -48,13 +48,14 @@
  * @property {string} createdDate e.g. "2020-09-14T01:42:03.017"
  * @property {string} modifiedDate e.g. "2020-09-14T01:42:03.017"
  * @property {'Overwrite'|'Update'|'Append'} targetUpdateTypeName defines how the query writes into the target data extension
- * @property {0|1|2} [targetUpdateTypeId] mapped to targetUpdateTypeName via this.definition.targetUpdateTypeMapping
+ * @property {number} [targetUpdateTypeId] 0|1|2, mapped to targetUpdateTypeName via this.definition.targetUpdateTypeMapping
  * @property {string} [targetId] Object ID of DE (removed before save)
  * @property {string} [targetDescription] Description DE (removed before save)
  * @property {boolean} isFrozen looks like this is always set to false
  * @property {string} [queryText] contains SQL query with line breaks converted to '\n'. The content is extracted during retrieval and written into a separate *.sql file
  * @property {string} [categoryId] holds folder ID, replaced with r__folder_Path during retrieve
  * @property {string} r__folder_Path folder path in which this DE is saved
+ * @property {string} [queryDefinitionId] Object ID of query
  * @typedef {Object.<string, QueryItem>} QueryMap
  */
 /**
@@ -84,10 +85,14 @@
  * @property {string} [Name_new] custom attribute that is only used when trying to rename a field from Name to Name_new
  * @property {string} DefaultValue empty string for not set
  * @property {true|false} IsRequired -
+ * @property {true|false} [IsNullable] opposite of IsRequired
  * @property {true|false} IsPrimaryKey -
- * @property {string} Ordinal 1, 2, 3, ...
+ * @property {number} Ordinal 1, 2, 3, ...
  * @property {'Text'|'Number'|'Date'|'Boolean'|'Decimal'|'EmailAddress'|'Phone'|'Locale'} FieldType can only be set on create
+ * @property {number|string} MaxLength field length
  * @property {string} Scale the number of places after the decimal that the field can hold; example: "0","1", ...
+ */
+/**
  * @typedef {Object.<string, DataExtensionFieldItem>} DataExtensionFieldMap
  */
 /**
@@ -110,6 +115,14 @@
  * @property {string} [r__dataExtensionTemplate_Name] name of optionally associated DE template
  * @property {object} [Template] -
  * @property {string} [Template.CustomerKey] key of optionally associated DE teplate
+ * @property {string} [RetainUntil] ?
+ * @property {any} [DataRetentionPeriodLength] ?
+ * @property {any} [DataRetentionPeriodUnitOfMeasure] ?
+ * @property {any} [RowBasedRetention] ?
+ * @property {any} [ResetRetentionPeriodOnImport] ?
+ * @property {any} [DeleteAtEndOfRetentionPeriod] ?
+ */
+/**
  * @typedef {Object.<string, DataExtensionItem>} DataExtensionMap
  */
 /**
@@ -182,7 +195,7 @@
 /**
  * @typedef {object} AutomationActivity
  * @property {string} name name (not key) of activity
- * @property {string} [objectTypeId] Id of assoicated activity type; see this.definition.activityTypeMapping
+ * @property {number} [objectTypeId] Id of assoicated activity type; see this.definition.activityTypeMapping
  * @property {string} [activityObjectId] Object Id of assoicated metadata item
  * @property {number} [displayOrder] order within step; starts with 1 or higher number
  * @property {string} r__type see this.definition.activityTypeMapping
@@ -197,17 +210,23 @@
  */
 /**
  * @typedef {object} AutomationSchedule REST format
- * @property {number} typeId ?
+ * @property {number} typeId equals schedule.scheduleTypeId; upsert endpoint requires scheduleTypeId. retrieve endpoint returns typeId
+ * @property {number} [scheduleTypeId] equals schedule.typeId; upsert endpoint requires scheduleTypeId. retrieve endpoint returns typeId
  * @property {string} startDate example: '2021-05-07T09:00:00'
  * @property {string} endDate example: '2021-05-07T09:00:00'
  * @property {string} icalRecur example: 'FREQ=DAILY;UNTIL=20790606T160000;INTERVAL=1'
  * @property {string} timezoneName example: 'W. Europe Standard Time'; see this.definition.timeZoneMapping
  * @property {number} [timezoneId] see this.definition.timeZoneMapping
+ * @property {number} [rangeTypeId] ?
+ * @property {any} [pattern] ?
+ * @property {any} [scheduledTime] ?
+ * @property {string} [scheduledStatus] ?
  */
 /**
  * @typedef {object} AutomationScheduleSoap SOAP format
+ * @property {string} [RecurrenceType] 'Minutely'|'Hourly'|'Daily'|'Weekly'|'Monthly'|'Yearly'
  * @property {object} Recurrence -
- * @property {object} Recurrence.$ {'xsi:type': keyStem + 'lyRecurrence'}
+ * @property {object} [Recurrence.$] {'xsi:type': keyStem + 'lyRecurrence'}
  * @property {'ByYear'} [Recurrence.YearlyRecurrencePatternType] * currently not supported by tool *
  * @property {'ByMonth'} [Recurrence.MonthlyRecurrencePatternType] * currently not supported by tool *
  * @property {'ByWeek'} [Recurrence.WeeklyRecurrencePatternType] * currently not supported by tool *
@@ -220,25 +239,32 @@
  * @property {number} [Recurrence.DayInterval] 1..n
  * @property {number} [Recurrence.HourInterval] 1..n
  * @property {number} [Recurrence.MinuteInterval] 1..n
- * @property {number} _interval internal variable for CLI output only
+ * @property {number} [_interval] internal variable for CLI output only
  * @property {object} TimeZone -
  * @property {number} TimeZone.ID AutomationSchedule.timezoneId
- * @property {string} _timezoneString internal variable for CLI output only
+ * @property {true} [TimeZone.IDSpecified] always true
+ * @property {string} [_timezoneString] internal variable for CLI output only
  * @property {string} StartDateTime AutomationSchedule.startDate
- * @property {string} EndDateTime AutomationSchedule.endDate
- * @property {string} _StartDateTime AutomationSchedule.startDate; internal variable for CLI output only
+ * @property {string} [_StartDateTime] AutomationSchedule.startDate; internal variable for CLI output only
+ * @property {string} [EndDateTime] AutomationSchedule.endDate
  * @property {'EndOn'|'EndAfter'} RecurrenceRangeType set to 'EndOn' if AutomationSchedule.icalRecur contains 'UNTIL'; otherwise to 'EndAfter'
- * @property {number} Occurrences only exists if RecurrenceRangeType=='EndAfter'
+ * @property {number} [Occurrences] only exists if RecurrenceRangeType=='EndAfter'
  */
 /**
  * @typedef {object} AutomationItem
- * @property {string} [id] Object Id
- * @property {string} key key
- * @property {string} name name
- * @property {any} notifications notifications
- * @property {string} description -
- * @property {'scheduled'|'triggered'} type Starting Source = Schedule / File Drop
- * @property {'Scheduled'|'Running'|'Ready'|'Building'|'PausedSchedule'|'InactiveTrigger'} status -
+ * @property {string} id Object Id
+ * @property {string} [legacyId] legacy Object Id - used for handling notifications
+ * @property {string} [ObjectID] Object Id as returned by SOAP API
+ * @property {string} [programId] legacy id
+ * @property {string} key key (Rest API)
+ * @property {string} [CustomerKey] key (SOAP API)
+ * @property {string} [name] name (Rest API)
+ * @property {string} [Name] name (SOAP API)
+ * @property {any} [notifications] notifications
+ * @property {string} [description] -
+ * @property {'scheduled'|'triggered'} [type] Starting Source = Schedule / File Drop
+ * @property {'Scheduled'|'Running'|'Ready'|'Building'|'PausedSchedule'|'InactiveTrigger'} [status] automation status
+ * @property {number} [statusId] automation status
  * @property {AutomationSchedule} [schedule] only existing if type=scheduled
  * @property {object} [fileTrigger] only existing if type=triggered
  * @property {string} fileTrigger.fileNamingPattern file name with placeholders
@@ -251,12 +277,12 @@
  * @property {AutomationSchedule} [startSource.schedule] rewritten to AutomationItem.schedule
  * @property {object} [startSource.fileDrop] rewritten to AutomationItem.fileTrigger
  * @property {string} startSource.fileDrop.fileNamePattern file name with placeholders
- * @property {string} startSource.fileDrop.fileNamePatternTypeId -
+ * @property {number} startSource.fileDrop.fileNamePatternTypeId -
  * @property {string} startSource.fileDrop.folderLocation -
  * @property {boolean} startSource.fileDrop.queueFiles -
  * @property {number} startSource.typeId -
- * @property {AutomationStep[]} steps -
- * @property {string} r__folder_Path folder path
+ * @property {AutomationStep[]} [steps] -
+ * @property {string} [r__folder_Path] folder path
  * @property {string} [categoryId] holds folder ID, replaced with r__folder_Path during retrieve
  */
 /**
@@ -270,13 +296,14 @@
  * @property {string} notificationEmailAddress email address to send notification to; empty string if shouldEmailOnFailure=false
  * @property {string} notificationEmailMessage email message to send; empty string if shouldEmailOnFailure=false
  * @property {number} createdBy user id of creator
+ * @property {string} [targetObjectId] ObjectID of target data extension
  * @property {string} r__dataExtension_CustomerKey key of target data extension
  */
 
 /**
  * @typedef {Object.<string, AutomationItem>} AutomationMap
  * @typedef {{metadata:AutomationMap,type:string}} AutomationMapObj
- * @typedef {{metadata:AutomationItem,type:string}} AutomationItemObj
+ * @typedef {{metadata:object | AutomationItem,type:string}} AutomationItemObj
  * @typedef {object} McdevDeltaPkgItem
  * @property {string} file relative path to file
  * @property {number} changes changed lines
@@ -333,21 +360,36 @@
  * @property {string} [continueRequest] request id
  * @property {object} [options] additional options (CallsInConversation, Client, ConversationID, Priority, RequestType, SaveOptions, ScheduledTime, SendResponseTo, SequenceCode)
  * @property {*} [clientIDs] ?
- * @property {SoapFilter | SoapFilterSimple} [filter] simple or complex
+ * @property {SoapSDKFilter} [filter] simple or complex
 complex
  * @property {boolean} [QueryAllAccounts] all BUs or just one
  */
 /**
  * @typedef {object} SoapFilterSimple
  * @property {string} property field
- * @property {'equals'|'equal'|'notEquals'|'isNull'|'isNotNull'|'greaterThan'|'lessThan'|'greaterThanOrEqual'|'lessThanOrEqual'|'between'|'IN'|'in'|'like'} simpleOperator various options
- * @property {string | number | boolean | Array} [value] field value
+ * @property {'equals'|'notEquals'|'isNull'|'isNotNull'|'greaterThan'|'lessThan'|'greaterThanOrEqual'|'lessThanOrEqual'|'between'|'IN'|'in'|'like'} simpleOperator various options
+ * @property {string | number | boolean | string[] | number[]} [value] field value
  */
 /**
- * @typedef {object} SoapFilter
- * @property {SoapFilter | SoapFilterSimple} leftOperand string for simple or a new filter-object for complex
- * @property {'AND'|'OR'} operator various options
- * @property {SoapFilter | SoapFilterSimple} [rightOperand] string for simple or a new filter-object for complex; omit for isNull and isNotNull
+ * @typedef {object} SoapFilterComplex
+ * @property {SoapSDKFilter} leftOperand string for simple or a new filter-object for complex
+ * @property {'AND'|'OR'} logicalOperator various options
+ * @property {SoapSDKFilter} rightOperand string for simple or a new filter-object for complex; omit for isNull and isNotNull
+ */
+/**
+ * @typedef {object} SoapSDKFilterSimple
+ * @property {SoapFilterSimple["property"]} leftOperand string for simple or a new filter-object for complex
+ * @property {SoapFilterSimple["simpleOperator"]} operator various options
+ * @property {SoapFilterSimple["value"]} [rightOperand] string for simple or a new filter-object for complex; omit for isNull and isNotNull
+ */
+/**
+ * @typedef {object} SoapSDKFilterComplex
+ * @property {SoapFilterComplex["leftOperand"]} leftOperand string for simple or a new filter-object for complex
+ * @property {SoapFilterComplex["logicalOperator"]} operator various options
+ * @property {SoapFilterComplex["rightOperand"]} rightOperand string for simple or a new filter-object for complex; omit for isNull and isNotNull
+ */
+/**
+ * @typedef {SoapSDKFilterSimple | SoapSDKFilterComplex} SoapSDKFilter
  */
 
 /**
@@ -366,7 +408,7 @@ complex
  * @typedef {object} AssetFilter
  * @property {AssetFilter | AssetFilterSimple} leftOperand string for simple or a new filter-object for complex
  * @property {'AND'|'OR'} logicalOperator various options
- * @property {SoapFilter | AssetFilterSimple} [rightOperand] string for simple or a new filter-object for complex; omit for isNull and isNotNull
+ * @property {SoapSDKFilter | AssetFilterSimple} [rightOperand] string for simple or a new filter-object for complex; omit for isNull and isNotNull
  */
 /**
  * @typedef {object} AssetFilterSimple

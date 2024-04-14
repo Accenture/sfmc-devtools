@@ -23,7 +23,7 @@ describe('type: script', () => {
             // WHEN
             const retrieve = await handler.retrieve('testInstance/testBU', ['script']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // retrieve result
             assert.equal(
                 retrieve['testInstance/testBU'].script
@@ -120,7 +120,7 @@ describe('type: script', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['script'], ['testExisting_script']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -163,7 +163,7 @@ describe('type: script', () => {
             await handler.retrieve('testInstance/testBU', ['script']);
 
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
 
             // get results from cache
             const result = cache.getCache();
@@ -204,7 +204,7 @@ describe('type: script', () => {
             handler.setOptions({ like: { key: 'NotExisting_script' } });
             await handler.retrieve('testInstance/testBU', ['script']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
 
             // get results from cache
             const result = cache.getCache();
@@ -234,7 +234,7 @@ describe('type: script', () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['script']);
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -279,11 +279,7 @@ describe('type: script', () => {
                 'testSourceMarket'
             );
             // WHEN
-            assert.equal(
-                process.exitCode,
-                false,
-                'retrieveAsTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'retrieveAsTemplate should not have thrown an error');
             assert.equal(
                 result.script ? Object.keys(result.script).length : 0,
                 1,
@@ -304,11 +300,7 @@ describe('type: script', () => {
                 'testExisting_script',
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_script', 'script'),
@@ -338,7 +330,7 @@ describe('type: script', () => {
                 'testSourceMarket'
             );
             // WHEN
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
 
             assert.equal(
                 result.script ? Object.keys(result.script).length : 0,
@@ -360,11 +352,7 @@ describe('type: script', () => {
                 'testExisting_script',
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_script', 'script'),
@@ -406,11 +394,7 @@ describe('type: script', () => {
                 'testExisting_script',
             ]);
             // THEN
-            assert.equal(
-                process.exitCode,
-                false,
-                'getFilesToCommit should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'getFilesToCommit should not have thrown an error');
             assert.equal(fileList.length, 3, 'expected only 3 file paths (html, json, ssjs)');
 
             assert.equal(

@@ -21,7 +21,7 @@ describe('type: journey', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['journey']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -52,7 +52,7 @@ describe('type: journey', () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['journey']);
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -108,7 +108,7 @@ describe('type: journey', () => {
                 ['testExisting_interaction'],
                 'testSourceMarket'
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.journey ? Object.keys(result.journey).length : 0,
                 1,
@@ -127,11 +127,7 @@ describe('type: journey', () => {
                 'testExisting_interaction',
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_interaction', 'journey'),
                 await testUtils.getExpectedJson('9999999', 'journey', 'build'),
@@ -156,7 +152,7 @@ describe('type: journey', () => {
                 'testExisting_interaction'
             );
             // THEN
-            assert.equal(process.exitCode, true, 'delete should have thrown an error');
+            assert.equal(process.exitCode, 1, 'delete should have thrown an error');
 
             assert.equal(isDeleted, false, 'should not have deleted the item');
             return;
@@ -170,7 +166,7 @@ describe('type: journey', () => {
                 'testExisting_interaction/2'
             );
             // THEN
-            assert.equal(process.exitCode, true, 'delete should have thrown an error');
+            assert.equal(process.exitCode, 1, 'delete should have thrown an error');
 
             assert.equal(isDeleted, false, 'should not have deleted the item');
             return;
@@ -184,7 +180,7 @@ describe('type: journey', () => {
                 'testExisting_interaction/1'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
 
             assert.equal(isDeleted, true, 'should have deleted the item');
             return;

@@ -23,7 +23,7 @@ describe('type: query', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['query']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -59,7 +59,7 @@ describe('type: query', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['query'], ['testExisting_query']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -88,7 +88,7 @@ describe('type: query', () => {
             handler.setOptions({ like: { key: '%Existing_query' } });
             await handler.retrieve('testInstance/testBU', ['query']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -119,7 +119,7 @@ describe('type: query', () => {
             handler.setOptions({ like: { key: 'NotExisting_query' } });
             await handler.retrieve('testInstance/testBU', ['query']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -154,7 +154,7 @@ describe('type: query', () => {
                 ['testNew_query', 'testExisting_query']
             );
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             assert.equal(
                 resultDeploy['testInstance/testBU']?.query
                     ? Object.keys(resultDeploy['testInstance/testBU']?.query).length
@@ -207,7 +207,7 @@ describe('type: query', () => {
             // THEN
             assert.equal(
                 process.exitCode,
-                false,
+                0,
                 'deploy with --execute should not have thrown an error'
             );
             // confirm updated item
@@ -253,7 +253,7 @@ describe('type: query', () => {
             // THEN
             assert.equal(
                 process.exitCode,
-                false,
+                0,
                 'deploy --changeKeyValue should not have thrown an error'
             );
             assert.equal(
@@ -301,7 +301,7 @@ describe('type: query', () => {
             // THEN
             assert.equal(
                 process.exitCode,
-                false,
+                0,
                 'deploy --changeKeyValue should not have thrown an error'
             );
             assert.equal(
@@ -339,7 +339,7 @@ describe('type: query', () => {
                 'testExisting_query',
             ]);
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // check which keys were fixed
             assert.equal(
                 resultFixKeys['testInstance/testBU'].length,
@@ -381,7 +381,7 @@ describe('type: query', () => {
                 'returned keys do not correspond to expected fixed keys'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_query_fixedKeys', 'query'),
@@ -420,7 +420,7 @@ describe('type: query', () => {
             // THEN
             assert.equal(
                 process.exitCode,
-                false,
+                0,
                 'fixKeys with --execute should not have thrown an error'
             );
             // confirm updated item
@@ -459,7 +459,7 @@ describe('type: query', () => {
                 'returned keys do not correspond to expected fixed keys'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_query_fixedKeys', 'query'),
@@ -498,7 +498,7 @@ describe('type: query', () => {
             // THEN
             assert.equal(
                 process.exitCode,
-                false,
+                0,
                 'fixKeys with --execute should not have thrown an error'
             );
             // confirm updated item
@@ -537,7 +537,7 @@ describe('type: query', () => {
                 'returned keys do not correspond to expected fixed keys'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_query_fixedKeys', 'query'),
@@ -567,11 +567,7 @@ describe('type: query', () => {
                 'testSourceMarket'
             );
             // WHEN
-            assert.equal(
-                process.exitCode,
-                false,
-                'retrieveAsTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'retrieveAsTemplate should not have thrown an error');
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
                 1,
@@ -592,11 +588,7 @@ describe('type: query', () => {
                 'testExisting_query',
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_query', 'query'),
@@ -626,7 +618,7 @@ describe('type: query', () => {
                 'testSourceMarket'
             );
             // WHEN
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
 
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
@@ -648,11 +640,7 @@ describe('type: query', () => {
                 'testExisting_query',
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_query', 'query'),
@@ -681,7 +669,7 @@ describe('type: query', () => {
                 'testExisting_query'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
 
             assert.equal(isDeleted, true, 'should have deleted the item');
             return;
@@ -695,11 +683,7 @@ describe('type: query', () => {
                 'testExisting_query',
             ]);
             // THEN
-            assert.equal(
-                process.exitCode,
-                false,
-                'getFilesToCommit should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'getFilesToCommit should not have thrown an error');
             assert.equal(fileList.length, 2, 'expected only 2 file paths');
 
             assert.equal(
@@ -721,7 +705,7 @@ describe('type: query', () => {
             const executedKeys = await handler.execute('testInstance/testBU', 'query', [
                 'testExisting_query',
             ]);
-            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
@@ -738,7 +722,7 @@ describe('type: query', () => {
         it('Should start a query selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExist%query' } });
             const executedKeys = await handler.execute('testInstance/testBU', 'query');
-            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
@@ -757,7 +741,7 @@ describe('type: query', () => {
             const executedKeys = await handler.execute('testInstance/testBU', 'query', [
                 'testExisting_query',
             ]);
-            assert.equal(process.exitCode, true, 'execute should have thrown an error');
+            assert.equal(process.exitCode, 1, 'execute should have thrown an error');
             assert.equal(
                 Object.keys(executedKeys).length,
                 0,

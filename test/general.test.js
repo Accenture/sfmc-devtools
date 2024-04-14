@@ -41,7 +41,7 @@ describe('GENERAL', () => {
     describe('explainTypes ================', () => {
         it('without options', () => {
             handler.explainTypes();
-            assert.equal(process.exitCode, false, 'explainTypes should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'explainTypes should not have thrown an error');
 
             return;
         });
@@ -52,7 +52,7 @@ describe('GENERAL', () => {
 
             assert.equal(
                 process.exitCode,
-                false,
+                0,
                 'explainTypes --json should not have thrown an error'
             );
 
