@@ -114,6 +114,7 @@ describe('type: asset', () => {
             assert.equal(process.exitCode, 0, 'resolveId should not have thrown an error');
             assert.deepEqual(
                 resolveIdJson,
+                // @ts-expect-error bad typing of assert.deepEqual
                 await testUtils.getExpectedJson('9999999', 'asset', 'resolveId-1295064-noPath'),
                 'returned response was not equal expected'
             );
@@ -142,6 +143,7 @@ describe('type: asset', () => {
             assert.equal(process.exitCode, 0, 'resolveId should not have thrown an error');
             assert.deepEqual(
                 resolveIdJson,
+                // @ts-expect-error bad typing of assert.deepEqual
                 await testUtils.getExpectedJson('9999999', 'asset', 'resolveId-1295064-withPath'),
                 'returned response was not equal expected'
             );
@@ -156,6 +158,7 @@ describe('type: asset', () => {
             // IMPORTANT: this will throw a false "TEST-ERROR" but our testing framework currently needs to not find the file to throw a 404
             assert.deepEqual(
                 resolveIdJson,
+                // @ts-expect-error bad typing of assert.deepEqual
                 await testUtils.getExpectedJson('9999999', 'asset', 'resolveId-1234-notFound'),
                 'returned response was not equal expected'
             );

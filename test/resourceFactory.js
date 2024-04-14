@@ -4,6 +4,7 @@ import { XMLParser } from 'fast-xml-parser';
 import { Util } from '../lib/util/util.js';
 const parser = new XMLParser();
 const attributeParser = new XMLParser({ ignoreAttributes: false });
+/** @type {typeof Util.color} */
 let color;
 
 /* eslint-disable unicorn/prefer-ternary */
@@ -12,6 +13,7 @@ if (
     process.env.VSCODE_CRASH_REPORTER_PROCESS_TYPE === 'extensionHost'
 ) {
     // when we execute the test in a VSCode extension host, we don't want CLI color codes.
+    // @ts-expect-error hacky way to get rid of colors - ts doesn't appreciate the hack
     color = new Proxy(
         {},
         {
@@ -38,7 +40,7 @@ if (
  * @param {string} type metadata Type
  * @param {string} mid of Business Unit
  * @param {object|string} filter likely for customer key
- * @returns {string} relevant metadata stringified
+ * @returns {Promise.<string>} relevant metadata stringified
  */
 async function loadSOAPRecords(mcdevAction, type, mid, filter) {
     type = type[0].toLowerCase() + type.slice(1);
