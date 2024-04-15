@@ -5,16 +5,16 @@
     "entry": [
         {
             "id": "ZTFXX0hpNDNFZXU0RzBqZk45SGIxdzo0MTow",
-            "name": "Contact_SMS_DEV_2",
+            "name": "testExisting_importFileSMS",
             "sourceFile": "_CustomObject",
             "audience": {
                 "id": "QUFBQUFBQUFBQUFBQUFBQUFBQUFBQTo2Mzow",
-                "name": "Contact_SMS_DEV_2",
+                "name": "testExisting_importFileSMS",
                 "description": ""
             },
             "code": {
-                "id": "N3Y3RTN6aXBWVUtmdUtGWEpfNW5yUTo4MTow",
-                "code": "491771783703",
+                "id": "RXBwc0JoNk9jVTY0YWJNWFZDaGxvdzo4MTow",
+                "code": "4912312345678",
                 "codeType": "PRIVATE",
                 "isShortCode": false,
                 "isGsmCharacterSetOnly": false,
@@ -27,8 +27,8 @@
                 "isOwner": false
             },
             "keyword": {
-                "id": "Y0ZDXzVjVHdYVUNlQVJlT2U2dzVKZzo4Njow",
-                "keyword": "ONEDEVICE_DEV",
+                "id": "cTVJaG5oSDJPVUNHcUh6Z3pQT2tVdzo4Njow",
+                "keyword": "TESTEXISTING_KEYWORD",
                 "restriction": "NONE",
                 "isInherited": false,
                 "isLinkShorteningEnabled": false,
@@ -48,8 +48,8 @@
                 "description": ""
             },
             "code": {
-                "id": "N3Y3RTN6aXBWVUtmdUtGWEpfNW5yUTo4MTow",
-                "code": "491771783703",
+                "id": "RXBwc0JoNk9jVTY0YWJNWFZDaGxvdzo4MTow",
+                "code": "4912312345678",
                 "codeType": "PRIVATE",
                 "isShortCode": false,
                 "isGsmCharacterSetOnly": false,
@@ -83,8 +83,8 @@
                 "description": ""
             },
             "code": {
-                "id": "N3Y3RTN6aXBWVUtmdUtGWEpfNW5yUTo4MTow",
-                "code": "491771783703",
+                "id": "RXBwc0JoNk9jVTY0YWJNWFZDaGxvdzo4MTow",
+                "code": "4912312345678",
                 "codeType": "PRIVATE",
                 "isShortCode": false,
                 "isGsmCharacterSetOnly": false,

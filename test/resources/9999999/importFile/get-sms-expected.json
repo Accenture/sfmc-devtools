@@ -1,7 +1,6 @@
 {
     "allowErrors": true,
     "c__dataAction": "AddUpdate",
-    "c__destinationType": "SMS",
     "c__subscriberImportType": "DataExtension",
     "createdDate": "2022-11-24T03:29:01.05",
     "customerKey": "testExisting_importFileSMS",
@@ -67,7 +66,14 @@
     "modifiedDate": "2023-07-19T23:06:33.577",
     "name": "testExisting_importFileSMS",
     "notificationEmailAddress": "joern.berkefeld@accenture.com",
-    "r__fileLocation_name": "ExactTarget Enhanced FTP",
     "sendEmailNotification": true,
-    "standardQuotedStrings": false
+    "standardQuotedStrings": false,
+    "destination": {
+        "c__destinationType": "SMS",
+        "c__codeKeyword": "4912312345678.TESTEXISTING_KEYWORD"
+    },
+    "source": {
+        "r__dataExtension_CustomerKey": "testExisting_dataExtension",
+        "r__fileLocation_name": "ExactTarget Enhanced FTP"
+    }
 }
