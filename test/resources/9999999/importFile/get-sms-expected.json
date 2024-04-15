@@ -1,7 +1,9 @@
 {
     "allowErrors": true,
     "c__dataAction": "AddUpdate",
+    "c__codeKeyword": "4912312345678.TESTEXISTING_KEYWORD",
     "c__destinationType": "SMS",
+    "c__sourceObjectKey": "testExisting_dataExtension",
     "c__subscriberImportType": "DataExtension",
     "createdDate": "2022-11-24T03:29:01.05",
     "customerKey": "testExisting_importFileSMS",
