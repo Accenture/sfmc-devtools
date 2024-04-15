@@ -1,0 +1,8 @@
+{
+    "CustomerKey": "testTemplated_sendClassification",
+    "Description": "",
+    "Name": "testTemplated_sendClassification",
+    "c__classification": "Commercial",
+    "r__deliveryProfile_key": "Default",
+    "r__senderProfile_CustomerKey": "testTemplated_senderProfile"
+}
