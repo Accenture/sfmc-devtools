@@ -8,10 +8,7 @@ const attributeParser = new XMLParser({ ignoreAttributes: false });
 let color;
 
 /* eslint-disable unicorn/prefer-ternary */
-if (
-    process.env.VSCODE_AMD_ENTRYPOINT === 'vs/workbench/api/node/extensionHostProcess' ||
-    process.env.VSCODE_CRASH_REPORTER_PROCESS_TYPE === 'extensionHost'
-) {
+if (Util.isRunViaVSCodeExtension) {
     // when we execute the test in a VSCode extension host, we don't want CLI color codes.
     // @ts-expect-error hacky way to get rid of colors - ts doesn't appreciate the hack
     color = new Proxy(
