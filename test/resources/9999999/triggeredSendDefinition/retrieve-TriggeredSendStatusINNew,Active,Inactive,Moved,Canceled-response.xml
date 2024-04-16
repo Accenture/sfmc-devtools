@@ -39,8 +39,13 @@
                 <SendClassification>
                     <PartnerKey xsi:nil="true" />
                     <ObjectID xsi:nil="true" />
-                    <CustomerKey>Default Transactional</CustomerKey>
+                    <CustomerKey>testExisting_sendClassification</CustomerKey>
                 </SendClassification>
+                <SenderProfile>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testExisting_senderProfile</CustomerKey>
+                </SenderProfile>
                 <FromName>unsubscribe</FromName>
                 <FromAddress>unsubscribe@emails.mcdev.accenture.com</FromAddress>
                 <SuppressTracking>false</SuppressTracking>
