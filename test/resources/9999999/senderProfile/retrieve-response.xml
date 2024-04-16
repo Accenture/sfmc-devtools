@@ -23,6 +23,24 @@
             <RequestID>4c6f37a1-7ab4-47a1-b341-f9912462ee97</RequestID>
             <Results xsi:type="SenderProfile">
                 <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-22T11:53:00</CreatedDate>
+                <ModifiedDate>2016-07-22T11:53:00</ModifiedDate>
+                <ObjectID>7acfb80f-3550-e611-96fe-38eaa7142c61</ObjectID>
+                <CustomerKey>Default</CustomerKey>
+                <Name>Default</Name>
+                <Description>Account defaults</Description>
+                <FromName>Accenture</FromName>
+                <FromAddress>joern.berkefeld@accenture.com</FromAddress>
+                <UseDefaultRMMRules>true</UseDefaultRMMRules>
+                <AutoForwardToEmailAddress />
+                <AutoForwardToName />
+                <DirectForward>false</DirectForward>
+                <AutoReply>false</AutoReply>
+                <SenderHeaderEmailAddress />
+                <SenderHeaderName />
+            </Results>
+            <Results xsi:type="SenderProfile">
+                <PartnerKey xsi:nil="true" />
                 <CreatedDate>2021-08-03T11:14:00</CreatedDate>
                 <ModifiedDate>2021-08-03T11:14:00</ModifiedDate>
                 <ObjectID>a75d452b-7ef4-eb11-b82d-48df37d1da95</ObjectID>
