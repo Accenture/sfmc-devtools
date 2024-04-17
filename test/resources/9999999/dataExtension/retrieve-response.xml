@@ -47,6 +47,32 @@
                 <RetainUntil />
                 <CategoryID>2</CategoryID>
             </Results>
+            <Results xsi:type="DataExtension">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2022-04-21T06:56:27.927</CreatedDate>
+                <ModifiedDate>2022-04-21T06:56:27.927</ModifiedDate>
+                <ObjectID>21711373-72c1-ec11-b83b-exclusion</ObjectID>
+                <CustomerKey>testExisting_dataExtension_exclusion</CustomerKey>
+                <Name>testExisting_dataExtension_exclusion</Name>
+                <Description>bla bla</Description>
+                <IsSendable>true</IsSendable>
+                <IsTestable>true</IsTestable>
+                <SendableDataExtensionField>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <Name>ContactKey</Name>
+                </SendableDataExtensionField>
+                <SendableSubscriberField>
+                    <Name>_SubscriberKey</Name>
+                </SendableSubscriberField>
+                <DataRetentionPeriodLength>6</DataRetentionPeriodLength>
+                <DataRetentionPeriodUnitOfMeasure>5</DataRetentionPeriodUnitOfMeasure>
+                <RowBasedRetention>true</RowBasedRetention>
+                <ResetRetentionPeriodOnImport>false</ResetRetentionPeriodOnImport>
+                <DeleteAtEndOfRetentionPeriod>false</DeleteAtEndOfRetentionPeriod>
+                <RetainUntil />
+                <CategoryID>2</CategoryID>
+            </Results>
         </RetrieveResponseMsg>
     </soap:Body>
 </soap:Envelope>
