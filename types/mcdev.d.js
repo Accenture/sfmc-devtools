@@ -444,5 +444,10 @@ complex
  * @property {Function} errorStack (ex, msg) print error with trace message
  * @typedef {import('winston').Logger & McdevLogger} Logger
  */
+/**
+ * @typedef {{id: number, key: string, pathName: string}} AssetItemSimple
+ * @typedef {Object.<string|number, AssetItemSimple>} AssetItemSimpleMap
+ * @typedef {'id'|'key'|'pathName'} ContentBlockConversionTypes
+ */
 
 export default {};
