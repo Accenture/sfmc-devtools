@@ -446,7 +446,8 @@ complex
  */
 /**
  * @typedef {{id: number, key: string, pathName: string}} AssetItemSimple
- * @typedef {Object.<string|number, AssetItemSimple>} AssetItemSimpleMap
+ * @typedef {Object.<string, AssetItemSimple>} AssetItemSimpleMap
+ * @typedef {Object.<number, AssetItemSimple>} AssetItemIdSimpleMap
  * @typedef {'id'|'key'|'pathName'} ContentBlockConversionTypes
  */
 
