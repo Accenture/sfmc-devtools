@@ -19,6 +19,10 @@ Run the following to install Accenture SFMC DevTools on your computer:
 npm install -g mcdev
 ```
 
+### VSCode Extension
+
+We also provide a [VSCode extension](https://marketplace.visualstudio.com/items?itemName=Accenture-oss.sfmc-devtools-vscode) that integrates SFMC DevTools into your IDE. You can install it from the [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=Accenture-oss.sfmc-devtools-vscode).
+
 ### Include in your package
 
 First, install it as dependency:
@@ -69,4 +73,4 @@ The people that lead this project:
 
 ## Copyright
 
-Copyright (c) 2020-2023 Accenture. [MIT licensed](https://github.com/Accenture/sfmc-devtools/blob/main/LICENSE).
+Copyright (c) 2020-2024 Accenture. [MIT licensed](https://github.com/Accenture/sfmc-devtools/blob/main/LICENSE).
