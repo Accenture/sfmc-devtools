@@ -131,6 +131,42 @@ describe('GENERAL', () => {
         });
     });
 
+    describe('without --metadata ================', () => {
+        it('retrieve multiple type with keys', async () => {
+            const buName = 'testInstance/testBU';
+            const result = await handler.retrieve(
+                buName,
+                ['dataExtract', 'senderProfile'],
+                ['wrong-key', 'Default']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+
+            const retrievedTypes = Object.keys(result[buName]);
+            assert.equal(retrievedTypes.length, 2, 'retrieve should have returned 2 types');
+            assert.equal(
+                retrievedTypes.includes('dataExtract'),
+                true,
+                'retrieve should have returned dataExtract'
+            );
+            assert.equal(
+                retrievedTypes.includes('senderProfile'),
+                true,
+                'retrieve should have returned senderProfile'
+            );
+            assert.equal(
+                Object.keys(result[buName]['dataExtract']).length,
+                0,
+                'retrieve should have returned 0 dataExtracts'
+            );
+            assert.equal(
+                Object.keys(result[buName]['senderProfile']).length,
+                1,
+                'retrieve should have returned 1 senderProfile'
+            );
+        });
+    });
+
     describe('init ================', () => {
         it('should init a local project without downloading BUs');
 
