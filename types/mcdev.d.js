@@ -10,7 +10,7 @@
  */
 /**
  * @typedef {Object.<string, string>} TemplateMap
- * @typedef {'asset'|'asset-archive'|'asset-asset'|'asset-audio'|'asset-block'|'asset-code'|'asset-document'|'asset-image'|'asset-message'|'asset-other'|'asset-rawimage'|'asset-template'|'asset-textfile'|'asset-video'|'attributeGroup'|'attributeSet'|'automation'|'campaign'|'contentArea'|'dataExtension'|'dataExtensionField'|'dataExtensionTemplate'|'dataExtract'|'dataExtractType'|'discovery'|'email'|'emailSend'|'event'|'fileLocation'|'fileTransfer'|'filter'|'folder'|'importFile'|'journey'|'list'|'mobileCode'|'mobileKeyword'|'mobileMessage'|'query'|'role'|'script'|'sendClassification'|'transactionalEmail'|'transactionalPush'|'transactionalSMS'|'triggeredSend'|'user'|'verification'} SupportedMetadataTypes
+ * @typedef {'asset'|'asset-archive'|'asset-asset'|'asset-audio'|'asset-block'|'asset-code'|'asset-document'|'asset-image'|'asset-message'|'asset-other'|'asset-rawimage'|'asset-template'|'asset-textfile'|'asset-video'|'attributeGroup'|'attributeSet'|'automation'|'campaign'|'contentArea'|'dataExtension'|'dataExtensionField'|'dataExtensionTemplate'|'dataExtract'|'dataExtractType'|'discovery'|'deliveryProfile'|'email'|'emailSend'|'event'|'fileLocation'|'fileTransfer'|'filter'|'folder'|'importFile'|'journey'|'list'|'mobileCode'|'mobileKeyword'|'mobileMessage'|'query'|'role'|'script'|'sendClassification'|'senderProfile'|'transactionalEmail'|'transactionalPush'|'transactionalSMS'|'triggeredSend'|'user'|'verification'} SupportedMetadataTypes
  * @typedef {Object.<SupportedMetadataTypes, string[]>} TypeKeyCombo object-key=metadata type, value=array of external keys
  */
 
