@@ -444,5 +444,20 @@ complex
  * @property {Function} errorStack (ex, msg) print error with trace message
  * @typedef {import('winston').Logger & McdevLogger} Logger
  */
+/**
+ * @typedef {object} ExplainType
+ * @property {string} name readable name of type
+ * @property {string} apiName api parameter name for type
+ * @property {string} description more info on what this type is about
+ * @property {boolean | string[]} retrieveByDefault is it retrieved by default OR list of subtypes that are retrieved by default
+ * @property {object} supports supported features
+ * @property {boolean} supports.retrieve can you download this type
+ * @property {boolean} supports.create can you create new records of this type
+ * @property {boolean} supports.update can you update records of this type
+ * @property {boolean} supports.delete can you delete records of this type
+ * @property {boolean} supports.changeKey can you change the key of existing records of this type
+ * @property {boolean} supports.buildTemplate can you apply templating on downloaded records of this type
+ * @property {boolean} supports.retrieveAsTemplate can you retrieve & template in one step
+ */
 
 export default {};
