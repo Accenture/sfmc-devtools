@@ -10,7 +10,7 @@
  */
 /**
  * @typedef {Object.<string, string>} TemplateMap
- * @typedef {'asset'|'asset-archive'|'asset-asset'|'asset-audio'|'asset-block'|'asset-code'|'asset-document'|'asset-image'|'asset-message'|'asset-other'|'asset-rawimage'|'asset-template'|'asset-textfile'|'asset-video'|'attributeGroup'|'attributeSet'|'automation'|'campaign'|'contentArea'|'dataExtension'|'dataExtensionField'|'dataExtensionTemplate'|'dataExtract'|'dataExtractType'|'discovery'|'email'|'emailSend'|'event'|'fileLocation'|'fileTransfer'|'filter'|'folder'|'importFile'|'journey'|'list'|'mobileCode'|'mobileKeyword'|'mobileMessage'|'query'|'role'|'script'|'sendClassification'|'transactionalEmail'|'transactionalPush'|'transactionalSMS'|'triggeredSend'|'user'|'verification'} SupportedMetadataTypes
+ * @typedef {'asset'|'asset-archive'|'asset-asset'|'asset-audio'|'asset-block'|'asset-code'|'asset-document'|'asset-image'|'asset-message'|'asset-other'|'asset-rawimage'|'asset-template'|'asset-textfile'|'asset-video'|'attributeGroup'|'attributeSet'|'automation'|'campaign'|'contentArea'|'dataExtension'|'dataExtensionField'|'dataExtensionTemplate'|'dataExtract'|'dataExtractType'|'discovery'|'deliveryProfile'|'email'|'emailSend'|'event'|'fileLocation'|'fileTransfer'|'filter'|'folder'|'importFile'|'journey'|'list'|'mobileCode'|'mobileKeyword'|'mobileMessage'|'query'|'role'|'script'|'sendClassification'|'senderProfile'|'transactionalEmail'|'transactionalPush'|'transactionalSMS'|'triggeredSend'|'user'|'verification'} SupportedMetadataTypes
  * @typedef {Object.<SupportedMetadataTypes, string[]>} TypeKeyCombo object-key=metadata type, value=array of external keys
  */
 
@@ -443,6 +443,21 @@ complex
  * @property {Function} error (msg) print error message
  * @property {Function} errorStack (ex, msg) print error with trace message
  * @typedef {import('winston').Logger & McdevLogger} Logger
+ */
+/**
+ * @typedef {object} ExplainType
+ * @property {string} name readable name of type
+ * @property {string} apiName api parameter name for type
+ * @property {string} description more info on what this type is about
+ * @property {boolean | string[]} retrieveByDefault is it retrieved by default OR list of subtypes that are retrieved by default
+ * @property {object} supports supported features
+ * @property {boolean} supports.retrieve can you download this type
+ * @property {boolean} supports.create can you create new records of this type
+ * @property {boolean} supports.update can you update records of this type
+ * @property {boolean} supports.delete can you delete records of this type
+ * @property {boolean} supports.changeKey can you change the key of existing records of this type
+ * @property {boolean} supports.buildTemplate can you apply templating on downloaded records of this type
+ * @property {boolean} supports.retrieveAsTemplate can you retrieve & template in one step
  */
 
 export default {};
