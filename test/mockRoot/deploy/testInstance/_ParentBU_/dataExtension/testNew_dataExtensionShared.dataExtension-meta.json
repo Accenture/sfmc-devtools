@@ -4,10 +4,6 @@
     "Description": "",
     "IsSendable": false,
     "IsTestable": false,
-    "RowBasedRetention": false,
-    "ResetRetentionPeriodOnImport": false,
-    "DeleteAtEndOfRetentionPeriod": false,
-    "RetainUntil": "",
     "Fields": [
         {
             "Name": "testField",
@@ -18,6 +14,7 @@
             "FieldType": "Text"
         }
     ],
+    "c__retentionPolicy": "none",
     "r__folder_ContentType": "shared_dataextension",
     "r__folder_Path": "Shared Items/Shared Data Extensions"
 }
