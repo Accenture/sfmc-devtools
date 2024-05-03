@@ -41,10 +41,10 @@
                 </SendableSubscriberField>
                 <DataRetentionPeriodLength>6</DataRetentionPeriodLength>
                 <DataRetentionPeriodUnitOfMeasure>5</DataRetentionPeriodUnitOfMeasure>
-                <RowBasedRetention>true</RowBasedRetention>
+                <RowBasedRetention>false</RowBasedRetention>
                 <ResetRetentionPeriodOnImport>false</ResetRetentionPeriodOnImport>
-                <DeleteAtEndOfRetentionPeriod>false</DeleteAtEndOfRetentionPeriod>
-                <RetainUntil />
+                <DeleteAtEndOfRetentionPeriod>true</DeleteAtEndOfRetentionPeriod>
+                <RetainUntil>5/9/2024 12:00:00 AM</RetainUntil>
                 <CategoryID>2</CategoryID>
             </Results>
             <Results xsi:type="DataExtension">

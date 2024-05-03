@@ -115,12 +115,15 @@
  * @property {string} [r__dataExtensionTemplate_Name] name of optionally associated DE template
  * @property {object} [Template] -
  * @property {string} [Template.CustomerKey] key of optionally associated DE teplate
- * @property {string} [RetainUntil] ?
- * @property {any} [DataRetentionPeriodLength] ?
- * @property {any} [DataRetentionPeriodUnitOfMeasure] ?
- * @property {any} [RowBasedRetention] ?
- * @property {any} [ResetRetentionPeriodOnImport] ?
- * @property {any} [DeleteAtEndOfRetentionPeriod] ?
+ * @property {string} RetainUntil empty string or US date + 12:00:00 AM
+ * @property {string} c__retainUntil YYYY-MM-DD
+ * @property {'none'|'allRecordsAndDataextension'|'allRecords'|'individialRecords'} [c__retentionPolicy] readable name of retention policy
+ * @property {number} [DataRetentionPeriodLength] number of days/weeks/months/years before retention kicks in
+ * @property {number} [DataRetentionPeriodUnitOfMeasure] 3:Days, 4:Weeks, 5:Months, 6:Years
+ * @property {string} [c__dataRetentionPeriodUnitOfMeasure] 3:Days, 4:Weeks, 5:Months, 6:Years
+ * @property {boolean} [RowBasedRetention] true for retention policy individialRecords
+ * @property {boolean} ResetRetentionPeriodOnImport ?
+ * @property {boolean} [DeleteAtEndOfRetentionPeriod] true for retention policy allRecords
  */
 /**
  * @typedef {Object.<string, DataExtensionItem>} DataExtensionMap

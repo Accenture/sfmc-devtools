@@ -31,10 +31,12 @@
                     <Description>Container for my test emails</Description>
                     <IsSendable>false</IsSendable>
                     <IsTestable>false</IsTestable>
+                    <DataRetentionPeriodLength>6</DataRetentionPeriodLength>
+                    <DataRetentionPeriodUnitOfMeasure>5</DataRetentionPeriodUnitOfMeasure>
                     <RowBasedRetention>false</RowBasedRetention>
                     <ResetRetentionPeriodOnImport>false</ResetRetentionPeriodOnImport>
-                    <DeleteAtEndOfRetentionPeriod>false</DeleteAtEndOfRetentionPeriod>
-                    <RetainUntil />
+                    <DeleteAtEndOfRetentionPeriod>true</DeleteAtEndOfRetentionPeriod>
+                    <RetainUntil>5/9/2024 12:00:00 AM</RetainUntil>
                     <Fields>
                         <Field>
                             <PartnerKey xsi:nil="true" />
