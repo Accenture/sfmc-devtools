@@ -1,23 +1,24 @@
 {
-    "id": "dsfdsafdsa-922c-4568-85a5-e5cc77efc3be",
-    "key": "0b76dccf-594c-b6dc-1acf-10c4493dcb84",
-    "name": "testExisting_temail",
+    "id": "0175b971-71a3-4d8e-98ac-48121f3fbf4f",
+    "key": "ada246f2-dfb8-51d3-a2ce-3622317ea31a",
+    "name": "testExisting_journey_Multistep",
     "lastPublishedDate": "0001-01-01T00:00:00",
     "description": "",
     "version": 1,
     "workflowApiVersion": 1,
-    "createdDate": "2022-03-24T02:20:32.74",
-    "modifiedDate": "2022-03-24T02:20:40.45",
+    "createdDate": "2024-05-04T05:54:48.027",
+    "modifiedDate": "2024-05-04T05:54:48.027",
     "activities": [
         {
-            "id": "9606bcb0-9246-4610-9800-963bc77fc20a",
-            "key": "EMAILV2-4",
-            "name": "testExisting_temail",
+            "id": "749e7bef-c87f-483e-bcbf-74d6619d56cc",
+            "key": "EMAILV2-1",
+            "name": "my custom activity name",
             "description": "",
             "type": "EMAILV2",
             "outcomes": [
                 {
-                    "key": "1f44021a-74ac-49be-a07c-67862228214d",
+                    "key": "ff60a294-3804-4165-85cd-c7c19c8e3a6d",
+                    "next": "WAITBYDURATION-1",
                     "arguments": {},
                     "metaData": {
                         "invalid": false
@@ -28,40 +29,43 @@
             "configurationArguments": {
                 "applicationExtensionKey": "jb-email-activity",
                 "isModified": true,
+                "googleAnalyticsCampaignName": "",
                 "triggeredSend": {
                     "autoAddSubscribers": true,
                     "autoUpdateSubscribers": true,
                     "bccEmail": "",
                     "ccEmail": "",
                     "created": {},
+                    "description": "my custom description",
                     "domainExclusions": [],
-                    "dynamicEmailSubject": "test email",
-                    "emailId": 25923,
-                    "emailSubject": "test email",
+                    "dynamicEmailSubject": "testExisting_ email subject",
+                    "emailId": 707139,
+                    "emailSubject": "testExisting_ email subject",
                     "exclusionFilter": "",
-                    "isSalesforceTracking": true,
+                    "isSalesforceTracking": false,
                     "isMultipart": true,
-                    "isSendLogging": false,
+                    "isSendLogging": true,
                     "isStoppedOnJobError": false,
                     "modified": {},
-                    "preHeader": "",
+                    "preHeader": "testExisting_ email preheader",
                     "priority": 4,
-                    "sendClassificationId": "1284e9b2-a7b8-e711-80cf-1402ec721c9d",
+                    "sendClassificationId": "88d65dda-b8e3-ea11-a2eb-1402ec937095",
                     "throttleOpens": "1/1/0001 12:00:00 AM",
                     "throttleCloses": "1/1/0001 12:00:00 AM",
-                    "deliveryProfileId": "1084e9b2-a7b8-e711-80cf-1402ec721c9d",
-                    "senderProfileId": "0f84e9b2-a7b8-e711-80cf-1402ec721c9d",
+                    "deliveryProfileId": "163f8417-13f7-e911-a2d8-1402ec938a35",
+                    "senderProfileId": "5a1dfa1f-6402-ef11-a5c8-5cba2c702db8",
                     "isTrackingClicks": true,
-                    "publicationListId": 15
-                },
-                "triggeredSendId": "0a650d90-755e-ed11-b852-48df37d1df5b",
-                "triggeredSendKey": "testExisting_temail"
+                    "publicationListId": 32308
+                }
             },
             "metaData": {
-                "highThroughput": {
-                    "definitionKey": "testExisting_temail",
-                    "dataExtensionId": "21711373-72c1-ec11-b83b-48df37d1deb7"
-                },
+                "category": "message",
+                "version": "1.0",
+                "icon": "https://jb-email-activity.s7.marketingcloudapps.com/img/email-icon.svg",
+                "iconSmall": "https://jb-email-activity.s7.marketingcloudapps.com/img/email-icon.svg",
+                "statsContactIcon": null,
+                "original_icon": "/img/email-icon.svg",
+                "original_iconSmall": "/img/email-icon.svg",
                 "sections": {},
                 "isConfigured": true
             },
@@ -174,46 +178,140 @@
                     }
                 }
             }
+        },
+        {
+            "id": "90970a04-e71c-437d-83ed-8158f33719cd",
+            "key": "WAITBYDURATION-1",
+            "name": "",
+            "description": "",
+            "type": "WAIT",
+            "outcomes": [
+                {
+                    "key": "97af222a-450a-429e-8925-649b72f01ccf",
+                    "arguments": {},
+                    "metaData": {
+                        "invalid": false
+                    }
+                }
+            ],
+            "arguments": {},
+            "configurationArguments": {
+                "waitDuration": 1,
+                "waitUnit": "DAYS"
+            },
+            "metaData": {
+                "isConfigured": true,
+                "uiType": "WAITBYDURATION"
+            },
+            "schema": {
+                "arguments": {
+                    "endDate": {
+                        "dataType": "Date",
+                        "isNullable": false,
+                        "direction": "Out",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "waitEndDateAttributeDataBound": {
+                        "dataType": "Text",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "waitDefinitionId": {
+                        "dataType": "Text",
+                        "isNullable": false,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "waitForEventId": {
+                        "dataType": "Text",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "executionMode": {
+                        "dataType": "Text",
+                        "isNullable": false,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "startActivityKey": {
+                        "dataType": "Text",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "waitQueueId": {
+                        "dataType": "LongNumber",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    }
+                }
+            }
         }
     ],
     "triggers": [
         {
+            "id": "4462b819-c18c-4d99-957c-7e5a10adb3fd",
             "key": "TRIGGER",
             "name": "TRIGGER",
             "description": "",
-            "type": "transactional-api",
+            "type": "EmailAudience",
             "outcomes": [],
             "arguments": {},
             "configurationArguments": {},
             "metaData": {
-                "chainType": "none",
+                "eventDefinitionId": "649d512b-4d08-4eca-a14e-fc7b64b4ada8",
+                "eventDefinitionKey": "DEAudience-2e3c73b6-48cc-2ec0-5522-48636e1a236e",
+                "chainType": "None",
                 "configurationRequired": false,
-                "iconUrl": "/images/icon_journeyBuilder-event-transactional-blue.svg",
-                "title": "Transactional API Event",
-                "category": "Transactional",
-                "entrySourceGroupConfigUrl": "null"
+                "iconUrl": "/images/icon-data-extension.svg",
+                "title": "Data Extension",
+                "entrySourceGroupConfigUrl": "jb:///data/entry/audience/entrysourcegroupconfig.json",
+                "sourceInteractionId": "00000000-0000-0000-0000-000000000000"
             }
         }
     ],
     "goals": [],
     "exits": [],
     "notifiers": [],
-    "entryMode": "MultipleEntries",
-    "definitionType": "Transactional",
-    "channel": "email",
+    "stats": {
+        "currentPopulation": 0,
+        "cumulativePopulation": 0,
+        "metGoal": 0,
+        "metExitCriteria": 0,
+        "goalPerformance": 0
+    },
+    "entryMode": "NotSet",
+    "definitionType": "Multistep",
+    "channel": "",
     "defaults": {
+        "email": ["{{Event.DEAudience-2e3c73b6-48cc-2ec0-5522-48636e1a236e.\"Email\"}}"],
         "properties": {
             "analyticsTracking": {
-                "enabled": false,
+                "enabled": true,
                 "analyticsType": "google",
                 "urlDomainsToTrack": []
             }
         }
     },
-    "metaData": {},
+    "metaData": {
+        "dataSource": "ContactsModel",
+        "highThroughputSending": {
+            "email": false
+        }
+    },
     "executionMode": "Production",
-    "categoryId": 6298,
-    "status": "Published",
-    "scheduledStatus": "Draft",
-    "definitionId": "dsfdsafdsa-922c-4568-85a5-e5cc77efc3be"
+    "categoryId": 290832,
+    "status": "Draft",
+    "definitionId": "0175b971-71a3-4d8e-98ac-48121f3fbf4f",
+    "scheduledStatus": "Draft"
 }

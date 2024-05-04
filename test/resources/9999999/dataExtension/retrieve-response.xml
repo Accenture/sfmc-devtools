@@ -73,6 +73,27 @@
                 <RetainUntil />
                 <CategoryID>2</CategoryID>
             </Results>
+            <Results xsi:type="DataExtension">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2024-04-24T12:15:55.853</CreatedDate>
+                <ModifiedDate>2024-04-24T12:15:55.853</ModifiedDate>
+                <ObjectID>5a7194ad-6602-ef11-a5c8-5cba2c702db8</ObjectID>
+                <CustomerKey>testExisting_DomainExclusion</CustomerKey>
+                <Name>testExisting_DomainExclusion</Name>
+                <Description>Domain Exclusion Data Extension Template</Description>
+                <IsSendable>false</IsSendable>
+                <IsTestable>false</IsTestable>
+                <Template>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>086D14D3-5057-462B-AF33-01CA8D1FE87A</CustomerKey>
+                </Template>
+                <RowBasedRetention>false</RowBasedRetention>
+                <ResetRetentionPeriodOnImport>false</ResetRetentionPeriodOnImport>
+                <DeleteAtEndOfRetentionPeriod>false</DeleteAtEndOfRetentionPeriod>
+                <RetainUntil />
+                <CategoryID>2</CategoryID>
+            </Results>
         </RetrieveResponseMsg>
     </soap:Body>
 </soap:Envelope>

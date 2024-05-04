@@ -38,6 +38,48 @@
             "publishedInteractionCount": 1,
             "automationId": "00000000-0000-0000-0000-000000000000",
             "disableDEDataLogging": false
+        },
+        {
+            "id": "9e1995f8-951d-4019-855c-826b45e5b028",
+            "type": "EmailAudience",
+            "name": "testExisting_journey_Quicksend",
+            "description": "",
+            "createdDate": "2024-04-24T12:18:40.573",
+            "createdBy": 700301950,
+            "modifiedDate": "2024-04-24T12:18:40.573",
+            "modifiedBy": 700301950,
+            "mode": "Production",
+            "eventDefinitionKey": "DEAudience-11be962d-064c-83d9-2804-7d1befc10325",
+            "dataExtensionId": "1c8064d5-6502-ef11-a5c8-5cba2c702db8",
+            "dataExtensionName": "testExisting_journey_Quicksend",
+            "sourceApplicationExtensionId": "97e942ee-6914-4d3d-9e52-37ecb71f79ed",
+            "filterDefinitionId": "00000000-0000-0000-0000-000000000000",
+            "filterDefinitionTemplate": "",
+            "iconUrl": "/images/icon-data-extension.svg",
+            "arguments": {
+                "serializedObjectType": 3,
+                "useHighWatermark": false,
+                "eventDefinitionId": "9e1995f8-951d-4019-855c-826b45e5b028",
+                "eventDefinitionKey": "DEAudience-11be962d-064c-83d9-2804-7d1befc10325",
+                "dataExtensionId": "1c8064d5-6502-ef11-a5c8-5cba2c702db8",
+                "criteria": ""
+            },
+            "configurationArguments": {
+                "unconfigured": false
+            },
+            "metaData": {
+                "criteriaDescription": "",
+                "scheduleFlowMode": "runOnce",
+                "runOnceScheduleMode": "onPublish",
+                "scheduleState": "No Schedule"
+            },
+            "interactionCount": 1,
+            "isVisibleInPicker": false,
+            "isPlatformObject": false,
+            "category": "Audience",
+            "publishedInteractionCount": 0,
+            "automationId": "0fc8f605-bca8-4f24-8b46-b43e06bf271c",
+            "disableDEDataLogging": false
         }
     ]
 }
