@@ -1,5 +1,4 @@
 {
-    "id": "0175b971-71a3-4d8e-98ac-48121f3fbf4f",
     "key": "testExisting_journey_Multistep",
     "name": "testExisting_journey_Multistep",
     "lastPublishedDate": "0001-01-01T00:00:00",
@@ -20,9 +19,7 @@
                     "key": "ff60a294-3804-4165-85cd-c7c19c8e3a6d",
                     "next": "WAITBYDURATION-1",
                     "arguments": {},
-                    "metaData": {
-                        "invalid": false
-                    }
+                    "metaData": { "invalid": false }
                 }
             ],
             "arguments": {},
@@ -39,7 +36,6 @@
                     "description": "my custom description",
                     "domainExclusions": [],
                     "dynamicEmailSubject": "testExisting_ email subject",
-                    "emailId": 531213,
                     "emailSubject": "testExisting_ email subject",
                     "exclusionFilter": "",
                     "isSalesforceTracking": false,
@@ -48,14 +44,15 @@
                     "isStoppedOnJobError": false,
                     "modified": {},
                     "preHeader": "testExisting_ email preheader",
-                    "priority": 4,
-                    "sendClassificationId": "95da425b-a06f-e611-96fe-38eaa7142c61",
                     "throttleOpens": "1/1/0001 12:00:00 AM",
                     "throttleCloses": "1/1/0001 12:00:00 AM",
-                    "deliveryProfileId": "163f8417-13f7-e911-a2d8-1402ec938a35",
-                    "senderProfileId": "a75d452b-7ef4-eb11-b82d-48df37d1da95",
                     "isTrackingClicks": true,
-                    "publicationListId": 15
+                    "r__list_PathName": { "publicationList": "my subscribers/All Subscribers" },
+                    "r__senderProfile_CustomerKey": "testExisting_senderProfile",
+                    "r__sendClassification_CustomerKey": "testExisting_sendClassification",
+                    "c__priority": "Medium",
+                    "r__assetMessage_Name_readOnly": "testExisting_asset_message",
+                    "r__assetMessage_Key": "testExisting_asset_message"
                 }
             },
             "metaData": {
@@ -189,20 +186,12 @@
                 {
                     "key": "97af222a-450a-429e-8925-649b72f01ccf",
                     "arguments": {},
-                    "metaData": {
-                        "invalid": false
-                    }
+                    "metaData": { "invalid": false }
                 }
             ],
             "arguments": {},
-            "configurationArguments": {
-                "waitDuration": 1,
-                "waitUnit": "DAYS"
-            },
-            "metaData": {
-                "isConfigured": true,
-                "uiType": "WAITBYDURATION"
-            },
+            "configurationArguments": { "waitDuration": 1, "waitUnit": "DAYS" },
+            "metaData": { "isConfigured": true, "uiType": "WAITBYDURATION" },
             "schema": {
                 "arguments": {
                     "endDate": {
@@ -260,7 +249,6 @@
     ],
     "triggers": [
         {
-            "id": "4462b819-c18c-4d99-957c-7e5a10adb3fd",
             "key": "TRIGGER",
             "name": "TRIGGER",
             "description": "",
@@ -269,7 +257,6 @@
             "arguments": {},
             "configurationArguments": {},
             "metaData": {
-                "eventDefinitionId": "649d512b-4d08-4eca-a14e-fc7b64b4ada8",
                 "eventDefinitionKey": "DEAudience-2e3c73b6-48cc-2ec0-5522-48636e1a236e",
                 "chainType": "None",
                 "configurationRequired": false,
@@ -283,13 +270,6 @@
     "goals": [],
     "exits": [],
     "notifiers": [],
-    "stats": {
-        "currentPopulation": 0,
-        "cumulativePopulation": 0,
-        "metGoal": 0,
-        "metExitCriteria": 0,
-        "goalPerformance": 0
-    },
     "entryMode": "NotSet",
     "definitionType": "Multistep",
     "channel": "",
@@ -303,15 +283,9 @@
             }
         }
     },
-    "metaData": {
-        "dataSource": "ContactsModel",
-        "highThroughputSending": {
-            "email": false
-        }
-    },
+    "metaData": { "dataSource": "ContactsModel", "highThroughputSending": { "email": false } },
     "executionMode": "Production",
-    "categoryId": 6298,
     "status": "Draft",
-    "definitionId": "0175b971-71a3-4d8e-98ac-48121f3fbf4f",
-    "scheduledStatus": "Draft"
+    "scheduledStatus": "Draft",
+    "r__folder_Path": "my journeys"
 }

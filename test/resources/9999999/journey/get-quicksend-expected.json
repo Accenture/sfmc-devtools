@@ -42,7 +42,6 @@
                     "keyword": "",
                     "modified": {},
                     "preHeader": "testExisting_ email preheader",
-                    "priority": 3,
                     "suppressTracking": true,
                     "throttleLimit": 0,
                     "throttleOpens": "1/1/0001 12:00:00 AM",
@@ -57,6 +56,7 @@
                     },
                     "r__senderProfile_CustomerKey": "testExisting_senderProfile",
                     "r__sendClassification_CustomerKey": "testExisting_sendClassification",
+                    "c__priority": "High",
                     "r__assetMessage_Name_readOnly": "testExisting_asset_message",
                     "r__assetMessage_Key": "testExisting_asset_message"
                 },

@@ -128,6 +128,78 @@
                     <CustomerKey>testExisting_dataExtension</CustomerKey>
                 </DataExtension>
             </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>78b6d411-a5a3-42ac-b9ef-4b5b31db861d</ObjectID>
+                <CustomerKey>[testExisting_journey_Multistep].[Email]</CustomerKey>
+                <Name>Email</Name>
+                <Scale>0</Scale>
+                <DefaultValue />
+                <MaxLength>254</MaxLength>
+                <IsRequired>true</IsRequired>
+                <Ordinal>1</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>EmailAddress</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testExisting_journey_Multistep</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>d38a445a-34b4-499d-9764-ce46cfc675a2</ObjectID>
+                <CustomerKey>[testExisting_journey_Multistep].[ContactId]</CustomerKey>
+                <Name>ContactId</Name>
+                <Scale>0</Scale>
+                <DefaultValue />
+                <MaxLength>50</MaxLength>
+                <IsRequired>true</IsRequired>
+                <Ordinal>0</Ordinal>
+                <IsPrimaryKey>true</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testExisting_journey_Multistep</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>f8c11314-49fc-4e9b-8971-5d6a50705195</ObjectID>
+                <CustomerKey>[testExisting_journey_Quicksend].[ContactId]</CustomerKey>
+                <Name>ContactId</Name>
+                <Scale>0</Scale>
+                <DefaultValue />
+                <MaxLength>50</MaxLength>
+                <IsRequired>true</IsRequired>
+                <Ordinal>0</Ordinal>
+                <IsPrimaryKey>true</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testExisting_journey_Quicksend</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>633ca953-b614-4715-8310-91cdadd085c6</ObjectID>
+                <CustomerKey>[testExisting_journey_Quicksend].[Email]</CustomerKey>
+                <Name>Email</Name>
+                <Scale>0</Scale>
+                <DefaultValue />
+                <MaxLength>254</MaxLength>
+                <IsRequired>true</IsRequired>
+                <Ordinal>1</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>EmailAddress</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testExisting_journey_Quicksend</CustomerKey>
+                </DataExtension>
+            </Results>
         </RetrieveResponseMsg>
     </soap:Body>
 </soap:Envelope>

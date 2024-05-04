@@ -94,6 +94,54 @@
                 <RetainUntil />
                 <CategoryID>2</CategoryID>
             </Results>
+            <Results xsi:type="DataExtension">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2024-04-24T12:09:53.527</CreatedDate>
+                <ModifiedDate>2024-04-24T12:09:53.527</ModifiedDate>
+                <ObjectID>1c8064d5-6502-ef11-a5c8-5cba2c702db8</ObjectID>
+                <CustomerKey>testExisting_journey_Quicksend</CustomerKey>
+                <Name>testExisting_journey_Quicksend</Name>
+                <Description />
+                <IsSendable>true</IsSendable>
+                <IsTestable>false</IsTestable>
+                <SendableDataExtensionField>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <Name>ContactId</Name>
+                </SendableDataExtensionField>
+                <SendableSubscriberField>
+                    <Name>_SubscriberKey</Name>
+                </SendableSubscriberField>
+                <RowBasedRetention>false</RowBasedRetention>
+                <ResetRetentionPeriodOnImport>false</ResetRetentionPeriodOnImport>
+                <DeleteAtEndOfRetentionPeriod>false</DeleteAtEndOfRetentionPeriod>
+                <RetainUntil />
+                <CategoryID>290821</CategoryID>
+            </Results>
+            <Results xsi:type="DataExtension">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2024-04-24T12:10:46.457</CreatedDate>
+                <ModifiedDate>2024-04-24T12:10:46.457</ModifiedDate>
+                <ObjectID>ed305df3-6502-ef11-a5c8-5cba2c702db8</ObjectID>
+                <CustomerKey>testExisting_journey_Multistep</CustomerKey>
+                <Name>testExisting_journey_Multistep</Name>
+                <Description />
+                <IsSendable>true</IsSendable>
+                <IsTestable>false</IsTestable>
+                <SendableDataExtensionField>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <Name>ContactId</Name>
+                </SendableDataExtensionField>
+                <SendableSubscriberField>
+                    <Name>_SubscriberKey</Name>
+                </SendableSubscriberField>
+                <RowBasedRetention>false</RowBasedRetention>
+                <ResetRetentionPeriodOnImport>false</ResetRetentionPeriodOnImport>
+                <DeleteAtEndOfRetentionPeriod>false</DeleteAtEndOfRetentionPeriod>
+                <RetainUntil />
+                <CategoryID>2</CategoryID>
+            </Results>
         </RetrieveResponseMsg>
     </soap:Body>
 </soap:Envelope>
