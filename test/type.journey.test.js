@@ -17,6 +17,41 @@ describe('type: journey', () => {
     });
 
     describe('Retrieve ================', () => {
+        it('Should retrieve a journey w/o keys', async () => {
+            // WHEN
+            await handler.retrieve('testInstance/testBU', ['journey']);
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.journey ? Object.keys(result.journey).length : 0,
+                3,
+                'only 3 journeys expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_journey_Quicksend', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get-quicksend'),
+                'returned JSON was not equal expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_journey_Multistep', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get-multistep'),
+                'returned JSON was not equal expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_temail', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get-transactionalEmail'),
+                'returned JSON was not equal expected'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                26,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
         it('Should retrieve a Quicksend journey with key', async () => {
             // WHEN
             await handler.retrieve(
@@ -97,6 +132,35 @@ describe('type: journey', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 23,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should retrieve a journey with id', async () => {
+            // WHEN
+            await handler.retrieve(
+                'testInstance/testBU',
+                ['journey'],
+                ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.journey ? Object.keys(result.journey).length : 0,
+                1,
+                'only 1 journeys expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_journey_Quicksend', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get-quicksend'),
+                'returned JSON was not equal expected'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                21,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
