@@ -14,5 +14,5 @@
         "trackLinks": true
     },
     "r__asset_customerKey": "{{{prefix}}}asset_message",
-    "r__journey_key": "{{{prefix}}}interaction"
+    "r__journey_key": "{{{prefix}}}temail"
 }
