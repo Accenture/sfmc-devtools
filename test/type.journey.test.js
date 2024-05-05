@@ -167,6 +167,52 @@ describe('type: journey', () => {
         });
     });
 
+    describe('Templating ================', () => {
+        it('Should create a journey template via buildTemplate and build it', async () => {
+            // download first before we test buildTemplate
+            await handler.retrieve('testInstance/testBU', ['journey']);
+            // buildTemplate
+            const result = await handler.buildTemplate(
+                'testInstance/testBU',
+                'journey',
+                ['testExisting_journey_Quicksend'],
+                'testSourceMarket'
+            );
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+            assert.equal(
+                result.journey ? Object.keys(result.journey).length : 0,
+                1,
+                'only one journey expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualTemplateJson('testExisting_journey_Quicksend', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'template'),
+                'returned template JSON was not equal expected'
+            );
+
+            // buildDefinition
+            await handler.buildDefinition(
+                'testInstance/testBU',
+                'journey',
+                'testExisting_journey_Quicksend',
+                'testTargetMarket'
+            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
+            assert.deepEqual(
+                await testUtils.getActualDeployJson('testTemplated_journey_Quicksend', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'build'),
+                'returned deployment JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                26,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
+
     describe('Delete ================', () => {
         it('Should NOT delete the item due to missing version', async () => {
             // WHEN
