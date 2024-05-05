@@ -173,7 +173,7 @@ describe('type: journey', () => {
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'journey',
-                'testExisting_interaction'
+                'testExisting_journey_Quicksend'
             );
             // THEN
             assert.equal(process.exitCode, 1, 'delete should have thrown an error');
@@ -187,7 +187,7 @@ describe('type: journey', () => {
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'journey',
-                'testExisting_interaction/2'
+                'testExisting_journey_Quicksend/2'
             );
             // THEN
             assert.equal(process.exitCode, 1, 'delete should have thrown an error');
@@ -201,7 +201,7 @@ describe('type: journey', () => {
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'journey',
-                'testExisting_interaction/1'
+                'testExisting_journey_Quicksend/1'
             );
             // THEN
             assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
