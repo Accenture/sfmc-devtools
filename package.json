@@ -86,7 +86,7 @@
     },
     "devDependencies": {
         "@types/mocha": "10.0.6",
-        "@types/node": "20.12.7",
+        "@types/node": "20.12.10",
         "assert": "2.1.0",
         "axios-mock-adapter": "1.22.0",
         "c8": "9.1.0",
