@@ -28,8 +28,8 @@ describe('type: query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                3,
-                'only three queries expected'
+                4,
+                'only 4 queries expected'
             );
             // normal test
             assert.deepEqual(
@@ -93,8 +93,8 @@ describe('type: query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                3,
-                'three queries in cache expected'
+                4,
+                '4 queries in cache expected'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_query', 'query'),
@@ -124,8 +124,8 @@ describe('type: query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                3,
-                'three queries in cache expected'
+                4,
+                '4 queries in cache expected'
             );
 
             expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.not
@@ -166,8 +166,8 @@ describe('type: query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                4,
-                'four queries expected in cache'
+                5,
+                '5 queries expected in cache'
             );
             // confirm created item
             assert.deepEqual(
@@ -619,7 +619,7 @@ describe('type: query', () => {
             const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query');
             assert.equal(
                 resultFixKeys['testInstance/testBU'].length,
-                1,
+                2,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
@@ -641,7 +641,7 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                13,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
