@@ -129,7 +129,7 @@ export function getExpectedFile(mid, type, action, ext) {
 export function mockSetup(isDeploy) {
     if (!isDeploy) {
         // no need to execute this again - already done in standard setup
-        handler.setOptions({ debug: true, noLogFile: true });
+        handler.setOptions({ debug: true, noLogFile: true, api: 'test' });
     }
     // @ts-expect-error somehow, MockAdapter does not expect type AxiosInstance
     apimock = new MockAdapter(axiosInstance, { onNoMatch: 'throwException' });
