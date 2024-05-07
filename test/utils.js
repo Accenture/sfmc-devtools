@@ -129,8 +129,11 @@ export function getExpectedFile(mid, type, action, ext) {
  * @returns {void}
  */
 export function mockSetup(isDeploy) {
+    // no need to execute this again if we ran it a 2nd time for deploy - already done in standard setup
     if (!isDeploy) {
-        // no need to execute this again - already done in standard setup
+        // truncate request log before each test
+        Util.requestLog.length = 0;
+        // reset all options to default
         handler.setOptions({
             // test config
             debug: true,
