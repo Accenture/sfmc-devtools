@@ -6,6 +6,7 @@ import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
+import { Util } from '../lib/util/util.js';
 chai.use(chaiFiles);
 const file = chaiFiles.file;
 
@@ -376,6 +377,50 @@ describe('type: query', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 14,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should change the key during create with and --keySuffix', async () => {
+            handler.setOptions({ keySuffix: '_DEV' });
+            const deployed = await handler.deploy(
+                'testInstance/_ParentBU_',
+                ['query'],
+                ['testNew_query']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy --keySuffix should not have thrown an error');
+            assert.equal(
+                Object.keys(deployed['testInstance/_ParentBU_'].query).length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            assert.equal(
+                Object.keys(deployed['testInstance/_ParentBU_'].query)[0],
+                'testNew_query_DEV',
+                'returned keys do not correspond to expected fixed keys'
+            );
+            const createCallout = Util.requestLog.find(
+                (item) => item.method === 'POST' && item.url === '/automation/v1/queries/'
+            );
+            assert.equal(
+                createCallout?.data?.key,
+                'testNew_query_DEV',
+                'key in create callout was not as expected'
+            );
+
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson('testNew_query_DEV', 'query', '_ParentBU_'),
+                await testUtils.getExpectedJson('1111111', 'query', 'patch_keySuffix'),
+                'returned metadata was not equal expected for update query'
+            );
+
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                4,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

@@ -47,10 +47,11 @@ export function getActualDoc(customerKey, type, buName = 'testBU') {
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
+ * @param {string} [buName] used when we need to test on ParentBU
  * @returns {string} file path
  */
-export function getActualFile(customerKey, type, ext) {
-    return `./retrieve/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`;
+export function getActualFile(customerKey, type, ext, buName = 'testBU') {
+    return `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-meta.${ext}`;
 }
 /**
  * gets file from Deploy folder
@@ -71,10 +72,11 @@ export function getActualDeployJson(customerKey, type, buName = 'testBU') {
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
+ * @param {string} [buName] used when we need to test on ParentBU
  * @returns {string} file path
  */
-export function getActualDeployFile(customerKey, type, ext) {
-    return `./deploy/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`;
+export function getActualDeployFile(customerKey, type, ext, buName = 'testBU') {
+    return `./deploy/testInstance/${buName}/${type}/${customerKey}.${type}-meta.${ext}`;
 }
 /**
  * gets file from Template folder
