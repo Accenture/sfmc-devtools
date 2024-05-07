@@ -8,7 +8,6 @@ import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
-import { Util } from '../lib/util/util.js';
 chai.use(chaiFiles);
 const file = chaiFiles.file;
 
@@ -112,11 +111,9 @@ describe('type: asset', () => {
                 1,
                 '1 assets to be deployed'
             );
-            const createCallout = Util.requestLog.find(
-                (item) => item.method === 'POST' && item.url === '/asset/v1/content/assets/'
-            );
+            const upsertCallout = testUtils.getRestCallout('post', '/asset/v1/content/assets/');
             assert.equal(
-                createCallout?.data?.customerKey,
+                upsertCallout?.customerKey,
                 'testNew_asset-9999999',
                 'customerKey should be testNew_asset-9999999 due to automatic MID suffix'
             );
@@ -155,11 +152,9 @@ describe('type: asset', () => {
                 1,
                 '1 assets to be deployed'
             );
-            const createCallout = Util.requestLog.find(
-                (item) => item.method === 'POST' && item.url === '/asset/v1/content/assets/'
-            );
+            const upsertCallout = testUtils.getRestCallout('post', '/asset/v1/content/assets/');
             assert.equal(
-                createCallout?.data?.customerKey,
+                upsertCallout?.customerKey,
                 'testNew_asset_DEV',
                 'customerKey should be testNew_asset_DEV due to noMidSuffix and keySuffix'
             );
@@ -191,11 +186,9 @@ describe('type: asset', () => {
                 1,
                 '1 assets to be deployed'
             );
-            const createCallout = Util.requestLog.find(
-                (item) => item.method === 'POST' && item.url === '/asset/v1/content/assets/'
-            );
+            const upsertCallout = testUtils.getRestCallout('post', '/asset/v1/content/assets/');
             assert.equal(
-                createCallout?.data?.customerKey,
+                upsertCallout?.customerKey,
                 'testNew_asset',
                 'customerKey should be testNew_asset due to noMidSuffix'
             );

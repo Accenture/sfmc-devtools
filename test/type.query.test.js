@@ -6,7 +6,6 @@ import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
-import { Util } from '../lib/util/util.js';
 chai.use(chaiFiles);
 const file = chaiFiles.file;
 
@@ -257,11 +256,9 @@ describe('type: query', () => {
                 0,
                 'deploy --changeKeyValue should not have thrown an error'
             );
-            const upsertCallout = Util.requestLog.find(
-                (item) => item.method === 'PATCH' && item.url.startsWith('/automation/v1/queries/')
-            );
+            const upsertCallout = testUtils.getRestCallout('patch', '/automation/v1/queries/%');
             assert.equal(
-                upsertCallout?.data?.key,
+                upsertCallout?.key,
                 'testExisting_query_fixedKeys',
                 'key in create callout was not as expected'
             );
@@ -314,11 +311,9 @@ describe('type: query', () => {
                 0,
                 'deploy --changeKeyValue should not have thrown an error'
             );
-            const upsertCallout = Util.requestLog.find(
-                (item) => item.method === 'PATCH' && item.url.startsWith('/automation/v1/queries/')
-            );
+            const upsertCallout = testUtils.getRestCallout('patch', '/automation/v1/queries/%');
             assert.equal(
-                upsertCallout?.data?.key,
+                upsertCallout?.key,
                 'testExisting_query_fixedKeys',
                 'key in create callout was not as expected'
             );
@@ -375,12 +370,10 @@ describe('type: query', () => {
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
+            const upsertCallout = testUtils.getRestCallout('patch', '/automation/v1/queries/%');
 
-            const upsertCallout = Util.requestLog.find(
-                (item) => item.method === 'PATCH' && item.url.startsWith('/automation/v1/queries/')
-            );
             assert.equal(
-                upsertCallout?.data?.key,
+                upsertCallout?.key,
                 'testExisting_query_fixedKeys_DEV',
                 'key in create callout was not as expected'
             );
@@ -428,11 +421,10 @@ describe('type: query', () => {
                 'testNew_query_DEV',
                 'returned keys do not correspond to expected fixed keys'
             );
-            const createCallout = Util.requestLog.find(
-                (item) => item.method === 'POST' && item.url === '/automation/v1/queries/'
-            );
+
+            const createCallout = testUtils.getRestCallout('post', '/automation/v1/queries/');
             assert.equal(
-                createCallout?.data?.key,
+                createCallout?.key,
                 'testNew_query_DEV',
                 'key in create callout was not as expected'
             );
@@ -534,11 +526,9 @@ describe('type: query', () => {
             // THEN
             assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
 
-            const upsertCallout = Util.requestLog.find(
-                (item) => item.method === 'PATCH' && item.url.startsWith('/automation/v1/queries/')
-            );
+            const upsertCallout = testUtils.getRestCallout('patch', '/automation/v1/queries/%');
             assert.equal(
-                upsertCallout?.data?.key,
+                upsertCallout?.key,
                 'testExisting_query_fixedKeys_DEV',
                 'key in create callout was not as expected'
             );

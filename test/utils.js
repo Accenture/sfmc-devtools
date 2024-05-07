@@ -131,15 +131,13 @@ export function getExpectedFile(mid, type, action, ext) {
 export function mockSetup(isDeploy) {
     // no need to execute this again if we ran it a 2nd time for deploy - already done in standard setup
     if (!isDeploy) {
-        // truncate request log before each test
-        Util.requestLog.length = 0;
         // reset all options to default
         handler.setOptions({
             // test config
             debug: true,
             noLogFile: true,
-            api: 'test',
             // reset
+            api: undefined,
             keySuffix: undefined,
             changeKeyField: undefined,
             changeKeyValue: undefined,
@@ -249,6 +247,19 @@ export function getAPIHistoryLength(includeToken) {
  */
 export function getAPIHistory() {
     return apimock.history;
+}
+/**
+ *
+ * @param {'patch'|'delete'|'post'|'get'|'put'} method http method
+ * @param {string} url url without domain, end on % if you want to search with startsWith()
+ * @returns {object} json payload of the request
+ */
+export function getRestCallout(method, url) {
+    const subset = apimock.history[method];
+    const myCallout = subset.find((item) =>
+        url.endsWith('%') ? item.url.startsWith(url.slice(0, -1)) : item.url === url
+    );
+    return JSON.parse(myCallout.data);
 }
 /**
  * helper to return most important fields for each api call
