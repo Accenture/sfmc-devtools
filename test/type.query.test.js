@@ -257,6 +257,15 @@ describe('type: query', () => {
                 0,
                 'deploy --changeKeyValue should not have thrown an error'
             );
+            const upsertCallout = Util.requestLog.find(
+                (item) => item.method === 'PATCH' && item.url.startsWith('/automation/v1/queries/')
+            );
+            assert.equal(
+                upsertCallout?.data?.key,
+                'testExisting_query_fixedKeys',
+                'key in create callout was not as expected'
+            );
+
             assert.equal(
                 Object.keys(deployed['testInstance/testBU'].query).length,
                 1,
@@ -305,6 +314,15 @@ describe('type: query', () => {
                 0,
                 'deploy --changeKeyValue should not have thrown an error'
             );
+            const upsertCallout = Util.requestLog.find(
+                (item) => item.method === 'PATCH' && item.url.startsWith('/automation/v1/queries/')
+            );
+            assert.equal(
+                upsertCallout?.data?.key,
+                'testExisting_query_fixedKeys',
+                'key in create callout was not as expected'
+            );
+
             assert.equal(
                 Object.keys(deployed['testInstance/testBU'].query).length,
                 1,
@@ -356,6 +374,15 @@ describe('type: query', () => {
                 Object.keys(deployed['testInstance/testBU'].query).length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
+            );
+
+            const upsertCallout = Util.requestLog.find(
+                (item) => item.method === 'PATCH' && item.url.startsWith('/automation/v1/queries/')
+            );
+            assert.equal(
+                upsertCallout?.data?.key,
+                'testExisting_query_fixedKeys_DEV',
+                'key in create callout was not as expected'
             );
             assert.equal(
                 Object.keys(deployed['testInstance/testBU'].query)[0],
@@ -504,6 +531,18 @@ describe('type: query', () => {
                 'testExisting_query_fixKeysSuffix',
                 'testExisting_query',
             ]);
+            // THEN
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
+
+            const upsertCallout = Util.requestLog.find(
+                (item) => item.method === 'PATCH' && item.url.startsWith('/automation/v1/queries/')
+            );
+            assert.equal(
+                upsertCallout?.data?.key,
+                'testExisting_query_fixedKeys_DEV',
+                'key in create callout was not as expected'
+            );
+
             assert.equal(
                 resultFixKeys['testInstance/testBU'].length,
                 1,
@@ -514,8 +553,6 @@ describe('type: query', () => {
                 'testExisting_query_fixedKeys_DEV',
                 'returned keys do not correspond to expected fixed keys'
             );
-            // THEN
-            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_query_fixedKeys_DEV', 'query'),
