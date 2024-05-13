@@ -239,6 +239,7 @@ export const handleRESTRequest = async (config) => {
             config.baseURL + (config.url.startsWith('/') ? config.url.slice(1) : config.url)
         );
         let filterName;
+        let filterBody;
         if (urlObj.searchParams.get('$filter')) {
             filterName = urlObj.searchParams.get('$filter').split(' eq ')[1];
         }
@@ -256,6 +257,18 @@ export const handleRESTRequest = async (config) => {
               '-' +
               urlObj.searchParams.get('$filter').replaceAll(' eq ', '=').replaceAll(' ', '')
             : null;
+
+        if (!testPathFilter && config.method === 'post' && config.data) {
+            const simpleOperators = { equal: '=', in: 'IN' };
+            const data = JSON.parse(config.data);
+            const myObj = data.query?.rightOperand || data.query;
+            if (myObj) {
+                const op = simpleOperators[myObj.simpleOperator];
+                filterBody = `${myObj.property}${op}${op === 'IN' ? myObj.value.join(',') : myObj.value}`;
+            }
+        }
+        const testPathFilterBody = filterBody ? testPath + '-' + filterBody : null;
+
         if (testPathFilter && (await fs.pathExists(testPathFilter + '.json'))) {
             // build filter logic to ensure templating works
             if (filterName) {
@@ -282,6 +295,20 @@ export const handleRESTRequest = async (config) => {
                     encoding: 'utf8',
                 }),
             ];
+        } else if (testPathFilterBody && (await fs.pathExists(testPathFilterBody + '.json'))) {
+            return [
+                200,
+                await fs.readFile(testPathFilterBody + '.json', {
+                    encoding: 'utf8',
+                }),
+            ];
+        } else if (testPathFilterBody && (await fs.pathExists(testPathFilterBody + '.txt'))) {
+            return [
+                200,
+                await fs.readFile(testPathFilterBody + '.txt', {
+                    encoding: 'utf8',
+                }),
+            ];
         } else if (await fs.pathExists(testPath + '.json')) {
             if (testPathFilter) {
                 /* eslint-disable no-console */
@@ -292,6 +319,20 @@ export const handleRESTRequest = async (config) => {
                         testPath + '.json'
                     } instead of the more specific ${
                         testPathFilter + '.json'
+                    }. Make sure this is intended`
+                );
+                /* eslint-enable no-console */
+            }
+
+            if (testPathFilterBody) {
+                /* eslint-disable no-console */
+                console.log(
+                    `${color.bgYellow}${color.fgBlack}TEST-WARNING${
+                        color.reset
+                    }: You are loading your reponse from ${
+                        testPath + '.json'
+                    } instead of the more specific ${
+                        testPathFilterBody + '.json'
                     }. Make sure this is intended`
                 );
                 /* eslint-enable no-console */
@@ -329,6 +370,19 @@ export const handleRESTRequest = async (config) => {
                 );
                 /* eslint-enable no-console */
             }
+            if (testPathFilterBody) {
+                /* eslint-disable no-console */
+                console.log(
+                    `${color.bgYellow}${color.fgBlack}TEST-WARNING${
+                        color.reset
+                    }: You are loading your reponse from ${
+                        testPath + '.txt'
+                    } instead of the more specific ${
+                        testPathFilterBody + '.txt'
+                    }. Make sure this is intended`
+                );
+                /* eslint-enable no-console */
+            }
 
             return [
                 200,
@@ -339,7 +393,7 @@ export const handleRESTRequest = async (config) => {
         } else {
             /* eslint-disable no-console */
             console.log(
-                `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}: Please create file ${testPath}.json/.txt${filterName ? ` or ${testPathFilter}.json/.txt` : ''}`
+                `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}: Please create file ${testPath}.json/.txt${filterName ? ` or ${testPathFilter}.json/.txt` : testPathFilterBody ? ` or ${testPathFilterBody}.json/.txt` : ''}`
             );
             /* eslint-enable no-console */
             process.exitCode = 404;
