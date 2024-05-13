@@ -20,10 +20,16 @@ const file = chaiFiles.file;
  * @param {string} [buName] used when we need to test on ParentBU
  * @returns {Promise.<string>} file in string form
  */
-function getActualJson(customerKey, type, subtype, buName = 'testBU') {
-    return File.readJSON(
-        `./retrieve/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.json`
-    );
+async function getActualJson(customerKey, type, subtype, buName = 'testBU') {
+    try {
+        return await File.readJSON(
+            `./retrieve/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.json`
+        );
+    } catch {
+        return await File.readJSON(
+            `./retrieve/testInstance/${buName}/${type}/${subtype}/${customerKey}/${customerKey}.${type}-${subtype}-meta.json`
+        );
+    }
 }
 /**
  * gets file from Retrieve folder
@@ -59,15 +65,15 @@ describe('type: asset', () => {
                 retrieve['testInstance/testBU'].asset
                     ? Object.keys(retrieve['testInstance/testBU'].asset).length
                     : 0,
-                3,
-                'only 3 assets expected in retrieve response'
+                5,
+                'only 5 assets expected in retrieve response'
             );
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                3,
-                'only 3 assets expected in cache'
+                5,
+                'only 5 assets expected in cache'
             );
 
             assert.deepEqual(
@@ -79,9 +85,15 @@ describe('type: asset', () => {
                 file(testUtils.getExpectedFile('9999999', 'asset', 'block-1157-retrieve', 'html'))
             );
 
+            assert.deepEqual(
+                await getActualJson('testExisting_asset_templatebasedemail', 'asset', 'message'),
+                await testUtils.getExpectedJson('9999999', 'asset', 'retrieve-templatebasedemail'),
+                'returned metadata was not equal expected'
+            );
+
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                30,
+                15,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
