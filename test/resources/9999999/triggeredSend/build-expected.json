@@ -17,7 +17,7 @@
     "ModifiedDate": "2018-06-25T05:58:00",
     "Name": "testTemplated_triggeredSend",
     "NewSlotTrigger": 0,
-    "Priority": 4,
+    "c__priority": "Medium",
     "SuppressTracking": false,
     "TriggeredSendStatus": "New",
     "TriggeredSendType": "Continuous",
