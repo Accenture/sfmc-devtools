@@ -47,10 +47,11 @@ export function getActualDoc(customerKey, type, buName = 'testBU') {
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
+ * @param {string} [buName] used when we need to test on ParentBU
  * @returns {string} file path
  */
-export function getActualFile(customerKey, type, ext) {
-    return `./retrieve/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`;
+export function getActualFile(customerKey, type, ext, buName = 'testBU') {
+    return `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-meta.${ext}`;
 }
 /**
  * gets file from Deploy folder
@@ -71,10 +72,11 @@ export function getActualDeployJson(customerKey, type, buName = 'testBU') {
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
+ * @param {string} [buName] used when we need to test on ParentBU
  * @returns {string} file path
  */
-export function getActualDeployFile(customerKey, type, ext) {
-    return `./deploy/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`;
+export function getActualDeployFile(customerKey, type, ext, buName = 'testBU') {
+    return `./deploy/testInstance/${buName}/${type}/${customerKey}.${type}-meta.${ext}`;
 }
 /**
  * gets file from Template folder
@@ -127,9 +129,32 @@ export function getExpectedFile(mid, type, action, ext) {
  * @returns {void}
  */
 export function mockSetup(isDeploy) {
+    // no need to execute this again if we ran it a 2nd time for deploy - already done in standard setup
     if (!isDeploy) {
-        // no need to execute this again - already done in standard setup
-        handler.setOptions({ debug: true, noLogFile: true });
+        // reset all options to default
+        handler.setOptions({
+            // test config
+            debug: true,
+            noLogFile: true,
+            // reset
+            api: undefined,
+            keySuffix: undefined,
+            changeKeyField: undefined,
+            changeKeyValue: undefined,
+            commitHistory: undefined,
+            errorLog: undefined,
+            execute: undefined,
+            filter: undefined,
+            fixShared: undefined,
+            fromRetrieve: undefined,
+            json: undefined,
+            like: undefined,
+            noMidSuffix: undefined,
+            refresh: undefined,
+            _runningTest: undefined,
+            schedule: undefined,
+            skipInteraction: undefined,
+        });
     }
     // @ts-expect-error somehow, MockAdapter does not expect type AxiosInstance
     apimock = new MockAdapter(axiosInstance, { onNoMatch: 'throwException' });
@@ -222,6 +247,19 @@ export function getAPIHistoryLength(includeToken) {
  */
 export function getAPIHistory() {
     return apimock.history;
+}
+/**
+ *
+ * @param {'patch'|'delete'|'post'|'get'|'put'} method http method
+ * @param {string} url url without domain, end on % if you want to search with startsWith()
+ * @returns {object} json payload of the request
+ */
+export function getRestCallout(method, url) {
+    const subset = apimock.history[method];
+    const myCallout = subset.find((item) =>
+        url.endsWith('%') ? item.url.startsWith(url.slice(0, -1)) : item.url === url
+    );
+    return JSON.parse(myCallout.data);
 }
 /**
  * helper to return most important fields for each api call

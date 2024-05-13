@@ -1,0 +1,59 @@
+{
+    "id": 1324776,
+    "customerKey": "testNew_asset-9999999",
+    "objectID": "26fdf503-eeed-49eb-b428-cb3b4bc2ba48",
+    "assetType": {
+        "id": 196,
+        "name": "textblock",
+        "displayName": "Text Block"
+    },
+    "fileProperties": {
+        "fileName": "testNew_asset"
+    },
+    "name": "testNew_asset",
+    "description": "bla bla",
+    "owner": {
+        "id": 700304523,
+        "email": "",
+        "name": "SFMC DEVOPS app user",
+        "userId": "700304523"
+    },
+    "createdDate": "2024-05-07T05:08:46.927-06:00",
+    "createdBy": {
+        "id": 700304523,
+        "email": "",
+        "name": "SFMC DEVOPS app user",
+        "userId": "700304523"
+    },
+    "modifiedDate": "2024-05-07T05:08:46.927-06:00",
+    "modifiedBy": {
+        "id": 700304523,
+        "email": "",
+        "name": "SFMC DEVOPS app user",
+        "userId": "700304523"
+    },
+    "enterpriseId": 1111111,
+    "memberId": 9999999,
+    "status": {
+        "id": 1,
+        "name": "Draft"
+    },
+    "thumbnail": {
+        "thumbnailUrl": "/v1/assets/1324776/thumbnail"
+    },
+    "category": {
+        "id": 89397,
+        "name": "Content Builder",
+        "parentId": 0
+    },
+    "content": "<table\n    cellpadding=\"0\"\n    cellspacing=\"0\"\n    width=\"100%\"\n    role=\"presentation\"\n    style=\"min-width: 100%\"\n    class=\"stylingblock-content-wrapper\"\n>\n    <tr>\n        <td class=\"stylingblock-content-wrapper camarker-inner\">foobar</td>\n    </tr>\n</table>\n",
+    "meta": {
+        "wrapperStyles": {
+            "mobile": {
+                "visible": true
+            }
+        }
+    },
+    "availableViews": [],
+    "modelVersion": 2
+}
