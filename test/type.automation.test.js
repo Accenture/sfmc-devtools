@@ -280,14 +280,16 @@ describe('type: automation', () => {
         it('Should run fixKeys but not find fixable keys and hence stop', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false } });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'automation', [
-                'testExisting_automation',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['automation'],
+                ['testExisting_automation']
+            );
             // THEN
             assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // check which keys were fixed
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['automation'].length,
                 0,
                 'expected to find no keys to be fixed'
             );
@@ -311,17 +313,18 @@ describe('type: automation', () => {
         it('Should fixKeys by key w/o re-retrieving, auto-schedule', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false } });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'automation', [
-                'testExisting_automation_fixKey_schedule',
-                'testExisting_automation',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['automation'],
+                ['testExisting_automation_fixKey_schedule', 'testExisting_automation']
+            );
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['automation'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['automation'][0],
                 'testExisting_automation_fixedKey_scheduled',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -356,17 +359,18 @@ describe('type: automation', () => {
         it('Should fixKeys by key w/o re-retrieving, auto-schedule and then --execute', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, execute: true });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'automation', [
-                'testExisting_automation_fixKey_schedule',
-                'testExisting_automation',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['automation'],
+                ['testExisting_automation_fixKey_schedule', 'testExisting_automation']
+            );
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['automation'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['automation'][0],
                 'testExisting_automation_fixedKey_scheduled',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -401,17 +405,18 @@ describe('type: automation', () => {
         it('Should fixKeys by key w/o re-retrieving, auto-schedule and then --schedule', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, schedule: true });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'automation', [
-                'testExisting_automation_fixKey_schedule',
-                'testExisting_automation',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['automation'],
+                ['testExisting_automation_fixKey_schedule', 'testExisting_automation']
+            );
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['automation'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['automation'][0],
                 'testExisting_automation_fixedKey_scheduled',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -446,16 +451,18 @@ describe('type: automation', () => {
         it('Should fixKeys by key w/o re-retrieving, deploy paused', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false } });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'automation', [
-                'testExisting_automation_fixKey_pause',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['automation'],
+                ['testExisting_automation_fixKey_pause']
+            );
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['automation'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['automation'][0],
                 'testExisting_automation_fixedKey_paused',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -487,17 +494,18 @@ describe('type: automation', () => {
         it('Should fixKeys by key w/o re-retrieving, deploy paused and then --execute', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, execute: true });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'automation', [
-                'testExisting_automation_fixKey_pause',
-                'testExisting_automation',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['automation'],
+                ['testExisting_automation_fixKey_pause', 'testExisting_automation']
+            );
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['automation'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['automation'][0],
                 'testExisting_automation_fixedKey_paused',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -529,17 +537,18 @@ describe('type: automation', () => {
         it('Should fixKeys by key w/o re-retrieving, deploy paused and then --schedule', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, schedule: true });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'automation', [
-                'testExisting_automation_fixKey_pause',
-                'testExisting_automation',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['automation'],
+                ['testExisting_automation_fixKey_pause', 'testExisting_automation']
+            );
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['automation'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['automation'][0],
                 'testExisting_automation_fixedKey_paused',
                 'returned keys do not correspond to expected fixed keys'
             );

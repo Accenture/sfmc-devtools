@@ -448,14 +448,16 @@ describe('type: query', () => {
         it('Should run fixKeys but not find fixable keys and hence stop', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false } });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
-                'testExisting_query',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['query'],
+                ['testExisting_query']
+            );
             // THEN
             assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // check which keys were fixed
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['query'].length,
                 0,
                 'expected to find no keys to be fixed'
             );
@@ -479,17 +481,18 @@ describe('type: query', () => {
         it('Should fixKeys by key WITHOUT re-retrieving dependent types', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false } });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
-                'testExisting_query_fixKeys',
-                'testExisting_query',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['query'],
+                ['testExisting_query_fixKeys', 'testExisting_query']
+            );
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['query'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['query'][0],
                 'testExisting_query_fixedKeys',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -519,10 +522,11 @@ describe('type: query', () => {
                 keySuffix: '_DEV',
                 skipInteraction: { fixKeysReretrieve: false },
             });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
-                'testExisting_query_fixKeysSuffix',
-                'testExisting_query',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['query'],
+                ['testExisting_query_fixKeysSuffix', 'testExisting_query']
+            );
             // THEN
             assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
 
@@ -534,12 +538,12 @@ describe('type: query', () => {
             );
 
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['query'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['query'][0],
                 'testExisting_query_fixedKeys_DEV',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -566,17 +570,18 @@ describe('type: query', () => {
         it('Should fixKeys by key WITHOUT re-retrieving dependent types and then --execute', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, execute: true });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
-                'testExisting_query_fixKeys',
-                'testExisting_query',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['query'],
+                ['testExisting_query_fixKeys', 'testExisting_query']
+            );
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['query'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['query'][0],
                 'testExisting_query_fixedKeys',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -607,17 +612,18 @@ describe('type: query', () => {
         it('Should fixKeys by key AND re-retrieve dependent types', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: true } });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
-                'testExisting_query_fixKeys',
-                'testExisting_query',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['query'],
+                ['testExisting_query_fixKeys', 'testExisting_query']
+            );
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['query'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['query'][0],
                 'testExisting_query_fixedKeys',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -644,17 +650,18 @@ describe('type: query', () => {
         it('Should fixKeys by key AND re-retrieve dependent types and then --execute', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: true }, execute: true });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
-                'testExisting_query_fixKeys',
-                'testExisting_query',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['query'],
+                ['testExisting_query_fixKeys', 'testExisting_query']
+            );
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['query'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['query'][0],
                 'testExisting_query_fixedKeys',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -688,14 +695,14 @@ describe('type: query', () => {
                 like: { key: 'testExisting_query_f%' },
                 skipInteraction: { fixKeysReretrieve: false },
             });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query');
+            const resultFixKeys = await handler.fixKeys('testInstance/testBU', ['query']);
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['query'].length,
                 2,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['query'][0],
                 'testExisting_query_fixedKeys',
                 'returned keys do not correspond to expected fixed keys'
             );
