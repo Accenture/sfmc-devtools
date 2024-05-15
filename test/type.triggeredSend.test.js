@@ -111,7 +111,7 @@ describe('type: triggeredSend', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'triggeredSend',
-                'testExisting_triggeredSend',
+                ['testExisting_triggeredSend'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
