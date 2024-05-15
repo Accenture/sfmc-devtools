@@ -90,7 +90,7 @@
         "assert": "2.1.0",
         "axios-mock-adapter": "1.22.0",
         "c8": "9.1.0",
-        "chai": "5.1.0",
+        "chai": "5.1.1",
         "chai-files": "1.4.0",
         "eslint": "8.57.0",
         "eslint-config-prettier": "9.1.0",
