@@ -109,7 +109,7 @@ describe('type: dataExtract', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'dataExtract',
-                'testExisting_dataExtract',
+                ['testExisting_dataExtract'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
@@ -151,7 +151,7 @@ describe('type: dataExtract', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'dataExtract',
-                'testExisting_dataExtract',
+                ['testExisting_dataExtract'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');

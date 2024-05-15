@@ -126,7 +126,7 @@ describe('type: transactionalEmail', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'transactionalEmail',
-                'testExisting_temail',
+                ['testExisting_temail'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');

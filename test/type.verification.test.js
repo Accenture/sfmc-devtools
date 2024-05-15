@@ -133,7 +133,7 @@ describe('type: verification', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'verification',
-                'testExisting_39f6a488-20eb-4ba0-b0b9',
+                ['testExisting_39f6a488-20eb-4ba0-b0b9'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');

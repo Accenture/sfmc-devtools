@@ -272,7 +272,7 @@ describe('type: dataExtension', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'dataExtension',
-                'testExisting_dataExtension',
+                ['testExisting_dataExtension'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
@@ -318,7 +318,7 @@ describe('type: dataExtension', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'dataExtension',
-                'testExisting_dataExtension',
+                ['testExisting_dataExtension'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');

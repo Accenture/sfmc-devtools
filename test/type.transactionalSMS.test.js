@@ -151,7 +151,7 @@ describe('type: transactionalSMS', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'transactionalSMS',
-                'testExisting_tsms',
+                ['testExisting_tsms'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');

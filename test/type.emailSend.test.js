@@ -109,7 +109,7 @@ describe('type: emailSend', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'emailSend',
-                'testExisting_emailSend',
+                ['testExisting_emailSend'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');

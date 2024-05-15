@@ -604,7 +604,7 @@ describe('type: automation', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'automation',
-                'testExisting_automation',
+                ['testExisting_automation'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
@@ -647,7 +647,7 @@ describe('type: automation', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'automation',
-                'testExisting_automation',
+                ['testExisting_automation'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');

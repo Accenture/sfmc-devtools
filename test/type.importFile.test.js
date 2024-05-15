@@ -141,7 +141,7 @@ describe('type: importFile', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'importFile',
-                'testExisting_importFile',
+                ['testExisting_importFile'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
@@ -183,7 +183,7 @@ describe('type: importFile', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'importFile',
-                'testExisting_importFile',
+                ['testExisting_importFile'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');

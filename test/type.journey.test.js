@@ -217,7 +217,7 @@ describe('type: journey', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'journey',
-                'testExisting_journey_Quicksend',
+                ['testExisting_journey_Quicksend'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');

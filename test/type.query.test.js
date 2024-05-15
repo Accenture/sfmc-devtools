@@ -755,7 +755,7 @@ describe('type: query', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'query',
-                'testExisting_query',
+                ['testExisting_query'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
@@ -807,7 +807,7 @@ describe('type: query', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'query',
-                'testExisting_query',
+                ['testExisting_query'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');

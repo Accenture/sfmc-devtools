@@ -118,7 +118,7 @@ describe('type: sendClassification', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'sendClassification',
-                'testExisting_sendClassification',
+                ['testExisting_sendClassification'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');

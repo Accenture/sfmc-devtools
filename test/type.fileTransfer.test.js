@@ -106,7 +106,7 @@ describe('type: fileTransfer', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'fileTransfer',
-                'testExisting_fileTransfer',
+                ['testExisting_fileTransfer'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
@@ -148,7 +148,7 @@ describe('type: fileTransfer', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'fileTransfer',
-                'testExisting_fileTransfer',
+                ['testExisting_fileTransfer'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');

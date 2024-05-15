@@ -198,7 +198,7 @@ describe('type: user', () => {
             await handler.buildDefinition(
                 'testInstance/_ParentBU_',
                 'user',
-                'testExisting_user',
+                ['testExisting_user'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
