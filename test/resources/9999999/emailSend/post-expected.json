@@ -1,0 +1,41 @@
+{
+    "Additional": "",
+    "AutoBccEmail": "",
+    "BccEmail": "",
+    "CCEmail": "",
+    "CustomerKey": "testNew_emailSend",
+    "DeduplicateByEmail": false,
+    "Description": "created on deploy",
+    "DynamicEmailSubject": "testExisting_asset_email",
+    "EmailSubject": "testExisting_asset_email",
+    "ExclusionFilter": "",
+    "IsMultipart": true,
+    "IsSendLogging": false,
+    "IsWrapped": true,
+    "Name": "testNew_emailSend",
+    "SendDefinitionList": [
+        {
+            "SendDefinitionListType": "ExclusionList",
+            "DataSourceTypeID": "CustomObject",
+            "IsTestObject": false,
+            "Name": "",
+            "r__dataExtension_Key": "testExisting_dataExtension_exclusion"
+        },
+        {
+            "SendDefinitionListType": "SourceList",
+            "DataSourceTypeID": "CustomObject",
+            "IsTestObject": false,
+            "Name": "",
+            "r__dataExtension_Key": "testExisting_dataExtension",
+            "r__list_PathName": "Publication Lists/Demo Publication List"
+        }
+    ],
+    "SuppressTracking": false,
+    "TestEmailAddr": "",
+    "r__assetMessage_Key": "testExisting_asset_message",
+    "r__assetMessage_Name": "testExisting_asset_message",
+    "r__deliveryProfile_key": "Default",
+    "r__folder_Path": "User-Initiated",
+    "r__sendClassification_CustomerKey": "testExisting_sendClassification",
+    "r__senderProfile_CustomerKey": "testExisting_senderProfile"
+}
