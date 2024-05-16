@@ -44,6 +44,82 @@ async function getActualJson(customerKey, type, subtype, buName = 'testBU') {
 function getActualFile(customerKey, type, subtype, ext, buName = 'testBU') {
     return `./retrieve/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`;
 }
+/**
+ * gets file from Template folder
+ *
+ * @param {string} customerKey of metadata
+ * @param {string} type of metadata
+ * @param {string} subtype of metadata
+ * @returns {Promise.<string>} file in string form
+ */
+async function getActualTemplateJson(customerKey, type, subtype) {
+    try {
+        return await File.readJSON(
+            `./template/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.json`
+        );
+    } catch {
+        return await File.readJSON(
+            `./template/${type}/${subtype}/${customerKey}/${customerKey}.${type}-${subtype}-meta.json`
+        );
+    }
+}
+/**
+ * gets file from Template folder
+ *
+ * @param {string} customerKey of metadata
+ * @param {string} type of metadata
+ * @param {string} subtype of metadata
+ * @param {string} ext file extension
+ * @param {string} [filename] optional fileprefix that differs from customerKey
+ * @returns {any} file
+ */
+function getActualTemplateFile(customerKey, type, subtype, ext, filename) {
+    return filename
+        ? file(
+              `./template/${type}/${subtype}/${customerKey}/${filename}.${type}-${subtype}-meta.${ext}`
+          )
+        : file(`./template/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`);
+}
+/**
+ * gets file from Deploy folder
+ *
+ * @param {string} customerKey of metadata
+ * @param {string} type of metadata
+ * @param {string} subtype of metadata
+ * @param {string} [buName] used when we need to test on ParentBU
+ * @returns {Promise.<string>} file in string form
+ */
+async function getActualDeployJson(customerKey, type, subtype, buName = 'testBU') {
+    try {
+        return await File.readJSON(
+            `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.json`
+        );
+    } catch {
+        return await File.readJSON(
+            `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}/${customerKey}.${type}-${subtype}-meta.json`
+        );
+    }
+}
+/**
+ * gets file from Deploy folder
+ *
+ * @param {string} customerKey of metadata
+ * @param {string} type of metadata
+ * @param {string} subtype of metadata
+ * @param {string} ext file extension
+ * @param {string} [filename] optional fileprefix that differs from customerKey
+ * @param {string} [buName] used when we need to test on ParentBU
+ * @returns {any} file content
+ */
+function getActualDeployFile(customerKey, type, subtype, ext, filename, buName = 'testBU') {
+    return filename
+        ? file(
+              `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}/${filename}.${type}-${subtype}-meta.${ext}`
+          )
+        : file(
+              `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`
+          );
+}
 
 describe('type: asset', () => {
     beforeEach(() => {
@@ -208,6 +284,106 @@ describe('type: asset', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 10,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
+
+    describe('Templating ================', () => {
+        it('Should create a asset template via buildTemplate and build it', async () => {
+            // download first before we test buildTemplate
+            await handler.retrieve('testInstance/testBU', ['asset']);
+
+            const expectedApiCallsRetrieve = 15;
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                expectedApiCallsRetrieve,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+
+            // GIVEN there is a template
+            const result = await handler.buildTemplate(
+                'testInstance/testBU',
+                'asset',
+                ['testExisting_asset_templatebasedemail'],
+                'testSourceMarket'
+            );
+            // WHEN
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+            assert.equal(
+                result.asset ? Object.keys(result.asset).length : 0,
+                1,
+                'only one asset expected'
+            );
+            assert.deepEqual(
+                await getActualTemplateJson(
+                    'testExisting_asset_templatebasedemail',
+                    'asset',
+                    'message'
+                ),
+                await testUtils.getExpectedJson('9999999', 'asset', 'template-templatebasedemail'),
+                'returned template JSON of buildTemplate was not equal expected'
+            );
+
+            expect(
+                getActualTemplateFile(
+                    'testExisting_asset_templatebasedemail',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.html.content'
+                )
+            ).to.equal(
+                file(
+                    testUtils.getExpectedFile(
+                        '9999999',
+                        'asset',
+                        'template-templatebasedemail',
+                        'html'
+                    )
+                )
+            );
+            // THEN
+            await handler.buildDefinition(
+                'testInstance/testBU',
+                'asset',
+                ['testExisting_asset_templatebasedemail'],
+                'testTargetMarket'
+            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
+
+            assert.deepEqual(
+                await getActualDeployJson(
+                    'testTemplated_asset_templatebasedemail',
+                    'asset',
+                    'message'
+                ),
+                await testUtils.getExpectedJson('9999999', 'asset', 'build-templatebasedemail'),
+                'returned deployment JSON was not equal expected'
+            );
+            expect(
+                getActualDeployFile(
+                    'testTemplated_asset_templatebasedemail',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.html.content'
+                )
+            ).to.equal(
+                file(
+                    testUtils.getExpectedFile(
+                        '9999999',
+                        'asset',
+                        'build-templatebasedemail',
+                        'html'
+                    )
+                )
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
+                0,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
