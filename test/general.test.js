@@ -485,6 +485,192 @@ describe('GENERAL', () => {
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
+
+            it('build multiple type with keys and --bulk', async () => {
+                // download first before we test buildTemplate
+                await handler.retrieve('testInstance/testBU', ['automation', 'query']);
+
+                const expectedApiCallsRetrieve = 25;
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    expectedApiCallsRetrieve,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+
+                // preparation
+                const argvMetadata = [
+                    'automation:testExisting_automation',
+                    'query:testExisting_query',
+                    'query:bad',
+                ];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                assert.notEqual(
+                    typeof typeKeyCombo,
+                    'undefined',
+                    'typeKeyCombo should not be undefined'
+                );
+                const buName = 'testInstance/testBU';
+
+                // *** build: buildTemplate and buildDefinition chained ***
+                const definitionResult = await handler.build(
+                    buName,
+                    'ignored',
+                    typeKeyCombo,
+                    'testSourceMarket',
+                    'deployment-target',
+                    true
+                );
+                assert.equal(process.exitCode, 0, 'build should not have thrown an error');
+
+                // *** buildTemplate ***
+
+                // check automation
+                assert.deepEqual(
+                    await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
+                    await testUtils.getExpectedJson('9999999', 'automation', 'template'),
+                    'returned template was not equal expected'
+                );
+                // check query
+                assert.deepEqual(
+                    await testUtils.getActualTemplateJson('testExisting_query', 'query'),
+                    await testUtils.getExpectedJson('9999999', 'query', 'template'),
+                    'returned template JSON of retrieveAsTemplate was not equal expected'
+                );
+                expect(
+                    file(testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql'))
+                ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'template', 'sql')));
+
+                // *** buildDefinitionBulk ***
+
+                // check automation
+                assert.equal(
+                    definitionResult.automation?.['testInstance/testBU']?.testSourceMarket
+                        ? Object.keys(
+                              definitionResult.automation?.['testInstance/testBU']?.testSourceMarket
+                          ).length
+                        : 0,
+                    1,
+                    'only one automation expected'
+                );
+                assert.equal(
+                    definitionResult.automation?.['testInstance/testBU']?.testTargetMarket
+                        ? Object.keys(
+                              definitionResult.automation?.['testInstance/testBU']?.testTargetMarket
+                          ).length
+                        : 0,
+                    1,
+                    'only one automation expected'
+                );
+                assert.equal(
+                    definitionResult.automation?.['testInstance/_ParentBU_']?.testTargetMarket
+                        ? Object.keys(
+                              definitionResult.automation?.['testInstance/_ParentBU_']
+                                  ?.testTargetMarket
+                          ).length
+                        : 0,
+                    1,
+                    'only one automation expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualDeployJson('testTemplated_automation', 'automation'),
+                    await testUtils.getExpectedJson('9999999', 'automation', 'build'),
+                    'returned deployment file was not equal expected'
+                );
+
+                // check if files were also created for other BU-market combos
+                // testBU: testSourceMarket
+                expect(
+                    file(
+                        testUtils.getActualDeployFile(
+                            'testExisting_automation',
+                            'automation',
+                            'json'
+                        )
+                    )
+                ).to.exist;
+                // _ParentBU_: testTargetMarket
+                expect(
+                    file(
+                        testUtils.getActualDeployFile(
+                            'testTemplated_automation',
+                            'automation',
+                            'json',
+                            '_ParentBU_'
+                        )
+                    )
+                ).to.exist;
+
+                // check query
+                assert.equal(
+                    definitionResult.query?.['testInstance/testBU']?.testSourceMarket
+                        ? Object.keys(
+                              definitionResult.query?.['testInstance/testBU']?.testSourceMarket
+                          ).length
+                        : 0,
+                    1,
+                    'only one query expected'
+                );
+                assert.equal(
+                    definitionResult.query?.['testInstance/testBU']?.testTargetMarket
+                        ? Object.keys(
+                              definitionResult.query?.['testInstance/testBU']?.testTargetMarket
+                          ).length
+                        : 0,
+                    1,
+                    'only one query expected'
+                );
+                assert.equal(
+                    definitionResult.query?.['testInstance/_ParentBU_']?.testTargetMarket
+                        ? Object.keys(
+                              definitionResult.query?.['testInstance/_ParentBU_']?.testTargetMarket
+                          ).length
+                        : 0,
+                    1,
+                    'only one query expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualDeployJson('testTemplated_query', 'query'),
+                    await testUtils.getExpectedJson('9999999', 'query', 'build'),
+                    'returned deployment JSON was not equal expected'
+                );
+                expect(
+                    file(testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql'))
+                ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'build', 'sql')));
+
+                // check if files were also created for other BU-market combos
+                // testBU: testSourceMarket
+                expect(file(testUtils.getActualDeployFile('testExisting_query', 'query', 'json')))
+                    .to.exist;
+                expect(file(testUtils.getActualDeployFile('testExisting_query', 'query', 'sql'))).to
+                    .exist;
+                // _ParentBU_: testTargetMarket
+                expect(
+                    file(
+                        testUtils.getActualDeployFile(
+                            'testTemplated_query',
+                            'query',
+                            'json',
+                            '_ParentBU_'
+                        )
+                    )
+                ).to.exist;
+                expect(
+                    file(
+                        testUtils.getActualDeployFile(
+                            'testTemplated_query',
+                            'query',
+                            'sql',
+                            '_ParentBU_'
+                        )
+                    )
+                ).to.exist;
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
+                    0,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+            });
         });
     });
 
