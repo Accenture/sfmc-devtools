@@ -3,7 +3,7 @@
     "attributeCount": 37,
     "attributeGroupIconKey": "Mobile",
     "attributeGroupType": "Standard",
-    "attributeSetIdentifiers": ["MobileDemographics", "MobileSubscriptions"],
+    "r__attributeSet_definitionKey": ["MobileDemographics", "MobileSubscriptions"],
     "canAddProperties": false,
     "canAddRelationships": true,
     "canChangeProperties": false,
