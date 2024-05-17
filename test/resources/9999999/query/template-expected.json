@@ -2,7 +2,7 @@
     "name": "{{{prefix}}}query",
     "key": "{{{prefix}}}query",
     "description": "{{{description}}}",
-    "targetKey": "{{{prefix}}}dataExtension",
+    "r__dataExtension_CustomerKey": "{{{prefix}}}dataExtension",
     "targetUpdateTypeName": "Overwrite",
     "r__folder_Path": "Query"
 }

@@ -44,12 +44,13 @@
  * @property {string} name name
  * @property {string} key key
  * @property {string} description -
+ * @property {string} [targetId] Object ID of DE (removed before save)
  * @property {string} targetKey key of target data extension
+ * @property {string} r__dataExtension_CustomerKey key of target data extension
  * @property {string} createdDate e.g. "2020-09-14T01:42:03.017"
  * @property {string} modifiedDate e.g. "2020-09-14T01:42:03.017"
  * @property {'Overwrite'|'Update'|'Append'} targetUpdateTypeName defines how the query writes into the target data extension
  * @property {number} [targetUpdateTypeId] 0|1|2, mapped to targetUpdateTypeName via this.definition.targetUpdateTypeMapping
- * @property {string} [targetId] Object ID of DE (removed before save)
  * @property {string} [targetDescription] Description DE (removed before save)
  * @property {boolean} isFrozen looks like this is always set to false
  * @property {string} [queryText] contains SQL query with line breaks converted to '\n'. The content is extracted during retrieval and written into a separate *.sql file
