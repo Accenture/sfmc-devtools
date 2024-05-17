@@ -198,7 +198,8 @@
 
 /**
  * @typedef {object} AutomationActivity
- * @property {string} name name (not key) of activity
+ * @property {string} r__key key of associated activity
+ * @property {string} [name] name (not key) of associated activity
  * @property {number} [objectTypeId] Id of assoicated activity type; see this.definition.activityTypeMapping
  * @property {string} [activityObjectId] Object Id of assoicated metadata item
  * @property {number} [displayOrder] order within step; starts with 1 or higher number
