@@ -60,7 +60,7 @@
             "availableViews": [],
             "template": {
                 "meta": { "contentHash": -166410261 },
-                "r__assetTemplate_Key": "testTemplated_asset_template"
+                "r__asset_customerKey": "testTemplated_asset_template"
             },
             "data": { "email": { "options": { "generateFrom": null } } },
             "modelVersion": 2
