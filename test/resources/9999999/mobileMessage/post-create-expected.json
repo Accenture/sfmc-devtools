@@ -4,9 +4,7 @@
     "type": "ExactTarget.Mobile.Sms.Core.Entities.SmsMessageEntity",
     "name": "jb test 3",
     "origin": "SMS Send",
-    "code": {
-        "code": "4912312345678"
-    },
+    "r__mobileCode_code": "4912312345678",
     "mtSendDate": "2017-07-03T14:03:00Z",
     "template": {
         "id": "Mzo4MDow",
