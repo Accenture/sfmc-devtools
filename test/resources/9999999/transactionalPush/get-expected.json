@@ -6,6 +6,6 @@
     "status": "Active",
     "createdDate": "2022-12-07T02:56:00",
     "modifiedDate": "2022-12-07T02:56:00",
-    "content": { "customerKey": "mobileMessage_test" },
+    "r__asset_customerKey": "mobileMessage_test",
     "options": { "sound": "temp.wmv", "badge": "1" }
 }
