@@ -57,8 +57,8 @@
                     "r__senderProfile_CustomerKey": "testExisting_senderProfile",
                     "r__sendClassification_CustomerKey": "testExisting_sendClassification",
                     "c__priority": "High",
-                    "r__assetMessage_Name_readOnly": "testExisting_asset_message",
-                    "r__assetMessage_Key": "testExisting_asset_message"
+                    "r__asset_name_readOnly": "testExisting_asset_message",
+                    "r__asset_customerKey": "testExisting_asset_message"
                 },
                 "applicationExtensionKey": "jb-email-activity"
             },
