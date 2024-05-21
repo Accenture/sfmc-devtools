@@ -70,7 +70,7 @@
     "standardQuotedStrings": false,
     "destination": {
         "c__destinationType": "SMS",
-        "c__codeKeyword": "4912312345678.TESTEXISTING_KEYWORD"
+        "r__mobileKeyword_c__codeKeyword": "4912312345678.TESTEXISTING_KEYWORD"
     },
     "source": {
         "r__dataExtension_CustomerKey": "testExisting_dataExtension",
