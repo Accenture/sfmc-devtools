@@ -95,7 +95,7 @@
         "eslint": "8.57.0",
         "eslint-config-prettier": "9.1.0",
         "eslint-config-ssjs": "1.1.11",
-        "eslint-plugin-jsdoc": "48.2.4",
+        "eslint-plugin-jsdoc": "48.2.5",
         "eslint-plugin-mocha": "10.4.3",
         "eslint-plugin-prettier": "5.1.2",
         "eslint-plugin-unicorn": "52.0.0",
