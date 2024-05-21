@@ -2,7 +2,7 @@
     "name": "testTemplated_query",
     "key": "testTemplated_query",
     "description": "foobar",
-    "targetKey": "testTemplated_dataExtension",
+    "r__dataExtension_key": "testTemplated_dataExtension",
     "targetUpdateTypeName": "Overwrite",
     "r__folder_Path": "Query"
 }

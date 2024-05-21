@@ -19,23 +19,23 @@
             "DataSourceTypeID": "CustomObject",
             "IsTestObject": false,
             "Name": "",
-            "r__dataExtension_Key": "testExisting_dataExtension_exclusion"
+            "r__dataExtension_key": "testExisting_dataExtension_exclusion"
         },
         {
             "SendDefinitionListType": "SourceList",
             "DataSourceTypeID": "CustomObject",
             "IsTestObject": false,
             "Name": "",
-            "r__dataExtension_Key": "testExisting_dataExtension",
+            "r__dataExtension_key": "testExisting_dataExtension",
             "r__list_PathName": "Publication Lists/Demo Publication List"
         }
     ],
     "SuppressTracking": false,
     "TestEmailAddr": "",
-    "r__assetMessage_Key": "testExisting_asset_message",
-    "r__assetMessage_Name": "testExisting_asset_message",
+    "r__asset_key": "testExisting_asset_message",
+    "r__asset_name_readOnly": "testExisting_asset_message",
     "r__deliveryProfile_key": "Default",
     "r__folder_Path": "User-Initiated",
-    "r__sendClassification_CustomerKey": "testExisting_sendClassification",
-    "r__senderProfile_CustomerKey": "testExisting_senderProfile"
+    "r__sendClassification_key": "testExisting_sendClassification",
+    "r__senderProfile_key": "testExisting_senderProfile"
 }

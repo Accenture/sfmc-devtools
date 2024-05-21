@@ -1,6 +1,6 @@
 {
     "dataVerificationDefinitionId": "testNew_RANDOM_NEW_GUID",
-    "r__dataExtension_CustomerKey": "testExisting_dataExtension",
+    "r__dataExtension_key": "testExisting_dataExtension",
     "verificationType": "IsEqualTo",
     "value1": 2,
     "value2": 0,

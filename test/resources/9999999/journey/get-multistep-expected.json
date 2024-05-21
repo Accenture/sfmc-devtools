@@ -100,11 +100,11 @@
                     "throttleCloses": "1/1/0001 12:00:00 AM",
                     "isTrackingClicks": true,
                     "r__list_PathName": { "publicationList": "my subscribers/All Subscribers" },
-                    "r__senderProfile_CustomerKey": "testExisting_senderProfile",
-                    "r__sendClassification_CustomerKey": "testExisting_sendClassification",
+                    "r__senderProfile_key": "testExisting_senderProfile",
+                    "r__sendClassification_key": "testExisting_sendClassification",
                     "c__priority": "Medium",
-                    "r__assetMessage_Name_readOnly": "testExisting_asset_message",
-                    "r__assetMessage_Key": "testExisting_asset_message"
+                    "r__asset_name_readOnly": "testExisting_asset_message",
+                    "r__asset_key": "testExisting_asset_message"
                 }
             },
             "metaData": {

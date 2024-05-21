@@ -48,14 +48,14 @@
                         "publicationList": "my subscribers/All Subscribers",
                         "suppressionLists": ["Suppression Lists/{{{prefix}}}suppressionList"]
                     },
-                    "r__dataExtension_CustomerKey": {
+                    "r__dataExtension_key": {
                         "domainExclusions": ["{{{prefix}}}DomainExclusion"]
                     },
-                    "r__senderProfile_CustomerKey": "{{{prefix}}}senderProfile",
-                    "r__sendClassification_CustomerKey": "{{{prefix}}}sendClassification",
+                    "r__senderProfile_key": "{{{prefix}}}senderProfile",
+                    "r__sendClassification_key": "{{{prefix}}}sendClassification",
                     "c__priority": "High",
-                    "r__assetMessage_Name_readOnly": "{{{prefix}}}asset_message",
-                    "r__assetMessage_Key": "{{{prefix}}}asset_message"
+                    "r__asset_name_readOnly": "{{{prefix}}}asset_message",
+                    "r__asset_key": "{{{prefix}}}asset_message"
                 },
                 "applicationExtensionKey": "jb-email-activity"
             },

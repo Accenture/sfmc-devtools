@@ -3,6 +3,6 @@
     "Name": "testNew_sendClassification",
     "Description": "created on deploy",
     "c__classification": "Transactional",
-    "r__senderProfile_CustomerKey": "testExisting_senderProfile",
+    "r__senderProfile_key": "testExisting_senderProfile",
     "r__deliveryProfile_key": "Default"
 }

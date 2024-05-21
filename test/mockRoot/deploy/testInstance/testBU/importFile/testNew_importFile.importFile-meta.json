@@ -25,7 +25,7 @@
     "c__dataAction": "AddUpdate",
     "destination": {
         "c__destinationType": "DataExtension",
-        "r__dataExtension_CustomerKey": "testExisting_dataExtension"
+        "r__dataExtension_key": "testExisting_dataExtension"
     },
     "source": {
         "r__fileLocation_name": "ExactTarget Enhanced FTP"

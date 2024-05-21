@@ -40,7 +40,7 @@ describe('type: query', () => {
             expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
                 file(testUtils.getExpectedFile('9999999', 'query', 'get', 'sql'))
             );
-            // check if targetKey was overwritten
+            // check if r__dataExtension_key was overwritten
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_query2', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'get2'),
