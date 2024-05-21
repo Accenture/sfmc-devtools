@@ -4,8 +4,8 @@
     "type": "ExactTarget.Mobile.Sms.Core.Entities.SmsMessageEntity",
     "name": "testNew_mobileMessage",
     "origin": "SMS Send",
-    "r__mobileCode_code": "4912312345678",
-    "r__campaign_name": ["testExisting_campaign"],
+    "r__mobileCode_key": "4912312345678",
+    "r__campaign_key": ["testExisting_campaign"],
     "mtSendDate": "2017-07-03T14:03:00Z",
     "template": {
         "id": "Mzo4MDow",

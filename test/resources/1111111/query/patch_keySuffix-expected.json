@@ -2,7 +2,7 @@
     "name": "testNew_query",
     "key": "testNew_query_DEV",
     "description": "created on deploy",
-    "r__dataExtension_CustomerKey": "testExisting_dataExtensionShared",
+    "r__dataExtension_key": "testExisting_dataExtensionShared",
     "createdDate": "2022-04-26T15:21:16.453",
     "modifiedDate": "2022-04-26T16:04:15.88",
     "targetUpdateTypeName": "Overwrite",

@@ -3,6 +3,6 @@
     "definitionKey": "{{{prefix}}}tpush",
     "description": "{{{description}}}. note that applicationId can only be manually set up in Setup - Mobile Push",
     "applicationId": "ffbab4c9-fbf6-4b87-9c9a-10c6ce86e81d",
-    "r__asset_customerKey": "mobileMessage{{{suffix}}}",
+    "r__asset_key": "mobileMessage{{{suffix}}}",
     "options": { "sound": "temp.wmv", "badge": "1" }
 }

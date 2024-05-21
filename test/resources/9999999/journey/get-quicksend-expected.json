@@ -51,14 +51,14 @@
                         "publicationList": "my subscribers/All Subscribers",
                         "suppressionLists": ["Suppression Lists/testExisting_suppressionList"]
                     },
-                    "r__dataExtension_CustomerKey": {
+                    "r__dataExtension_key": {
                         "domainExclusions": ["testExisting_DomainExclusion"]
                     },
-                    "r__senderProfile_CustomerKey": "testExisting_senderProfile",
-                    "r__sendClassification_CustomerKey": "testExisting_sendClassification",
+                    "r__senderProfile_key": "testExisting_senderProfile",
+                    "r__sendClassification_key": "testExisting_sendClassification",
                     "c__priority": "High",
                     "r__asset_name_readOnly": "testExisting_asset_message",
-                    "r__asset_customerKey": "testExisting_asset_message"
+                    "r__asset_key": "testExisting_asset_message"
                 },
                 "applicationExtensionKey": "jb-email-activity"
             },

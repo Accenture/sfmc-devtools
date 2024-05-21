@@ -2,7 +2,7 @@
     "name": "testExisting_query_fixedKeys",
     "key": "testExisting_query_fixKeys",
     "description": "updated on deploy",
-    "r__dataExtension_CustomerKey": "testExisting_dataExtension",
+    "r__dataExtension_key": "testExisting_dataExtension",
     "createdDate": "2022-04-26T15:21:16.453",
     "modifiedDate": "2022-04-26T16:04:15.88",
     "targetUpdateTypeName": "Overwrite",

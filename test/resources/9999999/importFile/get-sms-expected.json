@@ -70,10 +70,10 @@
     "standardQuotedStrings": false,
     "destination": {
         "c__destinationType": "SMS",
-        "r__mobileKeyword_c__codeKeyword": "4912312345678.TESTEXISTING_KEYWORD"
+        "r__mobileKeyword_key": "4912312345678.TESTEXISTING_KEYWORD"
     },
     "source": {
-        "r__dataExtension_CustomerKey": "testExisting_dataExtension",
+        "r__dataExtension_key": "testExisting_dataExtension",
         "r__fileLocation_name": "ExactTarget Enhanced FTP"
     }
 }

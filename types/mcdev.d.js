@@ -46,7 +46,7 @@
  * @property {string} description -
  * @property {string} [targetId] Object ID of DE (removed before save)
  * @property {string} targetKey key of target data extension
- * @property {string} r__dataExtension_CustomerKey key of target data extension
+ * @property {string} r__dataExtension_key key of target data extension
  * @property {string} createdDate e.g. "2020-09-14T01:42:03.017"
  * @property {string} modifiedDate e.g. "2020-09-14T01:42:03.017"
  * @property {'Overwrite'|'Update'|'Append'} targetUpdateTypeName defines how the query writes into the target data extension
@@ -113,7 +113,7 @@
  * @property {'dataextension'|'salesforcedataextension'|'synchronizeddataextension'|'shared_dataextension'|'shared_salesforcedataextension'} r__folder_ContentType retrieved from associated folder
  * @property {string} r__folder_Path folder path in which this DE is saved
  * @property {string} [CategoryID] holds folder ID, replaced with r__folder_Path during retrieve
- * @property {string} [r__dataExtensionTemplate_Name] name of optionally associated DE template
+ * @property {string} [r__dataExtensionTemplate_name] name of optionally associated DE template
  * @property {object} [Template] -
  * @property {string} [Template.CustomerKey] key of optionally associated DE teplate
  * @property {string} RetainUntil empty string or US date + 12:00:00 AM
@@ -302,7 +302,7 @@
  * @property {string} notificationEmailMessage email message to send; empty string if shouldEmailOnFailure=false
  * @property {number} createdBy user id of creator
  * @property {string} [targetObjectId] ObjectID of target data extension
- * @property {string} r__dataExtension_CustomerKey key of target data extension
+ * @property {string} r__dataExtension_key key of target data extension
  */
 
 /**
