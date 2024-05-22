@@ -5,7 +5,8 @@
     },
     "editor.formatOnSave": true,
     "files.associations": {
-        "*.ssjs": "javascript"
+        "*.ssjs": "javascript",
+        "*.html": "ampscript"
     },
     "files.eol": "\n",
     "js/ts.implicitProjectConfig.checkJs": true,
