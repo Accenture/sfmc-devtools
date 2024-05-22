@@ -41,7 +41,7 @@
         "mcdev": "./lib/cli.js"
     },
     "engines": {
-        "node": ">=18.16.0"
+        "node": ">=18.18.2"
     },
     "scripts": {
         "start": "node lib/cli.js",
@@ -63,7 +63,7 @@
         "version:patch": "npm version --no-commit-hooks patch"
     },
     "dependencies": {
-        "beauty-amp-core2": "0.4.6",
+        "beauty-amp-core2": "0.4.9",
         "cli-progress": "3.12.0",
         "command-exists": "1.2.9",
         "conf": "12.0.0",
