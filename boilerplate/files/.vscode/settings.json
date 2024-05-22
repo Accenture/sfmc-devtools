@@ -37,7 +37,7 @@
     "editor.formatOnSave": true,
     "files.associations": {
         "*.ssjs": "javascript",
-        "*.html": "AMPscript"
+        "*.html": "ampscript"
     },
     "files.eol": "\n",
     "files.exclude": {
