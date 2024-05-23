@@ -31,7 +31,6 @@
         "rest"
     ],
     "main": "./lib/index.js",
-    "types": "./@types/lib/index.d.ts",
     "exports": {
         ".": {
             "types": "./@types/lib/index.d.ts",
