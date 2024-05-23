@@ -5,6 +5,6 @@
     "Name": "testExisting_sendClassification",
     "Description": "",
     "c__classification": "Commercial",
-    "r__senderProfile_CustomerKey": "testExisting_senderProfile",
+    "r__senderProfile_key": "testExisting_senderProfile",
     "r__deliveryProfile_key": "Default"
 }

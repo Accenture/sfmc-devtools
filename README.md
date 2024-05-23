@@ -19,6 +19,10 @@ Run the following to install Accenture SFMC DevTools on your computer:
 npm install -g mcdev
 ```
 
+### VSCode Extension
+
+We also provide a [VSCode extension](https://marketplace.visualstudio.com/items?itemName=Accenture-oss.sfmc-devtools-vscode) that integrates SFMC DevTools into your IDE. You can install it from the [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=Accenture-oss.sfmc-devtools-vscode).
+
 ### Include in your package
 
 First, install it as dependency:
@@ -27,10 +31,10 @@ First, install it as dependency:
 npm install mcdev --save
 ```
 
-You can then include it in your code with:
+You can then include it in your code with JavaScript/ES module imports:
 
 ```javascript
-const mcdev = require('mcdev');
+import mcdev from 'mcdev';
 ```
 
 That will load `node_packages/mcdev/lib/index.js`. It can make sense to directly include other files if you have a special scenario. We've done that in our example for [retrieveChangelog.js](https://github.com/Accenture/sfmc-devtools/blob/main/lib/retrieveChangelog.js) or in more detail, in our child-project [sfmc-devtools-copado](https://github.com/Accenture/sfmc-devtools-copado) to get full control over certain aspects.
@@ -69,4 +73,4 @@ The people that lead this project:
 
 ## Copyright
 
-Copyright (c) 2020-2023 Accenture. [MIT licensed](https://github.com/Accenture/sfmc-devtools/blob/main/LICENSE).
+Copyright (c) 2020-2024 Accenture. [MIT licensed](https://github.com/Accenture/sfmc-devtools/blob/main/LICENSE).

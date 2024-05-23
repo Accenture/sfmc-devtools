@@ -141,7 +141,7 @@ describe('type: mobileMessage', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'mobileMessage',
-                'NTIzOjc4OjA',
+                ['NTIzOjc4OjA'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');

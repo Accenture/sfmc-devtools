@@ -28,8 +28,8 @@ describe('type: dataExtension', () => {
             const result = cache.getCache();
             assert.equal(
                 result.dataExtension ? Object.keys(result.dataExtension).length : 0,
-                1,
-                'only one dataExtension expected'
+                5,
+                'only 5 dataExtension expected'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_dataExtension', 'dataExtension'),
@@ -119,8 +119,8 @@ describe('type: dataExtension', () => {
             const result = cache.getCache();
             assert.equal(
                 result.dataExtension ? Object.keys(result.dataExtension).length : 0,
-                3,
-                'three dataExtensions expected'
+                7,
+                '7 dataExtensions expected'
             );
             // insert
             assert.deepEqual(
@@ -272,7 +272,7 @@ describe('type: dataExtension', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'dataExtension',
-                'testExisting_dataExtension',
+                ['testExisting_dataExtension'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
@@ -318,7 +318,7 @@ describe('type: dataExtension', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'dataExtension',
-                'testExisting_dataExtension',
+                ['testExisting_dataExtension'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');

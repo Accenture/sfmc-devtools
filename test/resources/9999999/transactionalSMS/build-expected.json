@@ -4,10 +4,9 @@
     "description": "foobar",
     "status": "Active",
     "subscriptions": {
-        "shortCode": "4912312345678",
         "countryCode": "",
         "autoAddSubscriber": true,
         "updateSubscriber": true,
-        "keyword": "TESTTEMPLATED_KEYWORD"
+        "r__mobileKeyword_key": "4912312345678.TESTTEMPLATED_KEYWORD"
     }
 }

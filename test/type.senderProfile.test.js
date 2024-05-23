@@ -112,7 +112,7 @@ describe('type: senderProfile', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'senderProfile',
-                'testExisting_senderProfile',
+                ['testExisting_senderProfile'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');

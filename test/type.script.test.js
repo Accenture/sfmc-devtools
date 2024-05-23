@@ -297,7 +297,7 @@ describe('type: script', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'script',
-                'testExisting_script',
+                ['testExisting_script'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
@@ -349,7 +349,7 @@ describe('type: script', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'script',
-                'testExisting_script',
+                ['testExisting_script'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');

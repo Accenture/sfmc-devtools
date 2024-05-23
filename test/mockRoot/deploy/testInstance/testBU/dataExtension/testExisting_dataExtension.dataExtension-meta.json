@@ -7,11 +7,7 @@
     "SendableDataExtensionField": { "Name": "ContactKey" },
     "SendableSubscriberField": { "Name": "Subscriber Key" },
     "DataRetentionPeriodLength": 6,
-    "DataRetentionPeriodUnitOfMeasure": 5,
-    "RowBasedRetention": true,
     "ResetRetentionPeriodOnImport": false,
-    "DeleteAtEndOfRetentionPeriod": false,
-    "RetainUntil": "",
     "Fields": [
         {
             "Name": "FirstName",
@@ -55,6 +51,9 @@
             "FieldType": "Text"
         }
     ],
+    "c__dataRetentionPeriodUnitOfMeasure": "Days",
+    "c__retainUntil": "2024-5-9",
+    "c__retentionPolicy": "allRecords",
     "r__folder_ContentType": "dataextension",
     "r__folder_Path": "Data Extensions"
 }

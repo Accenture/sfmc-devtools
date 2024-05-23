@@ -1,11 +1,12 @@
 [
     {
-        "version": "6.1.0",
-        "files": [".vscode/settings.json", ".beautyamp.json", ".vscode/extensions.json"]
-    },
-    {
-        "version": "6.0.3",
-        "files": [".prettierrc"]
+        "version": "7.0.0",
+        "files": [
+            ".vscode/extensions.json",
+            ".vscode/settings.json",
+            ".beautyamp.json",
+            ".prettierrc"
+        ]
     },
     {
         "version": "5.0.0",

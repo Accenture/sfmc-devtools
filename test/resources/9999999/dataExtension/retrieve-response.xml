@@ -41,7 +41,102 @@
                 </SendableSubscriberField>
                 <DataRetentionPeriodLength>6</DataRetentionPeriodLength>
                 <DataRetentionPeriodUnitOfMeasure>5</DataRetentionPeriodUnitOfMeasure>
+                <RowBasedRetention>false</RowBasedRetention>
+                <ResetRetentionPeriodOnImport>false</ResetRetentionPeriodOnImport>
+                <DeleteAtEndOfRetentionPeriod>true</DeleteAtEndOfRetentionPeriod>
+                <RetainUntil>5/9/2024 12:00:00 AM</RetainUntil>
+                <CategoryID>2</CategoryID>
+            </Results>
+            <Results xsi:type="DataExtension">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2022-04-21T06:56:27.927</CreatedDate>
+                <ModifiedDate>2022-04-21T06:56:27.927</ModifiedDate>
+                <ObjectID>21711373-72c1-ec11-b83b-exclusion</ObjectID>
+                <CustomerKey>testExisting_dataExtension_exclusion</CustomerKey>
+                <Name>testExisting_dataExtension_exclusion</Name>
+                <Description>bla bla</Description>
+                <IsSendable>true</IsSendable>
+                <IsTestable>true</IsTestable>
+                <SendableDataExtensionField>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <Name>ContactKey</Name>
+                </SendableDataExtensionField>
+                <SendableSubscriberField>
+                    <Name>_SubscriberKey</Name>
+                </SendableSubscriberField>
+                <DataRetentionPeriodLength>6</DataRetentionPeriodLength>
+                <DataRetentionPeriodUnitOfMeasure>5</DataRetentionPeriodUnitOfMeasure>
                 <RowBasedRetention>true</RowBasedRetention>
+                <ResetRetentionPeriodOnImport>false</ResetRetentionPeriodOnImport>
+                <DeleteAtEndOfRetentionPeriod>false</DeleteAtEndOfRetentionPeriod>
+                <RetainUntil />
+                <CategoryID>2</CategoryID>
+            </Results>
+            <Results xsi:type="DataExtension">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2024-04-24T12:15:55.853</CreatedDate>
+                <ModifiedDate>2024-04-24T12:15:55.853</ModifiedDate>
+                <ObjectID>5a7194ad-6602-ef11-a5c8-5cba2c702db8</ObjectID>
+                <CustomerKey>testExisting_DomainExclusion</CustomerKey>
+                <Name>testExisting_DomainExclusion</Name>
+                <Description>Domain Exclusion Data Extension Template</Description>
+                <IsSendable>false</IsSendable>
+                <IsTestable>false</IsTestable>
+                <Template>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>086D14D3-5057-462B-AF33-01CA8D1FE87A</CustomerKey>
+                </Template>
+                <RowBasedRetention>false</RowBasedRetention>
+                <ResetRetentionPeriodOnImport>false</ResetRetentionPeriodOnImport>
+                <DeleteAtEndOfRetentionPeriod>false</DeleteAtEndOfRetentionPeriod>
+                <RetainUntil />
+                <CategoryID>2</CategoryID>
+            </Results>
+            <Results xsi:type="DataExtension">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2024-04-24T12:09:53.527</CreatedDate>
+                <ModifiedDate>2024-04-24T12:09:53.527</ModifiedDate>
+                <ObjectID>1c8064d5-6502-ef11-a5c8-5cba2c702db8</ObjectID>
+                <CustomerKey>testExisting_journey_Quicksend</CustomerKey>
+                <Name>testExisting_journey_Quicksend</Name>
+                <Description />
+                <IsSendable>true</IsSendable>
+                <IsTestable>false</IsTestable>
+                <SendableDataExtensionField>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <Name>ContactId</Name>
+                </SendableDataExtensionField>
+                <SendableSubscriberField>
+                    <Name>_SubscriberKey</Name>
+                </SendableSubscriberField>
+                <RowBasedRetention>false</RowBasedRetention>
+                <ResetRetentionPeriodOnImport>false</ResetRetentionPeriodOnImport>
+                <DeleteAtEndOfRetentionPeriod>false</DeleteAtEndOfRetentionPeriod>
+                <RetainUntil />
+                <CategoryID>290821</CategoryID>
+            </Results>
+            <Results xsi:type="DataExtension">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2024-04-24T12:10:46.457</CreatedDate>
+                <ModifiedDate>2024-04-24T12:10:46.457</ModifiedDate>
+                <ObjectID>ed305df3-6502-ef11-a5c8-5cba2c702db8</ObjectID>
+                <CustomerKey>testExisting_journey_Multistep</CustomerKey>
+                <Name>testExisting_journey_Multistep</Name>
+                <Description />
+                <IsSendable>true</IsSendable>
+                <IsTestable>false</IsTestable>
+                <SendableDataExtensionField>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <Name>ContactId</Name>
+                </SendableDataExtensionField>
+                <SendableSubscriberField>
+                    <Name>_SubscriberKey</Name>
+                </SendableSubscriberField>
+                <RowBasedRetention>false</RowBasedRetention>
                 <ResetRetentionPeriodOnImport>false</ResetRetentionPeriodOnImport>
                 <DeleteAtEndOfRetentionPeriod>false</DeleteAtEndOfRetentionPeriod>
                 <RetainUntil />

@@ -4,5 +4,5 @@
     "Name": "testTemplated_sendClassification",
     "c__classification": "Commercial",
     "r__deliveryProfile_key": "Default",
-    "r__senderProfile_CustomerKey": "testTemplated_senderProfile"
+    "r__senderProfile_key": "testTemplated_senderProfile"
 }

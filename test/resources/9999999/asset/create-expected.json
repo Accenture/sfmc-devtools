@@ -1,0 +1,18 @@
+{
+    "customerKey": "testNew_asset-9999999",
+    "assetType": { "name": "textblock", "displayName": "Text Block" },
+    "fileProperties": { "fileName": "testNew_asset" },
+    "name": "testNew_asset",
+    "description": "bla bla",
+    "owner": { "email": "", "name": "SFMC DEVOPS app user" },
+    "createdDate": "2024-05-07T05:08:46.927-06:00",
+    "createdBy": { "email": "", "name": "SFMC DEVOPS app user" },
+    "modifiedDate": "2024-05-07T05:08:46.927-06:00",
+    "modifiedBy": { "email": "", "name": "SFMC DEVOPS app user" },
+    "memberId": 9999999,
+    "status": { "name": "Draft" },
+    "meta": { "wrapperStyles": { "mobile": { "visible": true } } },
+    "availableViews": [],
+    "modelVersion": 2,
+    "r__folder_Path": "Content Builder"
+}

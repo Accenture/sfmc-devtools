@@ -1,0 +1,82 @@
+{
+    "customerKey": "{{{prefix}}}asset_templatebasedemail",
+    "contentType": "application/vnd.etmc.email.Message; kind=template",
+    "assetType": { "name": "templatebasedemail", "displayName": "Template-Based Email" },
+    "name": " {{{prefix}}}asset_templatebasedemail",
+    "createdBy": {},
+    "modifiedBy": {},
+    "memberId": "{{{mid}}}",
+    "status": { "name": "Draft" },
+    "views": {
+        "subjectline": {
+            "contentType": "application/vnd.etmc.email.View; kind=subjectline",
+            "thumbnail": {},
+            "content": "my subject line",
+            "availableViews": [],
+            "data": { "email": { "options": { "generateFrom": null } } },
+            "modelVersion": 2
+        },
+        "preheader": {
+            "contentType": "application/vnd.etmc.email.View; kind=preheader",
+            "thumbnail": {},
+            "content": "my custom preheader text",
+            "availableViews": [],
+            "data": { "email": { "options": { "generateFrom": null } } },
+            "modelVersion": 2
+        },
+        "text": {
+            "thumbnail": {},
+            "availableViews": [],
+            "data": { "email": { "options": { "generateFrom": "html" } } },
+            "generateFrom": "html",
+            "modelVersion": 2
+        },
+        "viewAsAWebPage": {
+            "thumbnail": {},
+            "availableViews": [],
+            "data": { "email": { "options": { "generateFrom": null } } },
+            "modelVersion": 2
+        },
+        "subscriptioncenter": {
+            "thumbnail": {},
+            "availableViews": [],
+            "data": { "email": { "options": { "generateFrom": null } } },
+            "modelVersion": 2
+        },
+        "forwardHTML": {
+            "thumbnail": {},
+            "availableViews": [],
+            "data": { "email": { "options": { "generateFrom": null } } },
+            "modelVersion": 2
+        },
+        "forwardText": {
+            "thumbnail": {},
+            "availableViews": [],
+            "data": { "email": { "options": { "generateFrom": null } } },
+            "modelVersion": 2
+        },
+        "html": {
+            "thumbnail": {},
+            "availableViews": [],
+            "template": {
+                "meta": { "contentHash": -166410261 },
+                "r__asset_key": "{{{prefix}}}asset_template"
+            },
+            "data": { "email": { "options": { "generateFrom": null } } },
+            "modelVersion": 2
+        }
+    },
+    "availableViews": [
+        "subjectline",
+        "preheader",
+        "text",
+        "viewAsAWebPage",
+        "subscriptioncenter",
+        "forwardHTML",
+        "forwardText",
+        "html"
+    ],
+    "data": { "email": { "options": { "characterEncoding": "utf-8" } } },
+    "modelVersion": 2,
+    "r__folder_Path": "Content Builder"
+}

@@ -10,7 +10,7 @@
  */
 /**
  * @typedef {Object.<string, string>} TemplateMap
- * @typedef {'asset'|'asset-archive'|'asset-asset'|'asset-audio'|'asset-block'|'asset-code'|'asset-document'|'asset-image'|'asset-message'|'asset-other'|'asset-rawimage'|'asset-template'|'asset-textfile'|'asset-video'|'attributeGroup'|'attributeSet'|'automation'|'campaign'|'contentArea'|'dataExtension'|'dataExtensionField'|'dataExtensionTemplate'|'dataExtract'|'dataExtractType'|'discovery'|'email'|'emailSend'|'event'|'fileLocation'|'fileTransfer'|'filter'|'folder'|'importFile'|'journey'|'list'|'mobileCode'|'mobileKeyword'|'mobileMessage'|'query'|'role'|'script'|'sendClassification'|'transactionalEmail'|'transactionalPush'|'transactionalSMS'|'triggeredSend'|'user'|'verification'} SupportedMetadataTypes
+ * @typedef {'asset'|'asset-archive'|'asset-asset'|'asset-audio'|'asset-block'|'asset-code'|'asset-document'|'asset-image'|'asset-message'|'asset-other'|'asset-rawimage'|'asset-template'|'asset-textfile'|'asset-video'|'attributeGroup'|'attributeSet'|'automation'|'campaign'|'contentArea'|'dataExtension'|'dataExtensionField'|'dataExtensionTemplate'|'dataExtract'|'dataExtractType'|'discovery'|'deliveryProfile'|'email'|'emailSend'|'event'|'fileLocation'|'fileTransfer'|'filter'|'folder'|'importFile'|'journey'|'list'|'mobileCode'|'mobileKeyword'|'mobileMessage'|'query'|'role'|'script'|'sendClassification'|'senderProfile'|'transactionalEmail'|'transactionalPush'|'transactionalSMS'|'triggeredSend'|'user'|'verification'} SupportedMetadataTypes
  * @typedef {Object.<SupportedMetadataTypes, string[]>} TypeKeyCombo object-key=metadata type, value=array of external keys
  */
 
@@ -44,12 +44,13 @@
  * @property {string} name name
  * @property {string} key key
  * @property {string} description -
+ * @property {string} [targetId] Object ID of DE (removed before save)
  * @property {string} targetKey key of target data extension
+ * @property {string} r__dataExtension_key key of target data extension
  * @property {string} createdDate e.g. "2020-09-14T01:42:03.017"
  * @property {string} modifiedDate e.g. "2020-09-14T01:42:03.017"
  * @property {'Overwrite'|'Update'|'Append'} targetUpdateTypeName defines how the query writes into the target data extension
  * @property {number} [targetUpdateTypeId] 0|1|2, mapped to targetUpdateTypeName via this.definition.targetUpdateTypeMapping
- * @property {string} [targetId] Object ID of DE (removed before save)
  * @property {string} [targetDescription] Description DE (removed before save)
  * @property {boolean} isFrozen looks like this is always set to false
  * @property {string} [queryText] contains SQL query with line breaks converted to '\n'. The content is extracted during retrieval and written into a separate *.sql file
@@ -112,15 +113,18 @@
  * @property {'dataextension'|'salesforcedataextension'|'synchronizeddataextension'|'shared_dataextension'|'shared_salesforcedataextension'} r__folder_ContentType retrieved from associated folder
  * @property {string} r__folder_Path folder path in which this DE is saved
  * @property {string} [CategoryID] holds folder ID, replaced with r__folder_Path during retrieve
- * @property {string} [r__dataExtensionTemplate_Name] name of optionally associated DE template
+ * @property {string} [r__dataExtensionTemplate_name] name of optionally associated DE template
  * @property {object} [Template] -
  * @property {string} [Template.CustomerKey] key of optionally associated DE teplate
- * @property {string} [RetainUntil] ?
- * @property {any} [DataRetentionPeriodLength] ?
- * @property {any} [DataRetentionPeriodUnitOfMeasure] ?
- * @property {any} [RowBasedRetention] ?
- * @property {any} [ResetRetentionPeriodOnImport] ?
- * @property {any} [DeleteAtEndOfRetentionPeriod] ?
+ * @property {string} RetainUntil empty string or US date + 12:00:00 AM
+ * @property {string} c__retainUntil YYYY-MM-DD
+ * @property {'none'|'allRecordsAndDataextension'|'allRecords'|'individialRecords'} [c__retentionPolicy] readable name of retention policy
+ * @property {number} [DataRetentionPeriodLength] number of days/weeks/months/years before retention kicks in
+ * @property {number} [DataRetentionPeriodUnitOfMeasure] 3:Days, 4:Weeks, 5:Months, 6:Years
+ * @property {string} [c__dataRetentionPeriodUnitOfMeasure] 3:Days, 4:Weeks, 5:Months, 6:Years
+ * @property {boolean} [RowBasedRetention] true for retention policy individialRecords
+ * @property {boolean} ResetRetentionPeriodOnImport ?
+ * @property {boolean} [DeleteAtEndOfRetentionPeriod] true for retention policy allRecords
  */
 /**
  * @typedef {Object.<string, DataExtensionItem>} DataExtensionMap
@@ -194,7 +198,8 @@
 
 /**
  * @typedef {object} AutomationActivity
- * @property {string} name name (not key) of activity
+ * @property {string} r__key key of associated activity
+ * @property {string} [name] name (not key) of associated activity
  * @property {number} [objectTypeId] Id of assoicated activity type; see this.definition.activityTypeMapping
  * @property {string} [activityObjectId] Object Id of assoicated metadata item
  * @property {number} [displayOrder] order within step; starts with 1 or higher number
@@ -297,7 +302,7 @@
  * @property {string} notificationEmailMessage email message to send; empty string if shouldEmailOnFailure=false
  * @property {number} createdBy user id of creator
  * @property {string} [targetObjectId] ObjectID of target data extension
- * @property {string} r__dataExtension_CustomerKey key of target data extension
+ * @property {string} r__dataExtension_key key of target data extension
  */
 
 /**
@@ -449,6 +454,21 @@ complex
  * @typedef {Object.<string, AssetItemSimple>} AssetItemSimpleMap
  * @typedef {Object.<number, AssetItemSimple>} AssetItemIdSimpleMap
  * @typedef {'id'|'key'|'pathName'} ContentBlockConversionTypes
+ */
+/**
+ * @typedef {object} ExplainType
+ * @property {string} name readable name of type
+ * @property {string} apiName api parameter name for type
+ * @property {string} description more info on what this type is about
+ * @property {boolean | string[]} retrieveByDefault is it retrieved by default OR list of subtypes that are retrieved by default
+ * @property {object} supports supported features
+ * @property {boolean} supports.retrieve can you download this type
+ * @property {boolean} supports.create can you create new records of this type
+ * @property {boolean} supports.update can you update records of this type
+ * @property {boolean} supports.delete can you delete records of this type
+ * @property {boolean} supports.changeKey can you change the key of existing records of this type
+ * @property {boolean} supports.buildTemplate can you apply templating on downloaded records of this type
+ * @property {boolean} supports.retrieveAsTemplate can you retrieve & template in one step
  */
 
 export default {};

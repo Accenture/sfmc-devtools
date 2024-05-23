@@ -5,7 +5,7 @@
     "classification": "Default Transactional",
     "status": "Active",
     "subscriptions": {
-        "r__dataExtension_CustomerKey": "testTemplated_dataExtension",
+        "r__dataExtension_key": "testTemplated_dataExtension",
         "autoAddSubscriber": true,
         "updateSubscriber": true,
         "r__list_PathName": "my subscribers/All Subscribers"
@@ -13,6 +13,6 @@
     "options": {
         "trackLinks": true
     },
-    "r__asset_customerKey": "testTemplated_asset_message",
-    "r__journey_key": "testTemplated_interaction"
+    "r__asset_key": "testTemplated_asset_message",
+    "r__journey_key": "testTemplated_temail"
 }

@@ -1,518 +1,150 @@
 {
-    "key": "{{{prefix}}}interaction",
-    "name": "{{{prefix}}}interaction",
-    "description": "{{{description}}}",
+    "key": "{{{prefix}}}journey_Quicksend",
+    "name": "{{{prefix}}}journey_Quicksend",
+    "description": "",
     "workflowApiVersion": 1,
-    "modifiedDate": "2017-04-12T08:07:48.333",
+    "modifiedDate": "2024-04-24T12:19:12.803",
     "activities": [
         {
-            "id": "69213026-bd2c-433b-8332-5f52d3e87ca5",
-            "key": "WAIT-1",
-            "name": "",
+            "id": "e20dcaa3-a750-44cf-9ce8-42d00378b8b4",
+            "key": "EMAILV2-1",
+            "name": "{{{prefix}}}asset_mail",
             "description": "",
-            "type": "WAIT",
+            "type": "EMAILV2",
             "outcomes": [
                 {
-                    "key": "bd3dff6b-565c-4b56-b9cb-60cd5b6d080b",
-                    "next": "DATAEXTENSIONUPDATE-1",
+                    "key": "a6b9c1af-cd89-4ce8-ba4f-bd4289188dc2",
                     "arguments": {},
-                    "metaData": {}
+                    "metaData": { "invalid": false }
                 }
             ],
-            "arguments": {
-                "waitDefinitionId": "546704c0-9384-4a41-b20e-97615cc6cc6a",
-                "waitForEventId": "",
-                "executionMode": "{{Context.ExecutionMode}}",
-                "startActivityKey": "{{Context.StartActivityKey}}",
-                "waitQueueId": "{{Context.WaitQueueId}}"
-            },
+            "arguments": {},
             "configurationArguments": {
-                "waitDuration": 1,
-                "waitUnit": "DAYS",
-                "specifiedTime": "",
-                "timeZone": "",
-                "description": "",
-                "waitForEventKey": ""
-            },
-            "metaData": { "waitType": "duration" },
-            "schema": {
-                "arguments": {
-                    "endDate": {
-                        "dataType": "Date",
-                        "isNullable": false,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
+                "isModified": true,
+                "googleAnalyticsCampaignName": "",
+                "triggeredSend": {
+                    "autoAddSubscribers": true,
+                    "autoUpdateSubscribers": true,
+                    "bccEmail": "",
+                    "ccEmail": "",
+                    "created": {},
+                    "description": "my activity info text",
+                    "dynamicEmailSubject": "{{{prefix}}} email subject",
+                    "emailSubject": "{{{prefix}}} email subject",
+                    "exclusionFilter": "/* insert ampscript here */",
+                    "isSalesforceTracking": false,
+                    "isMultipart": true,
+                    "isSendLogging": true,
+                    "isStoppedOnJobError": false,
+                    "keyword": "",
+                    "modified": {},
+                    "preHeader": "{{{prefix}}} email preheader",
+                    "suppressTracking": true,
+                    "throttleLimit": 0,
+                    "throttleOpens": "1/1/0001 12:00:00 AM",
+                    "throttleCloses": "1/1/0001 12:00:00 AM",
+                    "isTrackingClicks": true,
+                    "r__list_PathName": {
+                        "publicationList": "my subscribers/All Subscribers",
+                        "suppressionLists": ["Suppression Lists/{{{prefix}}}suppressionList"]
                     },
-                    "waitEndDateAttributeDataBound": {
-                        "dataType": "Text",
-                        "isNullable": true,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
+                    "r__dataExtension_key": {
+                        "domainExclusions": ["{{{prefix}}}DomainExclusion"]
                     },
-                    "waitDefinitionId": {
-                        "dataType": "Text",
-                        "isNullable": false,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "waitForEventId": {
-                        "dataType": "Text",
-                        "isNullable": true,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "executionMode": {
-                        "dataType": "Text",
-                        "isNullable": false,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "startActivityKey": {
-                        "dataType": "Text",
-                        "isNullable": true,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "waitQueueId": {
-                        "dataType": "LongNumber",
-                        "isNullable": true,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    }
-                }
-            }
-        },
-        {
-            "id": "5d93cda9-2015-4c07-a1db-0d5853d25bf6",
-            "key": "WAIT-2",
-            "name": "",
-            "description": "",
-            "type": "WAIT",
-            "outcomes": [
-                {
-                    "key": "e3d3258a-891b-4838-b5a6-af37f8cb769a",
-                    "next": "SMSSYNC-1",
-                    "arguments": {},
-                    "metaData": {}
-                }
-            ],
-            "arguments": {
-                "waitDefinitionId": "deed4c9d-f487-4371-bfd9-76fca44ec49b",
-                "waitForEventId": "",
-                "executionMode": "{{Context.ExecutionMode}}",
-                "startActivityKey": "{{Context.StartActivityKey}}",
-                "waitQueueId": "{{Context.WaitQueueId}}"
-            },
-            "configurationArguments": {
-                "waitDuration": 1,
-                "waitUnit": "DAYS",
-                "specifiedTime": "",
-                "timeZone": "",
-                "description": "",
-                "waitForEventKey": ""
-            },
-            "metaData": { "waitType": "duration" },
-            "schema": {
-                "arguments": {
-                    "endDate": {
-                        "dataType": "Date",
-                        "isNullable": false,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "waitEndDateAttributeDataBound": {
-                        "dataType": "Text",
-                        "isNullable": true,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "waitDefinitionId": {
-                        "dataType": "Text",
-                        "isNullable": false,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "waitForEventId": {
-                        "dataType": "Text",
-                        "isNullable": true,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "executionMode": {
-                        "dataType": "Text",
-                        "isNullable": false,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "startActivityKey": {
-                        "dataType": "Text",
-                        "isNullable": true,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "waitQueueId": {
-                        "dataType": "LongNumber",
-                        "isNullable": true,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    }
-                }
-            }
-        },
-        {
-            "id": "79213026-bd2c-433b-8332-5f52d3e87ca5",
-            "key": "WAIT-3",
-            "name": "",
-            "description": "",
-            "type": "WAIT",
-            "outcomes": [
-                {
-                    "key": "bd3dff6b-565c-4b56-b9cb-60cd5b6d080b",
-                    "arguments": {},
-                    "metaData": {}
-                }
-            ],
-            "arguments": {
-                "waitDefinitionId": "546704c0-9384-4a41-b20e-97615cc6cc6a",
-                "waitForEventId": "",
-                "executionMode": "{{Context.ExecutionMode}}",
-                "startActivityKey": "{{Context.StartActivityKey}}",
-                "waitQueueId": "{{Context.WaitQueueId}}"
-            },
-            "configurationArguments": {
-                "waitDuration": 1,
-                "waitUnit": "DAYS",
-                "specifiedTime": "",
-                "timeZone": "",
-                "description": "",
-                "waitForEventKey": ""
-            },
-            "metaData": { "waitType": "duration" },
-            "schema": {
-                "arguments": {
-                    "endDate": {
-                        "dataType": "Date",
-                        "isNullable": false,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "waitEndDateAttributeDataBound": {
-                        "dataType": "Text",
-                        "isNullable": true,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "waitDefinitionId": {
-                        "dataType": "Text",
-                        "isNullable": false,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "waitForEventId": {
-                        "dataType": "Text",
-                        "isNullable": true,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "executionMode": {
-                        "dataType": "Text",
-                        "isNullable": false,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "startActivityKey": {
-                        "dataType": "Text",
-                        "isNullable": true,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "waitQueueId": {
-                        "dataType": "LongNumber",
-                        "isNullable": true,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    }
-                }
-            }
-        },
-        {
-            "id": "ef4db13e-83f0-4d41-981d-4bf5810c0daa",
-            "key": "DATAEXTENSIONUPDATE-1",
-            "name": "",
-            "description": "",
-            "type": "DATAEXTENSIONUPDATE",
-            "outcomes": [
-                {
-                    "key": "a49ecf04-4612-4582-85fe-d7193f872fa8",
-                    "next": "WAIT-2",
-                    "arguments": {},
-                    "metaData": {}
-                }
-            ],
-            "arguments": { "contactKey": "{{Contact.Key}}", "value": "{{DateTime.Now}}" },
-            "configurationArguments": {
-                "dataExtensionId": "ace267f0-b81d-e711-80cc-1402ec7222b4",
-                "field": "4e875b26-0317-4525-bfa0-50c8d1b7a7b5"
+                    "r__senderProfile_key": "{{{prefix}}}senderProfile",
+                    "r__sendClassification_key": "{{{prefix}}}sendClassification",
+                    "c__priority": "High",
+                    "r__asset_name_readOnly": "{{{prefix}}}asset_message",
+                    "r__asset_key": "{{{prefix}}}asset_message"
+                },
+                "applicationExtensionKey": "jb-email-activity"
             },
             "metaData": {
-                "dataExtensionName": "test_TestData",
-                "cachedFieldName": "JourneyConfirmed",
-                "cachedDisplayValue": ""
-            },
-            "schema": {
-                "arguments": {
-                    "contactKey": {
-                        "dataType": "Text",
-                        "isNullable": false,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "value": {
-                        "dataType": "Text",
-                        "isNullable": false,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    }
-                }
-            }
-        },
-        {
-            "id": "cfc3ec53-4314-4504-9f9d-1fe53fdf0bcf",
-            "key": "SMSSYNC-1",
-            "name": "Kate Test SMS",
-            "description": "",
-            "type": "SMSSYNC",
-            "outcomes": [
-                {
-                    "key": "d4d46c46-bf8c-4c62-bd34-4979548796cd",
-                    "next": "WAIT-3",
-                    "arguments": {},
-                    "metaData": {}
-                }
-            ],
-            "arguments": {
-                "contactKey": "{{Contact.Key}}",
-                "defaultSMSAddress": "{{Contact.Default.SMS}}",
-                "mobileNumber": "{{InteractionDefaults.MobileNumber}}",
-                "contactId": "{{Contact.Id}}",
-                "definitionInstanceId": "{{Context.DefinitionInstanceId}}",
-                "definitionId": "{{Context.DefinitionId}}"
-            },
-            "configurationArguments": {
-                "c__mobileMessage_id": "NTIzOjc4OjA",
-                "r__mobileKeyword_codeKeyword": "4912312345678.{{{prefixUpper}}}KEYWORD",
-                "isOptIn": false,
-                "honorBlackoutWindowEnum": 0,
-                "mobileBlackoutWindowStartTime": "",
-                "mobileBlackoutWindowEndTime": "",
-                "applicationExtensionKey": "jb-mobile-connect-send-sms-sync"
-            },
-            "metaData": {
+                "category": "message",
+                "version": "1.0",
+                "icon": "https://jb-email-activity.s7.marketingcloudapps.com/img/email-icon.svg",
+                "iconSmall": "https://jb-email-activity.s7.marketingcloudapps.com/img/email-icon.svg",
+                "statsContactIcon": null,
+                "original_icon": "/img/email-icon.svg",
+                "original_iconSmall": "/img/email-icon.svg",
+                "sections": {},
                 "isConfigured": true
             },
             "schema": {
                 "arguments": {
-                    "smsJobId": {
+                    "requestID": {
                         "dataType": "Text",
                         "isNullable": true,
                         "direction": "Out",
                         "readOnly": false,
                         "access": "Hidden"
                     },
-                    "isAddressCreated": {
-                        "dataType": "Boolean",
-                        "isNullable": true,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "isSubscriptionCreated": {
-                        "dataType": "Boolean",
-                        "isNullable": true,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "isTriggeredSend": {
-                        "dataType": "Boolean",
-                        "isNullable": true,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "isWithinBlackout": {
-                        "dataType": "Boolean",
-                        "isNullable": true,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "isValidMobileNumber": {
-                        "dataType": "Boolean",
-                        "isNullable": true,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "outMessageId": {
+                    "messageKey": {
                         "dataType": "Text",
                         "isNullable": true,
                         "direction": "Out",
                         "readOnly": false,
                         "access": "Hidden"
                     },
-                    "outKeywordId": {
+                    "activityId": {
                         "dataType": "Text",
                         "isNullable": true,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "outIsOptIn": {
-                        "dataType": "Boolean",
-                        "isNullable": true,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "outHonorBlackoutWindowEnum": {
-                        "dataType": "Number",
-                        "isNullable": true,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "outMobileBlackoutWindowStartTime": {
-                        "dataType": "Text",
-                        "isNullable": true,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "outMobileBlackoutWindowEndTime": {
-                        "dataType": "Text",
-                        "isNullable": true,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "outUtcOffset": {
-                        "dataType": "Text",
-                        "isNullable": true,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "outWindowStart": {
-                        "dataType": "Text",
-                        "isNullable": true,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "outWindowEnd": {
-                        "dataType": "Text",
-                        "isNullable": true,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "outTimeZoneId": {
-                        "dataType": "Number",
-                        "isNullable": true,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "outIsTZValid": {
-                        "dataType": "Boolean",
-                        "isNullable": true,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "outIsMobileBlackoutWindowEnabled": {
-                        "dataType": "Boolean",
-                        "isNullable": true,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "outIsUsingDEAttributesForPersonalization": {
-                        "dataType": "Boolean",
-                        "isNullable": true,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "outCountProcessedSingletonDuringBatchMethod": {
-                        "dataType": "LongNumber",
-                        "isNullable": true,
-                        "direction": "Out",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "contactKey": {
-                        "dataType": "Text",
-                        "isNullable": false,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "defaultSMSAddress": {
-                        "dataType": "Text",
-                        "isNullable": true,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "mobileNumber": {
-                        "dataType": "Text",
-                        "isNullable": true,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "contactId": {
-                        "dataType": "Text",
-                        "isNullable": false,
-                        "direction": "In",
-                        "readOnly": false,
-                        "access": "Hidden"
-                    },
-                    "definitionInstanceId": {
-                        "dataType": "Text",
-                        "isNullable": false,
                         "direction": "In",
                         "readOnly": false,
                         "access": "Hidden"
                     },
                     "definitionId": {
                         "dataType": "Text",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": true,
+                        "access": "Hidden"
+                    },
+                    "emailSubjectDataBound": {
+                        "dataType": "Text",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": true,
+                        "access": "Hidden"
+                    },
+                    "contactId": {
+                        "dataType": "Number",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "contactKey": {
+                        "dataType": "Text",
                         "isNullable": false,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "emailAddress": {
+                        "dataType": "Text",
+                        "isNullable": false,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "sourceCustomObjectId": {
+                        "dataType": "Text",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "sourceCustomObjectKey": {
+                        "dataType": "LongNumber",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "fieldType": {
+                        "dataType": "Text",
+                        "isNullable": true,
                         "direction": "In",
                         "readOnly": false,
                         "access": "Hidden"
@@ -520,6 +152,27 @@
                     "eventData": {
                         "dataType": "Text",
                         "isNullable": true,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "obfuscationProperties": {
+                        "dataType": "Text",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "customObjectKey": {
+                        "dataType": "LongNumber",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": true,
+                        "access": "Hidden"
+                    },
+                    "definitionInstanceId": {
+                        "dataType": "Text",
+                        "isNullable": false,
                         "direction": "In",
                         "readOnly": false,
                         "access": "Hidden"
@@ -531,41 +184,44 @@
     "triggers": [
         {
             "key": "TRIGGER",
-            "name": "test_TESTDataentry",
+            "name": "TRIGGER",
             "description": "",
-            "type": "APIEvent",
+            "type": "EmailAudience",
             "outcomes": [],
-            "arguments": {
-                "filterResult": "{{Contact.FilterId.e4ddb887-6f2d-46b1-9f64-9a020f217339}}"
-            },
-            "configurationArguments": {
-                "schemaVersionId": 133,
-                "criteria": "<FilterDefinition><ConditionSet Operator=\"AND\" ConditionSetName=\"Individual Filter Grouping\"></ConditionSet></FilterDefinition>",
-                "filterDefinitionId": "e4ddb887-6f2d-46b1-9f64-9a020f217339"
-            },
+            "arguments": {},
+            "configurationArguments": {},
             "metaData": {
-                "scheduleState": "No Schedule",
                 "sourceInteractionId": "00000000-0000-0000-0000-000000000000",
-                "eventDefinitionKey": "APIEvent-60130566-e2fe-eb29-4140-15c27093a80b",
+                "eventDefinitionKey": "DEAudience-11be962d-064c-83d9-2804-7d1befc10325",
                 "chainType": "None",
                 "configurationRequired": false,
-                "iconUrl": "/events/images/icon_journeyBuilder-event-api-blue.svg",
-                "title": "",
-                "category": "Event"
+                "iconUrl": "/images/icon-data-extension.svg",
+                "title": "Data Extension",
+                "entrySourceGroupConfigUrl": "jb:///data/entry/audience/entrysourcegroupconfig.json"
             }
         }
     ],
     "goals": [],
     "exits": [],
     "notifiers": [],
-    "entryMode": "OnceAndDone",
-    "definitionType": "Multistep",
-    "channel": "",
+    "entryMode": "MultipleEntries",
+    "definitionType": "Quicksend",
+    "channel": "email",
     "defaults": {
-        "email": ["{{Event.APIEvent-60130566-e2fe-eb29-4140-15c27093a80b.\"emailAddress\"}}"],
-        "properties": {}
+        "email": ["{{Event.DEAudience-11be962d-064c-83d9-2804-7d1befc10325.\"Email\"}}"],
+        "properties": {
+            "analyticsTracking": {
+                "enabled": true,
+                "analyticsType": "google",
+                "urlDomainsToTrack": []
+            }
+        }
     },
-    "metaData": {},
+    "metaData": {
+        "dataSource": "ContactsModel",
+        "isScheduleSet": true,
+        "highThroughputSending": { "email": false }
+    },
     "executionMode": "Production",
     "scheduledStatus": "Draft",
     "r__folder_Path": "my journeys"

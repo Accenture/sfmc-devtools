@@ -36,7 +36,7 @@ describe('type: triggeredSend', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                12,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -75,7 +75,7 @@ describe('type: triggeredSend', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                12,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -111,7 +111,7 @@ describe('type: triggeredSend', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'triggeredSend',
-                'testExisting_triggeredSend',
+                ['testExisting_triggeredSend'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
@@ -122,7 +122,7 @@ describe('type: triggeredSend', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                12,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

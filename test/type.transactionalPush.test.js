@@ -126,7 +126,7 @@ describe('type: transactionalPush', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'transactionalPush',
-                'testExisting_tpush',
+                ['testExisting_tpush'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');

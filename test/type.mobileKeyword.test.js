@@ -211,7 +211,7 @@ describe('type: mobileKeyword', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'mobileKeyword',
-                '4912312345678.TESTEXISTING_KEYWORD',
+                ['4912312345678.TESTEXISTING_KEYWORD'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');

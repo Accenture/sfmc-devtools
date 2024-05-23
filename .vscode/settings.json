@@ -5,7 +5,8 @@
     },
     "editor.formatOnSave": true,
     "files.associations": {
-        "*.ssjs": "javascript"
+        "*.ssjs": "javascript",
+        "*.html": "ampscript"
     },
     "files.eol": "\n",
     "js/ts.implicitProjectConfig.checkJs": true,
@@ -19,7 +20,7 @@
     "sql-formatter.indent": "    ",
     "sql-formatter.uppercase": true,
     "[html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "FiB.beautyAmp"
     },
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -55,6 +56,17 @@
         {
             "label": "Created By Me",
             "query": "author:${user} state:open repo:${owner}/${repository} sort:created-desc"
+        }
+    ],
+    "vsicons.associations.files": [
+        {
+            "icon": "apex",
+            "languages": [
+                { "ids": "ampscript", "defaultExtension": "amp" },
+                { "ids": "AMPscript", "defaultExtension": "amp" }
+            ],
+            "light": true,
+            "format": "FileFormat.svg"
         }
     ]
 }
