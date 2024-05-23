@@ -3,4 +3,4 @@ npx --no lint-staged
 
 # update typescript type declarations
 npx tsc
-git add types/ts
+git add @types
