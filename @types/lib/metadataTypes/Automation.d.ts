@@ -864,6 +864,12 @@ declare namespace Automation {
                 template: boolean;
             };
             'steps[].annotation': {
+                /**
+                 * manages post retrieve steps
+                 *
+                 * @param {AutomationItem} metadata a single automation
+                 * @returns {AutomationItem | void} parsed item
+                 */
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
