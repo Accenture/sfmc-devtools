@@ -51,13 +51,16 @@ export function getActualDoc(customerKey, type, buName = 'testBU') {
  * @param {string} type of metadata
  * @param {string} ext file extension
  * @param {string} [buName] used when we need to test on ParentBU
- * @returns {Promise.<string>} file in string form
+ * @returns {Promise.<string | null>} file in string form, null if not found
  */
-export function getActualFile(customerKey, type, ext, buName = 'testBU') {
-    return File.readFile(
-        `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-meta.${ext}`,
-        'utf8'
-    );
+export async function getActualFile(customerKey, type, ext, buName = 'testBU') {
+    const path = `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-meta.${ext}`;
+    try {
+        return await File.readFile(path, 'utf8');
+    } catch {
+        console.log(`File not found: ${path}`); // eslint-disable-line no-console
+        return null;
+    }
 }
 /**
  * gets file from Deploy folder
