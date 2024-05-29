@@ -158,7 +158,7 @@ describe('type: asset', () => {
                 'returned metadata was not equal expected'
             );
             expect(file(getActualFile('mcdev-issue-1157', 'asset', 'block', 'html'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'asset', 'block-1157-retrieve', 'html'))
+                await testUtils.getExpectedFile('9999999', 'asset', 'block-1157-retrieve', 'html')
             );
 
             assert.deepEqual(
@@ -335,13 +335,11 @@ describe('type: asset', () => {
                     'views.html.content'
                 )
             ).to.equal(
-                file(
-                    testUtils.getExpectedFile(
-                        '9999999',
-                        'asset',
-                        'template-templatebasedemail',
-                        'html'
-                    )
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'template-templatebasedemail',
+                    'html'
                 )
             );
             // THEN
@@ -371,13 +369,11 @@ describe('type: asset', () => {
                     'views.html.content'
                 )
             ).to.equal(
-                file(
-                    testUtils.getExpectedFile(
-                        '9999999',
-                        'asset',
-                        'build-templatebasedemail',
-                        'html'
-                    )
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'build-templatebasedemail',
+                    'html'
                 )
             );
 

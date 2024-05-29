@@ -7,7 +7,6 @@ import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const file = chaiFiles.file;
 
 describe('type: query', () => {
     beforeEach(() => {
@@ -37,8 +36,8 @@ describe('type: query', () => {
                 await testUtils.getExpectedJson('9999999', 'query', 'get'),
                 'returned metadata with correct key was not equal expected'
             );
-            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'query', 'get', 'sql'))
+            expect(await testUtils.getActualFile('testExisting_query', 'query', 'sql')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'query', 'get', 'sql')
             );
             // check if r__dataExtension_key was overwritten
             assert.deepEqual(
@@ -72,8 +71,8 @@ describe('type: query', () => {
                 await testUtils.getExpectedJson('9999999', 'query', 'get'),
                 'returned metadata was not equal expected'
             );
-            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'query', 'get', 'sql'))
+            expect(await testUtils.getActualFile('testExisting_query', 'query', 'sql')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'query', 'get', 'sql')
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -101,10 +100,10 @@ describe('type: query', () => {
                 await testUtils.getExpectedJson('9999999', 'query', 'get'),
                 'returned metadata was not equal expected'
             );
-            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'query', 'get', 'sql'))
+            expect(await testUtils.getActualFile('testExisting_query', 'query', 'sql')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'query', 'get', 'sql')
             );
-            expect(file(testUtils.getActualFile('testExisting_query2', 'query', 'sql'))).to.not
+            expect(await testUtils.getActualFile('testExisting_query2', 'query', 'sql')).to.not
                 .exist;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -128,9 +127,9 @@ describe('type: query', () => {
                 '4 queries in cache expected'
             );
 
-            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.not
+            expect(await testUtils.getActualFile('testExisting_query', 'query', 'sql')).to.not
                 .exist;
-            expect(file(testUtils.getActualFile('testExisting_query2', 'query', 'sql'))).to.not
+            expect(await testUtils.getActualFile('testExisting_query2', 'query', 'sql')).to.not
                 .exist;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -175,8 +174,8 @@ describe('type: query', () => {
                 await testUtils.getExpectedJson('9999999', 'query', 'post'),
                 'returned metadata was not equal expected for insert query'
             );
-            expect(file(testUtils.getActualFile('testNew_query', 'query', 'sql'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'query', 'post', 'sql'))
+            expect(await testUtils.getActualFile('testNew_query', 'query', 'sql')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'query', 'post', 'sql')
             );
             // confirm updated item
             assert.deepEqual(
@@ -184,8 +183,8 @@ describe('type: query', () => {
                 await testUtils.getExpectedJson('9999999', 'query', 'patch'),
                 'returned metadata was not equal expected for insert query'
             );
-            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'query', 'patch', 'sql'))
+            expect(await testUtils.getActualFile('testExisting_query', 'query', 'sql')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'query', 'patch', 'sql')
             );
             // check number of API calls
             assert.equal(
@@ -216,8 +215,8 @@ describe('type: query', () => {
                 await testUtils.getExpectedJson('9999999', 'query', 'patch'),
                 'returned metadata was not equal expected for insert query'
             );
-            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'query', 'patch', 'sql'))
+            expect(await testUtils.getActualFile('testExisting_query', 'query', 'sql')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'query', 'patch', 'sql')
             );
             // check number of API calls
             assert.equal(
@@ -281,8 +280,8 @@ describe('type: query', () => {
                 'returned metadata was not equal expected for update query'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql')));
+                await testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql'));
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -335,8 +334,8 @@ describe('type: query', () => {
                 'returned metadata was not equal expected for update query'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql')));
+                await testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql'));
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -389,9 +388,9 @@ describe('type: query', () => {
                 'returned metadata was not equal expected for update query'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_query_fixedKeys_DEV', 'query', 'sql'))
+                await testUtils.getActualFile('testExisting_query_fixedKeys_DEV', 'query', 'sql')
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeysSuffix', 'sql'))
+                await testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeysSuffix', 'sql')
             );
             // check number of API calls
             assert.equal(
@@ -505,8 +504,8 @@ describe('type: query', () => {
                 'returned metadata was not equal expected for update query'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql')));
+                await testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql'));
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -554,9 +553,9 @@ describe('type: query', () => {
                 'returned metadata was not equal expected for update query'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_query_fixedKeys_DEV', 'query', 'sql'))
+                await testUtils.getActualFile('testExisting_query_fixedKeys_DEV', 'query', 'sql')
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeysSuffix', 'sql'))
+                await testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeysSuffix', 'sql')
             );
             // check number of API calls
             assert.equal(
@@ -598,8 +597,8 @@ describe('type: query', () => {
                 'returned metadata was not equal expected for update query'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql')));
+                await testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql'));
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -636,8 +635,8 @@ describe('type: query', () => {
                 'returned metadata was not equal expected for update query'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql')));
+                await testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql'));
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -678,8 +677,8 @@ describe('type: query', () => {
                 'returned metadata was not equal expected for update query'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql')));
+                await testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql'));
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -715,8 +714,8 @@ describe('type: query', () => {
                 'returned metadata was not equal expected for update query'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql')));
+                await testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql'));
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -749,8 +748,8 @@ describe('type: query', () => {
                 'returned template JSON of retrieveAsTemplate was not equal expected'
             );
             expect(
-                file(testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'template', 'sql')));
+                await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
             // THEN
             await handler.buildDefinition(
                 'testInstance/testBU',
@@ -766,8 +765,8 @@ describe('type: query', () => {
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'build', 'sql')));
+                await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -801,8 +800,8 @@ describe('type: query', () => {
                 'returned template JSON of buildTemplate was not equal expected'
             );
             expect(
-                file(testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'template', 'sql')));
+                await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
             // THEN
             await handler.buildDefinition(
                 'testInstance/testBU',
@@ -818,8 +817,8 @@ describe('type: query', () => {
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'build', 'sql')));
+                await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
