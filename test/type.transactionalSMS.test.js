@@ -7,7 +7,6 @@ import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const file = chaiFiles.file;
 
 describe('type: transactionalSMS', () => {
     beforeEach(() => {
@@ -37,9 +36,9 @@ describe('type: transactionalSMS', () => {
                 'returned JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_tsms', 'transactionalSMS', 'amp'))
+                await testUtils.getActualFile('testExisting_tsms', 'transactionalSMS', 'amp')
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'get', 'amp'))
+                await testUtils.getExpectedFile('9999999', 'transactionalSMS', 'get', 'amp')
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -74,9 +73,9 @@ describe('type: transactionalSMS', () => {
                 'returned JSON was not equal expected for insert transactionalSMS'
             );
             expect(
-                file(testUtils.getActualFile('testNew_tsms', 'transactionalSMS', 'amp'))
+                await testUtils.getActualFile('testNew_tsms', 'transactionalSMS', 'amp')
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'post', 'amp'))
+                await testUtils.getExpectedFile('9999999', 'transactionalSMS', 'post', 'amp')
             );
             // confirm updated item
             assert.deepEqual(
@@ -85,9 +84,9 @@ describe('type: transactionalSMS', () => {
                 'returned JSON was not equal expected for update transactionalSMS'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_tsms', 'transactionalSMS', 'amp'))
+                await testUtils.getActualFile('testExisting_tsms', 'transactionalSMS', 'amp')
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'patch', 'amp'))
+                await testUtils.getExpectedFile('9999999', 'transactionalSMS', 'patch', 'amp')
             );
             // check number of API calls
             assert.equal(
@@ -141,11 +140,13 @@ describe('type: transactionalSMS', () => {
                 'returned template JSON was not equal expected'
             );
             expect(
-                file(
-                    testUtils.getActualTemplateFile('testExisting_tsms', 'transactionalSMS', 'amp')
+                await testUtils.getActualTemplateFile(
+                    'testExisting_tsms',
+                    'transactionalSMS',
+                    'amp'
                 )
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'template', 'amp'))
+                await testUtils.getExpectedFile('9999999', 'transactionalSMS', 'template', 'amp')
             );
             // buildDefinition
             await handler.buildDefinition(
@@ -162,9 +163,9 @@ describe('type: transactionalSMS', () => {
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualDeployFile('testTemplated_tsms', 'transactionalSMS', 'amp'))
+                await testUtils.getActualDeployFile('testTemplated_tsms', 'transactionalSMS', 'amp')
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'build', 'amp'))
+                await testUtils.getExpectedFile('9999999', 'transactionalSMS', 'build', 'amp')
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),

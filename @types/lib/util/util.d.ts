@@ -277,6 +277,15 @@ export namespace Util {
      * @returns {TypeKeyCombo} -
      */
     function createTypeKeyCombo(typeArr: string[], keyArr: string[], returnEmpty?: boolean): any;
+    /**
+     * async version of Array.find()
+     * returns the first element in the provided array that satisfies the provided testin function
+     *
+     * @param {Array} arr your test array
+     * @param {Function} asyncCallback callback
+     * @returns {Promise.<any | undefined>} first element that passed the test
+     */
+    function findAsync(arr: any[], asyncCallback: Function): Promise<any>;
 }
 export type AuthObject = import('../../types/mcdev.d.js').AuthObject;
 export type BuObject = import('../../types/mcdev.d.js').BuObject;

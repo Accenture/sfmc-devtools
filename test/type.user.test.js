@@ -40,9 +40,11 @@ describe('type: user', () => {
             );
             // check if MD file was created and equals expectations
             // ! this test needs to update the lastLoginDate counter because it changes with every passing day
-            const expectedFile = await File.readFile(
-                testUtils.getExpectedFile('1111111', 'user', 'retrieve', 'md'),
-                { encoding: 'utf8' }
+            const expectedFile = await testUtils.getExpectedFile(
+                '1111111',
+                'user',
+                'retrieve',
+                'md'
             );
             const regexFindDaysSinceLogin =
                 /\| (\d*) (seconds|minutes|days|weeks|months|years){1} \|/g;

@@ -7,7 +7,6 @@ import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const file = chaiFiles.file;
 
 describe('type: automation', () => {
     beforeEach(() => {
@@ -38,14 +37,12 @@ describe('type: automation', () => {
                 'returned metadata was not equal expected'
             );
             // check if MD file was created and equals expectations
-            expect(file(testUtils.getActualDoc('testExisting_automation', 'automation'))).to.equal(
-                file(
-                    testUtils.getExpectedFile(
-                        '9999999',
-                        'automation',
-                        'retrieve-testExisting_automation',
-                        'md'
-                    )
+            expect(await testUtils.getActualDoc('testExisting_automation', 'automation')).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'automation',
+                    'retrieve-testExisting_automation',
+                    'md'
                 )
             );
             assert.equal(
@@ -101,26 +98,22 @@ describe('type: automation', () => {
                 'returned metadata was not equal expected for update'
             );
             // check if MD file was created and equals expectations
-            expect(file(testUtils.getActualDoc('testExisting_automation', 'automation'))).to.equal(
-                file(
-                    testUtils.getExpectedFile(
-                        '9999999',
-                        'automation',
-                        'update-testExisting_automation',
-                        'md'
-                    )
+            expect(await testUtils.getActualDoc('testExisting_automation', 'automation')).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'automation',
+                    'update-testExisting_automation',
+                    'md'
                 )
             );
 
             // check if MD file was created and equals expectations
-            expect(file(testUtils.getActualDoc('testNew_automation', 'automation'))).to.equal(
-                file(
-                    testUtils.getExpectedFile(
-                        '9999999',
-                        'automation',
-                        'create-testNew_automation',
-                        'md'
-                    )
+            expect(await testUtils.getActualDoc('testNew_automation', 'automation')).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'automation',
+                    'create-testNew_automation',
+                    'md'
                 )
             );
 
@@ -183,14 +176,12 @@ describe('type: automation', () => {
                 'returned metadata was not equal expected for update'
             );
             // check if MD file was created and equals expectations
-            expect(file(testUtils.getActualDoc('testExisting_automation', 'automation'))).to.equal(
-                file(
-                    testUtils.getExpectedFile(
-                        '9999999',
-                        'automation',
-                        'update-testExisting_automation',
-                        'md'
-                    )
+            expect(await testUtils.getActualDoc('testExisting_automation', 'automation')).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'automation',
+                    'update-testExisting_automation',
+                    'md'
                 )
             );
 
@@ -252,14 +243,12 @@ describe('type: automation', () => {
                 'returned metadata was not equal expected for update'
             );
             // check if MD file was created and equals expectations
-            expect(file(testUtils.getActualDoc('testExisting_automation', 'automation'))).to.equal(
-                file(
-                    testUtils.getExpectedFile(
-                        '9999999',
-                        'automation',
-                        'update-testExisting_automation',
-                        'md'
-                    )
+            expect(await testUtils.getActualDoc('testExisting_automation', 'automation')).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'automation',
+                    'update-testExisting_automation',
+                    'md'
                 )
             );
 
@@ -340,11 +329,9 @@ describe('type: automation', () => {
                 'returned metadata was not equal expected for update automation'
             );
             expect(
-                file(
-                    testUtils.getActualDoc(
-                        'testExisting_automation_fixedKey_scheduled',
-                        'automation'
-                    )
+                await testUtils.getActualDoc(
+                    'testExisting_automation_fixedKey_scheduled',
+                    'automation'
                 )
             ).to.exist;
             // check number of API calls
@@ -386,11 +373,9 @@ describe('type: automation', () => {
                 'returned metadata was not equal expected for update automation'
             );
             expect(
-                file(
-                    testUtils.getActualDoc(
-                        'testExisting_automation_fixedKey_scheduled',
-                        'automation'
-                    )
+                await testUtils.getActualDoc(
+                    'testExisting_automation_fixedKey_scheduled',
+                    'automation'
                 )
             ).to.exist;
             // check number of API calls
@@ -432,11 +417,9 @@ describe('type: automation', () => {
                 'returned metadata was not equal expected for update automation'
             );
             expect(
-                file(
-                    testUtils.getActualDoc(
-                        'testExisting_automation_fixedKey_scheduled',
-                        'automation'
-                    )
+                await testUtils.getActualDoc(
+                    'testExisting_automation_fixedKey_scheduled',
+                    'automation'
                 )
             ).to.exist;
             // check number of API calls
@@ -478,8 +461,9 @@ describe('type: automation', () => {
                 'returned metadata was not equal expected for update automation'
             );
             expect(
-                file(
-                    testUtils.getActualDoc('testExisting_automation_fixedKey_paused', 'automation')
+                await testUtils.getActualDoc(
+                    'testExisting_automation_fixedKey_paused',
+                    'automation'
                 )
             ).to.exist;
             // check number of API calls
@@ -521,8 +505,9 @@ describe('type: automation', () => {
                 'returned metadata was not equal expected for update automation'
             );
             expect(
-                file(
-                    testUtils.getActualDoc('testExisting_automation_fixedKey_paused', 'automation')
+                await testUtils.getActualDoc(
+                    'testExisting_automation_fixedKey_paused',
+                    'automation'
                 )
             ).to.exist;
             // check number of API calls
@@ -564,8 +549,9 @@ describe('type: automation', () => {
                 'returned metadata was not equal expected for update automation'
             );
             expect(
-                file(
-                    testUtils.getActualDoc('testExisting_automation_fixedKey_paused', 'automation')
+                await testUtils.getActualDoc(
+                    'testExisting_automation_fixedKey_paused',
+                    'automation'
                 )
             ).to.exist;
             // check number of API calls

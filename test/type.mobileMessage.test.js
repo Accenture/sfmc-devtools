@@ -7,7 +7,6 @@ import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const file = chaiFiles.file;
 
 describe('type: mobileMessage', () => {
     beforeEach(() => {
@@ -36,8 +35,8 @@ describe('type: mobileMessage', () => {
                 await testUtils.getExpectedJson('9999999', 'mobileMessage', 'get'),
                 'saved JSON was not equal expected'
             );
-            expect(file(testUtils.getActualFile('NTIzOjc4OjA', 'mobileMessage', 'amp'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'get', 'amp'))
+            expect(await testUtils.getActualFile('NTIzOjc4OjA', 'mobileMessage', 'amp')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'mobileMessage', 'get', 'amp')
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -71,8 +70,8 @@ describe('type: mobileMessage', () => {
                 await testUtils.getExpectedJson('9999999', 'mobileMessage', 'post-create'),
                 'returned JSON was not equal expected for insert mobileMessage'
             );
-            expect(file(testUtils.getActualFile('NTQ3Ojc4OjA', 'mobileMessage', 'amp'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'post-create', 'amp'))
+            expect(await testUtils.getActualFile('NTQ3Ojc4OjA', 'mobileMessage', 'amp')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'mobileMessage', 'post-create', 'amp')
             );
 
             // confirm updated item
@@ -81,8 +80,8 @@ describe('type: mobileMessage', () => {
                 await testUtils.getExpectedJson('9999999', 'mobileMessage', 'post-update'), // watch out - mobileMessage api wants put instead of patch for updates
                 'returned JSON was not equal expected for update mobileMessage'
             );
-            expect(file(testUtils.getActualFile('NTIzOjc4OjA', 'mobileMessage', 'amp'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'post-update', 'amp'))
+            expect(await testUtils.getActualFile('NTIzOjc4OjA', 'mobileMessage', 'amp')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'mobileMessage', 'post-update', 'amp')
             );
 
             // check number of API calls
@@ -132,9 +131,9 @@ describe('type: mobileMessage', () => {
                 'returned template JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualTemplateFile('NTIzOjc4OjA', 'mobileMessage', 'amp'))
+                await testUtils.getActualTemplateFile('NTIzOjc4OjA', 'mobileMessage', 'amp')
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'template', 'amp'))
+                await testUtils.getExpectedFile('9999999', 'mobileMessage', 'template', 'amp')
             );
 
             // buildDefinition
@@ -151,8 +150,8 @@ describe('type: mobileMessage', () => {
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualDeployFile('NTIzOjc4OjA', 'mobileMessage', 'amp'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'build', 'amp')));
+                await testUtils.getActualDeployFile('NTIzOjc4OjA', 'mobileMessage', 'amp')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'mobileMessage', 'build', 'amp'));
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
