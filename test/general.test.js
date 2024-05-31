@@ -6,7 +6,6 @@ import chaiFiles from 'chai-files';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const file = chaiFiles.file;
 
 describe('GENERAL', () => {
     beforeEach(() => {
@@ -343,8 +342,8 @@ describe('GENERAL', () => {
                     'returned template JSON of retrieveAsTemplate was not equal expected'
                 );
                 expect(
-                    file(testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql'))
-                ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'template', 'sql')));
+                    await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
 
                 // *** buildDefinition ***
                 const definitionResult = await handler.buildDefinition(
@@ -385,8 +384,8 @@ describe('GENERAL', () => {
                     'returned deployment JSON was not equal expected'
                 );
                 expect(
-                    file(testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql'))
-                ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'build', 'sql')));
+                    await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
 
                 assert.equal(
                     testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
@@ -445,8 +444,8 @@ describe('GENERAL', () => {
                     'returned template JSON of retrieveAsTemplate was not equal expected'
                 );
                 expect(
-                    file(testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql'))
-                ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'template', 'sql')));
+                    await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
 
                 // *** buildDefinition ***
 
@@ -476,8 +475,8 @@ describe('GENERAL', () => {
                     'returned deployment JSON was not equal expected'
                 );
                 expect(
-                    file(testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql'))
-                ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'build', 'sql')));
+                    await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
 
                 assert.equal(
                     testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
@@ -537,8 +536,8 @@ describe('GENERAL', () => {
                     'returned template JSON of retrieveAsTemplate was not equal expected'
                 );
                 expect(
-                    file(testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql'))
-                ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'template', 'sql')));
+                    await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
 
                 // *** buildDefinitionBulk ***
 
@@ -580,23 +579,19 @@ describe('GENERAL', () => {
                 // check if files were also created for other BU-market combos
                 // testBU: testSourceMarket
                 expect(
-                    file(
-                        testUtils.getActualDeployFile(
-                            'testExisting_automation',
-                            'automation',
-                            'json'
-                        )
+                    await testUtils.getActualDeployFile(
+                        'testExisting_automation',
+                        'automation',
+                        'json'
                     )
                 ).to.exist;
                 // _ParentBU_: testTargetMarket
                 expect(
-                    file(
-                        testUtils.getActualDeployFile(
-                            'testTemplated_automation',
-                            'automation',
-                            'json',
-                            '_ParentBU_'
-                        )
+                    await testUtils.getActualDeployFile(
+                        'testTemplated_automation',
+                        'automation',
+                        'json',
+                        '_ParentBU_'
                     )
                 ).to.exist;
 
@@ -634,34 +629,30 @@ describe('GENERAL', () => {
                     'returned deployment JSON was not equal expected'
                 );
                 expect(
-                    file(testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql'))
-                ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'build', 'sql')));
+                    await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
 
                 // check if files were also created for other BU-market combos
                 // testBU: testSourceMarket
-                expect(file(testUtils.getActualDeployFile('testExisting_query', 'query', 'json')))
+                expect(await testUtils.getActualDeployFile('testExisting_query', 'query', 'json'))
                     .to.exist;
-                expect(file(testUtils.getActualDeployFile('testExisting_query', 'query', 'sql'))).to
+                expect(await testUtils.getActualDeployFile('testExisting_query', 'query', 'sql')).to
                     .exist;
                 // _ParentBU_: testTargetMarket
                 expect(
-                    file(
-                        testUtils.getActualDeployFile(
-                            'testTemplated_query',
-                            'query',
-                            'json',
-                            '_ParentBU_'
-                        )
+                    await testUtils.getActualDeployFile(
+                        'testTemplated_query',
+                        'query',
+                        'json',
+                        '_ParentBU_'
                     )
                 ).to.exist;
                 expect(
-                    file(
-                        testUtils.getActualDeployFile(
-                            'testTemplated_query',
-                            'query',
-                            'sql',
-                            '_ParentBU_'
-                        )
+                    await testUtils.getActualDeployFile(
+                        'testTemplated_query',
+                        'query',
+                        'sql',
+                        '_ParentBU_'
                     )
                 ).to.exist;
 
@@ -728,8 +719,8 @@ describe('GENERAL', () => {
                     'returned template JSON of retrieveAsTemplate was not equal expected'
                 );
                 expect(
-                    file(testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql'))
-                ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'template', 'sql')));
+                    await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
 
                 // *** buildDefinitionBulk chained ***
                 const definitionResult = await handler.buildDefinitionBulk(
@@ -780,23 +771,19 @@ describe('GENERAL', () => {
                 // check if files were also created for other BU-market combos
                 // testBU: testSourceMarket
                 expect(
-                    file(
-                        testUtils.getActualDeployFile(
-                            'testExisting_automation',
-                            'automation',
-                            'json'
-                        )
+                    await testUtils.getActualDeployFile(
+                        'testExisting_automation',
+                        'automation',
+                        'json'
                     )
                 ).to.exist;
                 // _ParentBU_: testTargetMarket
                 expect(
-                    file(
-                        testUtils.getActualDeployFile(
-                            'testTemplated_automation',
-                            'automation',
-                            'json',
-                            '_ParentBU_'
-                        )
+                    await testUtils.getActualDeployFile(
+                        'testTemplated_automation',
+                        'automation',
+                        'json',
+                        '_ParentBU_'
                     )
                 ).to.exist;
 
@@ -834,34 +821,30 @@ describe('GENERAL', () => {
                     'returned deployment JSON was not equal expected'
                 );
                 expect(
-                    file(testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql'))
-                ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'build', 'sql')));
+                    await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
 
                 // check if files were also created for other BU-market combos
                 // testBU: testSourceMarket
-                expect(file(testUtils.getActualDeployFile('testExisting_query', 'query', 'json')))
+                expect(await testUtils.getActualDeployFile('testExisting_query', 'query', 'json'))
                     .to.exist;
-                expect(file(testUtils.getActualDeployFile('testExisting_query', 'query', 'sql'))).to
+                expect(await testUtils.getActualDeployFile('testExisting_query', 'query', 'sql')).to
                     .exist;
                 // _ParentBU_: testTargetMarket
                 expect(
-                    file(
-                        testUtils.getActualDeployFile(
-                            'testTemplated_query',
-                            'query',
-                            'json',
-                            '_ParentBU_'
-                        )
+                    await testUtils.getActualDeployFile(
+                        'testTemplated_query',
+                        'query',
+                        'json',
+                        '_ParentBU_'
                     )
                 ).to.exist;
                 expect(
-                    file(
-                        testUtils.getActualDeployFile(
-                            'testTemplated_query',
-                            'query',
-                            'sql',
-                            '_ParentBU_'
-                        )
+                    await testUtils.getActualDeployFile(
+                        'testTemplated_query',
+                        'query',
+                        'sql',
+                        '_ParentBU_'
                     )
                 ).to.exist;
 

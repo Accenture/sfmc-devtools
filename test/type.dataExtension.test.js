@@ -7,7 +7,6 @@ import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const file = chaiFiles.file;
 
 describe('type: dataExtension', () => {
     beforeEach(() => {
@@ -39,9 +38,9 @@ describe('type: dataExtension', () => {
             );
             // check if MD file was created and equals expectations
             expect(
-                file(testUtils.getActualDoc('testExisting_dataExtension', 'dataExtension'))
+                await testUtils.getActualDoc('testExisting_dataExtension', 'dataExtension')
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'dataExtension', 'retrieve', 'md'))
+                await testUtils.getExpectedFile('9999999', 'dataExtension', 'retrieve', 'md')
             );
 
             assert.equal(
@@ -76,15 +75,13 @@ describe('type: dataExtension', () => {
             );
             // check if MD file was created and equals expectations
             expect(
-                file(
-                    testUtils.getActualDoc(
-                        'testExisting_dataExtensionShared',
-                        'dataExtension',
-                        '_ParentBU_'
-                    )
+                await testUtils.getActualDoc(
+                    'testExisting_dataExtensionShared',
+                    'dataExtension',
+                    '_ParentBU_'
                 )
             ).to.equal(
-                file(testUtils.getExpectedFile('1111111', 'dataExtension', 'retrieve', 'md'))
+                await testUtils.getExpectedFile('1111111', 'dataExtension', 'retrieve', 'md')
             );
 
             assert.equal(

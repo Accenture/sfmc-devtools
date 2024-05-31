@@ -26,9 +26,9 @@ declare class MetadataType {
      * @param {string} dir directory that contains '.json' files to be read
      * @param {boolean} [listBadKeys] do not print errors, used for badKeys()
      * @param {string[]} [selectedSubType] asset, message, ...
-     * @returns {MetadataTypeMap} fileName => fileContent map
+     * @returns {Promise.<MetadataTypeMap>} fileName => fileContent map
      */
-    static getJsonFromFS(dir: string, listBadKeys?: boolean, selectedSubType?: string[]): MetadataTypeMap;
+    static getJsonFromFS(dir: string, listBadKeys?: boolean, selectedSubType?: string[]): Promise<MetadataTypeMap>;
     /**
      * Returns fieldnames of Metadata Type. 'this.definition.fields' variable only set in child classes.
      *
@@ -608,9 +608,9 @@ declare class MetadataType {
      * @param {string} readDir root directory of metadata.
      * @param {boolean} [listBadKeys] do not print errors, used for badKeys()
      * @param {object} [buMetadata] Metadata of BU in local directory
-     * @returns {object} Metadata of BU in local directory
+     * @returns {Promise.<object>} Metadata of BU in local directory
      */
-    static readBUMetadataForType(readDir: string, listBadKeys?: boolean, buMetadata?: object): object;
+    static readBUMetadataForType(readDir: string, listBadKeys?: boolean, buMetadata?: object): Promise<object>;
     /**
      * should return only the json for all but asset, query and script that are saved as multiple files
      * additionally, the documentation for dataExtension and automation should be returned

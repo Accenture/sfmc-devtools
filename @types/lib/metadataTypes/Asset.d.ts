@@ -293,9 +293,9 @@ declare class Asset extends MetadataType {
      * @param {string} dir directory that contains '.json' files to be read
      * @param {boolean} _ unused parameter
      * @param {string[]} selectedSubType asset, message, ...
-     * @returns {MetadataTypeMap} fileName => fileContent map
+     * @returns {Promise.<MetadataTypeMap>} fileName => fileContent map
      */
-    static getJsonFromFS(dir: string, _: boolean, selectedSubType: string[]): MetadataTypeMap;
+    static getJsonFromFS(dir: string, _: boolean, selectedSubType: string[]): Promise<MetadataTypeMap>;
     /**
      * optional method used for some types to try a different folder structure
      *
@@ -359,9 +359,9 @@ declare class Asset extends MetadataType {
      *
      * @param {string} subType asset subtype
      * @param {object} item api response for metadata
-     * @returns {object} JS object of the asset we loaded from disk
+     * @returns {Promise.<object>} JS object of the asset we loaded from disk
      */
-    static "__#1@#getJson"(subType: string, item: object): object;
+    static "__#1@#getJson"(subType: string, item: object): Promise<object>;
 }
 declare namespace Asset {
     let definition: {

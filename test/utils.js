@@ -36,10 +36,13 @@ export function getActualJson(customerKey, type, buName = 'testBU') {
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} [buName] used when we need to test on ParentBU
- * @returns {string} file path
+ * @returns {Promise.<string>} file path
  */
 export function getActualDoc(customerKey, type, buName = 'testBU') {
-    return `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-doc.md`;
+    return File.readFile(
+        `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-doc.md`,
+        'utf8'
+    );
 }
 /**
  * gets file from Retrieve folder
@@ -48,10 +51,16 @@ export function getActualDoc(customerKey, type, buName = 'testBU') {
  * @param {string} type of metadata
  * @param {string} ext file extension
  * @param {string} [buName] used when we need to test on ParentBU
- * @returns {string} file path
+ * @returns {Promise.<string | null>} file in string form, null if not found
  */
-export function getActualFile(customerKey, type, ext, buName = 'testBU') {
-    return `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-meta.${ext}`;
+export async function getActualFile(customerKey, type, ext, buName = 'testBU') {
+    const path = `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-meta.${ext}`;
+    try {
+        return await File.readFile(path, 'utf8');
+    } catch {
+        console.log(`File not found: ${path}`); // eslint-disable-line no-console
+        return null;
+    }
 }
 /**
  * gets file from Deploy folder
@@ -59,7 +68,7 @@ export function getActualFile(customerKey, type, ext, buName = 'testBU') {
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} [buName] used when we need to test on ParentBU
- * @returns {Promise.<string>} file in string form
+ * @returns {Promise.<string>} file in JSON form
  */
 export function getActualDeployJson(customerKey, type, buName = 'testBU') {
     return File.readJSON(
@@ -73,17 +82,20 @@ export function getActualDeployJson(customerKey, type, buName = 'testBU') {
  * @param {string} type of metadata
  * @param {string} ext file extension
  * @param {string} [buName] used when we need to test on ParentBU
- * @returns {string} file path
+ * @returns {Promise.<string>} file in string form
  */
 export function getActualDeployFile(customerKey, type, ext, buName = 'testBU') {
-    return `./deploy/testInstance/${buName}/${type}/${customerKey}.${type}-meta.${ext}`;
+    return File.readFile(
+        `./deploy/testInstance/${buName}/${type}/${customerKey}.${type}-meta.${ext}`,
+        'utf8'
+    );
 }
 /**
  * gets file from Template folder
  *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
- * @returns {Promise.<string>} file in string form
+ * @returns {Promise.<string>} file in JSON form
  */
 export function getActualTemplateJson(customerKey, type) {
     return File.readJSON(`./template/${type}/${customerKey}.${type}-meta.json`);
@@ -94,10 +106,10 @@ export function getActualTemplateJson(customerKey, type) {
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
- * @returns {string} file path
+ * @returns {Promise.<string>} file in string form
  */
 export function getActualTemplateFile(customerKey, type, ext) {
-    return `./template/${type}/${customerKey}.${type}-meta.${ext}`;
+    return File.readFile(`./template/${type}/${customerKey}.${type}-meta.${ext}`, 'utf8');
 }
 /**
  * gets file from resources folder which should be used for comparison
@@ -105,10 +117,10 @@ export function getActualTemplateFile(customerKey, type, ext) {
  * @param {string} mid of Business Unit
  * @param {string} type of metadata
  * @param {string} action of SOAP request
- * @returns {Promise.<string>} file in string form
+ * @returns {Promise.<string>} file in JSON form
  */
 export function getExpectedJson(mid, type, action) {
-    return File.readJSON(path.join('test', 'resources', mid, type, action + '-expected.json'));
+    return File.readJSON(`./test/resources/${mid}/${type}/${action}-expected.json`);
 }
 /**
  * gets file from resources folder which should be used for comparison
@@ -117,10 +129,10 @@ export function getExpectedJson(mid, type, action) {
  * @param {string} type of metadata
  * @param {string} action of SOAP request
  * @param {string} ext file extension
- * @returns {string} file path
+ * @returns {Promise.<string>} file in string form
  */
 export function getExpectedFile(mid, type, action, ext) {
-    return path.join('test', 'resources', mid, type, action + '-expected.' + ext);
+    return File.readFile(`./test/resources/${mid}/${type}/${action}-expected.${ext}`, 'utf8');
 }
 /**
  * setup mocks for API and FS
@@ -294,5 +306,5 @@ export function logAPIHistoryDebug() {
  * @returns {string} escaped string
  */
 function escapeRegExp(str) {
-    return str.replaceAll(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+    return str.replaceAll(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`); // $& means the whole matched string
 }

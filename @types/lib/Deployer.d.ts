@@ -62,9 +62,9 @@ declare class Deployer {
      * @param {string} deployDir root directory of metadata.
      * @param {string[]} [typeArr] limit deployment to given metadata type
      * @param {boolean} [listBadKeys] do not print errors, used for badKeys()
-     * @returns {MultiMetadataTypeMap} Metadata of BU in local directory
+     * @returns {Promise.<MultiMetadataTypeMap>} Metadata of BU in local directory
      */
-    static readBUMetadata(deployDir: string, typeArr?: string[], listBadKeys?: boolean): MultiMetadataTypeMap;
+    static readBUMetadata(deployDir: string, typeArr?: string[], listBadKeys?: boolean): Promise<MultiMetadataTypeMap>;
     /**
      * parses asset metadata to auto-create folders in target folder
      *

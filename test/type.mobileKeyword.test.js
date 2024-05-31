@@ -7,7 +7,6 @@ import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const file = chaiFiles.file;
 
 describe('type: mobileKeyword', () => {
     beforeEach(() => {
@@ -40,14 +39,12 @@ describe('type: mobileKeyword', () => {
                 'saved JSON was not equal expected'
             );
             expect(
-                file(
-                    testUtils.getActualFile(
-                        '4912312345678.TESTEXISTING_KEYWORD',
-                        'mobileKeyword',
-                        'amp'
-                    )
+                await testUtils.getActualFile(
+                    '4912312345678.TESTEXISTING_KEYWORD',
+                    'mobileKeyword',
+                    'amp'
                 )
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'get', 'amp')));
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'mobileKeyword', 'get', 'amp'));
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 2,
@@ -85,11 +82,13 @@ describe('type: mobileKeyword', () => {
                 'returned JSON was not equal expected for insert mobileKeyword'
             );
             expect(
-                file(
-                    testUtils.getActualFile('4912312345678.TESTNEW_KEYWORD', 'mobileKeyword', 'amp')
+                await testUtils.getActualFile(
+                    '4912312345678.TESTNEW_KEYWORD',
+                    'mobileKeyword',
+                    'amp'
                 )
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'post-create', 'amp'))
+                await testUtils.getExpectedFile('9999999', 'mobileKeyword', 'post-create', 'amp')
             );
 
             // confirm updated item
@@ -152,15 +151,13 @@ describe('type: mobileKeyword', () => {
                 'returned template JSON was not equal expected'
             );
             expect(
-                file(
-                    testUtils.getActualTemplateFile(
-                        '4912312345678.TESTEXISTING_KEYWORD',
-                        'mobileKeyword',
-                        'amp'
-                    )
+                await testUtils.getActualTemplateFile(
+                    '4912312345678.TESTEXISTING_KEYWORD',
+                    'mobileKeyword',
+                    'amp'
                 )
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'template', 'amp'))
+                await testUtils.getExpectedFile('9999999', 'mobileKeyword', 'template', 'amp')
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -196,15 +193,13 @@ describe('type: mobileKeyword', () => {
                 'returned template JSON was not equal expected'
             );
             expect(
-                file(
-                    testUtils.getActualTemplateFile(
-                        '4912312345678.TESTEXISTING_KEYWORD',
-                        'mobileKeyword',
-                        'amp'
-                    )
+                await testUtils.getActualTemplateFile(
+                    '4912312345678.TESTEXISTING_KEYWORD',
+                    'mobileKeyword',
+                    'amp'
                 )
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'template', 'amp'))
+                await testUtils.getExpectedFile('9999999', 'mobileKeyword', 'template', 'amp')
             );
 
             // buildDefinition
@@ -224,14 +219,12 @@ describe('type: mobileKeyword', () => {
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(
-                    testUtils.getActualDeployFile(
-                        '4912312345678.TESTTEMPLATED_KEYWORD',
-                        'mobileKeyword',
-                        'amp'
-                    )
+                await testUtils.getActualDeployFile(
+                    '4912312345678.TESTTEMPLATED_KEYWORD',
+                    'mobileKeyword',
+                    'amp'
                 )
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'build', 'amp')));
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'mobileKeyword', 'build', 'amp'));
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
