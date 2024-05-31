@@ -9,7 +9,6 @@ import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const file = chaiFiles.file;
 
 /**
  * gets file from Retrieve folder
@@ -39,10 +38,16 @@ async function getActualJson(customerKey, type, subtype, buName = 'testBU') {
  * @param {string} subtype of metadata
  * @param {string} ext file extension
  * @param {string} [buName] used when we need to test on ParentBU
- * @returns {string} file path
+ * @returns {Promise.<string | null>} file path
  */
-function getActualFile(customerKey, type, subtype, ext, buName = 'testBU') {
-    return `./retrieve/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`;
+async function getActualFile(customerKey, type, subtype, ext, buName = 'testBU') {
+    const path = `./retrieve/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`;
+    try {
+        return await File.readFile(path, 'utf8');
+    } catch {
+        console.log(`File not found: ${path}`); // eslint-disable-line no-console
+        return null;
+    }
 }
 /**
  * gets file from Template folder
@@ -71,14 +76,18 @@ async function getActualTemplateJson(customerKey, type, subtype) {
  * @param {string} subtype of metadata
  * @param {string} ext file extension
  * @param {string} [filename] optional fileprefix that differs from customerKey
- * @returns {any} file
+ * @returns {Promise.<string>} file
  */
-function getActualTemplateFile(customerKey, type, subtype, ext, filename) {
+async function getActualTemplateFile(customerKey, type, subtype, ext, filename) {
     return filename
-        ? file(
-              `./template/${type}/${subtype}/${customerKey}/${filename}.${type}-${subtype}-meta.${ext}`
+        ? File.readFile(
+              `./template/${type}/${subtype}/${customerKey}/${filename}.${type}-${subtype}-meta.${ext}`,
+              'utf8'
           )
-        : file(`./template/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`);
+        : File.readFile(
+              `./template/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`,
+              'utf8'
+          );
 }
 /**
  * gets file from Deploy folder
@@ -109,15 +118,17 @@ async function getActualDeployJson(customerKey, type, subtype, buName = 'testBU'
  * @param {string} ext file extension
  * @param {string} [filename] optional fileprefix that differs from customerKey
  * @param {string} [buName] used when we need to test on ParentBU
- * @returns {any} file content
+ * @returns {Promise.<string>} file content
  */
-function getActualDeployFile(customerKey, type, subtype, ext, filename, buName = 'testBU') {
+async function getActualDeployFile(customerKey, type, subtype, ext, filename, buName = 'testBU') {
     return filename
-        ? file(
-              `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}/${filename}.${type}-${subtype}-meta.${ext}`
+        ? File.readFile(
+              `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}/${filename}.${type}-${subtype}-meta.${ext}`,
+              'utf8'
           )
-        : file(
-              `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`
+        : File.readFile(
+              `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`,
+              'utf8'
           );
 }
 
@@ -157,7 +168,7 @@ describe('type: asset', () => {
                 await testUtils.getExpectedJson('9999999', 'asset', 'block-1157-retrieve'),
                 'returned metadata was not equal expected'
             );
-            expect(file(getActualFile('mcdev-issue-1157', 'asset', 'block', 'html'))).to.equal(
+            expect(await getActualFile('mcdev-issue-1157', 'asset', 'block', 'html')).to.equal(
                 await testUtils.getExpectedFile('9999999', 'asset', 'block-1157-retrieve', 'html')
             );
 
@@ -327,7 +338,7 @@ describe('type: asset', () => {
             );
 
             expect(
-                getActualTemplateFile(
+                await getActualTemplateFile(
                     'testExisting_asset_templatebasedemail',
                     'asset',
                     'message',
@@ -361,7 +372,7 @@ describe('type: asset', () => {
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                getActualDeployFile(
+                await getActualDeployFile(
                     'testTemplated_asset_templatebasedemail',
                     'asset',
                     'message',

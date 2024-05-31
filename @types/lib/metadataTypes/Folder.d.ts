@@ -80,9 +80,9 @@ declare class Folder extends MetadataType {
      *
      * @param {string} dir directory that contains '.json' files to be read
      * @param {boolean} [listBadKeys] do not print errors, used for badKeys()
-     * @returns {MetadataTypeMap} fileName => fileContent map
+     * @returns {Promise.<MetadataTypeMap>} fileName => fileContent map
      */
-    static getJsonFromFS(dir: string, listBadKeys?: boolean): MetadataTypeMap;
+    static getJsonFromFS(dir: string, listBadKeys?: boolean): Promise<MetadataTypeMap>;
     /**
      * Helper to retrieve the folders as promise
      *
