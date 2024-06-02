@@ -656,8 +656,7 @@ declare namespace TriggeredSend {
                 skipValidation: boolean;
             };
             c__priority: {
-                /** @type {SoapRequestParams} */
-                skipValidation: boolean;
+                skipValidation: boolean; /** @type {SoapRequestParams} */
             };
             r__sendClassification_key: {
                 skipValidation: boolean;
