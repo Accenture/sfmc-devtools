@@ -9,6 +9,7 @@ export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
 export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
 export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
 export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
+export type ContentBlockConversionTypes = import('../../types/mcdev.d.js').ContentBlockConversionTypes;
 export type ScriptItem = import('../../types/mcdev.d.js').ScriptItem;
 export type ScriptMap = import('../../types/mcdev.d.js').ScriptMap;
 /**
@@ -22,6 +23,7 @@ export type ScriptMap = import('../../types/mcdev.d.js').ScriptMap;
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
+ * @typedef {import('../../types/mcdev.d.js').ContentBlockConversionTypes} ContentBlockConversionTypes
  */
 /**
  * @typedef {import('../../types/mcdev.d.js').ScriptItem} ScriptItem
@@ -145,6 +147,13 @@ declare class Script extends MetadataType {
      */
     static postRetrieveTasks(metadata: ScriptItem): CodeExtractItem;
     /**
+     * manages post retrieve steps
+     *
+     * @param {ScriptItem} metadata a single item
+     * @returns {CodeExtractItem} a single item with code parts extracted
+     */
+    static getCodeExtractItem(metadata: ScriptItem): CodeExtractItem;
+    /**
      * helper for {@link Script.postRetrieveTasks} and {@link Script._buildForNested}
      *
      * @param {string} metadataScript the code of the file
@@ -170,6 +179,14 @@ declare class Script extends MetadataType {
      * @returns {Promise.<void>} -
      */
     static postDeleteTasks(customerKey: string): Promise<void>;
+    /**
+     * Abstract execute method that needs to be implemented in child metadata type
+     *
+     * @param {MetadataTypeMap} metadataMap list of metadata (keyField => metadata)
+     * @param {string} retrieveDir retrieve dir including cred and bu
+     * @returns {Promise.<string[]>} Returns list of keys for which references were replaced
+     */
+    static replaceCbReference(metadataMap: MetadataTypeMap, retrieveDir: string): Promise<string[]>;
 }
 declare namespace Script {
     let definition: {
@@ -202,10 +219,7 @@ declare namespace Script {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
-                template: boolean; /**
-                 * @typedef {import('../../types/mcdev.d.js').ScriptItem} ScriptItem
-                 * @typedef {import('../../types/mcdev.d.js').ScriptMap} ScriptMap
-                 */
+                template: boolean;
             };
             createdDate: {
                 isCreateable: boolean;
@@ -221,7 +235,16 @@ declare namespace Script {
             };
             folderLocationText: {
                 isCreateable: boolean;
-                isUpdateable: boolean;
+                isUpdateable: boolean; /**
+                 * Retrieves Metadata of Script
+                 * Endpoint /automation/v1/scripts/ return all Scripts with all details.
+                 *
+                 * @param {string} [retrieveDir] Directory where retrieved metadata directory will be saved
+                 * @param {void | string[]} [_] unused parameter
+                 * @param {void | string[]} [__] unused parameter
+                 * @param {string} [key] customer key of single item to retrieve
+                 * @returns {Promise.<{metadata: ScriptMap, type: string}>} Promise
+                 */
                 retrieving: boolean;
                 template: boolean;
             };

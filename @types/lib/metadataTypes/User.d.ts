@@ -182,7 +182,7 @@ declare class User extends MetadataType {
      * @param {string} interval defaults to 'days'
      * @returns {string} time difference
      */
-    static "__#5@#timeSinceDate"(dateStr: string, interval?: string): string;
+    static "__#6@#timeSinceDate"(dateStr: string, interval?: string): string;
     /**
      * helper to print bu names
      *

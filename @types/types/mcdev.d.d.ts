@@ -1235,6 +1235,18 @@ export type McdevLogger = {
     errorStack: Function;
 };
 export type Logger = import('winston').Logger & McdevLogger;
+export type AssetItemSimple = {
+    id: number;
+    key: string;
+    name: string;
+};
+export type AssetItemSimpleMap = {
+    [x: string]: AssetItemSimple;
+};
+export type AssetItemIdSimpleMap = {
+    [x: number]: AssetItemSimple;
+};
+export type ContentBlockConversionTypes = 'id' | 'key' | 'name';
 export type ExplainType = {
     /**
      * readable name of type

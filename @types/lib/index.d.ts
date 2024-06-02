@@ -16,6 +16,7 @@ export type SoapRequestParams = import('../types/mcdev.d.js').SoapRequestParams;
 export type TemplateMap = import('../types/mcdev.d.js').TemplateMap;
 export type TypeKeyCombo = import('../types/mcdev.d.js').TypeKeyCombo;
 export type ExplainType = import('../types/mcdev.d.js').ExplainType;
+export type ContentBlockConversionTypes = import('../types/mcdev.d.js').ContentBlockConversionTypes;
 /**
  * @typedef {import('../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -34,6 +35,7 @@ export type ExplainType = import('../types/mcdev.d.js').ExplainType;
  * @typedef {import('../types/mcdev.d.js').TemplateMap} TemplateMap
  * @typedef {import('../types/mcdev.d.js').TypeKeyCombo} TypeKeyCombo
  * @typedef {import('../types/mcdev.d.js').ExplainType} ExplainType
+ * @typedef {import('../types/mcdev.d.js').ContentBlockConversionTypes} ContentBlockConversionTypes
  */
 /**
  * main class
@@ -103,7 +105,7 @@ declare class Mcdev {
     /**
      * helper to show an off-the-logs message to users
      */
-    static "__#6@#welcomeMessage"(): void;
+    static "__#7@#welcomeMessage"(): void;
     /**
      * Retrieve all metadata from the specified business unit into the local file system.
      *
@@ -124,7 +126,7 @@ declare class Mcdev {
      * @param {boolean} [changelogOnly] skip saving, only create json in memory
      * @returns {Promise.<object>} ensure that BUs are worked on sequentially
      */
-    static "__#6@#retrieveBU"(cred: string, bu: string, selectedTypesArr?: string[] | TypeKeyCombo, keys?: string[], changelogOnly?: boolean): Promise<object>;
+    static "__#7@#retrieveBU"(cred: string, bu: string, selectedTypesArr?: string[] | TypeKeyCombo, keys?: string[], changelogOnly?: boolean): Promise<object>;
     /**
      * Deploys all metadata located in the 'deploy' directory to the specified business unit
      *
@@ -298,6 +300,18 @@ declare class Mcdev {
      * Updates the key to match the name field
      *
      * @param {string} businessUnit name of BU
+     * @param {TypeKeyCombo} selectedTypesArr limit retrieval to given metadata type
+     * @param {string} to what to replace with
+     * @param {string[]} [fromList] what to replace
+     * @returns {Promise.<Object.<string, object>>} key1: business unit name, key2:type value: list of fixed item keys
+     */
+    static replaceCbReference(businessUnit: string, selectedTypesArr: TypeKeyCombo, to: string, fromList?: string[]): Promise<{
+        [x: string]: object;
+    }>;
+    /**
+     * Updates the key to match the name field
+     *
+     * @param {string} businessUnit name of BU
      * @param {string[] | TypeKeyCombo} selectedTypesArr limit retrieval to given metadata type
      * @param {string[]} [keys] customerkey of the metadata
      * @returns {Promise.<Object.<string, object>>} key1: business unit name, key2:type value: list of fixed item keys
@@ -308,26 +322,26 @@ declare class Mcdev {
     /**
      * run a method across BUs
      *
-     * @param {'execute'|'pause'|'fixKeys'} methodName what to run
+     * @param {'execute'|'pause'|'fixKeys'|'replaceCbReference'} methodName what to run
      * @param {string} businessUnit name of BU
      * @param {string} [selectedType] limit to given metadata types
      * @param {string[]} [keys] customerkey of the metadata
      * @returns {Promise.<Object.<string, string[]>>} key: business unit name, value: list of affected item keys
      */
-    static "__#6@#runMethod"(methodName: 'execute' | 'pause' | 'fixKeys', businessUnit: string, selectedType?: string, keys?: string[]): Promise<{
+    static "__#7@#runMethod"(methodName: 'execute' | 'pause' | 'fixKeys' | 'replaceCbReference', businessUnit: string, selectedType?: string, keys?: string[]): Promise<{
         [x: string]: string[];
     }>;
     /**
      * helper for Mcdev.#runMethod
      *
-     * @param {'execute'|'pause'|'fixKeys'} methodName what to run
+     * @param {'execute'|'pause'|'fixKeys'|'replaceCbReference'} methodName what to run
      * @param {string} cred name of Credential
      * @param {string} bu name of BU
      * @param {string} [type] limit execution to given metadata type
      * @param {string[]} [keyArr] customerkey of the metadata
      * @returns {Promise.<string[]>} list of keys that were affected
      */
-    static "__#6@#runOnBU"(methodName: 'execute' | 'pause' | 'fixKeys', cred: string, bu: string, type?: string, keyArr?: string[]): Promise<string[]>;
+    static "__#7@#runOnBU"(methodName: 'execute' | 'pause' | 'fixKeys' | 'replaceCbReference', cred: string, bu: string, type?: string, keyArr?: string[]): Promise<string[]>;
     /**
      * helper for Mcdev.#runOnBU
      *
@@ -335,7 +349,7 @@ declare class Mcdev {
      * @param {BuObject} buObject properties for auth
      * @returns {Promise.<string[]>} keyArr
      */
-    static "__#6@#retrieveKeysWithLike"(selectedType: string, buObject: BuObject): Promise<string[]>;
+    static "__#7@#retrieveKeysWithLike"(selectedType: string, buObject: BuObject): Promise<string[]>;
     /**
      * Updates the key to match the name field
      *
@@ -345,7 +359,17 @@ declare class Mcdev {
      * @param {string[]} [keyArr] customerkey of the metadata
      * @returns {Promise.<string[]>} list of keys that were affected
      */
-    static "__#6@#fixKeys"(cred: string, bu: string, type: string, keyArr?: string[]): Promise<string[]>;
+    static "__#7@#fixKeys"(cred: string, bu: string, type: string, keyArr?: string[]): Promise<string[]>;
+    /**
+     * Updates the key to match the name field
+     *
+     * @param {string} cred name of Credential
+     * @param {string} bu name of BU
+     * @param {string} type limit execution to given metadata type
+     * @param {string[]} [keyArr] customerkey of the metadata
+     * @returns {Promise.<string[]>} list of keys that were affected
+     */
+    static "__#7@#replaceCbReference"(cred: string, bu: string, type: string, keyArr?: string[]): Promise<string[]>;
     /**
      * helper to convert CSVs into an array. if only one value was given, it's also returned as an array
      *

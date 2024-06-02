@@ -197,6 +197,13 @@ declare class MetadataType {
     /**
      * Abstract execute method that needs to be implemented in child metadata type
      *
+     * @param {MetadataTypeMap} metadataMap list of metadata (keyField => metadata)
+     * @returns {Promise.<string[]>} Returns list of keys for which references were replaced
+     */
+    static replaceCbReference(metadataMap: MetadataTypeMap): Promise<string[]>;
+    /**
+     * Abstract execute method that needs to be implemented in child metadata type
+     *
      * @param {string[]} keyArr customerkey of the metadata
      * @returns {Promise.<string[]>} Returns list of keys that were executed
      */
@@ -471,6 +478,16 @@ declare class MetadataType {
      * @returns {Promise.<MetadataTypeMap>} Promise of saved metadata
      */
     static saveResults(results: MetadataTypeMap, retrieveDir: string, overrideType?: string, templateVariables?: TemplateMap): Promise<MetadataTypeMap>;
+    /**
+     *
+     * @param {MetadataTypeMap} results metadata results from deploy
+     * @param {string} originalKey key of metadata
+     * @param {string[]} baseDir [retrieveDir, ...overrideType.split('-')]
+     * @param {string} [subtypeExtension] e.g. ".asset-meta" or ".query-meta"
+     * @param {TemplateMap} [templateVariables] variables to be replaced in the metadata
+     * @returns {MetadataTypeItem} saved metadata
+     */
+    static saveToDisk(results: MetadataTypeMap, originalKey: string, baseDir: string[], subtypeExtension?: string, templateVariables?: TemplateMap): MetadataTypeItem;
     /**
      * helper for {@link MetadataType.buildDefinitionForNested}
      * searches extracted file for template variable names and applies the market values
