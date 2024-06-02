@@ -40,9 +40,10 @@ declare class Asset extends MetadataType {
      * @param {void | string[]} _ unused parameter
      * @param {string[]} [subTypeArr] optionally limit to a single AssetSubType
      * @param {string} [key] customer key
+     * @param {boolean} [loadShared] optionally retrieve assets from other BUs that were shared with the current
      * @returns {Promise.<{metadata: AssetMap, type: string}>} Promise
      */
-    static retrieve(retrieveDir: string, _: void | string[], subTypeArr?: string[], key?: string): Promise<{
+    static retrieve(retrieveDir: string, _: void | string[], subTypeArr?: string[], key?: string, loadShared?: boolean): Promise<{
         metadata: AssetMap;
         type: string;
     }>;
@@ -57,9 +58,10 @@ declare class Asset extends MetadataType {
      *
      * @param {void | string[]} [_] parameter not used
      * @param {string[]} [subTypeArr] optionally limit to a single subtype
+     * @param {boolean} [loadShared] optionally retrieve assets from other BUs that were shared with the current
      * @returns {Promise.<{metadata: AssetMap, type: string}>} Promise
      */
-    static retrieveForCache(_?: void | string[], subTypeArr?: string[]): Promise<{
+    static retrieveForCache(_?: void | string[], subTypeArr?: string[], loadShared?: boolean): Promise<{
         metadata: AssetMap;
         type: string;
     }>;
@@ -104,9 +106,10 @@ declare class Asset extends MetadataType {
      * @param {string} [retrieveDir] target directory for saving assets
      * @param {string} [key] key/id/name to filter by
      * @param {TemplateMap} [templateVariables] variables to be replaced in the metadata
+     * @param {boolean} [loadShared] optionally retrieve assets from other BUs that were shared with the current
      * @returns {Promise.<object[]>} Promise
      */
-    static requestSubType(subType: string, retrieveDir?: string, key?: string, templateVariables?: TemplateMap): Promise<object[]>;
+    static requestSubType(subType: string, retrieveDir?: string, key?: string, templateVariables?: TemplateMap, loadShared?: boolean): Promise<object[]>;
     /**
      * Retrieves extended metadata (files or extended content) of asset
      *
@@ -487,7 +490,15 @@ declare namespace Asset {
             contentType: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
-                retrieving: boolean;
+                retrieving: boolean; /**
+                 * Helper for writing Metadata to disk, used for Retrieve and deploy
+                 *
+                 * @param {MetadataTypeMap} results metadata results from deploy
+                 * @param {string} retrieveDir directory where metadata should be stored after deploy/retrieve
+                 * @param {string} [overrideType] for use when there is a subtype (such as folder-queries)
+                 * @param {TemplateMap} [templateVariables] variables to be replaced in the metadata
+                 * @returns {Promise.<MetadataTypeMap>} Promise of saved metadata
+                 */
                 template: boolean;
             };
             'createdBy.email': {
@@ -548,13 +559,7 @@ declare namespace Asset {
                 template: boolean;
             };
             'data.email.options': {
-                skipValidation: boolean; /**
-                 * Retrieves asset metadata for caching
-                 *
-                 * @param {void | string[]} [_] parameter not used
-                 * @param {string[]} [subTypeArr] optionally limit to a single subtype
-                 * @returns {Promise.<{metadata: AssetMap, type: string}>} Promise
-                 */
+                skipValidation: boolean;
             };
             'data.portfolio': {
                 isCreateable: boolean;
@@ -570,15 +575,7 @@ declare namespace Asset {
             };
             design: {
                 isCreateable: boolean;
-                isUpdateable: boolean; /**
-                 * Retrieves asset metadata for templating
-                 *
-                 * @param {string} templateDir Directory where retrieved metadata directory will be saved
-                 * @param {string} name name of the metadata file
-                 * @param {TemplateMap} templateVariables variables to be replaced in the metadata
-                 * @param {AssetSubType} [selectedSubType] optionally limit to a single subtype
-                 * @returns {Promise.<{metadata: AssetItem, type: string}>} Promise
-                 */
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
@@ -647,7 +644,12 @@ declare namespace Asset {
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
-            };
+            }; /**
+             * helper for {@link Asset.retrieve} + {@link Asset.retrieveAsTemplate}
+             *
+             * @private
+             * @returns {string[]} AssetSubType array
+             */
             legacyData: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -720,7 +722,7 @@ declare namespace Asset {
             objectID: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
-                retrieving: boolean; /** @type {AssetSubType[]} */
+                retrieving: boolean;
                 template: boolean;
             };
             owner: {
@@ -732,7 +734,7 @@ declare namespace Asset {
             'owner.email': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
-                retrieving: boolean; /** @type {AssetRequestParams} */
+                retrieving: boolean;
                 template: boolean;
             };
             'owner.id': {
@@ -1037,15 +1039,7 @@ declare namespace Asset {
             fla: number;
             eml: number;
             text: number;
-            txt: number; /**
-             * Some metadata types store their actual content as a separate file, e.g. images
-             * This method retrieves these and saves them alongside the metadata json
-             *
-             * @param {AssetItem} metadata a single asset
-             * @param {string} subType group of similar assets to put in a folder (ie. images)
-             * @param {string} retrieveDir target directory for saving assets
-             * @returns {Promise.<void>} -
-             */
+            txt: number;
             freeformblock: number;
             textblock: number;
             htmlblock: number;
