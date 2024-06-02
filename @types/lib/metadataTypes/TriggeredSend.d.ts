@@ -9,7 +9,6 @@ export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
 export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
 export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
 export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
-export type ContentBlockConversionTypes = import('../../types/mcdev.d.js').ContentBlockConversionTypes;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -21,7 +20,6 @@ export type ContentBlockConversionTypes = import('../../types/mcdev.d.js').Conte
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
- * @typedef {import('../../types/mcdev.d.js').ContentBlockConversionTypes} ContentBlockConversionTypes
  */
 /**
  * MessageSendActivity MetadataType
@@ -143,15 +141,7 @@ declare namespace TriggeredSend {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
-                templating: boolean; /**
-                 * Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
-                 *
-                 * @param {string} retrieveDir Directory where retrieved metadata directory will be saved
-                 * @param {void | string[]} [_] unused parameter
-                 * @param {void | string[]} [__] unused parameter
-                 * @param {string} [key] customer key of single item to retrieve
-                 * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
-                 */
+                templating: boolean;
             };
             AutoUpdateSubscribers: {
                 isCreateable: boolean;
@@ -167,7 +157,7 @@ declare namespace TriggeredSend {
             };
             BccEmail: {
                 isCreateable: boolean;
-                isUpdateable: boolean;
+                isUpdateable: boolean; /** @type {SoapRequestParams} */
                 retrieving: boolean;
                 templating: boolean;
             };
@@ -228,12 +218,7 @@ declare namespace TriggeredSend {
             'DeliveryProfile.ObjectID': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
-                retrieving: boolean; /**
-                 * Delete a metadata item from the specified business unit
-                 *
-                 * @param {string} customerKey Identifier of data extension
-                 * @returns {Promise.<boolean>} deletion success status
-                 */
+                retrieving: boolean;
                 templating: boolean;
             };
             Description: {
@@ -241,15 +226,15 @@ declare namespace TriggeredSend {
                 isUpdateable: boolean;
                 retrieving: boolean;
                 templating: boolean;
-            };
+            }; /**
+             * parses retrieved Metadata before saving
+             *
+             * @param {MetadataTypeItem} metadata a single item
+             * @returns {MetadataTypeItem | void} Array with one metadata object and one sql string
+             */
             DisableOnEmailBuildError: {
                 isCreateable: boolean;
-                isUpdateable: boolean; /**
-                 * parses retrieved Metadata before saving
-                 *
-                 * @param {MetadataTypeItem} metadata a single item
-                 * @returns {MetadataTypeItem | void} Array with one metadata object and one sql string
-                 */
+                isUpdateable: boolean;
                 retrieving: boolean;
                 templating: boolean;
             };
@@ -671,6 +656,7 @@ declare namespace TriggeredSend {
                 skipValidation: boolean;
             };
             c__priority: {
+                /** @type {SoapRequestParams} */
                 skipValidation: boolean;
             };
             r__sendClassification_key: {
