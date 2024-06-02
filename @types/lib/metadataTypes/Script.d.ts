@@ -180,13 +180,12 @@ declare class Script extends MetadataType {
      */
     static postDeleteTasks(customerKey: string): Promise<void>;
     /**
-     * Abstract execute method that needs to be implemented in child metadata type
      *
-     * @param {MetadataTypeMap} metadataMap list of metadata (keyField => metadata)
-     * @param {string} retrieveDir retrieve dir including cred and bu
-     * @returns {Promise.<string[]>} Returns list of keys for which references were replaced
+     * @param {MetadataTypeItem} item single metadata item
+     * @param {string} retrieveDir directory where metadata is saved
+     * @returns {Promise.<CodeExtractItem>} key of the item that was updated
      */
-    static replaceCbReference(metadataMap: MetadataTypeMap, retrieveDir: string): Promise<string[]>;
+    static replaceCbReference(item: MetadataTypeItem, retrieveDir: string): Promise<CodeExtractItem>;
 }
 declare namespace Script {
     let definition: {

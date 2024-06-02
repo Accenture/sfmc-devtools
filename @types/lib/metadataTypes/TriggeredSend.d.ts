@@ -9,6 +9,7 @@ export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
 export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
 export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
 export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
+export type ContentBlockConversionTypes = import('../../types/mcdev.d.js').ContentBlockConversionTypes;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -20,6 +21,7 @@ export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
+ * @typedef {import('../../types/mcdev.d.js').ContentBlockConversionTypes} ContentBlockConversionTypes
  */
 /**
  * MessageSendActivity MetadataType
@@ -95,6 +97,12 @@ declare class TriggeredSend extends MetadataType {
      * @returns {Promise.<boolean>} true if refresh was successful
      */
     static _refreshItem(key: string, checkKey: boolean): Promise<boolean>;
+    /**
+     *
+     * @param {MetadataTypeItem} item single metadata item
+     * @returns {Promise.<MetadataTypeItem>} key of the item that was updated
+     */
+    static replaceCbReference(item: MetadataTypeItem): Promise<MetadataTypeItem>;
 }
 declare namespace TriggeredSend {
     let definition: {
@@ -135,7 +143,15 @@ declare namespace TriggeredSend {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
-                templating: boolean;
+                templating: boolean; /**
+                 * Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
+                 *
+                 * @param {string} retrieveDir Directory where retrieved metadata directory will be saved
+                 * @param {void | string[]} [_] unused parameter
+                 * @param {void | string[]} [__] unused parameter
+                 * @param {string} [key] customer key of single item to retrieve
+                 * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
+                 */
             };
             AutoUpdateSubscribers: {
                 isCreateable: boolean;
@@ -212,10 +228,21 @@ declare namespace TriggeredSend {
             'DeliveryProfile.ObjectID': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
-                retrieving: boolean;
+                retrieving: boolean; /**
+                 * Delete a metadata item from the specified business unit
+                 *
+                 * @param {string} customerKey Identifier of data extension
+                 * @returns {Promise.<boolean>} deletion success status
+                 */
                 templating: boolean;
             };
             Description: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                templating: boolean;
+            };
+            DisableOnEmailBuildError: {
                 isCreateable: boolean;
                 isUpdateable: boolean; /**
                  * parses retrieved Metadata before saving
@@ -223,12 +250,6 @@ declare namespace TriggeredSend {
                  * @param {MetadataTypeItem} metadata a single item
                  * @returns {MetadataTypeItem | void} Array with one metadata object and one sql string
                  */
-                retrieving: boolean;
-                templating: boolean;
-            };
-            DisableOnEmailBuildError: {
-                isCreateable: boolean;
-                isUpdateable: boolean;
                 retrieving: boolean;
                 templating: boolean;
             };
@@ -565,12 +586,7 @@ declare namespace TriggeredSend {
             SendSourceDataExtension: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
-                retrieving: boolean; /**
-                 * helper for {@link TriggeredSend.refresh} that finds active TSDs on the server and filters it by the same rules that {@link TriggeredSend.retrieve} is using to avoid refreshing TSDs with broken dependencies
-                 *
-                 * @param {boolean} [assetLoaded] if run after Asset.deploy via --refresh option this will skip caching assets
-                 * @returns {Promise.<MetadataTypeMapObj>} Promise of TSD item map
-                 */
+                retrieving: boolean;
                 templating: boolean;
             };
             SendWindowClose: {
@@ -651,10 +667,9 @@ declare namespace TriggeredSend {
             r__folder_Path: {
                 skipValidation: boolean;
             };
-            /** @type {SoapRequestParams} */
             r__list_PathName: {
                 skipValidation: boolean;
-            }; /** @type {SoapRequestParams} */
+            };
             c__priority: {
                 skipValidation: boolean;
             };

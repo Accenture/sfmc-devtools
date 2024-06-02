@@ -195,12 +195,21 @@ declare class MetadataType {
      */
     static refresh(): void;
     /**
-     * Abstract execute method that needs to be implemented in child metadata type
+     * this iterates over all items found in the retrieve folder and executes the type-specific method for replacing references
      *
      * @param {MetadataTypeMap} metadataMap list of metadata (keyField => metadata)
+     * @param {string} retrieveDir retrieve dir including cred and bu
      * @returns {Promise.<string[]>} Returns list of keys for which references were replaced
      */
-    static replaceCbReference(metadataMap: MetadataTypeMap): Promise<string[]>;
+    static replaceCbReferenceLoop(metadataMap: MetadataTypeMap, retrieveDir: string): Promise<string[]>;
+    /**
+     * Abstract execute method that needs to be implemented in child metadata type
+     *
+     * @param {MetadataTypeItem} item single metadata item
+     * @param {string} [retrieveDir] directory where metadata is saved
+     * @returns {Promise.<MetadataTypeItem | CodeExtractItem>} key of the item that was updated
+     */
+    static replaceCbReference(item: MetadataTypeItem, retrieveDir?: string): Promise<MetadataTypeItem | CodeExtractItem>;
     /**
      * Abstract execute method that needs to be implemented in child metadata type
      *

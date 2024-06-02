@@ -36,7 +36,7 @@ export default class ReplaceContentBlockReference {
         name: AssetItemSimpleMap;
     };
     /** @type {{id: RegExp[], key: RegExp[], name: RegExp[]}} */
-    static "__#5@#regexBy": {
+    static "__#1@#regexBy": {
         id: RegExp[];
         key: RegExp[];
         name: RegExp[];
@@ -45,12 +45,12 @@ export default class ReplaceContentBlockReference {
      * used to equalize the reference in the code to whatever is set in the "to" field
      *
      * @param {string} str full code string
-     * @param {ContentBlockConversionTypes[]} fromList what to replace
-     * @param {ContentBlockConversionTypes} to what to replace with
      * @param {string} parentName name of the object that was passed in; used in error message only
+     * @param {ContentBlockConversionTypes[]} [fromList] what to replace
+     * @param {ContentBlockConversionTypes} [to] what to replace with
      * @returns {string} replaced string
      */
-    static replaceReference(str: string, fromList: ContentBlockConversionTypes[], to: ContentBlockConversionTypes, parentName: string): string;
+    static replaceReference(str: string, parentName: string, fromList?: ContentBlockConversionTypes[], to?: ContentBlockConversionTypes): string;
     /**
      *
      * @private
@@ -60,7 +60,7 @@ export default class ReplaceContentBlockReference {
      * @param {boolean} [isSsjs] replaces backslashes with double backslashes in name if true
      * @returns {AssetItemSimple} asset object
      */
-    private static "__#5@#getAssetBy";
+    private static "__#1@#getAssetBy";
     /**
      *
      * @param {AssetItemSimple} asset asset object
@@ -68,7 +68,7 @@ export default class ReplaceContentBlockReference {
      * @param {boolean} [isSsjs] replaces backslashes with double backslashes in name if true
      * @returns {string} replaced string
      */
-    static "__#5@#replaceWith"(asset: AssetItemSimple, to: ContentBlockConversionTypes, isSsjs?: boolean): string;
+    static "__#1@#replaceWith"(asset: AssetItemSimple, to: ContentBlockConversionTypes, isSsjs?: boolean): string;
     /**
      *
      * @param {Mcdevrc} properties properties for auth
