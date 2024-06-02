@@ -369,12 +369,6 @@ declare class Asset extends MetadataType {
      * @returns {Promise.<MetadataTypeItem>} key of the item that was updated
      */
     static replaceCbReference(item: MetadataTypeItem, retrieveDir: string): Promise<MetadataTypeItem>;
-    /**
-     * empty dummy method as assets are note saved via the central method
-     *
-     * @returns {MetadataTypeItem} saved metadata
-     */
-    static saveToDisk(): MetadataTypeItem;
 }
 declare namespace Asset {
     let definition: {

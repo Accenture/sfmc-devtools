@@ -37,15 +37,18 @@ async function getActualJson(customerKey, type, subtype, buName = 'testBU') {
  * @param {string} type of metadata
  * @param {string} subtype of metadata
  * @param {string} ext file extension
+ * @param {string} [filename] optional fileprefix that differs from customerKey
  * @param {string} [buName] used when we need to test on ParentBU
  * @returns {Promise.<string | null>} file path
  */
-async function getActualFile(customerKey, type, subtype, ext, buName = 'testBU') {
+async function getActualFile(customerKey, type, subtype, ext, filename, buName = 'testBU') {
     const path = `./retrieve/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`;
+    const pathSub = `./retrieve/testInstance/${buName}/${type}/${subtype}/${customerKey}/${filename}.${type}-${subtype}-meta.${ext}`;
+
     try {
-        return await File.readFile(path, 'utf8');
+        return await File.readFile(filename ? pathSub : path, 'utf8');
     } catch {
-        console.log(`File not found: ${path}`); // eslint-disable-line no-console
+        console.log(`File not found: ${filename ? pathSub : path}`); // eslint-disable-line no-console
         return null;
     }
 }
@@ -79,16 +82,17 @@ async function getActualTemplateJson(customerKey, type, subtype) {
  * @returns {Promise.<string>} file
  */
 async function getActualTemplateFile(customerKey, type, subtype, ext, filename) {
-    return filename
-        ? File.readFile(
-              `./template/${type}/${subtype}/${customerKey}/${filename}.${type}-${subtype}-meta.${ext}`,
-              'utf8'
-          )
-        : File.readFile(
-              `./template/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`,
-              'utf8'
-          );
+    const path = `./template/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`;
+    const pathSub = `./template/${type}/${subtype}/${customerKey}/${filename}.${type}-${subtype}-meta.${ext}`;
+
+    try {
+        return File.readFile(filename ? pathSub : path, 'utf8');
+    } catch {
+        console.log(`File not found: ${filename ? pathSub : path}`); // eslint-disable-line no-console
+        return null;
+    }
 }
+
 /**
  * gets file from Deploy folder
  *
@@ -121,15 +125,15 @@ async function getActualDeployJson(customerKey, type, subtype, buName = 'testBU'
  * @returns {Promise.<string>} file content
  */
 async function getActualDeployFile(customerKey, type, subtype, ext, filename, buName = 'testBU') {
-    return filename
-        ? File.readFile(
-              `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}/${filename}.${type}-${subtype}-meta.${ext}`,
-              'utf8'
-          )
-        : File.readFile(
-              `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`,
-              'utf8'
-          );
+    const path = `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`;
+    const pathSub = `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}/${filename}.${type}-${subtype}-meta.${ext}`;
+
+    try {
+        return File.readFile(filename ? pathSub : path, 'utf8');
+    } catch {
+        console.log(`File not found: ${filename ? pathSub : path}`); // eslint-disable-line no-console
+        return null;
+    }
 }
 
 describe('type: asset', () => {
@@ -176,6 +180,38 @@ describe('type: asset', () => {
                 await getActualJson('testExisting_asset_templatebasedemail', 'asset', 'message'),
                 await testUtils.getExpectedJson('9999999', 'asset', 'retrieve-templatebasedemail'),
                 'returned metadata was not equal expected'
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_templatebasedemail',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.html.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'retrieve-templatebasedemail-html',
+                    'html'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_templatebasedemail',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.preheader.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'retrieve-templatebasedemail-preheader',
+                    'html'
+                )
             );
 
             assert.equal(
@@ -349,7 +385,23 @@ describe('type: asset', () => {
                 await testUtils.getExpectedFile(
                     '9999999',
                     'asset',
-                    'template-templatebasedemail',
+                    'template-templatebasedemail-html',
+                    'html'
+                )
+            );
+            expect(
+                await getActualTemplateFile(
+                    'testExisting_asset_templatebasedemail',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.preheader.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'template-templatebasedemail-preheader',
                     'html'
                 )
             );
@@ -383,7 +435,23 @@ describe('type: asset', () => {
                 await testUtils.getExpectedFile(
                     '9999999',
                     'asset',
-                    'build-templatebasedemail',
+                    'build-templatebasedemail-html',
+                    'html'
+                )
+            );
+            expect(
+                await getActualDeployFile(
+                    'testTemplated_asset_templatebasedemail',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.preheader.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'build-templatebasedemail-preheader',
                     'html'
                 )
             );
