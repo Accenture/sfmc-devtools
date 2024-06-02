@@ -450,10 +450,10 @@ complex
  * @typedef {import('winston').Logger & McdevLogger} Logger
  */
 /**
- * @typedef {{id: number, key: string, pathName: string}} AssetItemSimple
+ * @typedef {{id: number, key: string, name: string}} AssetItemSimple
  * @typedef {Object.<string, AssetItemSimple>} AssetItemSimpleMap
  * @typedef {Object.<number, AssetItemSimple>} AssetItemIdSimpleMap
- * @typedef {'id'|'key'|'pathName'} ContentBlockConversionTypes
+ * @typedef {'id'|'key'|'name'} ContentBlockConversionTypes
  */
 /**
  * @typedef {object} ExplainType
