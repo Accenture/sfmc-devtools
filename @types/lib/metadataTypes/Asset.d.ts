@@ -362,6 +362,19 @@ declare class Asset extends MetadataType {
      * @returns {Promise.<object>} JS object of the asset we loaded from disk
      */
     static "__#2@#getJson"(subType: string, item: object): Promise<object>;
+    /**
+     *
+     * @param {MetadataTypeItem} item single metadata item
+     * @param {string} retrieveDir directory where metadata is saved
+     * @returns {Promise.<MetadataTypeItem>} key of the item that was updated
+     */
+    static replaceCbReference(item: MetadataTypeItem, retrieveDir: string): Promise<MetadataTypeItem>;
+    /**
+     * empty dummy method as assets are note saved via the central method
+     *
+     * @returns {MetadataTypeItem} saved metadata
+     */
+    static saveToDisk(): MetadataTypeItem;
 }
 declare namespace Asset {
     let definition: {
@@ -388,11 +401,6 @@ declare namespace Asset {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
-                /**
-                 * FileTransfer MetadataType
-                 *
-                 * @augments MetadataType
-                 */
                 template: boolean;
             };
             allowedBlocks: {
@@ -477,15 +485,7 @@ declare namespace Asset {
                 template: boolean;
             };
             content: {
-                isCreateable: boolean; /**
-                 * Helper for writing Metadata to disk, used for Retrieve and deploy
-                 *
-                 * @param {MetadataTypeMap} results metadata results from deploy
-                 * @param {string} retrieveDir directory where metadata should be stored after deploy/retrieve
-                 * @param {string} [overrideType] for use when there is a subtype (such as folder-queries)
-                 * @param {TemplateMap} [templateVariables] variables to be replaced in the metadata
-                 * @returns {Promise.<MetadataTypeMap>} Promise of saved metadata
-                 */
+                isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
@@ -549,16 +549,16 @@ declare namespace Asset {
             };
             'data.email.legacy': {
                 isCreateable: boolean;
-                isUpdateable: boolean; /**
-                 * Retrieves asset metadata for caching
-                 *
-                 * @param {void | string[]} [_] parameter not used
-                 * @param {string[]} [subTypeArr] optionally limit to a single subtype
-                 * @returns {Promise.<{metadata: AssetMap, type: string}>} Promise
-                 */
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
-            };
+            }; /**
+             * Retrieves asset metadata for caching
+             *
+             * @param {void | string[]} [_] parameter not used
+             * @param {string[]} [subTypeArr] optionally limit to a single subtype
+             * @returns {Promise.<{metadata: AssetMap, type: string}>} Promise
+             */
             'data.email.options': {
                 skipValidation: boolean;
             };
@@ -570,15 +570,6 @@ declare namespace Asset {
             };
             description: {
                 isCreateable: boolean;
-                /**
-                 * Retrieves asset metadata for templating
-                 *
-                 * @param {string} templateDir Directory where retrieved metadata directory will be saved
-                 * @param {string} name name of the metadata file
-                 * @param {TemplateMap} templateVariables variables to be replaced in the metadata
-                 * @param {AssetSubType} [selectedSubType] optionally limit to a single subtype
-                 * @returns {Promise.<{metadata: AssetItem, type: string}>} Promise
-                 */
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
@@ -671,12 +662,7 @@ declare namespace Asset {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
-                template: boolean; /**
-                 * Creates a single asset
-                 *
-                 * @param {AssetItem} metadata a single asset
-                 * @returns {Promise} Promise
-                 */
+                template: boolean;
             };
             memberId: {
                 isCreateable: boolean;
@@ -700,15 +686,7 @@ declare namespace Asset {
                 template: boolean;
             };
             'modifiedBy.id': {
-                isCreateable: boolean; /**
-                 * Retrieves Metadata of a specific asset type
-                 *
-                 * @param {string} subType group of similar assets to put in a folder (ie. images)
-                 * @param {string} [retrieveDir] target directory for saving assets
-                 * @param {string} [key] key/id/name to filter by
-                 * @param {TemplateMap} [templateVariables] variables to be replaced in the metadata
-                 * @returns {Promise.<object[]>} Promise
-                 */
+                isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
@@ -1035,6 +1013,10 @@ declare namespace Asset {
             jar: number;
             rar: number;
             tar: number;
+            zip: number;
+            gpg: number;
+            htm: number;
+            html: number;
             /**
              * Some metadata types store their actual content as a separate file, e.g. images
              * This method retrieves these and saves them alongside the metadata json
@@ -1044,10 +1026,6 @@ declare namespace Asset {
              * @param {string} retrieveDir target directory for saving assets
              * @returns {Promise.<void>} -
              */
-            zip: number;
-            gpg: number;
-            htm: number;
-            html: number;
             xhtml: number;
             xht: number;
             css: number;
