@@ -202,7 +202,7 @@ describe('type: asset', () => {
                     'testExisting_asset_templatebasedemail',
                     'asset',
                     'message',
-                    'html',
+                    'amp',
                     'views.preheader.content'
                 )
             ).to.equal(
@@ -210,7 +210,7 @@ describe('type: asset', () => {
                     '9999999',
                     'asset',
                     'retrieve-templatebasedemail-preheader',
-                    'html'
+                    'amp'
                 )
             );
 
@@ -394,7 +394,7 @@ describe('type: asset', () => {
                     'testExisting_asset_templatebasedemail',
                     'asset',
                     'message',
-                    'html',
+                    'amp',
                     'views.preheader.content'
                 )
             ).to.equal(
@@ -402,7 +402,7 @@ describe('type: asset', () => {
                     '9999999',
                     'asset',
                     'template-templatebasedemail-preheader',
-                    'html'
+                    'amp'
                 )
             );
             // THEN
@@ -444,7 +444,7 @@ describe('type: asset', () => {
                     'testTemplated_asset_templatebasedemail',
                     'asset',
                     'message',
-                    'html',
+                    'amp',
                     'views.preheader.content'
                 )
             ).to.equal(
@@ -452,7 +452,7 @@ describe('type: asset', () => {
                     '9999999',
                     'asset',
                     'build-templatebasedemail-preheader',
-                    'html'
+                    'amp'
                 )
             );
 
