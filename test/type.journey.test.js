@@ -279,4 +279,113 @@ describe('type: journey', () => {
             return;
         });
     });
+
+    describe('ReplaceContentBlockByX ================', () => {
+        it('Should replace references with ContentBlockByName w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    journey: null,
+                },
+                'name'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].journey,
+                ['testExisting_journey_Quicksend'],
+                'should have found the right journeys that need updating'
+            );
+
+            // check if conversions happened
+            // check if conversions happened
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_journey_Quicksend', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get-quicksend-rcb-name'),
+                'returned JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                38,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should replace references with ContentBlockById w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    journey: null,
+                },
+                'id'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].journey,
+                ['testExisting_journey_Quicksend'],
+                'should have found the right journeys that need updating'
+            );
+
+            // check if conversions happened
+            // check if conversions happened
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_journey_Quicksend', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get-quicksend-rcb-id'),
+                'returned JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                38,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should replace references with ContentBlockByKey w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    journey: null,
+                },
+                'key'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].journey,
+                ['testExisting_journey_Quicksend'],
+                'should have found the right assets that need updating'
+            );
+
+            // check if conversions happened
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_journey_Quicksend', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get-quicksend-rcb-key'),
+                'returned JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                38,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
 });

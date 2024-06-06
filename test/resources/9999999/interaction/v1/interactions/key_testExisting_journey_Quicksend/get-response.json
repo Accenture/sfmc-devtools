@@ -31,8 +31,8 @@
                 "triggeredSend": {
                     "autoAddSubscribers": true,
                     "autoUpdateSubscribers": true,
-                    "bccEmail": "",
-                    "ccEmail": "",
+                    "bccEmail": "%%= ContentBlockByName(\"Content Builder\\dont strip non ssjs content\") =%%",
+                    "ccEmail": "%%= ContentBlockByKey(\"mcdev-issue-1157\") =%%",
                     "created": {},
                     "description": "my activity info text",
                     "domainExclusions": [
@@ -41,17 +41,17 @@
                             "name": "testExisting_DomainExclusion"
                         }
                     ],
-                    "dynamicEmailSubject": "testExisting_ email subject",
+                    "dynamicEmailSubject": "testExisting_ dynamic email subject %%= ContentBlockByKey(\"mcdev-issue-1157\") =%%",
                     "emailId": 531213,
-                    "emailSubject": "testExisting_ email subject",
-                    "exclusionFilter": "/* insert ampscript here */",
+                    "emailSubject": "testExisting_ email subject %%= ContentBlockByKey(\"mcdev-issue-1157\") =%%",
+                    "exclusionFilter": "/* insert ampscript here */ %%= ContentBlockById(1295064) =%%",
                     "isSalesforceTracking": false,
                     "isMultipart": true,
                     "isSendLogging": true,
                     "isStoppedOnJobError": false,
                     "keyword": "",
                     "modified": {},
-                    "preHeader": "testExisting_ email preheader",
+                    "preHeader": "testExisting_ email preheader %%= ContentBlockByKey(\"mcdev-issue-1157\") =%%",
                     "priority": 3,
                     "sendClassificationId": "95da425b-a06f-e611-96fe-38eaa7142c61",
                     "suppressionLists": [

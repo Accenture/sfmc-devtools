@@ -1,14 +1,17 @@
 {
-    "key": "testTemplated_journey_Quicksend",
-    "name": "testTemplated_journey_Quicksend",
+    "key": "testExisting_journey_Quicksend",
+    "name": "testExisting_journey_Quicksend",
+    "lastPublishedDate": "0001-01-01T00:00:00",
     "description": "",
+    "version": 1,
     "workflowApiVersion": 1,
+    "createdDate": "2024-04-24T12:18:43.47",
     "modifiedDate": "2024-04-24T12:19:12.803",
     "activities": [
         {
             "id": "e20dcaa3-a750-44cf-9ce8-42d00378b8b4",
             "key": "EMAILV2-1",
-            "name": "testTemplated_asset_mail",
+            "name": "testExisting_asset_mail",
             "description": "",
             "type": "EMAILV2",
             "outcomes": [
@@ -25,12 +28,12 @@
                 "triggeredSend": {
                     "autoAddSubscribers": true,
                     "autoUpdateSubscribers": true,
-                    "bccEmail": "%%= ContentBlockByName(\"Content Builder\\dont strip non ssjs content\") =%%",
-                    "ccEmail": "%%= ContentBlockByKey(\"mcdev-issue-1157\") =%%",
+                    "bccEmail": "%%= ContentBlockById(1295064) =%%",
+                    "ccEmail": "%%= ContentBlockById(1295064) =%%",
                     "created": {},
                     "description": "my activity info text",
-                    "dynamicEmailSubject": "testTemplated_ dynamic email subject %%= ContentBlockByKey(\"mcdev-issue-1157\") =%%",
-                    "emailSubject": "testTemplated_ email subject %%= ContentBlockByKey(\"mcdev-issue-1157\") =%%",
+                    "dynamicEmailSubject": "testExisting_ dynamic email subject %%= ContentBlockById(1295064) =%%",
+                    "emailSubject": "testExisting_ email subject %%= ContentBlockById(1295064) =%%",
                     "exclusionFilter": "/* insert ampscript here */ %%= ContentBlockById(1295064) =%%",
                     "isSalesforceTracking": false,
                     "isMultipart": true,
@@ -38,7 +41,7 @@
                     "isStoppedOnJobError": false,
                     "keyword": "",
                     "modified": {},
-                    "preHeader": "testTemplated_ email preheader %%= ContentBlockByKey(\"mcdev-issue-1157\") =%%",
+                    "preHeader": "testExisting_ email preheader %%= ContentBlockById(1295064) =%%",
                     "suppressTracking": true,
                     "throttleLimit": 0,
                     "throttleOpens": "1/1/0001 12:00:00 AM",
@@ -46,16 +49,16 @@
                     "isTrackingClicks": true,
                     "r__list_PathName": {
                         "publicationList": "my subscribers/All Subscribers",
-                        "suppressionLists": ["Suppression Lists/testTemplated_suppressionList"]
+                        "suppressionLists": ["Suppression Lists/testExisting_suppressionList"]
                     },
                     "r__dataExtension_key": {
-                        "domainExclusions": ["testTemplated_DomainExclusion"]
+                        "domainExclusions": ["testExisting_DomainExclusion"]
                     },
-                    "r__senderProfile_key": "testTemplated_senderProfile",
-                    "r__sendClassification_key": "testTemplated_sendClassification",
+                    "r__senderProfile_key": "testExisting_senderProfile",
+                    "r__sendClassification_key": "testExisting_sendClassification",
                     "c__priority": "High",
-                    "r__asset_name_readOnly": "testTemplated_asset_message",
-                    "r__asset_key": "testTemplated_asset_message"
+                    "r__asset_name_readOnly": "testExisting_asset_message",
+                    "r__asset_key": "testExisting_asset_message"
                 },
                 "applicationExtensionKey": "jb-email-activity"
             },
@@ -223,6 +226,7 @@
         "highThroughputSending": { "email": false }
     },
     "executionMode": "Production",
+    "status": "Draft",
     "scheduledStatus": "Draft",
     "r__folder_Path": "my journeys"
 }
