@@ -543,4 +543,258 @@ describe('type: asset', () => {
             return;
         });
     });
+
+    describe('ReplaceContentBlockByX ================', () => {
+        it('Should replace references with ContentBlockByName w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    asset: null,
+                },
+                'name'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].asset,
+                ['testExisting_asset_message'],
+                'should have found the right assets that need updating'
+            );
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.asset ? Object.keys(result.asset).length : 0,
+                5,
+                'only 5 assets expected'
+            );
+            // check if conversions happened
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.html.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-html-rcb-name',
+                    'html'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.preheader.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-preheader-rcb-name',
+                    'amp'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.text.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-text-rcb-name',
+                    'amp'
+                )
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                26,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should replace references with ContentBlockById w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    asset: null,
+                },
+                'id'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].asset,
+                ['testExisting_asset_message'],
+                'should have found the right assets that need updating'
+            );
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.asset ? Object.keys(result.asset).length : 0,
+                5,
+                'only 5 assets expected'
+            );
+            // check if conversions happened
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.html.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-html-rcb-id',
+                    'html'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.preheader.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-preheader-rcb-id',
+                    'amp'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.text.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-text-rcb-id',
+                    'amp'
+                )
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                26,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should replace references with ContentBlockByKey w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    asset: null,
+                },
+                'key'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].asset,
+                ['testExisting_asset_message'],
+                'should have found the right assets that need updating'
+            );
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.asset ? Object.keys(result.asset).length : 0,
+                5,
+                'only 5 assets expected'
+            );
+            // check if conversions happened
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.html.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-html-rcb-key',
+                    'html'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.preheader.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-preheader-rcb-key',
+                    'amp'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.text.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-text-rcb-key',
+                    'amp'
+                )
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                26,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
 });
