@@ -231,21 +231,21 @@ declare class Mcdev {
      *
      * @param {string} businessUnit references credentials from properties.json
      * @param {string | TypeKeyCombo} selectedTypes limit retrieval to given metadata type
-     * @param {string[]} keyArr customerkey of the metadata
+     * @param {string[] | undefined} keyArr customerkey of the metadata
      * @param {string} market market localizations
      * @returns {Promise.<MultiMetadataTypeList>} -
      */
-    static buildTemplate(businessUnit: string, selectedTypes: string | TypeKeyCombo, keyArr: string[], market: string): Promise<MultiMetadataTypeList>;
+    static buildTemplate(businessUnit: string, selectedTypes: string | TypeKeyCombo, keyArr: string[] | undefined, market: string): Promise<MultiMetadataTypeList>;
     /**
      * Build a specific metadata file based on a template.
      *
      * @param {string} businessUnit references credentials from properties.json
      * @param {string | TypeKeyCombo} selectedTypes limit retrieval to given metadata type
-     * @param {string[]} nameArr name of the metadata
+     * @param {string[] | undefined} nameArr name of the metadata
      * @param {string} market market localizations
      * @returns {Promise.<MultiMetadataTypeList>} -
      */
-    static buildDefinition(businessUnit: string, selectedTypes: string | TypeKeyCombo, nameArr: string[], market: string): Promise<MultiMetadataTypeList>;
+    static buildDefinition(businessUnit: string, selectedTypes: string | TypeKeyCombo, nameArr: string[] | undefined, market: string): Promise<MultiMetadataTypeList>;
     /**
      * Build a specific metadata file based on a template using a list of bu-market combos
      *

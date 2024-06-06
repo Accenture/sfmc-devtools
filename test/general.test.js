@@ -315,7 +315,7 @@ describe('GENERAL', () => {
                 const templateResult = await handler.buildTemplate(
                     buName,
                     typeKeyCombo,
-                    null,
+                    undefined,
                     'testSourceMarket'
                 );
                 assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
@@ -349,7 +349,7 @@ describe('GENERAL', () => {
                 const definitionResult = await handler.buildDefinition(
                     buName,
                     typeKeyCombo,
-                    null,
+                    undefined,
                     'testTargetMarket'
                 );
                 assert.equal(
@@ -692,7 +692,7 @@ describe('GENERAL', () => {
                 const templateResult = await handler.buildTemplate(
                     buName,
                     typeKeyCombo,
-                    null,
+                    undefined,
                     'testSourceMarket'
                 );
                 assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
