@@ -84,6 +84,15 @@ export namespace Util {
      */
     function _isValidType(selectedType: string, handleOutside?: boolean): boolean;
     /**
+     * helper for Mcdev.retrieve, Mcdev.retrieveAsTemplate and Mcdev.deploy
+     *
+     * @param {Mcdevrc} properties javascript object in .mcdevrc.json
+     * @param {string} businessUnit name of BU
+     * @param {boolean} [handleOutside] if the API reponse is irregular this allows you to handle it outside of this generic method
+     * @returns {boolean} bu found or not
+     */
+    function _isValidBU(properties: import("../../types/mcdev.d.js").Mcdevrc, businessUnit: string, handleOutside?: boolean): boolean;
+    /**
      * helper that deals with extracting type and subtype
      *
      * @param {string} selectedType "type" or "type-subtype"
