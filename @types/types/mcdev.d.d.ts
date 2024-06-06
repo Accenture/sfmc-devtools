@@ -35,9 +35,11 @@ export type TemplateMap = {
 };
 export type SupportedMetadataTypes = 'asset' | 'asset-archive' | 'asset-asset' | 'asset-audio' | 'asset-block' | 'asset-code' | 'asset-document' | 'asset-image' | 'asset-message' | 'asset-other' | 'asset-rawimage' | 'asset-template' | 'asset-textfile' | 'asset-video' | 'attributeGroup' | 'attributeSet' | 'automation' | 'campaign' | 'contentArea' | 'dataExtension' | 'dataExtensionField' | 'dataExtensionTemplate' | 'dataExtract' | 'dataExtractType' | 'discovery' | 'deliveryProfile' | 'email' | 'emailSend' | 'event' | 'fileLocation' | 'fileTransfer' | 'filter' | 'folder' | 'importFile' | 'journey' | 'list' | 'mobileCode' | 'mobileKeyword' | 'mobileMessage' | 'query' | 'role' | 'script' | 'sendClassification' | 'senderProfile' | 'transactionalEmail' | 'transactionalPush' | 'transactionalSMS' | 'triggeredSend' | 'user' | 'verification';
 /**
- * object-key=metadata type, value=array of external keys
+ * object-key=SupportedMetadataTypes, value=array of external keys
  */
-export type TypeKeyCombo = any;
+export type TypeKeyCombo = {
+    [x: string]: string[] | null;
+};
 /**
  * generic metadata item
  */

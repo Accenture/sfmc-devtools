@@ -285,7 +285,9 @@ export namespace Util {
      * @param {boolean} [returnEmpty] returns array with null element if false/not set; Retriever needs this to be false; Deployer needs it to be true
      * @returns {TypeKeyCombo} -
      */
-    function createTypeKeyCombo(typeArr: string[], keyArr: string[], returnEmpty?: boolean): any;
+    function createTypeKeyCombo(typeArr: string[], keyArr: string[], returnEmpty?: boolean): {
+        [x: string]: string[];
+    };
     /**
      * async version of Array.find()
      * returns the first element in the provided array that satisfies the provided testin function
