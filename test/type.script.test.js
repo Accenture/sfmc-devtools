@@ -87,12 +87,12 @@ describe('type: script', () => {
                 'returned metadata was not equal expected'
             );
             expect(
-                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'html')
+                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'ssjs')
             ).to.not.exist;
             expect(
-                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'ssjs')
+                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'html')
             ).to.equal(
-                await testUtils.getExpectedFile('9999999', 'script', 'get_ampincluded', 'ssjs')
+                await testUtils.getExpectedFile('9999999', 'script', 'get_ampincluded', 'html')
             );
 
             // test with mixed code (ssjs and ampscript side-by-side)
