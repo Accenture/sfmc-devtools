@@ -79,7 +79,7 @@ async function getActualTemplateJson(customerKey, type, subtype) {
  * @param {string} subtype of metadata
  * @param {string} ext file extension
  * @param {string} [filename] optional fileprefix that differs from customerKey
- * @returns {Promise.<string>} file
+ * @returns {Promise.<string | undefined>} file
  */
 async function getActualTemplateFile(customerKey, type, subtype, ext, filename) {
     const path = `./template/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`;
@@ -89,7 +89,7 @@ async function getActualTemplateFile(customerKey, type, subtype, ext, filename) 
         return File.readFile(filename ? pathSub : path, 'utf8');
     } catch {
         console.log(`File not found: ${filename ? pathSub : path}`); // eslint-disable-line no-console
-        return null;
+        return;
     }
 }
 
@@ -122,7 +122,7 @@ async function getActualDeployJson(customerKey, type, subtype, buName = 'testBU'
  * @param {string} ext file extension
  * @param {string} [filename] optional fileprefix that differs from customerKey
  * @param {string} [buName] used when we need to test on ParentBU
- * @returns {Promise.<string>} file content
+ * @returns {Promise.<string | undefined>} file content
  */
 async function getActualDeployFile(customerKey, type, subtype, ext, filename, buName = 'testBU') {
     const path = `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`;
@@ -132,7 +132,7 @@ async function getActualDeployFile(customerKey, type, subtype, ext, filename, bu
         return File.readFile(filename ? pathSub : path, 'utf8');
     } catch {
         console.log(`File not found: ${filename ? pathSub : path}`); // eslint-disable-line no-console
-        return null;
+        return;
     }
 }
 
