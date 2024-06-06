@@ -116,7 +116,7 @@
                 <ResetRetentionPeriodOnImport>false</ResetRetentionPeriodOnImport>
                 <DeleteAtEndOfRetentionPeriod>false</DeleteAtEndOfRetentionPeriod>
                 <RetainUntil />
-                <CategoryID>290821</CategoryID>
+                <CategoryID>2</CategoryID>
             </Results>
             <Results xsi:type="DataExtension">
                 <PartnerKey xsi:nil="true" />
