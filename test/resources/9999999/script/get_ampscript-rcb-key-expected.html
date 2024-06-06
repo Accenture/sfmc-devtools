@@ -1,0 +1,8 @@
+line1
+%%[
+    SET @test = 'bla bla'
+]%%
+line2 %%= ContentBlockByKey("mcdev-issue-1157") =%% still line2 line3
+<script runat="server">
+    Platform.Function.ContentBlockByKey("mcdev-issue-1157");
+</script>
