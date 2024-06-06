@@ -72,8 +72,8 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     Object.keys(result[buName]['senderProfile']).length,
-                    2,
-                    'retrieve should have returned 2 senderProfile'
+                    3,
+                    'retrieve should have returned 3 senderProfile'
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),

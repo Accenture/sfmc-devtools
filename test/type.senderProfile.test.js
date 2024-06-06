@@ -26,8 +26,8 @@ describe('type: senderProfile', () => {
             const result = cache.getCache();
             assert.equal(
                 result.senderProfile ? Object.keys(result.senderProfile).length : 0,
-                2,
-                'only one senderProfile expected'
+                3,
+                '3 senderProfiles expected'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_senderProfile', 'senderProfile'),
@@ -58,8 +58,8 @@ describe('type: senderProfile', () => {
             const result = cache.getCache();
             assert.equal(
                 result.senderProfile ? Object.keys(result.senderProfile).length : 0,
-                3,
-                'two senderProfiles expected'
+                4,
+                '4 senderProfiles expected'
             );
             // confirm created item
             assert.deepEqual(
@@ -141,6 +141,115 @@ describe('type: senderProfile', () => {
             // THEN
             assert.equal(process.exitCode, 0, 'deleteByKey should not have thrown an error');
             assert.equal(isDeleted, true, 'deleteByKey should have returned true');
+            return;
+        });
+    });
+
+    describe('ReplaceContentBlockByX ================', () => {
+        it('Should replace references with ContentBlockByName w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    senderProfile: null,
+                },
+                'name'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].senderProfile,
+                ['testExisting_senderProfile_rcb'],
+                'should have found the right senderProfiles that need updating'
+            );
+
+            // check if conversions happened
+            // check if conversions happened
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_senderProfile_rcb', 'senderProfile'),
+                await testUtils.getExpectedJson('9999999', 'senderProfile', 'get-rcb-name'),
+                'returned JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                13,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should replace references with ContentBlockById w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    senderProfile: null,
+                },
+                'id'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].senderProfile,
+                ['testExisting_senderProfile_rcb'],
+                'should have found the right senderProfiles that need updating'
+            );
+
+            // check if conversions happened
+            // check if conversions happened
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_senderProfile_rcb', 'senderProfile'),
+                await testUtils.getExpectedJson('9999999', 'senderProfile', 'get-rcb-id'),
+                'returned JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                13,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should replace references with ContentBlockByKey w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    senderProfile: null,
+                },
+                'key'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].senderProfile,
+                ['testExisting_senderProfile_rcb'],
+                'should have found the right assets that need updating'
+            );
+
+            // check if conversions happened
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_senderProfile_rcb', 'senderProfile'),
+                await testUtils.getExpectedJson('9999999', 'senderProfile', 'get-rcb-key'),
+                'returned JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                13,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
             return;
         });
     });
