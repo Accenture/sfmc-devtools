@@ -17,142 +17,338 @@ describe('GENERAL', () => {
     });
 
     describe('ReplaceContentBlockByX ================', () => {
-        it('Should replace references with ContentBlockByName w/o deploy', async () => {
-            handler.setOptions({ skipDeploy: true });
+        describe('with types specified ================', () => {
+            it('Should replace references with ContentBlockByName w/o deploy', async () => {
+                handler.setOptions({ skipDeploy: true });
 
-            // WHEN
-            const replace = await handler.replaceCbReference(
-                'testInstance/testBU',
-                {
-                    journey: null,
-                    senderProfile: null,
-                },
-                'name'
-            );
-            // THEN
-            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
-            // retrieve result
-            assert.deepEqual(
-                replace['testInstance/testBU'].journey,
-                ['testExisting_journey_Quicksend'],
-                'should have found the right journeys that need updating'
-            );
-            assert.deepEqual(
-                replace['testInstance/testBU'].senderProfile,
-                ['testExisting_senderProfile_rcb'],
-                'should have found the right senderProfiles that need updating'
-            );
+                // WHEN
+                const replace = await handler.replaceCbReference(
+                    'testInstance/testBU',
+                    {
+                        journey: null,
+                        senderProfile: null,
+                    },
+                    'name'
+                );
+                // THEN
+                assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+                // retrieve result
+                assert.deepEqual(
+                    replace['testInstance/testBU'].journey,
+                    ['testExisting_journey_Quicksend'],
+                    'should have found the right journeys that need updating'
+                );
+                assert.deepEqual(
+                    replace['testInstance/testBU'].senderProfile,
+                    ['testExisting_senderProfile_rcb'],
+                    'should have found the right senderProfiles that need updating'
+                );
 
-            // check if conversions happened
-            assert.deepEqual(
-                await testUtils.getActualJson('testExisting_journey_Quicksend', 'journey'),
-                await testUtils.getExpectedJson('9999999', 'journey', 'get-quicksend-rcb-name'),
-                'returned JSON was not equal expected'
-            );
-            assert.deepEqual(
-                await testUtils.getActualJson('testExisting_senderProfile_rcb', 'senderProfile'),
-                await testUtils.getExpectedJson('9999999', 'senderProfile', 'get-rcb-name'),
-                'returned JSON was not equal expected'
-            );
+                // check if conversions happened
+                assert.deepEqual(
+                    await testUtils.getActualJson('testExisting_journey_Quicksend', 'journey'),
+                    await testUtils.getExpectedJson('9999999', 'journey', 'get-quicksend-rcb-name'),
+                    'returned JSON was not equal expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualJson(
+                        'testExisting_senderProfile_rcb',
+                        'senderProfile'
+                    ),
+                    await testUtils.getExpectedJson('9999999', 'senderProfile', 'get-rcb-name'),
+                    'returned JSON was not equal expected'
+                );
 
-            assert.equal(
-                testUtils.getAPIHistoryLength(),
-                51,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            );
-            return;
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    51,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+                return;
+            });
+
+            it('Should replace references with ContentBlockById w/o deploy', async () => {
+                handler.setOptions({ skipDeploy: true });
+
+                // WHEN
+                const replace = await handler.replaceCbReference(
+                    'testInstance/testBU',
+                    {
+                        journey: null,
+                        senderProfile: null,
+                    },
+                    'id'
+                );
+                // THEN
+                assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+                // retrieve result
+                assert.deepEqual(
+                    replace['testInstance/testBU'].journey,
+                    ['testExisting_journey_Quicksend'],
+                    'should have found the right journeys that need updating'
+                );
+                assert.deepEqual(
+                    replace['testInstance/testBU'].senderProfile,
+                    ['testExisting_senderProfile_rcb'],
+                    'should have found the right senderProfiles that need updating'
+                );
+
+                // check if conversions happened
+                assert.deepEqual(
+                    await testUtils.getActualJson('testExisting_journey_Quicksend', 'journey'),
+                    await testUtils.getExpectedJson('9999999', 'journey', 'get-quicksend-rcb-id'),
+                    'returned JSON was not equal expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualJson(
+                        'testExisting_senderProfile_rcb',
+                        'senderProfile'
+                    ),
+                    await testUtils.getExpectedJson('9999999', 'senderProfile', 'get-rcb-id'),
+                    'returned JSON was not equal expected'
+                );
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    51,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+                return;
+            });
+
+            it('Should replace references with ContentBlockByKey w/o deploy', async () => {
+                handler.setOptions({ skipDeploy: true });
+
+                // WHEN
+                const replace = await handler.replaceCbReference(
+                    'testInstance/testBU',
+                    {
+                        journey: null,
+                        senderProfile: null,
+                    },
+                    'key'
+                );
+                // THEN
+                assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+                // retrieve result
+                assert.deepEqual(
+                    replace['testInstance/testBU'].journey,
+                    ['testExisting_journey_Quicksend'],
+                    'should have found the right assets that need updating'
+                );
+                assert.deepEqual(
+                    replace['testInstance/testBU'].senderProfile,
+                    ['testExisting_senderProfile_rcb'],
+                    'should have found the right senderProfiles that need updating'
+                );
+
+                // check if conversions happened
+                assert.deepEqual(
+                    await testUtils.getActualJson('testExisting_journey_Quicksend', 'journey'),
+                    await testUtils.getExpectedJson('9999999', 'journey', 'get-quicksend-rcb-key'),
+                    'returned JSON was not equal expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualJson(
+                        'testExisting_senderProfile_rcb',
+                        'senderProfile'
+                    ),
+                    await testUtils.getExpectedJson('9999999', 'senderProfile', 'get-rcb-key'),
+                    'returned JSON was not equal expected'
+                );
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    51,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+                return;
+            });
         });
 
-        it('Should replace references with ContentBlockById w/o deploy', async () => {
-            handler.setOptions({ skipDeploy: true });
+        describe('without types specified ================', () => {
+            it('Should replace references with ContentBlockByName w/o deploy', async () => {
+                handler.setOptions({ skipDeploy: true });
 
-            // WHEN
-            const replace = await handler.replaceCbReference(
-                'testInstance/testBU',
-                {
-                    journey: null,
-                    senderProfile: null,
-                },
-                'id'
-            );
-            // THEN
-            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
-            // retrieve result
-            assert.deepEqual(
-                replace['testInstance/testBU'].journey,
-                ['testExisting_journey_Quicksend'],
-                'should have found the right journeys that need updating'
-            );
-            assert.deepEqual(
-                replace['testInstance/testBU'].senderProfile,
-                ['testExisting_senderProfile_rcb'],
-                'should have found the right senderProfiles that need updating'
-            );
+                // WHEN
+                const replace = await handler.replaceCbReference(
+                    'testInstance/testBU',
+                    undefined,
+                    'name'
+                );
+                // THEN
+                assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+                // retrieve result
+                assert.deepEqual(
+                    replace['testInstance/testBU'].asset,
+                    ['testExisting_asset_message'],
+                    'should have found the right assets that need updating'
+                );
+                assert.deepEqual(
+                    replace['testInstance/testBU'].journey,
+                    ['testExisting_journey_Quicksend'],
+                    'should have found the right assets that need updating'
+                );
+                assert.deepEqual(
+                    replace['testInstance/testBU'].script,
+                    ['testExisting_script_ampscript', 'testExisting_script_ampincluded'],
+                    'should have found the right scripts that need updating'
+                );
+                assert.deepEqual(
+                    replace['testInstance/testBU'].senderProfile,
+                    ['testExisting_senderProfile_rcb'],
+                    'should have found the right senderProfiles that need updating'
+                );
+                assert.deepEqual(
+                    replace['testInstance/testBU'].triggeredSend,
+                    ['testExisting_triggeredSend_rcb'],
+                    'should have found the right assets that need updating'
+                );
 
-            // check if conversions happened
-            assert.deepEqual(
-                await testUtils.getActualJson('testExisting_journey_Quicksend', 'journey'),
-                await testUtils.getExpectedJson('9999999', 'journey', 'get-quicksend-rcb-id'),
-                'returned JSON was not equal expected'
-            );
-            assert.deepEqual(
-                await testUtils.getActualJson('testExisting_senderProfile_rcb', 'senderProfile'),
-                await testUtils.getExpectedJson('9999999', 'senderProfile', 'get-rcb-id'),
-                'returned JSON was not equal expected'
-            );
+                // check if conversions happened
+                assert.deepEqual(
+                    await testUtils.getActualJson('testExisting_journey_Quicksend', 'journey'),
+                    await testUtils.getExpectedJson('9999999', 'journey', 'get-quicksend-rcb-name'),
+                    'returned JSON was not equal expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualJson(
+                        'testExisting_senderProfile_rcb',
+                        'senderProfile'
+                    ),
+                    await testUtils.getExpectedJson('9999999', 'senderProfile', 'get-rcb-name'),
+                    'returned JSON was not equal expected'
+                );
 
-            assert.equal(
-                testUtils.getAPIHistoryLength(),
-                51,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            );
-            return;
-        });
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    116,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+                return;
+            });
 
-        it('Should replace references with ContentBlockByKey w/o deploy', async () => {
-            handler.setOptions({ skipDeploy: true });
+            it('Should replace references with ContentBlockById w/o deploy', async () => {
+                handler.setOptions({ skipDeploy: true });
 
-            // WHEN
-            const replace = await handler.replaceCbReference(
-                'testInstance/testBU',
-                {
-                    journey: null,
-                    senderProfile: null,
-                },
-                'key'
-            );
-            // THEN
-            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
-            // retrieve result
-            assert.deepEqual(
-                replace['testInstance/testBU'].journey,
-                ['testExisting_journey_Quicksend'],
-                'should have found the right assets that need updating'
-            );
-            assert.deepEqual(
-                replace['testInstance/testBU'].senderProfile,
-                ['testExisting_senderProfile_rcb'],
-                'should have found the right senderProfiles that need updating'
-            );
+                // WHEN
+                const replace = await handler.replaceCbReference(
+                    'testInstance/testBU',
+                    undefined,
+                    'id'
+                );
+                // THEN
+                assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+                // retrieve result
+                assert.deepEqual(
+                    replace['testInstance/testBU'].asset,
+                    ['testExisting_asset_message'],
+                    'should have found the right assets that need updating'
+                );
+                assert.deepEqual(
+                    replace['testInstance/testBU'].journey,
+                    ['testExisting_journey_Quicksend'],
+                    'should have found the right assets that need updating'
+                );
+                assert.deepEqual(
+                    replace['testInstance/testBU'].script,
+                    ['testExisting_script_ampscript', 'testExisting_script_ampincluded'],
+                    'should have found the right scripts that need updating'
+                );
+                assert.deepEqual(
+                    replace['testInstance/testBU'].senderProfile,
+                    ['testExisting_senderProfile_rcb'],
+                    'should have found the right senderProfiles that need updating'
+                );
+                assert.deepEqual(
+                    replace['testInstance/testBU'].triggeredSend,
+                    ['testExisting_triggeredSend_rcb'],
+                    'should have found the right assets that need updating'
+                );
 
-            // check if conversions happened
-            assert.deepEqual(
-                await testUtils.getActualJson('testExisting_journey_Quicksend', 'journey'),
-                await testUtils.getExpectedJson('9999999', 'journey', 'get-quicksend-rcb-key'),
-                'returned JSON was not equal expected'
-            );
-            assert.deepEqual(
-                await testUtils.getActualJson('testExisting_senderProfile_rcb', 'senderProfile'),
-                await testUtils.getExpectedJson('9999999', 'senderProfile', 'get-rcb-key'),
-                'returned JSON was not equal expected'
-            );
+                // check if conversions happened
+                assert.deepEqual(
+                    await testUtils.getActualJson('testExisting_journey_Quicksend', 'journey'),
+                    await testUtils.getExpectedJson('9999999', 'journey', 'get-quicksend-rcb-id'),
+                    'returned JSON was not equal expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualJson(
+                        'testExisting_senderProfile_rcb',
+                        'senderProfile'
+                    ),
+                    await testUtils.getExpectedJson('9999999', 'senderProfile', 'get-rcb-id'),
+                    'returned JSON was not equal expected'
+                );
 
-            assert.equal(
-                testUtils.getAPIHistoryLength(),
-                51,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            );
-            return;
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    116,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+                return;
+            });
+
+            it('Should replace references with ContentBlockByKey w/o deploy', async () => {
+                handler.setOptions({ skipDeploy: true });
+
+                // WHEN
+                const replace = await handler.replaceCbReference(
+                    'testInstance/testBU',
+                    undefined,
+                    'key'
+                );
+                // THEN
+                assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+                // retrieve result
+                assert.deepEqual(
+                    replace['testInstance/testBU'].asset,
+                    ['testExisting_asset_message'],
+                    'should have found the right assets that need updating'
+                );
+                assert.deepEqual(
+                    replace['testInstance/testBU'].journey,
+                    ['testExisting_journey_Quicksend'],
+                    'should have found the right assets that need updating'
+                );
+                assert.deepEqual(
+                    replace['testInstance/testBU'].script,
+                    ['testExisting_script_ampscript', 'testExisting_script_ampincluded'],
+                    'should have found the right scripts that need updating'
+                );
+                assert.deepEqual(
+                    replace['testInstance/testBU'].senderProfile,
+                    ['testExisting_senderProfile_rcb'],
+                    'should have found the right senderProfiles that need updating'
+                );
+                assert.deepEqual(
+                    replace['testInstance/testBU'].triggeredSend,
+                    ['testExisting_triggeredSend_rcb'],
+                    'should have found the right assets that need updating'
+                );
+
+                // check if conversions happened
+                assert.deepEqual(
+                    await testUtils.getActualJson('testExisting_journey_Quicksend', 'journey'),
+                    await testUtils.getExpectedJson('9999999', 'journey', 'get-quicksend-rcb-key'),
+                    'returned JSON was not equal expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualJson(
+                        'testExisting_senderProfile_rcb',
+                        'senderProfile'
+                    ),
+                    await testUtils.getExpectedJson('9999999', 'senderProfile', 'get-rcb-key'),
+                    'returned JSON was not equal expected'
+                );
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    116,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+                return;
+            });
         });
     });
 
@@ -1191,7 +1387,7 @@ describe('GENERAL', () => {
 
             // check if certain types were returned
             assert.equal(
-                typeArr.find((type) => type.apiName === 'dataExtension').apiName,
+                typeArr.find((type) => type.apiName === 'dataExtension')?.apiName,
                 'dataExtension',
                 'Expected to find dataExtension type'
             );
