@@ -1,15 +1,18 @@
-import chai, { assert, expect } from 'chai';
+import * as chai from 'chai';
+const assert = chai.assert;
+const expect = chai.expect;
+
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const file = chaiFiles.file;
 
 describe('type: query', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
@@ -19,13 +22,13 @@ describe('type: query', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['query']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                3,
-                'only three queries expected'
+                4,
+                'only 4 queries expected'
             );
             // normal test
             assert.deepEqual(
@@ -33,10 +36,10 @@ describe('type: query', () => {
                 await testUtils.getExpectedJson('9999999', 'query', 'get'),
                 'returned metadata with correct key was not equal expected'
             );
-            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'query', 'get', 'sql'))
+            expect(await testUtils.getActualFile('testExisting_query', 'query', 'sql')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'query', 'get', 'sql')
             );
-            // check if targetKey was overwritten
+            // check if r__dataExtension_key was overwritten
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_query2', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'get2'),
@@ -50,11 +53,12 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should retrieve one specific query by key', async () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['query'], ['testExisting_query']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -67,8 +71,8 @@ describe('type: query', () => {
                 await testUtils.getExpectedJson('9999999', 'query', 'get'),
                 'returned metadata was not equal expected'
             );
-            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'query', 'get', 'sql'))
+            expect(await testUtils.getActualFile('testExisting_query', 'query', 'sql')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'query', 'get', 'sql')
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -77,28 +81,29 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should retrieve one specific query via --like', async () => {
             // WHEN
             handler.setOptions({ like: { key: '%Existing_query' } });
             await handler.retrieve('testInstance/testBU', ['query']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                3,
-                'three queries in cache expected'
+                4,
+                '4 queries in cache expected'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_query', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'get'),
                 'returned metadata was not equal expected'
             );
-            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'query', 'get', 'sql'))
+            expect(await testUtils.getActualFile('testExisting_query', 'query', 'sql')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'query', 'get', 'sql')
             );
-            expect(file(testUtils.getActualFile('testExisting_query2', 'query', 'sql'))).to.not
+            expect(await testUtils.getActualFile('testExisting_query2', 'query', 'sql')).to.not
                 .exist;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -107,23 +112,24 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should not retrieve any query via --like and key due to a mismatching filter', async () => {
             // WHEN
             handler.setOptions({ like: { key: 'NotExisting_query' } });
             await handler.retrieve('testInstance/testBU', ['query']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                3,
-                'three queries in cache expected'
+                4,
+                '4 queries in cache expected'
             );
 
-            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.not
+            expect(await testUtils.getActualFile('testExisting_query', 'query', 'sql')).to.not
                 .exist;
-            expect(file(testUtils.getActualFile('testExisting_query2', 'query', 'sql'))).to.not
+            expect(await testUtils.getActualFile('testExisting_query2', 'query', 'sql')).to.not
                 .exist;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -133,10 +139,12 @@ describe('type: query', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & upsert a query', async () => {
             // WHEN
             const resultDeploy = await handler.deploy(
@@ -145,7 +153,7 @@ describe('type: query', () => {
                 ['testNew_query', 'testExisting_query']
             );
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             assert.equal(
                 resultDeploy['testInstance/testBU']?.query
                     ? Object.keys(resultDeploy['testInstance/testBU']?.query).length
@@ -157,8 +165,8 @@ describe('type: query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                4,
-                'four queries expected in cache'
+                5,
+                '5 queries expected in cache'
             );
             // confirm created item
             assert.deepEqual(
@@ -166,8 +174,8 @@ describe('type: query', () => {
                 await testUtils.getExpectedJson('9999999', 'query', 'post'),
                 'returned metadata was not equal expected for insert query'
             );
-            expect(file(testUtils.getActualFile('testNew_query', 'query', 'sql'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'query', 'post', 'sql'))
+            expect(await testUtils.getActualFile('testNew_query', 'query', 'sql')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'query', 'post', 'sql')
             );
             // confirm updated item
             assert.deepEqual(
@@ -175,8 +183,8 @@ describe('type: query', () => {
                 await testUtils.getExpectedJson('9999999', 'query', 'patch'),
                 'returned metadata was not equal expected for insert query'
             );
-            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'query', 'patch', 'sql'))
+            expect(await testUtils.getActualFile('testExisting_query', 'query', 'sql')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'query', 'patch', 'sql')
             );
             // check number of API calls
             assert.equal(
@@ -186,6 +194,7 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should deploy and execute with --execute', async () => {
             handler.setOptions({ execute: true });
             // WHEN
@@ -197,7 +206,7 @@ describe('type: query', () => {
             // THEN
             assert.equal(
                 process.exitCode,
-                false,
+                0,
                 'deploy with --execute should not have thrown an error'
             );
             // confirm updated item
@@ -206,8 +215,8 @@ describe('type: query', () => {
                 await testUtils.getExpectedJson('9999999', 'query', 'patch'),
                 'returned metadata was not equal expected for insert query'
             );
-            expect(file(testUtils.getActualFile('testExisting_query', 'query', 'sql'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'query', 'patch', 'sql'))
+            expect(await testUtils.getActualFile('testExisting_query', 'query', 'sql')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'query', 'patch', 'sql')
             );
             // check number of API calls
             assert.equal(
@@ -218,10 +227,12 @@ describe('type: query', () => {
             return;
         });
     });
+
     describe('FixKeys ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should change the key during update with --changeKeyValue', async () => {
             // WHEN
             await handler.retrieve(
@@ -241,9 +252,16 @@ describe('type: query', () => {
             // THEN
             assert.equal(
                 process.exitCode,
-                false,
+                0,
                 'deploy --changeKeyValue should not have thrown an error'
             );
+            const upsertCallout = testUtils.getRestCallout('patch', '/automation/v1/queries/%');
+            assert.equal(
+                upsertCallout?.key,
+                'testExisting_query_fixedKeys',
+                'key in create callout was not as expected'
+            );
+
             assert.equal(
                 Object.keys(deployed['testInstance/testBU'].query).length,
                 1,
@@ -262,8 +280,8 @@ describe('type: query', () => {
                 'returned metadata was not equal expected for update query'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql')));
+                await testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql'));
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -272,6 +290,7 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should change the key during update with --changeKeyField', async () => {
             // WHEN
             await handler.retrieve(
@@ -288,9 +307,16 @@ describe('type: query', () => {
             // THEN
             assert.equal(
                 process.exitCode,
-                false,
+                0,
                 'deploy --changeKeyValue should not have thrown an error'
             );
+            const upsertCallout = testUtils.getRestCallout('patch', '/automation/v1/queries/%');
+            assert.equal(
+                upsertCallout?.key,
+                'testExisting_query_fixedKeys',
+                'key in create callout was not as expected'
+            );
+
             assert.equal(
                 Object.keys(deployed['testInstance/testBU'].query).length,
                 1,
@@ -308,8 +334,8 @@ describe('type: query', () => {
                 'returned metadata was not equal expected for update query'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql')));
+                await testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql'));
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -318,17 +344,119 @@ describe('type: query', () => {
             );
             return;
         });
+
+        it('Should change the key during update with --changeKeyField and --keySuffix', async () => {
+            // WHEN
+            await handler.retrieve(
+                'testInstance/testBU',
+                ['query'],
+                ['testExisting_query_fixKeysSuffix']
+            );
+            handler.setOptions({ changeKeyField: 'name', keySuffix: '_DEV', fromRetrieve: true });
+            const deployed = await handler.deploy(
+                'testInstance/testBU',
+                ['query'],
+                ['testExisting_query_fixKeysSuffix']
+            );
+            // THEN
+            assert.equal(
+                process.exitCode,
+                0,
+                'deploy --changeKeyValue --keySuffix should not have thrown an error'
+            );
+            assert.equal(
+                Object.keys(deployed['testInstance/testBU'].query).length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            const upsertCallout = testUtils.getRestCallout('patch', '/automation/v1/queries/%');
+
+            assert.equal(
+                upsertCallout?.key,
+                'testExisting_query_fixedKeys_DEV',
+                'key in create callout was not as expected'
+            );
+            assert.equal(
+                Object.keys(deployed['testInstance/testBU'].query)[0],
+                'testExisting_query_fixedKeys_DEV',
+                'returned keys do not correspond to expected fixed keys'
+            );
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_query_fixedKeys_DEV', 'query'),
+                await testUtils.getExpectedJson('9999999', 'query', 'patch_fixKeysSuffix'),
+                'returned metadata was not equal expected for update query'
+            );
+            expect(
+                await testUtils.getActualFile('testExisting_query_fixedKeys_DEV', 'query', 'sql')
+            ).to.equal(
+                await testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeysSuffix', 'sql')
+            );
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                14,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should change the key during create with and --keySuffix', async () => {
+            handler.setOptions({ keySuffix: '_DEV' });
+            const deployed = await handler.deploy(
+                'testInstance/_ParentBU_',
+                ['query'],
+                ['testNew_query']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy --keySuffix should not have thrown an error');
+            assert.equal(
+                Object.keys(deployed['testInstance/_ParentBU_'].query).length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            assert.equal(
+                Object.keys(deployed['testInstance/_ParentBU_'].query)[0],
+                'testNew_query_DEV',
+                'returned keys do not correspond to expected fixed keys'
+            );
+
+            const createCallout = testUtils.getRestCallout('post', '/automation/v1/queries/');
+            assert.equal(
+                createCallout?.key,
+                'testNew_query_DEV',
+                'key in create callout was not as expected'
+            );
+
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson('testNew_query_DEV', 'query', '_ParentBU_'),
+                await testUtils.getExpectedJson('1111111', 'query', 'patch_keySuffix'),
+                'returned metadata was not equal expected for update query'
+            );
+
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                4,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
         it('Should run fixKeys but not find fixable keys and hence stop', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false } });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
-                'testExisting_query',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['query'],
+                ['testExisting_query']
+            );
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // check which keys were fixed
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['query'].length,
                 0,
                 'expected to find no keys to be fixed'
             );
@@ -348,25 +476,27 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should fixKeys by key WITHOUT re-retrieving dependent types', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false } });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
-                'testExisting_query_fixKeys',
-                'testExisting_query',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['query'],
+                ['testExisting_query_fixKeys', 'testExisting_query']
+            );
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['query'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['query'][0],
                 'testExisting_query_fixedKeys',
                 'returned keys do not correspond to expected fixed keys'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_query_fixedKeys', 'query'),
@@ -374,8 +504,8 @@ describe('type: query', () => {
                 'returned metadata was not equal expected for update query'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql')));
+                await testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql'));
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -384,27 +514,80 @@ describe('type: query', () => {
             );
             return;
         });
-        it('Should fixKeys by key WITHOUT re-retrieving dependent types and then --execute', async () => {
+
+        it('Should fixKeys by key with --keySuffix WITHOUT re-retrieving dependent types', async () => {
             // WHEN
-            handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, execute: true });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
-                'testExisting_query_fixKeys',
-                'testExisting_query',
-            ]);
+            handler.setOptions({
+                keySuffix: '_DEV',
+                skipInteraction: { fixKeysReretrieve: false },
+            });
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['query'],
+                ['testExisting_query_fixKeysSuffix', 'testExisting_query']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
+
+            const upsertCallout = testUtils.getRestCallout('patch', '/automation/v1/queries/%');
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                upsertCallout?.key,
+                'testExisting_query_fixedKeys_DEV',
+                'key in create callout was not as expected'
+            );
+
+            assert.equal(
+                resultFixKeys['testInstance/testBU']['query'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['query'][0],
+                'testExisting_query_fixedKeys_DEV',
+                'returned keys do not correspond to expected fixed keys'
+            );
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_query_fixedKeys_DEV', 'query'),
+                await testUtils.getExpectedJson('9999999', 'query', 'patch_fixKeysSuffix'),
+                'returned metadata was not equal expected for update query'
+            );
+            expect(
+                await testUtils.getActualFile('testExisting_query_fixedKeys_DEV', 'query', 'sql')
+            ).to.equal(
+                await testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeysSuffix', 'sql')
+            );
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                16,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should fixKeys by key WITHOUT re-retrieving dependent types and then --execute', async () => {
+            // WHEN
+            handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, execute: true });
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['query'],
+                ['testExisting_query_fixKeys', 'testExisting_query']
+            );
+            assert.equal(
+                resultFixKeys['testInstance/testBU']['query'].length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            assert.equal(
+                resultFixKeys['testInstance/testBU']['query'][0],
                 'testExisting_query_fixedKeys',
                 'returned keys do not correspond to expected fixed keys'
             );
             // THEN
             assert.equal(
                 process.exitCode,
-                false,
+                0,
                 'fixKeys with --execute should not have thrown an error'
             );
             // confirm updated item
@@ -414,8 +597,8 @@ describe('type: query', () => {
                 'returned metadata was not equal expected for update query'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql')));
+                await testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql'));
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -424,25 +607,27 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should fixKeys by key AND re-retrieve dependent types', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: true } });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
-                'testExisting_query_fixKeys',
-                'testExisting_query',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['query'],
+                ['testExisting_query_fixKeys', 'testExisting_query']
+            );
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['query'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['query'][0],
                 'testExisting_query_fixedKeys',
                 'returned keys do not correspond to expected fixed keys'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_query_fixedKeys', 'query'),
@@ -450,37 +635,39 @@ describe('type: query', () => {
                 'returned metadata was not equal expected for update query'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql')));
+                await testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql'));
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                34,
+                38,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
+
         it('Should fixKeys by key AND re-retrieve dependent types and then --execute', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: true }, execute: true });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query', [
-                'testExisting_query_fixKeys',
-                'testExisting_query',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['query'],
+                ['testExisting_query_fixKeys', 'testExisting_query']
+            );
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['query'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['query'][0],
                 'testExisting_query_fixedKeys',
                 'returned keys do not correspond to expected fixed keys'
             );
             // THEN
             assert.equal(
                 process.exitCode,
-                false,
+                0,
                 'fixKeys with --execute should not have thrown an error'
             );
             // confirm updated item
@@ -490,35 +677,36 @@ describe('type: query', () => {
                 'returned metadata was not equal expected for update query'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql')));
+                await testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql'));
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                36,
+                40,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
+
         it('Should fixKeys via --like WITHOUT re-retrieving dependent types', async () => {
             // WHEN
             handler.setOptions({
                 like: { key: 'testExisting_query_f%' },
                 skipInteraction: { fixKeysReretrieve: false },
             });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'query');
+            const resultFixKeys = await handler.fixKeys('testInstance/testBU', ['query']);
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
-                1,
+                resultFixKeys['testInstance/testBU']['query'].length,
+                2,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['query'][0],
                 'testExisting_query_fixedKeys',
                 'returned keys do not correspond to expected fixed keys'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_query_fixedKeys', 'query'),
@@ -526,17 +714,18 @@ describe('type: query', () => {
                 'returned metadata was not equal expected for update query'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql')));
+                await testUtils.getActualFile('testExisting_query_fixedKeys', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeys', 'sql'));
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                13,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
     });
+
     describe('Templating ================', () => {
         it('Should create a query template via retrieveAsTemplate and build it', async () => {
             // GIVEN there is a template
@@ -547,11 +736,7 @@ describe('type: query', () => {
                 'testSourceMarket'
             );
             // WHEN
-            assert.equal(
-                process.exitCode,
-                false,
-                'retrieveAsTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'retrieveAsTemplate should not have thrown an error');
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
                 1,
@@ -563,20 +748,16 @@ describe('type: query', () => {
                 'returned template JSON of retrieveAsTemplate was not equal expected'
             );
             expect(
-                file(testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'template', 'sql')));
+                await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
             // THEN
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'query',
-                'testExisting_query',
+                ['testExisting_query'],
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_query', 'query'),
@@ -584,8 +765,8 @@ describe('type: query', () => {
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'build', 'sql')));
+                await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -594,6 +775,7 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should create a query template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['query']);
@@ -605,7 +787,7 @@ describe('type: query', () => {
                 'testSourceMarket'
             );
             // WHEN
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
 
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
@@ -618,20 +800,16 @@ describe('type: query', () => {
                 'returned template JSON of buildTemplate was not equal expected'
             );
             expect(
-                file(testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'template', 'sql')));
+                await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
             // THEN
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'query',
-                'testExisting_query',
+                ['testExisting_query'],
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_query', 'query'),
@@ -639,8 +817,8 @@ describe('type: query', () => {
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'query', 'build', 'sql')));
+                await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -650,6 +828,7 @@ describe('type: query', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN
@@ -659,12 +838,13 @@ describe('type: query', () => {
                 'testExisting_query'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
 
             assert.equal(isDeleted, true, 'should have deleted the item');
             return;
         });
     });
+
     describe('CI/CD ================', () => {
         it('Should return a list of files based on their type and key', async () => {
             // WHEN
@@ -672,11 +852,7 @@ describe('type: query', () => {
                 'testExisting_query',
             ]);
             // THEN
-            assert.equal(
-                process.exitCode,
-                false,
-                'getFilesToCommit should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'getFilesToCommit should not have thrown an error');
             assert.equal(fileList.length, 2, 'expected only 2 file paths');
 
             assert.equal(
@@ -692,12 +868,13 @@ describe('type: query', () => {
             return;
         });
     });
+
     describe('Execute ================', () => {
         it('Should start a query by key', async () => {
             const executedKeys = await handler.execute('testInstance/testBU', 'query', [
                 'testExisting_query',
             ]);
-            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
@@ -710,10 +887,11 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should start a query selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExist%query' } });
             const executedKeys = await handler.execute('testInstance/testBU', 'query');
-            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
@@ -726,12 +904,13 @@ describe('type: query', () => {
             );
             return;
         });
+
         it('Should not start executing a query because key and --like was specified', async () => {
             handler.setOptions({ like: { key: 'testExisting%' } });
             const executedKeys = await handler.execute('testInstance/testBU', 'query', [
                 'testExisting_query',
             ]);
-            assert.equal(process.exitCode, true, 'execute should have thrown an error');
+            assert.equal(process.exitCode, 1, 'execute should have thrown an error');
             assert.equal(
                 Object.keys(executedKeys).length,
                 0,

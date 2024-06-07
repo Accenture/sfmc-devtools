@@ -6,10 +6,9 @@
     "createdDate": "2022-11-07T02:24:00",
     "modifiedDate": "2022-11-07T02:25:00",
     "subscriptions": {
-        "shortCode": "4912312345678",
         "countryCode": "",
         "autoAddSubscriber": true,
         "updateSubscriber": true,
-        "keyword": "TESTEXISTING_KEYWORD"
+        "r__mobileKeyword_key": "4912312345678.TESTEXISTING_KEYWORD"
     }
 }

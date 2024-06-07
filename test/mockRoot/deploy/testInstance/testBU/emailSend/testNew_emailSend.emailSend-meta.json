@@ -1,0 +1,36 @@
+{
+    "Additional": "",
+    "AutoBccEmail": "",
+    "BccEmail": "",
+    "CCEmail": "",
+    "CreatedDate": "2022-11-14T12:27:29.963",
+    "CustomerKey": "testNew_emailSend",
+    "DeduplicateByEmail": false,
+    "Description": "created on deploy",
+    "DynamicEmailSubject": "testExisting_asset_email",
+    "EmailSubject": "testExisting_asset_email",
+    "ExclusionFilter": "",
+    "IsMultipart": true,
+    "IsSendLogging": false,
+    "IsWrapped": true,
+    "ModifiedDate": "2022-11-14T12:27:29.963",
+    "Name": "testNew_emailSend",
+    "SendDefinitionList": [
+        {
+            "DataSourceTypeID": "CustomObject",
+            "IsTestObject": false,
+            "Name": "",
+            "SendDefinitionListType": "SourceList",
+            "r__dataExtension_key": "testExisting_dataExtension",
+            "r__list_PathName": "Publication Lists/Demo Publication List"
+        }
+    ],
+    "SuppressTracking": false,
+    "TestEmailAddr": "",
+    "r__asset_key": "testExisting_asset_message",
+    "r__asset_name_readOnly": "testExisting_asset_message",
+    "r__deliveryProfile_key": "Default",
+    "r__folder_Path": "User-Initiated",
+    "r__sendClassification_key": "testExisting_sendClassification",
+    "r__senderProfile_key": "testExisting_senderProfile"
+}

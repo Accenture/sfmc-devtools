@@ -73,6 +73,19 @@
                 <Description />
                 <ListClassification>SuppressionList</ListClassification>
             </Results>
+            <Results xsi:type="List">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2024-04-24T12:17:15.423</CreatedDate>
+                <ModifiedDate>2024-04-24T12:17:15.423</ModifiedDate>
+                <ID>75520</ID>
+                <ObjectID>97382359-b292-49aa-97a1-e53cedc18911</ObjectID>
+                <CustomerKey>testExisting_suppressionList - 419</CustomerKey>
+                <ListName>testExisting_suppressionList</ListName>
+                <Category>419</Category>
+                <Type>Public</Type>
+                <Description>blabla</Description>
+                <ListClassification>SuppressionList</ListClassification>
+            </Results>
         </RetrieveResponseMsg>
     </soap:Body>
 </soap:Envelope>

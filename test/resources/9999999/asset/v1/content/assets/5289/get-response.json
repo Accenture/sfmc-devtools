@@ -1,0 +1,198 @@
+{
+    "id": 5289,
+    "customerKey": "testExisting_asset_templatebasedemail",
+    "objectID": "26c925ba-af6e-4c2a-a04a-a67f39cceeee",
+    "contentType": "application/vnd.etmc.email.Message; kind=template",
+    "assetType": {
+        "id": 207,
+        "name": "templatebasedemail",
+        "displayName": "Template-Based Email"
+    },
+    "name": " testExisting_asset_templatebasedemail",
+    "owner": {
+        "id": 710369861,
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld",
+        "userId": "710369861"
+    },
+    "createdDate": "2024-04-22T06:36:03.117-06:00",
+    "createdBy": {
+        "id": 710369861,
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld",
+        "userId": "710369861"
+    },
+    "modifiedDate": "2024-05-13T07:15:29.77-06:00",
+    "modifiedBy": {
+        "id": 710420432,
+        "name": "IDE - joern.berkefeld app user",
+        "userId": "710420432"
+    },
+    "enterpriseId": 1111111,
+    "memberId": 9999999,
+    "status": {
+        "id": 1,
+        "name": "Draft"
+    },
+    "thumbnail": {
+        "thumbnailUrl": "/v1/assets/5289/thumbnail"
+    },
+    "category": {
+        "id": 89397
+    },
+    "views": {
+        "subjectline": {
+            "contentType": "application/vnd.etmc.email.View; kind=subjectline",
+            "thumbnail": {},
+            "content": "my subject line",
+            "availableViews": [],
+            "data": {
+                "email": {
+                    "options": {
+                        "generateFrom": null
+                    }
+                }
+            },
+            "modelVersion": 2
+        },
+        "preheader": {
+            "contentType": "application/vnd.etmc.email.View; kind=preheader",
+            "thumbnail": {},
+            "content": "my custom preheader text",
+            "availableViews": [],
+            "data": {
+                "email": {
+                    "options": {
+                        "generateFrom": null
+                    }
+                }
+            },
+            "modelVersion": 2
+        },
+        "text": {
+            "thumbnail": {},
+            "availableViews": [],
+            "data": {
+                "email": {
+                    "options": {
+                        "generateFrom": "html"
+                    }
+                }
+            },
+            "generateFrom": "html",
+            "modelVersion": 2
+        },
+        "viewAsAWebPage": {
+            "thumbnail": {},
+            "availableViews": [],
+            "data": {
+                "email": {
+                    "options": {
+                        "generateFrom": null
+                    }
+                }
+            },
+            "modelVersion": 2
+        },
+        "subscriptioncenter": {
+            "thumbnail": {},
+            "availableViews": [],
+            "data": {
+                "email": {
+                    "options": {
+                        "generateFrom": null
+                    }
+                }
+            },
+            "modelVersion": 2
+        },
+        "forwardHTML": {
+            "thumbnail": {},
+            "availableViews": [],
+            "data": {
+                "email": {
+                    "options": {
+                        "generateFrom": null
+                    }
+                }
+            },
+            "modelVersion": 2
+        },
+        "forwardText": {
+            "thumbnail": {},
+            "availableViews": [],
+            "data": {
+                "email": {
+                    "options": {
+                        "generateFrom": null
+                    }
+                }
+            },
+            "modelVersion": 2
+        },
+        "html": {
+            "thumbnail": {},
+            "content": "<a href=\"%%ftaf_url%%\"\n    ><img\n        src=\"https://www.exacttarget.com/members/newsletters/gfx/forwardafriendicon.gif\"\n        border=\"0\" /></a\n><a href=\"%%profile_center_url%%\" alias=\"Update Profile\">Update Profile</a>\n<table cellpadding=\"2\" cellspacing=\"0\" width=\"600\" id=\"Table5\" border=\"0\">\n    <tr>\n        <td>\n            <font face=\"verdana\" size=\"1\" color=\"#444444\"\n                >This email was sent by: <b>%%Member_Busname%%</b><br />%%Member_Addr%%\n                %%Member_City%%, %%Member_State%%, %%Member_PostalCode%%, %%Member_Country%%<br /><br\n            /></font>\n        </td>\n    </tr>\n</table>\n<a href=\"%%subscription_center_url%%\" alias=\"Manage Subscriptions\">Manage Subscriptions</a\n><img src=\"https://www.exacttarget.com/images/Powered_By_1206.jpg\" border=\"0\" /><custom\n    name=\"opencounter\"\n    type=\"tracking\"\n/>\n",
+            "availableViews": [],
+            "template": {
+                "id": 5286,
+                "assetType": {
+                    "id": 4,
+                    "name": "template",
+                    "displayName": "Template"
+                },
+                "name": "testExisting_asset_template",
+                "meta": {
+                    "contentHash": -166410261
+                },
+                "availableViews": [],
+                "data": {
+                    "email": {
+                        "options": {
+                            "generateFrom": null
+                        }
+                    }
+                },
+                "modelVersion": 2
+            },
+            "data": {
+                "email": {
+                    "options": {
+                        "generateFrom": null
+                    }
+                }
+            },
+            "modelVersion": 2
+        }
+    },
+    "availableViews": [
+        "subjectline",
+        "preheader",
+        "text",
+        "viewAsAWebPage",
+        "subscriptioncenter",
+        "forwardHTML",
+        "forwardText",
+        "html"
+    ],
+    "data": {
+        "email": {
+            "options": {
+                "characterEncoding": "utf-8"
+            },
+            "legacy": {
+                "legacyId": 1643,
+                "legacyKey": "9b6edc22-d19a-429a-a705-da88c3a16543",
+                "legacyType": "email",
+                "legacyCategoryId": 10251
+            }
+        }
+    },
+    "legacyData": {
+        "legacyId": 1643,
+        "legacyKey": "9b6edc22-d19a-429a-a705-da88c3a16543",
+        "legacyType": "email",
+        "legacyCategoryId": 10251
+    },
+    "modelVersion": 2
+}

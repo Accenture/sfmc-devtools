@@ -1,6 +1,6 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-npm run docs
-git update-index --add docs/dist/documentation.md
+# run lint-staged hooks
 npx --no lint-staged
+
+# update typescript type declarations
+npx tsc
+git add @types

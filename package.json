@@ -1,6 +1,6 @@
 {
     "name": "mcdev",
-    "version": "6.0.2",
+    "version": "7.0.0",
     "description": "Accenture Salesforce Marketing Cloud DevTools",
     "author": "Accenture: joern.berkefeld, douglas.midgley, robert.zimmermann, maciej.barnas",
     "license": "MIT",
@@ -33,28 +33,29 @@
     "main": "./lib/index.js",
     "exports": {
         ".": {
+            "types": "./@types/lib/index.d.ts",
             "default": "./lib/index.js"
         },
-        "./*": "./*.js"
+        "./*": {
+            "types": "./@types/lib/*.d.ts",
+            "default": "./lib/*.js"
+        }
     },
     "bin": {
         "mcdev": "./lib/cli.js"
     },
     "engines": {
-        "node": ">=18.16.0"
+        "node": ">=18.18.2"
     },
     "scripts": {
         "start": "node lib/cli.js",
         "mcdev": "node lib/cli.js",
         "build": "run-s lint:fix docs test",
         "debug": "node --nolazy --inspect-brk=9229 lib/cli.js",
-        "docs": "jsdoc2md --files lib/**/*.js types/**/*.js > docs/dist/documentation.md",
-        "lint:fix": "eslint --fix lib/**/*.js && eslint --fix types/*.js && eslint --fix test/**/*.js",
-        "lint": "run-p -c lint-type lint-lib lint-test",
-        "lint-lib": "eslint lib/**/*.js",
-        "lint-type": "eslint types/*.js",
-        "lint-test": "eslint test/**/*.js",
-        "manual-prepare": "husky install",
+        "lint:fix": "eslint --fix lib/**/*.js types/*.js test/**/*.js",
+        "lint": "eslint lib/**/*.js types/*.js test/**/*.js",
+        "lint-ts": "tsc -p jsconfig.json --maxNodeModuleJsDepth 1 --noEmit",
+        "prepare": "husky || true",
         "lint-and-test": "run-s lint test",
         "test": "mocha --reporter-option maxDiffSize=25000",
         "coverage": "c8 npm run test",
@@ -63,54 +64,56 @@
         "version:patch": "npm version --no-commit-hooks patch"
     },
     "dependencies": {
-        "beauty-amp-core2": "0.4.5",
+        "beauty-amp-core2": "0.4.9",
         "cli-progress": "3.12.0",
         "command-exists": "1.2.9",
         "conf": "12.0.0",
         "console.table": "0.10.0",
         "deep-equal": "2.2.3",
-        "fs-extra": "11.1.1",
+        "fs-extra": "11.2.0",
         "inquirer": "9.2.6",
         "json-to-table": "4.2.1",
         "mustache": "4.2.0",
-        "p-limit": "4.0.0",
-        "prettier": "3.2.4",
-        "prettier-plugin-sql": "0.15.1",
-        "semver": "7.5.4",
+        "p-limit": "5.0.0",
+        "prettier": "3.3.0",
+        "prettier-plugin-sql": "0.18.0",
+        "semver": "7.6.0",
         "sfmc-sdk": "2.0.1",
         "simple-git": "3.22.0",
         "toposort": "2.0.2",
-        "update-notifier": "6.0.2",
-        "winston": "3.11.0",
+        "update-notifier": "7.0.0",
+        "winston": "3.13.0",
         "yargs": "17.7.2"
     },
     "devDependencies": {
+        "@types/mocha": "10.0.6",
+        "@types/node": "20.12.12",
         "assert": "2.1.0",
         "axios-mock-adapter": "1.22.0",
         "c8": "9.1.0",
-        "chai": "4.3.10",
+        "chai": "5.1.1",
         "chai-files": "1.4.0",
-        "eslint": "8.56.0",
+        "eslint": "8.57.0",
         "eslint-config-prettier": "9.1.0",
         "eslint-config-ssjs": "1.1.11",
-        "eslint-plugin-jsdoc": "48.0.2",
-        "eslint-plugin-mocha": "10.2.0",
+        "eslint-plugin-jsdoc": "48.2.7",
+        "eslint-plugin-mocha": "10.4.3",
         "eslint-plugin-prettier": "5.1.2",
-        "eslint-plugin-unicorn": "50.0.1",
-        "fast-xml-parser": "4.3.2",
-        "husky": "8.0.3",
-        "jsdoc-to-markdown": "8.0.0",
-        "lint-staged": "15.2.0",
-        "mocha": "10.2.0",
+        "eslint-plugin-unicorn": "53.0.0",
+        "fast-xml-parser": "4.4.0",
+        "husky": "9.0.11",
+        "lint-staged": "15.2.5",
+        "mocha": "10.4.0",
         "mock-fs": "5.2.0",
         "npm-run-all": "4.1.5",
-        "prettier-eslint": "16.2.0"
+        "prettier-eslint": "16.3.0",
+        "typescript": "5.4.5"
     },
     "optionalDependencies": {
         "fsevents": "*"
     },
     "lint-staged": {
-        "*.{js,jsx,ts,tsx}": [
+        "*.js": [
             "eslint --fix"
         ]
     },

@@ -1,4 +1,6 @@
-import chai, { assert } from 'chai';
+import * as chai from 'chai';
+const assert = chai.assert;
+
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
@@ -9,6 +11,7 @@ describe('type: transactionalEmail', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
@@ -18,7 +21,7 @@ describe('type: transactionalEmail', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['transactionalEmail']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -39,15 +42,17 @@ describe('type: transactionalEmail', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & upsert a transactionalEmail', async () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['transactionalEmail']);
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -75,6 +80,7 @@ describe('type: transactionalEmail', () => {
             );
             return;
         });
+
         it('Should NOT change the key during update with --changeKeyValue and instead fail due to missing support', async () => {
             // WHEN
             handler.setOptions({ changeKeyValue: 'updatedKey' });
@@ -92,6 +98,7 @@ describe('type: transactionalEmail', () => {
             return;
         });
     });
+
     describe('Templating ================', () => {
         // it.skip('Should create a transactionalEmail template via retrieveAsTemplate and build it');
         it('Should create a transactionalEmail template via buildTemplate and build it', async () => {
@@ -104,7 +111,7 @@ describe('type: transactionalEmail', () => {
                 ['testExisting_temail'],
                 'testSourceMarket'
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.transactionalEmail ? Object.keys(result.transactionalEmail).length : 0,
                 1,
@@ -119,14 +126,10 @@ describe('type: transactionalEmail', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'transactionalEmail',
-                'testExisting_temail',
+                ['testExisting_temail'],
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_temail', 'transactionalEmail'),
                 await testUtils.getExpectedJson('9999999', 'transactionalEmail', 'build'),
@@ -140,6 +143,7 @@ describe('type: transactionalEmail', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN
@@ -149,7 +153,7 @@ describe('type: transactionalEmail', () => {
                 'testExisting_temail'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
 
             assert.equal(isDeleted, true, 'should have deleted the item');
             return;

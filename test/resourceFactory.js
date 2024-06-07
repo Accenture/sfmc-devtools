@@ -4,14 +4,13 @@ import { XMLParser } from 'fast-xml-parser';
 import { Util } from '../lib/util/util.js';
 const parser = new XMLParser();
 const attributeParser = new XMLParser({ ignoreAttributes: false });
+/** @type {typeof Util.color} */
 let color;
 
 /* eslint-disable unicorn/prefer-ternary */
-if (
-    process.env.VSCODE_AMD_ENTRYPOINT === 'vs/workbench/api/node/extensionHostProcess' ||
-    process.env.VSCODE_CRASH_REPORTER_PROCESS_TYPE === 'extensionHost'
-) {
+if (Util.isRunViaVSCodeExtension) {
     // when we execute the test in a VSCode extension host, we don't want CLI color codes.
+    // @ts-expect-error hacky way to get rid of colors - ts doesn't appreciate the hack
     color = new Proxy(
         {},
         {
@@ -38,7 +37,7 @@ if (
  * @param {string} type metadata Type
  * @param {string} mid of Business Unit
  * @param {object|string} filter likely for customer key
- * @returns {string} relevant metadata stringified
+ * @returns {Promise.<string>} relevant metadata stringified
  */
 async function loadSOAPRecords(mcdevAction, type, mid, filter) {
     type = type[0].toLowerCase() + type.slice(1);
@@ -240,6 +239,7 @@ export const handleRESTRequest = async (config) => {
             config.baseURL + (config.url.startsWith('/') ? config.url.slice(1) : config.url)
         );
         let filterName;
+        let filterBody;
         if (urlObj.searchParams.get('$filter')) {
             filterName = urlObj.searchParams.get('$filter').split(' eq ')[1];
         }
@@ -252,8 +252,92 @@ export const handleRESTRequest = async (config) => {
                 config.method + '-response'
             )
             .replace(':', '_'); // replace : with _ for Windows
+        const testPathFilter = filterName
+            ? testPath +
+              '-' +
+              urlObj.searchParams.get('$filter').replaceAll(' eq ', '=').replaceAll(' ', '')
+            : null;
 
-        if (await fs.pathExists(testPath + '.json')) {
+        if (!testPathFilter && config.method === 'post' && config.data) {
+            const simpleOperators = { equal: '=', in: 'IN' };
+            const data = JSON.parse(config.data);
+            const myObj = data.query?.rightOperand || data.query;
+            if (myObj) {
+                const op = simpleOperators[myObj.simpleOperator];
+                filterBody = `${myObj.property}${op}${op === 'IN' ? myObj.value.join(',') : myObj.value}`;
+            }
+        }
+        const testPathFilterBody = filterBody ? testPath + '-' + filterBody : null;
+
+        if (testPathFilter && (await fs.pathExists(testPathFilter + '.json'))) {
+            // build filter logic to ensure templating works
+            if (filterName) {
+                const response = JSON.parse(
+                    await fs.readFile(testPathFilter + '.json', {
+                        encoding: 'utf8',
+                    })
+                );
+                response.items = response.items.filter((def) => def.name == filterName);
+                response.count = response.items.length;
+                return [200, JSON.stringify(response)];
+            } else {
+                return [
+                    200,
+                    await fs.readFile(testPathFilter + '.json', {
+                        encoding: 'utf8',
+                    }),
+                ];
+            }
+        } else if (testPathFilter && (await fs.pathExists(testPathFilter + '.txt'))) {
+            return [
+                200,
+                await fs.readFile(testPathFilter + '.txt', {
+                    encoding: 'utf8',
+                }),
+            ];
+        } else if (testPathFilterBody && (await fs.pathExists(testPathFilterBody + '.json'))) {
+            return [
+                200,
+                await fs.readFile(testPathFilterBody + '.json', {
+                    encoding: 'utf8',
+                }),
+            ];
+        } else if (testPathFilterBody && (await fs.pathExists(testPathFilterBody + '.txt'))) {
+            return [
+                200,
+                await fs.readFile(testPathFilterBody + '.txt', {
+                    encoding: 'utf8',
+                }),
+            ];
+        } else if (await fs.pathExists(testPath + '.json')) {
+            if (testPathFilter) {
+                /* eslint-disable no-console */
+                console.log(
+                    `${color.bgYellow}${color.fgBlack}TEST-WARNING${
+                        color.reset
+                    }: You are loading your reponse from ${
+                        testPath + '.json'
+                    } instead of the more specific ${
+                        testPathFilter + '.json'
+                    }. Make sure this is intended`
+                );
+                /* eslint-enable no-console */
+            }
+
+            if (testPathFilterBody) {
+                /* eslint-disable no-console */
+                console.log(
+                    `${color.bgYellow}${color.fgBlack}TEST-WARNING${
+                        color.reset
+                    }: You are loading your reponse from ${
+                        testPath + '.json'
+                    } instead of the more specific ${
+                        testPathFilterBody + '.json'
+                    }. Make sure this is intended`
+                );
+                /* eslint-enable no-console */
+            }
+
             // build filter logic to ensure templating works
             if (filterName) {
                 const response = JSON.parse(
@@ -273,6 +357,33 @@ export const handleRESTRequest = async (config) => {
                 ];
             }
         } else if (await fs.pathExists(testPath + '.txt')) {
+            if (testPathFilter) {
+                /* eslint-disable no-console */
+                console.log(
+                    `${color.bgYellow}${color.fgBlack}TEST-WARNING${
+                        color.reset
+                    }: You are loading your reponse from ${
+                        testPath + '.txt'
+                    } instead of the more specific ${
+                        testPathFilter + '.txt'
+                    }. Make sure this is intended`
+                );
+                /* eslint-enable no-console */
+            }
+            if (testPathFilterBody) {
+                /* eslint-disable no-console */
+                console.log(
+                    `${color.bgYellow}${color.fgBlack}TEST-WARNING${
+                        color.reset
+                    }: You are loading your reponse from ${
+                        testPath + '.txt'
+                    } instead of the more specific ${
+                        testPathFilterBody + '.txt'
+                    }. Make sure this is intended`
+                );
+                /* eslint-enable no-console */
+            }
+
             return [
                 200,
                 await fs.readFile(testPath + '.txt', {
@@ -282,7 +393,7 @@ export const handleRESTRequest = async (config) => {
         } else {
             /* eslint-disable no-console */
             console.log(
-                `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}: Please create file ${testPath}.json/.txt`
+                `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}: Please create file ${testPath}.json/.txt${filterName ? ` or ${testPathFilter}.json/.txt` : testPathFilterBody ? ` or ${testPathFilterBody}.json/.txt` : ''}`
             );
             /* eslint-enable no-console */
             process.exitCode = 404;

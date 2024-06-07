@@ -1,4 +1,6 @@
-import chai, { assert } from 'chai';
+import * as chai from 'chai';
+const assert = chai.assert;
+
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
@@ -9,6 +11,7 @@ describe('type: verification', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
@@ -18,7 +21,7 @@ describe('type: verification', () => {
             // WHEN
             const retrieved = await handler.retrieve('testInstance/testBU', ['verification']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -50,16 +53,18 @@ describe('type: verification', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & upsert a verification', async () => {
             // WHEN
 
             const deployed = await handler.deploy('testInstance/testBU', ['verification']);
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -98,6 +103,7 @@ describe('type: verification', () => {
             return;
         });
     });
+
     describe('Templating ================', () => {
         it('Should create a verification template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
@@ -109,7 +115,7 @@ describe('type: verification', () => {
                 ['testExisting_39f6a488-20eb-4ba0-b0b9'],
                 'testSourceMarket'
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.verification ? Object.keys(result.verification).length : 0,
                 1,
@@ -127,14 +133,10 @@ describe('type: verification', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'verification',
-                'testExisting_39f6a488-20eb-4ba0-b0b9',
+                ['testExisting_39f6a488-20eb-4ba0-b0b9'],
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
                 await testUtils.getActualDeployJson(
                     'testTemplated_39f6a488-20eb-4ba0-b0b9',
@@ -151,6 +153,7 @@ describe('type: verification', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN

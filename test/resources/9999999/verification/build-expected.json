@@ -2,7 +2,7 @@
     "dataVerificationDefinitionId": "testTemplated_39f6a488-20eb-4ba0-b0b9",
     "notificationEmailAddress": "",
     "notificationEmailMessage": "",
-    "r__dataExtension_CustomerKey": "testTemplated_dataExtension",
+    "r__dataExtension_key": "testTemplated_dataExtension",
     "shouldEmailOnFailure": false,
     "shouldStopOnFailure": true,
     "value1": 1,

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:cbecb68a-7bdf-417e-8fce-bef6c72febbd</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:2e88f8d2-82e7-4e2d-b780-b885a2205a0f</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-ed420673-a71e-47b4-a2f4-4d4399b7e6a9">
+                <wsu:Created>2024-04-12T12:20:37Z</wsu:Created>
+                <wsu:Expires>2024-04-12T12:25:37Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>4c6f37a1-7ab4-47a1-b341-f9912462ee97</RequestID>
+            <Results xsi:type="SenderProfile">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-22T11:53:00</CreatedDate>
+                <ModifiedDate>2016-07-22T11:53:00</ModifiedDate>
+                <ObjectID>7acfb80f-3550-e611-96fe-38eaa7142c61</ObjectID>
+                <CustomerKey>Default</CustomerKey>
+                <Name>Default</Name>
+                <Description>Account defaults</Description>
+                <FromName>Accenture</FromName>
+                <FromAddress>joern.berkefeld@accenture.com</FromAddress>
+                <UseDefaultRMMRules>true</UseDefaultRMMRules>
+                <AutoForwardToEmailAddress />
+                <AutoForwardToName />
+                <DirectForward>false</DirectForward>
+                <AutoReply>false</AutoReply>
+                <SenderHeaderEmailAddress />
+                <SenderHeaderName />
+            </Results>
+            <Results xsi:type="SenderProfile">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2021-08-03T11:14:00</CreatedDate>
+                <ModifiedDate>2021-08-03T11:14:00</ModifiedDate>
+                <ObjectID>a75d452b-7ef4-eb11-b82d-48df37d1da95</ObjectID>
+                <CustomerKey>testExisting_senderProfile</CustomerKey>
+                <Name>testExisting_senderProfile</Name>
+                <Description>Send from joern.berkefeld@accenture.com</Description>
+                <FromName>Jörn Berkefeld</FromName>
+                <FromAddress>joern.berkefeld@accenture.com</FromAddress>
+                <UseDefaultRMMRules>true</UseDefaultRMMRules>
+                <AutoForwardToEmailAddress />
+                <AutoForwardToName />
+                <DirectForward>false</DirectForward>
+                <AutoReply>false</AutoReply>
+                <SenderHeaderEmailAddress />
+                <SenderHeaderName />
+            </Results>
+            <Results xsi:type="SenderProfile">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2021-08-03T11:14:00</CreatedDate>
+                <ModifiedDate>2021-08-03T11:14:00</ModifiedDate>
+                <ObjectID>a75d452b-7ef4-eb11-b82d-48df37d1da99</ObjectID>
+                <CustomerKey>testExisting_senderProfile_rcb</CustomerKey>
+                <Name>testExisting_senderProfile_rcb</Name>
+                <Description>Send from joern.berkefeld@accenture.com</Description>
+                <FromName>%%= ContentBlockByName("Content Builder\dont strip non ssjs content") =%%</FromName>
+                <FromAddress>%%= ContentBlockByKey("mcdev-issue-1157") =%%</FromAddress>
+                <UseDefaultRMMRules>true</UseDefaultRMMRules>
+                <AutoForwardToEmailAddress>%%= ContentBlockById(1295064) =%%</AutoForwardToEmailAddress>
+                <AutoForwardToName>%%= ContentBlockById(1295064) =%%</AutoForwardToName>
+                <DirectForward>false</DirectForward>
+                <AutoReply>false</AutoReply>
+                <SenderHeaderEmailAddress />
+                <SenderHeaderName />
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>

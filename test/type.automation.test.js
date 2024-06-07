@@ -1,24 +1,28 @@
-import chai, { assert, expect } from 'chai';
+import * as chai from 'chai';
+const assert = chai.assert;
+const expect = chai.expect;
+
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const file = chaiFiles.file;
 
 describe('type: automation', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
+
     describe('Retrieve ================', () => {
         it('Should retrieve a automation', async () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['automation']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -33,28 +37,28 @@ describe('type: automation', () => {
                 'returned metadata was not equal expected'
             );
             // check if MD file was created and equals expectations
-            expect(file(testUtils.getActualDoc('testExisting_automation', 'automation'))).to.equal(
-                file(
-                    testUtils.getExpectedFile(
-                        '9999999',
-                        'automation',
-                        'retrieve-testExisting_automation',
-                        'md'
-                    )
+            expect(await testUtils.getActualDoc('testExisting_automation', 'automation')).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'automation',
+                    'retrieve-testExisting_automation',
+                    'md'
                 )
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                18,
+                22,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & update a automation', async () => {
             // WHEN
             const deployResult = await handler.deploy(
@@ -63,7 +67,7 @@ describe('type: automation', () => {
                 ['testExisting_automation', 'testNew_automation', 'testNew_39f6a488-20eb-4ba0-b0b9']
             );
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
 
             // check how many items were deployed
             assert.equal(
@@ -94,36 +98,33 @@ describe('type: automation', () => {
                 'returned metadata was not equal expected for update'
             );
             // check if MD file was created and equals expectations
-            expect(file(testUtils.getActualDoc('testExisting_automation', 'automation'))).to.equal(
-                file(
-                    testUtils.getExpectedFile(
-                        '9999999',
-                        'automation',
-                        'update-testExisting_automation',
-                        'md'
-                    )
+            expect(await testUtils.getActualDoc('testExisting_automation', 'automation')).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'automation',
+                    'update-testExisting_automation',
+                    'md'
                 )
             );
 
             // check if MD file was created and equals expectations
-            expect(file(testUtils.getActualDoc('testNew_automation', 'automation'))).to.equal(
-                file(
-                    testUtils.getExpectedFile(
-                        '9999999',
-                        'automation',
-                        'create-testNew_automation',
-                        'md'
-                    )
+            expect(await testUtils.getActualDoc('testNew_automation', 'automation')).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'automation',
+                    'create-testNew_automation',
+                    'md'
                 )
             );
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                25,
+                29,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
+
         it('Should update & schedule an automation with --schedule option', async () => {
             // WHEN
             handler.setOptions({ schedule: true });
@@ -135,7 +136,7 @@ describe('type: automation', () => {
             // THEN
             assert.equal(
                 process.exitCode,
-                false,
+                0,
                 'deploy with --execute should not have thrown an error'
             );
 
@@ -175,24 +176,23 @@ describe('type: automation', () => {
                 'returned metadata was not equal expected for update'
             );
             // check if MD file was created and equals expectations
-            expect(file(testUtils.getActualDoc('testExisting_automation', 'automation'))).to.equal(
-                file(
-                    testUtils.getExpectedFile(
-                        '9999999',
-                        'automation',
-                        'update-testExisting_automation',
-                        'md'
-                    )
+            expect(await testUtils.getActualDoc('testExisting_automation', 'automation')).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'automation',
+                    'update-testExisting_automation',
+                    'md'
                 )
             );
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                33,
+                37,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
+
         it('Should update & runOnce an automation with --execute option', async () => {
             // WHEN
             handler.setOptions({ execute: true });
@@ -204,7 +204,7 @@ describe('type: automation', () => {
             // THEN
             assert.equal(
                 process.exitCode,
-                false,
+                0,
                 'deploy with --execute should not have thrown an error'
             );
 
@@ -243,40 +243,42 @@ describe('type: automation', () => {
                 'returned metadata was not equal expected for update'
             );
             // check if MD file was created and equals expectations
-            expect(file(testUtils.getActualDoc('testExisting_automation', 'automation'))).to.equal(
-                file(
-                    testUtils.getExpectedFile(
-                        '9999999',
-                        'automation',
-                        'update-testExisting_automation',
-                        'md'
-                    )
+            expect(await testUtils.getActualDoc('testExisting_automation', 'automation')).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'automation',
+                    'update-testExisting_automation',
+                    'md'
                 )
             );
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                29,
+                33,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
     });
+
     describe('FixKeys ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should run fixKeys but not find fixable keys and hence stop', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false } });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'automation', [
-                'testExisting_automation',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['automation'],
+                ['testExisting_automation']
+            );
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // check which keys were fixed
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['automation'].length,
                 0,
                 'expected to find no keys to be fixed'
             );
@@ -291,30 +293,32 @@ describe('type: automation', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                18,
+                22,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
+
         it('Should fixKeys by key w/o re-retrieving, auto-schedule', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false } });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'automation', [
-                'testExisting_automation_fixKey_schedule',
-                'testExisting_automation',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['automation'],
+                ['testExisting_automation_fixKey_schedule', 'testExisting_automation']
+            );
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['automation'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['automation'][0],
                 'testExisting_automation_fixedKey_scheduled',
                 'returned keys do not correspond to expected fixed keys'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson(
@@ -325,40 +329,40 @@ describe('type: automation', () => {
                 'returned metadata was not equal expected for update automation'
             );
             expect(
-                file(
-                    testUtils.getActualDoc(
-                        'testExisting_automation_fixedKey_scheduled',
-                        'automation'
-                    )
+                await testUtils.getActualDoc(
+                    'testExisting_automation_fixedKey_scheduled',
+                    'automation'
                 )
             ).to.exist;
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                40,
+                48,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
+
         it('Should fixKeys by key w/o re-retrieving, auto-schedule and then --execute', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, execute: true });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'automation', [
-                'testExisting_automation_fixKey_schedule',
-                'testExisting_automation',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['automation'],
+                ['testExisting_automation_fixKey_schedule', 'testExisting_automation']
+            );
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['automation'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['automation'][0],
                 'testExisting_automation_fixedKey_scheduled',
                 'returned keys do not correspond to expected fixed keys'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson(
@@ -369,40 +373,40 @@ describe('type: automation', () => {
                 'returned metadata was not equal expected for update automation'
             );
             expect(
-                file(
-                    testUtils.getActualDoc(
-                        'testExisting_automation_fixedKey_scheduled',
-                        'automation'
-                    )
+                await testUtils.getActualDoc(
+                    'testExisting_automation_fixedKey_scheduled',
+                    'automation'
                 )
             ).to.exist;
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                42,
+                50,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
+
         it('Should fixKeys by key w/o re-retrieving, auto-schedule and then --schedule', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, schedule: true });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'automation', [
-                'testExisting_automation_fixKey_schedule',
-                'testExisting_automation',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['automation'],
+                ['testExisting_automation_fixKey_schedule', 'testExisting_automation']
+            );
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['automation'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['automation'][0],
                 'testExisting_automation_fixedKey_scheduled',
                 'returned keys do not correspond to expected fixed keys'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson(
@@ -413,39 +417,40 @@ describe('type: automation', () => {
                 'returned metadata was not equal expected for update automation'
             );
             expect(
-                file(
-                    testUtils.getActualDoc(
-                        'testExisting_automation_fixedKey_scheduled',
-                        'automation'
-                    )
+                await testUtils.getActualDoc(
+                    'testExisting_automation_fixedKey_scheduled',
+                    'automation'
                 )
             ).to.exist;
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                43,
+                51,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
+
         it('Should fixKeys by key w/o re-retrieving, deploy paused', async () => {
             // WHEN
             handler.setOptions({ skipInteraction: { fixKeysReretrieve: false } });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'automation', [
-                'testExisting_automation_fixKey_pause',
-            ]);
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['automation'],
+                ['testExisting_automation_fixKey_pause']
+            );
             assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
+                resultFixKeys['testInstance/testBU']['automation'].length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
+                resultFixKeys['testInstance/testBU']['automation'][0],
                 'testExisting_automation_fixedKey_paused',
                 'returned keys do not correspond to expected fixed keys'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
             // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson(
@@ -456,101 +461,109 @@ describe('type: automation', () => {
                 'returned metadata was not equal expected for update automation'
             );
             expect(
-                file(
-                    testUtils.getActualDoc('testExisting_automation_fixedKey_paused', 'automation')
-                )
-            ).to.exist;
-            // check number of API calls
-            assert.equal(
-                testUtils.getAPIHistoryLength(),
-                35,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            );
-            return;
-        });
-        it('Should fixKeys by key w/o re-retrieving, deploy paused and then --execute', async () => {
-            // WHEN
-            handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, execute: true });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'automation', [
-                'testExisting_automation_fixKey_pause',
-                'testExisting_automation',
-            ]);
-            assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
-                1,
-                'returned number of keys does not correspond to number of expected fixed keys'
-            );
-            assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
-                'testExisting_automation_fixedKey_paused',
-                'returned keys do not correspond to expected fixed keys'
-            );
-            // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
-            // confirm updated item
-            assert.deepEqual(
-                await testUtils.getActualJson(
+                await testUtils.getActualDoc(
                     'testExisting_automation_fixedKey_paused',
                     'automation'
-                ),
-                await testUtils.getExpectedJson('9999999', 'automation', 'patch_fixKeys-pause'),
-                'returned metadata was not equal expected for update automation'
-            );
-            expect(
-                file(
-                    testUtils.getActualDoc('testExisting_automation_fixedKey_paused', 'automation')
-                )
-            ).to.exist;
-            // check number of API calls
-            assert.equal(
-                testUtils.getAPIHistoryLength(),
-                41,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            );
-            return;
-        });
-        it('Should fixKeys by key w/o re-retrieving, deploy paused and then --schedule', async () => {
-            // WHEN
-            handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, schedule: true });
-            const resultFixKeys = await handler.fixKeys('testInstance/testBU', 'automation', [
-                'testExisting_automation_fixKey_pause',
-                'testExisting_automation',
-            ]);
-            assert.equal(
-                resultFixKeys['testInstance/testBU'].length,
-                1,
-                'returned number of keys does not correspond to number of expected fixed keys'
-            );
-            assert.equal(
-                resultFixKeys['testInstance/testBU'][0],
-                'testExisting_automation_fixedKey_paused',
-                'returned keys do not correspond to expected fixed keys'
-            );
-            // THEN
-            assert.equal(process.exitCode, false, 'fixKeys should not have thrown an error');
-            // confirm updated item
-            assert.deepEqual(
-                await testUtils.getActualJson(
-                    'testExisting_automation_fixedKey_paused',
-                    'automation'
-                ),
-                await testUtils.getExpectedJson('9999999', 'automation', 'patch_fixKeys-pause'),
-                'returned metadata was not equal expected for update automation'
-            );
-            expect(
-                file(
-                    testUtils.getActualDoc('testExisting_automation_fixedKey_paused', 'automation')
                 )
             ).to.exist;
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 43,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should fixKeys by key w/o re-retrieving, deploy paused and then --execute', async () => {
+            // WHEN
+            handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, execute: true });
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['automation'],
+                ['testExisting_automation_fixKey_pause', 'testExisting_automation']
+            );
+            assert.equal(
+                resultFixKeys['testInstance/testBU']['automation'].length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            assert.equal(
+                resultFixKeys['testInstance/testBU']['automation'][0],
+                'testExisting_automation_fixedKey_paused',
+                'returned keys do not correspond to expected fixed keys'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    'testExisting_automation_fixedKey_paused',
+                    'automation'
+                ),
+                await testUtils.getExpectedJson('9999999', 'automation', 'patch_fixKeys-pause'),
+                'returned metadata was not equal expected for update automation'
+            );
+            expect(
+                await testUtils.getActualDoc(
+                    'testExisting_automation_fixedKey_paused',
+                    'automation'
+                )
+            ).to.exist;
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                49,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should fixKeys by key w/o re-retrieving, deploy paused and then --schedule', async () => {
+            // WHEN
+            handler.setOptions({ skipInteraction: { fixKeysReretrieve: false }, schedule: true });
+            const resultFixKeys = await handler.fixKeys(
+                'testInstance/testBU',
+                ['automation'],
+                ['testExisting_automation_fixKey_pause', 'testExisting_automation']
+            );
+            assert.equal(
+                resultFixKeys['testInstance/testBU']['automation'].length,
+                1,
+                'returned number of keys does not correspond to number of expected fixed keys'
+            );
+            assert.equal(
+                resultFixKeys['testInstance/testBU']['automation'][0],
+                'testExisting_automation_fixedKey_paused',
+                'returned keys do not correspond to expected fixed keys'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'fixKeys should not have thrown an error');
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    'testExisting_automation_fixedKey_paused',
+                    'automation'
+                ),
+                await testUtils.getExpectedJson('9999999', 'automation', 'patch_fixKeys-pause'),
+                'returned metadata was not equal expected for update automation'
+            );
+            expect(
+                await testUtils.getActualDoc(
+                    'testExisting_automation_fixedKey_paused',
+                    'automation'
+                )
+            ).to.exist;
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                51,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
     });
+
     describe('Templating ================', () => {
         it('Should create a automation template via retrieveAsTemplate and build it', async () => {
             // GIVEN there is a template
@@ -560,11 +573,7 @@ describe('type: automation', () => {
                 ['testExisting_automation'],
                 'testSourceMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'retrieveAsTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'retrieveAsTemplate should not have thrown an error');
 
             // WHEN
             assert.equal(
@@ -581,14 +590,10 @@ describe('type: automation', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'automation',
-                'testExisting_automation',
+                ['testExisting_automation'],
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_automation', 'automation'),
                 await testUtils.getExpectedJson('9999999', 'automation', 'build'),
@@ -596,11 +601,12 @@ describe('type: automation', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                20,
+                24,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
+
         it('Should create a automation template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['automation']);
@@ -611,7 +617,7 @@ describe('type: automation', () => {
                 ['testExisting_automation'],
                 'testSourceMarket'
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             // WHEN
             assert.equal(
                 result.automation ? Object.keys(result.automation).length : 0,
@@ -627,14 +633,10 @@ describe('type: automation', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'automation',
-                'testExisting_automation',
+                ['testExisting_automation'],
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_automation', 'automation'),
@@ -643,12 +645,13 @@ describe('type: automation', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                18,
+                22,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
     });
+
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN
@@ -658,12 +661,13 @@ describe('type: automation', () => {
                 'testExisting_automation'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
 
             assert.equal(isDeleted, true, 'should have deleted the item');
             return;
         });
     });
+
     describe('CI/CD ================', () => {
         it('Should return a list of files based on their type and key', async () => {
             // WHEN
@@ -671,11 +675,7 @@ describe('type: automation', () => {
                 'testExisting_automation',
             ]);
             // THEN
-            assert.equal(
-                process.exitCode,
-                false,
-                'getFilesToCommit should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'getFilesToCommit should not have thrown an error');
             assert.equal(fileList.length, 2, 'expected only 2 file paths');
 
             assert.equal(
@@ -691,12 +691,13 @@ describe('type: automation', () => {
             return;
         });
     });
+
     describe('Schedule ================', () => {
         it('Should schedule an automation by key', async () => {
             const executedKeys = await handler.schedule('testInstance/testBU', 'automation', [
                 'testExisting_automation',
             ]);
-            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
@@ -709,10 +710,11 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should schedule an automation selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExist%automation' } });
             const executedKeys = await handler.schedule('testInstance/testBU', 'automation');
-            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
@@ -725,12 +727,13 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should not schedule executing an automation because key and --like was specified', async () => {
             handler.setOptions({ like: { key: 'testExisting%' } });
             const executedKeys = await handler.schedule('testInstance/testBU', 'automation', [
                 'testExisting_automation',
             ]);
-            assert.equal(process.exitCode, true, 'execute should have thrown an error');
+            assert.equal(process.exitCode, 1, 'execute should have thrown an error');
             assert.equal(
                 Object.keys(executedKeys).length,
                 0,
@@ -739,13 +742,14 @@ describe('type: automation', () => {
             return;
         });
     });
+
     describe('Execute ================', () => {
         it('Should execute --schedule an automation by key', async () => {
             handler.setOptions({ schedule: true });
             const executedKeys = await handler.execute('testInstance/testBU', 'automation', [
                 'testExisting_automation',
             ]);
-            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
@@ -758,10 +762,11 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should execute --schedule an automation selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExist%automation' }, schedule: true });
             const executedKeys = await handler.execute('testInstance/testBU', 'automation');
-            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
@@ -774,12 +779,13 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should not execute --schedule executing an automation because key and --like was specified', async () => {
             handler.setOptions({ like: { key: 'testExisting%' }, schedule: true });
             const executedKeys = await handler.execute('testInstance/testBU', 'automation', [
                 'testExisting_automation',
             ]);
-            assert.equal(process.exitCode, true, 'execute should have thrown an error');
+            assert.equal(process.exitCode, 1, 'execute should have thrown an error');
             assert.equal(
                 Object.keys(executedKeys).length,
                 0,
@@ -787,11 +793,12 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should runOnce an automation by key', async () => {
             const executedKeys = await handler.execute('testInstance/testBU', 'automation', [
                 'testExisting_automation',
             ]);
-            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
@@ -804,10 +811,11 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should runOnce an automation selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExist%automation' } });
             const executedKeys = await handler.execute('testInstance/testBU', 'automation');
-            assert.equal(process.exitCode, false, 'execute should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
                 executedKeys['testInstance/testBU']?.length,
                 1,
@@ -821,12 +829,13 @@ describe('type: automation', () => {
 
             return;
         });
+
         it('Should not runOnce executing an automation because key and --like was specified', async () => {
             handler.setOptions({ like: { key: 'testExisting%' } });
             const executedKeys = await handler.execute('testInstance/testBU', 'automation', [
                 'testExisting_automation',
             ]);
-            assert.equal(process.exitCode, true, 'execute should have thrown an error');
+            assert.equal(process.exitCode, 1, 'execute should have thrown an error');
             assert.equal(
                 Object.keys(executedKeys).length,
                 0,
@@ -836,12 +845,13 @@ describe('type: automation', () => {
             return;
         });
     });
+
     describe('Pause ================', () => {
         it('Should pause a automation by key', async () => {
             const pausedKeys = await handler.pause('testInstance/testBU', 'automation', [
                 'testExisting_automation_pause',
             ]);
-            assert.equal(process.exitCode, false, 'pause should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'pause should not have thrown an error');
             assert.equal(
                 pausedKeys['testInstance/testBU']?.length,
                 1,
@@ -854,10 +864,11 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should pause a automation selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExisting_a%n_pause' } });
             const pausedKeys = await handler.pause('testInstance/testBU', 'automation');
-            assert.equal(process.exitCode, false, 'pause should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'pause should not have thrown an error');
             assert.equal(
                 pausedKeys['testInstance/testBU']?.length,
                 1,
@@ -870,12 +881,13 @@ describe('type: automation', () => {
             );
             return;
         });
+
         it('Should not pause automation because key and --like was specified', async () => {
             handler.setOptions({ like: { key: 'testExisting_a%n_pause' } });
             const pausedKeys = await handler.pause('testInstance/testBU', 'automation', [
                 'testExisting_automation_pause',
             ]);
-            assert.equal(process.exitCode, true, 'pause should have thrown an error');
+            assert.equal(process.exitCode, 1, 'pause should have thrown an error');
             assert.equal(
                 Object.keys(pausedKeys).length,
                 0,

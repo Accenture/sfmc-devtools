@@ -30,16 +30,16 @@
                 <IsPlatformObject>false</IsPlatformObject>
                 <Name>testExisting_emailSend</Name>
                 <Description>some description</Description>
-                <CategoryID>290820</CategoryID>
+                <CategoryID>4691</CategoryID>
                 <SendClassification>
                     <PartnerKey xsi:nil="true" />
                     <ObjectID xsi:nil="true" />
-                    <CustomerKey>test_send_classification</CustomerKey>
+                    <CustomerKey>testExisting_sendClassification</CustomerKey>
                 </SendClassification>
                 <SenderProfile>
                     <PartnerKey xsi:nil="true" />
                     <ObjectID xsi:nil="true" />
-                    <CustomerKey>Test_sender</CustomerKey>
+                    <CustomerKey>testExisting_senderProfile</CustomerKey>
                 </SenderProfile>
                 <DeliveryProfile>
                     <PartnerKey xsi:nil="true" />
@@ -50,14 +50,24 @@
                 <IsSendLogging>false</IsSendLogging>
                 <SendDefinitionList>
                     <PartnerKey xsi:nil="true" />
+                    <ObjectID>9d1c7bf9-4964-ed11-b849-48df37d1de8c</ObjectID>
+                    <SendDefinitionListType>ExclusionList</SendDefinitionListType>
+                    <CustomObjectID>21711373-72c1-ec11-b83b-exclusion</CustomObjectID>
+                    <DataSourceTypeID>CustomObject</DataSourceTypeID>
+                    <IsTestObject>false</IsTestObject>
+                    <SalesForceObjectID />
+                    <Name />
+                </SendDefinitionList>
+                <SendDefinitionList>
+                    <PartnerKey xsi:nil="true" />
                     <ObjectID>9d1c7bf9-4964-ed11-b849-48df37d1de8b</ObjectID>
                     <List>
                         <PartnerKey xsi:nil="true" />
-                        <ID>32308</ID>
+                        <ID>114</ID>
                         <ObjectID xsi:nil="true" />
                     </List>
                     <SendDefinitionListType>SourceList</SendDefinitionListType>
-                    <CustomObjectID>2c19d707-743e-ed11-b848-48df37b24911</CustomObjectID>
+                    <CustomObjectID>21711373-72c1-ec11-b83b-48df37d1deb7</CustomObjectID>
                     <DataSourceTypeID>CustomObject</DataSourceTypeID>
                     <IsTestObject>false</IsTestObject>
                     <SalesForceObjectID />
@@ -65,7 +75,7 @@
                 </SendDefinitionList>
                 <Email>
                     <PartnerKey xsi:nil="true" />
-                    <ID>676709</ID>
+                    <ID>531213</ID>
                     <ObjectID xsi:nil="true" />
                 </Email>
                 <BccEmail />
@@ -76,7 +86,7 @@
                 <IsMultipart>true</IsMultipart>
                 <IsWrapped>true</IsWrapped>
                 <DeduplicateByEmail>false</DeduplicateByEmail>
-                <ExclusionFilter />
+                <ExclusionFilter>Domain(emailaddr) != "accenture.com"</ExclusionFilter>
                 <Additional />
                 <CCEmail />
             </Results>

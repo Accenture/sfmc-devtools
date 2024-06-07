@@ -18,12 +18,11 @@
     "Name": "testNew_triggeredSend",
     "NewSlotTrigger": 0,
     "Priority": 4,
-    "SendClassification": {
-        "CustomerKey": "Default Transactional"
-    },
     "SuppressTracking": false,
     "TriggeredSendStatus": "New",
     "TriggeredSendType": "Continuous",
-    "r__email_Name": "Sporting Goods for September",
-    "r__folder_Path": "Triggered Sends"
+    "r__email_name": "Sporting Goods for September",
+    "r__folder_Path": "Triggered Sends",
+    "r__sendClassification_key": "testExisting_sendClassification",
+    "r__senderProfile_key": "testExisting_senderProfile"
 }

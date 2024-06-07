@@ -1,15 +1,18 @@
-import chai, { assert, expect } from 'chai';
+import * as chai from 'chai';
+const assert = chai.assert;
+const expect = chai.expect;
+
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const file = chaiFiles.file;
 
 describe('type: mobileMessage', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
@@ -19,7 +22,7 @@ describe('type: mobileMessage', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['mobileMessage']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -32,8 +35,8 @@ describe('type: mobileMessage', () => {
                 await testUtils.getExpectedJson('9999999', 'mobileMessage', 'get'),
                 'saved JSON was not equal expected'
             );
-            expect(file(testUtils.getActualFile('NTIzOjc4OjA', 'mobileMessage', 'amp'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'get', 'amp'))
+            expect(await testUtils.getActualFile('NTIzOjc4OjA', 'mobileMessage', 'amp')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'mobileMessage', 'get', 'amp')
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -43,15 +46,17 @@ describe('type: mobileMessage', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & update items', async () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['mobileMessage']);
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -65,8 +70,8 @@ describe('type: mobileMessage', () => {
                 await testUtils.getExpectedJson('9999999', 'mobileMessage', 'post-create'),
                 'returned JSON was not equal expected for insert mobileMessage'
             );
-            expect(file(testUtils.getActualFile('NTQ3Ojc4OjA', 'mobileMessage', 'amp'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'post-create', 'amp'))
+            expect(await testUtils.getActualFile('NTQ3Ojc4OjA', 'mobileMessage', 'amp')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'mobileMessage', 'post-create', 'amp')
             );
 
             // confirm updated item
@@ -75,8 +80,8 @@ describe('type: mobileMessage', () => {
                 await testUtils.getExpectedJson('9999999', 'mobileMessage', 'post-update'), // watch out - mobileMessage api wants put instead of patch for updates
                 'returned JSON was not equal expected for update mobileMessage'
             );
-            expect(file(testUtils.getActualFile('NTIzOjc4OjA', 'mobileMessage', 'amp'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'post-update', 'amp'))
+            expect(await testUtils.getActualFile('NTIzOjc4OjA', 'mobileMessage', 'amp')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'mobileMessage', 'post-update', 'amp')
             );
 
             // check number of API calls
@@ -87,6 +92,7 @@ describe('type: mobileMessage', () => {
             );
             return;
         });
+
         it('Should NOT change the key during update with --changeKeyValue and instead fail due to missing support', async () => {
             // WHEN
             handler.setOptions({ changeKeyValue: 'updatedKey' });
@@ -100,6 +106,7 @@ describe('type: mobileMessage', () => {
             return;
         });
     });
+
     describe('Templating ================', () => {
         it('Should create a mobileMessage template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
@@ -111,7 +118,7 @@ describe('type: mobileMessage', () => {
                 ['NTIzOjc4OjA'],
                 'testSourceMarket'
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
 
             assert.equal(
                 result.mobileMessage ? Object.keys(result.mobileMessage).length : 0,
@@ -124,31 +131,27 @@ describe('type: mobileMessage', () => {
                 'returned template JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualTemplateFile('NTIzOjc4OjA', 'mobileMessage', 'amp'))
+                await testUtils.getActualTemplateFile('NTIzOjc4OjA', 'mobileMessage', 'amp')
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'template', 'amp'))
+                await testUtils.getExpectedFile('9999999', 'mobileMessage', 'template', 'amp')
             );
 
             // buildDefinition
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'mobileMessage',
-                'NTIzOjc4OjA',
+                ['NTIzOjc4OjA'],
                 'testTargetMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
                 await testUtils.getActualDeployJson('NTIzOjc4OjA', 'mobileMessage'),
                 await testUtils.getExpectedJson('9999999', 'mobileMessage', 'build'),
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualDeployFile('NTIzOjc4OjA', 'mobileMessage', 'amp'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'mobileMessage', 'build', 'amp')));
+                await testUtils.getActualDeployFile('NTIzOjc4OjA', 'mobileMessage', 'amp')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'mobileMessage', 'build', 'amp'));
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -158,6 +161,7 @@ describe('type: mobileMessage', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN
@@ -167,12 +171,13 @@ describe('type: mobileMessage', () => {
                 'NTIzOjc4OjA'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
 
             assert.equal(isDeleted, true, 'should have deleted the item');
             return;
         });
     });
+
     describe('CI/CD ================', () => {
         it('Should return a list of files based on their type and key', async () => {
             // WHEN
@@ -182,11 +187,7 @@ describe('type: mobileMessage', () => {
                 ['NTIzOjc4OjA']
             );
             // THEN
-            assert.equal(
-                process.exitCode,
-                false,
-                'getFilesToCommit should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'getFilesToCommit should not have thrown an error');
             assert.equal(fileList.length, 2, 'expected only 2 file paths');
 
             assert.equal(

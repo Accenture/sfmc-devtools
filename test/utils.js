@@ -36,10 +36,13 @@ export function getActualJson(customerKey, type, buName = 'testBU') {
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} [buName] used when we need to test on ParentBU
- * @returns {string} file path
+ * @returns {Promise.<string>} file path
  */
 export function getActualDoc(customerKey, type, buName = 'testBU') {
-    return `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-doc.md`;
+    return File.readFile(
+        `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-doc.md`,
+        'utf8'
+    );
 }
 /**
  * gets file from Retrieve folder
@@ -47,10 +50,17 @@ export function getActualDoc(customerKey, type, buName = 'testBU') {
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
- * @returns {string} file path
+ * @param {string} [buName] used when we need to test on ParentBU
+ * @returns {Promise.<string | null>} file in string form, null if not found
  */
-export function getActualFile(customerKey, type, ext) {
-    return `./retrieve/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`;
+export async function getActualFile(customerKey, type, ext, buName = 'testBU') {
+    const path = `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-meta.${ext}`;
+    try {
+        return await File.readFile(path, 'utf8');
+    } catch {
+        console.log(`File not found: ${path}`); // eslint-disable-line no-console
+        return null;
+    }
 }
 /**
  * gets file from Deploy folder
@@ -58,7 +68,7 @@ export function getActualFile(customerKey, type, ext) {
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} [buName] used when we need to test on ParentBU
- * @returns {Promise.<string>} file in string form
+ * @returns {Promise.<string>} file in JSON form
  */
 export function getActualDeployJson(customerKey, type, buName = 'testBU') {
     return File.readJSON(
@@ -71,17 +81,21 @@ export function getActualDeployJson(customerKey, type, buName = 'testBU') {
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
- * @returns {string} file path
+ * @param {string} [buName] used when we need to test on ParentBU
+ * @returns {Promise.<string>} file in string form
  */
-export function getActualDeployFile(customerKey, type, ext) {
-    return `./deploy/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`;
+export function getActualDeployFile(customerKey, type, ext, buName = 'testBU') {
+    return File.readFile(
+        `./deploy/testInstance/${buName}/${type}/${customerKey}.${type}-meta.${ext}`,
+        'utf8'
+    );
 }
 /**
  * gets file from Template folder
  *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
- * @returns {Promise.<string>} file in string form
+ * @returns {Promise.<string>} file in JSON form
  */
 export function getActualTemplateJson(customerKey, type) {
     return File.readJSON(`./template/${type}/${customerKey}.${type}-meta.json`);
@@ -92,33 +106,33 @@ export function getActualTemplateJson(customerKey, type) {
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
- * @returns {string} file path
- */
-export function getActualTemplateFile(customerKey, type, ext) {
-    return `./template/${type}/${customerKey}.${type}-meta.${ext}`;
-}
-/**
- * gets file from resources folder which should be used for comparison
- *
- * @param {number} mid of Business Unit
- * @param {string} type of metadata
- * @param {string} action of SOAP request
  * @returns {Promise.<string>} file in string form
  */
-export function getExpectedJson(mid, type, action) {
-    return File.readJSON(path.join('test', 'resources', mid, type, action + '-expected.json'));
+export function getActualTemplateFile(customerKey, type, ext) {
+    return File.readFile(`./template/${type}/${customerKey}.${type}-meta.${ext}`, 'utf8');
 }
 /**
  * gets file from resources folder which should be used for comparison
  *
- * @param {number} mid of Business Unit
+ * @param {string} mid of Business Unit
+ * @param {string} type of metadata
+ * @param {string} action of SOAP request
+ * @returns {Promise.<string>} file in JSON form
+ */
+export function getExpectedJson(mid, type, action) {
+    return File.readJSON(`./test/resources/${mid}/${type}/${action}-expected.json`);
+}
+/**
+ * gets file from resources folder which should be used for comparison
+ *
+ * @param {string} mid of Business Unit
  * @param {string} type of metadata
  * @param {string} action of SOAP request
  * @param {string} ext file extension
- * @returns {string} file path
+ * @returns {Promise.<string>} file in string form
  */
 export function getExpectedFile(mid, type, action, ext) {
-    return path.join('test', 'resources', mid, type, action + '-expected.' + ext);
+    return File.readFile(`./test/resources/${mid}/${type}/${action}-expected.${ext}`, 'utf8');
 }
 /**
  * setup mocks for API and FS
@@ -127,10 +141,34 @@ export function getExpectedFile(mid, type, action, ext) {
  * @returns {void}
  */
 export function mockSetup(isDeploy) {
+    // no need to execute this again if we ran it a 2nd time for deploy - already done in standard setup
     if (!isDeploy) {
-        // no need to execute this again - already done in standard setup
-        handler.setOptions({ debug: true, noLogFile: true });
+        // reset all options to default
+        handler.setOptions({
+            // test config
+            debug: true,
+            noLogFile: true,
+            // reset
+            api: undefined,
+            keySuffix: undefined,
+            changeKeyField: undefined,
+            changeKeyValue: undefined,
+            commitHistory: undefined,
+            errorLog: undefined,
+            execute: undefined,
+            filter: undefined,
+            fixShared: undefined,
+            fromRetrieve: undefined,
+            json: undefined,
+            like: undefined,
+            noMidSuffix: undefined,
+            refresh: undefined,
+            _runningTest: undefined,
+            schedule: undefined,
+            skipInteraction: undefined,
+        });
     }
+    // @ts-expect-error somehow, MockAdapter does not expect type AxiosInstance
     apimock = new MockAdapter(axiosInstance, { onNoMatch: 'throwException' });
     // set access_token to mid to allow for autorouting of mock to correct resources
     apimock.onPost(authResources.success.url).reply((config) => {
@@ -142,6 +180,9 @@ export function mockSetup(isDeploy) {
         .onAny(new RegExp(`^${escapeRegExp(restUrl)}`))
         .reply((config) => handleRESTRequest(config));
     const fsMockConf = {
+        '.beautyamp.json': fsmock.load(
+            path.resolve(__dirname, '../boilerplate/files/.beautyamp.json')
+        ),
         '.prettierrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.prettierrc')),
         '.eslintrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.eslintrc')),
         '.eslintignore': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.eslintignore')),
@@ -168,6 +209,7 @@ export function mockSetup(isDeploy) {
         'node_modules/sql-formatter': fsmock.load(
             path.resolve(__dirname, '../node_modules/sql-formatter')
         ),
+        'node_modules/jsox': fsmock.load(path.resolve(__dirname, '../node_modules/jsox')),
         'node_modules/nearley': fsmock.load(path.resolve(__dirname, '../node_modules/nearley')),
     };
     if (isDeploy) {
@@ -219,6 +261,19 @@ export function getAPIHistory() {
     return apimock.history;
 }
 /**
+ *
+ * @param {'patch'|'delete'|'post'|'get'|'put'} method http method
+ * @param {string} url url without domain, end on % if you want to search with startsWith()
+ * @returns {object} json payload of the request
+ */
+export function getRestCallout(method, url) {
+    const subset = apimock.history[method];
+    const myCallout = subset.find((item) =>
+        url.endsWith('%') ? item.url.startsWith(url.slice(0, -1)) : item.url === url
+    );
+    return JSON.parse(myCallout.data);
+}
+/**
  * helper to return most important fields for each api call
  *
  * @returns {object} of API history
@@ -251,5 +306,5 @@ export function logAPIHistoryDebug() {
  * @returns {string} escaped string
  */
 function escapeRegExp(str) {
-    return str.replaceAll(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+    return str.replaceAll(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`); // $& means the whole matched string
 }

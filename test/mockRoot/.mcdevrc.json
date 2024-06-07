@@ -57,26 +57,48 @@
             "countryCodeIn": "'testTarget'"
         }
     },
-    "marketList": {},
+    "marketList": {
+        "deployment-source": {
+            "description": "Define one 1:1 BU-Market combo here to as source for automated creation of deployment packages; you can create more than one source market list",
+            "testInstance/testBU": "testSourceMarket"
+        },
+        "deployment-target": {
+            "description": "Define n BU-Market combo here to as target for automated creation of deployment packages; you can create more than one target market list and they can be as complex as you like",
+            "testInstance/testBU": ["testSourceMarket", "testTargetMarket"],
+            "testInstance/_ParentBU_": ["testTargetMarket"]
+        }
+    },
     "metaDataTypes": {
         "documentOnRetrieve": ["user", "automation", "dataExtension", "role"],
         "retrieve": [
             "asset",
+            "attributeGroup",
+            "attributeSet",
             "automation",
             "dataExtension",
             "dataExtract",
+            "deliveryProfile",
             "emailSend",
-            "fileTransfer",
+            "event",
             "fileLocation",
+            "fileTransfer",
             "importFile",
+            "journey",
             "list",
             "mobileCode",
             "mobileKeyword",
+            "mobileMessage",
             "query",
             "role",
             "script",
-            "triggeredSend"
+            "sendClassification",
+            "senderProfile",
+            "transactionalEmail",
+            "transactionalPush",
+            "transactionalSMS",
+            "triggeredSend",
+            "verification"
         ]
     },
-    "version": "6.0.2"
+    "version": "7.0.0"
 }

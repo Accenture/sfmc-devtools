@@ -1,12 +1,14 @@
 import File from '../lib/util/file.js';
 
-import chai, { assert, expect } from 'chai';
+import * as chai from 'chai';
+const assert = chai.assert;
+const expect = chai.expect;
+
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const file = chaiFiles.file;
 
 /**
  * gets file from Retrieve folder
@@ -17,10 +19,16 @@ const file = chaiFiles.file;
  * @param {string} [buName] used when we need to test on ParentBU
  * @returns {Promise.<string>} file in string form
  */
-function getActualJson(customerKey, type, subtype, buName = 'testBU') {
-    return File.readJSON(
-        `./retrieve/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.json`
-    );
+async function getActualJson(customerKey, type, subtype, buName = 'testBU') {
+    try {
+        return await File.readJSON(
+            `./retrieve/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.json`
+        );
+    } catch {
+        return await File.readJSON(
+            `./retrieve/testInstance/${buName}/${type}/${subtype}/${customerKey}/${customerKey}.${type}-${subtype}-meta.json`
+        );
+    }
 }
 /**
  * gets file from Retrieve folder
@@ -29,39 +37,134 @@ function getActualJson(customerKey, type, subtype, buName = 'testBU') {
  * @param {string} type of metadata
  * @param {string} subtype of metadata
  * @param {string} ext file extension
- * @returns {string} file path
+ * @param {string} [filename] optional fileprefix that differs from customerKey
+ * @param {string} [buName] used when we need to test on ParentBU
+ * @returns {Promise.<string | null>} file path
  */
-function getActualFile(customerKey, type, subtype, ext) {
-    return `./retrieve/testInstance/testBU/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`;
+async function getActualFile(customerKey, type, subtype, ext, filename, buName = 'testBU') {
+    const path = `./retrieve/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`;
+    const pathSub = `./retrieve/testInstance/${buName}/${type}/${subtype}/${customerKey}/${filename}.${type}-${subtype}-meta.${ext}`;
+
+    try {
+        return await File.readFile(filename ? pathSub : path, 'utf8');
+    } catch {
+        console.log(`File not found: ${filename ? pathSub : path}`); // eslint-disable-line no-console
+        return null;
+    }
+}
+/**
+ * gets file from Template folder
+ *
+ * @param {string} customerKey of metadata
+ * @param {string} type of metadata
+ * @param {string} subtype of metadata
+ * @returns {Promise.<string>} file in string form
+ */
+async function getActualTemplateJson(customerKey, type, subtype) {
+    try {
+        return await File.readJSON(
+            `./template/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.json`
+        );
+    } catch {
+        return await File.readJSON(
+            `./template/${type}/${subtype}/${customerKey}/${customerKey}.${type}-${subtype}-meta.json`
+        );
+    }
+}
+/**
+ * gets file from Template folder
+ *
+ * @param {string} customerKey of metadata
+ * @param {string} type of metadata
+ * @param {string} subtype of metadata
+ * @param {string} ext file extension
+ * @param {string} [filename] optional fileprefix that differs from customerKey
+ * @returns {Promise.<string | undefined>} file
+ */
+async function getActualTemplateFile(customerKey, type, subtype, ext, filename) {
+    const path = `./template/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`;
+    const pathSub = `./template/${type}/${subtype}/${customerKey}/${filename}.${type}-${subtype}-meta.${ext}`;
+
+    try {
+        return File.readFile(filename ? pathSub : path, 'utf8');
+    } catch {
+        console.log(`File not found: ${filename ? pathSub : path}`); // eslint-disable-line no-console
+        return;
+    }
+}
+
+/**
+ * gets file from Deploy folder
+ *
+ * @param {string} customerKey of metadata
+ * @param {string} type of metadata
+ * @param {string} subtype of metadata
+ * @param {string} [buName] used when we need to test on ParentBU
+ * @returns {Promise.<string>} file in string form
+ */
+async function getActualDeployJson(customerKey, type, subtype, buName = 'testBU') {
+    try {
+        return await File.readJSON(
+            `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.json`
+        );
+    } catch {
+        return await File.readJSON(
+            `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}/${customerKey}.${type}-${subtype}-meta.json`
+        );
+    }
+}
+/**
+ * gets file from Deploy folder
+ *
+ * @param {string} customerKey of metadata
+ * @param {string} type of metadata
+ * @param {string} subtype of metadata
+ * @param {string} ext file extension
+ * @param {string} [filename] optional fileprefix that differs from customerKey
+ * @param {string} [buName] used when we need to test on ParentBU
+ * @returns {Promise.<string | undefined>} file content
+ */
+async function getActualDeployFile(customerKey, type, subtype, ext, filename, buName = 'testBU') {
+    const path = `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`;
+    const pathSub = `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}/${filename}.${type}-${subtype}-meta.${ext}`;
+
+    try {
+        return File.readFile(filename ? pathSub : path, 'utf8');
+    } catch {
+        console.log(`File not found: ${filename ? pathSub : path}`); // eslint-disable-line no-console
+        return;
+    }
 }
 
 describe('type: asset', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
+
     describe('Retrieve ================', () => {
         it('Should retrieve a asset & ensure non-ssjs code is not removed', async () => {
             // WHEN
             const retrieve = await handler.retrieve('testInstance/testBU', ['asset']);
 
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             assert.equal(
                 retrieve['testInstance/testBU'].asset
                     ? Object.keys(retrieve['testInstance/testBU'].asset).length
                     : 0,
-                3,
-                'only 3 assets expected in retrieve response'
+                5,
+                'only 5 assets expected in retrieve response'
             );
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                3,
-                'only 3 assets expected in cache'
+                5,
+                'only 5 assets expected in cache'
             );
 
             assert.deepEqual(
@@ -69,13 +172,626 @@ describe('type: asset', () => {
                 await testUtils.getExpectedJson('9999999', 'asset', 'block-1157-retrieve'),
                 'returned metadata was not equal expected'
             );
-            expect(file(getActualFile('mcdev-issue-1157', 'asset', 'block', 'html'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'asset', 'block-1157-retrieve', 'html'))
+            expect(await getActualFile('mcdev-issue-1157', 'asset', 'block', 'html')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'asset', 'block-1157-retrieve', 'html')
+            );
+
+            assert.deepEqual(
+                await getActualJson('testExisting_asset_templatebasedemail', 'asset', 'message'),
+                await testUtils.getExpectedJson('9999999', 'asset', 'retrieve-templatebasedemail'),
+                'returned metadata was not equal expected'
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_templatebasedemail',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.html.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'retrieve-templatebasedemail-html',
+                    'html'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_templatebasedemail',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.preheader.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'retrieve-templatebasedemail-preheader',
+                    'amp'
+                )
             );
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                30,
+                15,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
+
+    describe('Deploy ================', () => {
+        beforeEach(() => {
+            testUtils.mockSetup(true);
+        });
+
+        it('Should create an asset with mis-matching memberId, automatically adding the MID suffix', async () => {
+            // WHEN
+            const deployResult = await handler.deploy(
+                'testInstance/testBU',
+                ['asset'],
+                ['testNew_asset']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+
+            // check how many items were deployed
+            assert.equal(
+                deployResult['testInstance/testBU']?.asset
+                    ? Object.keys(deployResult['testInstance/testBU']?.asset).length
+                    : 0,
+                1,
+                '1 assets to be deployed'
+            );
+            const upsertCallout = testUtils.getRestCallout('post', '/asset/v1/content/assets/');
+            assert.equal(
+                upsertCallout?.customerKey,
+                'testNew_asset-9999999',
+                'customerKey should be testNew_asset-9999999 due to automatic MID suffix'
+            );
+
+            // insert
+            assert.deepEqual(
+                await getActualJson('testNew_asset-9999999', 'asset', 'block'),
+                await testUtils.getExpectedJson('9999999', 'asset', 'create'),
+                'returned metadata was not equal expected for create'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                10,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should create an assetwith mis-matching memberId, --noMidSuffix and --keySuffix', async () => {
+            handler.setOptions({ keySuffix: '_DEV', noMidSuffix: true });
+            // WHEN
+            const deployResult = await handler.deploy(
+                'testInstance/testBU',
+                ['asset'],
+                ['testNew_asset']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+
+            // check how many items were deployed
+            assert.equal(
+                deployResult['testInstance/testBU']?.asset
+                    ? Object.keys(deployResult['testInstance/testBU']?.asset).length
+                    : 0,
+                1,
+                '1 assets to be deployed'
+            );
+            const upsertCallout = testUtils.getRestCallout('post', '/asset/v1/content/assets/');
+            assert.equal(
+                upsertCallout?.customerKey,
+                'testNew_asset_DEV',
+                'customerKey should be testNew_asset_DEV due to noMidSuffix and keySuffix'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                10,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should create an assetwith mis-matching memberId, --noMidSuffix', async () => {
+            handler.setOptions({ noMidSuffix: true });
+            // WHEN
+            const deployResult = await handler.deploy(
+                'testInstance/testBU',
+                ['asset'],
+                ['testNew_asset']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+
+            // check how many items were deployed
+            assert.equal(
+                deployResult['testInstance/testBU']?.asset
+                    ? Object.keys(deployResult['testInstance/testBU']?.asset).length
+                    : 0,
+                1,
+                '1 assets to be deployed'
+            );
+            const upsertCallout = testUtils.getRestCallout('post', '/asset/v1/content/assets/');
+            assert.equal(
+                upsertCallout?.customerKey,
+                'testNew_asset',
+                'customerKey should be testNew_asset due to noMidSuffix'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                10,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
+
+    describe('Templating ================', () => {
+        it('Should create a asset template via buildTemplate and build it', async () => {
+            // download first before we test buildTemplate
+            await handler.retrieve('testInstance/testBU', ['asset']);
+
+            const expectedApiCallsRetrieve = 15;
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                expectedApiCallsRetrieve,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+
+            // GIVEN there is a template
+            const result = await handler.buildTemplate(
+                'testInstance/testBU',
+                'asset',
+                ['testExisting_asset_templatebasedemail'],
+                'testSourceMarket'
+            );
+            // WHEN
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+            assert.equal(
+                result.asset ? Object.keys(result.asset).length : 0,
+                1,
+                'only one asset expected'
+            );
+            assert.deepEqual(
+                await getActualTemplateJson(
+                    'testExisting_asset_templatebasedemail',
+                    'asset',
+                    'message'
+                ),
+                await testUtils.getExpectedJson('9999999', 'asset', 'template-templatebasedemail'),
+                'returned template JSON of buildTemplate was not equal expected'
+            );
+
+            expect(
+                await getActualTemplateFile(
+                    'testExisting_asset_templatebasedemail',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.html.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'template-templatebasedemail-html',
+                    'html'
+                )
+            );
+            expect(
+                await getActualTemplateFile(
+                    'testExisting_asset_templatebasedemail',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.preheader.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'template-templatebasedemail-preheader',
+                    'amp'
+                )
+            );
+            // THEN
+            await handler.buildDefinition(
+                'testInstance/testBU',
+                'asset',
+                ['testExisting_asset_templatebasedemail'],
+                'testTargetMarket'
+            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
+
+            assert.deepEqual(
+                await getActualDeployJson(
+                    'testTemplated_asset_templatebasedemail',
+                    'asset',
+                    'message'
+                ),
+                await testUtils.getExpectedJson('9999999', 'asset', 'build-templatebasedemail'),
+                'returned deployment JSON was not equal expected'
+            );
+            expect(
+                await getActualDeployFile(
+                    'testTemplated_asset_templatebasedemail',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.html.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'build-templatebasedemail-html',
+                    'html'
+                )
+            );
+            expect(
+                await getActualDeployFile(
+                    'testTemplated_asset_templatebasedemail',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.preheader.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'build-templatebasedemail-preheader',
+                    'amp'
+                )
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
+                0,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
+
+    describe('Delete ================', () => {
+        it('Should delete the item', async () => {
+            // WHEN
+            const isDeleted = await handler.deleteByKey(
+                'testInstance/testBU',
+                'asset',
+                'testExisting_asset'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'deleteByKey should not have thrown an error');
+            assert.equal(isDeleted, true, 'deleteByKey should have returned true');
+            return;
+        });
+    });
+
+    describe('ResolveID ================', () => {
+        it('Should resolve the id of the item but NOT find the asset locally', async () => {
+            // WHEN
+            const resolveIdJson = await handler.resolveId(
+                'testInstance/testBU',
+                'asset',
+                '1295064'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'resolveId should not have thrown an error');
+            assert.deepEqual(
+                resolveIdJson,
+                // @ts-expect-error bad typing of assert.deepEqual
+                await testUtils.getExpectedJson('9999999', 'asset', 'resolveId-1295064-noPath'),
+                'returned response was not equal expected'
+            );
+            return;
+        });
+
+        it('Should resolve the id with --json option enabled', async () => {
+            handler.setOptions({ json: true });
+            // WHEN
+            await handler.resolveId('testInstance/testBU', 'asset', '1295064');
+            // THEN
+            assert.equal(process.exitCode, 0, 'resolveId should not have thrown an error');
+            return;
+        });
+
+        it('Should resolve the id of the item AND find the asset locally', async () => {
+            // prep test by retrieving the file
+            await handler.retrieve('testInstance/testBU', ['asset-block'], ['mcdev-issue-1157']);
+            // WHEN
+            const resolveIdJson = await handler.resolveId(
+                'testInstance/testBU',
+                'asset',
+                '1295064'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'resolveId should not have thrown an error');
+            assert.deepEqual(
+                resolveIdJson,
+                // @ts-expect-error bad typing of assert.deepEqual
+                await testUtils.getExpectedJson('9999999', 'asset', 'resolveId-1295064-withPath'),
+                'returned response was not equal expected'
+            );
+            return;
+        });
+
+        it('Should NOT resolve the id of the item', async () => {
+            // WHEN
+            const resolveIdJson = await handler.resolveId('testInstance/testBU', 'asset', '-1234');
+            // THEN
+            assert.equal(process.exitCode, 404, 'resolveId should have thrown an error');
+            // IMPORTANT: this will throw a false "TEST-ERROR" but our testing framework currently needs to not find the file to throw a 404
+            assert.deepEqual(
+                resolveIdJson,
+                // @ts-expect-error bad typing of assert.deepEqual
+                await testUtils.getExpectedJson('9999999', 'asset', 'resolveId-1234-notFound'),
+                'returned response was not equal expected'
+            );
+            return;
+        });
+    });
+
+    describe('ReplaceContentBlockByX ================', () => {
+        it('Should replace references with ContentBlockByName w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    asset: null,
+                },
+                'name'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].asset,
+                ['testExisting_asset_message'],
+                'should have found the right assets that need updating'
+            );
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.asset ? Object.keys(result.asset).length : 0,
+                5,
+                'only 5 assets expected'
+            );
+            // check if conversions happened
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.html.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-html-rcb-name',
+                    'html'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.preheader.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-preheader-rcb-name',
+                    'amp'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.text.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-text-rcb-name',
+                    'amp'
+                )
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                26,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should replace references with ContentBlockById w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    asset: null,
+                },
+                'id'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].asset,
+                ['testExisting_asset_message'],
+                'should have found the right assets that need updating'
+            );
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.asset ? Object.keys(result.asset).length : 0,
+                5,
+                'only 5 assets expected'
+            );
+            // check if conversions happened
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.html.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-html-rcb-id',
+                    'html'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.preheader.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-preheader-rcb-id',
+                    'amp'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.text.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-text-rcb-id',
+                    'amp'
+                )
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                26,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should replace references with ContentBlockByKey w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    asset: null,
+                },
+                'key'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].asset,
+                ['testExisting_asset_message'],
+                'should have found the right assets that need updating'
+            );
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.asset ? Object.keys(result.asset).length : 0,
+                5,
+                'only 5 assets expected'
+            );
+            // check if conversions happened
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.html.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-html-rcb-key',
+                    'html'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.preheader.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-preheader-rcb-key',
+                    'amp'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.text.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-text-rcb-key',
+                    'amp'
+                )
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                26,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

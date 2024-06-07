@@ -5,6 +5,7 @@
     "dateFormatLocale": "en-US",
     "deleteFile": false,
     "description": "updated on deploy",
+    "encodingName": "utf-8",
     "fieldMappingType": "InferFromColumnHeadings",
     "fieldMappings": [],
     "fileNamingPattern": "blabla",
@@ -21,9 +22,14 @@
     "name": "testExisting_importFile",
     "sendEmailNotification": false,
     "standardQuotedStrings": true,
-    "r__fileLocation_name": "ExactTarget Enhanced FTP",
-    "c__destinationType": "DataExtension",
-    "r__dataExtension_CustomerKey": "testExisting_dataExtension",
+    "c__blankFileProcessing": "Process",
+    "c__dataAction": "AddUpdate",
     "c__subscriberImportType": "DataExtension",
-    "c__dataAction": "AddUpdate"
+    "destination": {
+        "c__destinationType": "DataExtension",
+        "r__dataExtension_key": "testExisting_dataExtension"
+    },
+    "source": {
+        "r__fileLocation_name": "ExactTarget Enhanced FTP"
+    }
 }

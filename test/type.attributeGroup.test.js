@@ -1,4 +1,6 @@
-import chai, { assert } from 'chai';
+import * as chai from 'chai';
+const assert = chai.assert;
+
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
@@ -9,16 +11,18 @@ describe('type: attributeGroup', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
+
     describe('Retrieve ================', () => {
         it('Should retrieve a attributeGroup', async () => {
             // WHEN
             const retrieve = await handler.retrieve('testInstance/testBU', ['attributeGroup']);
 
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             assert.equal(
                 retrieve['testInstance/testBU'].attributeGroup
                     ? Object.keys(retrieve['testInstance/testBU'].attributeGroup).length
