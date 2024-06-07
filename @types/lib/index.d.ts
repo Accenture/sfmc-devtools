@@ -300,12 +300,12 @@ declare class Mcdev {
      * Updates the key to match the name field
      *
      * @param {string} businessUnit name of BU
-     * @param {TypeKeyCombo} selectedTypesArr limit retrieval to given metadata type
+     * @param {TypeKeyCombo|undefined} selectedTypesArr limit retrieval to given metadata type
      * @param {ContentBlockConversionTypes} to what to replace with
      * @param {ContentBlockConversionTypes[]} [fromList] what to replace
      * @returns {Promise.<Object.<string, object>>} key1: business unit name, key2:type value: list of fixed item keys
      */
-    static replaceCbReference(businessUnit: string, selectedTypesArr: TypeKeyCombo, to: ContentBlockConversionTypes, fromList?: ContentBlockConversionTypes[]): Promise<{
+    static replaceCbReference(businessUnit: string, selectedTypesArr: TypeKeyCombo | undefined, to: ContentBlockConversionTypes, fromList?: ContentBlockConversionTypes[]): Promise<{
         [x: string]: object;
     }>;
     /**
@@ -373,11 +373,11 @@ declare class Mcdev {
     /**
      * helper to convert CSVs into an array. if only one value was given, it's also returned as an array
      *
-     * @param {string|string[]} metadataOption potentially comma-separated value or null
+     * @param {string|string[]|undefined} metadataOption potentially comma-separated value or null
      * @param {string[]} [allowedIdentifiers] 'key', 'id', 'name'
      * @param {boolean} [firstOnly] removes all but the first entry if enabled
      * @returns {TypeKeyCombo} values split into an array.
      */
-    static metadataToTypeKey(metadataOption: string | string[], allowedIdentifiers?: string[], firstOnly?: boolean): TypeKeyCombo;
+    static metadataToTypeKey(metadataOption: string | string[] | undefined, allowedIdentifiers?: string[], firstOnly?: boolean): TypeKeyCombo;
 }
 //# sourceMappingURL=index.d.ts.map
