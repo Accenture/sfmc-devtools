@@ -191,7 +191,7 @@ describe('GENERAL', () => {
                 );
                 assert.deepEqual(
                     replace['testInstance/testBU'].script,
-                    ['testExisting_script_ampscript', 'testExisting_script_ampincluded'],
+                    ['testExisting_script_ampincluded', 'testExisting_script_mixed'],
                     'should have found the right scripts that need updating'
                 );
                 assert.deepEqual(
@@ -252,7 +252,7 @@ describe('GENERAL', () => {
                 );
                 assert.deepEqual(
                     replace['testInstance/testBU'].script,
-                    ['testExisting_script_ampscript', 'testExisting_script_ampincluded'],
+                    ['testExisting_script_ampscript', 'testExisting_script_mixed'],
                     'should have found the right scripts that need updating'
                 );
                 assert.deepEqual(
