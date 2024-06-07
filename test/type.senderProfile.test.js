@@ -167,7 +167,6 @@ describe('type: senderProfile', () => {
             );
 
             // check if conversions happened
-            // check if conversions happened
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_senderProfile_rcb', 'senderProfile'),
                 await testUtils.getExpectedJson('9999999', 'senderProfile', 'get-rcb-name'),
@@ -202,7 +201,6 @@ describe('type: senderProfile', () => {
                 'should have found the right senderProfiles that need updating'
             );
 
-            // check if conversions happened
             // check if conversions happened
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_senderProfile_rcb', 'senderProfile'),

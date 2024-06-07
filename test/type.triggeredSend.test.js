@@ -179,7 +179,6 @@ describe('type: triggeredSend', () => {
             );
 
             // check if conversions happened
-            // check if conversions happened
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_triggeredSend_rcb', 'triggeredSend'),
                 await testUtils.getExpectedJson('9999999', 'triggeredSend', 'get-rcb-name'),
@@ -214,7 +213,6 @@ describe('type: triggeredSend', () => {
                 'should have found the right triggeredSends that need updating'
             );
 
-            // check if conversions happened
             // check if conversions happened
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_triggeredSend_rcb', 'triggeredSend'),

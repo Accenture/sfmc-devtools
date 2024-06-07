@@ -302,7 +302,6 @@ describe('type: journey', () => {
             );
 
             // check if conversions happened
-            // check if conversions happened
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_journey_Quicksend', 'journey'),
                 await testUtils.getExpectedJson('9999999', 'journey', 'get-quicksend-rcb-name'),
@@ -337,7 +336,6 @@ describe('type: journey', () => {
                 'should have found the right journeys that need updating'
             );
 
-            // check if conversions happened
             // check if conversions happened
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_journey_Quicksend', 'journey'),
