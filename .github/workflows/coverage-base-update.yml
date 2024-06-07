@@ -47,7 +47,7 @@ jobs:
 
             - name: Check file existence
               id: check_files
-              uses: andstor/file-existence-action@v2
+              uses: andstor/file-existence-action@v3
               with:
                   files: 'base-artifacts/coverage-summary.json, artifacts/coverage-summary.json'
 
