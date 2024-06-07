@@ -37,15 +37,18 @@ async function getActualJson(customerKey, type, subtype, buName = 'testBU') {
  * @param {string} type of metadata
  * @param {string} subtype of metadata
  * @param {string} ext file extension
+ * @param {string} [filename] optional fileprefix that differs from customerKey
  * @param {string} [buName] used when we need to test on ParentBU
  * @returns {Promise.<string | null>} file path
  */
-async function getActualFile(customerKey, type, subtype, ext, buName = 'testBU') {
+async function getActualFile(customerKey, type, subtype, ext, filename, buName = 'testBU') {
     const path = `./retrieve/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`;
+    const pathSub = `./retrieve/testInstance/${buName}/${type}/${subtype}/${customerKey}/${filename}.${type}-${subtype}-meta.${ext}`;
+
     try {
-        return await File.readFile(path, 'utf8');
+        return await File.readFile(filename ? pathSub : path, 'utf8');
     } catch {
-        console.log(`File not found: ${path}`); // eslint-disable-line no-console
+        console.log(`File not found: ${filename ? pathSub : path}`); // eslint-disable-line no-console
         return null;
     }
 }
@@ -76,19 +79,20 @@ async function getActualTemplateJson(customerKey, type, subtype) {
  * @param {string} subtype of metadata
  * @param {string} ext file extension
  * @param {string} [filename] optional fileprefix that differs from customerKey
- * @returns {Promise.<string>} file
+ * @returns {Promise.<string | undefined>} file
  */
 async function getActualTemplateFile(customerKey, type, subtype, ext, filename) {
-    return filename
-        ? File.readFile(
-              `./template/${type}/${subtype}/${customerKey}/${filename}.${type}-${subtype}-meta.${ext}`,
-              'utf8'
-          )
-        : File.readFile(
-              `./template/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`,
-              'utf8'
-          );
+    const path = `./template/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`;
+    const pathSub = `./template/${type}/${subtype}/${customerKey}/${filename}.${type}-${subtype}-meta.${ext}`;
+
+    try {
+        return File.readFile(filename ? pathSub : path, 'utf8');
+    } catch {
+        console.log(`File not found: ${filename ? pathSub : path}`); // eslint-disable-line no-console
+        return;
+    }
 }
+
 /**
  * gets file from Deploy folder
  *
@@ -118,18 +122,18 @@ async function getActualDeployJson(customerKey, type, subtype, buName = 'testBU'
  * @param {string} ext file extension
  * @param {string} [filename] optional fileprefix that differs from customerKey
  * @param {string} [buName] used when we need to test on ParentBU
- * @returns {Promise.<string>} file content
+ * @returns {Promise.<string | undefined>} file content
  */
 async function getActualDeployFile(customerKey, type, subtype, ext, filename, buName = 'testBU') {
-    return filename
-        ? File.readFile(
-              `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}/${filename}.${type}-${subtype}-meta.${ext}`,
-              'utf8'
-          )
-        : File.readFile(
-              `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`,
-              'utf8'
-          );
+    const path = `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}.${type}-${subtype}-meta.${ext}`;
+    const pathSub = `./deploy/testInstance/${buName}/${type}/${subtype}/${customerKey}/${filename}.${type}-${subtype}-meta.${ext}`;
+
+    try {
+        return File.readFile(filename ? pathSub : path, 'utf8');
+    } catch {
+        console.log(`File not found: ${filename ? pathSub : path}`); // eslint-disable-line no-console
+        return;
+    }
 }
 
 describe('type: asset', () => {
@@ -176,6 +180,38 @@ describe('type: asset', () => {
                 await getActualJson('testExisting_asset_templatebasedemail', 'asset', 'message'),
                 await testUtils.getExpectedJson('9999999', 'asset', 'retrieve-templatebasedemail'),
                 'returned metadata was not equal expected'
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_templatebasedemail',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.html.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'retrieve-templatebasedemail-html',
+                    'html'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_templatebasedemail',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.preheader.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'retrieve-templatebasedemail-preheader',
+                    'amp'
+                )
             );
 
             assert.equal(
@@ -349,8 +385,24 @@ describe('type: asset', () => {
                 await testUtils.getExpectedFile(
                     '9999999',
                     'asset',
-                    'template-templatebasedemail',
+                    'template-templatebasedemail-html',
                     'html'
+                )
+            );
+            expect(
+                await getActualTemplateFile(
+                    'testExisting_asset_templatebasedemail',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.preheader.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'template-templatebasedemail-preheader',
+                    'amp'
                 )
             );
             // THEN
@@ -383,8 +435,24 @@ describe('type: asset', () => {
                 await testUtils.getExpectedFile(
                     '9999999',
                     'asset',
-                    'build-templatebasedemail',
+                    'build-templatebasedemail-html',
                     'html'
+                )
+            );
+            expect(
+                await getActualDeployFile(
+                    'testTemplated_asset_templatebasedemail',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.preheader.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'build-templatebasedemail-preheader',
+                    'amp'
                 )
             );
 
@@ -471,6 +539,260 @@ describe('type: asset', () => {
                 // @ts-expect-error bad typing of assert.deepEqual
                 await testUtils.getExpectedJson('9999999', 'asset', 'resolveId-1234-notFound'),
                 'returned response was not equal expected'
+            );
+            return;
+        });
+    });
+
+    describe('ReplaceContentBlockByX ================', () => {
+        it('Should replace references with ContentBlockByName w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    asset: null,
+                },
+                'name'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].asset,
+                ['testExisting_asset_message'],
+                'should have found the right assets that need updating'
+            );
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.asset ? Object.keys(result.asset).length : 0,
+                5,
+                'only 5 assets expected'
+            );
+            // check if conversions happened
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.html.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-html-rcb-name',
+                    'html'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.preheader.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-preheader-rcb-name',
+                    'amp'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.text.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-text-rcb-name',
+                    'amp'
+                )
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                26,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should replace references with ContentBlockById w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    asset: null,
+                },
+                'id'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].asset,
+                ['testExisting_asset_message'],
+                'should have found the right assets that need updating'
+            );
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.asset ? Object.keys(result.asset).length : 0,
+                5,
+                'only 5 assets expected'
+            );
+            // check if conversions happened
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.html.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-html-rcb-id',
+                    'html'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.preheader.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-preheader-rcb-id',
+                    'amp'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.text.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-text-rcb-id',
+                    'amp'
+                )
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                26,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should replace references with ContentBlockByKey w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    asset: null,
+                },
+                'key'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].asset,
+                ['testExisting_asset_message'],
+                'should have found the right assets that need updating'
+            );
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.asset ? Object.keys(result.asset).length : 0,
+                5,
+                'only 5 assets expected'
+            );
+            // check if conversions happened
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.html.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-html-rcb-key',
+                    'html'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.preheader.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-preheader-rcb-key',
+                    'amp'
+                )
+            );
+            expect(
+                await getActualFile(
+                    'testExisting_asset_message',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.text.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_message-text-rcb-key',
+                    'amp'
+                )
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                26,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });

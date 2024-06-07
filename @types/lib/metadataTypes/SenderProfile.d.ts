@@ -58,6 +58,12 @@ declare class SenderProfile extends MetadataType {
      * @returns {Promise.<MetadataTypeItem>} Promise
      */
     static preDeployTasks(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
+    /**
+     *
+     * @param {MetadataTypeItem} item single metadata item
+     * @returns {Promise.<MetadataTypeItem>} key of the item that was updated
+     */
+    static replaceCbReference(item: MetadataTypeItem): Promise<MetadataTypeItem>;
 }
 declare namespace SenderProfile {
     let definition: {
@@ -97,7 +103,15 @@ declare namespace SenderProfile {
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
-            };
+            }; /**
+             * Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
+             *
+             * @param {string} [retrieveDir] Directory where retrieved metadata directory will be saved
+             * @param {void | string[]} [_] unused parameter
+             * @param {void | string[]} [__] unused parameter
+             * @param {string} [key] customer key of single item to retrieve
+             * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
+             */
             CustomerKey: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -115,7 +129,7 @@ declare namespace SenderProfile {
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
-            }; /** @type {SoapRequestParams} */
+            };
             Description: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -147,12 +161,6 @@ declare namespace SenderProfile {
                 template: boolean;
             };
             AutoForwardTriggeredSend: {
-                /**
-                 * Delete a metadata item from the specified business unit
-                 *
-                 * @param {string} customerKey Identifier of data extension
-                 * @returns {Promise.<boolean>} deletion success status
-                 */
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -162,12 +170,7 @@ declare namespace SenderProfile {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
-                template: boolean; /**
-                 * prepares a single item for deployment
-                 *
-                 * @param {MetadataTypeItem} metadata a single query activity
-                 * @returns {Promise.<MetadataTypeItem>} Promise
-                 */
+                template: boolean;
             };
             AutoReplyTriggeredSend: {
                 isCreateable: boolean;

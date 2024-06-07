@@ -26,8 +26,8 @@ describe('type: triggeredSend', () => {
             const result = cache.getCache();
             assert.equal(
                 result.triggeredSend ? Object.keys(result.triggeredSend).length : 0,
-                1,
-                'only one triggeredSend expected'
+                2,
+                'only 2 triggeredSend expected'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_triggeredSend', 'triggeredSend'),
@@ -57,7 +57,7 @@ describe('type: triggeredSend', () => {
             const result = cache.getCache();
             assert.equal(
                 result.triggeredSend ? Object.keys(result.triggeredSend).length : 0,
-                2,
+                3,
                 'two triggeredSends expected'
             );
             // confirm created item
@@ -155,5 +155,112 @@ describe('type: triggeredSend', () => {
 
     describe('Pause ================', () => {
         it('Should pause a triggeredSend by key');
+    });
+
+    describe('ReplaceContentBlockByX ================', () => {
+        it('Should replace references with ContentBlockByName w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    triggeredSend: null,
+                },
+                'name'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].triggeredSend,
+                ['testExisting_triggeredSend_rcb'],
+                'should have found the right triggeredSends that need updating'
+            );
+
+            // check if conversions happened
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_triggeredSend_rcb', 'triggeredSend'),
+                await testUtils.getExpectedJson('9999999', 'triggeredSend', 'get-rcb-name'),
+                'returned JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                24,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should replace references with ContentBlockById w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    triggeredSend: null,
+                },
+                'id'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].triggeredSend,
+                ['testExisting_triggeredSend_rcb'],
+                'should have found the right triggeredSends that need updating'
+            );
+
+            // check if conversions happened
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_triggeredSend_rcb', 'triggeredSend'),
+                await testUtils.getExpectedJson('9999999', 'triggeredSend', 'get-rcb-id'),
+                'returned JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                24,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should replace references with ContentBlockByKey w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    triggeredSend: null,
+                },
+                'key'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].triggeredSend,
+                ['testExisting_triggeredSend_rcb'],
+                'should have found the right assets that need updating'
+            );
+
+            // check if conversions happened
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_triggeredSend_rcb', 'triggeredSend'),
+                await testUtils.getExpectedJson('9999999', 'triggeredSend', 'get-rcb-key'),
+                'returned JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                24,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 });

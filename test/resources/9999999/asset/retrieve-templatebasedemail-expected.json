@@ -22,7 +22,6 @@
         "preheader": {
             "contentType": "application/vnd.etmc.email.View; kind=preheader",
             "thumbnail": {},
-            "content": "my custom preheader text",
             "availableViews": [],
             "data": { "email": { "options": { "generateFrom": null } } },
             "modelVersion": 2

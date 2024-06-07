@@ -87,12 +87,12 @@ describe('type: script', () => {
                 'returned metadata was not equal expected'
             );
             expect(
-                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'html')
+                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'ssjs')
             ).to.not.exist;
             expect(
-                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'ssjs')
+                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'html')
             ).to.equal(
-                await testUtils.getExpectedFile('9999999', 'script', 'get_ampincluded', 'ssjs')
+                await testUtils.getExpectedFile('9999999', 'script', 'get_ampincluded', 'html')
             );
 
             // test with mixed code (ssjs and ampscript side-by-side)
@@ -416,4 +416,213 @@ describe('type: script', () => {
     });
 
     describe('Execute ================', () => {});
+
+    describe('ReplaceContentBlockByX ================', () => {
+        it('Should replace references with ContentBlockByName w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    script: null,
+                },
+                'name'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].script,
+                ['testExisting_script_ampincluded', 'testExisting_script_mixed'],
+                'should have found the right scripts that need updating'
+            );
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.script ? Object.keys(result.script).length : 0,
+                5,
+                'only 5 scripts expected'
+            );
+            // check if conversions happened
+            expect(
+                await testUtils.getActualFile('testExisting_script_ampscript', 'script', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'script',
+                    'get_ampscript-rcb-name',
+                    'html'
+                )
+            );
+            expect(await testUtils.getActualFile('testExisting_script_ampscript', 'script', 'ssjs'))
+                .to.not.exist;
+
+            expect(
+                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'script',
+                    'get_ampincluded-rcb-name',
+                    'html'
+                )
+            );
+            expect(
+                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'ssjs')
+            ).to.not.exist;
+
+            expect(
+                await testUtils.getActualFile('testExisting_script_mixed', 'script', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile('9999999', 'script', 'get_mixed-rcb-name', 'html')
+            );
+            expect(await testUtils.getActualFile('testExisting_script_mixed', 'script', 'ssjs')).to
+                .not.exist;
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                15,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should replace references with ContentBlockById w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    script: null,
+                },
+                'id'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].script,
+                ['testExisting_script_ampscript', 'testExisting_script_mixed'],
+                'should have found the right scripts that need updating'
+            );
+
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.script ? Object.keys(result.script).length : 0,
+                5,
+                'only 5 scripts expected'
+            );
+            // check if conversions happened
+            expect(
+                await testUtils.getActualFile('testExisting_script_ampscript', 'script', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile('9999999', 'script', 'get_ampscript-rcb-id', 'html')
+            );
+            expect(await testUtils.getActualFile('testExisting_script_ampscript', 'script', 'ssjs'))
+                .to.not.exist;
+
+            expect(
+                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'script',
+                    'get_ampincluded-rcb-id',
+                    'html'
+                )
+            );
+            expect(
+                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'ssjs')
+            ).to.not.exist;
+
+            expect(
+                await testUtils.getActualFile('testExisting_script_mixed', 'script', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile('9999999', 'script', 'get_mixed-rcb-id', 'html')
+            );
+            expect(await testUtils.getActualFile('testExisting_script_mixed', 'script', 'ssjs')).to
+                .not.exist;
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                15,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should replace references with ContentBlockByKey w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    script: null,
+                },
+                'key'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].script,
+                ['testExisting_script_ampscript', 'testExisting_script_ampincluded'],
+                'should have found the right scripts that need updating'
+            );
+
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.script ? Object.keys(result.script).length : 0,
+                5,
+                'only 5 scripts expected'
+            );
+            // check if conversions happened
+            expect(
+                await testUtils.getActualFile('testExisting_script_ampscript', 'script', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'script',
+                    'get_ampscript-rcb-key',
+                    'html'
+                )
+            );
+            expect(await testUtils.getActualFile('testExisting_script_ampscript', 'script', 'ssjs'))
+                .to.not.exist;
+
+            expect(
+                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'script',
+                    'get_ampincluded-rcb-key',
+                    'html'
+                )
+            );
+            expect(
+                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'ssjs')
+            ).to.not.exist;
+
+            expect(
+                await testUtils.getActualFile('testExisting_script_mixed', 'script', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile('9999999', 'script', 'get_mixed-rcb-key', 'html')
+            );
+            expect(await testUtils.getActualFile('testExisting_script_mixed', 'script', 'ssjs')).to
+                .not.exist;
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                15,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
 });

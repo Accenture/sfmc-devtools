@@ -1,0 +1,16 @@
+{
+    "CreatedDate": "2021-08-03T11:14:00",
+    "ModifiedDate": "2021-08-03T11:14:00",
+    "CustomerKey": "testExisting_senderProfile_rcb",
+    "Name": "testExisting_senderProfile_rcb",
+    "Description": "Send from joern.berkefeld@accenture.com",
+    "FromName": "%%= ContentBlockByKey(\"mcdev-issue-1157\") =%%",
+    "FromAddress": "%%= ContentBlockByKey(\"mcdev-issue-1157\") =%%",
+    "UseDefaultRMMRules": true,
+    "AutoForwardToEmailAddress": "%%= ContentBlockByKey(\"mcdev-issue-1157\") =%%",
+    "AutoForwardToName": "%%= ContentBlockByKey(\"mcdev-issue-1157\") =%%",
+    "DirectForward": false,
+    "AutoReply": false,
+    "SenderHeaderEmailAddress": "",
+    "SenderHeaderName": ""
+}

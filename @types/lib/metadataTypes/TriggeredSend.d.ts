@@ -95,6 +95,12 @@ declare class TriggeredSend extends MetadataType {
      * @returns {Promise.<boolean>} true if refresh was successful
      */
     static _refreshItem(key: string, checkKey: boolean): Promise<boolean>;
+    /**
+     *
+     * @param {MetadataTypeItem} item single metadata item
+     * @returns {Promise.<MetadataTypeItem>} key of the item that was updated
+     */
+    static replaceCbReference(item: MetadataTypeItem): Promise<MetadataTypeItem>;
 }
 declare namespace TriggeredSend {
     let definition: {
@@ -151,7 +157,7 @@ declare namespace TriggeredSend {
             };
             BccEmail: {
                 isCreateable: boolean;
-                isUpdateable: boolean;
+                isUpdateable: boolean; /** @type {SoapRequestParams} */
                 retrieving: boolean;
                 templating: boolean;
             };
@@ -217,15 +223,15 @@ declare namespace TriggeredSend {
             };
             Description: {
                 isCreateable: boolean;
-                isUpdateable: boolean; /**
-                 * parses retrieved Metadata before saving
-                 *
-                 * @param {MetadataTypeItem} metadata a single item
-                 * @returns {MetadataTypeItem | void} Array with one metadata object and one sql string
-                 */
+                isUpdateable: boolean;
                 retrieving: boolean;
                 templating: boolean;
-            };
+            }; /**
+             * parses retrieved Metadata before saving
+             *
+             * @param {MetadataTypeItem} metadata a single item
+             * @returns {MetadataTypeItem | void} Array with one metadata object and one sql string
+             */
             DisableOnEmailBuildError: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -565,12 +571,7 @@ declare namespace TriggeredSend {
             SendSourceDataExtension: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
-                retrieving: boolean; /**
-                 * helper for {@link TriggeredSend.refresh} that finds active TSDs on the server and filters it by the same rules that {@link TriggeredSend.retrieve} is using to avoid refreshing TSDs with broken dependencies
-                 *
-                 * @param {boolean} [assetLoaded] if run after Asset.deploy via --refresh option this will skip caching assets
-                 * @returns {Promise.<MetadataTypeMapObj>} Promise of TSD item map
-                 */
+                retrieving: boolean;
                 templating: boolean;
             };
             SendWindowClose: {
@@ -651,12 +652,11 @@ declare namespace TriggeredSend {
             r__folder_Path: {
                 skipValidation: boolean;
             };
-            /** @type {SoapRequestParams} */
             r__list_PathName: {
                 skipValidation: boolean;
-            }; /** @type {SoapRequestParams} */
+            };
             c__priority: {
-                skipValidation: boolean;
+                skipValidation: boolean; /** @type {SoapRequestParams} */
             };
             r__sendClassification_key: {
                 skipValidation: boolean;

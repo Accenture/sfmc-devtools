@@ -195,6 +195,22 @@ declare class MetadataType {
      */
     static refresh(): void;
     /**
+     * this iterates over all items found in the retrieve folder and executes the type-specific method for replacing references
+     *
+     * @param {MetadataTypeMap} metadataMap list of metadata (keyField => metadata)
+     * @param {string} retrieveDir retrieve dir including cred and bu
+     * @returns {Promise.<string[]>} Returns list of keys for which references were replaced
+     */
+    static replaceCbReferenceLoop(metadataMap: MetadataTypeMap, retrieveDir: string): Promise<string[]>;
+    /**
+     * Abstract execute method that needs to be implemented in child metadata type
+     *
+     * @param {MetadataTypeItem} item single metadata item
+     * @param {string} [retrieveDir] directory where metadata is saved
+     * @returns {Promise.<MetadataTypeItem | CodeExtractItem>} key of the item that was updated
+     */
+    static replaceCbReference(item: MetadataTypeItem, retrieveDir?: string): Promise<MetadataTypeItem | CodeExtractItem>;
+    /**
      * Abstract execute method that needs to be implemented in child metadata type
      *
      * @param {string[]} keyArr customerkey of the metadata
@@ -471,6 +487,16 @@ declare class MetadataType {
      * @returns {Promise.<MetadataTypeMap>} Promise of saved metadata
      */
     static saveResults(results: MetadataTypeMap, retrieveDir: string, overrideType?: string, templateVariables?: TemplateMap): Promise<MetadataTypeMap>;
+    /**
+     *
+     * @param {MetadataTypeMap} results metadata results from deploy
+     * @param {string} originalKey key of metadata
+     * @param {string[]} baseDir [retrieveDir, ...overrideType.split('-')]
+     * @param {string} [subtypeExtension] e.g. ".asset-meta" or ".query-meta"
+     * @param {TemplateMap} [templateVariables] variables to be replaced in the metadata
+     * @returns {MetadataTypeItem} saved metadata
+     */
+    static saveToDisk(results: MetadataTypeMap, originalKey: string, baseDir: string[], subtypeExtension?: string, templateVariables?: TemplateMap): MetadataTypeItem;
     /**
      * helper for {@link MetadataType.buildDefinitionForNested}
      * searches extracted file for template variable names and applies the market values

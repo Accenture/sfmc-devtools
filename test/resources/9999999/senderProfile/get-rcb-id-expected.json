@@ -1,0 +1,16 @@
+{
+    "CreatedDate": "2021-08-03T11:14:00",
+    "ModifiedDate": "2021-08-03T11:14:00",
+    "CustomerKey": "testExisting_senderProfile_rcb",
+    "Name": "testExisting_senderProfile_rcb",
+    "Description": "Send from joern.berkefeld@accenture.com",
+    "FromName": "%%= ContentBlockById(1295064) =%%",
+    "FromAddress": "%%= ContentBlockById(1295064) =%%",
+    "UseDefaultRMMRules": true,
+    "AutoForwardToEmailAddress": "%%= ContentBlockById(1295064) =%%",
+    "AutoForwardToName": "%%= ContentBlockById(1295064) =%%",
+    "DirectForward": false,
+    "AutoReply": false,
+    "SenderHeaderEmailAddress": "",
+    "SenderHeaderName": ""
+}

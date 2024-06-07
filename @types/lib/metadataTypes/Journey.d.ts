@@ -91,6 +91,12 @@ declare class Journey extends MetadataType {
      * @param {MetadataTypeItem} metadata a single item
      */
     private static _preDeployTasks_activities;
+    /**
+     *
+     * @param {MetadataTypeItem} item single metadata item
+     * @returns {Promise.<MetadataTypeItem>} key of the item that was updated
+     */
+    static replaceCbReference(item: MetadataTypeItem): Promise<MetadataTypeItem>;
 }
 declare namespace Journey {
     let definition: {
@@ -109,7 +115,15 @@ declare namespace Journey {
         lastmodNameField: any;
         restPagination: boolean;
         restPageSize: number;
-        type: string;
+        type: string; /**
+         * Retrieves Metadata of Journey
+         *
+         * @param {string} retrieveDir Directory where retrieved metadata directory will be saved
+         * @param {void | string[]} [_] unused parameter
+         * @param {void | string[]} [__] unused parameter
+         * @param {string} [key] customer key of single item to retrieve
+         * @returns {Promise.<MetadataTypeMapObj>} Promise
+         */
         typeDescription: string;
         typeRetrieveByDefault: boolean;
         typeName: string;
@@ -349,7 +363,12 @@ declare namespace Journey {
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
-            };
+            }; /**
+             * Delete a metadata item from the specified business unit
+             *
+             * @param {string} key Identifier of item
+             * @returns {Promise.<boolean>} deletion success status
+             */
             'triggers[].configurationArguments.relatedObjectFilterCriteria': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -474,12 +493,7 @@ declare namespace Journey {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
-                template: boolean; /**
-                 * Creates a single item
-                 *
-                 * @param {MetadataTypeItem} metadata a single item
-                 * @returns {Promise} Promise
-                 */
+                template: boolean;
             };
             'triggers[].metaData.iconUrl': {
                 isCreateable: boolean;

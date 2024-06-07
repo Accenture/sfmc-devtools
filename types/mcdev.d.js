@@ -11,7 +11,7 @@
 /**
  * @typedef {Object.<string, string>} TemplateMap
  * @typedef {'asset'|'asset-archive'|'asset-asset'|'asset-audio'|'asset-block'|'asset-code'|'asset-document'|'asset-image'|'asset-message'|'asset-other'|'asset-rawimage'|'asset-template'|'asset-textfile'|'asset-video'|'attributeGroup'|'attributeSet'|'automation'|'campaign'|'contentArea'|'dataExtension'|'dataExtensionField'|'dataExtensionTemplate'|'dataExtract'|'dataExtractType'|'discovery'|'deliveryProfile'|'email'|'emailSend'|'event'|'fileLocation'|'fileTransfer'|'filter'|'folder'|'importFile'|'journey'|'list'|'mobileCode'|'mobileKeyword'|'mobileMessage'|'query'|'role'|'script'|'sendClassification'|'senderProfile'|'transactionalEmail'|'transactionalPush'|'transactionalSMS'|'triggeredSend'|'user'|'verification'} SupportedMetadataTypes
- * @typedef {Object.<SupportedMetadataTypes, string[]>} TypeKeyCombo object-key=metadata type, value=array of external keys
+ * @typedef {Object.<string, string[] | null>} TypeKeyCombo object-key=SupportedMetadataTypes, value=array of external keys
  */
 
 /**
@@ -448,6 +448,12 @@ complex
  * @property {Function} error (msg) print error message
  * @property {Function} errorStack (ex, msg) print error with trace message
  * @typedef {import('winston').Logger & McdevLogger} Logger
+ */
+/**
+ * @typedef {{id: number, key: string, name: string}} AssetItemSimple
+ * @typedef {Object.<string, AssetItemSimple>} AssetItemSimpleMap
+ * @typedef {Object.<number, AssetItemSimple>} AssetItemIdSimpleMap
+ * @typedef {'id'|'key'|'name'} ContentBlockConversionTypes
  */
 /**
  * @typedef {object} ExplainType

@@ -57,6 +57,24 @@
                 <SenderHeaderEmailAddress />
                 <SenderHeaderName />
             </Results>
+            <Results xsi:type="SenderProfile">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2021-08-03T11:14:00</CreatedDate>
+                <ModifiedDate>2021-08-03T11:14:00</ModifiedDate>
+                <ObjectID>a75d452b-7ef4-eb11-b82d-48df37d1da99</ObjectID>
+                <CustomerKey>testExisting_senderProfile_rcb</CustomerKey>
+                <Name>testExisting_senderProfile_rcb</Name>
+                <Description>Send from joern.berkefeld@accenture.com</Description>
+                <FromName>%%= ContentBlockByName("Content Builder\dont strip non ssjs content") =%%</FromName>
+                <FromAddress>%%= ContentBlockByKey("mcdev-issue-1157") =%%</FromAddress>
+                <UseDefaultRMMRules>true</UseDefaultRMMRules>
+                <AutoForwardToEmailAddress>%%= ContentBlockById(1295064) =%%</AutoForwardToEmailAddress>
+                <AutoForwardToName>%%= ContentBlockById(1295064) =%%</AutoForwardToName>
+                <DirectForward>false</DirectForward>
+                <AutoReply>false</AutoReply>
+                <SenderHeaderEmailAddress />
+                <SenderHeaderName />
+            </Results>
         </RetrieveResponseMsg>
     </soap:Body>
 </soap:Envelope>
