@@ -24,7 +24,7 @@ jobs:
                   git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
 
             - name: Download artifact for base branch
-              uses: dawidd6/action-download-artifact@v3
+              uses: dawidd6/action-download-artifact@v5
               continue-on-error: true
               with:
                   workflow: ${{ github.event.pull_request.base.ref == 'main' && 'coverage-main-branch.yml' || github.event.pull_request.base.ref == 'develop' && 'coverage-develop-branch.yml' || 'coverage.yml' }}
@@ -35,7 +35,7 @@ jobs:
                   search_artifacts: true
 
             - name: Download artifact for to be merged branch
-              uses: dawidd6/action-download-artifact@v3
+              uses: dawidd6/action-download-artifact@v5
               continue-on-error: true
               with:
                   workflow: 'coverage.yml'
