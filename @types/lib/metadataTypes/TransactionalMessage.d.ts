@@ -110,7 +110,11 @@ declare namespace TransactionalMessage {
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
-            };
+            }; /**
+             * TransactionalMessage MetadataType
+             *
+             * @augments MetadataType
+             */
             description: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -120,15 +124,6 @@ declare namespace TransactionalMessage {
             requestId: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
-                /**
-                 * Retrieves Metadata
-                 *
-                 * @param {string} [retrieveDir] Directory where retrieved metadata directory will be saved
-                 * @param {void | string[]} [_] unused parameter
-                 * @param {void | string[]} [__] unused parameter
-                 * @param {string} [key] customer key of single item to retrieve
-                 * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
-                 */
                 retrieving: boolean;
                 template: boolean;
             };
