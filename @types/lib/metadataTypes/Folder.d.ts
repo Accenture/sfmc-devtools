@@ -115,6 +115,7 @@ declare namespace Folder {
         dependencies: any[];
         subTypes: string[];
         deployFolderTypes: string[];
+        deployFolderTypesRest: string[];
         deployFolderBlacklist: string[];
         folderTypesFromParent: string[];
         hasExtended: boolean;

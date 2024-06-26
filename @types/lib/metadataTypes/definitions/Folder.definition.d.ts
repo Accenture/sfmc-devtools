@@ -3,6 +3,7 @@ declare namespace _default {
     let dependencies: any[];
     let subTypes: string[];
     let deployFolderTypes: string[];
+    let deployFolderTypesRest: string[];
     let deployFolderBlacklist: string[];
     let folderTypesFromParent: string[];
     let hasExtended: boolean;
