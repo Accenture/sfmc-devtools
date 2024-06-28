@@ -168,7 +168,6 @@ export function mockSetup(isDeploy) {
             skipInteraction: undefined,
         });
     }
-    // @ts-expect-error somehow, MockAdapter does not expect type AxiosInstance
     apimock = new MockAdapter(axiosInstance, { onNoMatch: 'throwException' });
     // set access_token to mid to allow for autorouting of mock to correct resources
     apimock.onPost(authResources.success.url).reply((config) => {
@@ -272,6 +271,30 @@ export function getRestCallout(method, url) {
         url.endsWith('%') ? item.url.startsWith(url.slice(0, -1)) : item.url === url
     );
     return JSON.parse(myCallout.data);
+}
+/**
+ *
+ * @param {'Schedule'|'Retrieve'|'Create'|'Update'|'Delete'|'Describe'|'Execute'} requestAction soap request types
+ * @param {string} [objectType] optionall filter requests by object
+ * @returns {object[]} json payload of the requests
+ */
+export function getSoapCallout(requestAction, objectType) {
+    const method = 'post';
+    const url = '/Service.asmx';
+    const subset = apimock.history[method];
+    const myCallout = subset
+        // find soap requests
+        .filter((item) => item.url === url)
+        // find soap requestst of the correct request type
+        .filter((item) => item.headers.SOAPAction === requestAction)
+        // find soap requestst of the correct request type
+        .filter(
+            (item) =>
+                !objectType ||
+                item.data.split('<ObjectType>')[1].split('</ObjectType>')[0] === objectType
+        )
+        .map((item) => item.data);
+    return myCallout;
 }
 /**
  * helper to return most important fields for each api call
