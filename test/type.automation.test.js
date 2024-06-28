@@ -85,13 +85,27 @@ describe('type: automation', () => {
                 5,
                 'three automations expected'
             );
+            // get what was sent to the server API
+            const createCallout = testUtils.getRestCallout('post', '/automation/v1/automations/%');
+            const updateCallout = testUtils.getRestCallout('patch', '/automation/v1/automations/%');
+
             // insert
+            assert.deepEqual(
+                createCallout,
+                await testUtils.getExpectedJson('9999999', 'automation', 'create-callout'),
+                'sent metadata was not equal expected for create'
+            );
             assert.deepEqual(
                 await testUtils.getActualJson('testNew_automation', 'automation'),
                 await testUtils.getExpectedJson('9999999', 'automation', 'create'),
                 'returned metadata was not equal expected for create'
             );
             // update
+            assert.deepEqual(
+                updateCallout,
+                await testUtils.getExpectedJson('9999999', 'automation', 'update-callout'),
+                'sent metadata was not equal expected for create'
+            );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_automation', 'automation'),
                 await testUtils.getExpectedJson('9999999', 'automation', 'update'),
@@ -147,6 +161,13 @@ describe('type: automation', () => {
                 5,
                 'five cached automation expected'
             );
+
+            // const scheduleCalloutList = testUtils.getSoapCallout('Schedule');
+            // const objectIds = {
+            //     testNew_automation: 'a8afb0e2-b00a-4c88-ad2e-1f7f8788c560',
+            //     testExisting_automation: '08afb0e2-b00a-4c88-ad2e-1f7f8788c560',
+            // };
+
             assert.equal(
                 deployed['testInstance/testBU'].automation
                     ? Object.keys(deployed['testInstance/testBU'].automation).length
@@ -169,7 +190,32 @@ describe('type: automation', () => {
                 'expected specific automation to have been deployed'
             );
 
+            // insert
+            // assert.equal(
+            //     scheduleCalloutList.find((item) => item.includes(objectIds['testNew_automation'])),
+            //     await testUtils.getExpectedFile(
+            //         '9999999',
+            //         'automation',
+            //         'schedule-callout-new',
+            //         'xml'
+            //     ),
+            //     'sent metadata was not equal expected for create'
+            // );
+
             // update
+            // assert.deepEqual(
+            //     scheduleCalloutList.find((item) =>
+            //         item.includes(objectIds['testExisting_automation'])
+            //     ),
+            //     await testUtils.getExpectedFile(
+            //         '9999999',
+            //         'automation',
+            //         'schedule-callout-existing',
+            //         'xml'
+            //     ),
+            //     'sent metadata was not equal expected for create'
+            // );
+
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_automation', 'automation'),
                 await testUtils.getExpectedJson('9999999', 'automation', 'update'),
