@@ -58,10 +58,11 @@ declare class Asset extends MetadataType {
      *
      * @param {void | string[]} [_] parameter not used
      * @param {string[]} [subTypeArr] optionally limit to a single subtype
+     * @param {void | string} [__] parameter not used
      * @param {boolean} [loadShared] optionally retrieve assets from other BUs that were shared with the current
      * @returns {Promise.<{metadata: AssetMap, type: string}>} Promise
      */
-    static retrieveForCache(_?: void | string[], subTypeArr?: string[], loadShared?: boolean): Promise<{
+    static retrieveForCache(_?: void | string[], subTypeArr?: string[], __?: void | string, loadShared?: boolean): Promise<{
         metadata: AssetMap;
         type: string;
     }>;
@@ -354,9 +355,9 @@ declare class Asset extends MetadataType {
      * @param {string} subType asset subtype
      * @param {object} item api response for metadata
      * @param {string} buName owner business unit name
-     * @returns {string} path to the asset's code
+     * @returns {Promise.<string>} path to the asset's code
      */
-    static "__#2@#getPath"(subType: string, item: object, buName: string): string;
+    static "__#2@#getPath"(subType: string, item: object, buName: string): Promise<string>;
     /**
      * helper for {@link Asset.resolveId} that loads the JSON file for the asset
      *
@@ -644,14 +645,14 @@ declare namespace Asset {
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
-            }; /**
-             * helper for {@link Asset.retrieve} + {@link Asset.retrieveAsTemplate}
-             *
-             * @private
-             * @returns {string[]} AssetSubType array
-             */
+            };
             legacyData: {
-                isCreateable: boolean;
+                isCreateable: boolean; /**
+                 * helper for {@link Asset.retrieve} + {@link Asset.retrieveAsTemplate}
+                 *
+                 * @private
+                 * @returns {string[]} AssetSubType array
+                 */
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;

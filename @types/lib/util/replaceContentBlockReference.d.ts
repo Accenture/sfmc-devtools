@@ -35,11 +35,13 @@ export default class ReplaceContentBlockReference {
         key: AssetItemSimpleMap;
         name: AssetItemSimpleMap;
     };
-    /** @type {{id: RegExp[], key: RegExp[], name: RegExp[]}} */
+    /** @type {Object.<string, {id: RegExp[], key: RegExp[], name: RegExp[]}>} */
     static "__#1@#regexBy": {
-        id: RegExp[];
-        key: RegExp[];
-        name: RegExp[];
+        [x: string]: {
+            id: RegExp[];
+            key: RegExp[];
+            name: RegExp[];
+        };
     };
     /**
      * used to equalize the reference in the code to whatever is set in the "to" field
@@ -53,14 +55,13 @@ export default class ReplaceContentBlockReference {
     static replaceReference(str: string, parentName: string, fromList?: ContentBlockConversionTypes[], to?: ContentBlockConversionTypes): string;
     /**
      *
-     * @private
      * @param {ContentBlockConversionTypes} from replace with
      * @param {string|number} identifier id, key or name of asset
      * @param {string} parentName name of the object that was passed in; used in error message only
      * @param {boolean} [isSsjs] replaces backslashes with double backslashes in name if true
      * @returns {AssetItemSimple} asset object
      */
-    private static "__#1@#getAssetBy";
+    static "__#1@#getAssetBy"(from: ContentBlockConversionTypes, identifier: string | number, parentName: string, isSsjs?: boolean): AssetItemSimple;
     /**
      *
      * @param {AssetItemSimple} asset asset object

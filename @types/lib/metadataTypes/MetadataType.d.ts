@@ -494,9 +494,9 @@ declare class MetadataType {
      * @param {string[]} baseDir [retrieveDir, ...overrideType.split('-')]
      * @param {string} [subtypeExtension] e.g. ".asset-meta" or ".query-meta"
      * @param {TemplateMap} [templateVariables] variables to be replaced in the metadata
-     * @returns {MetadataTypeItem} saved metadata
+     * @returns {Promise.<MetadataTypeItem>} saved metadata
      */
-    static saveToDisk(results: MetadataTypeMap, originalKey: string, baseDir: string[], subtypeExtension?: string, templateVariables?: TemplateMap): MetadataTypeItem;
+    static saveToDisk(results: MetadataTypeMap, originalKey: string, baseDir: string[], subtypeExtension?: string, templateVariables?: TemplateMap): Promise<MetadataTypeItem>;
     /**
      * helper for {@link MetadataType.buildDefinitionForNested}
      * searches extracted file for template variable names and applies the market values
