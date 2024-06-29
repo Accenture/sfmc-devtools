@@ -32,7 +32,7 @@ export default [
 
         languageOptions: {
             globals: {
-                ...globals.node,
+                ...globals.nodeBuiltin,
                 Atomics: 'readonly',
                 SharedArrayBuffer: 'readonly',
             },
