@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // for some reason doesnt realize below reference
-// eslint-disable-next-line no-unused-vars
+
 import fsmock from 'mock-fs';
 
 let apimock;
