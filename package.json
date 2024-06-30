@@ -86,6 +86,7 @@
         "yargs": "17.7.2"
     },
     "devDependencies": {
+        "@eslint/js": "9.6.0",
         "@types/mocha": "10.0.6",
         "@types/node": "20.14.9",
         "assert": "2.1.0",
@@ -93,14 +94,15 @@
         "c8": "10.0.0",
         "chai": "5.1.1",
         "chai-files": "1.4.0",
-        "eslint": "8.57.0",
+        "eslint": "9.6.0",
         "eslint-config-prettier": "9.1.0",
-        "eslint-config-ssjs": "1.1.11",
+        "eslint-config-ssjs": "2.0.0",
         "eslint-plugin-jsdoc": "48.2.7",
         "eslint-plugin-mocha": "10.4.3",
         "eslint-plugin-prettier": "5.1.2",
         "eslint-plugin-unicorn": "53.0.0",
         "fast-xml-parser": "4.4.0",
+        "globals": "15.6.0",
         "husky": "9.0.11",
         "lint-staged": "15.2.7",
         "mocha": "10.4.0",
@@ -113,9 +115,7 @@
         "fsevents": "*"
     },
     "lint-staged": {
-        "*.js": [
-            "eslint --fix"
-        ]
+        "*.js": ["eslint --fix"]
     },
     "type": "module"
 }

@@ -44,18 +44,34 @@ declare namespace Init {
      * returns list of files that need to be updated
      *
      * @param {string} projectVersion version found in config file of the current project
-     * @returns {Promise.<string[]>} relevant files with path that need to be updated
+     * @returns {Promise.<{updates:string[],deletes:string[]}>} relevant files with path that need to be updated
      */
-    function _getForcedUpdateList(projectVersion: string): Promise<string[]>;
+    function _getForcedUpdateList(projectVersion: string): Promise<{
+        updates: string[];
+        deletes: string[];
+    }>;
     /**
      * handles creation/update of one config file from the boilerplate at a time
      *
      * @param {string[]} fileNameArr 0: path, 1: filename, 2: extension with dot
-     * @param {string[]} relevantForcedUpdates if fileNameArr is in this list we require an override
+     * @param {{updates:string[],deletes:string[]}} relevantForced if fileNameArr is in this list we require an override
      * @param {string} [boilerplateFileContent] in case we cannot copy files 1:1 this can be used to pass in content
      * @returns {Promise.<boolean>} install successful or error occured
      */
-    function _createIdeConfigFile(fileNameArr: string[], relevantForcedUpdates: string[], boilerplateFileContent?: string): Promise<boolean>;
+    function _createIdeConfigFile(fileNameArr: string[], relevantForced: {
+        updates: string[];
+        deletes: string[];
+    }, boilerplateFileContent?: string): Promise<boolean>;
+    /**
+     * handles deletion of no longer needed config files
+     *
+     * @param {{updates:string[],deletes:string[]}} relevantForced if file is in .deletes, we require deleting/renaming it
+     * @returns {Promise.<boolean>} deletion successful or error occured
+     */
+    function _removeIdeConfigFiles(relevantForced: {
+        updates: string[];
+        deletes: string[];
+    }): Promise<boolean>;
     /**
      * helper method for this.upgradeProject that upgrades project config if needed
      *
