@@ -63,10 +63,10 @@ declare namespace Init {
         deletes: string[];
     }, boilerplateFileContent?: string): Promise<boolean>;
     /**
-     * handles creation/update of one config file from the boilerplate at a time
+     * handles deletion of no longer needed config files
      *
-     * @param {{updates:string[],deletes:string[]}} relevantForced if fileNameArr is in this list we require an override
-     * @returns {Promise.<boolean>} install successful or error occured
+     * @param {{updates:string[],deletes:string[]}} relevantForced if file is in .deletes, we require deleting/renaming it
+     * @returns {Promise.<boolean>} deletion successful or error occured
      */
     function _removeIdeConfigFiles(relevantForced: {
         updates: string[];
