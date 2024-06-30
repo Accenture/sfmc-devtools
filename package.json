@@ -1,6 +1,6 @@
 {
     "name": "mcdev",
-    "version": "7.0.2",
+    "version": "7.0.3",
     "description": "Accenture Salesforce Marketing Cloud DevTools",
     "author": "Accenture: joern.berkefeld, douglas.midgley, robert.zimmermann, maciej.barnas",
     "license": "MIT",
@@ -115,7 +115,9 @@
         "fsevents": "*"
     },
     "lint-staged": {
-        "*.js": ["eslint --fix"]
+        "*.js": [
+            "eslint --fix"
+        ]
     },
     "type": "module"
 }
