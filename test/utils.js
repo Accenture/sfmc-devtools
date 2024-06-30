@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // for some reason doesnt realize below reference
-// eslint-disable-next-line no-unused-vars
+
 import fsmock from 'mock-fs';
 
 let apimock;
@@ -184,8 +184,9 @@ export function mockSetup(isDeploy) {
             path.resolve(__dirname, '../boilerplate/files/.beautyamp.json')
         ),
         '.prettierrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.prettierrc')),
-        '.eslintrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.eslintrc')),
-        '.eslintignore': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.eslintignore')),
+        'eslint.config.js': fsmock.load(
+            path.resolve(__dirname, '../boilerplate/files/eslint.config.js')
+        ),
         '.mcdevrc.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdevrc.json')),
         '.mcdev-auth.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdev-auth.json')),
         'boilerplate/config.json': fsmock.load(
@@ -272,6 +273,30 @@ export function getRestCallout(method, url) {
         url.endsWith('%') ? item.url.startsWith(url.slice(0, -1)) : item.url === url
     );
     return JSON.parse(myCallout.data);
+}
+/**
+ *
+ * @param {'Schedule'|'Retrieve'|'Create'|'Update'|'Delete'|'Describe'|'Execute'} requestAction soap request types
+ * @param {string} [objectType] optionall filter requests by object
+ * @returns {object[]} json payload of the requests
+ */
+export function getSoapCallout(requestAction, objectType) {
+    const method = 'post';
+    const url = '/Service.asmx';
+    const subset = apimock.history[method];
+    const myCallout = subset
+        // find soap requests
+        .filter((item) => item.url === url)
+        // find soap requestst of the correct request type
+        .filter((item) => item.headers.SOAPAction === requestAction)
+        // find soap requestst of the correct request type
+        .filter(
+            (item) =>
+                !objectType ||
+                item.data.split('<ObjectType>')[1].split('</ObjectType>')[0] === objectType
+        )
+        .map((item) => item.data);
+    return myCallout;
 }
 /**
  * helper to return most important fields for each api call

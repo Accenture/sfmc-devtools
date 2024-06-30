@@ -363,12 +363,7 @@ declare namespace Journey {
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
-            }; /**
-             * Delete a metadata item from the specified business unit
-             *
-             * @param {string} key Identifier of item
-             * @returns {Promise.<boolean>} deletion success status
-             */
+            };
             'triggers[].configurationArguments.relatedObjectFilterCriteria': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -458,7 +453,14 @@ declare namespace Journey {
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
-            };
+            }; /**
+             * Deploys metadata - merely kept here to be able to print {@link Util.logBeta} once per deploy
+             *
+             * @param {MetadataTypeMap} metadata metadata mapped by their keyField
+             * @param {string} deployDir directory where deploy metadata are saved
+             * @param {string} retrieveDir directory where metadata after deploy should be saved
+             * @returns {Promise.<MetadataTypeMap>} Promise of keyField => metadata map
+             */
             'triggers[].metaData': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -531,7 +533,11 @@ declare namespace Journey {
             r__folder_Path: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
-                retrieving: boolean;
+                retrieving: boolean; /**
+                 * helper for Journey's {@link Journey.saveResults}. Gets executed after retreive of metadata type and
+                 *
+                 * @param {MetadataTypeMap} metadataMap key=customer key, value=metadata
+                 */
                 template: boolean;
             };
         };
