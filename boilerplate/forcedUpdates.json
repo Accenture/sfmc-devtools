@@ -1,5 +1,10 @@
 [
     {
+        "version": "7.0.2",
+        "files": ["eslint.config.js"],
+        "filesRemove": [".eslintignore", ".eslintrc"]
+    },
+    {
         "version": "7.0.0",
         "files": [
             ".vscode/extensions.json",

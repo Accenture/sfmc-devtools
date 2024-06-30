@@ -86,7 +86,6 @@
         "yargs": "17.7.2"
     },
     "devDependencies": {
-        "@eslint/eslintrc": "3.1.0",
         "@eslint/js": "9.6.0",
         "@types/mocha": "10.0.6",
         "@types/node": "20.14.9",
@@ -97,7 +96,7 @@
         "chai-files": "1.4.0",
         "eslint": "9.6.0",
         "eslint-config-prettier": "9.1.0",
-        "eslint-config-ssjs": "1.1.11",
+        "eslint-config-ssjs": "2.0.0",
         "eslint-plugin-jsdoc": "48.2.7",
         "eslint-plugin-mocha": "10.4.3",
         "eslint-plugin-prettier": "5.1.2",
@@ -116,9 +115,7 @@
         "fsevents": "*"
     },
     "lint-staged": {
-        "*.js": [
-            "eslint --fix"
-        ]
+        "*.js": ["eslint --fix"]
     },
     "type": "module"
 }
