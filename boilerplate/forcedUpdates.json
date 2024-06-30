@@ -1,6 +1,6 @@
 [
     {
-        "version": "7.0.2",
+        "version": "7.0.3",
         "files": ["eslint.config.js"],
         "filesRemove": [".eslintignore", ".eslintrc"]
     },
