@@ -184,8 +184,9 @@ export function mockSetup(isDeploy) {
             path.resolve(__dirname, '../boilerplate/files/.beautyamp.json')
         ),
         '.prettierrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.prettierrc')),
-        '.eslintrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.eslintrc')),
-        '.eslintignore': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.eslintignore')),
+        'eslint.config.js': fsmock.load(
+            path.resolve(__dirname, '../boilerplate/files/eslint.config.js')
+        ),
         '.mcdevrc.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdevrc.json')),
         '.mcdev-auth.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdev-auth.json')),
         'boilerplate/config.json': fsmock.load(
