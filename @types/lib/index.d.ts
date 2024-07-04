@@ -170,11 +170,11 @@ declare class Mcdev {
      * deletes metadata from MC instance by key
      *
      * @param {string} businessUnit references credentials from properties.json
-     * @param {string} type supported metadata type
-     * @param {string} customerKey Identifier of metadata
+     * @param {string | TypeKeyCombo} selectedTypes supported metadata type (single) or complex object
+     * @param {string[] | string} [keyArr] Identifier of metadata
      * @returns {Promise.<boolean>} true if successful, false otherwise
      */
-    static deleteByKey(businessUnit: string, type: string, customerKey: string): Promise<boolean>;
+    static deleteByKey(businessUnit: string, selectedTypes: string | TypeKeyCombo, keyArr?: string[] | string): Promise<boolean>;
     /**
      * get name & key for provided id
      *
