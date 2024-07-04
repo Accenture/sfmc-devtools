@@ -954,25 +954,25 @@ export type McdevDeltaPkgItem = {
     _businessUnit: string;
 };
 export type DeltaPkgItem = import('simple-git').DiffResultTextFile & McdevDeltaPkgItem;
-export type SDKauth = any;
-export type SDKrest = any;
-export type SDKsoap = any;
-export type RestError = any;
-export type SOAPError = any;
+export type SDKauth = import('sfmc-sdk/auth').default;
+export type SDKrest = import('sfmc-sdk/rest').default;
+export type SDKsoap = import('sfmc-sdk/soap').default;
+export type RestError = import('sfmc-sdk/util').RestError;
+export type SOAPError = import('sfmc-sdk/util').SOAPError;
 export type SDKError = SOAPError & RestError;
 export type SDK = {
     /**
      * SDKauth
      */
-    auth: any;
+    auth: SDKauth;
     /**
      * SDKrest
      */
-    rest: any;
+    rest: SDKrest;
     /**
      * SDKsoap
      */
-    soap: any;
+    soap: SDKsoap;
 };
 /**
  * signals what to insert automatically for things usually asked via wizard

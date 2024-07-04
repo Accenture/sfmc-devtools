@@ -105,7 +105,7 @@ declare class Mcdev {
     /**
      * helper to show an off-the-logs message to users
      */
-    static "__#7@#welcomeMessage"(): void;
+    static "__#8@#welcomeMessage"(): void;
     /**
      * Retrieve all metadata from the specified business unit into the local file system.
      *
@@ -126,7 +126,7 @@ declare class Mcdev {
      * @param {boolean} [changelogOnly] skip saving, only create json in memory
      * @returns {Promise.<object>} ensure that BUs are worked on sequentially
      */
-    static "__#7@#retrieveBU"(cred: string, bu: string, selectedTypesArr?: string[] | TypeKeyCombo, keys?: string[], changelogOnly?: boolean): Promise<object>;
+    static "__#8@#retrieveBU"(cred: string, bu: string, selectedTypesArr?: string[] | TypeKeyCombo, keys?: string[], changelogOnly?: boolean): Promise<object>;
     /**
      * Deploys all metadata located in the 'deploy' directory to the specified business unit
      *
@@ -312,11 +312,11 @@ declare class Mcdev {
      * Updates the key to match the name field
      *
      * @param {string} businessUnit name of BU
-     * @param {string[] | TypeKeyCombo} selectedTypesArr limit retrieval to given metadata type
+     * @param {string[] | TypeKeyCombo} selectedTypes limit retrieval to given metadata type
      * @param {string[]} [keys] customerkey of the metadata
      * @returns {Promise.<Object.<string, object>>} key1: business unit name, key2:type value: list of fixed item keys
      */
-    static fixKeys(businessUnit: string, selectedTypesArr: string[] | TypeKeyCombo, keys?: string[]): Promise<{
+    static fixKeys(businessUnit: string, selectedTypes: string[] | TypeKeyCombo, keys?: string[]): Promise<{
         [x: string]: object;
     }>;
     /**
@@ -328,7 +328,7 @@ declare class Mcdev {
      * @param {string[]} [keys] customerkey of the metadata
      * @returns {Promise.<Object.<string, string[]>>} key: business unit name, value: list of affected item keys
      */
-    static "__#7@#runMethod"(methodName: 'execute' | 'pause' | 'fixKeys' | 'replaceCbReference', businessUnit: string, selectedType?: string, keys?: string[]): Promise<{
+    static "__#8@#runMethod"(methodName: 'execute' | 'pause' | 'fixKeys' | 'replaceCbReference', businessUnit: string, selectedType?: string, keys?: string[]): Promise<{
         [x: string]: string[];
     }>;
     /**
@@ -341,7 +341,7 @@ declare class Mcdev {
      * @param {string[]} [keyArr] customerkey of the metadata
      * @returns {Promise.<string[]>} list of keys that were affected
      */
-    static "__#7@#runOnBU"(methodName: 'execute' | 'pause' | 'fixKeys' | 'replaceCbReference', cred: string, bu: string, type?: string, keyArr?: string[]): Promise<string[]>;
+    static "__#8@#runOnBU"(methodName: 'execute' | 'pause' | 'fixKeys' | 'replaceCbReference', cred: string, bu: string, type?: string, keyArr?: string[]): Promise<string[]>;
     /**
      * helper for Mcdev.#runOnBU
      *
@@ -349,7 +349,7 @@ declare class Mcdev {
      * @param {BuObject} buObject properties for auth
      * @returns {Promise.<string[]>} keyArr
      */
-    static "__#7@#retrieveKeysWithLike"(selectedType: string, buObject: BuObject): Promise<string[]>;
+    static "__#8@#retrieveKeysWithLike"(selectedType: string, buObject: BuObject): Promise<string[]>;
     /**
      * Updates the key to match the name field
      *
@@ -359,7 +359,7 @@ declare class Mcdev {
      * @param {string[]} [keyArr] customerkey of the metadata
      * @returns {Promise.<string[]>} list of keys that were affected
      */
-    static "__#7@#fixKeys"(cred: string, bu: string, type: string, keyArr?: string[]): Promise<string[]>;
+    static "__#8@#fixKeys"(cred: string, bu: string, type: string, keyArr?: string[]): Promise<string[]>;
     /**
      * Updates the key to match the name field
      *
@@ -369,7 +369,7 @@ declare class Mcdev {
      * @param {string[]} [keyArr] customerkey of the metadata
      * @returns {Promise.<string[]>} list of keys that were affected
      */
-    static "__#7@#replaceCbReference"(cred: string, bu: string, type: string, keyArr?: string[]): Promise<string[]>;
+    static "__#8@#replaceCbReference"(cred: string, bu: string, type: string, keyArr?: string[]): Promise<string[]>;
     /**
      * helper to convert CSVs into an array. if only one value was given, it's also returned as an array
      *

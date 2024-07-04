@@ -311,14 +311,14 @@ declare class MetadataType {
      * @param {MetadataTypeItem} [metadataEntry] single metadata entry
      * @param {boolean} [handleOutside] if the API reponse is irregular this allows you to handle it outside of this generic method
      */
-    static _handleSOAPErrors(ex: any, msg: 'creating' | 'updating' | 'retrieving' | 'executing' | 'pausing', metadataEntry?: MetadataTypeItem, handleOutside?: boolean): void;
+    static _handleSOAPErrors(ex: SOAPError, msg: 'creating' | 'updating' | 'retrieving' | 'executing' | 'pausing', metadataEntry?: MetadataTypeItem, handleOutside?: boolean): void;
     /**
      * helper for {@link MetadataType._handleSOAPErrors}
      *
      * @param {SOAPError} ex error that occured
      * @returns {string} error message
      */
-    static getSOAPErrorMsg(ex: any): string;
+    static getSOAPErrorMsg(ex: SOAPError): string;
     /**
      * Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
      *
@@ -360,7 +360,7 @@ declare class MetadataType {
      * @param {string} id id or key of item
      * @returns {Promise.<any>} -
      */
-    static handleRESTErrors(ex: any, id: string): Promise<any>;
+    static handleRESTErrors(ex: RestError, id: string): Promise<any>;
     /**
      * Used to execute a query/automation etc.
      *
