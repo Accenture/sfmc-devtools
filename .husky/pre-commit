@@ -2,5 +2,5 @@
 npx --no lint-staged
 
 # update typescript type declarations
-npx tsc
+npx tsc -p tsconfig.precommit.json
 git add @types
