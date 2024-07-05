@@ -495,7 +495,7 @@ export type UserDocument = {
     /**
      * (API only)
      */
-    IsLocked?: boolean | string;
+    IsLocked?: boolean;
     /**
      * used to unlock a user that has IsLocked === true
      */
@@ -548,7 +548,45 @@ export type UserDocumentDiff = {
 export type UserDocumentMap = {
     [x: string]: UserDocument;
 };
-export type UserDocumentDocument = UserDocument & object;
+export type UserDocumentDocumentHelper = {
+    /**
+     * docs: user.ActiveFlag === true ? '✓' : '-'
+     */
+    ActiveFlagDocs: string;
+    /**
+     * docs: user.IsAPIUser === true ? '✓' : '-'
+     */
+    IsAPIUserDocs: string;
+    /**
+     * docs: user.MustChangePassword === true ? '✓' : '-'
+     */
+    MustChangePasswordDocs: string;
+    /**
+     * docs: default MID; BUName after we resolved it
+     */
+    DefaultBusinessUnitDocs: string;
+    /**
+     * docs: list of roles as concatenated string
+     */
+    RolesDocs: string;
+    /**
+     * docs: list of associated BUs as concatenated string
+     */
+    AssociatedBusDocs: string;
+    /**
+     * docs: user name who last modified this user
+     */
+    ModifiedBy: string | number;
+    /**
+     * docs: name of timezone
+     */
+    TimeZoneName: string;
+    /**
+     * docs: if the user cannot login
+     */
+    IsLockedDocs: string;
+};
+export type UserDocumentDocument = UserDocument & UserDocumentDocumentHelper;
 export type AccountUserConfiguration = {
     /**
      * wrapper
@@ -954,26 +992,9 @@ export type McdevDeltaPkgItem = {
     _businessUnit: string;
 };
 export type DeltaPkgItem = import('simple-git').DiffResultTextFile & McdevDeltaPkgItem;
-export type SDKauth = any;
-export type SDKrest = any;
-export type SDKsoap = any;
-export type RestError = any;
-export type SOAPError = any;
+export type RestError = import('sfmc-sdk/util').RestError;
+export type SOAPError = import('sfmc-sdk/util').SOAPError;
 export type SDKError = SOAPError & RestError;
-export type SDK = {
-    /**
-     * SDKauth
-     */
-    auth: any;
-    /**
-     * SDKrest
-     */
-    rest: any;
-    /**
-     * SDKsoap
-     */
-    soap: any;
-};
 /**
  * signals what to insert automatically for things usually asked via wizard
  */

@@ -43,13 +43,13 @@ declare class MobileKeyword extends MetadataType {
      *
      * @param {MetadataTypeItem} metadata single item
      */
-    static "__#5@#createCustomKeyField"(metadata: MetadataTypeItem): void;
+    static "__#6@#createCustomKeyField"(metadata: MetadataTypeItem): void;
     /**
      * helper for {@link MobileKeyword.preDeployTasks} and {@link MobileKeyword.createOrUpdate} to ensure we have code & keyword properly set
      *
      * @param {MetadataTypeItem} metadata single item
      */
-    static "__#5@#setCodeAndKeyword"(metadata: MetadataTypeItem): void;
+    static "__#6@#setCodeAndKeyword"(metadata: MetadataTypeItem): void;
     /**
      * Retrieves event definition metadata for caching
      *
@@ -74,7 +74,7 @@ declare class MobileKeyword extends MetadataType {
      * @param {string} key customer key of single item to retrieve / name of the metadata file
      * @returns {Array} key, queryParams
      */
-    static "__#5@#getRetrieveKeyAndUrl"(key: string): any[];
+    static "__#6@#getRetrieveKeyAndUrl"(key: string): any[];
     /**
      * Creates a single item
      *

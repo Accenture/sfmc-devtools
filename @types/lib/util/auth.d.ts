@@ -38,4 +38,5 @@ declare namespace Auth {
      */
     function clearSessions(): void;
 }
+import SDK from 'sfmc-sdk';
 //# sourceMappingURL=auth.d.ts.map

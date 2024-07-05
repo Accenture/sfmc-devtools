@@ -36,7 +36,7 @@ export default class ReplaceContentBlockReference {
         name: AssetItemSimpleMap;
     };
     /** @type {Object.<string, {id: RegExp[], key: RegExp[], name: RegExp[]}>} */
-    static "__#1@#regexBy": {
+    static "__#2@#regexBy": {
         [x: string]: {
             id: RegExp[];
             key: RegExp[];
@@ -61,7 +61,7 @@ export default class ReplaceContentBlockReference {
      * @param {boolean} [isSsjs] replaces backslashes with double backslashes in name if true
      * @returns {AssetItemSimple} asset object
      */
-    static "__#1@#getAssetBy"(from: ContentBlockConversionTypes, identifier: string | number, parentName: string, isSsjs?: boolean): AssetItemSimple;
+    static "__#2@#getAssetBy"(from: ContentBlockConversionTypes, identifier: string | number, parentName: string, isSsjs?: boolean): AssetItemSimple;
     /**
      *
      * @param {AssetItemSimple} asset asset object
@@ -69,7 +69,7 @@ export default class ReplaceContentBlockReference {
      * @param {boolean} [isSsjs] replaces backslashes with double backslashes in name if true
      * @returns {string} replaced string
      */
-    static "__#1@#replaceWith"(asset: AssetItemSimple, to: ContentBlockConversionTypes, isSsjs?: boolean): string;
+    static "__#2@#replaceWith"(asset: AssetItemSimple, to: ContentBlockConversionTypes, isSsjs?: boolean): string;
     /**
      *
      * @param {Mcdevrc} properties properties for auth

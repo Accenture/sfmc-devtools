@@ -50,7 +50,7 @@ declare class Verification extends MetadataType {
      * @param {string} id id or key of item
      * @returns {null} -
      */
-    static handleRESTErrors(ex: any, id: string): null;
+    static handleRESTErrors(ex: RestError, id: string): null;
     /**
      * Retrieves Metadata of  Data Extract Activity for caching
      *

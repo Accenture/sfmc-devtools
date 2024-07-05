@@ -59,12 +59,20 @@ declare class Automation extends MetadataType {
      */
     static retrieve(retrieveDir?: string, _?: void | string[], __?: void | string[], key?: string): Promise<AutomationMapObj>;
     /**
+     * helper for {@link this.retrieveRESTcollection}
+     *
+     * @param {SDKError} ex exception
+     * @param {string} id id or key of item
+     * @returns {Promise.<any>} can return retry-result
+     */
+    static handleRESTErrors(ex: SDKError, id: string): Promise<any>;
+    /**
      * helper for {@link Automation.retrieve} to get Automation Notifications
      *
      * @param {MetadataTypeMap} metadataMap keyField => metadata map
      * @returns {Promise.<object>} Promise of automation legacy api response
      */
-    static "__#3@#getAutomationNotificationsREST"(metadataMap: MetadataTypeMap): Promise<object>;
+    static "__#4@#getAutomationNotificationsREST"(metadataMap: MetadataTypeMap): Promise<object>;
     /**
      * Retrieves Metadata of Automation
      *
@@ -92,7 +100,7 @@ declare class Automation extends MetadataType {
      * @param {AutomationItem} metadata a single automation
      * @returns {boolean} true if the automation schedule is valid
      */
-    static "__#3@#isValidSchedule"(metadata: AutomationItem): boolean;
+    static "__#4@#isValidSchedule"(metadata: AutomationItem): boolean;
     /**
      * manages post retrieve steps
      *
@@ -107,7 +115,7 @@ declare class Automation extends MetadataType {
      * @param {string} key key of the metadata
      * @returns {Promise.<{key:string, response:object}>} metadata key and API response
      */
-    static "__#3@#executeItem"(metadataMap: AutomationMap, key: string): Promise<{
+    static "__#4@#executeItem"(metadataMap: AutomationMap, key: string): Promise<{
         key: string;
         response: object;
     }>;
@@ -117,7 +125,7 @@ declare class Automation extends MetadataType {
      * @param {AutomationItem} metadataEntry metadata object
      * @returns {Promise.<{key:string, response:object}>} metadata key and API response
      */
-    static "__#3@#runOnce"(metadataEntry: AutomationItem): Promise<{
+    static "__#4@#runOnce"(metadataEntry: AutomationItem): Promise<{
         key: string;
         response: object;
     }>;
@@ -127,7 +135,7 @@ declare class Automation extends MetadataType {
      * @param {AutomationItem} metadata automation metadata
      * @returns {Promise.<{key:string, response:object}>} metadata key and API response
      */
-    static "__#3@#pauseItem"(metadata: AutomationItem): Promise<{
+    static "__#4@#pauseItem"(metadata: AutomationItem): Promise<{
         key: string;
         response: object;
     }>;
@@ -160,7 +168,7 @@ declare class Automation extends MetadataType {
      *
      * @param {AutomationItem} metadata metadata mapped by their keyField
      */
-    static "__#3@#preDeploySchedule"(metadata: AutomationItem): void;
+    static "__#4@#preDeploySchedule"(metadata: AutomationItem): void;
     /**
      * Gets executed before deploying metadata
      *
@@ -198,7 +206,7 @@ declare class Automation extends MetadataType {
      * @param {string} key current customer key
      * @returns {Promise.<void>} -
      */
-    static "__#3@#updateNotificationInfoREST"(metadataMap: AutomationMap, key: string): Promise<void>;
+    static "__#4@#updateNotificationInfoREST"(metadataMap: AutomationMap, key: string): Promise<void>;
     /**
      * helper for {@link Automation.postDeployTasks}
      *
@@ -208,7 +216,7 @@ declare class Automation extends MetadataType {
      * @param {string} [oldKey] old customer key before fixKey / changeKeyValue / changeKeyField
      * @returns {Promise.<{key:string, response:object}>} metadata key and API response
      */
-    static "__#3@#scheduleAutomation"(metadataMap: AutomationMap, originalMetadataMap: AutomationMap, key: string, oldKey?: string): Promise<{
+    static "__#4@#scheduleAutomation"(metadataMap: AutomationMap, originalMetadataMap: AutomationMap, key: string, oldKey?: string): Promise<{
         key: string;
         response: object;
     }>;
@@ -265,7 +273,7 @@ declare class Automation extends MetadataType {
      * @param {string} key customer key
      * @returns {Promise.<string>} objectId or enpty string
      */
-    static "__#3@#getObjectIdForSingleRetrieve"(key: string): Promise<string>;
+    static "__#4@#getObjectIdForSingleRetrieve"(key: string): Promise<string>;
     /**
      * clean up after deleting a metadata item
      *

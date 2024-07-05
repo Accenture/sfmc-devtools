@@ -182,7 +182,7 @@ declare class User extends MetadataType {
      * @param {string} interval defaults to 'days'
      * @returns {string} time difference
      */
-    static "__#6@#timeSinceDate"(dateStr: string, interval?: string): string;
+    static "__#7@#timeSinceDate"(dateStr: string, interval?: string): string;
     /**
      * helper to print bu names
      *
@@ -225,10 +225,10 @@ declare class User extends MetadataType {
     /**
      * manages post retrieve steps
      *
-     * @param {MetadataTypeItem} metadata a single item
+     * @param {UserDocument} metadata a single item
      * @returns {MetadataTypeItem | void} a single item
      */
-    static postRetrieveTasks(metadata: MetadataTypeItem): MetadataTypeItem | void;
+    static postRetrieveTasks(metadata: UserDocument): MetadataTypeItem | void;
 }
 declare namespace User {
     let userIdBuMap: {};
