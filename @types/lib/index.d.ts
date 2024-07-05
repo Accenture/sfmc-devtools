@@ -301,11 +301,11 @@ declare class Mcdev {
      *
      * @param {string} businessUnit name of BU
      * @param {TypeKeyCombo | undefined} selectedTypesObj limit retrieval to given metadata type
-     * @param {ContentBlockConversionTypes} to what to replace with
-     * @param {ContentBlockConversionTypes[]} [fromList] what to replace
+     * @param {string} to what to replace with
+     * @param {string[]} [fromList] what to replace
      * @returns {Promise.<Object.<string, object>>} key1: business unit name, key2:type value: list of fixed item keys
      */
-    static replaceCbReference(businessUnit: string, selectedTypesObj: TypeKeyCombo | undefined, to: ContentBlockConversionTypes, fromList?: ContentBlockConversionTypes[]): Promise<{
+    static replaceCbReference(businessUnit: string, selectedTypesObj: TypeKeyCombo | undefined, to: string, fromList?: string[]): Promise<{
         [x: string]: object;
     }>;
     /**
