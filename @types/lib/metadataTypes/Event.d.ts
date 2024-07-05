@@ -405,14 +405,7 @@ declare namespace Event {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
-                template: boolean; /**
-                 * Gets executed after deployment of metadata type
-                 *
-                 * @param {MetadataTypeMap} upsertResults metadata mapped by their keyField as returned by update/create
-                 * @param {MetadataTypeMap} originalMetadata metadata to be updated (contains additioanl fields)
-                 * @param {{created: number, updated: number}} createdUpdated counter representing successful creates/updates
-                 * @returns {Promise.<void>} -
-                 */
+                template: boolean;
             };
             'metaData.automationData.createdBy.name': {
                 isCreateable: boolean;
