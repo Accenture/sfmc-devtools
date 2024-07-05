@@ -66,9 +66,10 @@ declare class DataExtension extends MetadataType {
      * Updates a single dataExtension. Also updates their columns in 'dataExtension.columns'
      *
      * @param {DataExtensionItem} metadata single metadata entry
+     * @param {boolean} [handleOutside] if the API reponse is irregular this allows you to handle it outside of this generic method
      * @returns {Promise} Promise
      */
-    static update(metadata: DataExtensionItem): Promise<any>;
+    static update(metadata: DataExtensionItem, handleOutside?: boolean): Promise<any>;
     /**
      * Gets executed after deployment of metadata type
      *

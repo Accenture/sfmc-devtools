@@ -27,6 +27,7 @@ export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
  * @augments MetadataType
  */
 declare class Event extends MetadataType {
+    static reCacheDataExtensions: any[];
     /**
      * Retrieves Metadata of Event Definition.
      * Endpoint /interaction/v1/eventDefinitions return all Event Definitions with all details.
@@ -92,6 +93,23 @@ declare namespace Event {
         keyIsFixed: boolean;
         keyField: string;
         nameField: string;
+        /**
+         * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
+         * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
+         * @typedef {import('../../types/mcdev.d.js').CodeExtractItem} CodeExtractItem
+         * @typedef {import('../../types/mcdev.d.js').MetadataTypeItem} MetadataTypeItem
+         * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemDiff} MetadataTypeItemDiff
+         * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemObj} MetadataTypeItemObj
+         * @typedef {import('../../types/mcdev.d.js').MetadataTypeMap} MetadataTypeMap
+         * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
+         * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
+         * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
+         */
+        /**
+         * Event MetadataType
+         *
+         * @augments MetadataType
+         */
         createdDateField: string;
         createdNameField: string;
         lastmodDateField: string;
@@ -105,11 +123,7 @@ declare namespace Event {
         validTypes: string[];
         fields: {
             'arguments.audienceCount': {
-                isCreateable: boolean; /**
-                 * Event MetadataType
-                 *
-                 * @augments MetadataType
-                 */
+                isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
@@ -391,7 +405,14 @@ declare namespace Event {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
-                template: boolean;
+                template: boolean; /**
+                 * Gets executed after deployment of metadata type
+                 *
+                 * @param {MetadataTypeMap} upsertResults metadata mapped by their keyField as returned by update/create
+                 * @param {MetadataTypeMap} originalMetadata metadata to be updated (contains additioanl fields)
+                 * @param {{created: number, updated: number}} createdUpdated counter representing successful creates/updates
+                 * @returns {Promise.<void>} -
+                 */
             };
             'metaData.automationData.createdBy.name': {
                 isCreateable: boolean;

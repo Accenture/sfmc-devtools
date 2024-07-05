@@ -52,12 +52,12 @@ declare class MetadataType {
      * @param {MetadataTypeMap} upsertResults metadata mapped by their keyField as returned by update/create
      * @param {MetadataTypeMap} originalMetadata metadata to be updated (contains additioanl fields)
      * @param {{created: number, updated: number}} createdUpdated counter representing successful creates/updates
-     * @returns {void}
+     * @returns {Promise.<void>} -
      */
     static postDeployTasks(upsertResults: MetadataTypeMap, originalMetadata: MetadataTypeMap, createdUpdated: {
         created: number;
         updated: number;
-    }): void;
+    }): Promise<void>;
     /**
      * helper for {@link MetadataType.createREST}
      *

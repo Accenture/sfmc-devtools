@@ -159,18 +159,6 @@ declare class Asset extends MetadataType {
      */
     static postRetrieveTasks(metadata: AssetItem): CodeExtractItem;
     /**
-     * Gets executed after deployment of metadata type
-     *
-     * @param {MetadataTypeMap} metadata metadata mapped by their keyField
-     * @param {MetadataTypeMap} _ originalMetadata to be updated (contains additioanl fields)
-     * @param {{created: number, updated: number}} createdUpdated counter representing successful creates/updates
-     * @returns {Promise.<void>} -
-     */
-    static postDeployTasks(metadata: MetadataTypeMap, _: MetadataTypeMap, createdUpdated: {
-        created: number;
-        updated: number;
-    }): Promise<void>;
-    /**
      * helper for {@link Asset.postDeployTasks}. triggers a refresh of active triggerredSendDefinitions associated with the updated asset-message items. Gets executed if refresh option has been set.
      *
      * @private

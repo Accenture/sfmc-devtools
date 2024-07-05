@@ -48,9 +48,9 @@ declare class TransactionalEmail extends TransactionalMessage {
     /**
      * Gets executed after deployment of metadata type
      *
-     * @returns {void}
+     * @returns {Promise.<void>} -
      */
-    static postDeployTasks(): void;
+    static postDeployTasks(): Promise<void>;
     /**
      * manages post retrieve steps
      *
