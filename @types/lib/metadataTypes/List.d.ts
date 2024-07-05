@@ -68,7 +68,7 @@ declare class List extends MetadataType {
     static parseMetadata(metadata: MetadataTypeItem, parseForCache?: boolean): MetadataTypeItem;
 }
 declare namespace List {
-    let client: import("../../../SFMC-SDK/@types/index.js").default;
+    let client: import("sfmc-sdk").default;
     let buObject: import("../../types/mcdev.d.js").BuObject;
     let definition: {
         bodyIteratorField: string;
