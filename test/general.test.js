@@ -1191,6 +1191,24 @@ describe('GENERAL', () => {
                 );
             });
         });
+
+        describe('Delete --metadata ~~~', () => {
+            it('Should delete the item', async () => {
+                const argvMetadata = [
+                    'asset:testExisting_asset',
+                    'automation:testExisting_automation',
+                    'journey:testExisting_journey_Quicksend/1',
+                    'journey:testExisting_journey_Multistep/1',
+                ];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                // WHEN
+                const isDeleted = await handler.deleteByKey('testInstance/testBU', typeKeyCombo);
+                // THEN
+                assert.equal(process.exitCode, 0, 'deleteByKey should not have thrown an error');
+                assert.equal(isDeleted, true, 'deleteByKey should have returned true');
+                return;
+            });
+        });
     });
 
     describe('without --metadata ================', () => {

@@ -278,6 +278,19 @@ describe('type: journey', () => {
             assert.equal(isDeleted, true, 'should have deleted the item');
             return;
         });
+
+        it('Should delete 2 items with version', async () => {
+            // WHEN
+            const isDeleted = await handler.deleteByKey('testInstance/testBU', 'journey', [
+                'testExisting_journey_Quicksend/1',
+                'testExisting_journey_Multistep/1',
+            ]);
+            // THEN
+            assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
+
+            assert.equal(isDeleted, true, 'should have deleted the item');
+            return;
+        });
     });
 
     describe('ReplaceContentBlockByX ================', () => {
