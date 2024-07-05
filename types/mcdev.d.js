@@ -332,16 +332,9 @@
  * @typedef {import('simple-git').DiffResultTextFile & McdevDeltaPkgItem} DeltaPkgItem
  */
 /**
- * @typedef {import('sfmc-sdk/auth').default} SDKauth
- * @typedef {import('sfmc-sdk/rest').default} SDKrest
- * @typedef {import('sfmc-sdk/soap').default} SDKsoap
  * @typedef {import('sfmc-sdk/util').RestError} RestError
  * @typedef {import('sfmc-sdk/util').SOAPError} SOAPError
  * @typedef {SOAPError & RestError} SDKError
- * @typedef {object} SDK
- * @property {SDKauth} auth SDKauth
- * @property {SDKrest} rest SDKrest
- * @property {SDKsoap} soap SDKsoap
  */
 
 /**
