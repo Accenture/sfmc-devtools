@@ -156,7 +156,7 @@
  * @property {number} [Client.ID] EID e.g:7281698
  * @property {number} [Client.ModifiedBy] AccountUserID of user who last modified this user
  * @property {'User'|'Installed Package'} c__type -
- * @property {boolean|string} [IsLocked] (API only)
+ * @property {boolean} [IsLocked] (API only)
  * @property {boolean} [Unlock] used to unlock a user that has IsLocked === true
  * @property {boolean} c__IsLocked_readOnly copy of IsLocked
  * @property {string} c__TimeZoneName name of timezone
@@ -175,11 +175,17 @@
  * @typedef {Object.<string, UserDocument>} UserDocumentMap key=customer key
  */
 /**
- * @typedef {UserDocument & object} UserDocumentDocument
- * @property {boolean | string} ActiveFlag user.ActiveFlag === true ? '✓' : '-'
- * @property {boolean | string} IsAPIUser user.IsAPIUser === true ? '✓' : '-'
- * @property {boolean | string} MustChangePassword user.MustChangePassword === true ? '✓' : '-'
- * @property {number | string} DefaultBusinessUnit default MID; BUName after we resolved it
+ * @typedef {object} UserDocumentDocumentHelper
+ * @property {string} ActiveFlagDocs docs: user.ActiveFlag === true ? '✓' : '-'
+ * @property {string} IsAPIUserDocs docs: user.IsAPIUser === true ? '✓' : '-'
+ * @property {string} MustChangePasswordDocs docs: user.MustChangePassword === true ? '✓' : '-'
+ * @property {string} DefaultBusinessUnitDocs docs: default MID; BUName after we resolved it
+ * @property {string} RolesDocs docs: list of roles as concatenated string
+ * @property {string} AssociatedBusDocs docs: list of associated BUs as concatenated string
+ * @property {string | number} ModifiedBy docs: user name who last modified this user
+ * @property {string} TimeZoneName docs: name of timezone
+ * @property {string} IsLockedDocs docs: if the user cannot login
+ * @typedef {UserDocument & UserDocumentDocumentHelper} UserDocumentDocument
  */
 /**
  * @typedef {object} AccountUserConfiguration

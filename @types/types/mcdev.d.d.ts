@@ -495,7 +495,7 @@ export type UserDocument = {
     /**
      * (API only)
      */
-    IsLocked?: boolean | string;
+    IsLocked?: boolean;
     /**
      * used to unlock a user that has IsLocked === true
      */
@@ -548,7 +548,45 @@ export type UserDocumentDiff = {
 export type UserDocumentMap = {
     [x: string]: UserDocument;
 };
-export type UserDocumentDocument = UserDocument & object;
+export type UserDocumentDocumentHelper = {
+    /**
+     * docs: user.ActiveFlag === true ? '✓' : '-'
+     */
+    ActiveFlagDocs: string;
+    /**
+     * docs: user.IsAPIUser === true ? '✓' : '-'
+     */
+    IsAPIUserDocs: string;
+    /**
+     * docs: user.MustChangePassword === true ? '✓' : '-'
+     */
+    MustChangePasswordDocs: string;
+    /**
+     * docs: default MID; BUName after we resolved it
+     */
+    DefaultBusinessUnitDocs: string;
+    /**
+     * docs: list of roles as concatenated string
+     */
+    RolesDocs: string;
+    /**
+     * docs: list of associated BUs as concatenated string
+     */
+    AssociatedBusDocs: string;
+    /**
+     * docs: user name who last modified this user
+     */
+    ModifiedBy: string | number;
+    /**
+     * docs: name of timezone
+     */
+    TimeZoneName: string;
+    /**
+     * docs: if the user cannot login
+     */
+    IsLockedDocs: string;
+};
+export type UserDocumentDocument = UserDocument & UserDocumentDocumentHelper;
 export type AccountUserConfiguration = {
     /**
      * wrapper

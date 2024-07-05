@@ -54,7 +54,7 @@
         "debug": "node --nolazy --inspect-brk=9229 lib/cli.js",
         "lint:fix": "eslint --fix lib/**/*.js types/*.js test/**/*.js",
         "lint": "eslint lib/**/*.js types/*.js test/**/*.js",
-        "lint-ts": "tsc -p jsconfig.json --maxNodeModuleJsDepth 1 --noEmit",
+        "lint-ts": "tsc -p tsconfig.npmScripts.json",
         "prepare": "husky || true",
         "lint-and-test": "run-s lint test",
         "test": "mocha --reporter-option maxDiffSize=25000",

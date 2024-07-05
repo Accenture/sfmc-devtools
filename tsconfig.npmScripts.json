@@ -7,7 +7,6 @@
         "target": "es2022",
         "checkJs": true,
         "skipLibCheck": true,
-        "noEmit": true,
-        "maxNodeModuleJsDepth": 1
+        "noEmit": true
     }
 }

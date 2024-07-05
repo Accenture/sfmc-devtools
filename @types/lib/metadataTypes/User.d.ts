@@ -225,10 +225,10 @@ declare class User extends MetadataType {
     /**
      * manages post retrieve steps
      *
-     * @param {MetadataTypeItem} metadata a single item
+     * @param {UserDocument} metadata a single item
      * @returns {MetadataTypeItem | void} a single item
      */
-    static postRetrieveTasks(metadata: MetadataTypeItem): MetadataTypeItem | void;
+    static postRetrieveTasks(metadata: UserDocument): MetadataTypeItem | void;
 }
 declare namespace User {
     let userIdBuMap: {};
