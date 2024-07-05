@@ -293,6 +293,12 @@ declare namespace Event {
                 retrieving: boolean;
                 template: boolean;
             };
+            'configurationArguments.unconfigured': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             createdBy: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -530,6 +536,12 @@ declare namespace Event {
             'metaData.automationData.scheduleObject.createdBy': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
+                /**
+                 * parses retrieved Metadata before saving
+                 *
+                 * @param {MetadataTypeItem} metadata a single event definition
+                 * @returns {MetadataTypeItem} parsed metadata
+                 */
                 retrieving: boolean;
                 template: boolean;
             };
@@ -959,7 +971,7 @@ declare namespace Event {
                 retrieving: boolean;
                 template: boolean;
             };
-            r__dataExtension_CustomerKey: {
+            r__dataExtension_key: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

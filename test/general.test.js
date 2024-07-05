@@ -461,7 +461,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     Object.keys(result[buName]['dataExtension']).length,
-                    5,
+                    6,
                     'retrieve should have returned 5 dataExtension'
                 );
                 assert.equal(
