@@ -338,6 +338,4 @@ describe('type: event', () => {
             return;
         });
     });
-
-    describe('CI/CD ================', () => {});
 });
