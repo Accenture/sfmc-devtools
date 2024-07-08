@@ -19,6 +19,17 @@ const authResources = File.readJsonSync(path.join(__dirname, './resources/auth.j
 /**
  * gets file from Retrieve folder
  *
+ * @param {string} from source path (starting in bu folder)
+ * @param {string} to target path (starting in bu folder)
+ * @param {string} [mid] used when we need to test on ParentBU
+ * @returns {Promise.<{status:'ok'|'skipped'|'failed', statusMessage:string, file:string}>} -
+ */
+export async function copyFile(from, to, mid = '9999999') {
+    return File.copyFileSimple(`./test/resources/${mid}/${from}`, `./test/resources/${mid}/${to}`);
+}
+/**
+ * gets file from Retrieve folder
+ *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} [buName] used when we need to test on ParentBU
@@ -168,7 +179,6 @@ export function mockSetup(isDeploy) {
             skipInteraction: undefined,
         });
     }
-    // @ts-expect-error somehow, MockAdapter does not expect type AxiosInstance
     apimock = new MockAdapter(axiosInstance, { onNoMatch: 'throwException' });
     // set access_token to mid to allow for autorouting of mock to correct resources
     apimock.onPost(authResources.success.url).reply((config) => {
@@ -280,7 +290,7 @@ export function getRestCallout(method, url) {
  * @param {string} [objectType] optionall filter requests by object
  * @returns {object[]} json payload of the requests
  */
-export function getSoapCallout(requestAction, objectType) {
+export function getSoapCallouts(requestAction, objectType) {
     const method = 'post';
     const url = '/Service.asmx';
     const subset = apimock.history[method];
@@ -290,10 +300,12 @@ export function getSoapCallout(requestAction, objectType) {
         // find soap requestst of the correct request type
         .filter((item) => item.headers.SOAPAction === requestAction)
         // find soap requestst of the correct request type
-        .filter(
-            (item) =>
-                !objectType ||
-                item.data.split('<ObjectType>')[1].split('</ObjectType>')[0] === objectType
+        .filter((item) =>
+            !objectType || item.data.includes('<ObjectType')
+                ? item.data.split('<ObjectType>')[1].split('</ObjectType>')[0] === objectType
+                : item.data.includes('<Objects xsi:type="')
+                  ? item.data.split('<Objects xsi:type="')[1].split('">')[0] === objectType
+                  : false
         )
         .map((item) => item.data);
     return myCallout;

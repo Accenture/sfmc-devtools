@@ -1,16 +1,16 @@
 export default Asset;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type CodeExtract = import('../../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../../types/mcdev.d.js').CodeExtractItem;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
-export type AssetSubType = import('../../types/mcdev.d.js').AssetSubType;
-export type AssetMap = import('../../types/mcdev.d.js').AssetMap;
-export type AssetItem = import('../../types/mcdev.d.js').AssetItem;
-export type AssetRequestParams = import('../../types/mcdev.d.js').AssetRequestParams;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type AssetSubType = import("../../types/mcdev.d.js").AssetSubType;
+export type AssetMap = import("../../types/mcdev.d.js").AssetMap;
+export type AssetItem = import("../../types/mcdev.d.js").AssetItem;
+export type AssetRequestParams = import("../../types/mcdev.d.js").AssetRequestParams;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -159,18 +159,6 @@ declare class Asset extends MetadataType {
      */
     static postRetrieveTasks(metadata: AssetItem): CodeExtractItem;
     /**
-     * Gets executed after deployment of metadata type
-     *
-     * @param {MetadataTypeMap} metadata metadata mapped by their keyField
-     * @param {MetadataTypeMap} _ originalMetadata to be updated (contains additioanl fields)
-     * @param {{created: number, updated: number}} createdUpdated counter representing successful creates/updates
-     * @returns {Promise.<void>} -
-     */
-    static postDeployTasks(metadata: MetadataTypeMap, _: MetadataTypeMap, createdUpdated: {
-        created: number;
-        updated: number;
-    }): Promise<void>;
-    /**
      * helper for {@link Asset.postDeployTasks}. triggers a refresh of active triggerredSendDefinitions associated with the updated asset-message items. Gets executed if refresh option has been set.
      *
      * @private
@@ -192,7 +180,7 @@ declare class Asset extends MetadataType {
      * @param {string} extendedSubType webpage, htmlblock, etc
      * @returns {string} subType: block, message, other, etc
      */
-    static "__#2@#getMainSubtype"(extendedSubType: string): string;
+    static "__#3@#getMainSubtype"(extendedSubType: string): string;
     /**
      * helper to find a new unique name during asset creation
      *
@@ -249,7 +237,7 @@ declare class Asset extends MetadataType {
      * @param {'definition'|'template'} mode defines what we use this helper for
      * @returns {Promise.<string[][]>} list of extracted files with path-parts provided as an array
      */
-    static _buildForNested(templateDir: string, targetDir: string | string[], metadata: AssetItem, templateVariables: TemplateMap, templateName: string, mode: 'definition' | 'template'): Promise<string[][]>;
+    static _buildForNested(templateDir: string, targetDir: string | string[], metadata: AssetItem, templateVariables: TemplateMap, templateName: string, mode: "definition" | "template"): Promise<string[][]>;
     /**
      * helper for {@link Asset.preDeployTasks} that loads extracted code content back into JSON
      *
@@ -357,7 +345,7 @@ declare class Asset extends MetadataType {
      * @param {string} buName owner business unit name
      * @returns {Promise.<string>} path to the asset's code
      */
-    static "__#2@#getPath"(subType: string, item: object, buName: string): Promise<string>;
+    static "__#3@#getPath"(subType: string, item: object, buName: string): Promise<string>;
     /**
      * helper for {@link Asset.resolveId} that loads the JSON file for the asset
      *
@@ -365,7 +353,7 @@ declare class Asset extends MetadataType {
      * @param {object} item api response for metadata
      * @returns {Promise.<object>} JS object of the asset we loaded from disk
      */
-    static "__#2@#getJson"(subType: string, item: object): Promise<object>;
+    static "__#3@#getJson"(subType: string, item: object): Promise<object>;
     /**
      *
      * @param {MetadataTypeItem} item single metadata item
@@ -491,15 +479,7 @@ declare namespace Asset {
             contentType: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
-                retrieving: boolean; /**
-                 * Helper for writing Metadata to disk, used for Retrieve and deploy
-                 *
-                 * @param {MetadataTypeMap} results metadata results from deploy
-                 * @param {string} retrieveDir directory where metadata should be stored after deploy/retrieve
-                 * @param {string} [overrideType] for use when there is a subtype (such as folder-queries)
-                 * @param {TemplateMap} [templateVariables] variables to be replaced in the metadata
-                 * @returns {Promise.<MetadataTypeMap>} Promise of saved metadata
-                 */
+                retrieving: boolean;
                 template: boolean;
             };
             'createdBy.email': {
@@ -647,12 +627,7 @@ declare namespace Asset {
                 template: boolean;
             };
             legacyData: {
-                isCreateable: boolean; /**
-                 * helper for {@link Asset.retrieve} + {@link Asset.retrieveAsTemplate}
-                 *
-                 * @private
-                 * @returns {string[]} AssetSubType array
-                 */
+                isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;

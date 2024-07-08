@@ -1,14 +1,14 @@
 export default DataExtension;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
-export type DataExtensionFieldItem = import('../../types/mcdev.d.js').DataExtensionFieldItem;
-export type DataExtensionFieldMap = import('../../types/mcdev.d.js').DataExtensionFieldMap;
-export type DataExtensionItem = import('../../types/mcdev.d.js').DataExtensionItem;
-export type DataExtensionMap = import('../../types/mcdev.d.js').DataExtensionMap;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type DataExtensionFieldItem = import("../../types/mcdev.d.js").DataExtensionFieldItem;
+export type DataExtensionFieldMap = import("../../types/mcdev.d.js").DataExtensionFieldMap;
+export type DataExtensionItem = import("../../types/mcdev.d.js").DataExtensionItem;
+export type DataExtensionMap = import("../../types/mcdev.d.js").DataExtensionMap;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeItem} MetadataTypeItem
@@ -45,7 +45,7 @@ declare class DataExtension extends MetadataType {
      * @param {object} res -
      * @returns {boolean} true: keep, false: discard
      */
-    static "__#4@#filterUpsertResults"(res: object): boolean;
+    static "__#5@#filterUpsertResults"(res: object): boolean;
     /**
      * Create a single dataExtension. Also creates their columns in 'dataExtension.columns'
      *
@@ -61,14 +61,15 @@ declare class DataExtension extends MetadataType {
      * @param {DataExtensionItem} metadata single metadata entry
      * @returns {void}
      */
-    static "__#4@#cleanupRetentionPolicyFields"(metadata: DataExtensionItem): void;
+    static "__#5@#cleanupRetentionPolicyFields"(metadata: DataExtensionItem): void;
     /**
      * Updates a single dataExtension. Also updates their columns in 'dataExtension.columns'
      *
      * @param {DataExtensionItem} metadata single metadata entry
+     * @param {boolean} [handleOutside] if the API reponse is irregular this allows you to handle it outside of this generic method
      * @returns {Promise} Promise
      */
-    static update(metadata: DataExtensionItem): Promise<any>;
+    static update(metadata: DataExtensionItem, handleOutside?: boolean): Promise<any>;
     /**
      * Gets executed after deployment of metadata type
      *
@@ -91,7 +92,7 @@ declare class DataExtension extends MetadataType {
      * @param {{created: number, updated: number}} createdUpdated counter representing successful creates/updates
      * @returns {Promise.<void>} -
      */
-    static "__#4@#fixShared"(upsertedMetadata: DataExtensionMap, originalMetadata: DataExtensionMap, createdUpdated: {
+    static "__#5@#fixShared"(upsertedMetadata: DataExtensionMap, originalMetadata: DataExtensionMap, createdUpdated: {
         created: number;
         updated: number;
     }): Promise<void>;
@@ -100,7 +101,7 @@ declare class DataExtension extends MetadataType {
      *
      * @returns {Promise.<string[]>} list of selected BU names
      */
-    static "__#4@#fixShared_getBUs"(): Promise<string[]>;
+    static "__#5@#fixShared_getBUs"(): Promise<string[]>;
     /**
      * helper for {@link DataExtension.#fixShared}
      *
@@ -110,7 +111,7 @@ declare class DataExtension extends MetadataType {
      * @param {Object.<string, string>} sharedDataExtensionMap ID-Key relationship of shared data extensions
      * @returns {Promise.<string[]>} updated shared DE keys on BU
      */
-    static "__#4@#fixShared_onBU"(childBuName: string, buObjectParent: BuObject, clientParent: object, sharedDataExtensionMap: {
+    static "__#5@#fixShared_onBU"(childBuName: string, buObjectParent: BuObject, clientParent: object, sharedDataExtensionMap: {
         [x: string]: string;
     }): Promise<string[]>;
     /**
@@ -125,7 +126,7 @@ declare class DataExtension extends MetadataType {
      * @param {object} clientParent SDK for parent BU
      * @returns {Promise.<boolean>} flag that signals if the fix was successful
      */
-    static "__#4@#fixShared_item"(deId: string, deKey: string, buObjectChildBu: BuObject, clientChildBu: object, buObjectParent: BuObject, clientParent: object): Promise<boolean>;
+    static "__#5@#fixShared_item"(deId: string, deKey: string, buObjectChildBu: BuObject, clientChildBu: object, buObjectParent: BuObject, clientParent: object): Promise<boolean>;
     /**
      * add a new field to the shared DE to trigger an update to the data model
      * helper for {@link DataExtension.#fixShared_item}
@@ -136,7 +137,7 @@ declare class DataExtension extends MetadataType {
      * @param {string} deId dataExtension ObjectID
      * @returns {Promise.<string>} randomSuffix
      */
-    static "__#4@#fixShared_item_addField"(buObjectChildBu: BuObject, clientChildBu: object, deKey: string, deId: string): Promise<string>;
+    static "__#5@#fixShared_item_addField"(buObjectChildBu: BuObject, clientChildBu: object, deKey: string, deId: string): Promise<string>;
     /**
      * get ID of the field added by {@link DataExtension.#fixShared_item_addField} on the shared DE via parent BU
      * helper for {@link DataExtension.#fixShared_item}
@@ -147,7 +148,7 @@ declare class DataExtension extends MetadataType {
      * @param {string} deKey dataExtension key
      * @returns {Promise.<string>} fieldObjectID
      */
-    static "__#4@#fixShared_item_getFieldId"(randomSuffix: string, buObjectParent: BuObject, clientParent: object, deKey: string): Promise<string>;
+    static "__#5@#fixShared_item_getFieldId"(randomSuffix: string, buObjectParent: BuObject, clientParent: object, deKey: string): Promise<string>;
     /**
      * delete the field added by {@link DataExtension.#fixShared_item_addField}
      * helper for {@link DataExtension.#fixShared_item}
@@ -159,7 +160,7 @@ declare class DataExtension extends MetadataType {
      * @param {string} fieldObjectID field ObjectID
      * @returns {Promise} -
      */
-    static "__#4@#fixShared_item_deleteField"(randomSuffix: string, buObjectChildBu: BuObject, clientChildBu: object, deKey: string, fieldObjectID: string): Promise<any>;
+    static "__#5@#fixShared_item_deleteField"(randomSuffix: string, buObjectChildBu: BuObject, clientChildBu: object, deKey: string, fieldObjectID: string): Promise<any>;
     /**
      * Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionColumn metadata retrieval
      *
@@ -189,7 +190,7 @@ declare class DataExtension extends MetadataType {
      * @param {string[]} [additionalFields] Returns specified fields even if their retrieve definition is not set to true
      * @returns {Promise.<void>} -
      */
-    static "__#4@#attachFields"(metadata: DataExtensionMap, fieldOptions?: SoapRequestParams, additionalFields?: string[]): Promise<void>;
+    static "__#5@#attachFields"(metadata: DataExtensionMap, fieldOptions?: SoapRequestParams, additionalFields?: string[]): Promise<void>;
     /**
      * Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionColumn metadata retrieval
      *
@@ -452,16 +453,7 @@ declare namespace DataExtension {
             };
             Name: {
                 isCreateable: boolean;
-                isUpdateable: boolean; /**
-                 * helper for {@link MetadataType.upsert}
-                 *
-                 * @param {MetadataTypeMap} metadataMap list of metadata
-                 * @param {string} metadataKey key of item we are looking at
-                 * @param {boolean} hasError error flag from previous code
-                 * @param {MetadataTypeItemDiff[]} metadataToUpdate list of items to update
-                 * @param {MetadataTypeItem[]} metadataToCreate list of items to create
-                 * @returns {Promise.<'create'|'update'|'skip'>} action to take
-                 */
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };

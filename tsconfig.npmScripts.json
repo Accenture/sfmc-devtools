@@ -2,7 +2,7 @@
     "include": ["lib/**/*.js", "types/**/*.js", "test/**/*.js"],
     "exclude": ["node_modules"],
     "compilerOptions": {
-        "module": "NodeNext",
+        "module": "nodenext",
         "moduleResolution": "nodenext",
         "target": "es2022",
         "checkJs": true,

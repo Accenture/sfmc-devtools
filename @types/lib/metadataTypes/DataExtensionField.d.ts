@@ -1,16 +1,16 @@
 export default DataExtensionField;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type CodeExtract = import('../../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../../types/mcdev.d.js').CodeExtractItem;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
-export type DataExtensionFieldMap = import('../../types/mcdev.d.js').DataExtensionFieldMap;
-export type DataExtensionFieldItem = import('../../types/mcdev.d.js').DataExtensionFieldItem;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type DataExtensionFieldMap = import("../../types/mcdev.d.js").DataExtensionFieldMap;
+export type DataExtensionFieldItem = import("../../types/mcdev.d.js").DataExtensionFieldItem;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -189,12 +189,6 @@ declare namespace DataExtensionField {
             };
             ModifiedDate: {
                 isCreateable: boolean;
-                /**
-                 * helper for DataExtension.retrieveFieldsForSingleDe that sorts the fields into an array
-                 *
-                 * @param {DataExtensionFieldMap} fieldsObj customerKey-based list of fields for one dataExtension
-                 * @returns {DataExtensionFieldItem[]} sorted array of field objects
-                 */
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;

@@ -1,19 +1,19 @@
 export default MetadataType;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type CodeExtract = import('../../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../../types/mcdev.d.js').CodeExtractItem;
-export type Mcdevrc = import('../../types/mcdev.d.js').Mcdevrc;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
-export type SDK = import('../../types/mcdev.d.js').SDK;
-export type SDKError = import('../../types/mcdev.d.js').SDKError;
-export type SOAPError = import('../../types/mcdev.d.js').SOAPError;
-export type RestError = import('../../types/mcdev.d.js').RestError;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
+export type Mcdevrc = import("../../types/mcdev.d.js").Mcdevrc;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type SDK = import("sfmc-sdk").default;
+export type SDKError = import("../../types/mcdev.d.js").SDKError;
+export type SOAPError = import("../../types/mcdev.d.js").SOAPError;
+export type RestError = import("../../types/mcdev.d.js").RestError;
 /**
  * MetadataType class that gets extended by their specific metadata type class.
  * Provides default functionality that can be overwritten by child metadata type classes
@@ -52,12 +52,12 @@ declare class MetadataType {
      * @param {MetadataTypeMap} upsertResults metadata mapped by their keyField as returned by update/create
      * @param {MetadataTypeMap} originalMetadata metadata to be updated (contains additioanl fields)
      * @param {{created: number, updated: number}} createdUpdated counter representing successful creates/updates
-     * @returns {void}
+     * @returns {Promise.<void>} -
      */
     static postDeployTasks(upsertResults: MetadataTypeMap, originalMetadata: MetadataTypeMap, createdUpdated: {
         created: number;
         updated: number;
-    }): void;
+    }): Promise<void>;
     /**
      * helper for {@link MetadataType.createREST}
      *
@@ -261,7 +261,7 @@ declare class MetadataType {
      * @param {MetadataTypeItem[]} metadataToCreate list of items to create
      * @returns {Promise.<'create' | 'update' | 'skip'>} action to take
      */
-    static createOrUpdate(metadataMap: MetadataTypeMap, metadataKey: string, hasError: boolean, metadataToUpdate: MetadataTypeItemDiff[], metadataToCreate: MetadataTypeItem[]): Promise<'create' | 'update' | 'skip'>;
+    static createOrUpdate(metadataMap: MetadataTypeMap, metadataKey: string, hasError: boolean, metadataToUpdate: MetadataTypeItemDiff[], metadataToCreate: MetadataTypeItem[]): Promise<"create" | "update" | "skip">;
     /**
      * Creates a single metadata entry via REST
      *
@@ -287,7 +287,7 @@ declare class MetadataType {
      * @param {'patch'|'post'|'put'} [httpMethod] defaults to 'patch'; some update requests require PUT instead of PATCH
      * @returns {Promise.<object> | null} Promise of API response or null in case of an error
      */
-    static updateREST(metadataEntry: MetadataTypeItem, uri: string, httpMethod?: 'patch' | 'post' | 'put'): Promise<object> | null;
+    static updateREST(metadataEntry: MetadataTypeItem, uri: string, httpMethod?: "patch" | "post" | "put"): Promise<object> | null;
     /**
      * helper for {@link MetadataType.updateREST} and {@link MetadataType.updateSOAP} that removes old files after the key was changed
      *
@@ -311,14 +311,14 @@ declare class MetadataType {
      * @param {MetadataTypeItem} [metadataEntry] single metadata entry
      * @param {boolean} [handleOutside] if the API reponse is irregular this allows you to handle it outside of this generic method
      */
-    static _handleSOAPErrors(ex: any, msg: 'creating' | 'updating' | 'retrieving' | 'executing' | 'pausing', metadataEntry?: MetadataTypeItem, handleOutside?: boolean): void;
+    static _handleSOAPErrors(ex: SOAPError, msg: "creating" | "updating" | "retrieving" | "executing" | "pausing", metadataEntry?: MetadataTypeItem, handleOutside?: boolean): void;
     /**
      * helper for {@link MetadataType._handleSOAPErrors}
      *
      * @param {SOAPError} ex error that occured
      * @returns {string} error message
      */
-    static getSOAPErrorMsg(ex: any): string;
+    static getSOAPErrorMsg(ex: SOAPError): string;
     /**
      * Retrieves SOAP via generic fuel-soap wrapper based metadata of metadata type into local filesystem. executes callback with retrieved metadata
      *
@@ -360,7 +360,7 @@ declare class MetadataType {
      * @param {string} id id or key of item
      * @returns {Promise.<any>} -
      */
-    static handleRESTErrors(ex: any, id: string): Promise<any>;
+    static handleRESTErrors(ex: RestError, id: string): Promise<any>;
     /**
      * Used to execute a query/automation etc.
      *
@@ -410,7 +410,7 @@ declare class MetadataType {
      * @param {string} origin string of parent object, required when using arrays as these are parsed slightly differently.
      * @returns {void}
      */
-    static deleteFieldByDefinition(metadataEntry: MetadataTypeItem, fieldPath: string, definitionProperty: 'isCreateable' | 'isUpdateable' | 'retrieving' | 'template', origin: string): void;
+    static deleteFieldByDefinition(metadataEntry: MetadataTypeItem, fieldPath: string, definitionProperty: "isCreateable" | "isUpdateable" | "retrieving" | "template", origin: string): void;
     /**
      * Remove fields from metadata entry that are not createable
      *

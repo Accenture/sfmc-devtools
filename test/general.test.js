@@ -461,8 +461,8 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     Object.keys(result[buName]['dataExtension']).length,
-                    5,
-                    'retrieve should have returned 5 dataExtension'
+                    7,
+                    'retrieve should have returned 7 dataExtension'
                 );
                 assert.equal(
                     Object.keys(result[buName]['dataExtract']).length,
@@ -1189,6 +1189,24 @@ describe('GENERAL', () => {
                     0,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
+            });
+        });
+
+        describe('Delete --metadata ~~~', () => {
+            it('Should delete the item', async () => {
+                const argvMetadata = [
+                    'asset:testExisting_asset',
+                    'automation:testExisting_automation',
+                    'journey:testExisting_journey_Quicksend/1',
+                    'journey:testExisting_journey_Multistep/1',
+                ];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                // WHEN
+                const isDeleted = await handler.deleteByKey('testInstance/testBU', typeKeyCombo);
+                // THEN
+                assert.equal(process.exitCode, 0, 'deleteByKey should not have thrown an error');
+                assert.equal(isDeleted, true, 'deleteByKey should have returned true');
+                return;
             });
         });
     });

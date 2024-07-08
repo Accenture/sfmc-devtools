@@ -33,8 +33,8 @@ declare namespace Init {
      * @returns {Promise.<{'user.name': string, 'user.email': string}>} user.name and user.email
      */
     function _getGitConfigUser(): Promise<{
-        'user.name': string;
-        'user.email': string;
+        "user.name": string;
+        "user.email": string;
     }>;
 }
 //# sourceMappingURL=init.git.d.ts.map

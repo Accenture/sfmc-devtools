@@ -1,0 +1,232 @@
+{
+    "type": "APIEvent",
+    "name": "testNew_event_withExistingDE",
+    "description": "created on deploy",
+    "createdDate": "0001-01-01T00:00:00",
+    "createdBy": 0,
+    "modifiedDate": "0001-01-01T00:00:00",
+    "modifiedBy": 0,
+    "eventDefinitionKey": "testNew_event_withExistingDE",
+    "schema": {
+        "fields": [
+            {
+                "name": "ContactId",
+                "dataType": "Text",
+                "maxLength": "18",
+                "isNullable": false,
+                "isPrimaryKey": true,
+                "isDevicePreference": false
+            },
+            {
+                "name": "Type",
+                "dataType": "Text",
+                "maxLength": "50",
+                "isNullable": false,
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "Status",
+                "dataType": "Text",
+                "maxLength": "50",
+                "isNullable": false,
+                "isPrimaryKey": true,
+                "isDevicePreference": false
+            },
+            {
+                "name": "Respondent",
+                "dataType": "Text",
+                "maxLength": "256",
+                "isNullable": true,
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "FirstName",
+                "dataType": "Text",
+                "maxLength": "256",
+                "isNullable": true,
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "LastName",
+                "dataType": "Text",
+                "maxLength": "256",
+                "isNullable": true,
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "PreferredLanguage",
+                "dataType": "Text",
+                "maxLength": "50",
+                "isNullable": true,
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "TouchPoint",
+                "dataType": "Text",
+                "maxLength": "256",
+                "isNullable": true,
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "Datestamp",
+                "dataType": "Date",
+                "isNullable": true,
+                "defaultValue": "GetDate()",
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "StartDate",
+                "dataType": "Date",
+                "isNullable": true,
+                "defaultValue": "",
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "EndDate",
+                "dataType": "Date",
+                "isNullable": true,
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "BroadcastedNotificationDate",
+                "dataType": "Date",
+                "isNullable": true,
+                "defaultValue": "",
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "FirstReminderDate",
+                "dataType": "Date",
+                "isNullable": true,
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "SecondReminderDate",
+                "dataType": "Date",
+                "isNullable": true,
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "Title",
+                "dataType": "Text",
+                "maxLength": "256",
+                "isNullable": true,
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "DisplayName",
+                "dataType": "Text",
+                "maxLength": "256",
+                "isNullable": true,
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "Text",
+                "dataType": "Text",
+                "maxLength": "256",
+                "isNullable": true,
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "Description",
+                "dataType": "Text",
+                "maxLength": "4000",
+                "isNullable": true,
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "Channel",
+                "dataType": "Text",
+                "maxLength": "256",
+                "isNullable": true,
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "FirstReminderChannel",
+                "dataType": "Text",
+                "maxLength": "256",
+                "isNullable": true,
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "SecondReminderChannel",
+                "dataType": "Text",
+                "maxLength": "256",
+                "isNullable": true,
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "Email",
+                "dataType": "Email",
+                "maxLength": "",
+                "isNullable": true,
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "ArticleOrTaskID",
+                "dataType": "Text",
+                "maxLength": "18",
+                "isNullable": false,
+                "isPrimaryKey": true,
+                "isDevicePreference": false
+            },
+            {
+                "name": "Points",
+                "dataType": "Number",
+                "maxLength": "",
+                "isNullable": true,
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "TaskType",
+                "dataType": "Text",
+                "maxLength": "255",
+                "isNullable": true,
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            },
+            {
+                "name": "TaskArea",
+                "dataType": "Text",
+                "maxLength": "255",
+                "isNullable": true,
+                "isPrimaryKey": false,
+                "isDevicePreference": false
+            }
+        ],
+        "sendableCustomObjectField": "ContactId",
+        "sendableSubscriberField": "_SubscriberKey"
+    },
+    "filterDefinitionId": "00000000-0000-0000-0000-000000000000",
+    "arguments": {
+        "serializedObjectType": 11
+    },
+    "metaData": {},
+    "interactionCount": 0,
+    "isVisibleInPicker": true,
+    "category": "Event",
+    "publishedInteractionCount": 0,
+    "automationId": "00000000-0000-0000-0000-000000000000",
+    "r__dataExtension_key": "testExisting_event - 2024-07-05T080154625"
+}

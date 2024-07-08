@@ -1,16 +1,16 @@
 export default Builder;
-export type BuObject = import('../types/mcdev.d.js').BuObject;
-export type CodeExtract = import('../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../types/mcdev.d.js').CodeExtractItem;
-export type Mcdevrc = import('../types/mcdev.d.js').Mcdevrc;
-export type MetadataTypeItem = import('../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../types/mcdev.d.js').MetadataTypeMapObj;
-export type MultiMetadataTypeList = import('../types/mcdev.d.js').MultiMetadataTypeList;
-export type SoapRequestParams = import('../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../types/mcdev.d.js').TemplateMap;
+export type BuObject = import("../types/mcdev.d.js").BuObject;
+export type CodeExtract = import("../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../types/mcdev.d.js").CodeExtractItem;
+export type Mcdevrc = import("../types/mcdev.d.js").Mcdevrc;
+export type MetadataTypeItem = import("../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../types/mcdev.d.js").MetadataTypeMapObj;
+export type MultiMetadataTypeList = import("../types/mcdev.d.js").MultiMetadataTypeList;
+export type SoapRequestParams = import("../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../types/mcdev.d.js").TemplateMap;
 /**
  * @typedef {import('../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -68,7 +68,7 @@ saved
     constructor(properties: Mcdevrc, buObject: BuObject);
     properties: import("../types/mcdev.d.js").Mcdevrc;
     templateDir: string;
-    retrieveDir: any;
+    retrieveDir: string;
     buObject: import("../types/mcdev.d.js").BuObject;
     targetDir: string[];
     /**

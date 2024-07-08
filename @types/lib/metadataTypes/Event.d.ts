@@ -1,14 +1,14 @@
 export default Event;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type CodeExtract = import('../../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../../types/mcdev.d.js').CodeExtractItem;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -27,6 +27,7 @@ export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
  * @augments MetadataType
  */
 declare class Event extends MetadataType {
+    static reCacheDataExtensions: any[];
     /**
      * Retrieves Metadata of Event Definition.
      * Endpoint /interaction/v1/eventDefinitions return all Event Definitions with all details.
@@ -105,11 +106,7 @@ declare namespace Event {
         validTypes: string[];
         fields: {
             'arguments.audienceCount': {
-                isCreateable: boolean; /**
-                 * Event MetadataType
-                 *
-                 * @augments MetadataType
-                 */
+                isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
@@ -274,6 +271,12 @@ declare namespace Event {
                 template: boolean;
             };
             configurationArguments: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'configurationArguments.unconfigured': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -945,7 +948,7 @@ declare namespace Event {
                 retrieving: boolean;
                 template: boolean;
             };
-            r__dataExtension_CustomerKey: {
+            r__dataExtension_key: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

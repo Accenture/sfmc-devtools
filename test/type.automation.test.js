@@ -162,7 +162,7 @@ describe('type: automation', () => {
                 'five cached automation expected'
             );
 
-            // const scheduleCalloutList = testUtils.getSoapCallout('Schedule');
+            // const scheduleCalloutList = testUtils.getSoapCallouts('Schedule');
             // const objectIds = {
             //     testNew_automation: 'a8afb0e2-b00a-4c88-ad2e-1f7f8788c560',
             //     testExisting_automation: '08afb0e2-b00a-4c88-ad2e-1f7f8788c560',

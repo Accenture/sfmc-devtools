@@ -36,7 +36,7 @@ export default class ReplaceContentBlockReference {
         name: AssetItemSimpleMap;
     };
     /** @type {Object.<string, {id: RegExp[], key: RegExp[], name: RegExp[]}>} */
-    static "__#1@#regexBy": {
+    static "__#2@#regexBy": {
         [x: string]: {
             id: RegExp[];
             key: RegExp[];
@@ -61,7 +61,7 @@ export default class ReplaceContentBlockReference {
      * @param {boolean} [isSsjs] replaces backslashes with double backslashes in name if true
      * @returns {AssetItemSimple} asset object
      */
-    static "__#1@#getAssetBy"(from: ContentBlockConversionTypes, identifier: string | number, parentName: string, isSsjs?: boolean): AssetItemSimple;
+    static "__#2@#getAssetBy"(from: ContentBlockConversionTypes, identifier: string | number, parentName: string, isSsjs?: boolean): AssetItemSimple;
     /**
      *
      * @param {AssetItemSimple} asset asset object
@@ -69,7 +69,7 @@ export default class ReplaceContentBlockReference {
      * @param {boolean} [isSsjs] replaces backslashes with double backslashes in name if true
      * @returns {string} replaced string
      */
-    static "__#1@#replaceWith"(asset: AssetItemSimple, to: ContentBlockConversionTypes, isSsjs?: boolean): string;
+    static "__#2@#replaceWith"(asset: AssetItemSimple, to: ContentBlockConversionTypes, isSsjs?: boolean): string;
     /**
      *
      * @param {Mcdevrc} properties properties for auth
@@ -78,29 +78,29 @@ saved
      */
     static createCacheMap(properties: Mcdevrc, buObject: BuObject): Promise<void>;
 }
-export type AuthObject = import('../../types/mcdev.d.js').AuthObject;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type Cache = import('../../types/mcdev.d.js').Cache;
-export type CodeExtract = import('../../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../../types/mcdev.d.js').CodeExtractItem;
-export type DeltaPkgItem = import('../../types/mcdev.d.js').DeltaPkgItem;
-export type McdevLogger = import('../../types/mcdev.d.js').McdevLogger;
-export type Logger = import('../../types/mcdev.d.js').Logger;
-export type Mcdevrc = import('../../types/mcdev.d.js').Mcdevrc;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
-export type MultiMetadataTypeList = import('../../types/mcdev.d.js').MultiMetadataTypeList;
-export type MultiMetadataTypeMap = import('../../types/mcdev.d.js').MultiMetadataTypeMap;
-export type SkipInteraction = import('../../types/mcdev.d.js').SkipInteraction;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
-export type TypeKeyCombo = import('../../types/mcdev.d.js').TypeKeyCombo;
-export type SDKError = import('../../types/mcdev.d.js').SDKError;
-export type AssetItemSimple = import('../../types/mcdev.d.js').AssetItemSimple;
-export type AssetItemSimpleMap = import('../../types/mcdev.d.js').AssetItemSimpleMap;
-export type AssetItemIdSimpleMap = import('../../types/mcdev.d.js').AssetItemIdSimpleMap;
-export type ContentBlockConversionTypes = import('../../types/mcdev.d.js').ContentBlockConversionTypes;
+export type AuthObject = import("../../types/mcdev.d.js").AuthObject;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type Cache = import("../../types/mcdev.d.js").Cache;
+export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
+export type DeltaPkgItem = import("../../types/mcdev.d.js").DeltaPkgItem;
+export type McdevLogger = import("../../types/mcdev.d.js").McdevLogger;
+export type Logger = import("../../types/mcdev.d.js").Logger;
+export type Mcdevrc = import("../../types/mcdev.d.js").Mcdevrc;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type MultiMetadataTypeList = import("../../types/mcdev.d.js").MultiMetadataTypeList;
+export type MultiMetadataTypeMap = import("../../types/mcdev.d.js").MultiMetadataTypeMap;
+export type SkipInteraction = import("../../types/mcdev.d.js").SkipInteraction;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
+export type SDKError = import("../../types/mcdev.d.js").SDKError;
+export type AssetItemSimple = import("../../types/mcdev.d.js").AssetItemSimple;
+export type AssetItemSimpleMap = import("../../types/mcdev.d.js").AssetItemSimpleMap;
+export type AssetItemIdSimpleMap = import("../../types/mcdev.d.js").AssetItemIdSimpleMap;
+export type ContentBlockConversionTypes = import("../../types/mcdev.d.js").ContentBlockConversionTypes;
 //# sourceMappingURL=replaceContentBlockReference.d.ts.map

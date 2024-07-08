@@ -1,7 +1,7 @@
 export default AttributeSet;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
 /**
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeItem} MetadataTypeItem
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMap} MetadataTypeMap
@@ -104,11 +104,7 @@ declare namespace AttributeSet {
                 isUpdateable: any;
                 retrieving: boolean;
                 template: any;
-            }; /**
-             * Retrieves Metadata of schema set definitions for caching.
-             *
-             * @returns {Promise.<MetadataTypeMapObj>} Promise
-             */
+            };
             canModify: {
                 isCreateable: any;
                 isUpdateable: any;
@@ -326,13 +322,7 @@ declare namespace AttributeSet {
                 template: boolean;
             };
             'localizedDescription.value': {
-                isCreateable: boolean; /**
-                 * Builds map of metadata entries mapped to their keyfields
-                 *
-                 * @param {object} body json of response body
-                 * @param {string} [singleRetrieve] key of single item to filter by
-                 * @returns {MetadataTypeMap} keyField => metadata map
-                 */
+                isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
@@ -359,12 +349,6 @@ declare namespace AttributeSet {
                 isCreateable: any;
                 isUpdateable: any;
                 retrieving: boolean;
-                /**
-                 * manages post retrieve steps
-                 *
-                 * @param {MetadataTypeItem} metadata a single metadata
-                 * @returns {MetadataTypeItem} metadata
-                 */
                 template: any;
             };
             'nonStandardAttributeGroupReferences[].definitionKey': {

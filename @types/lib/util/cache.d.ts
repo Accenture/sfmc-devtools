@@ -1,18 +1,10 @@
 declare namespace _default {
-    function initCache(buObject: import("../../types/mcdev.d.js").BuObject): void;
-    function getCache(): {
-        [x: string]: {
-            [x: string]: any;
-        };
-    };
+    function initCache(buObject: BuObject): void;
+    function getCache(): MultiMetadataTypeMap;
     function clearCache(mid?: number): void;
-    function getByKey(type: string, key: string): any;
-    function setMetadata(type: string, metadataMap: {
-        [x: string]: any;
-    }): void;
-    function mergeMetadata(type: string, metadataMap: {
-        [x: string]: any;
-    }, overrideMID?: number): void;
+    function getByKey(type: string, key: string): MetadataTypeItem;
+    function setMetadata(type: string, metadataMap: MetadataTypeMap): void;
+    function mergeMetadata(type: string, metadataMap: MetadataTypeMap, overrideMID?: number): void;
     /**
      * standardized method for getting data from cache.
      *
@@ -32,7 +24,7 @@ declare namespace _default {
      * @param {'ObjectID'|'ID'|'CustomerKey'} searchField ObjectID:string(uuid), ID:numeric, CustomerKey:string(name + folder ID)
      * @returns {string} unique folderPath/ListName combo of list
      */
-    function getListPathName(searchValue: string, searchField: "ID" | "CustomerKey" | "ObjectID"): string;
+    function getListPathName(searchValue: string, searchField: "ObjectID" | "ID" | "CustomerKey"): string;
     /**
      * standardized method for getting data from cache - adapted for special case of lists
      * ! keeping this in util/cache.js rather than in metadataTypes/List.js to avoid potential circular dependencies
@@ -41,24 +33,24 @@ declare namespace _default {
      * @param {'ObjectID'|'ID'|'CustomerKey'|'ListName'} returnField ObjectID:string(uuid), ID:numeric, CustomerKey:string(name + folder ID)
      * @returns {string} unique ObjectId of list
      */
-    function getListObjectId(listPathName: string, returnField: "ID" | "CustomerKey" | "ObjectID" | "ListName"): string;
+    function getListObjectId(listPathName: string, returnField: "ObjectID" | "ID" | "CustomerKey" | "ListName"): string;
 }
 export default _default;
-export type AuthObject = import('../../types/mcdev.d.js').AuthObject;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type Cache = import('../../types/mcdev.d.js').Cache;
-export type CodeExtract = import('../../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../../types/mcdev.d.js').CodeExtractItem;
-export type DeltaPkgItem = import('../../types/mcdev.d.js').DeltaPkgItem;
-export type Mcdevrc = import('../../types/mcdev.d.js').Mcdevrc;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
-export type MultiMetadataTypeList = import('../../types/mcdev.d.js').MultiMetadataTypeList;
-export type MultiMetadataTypeMap = import('../../types/mcdev.d.js').MultiMetadataTypeMap;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
-export type TypeKeyCombo = import('../../types/mcdev.d.js').TypeKeyCombo;
+export type AuthObject = import("../../types/mcdev.d.js").AuthObject;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type Cache = import("../../types/mcdev.d.js").Cache;
+export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
+export type DeltaPkgItem = import("../../types/mcdev.d.js").DeltaPkgItem;
+export type Mcdevrc = import("../../types/mcdev.d.js").Mcdevrc;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type MultiMetadataTypeList = import("../../types/mcdev.d.js").MultiMetadataTypeList;
+export type MultiMetadataTypeMap = import("../../types/mcdev.d.js").MultiMetadataTypeMap;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 //# sourceMappingURL=cache.d.ts.map

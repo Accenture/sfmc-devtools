@@ -1,0 +1,17 @@
+{
+    "type": "APIEvent",
+    "name": "testNew_event_withExistingDE",
+    "description": "created on deploy",
+    "eventDefinitionKey": "testNew_event_withExistingDE",
+    "filterDefinitionId": "00000000-0000-0000-0000-000000000000",
+    "arguments": {
+        "serializedObjectType": 11,
+        "eventDefinitionKey": "testNew_event_withExistingDE"
+    },
+    "metaData": {},
+    "isVisibleInPicker": true,
+    "category": "Event",
+    "automationId": "00000000-0000-0000-0000-000000000000",
+    "mode": "Production",
+    "dataExtensionId": "f2cc2b21-d73a-ef11-a5c8-5cba2c702db8"
+}
