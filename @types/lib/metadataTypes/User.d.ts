@@ -1,19 +1,19 @@
 export default User;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type CodeExtract = import('../../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../../types/mcdev.d.js').CodeExtractItem;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
-export type UserDocument = import('../../types/mcdev.d.js').UserDocument;
-export type UserDocumentDocument = import('../../types/mcdev.d.js').UserDocumentDocument;
-export type UserDocumentDiff = import('../../types/mcdev.d.js').UserDocumentDiff;
-export type UserDocumentMap = import('../../types/mcdev.d.js').UserDocumentMap;
-export type AccountUserConfiguration = import('../../types/mcdev.d.js').AccountUserConfiguration;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type UserDocument = import("../../types/mcdev.d.js").UserDocument;
+export type UserDocumentDocument = import("../../types/mcdev.d.js").UserDocumentDocument;
+export type UserDocumentDiff = import("../../types/mcdev.d.js").UserDocumentDiff;
+export type UserDocumentMap = import("../../types/mcdev.d.js").UserDocumentMap;
+export type AccountUserConfiguration = import("../../types/mcdev.d.js").AccountUserConfiguration;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -87,7 +87,7 @@ declare class User extends MetadataType {
      * @param {UserDocument[]} metadataToCreate list of items to create
      * @returns {Promise.<'create'|'update'|'skip'>} action to take
      */
-    static createOrUpdate(metadata: MetadataTypeMap, metadataKey: string, hasError: boolean, metadataToUpdate: UserDocumentDiff[], metadataToCreate: UserDocument[]): Promise<'create' | 'update' | 'skip'>;
+    static createOrUpdate(metadata: MetadataTypeMap, metadataKey: string, hasError: boolean, metadataToUpdate: UserDocumentDiff[], metadataToCreate: UserDocument[]): Promise<"create" | "update" | "skip">;
     /**
      *
      * @private
@@ -278,15 +278,7 @@ declare namespace User {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
-                template: boolean; /**
-                 * Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
-                 *
-                 * @param {string} retrieveDir Directory where retrieved metadata directory will be saved
-                 * @param {void | string[]} _ unused parameter
-                 * @param {void | string[]} [__] unused parameter
-                 * @param {string} [key] customer key of single item to retrieve
-                 * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
-                 */
+                template: boolean;
             };
             ChallengeAnswer: {
                 isCreateable: boolean;
@@ -321,12 +313,7 @@ declare namespace User {
             CorrelationID: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
-                retrieving: boolean; /**
-                 * Create a single item.
-                 *
-                 * @param {MetadataTypeItem} metadata single metadata entry
-                 * @returns {Promise} Promise
-                 */
+                retrieving: boolean;
                 template: boolean;
             };
             CreatedDate: {
@@ -342,12 +329,7 @@ declare namespace User {
                 template: boolean;
             };
             DefaultApplication: {
-                isCreateable: boolean; /**
-                 * Updates a single item.
-                 *
-                 * @param {MetadataTypeItem} metadata single metadata entry
-                 * @returns {Promise} Promise
-                 */
+                isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;

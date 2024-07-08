@@ -1,14 +1,14 @@
 export default FileTransfer;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type CodeExtract = import('../../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../../types/mcdev.d.js').CodeExtractItem;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -160,14 +160,7 @@ declare namespace FileTransfer {
             isFileSpecLocalized: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
-                retrieving: boolean; /**
-                 * Retrieve a specific File Transfer Definition by Name
-                 *
-                 * @param {string} templateDir Directory where retrieved metadata directory will be saved
-                 * @param {string} name name of the metadata file
-                 * @param {TemplateMap} templateVariables variables to be replaced in the metadata
-                 * @returns {Promise.<MetadataTypeItemObj>} Promise
-                 */
+                retrieving: boolean;
                 template: boolean;
             };
             isPgp: {

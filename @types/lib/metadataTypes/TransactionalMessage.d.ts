@@ -1,14 +1,14 @@
 export default TransactionalMessage;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type CodeExtract = import('../../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../../types/mcdev.d.js').CodeExtractItem;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -67,23 +67,6 @@ declare namespace TransactionalMessage {
         bodyIteratorField: string;
         dependencies: any[];
         hasExtended: boolean;
-        /**
-         * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
-         * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
-         * @typedef {import('../../types/mcdev.d.js').CodeExtractItem} CodeExtractItem
-         * @typedef {import('../../types/mcdev.d.js').MetadataTypeItem} MetadataTypeItem
-         * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemDiff} MetadataTypeItemDiff
-         * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemObj} MetadataTypeItemObj
-         * @typedef {import('../../types/mcdev.d.js').MetadataTypeMap} MetadataTypeMap
-         * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
-         * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
-         * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
-         */
-        /**
-         * TransactionalMessage MetadataType
-         *
-         * @augments MetadataType
-         */
         idField: string;
         keyIsFixed: boolean;
         keyField: string;
@@ -110,11 +93,7 @@ declare namespace TransactionalMessage {
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
-            }; /**
-             * TransactionalMessage MetadataType
-             *
-             * @augments MetadataType
-             */
+            };
             description: {
                 isCreateable: boolean;
                 isUpdateable: boolean;

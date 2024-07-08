@@ -1,14 +1,14 @@
 export default TransactionalSMS;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type CodeExtract = import('../../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../../types/mcdev.d.js').CodeExtractItem;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -73,7 +73,7 @@ declare class TransactionalSMS extends TransactionalMessage {
      * @param {'definition'|'template'} mode defines what we use this helper for
      * @returns {Promise.<string[][]>} list of extracted files with path-parts provided as an array
      */
-    static _buildForNested(templateDir: string, targetDir: string | string[], metadata: MetadataTypeItem, templateVariables: TemplateMap, templateName: string, mode: 'definition' | 'template'): Promise<string[][]>;
+    static _buildForNested(templateDir: string, targetDir: string | string[], metadata: MetadataTypeItem, templateVariables: TemplateMap, templateName: string, mode: "definition" | "template"): Promise<string[][]>;
     /**
      * very simplified test for HTML code in our SMS
      *
@@ -137,13 +137,7 @@ declare namespace TransactionalSMS {
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
-            }; /**
-             * prepares for deployment
-             *
-             * @param {MetadataTypeItem} metadata a single item
-             * @param {string} deployDir directory of deploy files
-             * @returns {Promise.<MetadataTypeItem>} Promise
-             */
+            };
             createdDate: {
                 isCreateable: boolean;
                 isUpdateable: boolean;

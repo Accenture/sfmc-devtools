@@ -1,21 +1,21 @@
 export default Automation;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type CodeExtract = import('../../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../../types/mcdev.d.js').CodeExtractItem;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
-export type SDKError = import('../../types/mcdev.d.js').SDKError;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
-export type AutomationItem = import('../../types/mcdev.d.js').AutomationItem;
-export type AutomationItemObj = import('../../types/mcdev.d.js').AutomationItemObj;
-export type AutomationMap = import('../../types/mcdev.d.js').AutomationMap;
-export type AutomationMapObj = import('../../types/mcdev.d.js').AutomationMapObj;
-export type AutomationSchedule = import('../../types/mcdev.d.js').AutomationSchedule;
-export type AutomationScheduleSoap = import('../../types/mcdev.d.js').AutomationScheduleSoap;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type SDKError = import("../../types/mcdev.d.js").SDKError;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type AutomationItem = import("../../types/mcdev.d.js").AutomationItem;
+export type AutomationItemObj = import("../../types/mcdev.d.js").AutomationItemObj;
+export type AutomationMap = import("../../types/mcdev.d.js").AutomationMap;
+export type AutomationMapObj = import("../../types/mcdev.d.js").AutomationMapObj;
+export type AutomationSchedule = import("../../types/mcdev.d.js").AutomationSchedule;
+export type AutomationScheduleSoap = import("../../types/mcdev.d.js").AutomationScheduleSoap;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -320,14 +320,7 @@ declare namespace Automation {
         keyField: string;
         nameField: string;
         folderIdField: string;
-        createdDateField: string; /**
-         * @typedef {import('../../types/mcdev.d.js').AutomationItem} AutomationItem
-         * @typedef {import('../../types/mcdev.d.js').AutomationItemObj} AutomationItemObj
-         * @typedef {import('../../types/mcdev.d.js').AutomationMap} AutomationMap
-         * @typedef {import('../../types/mcdev.d.js').AutomationMapObj} AutomationMapObj
-         * @typedef {import('../../types/mcdev.d.js').AutomationSchedule} AutomationSchedule
-         * @typedef {import('../../types/mcdev.d.js').AutomationScheduleSoap} AutomationScheduleSoap
-         */
+        createdDateField: string;
         createdNameField: string;
         lastmodDateField: string;
         lastmodNameField: string;
@@ -343,11 +336,6 @@ declare namespace Automation {
         statusMapping: {
             AwaitingTrigger: number;
             Building: number;
-            /**
-             * Automation MetadataType
-             *
-             * @augments MetadataType
-             */
             BuildingError: number;
             Error: number;
             InactiveTrigger: number;
@@ -372,7 +360,7 @@ declare namespace Automation {
             'Canada Central Standard Time': number;
             'Cape Verde Standard Time': number;
             'Caucasus Standard Time': number;
-            'Cen. Australia Standard Time': number; /** @type {SoapRequestParams} */
+            'Cen. Australia Standard Time': number;
             'Central America Standard Time': number;
             'Central Asia Standard Time': number;
             'Central Brazilian Standard Time': number;
@@ -677,7 +665,6 @@ declare namespace Automation {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
-                /** @type {AutomationMap} */
                 template: boolean;
             };
             'notifications[].channelType': {
@@ -721,14 +708,6 @@ declare namespace Automation {
             };
             'schedule.occurrences': {
                 isCreateable: boolean;
-                /**
-                 * Retrieve a specific Automation Definition by Name
-                 *
-                 * @param {string} templateDir Directory where retrieved metadata directory will be saved
-                 * @param {string} name name of the metadata file
-                 * @param {TemplateMap} templateVariables variables to be replaced in the metadata
-                 * @returns {Promise.<AutomationItemObj>} Promise of metadata
-                 */
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;

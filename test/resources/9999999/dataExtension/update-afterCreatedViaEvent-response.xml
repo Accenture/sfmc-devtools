@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>UpdateResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:994e213d-1125-450d-b187-32e3870147d1</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:f1fc86ef-c0c8-4c17-a901-a15fc2631f76</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-88cf0bce-bf0f-4d5f-90a6-2897708181b5">
+                <wsu:Created>2022-04-26T20:49:03Z</wsu:Created>
+                <wsu:Expires>2022-04-26T20:54:03Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <UpdateResponse xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <Results>
+                <StatusCode>OK</StatusCode>
+                <StatusMessage>Data Extension updated.</StatusMessage>
+                <OrdinalID>0</OrdinalID>
+                <Object xsi:type="DataExtension">
+                    <PartnerKey xsi:nil="true" />
+                    <CreatedDate>2024-07-05T08:01:54.803</CreatedDate>
+                    <ModifiedDate>2024-07-05T08:01:58.923</ModifiedDate>
+                    <ObjectID>4342972c-a43c-ef11-a5c8-5cba2c702db8</ObjectID>
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                    <Name>testNew_event_withSchema</Name>
+                    <Description />
+                    <IsSendable>true</IsSendable>
+                    <IsTestable>false</IsTestable>
+                    <SendableDataExtensionField>
+                        <PartnerKey xsi:nil="true" />
+                        <ObjectID xsi:nil="true" />
+                        <Name>ContactId</Name>
+                    </SendableDataExtensionField>
+                    <SendableSubscriberField>
+                        <Name>_SubscriberKey</Name>
+                    </SendableSubscriberField>
+                    <RowBasedRetention>false</RowBasedRetention>
+                    <ResetRetentionPeriodOnImport>false</ResetRetentionPeriodOnImport>
+                    <DeleteAtEndOfRetentionPeriod>false</DeleteAtEndOfRetentionPeriod>
+                    <RetainUntil />
+                    <CategoryID>2</CategoryID>
+
+                </Results>
+                <RequestID>dbfedcb6-a809-4101-b314-a7b920c9fb1e</RequestID>
+                <OverallStatus>OK</OverallStatus>
+            </UpdateResponse>
+        </soap:Body>
+    </soap:Envelope>

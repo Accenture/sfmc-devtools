@@ -189,6 +189,12 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        'configurationArguments.unconfigured': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         createdBy: {
             isCreateable: boolean;
             isUpdateable: boolean;
@@ -855,7 +861,7 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
-        r__dataExtension_CustomerKey: {
+        r__dataExtension_key: {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;

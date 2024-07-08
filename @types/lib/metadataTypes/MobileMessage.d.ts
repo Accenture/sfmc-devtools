@@ -1,14 +1,14 @@
 export default MobileMessage;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type CodeExtract = import('../../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../../types/mcdev.d.js').CodeExtractItem;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -114,7 +114,7 @@ declare class MobileMessage extends MetadataType {
      * @param {'definition'|'template'} mode defines what we use this helper for
      * @returns {Promise.<string[][]>} list of extracted files with path-parts provided as an array
      */
-    static _buildForNested(templateDir: string, targetDir: string | string[], metadata: MetadataTypeItem, templateVariables: TemplateMap, templateName: string, mode: 'definition' | 'template'): Promise<string[][]>;
+    static _buildForNested(templateDir: string, targetDir: string | string[], metadata: MetadataTypeItem, templateVariables: TemplateMap, templateName: string, mode: "definition" | "template"): Promise<string[][]>;
 }
 declare namespace MobileMessage {
     let definition: {
@@ -150,24 +150,11 @@ declare namespace MobileMessage {
                 skipValidation: boolean;
             };
             campaigns: {
-                /**
-                 * MobileMessage MetadataType
-                 *
-                 * @augments MetadataType
-                 */
                 skipValidation: boolean;
             };
             'campaigns[]': {
                 skipValidation: boolean;
-            }; /**
-             * Retrieves Metadata of Mobile Keywords
-             *
-             * @param {string} retrieveDir Directory where retrieved metadata directory will be saved
-             * @param {void | string[]} [_] unused parameter
-             * @param {void | string[]} [__] unused parameter
-             * @param {string} [key] customer key of single item to retrieve
-             * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
-             */
+            };
             r__mobileCode_key: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -301,12 +288,7 @@ declare namespace MobileMessage {
                 template: boolean;
             };
             'code.sendableCountries[].vendor': {
-                isCreateable: boolean; /**
-                 * helper for {@link MobileMessage.postRetrieveTasks} and {@link MobileMessage._buildForNested}
-                 *
-                 * @param {string} code the code of the file
-                 * @returns {{fileExt:string,code:string}} returns found extension and file content
-                 */
+                isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
@@ -598,17 +580,7 @@ declare namespace MobileMessage {
                 isUpdatable: boolean;
                 retrieving: boolean;
                 template: boolean;
-            }; /**
-             * helper for {@link MetadataType.buildDefinition}
-             * handles extracted code if any are found for complex types
-             *
-             * @param {string} templateDir Directory where metadata templates are stored
-             * @param {string|string[]} targetDir (List of) Directory where built definitions will be saved
-             * @param {MetadataTypeItem} metadata main JSON file that was read from file system
-             * @param {TemplateMap} templateVariables variables to be replaced in the metadata
-             * @param {string} templateName name of the template to be built
-             * @returns {Promise.<string[][]>} list of extracted files with path-parts provided as an array
-             */
+            };
             mtSendDate: {
                 isCreatable: boolean;
                 isUpdatable: boolean;

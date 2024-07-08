@@ -1,0 +1,26 @@
+{
+    "id": "21ab68de-2e2f-40b2-b455-c977cbdd4335",
+    "type": "APIEvent",
+    "name": "testNew_event_withExistingDE",
+    "description": "created on deploy",
+    "createdDate": "0001-01-01T00:00:00",
+    "createdBy": 0,
+    "modifiedDate": "0001-01-01T00:00:00",
+    "modifiedBy": 0,
+    "mode": "Production",
+    "eventDefinitionKey": "testNew_event_withExistingDE",
+    "dataExtensionId": "f2cc2b21-d73a-ef11-a5c8-5cba2c702db8",
+    "filterDefinitionId": "00000000-0000-0000-0000-000000000000",
+    "arguments": {
+        "serializedObjectType": 11,
+        "eventDefinitionKey": "testNew_event_withExistingDE",
+        "eventDefinitionId": "21ab68de-2e2f-40b2-b455-c977cbdd4335",
+        "dataExtensionId": "f2cc2b21-d73a-ef11-a5c8-5cba2c702db8"
+    },
+    "metaData": {},
+    "interactionCount": 0,
+    "isVisibleInPicker": true,
+    "category": "Event",
+    "publishedInteractionCount": 0,
+    "automationId": "00000000-0000-0000-0000-000000000000"
+}

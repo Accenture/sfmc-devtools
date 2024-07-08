@@ -1,22 +1,22 @@
 export default Cli;
-export type AuthObject = import('../../types/mcdev.d.js').AuthObject;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type Cache = import('../../types/mcdev.d.js').Cache;
-export type CodeExtract = import('../../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../../types/mcdev.d.js').CodeExtractItem;
-export type DeltaPkgItem = import('../../types/mcdev.d.js').DeltaPkgItem;
-export type Mcdevrc = import('../../types/mcdev.d.js').Mcdevrc;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
-export type MultiMetadataTypeList = import('../../types/mcdev.d.js').MultiMetadataTypeList;
-export type MultiMetadataTypeMap = import('../../types/mcdev.d.js').MultiMetadataTypeMap;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
-export type TypeKeyCombo = import('../../types/mcdev.d.js').TypeKeyCombo;
-export type ExplainType = import('../../types/mcdev.d.js').ExplainType;
+export type AuthObject = import("../../types/mcdev.d.js").AuthObject;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type Cache = import("../../types/mcdev.d.js").Cache;
+export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
+export type DeltaPkgItem = import("../../types/mcdev.d.js").DeltaPkgItem;
+export type Mcdevrc = import("../../types/mcdev.d.js").Mcdevrc;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type MultiMetadataTypeList = import("../../types/mcdev.d.js").MultiMetadataTypeList;
+export type MultiMetadataTypeMap = import("../../types/mcdev.d.js").MultiMetadataTypeMap;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
+export type ExplainType = import("../../types/mcdev.d.js").ExplainType;
 declare namespace Cli {
     /**
      * used when initially setting up a project.
@@ -31,7 +31,7 @@ declare namespace Cli {
      * @param {Mcdevrc} properties config file's json
      * @returns {Promise.<boolean | string>} status
      */
-    function addExtraCredential(properties: import("../../types/mcdev.d.js").Mcdevrc): Promise<string | boolean>;
+    function addExtraCredential(properties: Mcdevrc): Promise<boolean | string>;
     /**
      *
      * @param {string[]} dependentTypes types that depent on type
@@ -44,7 +44,7 @@ declare namespace Cli {
      * @param {Mcdevrc} properties config file's json
      * @returns {void}
      */
-    function logExistingCredentials(properties: import("../../types/mcdev.d.js").Mcdevrc): void;
+    function logExistingCredentials(properties: Mcdevrc): void;
     /**
      * Extends template file for properties.json
      * update credentials
@@ -54,7 +54,7 @@ declare namespace Cli {
      * @param {boolean} [refreshBUs] if this was triggered by mcdev join, do not refresh BUs
      * @returns {Promise.<string | boolean>} success of update
      */
-    function updateCredential(properties: import("../../types/mcdev.d.js").Mcdevrc, credName: string, refreshBUs?: boolean): Promise<string | boolean>;
+    function updateCredential(properties: Mcdevrc, credName: string, refreshBUs?: boolean): Promise<string | boolean>;
     /**
      * Returns Object with parameters required for accessing API
      *
@@ -64,7 +64,7 @@ declare namespace Cli {
      * @param {boolean} [allowAll] Offer ALL as option in BU selection
      * @returns {Promise.<BuObject>} credential to be used for Business Unit
      */
-    function getCredentialObject(properties: import("../../types/mcdev.d.js").Mcdevrc, target: string, isCredentialOnly?: string | boolean, allowAll?: boolean): Promise<import("../../types/mcdev.d.js").BuObject>;
+    function getCredentialObject(properties: Mcdevrc, target: string, isCredentialOnly?: boolean | string, allowAll?: boolean): Promise<BuObject>;
     /**
      * helps select the right credential in case of bad initial input
      *
@@ -74,7 +74,7 @@ declare namespace Cli {
      * @param {boolean} [allowAll] Offer ALL as option in BU selection
      * @returns {Promise.<{businessUnit:string, credential:string}>} selected credential/BU combo
      */
-    function _selectBU(properties: import("../../types/mcdev.d.js").Mcdevrc, credential?: string, isCredentialOnly?: boolean, allowAll?: boolean): Promise<{
+    function _selectBU(properties: Mcdevrc, credential?: string, isCredentialOnly?: boolean, allowAll?: boolean): Promise<{
         businessUnit: string;
         credential: string;
     }>;
@@ -86,7 +86,7 @@ declare namespace Cli {
      * @param {boolean} [refreshBUs] if this was triggered by mcdev join, do not refresh BUs
      * @returns {Promise.<boolean | string>} success of refresh or credential name
      */
-    function _setCredential(properties: import("../../types/mcdev.d.js").Mcdevrc, credName?: string, refreshBUs?: boolean): Promise<string | boolean>;
+    function _setCredential(properties: Mcdevrc, credName?: string, refreshBUs?: boolean): Promise<boolean | string>;
     /**
      * helper for {@link Cli.addExtraCredential}
      *
@@ -94,7 +94,7 @@ declare namespace Cli {
      * @param {string} [credName] name of credential that needs updating
      * @returns {Promise.<object>} credential info
      */
-    function _askCredentials(properties: import("../../types/mcdev.d.js").Mcdevrc, credName?: string): Promise<any>;
+    function _askCredentials(properties: Mcdevrc, credName?: string): Promise<object>;
     /**
      * allows updating the metadata types that shall be retrieved
      *
@@ -102,7 +102,7 @@ declare namespace Cli {
      * @param {string[]} [setTypesArr] skip user prompt and overwrite with this list if given
      * @returns {Promise.<void>} -
      */
-    function selectTypes(properties: import("../../types/mcdev.d.js").Mcdevrc, setTypesArr?: string[]): Promise<void>;
+    function selectTypes(properties: Mcdevrc, setTypesArr?: string[]): Promise<void>;
     /**
      * helper for {@link Cli.selectTypes} that converts subtypes back to main type if all and only defaults were selected
      * this keeps the config automatically upgradable when we add new subtypes or change what is selected by default
@@ -120,6 +120,6 @@ declare namespace Cli {
      *
      * @returns {ExplainType[]} list of supported types with their apiNames
      */
-    function explainTypes(): import("../../types/mcdev.d.js").ExplainType[];
+    function explainTypes(): ExplainType[];
 }
 //# sourceMappingURL=cli.d.ts.map
