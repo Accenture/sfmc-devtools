@@ -68,7 +68,7 @@ saved
     constructor(properties: Mcdevrc, buObject: BuObject);
     properties: import("../types/mcdev.d.js").Mcdevrc;
     templateDir: string;
-    retrieveDir: any;
+    retrieveDir: string;
     buObject: import("../types/mcdev.d.js").BuObject;
     targetDir: string[];
     /**

@@ -83,8 +83,8 @@ declare class Deployer {
     constructor(properties: Mcdevrc, buObject: BuObject);
     buObject: import("../types/mcdev.d.js").BuObject;
     properties: import("../types/mcdev.d.js").Mcdevrc;
-    deployDir: any;
-    retrieveDir: any;
+    deployDir: string;
+    retrieveDir: string;
     /**
      * Deploy all metadata that is located in the deployDir
      *

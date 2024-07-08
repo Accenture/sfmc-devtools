@@ -44,7 +44,7 @@ declare class Retriever {
     properties: import("../types/mcdev.d.js").Mcdevrc;
     retrieveDir: string;
     templateDir: string;
-    savePath: any;
+    savePath: string;
     /**
      * Retrieve metadata of specified types into local file system and Retriever.metadata
      *
