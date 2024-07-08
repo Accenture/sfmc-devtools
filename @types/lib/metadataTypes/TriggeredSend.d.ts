@@ -1,14 +1,14 @@
 export default TriggeredSend;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type CodeExtract = import('../../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../../types/mcdev.d.js').CodeExtractItem;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -157,7 +157,7 @@ declare namespace TriggeredSend {
             };
             BccEmail: {
                 isCreateable: boolean;
-                isUpdateable: boolean; /** @type {SoapRequestParams} */
+                isUpdateable: boolean;
                 retrieving: boolean;
                 templating: boolean;
             };
@@ -226,12 +226,7 @@ declare namespace TriggeredSend {
                 isUpdateable: boolean;
                 retrieving: boolean;
                 templating: boolean;
-            }; /**
-             * parses retrieved Metadata before saving
-             *
-             * @param {MetadataTypeItem} metadata a single item
-             * @returns {MetadataTypeItem | void} Array with one metadata object and one sql string
-             */
+            };
             DisableOnEmailBuildError: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -656,7 +651,7 @@ declare namespace TriggeredSend {
                 skipValidation: boolean;
             };
             c__priority: {
-                skipValidation: boolean; /** @type {SoapRequestParams} */
+                skipValidation: boolean;
             };
             r__sendClassification_key: {
                 skipValidation: boolean;

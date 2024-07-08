@@ -1,21 +1,21 @@
 export default Init;
-export type AuthObject = import('../../types/mcdev.d.js').AuthObject;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type Cache = import('../../types/mcdev.d.js').Cache;
-export type CodeExtract = import('../../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../../types/mcdev.d.js').CodeExtractItem;
-export type DeltaPkgItem = import('../../types/mcdev.d.js').DeltaPkgItem;
-export type Mcdevrc = import('../../types/mcdev.d.js').Mcdevrc;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
-export type MultiMetadataTypeList = import('../../types/mcdev.d.js').MultiMetadataTypeList;
-export type MultiMetadataTypeMap = import('../../types/mcdev.d.js').MultiMetadataTypeMap;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
-export type TypeKeyCombo = import('../../types/mcdev.d.js').TypeKeyCombo;
+export type AuthObject = import("../../types/mcdev.d.js").AuthObject;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type Cache = import("../../types/mcdev.d.js").Cache;
+export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
+export type DeltaPkgItem = import("../../types/mcdev.d.js").DeltaPkgItem;
+export type Mcdevrc = import("../../types/mcdev.d.js").Mcdevrc;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type MultiMetadataTypeList = import("../../types/mcdev.d.js").MultiMetadataTypeList;
+export type MultiMetadataTypeMap = import("../../types/mcdev.d.js").MultiMetadataTypeMap;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 declare namespace Init {
     /**
      * helper method for this.upgradeProject that upgrades project config if needed
@@ -23,7 +23,7 @@ declare namespace Init {
      * @param {Mcdevrc} properties config file's json
      * @returns {Promise.<boolean>} returns true if worked without errors
      */
-    function fixMcdevConfig(properties: import("../../types/mcdev.d.js").Mcdevrc): Promise<boolean>;
+    function fixMcdevConfig(properties: Mcdevrc): Promise<boolean>;
     /**
      * handles creation/update of all config file from the boilerplate
      *
@@ -39,7 +39,7 @@ declare namespace Init {
      * @param {string} fieldName dot-concatenated object-path that needs adding
      * @returns {void}
      */
-    function _updateLeaf(propertiersCur: any, defaultPropsCur: any, fieldName: string): void;
+    function _updateLeaf(propertiersCur: object, defaultPropsCur: object, fieldName: string): void;
     /**
      * returns list of files that need to be updated
      *

@@ -45,14 +45,14 @@ export namespace Util {
      * @param {Mcdevrc} properties local mcdev config
      * @returns {boolean} found market or not
      */
-    function checkMarket(market: string, properties: import("../../types/mcdev.d.js").Mcdevrc): boolean;
+    function checkMarket(market: string, properties: Mcdevrc): boolean;
     /**
      * ensure provided MarketList exists and it's content including markets and BUs checks out
      *
      * @param {string} mlName name of marketList
      * @param {Mcdevrc} properties General configuration to be used in retrieve
      */
-    function verifyMarketList(mlName: string, properties: import("../../types/mcdev.d.js").Mcdevrc): void;
+    function verifyMarketList(mlName: string, properties: Mcdevrc): void;
     /**
      * used to ensure the program tells surrounding software that an unrecoverable error occured
      *
@@ -91,7 +91,7 @@ export namespace Util {
      * @param {boolean} [handleOutside] if the API reponse is irregular this allows you to handle it outside of this generic method
      * @returns {boolean} bu found or not
      */
-    function _isValidBU(properties: import("../../types/mcdev.d.js").Mcdevrc, businessUnit: string, handleOutside?: boolean): boolean;
+    function _isValidBU(properties: Mcdevrc, businessUnit: string, handleOutside?: boolean): boolean;
     /**
      * helper that deals with extracting type and subtype
      *
@@ -108,15 +108,13 @@ export namespace Util {
      * @returns {string[]} type choices
      */
     function getRetrieveTypeChoices(): string[];
-    function _createNewLoggerTransport(noLogFile?: boolean): any;
+    function _createNewLoggerTransport(noLogFile?: boolean): object;
     let loggerTransports: any;
     let logger: Logger;
     function startLogger(restart?: boolean, noLogFile?: boolean): void;
     function metadataLogger(level: string, type: string, method: string, payload: any, source?: string): void;
-    function replaceByObject(str: any, obj: {
-        [x: string]: string;
-    }): any;
-    function inverseGet(objs: any, val: string | number): string;
+    function replaceByObject(str: string | object, obj: TemplateMap): string | object;
+    function inverseGet(objs: object, val: string | number): string;
     /**
      *helper for Mcdev.fixKeys. Retrieve dependent metadata
      *
@@ -140,7 +138,7 @@ export namespace Util {
      * @param {object} obj some parent object
      * @returns {any} value of obj.path
      */
-    function resolveObjPath(path: string, obj: any): any;
+    function resolveObjPath(path: string, obj: object): any;
     /**
      * helper to run other commands as if run manually by user
      *
@@ -158,7 +156,7 @@ export namespace Util {
      * @param {string} searchValue the value which is being looked for
      * @returns {MetadataTypeItem} metadata to be used in building template
      */
-    function templateSearchResult(results: any[], keyToSearch: string, searchValue: string): any;
+    function templateSearchResult(results: MetadataTypeItem[], keyToSearch: string, searchValue: string): MetadataTypeItem;
     /**
      * configures what is displayed in the console
      *
@@ -227,7 +225,7 @@ export namespace Util {
      * @param {boolean} [isId] optional flag to indicate if key is an id
      * @returns {string} string to be appended to log message
      */
-    function getKeysString(keyArr: string | string[], isId?: boolean): string;
+    function getKeysString(keyArr: string[] | string, isId?: boolean): string;
     /**
      * pause execution of code; useful when multiple server calls are dependent on each other and might not be executed right away
      *
@@ -269,7 +267,7 @@ export namespace Util {
      * @param {object} [filters] only used in recursive calls
      * @returns {boolean} true if no LIKE filter is defined or if all filters match
      */
-    function fieldsLike(metadata: any, filters?: any): boolean;
+    function fieldsLike(metadata: MetadataTypeItem, filters?: object): boolean;
     /**
      * helper used by SOAP methods to ensure the type always uses an upper-cased first letter
      *
@@ -285,9 +283,7 @@ export namespace Util {
      * @param {boolean} [returnEmpty] returns array with null element if false/not set; Retriever needs this to be false; Deployer needs it to be true
      * @returns {TypeKeyCombo} -
      */
-    function createTypeKeyCombo(typeArr: string[], keyArr: string[], returnEmpty?: boolean): {
-        [x: string]: string[];
-    };
+    function createTypeKeyCombo(typeArr: string[], keyArr: string[], returnEmpty?: boolean): TypeKeyCombo;
     /**
      * async version of Array.find()
      * returns the first element in the provided array that satisfies the provided testin function
@@ -296,27 +292,27 @@ export namespace Util {
      * @param {Function} asyncCallback callback
      * @returns {Promise.<any | undefined>} first element that passed the test
      */
-    function findAsync(arr: any[], asyncCallback: Function): Promise<any>;
+    function findAsync(arr: any[], asyncCallback: Function): Promise<any | undefined>;
 }
-export type AuthObject = import('../../types/mcdev.d.js').AuthObject;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type Cache = import('../../types/mcdev.d.js').Cache;
-export type CodeExtract = import('../../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../../types/mcdev.d.js').CodeExtractItem;
-export type DeltaPkgItem = import('../../types/mcdev.d.js').DeltaPkgItem;
-export type McdevLogger = import('../../types/mcdev.d.js').McdevLogger;
-export type Logger = import('../../types/mcdev.d.js').Logger;
-export type Mcdevrc = import('../../types/mcdev.d.js').Mcdevrc;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
-export type MultiMetadataTypeList = import('../../types/mcdev.d.js').MultiMetadataTypeList;
-export type MultiMetadataTypeMap = import('../../types/mcdev.d.js').MultiMetadataTypeMap;
-export type SkipInteraction = import('../../types/mcdev.d.js').SkipInteraction;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
-export type TypeKeyCombo = import('../../types/mcdev.d.js').TypeKeyCombo;
-export type SDKError = import('../../types/mcdev.d.js').SDKError;
+export type AuthObject = import("../../types/mcdev.d.js").AuthObject;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type Cache = import("../../types/mcdev.d.js").Cache;
+export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
+export type DeltaPkgItem = import("../../types/mcdev.d.js").DeltaPkgItem;
+export type McdevLogger = import("../../types/mcdev.d.js").McdevLogger;
+export type Logger = import("../../types/mcdev.d.js").Logger;
+export type Mcdevrc = import("../../types/mcdev.d.js").Mcdevrc;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type MultiMetadataTypeList = import("../../types/mcdev.d.js").MultiMetadataTypeList;
+export type MultiMetadataTypeMap = import("../../types/mcdev.d.js").MultiMetadataTypeMap;
+export type SkipInteraction = import("../../types/mcdev.d.js").SkipInteraction;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
+export type SDKError = import("../../types/mcdev.d.js").SDKError;
 //# sourceMappingURL=util.d.ts.map

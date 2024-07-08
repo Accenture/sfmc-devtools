@@ -15,8 +15,8 @@ declare namespace Init {
      * @param {object} [currentContent] what was read from existing package.json file
      * @returns {Promise.<{script: object, author: string, license: string}>} extended currentContent
      */
-    function _getDefaultPackageJson(currentContent?: any): Promise<{
-        script: any;
+    function _getDefaultPackageJson(currentContent?: object): Promise<{
+        script: object;
         author: string;
         license: string;
     }>;

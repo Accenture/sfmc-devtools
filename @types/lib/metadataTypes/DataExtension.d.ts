@@ -1,14 +1,14 @@
 export default DataExtension;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
-export type DataExtensionFieldItem = import('../../types/mcdev.d.js').DataExtensionFieldItem;
-export type DataExtensionFieldMap = import('../../types/mcdev.d.js').DataExtensionFieldMap;
-export type DataExtensionItem = import('../../types/mcdev.d.js').DataExtensionItem;
-export type DataExtensionMap = import('../../types/mcdev.d.js').DataExtensionMap;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type DataExtensionFieldItem = import("../../types/mcdev.d.js").DataExtensionFieldItem;
+export type DataExtensionFieldMap = import("../../types/mcdev.d.js").DataExtensionFieldMap;
+export type DataExtensionItem = import("../../types/mcdev.d.js").DataExtensionItem;
+export type DataExtensionMap = import("../../types/mcdev.d.js").DataExtensionMap;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeItem} MetadataTypeItem
@@ -291,9 +291,12 @@ declare class DataExtension extends MetadataType {
     /**
      * Retrieves folder metadata into local filesystem. Also creates a uniquePath attribute for each folder.
      *
+     * @param {string[]} [_] unused parameter
+     * @param {string[]} [__] unused parameter
+     * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<{metadata: DataExtensionMap, type: string}>} Promise
      */
-    static retrieveForCache(): Promise<{
+    static retrieveForCache(_?: string[], __?: string[], key?: string): Promise<{
         metadata: DataExtensionMap;
         type: string;
     }>;
@@ -453,16 +456,7 @@ declare namespace DataExtension {
             };
             Name: {
                 isCreateable: boolean;
-                isUpdateable: boolean; /**
-                 * helper for {@link MetadataType.upsert}
-                 *
-                 * @param {MetadataTypeMap} metadataMap list of metadata
-                 * @param {string} metadataKey key of item we are looking at
-                 * @param {boolean} hasError error flag from previous code
-                 * @param {MetadataTypeItemDiff[]} metadataToUpdate list of items to update
-                 * @param {MetadataTypeItem[]} metadataToCreate list of items to create
-                 * @returns {Promise.<'create'|'update'|'skip'>} action to take
-                 */
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };

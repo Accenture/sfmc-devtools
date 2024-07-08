@@ -1,14 +1,14 @@
 export default Email;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type CodeExtract = import('../../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../../types/mcdev.d.js').CodeExtractItem;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -75,22 +75,9 @@ declare namespace Email {
                 templating: boolean;
             };
             'Client.ID': {
-                /**
-                 * Email MetadataType
-                 *
-                 * @augments MetadataType
-                 */
                 isCreateable: boolean;
                 isUpdateable: boolean;
-                retrieving: boolean; /**
-                 * Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
-                 *
-                 * @param {string} retrieveDir Directory where retrieved metadata directory will be saved
-                 * @param {void | string[]} [_] unused parameter
-                 * @param {void | string[]} [__] unused parameter
-                 * @param {string} [key] customer key of single item to retrieve
-                 * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
-                 */
+                retrieving: boolean;
                 templating: boolean;
             };
             'Client.PartnerClientKey': {
@@ -109,7 +96,7 @@ declare namespace Email {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
-                templating: boolean; /** @type {SoapRequestParams} */
+                templating: boolean;
             };
             'ContentAreas.CategoryID': {
                 isCreateable: boolean;
@@ -128,15 +115,7 @@ declare namespace Email {
                 isUpdateable: boolean;
                 retrieving: boolean;
                 templating: boolean;
-            }; /**
-             * Helper for writing Metadata to disk, used for Retrieve and deploy
-             *
-             * @param {MetadataTypeMap} results metadata results from deploy
-             * @param {string} retrieveDir directory where metadata should be stored after deploy/retrieve
-             * @param {string} [overrideType] for use when there is a subtype (such as folder-queries)
-             * @param {TemplateMap} [templateVariables] variables to be replaced in the metadata
-             * @returns {Promise.<MetadataTypeMap>} Promise of saved metadata
-             */
+            };
             'ContentAreas.ID': {
                 isCreateable: boolean;
                 isUpdateable: boolean;

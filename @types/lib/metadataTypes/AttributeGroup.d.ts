@@ -1,6 +1,6 @@
 export default AttributeGroup;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
 /**
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeItem} MetadataTypeItem
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
@@ -157,12 +157,7 @@ declare namespace AttributeGroup {
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
-            }; /**
-             * prepares for deployment
-             *
-             * @param {MetadataTypeItem} metadata a single item
-             * @returns {MetadataTypeItem} Promise
-             */
+            };
             containsSchemaAttributes: {
                 isCreateable: boolean;
                 isUpdateable: boolean;

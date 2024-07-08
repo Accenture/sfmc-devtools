@@ -1,14 +1,14 @@
 export default Journey;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type CodeExtract = import('../../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../../types/mcdev.d.js').CodeExtractItem;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -115,15 +115,7 @@ declare namespace Journey {
         lastmodNameField: any;
         restPagination: boolean;
         restPageSize: number;
-        type: string; /**
-         * Retrieves Metadata of Journey
-         *
-         * @param {string} retrieveDir Directory where retrieved metadata directory will be saved
-         * @param {void | string[]} [_] unused parameter
-         * @param {void | string[]} [__] unused parameter
-         * @param {string} [key] customer key of single item to retrieve
-         * @returns {Promise.<MetadataTypeMapObj>} Promise
-         */
+        type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
         typeName: string;
@@ -450,14 +442,7 @@ declare namespace Journey {
             };
             'triggers[].configurationArguments.schemaVersionId': {
                 isCreateable: boolean;
-                isUpdateable: boolean; /**
-                 * Deploys metadata - merely kept here to be able to print {@link Util.logBeta} once per deploy
-                 *
-                 * @param {MetadataTypeMap} metadata metadata mapped by their keyField
-                 * @param {string} deployDir directory where deploy metadata are saved
-                 * @param {string} retrieveDir directory where metadata after deploy should be saved
-                 * @returns {Promise.<MetadataTypeMap>} Promise of keyField => metadata map
-                 */
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
@@ -478,12 +463,7 @@ declare namespace Journey {
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
-            }; /**
-             * Updates a single item
-             *
-             * @param {MetadataTypeItem} metadata a single item
-             * @returns {Promise} Promise
-             */
+            };
             'triggers[].metaData.eventDefinitionKey': {
                 isCreateable: boolean;
                 isUpdateable: boolean;

@@ -1,21 +1,21 @@
 export default Init;
-export type AuthObject = import('../../types/mcdev.d.js').AuthObject;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type Cache = import('../../types/mcdev.d.js').Cache;
-export type CodeExtract = import('../../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../../types/mcdev.d.js').CodeExtractItem;
-export type DeltaPkgItem = import('../../types/mcdev.d.js').DeltaPkgItem;
-export type Mcdevrc = import('../../types/mcdev.d.js').Mcdevrc;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
-export type MultiMetadataTypeList = import('../../types/mcdev.d.js').MultiMetadataTypeList;
-export type MultiMetadataTypeMap = import('../../types/mcdev.d.js').MultiMetadataTypeMap;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
-export type TypeKeyCombo = import('../../types/mcdev.d.js').TypeKeyCombo;
+export type AuthObject = import("../../types/mcdev.d.js").AuthObject;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type Cache = import("../../types/mcdev.d.js").Cache;
+export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
+export type DeltaPkgItem = import("../../types/mcdev.d.js").DeltaPkgItem;
+export type Mcdevrc = import("../../types/mcdev.d.js").Mcdevrc;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type MultiMetadataTypeList = import("../../types/mcdev.d.js").MultiMetadataTypeList;
+export type MultiMetadataTypeMap = import("../../types/mcdev.d.js").MultiMetadataTypeMap;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 declare namespace Init {
     /**
      * Creates template file for properties.json
@@ -25,7 +25,7 @@ declare namespace Init {
      * @param {boolean} [refreshBUs] if this was triggered by mcdev join, do not refresh BUs
      * @returns {Promise.<void>} -
      */
-    function initProject(properties: import("../../types/mcdev.d.js").Mcdevrc, credentialName?: string, refreshBUs?: boolean): Promise<void>;
+    function initProject(properties: Mcdevrc, credentialName?: string, refreshBUs?: boolean): Promise<void>;
     /**
      * Creates template file for properties.json
      *
@@ -52,7 +52,7 @@ declare namespace Init {
      * @param {string} [repoName] if git URL was provided earlier, the repo name was extracted to use it for npm init
      * @returns {Promise.<boolean>} success flag
      */
-    function upgradeProject(properties: import("../../types/mcdev.d.js").Mcdevrc, initial?: boolean, repoName?: string): Promise<boolean>;
+    function upgradeProject(properties: Mcdevrc, initial?: boolean, repoName?: string): Promise<boolean>;
     /**
      * check if git repo is being saved on a cloud service and warn the user
      *
@@ -67,6 +67,6 @@ declare namespace Init {
      * @param {Mcdevrc} properties javascript object in .mcdevrc.json
      * @returns {string[]} list of credential names
      */
-    function _getMissingCredentials(properties: import("../../types/mcdev.d.js").Mcdevrc): string[];
+    function _getMissingCredentials(properties: Mcdevrc): string[];
 }
 //# sourceMappingURL=init.d.ts.map

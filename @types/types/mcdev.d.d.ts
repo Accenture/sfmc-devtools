@@ -33,7 +33,7 @@ export type BuObject = {
 export type TemplateMap = {
     [x: string]: string;
 };
-export type SupportedMetadataTypes = 'asset' | 'asset-archive' | 'asset-asset' | 'asset-audio' | 'asset-block' | 'asset-code' | 'asset-document' | 'asset-image' | 'asset-message' | 'asset-other' | 'asset-rawimage' | 'asset-template' | 'asset-textfile' | 'asset-video' | 'attributeGroup' | 'attributeSet' | 'automation' | 'campaign' | 'contentArea' | 'dataExtension' | 'dataExtensionField' | 'dataExtensionTemplate' | 'dataExtract' | 'dataExtractType' | 'discovery' | 'deliveryProfile' | 'email' | 'emailSend' | 'event' | 'fileLocation' | 'fileTransfer' | 'filter' | 'folder' | 'importFile' | 'journey' | 'list' | 'mobileCode' | 'mobileKeyword' | 'mobileMessage' | 'query' | 'role' | 'script' | 'sendClassification' | 'senderProfile' | 'transactionalEmail' | 'transactionalPush' | 'transactionalSMS' | 'triggeredSend' | 'user' | 'verification';
+export type SupportedMetadataTypes = "asset" | "asset-archive" | "asset-asset" | "asset-audio" | "asset-block" | "asset-code" | "asset-document" | "asset-image" | "asset-message" | "asset-other" | "asset-rawimage" | "asset-template" | "asset-textfile" | "asset-video" | "attributeGroup" | "attributeSet" | "automation" | "campaign" | "contentArea" | "dataExtension" | "dataExtensionField" | "dataExtensionTemplate" | "dataExtract" | "dataExtractType" | "discovery" | "deliveryProfile" | "email" | "emailSend" | "event" | "fileLocation" | "fileTransfer" | "filter" | "folder" | "importFile" | "journey" | "list" | "mobileCode" | "mobileKeyword" | "mobileMessage" | "query" | "role" | "script" | "sendClassification" | "senderProfile" | "transactionalEmail" | "transactionalPush" | "transactionalSMS" | "triggeredSend" | "user" | "verification";
 /**
  * object-key=SupportedMetadataTypes, value=array of external keys
  */
@@ -117,7 +117,7 @@ export type CodeExtract = {
     /**
      * optional for binary files
      */
-    encoding?: 'base64';
+    encoding?: "base64";
 };
 export type QueryItem = {
     /**
@@ -155,7 +155,7 @@ export type QueryItem = {
     /**
      * defines how the query writes into the target data extension
      */
-    targetUpdateTypeName: 'Overwrite' | 'Update' | 'Append';
+    targetUpdateTypeName: "Overwrite" | "Update" | "Append";
     /**
      * 0|1|2, mapped to targetUpdateTypeName via this.definition.targetUpdateTypeMapping
      */
@@ -231,7 +231,7 @@ export type AssetItem = {
 export type AssetMap = {
     [x: string]: AssetItem;
 };
-export type AssetSubType = 'archive' | 'asset' | 'audio' | 'block' | 'code' | 'document' | 'image' | 'message' | 'other' | 'rawimage' | 'template' | 'textfile' | 'video';
+export type AssetSubType = "archive" | "asset" | "audio" | "block" | "code" | "document" | "image" | "message" | "other" | "rawimage" | "template" | "textfile" | "video";
 export type DataExtensionFieldItem = {
     /**
      * id
@@ -278,7 +278,7 @@ export type DataExtensionFieldItem = {
     /**
      * can only be set on create
      */
-    FieldType: 'Text' | 'Number' | 'Date' | 'Boolean' | 'Decimal' | 'EmailAddress' | 'Phone' | 'Locale';
+    FieldType: "Text" | "Number" | "Date" | "Boolean" | "Decimal" | "EmailAddress" | "Phone" | "Locale";
     /**
      * field length
      */
@@ -339,7 +339,7 @@ export type DataExtensionItem = {
     /**
      * retrieved from associated folder
      */
-    r__folder_ContentType: 'dataextension' | 'salesforcedataextension' | 'synchronizeddataextension' | 'shared_dataextension' | 'shared_salesforcedataextension';
+    r__folder_ContentType: "dataextension" | "salesforcedataextension" | "synchronizeddataextension" | "shared_dataextension" | "shared_salesforcedataextension";
     /**
      * folder path in which this DE is saved
      */
@@ -369,7 +369,7 @@ export type DataExtensionItem = {
     /**
      * readable name of retention policy
      */
-    c__retentionPolicy?: 'none' | 'allRecordsAndDataextension' | 'allRecords' | 'individialRecords';
+    c__retentionPolicy?: "none" | "allRecordsAndDataextension" | "allRecords" | "individialRecords";
     /**
      * number of days/weeks/months/years before retention kicks in
      */
@@ -402,7 +402,7 @@ export type UserDocument = {
     /**
      * -
      */
-    TYPE: 'User' | 'Installed Package' | 'Inactivated User';
+    TYPE: "User" | "Installed Package" | "Inactivated User";
     /**
      * equal to UserID; optional in update/create calls
      */
@@ -491,7 +491,7 @@ export type UserDocument = {
     /**
      * -
      */
-    c__type: 'User' | 'Installed Package';
+    c__type: "User" | "Installed Package";
     /**
      * (API only)
      */
@@ -522,12 +522,12 @@ export type UserDocument = {
     /**
      * fr-CA, en-US, ...
      */
-    c__LocaleCode: 'en-US' | 'fr-CA' | 'fr-FR' | 'de-DE' | 'it-IT' | 'ja-JP' | 'pt-BR' | 'es-419' | 'es-ES';
+    c__LocaleCode: "en-US" | "fr-CA" | "fr-FR" | "de-DE" | "it-IT" | "ja-JP" | "pt-BR" | "es-419" | "es-ES";
     /**
      * (API only)
      */
     Locale?: {
-        LocaleCode?: 'en-US' | 'fr-CA' | 'fr-FR' | 'de-DE' | 'it-IT' | 'ja-JP' | 'pt-BR' | 'es-419' | 'es-ES';
+        LocaleCode?: "en-US" | "fr-CA" | "fr-FR" | "de-DE" | "it-IT" | "ja-JP" | "pt-BR" | "es-419" | "es-ES";
     };
     /**
      * -
@@ -737,12 +737,12 @@ export type AutomationScheduleSoap = {
      */
     Recurrence: {
         $?: object;
-        YearlyRecurrencePatternType?: 'ByYear';
-        MonthlyRecurrencePatternType?: 'ByMonth';
-        WeeklyRecurrencePatternType?: 'ByWeek';
-        DailyRecurrencePatternType?: 'ByDay';
-        MinutelyRecurrencePatternType?: 'Interval';
-        HourlyRecurrencePatternType?: 'Interval';
+        YearlyRecurrencePatternType?: "ByYear";
+        MonthlyRecurrencePatternType?: "ByMonth";
+        WeeklyRecurrencePatternType?: "ByWeek";
+        DailyRecurrencePatternType?: "ByDay";
+        MinutelyRecurrencePatternType?: "Interval";
+        HourlyRecurrencePatternType?: "Interval";
         YearInterval?: number;
         MonthInterval?: number;
         WeekInterval?: number;
@@ -780,7 +780,7 @@ export type AutomationScheduleSoap = {
     /**
      * set to 'EndOn' if AutomationSchedule.icalRecur contains 'UNTIL'; otherwise to 'EndAfter'
      */
-    RecurrenceRangeType: 'EndOn' | 'EndAfter';
+    RecurrenceRangeType: "EndOn" | "EndAfter";
     /**
      * only exists if RecurrenceRangeType=='EndAfter'
      */
@@ -830,11 +830,11 @@ export type AutomationItem = {
     /**
      * Starting Source = Schedule / File Drop
      */
-    type?: 'scheduled' | 'triggered';
+    type?: "scheduled" | "triggered";
     /**
      * automation status
      */
-    status?: 'Scheduled' | 'Running' | 'Ready' | 'Building' | 'PausedSchedule' | 'InactiveTrigger';
+    status?: "Scheduled" | "Running" | "Ready" | "Building" | "PausedSchedule" | "InactiveTrigger";
     /**
      * automation status
      */
@@ -888,7 +888,7 @@ export type VerificationItem = {
     /**
      * key
      */
-    verificationType: 'IsEqualTo' | 'IsLessThan' | 'IsGreaterThan' | 'IsOutsideRange' | 'IsInsideRange' | 'IsNotEqualTo' | 'IsNotLessThan' | 'IsNotGreaterThan' | 'IsNotOutsideRange' | 'IsNotInsideRange';
+    verificationType: "IsEqualTo" | "IsLessThan" | "IsGreaterThan" | "IsOutsideRange" | "IsInsideRange" | "IsNotEqualTo" | "IsNotLessThan" | "IsNotGreaterThan" | "IsNotOutsideRange" | "IsNotInsideRange";
     /**
      * used for all verificationTypes; lower value for IsOutsideRange, IsInsideRange, IsNotOutsideRange, IsNotInsideRange
      */
@@ -981,7 +981,7 @@ export type McdevDeltaPkgItem = {
     /**
      * what git recognized as an action
      */
-    gitAction: 'move' | 'add/update' | 'delete';
+    gitAction: "move" | "add/update" | "delete";
     /**
      * mcdev credential name
      */
@@ -991,9 +991,9 @@ export type McdevDeltaPkgItem = {
      */
     _businessUnit: string;
 };
-export type DeltaPkgItem = import('simple-git').DiffResultTextFile & McdevDeltaPkgItem;
-export type RestError = import('sfmc-sdk/util').RestError;
-export type SOAPError = import('sfmc-sdk/util').SOAPError;
+export type DeltaPkgItem = import("simple-git").DiffResultTextFile & McdevDeltaPkgItem;
+export type RestError = import("sfmc-sdk/util").RestError;
+export type SOAPError = import("sfmc-sdk/util").SOAPError;
 export type SDKError = SOAPError & RestError;
 /**
  * signals what to insert automatically for things usually asked via wizard
@@ -1089,7 +1089,7 @@ export type SoapFilterSimple = {
     /**
      * various options
      */
-    simpleOperator: 'equals' | 'notEquals' | 'isNull' | 'isNotNull' | 'greaterThan' | 'lessThan' | 'greaterThanOrEqual' | 'lessThanOrEqual' | 'between' | 'IN' | 'in' | 'like';
+    simpleOperator: "equals" | "notEquals" | "isNull" | "isNotNull" | "greaterThan" | "lessThan" | "greaterThanOrEqual" | "lessThanOrEqual" | "between" | "IN" | "in" | "like";
     /**
      * field value
      */
@@ -1103,7 +1103,7 @@ export type SoapFilterComplex = {
     /**
      * various options
      */
-    logicalOperator: 'AND' | 'OR';
+    logicalOperator: "AND" | "OR";
     /**
      * string for simple or a new filter-object for complex; omit for isNull and isNotNull
      */
@@ -1165,7 +1165,7 @@ export type AssetRequestParams = {
      */
     sort?: {
         property: string;
-        direction: 'ASC' | 'DESC';
+        direction: "ASC" | "DESC";
     }[];
     /**
      * simple or complex filter
@@ -1180,7 +1180,7 @@ export type AssetFilter = {
     /**
      * various options
      */
-    logicalOperator: 'AND' | 'OR';
+    logicalOperator: "AND" | "OR";
     /**
      * string for simple or a new filter-object for complex; omit for isNull and isNotNull
      */
@@ -1194,7 +1194,7 @@ export type AssetFilterSimple = {
     /**
      * various options
      */
-    simpleOperator: 'equal' | 'notEquals' | 'isNull' | 'isNotNull' | 'greaterThan' | 'lessThan' | 'greaterThanOrEqual' | 'lessThanOrEqual' | 'between' | 'IN' | 'in' | 'like';
+    simpleOperator: "equal" | "notEquals" | "isNull" | "isNotNull" | "greaterThan" | "lessThan" | "greaterThanOrEqual" | "lessThanOrEqual" | "between" | "IN" | "in" | "like";
     /**
      * field value
      */
@@ -1242,7 +1242,7 @@ export type Mcdevrc = {
      */
     version: string;
 };
-export type LoggerLevel = 'error' | 'verbose' | 'info' | 'debug';
+export type LoggerLevel = "error" | "verbose" | "info" | "debug";
 export type McdevLogger = {
     /**
      * (msg) print info message
@@ -1257,7 +1257,7 @@ export type McdevLogger = {
      */
     errorStack: Function;
 };
-export type Logger = import('winston').Logger & McdevLogger;
+export type Logger = import("winston").Logger & McdevLogger;
 export type AssetItemSimple = {
     id: number;
     key: string;
@@ -1269,7 +1269,7 @@ export type AssetItemSimpleMap = {
 export type AssetItemIdSimpleMap = {
     [x: number]: AssetItemSimple;
 };
-export type ContentBlockConversionTypes = 'id' | 'key' | 'name';
+export type ContentBlockConversionTypes = "id" | "key" | "name";
 export type ExplainType = {
     /**
      * readable name of type

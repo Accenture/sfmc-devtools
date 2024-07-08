@@ -1,22 +1,22 @@
 export default Mcdev;
-export type BuObject = import('../types/mcdev.d.js').BuObject;
-export type CodeExtract = import('../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../types/mcdev.d.js').CodeExtractItem;
-export type DeltaPkgItem = import('../types/mcdev.d.js').DeltaPkgItem;
-export type Mcdevrc = import('../types/mcdev.d.js').Mcdevrc;
-export type MetadataTypeItem = import('../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../types/mcdev.d.js').MetadataTypeMapObj;
-export type MultiMetadataTypeList = import('../types/mcdev.d.js').MultiMetadataTypeList;
-export type MultiMetadataTypeMap = import('../types/mcdev.d.js').MultiMetadataTypeMap;
-export type SkipInteraction = import('../types/mcdev.d.js').SkipInteraction;
-export type SoapRequestParams = import('../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../types/mcdev.d.js').TemplateMap;
-export type TypeKeyCombo = import('../types/mcdev.d.js').TypeKeyCombo;
-export type ExplainType = import('../types/mcdev.d.js').ExplainType;
-export type ContentBlockConversionTypes = import('../types/mcdev.d.js').ContentBlockConversionTypes;
+export type BuObject = import("../types/mcdev.d.js").BuObject;
+export type CodeExtract = import("../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../types/mcdev.d.js").CodeExtractItem;
+export type DeltaPkgItem = import("../types/mcdev.d.js").DeltaPkgItem;
+export type Mcdevrc = import("../types/mcdev.d.js").Mcdevrc;
+export type MetadataTypeItem = import("../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../types/mcdev.d.js").MetadataTypeMapObj;
+export type MultiMetadataTypeList = import("../types/mcdev.d.js").MultiMetadataTypeList;
+export type MultiMetadataTypeMap = import("../types/mcdev.d.js").MultiMetadataTypeMap;
+export type SkipInteraction = import("../types/mcdev.d.js").SkipInteraction;
+export type SoapRequestParams = import("../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../types/mcdev.d.js").TemplateMap;
+export type TypeKeyCombo = import("../types/mcdev.d.js").TypeKeyCombo;
+export type ExplainType = import("../types/mcdev.d.js").ExplainType;
+export type ContentBlockConversionTypes = import("../types/mcdev.d.js").ContentBlockConversionTypes;
 /**
  * @typedef {import('../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -328,7 +328,7 @@ declare class Mcdev {
      * @param {string[]} [keys] customerkey of the metadata
      * @returns {Promise.<Object.<string, string[]>>} key: business unit name, value: list of affected item keys
      */
-    static "__#8@#runMethod"(methodName: 'execute' | 'pause' | 'fixKeys' | 'replaceCbReference', businessUnit: string, selectedType?: string, keys?: string[]): Promise<{
+    static "__#8@#runMethod"(methodName: "execute" | "pause" | "fixKeys" | "replaceCbReference", businessUnit: string, selectedType?: string, keys?: string[]): Promise<{
         [x: string]: string[];
     }>;
     /**
@@ -341,7 +341,7 @@ declare class Mcdev {
      * @param {string[]} [keyArr] customerkey of the metadata
      * @returns {Promise.<string[]>} list of keys that were affected
      */
-    static "__#8@#runOnBU"(methodName: 'execute' | 'pause' | 'fixKeys' | 'replaceCbReference', cred: string, bu: string, type?: string, keyArr?: string[]): Promise<string[]>;
+    static "__#8@#runOnBU"(methodName: "execute" | "pause" | "fixKeys" | "replaceCbReference", cred: string, bu: string, type?: string, keyArr?: string[]): Promise<string[]>;
     /**
      * helper for Mcdev.#runOnBU
      *

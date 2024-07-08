@@ -166,6 +166,30 @@
                 <RetainUntil />
                 <CategoryID>2</CategoryID>
             </Results>
+            <Results xsi:type="DataExtension">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2024-07-05T08:01:54.803</CreatedDate>
+                <ModifiedDate>2024-07-05T08:01:58.923</ModifiedDate>
+                <ObjectID>4342972c-a43c-ef11-a5c8-5cba2c702db8</ObjectID>
+                <CustomerKey>testNew_event_withSchema - 2024-07-08T014814443</CustomerKey>
+                <Name>testNew_event_withSchema - 2024-07-08T014814443</Name>
+                <Description />
+                <IsSendable>true</IsSendable>
+                <IsTestable>false</IsTestable>
+                <SendableDataExtensionField>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <Name>ContactId</Name>
+                </SendableDataExtensionField>
+                <SendableSubscriberField>
+                    <Name>_SubscriberKey</Name>
+                </SendableSubscriberField>
+                <RowBasedRetention>false</RowBasedRetention>
+                <ResetRetentionPeriodOnImport>false</ResetRetentionPeriodOnImport>
+                <DeleteAtEndOfRetentionPeriod>false</DeleteAtEndOfRetentionPeriod>
+                <RetainUntil />
+                <CategoryID>2</CategoryID>
+            </Results>
         </RetrieveResponseMsg>
     </soap:Body>
 </soap:Envelope>

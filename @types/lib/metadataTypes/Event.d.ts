@@ -1,14 +1,14 @@
 export default Event;
-export type BuObject = import('../../types/mcdev.d.js').BuObject;
-export type CodeExtract = import('../../types/mcdev.d.js').CodeExtract;
-export type CodeExtractItem = import('../../types/mcdev.d.js').CodeExtractItem;
-export type MetadataTypeItem = import('../../types/mcdev.d.js').MetadataTypeItem;
-export type MetadataTypeItemDiff = import('../../types/mcdev.d.js').MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import('../../types/mcdev.d.js').MetadataTypeItemObj;
-export type MetadataTypeMap = import('../../types/mcdev.d.js').MetadataTypeMap;
-export type MetadataTypeMapObj = import('../../types/mcdev.d.js').MetadataTypeMapObj;
-export type SoapRequestParams = import('../../types/mcdev.d.js').SoapRequestParams;
-export type TemplateMap = import('../../types/mcdev.d.js').TemplateMap;
+export type BuObject = import("../../types/mcdev.d.js").BuObject;
+export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
+export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -93,23 +93,6 @@ declare namespace Event {
         keyIsFixed: boolean;
         keyField: string;
         nameField: string;
-        /**
-         * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
-         * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
-         * @typedef {import('../../types/mcdev.d.js').CodeExtractItem} CodeExtractItem
-         * @typedef {import('../../types/mcdev.d.js').MetadataTypeItem} MetadataTypeItem
-         * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemDiff} MetadataTypeItemDiff
-         * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemObj} MetadataTypeItemObj
-         * @typedef {import('../../types/mcdev.d.js').MetadataTypeMap} MetadataTypeMap
-         * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
-         * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
-         * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
-         */
-        /**
-         * Event MetadataType
-         *
-         * @augments MetadataType
-         */
         createdDateField: string;
         createdNameField: string;
         lastmodDateField: string;
@@ -536,12 +519,6 @@ declare namespace Event {
             'metaData.automationData.scheduleObject.createdBy': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
-                /**
-                 * parses retrieved Metadata before saving
-                 *
-                 * @param {MetadataTypeItem} metadata a single event definition
-                 * @returns {MetadataTypeItem} parsed metadata
-                 */
                 retrieving: boolean;
                 template: boolean;
             };
