@@ -275,6 +275,17 @@ declare class Mcdev {
         [x: string]: string[];
     }>;
     /**
+     * Publish an item
+     *
+     * @param {string} businessUnit name of BU
+     * @param {string} selectedType limit to given metadata types
+     * @param {string[]} [keys] customerkey of the metadata
+     * @returns {Promise.<Object.<string, string[]>>} key: business unit name, value: list of executed item keys
+     */
+    static publish(businessUnit: string, selectedType: string, keys?: string[]): Promise<{
+        [x: string]: string[];
+    }>;
+    /**
      * Start/execute an item
      *
      * @param {string} businessUnit name of BU
@@ -322,26 +333,26 @@ declare class Mcdev {
     /**
      * run a method across BUs
      *
-     * @param {'execute'|'pause'|'fixKeys'|'replaceCbReference'} methodName what to run
+     * @param {'execute'|'pause'|'publish'|'fixKeys'|'replaceCbReference'} methodName what to run
      * @param {string} businessUnit name of BU
      * @param {string} [selectedType] limit to given metadata types
      * @param {string[]} [keys] customerkey of the metadata
      * @returns {Promise.<Object.<string, string[]>>} key: business unit name, value: list of affected item keys
      */
-    static "__#8@#runMethod"(methodName: "execute" | "pause" | "fixKeys" | "replaceCbReference", businessUnit: string, selectedType?: string, keys?: string[]): Promise<{
+    static "__#8@#runMethod"(methodName: "execute" | "pause" | "publish" | "fixKeys" | "replaceCbReference", businessUnit: string, selectedType?: string, keys?: string[]): Promise<{
         [x: string]: string[];
     }>;
     /**
      * helper for Mcdev.#runMethod
      *
-     * @param {'execute'|'pause'|'fixKeys'|'replaceCbReference'} methodName what to run
+     * @param {'execute'|'pause'|'publish'|'fixKeys'|'replaceCbReference'} methodName what to run
      * @param {string} cred name of Credential
      * @param {string} bu name of BU
      * @param {string} [type] limit execution to given metadata type
      * @param {string[]} [keyArr] customerkey of the metadata
      * @returns {Promise.<string[]>} list of keys that were affected
      */
-    static "__#8@#runOnBU"(methodName: "execute" | "pause" | "fixKeys" | "replaceCbReference", cred: string, bu: string, type?: string, keyArr?: string[]): Promise<string[]>;
+    static "__#8@#runOnBU"(methodName: "execute" | "pause" | "publish" | "fixKeys" | "replaceCbReference", cred: string, bu: string, type?: string, keyArr?: string[]): Promise<string[]>;
     /**
      * helper for Mcdev.#runOnBU
      *

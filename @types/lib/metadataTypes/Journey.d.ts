@@ -97,6 +97,13 @@ declare class Journey extends MetadataType {
      * @returns {Promise.<MetadataTypeItem>} key of the item that was updated
      */
     static replaceCbReference(item: MetadataTypeItem): Promise<MetadataTypeItem>;
+    /**
+     * a function to publish the journey via API
+     *
+     * @param {string[]} keyArr customerkey of the metadata
+     * @returns {Promise.<string[]>} Returns list of keys that were executed successfully
+     */
+    static publish(keyArr: string[]): Promise<string[]>;
 }
 declare namespace Journey {
     let definition: {
