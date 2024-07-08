@@ -30,7 +30,7 @@ describe('type: event', () => {
                 'only 4 event expected'
             );
             assert.deepEqual(
-                await testUtils.getActualJson('testExising_event', 'event'),
+                await testUtils.getActualJson('testExisting_event', 'event'),
                 await testUtils.getExpectedJson('9999999', 'event', 'get'),
                 'returned JSON was not equal expected'
             );
@@ -135,6 +135,42 @@ describe('type: event', () => {
             );
             return;
         });
+
+        it('Should update an event', async () => {
+            await handler.deploy('testInstance/testBU', ['event'], ['testExisting_event']);
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.event ? Object.keys(result.event).length : 0,
+                4,
+                '4 events expected'
+            );
+            // get callouts
+            const updateCallout = testUtils.getRestCallout(
+                'put',
+                '/interaction/v1/eventDefinitions/%'
+            );
+            // confirm updated item
+            assert.deepEqual(
+                updateCallout,
+                await testUtils.getExpectedJson('9999999', 'event', 'put-callout'),
+                'update-payload JSON was not equal expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_event', 'event'),
+                await testUtils.getExpectedJson('9999999', 'event', 'put'),
+                'returned existing-JSON was not equal expected for update event'
+            );
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                5,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 
     describe('FixKeys ================', () => {
@@ -173,7 +209,7 @@ describe('type: event', () => {
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'event',
-                'testExising_event'
+                'testExisting_event'
             );
             // THEN
             assert.equal(process.exitCode, 0, 'deleteByKey should not have thrown an error');

@@ -124,19 +124,19 @@
         {
             "id": "d8d57832-ce9c-4bf6-8c24-3044ece5dffd",
             "type": "APIEvent",
-            "name": "testExising_event",
+            "name": "testExisting_event",
             "description": "",
             "createdDate": "2024-07-05T06:12:24.227",
             "createdBy": 700304523,
             "modifiedDate": "2024-07-05T08:01:55.4",
             "modifiedBy": 700304523,
             "mode": "Production",
-            "eventDefinitionKey": "testExising_event",
+            "eventDefinitionKey": "testExisting_event",
             "dataExtensionId": "f2cc2b21-d73a-ef11-a5c8-5cba2c702db8",
-            "dataExtensionName": "testExising_event - 2024-07-05T080154625",
+            "dataExtensionName": "testExisting_event - 2024-07-05T080154625",
             "schema": {
                 "id": "f2cc2b21-d73a-ef11-a5c8-5cba2c702db8",
-                "name": "testExising_event - 2024-07-05T080154625",
+                "name": "testExisting_event - 2024-07-05T080154625",
                 "fields": [
                     {
                         "name": "ContactId",
@@ -354,7 +354,7 @@
             "iconUrl": "",
             "arguments": {
                 "serializedObjectType": 11,
-                "eventDefinitionKey": "testExising_event",
+                "eventDefinitionKey": "testExisting_event",
                 "eventDefinitionId": "d8d57832-ce9c-4bf6-8c24-3044ece5dffd",
                 "dataExtensionId": "00000000-0000-0000-0000-000000000000",
                 "criteria": ""
