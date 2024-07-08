@@ -51,15 +51,15 @@ describe('type: event', () => {
 
         it('Should create an event & dataExtension via schema', async () => {
             // prepare
-            testUtils.copyFile(
+            await testUtils.copyFile(
                 'interaction/v1/eventDefinitions/post_withSchema-response.json',
                 'interaction/v1/eventDefinitions/post-response.json'
             );
-            testUtils.copyFile(
+            await testUtils.copyFile(
                 'dataExtension/retrieve-createdViaEvent-response.xml',
                 'dataExtension/retrieve-response.xml'
             );
-            testUtils.copyFile(
+            await testUtils.copyFile(
                 'dataExtension/update-afterCreatedViaEvent-response.xml',
                 'dataExtension/update-response.xml'
             );
@@ -124,7 +124,7 @@ describe('type: event', () => {
 
         it('Should create an event with pre-Existing dataExtension', async () => {
             // prepare
-            testUtils.copyFile(
+            await testUtils.copyFile(
                 'interaction/v1/eventDefinitions/post_withExistingDE-response.json',
                 'interaction/v1/eventDefinitions/post-response.json'
             );

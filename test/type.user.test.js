@@ -55,7 +55,7 @@ describe('type: user', () => {
                 await File.readFile(`./docs/user/testInstance.users.md`, {
                     encoding: 'utf8',
                 })
-            ).replaceAll(regexFindDaysSinceLogin, [expectedDaysSinceLogin[0]]);
+            ).replaceAll(regexFindDaysSinceLogin, expectedDaysSinceLogin[0]);
             expect(actualFile).to.equal(expectedFile);
 
             assert.equal(
