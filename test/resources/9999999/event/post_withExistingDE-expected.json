@@ -1,0 +1,21 @@
+{
+    "type": "APIEvent",
+    "name": "testNew_event_withExistingDE",
+    "description": "created on deploy",
+    "createdDate": "0001-01-01T00:00:00",
+    "createdBy": 0,
+    "modifiedDate": "0001-01-01T00:00:00",
+    "modifiedBy": 0,
+    "eventDefinitionKey": "testNew_event_withExistingDE",
+    "filterDefinitionId": "00000000-0000-0000-0000-000000000000",
+    "arguments": {
+        "serializedObjectType": 11
+    },
+    "metaData": {},
+    "interactionCount": 0,
+    "isVisibleInPicker": true,
+    "category": "Event",
+    "publishedInteractionCount": 0,
+    "automationId": "00000000-0000-0000-0000-000000000000",
+    "r__dataExtension_key": "testExisting_event - 2024-07-05T080154625"
+}

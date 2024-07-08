@@ -89,6 +89,52 @@ describe('type: event', () => {
             );
             return;
         });
+
+        it('Should create an event with pre-Existing dataExtension', async () => {
+            // prepare
+            testUtils.copyFile(
+                'interaction/v1/eventDefinitions/post_withExistingDE-response.json',
+                'interaction/v1/eventDefinitions/post-response.json'
+            );
+
+            await handler.deploy(
+                'testInstance/testBU',
+                ['event'],
+                ['testNew_event_withExistingDE']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.event ? Object.keys(result.event).length : 0,
+                5,
+                '5 events expected'
+            );
+            // get callouts
+            const createCallout = testUtils.getRestCallout(
+                'post',
+                '/interaction/v1/eventDefinitions/'
+            );
+            // confirm created item
+            assert.deepEqual(
+                createCallout,
+                await testUtils.getExpectedJson('9999999', 'event', 'post_withExistingDE-callout'),
+                'create-payload JSON was not equal expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('testNew_event_withExistingDE', 'event'),
+                await testUtils.getExpectedJson('9999999', 'event', 'post_withExistingDE'),
+                'returned new-JSON was not equal expected for insert event'
+            );
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                5,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 
     describe('FixKeys ================', () => {
