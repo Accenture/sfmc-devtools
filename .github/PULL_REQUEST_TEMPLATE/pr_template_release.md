@@ -6,6 +6,7 @@
 
 - [ ] Wiki updated with info in ticket listed under **Documentation**
 - [ ] ran `npm audit fix`
+- [ ] ran `npm run lint-ts`
 - [ ] ran `npm run lint:fix`
 - [ ] ran `npm run version:major/minor/patch`
 - [ ] updated [bug template](/.github/ISSUE_TEMPLATE/bug.yml) to include the new version
