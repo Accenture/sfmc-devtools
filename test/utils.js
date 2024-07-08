@@ -19,6 +19,17 @@ const authResources = File.readJsonSync(path.join(__dirname, './resources/auth.j
 /**
  * gets file from Retrieve folder
  *
+ * @param {string} from source path (starting in bu folder)
+ * @param {string} to target path (starting in bu folder)
+ * @param {string} [mid] used when we need to test on ParentBU
+ * @returns {Promise.<string>} file in string form
+ */
+export async function copyFile(from, to, mid = '9999999') {
+    return File.copyFile(`./test/resources/${mid}/${from}`, `./test/resources/${mid}/${to}`);
+}
+/**
+ * gets file from Retrieve folder
+ *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} [buName] used when we need to test on ParentBU
