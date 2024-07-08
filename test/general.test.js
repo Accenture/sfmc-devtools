@@ -619,6 +619,71 @@ describe('GENERAL', () => {
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
+
+            it('deploy multiple type with keys and --noUpdate', async () => {
+                handler.setOptions({ noUpdate: true });
+
+                const argvMetadata = [
+                    'dataExtension',
+                    'dataExtract:wrong-key',
+                    'senderProfile:testExisting_senderProfile',
+                    'query:testExisting_query',
+                    'query:key:wrong-key2',
+                ];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                assert.notEqual(
+                    typeof typeKeyCombo,
+                    'undefined',
+                    'typeKeyCombo should not be undefined'
+                );
+                const buName = 'testInstance/testBU';
+                const result = await handler.deploy(buName, typeKeyCombo);
+                // THEN
+                assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+
+                const deployedTypes = Object.keys(result[buName]);
+                assert.equal(deployedTypes.length, 3, 'deploy should have returned 3 types');
+                assert.equal(
+                    deployedTypes.includes('dataExtension'),
+                    true,
+                    'deploy should have returned dataExtension'
+                );
+                assert.equal(
+                    deployedTypes.includes('dataExtract'),
+                    false,
+                    'deploy should have returned dataExtract'
+                );
+                assert.equal(
+                    deployedTypes.includes('senderProfile'),
+                    true,
+                    'deploy should have returned senderProfile'
+                );
+                assert.equal(
+                    deployedTypes.includes('query'),
+                    true,
+                    'deploy should have returned query'
+                );
+                assert.equal(
+                    Object.keys(result[buName]['dataExtension']).length,
+                    1,
+                    'deploy should have returned 1 dataExtension'
+                );
+                assert.equal(
+                    Object.keys(result[buName]['senderProfile']).length,
+                    0,
+                    'deploy should have returned 0 senderProfile'
+                );
+                assert.equal(
+                    Object.keys(result[buName]['query']).length,
+                    0,
+                    'deploy should have returned 0 query'
+                );
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    12,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+            });
         });
 
         describe('template --metadata ~~~', () => {
