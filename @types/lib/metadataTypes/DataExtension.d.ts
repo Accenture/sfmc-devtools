@@ -291,12 +291,9 @@ declare class DataExtension extends MetadataType {
     /**
      * Retrieves folder metadata into local filesystem. Also creates a uniquePath attribute for each folder.
      *
-     * @param {string[]} [_] unused parameter
-     * @param {string[]} [__] unused parameter
-     * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<{metadata: DataExtensionMap, type: string}>} Promise
      */
-    static retrieveForCache(_?: string[], __?: string[], key?: string): Promise<{
+    static retrieveForCache(): Promise<{
         metadata: DataExtensionMap;
         type: string;
     }>;

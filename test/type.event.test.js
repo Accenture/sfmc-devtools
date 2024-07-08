@@ -1,5 +1,6 @@
 import * as chai from 'chai';
 const assert = chai.assert;
+const expect = chai.expect;
 
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
@@ -54,6 +55,14 @@ describe('type: event', () => {
                 'interaction/v1/eventDefinitions/post_withSchema-response.json',
                 'interaction/v1/eventDefinitions/post-response.json'
             );
+            testUtils.copyFile(
+                'dataExtension/retrieve-createdViaEvent-response.xml',
+                'dataExtension/retrieve-response.xml'
+            );
+            testUtils.copyFile(
+                'dataExtension/update-afterCreatedViaEvent-response.xml',
+                'dataExtension/update-response.xml'
+            );
 
             await handler.deploy('testInstance/testBU', ['event'], ['testNew_event_withSchema']);
             // THEN
@@ -81,10 +90,33 @@ describe('type: event', () => {
                 await testUtils.getExpectedJson('9999999', 'event', 'post_withSchema'),
                 'returned new-JSON was not equal expected for insert event'
             );
+            // confirm we changed the dataExtension key correctly
+            const updateCalloutDE = testUtils.getSoapCallouts('Update', 'DataExtension');
+            expect(updateCalloutDE[0]).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'dataExtension',
+                    'update-callout-afterCreatedViaEvent',
+                    'xml'
+                )
+            );
+
+            // confirm created dataExtension
+            assert.deepEqual(
+                await testUtils.getActualJson('testNew_event_withSchema', 'dataExtension'),
+                await testUtils.getExpectedJson(
+                    '9999999',
+                    'dataExtension',
+                    'retrieve_event_withSchema'
+                ),
+
+                'returned metadata was not equal expected'
+            );
+
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                9,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

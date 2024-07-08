@@ -27,8 +27,8 @@ describe('type: dataExtension', () => {
             const result = cache.getCache();
             assert.equal(
                 result.dataExtension ? Object.keys(result.dataExtension).length : 0,
-                6,
-                'only 6 dataExtension expected'
+                7,
+                'only 7 dataExtension expected'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_dataExtension', 'dataExtension'),
@@ -116,8 +116,8 @@ describe('type: dataExtension', () => {
             const result = cache.getCache();
             assert.equal(
                 result.dataExtension ? Object.keys(result.dataExtension).length : 0,
-                8,
-                '8 dataExtensions expected'
+                9,
+                '9 dataExtensions expected'
             );
             // insert
             assert.deepEqual(

@@ -290,7 +290,7 @@ export function getRestCallout(method, url) {
  * @param {string} [objectType] optionall filter requests by object
  * @returns {object[]} json payload of the requests
  */
-export function getSoapCallout(requestAction, objectType) {
+export function getSoapCallouts(requestAction, objectType) {
     const method = 'post';
     const url = '/Service.asmx';
     const subset = apimock.history[method];
@@ -300,10 +300,12 @@ export function getSoapCallout(requestAction, objectType) {
         // find soap requestst of the correct request type
         .filter((item) => item.headers.SOAPAction === requestAction)
         // find soap requestst of the correct request type
-        .filter(
-            (item) =>
-                !objectType ||
-                item.data.split('<ObjectType>')[1].split('</ObjectType>')[0] === objectType
+        .filter((item) =>
+            !objectType || item.data.includes('<ObjectType')
+                ? item.data.split('<ObjectType>')[1].split('</ObjectType>')[0] === objectType
+                : item.data.includes('<Objects xsi:type="')
+                  ? item.data.split('<Objects xsi:type="')[1].split('">')[0] === objectType
+                  : false
         )
         .map((item) => item.data);
     return myCallout;
