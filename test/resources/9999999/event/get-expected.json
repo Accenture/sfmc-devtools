@@ -226,7 +226,6 @@
     "metaData": { "scheduleState": "No Schedule" },
     "interactionCount": 0,
     "isVisibleInPicker": true,
-    "isPlatformObject": false,
     "category": "Event",
     "publishedInteractionCount": 0,
     "automationId": "00000000-0000-0000-0000-000000000000",

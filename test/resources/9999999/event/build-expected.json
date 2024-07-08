@@ -220,7 +220,6 @@
     "arguments": { "serializedObjectType": 11, "criteria": "" },
     "metaData": { "scheduleState": "No Schedule" },
     "isVisibleInPicker": true,
-    "isPlatformObject": false,
     "category": "Event",
     "automationId": "00000000-0000-0000-0000-000000000000",
     "disableDEDataLogging": false,
