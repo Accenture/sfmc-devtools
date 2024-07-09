@@ -747,12 +747,12 @@ describe('type: automation', () => {
             );
             assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
-                executedKeys['testInstance/testBU']?.length,
+                executedKeys['testInstance/testBU']?.automation?.length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                executedKeys['testInstance/testBU'][0],
+                executedKeys['testInstance/testBU']?.automation[0],
                 'testExisting_automation',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -764,12 +764,12 @@ describe('type: automation', () => {
             const executedKeys = await handler.schedule('testInstance/testBU', ['automation']);
             assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
-                executedKeys['testInstance/testBU']?.length,
+                executedKeys['testInstance/testBU']?.automation?.length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                executedKeys['testInstance/testBU'][0],
+                executedKeys['testInstance/testBU']?.automation[0],
                 'testExisting_automation',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -803,12 +803,12 @@ describe('type: automation', () => {
             );
             assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
-                executedKeys['testInstance/testBU']?.length,
+                executedKeys['testInstance/testBU']?.automation?.length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                executedKeys['testInstance/testBU'][0],
+                executedKeys['testInstance/testBU']?.automation[0],
                 'testExisting_automation',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -820,12 +820,12 @@ describe('type: automation', () => {
             const executedKeys = await handler.execute('testInstance/testBU', ['automation']);
             assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
-                executedKeys['testInstance/testBU']?.length,
+                executedKeys['testInstance/testBU']?.automation?.length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                executedKeys['testInstance/testBU'][0],
+                executedKeys['testInstance/testBU']?.automation[0],
                 'testExisting_automation',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -856,12 +856,12 @@ describe('type: automation', () => {
             );
             assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
-                executedKeys['testInstance/testBU']?.length,
+                executedKeys['testInstance/testBU']?.automation?.length,
                 1,
                 'automation was supposed to be executed'
             );
             assert.equal(
-                executedKeys['testInstance/testBU'][0],
+                executedKeys['testInstance/testBU']?.automation[0],
                 'testExisting_automation',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -873,12 +873,12 @@ describe('type: automation', () => {
             const executedKeys = await handler.execute('testInstance/testBU', ['automation']);
             assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
-                executedKeys['testInstance/testBU']?.length,
+                executedKeys['testInstance/testBU']?.automation?.length,
                 1,
                 'automation was supposed to be executed'
             );
             assert.equal(
-                executedKeys['testInstance/testBU'][0],
+                executedKeys['testInstance/testBU']?.automation[0],
                 'testExisting_automation',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -913,12 +913,12 @@ describe('type: automation', () => {
             );
             assert.equal(process.exitCode, 0, 'pause should not have thrown an error');
             assert.equal(
-                pausedKeys['testInstance/testBU']?.length,
+                pausedKeys['testInstance/testBU']?.automation?.length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                pausedKeys['testInstance/testBU'][0],
+                pausedKeys['testInstance/testBU']?.automation[0],
                 'testExisting_automation_pause',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -930,12 +930,12 @@ describe('type: automation', () => {
             const pausedKeys = await handler.pause('testInstance/testBU', ['automation']);
             assert.equal(process.exitCode, 0, 'pause should not have thrown an error');
             assert.equal(
-                pausedKeys['testInstance/testBU']?.length,
+                pausedKeys['testInstance/testBU']?.automation?.length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                pausedKeys['testInstance/testBU'][0],
+                pausedKeys['testInstance/testBU']?.automation[0],
                 'testExisting_automation_pause',
                 'returned keys do not correspond to expected fixed keys'
             );

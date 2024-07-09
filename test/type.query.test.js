@@ -878,12 +878,12 @@ describe('type: query', () => {
             );
             assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
-                executedKeys['testInstance/testBU']?.length,
+                executedKeys['testInstance/testBU']?.query?.length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                executedKeys['testInstance/testBU'][0],
+                executedKeys['testInstance/testBU']?.query[0],
                 'testExisting_query',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -895,12 +895,12 @@ describe('type: query', () => {
             const executedKeys = await handler.execute('testInstance/testBU', ['query']);
             assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
-                executedKeys['testInstance/testBU']?.length,
+                executedKeys['testInstance/testBU']?.query?.length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                executedKeys['testInstance/testBU'][0],
+                executedKeys['testInstance/testBU']?.query[0],
                 'testExisting_query',
                 'returned keys do not correspond to expected fixed keys'
             );
