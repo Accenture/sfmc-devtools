@@ -267,45 +267,53 @@ declare class Mcdev {
      * Schedule an item (shortcut for execute --schedule)
      *
      * @param {string} businessUnit name of BU
-     * @param {string} [selectedType] limit to given metadata types
+     * @param {string[] | TypeKeyCombo} [selectedTypes] limit to given metadata types
      * @param {string[]} [keys] customerkey of the metadata
-     * @returns {Promise.<Object.<string, string[]>>} key: business unit name, value: list of scheduled item keys
+     * @returns {Promise.<Object.<string, Object.<string, string[]>>>} key: business unit name, key2: type, value: list of affected item keys
      */
-    static schedule(businessUnit: string, selectedType?: string, keys?: string[]): Promise<{
-        [x: string]: string[];
+    static schedule(businessUnit: string, selectedTypes?: string[] | TypeKeyCombo, keys?: string[]): Promise<{
+        [x: string]: {
+            [x: string]: string[];
+        };
     }>;
     /**
      * Publish an item
      *
      * @param {string} businessUnit name of BU
-     * @param {string} selectedType limit to given metadata types
+     * @param {string[] | TypeKeyCombo} selectedTypes limit to given metadata types
      * @param {string[]} [keys] customerkey of the metadata
-     * @returns {Promise.<Object.<string, string[]>>} key: business unit name, value: list of executed item keys
+     * @returns {Promise.<Object.<string, Object.<string, string[]>>>} key: business unit name, key2: type, value: list of affected item keys
      */
-    static publish(businessUnit: string, selectedType: string, keys?: string[]): Promise<{
-        [x: string]: string[];
+    static publish(businessUnit: string, selectedTypes: string[] | TypeKeyCombo, keys?: string[]): Promise<{
+        [x: string]: {
+            [x: string]: string[];
+        };
     }>;
     /**
      * Start/execute an item
      *
      * @param {string} businessUnit name of BU
-     * @param {string} [selectedType] limit to given metadata types
+     * @param {string[] | TypeKeyCombo} [selectedTypes] limit to given metadata types
      * @param {string[]} [keys] customerkey of the metadata
-     * @returns {Promise.<Object.<string, string[]>>} key: business unit name, value: list of executed item keys
+     * @returns {Promise.<Object.<string, Object.<string, string[]>>>} key: business unit name, key2: type, value: list of affected item keys
      */
-    static execute(businessUnit: string, selectedType?: string, keys?: string[]): Promise<{
-        [x: string]: string[];
+    static execute(businessUnit: string, selectedTypes?: string[] | TypeKeyCombo, keys?: string[]): Promise<{
+        [x: string]: {
+            [x: string]: string[];
+        };
     }>;
     /**
      * pause an item
      *
      * @param {string} businessUnit name of BU
-     * @param {string} [selectedType] limit to given metadata types
+     * @param {string[] | TypeKeyCombo} [selectedTypes] limit to given metadata types
      * @param {string[]} [keys] customerkey of the metadata
-     * @returns {Promise.<Object.<string, string[]>>} key: business unit name, value: list of paused item keys
+     * @returns {Promise.<Object.<string, Object.<string, string[]>>>} key: business unit name, key2: type, value: list of affected item keys
      */
-    static pause(businessUnit: string, selectedType?: string, keys?: string[]): Promise<{
-        [x: string]: string[];
+    static pause(businessUnit: string, selectedTypes?: string[] | TypeKeyCombo, keys?: string[]): Promise<{
+        [x: string]: {
+            [x: string]: string[];
+        };
     }>;
     /**
      * Updates the key to match the name field
@@ -335,12 +343,14 @@ declare class Mcdev {
      *
      * @param {'execute'|'pause'|'publish'|'fixKeys'|'replaceCbReference'} methodName what to run
      * @param {string} businessUnit name of BU
-     * @param {string} [selectedType] limit to given metadata types
+     * @param {string[] | TypeKeyCombo} [selectedTypes] limit to given metadata types
      * @param {string[]} [keys] customerkey of the metadata
-     * @returns {Promise.<Object.<string, string[]>>} key: business unit name, value: list of affected item keys
+     * @returns {Promise.<Object.<string, Object.<string, string[]>>>} key: business unit name, key2: type, value: list of affected item keys
      */
-    static "__#8@#runMethod"(methodName: "execute" | "pause" | "publish" | "fixKeys" | "replaceCbReference", businessUnit: string, selectedType?: string, keys?: string[]): Promise<{
-        [x: string]: string[];
+    static "__#8@#runMethod"(methodName: "execute" | "pause" | "publish" | "fixKeys" | "replaceCbReference", businessUnit: string, selectedTypes?: string[] | TypeKeyCombo, keys?: string[]): Promise<{
+        [x: string]: {
+            [x: string]: string[];
+        };
     }>;
     /**
      * helper for Mcdev.#runMethod
