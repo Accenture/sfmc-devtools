@@ -97,6 +97,38 @@ declare class Journey extends MetadataType {
      * @returns {Promise.<MetadataTypeItem>} key of the item that was updated
      */
     static replaceCbReference(item: MetadataTypeItem): Promise<MetadataTypeItem>;
+    /**
+     * Gets executed after deployment of metadata type
+     *
+     * @param {MetadataTypeMap} upsertResults metadata mapped by their keyField as returned by update/create
+     */
+    static postDeployTasks(upsertResults: MetadataTypeMap): Promise<void>;
+    /**
+     * a function to publish the journey via API
+     *
+     * @param {string[]} keyArr keys or ids of the metadata
+     * @returns {Promise.<string[]>} Returns list of updated keys/ids that were published. Success could only be seen with a delay in the UI because the publish-endpoint is async
+     */
+    static publish(keyArr: string[]): Promise<string[]>;
+    /**
+     * helper for {@link Journey.publish}
+     *
+     * @param {string} statusUrl URL to check the status of the publish request
+     * @param {string} key key or id for log messages
+     * @param {number} [tries] number of tries used to check the status
+     * @returns {Promise.<string>} key of the item that was published successfully
+     */
+    static _checkPublishStatus(statusUrl: string, key: string, tries?: number): Promise<string>;
+    /**
+     * helper for {@link Journey._checkPublishStatus}
+     *
+     * @param {{status:string, errors:Array, warnings:Array}} response publishStatus response
+     */
+    static _showPublishStatusDetails(response: {
+        status: string;
+        errors: any[];
+        warnings: any[];
+    }): void;
 }
 declare namespace Journey {
     let definition: {

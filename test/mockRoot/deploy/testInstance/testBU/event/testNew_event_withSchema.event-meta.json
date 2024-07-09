@@ -4,6 +4,7 @@
     "description": "created on deploy",
     "mode": "Production",
     "eventDefinitionKey": "testNew_event_withSchema",
+    "sourceApplicationExtensionId": "7db1f972-f8b7-49b6-91b5-fa218e13953d",
     "schema": {
         "fields": [
             {
