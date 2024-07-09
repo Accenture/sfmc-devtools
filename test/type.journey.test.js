@@ -399,4 +399,231 @@ describe('type: journey', () => {
             return;
         });
     });
+
+    describe('Publish ================', () => {
+        it('Should publish a journey by key (auto-picks latest version)', async () => {
+            handler.setOptions({ skipStatusCheck: true });
+            // WHEN
+            const publish = await handler.publish('testInstance/testBU', 'journey', [
+                'testExisting_journey_Quicksend',
+            ]);
+            // THEN
+            assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                publish['testInstance/testBU'],
+                ['testExisting_journey_Quicksend'],
+                'should have published the right journey'
+            );
+
+            // get callouts
+            const publishCallout = testUtils.getRestCallout(
+                'post',
+                '/interaction/v1/interactions/publishAsync/%'
+            );
+            // confirm created item
+            assert.deepEqual(
+                publishCallout,
+                await testUtils.getExpectedJson('9999999', 'journey', 'publish-callout'),
+                'create-payload JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                2,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should publish a journey by id w/ version', async () => {
+            handler.setOptions({ skipStatusCheck: true });
+            // WHEN
+            const publish = await handler.publish('testInstance/testBU', 'journey', [
+                'id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1',
+            ]);
+            // THEN
+            assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                publish['testInstance/testBU'],
+                ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1'],
+                'should have published the right journey'
+            );
+
+            // get callouts
+            const publishCallout = testUtils.getRestCallout(
+                'post',
+                '/interaction/v1/interactions/publishAsync/%'
+            );
+            // confirm created item
+            assert.deepEqual(
+                publishCallout,
+                await testUtils.getExpectedJson('9999999', 'journey', 'publish-callout'),
+                'create-payload JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                1,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should publish a journey by id but w/o version (auto-picks latest version)', async () => {
+            handler.setOptions({ skipStatusCheck: true });
+            // WHEN
+            const publish = await handler.publish('testInstance/testBU', 'journey', [
+                'id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2',
+            ]);
+            // THEN
+            assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                publish['testInstance/testBU'],
+                ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2'],
+                'should have published the right journey'
+            );
+
+            // get callouts
+            const publishCallout = testUtils.getRestCallout(
+                'post',
+                '/interaction/v1/interactions/publishAsync/%'
+            );
+            // confirm created item
+            assert.deepEqual(
+                publishCallout,
+                await testUtils.getExpectedJson('9999999', 'journey', 'publish-callout'),
+                'create-payload JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                2,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should publish a journey by id w/ version with failing status check', async () => {
+            await testUtils.copyFile(
+                'interaction/v1/interactions/publishStatus/45f06c0a-3ed2-48b2-a6a8-b5119253f01c/get-response-failed.json',
+                'interaction/v1/interactions/publishStatus/45f06c0a-3ed2-48b2-a6a8-b5119253f01c/get-response.json'
+            );
+
+            handler.setOptions({ skipStatusCheck: false, _runningTest: true });
+            // WHEN
+            const publish = await handler.publish('testInstance/testBU', 'journey', [
+                'id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1',
+            ]);
+            // THEN
+            assert.equal(process.exitCode, 1, 'publish should have thrown an error');
+            // retrieve result
+            assert.equal(
+                publish['testInstance/testBU'].length,
+                0,
+                'should have not published the journey'
+            );
+
+            // get callouts
+            const publishCallout = testUtils.getRestCallout(
+                'post',
+                '/interaction/v1/interactions/publishAsync/%'
+            );
+            // confirm created item
+            assert.deepEqual(
+                publishCallout,
+                await testUtils.getExpectedJson('9999999', 'journey', 'publish-callout'),
+                'create-payload JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                2,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should publish a journey by id w/ version with successful status check but with warnings', async () => {
+            await testUtils.copyFile(
+                'interaction/v1/interactions/publishStatus/45f06c0a-3ed2-48b2-a6a8-b5119253f01c/get-response-successWarnings.json',
+                'interaction/v1/interactions/publishStatus/45f06c0a-3ed2-48b2-a6a8-b5119253f01c/get-response.json'
+            );
+
+            handler.setOptions({ skipStatusCheck: false, _runningTest: true });
+            // WHEN
+            const publish = await handler.publish('testInstance/testBU', 'journey', [
+                'id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1',
+            ]);
+            // THEN
+            assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                publish['testInstance/testBU'],
+                ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1'],
+                'should have published the journey'
+            );
+
+            // get callouts
+            const publishCallout = testUtils.getRestCallout(
+                'post',
+                '/interaction/v1/interactions/publishAsync/%'
+            );
+            // confirm created item
+            assert.deepEqual(
+                publishCallout,
+                await testUtils.getExpectedJson('9999999', 'journey', 'publish-callout'),
+                'create-payload JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                2,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should publish a journey by id w/ version with successful status check', async () => {
+            await testUtils.copyFile(
+                'interaction/v1/interactions/publishStatus/45f06c0a-3ed2-48b2-a6a8-b5119253f01c/get-response-success.json',
+                'interaction/v1/interactions/publishStatus/45f06c0a-3ed2-48b2-a6a8-b5119253f01c/get-response.json'
+            );
+
+            handler.setOptions({ skipStatusCheck: false, _runningTest: true });
+            // WHEN
+            const publish = await handler.publish('testInstance/testBU', 'journey', [
+                'id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1',
+            ]);
+            // THEN
+            assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                publish['testInstance/testBU'],
+                ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1'],
+                'should have published the journey'
+            );
+
+            // get callouts
+            const publishCallout = testUtils.getRestCallout(
+                'post',
+                '/interaction/v1/interactions/publishAsync/%'
+            );
+            // confirm created item
+            assert.deepEqual(
+                publishCallout,
+                await testUtils.getExpectedJson('9999999', 'journey', 'publish-callout'),
+                'create-payload JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                2,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
 });
