@@ -7,6 +7,7 @@
     "modifiedDate": "0001-01-01T00:00:00",
     "modifiedBy": 0,
     "eventDefinitionKey": "testExisting_event",
+    "iconUrl": "/images/icon_journeyBuilder-event-api-blue.svg",
     "schema": {
         "fields": [
             {
@@ -224,7 +225,7 @@
     },
     "metaData": {},
     "interactionCount": 0,
-    "isVisibleInPicker": true,
+    "isVisibleInPicker": false,
     "category": "Event",
     "publishedInteractionCount": 0,
     "automationId": "00000000-0000-0000-0000-000000000000",
