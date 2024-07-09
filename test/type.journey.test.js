@@ -404,14 +404,16 @@ describe('type: journey', () => {
         it('Should publish a journey by key (auto-picks latest version)', async () => {
             handler.setOptions({ skipStatusCheck: true });
             // WHEN
-            const publish = await handler.publish('testInstance/testBU', 'journey', [
-                'testExisting_journey_Quicksend',
-            ]);
+            const publish = await handler.publish(
+                'testInstance/testBU',
+                ['journey'],
+                ['testExisting_journey_Quicksend']
+            );
             // THEN
             assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
             // retrieve result
             assert.deepEqual(
-                publish['testInstance/testBU'],
+                publish['testInstance/testBU']?.journey,
                 ['testExisting_journey_Quicksend'],
                 'should have published the right journey'
             );
@@ -439,14 +441,16 @@ describe('type: journey', () => {
         it('Should publish a journey by id w/ version', async () => {
             handler.setOptions({ skipStatusCheck: true });
             // WHEN
-            const publish = await handler.publish('testInstance/testBU', 'journey', [
-                'id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1',
-            ]);
+            const publish = await handler.publish(
+                'testInstance/testBU',
+                ['journey'],
+                ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1']
+            );
             // THEN
             assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
             // retrieve result
             assert.deepEqual(
-                publish['testInstance/testBU'],
+                publish['testInstance/testBU']?.journey,
                 ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1'],
                 'should have published the right journey'
             );
@@ -474,14 +478,16 @@ describe('type: journey', () => {
         it('Should publish a journey by id but w/o version (auto-picks latest version)', async () => {
             handler.setOptions({ skipStatusCheck: true });
             // WHEN
-            const publish = await handler.publish('testInstance/testBU', 'journey', [
-                'id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2',
-            ]);
+            const publish = await handler.publish(
+                'testInstance/testBU',
+                ['journey'],
+                ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2']
+            );
             // THEN
             assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
             // retrieve result
             assert.deepEqual(
-                publish['testInstance/testBU'],
+                publish['testInstance/testBU']?.journey,
                 ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2'],
                 'should have published the right journey'
             );
@@ -514,14 +520,16 @@ describe('type: journey', () => {
 
             handler.setOptions({ skipStatusCheck: false, _runningTest: true });
             // WHEN
-            const publish = await handler.publish('testInstance/testBU', 'journey', [
-                'id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1',
-            ]);
+            const publish = await handler.publish(
+                'testInstance/testBU',
+                ['journey'],
+                ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1']
+            );
             // THEN
             assert.equal(process.exitCode, 1, 'publish should have thrown an error');
             // retrieve result
             assert.equal(
-                publish['testInstance/testBU'].length,
+                publish['testInstance/testBU']?.journey.length,
                 0,
                 'should have not published the journey'
             );
@@ -554,14 +562,16 @@ describe('type: journey', () => {
 
             handler.setOptions({ skipStatusCheck: false, _runningTest: true });
             // WHEN
-            const publish = await handler.publish('testInstance/testBU', 'journey', [
-                'id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1',
-            ]);
+            const publish = await handler.publish(
+                'testInstance/testBU',
+                ['journey'],
+                ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1']
+            );
             // THEN
             assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
             // retrieve result
             assert.deepEqual(
-                publish['testInstance/testBU'],
+                publish['testInstance/testBU']?.journey,
                 ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1'],
                 'should have published the journey'
             );
@@ -594,14 +604,16 @@ describe('type: journey', () => {
 
             handler.setOptions({ skipStatusCheck: false, _runningTest: true });
             // WHEN
-            const publish = await handler.publish('testInstance/testBU', 'journey', [
-                'id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1',
-            ]);
+            const publish = await handler.publish(
+                'testInstance/testBU',
+                ['journey'],
+                ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1']
+            );
             // THEN
             assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
             // retrieve result
             assert.deepEqual(
-                publish['testInstance/testBU'],
+                publish['testInstance/testBU']?.journey,
                 ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1'],
                 'should have published the journey'
             );
