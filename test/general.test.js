@@ -1274,6 +1274,111 @@ describe('GENERAL', () => {
                 return;
             });
         });
+
+        describe('Publish --metadata ~~~', () => {
+            it('Should publish the journey', async () => {
+                handler.setOptions({ skipStatusCheck: true });
+                const argvMetadata = ['journey:id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1'];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                // WHEN
+                const publish = await handler.publish('testInstance/testBU', typeKeyCombo);
+                // THEN
+                assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
+                assert.deepEqual(
+                    publish['testInstance/testBU']?.journey,
+                    ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1'],
+                    'should have published the right journey'
+                );
+                return;
+            });
+        });
+
+        describe('Execute/Start --metadata ~~~', () => {
+            it('Should execute the item', async () => {
+                const argvMetadata = [
+                    'query:testExisting_query',
+                    'automation:testExisting_automation',
+                ];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                // WHEN
+                const executedKeys = await handler.execute('testInstance/testBU', typeKeyCombo);
+                assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
+
+                // query
+                assert.equal(
+                    executedKeys['testInstance/testBU']?.query?.length,
+                    1,
+                    'returned number of keys does not correspond to number of expected fixed keys'
+                );
+                assert.equal(
+                    executedKeys['testInstance/testBU']?.query[0],
+                    'testExisting_query',
+                    'returned keys do not correspond to expected fixed keys'
+                );
+
+                // automation
+                assert.equal(
+                    executedKeys['testInstance/testBU']?.automation?.length,
+                    1,
+                    'automation was supposed to be executed'
+                );
+                assert.equal(
+                    executedKeys['testInstance/testBU']?.automation[0],
+                    'testExisting_automation',
+                    'returned keys do not correspond to expected fixed keys'
+                );
+
+                return;
+            });
+        });
+
+        describe('Pause --metadata ~~~', () => {
+            it('Should pause the item', async () => {
+                const argvMetadata = ['automation:testExisting_automation_pause'];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                // WHEN
+                const pausedKeys = await handler.pause('testInstance/testBU', typeKeyCombo);
+                assert.equal(process.exitCode, 0, 'pause should not have thrown an error');
+
+                // automation
+                assert.equal(
+                    pausedKeys['testInstance/testBU']?.automation?.length,
+                    1,
+                    'returned number of keys does not correspond to number of expected fixed keys'
+                );
+                assert.equal(
+                    pausedKeys['testInstance/testBU']?.automation[0],
+                    'testExisting_automation_pause',
+                    'returned keys do not correspond to expected fixed keys'
+                );
+
+                return;
+            });
+        });
+
+        describe('Schedule --metadata ~~~', () => {
+            it('Should schedule the item', async () => {
+                const argvMetadata = ['automation:testExisting_automation'];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                // WHEN
+                const scheduled = await handler.schedule('testInstance/testBU', typeKeyCombo);
+                assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
+
+                // automation
+                assert.equal(
+                    scheduled['testInstance/testBU']?.automation?.length,
+                    1,
+                    'returned number of keys does not correspond to number of expected fixed keys'
+                );
+                assert.equal(
+                    scheduled['testInstance/testBU']?.automation[0],
+                    'testExisting_automation',
+                    'returned keys do not correspond to expected fixed keys'
+                );
+
+                return;
+            });
+        });
     });
 
     describe('without --metadata ================', () => {
