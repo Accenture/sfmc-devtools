@@ -1,6 +1,7 @@
 declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: any[];
+    let dependencyGraph: any;
     let deployBlacklist: string[];
     let documentInOneFile: boolean;
     let hasExtended: boolean;

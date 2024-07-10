@@ -106,6 +106,12 @@ declare namespace TriggeredSend {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            asset: string[];
+            list: string[];
+            sendClassification: string[];
+            senderProfile: string[];
+        };
         folderType: string;
         hasExtended: boolean;
         idField: string;

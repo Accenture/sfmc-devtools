@@ -326,6 +326,7 @@ declare namespace DataExtension {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: any;
         folderType: string;
         filter: {
             CustomerKey: string[];

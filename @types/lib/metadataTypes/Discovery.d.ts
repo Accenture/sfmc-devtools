@@ -43,6 +43,7 @@ declare namespace Discovery {
     let definition: {
         bodyIteratorField: any;
         dependencies: any[];
+        dependencyGraph: any;
         endPointMapping: {
             Address: string;
             Asset: string;

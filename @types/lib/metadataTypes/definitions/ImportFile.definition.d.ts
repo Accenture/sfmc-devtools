@@ -1,6 +1,11 @@
 declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: string[];
+    namespace dependencyGraph {
+        let dataExtension: string[];
+        let list: string[];
+        let mobileKeyword: string[];
+    }
     namespace destinationObjectTypeMapping {
         let unknown: number;
         let DataExtension: number;

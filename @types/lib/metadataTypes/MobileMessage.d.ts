@@ -120,6 +120,10 @@ declare namespace MobileMessage {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            mobileCode: string[];
+            mobileKeyword: string[];
+        };
         hasExtended: boolean;
         idField: string;
         keepId: boolean;

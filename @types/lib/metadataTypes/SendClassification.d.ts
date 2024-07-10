@@ -70,6 +70,9 @@ declare namespace SendClassification {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            senderProfile: string[];
+        };
         filter: {};
         hasExtended: boolean;
         idField: string;

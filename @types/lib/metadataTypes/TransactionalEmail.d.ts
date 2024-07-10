@@ -63,6 +63,12 @@ declare namespace TransactionalEmail {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            asset: string[];
+            dataExtension: string[];
+            list: string[];
+            journey: string[];
+        };
         hasExtended: boolean;
         idField: string;
         keyIsFixed: boolean;

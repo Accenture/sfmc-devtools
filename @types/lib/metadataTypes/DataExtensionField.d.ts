@@ -109,6 +109,7 @@ declare namespace DataExtensionField {
     let definition: {
         bodyIteratorField: string;
         dependencies: any[];
+        dependencyGraph: any;
         filter: {};
         hasExtended: boolean;
         idField: string;

@@ -8,6 +8,7 @@ export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataType
 export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
 export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type MultiMetadataTypeList = import("../../types/mcdev.d.js").MultiMetadataTypeList;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 export type SDK = import("sfmc-sdk").default;
@@ -645,6 +646,12 @@ declare class MetadataType {
      * @returns {Promise.<string[]>} list of all files that need to be committed in a flat array ['path/file1.ext', 'path/file2.ext']
      */
     static getFilesToCommit(keyArr: string[]): Promise<string[]>;
+    /**
+     *
+     * @param {string[]} keyArr customerkey of the metadata
+     * @returns {Promise.<MultiMetadataTypeList>} list of all keys that need to be deployed
+     */
+    static getDependentFiles(keyArr: string[]): Promise<MultiMetadataTypeList>;
     /**
      *
      * @param {MetadataTypeMap} metadataMap metadata mapped by their keyField

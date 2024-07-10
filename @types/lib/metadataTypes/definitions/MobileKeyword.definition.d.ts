@@ -1,6 +1,7 @@
 declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: string[];
+    let dependencyGraph: any;
     let hasExtended: boolean;
     let idField: string;
     let keyIsFixed: boolean;
@@ -25,6 +26,12 @@ declare namespace _default {
             template: boolean;
         };
         c__codeKeyword: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        r__mobileCode_key: {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;

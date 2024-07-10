@@ -73,6 +73,7 @@ declare namespace List {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: any;
         folderType: string;
         hasExtended: boolean;
         idField: string;

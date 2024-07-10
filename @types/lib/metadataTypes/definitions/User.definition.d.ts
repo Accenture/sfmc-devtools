@@ -1,6 +1,9 @@
 declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: string[];
+    namespace dependencyGraph {
+        let role: string[];
+    }
     let folderType: any;
     let hasExtended: boolean;
     let idField: string;

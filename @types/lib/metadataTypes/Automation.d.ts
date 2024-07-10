@@ -310,6 +310,15 @@ declare namespace Automation {
         };
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            dataExtract: string[];
+            emailSend: string[];
+            fileTransfer: string[];
+            importFile: string[];
+            query: string[];
+            script: string[];
+            verification: string[];
+        };
         folderType: string;
         hasExtended: boolean;
         filter: {

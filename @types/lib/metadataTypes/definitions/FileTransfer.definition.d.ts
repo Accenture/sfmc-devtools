@@ -1,6 +1,7 @@
 declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: string[];
+    let dependencyGraph: {};
     let hasExtended: boolean;
     let idField: string;
     let keyIsFixed: boolean;
