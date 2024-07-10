@@ -17,12 +17,6 @@ export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestPara
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 export type ExplainType = import("../../types/mcdev.d.js").ExplainType;
-export type Choice = ({
-    value: string;
-    name?: string;
-    description?: string;
-    disabled?: boolean | string;
-});
 declare namespace Cli {
     /**
      * used when initially setting up a project.
@@ -115,9 +109,9 @@ declare namespace Cli {
      *
      * @param {string[]} selectedTypes what types the user selected
      * @param {string} type metadata type
-     * @returns {void}
+     * @returns {string[]} filtered selectedTypes
      */
-    function _summarizeSubtypes(selectedTypes: string[], type: string): void;
+    function _summarizeSubtypes(selectedTypes: string[], type: string): string[];
     /**
      * shows metadata type descriptions
      *
