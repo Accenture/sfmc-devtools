@@ -17,6 +17,12 @@ export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestPara
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 export type ExplainType = import("../../types/mcdev.d.js").ExplainType;
+export type Choice = ({
+    value: string;
+    name?: string;
+    description?: string;
+    disabled?: boolean | string;
+});
 declare namespace Cli {
     /**
      * used when initially setting up a project.
@@ -107,14 +113,11 @@ declare namespace Cli {
      * helper for {@link Cli.selectTypes} that converts subtypes back to main type if all and only defaults were selected
      * this keeps the config automatically upgradable when we add new subtypes or change what is selected by default
      *
-     * @param {object} responses wrapper object for respones
-     * @param {string[]} responses.selectedTypes what types the user selected
+     * @param {string[]} selectedTypes what types the user selected
      * @param {string} type metadata type
      * @returns {void}
      */
-    function _summarizeSubtypes(responses: {
-        selectedTypes: string[];
-    }, type: string): void;
+    function _summarizeSubtypes(selectedTypes: string[], type: string): void;
     /**
      * shows metadata type descriptions
      *
