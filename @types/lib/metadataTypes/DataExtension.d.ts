@@ -29,8 +29,10 @@ export type DataExtensionMap = import("../../types/mcdev.d.js").DataExtensionMap
  * @augments MetadataType
  */
 declare class DataExtension extends MetadataType {
-    /** @type {DataExtensionFieldMap} */
-    static oldFields: DataExtensionFieldMap;
+    /** @type {Object.<string, DataExtensionFieldMap>} key: deKey, value: deFieldMap */
+    static oldFields: {
+        [x: string]: DataExtensionFieldMap;
+    };
     /**
      * Upserts dataExtensions after retrieving them from source and target to compare
      * if create or update operation is needed.

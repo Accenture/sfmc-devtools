@@ -94,7 +94,7 @@
  * @property {string} Scale the number of places after the decimal that the field can hold; example: "0","1", ...
  */
 /**
- * @typedef {Object.<string, DataExtensionFieldItem>} DataExtensionFieldMap
+ * @typedef {Object.<string, DataExtensionFieldItem>} DataExtensionFieldMap  key: name of field, value: DataExtensionFieldItem
  */
 /**
  * @typedef {object} DataExtensionItem
