@@ -156,7 +156,9 @@ declare namespace MobileKeyword {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
-        dependencyGraph: any;
+        dependencyGraph: {
+            mobileCode: string[];
+        };
         hasExtended: boolean;
         idField: string;
         keyIsFixed: boolean;

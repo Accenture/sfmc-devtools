@@ -1,7 +1,9 @@
 declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: string[];
-    let dependencyGraph: any;
+    namespace dependencyGraph {
+        let mobileCode: string[];
+    }
     let hasExtended: boolean;
     let idField: string;
     let keyIsFixed: boolean;

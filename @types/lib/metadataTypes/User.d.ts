@@ -7,6 +7,7 @@ export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataType
 export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
 export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type MultiMetadataTypeList = import("../../types/mcdev.d.js").MultiMetadataTypeList;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 export type UserDocument = import("../../types/mcdev.d.js").UserDocument;
@@ -23,6 +24,7 @@ export type AccountUserConfiguration = import("../../types/mcdev.d.js").AccountU
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemObj} MetadataTypeItemObj
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMap} MetadataTypeMap
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
+ * @typedef {import('../../types/mcdev.d.js').MultiMetadataTypeList} MultiMetadataTypeList
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
  */
@@ -229,6 +231,12 @@ declare class User extends MetadataType {
      * @returns {MetadataTypeItem | void} a single item
      */
     static postRetrieveTasks(metadata: UserDocument): MetadataTypeItem | void;
+    /**
+     *
+     * @param {string[]} [keyArr] customerkey of the metadata
+     * @returns {Promise.<MultiMetadataTypeList>} list of all keys that need to be deployed
+     */
+    static getDependentFiles(keyArr?: string[]): Promise<MultiMetadataTypeList>;
 }
 declare namespace User {
     let userIdBuMap: {};

@@ -649,9 +649,26 @@ declare class MetadataType {
     /**
      *
      * @param {string[]} keyArr customerkey of the metadata
+     * @param {MultiMetadataTypeList} multiTypeKeyList list of all keys that need to be deployed
      * @returns {Promise.<MultiMetadataTypeList>} list of all keys that need to be deployed
      */
-    static getDependentFiles(keyArr: string[]): Promise<MultiMetadataTypeList>;
+    static getDependentFiles(keyArr: string[], multiTypeKeyList?: MultiMetadataTypeList): Promise<MultiMetadataTypeList>;
+    /**
+     * helper for {@link MetadataType.getDependentFiles}
+     *
+     * @param {MetadataTypeItem} obj the metadataItem to search in
+     * @param {string} nestedKey e.g "my.field.here"
+     * @returns {(string | number)[]} result array or null if nothing was found
+     */
+    static getNestedValue(obj: MetadataTypeItem, nestedKey: string): (string | number)[];
+    /**
+     * helper for {@link MetadataType.getNestedValue}
+     *
+     * @param {any} obj the metadataItem to search in (or the result)
+     * @param {string[]} nestedKeyParts key in dot-notation split into parts
+     * @returns {(string|number) | (string | number)[]} result
+     */
+    static getNestedValueHelper(obj: any, nestedKeyParts: string[]): (string | number) | (string | number)[];
     /**
      *
      * @param {MetadataTypeMap} metadataMap metadata mapped by their keyField
