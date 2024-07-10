@@ -278,12 +278,12 @@ export namespace Util {
     /**
      * helper for Retriever and Deployer class
      *
-     * @param {string[]} typeArr -
+     * @param {string | string[]} typeArr -
      * @param {string[]} keyArr -
      * @param {boolean} [returnEmpty] returns array with null element if false/not set; Retriever needs this to be false; Deployer needs it to be true
      * @returns {TypeKeyCombo} -
      */
-    function createTypeKeyCombo(typeArr: string[], keyArr: string[], returnEmpty?: boolean): TypeKeyCombo;
+    function createTypeKeyCombo(typeArr: string | string[], keyArr: string[], returnEmpty?: boolean): TypeKeyCombo;
     /**
      * async version of Array.find()
      * returns the first element in the provided array that satisfies the provided testin function

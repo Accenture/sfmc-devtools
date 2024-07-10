@@ -11,6 +11,7 @@ export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMa
 export type MultiMetadataTypeList = import("../../types/mcdev.d.js").MultiMetadataTypeList;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 export type SDK = import("sfmc-sdk").default;
 export type SDKError = import("../../types/mcdev.d.js").SDKError;
 export type SOAPError = import("../../types/mcdev.d.js").SOAPError;
@@ -649,10 +650,10 @@ declare class MetadataType {
     /**
      *
      * @param {string[]} keyArr customerkey of the metadata
-     * @param {MultiMetadataTypeList} multiTypeKeyList list of all keys that need to be deployed
-     * @returns {Promise.<MultiMetadataTypeList>} list of all keys that need to be deployed
+     * @param {TypeKeyCombo} multiTypeKeyList list of all keys that need to be deployed
+     * @returns {Promise.<TypeKeyCombo>} list of all keys that need to be deployed
      */
-    static getDependentFiles(keyArr: string[], multiTypeKeyList?: MultiMetadataTypeList): Promise<MultiMetadataTypeList>;
+    static getDependentFiles(keyArr: string[], multiTypeKeyList?: TypeKeyCombo): Promise<TypeKeyCombo>;
     /**
      * helper for {@link MetadataType.getDependentFiles}
      *

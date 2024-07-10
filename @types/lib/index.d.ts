@@ -237,6 +237,13 @@ declare class Mcdev {
      */
     static buildTemplate(businessUnit: string, selectedTypes: string | TypeKeyCombo, keyArr: string[] | undefined, market: string): Promise<MultiMetadataTypeList>;
     /**
+     *
+     * @param {string} businessUnit references credentials from properties.json
+     * @param {TypeKeyCombo} selectedTypes limit retrieval to given metadata type
+     * @returns {Promise.<TypeKeyCombo>} dependencies
+     */
+    static addDependencies(businessUnit: string, selectedTypes: TypeKeyCombo): Promise<TypeKeyCombo>;
+    /**
      * Build a specific metadata file based on a template.
      *
      * @param {string} businessUnit references credentials from properties.json
