@@ -288,6 +288,9 @@ export type DataExtensionFieldItem = {
      */
     Scale: string;
 };
+/**
+ * key: name of field, value: DataExtensionFieldItem
+ */
 export type DataExtensionFieldMap = {
     [x: string]: DataExtensionFieldItem;
 };
