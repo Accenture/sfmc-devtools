@@ -7,7 +7,6 @@ export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataType
 export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
 export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
-export type MultiMetadataTypeList = import("../../types/mcdev.d.js").MultiMetadataTypeList;
 export type SDKError = import("../../types/mcdev.d.js").SDKError;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
@@ -27,7 +26,6 @@ export type AutomationScheduleSoap = import("../../types/mcdev.d.js").Automation
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemObj} MetadataTypeItemObj
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMap} MetadataTypeMap
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
- * @typedef {import('../../types/mcdev.d.js').MultiMetadataTypeList} MultiMetadataTypeList
  * @typedef {import('../../types/mcdev.d.js').SDKError} SDKError
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
@@ -285,12 +283,6 @@ declare class Automation extends MetadataType {
      * @returns {Promise.<void>} -
      */
     static postDeleteTasks(customerKey: string): Promise<void>;
-    /**
-     *
-     * @param {string[]} [keyArr] customerkey of the metadata
-     * @returns {Promise.<TypeKeyCombo>} list of all keys that need to be deployed
-     */
-    static getDependentFiles(keyArr?: string[]): Promise<TypeKeyCombo>;
 }
 declare namespace Automation {
     let retrieveDir: string;

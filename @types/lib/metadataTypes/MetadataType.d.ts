@@ -661,17 +661,19 @@ declare class MetadataType {
      *
      * @param {MetadataTypeItem} obj the metadataItem to search in
      * @param {string} nestedKey e.g "my.field.here"
+     * @param {string} dependentType used for types that need custom handling
      * @returns {(string | number)[]} result array or null if nothing was found
      */
-    static getNestedValue(obj: MetadataTypeItem, nestedKey: string): (string | number)[];
+    static getNestedValue(obj: MetadataTypeItem, nestedKey: string, dependentType: string): (string | number)[];
     /**
      * helper for {@link MetadataType.getNestedValue}
      *
      * @param {any} obj the metadataItem to search in (or the result)
      * @param {string[]} nestedKeyParts key in dot-notation split into parts
+     * @param {string} dependentType used for types that need custom handling
      * @returns {(string|number) | (string | number)[]} result
      */
-    static getNestedValueHelper(obj: any, nestedKeyParts: string[]): (string | number) | (string | number)[];
+    static getNestedValueHelper(obj: any, nestedKeyParts: string[], dependentType: string): (string | number) | (string | number)[];
     /**
      *
      * @param {MetadataTypeMap} metadataMap metadata mapped by their keyField
