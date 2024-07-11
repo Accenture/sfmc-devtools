@@ -7,10 +7,8 @@ export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataType
 export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
 export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
-export type MultiMetadataTypeList = import("../../types/mcdev.d.js").MultiMetadataTypeList;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
-export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 export type UserDocument = import("../../types/mcdev.d.js").UserDocument;
 export type UserDocumentDocument = import("../../types/mcdev.d.js").UserDocumentDocument;
 export type UserDocumentDiff = import("../../types/mcdev.d.js").UserDocumentDiff;
@@ -25,10 +23,8 @@ export type AccountUserConfiguration = import("../../types/mcdev.d.js").AccountU
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemObj} MetadataTypeItemObj
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMap} MetadataTypeMap
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
- * @typedef {import('../../types/mcdev.d.js').MultiMetadataTypeList} MultiMetadataTypeList
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
- * @typedef {import('../../types/mcdev.d.js').TypeKeyCombo} TypeKeyCombo
  */
 /**
  * @typedef {import('../../types/mcdev.d.js').UserDocument} UserDocument
@@ -233,12 +229,6 @@ declare class User extends MetadataType {
      * @returns {MetadataTypeItem | void} a single item
      */
     static postRetrieveTasks(metadata: UserDocument): MetadataTypeItem | void;
-    /**
-     *
-     * @param {string[]} [keyArr] customerkey of the metadata
-     * @returns {Promise.<TypeKeyCombo>} list of all keys that need to be deployed
-     */
-    static getDependentFiles(keyArr?: string[]): Promise<TypeKeyCombo>;
 }
 declare namespace User {
     let userIdBuMap: {};
@@ -246,9 +236,7 @@ declare namespace User {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
-        dependencyGraph: {
-            role: string[];
-        };
+        dependencyGraph: {};
         folderType: any;
         hasExtended: boolean;
         idField: string;
