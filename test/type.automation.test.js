@@ -696,6 +696,65 @@ describe('type: automation', () => {
             );
             return;
         });
+
+        it('Should create a automation template via buildTemplate with --dependencies', async () => {
+            // download first before we test buildTemplate
+            await handler.retrieve('testInstance/testBU');
+            const expectedApiCallsRetrieve = 68;
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                expectedApiCallsRetrieve,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+
+            // preparation
+            handler.setOptions({ dependencies: true });
+
+            // GIVEN there is a template
+            const templateResult = await handler.buildTemplate(
+                'testInstance/testBU',
+                'automation',
+                ['testExisting_automation'],
+                'testSourceMarket'
+            );
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+            // WHEN
+            // check type list
+            assert.deepEqual(
+                Object.keys(templateResult),
+                [
+                    'automation',
+                    'dataExtract',
+                    'emailSend',
+                    'dataExtension',
+                    'sendClassification',
+                    'senderProfile',
+                    'fileTransfer',
+                    'importFile',
+                    'query',
+                    'script',
+                    'verification',
+                ],
+                'did not create deployment packages for all relevant types'
+            );
+
+            assert.equal(
+                templateResult.automation ? Object.keys(templateResult.automation).length : 0,
+                1,
+                'only one automation expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
+                await testUtils.getExpectedJson('9999999', 'automation', 'template'),
+                'returned template was not equal expected'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
+                0,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 
     describe('Delete ================', () => {
