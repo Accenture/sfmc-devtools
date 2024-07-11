@@ -651,9 +651,11 @@ declare class MetadataType {
      *
      * @param {string[]} keyArr customerkey of the metadata
      * @param {TypeKeyCombo} multiTypeKeyList list of all keys that need to be deployed
+     * @param {TypeKeyCombo} notFoundList list of all keys that were not found
+     * @param {boolean} isFirstCall will not gray out the log message for type/keys that you initially selected but only for their dependencies
      * @returns {Promise.<TypeKeyCombo>} list of all keys that need to be deployed
      */
-    static getDependentFiles(keyArr: string[], multiTypeKeyList?: TypeKeyCombo): Promise<TypeKeyCombo>;
+    static getDependentFiles(keyArr: string[], multiTypeKeyList?: TypeKeyCombo, notFoundList?: TypeKeyCombo, isFirstCall?: boolean): Promise<TypeKeyCombo>;
     /**
      * helper for {@link MetadataType.getDependentFiles}
      *

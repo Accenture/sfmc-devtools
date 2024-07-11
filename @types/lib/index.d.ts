@@ -215,6 +215,13 @@ declare class Mcdev {
      */
     static retrieveAsTemplate(businessUnit: string, selectedType: string, name: string[], market: string): Promise<MultiMetadataTypeList>;
     /**
+     *
+     * @param {string} businessUnit references credentials from properties.json
+     * @param {TypeKeyCombo} selectedTypes limit retrieval to given metadata type
+     * @returns {Promise.<TypeKeyCombo>} dependencies
+     */
+    static addDependencies(businessUnit: string, selectedTypes: TypeKeyCombo): Promise<TypeKeyCombo>;
+    /**
      * Build a template based on a list of metadata files in the retrieve folder.
      *
      * @param {string} businessUnitTemplate references credentials from properties.json
@@ -236,13 +243,6 @@ declare class Mcdev {
      * @returns {Promise.<MultiMetadataTypeList>} -
      */
     static buildTemplate(businessUnit: string, selectedTypes: string | TypeKeyCombo, keyArr: string[] | undefined, market: string): Promise<MultiMetadataTypeList>;
-    /**
-     *
-     * @param {string} businessUnit references credentials from properties.json
-     * @param {TypeKeyCombo} selectedTypes limit retrieval to given metadata type
-     * @returns {Promise.<TypeKeyCombo>} dependencies
-     */
-    static addDependencies(businessUnit: string, selectedTypes: TypeKeyCombo): Promise<TypeKeyCombo>;
     /**
      * Build a specific metadata file based on a template.
      *

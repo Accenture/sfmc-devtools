@@ -10,6 +10,7 @@ export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMa
 export type MultiMetadataTypeList = import("../../types/mcdev.d.js").MultiMetadataTypeList;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 export type UserDocument = import("../../types/mcdev.d.js").UserDocument;
 export type UserDocumentDocument = import("../../types/mcdev.d.js").UserDocumentDocument;
 export type UserDocumentDiff = import("../../types/mcdev.d.js").UserDocumentDiff;
@@ -27,6 +28,7 @@ export type AccountUserConfiguration = import("../../types/mcdev.d.js").AccountU
  * @typedef {import('../../types/mcdev.d.js').MultiMetadataTypeList} MultiMetadataTypeList
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
+ * @typedef {import('../../types/mcdev.d.js').TypeKeyCombo} TypeKeyCombo
  */
 /**
  * @typedef {import('../../types/mcdev.d.js').UserDocument} UserDocument
@@ -234,9 +236,9 @@ declare class User extends MetadataType {
     /**
      *
      * @param {string[]} [keyArr] customerkey of the metadata
-     * @returns {Promise.<MultiMetadataTypeList>} list of all keys that need to be deployed
+     * @returns {Promise.<TypeKeyCombo>} list of all keys that need to be deployed
      */
-    static getDependentFiles(keyArr?: string[]): Promise<MultiMetadataTypeList>;
+    static getDependentFiles(keyArr?: string[]): Promise<TypeKeyCombo>;
 }
 declare namespace User {
     let userIdBuMap: {};
