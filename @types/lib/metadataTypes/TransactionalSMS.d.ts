@@ -86,6 +86,10 @@ declare namespace TransactionalSMS {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            mobileKeyword: string[];
+            mobileCode: string[];
+        };
         hasExtended: boolean;
         idField: string;
         keyIsFixed: boolean;

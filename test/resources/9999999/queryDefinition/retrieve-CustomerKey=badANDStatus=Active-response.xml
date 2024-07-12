@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:ed6a40f5-98ec-48e9-a059-2a4b7254448b</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:1b00729b-19f9-4eae-b856-f5ce837ec0c8</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-cd3b3dcd-ad61-43ad-9b80-3934f420befd">
+                <wsu:Created>2024-07-12T09:24:49Z</wsu:Created>
+                <wsu:Expires>2024-07-12T09:29:49Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>57658276-aab0-4312-b305-3b7e9911817f</RequestID>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>

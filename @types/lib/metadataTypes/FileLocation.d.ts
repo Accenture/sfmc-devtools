@@ -49,6 +49,7 @@ declare namespace FtpLocation {
     let definition: {
         bodyIteratorField: string;
         dependencies: any[];
+        dependencyGraph: any;
         hasExtended: boolean;
         idField: string;
         keyIsFixed: boolean;

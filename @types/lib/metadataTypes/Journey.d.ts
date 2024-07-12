@@ -135,6 +135,18 @@ declare namespace Journey {
         folderType: string;
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            transactionalEmail: string[];
+            dataExtension: string[];
+            triggeredSend: string[];
+            list: string[];
+            senderProfile: string[];
+            sendClassification: string[];
+            asset: string[];
+            mobileMessage: string[];
+            mobileKeyword: string[];
+            mobileCode: string[];
+        };
         folderIdField: string;
         hasExtended: boolean;
         idField: string;

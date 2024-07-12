@@ -366,6 +366,9 @@ declare namespace Asset {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            asset: string[];
+        };
         folderType: string;
         hasExtended: boolean;
         idField: string;

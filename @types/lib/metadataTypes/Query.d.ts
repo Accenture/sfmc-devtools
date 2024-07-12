@@ -161,6 +161,9 @@ declare namespace Query {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            dataExtension: string[];
+        };
         folderType: string;
         filter: {
             description: string[];

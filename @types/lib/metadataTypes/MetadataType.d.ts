@@ -8,8 +8,10 @@ export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataType
 export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
 export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type MultiMetadataTypeList = import("../../types/mcdev.d.js").MultiMetadataTypeList;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 export type SDK = import("sfmc-sdk").default;
 export type SDKError = import("../../types/mcdev.d.js").SDKError;
 export type SOAPError = import("../../types/mcdev.d.js").SOAPError;
@@ -645,6 +647,33 @@ declare class MetadataType {
      * @returns {Promise.<string[]>} list of all files that need to be committed in a flat array ['path/file1.ext', 'path/file2.ext']
      */
     static getFilesToCommit(keyArr: string[]): Promise<string[]>;
+    /**
+     *
+     * @param {string[]} keyArr customerkey of the metadata
+     * @param {TypeKeyCombo} multiTypeKeyList list of all keys that need to be deployed
+     * @param {TypeKeyCombo} notFoundList list of all keys that were not found
+     * @param {boolean} isFirstCall will not gray out the log message for type/keys that you initially selected but only for their dependencies
+     * @returns {Promise.<TypeKeyCombo>} list of all keys that need to be deployed
+     */
+    static getDependentFiles(keyArr: string[], multiTypeKeyList?: TypeKeyCombo, notFoundList?: TypeKeyCombo, isFirstCall?: boolean): Promise<TypeKeyCombo>;
+    /**
+     * helper for {@link MetadataType.getDependentFiles}
+     *
+     * @param {MetadataTypeItem} obj the metadataItem to search in
+     * @param {string} nestedKey e.g "my.field.here"
+     * @param {string} dependentType used for types that need custom handling
+     * @returns {(string | number)[]} result array or null if nothing was found
+     */
+    static getNestedValue(obj: MetadataTypeItem, nestedKey: string, dependentType: string): (string | number)[];
+    /**
+     * helper for {@link MetadataType.getNestedValue}
+     *
+     * @param {any} obj the metadataItem to search in (or the result)
+     * @param {string[]} nestedKeyParts key in dot-notation split into parts
+     * @param {string} dependentType used for types that need custom handling
+     * @returns {(string|number) | (string | number)[]} result
+     */
+    static getNestedValueHelper(obj: any, nestedKeyParts: string[], dependentType: string): (string | number) | (string | number)[];
     /**
      *
      * @param {MetadataTypeMap} metadataMap metadata mapped by their keyField

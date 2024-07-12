@@ -99,6 +99,9 @@ declare namespace Verification {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            dataExtension: string[];
+        };
         hasExtended: boolean;
         idField: string;
         keyIsFixed: boolean;

@@ -1,6 +1,9 @@
 declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: string[];
+    namespace dependencyGraph {
+        let asset: string[];
+    }
     let folderType: string;
     let hasExtended: boolean;
     let idField: string;
@@ -442,19 +445,20 @@ declare namespace _default {
     let subTypes: string[];
     let binarySubtypes: string[];
     namespace extendedSubTypes {
-        let asset: string[];
-        let image: string[];
-        let rawimage: string[];
-        let video: string[];
-        let document: string[];
-        let audio: string[];
-        let archive: string[];
-        let code: string[];
-        let textfile: string[];
-        let block: string[];
-        let template: string[];
-        let message: string[];
-        let other: string[];
+        let asset_1: string[];
+        export { asset_1 as asset };
+        export let image: string[];
+        export let rawimage: string[];
+        export let video: string[];
+        export let document: string[];
+        export let audio: string[];
+        export let archive: string[];
+        export let code: string[];
+        export let textfile: string[];
+        export let block: string[];
+        export let template: string[];
+        export let message: string[];
+        export let other: string[];
     }
     let typeMapping: {
         asset: number;

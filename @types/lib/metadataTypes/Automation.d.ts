@@ -10,6 +10,7 @@ export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMa
 export type SDKError = import("../../types/mcdev.d.js").SDKError;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 export type AutomationItem = import("../../types/mcdev.d.js").AutomationItem;
 export type AutomationItemObj = import("../../types/mcdev.d.js").AutomationItemObj;
 export type AutomationMap = import("../../types/mcdev.d.js").AutomationMap;
@@ -28,6 +29,7 @@ export type AutomationScheduleSoap = import("../../types/mcdev.d.js").Automation
  * @typedef {import('../../types/mcdev.d.js').SDKError} SDKError
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
+ * @typedef {import('../../types/mcdev.d.js').TypeKeyCombo} TypeKeyCombo
  */
 /**
  * @typedef {import('../../types/mcdev.d.js').AutomationItem} AutomationItem
@@ -310,6 +312,15 @@ declare namespace Automation {
         };
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            dataExtract: string[];
+            emailSend: string[];
+            fileTransfer: string[];
+            importFile: string[];
+            query: string[];
+            script: string[];
+            verification: string[];
+        };
         folderType: string;
         hasExtended: boolean;
         filter: {

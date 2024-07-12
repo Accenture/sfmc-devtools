@@ -85,6 +85,7 @@ declare namespace Role {
     let definition: {
         bodyIteratorField: string;
         dependencies: any[];
+        dependencyGraph: any;
         deployBlacklist: string[];
         documentInOneFile: boolean;
         hasExtended: boolean;

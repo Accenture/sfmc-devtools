@@ -156,6 +156,9 @@ declare namespace MobileKeyword {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            mobileCode: string[];
+        };
         hasExtended: boolean;
         idField: string;
         keyIsFixed: boolean;
@@ -180,6 +183,12 @@ declare namespace MobileKeyword {
                 template: boolean;
             };
             c__codeKeyword: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            r__mobileCode_key: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

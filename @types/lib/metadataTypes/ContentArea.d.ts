@@ -49,6 +49,7 @@ declare namespace ContentArea {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: any;
         hasExtended: boolean;
         idField: string;
         keepId: boolean;

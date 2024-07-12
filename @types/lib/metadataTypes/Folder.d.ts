@@ -113,6 +113,7 @@ declare namespace Folder {
     let definition: {
         bodyIteratorField: string;
         dependencies: any[];
+        dependencyGraph: any;
         subTypes: string[];
         deployFolderTypes: string[];
         deployFolderTypesRest: string[];

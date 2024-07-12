@@ -70,6 +70,14 @@ declare namespace EmailSend {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            asset: string[];
+            dataExtension: string[];
+            deliveryProfile: string[];
+            list: string[];
+            sendClassification: string[];
+            senderProfile: string[];
+        };
         folderType: string;
         hasExtended: boolean;
         idField: string;

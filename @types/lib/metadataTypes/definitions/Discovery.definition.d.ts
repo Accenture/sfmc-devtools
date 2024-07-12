@@ -1,6 +1,7 @@
 declare namespace _default {
     let bodyIteratorField: any;
     let dependencies: any[];
+    let dependencyGraph: any;
     let endPointMapping: {
         Address: string;
         Asset: string;
