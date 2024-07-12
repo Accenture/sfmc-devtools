@@ -165,6 +165,7 @@ export function mockSetup(isDeploy) {
             changeKeyField: undefined,
             changeKeyValue: undefined,
             commitHistory: undefined,
+            dependencies: undefined,
             errorLog: undefined,
             execute: undefined,
             filter: undefined,
@@ -175,8 +176,10 @@ export function mockSetup(isDeploy) {
             noMidSuffix: undefined,
             refresh: undefined,
             _runningTest: undefined,
+            retrieve: undefined,
             schedule: undefined,
             skipInteraction: undefined,
+            _welcomeMessageShown: undefined,
         });
     }
     apimock = new MockAdapter(axiosInstance, { onNoMatch: 'throwException' });
