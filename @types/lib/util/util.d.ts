@@ -285,6 +285,27 @@ export namespace Util {
      */
     function createTypeKeyCombo(typeArr: string | string[], keyArr: string[], returnEmpty?: boolean): TypeKeyCombo;
     /**
+     * helper that converts TypeKeyCombo objects into a string with all relevant -m parameters
+     *
+     * @param {TypeKeyCombo} [selectedTypes] selected metadata types & key
+     * @returns {string} object converted into --metadata parameters
+     */
+    function convertTypeKeyToCli(selectedTypes?: TypeKeyCombo): string;
+    /**
+     * helper that converts TypeKeyCombo objects into a string with all relevant -m parameters
+     *
+     * @param {TypeKeyCombo} [selectedTypes] selected metadata types & key
+     * @returns {string} object converted into --metadata parameters
+     */
+    function convertTypeKeyToString(selectedTypes?: TypeKeyCombo): string;
+    /**
+     * helper that checks how many keys are defined in TypeKeyCombo object
+     *
+     * @param {TypeKeyCombo} [selectedTypes] selected metadata types & key
+     * @returns {number} amount of keys across all types
+     */
+    function getTypeKeyCount(selectedTypes?: TypeKeyCombo): number;
+    /**
      * async version of Array.find()
      * returns the first element in the provided array that satisfies the provided testin function
      *

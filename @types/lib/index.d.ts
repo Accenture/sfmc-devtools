@@ -247,6 +247,15 @@ declare class Mcdev {
      * Build a specific metadata file based on a template.
      *
      * @param {string} businessUnit references credentials from properties.json
+     * @param {boolean} [alwaysAsk] by default this code only runs if --retrieve is set; this flag allows to always ask
+     * @param {TypeKeyCombo} [selectedTypes] limit retrieval to given metadata type
+     * @returns {Promise.<void>} -
+     */
+    static _reRetrieve(businessUnit: string, alwaysAsk?: boolean, selectedTypes?: TypeKeyCombo): Promise<void>;
+    /**
+     * Build a specific metadata file based on a template.
+     *
+     * @param {string} businessUnit references credentials from properties.json
      * @param {string | TypeKeyCombo} selectedTypes limit retrieval to given metadata type
      * @param {string[] | undefined} nameArr name of the metadata
      * @param {string} market market localizations
