@@ -708,7 +708,8 @@ describe('type: automation', () => {
             );
 
             // preparation
-            handler.setOptions({ dependencies: true });
+            // set skipInteraction to true to skip re-retrieving question
+            handler.setOptions({ dependencies: true, skipInteraction: true });
 
             // GIVEN there is a template
             const templateResult = await handler.buildTemplate(

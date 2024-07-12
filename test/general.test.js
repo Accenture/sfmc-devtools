@@ -930,6 +930,7 @@ describe('GENERAL', () => {
                 );
                 const buName = 'testInstance/testBU';
 
+                // set skipInteraction to true to skip re-retrieving question
                 handler.setOptions({ dependencies: true, skipInteraction: true });
 
                 // *** buildTemplate ***
@@ -1473,6 +1474,7 @@ describe('GENERAL', () => {
                 );
                 const buName = 'testInstance/testBU';
 
+                // set skipInteraction to true to skip re-retrieving question
                 handler.setOptions({ dependencies: true, skipInteraction: true });
 
                 // *** build: buildTemplate and buildDefinition chained ***
@@ -1875,6 +1877,7 @@ describe('GENERAL', () => {
                 );
                 const buName = 'testInstance/testBU';
 
+                // set skipInteraction to true to skip re-retrieving question
                 handler.setOptions({ dependencies: true, skipInteraction: true });
 
                 // *** build: buildTemplate and buildDefinition chained ***
