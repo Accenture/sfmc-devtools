@@ -443,6 +443,8 @@ declare namespace _default {
         };
     };
     let subTypes: string[];
+    let crosslinkedSubTypes: string[];
+    let selflinkedSubTypes: string[];
     let binarySubtypes: string[];
     namespace extendedSubTypes {
         let asset_1: string[];

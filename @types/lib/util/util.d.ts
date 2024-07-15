@@ -314,6 +314,13 @@ export namespace Util {
      * @returns {Promise.<any | undefined>} first element that passed the test
      */
     function findAsync(arr: any[], asyncCallback: Function): Promise<any | undefined>;
+    /**
+     *
+     * @param {Array} array array to be chunked
+     * @param {number} chunk_size integer > 0
+     * @returns {Array[]} array of arrays with max chunk_size members per element, last element might have less
+     */
+    function chunk(array: any[], chunk_size: number): any[][];
 }
 export type AuthObject = import("../../types/mcdev.d.js").AuthObject;
 export type BuObject = import("../../types/mcdev.d.js").BuObject;

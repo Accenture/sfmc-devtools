@@ -804,6 +804,8 @@ declare namespace Asset {
             };
         };
         subTypes: string[];
+        crosslinkedSubTypes: string[];
+        selflinkedSubTypes: string[];
         binarySubtypes: string[];
         extendedSubTypes: {
             asset: string[];
