@@ -1,5 +1,9 @@
 [
     {
+        "version": "7.1.0",
+        "files": [".vscode/settings.json"]
+    },
+    {
         "version": "7.0.3",
         "files": ["eslint.config.js"],
         "filesRemove": [".eslintignore", ".eslintrc"]
