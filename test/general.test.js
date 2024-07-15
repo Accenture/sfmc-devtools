@@ -61,7 +61,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    34,
+                    38,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -110,7 +110,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    34,
+                    38,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -159,7 +159,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    34,
+                    38,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -222,7 +222,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    75,
+                    85,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -283,7 +283,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    75,
+                    85,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -344,7 +344,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    75,
+                    85,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -909,7 +909,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 68;
+                const expectedApiCallsRetrieve = 71;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1040,7 +1040,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 // await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 68;
+                const expectedApiCallsRetrieve = 71;
                 // assert.equal(
                 //     testUtils.getAPIHistoryLength(),
                 //     expectedApiCallsRetrieve,
@@ -1453,7 +1453,7 @@ describe('GENERAL', () => {
                 // download everything before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 68;
+                const expectedApiCallsRetrieve = 71;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1566,7 +1566,7 @@ describe('GENERAL', () => {
                 // download everything before we test buildTemplate
                 // await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 68;
+                const expectedApiCallsRetrieve = 71;
                 // assert.equal(
                 //     testUtils.getAPIHistoryLength(),
                 //     expectedApiCallsRetrieve,
@@ -1856,7 +1856,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 68;
+                const expectedApiCallsRetrieve = 71;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
