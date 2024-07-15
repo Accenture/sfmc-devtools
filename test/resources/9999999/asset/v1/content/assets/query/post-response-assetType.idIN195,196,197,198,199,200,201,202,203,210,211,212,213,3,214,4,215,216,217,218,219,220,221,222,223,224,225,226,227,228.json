@@ -1,0 +1,73 @@
+{
+    "count": 2,
+    "page": 1,
+    "pageSize": 50,
+    "links": {},
+    "items": [
+        {
+            "id": 1295064,
+            "customerKey": "mcdev-issue-1157",
+            "assetType": {
+                "id": 197,
+                "name": "htmlblock",
+                "displayName": "HTML Block"
+            },
+            "fileProperties": {
+                "fileName": "dont strip non ssjs content"
+            },
+            "name": "dont strip non ssjs content",
+            "createdDate": "2024-01-08T08:26:58.277-06:00",
+            "createdBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "modifiedDate": "2024-01-08T08:28:01.6-06:00",
+            "modifiedBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "category": {
+                "id": 89397,
+                "name": "Content Builder",
+                "parentId": 0
+            },
+            "availableViews": [],
+            "modelVersion": 2
+        },
+        {
+            "id": 5286,
+            "customerKey": "testExisting_asset_template",
+            "assetType": {
+                "id": 4,
+                "name": "template",
+                "displayName": "Template"
+            },
+            "name": " testExisting_asset_template",
+            "createdDate": "2024-04-22T03:33:08.253-06:00",
+            "createdBy": {
+                "id": 710411605,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710411605"
+            },
+            "modifiedDate": "2024-05-13T07:12:13.117-06:00",
+            "modifiedBy": {
+                "id": 710420432,
+                "name": "joern.berkefeld app user",
+                "userId": "710420432"
+            },
+            "category": {
+                "id": 89397
+            },
+            "modelVersion": 2
+        }
+    ]
+}

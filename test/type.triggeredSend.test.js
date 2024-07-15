@@ -187,7 +187,7 @@ describe('type: triggeredSend', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                24,
+                16,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -222,7 +222,7 @@ describe('type: triggeredSend', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                24,
+                16,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -257,7 +257,7 @@ describe('type: triggeredSend', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                24,
+                16,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

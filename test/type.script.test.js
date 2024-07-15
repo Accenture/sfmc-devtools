@@ -482,7 +482,7 @@ describe('type: script', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                15,
+                7,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -548,7 +548,7 @@ describe('type: script', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                15,
+                7,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -619,7 +619,7 @@ describe('type: script', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                15,
+                7,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

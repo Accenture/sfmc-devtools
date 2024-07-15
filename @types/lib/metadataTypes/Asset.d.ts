@@ -97,14 +97,14 @@ declare class Asset extends MetadataType {
     /**
      * Retrieves Metadata of a specific asset type
      *
-     * @param {string} subType group of similar assets to put in a folder (ie. images)
+     * @param {string|string[]} subType group of similar assets to put in a folder (ie. images)
      * @param {string} [retrieveDir] target directory for saving assets
      * @param {string} [key] key/id/name to filter by
      * @param {TemplateMap} [templateVariables] variables to be replaced in the metadata
      * @param {boolean} [loadShared] optionally retrieve assets from other BUs that were shared with the current
      * @returns {Promise.<object[]>} Promise
      */
-    static requestSubType(subType: string, retrieveDir?: string, key?: string, templateVariables?: TemplateMap, loadShared?: boolean): Promise<object[]>;
+    static requestSubType(subType: string | string[], retrieveDir?: string, key?: string, templateVariables?: TemplateMap, loadShared?: boolean): Promise<object[]>;
     /**
      * Retrieves extended metadata (files or extended content) of asset
      *
