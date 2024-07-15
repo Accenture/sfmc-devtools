@@ -48,12 +48,6 @@ declare class Asset extends MetadataType {
         type: string;
     }>;
     /**
-     * helper for Journey's {@link Asset.saveResults}. Gets executed after retreive of metadata type and
-     *
-     * @param {MetadataTypeMap} metadataMap key=customer key, value=metadata
-     */
-    static _postRetrieveTasksBulk(metadataMap: MetadataTypeMap): Promise<void>;
-    /**
      * Retrieves asset metadata for caching
      *
      * @param {void | string[]} [_] parameter not used
@@ -273,6 +267,8 @@ declare class Asset extends MetadataType {
      */
     static _extractCode(metadata: AssetItem): CodeExtractItem;
     /**
+     * helper for {@link Asset.postRetrieveTasks} via {@link Asset._extractCode}
+     *
      * @param {string} prefix usually the customerkey
      * @param {object} metadataSlots metadata.views.html.slots or deeper slots.<>.blocks.<>.slots
      * @param {object[]} codeArr to be extended array for extracted code
