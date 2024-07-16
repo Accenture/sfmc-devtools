@@ -363,7 +363,7 @@ declare class Asset extends MetadataType {
      * @param {object} slots metadata.views.html.slots or deeper slots.<>.blocks.<>.slots
      * @param {string[]} dependentKeyArr list of found keys
      */
-    static _getDependentFiles(slots: object, dependentKeyArr: string[]): void;
+    static _getDependentFilesExtra(slots: object, dependentKeyArr: string[]): void;
 }
 declare namespace Asset {
     let definition: {
