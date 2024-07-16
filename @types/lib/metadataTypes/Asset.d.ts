@@ -7,6 +7,7 @@ export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataType
 export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 export type AssetSubType = import("../../types/mcdev.d.js").AssetSubType;
 export type AssetMap = import("../../types/mcdev.d.js").AssetMap;
 export type AssetItem = import("../../types/mcdev.d.js").AssetItem;
@@ -20,6 +21,7 @@ export type AssetRequestParams = import("../../types/mcdev.d.js").AssetRequestPa
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMap} MetadataTypeMap
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
+ * @typedef {import('../../types/mcdev.d.js').TypeKeyCombo} TypeKeyCombo
  */
 /**
  * @typedef {import('../../types/mcdev.d.js').AssetSubType} AssetSubType
@@ -357,6 +359,11 @@ declare class Asset extends MetadataType {
      * @returns {Promise.<MetadataTypeItem>} key of the item that was updated
      */
     static replaceCbReference(item: MetadataTypeItem, retrieveDir: string): Promise<MetadataTypeItem>;
+    /**
+     * @param {object} slots metadata.views.html.slots or deeper slots.<>.blocks.<>.slots
+     * @param {string[]} dependentKeyArr list of found keys
+     */
+    static _getDependentFiles(slots: object, dependentKeyArr: string[]): void;
 }
 declare namespace Asset {
     let definition: {
