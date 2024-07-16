@@ -239,6 +239,22 @@ declare class Asset extends MetadataType {
      *
      * @param {AssetItem} metadata a single asset definition
      * @param {string} deployDir directory of deploy files
+     * @returns {Promise.<void>} fileList for templating (disregarded during deployment)
+     */
+    static _preDeployTasksBocks(metadata: AssetItem, deployDir: string): Promise<void>;
+    /**
+     * helper for {@link Asset.preDeployTasks} that loads extracted code content back into JSON
+     *
+     * @param {object} metadataSlots metadata.views.html.slots or deeper slots.<>.blocks.<>.slots
+     * @param {string} deployDir directory of deploy files
+     * @returns {Promise.<void>} -
+     */
+    static _preDeployTasksBocks_slots(metadataSlots: object, deployDir: string): Promise<void>;
+    /**
+     * helper for {@link Asset.preDeployTasks} that loads extracted code content back into JSON
+     *
+     * @param {AssetItem} metadata a single asset definition
+     * @param {string} deployDir directory of deploy files
      * @param {string} subType asset-subtype name; full list in AssetSubType
      * @param {string} [templateName] name of the template used to built defintion (prior applying templating)
      * @param {boolean} [fileListOnly] does not read file contents nor update metadata if true
