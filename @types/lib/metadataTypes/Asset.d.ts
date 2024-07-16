@@ -388,6 +388,7 @@ declare namespace Asset {
         typeDescription: string;
         typeRetrieveByDefault: string[];
         typeName: string;
+        stringifyFieldsBeforeTemplate: string[];
         fields: {
             activeDate: {
                 isCreateable: boolean;
