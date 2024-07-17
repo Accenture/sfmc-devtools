@@ -82,7 +82,7 @@
         "simple-git": "3.25.0",
         "toposort": "2.0.2",
         "update-notifier": "7.0.0",
-        "winston": "3.13.0",
+        "winston": "3.13.1",
         "yargs": "17.7.2"
     },
     "devDependencies": {
