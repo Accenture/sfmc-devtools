@@ -198,6 +198,14 @@ declare class Mcdev {
      */
     static refresh(businessUnit: string, type: string, keyArr?: string[]): Promise<void>;
     /**
+     * method for contributors to get details on SOAP objects
+     *
+     * @param {string} type references credentials from properties.json
+     * @param {string} [businessUnit] defaults to first credential's ParentBU
+     * @returns {Promise.<void>} -
+     */
+    static describeSoap(type: string, businessUnit?: string): Promise<void>;
+    /**
      * Converts metadata to legacy format. Output is saved in 'converted' directory
      *
      * @param {string} businessUnit references credentials from properties.json
