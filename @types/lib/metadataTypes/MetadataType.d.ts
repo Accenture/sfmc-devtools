@@ -657,23 +657,30 @@ declare class MetadataType {
      */
     static getDependentFiles(keyArr: string[], multiTypeKeyList?: TypeKeyCombo, notFoundList?: TypeKeyCombo, isFirstCall?: boolean): Promise<TypeKeyCombo>;
     /**
+     * optional helper for {@link this.getDependentTypes}
+     *
+     * @param {object} metadataItem metadata json read from filesystem
+     * @param {TypeKeyCombo} dependentTypeKeyCombo list started in this.getDependentTypes
+     */
+    static getDependentFilesExtra(metadataItem: object, dependentTypeKeyCombo: TypeKeyCombo): void;
+    /**
      * helper for {@link MetadataType.getDependentFiles}
      *
      * @param {MetadataTypeItem} obj the metadataItem to search in
      * @param {string} nestedKey e.g "my.field.here"
      * @param {string} dependentType used for types that need custom handling
-     * @returns {(string | number)[]} result array or null if nothing was found
+     * @returns {(string)[]} result array or null if nothing was found
      */
-    static getNestedValue(obj: MetadataTypeItem, nestedKey: string, dependentType: string): (string | number)[];
+    static getNestedValue(obj: MetadataTypeItem, nestedKey: string, dependentType: string): (string)[];
     /**
      * helper for {@link MetadataType.getNestedValue}
      *
      * @param {any} obj the metadataItem to search in (or the result)
      * @param {string[]} nestedKeyParts key in dot-notation split into parts
      * @param {string} dependentType used for types that need custom handling
-     * @returns {(string|number) | (string | number)[]} result
+     * @returns {(string) | (string)[]} result
      */
-    static getNestedValueHelper(obj: any, nestedKeyParts: string[], dependentType: string): (string | number) | (string | number)[];
+    static getNestedValueHelper(obj: any, nestedKeyParts: string[], dependentType: string): (string) | (string)[];
     /**
      *
      * @param {MetadataTypeMap} metadataMap metadata mapped by their keyField

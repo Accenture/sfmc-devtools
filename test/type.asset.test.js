@@ -216,7 +216,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                15,
+                18,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -262,7 +262,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -296,7 +296,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -330,7 +330,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -342,7 +342,7 @@ describe('type: asset', () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['asset']);
 
-            const expectedApiCallsRetrieve = 15;
+            const expectedApiCallsRetrieve = 18;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 expectedApiCallsRetrieve,
@@ -454,6 +454,108 @@ describe('type: asset', () => {
                     'build-templatebasedemail-preheader',
                     'amp'
                 )
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
+                0,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should create a asset template via buildTemplate with --dependencies', async () => {
+            // download first before we test buildTemplate
+            await handler.retrieve('testInstance/testBU', ['asset']);
+
+            const expectedApiCallsRetrieve = 18;
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                expectedApiCallsRetrieve,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            handler.setOptions({ dependencies: true, skipInteraction: true });
+
+            // GIVEN there is a template
+            const templatedItems = await handler.buildTemplate(
+                'testInstance/testBU',
+                'asset',
+                ['testExisting_asset_templatebasedemail'],
+                'testSourceMarket'
+            );
+            // WHEN
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+            assert.equal(
+                templatedItems.asset ? templatedItems.asset.length : 0,
+                3,
+                'only 3 asset expected'
+            );
+            assert.deepEqual(
+                templatedItems.asset.map((item) => item.customerKey),
+                [
+                    '{{{prefix}}}asset_templatebasedemail',
+                    '{{{prefix}}}asset_template',
+                    'mcdev-issue-1157',
+                ],
+                'expected specific assets to be templated'
+            );
+
+            // testExisting_asset_templatebasedemail
+            assert.deepEqual(
+                await getActualTemplateJson(
+                    'testExisting_asset_templatebasedemail',
+                    'asset',
+                    'message'
+                ),
+                await testUtils.getExpectedJson('9999999', 'asset', 'template-templatebasedemail'),
+                'returned template JSON of buildTemplate was not equal expected'
+            );
+
+            expect(
+                await getActualTemplateFile(
+                    'testExisting_asset_templatebasedemail',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.html.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'template-templatebasedemail-html',
+                    'html'
+                )
+            );
+            expect(
+                await getActualTemplateFile(
+                    'testExisting_asset_templatebasedemail',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.preheader.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'template-templatebasedemail-preheader',
+                    'amp'
+                )
+            );
+
+            // testExisting_asset_template
+            assert.deepEqual(
+                await getActualTemplateJson('testExisting_asset_template', 'asset', 'template'),
+                await testUtils.getExpectedJson('9999999', 'asset', 'template-emailTemplate'),
+                'returned template JSON of buildTemplate was not equal expected'
+            );
+
+            // mcdev-issue-1157
+            assert.deepEqual(
+                await getActualTemplateJson('mcdev-issue-1157', 'asset', 'block'),
+                await testUtils.getExpectedJson('9999999', 'asset', 'template-mcdev-issue-1157'),
+                'returned template JSON of buildTemplate was not equal expected'
             );
 
             assert.equal(
@@ -620,7 +722,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                26,
+                20,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -704,7 +806,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                26,
+                20,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -788,7 +890,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                26,
+                20,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
