@@ -36,4 +36,4 @@ fi
 
 # store commit id for post-merge hook
 LAST_COMMIT_ID=$(git rev-parse HEAD)
-echo "[PRE-CHECKOUT] Stored commit id for post-merge: $LAST_COMMIT_ID"
+echo "[POST-CHECKOUT] Stored commit id for post-merge: $LAST_COMMIT_ID"
