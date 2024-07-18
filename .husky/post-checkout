@@ -21,7 +21,7 @@ NEWHEAD=$1
 OLDHEAD=$2
 # extract all paths to package-lock.json files
 PACKAGE_LOCK_REGEX="(^package-lock\.json)"
-PACKAGES=$(git diff --name-only $NEWHEAD $OLDHEAD | grep -E $PACKAGE_LOCK_REGEX || true)
+PACKAGES=$(git diff --name-only $OLDHEAD $NEWHEAD | grep -E $PACKAGE_LOCK_REGEX || true)
 
 if [[ ${PACKAGES[@]} ]]; then
   for package in $PACKAGES; do
@@ -33,3 +33,7 @@ if [[ ${PACKAGES[@]} ]]; then
 else
   echo "📦 All packages up-to-date. No need to run npm install."
 fi
+
+# store commit id for post-merge hook
+LAST_COMMIT_ID=$(git rev-parse HEAD)
+echo "[PRE-CHECKOUT] Stored commit id for post-merge: $LAST_COMMIT_ID"

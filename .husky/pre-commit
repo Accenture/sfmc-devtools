@@ -1,6 +1,12 @@
 # run lint-staged hooks
+echo "[PRE-COMMIT] Run lint-staged"
 npx --no lint-staged
 
 # update typescript type declarations
+echo "[PRE-COMMIT] Run typescript validation and create/update d.ts files"
 npx tsc -p tsconfig.precommit.json
 git add @types
+
+# store commit id for post-merge hook
+LAST_COMMIT_ID=$(git rev-parse HEAD)
+echo "[PRE-COMMIT] Stored commit id for post-merge: $LAST_COMMIT_ID"
