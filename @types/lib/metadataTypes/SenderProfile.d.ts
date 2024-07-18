@@ -58,12 +58,6 @@ declare class SenderProfile extends MetadataType {
      * @returns {Promise.<MetadataTypeItem>} Promise
      */
     static preDeployTasks(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
-    /**
-     *
-     * @param {MetadataTypeItem} item single metadata item
-     * @returns {Promise.<MetadataTypeItem>} key of the item that was updated
-     */
-    static replaceCbReference(item: MetadataTypeItem): Promise<MetadataTypeItem>;
 }
 declare namespace SenderProfile {
     let definition: {

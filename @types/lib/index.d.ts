@@ -223,6 +223,12 @@ declare class Mcdev {
      */
     static retrieveAsTemplate(businessUnit: string, selectedType: string, name: string[], market: string): Promise<MultiMetadataTypeList>;
     /**
+     * @param {string} businessUnit references credentials from properties.json
+     * @param {TypeKeyCombo} selectedTypes limit retrieval to given metadata type
+     * @returns {Promise.<TypeKeyCombo>} selected types including dependencies
+     */
+    static addDependentCbReferences(businessUnit: string, selectedTypes: TypeKeyCombo): Promise<TypeKeyCombo>;
+    /**
      *
      * @param {string} businessUnit references credentials from properties.json
      * @param {TypeKeyCombo} selectedTypes limit retrieval to given metadata type

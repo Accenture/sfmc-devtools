@@ -48,11 +48,10 @@ export default class ReplaceContentBlockReference {
      *
      * @param {string} str full code string
      * @param {string} parentName name of the object that was passed in; used in error message only
-     * @param {ContentBlockConversionTypes[]} [fromList] what to replace
-     * @param {ContentBlockConversionTypes} [to] what to replace with
+     * @param {Set.<string>} [findAssetKeys] list of keys that were found referenced via ContentBlockByX; if set, method only gets keys and runs no updates
      * @returns {string} replaced string
      */
-    static replaceReference(str: string, parentName: string, fromList?: ContentBlockConversionTypes[], to?: ContentBlockConversionTypes): string;
+    static replaceReference(str: string, parentName: string, findAssetKeys?: Set<string>): string;
     /**
      *
      * @param {ContentBlockConversionTypes} from replace with

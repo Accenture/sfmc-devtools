@@ -183,9 +183,10 @@ declare class Script extends MetadataType {
      *
      * @param {MetadataTypeItem} item single metadata item
      * @param {string} retrieveDir directory where metadata is saved
+     * @param {Set.<string>} [findAssetKeys] list of keys that were found referenced via ContentBlockByX; if set, method only gets keys and runs no updates
      * @returns {Promise.<CodeExtractItem>} key of the item that was updated
      */
-    static replaceCbReference(item: MetadataTypeItem, retrieveDir: string): Promise<CodeExtractItem>;
+    static replaceCbReference(item: MetadataTypeItem, retrieveDir: string, findAssetKeys?: Set<string>): Promise<CodeExtractItem>;
 }
 declare namespace Script {
     let definition: {
