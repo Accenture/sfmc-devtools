@@ -33,3 +33,7 @@ if [[ ${PACKAGES[@]} ]]; then
 else
   echo "📦 All packages up-to-date. No need to run npm install."
 fi
+
+# store commit id for post-merge hook
+LAST_COMMIT_ID=$(git rev-parse HEAD)
+echo "[PRE-COMMIT] Stored commit id for post-merge: $LAST_COMMIT_ID"
