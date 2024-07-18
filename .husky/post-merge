@@ -5,7 +5,7 @@ IFS=$'\n'
 # $1 is the new HEAD pointer
 NEWHEAD= "HEAD"
 # $2 is the previous HEAD pointer
-#OLDHEAD= $LAST_COMMIT_ID
+# OLDHEAD= $LAST_COMMIT_ID
 # extract all paths to package-lock.json files
 PACKAGE_LOCK_REGEX="(^package-lock\.json)"
 PACKAGES=$(git diff --name-only $LAST_COMMIT_ID $NEWHEAD | grep -E $PACKAGE_LOCK_REGEX || true)
