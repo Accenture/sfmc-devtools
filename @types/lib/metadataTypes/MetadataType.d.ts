@@ -26,7 +26,7 @@ declare class MetadataType {
     /**
      * Returns file contents mapped to their filename without '.json' ending
      *
-     * @param {string} dir directory that contains '.json' files to be read
+     * @param {string} dir directory with json files, e.g. /retrieve/cred/bu/event, /deploy/cred/bu/event, /template/event
      * @param {boolean} [listBadKeys] do not print errors, used for badKeys()
      * @param {string[]} [selectedSubType] asset, message, ...
      * @returns {Promise.<MetadataTypeMap>} fileName => fileContent map
@@ -199,12 +199,12 @@ declare class MetadataType {
     static refresh(): void;
     /**
      *
-     * @param {TypeKeyCombo} selectedTypes limit retrieval to given metadata type
+     * @param {string[]} keyArr limit retrieval to given metadata type
      * @param {string} retrieveDir retrieve dir including cred and bu
      * @param {Set.<string>} [findAssetKeys] list of keys that were found referenced via ContentBlockByX; if set, method only gets keys and runs no updates
      * @returns {Promise.<Set.<string>>} found asset keys
      */
-    static getCbReferenceKeys(selectedTypes: TypeKeyCombo, retrieveDir: string, findAssetKeys?: Set<string>): Promise<Set<string>>;
+    static getCbReferenceKeys(keyArr: string[], retrieveDir: string, findAssetKeys?: Set<string>): Promise<Set<string>>;
     /**
      * this iterates over all items found in the retrieve folder and executes the type-specific method for replacing references
      *

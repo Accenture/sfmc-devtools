@@ -377,12 +377,12 @@ declare class Asset extends MetadataType {
     static replaceCbReference(item: MetadataTypeItem, retrieveDir: string, findAssetKeys?: Set<string>): Promise<MetadataTypeItem>;
     /**
      *
-     * @param {TypeKeyCombo} selectedTypes limit retrieval to given metadata type
+     * @param {string[]} keyArr limit retrieval to given metadata type
      * @param {string} retrieveDir retrieve dir including cred and bu
      * @param {Set.<string>} findAssetKeys list of keys that were found referenced via ContentBlockByX; if set, method only gets keys and runs no updates
      * @returns {Promise.<Set.<string>>} found asset keys
      */
-    static getCbReferenceKeys(selectedTypes: TypeKeyCombo, retrieveDir: string, findAssetKeys: Set<string>): Promise<Set<string>>;
+    static getCbReferenceKeys(keyArr: string[], retrieveDir: string, findAssetKeys: Set<string>): Promise<Set<string>>;
     /**
      * @param {object} slots metadata.views.html.slots or deeper slots.<>.blocks.<>.slots
      * @param {string[]} dependentKeyArr list of found keys
