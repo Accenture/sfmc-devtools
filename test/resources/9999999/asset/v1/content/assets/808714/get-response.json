@@ -59,7 +59,7 @@
         },
         "preheader": {
             "thumbnail": {},
-            "content": "%%= ContentBlockByKey(\"mcdev-issue-1157\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByKey(\"mcdev-issue-1157\");</script>%%= ContentBlockById(1295064) =%% <script runat=\"server\">\nPlatform.Function.ContentBlockById(1295064);</script>%%= ContentBlockByName(\"Content Builder\\dont strip non ssjs content\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByName(\"Content Builder\\\\dont strip non ssjs content\");</script>",
+            "content": "%%= ContentBlockByKey(\"mcdev-issue-1157\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByKey(\"mcdev-issue-1157\");</script>%%= ContentBlockById(1295065) =%% <script runat=\"server\">\nPlatform.Function.ContentBlockById(1295064);</script>%%= ContentBlockByName(\"Content Builder\\dont strip non ssjs content\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByName(\"Content Builder\\\\dont strip non ssjs content\");</script>",
             "availableViews": [],
             "data": {
                 "email": {

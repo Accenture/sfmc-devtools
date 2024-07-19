@@ -156,15 +156,15 @@ describe('type: asset', () => {
                 retrieve['testInstance/testBU'].asset
                     ? Object.keys(retrieve['testInstance/testBU'].asset).length
                     : 0,
-                5,
-                'only 5 assets expected in retrieve response'
+                8,
+                'Unexpected number of assets in retrieve response'
             );
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                5,
-                'only 5 assets expected in cache'
+                8,
+                'Unexpected number of assets in cache'
             );
 
             assert.deepEqual(
@@ -216,7 +216,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                18,
+                21,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -342,7 +342,7 @@ describe('type: asset', () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['asset']);
 
-            const expectedApiCallsRetrieve = 18;
+            const expectedApiCallsRetrieve = 21;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 expectedApiCallsRetrieve,
@@ -468,7 +468,7 @@ describe('type: asset', () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['asset']);
 
-            const expectedApiCallsRetrieve = 18;
+            const expectedApiCallsRetrieve = 21;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 expectedApiCallsRetrieve,
@@ -487,8 +487,8 @@ describe('type: asset', () => {
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
                 templatedItems.asset ? templatedItems.asset.length : 0,
-                3,
-                'only 3 asset expected'
+                5,
+                'Unexpted number of assets templated'
             );
             assert.deepEqual(
                 templatedItems.asset.map((item) => item.customerKey),
@@ -496,6 +496,8 @@ describe('type: asset', () => {
                     '{{{prefix}}}asset_templatebasedemail',
                     '{{{prefix}}}asset_template',
                     'mcdev-issue-1157',
+                    '{{{prefix}}}htmlblock1',
+                    '{{{prefix}}}htmlblock2',
                 ],
                 'expected specific assets to be templated'
             );
@@ -560,7 +562,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
-                0,
+                4,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -660,15 +662,15 @@ describe('type: asset', () => {
             // retrieve result
             assert.deepEqual(
                 replace['testInstance/testBU'].asset,
-                ['testExisting_asset_message'],
+                ['mcdev-issue-1157', 'testExisting_htmlblock1', 'testExisting_asset_message'],
                 'should have found the right assets that need updating'
             );
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                5,
-                'only 5 assets expected'
+                8,
+                'Unexpected number of assets in cache'
             );
             // check if conversions happened
             expect(
@@ -722,7 +724,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                20,
+                23,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -751,8 +753,8 @@ describe('type: asset', () => {
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                5,
-                'only 5 assets expected'
+                8,
+                'Unexpected number of assets in cache'
             );
             // check if conversions happened
             expect(
@@ -806,7 +808,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                20,
+                23,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -828,15 +830,15 @@ describe('type: asset', () => {
             // retrieve result
             assert.deepEqual(
                 replace['testInstance/testBU'].asset,
-                ['testExisting_asset_message'],
+                ['mcdev-issue-1157', 'testExisting_htmlblock1', 'testExisting_asset_message'],
                 'should have found the right assets that need updating'
             );
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                5,
-                'only 5 assets expected'
+                8,
+                'Unexpected number of assets in cache'
             );
             // check if conversions happened
             expect(
@@ -890,7 +892,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                20,
+                23,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
