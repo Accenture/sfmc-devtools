@@ -800,15 +800,7 @@ describe('GENERAL', () => {
             });
 
             it('buildTemplate + buildDefinition for multiple types with keys and --retrieve', async () => {
-                // download first before we test buildTemplate
-                // await handler.retrieve('testInstance/testBU', ['automation', 'query']);
-
                 const expectedApiCallsRetrieve = 28;
-                // assert.equal(
-                //     testUtils.getAPIHistoryLength(),
-                //     expectedApiCallsRetrieve,
-                //     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-                // );
 
                 // preparation
                 const argvMetadata = [
@@ -1041,15 +1033,7 @@ describe('GENERAL', () => {
             });
 
             it('buildTemplate + buildDefinition for multiple types with keys and --dependencies and --retrieve', async () => {
-                // download first before we test buildTemplate
-                // await handler.retrieve('testInstance/testBU');
-
                 const expectedApiCallsRetrieve = 78;
-                // assert.equal(
-                //     testUtils.getAPIHistoryLength(),
-                //     expectedApiCallsRetrieve,
-                //     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-                // );
 
                 // preparation
                 const argvMetadata = [
@@ -1567,15 +1551,7 @@ describe('GENERAL', () => {
             });
 
             it('build multiple type with keys and --dependencies and --retrieve', async () => {
-                // download everything before we test buildTemplate
-                // await handler.retrieve('testInstance/testBU');
-
                 const expectedApiCallsRetrieve = 78;
-                // assert.equal(
-                //     testUtils.getAPIHistoryLength(),
-                //     expectedApiCallsRetrieve,
-                //     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-                // );
 
                 // preparation
                 const argvMetadata = [
