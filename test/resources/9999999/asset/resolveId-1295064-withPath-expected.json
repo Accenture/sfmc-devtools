@@ -1,8 +1,8 @@
 {
     "folder": "Content Builder",
     "isShared": false,
-    "key": "mcdev-issue-1157",
+    "key": "testExisting_asset_htmlblock",
     "mid": 9999999,
-    "name": "mcdev-issue-1157-Mcdev-strips-content",
-    "path": "./retrieve/testInstance/testBU/asset/block/mcdev-issue-1157.asset-block-meta.html"
+    "name": "testExisting_asset_htmlblock-Mcdev-strips-content",
+    "path": "./retrieve/testInstance/testBU/asset/block/testExisting_asset_htmlblock.asset-block-meta.html"
 }

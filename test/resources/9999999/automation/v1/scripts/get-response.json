@@ -48,7 +48,7 @@
             "name": "testExisting_script_mixed",
             "key": "testExisting_script_mixed",
             "description": "",
-            "script": " <script runat=\"server\">//dummy\n</script>line1 %%[ SET @test='bla bla' ]%% line2 %%= ContentBlockByKey(\"mcdev-issue-1157\") =%% still line2;\n collapsed to line2 because it's assumed HTML\n<script runat=\"server\">\nPlatform.Function.ContentBlockByKey(\"mcdev-issue-1157\");</script>",
+            "script": " <script runat=\"server\">//dummy\n</script>line1 %%[ SET @test='bla bla' ]%% line2 %%= ContentBlockByKey(\"testExisting_asset_htmlblock\") =%% still line2;\n collapsed to line2 because it's assumed HTML\n<script runat=\"server\">\nPlatform.Function.ContentBlockByKey(\"testExisting_asset_htmlblock\");</script>",
             "categoryId": 304,
             "createdDate": "2022-10-20T00:41:26.163",
             "modifiedDate": "2022-10-20T00:41:26.163"

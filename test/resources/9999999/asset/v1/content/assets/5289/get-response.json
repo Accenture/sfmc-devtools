@@ -142,7 +142,7 @@
                     "blocks": {
                         "hy6ik0ftsb4": {
                             "id": 1295064,
-                            "customerKey": "mcdev-issue-1157",
+                            "customerKey": "testExisting_asset_htmlblock",
                             "objectID": "972974ed-dc44-4df2-ab6e-53bae9070339",
                             "assetType": {
                                 "id": 197,
@@ -150,9 +150,9 @@
                                 "displayName": "HTML Block"
                             },
                             "fileProperties": {
-                                "fileName": "mcdev-issue-1157-Mcdev-strips-content"
+                                "fileName": "testExisting_asset_htmlblock-Mcdev-strips-content"
                             },
-                            "name": "mcdev-issue-1157-Mcdev-strips-content",
+                            "name": "testExisting_asset_htmlblock-Mcdev-strips-content",
                             "owner": {
                                 "id": 700301950,
                                 "email": "joern.berkefeld@accenture.com",

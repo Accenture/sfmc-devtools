@@ -192,7 +192,7 @@ describe('type: triggeredSend', () => {
             );
             assert.deepEqual(
                 templatedItems.asset.map((item) => item.customerKey),
-                ['mcdev-issue-1157', '{{{prefix}}}htmlblock1', '{{{prefix}}}htmlblock2'],
+                ['{{{prefix}}}asset_htmlblock', '{{{prefix}}}htmlblock1', '{{{prefix}}}htmlblock2'],
                 'expected specific assets to be templated'
             );
         });

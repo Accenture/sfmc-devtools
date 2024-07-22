@@ -6,7 +6,7 @@
     "items": [
         {
             "id": 1295064,
-            "customerKey": "mcdev-issue-1157",
+            "customerKey": "testExisting_asset_htmlblock",
             "assetType": {
                 "id": 197,
                 "name": "htmlblock",

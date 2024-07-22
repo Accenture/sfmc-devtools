@@ -168,12 +168,23 @@ describe('type: asset', () => {
             );
 
             assert.deepEqual(
-                await getActualJson('mcdev-issue-1157', 'asset', 'block'),
-                await testUtils.getExpectedJson('9999999', 'asset', 'block-1157-retrieve'),
+                await getActualJson('testExisting_asset_htmlblock', 'asset', 'block'),
+                await testUtils.getExpectedJson(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_htmlblock-retrieve'
+                ),
                 'returned metadata was not equal expected'
             );
-            expect(await getActualFile('mcdev-issue-1157', 'asset', 'block', 'html')).to.equal(
-                await testUtils.getExpectedFile('9999999', 'asset', 'block-1157-retrieve', 'html')
+            expect(
+                await getActualFile('testExisting_asset_htmlblock', 'asset', 'block', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_htmlblock-retrieve',
+                    'html'
+                )
             );
 
             assert.deepEqual(
@@ -353,16 +364,18 @@ describe('type: asset', () => {
             const result = await handler.buildTemplate(
                 'testInstance/testBU',
                 'asset',
-                ['testExisting_asset_templatebasedemail'],
+                ['testExisting_asset_templatebasedemail', 'testExisting_asset_htmlblock'],
                 'testSourceMarket'
             );
             // WHEN
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                1,
-                'only one asset expected'
+                2,
+                'unexpected number of assets templated'
             );
+
+            // testExisting_asset_templatebasedemail
             assert.deepEqual(
                 await getActualTemplateJson(
                     'testExisting_asset_templatebasedemail',
@@ -372,7 +385,6 @@ describe('type: asset', () => {
                 await testUtils.getExpectedJson('9999999', 'asset', 'template-templatebasedemail'),
                 'returned template JSON of buildTemplate was not equal expected'
             );
-
             expect(
                 await getActualTemplateFile(
                     'testExisting_asset_templatebasedemail',
@@ -405,15 +417,21 @@ describe('type: asset', () => {
                     'amp'
                 )
             );
-            // THEN
-            await handler.buildDefinition(
+
+            const definitions = await handler.buildDefinition(
                 'testInstance/testBU',
                 'asset',
-                ['testExisting_asset_templatebasedemail'],
+                ['testExisting_asset_templatebasedemail', 'testExisting_asset_htmlblock'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
+            assert.equal(
+                definitions.asset ? Object.keys(definitions.asset).length : 0,
+                2,
+                'unexpected number of assets templated'
+            );
 
+            // testTemplated_asset_templatebasedemail
             assert.deepEqual(
                 await getActualDeployJson(
                     'testTemplated_asset_templatebasedemail',
@@ -456,6 +474,18 @@ describe('type: asset', () => {
                 )
             );
 
+            // testTemplated_asset_htmlblock
+            assert.deepEqual(
+                await getActualDeployJson('testTemplated_asset_htmlblock', 'asset', 'block'),
+                await testUtils.getExpectedJson('9999999', 'asset', 'build-asset_htmlblock'),
+                'returned deployment JSON was not equal expected'
+            );
+            expect(
+                await getActualDeployFile('testTemplated_asset_htmlblock', 'asset', 'block', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile('9999999', 'asset', 'build-asset_htmlblock', 'html')
+            );
+
             assert.equal(
                 testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
                 0,
@@ -495,7 +525,7 @@ describe('type: asset', () => {
                 [
                     '{{{prefix}}}asset_templatebasedemail',
                     '{{{prefix}}}asset_template',
-                    'mcdev-issue-1157',
+                    '{{{prefix}}}asset_htmlblock',
                     '{{{prefix}}}htmlblock1',
                     '{{{prefix}}}htmlblock2',
                 ],
@@ -553,10 +583,14 @@ describe('type: asset', () => {
                 'returned template JSON of buildTemplate was not equal expected'
             );
 
-            // mcdev-issue-1157
+            // testExisting_asset_htmlblock
             assert.deepEqual(
-                await getActualTemplateJson('mcdev-issue-1157', 'asset', 'block'),
-                await testUtils.getExpectedJson('9999999', 'asset', 'template-mcdev-issue-1157'),
+                await getActualTemplateJson('testExisting_asset_htmlblock', 'asset', 'block'),
+                await testUtils.getExpectedJson(
+                    '9999999',
+                    'asset',
+                    'template-testExisting_asset_htmlblock'
+                ),
                 'returned template JSON of buildTemplate was not equal expected'
             );
 
@@ -613,7 +647,11 @@ describe('type: asset', () => {
 
         it('Should resolve the id of the item AND find the asset locally', async () => {
             // prep test by retrieving the file
-            await handler.retrieve('testInstance/testBU', ['asset-block'], ['mcdev-issue-1157']);
+            await handler.retrieve(
+                'testInstance/testBU',
+                ['asset-block'],
+                ['testExisting_asset_htmlblock']
+            );
             // WHEN
             const resolveIdJson = await handler.resolveId(
                 'testInstance/testBU',
@@ -662,7 +700,11 @@ describe('type: asset', () => {
             // retrieve result
             assert.deepEqual(
                 replace['testInstance/testBU'].asset,
-                ['mcdev-issue-1157', 'testExisting_htmlblock1', 'testExisting_asset_message'],
+                [
+                    'testExisting_asset_htmlblock',
+                    'testExisting_htmlblock1',
+                    'testExisting_asset_message',
+                ],
                 'should have found the right assets that need updating'
             );
             // get results from cache
@@ -830,7 +872,11 @@ describe('type: asset', () => {
             // retrieve result
             assert.deepEqual(
                 replace['testInstance/testBU'].asset,
-                ['mcdev-issue-1157', 'testExisting_htmlblock1', 'testExisting_asset_message'],
+                [
+                    'testExisting_asset_htmlblock',
+                    'testExisting_htmlblock1',
+                    'testExisting_asset_message',
+                ],
                 'should have found the right assets that need updating'
             );
             // get results from cache

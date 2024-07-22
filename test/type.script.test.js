@@ -411,7 +411,7 @@ describe('type: script', () => {
             );
             assert.deepEqual(
                 templatedItems.asset.map((item) => item.customerKey),
-                ['{{{prefix}}}htmlblock1', 'mcdev-issue-1157', '{{{prefix}}}htmlblock2'],
+                ['{{{prefix}}}htmlblock1', '{{{prefix}}}asset_htmlblock', '{{{prefix}}}htmlblock2'],
                 'expected specific assets to be templated'
             );
         });

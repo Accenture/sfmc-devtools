@@ -66,7 +66,7 @@
                 <Name>testExisting_senderProfile_rcb</Name>
                 <Description>Send from joern.berkefeld@accenture.com</Description>
                 <FromName>%%= ContentBlockByName("Content Builder\dont strip non ssjs content") =%%</FromName>
-                <FromAddress>%%= ContentBlockByKey("mcdev-issue-1157") =%%</FromAddress>
+                <FromAddress>%%= ContentBlockByKey("testExisting_asset_htmlblock") =%%</FromAddress>
                 <UseDefaultRMMRules>true</UseDefaultRMMRules>
                 <AutoForwardToEmailAddress>%%= ContentBlockById(1295064) =%%</AutoForwardToEmailAddress>
                 <AutoForwardToName>%%= ContentBlockById(1295064) =%%</AutoForwardToName>

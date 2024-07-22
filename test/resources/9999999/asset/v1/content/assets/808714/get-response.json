@@ -59,7 +59,7 @@
         },
         "preheader": {
             "thumbnail": {},
-            "content": "%%= ContentBlockByKey(\"mcdev-issue-1157\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByKey(\"mcdev-issue-1157\");</script>%%= ContentBlockById(1295065) =%% <script runat=\"server\">\nPlatform.Function.ContentBlockById(1295064);</script>%%= ContentBlockByName(\"Content Builder\\dont strip non ssjs content\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByName(\"Content Builder\\\\dont strip non ssjs content\");</script>",
+            "content": "%%= ContentBlockByKey(\"testExisting_asset_htmlblock\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByKey(\"testExisting_asset_htmlblock\");</script>%%= ContentBlockById(1295065) =%% <script runat=\"server\">\nPlatform.Function.ContentBlockById(1295064);</script>%%= ContentBlockByName(\"Content Builder\\dont strip non ssjs content\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByName(\"Content Builder\\\\dont strip non ssjs content\");</script>",
             "availableViews": [],
             "data": {
                 "email": {
@@ -72,7 +72,7 @@
         },
         "html": {
             "thumbnail": {},
-            "content": "<a href=\"%%ftaf_url%%\"\n    ><img\n        src=\"https://www.exacttarget.com/members/newsletters/gfx/forwardafriendicon.gif\"\n        border=\"0\" /></a\n><a href=\"%%profile_center_url%%\" alias=\"Update Profile\">Update Profile</a>\n<table cellpadding=\"2\" cellspacing=\"0\" width=\"600\" id=\"Table5\" border=\"0\">\n    <tr>\n        <td>\n            <font face=\"verdana\" size=\"1\" color=\"#444444\"\n                >This email was sent by: <b>%%Member_Busname%%</b><br />%%Member_Addr%%\n                %%Member_City%%, %%Member_State%%, %%Member_PostalCode%%, %%Member_Country%%<br /><br\n            /></font>\n        </td>\n    </tr>\n</table>\n<a href=\"%%subscription_center_url%%\" alias=\"Manage Subscriptions\">Manage Subscriptions</a\n><img src=\"https://www.exacttarget.com/images/Powered_By_1206.jpg\" border=\"0\" /><custom\n    name=\"opencounter\"\n    type=\"tracking\"\n/>\n%%= ContentBlockByKey(\"mcdev-issue-1157\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByKey(\"mcdev-issue-1157\");</script>%%= ContentBlockById(1295064) =%% <script runat=\"server\">\nPlatform.Function.ContentBlockById(1295064);</script>%%= ContentBlockByName(\"Content Builder\\dont strip non ssjs content\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByName(\"Content Builder\\\\dont strip non ssjs content\");</script>",
+            "content": "<a href=\"%%ftaf_url%%\"\n    ><img\n        src=\"https://www.exacttarget.com/members/newsletters/gfx/forwardafriendicon.gif\"\n        border=\"0\" /></a\n><a href=\"%%profile_center_url%%\" alias=\"Update Profile\">Update Profile</a>\n<table cellpadding=\"2\" cellspacing=\"0\" width=\"600\" id=\"Table5\" border=\"0\">\n    <tr>\n        <td>\n            <font face=\"verdana\" size=\"1\" color=\"#444444\"\n                >This email was sent by: <b>%%Member_Busname%%</b><br />%%Member_Addr%%\n                %%Member_City%%, %%Member_State%%, %%Member_PostalCode%%, %%Member_Country%%<br /><br\n            /></font>\n        </td>\n    </tr>\n</table>\n<a href=\"%%subscription_center_url%%\" alias=\"Manage Subscriptions\">Manage Subscriptions</a\n><img src=\"https://www.exacttarget.com/images/Powered_By_1206.jpg\" border=\"0\" /><custom\n    name=\"opencounter\"\n    type=\"tracking\"\n/>\n%%= ContentBlockByKey(\"testExisting_asset_htmlblock\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByKey(\"testExisting_asset_htmlblock\");</script>%%= ContentBlockById(1295064) =%% <script runat=\"server\">\nPlatform.Function.ContentBlockById(1295064);</script>%%= ContentBlockByName(\"Content Builder\\dont strip non ssjs content\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByName(\"Content Builder\\\\dont strip non ssjs content\");</script>",
             "availableViews": [],
             "data": {
                 "email": {
@@ -85,7 +85,7 @@
         },
         "text": {
             "thumbnail": {},
-            "content": "%%= ContentBlockByKey(\"mcdev-issue-1157\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByKey(\"mcdev-issue-1157\");</script>%%= ContentBlockById(1295064) =%% <script runat=\"server\">\nPlatform.Function.ContentBlockById(1295064);</script>%%= ContentBlockByName(\"Content Builder\\dont strip non ssjs content\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByName(\"Content Builder\\\\dont strip non ssjs content\");</script>",
+            "content": "%%= ContentBlockByKey(\"testExisting_asset_htmlblock\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByKey(\"testExisting_asset_htmlblock\");</script>%%= ContentBlockById(1295064) =%% <script runat=\"server\">\nPlatform.Function.ContentBlockById(1295064);</script>%%= ContentBlockByName(\"Content Builder\\dont strip non ssjs content\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByName(\"Content Builder\\\\dont strip non ssjs content\");</script>",
             "availableViews": [],
             "data": {
                 "email": {
