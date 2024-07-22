@@ -94,7 +94,7 @@
                     <CustomerKey>testExisting_senderProfile_rcb</CustomerKey>
                 </SenderProfile>
                 <FromName>%%= ContentBlockByName("Content Builder\dont strip non ssjs content") =%%</FromName>
-                <FromAddress>%%= ContentBlockByKey("mcdev-issue-1157") =%%</FromAddress>
+                <FromAddress>%%= ContentBlockByKey("testExisting_asset_htmlblock") =%%</FromAddress>
                 <SuppressTracking>false</SuppressTracking>
                 <TriggeredSendType>Continuous</TriggeredSendType>
                 <TriggeredSendStatus>New</TriggeredSendStatus>

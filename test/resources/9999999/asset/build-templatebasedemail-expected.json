@@ -64,7 +64,7 @@
                     "availableViews": [],
                     "blocks": {
                         "hy6ik0ftsb4": {
-                            "r__asset_key": "mcdev-issue-1157",
+                            "r__asset_key": "testTemplated_asset_htmlblock",
                             "r__folder_Path": "Content Builder",
                             "assetType": {
                                 "id": 197,
@@ -72,9 +72,9 @@
                                 "displayName": "HTML Block"
                             },
                             "fileProperties": {
-                                "fileName": "mcdev-issue-1157-Mcdev-strips-content"
+                                "fileName": "testTemplated_asset_htmlblock-Mcdev-strips-content"
                             },
-                            "name": "mcdev-issue-1157-Mcdev-strips-content",
+                            "name": "testTemplated_asset_htmlblock-Mcdev-strips-content",
                             "owner": {
                                 "id": 700301950,
                                 "email": "joern.berkefeld@accenture.com",

@@ -5,10 +5,10 @@
     },
     "availableViews": [],
     "createdBy": {},
-    "customerKey": "mcdev-issue-1157",
+    "customerKey": "{{{prefix}}}asset_htmlblock",
     "design": "",
     "fileProperties": {
-        "fileName": "mcdev-issue-1157-Mcdev-strips-content"
+        "fileName": "{{{prefix}}}asset_htmlblock-Mcdev-strips-content"
     },
     "memberId": "{{{mid}}}",
     "meta": {
@@ -21,7 +21,7 @@
     },
     "modelVersion": 2,
     "modifiedBy": {},
-    "name": "mcdev-issue-1157-Mcdev-strips-content",
+    "name": "{{{prefix}}}asset_htmlblock-Mcdev-strips-content",
     "r__folder_Path": "Content Builder",
     "status": {
         "name": "Draft"

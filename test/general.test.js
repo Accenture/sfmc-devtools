@@ -181,7 +181,11 @@ describe('GENERAL', () => {
                 // retrieve result
                 assert.deepEqual(
                     replace['testInstance/testBU'].asset,
-                    ['mcdev-issue-1157', 'testExisting_htmlblock1', 'testExisting_asset_message'],
+                    [
+                        'testExisting_asset_htmlblock',
+                        'testExisting_htmlblock1',
+                        'testExisting_asset_message',
+                    ],
                     'should have found the right assets that need updating'
                 );
                 assert.deepEqual(
@@ -307,7 +311,11 @@ describe('GENERAL', () => {
                 // retrieve result
                 assert.deepEqual(
                     replace['testInstance/testBU'].asset,
-                    ['mcdev-issue-1157', 'testExisting_htmlblock1', 'testExisting_asset_message'],
+                    [
+                        'testExisting_asset_htmlblock',
+                        'testExisting_htmlblock1',
+                        'testExisting_asset_message',
+                    ],
                     'should have found the right assets that need updating'
                 );
                 assert.deepEqual(
