@@ -215,9 +215,10 @@ export namespace Util {
      * helper to print the subtypes we filtered by
      *
      * @param {string[]} subTypeArr list of subtypes to be printed
+     * @param {string} [indent] optional prefix of spaces to be added to the log message
      * @returns {void}
      */
-    function logSubtypes(subTypeArr: string[]): void;
+    function logSubtypes(subTypeArr: string[], indent?: string): void;
     /**
      * helper to print the subtypes we filtered by
      *
