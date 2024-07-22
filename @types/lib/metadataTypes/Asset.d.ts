@@ -472,7 +472,10 @@ declare namespace Asset {
                 template: boolean;
             };
             businessUnitAvailability: {
-                skipValidation: boolean;
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
             };
             category: {
                 isCreateable: boolean;

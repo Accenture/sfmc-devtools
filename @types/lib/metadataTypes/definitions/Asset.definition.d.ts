@@ -77,7 +77,10 @@ declare namespace _default {
             template: boolean;
         };
         businessUnitAvailability: {
-            skipValidation: boolean;
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
         };
         category: {
             isCreateable: boolean;
