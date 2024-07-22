@@ -364,16 +364,18 @@ describe('type: asset', () => {
             const result = await handler.buildTemplate(
                 'testInstance/testBU',
                 'asset',
-                ['testExisting_asset_templatebasedemail'],
+                ['testExisting_asset_templatebasedemail', 'testExisting_asset_htmlblock'],
                 'testSourceMarket'
             );
             // WHEN
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                1,
-                'only one asset expected'
+                2,
+                'unexpected number of assets templated'
             );
+
+            // testExisting_asset_templatebasedemail
             assert.deepEqual(
                 await getActualTemplateJson(
                     'testExisting_asset_templatebasedemail',
@@ -383,8 +385,6 @@ describe('type: asset', () => {
                 await testUtils.getExpectedJson('9999999', 'asset', 'template-templatebasedemail'),
                 'returned template JSON of buildTemplate was not equal expected'
             );
-
-            // testExisting_asset_templatebasedemail
             expect(
                 await getActualTemplateFile(
                     'testExisting_asset_templatebasedemail',
@@ -417,16 +417,21 @@ describe('type: asset', () => {
                     'amp'
                 )
             );
-            // THEN
-            await handler.buildDefinition(
+
+            const definitions = await handler.buildDefinition(
                 'testInstance/testBU',
                 'asset',
-                ['testExisting_asset_templatebasedemail'],
+                ['testExisting_asset_templatebasedemail', 'testExisting_asset_htmlblock'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
+            assert.equal(
+                definitions.asset ? Object.keys(definitions.asset).length : 0,
+                2,
+                'unexpected number of assets templated'
+            );
 
-            // testExisting_asset_templatebasedemail > testTemplated_asset_templatebasedemail
+            // testTemplated_asset_templatebasedemail
             assert.deepEqual(
                 await getActualDeployJson(
                     'testTemplated_asset_templatebasedemail',
@@ -467,6 +472,18 @@ describe('type: asset', () => {
                     'build-templatebasedemail-preheader',
                     'amp'
                 )
+            );
+
+            // testTemplated_asset_htmlblock
+            assert.deepEqual(
+                await getActualDeployJson('testTemplated_asset_htmlblock', 'asset', 'block'),
+                await testUtils.getExpectedJson('9999999', 'asset', 'build-asset_htmlblock'),
+                'returned deployment JSON was not equal expected'
+            );
+            expect(
+                await getActualDeployFile('testTemplated_asset_htmlblock', 'asset', 'block', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile('9999999', 'asset', 'build-asset_htmlblock', 'html')
             );
 
             assert.equal(
