@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:00106553-ac00-4e72-b387-42325fe6f93d</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:a1dd2a9d-b696-480e-9a1b-265f262a8997</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-d82724f8-afc2-4461-8e3e-190aeb6d9625">
+                <wsu:Created>2024-01-08T14:30:39Z</wsu:Created>
+                <wsu:Expires>2024-01-08T14:35:39Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>6596087d-d12f-4c9d-9353-783fe01775a3</RequestID>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-22T11:52:35.687</CreatedDate>
+                <ModifiedDate>2016-07-22T11:52:35.687</ModifiedDate>
+                <ID>89397</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey />
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Content Builder</Name>
+                <Description>The root folder for assets</Description>
+                <ContentType>asset</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-29T12:13:07.7</CreatedDate>
+                <ModifiedDate>2021-12-16T02:56:14.68</ModifiedDate>
+                <ID>90888</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey />
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>89397</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Test Folder</Name>
+                <Description />
+                <ContentType>asset</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>true</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2017-01-24T06:32:42.353</CreatedDate>
+                <ModifiedDate>2017-01-24T06:32:42.353</ModifiedDate>
+                <ID>304</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>SSJSActivity_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Scripts</Name>
+                <Description />
+                <ContentType>SSJSActivity</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>

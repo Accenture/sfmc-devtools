@@ -61,7 +61,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    38,
+                    36,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -110,7 +110,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    38,
+                    36,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -159,7 +159,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    38,
+                    36,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -226,7 +226,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    88,
+                    83,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -287,7 +287,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    88,
+                    83,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -348,7 +348,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    88,
+                    83,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -695,7 +695,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU', ['automation', 'query']);
 
-                const expectedApiCallsRetrieve = 25;
+                const expectedApiCallsRetrieve = 24;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -800,15 +800,7 @@ describe('GENERAL', () => {
             });
 
             it('buildTemplate + buildDefinition for multiple types with keys and --retrieve', async () => {
-                // download first before we test buildTemplate
-                // await handler.retrieve('testInstance/testBU', ['automation', 'query']);
-
-                const expectedApiCallsRetrieve = 28;
-                // assert.equal(
-                //     testUtils.getAPIHistoryLength(),
-                //     expectedApiCallsRetrieve,
-                //     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-                // );
+                const expectedApiCallsRetrieve = 27;
 
                 // preparation
                 const argvMetadata = [
@@ -1041,15 +1033,7 @@ describe('GENERAL', () => {
             });
 
             it('buildTemplate + buildDefinition for multiple types with keys and --dependencies and --retrieve', async () => {
-                // download first before we test buildTemplate
-                // await handler.retrieve('testInstance/testBU');
-
                 const expectedApiCallsRetrieve = 78;
-                // assert.equal(
-                //     testUtils.getAPIHistoryLength(),
-                //     expectedApiCallsRetrieve,
-                //     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-                // );
 
                 // preparation
                 const argvMetadata = [
@@ -1174,7 +1158,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU', ['automation', 'query']);
 
-                const expectedApiCallsRetrieve = 25;
+                const expectedApiCallsRetrieve = 24;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1366,7 +1350,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU', ['automation', 'query']);
 
-                const expectedApiCallsRetrieve = 25;
+                const expectedApiCallsRetrieve = 24;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1567,15 +1551,7 @@ describe('GENERAL', () => {
             });
 
             it('build multiple type with keys and --dependencies and --retrieve', async () => {
-                // download everything before we test buildTemplate
-                // await handler.retrieve('testInstance/testBU');
-
                 const expectedApiCallsRetrieve = 78;
-                // assert.equal(
-                //     testUtils.getAPIHistoryLength(),
-                //     expectedApiCallsRetrieve,
-                //     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-                // );
 
                 // preparation
                 const argvMetadata = [
@@ -1682,7 +1658,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU', ['automation', 'query']);
 
-                const expectedApiCallsRetrieve = 25;
+                const expectedApiCallsRetrieve = 24;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -2308,7 +2284,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    9,
+                    8,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
