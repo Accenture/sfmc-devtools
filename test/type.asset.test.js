@@ -229,6 +229,7 @@ describe('type: asset', () => {
         });
 
         it('Should create an asset with mis-matching memberId, automatically adding the MID suffix', async () => {
+            handler.setOptions({ autoMidSuffix: true });
             // WHEN
             const deployResult = await handler.deploy(
                 'testInstance/testBU',
@@ -250,7 +251,7 @@ describe('type: asset', () => {
             assert.equal(
                 upsertCallout?.customerKey,
                 'testNew_asset-9999999',
-                'customerKey should be testNew_asset-9999999 due to automatic MID suffix'
+                'customerKey should be testNew_asset-9999999 due to --autoMidSuffix'
             );
 
             // insert
@@ -268,8 +269,8 @@ describe('type: asset', () => {
             return;
         });
 
-        it('Should create an assetwith mis-matching memberId, --noMidSuffix and --keySuffix', async () => {
-            handler.setOptions({ keySuffix: '_DEV', noMidSuffix: true });
+        it('Should create an assetwith mis-matching memberId and --keySuffix', async () => {
+            handler.setOptions({ keySuffix: '_DEV' });
             // WHEN
             const deployResult = await handler.deploy(
                 'testInstance/testBU',
@@ -291,7 +292,7 @@ describe('type: asset', () => {
             assert.equal(
                 upsertCallout?.customerKey,
                 'testNew_asset_DEV',
-                'customerKey should be testNew_asset_DEV due to noMidSuffix and keySuffix'
+                'customerKey should be testNew_asset_DEV due to --keySuffix'
             );
 
             assert.equal(
@@ -302,8 +303,7 @@ describe('type: asset', () => {
             return;
         });
 
-        it('Should create an assetwith mis-matching memberId, --noMidSuffix', async () => {
-            handler.setOptions({ noMidSuffix: true });
+        it('Should create an assetwith mis-matching memberId', async () => {
             // WHEN
             const deployResult = await handler.deploy(
                 'testInstance/testBU',
@@ -325,7 +325,7 @@ describe('type: asset', () => {
             assert.equal(
                 upsertCallout?.customerKey,
                 'testNew_asset',
-                'customerKey should be testNew_asset due to noMidSuffix'
+                'customerKey should be testNew_asset'
             );
 
             assert.equal(
