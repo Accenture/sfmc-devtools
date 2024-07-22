@@ -8,6 +8,7 @@ NEWHEAD= "HEAD"
 # OLDHEAD= $LAST_COMMIT_ID
 # extract all paths to package-lock.json files
 PACKAGE_LOCK_REGEX="(^package-lock\.json)"
+echo "[POST-MERGE] running git diff --name-only $LAST_COMMIT_ID $NEWHEAD"
 PACKAGES=$(git diff --name-only $LAST_COMMIT_ID $NEWHEAD | grep -E $PACKAGE_LOCK_REGEX || true)
 
 if [[ ${PACKAGES[@]} ]]; then
