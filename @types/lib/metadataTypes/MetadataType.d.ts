@@ -16,6 +16,7 @@ export type SDK = import("sfmc-sdk").default;
 export type SDKError = import("../../types/mcdev.d.js").SDKError;
 export type SOAPError = import("../../types/mcdev.d.js").SOAPError;
 export type RestError = import("../../types/mcdev.d.js").RestError;
+export type ContentBlockConversionTypes = import("../../types/mcdev.d.js").ContentBlockConversionTypes;
 /**
  * MetadataType class that gets extended by their specific metadata type class.
  * Provides default functionality that can be overwritten by child metadata type classes
@@ -25,7 +26,7 @@ declare class MetadataType {
     /**
      * Returns file contents mapped to their filename without '.json' ending
      *
-     * @param {string} dir directory that contains '.json' files to be read
+     * @param {string} dir directory with json files, e.g. /retrieve/cred/bu/event, /deploy/cred/bu/event, /template/event
      * @param {boolean} [listBadKeys] do not print errors, used for badKeys()
      * @param {string[]} [selectedSubType] asset, message, ...
      * @returns {Promise.<MetadataTypeMap>} fileName => fileContent map
@@ -197,21 +198,31 @@ declare class MetadataType {
      */
     static refresh(): void;
     /**
+     *
+     * @param {string[]} keyArr limit retrieval to given metadata type
+     * @param {string} retrieveDir retrieve dir including cred and bu
+     * @param {Set.<string>} [findAssetKeys] list of keys that were found referenced via ContentBlockByX; if set, method only gets keys and runs no updates
+     * @returns {Promise.<Set.<string>>} found asset keys
+     */
+    static getCbReferenceKeys(keyArr: string[], retrieveDir: string, findAssetKeys?: Set<string>): Promise<Set<string>>;
+    /**
      * this iterates over all items found in the retrieve folder and executes the type-specific method for replacing references
      *
      * @param {MetadataTypeMap} metadataMap list of metadata (keyField => metadata)
      * @param {string} retrieveDir retrieve dir including cred and bu
+     * @param {Set.<string>} [findAssetKeys] list of keys that were found referenced via ContentBlockByX; if set, method only gets keys and runs no updates
      * @returns {Promise.<string[]>} Returns list of keys for which references were replaced
      */
-    static replaceCbReferenceLoop(metadataMap: MetadataTypeMap, retrieveDir: string): Promise<string[]>;
+    static replaceCbReferenceLoop(metadataMap: MetadataTypeMap, retrieveDir: string, findAssetKeys?: Set<string>): Promise<string[]>;
     /**
      * Abstract execute method that needs to be implemented in child metadata type
      *
      * @param {MetadataTypeItem} item single metadata item
      * @param {string} [retrieveDir] directory where metadata is saved
+     * @param {Set.<string>} [findAssetKeys] list of keys that were found referenced via ContentBlockByX; if set, method only gets keys and runs no updates
      * @returns {Promise.<MetadataTypeItem | CodeExtractItem>} key of the item that was updated
      */
-    static replaceCbReference(item: MetadataTypeItem, retrieveDir?: string): Promise<MetadataTypeItem | CodeExtractItem>;
+    static replaceCbReference(item: MetadataTypeItem, retrieveDir?: string, findAssetKeys?: Set<string>): Promise<MetadataTypeItem | CodeExtractItem>;
     /**
      * Abstract execute method that needs to be implemented in child metadata type
      *

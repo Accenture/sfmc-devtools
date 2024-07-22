@@ -294,14 +294,13 @@ declare class Asset extends MetadataType {
      */
     static _extractCode_slots(prefix: string, metadataSlots: object, codeArr: object[]): void;
     /**
-     * Returns file contents mapped to their fileName without '.json' ending
+     * helper for {@link Asset.getJsonFromFS} that reads the file system for metadata files
      *
-     * @param {string} dir directory that contains '.json' files to be read
-     * @param {boolean} _ unused parameter
-     * @param {string[]} selectedSubType asset, message, ...
-     * @returns {Promise.<MetadataTypeMap>} fileName => fileContent map
+     * @param {string} currentdir directory to scan
+     * @param {string} subtype single subtype of asset
+     * @param {MetadataTypeMap} fileName2FileContent fileName => fileContent map
      */
-    static getJsonFromFS(dir: string, _: boolean, selectedSubType: string[]): Promise<MetadataTypeMap>;
+    static _getJsonFromFS(currentdir: string, subtype: string, fileName2FileContent: MetadataTypeMap): Promise<void>;
     /**
      * optional method used for some types to try a different folder structure
      *
@@ -372,9 +371,18 @@ declare class Asset extends MetadataType {
      *
      * @param {MetadataTypeItem} item single metadata item
      * @param {string} retrieveDir directory where metadata is saved
+     * @param {Set.<string>} [findAssetKeys] list of keys that were found referenced via ContentBlockByX; if set, method only gets keys and runs no updates
      * @returns {Promise.<MetadataTypeItem>} key of the item that was updated
      */
-    static replaceCbReference(item: MetadataTypeItem, retrieveDir: string): Promise<MetadataTypeItem>;
+    static replaceCbReference(item: MetadataTypeItem, retrieveDir: string, findAssetKeys?: Set<string>): Promise<MetadataTypeItem>;
+    /**
+     *
+     * @param {string[]} keyArr limit retrieval to given metadata type
+     * @param {string} retrieveDir retrieve dir including cred and bu
+     * @param {Set.<string>} findAssetKeys list of keys that were found referenced via ContentBlockByX; if set, method only gets keys and runs no updates
+     * @returns {Promise.<Set.<string>>} found asset keys
+     */
+    static getCbReferenceKeys(keyArr: string[], retrieveDir: string, findAssetKeys: Set<string>): Promise<Set<string>>;
     /**
      * @param {object} slots metadata.views.html.slots or deeper slots.<>.blocks.<>.slots
      * @param {string[]} dependentKeyArr list of found keys
@@ -382,6 +390,9 @@ declare class Asset extends MetadataType {
     static _getDependentFilesExtra(slots: object, dependentKeyArr: string[]): void;
 }
 declare namespace Asset {
+    let getJsonFromFSCache: {
+        [x: string]: any;
+    };
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
@@ -461,7 +472,10 @@ declare namespace Asset {
                 template: boolean;
             };
             businessUnitAvailability: {
-                skipValidation: boolean;
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
             };
             category: {
                 isCreateable: boolean;

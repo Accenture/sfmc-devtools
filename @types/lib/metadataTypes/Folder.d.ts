@@ -78,7 +78,7 @@ declare class Folder extends MetadataType {
     /**
      * Returns file contents mapped to their filename without '.json' ending
      *
-     * @param {string} dir directory that contains '.json' files to be read
+     * @param {string} dir directory with json files, e.g. /retrieve/cred/bu/folder, /deploy/cred/bu/folder, /template/folder
      * @param {boolean} [listBadKeys] do not print errors, used for badKeys()
      * @returns {Promise.<MetadataTypeMap>} fileName => fileContent map
      */

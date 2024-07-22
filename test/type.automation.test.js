@@ -700,7 +700,7 @@ describe('type: automation', () => {
         it('Should create a automation template via buildTemplate with --dependencies', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU');
-            const expectedApiCallsRetrieve = 71;
+            const expectedApiCallsRetrieve = 74;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 expectedApiCallsRetrieve,
@@ -751,7 +751,7 @@ describe('type: automation', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
-                0,
+                4,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

@@ -369,6 +369,52 @@ describe('type: script', () => {
             );
             return;
         });
+
+        it('Should create a script template via buildTemplate with --dependencies', async () => {
+            // download first before we test buildTemplate
+            await handler.retrieve('testInstance/testBU', ['script', 'asset']);
+
+            handler.setOptions({ dependencies: true, skipInteraction: true });
+
+            // GIVEN there is a template
+            const templatedItems = await handler.buildTemplate(
+                'testInstance/testBU',
+                'script',
+                ['testExisting_script_ampscript'],
+                'testSourceMarket'
+            );
+            // WHEN
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+
+            assert.deepEqual(
+                Object.keys(templatedItems),
+                ['script', 'asset'],
+                'expected specific types to be templated'
+            );
+
+            // script
+            assert.equal(
+                templatedItems.script ? Object.keys(templatedItems.script).length : 0,
+                1,
+                'unexpected number of scripts templated'
+            );
+            assert.deepEqual(
+                templatedItems.script.map((item) => item.key),
+                ['{{{prefix}}}script_ampscript'],
+                'expected specific scripts to be templated'
+            );
+            // asset
+            assert.equal(
+                templatedItems.asset ? Object.keys(templatedItems.asset).length : 0,
+                3,
+                'unexpected number of assets templated'
+            );
+            assert.deepEqual(
+                templatedItems.asset.map((item) => item.customerKey),
+                ['{{{prefix}}}htmlblock1', 'mcdev-issue-1157', '{{{prefix}}}htmlblock2'],
+                'expected specific assets to be templated'
+            );
+        });
     });
 
     describe('Delete ================', () => {
@@ -434,7 +480,11 @@ describe('type: script', () => {
             // retrieve result
             assert.deepEqual(
                 replace['testInstance/testBU'].script,
-                ['testExisting_script_ampincluded', 'testExisting_script_mixed'],
+                [
+                    'testExisting_script_ampscript',
+                    'testExisting_script_ampincluded',
+                    'testExisting_script_mixed',
+                ],
                 'should have found the right scripts that need updating'
             );
             // get results from cache

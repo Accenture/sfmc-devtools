@@ -127,6 +127,75 @@ describe('type: triggeredSend', () => {
             );
             return;
         });
+
+        it('Should create a script template via buildTemplate with --dependencies', async () => {
+            // download first before we test buildTemplate
+
+            handler.setOptions({ dependencies: true, retrieve: true });
+
+            // GIVEN there is a template
+            const templatedItems = await handler.buildTemplate(
+                'testInstance/testBU',
+                'triggeredSend',
+                ['testExisting_triggeredSend', 'testExisting_triggeredSend_rcb'],
+                'testSourceMarket'
+            );
+            // WHEN
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+
+            assert.deepEqual(
+                Object.keys(templatedItems),
+                ['triggeredSend', 'sendClassification', 'senderProfile', 'asset'],
+                'expected specific types to be templated'
+            );
+
+            // triggeredSend
+            assert.equal(
+                templatedItems.triggeredSend ? Object.keys(templatedItems.triggeredSend).length : 0,
+                2,
+                'unexpected number of triggeredSends templated'
+            );
+            assert.deepEqual(
+                templatedItems.triggeredSend.map((item) => item.CustomerKey),
+                ['{{{prefix}}}triggeredSend', '{{{prefix}}}triggeredSend_rcb'],
+                'expected specific triggeredSends to be templated'
+            );
+            // sendClassification
+            assert.equal(
+                templatedItems.sendClassification
+                    ? Object.keys(templatedItems.sendClassification).length
+                    : 0,
+                1,
+                'unexpected number of sendClassifications templated'
+            );
+            assert.deepEqual(
+                templatedItems.sendClassification.map((item) => item.CustomerKey),
+                ['{{{prefix}}}sendClassification'],
+                'expected specific sendClassifications to be templated'
+            );
+            // senderProfile
+            assert.equal(
+                templatedItems.senderProfile ? Object.keys(templatedItems.senderProfile).length : 0,
+                2,
+                'unexpected number of senderProfiles templated'
+            );
+            assert.deepEqual(
+                templatedItems.senderProfile.map((item) => item.CustomerKey),
+                ['{{{prefix}}}senderProfile', '{{{prefix}}}senderProfile_rcb'],
+                'expected specific senderProfiles to be templated'
+            );
+            // asset
+            assert.equal(
+                templatedItems.asset ? Object.keys(templatedItems.asset).length : 0,
+                3,
+                'unexpected number of assets templated'
+            );
+            assert.deepEqual(
+                templatedItems.asset.map((item) => item.customerKey),
+                ['mcdev-issue-1157', '{{{prefix}}}htmlblock1', '{{{prefix}}}htmlblock2'],
+                'expected specific assets to be templated'
+            );
+        });
     });
 
     describe('Delete ================', () => {

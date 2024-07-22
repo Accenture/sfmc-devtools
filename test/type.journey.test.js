@@ -234,6 +234,87 @@ describe('type: journey', () => {
             );
             return;
         });
+
+        it('Should create a journey template via buildTemplate with --dependencies', async () => {
+            // download first before we test buildTemplate
+            await handler.retrieve('testInstance/testBU', ['journey', 'asset']);
+
+            handler.setOptions({ dependencies: true, retrieve: true });
+
+            // GIVEN there is a template
+            const templatedItems = await handler.buildTemplate(
+                'testInstance/testBU',
+                'journey',
+                ['testExisting_journey_Quicksend', 'testExisting_journey_Multistep'],
+                'testSourceMarket'
+            );
+            // WHEN
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+
+            assert.deepEqual(
+                Object.keys(templatedItems),
+                ['journey', 'dataExtension', 'senderProfile', 'sendClassification', 'asset'],
+                'expected specific types to be templated'
+            );
+
+            // journey
+            assert.equal(
+                templatedItems.journey ? Object.keys(templatedItems.journey).length : 0,
+                2,
+                'unexpected number of journeys templated'
+            );
+            assert.deepEqual(
+                templatedItems.journey.map((item) => item.key),
+                ['{{{prefix}}}journey_Quicksend', '{{{prefix}}}journey_Multistep'],
+                'expected specific journeys to be templated'
+            );
+            // dataExtension
+            assert.equal(
+                templatedItems.dataExtension ? Object.keys(templatedItems.dataExtension).length : 0,
+                1,
+                'unexpected number of dataExtensions templated'
+            );
+            assert.deepEqual(
+                templatedItems.dataExtension.map((item) => item.CustomerKey),
+                ['{{{prefix}}}DomainExclusion'],
+                'expected specific dataExtensions to be templated'
+            );
+            // senderProfile
+            assert.equal(
+                templatedItems.senderProfile ? Object.keys(templatedItems.senderProfile).length : 0,
+                1,
+                'unexpected number of senderProfiles templated'
+            );
+            assert.deepEqual(
+                templatedItems.senderProfile.map((item) => item.CustomerKey),
+                ['{{{prefix}}}senderProfile'],
+                'expected specific assets to be templated'
+            );
+            // sendClassification
+            assert.equal(
+                templatedItems.sendClassification
+                    ? Object.keys(templatedItems.sendClassification).length
+                    : 0,
+                1,
+                'unexpected number of sendClassifications templated'
+            );
+            assert.deepEqual(
+                templatedItems.sendClassification.map((item) => item.CustomerKey),
+                ['{{{prefix}}}sendClassification'],
+                'expected specific sendClassifications to be templated'
+            );
+            // asset
+            assert.equal(
+                templatedItems.asset ? Object.keys(templatedItems.asset).length : 0,
+                3,
+                'unexpected number of assets templated'
+            );
+            assert.deepEqual(
+                templatedItems.asset.map((item) => item.customerKey),
+                ['mcdev-issue-1157', '{{{prefix}}}htmlblock1', '{{{prefix}}}htmlblock2'],
+                'expected specific assets to be templated'
+            );
+        });
     });
 
     describe('Delete ================', () => {

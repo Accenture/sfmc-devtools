@@ -181,7 +181,7 @@ describe('GENERAL', () => {
                 // retrieve result
                 assert.deepEqual(
                     replace['testInstance/testBU'].asset,
-                    ['testExisting_asset_message'],
+                    ['mcdev-issue-1157', 'testExisting_htmlblock1', 'testExisting_asset_message'],
                     'should have found the right assets that need updating'
                 );
                 assert.deepEqual(
@@ -191,7 +191,11 @@ describe('GENERAL', () => {
                 );
                 assert.deepEqual(
                     replace['testInstance/testBU'].script,
-                    ['testExisting_script_ampincluded', 'testExisting_script_mixed'],
+                    [
+                        'testExisting_script_ampscript',
+                        'testExisting_script_ampincluded',
+                        'testExisting_script_mixed',
+                    ],
                     'should have found the right scripts that need updating'
                 );
                 assert.deepEqual(
@@ -222,7 +226,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    85,
+                    88,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -283,7 +287,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    85,
+                    88,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -303,7 +307,7 @@ describe('GENERAL', () => {
                 // retrieve result
                 assert.deepEqual(
                     replace['testInstance/testBU'].asset,
-                    ['testExisting_asset_message'],
+                    ['mcdev-issue-1157', 'testExisting_htmlblock1', 'testExisting_asset_message'],
                     'should have found the right assets that need updating'
                 );
                 assert.deepEqual(
@@ -344,7 +348,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    85,
+                    88,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -909,7 +913,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 71;
+                const expectedApiCallsRetrieve = 74;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1031,7 +1035,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
-                    0,
+                    4,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -1040,7 +1044,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 // await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 71;
+                const expectedApiCallsRetrieve = 78;
                 // assert.equal(
                 //     testUtils.getAPIHistoryLength(),
                 //     expectedApiCallsRetrieve,
@@ -1453,7 +1457,7 @@ describe('GENERAL', () => {
                 // download everything before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 71;
+                const expectedApiCallsRetrieve = 74;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1557,7 +1561,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
-                    0,
+                    4,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -1566,7 +1570,7 @@ describe('GENERAL', () => {
                 // download everything before we test buildTemplate
                 // await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 71;
+                const expectedApiCallsRetrieve = 78;
                 // assert.equal(
                 //     testUtils.getAPIHistoryLength(),
                 //     expectedApiCallsRetrieve,
@@ -1856,7 +1860,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 71;
+                const expectedApiCallsRetrieve = 74;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -2047,7 +2051,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
-                    0,
+                    4,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });

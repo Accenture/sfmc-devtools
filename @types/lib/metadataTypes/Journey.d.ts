@@ -92,12 +92,6 @@ declare class Journey extends MetadataType {
      */
     private static _preDeployTasks_activities;
     /**
-     *
-     * @param {MetadataTypeItem} item single metadata item
-     * @returns {Promise.<MetadataTypeItem>} key of the item that was updated
-     */
-    static replaceCbReference(item: MetadataTypeItem): Promise<MetadataTypeItem>;
-    /**
      * Gets executed after deployment of metadata type
      *
      * @param {MetadataTypeMap} upsertResults metadata mapped by their keyField as returned by update/create
