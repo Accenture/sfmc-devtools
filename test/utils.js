@@ -161,6 +161,7 @@ export function mockSetup(isDeploy) {
             noLogFile: true,
             // reset
             api: undefined,
+            autoMidSuffix: undefined,
             changeKeyField: undefined,
             changeKeyValue: undefined,
             commitHistory: undefined,
@@ -174,7 +175,6 @@ export function mockSetup(isDeploy) {
             keySuffix: undefined,
             like: undefined,
             noUpdate: undefined,
-            noMidSuffix: undefined,
             publish: undefined,
             referenceFrom: undefined,
             referenceTo: undefined,
