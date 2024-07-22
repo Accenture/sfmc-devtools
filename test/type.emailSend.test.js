@@ -36,7 +36,7 @@ describe('type: emailSend', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                16,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -76,7 +76,7 @@ describe('type: emailSend', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                18,
+                16,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -120,7 +120,7 @@ describe('type: emailSend', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                16,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
