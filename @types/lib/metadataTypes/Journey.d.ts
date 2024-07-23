@@ -130,6 +130,7 @@ declare namespace Journey {
         bodyIteratorField: string;
         dependencies: string[];
         dependencyGraph: {
+            event: string[];
             transactionalEmail: string[];
             dataExtension: string[];
             triggeredSend: string[];
