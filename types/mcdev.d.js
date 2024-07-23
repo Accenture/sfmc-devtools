@@ -472,16 +472,16 @@ complex
 
 /**
  * @typedef {object} ListItem
- * @property {object} Client wrapper
+ * @property {object} [Client] wrapper
  * @property {number} Client.ID owning BU's MID
  * @property {string} [PartnerKey] not used
- * @property {string} CreatedDate "2021-06-21T11:54:57.103"
- * @property {string} ModifiedDate "2021-06-21T11:54:57.103"
- * @property {number} ID unique identifier per BU
+ * @property {string} [CreatedDate] "2021-06-21T11:54:57.103"
+ * @property {string} [ModifiedDate] "2021-06-21T11:54:57.103"
+ * @property {number} [ID] unique identifier per BU
  * @property {string} [ObjectID] not used
- * @property {string} CustomerKey unique identifer per BU
+ * @property {string} [CustomerKey] unique identifer per BU
  * @property {string} [Path] customn field that tracks the exact directory path of the current folder including its own name
- * @property {object} ParentFolder wrapper
+ * @property {object} [ParentFolder] wrapper
  * @property {number} ParentFolder.ID folder id of parent folder; 0 if current folder is already on top level
  * @property {string} [ParentFolder.ObjectID] not used
  * @property {string} [ParentFolder.Path] customn field that tracks the exact directory path of the current folder including its own name
@@ -491,6 +491,7 @@ complex
  * @property {boolean} IsActive ?
  * @property {boolean} IsEditable option to disable renaming/moving this folder via GUI
  * @property {boolean} AllowChildren option to prevent creating subfolders via GUI
+ * @property {boolean} [_generated] helper flag for Deployer class to signal if the folder was auto-generated or manually placed
  *
  * @typedef {Object.<number, ListItem>} ListIdMap key=id
  * @typedef {Object.<string, ListItem>} ListMap key=customer key
