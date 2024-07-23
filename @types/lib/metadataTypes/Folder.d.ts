@@ -9,6 +9,9 @@ export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type ListItem = import("../../types/mcdev.d.js").ListItem;
+export type ListMap = import("../../types/mcdev.d.js").ListMap;
+export type ListIdMap = import("../../types/mcdev.d.js").ListIdMap;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -20,6 +23,10 @@ export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
+ *
+ * @typedef {import('../../types/mcdev.d.js').ListItem} ListItem
+ * @typedef {import('../../types/mcdev.d.js').ListMap} ListMap
+ * @typedef {import('../../types/mcdev.d.js').ListIdMap} ListIdMap
  */
 /**
  * Folder MetadataType
@@ -34,80 +41,86 @@ declare class Folder extends MetadataType {
      * @param {string[]} [additionalFields] Returns specified fields even if their retrieve definition is not set to true
      * @param {string[]} [subTypeArr] content type of folder
      * @param {string} [key] customer key of single item to retrieve
-     * @returns {Promise} Promise
+     * @returns {Promise.<{metadata: ListMap, type: string}>} Promise
      */
-    static retrieve(retrieveDir: string, additionalFields?: string[], subTypeArr?: string[], key?: string): Promise<any>;
+    static retrieve(retrieveDir: string, additionalFields?: string[], subTypeArr?: string[], key?: string): Promise<{
+        metadata: ListMap;
+        type: string;
+    }>;
     /**
      * Retrieves folder metadata for caching
      *
      * @param {void | string[]} [_] parameter not used
      * @param {string[]} [subTypeArr] content type of folder
-     * @returns {Promise} Promise
+     * @returns {Promise.<{metadata: ListMap, type: string}>} Promise
      */
-    static retrieveForCache(_?: void | string[], subTypeArr?: string[]): Promise<any>;
+    static retrieveForCache(_?: void | string[], subTypeArr?: string[]): Promise<{
+        metadata: ListMap;
+        type: string;
+    }>;
     /**
      * Folder upsert (copied from Metadata Upsert), after retrieving from target
      * and comparing to check if create or update operation is needed.
      * Copied due to having a dependency on itself, meaning the created need to be serial
      *
-     * @param {MetadataTypeMap} metadata metadata mapped by their keyField
-     * @returns {Promise.<object>} Promise of saved metadata
+     * @param {ListMap} metadata metadata mapped by their keyField
+     * @returns {Promise.<ListMap>} Promise of saved metadata
      */
-    static upsert(metadata: MetadataTypeMap): Promise<object>;
+    static upsert(metadata: ListMap): Promise<ListMap>;
     /**
      * creates a folder based on metatadata
      *
-     * @param {MetadataTypeItem} metadataEntry metadata of the folder
-     * @returns {Promise} Promise
+     * @param {ListItem} metadataEntry metadata of the folder
+     * @returns {Promise.<any>} Promise of api response
      */
-    static create(metadataEntry: MetadataTypeItem): Promise<any>;
+    static create(metadataEntry: ListItem): Promise<any>;
     /**
      * Updates a single Folder.
      *
      * @param {MetadataTypeItem} metadataEntry single metadata entry
-     * @returns {Promise} Promise
+     * @returns {Promise.<any>} Promise of api response
      */
     static update(metadataEntry: MetadataTypeItem): Promise<any>;
     /**
      * prepares a folder for deployment
      *
-     * @param {MetadataTypeItem} metadata a single folder definition
-     * @returns {Promise.<MetadataTypeItem>} Promise of parsed folder metadata
+     * @param {ListItem} metadata a single folder definition
+     * @returns {Promise.<ListItem>} Promise of parsed folder metadata
      */
-    static preDeployTasks(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
+    static preDeployTasks(metadata: ListItem): Promise<ListItem>;
     /**
      * Returns file contents mapped to their filename without '.json' ending
      *
      * @param {string} dir directory with json files, e.g. /retrieve/cred/bu/folder, /deploy/cred/bu/folder, /template/folder
      * @param {boolean} [listBadKeys] do not print errors, used for badKeys()
-     * @returns {Promise.<MetadataTypeMap>} fileName => fileContent map
+     * @returns {Promise.<ListMap>} fileName => fileContent map
      */
-    static getJsonFromFS(dir: string, listBadKeys?: boolean): Promise<MetadataTypeMap>;
+    static getJsonFromFS(dir: string, listBadKeys?: boolean): Promise<ListMap>;
     /**
      * Helper to retrieve the folders as promise
      *
      * @param {string[]} [additionalFields] Returns specified fields even if their retrieve definition is not set to true
      * @param {boolean} [queryAllAccounts] which queryAllAccounts setting to use
      * @param {string[]} [contentTypeList] content type of folder
-     * @returns {Promise.<object>} soap object
+     * @returns {Promise.<ListItem[]>} soap object
      */
-    static retrieveHelper(additionalFields?: string[], queryAllAccounts?: boolean, contentTypeList?: string[]): Promise<object>;
+    static retrieveHelper(additionalFields?: string[], queryAllAccounts?: boolean, contentTypeList?: string[]): Promise<ListItem[]>;
     /**
      * Gets executed after retreive of metadata type
      *
-     * @param {MetadataTypeItem} metadata metadata mapped by their keyField
-     * @returns {MetadataTypeItem} cloned metadata
+     * @param {ListItem} metadata metadata mapped by their keyField
+     * @returns {ListItem} cloned metadata
      */
-    static postRetrieveTasks(metadata: MetadataTypeItem): MetadataTypeItem;
+    static postRetrieveTasks(metadata: ListItem): ListItem;
     /**
      * Helper for writing Metadata to disk, used for Retrieve and deploy
      *
-     * @param {MetadataTypeMap} results metadata results from deploy
+     * @param {ListMap} results metadata results from deploy
      * @param {string} retrieveDir directory where metadata should be stored after deploy/retrieve
      * @param {number | string} mid unused parameter
-     * @returns {Promise.<object>} Promise of saved metadata
+     * @returns {Promise.<ListMap>} Promise of saved metadata
      */
-    static saveResults(results: MetadataTypeMap, retrieveDir: string, mid: number | string): Promise<object>;
+    static saveResults(results: ListMap, retrieveDir: string, mid: number | string): Promise<ListMap>;
 }
 declare namespace Folder {
     let definition: {
