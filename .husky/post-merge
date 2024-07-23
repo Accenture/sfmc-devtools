@@ -5,6 +5,10 @@ IFS=$'\n'
 # extract all paths to package-lock.json files
 PACKAGE_LOCK_REGEX="(^package-lock\.json)"
 echo "[POST-MERGE] running git diff --name-only HEAD^1 HEAD"
+echo "[POST-MERGE] 0 $0"
+echo "[POST-MERGE] 1 $1"
+echo "[POST-MERGE] 2 $2"
+echo "[POST-MERGE] 3 $3"
 PACKAGES=$(git diff --name-only HEAD^1 HEAD | grep -E $PACKAGE_LOCK_REGEX || true)
 
 if [[ ${PACKAGES[@]} ]]; then
