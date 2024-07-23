@@ -238,18 +238,16 @@ declare class Asset extends MetadataType {
      * helper for {@link Asset.preDeployTasks} that loads extracted code content back into JSON
      *
      * @param {AssetItem} metadata a single asset definition
-     * @param {string} deployDir directory of deploy files
      * @returns {Promise.<void>} fileList for templating (disregarded during deployment)
      */
-    static _preDeployTasksBocks(metadata: AssetItem, deployDir: string): Promise<void>;
+    static _preDeployTasksBocks(metadata: AssetItem): Promise<void>;
     /**
      * helper for {@link Asset.preDeployTasks} that loads extracted code content back into JSON
      *
      * @param {object} metadataSlots metadata.views.html.slots or deeper slots.<>.blocks.<>.slots
-     * @param {string} deployDir directory of deploy files
      * @returns {Promise.<void>} -
      */
-    static _preDeployTasksBocks_slots(metadataSlots: object, deployDir: string): Promise<void>;
+    static _preDeployTasksBocks_slots(metadataSlots: object): Promise<void>;
     /**
      * helper for {@link Asset.preDeployTasks} that loads extracted code content back into JSON
      *
