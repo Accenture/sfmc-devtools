@@ -288,6 +288,9 @@ export type DataExtensionFieldItem = {
      */
     Scale: string;
 };
+/**
+ * key: name of field, value: DataExtensionFieldItem
+ */
 export type DataExtensionFieldMap = {
     [x: string]: DataExtensionFieldItem;
 };
@@ -1299,5 +1302,89 @@ export type ExplainType = {
         buildTemplate: boolean;
         retrieveAsTemplate: boolean;
     };
+};
+export type ListItem = {
+    /**
+     * wrapper
+     */
+    Client?: {
+        ID: number;
+    };
+    /**
+     * not used
+     */
+    PartnerKey?: string;
+    /**
+     * "2021-06-21T11:54:57.103"
+     */
+    CreatedDate?: string;
+    /**
+     * "2021-06-21T11:54:57.103"
+     */
+    ModifiedDate?: string;
+    /**
+     * unique identifier per BU
+     */
+    ID?: number;
+    /**
+     * not used
+     */
+    ObjectID?: string;
+    /**
+     * unique identifer per BU
+     */
+    CustomerKey?: string;
+    /**
+     * customn field that tracks the exact directory path of the current folder including its own name
+     */
+    Path?: string;
+    /**
+     * wrapper
+     */
+    ParentFolder?: {
+        ID: number;
+        ObjectID?: string;
+        Path?: string;
+    };
+    /**
+     * folder name
+     */
+    Name: string;
+    /**
+     * deprecated option to describe the folder content
+     */
+    Description?: string;
+    /**
+     * e.g. "shared_data"; see folder-subtypes for complete list
+     */
+    ContentType: string;
+    /**
+     * ?
+     */
+    IsActive: boolean;
+    /**
+     * option to disable renaming/moving this folder via GUI
+     */
+    IsEditable: boolean;
+    /**
+     * option to prevent creating subfolders via GUI
+     */
+    AllowChildren: boolean;
+    /**
+     * helper flag for Deployer class to signal if the folder was auto-generated or manually placed
+     */
+    _generated?: boolean;
+};
+/**
+ * key=id
+ */
+export type ListIdMap = {
+    [x: number]: ListItem;
+};
+/**
+ * key=customer key
+ */
+export type ListMap = {
+    [x: string]: ListItem;
 };
 //# sourceMappingURL=mcdev.d.d.ts.map

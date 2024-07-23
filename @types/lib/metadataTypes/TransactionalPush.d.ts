@@ -47,6 +47,9 @@ declare namespace TransactionalPush {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            asset: string[];
+        };
         hasExtended: boolean;
         idField: string;
         keyIsFixed: boolean;

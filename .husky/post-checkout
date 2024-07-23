@@ -21,7 +21,7 @@ NEWHEAD=$1
 OLDHEAD=$2
 # extract all paths to package-lock.json files
 PACKAGE_LOCK_REGEX="(^package-lock\.json)"
-PACKAGES=$(git diff --name-only $NEWHEAD $OLDHEAD | grep -E $PACKAGE_LOCK_REGEX || true)
+PACKAGES=$(git diff --name-only $OLDHEAD $NEWHEAD | grep -E $PACKAGE_LOCK_REGEX || true)
 
 if [[ ${PACKAGES[@]} ]]; then
   for package in $PACKAGES; do

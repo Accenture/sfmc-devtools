@@ -1,6 +1,9 @@
 declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: string[];
+    namespace dependencyGraph {
+        let asset: string[];
+    }
     let folderType: string;
     let hasExtended: boolean;
     let idField: string;
@@ -17,6 +20,7 @@ declare namespace _default {
     let typeDescription: string;
     let typeRetrieveByDefault: string[];
     let typeName: string;
+    let stringifyFieldsBeforeTemplate: string[];
     let fields: {
         activeDate: {
             isCreateable: boolean;
@@ -73,7 +77,10 @@ declare namespace _default {
             template: boolean;
         };
         businessUnitAvailability: {
-            skipValidation: boolean;
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
         };
         category: {
             isCreateable: boolean;
@@ -440,21 +447,24 @@ declare namespace _default {
         };
     };
     let subTypes: string[];
+    let crosslinkedSubTypes: string[];
+    let selflinkedSubTypes: string[];
     let binarySubtypes: string[];
     namespace extendedSubTypes {
-        let asset: string[];
-        let image: string[];
-        let rawimage: string[];
-        let video: string[];
-        let document: string[];
-        let audio: string[];
-        let archive: string[];
-        let code: string[];
-        let textfile: string[];
-        let block: string[];
-        let template: string[];
-        let message: string[];
-        let other: string[];
+        let asset_1: string[];
+        export { asset_1 as asset };
+        export let image: string[];
+        export let rawimage: string[];
+        export let video: string[];
+        export let document: string[];
+        export let audio: string[];
+        export let archive: string[];
+        export let code: string[];
+        export let textfile: string[];
+        export let block: string[];
+        export let template: string[];
+        export let message: string[];
+        export let other: string[];
     }
     let typeMapping: {
         asset: number;

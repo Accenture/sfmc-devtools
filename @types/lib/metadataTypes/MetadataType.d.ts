@@ -8,12 +8,15 @@ export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataType
 export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
 export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
+export type MultiMetadataTypeList = import("../../types/mcdev.d.js").MultiMetadataTypeList;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 export type SDK = import("sfmc-sdk").default;
 export type SDKError = import("../../types/mcdev.d.js").SDKError;
 export type SOAPError = import("../../types/mcdev.d.js").SOAPError;
 export type RestError = import("../../types/mcdev.d.js").RestError;
+export type ContentBlockConversionTypes = import("../../types/mcdev.d.js").ContentBlockConversionTypes;
 /**
  * MetadataType class that gets extended by their specific metadata type class.
  * Provides default functionality that can be overwritten by child metadata type classes
@@ -23,7 +26,7 @@ declare class MetadataType {
     /**
      * Returns file contents mapped to their filename without '.json' ending
      *
-     * @param {string} dir directory that contains '.json' files to be read
+     * @param {string} dir directory with json files, e.g. /retrieve/cred/bu/event, /deploy/cred/bu/event, /template/event
      * @param {boolean} [listBadKeys] do not print errors, used for badKeys()
      * @param {string[]} [selectedSubType] asset, message, ...
      * @returns {Promise.<MetadataTypeMap>} fileName => fileContent map
@@ -195,21 +198,31 @@ declare class MetadataType {
      */
     static refresh(): void;
     /**
+     *
+     * @param {string[]} keyArr limit retrieval to given metadata type
+     * @param {string} retrieveDir retrieve dir including cred and bu
+     * @param {Set.<string>} [findAssetKeys] list of keys that were found referenced via ContentBlockByX; if set, method only gets keys and runs no updates
+     * @returns {Promise.<Set.<string>>} found asset keys
+     */
+    static getCbReferenceKeys(keyArr: string[], retrieveDir: string, findAssetKeys?: Set<string>): Promise<Set<string>>;
+    /**
      * this iterates over all items found in the retrieve folder and executes the type-specific method for replacing references
      *
      * @param {MetadataTypeMap} metadataMap list of metadata (keyField => metadata)
      * @param {string} retrieveDir retrieve dir including cred and bu
+     * @param {Set.<string>} [findAssetKeys] list of keys that were found referenced via ContentBlockByX; if set, method only gets keys and runs no updates
      * @returns {Promise.<string[]>} Returns list of keys for which references were replaced
      */
-    static replaceCbReferenceLoop(metadataMap: MetadataTypeMap, retrieveDir: string): Promise<string[]>;
+    static replaceCbReferenceLoop(metadataMap: MetadataTypeMap, retrieveDir: string, findAssetKeys?: Set<string>): Promise<string[]>;
     /**
      * Abstract execute method that needs to be implemented in child metadata type
      *
      * @param {MetadataTypeItem} item single metadata item
      * @param {string} [retrieveDir] directory where metadata is saved
+     * @param {Set.<string>} [findAssetKeys] list of keys that were found referenced via ContentBlockByX; if set, method only gets keys and runs no updates
      * @returns {Promise.<MetadataTypeItem | CodeExtractItem>} key of the item that was updated
      */
-    static replaceCbReference(item: MetadataTypeItem, retrieveDir?: string): Promise<MetadataTypeItem | CodeExtractItem>;
+    static replaceCbReference(item: MetadataTypeItem, retrieveDir?: string, findAssetKeys?: Set<string>): Promise<MetadataTypeItem | CodeExtractItem>;
     /**
      * Abstract execute method that needs to be implemented in child metadata type
      *
@@ -645,6 +658,40 @@ declare class MetadataType {
      * @returns {Promise.<string[]>} list of all files that need to be committed in a flat array ['path/file1.ext', 'path/file2.ext']
      */
     static getFilesToCommit(keyArr: string[]): Promise<string[]>;
+    /**
+     *
+     * @param {string[]} keyArr customerkey of the metadata
+     * @param {TypeKeyCombo} multiTypeKeyList list of all keys that need to be deployed
+     * @param {TypeKeyCombo} notFoundList list of all keys that were not found
+     * @param {boolean} isFirstCall will not gray out the log message for type/keys that you initially selected but only for their dependencies
+     * @returns {Promise.<TypeKeyCombo>} list of all keys that need to be deployed
+     */
+    static getDependentFiles(keyArr: string[], multiTypeKeyList?: TypeKeyCombo, notFoundList?: TypeKeyCombo, isFirstCall?: boolean): Promise<TypeKeyCombo>;
+    /**
+     * optional helper for {@link this.getDependentTypes}
+     *
+     * @param {object} metadataItem metadata json read from filesystem
+     * @param {TypeKeyCombo} dependentTypeKeyCombo list started in this.getDependentTypes
+     */
+    static getDependentFilesExtra(metadataItem: object, dependentTypeKeyCombo: TypeKeyCombo): void;
+    /**
+     * helper for {@link MetadataType.getDependentFiles}
+     *
+     * @param {MetadataTypeItem} obj the metadataItem to search in
+     * @param {string} nestedKey e.g "my.field.here"
+     * @param {string} dependentType used for types that need custom handling
+     * @returns {(string)[]} result array or null if nothing was found
+     */
+    static getNestedValue(obj: MetadataTypeItem, nestedKey: string, dependentType: string): (string)[];
+    /**
+     * helper for {@link MetadataType.getNestedValue}
+     *
+     * @param {any} obj the metadataItem to search in (or the result)
+     * @param {string[]} nestedKeyParts key in dot-notation split into parts
+     * @param {string} dependentType used for types that need custom handling
+     * @returns {(string) | (string)[]} result
+     */
+    static getNestedValueHelper(obj: any, nestedKeyParts: string[], dependentType: string): (string) | (string)[];
     /**
      *
      * @param {MetadataTypeMap} metadataMap metadata mapped by their keyField

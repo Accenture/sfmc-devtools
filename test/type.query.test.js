@@ -48,7 +48,7 @@ describe('type: query', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                6,
+                5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -76,7 +76,7 @@ describe('type: query', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                7,
+                6,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -107,7 +107,7 @@ describe('type: query', () => {
                 .exist;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                6,
+                5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -133,7 +133,7 @@ describe('type: query', () => {
                 .exist;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                6,
+                5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -189,7 +189,7 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                8,
+                7,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -221,7 +221,7 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                12,
+                11,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -285,7 +285,7 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                14,
+                12,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -339,7 +339,7 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                14,
+                12,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -395,7 +395,7 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                14,
+                12,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -471,7 +471,7 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                7,
+                6,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -509,7 +509,7 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                16,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -560,7 +560,7 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                16,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -602,7 +602,7 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                18,
+                16,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -640,7 +640,7 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                38,
+                35,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -682,7 +682,7 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                40,
+                37,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -719,7 +719,7 @@ describe('type: query', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                14,
+                12,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -770,7 +770,7 @@ describe('type: query', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                6,
+                5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -822,7 +822,7 @@ describe('type: query', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                6,
+                5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -871,17 +871,19 @@ describe('type: query', () => {
 
     describe('Execute ================', () => {
         it('Should start a query by key', async () => {
-            const executedKeys = await handler.execute('testInstance/testBU', 'query', [
-                'testExisting_query',
-            ]);
+            const executedKeys = await handler.execute(
+                'testInstance/testBU',
+                ['query'],
+                ['testExisting_query']
+            );
             assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
-                executedKeys['testInstance/testBU']?.length,
+                executedKeys['testInstance/testBU']?.query?.length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                executedKeys['testInstance/testBU'][0],
+                executedKeys['testInstance/testBU']?.query[0],
                 'testExisting_query',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -890,15 +892,15 @@ describe('type: query', () => {
 
         it('Should start a query selected via --like', async () => {
             handler.setOptions({ like: { key: 'testExist%query' } });
-            const executedKeys = await handler.execute('testInstance/testBU', 'query');
+            const executedKeys = await handler.execute('testInstance/testBU', ['query']);
             assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
             assert.equal(
-                executedKeys['testInstance/testBU']?.length,
+                executedKeys['testInstance/testBU']?.query?.length,
                 1,
                 'returned number of keys does not correspond to number of expected fixed keys'
             );
             assert.equal(
-                executedKeys['testInstance/testBU'][0],
+                executedKeys['testInstance/testBU']?.query[0],
                 'testExisting_query',
                 'returned keys do not correspond to expected fixed keys'
             );
@@ -907,9 +909,11 @@ describe('type: query', () => {
 
         it('Should not start executing a query because key and --like was specified', async () => {
             handler.setOptions({ like: { key: 'testExisting%' } });
-            const executedKeys = await handler.execute('testInstance/testBU', 'query', [
-                'testExisting_query',
-            ]);
+            const executedKeys = await handler.execute(
+                'testInstance/testBU',
+                ['query'],
+                ['testExisting_query']
+            );
             assert.equal(process.exitCode, 1, 'execute should have thrown an error');
             assert.equal(
                 Object.keys(executedKeys).length,

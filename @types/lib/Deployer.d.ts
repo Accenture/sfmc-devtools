@@ -13,6 +13,7 @@ export type SoapRequestParams = import("../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../types/mcdev.d.js").TemplateMap;
 export type MultiMetadataTypeMap = import("../types/mcdev.d.js").MultiMetadataTypeMap;
 export type TypeKeyCombo = import("../types/mcdev.d.js").TypeKeyCombo;
+export type ListMap = import("../types/mcdev.d.js").ListMap;
 /**
  * @typedef {import('../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -28,6 +29,8 @@ export type TypeKeyCombo = import("../types/mcdev.d.js").TypeKeyCombo;
  * @typedef {import('../types/mcdev.d.js').TemplateMap} TemplateMap
  * @typedef {import('../types/mcdev.d.js').MultiMetadataTypeMap} MultiMetadataTypeMap
  * @typedef {import('../types/mcdev.d.js').TypeKeyCombo} TypeKeyCombo
+ *
+ * @typedef {import('../types/mcdev.d.js').ListMap} ListMap
  */
 /**
  * Reads metadata from local directory and deploys it to specified target business unit.

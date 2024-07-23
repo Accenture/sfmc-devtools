@@ -60,6 +60,71 @@
         "html": {
             "thumbnail": {},
             "availableViews": [],
+            "slots": {
+                "banner": {
+                    "content": "<div data-type=\"block\" data-key=\"5v1vodxyvz\"></div><div data-type=\"block\" data-key=\"c2m5fa0c6ym\"></div><div data-type=\"block\" data-key=\"cdsuxkm6kyt\"></div><div data-type=\"block\" data-key=\"7xogokk59k\"></div><div data-type=\"block\" data-key=\"sf47b6tjg2m\"></div><div data-type=\"block\" data-key=\"hy6ik0ftsb4\"></div><div data-type=\"block\" data-key=\"csscq2x1lpr\"></div>",
+                    "design": "<p style=\"font-family:Arial;color:#ccc;font-size:12px;text-align:center;vertical-align:middle;font-weight:bold;height:150px;display:flex;flex-direction:column;justify-content:center;padding:10px;margin:0;border: #cccccc dashed 1px;\">Drop blocks or content here</p>",
+                    "availableViews": [],
+                    "blocks": {
+                        "hy6ik0ftsb4": {
+                            "r__asset_key": "testExisting_asset_htmlblock",
+                            "r__folder_Path": "Content Builder",
+                            "assetType": {
+                                "id": 197,
+                                "name": "htmlblock",
+                                "displayName": "HTML Block"
+                            },
+                            "fileProperties": {
+                                "fileName": "testExisting_asset_htmlblock-Mcdev-strips-content"
+                            },
+                            "name": "testExisting_asset_htmlblock-Mcdev-strips-content",
+                            "owner": {
+                                "id": 700301950,
+                                "email": "joern.berkefeld@accenture.com",
+                                "name": "Jörn Berkefeld (ASGR)",
+                                "userId": "700301950"
+                            },
+                            "createdDate": "2024-01-08T08:26:58.277-06:00",
+                            "createdBy": {
+                                "id": 700301950,
+                                "email": "joern.berkefeld@accenture.com",
+                                "name": "Jörn Berkefeld (ASGR)",
+                                "userId": "700301950"
+                            },
+                            "modifiedDate": "2024-01-08T08:28:01.6-06:00",
+                            "modifiedBy": {
+                                "id": 700301950,
+                                "email": "joern.berkefeld@accenture.com",
+                                "name": "Jörn Berkefeld (ASGR)",
+                                "userId": "700301950"
+                            },
+                            "enterpriseId": 99991999,
+                            "memberId": 99991999,
+                            "status": {
+                                "id": 1,
+                                "name": "Draft"
+                            },
+                            "design": "",
+                            "meta": {
+                                "wrapperStyles": {
+                                    "mobile": {
+                                        "visible": true
+                                    },
+                                    "styling": {}
+                                }
+                            },
+                            "availableViews": [],
+                            "modelVersion": 2
+                        }
+                    },
+                    "data": {
+                        "email": {
+                            "options": {}
+                        }
+                    },
+                    "modelVersion": 2
+                }
+            },
             "template": {
                 "meta": { "contentHash": -166410261 },
                 "r__asset_key": "testExisting_asset_template"

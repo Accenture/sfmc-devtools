@@ -37,12 +37,13 @@ if (Util.isRunViaVSCodeExtension) {
  * @param {string} type metadata Type
  * @param {string} mid of Business Unit
  * @param {object|string} filter likely for customer key
+ * @param {boolean} [QueryAllAccounts] get data from other BUs or not
  * @returns {Promise.<string>} relevant metadata stringified
  */
-async function loadSOAPRecords(mcdevAction, type, mid, filter) {
+async function loadSOAPRecords(mcdevAction, type, mid, filter, QueryAllAccounts) {
     type = type[0].toLowerCase() + type.slice(1);
     const testPath = path.join('test', 'resources', mid.toString(), type, mcdevAction);
-    const filterPath = typeof filter === 'string' && filter ? '-' + filter : filterToPath(filter);
+    const filterPath = getFilterPath(filter, QueryAllAccounts);
     if (await fs.pathExists(testPath + filterPath + '-response.xml')) {
         return fs.readFile(testPath + filterPath + '-response.xml', {
             encoding: 'utf8',
@@ -80,6 +81,26 @@ async function loadSOAPRecords(mcdevAction, type, mid, filter) {
     });
 }
 /**
+ * helper for {@link loadSOAPRecords} to get the filter path
+ *
+ * @param {object|string} filter likely for customer key
+ * @param {boolean} [QueryAllAccounts] get data from other BUs or not
+ * @param {number} [shorten] number of characters to shorten filters by to match windows max file length of 256 chars
+ * @returns {string} filterPath value
+ */
+function getFilterPath(filter, QueryAllAccounts, shorten) {
+    const filterPath =
+        (typeof filter === 'string' && filter ? '-' + filter : filterToPath(filter, shorten)) +
+        (QueryAllAccounts ? '-QAA' : '');
+    if ((filterPath + '-response.xml').length > 256) {
+        shorten ||= 10;
+        return getFilterPath(filter, QueryAllAccounts, --shorten);
+    } else {
+        return filterPath;
+    }
+}
+
+/**
  * main filter to path function
  *
  * @param {object} filter main filter object
@@ -89,11 +110,12 @@ async function loadSOAPRecords(mcdevAction, type, mid, filter) {
  * @param {object} filter.LeftOperand contains a filter object itself
  * @param {'AND'|'OR'} filter.LogicalOperator string representation of the comparison method
  * @param {object} filter.RightOperand field value to check for
+ * @param {number} [shorten] number of characters to shorten filters by to match windows max file length of 256 chars
  * @returns {string} string represenation of the entire filter
  */
-export function filterToPath(filter) {
+export function filterToPath(filter, shorten) {
     if (filter) {
-        return '-' + _filterToPath(filter);
+        return '-' + _filterToPath(filter, shorten);
     }
     return '';
 }
@@ -107,18 +129,27 @@ export function filterToPath(filter) {
  * @param {object} filter.LeftOperand contains a filter object itself
  * @param {'AND'|'OR'} filter.LogicalOperator string representation of the comparison method
  * @param {object} filter.RightOperand field value to check for
+ * @param {number} [shorten] number of characters to shorten filters by to match windows max file length of 256 chars
  * @returns {string} string represenation of the entire filter
  */
-function _filterToPath(filter) {
+function _filterToPath(filter, shorten) {
     if (filter.Property && filter.SimpleOperator) {
-        return `${filter.Property}${filter.SimpleOperator.replace('equals', '=')}${
-            filter.Value === undefined ? '' : filter.Value
-        }`;
+        let value;
+        if (filter.Value === undefined) {
+            value = '';
+        } else if (Array.isArray(filter.Value)) {
+            value = shorten
+                ? filter.Value.map((val) => val.slice(0, Math.max(0, shorten))).join(',')
+                : filter.Value.join(',');
+        } else {
+            value = shorten ? filter.Value.slice(0, Math.max(0, shorten)) : filter.Value;
+        }
+        return `${filter.Property}${filter.SimpleOperator.replace('equals', '=')}${value}`;
     } else if (filter.LeftOperand && filter.LogicalOperator && filter.RightOperand) {
         return (
-            _filterToPath(filter.LeftOperand) +
+            _filterToPath(filter.LeftOperand, shorten) +
             filter.LogicalOperator +
-            _filterToPath(filter.RightOperand)
+            _filterToPath(filter.RightOperand, shorten)
         );
     } else {
         throw new Error('unknown filter type');
@@ -141,7 +172,8 @@ export const handleSOAPRequest = async (config) => {
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 jObj.Envelope.Body.RetrieveRequestMsg.RetrieveRequest.ObjectType,
                 jObj.Envelope.Header.fueloauth,
-                jObj.Envelope.Body.RetrieveRequestMsg.RetrieveRequest.Filter
+                jObj.Envelope.Body.RetrieveRequestMsg.RetrieveRequest.Filter,
+                jObj.Envelope.Body.RetrieveRequestMsg.RetrieveRequest.QueryAllAccounts
             );
 
             break;

@@ -2,6 +2,19 @@ declare namespace _default {
     let folderType: string;
     let bodyIteratorField: string;
     let dependencies: string[];
+    namespace dependencyGraph {
+        let event: string[];
+        let transactionalEmail: string[];
+        let dataExtension: string[];
+        let triggeredSend: string[];
+        let list: string[];
+        let senderProfile: string[];
+        let sendClassification: string[];
+        let asset: string[];
+        let mobileMessage: string[];
+        let mobileKeyword: string[];
+        let mobileCode: string[];
+    }
     let folderIdField: string;
     let hasExtended: boolean;
     let idField: string;

@@ -61,7 +61,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    51,
+                    36,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -110,7 +110,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    51,
+                    36,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -159,7 +159,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    51,
+                    36,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -181,7 +181,11 @@ describe('GENERAL', () => {
                 // retrieve result
                 assert.deepEqual(
                     replace['testInstance/testBU'].asset,
-                    ['testExisting_asset_message'],
+                    [
+                        'testExisting_asset_htmlblock',
+                        'testExisting_htmlblock1',
+                        'testExisting_asset_message',
+                    ],
                     'should have found the right assets that need updating'
                 );
                 assert.deepEqual(
@@ -191,7 +195,11 @@ describe('GENERAL', () => {
                 );
                 assert.deepEqual(
                     replace['testInstance/testBU'].script,
-                    ['testExisting_script_ampincluded', 'testExisting_script_mixed'],
+                    [
+                        'testExisting_script_ampscript',
+                        'testExisting_script_ampincluded',
+                        'testExisting_script_mixed',
+                    ],
                     'should have found the right scripts that need updating'
                 );
                 assert.deepEqual(
@@ -222,7 +230,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    116,
+                    83,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -283,7 +291,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    116,
+                    83,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -303,7 +311,11 @@ describe('GENERAL', () => {
                 // retrieve result
                 assert.deepEqual(
                     replace['testInstance/testBU'].asset,
-                    ['testExisting_asset_message'],
+                    [
+                        'testExisting_asset_htmlblock',
+                        'testExisting_htmlblock1',
+                        'testExisting_asset_message',
+                    ],
                     'should have found the right assets that need updating'
                 );
                 assert.deepEqual(
@@ -344,7 +356,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    116,
+                    83,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -376,7 +388,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    6,
+                    3,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -510,7 +522,7 @@ describe('GENERAL', () => {
                 assert.equal(deployedTypes[0], 'dataExtract', 'deploy should have returned 1 type');
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    8,
+                    5,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -619,14 +631,79 @@ describe('GENERAL', () => {
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
+
+            it('deploy multiple type with keys and --noUpdate', async () => {
+                handler.setOptions({ noUpdate: true });
+
+                const argvMetadata = [
+                    'dataExtension',
+                    'dataExtract:wrong-key',
+                    'senderProfile:testExisting_senderProfile',
+                    'query:testExisting_query',
+                    'query:key:wrong-key2',
+                ];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                assert.notEqual(
+                    typeof typeKeyCombo,
+                    'undefined',
+                    'typeKeyCombo should not be undefined'
+                );
+                const buName = 'testInstance/testBU';
+                const result = await handler.deploy(buName, typeKeyCombo);
+                // THEN
+                assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+
+                const deployedTypes = Object.keys(result[buName]);
+                assert.equal(deployedTypes.length, 3, 'deploy should have returned 3 types');
+                assert.equal(
+                    deployedTypes.includes('dataExtension'),
+                    true,
+                    'deploy should have returned dataExtension'
+                );
+                assert.equal(
+                    deployedTypes.includes('dataExtract'),
+                    false,
+                    'deploy should have returned dataExtract'
+                );
+                assert.equal(
+                    deployedTypes.includes('senderProfile'),
+                    true,
+                    'deploy should have returned senderProfile'
+                );
+                assert.equal(
+                    deployedTypes.includes('query'),
+                    true,
+                    'deploy should have returned query'
+                );
+                assert.equal(
+                    Object.keys(result[buName]['dataExtension']).length,
+                    1,
+                    'deploy should have returned 1 dataExtension'
+                );
+                assert.equal(
+                    Object.keys(result[buName]['senderProfile']).length,
+                    0,
+                    'deploy should have returned 0 senderProfile'
+                );
+                assert.equal(
+                    Object.keys(result[buName]['query']).length,
+                    0,
+                    'deploy should have returned 0 query'
+                );
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    12,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+            });
         });
 
         describe('template --metadata ~~~', () => {
-            it('buildDefinition and buildTemplate multiple type with keys', async () => {
+            it('buildTemplate + buildDefinition for multiple types with keys', async () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU', ['automation', 'query']);
 
-                const expectedApiCallsRetrieve = 25;
+                const expectedApiCallsRetrieve = 24;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -730,11 +807,113 @@ describe('GENERAL', () => {
                 );
             });
 
-            it('build multiple type with keys', async () => {
-                // download first before we test buildTemplate
-                await handler.retrieve('testInstance/testBU', ['automation', 'query']);
+            it('buildTemplate + buildDefinition for multiple types with keys and --retrieve', async () => {
+                const expectedApiCallsRetrieve = 27;
 
-                const expectedApiCallsRetrieve = 25;
+                // preparation
+                const argvMetadata = [
+                    'automation:testExisting_automation',
+                    'query:testExisting_query',
+                    'query:bad',
+                ];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                assert.notEqual(
+                    typeof typeKeyCombo,
+                    'undefined',
+                    'typeKeyCombo should not be undefined'
+                );
+                const buName = 'testInstance/testBU';
+
+                handler.setOptions({ retrieve: true });
+
+                // *** buildTemplate ***
+                const templateResult = await handler.buildTemplate(
+                    buName,
+                    typeKeyCombo,
+                    undefined,
+                    'testSourceMarket'
+                );
+                assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+                // check automation
+                assert.equal(
+                    templateResult.automation ? Object.keys(templateResult.automation).length : 0,
+                    1,
+                    'only one automation expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
+                    await testUtils.getExpectedJson('9999999', 'automation', 'template'),
+                    'returned template was not equal expected'
+                );
+                // check query
+                assert.equal(
+                    templateResult.query ? Object.keys(templateResult.query).length : 0,
+                    1,
+                    'only one query expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualTemplateJson('testExisting_query', 'query'),
+                    await testUtils.getExpectedJson('9999999', 'query', 'template'),
+                    'returned template JSON of retrieveAsTemplate was not equal expected'
+                );
+                expect(
+                    await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
+
+                // *** buildDefinition ***
+                const definitionResult = await handler.buildDefinition(
+                    buName,
+                    typeKeyCombo,
+                    undefined,
+                    'testTargetMarket'
+                );
+                assert.equal(
+                    process.exitCode,
+                    0,
+                    'buildDefinition should not have thrown an error'
+                );
+
+                // check automation
+                assert.equal(
+                    definitionResult.automation
+                        ? Object.keys(definitionResult.automation).length
+                        : 0,
+                    1,
+                    'only one automation expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualDeployJson('testTemplated_automation', 'automation'),
+                    await testUtils.getExpectedJson('9999999', 'automation', 'build'),
+                    'returned deployment file was not equal expected'
+                );
+
+                // check query
+                assert.equal(
+                    definitionResult.query ? Object.keys(definitionResult.query).length : 0,
+                    1,
+                    'only one query expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualDeployJson('testTemplated_query', 'query'),
+                    await testUtils.getExpectedJson('9999999', 'query', 'build'),
+                    'returned deployment JSON was not equal expected'
+                );
+                expect(
+                    await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    expectedApiCallsRetrieve,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+            });
+
+            it('buildTemplate + buildDefinition for multiple types with keys and --dependencies', async () => {
+                // download first before we test buildTemplate
+                await handler.retrieve('testInstance/testBU');
+
+                const expectedApiCallsRetrieve = 74;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -755,25 +934,54 @@ describe('GENERAL', () => {
                 );
                 const buName = 'testInstance/testBU';
 
-                // *** build: buildTemplate and buildDefinition chained ***
-                const definitionResult = await handler.build(
-                    buName,
-                    buName,
-                    typeKeyCombo,
-                    'testSourceMarket',
-                    'testTargetMarket'
-                );
-                assert.equal(process.exitCode, 0, 'build should not have thrown an error');
+                // set skipInteraction to true to skip re-retrieving question
+                handler.setOptions({ dependencies: true, skipInteraction: true });
 
                 // *** buildTemplate ***
+                const templateResult = await handler.buildTemplate(
+                    buName,
+                    typeKeyCombo,
+                    undefined,
+                    'testSourceMarket'
+                );
+                assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+
+                // check type list
+                assert.deepEqual(
+                    Object.keys(templateResult),
+                    [
+                        'automation',
+                        'query',
+                        'dataExtract',
+                        'emailSend',
+                        'dataExtension',
+                        'sendClassification',
+                        'senderProfile',
+                        'fileTransfer',
+                        'importFile',
+                        'script',
+                        'verification',
+                    ],
+                    'did not create deployment packages for all relevant types'
+                );
 
                 // check automation
+                assert.equal(
+                    templateResult.automation ? Object.keys(templateResult.automation).length : 0,
+                    1,
+                    'only one automation expected'
+                );
                 assert.deepEqual(
                     await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
                     await testUtils.getExpectedJson('9999999', 'automation', 'template'),
                     'returned template was not equal expected'
                 );
                 // check query
+                assert.equal(
+                    templateResult.query ? Object.keys(templateResult.query).length : 0,
+                    1,
+                    'only one query expected'
+                );
                 assert.deepEqual(
                     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                     await testUtils.getExpectedJson('9999999', 'query', 'template'),
@@ -784,6 +992,17 @@ describe('GENERAL', () => {
                 ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
 
                 // *** buildDefinition ***
+                const definitionResult = await handler.buildDefinition(
+                    buName,
+                    typeKeyCombo,
+                    undefined,
+                    'testTargetMarket'
+                );
+                assert.equal(
+                    process.exitCode,
+                    0,
+                    'buildDefinition should not have thrown an error'
+                );
 
                 // check automation
                 assert.equal(
@@ -816,21 +1035,13 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
-                    0,
+                    4,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
 
-            it('build multiple type with keys and --bulk', async () => {
-                // download first before we test buildTemplate
-                await handler.retrieve('testInstance/testBU', ['automation', 'query']);
-
-                const expectedApiCallsRetrieve = 25;
-                assert.equal(
-                    testUtils.getAPIHistoryLength(),
-                    expectedApiCallsRetrieve,
-                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-                );
+            it('buildTemplate + buildDefinition for multiple types with keys and --dependencies and --retrieve', async () => {
+                const expectedApiCallsRetrieve = 78;
 
                 // preparation
                 const argvMetadata = [
@@ -846,26 +1057,53 @@ describe('GENERAL', () => {
                 );
                 const buName = 'testInstance/testBU';
 
-                // *** build: buildTemplate and buildDefinition chained ***
-                const definitionResult = await handler.build(
-                    buName,
-                    'ignored',
-                    typeKeyCombo,
-                    'testSourceMarket',
-                    'deployment-target',
-                    true
-                );
-                assert.equal(process.exitCode, 0, 'build should not have thrown an error');
+                handler.setOptions({ dependencies: true, retrieve: true });
 
                 // *** buildTemplate ***
+                const templateResult = await handler.buildTemplate(
+                    buName,
+                    typeKeyCombo,
+                    undefined,
+                    'testSourceMarket'
+                );
+                assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+
+                // check type list
+                assert.deepEqual(
+                    Object.keys(templateResult),
+                    [
+                        'automation',
+                        'query',
+                        'dataExtract',
+                        'emailSend',
+                        'dataExtension',
+                        'sendClassification',
+                        'senderProfile',
+                        'fileTransfer',
+                        'importFile',
+                        'script',
+                        'verification',
+                    ],
+                    'did not create deployment packages for all relevant types'
+                );
 
                 // check automation
+                assert.equal(
+                    templateResult.automation ? Object.keys(templateResult.automation).length : 0,
+                    1,
+                    'only one automation expected'
+                );
                 assert.deepEqual(
                     await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
                     await testUtils.getExpectedJson('9999999', 'automation', 'template'),
                     'returned template was not equal expected'
                 );
                 // check query
+                assert.equal(
+                    templateResult.query ? Object.keys(templateResult.query).length : 0,
+                    1,
+                    'only one query expected'
+                );
                 assert.deepEqual(
                     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                     await testUtils.getExpectedJson('9999999', 'query', 'template'),
@@ -875,33 +1113,23 @@ describe('GENERAL', () => {
                     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
                 ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
 
-                // *** buildDefinitionBulk ***
+                // *** buildDefinition ***
+                const definitionResult = await handler.buildDefinition(
+                    buName,
+                    typeKeyCombo,
+                    undefined,
+                    'testTargetMarket'
+                );
+                assert.equal(
+                    process.exitCode,
+                    0,
+                    'buildDefinition should not have thrown an error'
+                );
 
                 // check automation
                 assert.equal(
-                    definitionResult.automation?.['testInstance/testBU']?.testSourceMarket
-                        ? Object.keys(
-                              definitionResult.automation?.['testInstance/testBU']?.testSourceMarket
-                          ).length
-                        : 0,
-                    1,
-                    'only one automation expected'
-                );
-                assert.equal(
-                    definitionResult.automation?.['testInstance/testBU']?.testTargetMarket
-                        ? Object.keys(
-                              definitionResult.automation?.['testInstance/testBU']?.testTargetMarket
-                          ).length
-                        : 0,
-                    1,
-                    'only one automation expected'
-                );
-                assert.equal(
-                    definitionResult.automation?.['testInstance/_ParentBU_']?.testTargetMarket
-                        ? Object.keys(
-                              definitionResult.automation?.['testInstance/_ParentBU_']
-                                  ?.testTargetMarket
-                          ).length
+                    definitionResult.automation
+                        ? Object.keys(definitionResult.automation).length
                         : 0,
                     1,
                     'only one automation expected'
@@ -912,50 +1140,9 @@ describe('GENERAL', () => {
                     'returned deployment file was not equal expected'
                 );
 
-                // check if files were also created for other BU-market combos
-                // testBU: testSourceMarket
-                expect(
-                    await testUtils.getActualDeployFile(
-                        'testExisting_automation',
-                        'automation',
-                        'json'
-                    )
-                ).to.exist;
-                // _ParentBU_: testTargetMarket
-                expect(
-                    await testUtils.getActualDeployFile(
-                        'testTemplated_automation',
-                        'automation',
-                        'json',
-                        '_ParentBU_'
-                    )
-                ).to.exist;
-
                 // check query
                 assert.equal(
-                    definitionResult.query?.['testInstance/testBU']?.testSourceMarket
-                        ? Object.keys(
-                              definitionResult.query?.['testInstance/testBU']?.testSourceMarket
-                          ).length
-                        : 0,
-                    1,
-                    'only one query expected'
-                );
-                assert.equal(
-                    definitionResult.query?.['testInstance/testBU']?.testTargetMarket
-                        ? Object.keys(
-                              definitionResult.query?.['testInstance/testBU']?.testTargetMarket
-                          ).length
-                        : 0,
-                    1,
-                    'only one query expected'
-                );
-                assert.equal(
-                    definitionResult.query?.['testInstance/_ParentBU_']?.testTargetMarket
-                        ? Object.keys(
-                              definitionResult.query?.['testInstance/_ParentBU_']?.testTargetMarket
-                          ).length
-                        : 0,
+                    definitionResult.query ? Object.keys(definitionResult.query).length : 0,
                     1,
                     'only one query expected'
                 );
@@ -968,42 +1155,18 @@ describe('GENERAL', () => {
                     await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
                 ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
 
-                // check if files were also created for other BU-market combos
-                // testBU: testSourceMarket
-                expect(await testUtils.getActualDeployFile('testExisting_query', 'query', 'json'))
-                    .to.exist;
-                expect(await testUtils.getActualDeployFile('testExisting_query', 'query', 'sql')).to
-                    .exist;
-                // _ParentBU_: testTargetMarket
-                expect(
-                    await testUtils.getActualDeployFile(
-                        'testTemplated_query',
-                        'query',
-                        'json',
-                        '_ParentBU_'
-                    )
-                ).to.exist;
-                expect(
-                    await testUtils.getActualDeployFile(
-                        'testTemplated_query',
-                        'query',
-                        'sql',
-                        '_ParentBU_'
-                    )
-                ).to.exist;
-
                 assert.equal(
-                    testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
-                    0,
+                    testUtils.getAPIHistoryLength(),
+                    expectedApiCallsRetrieve,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
 
-            it('buildTemplate + builDefinitionBulk multiple type with keys', async () => {
+            it('buildTemplate + buildDefinitionBulk multiple type with keys', async () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU', ['automation', 'query']);
 
-                const expectedApiCallsRetrieve = 25;
+                const expectedApiCallsRetrieve = 24;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1190,6 +1353,692 @@ describe('GENERAL', () => {
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
+
+            it('build multiple type with keys', async () => {
+                // download first before we test buildTemplate
+                await handler.retrieve('testInstance/testBU', ['automation', 'query']);
+
+                const expectedApiCallsRetrieve = 24;
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    expectedApiCallsRetrieve,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+
+                // preparation
+                const argvMetadata = [
+                    'automation:testExisting_automation',
+                    'query:testExisting_query',
+                    'query:bad',
+                ];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                assert.notEqual(
+                    typeof typeKeyCombo,
+                    'undefined',
+                    'typeKeyCombo should not be undefined'
+                );
+                const buName = 'testInstance/testBU';
+
+                // *** build: buildTemplate and buildDefinition chained ***
+                const definitionResult = await handler.build(
+                    buName,
+                    buName,
+                    typeKeyCombo,
+                    'testSourceMarket',
+                    'testTargetMarket'
+                );
+                assert.equal(process.exitCode, 0, 'build should not have thrown an error');
+
+                // *** buildTemplate ***
+
+                // check automation
+                assert.deepEqual(
+                    await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
+                    await testUtils.getExpectedJson('9999999', 'automation', 'template'),
+                    'returned template was not equal expected'
+                );
+                // check query
+                assert.deepEqual(
+                    await testUtils.getActualTemplateJson('testExisting_query', 'query'),
+                    await testUtils.getExpectedJson('9999999', 'query', 'template'),
+                    'returned template JSON of retrieveAsTemplate was not equal expected'
+                );
+                expect(
+                    await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
+
+                // *** buildDefinition ***
+
+                // check automation
+                assert.equal(
+                    definitionResult.automation
+                        ? Object.keys(definitionResult.automation).length
+                        : 0,
+                    1,
+                    'only one automation expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualDeployJson('testTemplated_automation', 'automation'),
+                    await testUtils.getExpectedJson('9999999', 'automation', 'build'),
+                    'returned deployment file was not equal expected'
+                );
+
+                // check query
+                assert.equal(
+                    definitionResult.query ? Object.keys(definitionResult.query).length : 0,
+                    1,
+                    'only one query expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualDeployJson('testTemplated_query', 'query'),
+                    await testUtils.getExpectedJson('9999999', 'query', 'build'),
+                    'returned deployment JSON was not equal expected'
+                );
+                expect(
+                    await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
+                    0,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+            });
+
+            it('build multiple type with keys and --dependencies', async () => {
+                // download everything before we test buildTemplate
+                await handler.retrieve('testInstance/testBU');
+
+                const expectedApiCallsRetrieve = 74;
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    expectedApiCallsRetrieve,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+
+                // preparation
+                const argvMetadata = [
+                    'automation:testExisting_automation',
+                    'query:testExisting_query',
+                    'query:bad',
+                ];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                assert.notEqual(
+                    typeof typeKeyCombo,
+                    'undefined',
+                    'typeKeyCombo should not be undefined'
+                );
+                const buName = 'testInstance/testBU';
+
+                // set skipInteraction to true to skip re-retrieving question
+                handler.setOptions({ dependencies: true, skipInteraction: true });
+
+                // *** build: buildTemplate and buildDefinition chained ***
+                const definitionResult = await handler.build(
+                    buName,
+                    buName,
+                    typeKeyCombo,
+                    'testSourceMarket',
+                    'testTargetMarket'
+                );
+                assert.equal(process.exitCode, 0, 'build should not have thrown an error');
+
+                // *** buildTemplate ***
+
+                // check automation
+                assert.deepEqual(
+                    await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
+                    await testUtils.getExpectedJson('9999999', 'automation', 'template'),
+                    'returned template was not equal expected'
+                );
+                // check query
+                assert.deepEqual(
+                    await testUtils.getActualTemplateJson('testExisting_query', 'query'),
+                    await testUtils.getExpectedJson('9999999', 'query', 'template'),
+                    'returned template JSON of retrieveAsTemplate was not equal expected'
+                );
+                expect(
+                    await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
+
+                // *** buildDefinition ***
+
+                // check type list
+                assert.deepEqual(
+                    Object.keys(definitionResult),
+                    [
+                        'automation',
+                        'query',
+                        'dataExtract',
+                        'emailSend',
+                        'dataExtension',
+                        'sendClassification',
+                        'senderProfile',
+                        'fileTransfer',
+                        'importFile',
+                        'script',
+                        'verification',
+                    ],
+                    'did not create deployment packages for all relevant types'
+                );
+
+                // check automation
+                assert.equal(
+                    definitionResult.automation
+                        ? Object.keys(definitionResult.automation).length
+                        : 0,
+                    1,
+                    'only one automation expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualDeployJson('testTemplated_automation', 'automation'),
+                    await testUtils.getExpectedJson('9999999', 'automation', 'build'),
+                    'returned deployment file was not equal expected'
+                );
+
+                // check query
+                assert.equal(
+                    definitionResult.query ? Object.keys(definitionResult.query).length : 0,
+                    1,
+                    'only one query expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualDeployJson('testTemplated_query', 'query'),
+                    await testUtils.getExpectedJson('9999999', 'query', 'build'),
+                    'returned deployment JSON was not equal expected'
+                );
+                expect(
+                    await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
+                    4,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+            });
+
+            it('build multiple type with keys and --dependencies and --retrieve', async () => {
+                const expectedApiCallsRetrieve = 78;
+
+                // preparation
+                const argvMetadata = [
+                    'automation:testExisting_automation',
+                    'query:testExisting_query',
+                    'query:bad',
+                ];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                assert.notEqual(
+                    typeof typeKeyCombo,
+                    'undefined',
+                    'typeKeyCombo should not be undefined'
+                );
+                const buName = 'testInstance/testBU';
+
+                handler.setOptions({ dependencies: true, retrieve: true });
+
+                // *** build: buildTemplate and buildDefinition chained ***
+                const definitionResult = await handler.build(
+                    buName,
+                    buName,
+                    typeKeyCombo,
+                    'testSourceMarket',
+                    'testTargetMarket'
+                );
+                assert.equal(process.exitCode, 0, 'build should not have thrown an error');
+
+                // *** buildTemplate ***
+
+                // check automation
+                assert.deepEqual(
+                    await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
+                    await testUtils.getExpectedJson('9999999', 'automation', 'template'),
+                    'returned template was not equal expected'
+                );
+                // check query
+                assert.deepEqual(
+                    await testUtils.getActualTemplateJson('testExisting_query', 'query'),
+                    await testUtils.getExpectedJson('9999999', 'query', 'template'),
+                    'returned template JSON of retrieveAsTemplate was not equal expected'
+                );
+                expect(
+                    await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
+
+                // *** buildDefinition ***
+
+                // check type list
+                assert.deepEqual(
+                    Object.keys(definitionResult),
+                    [
+                        'automation',
+                        'query',
+                        'dataExtract',
+                        'emailSend',
+                        'dataExtension',
+                        'sendClassification',
+                        'senderProfile',
+                        'fileTransfer',
+                        'importFile',
+                        'script',
+                        'verification',
+                    ],
+                    'did not create deployment packages for all relevant types'
+                );
+
+                // check automation
+                assert.equal(
+                    definitionResult.automation
+                        ? Object.keys(definitionResult.automation).length
+                        : 0,
+                    1,
+                    'only one automation expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualDeployJson('testTemplated_automation', 'automation'),
+                    await testUtils.getExpectedJson('9999999', 'automation', 'build'),
+                    'returned deployment file was not equal expected'
+                );
+
+                // check query
+                assert.equal(
+                    definitionResult.query ? Object.keys(definitionResult.query).length : 0,
+                    1,
+                    'only one query expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualDeployJson('testTemplated_query', 'query'),
+                    await testUtils.getExpectedJson('9999999', 'query', 'build'),
+                    'returned deployment JSON was not equal expected'
+                );
+                expect(
+                    await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    expectedApiCallsRetrieve,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+            });
+
+            it('build multiple type with keys and --bulk', async () => {
+                // download first before we test buildTemplate
+                await handler.retrieve('testInstance/testBU', ['automation', 'query']);
+
+                const expectedApiCallsRetrieve = 24;
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    expectedApiCallsRetrieve,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+
+                // preparation
+                const argvMetadata = [
+                    'automation:testExisting_automation',
+                    'query:testExisting_query',
+                    'query:bad',
+                ];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                assert.notEqual(
+                    typeof typeKeyCombo,
+                    'undefined',
+                    'typeKeyCombo should not be undefined'
+                );
+                const buName = 'testInstance/testBU';
+
+                // *** build: buildTemplate and buildDefinition chained ***
+                const definitionResult = await handler.build(
+                    buName,
+                    'ignored',
+                    typeKeyCombo,
+                    'testSourceMarket',
+                    'deployment-target',
+                    true
+                );
+                assert.equal(process.exitCode, 0, 'build should not have thrown an error');
+
+                // *** buildTemplate ***
+
+                // check automation
+                assert.deepEqual(
+                    await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
+                    await testUtils.getExpectedJson('9999999', 'automation', 'template'),
+                    'returned template was not equal expected'
+                );
+                // check query
+                assert.deepEqual(
+                    await testUtils.getActualTemplateJson('testExisting_query', 'query'),
+                    await testUtils.getExpectedJson('9999999', 'query', 'template'),
+                    'returned template JSON of retrieveAsTemplate was not equal expected'
+                );
+                expect(
+                    await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
+
+                // *** buildDefinitionBulk ***
+
+                // check automation
+                assert.equal(
+                    definitionResult.automation?.['testInstance/testBU']?.testSourceMarket
+                        ? Object.keys(
+                              definitionResult.automation?.['testInstance/testBU']?.testSourceMarket
+                          ).length
+                        : 0,
+                    1,
+                    'only one automation expected'
+                );
+                assert.equal(
+                    definitionResult.automation?.['testInstance/testBU']?.testTargetMarket
+                        ? Object.keys(
+                              definitionResult.automation?.['testInstance/testBU']?.testTargetMarket
+                          ).length
+                        : 0,
+                    1,
+                    'only one automation expected'
+                );
+                assert.equal(
+                    definitionResult.automation?.['testInstance/_ParentBU_']?.testTargetMarket
+                        ? Object.keys(
+                              definitionResult.automation?.['testInstance/_ParentBU_']
+                                  ?.testTargetMarket
+                          ).length
+                        : 0,
+                    1,
+                    'only one automation expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualDeployJson('testTemplated_automation', 'automation'),
+                    await testUtils.getExpectedJson('9999999', 'automation', 'build'),
+                    'returned deployment file was not equal expected'
+                );
+
+                // check if files were also created for other BU-market combos
+                // testBU: testSourceMarket
+                expect(
+                    await testUtils.getActualDeployFile(
+                        'testExisting_automation',
+                        'automation',
+                        'json'
+                    )
+                ).to.exist;
+                // _ParentBU_: testTargetMarket
+                expect(
+                    await testUtils.getActualDeployFile(
+                        'testTemplated_automation',
+                        'automation',
+                        'json',
+                        '_ParentBU_'
+                    )
+                ).to.exist;
+
+                // check query
+                assert.equal(
+                    definitionResult.query?.['testInstance/testBU']?.testSourceMarket
+                        ? Object.keys(
+                              definitionResult.query?.['testInstance/testBU']?.testSourceMarket
+                          ).length
+                        : 0,
+                    1,
+                    'only one query expected'
+                );
+                assert.equal(
+                    definitionResult.query?.['testInstance/testBU']?.testTargetMarket
+                        ? Object.keys(
+                              definitionResult.query?.['testInstance/testBU']?.testTargetMarket
+                          ).length
+                        : 0,
+                    1,
+                    'only one query expected'
+                );
+                assert.equal(
+                    definitionResult.query?.['testInstance/_ParentBU_']?.testTargetMarket
+                        ? Object.keys(
+                              definitionResult.query?.['testInstance/_ParentBU_']?.testTargetMarket
+                          ).length
+                        : 0,
+                    1,
+                    'only one query expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualDeployJson('testTemplated_query', 'query'),
+                    await testUtils.getExpectedJson('9999999', 'query', 'build'),
+                    'returned deployment JSON was not equal expected'
+                );
+                expect(
+                    await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
+
+                // check if files were also created for other BU-market combos
+                // testBU: testSourceMarket
+                expect(await testUtils.getActualDeployFile('testExisting_query', 'query', 'json'))
+                    .to.exist;
+                expect(await testUtils.getActualDeployFile('testExisting_query', 'query', 'sql')).to
+                    .exist;
+                // _ParentBU_: testTargetMarket
+                expect(
+                    await testUtils.getActualDeployFile(
+                        'testTemplated_query',
+                        'query',
+                        'json',
+                        '_ParentBU_'
+                    )
+                ).to.exist;
+                expect(
+                    await testUtils.getActualDeployFile(
+                        'testTemplated_query',
+                        'query',
+                        'sql',
+                        '_ParentBU_'
+                    )
+                ).to.exist;
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
+                    0,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+            });
+
+            it('build multiple type with keys and --bulk and --dependencies', async () => {
+                // download first before we test buildTemplate
+                await handler.retrieve('testInstance/testBU');
+
+                const expectedApiCallsRetrieve = 74;
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    expectedApiCallsRetrieve,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+
+                // preparation
+                const argvMetadata = [
+                    'automation:testExisting_automation',
+                    'query:testExisting_query',
+                    'query:bad',
+                ];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                assert.notEqual(
+                    typeof typeKeyCombo,
+                    'undefined',
+                    'typeKeyCombo should not be undefined'
+                );
+                const buName = 'testInstance/testBU';
+
+                // set skipInteraction to true to skip re-retrieving question
+                handler.setOptions({ dependencies: true, skipInteraction: true });
+
+                // *** build: buildTemplate and buildDefinition chained ***
+                const definitionResult = await handler.build(
+                    buName,
+                    'ignored',
+                    typeKeyCombo,
+                    'testSourceMarket',
+                    'deployment-target',
+                    true
+                );
+                assert.equal(process.exitCode, 0, 'build should not have thrown an error');
+
+                // *** buildTemplate ***
+
+                // check automation
+                assert.deepEqual(
+                    await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
+                    await testUtils.getExpectedJson('9999999', 'automation', 'template'),
+                    'returned template was not equal expected'
+                );
+                // check query
+                assert.deepEqual(
+                    await testUtils.getActualTemplateJson('testExisting_query', 'query'),
+                    await testUtils.getExpectedJson('9999999', 'query', 'template'),
+                    'returned template JSON of retrieveAsTemplate was not equal expected'
+                );
+                expect(
+                    await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
+
+                // *** buildDefinitionBulk ***
+
+                // check type list
+                assert.deepEqual(
+                    Object.keys(definitionResult),
+                    [
+                        'automation',
+                        'query',
+                        'dataExtract',
+                        'emailSend',
+                        'dataExtension',
+                        'sendClassification',
+                        'senderProfile',
+                        'fileTransfer',
+                        'importFile',
+                        'script',
+                        'verification',
+                    ],
+                    'did not create deployment packages for all relevant types'
+                );
+
+                // check automation
+                assert.equal(
+                    definitionResult.automation?.['testInstance/testBU']?.testSourceMarket
+                        ? Object.keys(
+                              definitionResult.automation?.['testInstance/testBU']?.testSourceMarket
+                          ).length
+                        : 0,
+                    1,
+                    'only one automation expected'
+                );
+                assert.equal(
+                    definitionResult.automation?.['testInstance/testBU']?.testTargetMarket
+                        ? Object.keys(
+                              definitionResult.automation?.['testInstance/testBU']?.testTargetMarket
+                          ).length
+                        : 0,
+                    1,
+                    'only one automation expected'
+                );
+                assert.equal(
+                    definitionResult.automation?.['testInstance/_ParentBU_']?.testTargetMarket
+                        ? Object.keys(
+                              definitionResult.automation?.['testInstance/_ParentBU_']
+                                  ?.testTargetMarket
+                          ).length
+                        : 0,
+                    1,
+                    'only one automation expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualDeployJson('testTemplated_automation', 'automation'),
+                    await testUtils.getExpectedJson('9999999', 'automation', 'build'),
+                    'returned deployment file was not equal expected'
+                );
+
+                // check if files were also created for other BU-market combos
+                // testBU: testSourceMarket
+                expect(
+                    await testUtils.getActualDeployFile(
+                        'testExisting_automation',
+                        'automation',
+                        'json'
+                    )
+                ).to.exist;
+                // _ParentBU_: testTargetMarket
+                expect(
+                    await testUtils.getActualDeployFile(
+                        'testTemplated_automation',
+                        'automation',
+                        'json',
+                        '_ParentBU_'
+                    )
+                ).to.exist;
+
+                // check query
+                assert.equal(
+                    definitionResult.query?.['testInstance/testBU']?.testSourceMarket
+                        ? Object.keys(
+                              definitionResult.query?.['testInstance/testBU']?.testSourceMarket
+                          ).length
+                        : 0,
+                    1,
+                    'only one query expected'
+                );
+                assert.equal(
+                    definitionResult.query?.['testInstance/testBU']?.testTargetMarket
+                        ? Object.keys(
+                              definitionResult.query?.['testInstance/testBU']?.testTargetMarket
+                          ).length
+                        : 0,
+                    1,
+                    'only one query expected'
+                );
+                assert.equal(
+                    definitionResult.query?.['testInstance/_ParentBU_']?.testTargetMarket
+                        ? Object.keys(
+                              definitionResult.query?.['testInstance/_ParentBU_']?.testTargetMarket
+                          ).length
+                        : 0,
+                    1,
+                    'only one query expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualDeployJson('testTemplated_query', 'query'),
+                    await testUtils.getExpectedJson('9999999', 'query', 'build'),
+                    'returned deployment JSON was not equal expected'
+                );
+                expect(
+                    await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
+
+                // check if files were also created for other BU-market combos
+                // testBU: testSourceMarket
+                expect(await testUtils.getActualDeployFile('testExisting_query', 'query', 'json'))
+                    .to.exist;
+                expect(await testUtils.getActualDeployFile('testExisting_query', 'query', 'sql')).to
+                    .exist;
+                // _ParentBU_: testTargetMarket
+                expect(
+                    await testUtils.getActualDeployFile(
+                        'testTemplated_query',
+                        'query',
+                        'json',
+                        '_ParentBU_'
+                    )
+                ).to.exist;
+                expect(
+                    await testUtils.getActualDeployFile(
+                        'testTemplated_query',
+                        'query',
+                        'sql',
+                        '_ParentBU_'
+                    )
+                ).to.exist;
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
+                    4,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+            });
         });
 
         describe('Delete --metadata ~~~', () => {
@@ -1206,6 +2055,111 @@ describe('GENERAL', () => {
                 // THEN
                 assert.equal(process.exitCode, 0, 'deleteByKey should not have thrown an error');
                 assert.equal(isDeleted, true, 'deleteByKey should have returned true');
+                return;
+            });
+        });
+
+        describe('Publish --metadata ~~~', () => {
+            it('Should publish the journey', async () => {
+                handler.setOptions({ skipStatusCheck: true });
+                const argvMetadata = ['journey:id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1'];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                // WHEN
+                const publish = await handler.publish('testInstance/testBU', typeKeyCombo);
+                // THEN
+                assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
+                assert.deepEqual(
+                    publish['testInstance/testBU']?.journey,
+                    ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1'],
+                    'should have published the right journey'
+                );
+                return;
+            });
+        });
+
+        describe('Execute/Start --metadata ~~~', () => {
+            it('Should execute the item', async () => {
+                const argvMetadata = [
+                    'query:testExisting_query',
+                    'automation:testExisting_automation',
+                ];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                // WHEN
+                const executedKeys = await handler.execute('testInstance/testBU', typeKeyCombo);
+                assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
+
+                // query
+                assert.equal(
+                    executedKeys['testInstance/testBU']?.query?.length,
+                    1,
+                    'returned number of keys does not correspond to number of expected fixed keys'
+                );
+                assert.equal(
+                    executedKeys['testInstance/testBU']?.query[0],
+                    'testExisting_query',
+                    'returned keys do not correspond to expected fixed keys'
+                );
+
+                // automation
+                assert.equal(
+                    executedKeys['testInstance/testBU']?.automation?.length,
+                    1,
+                    'automation was supposed to be executed'
+                );
+                assert.equal(
+                    executedKeys['testInstance/testBU']?.automation[0],
+                    'testExisting_automation',
+                    'returned keys do not correspond to expected fixed keys'
+                );
+
+                return;
+            });
+        });
+
+        describe('Pause --metadata ~~~', () => {
+            it('Should pause the item', async () => {
+                const argvMetadata = ['automation:testExisting_automation_pause'];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                // WHEN
+                const pausedKeys = await handler.pause('testInstance/testBU', typeKeyCombo);
+                assert.equal(process.exitCode, 0, 'pause should not have thrown an error');
+
+                // automation
+                assert.equal(
+                    pausedKeys['testInstance/testBU']?.automation?.length,
+                    1,
+                    'returned number of keys does not correspond to number of expected fixed keys'
+                );
+                assert.equal(
+                    pausedKeys['testInstance/testBU']?.automation[0],
+                    'testExisting_automation_pause',
+                    'returned keys do not correspond to expected fixed keys'
+                );
+
+                return;
+            });
+        });
+
+        describe('Schedule --metadata ~~~', () => {
+            it('Should schedule the item', async () => {
+                const argvMetadata = ['automation:testExisting_automation'];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                // WHEN
+                const scheduled = await handler.schedule('testInstance/testBU', typeKeyCombo);
+                assert.equal(process.exitCode, 0, 'execute should not have thrown an error');
+
+                // automation
+                assert.equal(
+                    scheduled['testInstance/testBU']?.automation?.length,
+                    1,
+                    'returned number of keys does not correspond to number of expected fixed keys'
+                );
+                assert.equal(
+                    scheduled['testInstance/testBU']?.automation[0],
+                    'testExisting_automation',
+                    'returned keys do not correspond to expected fixed keys'
+                );
+
                 return;
             });
         });
@@ -1247,7 +2201,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    8,
+                    5,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -1338,7 +2292,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    9,
+                    8,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });

@@ -4,6 +4,8 @@
     "description": "updated on deploy",
     "mode": "Production",
     "eventDefinitionKey": "testExisting_event",
+    "entrySourceGroupConfigUrl": "jb:///data/entry/api-event/entrysourcegroupconfig.json",
+    "iconUrl": "/images/icon_journeyBuilder-event-api-blue.svg",
     "schema": {
         "fields": [
             {
@@ -191,7 +193,7 @@
         "id": "f2cc2b21-d73a-ef11-a5c8-5cba2c702db8",
         "name": "testExisting_event - 2024-07-05T080154625"
     },
-    "isVisibleInPicker": true,
+    "isVisibleInPicker": false,
     "arguments": {
         "eventDefinitionKey": "testExisting_event",
         "dataExtensionId": "f2cc2b21-d73a-ef11-a5c8-5cba2c702db8"

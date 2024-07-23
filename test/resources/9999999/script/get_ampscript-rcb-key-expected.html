@@ -2,7 +2,8 @@ line1
 %%[
     SET @test = 'bla bla'
 ]%%
-line2 %%= ContentBlockByKey("mcdev-issue-1157") =%% still line2 line3
+line2 %%= ContentBlockByKey("testExisting_asset_htmlblock") =%% still line2 line3
 <script runat="server">
-    Platform.Function.ContentBlockByKey("mcdev-issue-1157");
+    Platform.Function.ContentBlockByKey("testExisting_asset_htmlblock");
+    Platform.Function.ContentBlockByKey("testExisting_htmlblock1");
 </script>

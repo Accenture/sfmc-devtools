@@ -7,6 +7,7 @@ export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataType
 export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 export type AssetSubType = import("../../types/mcdev.d.js").AssetSubType;
 export type AssetMap = import("../../types/mcdev.d.js").AssetMap;
 export type AssetItem = import("../../types/mcdev.d.js").AssetItem;
@@ -20,6 +21,7 @@ export type AssetRequestParams = import("../../types/mcdev.d.js").AssetRequestPa
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMap} MetadataTypeMap
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
+ * @typedef {import('../../types/mcdev.d.js').TypeKeyCombo} TypeKeyCombo
  */
 /**
  * @typedef {import('../../types/mcdev.d.js').AssetSubType} AssetSubType
@@ -47,12 +49,6 @@ declare class Asset extends MetadataType {
         metadata: AssetMap;
         type: string;
     }>;
-    /**
-     * helper for Journey's {@link Asset.saveResults}. Gets executed after retreive of metadata type and
-     *
-     * @param {MetadataTypeMap} metadataMap key=customer key, value=metadata
-     */
-    static _postRetrieveTasksBulk(metadataMap: MetadataTypeMap): Promise<void>;
     /**
      * Retrieves asset metadata for caching
      *
@@ -103,14 +99,14 @@ declare class Asset extends MetadataType {
     /**
      * Retrieves Metadata of a specific asset type
      *
-     * @param {string} subType group of similar assets to put in a folder (ie. images)
+     * @param {string|string[]} subType group of similar assets to put in a folder (ie. images)
      * @param {string} [retrieveDir] target directory for saving assets
      * @param {string} [key] key/id/name to filter by
      * @param {TemplateMap} [templateVariables] variables to be replaced in the metadata
      * @param {boolean} [loadShared] optionally retrieve assets from other BUs that were shared with the current
      * @returns {Promise.<object[]>} Promise
      */
-    static requestSubType(subType: string, retrieveDir?: string, key?: string, templateVariables?: TemplateMap, loadShared?: boolean): Promise<object[]>;
+    static requestSubType(subType: string | string[], retrieveDir?: string, key?: string, templateVariables?: TemplateMap, loadShared?: boolean): Promise<object[]>;
     /**
      * Retrieves extended metadata (files or extended content) of asset
      *
@@ -242,6 +238,20 @@ declare class Asset extends MetadataType {
      * helper for {@link Asset.preDeployTasks} that loads extracted code content back into JSON
      *
      * @param {AssetItem} metadata a single asset definition
+     * @returns {Promise.<void>} fileList for templating (disregarded during deployment)
+     */
+    static _preDeployTasksBocks(metadata: AssetItem): Promise<void>;
+    /**
+     * helper for {@link Asset.preDeployTasks} that loads extracted code content back into JSON
+     *
+     * @param {object} metadataSlots metadata.views.html.slots or deeper slots.<>.blocks.<>.slots
+     * @returns {Promise.<void>} -
+     */
+    static _preDeployTasksBocks_slots(metadataSlots: object): Promise<void>;
+    /**
+     * helper for {@link Asset.preDeployTasks} that loads extracted code content back into JSON
+     *
+     * @param {AssetItem} metadata a single asset definition
      * @param {string} deployDir directory of deploy files
      * @param {string} subType asset-subtype name; full list in AssetSubType
      * @param {string} [templateName] name of the template used to built defintion (prior applying templating)
@@ -273,6 +283,8 @@ declare class Asset extends MetadataType {
      */
     static _extractCode(metadata: AssetItem): CodeExtractItem;
     /**
+     * helper for {@link Asset.postRetrieveTasks} via {@link Asset._extractCode}
+     *
      * @param {string} prefix usually the customerkey
      * @param {object} metadataSlots metadata.views.html.slots or deeper slots.<>.blocks.<>.slots
      * @param {object[]} codeArr to be extended array for extracted code
@@ -280,14 +292,13 @@ declare class Asset extends MetadataType {
      */
     static _extractCode_slots(prefix: string, metadataSlots: object, codeArr: object[]): void;
     /**
-     * Returns file contents mapped to their fileName without '.json' ending
+     * helper for {@link Asset.getJsonFromFS} that reads the file system for metadata files
      *
-     * @param {string} dir directory that contains '.json' files to be read
-     * @param {boolean} _ unused parameter
-     * @param {string[]} selectedSubType asset, message, ...
-     * @returns {Promise.<MetadataTypeMap>} fileName => fileContent map
+     * @param {string} currentdir directory to scan
+     * @param {string} subtype single subtype of asset
+     * @param {MetadataTypeMap} fileName2FileContent fileName => fileContent map
      */
-    static getJsonFromFS(dir: string, _: boolean, selectedSubType: string[]): Promise<MetadataTypeMap>;
+    static _getJsonFromFS(currentdir: string, subtype: string, fileName2FileContent: MetadataTypeMap): Promise<void>;
     /**
      * optional method used for some types to try a different folder structure
      *
@@ -358,14 +369,34 @@ declare class Asset extends MetadataType {
      *
      * @param {MetadataTypeItem} item single metadata item
      * @param {string} retrieveDir directory where metadata is saved
+     * @param {Set.<string>} [findAssetKeys] list of keys that were found referenced via ContentBlockByX; if set, method only gets keys and runs no updates
      * @returns {Promise.<MetadataTypeItem>} key of the item that was updated
      */
-    static replaceCbReference(item: MetadataTypeItem, retrieveDir: string): Promise<MetadataTypeItem>;
+    static replaceCbReference(item: MetadataTypeItem, retrieveDir: string, findAssetKeys?: Set<string>): Promise<MetadataTypeItem>;
+    /**
+     *
+     * @param {string[]} keyArr limit retrieval to given metadata type
+     * @param {string} retrieveDir retrieve dir including cred and bu
+     * @param {Set.<string>} findAssetKeys list of keys that were found referenced via ContentBlockByX; if set, method only gets keys and runs no updates
+     * @returns {Promise.<Set.<string>>} found asset keys
+     */
+    static getCbReferenceKeys(keyArr: string[], retrieveDir: string, findAssetKeys: Set<string>): Promise<Set<string>>;
+    /**
+     * @param {object} slots metadata.views.html.slots or deeper slots.<>.blocks.<>.slots
+     * @param {string[]} dependentKeyArr list of found keys
+     */
+    static _getDependentFilesExtra(slots: object, dependentKeyArr: string[]): void;
 }
 declare namespace Asset {
+    let getJsonFromFSCache: {
+        [x: string]: any;
+    };
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            asset: string[];
+        };
         folderType: string;
         hasExtended: boolean;
         idField: string;
@@ -382,6 +413,7 @@ declare namespace Asset {
         typeDescription: string;
         typeRetrieveByDefault: string[];
         typeName: string;
+        stringifyFieldsBeforeTemplate: string[];
         fields: {
             activeDate: {
                 isCreateable: boolean;
@@ -438,7 +470,10 @@ declare namespace Asset {
                 template: boolean;
             };
             businessUnitAvailability: {
-                skipValidation: boolean;
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
             };
             category: {
                 isCreateable: boolean;
@@ -805,6 +840,8 @@ declare namespace Asset {
             };
         };
         subTypes: string[];
+        crosslinkedSubTypes: string[];
+        selflinkedSubTypes: string[];
         binarySubtypes: string[];
         extendedSubTypes: {
             asset: string[];

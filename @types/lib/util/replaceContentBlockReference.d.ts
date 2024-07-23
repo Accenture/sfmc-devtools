@@ -20,6 +20,8 @@
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
  * @typedef {import('../../types/mcdev.d.js').TypeKeyCombo} TypeKeyCombo
  * @typedef {import('../../types/mcdev.d.js').SDKError} SDKError
+ *
+ * @typedef {import('../../types/mcdev.d.js').AssetMap} AssetMap
  * @typedef {import('../../types/mcdev.d.js').AssetItemSimple} AssetItemSimple
  * @typedef {import('../../types/mcdev.d.js').AssetItemSimpleMap} AssetItemSimpleMap
  * @typedef {import('../../types/mcdev.d.js').AssetItemIdSimpleMap} AssetItemIdSimpleMap
@@ -48,11 +50,10 @@ export default class ReplaceContentBlockReference {
      *
      * @param {string} str full code string
      * @param {string} parentName name of the object that was passed in; used in error message only
-     * @param {ContentBlockConversionTypes[]} [fromList] what to replace
-     * @param {ContentBlockConversionTypes} [to] what to replace with
+     * @param {Set.<string>} [findAssetKeys] list of keys that were found referenced via ContentBlockByX; if set, method only gets keys and runs no updates
      * @returns {string} replaced string
      */
-    static replaceReference(str: string, parentName: string, fromList?: ContentBlockConversionTypes[], to?: ContentBlockConversionTypes): string;
+    static replaceReference(str: string, parentName: string, findAssetKeys?: Set<string>): string;
     /**
      *
      * @param {ContentBlockConversionTypes} from replace with
@@ -71,12 +72,33 @@ export default class ReplaceContentBlockReference {
      */
     static "__#2@#replaceWith"(asset: AssetItemSimple, to: ContentBlockConversionTypes, isSsjs?: boolean): string;
     /**
+     * ensures we cache the right things from disk and if required from server
      *
      * @param {Mcdevrc} properties properties for auth
 saved
      * @param {BuObject} buObject properties for auth
+     * @param {boolean} [retrieveSharedOnly] for --dependencies only, do not have to re-retrieve local assets
+     * @returns {Promise.<void>} -
      */
-    static createCacheMap(properties: Mcdevrc, buObject: BuObject): Promise<void>;
+    static createCacheMap(properties: Mcdevrc, buObject: BuObject, retrieveSharedOnly?: boolean): Promise<void>;
+    /**
+     * helper for {@link this.createCacheMap} that converts AssetMap into Asset
+     *
+     * @param {AssetMap} metadataMap list of local or shared assets
+     */
+    static _createCacheMap(metadataMap: AssetMap): void;
+    /**
+     * helper for {@link this.createCacheMap}
+     *
+     * @param {BuObject} buObject references credentials
+     * @param {Mcdevrc} properties central properties object
+     * @param {boolean} [retrieveSharedOnly] for --dependencies only, do not have to re-retrieve local assets
+     * @returns {Promise.<{localAssets: AssetMap, sharedAssets: AssetMap}>} -
+     */
+    static _retrieveCache(buObject: BuObject, properties: Mcdevrc, retrieveSharedOnly?: boolean): Promise<{
+        localAssets: AssetMap;
+        sharedAssets: AssetMap;
+    }>;
 }
 export type AuthObject = import("../../types/mcdev.d.js").AuthObject;
 export type BuObject = import("../../types/mcdev.d.js").BuObject;
@@ -99,6 +121,7 @@ export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestPara
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 export type SDKError = import("../../types/mcdev.d.js").SDKError;
+export type AssetMap = import("../../types/mcdev.d.js").AssetMap;
 export type AssetItemSimple = import("../../types/mcdev.d.js").AssetItemSimple;
 export type AssetItemSimpleMap = import("../../types/mcdev.d.js").AssetItemSimpleMap;
 export type AssetItemIdSimpleMap = import("../../types/mcdev.d.js").AssetItemIdSimpleMap;

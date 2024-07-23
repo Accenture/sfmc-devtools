@@ -215,9 +215,10 @@ export namespace Util {
      * helper to print the subtypes we filtered by
      *
      * @param {string[]} subTypeArr list of subtypes to be printed
+     * @param {string} [indent] optional prefix of spaces to be added to the log message
      * @returns {void}
      */
-    function logSubtypes(subTypeArr: string[]): void;
+    function logSubtypes(subTypeArr: string[], indent?: string): void;
     /**
      * helper to print the subtypes we filtered by
      *
@@ -278,12 +279,33 @@ export namespace Util {
     /**
      * helper for Retriever and Deployer class
      *
-     * @param {string[]} typeArr -
+     * @param {string | string[]} typeArr -
      * @param {string[]} keyArr -
      * @param {boolean} [returnEmpty] returns array with null element if false/not set; Retriever needs this to be false; Deployer needs it to be true
      * @returns {TypeKeyCombo} -
      */
-    function createTypeKeyCombo(typeArr: string[], keyArr: string[], returnEmpty?: boolean): TypeKeyCombo;
+    function createTypeKeyCombo(typeArr: string | string[], keyArr: string[], returnEmpty?: boolean): TypeKeyCombo;
+    /**
+     * helper that converts TypeKeyCombo objects into a string with all relevant -m parameters
+     *
+     * @param {TypeKeyCombo} [selectedTypes] selected metadata types & key
+     * @returns {string} object converted into --metadata parameters
+     */
+    function convertTypeKeyToCli(selectedTypes?: TypeKeyCombo): string;
+    /**
+     * helper that converts TypeKeyCombo objects into a string with all relevant -m parameters
+     *
+     * @param {TypeKeyCombo} [selectedTypes] selected metadata types & key
+     * @returns {string} object converted into --metadata parameters
+     */
+    function convertTypeKeyToString(selectedTypes?: TypeKeyCombo): string;
+    /**
+     * helper that checks how many keys are defined in TypeKeyCombo object
+     *
+     * @param {TypeKeyCombo} [selectedTypes] selected metadata types & key
+     * @returns {number} amount of keys across all types
+     */
+    function getTypeKeyCount(selectedTypes?: TypeKeyCombo): number;
     /**
      * async version of Array.find()
      * returns the first element in the provided array that satisfies the provided testin function
@@ -293,6 +315,13 @@ export namespace Util {
      * @returns {Promise.<any | undefined>} first element that passed the test
      */
     function findAsync(arr: any[], asyncCallback: Function): Promise<any | undefined>;
+    /**
+     *
+     * @param {Array} array array to be chunked
+     * @param {number} chunk_size integer > 0
+     * @returns {Array[]} array of arrays with max chunk_size members per element, last element might have less
+     */
+    function chunk(array: any[], chunk_size: number): any[][];
 }
 export type AuthObject = import("../../types/mcdev.d.js").AuthObject;
 export type BuObject = import("../../types/mcdev.d.js").BuObject;

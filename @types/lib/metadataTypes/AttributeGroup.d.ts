@@ -39,6 +39,9 @@ declare namespace AttributeGroup {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            attributeSet: string[];
+        };
         hasExtended: boolean;
         idField: string;
         keyIsFixed: boolean;

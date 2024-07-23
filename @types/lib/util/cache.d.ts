@@ -17,6 +17,14 @@ declare namespace _default {
      */
     function searchForField(metadataType: string, searchValue: string | number | boolean, searchField: string, returnField: string, overrideMID?: number): string;
     /**
+     * helper for setFolderId
+     *
+     * @param {string} r__folder_Path folder path value
+     * @param {number} [overrideMID] ignore currentMID and use alternative (for example parent MID)
+     * @returns {number} folder ID
+     */
+    function getFolderId(r__folder_Path: string, overrideMID?: number): number;
+    /**
      * standardized method for getting data from cache - adapted for special case of lists
      * ! keeping this in util/cache.js rather than in metadataTypes/List.js to avoid potential circular dependencies
      *
@@ -53,4 +61,6 @@ export type MultiMetadataTypeMap = import("../../types/mcdev.d.js").MultiMetadat
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
+export type ListItem = import("../../types/mcdev.d.js").ListItem;
+export type ListMap = import("../../types/mcdev.d.js").ListMap;
 //# sourceMappingURL=cache.d.ts.map

@@ -59,6 +59,11 @@ declare namespace AttributeSet {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            dataExtension: string[];
+            attributeSet: string[];
+            attributeGroup: string[];
+        };
         hasExtended: boolean;
         idField: string;
         keyIsFixed: boolean;

@@ -24,6 +24,22 @@ declare namespace _default {
     }
     export let bodyIteratorField: string;
     export let dependencies: string[];
+    export namespace dependencyGraph {
+        let dataExtract_1: string[];
+        export { dataExtract_1 as dataExtract };
+        let emailSend_1: string[];
+        export { emailSend_1 as emailSend };
+        let fileTransfer_1: string[];
+        export { fileTransfer_1 as fileTransfer };
+        let importFile_1: string[];
+        export { importFile_1 as importFile };
+        let query_1: string[];
+        export { query_1 as query };
+        let script_1: string[];
+        export { script_1 as script };
+        let verification_1: string[];
+        export { verification_1 as verification };
+    }
     export let folderType: string;
     export let hasExtended: boolean;
     export namespace filter_1 {

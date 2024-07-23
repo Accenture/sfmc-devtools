@@ -236,6 +236,7 @@ declare namespace User {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {};
         folderType: any;
         hasExtended: boolean;
         idField: string;

@@ -9,6 +9,8 @@
     "modifiedBy": 0,
     "mode": "Production",
     "eventDefinitionKey": "testNew_event_withExistingDE",
+    "iconUrl": "/images/icon_journeyBuilder-event-api-blue.svg",
+    "sourceApplicationExtensionId": "7db1f972-f8b7-49b6-91b5-fa218e13953d",
     "dataExtensionId": "f2cc2b21-d73a-ef11-a5c8-5cba2c702db8",
     "filterDefinitionId": "00000000-0000-0000-0000-000000000000",
     "arguments": {

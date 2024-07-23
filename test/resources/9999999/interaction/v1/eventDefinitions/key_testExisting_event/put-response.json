@@ -9,6 +9,7 @@
     "modifiedBy": 0,
     "mode": "Production",
     "eventDefinitionKey": "testExisting_event",
+    "iconUrl": "/images/icon_journeyBuilder-event-api-blue.svg",
     "dataExtensionId": "f2cc2b21-d73a-ef11-a5c8-5cba2c702db8",
     "schema": {
         "id": "f2cc2b21-d73a-ef11-a5c8-5cba2c702db8",
@@ -233,7 +234,7 @@
     },
     "metaData": {},
     "interactionCount": 0,
-    "isVisibleInPicker": true,
+    "isVisibleInPicker": false,
     "isPlatformObject": false,
     "category": "Event",
     "publishedInteractionCount": 0,

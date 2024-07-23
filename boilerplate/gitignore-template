@@ -4,7 +4,6 @@ node_modules/
 /docs/badKeys/
 /docs/deltaPackage/
 /logs/
-/template/
 **/QueryStudioResults at*
 .mcdev-auth.json
 *.error.log

@@ -95,17 +95,17 @@ declare class TriggeredSend extends MetadataType {
      * @returns {Promise.<boolean>} true if refresh was successful
      */
     static _refreshItem(key: string, checkKey: boolean): Promise<boolean>;
-    /**
-     *
-     * @param {MetadataTypeItem} item single metadata item
-     * @returns {Promise.<MetadataTypeItem>} key of the item that was updated
-     */
-    static replaceCbReference(item: MetadataTypeItem): Promise<MetadataTypeItem>;
 }
 declare namespace TriggeredSend {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            asset: string[];
+            list: string[];
+            sendClassification: string[];
+            senderProfile: string[];
+        };
         folderType: string;
         hasExtended: boolean;
         idField: string;

@@ -156,24 +156,35 @@ describe('type: asset', () => {
                 retrieve['testInstance/testBU'].asset
                     ? Object.keys(retrieve['testInstance/testBU'].asset).length
                     : 0,
-                5,
-                'only 5 assets expected in retrieve response'
+                8,
+                'Unexpected number of assets in retrieve response'
             );
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                5,
-                'only 5 assets expected in cache'
+                8,
+                'Unexpected number of assets in cache'
             );
 
             assert.deepEqual(
-                await getActualJson('mcdev-issue-1157', 'asset', 'block'),
-                await testUtils.getExpectedJson('9999999', 'asset', 'block-1157-retrieve'),
+                await getActualJson('testExisting_asset_htmlblock', 'asset', 'block'),
+                await testUtils.getExpectedJson(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_htmlblock-retrieve'
+                ),
                 'returned metadata was not equal expected'
             );
-            expect(await getActualFile('mcdev-issue-1157', 'asset', 'block', 'html')).to.equal(
-                await testUtils.getExpectedFile('9999999', 'asset', 'block-1157-retrieve', 'html')
+            expect(
+                await getActualFile('testExisting_asset_htmlblock', 'asset', 'block', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_htmlblock-retrieve',
+                    'html'
+                )
             );
 
             assert.deepEqual(
@@ -216,7 +227,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                15,
+                21,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -229,6 +240,7 @@ describe('type: asset', () => {
         });
 
         it('Should create an asset with mis-matching memberId, automatically adding the MID suffix', async () => {
+            handler.setOptions({ autoMidSuffix: true });
             // WHEN
             const deployResult = await handler.deploy(
                 'testInstance/testBU',
@@ -250,7 +262,7 @@ describe('type: asset', () => {
             assert.equal(
                 upsertCallout?.customerKey,
                 'testNew_asset-9999999',
-                'customerKey should be testNew_asset-9999999 due to automatic MID suffix'
+                'customerKey should be testNew_asset-9999999 due to --autoMidSuffix'
             );
 
             // insert
@@ -262,14 +274,14 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
 
-        it('Should create an assetwith mis-matching memberId, --noMidSuffix and --keySuffix', async () => {
-            handler.setOptions({ keySuffix: '_DEV', noMidSuffix: true });
+        it('Should create an assetwith mis-matching memberId and --keySuffix', async () => {
+            handler.setOptions({ keySuffix: '_DEV' });
             // WHEN
             const deployResult = await handler.deploy(
                 'testInstance/testBU',
@@ -291,19 +303,18 @@ describe('type: asset', () => {
             assert.equal(
                 upsertCallout?.customerKey,
                 'testNew_asset_DEV',
-                'customerKey should be testNew_asset_DEV due to noMidSuffix and keySuffix'
+                'customerKey should be testNew_asset_DEV due to --keySuffix'
             );
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
 
-        it('Should create an assetwith mis-matching memberId, --noMidSuffix', async () => {
-            handler.setOptions({ noMidSuffix: true });
+        it('Should create an assetwith mis-matching memberId', async () => {
             // WHEN
             const deployResult = await handler.deploy(
                 'testInstance/testBU',
@@ -325,12 +336,12 @@ describe('type: asset', () => {
             assert.equal(
                 upsertCallout?.customerKey,
                 'testNew_asset',
-                'customerKey should be testNew_asset due to noMidSuffix'
+                'customerKey should be testNew_asset'
             );
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -342,7 +353,7 @@ describe('type: asset', () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['asset']);
 
-            const expectedApiCallsRetrieve = 15;
+            const expectedApiCallsRetrieve = 21;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 expectedApiCallsRetrieve,
@@ -353,16 +364,18 @@ describe('type: asset', () => {
             const result = await handler.buildTemplate(
                 'testInstance/testBU',
                 'asset',
-                ['testExisting_asset_templatebasedemail'],
+                ['testExisting_asset_templatebasedemail', 'testExisting_asset_htmlblock'],
                 'testSourceMarket'
             );
             // WHEN
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                1,
-                'only one asset expected'
+                2,
+                'unexpected number of assets templated'
             );
+
+            // testExisting_asset_templatebasedemail
             assert.deepEqual(
                 await getActualTemplateJson(
                     'testExisting_asset_templatebasedemail',
@@ -372,7 +385,6 @@ describe('type: asset', () => {
                 await testUtils.getExpectedJson('9999999', 'asset', 'template-templatebasedemail'),
                 'returned template JSON of buildTemplate was not equal expected'
             );
-
             expect(
                 await getActualTemplateFile(
                     'testExisting_asset_templatebasedemail',
@@ -405,15 +417,21 @@ describe('type: asset', () => {
                     'amp'
                 )
             );
-            // THEN
-            await handler.buildDefinition(
+
+            const definitions = await handler.buildDefinition(
                 'testInstance/testBU',
                 'asset',
-                ['testExisting_asset_templatebasedemail'],
+                ['testExisting_asset_templatebasedemail', 'testExisting_asset_htmlblock'],
                 'testTargetMarket'
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
+            assert.equal(
+                definitions.asset ? Object.keys(definitions.asset).length : 0,
+                2,
+                'unexpected number of assets templated'
+            );
 
+            // testTemplated_asset_templatebasedemail
             assert.deepEqual(
                 await getActualDeployJson(
                     'testTemplated_asset_templatebasedemail',
@@ -456,9 +474,129 @@ describe('type: asset', () => {
                 )
             );
 
+            // testTemplated_asset_htmlblock
+            assert.deepEqual(
+                await getActualDeployJson('testTemplated_asset_htmlblock', 'asset', 'block'),
+                await testUtils.getExpectedJson('9999999', 'asset', 'build-asset_htmlblock'),
+                'returned deployment JSON was not equal expected'
+            );
+            expect(
+                await getActualDeployFile('testTemplated_asset_htmlblock', 'asset', 'block', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile('9999999', 'asset', 'build-asset_htmlblock', 'html')
+            );
+
             assert.equal(
                 testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
                 0,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should create a asset template via buildTemplate with --dependencies', async () => {
+            // download first before we test buildTemplate
+            await handler.retrieve('testInstance/testBU', ['asset']);
+
+            const expectedApiCallsRetrieve = 21;
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                expectedApiCallsRetrieve,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            handler.setOptions({ dependencies: true, skipInteraction: true });
+
+            // GIVEN there is a template
+            const templatedItems = await handler.buildTemplate(
+                'testInstance/testBU',
+                'asset',
+                ['testExisting_asset_templatebasedemail'],
+                'testSourceMarket'
+            );
+            // WHEN
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+            assert.equal(
+                templatedItems.asset ? templatedItems.asset.length : 0,
+                5,
+                'Unexpted number of assets templated'
+            );
+            assert.deepEqual(
+                templatedItems.asset.map((item) => item.customerKey),
+                [
+                    '{{{prefix}}}asset_templatebasedemail',
+                    '{{{prefix}}}asset_template',
+                    '{{{prefix}}}asset_htmlblock',
+                    '{{{prefix}}}htmlblock1',
+                    '{{{prefix}}}htmlblock2',
+                ],
+                'expected specific assets to be templated'
+            );
+
+            // testExisting_asset_templatebasedemail
+            assert.deepEqual(
+                await getActualTemplateJson(
+                    'testExisting_asset_templatebasedemail',
+                    'asset',
+                    'message'
+                ),
+                await testUtils.getExpectedJson('9999999', 'asset', 'template-templatebasedemail'),
+                'returned template JSON of buildTemplate was not equal expected'
+            );
+
+            expect(
+                await getActualTemplateFile(
+                    'testExisting_asset_templatebasedemail',
+                    'asset',
+                    'message',
+                    'html',
+                    'views.html.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'template-templatebasedemail-html',
+                    'html'
+                )
+            );
+            expect(
+                await getActualTemplateFile(
+                    'testExisting_asset_templatebasedemail',
+                    'asset',
+                    'message',
+                    'amp',
+                    'views.preheader.content'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'template-templatebasedemail-preheader',
+                    'amp'
+                )
+            );
+
+            // testExisting_asset_template
+            assert.deepEqual(
+                await getActualTemplateJson('testExisting_asset_template', 'asset', 'template'),
+                await testUtils.getExpectedJson('9999999', 'asset', 'template-emailTemplate'),
+                'returned template JSON of buildTemplate was not equal expected'
+            );
+
+            // testExisting_asset_htmlblock
+            assert.deepEqual(
+                await getActualTemplateJson('testExisting_asset_htmlblock', 'asset', 'block'),
+                await testUtils.getExpectedJson(
+                    '9999999',
+                    'asset',
+                    'template-testExisting_asset_htmlblock'
+                ),
+                'returned template JSON of buildTemplate was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
+                4,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -509,7 +647,11 @@ describe('type: asset', () => {
 
         it('Should resolve the id of the item AND find the asset locally', async () => {
             // prep test by retrieving the file
-            await handler.retrieve('testInstance/testBU', ['asset-block'], ['mcdev-issue-1157']);
+            await handler.retrieve(
+                'testInstance/testBU',
+                ['asset-block'],
+                ['testExisting_asset_htmlblock']
+            );
             // WHEN
             const resolveIdJson = await handler.resolveId(
                 'testInstance/testBU',
@@ -558,15 +700,19 @@ describe('type: asset', () => {
             // retrieve result
             assert.deepEqual(
                 replace['testInstance/testBU'].asset,
-                ['testExisting_asset_message'],
+                [
+                    'testExisting_asset_htmlblock',
+                    'testExisting_htmlblock1',
+                    'testExisting_asset_message',
+                ],
                 'should have found the right assets that need updating'
             );
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                5,
-                'only 5 assets expected'
+                8,
+                'Unexpected number of assets in cache'
             );
             // check if conversions happened
             expect(
@@ -620,7 +766,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                26,
+                23,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -649,8 +795,8 @@ describe('type: asset', () => {
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                5,
-                'only 5 assets expected'
+                8,
+                'Unexpected number of assets in cache'
             );
             // check if conversions happened
             expect(
@@ -704,7 +850,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                26,
+                23,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -726,15 +872,19 @@ describe('type: asset', () => {
             // retrieve result
             assert.deepEqual(
                 replace['testInstance/testBU'].asset,
-                ['testExisting_asset_message'],
+                [
+                    'testExisting_asset_htmlblock',
+                    'testExisting_htmlblock1',
+                    'testExisting_asset_message',
+                ],
                 'should have found the right assets that need updating'
             );
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                5,
-                'only 5 assets expected'
+                8,
+                'Unexpected number of assets in cache'
             );
             // check if conversions happened
             expect(
@@ -788,7 +938,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                26,
+                23,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

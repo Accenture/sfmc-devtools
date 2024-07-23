@@ -94,6 +94,7 @@ declare namespace FileTransfer {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {};
         hasExtended: boolean;
         idField: string;
         keyIsFixed: boolean;

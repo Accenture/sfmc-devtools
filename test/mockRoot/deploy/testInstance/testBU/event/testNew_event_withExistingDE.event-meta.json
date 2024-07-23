@@ -7,6 +7,7 @@
     "modifiedDate": "0001-01-01T00:00:00",
     "modifiedBy": 0,
     "eventDefinitionKey": "testNew_event_withExistingDE",
+    "sourceApplicationExtensionId": "7db1f972-f8b7-49b6-91b5-fa218e13953d",
     "schema": {
         "fields": [
             {

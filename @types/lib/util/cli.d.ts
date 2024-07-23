@@ -107,14 +107,11 @@ declare namespace Cli {
      * helper for {@link Cli.selectTypes} that converts subtypes back to main type if all and only defaults were selected
      * this keeps the config automatically upgradable when we add new subtypes or change what is selected by default
      *
-     * @param {object} responses wrapper object for respones
-     * @param {string[]} responses.selectedTypes what types the user selected
+     * @param {string[]} selectedTypes what types the user selected
      * @param {string} type metadata type
-     * @returns {void}
+     * @returns {string[]} filtered selectedTypes
      */
-    function _summarizeSubtypes(responses: {
-        selectedTypes: string[];
-    }, type: string): void;
+    function _summarizeSubtypes(selectedTypes: string[], type: string): string[];
     /**
      * shows metadata type descriptions
      *

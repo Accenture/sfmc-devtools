@@ -100,6 +100,11 @@ declare namespace ImportFile {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            dataExtension: string[];
+            list: string[];
+            mobileKeyword: string[];
+        };
         destinationObjectTypeMapping: {
             unknown: number;
             DataExtension: number;

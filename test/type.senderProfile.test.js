@@ -128,6 +128,39 @@ describe('type: senderProfile', () => {
             );
             return;
         });
+
+        it('Should create a senderProfile template via buildTemplate with --dependencies', async () => {
+            // download first before we test buildTemplate
+            handler.setOptions({ dependencies: true, retrieve: true });
+
+            // GIVEN there is a template
+            const templatedItems = await handler.buildTemplate(
+                'testInstance/testBU',
+                'senderProfile',
+                ['testExisting_senderProfile'],
+                'testSourceMarket'
+            );
+            // WHEN
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+
+            assert.deepEqual(
+                Object.keys(templatedItems),
+                ['senderProfile'],
+                'expected specific types to be templated'
+            );
+
+            // senderProfile
+            assert.equal(
+                templatedItems.senderProfile ? Object.keys(templatedItems.senderProfile).length : 0,
+                1,
+                'unexpected number of senderProfiles templated'
+            );
+            assert.deepEqual(
+                templatedItems.senderProfile.map((item) => item.CustomerKey),
+                ['{{{prefix}}}senderProfile'],
+                'expected specific senderProfiles to be templated'
+            );
+        });
     });
 
     describe('Delete ================', () => {
@@ -175,7 +208,7 @@ describe('type: senderProfile', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                13,
+                7,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -210,7 +243,7 @@ describe('type: senderProfile', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                13,
+                7,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -245,7 +278,7 @@ describe('type: senderProfile', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                13,
+                7,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

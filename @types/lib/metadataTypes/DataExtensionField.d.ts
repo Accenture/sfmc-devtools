@@ -84,11 +84,9 @@ declare class DataExtensionField extends MetadataType {
      *
      * @param {DataExtensionFieldItem[]} deployColumns Columns of data extension that will be deployed
      * @param {string} deKey external/customer key of Data Extension
-     * @returns {Promise.<Object.<string, DataExtensionFieldItem>>} existing fields by their original name to allow re-adding FieldType after update
+     * @returns {Promise.<DataExtensionFieldMap>} existing fields by their original name to allow re-adding FieldType after update
      */
-    static prepareDeployColumnsOnUpdate(deployColumns: DataExtensionFieldItem[], deKey: string): Promise<{
-        [x: string]: DataExtensionFieldItem;
-    }>;
+    static prepareDeployColumnsOnUpdate(deployColumns: DataExtensionFieldItem[], deKey: string): Promise<DataExtensionFieldMap>;
     /**
      * Delete a data extension from the specified business unit
      *
@@ -109,6 +107,7 @@ declare namespace DataExtensionField {
     let definition: {
         bodyIteratorField: string;
         dependencies: any[];
+        dependencyGraph: any;
         filter: {};
         hasExtended: boolean;
         idField: string;
