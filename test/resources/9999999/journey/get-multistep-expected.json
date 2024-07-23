@@ -379,7 +379,7 @@
             "arguments": {},
             "configurationArguments": {},
             "metaData": {
-                "eventDefinitionKey": "DEAudience-2e3c73b6-48cc-2ec0-5522-48636e1a236e",
+                "r__event_key": "DEAudience-2e3c73b6-48cc-2ec0-5522-48636e1a236e",
                 "chainType": "None",
                 "configurationRequired": false,
                 "iconUrl": "/images/icon-data-extension.svg",

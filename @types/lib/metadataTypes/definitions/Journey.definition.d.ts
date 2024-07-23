@@ -3,6 +3,7 @@ declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: string[];
     namespace dependencyGraph {
+        let event: string[];
         let transactionalEmail: string[];
         let dataExtension: string[];
         let triggeredSend: string[];

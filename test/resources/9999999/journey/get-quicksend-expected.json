@@ -195,7 +195,7 @@
             "configurationArguments": {},
             "metaData": {
                 "sourceInteractionId": "00000000-0000-0000-0000-000000000000",
-                "eventDefinitionKey": "DEAudience-11be962d-064c-83d9-2804-7d1befc10325",
+                "r__event_key": "DEAudience-11be962d-064c-83d9-2804-7d1befc10325",
                 "chainType": "None",
                 "configurationRequired": false,
                 "iconUrl": "/images/icon-data-extension.svg",

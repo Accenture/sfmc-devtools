@@ -253,62 +253,55 @@ describe('type: journey', () => {
 
             assert.deepEqual(
                 Object.keys(templatedItems),
-                ['journey', 'dataExtension', 'senderProfile', 'sendClassification', 'asset'],
+                [
+                    'journey',
+                    'event',
+                    'dataExtension',
+                    'senderProfile',
+                    'sendClassification',
+                    'asset',
+                ],
                 'expected specific types to be templated'
             );
 
             // journey
-            assert.equal(
-                templatedItems.journey ? Object.keys(templatedItems.journey).length : 0,
-                2,
-                'unexpected number of journeys templated'
-            );
             assert.deepEqual(
                 templatedItems.journey.map((item) => item.key),
                 ['{{{prefix}}}journey_Quicksend', '{{{prefix}}}journey_Multistep'],
                 'expected specific journeys to be templated'
             );
-            // dataExtension
-            assert.equal(
-                templatedItems.dataExtension ? Object.keys(templatedItems.dataExtension).length : 0,
-                1,
-                'unexpected number of dataExtensions templated'
+            // event
+            assert.deepEqual(
+                templatedItems.event.map((item) => item.eventDefinitionKey),
+                [
+                    'DEAudience-11be962d-064c-83d9-2804-7d1befc10325',
+                    'DEAudience-2e3c73b6-48cc-2ec0-5522-48636e1a236e',
+                ],
+                'expected specific events to be templated'
             );
+            // dataExtension
             assert.deepEqual(
                 templatedItems.dataExtension.map((item) => item.CustomerKey),
-                ['{{{prefix}}}DomainExclusion'],
+                [
+                    '{{{prefix}}}journey_Quicksend',
+                    '{{{prefix}}}journey_Multistep',
+                    '{{{prefix}}}DomainExclusion',
+                ],
                 'expected specific dataExtensions to be templated'
             );
             // senderProfile
-            assert.equal(
-                templatedItems.senderProfile ? Object.keys(templatedItems.senderProfile).length : 0,
-                1,
-                'unexpected number of senderProfiles templated'
-            );
             assert.deepEqual(
                 templatedItems.senderProfile.map((item) => item.CustomerKey),
                 ['{{{prefix}}}senderProfile'],
                 'expected specific assets to be templated'
             );
             // sendClassification
-            assert.equal(
-                templatedItems.sendClassification
-                    ? Object.keys(templatedItems.sendClassification).length
-                    : 0,
-                1,
-                'unexpected number of sendClassifications templated'
-            );
             assert.deepEqual(
                 templatedItems.sendClassification.map((item) => item.CustomerKey),
                 ['{{{prefix}}}sendClassification'],
                 'expected specific sendClassifications to be templated'
             );
             // asset
-            assert.equal(
-                templatedItems.asset ? Object.keys(templatedItems.asset).length : 0,
-                3,
-                'unexpected number of assets templated'
-            );
             assert.deepEqual(
                 templatedItems.asset.map((item) => item.customerKey),
                 ['{{{prefix}}}asset_htmlblock', '{{{prefix}}}htmlblock1', '{{{prefix}}}htmlblock2'],
