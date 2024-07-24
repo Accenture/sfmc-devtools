@@ -494,6 +494,12 @@ declare namespace AttributeSet {
                 retrieving: boolean;
                 template: any;
             };
+            'relationships[].leftItem.r__attributeGroup_key': {
+                isCreateable: any;
+                isUpdateable: any;
+                retrieving: boolean;
+                template: any;
+            };
             'relationships[].rightItem.cardinality': {
                 isCreateable: any;
                 isUpdateable: any;
@@ -507,6 +513,12 @@ declare namespace AttributeSet {
                 template: any;
             };
             'relationships[].rightItem.r__attributeSet_key': {
+                isCreateable: any;
+                isUpdateable: any;
+                retrieving: boolean;
+                template: any;
+            };
+            'relationships[].rightItem.r__attributeGroup_key': {
                 isCreateable: any;
                 isUpdateable: any;
                 retrieving: boolean;
@@ -951,6 +963,18 @@ declare namespace AttributeSet {
                 template: any;
             };
             'valueDefinitions[].storageFieldReferenceID.value': {
+                isCreateable: any;
+                isUpdateable: any;
+                retrieving: boolean;
+                template: any;
+            };
+            'valueDefinitions[].storageFieldValueID.type': {
+                isCreateable: any;
+                isUpdateable: any;
+                retrieving: boolean;
+                template: any;
+            };
+            'valueDefinitions[].storageFieldValueID.value': {
                 isCreateable: any;
                 isUpdateable: any;
                 retrieving: boolean;
