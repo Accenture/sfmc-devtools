@@ -476,6 +476,42 @@ declare namespace AttributeSet {
                 retrieving: boolean;
                 template: any;
             };
+            'relationships[].leftItem.cardinality': {
+                isCreateable: any;
+                isUpdateable: any;
+                retrieving: boolean;
+                template: any;
+            };
+            'relationships[].leftItem.relationshipType': {
+                isCreateable: any;
+                isUpdateable: any;
+                retrieving: boolean;
+                template: any;
+            };
+            'relationships[].leftItem.r__attributeSet_key': {
+                isCreateable: any;
+                isUpdateable: any;
+                retrieving: boolean;
+                template: any;
+            };
+            'relationships[].rightItem.cardinality': {
+                isCreateable: any;
+                isUpdateable: any;
+                retrieving: boolean;
+                template: any;
+            };
+            'relationships[].rightItem.relationshipType': {
+                isCreateable: any;
+                isUpdateable: any;
+                retrieving: boolean;
+                template: any;
+            };
+            'relationships[].rightItem.r__attributeSet_key': {
+                isCreateable: any;
+                isUpdateable: any;
+                retrieving: boolean;
+                template: any;
+            };
             'relationships[].leftRelationshipIDs[].type': {
                 isCreateable: any;
                 isUpdateable: any;
@@ -925,6 +961,21 @@ declare namespace AttributeSet {
                 isUpdateable: any;
                 retrieving: boolean;
                 template: any;
+            };
+            'valueDefinitions[].storageObjectFieldInformation': {
+                skipValidation: boolean;
+            };
+            'valueDefinitions[].storageObjectFieldInformation.externalObjectFieldAPIName': {
+                skipValidation: boolean;
+            };
+            'valueDefinitions[].storageObjectFieldInformation.externalObjectFieldDataTypeName': {
+                skipValidation: boolean;
+            };
+            'valueDefinitions[].storageObjectFieldInformation.externalObjectFieldLength': {
+                skipValidation: boolean;
+            };
+            'valueDefinitions[].storageObjectFieldInformation.externalIsRowIdentifier': {
+                skipValidation: boolean;
             };
             'valueDefinitions[].valueDefinitionID': {
                 isCreateable: any;
