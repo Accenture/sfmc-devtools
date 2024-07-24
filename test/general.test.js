@@ -493,7 +493,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    12,
+                    14,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -913,7 +913,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 75;
+                const expectedApiCallsRetrieve = 77;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1041,7 +1041,7 @@ describe('GENERAL', () => {
             });
 
             it('buildTemplate + buildDefinition for multiple types with keys and --dependencies and --retrieve', async () => {
-                const expectedApiCallsRetrieve = 79;
+                const expectedApiCallsRetrieve = 81;
 
                 // preparation
                 const argvMetadata = [
@@ -1449,7 +1449,7 @@ describe('GENERAL', () => {
                 // download everything before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 75;
+                const expectedApiCallsRetrieve = 77;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1559,7 +1559,7 @@ describe('GENERAL', () => {
             });
 
             it('build multiple type with keys and --dependencies and --retrieve', async () => {
-                const expectedApiCallsRetrieve = 79;
+                const expectedApiCallsRetrieve = 81;
 
                 // preparation
                 const argvMetadata = [
@@ -1844,7 +1844,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 75;
+                const expectedApiCallsRetrieve = 77;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
