@@ -70,6 +70,9 @@ declare namespace _default {
             retrieving: any;
             template: any;
         };
+        'defaults.properties': {
+            skipValidation: boolean;
+        };
         'defaults.properties.analyticsTracking.analyticsType': {
             isCreateable: any;
             isUpdateable: any;
@@ -250,6 +253,48 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        'triggers[].arguments.serializedObjectType': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'triggers[].arguments.eventDefinitionId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'triggers[].arguments.eventDefinitionKey': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'triggers[].arguments.dataExtensionId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'triggers[].arguments.automationId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'triggers[].arguments.r__event_key': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'triggers[].arguments.r__dataExtension_key': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         'triggers[].configurationArguments': {
             isCreateable: boolean;
             isUpdateable: boolean;
@@ -358,6 +403,24 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        'triggers[].configurationArguments.whoToInject': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'triggers[].configurationArguments.objectApiName': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'triggers[].configurationArguments.additionalObjectFilterCriteria': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         'triggers[].metaData': {
             isCreateable: boolean;
             isUpdateable: boolean;
@@ -365,6 +428,24 @@ declare namespace _default {
             template: boolean;
         };
         'triggers[].metaData.sourceInteractionId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'triggers[].metaData.entrySourceGroupConfigUrl': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'triggers[].metaData.r__event_key': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'triggers[].metaData.category': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
