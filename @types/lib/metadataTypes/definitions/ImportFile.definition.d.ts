@@ -293,7 +293,13 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
-        'destination.c__destinationType': {
+        'source.c__type': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'destination.c__type': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
