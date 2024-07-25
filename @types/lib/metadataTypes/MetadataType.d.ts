@@ -43,12 +43,12 @@ declare class MetadataType {
     /**
      * Deploys metadata
      *
-     * @param {MetadataTypeMap} metadata metadata mapped by their keyField
+     * @param {MetadataTypeMap} metadataMap metadata mapped by their keyField
      * @param {string} deployDir directory where deploy metadata are saved
      * @param {string} retrieveDir directory where metadata after deploy should be saved
      * @returns {Promise.<MetadataTypeMap>} Promise of keyField => metadata map
      */
-    static deploy(metadata: MetadataTypeMap, deployDir: string, retrieveDir: string): Promise<MetadataTypeMap>;
+    static deploy(metadataMap: MetadataTypeMap, deployDir: string, retrieveDir: string): Promise<MetadataTypeMap>;
     /**
      * Gets executed after deployment of metadata type
      *
