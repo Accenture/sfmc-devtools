@@ -69,10 +69,11 @@
     "sendEmailNotification": true,
     "standardQuotedStrings": false,
     "destination": {
-        "c__destinationType": "SMS",
+        "c__type": "SMS",
         "r__mobileKeyword_key": "4912312345678.TESTEXISTING_KEYWORD"
     },
     "source": {
+        "c__type": "DataExtension",
         "r__dataExtension_key": "testExisting_dataExtension",
         "r__fileLocation_name": "ExactTarget Enhanced FTP"
     }

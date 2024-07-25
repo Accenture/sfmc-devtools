@@ -461,7 +461,7 @@ declare namespace _default {
         'SendDefinitionList[].Name': {
             skipValidation: boolean;
         };
-        'SendDefinitionList[].r__dataExtension_Key': {
+        'SendDefinitionList[].r__dataExtension_key': {
             skipValidation: boolean;
         };
         'SendDefinitionList[].List.ObjectID': {

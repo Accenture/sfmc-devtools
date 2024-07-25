@@ -23,10 +23,8 @@
     "sendEmailNotification": false,
     "standardQuotedStrings": true,
     "destination": {
-        "c__destinationType": "DataExtension",
+        "c__type": "DataExtension",
         "r__dataExtension_key": "testTemplated_dataExtension"
     },
-    "source": {
-        "r__fileLocation_name": "ExactTarget Enhanced FTP"
-    }
+    "source": { "c__type": "File Location", "r__fileLocation_name": "ExactTarget Enhanced FTP" }
 }

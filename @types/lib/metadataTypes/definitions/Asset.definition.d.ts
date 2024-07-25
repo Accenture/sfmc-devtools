@@ -82,6 +82,42 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        'businessUnitAvailability.%': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'businessUnitAvailability.%.view': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'businessUnitAvailability.%.update': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'businessUnitAvailability.%.delete': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'businessUnitAvailability.%.memberId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'businessUnitAvailability.%.transferOwnership': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         category: {
             isCreateable: boolean;
             isUpdateable: boolean;
@@ -171,6 +207,12 @@ declare namespace _default {
         };
         'data.approvals': {
             skipValidation: boolean;
+        };
+        'data.email': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
         };
         'data.email.attributes': {
             skipValidation: boolean;
@@ -383,6 +425,18 @@ declare namespace _default {
             skipValidation: boolean;
         };
         'sharingProperties.sharedWith': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'sharingProperties.sharedFrom': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'sharingProperties.sharedFromMID': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;

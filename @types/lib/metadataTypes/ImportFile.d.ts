@@ -230,6 +230,12 @@ declare namespace ImportFile {
                 retrieving: boolean;
                 template: boolean;
             };
+            fileSpec: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             fileTransferLocationId: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -349,6 +355,18 @@ declare namespace ImportFile {
                 retrieving: boolean;
                 template: boolean;
             };
+            sourceCustomObjectId: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            sourceDataExtensionName: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             c__dataAction: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -373,7 +391,13 @@ declare namespace ImportFile {
                 retrieving: boolean;
                 template: boolean;
             };
-            'destination.c__destinationType': {
+            'source.c__type': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'destination.c__type': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

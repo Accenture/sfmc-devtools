@@ -1,7 +1,7 @@
 {
     "page": 1,
     "pageSize": 500,
-    "count": 2,
+    "count": 3,
     "items": [
         {
             "allowErrors": true,
@@ -109,6 +109,37 @@
             "standardQuotedStrings": false,
             "subscriberImportTypeId": 255,
             "updateTypeId": 0,
+            "fileTransferLocationTypeId": 0
+        },
+        {
+            "allowErrors": true,
+            "customerKey": "testExisting_importFileDataImport",
+            "createdDate": "2024-07-24T04:10:42.15",
+            "modifiedDate": "2024-07-24T04:10:42.15",
+            "dateFormatLocale": "en-US",
+            "deleteFile": false,
+            "destinationObjectId": "bf4f1d9b-a349-ef11-b876-f40343c95928",
+            "destinationId": 0,
+            "destinationObjectTypeId": 310,
+            "fieldMappings": [],
+            "fieldMappingType": "InferFromColumnHeadings",
+            "fileNamingPattern": "_CustomObject",
+            "fileSpec": "_CustomObject",
+            "fileTransferLocationId": "527eeab5-fd9e-4a2d-ad38-f3c856ea2031",
+            "fileType": "CSV",
+            "filter": "",
+            "hasColumnHeader": true,
+            "importDefinitionId": "d2474efb-a449-ef11-b876-f40343c95928",
+            "isOrderedImport": true,
+            "isSequential": true,
+            "maxFileAgeHours": 0,
+            "maxImportFrequencyHours": 0,
+            "maxFileAgeScheduleOffsetHours": 0,
+            "name": "testExisting_importFileDataImport",
+            "sendEmailNotification": false,
+            "standardQuotedStrings": true,
+            "subscriberImportTypeId": 255,
+            "updateTypeId": 4,
             "fileTransferLocationTypeId": 0
         }
     ]
