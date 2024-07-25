@@ -38,6 +38,381 @@ declare namespace _default {
     }
     let fields: {
         activities: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].id': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].key': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].name': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].description': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].type': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].outcomes': {
+            skipValidation: boolean;
+        };
+        'activities[].arguments': {
+            skipValidation: boolean;
+        };
+        'activities[].configurationArguments': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.autoAddSubscribers': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.autoUpdateSubscribers': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.bccEmail': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.categoryId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.ccEmail': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.created': {
+            skipValidation: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.description': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.domainExclusions': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.dynamicEmailSubject': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.emailSubject': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.exclusionFilter': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.isSalesforceTracking': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.isMultipart': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.isSendLogging': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.isStoppedOnJobError': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.keyword': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.modified': {
+            skipValidation: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.name': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.preHeader': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.replyToAddress': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.replyToDisplayName': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.suppressTracking': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.triggeredSendStatus': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.version': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.throttleOpens': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.throttleCloses': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.isTrackingClicks': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.emailId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.r__triggeredSend_key': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.r__senderProfile_key': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.r__sendClassification_key': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.r__list_PathName': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.r__list_PathName.publicationList': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.c__priority': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.r__asset_name_readOnly': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.r__asset_key': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.applicationExtensionKey': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.applicationExtensionId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.isModified': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.isSimulation': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.googleAnalyticsCampaignName': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.useLLTS': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.fuelAgentRequested': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.r__triggeredSend_key': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.waitDuration': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.waitUnit': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.specifiedTime': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.timeZone': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.description': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.waitEndDateAttributeExpression': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.specificDate': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.waitForEventKey': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.schemaVersionId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.criteria': {
+            skipValidation: boolean;
+        };
+        'activities[].configurationArguments.eventDataConfig': {
+            skipValidation: boolean;
+        };
+        'activities[].metaData': {
+            skipValidation: boolean;
+        };
+        'activities[].schema': {
             skipValidation: boolean;
         };
         categoryId: {
@@ -308,16 +683,10 @@ declare namespace _default {
             template: boolean;
         };
         'triggers[].configurationArguments.primaryObjectFilterCriteria': {
-            isCreateable: boolean;
-            isUpdateable: boolean;
-            retrieving: boolean;
-            template: boolean;
+            skipValidation: boolean;
         };
         'triggers[].configurationArguments.relatedObjectFilterCriteria': {
-            isCreateable: boolean;
-            isUpdateable: boolean;
-            retrieving: boolean;
-            template: boolean;
+            skipValidation: boolean;
         };
         'triggers[].configurationArguments.salesforceTriggerCriteria': {
             isCreateable: boolean;
@@ -338,10 +707,7 @@ declare namespace _default {
             template: boolean;
         };
         'triggers[].configurationArguments.contactKey': {
-            isCreateable: boolean;
-            isUpdateable: boolean;
-            retrieving: boolean;
-            template: boolean;
+            skipValidation: boolean;
         };
         'triggers[].configurationArguments.contactPersonType': {
             isCreateable: boolean;
@@ -380,10 +746,7 @@ declare namespace _default {
             template: boolean;
         };
         'triggers[].configurationArguments.passThroughArgument': {
-            isCreateable: boolean;
-            isUpdateable: boolean;
-            retrieving: boolean;
-            template: boolean;
+            skipValidation: boolean;
         };
         'triggers[].configurationArguments.filterDefinitionId': {
             isCreateable: boolean;
