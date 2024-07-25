@@ -6,7 +6,6 @@ declare namespace _default {
         let event: string[];
         let transactionalEmail: string[];
         let dataExtension: string[];
-        let triggeredSend: string[];
         let list: string[];
         let senderProfile: string[];
         let sendClassification: string[];

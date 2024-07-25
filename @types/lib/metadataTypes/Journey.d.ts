@@ -133,7 +133,6 @@ declare namespace Journey {
             event: string[];
             transactionalEmail: string[];
             dataExtension: string[];
-            triggeredSend: string[];
             list: string[];
             senderProfile: string[];
             sendClassification: string[];
