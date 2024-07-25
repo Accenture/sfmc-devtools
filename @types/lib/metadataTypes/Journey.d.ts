@@ -367,6 +367,12 @@ declare namespace Journey {
                 retrieving: boolean;
                 template: boolean;
             };
+            'activities[].configurationArguments.triggeredSend.throttleLimit': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             'activities[].configurationArguments.triggeredSend.isTrackingClicks': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -409,6 +415,24 @@ declare namespace Journey {
                 retrieving: boolean;
                 template: boolean;
             };
+            'activities[].configurationArguments.triggeredSend.r__list_PathName.suppressionLists': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'activities[].configurationArguments.triggeredSend.r__dataExtension_key': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'activities[].configurationArguments.triggeredSend.r__dataExtension_key.domainExclusions': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             'activities[].configurationArguments.triggeredSend.c__priority': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -428,6 +452,12 @@ declare namespace Journey {
                 template: boolean;
             };
             'activities[].configurationArguments.applicationExtensionKey': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'activities[].configurationArguments.r__transactionalEmail_key': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

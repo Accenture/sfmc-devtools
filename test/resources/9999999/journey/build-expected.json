@@ -54,7 +54,6 @@
                     "r__senderProfile_key": "testTemplated_senderProfile",
                     "r__sendClassification_key": "testTemplated_sendClassification",
                     "c__priority": "High",
-                    "r__asset_name_readOnly": "testTemplated_asset_message",
                     "r__asset_key": "testTemplated_asset_message"
                 },
                 "applicationExtensionKey": "jb-email-activity"

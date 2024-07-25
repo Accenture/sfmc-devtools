@@ -79,19 +79,20 @@
                 "applicationExtensionKey": "jb-email-activity",
                 "isModified": true,
                 "googleAnalyticsCampaignName": "",
+                "r__triggeredSend_key": "testExisting_triggeredSend",
                 "triggeredSend": {
-                    "autoAddSubscribers": true,
-                    "autoUpdateSubscribers": true,
+                    "autoAddSubscribers": false,
+                    "autoUpdateSubscribers": false,
                     "bccEmail": "",
                     "ccEmail": "",
                     "created": { "name": "", "date": "" },
                     "description": "my custom description",
                     "domainExclusions": [],
-                    "dynamicEmailSubject": "testExisting_ email subject",
-                    "emailSubject": "testExisting_ email subject",
+                    "dynamicEmailSubject": "You are successfully unsubscribed",
+                    "emailSubject": "You are successfully unsubscribed",
                     "exclusionFilter": "",
                     "isSalesforceTracking": false,
-                    "isMultipart": true,
+                    "isMultipart": false,
                     "isSendLogging": true,
                     "isStoppedOnJobError": false,
                     "modified": { "name": "", "date": "" },
@@ -104,7 +105,8 @@
                     "r__sendClassification_key": "testExisting_sendClassification",
                     "c__priority": "Medium",
                     "r__asset_name_readOnly": "testExisting_asset_message",
-                    "r__asset_key": "testExisting_asset_message"
+                    "r__asset_key": "testExisting_asset_message",
+                    "r__triggeredSend_key": "testExisting_triggeredSend"
                 }
             },
             "metaData": {
