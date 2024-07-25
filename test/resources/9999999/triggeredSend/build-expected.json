@@ -21,7 +21,8 @@
     "SuppressTracking": false,
     "TriggeredSendStatus": "New",
     "TriggeredSendType": "Continuous",
-    "r__email_name": "Sporting Goods for September",
+    "r__asset_key": "testTemplated_asset_message",
+    "r__asset_name_readOnly": "testTemplated_asset_message",
     "r__folder_Path": "Triggered Sends",
     "r__sendClassification_key": "testTemplated_sendClassification",
     "r__senderProfile_key": "testTemplated_senderProfile"
