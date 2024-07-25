@@ -87,9 +87,17 @@ declare class Asset extends MetadataType {
      *
      * @param {AssetMap} metadataMap metadata mapped by their keyField
      * @param {string} deployDir directory where deploy metadata are saved
-     * @returns {Promise.<MetadataTypeMap>} keyField => metadata map but sorted to ensure dependencies are deployed in correct order
+     * @returns {Promise.<AssetMap>} keyField => metadata map but sorted to ensure dependencies are deployed in correct order
      */
-    static getUpsertOrder(metadataMap: AssetMap, deployDir: string): Promise<MetadataTypeMap>;
+    static getUpsertOrder(metadataMap: AssetMap, deployDir: string): Promise<AssetMap>;
+    /**
+     * MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
+     *
+     * @param {AssetMap} metadataMap metadata mapped by their keyField
+     * @param {string} deployDir directory where deploy metadata are saved
+     * @returns {Promise.<AssetMap>} keyField => metadata map
+     */
+    static upsert(metadataMap: AssetMap, deployDir: string): Promise<AssetMap>;
     /**
      * Creates a single asset
      *
