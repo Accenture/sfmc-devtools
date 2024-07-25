@@ -232,6 +232,49 @@ describe('type: asset', () => {
             );
             return;
         });
+
+        it('Should retrieve a asset by key', async () => {
+            // WHEN
+            const retrieve = await handler.retrieve(
+                'testInstance/testBU',
+                ['asset'],
+                ['testExisting_asset_htmlblock']
+            );
+
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            assert.equal(
+                retrieve['testInstance/testBU'].asset
+                    ? Object.keys(retrieve['testInstance/testBU'].asset).length
+                    : 0,
+                1,
+                'Unexpected number of assets in retrieve response'
+            );
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.asset ? Object.keys(result.asset).length : 0,
+                6,
+                'Unexpected number of assets in cache'
+            );
+
+            assert.deepEqual(
+                await getActualJson('testExisting_asset_htmlblock', 'asset', 'block'),
+                await testUtils.getExpectedJson(
+                    '9999999',
+                    'asset',
+                    'testExisting_asset_htmlblock-retrieve'
+                ),
+                'returned metadata was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                8,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 
     describe('Deploy ================', () => {
