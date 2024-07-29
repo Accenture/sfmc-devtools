@@ -264,7 +264,19 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        'activities[].configurationArguments.triggeredSend.senderProfileId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         'activities[].configurationArguments.triggeredSend.r__senderProfile_key': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        ' activities[].configurationArguments.triggeredSend.sendClassificationId': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
@@ -277,6 +289,12 @@ declare namespace _default {
             template: boolean;
         };
         'activities[].configurationArguments.triggeredSend.r__list_PathName': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.publicationListId': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
@@ -301,6 +319,12 @@ declare namespace _default {
             template: boolean;
         };
         'activities[].configurationArguments.triggeredSend.r__dataExtension_key.domainExclusions': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.priority': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
