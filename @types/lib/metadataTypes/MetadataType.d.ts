@@ -250,12 +250,12 @@ declare class MetadataType {
      * test if metadata was actually changed or not to potentially skip it during deployment
      *
      * @param {MetadataTypeItem} cachedVersion cached version from the server
-     * @param {MetadataTypeItem} metadata item to upload
+     * @param {MetadataTypeItem} metadataItem item to upload
      * @param {string} [fieldName] optional field name to use for identifying the record in logs
      * @param {boolean} [silent] optionally suppress logging
      * @returns {boolean} true on first identified deviation or false if none are found
      */
-    static hasChangedGeneric(cachedVersion: MetadataTypeItem, metadata: MetadataTypeItem, fieldName?: string, silent?: boolean): boolean;
+    static hasChangedGeneric(cachedVersion: MetadataTypeItem, metadataItem: MetadataTypeItem, fieldName?: string, silent?: boolean): boolean;
     /**
      * MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
      *
