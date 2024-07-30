@@ -414,6 +414,7 @@ declare namespace Asset {
         typeRetrieveByDefault: string[];
         typeName: string;
         stringifyFieldsBeforeTemplate: string[];
+        allowMatchingByName: boolean;
         fields: {
             activeDate: {
                 isCreateable: boolean;

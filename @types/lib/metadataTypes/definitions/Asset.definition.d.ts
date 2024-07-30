@@ -21,6 +21,7 @@ declare namespace _default {
     let typeRetrieveByDefault: string[];
     let typeName: string;
     let stringifyFieldsBeforeTemplate: string[];
+    let allowMatchingByName: boolean;
     let fields: {
         activeDate: {
             isCreateable: boolean;
