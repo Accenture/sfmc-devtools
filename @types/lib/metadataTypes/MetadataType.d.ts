@@ -276,6 +276,13 @@ declare class MetadataType {
      */
     static createOrUpdate(metadataMap: MetadataTypeMap, metadataKey: string, hasError: boolean, metadataToUpdate: MetadataTypeItemDiff[], metadataToCreate: MetadataTypeItem[]): Promise<"create" | "update" | "skip">;
     /**
+     * helper for {@link MetadataType.createOrUpdate}
+     *
+     * @param {MetadataTypeItem} metadataItem to be deployed item
+     * @returns {MetadataTypeItem} cached item or undefined
+     */
+    static getCacheMatchedByName(metadataItem: MetadataTypeItem): MetadataTypeItem;
+    /**
      * Creates a single metadata entry via REST
      *
      * @param {MetadataTypeItem} metadataEntry a single metadata Entry
