@@ -18,7 +18,7 @@ import {
     handleRESTRequest,
     soapUrl,
     restUrl,
-    TError,
+    tWarn,
 } from './resourceFactory.js';
 const authResources = File.readJsonSync(path.join(__dirname, './resources/auth.json'));
 
@@ -296,7 +296,7 @@ export function getAPIHistory() {
  */
 export function getRestCallout(method, url) {
     if (!apimock.history[method]?.length) {
-        console.log(`${TError} No history for method ${method}.`); // eslint-disable-line no-console
+        console.log(`${tWarn} No history for method ${method}.`); // eslint-disable-line no-console
         const methods = Object.keys(apimock.history)
             .filter((el) => apimock.history[el]?.length)
             .join(', ');
@@ -308,7 +308,7 @@ export function getRestCallout(method, url) {
         url.endsWith('%') ? item.url.startsWith(url.slice(0, -1)) : item.url === url
     );
     if (!myCallout) {
-        console.error(`${TError} No callout found for ${method} ${url}`); // eslint-disable-line no-console
+        console.error(`${tWarn} No callout found for ${method} ${url}`); // eslint-disable-line no-console
         const urls = [...new Set(subset.map((el) => el.url))].join('\n- ');
         const methods = Object.keys(apimock.history)
             .filter((el) => apimock.history[el]?.length)
@@ -344,7 +344,7 @@ export function getSoapCallouts(requestAction, objectType) {
         )
         .map((item) => item.data);
     if (!myCallout) {
-        console.error(`${TError} No callout found for ${requestAction} ${objectType || ''}`); // eslint-disable-line no-console
+        console.error(`${tWarn} No callout found for ${requestAction} ${objectType || ''}`); // eslint-disable-line no-console
         return null;
     }
     return myCallout;
