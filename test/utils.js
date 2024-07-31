@@ -13,7 +13,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 import fsmock from 'mock-fs';
 
 let apimock;
-import { handleSOAPRequest, handleRESTRequest, soapUrl, restUrl } from './resourceFactory.js';
+import {
+    handleSOAPRequest,
+    handleRESTRequest,
+    soapUrl,
+    restUrl,
+    tWarn,
+} from './resourceFactory.js';
 const authResources = File.readJsonSync(path.join(__dirname, './resources/auth.json'));
 
 /**
@@ -174,6 +180,7 @@ export function mockSetup(isDeploy) {
             json: undefined,
             keySuffix: undefined,
             like: undefined,
+            matchName: undefined,
             noUpdate: undefined,
             publish: undefined,
             referenceFrom: undefined,
@@ -288,10 +295,28 @@ export function getAPIHistory() {
  * @returns {object} json payload of the request
  */
 export function getRestCallout(method, url) {
+    if (!apimock.history[method]?.length) {
+        console.log(`${tWarn} No history for method ${method}.`); // eslint-disable-line no-console
+        const methods = Object.keys(apimock.history)
+            .filter((el) => apimock.history[el]?.length)
+            .join(', ');
+        console.error(`Available methods: ${methods}`); // eslint-disable-line no-console
+        return null;
+    }
     const subset = apimock.history[method];
     const myCallout = subset.find((item) =>
         url.endsWith('%') ? item.url.startsWith(url.slice(0, -1)) : item.url === url
     );
+    if (!myCallout) {
+        console.error(`${tWarn} No callout found for ${method} ${url}`); // eslint-disable-line no-console
+        const urls = [...new Set(subset.map((el) => el.url))].join('\n- ');
+        const methods = Object.keys(apimock.history)
+            .filter((el) => apimock.history[el]?.length)
+            .join(', ');
+        console.error(`Available methods: ${methods}`); // eslint-disable-line no-console
+        console.error(`Available unique urls in method ${method}:\n- ${urls}`); // eslint-disable-line no-console
+        return null;
+    }
     return JSON.parse(myCallout.data);
 }
 /**
@@ -318,6 +343,10 @@ export function getSoapCallouts(requestAction, objectType) {
                   : false
         )
         .map((item) => item.data);
+    if (!myCallout) {
+        console.error(`${tWarn} No callout found for ${requestAction} ${objectType || ''}`); // eslint-disable-line no-console
+        return null;
+    }
     return myCallout;
 }
 /**

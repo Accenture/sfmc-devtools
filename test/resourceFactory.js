@@ -30,6 +30,8 @@ if (Util.isRunViaVSCodeExtension) {
 }
 /* eslint-enable unicorn/prefer-ternary */
 
+export const tWarn = `${color.bgYellow}${color.fgBlack}TEST-WARNING${color.reset}`;
+export const tError = `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}`;
 /**
  * gets mock SOAP metadata for responding
  *
@@ -52,9 +54,7 @@ async function loadSOAPRecords(mcdevAction, type, mid, filter, QueryAllAccounts)
         if (filterPath) {
             /* eslint-disable no-console */
             console.log(
-                `${color.bgYellow}${color.fgBlack}TEST-WARNING${
-                    color.reset
-                }: You are loading your reponse from ${
+                `${tWarn}: You are loading your reponse from ${
                     testPath + '-response.xml'
                 } instead of the more specific ${
                     testPath + filterPath + '-response.xml'
@@ -68,7 +68,7 @@ async function loadSOAPRecords(mcdevAction, type, mid, filter, QueryAllAccounts)
     }
     /* eslint-disable no-console */
     console.log(
-        `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}: Please create file ${
+        `${tError}: Please create file ${
             filterPath ? testPath + filterPath + '-response.xml or ' : ''
         }${testPath + '-response.xml'}`
     );
@@ -313,6 +313,7 @@ export const handleRESTRequest = async (config) => {
                 response.count = response.items.length;
                 return [200, JSON.stringify(response)];
             } else {
+                console.log('loading ' + testPathFilter + '.json'); // eslint-disable-line no-console
                 return [
                     200,
                     await fs.readFile(testPathFilter + '.json', {
@@ -328,6 +329,7 @@ export const handleRESTRequest = async (config) => {
                 }),
             ];
         } else if (testPathFilterBody && (await fs.pathExists(testPathFilterBody + '.json'))) {
+            console.log('loading ' + testPathFilterBody + '.json'); // eslint-disable-line no-console
             return [
                 200,
                 await fs.readFile(testPathFilterBody + '.json', {
@@ -345,9 +347,7 @@ export const handleRESTRequest = async (config) => {
             if (testPathFilter) {
                 /* eslint-disable no-console */
                 console.log(
-                    `${color.bgYellow}${color.fgBlack}TEST-WARNING${
-                        color.reset
-                    }: You are loading your reponse from ${
+                    `${tWarn}: You are loading your reponse from ${
                         testPath + '.json'
                     } instead of the more specific ${
                         testPathFilter + '.json'
@@ -359,9 +359,7 @@ export const handleRESTRequest = async (config) => {
             if (testPathFilterBody) {
                 /* eslint-disable no-console */
                 console.log(
-                    `${color.bgYellow}${color.fgBlack}TEST-WARNING${
-                        color.reset
-                    }: You are loading your reponse from ${
+                    `${tWarn}: You are loading your reponse from ${
                         testPath + '.json'
                     } instead of the more specific ${
                         testPathFilterBody + '.json'
@@ -381,6 +379,8 @@ export const handleRESTRequest = async (config) => {
                 response.count = response.items.length;
                 return [200, JSON.stringify(response)];
             } else {
+                console.log('loading ' + testPath + '.json'); // eslint-disable-line no-console
+
                 return [
                     200,
                     await fs.readFile(testPath + '.json', {
@@ -392,9 +392,7 @@ export const handleRESTRequest = async (config) => {
             if (testPathFilter) {
                 /* eslint-disable no-console */
                 console.log(
-                    `${color.bgYellow}${color.fgBlack}TEST-WARNING${
-                        color.reset
-                    }: You are loading your reponse from ${
+                    `${tWarn}: You are loading your reponse from ${
                         testPath + '.txt'
                     } instead of the more specific ${
                         testPathFilter + '.txt'
@@ -405,9 +403,7 @@ export const handleRESTRequest = async (config) => {
             if (testPathFilterBody) {
                 /* eslint-disable no-console */
                 console.log(
-                    `${color.bgYellow}${color.fgBlack}TEST-WARNING${
-                        color.reset
-                    }: You are loading your reponse from ${
+                    `${tWarn}: You are loading your reponse from ${
                         testPath + '.txt'
                     } instead of the more specific ${
                         testPathFilterBody + '.txt'
@@ -425,7 +421,7 @@ export const handleRESTRequest = async (config) => {
         } else {
             /* eslint-disable no-console */
             console.log(
-                `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}: Please create file ${testPath}.json/.txt${filterName ? ` or ${testPathFilter}.json/.txt` : testPathFilterBody ? ` or ${testPathFilterBody}.json/.txt` : ''}`
+                `${tError}: Please create file ${testPath}.json/.txt${filterName ? ` or ${testPathFilter}.json/.txt` : testPathFilterBody ? ` or ${testPathFilterBody}.json/.txt` : ''}`
             );
             /* eslint-enable no-console */
             process.exitCode = 404;
