@@ -313,6 +313,7 @@ export const handleRESTRequest = async (config) => {
                 response.count = response.items.length;
                 return [200, JSON.stringify(response)];
             } else {
+                console.log('loading ' + testPathFilter + '.json'); // eslint-disable-line no-console
                 return [
                     200,
                     await fs.readFile(testPathFilter + '.json', {
@@ -328,6 +329,7 @@ export const handleRESTRequest = async (config) => {
                 }),
             ];
         } else if (testPathFilterBody && (await fs.pathExists(testPathFilterBody + '.json'))) {
+            console.log('loading ' + testPathFilterBody + '.json'); // eslint-disable-line no-console
             return [
                 200,
                 await fs.readFile(testPathFilterBody + '.json', {
@@ -377,6 +379,8 @@ export const handleRESTRequest = async (config) => {
                 response.count = response.items.length;
                 return [200, JSON.stringify(response)];
             } else {
+                console.log('loading ' + testPath + '.json'); // eslint-disable-line no-console
+
                 return [
                     200,
                     await fs.readFile(testPath + '.json', {
