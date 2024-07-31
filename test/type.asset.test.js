@@ -323,7 +323,51 @@ describe('type: asset', () => {
             return;
         });
 
-        it('Should create an assetwith mis-matching memberId and --keySuffix', async () => {
+        it('Should update an asset with --matchName', async () => {
+            handler.setOptions({ matchName: true });
+            // WHEN
+            const deployResult = await handler.deploy(
+                'testInstance/testBU',
+                ['asset'],
+                ['testExisting_asset_htmlblock-matchName']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+
+            // check how many items were deployed
+            assert.equal(
+                deployResult['testInstance/testBU']?.asset
+                    ? Object.keys(deployResult['testInstance/testBU']?.asset).length
+                    : 0,
+                1,
+                '1 assets to be deployed'
+            );
+            const currentCache = cache.getCache();
+
+            const upsertCallout = testUtils.getRestCallout(
+                'patch',
+                '/asset/v1/content/assets/1295064'
+            );
+            assert.equal(
+                upsertCallout?.customerKey,
+                'testExisting_asset_htmlblock-matchName',
+                'customerKey should be testExisting_asset_htmlblock-matchName'
+            );
+            assert.equal(
+                upsertCallout?.id,
+                currentCache.asset['testExisting_asset_htmlblock'].id,
+                'id should be that of the existing testExisting_asset_htmlblock'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                5,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should create an asset with mis-matching memberId and --keySuffix', async () => {
             handler.setOptions({ keySuffix: '_DEV' });
             // WHEN
             const deployResult = await handler.deploy(
@@ -357,7 +401,7 @@ describe('type: asset', () => {
             return;
         });
 
-        it('Should create an assetwith mis-matching memberId', async () => {
+        it('Should create an asset with mis-matching memberId', async () => {
             // WHEN
             const deployResult = await handler.deploy(
                 'testInstance/testBU',
