@@ -10,6 +10,7 @@ declare namespace _default {
     let keyIsFixed: boolean;
     let keyField: string;
     let nameField: string;
+    let folderIdField: string;
     let createdDateField: string;
     let createdNameField: string;
     let lastmodDateField: string;
@@ -21,6 +22,7 @@ declare namespace _default {
     let typeRetrieveByDefault: string[];
     let typeName: string;
     let stringifyFieldsBeforeTemplate: string[];
+    let allowMatchingByName: boolean;
     let fields: {
         activeDate: {
             isCreateable: boolean;

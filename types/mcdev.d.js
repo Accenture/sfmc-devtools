@@ -444,8 +444,8 @@ complex
  * @typedef {'error'|'verbose'|'info'|'debug'} LoggerLevel
  * @typedef {object} McdevLogger
  * @property {LoggerLevel} [level] (msg) print info message
- * @property {Function} error (msg) print error message
- * @property {Function} errorStack (ex, msg) print error with trace message
+ * @property {(msg:string)=>void} error (msg) print error message; wrapper around winstonLogger.error that also sets error code to 1
+ * @property {(ex:SDKError,message?:string)=>void} errorStack print error with trace message
  * @typedef {import('winston').Logger & McdevLogger} Logger
  */
 /**
