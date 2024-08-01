@@ -165,6 +165,35 @@ describe('type: journey', () => {
             );
             return;
         });
+
+        it('Should retrieve a journey with name', async () => {
+            // WHEN
+            await handler.retrieve(
+                'testInstance/testBU',
+                ['journey'],
+                ['name:testExisting_journey_Quicksend']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.journey ? Object.keys(result.journey).length : 0,
+                1,
+                'only 1 journeys expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_journey_Quicksend', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get-quicksend'),
+                'returned JSON was not equal expected'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                19,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 
     describe('Deploy ================', () => {
