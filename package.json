@@ -106,7 +106,7 @@
         "eslint-plugin-unicorn": "55.0.0",
         "fast-xml-parser": "4.4.1",
         "globals": "15.8.0",
-        "husky": "9.0.11",
+        "husky": "9.1.4",
         "lint-staged": "15.2.7",
         "mocha": "10.7.0",
         "mock-fs": "5.2.0",
