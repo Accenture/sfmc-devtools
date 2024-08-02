@@ -333,7 +333,12 @@ describe('type: journey', () => {
             // asset
             assert.deepEqual(
                 templatedItems.asset.map((item) => item.customerKey),
-                ['{{{prefix}}}asset_htmlblock', '{{{prefix}}}htmlblock1', '{{{prefix}}}htmlblock2'],
+                [
+                    '{{{prefix}}}asset_htmlblock',
+                    '{{{prefix}}}htmlblock1',
+                    '{{{prefix}}}htmlblock 3 spaces',
+                    '{{{prefix}}}htmlblock2',
+                ],
                 'expected specific assets to be templated'
             );
         });
