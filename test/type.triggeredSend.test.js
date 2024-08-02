@@ -150,49 +150,32 @@ describe('type: triggeredSend', () => {
             );
 
             // triggeredSend
-            assert.equal(
-                templatedItems.triggeredSend ? Object.keys(templatedItems.triggeredSend).length : 0,
-                2,
-                'unexpected number of triggeredSends templated'
-            );
             assert.deepEqual(
                 templatedItems.triggeredSend.map((item) => item.CustomerKey),
                 ['{{{prefix}}}triggeredSend', '{{{prefix}}}triggeredSend_rcb'],
                 'expected specific triggeredSends to be templated'
             );
             // sendClassification
-            assert.equal(
-                templatedItems.sendClassification
-                    ? Object.keys(templatedItems.sendClassification).length
-                    : 0,
-                1,
-                'unexpected number of sendClassifications templated'
-            );
             assert.deepEqual(
                 templatedItems.sendClassification.map((item) => item.CustomerKey),
                 ['{{{prefix}}}sendClassification'],
                 'expected specific sendClassifications to be templated'
             );
             // senderProfile
-            assert.equal(
-                templatedItems.senderProfile ? Object.keys(templatedItems.senderProfile).length : 0,
-                2,
-                'unexpected number of senderProfiles templated'
-            );
             assert.deepEqual(
                 templatedItems.senderProfile.map((item) => item.CustomerKey),
                 ['{{{prefix}}}senderProfile', '{{{prefix}}}senderProfile_rcb'],
                 'expected specific senderProfiles to be templated'
             );
             // asset
-            assert.equal(
-                templatedItems.asset ? Object.keys(templatedItems.asset).length : 0,
-                3,
-                'unexpected number of assets templated'
-            );
             assert.deepEqual(
                 templatedItems.asset.map((item) => item.customerKey),
-                ['{{{prefix}}}asset_htmlblock', '{{{prefix}}}htmlblock1', '{{{prefix}}}htmlblock2'],
+                [
+                    '{{{prefix}}}asset_htmlblock',
+                    '{{{prefix}}}htmlblock1',
+                    '{{{prefix}}}htmlblock 3 spaces',
+                    '{{{prefix}}}htmlblock2',
+                ],
                 'expected specific assets to be templated'
             );
         });

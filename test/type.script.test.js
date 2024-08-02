@@ -393,25 +393,20 @@ describe('type: script', () => {
             );
 
             // script
-            assert.equal(
-                templatedItems.script ? Object.keys(templatedItems.script).length : 0,
-                1,
-                'unexpected number of scripts templated'
-            );
             assert.deepEqual(
                 templatedItems.script.map((item) => item.key),
                 ['{{{prefix}}}script_ampscript'],
                 'expected specific scripts to be templated'
             );
             // asset
-            assert.equal(
-                templatedItems.asset ? Object.keys(templatedItems.asset).length : 0,
-                3,
-                'unexpected number of assets templated'
-            );
             assert.deepEqual(
                 templatedItems.asset.map((item) => item.customerKey),
-                ['{{{prefix}}}htmlblock1', '{{{prefix}}}asset_htmlblock', '{{{prefix}}}htmlblock2'],
+                [
+                    '{{{prefix}}}htmlblock1',
+                    '{{{prefix}}}asset_htmlblock',
+                    '{{{prefix}}}htmlblock 3 spaces',
+                    '{{{prefix}}}htmlblock2',
+                ],
                 'expected specific assets to be templated'
             );
         });
