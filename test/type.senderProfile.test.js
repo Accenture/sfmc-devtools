@@ -150,11 +150,6 @@ describe('type: senderProfile', () => {
             );
 
             // senderProfile
-            assert.equal(
-                templatedItems.senderProfile ? Object.keys(templatedItems.senderProfile).length : 0,
-                1,
-                'unexpected number of senderProfiles templated'
-            );
             assert.deepEqual(
                 templatedItems.senderProfile.map((item) => item.CustomerKey),
                 ['{{{prefix}}}senderProfile'],
