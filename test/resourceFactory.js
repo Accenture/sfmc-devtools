@@ -32,6 +32,7 @@ if (Util.isRunViaVSCodeExtension) {
 
 export const tWarn = `${color.bgYellow}${color.fgBlack}TEST-WARNING${color.reset}`;
 export const tError = `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}`;
+
 /**
  * gets mock SOAP metadata for responding
  *
@@ -80,6 +81,7 @@ async function loadSOAPRecords(mcdevAction, type, mid, filter, QueryAllAccounts)
         encoding: 'utf8',
     });
 }
+
 /**
  * helper for {@link loadSOAPRecords} to get the filter path
  *
@@ -119,6 +121,7 @@ export function filterToPath(filter, shorten) {
     }
     return '';
 }
+
 /**
  * helper for filterToPath
  *
@@ -155,6 +158,7 @@ function _filterToPath(filter, shorten) {
         throw new Error('unknown filter type');
     }
 }
+
 /**
  * based on request, respond with different soap data
  *
