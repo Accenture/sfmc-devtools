@@ -30,6 +30,7 @@ async function getActualJson(customerKey, type, subtype, buName = 'testBU') {
         );
     }
 }
+
 /**
  * gets file from Retrieve folder
  *
@@ -52,6 +53,7 @@ async function getActualFile(customerKey, type, subtype, ext, filename, buName =
         return null;
     }
 }
+
 /**
  * gets file from Template folder
  *
@@ -71,6 +73,7 @@ async function getActualTemplateJson(customerKey, type, subtype) {
         );
     }
 }
+
 /**
  * gets file from Template folder
  *
@@ -113,6 +116,7 @@ async function getActualDeployJson(customerKey, type, subtype, buName = 'testBU'
         );
     }
 }
+
 /**
  * gets file from Deploy folder
  *
