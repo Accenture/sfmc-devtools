@@ -71,7 +71,7 @@
         "console.table": "0.10.0",
         "deep-equal": "2.2.3",
         "fs-extra": "11.2.0",
-        "inquirer": "10.0.1",
+        "inquirer": "10.1.8",
         "json-to-table": "4.2.1",
         "mustache": "4.2.0",
         "p-limit": "6.1.0",
