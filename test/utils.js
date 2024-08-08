@@ -37,6 +37,20 @@ export async function copyFile(from, to, mid = '9999999') {
 /**
  * gets file from Retrieve folder
  *
+ * @param {string} from source path (starting in bu folder)
+ * @param {string} to target path (starting in bu folder)
+ * @param {string} [mid] used when we need to test on ParentBU
+ * @param {string} [buName] used when we need to test on ParentBU
+ * @returns {void} -
+ */
+export function copyToDeploy(from, to, mid = '9999999', buName = 'testBU') {
+    console.log(`Copying ${from} to deploy folder`); // eslint-disable-line no-console
+    File.copySync(`./test/resources/${mid}/${from}`, `./deploy/testInstance/${buName}/${to}`);
+}
+
+/**
+ * gets file from Retrieve folder
+ *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} [buName] used when we need to test on ParentBU
@@ -304,9 +318,10 @@ export function getAPIHistory() {
  *
  * @param {'patch'|'delete'|'post'|'get'|'put'} method http method
  * @param {string} url url without domain, end on % if you want to search with startsWith()
+ * @param {boolean} returnAll useful for post requests that often have multiple callouts with the same url
  * @returns {object} json payload of the request
  */
-export function getRestCallout(method, url) {
+export function getRestCallout(method, url, returnAll = false) {
     if (!apimock.history[method]?.length) {
         console.log(`${tWarn} No history for method ${method}.`); // eslint-disable-line no-console
         const methods = Object.keys(apimock.history)
@@ -316,9 +331,18 @@ export function getRestCallout(method, url) {
         return null;
     }
     const subset = apimock.history[method];
-    const myCallout = subset.find((item) =>
-        url.endsWith('%') ? item.url.startsWith(url.slice(0, -1)) : item.url === url
-    );
+
+    /**
+     * helper for filter/find
+     *
+     * @param {any} item
+     * @returns {boolean} if item matches
+     */
+    function findCallout(item) {
+        return url.endsWith('%') ? item.url.startsWith(url.slice(0, -1)) : item.url === url;
+    }
+
+    const myCallout = returnAll ? subset.filter(findCallout) : subset.find(findCallout);
     if (!myCallout) {
         console.error(`${tWarn} No callout found for ${method} ${url}`); // eslint-disable-line no-console
         const urls = [...new Set(subset.map((el) => el.url))].join('\n- ');
@@ -329,7 +353,7 @@ export function getRestCallout(method, url) {
         console.error(`Available unique urls in method ${method}:\n- ${urls}`); // eslint-disable-line no-console
         return null;
     }
-    return JSON.parse(myCallout.data);
+    return returnAll ? myCallout.map((el) => JSON.parse(el.data)) : JSON.parse(myCallout.data);
 }
 
 /**
