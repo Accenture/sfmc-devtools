@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>CreateResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:50c68314-30a5-45d4-93aa-6dd1191190e2</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:00b40ac8-d7e8-4e55-8b88-fcf3569684a8</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-26435e8f-90d6-4552-aabb-d5eefa3a4bec">
+                <wsu:Created>2024-08-08T09:56:20Z</wsu:Created>
+                <wsu:Expires>2024-08-08T10:01:20Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <CreateResponse xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <Results>
+                <StatusCode>OK</StatusCode>
+                <StatusMessage>Folder created successfully.</StatusMessage>
+                <OrdinalID>0</OrdinalID>
+                <NewID>862001</NewID>
+                <NewObjectID>d890243b-a4e1-4010-85e4-db6d6ae84501</NewObjectID>
+            </Results>
+            <RequestID>5b408e0b-ecbe-4b8e-9019-6376f6eeb0e1</RequestID>
+            <OverallStatus>OK</OverallStatus>
+        </CreateResponse>
+    </soap:Body>
+</soap:Envelope>

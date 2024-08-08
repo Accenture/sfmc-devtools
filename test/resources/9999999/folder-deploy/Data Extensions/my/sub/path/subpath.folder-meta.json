@@ -1,0 +1,9 @@
+{
+    "Name": "subpath",
+    "Description": "",
+    "ContentType": "dataextension",
+    "IsActive": true,
+    "IsEditable": true,
+    "AllowChildren": true,
+    "_generated": true
+}
