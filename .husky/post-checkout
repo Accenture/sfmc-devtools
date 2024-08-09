@@ -12,6 +12,7 @@ echo "$TEMPLATE" > ".git/templatemessage"
 
 
 # ### run npm install ###
+echo "[POST-CHECKOUT] SKIP_HOOKS $SKIP_HOOKS"
 echo "[POST-CHECKOUT] 📦 Checking for changes to dependencies"
 # define how to split strings into array elements
 IFS=$'\n'

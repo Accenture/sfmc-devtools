@@ -1,38 +1,69 @@
 [
   {
-    "name": "Create PR to develop branch",
-    "target": "ref",
-    "refTargets": [
-      "localbranch",
-      "remotebranch"
-    ],
-    "action": {
-      "type": "url",
-      "url": "https://github.com/Accenture/sfmc-devtools/compare/develop...$shortname?expand=1"
-    }
+    "version" : 1
   },
   {
-    "name": "Create PR to hotfix branch",
-    "target": "ref",
-    "refTargets": [
+    "action" : {
+      "script" : "SKIP_HOOKS=1 git switch $name && SKIP_HOOKS=2 git pull",
+      "showOutput" : true,
+      "type" : "sh",
+      "waitForExit" : true
+    },
+    "name" : "Checkout & Pull",
+    "refTargets" : [
       "localbranch",
       "remotebranch"
     ],
-    "action": {
-      "type": "url",
-      "url": "https://github.com/Accenture/sfmc-devtools/compare/hotfix...$shortname?expand=1"
-    }
+    "target" : "ref"
   },
   {
-    "name": "Create Release-PR to master branch",
-    "target": "ref",
-    "refTargets": [
+    "action" : {
+      "type" : "url",
+      "url" : "https://github.com/Accenture/sfmc-devtools/compare/develop...$shortname?expand=1"
+    },
+    "name" : "Create PR to develop branch",
+    "refTargets" : [
       "localbranch",
       "remotebranch"
     ],
-    "action": {
-      "type": "url",
-      "url": "https://github.com/Accenture/sfmc-devtools/compare/main...$shortname?expand=1&template=pr_template_release.md"
-    }
+    "target" : "ref"
+  },
+  {
+    "action" : {
+      "type" : "url",
+      "url" : "https://github.com/Accenture/sfmc-devtools/compare/hotfix...$shortname?expand=1"
+    },
+    "name" : "Create PR to hotfix branch",
+    "refTargets" : [
+      "localbranch",
+      "remotebranch"
+    ],
+    "target" : "ref"
+  },
+  {
+    "action" : {
+      "type" : "url",
+      "url" : "https://github.com/Accenture/sfmc-devtools/compare/main...$shortname?expand=1&template=pr_template_release.md"
+    },
+    "name" : "Create Release-PR to master branch",
+    "refTargets" : [
+      "localbranch",
+      "remotebranch"
+    ],
+    "target" : "ref"
+  },
+  {
+    "action" : {
+      "script" : "SKIP_HOOKS=3 git pull",
+      "showOutput" : true,
+      "type" : "sh",
+      "waitForExit" : true
+    },
+    "name" : "Pull (skip checkout)",
+    "refTargets" : [
+      "localbranch",
+      "remotebranch"
+    ],
+    "target" : "ref"
   }
 ]
