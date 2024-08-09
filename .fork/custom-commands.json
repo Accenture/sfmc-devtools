@@ -5,7 +5,7 @@
   {
     "action" : {
       "script" : "SKIP_HOOKS=1 git switch $name && SKIP_HOOKS=2 git pull",
-      "showOutput" : true,
+      "showOutput" : false,
       "type" : "sh",
       "waitForExit" : true
     },
@@ -55,7 +55,7 @@
   {
     "action" : {
       "script" : "SKIP_HOOKS=3 git pull",
-      "showOutput" : true,
+      "showOutput" : false,
       "type" : "sh",
       "waitForExit" : true
     },

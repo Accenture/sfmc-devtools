@@ -11,8 +11,13 @@ echo "[POST_CHECKOUT] Setting template commit to '$TEMPLATE'"
 echo "$TEMPLATE" > ".git/templatemessage"
 
 
-# ### run npm install ###
 echo "[POST-CHECKOUT] SKIP_HOOKS $SKIP_HOOKS"
+if [[ $SKIP_HOOKS>0 ]]; then
+  echo "[POST-CHECKOUT] skipping hooks"
+  exit 0
+fi
+
+# ### run npm install ###
 echo "[POST-CHECKOUT] 📦 Checking for changes to dependencies"
 # define how to split strings into array elements
 IFS=$'\n'
