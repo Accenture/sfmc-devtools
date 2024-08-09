@@ -5,9 +5,9 @@
   {
     "action" : {
       "type" : "url",
-      "url" : "https://github.com/Accenture/sfmc-devtools/compare/develop...$shortname?expand=1"
+      "url" : "https://github.com/Accenture/sfmc-devtools/compare/main...${ref:short}?expand=1&template=pr_template_release.md"
     },
-    "name" : "Create PR to develop branch",
+    "name" : "Create PR/Release-PR to master branch",
     "refTargets" : [
       "localbranch",
       "remotebranch"
@@ -17,9 +17,9 @@
   {
     "action" : {
       "type" : "url",
-      "url" : "https://github.com/Accenture/sfmc-devtools/compare/hotfix...$shortname?expand=1"
+      "url" : "https://github.com/Accenture/sfmc-devtools/compare/develop...${ref:short}?expand=1"
     },
-    "name" : "Create PR to hotfix branch",
+    "name" : "Create PR/To develop branch",
     "refTargets" : [
       "localbranch",
       "remotebranch"
@@ -29,9 +29,9 @@
   {
     "action" : {
       "type" : "url",
-      "url" : "https://github.com/Accenture/sfmc-devtools/compare/main...$shortname?expand=1&template=pr_template_release.md"
+      "url" : "https://github.com/Accenture/sfmc-devtools/compare/hotfix...${ref:short}?expand=1"
     },
-    "name" : "Create Release-PR to master branch",
+    "name" : "Create PR/To hotfix branch",
     "refTargets" : [
       "localbranch",
       "remotebranch"
@@ -45,7 +45,7 @@
       "type" : "sh",
       "waitForExit" : true
     },
-    "name" : "SKIP HOOKS: Checkout",
+    "name" : "Skip Hooks/Checkout",
     "refTargets" : [
       "localbranch"
     ],
@@ -58,7 +58,7 @@
       "type" : "sh",
       "waitForExit" : true
     },
-    "name" : "SKIP HOOKS: Checkout & Pull",
+    "name" : "Skip Hooks/Checkout & Pull",
     "refTargets" : [
       "localbranch",
       "remotebranch"
@@ -72,7 +72,7 @@
       "type" : "sh",
       "waitForExit" : true
     },
-    "name" : "SKIP HOOKS: Merge into current branch",
+    "name" : "Skip Hooks/Merge into current branch",
     "refTargets" : [
       "localbranch"
     ],
@@ -85,7 +85,7 @@
       "type" : "sh",
       "waitForExit" : true
     },
-    "name" : "SKIP HOOKS: Pull",
+    "name" : "Skip Hooks/Pull",
     "refTargets" : [
       "localbranch",
       "remotebranch"
