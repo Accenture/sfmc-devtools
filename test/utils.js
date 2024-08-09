@@ -33,6 +33,21 @@ const authResources = File.readJsonSync(path.join(__dirname, './resources/auth.j
 export async function copyFile(from, to, mid = '9999999') {
     return File.copyFileSimple(`./test/resources/${mid}/${from}`, `./test/resources/${mid}/${to}`);
 }
+
+/**
+ * gets file from Retrieve folder
+ *
+ * @param {string} from source path (starting in bu folder)
+ * @param {string} to target path (starting in bu folder)
+ * @param {string} [mid] used when we need to test on ParentBU
+ * @param {string} [buName] used when we need to test on ParentBU
+ * @returns {void} -
+ */
+export function copyToDeploy(from, to, mid = '9999999', buName = 'testBU') {
+    console.log(`Copying ${from} to deploy folder`); // eslint-disable-line no-console
+    File.copySync(`./test/resources/${mid}/${from}`, `./deploy/testInstance/${buName}/${to}`);
+}
+
 /**
  * gets file from Retrieve folder
  *
@@ -61,6 +76,7 @@ export function getActualDoc(customerKey, type, buName = 'testBU') {
         'utf8'
     );
 }
+
 /**
  * gets file from Retrieve folder
  *
@@ -79,6 +95,7 @@ export async function getActualFile(customerKey, type, ext, buName = 'testBU') {
         return null;
     }
 }
+
 /**
  * gets file from Deploy folder
  *
@@ -92,6 +109,7 @@ export function getActualDeployJson(customerKey, type, buName = 'testBU') {
         `./deploy/testInstance/${buName}/${type}/${customerKey}.${type}-meta.json`
     );
 }
+
 /**
  * gets file from Deploy folder
  *
@@ -107,6 +125,7 @@ export function getActualDeployFile(customerKey, type, ext, buName = 'testBU') {
         'utf8'
     );
 }
+
 /**
  * gets file from Template folder
  *
@@ -117,6 +136,7 @@ export function getActualDeployFile(customerKey, type, ext, buName = 'testBU') {
 export function getActualTemplateJson(customerKey, type) {
     return File.readJSON(`./template/${type}/${customerKey}.${type}-meta.json`);
 }
+
 /**
  * gets file from Template folder
  *
@@ -128,6 +148,7 @@ export function getActualTemplateJson(customerKey, type) {
 export function getActualTemplateFile(customerKey, type, ext) {
     return File.readFile(`./template/${type}/${customerKey}.${type}-meta.${ext}`, 'utf8');
 }
+
 /**
  * gets file from resources folder which should be used for comparison
  *
@@ -139,6 +160,7 @@ export function getActualTemplateFile(customerKey, type, ext) {
 export function getExpectedJson(mid, type, action) {
     return File.readJSON(`./test/resources/${mid}/${type}/${action}-expected.json`);
 }
+
 /**
  * gets file from resources folder which should be used for comparison
  *
@@ -151,6 +173,7 @@ export function getExpectedJson(mid, type, action) {
 export function getExpectedFile(mid, type, action, ext) {
     return File.readFile(`./test/resources/${mid}/${type}/${action}-expected.${ext}`, 'utf8');
 }
+
 /**
  * setup mocks for API and FS
  *
@@ -267,6 +290,7 @@ export function mockReset() {
     fsmock.restore();
     apimock.restore();
 }
+
 /**
  * helper to return amount of api callouts
  *
@@ -280,6 +304,7 @@ export function getAPIHistoryLength(includeToken) {
     }
     return historyArr.filter((item) => item.url !== '/v2/token').length;
 }
+
 /**
  * helper to return api history
  *
@@ -288,13 +313,15 @@ export function getAPIHistoryLength(includeToken) {
 export function getAPIHistory() {
     return apimock.history;
 }
+
 /**
  *
  * @param {'patch'|'delete'|'post'|'get'|'put'} method http method
  * @param {string} url url without domain, end on % if you want to search with startsWith()
+ * @param {boolean} returnAll useful for post requests that often have multiple callouts with the same url
  * @returns {object} json payload of the request
  */
-export function getRestCallout(method, url) {
+export function getRestCallout(method, url, returnAll = false) {
     if (!apimock.history[method]?.length) {
         console.log(`${tWarn} No history for method ${method}.`); // eslint-disable-line no-console
         const methods = Object.keys(apimock.history)
@@ -304,9 +331,18 @@ export function getRestCallout(method, url) {
         return null;
     }
     const subset = apimock.history[method];
-    const myCallout = subset.find((item) =>
-        url.endsWith('%') ? item.url.startsWith(url.slice(0, -1)) : item.url === url
-    );
+
+    /**
+     * helper for filter/find
+     *
+     * @param {any} item history item
+     * @returns {boolean} if item matches
+     */
+    function findCallout(item) {
+        return url.endsWith('%') ? item.url.startsWith(url.slice(0, -1)) : item.url === url;
+    }
+
+    const myCallout = returnAll ? subset.filter(findCallout) : subset.find(findCallout);
     if (!myCallout) {
         console.error(`${tWarn} No callout found for ${method} ${url}`); // eslint-disable-line no-console
         const urls = [...new Set(subset.map((el) => el.url))].join('\n- ');
@@ -317,8 +353,9 @@ export function getRestCallout(method, url) {
         console.error(`Available unique urls in method ${method}:\n- ${urls}`); // eslint-disable-line no-console
         return null;
     }
-    return JSON.parse(myCallout.data);
+    return returnAll ? myCallout.map((el) => JSON.parse(el.data)) : JSON.parse(myCallout.data);
 }
+
 /**
  *
  * @param {'Schedule'|'Retrieve'|'Create'|'Update'|'Delete'|'Describe'|'Execute'} requestAction soap request types
@@ -349,6 +386,7 @@ export function getSoapCallouts(requestAction, objectType) {
     }
     return myCallout;
 }
+
 /**
  * helper to return most important fields for each api call
  *
@@ -366,6 +404,7 @@ export function getAPIHistoryDebug() {
         });
     return historyArr;
 }
+
 /**
  * helper to return most important fields for each api call
  *

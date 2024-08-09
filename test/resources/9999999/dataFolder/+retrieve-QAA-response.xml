@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:4d209b2f-d7ce-4e6e-916c-c8642d368866</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:a850f043-1422-4d16-8443-702dd2f9f13a</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-5da63531-caa7-4ead-9f10-a33d9bf66745">
+                <wsu:Created>2023-08-11T13:15:46Z</wsu:Created>
+                <wsu:Expires>2023-08-11T13:20:46Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>ba1b0c59-78c4-4608-8423-35dda2248d4d</RequestID>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>1111111</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-22T11:52:18.73</CreatedDate>
+                <ModifiedDate>2016-07-22T11:52:19.603</ModifiedDate>
+                <ID>89344</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>shared_data_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Shared Items</Name>
+                <Description />
+                <ContentType>shared_data</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>false</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>1111111</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-22T11:52:19.6</CreatedDate>
+                <ModifiedDate>2016-07-22T11:52:19.6</ModifiedDate>
+                <ID>89355</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>dataextension_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Data Extensions</Name>
+                <Description />
+                <ContentType>dataextension</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>1111111</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-22T11:52:19.603</CreatedDate>
+                <ModifiedDate>2016-07-22T11:52:19.603</ModifiedDate>
+                <ID>89356</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>shared_dataextension_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>89344</ID>
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>shared_data_default</CustomerKey>
+                </ParentFolder>
+                <Name>Shared Data Extensions</Name>
+                <Description />
+                <ContentType>shared_dataextension</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>1111111</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-29T12:13:27.28</CreatedDate>
+                <ModifiedDate>2016-07-29T12:13:27.28</ModifiedDate>
+                <ID>90889</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>HiddenCategory_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>HiddenCategory</Name>
+                <Description>Hidden folder to store Hidden items</Description>
+                <ContentType>Hidden</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>1111111</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-08-23T09:22:27.54</CreatedDate>
+                <ModifiedDate>2016-08-23T09:22:27.54</ModifiedDate>
+                <ID>93698</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>salesforcedataextension_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Salesforce Data Extensions</Name>
+                <Description />
+                <ContentType>salesforcedataextension</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>1111111</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-08-23T09:22:27.55</CreatedDate>
+                <ModifiedDate>2016-08-23T09:22:27.55</ModifiedDate>
+                <ID>93699</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>shared_salesforcedataextension_defau</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>89344</ID>
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>shared_data_default</CustomerKey>
+                </ParentFolder>
+                <Name>Shared Salesforce Data Extensions</Name>
+                <Description />
+                <ContentType>shared_salesforcedataextension</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>1111111</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2020-01-27T10:50:46.573</CreatedDate>
+                <ModifiedDate>2020-01-27T10:50:46.573</ModifiedDate>
+                <ID>309082</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey />
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>89355</ID>
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>dataextension_default</CustomerKey>
+                </ParentFolder>
+                <Name>QueryStudioResults</Name>
+                <Description />
+                <ContentType>dataextension</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>true</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>1111111</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2020-04-17T08:14:19.763</CreatedDate>
+                <ModifiedDate>2020-04-17T08:14:19.763</ModifiedDate>
+                <ID>587750</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey />
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>89356</ID>
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>shared_dataextension_default</CustomerKey>
+                </ParentFolder>
+                <Name>catalyst target 1</Name>
+                <Description />
+                <ContentType>shared_dataextension</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>true</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>1111111</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2020-07-09T02:30:12.38</CreatedDate>
+                <ModifiedDate>2021-12-16T03:43:30.753</ModifiedDate>
+                <ID>605618</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>dataextension_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>89355</ID>
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>dataextension_default</CustomerKey>
+                </ParentFolder>
+                <Name>Audiences</Name>
+                <Description />
+                <ContentType>dataextension</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>true</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>1111111</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2020-12-25T06:11:40.107</CreatedDate>
+                <ModifiedDate>2021-12-23T10:51:24.393</ModifiedDate>
+                <ID>633441</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey />
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>89355</ID>
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>dataextension_default</CustomerKey>
+                </ParentFolder>
+                <Name>System DEs</Name>
+                <Description />
+                <ContentType>dataextension</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>true</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>1111111</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2021-01-30T11:54:36.11</CreatedDate>
+                <ModifiedDate>2021-01-30T11:54:36.11</ModifiedDate>
+                <ID>638814</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>0b72bf27-0678-484d-ac0b-a8762b9bec33</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>89356</ID>
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>shared_dataextension_default</CustomerKey>
+                </ParentFolder>
+                <Name>Customer 360 Segments</Name>
+                <Description>All Customer 360 segments will be grouped here. Each sub-folder relates to an activation profile name.</Description>
+                <ContentType>shared_dataextension</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>1111111</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2021-01-30T11:56:38.77</CreatedDate>
+                <ModifiedDate>2021-01-30T11:56:38.77</ModifiedDate>
+                <ID>638815</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>cedd206d-178e-41cb-8965-ce255975b046</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>638814</ID>
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>0b72bf27-0678-484d-ac0b-a8762b9bec33</CustomerKey>
+                </ParentFolder>
+                <Name>FirstAudience360 Segment</Name>
+                <Description />
+                <ContentType>shared_dataextension</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>false</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>1111111</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2021-02-07T10:44:01.413</CreatedDate>
+                <ModifiedDate>2021-12-16T03:43:33.38</ModifiedDate>
+                <ID>639967</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey />
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>89355</ID>
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>dataextension_default</CustomerKey>
+                </ParentFolder>
+                <Name>TestAudiences</Name>
+                <Description />
+                <ContentType>dataextension</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>true</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>1111111</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2021-08-04T15:17:18.533</CreatedDate>
+                <ModifiedDate>2021-08-04T15:17:18.567</ModifiedDate>
+                <ID>675203</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>A19F7E38-7369-497E-826F-D551F17FB0B4</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Synchronized Data Extensions</Name>
+                <Description />
+                <ContentType>synchronizeddataextension</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>1111111</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2021-10-03T05:01:37.23</CreatedDate>
+                <ModifiedDate>2021-10-03T05:01:37.37</ModifiedDate>
+                <ID>688352</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>B80AE306-55BC-4C2E-A79F-8CCA486F0BA0</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Synchronized Data Extensions</Name>
+                <Description />
+                <ContentType>synchronizeddataextension</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>1111111</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2022-10-26T09:48:38.293</CreatedDate>
+                <ModifiedDate>2022-10-26T09:48:38.31</ModifiedDate>
+                <ID>757145</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>0ACB800B-AA8B-4F0F-9642-4907592C919C</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Synchronized Data Extensions</Name>
+                <Description />
+                <ContentType>synchronizeddataextension</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>

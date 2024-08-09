@@ -1,0 +1,9 @@
+{
+    "Name": "subpath",
+    "Description": "",
+    "ContentType": "automations",
+    "IsActive": true,
+    "IsEditable": true,
+    "AllowChildren": true,
+    "_generated": true
+}

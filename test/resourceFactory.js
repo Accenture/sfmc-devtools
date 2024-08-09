@@ -32,6 +32,7 @@ if (Util.isRunViaVSCodeExtension) {
 
 export const tWarn = `${color.bgYellow}${color.fgBlack}TEST-WARNING${color.reset}`;
 export const tError = `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}`;
+
 /**
  * gets mock SOAP metadata for responding
  *
@@ -80,6 +81,7 @@ async function loadSOAPRecords(mcdevAction, type, mid, filter, QueryAllAccounts)
         encoding: 'utf8',
     });
 }
+
 /**
  * helper for {@link loadSOAPRecords} to get the filter path
  *
@@ -119,6 +121,7 @@ export function filterToPath(filter, shorten) {
     }
     return '';
 }
+
 /**
  * helper for filterToPath
  *
@@ -155,6 +158,7 @@ function _filterToPath(filter, shorten) {
         throw new Error('unknown filter type');
     }
 }
+
 /**
  * based on request, respond with different soap data
  *
@@ -179,11 +183,15 @@ export const handleSOAPRequest = async (config) => {
             break;
         }
         case 'Create': {
+            let filter = null;
+            if (fullObj.Envelope.Body.CreateRequest.Objects['@_xsi:type'] === 'DataFolder') {
+                filter = `ContentType=${fullObj.Envelope.Body.CreateRequest.Objects.ContentType},Name=${fullObj.Envelope.Body.CreateRequest.Objects.Name},ParentFolderID=${fullObj.Envelope.Body.CreateRequest.Objects.ParentFolder.ID}`;
+            }
             responseXML = await loadSOAPRecords(
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.CreateRequest.Objects['@_xsi:type'],
                 jObj.Envelope.Header.fueloauth,
-                null
+                filter
             );
 
             break;
@@ -297,6 +305,12 @@ export const handleRESTRequest = async (config) => {
             if (myObj) {
                 const op = simpleOperators[myObj.simpleOperator];
                 filterBody = `${myObj.property}${op}${op === 'IN' ? myObj.value.join(',') : myObj.value}`;
+            } else if (config.url === '/email/v1/category') {
+                const data = JSON.parse(config.data);
+
+                filterBody = Object.keys(data)
+                    .map((key) => `${key}=${data[key]}`)
+                    .join(',');
             }
         }
         const testPathFilterBody = filterBody ? testPath + '-' + filterBody : null;
