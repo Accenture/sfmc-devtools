@@ -419,6 +419,7 @@ declare namespace Asset {
         keyIsFixed: boolean;
         keyField: string;
         nameField: string;
+        folderIdField: string;
         createdDateField: string;
         createdNameField: string;
         lastmodDateField: string;
@@ -430,6 +431,7 @@ declare namespace Asset {
         typeRetrieveByDefault: string[];
         typeName: string;
         stringifyFieldsBeforeTemplate: string[];
+        allowMatchingByName: boolean;
         fields: {
             activeDate: {
                 isCreateable: boolean;

@@ -8,6 +8,7 @@
  * @property {string} [businessUnit] name of the BU to interact with
  * @property {string} [credential] name of the credential to interact with
  */
+
 /**
  * @typedef {Object.<string, string>} TemplateMap
  * @typedef {'asset'|'asset-archive'|'asset-asset'|'asset-audio'|'asset-block'|'asset-code'|'asset-document'|'asset-image'|'asset-message'|'asset-other'|'asset-rawimage'|'asset-template'|'asset-textfile'|'asset-video'|'attributeGroup'|'attributeSet'|'automation'|'campaign'|'contentArea'|'dataExtension'|'dataExtensionField'|'dataExtensionTemplate'|'dataExtract'|'dataExtractType'|'discovery'|'deliveryProfile'|'email'|'emailSend'|'event'|'fileLocation'|'fileTransfer'|'filter'|'folder'|'importFile'|'journey'|'list'|'mobileCode'|'mobileKeyword'|'mobileMessage'|'query'|'role'|'script'|'sendClassification'|'senderProfile'|'transactionalEmail'|'transactionalPush'|'transactionalSMS'|'triggeredSend'|'user'|'verification'} SupportedMetadataTypes
@@ -31,6 +32,7 @@
  * @property {CodeExtract[]} codeArr list of code snippets in this item
  * @property {string[]} subFolder mostly set to null, otherwise list of subfolders
  */
+
 /**
  * @typedef {object} CodeExtract
  * @property {string[]} subFolder mostly set to null, otherwise subfolders path split into elements
@@ -39,6 +41,7 @@
  * @property {string} content file content
  * @property {'base64'} [encoding] optional for binary files
  */
+
 /**
  * @typedef {object} QueryItem
  * @property {string} name name
@@ -59,6 +62,7 @@
  * @property {string} [queryDefinitionId] Object ID of query
  * @typedef {Object.<string, QueryItem>} QueryMap
  */
+
 /**
  * @typedef {object} ScriptItem
  * @property {string} name name
@@ -71,11 +75,13 @@
  * @property {string} r__folder_Path folder path in which this DE is saved
  * @typedef {Object.<string, ScriptItem>} ScriptMap
  */
+
 /**
  * @typedef {Object.<string, any>} AssetItem
  * @typedef {Object.<string, AssetItem>} AssetMap
  * @typedef {'archive'|'asset'|'audio'|'block'|'code'|'document'|'image'|'message'|'other'|'rawimage'|'template'|'textfile'|'video'} AssetSubType
  */
+
 /**
  * @typedef {object} DataExtensionFieldItem
  * @property {string} [ObjectID] id
@@ -93,9 +99,11 @@
  * @property {number|string} MaxLength field length
  * @property {string} Scale the number of places after the decimal that the field can hold; example: "0","1", ...
  */
+
 /**
  * @typedef {Object.<string, DataExtensionFieldItem>} DataExtensionFieldMap  key: name of field, value: DataExtensionFieldItem
  */
+
 /**
  * @typedef {object} DataExtensionItem
  * @property {string} CustomerKey key
@@ -126,9 +134,11 @@
  * @property {boolean} ResetRetentionPeriodOnImport ?
  * @property {boolean} [DeleteAtEndOfRetentionPeriod] true for retention policy allRecords
  */
+
 /**
  * @typedef {Object.<string, DataExtensionItem>} DataExtensionMap
  */
+
 /**
  * @typedef {object} UserDocument
  * @property {'User'|'Installed Package'|'Inactivated User'} TYPE -
@@ -170,10 +180,12 @@
  * @property {object} [SsoIdentity] -
  * @property {Array|object} [SsoIdentities] -
  */
+
 /**
  * @typedef {{before:UserDocument,after:UserDocument}} UserDocumentDiff
  * @typedef {Object.<string, UserDocument>} UserDocumentMap key=customer key
  */
+
 /**
  * @typedef {object} UserDocumentDocumentHelper
  * @property {string} ActiveFlagDocs docs: user.ActiveFlag === true ? '✓' : '-'
@@ -187,6 +199,7 @@
  * @property {string} IsLockedDocs docs: if the user cannot login
  * @typedef {UserDocument & UserDocumentDocumentHelper} UserDocumentDocument
  */
+
 /**
  * @typedef {object} AccountUserConfiguration
  * @property {object} Client wrapper
@@ -211,6 +224,7 @@
  * @property {number} [displayOrder] order within step; starts with 1 or higher number
  * @property {string} r__type see this.definition.activityTypeMapping
  */
+
 /**
  * @typedef {object}  AutomationStep
  * @property {string} name description
@@ -219,6 +233,7 @@
  * @property {number} [stepNumber] step iterator, automatically set during deployment
  * @property {AutomationActivity[]} activities -
  */
+
 /**
  * @typedef {object} AutomationSchedule REST format
  * @property {number} typeId equals schedule.scheduleTypeId; upsert endpoint requires scheduleTypeId. retrieve endpoint returns typeId
@@ -233,6 +248,7 @@
  * @property {any} [scheduledTime] ?
  * @property {string} [scheduledStatus] ?
  */
+
 /**
  * @typedef {object} AutomationScheduleSoap SOAP format
  * @property {string} [RecurrenceType] 'Minutely'|'Hourly'|'Daily'|'Weekly'|'Monthly'|'Yearly'
@@ -261,6 +277,7 @@
  * @property {'EndOn'|'EndAfter'} RecurrenceRangeType set to 'EndOn' if AutomationSchedule.icalRecur contains 'UNTIL'; otherwise to 'EndAfter'
  * @property {number} [Occurrences] only exists if RecurrenceRangeType=='EndAfter'
  */
+
 /**
  * @typedef {object} AutomationItem
  * @property {string} id Object Id
@@ -296,6 +313,7 @@
  * @property {string} [r__folder_Path] folder path
  * @property {string} [categoryId] holds folder ID, replaced with r__folder_Path during retrieve
  */
+
 /**
  * @typedef {object} VerificationItem
  * @property {string} dataVerificationDefinitionId ID / Key
@@ -331,6 +349,7 @@
  * @property {string} _businessUnit mcdev business unit name inside of _credential
  * @typedef {import('simple-git').DiffResultTextFile & McdevDeltaPkgItem} DeltaPkgItem
  */
+
 /**
  * @typedef {import('sfmc-sdk/util').RestError} RestError
  * @typedef {import('sfmc-sdk/util').SOAPError} SOAPError
@@ -368,30 +387,35 @@
 complex
  * @property {boolean} [QueryAllAccounts] all BUs or just one
  */
+
 /**
  * @typedef {object} SoapFilterSimple
  * @property {string} property field
  * @property {'equals'|'notEquals'|'isNull'|'isNotNull'|'greaterThan'|'lessThan'|'greaterThanOrEqual'|'lessThanOrEqual'|'between'|'IN'|'in'|'like'} simpleOperator various options
  * @property {string | number | boolean | string[] | number[]} [value] field value
  */
+
 /**
  * @typedef {object} SoapFilterComplex
  * @property {SoapSDKFilter} leftOperand string for simple or a new filter-object for complex
  * @property {'AND'|'OR'} logicalOperator various options
  * @property {SoapSDKFilter} rightOperand string for simple or a new filter-object for complex; omit for isNull and isNotNull
  */
+
 /**
  * @typedef {object} SoapSDKFilterSimple
  * @property {SoapFilterSimple["property"]} leftOperand string for simple or a new filter-object for complex
  * @property {SoapFilterSimple["simpleOperator"]} operator various options
  * @property {SoapFilterSimple["value"]} [rightOperand] string for simple or a new filter-object for complex; omit for isNull and isNotNull
  */
+
 /**
  * @typedef {object} SoapSDKFilterComplex
  * @property {SoapFilterComplex["leftOperand"]} leftOperand string for simple or a new filter-object for complex
  * @property {SoapFilterComplex["logicalOperator"]} operator various options
  * @property {SoapFilterComplex["rightOperand"]} rightOperand string for simple or a new filter-object for complex; omit for isNull and isNotNull
  */
+
 /**
  * @typedef {SoapSDKFilterSimple | SoapSDKFilterComplex} SoapSDKFilter
  */
@@ -414,6 +438,7 @@ complex
  * @property {'AND'|'OR'} logicalOperator various options
  * @property {SoapSDKFilter | AssetFilterSimple} [rightOperand] string for simple or a new filter-object for complex; omit for isNull and isNotNull
  */
+
 /**
  * @typedef {object} AssetFilterSimple
  * @property {string} property field
@@ -444,16 +469,18 @@ complex
  * @typedef {'error'|'verbose'|'info'|'debug'} LoggerLevel
  * @typedef {object} McdevLogger
  * @property {LoggerLevel} [level] (msg) print info message
- * @property {Function} error (msg) print error message
- * @property {Function} errorStack (ex, msg) print error with trace message
+ * @property {(msg:string)=>void} error (msg) print error message; wrapper around winstonLogger.error that also sets error code to 1
+ * @property {(ex:SDKError,message?:string)=>void} errorStack print error with trace message
  * @typedef {import('winston').Logger & McdevLogger} Logger
  */
+
 /**
  * @typedef {{id: number, key: string, name: string}} AssetItemSimple
  * @typedef {Object.<string, AssetItemSimple>} AssetItemSimpleMap
  * @typedef {Object.<number, AssetItemSimple>} AssetItemIdSimpleMap
  * @typedef {'id'|'key'|'name'} ContentBlockConversionTypes
  */
+
 /**
  * @typedef {object} ExplainType
  * @property {string} name readable name of type

@@ -1252,13 +1252,13 @@ export type McdevLogger = {
      */
     level?: LoggerLevel;
     /**
-     * (msg) print error message
+     * (msg) print error message; wrapper around winstonLogger.error that also sets error code to 1
      */
-    error: Function;
+    error: (msg: string) => void;
     /**
-     * (ex, msg) print error with trace message
+     * print error with trace message
      */
-    errorStack: Function;
+    errorStack: (ex: SDKError, message?: string) => void;
 };
 export type Logger = import("winston").Logger & McdevLogger;
 export type AssetItemSimple = {
