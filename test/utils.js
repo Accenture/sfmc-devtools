@@ -335,7 +335,7 @@ export function getRestCallout(method, url, returnAll = false) {
     /**
      * helper for filter/find
      *
-     * @param {any} item
+     * @param {any} item history item
      * @returns {boolean} if item matches
      */
     function findCallout(item) {
