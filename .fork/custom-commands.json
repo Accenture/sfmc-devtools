@@ -65,6 +65,52 @@
     "target" : "ref"
   },
   {
+    "name" : "Skip Hooks/Commit",
+    "refTargets" : [
+      "localbranch",
+      "remotebranch"
+    ],
+    "target" : "ref",
+    "ui" : {
+      "buttons" : [
+        {
+          "action" : {
+            "args" : "commit -n -m \"$1{text}\" -m \" $2{text}\"",
+            "path" : "${git}",
+            "showOutput" : false,
+            "type" : "process",
+            "waitForExit" : true
+          },
+          "title" : "Commit without Hooks"
+        },
+        {
+          "action" : {
+            "type" : "cancel"
+          },
+          "title" : "Cancel"
+        }
+      ],
+      "controls" : [
+        {
+          "placeholder" : "",
+          "text" : "",
+          "textBoxType" : "generic",
+          "title" : "Commit subject",
+          "type" : "textBox"
+        },
+        {
+          "placeholder" : "",
+          "text" : "",
+          "textBoxType" : "generic",
+          "title" : "Description",
+          "type" : "textBox"
+        }
+      ],
+      "description" : "This will create a commit but not run pre-commit hooks",
+      "title" : "Commit skipping Hooks"
+    }
+  },
+  {
     "action" : {
       "script" : "SKIP_HOOKS=4 git merge ${ref:short}",
       "showOutput" : false,
