@@ -1,3 +1,8 @@
+if [[ $SKIP_HOOKS>0 ]]; then
+  echo "[POST-MERGE] skipping hooks ($SKIP_HOOKS)"
+  exit 0
+fi
+
 # ### run npm install ###
 echo "[POST-MERGE] 📦 Checking for changes to dependencies"
 # define how to split strings into array elements
