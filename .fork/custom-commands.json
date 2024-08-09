@@ -53,7 +53,7 @@
   },
   {
     "action" : {
-      "script" : "SKIP_HOOKS=1 git switch ${ref} && SKIP_HOOKS=2 git pull",
+      "script" : "SKIP_HOOKS=1 git switch ${ref:short} && SKIP_HOOKS=2 git pull",
       "showOutput" : false,
       "type" : "sh",
       "waitForExit" : true
@@ -67,7 +67,7 @@
   },
   {
     "action" : {
-      "script" : "SKIP_HOOKS=4 git merge origin/${ref}",
+      "script" : "SKIP_HOOKS=4 git merge origin/${ref:short}",
       "showOutput" : false,
       "type" : "sh",
       "waitForExit" : true
