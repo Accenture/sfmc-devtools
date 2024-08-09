@@ -6,7 +6,7 @@ then
   TICKETID="0"
 fi
 TEMPLATE="#$TICKETID: "
-echo "[POST_CHECKOUT] Setting template commit to '$TEMPLATE'"
+echo "[POST-CHECKOUT] Setting template commit to '$TEMPLATE'"
 # wrap $TEMPLATE in quotes or else it is trimmed automatically
 echo "$TEMPLATE" > ".git/templatemessage"
 
