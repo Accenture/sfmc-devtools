@@ -125,10 +125,10 @@ export namespace Util {
     /**
      * Returns Order in which metadata needs to be retrieved/deployed
      *
-     * @param {string[]} metadataTypes which should be retrieved/deployed
+     * @param {string[]} typeArr which should be retrieved/deployed
      * @returns {Object.<string, string[]>} retrieve/deploy order as array
      */
-    function getMetadataHierachy(metadataTypes: string[]): {
+    function getMetadataHierachy(typeArr: string[]): {
         [x: string]: string[];
     };
     /**
