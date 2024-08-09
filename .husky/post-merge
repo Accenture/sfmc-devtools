@@ -1,6 +1,5 @@
-echo "[POST-MERGE] SKIP_HOOKS $SKIP_HOOKS"
 if [[ $SKIP_HOOKS>0 ]]; then
-  echo "[POST-MERGE] skipping hooks"
+  echo "[POST-MERGE] skipping hooks ($SKIP_HOOKS)"
   exit 0
 fi
 

@@ -4,20 +4,6 @@
   },
   {
     "action" : {
-      "script" : "SKIP_HOOKS=1 git switch $name && SKIP_HOOKS=2 git pull",
-      "showOutput" : false,
-      "type" : "sh",
-      "waitForExit" : true
-    },
-    "name" : "Checkout & Pull",
-    "refTargets" : [
-      "localbranch",
-      "remotebranch"
-    ],
-    "target" : "ref"
-  },
-  {
-    "action" : {
       "type" : "url",
       "url" : "https://github.com/Accenture/sfmc-devtools/compare/develop...$shortname?expand=1"
     },
@@ -54,12 +40,52 @@
   },
   {
     "action" : {
+      "script" : "SKIP_HOOKS=1 git switch $ref",
+      "showOutput" : true,
+      "type" : "sh",
+      "waitForExit" : true
+    },
+    "name" : "SKIP HOOKS: Checkout",
+    "refTargets" : [
+      "localbranch"
+    ],
+    "target" : "ref"
+  },
+  {
+    "action" : {
+      "script" : "SKIP_HOOKS=1 git switch $ref && SKIP_HOOKS=2 git pull",
+      "showOutput" : false,
+      "type" : "sh",
+      "waitForExit" : true
+    },
+    "name" : "SKIP HOOKS: Checkout & Pull",
+    "refTargets" : [
+      "localbranch",
+      "remotebranch"
+    ],
+    "target" : "ref"
+  },
+  {
+    "action" : {
+      "script" : "SKIP_HOOKS=4 git merge origin/$ref",
+      "showOutput" : false,
+      "type" : "sh",
+      "waitForExit" : true
+    },
+    "name" : "SKIP HOOKS: Merge into current branch",
+    "refTargets" : [
+      "localbranch"
+    ],
+    "target" : "ref"
+  },
+  {
+    "action" : {
       "script" : "SKIP_HOOKS=3 git pull",
       "showOutput" : false,
       "type" : "sh",
       "waitForExit" : true
     },
-    "name" : "Pull (skip checkout)",
+    "name" : "SKIP HOOKS: Pull",
     "refTargets" : [
       "localbranch",
       "remotebranch"

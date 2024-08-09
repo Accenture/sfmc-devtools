@@ -11,9 +11,8 @@ echo "[POST_CHECKOUT] Setting template commit to '$TEMPLATE'"
 echo "$TEMPLATE" > ".git/templatemessage"
 
 
-echo "[POST-CHECKOUT] SKIP_HOOKS $SKIP_HOOKS"
 if [[ $SKIP_HOOKS>0 ]]; then
-  echo "[POST-CHECKOUT] skipping hooks"
+  echo "[POST-CHECKOUT] skipping hooks ($SKIP_HOOKS)"
   exit 0
 fi
 
