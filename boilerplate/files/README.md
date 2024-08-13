@@ -6,4 +6,4 @@ This project relies on **Accenture SFMC DevTools**!
 
 ---
 
-© 2022 Accenture - [www.accenture.com](https://www.accenture.com/)
+© 2024 Accenture - [www.accenture.com](https://www.accenture.com/)
