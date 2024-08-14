@@ -523,4 +523,39 @@ complex
  * @typedef {Object.<number, ListItem>} ListIdMap key=id
  * @typedef {Object.<string, ListItem>} ListMap key=customer key
  */
+
+/**
+ * @typedef {object} ReferenceObject returned by /data/v1/integration/member/salesforce/object/<OBJECT NAME>/referenceobjects
+ * @property {string} displayname label
+ * @property {string} referenceObjectName api name of salesforce object
+ * @property {string} relationshipName name of lookup/MD field on related object ending on __r (way to return fields from other object)
+ * @property {string} relationshipIdName name of lookup/MD field on related object ending on __c (returning id)
+ * @property {boolean} isPolymorphic if this lookup can point to multiple objects or not
+ *
+ * @typedef {object} SfObjectPicklist returned by /legacy/v1/beta/integration/member/salesforce/object/<OBJECT NAME>
+ * @property {boolean} active -
+ * @property {boolean} defaultValue -
+ * @property {string} label what you see in the GUI
+ * @property {string} value whats stored in the DB
+ *
+ * @typedef {object} SfObjectField returned by /legacy/v1/beta/integration/member/salesforce/object/<OBJECT NAME>
+ * @property {string} label "Annual Revenue"
+ * @property {string} name "AnnualRevenue"
+ * @property {'currency'|'string'|'int'|'picklist'|'textarea'|'boolean'|'date'|'datetime'|'email'} datatype type
+ * @property {number} length 0-4000
+ * @property {boolean} nillable == not required
+ * @property {boolean} custom is it a custom field
+ * @property {boolean} updateable always true?
+ * @property {boolean} createable always true?
+ * @property {boolean} defaultedoncreate -
+ * @property {boolean} externalid -
+ * @property {boolean} idlookup -
+ * @property {number} precision -
+ * @property {number} scale -
+ * @property {'Currency'|'Text'|'Number'|'Picklist'|'Text Area (long)'|'Checkbox'|'Date'|'Date/Time'|'Email'} displaydatatype "Currency"
+ * @property {string} objectname "Lead",
+ * @property {string} relationname "",
+ * @property {boolean} isnamefield -
+ * @property {SfObjectPicklist[]} [picklist] list of values
+ */
 export default {};
