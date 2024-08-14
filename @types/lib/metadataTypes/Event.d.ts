@@ -80,9 +80,40 @@ declare class Event extends MetadataType {
      * parses retrieved Metadata before saving
      *
      * @param {MetadataTypeItem} metadata a single event definition
-     * @returns {MetadataTypeItem} parsed metadata
+     * @returns {Promise.<MetadataTypeItem>} parsed metadata
      */
-    static postRetrieveTasks(metadata: MetadataTypeItem): MetadataTypeItem;
+    static postRetrieveTasks(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
+    static sfObjects: {
+        workflowObjects: any;
+        referencedObjects: {};
+        objectFields: {};
+    };
+    /**
+     * helper for {@link this.checkSalesforceEntryEvents} that retrieves information about SF object fields
+     *
+     * @param {string} objectAPIName salesforce object api name
+     */
+    static getSalesforceObjects(objectAPIName: string): Promise<void>;
+    static defaultSalesforceFields: string[];
+    /**
+     *
+     * @param {any} ca trigger[0].configurationArguments
+     */
+    static checkSalesforceEntryEvents(ca: any): void;
+    /**
+     *
+     * @param {string} triggerType e.g. SalesforceObjectTriggerV2, APIEvent, ...
+     * @param {any} ca trigger[0].configurationArguments
+     * @returns {Promise.<void>} -
+     */
+    static postRetrieveTasks_SalesforceEntryEvents(triggerType: string, ca: any): Promise<void>;
+    /**
+     *
+     * @param {string} triggerType e.g. SalesforceObjectTriggerV2, APIEvent, ...
+     * @param {any} ca trigger[0].configurationArguments
+     * @returns {Promise.<void>} -
+     */
+    static preDeployTasks_SalesforceEntryEvents(triggerType: string, ca: any): Promise<void>;
 }
 declare namespace Event {
     let definition: {
