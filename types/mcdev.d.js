@@ -537,7 +537,9 @@ complex
  * @property {boolean} defaultValue -
  * @property {string} label what you see in the GUI
  * @property {string} value whats stored in the DB
- *
+ */
+
+/**
  * @typedef {object} SfObjectField returned by /legacy/v1/beta/integration/member/salesforce/object/<OBJECT NAME>
  * @property {string} label "Annual Revenue"
  * @property {string} name "AnnualRevenue"
