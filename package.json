@@ -91,7 +91,7 @@
         "@types/inquirer": "9.0.7",
         "@types/mocha": "10.0.7",
         "@types/node": "22.4.1",
-        "@types/yargs": "17.0.32",
+        "@types/yargs": "17.0.33",
         "assert": "2.1.0",
         "axios-mock-adapter": "2.0.0",
         "c8": "10.0.0",
