@@ -9,6 +9,8 @@ export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type ReferenceObject = import("../../types/mcdev.d.js").ReferenceObject;
+export type SfObjectField = import("../../types/mcdev.d.js").SfObjectField;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -20,6 +22,9 @@ export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
+ *
+ * @typedef {import('../../types/mcdev.d.js').ReferenceObject} ReferenceObject
+ * @typedef {import('../../types/mcdev.d.js').SfObjectField} SfObjectField
  */
 /**
  * Event MetadataType
@@ -84,12 +89,21 @@ declare class Event extends MetadataType {
      */
     static postRetrieveTasks(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
     static sfObjects: {
-        workflowObjects: any;
-        referencedObjects: {};
-        objectFields: {};
+        /** @type {string[]} */
+        workflowObjects: string[];
+        /** @type {Object.<string, ReferenceObject[]>} object-name > object data */
+        referencedObjects: {
+            [x: string]: ReferenceObject[];
+        };
+        /** @type {Object.<string, Object.<string, SfObjectField>>} object-name > field-name > field data */
+        objectFields: {
+            [x: string]: {
+                [x: string]: SfObjectField;
+            };
+        };
     };
     /**
-     * helper for {@link this.checkSalesforceEntryEvents} that retrieves information about SF object fields
+     * helper for {@link checkSalesforceEntryEvents} that retrieves information about SF object fields
      *
      * @param {string} objectAPIName salesforce object api name
      */
