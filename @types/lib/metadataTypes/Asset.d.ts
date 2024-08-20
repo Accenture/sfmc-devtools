@@ -12,6 +12,7 @@ export type AssetSubType = import("../../types/mcdev.d.js").AssetSubType;
 export type AssetMap = import("../../types/mcdev.d.js").AssetMap;
 export type AssetItem = import("../../types/mcdev.d.js").AssetItem;
 export type AssetRequestParams = import("../../types/mcdev.d.js").AssetRequestParams;
+export type ContentBlockConversionTypes = import("../../types/mcdev.d.js").ContentBlockConversionTypes;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -28,6 +29,7 @@ export type AssetRequestParams = import("../../types/mcdev.d.js").AssetRequestPa
  * @typedef {import('../../types/mcdev.d.js').AssetMap} AssetMap
  * @typedef {import('../../types/mcdev.d.js').AssetItem} AssetItem
  * @typedef {import('../../types/mcdev.d.js').AssetRequestParams} AssetRequestParams
+ * @typedef {import('../../types/mcdev.d.js').ContentBlockConversionTypes} ContentBlockConversionTypes
  */
 /**
  * FileTransfer MetadataType
