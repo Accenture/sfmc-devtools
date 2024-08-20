@@ -171,10 +171,10 @@ declare class Mcdev {
      *
      * @param {string} businessUnit references credentials from properties.json
      * @param {string | TypeKeyCombo} selectedTypes supported metadata type (single) or complex object
-     * @param {string[] | string} [keyArr] Identifier of metadata
+     * @param {string[] | string} [keys] Identifier of metadata
      * @returns {Promise.<boolean>} true if successful, false otherwise
      */
-    static deleteByKey(businessUnit: string, selectedTypes: string | TypeKeyCombo, keyArr?: string[] | string): Promise<boolean>;
+    static deleteByKey(businessUnit: string, selectedTypes: string | TypeKeyCombo, keys?: string[] | string): Promise<boolean>;
     /**
      * get name & key for provided id
      *
