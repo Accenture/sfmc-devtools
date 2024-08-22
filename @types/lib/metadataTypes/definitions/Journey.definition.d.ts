@@ -4,7 +4,6 @@ declare namespace _default {
     let dependencies: string[];
     namespace dependencyGraph {
         let event: string[];
-        let transactionalEmail: string[];
         let dataExtension: string[];
         let list: string[];
         let senderProfile: string[];
