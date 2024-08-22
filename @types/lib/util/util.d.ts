@@ -322,6 +322,14 @@ export namespace Util {
      * @returns {Array[]} array of arrays with max chunk_size members per element, last element might have less
      */
     function chunk(array: any[], chunk_size: number): any[][];
+    /**
+     * recursively find all values of the given key in the object
+     *
+     * @param {any} object data to search in
+     * @param {string} key attribute to find
+     * @returns {Array} all values of the given key
+     */
+    function findLeafVals(object: any, key: string): any[];
 }
 export type AuthObject = import("../../types/mcdev.d.js").AuthObject;
 export type BuObject = import("../../types/mcdev.d.js").BuObject;
