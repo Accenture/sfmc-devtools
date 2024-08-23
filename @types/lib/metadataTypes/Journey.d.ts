@@ -130,7 +130,6 @@ declare namespace Journey {
         dependencies: string[];
         dependencyGraph: {
             event: string[];
-            transactionalEmail: string[];
             dataExtension: string[];
             list: string[];
             senderProfile: string[];

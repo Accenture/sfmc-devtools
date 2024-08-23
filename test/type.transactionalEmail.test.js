@@ -26,8 +26,8 @@ describe('type: transactionalEmail', () => {
             const result = cache.getCache();
             assert.equal(
                 result.transactionalEmail ? Object.keys(result.transactionalEmail).length : 0,
-                1,
-                'only one transactionalEmail expected'
+                2,
+                'unexpected number of transactionalEmail'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_temail', 'transactionalEmail'),
@@ -36,7 +36,7 @@ describe('type: transactionalEmail', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                11,
+                12,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -57,8 +57,8 @@ describe('type: transactionalEmail', () => {
             const result = cache.getCache();
             assert.equal(
                 result.transactionalEmail ? Object.keys(result.transactionalEmail).length : 0,
-                2,
-                'two transactionalEmails expected'
+                3,
+                'unexpected number of transactionalEmails'
             );
             // confirm created item
             assert.deepEqual(
@@ -75,7 +75,7 @@ describe('type: transactionalEmail', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                13,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -137,7 +137,7 @@ describe('type: transactionalEmail', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                11,
+                12,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
