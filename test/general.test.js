@@ -2075,7 +2075,7 @@ describe('GENERAL', () => {
                 assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
                 assert.deepEqual(
                     publish['testInstance/testBU']?.journey,
-                    ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1'],
+                    ['testExisting_journey_Quicksend'],
                     'should have published the right journey'
                 );
                 return;

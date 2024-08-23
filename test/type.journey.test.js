@@ -559,7 +559,7 @@ describe('type: journey', () => {
             // retrieve result
             assert.deepEqual(
                 publish['testInstance/testBU']?.journey,
-                ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1'],
+                ['testExisting_journey_Quicksend'],
                 'should have published the right journey'
             );
 
@@ -574,10 +574,9 @@ describe('type: journey', () => {
                 await testUtils.getExpectedJson('9999999', 'journey', 'publish-callout'),
                 'create-payload JSON was not equal expected'
             );
-
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                1,
+                2,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -596,7 +595,7 @@ describe('type: journey', () => {
             // retrieve result
             assert.deepEqual(
                 publish['testInstance/testBU']?.journey,
-                ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2'],
+                ['testExisting_journey_Quicksend'],
                 'should have published the right journey'
             );
 
@@ -656,7 +655,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                2,
+                3,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -698,7 +697,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                2,
+                3,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -740,7 +739,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                2,
+                3,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
