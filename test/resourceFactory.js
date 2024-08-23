@@ -2,6 +2,13 @@ import fs from 'fs-extra';
 import path from 'node:path';
 import { XMLParser } from 'fast-xml-parser';
 import { Util } from '../lib/util/util.js';
+
+import { fileURLToPath } from 'node:url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const projectRootHelper = __dirname.split(path.sep);
+projectRootHelper.pop();
+const projectRoot = projectRootHelper.join(path.sep) + path.sep;
+
 const parser = new XMLParser();
 const attributeParser = new XMLParser({ ignoreAttributes: false });
 /** @type {typeof Util.color} */
@@ -48,6 +55,7 @@ async function loadSOAPRecords(mcdevAction, type, mid, filter, QueryAllAccounts)
     const testPath = path.join('test', 'resources', mid.toString(), type, mcdevAction);
     const filterPath = getFilterPath(filter, QueryAllAccounts);
     if (await fs.pathExists(testPath + filterPath + '-response.xml')) {
+        console.log('loading ' + projectRoot + testPath + filterPath + '-response.xml'); // eslint-disable-line no-console
         return fs.readFile(testPath + filterPath + '-response.xml', {
             encoding: 'utf8',
         });
@@ -63,6 +71,7 @@ async function loadSOAPRecords(mcdevAction, type, mid, filter, QueryAllAccounts)
             );
             /* eslint-enable no-console */
         }
+        console.log('loading ' + projectRoot + testPath + '-response.xml'); // eslint-disable-line no-console
         return fs.readFile(testPath + '-response.xml', {
             encoding: 'utf8',
         });
@@ -327,7 +336,7 @@ export const handleRESTRequest = async (config) => {
                 response.count = response.items.length;
                 return [200, JSON.stringify(response)];
             } else {
-                console.log('loading ' + testPathFilter + '.json'); // eslint-disable-line no-console
+                console.log('loading ' + projectRoot + testPathFilter + '.json'); // eslint-disable-line no-console
                 return [
                     200,
                     await fs.readFile(testPathFilter + '.json', {
@@ -343,7 +352,7 @@ export const handleRESTRequest = async (config) => {
                 }),
             ];
         } else if (testPathFilterBody && (await fs.pathExists(testPathFilterBody + '.json'))) {
-            console.log('loading ' + testPathFilterBody + '.json'); // eslint-disable-line no-console
+            console.log('loading ' + projectRoot + testPathFilterBody + '.json'); // eslint-disable-line no-console
             return [
                 200,
                 await fs.readFile(testPathFilterBody + '.json', {
@@ -393,7 +402,7 @@ export const handleRESTRequest = async (config) => {
                 response.count = response.items.length;
                 return [200, JSON.stringify(response)];
             } else {
-                console.log('loading ' + testPath + '.json'); // eslint-disable-line no-console
+                console.log('loading ' + projectRoot + testPath + '.json'); // eslint-disable-line no-console
 
                 return [
                     200,
