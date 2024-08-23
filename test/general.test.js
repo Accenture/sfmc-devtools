@@ -61,7 +61,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    36,
+                    38,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -110,7 +110,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    36,
+                    38,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -159,7 +159,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    36,
+                    38,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -231,7 +231,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    84,
+                    86,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -296,7 +296,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    84,
+                    86,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -361,7 +361,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    84,
+                    86,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -478,7 +478,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     Object.keys(result[buName]['dataExtension']).length,
-                    7,
+                    8,
                     'retrieve should have returned 7 dataExtension'
                 );
                 assert.equal(
@@ -918,7 +918,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 78;
+                const expectedApiCallsRetrieve = 81;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1046,7 +1046,7 @@ describe('GENERAL', () => {
             });
 
             it('buildTemplate + buildDefinition for multiple types with keys and --dependencies and --retrieve', async () => {
-                const expectedApiCallsRetrieve = 82;
+                const expectedApiCallsRetrieve = 85;
 
                 // preparation
                 const argvMetadata = [
@@ -1454,7 +1454,7 @@ describe('GENERAL', () => {
                 // download everything before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 78;
+                const expectedApiCallsRetrieve = 81;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1564,7 +1564,7 @@ describe('GENERAL', () => {
             });
 
             it('build multiple type with keys and --dependencies and --retrieve', async () => {
-                const expectedApiCallsRetrieve = 82;
+                const expectedApiCallsRetrieve = 85;
 
                 // preparation
                 const argvMetadata = [
@@ -1849,7 +1849,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 78;
+                const expectedApiCallsRetrieve = 81;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -2075,7 +2075,7 @@ describe('GENERAL', () => {
                 assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
                 assert.deepEqual(
                     publish['testInstance/testBU']?.journey,
-                    ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1'],
+                    ['testExisting_journey_Quicksend'],
                     'should have published the right journey'
                 );
                 return;

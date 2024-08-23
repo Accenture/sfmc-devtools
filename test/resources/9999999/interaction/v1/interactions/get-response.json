@@ -126,6 +126,44 @@
             "status": "Published",
             "scheduledStatus": "Draft",
             "definitionId": "dsfdsafdsa-922c-4568-85a5-e5cc77efc3be"
+        },
+        {
+            "id": "d4a900fe-3a8f-4cc5-9a49-81286e3e2cd2",
+            "key": "testExisting_temail_notPublished",
+            "name": "testExisting_temail_notPublished",
+            "lastPublishedDate": "0001-01-01T00:00:00",
+            "description": "",
+            "version": 1,
+            "workflowApiVersion": 1,
+            "createdDate": "2024-08-23T00:29:39.55",
+            "modifiedDate": "2024-08-23T00:29:39.55",
+            "goals": [],
+            "exits": [],
+            "notifiers": [],
+            "stats": {
+                "currentPopulation": 0,
+                "cumulativePopulation": 0,
+                "metGoal": 0,
+                "metExitCriteria": 0,
+                "goalPerformance": 0
+            },
+            "entryMode": "MultipleEntries",
+            "definitionType": "Transactional",
+            "channel": "email",
+            "defaults": {
+                "properties": {}
+            },
+            "metaData": {
+                "dataSource": "ContactsModel",
+                "highThroughputSending": {
+                    "email": false
+                }
+            },
+            "executionMode": "Production",
+            "categoryId": 6298,
+            "status": "Draft",
+            "definitionId": "d4a900fe-3a8f-4cc5-9a49-81286e3e2cd2",
+            "scheduledStatus": "Draft"
         }
     ]
 }
