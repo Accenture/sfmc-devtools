@@ -509,6 +509,70 @@ describe('type: journey', () => {
     });
 
     describe('Publish ================', () => {
+        it(`Should not publish a transactional journey by key that is already published`, async () => {
+            handler.setOptions({ skipStatusCheck: true });
+            // WHEN
+            const publish = await handler.publish(
+                'testInstance/testBU',
+                ['journey'],
+                ['testExisting_temail']
+            );
+            // THEN
+            assert.equal(process.exitCode, 1, 'publish should have thrown an error');
+
+            assert.deepEqual(
+                publish['testInstance/testBU']?.journey,
+                [],
+                'should have not have published any journey'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                1,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should publish a transactional journey by key', async () => {
+            handler.setOptions({ skipStatusCheck: true });
+            // WHEN
+            const publish = await handler.publish(
+                'testInstance/testBU',
+                ['journey'],
+                ['testExisting_temail_notPublished']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                publish['testInstance/testBU']?.journey,
+                ['testExisting_temail_notPublished'],
+                'should have published the right journey'
+            );
+
+            // get callouts
+            const publishCallout = testUtils.getRestCallout(
+                'post',
+                '/interaction/v1/interactions/transactional/create'
+            );
+            // confirm created item
+            assert.deepEqual(
+                publishCallout,
+                {
+                    definitionId: 'd4a900fe-3a8f-4cc5-9a49-81286e3e2cd2',
+                },
+                'publish-payload JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                33,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
         it('Should publish a journey by key (auto-picks latest version)', async () => {
             handler.setOptions({ skipStatusCheck: true });
             // WHEN
@@ -535,7 +599,7 @@ describe('type: journey', () => {
             assert.deepEqual(
                 publishCallout,
                 await testUtils.getExpectedJson('9999999', 'journey', 'publish-callout'),
-                'create-payload JSON was not equal expected'
+                'publish-payload JSON was not equal expected'
             );
 
             assert.equal(
@@ -572,7 +636,7 @@ describe('type: journey', () => {
             assert.deepEqual(
                 publishCallout,
                 await testUtils.getExpectedJson('9999999', 'journey', 'publish-callout'),
-                'create-payload JSON was not equal expected'
+                'publish-payload JSON was not equal expected'
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -608,7 +672,7 @@ describe('type: journey', () => {
             assert.deepEqual(
                 publishCallout,
                 await testUtils.getExpectedJson('9999999', 'journey', 'publish-callout'),
-                'create-payload JSON was not equal expected'
+                'publish-payload JSON was not equal expected'
             );
 
             assert.equal(
@@ -650,7 +714,7 @@ describe('type: journey', () => {
             assert.deepEqual(
                 publishCallout,
                 await testUtils.getExpectedJson('9999999', 'journey', 'publish-callout'),
-                'create-payload JSON was not equal expected'
+                'publish-payload JSON was not equal expected'
             );
 
             assert.equal(
@@ -692,7 +756,7 @@ describe('type: journey', () => {
             assert.deepEqual(
                 publishCallout,
                 await testUtils.getExpectedJson('9999999', 'journey', 'publish-callout'),
-                'create-payload JSON was not equal expected'
+                'publish-payload JSON was not equal expected'
             );
 
             assert.equal(
@@ -734,7 +798,7 @@ describe('type: journey', () => {
             assert.deepEqual(
                 publishCallout,
                 await testUtils.getExpectedJson('9999999', 'journey', 'publish-callout'),
-                'create-payload JSON was not equal expected'
+                'publish-payload JSON was not equal expected'
             );
 
             assert.equal(

@@ -7,6 +7,13 @@
             "status": "Active",
             "createdDate": "2020-08-17T01:37:00",
             "modifiedDate": "2020-08-17T01:37:00"
+        },
+        {
+            "name": "testExisting_temail_notPublished",
+            "definitionKey": "testExisting_temail_notPublished",
+            "status": "Active",
+            "createdDate": "2020-08-17T01:37:00",
+            "modifiedDate": "2020-08-17T01:37:00"
         }
     ],
     "count": 1,
