@@ -78,9 +78,9 @@ declare class Event extends MetadataType {
      * prepares an event definition for deployment
      *
      * @param {MetadataTypeItem} metadata a single eventDefinition
-     * @returns {MetadataTypeItem} parsed version
+     * @returns {Promise.<MetadataTypeItem>} parsed version
      */
-    static preDeployTasks(metadata: MetadataTypeItem): MetadataTypeItem;
+    static preDeployTasks(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
     /**
      * parses retrieved Metadata before saving
      *
