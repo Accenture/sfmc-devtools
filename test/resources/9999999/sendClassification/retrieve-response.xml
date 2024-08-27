@@ -52,7 +52,7 @@
                 <Description>Default Transactional Send Classification</Description>
                 <SenderProfile>
                     <PartnerKey xsi:nil="true" />
-                    <ObjectID xsi:nil="true" />
+                    <ObjectID>7acfb80f-3550-e611-96fe-38eaa7142c61</ObjectID>
                     <CustomerKey>Default</CustomerKey>
                 </SenderProfile>
                 <DeliveryProfile>
@@ -72,7 +72,7 @@
                 <Description />
                 <SenderProfile>
                     <PartnerKey xsi:nil="true" />
-                    <ObjectID xsi:nil="true" />
+                    <ObjectID>a75d452b-7ef4-eb11-b82d-48df37d1da95</ObjectID>
                     <CustomerKey>testExisting_senderProfile</CustomerKey>
                 </SenderProfile>
                 <DeliveryProfile>
