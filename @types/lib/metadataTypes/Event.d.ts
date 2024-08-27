@@ -120,9 +120,10 @@ declare class Event extends MetadataType {
      * @param {string} triggerType e.g. SalesforceObjectTriggerV2, APIEvent, ...
      * @param {any} ca trigger[0].configurationArguments
      * @param {string} key of event / journey
+     * @param {string} [type] optionally provide type for error on missing configurationArguments attributes
      * @returns {Promise.<void>} -
      */
-    static postRetrieveTasks_SalesforceEntryEvents(triggerType: string, ca: any, key: string): Promise<void>;
+    static postRetrieveTasks_SalesforceEntryEvents(triggerType: string, ca: any, key: string, type?: string): Promise<void>;
     /**
      *
      * @param {string} triggerType e.g. SalesforceObjectTriggerV2, APIEvent, ...
