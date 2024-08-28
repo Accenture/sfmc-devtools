@@ -334,6 +334,7 @@ export const handleRESTRequest = async (config) => {
                 );
                 response.items = response.items.filter((def) => def.name == filterName);
                 response.count = response.items.length;
+                console.log('loading ' + projectRoot + testPathFilter + '.json'); // eslint-disable-line no-console
                 return [200, JSON.stringify(response)];
             } else {
                 console.log('loading ' + projectRoot + testPathFilter + '.json'); // eslint-disable-line no-console
@@ -345,6 +346,7 @@ export const handleRESTRequest = async (config) => {
                 ];
             }
         } else if (testPathFilter && (await fs.pathExists(testPathFilter + '.txt'))) {
+            console.log('loading ' + projectRoot + testPathFilter + '.txt'); // eslint-disable-line no-console
             return [
                 200,
                 await fs.readFile(testPathFilter + '.txt', {
@@ -360,6 +362,7 @@ export const handleRESTRequest = async (config) => {
                 }),
             ];
         } else if (testPathFilterBody && (await fs.pathExists(testPathFilterBody + '.txt'))) {
+            console.log('loading ' + projectRoot + testPathFilterBody + '.txt'); // eslint-disable-line no-console
             return [
                 200,
                 await fs.readFile(testPathFilterBody + '.txt', {
@@ -400,6 +403,7 @@ export const handleRESTRequest = async (config) => {
                 );
                 response.items = response.items.filter((def) => def.name == filterName);
                 response.count = response.items.length;
+                console.log('loading ' + projectRoot + testPath + '.json'); // eslint-disable-line no-console
                 return [200, JSON.stringify(response)];
             } else {
                 console.log('loading ' + projectRoot + testPath + '.json'); // eslint-disable-line no-console
@@ -434,7 +438,7 @@ export const handleRESTRequest = async (config) => {
                 );
                 /* eslint-enable no-console */
             }
-
+            console.log('loading ' + projectRoot + testPath + '.txt'); // eslint-disable-line no-console
             return [
                 200,
                 await fs.readFile(testPath + '.txt', {
