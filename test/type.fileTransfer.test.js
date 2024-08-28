@@ -107,7 +107,7 @@ describe('type: fileTransfer', () => {
                 'testInstance/testBU',
                 'fileTransfer',
                 ['testExisting_fileTransfer'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
@@ -131,7 +131,7 @@ describe('type: fileTransfer', () => {
                 'testInstance/testBU',
                 'fileTransfer',
                 ['testExisting_fileTransfer'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
@@ -149,7 +149,7 @@ describe('type: fileTransfer', () => {
                 'testInstance/testBU',
                 'fileTransfer',
                 ['testExisting_fileTransfer'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(

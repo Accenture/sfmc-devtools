@@ -98,7 +98,7 @@ describe('type: sendClassification', () => {
                 'testInstance/testBU',
                 'sendClassification',
                 ['testExisting_sendClassification'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
@@ -119,7 +119,7 @@ describe('type: sendClassification', () => {
                 'testInstance/testBU',
                 'sendClassification',
                 ['testExisting_sendClassification'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(

@@ -182,7 +182,7 @@ describe('type: user', () => {
                 'testInstance/_ParentBU_',
                 'user',
                 ['testExisting_user'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             // WHEN
@@ -201,7 +201,7 @@ describe('type: user', () => {
                 'testInstance/_ParentBU_',
                 'user',
                 ['testExisting_user'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 
