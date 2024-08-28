@@ -238,6 +238,13 @@ declare class MetadataType {
      */
     static pause(keyArr: string[]): Promise<string[]>;
     /**
+     * Abstract stop method that needs to be implemented in child metadata type
+     *
+     * @param {string[]} keyArr customerkey of the metadata
+     * @returns {Promise.<string[]>} Returns list of keys that were stopped
+     */
+    static stop(keyArr: string[]): Promise<string[]>;
+    /**
      * test if metadata was actually changed or not to potentially skip it during deployment
      *
      * @param {MetadataTypeItem} cachedVersion cached version from the server
