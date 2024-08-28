@@ -37,8 +37,7 @@
     },
     "editor.formatOnSave": true,
     "files.associations": {
-        "*.ssjs": "javascript",
-        "*.html": "ampscript"
+        "*.ssjs": "javascript"
     },
     "files.eol": "\n",
     "files.exclude": {
@@ -49,7 +48,7 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[html]": {
-        "editor.defaultFormatter": "FiB.beautyAmp"
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"

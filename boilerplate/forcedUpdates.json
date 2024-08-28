@@ -1,5 +1,9 @@
 [
     {
+        "version": "7.2.1",
+        "files": [".vscode/settings.json"]
+    },
+    {
         "version": "7.1.0",
         "files": [".vscode/settings.json", ".gitignore"]
     },

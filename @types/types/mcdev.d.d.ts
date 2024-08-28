@@ -1387,4 +1387,127 @@ export type ListIdMap = {
 export type ListMap = {
     [x: string]: ListItem;
 };
+/**
+ * returned by /data/v1/integration/member/salesforce/object/<OBJECT NAME>/referenceobjects
+ */
+export type ReferenceObject = {
+    /**
+     * label
+     */
+    displayname: string;
+    /**
+     * api name of salesforce object
+     */
+    referenceObjectName: string;
+    /**
+     * name of lookup/MD field on related object ending on __r (way to return fields from other object)
+     */
+    relationshipName: string;
+    /**
+     * name of lookup/MD field on related object ending on __c (returning id)
+     */
+    relationshipIdName: string;
+    /**
+     * if this lookup can point to multiple objects or not
+     */
+    isPolymorphic: boolean;
+};
+/**
+ * returned by /legacy/v1/beta/integration/member/salesforce/object/<OBJECT NAME>
+ */
+export type SfObjectPicklist = {
+    /**
+     * -
+     */
+    active: boolean;
+    /**
+     * -
+     */
+    defaultValue: boolean;
+    /**
+     * what you see in the GUI
+     */
+    label: string;
+    /**
+     * whats stored in the DB
+     */
+    value: string;
+};
+/**
+ * returned by /legacy/v1/beta/integration/member/salesforce/object/<OBJECT NAME>
+ */
+export type SfObjectField = {
+    /**
+     * "Annual Revenue"
+     */
+    label: string;
+    /**
+     * "AnnualRevenue"
+     */
+    name: string;
+    /**
+     * type
+     */
+    datatype: "currency" | "string" | "int" | "picklist" | "textarea" | "boolean" | "date" | "datetime" | "email";
+    /**
+     * 0-4000
+     */
+    length: number;
+    /**
+     * == not required
+     */
+    nillable: boolean;
+    /**
+     * is it a custom field
+     */
+    custom: boolean;
+    /**
+     * always true?
+     */
+    updateable: boolean;
+    /**
+     * always true?
+     */
+    createable: boolean;
+    /**
+     * -
+     */
+    defaultedoncreate: boolean;
+    /**
+     * -
+     */
+    externalid: boolean;
+    /**
+     * -
+     */
+    idlookup: boolean;
+    /**
+     * -
+     */
+    precision: number;
+    /**
+     * -
+     */
+    scale: number;
+    /**
+     * "Currency"
+     */
+    displaydatatype: "Currency" | "Text" | "Number" | "Picklist" | "Text Area (long)" | "Checkbox" | "Date" | "Date/Time" | "Email";
+    /**
+     * "Lead",
+     */
+    objectname: string;
+    /**
+     * "",
+     */
+    relationname: string;
+    /**
+     * -
+     */
+    isnamefield: boolean;
+    /**
+     * list of values
+     */
+    picklist?: SfObjectPicklist[];
+};
 //# sourceMappingURL=mcdev.d.d.ts.map
