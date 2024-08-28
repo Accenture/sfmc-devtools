@@ -241,22 +241,22 @@ declare class Mcdev {
      * @param {string} businessUnitTemplate references credentials from properties.json
      * @param {string} businessUnitDefinition references credentials from properties.json
      * @param {TypeKeyCombo} typeKeyCombo limit retrieval to given metadata type
-     * @param {string} marketTemplate market localizations
-     * @param {string} marketDefinition market localizations
+     * @param {string[]} marketTemplate market localizations
+     * @param {string[]} marketDefinition market localizations
      * @param {boolean} [bulk] runs buildDefinitionBulk instead of buildDefinition; requires marketList to be defined and given via marketDefinition
      * @returns {Promise.<MultiMetadataTypeList | object>} response from buildDefinition
      */
-    static build(businessUnitTemplate: string, businessUnitDefinition: string, typeKeyCombo: TypeKeyCombo, marketTemplate: string, marketDefinition: string, bulk?: boolean): Promise<MultiMetadataTypeList | object>;
+    static build(businessUnitTemplate: string, businessUnitDefinition: string, typeKeyCombo: TypeKeyCombo, marketTemplate: string[], marketDefinition: string[], bulk?: boolean): Promise<MultiMetadataTypeList | object>;
     /**
      * Build a template based on a list of metadata files in the retrieve folder.
      *
      * @param {string} businessUnit references credentials from properties.json
      * @param {string | TypeKeyCombo} selectedTypes limit retrieval to given metadata type
      * @param {string[] | undefined} keyArr customerkey of the metadata
-     * @param {string} market market localizations
+     * @param {string[]} marketArr market localizations
      * @returns {Promise.<MultiMetadataTypeList>} -
      */
-    static buildTemplate(businessUnit: string, selectedTypes: string | TypeKeyCombo, keyArr: string[] | undefined, market: string): Promise<MultiMetadataTypeList>;
+    static buildTemplate(businessUnit: string, selectedTypes: string | TypeKeyCombo, keyArr: string[] | undefined, marketArr: string[]): Promise<MultiMetadataTypeList>;
     /**
      * Build a specific metadata file based on a template.
      *
@@ -272,10 +272,10 @@ declare class Mcdev {
      * @param {string} businessUnit references credentials from properties.json
      * @param {string | TypeKeyCombo} selectedTypes limit retrieval to given metadata type
      * @param {string[] | undefined} nameArr name of the metadata
-     * @param {string} market market localizations
+     * @param {string[]} marketArr market localizations
      * @returns {Promise.<MultiMetadataTypeList>} -
      */
-    static buildDefinition(businessUnit: string, selectedTypes: string | TypeKeyCombo, nameArr: string[] | undefined, market: string): Promise<MultiMetadataTypeList>;
+    static buildDefinition(businessUnit: string, selectedTypes: string | TypeKeyCombo, nameArr: string[] | undefined, marketArr: string[]): Promise<MultiMetadataTypeList>;
     /**
      * Build a specific metadata file based on a template using a list of bu-market combos
      *
