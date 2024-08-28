@@ -2047,7 +2047,7 @@ describe('GENERAL', () => {
         });
 
         describe('Delete --metadata ~~~', () => {
-            it('Should delete the item', async () => {
+            it('Should delete the items', async () => {
                 const argvMetadata = [
                     'asset:testExisting_asset',
                     'automation:testExisting_automation',
