@@ -228,7 +228,7 @@ describe('type: journey', () => {
                 'testInstance/testBU',
                 'journey',
                 ['testExisting_journey_Quicksend'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
@@ -247,7 +247,7 @@ describe('type: journey', () => {
                 'testInstance/testBU',
                 'journey',
                 ['testExisting_journey_Quicksend'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
@@ -275,7 +275,7 @@ describe('type: journey', () => {
                 'testInstance/testBU',
                 'journey',
                 ['testExisting_journey_Quicksend', 'testExisting_journey_Multistep'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             // WHEN
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');

@@ -91,7 +91,7 @@ describe('type: triggeredSend', () => {
                 'testInstance/testBU',
                 'triggeredSend',
                 ['testExisting_triggeredSend'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
@@ -112,7 +112,7 @@ describe('type: triggeredSend', () => {
                 'testInstance/testBU',
                 'triggeredSend',
                 ['testExisting_triggeredSend'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
@@ -138,7 +138,7 @@ describe('type: triggeredSend', () => {
                 'testInstance/testBU',
                 'triggeredSend',
                 ['testExisting_triggeredSend', 'testExisting_triggeredSend_rcb'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             // WHEN
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
