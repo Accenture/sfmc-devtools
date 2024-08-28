@@ -297,7 +297,7 @@ describe('type: script', () => {
                 'testInstance/testBU',
                 'script',
                 ['testExisting_script'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 
@@ -326,7 +326,7 @@ describe('type: script', () => {
                 'testInstance/testBU',
                 'script',
                 ['testExisting_script'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             // WHEN
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
@@ -349,7 +349,7 @@ describe('type: script', () => {
                 'testInstance/testBU',
                 'script',
                 ['testExisting_script'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 
@@ -381,7 +381,7 @@ describe('type: script', () => {
                 'testInstance/testBU',
                 'script',
                 ['testExisting_script_ampscript'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             // WHEN
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');

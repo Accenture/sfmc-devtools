@@ -228,7 +228,7 @@ describe('type: journey', () => {
                 'testInstance/testBU',
                 'journey',
                 ['testExisting_journey_Quicksend'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
@@ -247,7 +247,7 @@ describe('type: journey', () => {
                 'testInstance/testBU',
                 'journey',
                 ['testExisting_journey_Quicksend'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
@@ -275,7 +275,7 @@ describe('type: journey', () => {
                 'testInstance/testBU',
                 'journey',
                 ['testExisting_journey_Quicksend', 'testExisting_journey_Multistep'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             // WHEN
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
@@ -373,7 +373,7 @@ describe('type: journey', () => {
             return;
         });
 
-        it('Should delete the item with version', async () => {
+        it('Should delete the item with exact version', async () => {
             // WHEN
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
@@ -387,7 +387,21 @@ describe('type: journey', () => {
             return;
         });
 
-        it('Should delete 2 items with version', async () => {
+        it('Should delete the item with all versions', async () => {
+            // WHEN
+            const isDeleted = await handler.deleteByKey(
+                'testInstance/testBU',
+                'journey',
+                'testExisting_journey_Quicksend/*'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
+
+            assert.equal(isDeleted, true, 'should have deleted the item');
+            return;
+        });
+
+        it('Should delete 2 items with exact version', async () => {
             // WHEN
             const isDeleted = await handler.deleteByKey('testInstance/testBU', 'journey', [
                 'testExisting_journey_Quicksend/1',

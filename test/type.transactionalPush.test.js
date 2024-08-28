@@ -109,7 +109,7 @@ describe('type: transactionalPush', () => {
                 'testInstance/testBU',
                 'transactionalPush',
                 ['testExisting_tpush'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
@@ -127,7 +127,7 @@ describe('type: transactionalPush', () => {
                 'testInstance/testBU',
                 'transactionalPush',
                 ['testExisting_tpush'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 

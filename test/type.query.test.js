@@ -755,7 +755,7 @@ describe('type: query', () => {
                 'testInstance/testBU',
                 'query',
                 ['testExisting_query'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 
@@ -784,7 +784,7 @@ describe('type: query', () => {
                 'testInstance/testBU',
                 'query',
                 ['testExisting_query'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             // WHEN
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
@@ -807,7 +807,7 @@ describe('type: query', () => {
                 'testInstance/testBU',
                 'query',
                 ['testExisting_query'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 

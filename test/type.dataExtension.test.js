@@ -270,7 +270,7 @@ describe('type: dataExtension', () => {
                 'testInstance/testBU',
                 'dataExtension',
                 ['testExisting_dataExtension'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
@@ -294,7 +294,7 @@ describe('type: dataExtension', () => {
                 'testInstance/testBU',
                 'dataExtension',
                 ['testExisting_dataExtension'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             // WHEN
@@ -316,7 +316,7 @@ describe('type: dataExtension', () => {
                 'testInstance/testBU',
                 'dataExtension',
                 ['testExisting_dataExtension'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 

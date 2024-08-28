@@ -20,7 +20,7 @@
     "sql-formatter.indent": "    ",
     "sql-formatter.uppercase": true,
     "[html]": {
-        "editor.defaultFormatter": "FiB.beautyAmp"
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"

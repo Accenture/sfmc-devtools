@@ -734,7 +734,7 @@ describe('GENERAL', () => {
                     buName,
                     typeKeyCombo,
                     undefined,
-                    'testSourceMarket'
+                    ['testSourceMarket']
                 );
                 assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
                 // check automation
@@ -768,7 +768,7 @@ describe('GENERAL', () => {
                     buName,
                     typeKeyCombo,
                     undefined,
-                    'testTargetMarket'
+                    ['testTargetMarket']
                 );
                 assert.equal(
                     process.exitCode,
@@ -836,7 +836,7 @@ describe('GENERAL', () => {
                     buName,
                     typeKeyCombo,
                     undefined,
-                    'testSourceMarket'
+                    ['testSourceMarket']
                 );
                 assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
                 // check automation
@@ -870,7 +870,7 @@ describe('GENERAL', () => {
                     buName,
                     typeKeyCombo,
                     undefined,
-                    'testTargetMarket'
+                    ['testTargetMarket']
                 );
                 assert.equal(
                     process.exitCode,
@@ -947,7 +947,7 @@ describe('GENERAL', () => {
                     buName,
                     typeKeyCombo,
                     undefined,
-                    'testSourceMarket'
+                    ['testSourceMarket']
                 );
                 assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
 
@@ -1001,7 +1001,7 @@ describe('GENERAL', () => {
                     buName,
                     typeKeyCombo,
                     undefined,
-                    'testTargetMarket'
+                    ['testTargetMarket']
                 );
                 assert.equal(
                     process.exitCode,
@@ -1069,7 +1069,7 @@ describe('GENERAL', () => {
                     buName,
                     typeKeyCombo,
                     undefined,
-                    'testSourceMarket'
+                    ['testSourceMarket']
                 );
                 assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
 
@@ -1123,7 +1123,7 @@ describe('GENERAL', () => {
                     buName,
                     typeKeyCombo,
                     undefined,
-                    'testTargetMarket'
+                    ['testTargetMarket']
                 );
                 assert.equal(
                     process.exitCode,
@@ -1197,7 +1197,7 @@ describe('GENERAL', () => {
                     buName,
                     typeKeyCombo,
                     undefined,
-                    'testSourceMarket'
+                    ['testSourceMarket']
                 );
                 assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
                 // check automation
@@ -1389,8 +1389,8 @@ describe('GENERAL', () => {
                     buName,
                     buName,
                     typeKeyCombo,
-                    'testSourceMarket',
-                    'testTargetMarket'
+                    ['testSourceMarket'],
+                    ['testTargetMarket']
                 );
                 assert.equal(process.exitCode, 0, 'build should not have thrown an error');
 
@@ -1483,8 +1483,8 @@ describe('GENERAL', () => {
                     buName,
                     buName,
                     typeKeyCombo,
-                    'testSourceMarket',
-                    'testTargetMarket'
+                    ['testSourceMarket'],
+                    ['testTargetMarket']
                 );
                 assert.equal(process.exitCode, 0, 'build should not have thrown an error');
 
@@ -1587,8 +1587,8 @@ describe('GENERAL', () => {
                     buName,
                     buName,
                     typeKeyCombo,
-                    'testSourceMarket',
-                    'testTargetMarket'
+                    ['testSourceMarket'],
+                    ['testTargetMarket']
                 );
                 assert.equal(process.exitCode, 0, 'build should not have thrown an error');
 
@@ -1697,8 +1697,8 @@ describe('GENERAL', () => {
                     buName,
                     'ignored',
                     typeKeyCombo,
-                    'testSourceMarket',
-                    'deployment-target',
+                    ['testSourceMarket'],
+                    ['deployment-target'],
                     true
                 );
                 assert.equal(process.exitCode, 0, 'build should not have thrown an error');
@@ -1878,8 +1878,8 @@ describe('GENERAL', () => {
                     buName,
                     'ignored',
                     typeKeyCombo,
-                    'testSourceMarket',
-                    'deployment-target',
+                    ['testSourceMarket'],
+                    ['deployment-target'],
                     true
                 );
                 assert.equal(process.exitCode, 0, 'build should not have thrown an error');
@@ -2047,7 +2047,7 @@ describe('GENERAL', () => {
         });
 
         describe('Delete --metadata ~~~', () => {
-            it('Should delete the item', async () => {
+            it('Should delete the items', async () => {
                 const argvMetadata = [
                     'asset:testExisting_asset',
                     'automation:testExisting_automation',

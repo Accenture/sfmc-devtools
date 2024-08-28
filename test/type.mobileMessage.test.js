@@ -116,7 +116,7 @@ describe('type: mobileMessage', () => {
                 'testInstance/testBU',
                 'mobileMessage',
                 ['NTIzOjc4OjA'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
 
@@ -141,7 +141,7 @@ describe('type: mobileMessage', () => {
                 'testInstance/testBU',
                 'mobileMessage',
                 ['NTIzOjc4OjA'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(

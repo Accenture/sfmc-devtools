@@ -63,12 +63,11 @@ declare class Journey extends MetadataType {
     static _postRetrieveTasksBulk(metadataMap: MetadataTypeMap): Promise<void>;
     /**
      * manages post retrieve steps
-     * ! BETA RELEASE of journey support (v4.3.0); it so far only resolves a limited amount of dependencies and will likely break during cross-BU deployments!
      *
      * @param {MetadataTypeItem} metadata a single item
-     * @returns {MetadataTypeItem} Array with one metadata object
+     * @returns {Promise.<MetadataTypeItem>} Array with one metadata object
      */
-    static postRetrieveTasks(metadata: MetadataTypeItem): MetadataTypeItem;
+    static postRetrieveTasks(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
     /**
      * helper for {@link Journey.postRetrieveTasks}
      *

@@ -35,20 +35,20 @@ declare class Builder {
      * @param {string} businessUnit references credentials from properties.json
      * @param {string} selectedType supported metadata type
      * @param {string[]} keyArr customerkey of the metadata
-     * @param {string} market market localizations
+     * @param {string[]} marketArr market localizations
      * @returns {Promise.<MultiMetadataTypeList>} -
      */
-    static buildTemplate(businessUnit: string, selectedType: string, keyArr: string[], market: string): Promise<MultiMetadataTypeList>;
+    static buildTemplate(businessUnit: string, selectedType: string, keyArr: string[], marketArr: string[]): Promise<MultiMetadataTypeList>;
     /**
      * Build a specific metadata file based on a template.
      *
      * @param {string} businessUnit references credentials from properties.json
      * @param {string} selectedType supported metadata type
      * @param {string[]} nameArr name of the metadata
-     * @param {string} market market localizations
+     * @param {string[]} marketArr market localizations
      * @returns {Promise.<MultiMetadataTypeList>} -
      */
-    static buildDefinition(businessUnit: string, selectedType: string, nameArr: string[], market: string): Promise<MultiMetadataTypeList>;
+    static buildDefinition(businessUnit: string, selectedType: string, nameArr: string[], marketArr: string[]): Promise<MultiMetadataTypeList>;
     /**
      * Build a specific metadata file based on a template using a list of bu-market combos
      *
