@@ -94,9 +94,8 @@ declare class Journey extends MetadataType {
      * Gets executed after deployment of metadata type
      *
      * @param {MetadataTypeMap} upsertResults metadata mapped by their keyField as returned by update/create
-     * @returns {Promise.<any>} -
      */
-    static postDeployTasks(upsertResults: MetadataTypeMap): Promise<any>;
+    static postDeployTasks(upsertResults: MetadataTypeMap): Promise<void>;
     /**
      * a function to publish the journey via API
      *
