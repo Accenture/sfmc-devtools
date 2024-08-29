@@ -593,14 +593,14 @@ describe('type: journey', () => {
             const publish = await handler.publish(
                 'testInstance/testBU',
                 ['journey'],
-                ['testExisting_journey_Quicksend']
+                ['testExisting_journey_Multistep']
             );
             // THEN
             assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
             // retrieve result
             assert.deepEqual(
                 publish['testInstance/testBU']?.journey,
-                ['testExisting_journey_Quicksend'],
+                ['testExisting_journey_Multistep'],
                 'should have published the right journey'
             );
 
@@ -630,14 +630,14 @@ describe('type: journey', () => {
             const publish = await handler.publish(
                 'testInstance/testBU',
                 ['journey'],
-                ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1']
+                ['id:0175b971-71a3-4d8e-98ac-48121f3fbf4f/1']
             );
             // THEN
             assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
             // retrieve result
             assert.deepEqual(
                 publish['testInstance/testBU']?.journey,
-                ['testExisting_journey_Quicksend'],
+                ['id:0175b971-71a3-4d8e-98ac-48121f3fbf4f/1'],
                 'should have published the right journey'
             );
 
@@ -666,14 +666,14 @@ describe('type: journey', () => {
             const publish = await handler.publish(
                 'testInstance/testBU',
                 ['journey'],
-                ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2']
+                ['id:0175b971-71a3-4d8e-98ac-48121f3fbf4f']
             );
             // THEN
             assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
             // retrieve result
             assert.deepEqual(
                 publish['testInstance/testBU']?.journey,
-                ['testExisting_journey_Quicksend'],
+                ['id:0175b971-71a3-4d8e-98ac-48121f3fbf4f'],
                 'should have published the right journey'
             );
 
@@ -708,7 +708,7 @@ describe('type: journey', () => {
             const publish = await handler.publish(
                 'testInstance/testBU',
                 ['journey'],
-                ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1']
+                ['id:0175b971-71a3-4d8e-98ac-48121f3fbf4f/1']
             );
             // THEN
             assert.equal(process.exitCode, 1, 'publish should have thrown an error');
@@ -750,14 +750,14 @@ describe('type: journey', () => {
             const publish = await handler.publish(
                 'testInstance/testBU',
                 ['journey'],
-                ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1']
+                ['id:0175b971-71a3-4d8e-98ac-48121f3fbf4f/1']
             );
             // THEN
             assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
             // retrieve result
             assert.deepEqual(
                 publish['testInstance/testBU']?.journey,
-                ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1'],
+                ['id:0175b971-71a3-4d8e-98ac-48121f3fbf4f/1'],
                 'should have published the journey'
             );
 
@@ -792,14 +792,14 @@ describe('type: journey', () => {
             const publish = await handler.publish(
                 'testInstance/testBU',
                 ['journey'],
-                ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1']
+                ['id:0175b971-71a3-4d8e-98ac-48121f3fbf4f/1']
             );
             // THEN
             assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
             // retrieve result
             assert.deepEqual(
                 publish['testInstance/testBU']?.journey,
-                ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1'],
+                ['id:0175b971-71a3-4d8e-98ac-48121f3fbf4f/1'],
                 'should have published the journey'
             );
 

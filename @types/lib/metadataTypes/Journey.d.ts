@@ -94,8 +94,9 @@ declare class Journey extends MetadataType {
      * Gets executed after deployment of metadata type
      *
      * @param {MetadataTypeMap} upsertResults metadata mapped by their keyField as returned by update/create
+     * @returns {Promise.<any>} -
      */
-    static postDeployTasks(upsertResults: MetadataTypeMap): Promise<void>;
+    static postDeployTasks(upsertResults: MetadataTypeMap): Promise<any>;
     /**
      * a function to publish the journey via API
      *
@@ -108,10 +109,11 @@ declare class Journey extends MetadataType {
      *
      * @param {string} statusUrl URL to check the status of the publish request
      * @param {string} key key or id for log messages
+     * @param {any} spinner key or id for log messages
      * @param {number} [tries] number of tries used to check the status
      * @returns {Promise.<string>} key of the item that was published successfully
      */
-    static _checkPublishStatus(statusUrl: string, key: string, tries?: number): Promise<string>;
+    static _checkPublishStatus(statusUrl: string, key: string, spinner: any, tries?: number): Promise<string>;
     /**
      * helper for {@link Journey._checkPublishStatus}
      *

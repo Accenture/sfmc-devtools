@@ -2067,7 +2067,7 @@ describe('GENERAL', () => {
         describe('Publish --metadata ~~~', () => {
             it('Should publish the journey', async () => {
                 handler.setOptions({ skipStatusCheck: true });
-                const argvMetadata = ['journey:id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1'];
+                const argvMetadata = ['journey:testExisting_journey_Multistep'];
                 const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
                 // WHEN
                 const publish = await handler.publish('testInstance/testBU', typeKeyCombo);
@@ -2075,7 +2075,7 @@ describe('GENERAL', () => {
                 assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
                 assert.deepEqual(
                     publish['testInstance/testBU']?.journey,
-                    ['testExisting_journey_Quicksend'],
+                    ['testExisting_journey_Multistep'],
                     'should have published the right journey'
                 );
                 return;
