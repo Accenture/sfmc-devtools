@@ -114,6 +114,13 @@ declare class Event extends MetadataType {
      * @param {any} ca trigger[0].configurationArguments
      */
     static checkSalesforceEntryEvents(ca: any): void;
+    /**
+     *
+     * @param {object[]} conditions -
+     * @param {string[]} errors list of errors
+     * @param {'primaryObjectFilterCriteria'|'relatedObjectFilterCriteria'} context used to improve error logs
+     */
+    static checkSfFilterFieldsExist(conditions: object[], errors: string[], context: "primaryObjectFilterCriteria" | "relatedObjectFilterCriteria"): void;
     static requiredConfigurationArguments: string[];
     /**
      *
