@@ -6,7 +6,7 @@
 
 - [ ] Wiki updated with info in ticket listed under **Documentation**
 - [ ] ran `npm run prepare-release` (which runs `npm audit fix`, `npm run lint-ts` and `npm run lint:fix`)
-- [ ] committed & pushed potential changes made by prepare-release
+- [ ] pushed potential changes made by prepare-release
 
 ### After merge
 
