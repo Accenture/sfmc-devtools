@@ -605,7 +605,7 @@ describe('type: automation', () => {
                 'testInstance/testBU',
                 'automation',
                 ['testExisting_automation'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
@@ -629,7 +629,7 @@ describe('type: automation', () => {
                 'testInstance/testBU',
                 'automation',
                 ['testExisting_automation'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             // WHEN
@@ -648,7 +648,7 @@ describe('type: automation', () => {
                 'testInstance/testBU',
                 'automation',
                 ['testExisting_automation'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 
@@ -668,7 +668,7 @@ describe('type: automation', () => {
         it('Should create a automation template via buildTemplate with --dependencies', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU');
-            const expectedApiCallsRetrieve = 78;
+            const expectedApiCallsRetrieve = 81;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 expectedApiCallsRetrieve,
@@ -684,7 +684,7 @@ describe('type: automation', () => {
                 'testInstance/testBU',
                 'automation',
                 ['testExisting_automation'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             // WHEN

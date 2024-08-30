@@ -175,7 +175,7 @@ describe('type: mobileKeyword', () => {
                 'testInstance/testBU',
                 'mobileKeyword',
                 ['4912312345678.TESTEXISTING_KEYWORD'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
 
@@ -207,7 +207,7 @@ describe('type: mobileKeyword', () => {
                 'testInstance/testBU',
                 'mobileKeyword',
                 ['4912312345678.TESTEXISTING_KEYWORD'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(

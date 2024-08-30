@@ -27,8 +27,8 @@ describe('type: dataExtension', () => {
             const result = cache.getCache();
             assert.equal(
                 result.dataExtension ? Object.keys(result.dataExtension).length : 0,
-                7,
-                'only 7 dataExtension expected'
+                8,
+                'unexpected number of dataExtension'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_dataExtension', 'dataExtension'),
@@ -116,8 +116,8 @@ describe('type: dataExtension', () => {
             const result = cache.getCache();
             assert.equal(
                 result.dataExtension ? Object.keys(result.dataExtension).length : 0,
-                9,
-                '9 dataExtensions expected'
+                10,
+                'unexpected number of dataExtensions'
             );
             // insert
             assert.deepEqual(
@@ -270,7 +270,7 @@ describe('type: dataExtension', () => {
                 'testInstance/testBU',
                 'dataExtension',
                 ['testExisting_dataExtension'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
@@ -294,7 +294,7 @@ describe('type: dataExtension', () => {
                 'testInstance/testBU',
                 'dataExtension',
                 ['testExisting_dataExtension'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             // WHEN
@@ -316,7 +316,7 @@ describe('type: dataExtension', () => {
                 'testInstance/testBU',
                 'dataExtension',
                 ['testExisting_dataExtension'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 

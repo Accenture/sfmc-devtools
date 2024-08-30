@@ -9,6 +9,8 @@ export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type ReferenceObject = import("../../types/mcdev.d.js").ReferenceObject;
+export type SfObjectField = import("../../types/mcdev.d.js").SfObjectField;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -20,6 +22,9 @@ export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
+ *
+ * @typedef {import('../../types/mcdev.d.js').ReferenceObject} ReferenceObject
+ * @typedef {import('../../types/mcdev.d.js').SfObjectField} SfObjectField
  */
 /**
  * Event MetadataType
@@ -73,16 +78,66 @@ declare class Event extends MetadataType {
      * prepares an event definition for deployment
      *
      * @param {MetadataTypeItem} metadata a single eventDefinition
-     * @returns {MetadataTypeItem} parsed version
+     * @returns {Promise.<MetadataTypeItem>} parsed version
      */
-    static preDeployTasks(metadata: MetadataTypeItem): MetadataTypeItem;
+    static preDeployTasks(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
     /**
      * parses retrieved Metadata before saving
      *
      * @param {MetadataTypeItem} metadata a single event definition
-     * @returns {MetadataTypeItem} parsed metadata
+     * @returns {Promise.<MetadataTypeItem>} parsed metadata
      */
-    static postRetrieveTasks(metadata: MetadataTypeItem): MetadataTypeItem;
+    static postRetrieveTasks(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
+    static sfObjects: {
+        /** @type {string[]} */
+        workflowObjects: string[];
+        /** @type {Object.<string, ReferenceObject[]>} object-name > object data */
+        referencedObjects: {
+            [x: string]: ReferenceObject[];
+        };
+        /** @type {Object.<string, Object.<string, SfObjectField>>} object-name > field-name > field data */
+        objectFields: {
+            [x: string]: {
+                [x: string]: SfObjectField;
+            };
+        };
+    };
+    /**
+     * helper for {@link checkSalesforceEntryEvents} that retrieves information about SF object fields
+     *
+     * @param {string} objectAPIName salesforce object api name
+     */
+    static getSalesforceObjects(objectAPIName: string): Promise<void>;
+    static defaultSalesforceFields: string[];
+    /**
+     *
+     * @param {any} ca trigger[0].configurationArguments
+     */
+    static checkSalesforceEntryEvents(ca: any): void;
+    /**
+     *
+     * @param {object[]} conditions -
+     * @param {string[]} errors list of errors
+     * @param {'primaryObjectFilterCriteria'|'relatedObjectFilterCriteria'} context used to improve error logs
+     */
+    static checkSfFilterFieldsExist(conditions: object[], errors: string[], context: "primaryObjectFilterCriteria" | "relatedObjectFilterCriteria"): void;
+    static requiredConfigurationArguments: string[];
+    /**
+     *
+     * @param {string} triggerType e.g. SalesforceObjectTriggerV2, APIEvent, ...
+     * @param {any} ca trigger[0].configurationArguments
+     * @param {string} key of event / journey
+     * @param {string} [type] optionally provide type for error on missing configurationArguments attributes
+     * @returns {Promise.<void>} -
+     */
+    static postRetrieveTasks_SalesforceEntryEvents(triggerType: string, ca: any, key: string, type?: string): Promise<void>;
+    /**
+     *
+     * @param {string} triggerType e.g. SalesforceObjectTriggerV2, APIEvent, ...
+     * @param {any} ca trigger[0].configurationArguments
+     * @returns {Promise.<void>} -
+     */
+    static preDeployTasks_SalesforceEntryEvents(triggerType: string, ca: any): Promise<void>;
 }
 declare namespace Event {
     let definition: {

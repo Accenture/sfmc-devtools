@@ -241,22 +241,22 @@ declare class Mcdev {
      * @param {string} businessUnitTemplate references credentials from properties.json
      * @param {string} businessUnitDefinition references credentials from properties.json
      * @param {TypeKeyCombo} typeKeyCombo limit retrieval to given metadata type
-     * @param {string} marketTemplate market localizations
-     * @param {string} marketDefinition market localizations
+     * @param {string[]} marketTemplate market localizations
+     * @param {string[]} marketDefinition market localizations
      * @param {boolean} [bulk] runs buildDefinitionBulk instead of buildDefinition; requires marketList to be defined and given via marketDefinition
      * @returns {Promise.<MultiMetadataTypeList | object>} response from buildDefinition
      */
-    static build(businessUnitTemplate: string, businessUnitDefinition: string, typeKeyCombo: TypeKeyCombo, marketTemplate: string, marketDefinition: string, bulk?: boolean): Promise<MultiMetadataTypeList | object>;
+    static build(businessUnitTemplate: string, businessUnitDefinition: string, typeKeyCombo: TypeKeyCombo, marketTemplate: string[], marketDefinition: string[], bulk?: boolean): Promise<MultiMetadataTypeList | object>;
     /**
      * Build a template based on a list of metadata files in the retrieve folder.
      *
      * @param {string} businessUnit references credentials from properties.json
      * @param {string | TypeKeyCombo} selectedTypes limit retrieval to given metadata type
      * @param {string[] | undefined} keyArr customerkey of the metadata
-     * @param {string} market market localizations
+     * @param {string[]} marketArr market localizations
      * @returns {Promise.<MultiMetadataTypeList>} -
      */
-    static buildTemplate(businessUnit: string, selectedTypes: string | TypeKeyCombo, keyArr: string[] | undefined, market: string): Promise<MultiMetadataTypeList>;
+    static buildTemplate(businessUnit: string, selectedTypes: string | TypeKeyCombo, keyArr: string[] | undefined, marketArr: string[]): Promise<MultiMetadataTypeList>;
     /**
      * Build a specific metadata file based on a template.
      *
@@ -272,10 +272,10 @@ declare class Mcdev {
      * @param {string} businessUnit references credentials from properties.json
      * @param {string | TypeKeyCombo} selectedTypes limit retrieval to given metadata type
      * @param {string[] | undefined} nameArr name of the metadata
-     * @param {string} market market localizations
+     * @param {string[]} marketArr market localizations
      * @returns {Promise.<MultiMetadataTypeList>} -
      */
-    static buildDefinition(businessUnit: string, selectedTypes: string | TypeKeyCombo, nameArr: string[] | undefined, market: string): Promise<MultiMetadataTypeList>;
+    static buildDefinition(businessUnit: string, selectedTypes: string | TypeKeyCombo, nameArr: string[] | undefined, marketArr: string[]): Promise<MultiMetadataTypeList>;
     /**
      * Build a specific metadata file based on a template using a list of bu-market combos
      *
@@ -346,6 +346,19 @@ declare class Mcdev {
         };
     }>;
     /**
+     * stop an item
+     *
+     * @param {string} businessUnit name of BU
+     * @param {string[] | TypeKeyCombo} [selectedTypes] limit to given metadata types
+     * @param {string[]} [keys] customerkey of the metadata
+     * @returns {Promise.<Object.<string, Object.<string, string[]>>>} key: business unit name, key2: type, value: list of affected item keys
+     */
+    static stop(businessUnit: string, selectedTypes?: string[] | TypeKeyCombo, keys?: string[]): Promise<{
+        [x: string]: {
+            [x: string]: string[];
+        };
+    }>;
+    /**
      * Updates the key to match the name field
      *
      * @param {string} businessUnit name of BU
@@ -371,13 +384,13 @@ declare class Mcdev {
     /**
      * run a method across BUs
      *
-     * @param {'execute'|'pause'|'publish'|'fixKeys'|'replaceCbReference'} methodName what to run
+     * @param {'execute'|'pause'|'stop'|'publish'|'fixKeys'|'replaceCbReference'} methodName what to run
      * @param {string} businessUnit name of BU
      * @param {string[] | TypeKeyCombo} [selectedTypes] limit to given metadata types
      * @param {string[]} [keys] customerkey of the metadata
      * @returns {Promise.<Object.<string, Object.<string, string[]>>>} key: business unit name, key2: type, value: list of affected item keys
      */
-    static "__#8@#runMethod"(methodName: "execute" | "pause" | "publish" | "fixKeys" | "replaceCbReference", businessUnit: string, selectedTypes?: string[] | TypeKeyCombo, keys?: string[]): Promise<{
+    static "__#8@#runMethod"(methodName: "execute" | "pause" | "stop" | "publish" | "fixKeys" | "replaceCbReference", businessUnit: string, selectedTypes?: string[] | TypeKeyCombo, keys?: string[]): Promise<{
         [x: string]: {
             [x: string]: string[];
         };
@@ -385,14 +398,14 @@ declare class Mcdev {
     /**
      * helper for Mcdev.#runMethod
      *
-     * @param {'execute'|'pause'|'publish'|'fixKeys'|'replaceCbReference'} methodName what to run
+     * @param {'execute'|'pause'|'stop'|'publish'|'fixKeys'|'replaceCbReference'} methodName what to run
      * @param {string} cred name of Credential
      * @param {string} bu name of BU
      * @param {string} [type] limit execution to given metadata type
      * @param {string[]} [keyArr] customerkey of the metadata
      * @returns {Promise.<string[]>} list of keys that were affected
      */
-    static "__#8@#runOnBU"(methodName: "execute" | "pause" | "publish" | "fixKeys" | "replaceCbReference", cred: string, bu: string, type?: string, keyArr?: string[]): Promise<string[]>;
+    static "__#8@#runOnBU"(methodName: "execute" | "pause" | "stop" | "publish" | "fixKeys" | "replaceCbReference", cred: string, bu: string, type?: string, keyArr?: string[]): Promise<string[]>;
     /**
      * helper for Mcdev.#runOnBU
      *

@@ -527,7 +527,7 @@ describe('type: asset', () => {
                 'testInstance/testBU',
                 'asset',
                 ['testExisting_asset_templatebasedemail', 'testExisting_asset_htmlblock'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             // WHEN
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
@@ -584,7 +584,7 @@ describe('type: asset', () => {
                 'testInstance/testBU',
                 'asset',
                 ['testExisting_asset_templatebasedemail', 'testExisting_asset_htmlblock'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.equal(
@@ -673,7 +673,7 @@ describe('type: asset', () => {
                 'testInstance/testBU',
                 'asset',
                 ['testExisting_asset_templatebasedemail'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             // WHEN
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');

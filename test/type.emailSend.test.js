@@ -92,7 +92,7 @@ describe('type: emailSend', () => {
                 'testInstance/testBU',
                 'emailSend',
                 ['testExisting_emailSend'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
@@ -110,7 +110,7 @@ describe('type: emailSend', () => {
                 'testInstance/testBU',
                 'emailSend',
                 ['testExisting_emailSend'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(

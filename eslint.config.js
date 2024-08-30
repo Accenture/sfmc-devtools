@@ -108,7 +108,7 @@ export default [
                 },
             ],
 
-            'jsdoc/no-undefined-types': 'error',
+            'jsdoc/no-undefined-types': 'off',
             'jsdoc/valid-types': 'off',
 
             'spaced-comment': [

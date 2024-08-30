@@ -63,12 +63,11 @@ declare class Journey extends MetadataType {
     static _postRetrieveTasksBulk(metadataMap: MetadataTypeMap): Promise<void>;
     /**
      * manages post retrieve steps
-     * ! BETA RELEASE of journey support (v4.3.0); it so far only resolves a limited amount of dependencies and will likely break during cross-BU deployments!
      *
      * @param {MetadataTypeItem} metadata a single item
-     * @returns {MetadataTypeItem} Array with one metadata object
+     * @returns {Promise.<MetadataTypeItem>} Array with one metadata object
      */
-    static postRetrieveTasks(metadata: MetadataTypeItem): MetadataTypeItem;
+    static postRetrieveTasks(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
     /**
      * helper for {@link Journey.postRetrieveTasks}
      *
@@ -109,10 +108,11 @@ declare class Journey extends MetadataType {
      *
      * @param {string} statusUrl URL to check the status of the publish request
      * @param {string} key key or id for log messages
+     * @param {any} spinner key or id for log messages
      * @param {number} [tries] number of tries used to check the status
      * @returns {Promise.<string>} key of the item that was published successfully
      */
-    static _checkPublishStatus(statusUrl: string, key: string, tries?: number): Promise<string>;
+    static _checkPublishStatus(statusUrl: string, key: string, spinner: any, tries?: number): Promise<string>;
     /**
      * helper for {@link Journey._checkPublishStatus}
      *
@@ -131,7 +131,6 @@ declare namespace Journey {
         dependencies: string[];
         dependencyGraph: {
             event: string[];
-            transactionalEmail: string[];
             dataExtension: string[];
             list: string[];
             senderProfile: string[];

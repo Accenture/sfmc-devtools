@@ -5,9 +5,8 @@
 ### Before merge
 
 - [ ] Wiki updated with info in ticket listed under **Documentation**
-- [ ] ran `npm audit fix`
-- [ ] ran `npm run lint-ts`
-- [ ] ran `npm run lint:fix`
+- [ ] ran `npm run prepare-release` (which runs `npm audit fix`, `npm run lint-ts`, `npm run lint:fix`, `git add`, `git commit`)
+- [ ] pushed potential changes made by prepare-release
 
 ### After merge
 
@@ -15,6 +14,7 @@
 - [ ] updated [bug template](/.github/ISSUE_TEMPLATE/bug.yml) to include the new version
 - [ ] updated [.mcdevrc](/test/mockRoot/.mcdevrc.json) for tests to the new version
 - [ ] ran `npm run version:major/minor/patch`
+- [ ] pushed version-prep commits
 - [ ] merged main branch into develop branch
 - [ ] closed GitHub milestone
 - [ ] created [new GitHub Release](https://github.com/Accenture/sfmc-devtools/releases/new)

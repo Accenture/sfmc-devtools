@@ -1,6 +1,6 @@
 {
     "name": "mcdev",
-    "version": "7.1.4",
+    "version": "7.3.1",
     "description": "Accenture Salesforce Marketing Cloud DevTools",
     "author": "Accenture: joern.berkefeld, douglas.midgley, robert.zimmermann, maciej.barnas",
     "license": "MIT",
@@ -59,6 +59,10 @@
         "lint-and-test": "run-s lint test",
         "test": "mocha --reporter-option maxDiffSize=25000",
         "coverage": "c8 npm run test",
+        "prepare-release:audit-fix": "npm audit fix",
+        "prepare-release:git-stage": "git add .",
+        "prepare-release:git-commit": "git commit -n -m \"prepare-release changes\"",
+        "prepare-release": "run-s prepare-release:audit-fix lint-ts lint:fix prepare-release:git-stage prepare-release:git-commit",
         "version:major": "npm version --no-commit-hooks major",
         "version:minor": "npm version --no-commit-hooks minor",
         "version:patch": "npm version --no-commit-hooks patch"
@@ -83,14 +87,15 @@
         "toposort": "2.0.2",
         "update-notifier": "7.2.0",
         "winston": "3.14.2",
-        "yargs": "17.7.2"
+        "yargs": "17.7.2",
+        "yocto-spinner": "0.1.0"
     },
     "devDependencies": {
         "@eslint/js": "9.9.0",
         "@types/fs-extra": "11.0.4",
         "@types/inquirer": "9.0.7",
         "@types/mocha": "10.0.7",
-        "@types/node": "22.4.1",
+        "@types/node": "22.4.2",
         "@types/yargs": "17.0.33",
         "assert": "2.1.0",
         "axios-mock-adapter": "2.0.0",
@@ -106,7 +111,7 @@
         "eslint-plugin-unicorn": "55.0.0",
         "fast-xml-parser": "4.4.1",
         "globals": "15.9.0",
-        "husky": "9.1.4",
+        "husky": "9.1.5",
         "lint-staged": "15.2.9",
         "mocha": "10.7.3",
         "mock-fs": "5.2.0",

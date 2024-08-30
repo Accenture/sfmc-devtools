@@ -38,12 +38,12 @@
                 <CategoryID>89348</CategoryID>
                 <SendClassification>
                     <PartnerKey xsi:nil="true" />
-                    <ObjectID xsi:nil="true" />
+                    <ObjectID>95da425b-a06f-e611-96fe-38eaa7142c61</ObjectID>
                     <CustomerKey>testExisting_sendClassification</CustomerKey>
                 </SendClassification>
                 <SenderProfile>
                     <PartnerKey xsi:nil="true" />
-                    <ObjectID xsi:nil="true" />
+                    <ObjectID>a75d452b-7ef4-eb11-b82d-48df37d1da95</ObjectID>
                     <CustomerKey>testExisting_senderProfile</CustomerKey>
                 </SenderProfile>
                 <FromName>unsubscribe</FromName>
@@ -85,12 +85,12 @@
                 <CategoryID>89348</CategoryID>
                 <SendClassification>
                     <PartnerKey xsi:nil="true" />
-                    <ObjectID xsi:nil="true" />
+                    <ObjectID>95da425b-a06f-e611-96fe-38eaa7142c61</ObjectID>
                     <CustomerKey>testExisting_sendClassification</CustomerKey>
                 </SendClassification>
                 <SenderProfile>
                     <PartnerKey xsi:nil="true" />
-                    <ObjectID xsi:nil="true" />
+                    <ObjectID>a75d452b-7ef4-eb11-b82d-48df37d1da99</ObjectID>
                     <CustomerKey>testExisting_senderProfile_rcb</CustomerKey>
                 </SenderProfile>
                 <FromName>%%= ContentBlockByName("Content Builder\dont strip non ssjs content") =%%</FromName>

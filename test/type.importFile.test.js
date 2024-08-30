@@ -147,7 +147,7 @@ describe('type: importFile', () => {
                 'testInstance/testBU',
                 'importFile',
                 ['testExisting_importFile'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
@@ -171,7 +171,7 @@ describe('type: importFile', () => {
                 'testInstance/testBU',
                 'importFile',
                 ['testExisting_importFile'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
@@ -189,7 +189,7 @@ describe('type: importFile', () => {
                 'testInstance/testBU',
                 'importFile',
                 ['testExisting_importFile'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(

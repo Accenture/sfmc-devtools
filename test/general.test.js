@@ -61,7 +61,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    36,
+                    38,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -110,7 +110,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    36,
+                    38,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -159,7 +159,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    36,
+                    38,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -231,7 +231,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    84,
+                    86,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -296,7 +296,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    84,
+                    86,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -361,7 +361,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    84,
+                    86,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -478,7 +478,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     Object.keys(result[buName]['dataExtension']).length,
-                    7,
+                    8,
                     'retrieve should have returned 7 dataExtension'
                 );
                 assert.equal(
@@ -734,7 +734,7 @@ describe('GENERAL', () => {
                     buName,
                     typeKeyCombo,
                     undefined,
-                    'testSourceMarket'
+                    ['testSourceMarket']
                 );
                 assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
                 // check automation
@@ -768,7 +768,7 @@ describe('GENERAL', () => {
                     buName,
                     typeKeyCombo,
                     undefined,
-                    'testTargetMarket'
+                    ['testTargetMarket']
                 );
                 assert.equal(
                     process.exitCode,
@@ -836,7 +836,7 @@ describe('GENERAL', () => {
                     buName,
                     typeKeyCombo,
                     undefined,
-                    'testSourceMarket'
+                    ['testSourceMarket']
                 );
                 assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
                 // check automation
@@ -870,7 +870,7 @@ describe('GENERAL', () => {
                     buName,
                     typeKeyCombo,
                     undefined,
-                    'testTargetMarket'
+                    ['testTargetMarket']
                 );
                 assert.equal(
                     process.exitCode,
@@ -918,7 +918,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 78;
+                const expectedApiCallsRetrieve = 81;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -947,7 +947,7 @@ describe('GENERAL', () => {
                     buName,
                     typeKeyCombo,
                     undefined,
-                    'testSourceMarket'
+                    ['testSourceMarket']
                 );
                 assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
 
@@ -1001,7 +1001,7 @@ describe('GENERAL', () => {
                     buName,
                     typeKeyCombo,
                     undefined,
-                    'testTargetMarket'
+                    ['testTargetMarket']
                 );
                 assert.equal(
                     process.exitCode,
@@ -1046,7 +1046,7 @@ describe('GENERAL', () => {
             });
 
             it('buildTemplate + buildDefinition for multiple types with keys and --dependencies and --retrieve', async () => {
-                const expectedApiCallsRetrieve = 82;
+                const expectedApiCallsRetrieve = 85;
 
                 // preparation
                 const argvMetadata = [
@@ -1069,7 +1069,7 @@ describe('GENERAL', () => {
                     buName,
                     typeKeyCombo,
                     undefined,
-                    'testSourceMarket'
+                    ['testSourceMarket']
                 );
                 assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
 
@@ -1123,7 +1123,7 @@ describe('GENERAL', () => {
                     buName,
                     typeKeyCombo,
                     undefined,
-                    'testTargetMarket'
+                    ['testTargetMarket']
                 );
                 assert.equal(
                     process.exitCode,
@@ -1197,7 +1197,7 @@ describe('GENERAL', () => {
                     buName,
                     typeKeyCombo,
                     undefined,
-                    'testSourceMarket'
+                    ['testSourceMarket']
                 );
                 assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
                 // check automation
@@ -1389,8 +1389,8 @@ describe('GENERAL', () => {
                     buName,
                     buName,
                     typeKeyCombo,
-                    'testSourceMarket',
-                    'testTargetMarket'
+                    ['testSourceMarket'],
+                    ['testTargetMarket']
                 );
                 assert.equal(process.exitCode, 0, 'build should not have thrown an error');
 
@@ -1454,7 +1454,7 @@ describe('GENERAL', () => {
                 // download everything before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 78;
+                const expectedApiCallsRetrieve = 81;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1483,8 +1483,8 @@ describe('GENERAL', () => {
                     buName,
                     buName,
                     typeKeyCombo,
-                    'testSourceMarket',
-                    'testTargetMarket'
+                    ['testSourceMarket'],
+                    ['testTargetMarket']
                 );
                 assert.equal(process.exitCode, 0, 'build should not have thrown an error');
 
@@ -1564,7 +1564,7 @@ describe('GENERAL', () => {
             });
 
             it('build multiple type with keys and --dependencies and --retrieve', async () => {
-                const expectedApiCallsRetrieve = 82;
+                const expectedApiCallsRetrieve = 85;
 
                 // preparation
                 const argvMetadata = [
@@ -1587,8 +1587,8 @@ describe('GENERAL', () => {
                     buName,
                     buName,
                     typeKeyCombo,
-                    'testSourceMarket',
-                    'testTargetMarket'
+                    ['testSourceMarket'],
+                    ['testTargetMarket']
                 );
                 assert.equal(process.exitCode, 0, 'build should not have thrown an error');
 
@@ -1697,8 +1697,8 @@ describe('GENERAL', () => {
                     buName,
                     'ignored',
                     typeKeyCombo,
-                    'testSourceMarket',
-                    'deployment-target',
+                    ['testSourceMarket'],
+                    ['deployment-target'],
                     true
                 );
                 assert.equal(process.exitCode, 0, 'build should not have thrown an error');
@@ -1849,7 +1849,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 78;
+                const expectedApiCallsRetrieve = 81;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1878,8 +1878,8 @@ describe('GENERAL', () => {
                     buName,
                     'ignored',
                     typeKeyCombo,
-                    'testSourceMarket',
-                    'deployment-target',
+                    ['testSourceMarket'],
+                    ['deployment-target'],
                     true
                 );
                 assert.equal(process.exitCode, 0, 'build should not have thrown an error');
@@ -2047,7 +2047,7 @@ describe('GENERAL', () => {
         });
 
         describe('Delete --metadata ~~~', () => {
-            it('Should delete the item', async () => {
+            it('Should delete the items', async () => {
                 const argvMetadata = [
                     'asset:testExisting_asset',
                     'automation:testExisting_automation',
@@ -2067,7 +2067,10 @@ describe('GENERAL', () => {
         describe('Publish --metadata ~~~', () => {
             it('Should publish the journey', async () => {
                 handler.setOptions({ skipStatusCheck: true });
-                const argvMetadata = ['journey:id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1'];
+                const argvMetadata = [
+                    'journey:testExisting_journey_Multistep',
+                    'journey:testExisting_temail_notPublished',
+                ];
                 const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
                 // WHEN
                 const publish = await handler.publish('testInstance/testBU', typeKeyCombo);
@@ -2075,7 +2078,7 @@ describe('GENERAL', () => {
                 assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
                 assert.deepEqual(
                     publish['testInstance/testBU']?.journey,
-                    ['id:3c3f4112-9b43-43ca-8a89-aa0375b2c1a2/1'],
+                    ['testExisting_journey_Multistep', 'testExisting_temail_notPublished'],
                     'should have published the right journey'
                 );
                 return;

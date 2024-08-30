@@ -259,7 +259,7 @@ describe('type: event', () => {
                 'testInstance/testBU',
                 'event',
                 ['testExisting_event'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 
@@ -285,7 +285,7 @@ describe('type: event', () => {
                 'testInstance/testBU',
                 'event',
                 ['testExisting_event'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             // WHEN
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
@@ -305,7 +305,7 @@ describe('type: event', () => {
                 'testInstance/testBU',
                 'event',
                 ['testExisting_event'],
-                'testTargetMarket'
+                ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 

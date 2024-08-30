@@ -190,6 +190,35 @@
                 <RetainUntil />
                 <CategoryID>2</CategoryID>
             </Results>
+            <Results xsi:type="DataExtension">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2024-08-21T09:54:28.807</CreatedDate>
+                <ModifiedDate>2024-08-21T09:54:28.807</ModifiedDate>
+                <ObjectID>3c3a54a5-d55f-ef11-b876-f40343c95928</ObjectID>
+                <CustomerKey>testExisting_temail_notPublished</CustomerKey>
+                <Name>testExisting_temail_notPublished</Name>
+                <Description>Triggered Send Source Data Extension Template</Description>
+                <IsSendable>true</IsSendable>
+                <IsTestable>false</IsTestable>
+                <SendableDataExtensionField>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <Name>SubscriberKey</Name>
+                </SendableDataExtensionField>
+                <SendableSubscriberField>
+                    <Name>_SubscriberKey</Name>
+                </SendableSubscriberField>
+                <Template>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>B6E8AE4C-3D93-49B1-B299-E0AE734213DD</CustomerKey>
+                </Template>
+                <RowBasedRetention>false</RowBasedRetention>
+                <ResetRetentionPeriodOnImport>false</ResetRetentionPeriodOnImport>
+                <DeleteAtEndOfRetentionPeriod>false</DeleteAtEndOfRetentionPeriod>
+                <RetainUntil />
+                <CategoryID>2</CategoryID>
+            </Results>
         </RetrieveResponseMsg>
     </soap:Body>
 </soap:Envelope>
