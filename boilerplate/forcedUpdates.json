@@ -1,5 +1,9 @@
 [
     {
+        "version": "7.3.1",
+        "files": [".vscode/settings.json"]
+    },
+    {
         "version": "7.3.0",
         "files": [".vscode/settings.json"]
     },
