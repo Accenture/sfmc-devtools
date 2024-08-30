@@ -59,6 +59,8 @@
         "lint-and-test": "run-s lint test",
         "test": "mocha --reporter-option maxDiffSize=25000",
         "coverage": "c8 npm run test",
+        "audit-fix": "npm audit fix",
+        "prepare-release": "run-s audit-fix lint-ts lint:fix",
         "version:major": "npm version --no-commit-hooks major",
         "version:minor": "npm version --no-commit-hooks minor",
         "version:patch": "npm version --no-commit-hooks patch"

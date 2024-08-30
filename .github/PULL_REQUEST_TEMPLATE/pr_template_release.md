@@ -5,9 +5,8 @@
 ### Before merge
 
 - [ ] Wiki updated with info in ticket listed under **Documentation**
-- [ ] ran `npm audit fix`
-- [ ] ran `npm run lint-ts`
-- [ ] ran `npm run lint:fix`
+- [ ] ran `npm run prepare-release` (which runs `npm audit fix`, `npm run lint-ts` and `npm run lint:fix`)
+- [ ] committed & pushed potential changes made by prepare-release
 
 ### After merge
 
