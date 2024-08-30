@@ -14,6 +14,7 @@
 - [ ] updated [bug template](/.github/ISSUE_TEMPLATE/bug.yml) to include the new version
 - [ ] updated [.mcdevrc](/test/mockRoot/.mcdevrc.json) for tests to the new version
 - [ ] ran `npm run version:major/minor/patch`
+- [ ] pushed version-prep commits
 - [ ] merged main branch into develop branch
 - [ ] closed GitHub milestone
 - [ ] created [new GitHub Release](https://github.com/Accenture/sfmc-devtools/releases/new)
