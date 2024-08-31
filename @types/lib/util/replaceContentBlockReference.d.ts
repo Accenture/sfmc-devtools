@@ -75,20 +75,19 @@ export default class ReplaceContentBlockReference {
      * ensures we cache the right things from disk and if required from server
      *
      * @param {Mcdevrc} properties properties for auth
-saved
      * @param {BuObject} buObject properties for auth
      * @param {boolean} [retrieveSharedOnly] for --dependencies only, do not have to re-retrieve local assets
      * @returns {Promise.<void>} -
      */
-    static createCacheMap(properties: Mcdevrc, buObject: BuObject, retrieveSharedOnly?: boolean): Promise<void>;
+    static createCache(properties: Mcdevrc, buObject: BuObject, retrieveSharedOnly?: boolean): Promise<void>;
     /**
-     * helper for {@link this.createCacheMap} that converts AssetMap into Asset
+     * helper for {@link ReplaceContentBlockReference.createCache} that converts AssetMap into AssetItemSimple entries in this.assetCacheMap
      *
      * @param {AssetMap} metadataMap list of local or shared assets
      */
-    static _createCacheMap(metadataMap: AssetMap): void;
+    static createCacheForMap(metadataMap: AssetMap): void;
     /**
-     * helper for {@link this.createCacheMap}
+     * helper for {@link ReplaceContentBlockReference.createCache}
      *
      * @param {BuObject} buObject references credentials
      * @param {Mcdevrc} properties central properties object
