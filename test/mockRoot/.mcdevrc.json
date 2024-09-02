@@ -19,6 +19,16 @@
                 "master": ["MyProduction/PROD-DE", "MyProduction/PROD-NL"]
             }
         },
+        "validation": {
+            "buildDefinition": {
+                "noGuidKeys": "warn",
+                "noRootFolder": "warn"
+            },
+            "deploy": {
+                "noGuidKeys": "warn",
+                "noRootFolder": "warn"
+            }
+        },
         "documentType": "md",
         "exclude": {},
         "include": {},
