@@ -10,7 +10,6 @@ export namespace Util {
     let packageJsonMcdev: any;
     let OPTIONS: {};
     let changedKeysMap: {};
-    let matchedByName: {};
     /**
      * helper that allows filtering an object by its keys
      *
