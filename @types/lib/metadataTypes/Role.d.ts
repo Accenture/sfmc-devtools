@@ -40,6 +40,13 @@ declare class Role extends MetadataType {
      */
     static retrieve(retrieveDir: string, _?: void | string[], ___?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
+     * adds default roles to the list of retrieved roles for proper caching (but not storing)
+     * also caches available timezones for retrieve-user
+     *
+     * @param {MetadataTypeMap} parsed list or previously retrieved items as reference
+     */
+    static cacheDefaultRolesAndTimezones(parsed: MetadataTypeMap): Promise<void>;
+    /**
      * Gets executed before deploying metadata
      *
      * @param {MetadataTypeItem} metadata a single metadata item
