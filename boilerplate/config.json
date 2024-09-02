@@ -17,6 +17,14 @@
             }
         },
         "documentType": "md",
+        "validation": {
+            "buildDefinition": {
+                "noGuidKeys": "warn"
+            },
+            "deploy": {
+                "noGuidKeys": "error"
+            }
+        },
         "documentStandardRoles": false,
         "exclude": {},
         "include": {},
