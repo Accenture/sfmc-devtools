@@ -722,6 +722,43 @@ declare class MetadataType {
      * @returns {string} newKey
      */
     static getNewKey(baseField: string, metadataItem: MetadataTypeItem, maxKeyLength: number): string;
+    /**
+     * Gets executed before deploying metadata
+     *
+     * @param {MetadataTypeItem} item a single metadata item
+     * @param {string} deployDir folder where files for deployment are stored
+     * @returns {Promise.<MetadataTypeItem>} Promise of a single metadata item
+     */
+    static validation_buildDefinition(item: MetadataTypeItem, deployDir: string): Promise<MetadataTypeItem>;
+    /**
+     * @typedef {'off'|'warn'|'error'} ValidationLevel
+     */
+    /**
+     * @typedef {object} ValidationRules
+     * @property {ValidationLevel} [noGuidKeys] flags metadata that did not get a proper key
+     */
+    /**
+     * Gets executed before deploying metadata
+     *
+     * @param {MetadataTypeItem} item a single metadata item
+     * @param {string} deployDir folder where files for deployment are stored
+     * @returns {Promise.<MetadataTypeItem>} Promise of a single metadata item
+     */
+    static validation_deploy(item: MetadataTypeItem, deployDir: string): Promise<MetadataTypeItem>;
+    /**
+     * Gets executed before deploying metadata
+     *
+     * @param {ValidationRules} validationConfig from properties
+     * @param {MetadataTypeItem} item a single metadata item
+     * @param {string} deployDir folder where files for deployment are stored
+     * @returns {Promise.<MetadataTypeItem>} Promise of a single metadata item
+     */
+    static validation(validationConfig: {
+        /**
+         * flags metadata that did not get a proper key
+         */
+        noGuidKeys?: "error" | "off" | "warn";
+    }, item: MetadataTypeItem, deployDir: string): Promise<MetadataTypeItem>;
 }
 declare namespace MetadataType {
     namespace definition {
