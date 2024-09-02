@@ -16,7 +16,6 @@
                 "master": ["MyProduction/PROD-DE", "MyProduction/PROD-NL"]
             }
         },
-        "documentType": "md",
         "validation": {
             "buildDefinition": {
                 "noGuidKeys": "warn",
@@ -27,6 +26,7 @@
                 "noRootFolder": "warn"
             }
         },
+        "documentType": "md",
         "documentStandardRoles": false,
         "exclude": {},
         "include": {},
