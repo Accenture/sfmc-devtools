@@ -723,7 +723,15 @@ declare class MetadataType {
      */
     static getNewKey(baseField: string, metadataItem: MetadataTypeItem, maxKeyLength: number): string;
     /**
-     * Gets executed before deploying metadata
+     * Gets executed before creating deployment package
+     *
+     * @param {MetadataTypeItem} item a single metadata item
+     * @param {string} retrieveDir folder where files for deployment are stored
+     * @returns {Promise.<MetadataTypeItem>} Promise of a single metadata item
+     */
+    static validation_retrieve(item: MetadataTypeItem, retrieveDir: string): Promise<MetadataTypeItem>;
+    /**
+     * Gets executed before creating deployment package
      *
      * @param {MetadataTypeItem} item a single metadata item
      * @param {string} deployDir folder where files for deployment are stored
