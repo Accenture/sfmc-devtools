@@ -1,23 +1,9 @@
 /**
  *
- * @param {any} definition
- * @param {any} item
- * @param {string} targetDir
+ * @param {any} definition type definition
+ * @param {any} item MetadataItem
+ * @returns {Promise.<any>} MetadataItem
+ * @param {string} targetDir folder in which the MetadataItem is deployed from (deploy/cred/bu)
  */
-export default function validation(definition: any, item: any, targetDir: string): Promise<{
-    noGuidKeys: {
-        failedMsg: string;
-        /**
-         * @returns {boolean} true=test passed
-         */
-        passed: () => boolean;
-    };
-    noRootFolder: {
-        failedMsg: string;
-        /**
-         * @returns {boolean} true=test passed
-         */
-        passed: () => boolean;
-    };
-}>;
+export default function validation(definition: any, item: any, targetDir: string): Promise<any>;
 //# sourceMappingURL=validations.d.ts.map
