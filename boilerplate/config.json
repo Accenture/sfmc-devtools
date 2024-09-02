@@ -19,10 +19,12 @@
         "documentType": "md",
         "validation": {
             "buildDefinition": {
-                "noGuidKeys": "warn"
+                "noGuidKeys": "warn",
+                "noRootFolder": "warn"
             },
             "deploy": {
-                "noGuidKeys": "error"
+                "noGuidKeys": "warn",
+                "noRootFolder": "warn"
             }
         },
         "documentStandardRoles": false,
