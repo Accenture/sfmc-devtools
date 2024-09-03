@@ -17,6 +17,10 @@
             }
         },
         "validation": {
+            "retrieve": {
+                "noGuidKeys": "warn",
+                "noRootFolder": "warn"
+            },
             "buildDefinition": {
                 "noGuidKeys": "warn",
                 "noRootFolder": "warn"
