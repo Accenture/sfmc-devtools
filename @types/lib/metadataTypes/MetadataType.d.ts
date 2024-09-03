@@ -728,6 +728,8 @@ declare class MetadataType {
     /**
      * @typedef {object} ValidationRules
      * @property {ValidationLevel} [noGuidKeys] flags metadata that did not get a proper key
+     * @property {ValidationLevel} [noRootFolder] flags metadata that did not get a proper key
+     * @property {{type:string[], options: ValidationRules}[]} [overrides] flags metadata that did not get a proper key
      */
     /**
      * Gets executed before deploying metadata
