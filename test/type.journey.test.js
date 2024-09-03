@@ -757,7 +757,7 @@ describe('type: journey', () => {
             // retrieve result
             assert.deepEqual(
                 publish['testInstance/testBU']?.journey,
-                ['id:0175b971-71a3-4d8e-98ac-48121f3fbf4f/1'],
+                ['testExisting_journey_Multistep'],
                 'should have published the journey'
             );
 
@@ -799,7 +799,7 @@ describe('type: journey', () => {
             // retrieve result
             assert.deepEqual(
                 publish['testInstance/testBU']?.journey,
-                ['id:0175b971-71a3-4d8e-98ac-48121f3fbf4f/1'],
+                ['testExisting_journey_Multistep'],
                 'should have published the journey'
             );
 

@@ -101,6 +101,16 @@ declare class Event extends MetadataType {
                 [x: string]: SfObjectField;
             };
         };
+        /** @type {Object.<string, Promise.<any>>} */
+        loadingFields: {
+            [x: string]: Promise<any>;
+        };
+        /** @type {Object.<string, Promise.<any>>} */
+        loadingRelatedObjects: {
+            [x: string]: Promise<any>;
+        };
+        /** @type {Promise.<any>} */
+        loadingWorkflowObjects: Promise<any>;
     };
     /**
      * helper for {@link checkSalesforceEntryEvents} that retrieves information about SF object fields
@@ -108,6 +118,22 @@ declare class Event extends MetadataType {
      * @param {string} objectAPIName salesforce object api name
      */
     static getSalesforceObjects(objectAPIName: string): Promise<void>;
+    /**
+     * helper that allows skipping to run this again in multi-key retrieval
+     */
+    static _getWorkflowObjects(): Promise<void>;
+    /**
+     * helper that allows skipping to run this again in multi-key retrieval
+     *
+     * @param {string} objectAPIName SF entry object of the current event
+     */
+    static _getRelatedSfObjects(objectAPIName: string): Promise<void>;
+    /**
+     * helper that allows skipping to run this again in multi-key retrieval
+     *
+     * @param {string} objectAPIName SF object for which to get the fields
+     */
+    static _getSalesforceObjectFields(objectAPIName: string): Promise<void>;
     static defaultSalesforceFields: string[];
     /**
      *
