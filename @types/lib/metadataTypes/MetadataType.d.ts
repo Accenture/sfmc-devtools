@@ -723,50 +723,23 @@ declare class MetadataType {
      */
     static getNewKey(baseField: string, metadataItem: MetadataTypeItem, maxKeyLength: number): string;
     /**
-     * Gets executed before creating deployment package
-     *
-     * @param {MetadataTypeItem} item a single metadata item
-     * @param {string} retrieveDir folder where files for deployment are stored
-     * @returns {Promise.<MetadataTypeItem>} Promise of a single metadata item
-     */
-    static validation_retrieve(item: MetadataTypeItem, retrieveDir: string): Promise<MetadataTypeItem>;
-    /**
-     * Gets executed before creating deployment package
-     *
-     * @param {MetadataTypeItem} item a single metadata item
-     * @param {string} deployDir folder where files for deployment are stored
-     * @returns {Promise.<MetadataTypeItem>} Promise of a single metadata item
-     */
-    static validation_buildDefinition(item: MetadataTypeItem, deployDir: string): Promise<MetadataTypeItem>;
-    /**
      * @typedef {'off'|'warn'|'error'} ValidationLevel
      */
     /**
      * @typedef {object} ValidationRules
      * @property {ValidationLevel} [noGuidKeys] flags metadata that did not get a proper key
+     * @property {ValidationLevel} [noRootFolder] flags metadata that did not get a proper key
+     * @property {{type:string[], options: ValidationRules}[]} [overrides] flags metadata that did not get a proper key
      */
     /**
      * Gets executed before deploying metadata
      *
+     * @param {'retrieve'|'buildDefinition'|'deploy'} method used to select the right config
      * @param {MetadataTypeItem} item a single metadata item
-     * @param {string} deployDir folder where files for deployment are stored
+     * @param {string} targetDir folder where files for deployment are stored
      * @returns {Promise.<MetadataTypeItem>} Promise of a single metadata item
      */
-    static validation_deploy(item: MetadataTypeItem, deployDir: string): Promise<MetadataTypeItem>;
-    /**
-     * Gets executed before deploying metadata
-     *
-     * @param {ValidationRules} validationConfig from properties
-     * @param {MetadataTypeItem} item a single metadata item
-     * @param {string} deployDir folder where files for deployment are stored
-     * @returns {Promise.<MetadataTypeItem>} Promise of a single metadata item
-     */
-    static validation(validationConfig: {
-        /**
-         * flags metadata that did not get a proper key
-         */
-        noGuidKeys?: "error" | "off" | "warn";
-    }, item: MetadataTypeItem, deployDir: string): Promise<MetadataTypeItem>;
+    static validation(method: "retrieve" | "buildDefinition" | "deploy", item: MetadataTypeItem, targetDir: string): Promise<MetadataTypeItem>;
 }
 declare namespace MetadataType {
     namespace definition {
