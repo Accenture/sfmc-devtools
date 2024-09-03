@@ -27,7 +27,15 @@
             },
             "deploy": {
                 "noGuidKeys": "warn",
-                "noRootFolder": "warn"
+                "noRootFolder": "warn",
+                "overrides": [
+                    {
+                        "type": ["journey"],
+                        "options": {
+                            "noGuidKeys": "warn"
+                        }
+                    }
+                ]
             }
         },
         "documentType": "md",
