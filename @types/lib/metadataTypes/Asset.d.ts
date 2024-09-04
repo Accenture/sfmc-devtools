@@ -253,6 +253,13 @@ declare class Asset extends MetadataType {
      */
     static _buildForNested(templateDir: string, targetDir: string | string[], metadata: AssetItem, templateVariables: TemplateMap, templateName: string, mode: "definition" | "template"): Promise<string[][]>;
     /**
+     * generic script that retrieves the folder path from cache and updates the given metadata with it after retrieve
+     *
+     * @param {MetadataTypeItem} metadata a single script activity definition
+     * @param {boolean} [hideWarning] when checking content blocks we do want to set the folder path but if we cant, lets not cludder the log with warnings about it
+     */
+    static setFolderPath(metadata: MetadataTypeItem, hideWarning?: boolean): void;
+    /**
      * helper for {@link Asset.preDeployTasks} that loads extracted code content back into JSON
      *
      * @param {AssetItem} metadata a single asset definition
