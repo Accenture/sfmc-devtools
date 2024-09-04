@@ -43,12 +43,12 @@ declare class MetadataType {
     /**
      * Deploys metadata
      *
-     * @param {MetadataTypeMap} metadata metadata mapped by their keyField
+     * @param {MetadataTypeMap} metadataMap metadata mapped by their keyField
      * @param {string} deployDir directory where deploy metadata are saved
      * @param {string} retrieveDir directory where metadata after deploy should be saved
      * @returns {Promise.<MetadataTypeMap>} Promise of keyField => metadata map
      */
-    static deploy(metadata: MetadataTypeMap, deployDir: string, retrieveDir: string): Promise<MetadataTypeMap>;
+    static deploy(metadataMap: MetadataTypeMap, deployDir: string, retrieveDir: string): Promise<MetadataTypeMap>;
     /**
      * Gets executed after deployment of metadata type
      *
@@ -268,9 +268,10 @@ declare class MetadataType {
      *
      * @param {MetadataTypeMap} metadataMap metadata mapped by their keyField
      * @param {string} deployDir directory where deploy metadata are saved
+     * @param {boolean} [runUpsertSequentially] when a type has self-dependencies creates need to run one at a time and created/changed keys need to be cached to ensure following creates/updates have thoses keys available
      * @returns {Promise.<MetadataTypeMap>} keyField => metadata map
      */
-    static upsert(metadataMap: MetadataTypeMap, deployDir: string): Promise<MetadataTypeMap>;
+    static upsert(metadataMap: MetadataTypeMap, deployDir: string, runUpsertSequentially?: boolean): Promise<MetadataTypeMap>;
     /**
      * helper for {@link MetadataType.upsert}
      *
@@ -721,6 +722,24 @@ declare class MetadataType {
      * @returns {string} newKey
      */
     static getNewKey(baseField: string, metadataItem: MetadataTypeItem, maxKeyLength: number): string;
+    /**
+     * @typedef {'off'|'warn'|'error'} ValidationLevel
+     */
+    /**
+     * @typedef {object} ValidationRules
+     * @property {ValidationLevel} [noGuidKeys] flags metadata that did not get a proper key
+     * @property {ValidationLevel} [noRootFolder] flags metadata that did not get a proper key
+     * @property {{type:string[], options: ValidationRules}[]} [overrides] flags metadata that did not get a proper key
+     */
+    /**
+     * Gets executed before deploying metadata
+     *
+     * @param {'retrieve'|'buildDefinition'|'deploy'} method used to select the right config
+     * @param {MetadataTypeItem | CodeExtractItem} item a single metadata item
+     * @param {string} targetDir folder where files for deployment are stored
+     * @returns {Promise.<MetadataTypeItem | CodeExtractItem>} Promise of a single metadata item
+     */
+    static validation(method: "retrieve" | "buildDefinition" | "deploy", item: MetadataTypeItem | CodeExtractItem, targetDir: string): Promise<MetadataTypeItem | CodeExtractItem>;
 }
 declare namespace MetadataType {
     namespace definition {

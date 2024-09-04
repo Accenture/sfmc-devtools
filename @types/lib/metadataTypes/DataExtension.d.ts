@@ -38,9 +38,10 @@ declare class DataExtension extends MetadataType {
      * if create or update operation is needed.
      *
      * @param {DataExtensionMap} metadataMap dataExtensions mapped by their customerKey
-     * @returns {Promise} Promise
+     * @param {string} deployDir directory where deploy metadata are saved
+     * @returns {Promise.<MetadataTypeMap>} keyField => metadata map
      */
-    static upsert(metadataMap: DataExtensionMap): Promise<any>;
+    static upsert(metadataMap: DataExtensionMap, deployDir: string): Promise<MetadataTypeMap>;
     /**
      * helper for {@link DataExtension.upsert}
      *

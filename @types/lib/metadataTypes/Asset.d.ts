@@ -12,6 +12,7 @@ export type AssetSubType = import("../../types/mcdev.d.js").AssetSubType;
 export type AssetMap = import("../../types/mcdev.d.js").AssetMap;
 export type AssetItem = import("../../types/mcdev.d.js").AssetItem;
 export type AssetRequestParams = import("../../types/mcdev.d.js").AssetRequestParams;
+export type ContentBlockConversionTypes = import("../../types/mcdev.d.js").ContentBlockConversionTypes;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -28,6 +29,7 @@ export type AssetRequestParams = import("../../types/mcdev.d.js").AssetRequestPa
  * @typedef {import('../../types/mcdev.d.js').AssetMap} AssetMap
  * @typedef {import('../../types/mcdev.d.js').AssetItem} AssetItem
  * @typedef {import('../../types/mcdev.d.js').AssetRequestParams} AssetRequestParams
+ * @typedef {import('../../types/mcdev.d.js').ContentBlockConversionTypes} ContentBlockConversionTypes
  */
 /**
  * FileTransfer MetadataType
@@ -82,6 +84,22 @@ declare class Asset extends MetadataType {
      * @returns {string[]} AssetSubType array
      */
     private static _getSubTypes;
+    /**
+     * Returns Order in which metadata needs to be retrieved/deployed
+     *
+     * @param {AssetMap} metadataMap metadata mapped by their keyField
+     * @param {string} deployDir directory where deploy metadata are saved
+     * @returns {Promise.<AssetMap>} keyField => metadata map but sorted to ensure dependencies are deployed in correct order
+     */
+    static _getUpsertOrder(metadataMap: AssetMap, deployDir: string): Promise<AssetMap>;
+    /**
+     * MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
+     *
+     * @param {AssetMap} metadataMap metadata mapped by their keyField
+     * @param {string} deployDir directory where deploy metadata are saved
+     * @returns {Promise.<AssetMap>} keyField => metadata map
+     */
+    static upsert(metadataMap: AssetMap, deployDir: string): Promise<AssetMap>;
     /**
      * Creates a single asset
      *
@@ -234,6 +252,13 @@ declare class Asset extends MetadataType {
      * @returns {Promise.<string[][]>} list of extracted files with path-parts provided as an array
      */
     static _buildForNested(templateDir: string, targetDir: string | string[], metadata: AssetItem, templateVariables: TemplateMap, templateName: string, mode: "definition" | "template"): Promise<string[][]>;
+    /**
+     * generic script that retrieves the folder path from cache and updates the given metadata with it after retrieve
+     *
+     * @param {MetadataTypeItem} metadata a single script activity definition
+     * @param {boolean} [hideWarning] when checking content blocks we do want to set the folder path but if we cant, lets not cludder the log with warnings about it
+     */
+    static setFolderPath(metadata: MetadataTypeItem, hideWarning?: boolean): void;
     /**
      * helper for {@link Asset.preDeployTasks} that loads extracted code content back into JSON
      *
