@@ -268,10 +268,10 @@ declare class MetadataType {
      *
      * @param {MetadataTypeMap} metadataMap metadata mapped by their keyField
      * @param {string} deployDir directory where deploy metadata are saved
-     * @param {boolean} [runCreatesSequentially] when a type has self-dependencies creates need to run one at a time and created keys need to be cached to ensure following creates/updates have thoses keys available
+     * @param {boolean} [runUpsertSequentially] when a type has self-dependencies creates need to run one at a time and created/changed keys need to be cached to ensure following creates/updates have thoses keys available
      * @returns {Promise.<MetadataTypeMap>} keyField => metadata map
      */
-    static upsert(metadataMap: MetadataTypeMap, deployDir: string, runCreatesSequentially?: boolean): Promise<MetadataTypeMap>;
+    static upsert(metadataMap: MetadataTypeMap, deployDir: string, runUpsertSequentially?: boolean): Promise<MetadataTypeMap>;
     /**
      * helper for {@link MetadataType.upsert}
      *
