@@ -740,12 +740,6 @@ declare class MetadataType {
      * @returns {Promise.<MetadataTypeItem | CodeExtractItem>} Promise of a single metadata item
      */
     static validation(method: "retrieve" | "buildDefinition" | "deploy", item: MetadataTypeItem | CodeExtractItem, targetDir: string): Promise<MetadataTypeItem | CodeExtractItem>;
-    /**
-     * helper for those types relying on the SOAP api: sets a fake date for CreatedDate and ModifiedDate to make the API return the real dates
-     *
-     * @param {MetadataTypeItem} metadata a single metadata item
-     */
-    static preDeploy_setFakeSoapDate(metadata: MetadataTypeItem): void;
 }
 declare namespace MetadataType {
     namespace definition {
