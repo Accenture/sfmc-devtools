@@ -735,11 +735,11 @@ declare class MetadataType {
      * Gets executed before deploying metadata
      *
      * @param {'retrieve'|'buildDefinition'|'deploy'} method used to select the right config
-     * @param {MetadataTypeItem} item a single metadata item
+     * @param {MetadataTypeItem | CodeExtractItem} item a single metadata item
      * @param {string} targetDir folder where files for deployment are stored
-     * @returns {Promise.<MetadataTypeItem>} Promise of a single metadata item
+     * @returns {Promise.<MetadataTypeItem | CodeExtractItem>} Promise of a single metadata item
      */
-    static validation(method: "retrieve" | "buildDefinition" | "deploy", item: MetadataTypeItem, targetDir: string): Promise<MetadataTypeItem>;
+    static validation(method: "retrieve" | "buildDefinition" | "deploy", item: MetadataTypeItem | CodeExtractItem, targetDir: string): Promise<MetadataTypeItem | CodeExtractItem>;
     /**
      * helper for those types relying on the SOAP api: sets a fake date for CreatedDate and ModifiedDate to make the API return the real dates
      *
