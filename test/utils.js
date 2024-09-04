@@ -215,6 +215,7 @@ export function mockSetup(isDeploy) {
             skipInteraction: undefined,
             skipRetrieve: undefined,
             skipStatusCheck: undefined,
+            skipValidation: undefined,
             _runningTest: undefined,
             _welcomeMessageShown: undefined,
         });
