@@ -20,6 +20,10 @@
             }
         },
         "validation": {
+            "retrieve": {
+                "noGuidKeys": "warn",
+                "noRootFolder": "warn"
+            },
             "buildDefinition": {
                 "noGuidKeys": "warn",
                 "noRootFolder": "warn"
@@ -110,5 +114,5 @@
             "verification"
         ]
     },
-    "version": "7.3.1"
+    "version": "7.4.0"
 }
