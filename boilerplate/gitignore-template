@@ -7,3 +7,4 @@ node_modules/
 **/QueryStudioResults at*
 .mcdev-auth.json
 *.error.log
+*.BAK

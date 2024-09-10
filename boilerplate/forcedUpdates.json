@@ -1,5 +1,9 @@
 [
     {
+        "version": "7.4.1",
+        "files": [".gitignore"]
+    },
+    {
         "version": "7.3.2",
         "files": [".gitattributes"]
     },
