@@ -25,8 +25,10 @@
                 "triggeredSend": {
                     "autoAddSubscribers": true,
                     "autoUpdateSubscribers": true,
-                    "bccEmail": "%%= ContentBlockByName(\"Content Builder\\dont strip non ssjs content\") =%%",
-                    "ccEmail": "%%= ContentBlockByKey(\"testTemplated_asset_htmlblock\") =%%",
+                    "bccEmail": [
+                        "%%= ContentBlockByName(\"Content Builder\\dont strip non ssjs content\") =%%"
+                    ],
+                    "ccEmail": ["%%= ContentBlockByKey(\"testTemplated_asset_htmlblock\") =%%"],
                     "created": {},
                     "description": "my activity info text",
                     "dynamicEmailSubject": "testTemplated_ dynamic email subject %%= ContentBlockByKey(\"testTemplated_asset_htmlblock\") =%%",

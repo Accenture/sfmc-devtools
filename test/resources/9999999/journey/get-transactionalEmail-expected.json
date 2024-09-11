@@ -28,8 +28,8 @@
                 "triggeredSend": {
                     "autoAddSubscribers": true,
                     "autoUpdateSubscribers": true,
-                    "bccEmail": "",
-                    "ccEmail": "",
+                    "bccEmail": [],
+                    "ccEmail": [],
                     "created": {},
                     "domainExclusions": [],
                     "dynamicEmailSubject": "test email",
