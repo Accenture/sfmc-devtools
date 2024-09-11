@@ -142,8 +142,9 @@ declare class Event extends MetadataType {
     /**
      *
      * @param {configurationArguments} ca trigger[0].configurationArguments
+     * @param {boolean} isPublished if the current item is published it means we do not need to do contact vs common checks
      */
-    static checkSalesforceEntryEvents(ca: configurationArguments): void;
+    static checkSalesforceEntryEvents(ca: configurationArguments, isPublished: boolean): void;
     /**
      *
      * @param {object[]} conditions -
@@ -157,10 +158,11 @@ declare class Event extends MetadataType {
      * @param {string} triggerType e.g. SalesforceObjectTriggerV2, APIEvent, ...
      * @param {configurationArguments} ca trigger[0].configurationArguments
      * @param {string} key of event / journey
-     * @param {string} [type] optionally provide type for error on missing configurationArguments attributes
+     * @param {boolean} isPublished if the current item is published it means we do not need to do contact vs common checks
+     * @param {string} [type] optionally provide metadatype for error on missing configurationArguments attributes
      * @returns {Promise.<void>} -
      */
-    static postRetrieveTasks_SalesforceEntryEvents(triggerType: string, ca: configurationArguments, key: string, type?: string): Promise<void>;
+    static postRetrieveTasks_SalesforceEntryEvents(triggerType: string, ca: configurationArguments, key: string, isPublished: boolean, type?: string): Promise<void>;
     /**
      *
      * @param {string} triggerType e.g. SalesforceObjectTriggerV2, APIEvent, ...
