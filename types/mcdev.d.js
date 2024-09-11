@@ -560,4 +560,70 @@ complex
  * @property {boolean} isnamefield -
  * @property {SfObjectPicklist[]} [picklist] list of values
  */
+
+/**
+ * @typedef {object} configurationArguments
+ * @property {string} applicationExtensionKey SalesforceObjectTriggerV2
+ * @property {string} version 3.0
+ * @property {'Created'|'Updated'|'CreatedUpdated'} salesforceTriggerCriteria what record event in SF triggers this
+ * @property {object} eventDataConfig what objects are used by this event
+ * @property {eventDataConfigObject[]} eventDataConfig.objects list of sf objects with the fields that are used
+ * @property {Conditions} primaryObjectFilterCriteria TODO
+ * @property {Conditions} relatedObjectFilterCriteria TODO
+ * @property {object} [additionalObjectFilterCriteria] seems to only exist on journey but not on event and also not on every journey
+ * @property {object} contactKey defines how this event links to the all contacts list
+ * @property {string} contactKey.relationshipIdName Id / the __c field
+ * @property {string} contactKey.relationshipName Common / the __r field
+ * @property {boolean} contactKey.isPolymorphic false
+ * @property {string} contactKey.referenceObjectName Common
+ * @property {string} [contactKey.fieldName] if relationshipIdName points to a __c field then this tends to be set to "Id"
+ * @property {object} passThroughArgument TODO
+ * @property {object} passThroughArgument.fields TODO
+ * @property {string} passThroughArgument.fields.ContactKey CampaignMember:Common:Id
+ * @property {object} passThroughArgument.fields.Email CampaignMember:Common:Email; not affected by changing which field is to be used for email in the journey
+ * @property {string} [passThroughArgument.fields.HasOptedOutOfEmail] Contact:HasOptedOutOfEmail
+ * @property {string} primaryObjectFilterSummary primaryObjectFilterCriteria in simplified string-form
+ * @property {string} relatedObjectFilterSummary relatedObjectFilterCriteria in simplified string-form
+ * @property {string[]} eventDataSummary eventDataConfig in simplified string-form
+ * @property {'Created;'|'Updated;'|'Created;Updated;'} evaluationCriteriaSummary salesforceTriggerCriteria plus semi-colon
+ * @property {'CampaignMember'|'Contact'} contactPersonType if objectAPIName==CampaignMember then this is also CampaignMember; otherwise it's Contact
+ * @property {string} objectAPIName the SF object on which the salesforceTriggerCriteria is listening on
+ * @property {string} whoToInject "objectAPIName (Contact / Lead / Contacts and Leads)"
+ * @property {string} criteria empty string for SF events
+ * @property {number} schemaVersionId set to 0 for SF events
+ */
+
+/**
+ * @typedef {object} eventDataConfigObject part of configurationArguments
+ * @property {string} dePrefix CampaignMember:Campaign:
+ * @property {boolean} isPolymorphic ?
+ * @property {string} referenceObject field on parent object containing the id; ends on __c for custom fields; same as referenceObject for standard fields; can be "Contacts and Leads"
+ * @property {string} relationshipName field on parent object acting as lookup; ends on __r for custom fields; same as referenceObject for standard fields; can be "Common"
+ * @property {string} [relationshipIdName] ?
+ * @property {string[]} fields list of field names that are used by this journey
+ */
+/**
+ * @typedef {object} Conditions part of configurationArguments
+ * @property {'AND'|'OR'} operand -
+ * @property {(Conditions | FieldCondition)[]} conditions list of conditions
+ */
+/**
+ * @typedef {object} FieldCondition part of configurationArguments
+ * @property {number} _length is 0 for booleans, otherwise field length
+ * @property {'currency'|'string'|'int'|'picklist'|'textarea'|'boolean'|'date'|'datetime'|'email'} datatype type
+ * @property {string} fieldName field API name; "TR1__Email__c"
+ * @property {string} folderId "CampaignMember-CampaignMember"
+ * @property {string} id "CampaignMember-CampaignMember-TR1__Email__c"
+ * @property {boolean} isPolymorphic ?
+ * @property {string} name likely the field label; "Email"
+ * @property {'equals'|'EQUALS'|'WASSET'} operator condition comparator
+ * @property {string} [value] value to compare the field with if operator is sth like "equals"; booleans are stored as upper-camel-case string!
+ * @property {number} precision ?
+ * @property {string} referenceObjectName "Contacts and Leads"
+ * @property {string} relationshipIdName "CommonId"; can be an empty string
+ * @property {string} relationshipName "Common"; can be an empty string
+ * @property {number} scale ?
+ * @property {string} text seems to be equal to name-attribute?; "Email"
+ */
+
 export default {};
