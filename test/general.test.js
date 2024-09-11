@@ -569,7 +569,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    14,
+                    13,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -632,7 +632,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    15,
+                    14,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -697,7 +697,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    12,
+                    11,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -2251,7 +2251,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    14,
+                    13,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });

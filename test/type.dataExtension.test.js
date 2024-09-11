@@ -133,7 +133,7 @@ describe('type: dataExtension', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                11,
+                10,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -182,7 +182,7 @@ describe('type: dataExtension', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                8,
+                7,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -233,7 +233,7 @@ describe('type: dataExtension', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                12,
+                11,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
