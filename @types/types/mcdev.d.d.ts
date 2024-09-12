@@ -1510,4 +1510,199 @@ export type SfObjectField = {
      */
     picklist?: SfObjectPicklist[];
 };
+export type configurationArguments = {
+    /**
+     * SalesforceObjectTriggerV2
+     */
+    applicationExtensionKey: string;
+    /**
+     * 3.0
+     */
+    version: string;
+    /**
+     * what record event in SF triggers this
+     */
+    salesforceTriggerCriteria: "Created" | "Updated" | "CreatedUpdated";
+    /**
+     * what objects are used by this event
+     */
+    eventDataConfig: {
+        objects: eventDataConfigObject[];
+    };
+    /**
+     * TODO
+     */
+    primaryObjectFilterCriteria: Conditions;
+    /**
+     * TODO
+     */
+    relatedObjectFilterCriteria: Conditions;
+    /**
+     * seems to only exist on journey but not on event and also not on every journey
+     */
+    additionalObjectFilterCriteria?: object;
+    /**
+     * defines how this event links to the all contacts list
+     */
+    contactKey: {
+        relationshipIdName: string;
+        relationshipName: string;
+        isPolymorphic: boolean;
+        referenceObjectName: string;
+        fieldName?: string;
+    };
+    /**
+     * TODO
+     */
+    passThroughArgument: {
+        fields: {
+            ContactKey: string;
+            Email: object;
+            HasOptedOutOfEmail?: string;
+        };
+    };
+    /**
+     * primaryObjectFilterCriteria in simplified string-form
+     */
+    primaryObjectFilterSummary: string;
+    /**
+     * relatedObjectFilterCriteria in simplified string-form
+     */
+    relatedObjectFilterSummary: string;
+    /**
+     * eventDataConfig in simplified string-form
+     */
+    eventDataSummary: string[];
+    /**
+     * salesforceTriggerCriteria plus semi-colon
+     */
+    evaluationCriteriaSummary: "Created;" | "Updated;" | "Created;Updated;";
+    /**
+     * if objectAPIName==CampaignMember then this is also CampaignMember; otherwise it's Contact
+     */
+    contactPersonType: "CampaignMember" | "Contact";
+    /**
+     * the SF object on which the salesforceTriggerCriteria is listening on
+     */
+    objectAPIName: string;
+    /**
+     * "objectAPIName (Contact / Lead / Contacts and Leads)"
+     */
+    whoToInject: string;
+    /**
+     * empty string for SF events
+     */
+    criteria: string;
+    /**
+     * set to 0 for SF events
+     */
+    schemaVersionId: number;
+};
+/**
+ * part of configurationArguments
+ */
+export type eventDataConfigObject = {
+    /**
+     * CampaignMember:Campaign:
+     */
+    dePrefix: string;
+    /**
+     * ?
+     */
+    isPolymorphic: boolean;
+    /**
+     * field on parent object containing the id; ends on __c for custom fields; same as referenceObject for standard fields; can be "Contacts and Leads"
+     */
+    referenceObject: string;
+    /**
+     * field on parent object acting as lookup; ends on __r for custom fields; same as referenceObject for standard fields; can be "Common"
+     */
+    relationshipName: string;
+    /**
+     * ?
+     */
+    relationshipIdName?: string;
+    /**
+     * list of field names that are used by this journey
+     */
+    fields: string[];
+};
+/**
+ * part of configurationArguments
+ */
+export type Conditions = {
+    /**
+     * -
+     */
+    operand: "AND" | "OR";
+    /**
+     * list of conditions
+     */
+    conditions: (Conditions | FieldCondition)[];
+};
+/**
+ * part of configurationArguments
+ */
+export type FieldCondition = {
+    /**
+     * is 0 for booleans, otherwise field length
+     */
+    _length: number;
+    /**
+     * type
+     */
+    datatype: "currency" | "string" | "int" | "picklist" | "textarea" | "boolean" | "date" | "datetime" | "email";
+    /**
+     * field API name; "TR1__Email__c"
+     */
+    fieldName: string;
+    /**
+     * "CampaignMember-CampaignMember"
+     */
+    folderId: string;
+    /**
+     * "CampaignMember-CampaignMember-TR1__Email__c"
+     */
+    id: string;
+    /**
+     * ?
+     */
+    isPolymorphic: boolean;
+    /**
+     * likely the field label; "Email"
+     */
+    name: string;
+    /**
+     * condition comparator
+     */
+    operator: "equals" | "EQUALS" | "WASSET";
+    /**
+     * value to compare the field with if operator is sth like "equals"; booleans are stored as upper-camel-case string!
+     */
+    value?: string;
+    /**
+     * ?
+     */
+    precision: number;
+    /**
+     * "Contacts and Leads"
+     */
+    referenceObjectName: string;
+    /**
+     * "CommonId"; can be an empty string
+     */
+    relationshipIdName: string;
+    /**
+     * "Common"; can be an empty string
+     */
+    relationshipName: string;
+    /**
+     * ?
+     */
+    scale: number;
+    /**
+     * seems to be equal to name-attribute?; "Email"
+     */
+    text: string;
+};
 //# sourceMappingURL=mcdev.d.d.ts.map

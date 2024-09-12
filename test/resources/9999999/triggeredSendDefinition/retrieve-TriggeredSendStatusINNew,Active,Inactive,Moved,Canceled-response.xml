@@ -59,7 +59,6 @@
                 <AutoAddSubscribers>false</AutoAddSubscribers>
                 <AutoUpdateSubscribers>false</AutoUpdateSubscribers>
                 <BatchInterval>0</BatchInterval>
-                <BccEmail />
                 <EmailSubject>You are successfully unsubscribed</EmailSubject>
                 <DynamicEmailSubject>You are successfully unsubscribed</DynamicEmailSubject>
                 <IsMultipart>false</IsMultipart>
@@ -106,7 +105,6 @@
                 <AutoAddSubscribers>false</AutoAddSubscribers>
                 <AutoUpdateSubscribers>false</AutoUpdateSubscribers>
                 <BatchInterval>0</BatchInterval>
-                <BccEmail />
                 <EmailSubject>%%= ContentBlockById(1295064) =%%</EmailSubject>
                 <DynamicEmailSubject>%%= ContentBlockById(1295064) =%%</DynamicEmailSubject>
                 <IsMultipart>false</IsMultipart>

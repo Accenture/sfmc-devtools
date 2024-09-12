@@ -11,6 +11,8 @@ export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestPara
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 export type ReferenceObject = import("../../types/mcdev.d.js").ReferenceObject;
 export type SfObjectField = import("../../types/mcdev.d.js").SfObjectField;
+export type configurationArguments = import("../../types/mcdev.d.js").configurationArguments;
+export type Conditions = import("../../types/mcdev.d.js").Conditions;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -25,6 +27,8 @@ export type SfObjectField = import("../../types/mcdev.d.js").SfObjectField;
  *
  * @typedef {import('../../types/mcdev.d.js').ReferenceObject} ReferenceObject
  * @typedef {import('../../types/mcdev.d.js').SfObjectField} SfObjectField
+ * @typedef {import('../../types/mcdev.d.js').configurationArguments} configurationArguments
+ * @typedef {import('../../types/mcdev.d.js').Conditions} Conditions
  */
 /**
  * Event MetadataType
@@ -137,9 +141,10 @@ declare class Event extends MetadataType {
     static defaultSalesforceFields: string[];
     /**
      *
-     * @param {any} ca trigger[0].configurationArguments
+     * @param {configurationArguments} ca trigger[0].configurationArguments
+     * @param {boolean} isPublished if the current item is published it means we do not need to do contact vs common checks
      */
-    static checkSalesforceEntryEvents(ca: any): void;
+    static checkSalesforceEntryEvents(ca: configurationArguments, isPublished: boolean): void;
     /**
      *
      * @param {object[]} conditions -
@@ -151,19 +156,20 @@ declare class Event extends MetadataType {
     /**
      *
      * @param {string} triggerType e.g. SalesforceObjectTriggerV2, APIEvent, ...
-     * @param {any} ca trigger[0].configurationArguments
+     * @param {configurationArguments} ca trigger[0].configurationArguments
      * @param {string} key of event / journey
-     * @param {string} [type] optionally provide type for error on missing configurationArguments attributes
+     * @param {boolean} isPublished if the current item is published it means we do not need to do contact vs common checks
+     * @param {string} [type] optionally provide metadatype for error on missing configurationArguments attributes
      * @returns {Promise.<void>} -
      */
-    static postRetrieveTasks_SalesforceEntryEvents(triggerType: string, ca: any, key: string, type?: string): Promise<void>;
+    static postRetrieveTasks_SalesforceEntryEvents(triggerType: string, ca: configurationArguments, key: string, isPublished: boolean, type?: string): Promise<void>;
     /**
      *
      * @param {string} triggerType e.g. SalesforceObjectTriggerV2, APIEvent, ...
-     * @param {any} ca trigger[0].configurationArguments
+     * @param {configurationArguments} ca trigger[0].configurationArguments
      * @returns {Promise.<void>} -
      */
-    static preDeployTasks_SalesforceEntryEvents(triggerType: string, ca: any): Promise<void>;
+    static preDeployTasks_SalesforceEntryEvents(triggerType: string, ca: configurationArguments): Promise<void>;
 }
 declare namespace Event {
     let definition: {

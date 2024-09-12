@@ -63,7 +63,6 @@
                     <AutoAddSubscribers>false</AutoAddSubscribers>
                     <AutoUpdateSubscribers>false</AutoUpdateSubscribers>
                     <BatchInterval>0</BatchInterval>
-                    <BccEmail />
                     <EmailSubject>You are successfully unsubscribed</EmailSubject>
                     <DynamicEmailSubject>You are successfully unsubscribed</DynamicEmailSubject>
                     <IsMultipart>false</IsMultipart>
