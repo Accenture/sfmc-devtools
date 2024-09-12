@@ -3,7 +3,6 @@
     "AutoAddSubscribers": false,
     "AutoUpdateSubscribers": false,
     "BatchInterval": 0,
-    "BccEmail": "",
     "CreatedDate": "2018-06-25T05:58:00",
     "CustomerKey": "testExisting_triggeredSend_rcb",
     "Description": "Unsubscribe_Email",
