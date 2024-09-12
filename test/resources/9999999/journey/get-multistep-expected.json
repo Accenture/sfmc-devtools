@@ -83,8 +83,8 @@
                 "triggeredSend": {
                     "autoAddSubscribers": false,
                     "autoUpdateSubscribers": false,
-                    "bccEmail": "",
-                    "ccEmail": "",
+                    "bccEmail": [],
+                    "ccEmail": [],
                     "created": { "name": "", "date": "" },
                     "description": "my custom description",
                     "domainExclusions": [],

@@ -28,8 +28,8 @@
                 "triggeredSend": {
                     "autoAddSubscribers": true,
                     "autoUpdateSubscribers": true,
-                    "bccEmail": "%%= ContentBlockByKey(\"testExisting_asset_htmlblock\") =%%",
-                    "ccEmail": "%%= ContentBlockByKey(\"testExisting_asset_htmlblock\") =%%",
+                    "bccEmail": ["%%= ContentBlockByKey(\"testExisting_asset_htmlblock\") =%%"],
+                    "ccEmail": ["%%= ContentBlockByKey(\"testExisting_asset_htmlblock\") =%%"],
                     "created": {},
                     "description": "my activity info text",
                     "dynamicEmailSubject": "testExisting_ dynamic email subject %%= ContentBlockByKey(\"testExisting_asset_htmlblock\") =%%",
