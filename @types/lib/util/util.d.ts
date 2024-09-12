@@ -331,6 +331,13 @@ export namespace Util {
      * @returns {Array} all values of the given key
      */
     function findLeafVals(object: any, key: string): any[];
+    /**
+     * helper that returns a new object with sorted attributes of the given object
+     *
+     * @param {object} obj object with unsorted attributes
+     * @returns {object} obj but with sorted attributes
+     */
+    function sortObjectAttributes(obj: object): object;
 }
 export type AuthObject = import("../../types/mcdev.d.js").AuthObject;
 export type BuObject = import("../../types/mcdev.d.js").BuObject;
