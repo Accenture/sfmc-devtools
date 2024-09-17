@@ -625,5 +625,18 @@ complex
  * @property {number} scale ?
  * @property {string} text seems to be equal to name-attribute?; "Email"
  */
+/**
+ *
+ * @callback validationRuleTest
+ * @returns {boolean} true = test passed; false = test failed
+ */
+/**
+ * @typedef {object} validationRule
+ * @property {string} failedMsg error message to display in case of a failed test
+ * @property {validationRuleTest} passed test to run
+ */
+/**
+ * @typedef {Object.<string, validationRule>} validationRuleList key=rule name
+ */
 
 export default {};
