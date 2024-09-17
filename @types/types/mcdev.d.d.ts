@@ -1705,4 +1705,21 @@ export type FieldCondition = {
      */
     text: string;
 };
+export type validationRuleTest = () => boolean;
+export type validationRule = {
+    /**
+     * error message to display in case of a failed test
+     */
+    failedMsg: string;
+    /**
+     * test to run
+     */
+    passed: validationRuleTest;
+};
+/**
+ * key=rule name
+ */
+export type validationRuleList = {
+    [x: string]: validationRule;
+};
 //# sourceMappingURL=mcdev.d.d.ts.map
