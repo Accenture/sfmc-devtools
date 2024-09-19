@@ -48,6 +48,8 @@
                     "throttleOpens": "1/1/0001 12:00:00 AM",
                     "throttleCloses": "1/1/0001 12:00:00 AM",
                     "isTrackingClicks": true,
+                    "suppressTracking": false,
+                    "triggeredSendStatus": "New",
                     "r__list_PathName": { "publicationList": "my subscribers/All Subscribers" },
                     "r__senderProfile_key": "testExisting_senderProfile",
                     "r__sendClassification_key": "testExisting_sendClassification",
