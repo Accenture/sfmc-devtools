@@ -117,10 +117,9 @@ declare class Folder extends MetadataType {
      *
      * @param {ListMap} results metadata results from deploy
      * @param {string} retrieveDir directory where metadata should be stored after deploy/retrieve
-     * @param {number | string} mid unused parameter
      * @returns {Promise.<ListMap>} Promise of saved metadata
      */
-    static saveResults(results: ListMap, retrieveDir: string, mid: number | string): Promise<ListMap>;
+    static saveResults(results: ListMap, retrieveDir: string): Promise<ListMap>;
 }
 declare namespace Folder {
     let definition: {
