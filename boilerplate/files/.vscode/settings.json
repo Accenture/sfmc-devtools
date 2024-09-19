@@ -1,7 +1,4 @@
 {
-    "workbench.editorAssociations": {
-        "*.md": "vscode.markdown.preview.editor"
-    },
     "explorer.compactFolders": false,
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.expand": false,
