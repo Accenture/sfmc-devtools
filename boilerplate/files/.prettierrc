@@ -22,6 +22,12 @@
                 "functionCase": "upper",
                 "keywordCase": "upper"
             }
+        },
+        {
+            "files": ".mcdev-validations.js",
+            "options": {
+                "trailingComma": "es5"
+            }
         }
     ]
 }
