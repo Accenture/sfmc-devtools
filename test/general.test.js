@@ -61,7 +61,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    38,
+                    39,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -110,7 +110,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    38,
+                    39,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -159,7 +159,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    38,
+                    39,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -231,7 +231,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    86,
+                    87,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -296,7 +296,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    86,
+                    87,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -361,7 +361,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    86,
+                    87,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
