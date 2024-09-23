@@ -52,6 +52,13 @@ declare class SenderProfile extends MetadataType {
      */
     static create(metadataItem: MetadataTypeItem): Promise<any>;
     /**
+     * manages post retrieve steps
+     *
+     * @param {MetadataTypeItem} metadata a single item
+     * @returns {MetadataTypeItem} a single item
+     */
+    static postRetrieveTasks(metadata: MetadataTypeItem): MetadataTypeItem;
+    /**
      * prepares a single item for deployment
      *
      * @param {MetadataTypeItem} metadata a single query activity
@@ -72,9 +79,9 @@ declare namespace SenderProfile {
         maxKeyLength: number;
         nameField: string;
         createdDateField: string;
-        createdNameField: any;
+        createdNameField: string;
         lastmodDateField: string;
-        lastmodNameField: any;
+        lastmodNameField: string;
         restPagination: boolean;
         type: string;
         typeDescription: string;
@@ -82,6 +89,18 @@ declare namespace SenderProfile {
         typeName: string;
         fields: {
             'Client.ID': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'Client.CreatedBy': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'Client.ModifiedBy': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -147,7 +166,7 @@ declare namespace SenderProfile {
                 retrieving: boolean;
                 template: boolean;
             };
-            AutoForwardTriggeredSend: {
+            'AutoForwardTriggeredSend.ObjectID': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -159,7 +178,7 @@ declare namespace SenderProfile {
                 retrieving: boolean;
                 template: boolean;
             };
-            AutoReplyTriggeredSend: {
+            'AutoReplyTriggeredSend.ObjectID': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -183,6 +202,12 @@ declare namespace SenderProfile {
                 retrieving: boolean;
                 template: boolean;
             };
+            FallbackFromAddress: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             FromAddress: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -201,7 +226,13 @@ declare namespace SenderProfile {
                 retrieving: boolean;
                 template: boolean;
             };
-            ReplyManagementRuleSet: {
+            'ReplyManagementRuleSet.ObjectID': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'RMMRuleCollection.ObjectID': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

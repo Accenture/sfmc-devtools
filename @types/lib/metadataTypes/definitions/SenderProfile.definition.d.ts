@@ -10,9 +10,9 @@ declare namespace _default {
     let maxKeyLength: number;
     let nameField: string;
     let createdDateField: string;
-    let createdNameField: any;
+    let createdNameField: string;
     let lastmodDateField: string;
-    let lastmodNameField: any;
+    let lastmodNameField: string;
     let restPagination: boolean;
     let type: string;
     let typeDescription: string;
@@ -20,6 +20,18 @@ declare namespace _default {
     let typeName: string;
     let fields: {
         'Client.ID': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'Client.CreatedBy': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'Client.ModifiedBy': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
@@ -85,7 +97,7 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
-        AutoForwardTriggeredSend: {
+        'AutoForwardTriggeredSend.ObjectID': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
@@ -97,7 +109,7 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
-        AutoReplyTriggeredSend: {
+        'AutoReplyTriggeredSend.ObjectID': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
@@ -121,6 +133,12 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        FallbackFromAddress: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         FromAddress: {
             isCreateable: boolean;
             isUpdateable: boolean;
@@ -139,7 +157,13 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
-        ReplyManagementRuleSet: {
+        'ReplyManagementRuleSet.ObjectID': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'RMMRuleCollection.ObjectID': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
