@@ -133,6 +133,7 @@ declare namespace Journey {
         dependencyGraph: {
             event: string[];
             dataExtension: string[];
+            deliveryProfile: string[];
             list: string[];
             senderProfile: string[];
             sendClassification: string[];
@@ -397,6 +398,12 @@ declare namespace Journey {
                 retrieving: boolean;
                 template: boolean;
             };
+            'activities[].configurationArguments.triggeredSend.deliveryProfileId': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             'activities[].configurationArguments.triggeredSend.r__senderProfile_key': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -404,6 +411,12 @@ declare namespace Journey {
                 template: boolean;
             };
             ' activities[].configurationArguments.triggeredSend.sendClassificationId': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'activities[].configurationArguments.triggeredSend.r__deliveryProfile_key': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

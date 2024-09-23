@@ -5,6 +5,7 @@ declare namespace _default {
     namespace dependencyGraph {
         let event: string[];
         let dataExtension: string[];
+        let deliveryProfile: string[];
         let list: string[];
         let senderProfile: string[];
         let sendClassification: string[];
@@ -269,6 +270,12 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        'activities[].configurationArguments.triggeredSend.deliveryProfileId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         'activities[].configurationArguments.triggeredSend.r__senderProfile_key': {
             isCreateable: boolean;
             isUpdateable: boolean;
@@ -276,6 +283,12 @@ declare namespace _default {
             template: boolean;
         };
         ' activities[].configurationArguments.triggeredSend.sendClassificationId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.triggeredSend.r__deliveryProfile_key': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
