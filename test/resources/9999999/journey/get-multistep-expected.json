@@ -51,6 +51,7 @@
                     "suppressTracking": false,
                     "triggeredSendStatus": "New",
                     "r__list_PathName": { "publicationList": "my subscribers/All Subscribers" },
+                    "r__deliveryProfile_key": "Default",
                     "r__senderProfile_key": "testExisting_senderProfile",
                     "r__sendClassification_key": "testExisting_sendClassification",
                     "c__priority": "Medium",
