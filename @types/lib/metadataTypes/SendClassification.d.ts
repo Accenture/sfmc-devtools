@@ -38,6 +38,12 @@ declare class SendClassification extends MetadataType {
      */
     static retrieve(retrieveDir: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
+     * Retrieves event definition metadata for caching
+     *
+     * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
+     */
+    static retrieveForCache(): Promise<MetadataTypeMapObj>;
+    /**
      * Updates a single item
      *
      * @param {MetadataTypeItem} metadataItem a single item

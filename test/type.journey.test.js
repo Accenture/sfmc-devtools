@@ -46,7 +46,7 @@ describe('type: journey', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                25,
+                26,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -75,7 +75,7 @@ describe('type: journey', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                18,
+                19,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -105,7 +105,7 @@ describe('type: journey', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                18,
+                19,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -131,7 +131,7 @@ describe('type: journey', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                21,
+                22,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -160,7 +160,7 @@ describe('type: journey', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                18,
+                19,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -189,7 +189,7 @@ describe('type: journey', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                19,
+                20,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -258,7 +258,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                25,
+                26,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -445,7 +445,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                31,
+                32,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -480,7 +480,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                31,
+                32,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -515,7 +515,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                31,
+                32,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -581,7 +581,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                33,
+                34,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
