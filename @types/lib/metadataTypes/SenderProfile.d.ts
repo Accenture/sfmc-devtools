@@ -52,6 +52,13 @@ declare class SenderProfile extends MetadataType {
      */
     static create(metadataItem: MetadataTypeItem): Promise<any>;
     /**
+     * manages post retrieve steps
+     *
+     * @param {MetadataTypeItem} metadata a single item
+     * @returns {MetadataTypeItem} a single item
+     */
+    static postRetrieveTasks(metadata: MetadataTypeItem): MetadataTypeItem;
+    /**
      * prepares a single item for deployment
      *
      * @param {MetadataTypeItem} metadata a single query activity
@@ -62,7 +69,7 @@ declare class SenderProfile extends MetadataType {
 declare namespace SenderProfile {
     let definition: {
         bodyIteratorField: string;
-        dependencies: any[];
+        dependencies: string[];
         dependencyGraph: any;
         filter: {};
         hasExtended: boolean;
@@ -72,9 +79,9 @@ declare namespace SenderProfile {
         maxKeyLength: number;
         nameField: string;
         createdDateField: string;
-        createdNameField: any;
+        createdNameField: string;
         lastmodDateField: string;
-        lastmodNameField: any;
+        lastmodNameField: string;
         restPagination: boolean;
         type: string;
         typeDescription: string;
@@ -82,6 +89,18 @@ declare namespace SenderProfile {
         typeName: string;
         fields: {
             'Client.ID': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'Client.CreatedBy': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'Client.ModifiedBy': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
