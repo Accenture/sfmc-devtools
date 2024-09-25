@@ -201,9 +201,9 @@ declare namespace Script {
         nameField: string;
         folderIdField: string;
         createdDateField: string;
-        createdNameField: string;
+        createdNameField: any;
         lastmodDateField: string;
-        lastmodNameField: string;
+        lastmodNameField: any;
         restPagination: boolean;
         type: string;
         typeDescription: string;
