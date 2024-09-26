@@ -1,6 +1,6 @@
 declare namespace _default {
     let bodyIteratorField: string;
-    let dependencies: any[];
+    let dependencies: string[];
     let dependencyGraph: any;
     let filter: {};
     let hasExtended: boolean;
@@ -10,9 +10,9 @@ declare namespace _default {
     let maxKeyLength: number;
     let nameField: string;
     let createdDateField: string;
-    let createdNameField: any;
+    let createdNameField: string;
     let lastmodDateField: string;
-    let lastmodNameField: any;
+    let lastmodNameField: string;
     let restPagination: boolean;
     let type: string;
     let typeDescription: string;
@@ -23,6 +23,30 @@ declare namespace _default {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
+            template: boolean;
+        };
+        'Client.CreatedBy': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'Client.ModifiedBy': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        createdBy: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: any;
+            template: boolean;
+        };
+        modifiedBy: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: any;
             template: boolean;
         };
         CreatedDate: {

@@ -40,6 +40,7 @@ export type AccountUserConfiguration = import("../../types/mcdev.d.js").AccountU
  */
 declare class User extends MetadataType {
     static userBUassignments: any;
+    static userIdBuMap: any;
     /**
      * Retrieves SOAP based metadata of metadata type into local filesystem. executes callback with retrieved metadata
      *
@@ -89,6 +90,7 @@ declare class User extends MetadataType {
      */
     static createOrUpdate(metadata: MetadataTypeMap, metadataKey: string, hasError: boolean, metadataToUpdate: UserDocumentDiff[], metadataToCreate: UserDocument[]): Promise<"create" | "update" | "skip">;
     /**
+     * helper for {@link createOrUpdate}
      *
      * @private
      * @param {MetadataTypeItem} metadata single metadata itme
@@ -104,7 +106,7 @@ declare class User extends MetadataType {
      */
     static postDeployTasks(upsertResults: UserDocumentMap): Promise<void>;
     /**
-     * create/update business unit assignments
+     * create/update business unit assignments. helper for {@link postDeployTasks}
      *
      * @private
      * @param {UserDocumentMap} upsertResults metadata mapped by their keyField
@@ -165,6 +167,13 @@ declare class User extends MetadataType {
      * @returns {Promise.<MetadataTypeMapObj>} Promise of item map
      */
     static retrieveSOAP(retrieveDir: string, requestParams?: SoapRequestParams, singleRetrieve?: string, additionalFields?: string[]): Promise<MetadataTypeMapObj>;
+    /**
+     * helper for {@link retrieveSOAP} and {@link upsert}; populates userIdBuMap
+     *
+     * @param {MetadataTypeItem[]} [metadataList] -
+     * @returns {Promise.<void>} -
+     */
+    static cacheBusinessUnitAssignments(metadataList?: MetadataTypeItem[]): Promise<void>;
     /**
      * helper for {@link User.retrieveSOAP}
      *
@@ -231,7 +240,6 @@ declare class User extends MetadataType {
     static postRetrieveTasks(metadata: UserDocument): MetadataTypeItem | void;
 }
 declare namespace User {
-    let userIdBuMap: {};
     let buIdName: {};
     let definition: {
         bodyIteratorField: string;

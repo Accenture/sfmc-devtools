@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:18989827-614e-4b4b-833a-ca06d03565a3</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:84c999df-4607-4423-8f68-77a0ebf4db2f</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-7515cb13-8659-4ef9-86ba-b67d78e3e566">
+                <wsu:Created>2024-09-25T16:43:14Z</wsu:Created>
+                <wsu:Expires>2024-09-25T16:48:14Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>f346a727-d497-4f83-9559-77854ecf0be3</RequestID>
+            <Results xsi:type="AccountUser">
+                <Client>
+                    <ID>9999999</ID>
+                    <ModifiedBy>700301950</ModifiedBy>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2024-03-06T07:46:36.397</CreatedDate>
+                <ModifiedDate>2024-09-04T06:41:51.233</ModifiedDate>
+                <ID>700301950</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>99b4a407-0efa-4f9e-9dd5-af7ace87e634</CustomerKey>
+                <AccountUserID>700301950</AccountUserID>
+                <UserID>joern.berkefeld@accenture.com</UserID>
+                <Name>Jörn Berkefeld</Name>
+                <Email>joern.berkefeld@accenture.com</Email>
+                <MustChangePassword>false</MustChangePassword>
+                <ActiveFlag>true</ActiveFlag>
+                <Delete>0</Delete>
+                <LastSuccessfulLogin>2024-09-25T09:07:52.743</LastSuccessfulLogin>
+                <IsAPIUser>false</IsAPIUser>
+                <NotificationEmailAddress>joern.berkefeld@accenture.com</NotificationEmailAddress>
+                <IsLocked>false</IsLocked>
+                <DefaultBusinessUnit>510007949</DefaultBusinessUnit>
+                <Locale>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <LocaleCode>en-US</LocaleCode>
+                </Locale>
+                <TimeZone>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>5</ID>
+                    <ObjectID xsi:nil="true" />
+                    <Name>(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna</Name>
+                </TimeZone>
+                <DefaultBusinessUnitObject>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>9999999</ID>
+                    <ObjectID xsi:nil="true" />
+                    <AccountType>None</AccountType>
+                    <Subscription xsi:nil="true" />
+                </DefaultBusinessUnitObject>
+                <Roles>
+                    <Role>
+                        <Client>
+                            <ID>9999999</ID>
+                            <CreatedBy>500000009</CreatedBy>
+                            <ModifiedBy>500000009</ModifiedBy>
+                            <EnterpriseID>9999999</EnterpriseID>
+                        </Client>
+                        <PartnerKey xsi:nil="true" />
+                        <CreatedDate>2021-06-21T17:55:14.7</CreatedDate>
+                        <ModifiedDate>2021-06-21T17:55:14.7</ModifiedDate>
+                        <ObjectID>f35c8ecf-b9d2-eb11-b83e-f40343c95998</ObjectID>
+                        <CustomerKey>SYS_DEF_ADMIN</CustomerKey>
+                        <Name>Administrator</Name>
+                        <Description>Administrator</Description>
+                        <IsPrivate>false</IsPrivate>
+                        <IsSystemDefined>true</IsSystemDefined>
+                    </Role>
+                    <Role>
+                        <Client>
+                            <ID>0</ID>
+                            <CreatedBy>0</CreatedBy>
+                            <ModifiedBy>0</ModifiedBy>
+                            <EnterpriseID>0</EnterpriseID>
+                        </Client>
+                        <PartnerKey xsi:nil="true" />
+                        <CreatedDate>2012-02-21T02:09:19.983</CreatedDate>
+                        <ModifiedDate>2013-12-23T16:48:50.533</ModifiedDate>
+                        <ObjectID>63a50610-315c-e111-beee-8e001800001f</ObjectID>
+                        <CustomerKey>SYS_DEF_IMHADMIN</CustomerKey>
+                        <Name>Marketing Cloud Administrator</Name>
+                        <Description>Assign Marketing Cloud roles to users and manage Mobile, Social and Sites Channels, Hub Apps and Marketing Cloud Tools</Description>
+                        <IsPrivate>false</IsPrivate>
+                        <IsSystemDefined>true</IsSystemDefined>
+                    </Role>
+                </Roles>
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>

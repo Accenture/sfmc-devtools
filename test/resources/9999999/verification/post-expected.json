@@ -1,4 +1,5 @@
 {
+    "createdBy": "Jörn Berkefeld",
     "dataVerificationDefinitionId": "testNew_RANDOM_NEW_GUID",
     "r__dataExtension_key": "testExisting_dataExtension",
     "verificationType": "IsEqualTo",

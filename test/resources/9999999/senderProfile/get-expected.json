@@ -12,5 +12,7 @@
     "DirectForward": false,
     "AutoReply": false,
     "SenderHeaderEmailAddress": "",
-    "SenderHeaderName": ""
+    "SenderHeaderName": "",
+    "createdBy": "Jörn Berkefeld",
+    "modifiedBy": "Jörn Berkefeld"
 }

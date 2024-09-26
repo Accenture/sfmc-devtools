@@ -3,9 +3,9 @@
     "name": "testExisting_event",
     "description": "",
     "createdDate": "2024-07-05T06:12:24.227",
-    "createdBy": 700304523,
+    "createdBy": "Jörn Berkefeld",
     "modifiedDate": "2024-07-05T08:01:55.4",
-    "modifiedBy": 700304523,
+    "modifiedBy": "Jörn Berkefeld",
     "eventDefinitionKey": "testExisting_event",
     "schema": {
         "fields": [

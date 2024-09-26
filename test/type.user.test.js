@@ -132,7 +132,7 @@ describe('type: user', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                9,
+                8,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -165,7 +165,7 @@ describe('type: user', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                6,
+                5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
