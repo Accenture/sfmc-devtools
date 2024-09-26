@@ -22,6 +22,10 @@
             <OverallStatus>OK</OverallStatus>
             <RequestID>4c6f37a1-7ab4-47a1-b341-f9912462ee97</RequestID>
             <Results xsi:type="SenderProfile">
+                <Client>
+                    <CreatedBy>700301950</CreatedBy>
+                    <ModifiedBy>700301950</ModifiedBy>
+                </Client>
                 <PartnerKey xsi:nil="true" />
                 <CreatedDate>2016-07-22T11:53:00</CreatedDate>
                 <ModifiedDate>2016-07-22T11:53:00</ModifiedDate>
@@ -38,6 +42,7 @@
                 <AutoReply>false</AutoReply>
                 <SenderHeaderEmailAddress />
                 <SenderHeaderName />
+                <FallbackFromAddress />
             </Results>
         </RetrieveResponseMsg>
     </soap:Body>
