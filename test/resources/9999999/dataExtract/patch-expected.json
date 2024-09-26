@@ -1,5 +1,5 @@
 {
-    "createdBy": 700304523,
+    "createdBy": "Jörn Berkefeld",
     "dataFields": [
         {
             "name": "ColumnDelimiter",
@@ -31,7 +31,7 @@
     "fileSpec": "testExisting-%%Year%%-%%Month%%-%%Day%%",
     "intervalType": 0,
     "key": "testExisting_dataExtract",
-    "modifiedBy": 700304523,
+    "modifiedBy": "Jörn Berkefeld",
     "name": "testExisting_dataExtract",
     "r__dataExtractType_name": "Data Extension Extract"
 }

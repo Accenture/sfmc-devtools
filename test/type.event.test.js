@@ -37,7 +37,7 @@ describe('type: event', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                4,
+                7,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -116,7 +116,7 @@ describe('type: event', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                14,
+                17,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -162,7 +162,7 @@ describe('type: event', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                5,
+                8,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -198,7 +198,7 @@ describe('type: event', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                5,
+                8,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -271,7 +271,7 @@ describe('type: event', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                4,
+                7,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -317,7 +317,7 @@ describe('type: event', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                4,
+                7,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

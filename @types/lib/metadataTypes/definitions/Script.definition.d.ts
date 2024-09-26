@@ -10,9 +10,9 @@ declare namespace _default {
     let nameField: string;
     let folderIdField: string;
     let createdDateField: string;
-    let createdNameField: string;
+    let createdNameField: any;
     let lastmodDateField: string;
-    let lastmodNameField: string;
+    let lastmodNameField: any;
     let restPagination: boolean;
     let type: string;
     let typeDescription: string;

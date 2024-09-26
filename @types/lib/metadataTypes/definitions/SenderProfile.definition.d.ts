@@ -1,6 +1,6 @@
 declare namespace _default {
     let bodyIteratorField: string;
-    let dependencies: any[];
+    let dependencies: string[];
     let dependencyGraph: any;
     let filter: {};
     let hasExtended: boolean;
@@ -35,6 +35,18 @@ declare namespace _default {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
+            template: boolean;
+        };
+        createdBy: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: any;
+            template: boolean;
+        };
+        modifiedBy: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: any;
             template: boolean;
         };
         CreatedDate: {

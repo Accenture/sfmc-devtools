@@ -69,7 +69,7 @@ declare class SenderProfile extends MetadataType {
 declare namespace SenderProfile {
     let definition: {
         bodyIteratorField: string;
-        dependencies: any[];
+        dependencies: string[];
         dependencyGraph: any;
         filter: {};
         hasExtended: boolean;
@@ -104,6 +104,18 @@ declare namespace SenderProfile {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
+                template: boolean;
+            };
+            createdBy: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: any;
+                template: boolean;
+            };
+            modifiedBy: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: any;
                 template: boolean;
             };
             CreatedDate: {
