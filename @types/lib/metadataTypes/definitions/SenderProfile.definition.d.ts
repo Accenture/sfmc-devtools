@@ -37,6 +37,18 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        createdBy: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: any;
+            template: boolean;
+        };
+        modifiedBy: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: any;
+            template: boolean;
+        };
         CreatedDate: {
             isCreateable: boolean;
             isUpdateable: boolean;
