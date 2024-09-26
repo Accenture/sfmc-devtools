@@ -178,7 +178,7 @@ declare namespace SenderProfile {
                 retrieving: boolean;
                 template: boolean;
             };
-            AutoForwardTriggeredSend: {
+            'AutoForwardTriggeredSend.ObjectID': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -190,7 +190,7 @@ declare namespace SenderProfile {
                 retrieving: boolean;
                 template: boolean;
             };
-            AutoReplyTriggeredSend: {
+            'AutoReplyTriggeredSend.ObjectID': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -214,6 +214,12 @@ declare namespace SenderProfile {
                 retrieving: boolean;
                 template: boolean;
             };
+            FallbackFromAddress: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             FromAddress: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -232,7 +238,13 @@ declare namespace SenderProfile {
                 retrieving: boolean;
                 template: boolean;
             };
-            ReplyManagementRuleSet: {
+            'ReplyManagementRuleSet.ObjectID': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'RMMRuleCollection.ObjectID': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

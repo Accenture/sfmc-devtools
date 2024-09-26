@@ -38,6 +38,7 @@
                     <AutoReply>false</AutoReply>
                     <SenderHeaderEmailAddress />
                     <SenderHeaderName />
+                    <FallbackFromAddress />
                 </Object>
             </Results>
             <RequestID>ef6e2933-b767-47ea-a1c4-d3dc44674a56</RequestID>
