@@ -2,7 +2,6 @@
     "name": "testNew_temail",
     "definitionKey": "testNew_temail",
     "description": "created on deploy",
-    "classification": "Default Transactional",
     "status": "Active",
     "createdDate": "2022-12-06T06:08:00",
     "modifiedDate": "2022-12-06T06:08:00",
@@ -16,5 +15,6 @@
         "trackLinks": true
     },
     "r__asset_key": "testExisting_asset_message",
-    "r__journey_key": "testNew_RANDOM_interaction"
+    "r__journey_key": "testNew_RANDOM_interaction",
+    "r__sendClassification_key": "Default Transactional"
 }
