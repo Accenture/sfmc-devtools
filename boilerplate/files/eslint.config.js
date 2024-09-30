@@ -66,6 +66,24 @@ export default [
         }
     },
     {
+        files: ['.mcdev-validations.js'],
+
+        languageOptions: {
+            globals: {
+                ...globals.nodeBuiltin
+            },
+
+            ecmaVersion: 2022,
+            sourceType: 'module'
+        },
+
+        rules: {
+            'no-var': 'error',
+            'prefer-const': 'error',
+            'prettier/prettier': 'warn'
+        }
+    },
+    {
         files: ['eslint.config.js'],
 
         languageOptions: {

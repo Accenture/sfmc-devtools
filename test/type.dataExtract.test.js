@@ -36,7 +36,7 @@ describe('type: dataExtract', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                3,
+                6,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -76,7 +76,7 @@ describe('type: dataExtract', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                5,
+                8,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -120,7 +120,7 @@ describe('type: dataExtract', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                3,
+                6,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -162,7 +162,7 @@ describe('type: dataExtract', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                3,
+                6,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

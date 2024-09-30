@@ -53,6 +53,7 @@
                     "r__dataExtension_key": {
                         "domainExclusions": ["testTemplated_DomainExclusion"]
                     },
+                    "r__deliveryProfile_key": "Default",
                     "r__senderProfile_key": "testTemplated_senderProfile",
                     "r__sendClassification_key": "testTemplated_sendClassification",
                     "c__priority": "High",

@@ -32,12 +32,12 @@
                 <Description>Default Commercial Send Classification</Description>
                 <SenderProfile>
                     <PartnerKey xsi:nil="true" />
-                    <ObjectID xsi:nil="true" />
+                    <ObjectID>7acfb80f-3550-e611-96fe-38eaa7142c61</ObjectID>
                     <CustomerKey>Default</CustomerKey>
                 </SenderProfile>
                 <DeliveryProfile>
                     <PartnerKey xsi:nil="true" />
-                    <ObjectID xsi:nil="true" />
+                    <ObjectID>163f8417-13f7-e911-a2d8-1402ec938a35</ObjectID>
                     <CustomerKey>Default</CustomerKey>
                 </DeliveryProfile>
             </Results>
@@ -57,7 +57,7 @@
                 </SenderProfile>
                 <DeliveryProfile>
                     <PartnerKey xsi:nil="true" />
-                    <ObjectID xsi:nil="true" />
+                    <ObjectID>163f8417-13f7-e911-a2d8-1402ec938a35</ObjectID>
                     <CustomerKey>Default</CustomerKey>
                 </DeliveryProfile>
             </Results>
@@ -77,7 +77,7 @@
                 </SenderProfile>
                 <DeliveryProfile>
                     <PartnerKey xsi:nil="true" />
-                    <ObjectID xsi:nil="true" />
+                    <ObjectID>163f8417-13f7-e911-a2d8-1402ec938a35</ObjectID>
                     <CustomerKey>Default</CustomerKey>
                 </DeliveryProfile>
             </Results>

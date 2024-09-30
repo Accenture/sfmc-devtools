@@ -1,4 +1,5 @@
 {
+    "FallbackFromAddress": "",
     "AutoForwardToEmailAddress": "joern.berkefeld@accenture.com",
     "AutoForwardToName": "Jörn Berkefeld",
     "AutoReply": false,
