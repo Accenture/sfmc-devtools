@@ -6,6 +6,7 @@ declare namespace _default {
         let dataExtension: string[];
         let list: string[];
         let journey: string[];
+        let sendClassification: string[];
     }
     let hasExtended: boolean;
     let idField: string;
@@ -162,6 +163,12 @@ declare namespace _default {
             template: boolean;
         };
         r__journey_key: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        r__sendClassification_key: {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
