@@ -71,6 +71,12 @@ declare class SendClassification extends MetadataType {
      * @returns {MetadataTypeItem} parsed metadata
      */
     static postRetrieveTasks(metadata: MetadataTypeItem): MetadataTypeItem;
+    /**
+     * this is the only known way to get the object ID for a deliveryProfile
+     *
+     * @param {MetadataTypeItem} metadata a single sendClassification item
+     */
+    static updateDeliveryProfileIdInCache(metadata: MetadataTypeItem): void;
 }
 declare namespace SendClassification {
     let definition: {
