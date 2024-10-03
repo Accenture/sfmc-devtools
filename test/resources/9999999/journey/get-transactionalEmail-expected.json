@@ -46,8 +46,8 @@
                     "isTrackingClicks": true,
                     "r__list_PathName": { "publicationList": "my subscribers/All Subscribers" },
                     "r__deliveryProfile_key": "Default",
-                    "r__senderProfile_key": "testExisting_senderProfile",
-                    "r__sendClassification_key": "testExisting_sendClassification",
+                    "r__senderProfile_key": "Default",
+                    "r__sendClassification_key": "Default Transactional",
                     "c__priority": "Medium",
                     "r__asset_name_readOnly": "testExisting_asset_message",
                     "r__asset_key": "testExisting_asset_message"

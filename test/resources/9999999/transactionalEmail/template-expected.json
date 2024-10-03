@@ -2,7 +2,6 @@
     "name": "{{{prefix}}}temail",
     "definitionKey": "{{{prefix}}}temail",
     "description": "{{{description}}}",
-    "classification": "Default Transactional",
     "status": "Active",
     "subscriptions": {
         "r__dataExtension_key": "{{{prefix}}}dataExtension",
@@ -14,5 +13,6 @@
         "trackLinks": true
     },
     "r__asset_key": "{{{prefix}}}asset_message",
-    "r__journey_key": "{{{prefix}}}temail"
+    "r__journey_key": "{{{prefix}}}temail",
+    "r__sendClassification_key": "Default Transactional"
 }

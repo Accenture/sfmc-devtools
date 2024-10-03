@@ -18,14 +18,17 @@
         },
         "validation": {
             "retrieve": {
+                "noAmpscriptHtmlTag": "warn",
                 "noGuidKeys": "warn",
                 "noRootFolder": "warn"
             },
             "buildDefinition": {
+                "noAmpscriptHtmlTag": "warn",
                 "noGuidKeys": "warn",
                 "noRootFolder": "warn"
             },
             "deploy": {
+                "noAmpscriptHtmlTag": "warn",
                 "noGuidKeys": "warn",
                 "noRootFolder": "warn",
                 "overrides": [

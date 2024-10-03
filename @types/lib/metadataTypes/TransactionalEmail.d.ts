@@ -68,6 +68,7 @@ declare namespace TransactionalEmail {
             dataExtension: string[];
             list: string[];
             journey: string[];
+            sendClassification: string[];
         };
         hasExtended: boolean;
         idField: string;
@@ -224,6 +225,12 @@ declare namespace TransactionalEmail {
                 template: boolean;
             };
             r__journey_key: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            r__sendClassification_key: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
