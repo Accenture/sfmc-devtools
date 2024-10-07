@@ -108,7 +108,7 @@
         "eslint-plugin-jsdoc": "50.2.4",
         "eslint-plugin-mocha": "10.5.0",
         "eslint-plugin-prettier": "5.2.1",
-        "eslint-plugin-unicorn": "55.0.0",
+        "eslint-plugin-unicorn": "56.0.0",
         "fast-xml-parser": "4.4.1",
         "globals": "15.9.0",
         "husky": "9.1.6",
