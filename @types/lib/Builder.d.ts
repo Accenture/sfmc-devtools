@@ -46,9 +46,10 @@ declare class Builder {
      * @param {string} selectedType supported metadata type
      * @param {string[]} nameArr name of the metadata
      * @param {string[]} marketArr market localizations
+     * @param {boolean} [isPurgeDeployFolder] whether to purge the deploy folder
      * @returns {Promise.<MultiMetadataTypeList>} -
      */
-    static buildDefinition(businessUnit: string, selectedType: string, nameArr: string[], marketArr: string[]): Promise<MultiMetadataTypeList>;
+    static buildDefinition(businessUnit: string, selectedType: string, nameArr: string[], marketArr: string[], isPurgeDeployFolder?: boolean): Promise<MultiMetadataTypeList>;
     /**
      * Build a specific metadata file based on a template using a list of bu-market combos
      *
