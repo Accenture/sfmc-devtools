@@ -212,7 +212,43 @@ declare namespace Journey {
                 retrieving: boolean;
                 template: boolean;
             };
+            'activities[].configurationArguments.triggeredSendKey': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'activities[].configurationArguments.triggeredSendId': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             'activities[].configurationArguments.triggeredSend': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'activities[].configurationArguments.triggeredSend.id': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'activities[].configurationArguments.triggeredSend.key': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'activities[].configurationArguments.triggeredSend.campaigns': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'activities[].configurationArguments.triggeredSend.suppressionLists': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -870,10 +906,7 @@ declare namespace Journey {
                 template: boolean;
             };
             'triggers[].configurationArguments.eventDataConfig': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
+                skipValidation: boolean;
             };
             'triggers[].configurationArguments.primaryObjectFilterCriteria': {
                 skipValidation: boolean;
