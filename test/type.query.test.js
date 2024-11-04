@@ -373,22 +373,26 @@ describe('type: query', () => {
 
             assert.equal(
                 upsertCallout?.key,
-                'testExisting_query_fixedKeys_DEV',
+                'testExisting_query_fixedKeysSuff_DEV',
                 'key in create callout was not as expected'
             );
             assert.equal(
                 Object.keys(deployed['testInstance/testBU'].query)[0],
-                'testExisting_query_fixedKeys_DEV',
+                'testExisting_query_fixedKeysSuff_DEV',
                 'returned keys do not correspond to expected fixed keys'
             );
             // confirm updated item
             assert.deepEqual(
-                await testUtils.getActualJson('testExisting_query_fixedKeys_DEV', 'query'),
+                await testUtils.getActualJson('testExisting_query_fixedKeysSuff_DEV', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'patch_fixKeysSuffix'),
                 'returned metadata was not equal expected for update query'
             );
             expect(
-                await testUtils.getActualFile('testExisting_query_fixedKeys_DEV', 'query', 'sql')
+                await testUtils.getActualFile(
+                    'testExisting_query_fixedKeysSuff_DEV',
+                    'query',
+                    'sql'
+                )
             ).to.equal(
                 await testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeysSuffix', 'sql')
             );
@@ -532,7 +536,7 @@ describe('type: query', () => {
             const upsertCallout = testUtils.getRestCallout('patch', '/automation/v1/queries/%');
             assert.equal(
                 upsertCallout?.key,
-                'testExisting_query_fixedKeys_DEV',
+                'testExisting_query_fixedKeysSuff_DEV',
                 'key in create callout was not as expected'
             );
 
@@ -543,17 +547,21 @@ describe('type: query', () => {
             );
             assert.equal(
                 resultFixKeys['testInstance/testBU']['query'][0],
-                'testExisting_query_fixedKeys_DEV',
+                'testExisting_query_fixedKeysSuff_DEV',
                 'returned keys do not correspond to expected fixed keys'
             );
             // confirm updated item
             assert.deepEqual(
-                await testUtils.getActualJson('testExisting_query_fixedKeys_DEV', 'query'),
+                await testUtils.getActualJson('testExisting_query_fixedKeysSuff_DEV', 'query'),
                 await testUtils.getExpectedJson('9999999', 'query', 'patch_fixKeysSuffix'),
                 'returned metadata was not equal expected for update query'
             );
             expect(
-                await testUtils.getActualFile('testExisting_query_fixedKeys_DEV', 'query', 'sql')
+                await testUtils.getActualFile(
+                    'testExisting_query_fixedKeysSuff_DEV',
+                    'query',
+                    'sql'
+                )
             ).to.equal(
                 await testUtils.getExpectedFile('9999999', 'query', 'patch_fixKeysSuffix', 'sql')
             );
