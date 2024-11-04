@@ -196,17 +196,6 @@ declare class Asset extends MetadataType {
      */
     static "__#3@#getMainSubtype"(extendedSubType: string): string;
     /**
-     * helper to find a new unique name during asset creation
-     *
-     * @private
-     * @param {string} key key of the asset
-     * @param {string} name name of the asset
-     * @param {string} type assetType-name
-     * @param {{ type: string; key: string; name: any; }[]} namesInFolder names of the assets in the same folder
-     * @returns {string} new name
-     */
-    private static _findUniqueName;
-    /**
      * determines the subtype of the current asset
      *
      * @private
