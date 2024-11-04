@@ -264,7 +264,8 @@ declare namespace _default {
     export let typeDescription: string;
     export let typeRetrieveByDefault: boolean;
     export let typeName: string;
-    export let manualDeployTypes: string[];
+    export let customDeployTypes: string[];
+    export let manualDeployTypes: any[];
     export let fields: {
         categoryId: {
             isCreateable: boolean;
