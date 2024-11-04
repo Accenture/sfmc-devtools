@@ -856,6 +856,12 @@ declare namespace Automation {
             'steps[].activities[].r__key': {
                 skipValidation: boolean;
             };
+            'steps[].activities[].timeZone': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             'steps[].description': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
