@@ -74,7 +74,7 @@ declare class Automation extends MetadataType {
      * @param {MetadataTypeMap} metadataMap keyField => metadata map
      * @returns {Promise.<object>} Promise of automation legacy api response
      */
-    static "__#4@#getAutomationNotificationsREST"(metadataMap: MetadataTypeMap): Promise<object>;
+    static "__#4@#getAutomationLegacyREST"(metadataMap: MetadataTypeMap): Promise<object>;
     /**
      * Retrieves Metadata of Automation
      *
