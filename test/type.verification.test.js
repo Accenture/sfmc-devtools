@@ -47,7 +47,7 @@ describe('type: verification', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                12,
+                13,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -97,7 +97,7 @@ describe('type: verification', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                14,
+                15,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -147,7 +147,7 @@ describe('type: verification', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                12,
+                13,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
