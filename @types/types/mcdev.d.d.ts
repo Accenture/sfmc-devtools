@@ -640,6 +640,10 @@ export type AutomationActivity = {
      */
     name?: string;
     /**
+     * used by wait activity if a specific time of day was set
+     */
+    timeZone?: string;
+    /**
      * Id of assoicated activity type; see this.definition.activityTypeMapping
      */
     objectTypeId?: number;
