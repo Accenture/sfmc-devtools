@@ -64,7 +64,7 @@
             "name": "",
             "activities": [
                 {
-                    "name": "03:00 PM",
+                    "name": "15:00",
                     "timeZone": "GMT Standard Time",
                     "r__type": "wait"
                 }
