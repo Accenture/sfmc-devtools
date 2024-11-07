@@ -264,7 +264,8 @@ declare namespace _default {
     export let typeDescription: string;
     export let typeRetrieveByDefault: boolean;
     export let typeName: string;
-    export let manualDeployTypes: string[];
+    export let customDeployTypes: string[];
+    export let manualDeployTypes: any[];
     export let fields: {
         categoryId: {
             isCreateable: boolean;
@@ -574,6 +575,12 @@ declare namespace _default {
         };
         'steps[].activities[].r__key': {
             skipValidation: boolean;
+        };
+        'steps[].activities[].timeZone': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
         };
         'steps[].description': {
             isCreateable: boolean;

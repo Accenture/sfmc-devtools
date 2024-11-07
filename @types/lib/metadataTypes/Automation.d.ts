@@ -74,7 +74,7 @@ declare class Automation extends MetadataType {
      * @param {MetadataTypeMap} metadataMap keyField => metadata map
      * @returns {Promise.<object>} Promise of automation legacy api response
      */
-    static "__#4@#getAutomationNotificationsREST"(metadataMap: MetadataTypeMap): Promise<object>;
+    static "__#4@#getAutomationLegacyREST"(metadataMap: MetadataTypeMap): Promise<object>;
     /**
      * Retrieves Metadata of Automation
      *
@@ -544,7 +544,8 @@ declare namespace Automation {
         typeDescription: string;
         typeRetrieveByDefault: boolean;
         typeName: string;
-        manualDeployTypes: string[];
+        customDeployTypes: string[];
+        manualDeployTypes: any[];
         fields: {
             categoryId: {
                 isCreateable: boolean;
@@ -854,6 +855,12 @@ declare namespace Automation {
             };
             'steps[].activities[].r__key': {
                 skipValidation: boolean;
+            };
+            'steps[].activities[].timeZone': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
             };
             'steps[].description': {
                 isCreateable: boolean;

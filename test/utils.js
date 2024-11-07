@@ -5,6 +5,8 @@ import { axiosInstance } from '../node_modules/sfmc-sdk/lib/util.js';
 import handler from '../lib/index.js';
 import auth from '../lib/util/auth.js';
 import { Util } from '../lib/util/util.js';
+import ReplaceContentBlockReference from '../lib/util/replaceContentBlockReference.js';
+
 import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -286,6 +288,8 @@ export function mockReset() {
             delete Util.OPTIONS[key];
         }
     }
+    // avoid spillover from other tests
+    ReplaceContentBlockReference.resetCacheMap();
     // reset sfmc login
     auth.clearSessions();
     fsmock.restore();

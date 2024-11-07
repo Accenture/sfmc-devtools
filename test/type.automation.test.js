@@ -27,8 +27,8 @@ describe('type: automation', () => {
             const result = cache.getCache();
             assert.equal(
                 result.automation ? Object.keys(result.automation).length : 0,
-                4,
-                'only four automations expected'
+                5,
+                'unexpected number of automations'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_automation', 'automation'),
@@ -45,9 +45,20 @@ describe('type: automation', () => {
                     'md'
                 )
             );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_automation_wait', 'automation'),
+                await testUtils.getExpectedJson('9999999', 'automation', 'retrieve-wait'),
+
+                'returned metadata was not equal expected'
+            );
+            expect(
+                await testUtils.getActualDoc('testExisting_automation_wait', 'automation')
+            ).to.equal(
+                await testUtils.getExpectedFile('9999999', 'automation', 'retrieve-wait', 'md')
+            );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                22,
+                25,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -82,8 +93,8 @@ describe('type: automation', () => {
             const cacheResult = cache.getCache();
             assert.equal(
                 cacheResult.automation ? Object.keys(cacheResult.automation).length : 0,
-                5,
-                'three automations expected'
+                6,
+                'unexpected number of automations in cache'
             );
             // get what was sent to the server API
             const createCallout = testUtils.getRestCallout('post', '/automation/v1/automations/%');
@@ -133,7 +144,7 @@ describe('type: automation', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                32,
+                33,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -158,8 +169,8 @@ describe('type: automation', () => {
             const cached = cache.getCache();
             assert.equal(
                 cached.automation ? Object.keys(cached.automation).length : 0,
-                5,
-                'five cached automation expected'
+                6,
+                'unexpected number of automations in cache'
             );
 
             assert.equal(
@@ -201,7 +212,7 @@ describe('type: automation', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                40,
+                41,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -226,8 +237,8 @@ describe('type: automation', () => {
             const cached = cache.getCache();
             assert.equal(
                 cached.automation ? Object.keys(cached.automation).length : 0,
-                5,
-                'five cached automation expected'
+                6,
+                'unexpected number of automations in cache'
             );
             assert.equal(
                 deployed['testInstance/testBU'].automation
@@ -268,7 +279,7 @@ describe('type: automation', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                36,
+                37,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -307,7 +318,7 @@ describe('type: automation', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                22,
+                23,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -351,7 +362,7 @@ describe('type: automation', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                48,
+                50,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -395,7 +406,7 @@ describe('type: automation', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                50,
+                52,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -439,7 +450,7 @@ describe('type: automation', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                51,
+                53,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -483,7 +494,7 @@ describe('type: automation', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                43,
+                45,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -527,7 +538,7 @@ describe('type: automation', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                49,
+                51,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -571,7 +582,7 @@ describe('type: automation', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                51,
+                53,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -615,7 +626,7 @@ describe('type: automation', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                24,
+                25,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -659,7 +670,7 @@ describe('type: automation', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                22,
+                25,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -668,7 +679,7 @@ describe('type: automation', () => {
         it('Should create a automation template via buildTemplate with --dependencies', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU');
-            const expectedApiCallsRetrieve = 84;
+            const expectedApiCallsRetrieve = 87;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 expectedApiCallsRetrieve,
