@@ -2,6 +2,7 @@ declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: string[];
     namespace dependencyGraph {
+        let automation: string[];
         let dataExtension: string[];
     }
     let hasExtended: boolean;

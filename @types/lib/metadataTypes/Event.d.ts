@@ -176,6 +176,7 @@ declare namespace Event {
         bodyIteratorField: string;
         dependencies: string[];
         dependencyGraph: {
+            automation: string[];
             dataExtension: string[];
         };
         hasExtended: boolean;
