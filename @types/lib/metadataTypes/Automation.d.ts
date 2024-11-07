@@ -544,8 +544,7 @@ declare namespace Automation {
         typeDescription: string;
         typeRetrieveByDefault: boolean;
         typeName: string;
-        customDeployTypes: string[];
-        manualDeployTypes: any[];
+        manualDeployTypes: string[];
         fields: {
             categoryId: {
                 isCreateable: boolean;
