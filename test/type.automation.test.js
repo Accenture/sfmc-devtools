@@ -51,6 +51,11 @@ describe('type: automation', () => {
 
                 'returned metadata was not equal expected'
             );
+            expect(
+                await testUtils.getActualDoc('testExisting_automation_wait', 'automation')
+            ).to.equal(
+                await testUtils.getExpectedFile('9999999', 'automation', 'retrieve-wait', 'md')
+            );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 25,
