@@ -2,6 +2,7 @@ declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: string[];
     namespace dependencyGraph {
+        let automation: string[];
         let dataExtension: string[];
     }
     let hasExtended: boolean;
@@ -961,6 +962,12 @@ declare namespace _default {
             template: boolean;
         };
         r__dataExtension_key: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        r__automation_key: {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;

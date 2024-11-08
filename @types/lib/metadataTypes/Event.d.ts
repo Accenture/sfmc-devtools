@@ -176,6 +176,7 @@ declare namespace Event {
         bodyIteratorField: string;
         dependencies: string[];
         dependencyGraph: {
+            automation: string[];
             dataExtension: string[];
         };
         hasExtended: boolean;
@@ -1135,6 +1136,12 @@ declare namespace Event {
                 template: boolean;
             };
             r__dataExtension_key: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            r__automation_key: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
