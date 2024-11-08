@@ -13,6 +13,7 @@ export type ReferenceObject = import("../../types/mcdev.d.js").ReferenceObject;
 export type SfObjectField = import("../../types/mcdev.d.js").SfObjectField;
 export type configurationArguments = import("../../types/mcdev.d.js").configurationArguments;
 export type Conditions = import("../../types/mcdev.d.js").Conditions;
+export type DataExtensionItem = import("../../types/mcdev.d.js").DataExtensionItem;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -29,6 +30,7 @@ export type Conditions = import("../../types/mcdev.d.js").Conditions;
  * @typedef {import('../../types/mcdev.d.js').SfObjectField} SfObjectField
  * @typedef {import('../../types/mcdev.d.js').configurationArguments} configurationArguments
  * @typedef {import('../../types/mcdev.d.js').Conditions} Conditions
+ * @typedef {import('../../types/mcdev.d.js').DataExtensionItem} DataExtensionItem
  */
 /**
  * Event MetadataType
@@ -163,6 +165,14 @@ declare class Event extends MetadataType {
      * @returns {Promise.<void>} -
      */
     static postRetrieveTasks_SalesforceEntryEvents(triggerType: string, ca: configurationArguments, key: string, isPublished: boolean, type?: string): Promise<void>;
+    /**
+     *
+     * @param {string} triggerType e.g. SalesforceObjectTriggerV2, APIEvent, ...
+     * @param {string[]} eventDataSummary eventDataConfig in simplified string-form
+     * @param {string} deKey key of associated dataExtension
+     * @returns {Promise.<void>} -
+     */
+    static compareSalesforceEntryEvents_dataExtension(triggerType: string, eventDataSummary: string[], deKey: string): Promise<void>;
     /**
      *
      * @param {string} triggerType e.g. SalesforceObjectTriggerV2, APIEvent, ...
@@ -379,6 +389,30 @@ declare namespace Event {
                 retrieving: boolean;
                 template: boolean;
             };
+            'configurationArguments.contactKey.relationshipIdName': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'configurationArguments.contactKey.relationshipName': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'configurationArguments.contactKey.isPolymorphic': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'configurationArguments.contactKey.referenceObjectName': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             'configurationArguments.contactPersonType': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -403,6 +437,9 @@ declare namespace Event {
                 retrieving: boolean;
                 template: boolean;
             };
+            'configurationArguments.eventDataConfig.objects': {
+                skipValidation: boolean;
+            };
             'configurationArguments.eventDataSummary': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -421,11 +458,26 @@ declare namespace Event {
                 retrieving: boolean;
                 template: boolean;
             };
-            'configurationArguments.primaryObjectFilterCriteria': {
+            'configurationArguments.passThroughArgument.fields': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
+            };
+            'configurationArguments.passThroughArgument.fields.ContactKey': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'configurationArguments.passThroughArgument.fields.Email': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'configurationArguments.primaryObjectFilterCriteria': {
+                skipValidation: boolean;
             };
             'configurationArguments.primaryObjectFilterSummary': {
                 isCreateable: boolean;

@@ -193,7 +193,7 @@ declare class DataExtension extends MetadataType {
      * @param {string[]} [additionalFields] Returns specified fields even if their retrieve definition is not set to true
      * @returns {Promise.<void>} -
      */
-    static "__#5@#attachFields"(metadata: DataExtensionMap, fieldOptions?: SoapRequestParams, additionalFields?: string[]): Promise<void>;
+    static attachFields(metadata: DataExtensionMap, fieldOptions?: SoapRequestParams, additionalFields?: string[]): Promise<void>;
     /**
      * Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionColumn metadata retrieval
      *

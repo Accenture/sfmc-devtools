@@ -1,6 +1,6 @@
 declare namespace _default {
     let bodyIteratorField: string;
-    let dependencies: any[];
+    let dependencies: string[];
     let dependencyGraph: any;
     let filter: {};
     let hasExtended: boolean;
