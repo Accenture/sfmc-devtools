@@ -22,16 +22,27 @@
         },
         "validation": {
             "retrieve": {
+                "noAmpscriptHtmlTag": "warn",
                 "noGuidKeys": "warn",
                 "noRootFolder": "warn"
             },
             "buildDefinition": {
+                "noAmpscriptHtmlTag": "warn",
                 "noGuidKeys": "warn",
                 "noRootFolder": "warn"
             },
             "deploy": {
+                "noAmpscriptHtmlTag": "warn",
                 "noGuidKeys": "warn",
-                "noRootFolder": "warn"
+                "noRootFolder": "warn",
+                "overrides": [
+                    {
+                        "type": ["journey"],
+                        "options": {
+                            "noGuidKeys": "warn"
+                        }
+                    }
+                ]
             }
         },
         "documentType": "md",
