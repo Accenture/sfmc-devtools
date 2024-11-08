@@ -1141,6 +1141,12 @@ declare namespace Event {
                 retrieving: boolean;
                 template: boolean;
             };
+            r__automation_key: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
         };
     };
 }

@@ -1,9 +1,61 @@
 {
-    "count": 4,
+    "count": 5,
     "page": 1,
     "pageSize": 50,
     "links": {},
     "items": [
+        {
+            "id": "161b64a1-1867-4272-8c5c-4d7abe880702",
+            "type": "AutomationAudience",
+            "name": "testExisting_event_automation",
+            "description": "",
+            "createdDate": "2024-11-07T04:58:46.51",
+            "createdBy": 700301950,
+            "modifiedDate": "2024-11-07T04:58:46.51",
+            "modifiedBy": 700301950,
+            "mode": "Production",
+            "eventDefinitionKey": "testExisting_event_automation",
+            "dataExtensionId": "21711373-72c1-ec11-b83b-48df37d1deb7",
+            "dataExtensionName": "testExisting_automation_event",
+            "sourceApplicationExtensionId": "97e942ee-6914-4d3d-9e52-37ecb71f79ed",
+            "filterDefinitionId": "00000000-0000-0000-0000-000000000000",
+            "filterDefinitionTemplate": "",
+            "iconUrl": "/images/icon-data-extension.svg",
+            "arguments": {
+                "serializedObjectType": 9,
+                "useHighWatermark": true,
+                "resetHighWatermark": false,
+                "automationId": "8f82c2a7-0bae-45a9-bdee-e631ab25c0d5",
+                "eventDefinitionId": "161b64a1-1867-4272-8c5c-4d7abe880702",
+                "eventDefinitionKey": "testExisting_event_automation",
+                "dataExtensionId": "21711373-72c1-ec11-b83b-48df37d1deb7",
+                "criteria": ""
+            },
+            "configurationArguments": {
+                "unconfigured": false
+            },
+            "metaData": {
+                "criteriaDescription": "",
+                "scheduleFlowMode": "automation"
+            },
+            "schedule": {
+                "startDateTime": "2024-11-07T12:15:00",
+                "endDateTime": "2079-06-06T00:00:00",
+                "timeZone": "W. Europe Standard Time",
+                "occurrences": 478403,
+                "endType": "EndDate",
+                "frequency": "Hourly",
+                "recurrencePattern": "Interval",
+                "interval": 1
+            },
+            "interactionCount": 1,
+            "isVisibleInPicker": false,
+            "isPlatformObject": false,
+            "category": "Audience",
+            "publishedInteractionCount": 1,
+            "automationId": "8f82c2a7-0bae-45a9-bdee-e631ab25c0d5",
+            "disableDEDataLogging": false
+        },
         {
             "id": "33b4dbc5-4b58-4a54-ab57-24388f1eefe4",
             "type": "APIEvent",
@@ -79,7 +131,7 @@
             "isPlatformObject": false,
             "category": "Audience",
             "publishedInteractionCount": 0,
-            "automationId": "0fc8f605-bca8-4f24-8b46-b43e06bf271c",
+            "automationId": "00000000-0000-0000-0000-000000000000",
             "disableDEDataLogging": false
         },
         {
@@ -118,7 +170,7 @@
             "isPlatformObject": false,
             "category": "Audience",
             "publishedInteractionCount": 0,
-            "automationId": "a3c606a8-19d7-4866-8804-5f43dc4502ea",
+            "automationId": "00000000-0000-0000-0000-000000000000",
             "disableDEDataLogging": false
         },
         {

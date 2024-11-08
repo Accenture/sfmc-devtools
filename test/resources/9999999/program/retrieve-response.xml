@@ -51,6 +51,12 @@
                 <Name>testExisting_automation_wait</Name>                <!--only retrieved for cache-->
                 <CustomerKey>testExisting_automation_wait</CustomerKey>                <!--only retrieved for cache-->
             </Results>
+            <Results xsi:type="Program">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>8f82c2a7-0bae-45a9-bdee-e631ab25c0d5</ObjectID>
+                <CustomerKey>testExisting_automation_event</CustomerKey>
+                <Name>testExisting_automation_event</Name>
+            </Results>
         </RetrieveResponseMsg>
     </soap:Body>
 </soap:Envelope>
