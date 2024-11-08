@@ -205,6 +205,30 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        'configurationArguments.contactKey.relationshipIdName': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'configurationArguments.contactKey.relationshipName': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'configurationArguments.contactKey.isPolymorphic': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'configurationArguments.contactKey.referenceObjectName': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         'configurationArguments.contactPersonType': {
             isCreateable: boolean;
             isUpdateable: boolean;
@@ -229,6 +253,9 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        'configurationArguments.eventDataConfig.objects': {
+            skipValidation: boolean;
+        };
         'configurationArguments.eventDataSummary': {
             isCreateable: boolean;
             isUpdateable: boolean;
@@ -247,11 +274,26 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
-        'configurationArguments.primaryObjectFilterCriteria': {
+        'configurationArguments.passThroughArgument.fields': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
             template: boolean;
+        };
+        'configurationArguments.passThroughArgument.fields.ContactKey': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'configurationArguments.passThroughArgument.fields.Email': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'configurationArguments.primaryObjectFilterCriteria': {
+            skipValidation: boolean;
         };
         'configurationArguments.primaryObjectFilterSummary': {
             isCreateable: boolean;

@@ -46,6 +46,12 @@ declare class DataExtensionField extends MetadataType {
         type: string;
     }>;
     /**
+     * Retrieves all records and saves it to disk
+     *
+     * @returns {Promise.<MetadataTypeMapObj>} Promise of items
+     */
+    static retrieveForCache(): Promise<MetadataTypeMapObj>;
+    /**
      * Retrieves all records for caching
      *
      * @param {SoapRequestParams} [requestParams] required for the specific request (filter for example)
@@ -106,7 +112,7 @@ declare class DataExtensionField extends MetadataType {
 declare namespace DataExtensionField {
     let definition: {
         bodyIteratorField: string;
-        dependencies: any[];
+        dependencies: string[];
         dependencyGraph: any;
         filter: {};
         hasExtended: boolean;
