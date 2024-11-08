@@ -9,6 +9,7 @@
         }
     },
     "options": {
+        "formatOnRetrieve": true,
         "deployment": {
             "commitHistory": 10,
             "sourceTargetMapping": {
