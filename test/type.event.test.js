@@ -42,7 +42,7 @@ describe('type: event', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                9,
+                10,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -121,7 +121,7 @@ describe('type: event', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                19,
+                20,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -167,7 +167,7 @@ describe('type: event', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                11,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -203,7 +203,7 @@ describe('type: event', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                11,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -276,7 +276,7 @@ describe('type: event', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                9,
+                10,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -322,7 +322,7 @@ describe('type: event', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                9,
+                10,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
