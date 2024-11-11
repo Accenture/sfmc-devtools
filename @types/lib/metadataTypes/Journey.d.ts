@@ -104,7 +104,7 @@ declare class Journey extends MetadataType {
      */
     static publish(keyArr: string[]): Promise<string[]>;
     /**
-     * helper for {@link Journey.publish}
+     * helper for {@link Journey.publish} and {@link Journey.validate}
      *
      * @param {string} statusUrl URL to check the status of the publish request
      * @param {string} key journey-key or id for log messages
@@ -124,6 +124,13 @@ declare class Journey extends MetadataType {
         errors: any[];
         warnings: any[];
     }): void;
+    /**
+     * a function to validate the journey via API
+     *
+     * @param {string[]} keyArr keys or ids of the metadata
+     * @returns {Promise.<string[]>} Returns list of updated keys/ids that were published. Success could only be seen with a delay in the UI because the publish-endpoint is async
+     */
+    static validate(keyArr: string[]): Promise<string[]>;
 }
 declare namespace Journey {
     let definition: {
