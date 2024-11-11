@@ -825,6 +825,25 @@ describe('type: journey', () => {
     });
 
     describe('Validate ================', () => {
+        it('Should not validate a transactional journey by key', async () => {
+            handler.setOptions({ skipStatusCheck: true });
+            // WHEN
+            await handler.validate(
+                'testInstance/testBU',
+                ['journey'],
+                ['testExisting_temail_notPublished']
+            );
+            // THEN
+            assert.equal(process.exitCode, 1, 'validate should not have thrown an error');
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                1,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
         it('Should validate a journey by id but w/o version (auto-picks latest version)', async () => {
             await testUtils.copyFile(
                 'interaction/v1/interactions/validateStatus/45f06c0a-3ed2-48b2-a6a8-b5119253f01c/get-response-success.json',
