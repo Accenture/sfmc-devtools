@@ -145,8 +145,9 @@ declare class Event extends MetadataType {
      *
      * @param {configurationArguments} ca trigger[0].configurationArguments
      * @param {boolean} isPublished if the current item is published it means we do not need to do contact vs common checks
+     * @returns {string} warnings or null
      */
-    static checkSalesforceEntryEvents(ca: configurationArguments, isPublished: boolean): void;
+    static checkSalesforceEntryEvents(ca: configurationArguments, isPublished: boolean): string;
     /**
      *
      * @param {object[]} conditions -
@@ -177,9 +178,9 @@ declare class Event extends MetadataType {
      *
      * @param {string} triggerType e.g. SalesforceObjectTriggerV2, APIEvent, ...
      * @param {configurationArguments} ca trigger[0].configurationArguments
-     * @returns {Promise.<void>} -
+     * @returns {Promise.<string>} -
      */
-    static preDeployTasks_SalesforceEntryEvents(triggerType: string, ca: configurationArguments): Promise<void>;
+    static preDeployTasks_SalesforceEntryEvents(triggerType: string, ca: configurationArguments): Promise<string>;
 }
 declare namespace Event {
     let definition: {
