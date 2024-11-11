@@ -823,4 +823,88 @@ describe('type: journey', () => {
             return;
         });
     });
+
+    describe('Validate ================', () => {
+        it('Should validate a journey by id but w/o version (auto-picks latest version)', async () => {
+            await testUtils.copyFile(
+                'interaction/v1/interactions/validateStatus/45f06c0a-3ed2-48b2-a6a8-b5119253f01c/get-response-success.json',
+                'interaction/v1/interactions/validateStatus/45f06c0a-3ed2-48b2-a6a8-b5119253f01c/get-response.json'
+            );
+            // WHEN
+            const validate = await handler.validate(
+                'testInstance/testBU',
+                ['journey'],
+                ['id:0175b971-71a3-4d8e-98ac-48121f3fbf4f']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'validate should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                validate['testInstance/testBU']?.journey,
+                ['testExisting_journey_Multistep'],
+                'should have validateed the right journey'
+            );
+
+            // get callouts
+            const validateCallout = testUtils.getRestCallout(
+                'post',
+                '/interaction/v1/interactions/validateAsync/%'
+            );
+            // confirm created item
+            assert.deepEqual(
+                validateCallout,
+                await testUtils.getExpectedJson('9999999', 'journey', 'validate-callout'),
+                'validate-payload JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                3,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should validate a journey by id w/ version with failing status check', async () => {
+            await testUtils.copyFile(
+                'interaction/v1/interactions/publishStatus/45f06c0a-3ed2-48b2-a6a8-b5119253f01c/get-response-failed.json',
+                'interaction/v1/interactions/validateStatus/45f06c0a-3ed2-48b2-a6a8-b5119253f01c/get-response.json'
+            );
+
+            handler.setOptions({ _runningTest: true });
+            // WHEN
+            const validate = await handler.validate(
+                'testInstance/testBU',
+                ['journey'],
+                ['id:0175b971-71a3-4d8e-98ac-48121f3fbf4f/1']
+            );
+            // THEN
+            assert.equal(process.exitCode, 1, 'validate should have thrown an error');
+            // retrieve result
+            assert.equal(
+                validate['testInstance/testBU']?.journey.length,
+                0,
+                'should have not validated the journey'
+            );
+
+            // get callouts
+            const validateCallout = testUtils.getRestCallout(
+                'post',
+                '/interaction/v1/interactions/validateAsync/%'
+            );
+            // confirm created item
+            assert.deepEqual(
+                validateCallout,
+                await testUtils.getExpectedJson('9999999', 'journey', 'validate-callout'),
+                'validate-payload JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                3,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
 });
