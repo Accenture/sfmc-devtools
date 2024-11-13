@@ -107,7 +107,7 @@ declare namespace TriggeredSend {
             senderProfile: string[];
         };
         filter: {
-            r__folder_Path: string;
+            r__folder_Path: string[];
         };
         folderType: string;
         hasExtended: boolean;
