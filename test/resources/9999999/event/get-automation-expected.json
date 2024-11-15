@@ -1,0 +1,42 @@
+{
+    "type": "AutomationAudience",
+    "name": "testExisting_event_automation",
+    "description": "",
+    "createdDate": "2024-11-07T04:58:46.51",
+    "createdBy": "Jörn Berkefeld",
+    "modifiedDate": "2024-11-07T04:58:46.51",
+    "modifiedBy": "Jörn Berkefeld",
+    "eventDefinitionKey": "testExisting_event_automation",
+    "sourceApplicationExtensionId": "97e942ee-6914-4d3d-9e52-37ecb71f79ed",
+    "filterDefinitionId": "00000000-0000-0000-0000-000000000000",
+    "filterDefinitionTemplate": "",
+    "iconUrl": "/images/icon-data-extension.svg",
+    "arguments": {
+        "serializedObjectType": 9,
+        "useHighWatermark": true,
+        "resetHighWatermark": false,
+        "criteria": ""
+    },
+    "configurationArguments": {},
+    "metaData": {
+        "criteriaDescription": "",
+        "scheduleFlowMode": "automation"
+    },
+    "schedule": {
+        "startDateTime": "2024-11-07T12:15:00",
+        "endDateTime": "2079-06-06T00:00:00",
+        "timeZone": "W. Europe Standard Time",
+        "occurrences": 478403,
+        "endType": "EndDate",
+        "frequency": "Hourly",
+        "recurrencePattern": "Interval",
+        "interval": 1
+    },
+    "interactionCount": 1,
+    "isVisibleInPicker": false,
+    "category": "Audience",
+    "publishedInteractionCount": 1,
+    "disableDEDataLogging": false,
+    "r__automation_key": "testExisting_automation_event",
+    "r__dataExtension_key": "testExisting_dataExtension"
+}

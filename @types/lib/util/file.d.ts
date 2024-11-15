@@ -87,7 +87,7 @@ declare const FileFs: typeof fs & {
      * @param {boolean} [formatHTML] applies formatting to html and ampscript if true
      * @returns {Promise.<string>} formatted code
      */
-    beautify_beautyAmp_beautify: (content: string, formatHTML?: boolean) => Promise<string>;
+    _beautify_beautyAmp_beautify: (content: string, formatHTML?: boolean) => Promise<string>;
     /**
      * helper for {@link File.writePrettyToFile}, applying beautyAmp onto given stringified content
      *

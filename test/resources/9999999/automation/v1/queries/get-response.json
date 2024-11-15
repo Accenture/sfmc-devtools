@@ -56,7 +56,7 @@
         },
         {
             "queryDefinitionId": "549f0568-607c-4940-afef-437965094dat_fixKeysSuffix",
-            "name": "testExisting_query_fixedKeys",
+            "name": "testExisting_query_fixedKeysSuffix",
             "key": "testExisting_query_fixKeysSuffix",
             "description": "bla bla",
             "queryText": "Select\n    SubscriberKey as testField, Trim(last_name) AS name\nfrom\n    _Subscribers\nwhere\n    country in ('test')\n",

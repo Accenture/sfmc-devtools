@@ -1,8 +1,75 @@
 {
     "startIndex": 0,
     "itemsPerPage": 50,
-    "totalResults": 1,
+    "totalResults": 3,
     "entry": [
+        {
+            "id": "cDhLQ2o2NExxVVc5N3VZeHF5WEExUToyNTow",
+            "key": "testExisting_automation_event",
+            "createdDate": "2024-11-07T10:20:18.877Z",
+            "name": "testExisting_automation_event",
+            "description": "",
+            "clientId": 9999999,
+            "status": "Scheduled",
+            "createdBy": {
+                "id": "NzEwNDIwNDE4OjQ6MA",
+                "name": "Jörn Berkefeld",
+                "email": "joern.berkefeld@accenture.com"
+            },
+            "modifiedDate": "2024-11-07T22:17:24.457Z",
+            "modifiedBy": {
+                "id": "LTEwMDA6NDow",
+                "name": "System"
+            },
+            "processes": [
+                {
+                    "id": "Q3FPcDlGeGc1VTJHcE9mZmlmNW9oUToyNzow",
+                    "createdDate": "2024-11-07T10:26:58.62Z",
+                    "name": "",
+                    "description": "",
+                    "sequence": 0,
+                    "status": "Complete",
+                    "workerCounts": [
+                        {
+                            "name": "QueryDefinition",
+                            "objectTypeId": 300,
+                            "count": 1,
+                            "status": "Complete"
+                        }
+                    ],
+                    "instanceId": "aDJvYXJPR2Z5MHVNNHdBVVA0cG5xUToyODow"
+                },
+                {
+                    "id": "UDF0MWd4SlF0RW1CRWdLUnlIbTUxUToyNzow",
+                    "createdDate": "2024-11-07T10:59:15.813Z",
+                    "name": "",
+                    "description": "",
+                    "sequence": 2,
+                    "status": "Complete",
+                    "workerCounts": [
+                        {
+                            "name": "JourneyBuilderAudience",
+                            "objectTypeId": 952,
+                            "count": 1,
+                            "status": "Complete"
+                        }
+                    ],
+                    "instanceId": "VjBzTVVjZHJja0M3TS12ZlRPMmZ6QToyODow"
+                }
+            ],
+            "schedule": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/automations/schedule/dXZSTUJ0Q2xDa0tLVHlZRldqVlF1ZzozNjow",
+            "scheduledTime": "2024-11-07T23:15:00Z",
+            "startTime": "2024-11-07T22:15:19.057Z",
+            "completedTime": "2024-11-07T22:17:24.453Z",
+            "lastRunTime": "2024-11-07T22:15:19.057Z",
+            "lastRunInstance": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/bulk/automations/automation/instance/VEhxcm1sTk5DMEdhZnQ1S0ZsMURIZzoyNjow",
+            "instanceId": "VEhxcm1sTk5DMEdhZnQ1S0ZsMURIZzoyNjow",
+            "automationInstance": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/bulk/automations/automation/instance/VEhxcm1sTk5DMEdhZnQ1S0ZsMURIZzoyNjow",
+            "isPlatformObject": false,
+            "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/cDhLQ2o2NExxVVc5N3VZeHF5WEExUToxMjow",
+            "automationType": "scheduled",
+            "lastRunStatus": "Complete"
+        },
         {
             "id": "RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow",
             "key": "testExisting_automation",
@@ -25,6 +92,136 @@
             "isPlatformObject": false,
             "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoxMjow",
             "automationType": "scheduled"
+        },
+        {
+            "id": "bHF6Q0Q3b1VXa21OdVQzZFQ0ckVSQToyNTow",
+            "key": "testExisting_automation_wait",
+            "createdDate": "2024-11-04T17:30:12.973Z",
+            "name": "testExisting_automation_wait",
+            "description": "",
+            "clientId": 9999999,
+            "status": "Ready",
+            "createdBy": {
+                "id": "NzEwNDIwNDE4OjQ6MA",
+                "name": "Jörn Berkefeld",
+                "email": "joern.berkefeld@accenture.com"
+            },
+            "modifiedDate": "2024-11-04T17:42:13.203Z",
+            "modifiedBy": {
+                "id": "NzEwNDIwNDE4OjQ6MA",
+                "name": "Jörn Berkefeld",
+                "email": "joern.berkefeld@accenture.com"
+            },
+            "processes": [
+                {
+                    "id": "OXJtc2M5STlma3FpVzN3NkF4Y0pWdzoyNzow",
+                    "createdDate": "2024-11-04T17:42:13.167Z",
+                    "name": "",
+                    "description": "",
+                    "sequence": 0,
+                    "status": "Initialized",
+                    "workerCounts": [
+                        {
+                            "name": "ProgramWait",
+                            "objectTypeId": 467,
+                            "count": 1
+                        }
+                    ]
+                },
+                {
+                    "id": "YllfOWc3dFVCRXU4RGQxaTRXOUZLZzoyNzow",
+                    "createdDate": "2024-11-04T17:42:13.17Z",
+                    "name": "",
+                    "description": "",
+                    "sequence": 1,
+                    "status": "Initialized",
+                    "workerCounts": [
+                        {
+                            "name": "ProgramWait",
+                            "objectTypeId": 467,
+                            "count": 1
+                        }
+                    ]
+                },
+                {
+                    "id": "d1VwZGsxN0dwa3V0dEtQSTZOeXlRUToyNzow",
+                    "createdDate": "2024-11-04T17:42:13.177Z",
+                    "name": "",
+                    "description": "",
+                    "sequence": 2,
+                    "status": "Initialized",
+                    "workerCounts": [
+                        {
+                            "name": "ProgramWait",
+                            "objectTypeId": 467,
+                            "count": 1
+                        }
+                    ]
+                },
+                {
+                    "id": "cG5GWTY1a1RiRVNnWnpvRDBhUTJmdzoyNzow",
+                    "createdDate": "2024-11-04T17:42:13.18Z",
+                    "name": "",
+                    "description": "",
+                    "sequence": 3,
+                    "status": "Initialized",
+                    "workerCounts": [
+                        {
+                            "name": "ProgramWait",
+                            "objectTypeId": 467,
+                            "count": 1
+                        }
+                    ]
+                },
+                {
+                    "id": "VjFyRUptR0hyRTJSdE1IR1RScG5RUToyNzow",
+                    "createdDate": "2024-11-04T17:42:13.183Z",
+                    "name": "",
+                    "description": "",
+                    "sequence": 4,
+                    "status": "Initialized",
+                    "workerCounts": [
+                        {
+                            "name": "ProgramWait",
+                            "objectTypeId": 467,
+                            "count": 1
+                        }
+                    ]
+                },
+                {
+                    "id": "SjFFR2s4eXR5ME93UU85anZpS0Y3QToyNzow",
+                    "createdDate": "2024-11-04T17:42:13.187Z",
+                    "name": "",
+                    "description": "",
+                    "sequence": 5,
+                    "status": "Initialized",
+                    "workerCounts": [
+                        {
+                            "name": "ProgramWait",
+                            "objectTypeId": 467,
+                            "count": 1
+                        }
+                    ]
+                },
+                {
+                    "id": "a0JPTkRiNTFmVUtRQ3dyMXlRYWdHdzoyNzow",
+                    "createdDate": "2024-11-04T17:42:13.19Z",
+                    "name": "",
+                    "description": "",
+                    "sequence": 6,
+                    "status": "Initialized",
+                    "workerCounts": [
+                        {
+                            "name": "ProgramWait",
+                            "objectTypeId": 467,
+                            "count": 1
+                        }
+                    ]
+                }
+            ],
+            "isPlatformObject": false,
+            "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/bHF6Q0Q3b1VXa21OdVQzZFQ0ckVSQToxMjow",
+            "automationType": "unspecified"
         }
     ]
 }
