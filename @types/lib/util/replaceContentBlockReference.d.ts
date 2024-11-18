@@ -46,6 +46,10 @@ export default class ReplaceContentBlockReference {
         };
     };
     /**
+     * helper for tests
+     */
+    static resetCacheMap(): void;
+    /**
      * used to equalize the reference in the code to whatever is set in the "to" field
      *
      * @param {string} str full code string

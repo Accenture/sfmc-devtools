@@ -176,6 +176,20 @@ declare class MetadataType {
      */
     static preDeployTasks(metadata: MetadataTypeItem, deployDir: string): Promise<MetadataTypeItem>;
     /**
+     * helper to find a new unique name during item creation
+     *
+     * @param {string} key key of the item
+     * @param {string} name name of the item
+     * @param {{ type: string; key: string; name: any; }[]} namesInFolder names of the items in the same folder
+     * @param {string} [subtype] itemType-name
+     * @returns {string} new name
+     */
+    static findUniqueName(key: string, name: string, namesInFolder: {
+        type: string;
+        key: string;
+        name: any;
+    }[], subtype?: string): string;
+    /**
      * Abstract create method that needs to be implemented in child metadata type
      *
      * @param {MetadataTypeItem} metadata single metadata entry

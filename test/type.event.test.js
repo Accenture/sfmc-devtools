@@ -27,17 +27,22 @@ describe('type: event', () => {
             const result = cache.getCache();
             assert.equal(
                 result.event ? Object.keys(result.event).length : 0,
-                4,
-                'only 4 event expected'
+                5,
+                'unexpected amount of events'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_event', 'event'),
                 await testUtils.getExpectedJson('9999999', 'event', 'get'),
                 'returned JSON was not equal expected'
             );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_event_automation', 'event'),
+                await testUtils.getExpectedJson('9999999', 'event', 'get-automation'),
+                'returned JSON was not equal expected'
+            );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                7,
+                10,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -71,8 +76,8 @@ describe('type: event', () => {
             const result = cache.getCache();
             assert.equal(
                 result.event ? Object.keys(result.event).length : 0,
-                5,
-                '5 events expected'
+                6,
+                'unexpected number of events'
             );
             // get callouts
             const createCallout = testUtils.getRestCallout(
@@ -116,7 +121,7 @@ describe('type: event', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                17,
+                20,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -140,8 +145,8 @@ describe('type: event', () => {
             const result = cache.getCache();
             assert.equal(
                 result.event ? Object.keys(result.event).length : 0,
-                5,
-                '5 events expected'
+                6,
+                'unexpected number of events'
             );
             // get callouts
             const createCallout = testUtils.getRestCallout(
@@ -162,7 +167,7 @@ describe('type: event', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                8,
+                11,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -176,8 +181,8 @@ describe('type: event', () => {
             const result = cache.getCache();
             assert.equal(
                 result.event ? Object.keys(result.event).length : 0,
-                4,
-                '4 events expected'
+                5,
+                'unexpected number of events'
             );
             // get callouts
             const updateCallout = testUtils.getRestCallout(
@@ -198,7 +203,7 @@ describe('type: event', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                8,
+                11,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -271,7 +276,7 @@ describe('type: event', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                7,
+                10,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -317,7 +322,7 @@ describe('type: event', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                7,
+                10,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

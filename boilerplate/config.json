@@ -6,6 +6,7 @@
         }
     },
     "options": {
+        "formatOnSave": true,
         "deployment": {
             "commitHistory": 10,
             "sourceTargetMapping": {
