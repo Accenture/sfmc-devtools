@@ -161,6 +161,7 @@ declare namespace Journey {
         lastmodNameField: any;
         restPagination: boolean;
         restPageSize: number;
+        maxKeyLength: number;
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
