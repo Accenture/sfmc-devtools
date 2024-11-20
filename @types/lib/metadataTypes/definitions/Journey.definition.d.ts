@@ -26,6 +26,7 @@ declare namespace _default {
     let lastmodNameField: any;
     let restPagination: boolean;
     let restPageSize: number;
+    let maxKeyLength: number;
     let type: string;
     let typeDescription: string;
     let typeRetrieveByDefault: boolean;
