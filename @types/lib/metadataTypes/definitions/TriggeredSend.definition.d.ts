@@ -7,6 +7,9 @@ declare namespace _default {
         let sendClassification: string[];
         let senderProfile: string[];
     }
+    namespace filter {
+        let r__folder_Path: string[];
+    }
     let folderType: string;
     let hasExtended: boolean;
     let idField: string;

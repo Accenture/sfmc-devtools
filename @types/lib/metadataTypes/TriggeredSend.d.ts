@@ -106,6 +106,9 @@ declare namespace TriggeredSend {
             sendClassification: string[];
             senderProfile: string[];
         };
+        filter: {
+            r__folder_Path: string[];
+        };
         folderType: string;
         hasExtended: boolean;
         idField: string;

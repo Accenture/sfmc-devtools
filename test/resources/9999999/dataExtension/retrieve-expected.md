@@ -10,6 +10,11 @@
 
 **Testable:** Yes
 
+**Retention Policy:** allRecords
+
+- **Retention Period:** 6 Months
+- **Reset Retention Period on import:** no
+
 | Name | FieldType | MaxLength | IsPrimaryKey | IsNullable | DefaultValue |
 | --- | --- | --- | --- | --- | --- |
 | FirstName | Text | 50 | - | + |  |

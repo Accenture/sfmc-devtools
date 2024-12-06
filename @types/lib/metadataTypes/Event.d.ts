@@ -13,6 +13,7 @@ export type ReferenceObject = import("../../types/mcdev.d.js").ReferenceObject;
 export type SfObjectField = import("../../types/mcdev.d.js").SfObjectField;
 export type configurationArguments = import("../../types/mcdev.d.js").configurationArguments;
 export type Conditions = import("../../types/mcdev.d.js").Conditions;
+export type DataExtensionItem = import("../../types/mcdev.d.js").DataExtensionItem;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -29,6 +30,7 @@ export type Conditions = import("../../types/mcdev.d.js").Conditions;
  * @typedef {import('../../types/mcdev.d.js').SfObjectField} SfObjectField
  * @typedef {import('../../types/mcdev.d.js').configurationArguments} configurationArguments
  * @typedef {import('../../types/mcdev.d.js').Conditions} Conditions
+ * @typedef {import('../../types/mcdev.d.js').DataExtensionItem} DataExtensionItem
  */
 /**
  * Event MetadataType
@@ -143,8 +145,9 @@ declare class Event extends MetadataType {
      *
      * @param {configurationArguments} ca trigger[0].configurationArguments
      * @param {boolean} isPublished if the current item is published it means we do not need to do contact vs common checks
+     * @returns {string} warnings or null
      */
-    static checkSalesforceEntryEvents(ca: configurationArguments, isPublished: boolean): void;
+    static checkSalesforceEntryEvents(ca: configurationArguments, isPublished: boolean): string;
     /**
      *
      * @param {object[]} conditions -
@@ -166,16 +169,25 @@ declare class Event extends MetadataType {
     /**
      *
      * @param {string} triggerType e.g. SalesforceObjectTriggerV2, APIEvent, ...
-     * @param {configurationArguments} ca trigger[0].configurationArguments
+     * @param {string[]} eventDataSummary eventDataConfig in simplified string-form
+     * @param {string} deKey key of associated dataExtension
      * @returns {Promise.<void>} -
      */
-    static preDeployTasks_SalesforceEntryEvents(triggerType: string, ca: configurationArguments): Promise<void>;
+    static compareSalesforceEntryEvents_dataExtension(triggerType: string, eventDataSummary: string[], deKey: string): Promise<void>;
+    /**
+     *
+     * @param {string} triggerType e.g. SalesforceObjectTriggerV2, APIEvent, ...
+     * @param {configurationArguments} ca trigger[0].configurationArguments
+     * @returns {Promise.<string>} -
+     */
+    static preDeployTasks_SalesforceEntryEvents(triggerType: string, ca: configurationArguments): Promise<string>;
 }
 declare namespace Event {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
         dependencyGraph: {
+            automation: string[];
             dataExtension: string[];
         };
         hasExtended: boolean;
@@ -378,6 +390,30 @@ declare namespace Event {
                 retrieving: boolean;
                 template: boolean;
             };
+            'configurationArguments.contactKey.relationshipIdName': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'configurationArguments.contactKey.relationshipName': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'configurationArguments.contactKey.isPolymorphic': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'configurationArguments.contactKey.referenceObjectName': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             'configurationArguments.contactPersonType': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -402,6 +438,9 @@ declare namespace Event {
                 retrieving: boolean;
                 template: boolean;
             };
+            'configurationArguments.eventDataConfig.objects': {
+                skipValidation: boolean;
+            };
             'configurationArguments.eventDataSummary': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -420,11 +459,26 @@ declare namespace Event {
                 retrieving: boolean;
                 template: boolean;
             };
-            'configurationArguments.primaryObjectFilterCriteria': {
+            'configurationArguments.passThroughArgument.fields': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
+            };
+            'configurationArguments.passThroughArgument.fields.ContactKey': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'configurationArguments.passThroughArgument.fields.Email': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'configurationArguments.primaryObjectFilterCriteria': {
+                skipValidation: boolean;
             };
             'configurationArguments.primaryObjectFilterSummary': {
                 isCreateable: boolean;
@@ -1135,6 +1189,12 @@ declare namespace Event {
                 template: boolean;
             };
             r__dataExtension_key: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            r__automation_key: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
