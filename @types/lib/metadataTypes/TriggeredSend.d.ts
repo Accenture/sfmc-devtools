@@ -66,14 +66,6 @@ declare class TriggeredSend extends MetadataType {
      */
     static preDeployTasks(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
     /**
-     * TSD-specific refresh method that finds active TSDs and refreshes them
-     *
-     * @param {string[]} [keyArr] metadata keys
-     * @param {boolean} [checkKey] whether to check if the key is valid
-     * @returns {Promise.<void>} -
-     */
-    static refresh(keyArr?: string[], checkKey?: boolean): Promise<void>;
-    /**
      * helper for {@link TriggeredSend.refresh} that extracts the keys from the TSD item map and eli
      *
      * @param {MetadataTypeMap} metadata TSD item map

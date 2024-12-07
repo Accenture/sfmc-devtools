@@ -208,9 +208,11 @@ declare class MetadataType {
     /**
      * Abstract refresh method that needs to be implemented in child metadata type
      *
-     * @returns {void}
+     * @param {string[]} [keyArr] metadata keys
+     * @param {boolean} [checkKey] whether to check if the key is valid
+     * @returns {Promise.<string[]>} Returns list of keys that were refreshed
      */
-    static refresh(): void;
+    static refresh(keyArr?: string[], checkKey?: boolean): Promise<string[]>;
     /**
      *
      * @param {string[]} keyArr limit retrieval to given metadata type
