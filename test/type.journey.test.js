@@ -350,7 +350,7 @@ describe('type: journey', () => {
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'journey',
-                'testExisting_journey_Quicksend'
+                'testExisting_journey_Multistep'
             );
             // THEN
             assert.equal(process.exitCode, 1, 'delete should have thrown an error');
@@ -364,7 +364,7 @@ describe('type: journey', () => {
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'journey',
-                'testExisting_journey_Quicksend/2'
+                'testExisting_journey_Multistep/2'
             );
             // THEN
             assert.equal(process.exitCode, 1, 'delete should have thrown an error');
@@ -378,7 +378,7 @@ describe('type: journey', () => {
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'journey',
-                'testExisting_journey_Quicksend/1'
+                'testExisting_journey_Multistep/1'
             );
             // THEN
             assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
@@ -392,7 +392,7 @@ describe('type: journey', () => {
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'journey',
-                'testExisting_journey_Quicksend/*'
+                'testExisting_journey_Multistep/*'
             );
             // THEN
             assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
@@ -404,7 +404,8 @@ describe('type: journey', () => {
         it('Should delete 2 items with exact version', async () => {
             // WHEN
             const isDeleted = await handler.deleteByKey('testInstance/testBU', 'journey', [
-                'testExisting_journey_Quicksend/1',
+                'testExisting_journey_Quicksend',
+                'testExisting_temail',
                 'testExisting_journey_Multistep/1',
             ]);
             // THEN
