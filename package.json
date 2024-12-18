@@ -71,7 +71,7 @@
         "beauty-amp-core2": "0.4.9",
         "cli-progress": "3.12.0",
         "command-exists": "1.2.9",
-        "conf": "13.0.1",
+        "conf": "13.1.0",
         "console.table": "0.10.0",
         "deep-equal": "2.2.3",
         "fs-extra": "11.2.0",
