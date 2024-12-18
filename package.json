@@ -91,7 +91,7 @@
         "yocto-spinner": "0.1.1"
     },
     "devDependencies": {
-        "@eslint/js": "9.15.0",
+        "@eslint/js": "9.17.0",
         "@types/fs-extra": "11.0.4",
         "@types/inquirer": "9.0.7",
         "@types/mocha": "10.0.8",
