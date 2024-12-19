@@ -131,6 +131,21 @@ declare class Journey extends MetadataType {
      * @returns {Promise.<string[]>} Returns list of updated keys/ids that were published. Success could only be seen with a delay in the UI because the publish-endpoint is async
      */
     static validate(keyArr: string[]): Promise<string[]>;
+    /**
+     * TSD-specific refresh method that finds active TSDs and refreshes them
+     *
+     * @param {string[]} keyArr metadata keys
+     * @param {boolean} [checkKey] whether to check if the key is valid
+     * @returns {Promise.<string[]>} Returns list of keys that were refreshed
+     */
+    static refresh(keyArr: string[], checkKey?: boolean): Promise<string[]>;
+    /**
+     * helper for {@link Journey.refresh} that pauses, publishes and starts a triggered send
+     *
+     * @param {string} key external key of triggered send item
+     * @returns {Promise.<boolean>} true if refresh was successful
+     */
+    static _refreshItem(key: string): Promise<boolean>;
 }
 declare namespace Journey {
     let definition: {
@@ -161,6 +176,7 @@ declare namespace Journey {
         lastmodNameField: any;
         restPagination: boolean;
         restPageSize: number;
+        maxKeyLength: number;
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
