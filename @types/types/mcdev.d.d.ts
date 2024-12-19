@@ -38,7 +38,7 @@ export type SupportedMetadataTypes = "asset" | "asset-archive" | "asset-asset" |
  * object-key=SupportedMetadataTypes, value=array of external keys
  */
 export type TypeKeyCombo = {
-    [x: string]: string[] | null;
+    [x: string]: string[];
 };
 /**
  * generic metadata item
@@ -48,19 +48,21 @@ export type MetadataTypeItem = any;
  * key=customer key
  */
 export type MetadataTypeMap = {
-    [x: string]: MetadataTypeItem;
+    [x: string]: any;
 };
 /**
  * key=Supported MetadataType
  */
 export type MultiMetadataTypeMap = {
-    [x: string]: MetadataTypeMap;
+    [x: string]: {
+        [x: string]: any;
+    };
 };
 /**
  * key=Supported MetadataType
  */
 export type MultiMetadataTypeList = {
-    [x: string]: MetadataTypeItem[];
+    [x: string]: any[];
 };
 export type MetadataTypeMapObj = {
     metadata: MetadataTypeMap;
@@ -74,7 +76,11 @@ export type MetadataTypeItemObj = {
  * key=MID
  */
 export type Cache = {
-    [x: number]: MultiMetadataTypeMap;
+    [x: number]: {
+        [x: string]: {
+            [x: string]: any;
+        };
+    };
 };
 /**
  * used during update
@@ -229,7 +235,9 @@ export type AssetItem = {
     [x: string]: any;
 };
 export type AssetMap = {
-    [x: string]: AssetItem;
+    [x: string]: {
+        [x: string]: any;
+    };
 };
 export type AssetSubType = "archive" | "asset" | "audio" | "block" | "code" | "document" | "image" | "message" | "other" | "rawimage" | "template" | "textfile" | "video";
 export type DataExtensionFieldItem = {
@@ -1231,7 +1239,7 @@ export type Mcdevrc = {
      * templating variables grouped by markets
      */
     markets: {
-        [x: string]: object;
+        [x: string]: any;
     };
     /**
      * combination of markets and BUs for streamlined deployments
