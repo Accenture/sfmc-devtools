@@ -845,7 +845,7 @@ export type AutomationItem = {
     /**
      * Starting Source = Schedule / File Drop
      */
-    type?: "scheduled" | "triggered";
+    type?: "scheduled" | "triggered" | "automationtriggered";
     /**
      * automation status
      */
@@ -869,6 +869,10 @@ export type AutomationItem = {
         queueFiles: boolean;
         triggerActive: boolean;
     };
+    /**
+     * only existing if type=automationtriggered
+     */
+    automationTrigger?: object;
     /**
      * -
      */
