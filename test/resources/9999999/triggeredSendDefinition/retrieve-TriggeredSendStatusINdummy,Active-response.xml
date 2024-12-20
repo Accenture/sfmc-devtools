@@ -50,7 +50,7 @@
                 <FromAddress>unsubscribe@emails.mcdev.accenture.com</FromAddress>
                 <SuppressTracking>false</SuppressTracking>
                 <TriggeredSendType>Continuous</TriggeredSendType>
-                <TriggeredSendStatus>New</TriggeredSendStatus>
+                <TriggeredSendStatus>Active</TriggeredSendStatus>
                 <Email>
                     <PartnerKey xsi:nil="true" />
                     <ID>531213</ID>
@@ -96,7 +96,7 @@
                 <FromAddress>%%= ContentBlockByKey("testExisting_asset_htmlblock") =%%</FromAddress>
                 <SuppressTracking>false</SuppressTracking>
                 <TriggeredSendType>Continuous</TriggeredSendType>
-                <TriggeredSendStatus>New</TriggeredSendStatus>
+                <TriggeredSendStatus>Active</TriggeredSendStatus>
                 <Email>
                     <PartnerKey xsi:nil="true" />
                     <ID>531213</ID>

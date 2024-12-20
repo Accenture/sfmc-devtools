@@ -291,7 +291,7 @@
  * @property {string} [Name] name (SOAP API)
  * @property {any} [notifications] notifications
  * @property {string} [description] -
- * @property {'scheduled'|'triggered'} [type] Starting Source = Schedule / File Drop
+ * @property {'scheduled'|'triggered'|'automationtriggered'} [type] Starting Source = Schedule / File Drop
  * @property {'Scheduled'|'Running'|'Ready'|'Building'|'PausedSchedule'|'InactiveTrigger'} [status] automation status
  * @property {number} [statusId] automation status
  * @property {AutomationSchedule} [schedule] only existing if type=scheduled
@@ -302,6 +302,7 @@
  * @property {boolean} fileTrigger.isPublished ?
  * @property {boolean} fileTrigger.queueFiles ?
  * @property {boolean} fileTrigger.triggerActive -
+ * @property {object} [automationTrigger] only existing if type=automationtriggered
  * @property {object} [startSource] -
  * @property {AutomationSchedule} [startSource.schedule] rewritten to AutomationItem.schedule
  * @property {object} [startSource.fileDrop] rewritten to AutomationItem.fileTrigger

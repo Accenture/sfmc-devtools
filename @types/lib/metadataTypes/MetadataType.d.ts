@@ -243,16 +243,18 @@ declare class MetadataType {
      * Abstract execute method that needs to be implemented in child metadata type
      *
      * @param {string[]} keyArr customerkey of the metadata
+     * @param {MetadataTypeMapObj} [cache] metadata cache used by refresh to avoid recaching
      * @returns {Promise.<string[]>} Returns list of keys that were executed
      */
-    static execute(keyArr: string[]): Promise<string[]>;
+    static execute(keyArr: string[], cache?: MetadataTypeMapObj): Promise<string[]>;
     /**
      * Abstract pause method that needs to be implemented in child metadata type
      *
      * @param {string[]} keyArr customerkey of the metadata
+     * @param {MetadataTypeMapObj} [cache] metadata cache used by refresh to avoid recaching
      * @returns {Promise.<string[]>} Returns list of keys that were paused
      */
-    static pause(keyArr: string[]): Promise<string[]>;
+    static pause(keyArr: string[], cache?: MetadataTypeMapObj): Promise<string[]>;
     /**
      * Abstract stop method that needs to be implemented in child metadata type
      *

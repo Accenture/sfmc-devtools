@@ -29,52 +29,6 @@
                 </PartnerProperties>
                 <CreatedDate>2018-06-25T05:58:00</CreatedDate>
                 <ModifiedDate>2018-06-25T05:58:00</ModifiedDate>
-                <ObjectID>b3150cf0-6e78-e811-80d4-1402ec721c9d</ObjectID>
-                <CustomerKey>testExisting_triggeredSend</CustomerKey>
-                <IsPlatformObject>false</IsPlatformObject>
-                <Name>testExisting_triggeredSend</Name>
-                <Description>Unsubscribe_Email</Description>
-                <Keyword />
-                <CategoryID>89348</CategoryID>
-                <SendClassification>
-                    <PartnerKey xsi:nil="true" />
-                    <ObjectID>95da425b-a06f-e611-96fe-38eaa7142c61</ObjectID>
-                    <CustomerKey>testExisting_sendClassification</CustomerKey>
-                </SendClassification>
-                <SenderProfile>
-                    <PartnerKey xsi:nil="true" />
-                    <ObjectID>a75d452b-7ef4-eb11-b82d-48df37d1da95</ObjectID>
-                    <CustomerKey>testExisting_senderProfile</CustomerKey>
-                </SenderProfile>
-                <FromName>unsubscribe</FromName>
-                <FromAddress>unsubscribe@emails.mcdev.accenture.com</FromAddress>
-                <SuppressTracking>false</SuppressTracking>
-                <TriggeredSendType>Continuous</TriggeredSendType>
-                <TriggeredSendStatus>New</TriggeredSendStatus>
-                <Email>
-                    <PartnerKey xsi:nil="true" />
-                    <ID>531213</ID>
-                    <ObjectID xsi:nil="true" />
-                </Email>
-                <AutoAddSubscribers>false</AutoAddSubscribers>
-                <AutoUpdateSubscribers>false</AutoUpdateSubscribers>
-                <BatchInterval>0</BatchInterval>
-                <EmailSubject>You are successfully unsubscribed</EmailSubject>
-                <DynamicEmailSubject>You are successfully unsubscribed</DynamicEmailSubject>
-                <IsMultipart>false</IsMultipart>
-                <IsWrapped>true</IsWrapped>
-                <AllowedSlots>0</AllowedSlots>
-                <NewSlotTrigger>0</NewSlotTrigger>
-                <Priority>4</Priority>
-            </Results>
-            <Results xsi:type="TriggeredSendDefinition">
-                <PartnerKey xsi:nil="true" />
-                <PartnerProperties>
-                    <Name>TestEmailAddr</Name>
-                    <Value />
-                </PartnerProperties>
-                <CreatedDate>2018-06-25T05:58:00</CreatedDate>
-                <ModifiedDate>2018-06-25T05:58:00</ModifiedDate>
                 <ObjectID>b3150cf0-6e78-e811-80d4-1402ec721c9a</ObjectID>
                 <CustomerKey>testExisting_triggeredSend_rcb</CustomerKey>
                 <IsPlatformObject>false</IsPlatformObject>
@@ -96,7 +50,7 @@
                 <FromAddress>%%= ContentBlockByKey("testExisting_asset_htmlblock") =%%</FromAddress>
                 <SuppressTracking>false</SuppressTracking>
                 <TriggeredSendType>Continuous</TriggeredSendType>
-                <TriggeredSendStatus>New</TriggeredSendStatus>
+                <TriggeredSendStatus>Active</TriggeredSendStatus>
                 <Email>
                     <PartnerKey xsi:nil="true" />
                     <ID>531213</ID>
