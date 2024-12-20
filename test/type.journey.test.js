@@ -927,4 +927,77 @@ describe('type: journey', () => {
             return;
         });
     });
+
+    describe('Refresh ================', () => {
+        it('Should refresh all active journeys');
+
+        it('Should refresh a specifc multi-step journey by key', async () => {
+            // WHEN
+            const replace = await handler.refresh('testInstance/testBU', {
+                journey: ['testExisting_journey_Multistep'],
+            });
+            // THEN
+            assert.equal(process.exitCode, 0, 'refresh should not have thrown an error');
+            // retrieve result
+
+            assert.deepEqual(
+                replace['testInstance/testBU'].journey,
+                ['testExisting_journey_Multistep'],
+                'should have found the right journeys that need updating'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                6,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should refresh a specifc transactional send journey by key', async () => {
+            // WHEN
+            const replace = await handler.refresh('testInstance/testBU', {
+                journey: ['testExisting_temail'],
+            });
+            // THEN
+            assert.equal(process.exitCode, 0, 'refresh should not have thrown an error');
+            // retrieve result
+
+            assert.deepEqual(
+                replace['testInstance/testBU'].journey,
+                ['testExisting_temail'],
+                'should have found the right journeys that need updating'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                3,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should refresh a specifc cross type journeys by key', async () => {
+            // WHEN
+            const replace = await handler.refresh('testInstance/testBU', {
+                journey: ['testExisting_temail', 'testExisting_journey_Multistep'],
+            });
+            // THEN
+            assert.equal(process.exitCode, 0, 'refresh should not have thrown an error');
+            // retrieve result
+
+            assert.deepEqual(
+                replace['testInstance/testBU'].journey,
+                ['testExisting_journey_Multistep', 'testExisting_temail'],
+                'should have found the right journeys that need updating'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                8,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
 });

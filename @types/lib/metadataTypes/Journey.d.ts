@@ -143,9 +143,10 @@ declare class Journey extends MetadataType {
      * helper for {@link Journey.refresh} that pauses, publishes and starts a triggered send
      *
      * @param {string} key external key of triggered send item
+     * @param {MetadataTypeMapObj} journeyCache metadata cache
      * @returns {Promise.<boolean>} true if refresh was successful
      */
-    static _refreshItem(key: string): Promise<boolean>;
+    static _refreshItem(key: string, journeyCache: MetadataTypeMapObj): Promise<boolean>;
 }
 declare namespace Journey {
     let definition: {

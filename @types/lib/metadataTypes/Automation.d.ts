@@ -111,6 +111,13 @@ declare class Automation extends MetadataType {
      */
     static postRetrieveTasks(metadata: AutomationItem): AutomationItem | void;
     /**
+     * a function to start query execution via API
+     *
+     * @param {string[]} keyArr customerkey of the metadata
+     * @returns {Promise.<string[]>} Returns list of keys that were executed
+     */
+    static execute(keyArr: string[]): Promise<string[]>;
+    /**
      * helper for {@link Automation.execute}
      *
      * @param {AutomationMap} metadataMap map of metadata
@@ -131,6 +138,13 @@ declare class Automation extends MetadataType {
         key: string;
         response: object;
     }>;
+    /**
+     * a function to start query execution via API
+     *
+     * @param {string[]} keyArr customerkey of the metadata
+     * @returns {Promise.<string[]>} Returns list of keys that were paused
+     */
+    static pause(keyArr: string[]): Promise<string[]>;
     /**
      * helper for {@link Automation.pause}
      *
