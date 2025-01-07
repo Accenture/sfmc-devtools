@@ -40,6 +40,8 @@ if (Util.isRunViaVSCodeExtension) {
 export const tWarn = `${color.bgYellow}${color.fgBlack}TEST-WARNING${color.reset}`;
 export const tError = `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}`;
 
+const loadingFile = 'loading server file:///';
+
 /**
  * gets mock SOAP metadata for responding
  *
@@ -55,7 +57,7 @@ async function loadSOAPRecords(mcdevAction, type, mid, filter, QueryAllAccounts)
     const testPath = path.join('test', 'resources', mid.toString(), type, mcdevAction);
     const filterPath = getFilterPath(filter, QueryAllAccounts);
     if (await fs.pathExists(testPath + filterPath + '-response.xml')) {
-        console.log('loading ' + projectRoot + testPath + filterPath + '-response.xml'); // eslint-disable-line no-console
+        console.log(loadingFile + projectRoot + testPath + filterPath + '-response.xml'); // eslint-disable-line no-console
         return fs.readFile(testPath + filterPath + '-response.xml', {
             encoding: 'utf8',
         });
@@ -71,7 +73,7 @@ async function loadSOAPRecords(mcdevAction, type, mid, filter, QueryAllAccounts)
             );
             /* eslint-enable no-console */
         }
-        console.log('loading ' + projectRoot + testPath + '-response.xml'); // eslint-disable-line no-console
+        console.log(loadingFile + projectRoot + testPath + '-response.xml'); // eslint-disable-line no-console
         return fs.readFile(testPath + '-response.xml', {
             encoding: 'utf8',
         });
@@ -334,10 +336,10 @@ export const handleRESTRequest = async (config) => {
                 );
                 response.items = response.items.filter((def) => def.name == filterName);
                 response.count = response.items.length;
-                console.log('loading ' + projectRoot + testPathFilter + '.json'); // eslint-disable-line no-console
+                console.log(loadingFile + projectRoot + testPathFilter + '.json'); // eslint-disable-line no-console
                 return [200, JSON.stringify(response)];
             } else {
-                console.log('loading ' + projectRoot + testPathFilter + '.json'); // eslint-disable-line no-console
+                console.log(loadingFile + projectRoot + testPathFilter + '.json'); // eslint-disable-line no-console
                 return [
                     200,
                     await fs.readFile(testPathFilter + '.json', {
@@ -346,7 +348,7 @@ export const handleRESTRequest = async (config) => {
                 ];
             }
         } else if (testPathFilter && (await fs.pathExists(testPathFilter + '.txt'))) {
-            console.log('loading ' + projectRoot + testPathFilter + '.txt'); // eslint-disable-line no-console
+            console.log(loadingFile + projectRoot + testPathFilter + '.txt'); // eslint-disable-line no-console
             return [
                 200,
                 await fs.readFile(testPathFilter + '.txt', {
@@ -354,7 +356,7 @@ export const handleRESTRequest = async (config) => {
                 }),
             ];
         } else if (testPathFilterBody && (await fs.pathExists(testPathFilterBody + '.json'))) {
-            console.log('loading ' + projectRoot + testPathFilterBody + '.json'); // eslint-disable-line no-console
+            console.log(loadingFile + projectRoot + testPathFilterBody + '.json'); // eslint-disable-line no-console
             return [
                 200,
                 await fs.readFile(testPathFilterBody + '.json', {
@@ -362,7 +364,7 @@ export const handleRESTRequest = async (config) => {
                 }),
             ];
         } else if (testPathFilterBody && (await fs.pathExists(testPathFilterBody + '.txt'))) {
-            console.log('loading ' + projectRoot + testPathFilterBody + '.txt'); // eslint-disable-line no-console
+            console.log(loadingFile + projectRoot + testPathFilterBody + '.txt'); // eslint-disable-line no-console
             return [
                 200,
                 await fs.readFile(testPathFilterBody + '.txt', {
@@ -403,10 +405,10 @@ export const handleRESTRequest = async (config) => {
                 );
                 response.items = response.items.filter((def) => def.name == filterName);
                 response.count = response.items.length;
-                console.log('loading ' + projectRoot + testPath + '.json'); // eslint-disable-line no-console
+                console.log(loadingFile + projectRoot + testPath + '.json'); // eslint-disable-line no-console
                 return [200, JSON.stringify(response)];
             } else {
-                console.log('loading ' + projectRoot + testPath + '.json'); // eslint-disable-line no-console
+                console.log(loadingFile + projectRoot + testPath + '.json'); // eslint-disable-line no-console
 
                 return [
                     200,
@@ -438,7 +440,7 @@ export const handleRESTRequest = async (config) => {
                 );
                 /* eslint-enable no-console */
             }
-            console.log('loading ' + projectRoot + testPath + '.txt'); // eslint-disable-line no-console
+            console.log(loadingFile + projectRoot + testPath + '.txt'); // eslint-disable-line no-console
             return [
                 200,
                 await fs.readFile(testPath + '.txt', {
