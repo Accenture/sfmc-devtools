@@ -82,7 +82,7 @@ describe('type: sendClassification', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                5,
+                6,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
