@@ -24,6 +24,8 @@ import {
 } from './resourceFactory.js';
 const authResources = File.readJsonSync(path.join(__dirname, './resources/auth.json'));
 
+const loadingFile = 'loading expected file:///' + __dirname.split(path.sep).join('/');
+
 /**
  * gets file from Retrieve folder
  *
@@ -160,7 +162,9 @@ export function getActualTemplateFile(customerKey, type, ext) {
  * @returns {Promise.<string>} file in JSON form
  */
 export function getExpectedJson(mid, type, action) {
-    return File.readJSON(`./test/resources/${mid}/${type}/${action}-expected.json`);
+    const path = `/resources/${mid}/${type}/${action}-expected.json`;
+    console.log(loadingFile + path); // eslint-disable-line no-console
+    return File.readJSON(`./test` + path);
 }
 
 /**
