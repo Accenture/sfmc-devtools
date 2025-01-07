@@ -28,7 +28,7 @@
             "value": "False"
         }
     ],
-    "description": "created via deploy",
+    "description": "blabla",
     "fileSpec": "testExisting-%%Year%%-%%Month%%-%%Day%%",
     "intervalType": 0,
     "key": "testExisting_dataExtract",
