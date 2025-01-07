@@ -10,6 +10,7 @@
     },
     "options": {
         "formatOnSave": true,
+        "formatErrorLog": false,
         "deployment": {
             "commitHistory": 10,
             "sourceTargetMapping": {
