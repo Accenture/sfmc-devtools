@@ -1,13 +1,12 @@
 {
     "type": "APIEvent",
     "name": "testExisting_event",
-    "description": "updated on deploy",
-    "createdDate": "0001-01-01T00:00:00",
-    "createdBy": 0,
-    "modifiedDate": "0001-01-01T00:00:00",
-    "modifiedBy": 0,
+    "description": "",
+    "createdDate": "2024-07-05T06:12:24.227",
+    "createdBy": "Jörn Berkefeld",
+    "modifiedDate": "2024-07-05T08:01:55.4",
+    "modifiedBy": "Jörn Berkefeld",
     "eventDefinitionKey": "testExisting_event",
-    "iconUrl": "/images/icon_journeyBuilder-event-api-blue.svg",
     "schema": {
         "fields": [
             {
@@ -219,15 +218,17 @@
         "sendableCustomObjectField": "ContactId",
         "sendableSubscriberField": "_SubscriberKey"
     },
+    "sourceApplicationExtensionId": "00000000-0000-0000-0000-000000000000",
     "filterDefinitionId": "00000000-0000-0000-0000-000000000000",
-    "arguments": {
-        "serializedObjectType": 11
-    },
-    "metaData": {},
+    "filterDefinitionTemplate": "",
+    "iconUrl": "",
+    "arguments": { "serializedObjectType": 11, "criteria": "" },
+    "metaData": { "scheduleState": "No Schedule" },
     "interactionCount": 0,
-    "isVisibleInPicker": false,
+    "isVisibleInPicker": true,
     "category": "Event",
     "publishedInteractionCount": 0,
     "automationId": "00000000-0000-0000-0000-000000000000",
+    "disableDEDataLogging": false,
     "r__dataExtension_key": "testExisting_event - 2024-07-05T080154625"
 }
