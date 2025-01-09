@@ -524,7 +524,7 @@ describe('type: journey', () => {
     });
 
     describe('Publish ================', () => {
-        it(`Should not publish a transactional journey by key that is already published`, async () => {
+        it(`Should not publish a transactional journey by key that is already published but instead trigger a refresh`, async () => {
             handler.setOptions({ skipStatusCheck: true });
             // WHEN
             const publish = await handler.publish(
@@ -533,17 +533,41 @@ describe('type: journey', () => {
                 ['testExisting_temail']
             );
             // THEN
-            assert.equal(process.exitCode, 1, 'publish should have thrown an error');
+            assert.equal(process.exitCode, 0, 'publish should not have thrown an error');
 
             assert.deepEqual(
                 publish['testInstance/testBU']?.journey,
-                [],
-                'should have not have published any journey'
+                ['testExisting_temail'],
+                'should not have published any journey but instead triggered a refresh'
+            );
+
+            // get callouts
+            const pauseCallout = testUtils.getRestCallout(
+                'post',
+                '/interaction/v1/interactions/transactional/pause'
+            );
+            const resumeCallout = testUtils.getRestCallout(
+                'post',
+                '/interaction/v1/interactions/transactional/resume'
+            );
+            const pauseResumeResponse = {
+                definitionId: 'dsfdsafdsa-922c-4568-85a5-e5cc77efc3be',
+            };
+            // confirm responses
+            assert.deepEqual(
+                pauseCallout,
+                pauseResumeResponse,
+                'pause-payload JSON was not equal expected'
+            );
+            assert.deepEqual(
+                resumeCallout,
+                pauseResumeResponse,
+                'resume-payload JSON was not equal expected'
             );
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                1,
+                4,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
