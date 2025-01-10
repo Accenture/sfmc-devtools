@@ -1,7 +1,7 @@
 declare namespace _default {
     function initCache(buObject: BuObject): void;
     function getCache(): MultiMetadataTypeMap;
-    function clearCache(mid?: number): void;
+    function clearCache(mid?: number, type?: string): void;
     function getByKey(type: string, key: string): MetadataTypeItem;
     function setMetadata(type: string, metadataMap: MetadataTypeMap): void;
     function mergeMetadata(type: string, metadataMap: MetadataTypeMap, overrideMID?: number): void;
