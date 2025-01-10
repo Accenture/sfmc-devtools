@@ -192,11 +192,11 @@ declare class Mcdev {
      * ensures triggered sends are restarted to ensure they pick up on changes of the underlying emails
      *
      * @param {string} businessUnit references credentials from properties.json
-     * @param {string[] | TypeKeyCombo} [selectedTypes] limit to given metadata types
+     * @param {string[] | TypeKeyCombo} selectedTypes limit to given metadata types
      * @param {string[]} [keys] customerkey of the metadata
      * @returns {Promise.<Object.<string, Object.<string, string[]>>>} key: business unit name, key2: type, value: list of affected item keys
      */
-    static refresh(businessUnit: string, selectedTypes?: string[] | TypeKeyCombo, keys?: string[]): Promise<{
+    static refresh(businessUnit: string, selectedTypes: string[] | TypeKeyCombo, keys?: string[]): Promise<{
         [x: string]: {
             [x: string]: string[];
         };
@@ -299,19 +299,6 @@ declare class Mcdev {
      */
     static getFilesToCommit(businessUnit: string, selectedType: string, keyArr: string[]): Promise<string[]>;
     /**
-     * Schedule an item (shortcut for execute --schedule)
-     *
-     * @param {string} businessUnit name of BU
-     * @param {string[] | TypeKeyCombo} [selectedTypes] limit to given metadata types
-     * @param {string[]} [keys] customerkey of the metadata
-     * @returns {Promise.<Object.<string, Object.<string, string[]>>>} key: business unit name, key2: type, value: list of affected item keys
-     */
-    static schedule(businessUnit: string, selectedTypes?: string[] | TypeKeyCombo, keys?: string[]): Promise<{
-        [x: string]: {
-            [x: string]: string[];
-        };
-    }>;
-    /**
      * Publish an item
      *
      * @param {string} businessUnit name of BU
@@ -341,11 +328,24 @@ declare class Mcdev {
      * Start/execute an item
      *
      * @param {string} businessUnit name of BU
-     * @param {string[] | TypeKeyCombo} [selectedTypes] limit to given metadata types
+     * @param {string[] | TypeKeyCombo} selectedTypes limit to given metadata types
      * @param {string[]} [keys] customerkey of the metadata
      * @returns {Promise.<Object.<string, Object.<string, string[]>>>} key: business unit name, key2: type, value: list of affected item keys
      */
-    static execute(businessUnit: string, selectedTypes?: string[] | TypeKeyCombo, keys?: string[]): Promise<{
+    static execute(businessUnit: string, selectedTypes: string[] | TypeKeyCombo, keys?: string[]): Promise<{
+        [x: string]: {
+            [x: string]: string[];
+        };
+    }>;
+    /**
+     * Schedule an item (shortcut for execute --schedule)
+     *
+     * @param {string} businessUnit name of BU
+     * @param {string[] | TypeKeyCombo} selectedTypes limit to given metadata types
+     * @param {string[]} [keys] customerkey of the metadata
+     * @returns {Promise.<Object.<string, Object.<string, string[]>>>} key: business unit name, key2: type, value: list of affected item keys
+     */
+    static schedule(businessUnit: string, selectedTypes: string[] | TypeKeyCombo, keys?: string[]): Promise<{
         [x: string]: {
             [x: string]: string[];
         };
@@ -354,11 +354,11 @@ declare class Mcdev {
      * pause an item
      *
      * @param {string} businessUnit name of BU
-     * @param {string[] | TypeKeyCombo} [selectedTypes] limit to given metadata types
+     * @param {string[] | TypeKeyCombo} selectedTypes limit to given metadata types
      * @param {string[]} [keys] customerkey of the metadata
      * @returns {Promise.<Object.<string, Object.<string, string[]>>>} key: business unit name, key2: type, value: list of affected item keys
      */
-    static pause(businessUnit: string, selectedTypes?: string[] | TypeKeyCombo, keys?: string[]): Promise<{
+    static pause(businessUnit: string, selectedTypes: string[] | TypeKeyCombo, keys?: string[]): Promise<{
         [x: string]: {
             [x: string]: string[];
         };
@@ -367,11 +367,11 @@ declare class Mcdev {
      * stop an item
      *
      * @param {string} businessUnit name of BU
-     * @param {string[] | TypeKeyCombo} [selectedTypes] limit to given metadata types
+     * @param {string[] | TypeKeyCombo} selectedTypes limit to given metadata types
      * @param {string[]} [keys] customerkey of the metadata
      * @returns {Promise.<Object.<string, Object.<string, string[]>>>} key: business unit name, key2: type, value: list of affected item keys
      */
-    static stop(businessUnit: string, selectedTypes?: string[] | TypeKeyCombo, keys?: string[]): Promise<{
+    static stop(businessUnit: string, selectedTypes: string[] | TypeKeyCombo, keys?: string[]): Promise<{
         [x: string]: {
             [x: string]: string[];
         };
