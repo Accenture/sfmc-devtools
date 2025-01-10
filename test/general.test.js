@@ -2303,6 +2303,29 @@ describe('GENERAL', () => {
                 );
             });
         });
+
+        describe('Refresh ================', () => {
+            it('Should not refresh anything due to missing type', async () => {
+                // WHEN
+                const replace = await handler.refresh('testInstance/testBU', null);
+                // THEN
+                assert.equal(process.exitCode, 1, 'refresh should have thrown an error');
+                // retrieve result
+
+                assert.deepEqual(
+                    Object.keys(replace).length,
+                    0,
+                    'should not have replaced anything'
+                );
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    0,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+                return;
+            });
+        });
     });
 
     describe('init ================', () => {
