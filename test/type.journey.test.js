@@ -595,13 +595,23 @@ describe('type: journey', () => {
                 'post',
                 '/interaction/v1/interactions/transactional/create'
             );
-            // confirm created item
+            // confirm callouts
             assert.deepEqual(
                 publishCallout,
                 {
                     definitionId: 'd4a900fe-3a8f-4cc5-9a49-81286e3e2cd2',
                 },
                 'publish-payload JSON was not equal expected'
+            );
+
+            // confirm transactionalEmail was downloaded
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    'testExisting_temail_notPublished',
+                    'transactionalEmail'
+                ),
+                await testUtils.getExpectedJson('9999999', 'transactionalEmail', 'get-published'),
+                'returned JSON was not equal expected'
             );
 
             assert.equal(
