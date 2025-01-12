@@ -100,9 +100,10 @@ declare class Journey extends MetadataType {
      * a function to publish the journey via API
      *
      * @param {string[]} keyArr keys or ids of the metadata
+     * @param {MetadataTypeMap} [upsertResults] metadata mapped by their keyField as returned by update/create
      * @returns {Promise.<string[]>} Returns list of updated keys/ids that were published. Success could only be seen with a delay in the UI because the publish-endpoint is async
      */
-    static publish(keyArr: string[]): Promise<string[]>;
+    static publish(keyArr: string[], upsertResults?: MetadataTypeMap): Promise<string[]>;
     /**
      * helper for {@link Journey.publish} and {@link Journey.validate}
      *
