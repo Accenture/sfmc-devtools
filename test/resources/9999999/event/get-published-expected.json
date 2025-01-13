@@ -1,0 +1,30 @@
+{
+    "type": "EmailAudience",
+    "name": "testExisting_journey_Multistep",
+    "description": "",
+    "createdDate": "2024-05-04T05:54:44.95",
+    "createdBy": "Jörn Berkefeld",
+    "modifiedDate": "2024-05-04T05:54:44.95",
+    "modifiedBy": "Jörn Berkefeld",
+    "eventDefinitionKey": "DEAudience-2e3c73b6-48cc-2ec0-5522-48636e1a236e",
+    "sourceApplicationExtensionId": "97e942ee-6914-4d3d-9e52-37ecb71f79ed",
+    "filterDefinitionId": "00000000-0000-0000-0000-000000000000",
+    "filterDefinitionTemplate": "",
+    "iconUrl": "/images/icon-data-extension.svg",
+    "configurationArguments": {},
+    "arguments": {
+        "serializedObjectType": 3,
+        "criteria": ""
+    },
+    "metaData": {
+        "criteriaDescription": "",
+        "scheduleState": "No Schedule"
+    },
+    "interactionCount": 1,
+    "isVisibleInPicker": false,
+    "category": "Audience",
+    "publishedInteractionCount": 0,
+    "automationId": "00000000-0000-0000-0000-000000000000",
+    "disableDEDataLogging": false,
+    "r__dataExtension_key": "testExisting_journey_Multistep"
+}
