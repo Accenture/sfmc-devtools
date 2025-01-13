@@ -107,6 +107,14 @@ declare class Journey extends MetadataType {
      */
     static publish(keyArr: string[], upsertResults?: MetadataTypeMap): Promise<string[]>;
     /**
+     *
+     * @param {string[]} executedKeyArr list of journey keys
+     * @param {number} transactionalCounter how many transactiona-send journeys did we expect to refresh
+     * @param {number} multiStepCounter how many multi-step journeys did we expect to refresh
+     * @returns {Promise.<void>} -
+     */
+    static _reRetrieve(executedKeyArr: string[], transactionalCounter: number, multiStepCounter: number): Promise<void>;
+    /**
      * helper for {@link Journey.publish} and {@link Journey.validate}
      *
      * @param {string} statusUrl URL to check the status of the publish request
