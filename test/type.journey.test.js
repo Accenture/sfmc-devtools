@@ -218,6 +218,32 @@ describe('type: journey', () => {
             return;
         });
 
+        it('Should not deploy --publish an already published transactional journey', async () => {
+            // WHEN
+            handler.setOptions({ skipStatusCheck: true, publish: true });
+            const deploy = await handler.deploy(
+                'testInstance/testBU',
+                ['journey'],
+                ['testExisting_temail']
+            );
+
+            // THEN
+            assert.equal(process.exitCode, 1, 'deploy --publish should have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                Object.keys(deploy['testInstance/testBU']?.journey),
+                [],
+                'should have published the right journey'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                22,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
         it('Should deploy --publish a transactional journey', async () => {
             // WHEN
             handler.setOptions({ skipStatusCheck: true, publish: true });
@@ -263,64 +289,6 @@ describe('type: journey', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 57,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            );
-            return;
-        });
-
-        it('Should deploy --publish an already published transactional journey and refresh it', async () => {
-            // WHEN
-            handler.setOptions({ skipStatusCheck: true, publish: true });
-            const deploy = await handler.deploy(
-                'testInstance/testBU',
-                ['journey'],
-                ['testExisting_temail']
-            );
-
-            // THEN
-            assert.equal(process.exitCode, 0, 'deploy --publish should not have thrown an error');
-            // retrieve result
-            assert.deepEqual(
-                Object.keys(deploy['testInstance/testBU']?.journey),
-                ['testExisting_temail'],
-                'should have published the right journey'
-            );
-
-            // get callouts
-            const pauseCallout = testUtils.getRestCallout(
-                'post',
-                '/interaction/v1/interactions/transactional/pause'
-            );
-            const resumeCallout = testUtils.getRestCallout(
-                'post',
-                '/interaction/v1/interactions/transactional/pause'
-            );
-            // confirm callouts
-            assert.deepEqual(
-                pauseCallout,
-                {
-                    definitionId: 'dsfdsafdsa-922c-4568-85a5-e5cc77efc3be',
-                },
-                'pause-payload JSON was not equal expected'
-            );
-            assert.deepEqual(
-                resumeCallout,
-                {
-                    definitionId: 'dsfdsafdsa-922c-4568-85a5-e5cc77efc3be',
-                },
-                'resume-payload JSON was not equal expected'
-            );
-
-            // confirm transactionalEmail was downloaded
-            // assert.deepEqual(
-            //     await testUtils.getActualJson('testExisting_temail', 'transactionalEmail'),
-            //     await testUtils.getExpectedJson('9999999', 'transactionalEmail', 'get'),
-            //     'returned JSON was not equal expected'
-            // );
-
-            assert.equal(
-                testUtils.getAPIHistoryLength(),
-                26,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -719,9 +687,21 @@ describe('type: journey', () => {
                 'resume-payload JSON was not equal expected'
             );
 
+            // confirm transactionalEmail was downloaded
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_temail', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get-transactionalEmail'),
+                'returned JSON was not equal expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_temail', 'transactionalEmail'),
+                await testUtils.getExpectedJson('9999999', 'transactionalEmail', 'get'),
+                'returned JSON was not equal expected'
+            );
+
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                4,
+                37,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -1200,7 +1180,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                3,
+                36,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -1223,7 +1203,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                8,
+                41,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
