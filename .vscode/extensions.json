@@ -7,6 +7,7 @@
         // collaboration
         "aaron-bond.better-comments",
         "github.vscode-pull-request-github",
+        "johnpapa.vscode-peacock",
 
         // Linters
         "dbaeumer.vscode-eslint",

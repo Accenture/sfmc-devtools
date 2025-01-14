@@ -6,6 +6,7 @@
     "recommendations": [
         // collaboration
         "aaron-bond.better-comments",
+        "johnpapa.vscode-peacock",
 
         // Linters
         "dbaeumer.vscode-eslint",
