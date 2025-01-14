@@ -527,7 +527,7 @@ describe('GENERAL', () => {
                 assert.equal(deployedTypes[0], 'dataExtract', 'deploy should have returned 1 type');
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    8,
+                    10,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -569,7 +569,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    16,
+                    17,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -632,7 +632,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    17,
+                    18,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -697,7 +697,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    14,
+                    15,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -2249,7 +2249,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    16,
+                    17,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -2298,9 +2298,32 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    11,
+                    12,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
+            });
+        });
+
+        describe('Refresh ================', () => {
+            it('Should not refresh anything due to missing type', async () => {
+                // WHEN
+                const replace = await handler.refresh('testInstance/testBU', null);
+                // THEN
+                assert.equal(process.exitCode, 1, 'refresh should have thrown an error');
+                // retrieve result
+
+                assert.deepEqual(
+                    Object.keys(replace).length,
+                    0,
+                    'should not have replaced anything'
+                );
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    0,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+                return;
             });
         });
     });

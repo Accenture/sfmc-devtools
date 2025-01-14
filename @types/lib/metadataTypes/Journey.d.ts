@@ -9,6 +9,7 @@ export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -20,6 +21,7 @@ export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
+ * @typedef {import('../../types/mcdev.d.js').TypeKeyCombo} TypeKeyCombo
  */
 /**
  * Journey MetadataType
@@ -100,9 +102,18 @@ declare class Journey extends MetadataType {
      * a function to publish the journey via API
      *
      * @param {string[]} keyArr keys or ids of the metadata
+     * @param {MetadataTypeMap} [upsertResults] metadata mapped by their keyField as returned by update/create
      * @returns {Promise.<string[]>} Returns list of updated keys/ids that were published. Success could only be seen with a delay in the UI because the publish-endpoint is async
      */
-    static publish(keyArr: string[]): Promise<string[]>;
+    static publish(keyArr: string[], upsertResults?: MetadataTypeMap): Promise<string[]>;
+    /**
+     *
+     * @param {string[]} executedKeyArr list of journey keys
+     * @param {number} transactionalCounter how many transactiona-send journeys did we expect to refresh
+     * @param {number} multiStepCounter how many multi-step journeys did we expect to refresh
+     * @returns {Promise.<void>} -
+     */
+    static _reRetrieve(executedKeyArr: string[], transactionalCounter: number, multiStepCounter: number): Promise<void>;
     /**
      * helper for {@link Journey.publish} and {@link Journey.validate}
      *
@@ -135,10 +146,9 @@ declare class Journey extends MetadataType {
      * TSD-specific refresh method that finds active TSDs and refreshes them
      *
      * @param {string[]} keyArr metadata keys
-     * @param {boolean} [checkKey] whether to check if the key is valid
      * @returns {Promise.<string[]>} Returns list of keys that were refreshed
      */
-    static refresh(keyArr: string[], checkKey?: boolean): Promise<string[]>;
+    static refresh(keyArr: string[]): Promise<string[]>;
     /**
      * helper for {@link Journey.refresh} that pauses, publishes and starts a triggered send
      *

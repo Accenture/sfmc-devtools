@@ -68,7 +68,6 @@
                     "blocks": {
                         "hy6ik0ftsb4": {
                             "r__asset_key": "testExisting_asset_htmlblock",
-                            "r__folder_Path": "Content Builder",
                             "assetType": {
                                 "id": 197,
                                 "name": "htmlblock",

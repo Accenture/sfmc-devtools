@@ -1,15 +1,19 @@
 {
     "FallbackFromAddress": "",
-    "AutoForwardToEmailAddress": "joern.berkefeld@accenture.com",
-    "AutoForwardToName": "Jörn Berkefeld",
-    "AutoReply": false,
+    "CreatedDate": "2021-08-03T11:14:00",
+    "ModifiedDate": "2021-08-03T11:14:00",
     "CustomerKey": "testExisting_senderProfile",
-    "Description": "updated via deploy",
-    "DirectForward": false,
-    "FromAddress": "joern.berkefeld@accenture.com",
-    "FromName": "Jörn Berkefeld",
     "Name": "testExisting_senderProfile",
+    "Description": "Send from joern.berkefeld@accenture.com",
+    "FromName": "Jörn Berkefeld",
+    "FromAddress": "joern.berkefeld@accenture.com",
+    "UseDefaultRMMRules": true,
+    "AutoForwardToEmailAddress": "",
+    "AutoForwardToName": "",
+    "DirectForward": false,
+    "AutoReply": false,
     "SenderHeaderEmailAddress": "",
     "SenderHeaderName": "",
-    "UseDefaultRMMRules": false
+    "createdBy": "Jörn Berkefeld",
+    "modifiedBy": "Jörn Berkefeld"
 }

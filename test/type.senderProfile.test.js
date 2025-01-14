@@ -76,7 +76,7 @@ describe('type: senderProfile', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                6,
+                7,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
