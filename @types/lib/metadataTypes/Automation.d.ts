@@ -370,6 +370,12 @@ declare namespace Automation {
             Scheduled: number;
             Stopped: number;
         };
+        fileNameOperatorMapping: {
+            Equals: number;
+            Contains: number;
+            'Begins with': number;
+            'Ends with': number;
+        };
         timeZoneMapping: {
             'Afghanistan Standard Time': number;
             'Alaskan Standard Time': number;
