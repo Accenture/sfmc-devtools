@@ -701,6 +701,46 @@ describe('GENERAL', () => {
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
+
+            it('skip deploy event with bad filename or bad extension', async () => {
+                testUtils.copyToDeploy('event-deploy', 'event');
+
+                const argvMetadata = [
+                    'event:testNew_event_badExtension',
+                    'event:testNew_event_badName',
+                ];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                const buName = 'testInstance/testBU';
+                await handler.deploy(buName, typeKeyCombo);
+                // THEN
+                assert.equal(process.exitCode, 1, 'deploy should not have thrown an error');
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    0,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+            });
+
+            it('skip deploy asset with bad filename or bad extension', async () => {
+                testUtils.copyToDeploy('asset-deploy', 'asset');
+                const argvMetadata = [
+                    'asset:testNew_asset_badExtension',
+                    'asset:testNew_asset_badName',
+                ];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                const buName = 'testInstance/testBU';
+                await handler.deploy(buName, typeKeyCombo);
+
+                // THEN
+                assert.equal(process.exitCode, 1, 'deploy should not have thrown an error');
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    0,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+            });
         });
 
         describe('template --metadata ~~~', () => {
