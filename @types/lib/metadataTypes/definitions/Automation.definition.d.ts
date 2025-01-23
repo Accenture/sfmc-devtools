@@ -76,6 +76,12 @@ declare namespace _default {
         let Scheduled: number;
         let Stopped: number;
     }
+    export let fileNameOperatorMapping: {
+        Equals: number;
+        Contains: number;
+        'Begins with': number;
+        'Ends with': number;
+    };
     export let timeZoneMapping: {
         'Afghanistan Standard Time': number;
         'Alaskan Standard Time': number;

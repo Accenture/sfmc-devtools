@@ -1,4 +1,4 @@
-export default FtpLocation;
+export default FileLocation;
 export type BuObject = import("../../types/mcdev.d.js").BuObject;
 export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
 export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
@@ -26,10 +26,10 @@ export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
  *
  * @augments MetadataType
  */
-declare class FtpLocation extends MetadataType {
+declare class FileLocation extends MetadataType {
     /**
-     * Retrieves Metadata of FtpLocation
-     * Endpoint /automation/v1/ftplocations/ return all FtpLocations
+     * Retrieves Metadata of FileLocation
+     * Endpoint /automation/v1/ftplocations/ return all FileLocations
      *
      * @param {string} retrieveDir Directory where retrieved metadata directory will be saved
      * @param {void | string[]} [_] unused parameter
@@ -44,8 +44,22 @@ declare class FtpLocation extends MetadataType {
      * @returns {Promise.<MetadataTypeMapObj>} Promise
      */
     static retrieveForCache(): Promise<MetadataTypeMapObj>;
+    /**
+     * prepares a import definition for deployment
+     *
+     * @param {MetadataTypeItem} metadata a single importDef
+     * @returns {Promise.<MetadataTypeItem>} Promise
+     */
+    static preDeployTasks(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
+    /**
+     * manages post retrieve steps
+     *
+     * @param {MetadataTypeItem} metadata a single item
+     * @returns {MetadataTypeItem} parsed metadata
+     */
+    static postRetrieveTasks(metadata: MetadataTypeItem): MetadataTypeItem;
 }
-declare namespace FtpLocation {
+declare namespace FileLocation {
     let definition: {
         bodyIteratorField: string;
         dependencies: any[];
@@ -64,6 +78,20 @@ declare namespace FtpLocation {
         typeDescription: string;
         typeRetrieveByDefault: boolean;
         typeName: string;
+        locationTypeMapping: {
+            'Enhanced FTP Site Import Directory': number;
+            'External FTP Site': number;
+            'External SFTP Site': number;
+            'External FTPS Site': number;
+            'Salesforce Objects and Reports': number;
+            Safehouse: number;
+            'Enhanced FTP Site Export Directory': number;
+            'Legacy Import Directory': number;
+            'Relative location under FTP Site': number;
+            'Amazon Simple Storage Service': number;
+            'Azure Blob Storage': number;
+            'Google Cloud Storage': number;
+        };
         fields: {
             id: {
                 isCreateable: boolean;
@@ -90,6 +118,12 @@ declare namespace FtpLocation {
                 template: boolean;
             };
             relPath: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            c__locationType: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

@@ -16,6 +16,20 @@ declare namespace _default {
     let typeDescription: string;
     let typeRetrieveByDefault: boolean;
     let typeName: string;
+    let locationTypeMapping: {
+        'Enhanced FTP Site Import Directory': number;
+        'External FTP Site': number;
+        'External SFTP Site': number;
+        'External FTPS Site': number;
+        'Salesforce Objects and Reports': number;
+        Safehouse: number;
+        'Enhanced FTP Site Export Directory': number;
+        'Legacy Import Directory': number;
+        'Relative location under FTP Site': number;
+        'Amazon Simple Storage Service': number;
+        'Azure Blob Storage': number;
+        'Google Cloud Storage': number;
+    };
     namespace fields {
         namespace id {
             let isCreateable: boolean;
@@ -62,6 +76,16 @@ declare namespace _default {
             export { retrieving_4 as retrieving };
             let template_4: boolean;
             export { template_4 as template };
+        }
+        namespace c__locationType {
+            let isCreateable_5: boolean;
+            export { isCreateable_5 as isCreateable };
+            let isUpdateable_5: boolean;
+            export { isUpdateable_5 as isUpdateable };
+            let retrieving_5: boolean;
+            export { retrieving_5 as retrieving };
+            let template_5: boolean;
+            export { template_5 as template };
         }
     }
 }
