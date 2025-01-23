@@ -26,12 +26,12 @@ exec('git status --porcelain', (err, stdout, stderr) => {
                     console.error(`Error executing git commit: ${stderr}`);
                     return;
                 } else {
-                    console.log('Changes committed successfully.');
+                    console.log('✅ Changes committed successfully.');
                 }
             });
         });
     } else {
-        console.log('No untracked files to commit.');
+        console.log('✅ No untracked files to commit.');
     }
 });
 /* eslint-enable no-console */
