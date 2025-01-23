@@ -60,9 +60,8 @@
         "test": "mocha --reporter-option maxDiffSize=25000",
         "coverage": "c8 npm run test",
         "prepare-release:audit-fix": "npm audit fix",
-        "prepare-release:git-stage": "git add .",
-        "prepare-release:git-commit": "git commit -n -m \"prepare-release changes\"",
-        "prepare-release": "run-s prepare-release:audit-fix lint-ts lint:fix prepare-release:git-stage prepare-release:git-commit",
+        "prepare-release:git": "node prepare-release.js",
+        "prepare-release": "run-s prepare-release:audit-fix lint-ts lint:fix prepare-release:git",
         "version:major": "npm version --no-commit-hooks major",
         "version:minor": "npm version --no-commit-hooks minor",
         "version:patch": "npm version --no-commit-hooks patch"
@@ -123,9 +122,7 @@
         "fsevents": "*"
     },
     "lint-staged": {
-        "*.js": [
-            "eslint --fix"
-        ]
+        "*.js": ["eslint --fix"]
     },
     "type": "module"
 }
