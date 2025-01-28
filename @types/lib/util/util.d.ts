@@ -55,6 +55,14 @@ export namespace Util {
      */
     function verifyMarketList(mlName: string, properties: Mcdevrc): void;
     /**
+     *
+     * @param {string | TypeKeyCombo} selectedTypes supported metadata type
+     * @param {string[]} [keyArr] name/key of the metadata
+     * @param {string} [commandName] for log output only
+     * @returns {TypeKeyCombo} true if everything is valid; false otherwise
+     */
+    function checkAndPrepareTypeKeyCombo(selectedTypes: string | TypeKeyCombo, keyArr?: string[], commandName?: string): TypeKeyCombo;
+    /**
      * used to ensure the program tells surrounding software that an unrecoverable error occured
      *
      * @returns {void}
