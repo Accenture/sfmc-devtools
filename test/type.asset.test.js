@@ -685,11 +685,11 @@ describe('type: asset', () => {
             assert.deepEqual(
                 templatedItems.asset.map((item) => item.customerKey),
                 [
-                    '{{{prefix}}}asset_templatebasedemail',
-                    '{{{prefix}}}asset_template',
                     '{{{prefix}}}asset_htmlblock',
-                    '{{{prefix}}}htmlblock1',
+                    '{{{prefix}}}asset_template',
+                    '{{{prefix}}}asset_templatebasedemail',
                     '{{{prefix}}}htmlblock 3 spaces',
+                    '{{{prefix}}}htmlblock1',
                     '{{{prefix}}}htmlblock2',
                 ],
                 'expected specific assets to be templated'

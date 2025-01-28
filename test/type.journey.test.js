@@ -418,7 +418,7 @@ describe('type: journey', () => {
             // journey
             assert.deepEqual(
                 templatedItems.journey.map((item) => item.key),
-                ['{{{prefix}}}journey_Quicksend', '{{{prefix}}}journey_Multistep'],
+                ['{{{prefix}}}journey_Multistep', '{{{prefix}}}journey_Quicksend'],
                 'expected specific journeys to be templated'
             );
             // event
@@ -434,9 +434,9 @@ describe('type: journey', () => {
             assert.deepEqual(
                 templatedItems.dataExtension.map((item) => item.CustomerKey),
                 [
-                    '{{{prefix}}}journey_Quicksend',
-                    '{{{prefix}}}journey_Multistep',
                     '{{{prefix}}}DomainExclusion',
+                    '{{{prefix}}}journey_Multistep',
+                    '{{{prefix}}}journey_Quicksend',
                 ],
                 'expected specific dataExtensions to be templated'
             );
@@ -457,8 +457,8 @@ describe('type: journey', () => {
                 templatedItems.asset.map((item) => item.customerKey),
                 [
                     '{{{prefix}}}asset_htmlblock',
-                    '{{{prefix}}}htmlblock1',
                     '{{{prefix}}}htmlblock 3 spaces',
+                    '{{{prefix}}}htmlblock1',
                     '{{{prefix}}}htmlblock2',
                 ],
                 'expected specific assets to be templated'
