@@ -1423,6 +1423,7 @@ describe('GENERAL', () => {
                 );
                 const buName = 'testInstance/testBU';
 
+                handler.setOptions({ skipInteraction: true, purge: false });
                 // *** build: buildTemplate and buildDefinition chained ***
                 const definitionResult = await handler.build(
                     buName,
@@ -1515,7 +1516,7 @@ describe('GENERAL', () => {
                 const buName = 'testInstance/testBU';
 
                 // set skipInteraction to true to skip re-retrieving question
-                handler.setOptions({ dependencies: true, skipInteraction: true });
+                handler.setOptions({ dependencies: true, skipInteraction: true, purge: true });
 
                 // *** build: buildTemplate and buildDefinition chained ***
                 const definitionResult = await handler.build(
@@ -1617,7 +1618,12 @@ describe('GENERAL', () => {
                 );
                 const buName = 'testInstance/testBU';
 
-                handler.setOptions({ dependencies: true, retrieve: true, skipInteraction: true });
+                handler.setOptions({
+                    dependencies: true,
+                    retrieve: true,
+                    skipInteraction: true,
+                    purge: true,
+                });
 
                 // *** build: buildTemplate and buildDefinition chained ***
                 const definitionResult = await handler.build(
@@ -1729,6 +1735,7 @@ describe('GENERAL', () => {
                     'typeKeyCombo should not be undefined'
                 );
                 const buName = 'testInstance/testBU';
+                handler.setOptions({ skipInteraction: true, purge: false });
 
                 // *** build: buildTemplate and buildDefinition chained ***
                 const definitionResult = await handler.build(
@@ -1909,7 +1916,7 @@ describe('GENERAL', () => {
                 const buName = 'testInstance/testBU';
 
                 // set skipInteraction to true to skip re-retrieving question
-                handler.setOptions({ dependencies: true, skipInteraction: true });
+                handler.setOptions({ dependencies: true, skipInteraction: true, purge: true });
 
                 // *** build: buildTemplate and buildDefinition chained ***
                 const definitionResult = await handler.build(
