@@ -59,9 +59,9 @@ export namespace Util {
      * @param {string | TypeKeyCombo} selectedTypes supported metadata type
      * @param {string[]} [keyArr] name/key of the metadata
      * @param {string} [commandName] for log output only
-     * @returns {TypeKeyCombo} true if everything is valid; false otherwise
+     * @returns {TypeKeyCombo | undefined} true if everything is valid; false otherwise
      */
-    function checkAndPrepareTypeKeyCombo(selectedTypes: string | TypeKeyCombo, keyArr?: string[], commandName?: string): TypeKeyCombo;
+    function checkAndPrepareTypeKeyCombo(selectedTypes: string | TypeKeyCombo, keyArr?: string[], commandName?: string): TypeKeyCombo | undefined;
     /**
      * used to ensure the program tells surrounding software that an unrecoverable error occured
      *
