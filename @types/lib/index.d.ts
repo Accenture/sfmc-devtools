@@ -245,6 +245,15 @@ declare class Mcdev {
      * @param {string} businessUnitTemplate references credentials from properties.json
      * @param {string} businessUnitDefinition references credentials from properties.json
      * @param {TypeKeyCombo} typeKeyCombo limit retrieval to given metadata type
+     * @returns {Promise.<MultiMetadataTypeList | object>} response from buildDefinition
+     */
+    static clone(businessUnitTemplate: string, businessUnitDefinition: string, typeKeyCombo: TypeKeyCombo): Promise<MultiMetadataTypeList | object>;
+    /**
+     * Build a template based on a list of metadata files in the retrieve folder.
+     *
+     * @param {string} businessUnitTemplate references credentials from properties.json
+     * @param {string} businessUnitDefinition references credentials from properties.json
+     * @param {TypeKeyCombo} typeKeyCombo limit retrieval to given metadata type
      * @param {string[]} marketTemplate market localizations
      * @param {string[]} marketDefinition market localizations
      * @param {boolean} [bulk] runs buildDefinitionBulk instead of buildDefinition; requires marketList to be defined and given via marketDefinition
