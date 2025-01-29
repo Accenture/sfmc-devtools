@@ -48,6 +48,14 @@ export namespace Util {
      */
     function checkMarket(market: string, properties: Mcdevrc): boolean;
     /**
+     * check if a market name exists in current mcdev config
+     *
+     * @param {string[]} marketArr market localizations
+     * @param {Mcdevrc} properties local mcdev config
+     * @returns {boolean} found market or not
+     */
+    function checkMarketList(marketArr: string[], properties: Mcdevrc): boolean;
+    /**
      * ensure provided MarketList exists and it's content including markets and BUs checks out
      *
      * @param {string} mlName name of marketList
