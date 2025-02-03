@@ -33,7 +33,7 @@ jobs:
                   git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
 
             - name: Upload coverage artifact
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                   name: test-coverage-output
                   path: coverage
