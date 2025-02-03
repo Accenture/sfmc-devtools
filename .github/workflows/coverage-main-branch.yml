@@ -34,7 +34,9 @@ jobs:
                   npx c8 report --reporter json-summary --exclude-after-remap false
 
             - name: Upload coverage artifact
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                   name: test-coverage-output
                   path: coverage
+                  overwrite: true
+                  retention-days: 90
