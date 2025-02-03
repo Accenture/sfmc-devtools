@@ -37,9 +37,11 @@ jobs:
               with:
                   name: test-coverage-output
                   path: coverage
+                  overwrite: true
+                  retention-days: 90
 
             - name: Download coverage artifact
-              uses: actions/download-artifact@v3
+              uses: actions/download-artifact@v4
               with:
                   path: artifacts
 
