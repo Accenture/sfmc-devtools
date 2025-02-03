@@ -26,7 +26,7 @@ describe('type: transactionalEmail', () => {
             const result = cache.getCache();
             assert.equal(
                 result.transactionalEmail ? Object.keys(result.transactionalEmail).length : 0,
-                2,
+                3,
                 'unexpected number of transactionalEmail'
             );
             assert.deepEqual(
@@ -36,7 +36,7 @@ describe('type: transactionalEmail', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                13,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -57,7 +57,7 @@ describe('type: transactionalEmail', () => {
             const result = cache.getCache();
             assert.equal(
                 result.transactionalEmail ? Object.keys(result.transactionalEmail).length : 0,
-                3,
+                4,
                 'unexpected number of transactionalEmails'
             );
             // confirm created item
@@ -75,7 +75,7 @@ describe('type: transactionalEmail', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                15,
+                16,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -137,7 +137,7 @@ describe('type: transactionalEmail', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                13,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
