@@ -33,13 +33,15 @@ jobs:
                   git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
 
             - name: Upload coverage artifact
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                   name: test-coverage-output
                   path: coverage
+                  overwrite: true
+                  retention-days: 90
 
             - name: Download coverage artifact
-              uses: actions/download-artifact@v3
+              uses: actions/download-artifact@v4
               with:
                   path: artifacts
 
@@ -56,7 +58,7 @@ jobs:
                   GITHUB_TOKEN: ${{ github.token }}
 
             - name: Download artifact for base branch if available, previous
-              uses: dawidd6/action-download-artifact@v7
+              uses: dawidd6/action-download-artifact@v8
               continue-on-error: true
               with:
                   workflow: ${{ github.event.pull_request.base.ref == 'main' && 'coverage-main-branch.yml' || github.event.pull_request.base.ref == 'develop' && 'coverage-develop-branch.yml' || 'coverage.yml' }}
