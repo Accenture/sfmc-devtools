@@ -108,7 +108,7 @@ export namespace Util {
      * @param {boolean} [handleOutside] if the API reponse is irregular this allows you to handle it outside of this generic method
      * @returns {boolean} bu found or not
      */
-    function _isValidBU(properties: Mcdevrc, businessUnit: string, handleOutside?: boolean): boolean;
+    function isValidBU(properties: Mcdevrc, businessUnit: string, handleOutside?: boolean): boolean;
     /**
      * helper that deals with extracting type and subtype
      *
