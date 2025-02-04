@@ -16,6 +16,17 @@
             "sourceTargetMapping": {
                 "deployment-source": "deployment-target"
             },
+            "branchSourceTargetMapping": {
+                "sit": {
+                    "deployment-sit-source": "deployment-sit-target"
+                },
+                "uat": {
+                    "deployment-uat-source": "deployment-uat-target"
+                },
+                "prod": {
+                    "deployment-prod-source": "deployment-prod-target"
+                }
+            },
             "targetBranchBuMapping": {
                 "release/*": "MySandbox/QA-DE",
                 "master": ["MyProduction/PROD-DE", "MyProduction/PROD-NL"]
