@@ -303,7 +303,7 @@ describe('type: asset', () => {
                     ? Object.keys(deployResult['testInstance/testBU']?.asset).length
                     : 0,
                 1,
-                '1 assets to be deployed'
+                'Unexpected number of assets deployed'
             );
             const upsertCallout = testUtils.getRestCallout('post', '/asset/v1/content/assets/');
             assert.equal(
@@ -344,7 +344,7 @@ describe('type: asset', () => {
                     ? Object.keys(deployResult['testInstance/testBU']?.asset).length
                     : 0,
                 1,
-                '1 assets to be deployed'
+                'Unexpected number of assets deployed'
             );
             const currentCache = cache.getCache();
 
@@ -388,7 +388,7 @@ describe('type: asset', () => {
                     ? Object.keys(deployResult['testInstance/testBU']?.asset).length
                     : 0,
                 0,
-                '0 assets to be deployed'
+                'Unexpected number of assets deployed'
             );
 
             const upsertCallout = testUtils.getRestCallout('patch', '/asset/v1/content/assets/%');
@@ -419,7 +419,7 @@ describe('type: asset', () => {
                     ? Object.keys(deployResult['testInstance/testBU']?.asset).length
                     : 0,
                 1,
-                '1 assets to be deployed'
+                'Unexpected number of assets deployed'
             );
 
             const upsertCallout = testUtils.getRestCallout('post', '/asset/v1/content/assets/');
@@ -459,7 +459,7 @@ describe('type: asset', () => {
                     ? Object.keys(deployResult['testInstance/testBU']?.asset).length
                     : 0,
                 1,
-                '1 assets to be deployed'
+                'Unexpected number of assets deployed'
             );
             const upsertCallout = testUtils.getRestCallout('post', '/asset/v1/content/assets/');
             assert.equal(
@@ -492,7 +492,7 @@ describe('type: asset', () => {
                     ? Object.keys(deployResult['testInstance/testBU']?.asset).length
                     : 0,
                 1,
-                '1 assets to be deployed'
+                'Unexpected number of assets deployed'
             );
             const upsertCallout = testUtils.getRestCallout('post', '/asset/v1/content/assets/');
             assert.equal(
@@ -504,6 +504,104 @@ describe('type: asset', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 5,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should create an asset that loads a pre-existing content block via CBBK', async () => {
+            // WHEN
+            const deployResult = await handler.deploy('testInstance/testBU', {
+                asset: ['testNew_asset_withCBBK_preexisting'],
+            });
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+
+            // check how many items were deployed
+            assert.equal(
+                deployResult['testInstance/testBU']?.asset
+                    ? Object.keys(deployResult['testInstance/testBU']?.asset).length
+                    : 0,
+                1,
+                'Unexpected number of assets deployed'
+            );
+            const upsertCallout = testUtils.getRestCallout('post', '/asset/v1/content/assets/');
+            assert.equal(
+                upsertCallout?.customerKey,
+                'testNew_asset_withCBBK_preexisting',
+                'customerKey should be testNew_asset'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                5,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should not create an asset that attempts to load a non-existent content block via CBBK', async () => {
+            // WHEN
+            const deployResult = await handler.deploy('testInstance/testBU', {
+                asset: ['testNew_asset_withCBBK_notexisting'],
+            });
+            // THEN
+            assert.equal(process.exitCode, 1, 'deploy should have thrown an error');
+
+            // check how many items were deployed
+            assert.equal(
+                deployResult['testInstance/testBU']?.asset
+                    ? Object.keys(deployResult['testInstance/testBU']?.asset).length
+                    : 0,
+                0,
+                'Unexpected number of assets deployed'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                4,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should create an asset that loads a content block via CBBK that is also created in the same package', async () => {
+            // WHEN
+            const deployResult = await handler.deploy('testInstance/testBU', {
+                asset: ['testNew_asset_withCBBK_notexisting', 'testNew_asset_htmlblock'],
+            });
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+
+            // check how many items were deployed
+            assert.deepEqual(
+                deployResult['testInstance/testBU']?.asset
+                    ? Object.keys(deployResult['testInstance/testBU']?.asset)
+                    : [],
+                ['testNew_asset_htmlblock', 'testNew_asset_withCBBK_notexisting'],
+                'unexpected assets deployed'
+            );
+
+            // check if we really issued callouts for those 2 blocks AND if they were run in the right order despite the key list for deploy() getting it in the wrong order
+            const upsertCallouts = testUtils.getRestCallout(
+                'post',
+                '/asset/v1/content/assets/',
+                true
+            );
+            assert.equal(
+                upsertCallouts[0]?.customerKey,
+                'testNew_asset_htmlblock',
+                'first create callout not for expected asset'
+            );
+            assert.equal(
+                upsertCallouts[1]?.customerKey,
+                'testNew_asset_withCBBK_notexisting',
+                'second create callout not for expected asset'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                6,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
