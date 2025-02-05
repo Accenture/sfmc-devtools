@@ -64,9 +64,10 @@ export default class ReplaceContentBlockReference {
      * @param {string|number} identifier id, key or name of asset
      * @param {string} parentName name of the object that was passed in; used in error message only
      * @param {boolean} [isSsjs] replaces backslashes with double backslashes in name if true
+     * @param {boolean} [handleOutside] don not print error message if asset not found
      * @returns {AssetItemSimple} asset object
      */
-    static "__#2@#getAssetBy"(from: ContentBlockConversionTypes, identifier: string | number, parentName: string, isSsjs?: boolean): AssetItemSimple;
+    static "__#2@#getAssetBy"(from: ContentBlockConversionTypes, identifier: string | number, parentName: string, isSsjs?: boolean, handleOutside?: boolean): AssetItemSimple;
     /**
      *
      * @param {AssetItemSimple} asset asset object
