@@ -303,7 +303,7 @@ describe('type: asset', () => {
                     ? Object.keys(deployResult['testInstance/testBU']?.asset).length
                     : 0,
                 1,
-                '1 assets to be deployed'
+                'Unexpected number of assets deployed'
             );
             const upsertCallout = testUtils.getRestCallout('post', '/asset/v1/content/assets/');
             assert.equal(
@@ -344,7 +344,7 @@ describe('type: asset', () => {
                     ? Object.keys(deployResult['testInstance/testBU']?.asset).length
                     : 0,
                 1,
-                '1 assets to be deployed'
+                'Unexpected number of assets deployed'
             );
             const currentCache = cache.getCache();
 
@@ -388,7 +388,7 @@ describe('type: asset', () => {
                     ? Object.keys(deployResult['testInstance/testBU']?.asset).length
                     : 0,
                 0,
-                '0 assets to be deployed'
+                'Unexpected number of assets deployed'
             );
 
             const upsertCallout = testUtils.getRestCallout('patch', '/asset/v1/content/assets/%');
@@ -419,7 +419,7 @@ describe('type: asset', () => {
                     ? Object.keys(deployResult['testInstance/testBU']?.asset).length
                     : 0,
                 1,
-                '1 assets to be deployed'
+                'Unexpected number of assets deployed'
             );
 
             const upsertCallout = testUtils.getRestCallout('post', '/asset/v1/content/assets/');
@@ -459,7 +459,7 @@ describe('type: asset', () => {
                     ? Object.keys(deployResult['testInstance/testBU']?.asset).length
                     : 0,
                 1,
-                '1 assets to be deployed'
+                'Unexpected number of assets deployed'
             );
             const upsertCallout = testUtils.getRestCallout('post', '/asset/v1/content/assets/');
             assert.equal(
@@ -492,7 +492,7 @@ describe('type: asset', () => {
                     ? Object.keys(deployResult['testInstance/testBU']?.asset).length
                     : 0,
                 1,
-                '1 assets to be deployed'
+                'Unexpected number of assets deployed'
             );
             const upsertCallout = testUtils.getRestCallout('post', '/asset/v1/content/assets/');
             assert.equal(
@@ -523,7 +523,7 @@ describe('type: asset', () => {
                     ? Object.keys(deployResult['testInstance/testBU']?.asset).length
                     : 0,
                 1,
-                '1 assets to be deployed'
+                'Unexpected number of assets deployed'
             );
             const upsertCallout = testUtils.getRestCallout('post', '/asset/v1/content/assets/');
             assert.equal(
@@ -554,7 +554,7 @@ describe('type: asset', () => {
                     ? Object.keys(deployResult['testInstance/testBU']?.asset).length
                     : 0,
                 0,
-                '0 assets deployed'
+                'Unexpected number of assets deployed'
             );
 
             assert.equal(
@@ -568,7 +568,7 @@ describe('type: asset', () => {
         it('Should create an asset that loads a content block via CBBK that is also created in the same package', async () => {
             // WHEN
             const deployResult = await handler.deploy('testInstance/testBU', {
-                asset: ['testNew_asset_htmlblock', 'testNew_asset_withCBBK_notexisting'],
+                asset: ['testNew_asset_withCBBK_notexisting', 'testNew_asset_htmlblock'],
             });
             // THEN
             assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
@@ -582,26 +582,21 @@ describe('type: asset', () => {
                 'unexpected assets deployed'
             );
 
+            // check if we really issued callouts for those 2 blocks AND if they were run in the right order despite the key list for deploy() getting it in the wrong order
             const upsertCallouts = testUtils.getRestCallout(
                 'post',
                 '/asset/v1/content/assets/',
                 true
             );
-            const upsertCallout1 = upsertCallouts.find(
-                (item) => item.customerKey === 'testNew_asset_htmlblock'
-            );
-            const upsertCallout2 = upsertCallouts.find(
-                (item) => item.customerKey === 'testNew_asset_withCBBK_notexisting'
-            );
             assert.equal(
-                upsertCallout1?.customerKey,
+                upsertCallouts[0]?.customerKey,
                 'testNew_asset_htmlblock',
-                'create callout not found'
+                'first create callout not for expected asset'
             );
             assert.equal(
-                upsertCallout2?.customerKey,
+                upsertCallouts[1]?.customerKey,
                 'testNew_asset_withCBBK_notexisting',
-                'create callout not found'
+                'second create callout not for expected asset'
             );
 
             assert.equal(
