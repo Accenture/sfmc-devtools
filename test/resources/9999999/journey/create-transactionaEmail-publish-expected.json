@@ -3,10 +3,13 @@
     "name": "testNew_temail_notPublished",
     "description": "",
     "workflowApiVersion": 1,
-    "modifiedDate": "2024-12-06T19:36:30.563",
+    "version": 1,
+    "lastPublishedDate": "2025-01-31T03:46:39.267",
+    "modifiedDate": "2025-01-31T03:46:39.267",
+    "createdDate": "2025-01-31T03:46:39.267",
     "activities": [
         {
-            "id": "848d91be-faa5-4307-94d7-22c9a5bcfb1d",
+            "id": "1ce8a9e3-bee4-43e3-88a5-a1b3d21f1813",
             "key": "EMAILV2-1",
             "name": "testNew_temail_notPublished_24Q3",
             "description": "",
@@ -43,6 +46,7 @@
                     "modified": {},
                     "preHeader": "%%=treatascontent(@preheader)=%%\n",
                     "r__asset_key": "testExisting_asset_message",
+                    "r__asset_name_readOnly": "testExisting_asset_message",
                     "r__deliveryProfile_key": "Default",
                     "r__list_PathName": {
                         "publicationList": "my subscribers/All Subscribers"
@@ -59,7 +63,6 @@
                 "highThroughput": {
                     "r__dataExtension_key": "testExisting_dataExtension"
                 },
-                "sections": {},
                 "isConfigured": true
             },
             "schema": {
@@ -209,5 +212,6 @@
     },
     "executionMode": "Production",
     "scheduledStatus": "Draft",
+    "status": "Published",
     "r__folder_Path": "my journeys"
 }

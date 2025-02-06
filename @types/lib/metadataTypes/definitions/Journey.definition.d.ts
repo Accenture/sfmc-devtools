@@ -319,7 +319,7 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
-        ' activities[].configurationArguments.triggeredSend.sendClassificationId': {
+        'activities[].configurationArguments.triggeredSend.sendClassificationId': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
