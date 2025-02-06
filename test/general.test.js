@@ -1443,7 +1443,7 @@ describe('GENERAL', () => {
                 );
                 assert.deepEqual(
                     await testUtils.getActualDeployJson('testExisting_automation', 'automation'),
-                    await testUtils.getExpectedJson('9999999', 'automation', 'retrieve'),
+                    await testUtils.getExpectedJson('9999999', 'automation', 'clone'),
                     'returned deployment file was not equal expected'
                 );
 
@@ -1453,14 +1453,14 @@ describe('GENERAL', () => {
                     1,
                     'only one query expected'
                 );
-                // assert.deepEqual(
-                //     await testUtils.getActualDeployJson('testExisting_query', 'query'),
-                //     await testUtils.getExpectedJson('9999999', 'query', 'get'),
-                //     'returned deployment JSON was not equal expected'
-                // );
+                assert.deepEqual(
+                    await testUtils.getActualDeployJson('testExisting_query', 'query'),
+                    await testUtils.getExpectedJson('9999999', 'query', 'clone'),
+                    'returned deployment JSON was not equal expected'
+                );
                 expect(
                     await testUtils.getActualDeployFile('testExisting_query', 'query', 'sql')
-                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'get', 'sql'));
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'clone', 'sql'));
 
                 assert.equal(
                     testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
