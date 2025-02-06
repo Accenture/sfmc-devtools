@@ -77,14 +77,15 @@ declare class Mcdev {
      * handler for 'mcdev createDeltaPkg
      *
      * @param {object} argv yargs parameters
-     * @param {string} [argv.range] git commit range
-    into deploy directory
+     * @param {string} [argv.commitrange] git commit range via positional
+     * @param {string} [argv.range] git commit range via option
      * @param {string} [argv.filter] filter file paths that start with any
      * @param {number} [argv.commitHistory] filter file paths that start with any
      * @param {DeltaPkgItem[]} [argv.diffArr] list of files to include in delta package (skips git diff when provided)
      * @returns {Promise.<DeltaPkgItem[]>} list of changed items
      */
     static createDeltaPkg(argv: {
+        commitrange?: string;
         range?: string;
         filter?: string;
         commitHistory?: number;
