@@ -332,6 +332,16 @@ describe('type: journey', () => {
                 await testUtils.getExpectedJson('9999999', 'transactionalEmail', 'create-publish'),
                 'returned JSON was not equal expected'
             );
+            // confirm journey was downloaded
+            assert.deepEqual(
+                await testUtils.getActualJson('testNew_temail_notPublished', 'journey'),
+                await testUtils.getExpectedJson(
+                    '9999999',
+                    'journey',
+                    'create-transactionaEmail-publish'
+                ),
+                'returned JSON was not equal expected'
+            );
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),

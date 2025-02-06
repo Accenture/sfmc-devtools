@@ -125,6 +125,7 @@ export namespace Util {
      * @returns {string[]} type choices
      */
     function getRetrieveTypeChoices(): string[];
+    let logFileName: string;
     function _createNewLoggerTransport(noLogFile?: boolean): object;
     let loggerTransports: any;
     let logger: Logger;

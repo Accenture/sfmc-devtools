@@ -9,7 +9,7 @@
     },
     "r__asset_key": "testExisting_asset_message",
     "r__journey_key": "testNew_temail_notPublished",
-    "r__sendClassification_key": "Default Transactional",
+    "r__sendClassification_key": "testExisting_sendClassification",
     "status": "Active",
     "subscriptions": {
         "autoAddSubscriber": true,
