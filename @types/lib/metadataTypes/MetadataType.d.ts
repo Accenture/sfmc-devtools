@@ -210,9 +210,10 @@ declare class MetadataType {
      *
      * @param {string[]} [keyArr] metadata keys
      * @param {boolean} [checkKey] whether to check if the key is valid
+     * @param {MetadataTypeMap} [upsertResults] metadata mapped by their keyField as returned by update/create; needs to be refreshed after publish
      * @returns {Promise.<string[]>} Returns list of keys that were refreshed
      */
-    static refresh(keyArr?: string[], checkKey?: boolean): Promise<string[]>;
+    static refresh(keyArr?: string[], checkKey?: boolean, upsertResults?: MetadataTypeMap): Promise<string[]>;
     /**
      *
      * @param {string[]} keyArr limit retrieval to given metadata type
