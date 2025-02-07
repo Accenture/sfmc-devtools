@@ -116,6 +116,7 @@
             "dataExtension",
             "dataExtract",
             "deliveryProfile",
+            "domainVerification",
             "emailSend",
             "event",
             "fileLocation",
