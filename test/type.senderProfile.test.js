@@ -36,7 +36,7 @@ describe('type: senderProfile', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                4,
+                5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -76,7 +76,7 @@ describe('type: senderProfile', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                7,
+                8,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -123,7 +123,7 @@ describe('type: senderProfile', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                4,
+                5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -203,7 +203,7 @@ describe('type: senderProfile', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                11,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -238,7 +238,7 @@ describe('type: senderProfile', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                11,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -273,7 +273,7 @@ describe('type: senderProfile', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                11,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

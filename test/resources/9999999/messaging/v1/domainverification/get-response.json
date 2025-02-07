@@ -1,0 +1,16 @@
+{
+    "page": 1,
+    "pageSize": 500,
+    "count": 1,
+    "items": [
+        {
+            "enterpriseId": 1111111,
+            "domain": "joern.berkefeld@accenture.com",
+            "status": "Verified",
+            "domainType": "UserDomain",
+            "isSendable": true,
+            "memberId": 9999999,
+            "emailSendTime": "2024-05-15T08:37:08.587"
+        }
+    ]
+}
