@@ -60,7 +60,7 @@ declare class DomainVerification extends MetadataType {
      */
     static postCreateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): Promise<object>;
     /**
-     * Updates a single item
+     * Updates a single item; replaces super.updateREST because we need to send metadataItem as an array for some reason and also get an array back
      *
      * @param {MetadataTypeItem} metadataItem a single item
      * @returns {Promise.<any>} Promise
@@ -80,6 +80,13 @@ declare class DomainVerification extends MetadataType {
      * @returns {Promise.<void>} -
      */
     static postDeployTasks(upsertResults: MetadataTypeMap): Promise<void>;
+    /**
+     * prepares a single item for deployment
+     *
+     * @param {MetadataTypeItem} metadata a single item
+     * @returns {Promise.<MetadataTypeItem>} Promise
+     */
+    static preDeployTasks(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
 }
 declare namespace DomainVerification {
     let definition: {
@@ -133,6 +140,12 @@ declare namespace DomainVerification {
                 template: boolean;
             };
             isSendable: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            status: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

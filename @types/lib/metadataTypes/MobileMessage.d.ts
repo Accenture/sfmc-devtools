@@ -95,14 +95,6 @@ declare class MobileMessage extends MetadataType {
      */
     static postCreateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): Promise<object>;
     /**
-     * helper for {@link MetadataType.updateREST}
-     *
-     * @param {MetadataTypeItem} metadataEntry a single metadata Entry
-     * @param {object} apiResponse varies depending on the API call
-     * @returns {Promise.<void>} -
-     */
-    static postUpdateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): Promise<void>;
-    /**
      * helper for {@link MobileMessage.buildTemplateForNested} / {@link MobileMessage.buildDefinitionForNested}
      * handles extracted code if any are found for complex types
      *

@@ -74,7 +74,7 @@ declare namespace _default {
             let template_5: boolean;
             export { template_5 as template };
         }
-        namespace emailSendTime {
+        namespace status {
             let isCreateable_6: boolean;
             export { isCreateable_6 as isCreateable };
             let isUpdateable_6: boolean;
@@ -83,6 +83,16 @@ declare namespace _default {
             export { retrieving_6 as retrieving };
             let template_6: boolean;
             export { template_6 as template };
+        }
+        namespace emailSendTime {
+            let isCreateable_7: boolean;
+            export { isCreateable_7 as isCreateable };
+            let isUpdateable_7: boolean;
+            export { isUpdateable_7 as isUpdateable };
+            let retrieving_7: boolean;
+            export { retrieving_7 as retrieving };
+            let template_7: boolean;
+            export { template_7 as template };
         }
     }
 }

@@ -75,9 +75,9 @@ declare class MetadataType {
      *
      * @param {MetadataTypeItem} metadataEntry a single metadata Entry
      * @param {object} apiResponse varies depending on the API call
-     * @returns {void}
+     * @returns {Promise.<object>} apiResponse, potentially modified
      */
-    static postUpdateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): void;
+    static postUpdateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): Promise<object>;
     /**
      * helper for {@link MetadataType.createREST} when legacy API endpoints as these do not return the created item but only their new id
      *
