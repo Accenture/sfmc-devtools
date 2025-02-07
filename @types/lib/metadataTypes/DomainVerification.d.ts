@@ -52,6 +52,14 @@ declare class DomainVerification extends MetadataType {
      */
     static create(metadataItem: MetadataTypeItem): Promise<any>;
     /**
+     * helper for {@link MetadataType.createREST}
+     *
+     * @param {MetadataTypeItem} metadataEntry a single metadata Entry
+     * @param {object} apiResponse varies depending on the API call
+     * @returns {Promise.<object>} apiResponse
+     */
+    static postCreateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): Promise<object>;
+    /**
      * Updates a single item
      *
      * @param {MetadataTypeItem} metadataItem a single item
