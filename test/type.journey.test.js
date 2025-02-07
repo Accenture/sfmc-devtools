@@ -218,7 +218,11 @@ describe('type: journey', () => {
             return;
         });
 
-        it('Should not deploy --publish an already published transactional journey', async () => {
+        it('Should deploy --publish an already published transactional journey by first pausing it', async () => {
+            await testUtils.copyFile(
+                'interaction/v1/interactions/key_testExisting_temail/put-response-paused.json',
+                'interaction/v1/interactions/key_testExisting_temail/put-response.json'
+            );
             // WHEN
             handler.setOptions({ skipStatusCheck: true, publish: true });
             const deploy = await handler.deploy(
@@ -228,17 +232,42 @@ describe('type: journey', () => {
             );
 
             // THEN
-            assert.equal(process.exitCode, 1, 'deploy --publish should have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy --publish should not have thrown an error');
             // retrieve result
             assert.deepEqual(
                 Object.keys(deploy['testInstance/testBU']?.journey),
-                [],
+                ['testExisting_temail'],
                 'should have published the right journey'
+            );
+
+            const pauseCallout = testUtils.getRestCallout(
+                'post',
+                '/interaction/v1/interactions/transactional/pause'
+            );
+            const resumeCallout = testUtils.getRestCallout(
+                'post',
+                '/interaction/v1/interactions/transactional/resume'
+            );
+
+            // confirm callouts
+            assert.deepEqual(
+                pauseCallout,
+                {
+                    definitionId: 'dsfdsafdsa-922c-4568-85a5-e5cc77efc3be',
+                },
+                'pauseCallout-payload JSON was not equal expected'
+            );
+            assert.deepEqual(
+                resumeCallout,
+                {
+                    definitionId: 'dsfdsafdsa-922c-4568-85a5-e5cc77efc3be',
+                },
+                'resumeCallout-payload JSON was not equal expected'
             );
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                23,
+                60,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

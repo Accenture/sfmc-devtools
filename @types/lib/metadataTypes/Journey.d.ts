@@ -147,9 +147,11 @@ declare class Journey extends MetadataType {
      * TSD-specific refresh method that finds active TSDs and refreshes them
      *
      * @param {string[]} keyArr metadata keys
+     * @param {boolean} [_] whether to check if the key is valid
+     * @param {MetadataTypeMap} [upsertResults] metadata mapped by their keyField as returned by update/create; needs to be refreshed after publish
      * @returns {Promise.<string[]>} Returns list of keys that were refreshed
      */
-    static refresh(keyArr: string[]): Promise<string[]>;
+    static refresh(keyArr: string[], _?: boolean, upsertResults?: MetadataTypeMap): Promise<string[]>;
     /**
      * helper for {@link Journey.refresh} that pauses, publishes and starts a triggered send
      *
