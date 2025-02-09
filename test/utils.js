@@ -214,6 +214,8 @@ export function mockSetup(isDeploy) {
             matchName: undefined,
             noUpdate: undefined,
             publish: undefined,
+            purge: undefined,
+            range: undefined,
             referenceFrom: undefined,
             referenceTo: undefined,
             refresh: undefined,
