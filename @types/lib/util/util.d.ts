@@ -230,6 +230,30 @@ export namespace Util {
      */
     function getGrayMsg(msg: string): string;
     /**
+     * helper that returns the prefix of item specific log messages
+     *
+     * @param {any} definition metadata definition
+     * @param {MetadataTypeItem} metadataItem metadata item
+     * @returns {string} msg prefix
+     */
+    function getMsgPrefix(definition: any, metadataItem: MetadataTypeItem): string;
+    /**
+     * helper that returns the prefix of item specific log messages
+     *
+     * @param {any} definition metadata definition
+     * @param {MetadataTypeItem} metadataItem metadata item
+     * @returns {string} key or key/name combo
+     */
+    function getTypeKeyName(definition: any, metadataItem: MetadataTypeItem): string;
+    /**
+     * helper that returns the prefix of item specific log messages
+     *
+     * @param {any} definition metadata definition
+     * @param {MetadataTypeItem} metadataItem metadata item
+     * @returns {string} key or key/name combo
+     */
+    function getKeyName(definition: any, metadataItem: MetadataTypeItem): string;
+    /**
      * helper to print the subtypes we filtered by
      *
      * @param {string[]} subTypeArr list of subtypes to be printed
