@@ -9,6 +9,7 @@ export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type DomainVerificationItem = import("../../types/mcdev.d.js").DomainVerificationItem;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -20,6 +21,7 @@ export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
+ * @typedef {import('../../types/mcdev.d.js').DomainVerificationItem} DomainVerificationItem
  */
 /**
  * DomainVerification MetadataType
@@ -47,32 +49,40 @@ declare class DomainVerification extends MetadataType {
     /**
      * Creates a single item
      *
-     * @param {MetadataTypeItem} metadataItem a single item
+     * @param {DomainVerificationItem} metadataItem a single item
      * @returns {Promise} Promise
      */
-    static create(metadataItem: MetadataTypeItem): Promise<any>;
+    static create(metadataItem: DomainVerificationItem): Promise<any>;
     /**
      * helper for {@link MetadataType.createREST}
      *
-     * @param {MetadataTypeItem} metadataEntry a single metadata Entry
+     * @param {DomainVerificationItem} metadataEntry a single metadata Entry
      * @param {object} apiResponse varies depending on the API call
-     * @returns {Promise.<object>} apiResponse
+     * @returns {Promise.<DomainVerificationItem>} apiResponse
      */
-    static postCreateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): Promise<object>;
+    static postCreateTasks(metadataEntry: DomainVerificationItem, apiResponse: object): Promise<DomainVerificationItem>;
+    /**
+     * helper for {@link update}
+     *
+     * @param {DomainVerificationItem} metadataEntry a single metadata Entry
+     * @param {object} apiResponse varies depending on the API call
+     * @returns {Promise.<DomainVerificationItem>} apiResponse, potentially modified
+     */
+    static postUpdateTasks(metadataEntry: DomainVerificationItem, apiResponse: object): Promise<DomainVerificationItem>;
     /**
      * Updates a single item; replaces super.updateREST because we need to send metadataItem as an array for some reason and also get an array back
      *
-     * @param {MetadataTypeItem} metadataItem a single item
-     * @returns {Promise.<any>} Promise
+     * @param {DomainVerificationItem} metadataItem a single item
+     * @returns {Promise.<DomainVerificationItem>} Promise
      */
-    static update(metadataItem: MetadataTypeItem): Promise<any>;
+    static update(metadataItem: DomainVerificationItem): Promise<DomainVerificationItem>;
     /**
      * manages post retrieve steps
      *
-     * @param {MetadataTypeItem} metadataItem a single item
-     * @returns {MetadataTypeItem} metadata
+     * @param {DomainVerificationItem} metadataItem a single item
+     * @returns {DomainVerificationItem} metadata
      */
-    static postRetrieveTasks(metadataItem: MetadataTypeItem): MetadataTypeItem;
+    static postRetrieveTasks(metadataItem: DomainVerificationItem): DomainVerificationItem;
     /**
      * Gets executed after deployment of metadata type
      *
@@ -83,10 +93,16 @@ declare class DomainVerification extends MetadataType {
     /**
      * prepares a single item for deployment
      *
-     * @param {MetadataTypeItem} metadata a single item
-     * @returns {Promise.<MetadataTypeItem>} Promise
+     * @param {DomainVerificationItem} metadata a single item
+     * @returns {Promise.<DomainVerificationItem>} Promise
      */
-    static preDeployTasks(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
+    static preDeployTasks(metadata: DomainVerificationItem): Promise<DomainVerificationItem>;
+    /**
+     * Gets executed before deleting a list of keys for the current type
+     *
+     * @returns {Promise.<void>} -
+     */
+    static preDeleteTasks(): Promise<void>;
 }
 declare namespace DomainVerification {
     let definition: {

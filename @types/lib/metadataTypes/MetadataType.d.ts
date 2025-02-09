@@ -62,6 +62,13 @@ declare class MetadataType {
         updated: number;
     }): Promise<void>;
     /**
+     * Gets executed before deleting a list of keys for the current type
+     *
+     * @param {string} keyArr metadata keys
+     * @returns {Promise.<void>} -
+     */
+    static preDeleteTasks(keyArr: string): Promise<void>;
+    /**
      * helper for {@link MetadataType.createREST}
      *
      * @param {MetadataTypeItem} metadataEntry a single metadata Entry
