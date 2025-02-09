@@ -68,8 +68,32 @@ describe('type: domainVerification', () => {
             // THEN
             assert.equal(process.exitCode, 0, 'deleteByKey should not have thrown an error');
             assert.equal(isDeleted, true, 'deleteByKey should have returned true');
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                2,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
             return;
         });
 
+        it('Should not delete the items with wrong domainType', async () => {
+            // WHEN
+            const isDeleted = await handler.deleteByKey('testInstance/testBU', {
+                domainVerification: [
+                    'mcdev.accenture.com',
+                    'adhoc.accenture.com',
+                    'mcdev-transferrable.accenture.com',
+                ],
+            });
+            // THEN
+            assert.equal(process.exitCode, 1, 'deleteByKey should have thrown an error');
+            assert.equal(isDeleted, false, 'deleteByKey should have returned false');
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                1,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 });
