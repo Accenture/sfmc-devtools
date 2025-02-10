@@ -1,0 +1,20 @@
+{
+    "createdDate": "2024-08-23T02:01:00",
+    "definitionKey": "testNew_temail_notPublished",
+    "description": "testNew_temail_notPublis - 754cc4a10da14f538ecbd5470d771eaf",
+    "modifiedDate": "2024-08-23T02:01:00",
+    "name": "testNew_temail_notPublis - 754cc4a10da14f538ecbd5470d771eaf",
+    "options": {
+        "trackLinks": true
+    },
+    "r__asset_key": "testExisting_asset_message",
+    "r__journey_key": "testNew_temail_notPublished",
+    "r__sendClassification_key": "testExisting_sendClassification",
+    "status": "Active",
+    "subscriptions": {
+        "autoAddSubscriber": true,
+        "r__dataExtension_key": "testExisting_dataExtension",
+        "r__list_PathName": "my subscribers/All Subscribers",
+        "updateSubscriber": true
+    }
+}

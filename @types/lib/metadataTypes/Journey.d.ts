@@ -102,7 +102,7 @@ declare class Journey extends MetadataType {
      * a function to publish the journey via API
      *
      * @param {string[]} keyArr keys or ids of the metadata
-     * @param {MetadataTypeMap} [upsertResults] metadata mapped by their keyField as returned by update/create
+     * @param {MetadataTypeMap} [upsertResults] metadata mapped by their keyField as returned by update/create; needs to be refreshed after publish
      * @returns {Promise.<string[]>} Returns list of updated keys/ids that were published. Success could only be seen with a delay in the UI because the publish-endpoint is async
      */
     static publish(keyArr: string[], upsertResults?: MetadataTypeMap): Promise<string[]>;
@@ -111,9 +111,10 @@ declare class Journey extends MetadataType {
      * @param {string[]} executedKeyArr list of journey keys
      * @param {number} transactionalCounter how many transactiona-send journeys did we expect to refresh
      * @param {number} multiStepCounter how many multi-step journeys did we expect to refresh
+     * @param {MetadataTypeMap} [upsertResults] metadata mapped by their keyField returned by update/create; needs to be refreshed after publish
      * @returns {Promise.<void>} -
      */
-    static _reRetrieve(executedKeyArr: string[], transactionalCounter: number, multiStepCounter: number): Promise<void>;
+    static _reRetrieve(executedKeyArr: string[], transactionalCounter: number, multiStepCounter: number, upsertResults?: MetadataTypeMap): Promise<void>;
     /**
      * helper for {@link Journey.publish} and {@link Journey.validate}
      *
@@ -146,9 +147,11 @@ declare class Journey extends MetadataType {
      * TSD-specific refresh method that finds active TSDs and refreshes them
      *
      * @param {string[]} keyArr metadata keys
+     * @param {boolean} [_] whether to check if the key is valid
+     * @param {MetadataTypeMap} [upsertResults] metadata mapped by their keyField as returned by update/create; needs to be refreshed after publish
      * @returns {Promise.<string[]>} Returns list of keys that were refreshed
      */
-    static refresh(keyArr: string[]): Promise<string[]>;
+    static refresh(keyArr: string[], _?: boolean, upsertResults?: MetadataTypeMap): Promise<string[]>;
     /**
      * helper for {@link Journey.refresh} that pauses, publishes and starts a triggered send
      *
@@ -480,7 +483,7 @@ declare namespace Journey {
                 retrieving: boolean;
                 template: boolean;
             };
-            ' activities[].configurationArguments.triggeredSend.sendClassificationId': {
+            'activities[].configurationArguments.triggeredSend.sendClassificationId': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

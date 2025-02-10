@@ -4,6 +4,7 @@
     "Description": "updated via deploy",
     "FromName": "Jörn Berkefeld",
     "FromAddress": "joern.berkefeld@accenture.com",
+    "FallbackFromAddress": "",
     "UseDefaultRMMRules": false,
     "AutoForwardToEmailAddress": "joern.berkefeld@accenture.com",
     "AutoForwardToName": "Jörn Berkefeld",

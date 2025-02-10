@@ -641,4 +641,16 @@ complex
  * @typedef {Object.<string, validationRule>} validationRuleList key=rule name
  */
 
+/**
+ * @typedef {object} DomainVerificationItem
+ * @property {number} [enterpriseId] EID
+ * @property {number} [memberId] MID
+ * @property {string} [domain] domain or email address used in retrieve and create
+ * @property {string} [emailAddress] email address used in update call for isSendable field
+ * @property {'Verified'|'Pending'} [status] returned by retrieve
+ * @property {'SAP'|'UserDomain'|'PrivateDomain'|'RegisteredDomain'} [domainType] returned by retrieve and required for update call
+ * @property {boolean} isSendable automatically true upon creation. can be changed to false via update
+ * @property {string} [emailSendTime] e.g. ""2023-06-19T11:11:17.32""
+ */
+
 export default {};

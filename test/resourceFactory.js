@@ -322,6 +322,12 @@ export const handleRESTRequest = async (config) => {
                 filterBody = Object.keys(data)
                     .map((key) => `${key}=${data[key]}`)
                     .join(',');
+            } else if (config.url === '/asset/v1/content/assets/') {
+                const data = JSON.parse(config.data);
+
+                if (data.customerKey) {
+                    filterBody = 'key=' + data.customerKey;
+                }
             }
         }
         const testPathFilterBody = filterBody ? testPath + '-' + filterBody : null;
