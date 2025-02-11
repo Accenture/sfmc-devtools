@@ -85,13 +85,13 @@ declare class Asset extends MetadataType {
      */
     private static _getSubTypes;
     /**
-     * Returns Order in which metadata needs to be retrieved/deployed
+     * Returns Order in which metadata needs to be retrieved/deployed and skips components with missing components
      *
      * @param {AssetMap} metadataMap metadata mapped by their keyField
      * @param {string} deployDir directory where deploy metadata are saved
      * @returns {Promise.<AssetMap>} keyField => metadata map but sorted to ensure dependencies are deployed in correct order
      */
-    static _getUpsertOrder(metadataMap: AssetMap, deployDir: string): Promise<AssetMap>;
+    static _getUpsertOrderAndSkipMissing(metadataMap: AssetMap, deployDir: string): Promise<AssetMap>;
     /**
      * MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
      *

@@ -44,8 +44,8 @@ declare class MetadataType {
      * Deploys metadata
      *
      * @param {MetadataTypeMap} metadataMap metadata mapped by their keyField
-     * @param {string} deployDir directory where deploy metadata are saved
-     * @param {string} retrieveDir directory where metadata after deploy should be saved
+     * @param {string} deployDir directory where deploy metadata are saved, ending on cred/bu
+     * @param {string} retrieveDir directory where metadata after deploy should be saved, ending on cred/bu
      * @returns {Promise.<MetadataTypeMap>} Promise of keyField => metadata map
      */
     static deploy(metadataMap: MetadataTypeMap, deployDir: string, retrieveDir: string): Promise<MetadataTypeMap>;
@@ -62,22 +62,29 @@ declare class MetadataType {
         updated: number;
     }): Promise<void>;
     /**
+     * Gets executed before deleting a list of keys for the current type
+     *
+     * @param {string} keyArr metadata keys
+     * @returns {Promise.<void>} -
+     */
+    static preDeleteTasks(keyArr: string): Promise<void>;
+    /**
      * helper for {@link MetadataType.createREST}
      *
      * @param {MetadataTypeItem} metadataEntry a single metadata Entry
      * @param {object} apiResponse varies depending on the API call
      * @param {MetadataTypeItem} metadataEntryWithAllFields like metadataEntry but before non-creatable fields were stripped
-     * @returns {void}
+     * @returns {Promise.<object>} apiResponse, potentially modified
      */
-    static postCreateTasks(metadataEntry: MetadataTypeItem, apiResponse: object, metadataEntryWithAllFields: MetadataTypeItem): void;
+    static postCreateTasks(metadataEntry: MetadataTypeItem, apiResponse: object, metadataEntryWithAllFields: MetadataTypeItem): Promise<object>;
     /**
      * helper for {@link MetadataType.updateREST}
      *
      * @param {MetadataTypeItem} metadataEntry a single metadata Entry
      * @param {object} apiResponse varies depending on the API call
-     * @returns {void}
+     * @returns {Promise.<object>} apiResponse, potentially modified
      */
-    static postUpdateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): void;
+    static postUpdateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): Promise<object>;
     /**
      * helper for {@link MetadataType.createREST} when legacy API endpoints as these do not return the created item but only their new id
      *
@@ -208,9 +215,12 @@ declare class MetadataType {
     /**
      * Abstract refresh method that needs to be implemented in child metadata type
      *
-     * @returns {void}
+     * @param {string[]} [keyArr] metadata keys
+     * @param {boolean} [checkKey] whether to check if the key is valid
+     * @param {MetadataTypeMap} [upsertResults] metadata mapped by their keyField as returned by update/create; needs to be refreshed after publish
+     * @returns {Promise.<string[]>} Returns list of keys that were refreshed
      */
-    static refresh(): void;
+    static refresh(keyArr?: string[], checkKey?: boolean, upsertResults?: MetadataTypeMap): Promise<string[]>;
     /**
      *
      * @param {string[]} keyArr limit retrieval to given metadata type
@@ -241,16 +251,18 @@ declare class MetadataType {
      * Abstract execute method that needs to be implemented in child metadata type
      *
      * @param {string[]} keyArr customerkey of the metadata
+     * @param {MetadataTypeMapObj} [cache] metadata cache used by refresh to avoid recaching
      * @returns {Promise.<string[]>} Returns list of keys that were executed
      */
-    static execute(keyArr: string[]): Promise<string[]>;
+    static execute(keyArr: string[], cache?: MetadataTypeMapObj): Promise<string[]>;
     /**
      * Abstract pause method that needs to be implemented in child metadata type
      *
      * @param {string[]} keyArr customerkey of the metadata
+     * @param {MetadataTypeMapObj} [cache] metadata cache used by refresh to avoid recaching
      * @returns {Promise.<string[]>} Returns list of keys that were paused
      */
-    static pause(keyArr: string[]): Promise<string[]>;
+    static pause(keyArr: string[], cache?: MetadataTypeMapObj): Promise<string[]>;
     /**
      * Abstract stop method that needs to be implemented in child metadata type
      *

@@ -291,7 +291,7 @@
  * @property {string} [Name] name (SOAP API)
  * @property {any} [notifications] notifications
  * @property {string} [description] -
- * @property {'scheduled'|'triggered'} [type] Starting Source = Schedule / File Drop
+ * @property {'scheduled'|'triggered'|'automationtriggered'} [type] Starting Source = Schedule / File Drop
  * @property {'Scheduled'|'Running'|'Ready'|'Building'|'PausedSchedule'|'InactiveTrigger'} [status] automation status
  * @property {number} [statusId] automation status
  * @property {AutomationSchedule} [schedule] only existing if type=scheduled
@@ -302,6 +302,7 @@
  * @property {boolean} fileTrigger.isPublished ?
  * @property {boolean} fileTrigger.queueFiles ?
  * @property {boolean} fileTrigger.triggerActive -
+ * @property {object} [automationTrigger] only existing if type=automationtriggered
  * @property {object} [startSource] -
  * @property {AutomationSchedule} [startSource.schedule] rewritten to AutomationItem.schedule
  * @property {object} [startSource.fileDrop] rewritten to AutomationItem.fileTrigger
@@ -638,6 +639,18 @@ complex
  */
 /**
  * @typedef {Object.<string, validationRule>} validationRuleList key=rule name
+ */
+
+/**
+ * @typedef {object} DomainVerificationItem
+ * @property {number} [enterpriseId] EID
+ * @property {number} [memberId] MID
+ * @property {string} [domain] domain or email address used in retrieve and create
+ * @property {string} [emailAddress] email address used in update call for isSendable field
+ * @property {'Verified'|'Pending'} [status] returned by retrieve
+ * @property {'SAP'|'UserDomain'|'PrivateDomain'|'RegisteredDomain'} [domainType] returned by retrieve and required for update call
+ * @property {boolean} isSendable automatically true upon creation. can be changed to false via update
+ * @property {string} [emailSendTime] e.g. ""2023-06-19T11:11:17.32""
  */
 
 export default {};

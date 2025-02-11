@@ -172,8 +172,8 @@ describe('type: triggeredSend', () => {
                 templatedItems.asset.map((item) => item.customerKey),
                 [
                     '{{{prefix}}}asset_htmlblock',
-                    '{{{prefix}}}htmlblock1',
                     '{{{prefix}}}htmlblock 3 spaces',
+                    '{{{prefix}}}htmlblock1',
                     '{{{prefix}}}htmlblock2',
                 ],
                 'expected specific assets to be templated'
@@ -198,7 +198,74 @@ describe('type: triggeredSend', () => {
     });
 
     describe('Refresh ================', () => {
-        it('Should refresh a triggeredSend by key');
+        it('Should refresh all active triggeredSend', async () => {
+            // WHEN
+            const replace = await handler.refresh('testInstance/testBU', {
+                triggeredSend: null,
+            });
+            // THEN
+            assert.equal(process.exitCode, 0, 'refresh should not have thrown an error');
+            // retrieve result
+
+            assert.deepEqual(
+                replace['testInstance/testBU'].triggeredSend,
+                ['testExisting_triggeredSend', 'testExisting_triggeredSend_rcb'],
+                'should have found the right triggeredSends that need updating'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                15,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should refresh a specifc triggeredSend by key', async () => {
+            // WHEN
+            const replace = await handler.refresh('testInstance/testBU', {
+                triggeredSend: ['testExisting_triggeredSend'],
+            });
+            // THEN
+            assert.equal(process.exitCode, 0, 'refresh should not have thrown an error');
+            // retrieve result
+
+            assert.deepEqual(
+                replace['testInstance/testBU'].triggeredSend,
+                ['testExisting_triggeredSend'],
+                'should have found the right triggeredSends that need updating'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                4,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should refresh 2 triggeredSend by key', async () => {
+            // WHEN
+            const replace = await handler.refresh('testInstance/testBU', {
+                triggeredSend: ['testExisting_triggeredSend', 'testExisting_triggeredSend_rcb'],
+            });
+            // THEN
+            assert.equal(process.exitCode, 0, 'refresh should not have thrown an error');
+            // retrieve result
+
+            assert.deepEqual(
+                replace['testInstance/testBU'].triggeredSend,
+                ['testExisting_triggeredSend', 'testExisting_triggeredSend_rcb'],
+                'should have found the right triggeredSends that need updating'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                8,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 
     describe('Start (Execute) ================', () => {

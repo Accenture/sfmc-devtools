@@ -5,6 +5,7 @@ import { axiosInstance } from '../node_modules/sfmc-sdk/lib/util.js';
 import handler from '../lib/index.js';
 import auth from '../lib/util/auth.js';
 import { Util } from '../lib/util/util.js';
+import cache from '../lib/util/cache.js';
 import ReplaceContentBlockReference from '../lib/util/replaceContentBlockReference.js';
 
 import { fileURLToPath } from 'node:url';
@@ -23,6 +24,8 @@ import {
     tWarn,
 } from './resourceFactory.js';
 const authResources = File.readJsonSync(path.join(__dirname, './resources/auth.json'));
+
+const loadingFile = 'loading expected file:///' + __dirname.split(path.sep).join('/');
 
 /**
  * gets file from Retrieve folder
@@ -160,7 +163,9 @@ export function getActualTemplateFile(customerKey, type, ext) {
  * @returns {Promise.<string>} file in JSON form
  */
 export function getExpectedJson(mid, type, action) {
-    return File.readJSON(`./test/resources/${mid}/${type}/${action}-expected.json`);
+    const path = `/resources/${mid}/${type}/${action}-expected.json`;
+    console.log(loadingFile + path); // eslint-disable-line no-console
+    return File.readJSON(`./test` + path);
 }
 
 /**
@@ -183,6 +188,7 @@ export function getExpectedFile(mid, type, action, ext) {
  * @returns {void}
  */
 export function mockSetup(isDeploy) {
+    cache.clearCache();
     // no need to execute this again if we ran it a 2nd time for deploy - already done in standard setup
     if (!isDeploy) {
         // reset all options to default
@@ -208,6 +214,8 @@ export function mockSetup(isDeploy) {
             matchName: undefined,
             noUpdate: undefined,
             publish: undefined,
+            purge: undefined,
+            range: undefined,
             referenceFrom: undefined,
             referenceTo: undefined,
             refresh: undefined,

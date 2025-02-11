@@ -99,12 +99,12 @@ declare class Event extends MetadataType {
         workflowObjects: string[];
         /** @type {Object.<string, ReferenceObject[]>} object-name > object data */
         referencedObjects: {
-            [x: string]: ReferenceObject[];
+            [x: string]: import("../../types/mcdev.d.js").ReferenceObject[];
         };
         /** @type {Object.<string, Object.<string, SfObjectField>>} object-name > field-name > field data */
         objectFields: {
             [x: string]: {
-                [x: string]: SfObjectField;
+                [x: string]: import("../../types/mcdev.d.js").SfObjectField;
             };
         };
         /** @type {Object.<string, Promise.<any>>} */

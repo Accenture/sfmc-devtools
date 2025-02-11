@@ -10,10 +10,22 @@
     },
     "options": {
         "formatOnSave": true,
+        "formatErrorLog": false,
         "deployment": {
             "commitHistory": 10,
             "sourceTargetMapping": {
                 "deployment-source": "deployment-target"
+            },
+            "branchSourceTargetMapping": {
+                "sit": {
+                    "deployment-sit-source": "deployment-sit-target"
+                },
+                "uat": {
+                    "deployment-uat-source": "deployment-uat-target"
+                },
+                "prod": {
+                    "deployment-prod-source": "deployment-prod-target"
+                }
             },
             "targetBranchBuMapping": {
                 "release/*": "MySandbox/QA-DE",
@@ -104,6 +116,7 @@
             "dataExtension",
             "dataExtract",
             "deliveryProfile",
+            "domainVerification",
             "emailSend",
             "event",
             "fileLocation",
@@ -126,5 +139,5 @@
             "verification"
         ]
     },
-    "version": "7.4.4"
+    "version": "7.6.3"
 }

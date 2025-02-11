@@ -1,0 +1,43 @@
+{
+    "page": 1,
+    "pageSize": 500,
+    "count": 4,
+    "items": [
+        {
+            "enterpriseId": 1111111,
+            "domain": "joern.berkefeld@accenture.com",
+            "status": "Verified",
+            "domainType": "UserDomain",
+            "isSendable": true,
+            "memberId": 9999999,
+            "emailSendTime": "2024-05-15T08:37:08.587"
+        },
+        {
+            "enterpriseId": 1111111,
+            "domain": "mcdev.accenture.com",
+            "status": "Verified",
+            "domainType": "SAP",
+            "isSendable": true,
+            "memberId": 9999999,
+            "emailSendTime": "2023-06-19T11:11:17.32"
+        },
+        {
+            "enterpriseId": 1111111,
+            "domain": "adhoc.accenture.com",
+            "status": "Verified",
+            "domainType": "PrivateDomain",
+            "isSendable": true,
+            "memberId": 9999999,
+            "emailSendTime": "2024-07-18T06:42:09.943"
+        },
+        {
+            "enterpriseId": 1111111,
+            "domain": "mcdev-transferrable.accenture.com",
+            "status": "Verified",
+            "domainType": "RegisteredDomain",
+            "isSendable": true,
+            "memberId": 9999999,
+            "emailSendTime": "2023-09-20T06:05:53.873"
+        }
+    ]
+}

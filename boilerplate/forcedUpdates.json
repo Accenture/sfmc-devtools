@@ -1,5 +1,13 @@
 [
     {
+        "version": "7.7.0",
+        "files": [".gitignore"]
+    },
+    {
+        "version": "7.6.2",
+        "files": [".vscode/extensions.json"]
+    },
+    {
         "version": "7.4.3",
         "files": ["eslint.config.js", ".prettierrc"]
     },

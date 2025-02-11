@@ -70,9 +70,9 @@ declare class TriggeredSend extends MetadataType {
      *
      * @param {string[]} [keyArr] metadata keys
      * @param {boolean} [checkKey] whether to check if the key is valid
-     * @returns {Promise.<void>} -
+     * @returns {Promise.<string[]>} Returns list of keys that were refreshed
      */
-    static refresh(keyArr?: string[], checkKey?: boolean): Promise<void>;
+    static refresh(keyArr?: string[], checkKey?: boolean): Promise<string[]>;
     /**
      * helper for {@link TriggeredSend.refresh} that extracts the keys from the TSD item map and eli
      *

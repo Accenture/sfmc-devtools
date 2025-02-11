@@ -26,6 +26,7 @@ declare namespace _default {
     let lastmodNameField: any;
     let restPagination: boolean;
     let restPageSize: number;
+    let maxKeyLength: number;
     let type: string;
     let typeDescription: string;
     let typeRetrieveByDefault: boolean;
@@ -318,7 +319,7 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
-        ' activities[].configurationArguments.triggeredSend.sendClassificationId': {
+        'activities[].configurationArguments.triggeredSend.sendClassificationId': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:8fe86c01-56d5-4c56-8ac2-991578c79485</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:592f71ac-78a0-45a2-8cfe-37a91fc6cfd5</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-675af14a-b6a1-44a5-b7e7-4a76c6d18424">
+                <wsu:Created>2023-02-01T10:29:21Z</wsu:Created>
+                <wsu:Expires>2023-02-01T10:34:21Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>a90dda5e-aeba-440a-82ce-74fb2abf5eb2</RequestID>
+            <Results xsi:type="TriggeredSendDefinition">
+                <PartnerKey xsi:nil="true" />
+                <PartnerProperties>
+                    <Name>TestEmailAddr</Name>
+                    <Value />
+                </PartnerProperties>
+                <CreatedDate>2018-06-25T05:58:00</CreatedDate>
+                <ModifiedDate>2018-06-25T05:58:00</ModifiedDate>
+                <ObjectID>b3150cf0-6e78-e811-80d4-1402ec721c9d</ObjectID>
+                <CustomerKey>testExisting_triggeredSend</CustomerKey>
+                <IsPlatformObject>false</IsPlatformObject>
+                <Name>testExisting_triggeredSend</Name>
+                <Description>Unsubscribe_Email</Description>
+                <Keyword />
+                <CategoryID>89348</CategoryID>
+                <SendClassification>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID>95da425b-a06f-e611-96fe-38eaa7142c61</ObjectID>
+                    <CustomerKey>testExisting_sendClassification</CustomerKey>
+                </SendClassification>
+                <SenderProfile>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID>a75d452b-7ef4-eb11-b82d-48df37d1da95</ObjectID>
+                    <CustomerKey>testExisting_senderProfile</CustomerKey>
+                </SenderProfile>
+                <FromName>unsubscribe</FromName>
+                <FromAddress>unsubscribe@emails.mcdev.accenture.com</FromAddress>
+                <SuppressTracking>false</SuppressTracking>
+                <TriggeredSendType>Continuous</TriggeredSendType>
+                <TriggeredSendStatus>Active</TriggeredSendStatus>
+                <Email>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>531213</ID>
+                    <ObjectID xsi:nil="true" />
+                </Email>
+                <AutoAddSubscribers>false</AutoAddSubscribers>
+                <AutoUpdateSubscribers>false</AutoUpdateSubscribers>
+                <BatchInterval>0</BatchInterval>
+                <EmailSubject>You are successfully unsubscribed</EmailSubject>
+                <DynamicEmailSubject>You are successfully unsubscribed</DynamicEmailSubject>
+                <IsMultipart>false</IsMultipart>
+                <IsWrapped>true</IsWrapped>
+                <AllowedSlots>0</AllowedSlots>
+                <NewSlotTrigger>0</NewSlotTrigger>
+                <Priority>4</Priority>
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>

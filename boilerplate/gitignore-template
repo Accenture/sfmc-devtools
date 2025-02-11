@@ -2,9 +2,9 @@
 node_modules/
 /deploy/
 /docs/badKeys/
-/docs/deltaPackage/
 /logs/
 **/QueryStudioResults at*
 .mcdev-auth.json
+.mcdev/template/
 *.error.log
 *.BAK

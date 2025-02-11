@@ -59,12 +59,26 @@ declare class SenderProfile extends MetadataType {
      */
     static postRetrieveTasks(metadata: MetadataTypeItem): MetadataTypeItem;
     /**
+     *
+     * @param {MetadataTypeItem} metadata a single item
+     * @param {MetadataTypeItem} [metadataCaller] if called from SendClassification this can be used to adjust logs
+     * @param {any} [definition] type defintiion from SendClassification
+     */
+    static verifySenderEmailAddresses(metadata: MetadataTypeItem, metadataCaller?: MetadataTypeItem, definition?: any): void;
+    /**
      * prepares a single item for deployment
      *
      * @param {MetadataTypeItem} metadata a single query activity
      * @returns {Promise.<MetadataTypeItem>} Promise
      */
     static preDeployTasks(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
+    /**
+     * Gets executed after deployment of metadata type
+     *
+     * @param {MetadataTypeMap} upsertResults metadata mapped by their keyField as returned by update/create
+     * @returns {Promise.<void>} -
+     */
+    static postDeployTasks(upsertResults: MetadataTypeMap): Promise<void>;
 }
 declare namespace SenderProfile {
     let definition: {

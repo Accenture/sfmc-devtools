@@ -61,7 +61,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    42,
+                    44,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -110,7 +110,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    42,
+                    44,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -159,7 +159,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    42,
+                    44,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -231,7 +231,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    90,
+                    92,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -296,7 +296,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    90,
+                    92,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -361,7 +361,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    90,
+                    92,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -430,7 +430,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    9,
+                    10,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -498,7 +498,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    17,
+                    18,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -527,7 +527,7 @@ describe('GENERAL', () => {
                 assert.equal(deployedTypes[0], 'dataExtract', 'deploy should have returned 1 type');
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    8,
+                    10,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -569,7 +569,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    16,
+                    20,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -632,7 +632,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    17,
+                    19,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -697,7 +697,47 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    14,
+                    16,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+            });
+
+            it('skip deploy event with bad filename or bad extension', async () => {
+                testUtils.copyToDeploy('event-deploy', 'event');
+
+                const argvMetadata = [
+                    'event:testNew_event_badExtension',
+                    'event:testNew_event_badName',
+                ];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                const buName = 'testInstance/testBU';
+                await handler.deploy(buName, typeKeyCombo);
+                // THEN
+                assert.equal(process.exitCode, 1, 'deploy should not have thrown an error');
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    0,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+            });
+
+            it('skip deploy asset with bad filename or bad extension', async () => {
+                testUtils.copyToDeploy('asset-deploy', 'asset');
+                const argvMetadata = [
+                    'asset:testNew_asset_badExtension',
+                    'asset:testNew_asset_badName',
+                ];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                const buName = 'testInstance/testBU';
+                await handler.deploy(buName, typeKeyCombo);
+
+                // THEN
+                assert.equal(process.exitCode, 1, 'deploy should not have thrown an error');
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    0,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -708,7 +748,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU', ['automation', 'query']);
 
-                const expectedApiCallsRetrieve = 30;
+                const expectedApiCallsRetrieve = 31;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -813,7 +853,7 @@ describe('GENERAL', () => {
             });
 
             it('buildTemplate + buildDefinition for multiple types with keys and --retrieve', async () => {
-                const expectedApiCallsRetrieve = 30;
+                const expectedApiCallsRetrieve = 31;
 
                 // preparation
                 const argvMetadata = [
@@ -918,7 +958,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 90;
+                const expectedApiCallsRetrieve = 93;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1158,7 +1198,7 @@ describe('GENERAL', () => {
                     await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
                 ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
 
-                const expectedApiCallsRetrieve = 94;
+                const expectedApiCallsRetrieve = 97;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1170,7 +1210,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU', ['automation', 'query']);
 
-                const expectedApiCallsRetrieve = 30;
+                const expectedApiCallsRetrieve = 31;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1358,11 +1398,11 @@ describe('GENERAL', () => {
                 );
             });
 
-            it('build multiple type with keys', async () => {
+            it('clone multiple type with keys', async () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU', ['automation', 'query']);
 
-                const expectedApiCallsRetrieve = 30;
+                const expectedApiCallsRetrieve = 31;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1383,6 +1423,78 @@ describe('GENERAL', () => {
                 );
                 const buName = 'testInstance/testBU';
 
+                handler.setOptions({ skipInteraction: true, purge: false });
+                // *** build: buildTemplate and buildDefinition chained ***
+                const definitionResult = await handler.clone(buName, buName, typeKeyCombo);
+                assert.equal(process.exitCode, 0, 'build should not have thrown an error');
+
+                // *** buildTemplate ***
+                // cannot be checked in build anymore because it writes templates into a temporary folder and deletes them afterwards
+
+                // *** buildDefinition ***
+
+                // check automation
+                assert.equal(
+                    definitionResult.automation
+                        ? Object.keys(definitionResult.automation).length
+                        : 0,
+                    1,
+                    'only one automation expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualDeployJson('testExisting_automation', 'automation'),
+                    await testUtils.getExpectedJson('9999999', 'automation', 'clone'),
+                    'returned deployment file was not equal expected'
+                );
+
+                // check query
+                assert.equal(
+                    definitionResult.query ? Object.keys(definitionResult.query).length : 0,
+                    1,
+                    'only one query expected'
+                );
+                assert.deepEqual(
+                    await testUtils.getActualDeployJson('testExisting_query', 'query'),
+                    await testUtils.getExpectedJson('9999999', 'query', 'clone'),
+                    'returned deployment JSON was not equal expected'
+                );
+                expect(
+                    await testUtils.getActualDeployFile('testExisting_query', 'query', 'sql')
+                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'clone', 'sql'));
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
+                    0,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+            });
+
+            it('build multiple type with keys', async () => {
+                // download first before we test buildTemplate
+                await handler.retrieve('testInstance/testBU', ['automation', 'query']);
+
+                const expectedApiCallsRetrieve = 31;
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    expectedApiCallsRetrieve,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+
+                // preparation
+                const argvMetadata = [
+                    'automation:testExisting_automation',
+                    'query:testExisting_query',
+                    'query:bad',
+                ];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                assert.notEqual(
+                    typeof typeKeyCombo,
+                    'undefined',
+                    'typeKeyCombo should not be undefined'
+                );
+                const buName = 'testInstance/testBU';
+
+                handler.setOptions({ skipInteraction: true, purge: false });
                 // *** build: buildTemplate and buildDefinition chained ***
                 const definitionResult = await handler.build(
                     buName,
@@ -1396,20 +1508,27 @@ describe('GENERAL', () => {
                 // *** buildTemplate ***
 
                 // check automation
-                assert.deepEqual(
-                    await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
-                    await testUtils.getExpectedJson('9999999', 'automation', 'template'),
-                    'returned template was not equal expected'
-                );
-                // check query
-                assert.deepEqual(
-                    await testUtils.getActualTemplateJson('testExisting_query', 'query'),
-                    await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                    'returned template JSON of retrieveAsTemplate was not equal expected'
-                );
-                expect(
-                    await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
-                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
+                // assert.deepEqual(
+                //     await testUtils.getActualTemporaryTemplateJson(
+                //         'testExisting_automation',
+                //         'automation'
+                //     ),
+                //     await testUtils.getExpectedJson('9999999', 'automation', 'template'),
+                //     'returned template was not equal expected'
+                // );
+                // // check query
+                // assert.deepEqual(
+                //     await testUtils.getActualTemporaryTemplateJson('testExisting_query', 'query'),
+                //     await testUtils.getExpectedJson('9999999', 'query', 'template'),
+                //     'returned template JSON of retrieveAsTemplate was not equal expected'
+                // );
+                // expect(
+                //     await testUtils.getActualTemporaryTemplateFile(
+                //         'testExisting_query',
+                //         'query',
+                //         'sql'
+                //     )
+                // ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
 
                 // *** buildDefinition ***
 
@@ -1453,7 +1572,7 @@ describe('GENERAL', () => {
                 // download everything before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 90;
+                const expectedApiCallsRetrieve = 93;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1475,7 +1594,7 @@ describe('GENERAL', () => {
                 const buName = 'testInstance/testBU';
 
                 // set skipInteraction to true to skip re-retrieving question
-                handler.setOptions({ dependencies: true, skipInteraction: true });
+                handler.setOptions({ dependencies: true, skipInteraction: true, purge: true });
 
                 // *** build: buildTemplate and buildDefinition chained ***
                 const definitionResult = await handler.build(
@@ -1489,21 +1608,21 @@ describe('GENERAL', () => {
 
                 // *** buildTemplate ***
 
-                // check automation
-                assert.deepEqual(
-                    await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
-                    await testUtils.getExpectedJson('9999999', 'automation', 'template'),
-                    'returned template was not equal expected'
-                );
-                // check query
-                assert.deepEqual(
-                    await testUtils.getActualTemplateJson('testExisting_query', 'query'),
-                    await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                    'returned template JSON of retrieveAsTemplate was not equal expected'
-                );
-                expect(
-                    await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
-                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
+                // // check automation
+                // assert.deepEqual(
+                //     await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
+                //     await testUtils.getExpectedJson('9999999', 'automation', 'template'),
+                //     'returned template was not equal expected'
+                // );
+                // // check query
+                // assert.deepEqual(
+                //     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
+                //     await testUtils.getExpectedJson('9999999', 'query', 'template'),
+                //     'returned template JSON of retrieveAsTemplate was not equal expected'
+                // );
+                // expect(
+                //     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
+                // ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
 
                 // *** buildDefinition ***
 
@@ -1577,7 +1696,12 @@ describe('GENERAL', () => {
                 );
                 const buName = 'testInstance/testBU';
 
-                handler.setOptions({ dependencies: true, retrieve: true, skipInteraction: true });
+                handler.setOptions({
+                    dependencies: true,
+                    retrieve: true,
+                    skipInteraction: true,
+                    purge: true,
+                });
 
                 // *** build: buildTemplate and buildDefinition chained ***
                 const definitionResult = await handler.build(
@@ -1592,20 +1716,20 @@ describe('GENERAL', () => {
                 // *** buildTemplate ***
 
                 // check automation
-                assert.deepEqual(
-                    await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
-                    await testUtils.getExpectedJson('9999999', 'automation', 'template'),
-                    'returned template was not equal expected'
-                );
-                // check query
-                assert.deepEqual(
-                    await testUtils.getActualTemplateJson('testExisting_query', 'query'),
-                    await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                    'returned template JSON of retrieveAsTemplate was not equal expected'
-                );
-                expect(
-                    await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
-                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
+                // assert.deepEqual(
+                //     await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
+                //     await testUtils.getExpectedJson('9999999', 'automation', 'template'),
+                //     'returned template was not equal expected'
+                // );
+                // // check query
+                // assert.deepEqual(
+                //     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
+                //     await testUtils.getExpectedJson('9999999', 'query', 'template'),
+                //     'returned template JSON of retrieveAsTemplate was not equal expected'
+                // );
+                // expect(
+                //     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
+                // ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
 
                 // *** buildDefinition ***
 
@@ -1657,7 +1781,7 @@ describe('GENERAL', () => {
                     await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
                 ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
 
-                const expectedApiCallsRetrieve = 94;
+                const expectedApiCallsRetrieve = 97;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1669,7 +1793,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU', ['automation', 'query']);
 
-                const expectedApiCallsRetrieve = 30;
+                const expectedApiCallsRetrieve = 31;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1689,6 +1813,7 @@ describe('GENERAL', () => {
                     'typeKeyCombo should not be undefined'
                 );
                 const buName = 'testInstance/testBU';
+                handler.setOptions({ skipInteraction: true, purge: false });
 
                 // *** build: buildTemplate and buildDefinition chained ***
                 const definitionResult = await handler.build(
@@ -1703,21 +1828,21 @@ describe('GENERAL', () => {
 
                 // *** buildTemplate ***
 
-                // check automation
-                assert.deepEqual(
-                    await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
-                    await testUtils.getExpectedJson('9999999', 'automation', 'template'),
-                    'returned template was not equal expected'
-                );
-                // check query
-                assert.deepEqual(
-                    await testUtils.getActualTemplateJson('testExisting_query', 'query'),
-                    await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                    'returned template JSON of retrieveAsTemplate was not equal expected'
-                );
-                expect(
-                    await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
-                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
+                // // check automation
+                // assert.deepEqual(
+                //     await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
+                //     await testUtils.getExpectedJson('9999999', 'automation', 'template'),
+                //     'returned template was not equal expected'
+                // );
+                // // check query
+                // assert.deepEqual(
+                //     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
+                //     await testUtils.getExpectedJson('9999999', 'query', 'template'),
+                //     'returned template JSON of retrieveAsTemplate was not equal expected'
+                // );
+                // expect(
+                //     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
+                // ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
 
                 // *** buildDefinitionBulk ***
 
@@ -1847,7 +1972,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 90;
+                const expectedApiCallsRetrieve = 93;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1869,7 +1994,7 @@ describe('GENERAL', () => {
                 const buName = 'testInstance/testBU';
 
                 // set skipInteraction to true to skip re-retrieving question
-                handler.setOptions({ dependencies: true, skipInteraction: true });
+                handler.setOptions({ dependencies: true, skipInteraction: true, purge: true });
 
                 // *** build: buildTemplate and buildDefinition chained ***
                 const definitionResult = await handler.build(
@@ -1884,21 +2009,21 @@ describe('GENERAL', () => {
 
                 // *** buildTemplate ***
 
-                // check automation
-                assert.deepEqual(
-                    await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
-                    await testUtils.getExpectedJson('9999999', 'automation', 'template'),
-                    'returned template was not equal expected'
-                );
-                // check query
-                assert.deepEqual(
-                    await testUtils.getActualTemplateJson('testExisting_query', 'query'),
-                    await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                    'returned template JSON of retrieveAsTemplate was not equal expected'
-                );
-                expect(
-                    await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
-                ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
+                // // check automation
+                // assert.deepEqual(
+                //     await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
+                //     await testUtils.getExpectedJson('9999999', 'automation', 'template'),
+                //     'returned template was not equal expected'
+                // );
+                // // check query
+                // assert.deepEqual(
+                //     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
+                //     await testUtils.getExpectedJson('9999999', 'query', 'template'),
+                //     'returned template JSON of retrieveAsTemplate was not equal expected'
+                // );
+                // expect(
+                //     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
+                // ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
 
                 // *** buildDefinitionBulk ***
 
@@ -2207,7 +2332,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    8,
+                    9,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -2249,7 +2374,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    16,
+                    20,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -2298,9 +2423,32 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    11,
+                    13,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
+            });
+        });
+
+        describe('Refresh ================', () => {
+            it('Should not refresh anything due to missing type', async () => {
+                // WHEN
+                const replace = await handler.refresh('testInstance/testBU', null);
+                // THEN
+                assert.equal(process.exitCode, 1, 'refresh should have thrown an error');
+                // retrieve result
+
+                assert.deepEqual(
+                    Object.keys(replace).length,
+                    0,
+                    'should not have replaced anything'
+                );
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    0,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+                return;
             });
         });
     });

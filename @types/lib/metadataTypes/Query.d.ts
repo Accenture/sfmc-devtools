@@ -47,6 +47,13 @@ declare class Query extends MetadataType {
         type: string;
     }>;
     /**
+     * a function to start query execution via API
+     *
+     * @param {string[]} keyArr customerkey of the metadata
+     * @returns {Promise.<string[]>} Returns list of keys that were executed successfully
+     */
+    static execute(keyArr: string[]): Promise<string[]>;
+    /**
      * helper to allow us to select single metadata entries via REST
      *
      * @private
