@@ -108,6 +108,14 @@ declare class Asset extends MetadataType {
      */
     static create(metadata: AssetItem): Promise<any>;
     /**
+     * helper for {@link MetadataType.createREST}
+     *
+     * @param {MetadataTypeItem} metadataEntry a single metadata Entry
+     * @param {object} apiResponse varies depending on the API call
+     * @returns {Promise.<object>} apiResponse, potentially modified
+     */
+    static postCreateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): Promise<object>;
+    /**
      * Updates a single asset
      *
      * @param {AssetItem} metadata a single asset
