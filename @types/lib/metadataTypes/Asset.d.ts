@@ -87,7 +87,7 @@ declare class Asset extends MetadataType {
     /**
      * Returns Order in which metadata needs to be retrieved/deployed and skips components with missing components
      *
-     * @param {AssetMap} metadataMap metadata mapped by their keyField
+     * @param {AssetMap} metadataMap metadata thats about to be deployed
      * @param {string} deployDir directory where deploy metadata are saved
      * @returns {Promise.<AssetMap>} keyField => metadata map but sorted to ensure dependencies are deployed in correct order
      */
