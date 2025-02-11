@@ -763,9 +763,9 @@ declare class MetadataType {
      * @param {'retrieve'|'buildDefinition'|'deploy'} method used to select the right config
      * @param {MetadataTypeItem | CodeExtractItem} item a single metadata item
      * @param {string} targetDir folder where files for deployment are stored
-     * @returns {Promise.<MetadataTypeItem>} Promise of a single metadata item
+     * @returns {Promise.<MetadataTypeItem | CodeExtractItem>} Promise of a single metadata item
      */
-    static validation(method: "retrieve" | "buildDefinition" | "deploy", item: MetadataTypeItem | CodeExtractItem, targetDir: string): Promise<MetadataTypeItem>;
+    static validation(method: "retrieve" | "buildDefinition" | "deploy", item: MetadataTypeItem | CodeExtractItem, targetDir: string): Promise<MetadataTypeItem | CodeExtractItem>;
 }
 declare namespace MetadataType {
     namespace definition {
