@@ -250,6 +250,9 @@ export function mockSetup(isDeploy) {
         ),
         '.mcdevrc.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdevrc.json')),
         '.mcdev-auth.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdev-auth.json')),
+        '.mcdev-validations.js': fsmock.load(
+            path.resolve(__dirname, 'mockRoot/.mcdev-validations.js')
+        ),
         'boilerplate/config.json': fsmock.load(
             path.resolve(__dirname, '../boilerplate/config.json')
         ),

@@ -41,12 +41,14 @@
             "buildDefinition": {
                 "noAmpscriptHtmlTag": "warn",
                 "noGuidKeys": "warn",
-                "noRootFolder": "warn"
+                "noRootFolder": "warn",
+                "filterPrefixByBu": "error"
             },
             "deploy": {
                 "noAmpscriptHtmlTag": "warn",
                 "noGuidKeys": "warn",
                 "noRootFolder": "warn",
+                "filterPrefixByBu": "error",
                 "overrides": [
                     {
                         "type": ["journey"],
