@@ -206,6 +206,7 @@ export function mockSetup(isDeploy) {
             errorLog: undefined,
             execute: undefined,
             filter: undefined,
+            fix: undefined,
             fixShared: undefined,
             fromRetrieve: undefined,
             json: undefined,

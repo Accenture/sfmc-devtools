@@ -733,11 +733,49 @@ describe('GENERAL', () => {
                 await handler.deploy(buName, typeKeyCombo);
 
                 // THEN
-                assert.equal(process.exitCode, 1, 'deploy should not have thrown an error');
+                assert.equal(process.exitCode, 1, 'deploy should have thrown an error');
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     0,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+            });
+
+            it('skip deploy based on validation rule "filterPrefixByBu" with --fix without error', async () => {
+                const buName = 'testInstance/testBU';
+
+                handler.setOptions({ fix: true });
+
+                await handler.deploy(buName, {
+                    asset: ['testBlacklist_asset_htmlblock'],
+                    dataExtension: ['testBlacklist_dataExtension'],
+                });
+
+                // THEN
+                assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    8,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+            });
+
+            it('skip deploy based on validation rule "filterPrefixByBu" without --fix but with error', async () => {
+                const buName = 'testInstance/testBU';
+
+                await handler.deploy(buName, {
+                    asset: ['testBlacklist_asset_htmlblock'],
+                    dataExtension: ['testBlacklist_dataExtension'],
+                });
+
+                // THEN
+                assert.equal(process.exitCode, 1, 'deploy should have thrown an error');
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    8,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
