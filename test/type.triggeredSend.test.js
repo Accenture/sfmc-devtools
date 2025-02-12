@@ -172,8 +172,8 @@ describe('type: triggeredSend', () => {
                 templatedItems.asset.map((item) => item.customerKey),
                 [
                     '{{{prefix}}}asset_htmlblock',
-                    '{{{prefix}}}htmlblock1',
                     '{{{prefix}}}htmlblock 3 spaces',
+                    '{{{prefix}}}htmlblock1',
                     '{{{prefix}}}htmlblock2',
                 ],
                 'expected specific assets to be templated'

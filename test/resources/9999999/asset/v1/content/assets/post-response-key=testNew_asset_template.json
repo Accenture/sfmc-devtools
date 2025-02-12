@@ -1,0 +1,147 @@
+{
+    "id": 8973,
+    "customerKey": "testNew_asset_template",
+    "objectID": "a6aad42d-df00-4b5d-9780-b7adc2a3cfa4",
+    "assetType": {
+        "id": 4,
+        "name": "template",
+        "displayName": "Template"
+    },
+    "fileProperties": {
+        "fileName": "testNew_asset_template"
+    },
+    "name": "testNew_asset_template",
+    "owner": {
+        "id": 710420432,
+        "email": "",
+        "name": "IDE - joern.berkefeld app user",
+        "userId": "710420432"
+    },
+    "createdDate": "2025-02-12T11:06:57.24-06:00",
+    "createdBy": {
+        "id": 710420432,
+        "email": "",
+        "name": "IDE - joern.berkefeld app user",
+        "userId": "710420432"
+    },
+    "modifiedDate": "2025-02-12T11:06:57.24-06:00",
+    "modifiedBy": {
+        "id": 710420432,
+        "email": "",
+        "name": "IDE - joern.berkefeld app user",
+        "userId": "710420432"
+    },
+    "enterpriseId": 1111111,
+    "memberId": 9999999,
+    "status": {
+        "id": 1,
+        "name": "Draft"
+    },
+    "thumbnail": {
+        "thumbnailUrl": "/v1/assets/8973/thumbnail"
+    },
+    "category": {
+        "id": 89397,
+        "name": "Content Builder",
+        "parentId": 0
+    },
+    "content": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n<html>\n  <head>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n    <style type=\"text/css\">\n      ReadMsgBody{ width: 100%;}\n      .ExternalClass {width: 100%;}\n      .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;}\n      body {-webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;margin:0 !important;}\n      p { margin: 1em 0;}\n      table td { border-collapse: collapse;}\n      img {outline:0;}\n      a img {border:none;}\n      @-ms-viewport{ width: device-width;}\n    </style>\n    <style type=\"text/css\">\n      @media only screen and (max-width: 480px) {\n        .container {width: 100% !important;}\n        .footer { width:auto !important; margin-left:0; }\n        .mobile-hidden { display:none !important; }\n        .logo { display:block !important; padding:0 !important; }\n        img { max-width:100% !important; height:auto !important; max-height:auto !important;}\n        .header img{max-width:100% !important;height:auto !important; max-height:auto !important;}\n        .photo img { width:100% !important; max-width:100% !important; height:auto !important;}\n        .drop { display:block !important; width: 100% !important; float:left; clear:both;}\n        .footerlogo { display:block !important; width: 100% !important; padding-top:15px; float:left; clear:both;}\n        .nav4, .nav5, .nav6 { display: none !important; }\n        .tableBlock {width:100% !important;}\n        .responsive-td {width:100% !important; display:block !important; padding:0 !important; }\n        .fluid, .fluid-centered {\n          width: 100% !important;\n          max-width: 100% !important;\n          height: auto !important;\n          margin-left: auto !important;\n          margin-right: auto !important;\n        }\n        .fluid-centered {\n          margin-left: auto !important;\n          margin-right: auto !important;\n        }\n        /* MOBILE GLOBAL STYLES - DO NOT CHANGE */\n        body { padding: 0px !important; font-size: 16px !important; line-height: 150% !important;}\n        h1 { font-size: 22px !important; line-height: normal !important;}\n        h2 { font-size: 20px !important; line-height: normal !important;}\n        h3 { font-size: 18px !important; line-height: normal !important;}\n        .buttonstyles {\n          font-family:arial,helvetica,sans-serif !important;\n          font-size: 16px !important;\n          color: #FFFFFF !important;\n          padding: 10px !important;\n        }\n        /* END OF MOBILE GLOBAL STYLES - DO NOT CHANGE */\n      }\n      @media only screen and (max-width: 640px) {\n        .container { width:100% !important; }\n        .mobile-hidden { display:none !important; }\n        .logo { display:block !important; padding:0 !important; }\n        .photo img { width:100% !important; height:auto !important;}\n        .nav5, .nav6 { display: none !important;}\n        .fluid, .fluid-centered {\n          width: 100% !important;\n          max-width: 100% !important;\n          height: auto !important;\n          margin-left: auto !important;\n          margin-right: auto !important;\n        }\n        .fluid-centered {\n          margin-left: auto !important;\n          margin-right: auto !important;\n        }\n      }\n    </style>\n    <!--[if mso]>\n      <style type=\"text/css\">\n          /* Begin Outlook Font Fix */\n          body, table, td {\n              font-family: Arial, Helvetica, sans-serif ;\n              font-size:16px;\n              color:#000000;\n              line-height:1;\n          }\n          /* End Outlook Font Fix */\n      </style>\n    <![endif]-->\n  </head>\n  <body bgcolor=\"#ffffff\" text=\"#000000\" style=\"background-color: #ffffff; color: #000000; padding: 0px; -webkit-text-size-adjust:none; font-size: 16px; font-family:arial,helvetica,sans-serif;\">\n    <div style=\"font-size:0; line-height:0;\"><custom name=\"opencounter\" type=\"tracking\"><custom name=\"usermatch\" type=\"tracking\" /></div>\n    <table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" align=\"center\">\n      <tr>\n        <td align=\"center\" valign=\"top\">\n          <custom type=\"header\"/>\n        </td>\n      </tr>\n      <tr>\n        <td align=\"center\">\n          <table cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"600\" class=\"container\" align=\"center\">\n            <tr>\n              <td>\n                <table class=\"tb_properties border_style\" style=\"background-color:#FFFFFF;\" cellspacing=\"0\" cellpadding=\"0\" bgcolor=\"#ffffff\" width=\"100%\">\n                  <tr>\n                    <td align=\"center\" valign=\"top\">\n                      <table align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n                        <tr>\n                          <!-- added padding here -->\n                          <td class=\"content_padding\" style=\"\">\n                            <!-- end of comment -->\n                            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n                              <tr> <!-- top slot -->\n                                <td align=\"center\" class=\"header\" valign=\"top\">\n                                  <table align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n                                    <tbody>\n                                        <tr>\n                                          <td align=\"left\" valign=\"top\">\n                                            <table cellspacing=\"0\" cellpadding=\"0\" style=\"width:100%\">\n                                              <tbody>\n                                              <tr>\n                                                <td class=\"responsive-td\" valign=\"top\" style=\"width: 100%;\">\n                                                  <div data-type=\"slot\" data-key=\"banner\">\n\t\t\t\t\t\t\t\t\t\t\t\t  </div>\n                                                </td>\n                                              </tr>\n                                              </tbody>\n                                            </table>\n                                          </td>\n                                        </tr>\n                                    </tbody>\n                                  </table>\n                                </td>\n                              </tr>\n                            </table>\n                          </td>\n                        </tr>\n                      </table>\n                    </td>\n                  </tr>\n                </table>\n              </td>\n            </tr>\n          </table>\n        </td>\n      </tr>\n      <tr>\n        <td valign=\"top\">\n          <custom type=\"footer\" />\n        </td>\n      </tr>\n    </table>\n  </body>\n</html>\n",
+    "meta": {
+        "globalStyles": {
+            "isLocked": false,
+            "template": {
+                "background-color": "#FFFFFF",
+                "border-color": "",
+                "border-width": "0px",
+                "border-style": "solid"
+            },
+            "body": {
+                "background-color": "#FFFFFF",
+                "font-family": "Arial,helvetica,sans-serif",
+                "font-size": "16px",
+                "color": "#000000",
+                "line-height": 1,
+                "margin": "0px",
+                "padding": "0px",
+                "content-padding-top": "0px",
+                "content-padding-right": "0px",
+                "content-padding-bottom": "0px",
+                "content-padding-left": "0px"
+            },
+            "h1": {
+                "font-family": "Arial,helvetica,sans-serif",
+                "font-size": "28px",
+                "color": "#181818",
+                "line-height": 1,
+                "font-weight": "bold",
+                "font-style": "normal"
+            },
+            "h2": {
+                "font-family": "Arial,helvetica,sans-serif",
+                "font-size": "22px",
+                "color": "#181818",
+                "line-height": 1,
+                "font-weight": "bold",
+                "font-style": "normal"
+            },
+            "h3": {
+                "font-family": "Arial,helvetica,sans-serif",
+                "font-size": "20px",
+                "color": "#181818",
+                "line-height": 1,
+                "font-weight": "bold",
+                "font-style": "normal"
+            },
+            "links": {
+                "font-weight": "normal",
+                "color": "#0176d3",
+                "text-decoration": "none"
+            },
+            "buttons": {
+                "font-family": "Arial,helvetica,sans-serif",
+                "font-size": "16px",
+                "color": "#FFFFFF",
+                "background-color": "#5D5D5D",
+                "border-radius": "3px",
+                "padding": "10px",
+                "border-color": "#5D5D5D",
+                "border-width": "1px",
+                "border-style": "solid"
+            },
+            "mobile": {
+                "body": {
+                    "padding": "0px",
+                    "font-size": "16px",
+                    "line-height": 1.5
+                },
+                "h1": {
+                    "font-size": "22px",
+                    "line-height": 1
+                },
+                "h2": {
+                    "font-size": "20px",
+                    "line-height": 1
+                },
+                "h3": {
+                    "font-size": "18px",
+                    "line-height": 1
+                },
+                "buttons": {
+                    "font-family": "Arial,helvetica,sans-serif",
+                    "font-size": "16px",
+                    "color": "#FFFFFF",
+                    "padding": "10px"
+                }
+            }
+        }
+    },
+    "availableViews": [],
+    "slots": {
+        "banner": {
+            "thumbnail": {},
+            "design": "<p style=\"font-family:Arial;color:#ccc;font-size:12px;text-align:center;vertical-align:middle;font-weight:bold;height:150px;display:flex;flex-direction:column;justify-content:center;padding:10px;margin:0;border: #cccccc dashed 1px;\">Drop blocks or content here</p>",
+            "modelVersion": 2
+        }
+    },
+    "modelVersion": 2
+}

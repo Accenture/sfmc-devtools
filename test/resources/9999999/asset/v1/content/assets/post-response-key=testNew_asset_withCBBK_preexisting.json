@@ -1,0 +1,59 @@
+{
+    "id": 1322777,
+    "customerKey": "testNew_asset_withCBBK_preexisting",
+    "objectID": "26fdf503-eeed-49eb-b428-cb3b4bc2ba49",
+    "assetType": {
+        "id": 196,
+        "name": "textblock",
+        "displayName": "Text Block"
+    },
+    "fileProperties": {
+        "fileName": "testNew_asset_withCBBK_preexisting"
+    },
+    "name": "testNew_asset_withCBBK_preexisting",
+    "description": "bla bla",
+    "owner": {
+        "id": 700304523,
+        "email": "",
+        "name": "SFMC DEVOPS app user",
+        "userId": "700304523"
+    },
+    "createdDate": "2024-05-07T05:08:46.927-06:00",
+    "createdBy": {
+        "id": 700304523,
+        "email": "",
+        "name": "SFMC DEVOPS app user",
+        "userId": "700304523"
+    },
+    "modifiedDate": "2024-05-07T05:08:46.927-06:00",
+    "modifiedBy": {
+        "id": 700304523,
+        "email": "",
+        "name": "SFMC DEVOPS app user",
+        "userId": "700304523"
+    },
+    "enterpriseId": 1111111,
+    "memberId": 9999999,
+    "status": {
+        "id": 1,
+        "name": "Draft"
+    },
+    "thumbnail": {
+        "thumbnailUrl": "/v1/assets/1324776/thumbnail"
+    },
+    "category": {
+        "id": 89397,
+        "name": "Content Builder",
+        "parentId": 0
+    },
+    "content": "%%[\n    ContentBlockByKey(\"testExisting_asset_htmlblock\")\n]%%\n\n",
+    "meta": {
+        "wrapperStyles": {
+            "mobile": {
+                "visible": true
+            }
+        }
+    },
+    "availableViews": [],
+    "modelVersion": 2
+}

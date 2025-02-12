@@ -4,6 +4,7 @@
     "Description": "created on deploy",
     "FromName": "Jörn Berkefeld",
     "FromAddress": "joern.berkefeld@accenture.com",
+    "FallbackFromAddress": "joern.berkefeld.New@accenture.com",
     "UseDefaultRMMRules": false,
     "AutoForwardToEmailAddress": "joern.berkefeld@accenture.com",
     "AutoForwardToName": "Jörn Berkefeld",

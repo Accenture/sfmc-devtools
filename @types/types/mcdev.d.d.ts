@@ -1738,4 +1738,38 @@ export type validationRule = {
 export type validationRuleList = {
     [x: string]: validationRule;
 };
+export type DomainVerificationItem = {
+    /**
+     * EID
+     */
+    enterpriseId?: number;
+    /**
+     * MID
+     */
+    memberId?: number;
+    /**
+     * domain or email address used in retrieve and create
+     */
+    domain?: string;
+    /**
+     * email address used in update call for isSendable field
+     */
+    emailAddress?: string;
+    /**
+     * returned by retrieve
+     */
+    status?: "Verified" | "Pending";
+    /**
+     * returned by retrieve and required for update call
+     */
+    domainType?: "SAP" | "UserDomain" | "PrivateDomain" | "RegisteredDomain";
+    /**
+     * automatically true upon creation. can be changed to false via update
+     */
+    isSendable: boolean;
+    /**
+     * e.g. ""2023-06-19T11:11:17.32""
+     */
+    emailSendTime?: string;
+};
 //# sourceMappingURL=mcdev.d.d.ts.map

@@ -1,0 +1,20 @@
+{
+    "CustomerKey": "testBlacklist_dataExtension",
+    "Name": "testBlacklist_dataExtension",
+    "Description": "",
+    "IsSendable": false,
+    "IsTestable": false,
+    "Fields": [
+        {
+            "Name": "testField",
+            "DefaultValue": "",
+            "MaxLength": 254,
+            "IsRequired": true,
+            "IsPrimaryKey": false,
+            "FieldType": "Text"
+        }
+    ],
+    "c__retentionPolicy": "none",
+    "r__folder_ContentType": "dataextension",
+    "r__folder_Path": "Data Extensions"
+}

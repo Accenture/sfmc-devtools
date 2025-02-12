@@ -59,6 +59,20 @@ declare class Builder {
      */
     static buildDefinitionBulk(listName: string, type: string, nameArr: string[]): Promise<object>;
     /**
+     * helper for buildDefinitionBulk, createDeltaPkg
+     *
+     * @param {string} listName market list name
+     * @returns {Promise.<void>} -
+     */
+    static purgeDeployFolderList(listName: string): Promise<void>;
+    /**
+     * helper for buildDefiniton, purgeDeployFolderList
+     *
+     * @param {string} businessUnit cred/bu combo
+     * @returns {Promise.<void>} -
+     */
+    static purgeDeployFolder(businessUnit: string): Promise<void>;
+    /**
      * Creates a Builder, uses v2 auth if v2AuthOptions are passed.
      *
      * @param {Mcdevrc} properties properties for auth
