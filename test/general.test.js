@@ -2205,6 +2205,120 @@ describe('GENERAL', () => {
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
+
+            it('skip build based on validation rule "filterPrefixByBu" with --fix without error', async () => {
+                const buName = 'testInstance/testBU';
+                const typeKeyCombo = {
+                    asset: ['testExisting_asset_htmlblock'],
+                    dataExtension: ['testExisting_dataExtension'],
+                };
+                await handler.retrieve(buName, typeKeyCombo);
+
+                const expectedApiCallsRetrieve = 11;
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    expectedApiCallsRetrieve,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+
+                handler.setOptions({ skipInteraction: true, purge: false, fix: true });
+
+                const definitionResult = await handler.build(
+                    buName,
+                    'ignored',
+                    typeKeyCombo,
+                    ['testSourceMarket'],
+                    ['parent'],
+                    true
+                );
+
+                // THEN
+                assert.equal(process.exitCode, 0, 'build should not have thrown an error');
+
+                // confirm that no deployment package was created
+                assert.equal(
+                    definitionResult.asset?.['testInstance/_ParentBU_']?.testTargetMarket
+                        ? Object.keys(
+                              definitionResult.asset?.['testInstance/_ParentBU_']?.testTargetMarket
+                          ).length
+                        : 0,
+                    0,
+                    '0 asset expected'
+                );
+                assert.equal(
+                    definitionResult.dataExtension?.['testInstance/_ParentBU_']?.testTargetMarket
+                        ? Object.keys(
+                              definitionResult.dataExtension?.['testInstance/_ParentBU_']
+                                  ?.testTargetMarket
+                          ).length
+                        : 0,
+                    0,
+                    '0 dataExtension expected'
+                );
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
+                    0,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+            });
+
+            it('skip deploy based on validation rule "filterPrefixByBu" without --fix but with error', async () => {
+                const buName = 'testInstance/testBU';
+                const typeKeyCombo = {
+                    asset: ['testExisting_asset_htmlblock'],
+                    dataExtension: ['testExisting_dataExtension'],
+                };
+                await handler.retrieve(buName, typeKeyCombo);
+
+                const expectedApiCallsRetrieve = 11;
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    expectedApiCallsRetrieve,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+
+                handler.setOptions({ skipInteraction: true, purge: false });
+
+                const definitionResult = await handler.build(
+                    buName,
+                    'ignored',
+                    typeKeyCombo,
+                    ['testSourceMarket'],
+                    ['parent'],
+                    true
+                );
+
+                // THEN
+                assert.equal(process.exitCode, 1, 'build should have thrown an error');
+
+                // confirm that no deployment package was created
+                assert.equal(
+                    definitionResult.asset?.['testInstance/_ParentBU_']?.testTargetMarket
+                        ? Object.keys(
+                              definitionResult.asset?.['testInstance/_ParentBU_']?.testTargetMarket
+                          ).length
+                        : 0,
+                    0,
+                    '0 asset expected'
+                );
+                assert.equal(
+                    definitionResult.dataExtension?.['testInstance/_ParentBU_']?.testTargetMarket
+                        ? Object.keys(
+                              definitionResult.dataExtension?.['testInstance/_ParentBU_']
+                                  ?.testTargetMarket
+                          ).length
+                        : 0,
+                    0,
+                    '0 dataExtension expected'
+                );
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
+                    0,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+            });
         });
 
         describe('Delete --metadata ~~~', () => {

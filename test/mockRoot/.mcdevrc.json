@@ -106,6 +106,9 @@
             "description": "Define n BU-Market combo here to as target for automated creation of deployment packages; you can create more than one target market list and they can be as complex as you like",
             "testInstance/testBU": ["testSourceMarket", "testTargetMarket"],
             "testInstance/_ParentBU_": ["testTargetMarket"]
+        },
+        "parent": {
+            "testInstance/_ParentBU_": ["testTargetMarket"]
         }
     },
     "metaDataTypes": {
