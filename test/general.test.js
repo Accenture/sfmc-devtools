@@ -743,6 +743,9 @@ describe('GENERAL', () => {
             });
 
             it('skip deploy based on validation rule "filterPrefixByBu" with --fix without error', async () => {
+                testUtils.copyToDeploy('asset-deploy2', 'asset');
+                testUtils.copyToDeploy('dataExtension-deploy', 'dataExtension');
+
                 const buName = 'testInstance/testBU';
 
                 handler.setOptions({ fix: true });
@@ -763,6 +766,9 @@ describe('GENERAL', () => {
             });
 
             it('skip deploy based on validation rule "filterPrefixByBu" without --fix but with error', async () => {
+                testUtils.copyToDeploy('asset-deploy2', 'asset');
+                testUtils.copyToDeploy('dataExtension-deploy', 'dataExtension');
+
                 const buName = 'testInstance/testBU';
 
                 await handler.deploy(buName, {

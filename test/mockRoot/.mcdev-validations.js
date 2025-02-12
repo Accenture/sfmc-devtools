@@ -3,7 +3,7 @@
 /** @type {Object.<string, string[]>} */
 const buPrefixBlacklistMap = {
     testBU: ['testBlacklist_'],
-    _ParentBU_: ['testTemplated_'],
+    _ParentBU_: ['testBlacklist_'],
 };
 
 /**

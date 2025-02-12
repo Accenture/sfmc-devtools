@@ -95,6 +95,17 @@
             "prefixUpper": "TESTTEMPLATED_",
             "description": "foobar",
             "countryCodeIn": "'testTarget'"
+        },
+        "testBlacklistMarket": {
+            "mid": "1111111",
+            "buName": "testBUTarget",
+            "secret": "target secret",
+            "sharedFolder": "/Shared Data Extensions/test target",
+            "suffix": "_testTarget",
+            "prefix": "testBlacklist_",
+            "prefixUpper": "TESTTEMPLATED_",
+            "description": "foobar",
+            "countryCodeIn": "'testTarget'"
         }
     },
     "marketList": {
@@ -108,7 +119,7 @@
             "testInstance/_ParentBU_": ["testTargetMarket"]
         },
         "parent": {
-            "testInstance/_ParentBU_": ["testTargetMarket"]
+            "testInstance/_ParentBU_": ["testBlacklistMarket"]
         }
     },
     "metaDataTypes": {
