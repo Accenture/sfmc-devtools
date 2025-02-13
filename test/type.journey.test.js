@@ -46,7 +46,7 @@ describe('type: journey', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                26,
+                27,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -131,7 +131,7 @@ describe('type: journey', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                22,
+                23,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -218,7 +218,11 @@ describe('type: journey', () => {
             return;
         });
 
-        it('Should not deploy --publish an already published transactional journey', async () => {
+        it('Should deploy --publish an already published transactional journey by first pausing it', async () => {
+            await testUtils.copyFile(
+                'interaction/v1/interactions/key_testExisting_temail/put-response-paused.json',
+                'interaction/v1/interactions/key_testExisting_temail/put-response.json'
+            );
             // WHEN
             handler.setOptions({ skipStatusCheck: true, publish: true });
             const deploy = await handler.deploy(
@@ -228,23 +232,48 @@ describe('type: journey', () => {
             );
 
             // THEN
-            assert.equal(process.exitCode, 1, 'deploy --publish should have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy --publish should not have thrown an error');
             // retrieve result
             assert.deepEqual(
                 Object.keys(deploy['testInstance/testBU']?.journey),
-                [],
+                ['testExisting_temail'],
                 'should have published the right journey'
+            );
+
+            const pauseCallout = testUtils.getRestCallout(
+                'post',
+                '/interaction/v1/interactions/transactional/pause'
+            );
+            const resumeCallout = testUtils.getRestCallout(
+                'post',
+                '/interaction/v1/interactions/transactional/resume'
+            );
+
+            // confirm callouts
+            assert.deepEqual(
+                pauseCallout,
+                {
+                    definitionId: 'dsfdsafdsa-922c-4568-85a5-e5cc77efc3be',
+                },
+                'pauseCallout-payload JSON was not equal expected'
+            );
+            assert.deepEqual(
+                resumeCallout,
+                {
+                    definitionId: 'dsfdsafdsa-922c-4568-85a5-e5cc77efc3be',
+                },
+                'resumeCallout-payload JSON was not equal expected'
             );
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                22,
+                60,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
 
-        it('Should deploy --publish a transactional journey', async () => {
+        it('Should update and publish a transactional journey', async () => {
             // WHEN
             handler.setOptions({ skipStatusCheck: true, publish: true });
             const deploy = await handler.deploy(
@@ -288,13 +317,70 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                57,
+                59,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
 
-        it('Should deploy --publish a journey by key (auto-picks latest version)', async () => {
+        it('Should create and publish a transactional journey', async () => {
+            // WHEN
+            handler.setOptions({ skipStatusCheck: true, publish: true });
+            const deploy = await handler.deploy(
+                'testInstance/testBU',
+                ['journey'],
+                ['testNew_temail_notPublished']
+            );
+
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy --publish should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                Object.keys(deploy['testInstance/testBU']?.journey),
+                ['testNew_temail_notPublished'],
+                'should have published the right journey'
+            );
+
+            // get callouts
+            const publishCallout = testUtils.getRestCallout(
+                'post',
+                '/interaction/v1/interactions/transactional/create'
+            );
+            // confirm callouts
+            assert.deepEqual(
+                publishCallout,
+                {
+                    definitionId: '4c39662b-7c47-4df4-8bd6-65f01c313e8c',
+                },
+                'publish-payload JSON was not equal expected'
+            );
+
+            // confirm transactionalEmail was downloaded
+            assert.deepEqual(
+                await testUtils.getActualJson('testNew_temail_notPublished', 'transactionalEmail'),
+                await testUtils.getExpectedJson('9999999', 'transactionalEmail', 'create-publish'),
+                'returned JSON was not equal expected'
+            );
+            // confirm journey was downloaded
+            assert.deepEqual(
+                await testUtils.getActualJson('testNew_temail_notPublished', 'journey'),
+                await testUtils.getExpectedJson(
+                    '9999999',
+                    'journey',
+                    'create-transactionaEmail-publish'
+                ),
+                'returned JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                59,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should update & publish a  multi-step journey by key (auto-picks latest version)', async () => {
             handler.setOptions({ skipStatusCheck: true, publish: true });
             // WHEN
             const deploy = await handler.deploy(
@@ -380,7 +466,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                26,
+                27,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -418,7 +504,7 @@ describe('type: journey', () => {
             // journey
             assert.deepEqual(
                 templatedItems.journey.map((item) => item.key),
-                ['{{{prefix}}}journey_Quicksend', '{{{prefix}}}journey_Multistep'],
+                ['{{{prefix}}}journey_Multistep', '{{{prefix}}}journey_Quicksend'],
                 'expected specific journeys to be templated'
             );
             // event
@@ -434,9 +520,9 @@ describe('type: journey', () => {
             assert.deepEqual(
                 templatedItems.dataExtension.map((item) => item.CustomerKey),
                 [
-                    '{{{prefix}}}journey_Quicksend',
-                    '{{{prefix}}}journey_Multistep',
                     '{{{prefix}}}DomainExclusion',
+                    '{{{prefix}}}journey_Multistep',
+                    '{{{prefix}}}journey_Quicksend',
                 ],
                 'expected specific dataExtensions to be templated'
             );
@@ -457,8 +543,8 @@ describe('type: journey', () => {
                 templatedItems.asset.map((item) => item.customerKey),
                 [
                     '{{{prefix}}}asset_htmlblock',
-                    '{{{prefix}}}htmlblock1',
                     '{{{prefix}}}htmlblock 3 spaces',
+                    '{{{prefix}}}htmlblock1',
                     '{{{prefix}}}htmlblock2',
                 ],
                 'expected specific assets to be templated'
@@ -568,7 +654,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                32,
+                33,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -603,7 +689,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                32,
+                33,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -638,7 +724,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                32,
+                33,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -701,7 +787,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                37,
+                38,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -755,7 +841,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                35,
+                36,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -1180,7 +1266,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                36,
+                37,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -1203,7 +1289,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                41,
+                42,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

@@ -42,9 +42,9 @@ declare class TransactionalEmail extends TransactionalMessage {
      *
      * @param {MetadataTypeItem} _ not used
      * @param {object} apiResponse varies depending on the API call
-     * @returns {Promise.<void>} -
+     * @returns {Promise.<object>} apiResponse
      */
-    static postCreateTasks(_: MetadataTypeItem, apiResponse: object): Promise<void>;
+    static postCreateTasks(_: MetadataTypeItem, apiResponse: object): Promise<object>;
     /**
      * Gets executed after deployment of metadata type
      *

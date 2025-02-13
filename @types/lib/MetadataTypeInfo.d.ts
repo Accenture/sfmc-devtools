@@ -12,6 +12,7 @@ declare namespace _default {
     export { dataExtractType };
     export { deliveryProfile };
     export { discovery };
+    export { domainVerification };
     export { email };
     export { emailSend };
     export { event };
@@ -51,6 +52,7 @@ import dataExtract from './metadataTypes/DataExtract.js';
 import dataExtractType from './metadataTypes/DataExtractType.js';
 import deliveryProfile from './metadataTypes/DeliveryProfile.js';
 import discovery from './metadataTypes/Discovery.js';
+import domainVerification from './metadataTypes/DomainVerification.js';
 import email from './metadataTypes/Email.js';
 import emailSend from './metadataTypes/EmailSend.js';
 import event from './metadataTypes/Event.js';

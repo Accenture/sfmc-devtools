@@ -65,15 +65,6 @@ declare class Verification extends MetadataType {
      */
     static create(metadata: VerificationItem): Promise<any>;
     /**
-     * helper for {@link MetadataType.createREST}
-     *
-     * @param {MetadataTypeItem} metadataEntry a single metadata Entry
-     * @param {object} apiResponse varies depending on the API call
-     * @param {MetadataTypeItem} metadataEntryWithAllFields like metadataEntry but before non-creatable fields were stripped
-     * @returns {Promise.<void>} -
-     */
-    static postCreateTasks(metadataEntry: MetadataTypeItem, apiResponse: object, metadataEntryWithAllFields: MetadataTypeItem): Promise<void>;
-    /**
      * Updates a single Data Extract
      *
      * @param {VerificationItem} metadata a single Data Extract

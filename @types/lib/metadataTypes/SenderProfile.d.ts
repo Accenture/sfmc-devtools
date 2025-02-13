@@ -59,6 +59,13 @@ declare class SenderProfile extends MetadataType {
      */
     static postRetrieveTasks(metadata: MetadataTypeItem): MetadataTypeItem;
     /**
+     *
+     * @param {MetadataTypeItem} metadata a single item
+     * @param {MetadataTypeItem} [metadataCaller] if called from SendClassification this can be used to adjust logs
+     * @param {any} [definition] type defintiion from SendClassification
+     */
+    static verifySenderEmailAddresses(metadata: MetadataTypeItem, metadataCaller?: MetadataTypeItem, definition?: any): void;
+    /**
      * prepares a single item for deployment
      *
      * @param {MetadataTypeItem} metadata a single query activity

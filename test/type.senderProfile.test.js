@@ -36,7 +36,7 @@ describe('type: senderProfile', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                4,
+                5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -61,6 +61,26 @@ describe('type: senderProfile', () => {
                 4,
                 '4 senderProfiles expected'
             );
+            // check callouts
+            const createCallout = testUtils.getRestCallout(
+                'post',
+                '/messaging/v1/domainverification/'
+            );
+            assert.deepEqual(
+                createCallout,
+                { domain: 'joern.berkefeld.New@accenture.com' },
+                'unexecpted payload for create callout'
+            );
+            // confirm created domainVerification item
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    'joern.berkefeld.New@accenture.com',
+                    'domainVerification'
+                ),
+                await testUtils.getExpectedJson('9999999', 'domainVerification', 'create'),
+                'returned new-JSON was not equal expected for insert domainVerification'
+            );
+
             // confirm created item
             assert.deepEqual(
                 await testUtils.getActualJson('testNew_senderProfile', 'senderProfile'),
@@ -76,7 +96,7 @@ describe('type: senderProfile', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                7,
+                10,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -123,7 +143,7 @@ describe('type: senderProfile', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                4,
+                5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -203,7 +223,7 @@ describe('type: senderProfile', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                11,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -238,7 +258,7 @@ describe('type: senderProfile', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                11,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -273,7 +293,7 @@ describe('type: senderProfile', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                11,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

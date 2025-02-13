@@ -77,14 +77,15 @@ declare class Mcdev {
      * handler for 'mcdev createDeltaPkg
      *
      * @param {object} argv yargs parameters
-     * @param {string} [argv.range] git commit range
-    into deploy directory
+     * @param {string} [argv.commitrange] git commit range via positional
+     * @param {string} [argv.range] git commit range via option
      * @param {string} [argv.filter] filter file paths that start with any
      * @param {number} [argv.commitHistory] filter file paths that start with any
      * @param {DeltaPkgItem[]} [argv.diffArr] list of files to include in delta package (skips git diff when provided)
      * @returns {Promise.<DeltaPkgItem[]>} list of changed items
      */
     static createDeltaPkg(argv: {
+        commitrange?: string;
         range?: string;
         filter?: string;
         commitHistory?: number;
@@ -228,17 +229,26 @@ declare class Mcdev {
     static retrieveAsTemplate(businessUnit: string, selectedType: string, name: string[], market: string): Promise<MultiMetadataTypeList>;
     /**
      * @param {string} businessUnit references credentials from properties.json
-     * @param {TypeKeyCombo} selectedTypes limit retrieval to given metadata type
+     * @param {TypeKeyCombo} typeKeyList limit retrieval to given metadata type
      * @returns {Promise.<TypeKeyCombo>} selected types including dependencies
      */
-    static addDependentCbReferences(businessUnit: string, selectedTypes: TypeKeyCombo): Promise<TypeKeyCombo>;
+    static addDependentCbReferences(businessUnit: string, typeKeyList: TypeKeyCombo): Promise<TypeKeyCombo>;
     /**
      *
      * @param {string} businessUnit references credentials from properties.json
-     * @param {TypeKeyCombo} selectedTypes limit retrieval to given metadata type
+     * @param {TypeKeyCombo} typeKeyList limit retrieval to given metadata type
      * @returns {Promise.<TypeKeyCombo>} dependencies
      */
-    static addDependencies(businessUnit: string, selectedTypes: TypeKeyCombo): Promise<TypeKeyCombo>;
+    static addDependencies(businessUnit: string, typeKeyList: TypeKeyCombo): Promise<TypeKeyCombo>;
+    /**
+     * Build a template based on a list of metadata files in the retrieve folder.
+     *
+     * @param {string} businessUnitTemplate references credentials from properties.json
+     * @param {string} businessUnitDefinition references credentials from properties.json
+     * @param {TypeKeyCombo} typeKeyCombo limit retrieval to given metadata type
+     * @returns {Promise.<MultiMetadataTypeList | object>} response from buildDefinition
+     */
+    static clone(businessUnitTemplate: string, businessUnitDefinition: string, typeKeyCombo: TypeKeyCombo): Promise<MultiMetadataTypeList | object>;
     /**
      * Build a template based on a list of metadata files in the retrieve folder.
      *
@@ -277,10 +287,9 @@ declare class Mcdev {
      * @param {string | TypeKeyCombo} selectedTypes limit retrieval to given metadata type
      * @param {string[] | undefined} nameArr name of the metadata
      * @param {string[]} marketArr market localizations
-     * @param {boolean} [isPurgeDeployFolder] whether to purge the deploy folder
      * @returns {Promise.<MultiMetadataTypeList>} -
      */
-    static buildDefinition(businessUnit: string, selectedTypes: string | TypeKeyCombo, nameArr: string[] | undefined, marketArr: string[], isPurgeDeployFolder?: boolean): Promise<MultiMetadataTypeList>;
+    static buildDefinition(businessUnit: string, selectedTypes: string | TypeKeyCombo, nameArr: string[] | undefined, marketArr: string[]): Promise<MultiMetadataTypeList>;
     /**
      * Build a specific metadata file based on a template using a list of bu-market combos
      *

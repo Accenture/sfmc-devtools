@@ -48,12 +48,28 @@ export namespace Util {
      */
     function checkMarket(market: string, properties: Mcdevrc): boolean;
     /**
+     * check if a market name exists in current mcdev config
+     *
+     * @param {string[]} marketArr market localizations
+     * @param {Mcdevrc} properties local mcdev config
+     * @returns {boolean} found market or not
+     */
+    function checkMarketList(marketArr: string[], properties: Mcdevrc): boolean;
+    /**
      * ensure provided MarketList exists and it's content including markets and BUs checks out
      *
      * @param {string} mlName name of marketList
      * @param {Mcdevrc} properties General configuration to be used in retrieve
      */
     function verifyMarketList(mlName: string, properties: Mcdevrc): void;
+    /**
+     *
+     * @param {string | TypeKeyCombo} selectedTypes supported metadata type
+     * @param {string[]} [keyArr] name/key of the metadata
+     * @param {string} [commandName] for log output only
+     * @returns {TypeKeyCombo | undefined} true if everything is valid; false otherwise
+     */
+    function checkAndPrepareTypeKeyCombo(selectedTypes: string | TypeKeyCombo, keyArr?: string[], commandName?: string): TypeKeyCombo | undefined;
     /**
      * used to ensure the program tells surrounding software that an unrecoverable error occured
      *
@@ -92,7 +108,7 @@ export namespace Util {
      * @param {boolean} [handleOutside] if the API reponse is irregular this allows you to handle it outside of this generic method
      * @returns {boolean} bu found or not
      */
-    function _isValidBU(properties: Mcdevrc, businessUnit: string, handleOutside?: boolean): boolean;
+    function isValidBU(properties: Mcdevrc, businessUnit: string, handleOutside?: boolean): boolean;
     /**
      * helper that deals with extracting type and subtype
      *
@@ -109,6 +125,7 @@ export namespace Util {
      * @returns {string[]} type choices
      */
     function getRetrieveTypeChoices(): string[];
+    let logFileName: string;
     function _createNewLoggerTransport(noLogFile?: boolean): object;
     let loggerTransports: any;
     let logger: Logger;
@@ -212,6 +229,30 @@ export namespace Util {
      * @returns {string} gray msg
      */
     function getGrayMsg(msg: string): string;
+    /**
+     * helper that returns the prefix of item specific log messages
+     *
+     * @param {any} definition metadata definition
+     * @param {MetadataTypeItem} metadataItem metadata item
+     * @returns {string} msg prefix
+     */
+    function getMsgPrefix(definition: any, metadataItem: MetadataTypeItem): string;
+    /**
+     * helper that returns the prefix of item specific log messages
+     *
+     * @param {any} definition metadata definition
+     * @param {MetadataTypeItem} metadataItem metadata item
+     * @returns {string} key or key/name combo
+     */
+    function getTypeKeyName(definition: any, metadataItem: MetadataTypeItem): string;
+    /**
+     * helper that returns the prefix of item specific log messages
+     *
+     * @param {any} definition metadata definition
+     * @param {MetadataTypeItem} metadataItem metadata item
+     * @returns {string} key or key/name combo
+     */
+    function getKeyName(definition: any, metadataItem: MetadataTypeItem): string;
     /**
      * helper to print the subtypes we filtered by
      *
