@@ -12,30 +12,7 @@ const projectRoot = projectRootHelper.join(path.sep) + path.sep;
 const parser = new XMLParser();
 const attributeParser = new XMLParser({ ignoreAttributes: false });
 /** @type {typeof Util.color} */
-let color;
-
-/* eslint-disable unicorn/prefer-ternary */
-if (Util.isRunViaVSCodeExtension) {
-    // when we execute the test in a VSCode extension host, we don't want CLI color codes.
-    // @ts-expect-error hacky way to get rid of colors - ts doesn't appreciate the hack
-    color = new Proxy(
-        {},
-        {
-            /**
-             * catch-all for color
-             *
-             * @returns {string} empty string
-             */
-            get() {
-                return '';
-            },
-        }
-    );
-} else {
-    // test is executed directly in a command prompt. Use colors.
-    color = Util.color;
-}
-/* eslint-enable unicorn/prefer-ternary */
+const color = Util.color;
 
 export const tWarn = `${color.bgYellow}${color.fgBlack}TEST-WARNING${color.reset}`;
 export const tError = `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}`;
