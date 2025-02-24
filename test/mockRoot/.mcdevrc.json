@@ -41,12 +41,14 @@
             "buildDefinition": {
                 "noAmpscriptHtmlTag": "warn",
                 "noGuidKeys": "warn",
-                "noRootFolder": "warn"
+                "noRootFolder": "warn",
+                "filterPrefixByBu": "error"
             },
             "deploy": {
                 "noAmpscriptHtmlTag": "warn",
                 "noGuidKeys": "warn",
                 "noRootFolder": "warn",
+                "filterPrefixByBu": "error",
                 "overrides": [
                     {
                         "type": ["journey"],
@@ -93,6 +95,17 @@
             "prefixUpper": "TESTTEMPLATED_",
             "description": "foobar",
             "countryCodeIn": "'testTarget'"
+        },
+        "testBlacklistMarket": {
+            "mid": "1111111",
+            "buName": "testBUTarget",
+            "secret": "target secret",
+            "sharedFolder": "/Shared Data Extensions/test target",
+            "suffix": "_testTarget",
+            "prefix": "testBlacklist_",
+            "prefixUpper": "TESTTEMPLATED_",
+            "description": "foobar",
+            "countryCodeIn": "'testTarget'"
         }
     },
     "marketList": {
@@ -104,6 +117,9 @@
             "description": "Define n BU-Market combo here to as target for automated creation of deployment packages; you can create more than one target market list and they can be as complex as you like",
             "testInstance/testBU": ["testSourceMarket", "testTargetMarket"],
             "testInstance/_ParentBU_": ["testTargetMarket"]
+        },
+        "parent": {
+            "testInstance/_ParentBU_": ["testBlacklistMarket"]
         }
     },
     "metaDataTypes": {
@@ -139,5 +155,5 @@
             "verification"
         ]
     },
-    "version": "7.6.3"
+    "version": "7.7.1"
 }

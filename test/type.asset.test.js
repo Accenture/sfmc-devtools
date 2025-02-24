@@ -673,6 +673,48 @@ describe('type: asset', () => {
             );
             return;
         });
+
+        it('Should create a templatebased email and its template connected via r__asset_key', async () => {
+            // WHEN
+            const deployResult = await handler.deploy('testInstance/testBU', {
+                asset: ['testNew_asset_templatebasedemail', 'testNew_asset_template'],
+            });
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+
+            // check how many items were deployed
+            assert.deepEqual(
+                deployResult['testInstance/testBU']?.asset
+                    ? Object.keys(deployResult['testInstance/testBU']?.asset)
+                    : [],
+                ['testNew_asset_template', 'testNew_asset_templatebasedemail'],
+                'unexpected assets deployed'
+            );
+
+            // check if we really issued callouts for those 2 blocks AND if they were run in the right order despite the key list for deploy() getting it in the wrong order
+            const upsertCallouts = testUtils.getRestCallout(
+                'post',
+                '/asset/v1/content/assets/',
+                true
+            );
+            assert.equal(
+                upsertCallouts[0]?.customerKey,
+                'testNew_asset_template',
+                'first create callout not for expected asset'
+            );
+            assert.equal(
+                upsertCallouts[1]?.customerKey,
+                'testNew_asset_templatebasedemail',
+                'second create callout not for expected asset'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                6,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 
     describe('Templating ================', () => {
