@@ -5,6 +5,7 @@
     // List of extensions which should be recommended for users of this workspace.
     "recommendations": [
         // collaboration
+        "Accenture-oss.sfmc-devtools-vscode",
         "aaron-bond.better-comments",
         "johnpapa.vscode-peacock",
 
