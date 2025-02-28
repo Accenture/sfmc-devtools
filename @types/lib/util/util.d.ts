@@ -1,5 +1,4 @@
 export namespace Util {
-    let isRunViaVSCodeExtension: boolean;
     let authFileName: string;
     let boilerplateDirectory: string;
     let configFileName: string;
