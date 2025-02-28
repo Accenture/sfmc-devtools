@@ -78,7 +78,7 @@ declare class MetadataType {
      */
     static postCreateTasks(metadataEntry: MetadataTypeItem, apiResponse: object, metadataEntryWithAllFields: MetadataTypeItem): Promise<object>;
     /**
-     * helper for {@link MetadataType.updateREST}
+     * helper for {@link MetadataType.updateREST} and {@link MetadataType.updateSOAP}
      *
      * @param {MetadataTypeItem} metadataEntry a single metadata Entry
      * @param {object} apiResponse varies depending on the API call
