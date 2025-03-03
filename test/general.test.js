@@ -2212,6 +2212,34 @@ describe('GENERAL', () => {
                 );
             });
 
+            it('build but error after buildTemplate step because keys were not found', async () => {
+                const buName = 'testInstance/testBU';
+                const typeKeyCombo = {
+                    asset: ['404'],
+                    dataExtension: ['404'],
+                };
+
+                // handler.setOptions({ skipInteraction: true, purge: false, fix: true });
+
+                await handler.build(
+                    buName,
+                    'ignored',
+                    typeKeyCombo,
+                    ['testSourceMarket'],
+                    ['parent'],
+                    true
+                );
+
+                // THEN
+                assert.equal(process.exitCode, 1, 'build should not have thrown an error');
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    0,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+            });
+
             it('skip build based on validation rule "filterPrefixByBu" with --fix without error', async () => {
                 const buName = 'testInstance/testBU';
                 const typeKeyCombo = {
