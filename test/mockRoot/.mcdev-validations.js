@@ -1,4 +1,27 @@
 'use strict';
+/**
+ * @typedef {Object.<string, any>} MetadataTypeItem generic metadata item
+ *
+ * @typedef {object} CodeExtract
+ * @property {string[]} subFolder mostly set to null, otherwise subfolders path split into elements
+ * @property {string} fileName name of file w/o extension
+ * @property {string} fileExt file extension
+ * @property {string} content file content
+ * @property {'base64'} [encoding] optional for binary files
+ *
+ * @callback validationRuleFix
+ * @returns {boolean|null} true = test passed; false = test failed & fixed; null = test failed & item removed to fix
+ *
+ * @callback validationRuleTest
+ * @returns {boolean} true = test passed; false = test failed
+ *
+ * @typedef {object} validationRule
+ * @property {string} failedMsg error message to display in case of a failed test
+ * @property {validationRuleTest} passed test to run
+ * @property {validationRuleFix} [fix] test to run
+ *
+ * @typedef {Object.<string, validationRule>} validationRuleList key=rule name
+ */
 
 /** @type {Object.<string, string[]>} */
 const buPrefixBlacklistMap = {
@@ -8,14 +31,16 @@ const buPrefixBlacklistMap = {
 
 /**
  *
- * @param {any} definition - type defintiion
- * @param {any} item - metadata json
- * @param {string} targetDir - where the metadata is stored ("deploy/cred/bu")
- * @param {any} Util - helper methods
- * @param {{subFolder: string[],fileName: string,fileExt: string,content: string,encoding?: "base64"}[]} [codeExtractItemArr] - actual code blocks
- * @returns {any} validation rule
+ * @param {any} definition type definition
+ * @param {MetadataTypeItem} item MetadataItem
+ * @param {string} targetDir folder in which the MetadataItem is deployed from (deploy/cred/bu)
+ * @param {CodeExtract[]} codeExtractItemArr array of code snippets
+ * @param {any} Util utility functions
+ * @returns {validationRuleList} MetadataItem
  */
-export function validation(definition, item, targetDir, Util, codeExtractItemArr) {
+export function validation(definition, item, targetDir, codeExtractItemArr, Util) {
+    Util.logger.verbose('just here to not get a warning about the unused property Util');
+
     const bu =
         (targetDir.includes('/') ? targetDir.split('/').pop() : targetDir.split('\\').pop()) ||
         'not-found';
@@ -31,9 +56,12 @@ export function validation(definition, item, targetDir, Util, codeExtractItemArr
             get failedMsg() {
                 return `Prefix not allowed on this BU. Blacklisted prefixes: ${prefixBlacklist.join(', ')}`;
             },
-            /**
-             * @returns {boolean|null} true=test passed, false=issue error, null=skip item for current activity due to --fix (build/deploy)
-             */
+            /** @type {validationRuleFix} */
+            fix: function () {
+                // to fix we skip the component
+                return this.passed() || null;
+            },
+            /** @type {validationRuleTest} */
             passed: function () {
                 // this rule aims to prevent deploying things that dont belong on a BU
                 if (prefixBlacklist.length === 0) {
@@ -47,7 +75,7 @@ export function validation(definition, item, targetDir, Util, codeExtractItemArr
                         ('' + item[definition.keyField]).startsWith(prefix)
                     ) {
                         // return false to issue an error or null to skip the item entirely (which is the "fix" of this rule)
-                        return Util.OPTIONS.fix ? null : false;
+                        return false;
                     }
                     // some components have unreadable keys and hence only have the brand prefix in the name
                     if (
@@ -55,7 +83,7 @@ export function validation(definition, item, targetDir, Util, codeExtractItemArr
                         ('' + item[definition.nameField]).startsWith(prefix)
                     ) {
                         // return false to issue an error or null to skip the item entirely (which is the "fix" of this rule)
-                        return Util.OPTIONS.fix ? null : false;
+                        return false;
                     }
                 }
                 // not found

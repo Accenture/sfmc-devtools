@@ -949,6 +949,12 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        'triggers[].metaData.scheduleState': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         version: {
             isCreateable: boolean;
             isUpdateable: boolean;

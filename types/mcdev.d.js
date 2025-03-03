@@ -629,15 +629,17 @@ complex
  */
 /**
  *
+ * @callback validationRuleFix
+ * @returns {boolean|null} true = test passed; false = test failed & fixed; null = test failed & item removed to fix
+ *
  * @callback validationRuleTest
  * @returns {boolean} true = test passed; false = test failed
- */
-/**
+ *
  * @typedef {object} validationRule
  * @property {string} failedMsg error message to display in case of a failed test
  * @property {validationRuleTest} passed test to run
- */
-/**
+ * @property {validationRuleFix} [fix] test to run
+ *
  * @typedef {Object.<string, validationRule>} validationRuleList key=rule name
  */
 

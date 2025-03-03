@@ -1721,6 +1721,7 @@ export type FieldCondition = {
      */
     text: string;
 };
+export type validationRuleFix = () => boolean | null;
 export type validationRuleTest = () => boolean;
 export type validationRule = {
     /**
@@ -1731,6 +1732,10 @@ export type validationRule = {
      * test to run
      */
     passed: validationRuleTest;
+    /**
+     * test to run
+     */
+    fix?: validationRuleFix;
 };
 /**
  * key=rule name
