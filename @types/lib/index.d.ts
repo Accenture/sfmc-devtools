@@ -66,6 +66,7 @@ declare class Mcdev {
         verbose?: boolean;
         debug?: boolean;
     }): void;
+    static knownOptions: string[];
     /**
      * allows setting system wide / command related options
      *

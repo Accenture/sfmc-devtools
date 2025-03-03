@@ -8,6 +8,7 @@
  */
 export default function validation(definition: any, item: any, targetDir: string, codeExtractItemArr?: CodeExtract[]): Promise<any>;
 export type validationRuleList = import("../../types/mcdev.d.js").validationRuleList;
+export type validationRuleFix = import("../../types/mcdev.d.js").validationRuleFix;
 export type validationRuleTest = import("../../types/mcdev.d.js").validationRuleTest;
 export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
 //# sourceMappingURL=validations.d.ts.map
