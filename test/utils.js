@@ -192,44 +192,16 @@ export function mockSetup(isDeploy) {
     // no need to execute this again if we ran it a 2nd time for deploy - already done in standard setup
     if (!isDeploy) {
         // reset all options to default
-        handler.setOptions({
-            // test config
-            debug: true,
-            noLogFile: true,
-            // reset
-            api: undefined,
-            autoMidSuffix: undefined,
-            changeKeyField: undefined,
-            changeKeyValue: undefined,
-            commitHistory: undefined,
-            dependencies: undefined,
-            errorLog: undefined,
-            execute: undefined,
-            filter: undefined,
-            fix: undefined,
-            fixShared: undefined,
-            fromRetrieve: undefined,
-            json: undefined,
-            keySuffix: undefined,
-            like: undefined,
-            matchName: undefined,
-            noUpdate: undefined,
-            publish: undefined,
-            purge: undefined,
-            range: undefined,
-            referenceFrom: undefined,
-            referenceTo: undefined,
-            refresh: undefined,
-            retrieve: undefined,
-            schedule: undefined,
-            skipDeploy: undefined,
-            skipInteraction: undefined,
-            skipRetrieve: undefined,
-            skipStatusCheck: undefined,
-            skipValidation: undefined,
-            _runningTest: undefined,
-            _welcomeMessageShown: undefined,
-        });
+        const resetOptions = {};
+        // get known options and make sure none are set
+        for (const options in handler.knownOptions) {
+            resetOptions[options] = undefined;
+        }
+        // test config
+        resetOptions.debug = true;
+        resetOptions.noLogFile = true;
+
+        handler.setOptions(resetOptions);
     }
     apimock = new MockAdapter(axiosInstance, { onNoMatch: 'throwException' });
     // set access_token to mid to allow for autorouting of mock to correct resources
