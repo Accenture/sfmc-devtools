@@ -194,8 +194,8 @@ export function mockSetup(isDeploy) {
         // reset all options to default
         const resetOptions = {};
         // get known options and make sure none are set
-        for (const options in handler.knownOptions) {
-            resetOptions[options] = undefined;
+        for (const option in handler.knownOptions) {
+            resetOptions[option] = undefined;
         }
         // test config
         resetOptions.debug = true;
