@@ -1721,7 +1721,7 @@ export type FieldCondition = {
      */
     text: string;
 };
-export type validationRuleFix = (mode: "warn" | "error" | "fix") => boolean | null;
+export type validationRuleFix = () => boolean | null;
 export type validationRuleTest = () => boolean;
 export type validationRule = {
     /**

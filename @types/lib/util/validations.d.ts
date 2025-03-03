@@ -4,9 +4,9 @@
  * @param {any} item MetadataItem
  * @param {string} targetDir folder in which the MetadataItem is deployed from (deploy/cred/bu)
  * @param {CodeExtract[]} [codeExtractItemArr] array of code snippets
- * @returns {Promise.<any>} MetadataItem
+ * @returns {Promise.<validationRuleList>} MetadataItem
  */
-export default function validation(definition: any, item: any, targetDir: string, codeExtractItemArr?: CodeExtract[]): Promise<any>;
+export default function validation(definition: any, item: any, targetDir: string, codeExtractItemArr?: CodeExtract[]): Promise<validationRuleList>;
 export type validationRuleList = import("../../types/mcdev.d.js").validationRuleList;
 export type validationRuleFix = import("../../types/mcdev.d.js").validationRuleFix;
 export type validationRuleTest = import("../../types/mcdev.d.js").validationRuleTest;
