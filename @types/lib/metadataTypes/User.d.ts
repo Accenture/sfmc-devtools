@@ -262,6 +262,7 @@ declare namespace User {
         typeDescription: string;
         typeName: string;
         typeRetrieveByDefault: boolean;
+        typeCdpByDefault: boolean;
         documentInOneFile: boolean;
         stringifyFieldsBeforeTemplate: string[];
         fields: {

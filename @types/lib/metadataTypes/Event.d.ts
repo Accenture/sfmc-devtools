@@ -204,6 +204,7 @@ declare namespace Event {
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
+        typeCdpByDefault: boolean;
         typeName: string;
         validTypes: string[];
         fields: {

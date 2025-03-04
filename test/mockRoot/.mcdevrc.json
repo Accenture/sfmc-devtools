@@ -153,6 +153,28 @@
             "transactionalSMS",
             "triggeredSend",
             "verification"
+        ],
+        "createDeltaPkg": [
+            "asset",
+            "automation",
+            "dataExtension",
+            "dataExtract",
+            "emailSend",
+            "event",
+            "fileLocation",
+            "fileTransfer",
+            "importFile",
+            "journey",
+            "mobileCode",
+            "mobileKeyword",
+            "mobileMessage",
+            "query",
+            "script",
+            "sendClassification",
+            "senderProfile",
+            "transactionalPush",
+            "transactionalSMS",
+            "verification"
         ]
     },
     "version": "7.7.2"

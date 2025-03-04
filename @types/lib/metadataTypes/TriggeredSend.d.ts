@@ -127,6 +127,7 @@ declare namespace TriggeredSend {
         soapType: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
+        typeCdpByDefault: boolean;
         typeName: string;
         priorityMapping: {
             High: number;

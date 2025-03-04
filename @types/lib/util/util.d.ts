@@ -121,9 +121,10 @@ export namespace Util {
     /**
      * helper for getDefaultProperties()
      *
+     * @param {string} field relevant field in type definition
      * @returns {string[]} type choices
      */
-    function getRetrieveTypeChoices(): string[];
+    function getTypeChoices(field: string): string[];
     let logFileName: string;
     function _createNewLoggerTransport(noLogFile?: boolean): object;
     let loggerTransports: any;

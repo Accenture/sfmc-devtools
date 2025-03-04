@@ -73,6 +73,7 @@ declare namespace Campaign {
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
+        typeCdpByDefault: boolean;
         typeName: string;
         fields: {
             id: {
