@@ -28,6 +28,7 @@ declare namespace _default {
     let soapType: string;
     let typeDescription: string;
     let typeRetrieveByDefault: boolean;
+    let typeCdpByDefault: boolean;
     let typeName: string;
     namespace priorityMapping {
         let High: number;

@@ -269,6 +269,7 @@ declare namespace _default {
     export let type: string;
     export let typeDescription: string;
     export let typeRetrieveByDefault: boolean;
+    export let typeCdpByDefault: boolean;
     export let typeName: string;
     export let customDeployTypes: string[];
     export let manualDeployTypes: any[];

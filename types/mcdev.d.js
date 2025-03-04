@@ -463,6 +463,7 @@ complex
  * @property {object} marketList combination of markets and BUs for streamlined deployments
  * @property {object} metaDataTypes templating variables grouped by markets
  * @property {string[]} metaDataTypes.retrieve define what types shall be downloaded by default during retrieve
+ * @property {string[]} metaDataTypes.createDeltaPkg defines what types shall be passed to build() as part of running cdp
  * @property {string[]} metaDataTypes.documentOnRetrieve which types should be parsed & documented after retrieve
  * @property {string} version mcdev version that last updated the config file
  */

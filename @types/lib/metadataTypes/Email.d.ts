@@ -61,6 +61,7 @@ declare namespace Email {
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
+        typeCdpByDefault: boolean;
         typeName: string;
         fields: {
             CategoryID: {

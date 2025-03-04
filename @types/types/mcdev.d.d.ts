@@ -1254,6 +1254,7 @@ export type Mcdevrc = {
      */
     metaDataTypes: {
         retrieve: string[];
+        createDeltaPkg: string[];
         documentOnRetrieve: string[];
     };
     /**
