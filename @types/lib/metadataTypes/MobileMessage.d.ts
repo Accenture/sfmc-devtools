@@ -131,6 +131,7 @@ declare namespace MobileMessage {
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
+        typeCdpByDefault: boolean;
         typeName: string;
         fields: {
             allowSingleOptin: {

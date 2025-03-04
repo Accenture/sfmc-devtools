@@ -563,6 +563,7 @@ declare namespace Automation {
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
+        typeCdpByDefault: boolean;
         typeName: string;
         customDeployTypes: string[];
         manualDeployTypes: any[];

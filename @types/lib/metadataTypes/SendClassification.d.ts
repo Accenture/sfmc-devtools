@@ -107,6 +107,7 @@ declare namespace SendClassification {
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
+        typeCdpByDefault: boolean;
         typeName: string;
         sendClassificationTypeMapping: {
             Commercial: string;

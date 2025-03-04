@@ -193,6 +193,7 @@ declare namespace Journey {
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
+        typeCdpByDefault: boolean;
         typeName: string;
         priorityMapping: {
             High: number;

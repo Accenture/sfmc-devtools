@@ -41,6 +41,7 @@ declare namespace _default {
     let type: string;
     let typeDescription: string;
     let typeRetrieveByDefault: boolean;
+    let typeCdpByDefault: boolean;
     let typeName: string;
     let fields: {
         CategoryID: {

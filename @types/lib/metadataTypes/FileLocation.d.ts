@@ -77,6 +77,7 @@ declare namespace FileLocation {
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
+        typeCdpByDefault: boolean;
         typeName: string;
         locationTypeMapping: {
             'Enhanced FTP Site Import Directory': number;

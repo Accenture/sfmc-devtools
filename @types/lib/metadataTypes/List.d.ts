@@ -84,6 +84,7 @@ declare namespace List {
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
+        typeCdpByDefault: boolean;
         typeName: string;
         fields: {
             'AutomatedEmail.ID': {

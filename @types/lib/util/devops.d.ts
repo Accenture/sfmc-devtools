@@ -58,5 +58,14 @@ declare namespace DevOps {
      * @returns {Promise.<string[]>} list of all files that need to be committed in a flat array ['path/file1.ext', 'path/file2.ext']
      */
     function getFilesToCommit(properties: Mcdevrc, buObject: BuObject, metadataType: string, keyArr: string[]): Promise<string[]>;
+    /**
+     * helper for {@link DevOps.buildDeltaDefinitions}
+     *
+     * @param {DeltaPkgItem[]} delta git delta
+     * @param {string} sourceMarket market for the source BU
+     * @param {Mcdevrc} properties mcdev config
+     * @param {string} targetMlName marketList used to build for the target BU
+     */
+    function _generateDeleteInstructions(delta: DeltaPkgItem[], sourceMarket: string, properties: Mcdevrc, targetMlName: string): void;
 }
 //# sourceMappingURL=devops.d.ts.map
