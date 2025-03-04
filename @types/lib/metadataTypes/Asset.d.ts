@@ -435,6 +435,7 @@ declare namespace Asset {
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: string[];
+        typeCdpByDefault: boolean;
         typeName: string;
         stringifyFieldsBeforeTemplate: string[];
         allowMatchingByName: boolean;

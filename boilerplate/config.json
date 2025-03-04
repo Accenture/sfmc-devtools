@@ -108,6 +108,7 @@
     },
     "metaDataTypes": {
         "documentOnRetrieve": ["user", "automation", "dataExtension", "role"],
-        "retrieve": []
+        "retrieve": [],
+        "createDeltaPkg": []
     }
 }

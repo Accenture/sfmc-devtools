@@ -20,6 +20,7 @@ declare namespace _default {
     let type: string;
     let typeDescription: string;
     let typeRetrieveByDefault: string[];
+    let typeCdpByDefault: boolean;
     let typeName: string;
     let stringifyFieldsBeforeTemplate: string[];
     let allowMatchingByName: boolean;
