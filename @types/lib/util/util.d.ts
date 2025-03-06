@@ -121,10 +121,20 @@ export namespace Util {
     /**
      * helper for getDefaultProperties()
      *
-     * @param {string} field relevant field in type definition
+     * @param {'typeRetrieveByDefault'|'typeCdpByDefault'} field relevant field in type definition
      * @returns {string[]} type choices
      */
-    function getTypeChoices(field: string): string[];
+    function getTypeChoices(field: "typeRetrieveByDefault" | "typeCdpByDefault"): string[];
+    /**
+     * helper for cli.selectTypes and init.config.fixMcdevConfig that converts subtypes back to main type if all and only defaults were selected
+     * this keeps the config automatically upgradable when we add new subtypes or change what is selected by default
+     *
+     * @param {'typeRetrieveByDefault'|'typeCdpByDefault'} field relevant field in type definition
+     * @param {string[]} selectedTypes what types the user selected
+     * @param {'asset'} [type] metadata type
+     * @returns {string[]} filtered selectedTypes
+     */
+    function summarizeSubtypes(field: "typeRetrieveByDefault" | "typeCdpByDefault", selectedTypes: string[], type?: "asset"): string[];
     let logFileName: string;
     function _createNewLoggerTransport(noLogFile?: boolean): object;
     let loggerTransports: any;
