@@ -91,6 +91,9 @@ export namespace Util {
      * @returns {boolean} attribute value == false ? true : false
      */
     function isFalse(attrValue: any): boolean;
+    function isEqual(item1: string | number | boolean | any[] | object, item2: string | number | boolean | any[] | object): boolean;
+    function _isEqualArray(array1: any[], array2: any[]): boolean;
+    function _isEqualObject(item1: object, item2: object): boolean;
     /**
      * helper for Mcdev.retrieve, Mcdev.retrieveAsTemplate and Mcdev.deploy
      *
