@@ -1,5 +1,9 @@
 [
     {
+        "version": "7.9.1",
+        "files": ["eslint.config.js"]
+    },
+    {
         "version": "7.7.2",
         "files": [".vscode/extensions.json"]
     },
