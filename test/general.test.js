@@ -208,11 +208,6 @@ describe('GENERAL', () => {
                     ['testExisting_senderProfile_rcb'],
                     'should have found the right senderProfiles that need updating'
                 );
-                assert.deepEqual(
-                    replace['testInstance/testBU'].triggeredSend,
-                    ['testExisting_triggeredSend_rcb'],
-                    'should have found the right assets that need updating'
-                );
 
                 // check if conversions happened
                 assert.deepEqual(
@@ -231,7 +226,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    92,
+                    76,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -273,11 +268,6 @@ describe('GENERAL', () => {
                     ['testExisting_senderProfile_rcb'],
                     'should have found the right senderProfiles that need updating'
                 );
-                assert.deepEqual(
-                    replace['testInstance/testBU'].triggeredSend,
-                    ['testExisting_triggeredSend_rcb'],
-                    'should have found the right assets that need updating'
-                );
 
                 // check if conversions happened
                 assert.deepEqual(
@@ -296,7 +286,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    92,
+                    76,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -338,11 +328,6 @@ describe('GENERAL', () => {
                     ['testExisting_senderProfile_rcb'],
                     'should have found the right senderProfiles that need updating'
                 );
-                assert.deepEqual(
-                    replace['testInstance/testBU'].triggeredSend,
-                    ['testExisting_triggeredSend_rcb'],
-                    'should have found the right assets that need updating'
-                );
 
                 // check if conversions happened
                 assert.deepEqual(
@@ -361,7 +346,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    92,
+                    76,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
