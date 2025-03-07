@@ -654,6 +654,10 @@ complex
  * @property {'SAP'|'UserDomain'|'PrivateDomain'|'RegisteredDomain'} [domainType] returned by retrieve and required for update call
  * @property {boolean} isSendable automatically true upon creation. can be changed to false via update
  * @property {string} [emailSendTime] e.g. ""2023-06-19T11:11:17.32""
+ * @property {string} [notificationEmail] for bulk-creation only: email address to send notifications to when done
+ * @property {string[]} [addresses] for bulk-creation only: list of email addresses to verify
+ * @property {string} [deTable] for bulk-creation only: instead of an array in addresses, specify the name of a DE
+ * @property {string} [deColumn] for bulk-creation only: instead of an array in addresses, specify the name of a DE column/field here
  */
 
 export default {};

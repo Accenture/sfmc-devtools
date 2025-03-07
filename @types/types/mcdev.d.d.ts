@@ -1777,5 +1777,21 @@ export type DomainVerificationItem = {
      * e.g. ""2023-06-19T11:11:17.32""
      */
     emailSendTime?: string;
+    /**
+     * for bulk-creation only: email address to send notifications to when done
+     */
+    notificationEmail?: string;
+    /**
+     * for bulk-creation only: list of email addresses to verify
+     */
+    addresses?: string[];
+    /**
+     * for bulk-creation only: instead of an array in addresses, specify the name of a DE
+     */
+    deTable?: string;
+    /**
+     * for bulk-creation only: instead of an array in addresses, specify the name of a DE column/field here
+     */
+    deColumn?: string;
 };
 //# sourceMappingURL=mcdev.d.d.ts.map
