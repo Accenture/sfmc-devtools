@@ -88,9 +88,9 @@ declare class DomainVerification extends MetadataType {
      * manages post retrieve steps
      *
      * @param {DomainVerificationItem} metadataItem a single item
-     * @returns {DomainVerificationItem} metadata
+     * @returns {DomainVerificationItem|void} metadata
      */
-    static postRetrieveTasks(metadataItem: DomainVerificationItem): DomainVerificationItem;
+    static postRetrieveTasks(metadataItem: DomainVerificationItem): DomainVerificationItem | void;
     /**
      * Gets executed after deployment of metadata type
      *
