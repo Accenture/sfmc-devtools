@@ -131,7 +131,6 @@
             "automation",
             "dataExtension",
             "dataExtract",
-            "deliveryProfile",
             "domainVerification",
             "emailSend",
             "event",
@@ -151,7 +150,6 @@
             "transactionalEmail",
             "transactionalPush",
             "transactionalSMS",
-            "triggeredSend",
             "verification"
         ],
         "createDeltaPkg": [
@@ -161,8 +159,8 @@
             "dataExtract",
             "emailSend",
             "event",
-            "fileLocation",
             "fileTransfer",
+            "filter",
             "importFile",
             "journey",
             "mobileCode",
