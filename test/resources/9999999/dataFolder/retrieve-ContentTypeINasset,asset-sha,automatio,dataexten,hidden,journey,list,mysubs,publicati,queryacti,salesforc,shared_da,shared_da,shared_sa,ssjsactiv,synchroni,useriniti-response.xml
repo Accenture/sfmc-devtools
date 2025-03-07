@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:f36f3303-3b5a-4641-8109-b26447634d91</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:33983968-28c4-4379-bb5f-f80ae32eb988</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-32ecc81b-6020-473c-9e99-4b5338921220">
+                <wsu:Created>2022-04-19T20:03:41Z</wsu:Created>
+                <wsu:Expires>2022-04-19T20:08:41Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>02cd5ccb-8f84-4651-826f-71169eeecf05</RequestID>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-22T11:52:19.6</CreatedDate>
+                <ModifiedDate>2016-07-22T11:52:19.6</ModifiedDate>
+                <ID>2</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>dataextension_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Data Extensions</Name>
+                <Description />
+                <ContentType>dataextension</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-22T11:52:20.407</CreatedDate>
+                <ModifiedDate>2016-07-22T11:52:20.407</ModifiedDate>
+                <ID>999</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>queryactivity_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Query</Name>
+                <Description />
+                <ContentType>queryactivity</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2017-02-16T01:59:27.18</CreatedDate>
+                <ModifiedDate>2017-02-16T01:59:27.18</ModifiedDate>
+                <ID>412</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>mysubs_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>my subscribers</Name>
+                <Description />
+                <ContentType>mysubs</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2017-02-16T01:59:27.177</CreatedDate>
+                <ModifiedDate>2017-02-16T01:59:27.177</ModifiedDate>
+                <ID>404</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>list_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>my lists</Name>
+                <Description />
+                <ContentType>list</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2017-02-16T01:59:34.023</CreatedDate>
+                <ModifiedDate>2017-02-16T01:59:34.023</ModifiedDate>
+                <ID>424</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>publication_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Publication Lists</Name>
+                <Description />
+                <ContentType>publication</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2017-02-16T01:59:32.323</CreatedDate>
+                <ModifiedDate>2017-02-16T01:59:32.323</ModifiedDate>
+                <ID>419</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>suppression_list_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Suppression Lists</Name>
+                <Description />
+                <ContentType>suppression_list</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2017-02-16T01:59:32.323</CreatedDate>
+                <ModifiedDate>2017-02-16T01:59:32.323</ModifiedDate>
+                <ID>6298</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>journey_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>my journeys</Name>
+                <Description>The root folder for Journeys</Description>
+                <ContentType>journey</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2019-10-25T05:35:17.337</CreatedDate>
+                <ModifiedDate>2019-10-25T05:35:17.337</ModifiedDate>
+                <ID>290937</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey />
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>my automations</Name>
+                <Description />
+                <ContentType>automations</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>true</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2017-02-08T10:19:37.123</CreatedDate>
+                <ModifiedDate>2017-02-08T10:19:37.123</ModifiedDate>
+                <ID>386</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey />
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>2</ID>
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>dataextension_default</CustomerKey>
+                </ParentFolder>
+                <Name>Einstein</Name>
+                <Description />
+                <ContentType>dataextension</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>true</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-22T11:52:35.687</CreatedDate>
+                <ModifiedDate>2016-07-22T11:52:35.687</ModifiedDate>
+                <ID>89397</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey />
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Content Builder</Name>
+                <Description>The root folder for assets</Description>
+                <ContentType>asset</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-29T12:13:07.7</CreatedDate>
+                <ModifiedDate>2021-12-16T02:56:14.68</ModifiedDate>
+                <ID>90888</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey />
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>89397</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>Test Folder</Name>
+                <Description />
+                <ContentType>asset</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>true</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-29T12:13:27.28</CreatedDate>
+                <ModifiedDate>2016-07-29T12:13:27.28</ModifiedDate>
+                <ID>90889</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>HiddenCategory_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>HiddenCategory</Name>
+                <Description>Hidden folder to store Hidden items</Description>
+                <ContentType>Hidden</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>
