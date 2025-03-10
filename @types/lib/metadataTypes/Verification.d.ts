@@ -33,6 +33,7 @@ export type VerificationItem = import("../../types/mcdev.d.js").VerificationItem
  * @augments MetadataType
  */
 declare class Verification extends MetadataType {
+    static verificationIdKeyMap: any;
     /**
      * Retrieves Metadata of Data Verification Activity.
      *
@@ -171,6 +172,12 @@ declare namespace Verification {
                 template: boolean;
             };
             r__dataExtension_key: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            c__automation_step: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

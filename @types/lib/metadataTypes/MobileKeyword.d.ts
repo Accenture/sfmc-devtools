@@ -39,12 +39,6 @@ declare class MobileKeyword extends MetadataType {
      */
     static retrieve(retrieveDir: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
-     * helper for {@link MobileKeyword.parseResponseBody} that creates a custom key field for this type based on mobileCode and keyword
-     *
-     * @param {MetadataTypeItem} metadata single item
-     */
-    static "__#6@#createCustomKeyField"(metadata: MetadataTypeItem): void;
-    /**
      * helper for {@link MobileKeyword.preDeployTasks} and {@link MobileKeyword.createOrUpdate} to ensure we have code & keyword properly set
      *
      * @param {MetadataTypeItem} metadata single item

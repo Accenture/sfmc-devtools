@@ -445,6 +445,12 @@ declare class MetadataType {
      */
     static runDocumentOnRetrieve(singleRetrieve: string | number, metadataMap: MetadataTypeMap): Promise<void>;
     /**
+     * helper for {@link parseResponseBody} that creates a custom key field for this type based on mobileCode and keyword
+     *
+     * @param {MetadataTypeItem} metadata single item
+     */
+    static createCustomKeyField(metadata: MetadataTypeItem): void;
+    /**
      * Builds map of metadata entries mapped to their keyfields
      *
      * @param {object} body json of response body
