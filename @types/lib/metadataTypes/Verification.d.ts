@@ -33,6 +33,7 @@ export type VerificationItem = import("../../types/mcdev.d.js").VerificationItem
  * @augments MetadataType
  */
 declare class Verification extends MetadataType {
+    static verificationIdKeyMap: any;
     /**
      * Retrieves Metadata of Data Verification Activity.
      *
@@ -52,22 +53,22 @@ declare class Verification extends MetadataType {
      */
     static handleRESTErrors(ex: RestError, id: string): null;
     /**
-     * Retrieves Metadata of  Data Extract Activity for caching
+     * Retrieves Metadata of item for caching
      *
      * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
      */
     static retrieveForCache(): Promise<MetadataTypeMapObj>;
     /**
-     * Creates a single Data Extract
+     * Creates a single item
      *
-     * @param {VerificationItem} metadata a single Data Extract
+     * @param {VerificationItem} metadata a single item
      * @returns {Promise} Promise
      */
     static create(metadata: VerificationItem): Promise<any>;
     /**
-     * Updates a single Data Extract
+     * Updates a single item
      *
-     * @param {VerificationItem} metadata a single Data Extract
+     * @param {VerificationItem} metadata a single item
      * @returns {Promise} Promise
      */
     static update(metadata: VerificationItem): Promise<any>;
@@ -171,6 +172,12 @@ declare namespace Verification {
                 template: boolean;
             };
             r__dataExtension_key: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            c__automation_step: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

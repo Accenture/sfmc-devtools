@@ -101,6 +101,14 @@ declare class Asset extends MetadataType {
      */
     static upsert(metadataMap: AssetMap, deployDir: string): Promise<AssetMap>;
     /**
+     * helper for {@link MetadataType.updateREST} and {@link MetadataType.updateSOAP}
+     *
+     * @param {MetadataTypeItem} metadataEntry a single metadata Entry
+     * @param {object} apiResponse varies depending on the API call
+     * @returns {Promise.<object>} apiResponse, potentially modified
+     */
+    static postUpdateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): Promise<object>;
+    /**
      * Creates a single asset
      *
      * @param {AssetItem} metadata a single asset

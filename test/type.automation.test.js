@@ -75,7 +75,7 @@ describe('type: automation', () => {
             const deployResult = await handler.deploy(
                 'testInstance/testBU',
                 ['automation', 'verification'],
-                ['testExisting_automation', 'testNew_automation', 'testNew_39f6a488-20eb-4ba0-b0b9']
+                ['testExisting_automation', 'testNew_automation', 'testNew_automation__s1.7']
             );
             // THEN
             assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
@@ -156,7 +156,7 @@ describe('type: automation', () => {
             const deployed = await handler.deploy(
                 'testInstance/testBU',
                 ['automation', 'verification'],
-                ['testExisting_automation', 'testNew_automation', 'testNew_39f6a488-20eb-4ba0-b0b9']
+                ['testExisting_automation', 'testNew_automation', 'testNew_automation__s1.7']
             );
             // THEN
             assert.equal(
@@ -224,7 +224,7 @@ describe('type: automation', () => {
             const deployed = await handler.deploy(
                 'testInstance/testBU',
                 ['automation', 'verification'],
-                ['testExisting_automation', 'testNew_automation', 'testNew_39f6a488-20eb-4ba0-b0b9']
+                ['testExisting_automation', 'testNew_automation', 'testNew_automation__s1.7']
             );
             // THEN
             assert.equal(

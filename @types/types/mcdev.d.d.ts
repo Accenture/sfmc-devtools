@@ -944,6 +944,10 @@ export type VerificationItem = {
      * key of target data extension
      */
     r__dataExtension_key: string;
+    /**
+     * custom key for verifications based on automation, step and activity number
+     */
+    c__automation_step: string;
 };
 export type AutomationMap = {
     [x: string]: AutomationItem;
