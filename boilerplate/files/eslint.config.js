@@ -16,6 +16,31 @@ export default [
     {
         plugins: { jsdoc },
         rules: {
+            'unicorn/better-regex': 'off',
+            'unicorn/prefer-string-raw': 'off',
+            'unicorn/catch-error-name': [
+                'error',
+                {
+                    name: 'ex'
+                }
+            ],
+            'unicorn/explicit-length-check': 'off',
+            'unicorn/no-null': 'off',
+            'unicorn/prefer-module': 'off',
+            'unicorn/prevent-abbreviations': 'off',
+            'unicorn/filename-case': 'off',
+            'unicorn/no-array-callback-reference': 'off',
+            'unicorn/no-array-reduce': 'off',
+            'unicorn/no-await-expression-member': 'off',
+            'unicorn/no-hex-escape': 'off',
+            'unicorn/no-nested-ternary': 'off',
+            'unicorn/no-static-only-class': 'off',
+            'unicorn/no-unused-properties': 'warn',
+            'unicorn/numeric-separators-style': 'off',
+            'unicorn/prefer-array-some': 'off',
+            'unicorn/prefer-set-has': 'off',
+            'unicorn/prefer-spread': 'off',
+            'unicorn/prefer-string-replace-all': 'error',
             'padded-blocks': 'off',
             'prefer-rest-params': 'off',
             'prefer-spread': 'off',
@@ -49,7 +74,11 @@ export default [
     },
     {
         ...sfmcSsjs.configs.recommended,
-        files: ['**/*.ssjs']
+        files: ['**/*.ssjs'],
+        rules: {
+            'unicorn/text-encoding-identifier-case': 'off',
+            'unicorn/prefer-string-replace-all': 'off'
+        }
     },
     {
         files: ['**/*.js'],
@@ -106,32 +135,6 @@ export default [
 
         rules: {
             'logical-assignment-operators': ['error', 'always'],
-            'unicorn/better-regex': 'off',
-
-            'unicorn/catch-error-name': [
-                'error',
-                {
-                    name: 'ex'
-                }
-            ],
-
-            'unicorn/explicit-length-check': 'off',
-            'unicorn/no-null': 'off',
-            'unicorn/prefer-module': 'off',
-            'unicorn/prevent-abbreviations': 'off',
-            'unicorn/filename-case': 'off',
-            'unicorn/no-array-callback-reference': 'off',
-            'unicorn/no-array-reduce': 'off',
-            'unicorn/no-await-expression-member': 'off',
-            'unicorn/no-hex-escape': 'off',
-            'unicorn/no-nested-ternary': 'off',
-            'unicorn/no-static-only-class': 'off',
-            'unicorn/no-unused-properties': 'warn',
-            'unicorn/numeric-separators-style': 'off',
-            'unicorn/prefer-array-some': 'off',
-            'unicorn/prefer-set-has': 'off',
-            'unicorn/prefer-spread': 'off',
-            'unicorn/prefer-string-replace-all': 'error',
             'arrow-body-style': ['error', 'as-needed'],
             curly: 'error',
 

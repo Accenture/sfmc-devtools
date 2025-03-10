@@ -329,6 +329,7 @@
  * @property {number} createdBy user id of creator
  * @property {string} [targetObjectId] ObjectID of target data extension
  * @property {string} r__dataExtension_key key of target data extension
+ * @property {string} c__automation_step custom key for verifications based on automation, step and activity number
  */
 
 /**

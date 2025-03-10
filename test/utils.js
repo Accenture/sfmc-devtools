@@ -178,7 +178,9 @@ export function getExpectedJson(mid, type, action) {
  * @returns {Promise.<string>} file in string form
  */
 export function getExpectedFile(mid, type, action, ext) {
-    return File.readFile(`./test/resources/${mid}/${type}/${action}-expected.${ext}`, 'utf8');
+    const path = `/resources/${mid}/${type}/${action}-expected.${ext}`;
+    console.log(loadingFile + path); // eslint-disable-line no-console
+    return File.readFile(`./test` + path, 'utf8');
 }
 
 /**
