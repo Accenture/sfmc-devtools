@@ -122,6 +122,14 @@ declare class MobileKeyword extends MetadataType {
      */
     static postCreateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): Promise<object>;
     /**
+     * helper for {@link MetadataType.updateREST}
+     *
+     * @param {MetadataTypeItem} metadataEntry a single metadata Entry
+     * @param {object} apiResponse varies depending on the API call
+     * @returns {Promise.<object>} apiResponse, potentially modified
+     */
+    static postUpdateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): Promise<object>;
+    /**
      * helper for {@link MobileKeyword.preDeployTasks} that loads extracted code content back into JSON
      *
      * @param {MetadataTypeItem} metadata a single definition

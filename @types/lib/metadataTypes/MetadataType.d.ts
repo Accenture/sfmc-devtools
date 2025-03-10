@@ -82,9 +82,10 @@ declare class MetadataType {
      *
      * @param {MetadataTypeItem} metadataEntry a single metadata Entry
      * @param {object} apiResponse varies depending on the API call
+     * @param {MetadataTypeItem} metadataEntryWithAllFields like metadataEntry but before non-creatable fields were stripped
      * @returns {Promise.<object>} apiResponse, potentially modified
      */
-    static postUpdateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): Promise<object>;
+    static postUpdateTasks(metadataEntry: MetadataTypeItem, apiResponse: object, metadataEntryWithAllFields: MetadataTypeItem): Promise<object>;
     /**
      * helper for {@link MetadataType.createREST} when legacy API endpoints as these do not return the created item but only their new id
      *
