@@ -26,4 +26,4 @@
 | _1.4: importFile_<br>testExisting_importFile |
 | _1.5: query_<br>testExisting_query |
 | _1.6: script_<br>testExisting_script |
-| _1.7: verification_<br>testNew_RANDOM_NEW_GUID |
+| _1.7: verification_<br>testNew_automation__s1.7 |
