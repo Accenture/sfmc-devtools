@@ -493,6 +493,7 @@ describe('type: journey', () => {
                 [
                     'asset',
                     'dataExtension',
+                    'domainVerification',
                     'event',
                     'journey',
                     'sendClassification',
@@ -525,6 +526,12 @@ describe('type: journey', () => {
                     '{{{prefix}}}journey_Quicksend',
                 ],
                 'expected specific dataExtensions to be templated'
+            );
+            // domainVerification
+            assert.deepEqual(
+                templatedItems.domainVerification.map((item) => item.domain),
+                ['joern.berkefeld+test@accenture.com', 'joern.berkefeld@accenture.com'],
+                'expected specific domainVerifications to be templated'
             );
             // senderProfile
             assert.deepEqual(

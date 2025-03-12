@@ -706,6 +706,7 @@ describe('type: automation', () => {
                     'automation',
                     'dataExtension',
                     'dataExtract',
+                    'domainVerification',
                     'emailSend',
                     'fileTransfer',
                     'importFile',

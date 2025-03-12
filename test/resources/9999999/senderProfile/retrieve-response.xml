@@ -65,7 +65,7 @@
                 <AutoReply>false</AutoReply>
                 <SenderHeaderEmailAddress />
                 <SenderHeaderName />
-                <FallbackFromAddress />
+                <FallbackFromAddress>joern.berkefeld+test@accenture.com</FallbackFromAddress>
             </Results>
             <Results xsi:type="SenderProfile">
                 <Client>
