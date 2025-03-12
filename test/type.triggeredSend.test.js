@@ -176,7 +176,7 @@ describe('type: triggeredSend', () => {
             // domainVerification
             assert.deepEqual(
                 templatedItems.domainVerification.map((item) => item.domain),
-                ['joern.berkefeld@accenture.com'],
+                ['joern.berkefeld+test@accenture.com', 'joern.berkefeld@accenture.com'],
                 'expected specific domainVerification to be templated'
             );
             // asset
