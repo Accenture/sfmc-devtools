@@ -101,7 +101,9 @@ declare namespace DataExtract {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
-        dependencyGraph: any;
+        dependencyGraph: {
+            dataExtension: string[];
+        };
         hasExtended: boolean;
         idField: string;
         keyIsFixed: boolean;
