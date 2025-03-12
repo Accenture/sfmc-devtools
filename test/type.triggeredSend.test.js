@@ -145,7 +145,7 @@ describe('type: triggeredSend', () => {
 
             assert.deepEqual(
                 Object.keys(templatedItems),
-                ['triggeredSend', 'sendClassification', 'senderProfile', 'asset'],
+                ['asset', 'sendClassification', 'senderProfile', 'triggeredSend'],
                 'expected specific types to be templated'
             );
 

@@ -704,15 +704,15 @@ describe('type: automation', () => {
                 Object.keys(templateResult),
                 [
                     'automation',
-                    'dataExtract',
                     'dataExtension',
+                    'dataExtract',
                     'emailSend',
-                    'sendClassification',
-                    'senderProfile',
                     'fileTransfer',
                     'importFile',
                     'query',
                     'script',
+                    'sendClassification',
+                    'senderProfile',
                     'verification',
                 ],
                 'did not create deployment packages for all relevant types'

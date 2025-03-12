@@ -491,12 +491,12 @@ describe('type: journey', () => {
             assert.deepEqual(
                 Object.keys(templatedItems),
                 [
-                    'journey',
-                    'event',
-                    'dataExtension',
-                    'senderProfile',
-                    'sendClassification',
                     'asset',
+                    'dataExtension',
+                    'event',
+                    'journey',
+                    'sendClassification',
+                    'senderProfile',
                 ],
                 'expected specific types to be templated'
             );
