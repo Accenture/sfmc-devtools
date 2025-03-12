@@ -8,8 +8,7 @@
         },
         {
             "name": "DECustomerKey",
-            "type": "string",
-            "value": "testExisting_dataExtension"
+            "type": "string"
         },
         {
             "name": "HasColumnHeaders",
@@ -33,5 +32,6 @@
     "key": "testNew_dataExtract",
     "modifiedBy": "Jörn Berkefeld",
     "name": "testNew_dataExtract",
+    "r__dataExtension_key": "testExisting_dataExtension",
     "r__dataExtractType_name": "Data Extension Extract"
 }

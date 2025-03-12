@@ -378,7 +378,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    6,
+                    9,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -512,7 +512,7 @@ describe('GENERAL', () => {
                 assert.equal(deployedTypes[0], 'dataExtract', 'deploy should have returned 1 type');
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    10,
+                    13,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -1027,8 +1027,8 @@ describe('GENERAL', () => {
                         'automation',
                         'query',
                         'dataExtract',
-                        'emailSend',
                         'dataExtension',
+                        'emailSend',
                         'sendClassification',
                         'senderProfile',
                         'fileTransfer',
@@ -1147,8 +1147,8 @@ describe('GENERAL', () => {
                         'automation',
                         'query',
                         'dataExtract',
-                        'emailSend',
                         'dataExtension',
+                        'emailSend',
                         'sendClassification',
                         'senderProfile',
                         'fileTransfer',
@@ -1662,8 +1662,8 @@ describe('GENERAL', () => {
                         'automation',
                         'query',
                         'dataExtract',
-                        'emailSend',
                         'dataExtension',
+                        'emailSend',
                         'sendClassification',
                         'senderProfile',
                         'fileTransfer',
@@ -1769,8 +1769,8 @@ describe('GENERAL', () => {
                         'automation',
                         'query',
                         'dataExtract',
-                        'emailSend',
                         'dataExtension',
+                        'emailSend',
                         'sendClassification',
                         'senderProfile',
                         'fileTransfer',
@@ -2063,8 +2063,8 @@ describe('GENERAL', () => {
                         'automation',
                         'query',
                         'dataExtract',
-                        'emailSend',
                         'dataExtension',
+                        'emailSend',
                         'sendClassification',
                         'senderProfile',
                         'fileTransfer',
@@ -2503,7 +2503,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    9,
+                    12,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });

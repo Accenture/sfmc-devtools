@@ -705,8 +705,8 @@ describe('type: automation', () => {
                 [
                     'automation',
                     'dataExtract',
-                    'emailSend',
                     'dataExtension',
+                    'emailSend',
                     'sendClassification',
                     'senderProfile',
                     'fileTransfer',
