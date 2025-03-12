@@ -203,7 +203,16 @@ declare namespace DataExtract {
                 template: boolean;
             };
             r__dataExtractType_name: {
-                skipValidation: boolean;
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            r__dataExtension_key: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
             };
         };
     };
