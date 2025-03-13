@@ -1,5 +1,5 @@
 {
-    "description": "updated on deploy",
+    "description": "bla bla",
     "key": "testExisting_automation",
     "name": "testExisting_automation",
     "r__folder_Path": "my automations",
@@ -36,10 +36,26 @@
                 {
                     "r__key": "testExisting_script",
                     "r__type": "script"
+                },
+                {
+                    "r__key": "testExisting_automation__s1.7",
+                    "r__type": "verification"
                 }
             ],
             "name": ""
         }
     ],
-    "type": "scheduled"
+    "type": "scheduled",
+    "notifications": [
+        {
+            "email": ["complete@test.accenture.com"],
+            "message": "",
+            "type": "Complete"
+        },
+        {
+            "email": ["error@test.accenture.com"],
+            "message": "test",
+            "type": "Error"
+        }
+    ]
 }
