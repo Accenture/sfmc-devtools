@@ -88,6 +88,14 @@ declare class Event extends MetadataType {
      */
     static preDeployTasks(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
     /**
+     * helper for {@link createOrUpdate}
+     *
+     * @param {string} metadataKey key of item we are looking at
+     * @param {MetadataTypeItemDiff[]} metadataToUpdate list of items to update
+     * @param {MetadataTypeItem[]} metadataToCreate list of items to create
+     */
+    static removeFromDeployment(metadataKey: string, metadataToUpdate: MetadataTypeItemDiff[], metadataToCreate: MetadataTypeItem[]): void;
+    /**
      * parses retrieved Metadata before saving
      *
      * @param {MetadataTypeItem} metadata a single event definition
