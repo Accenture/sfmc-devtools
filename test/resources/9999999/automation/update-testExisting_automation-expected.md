@@ -1,6 +1,6 @@
 ## testExisting_automation
 
-**Description:** updated on deploy
+**Description:** bla bla
 
 **Folder:** my automations/
 
@@ -15,8 +15,10 @@
 * Timezone: W. Europe Standard Time
 * Recurrance: run only once
 
-**Notifications:** _none_
+**Notifications:**
 
+* Complete: complete@test.accenture.com
+* Error: error@test.accenture.com ("test")
 
 | Step 1<br>_<small>-</small>_ |
 | --- |
@@ -26,3 +28,4 @@
 | _1.4: importFile_<br>testExisting_importFile |
 | _1.5: query_<br>testExisting_query |
 | _1.6: script_<br>testExisting_script |
+| _1.7: verification_<br>testExisting_automation__s1.7 |
