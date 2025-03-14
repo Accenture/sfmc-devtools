@@ -944,6 +944,10 @@ export type VerificationItem = {
      * key of target data extension
      */
     r__dataExtension_key: string;
+    /**
+     * custom key for verifications based on automation, step and activity number
+     */
+    c__automation_step: string;
 };
 export type AutomationMap = {
     [x: string]: AutomationItem;
@@ -1254,6 +1258,7 @@ export type Mcdevrc = {
      */
     metaDataTypes: {
         retrieve: string[];
+        createDeltaPkg: string[];
         documentOnRetrieve: string[];
     };
     /**
@@ -1721,6 +1726,7 @@ export type FieldCondition = {
      */
     text: string;
 };
+export type validationRuleFix = () => boolean | null;
 export type validationRuleTest = () => boolean;
 export type validationRule = {
     /**
@@ -1731,6 +1737,10 @@ export type validationRule = {
      * test to run
      */
     passed: validationRuleTest;
+    /**
+     * test to run
+     */
+    fix?: validationRuleFix;
 };
 /**
  * key=rule name
@@ -1771,5 +1781,21 @@ export type DomainVerificationItem = {
      * e.g. ""2023-06-19T11:11:17.32""
      */
     emailSendTime?: string;
+    /**
+     * for bulk-creation only: email address to send notifications to when done
+     */
+    notificationEmail?: string;
+    /**
+     * for bulk-creation only: list of email addresses to verify
+     */
+    addresses?: string[];
+    /**
+     * for bulk-creation only: instead of an array in addresses, specify the name of a DE
+     */
+    deTable?: string;
+    /**
+     * for bulk-creation only: instead of an array in addresses, specify the name of a DE column/field here
+     */
+    deColumn?: string;
 };
 //# sourceMappingURL=mcdev.d.d.ts.map

@@ -54,6 +54,14 @@ declare class DomainVerification extends MetadataType {
      */
     static create(metadataItem: DomainVerificationItem): Promise<any>;
     /**
+     * Creates a multiple metadata entries via REST
+     *
+     * @param {MetadataTypeItem} metadataEntry a single metadata Entry
+     * @param {string} uri rest endpoint for POST
+     * @returns {Promise.<object> | null} Promise of API response or null in case of an error
+     */
+    static createRESTBulk(metadataEntry: MetadataTypeItem, uri: string): Promise<object> | null;
+    /**
      * helper for {@link MetadataType.createREST}
      *
      * @param {DomainVerificationItem} metadataEntry a single metadata Entry
@@ -80,9 +88,9 @@ declare class DomainVerification extends MetadataType {
      * manages post retrieve steps
      *
      * @param {DomainVerificationItem} metadataItem a single item
-     * @returns {DomainVerificationItem} metadata
+     * @returns {DomainVerificationItem|void} metadata
      */
-    static postRetrieveTasks(metadataItem: DomainVerificationItem): DomainVerificationItem;
+    static postRetrieveTasks(metadataItem: DomainVerificationItem): DomainVerificationItem | void;
     /**
      * Gets executed after deployment of metadata type
      *
@@ -123,6 +131,7 @@ declare namespace DomainVerification {
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
+        typeCdpByDefault: boolean;
         typeName: string;
         fields: {
             domain: {

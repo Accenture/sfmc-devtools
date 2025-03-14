@@ -388,7 +388,7 @@ describe('type: script', () => {
 
             assert.deepEqual(
                 Object.keys(templatedItems),
-                ['script', 'asset'],
+                ['asset', 'script'],
                 'expected specific types to be templated'
             );
 

@@ -101,7 +101,9 @@ declare namespace DataExtract {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
-        dependencyGraph: any;
+        dependencyGraph: {
+            dataExtension: string[];
+        };
         hasExtended: boolean;
         idField: string;
         keyIsFixed: boolean;
@@ -116,6 +118,7 @@ declare namespace DataExtract {
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
+        typeCdpByDefault: boolean;
         typeName: string;
         fields: {
             createdBy: {
@@ -200,7 +203,16 @@ declare namespace DataExtract {
                 template: boolean;
             };
             r__dataExtractType_name: {
-                skipValidation: boolean;
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            r__dataExtension_key: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
             };
         };
     };

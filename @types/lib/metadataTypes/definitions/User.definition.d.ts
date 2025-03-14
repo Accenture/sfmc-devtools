@@ -19,6 +19,7 @@ declare namespace _default {
     let typeDescription: string;
     let typeName: string;
     let typeRetrieveByDefault: boolean;
+    let typeCdpByDefault: boolean;
     let documentInOneFile: boolean;
     let stringifyFieldsBeforeTemplate: string[];
     let fields: {

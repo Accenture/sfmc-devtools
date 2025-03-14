@@ -145,7 +145,13 @@ describe('type: triggeredSend', () => {
 
             assert.deepEqual(
                 Object.keys(templatedItems),
-                ['triggeredSend', 'sendClassification', 'senderProfile', 'asset'],
+                [
+                    'asset',
+                    'domainVerification',
+                    'sendClassification',
+                    'senderProfile',
+                    'triggeredSend',
+                ],
                 'expected specific types to be templated'
             );
 
@@ -166,6 +172,12 @@ describe('type: triggeredSend', () => {
                 templatedItems.senderProfile.map((item) => item.CustomerKey),
                 ['{{{prefix}}}senderProfile', '{{{prefix}}}senderProfile_rcb'],
                 'expected specific senderProfiles to be templated'
+            );
+            // domainVerification
+            assert.deepEqual(
+                templatedItems.domainVerification.map((item) => item.domain),
+                ['joern.berkefeld+test@accenture.com', 'joern.berkefeld@accenture.com'],
+                'expected specific domainVerification to be templated'
             );
             // asset
             assert.deepEqual(

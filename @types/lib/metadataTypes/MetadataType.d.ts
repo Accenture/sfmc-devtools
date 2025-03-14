@@ -78,13 +78,14 @@ declare class MetadataType {
      */
     static postCreateTasks(metadataEntry: MetadataTypeItem, apiResponse: object, metadataEntryWithAllFields: MetadataTypeItem): Promise<object>;
     /**
-     * helper for {@link MetadataType.updateREST}
+     * helper for {@link MetadataType.updateREST} and {@link MetadataType.updateSOAP}
      *
      * @param {MetadataTypeItem} metadataEntry a single metadata Entry
      * @param {object} apiResponse varies depending on the API call
+     * @param {MetadataTypeItem} metadataEntryWithAllFields like metadataEntry but before non-creatable fields were stripped
      * @returns {Promise.<object>} apiResponse, potentially modified
      */
-    static postUpdateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): Promise<object>;
+    static postUpdateTasks(metadataEntry: MetadataTypeItem, apiResponse: object, metadataEntryWithAllFields: MetadataTypeItem): Promise<object>;
     /**
      * helper for {@link MetadataType.createREST} when legacy API endpoints as these do not return the created item but only their new id
      *
@@ -445,6 +446,12 @@ declare class MetadataType {
      */
     static runDocumentOnRetrieve(singleRetrieve: string | number, metadataMap: MetadataTypeMap): Promise<void>;
     /**
+     * helper for {@link parseResponseBody} that creates a custom key field for this type based on mobileCode and keyword
+     *
+     * @param {MetadataTypeItem} metadata single item
+     */
+    static createCustomKeyField(metadata: MetadataTypeItem): void;
+    /**
      * Builds map of metadata entries mapped to their keyfields
      *
      * @param {object} body json of response body
@@ -667,21 +674,29 @@ declare class MetadataType {
     /**
      * Delete a data extension from the specified business unit
      *
-     * @param {string} customerKey Identifier of metadata
+     * @param {string} key Identifier of metadata
      * @param {string} [overrideKeyField] optionally change the name of the key field if the api uses a different name
+     * @param {number} [codeNotFound] error code that is responded with if the item was not found
      * @param {boolean} [handleOutside] if the API reponse is irregular this allows you to handle it outside of this generic method
      * @returns {Promise.<boolean>} deletion success flag
      */
-    static deleteByKeySOAP(customerKey: string, overrideKeyField?: string, handleOutside?: boolean): Promise<boolean>;
+    static deleteByKeySOAP(key: string, overrideKeyField?: string, codeNotFound?: number, handleOutside?: boolean): Promise<boolean>;
     /**
      * Delete a data extension from the specified business unit
      *
      * @param {string} url endpoint
      * @param {string} key Identifier of metadata
+     * @param {number} [codeNotFound] error code that is responded with if the item was not found
      * @param {boolean} [handleOutside] if the API reponse is irregular this allows you to handle it outside of this generic method
      * @returns {Promise.<boolean>} deletion success flag
      */
-    static deleteByKeyREST(url: string, key: string, handleOutside?: boolean): Promise<boolean>;
+    static deleteByKeyREST(url: string, key: string, codeNotFound?: number, handleOutside?: boolean): Promise<boolean>;
+    /**
+     * helper for {@link deleteByKey}, {@link deleteByKeyREST}, {@link deleteByKeySOAP}
+     *
+     * @param {string} key Identifier of metadata
+     */
+    static deleteNotFound(key: string): Promise<void>;
     /**
      * Returns metadata of a business unit that is saved locally
      *
@@ -761,11 +776,11 @@ declare class MetadataType {
      * Gets executed before deploying metadata
      *
      * @param {'retrieve'|'buildDefinition'|'deploy'} method used to select the right config
-     * @param {MetadataTypeItem | CodeExtractItem} item a single metadata item
+     * @param {MetadataTypeItem | CodeExtractItem} originalItem a single metadata item
      * @param {string} targetDir folder where files for deployment are stored
      * @returns {Promise.<MetadataTypeItem | CodeExtractItem>} Promise of a single metadata item
      */
-    static validation(method: "retrieve" | "buildDefinition" | "deploy", item: MetadataTypeItem | CodeExtractItem, targetDir: string): Promise<MetadataTypeItem | CodeExtractItem>;
+    static validation(method: "retrieve" | "buildDefinition" | "deploy", originalItem: MetadataTypeItem | CodeExtractItem, targetDir: string): Promise<MetadataTypeItem | CodeExtractItem>;
 }
 declare namespace MetadataType {
     namespace definition {

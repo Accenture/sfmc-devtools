@@ -1,5 +1,4 @@
 export namespace Util {
-    let isRunViaVSCodeExtension: boolean;
     let authFileName: string;
     let boilerplateDirectory: string;
     let configFileName: string;
@@ -92,6 +91,9 @@ export namespace Util {
      * @returns {boolean} attribute value == false ? true : false
      */
     function isFalse(attrValue: any): boolean;
+    function isEqual(item1: string | number | boolean | any[] | object, item2: string | number | boolean | any[] | object): boolean;
+    function _isEqualArray(array1: any[], array2: any[]): boolean;
+    function _isEqualObject(item1: object, item2: object): boolean;
     /**
      * helper for Mcdev.retrieve, Mcdev.retrieveAsTemplate and Mcdev.deploy
      *
@@ -122,9 +124,20 @@ export namespace Util {
     /**
      * helper for getDefaultProperties()
      *
+     * @param {'typeRetrieveByDefault'|'typeCdpByDefault'} field relevant field in type definition
      * @returns {string[]} type choices
      */
-    function getRetrieveTypeChoices(): string[];
+    function getTypeChoices(field: "typeRetrieveByDefault" | "typeCdpByDefault"): string[];
+    /**
+     * helper for cli.selectTypes and init.config.fixMcdevConfig that converts subtypes back to main type if all and only defaults were selected
+     * this keeps the config automatically upgradable when we add new subtypes or change what is selected by default
+     *
+     * @param {'typeRetrieveByDefault'|'typeCdpByDefault'} field relevant field in type definition
+     * @param {string[]} selectedTypes what types the user selected
+     * @param {'asset'} [type] metadata type
+     * @returns {string[]} filtered selectedTypes
+     */
+    function summarizeSubtypes(field: "typeRetrieveByDefault" | "typeCdpByDefault", selectedTypes: string[], type?: "asset"): string[];
     let logFileName: string;
     function _createNewLoggerTransport(noLogFile?: boolean): object;
     let loggerTransports: any;

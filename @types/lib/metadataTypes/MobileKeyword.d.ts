@@ -39,12 +39,6 @@ declare class MobileKeyword extends MetadataType {
      */
     static retrieve(retrieveDir: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
-     * helper for {@link MobileKeyword.parseResponseBody} that creates a custom key field for this type based on mobileCode and keyword
-     *
-     * @param {MetadataTypeItem} metadata single item
-     */
-    static "__#6@#createCustomKeyField"(metadata: MetadataTypeItem): void;
-    /**
      * helper for {@link MobileKeyword.preDeployTasks} and {@link MobileKeyword.createOrUpdate} to ensure we have code & keyword properly set
      *
      * @param {MetadataTypeItem} metadata single item
@@ -128,6 +122,14 @@ declare class MobileKeyword extends MetadataType {
      */
     static postCreateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): Promise<object>;
     /**
+     * helper for {@link MetadataType.updateREST}
+     *
+     * @param {MetadataTypeItem} metadataEntry a single metadata Entry
+     * @param {object} apiResponse varies depending on the API call
+     * @returns {Promise.<object>} apiResponse, potentially modified
+     */
+    static postUpdateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): Promise<object>;
+    /**
      * helper for {@link MobileKeyword.preDeployTasks} that loads extracted code content back into JSON
      *
      * @param {MetadataTypeItem} metadata a single definition
@@ -166,6 +168,7 @@ declare namespace MobileKeyword {
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
+        typeCdpByDefault: boolean;
         typeName: string;
         fields: {
             id: {

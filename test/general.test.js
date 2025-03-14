@@ -208,11 +208,6 @@ describe('GENERAL', () => {
                     ['testExisting_senderProfile_rcb'],
                     'should have found the right senderProfiles that need updating'
                 );
-                assert.deepEqual(
-                    replace['testInstance/testBU'].triggeredSend,
-                    ['testExisting_triggeredSend_rcb'],
-                    'should have found the right assets that need updating'
-                );
 
                 // check if conversions happened
                 assert.deepEqual(
@@ -231,7 +226,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    92,
+                    76,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -273,11 +268,6 @@ describe('GENERAL', () => {
                     ['testExisting_senderProfile_rcb'],
                     'should have found the right senderProfiles that need updating'
                 );
-                assert.deepEqual(
-                    replace['testInstance/testBU'].triggeredSend,
-                    ['testExisting_triggeredSend_rcb'],
-                    'should have found the right assets that need updating'
-                );
 
                 // check if conversions happened
                 assert.deepEqual(
@@ -296,7 +286,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    92,
+                    76,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -338,11 +328,6 @@ describe('GENERAL', () => {
                     ['testExisting_senderProfile_rcb'],
                     'should have found the right senderProfiles that need updating'
                 );
-                assert.deepEqual(
-                    replace['testInstance/testBU'].triggeredSend,
-                    ['testExisting_triggeredSend_rcb'],
-                    'should have found the right assets that need updating'
-                );
 
                 // check if conversions happened
                 assert.deepEqual(
@@ -361,7 +346,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    92,
+                    76,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -393,7 +378,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    6,
+                    9,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -527,7 +512,7 @@ describe('GENERAL', () => {
                 assert.equal(deployedTypes[0], 'dataExtract', 'deploy should have returned 1 type');
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    10,
+                    13,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -1040,15 +1025,16 @@ describe('GENERAL', () => {
                     Object.keys(templateResult),
                     [
                         'automation',
-                        'query',
-                        'dataExtract',
-                        'emailSend',
                         'dataExtension',
-                        'sendClassification',
-                        'senderProfile',
+                        'dataExtract',
+                        'domainVerification',
+                        'emailSend',
                         'fileTransfer',
                         'importFile',
+                        'query',
                         'script',
+                        'sendClassification',
+                        'senderProfile',
                         'verification',
                     ],
                     'did not create deployment packages for all relevant types'
@@ -1160,15 +1146,16 @@ describe('GENERAL', () => {
                     Object.keys(templateResult),
                     [
                         'automation',
-                        'query',
-                        'dataExtract',
-                        'emailSend',
                         'dataExtension',
-                        'sendClassification',
-                        'senderProfile',
+                        'dataExtract',
+                        'domainVerification',
+                        'emailSend',
                         'fileTransfer',
                         'importFile',
+                        'query',
                         'script',
+                        'sendClassification',
+                        'senderProfile',
                         'verification',
                     ],
                     'did not create deployment packages for all relevant types'
@@ -1675,15 +1662,16 @@ describe('GENERAL', () => {
                     Object.keys(definitionResult),
                     [
                         'automation',
-                        'query',
-                        'dataExtract',
-                        'emailSend',
                         'dataExtension',
-                        'sendClassification',
-                        'senderProfile',
+                        'dataExtract',
+                        'domainVerification',
+                        'emailSend',
                         'fileTransfer',
                         'importFile',
+                        'query',
                         'script',
+                        'sendClassification',
+                        'senderProfile',
                         'verification',
                     ],
                     'did not create deployment packages for all relevant types'
@@ -1782,15 +1770,16 @@ describe('GENERAL', () => {
                     Object.keys(definitionResult),
                     [
                         'automation',
-                        'query',
-                        'dataExtract',
-                        'emailSend',
                         'dataExtension',
-                        'sendClassification',
-                        'senderProfile',
+                        'dataExtract',
+                        'domainVerification',
+                        'emailSend',
                         'fileTransfer',
                         'importFile',
+                        'query',
                         'script',
+                        'sendClassification',
+                        'senderProfile',
                         'verification',
                     ],
                     'did not create deployment packages for all relevant types'
@@ -2076,15 +2065,16 @@ describe('GENERAL', () => {
                     Object.keys(definitionResult),
                     [
                         'automation',
-                        'query',
-                        'dataExtract',
-                        'emailSend',
                         'dataExtension',
-                        'sendClassification',
-                        'senderProfile',
+                        'dataExtract',
+                        'domainVerification',
+                        'emailSend',
                         'fileTransfer',
                         'importFile',
+                        'query',
                         'script',
+                        'sendClassification',
+                        'senderProfile',
                         'verification',
                     ],
                     'did not create deployment packages for all relevant types'
@@ -2208,6 +2198,34 @@ describe('GENERAL', () => {
                 assert.equal(
                     testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
                     4,
+                    'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+                );
+            });
+
+            it('build but error after buildTemplate step because keys were not found', async () => {
+                const buName = 'testInstance/testBU';
+                const typeKeyCombo = {
+                    asset: ['404'],
+                    dataExtension: ['404'],
+                };
+
+                // handler.setOptions({ skipInteraction: true, purge: false, fix: true });
+
+                await handler.build(
+                    buName,
+                    'ignored',
+                    typeKeyCombo,
+                    ['testSourceMarket'],
+                    ['parent'],
+                    true
+                );
+
+                // THEN
+                assert.equal(process.exitCode, 1, 'build should not have thrown an error');
+
+                assert.equal(
+                    testUtils.getAPIHistoryLength(),
+                    0,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -2490,7 +2508,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    9,
+                    12,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });

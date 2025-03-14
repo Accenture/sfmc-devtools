@@ -84,7 +84,9 @@ declare namespace SenderProfile {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
-        dependencyGraph: any;
+        dependencyGraph: {
+            domainVerification: string[];
+        };
         filter: {};
         hasExtended: boolean;
         idField: string;
@@ -100,6 +102,7 @@ declare namespace SenderProfile {
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
+        typeCdpByDefault: boolean;
         typeName: string;
         fields: {
             'Client.ID': {

@@ -329,6 +329,7 @@
  * @property {number} createdBy user id of creator
  * @property {string} [targetObjectId] ObjectID of target data extension
  * @property {string} r__dataExtension_key key of target data extension
+ * @property {string} c__automation_step custom key for verifications based on automation, step and activity number
  */
 
 /**
@@ -463,6 +464,7 @@ complex
  * @property {object} marketList combination of markets and BUs for streamlined deployments
  * @property {object} metaDataTypes templating variables grouped by markets
  * @property {string[]} metaDataTypes.retrieve define what types shall be downloaded by default during retrieve
+ * @property {string[]} metaDataTypes.createDeltaPkg defines what types shall be passed to build() as part of running cdp
  * @property {string[]} metaDataTypes.documentOnRetrieve which types should be parsed & documented after retrieve
  * @property {string} version mcdev version that last updated the config file
  */
@@ -629,15 +631,17 @@ complex
  */
 /**
  *
+ * @callback validationRuleFix
+ * @returns {boolean|null} true = test passed; false = test failed & fixed; null = test failed & item removed to fix
+ *
  * @callback validationRuleTest
  * @returns {boolean} true = test passed; false = test failed
- */
-/**
+ *
  * @typedef {object} validationRule
  * @property {string} failedMsg error message to display in case of a failed test
  * @property {validationRuleTest} passed test to run
- */
-/**
+ * @property {validationRuleFix} [fix] test to run
+ *
  * @typedef {Object.<string, validationRule>} validationRuleList key=rule name
  */
 
@@ -651,6 +655,10 @@ complex
  * @property {'SAP'|'UserDomain'|'PrivateDomain'|'RegisteredDomain'} [domainType] returned by retrieve and required for update call
  * @property {boolean} isSendable automatically true upon creation. can be changed to false via update
  * @property {string} [emailSendTime] e.g. ""2023-06-19T11:11:17.32""
+ * @property {string} [notificationEmail] for bulk-creation only: email address to send notifications to when done
+ * @property {string[]} [addresses] for bulk-creation only: list of email addresses to verify
+ * @property {string} [deTable] for bulk-creation only: instead of an array in addresses, specify the name of a DE
+ * @property {string} [deColumn] for bulk-creation only: instead of an array in addresses, specify the name of a DE column/field here
  */
 
 export default {};

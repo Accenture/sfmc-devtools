@@ -30,6 +30,7 @@ declare namespace _default {
     let type: string;
     let typeDescription: string;
     let typeRetrieveByDefault: boolean;
+    let typeCdpByDefault: boolean;
     let typeName: string;
     namespace priorityMapping {
         let High: number;
@@ -944,6 +945,12 @@ declare namespace _default {
             template: boolean;
         };
         'triggers[].metaData.title': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'triggers[].metaData.scheduleState': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;

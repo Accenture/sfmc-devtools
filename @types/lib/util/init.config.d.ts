@@ -37,9 +37,9 @@ declare namespace Init {
      * @param {object} propertiersCur current sub-object of project settings
      * @param {object} defaultPropsCur current sub-object of default settings
      * @param {string} fieldName dot-concatenated object-path that needs adding
-     * @returns {void}
+     * @returns {boolean} was something updated or not
      */
-    function _updateLeaf(propertiersCur: object, defaultPropsCur: object, fieldName: string): void;
+    function _updateLeaf(propertiersCur: object, defaultPropsCur: object, fieldName: string): boolean;
     /**
      * returns list of files that need to be updated
      *

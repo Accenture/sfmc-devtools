@@ -1,7 +1,9 @@
 declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: string[];
-    let dependencyGraph: any;
+    namespace dependencyGraph {
+        let domainVerification: string[];
+    }
     let filter: {};
     let hasExtended: boolean;
     let idField: string;
@@ -17,6 +19,7 @@ declare namespace _default {
     let type: string;
     let typeDescription: string;
     let typeRetrieveByDefault: boolean;
+    let typeCdpByDefault: boolean;
     let typeName: string;
     let fields: {
         'Client.ID': {

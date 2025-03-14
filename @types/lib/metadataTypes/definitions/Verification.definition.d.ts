@@ -18,6 +18,7 @@ declare namespace _default {
     let type: string;
     let typeDescription: string;
     let typeRetrieveByDefault: boolean;
+    let typeCdpByDefault: boolean;
     let typeName: string;
     namespace fields {
         namespace createdBy {
@@ -125,6 +126,16 @@ declare namespace _default {
             export { retrieving_10 as retrieving };
             let template_10: boolean;
             export { template_10 as template };
+        }
+        namespace c__automation_step {
+            let isCreateable_11: boolean;
+            export { isCreateable_11 as isCreateable };
+            let isUpdateable_11: boolean;
+            export { isUpdateable_11 as isUpdateable };
+            let retrieving_11: boolean;
+            export { retrieving_11 as retrieving };
+            let template_11: boolean;
+            export { template_11 as template };
         }
     }
 }

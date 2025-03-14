@@ -131,7 +131,6 @@
             "automation",
             "dataExtension",
             "dataExtract",
-            "deliveryProfile",
             "domainVerification",
             "emailSend",
             "event",
@@ -151,9 +150,30 @@
             "transactionalEmail",
             "transactionalPush",
             "transactionalSMS",
-            "triggeredSend",
+            "verification"
+        ],
+        "createDeltaPkg": [
+            "asset",
+            "automation",
+            "dataExtension",
+            "dataExtract",
+            "emailSend",
+            "event",
+            "fileTransfer",
+            "filter",
+            "importFile",
+            "journey",
+            "mobileCode",
+            "mobileKeyword",
+            "mobileMessage",
+            "query",
+            "script",
+            "sendClassification",
+            "senderProfile",
+            "transactionalPush",
+            "transactionalSMS",
             "verification"
         ]
     },
-    "version": "7.7.1"
+    "version": "7.10.0"
 }
