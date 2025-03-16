@@ -57,9 +57,5 @@
             "message": "test",
             "type": "Error"
         }
-    ],
-    "createdDate": "2022-01-12T08:41:35.773Z",
-    "createdName": "Tom Tester",
-    "modifiedDate": "2024-11-04T17:42:13.143Z",
-    "modifiedName": "Jörn Berkefeld"
+    ]
 }
