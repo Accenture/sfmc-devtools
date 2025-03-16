@@ -658,13 +658,31 @@ declare namespace Automation {
                 retrieving: boolean;
                 template: boolean;
             };
+            createdByName: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             createdDate: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            createdByName: {
+            createdName: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            modifiedDate: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            modifiedName: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
