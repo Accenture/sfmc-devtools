@@ -156,15 +156,6 @@ declare class Automation extends MetadataType {
         response: object;
     }>;
     /**
-     * Deploys automation - the saved file is the original one due to large differences required for deployment
-     *
-     * @param {AutomationMap} metadata metadata mapped by their keyField
-     * @param {string} targetBU name/shorthand of target businessUnit for mapping
-     * @param {string} retrieveDir directory where metadata after deploy should be saved
-     * @returns {Promise.<AutomationMap>} Promise
-     */
-    static deploy(metadata: AutomationMap, targetBU: string, retrieveDir: string): Promise<AutomationMap>;
-    /**
      * Creates a single automation
      *
      * @param {AutomationItem} metadata single metadata entry
@@ -658,13 +649,43 @@ declare namespace Automation {
                 retrieving: boolean;
                 template: boolean;
             };
+            createdByName: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             createdDate: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            createdByName: {
+            createdName: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            modifiedDate: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            modifiedName: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            pausedDate: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            pausedName: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
