@@ -394,18 +394,6 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
-        pausedDate: {
-            isCreateable: boolean;
-            isUpdateable: boolean;
-            retrieving: boolean;
-            template: boolean;
-        };
-        pausedName: {
-            isCreateable: boolean;
-            isUpdateable: boolean;
-            retrieving: boolean;
-            template: boolean;
-        };
         updateInProgress: {
             isCreateable: boolean;
             isUpdateable: boolean;
