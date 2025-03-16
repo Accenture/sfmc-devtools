@@ -191,10 +191,16 @@
         }
     ],
     "isPlatformObject": false,
-    "notifications": "https://mcmgrzvb1j6v-5bsmkdsl4pgbk64.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/bHF6Q0Q3b1VXa21OdVQzZFQ0ckVSQToxMjow",
+    "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/bHF6Q0Q3b1VXa21OdVQzZFQ0ckVSQToxMjow",
     "automationType": "unspecified",
     "categoryId": 4700,
     "folderPath": "my automations",
+    "lastPausedDate": "2025-03-14T15:21:57.62Z",
+    "lastPausedBy": {
+        "id": "NzEwNDIwNDE4OjQ6MA",
+        "name": "Jörn Berkefeld",
+        "email": "joern.berkefeld@accenture.com"
+    },
     "lastSaveDate": "2024-11-04T17:42:13.143Z",
     "lastSavedBy": {
         "id": "NzEwNDIwNDE4OjQ6MA",

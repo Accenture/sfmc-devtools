@@ -1,0 +1,35 @@
+{
+    "id": "RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow",
+    "key": "testExisting_automation",
+    "createdDate": "2022-01-12T08:41:35.773Z",
+    "name": "testExisting_automation",
+    "description": "bla bla",
+    "clientId": 9999999,
+    "status": "Scheduled",
+    "createdBy": {
+        "id": "NzE3MzUzNDA1OjQ6MA",
+        "name": "Tom Tester",
+        "email": "tom.tester@accenture.com"
+    },
+    "modifiedDate": "2022-11-11T16:42:36.513Z",
+    "modifiedBy": {
+        "id": "NzE3MzUzNDA1OjQ6MA",
+        "name": "Tom Tester",
+        "email": "tom.tester@accenture.com"
+    },
+    "isPlatformObject": false,
+    "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoxMjow",
+    "automationType": "scheduled",
+    "lastPausedDate": "2025-03-14T15:21:57.62Z",
+    "lastPausedBy": {
+        "id": "NzEwNDIwNDE4OjQ6MA",
+        "name": "Jörn Berkefeld",
+        "email": "joern.berkefeld@accenture.com"
+    },
+    "lastSaveDate": "2024-11-04T17:42:13.143Z",
+    "lastSavedBy": {
+        "id": "NzEwNDIwNDE4OjQ6MA",
+        "name": "Jörn Berkefeld",
+        "email": "joern.berkefeld@accenture.com"
+    }
+}
