@@ -1,7 +1,9 @@
 declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: string[];
-    let dependencyGraph: any;
+    namespace dependencyGraph {
+        let dataExtension: string[];
+    }
     let hasExtended: boolean;
     let idField: string;
     let keyIsFixed: boolean;
@@ -149,8 +151,24 @@ declare namespace _default {
             export { template_12 as template };
         }
         namespace r__dataExtractType_name {
-            let skipValidation_1: boolean;
-            export { skipValidation_1 as skipValidation };
+            let isCreateable_13: boolean;
+            export { isCreateable_13 as isCreateable };
+            let isUpdateable_13: boolean;
+            export { isUpdateable_13 as isUpdateable };
+            let retrieving_13: boolean;
+            export { retrieving_13 as retrieving };
+            let template_13: boolean;
+            export { template_13 as template };
+        }
+        namespace r__dataExtension_key {
+            let isCreateable_14: boolean;
+            export { isCreateable_14 as isCreateable };
+            let isUpdateable_14: boolean;
+            export { isUpdateable_14 as isUpdateable };
+            let retrieving_14: boolean;
+            export { retrieving_14 as retrieving };
+            let template_14: boolean;
+            export { template_14 as template };
         }
     }
 }

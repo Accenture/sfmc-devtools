@@ -1,7 +1,7 @@
 {
     "startIndex": 0,
     "itemsPerPage": 50,
-    "totalResults": 3,
+    "totalResults": 4,
     "entry": [
         {
             "id": "cDhLQ2o2NExxVVc5N3VZeHF5WEExUToyNTow",
@@ -71,13 +71,72 @@
             "lastRunStatus": "Complete"
         },
         {
+            "id": "RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow-PAUSED",
+            "name": "testExisting_automation_pause",
+            "description": "updated on deploy",
+            "key": "testExisting_automation_pause",
+            "typeId": 1,
+            "statusId": 4,
+            "status": "Scheduled",
+            "processes": [
+                {
+                    "workerCounts": [
+                        {
+                            "name": "testExisting_dataExtract",
+                            "objectTypeId": 73,
+                            "count": 1
+                        },
+                        {
+                            "name": "testExisting_emailSend",
+                            "objectTypeId": 42,
+                            "count": 2
+                        },
+                        {
+                            "name": "testExisting_fileTransfer",
+                            "objectTypeId": 53,
+                            "count": 3
+                        },
+                        {
+                            "name": "testExisting_importFile",
+                            "objectTypeId": 43,
+                            "count": 4
+                        },
+                        {
+                            "name": "testExisting_query_WRONG_NAME",
+                            "objectTypeId": 300,
+                            "count": 5
+                        },
+                        {
+                            "name": "testExisting_script",
+                            "objectTypeId": 423,
+                            "count": 6
+                        }
+                    ],
+                    "annotation": "",
+                    "stepNumber": 0
+                }
+            ],
+            "schedule": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/automations/schedule/dXZSTUJ0Q2xDa0tLVHlZRldqVlF1ZzozNjow",
+            "scheduledTime": "2024-11-07T23:15:00Z",
+            "startTime": "2024-11-07T22:15:19.057Z",
+            "completedTime": "2024-11-07T22:17:24.453Z",
+            "lastRunTime": "2024-11-07T22:15:19.057Z",
+            "lastRunInstance": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/bulk/automations/automation/instance/VEhxcm1sTk5DMEdhZnQ1S0ZsMURIZzoyNjow",
+            "instanceId": "VEhxcm1sTk5DMEdhZnQ1S0ZsMURIZzoyNjow",
+            "automationInstance": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/bulk/automations/automation/instance/VEhxcm1sTk5DMEdhZnQ1S0ZsMURIZzoyNjow",
+            "isPlatformObject": false,
+            "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/cDhLQ2o2NExxVVc5N3VZeHF5WEExUToxMjow",
+            "automationType": "scheduled",
+            "lastRunStatus": "Complete"
+        },
+        {
             "id": "RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow",
             "key": "testExisting_automation",
             "createdDate": "2022-01-12T08:41:35.773Z",
             "name": "testExisting_automation",
             "description": "bla bla",
             "clientId": 9999999,
-            "status": "Scheduled",
+            "status": "PausedSchedule",
             "createdBy": {
                 "id": "NzE3MzUzNDA1OjQ6MA",
                 "name": "Tom Tester",

@@ -157,7 +157,7 @@ describe('type: senderProfile', () => {
             const templatedItems = await handler.buildTemplate(
                 'testInstance/testBU',
                 'senderProfile',
-                ['testExisting_senderProfile'],
+                ['Default', 'testExisting_senderProfile', 'testExisting_senderProfile_rcb'],
                 ['testSourceMarket']
             );
             // WHEN
@@ -165,14 +165,31 @@ describe('type: senderProfile', () => {
 
             assert.deepEqual(
                 Object.keys(templatedItems),
-                ['senderProfile'],
+                ['asset', 'domainVerification', 'senderProfile'],
                 'expected specific types to be templated'
             );
 
+            // asset
+            assert.deepEqual(
+                templatedItems.asset.map((item) => item.customerKey),
+                [
+                    '{{{prefix}}}asset_htmlblock',
+                    '{{{prefix}}}htmlblock 3 spaces',
+                    '{{{prefix}}}htmlblock1',
+                    '{{{prefix}}}htmlblock2',
+                ],
+                'expected specific assets to be templated'
+            );
+            // domainVerification
+            assert.deepEqual(
+                templatedItems.domainVerification.map((item) => item.domain),
+                ['joern.berkefeld+test@accenture.com', 'joern.berkefeld@accenture.com'],
+                'expected specific domainVerifications to be templated'
+            );
             // senderProfile
             assert.deepEqual(
                 templatedItems.senderProfile.map((item) => item.CustomerKey),
-                ['{{{prefix}}}senderProfile'],
+                ['Default', '{{{prefix}}}senderProfile', '{{{prefix}}}senderProfile_rcb'],
                 'expected specific senderProfiles to be templated'
             );
         });

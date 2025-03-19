@@ -237,6 +237,7 @@
 
 /**
  * @typedef {object} AutomationSchedule REST format
+ * @property {string} id legacy id of schedule
  * @property {number} typeId equals schedule.scheduleTypeId; upsert endpoint requires scheduleTypeId. retrieve endpoint returns typeId
  * @property {number} [scheduleTypeId] equals schedule.typeId; upsert endpoint requires scheduleTypeId. retrieve endpoint returns typeId
  * @property {string} startDate example: '2021-05-07T09:00:00'
@@ -292,6 +293,7 @@
  * @property {any} [notifications] notifications
  * @property {string} [description] -
  * @property {'scheduled'|'triggered'|'automationtriggered'} [type] Starting Source = Schedule / File Drop
+ * @property {'scheduled'|'triggered'|'automationtriggered'} [automationType] Starting Source = Schedule / File Drop; from legacy api
  * @property {'Scheduled'|'Running'|'Ready'|'Building'|'PausedSchedule'|'InactiveTrigger'} [status] automation status
  * @property {number} [statusId] automation status
  * @property {AutomationSchedule} [schedule] only existing if type=scheduled
@@ -314,6 +316,12 @@
  * @property {AutomationStep[]} [steps] -
  * @property {string} [r__folder_Path] folder path
  * @property {string} [categoryId] holds folder ID, replaced with r__folder_Path during retrieve
+ * @property {string} [createdName] user name of person who created this automation
+ * @property {string} [createdDate] iso format
+ * @property {string} [modifiedName] user name of person who last modified this automation
+ * @property {string} [modifiedDate] iso format
+ * @property {string} [pausedName] user name of person who paused this automation
+ * @property {string} [pausedDate] iso format
  */
 
 /**

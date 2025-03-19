@@ -378,7 +378,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    6,
+                    9,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -512,7 +512,7 @@ describe('GENERAL', () => {
                 assert.equal(deployedTypes[0], 'dataExtract', 'deploy should have returned 1 type');
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    10,
+                    13,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });
@@ -777,7 +777,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU', ['automation', 'query']);
 
-                const expectedApiCallsRetrieve = 31;
+                const expectedApiCallsRetrieve = 35;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -882,7 +882,7 @@ describe('GENERAL', () => {
             });
 
             it('buildTemplate + buildDefinition for multiple types with keys and --retrieve', async () => {
-                const expectedApiCallsRetrieve = 31;
+                const expectedApiCallsRetrieve = 32;
 
                 // preparation
                 const argvMetadata = [
@@ -987,7 +987,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 93;
+                const expectedApiCallsRetrieve = 97;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1025,15 +1025,16 @@ describe('GENERAL', () => {
                     Object.keys(templateResult),
                     [
                         'automation',
-                        'query',
-                        'dataExtract',
-                        'emailSend',
                         'dataExtension',
-                        'sendClassification',
-                        'senderProfile',
+                        'dataExtract',
+                        'domainVerification',
+                        'emailSend',
                         'fileTransfer',
                         'importFile',
+                        'query',
                         'script',
+                        'sendClassification',
+                        'senderProfile',
                         'verification',
                     ],
                     'did not create deployment packages for all relevant types'
@@ -1145,15 +1146,16 @@ describe('GENERAL', () => {
                     Object.keys(templateResult),
                     [
                         'automation',
-                        'query',
-                        'dataExtract',
-                        'emailSend',
                         'dataExtension',
-                        'sendClassification',
-                        'senderProfile',
+                        'dataExtract',
+                        'domainVerification',
+                        'emailSend',
                         'fileTransfer',
                         'importFile',
+                        'query',
                         'script',
+                        'sendClassification',
+                        'senderProfile',
                         'verification',
                     ],
                     'did not create deployment packages for all relevant types'
@@ -1227,7 +1229,7 @@ describe('GENERAL', () => {
                     await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
                 ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
 
-                const expectedApiCallsRetrieve = 97;
+                const expectedApiCallsRetrieve = 101;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1239,7 +1241,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU', ['automation', 'query']);
 
-                const expectedApiCallsRetrieve = 31;
+                const expectedApiCallsRetrieve = 35;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1431,7 +1433,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU', ['automation', 'query']);
 
-                const expectedApiCallsRetrieve = 31;
+                const expectedApiCallsRetrieve = 35;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1502,7 +1504,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU', ['automation', 'query']);
 
-                const expectedApiCallsRetrieve = 31;
+                const expectedApiCallsRetrieve = 35;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1601,7 +1603,7 @@ describe('GENERAL', () => {
                 // download everything before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 93;
+                const expectedApiCallsRetrieve = 97;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1660,15 +1662,16 @@ describe('GENERAL', () => {
                     Object.keys(definitionResult),
                     [
                         'automation',
-                        'query',
-                        'dataExtract',
-                        'emailSend',
                         'dataExtension',
-                        'sendClassification',
-                        'senderProfile',
+                        'dataExtract',
+                        'domainVerification',
+                        'emailSend',
                         'fileTransfer',
                         'importFile',
+                        'query',
                         'script',
+                        'sendClassification',
+                        'senderProfile',
                         'verification',
                     ],
                     'did not create deployment packages for all relevant types'
@@ -1767,15 +1770,16 @@ describe('GENERAL', () => {
                     Object.keys(definitionResult),
                     [
                         'automation',
-                        'query',
-                        'dataExtract',
-                        'emailSend',
                         'dataExtension',
-                        'sendClassification',
-                        'senderProfile',
+                        'dataExtract',
+                        'domainVerification',
+                        'emailSend',
                         'fileTransfer',
                         'importFile',
+                        'query',
                         'script',
+                        'sendClassification',
+                        'senderProfile',
                         'verification',
                     ],
                     'did not create deployment packages for all relevant types'
@@ -1810,7 +1814,7 @@ describe('GENERAL', () => {
                     await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
                 ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
 
-                const expectedApiCallsRetrieve = 97;
+                const expectedApiCallsRetrieve = 101;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1822,7 +1826,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU', ['automation', 'query']);
 
-                const expectedApiCallsRetrieve = 31;
+                const expectedApiCallsRetrieve = 35;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -2001,7 +2005,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 93;
+                const expectedApiCallsRetrieve = 97;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -2061,15 +2065,16 @@ describe('GENERAL', () => {
                     Object.keys(definitionResult),
                     [
                         'automation',
-                        'query',
-                        'dataExtract',
-                        'emailSend',
                         'dataExtension',
-                        'sendClassification',
-                        'senderProfile',
+                        'dataExtract',
+                        'domainVerification',
+                        'emailSend',
                         'fileTransfer',
                         'importFile',
+                        'query',
                         'script',
+                        'sendClassification',
+                        'senderProfile',
                         'verification',
                     ],
                     'did not create deployment packages for all relevant types'
@@ -2503,7 +2508,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    9,
+                    12,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
             });

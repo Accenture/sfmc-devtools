@@ -29,13 +29,13 @@ describe('type: domainVerification', () => {
                 retrieve['testInstance/testBU'].domainVerification
                     ? Object.keys(retrieve['testInstance/testBU'].domainVerification).length
                     : 0,
-                4,
+                5,
                 'Unexpected number of assets in retrieve response'
             );
             const typeCache = cache.getCache()?.domainVerification;
             assert.equal(
                 typeCache ? Object.keys(typeCache).length : 0,
-                4,
+                5,
                 'unexpected number of domainVerifications'
             );
             assert.deepEqual(
@@ -72,7 +72,7 @@ describe('type: domainVerification', () => {
             const cached = cache.getCache();
             assert.equal(
                 cached.domainVerification ? Object.keys(cached.domainVerification).length : 0,
-                5,
+                6,
                 'unexpected number of domainVerifications in cache'
             );
             assert.deepEqual(

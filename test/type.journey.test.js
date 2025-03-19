@@ -491,12 +491,13 @@ describe('type: journey', () => {
             assert.deepEqual(
                 Object.keys(templatedItems),
                 [
-                    'journey',
-                    'event',
-                    'dataExtension',
-                    'senderProfile',
-                    'sendClassification',
                     'asset',
+                    'dataExtension',
+                    'domainVerification',
+                    'event',
+                    'journey',
+                    'sendClassification',
+                    'senderProfile',
                 ],
                 'expected specific types to be templated'
             );
@@ -525,6 +526,12 @@ describe('type: journey', () => {
                     '{{{prefix}}}journey_Quicksend',
                 ],
                 'expected specific dataExtensions to be templated'
+            );
+            // domainVerification
+            assert.deepEqual(
+                templatedItems.domainVerification.map((item) => item.domain),
+                ['joern.berkefeld+test@accenture.com', 'joern.berkefeld@accenture.com'],
+                'expected specific domainVerifications to be templated'
             );
             // senderProfile
             assert.deepEqual(

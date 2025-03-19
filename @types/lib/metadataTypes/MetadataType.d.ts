@@ -257,6 +257,14 @@ declare class MetadataType {
      */
     static execute(keyArr: string[], cache?: MetadataTypeMapObj): Promise<string[]>;
     /**
+     * Abstract schedule method that needs to be implemented in child metadata type
+     *
+     * @param {string[]} keyArr customerkey of the metadata
+     * @param {MetadataTypeMapObj} [cache] metadata cache used by refresh to avoid recaching
+     * @returns {Promise.<string[]>} Returns list of keys that were executed
+     */
+    static schedule(keyArr: string[], cache?: MetadataTypeMapObj): Promise<string[]>;
+    /**
      * Abstract pause method that needs to be implemented in child metadata type
      *
      * @param {string[]} keyArr customerkey of the metadata
@@ -674,21 +682,29 @@ declare class MetadataType {
     /**
      * Delete a data extension from the specified business unit
      *
-     * @param {string} customerKey Identifier of metadata
+     * @param {string} key Identifier of metadata
      * @param {string} [overrideKeyField] optionally change the name of the key field if the api uses a different name
+     * @param {number} [codeNotFound] error code that is responded with if the item was not found
      * @param {boolean} [handleOutside] if the API reponse is irregular this allows you to handle it outside of this generic method
      * @returns {Promise.<boolean>} deletion success flag
      */
-    static deleteByKeySOAP(customerKey: string, overrideKeyField?: string, handleOutside?: boolean): Promise<boolean>;
+    static deleteByKeySOAP(key: string, overrideKeyField?: string, codeNotFound?: number, handleOutside?: boolean): Promise<boolean>;
     /**
      * Delete a data extension from the specified business unit
      *
      * @param {string} url endpoint
      * @param {string} key Identifier of metadata
+     * @param {number} [codeNotFound] error code that is responded with if the item was not found
      * @param {boolean} [handleOutside] if the API reponse is irregular this allows you to handle it outside of this generic method
      * @returns {Promise.<boolean>} deletion success flag
      */
-    static deleteByKeyREST(url: string, key: string, handleOutside?: boolean): Promise<boolean>;
+    static deleteByKeyREST(url: string, key: string, codeNotFound?: number, handleOutside?: boolean): Promise<boolean>;
+    /**
+     * helper for {@link deleteByKey}, {@link deleteByKeyREST}, {@link deleteByKeySOAP}
+     *
+     * @param {string} key Identifier of metadata
+     */
+    static deleteNotFound(key: string): Promise<void>;
     /**
      * Returns metadata of a business unit that is saved locally
      *
