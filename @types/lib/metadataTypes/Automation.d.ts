@@ -216,9 +216,9 @@ declare class Automation extends MetadataType {
      * based on combination of ical string and start/end dates.
      *
      * @param {AutomationSchedule} scheduleObject child of automation metadata used for scheduling
-     * @returns {AutomationScheduleSoap} Schedulable object for soap API (currently not rest supported)
+     * @returns {void} throws and error in case of problems
      */
-    static _buildSchedule(scheduleObject: AutomationSchedule): AutomationScheduleSoap;
+    static _checkSchedule(scheduleObject: AutomationSchedule): void;
     /**
      * used to convert dates to the system timezone required for startDate
      *
