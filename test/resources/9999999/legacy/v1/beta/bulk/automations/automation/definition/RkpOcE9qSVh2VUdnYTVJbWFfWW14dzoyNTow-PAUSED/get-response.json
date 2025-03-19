@@ -1,11 +1,11 @@
 {
-    "id": "RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow",
-    "key": "testExisting_automation",
+    "id": "RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow-PAUSED",
+    "key": "testExisting_automation_pause",
     "createdDate": "2022-01-12T08:41:35.773Z",
-    "name": "testExisting_automation",
+    "name": "testExisting_automation_pause",
     "description": "bla bla",
     "clientId": 9999999,
-    "status": "PausedSchedule",
+    "status": "Scheduled",
     "createdBy": {
         "id": "NzE3MzUzNDA1OjQ6MA",
         "name": "Tom Tester",
@@ -32,6 +32,7 @@
         "name": "Jörn Berkefeld",
         "email": "joern.berkefeld@accenture.com"
     },
+    "guidId": "08afb0e2-b00a-4c88-fixKey_pause",
     "scheduleObject": {
         "id": "WkNtUVIxN21WRTZndGxkTnZIS1JWUTozNjow",
         "key": "921",
@@ -45,6 +46,6 @@
         "iCalRecur": "FREQ=HOURLY;UNTIL=20790607T080000;INTERVAL=1",
         "timeZone": "W. Europe Standard Time",
         "timeZoneId": 5,
-        "scheduleStatus": "paused"
+        "scheduleStatus": "scheduled"
     }
 }

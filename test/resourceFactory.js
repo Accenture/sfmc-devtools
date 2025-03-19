@@ -270,6 +270,8 @@ export const handleRESTRequest = async (config) => {
         let filterBody;
         if (urlObj.searchParams.get('$filter')) {
             filterName = urlObj.searchParams.get('$filter').split(' eq ')[1];
+        } else if (urlObj.searchParams.get('action')) {
+            filterName = urlObj.searchParams.get('action');
         }
         const testPath = path
             .join(
@@ -283,9 +285,10 @@ export const handleRESTRequest = async (config) => {
         const testPathFilter = filterName
             ? testPath +
               '-' +
-              urlObj.searchParams.get('$filter').replaceAll(' eq ', '=').replaceAll(' ', '')
+              (urlObj.searchParams.get('$filter') || urlObj.searchParams.get('action'))
+                  .replaceAll(' eq ', '=')
+                  .replaceAll(' ', '')
             : null;
-
         if (!testPathFilter && config.method === 'post' && config.data) {
             const simpleOperators = { equal: '=', in: 'IN' };
             const data = JSON.parse(config.data);
@@ -308,7 +311,6 @@ export const handleRESTRequest = async (config) => {
             }
         }
         const testPathFilterBody = filterBody ? testPath + '-' + filterBody : null;
-
         if (testPathFilter && (await fs.pathExists(testPathFilter + '.json'))) {
             // build filter logic to ensure templating works
             if (filterName) {
@@ -317,8 +319,9 @@ export const handleRESTRequest = async (config) => {
                         encoding: 'utf8',
                     })
                 );
-                response.items = response.items.filter((def) => def.name == filterName);
-                response.count = response.items.length;
+                if (response.items) {
+                    response.items = response.items.filter((def) => def.name == filterName);
+                }
                 console.log(loadingFile + projectRoot + testPathFilter + '.json'); // eslint-disable-line no-console
                 return [200, JSON.stringify(response)];
             } else {

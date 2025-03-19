@@ -392,6 +392,7 @@ export namespace Util {
      * @returns {object} obj but with sorted attributes
      */
     function sortObjectAttributes(obj: object): object;
+    function notSupportedError(definition: any, method: string, item?: MetadataTypeItem): void;
 }
 export type AuthObject = import("../../types/mcdev.d.js").AuthObject;
 export type BuObject = import("../../types/mcdev.d.js").BuObject;
