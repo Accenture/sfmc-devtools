@@ -72,9 +72,10 @@ declare class Automation extends MetadataType {
      * helper for {@link Automation.retrieve} to get Automation Notifications
      *
      * @param {MetadataTypeMap} metadataMap keyField => metadata map
+     * @param {boolean} [skipNotification] skip notification retrieval
      * @returns {Promise.<object>} Promise of automation legacy api response
      */
-    static "__#4@#getAutomationLegacyREST"(metadataMap: MetadataTypeMap): Promise<object>;
+    static "__#4@#getAutomationLegacyREST"(metadataMap: MetadataTypeMap, skipNotification?: boolean): Promise<object>;
     /**
      * Retrieves Metadata of Automation
      *
@@ -111,50 +112,47 @@ declare class Automation extends MetadataType {
      */
     static postRetrieveTasks(metadata: AutomationItem): AutomationItem | void;
     /**
+     * a function to active the schedule of an automation
+     *
+     * @param {string[]} keyArr customerkey of the metadata
+     * @returns {Promise.<string[]>} Returns list of keys that were executed
+     */
+    static schedule(keyArr: string[]): Promise<string[]>;
+    /**
+     * a function to pause the schedule of an automation
+     *
+     * @param {string[]} keyArr customerkey of the metadata
+     * @returns {Promise.<string[]>} Returns list of keys that were executed
+     */
+    static pause(keyArr: string[]): Promise<string[]>;
+    /**
+     * a function to active the schedule of an automation
+     *
+     * @param {'schedule'|'pause'} mode what to do
+     * @param {string[]} keyArr customerkey of the metadata
+     * @returns {Promise.<string[]>} Returns list of keys that were executed
+     */
+    static "__#4@#schedulePause"(mode: "schedule" | "pause", keyArr: string[]): Promise<string[]>;
+    /**
+     * helper for {@link Automation.schedule}
+     *
+     * @param {'schedule'|'pause'} mode what to do
+     * @param {string} key automation key
+     * @param {string} automationLegacyId automation id
+     * @param {string} [scheduleLegacyId] schedule id
+     * @returns {Promise.<{key:string, response:object}>} metadata key and API response
+     */
+    static "__#4@#schedulePauseItem"(mode: "schedule" | "pause", key: string, automationLegacyId: string, scheduleLegacyId?: string): Promise<{
+        key: string;
+        response: object;
+    }>;
+    /**
      * a function to start query execution via API
      *
      * @param {string[]} keyArr customerkey of the metadata
      * @returns {Promise.<string[]>} Returns list of keys that were executed
      */
     static execute(keyArr: string[]): Promise<string[]>;
-    /**
-     * helper for {@link Automation.execute}
-     *
-     * @param {AutomationMap} metadataMap map of metadata
-     * @param {string} key key of the metadata
-     * @returns {Promise.<{key:string, response:object}>} metadata key and API response
-     */
-    static "__#4@#executeItem"(metadataMap: AutomationMap, key: string): Promise<{
-        key: string;
-        response: object;
-    }>;
-    /**
-     * helper for {@link Automation.execute}
-     *
-     * @param {AutomationItem} metadataEntry metadata object
-     * @returns {Promise.<{key:string, response:object}>} metadata key and API response
-     */
-    static "__#4@#runOnce"(metadataEntry: AutomationItem): Promise<{
-        key: string;
-        response: object;
-    }>;
-    /**
-     * a function to start query execution via API
-     *
-     * @param {string[]} keyArr customerkey of the metadata
-     * @returns {Promise.<string[]>} Returns list of keys that were paused
-     */
-    static pause(keyArr: string[]): Promise<string[]>;
-    /**
-     * helper for {@link Automation.pause}
-     *
-     * @param {AutomationItem} metadata automation metadata
-     * @returns {Promise.<{key:string, response:object}>} metadata key and API response
-     */
-    static "__#4@#pauseItem"(metadata: AutomationItem): Promise<{
-        key: string;
-        response: object;
-    }>;
     /**
      * Creates a single automation
      *
@@ -202,10 +200,9 @@ declare class Automation extends MetadataType {
      * Gets executed after deployment of metadata type
      *
      * @param {AutomationMap} metadataMap metadata mapped by their keyField
-     * @param {AutomationMap} originalMetadataMap metadata to be updated (contains additioanl fields)
      * @returns {Promise.<void>} -
      */
-    static postDeployTasks(metadataMap: AutomationMap, originalMetadataMap: AutomationMap): Promise<void>;
+    static postDeployTasks(metadataMap: AutomationMap): Promise<void>;
     /**
      * helper for {@link Automation.postDeployTasks}
      *
@@ -214,19 +211,6 @@ declare class Automation extends MetadataType {
      * @returns {Promise.<void>} -
      */
     static "__#4@#updateNotificationInfoREST"(metadataMap: AutomationMap, key: string): Promise<void>;
-    /**
-     * helper for {@link Automation.postDeployTasks}
-     *
-     * @param {AutomationMap} metadataMap metadata mapped by their keyField
-     * @param {AutomationMap} originalMetadataMap metadata to be updated (contains additioanl fields)
-     * @param {string} key current customer key
-     * @param {string} [oldKey] old customer key before fixKey / changeKeyValue / changeKeyField
-     * @returns {Promise.<{key:string, response:object}>} metadata key and API response
-     */
-    static "__#4@#scheduleAutomation"(metadataMap: AutomationMap, originalMetadataMap: AutomationMap, key: string, oldKey?: string): Promise<{
-        key: string;
-        response: object;
-    }>;
     /**
      * Builds a schedule object to be used for scheduling an automation
      * based on combination of ical string and start/end dates.
@@ -815,6 +799,12 @@ declare namespace Automation {
                 template: boolean;
             };
             'schedule.typeId': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'schedule.scheduleTypeId': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

@@ -695,6 +695,10 @@ export type AutomationStep = {
  */
 export type AutomationSchedule = {
     /**
+     * legacy id of schedule
+     */
+    id: string;
+    /**
      * equals schedule.scheduleTypeId; upsert endpoint requires scheduleTypeId. retrieve endpoint returns typeId
      */
     typeId: number;
@@ -847,6 +851,10 @@ export type AutomationItem = {
      */
     type?: "scheduled" | "triggered" | "automationtriggered";
     /**
+     * Starting Source = Schedule / File Drop; from legacy api
+     */
+    automationType?: "scheduled" | "triggered" | "automationtriggered";
+    /**
      * automation status
      */
     status?: "Scheduled" | "Running" | "Ready" | "Building" | "PausedSchedule" | "InactiveTrigger";
@@ -898,6 +906,30 @@ export type AutomationItem = {
      * holds folder ID, replaced with r__folder_Path during retrieve
      */
     categoryId?: string;
+    /**
+     * user name of person who created this automation
+     */
+    createdName?: string;
+    /**
+     * iso format
+     */
+    createdDate?: string;
+    /**
+     * user name of person who last modified this automation
+     */
+    modifiedName?: string;
+    /**
+     * iso format
+     */
+    modifiedDate?: string;
+    /**
+     * user name of person who paused this automation
+     */
+    pausedName?: string;
+    /**
+     * iso format
+     */
+    pausedDate?: string;
 };
 export type VerificationItem = {
     /**
