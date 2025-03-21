@@ -42,7 +42,7 @@ declare class ImportFile extends MetadataType {
      */
     static retrieve(retrieveDir?: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
-     * helper for {@link this.retrieveRESTcollection}
+     * helper for {@link MetadataType.retrieveRESTcollection}
      *
      * @param {SDKError} ex exception
      * @param {string} key id or key of item
