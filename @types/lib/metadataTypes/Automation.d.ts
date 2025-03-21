@@ -64,11 +64,11 @@ declare class Automation extends MetadataType {
      * helper for {@link this.retrieveRESTcollection}
      *
      * @param {SDKError} ex exception
-     * @param {string} id id or key of item
+     * @param {string} key id or key of item
      * @param {string} url url to call for retry
      * @returns {Promise.<any>} can return retry-result
      */
-    static handleRESTErrors(ex: SDKError, id: string, url: string): Promise<any>;
+    static handleRESTErrors(ex: SDKError, key: string, url: string): Promise<any>;
     /**
      * helper for {@link Automation.retrieve} to get Automation Notifications
      *
