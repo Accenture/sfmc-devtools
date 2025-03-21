@@ -541,6 +541,12 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        'schedule.description': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         status: {
             isCreateable: boolean;
             isUpdateable: boolean;

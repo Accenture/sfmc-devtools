@@ -23,6 +23,8 @@ declare namespace _default {
     let lastmodDateField: string;
     let lastmodNameField: any;
     let restPagination: boolean;
+    let restPageSize: number;
+    let restConcurrentLimit: number;
     namespace subscriberImportTypeMapping {
         let DataExtension_1: number;
         export { DataExtension_1 as DataExtension };
