@@ -9,6 +9,7 @@ export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type SDKError = import("../../types/mcdev.d.js").SDKError;
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -20,6 +21,7 @@ export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
+ * @typedef {import('../../types/mcdev.d.js').SDKError} SDKError
  */
 /**
  * ImportFile MetadataType
@@ -39,6 +41,15 @@ declare class ImportFile extends MetadataType {
      * @returns {Promise.<MetadataTypeMapObj>} Promise
      */
     static retrieve(retrieveDir?: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
+    /**
+     * helper for {@link MetadataType.retrieveRESTcollection}
+     *
+     * @param {SDKError} ex exception
+     * @param {string} key id or key of item
+     * @param {string} url url to call for retry
+     * @returns {Promise.<any>} can return retry-result
+     */
+    static handleRESTErrors(ex: SDKError, key: string, url: string): Promise<any>;
     /**
      * Retrieves import definition metadata for caching
      *
@@ -122,6 +133,8 @@ declare namespace ImportFile {
         lastmodDateField: string;
         lastmodNameField: any;
         restPagination: boolean;
+        restPageSize: number;
+        restConcurrentLimit: number;
         subscriberImportTypeMapping: {
             DataExtension: number;
             Email: number;

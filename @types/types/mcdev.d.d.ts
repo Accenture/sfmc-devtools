@@ -719,13 +719,29 @@ export type AutomationSchedule = {
      */
     icalRecur: string;
     /**
+     * same as icalRecur but returned by legacy-API; example: 'FREQ=DAILY;UNTIL=20790606T160000;INTERVAL=1'
+     */
+    iCalRecur?: string;
+    /**
      * example: 'W. Europe Standard Time'; see this.definition.timeZoneMapping
      */
     timezoneName: string;
     /**
+     * same as timezoneName but returned by legacy-API; example: 'W. Europe Standard Time'; see this.definition.timeZoneMapping
+     */
+    timeZone?: string;
+    /**
+     * kept in legacy API only, exact description of what this schedule does
+     */
+    description?: string;
+    /**
      * see this.definition.timeZoneMapping
      */
     timezoneId?: number;
+    /**
+     * same as timezoneId but returned by legacy-API; see this.definition.timeZoneMapping
+     */
+    timeZoneId?: number;
     /**
      * ?
      */

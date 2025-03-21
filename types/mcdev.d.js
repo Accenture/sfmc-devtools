@@ -243,8 +243,12 @@
  * @property {string} startDate example: '2021-05-07T09:00:00'
  * @property {string} endDate example: '2021-05-07T09:00:00'
  * @property {string} icalRecur example: 'FREQ=DAILY;UNTIL=20790606T160000;INTERVAL=1'
+ * @property {string} [iCalRecur] same as icalRecur but returned by legacy-API; example: 'FREQ=DAILY;UNTIL=20790606T160000;INTERVAL=1'
  * @property {string} timezoneName example: 'W. Europe Standard Time'; see this.definition.timeZoneMapping
+ * @property {string} [timeZone] same as timezoneName but returned by legacy-API; example: 'W. Europe Standard Time'; see this.definition.timeZoneMapping
+ * @property {string} [description] kept in legacy API only, exact description of what this schedule does
  * @property {number} [timezoneId] see this.definition.timeZoneMapping
+ * @property {number} [timeZoneId] same as timezoneId but returned by legacy-API; see this.definition.timeZoneMapping
  * @property {number} [rangeTypeId] ?
  * @property {any} [pattern] ?
  * @property {any} [scheduledTime] ?

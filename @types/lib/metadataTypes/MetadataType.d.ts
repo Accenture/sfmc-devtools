@@ -420,10 +420,11 @@ declare class MetadataType {
      * helper for {@link this.retrieveRESTcollection}
      *
      * @param {RestError} ex exception
-     * @param {string} id id or key of item
+     * @param {string} key id or key of item
+     * @param {string} url url to call for retry
      * @returns {Promise.<any>} -
      */
-    static handleRESTErrors(ex: RestError, id: string): Promise<any>;
+    static handleRESTErrors(ex: RestError, key: string, url: string): Promise<any>;
     /**
      * Used to execute a query/automation etc.
      *
