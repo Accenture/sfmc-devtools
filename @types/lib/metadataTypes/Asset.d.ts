@@ -580,6 +580,12 @@ declare namespace Asset {
                 retrieving: boolean;
                 template: boolean;
             };
+            'content.url': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             contentType: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -932,6 +938,7 @@ declare namespace Asset {
         binarySubtypes: string[];
         extendedSubTypes: {
             asset: string[];
+            cloudpage: string[];
             image: string[];
             rawimage: string[];
             video: string[];
@@ -939,6 +946,7 @@ declare namespace Asset {
             audio: string[];
             archive: string[];
             code: string[];
+            coderesource: string[];
             textfile: string[];
             block: string[];
             template: string[];
@@ -1175,6 +1183,17 @@ declare namespace Asset {
             contentmap: number;
             jsonmessage: number;
             icemailformblock: number;
+            coderesource: number;
+            jscoderesource: number;
+            csscoderesource: number;
+            jsoncoderesource: number;
+            rsscoderesource: number;
+            textcoderesource: number;
+            xmlcoderesource: number;
+            cloudpages: number;
+            landingpage: number;
+            microsite: number;
+            interactivecontent: number;
         };
     };
 }
