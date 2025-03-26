@@ -514,22 +514,22 @@ declare namespace _default {
     let selflinkedSubTypes: string[];
     let binarySubtypes: string[];
     namespace extendedSubTypes {
+        export let archive: string[];
         let asset_1: string[];
         export { asset_1 as asset };
-        export let cloudpage: string[];
-        export let image: string[];
-        export let rawimage: string[];
-        export let video: string[];
-        export let document: string[];
         export let audio: string[];
-        export let archive: string[];
+        export let block: string[];
+        export let cloudpage: string[];
         export let code: string[];
         export let coderesource: string[];
-        export let textfile: string[];
-        export let block: string[];
-        export let template: string[];
+        export let document: string[];
+        export let image: string[];
         export let message: string[];
         export let other: string[];
+        export let rawimage: string[];
+        export let template: string[];
+        export let textfile: string[];
+        export let video: string[];
     }
     let typeMapping: {
         asset: number;

@@ -937,21 +937,21 @@ declare namespace Asset {
         selflinkedSubTypes: string[];
         binarySubtypes: string[];
         extendedSubTypes: {
-            asset: string[];
-            cloudpage: string[];
-            image: string[];
-            rawimage: string[];
-            video: string[];
-            document: string[];
-            audio: string[];
             archive: string[];
+            asset: string[];
+            audio: string[];
+            block: string[];
+            cloudpage: string[];
             code: string[];
             coderesource: string[];
-            textfile: string[];
-            block: string[];
-            template: string[];
+            document: string[];
+            image: string[];
             message: string[];
             other: string[];
+            rawimage: string[];
+            template: string[];
+            textfile: string[];
+            video: string[];
         };
         typeMapping: {
             asset: number;

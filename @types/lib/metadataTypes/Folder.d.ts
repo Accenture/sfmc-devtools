@@ -128,7 +128,8 @@ declare namespace Folder {
         dependencyGraph: any;
         subTypes: string[];
         deployFolderTypes: string[];
-        deployFolderTypesRest: string[];
+        deployFolderTypesEmailRest: string[];
+        deployFolderTypesAssetRest: string[];
         deployFolderBlacklist: string[];
         folderTypesFromParent: string[];
         hasExtended: boolean;
@@ -181,6 +182,12 @@ declare namespace Folder {
                 retrieving: boolean;
                 template: boolean;
             };
+            description: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             CreatedDate: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -199,6 +206,18 @@ declare namespace Folder {
                 retrieving: boolean;
                 template: boolean;
             };
+            categoryType: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            catType: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             IsActive: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -211,7 +230,19 @@ declare namespace Folder {
                 retrieving: boolean;
                 template: boolean;
             };
+            editable: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             AllowChildren: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            extendable: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -223,7 +254,19 @@ declare namespace Folder {
                 retrieving: boolean;
                 template: boolean;
             };
+            objectId: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             Name: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            name: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -236,6 +279,18 @@ declare namespace Folder {
                 template: boolean;
             };
             'ParentFolder.ID': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            parentCatId: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            parentId: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -272,24 +327,6 @@ declare namespace Folder {
                 template: boolean;
             };
             _generated: {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            catType: {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            name: {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            parentCatId: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
