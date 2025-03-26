@@ -1,0 +1,54 @@
+{
+    "id": 9465,
+    "customerKey": "test_landingpage",
+    "objectID": "7e515e0c-e13e-442e-b076-fe768782b453",
+    "assetType": {
+        "id": 247,
+        "name": "landingpage",
+        "displayName": "Landing Page"
+    },
+    "version": 1,
+    "name": "test_landingpage",
+    "description": "",
+    "owner": {
+        "id": 710420418,
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld",
+        "userId": "710420418"
+    },
+    "createdDate": "2025-03-25T03:17:51.88-06:00",
+    "createdBy": {
+        "id": 710420418,
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld",
+        "userId": "710420418"
+    },
+    "modifiedDate": "2025-03-25T03:17:52.187-06:00",
+    "modifiedBy": {
+        "id": 710420418,
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld",
+        "userId": "710420418"
+    },
+    "enterpriseId": 1111111,
+    "memberId": 9999999,
+    "status": {
+        "id": 1,
+        "name": "Draft"
+    },
+    "thumbnail": {
+        "thumbnailUrl": "/v1/assets/9465/thumbnail"
+    },
+    "category": {
+        "id": 27675,
+        "name": "mcdev",
+        "parentId": 23009
+    },
+    "content": "{\"url\":\"https://oss-test.accenture.com/test_landingpage\"}",
+    "meta": {
+        "thumbnailRefAssetId": 9466,
+        "cloudPages": {}
+    },
+    "availableViews": [],
+    "modelVersion": 2
+}

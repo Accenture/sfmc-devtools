@@ -1,0 +1,43 @@
+{
+    "assetType": {
+        "displayName": "Microsite",
+        "name": "microsite"
+    },
+    "availableViews": [],
+    "category": {
+        "name": "mcdev"
+    },
+    "content": {
+        "url": "https://cloud.eu.randstad.com/test_microsite"
+    },
+    "createdBy": {
+        "email": "joern.berkefeld@randstad.com",
+        "name": "Jörn Berkefeld"
+    },
+    "createdDate": "2025-03-25T03:01:05.467-06:00",
+    "customerKey": "test_microsite",
+    "description": "",
+    "memberId": 9999999,
+    "meta": {
+        "cloudPages": {
+            "c__published": true,
+            "publishDate": "2025-03-25 03:12:51.850"
+        },
+        "thumbnailRefAssetId": 9461
+    },
+    "modelVersion": 2,
+    "modifiedBy": {
+        "email": "joern.berkefeld@randstad.com",
+        "name": "Jörn Berkefeld"
+    },
+    "modifiedDate": "2025-03-25T03:12:51.85-06:00",
+    "name": "test_microsite",
+    "owner": {
+        "email": "joern.berkefeld@randstad.com",
+        "name": "Jörn Berkefeld"
+    },
+    "status": {
+        "name": "Draft"
+    },
+    "version": 1
+}

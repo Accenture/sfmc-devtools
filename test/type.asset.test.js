@@ -153,7 +153,6 @@ describe('type: asset', () => {
         it('Should retrieve a asset & ensure non-ssjs code is not removed', async () => {
             // WHEN
             const retrieve = await handler.retrieve('testInstance/testBU', ['asset']);
-
             // THEN
             assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             assert.equal(
@@ -292,6 +291,57 @@ describe('type: asset', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 26,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should retrieve asset-cloudpage', async () => {
+            // WHEN
+            const retrieve = await handler.retrieve('testInstance/testBU', ['asset-cloudpage']);
+
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            assert.equal(
+                retrieve['testInstance/testBU'].asset
+                    ? Object.keys(retrieve['testInstance/testBU'].asset).length
+                    : 0,
+                3,
+                'Unexpected number of assets in retrieve response'
+            );
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.asset ? Object.keys(result.asset).length : 0,
+                10,
+                'Unexpected number of assets in cache'
+            );
+
+            assert.deepEqual(
+                await getActualJson('test_landingpage', 'asset', 'cloudpage'),
+                await testUtils.getExpectedJson('9999999', 'asset', 'test_landingpage-retrieve'),
+                'returned metadata was not equal expected'
+            );
+
+            assert.deepEqual(
+                await getActualJson('test_microsite', 'asset', 'cloudpage'),
+                await testUtils.getExpectedJson('9999999', 'asset', 'test_microsite-retrieve'),
+                'returned metadata was not equal expected'
+            );
+
+            assert.deepEqual(
+                await getActualJson('test_interactivecontent', 'asset', 'cloudpage'),
+                await testUtils.getExpectedJson(
+                    '9999999',
+                    'asset',
+                    'test_interactivecontent-retrieve'
+                ),
+                'returned metadata was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                10,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

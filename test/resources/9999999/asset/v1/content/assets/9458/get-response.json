@@ -1,0 +1,56 @@
+{
+    "id": 9458,
+    "customerKey": "test_interactivecontent",
+    "objectID": "02b1c184-87fb-4c58-ba3d-22d811c6cbbd",
+    "assetType": {
+        "id": 249,
+        "name": "interactivecontent",
+        "displayName": "Interactive Email Page"
+    },
+    "version": 1,
+    "name": "test_interactivecontent",
+    "description": "",
+    "owner": {
+        "id": 710420418,
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld",
+        "userId": "710420418"
+    },
+    "createdDate": "2025-03-25T03:02:46.823-06:00",
+    "createdBy": {
+        "id": 710420418,
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld",
+        "userId": "710420418"
+    },
+    "modifiedDate": "2025-03-25T03:02:55.307-06:00",
+    "modifiedBy": {
+        "id": 710420418,
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld",
+        "userId": "710420418"
+    },
+    "enterpriseId": 1111111,
+    "memberId": 9999999,
+    "status": {
+        "id": 1,
+        "name": "Draft"
+    },
+    "thumbnail": {
+        "thumbnailUrl": "/v1/assets/9458/thumbnail"
+    },
+    "category": {
+        "id": 27675,
+        "name": "mcdev",
+        "parentId": 23009
+    },
+    "content": "{\"url\":\"https://oss-test.accenture.com/test_interactivecontent\"}",
+    "meta": {
+        "thumbnailRefAssetId": 9459,
+        "cloudPages": {
+            "publishDate": "2025-03-25 03:02:55.307"
+        }
+    },
+    "availableViews": [],
+    "modelVersion": 2
+}

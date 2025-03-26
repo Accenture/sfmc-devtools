@@ -1,0 +1,43 @@
+{
+    "assetType": {
+        "displayName": "Interactive Email Page",
+        "name": "interactivecontent"
+    },
+    "availableViews": [],
+    "category": {
+        "name": "mcdev"
+    },
+    "content": {
+        "url": "https://oss-test.accenture.com/test_interactivecontent"
+    },
+    "createdBy": {
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld"
+    },
+    "createdDate": "2025-03-25T03:02:46.823-06:00",
+    "customerKey": "test_interactivecontent",
+    "description": "",
+    "memberId": 9999999,
+    "meta": {
+        "cloudPages": {
+            "c__published": true,
+            "publishDate": "2025-03-25 03:02:55.307"
+        },
+        "thumbnailRefAssetId": 9459
+    },
+    "modelVersion": 2,
+    "modifiedBy": {
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld"
+    },
+    "modifiedDate": "2025-03-25T03:02:55.307-06:00",
+    "name": "test_interactivecontent",
+    "owner": {
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld"
+    },
+    "status": {
+        "name": "Draft"
+    },
+    "version": 1
+}
