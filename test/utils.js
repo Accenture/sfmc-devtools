@@ -205,6 +205,8 @@ export function mockSetup(isDeploy) {
 
         handler.setOptions(resetOptions);
     }
+    File.prettierConfig = null;
+
     apimock = new MockAdapter(axiosInstance, { onNoMatch: 'throwException' });
     // set access_token to mid to allow for autorouting of mock to correct resources
     apimock.onPost(authResources.success.url).reply((config) => {

@@ -1,0 +1,56 @@
+{
+    "id": 9456,
+    "customerKey": "test_microsite",
+    "objectID": "5f717219-6766-48da-9843-e514cc9aa919",
+    "assetType": {
+        "id": 248,
+        "name": "microsite",
+        "displayName": "Microsite"
+    },
+    "version": 1,
+    "name": "test_microsite",
+    "description": "",
+    "owner": {
+        "id": 710420418,
+        "email": "joern.berkefeld@randstad.com",
+        "name": "Jörn Berkefeld",
+        "userId": "710420418"
+    },
+    "createdDate": "2025-03-25T03:01:05.467-06:00",
+    "createdBy": {
+        "id": 710420418,
+        "email": "joern.berkefeld@randstad.com",
+        "name": "Jörn Berkefeld",
+        "userId": "710420418"
+    },
+    "modifiedDate": "2025-03-25T03:12:51.85-06:00",
+    "modifiedBy": {
+        "id": 710420418,
+        "email": "joern.berkefeld@randstad.com",
+        "name": "Jörn Berkefeld",
+        "userId": "710420418"
+    },
+    "enterpriseId": 1111111,
+    "memberId": 9999999,
+    "status": {
+        "id": 1,
+        "name": "Draft"
+    },
+    "thumbnail": {
+        "thumbnailUrl": "/v1/assets/9456/thumbnail"
+    },
+    "category": {
+        "id": 27675,
+        "name": "mcdev",
+        "parentId": 23009
+    },
+    "content": "{\"url\":\"https://cloud.eu.randstad.com/test_microsite\"}",
+    "meta": {
+        "thumbnailRefAssetId": 9461,
+        "cloudPages": {
+            "publishDate": "2025-03-25 03:12:51.850"
+        }
+    },
+    "availableViews": [],
+    "modelVersion": 2
+}

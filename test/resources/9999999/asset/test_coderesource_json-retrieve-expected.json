@@ -1,0 +1,47 @@
+{
+    "assetType": {
+        "displayName": "JSON Code Resource",
+        "name": "jsoncoderesource"
+    },
+    "availableViews": [],
+    "category": {
+        "name": "mcdev"
+    },
+    "contentType": "application/json",
+    "createdBy": {
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld"
+    },
+    "createdDate": "2025-03-25T03:15:22.72-06:00",
+    "customerKey": "test_coderesource_json",
+    "data": {
+        "site": {
+            "content": {
+                "url": "https://oss-test.accenture.com/test_coderesource_json"
+            }
+        }
+    },
+    "description": "",
+    "memberId": 9999999,
+    "meta": {
+        "cloudPages": {
+            "c__published": true,
+            "publishDate": "2025-03-25 03:16:40.913"
+        }
+    },
+    "modelVersion": 2,
+    "modifiedBy": {
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld"
+    },
+    "modifiedDate": "2025-03-25T03:16:40.913-06:00",
+    "name": "test_coderesource_json",
+    "owner": {
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld"
+    },
+    "status": {
+        "name": "Draft"
+    },
+    "version": 1
+}

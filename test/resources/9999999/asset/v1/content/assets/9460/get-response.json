@@ -1,0 +1,59 @@
+{
+    "id": 9460,
+    "customerKey": "test_coderesource_xml",
+    "objectID": "66787c5f-3d36-4a61-91a5-34e760391505",
+    "contentType": "application/xml",
+    "assetType": {
+        "id": 245,
+        "name": "xmlcoderesource",
+        "displayName": "XML Code Resource"
+    },
+    "version": 1,
+    "name": "test_coderesource_xml",
+    "description": "",
+    "owner": {
+        "id": 710420418,
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld",
+        "userId": "710420418"
+    },
+    "createdDate": "2025-03-25T03:03:45.713-06:00",
+    "createdBy": {
+        "id": 710420418,
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld",
+        "userId": "710420418"
+    },
+    "modifiedDate": "2025-03-25T03:04:06.48-06:00",
+    "modifiedBy": {
+        "id": 710420418,
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld",
+        "userId": "710420418"
+    },
+    "enterpriseId": 1111111,
+    "memberId": 9999999,
+    "status": {
+        "id": 1,
+        "name": "Draft"
+    },
+    "thumbnail": {
+        "thumbnailUrl": "/v1/assets/9460/thumbnail"
+    },
+    "category": {
+        "id": 27675,
+        "name": "mcdev",
+        "parentId": 14914
+    },
+    "content": "<xml>test</xml>",
+    "meta": {
+        "cloudPages": {}
+    },
+    "availableViews": [],
+    "data": {
+        "site": {
+            "content": "{\"url\":\"https://oss-test.accenture.com/test_coderesource_xml\"}"
+        }
+    },
+    "modelVersion": 2
+}

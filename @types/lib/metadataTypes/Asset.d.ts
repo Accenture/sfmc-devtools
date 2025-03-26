@@ -580,6 +580,12 @@ declare namespace Asset {
                 retrieving: boolean;
                 template: boolean;
             };
+            'content.url': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             contentType: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -653,6 +659,24 @@ declare namespace Asset {
                 skipValidation: boolean;
             };
             'data.portfolio': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'data.site': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'data.site.content': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'data.site.content.url': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -931,19 +955,21 @@ declare namespace Asset {
         selflinkedSubTypes: string[];
         binarySubtypes: string[];
         extendedSubTypes: {
-            asset: string[];
-            image: string[];
-            rawimage: string[];
-            video: string[];
-            document: string[];
-            audio: string[];
             archive: string[];
-            code: string[];
-            textfile: string[];
+            asset: string[];
+            audio: string[];
             block: string[];
-            template: string[];
+            cloudpage: string[];
+            code: string[];
+            coderesource: string[];
+            document: string[];
+            image: string[];
             message: string[];
             other: string[];
+            rawimage: string[];
+            template: string[];
+            textfile: string[];
+            video: string[];
         };
         typeMapping: {
             asset: number;
@@ -1175,6 +1201,17 @@ declare namespace Asset {
             contentmap: number;
             jsonmessage: number;
             icemailformblock: number;
+            coderesource: number;
+            jscoderesource: number;
+            csscoderesource: number;
+            jsoncoderesource: number;
+            rsscoderesource: number;
+            textcoderesource: number;
+            xmlcoderesource: number;
+            cloudpages: number;
+            landingpage: number;
+            microsite: number;
+            interactivecontent: number;
         };
     };
 }

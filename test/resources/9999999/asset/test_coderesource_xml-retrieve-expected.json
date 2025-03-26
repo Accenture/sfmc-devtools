@@ -1,0 +1,46 @@
+{
+    "assetType": {
+        "displayName": "XML Code Resource",
+        "name": "xmlcoderesource"
+    },
+    "availableViews": [],
+    "category": {
+        "name": "mcdev"
+    },
+    "contentType": "application/xml",
+    "createdBy": {
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld"
+    },
+    "createdDate": "2025-03-25T03:03:45.713-06:00",
+    "customerKey": "test_coderesource_xml",
+    "data": {
+        "site": {
+            "content": {
+                "url": "https://oss-test.accenture.com/test_coderesource_xml"
+            }
+        }
+    },
+    "description": "",
+    "memberId": 9999999,
+    "meta": {
+        "cloudPages": {
+            "c__published": false
+        }
+    },
+    "modelVersion": 2,
+    "modifiedBy": {
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld"
+    },
+    "modifiedDate": "2025-03-25T03:04:06.48-06:00",
+    "name": "test_coderesource_xml",
+    "owner": {
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld"
+    },
+    "status": {
+        "name": "Draft"
+    },
+    "version": 1
+}
