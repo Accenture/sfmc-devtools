@@ -166,7 +166,7 @@ describe('type: asset', () => {
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                12,
+                15,
                 'Unexpected number of assets in cache'
             );
 
@@ -313,7 +313,7 @@ describe('type: asset', () => {
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                10,
+                13,
                 'Unexpected number of assets in cache'
             );
 
@@ -368,7 +368,7 @@ describe('type: asset', () => {
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                7,
+                10,
                 'Unexpected number of assets in cache'
             );
 

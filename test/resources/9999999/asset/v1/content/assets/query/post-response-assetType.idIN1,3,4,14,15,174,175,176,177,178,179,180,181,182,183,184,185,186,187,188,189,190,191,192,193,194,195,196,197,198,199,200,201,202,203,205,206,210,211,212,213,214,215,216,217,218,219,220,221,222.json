@@ -1,5 +1,5 @@
 {
-    "count": 6,
+    "count": 9,
     "page": 1,
     "pageSize": 50,
     "links": {},
@@ -278,6 +278,99 @@
                 }
             },
             "availableViews": ["html"],
+            "modelVersion": 2
+        },
+        {
+            "id": 9459,
+            "customerKey": "test_interactivecontent_content",
+            "objectID": "283dc273-84c0-44b6-979c-b9f2534b28a1",
+            "assetType": {
+                "id": 205,
+                "name": "webpage",
+                "displayName": "Web Page"
+            },
+            "name": "test_interactivecontent",
+            "createdDate": "2025-03-25T03:02:47.323-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:02:47.323-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "category": {
+                "id": 5328,
+                "name": "Content Builder",
+                "parentId": 0
+            },
+            "modelVersion": 2
+        },
+        {
+            "id": 9461,
+            "customerKey": "test_microsite_content",
+            "objectID": "8f32dff3-026b-4cd6-9096-d3ecb319f386",
+            "assetType": {
+                "id": 205,
+                "name": "webpage",
+                "displayName": "Web Page"
+            },
+            "name": "test_microsite_content",
+            "createdDate": "2025-03-25T03:10:56.733-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:10:56.733-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "category": {
+                "id": 5328,
+                "name": "Content Builder",
+                "parentId": 0
+            },
+            "modelVersion": 2
+        },
+        {
+            "id": 9466,
+            "customerKey": "test_landingpage_content",
+            "objectID": "95aa069b-5d48-41b9-a206-a623832cfc6d",
+            "assetType": {
+                "id": 205,
+                "name": "webpage",
+                "displayName": "Web Page"
+            },
+            "name": "test_landingpage_content",
+            "createdDate": "2025-03-25T03:17:52.317-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:17:52.317-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "category": {
+                "id": 5328,
+                "name": "Content Builder",
+                "parentId": 0
+            },
             "modelVersion": 2
         }
     ]
