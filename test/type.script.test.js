@@ -373,6 +373,7 @@ describe('type: script', () => {
         it('Should create a script template via buildTemplate with --dependencies', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['script', 'asset']);
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
 
             handler.setOptions({ dependencies: true, skipInteraction: true });
 

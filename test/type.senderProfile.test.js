@@ -152,6 +152,7 @@ describe('type: senderProfile', () => {
         it('Should create a senderProfile template via buildTemplate with --dependencies', async () => {
             // download first before we test buildTemplate
             handler.setOptions({ dependencies: true, retrieve: true });
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
 
             // GIVEN there is a template
             const templatedItems = await handler.buildTemplate(

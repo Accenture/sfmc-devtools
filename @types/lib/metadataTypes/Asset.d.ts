@@ -664,6 +664,24 @@ declare namespace Asset {
                 retrieving: boolean;
                 template: boolean;
             };
+            'data.site': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'data.site.content': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'data.site.content.url': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             description: {
                 isCreateable: boolean;
                 isUpdateable: boolean;

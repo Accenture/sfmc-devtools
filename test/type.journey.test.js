@@ -475,6 +475,7 @@ describe('type: journey', () => {
         it('Should create a journey template via buildTemplate with --dependencies', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['journey', 'asset']);
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
 
             handler.setOptions({ dependencies: true, retrieve: true });
 
