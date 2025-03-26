@@ -6,7 +6,7 @@
     "items": [
         {
             "id": 9463,
-            "customerKey": "69904680-56a4-4f59-976c-e32377bf48f2",
+            "customerKey": "test_coderesource_json",
             "assetType": {
                 "id": 242,
                 "name": "jsoncoderesource",
@@ -36,7 +36,7 @@
                 "name": "mcdev",
                 "parentId": 23009
             },
-            "content": "{\n\"test\":true\n}",
+            "content": "{\n\"test\": true\n}",
             "meta": {
                 "cloudPages": {
                     "publishDate": "2025-03-25 03:16:40.913"
@@ -52,7 +52,7 @@
         },
         {
             "id": 9460,
-            "customerKey": "fc2f4e53-e263-4466-88d8-cbe50181bbc9",
+            "customerKey": "test_coderesource_xml",
             "assetType": {
                 "id": 245,
                 "name": "xmlcoderesource",
@@ -96,13 +96,13 @@
         },
         {
             "id": 9451,
-            "customerKey": "3bf98928-a710-448c-afcc-0d57a5546f9e",
+            "customerKey": "test_coderesource_js",
             "assetType": {
                 "id": 240,
                 "name": "jscoderesource",
                 "displayName": "Javascript Code Resource"
             },
-            "name": "test_coderesource",
+            "name": "test_coderesource_js",
             "createdDate": "2025-03-24T05:20:40.82-06:00",
             "createdBy": {
                 "id": 710420418,
@@ -126,7 +126,7 @@
                 "name": "mcdev",
                 "parentId": 23009
             },
-            "content": "(function (/* root, doc */) {\n\n\t// add your code here...\n\n}(window, document));",
+            "content": "/* insert code here */\n",
             "meta": {
                 "cloudPages": {
                     "publishDate": "2025-03-24 06:05:23.203"

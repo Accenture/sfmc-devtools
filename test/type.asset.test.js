@@ -229,6 +229,66 @@ describe('type: asset', () => {
                 )
             );
 
+            assert.deepEqual(
+                await getActualJson('test_coderesource_js', 'asset', 'coderesource'),
+                await testUtils.getExpectedJson(
+                    '9999999',
+                    'asset',
+                    'test_coderesource_js-retrieve'
+                ),
+                'returned metadata was not equal expected'
+            );
+            expect(
+                await getActualFile('test_coderesource_js', 'asset', 'coderesource', 'js')
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'test_coderesource_js-retrieve',
+                    'js'
+                )
+            );
+
+            assert.deepEqual(
+                await getActualJson('test_coderesource_json', 'asset', 'coderesource'),
+                await testUtils.getExpectedJson(
+                    '9999999',
+                    'asset',
+                    'test_coderesource_json-retrieve'
+                ),
+                'returned metadata was not equal expected'
+            );
+            expect(
+                await getActualFile('test_coderesource_json', 'asset', 'coderesource', 'jsonc')
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'test_coderesource_json-retrieve',
+                    'jsonc'
+                )
+            );
+
+            assert.deepEqual(
+                await getActualJson('test_coderesource_xml', 'asset', 'coderesource'),
+                await testUtils.getExpectedJson(
+                    '9999999',
+                    'asset',
+                    'test_coderesource_xml-retrieve'
+                ),
+                'returned metadata was not equal expected'
+            );
+            expect(
+                await getActualFile('test_coderesource_xml', 'asset', 'coderesource', 'xml')
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'asset',
+                    'test_coderesource_xml-retrieve',
+                    'xml'
+                )
+            );
+
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 26,

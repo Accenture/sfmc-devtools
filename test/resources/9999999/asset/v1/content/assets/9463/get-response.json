@@ -1,6 +1,6 @@
 {
     "id": 9463,
-    "customerKey": "69904680-56a4-4f59-976c-e32377bf48f2",
+    "customerKey": "test_coderesource_json",
     "objectID": "5974959b-c531-404b-9361-e27d0d760b37",
     "contentType": "application/json",
     "assetType": {
@@ -45,7 +45,7 @@
         "name": "mcdev",
         "parentId": 14914
     },
-    "content": "{\n\"test\":true\n}",
+    "content": "{\n\"test\": true\n}",
     "meta": {
         "cloudPages": {
             "publishDate": "2025-03-25 03:16:40.913"

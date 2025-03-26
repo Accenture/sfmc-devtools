@@ -1,6 +1,6 @@
 {
     "id": 9451,
-    "customerKey": "3bf98928-a710-448c-afcc-0d57a5546f9e",
+    "customerKey": "test_coderesource_js",
     "objectID": "cbd96028-3fd4-49cc-910b-e3640d4686e5",
     "contentType": "application/javascript",
     "assetType": {
@@ -9,7 +9,7 @@
         "displayName": "Javascript Code Resource"
     },
     "version": 1,
-    "name": "test_coderesource",
+    "name": "test_coderesource_js",
     "description": "",
     "owner": {
         "id": 710420418,
@@ -45,7 +45,7 @@
         "name": "mcdev",
         "parentId": 14914
     },
-    "content": "(function (/* root, doc */) {\n\n\t// add your code here...\n\n}(window, document));",
+    "content": "/* insert code here */\n",
     "meta": {
         "cloudPages": {
             "publishDate": "2025-03-24 06:05:23.203"
