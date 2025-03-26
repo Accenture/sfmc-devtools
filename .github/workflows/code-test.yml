@@ -24,7 +24,7 @@ jobs:
 
             - uses: actions/setup-node@v4
               with:
-                  node-version: 18.18.2
+                  node-version: 18.20
                   registry-url: https://registry.npmjs.org/
 
             - run: npm ci --ignore-scripts
@@ -34,30 +34,7 @@ jobs:
             # Assuming code passes, run tests
             - name: Run mcdev-tests
               run: npm run test
-    lintandTest19:
-        name: lint & test w/ node v19
-        runs-on: ubuntu-latest
-        permissions:
-            actions: read
-            contents: read
-            security-events: write
 
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v4
-
-            - uses: actions/setup-node@v4
-              with:
-                  node-version: 19
-                  registry-url: https://registry.npmjs.org/
-
-            - run: npm ci --ignore-scripts
-
-            - run: npm run lint
-
-            # Assuming code passes, run tests
-            - name: Run mcdev-tests
-              run: npm run test
     lintandTest20:
         name: lint & test w/ node v20
         runs-on: ubuntu-latest
@@ -72,7 +49,7 @@ jobs:
 
             - uses: actions/setup-node@v4
               with:
-                  node-version: 20
+                  node-version: 20.10
                   registry-url: https://registry.npmjs.org/
 
             - run: npm ci --ignore-scripts
@@ -82,6 +59,7 @@ jobs:
             # Assuming code passes, run tests
             - name: Run mcdev-tests
               run: npm run test
+
     lintandTest21:
         name: lint & test w/ node v21
         runs-on: ubuntu-latest
@@ -106,6 +84,7 @@ jobs:
             # Assuming code passes, run tests
             - name: Run mcdev-tests
               run: npm run test
+
     lintandTest22:
         name: lint & test w/ node v22
         runs-on: ubuntu-latest
@@ -121,6 +100,31 @@ jobs:
             - uses: actions/setup-node@v4
               with:
                   node-version: 22
+                  registry-url: https://registry.npmjs.org/
+
+            - run: npm ci --ignore-scripts
+
+            - run: npm run lint
+
+            # Assuming code passes, run tests
+            - name: Run mcdev-tests
+              run: npm run test
+
+    lintandTest23:
+        name: lint & test w/ node v23
+        runs-on: ubuntu-latest
+        permissions:
+            actions: read
+            contents: read
+            security-events: write
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 23
                   registry-url: https://registry.npmjs.org/
 
             - run: npm ci --ignore-scripts
