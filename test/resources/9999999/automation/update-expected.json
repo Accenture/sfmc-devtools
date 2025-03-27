@@ -1,5 +1,5 @@
 {
-    "description": "updated on deploy",
+    "description": "bla bla",
     "key": "testExisting_automation",
     "name": "testExisting_automation",
     "r__folder_Path": "my automations",
@@ -14,32 +14,54 @@
         {
             "activities": [
                 {
-                    "name": "testExisting_dataExtract",
+                    "r__key": "testExisting_dataExtract",
                     "r__type": "dataExtract"
                 },
                 {
-                    "name": "testExisting_emailSend",
+                    "r__key": "testExisting_emailSend",
                     "r__type": "emailSend"
                 },
                 {
-                    "name": "testExisting_fileTransfer",
+                    "r__key": "testExisting_fileTransfer",
                     "r__type": "fileTransfer"
                 },
                 {
-                    "name": "testExisting_importFile",
+                    "r__key": "testExisting_importFile",
                     "r__type": "importFile"
                 },
                 {
-                    "name": "testExisting_query",
+                    "r__key": "testExisting_query",
                     "r__type": "query"
                 },
                 {
-                    "name": "testExisting_script",
+                    "r__key": "testExisting_script",
                     "r__type": "script"
+                },
+                {
+                    "r__key": "testExisting_automation__s1.7",
+                    "r__type": "verification"
                 }
             ],
             "name": ""
         }
     ],
-    "type": "scheduled"
+    "type": "scheduled",
+    "notifications": [
+        {
+            "email": ["complete@test.accenture.com"],
+            "message": "",
+            "type": "Complete"
+        },
+        {
+            "email": ["error@test.accenture.com"],
+            "message": "test",
+            "type": "Error"
+        }
+    ],
+    "createdDate": "2022-01-12T08:41:35.773Z",
+    "createdName": "Tom Tester",
+    "modifiedDate": "2024-11-04T17:42:13.143Z",
+    "modifiedName": "Jörn Berkefeld",
+    "pausedDate": "2025-03-14T15:21:57.62Z",
+    "pausedName": "Jörn Berkefeld"
 }

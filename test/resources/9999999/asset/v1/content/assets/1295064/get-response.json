@@ -1,6 +1,6 @@
 {
     "id": 1295064,
-    "customerKey": "mcdev-issue-1157",
+    "customerKey": "testExisting_asset_htmlblock",
     "objectID": "972974ed-dc44-4df2-ab6e-53bae9070339",
     "assetType": {
         "id": 197,
@@ -8,9 +8,9 @@
         "displayName": "HTML Block"
     },
     "fileProperties": {
-        "fileName": "mcdev-issue-1157-Mcdev-strips-content"
+        "fileName": "testExisting_asset_htmlblock-Mcdev-strips-content"
     },
-    "name": "mcdev-issue-1157-Mcdev-strips-content",
+    "name": "testExisting_asset_htmlblock-Mcdev-strips-content",
     "owner": {
         "id": 700301950,
         "email": "joern.berkefeld@accenture.com",
@@ -45,7 +45,7 @@
         "name": "Content Builder",
         "parentId": 0
     },
-    "content": "<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" role=\"presentation\" style=\"min-width: 100%; \" class=\"stylingblock-content-wrapper\"><tr><td class=\"stylingblock-content-wrapper camarker-inner\"><div>\n  my 1st html\n</div>\n\n%%[ /* my ampscript */ ]%%\n\n<script runat=\"server\">\n// my ssjs\n</script>\n\n<div>\n  my 2nd html\n</div></td></tr></table>",
+    "content": "<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" role=\"presentation\" style=\"min-width: 100%; \" class=\"stylingblock-content-wrapper\"><tr><td class=\"stylingblock-content-wrapper camarker-inner\"><div>\n  my 1st html\n</div>\n\n%%[ /* my ampscript */ ]%%\n\n<script runat=\"server\">\n// my ssjs\n</script>\n\n<div>\n  my 2nd html\n</div>\n<div>%%=ContentBlockById(1295065)=%%</div></td></tr></table>",
     "design": "",
     "meta": {
         "wrapperStyles": {

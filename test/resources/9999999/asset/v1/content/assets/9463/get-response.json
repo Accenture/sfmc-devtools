@@ -1,0 +1,61 @@
+{
+    "id": 9463,
+    "customerKey": "test_coderesource_json",
+    "objectID": "5974959b-c531-404b-9361-e27d0d760b37",
+    "contentType": "application/json",
+    "assetType": {
+        "id": 242,
+        "name": "jsoncoderesource",
+        "displayName": "JSON Code Resource"
+    },
+    "version": 1,
+    "name": "test_coderesource_json",
+    "description": "",
+    "owner": {
+        "id": 710420418,
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld",
+        "userId": "710420418"
+    },
+    "createdDate": "2025-03-25T03:15:22.72-06:00",
+    "createdBy": {
+        "id": 710420418,
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld",
+        "userId": "710420418"
+    },
+    "modifiedDate": "2025-03-25T03:16:40.913-06:00",
+    "modifiedBy": {
+        "id": 710420418,
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld",
+        "userId": "710420418"
+    },
+    "enterpriseId": 1111111,
+    "memberId": 9999999,
+    "status": {
+        "id": 1,
+        "name": "Draft"
+    },
+    "thumbnail": {
+        "thumbnailUrl": "/v1/assets/9463/thumbnail"
+    },
+    "category": {
+        "id": 27675,
+        "name": "mcdev",
+        "parentId": 14914
+    },
+    "content": "{\n\"test\": true\n}",
+    "meta": {
+        "cloudPages": {
+            "publishDate": "2025-03-25 03:16:40.913"
+        }
+    },
+    "availableViews": [],
+    "data": {
+        "site": {
+            "content": "{\"url\":\"https://oss-test.accenture.com/test_coderesource_json\"}"
+        }
+    },
+    "modelVersion": 2
+}

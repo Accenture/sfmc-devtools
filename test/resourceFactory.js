@@ -2,34 +2,22 @@ import fs from 'fs-extra';
 import path from 'node:path';
 import { XMLParser } from 'fast-xml-parser';
 import { Util } from '../lib/util/util.js';
+
+import { fileURLToPath } from 'node:url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const projectRootHelper = __dirname.split(path.sep);
+projectRootHelper.pop();
+const projectRoot = projectRootHelper.join(path.sep) + path.sep;
+
 const parser = new XMLParser();
 const attributeParser = new XMLParser({ ignoreAttributes: false });
-let color;
+/** @type {typeof Util.color} */
+const color = Util.color;
 
-/* eslint-disable unicorn/prefer-ternary */
-if (
-    process.env.VSCODE_AMD_ENTRYPOINT === 'vs/workbench/api/node/extensionHostProcess' ||
-    process.env.VSCODE_CRASH_REPORTER_PROCESS_TYPE === 'extensionHost'
-) {
-    // when we execute the test in a VSCode extension host, we don't want CLI color codes.
-    color = new Proxy(
-        {},
-        {
-            /**
-             * catch-all for color
-             *
-             * @returns {string} empty string
-             */
-            get() {
-                return '';
-            },
-        }
-    );
-} else {
-    // test is executed directly in a command prompt. Use colors.
-    color = Util.color;
-}
-/* eslint-enable unicorn/prefer-ternary */
+export const tWarn = `${color.bgYellow}${color.fgBlack}TEST-WARNING${color.reset}`;
+export const tError = `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}`;
+
+const loadingFile = 'loading server file:///';
 
 /**
  * gets mock SOAP metadata for responding
@@ -38,13 +26,15 @@ if (
  * @param {string} type metadata Type
  * @param {string} mid of Business Unit
  * @param {object|string} filter likely for customer key
- * @returns {string} relevant metadata stringified
+ * @param {boolean} [QueryAllAccounts] get data from other BUs or not
+ * @returns {Promise.<string>} relevant metadata stringified
  */
-async function loadSOAPRecords(mcdevAction, type, mid, filter) {
+async function loadSOAPRecords(mcdevAction, type, mid, filter, QueryAllAccounts) {
     type = type[0].toLowerCase() + type.slice(1);
     const testPath = path.join('test', 'resources', mid.toString(), type, mcdevAction);
-    const filterPath = typeof filter === 'string' && filter ? '-' + filter : filterToPath(filter);
+    const filterPath = getFilterPath(filter, QueryAllAccounts);
     if (await fs.pathExists(testPath + filterPath + '-response.xml')) {
+        console.log(loadingFile + projectRoot + testPath + filterPath + '-response.xml'); // eslint-disable-line no-console
         return fs.readFile(testPath + filterPath + '-response.xml', {
             encoding: 'utf8',
         });
@@ -52,9 +42,7 @@ async function loadSOAPRecords(mcdevAction, type, mid, filter) {
         if (filterPath) {
             /* eslint-disable no-console */
             console.log(
-                `${color.bgYellow}${color.fgBlack}TEST-WARNING${
-                    color.reset
-                }: You are loading your reponse from ${
+                `${tWarn}: You are loading your reponse from ${
                     testPath + '-response.xml'
                 } instead of the more specific ${
                     testPath + filterPath + '-response.xml'
@@ -62,13 +50,14 @@ async function loadSOAPRecords(mcdevAction, type, mid, filter) {
             );
             /* eslint-enable no-console */
         }
+        console.log(loadingFile + projectRoot + testPath + '-response.xml'); // eslint-disable-line no-console
         return fs.readFile(testPath + '-response.xml', {
             encoding: 'utf8',
         });
     }
     /* eslint-disable no-console */
     console.log(
-        `${color.bgRed}${color.fgBlack}TEST-ERROR${color.reset}: Please create file ${
+        `${tError}: Please create file ${
             filterPath ? testPath + filterPath + '-response.xml or ' : ''
         }${testPath + '-response.xml'}`
     );
@@ -80,6 +69,27 @@ async function loadSOAPRecords(mcdevAction, type, mid, filter) {
         encoding: 'utf8',
     });
 }
+
+/**
+ * helper for {@link loadSOAPRecords} to get the filter path
+ *
+ * @param {object|string} filter likely for customer key
+ * @param {boolean} [QueryAllAccounts] get data from other BUs or not
+ * @param {number} [shorten] number of characters to shorten filters by to match windows max file length of 256 chars
+ * @returns {string} filterPath value
+ */
+function getFilterPath(filter, QueryAllAccounts, shorten) {
+    const filterPath =
+        (typeof filter === 'string' && filter ? '-' + filter : filterToPath(filter, shorten)) +
+        (QueryAllAccounts ? '-QAA' : '');
+    if ((filterPath + '-response.xml').length > 256) {
+        shorten ||= 10;
+        return getFilterPath(filter, QueryAllAccounts, --shorten);
+    } else {
+        return filterPath;
+    }
+}
+
 /**
  * main filter to path function
  *
@@ -90,14 +100,16 @@ async function loadSOAPRecords(mcdevAction, type, mid, filter) {
  * @param {object} filter.LeftOperand contains a filter object itself
  * @param {'AND'|'OR'} filter.LogicalOperator string representation of the comparison method
  * @param {object} filter.RightOperand field value to check for
+ * @param {number} [shorten] number of characters to shorten filters by to match windows max file length of 256 chars
  * @returns {string} string represenation of the entire filter
  */
-export function filterToPath(filter) {
+export function filterToPath(filter, shorten) {
     if (filter) {
-        return '-' + _filterToPath(filter);
+        return '-' + _filterToPath(filter, shorten);
     }
     return '';
 }
+
 /**
  * helper for filterToPath
  *
@@ -108,23 +120,33 @@ export function filterToPath(filter) {
  * @param {object} filter.LeftOperand contains a filter object itself
  * @param {'AND'|'OR'} filter.LogicalOperator string representation of the comparison method
  * @param {object} filter.RightOperand field value to check for
+ * @param {number} [shorten] number of characters to shorten filters by to match windows max file length of 256 chars
  * @returns {string} string represenation of the entire filter
  */
-function _filterToPath(filter) {
+function _filterToPath(filter, shorten) {
     if (filter.Property && filter.SimpleOperator) {
-        return `${filter.Property}${filter.SimpleOperator.replace('equals', '=')}${
-            filter.Value === undefined ? '' : filter.Value
-        }`;
+        let value;
+        if (filter.Value === undefined) {
+            value = '';
+        } else if (Array.isArray(filter.Value)) {
+            value = shorten
+                ? filter.Value.map((val) => val.slice(0, Math.max(0, shorten))).join(',')
+                : filter.Value.join(',');
+        } else {
+            value = shorten ? filter.Value.slice(0, Math.max(0, shorten)) : filter.Value;
+        }
+        return `${filter.Property}${filter.SimpleOperator.replace('equals', '=')}${value}`;
     } else if (filter.LeftOperand && filter.LogicalOperator && filter.RightOperand) {
         return (
-            _filterToPath(filter.LeftOperand) +
+            _filterToPath(filter.LeftOperand, shorten) +
             filter.LogicalOperator +
-            _filterToPath(filter.RightOperand)
+            _filterToPath(filter.RightOperand, shorten)
         );
     } else {
         throw new Error('unknown filter type');
     }
 }
+
 /**
  * based on request, respond with different soap data
  *
@@ -142,17 +164,22 @@ export const handleSOAPRequest = async (config) => {
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 jObj.Envelope.Body.RetrieveRequestMsg.RetrieveRequest.ObjectType,
                 jObj.Envelope.Header.fueloauth,
-                jObj.Envelope.Body.RetrieveRequestMsg.RetrieveRequest.Filter
+                jObj.Envelope.Body.RetrieveRequestMsg.RetrieveRequest.Filter,
+                jObj.Envelope.Body.RetrieveRequestMsg.RetrieveRequest.QueryAllAccounts
             );
 
             break;
         }
         case 'Create': {
+            let filter = null;
+            if (fullObj.Envelope.Body.CreateRequest.Objects['@_xsi:type'] === 'DataFolder') {
+                filter = `ContentType=${fullObj.Envelope.Body.CreateRequest.Objects.ContentType},Name=${fullObj.Envelope.Body.CreateRequest.Objects.Name},ParentFolderID=${fullObj.Envelope.Body.CreateRequest.Objects.ParentFolder.ID}`;
+            }
             responseXML = await loadSOAPRecords(
                 config.headers.SOAPAction.toLocaleLowerCase(),
                 fullObj.Envelope.Body.CreateRequest.Objects['@_xsi:type'],
                 jObj.Envelope.Header.fueloauth,
-                null
+                filter
             );
 
             break;
@@ -240,8 +267,11 @@ export const handleRESTRequest = async (config) => {
             config.baseURL + (config.url.startsWith('/') ? config.url.slice(1) : config.url)
         );
         let filterName;
+        let filterBody;
         if (urlObj.searchParams.get('$filter')) {
             filterName = urlObj.searchParams.get('$filter').split(' eq ')[1];
+        } else if (urlObj.searchParams.get('action')) {
+            filterName = urlObj.searchParams.get('action');
         }
         const testPath = path
             .join(
@@ -255,8 +285,32 @@ export const handleRESTRequest = async (config) => {
         const testPathFilter = filterName
             ? testPath +
               '-' +
-              urlObj.searchParams.get('$filter').replaceAll(' eq ', '=').replaceAll(' ', '')
+              (urlObj.searchParams.get('$filter') || urlObj.searchParams.get('action'))
+                  .replaceAll(' eq ', '=')
+                  .replaceAll(' ', '')
             : null;
+        if (!testPathFilter && config.method === 'post' && config.data) {
+            const simpleOperators = { equal: '=', in: 'IN' };
+            const data = JSON.parse(config.data);
+            const myObj = data.query?.rightOperand || data.query;
+            if (myObj) {
+                const op = simpleOperators[myObj.simpleOperator];
+                filterBody = `${myObj.property}${op}${op === 'IN' ? myObj.value.join(',') : myObj.value}`;
+            } else if (config.url === '/email/v1/category') {
+                const data = JSON.parse(config.data);
+
+                filterBody = Object.keys(data)
+                    .map((key) => `${key}=${data[key]}`)
+                    .join(',');
+            } else if (config.url === '/asset/v1/content/assets/') {
+                const data = JSON.parse(config.data);
+
+                if (data.customerKey) {
+                    filterBody = 'key=' + data.customerKey;
+                }
+            }
+        }
+        const testPathFilterBody = filterBody ? testPath + '-' + filterBody : null;
         if (testPathFilter && (await fs.pathExists(testPathFilter + '.json'))) {
             // build filter logic to ensure templating works
             if (filterName) {
@@ -265,10 +319,13 @@ export const handleRESTRequest = async (config) => {
                         encoding: 'utf8',
                     })
                 );
-                response.items = response.items.filter((def) => def.name == filterName);
-                response.count = response.items.length;
+                if (response.items) {
+                    response.items = response.items.filter((def) => def.name == filterName);
+                }
+                console.log(loadingFile + projectRoot + testPathFilter + '.json'); // eslint-disable-line no-console
                 return [200, JSON.stringify(response)];
             } else {
+                console.log(loadingFile + projectRoot + testPathFilter + '.json'); // eslint-disable-line no-console
                 return [
                     200,
                     await fs.readFile(testPathFilter + '.json', {
@@ -277,9 +334,26 @@ export const handleRESTRequest = async (config) => {
                 ];
             }
         } else if (testPathFilter && (await fs.pathExists(testPathFilter + '.txt'))) {
+            console.log(loadingFile + projectRoot + testPathFilter + '.txt'); // eslint-disable-line no-console
             return [
                 200,
                 await fs.readFile(testPathFilter + '.txt', {
+                    encoding: 'utf8',
+                }),
+            ];
+        } else if (testPathFilterBody && (await fs.pathExists(testPathFilterBody + '.json'))) {
+            console.log(loadingFile + projectRoot + testPathFilterBody + '.json'); // eslint-disable-line no-console
+            return [
+                200,
+                await fs.readFile(testPathFilterBody + '.json', {
+                    encoding: 'utf8',
+                }),
+            ];
+        } else if (testPathFilterBody && (await fs.pathExists(testPathFilterBody + '.txt'))) {
+            console.log(loadingFile + projectRoot + testPathFilterBody + '.txt'); // eslint-disable-line no-console
+            return [
+                200,
+                await fs.readFile(testPathFilterBody + '.txt', {
                     encoding: 'utf8',
                 }),
             ];
@@ -287,12 +361,22 @@ export const handleRESTRequest = async (config) => {
             if (testPathFilter) {
                 /* eslint-disable no-console */
                 console.log(
-                    `${color.bgYellow}${color.fgBlack}TEST-WARNING${
-                        color.reset
-                    }: You are loading your reponse from ${
+                    `${tWarn}: You are loading your reponse from ${
                         testPath + '.json'
                     } instead of the more specific ${
                         testPathFilter + '.json'
+                    }. Make sure this is intended`
+                );
+                /* eslint-enable no-console */
+            }
+
+            if (testPathFilterBody) {
+                /* eslint-disable no-console */
+                console.log(
+                    `${tWarn}: You are loading your reponse from ${
+                        testPath + '.json'
+                    } instead of the more specific ${
+                        testPathFilterBody + '.json'
                     }. Make sure this is intended`
                 );
                 /* eslint-enable no-console */
@@ -307,8 +391,11 @@ export const handleRESTRequest = async (config) => {
                 );
                 response.items = response.items.filter((def) => def.name == filterName);
                 response.count = response.items.length;
+                console.log(loadingFile + projectRoot + testPath + '.json'); // eslint-disable-line no-console
                 return [200, JSON.stringify(response)];
             } else {
+                console.log(loadingFile + projectRoot + testPath + '.json'); // eslint-disable-line no-console
+
                 return [
                     200,
                     await fs.readFile(testPath + '.json', {
@@ -320,9 +407,7 @@ export const handleRESTRequest = async (config) => {
             if (testPathFilter) {
                 /* eslint-disable no-console */
                 console.log(
-                    `${color.bgYellow}${color.fgBlack}TEST-WARNING${
-                        color.reset
-                    }: You are loading your reponse from ${
+                    `${tWarn}: You are loading your reponse from ${
                         testPath + '.txt'
                     } instead of the more specific ${
                         testPathFilter + '.txt'
@@ -330,7 +415,18 @@ export const handleRESTRequest = async (config) => {
                 );
                 /* eslint-enable no-console */
             }
-
+            if (testPathFilterBody) {
+                /* eslint-disable no-console */
+                console.log(
+                    `${tWarn}: You are loading your reponse from ${
+                        testPath + '.txt'
+                    } instead of the more specific ${
+                        testPathFilterBody + '.txt'
+                    }. Make sure this is intended`
+                );
+                /* eslint-enable no-console */
+            }
+            console.log(loadingFile + projectRoot + testPath + '.txt'); // eslint-disable-line no-console
             return [
                 200,
                 await fs.readFile(testPath + '.txt', {
@@ -340,11 +436,7 @@ export const handleRESTRequest = async (config) => {
         } else {
             /* eslint-disable no-console */
             console.log(
-                `${color.bgRed}${color.fgBlack}TEST-ERROR${
-                    color.reset
-                }: Please create file ${testPath}.json/.txt${
-                    filterName ? ` or ${testPathFilter}.json/.txt` : ''
-                }`
+                `${tError}: Please create file ${testPath}.json/.txt${filterName ? ` or ${testPathFilter}.json/.txt` : testPathFilterBody ? ` or ${testPathFilterBody}.json/.txt` : ''}`
             );
             /* eslint-enable no-console */
             process.exitCode = 404;

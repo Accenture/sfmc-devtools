@@ -7,7 +7,6 @@ import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const file = chaiFiles.file;
 
 describe('type: dataExtension', () => {
     beforeEach(() => {
@@ -23,13 +22,13 @@ describe('type: dataExtension', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['dataExtension']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.dataExtension ? Object.keys(result.dataExtension).length : 0,
-                1,
-                'only one dataExtension expected'
+                8,
+                'unexpected number of dataExtension'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_dataExtension', 'dataExtension'),
@@ -39,9 +38,9 @@ describe('type: dataExtension', () => {
             );
             // check if MD file was created and equals expectations
             expect(
-                file(testUtils.getActualDoc('testExisting_dataExtension', 'dataExtension'))
+                await testUtils.getActualDoc('testExisting_dataExtension', 'dataExtension')
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'dataExtension', 'retrieve', 'md'))
+                await testUtils.getExpectedFile('9999999', 'dataExtension', 'retrieve', 'md')
             );
 
             assert.equal(
@@ -56,7 +55,7 @@ describe('type: dataExtension', () => {
             // WHEN
             await handler.retrieve('testInstance/_ParentBU_', ['dataExtension']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -76,15 +75,13 @@ describe('type: dataExtension', () => {
             );
             // check if MD file was created and equals expectations
             expect(
-                file(
-                    testUtils.getActualDoc(
-                        'testExisting_dataExtensionShared',
-                        'dataExtension',
-                        '_ParentBU_'
-                    )
+                await testUtils.getActualDoc(
+                    'testExisting_dataExtensionShared',
+                    'dataExtension',
+                    '_ParentBU_'
                 )
             ).to.equal(
-                file(testUtils.getExpectedFile('1111111', 'dataExtension', 'retrieve', 'md'))
+                await testUtils.getExpectedFile('1111111', 'dataExtension', 'retrieve', 'md')
             );
 
             assert.equal(
@@ -105,7 +102,7 @@ describe('type: dataExtension', () => {
             // WHEN
             const deployResult = await handler.deploy('testInstance/testBU', ['dataExtension']);
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
 
             assert.equal(
                 deployResult['testInstance/testBU']?.dataExtension
@@ -119,8 +116,8 @@ describe('type: dataExtension', () => {
             const result = cache.getCache();
             assert.equal(
                 result.dataExtension ? Object.keys(result.dataExtension).length : 0,
-                3,
-                'three dataExtensions expected'
+                10,
+                'unexpected number of dataExtensions'
             );
             // insert
             assert.deepEqual(
@@ -136,7 +133,7 @@ describe('type: dataExtension', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                11,
+                10,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -146,7 +143,7 @@ describe('type: dataExtension', () => {
             // WHEN
             const deployResult = await handler.deploy('testInstance/_ParentBU_', ['dataExtension']);
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
 
             assert.equal(
                 deployResult['testInstance/_ParentBU_']?.dataExtension
@@ -185,7 +182,7 @@ describe('type: dataExtension', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                8,
+                7,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -197,7 +194,7 @@ describe('type: dataExtension', () => {
 
             const deployResult = await handler.deploy('testInstance/_ParentBU_', ['dataExtension']);
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
 
             assert.equal(
                 deployResult['testInstance/_ParentBU_']?.dataExtension
@@ -236,7 +233,7 @@ describe('type: dataExtension', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                12,
+                11,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -252,11 +249,7 @@ describe('type: dataExtension', () => {
                 ['testExisting_dataExtension'],
                 'testSourceMarket'
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'retrieveAsTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'retrieveAsTemplate should not have thrown an error');
 
             // WHEN
             assert.equal(
@@ -276,14 +269,10 @@ describe('type: dataExtension', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'dataExtension',
-                'testExisting_dataExtension',
-                'testTargetMarket'
+                ['testExisting_dataExtension'],
+                ['testTargetMarket']
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_dataExtension', 'dataExtension'),
                 await testUtils.getExpectedJson('9999999', 'dataExtension', 'build'),
@@ -305,9 +294,9 @@ describe('type: dataExtension', () => {
                 'testInstance/testBU',
                 'dataExtension',
                 ['testExisting_dataExtension'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             // WHEN
             assert.equal(
                 result.dataExtension ? Object.keys(result.dataExtension).length : 0,
@@ -326,14 +315,10 @@ describe('type: dataExtension', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'dataExtension',
-                'testExisting_dataExtension',
-                'testTargetMarket'
+                ['testExisting_dataExtension'],
+                ['testTargetMarket']
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_dataExtension', 'dataExtension'),
@@ -358,7 +343,7 @@ describe('type: dataExtension', () => {
                 'testExisting_dataExtension'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
 
             assert.equal(isDeleted, true, 'should have deleted the item');
             return;
@@ -372,7 +357,7 @@ describe('type: dataExtension', () => {
                 'testExisting_dataExtension.LastName'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
 
             assert.equal(isDeleted, true, 'should have deleted the item');
             return;
@@ -388,11 +373,7 @@ describe('type: dataExtension', () => {
                 ['testExisting_dataExtension']
             );
             // THEN
-            assert.equal(
-                process.exitCode,
-                false,
-                'getFilesToCommit should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'getFilesToCommit should not have thrown an error');
             assert.equal(fileList.length, 2, 'expected only 2 file paths (json, md)');
 
             assert.equal(

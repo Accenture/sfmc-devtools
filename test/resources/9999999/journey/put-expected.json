@@ -549,7 +549,7 @@
             "metaData": {
                 "scheduleState": "No Schedule",
                 "sourceInteractionId": "00000000-0000-0000-0000-000000000000",
-                "eventDefinitionKey": "APIEvent-60130566-e2fe-eb29-4140-15c27093a80b",
+                "r__event_key": "APIEvent-60130566-e2fe-eb29-4140-15c27093a80b",
                 "chainType": "None",
                 "configurationRequired": false,
                 "iconUrl": "/events/images/icon_journeyBuilder-event-api-blue.svg",

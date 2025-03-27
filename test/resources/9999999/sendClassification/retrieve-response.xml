@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:31b53ebd-b853-4f8c-b952-f176aed80aa9</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:cac816ee-0b59-4748-b629-4475b198708f</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-94d58fe7-c739-4593-b44e-86af9511d712">
+                <wsu:Created>2024-04-15T21:11:54Z</wsu:Created>
+                <wsu:Expires>2024-04-15T21:16:54Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>e7197c3d-0483-44fd-93ad-d7dd2e0cfb56</RequestID>
+            <Results xsi:type="SendClassification">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-22T11:53:00</CreatedDate>
+                <ModifiedDate>2016-07-22T11:53:00</ModifiedDate>
+                <ObjectID>8ecfb80f-3550-e611-96fe-38eaa7142c61</ObjectID>
+                <CustomerKey>Default Commercial</CustomerKey>
+                <SendClassificationType>Marketing</SendClassificationType>
+                <Name>Default Commercial</Name>
+                <Description>Default Commercial Send Classification</Description>
+                <SenderProfile>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID>7acfb80f-3550-e611-96fe-38eaa7142c61</ObjectID>
+                    <CustomerKey>Default</CustomerKey>
+                </SenderProfile>
+                <DeliveryProfile>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID>163f8417-13f7-e911-a2d8-1402ec938a35</ObjectID>
+                    <CustomerKey>Default</CustomerKey>
+                </DeliveryProfile>
+            </Results>
+            <Results xsi:type="SendClassification">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-07-22T11:53:00</CreatedDate>
+                <ModifiedDate>2016-07-22T11:53:00</ModifiedDate>
+                <ObjectID>90cfb80f-3550-e611-96fe-38eaa7142c61</ObjectID>
+                <CustomerKey>Default Transactional</CustomerKey>
+                <SendClassificationType>Operational</SendClassificationType>
+                <Name>Default Transactional</Name>
+                <Description>Default Transactional Send Classification</Description>
+                <SenderProfile>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID>7acfb80f-3550-e611-96fe-38eaa7142c61</ObjectID>
+                    <CustomerKey>Default</CustomerKey>
+                </SenderProfile>
+                <DeliveryProfile>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID>163f8417-13f7-e911-a2d8-1402ec938a35</ObjectID>
+                    <CustomerKey>Default</CustomerKey>
+                </DeliveryProfile>
+            </Results>
+            <Results xsi:type="SendClassification">
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2016-08-31T11:29:00</CreatedDate>
+                <ModifiedDate>2024-04-15T15:33:00</ModifiedDate>
+                <ObjectID>95da425b-a06f-e611-96fe-38eaa7142c61</ObjectID>
+                <CustomerKey>testExisting_sendClassification</CustomerKey>
+                <SendClassificationType>Marketing</SendClassificationType>
+                <Name>testExisting_sendClassification</Name>
+                <Description />
+                <SenderProfile>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID>a75d452b-7ef4-eb11-b82d-48df37d1da95</ObjectID>
+                    <CustomerKey>testExisting_senderProfile</CustomerKey>
+                </SenderProfile>
+                <DeliveryProfile>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID>163f8417-13f7-e911-a2d8-1402ec938a35</ObjectID>
+                    <CustomerKey>Default</CustomerKey>
+                </DeliveryProfile>
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>

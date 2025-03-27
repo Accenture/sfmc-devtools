@@ -1,0 +1,41 @@
+{
+    "customerKey": "testExisting_asset_htmlblock-matchName",
+    "assetType": {
+        "name": "htmlblock",
+        "displayName": "HTML Block"
+    },
+    "fileProperties": {
+        "fileName": "dont strip non ssjs content"
+    },
+    "name": "dont strip non ssjs content",
+    "owner": {
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld (ASGR)"
+    },
+    "createdDate": "2024-01-08T08:26:58.277-06:00",
+    "createdBy": {
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld (ASGR)"
+    },
+    "modifiedDate": "2024-01-08T08:28:01.6-06:00",
+    "modifiedBy": {
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld (ASGR)"
+    },
+    "memberId": 9999999,
+    "status": {
+        "name": "Draft"
+    },
+    "design": "",
+    "meta": {
+        "wrapperStyles": {
+            "mobile": {
+                "visible": true
+            },
+            "styling": {}
+        }
+    },
+    "availableViews": [],
+    "modelVersion": 2,
+    "r__folder_Path": "Content Builder"
+}

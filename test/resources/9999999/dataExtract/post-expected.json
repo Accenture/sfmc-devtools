@@ -1,5 +1,5 @@
 {
-    "createdBy": 700304523,
+    "createdBy": "Jörn Berkefeld",
     "dataFields": [
         {
             "name": "ColumnDelimiter",
@@ -8,8 +8,7 @@
         },
         {
             "name": "DECustomerKey",
-            "type": "string",
-            "value": "testExisting_dataExtension"
+            "type": "string"
         },
         {
             "name": "HasColumnHeaders",
@@ -31,7 +30,8 @@
     "fileSpec": "testNew-%%Year%%-%%Month%%-%%Day%%",
     "intervalType": 0,
     "key": "testNew_dataExtract",
-    "modifiedBy": 700304523,
+    "modifiedBy": "Jörn Berkefeld",
     "name": "testNew_dataExtract",
+    "r__dataExtension_key": "testExisting_dataExtension",
     "r__dataExtractType_name": "Data Extension Extract"
 }

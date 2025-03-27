@@ -1,0 +1,204 @@
+{
+    "type": "APIEvent",
+    "name": "testExisting_event",
+    "description": "updated on deploy",
+    "mode": "Production",
+    "eventDefinitionKey": "testExisting_event",
+    "entrySourceGroupConfigUrl": "jb:///data/entry/api-event/entrysourcegroupconfig.json",
+    "iconUrl": "/images/icon_journeyBuilder-event-api-blue.svg",
+    "schema": {
+        "fields": [
+            {
+                "name": "ContactId",
+                "dataType": "Text",
+                "maxLength": "18",
+                "isNullable": false,
+                "isPrimaryKey": true
+            },
+            {
+                "name": "Type",
+                "dataType": "Text",
+                "maxLength": "50",
+                "isNullable": false,
+                "isPrimaryKey": false
+            },
+            {
+                "name": "Status",
+                "dataType": "Text",
+                "maxLength": "50",
+                "isNullable": false,
+                "isPrimaryKey": true
+            },
+            {
+                "name": "Respondent",
+                "dataType": "Text",
+                "maxLength": "256",
+                "isNullable": true,
+                "isPrimaryKey": false
+            },
+            {
+                "name": "FirstName",
+                "dataType": "Text",
+                "maxLength": "256",
+                "isNullable": true,
+                "isPrimaryKey": false
+            },
+            {
+                "name": "LastName",
+                "dataType": "Text",
+                "maxLength": "256",
+                "isNullable": true,
+                "isPrimaryKey": false
+            },
+            {
+                "name": "PreferredLanguage",
+                "dataType": "Text",
+                "maxLength": "50",
+                "isNullable": true,
+                "isPrimaryKey": false
+            },
+            {
+                "name": "TouchPoint",
+                "dataType": "Text",
+                "maxLength": "256",
+                "isNullable": true,
+                "isPrimaryKey": false
+            },
+            {
+                "name": "Datestamp",
+                "dataType": "Date",
+                "defaultValue": "GetDate()",
+                "isNullable": true,
+                "isPrimaryKey": false
+            },
+            {
+                "name": "StartDate",
+                "dataType": "Date",
+                "isNullable": true,
+                "defaultValue": "",
+                "isPrimaryKey": false
+            },
+            {
+                "name": "EndDate",
+                "dataType": "Date",
+                "isNullable": true,
+                "isPrimaryKey": false
+            },
+            {
+                "name": "BroadcastedNotificationDate",
+                "dataType": "Date",
+                "isNullable": true,
+                "defaultValue": "",
+                "isPrimaryKey": false
+            },
+            {
+                "name": "FirstReminderDate",
+                "dataType": "Date",
+                "isNullable": true,
+                "isPrimaryKey": false
+            },
+            {
+                "name": "SecondReminderDate",
+                "dataType": "Date",
+                "isNullable": true,
+                "isPrimaryKey": false
+            },
+            {
+                "name": "Title",
+                "dataType": "Text",
+                "maxLength": "256",
+                "isNullable": true,
+                "isPrimaryKey": false
+            },
+            {
+                "name": "DisplayName",
+                "dataType": "Text",
+                "maxLength": "256",
+                "isNullable": true,
+                "isPrimaryKey": false
+            },
+            {
+                "name": "Text",
+                "dataType": "Text",
+                "maxLength": "256",
+                "isNullable": true,
+                "isPrimaryKey": false
+            },
+            {
+                "name": "Description",
+                "dataType": "Text",
+                "maxLength": "4000",
+                "isNullable": true,
+                "isPrimaryKey": false
+            },
+            {
+                "name": "Channel",
+                "dataType": "Text",
+                "maxLength": "256",
+                "isNullable": true,
+                "isPrimaryKey": false
+            },
+            {
+                "name": "FirstReminderChannel",
+                "dataType": "Text",
+                "maxLength": "256",
+                "isNullable": true,
+                "isPrimaryKey": false
+            },
+            {
+                "name": "SecondReminderChannel",
+                "dataType": "Text",
+                "maxLength": "256",
+                "isNullable": true,
+                "isPrimaryKey": false
+            },
+            {
+                "name": "Email",
+                "dataType": "Email",
+                "maxLength": "",
+                "isNullable": true,
+                "isPrimaryKey": false
+            },
+            {
+                "name": "ArticleOrTaskID",
+                "dataType": "Text",
+                "maxLength": "18",
+                "isNullable": false,
+                "isPrimaryKey": true
+            },
+            {
+                "name": "Points",
+                "dataType": "Number",
+                "maxLength": "",
+                "isNullable": true,
+                "isPrimaryKey": false
+            },
+            {
+                "name": "TaskType",
+                "dataType": "Text",
+                "maxLength": "255",
+                "isNullable": true,
+                "isPrimaryKey": false
+            },
+            {
+                "name": "TaskArea",
+                "dataType": "Text",
+                "maxLength": "255",
+                "isNullable": true,
+                "isPrimaryKey": false
+            }
+        ],
+        "sendableCustomObjectField": "ContactId",
+        "sendableSubscriberField": "_SubscriberKey",
+        "id": "f2cc2b21-d73a-ef11-a5c8-5cba2c702db8",
+        "name": "testExisting_event - 2024-07-05T080154625"
+    },
+    "isVisibleInPicker": false,
+    "arguments": {
+        "eventDefinitionKey": "testExisting_event",
+        "dataExtensionId": "f2cc2b21-d73a-ef11-a5c8-5cba2c702db8"
+    },
+    "isPlatformObject": false,
+    "id": "d8d57832-ce9c-4bf6-8c24-3044ece5dffd",
+    "dataExtensionId": "f2cc2b21-d73a-ef11-a5c8-5cba2c702db8"
+}

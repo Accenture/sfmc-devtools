@@ -9,14 +9,54 @@
         }
     },
     "options": {
+        "formatOnSave": true,
+        "formatErrorLog": false,
         "deployment": {
             "commitHistory": 10,
             "sourceTargetMapping": {
                 "deployment-source": "deployment-target"
             },
+            "branchSourceTargetMapping": {
+                "sit": {
+                    "deployment-sit-source": "deployment-sit-target"
+                },
+                "uat": {
+                    "deployment-uat-source": "deployment-uat-target"
+                },
+                "prod": {
+                    "deployment-prod-source": "deployment-prod-target"
+                }
+            },
             "targetBranchBuMapping": {
                 "release/*": "MySandbox/QA-DE",
                 "master": ["MyProduction/PROD-DE", "MyProduction/PROD-NL"]
+            }
+        },
+        "validation": {
+            "retrieve": {
+                "noAmpscriptHtmlTag": "warn",
+                "noGuidKeys": "warn",
+                "noRootFolder": "warn"
+            },
+            "buildDefinition": {
+                "noAmpscriptHtmlTag": "warn",
+                "noGuidKeys": "warn",
+                "noRootFolder": "warn",
+                "filterPrefixByBu": "error"
+            },
+            "deploy": {
+                "noAmpscriptHtmlTag": "warn",
+                "noGuidKeys": "warn",
+                "noRootFolder": "warn",
+                "filterPrefixByBu": "error",
+                "overrides": [
+                    {
+                        "type": ["journey"],
+                        "options": {
+                            "noGuidKeys": "warn"
+                        }
+                    }
+                ]
             }
         },
         "documentType": "md",
@@ -55,28 +95,85 @@
             "prefixUpper": "TESTTEMPLATED_",
             "description": "foobar",
             "countryCodeIn": "'testTarget'"
+        },
+        "testBlacklistMarket": {
+            "mid": "1111111",
+            "buName": "testBUTarget",
+            "secret": "target secret",
+            "sharedFolder": "/Shared Data Extensions/test target",
+            "suffix": "_testTarget",
+            "prefix": "testBlacklist_",
+            "prefixUpper": "TESTTEMPLATED_",
+            "description": "foobar",
+            "countryCodeIn": "'testTarget'"
         }
     },
-    "marketList": {},
+    "marketList": {
+        "deployment-source": {
+            "description": "Define one 1:1 BU-Market combo here to as source for automated creation of deployment packages; you can create more than one source market list",
+            "testInstance/testBU": "testSourceMarket"
+        },
+        "deployment-target": {
+            "description": "Define n BU-Market combo here to as target for automated creation of deployment packages; you can create more than one target market list and they can be as complex as you like",
+            "testInstance/testBU": ["testSourceMarket", "testTargetMarket"],
+            "testInstance/_ParentBU_": ["testTargetMarket"]
+        },
+        "parent": {
+            "testInstance/_ParentBU_": ["testBlacklistMarket"]
+        }
+    },
     "metaDataTypes": {
         "documentOnRetrieve": ["user", "automation", "dataExtension", "role"],
         "retrieve": [
+            "asset",
+            "attributeGroup",
+            "attributeSet",
+            "automation",
+            "dataExtension",
+            "dataExtract",
+            "domainVerification",
+            "emailSend",
+            "event",
+            "fileLocation",
+            "fileTransfer",
+            "importFile",
+            "journey",
+            "list",
+            "mobileCode",
+            "mobileKeyword",
+            "mobileMessage",
+            "query",
+            "role",
+            "script",
+            "sendClassification",
+            "senderProfile",
+            "transactionalEmail",
+            "transactionalPush",
+            "transactionalSMS",
+            "verification"
+        ],
+        "createDeltaPkg": [
             "asset",
             "automation",
             "dataExtension",
             "dataExtract",
             "emailSend",
+            "event",
             "fileTransfer",
-            "fileLocation",
+            "filter",
             "importFile",
-            "list",
+            "journey",
             "mobileCode",
             "mobileKeyword",
+            "mobileMessage",
             "query",
-            "role",
             "script",
-            "triggeredSend"
+            "sendClassification",
+            "senderProfile",
+            "transactionalPush",
+            "transactionalSMS",
+            "verification"
         ]
     },
-    "version": "6.0.2"
+    "version": "7.10.1"
 }

@@ -21,7 +21,7 @@ describe('type: dataExtract', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['dataExtract']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -36,7 +36,7 @@ describe('type: dataExtract', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                6,
+                9,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -53,7 +53,7 @@ describe('type: dataExtract', () => {
 
             await handler.deploy('testInstance/testBU', ['dataExtract']);
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -76,7 +76,7 @@ describe('type: dataExtract', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                8,
+                13,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -94,7 +94,7 @@ describe('type: dataExtract', () => {
                 ['testExisting_dataExtract'],
                 'testSourceMarket'
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.dataExtract ? Object.keys(result.dataExtract).length : 0,
                 1,
@@ -109,14 +109,10 @@ describe('type: dataExtract', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'dataExtract',
-                'testExisting_dataExtract',
-                'testTargetMarket'
+                ['testExisting_dataExtract'],
+                ['testTargetMarket']
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_dataExtract', 'dataExtract'),
                 await testUtils.getExpectedJson('9999999', 'dataExtract', 'build'),
@@ -124,7 +120,7 @@ describe('type: dataExtract', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                6,
+                9,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -138,9 +134,9 @@ describe('type: dataExtract', () => {
                 'testInstance/testBU',
                 'dataExtract',
                 ['testExisting_dataExtract'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.dataExtract ? Object.keys(result.dataExtract).length : 0,
                 1,
@@ -155,14 +151,10 @@ describe('type: dataExtract', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'dataExtract',
-                'testExisting_dataExtract',
-                'testTargetMarket'
+                ['testExisting_dataExtract'],
+                ['testTargetMarket']
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_dataExtract', 'dataExtract'),
                 await testUtils.getExpectedJson('9999999', 'dataExtract', 'build'),
@@ -170,7 +162,7 @@ describe('type: dataExtract', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                6,
+                9,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

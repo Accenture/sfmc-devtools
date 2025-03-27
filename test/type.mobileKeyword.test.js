@@ -7,7 +7,6 @@ import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const file = chaiFiles.file;
 
 describe('type: mobileKeyword', () => {
     beforeEach(() => {
@@ -23,7 +22,7 @@ describe('type: mobileKeyword', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['mobileKeyword']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -40,14 +39,12 @@ describe('type: mobileKeyword', () => {
                 'saved JSON was not equal expected'
             );
             expect(
-                file(
-                    testUtils.getActualFile(
-                        '4912312345678.TESTEXISTING_KEYWORD',
-                        'mobileKeyword',
-                        'amp'
-                    )
+                await testUtils.getActualFile(
+                    '4912312345678.TESTEXISTING_KEYWORD',
+                    'mobileKeyword',
+                    'amp'
                 )
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'get', 'amp')));
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'mobileKeyword', 'get', 'amp'));
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 2,
@@ -70,7 +67,7 @@ describe('type: mobileKeyword', () => {
                 ['4912312345678.TESTNEW_KEYWORD']
             );
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -85,11 +82,13 @@ describe('type: mobileKeyword', () => {
                 'returned JSON was not equal expected for insert mobileKeyword'
             );
             expect(
-                file(
-                    testUtils.getActualFile('4912312345678.TESTNEW_KEYWORD', 'mobileKeyword', 'amp')
+                await testUtils.getActualFile(
+                    '4912312345678.TESTNEW_KEYWORD',
+                    'mobileKeyword',
+                    'amp'
                 )
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'post-create', 'amp'))
+                await testUtils.getExpectedFile('9999999', 'mobileKeyword', 'post-create', 'amp')
             );
 
             // confirm updated item
@@ -115,7 +114,7 @@ describe('type: mobileKeyword', () => {
                 ['4912312345678.TESTNEW_KEYWORD_BLOCKED']
             );
             // THEN
-            assert.equal(process.exitCode, true, 'deploy should have thrown an error');
+            assert.equal(process.exitCode, 1, 'deploy should have thrown an error');
 
             // check number of API calls
             assert.equal(
@@ -137,11 +136,7 @@ describe('type: mobileKeyword', () => {
                 'testSourceMarket'
             );
             // WHEN
-            assert.equal(
-                process.exitCode,
-                false,
-                'retrieveAsTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'retrieveAsTemplate should not have thrown an error');
             assert.equal(
                 result.mobileKeyword ? Object.keys(result.mobileKeyword).length : 0,
                 1,
@@ -156,15 +151,13 @@ describe('type: mobileKeyword', () => {
                 'returned template JSON was not equal expected'
             );
             expect(
-                file(
-                    testUtils.getActualTemplateFile(
-                        '4912312345678.TESTEXISTING_KEYWORD',
-                        'mobileKeyword',
-                        'amp'
-                    )
+                await testUtils.getActualTemplateFile(
+                    '4912312345678.TESTEXISTING_KEYWORD',
+                    'mobileKeyword',
+                    'amp'
                 )
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'template', 'amp'))
+                await testUtils.getExpectedFile('9999999', 'mobileKeyword', 'template', 'amp')
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -182,9 +175,9 @@ describe('type: mobileKeyword', () => {
                 'testInstance/testBU',
                 'mobileKeyword',
                 ['4912312345678.TESTEXISTING_KEYWORD'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
 
             assert.equal(
                 result.mobileKeyword ? Object.keys(result.mobileKeyword).length : 0,
@@ -200,29 +193,23 @@ describe('type: mobileKeyword', () => {
                 'returned template JSON was not equal expected'
             );
             expect(
-                file(
-                    testUtils.getActualTemplateFile(
-                        '4912312345678.TESTEXISTING_KEYWORD',
-                        'mobileKeyword',
-                        'amp'
-                    )
+                await testUtils.getActualTemplateFile(
+                    '4912312345678.TESTEXISTING_KEYWORD',
+                    'mobileKeyword',
+                    'amp'
                 )
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'template', 'amp'))
+                await testUtils.getExpectedFile('9999999', 'mobileKeyword', 'template', 'amp')
             );
 
             // buildDefinition
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'mobileKeyword',
-                '4912312345678.TESTEXISTING_KEYWORD',
-                'testTargetMarket'
+                ['4912312345678.TESTEXISTING_KEYWORD'],
+                ['testTargetMarket']
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
                 await testUtils.getActualDeployJson(
                     '4912312345678.TESTTEMPLATED_KEYWORD',
@@ -232,14 +219,12 @@ describe('type: mobileKeyword', () => {
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(
-                    testUtils.getActualDeployFile(
-                        '4912312345678.TESTTEMPLATED_KEYWORD',
-                        'mobileKeyword',
-                        'amp'
-                    )
+                await testUtils.getActualDeployFile(
+                    '4912312345678.TESTTEMPLATED_KEYWORD',
+                    'mobileKeyword',
+                    'amp'
                 )
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'mobileKeyword', 'build', 'amp')));
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'mobileKeyword', 'build', 'amp'));
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -259,7 +244,7 @@ describe('type: mobileKeyword', () => {
                 '4912312345678.TESTEXISTING_KEYWORD'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
 
             assert.equal(isDeleted, true, 'should have deleted the item');
             return;
@@ -275,11 +260,7 @@ describe('type: mobileKeyword', () => {
                 ['4912312345678.TESTEXISTING_KEYWORD']
             );
             // THEN
-            assert.equal(
-                process.exitCode,
-                false,
-                'getFilesToCommit should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'getFilesToCommit should not have thrown an error');
             assert.equal(fileList.length, 2, 'expected only 2 file paths');
 
             assert.equal(

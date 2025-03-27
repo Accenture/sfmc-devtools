@@ -1,0 +1,11 @@
+{
+    "c__automation_step": "testNew_automation__s1.7",
+    "notificationEmailAddress": "",
+    "notificationEmailMessage": "",
+    "r__dataExtension_key": "testExisting_dataExtension",
+    "shouldEmailOnFailure": false,
+    "shouldStopOnFailure": false,
+    "value1": 2,
+    "value2": 0,
+    "verificationType": "IsEqualTo"
+}

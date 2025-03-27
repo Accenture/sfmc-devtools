@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>CreateResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:a717abcf-ef43-42a9-af53-69d95f93cf4a</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:38efc94c-5fea-43e3-8689-fd26ec03d091</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-2552d265-3c7a-4593-ba69-15566a731880">
+                <wsu:Created>2024-04-17T12:57:44Z</wsu:Created>
+                <wsu:Expires>2024-04-17T13:02:44Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <CreateResponse xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <Results>
+                <StatusCode>OK</StatusCode>
+                <StatusMessage>EmailSendDefinition created</StatusMessage>
+                <OrdinalID>0</OrdinalID>
+                <NewID>0</NewID>
+                <NewObjectID>ce281713-bafc-ee11-a5c8-5cba2c6fc270</NewObjectID>
+                <Object xsi:type="EmailSendDefinition">
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID>ce281713-bafc-ee11-a5c8-5cba2c6fc270</ObjectID>
+                    <CustomerKey>testNew_emailSend</CustomerKey>
+                    <IsPlatformObject>false</IsPlatformObject>
+                    <Name>testNew_emailSend</Name>
+                    <Description>created on deploy</Description>
+                    <CategoryID>4691</CategoryID>
+                    <SendClassification>
+                        <PartnerKey xsi:nil="true" />
+                        <ObjectID xsi:nil="true" />
+                        <CustomerKey>testExisting_sendClassification</CustomerKey>
+                    </SendClassification>
+                    <SenderProfile>
+                        <PartnerKey xsi:nil="true" />
+                        <ObjectID xsi:nil="true" />
+                        <CustomerKey>testExisting_senderProfile</CustomerKey>
+                    </SenderProfile>
+                    <DeliveryProfile>
+                        <PartnerKey xsi:nil="true" />
+                        <ObjectID xsi:nil="true" />
+                        <CustomerKey>Default</CustomerKey>
+                    </DeliveryProfile>
+                    <SuppressTracking>false</SuppressTracking>
+                    <IsSendLogging>false</IsSendLogging>
+                    <SendDefinitionList>
+                        <PartnerKey xsi:nil="true" />
+                        <ObjectID xsi:nil="true" />
+                        <SendDefinitionListType>ExclusionList</SendDefinitionListType>
+                        <CustomObjectID>21711373-72c1-ec11-b83b-exclusion</CustomObjectID>
+                        <DataSourceTypeID>CustomObject</DataSourceTypeID>
+                        <IsTestObject>false</IsTestObject>
+                        <Name />
+                    </SendDefinitionList>
+                    <SendDefinitionList>
+                        <PartnerKey xsi:nil="true" />
+                        <ObjectID xsi:nil="true" />
+                        <List>
+                            <PartnerKey xsi:nil="true" />
+                            <ID>114</ID>
+                            <ObjectID xsi:nil="true" />
+                        </List>
+                        <SendDefinitionListType>SourceList</SendDefinitionListType>
+                        <CustomObjectID>21711373-72c1-ec11-b83b-48df37d1deb7</CustomObjectID>
+                        <DataSourceTypeID>CustomObject</DataSourceTypeID>
+                        <IsTestObject>false</IsTestObject>
+                        <Name />
+                    </SendDefinitionList>
+                    <Email>
+                        <PartnerKey xsi:nil="true" />
+                        <ID>531213</ID>
+                        <ObjectID xsi:nil="true" />
+                    </Email>
+                    <BccEmail />
+                    <AutoBccEmail />
+                    <TestEmailAddr />
+                    <EmailSubject>testExisting_asset_email</EmailSubject>
+                    <DynamicEmailSubject>testExisting_asset_email</DynamicEmailSubject>
+                    <IsMultipart>true</IsMultipart>
+                    <IsWrapped>true</IsWrapped>
+                    <DeduplicateByEmail>false</DeduplicateByEmail>
+                    <ExclusionFilter />
+                    <Additional />
+                    <CCEmail />
+                </Object>
+            </Results>
+            <RequestID>8a548392-c00a-4909-97d3-85b5a9305d35</RequestID>
+            <OverallStatus>OK</OverallStatus>
+        </CreateResponse>
+    </soap:Body>
+</soap:Envelope>

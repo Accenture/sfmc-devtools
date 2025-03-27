@@ -1,0 +1,61 @@
+{
+    "description": "bla bla",
+    "key": "testExisting_automation",
+    "name": "testExisting_automation",
+    "r__folder_Path": "my automations",
+    "schedule": {
+        "endDate": "2022-07-30T00:00:00",
+        "icalRecur": "FREQ=DAILY;COUNT=1;INTERVAL=1",
+        "startDate": "2022-07-30T00:00:00",
+        "timezoneName": "W. Europe Standard Time"
+    },
+    "status": "PausedSchedule",
+    "steps": [
+        {
+            "activities": [
+                {
+                    "r__key": "testExisting_dataExtract",
+                    "r__type": "dataExtract"
+                },
+                {
+                    "r__key": "testExisting_emailSend",
+                    "r__type": "emailSend"
+                },
+                {
+                    "r__key": "testExisting_fileTransfer",
+                    "r__type": "fileTransfer"
+                },
+                {
+                    "r__key": "testExisting_importFile",
+                    "r__type": "importFile"
+                },
+                {
+                    "r__key": "testExisting_query",
+                    "r__type": "query"
+                },
+                {
+                    "r__key": "testExisting_script",
+                    "r__type": "script"
+                },
+                {
+                    "r__key": "testExisting_automation__s1.7",
+                    "r__type": "verification"
+                }
+            ],
+            "name": ""
+        }
+    ],
+    "type": "scheduled",
+    "notifications": [
+        {
+            "email": ["complete@test.accenture.com"],
+            "message": "",
+            "type": "Complete"
+        },
+        {
+            "email": ["error@test.accenture.com"],
+            "message": "test",
+            "type": "Error"
+        }
+    ]
+}

@@ -1,6 +1,8 @@
-echo "[PRE-COMMIT] Re-creating documentation..."
-npm run docs
-git update-index --add docs/dist/documentation.md
+# run lint-staged hooks
+echo "[PRE-COMMIT] Run lint-staged"
+lint-staged
 
-echo "[PRE-COMMIT] Running lint-staged..."
-npx --no lint-staged
+# update typescript type declarations
+echo "[PRE-COMMIT] Run typescript validation and create/update d.ts files"
+tsc -p tsconfig.precommit.json
+git add @types

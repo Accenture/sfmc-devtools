@@ -1,0 +1,15 @@
+{
+    "FallbackFromAddress": "joern.berkefeld+test@accenture.com",
+    "AutoForwardToEmailAddress": "",
+    "AutoForwardToName": "",
+    "AutoReply": false,
+    "CustomerKey": "{{{prefix}}}senderProfile",
+    "Description": "Send from joern.berkefeld@accenture.com",
+    "DirectForward": false,
+    "FromAddress": "joern.berkefeld@accenture.com",
+    "FromName": "Jörn Berkefeld",
+    "Name": "{{{prefix}}}senderProfile",
+    "SenderHeaderEmailAddress": "",
+    "SenderHeaderName": "",
+    "UseDefaultRMMRules": true
+}

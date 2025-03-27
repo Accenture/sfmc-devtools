@@ -10,6 +10,7 @@ updates:
       schedule:
           interval: 'weekly'
       target-branch: 'develop'
+      open-pull-requests-limit: 10
       labels:
           - 'dependencies'
     - package-ecosystem: 'github-actions'

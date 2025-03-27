@@ -1,0 +1,68 @@
+{
+    "description": "updated on deploy",
+    "key": "testExisting_automation",
+    "name": "testExisting_automation",
+    "status": "PausedSchedule",
+    "steps": [
+        {
+            "activities": [
+                {
+                    "displayOrder": 1,
+                    "activityObjectId": "56c5370a-f988-4f36-b0ee-0f876573f6d7",
+                    "name": "testExisting_dataExtract",
+                    "objectTypeId": 73
+                },
+                {
+                    "displayOrder": 2,
+                    "activityObjectId": "9b1c7bf9-4964-ed11-b849-48df37d1de8b",
+                    "name": "testExisting_emailSend",
+                    "objectTypeId": 42
+                },
+                {
+                    "displayOrder": 3,
+                    "activityObjectId": "72c328ac-f5b0-4e37-91d3-a775666f15a6",
+                    "name": "testExisting_fileTransfer",
+                    "objectTypeId": 53
+                },
+                {
+                    "displayOrder": 4,
+                    "activityObjectId": "9d16f42c-2260-ed11-b849-48df37d1de8b",
+                    "name": "testExisting_importFile",
+                    "objectTypeId": 43
+                },
+                {
+                    "displayOrder": 5,
+                    "activityObjectId": "549f0568-607c-4940-afef-437965094dat",
+                    "name": "testExisting_query",
+                    "objectTypeId": 300
+                },
+                {
+                    "displayOrder": 6,
+                    "activityObjectId": "39f6a488-20eb-4ba0-b0b9-023725b574e4",
+                    "name": "testExisting_script",
+                    "objectTypeId": 423
+                }
+            ],
+            "annotation": "",
+            "stepNumber": 0
+        }
+    ],
+    "notifications": [
+        {
+            "email": ["error-updated@test.accenture.com"],
+            "message": "test updated",
+            "type": "Error"
+        }
+    ],
+    "categoryId": 290937,
+    "startSource": {
+        "schedule": {
+            "endDate": "2022-07-30T00:00:00",
+            "icalRecur": "FREQ=DAILY;COUNT=1;INTERVAL=1",
+            "startDate": "2022-07-30T00:00:00",
+            "timezoneId": 5
+        },
+        "typeId": 1
+    },
+    "id": "08afb0e2-b00a-4c88-ad2e-1f7f8788c560"
+}

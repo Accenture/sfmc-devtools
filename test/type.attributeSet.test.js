@@ -22,7 +22,7 @@ describe('type: attributeSet', () => {
             const retrieve = await handler.retrieve('testInstance/testBU', ['attributeSet']);
 
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             assert.equal(
                 retrieve['testInstance/testBU'].attributeSet
                     ? Object.keys(retrieve['testInstance/testBU'].attributeSet).length

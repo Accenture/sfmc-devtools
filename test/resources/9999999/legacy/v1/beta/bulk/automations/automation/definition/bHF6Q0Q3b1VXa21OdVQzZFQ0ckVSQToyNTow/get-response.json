@@ -1,0 +1,216 @@
+{
+    "id": "bHF6Q0Q3b1VXa21OdVQzZFQ0ckVSQToyNTow",
+    "key": "testExisting_automation_wait",
+    "createdDate": "2024-11-04T17:30:12.973Z",
+    "updateInProgress": false,
+    "name": "testExisting_automation_wait",
+    "description": "",
+    "createdBy": {
+        "id": "NzEwNDIwNDE4OjQ6MA",
+        "name": "Jörn Berkefeld",
+        "email": "joern.berkefeld@accenture.com"
+    },
+    "modifiedDate": "2024-11-04T17:42:13.203Z",
+    "status": "Ready",
+    "memberId": 510004860,
+    "processes": [
+        {
+            "id": "OXJtc2M5STlma3FpVzN3NkF4Y0pWdzoyNzow",
+            "name": "",
+            "description": "",
+            "sequence": 0,
+            "workers": [
+                {
+                    "id": "ZC1YQS1Jd25uMGV6Z1dFRmFiQzFMZzoyOTow",
+                    "key": "07801bb9-0fd1-4ed0-9349-625c5a03b957",
+                    "sequence": 0,
+                    "name": "1 Years",
+                    "description": "",
+                    "activityObjectId": "1bd41a92-2c57-463c-a1e6-6e1549e481a1",
+                    "objectTypeId": 467,
+                    "serializedObject": "{\"duration\":1,\"durationUnits\":\"Years\"}",
+                    "selectedObject": [
+                        {
+                            "categoryId": -1
+                        }
+                    ],
+                    "guidId": "f8c0e577-278c-479f-b381-610569b0b52e"
+                }
+            ],
+            "guidId": "73acb9f6-3dd2-4a7e-a25b-7c3a03170957"
+        },
+        {
+            "id": "YllfOWc3dFVCRXU4RGQxaTRXOUZLZzoyNzow",
+            "name": "",
+            "description": "",
+            "sequence": 1,
+            "workers": [
+                {
+                    "id": "cWZwazAtTUdPRTJmdnBPWWF4MVVIZzoyOTow",
+                    "key": "41fed5be-317a-425a-a81d-94485042ad26",
+                    "sequence": 0,
+                    "name": "1 Months",
+                    "description": "",
+                    "activityObjectId": "76f255e3-1603-4d8b-be59-32ac6fe61e15",
+                    "objectTypeId": 467,
+                    "serializedObject": "{\"duration\":1,\"durationUnits\":\"Months\"}",
+                    "selectedObject": [
+                        {
+                            "categoryId": -1
+                        }
+                    ],
+                    "guidId": "d364faa9-06e3-4d38-9fbe-93986b1d541e"
+                }
+            ],
+            "guidId": "83fd8f6d-54bb-4b04-bc0d-dd62e16f452a"
+        },
+        {
+            "id": "d1VwZGsxN0dwa3V0dEtQSTZOeXlRUToyNzow",
+            "name": "",
+            "description": "",
+            "sequence": 2,
+            "workers": [
+                {
+                    "id": "TnJHdVdodWJIMDJWOHIzWTFTTHdHQToyOTow",
+                    "key": "984a2011-87d9-4219-b609-ee3f13be7520",
+                    "sequence": 0,
+                    "name": "1 Weeks",
+                    "description": "",
+                    "activityObjectId": "85a405e4-e77b-4a2e-8d1b-9ad34244ac10",
+                    "objectTypeId": 467,
+                    "serializedObject": "{\"duration\":1,\"durationUnits\":\"Weeks\"}",
+                    "selectedObject": [
+                        {
+                            "categoryId": -1
+                        }
+                    ],
+                    "guidId": "5aaeb136-9b1b-4d1f-95f2-bdd8d522f018"
+                }
+            ],
+            "guidId": "935d4ac1-c65e-4ba6-adb4-a3c8e8dcb241"
+        },
+        {
+            "id": "cG5GWTY1a1RiRVNnWnpvRDBhUTJmdzoyNzow",
+            "name": "",
+            "description": "",
+            "sequence": 3,
+            "workers": [
+                {
+                    "id": "Tkw0dkFMQVFJVUd4bXVuQWM4dlhBQToyOTow",
+                    "key": "29cc7a78-7a98-49bb-821d-f68f3695f386",
+                    "sequence": 0,
+                    "name": "1 Days",
+                    "description": "",
+                    "activityObjectId": "562cf01a-6cca-4fd9-9d3c-f2649379a282",
+                    "objectTypeId": 467,
+                    "serializedObject": "{\"duration\":1,\"durationUnits\":\"Days\"}",
+                    "selectedObject": [
+                        {
+                            "categoryId": -1
+                        }
+                    ],
+                    "guidId": "002fbe34-10b0-4121-b19a-e9c073cbd700"
+                }
+            ],
+            "guidId": "eb5871a6-1399-446c-a067-3a03d1a4367f"
+        },
+        {
+            "id": "VjFyRUptR0hyRTJSdE1IR1RScG5RUToyNzow",
+            "name": "",
+            "description": "",
+            "sequence": 4,
+            "workers": [
+                {
+                    "id": "endvNktPM1ZOVVdpcHpnLUxJeFIydzoyOTow",
+                    "key": "d83889a8-7d08-4234-979f-e8356ca6a9d2",
+                    "sequence": 0,
+                    "name": "1 Hours",
+                    "description": "",
+                    "activityObjectId": "2722bb7c-2ea2-4cf5-8891-96c5a4362a72",
+                    "objectTypeId": 467,
+                    "serializedObject": "{\"duration\":1,\"durationUnits\":\"Hours\"}",
+                    "selectedObject": [
+                        {
+                            "categoryId": -1
+                        }
+                    ],
+                    "guidId": "283a0acf-d5ed-4535-a2a7-383e2c8c51db"
+                }
+            ],
+            "guidId": "26c45a57-8761-4dac-91b4-c1c64d1a6741"
+        },
+        {
+            "id": "SjFFR2s4eXR5ME93UU85anZpS0Y3QToyNzow",
+            "name": "",
+            "description": "",
+            "sequence": 5,
+            "workers": [
+                {
+                    "id": "R2hCN0ZnbXZBa0NoVF9VMzNpWnM0QToyOTow",
+                    "key": "8c51a35a-65dc-4675-93e5-c30037fc6a77",
+                    "sequence": 0,
+                    "name": "1 Minutes",
+                    "description": "",
+                    "activityObjectId": "5d5f816b-b024-45a9-8ce9-726c6dd61bf4",
+                    "objectTypeId": 467,
+                    "serializedObject": "{\"duration\":1,\"durationUnits\":\"Minutes\"}",
+                    "selectedObject": [
+                        {
+                            "categoryId": -1
+                        }
+                    ],
+                    "guidId": "167b101a-af09-4002-a14f-f537de266ce0"
+                }
+            ],
+            "guidId": "93065127-adcc-43cb-b040-ef63be2285ec"
+        },
+        {
+            "id": "a0JPTkRiNTFmVUtRQ3dyMXlRYWdHdzoyNzow",
+            "name": "",
+            "description": "",
+            "sequence": 6,
+            "workers": [
+                {
+                    "id": "YXBCU1o1bk9fa3V4MVUyNDYwb2tzQToyOTow",
+                    "key": "933b7da5-ef25-4e5a-b92c-ff061d05ba7f",
+                    "sequence": 0,
+                    "name": "03:00 PM",
+                    "description": "",
+                    "activityObjectId": "1c9836b8-0242-4620-9421-21d36a0df751",
+                    "objectTypeId": 467,
+                    "serializedObject": "{\"specifiedTime\":\"15:00\",\"timeZone\":\"GMT Standard Time\"}",
+                    "selectedObject": [
+                        {
+                            "categoryId": -1
+                        }
+                    ],
+                    "guidId": "6752906a-ce99-4bfe-b1d5-4db8eb4a24b0"
+                }
+            ],
+            "guidId": "0d8d1390-75be-427d-900b-0af5c906a01b"
+        }
+    ],
+    "isPlatformObject": false,
+    "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/bHF6Q0Q3b1VXa21OdVQzZFQ0ckVSQToxMjow",
+    "automationType": "unspecified",
+    "categoryId": 4700,
+    "folderPath": "my automations",
+    "lastPausedDate": "2025-03-14T15:21:57.62Z",
+    "lastPausedBy": {
+        "id": "NzEwNDIwNDE4OjQ6MA",
+        "name": "Jörn Berkefeld",
+        "email": "joern.berkefeld@accenture.com"
+    },
+    "lastSaveDate": "2024-11-04T17:42:13.143Z",
+    "lastSavedBy": {
+        "id": "NzEwNDIwNDE4OjQ6MA",
+        "name": "Jörn Berkefeld",
+        "email": "joern.berkefeld@accenture.com"
+    },
+    "selectedCategoryId": [
+        {
+            "categoryId": 4700
+        }
+    ],
+    "guidId": "0fc2ac96-14ba-495a-8db9-3ddd4f8ac444-wait"
+}

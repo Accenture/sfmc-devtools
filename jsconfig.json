@@ -1,7 +1,0 @@
-{
-    "include": ["lib/**/*.js", "types/**/*.js", "test/**/*.js"],
-    "compilerOptions": {
-        "module": "es6",
-        "target": "esnext"
-    }
-}

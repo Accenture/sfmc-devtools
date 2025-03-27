@@ -1,7 +1,61 @@
 [
     {
-        "version": "6.0.3",
-        "files": [".prettierrc"]
+        "version": "7.9.1",
+        "files": ["eslint.config.js"]
+    },
+    {
+        "version": "7.7.2",
+        "files": [".vscode/extensions.json"]
+    },
+    {
+        "version": "7.7.0",
+        "files": [".gitignore"]
+    },
+    {
+        "version": "7.6.2",
+        "files": [".vscode/extensions.json"]
+    },
+    {
+        "version": "7.4.3",
+        "files": ["eslint.config.js", ".prettierrc"]
+    },
+    {
+        "version": "7.4.2",
+        "files": [".vscode/settings.json"]
+    },
+    {
+        "version": "7.4.1",
+        "files": [".gitignore"]
+    },
+    {
+        "version": "7.3.2",
+        "files": [".gitattributes"]
+    },
+    {
+        "version": "7.3.1",
+        "files": [".vscode/settings.json"]
+    },
+    {
+        "version": "7.3.0",
+        "files": [".vscode/settings.json"]
+    },
+    {
+        "version": "7.1.0",
+        "files": [".vscode/settings.json", ".gitignore"]
+    },
+    {
+        "version": "7.0.3",
+        "files": ["eslint.config.js"],
+        "filesRemove": [".eslintignore", ".eslintrc"]
+    },
+    {
+        "version": "7.0.0",
+        "files": [
+            ".vscode/extensions.json",
+            ".vscode/settings.json",
+            ".beautyamp.json",
+            ".prettierrc"
+        ]
     },
     {
         "version": "5.0.0",

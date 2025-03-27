@@ -1,0 +1,11 @@
+{
+    "c__automation_step": "testExisting_automation__s1.7",
+    "notificationEmailAddress": "test@accenture.com",
+    "notificationEmailMessage": "",
+    "r__dataExtension_key": "testExisting_dataExtension",
+    "shouldEmailOnFailure": true,
+    "shouldStopOnFailure": true,
+    "value1": 1,
+    "value2": 0,
+    "verificationType": "IsEqualTo"
+}

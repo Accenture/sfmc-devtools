@@ -1,0 +1,60 @@
+{
+    "id": 1295067,
+    "customerKey": "testExisting_htmlblock 3 spaces",
+    "objectID": "972974ed-dc44-4df2-ab6e-53bae9070336",
+    "assetType": {
+        "id": 197,
+        "name": "htmlblock",
+        "displayName": "HTML Block"
+    },
+    "fileProperties": {
+        "fileName": "testExisting_htmlblock 3 spaces"
+    },
+    "name": "testExisting_htmlblock 3 spaces",
+    "owner": {
+        "id": 700301950,
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld (ASGR)",
+        "userId": "700301950"
+    },
+    "createdDate": "2024-01-08T08:26:58.277-06:00",
+    "createdBy": {
+        "id": 700301950,
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld (ASGR)",
+        "userId": "700301950"
+    },
+    "modifiedDate": "2024-01-08T08:28:01.6-06:00",
+    "modifiedBy": {
+        "id": 700301950,
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld (ASGR)",
+        "userId": "700301950"
+    },
+    "enterpriseId": 9999999,
+    "memberId": 9999999,
+    "status": {
+        "id": 1,
+        "name": "Draft"
+    },
+    "thumbnail": {
+        "thumbnailUrl": "/v1/assets/1295066/thumbnail"
+    },
+    "category": {
+        "id": 89397,
+        "name": "Content Builder",
+        "parentId": 0
+    },
+    "content": "<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" role=\"presentation\" style=\"min-width: 100%; \" class=\"stylingblock-content-wrapper\"><tr><td class=\"stylingblock-content-wrapper camarker-inner\"><div>\n  my 1st html\n</div>\n\n%%[ /* my ampscript */ ]%%\n\n<script runat=\"server\">\n// my ssjs\n</script>\n\n<div>\n  my 2nd html\n</div>\n<div>%%=TreatAsContent(ContentBlockByFake(\"Content Builder\\my very long path\\Content Blocks Library\\COMMON\\some other folder\\my code snippet\"))=%% %%= ContentBlockByKey(\"testExisting_htmlblock1\")=%% %%= ContentBlockByKey(\"testExisting_htmlblock1 \")=%%</div></td></tr></table>",
+    "design": "",
+    "meta": {
+        "wrapperStyles": {
+            "mobile": {
+                "visible": true
+            },
+            "styling": {}
+        }
+    },
+    "availableViews": [],
+    "modelVersion": 2
+}

@@ -1,0 +1,19 @@
+{
+    "FallbackFromAddress": "",
+    "createdBy": "Jörn Berkefeld",
+    "modifiedBy": "Jörn Berkefeld",
+    "CreatedDate": "2021-08-03T11:14:00",
+    "ModifiedDate": "2021-08-03T11:14:00",
+    "CustomerKey": "testExisting_senderProfile_rcb",
+    "Name": "testExisting_senderProfile_rcb",
+    "Description": "Send from joern.berkefeld@accenture.com",
+    "FromName": "%%= ContentBlockByName(\"Content Builder\\dont strip non ssjs content\") =%%",
+    "FromAddress": "%%= ContentBlockByName(\"Content Builder\\dont strip non ssjs content\") =%%",
+    "UseDefaultRMMRules": true,
+    "AutoForwardToEmailAddress": "%%= ContentBlockByName(\"Content Builder\\dont strip non ssjs content\") =%%",
+    "AutoForwardToName": "%%= ContentBlockByName(\"Content Builder\\dont strip non ssjs content\") =%%",
+    "DirectForward": false,
+    "AutoReply": false,
+    "SenderHeaderEmailAddress": "",
+    "SenderHeaderName": ""
+}

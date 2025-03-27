@@ -7,7 +7,6 @@ import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const file = chaiFiles.file;
 
 describe('type: transactionalSMS', () => {
     beforeEach(() => {
@@ -23,7 +22,7 @@ describe('type: transactionalSMS', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['transactionalSMS']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -37,9 +36,9 @@ describe('type: transactionalSMS', () => {
                 'returned JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_tsms', 'transactionalSMS', 'amp'))
+                await testUtils.getActualFile('testExisting_tsms', 'transactionalSMS', 'amp')
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'get', 'amp'))
+                await testUtils.getExpectedFile('9999999', 'transactionalSMS', 'get', 'amp')
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -59,7 +58,7 @@ describe('type: transactionalSMS', () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['transactionalSMS']);
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -74,9 +73,9 @@ describe('type: transactionalSMS', () => {
                 'returned JSON was not equal expected for insert transactionalSMS'
             );
             expect(
-                file(testUtils.getActualFile('testNew_tsms', 'transactionalSMS', 'amp'))
+                await testUtils.getActualFile('testNew_tsms', 'transactionalSMS', 'amp')
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'post', 'amp'))
+                await testUtils.getExpectedFile('9999999', 'transactionalSMS', 'post', 'amp')
             );
             // confirm updated item
             assert.deepEqual(
@@ -85,9 +84,9 @@ describe('type: transactionalSMS', () => {
                 'returned JSON was not equal expected for update transactionalSMS'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_tsms', 'transactionalSMS', 'amp'))
+                await testUtils.getActualFile('testExisting_tsms', 'transactionalSMS', 'amp')
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'patch', 'amp'))
+                await testUtils.getExpectedFile('9999999', 'transactionalSMS', 'patch', 'amp')
             );
             // check number of API calls
             assert.equal(
@@ -126,9 +125,9 @@ describe('type: transactionalSMS', () => {
                 'testInstance/testBU',
                 'transactionalSMS',
                 ['testExisting_tsms'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
 
             assert.equal(
                 result.transactionalSMS ? Object.keys(result.transactionalSMS).length : 0,
@@ -141,24 +140,22 @@ describe('type: transactionalSMS', () => {
                 'returned template JSON was not equal expected'
             );
             expect(
-                file(
-                    testUtils.getActualTemplateFile('testExisting_tsms', 'transactionalSMS', 'amp')
+                await testUtils.getActualTemplateFile(
+                    'testExisting_tsms',
+                    'transactionalSMS',
+                    'amp'
                 )
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'template', 'amp'))
+                await testUtils.getExpectedFile('9999999', 'transactionalSMS', 'template', 'amp')
             );
             // buildDefinition
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'transactionalSMS',
-                'testExisting_tsms',
-                'testTargetMarket'
+                ['testExisting_tsms'],
+                ['testTargetMarket']
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_tsms', 'transactionalSMS'),
@@ -166,9 +163,9 @@ describe('type: transactionalSMS', () => {
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualDeployFile('testTemplated_tsms', 'transactionalSMS', 'amp'))
+                await testUtils.getActualDeployFile('testTemplated_tsms', 'transactionalSMS', 'amp')
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'transactionalSMS', 'build', 'amp'))
+                await testUtils.getExpectedFile('9999999', 'transactionalSMS', 'build', 'amp')
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -185,7 +182,7 @@ describe('type: transactionalSMS', () => {
         //     // WHEN
         //     const isDeleted = await handler.deleteByKey('testInstance/testBU', 'mobileKeyword', 'testExisting_keyword');
         //     // THEN
-        //     assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+        //     assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
 
         //     assert.equal(isDeleted, true, 'should have deleted the item');
         //     return;

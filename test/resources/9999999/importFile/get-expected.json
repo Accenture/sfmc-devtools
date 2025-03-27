@@ -2,7 +2,6 @@
     "allowErrors": true,
     "c__blankFileProcessing": "Skip",
     "c__dataAction": "AddUpdate",
-    "c__destinationType": "DataExtension",
     "c__subscriberImportType": "DataExtension",
     "createdDate": "2022-11-09T05:32:30.533",
     "customerKey": "testExisting_importFile",
@@ -23,8 +22,12 @@
     "maxImportFrequencyHours": 0,
     "modifiedDate": "2022-11-17T07:13:03.95",
     "name": "testExisting_importFile",
-    "r__dataExtension_CustomerKey": "testExisting_dataExtension",
-    "r__fileLocation_name": "ExactTarget Enhanced FTP",
+
     "sendEmailNotification": false,
-    "standardQuotedStrings": true
+    "standardQuotedStrings": true,
+    "destination": {
+        "c__type": "DataExtension",
+        "r__dataExtension_key": "testExisting_dataExtension"
+    },
+    "source": { "c__type": "File Location", "r__fileLocation_name": "ExactTarget Enhanced FTP" }
 }

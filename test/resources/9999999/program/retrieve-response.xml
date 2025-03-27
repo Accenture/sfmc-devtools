@@ -47,93 +47,15 @@
             </Results>
             <Results xsi:type="Program">
                 <PartnerKey xsi:nil="true" />
-                <ObjectID>08afb0e2-b00a-4c88-ad2e-updateNotifications_errorEmailCompletionEmail</ObjectID>
-                <Name>testExisting_automation_updateNotifications_errorEmailCompletionEmail</Name>                <!--only retrieved for cache-->
-                <CustomerKey>testExisting_automation_updateNotifications_errorEmailCompletionEmail</CustomerKey>                <!--only retrieved for cache-->
+                <ObjectID>0fc2ac96-14ba-495a-8db9-3ddd4f8ac444-wait</ObjectID>
+                <Name>testExisting_automation_wait</Name>                <!--only retrieved for cache-->
+                <CustomerKey>testExisting_automation_wait</CustomerKey>                <!--only retrieved for cache-->
             </Results>
             <Results xsi:type="Program">
                 <PartnerKey xsi:nil="true" />
-                <ObjectID>08afb0e2-b00a-4c88-ad2e-clearNotificationsAll</ObjectID>
-                <Name>testExisting_automation_clearNotificationsAll</Name>                <!--only retrieved for cache-->
-                <CustomerKey>testExisting_automation_clearNotificationsAll</CustomerKey>                <!--only retrieved for cache-->
-            </Results>
-            <Results xsi:type="Program">
-                <PartnerKey xsi:nil="true" />
-                <ObjectID>08afb0e2-b00a-4c88-ad2e-clearNotificationsCompletionEmail</ObjectID>
-                <Name>testExisting_automation_clearNotificationsCompletionEmail</Name>                <!--only retrieved for cache-->
-                <CustomerKey>testExisting_automation_clearNotificationsCompletionEmail</CustomerKey>                <!--only retrieved for cache-->
-            </Results>
-            <Results xsi:type="Program">
-                <PartnerKey xsi:nil="true" />
-                <ObjectID>08afb0e2-b00a-4c88-ad2e-clearNotificationsErrorEmail</ObjectID>
-                <Name>testExisting_automation_clearNotificationsErrorEmail</Name>                <!--only retrieved for cache-->
-                <CustomerKey>testExisting_automation_clearNotificationsErrorEmail</CustomerKey>                <!--only retrieved for cache-->
-            </Results>
-             <Results xsi:type="Program">
-                <PartnerKey xsi:nil="true" />
-                <ObjectID>08afb0e2-b00a-4c88-ad2e-clearNotificationsNotes</ObjectID>
-                <Name>testExisting_automation_clearNotificationsNotes</Name>                <!-- only retrieved for cache  -->
-                <CustomerKey>testExisting_automation_clearNotificationsNotes</CustomerKey>             <!--   only retrieved for cache-->
-         </Results>
-            <Results xsi:type="Program">
-                <PartnerKey xsi:nil="true" />
-                <ObjectID>08afb0e2-b00a-4c88-ad2e-updateNotifications_errorEmailErrorNote</ObjectID>
-                <Name>testExisting_automation_updateNotifications_errorEmailErrorNote</Name>                <!--only retrieved for cache-->
-                <CustomerKey>testExisting_automation_updateNotifications_errorEmailErrorNote</CustomerKey>                <!--only retrieved for cache-->
-            </Results>
-            <Results xsi:type="Program">
-                <PartnerKey xsi:nil="true" />
-                <ObjectID>08afb0e2-b00a-4c88-ad2e-updateNotifications_completionEmailCompletionNote</ObjectID>
-                <Name>testExisting_automation_updateNotifications_completionEmailCompletionNote</Name>                <!--only retrieved for cache-->
-                <CustomerKey>testExisting_automation_updateNotifications_completionEmailCompletionNote</CustomerKey>                <!--only retrieved for cache-->
-            </Results>
-            <Results xsi:type="Program">
-                <PartnerKey xsi:nil="true" />
-                <ObjectID>08afb0e2-b00a-4c88-ad2e-updateNotifications_completionEmailErrorNote</ObjectID>
-                <Name>testExisting_automation_updateNotifications_completionEmailErrorNote</Name>                <!--only retrieved for cache-->
-                <CustomerKey>testExisting_automation_updateNotifications_completionEmailErrorNote</CustomerKey>                <!--only retrieved for cache-->
-            </Results>
-            <Results xsi:type="Program">
-                <PartnerKey xsi:nil="true" />
-                <ObjectID>08afb0e2-b00a-4c88-ad2e-updateNotifications_errorEmailCompletionNote</ObjectID>
-                <Name>testExisting_automation_updateNotifications_errorEmailCompletionNote</Name>                <!--only retrieved for cache-->
-                <CustomerKey>testExisting_automation_updateNotifications_errorEmailCompletionNote</CustomerKey>                <!--only retrieved for cache-->
-            </Results>
-            <Results xsi:type="Program">
-                <PartnerKey xsi:nil="true" />
-                <ObjectID>08afb0e2-b00a-4c88-ad2e-updateNotifications_errorEmailCompletionNoteCompletionEmail</ObjectID>
-                <Name>testExisting_automation_updateNotifications_errorEmailCompletionNoteCompletionEmail</Name>                <!--only retrieved for cache-->
-                <CustomerKey>testExisting_automation_updateNotifications_errorEmailCompletionNoteCompletionEmail</CustomerKey>                <!--only retrieved for cache-->
-            </Results>
-            <Results xsi:type="Program">
-                <PartnerKey xsi:nil="true" />
-                <ObjectID>08afb0e2-b00a-4c88-ad2e-updateNotifications_errorEmailErrorNoteCompletionEmail</ObjectID>
-                <Name>testExisting_automation_updateNotifications_errorEmailErrorNoteCompletionEmail</Name>                <!--only retrieved for cache-->
-                <CustomerKey>testExisting_automation_updateNotifications_errorEmailErrorNoteCompletionEmail</CustomerKey>                <!--only retrieved for cache-->
-            </Results>
-            <Results xsi:type="Program">
-                <PartnerKey xsi:nil="true" />
-                <ObjectID>08afb0e2-b00a-4c88-ad2e-updateNotifications_errorEmailCompletionNoteErrorNote</ObjectID>
-                <Name>testExisting_automation_updateNotifications_errorEmailCompletionNoteErrorNote</Name>                <!--only retrieved for cache-->
-                <CustomerKey>testExisting_automation_updateNotifications_errorEmailCompletionNoteErrorNote</CustomerKey>                <!--only retrieved for cache-->
-            </Results>
-            <Results xsi:type="Program">
-                <PartnerKey xsi:nil="true" />
-                <ObjectID>08afb0e2-b00a-4c88-ad2e-updateNotifications_completionEmailCompletionNoteErrorNote</ObjectID>
-                <Name>testExisting_automation_updateNotifications_completionEmailCompletionNoteErrorNote</Name>                <!--only retrieved for cache-->
-                <CustomerKey>testExisting_automation_updateNotifications_completionEmailCompletionNoteErrorNote</CustomerKey>                <!--only retrieved for cache-->
-            </Results>
-            <Results xsi:type="Program">
-                <PartnerKey xsi:nil="true" />
-                <ObjectID>08afb0e2-b00a-4c88-ad2e-updateNotifications_completionNote</ObjectID>
-                <Name>testExisting_automation_updateNotifications_completionNote</Name>                <!--only retrieved for cache-->
-                <CustomerKey>testExisting_automation_updateNotifications_completionNote</CustomerKey>                <!--only retrieved for cache-->
-            </Results>
-            <Results xsi:type="Program">
-                <PartnerKey xsi:nil="true" />
-                <ObjectID>08afb0e2-b00a-4c88-ad2e-updateNotifications_completionEmailNoteErrorEmailNote</ObjectID>
-                <Name>testExisting_automation_updateNotifications_completionEmailNoteErrorEmailNote</Name>                <!--only retrieved for cache-->
-                <CustomerKey>testExisting_automation_updateNotifications_completionEmailNoteErrorEmailNote</CustomerKey>                <!--only retrieved for cache-->
+                <ObjectID>8f82c2a7-0bae-45a9-bdee-e631ab25c0d5</ObjectID>
+                <CustomerKey>testExisting_automation_event</CustomerKey>
+                <Name>testExisting_automation_event</Name>
             </Results>
         </RetrieveResponseMsg>
     </soap:Body>

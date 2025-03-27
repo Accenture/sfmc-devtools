@@ -38,9 +38,14 @@
                 <CategoryID>89348</CategoryID>
                 <SendClassification>
                     <PartnerKey xsi:nil="true" />
-                    <ObjectID xsi:nil="true" />
-                    <CustomerKey>Default Transactional</CustomerKey>
+                    <ObjectID>95da425b-a06f-e611-96fe-38eaa7142c61</ObjectID>
+                    <CustomerKey>testExisting_sendClassification</CustomerKey>
                 </SendClassification>
+                <SenderProfile>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID>a75d452b-7ef4-eb11-b82d-48df37d1da95</ObjectID>
+                    <CustomerKey>testExisting_senderProfile</CustomerKey>
+                </SenderProfile>
                 <FromName>unsubscribe</FromName>
                 <FromAddress>unsubscribe@emails.mcdev.accenture.com</FromAddress>
                 <SuppressTracking>false</SuppressTracking>
@@ -48,15 +53,60 @@
                 <TriggeredSendStatus>New</TriggeredSendStatus>
                 <Email>
                     <PartnerKey xsi:nil="true" />
-                    <ID>483943</ID>
+                    <ID>531213</ID>
                     <ObjectID xsi:nil="true" />
                 </Email>
                 <AutoAddSubscribers>false</AutoAddSubscribers>
                 <AutoUpdateSubscribers>false</AutoUpdateSubscribers>
                 <BatchInterval>0</BatchInterval>
-                <BccEmail />
                 <EmailSubject>You are successfully unsubscribed</EmailSubject>
                 <DynamicEmailSubject>You are successfully unsubscribed</DynamicEmailSubject>
+                <IsMultipart>false</IsMultipart>
+                <IsWrapped>true</IsWrapped>
+                <AllowedSlots>0</AllowedSlots>
+                <NewSlotTrigger>0</NewSlotTrigger>
+                <Priority>4</Priority>
+            </Results>
+            <Results xsi:type="TriggeredSendDefinition">
+                <PartnerKey xsi:nil="true" />
+                <PartnerProperties>
+                    <Name>TestEmailAddr</Name>
+                    <Value />
+                </PartnerProperties>
+                <CreatedDate>2018-06-25T05:58:00</CreatedDate>
+                <ModifiedDate>2018-06-25T05:58:00</ModifiedDate>
+                <ObjectID>b3150cf0-6e78-e811-80d4-1402ec721c9a</ObjectID>
+                <CustomerKey>testExisting_triggeredSend_rcb</CustomerKey>
+                <IsPlatformObject>false</IsPlatformObject>
+                <Name>testExisting_triggeredSend_rcb</Name>
+                <Description>Unsubscribe_Email</Description>
+                <Keyword />
+                <CategoryID>89348</CategoryID>
+                <SendClassification>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID>95da425b-a06f-e611-96fe-38eaa7142c61</ObjectID>
+                    <CustomerKey>testExisting_sendClassification</CustomerKey>
+                </SendClassification>
+                <SenderProfile>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID>a75d452b-7ef4-eb11-b82d-48df37d1da99</ObjectID>
+                    <CustomerKey>testExisting_senderProfile_rcb</CustomerKey>
+                </SenderProfile>
+                <FromName>%%= ContentBlockByName("Content Builder\dont strip non ssjs content") =%%</FromName>
+                <FromAddress>%%= ContentBlockByKey("testExisting_asset_htmlblock") =%%</FromAddress>
+                <SuppressTracking>false</SuppressTracking>
+                <TriggeredSendType>Continuous</TriggeredSendType>
+                <TriggeredSendStatus>New</TriggeredSendStatus>
+                <Email>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>531213</ID>
+                    <ObjectID xsi:nil="true" />
+                </Email>
+                <AutoAddSubscribers>false</AutoAddSubscribers>
+                <AutoUpdateSubscribers>false</AutoUpdateSubscribers>
+                <BatchInterval>0</BatchInterval>
+                <EmailSubject>%%= ContentBlockById(1295064) =%%</EmailSubject>
+                <DynamicEmailSubject>%%= ContentBlockById(1295064) =%%</DynamicEmailSubject>
                 <IsMultipart>false</IsMultipart>
                 <IsWrapped>true</IsWrapped>
                 <AllowedSlots>0</AllowedSlots>

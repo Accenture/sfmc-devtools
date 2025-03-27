@@ -5,16 +5,53 @@ import { axiosInstance } from '../node_modules/sfmc-sdk/lib/util.js';
 import handler from '../lib/index.js';
 import auth from '../lib/util/auth.js';
 import { Util } from '../lib/util/util.js';
+import cache from '../lib/util/cache.js';
+import ReplaceContentBlockReference from '../lib/util/replaceContentBlockReference.js';
+
 import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // for some reason doesnt realize below reference
-// eslint-disable-next-line no-unused-vars
+
 import fsmock from 'mock-fs';
 
 let apimock;
-import { handleSOAPRequest, handleRESTRequest, soapUrl, restUrl } from './resourceFactory.js';
+import {
+    handleSOAPRequest,
+    handleRESTRequest,
+    soapUrl,
+    restUrl,
+    tWarn,
+} from './resourceFactory.js';
 const authResources = File.readJsonSync(path.join(__dirname, './resources/auth.json'));
+
+const loadingFile = 'loading expected file:///' + __dirname.split(path.sep).join('/');
+
+/**
+ * gets file from Retrieve folder
+ *
+ * @param {string} from source path (starting in bu folder)
+ * @param {string} to target path (starting in bu folder)
+ * @param {string} [mid] used when we need to test on ParentBU
+ * @returns {Promise.<{status:'ok'|'skipped'|'failed', statusMessage:string, file:string}>} -
+ */
+export async function copyFile(from, to, mid = '9999999') {
+    return File.copyFileSimple(`./test/resources/${mid}/${from}`, `./test/resources/${mid}/${to}`);
+}
+
+/**
+ * gets file from Retrieve folder
+ *
+ * @param {string} from source path (starting in bu folder)
+ * @param {string} to target path (starting in bu folder)
+ * @param {string} [mid] used when we need to test on ParentBU
+ * @param {string} [buName] used when we need to test on ParentBU
+ * @returns {void} -
+ */
+export function copyToDeploy(from, to, mid = '9999999', buName = 'testBU') {
+    console.log(`Copying ${from} to deploy folder`); // eslint-disable-line no-console
+    File.copySync(`./test/resources/${mid}/${from}`, `./deploy/testInstance/${buName}/${to}`);
+}
 
 /**
  * gets file from Retrieve folder
@@ -36,90 +73,116 @@ export function getActualJson(customerKey, type, buName = 'testBU') {
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} [buName] used when we need to test on ParentBU
- * @returns {string} file path
+ * @returns {Promise.<string>} file path
  */
 export function getActualDoc(customerKey, type, buName = 'testBU') {
-    return `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-doc.md`;
+    return File.readFile(
+        `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-doc.md`,
+        'utf8'
+    );
 }
+
 /**
  * gets file from Retrieve folder
  *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
- * @returns {string} file path
+ * @param {string} [buName] used when we need to test on ParentBU
+ * @returns {Promise.<string | null>} file in string form, null if not found
  */
-export function getActualFile(customerKey, type, ext) {
-    return `./retrieve/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`;
+export async function getActualFile(customerKey, type, ext, buName = 'testBU') {
+    const path = `./retrieve/testInstance/${buName}/${type}/${customerKey}.${type}-meta.${ext}`;
+    try {
+        return await File.readFile(path, 'utf8');
+    } catch {
+        console.log(`File not found: ${path}`); // eslint-disable-line no-console
+        return null;
+    }
 }
+
 /**
  * gets file from Deploy folder
  *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} [buName] used when we need to test on ParentBU
- * @returns {Promise.<string>} file in string form
+ * @returns {Promise.<string>} file in JSON form
  */
 export function getActualDeployJson(customerKey, type, buName = 'testBU') {
     return File.readJSON(
         `./deploy/testInstance/${buName}/${type}/${customerKey}.${type}-meta.json`
     );
 }
+
 /**
  * gets file from Deploy folder
  *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
- * @returns {string} file path
+ * @param {string} [buName] used when we need to test on ParentBU
+ * @returns {Promise.<string>} file in string form
  */
-export function getActualDeployFile(customerKey, type, ext) {
-    return `./deploy/testInstance/testBU/${type}/${customerKey}.${type}-meta.${ext}`;
+export function getActualDeployFile(customerKey, type, ext, buName = 'testBU') {
+    return File.readFile(
+        `./deploy/testInstance/${buName}/${type}/${customerKey}.${type}-meta.${ext}`,
+        'utf8'
+    );
 }
+
 /**
  * gets file from Template folder
  *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
- * @returns {Promise.<string>} file in string form
+ * @returns {Promise.<string>} file in JSON form
  */
 export function getActualTemplateJson(customerKey, type) {
     return File.readJSON(`./template/${type}/${customerKey}.${type}-meta.json`);
 }
+
 /**
  * gets file from Template folder
  *
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} ext file extension
- * @returns {string} file path
- */
-export function getActualTemplateFile(customerKey, type, ext) {
-    return `./template/${type}/${customerKey}.${type}-meta.${ext}`;
-}
-/**
- * gets file from resources folder which should be used for comparison
- *
- * @param {number} mid of Business Unit
- * @param {string} type of metadata
- * @param {string} action of SOAP request
  * @returns {Promise.<string>} file in string form
  */
-export function getExpectedJson(mid, type, action) {
-    return File.readJSON(path.join('test', 'resources', mid, type, action + '-expected.json'));
+export function getActualTemplateFile(customerKey, type, ext) {
+    return File.readFile(`./template/${type}/${customerKey}.${type}-meta.${ext}`, 'utf8');
 }
+
 /**
  * gets file from resources folder which should be used for comparison
  *
- * @param {number} mid of Business Unit
+ * @param {string} mid of Business Unit
+ * @param {string} type of metadata
+ * @param {string} action of SOAP request
+ * @returns {Promise.<string>} file in JSON form
+ */
+export function getExpectedJson(mid, type, action) {
+    const path = `/resources/${mid}/${type}/${action}-expected.json`;
+    console.log(loadingFile + path); // eslint-disable-line no-console
+    return File.readJSON(`./test` + path);
+}
+
+/**
+ * gets file from resources folder which should be used for comparison
+ *
+ * @param {string} mid of Business Unit
  * @param {string} type of metadata
  * @param {string} action of SOAP request
  * @param {string} ext file extension
- * @returns {string} file path
+ * @returns {Promise.<string>} file in string form
  */
 export function getExpectedFile(mid, type, action, ext) {
-    return path.join('test', 'resources', mid, type, action + '-expected.' + ext);
+    const path = `/resources/${mid}/${type}/${action}-expected.${ext}`;
+    console.log(loadingFile + path); // eslint-disable-line no-console
+    return File.readFile(`./test` + path, 'utf8');
 }
+
 /**
  * setup mocks for API and FS
  *
@@ -127,10 +190,23 @@ export function getExpectedFile(mid, type, action, ext) {
  * @returns {void}
  */
 export function mockSetup(isDeploy) {
+    cache.clearCache();
+    // no need to execute this again if we ran it a 2nd time for deploy - already done in standard setup
     if (!isDeploy) {
-        // no need to execute this again - already done in standard setup
-        handler.setOptions({ debug: true, noLogFile: true });
+        // reset all options to default
+        const resetOptions = {};
+        // get known options and make sure none are set
+        for (const option in handler.knownOptions) {
+            resetOptions[option] = undefined;
+        }
+        // test config
+        resetOptions.debug = true;
+        resetOptions.noLogFile = true;
+
+        handler.setOptions(resetOptions);
     }
+    File.prettierConfig = null;
+
     apimock = new MockAdapter(axiosInstance, { onNoMatch: 'throwException' });
     // set access_token to mid to allow for autorouting of mock to correct resources
     apimock.onPost(authResources.success.url).reply((config) => {
@@ -142,11 +218,18 @@ export function mockSetup(isDeploy) {
         .onAny(new RegExp(`^${escapeRegExp(restUrl)}`))
         .reply((config) => handleRESTRequest(config));
     const fsMockConf = {
+        '.beautyamp.json': fsmock.load(
+            path.resolve(__dirname, '../boilerplate/files/.beautyamp.json')
+        ),
         '.prettierrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.prettierrc')),
-        '.eslintrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.eslintrc')),
-        '.eslintignore': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.eslintignore')),
+        'eslint.config.js': fsmock.load(
+            path.resolve(__dirname, '../boilerplate/files/eslint.config.js')
+        ),
         '.mcdevrc.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdevrc.json')),
         '.mcdev-auth.json': fsmock.load(path.resolve(__dirname, 'mockRoot/.mcdev-auth.json')),
+        '.mcdev-validations.js': fsmock.load(
+            path.resolve(__dirname, 'mockRoot/.mcdev-validations.js')
+        ),
         'boilerplate/config.json': fsmock.load(
             path.resolve(__dirname, '../boilerplate/config.json')
         ),
@@ -193,11 +276,14 @@ export function mockReset() {
             delete Util.OPTIONS[key];
         }
     }
+    // avoid spillover from other tests
+    ReplaceContentBlockReference.resetCacheMap();
     // reset sfmc login
     auth.clearSessions();
     fsmock.restore();
     apimock.restore();
 }
+
 /**
  * helper to return amount of api callouts
  *
@@ -211,6 +297,7 @@ export function getAPIHistoryLength(includeToken) {
     }
     return historyArr.filter((item) => item.url !== '/v2/token').length;
 }
+
 /**
  * helper to return api history
  *
@@ -219,6 +306,80 @@ export function getAPIHistoryLength(includeToken) {
 export function getAPIHistory() {
     return apimock.history;
 }
+
+/**
+ *
+ * @param {'patch'|'delete'|'post'|'get'|'put'} method http method
+ * @param {string} url url without domain, end on % if you want to search with startsWith()
+ * @param {boolean} returnAll useful for post requests that often have multiple callouts with the same url
+ * @returns {object} json payload of the request
+ */
+export function getRestCallout(method, url, returnAll = false) {
+    if (!apimock.history[method]?.length) {
+        console.log(`${tWarn} No history for method ${method}.`); // eslint-disable-line no-console
+        const methods = Object.keys(apimock.history)
+            .filter((el) => apimock.history[el]?.length)
+            .join(', ');
+        console.error(`Available methods: ${methods}`); // eslint-disable-line no-console
+        return null;
+    }
+    const subset = apimock.history[method];
+
+    /**
+     * helper for filter/find
+     *
+     * @param {any} item history item
+     * @returns {boolean} if item matches
+     */
+    function findCallout(item) {
+        return url.endsWith('%') ? item.url.startsWith(url.slice(0, -1)) : item.url === url;
+    }
+
+    const myCallout = returnAll ? subset.filter(findCallout) : subset.find(findCallout);
+    if (!myCallout) {
+        console.error(`${tWarn} No callout found for ${method} ${url}`); // eslint-disable-line no-console
+        const urls = [...new Set(subset.map((el) => el.url))].join('\n- ');
+        const methods = Object.keys(apimock.history)
+            .filter((el) => apimock.history[el]?.length)
+            .join(', ');
+        console.error(`Available methods: ${methods}`); // eslint-disable-line no-console
+        console.error(`Available unique urls in method ${method}:\n- ${urls}`); // eslint-disable-line no-console
+        return null;
+    }
+    return returnAll ? myCallout.map((el) => JSON.parse(el.data)) : JSON.parse(myCallout.data);
+}
+
+/**
+ *
+ * @param {'Schedule'|'Retrieve'|'Create'|'Update'|'Delete'|'Describe'|'Execute'} requestAction soap request types
+ * @param {string} [objectType] optionall filter requests by object
+ * @returns {object[]} json payload of the requests
+ */
+export function getSoapCallouts(requestAction, objectType) {
+    const method = 'post';
+    const url = '/Service.asmx';
+    const subset = apimock.history[method];
+    const myCallout = subset
+        // find soap requests
+        .filter((item) => item.url === url)
+        // find soap requestst of the correct request type
+        .filter((item) => item.headers.SOAPAction === requestAction)
+        // find soap requestst of the correct request type
+        .filter((item) =>
+            !objectType || item.data.includes('<ObjectType')
+                ? item.data.split('<ObjectType>')[1].split('</ObjectType>')[0] === objectType
+                : item.data.includes('<Objects xsi:type="')
+                  ? item.data.split('<Objects xsi:type="')[1].split('">')[0] === objectType
+                  : false
+        )
+        .map((item) => item.data);
+    if (!myCallout) {
+        console.error(`${tWarn} No callout found for ${requestAction} ${objectType || ''}`); // eslint-disable-line no-console
+        return null;
+    }
+    return myCallout;
+}
+
 /**
  * helper to return most important fields for each api call
  *
@@ -236,6 +397,7 @@ export function getAPIHistoryDebug() {
         });
     return historyArr;
 }
+
 /**
  * helper to return most important fields for each api call
  *
@@ -252,5 +414,5 @@ export function logAPIHistoryDebug() {
  * @returns {string} escaped string
  */
 function escapeRegExp(str) {
-    return str.replaceAll(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+    return str.replaceAll(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`); // $& means the whole matched string
 }

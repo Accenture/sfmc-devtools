@@ -1,8 +1,9 @@
 {
-    "dataVerificationDefinitionId": "testExisting_39f6a488-20eb-4ba0-b0b9",
+    "c__automation_step": "testExisting_automation__s1.7",
+    "createdBy": "Jörn Berkefeld",
     "notificationEmailAddress": "",
     "notificationEmailMessage": "",
-    "r__dataExtension_CustomerKey": "testExisting_dataExtension",
+    "r__dataExtension_key": "testExisting_dataExtension",
     "shouldEmailOnFailure": false,
     "shouldStopOnFailure": true,
     "value1": 1,

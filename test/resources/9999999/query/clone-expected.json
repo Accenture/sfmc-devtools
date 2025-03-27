@@ -1,0 +1,8 @@
+{
+    "name": "testExisting_query",
+    "key": "testExisting_query",
+    "description": "bla bla",
+    "targetUpdateTypeName": "Overwrite",
+    "r__dataExtension_key": "testExisting_dataExtension",
+    "r__folder_Path": "Query"
+}

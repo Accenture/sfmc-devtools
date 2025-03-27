@@ -6,14 +6,52 @@
         }
     },
     "options": {
+        "formatOnSave": true,
+        "formatErrorLog": false,
         "deployment": {
             "commitHistory": 10,
             "sourceTargetMapping": {
                 "deployment-source": "deployment-target"
             },
+            "branchSourceTargetMapping": {
+                "sit": {
+                    "deployment-sit-source": "deployment-sit-target"
+                },
+                "uat": {
+                    "deployment-uat-source": "deployment-uat-target"
+                },
+                "prod": {
+                    "deployment-prod-source": "deployment-prod-target"
+                }
+            },
             "targetBranchBuMapping": {
                 "release/*": "MySandbox/QA-DE",
                 "master": ["MyProduction/PROD-DE", "MyProduction/PROD-NL"]
+            }
+        },
+        "validation": {
+            "retrieve": {
+                "noAmpscriptHtmlTag": "warn",
+                "noGuidKeys": "warn",
+                "noRootFolder": "warn"
+            },
+            "buildDefinition": {
+                "noAmpscriptHtmlTag": "warn",
+                "noGuidKeys": "warn",
+                "noRootFolder": "warn"
+            },
+            "deploy": {
+                "noAmpscriptHtmlTag": "warn",
+                "noGuidKeys": "warn",
+                "noRootFolder": "warn",
+                "overrides": [
+                    {
+                        "type": ["journey"],
+                        "options": {
+                            "noGuidKeys": "warn"
+                        }
+                    }
+                ]
             }
         },
         "documentType": "md",
@@ -70,6 +108,7 @@
     },
     "metaDataTypes": {
         "documentOnRetrieve": ["user", "automation", "dataExtension", "role"],
-        "retrieve": []
+        "retrieve": [],
+        "createDeltaPkg": []
     }
 }

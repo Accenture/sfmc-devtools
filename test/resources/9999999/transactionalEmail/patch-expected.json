@@ -2,12 +2,11 @@
     "name": "testExisting_temail",
     "definitionKey": "testExisting_temail",
     "description": "updated via deploy",
-    "classification": "Default Transactional",
     "status": "Active",
     "createdDate": "2020-09-10T03:29:00",
     "modifiedDate": "2020-09-10T03:29:00",
     "subscriptions": {
-        "r__dataExtension_CustomerKey": "testExisting_dataExtension",
+        "r__dataExtension_key": "testExisting_dataExtension",
         "autoAddSubscriber": true,
         "updateSubscriber": true,
         "r__list_PathName": "my subscribers/All Subscribers"
@@ -15,6 +14,7 @@
     "options": {
         "trackLinks": true
     },
-    "r__asset_customerKey": "testExisting_asset_message",
-    "r__journey_key": "testExisting_interaction"
+    "r__asset_key": "testExisting_asset_message",
+    "r__journey_key": "testExisting_temail",
+    "r__sendClassification_key": "Default Transactional"
 }

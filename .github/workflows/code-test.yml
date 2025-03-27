@@ -10,9 +10,12 @@ on:
         branches: [main, develop, hotfix]
 
 jobs:
-    testAndCoverage:
-        name: lint & test
+    lintandTesting:
         runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node: ['18.20', '20.10', 21, 22, 23]
+        name: lint & test w/ node v${{ matrix.node }}
         permissions:
             actions: read
             contents: read
@@ -22,9 +25,10 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4
 
-            - uses: actions/setup-node@v4
+            - name: Setup node
+              uses: actions/setup-node@v4
               with:
-                  node-version: 16
+                  node-version: ${{ matrix.node }}
                   registry-url: https://registry.npmjs.org/
 
             - run: npm ci --ignore-scripts

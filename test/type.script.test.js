@@ -7,7 +7,6 @@ import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const file = chaiFiles.file;
 
 describe('type: script', () => {
     beforeEach(() => {
@@ -23,7 +22,7 @@ describe('type: script', () => {
             // WHEN
             const retrieve = await handler.retrieve('testInstance/testBU', ['script']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // retrieve result
             assert.equal(
                 retrieve['testInstance/testBU'].script
@@ -46,10 +45,10 @@ describe('type: script', () => {
                 await testUtils.getExpectedJson('9999999', 'script', 'get'),
                 'returned metadata with correct key was not equal expected'
             );
-            expect(file(testUtils.getActualFile('testExisting_script', 'script', 'html'))).to.not
+            expect(await testUtils.getActualFile('testExisting_script', 'script', 'html')).to.not
                 .exist;
-            expect(file(testUtils.getActualFile('testExisting_script', 'script', 'ssjs'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'script', 'get', 'ssjs'))
+            expect(await testUtils.getActualFile('testExisting_script', 'script', 'ssjs')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'script', 'get', 'ssjs')
             );
 
             // test with no script tag
@@ -59,12 +58,12 @@ describe('type: script', () => {
                 'returned metadata was not equal expected'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_script_noScriptTag', 'script', 'html'))
+                await testUtils.getActualFile('testExisting_script_noScriptTag', 'script', 'html')
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'script', 'get_noScriptTag', 'html'))
+                await testUtils.getExpectedFile('9999999', 'script', 'get_noScriptTag', 'html')
             );
             expect(
-                file(testUtils.getActualFile('testExisting_script_noScriptTag', 'script', 'ssjs'))
+                await testUtils.getActualFile('testExisting_script_noScriptTag', 'script', 'ssjs')
             ).to.not.exist;
 
             // test with ampscript
@@ -74,11 +73,11 @@ describe('type: script', () => {
                 'returned metadata was not equal expected'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_script_ampscript', 'script', 'html'))
+                await testUtils.getActualFile('testExisting_script_ampscript', 'script', 'html')
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'script', 'get_ampscript', 'html'))
+                await testUtils.getExpectedFile('9999999', 'script', 'get_ampscript', 'html')
             );
-            expect(file(testUtils.getActualFile('testExisting_script_ampscript', 'script', 'ssjs')))
+            expect(await testUtils.getActualFile('testExisting_script_ampscript', 'script', 'ssjs'))
                 .to.not.exist;
 
             // test with mixed code (ampscript inside of ssjs)
@@ -88,12 +87,12 @@ describe('type: script', () => {
                 'returned metadata was not equal expected'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'html'))
+                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'ssjs')
             ).to.not.exist;
             expect(
-                file(testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'ssjs'))
+                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'html')
             ).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'script', 'get_ampincluded', 'ssjs'))
+                await testUtils.getExpectedFile('9999999', 'script', 'get_ampincluded', 'html')
             );
 
             // test with mixed code (ssjs and ampscript side-by-side)
@@ -103,14 +102,14 @@ describe('type: script', () => {
                 'returned metadata was not equal expected'
             );
             expect(
-                file(testUtils.getActualFile('testExisting_script_mixed', 'script', 'html'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'script', 'get_mixed', 'html')));
-            expect(file(testUtils.getActualFile('testExisting_script_mixed', 'script', 'ssjs'))).to
+                await testUtils.getActualFile('testExisting_script_mixed', 'script', 'html')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'script', 'get_mixed', 'html'));
+            expect(await testUtils.getActualFile('testExisting_script_mixed', 'script', 'ssjs')).to
                 .not.exist;
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                3,
+                2,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -120,7 +119,7 @@ describe('type: script', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['script'], ['testExisting_script']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -133,25 +132,25 @@ describe('type: script', () => {
                 await testUtils.getExpectedJson('9999999', 'script', 'get'),
                 'returned metadata was not equal expected'
             );
-            expect(file(testUtils.getActualFile('testExisting_script', 'script', 'html'))).to.not
+            expect(await testUtils.getActualFile('testExisting_script', 'script', 'html')).to.not
                 .exist;
-            expect(file(testUtils.getActualFile('testExisting_script', 'script', 'ssjs'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'script', 'get', 'ssjs'))
+            expect(await testUtils.getActualFile('testExisting_script', 'script', 'ssjs')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'script', 'get', 'ssjs')
             );
 
             expect(
-                file(testUtils.getActualFile('testExisting_script_noScriptTag', 'script', 'json'))
+                await testUtils.getActualFile('testExisting_script_noScriptTag', 'script', 'json')
             ).to.not.exist;
             expect(
-                file(testUtils.getActualFile('testExisting_script_noScriptTag', 'script', 'ssjs'))
+                await testUtils.getActualFile('testExisting_script_noScriptTag', 'script', 'ssjs')
             ).to.not.exist;
             expect(
-                file(testUtils.getActualFile('testExisting_script_noScriptTag', 'script', 'html'))
+                await testUtils.getActualFile('testExisting_script_noScriptTag', 'script', 'html')
             ).to.not.exist;
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                3,
+                2,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -163,7 +162,7 @@ describe('type: script', () => {
             await handler.retrieve('testInstance/testBU', ['script']);
 
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
 
             // get results from cache
             const result = cache.getCache();
@@ -177,23 +176,23 @@ describe('type: script', () => {
                 await testUtils.getExpectedJson('9999999', 'script', 'get'),
                 'returned metadata was not equal expected'
             );
-            expect(file(testUtils.getActualFile('testExisting_script', 'script', 'ssjs'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'script', 'get', 'ssjs'))
+            expect(await testUtils.getActualFile('testExisting_script', 'script', 'ssjs')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'script', 'get', 'ssjs')
             );
 
             expect(
-                file(testUtils.getActualFile('testExisting_script_noScriptTag', 'script', 'json'))
+                await testUtils.getActualFile('testExisting_script_noScriptTag', 'script', 'json')
             ).to.not.exist;
             expect(
-                file(testUtils.getActualFile('testExisting_script_noScriptTag', 'script', 'ssjs'))
+                await testUtils.getActualFile('testExisting_script_noScriptTag', 'script', 'ssjs')
             ).to.not.exist;
             expect(
-                file(testUtils.getActualFile('testExisting_script_noScriptTag', 'script', 'html'))
+                await testUtils.getActualFile('testExisting_script_noScriptTag', 'script', 'html')
             ).to.not.exist;
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                3,
+                2,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -204,7 +203,7 @@ describe('type: script', () => {
             handler.setOptions({ like: { key: 'NotExisting_script' } });
             await handler.retrieve('testInstance/testBU', ['script']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
 
             // get results from cache
             const result = cache.getCache();
@@ -214,11 +213,11 @@ describe('type: script', () => {
                 '5 scripts in cache expected'
             );
 
-            expect(file(testUtils.getActualFile('testExisting_script', 'script', 'ssjs'))).to.not
+            expect(await testUtils.getActualFile('testExisting_script', 'script', 'ssjs')).to.not
                 .exist;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                3,
+                2,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -234,7 +233,7 @@ describe('type: script', () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['script']);
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -254,15 +253,15 @@ describe('type: script', () => {
                 await testUtils.getExpectedJson('9999999', 'script', 'patch'),
                 'returned metadata was not equal expected for insert script'
             );
-            expect(file(testUtils.getActualFile('testExisting_script', 'script', 'html'))).to.not
+            expect(await testUtils.getActualFile('testExisting_script', 'script', 'html')).to.not
                 .exist;
-            expect(file(testUtils.getActualFile('testExisting_script', 'script', 'ssjs'))).to.equal(
-                file(testUtils.getExpectedFile('9999999', 'script', 'patch', 'ssjs'))
+            expect(await testUtils.getActualFile('testExisting_script', 'script', 'ssjs')).to.equal(
+                await testUtils.getExpectedFile('9999999', 'script', 'patch', 'ssjs')
             );
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                5,
+                4,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -279,11 +278,7 @@ describe('type: script', () => {
                 'testSourceMarket'
             );
             // WHEN
-            assert.equal(
-                process.exitCode,
-                false,
-                'retrieveAsTemplate should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'retrieveAsTemplate should not have thrown an error');
             assert.equal(
                 result.script ? Object.keys(result.script).length : 0,
                 1,
@@ -295,20 +290,16 @@ describe('type: script', () => {
                 'returned template JSON of retrieveAsTemplate was not equal expected'
             );
             expect(
-                file(testUtils.getActualTemplateFile('testExisting_script', 'script', 'ssjs'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'script', 'template', 'ssjs')));
+                await testUtils.getActualTemplateFile('testExisting_script', 'script', 'ssjs')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'script', 'template', 'ssjs'));
             // THEN
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'script',
-                'testExisting_script',
-                'testTargetMarket'
+                ['testExisting_script'],
+                ['testTargetMarket']
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_script', 'script'),
@@ -316,12 +307,12 @@ describe('type: script', () => {
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualDeployFile('testTemplated_script', 'script', 'ssjs'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'script', 'build', 'ssjs')));
+                await testUtils.getActualDeployFile('testTemplated_script', 'script', 'ssjs')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'script', 'build', 'ssjs'));
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                3,
+                2,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -335,10 +326,10 @@ describe('type: script', () => {
                 'testInstance/testBU',
                 'script',
                 ['testExisting_script'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
             // WHEN
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
 
             assert.equal(
                 result.script ? Object.keys(result.script).length : 0,
@@ -351,20 +342,16 @@ describe('type: script', () => {
                 'returned template JSON of buildTemplate was not equal expected'
             );
             expect(
-                file(testUtils.getActualTemplateFile('testExisting_script', 'script', 'ssjs'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'script', 'template', 'ssjs')));
+                await testUtils.getActualTemplateFile('testExisting_script', 'script', 'ssjs')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'script', 'template', 'ssjs'));
             // THEN
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'script',
-                'testExisting_script',
-                'testTargetMarket'
+                ['testExisting_script'],
+                ['testTargetMarket']
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_script', 'script'),
@@ -372,15 +359,57 @@ describe('type: script', () => {
                 'returned deployment JSON was not equal expected'
             );
             expect(
-                file(testUtils.getActualDeployFile('testTemplated_script', 'script', 'ssjs'))
-            ).to.equal(file(testUtils.getExpectedFile('9999999', 'script', 'build', 'ssjs')));
+                await testUtils.getActualDeployFile('testTemplated_script', 'script', 'ssjs')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'script', 'build', 'ssjs'));
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                3,
+                2,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
+        });
+
+        it('Should create a script template via buildTemplate with --dependencies', async () => {
+            // download first before we test buildTemplate
+            await handler.retrieve('testInstance/testBU', ['script', 'asset']);
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+
+            handler.setOptions({ dependencies: true, skipInteraction: true });
+
+            // GIVEN there is a template
+            const templatedItems = await handler.buildTemplate(
+                'testInstance/testBU',
+                'script',
+                ['testExisting_script_ampscript'],
+                ['testSourceMarket']
+            );
+            // WHEN
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+
+            assert.deepEqual(
+                Object.keys(templatedItems),
+                ['asset', 'script'],
+                'expected specific types to be templated'
+            );
+
+            // script
+            assert.deepEqual(
+                templatedItems.script.map((item) => item.key),
+                ['{{{prefix}}}script_ampscript'],
+                'expected specific scripts to be templated'
+            );
+            // asset
+            assert.deepEqual(
+                templatedItems.asset.map((item) => item.customerKey),
+                [
+                    '{{{prefix}}}asset_htmlblock',
+                    '{{{prefix}}}htmlblock 3 spaces',
+                    '{{{prefix}}}htmlblock1',
+                    '{{{prefix}}}htmlblock2',
+                ],
+                'expected specific assets to be templated'
+            );
         });
     });
 
@@ -406,11 +435,7 @@ describe('type: script', () => {
                 'testExisting_script',
             ]);
             // THEN
-            assert.equal(
-                process.exitCode,
-                false,
-                'getFilesToCommit should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'getFilesToCommit should not have thrown an error');
             assert.equal(fileList.length, 3, 'expected only 3 file paths (html, json, ssjs)');
 
             assert.equal(
@@ -433,4 +458,217 @@ describe('type: script', () => {
     });
 
     describe('Execute ================', () => {});
+
+    describe('ReplaceContentBlockByX ================', () => {
+        it('Should replace references with ContentBlockByName w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    script: null,
+                },
+                'name'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].script,
+                [
+                    'testExisting_script_ampscript',
+                    'testExisting_script_ampincluded',
+                    'testExisting_script_mixed',
+                ],
+                'should have found the right scripts that need updating'
+            );
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.script ? Object.keys(result.script).length : 0,
+                5,
+                'only 5 scripts expected'
+            );
+            // check if conversions happened
+            expect(
+                await testUtils.getActualFile('testExisting_script_ampscript', 'script', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'script',
+                    'get_ampscript-rcb-name',
+                    'html'
+                )
+            );
+            expect(await testUtils.getActualFile('testExisting_script_ampscript', 'script', 'ssjs'))
+                .to.not.exist;
+
+            expect(
+                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'script',
+                    'get_ampincluded-rcb-name',
+                    'html'
+                )
+            );
+            expect(
+                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'ssjs')
+            ).to.not.exist;
+
+            expect(
+                await testUtils.getActualFile('testExisting_script_mixed', 'script', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile('9999999', 'script', 'get_mixed-rcb-name', 'html')
+            );
+            expect(await testUtils.getActualFile('testExisting_script_mixed', 'script', 'ssjs')).to
+                .not.exist;
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                8,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should replace references with ContentBlockById w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    script: null,
+                },
+                'id'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].script,
+                ['testExisting_script_ampscript', 'testExisting_script_mixed'],
+                'should have found the right scripts that need updating'
+            );
+
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.script ? Object.keys(result.script).length : 0,
+                5,
+                'only 5 scripts expected'
+            );
+            // check if conversions happened
+            expect(
+                await testUtils.getActualFile('testExisting_script_ampscript', 'script', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile('9999999', 'script', 'get_ampscript-rcb-id', 'html')
+            );
+            expect(await testUtils.getActualFile('testExisting_script_ampscript', 'script', 'ssjs'))
+                .to.not.exist;
+
+            expect(
+                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'script',
+                    'get_ampincluded-rcb-id',
+                    'html'
+                )
+            );
+            expect(
+                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'ssjs')
+            ).to.not.exist;
+
+            expect(
+                await testUtils.getActualFile('testExisting_script_mixed', 'script', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile('9999999', 'script', 'get_mixed-rcb-id', 'html')
+            );
+            expect(await testUtils.getActualFile('testExisting_script_mixed', 'script', 'ssjs')).to
+                .not.exist;
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                8,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should replace references with ContentBlockByKey w/o deploy', async () => {
+            handler.setOptions({ skipDeploy: true });
+
+            // WHEN
+            const replace = await handler.replaceCbReference(
+                'testInstance/testBU',
+                {
+                    script: null,
+                },
+                'key'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                replace['testInstance/testBU'].script,
+                ['testExisting_script_ampscript', 'testExisting_script_ampincluded'],
+                'should have found the right scripts that need updating'
+            );
+
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.script ? Object.keys(result.script).length : 0,
+                5,
+                'only 5 scripts expected'
+            );
+            // check if conversions happened
+            expect(
+                await testUtils.getActualFile('testExisting_script_ampscript', 'script', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'script',
+                    'get_ampscript-rcb-key',
+                    'html'
+                )
+            );
+            expect(await testUtils.getActualFile('testExisting_script_ampscript', 'script', 'ssjs'))
+                .to.not.exist;
+
+            expect(
+                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile(
+                    '9999999',
+                    'script',
+                    'get_ampincluded-rcb-key',
+                    'html'
+                )
+            );
+            expect(
+                await testUtils.getActualFile('testExisting_script_ampincluded', 'script', 'ssjs')
+            ).to.not.exist;
+
+            expect(
+                await testUtils.getActualFile('testExisting_script_mixed', 'script', 'html')
+            ).to.equal(
+                await testUtils.getExpectedFile('9999999', 'script', 'get_mixed-rcb-key', 'html')
+            );
+            expect(await testUtils.getActualFile('testExisting_script_mixed', 'script', 'ssjs')).to
+                .not.exist;
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                8,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
 });

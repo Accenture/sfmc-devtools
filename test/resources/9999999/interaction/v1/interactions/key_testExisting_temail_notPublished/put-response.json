@@ -1,0 +1,226 @@
+{
+    "id": "d4a900fe-3a8f-4cc5-9a49-81286e3e2cd2",
+    "key": "testExisting_temail_notPublished",
+    "name": "testExisting_temail_notPublished",
+    "lastPublishedDate": "0001-01-01T00:00:00",
+    "description": "",
+    "version": 1,
+    "workflowApiVersion": 1,
+    "createdDate": "2024-08-23T01:29:33.233",
+    "modifiedDate": "2024-08-23T02:00:44.57",
+    "activities": [
+        {
+            "id": "4ae63473-ea1e-4963-a257-6fea45a9038a",
+            "key": "EMAILV2-3",
+            "name": "my email activity",
+            "description": "",
+            "type": "EMAILV2",
+            "outcomes": [
+                {
+                    "key": "067f20ba-af36-4401-99d8-934100e1935d",
+                    "arguments": {},
+                    "metaData": {
+                        "invalid": false
+                    }
+                }
+            ],
+            "arguments": {},
+            "configurationArguments": {
+                "applicationExtensionKey": "jb-email-activity",
+                "isModified": true,
+                "triggeredSend": {
+                    "autoAddSubscribers": true,
+                    "autoUpdateSubscribers": true,
+                    "bccEmail": "",
+                    "ccEmail": "",
+                    "created": {},
+                    "domainExclusions": [],
+                    "dynamicEmailSubject": "%%=treatascontent(@subject)=%%",
+                    "emailId": 531213,
+                    "emailSubject": "%%=treatascontent(@subject)=%%",
+                    "exclusionFilter": "",
+                    "isSalesforceTracking": true,
+                    "isMultipart": true,
+                    "isSendLogging": false,
+                    "isStoppedOnJobError": false,
+                    "modified": {},
+                    "preHeader": "%%=treatascontent(@preheader)=%%\n",
+                    "priority": 4,
+                    "sendClassificationId": "95da425b-a06f-e611-96fe-38eaa7142c61",
+                    "throttleOpens": "1/1/0001 12:00:00 AM",
+                    "throttleCloses": "1/1/0001 12:00:00 AM",
+                    "deliveryProfileId": "163f8417-13f7-e911-a2d8-1402ec938a35",
+                    "senderProfileId": "a75d452b-7ef4-eb11-b82d-48df37d1da95",
+                    "isTrackingClicks": true,
+                    "publicationListId": 15
+                },
+                "triggeredSendId": "6a2f70c5-2561-ef11-b876-f40343c95928",
+                "triggeredSendKey": "testExisting_temail_notPublished"
+            },
+            "metaData": {
+                "highThroughput": {
+                    "definitionKey": "testExisting_temail_notPublished",
+                    "dataExtensionId": "3c3a54a5-d55f-ef11-b876-f40343c95928"
+                },
+                "isConfigured": true,
+                "sections": {}
+            },
+            "schema": {
+                "arguments": {
+                    "requestID": {
+                        "dataType": "Text",
+                        "isNullable": true,
+                        "direction": "Out",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "messageKey": {
+                        "dataType": "Text",
+                        "isNullable": true,
+                        "direction": "Out",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "activityId": {
+                        "dataType": "Text",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "definitionId": {
+                        "dataType": "Text",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": true,
+                        "access": "Hidden"
+                    },
+                    "emailSubjectDataBound": {
+                        "dataType": "Text",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": true,
+                        "access": "Hidden"
+                    },
+                    "contactId": {
+                        "dataType": "Number",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "contactKey": {
+                        "dataType": "Text",
+                        "isNullable": false,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "emailAddress": {
+                        "dataType": "Text",
+                        "isNullable": false,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "sourceCustomObjectId": {
+                        "dataType": "Text",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "sourceCustomObjectKey": {
+                        "dataType": "LongNumber",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "fieldType": {
+                        "dataType": "Text",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "eventData": {
+                        "dataType": "Text",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "obfuscationProperties": {
+                        "dataType": "Text",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "customObjectKey": {
+                        "dataType": "LongNumber",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": true,
+                        "access": "Hidden"
+                    },
+                    "definitionInstanceId": {
+                        "dataType": "Text",
+                        "isNullable": false,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    }
+                }
+            }
+        }
+    ],
+    "triggers": [
+        {
+            "id": "64a93832-fd23-487e-b585-8f3af3b5b6eb",
+            "key": "TRIGGER",
+            "name": "TRIGGER",
+            "description": "",
+            "type": "transactional-api",
+            "outcomes": [],
+            "arguments": {},
+            "configurationArguments": {},
+            "metaData": {
+                "chainType": "none",
+                "configurationRequired": false,
+                "iconUrl": "/images/icon_journeyBuilder-event-transactional-blue.svg",
+                "title": "Transactional API Event",
+                "category": "Transactional",
+                "entrySourceGroupConfigUrl": "null"
+            }
+        }
+    ],
+    "goals": [],
+    "exits": [],
+    "notifiers": [],
+    "stats": {
+        "currentPopulation": 0,
+        "cumulativePopulation": 0,
+        "metGoal": 0,
+        "metExitCriteria": 0,
+        "goalPerformance": 0
+    },
+    "entryMode": "MultipleEntries",
+    "definitionType": "Transactional",
+    "channel": "email",
+    "defaults": {
+        "properties": {}
+    },
+    "metaData": {
+        "dataSource": "ContactsModel",
+        "highThroughputSending": {
+            "email": false
+        }
+    },
+    "executionMode": "Production",
+    "categoryId": 6298,
+    "status": "Draft",
+    "definitionId": "d4a900fe-3a8f-4cc5-9a49-81286e3e2cd2",
+    "scheduledStatus": "Draft"
+}

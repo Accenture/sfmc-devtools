@@ -4,9 +4,7 @@
     "type": "ExactTarget.Mobile.Sms.Core.Entities.SmsMessageEntity",
     "name": "jb test 3",
     "origin": "SMS Send",
-    "code": {
-        "code": "4912312345678"
-    },
+    "r__mobileCode_key": "4912312345678",
     "mtSendDate": "2017-07-03T14:03:00Z",
     "template": {
         "id": "Mzo4MDow",
@@ -18,7 +16,7 @@
     "status": "Active/Scheduled",
     "invalidMessage": "",
     "responseMessage": "",
-    "publishedMessage": "Text '<keyword>'  to 491771783703.",
+    "publishedMessage": "Text '<keyword>'  to 4912312345678.",
     "isTest": false,
     "moTimezone": {
         "offset": 1,

@@ -21,7 +21,7 @@ describe('type: fileTransfer', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['fileTransfer']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -52,7 +52,7 @@ describe('type: fileTransfer', () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['fileTransfer']);
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -91,7 +91,7 @@ describe('type: fileTransfer', () => {
                 ['testExisting_fileTransfer'],
                 'testSourceMarket'
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.fileTransfer ? Object.keys(result.fileTransfer).length : 0,
                 1,
@@ -106,14 +106,10 @@ describe('type: fileTransfer', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'fileTransfer',
-                'testExisting_fileTransfer',
-                'testTargetMarket'
+                ['testExisting_fileTransfer'],
+                ['testTargetMarket']
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_fileTransfer', 'fileTransfer'),
                 await testUtils.getExpectedJson('9999999', 'fileTransfer', 'build'),
@@ -135,9 +131,9 @@ describe('type: fileTransfer', () => {
                 'testInstance/testBU',
                 'fileTransfer',
                 ['testExisting_fileTransfer'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.fileTransfer ? Object.keys(result.fileTransfer).length : 0,
                 1,
@@ -152,14 +148,10 @@ describe('type: fileTransfer', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'fileTransfer',
-                'testExisting_fileTransfer',
-                'testTargetMarket'
+                ['testExisting_fileTransfer'],
+                ['testTargetMarket']
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_fileTransfer', 'fileTransfer'),
                 await testUtils.getExpectedJson('9999999', 'fileTransfer', 'build'),

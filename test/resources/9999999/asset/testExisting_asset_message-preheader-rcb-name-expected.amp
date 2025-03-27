@@ -1,0 +1,4 @@
+%%= ContentBlockByName("Content Builder\dont strip non ssjs content") =%% <script runat="server">
+Platform.Function.ContentBlockByName("Content Builder\\dont strip non ssjs content");</script>%%= ContentBlockByName("Content Builder\testExisting_htmlblock1") =%% <script runat="server">
+Platform.Function.ContentBlockByName("Content Builder\\dont strip non ssjs content");</script>%%= ContentBlockByName("Content Builder\dont strip non ssjs content") =%% <script runat="server">
+Platform.Function.ContentBlockByName("Content Builder\\dont strip non ssjs content");</script>

@@ -1,0 +1,66 @@
+{
+    "description": "created on deploy",
+    "key": "testNew_automation",
+    "name": "testNew_automation",
+    "status": "Scheduled",
+    "steps": [
+        {
+            "activities": [
+                {
+                    "displayOrder": 1,
+                    "activityObjectId": "56c5370a-f988-4f36-b0ee-0f876573f6d7",
+                    "name": "testExisting_dataExtract",
+                    "objectTypeId": 73
+                },
+                {
+                    "displayOrder": 2,
+                    "activityObjectId": "9b1c7bf9-4964-ed11-b849-48df37d1de8b",
+                    "name": "testExisting_emailSend",
+                    "objectTypeId": 42
+                },
+                {
+                    "displayOrder": 3,
+                    "activityObjectId": "72c328ac-f5b0-4e37-91d3-a775666f15a6",
+                    "name": "testExisting_fileTransfer",
+                    "objectTypeId": 53
+                },
+                {
+                    "displayOrder": 4,
+                    "activityObjectId": "9d16f42c-2260-ed11-b849-48df37d1de8b",
+                    "name": "testExisting_importFile",
+                    "objectTypeId": 43
+                },
+                {
+                    "displayOrder": 5,
+                    "activityObjectId": "549f0568-607c-4940-afef-437965094dat",
+                    "name": "testExisting_query",
+                    "objectTypeId": 300
+                },
+                {
+                    "displayOrder": 6,
+                    "activityObjectId": "39f6a488-20eb-4ba0-b0b9-023725b574e4",
+                    "name": "testExisting_script",
+                    "objectTypeId": 423
+                },
+                {
+                    "displayOrder": 7,
+                    "activityObjectId": "testNew_RANDOM_NEW_GUID",
+                    "name": "testNew_automation__s1.7",
+                    "objectTypeId": 1000
+                }
+            ],
+            "annotation": "",
+            "stepNumber": 0
+        }
+    ],
+    "categoryId": 290937,
+    "startSource": {
+        "schedule": {
+            "startDate": "2020-05-14T02:30:32.11",
+            "endDate": "2079-06-06T21:00:00",
+            "icalRecur": "FREQ=MINUTELY;UNTIL=20790607T050000;INTERVAL=5",
+            "timezoneId": 5
+        },
+        "typeId": 1
+    }
+}

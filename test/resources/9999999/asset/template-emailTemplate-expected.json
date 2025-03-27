@@ -1,0 +1,20 @@
+{
+    "assetType": {
+        "displayName": "Template",
+        "name": "template"
+    },
+    "availableViews": [],
+    "createdBy": {},
+    "customerKey": "{{{prefix}}}asset_template",
+    "fileProperties": {
+        "fileName": " {{{prefix}}}asset_template"
+    },
+    "memberId": "510009653",
+    "modelVersion": 2,
+    "modifiedBy": {},
+    "name": " {{{prefix}}}asset_template",
+    "r__folder_Path": "Content Builder",
+    "status": {
+        "name": "Draft"
+    }
+}
