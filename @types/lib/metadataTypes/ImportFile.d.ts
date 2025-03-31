@@ -122,6 +122,7 @@ declare namespace ImportFile {
             List: number;
             SMS: number;
             Push: number;
+            WhatsApp: number;
         };
         hasExtended: boolean;
         idField: string;
