@@ -12,6 +12,7 @@ declare namespace _default {
         let List: number;
         let SMS: number;
         let Push: number;
+        let WhatsApp: number;
     }
     let hasExtended: boolean;
     let idField: string;
