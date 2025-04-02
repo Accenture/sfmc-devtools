@@ -220,7 +220,6 @@
         "sendableCustomObjectField": "ContactId",
         "sendableSubscriberField": "_SubscriberKey"
     },
-    "filterDefinitionId": "00000000-0000-0000-0000-000000000000",
     "arguments": {
         "serializedObjectType": 11
     },
@@ -229,6 +228,5 @@
     "isVisibleInPicker": true,
     "category": "Event",
     "publishedInteractionCount": 0,
-    "automationId": "00000000-0000-0000-0000-000000000000",
     "r__dataExtension_key": "testNew_event_withSchema"
 }
