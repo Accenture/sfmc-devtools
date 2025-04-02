@@ -219,7 +219,6 @@
         "sendableSubscriberField": "_SubscriberKey"
     },
     "sourceApplicationExtensionId": "00000000-0000-0000-0000-000000000000",
-    "filterDefinitionId": "00000000-0000-0000-0000-000000000000",
     "filterDefinitionTemplate": "",
     "iconUrl": "",
     "arguments": { "serializedObjectType": 11, "criteria": "" },
@@ -228,7 +227,6 @@
     "isVisibleInPicker": true,
     "category": "Event",
     "publishedInteractionCount": 0,
-    "automationId": "00000000-0000-0000-0000-000000000000",
     "disableDEDataLogging": false,
     "r__dataExtension_key": "testExisting_event - 2024-07-05T080154625"
 }
