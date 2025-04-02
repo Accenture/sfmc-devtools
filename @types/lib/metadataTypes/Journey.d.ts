@@ -957,6 +957,12 @@ declare namespace Journey {
                 retrieving: boolean;
                 template: boolean;
             };
+            'triggers[].configurationArguments.objectApiName': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             'triggers[].configurationArguments.objectAPIName': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -1030,12 +1036,6 @@ declare namespace Journey {
                 template: boolean;
             };
             'triggers[].configurationArguments.whoToInject': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            'triggers[].configurationArguments.objectApiName': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
