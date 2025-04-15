@@ -998,6 +998,12 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        entrySourceGroupConfigUrl: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         type: {
             isCreateable: boolean;
             isUpdateable: boolean;

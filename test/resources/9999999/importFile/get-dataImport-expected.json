@@ -21,7 +21,7 @@
     "sendEmailNotification": false,
     "standardQuotedStrings": true,
     "encodingName": "utf-8",
-    "blankFileProcessingType": 0,
+    "c__blankFileProcessing": "Fail",
     "destination": {
         "c__type": "DataExtension",
         "r__dataExtension_key": "testExisting_journey_Quicksend"
