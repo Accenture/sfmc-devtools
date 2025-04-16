@@ -272,7 +272,14 @@ export const handleRESTRequest = async (config) => {
             filterName = urlObj.searchParams.get('$filter').split(' eq ')[1];
         } else if (urlObj.searchParams.get('action')) {
             filterName = urlObj.searchParams.get('action');
+        } else if (urlObj.searchParams.get('mostRecentVersionOnly')) {
+            filterName = 'mostRecentVersionOnly';
+        } else if (urlObj.searchParams.get('versionNumber')) {
+            filterName = 'versionNumber';
+        } else if (urlObj.searchParams.get('id')) {
+            filterName = 'id';
         }
+
         const testPath = path
             .join(
                 'test',
@@ -285,10 +292,18 @@ export const handleRESTRequest = async (config) => {
         const testPathFilter = filterName
             ? testPath +
               '-' +
-              (urlObj.searchParams.get('$filter') || urlObj.searchParams.get('action'))
+              (urlObj.searchParams.get('$filter') || urlObj.searchParams.get('action') || '')
                   .replaceAll(' eq ', '=')
-                  .replaceAll(' ', '')
+                  .replaceAll(' ', '') +
+              (urlObj.searchParams.get('id') ? 'id=' + urlObj.searchParams.get('id') : '') +
+              (urlObj.searchParams.get('versionNumber')
+                  ? 'versionNumber=' + urlObj.searchParams.get('versionNumber')
+                  : '') +
+              (urlObj.searchParams.get('mostRecentVersionOnly')
+                  ? 'mostRecentVersionOnly=' + urlObj.searchParams.get('mostRecentVersionOnly')
+                  : '')
             : null;
+
         if (!testPathFilter && config.method === 'post' && config.data) {
             const simpleOperators = { equal: '=', in: 'IN' };
             const data = JSON.parse(config.data);
@@ -319,7 +334,12 @@ export const handleRESTRequest = async (config) => {
                         encoding: 'utf8',
                     })
                 );
-                if (response.items) {
+                if (
+                    response.items &&
+                    filterName !== 'mostRecentVersionOnly' &&
+                    filterName !== 'versionNumber' &&
+                    filterName !== 'id'
+                ) {
                     response.items = response.items.filter((def) => def.name == filterName);
                 }
                 console.log(loadingFile + projectRoot + testPathFilter + '.json'); // eslint-disable-line no-console
@@ -448,7 +468,8 @@ export const handleRESTRequest = async (config) => {
                 }),
             ];
         }
-    } catch {
+    } catch (ex) {
+        console.log(ex); // eslint-disable-line no-console
         return [500, {}];
     }
 };
