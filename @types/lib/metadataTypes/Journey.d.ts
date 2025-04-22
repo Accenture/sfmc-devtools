@@ -143,6 +143,13 @@ declare class Journey extends MetadataType {
      */
     static validate(keyArr: string[]): Promise<string[]>;
     /**
+     * audit latest or given journey version
+     *
+     * @param {string[]} keyArr customerkey of the metadata
+     * @returns {Promise.<string[]>} Returns list of keys that were paused
+     */
+    static audit(keyArr: string[]): Promise<string[]>;
+    /**
      * TSD-specific refresh method that finds active TSDs and refreshes them
      *
      * @param {string[]} keyArr metadata keys
