@@ -403,7 +403,12 @@ export const handleRESTRequest = async (config) => {
             }
 
             // build filter logic to ensure templating works
-            if (filterName) {
+            if (
+                filterName &&
+                filterName !== 'mostRecentVersionOnly' &&
+                filterName !== 'versionNumber' &&
+                filterName !== 'id'
+            ) {
                 const response = JSON.parse(
                     await fs.readFile(testPath + '.json', {
                         encoding: 'utf8',

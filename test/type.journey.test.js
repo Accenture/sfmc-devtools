@@ -1305,9 +1305,47 @@ describe('type: journey', () => {
     });
 
     describe('Audit ================', () => {
-        it('Should show audit log of a transactional journey');
+        it('Should show audit log of a transactional journey', async () => {
+            const audit = await handler.audit('testInstance/testBU', {
+                journey: ['testExisting_temail'],
+            });
+            // THEN
+            assert.equal(process.exitCode, 0, 'audit should not have thrown an error');
 
-        it('Should show audit log of a transactional journey disregarding the given version');
+            assert.deepEqual(
+                audit['testInstance/testBU'].journey,
+                ['testExisting_temail'],
+                'should have returned the right journeys'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                2,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+
+            return;
+        });
+
+        it('Should show audit log of a transactional journey disregarding the given version', async () => {
+            const audit = await handler.audit('testInstance/testBU', {
+                journey: ['testExisting_temail/99'],
+            });
+            // THEN
+            assert.equal(process.exitCode, 0, 'audit should not have thrown an error');
+
+            assert.deepEqual(
+                audit['testInstance/testBU'].journey,
+                ['testExisting_temail'],
+                'should have returned the right journeys'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                2,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+
+            return;
+        });
 
         it('Should show audit log of a multi-step journey and version', async () => {
             const audit = await handler.audit('testInstance/testBU', {
