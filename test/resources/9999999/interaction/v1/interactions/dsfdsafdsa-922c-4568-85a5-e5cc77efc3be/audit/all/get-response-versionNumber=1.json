@@ -1,0 +1,23 @@
+{
+    "count": 1,
+    "page": 1,
+    "pageSize": 50,
+    "links": {},
+    "items": [
+        {
+            "id": "dsfdsafdsa-922c-4568-85a5-e5cc77efc3be",
+            "action": "Create",
+            "user": {
+                "name": "joern.berkefeld app user",
+                "userId": 710420432
+            },
+            "timeStamp": "2024-10-01T07:07:51.967",
+            "key": "testExisting_temail",
+            "versionNumber": 1,
+            "originalDefinitionId": "dsfdsafdsa-922c-4568-85a5-e5cc77efc3be",
+            "name": "testExisting_temail",
+            "description": "",
+            "executionMode": "Production"
+        }
+    ]
+}
