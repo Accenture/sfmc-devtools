@@ -97,7 +97,7 @@
             },
             "executionMode": "Production",
             "categoryId": 12202,
-            "status": "Stopped",
+            "status": "Published",
             "definitionId": "4a15030f-edce-4b83-9f8a-74ce80eb7df6",
             "scheduledStatus": "Draft"
         }
