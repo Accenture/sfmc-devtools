@@ -13,7 +13,7 @@ export default [
     eslintPluginPrettierRecommended,
     mochaPlugin.configs.recommended,
     jsdoc.configs['flat/recommended'],
-    eslintPluginUnicorn.configs['flat/recommended'],
+    eslintPluginUnicorn.configs['recommended'],
     {
         languageOptions: {
             globals: {
