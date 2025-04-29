@@ -6,7 +6,6 @@
     "modifiedDate": "2024-04-24T12:19:12.803",
     "activities": [
         {
-            "id": "e20dcaa3-a750-44cf-9ce8-42d00378b8b4",
             "key": "EMAILV2-1",
             "name": "{{{prefix}}}asset_mail",
             "description": "",

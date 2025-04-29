@@ -11,9 +11,9 @@ export default [
     },
     js.configs.recommended,
     eslintPluginPrettierRecommended,
-    mochaPlugin.configs.flat.recommended,
+    mochaPlugin.configs.recommended,
     jsdoc.configs['flat/recommended'],
-    eslintPluginUnicorn.configs['flat/recommended'],
+    eslintPluginUnicorn.configs['recommended'],
     {
         languageOptions: {
             globals: {

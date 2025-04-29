@@ -1,0 +1,144 @@
+{
+    "count": 3,
+    "page": 1,
+    "pageSize": 50,
+    "links": {},
+    "items": [
+        {
+            "id": 9463,
+            "customerKey": "test_coderesource_json",
+            "assetType": {
+                "id": 242,
+                "name": "jsoncoderesource",
+                "displayName": "JSON Code Resource"
+            },
+            "name": "test_coderesource_json",
+            "createdDate": "2025-03-25T03:15:22.72-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:16:40.913-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "category": {
+                "id": 27675,
+                "name": "mcdev",
+                "parentId": 23009
+            },
+            "content": "{\n\"test\": true\n}",
+            "meta": {
+                "cloudPages": {
+                    "publishDate": "2025-03-25 03:16:40.913"
+                }
+            },
+            "availableViews": [],
+            "data": {
+                "site": {
+                    "content": "{\"url\":\"https://oss-test.accenture.com/test_coderesource_json\"}"
+                }
+            },
+            "modelVersion": 2
+        },
+        {
+            "id": 9460,
+            "customerKey": "test_coderesource_xml",
+            "assetType": {
+                "id": 245,
+                "name": "xmlcoderesource",
+                "displayName": "XML Code Resource"
+            },
+            "name": "test_coderesource_xml",
+            "createdDate": "2025-03-25T03:03:45.713-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:04:06.48-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "category": {
+                "id": 27675,
+                "name": "mcdev",
+                "parentId": 23009
+            },
+            "content": "<xml>test</xml>",
+            "meta": {
+                "cloudPages": {}
+            },
+            "availableViews": [],
+            "data": {
+                "site": {
+                    "content": "{\"url\":\"https://oss-test.accenture.com/test_coderesource_xml\"}"
+                }
+            },
+            "modelVersion": 2
+        },
+        {
+            "id": 9451,
+            "customerKey": "test_coderesource_js",
+            "assetType": {
+                "id": 240,
+                "name": "jscoderesource",
+                "displayName": "Javascript Code Resource"
+            },
+            "name": "test_coderesource_js",
+            "createdDate": "2025-03-24T05:20:40.82-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:03:20.603-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "category": {
+                "id": 27675,
+                "name": "mcdev",
+                "parentId": 23009
+            },
+            "content": "/* insert code here */\n",
+            "meta": {
+                "cloudPages": {
+                    "publishDate": "2025-03-24 06:05:23.203"
+                }
+            },
+            "availableViews": [],
+            "data": {
+                "site": {
+                    "content": "{\"url\":\"https://oss-test.accenture.com/test_coderesource\"}"
+                }
+            },
+            "modelVersion": 2
+        }
+    ]
+}

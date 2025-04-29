@@ -348,9 +348,10 @@ declare class MetadataType {
      * @param {MetadataTypeItem} metadataEntry a single metadata Entry
      * @param {string} uri rest endpoint for PATCH
      * @param {'patch'|'post'|'put'} [httpMethod] defaults to 'patch'; some update requests require PUT instead of PATCH
+     * @param {boolean} [handleOutside] if the API reponse is irregular this allows you to handle it outside of this generic method
      * @returns {Promise.<object> | null} Promise of API response or null in case of an error
      */
-    static updateREST(metadataEntry: MetadataTypeItem, uri: string, httpMethod?: "patch" | "post" | "put"): Promise<object> | null;
+    static updateREST(metadataEntry: MetadataTypeItem, uri: string, httpMethod?: "patch" | "post" | "put", handleOutside?: boolean): Promise<object> | null;
     /**
      * helper for {@link MetadataType.updateREST} and {@link MetadataType.updateSOAP} that removes old files after the key was changed
      *
@@ -420,10 +421,11 @@ declare class MetadataType {
      * helper for {@link this.retrieveRESTcollection}
      *
      * @param {RestError} ex exception
-     * @param {string} id id or key of item
+     * @param {string} key id or key of item
+     * @param {string} url url to call for retry
      * @returns {Promise.<any>} -
      */
-    static handleRESTErrors(ex: RestError, id: string): Promise<any>;
+    static handleRESTErrors(ex: RestError, key: string, url: string): Promise<any>;
     /**
      * Used to execute a query/automation etc.
      *

@@ -679,7 +679,9 @@ describe('type: automation', () => {
         it('Should create a automation template via buildTemplate with --dependencies', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU');
-            const expectedApiCallsRetrieve = 97;
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+
+            const expectedApiCallsRetrieve = 101;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 expectedApiCallsRetrieve,

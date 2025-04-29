@@ -13,9 +13,10 @@ declare namespace _default {
      * @param {string} searchField field name (key in object) which contains the unique identifer
      * @param {string} returnField field which should be returned
      * @param {number} [overrideMID] ignore currentMID and use alternative (for example parent MID)
+     * @param {boolean} caseInsensitive optional; if true, search is case insensitive
      * @returns {string} value of specified field. Error is thrown if not found
      */
-    function searchForField(metadataType: string, searchValue: string | number | boolean, searchField: string, returnField: string, overrideMID?: number): string;
+    function searchForField(metadataType: string, searchValue: string | number | boolean, searchField: string, returnField: string, overrideMID?: number, caseInsensitive?: boolean): string;
     /**
      * helper for setFolderId
      *

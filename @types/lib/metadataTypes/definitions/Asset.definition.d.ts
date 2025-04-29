@@ -157,6 +157,12 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        'content.url': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         contentType: {
             isCreateable: boolean;
             isUpdateable: boolean;
@@ -230,6 +236,24 @@ declare namespace _default {
             skipValidation: boolean;
         };
         'data.portfolio': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'data.site': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'data.site.content': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'data.site.content.url': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
@@ -508,20 +532,22 @@ declare namespace _default {
     let selflinkedSubTypes: string[];
     let binarySubtypes: string[];
     namespace extendedSubTypes {
+        export let archive: string[];
         let asset_1: string[];
         export { asset_1 as asset };
-        export let image: string[];
-        export let rawimage: string[];
-        export let video: string[];
-        export let document: string[];
         export let audio: string[];
-        export let archive: string[];
-        export let code: string[];
-        export let textfile: string[];
         export let block: string[];
-        export let template: string[];
+        export let cloudpage: string[];
+        export let code: string[];
+        export let coderesource: string[];
+        export let document: string[];
+        export let image: string[];
         export let message: string[];
         export let other: string[];
+        export let rawimage: string[];
+        export let template: string[];
+        export let textfile: string[];
+        export let video: string[];
     }
     let typeMapping: {
         asset: number;
@@ -753,6 +779,17 @@ declare namespace _default {
         contentmap: number;
         jsonmessage: number;
         icemailformblock: number;
+        coderesource: number;
+        jscoderesource: number;
+        csscoderesource: number;
+        jsoncoderesource: number;
+        rsscoderesource: number;
+        textcoderesource: number;
+        xmlcoderesource: number;
+        cloudpages: number;
+        landingpage: number;
+        microsite: number;
+        interactivecontent: number;
     };
 }
 export default _default;

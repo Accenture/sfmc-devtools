@@ -1,0 +1,132 @@
+{
+    "count": 4,
+    "page": 1,
+    "pageSize": 50,
+    "links": {},
+    "items": [
+        {
+            "id": 9465,
+            "customerKey": "test_landingpage",
+            "assetType": {
+                "id": 247,
+                "name": "landingpage",
+                "displayName": "Landing Page"
+            },
+            "name": "test_landingpage",
+            "createdDate": "2025-03-25T03:17:51.88-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:17:52.187-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "category": {
+                "id": 27675,
+                "name": "mcdev",
+                "parentId": 23009
+            },
+            "content": "{\"url\":\"https://oss-test.accenture.com/test_landingpage\"}",
+            "meta": {
+                "thumbnailRefAssetId": 9466,
+                "cloudPages": {}
+            },
+            "availableViews": [],
+            "modelVersion": 2
+        },
+        {
+            "id": 9456,
+            "customerKey": "test_microsite",
+            "assetType": {
+                "id": 248,
+                "name": "microsite",
+                "displayName": "Microsite"
+            },
+            "name": "test_microsite",
+            "createdDate": "2025-03-25T03:01:05.467-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:12:51.85-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "category": {
+                "id": 27675,
+                "name": "mcdev",
+                "parentId": 23009
+            },
+            "content": "{\"url\":\"https://oss-test.accenture.com/test_microsite\"}",
+            "meta": {
+                "thumbnailRefAssetId": 9461,
+                "cloudPages": {
+                    "publishDate": "2025-03-25 03:12:51.850"
+                }
+            },
+            "availableViews": [],
+            "modelVersion": 2
+        },
+        {
+            "id": 9458,
+            "customerKey": "test_interactivecontent",
+            "assetType": {
+                "id": 249,
+                "name": "interactivecontent",
+                "displayName": "Interactive Email Page"
+            },
+            "name": "test_interactivecontent",
+            "createdDate": "2025-03-25T03:02:46.823-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:02:55.307-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "category": {
+                "id": 27675,
+                "name": "mcdev",
+                "parentId": 23009
+            },
+            "content": "{\"url\":\"https://oss-test.accenture.com/test_interactivecontent\"}",
+            "meta": {
+                "thumbnailRefAssetId": 9459,
+                "cloudPages": {
+                    "publishDate": "2025-03-25 03:02:55.307"
+                }
+            },
+            "availableViews": [],
+            "modelVersion": 2
+        }
+    ]
+}

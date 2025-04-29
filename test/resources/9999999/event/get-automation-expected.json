@@ -8,7 +8,6 @@
     "modifiedBy": "Jörn Berkefeld",
     "eventDefinitionKey": "testExisting_event_automation",
     "sourceApplicationExtensionId": "97e942ee-6914-4d3d-9e52-37ecb71f79ed",
-    "filterDefinitionId": "00000000-0000-0000-0000-000000000000",
     "filterDefinitionTemplate": "",
     "iconUrl": "/images/icon-data-extension.svg",
     "arguments": {

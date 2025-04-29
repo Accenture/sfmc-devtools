@@ -1,0 +1,86 @@
+{
+    "count": 6,
+    "page": 1,
+    "pageSize": 50,
+    "links": {},
+    "items": [
+        {
+            "id": "0175b971-71a3-4d8e-98ac-48121f3fbf4f",
+            "action": "Stop",
+            "user": {
+                "name": "Jörn Berkefeld",
+                "userId": 710355723
+            },
+            "timeStamp": "2024-11-26T08:07:00.867",
+            "key": "testExisting_journey_Multistep",
+            "versionNumber": 3,
+            "originalDefinitionId": "0175b971-71a3-4d8e-98ac-48121f3fbf4f",
+            "name": "testExisting_journey_Multistep",
+            "description": ""
+        },
+        {
+            "id": "0175b971-71a3-4d8e-98ac-48121f3fbf4f",
+            "action": "Publish",
+            "user": {
+                "name": "Jörn Berkefeld",
+                "userId": 710355723
+            },
+            "timeStamp": "2024-10-28T08:05:01.087",
+            "key": "testExisting_journey_Multistep",
+            "versionNumber": 3,
+            "originalDefinitionId": "0175b971-71a3-4d8e-98ac-48121f3fbf4f",
+            "name": "testExisting_journey_Multistep",
+            "description": "",
+            "executionMode": "Production",
+            "publishStatus": "PublishCompleted",
+            "publishRequestId": "f91be603-e9d0-4f12-b75a-6f4d6dae760c"
+        },
+        {
+            "id": "0175b971-71a3-4d8e-98ac-48121f3fbf4f",
+            "action": "Publish",
+            "user": {
+                "name": "Jörn Berkefeld",
+                "userId": 710355723
+            },
+            "timeStamp": "2024-10-28T08:04:22.4",
+            "key": "testExisting_journey_Multistep",
+            "versionNumber": 3,
+            "originalDefinitionId": "0175b971-71a3-4d8e-98ac-48121f3fbf4f",
+            "name": "testExisting_journey_Multistep",
+            "description": "",
+            "executionMode": "Production",
+            "publishStatus": "PublishCompleted",
+            "publishRequestId": "8ee64518-181d-4c49-b1ba-de8314c306dd"
+        },
+        {
+            "id": "0175b971-71a3-4d8e-98ac-48121f3fbf4f",
+            "action": "Modify",
+            "user": {
+                "name": "Jörn Berkefeld",
+                "userId": 710355723
+            },
+            "timeStamp": "2024-10-28T08:04:14.607",
+            "key": "testExisting_journey_Multistep",
+            "versionNumber": 3,
+            "originalDefinitionId": "0175b971-71a3-4d8e-98ac-48121f3fbf4f",
+            "name": "testExisting_journey_Multistep",
+            "description": "",
+            "executionMode": "Production"
+        },
+        {
+            "id": "0175b971-71a3-4d8e-98ac-48121f3fbf4f",
+            "action": "Create",
+            "user": {
+                "name": "Jörn Berkefeld",
+                "userId": 710355723
+            },
+            "timeStamp": "2024-10-28T08:03:21.383",
+            "key": "testExisting_journey_Multistep",
+            "versionNumber": 3,
+            "originalDefinitionId": "0175b971-71a3-4d8e-98ac-48121f3fbf4f",
+            "name": "testExisting_journey_Multistep",
+            "description": "",
+            "executionMode": "Production"
+        }
+    ]
+}

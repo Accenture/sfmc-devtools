@@ -64,10 +64,11 @@ declare class Automation extends MetadataType {
      * helper for {@link this.retrieveRESTcollection}
      *
      * @param {SDKError} ex exception
-     * @param {string} id id or key of item
+     * @param {string} key id or key of item
+     * @param {string} url url to call for retry
      * @returns {Promise.<any>} can return retry-result
      */
-    static handleRESTErrors(ex: SDKError, id: string): Promise<any>;
+    static handleRESTErrors(ex: SDKError, key: string, url: string): Promise<any>;
     /**
      * helper for {@link Automation.retrieve} to get Automation Notifications
      *
@@ -140,9 +141,10 @@ declare class Automation extends MetadataType {
      * @param {string} key automation key
      * @param {string} automationLegacyId automation id
      * @param {string} [scheduleLegacyId] schedule id
+     * @param {string} [description] schedule description
      * @returns {Promise.<{key:string, response:object}>} metadata key and API response
      */
-    static "__#4@#schedulePauseItem"(mode: "schedule" | "pause", key: string, automationLegacyId: string, scheduleLegacyId?: string): Promise<{
+    static "__#4@#schedulePauseItem"(mode: "schedule" | "pause", key: string, automationLegacyId: string, scheduleLegacyId?: string, description?: string): Promise<{
         key: string;
         response: object;
     }>;
@@ -216,9 +218,10 @@ declare class Automation extends MetadataType {
      * based on combination of ical string and start/end dates.
      *
      * @param {AutomationSchedule} scheduleObject child of automation metadata used for scheduling
+     * @param {boolean} [errorOnNotSchedulable] used if run for schedule command
      * @returns {void} throws and error in case of problems
      */
-    static _checkSchedule(scheduleObject: AutomationSchedule): void;
+    static _checkSchedule(scheduleObject: AutomationSchedule, errorOnNotSchedulable?: boolean): void;
     /**
      * used to convert dates to the system timezone required for startDate
      *
@@ -805,6 +808,12 @@ declare namespace Automation {
                 template: boolean;
             };
             'schedule.scheduleTypeId': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'schedule.description': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
