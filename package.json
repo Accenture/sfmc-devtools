@@ -103,7 +103,7 @@
         "chai-files": "1.4.0",
         "eslint": "9.25.1",
         "eslint-config-ssjs": "2.0.0",
-        "eslint-plugin-jsdoc": "50.6.11",
+        "eslint-plugin-jsdoc": "50.6.17",
         "eslint-plugin-mocha": "11.0.0",
         "eslint-plugin-prettier": "5.2.6",
         "eslint-plugin-unicorn": "59.0.0",
