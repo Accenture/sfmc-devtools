@@ -105,7 +105,7 @@
         "eslint-config-ssjs": "2.0.0",
         "eslint-plugin-jsdoc": "50.6.11",
         "eslint-plugin-mocha": "11.0.0",
-        "eslint-plugin-prettier": "5.2.6",
+        "eslint-plugin-prettier": "5.4.0",
         "eslint-plugin-unicorn": "59.0.0",
         "fast-xml-parser": "5.2.1",
         "globals": "16.0.0",
