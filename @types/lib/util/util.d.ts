@@ -215,6 +215,7 @@ export namespace Util {
      * @param {string} [useInstead] optionally specify which method to use instead
      */
     function logDeprecated(method: string, useInstead?: string): void;
+    function logNotSupported(definition: any, method: string, item?: MetadataTypeItem): void;
     namespace color {
         let reset: string;
         let dim: string;
@@ -399,7 +400,6 @@ export namespace Util {
      * @returns {object} obj but with sorted attributes
      */
     function sortObjectAttributes(obj: object): object;
-    function notSupportedError(definition: any, method: string, item?: MetadataTypeItem): void;
 }
 export type AuthObject = import("../../types/mcdev.d.js").AuthObject;
 export type BuObject = import("../../types/mcdev.d.js").BuObject;
