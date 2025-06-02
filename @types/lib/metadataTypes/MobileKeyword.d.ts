@@ -56,6 +56,7 @@ declare class MobileKeyword extends MetadataType {
     /**
      * retrieve an item and create a template from it
      *
+     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
      * @param {string} templateDir Directory where retrieved metadata directory will be saved
      * @param {string} key name of the metadata file
      * @param {TemplateMap} templateVariables variables to be replaced in the metadata

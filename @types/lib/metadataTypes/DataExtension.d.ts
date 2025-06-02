@@ -305,6 +305,7 @@ declare class DataExtension extends MetadataType {
     /**
      * Retrieves dataExtension metadata in template format.
      *
+     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
      * @param {string} templateDir Directory where retrieved metadata directory will be saved
      * @param {string} name name of the metadata item
      * @param {TemplateMap} templateVariables variables to be replaced in the metadata

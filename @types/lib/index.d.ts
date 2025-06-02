@@ -221,6 +221,7 @@ declare class Mcdev {
     /**
      * Retrieve a specific metadata file and templatise.
      *
+     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
      * @param {string} businessUnit references credentials from properties.json
      * @param {string} selectedType supported metadata type
      * @param {string[]} name name of the metadata

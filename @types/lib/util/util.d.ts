@@ -208,6 +208,13 @@ export namespace Util {
      * @param {string} type api name of the type thats in beta
      */
     function logBeta(type: string): void;
+    /**
+     * outputs a warning that the given method is deprecated
+     *
+     * @param {string} method name of the method
+     * @param {string} [useInstead] optionally specify which method to use instead
+     */
+    function logDeprecated(method: string, useInstead?: string): void;
     namespace color {
         let reset: string;
         let dim: string;
