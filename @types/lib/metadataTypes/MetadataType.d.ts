@@ -145,6 +145,7 @@ declare class MetadataType {
     /**
      * Gets metadata cache with limited fields and does not store value to disk
      *
+     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
      * @param {string} templateDir Directory where retrieved metadata directory will be saved
      * @param {string} name name of the metadata file
      * @param {TemplateMap} templateVariables variables to be replaced in the metadata
