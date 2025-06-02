@@ -39,6 +39,7 @@ export type DataExtensionItem = import("../../types/mcdev.d.js").DataExtensionIt
  */
 declare class Event extends MetadataType {
     static reCacheDataExtensions: any[];
+    static createdKeys: any[];
     /**
      * Retrieves Metadata of Event Definition.
      * Endpoint /interaction/v1/eventDefinitions return all Event Definitions with all details.
