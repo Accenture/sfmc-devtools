@@ -4,9 +4,6 @@
         "name": "landingpage"
     },
     "availableViews": [],
-    "category": {
-        "name": "mcdev"
-    },
     "content": {
         "url": "https://oss-test.accenture.com/test_landingpage"
     },
@@ -38,5 +35,6 @@
     "status": {
         "name": "Draft"
     },
-    "version": 1
+    "version": 1,
+    "r__folder_Path": "Content Builder/Test Folder"
 }

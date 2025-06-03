@@ -41,9 +41,9 @@
         "thumbnailUrl": "/v1/assets/9451/thumbnail"
     },
     "category": {
-        "id": 27675,
-        "name": "mcdev",
-        "parentId": 14914
+        "id": 90888,
+        "name": "Test Folder",
+        "parentId": 89397
     },
     "content": "/* insert code here */\n",
     "meta": {

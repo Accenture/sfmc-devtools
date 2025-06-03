@@ -4,9 +4,6 @@
         "name": "microsite"
     },
     "availableViews": [],
-    "category": {
-        "name": "mcdev"
-    },
     "content": {
         "url": "https://cloud.eu.randstad.com/test_microsite"
     },
@@ -39,5 +36,6 @@
     "status": {
         "name": "Draft"
     },
-    "version": 1
+    "version": 1,
+    "r__folder_Path": "Content Builder/Test Folder"
 }
