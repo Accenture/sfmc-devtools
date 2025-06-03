@@ -40,9 +40,9 @@
         "thumbnailUrl": "/v1/assets/9456/thumbnail"
     },
     "category": {
-        "id": 27675,
-        "name": "mcdev",
-        "parentId": 23009
+        "id": 90888,
+        "name": "Test Folder",
+        "parentId": 89397
     },
     "content": "{\"url\":\"https://cloud.eu.randstad.com/test_microsite\"}",
     "meta": {
