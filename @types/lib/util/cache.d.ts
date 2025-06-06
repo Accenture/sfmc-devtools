@@ -27,6 +27,15 @@ declare namespace _default {
      */
     function getFolderId(r__folder_Path: string, overrideMID?: number, allowOtherBu?: boolean): number;
     /**
+     * helper for setFolderId
+     *
+     * @param {string} r__folder_Path folder path value
+     * @param {number} [overrideMID] ignore currentMID and use alternative (for example parent MID)
+     * @param {boolean} allowOtherBu getting folder from other BU; FALSE for folder parent search
+     * @returns {object} folder item
+     */
+    function getFolderByPath(r__folder_Path: string, overrideMID?: number, allowOtherBu?: boolean): object;
+    /**
      * standardized method for getting data from cache - adapted for special case of lists
      * ! keeping this in util/cache.js rather than in metadataTypes/List.js to avoid potential circular dependencies
      *

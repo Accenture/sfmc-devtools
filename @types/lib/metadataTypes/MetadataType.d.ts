@@ -375,8 +375,9 @@ declare class MetadataType {
      * @param {'creating'|'updating'|'retrieving'|'executing'|'pausing'} msg what to print in the log
      * @param {MetadataTypeItem} [metadataEntry] single metadata entry
      * @param {boolean} [handleOutside] if the API reponse is irregular this allows you to handle it outside of this generic method
+     * @param {string} [nameAttribute] name attribute to use in the error message instead of keyField
      */
-    static _handleSOAPErrors(ex: SOAPError, msg: "creating" | "updating" | "retrieving" | "executing" | "pausing", metadataEntry?: MetadataTypeItem, handleOutside?: boolean): void;
+    static _handleSOAPErrors(ex: SOAPError, msg: "creating" | "updating" | "retrieving" | "executing" | "pausing", metadataEntry?: MetadataTypeItem, handleOutside?: boolean, nameAttribute?: string): void;
     /**
      * helper for {@link MetadataType._handleSOAPErrors}
      *
