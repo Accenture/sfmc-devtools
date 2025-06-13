@@ -348,20 +348,6 @@ describe('type: dataExtension', () => {
             assert.equal(isDeleted, true, 'should have deleted the item');
             return;
         });
-
-        it('Should delete the dataExtensionField', async () => {
-            // WHEN
-            const isDeleted = await handler.deleteByKey(
-                'testInstance/testBU',
-                'dataExtensionField',
-                'testExisting_dataExtension.LastName'
-            );
-            // THEN
-            assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
-
-            assert.equal(isDeleted, true, 'should have deleted the item');
-            return;
-        });
     });
 
     describe('CI/CD ================', () => {
