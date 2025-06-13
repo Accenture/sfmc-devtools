@@ -119,6 +119,7 @@ declare namespace DataExtensionField {
         typeRetrieveByDefault: boolean;
         typeCdpByDefault: boolean;
         typeName: string;
+        deleteSynchronously: boolean;
         fields: {
             'Client.ID': {
                 isCreateable: boolean;

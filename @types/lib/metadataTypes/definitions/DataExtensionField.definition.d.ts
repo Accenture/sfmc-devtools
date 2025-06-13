@@ -14,6 +14,7 @@ declare namespace _default {
     let typeRetrieveByDefault: boolean;
     let typeCdpByDefault: boolean;
     let typeName: string;
+    let deleteSynchronously: boolean;
     let fields: {
         'Client.ID': {
             isCreateable: boolean;
