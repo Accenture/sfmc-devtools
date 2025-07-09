@@ -397,6 +397,12 @@ declare namespace Journey {
                 retrieving: boolean;
                 template: boolean;
             };
+            'activities[].configurationArguments.isReconcilable': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             'activities[].configurationArguments.isActivityBatchValidated': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
