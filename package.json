@@ -107,7 +107,7 @@
         "eslint-plugin-mocha": "11.0.0",
         "eslint-plugin-prettier": "5.4.1",
         "eslint-plugin-unicorn": "59.0.1",
-        "fast-xml-parser": "5.2.3",
+        "fast-xml-parser": "5.2.5",
         "globals": "16.2.0",
         "husky": "9.1.7",
         "lint-staged": "15.5.1",
