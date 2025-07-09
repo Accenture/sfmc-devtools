@@ -101,13 +101,6 @@ declare class DataExtensionField extends MetadataType {
      * @returns {Promise.<boolean>} deletion success flag
      */
     static deleteByKeySOAP(customerKey: string, fieldId?: string): Promise<boolean>;
-    /**
-     * clean up after deleting a metadata item
-     *
-     * @param {string} customerKey Identifier of metadata item
-     * @returns {Promise.<void>} -
-     */
-    static postDeleteTasks(customerKey: string): Promise<void>;
 }
 declare namespace DataExtensionField {
     let definition: {
@@ -126,6 +119,7 @@ declare namespace DataExtensionField {
         typeRetrieveByDefault: boolean;
         typeCdpByDefault: boolean;
         typeName: string;
+        deleteSynchronously: boolean;
         fields: {
             'Client.ID': {
                 isCreateable: boolean;
