@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:8fe86c01-56d5-4c56-8ac2-991578c79485</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:592f71ac-78a0-45a2-8cfe-37a91fc6cfd5</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-675af14a-b6a1-44a5-b7e7-4a76c6d18424">
+                <wsu:Created>2023-02-01T10:29:21Z</wsu:Created>
+                <wsu:Expires>2023-02-01T10:34:21Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>a90dda5e-aeba-440a-82ce-74fb2abf5eb2</RequestID>
+            <Results xsi:type="TriggeredSendSummary">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>b3150cf0-6e78-e811-80d4-1402ec721c9d</ObjectID>
+                <CustomerKey>testExisting_triggeredSend</CustomerKey>
+                <Sent>10</Sent>
+                <NotSentDueToOptOut>0</NotSentDueToOptOut>
+                <NotSentDueToUndeliverable>0</NotSentDueToUndeliverable>
+                <Bounces>0</Bounces>
+                <Opens>0</Opens>
+                <Clicks>0</Clicks>
+                <UniqueOpens>0</UniqueOpens>
+                <UniqueClicks>0</UniqueClicks>
+                <OptOuts>0</OptOuts>
+                <SurveyResponses>0</SurveyResponses>
+                <FTAFRequests>0</FTAFRequests>
+                <FTAFEmailsSent>0</FTAFEmailsSent>
+                <FTAFOptIns>0</FTAFOptIns>
+                <Conversions>0</Conversions>
+                <UniqueConversions>0</UniqueConversions>
+                <InProcess>0</InProcess>
+                <NotSentDueToError>0</NotSentDueToError>
+                <Queued>0</Queued>
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>

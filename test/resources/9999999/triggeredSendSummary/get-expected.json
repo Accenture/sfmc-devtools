@@ -1,0 +1,23 @@
+{
+    "CustomerKey": "testExisting_triggeredSend",
+    "Sent": 10,
+    "NotSentDueToOptOut": 0,
+    "NotSentDueToUndeliverable": 0,
+    "Bounces": 0,
+    "Opens": 0,
+    "Clicks": 0,
+    "UniqueOpens": 0,
+    "UniqueClicks": 0,
+    "OptOuts": 0,
+    "SurveyResponses": 0,
+    "FTAFRequests": 0,
+    "FTAFEmailsSent": 0,
+    "FTAFOptIns": 0,
+    "Conversions": 0,
+    "UniqueConversions": 0,
+    "InProcess": 0,
+    "NotSentDueToError": 0,
+    "Queued": 0,
+    "r__triggeredSend_name": "testExisting_triggeredSend",
+    "r__triggeredSend_key": "testExisting_triggeredSend"
+}
