@@ -19,8 +19,7 @@ describe('type: triggeredSendSummary', () => {
     describe('Retrieve ================', () => {
         it('Should retrieve a triggeredSendSummary', async () => {
             // WHEN
-            const res = await handler.retrieve('testInstance/testBU', ['triggeredSendSummary']);
-            console.log(res['testInstance/testBU'].triggeredSendSummary);
+            await handler.retrieve('testInstance/testBU', ['triggeredSendSummary']);
             // THEN
             assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
