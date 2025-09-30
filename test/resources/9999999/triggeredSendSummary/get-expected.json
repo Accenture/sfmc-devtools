@@ -18,6 +18,7 @@
     "InProcess": 0,
     "NotSentDueToError": 0,
     "Queued": 0,
+    "r__folder_Path": "Triggered Sends",
     "r__triggeredSend_name": "testExisting_triggeredSend",
     "r__triggeredSend_key": "testExisting_triggeredSend"
 }

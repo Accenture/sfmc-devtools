@@ -36,6 +36,7 @@ declare namespace _default {
     export { transactionalPush };
     export { transactionalSMS };
     export { triggeredSend };
+    export { triggeredSendSummary };
     export { user };
     export { verification };
 }
@@ -77,6 +78,7 @@ import transactionalEmail from './metadataTypes/definitions/TransactionalEmail.d
 import transactionalPush from './metadataTypes/definitions/TransactionalPush.definition.js';
 import transactionalSMS from './metadataTypes/definitions/TransactionalSMS.definition.js';
 import triggeredSend from './metadataTypes/definitions/TriggeredSend.definition.js';
+import triggeredSendSummary from './metadataTypes/definitions/TriggeredSendSummary.definition.js';
 import user from './metadataTypes/definitions/User.definition.js';
 import verification from './metadataTypes/definitions/Verification.definition.js';
 //# sourceMappingURL=MetadataTypeDefinitions.d.ts.map
