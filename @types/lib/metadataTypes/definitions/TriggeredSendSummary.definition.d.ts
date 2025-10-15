@@ -196,12 +196,6 @@ declare namespace _default {
             retrieving: boolean; /** Listed in the type documentation but not retrievable */
             templating: boolean;
         };
-        'TriggeredSend.CategoryID': {
-            isCreateable: boolean;
-            isUpdateable: boolean;
-            retrieving: boolean;
-            templating: boolean;
-        };
         r__triggeredSend_name: {
             skipValidation: boolean;
         };

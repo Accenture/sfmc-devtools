@@ -244,12 +244,6 @@ declare namespace TriggeredSendSummary {
                 retrieving: boolean;
                 templating: boolean;
             };
-            'TriggeredSend.CategoryID': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                templating: boolean;
-            };
             r__triggeredSend_name: {
                 skipValidation: boolean;
             };
