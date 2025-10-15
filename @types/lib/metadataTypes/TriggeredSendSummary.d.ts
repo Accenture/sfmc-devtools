@@ -22,7 +22,7 @@ export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
  */
 /**
- * MessageSendActivity MetadataType
+ * TriggeredSendSummary MetadataType
  *
  * @augments MetadataType
  */
