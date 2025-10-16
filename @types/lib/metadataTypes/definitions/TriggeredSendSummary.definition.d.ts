@@ -4,10 +4,7 @@ declare namespace _default {
     namespace dependencyGraph {
         let triggeredSend: string[];
     }
-    namespace filter {
-        let r__folder_Path: string[];
-    }
-    let folderType: string;
+    let filter: {};
     let hasExtended: boolean;
     let idField: string;
     let keepId: boolean;
@@ -20,7 +17,7 @@ declare namespace _default {
     let lastmodDateField: any;
     let lastmodNameField: any;
     let restPagination: any;
-    let maxKeyLength: any;
+    let maxKeyLength: number;
     let type: string;
     let soapType: string;
     let typeDescription: string;

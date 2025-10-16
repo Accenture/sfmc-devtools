@@ -52,10 +52,7 @@ declare namespace TriggeredSendSummary {
         dependencyGraph: {
             triggeredSend: string[];
         };
-        filter: {
-            r__folder_Path: string[];
-        };
-        folderType: string;
+        filter: {};
         hasExtended: boolean;
         idField: string;
         keepId: boolean;
@@ -68,7 +65,7 @@ declare namespace TriggeredSendSummary {
         lastmodDateField: any;
         lastmodNameField: any;
         restPagination: any;
-        maxKeyLength: any;
+        maxKeyLength: number;
         type: string;
         soapType: string;
         typeDescription: string;
