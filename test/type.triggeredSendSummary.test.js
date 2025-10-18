@@ -36,7 +36,7 @@ describe('type: triggeredSendSummary', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                4,
+                3,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
