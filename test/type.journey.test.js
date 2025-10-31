@@ -1132,17 +1132,52 @@ describe('type: journey', () => {
         it('Should not validate a transactional journey by key', async () => {
             handler.setOptions({ skipStatusCheck: true });
             // WHEN
-            await handler.validate(
+            const validate = await handler.validate(
                 'testInstance/testBU',
                 ['journey'],
                 ['testExisting_temail_notPublished']
             );
             // THEN
-            assert.equal(process.exitCode, 1, 'validate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'validate should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                validate['testInstance/testBU']?.journey,
+                [],
+                'should not have validated any journey'
+            );
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 1,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should validate a multi-step journey but not the transactional journey by key', async () => {
+            await testUtils.copyFile(
+                'interaction/v1/interactions/validateStatus/45f06c0a-3ed2-48b2-a6a8-b5119253f01c/get-response-success.json',
+                'interaction/v1/interactions/validateStatus/45f06c0a-3ed2-48b2-a6a8-b5119253f01c/get-response.json'
+            );
+            handler.setOptions({ skipStatusCheck: true });
+            // WHEN
+            const validate = await handler.validate(
+                'testInstance/testBU',
+                ['journey'],
+                ['testExisting_temail_notPublished', 'testExisting_journey_Multistep']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'validate should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                validate['testInstance/testBU']?.journey,
+                ['testExisting_journey_Multistep'],
+                'should not have validated any journey'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                3,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
