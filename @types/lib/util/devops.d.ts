@@ -43,10 +43,11 @@ declare namespace DevOps {
      * create markdown file for deployment listing
      *
      * @param {string} directory -
+     * @param {string} filterPathsCSV -
      * @param {object} jsonReport -
      * @returns {void}
      */
-    function document(directory: string, jsonReport: object): void;
+    function document(directory: string, filterPathsCSV: string, jsonReport: object): void;
     /**
      * should return only the json for all but asset, query and script that are saved as multiple files
      * additionally, the documentation for dataExtension and automation should be returned
