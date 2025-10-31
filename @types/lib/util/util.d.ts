@@ -328,10 +328,11 @@ export namespace Util {
      * returns true if no LIKE filter is defined or if all filters match
      *
      * @param {MetadataTypeItem} metadata a single metadata item
+     * @param {object} definition type definition
      * @param {object} [filters] only used in recursive calls
      * @returns {boolean} true if no LIKE filter is defined or if all filters match
      */
-    function fieldsLike(metadata: MetadataTypeItem, filters?: object): boolean;
+    function fieldsLike(metadata: MetadataTypeItem, definition: object, filters?: object): boolean;
     /**
      * helper used by SOAP methods to ensure the type always uses an upper-cased first letter
      *
