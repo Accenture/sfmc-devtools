@@ -847,18 +847,6 @@ declare namespace Journey {
             'activities[].schema': {
                 skipValidation: boolean;
             };
-            'activities[].arguments.activityData.updateContactFields[].r__dataExtension_key': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            'activities[].arguments.activityData.updateContactFields[].dataExtensionFieldName': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
             categoryId: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
