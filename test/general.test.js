@@ -58,7 +58,6 @@ describe('GENERAL', () => {
                     await testUtils.getExpectedJson('9999999', 'senderProfile', 'get-rcb-name'),
                     'returned JSON was not equal expected'
                 );
-
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     44,
