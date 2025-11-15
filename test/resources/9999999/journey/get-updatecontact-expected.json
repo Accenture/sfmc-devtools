@@ -1,6 +1,6 @@
 {
-    "key": "testExisting_journey_updatecontact_Multistep",
-    "name": "testExisting_journey_updatecontact_Multistep",
+    "key": "testExisting_journey_updatecontact",
+    "name": "testExisting_journey_updatecontact",
     "lastPublishedDate": "0001-01-01T00:00:00",
     "description": "",
     "version": 1,
@@ -26,9 +26,9 @@
                 "activityData": {
                     "updateContactFields": [
                         {
-                            "dataExtensionId": "990b8d15-04b1-f011-a5b5-5cba2c6fa110",
-                            "field": "29202607-2359-4162-b83b-f5b8b75eec17",
-                            "value": "TEST"
+                            "field": "CONTACT_ID",
+                            "value": "TEST",
+                            "r__dataExtension_key": "testExisting_dataExtension"
                         }
                     ]
                 }
