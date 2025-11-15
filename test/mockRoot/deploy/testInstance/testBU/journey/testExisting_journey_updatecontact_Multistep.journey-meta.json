@@ -417,8 +417,8 @@
                 "activityData": {
                     "updateContactFields": [
                         {
-                            "field": "ContactKey",
-                            "r__dataExtension_key": "TEST",
+                            "dataExtensionId": "990b8d15-04b1-f011-a5b5-5cba2c6fa110",
+                            "field": "29202607-2359-4162-b83b-f5b8b75eec17",
                             "value": "TEST"
                         }
                     ]
