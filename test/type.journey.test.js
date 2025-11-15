@@ -111,6 +111,43 @@ describe('type: journey', () => {
             return;
         });
 
+        it('Should retrieve a Multistep journey containing an UPDATECONTACTDATA activity with key', async () => {
+            // WHEN
+            await handler.retrieve(
+                'testInstance/testBU',
+                ['journey'],
+                ['testExisting_journey_updatecontact_Multistep']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.journey ? Object.keys(result.journey).length : 0,
+                1,
+                'only 1 journeys expected'
+            );
+
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    'testExisting_journey_updatecontact_Multistep',
+                    'journey'
+                ),
+                await testUtils.getExpectedJson(
+                    '9999999',
+                    'journey',
+                    'get-updatecontact-multistep'
+                ),
+                'returned JSON was not equal expected'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                20,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
         it('Should retrieve a Transactional Email journey with key', async () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['journey'], ['testExisting_temail']);
