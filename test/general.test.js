@@ -60,7 +60,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    45,
+                    46,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -106,10 +106,9 @@ describe('GENERAL', () => {
                     await testUtils.getExpectedJson('9999999', 'senderProfile', 'get-rcb-id'),
                     'returned JSON was not equal expected'
                 );
-
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    45,
+                    46,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -158,7 +157,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    45,
+                    46,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -225,7 +224,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    81,
+                    82,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -285,7 +284,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    81,
+                    82,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -345,7 +344,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    81,
+                    82,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -986,7 +985,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 101;
+                const expectedApiCallsRetrieve = 103;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1228,7 +1227,7 @@ describe('GENERAL', () => {
                     await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
                 ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
 
-                const expectedApiCallsRetrieve = 105;
+                const expectedApiCallsRetrieve = 107;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1602,7 +1601,7 @@ describe('GENERAL', () => {
                 // download everything before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 101;
+                const expectedApiCallsRetrieve = 103;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1813,7 +1812,7 @@ describe('GENERAL', () => {
                     await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
                 ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
 
-                const expectedApiCallsRetrieve = 105;
+                const expectedApiCallsRetrieve = 107;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -2004,7 +2003,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 101;
+                const expectedApiCallsRetrieve = 103;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
