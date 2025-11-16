@@ -26,7 +26,7 @@
                 "activityData": {
                     "updateContactFields": [
                         {
-                            "field": "CONTACT_ID",
+                            "field": "LastName",
                             "value": "TEST",
                             "r__dataExtension_key": "testExisting_dataExtension"
                         }

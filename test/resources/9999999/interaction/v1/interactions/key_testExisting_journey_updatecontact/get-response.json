@@ -1,4 +1,5 @@
 {
+    "id": "0175b971-71a3-4d8e-98ac-48121f3fbf4f",
     "key": "testExisting_journey_updatecontact",
     "name": "testExisting_journey_updatecontact",
     "lastPublishedDate": "0001-01-01T00:00:00",
@@ -26,9 +27,9 @@
                 "activityData": {
                     "updateContactFields": [
                         {
-                            "field": "CONTACT_ID",
-                            "value": "TEST",
-                            "r__dataExtension_key": "testExisting_dataExtension"
+                            "dataExtensionId": "21711373-72c1-ec11-b83b-48df37d1deb7",
+                            "field": "bea0e308-5d45-4181-a673-da9972a7c674",
+                            "value": "TEST"
                         }
                     ]
                 }
@@ -59,6 +60,7 @@
     ],
     "triggers": [
         {
+            "id": "92753481-1258-49bd-8a84-921ed63bcc2e",
             "key": "TRIGGER",
             "name": "TRIGGER",
             "description": "",
@@ -67,7 +69,8 @@
             "arguments": {},
             "configurationArguments": {},
             "metaData": {
-                "r__event_key": "DEAudience-2e3c73b6-48cc-2ec0-5522-48636e1a236e",
+                "eventDefinitionId": "649d512b-4d08-4eca-a14e-fc7b64b4ada8",
+                "eventDefinitionKey": "DEAudience-2e3c73b6-48cc-2ec0-5522-48636e1a236e",
                 "chainType": "None",
                 "configurationRequired": false,
                 "iconUrl": "/images/icon-data-extension.svg",
@@ -80,6 +83,13 @@
     "goals": [],
     "exits": [],
     "notifiers": [],
+    "stats": {
+        "currentPopulation": 0,
+        "cumulativePopulation": 0,
+        "metGoal": 0,
+        "metExitCriteria": 0,
+        "goalPerformance": 0
+    },
     "entryMode": "NotSet",
     "definitionType": "Multistep",
     "channel": "",
@@ -102,7 +112,8 @@
         }
     },
     "executionMode": "Production",
+    "categoryId": 6298,
     "status": "Draft",
-    "scheduledStatus": "Draft",
-    "r__folder_Path": "my journeys"
+    "definitionId": "0175b971-71a3-4d8e-98ac-48121f3fbf4f",
+    "scheduledStatus": "Draft"
 }
