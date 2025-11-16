@@ -467,9 +467,9 @@ describe('type: journey', () => {
             assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // // confirm updated item
             assert.deepEqual(
-                await testUtils.getActualJson('testExisting_journey_updatecontact', 'journey'), // test\resources\9999999\journey
+                await testUtils.getActualJson('testExisting_journey_updatecontact', 'journey'),
                 await testUtils.getExpectedJson('9999999', 'journey', 'put-updatecontact'),
-                'returned metadata was not equal expected for update journey'
+                'returned metadata was not equal expected for update journey with updatecontact activity'
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
