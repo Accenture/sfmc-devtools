@@ -260,7 +260,7 @@ declare class Mcdev {
      * @param {string[]} marketTemplate market localizations
      * @param {string[]} marketDefinition market localizations
      * @param {boolean} [bulk] runs buildDefinitionBulk instead of buildDefinition; requires marketList to be defined and given via marketDefinition
-     * @param {object} [filter] market list specific filter
+     * @param {object} [filter] market list specific filter for buildTemplate
      * @returns {Promise.<MultiMetadataTypeList | object>} response from buildDefinition
      */
     static build(businessUnitTemplate: string, businessUnitDefinition: string, typeKeyCombo: TypeKeyCombo, marketTemplate: string[], marketDefinition: string[], bulk?: boolean, filter?: object): Promise<MultiMetadataTypeList | object>;
