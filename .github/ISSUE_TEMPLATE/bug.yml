@@ -39,6 +39,7 @@ body:
           label: Version
           description: What version of our software are you running? (mcdev --version)
           options:
+              - 8.2.1
               - 8.2.0
               - 8.1.0
               - 8.0.2
