@@ -5,7 +5,7 @@
     "description": "",
     "version": 1,
     "workflowApiVersion": 1,
-    "createdDate": "2024-05-04T05:54:48.027",
+    "createdDate": "0001-01-01T00:00:00",
     "modifiedDate": "2024-05-04T17:25:57.9",
     "activities": [
         {
@@ -84,9 +84,7 @@
     "definitionType": "Multistep",
     "channel": "",
     "defaults": {
-        "email": [
-            "{{Event.DEAudience-2e3c73b6-48cc-2ec0-5522-48636e1a236e.\"Email\"}}"
-        ],
+        "email": ["{{Event.DEAudience-2e3c73b6-48cc-2ec0-5522-48636e1a236e.\"Email\"}}"],
         "properties": {
             "analyticsTracking": {
                 "enabled": true,
