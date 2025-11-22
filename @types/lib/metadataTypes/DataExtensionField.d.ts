@@ -52,6 +52,13 @@ declare class DataExtensionField extends MetadataType {
      */
     static retrieveForCache(): Promise<MetadataTypeMapObj>;
     /**
+     * helps retrieving fields for a single DE. Use when needing field data for one DE only.
+     *
+     * @param {string} customerKey external key of single DE
+     * @returns {Promise.<Array>} Promise of items
+     */
+    static retrieveFieldsForSingleDe(customerKey: string): Promise<any[]>;
+    /**
      * Retrieves all records for caching
      *
      * @param {SoapRequestParams} [requestParams] required for the specific request (filter for example)
