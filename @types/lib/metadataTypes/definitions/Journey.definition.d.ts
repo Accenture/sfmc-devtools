@@ -683,6 +683,12 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        'activities[].arguments.activityData.updateContactFields[].r__dataExtensionField_name': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         'activities[].arguments.activityData.updateContactFields[].field': {
             isCreateable: boolean;
             isUpdateable: boolean;
