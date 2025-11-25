@@ -1858,7 +1858,7 @@ export type BuildFilter = {
 };
 export type BuildFilterKeys = {
     /**
-     * filters applying to all types
+     * object with keys representing metadata types ("*" for all types, or specific type names) and values being arrays of string patterns to match against
      */
     key?: any;
 };
