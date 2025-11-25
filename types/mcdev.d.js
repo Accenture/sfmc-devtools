@@ -681,7 +681,7 @@ complex
 
 /**
  * @typedef {object} BuildFilterKeys
- * @property {Object.<"*"|SupportedMetadataTypes, string[]>} [key] filters applying to all types
+ * @property {Object.<"*"|SupportedMetadataTypes, string[]>} [key] object with keys representing metadata types ("*" for all types, or specific type names) and values being arrays of string patterns to match against
  */
 
 export default {};
