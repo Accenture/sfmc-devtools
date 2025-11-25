@@ -16,6 +16,7 @@ export type MultiMetadataTypeMap = import("../../types/mcdev.d.js").MultiMetadat
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
+export type BuildFilter = import("../../types/mcdev.d.js").BuildFilter;
 declare namespace DevOps {
     /**
      * Extracts the delta between a commit and the current state for deployment.

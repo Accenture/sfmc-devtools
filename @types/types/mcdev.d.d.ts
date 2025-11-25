@@ -1846,4 +1846,20 @@ export type DomainVerificationItem = {
      */
     deColumn?: string;
 };
+export type BuildFilter = {
+    /**
+     * include key filters
+     */
+    include?: BuildFilterKeys;
+    /**
+     * exclude key filters
+     */
+    exclude?: BuildFilterKeys;
+};
+export type BuildFilterKeys = {
+    /**
+     * filters applying to all types
+     */
+    key?: any;
+};
 //# sourceMappingURL=mcdev.d.d.ts.map
