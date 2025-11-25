@@ -673,4 +673,15 @@ complex
  * @property {string} [deColumn] for bulk-creation only: instead of an array in addresses, specify the name of a DE column/field here
  */
 
+/**
+ * @typedef {object} BuildFilter
+ * @property {BuildFilterKeys} [include] include key filters
+ * @property {BuildFilterKeys} [exclude] exclude key filters
+ */
+
+/**
+ * @typedef {object} BuildFilterKeys
+ * @property {Object.<"*"|SupportedMetadataTypes, string[]>} [key] object with keys representing metadata types ("*" for all types, or specific type names) and values being arrays of string patterns to match against
+ */
+
 export default {};
