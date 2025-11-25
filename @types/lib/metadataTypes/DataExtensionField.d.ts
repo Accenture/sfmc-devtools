@@ -55,9 +55,9 @@ declare class DataExtensionField extends MetadataType {
      * helps retrieving fields for a single DE. Use when needing field data for one DE only.
      *
      * @param {string} customerKey external key of single DE
-     * @returns {Promise.<Array>} Promise of items
+     * @returns {Promise.<object>} Promise of items
      */
-    static retrieveFieldsForSingleDe(customerKey: string): Promise<any[]>;
+    static retrieveFieldsForSingleDe(customerKey: string): Promise<object>;
     /**
      * Retrieves all records for caching
      *
