@@ -26,8 +26,8 @@
                 "activityData": {
                     "updateContactFields": [
                         {
-                            "dataExtensionId": "990b8d15-04b1-f011-a5b5-5cba2c6fa110",
-                            "field": "29202607-2359-4162-b83b-f5b8b75eec17",
+                            "r__dataExtension_key": "testExisting_dataExtension",
+                            "r__dataExtensionField_name": "LastName",
                             "value": "TEST"
                         }
                     ]
