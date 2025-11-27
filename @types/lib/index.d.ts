@@ -17,6 +17,7 @@ export type TemplateMap = import("../types/mcdev.d.js").TemplateMap;
 export type TypeKeyCombo = import("../types/mcdev.d.js").TypeKeyCombo;
 export type ExplainType = import("../types/mcdev.d.js").ExplainType;
 export type ContentBlockConversionTypes = import("../types/mcdev.d.js").ContentBlockConversionTypes;
+export type BuildFilter = import("../types/mcdev.d.js").BuildFilter;
 /**
  * @typedef {import('../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -36,6 +37,7 @@ export type ContentBlockConversionTypes = import("../types/mcdev.d.js").ContentB
  * @typedef {import('../types/mcdev.d.js').TypeKeyCombo} TypeKeyCombo
  * @typedef {import('../types/mcdev.d.js').ExplainType} ExplainType
  * @typedef {import('../types/mcdev.d.js').ContentBlockConversionTypes} ContentBlockConversionTypes
+ * @typedef {import('../types/mcdev.d.js').BuildFilter} BuildFilter
  */
 /**
  * main class
@@ -260,10 +262,10 @@ declare class Mcdev {
      * @param {string[]} marketTemplate market localizations
      * @param {string[]} marketDefinition market localizations
      * @param {boolean} [bulk] runs buildDefinitionBulk instead of buildDefinition; requires marketList to be defined and given via marketDefinition
-     * @param {object} [filter] market list specific filter for buildTemplate
+     * @param {BuildFilter} [filter] market list specific filter for buildTemplate
      * @returns {Promise.<MultiMetadataTypeList | object>} response from buildDefinition
      */
-    static build(businessUnitTemplate: string, businessUnitDefinition: string, typeKeyCombo: TypeKeyCombo, marketTemplate: string[], marketDefinition: string[], bulk?: boolean, filter?: object): Promise<MultiMetadataTypeList | object>;
+    static build(businessUnitTemplate: string, businessUnitDefinition: string, typeKeyCombo: TypeKeyCombo, marketTemplate: string[], marketDefinition: string[], bulk?: boolean, filter?: BuildFilter): Promise<MultiMetadataTypeList | object>;
     /**
      * Build a template based on a list of metadata files in the retrieve folder.
      *
@@ -271,10 +273,17 @@ declare class Mcdev {
      * @param {string | TypeKeyCombo} selectedTypes limit retrieval to given metadata type
      * @param {string[] | undefined} keyArr customerkey of the metadata
      * @param {string[]} marketArr market localizations
-     * @param {object} [filter] market list specific filter
+     * @param {BuildFilter} [filter] market list specific filter
      * @returns {Promise.<MultiMetadataTypeList>} -
      */
-    static buildTemplate(businessUnit: string, selectedTypes: string | TypeKeyCombo, keyArr: string[] | undefined, marketArr: string[], filter?: object): Promise<MultiMetadataTypeList>;
+    static buildTemplate(businessUnit: string, selectedTypes: string | TypeKeyCombo, keyArr: string[] | undefined, marketArr: string[], filter?: BuildFilter): Promise<MultiMetadataTypeList>;
+    /**
+     * helper for {@link buildTemplate} to apply include/exclude key filters
+     *
+     * @param {TypeKeyCombo | undefined} typeKeyList supported metadata type
+     * @param {BuildFilter} filter market list specific filter for buildTemplate
+     */
+    static applyKeyFilters(typeKeyList: TypeKeyCombo | undefined, filter: BuildFilter): void;
     /**
      * Build a specific metadata file based on a template.
      *
