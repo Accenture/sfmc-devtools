@@ -1,0 +1,43 @@
+{
+    "Additional": "",
+    "AutoBccEmail": "",
+    "BccEmail": "",
+    "CCEmail": "",
+    "CreatedDate": "2022-11-14T12:27:29.963",
+    "CustomerKey": "testExisting_emailSend",
+    "DeduplicateByEmail": false,
+    "Description": "some description",
+    "DynamicEmailSubject": "someSubject",
+    "EmailSubject": "someSubject",
+    "ExclusionFilter": "Domain(emailaddr) != \"accenture.com\"",
+    "IsMultipart": true,
+    "IsSendLogging": false,
+    "IsWrapped": true,
+    "ModifiedDate": "2022-11-14T12:27:29.963",
+    "Name": "testExisting_emailSend",
+    "SendDefinitionList": [
+        {
+            "SendDefinitionListType": "ExclusionList",
+            "DataSourceTypeID": "CustomObject",
+            "IsTestObject": false,
+            "Name": "",
+            "r__dataExtension_key": "testExisting_dataExtension_exclusion"
+        },
+        {
+            "SendDefinitionListType": "SourceList",
+            "DataSourceTypeID": "CustomObject",
+            "IsTestObject": false,
+            "Name": "",
+            "r__dataExtension_key": "testExisting_dataExtension",
+            "r__list_PathName": "Publication Lists/Demo Publication List"
+        }
+    ],
+    "SuppressTracking": false,
+    "TestEmailAddr": "",
+    "r__asset_key": "testExisting_asset_message",
+    "r__asset_name_readOnly": "testExisting_asset_message",
+    "r__deliveryProfile_key": "Default",
+    "r__folder_Path": "User-Initiated",
+    "r__sendClassification_key": "testExisting_sendClassification",
+    "r__senderProfile_key": "testExisting_senderProfile"
+}

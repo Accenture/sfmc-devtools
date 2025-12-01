@@ -1,0 +1,377 @@
+{
+    "count": 9,
+    "page": 1,
+    "pageSize": 50,
+    "links": {},
+    "items": [
+        {
+            "id": 5286,
+            "customerKey": "testExisting_asset_template",
+            "assetType": {
+                "id": 4,
+                "name": "template",
+                "displayName": "Template"
+            },
+            "name": " testExisting_asset_template",
+            "createdDate": "2024-04-22T03:33:08.253-06:00",
+            "createdBy": {
+                "id": 710411605,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710411605"
+            },
+            "modifiedDate": "2024-05-13T07:12:13.117-06:00",
+            "modifiedBy": {
+                "id": 710420432,
+                "name": "joern.berkefeld app user",
+                "userId": "710420432"
+            },
+            "category": {
+                "id": 89397
+            },
+            "modelVersion": 2
+        },
+        {
+            "id": 1295064,
+            "customerKey": "testExisting_asset_htmlblock",
+            "assetType": {
+                "id": 197,
+                "name": "htmlblock",
+                "displayName": "HTML Block"
+            },
+            "fileProperties": {
+                "fileName": "dont strip non ssjs content"
+            },
+            "name": "dont strip non ssjs content",
+            "createdDate": "2024-01-08T08:26:58.277-06:00",
+            "createdBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "modifiedDate": "2024-01-08T08:28:01.6-06:00",
+            "modifiedBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "category": {
+                "id": 89397,
+                "name": "Content Builder",
+                "parentId": 0
+            },
+            "availableViews": [],
+            "modelVersion": 2
+        },
+        {
+            "id": 1295065,
+            "customerKey": "testExisting_htmlblock1",
+            "assetType": {
+                "id": 197,
+                "name": "htmlblock",
+                "displayName": "HTML Block"
+            },
+            "fileProperties": {
+                "fileName": "testExisting_htmlblock1"
+            },
+            "name": "testExisting_htmlblock1",
+            "createdDate": "2024-01-08T08:26:58.277-06:00",
+            "createdBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "modifiedDate": "2024-01-08T08:28:01.6-06:00",
+            "modifiedBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "category": {
+                "id": 89397,
+                "name": "Content Builder",
+                "parentId": 0
+            },
+            "availableViews": [],
+            "modelVersion": 2
+        },
+        {
+            "id": 1295066,
+            "customerKey": "testExisting_htmlblock2",
+            "assetType": {
+                "id": 197,
+                "name": "htmlblock",
+                "displayName": "HTML Block"
+            },
+            "fileProperties": {
+                "fileName": "testExisting_htmlblock2"
+            },
+            "name": "testExisting_htmlblock2",
+            "createdDate": "2024-01-08T08:26:58.277-06:00",
+            "createdBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "modifiedDate": "2024-01-08T08:28:01.6-06:00",
+            "modifiedBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "category": {
+                "id": 89397,
+                "name": "Content Builder",
+                "parentId": 0
+            },
+            "availableViews": [],
+            "modelVersion": 2
+        },
+        {
+            "id": 1295067,
+            "customerKey": "testExisting_htmlblock 3 spaces",
+            "assetType": {
+                "id": 197,
+                "name": "htmlblock",
+                "displayName": "HTML Block"
+            },
+            "fileProperties": {
+                "fileName": "testExisting_htmlblock 3 spaces"
+            },
+            "name": "testExisting_htmlblock 3 spaces",
+            "createdDate": "2024-01-08T08:26:58.277-06:00",
+            "createdBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "modifiedDate": "2024-01-08T08:28:01.6-06:00",
+            "modifiedBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "category": {
+                "id": 89397,
+                "name": "Content Builder",
+                "parentId": 0
+            },
+            "availableViews": [],
+            "modelVersion": 2
+        },
+        {
+            "id": 950143,
+            "customerKey": "testExisting_asset",
+            "objectID": "198ad191-59ae-44d1-9981-ffa71b076ad9",
+            "contentType": "text/html",
+            "assetType": {
+                "id": 205,
+                "name": "webpage",
+                "displayName": "Web Page"
+            },
+            "version": 1,
+            "name": "testExisting_asset",
+            "owner": {
+                "id": 717319337,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "717319337"
+            },
+            "createdDate": "2021-09-13T12:14:02.32-06:00",
+            "createdBy": {
+                "id": 717319337,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "717319337"
+            },
+            "modifiedDate": "2023-08-02T07:10:29.553-06:00",
+            "modifiedBy": {
+                "id": 700304523,
+                "name": "SFMC DEVOPS app user",
+                "userId": "700304523"
+            },
+            "enterpriseId": 111111,
+            "memberId": 999999,
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "thumbnail": {
+                "thumbnailUrl": "/v1/assets/950143/thumbnail"
+            },
+            "category": {
+                "id": 89397
+            },
+            "meta": {
+                "globalStyles": {
+                    "isLocked": false,
+                    "body": {
+                        "max-width": "1280px",
+                        "color": "#000000",
+                        "font-family": "Arial",
+                        "font-size": "12px",
+                        "margin": "0px auto"
+                    },
+                    "template": {
+                        "background-color": "#FFFFFF",
+                        "border": "none",
+                        "box-sizing": "border-box",
+                        "padding": "0px",
+                        "width": "100%"
+                    }
+                }
+            },
+            "views": {
+                "html": {
+                    "thumbnail": {},
+                    "content": "<!DOCTYPE html>\n<html>\n    <head>\n        <meta\n            name=\"viewport\"\n            content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0\"\n        />\n        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n        <style class=\"main_style\">\n            .layout-canvas-g {\n                background-color: #ffffff;\n                border: none;\n                box-sizing: border-box;\n                padding: 0px;\n                width: 100%;\n            }\n            .layout-canvas-g > .header,\n            .layout-canvas-g > .section,\n            .layout-canvas-g > .footer {\n                position: relative;\n                overflow: hidden;\n                width: 100%;\n                overflow-wrap: break-word;\n            }\n            .layout-canvas-g > .section {\n                margin: 10px 0px;\n            }\n            .layout-canvas-g > .section > .columns {\n                box-sizing: border-box;\n                overflow-wrap: break-word;\n            }\n            body {\n                color: #000000;\n                font-family: Arial;\n                font-size: 12px;\n                margin: 0px auto;\n                max-width: 1280px;\n            }\n            @media only screen and (max-width: 480px) {\n                .mobile-hidden {\n                    display: none !important;\n                }\n                .responsive-td {\n                    width: 100% !important;\n                    display: block !important;\n                    padding: 0px !important;\n                }\n            }\n            .layout-canvas-g > .section > .columns {\n                width: 100%;\n            }\n        </style>\n    </head>\n    <body>\n        <div class=\"layout layout-canvas-g\">\n            <div class=\"section\">\n                <div class=\"columns col1\">\n                    <div data-type=\"slot\" data-key=\"col1\"></div>\n                </div>\n            </div>\n        </div>\n    </body>\n</html>\n",
+                    "slots": {
+                        "col1": {
+                            "content": "<div data-type=\"block\" data-key=\"bgbqbbx4we9\"></div>",
+                            "design": "<p style=\"font-family:arial;color:#ccc;font-size:11px;text-align:center;vertical-align:middle;font-weight:bold;padding:10px;margin:0;border:#ccc dashed 1px;\">Drop blocks or content here</p>",
+                            "blocks": {
+                                "bgbqbbx4we9": {
+                                    "assetType": {
+                                        "id": 197,
+                                        "name": "htmlblock"
+                                    },
+                                    "content": "<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" role=\"presentation\" style=\"min-width: 100%; \" class=\"stylingblock-content-wrapper\"><tr><td class=\"stylingblock-content-wrapper camarker-inner\">\n%%[FOR @I=1 TO 1000 DO\n    SET @a = CONCAT(IIF(MOD(@i, 3)==0, \"Fizz\", \"\"), IIF(MOD(@i,5)==0,\"Buzz\",\"\"), IIF(MOD(@i, 7)==0, \"Boing\", \"\"), IIF(MOD(@i,11)==0,\"Bang\",\"\"))\nOUTPUT(CONCAT(@a, IIF(LENGTH(@a)>0, \"\", @i), \"<br>\"))NEXT @i\n]%%\n</td></tr></table>",
+                                    "design": "<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" role=\"presentation\" style=\"min-width: 100%; \" class=\"stylingblock-content-wrapper\"><tr><td class=\"stylingblock-content-wrapper camarker-inner\"><div class=\"default-design\"></div></td></tr></table>",
+                                    "meta": {
+                                        "wrapperStyles": {
+                                            "mobile": {
+                                                "visible": true
+                                            }
+                                        }
+                                    },
+                                    "modelVersion": 2
+                                }
+                            },
+                            "modelVersion": 2
+                        }
+                    },
+                    "modelVersion": 2
+                }
+            },
+            "availableViews": ["html"],
+            "modelVersion": 2
+        },
+        {
+            "id": 9459,
+            "customerKey": "test_interactivecontent_content",
+            "objectID": "283dc273-84c0-44b6-979c-b9f2534b28a1",
+            "assetType": {
+                "id": 205,
+                "name": "webpage",
+                "displayName": "Web Page"
+            },
+            "name": "test_interactivecontent",
+            "createdDate": "2025-03-25T03:02:47.323-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:02:47.323-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "category": {
+                "id": 5328,
+                "name": "Content Builder",
+                "parentId": 0
+            },
+            "modelVersion": 2
+        },
+        {
+            "id": 9461,
+            "customerKey": "test_microsite_content",
+            "objectID": "8f32dff3-026b-4cd6-9096-d3ecb319f386",
+            "assetType": {
+                "id": 205,
+                "name": "webpage",
+                "displayName": "Web Page"
+            },
+            "name": "test_microsite_content",
+            "createdDate": "2025-03-25T03:10:56.733-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:10:56.733-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "category": {
+                "id": 5328,
+                "name": "Content Builder",
+                "parentId": 0
+            },
+            "modelVersion": 2
+        },
+        {
+            "id": 9466,
+            "customerKey": "test_landingpage_content",
+            "objectID": "95aa069b-5d48-41b9-a206-a623832cfc6d",
+            "assetType": {
+                "id": 205,
+                "name": "webpage",
+                "displayName": "Web Page"
+            },
+            "name": "test_landingpage_content",
+            "createdDate": "2025-03-25T03:17:52.317-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:17:52.317-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "category": {
+                "id": 5328,
+                "name": "Content Builder",
+                "parentId": 0
+            },
+            "modelVersion": 2
+        }
+    ]
+}

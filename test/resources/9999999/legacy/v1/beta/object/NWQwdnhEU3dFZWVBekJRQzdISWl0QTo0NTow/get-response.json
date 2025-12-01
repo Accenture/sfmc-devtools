@@ -1,0 +1,12 @@
+{
+    "id": "NWQwdnhEU3dFZWVBekJRQzdISWl0QTo0NTow",
+    "key": "testExisting_dataExtension",
+    "dataExtensionName": "testExisting_dataExtension",
+    "description": "",
+    "isSendable": true,
+    "sendableDataExtensionField": "ContactKey",
+    "sendableSubscriberField": "_SubscriberKey",
+    "isTestable": false,
+    "isPublic": false,
+    "isPlatformObject": false
+}

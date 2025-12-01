@@ -1,0 +1,10 @@
+{
+    "CreatedDate": "2016-08-31T11:29:00",
+    "ModifiedDate": "2024-04-15T15:33:00",
+    "CustomerKey": "testExisting_sendClassification",
+    "Name": "testExisting_sendClassification",
+    "Description": "",
+    "c__classification": "Commercial",
+    "r__senderProfile_key": "testExisting_senderProfile",
+    "r__deliveryProfile_key": "Default"
+}

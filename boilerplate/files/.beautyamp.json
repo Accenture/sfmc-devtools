@@ -1,0 +1,13 @@
+{
+    "ampscript": {
+        "capitalizeAndOrNot": true,
+        "capitalizeIfFor": true,
+        "capitalizeSet": true,
+        "capitalizeVar": true,
+        "maxParametersPerLine": 4
+    },
+    "editor": {
+        "insertSpaces": true,
+        "tabSize": 4
+    }
+}

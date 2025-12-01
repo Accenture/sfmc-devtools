@@ -1,15 +1,17 @@
-const chai = require('chai');
-const chaiFiles = require('chai-files');
+import * as chai from 'chai';
 const assert = chai.assert;
+
+import chaiFiles from 'chai-files';
+import cache from '../lib/util/cache.js';
+import * as testUtils from './utils.js';
+import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const cache = require('../lib/util/cache');
-const testUtils = require('./utils');
-const handler = require('../lib/index');
 
 describe('type: transactionalEmail', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
@@ -19,13 +21,13 @@ describe('type: transactionalEmail', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['transactionalEmail']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.transactionalEmail ? Object.keys(result.transactionalEmail).length : 0,
-                1,
-                'only one transactionalEmail expected'
+                3,
+                'unexpected number of transactionalEmail'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_temail', 'transactionalEmail'),
@@ -34,27 +36,29 @@ describe('type: transactionalEmail', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                12,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & upsert a transactionalEmail', async () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['transactionalEmail']);
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.transactionalEmail ? Object.keys(result.transactionalEmail).length : 0,
-                2,
-                'two transactionalEmails expected'
+                4,
+                'unexpected number of transactionalEmails'
             );
             // confirm created item
             assert.deepEqual(
@@ -71,11 +75,12 @@ describe('type: transactionalEmail', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                14,
+                16,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
+
         it('Should NOT change the key during update with --changeKeyValue and instead fail due to missing support', async () => {
             // WHEN
             handler.setOptions({ changeKeyValue: 'updatedKey' });
@@ -93,6 +98,7 @@ describe('type: transactionalEmail', () => {
             return;
         });
     });
+
     describe('Templating ================', () => {
         // it.skip('Should create a transactionalEmail template via retrieveAsTemplate and build it');
         it('Should create a transactionalEmail template via buildTemplate and build it', async () => {
@@ -103,9 +109,9 @@ describe('type: transactionalEmail', () => {
                 'testInstance/testBU',
                 'transactionalEmail',
                 ['testExisting_temail'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.transactionalEmail ? Object.keys(result.transactionalEmail).length : 0,
                 1,
@@ -120,14 +126,10 @@ describe('type: transactionalEmail', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'transactionalEmail',
-                'testExisting_temail',
-                'testTargetMarket'
+                ['testExisting_temail'],
+                ['testTargetMarket']
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_temail', 'transactionalEmail'),
                 await testUtils.getExpectedJson('9999999', 'transactionalEmail', 'build'),
@@ -135,12 +137,13 @@ describe('type: transactionalEmail', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                12,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
     });
+
     describe('Delete ================', () => {
         it('Should delete the item', async () => {
             // WHEN
@@ -150,7 +153,7 @@ describe('type: transactionalEmail', () => {
                 'testExisting_temail'
             );
             // THEN
-            assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
 
             assert.equal(isDeleted, true, 'should have deleted the item');
             return;

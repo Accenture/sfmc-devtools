@@ -1,6 +1,8 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+# run lint-staged hooks
+echo "[PRE-COMMIT] Run lint-staged"
+lint-staged
 
-npm run docs
-git update-index --add docs/dist/documentation.md
-npx --no lint-staged
+# update typescript type declarations
+echo "[PRE-COMMIT] Run typescript validation and create/update d.ts files"
+tsc -p tsconfig.precommit.json
+git add @types

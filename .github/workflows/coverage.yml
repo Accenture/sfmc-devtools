@@ -12,14 +12,14 @@ jobs:
         name: Test and report
         steps:
             - name: Checkout
-              uses: actions/checkout@v3
+              uses: actions/checkout@v5
               with:
                   ref: ${{ github.event.pull_request.head.sha }}
                   fetch-depth: 1000
 
-            - uses: actions/setup-node@v3
+            - uses: actions/setup-node@v6
               with:
-                  node-version: 16
+                  node-version-file: ./package.json
 
             - run: npm ci --ignore-scripts
 
@@ -28,18 +28,20 @@ jobs:
 
             - name: Prepare for Report Coverage
               run: |
-                  npx nyc report --reporter json-summary --exclude-after-remap false
+                  npx c8 report --reporter json-summary --exclude-after-remap false
                   npm i svelte-to-html@1.0.9
                   git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
 
             - name: Upload coverage artifact
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v5
               with:
                   name: test-coverage-output
                   path: coverage
+                  overwrite: true
+                  retention-days: 90
 
             - name: Download coverage artifact
-              uses: actions/download-artifact@v3
+              uses: actions/download-artifact@v4
               with:
                   path: artifacts
 
@@ -56,7 +58,7 @@ jobs:
                   GITHUB_TOKEN: ${{ github.token }}
 
             - name: Download artifact for base branch if available, previous
-              uses: dawidd6/action-download-artifact@v2
+              uses: dawidd6/action-download-artifact@v11
               continue-on-error: true
               with:
                   workflow: ${{ github.event.pull_request.base.ref == 'main' && 'coverage-main-branch.yml' || github.event.pull_request.base.ref == 'develop' && 'coverage-develop-branch.yml' || 'coverage.yml' }}
@@ -67,7 +69,7 @@ jobs:
 
             - name: Check file existence
               id: check_files
-              uses: andstor/file-existence-action@v2
+              uses: andstor/file-existence-action@v3
               with:
                   files: 'base-artifacts/coverage-summary.json'
 

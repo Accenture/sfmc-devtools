@@ -1,0 +1,29 @@
+{
+    "guidId": "a8afb0e2-b00a-4c88-ad2e-1f7f8788c560",
+    "id": "NewRkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow",
+    "name": "testNew_automation",
+    "description": "created on deploy",
+    "key": "testNew_automation",
+    "clientId": 9999999,
+    "lastSavedDate": "2023-07-04T07:49:08.577",
+    "lastSavedByName": "SFMC DevTools app user",
+    "createdDate": "2023-07-04T07:49:08.297",
+    "createdByName": "SFMC DevTools app user",
+    "updateInProgress": false,
+    "automationType": "scheduled",
+    "scheduleObject": {
+        "id": "WkNtUVIxN21WRTZndGxkTnZIS1JWUTozNjow",
+        "key": "921",
+        "createdDate": "2025-03-18T09:57:00Z",
+        "createdBy": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/organization/user/NzEwNDIwNDMyOjQ6MA",
+        "lastUpdated": "2025-03-18T09:57:00Z",
+        "lastUpdatedBy": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/organization/user/NzEwNDIwNDMyOjQ6MA",
+        "name": "",
+        "description": "Will run every hour, effective 5-3-2025 at 10:45  through Wednesday 7 June 2079",
+        "startDate": "2025-03-05T10:45:00",
+        "iCalRecur": "FREQ=HOURLY;UNTIL=20790607T080000;INTERVAL=1",
+        "timeZone": "W. Europe Standard Time",
+        "timeZoneId": 5,
+        "scheduleStatus": "scheduled"
+    }
+}

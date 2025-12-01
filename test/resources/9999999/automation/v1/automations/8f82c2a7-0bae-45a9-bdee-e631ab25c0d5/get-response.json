@@ -1,0 +1,44 @@
+{
+    "id": "8f82c2a7-0bae-45a9-bdee-e631ab25c0d5",
+    "name": "testExisting_automation_event",
+    "description": "",
+    "key": "testExisting_automation_event",
+    "typeId": 1,
+    "type": "scheduled",
+    "statusId": 6,
+    "status": "Scheduled",
+    "categoryId": 290937,
+    "lastRunTime": "2024-11-08T03:15:20.27",
+    "lastRunInstanceId": "b2bc1d03-04ba-4a01-9e33-0c246f07dd36",
+    "schedule": {
+        "id": "064cf4ba-a5d0-420a-8a4f-26055a3550ba",
+        "typeId": 2,
+        "startDate": "2024-11-07T12:15:00",
+        "endDate": "2079-06-06T00:00:00",
+        "scheduledTime": "2024-11-08T11:15:00",
+        "rangeTypeId": 1,
+        "occurrences": 478403,
+        "pattern": "<Pattern><PatternType>0</PatternType><HourInterval>1</HourInterval></Pattern>",
+        "icalRecur": "FREQ=HOURLY;UNTIL=20790606T080000;INTERVAL=1",
+        "timezoneName": "W. Europe Standard Time",
+        "scheduleStatus": "active",
+        "timezoneId": 5
+    },
+    "steps": [
+        {
+            "id": "83755b3f-5012-49b4-8112-0291c879b9d5",
+            "name": "",
+            "description": "",
+            "step": 1,
+            "activities": [
+                {
+                    "id": "39d74fe0-ced2-4e91-b23e-11218adc304c",
+                    "name": "testExisting_event_automation",
+                    "activityObjectId": "161b64a1-1867-4272-8c5c-4d7abe880702",
+                    "objectTypeId": 952,
+                    "displayOrder": 1
+                }
+            ]
+        }
+    ]
+}

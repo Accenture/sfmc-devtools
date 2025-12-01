@@ -1,0 +1,12 @@
+<script runat="server">
+    //dummy
+</script>
+line1
+%%[
+    SET @test = 'bla bla'
+]%%
+line2 %%= ContentBlockById(1295064) =%% still line2; collapsed to line2 because it's assumed
+HTML
+<script runat="server">
+    Platform.Function.ContentBlockById(1295064);
+</script>

@@ -1,0 +1,114 @@
+{
+    "id": "0fc2ac96-14ba-495a-8db9-3ddd4f8ac444-wait",
+    "name": "testExisting_automation_wait",
+    "description": "",
+    "key": "testExisting_automation_wait",
+    "typeId": 0,
+    "type": "unspecified",
+    "statusId": 2,
+    "status": "Ready",
+    "categoryId": 290937,
+    "schedule": {
+        "scheduleStatus": "none"
+    },
+    "steps": [
+        {
+            "id": "73acb9f6-3dd2-4a7e-a25b-7c3a03170957",
+            "name": "",
+            "step": 1,
+            "activities": [
+                {
+                    "id": "f8c0e577-278c-479f-b381-610569b0b52e",
+                    "name": "1 Years",
+                    "activityObjectId": "1bd41a92-2c57-463c-a1e6-6e1549e481a1",
+                    "objectTypeId": 467,
+                    "displayOrder": 1
+                }
+            ]
+        },
+        {
+            "id": "83fd8f6d-54bb-4b04-bc0d-dd62e16f452a",
+            "name": "",
+            "step": 2,
+            "activities": [
+                {
+                    "id": "d364faa9-06e3-4d38-9fbe-93986b1d541e",
+                    "name": "1 Months",
+                    "activityObjectId": "76f255e3-1603-4d8b-be59-32ac6fe61e15",
+                    "objectTypeId": 467,
+                    "displayOrder": 1
+                }
+            ]
+        },
+        {
+            "id": "935d4ac1-c65e-4ba6-adb4-a3c8e8dcb241",
+            "name": "",
+            "step": 3,
+            "activities": [
+                {
+                    "id": "5aaeb136-9b1b-4d1f-95f2-bdd8d522f018",
+                    "name": "1 Weeks",
+                    "activityObjectId": "85a405e4-e77b-4a2e-8d1b-9ad34244ac10",
+                    "objectTypeId": 467,
+                    "displayOrder": 1
+                }
+            ]
+        },
+        {
+            "id": "eb5871a6-1399-446c-a067-3a03d1a4367f",
+            "name": "",
+            "step": 4,
+            "activities": [
+                {
+                    "id": "002fbe34-10b0-4121-b19a-e9c073cbd700",
+                    "name": "1 Days",
+                    "activityObjectId": "562cf01a-6cca-4fd9-9d3c-f2649379a282",
+                    "objectTypeId": 467,
+                    "displayOrder": 1
+                }
+            ]
+        },
+        {
+            "id": "26c45a57-8761-4dac-91b4-c1c64d1a6741",
+            "name": "",
+            "step": 5,
+            "activities": [
+                {
+                    "id": "283a0acf-d5ed-4535-a2a7-383e2c8c51db",
+                    "name": "1 Hours",
+                    "activityObjectId": "2722bb7c-2ea2-4cf5-8891-96c5a4362a72",
+                    "objectTypeId": 467,
+                    "displayOrder": 1
+                }
+            ]
+        },
+        {
+            "id": "93065127-adcc-43cb-b040-ef63be2285ec",
+            "name": "",
+            "step": 6,
+            "activities": [
+                {
+                    "id": "167b101a-af09-4002-a14f-f537de266ce0",
+                    "name": "1 Minutes",
+                    "activityObjectId": "5d5f816b-b024-45a9-8ce9-726c6dd61bf4",
+                    "objectTypeId": 467,
+                    "displayOrder": 1
+                }
+            ]
+        },
+        {
+            "id": "0d8d1390-75be-427d-900b-0af5c906a01b",
+            "name": "",
+            "step": 7,
+            "activities": [
+                {
+                    "id": "6752906a-ce99-4bfe-b1d5-4db8eb4a24b0",
+                    "name": "03:00 PM",
+                    "activityObjectId": "1c9836b8-0242-4620-9421-21d36a0df751",
+                    "objectTypeId": 467,
+                    "displayOrder": 1
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+line1
+%%[
+    SET @test = 'bla bla'
+]%%
+line2 %%= ContentBlockById(1295064) =%% still line2 line3
+<script runat="server">
+    Platform.Function.ContentBlockById(1295064);
+    Platform.Function.ContentBlockById(1295065);
+</script>

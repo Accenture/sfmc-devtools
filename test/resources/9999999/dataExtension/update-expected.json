@@ -4,10 +4,8 @@
     "Description": "Container for my test emails",
     "IsSendable": false,
     "IsTestable": false,
-    "RowBasedRetention": true,
+    "DataRetentionPeriodLength": 6,
     "ResetRetentionPeriodOnImport": false,
-    "DeleteAtEndOfRetentionPeriod": false,
-    "RetainUntil": "",
     "Fields": [
         {
             "Name": "FirstName",
@@ -42,6 +40,22 @@
             "FieldType": "Text"
         },
         {
+            "Name": "decimalField",
+            "DefaultValue": "",
+            "MaxLength": 6,
+            "Scale": 3,
+            "IsPrimaryKey": false,
+            "IsRequired": true,
+            "FieldType": "Decimal"
+        },
+        {
+            "Name": "numberField",
+            "DefaultValue": "",
+            "IsPrimaryKey": false,
+            "IsRequired": true,
+            "FieldType": "Number"
+        },
+        {
             "Name": "testField",
             "DefaultValue": "",
             "MaxLength": 254,
@@ -50,6 +64,9 @@
             "FieldType": "Text"
         }
     ],
+    "c__dataRetentionPeriodUnitOfMeasure": "Months",
+    "c__retainUntil": "2024-5-9",
+    "c__retentionPolicy": "allRecords",
     "r__folder_ContentType": "dataextension",
     "r__folder_Path": "Data Extensions"
 }

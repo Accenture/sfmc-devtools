@@ -14,31 +14,31 @@
         {
             "activities": [
                 {
-                    "name": "{{{prefix}}}dataExtract",
+                    "r__key": "{{{prefix}}}dataExtract",
                     "r__type": "dataExtract"
                 },
                 {
-                    "name": "{{{prefix}}}emailSend",
+                    "r__key": "{{{prefix}}}emailSend",
                     "r__type": "emailSend"
                 },
                 {
-                    "name": "{{{prefix}}}fileTransfer",
+                    "r__key": "{{{prefix}}}fileTransfer",
                     "r__type": "fileTransfer"
                 },
                 {
-                    "name": "{{{prefix}}}importFile",
+                    "r__key": "{{{prefix}}}importFile",
                     "r__type": "importFile"
                 },
                 {
-                    "name": "{{{prefix}}}query",
+                    "r__key": "{{{prefix}}}query",
                     "r__type": "query"
                 },
                 {
-                    "name": "{{{prefix}}}script",
+                    "r__key": "{{{prefix}}}script",
                     "r__type": "script"
                 },
                 {
-                    "name": "{{{prefix}}}39f6a488-20eb-4ba0-b0b9",
+                    "r__key": "{{{prefix}}}automation__s1.7",
                     "r__type": "verification"
                 }
             ],

@@ -1,0 +1,29 @@
+{
+    "assetType": {
+        "displayName": "HTML Block",
+        "name": "htmlblock"
+    },
+    "availableViews": [],
+    "createdBy": {},
+    "customerKey": "testTemplated_asset_htmlblock",
+    "design": "",
+    "fileProperties": {
+        "fileName": "testTemplated_asset_htmlblock-Mcdev-strips-content"
+    },
+    "memberId": "1111111",
+    "meta": {
+        "wrapperStyles": {
+            "mobile": {
+                "visible": true
+            },
+            "styling": {}
+        }
+    },
+    "modelVersion": 2,
+    "modifiedBy": {},
+    "name": "testTemplated_asset_htmlblock-Mcdev-strips-content",
+    "r__folder_Path": "Content Builder",
+    "status": {
+        "name": "Draft"
+    }
+}

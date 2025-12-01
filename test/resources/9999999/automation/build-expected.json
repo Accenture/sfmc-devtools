@@ -14,31 +14,31 @@
         {
             "activities": [
                 {
-                    "name": "testTemplated_dataExtract",
+                    "r__key": "testTemplated_dataExtract",
                     "r__type": "dataExtract"
                 },
                 {
-                    "name": "testTemplated_emailSend",
+                    "r__key": "testTemplated_emailSend",
                     "r__type": "emailSend"
                 },
                 {
-                    "name": "testTemplated_fileTransfer",
+                    "r__key": "testTemplated_fileTransfer",
                     "r__type": "fileTransfer"
                 },
                 {
-                    "name": "testTemplated_importFile",
+                    "r__key": "testTemplated_importFile",
                     "r__type": "importFile"
                 },
                 {
-                    "name": "testTemplated_query",
+                    "r__key": "testTemplated_query",
                     "r__type": "query"
                 },
                 {
-                    "name": "testTemplated_script",
+                    "r__key": "testTemplated_script",
                     "r__type": "script"
                 },
                 {
-                    "name": "testTemplated_39f6a488-20eb-4ba0-b0b9",
+                    "r__key": "testTemplated_automation__s1.7",
                     "r__type": "verification"
                 }
             ],

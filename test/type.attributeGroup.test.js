@@ -1,27 +1,28 @@
-const chai = require('chai');
-const chaiFiles = require('chai-files');
-
-chai.use(chaiFiles);
-
+import * as chai from 'chai';
 const assert = chai.assert;
-const cache = require('../lib/util/cache');
-const testUtils = require('./utils');
-const handler = require('../lib/index');
+
+import chaiFiles from 'chai-files';
+import cache from '../lib/util/cache.js';
+import * as testUtils from './utils.js';
+import handler from '../lib/index.js';
+chai.use(chaiFiles);
 
 describe('type: attributeGroup', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
+
     describe('Retrieve ================', () => {
         it('Should retrieve a attributeGroup', async () => {
             // WHEN
             const retrieve = await handler.retrieve('testInstance/testBU', ['attributeGroup']);
 
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             assert.equal(
                 retrieve['testInstance/testBU'].attributeGroup
                     ? Object.keys(retrieve['testInstance/testBU'].attributeGroup).length

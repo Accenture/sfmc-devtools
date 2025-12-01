@@ -1,0 +1,426 @@
+{
+    "count": 5,
+    "page": 1,
+    "pageSize": 50,
+    "links": {},
+    "items": [
+        {
+            "id": "161b64a1-1867-4272-8c5c-4d7abe880702",
+            "type": "AutomationAudience",
+            "name": "testExisting_event_automation",
+            "description": "",
+            "createdDate": "2024-11-07T04:58:46.51",
+            "createdBy": 700301950,
+            "modifiedDate": "2024-11-07T04:58:46.51",
+            "modifiedBy": 700301950,
+            "mode": "Production",
+            "eventDefinitionKey": "testExisting_event_automation",
+            "dataExtensionId": "21711373-72c1-ec11-b83b-48df37d1deb7",
+            "dataExtensionName": "testExisting_automation_event",
+            "sourceApplicationExtensionId": "97e942ee-6914-4d3d-9e52-37ecb71f79ed",
+            "filterDefinitionId": "00000000-0000-0000-0000-000000000000",
+            "filterDefinitionTemplate": "",
+            "iconUrl": "/images/icon-data-extension.svg",
+            "arguments": {
+                "serializedObjectType": 9,
+                "useHighWatermark": true,
+                "resetHighWatermark": false,
+                "automationId": "8f82c2a7-0bae-45a9-bdee-e631ab25c0d5",
+                "eventDefinitionId": "161b64a1-1867-4272-8c5c-4d7abe880702",
+                "eventDefinitionKey": "testExisting_event_automation",
+                "dataExtensionId": "21711373-72c1-ec11-b83b-48df37d1deb7",
+                "criteria": ""
+            },
+            "configurationArguments": {
+                "unconfigured": false
+            },
+            "metaData": {
+                "criteriaDescription": "",
+                "scheduleFlowMode": "automation"
+            },
+            "schedule": {
+                "startDateTime": "2024-11-07T12:15:00",
+                "endDateTime": "2079-06-06T00:00:00",
+                "timeZone": "W. Europe Standard Time",
+                "occurrences": 478403,
+                "endType": "EndDate",
+                "frequency": "Hourly",
+                "recurrencePattern": "Interval",
+                "interval": 1
+            },
+            "interactionCount": 1,
+            "isVisibleInPicker": false,
+            "isPlatformObject": false,
+            "category": "Audience",
+            "publishedInteractionCount": 1,
+            "automationId": "8f82c2a7-0bae-45a9-bdee-e631ab25c0d5",
+            "disableDEDataLogging": false
+        },
+        {
+            "id": "33b4dbc5-4b58-4a54-ab57-24388f1eefe4",
+            "type": "APIEvent",
+            "name": "TestContact_Event",
+            "description": "",
+            "createdDate": "2018-08-03T07:55:27.38",
+            "createdBy": 700301950,
+            "modifiedDate": "2018-08-03T08:22:03.76",
+            "modifiedBy": 700301950,
+            "mode": "Production",
+            "eventDefinitionKey": "APIEvent-60130566-e2fe-eb29-4140-15c27093a80b",
+            "dataExtensionId": "1c8064d5-6502-ef11-a5c8-5cba2c702db8",
+            "dataExtensionName": "testExisting_journey_Quicksend",
+            "sourceApplicationExtensionId": "7db1f972-f8b7-49b6-91b5-fa218e13953d",
+            "filterDefinitionTemplate": "",
+            "iconUrl": "/events/images/icon_journeyBuilder-event-api-blue.svg",
+            "arguments": {
+                "serializedObjectType": 11,
+                "eventDefinitionKey": "APIEvent-60130566-e2fe-eb29-4140-15c27093a80b",
+                "dataExtensionId": "C25D5A59-5EBC-40C9-8D27-149831881D89",
+                "automationId": "00000000-0000-0000-0000-000000000000",
+                "criteria": "",
+                "useHighWatermark": false
+            },
+            "metaData": {
+                "scheduleState": "No Schedule",
+                "criteriaDescription": ""
+            },
+            "interactionCount": 1,
+            "isVisibleInPicker": true,
+            "isPlatformObject": false,
+            "category": "Event",
+            "publishedInteractionCount": 1,
+            "automationId": "00000000-0000-0000-0000-000000000000",
+            "disableDEDataLogging": false
+        },
+        {
+            "id": "9e1995f8-951d-4019-855c-826b45e5b028",
+            "type": "EmailAudience",
+            "name": "testExisting_journey_Quicksend",
+            "description": "",
+            "createdDate": "2024-04-24T12:18:40.573",
+            "createdBy": 700301950,
+            "modifiedDate": "2024-04-24T12:18:40.573",
+            "modifiedBy": 700301950,
+            "mode": "Production",
+            "eventDefinitionKey": "DEAudience-11be962d-064c-83d9-2804-7d1befc10325",
+            "dataExtensionId": "1c8064d5-6502-ef11-a5c8-5cba2c702db8",
+            "dataExtensionName": "testExisting_journey_Quicksend",
+            "sourceApplicationExtensionId": "97e942ee-6914-4d3d-9e52-37ecb71f79ed",
+            "filterDefinitionId": "00000000-0000-0000-0000-000000000000",
+            "filterDefinitionTemplate": "",
+            "iconUrl": "/images/icon-data-extension.svg",
+            "arguments": {
+                "serializedObjectType": 3,
+                "useHighWatermark": false,
+                "eventDefinitionId": "9e1995f8-951d-4019-855c-826b45e5b028",
+                "eventDefinitionKey": "DEAudience-11be962d-064c-83d9-2804-7d1befc10325",
+                "dataExtensionId": "1c8064d5-6502-ef11-a5c8-5cba2c702db8",
+                "criteria": ""
+            },
+            "configurationArguments": {
+                "unconfigured": false
+            },
+            "metaData": {
+                "criteriaDescription": "",
+                "scheduleFlowMode": "runOnce",
+                "runOnceScheduleMode": "onPublish",
+                "scheduleState": "No Schedule"
+            },
+            "interactionCount": 1,
+            "isVisibleInPicker": false,
+            "isPlatformObject": false,
+            "category": "Audience",
+            "publishedInteractionCount": 0,
+            "automationId": "00000000-0000-0000-0000-000000000000",
+            "disableDEDataLogging": false
+        },
+        {
+            "id": "649d512b-4d08-4eca-a14e-fc7b64b4ada8",
+            "type": "EmailAudience",
+            "name": "testExisting_journey_Multistep",
+            "description": "",
+            "createdDate": "2024-05-04T05:54:44.95",
+            "createdBy": 700301950,
+            "modifiedDate": "2024-05-04T05:54:44.95",
+            "modifiedBy": 700301950,
+            "mode": "Production",
+            "eventDefinitionKey": "DEAudience-2e3c73b6-48cc-2ec0-5522-48636e1a236e",
+            "dataExtensionId": "ed305df3-6502-ef11-a5c8-5cba2c702db8",
+            "dataExtensionName": "testExisting_journey_Multistep",
+            "sourceApplicationExtensionId": "97e942ee-6914-4d3d-9e52-37ecb71f79ed",
+            "filterDefinitionId": "00000000-0000-0000-0000-000000000000",
+            "filterDefinitionTemplate": "",
+            "iconUrl": "/images/icon-data-extension.svg",
+            "arguments": {
+                "serializedObjectType": 3,
+                "eventDefinitionId": "649d512b-4d08-4eca-a14e-fc7b64b4ada8",
+                "eventDefinitionKey": "DEAudience-2e3c73b6-48cc-2ec0-5522-48636e1a236e",
+                "dataExtensionId": "ed305df3-6502-ef11-a5c8-5cba2c702db8",
+                "criteria": ""
+            },
+            "configurationArguments": {
+                "unconfigured": true
+            },
+            "metaData": {
+                "criteriaDescription": "",
+                "scheduleState": "No Schedule"
+            },
+            "interactionCount": 1,
+            "isVisibleInPicker": false,
+            "isPlatformObject": false,
+            "category": "Audience",
+            "publishedInteractionCount": 0,
+            "automationId": "00000000-0000-0000-0000-000000000000",
+            "disableDEDataLogging": false
+        },
+        {
+            "id": "d8d57832-ce9c-4bf6-8c24-3044ece5dffd",
+            "type": "APIEvent",
+            "name": "testExisting_event",
+            "description": "",
+            "createdDate": "2024-07-05T06:12:24.227",
+            "createdBy": 700301950,
+            "modifiedDate": "2024-07-05T08:01:55.4",
+            "modifiedBy": 700301950,
+            "mode": "Production",
+            "eventDefinitionKey": "testExisting_event",
+            "dataExtensionId": "f2cc2b21-d73a-ef11-a5c8-5cba2c702db8",
+            "dataExtensionName": "testExisting_event - 2024-07-05T080154625",
+            "schema": {
+                "id": "f2cc2b21-d73a-ef11-a5c8-5cba2c702db8",
+                "name": "testExisting_event - 2024-07-05T080154625",
+                "fields": [
+                    {
+                        "name": "ContactId",
+                        "dataType": "Text",
+                        "maxLength": "18",
+                        "isNullable": false,
+                        "isPrimaryKey": true,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "Type",
+                        "dataType": "Text",
+                        "maxLength": "50",
+                        "isNullable": false,
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "Status",
+                        "dataType": "Text",
+                        "maxLength": "50",
+                        "isNullable": false,
+                        "isPrimaryKey": true,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "Respondent",
+                        "dataType": "Text",
+                        "maxLength": "256",
+                        "isNullable": true,
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "FirstName",
+                        "dataType": "Text",
+                        "maxLength": "256",
+                        "isNullable": true,
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "LastName",
+                        "dataType": "Text",
+                        "maxLength": "256",
+                        "isNullable": true,
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "PreferredLanguage",
+                        "dataType": "Text",
+                        "maxLength": "50",
+                        "isNullable": true,
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "TouchPoint",
+                        "dataType": "Text",
+                        "maxLength": "256",
+                        "isNullable": true,
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "Datestamp",
+                        "dataType": "Date",
+                        "isNullable": true,
+                        "defaultValue": "GetDate()",
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "StartDate",
+                        "dataType": "Date",
+                        "isNullable": true,
+                        "defaultValue": "",
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "EndDate",
+                        "dataType": "Date",
+                        "isNullable": true,
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "BroadcastedNotificationDate",
+                        "dataType": "Date",
+                        "isNullable": true,
+                        "defaultValue": "",
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "FirstReminderDate",
+                        "dataType": "Date",
+                        "isNullable": true,
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "SecondReminderDate",
+                        "dataType": "Date",
+                        "isNullable": true,
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "Title",
+                        "dataType": "Text",
+                        "maxLength": "256",
+                        "isNullable": true,
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "DisplayName",
+                        "dataType": "Text",
+                        "maxLength": "256",
+                        "isNullable": true,
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "Text",
+                        "dataType": "Text",
+                        "maxLength": "256",
+                        "isNullable": true,
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "Description",
+                        "dataType": "Text",
+                        "maxLength": "4000",
+                        "isNullable": true,
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "Channel",
+                        "dataType": "Text",
+                        "maxLength": "256",
+                        "isNullable": true,
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "FirstReminderChannel",
+                        "dataType": "Text",
+                        "maxLength": "256",
+                        "isNullable": true,
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "SecondReminderChannel",
+                        "dataType": "Text",
+                        "maxLength": "256",
+                        "isNullable": true,
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "Email",
+                        "dataType": "Email",
+                        "maxLength": "",
+                        "isNullable": true,
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "ArticleOrTaskID",
+                        "dataType": "Text",
+                        "maxLength": "18",
+                        "isNullable": false,
+                        "isPrimaryKey": true,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "Points",
+                        "dataType": "Number",
+                        "maxLength": "",
+                        "isNullable": true,
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "TaskType",
+                        "dataType": "Text",
+                        "maxLength": "255",
+                        "isNullable": true,
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    },
+                    {
+                        "name": "TaskArea",
+                        "dataType": "Text",
+                        "maxLength": "255",
+                        "isNullable": true,
+                        "isPrimaryKey": false,
+                        "isDevicePreference": false
+                    }
+                ],
+                "sendableCustomObjectField": "ContactId",
+                "sendableSubscriberField": "_SubscriberKey",
+                "isPlatformObject": false
+            },
+            "sourceApplicationExtensionId": "00000000-0000-0000-0000-000000000000",
+            "filterDefinitionId": "00000000-0000-0000-0000-000000000000",
+            "filterDefinitionTemplate": "",
+            "iconUrl": "",
+            "arguments": {
+                "serializedObjectType": 11,
+                "eventDefinitionKey": "testExisting_event",
+                "eventDefinitionId": "d8d57832-ce9c-4bf6-8c24-3044ece5dffd",
+                "dataExtensionId": "00000000-0000-0000-0000-000000000000",
+                "criteria": ""
+            },
+            "metaData": {
+                "scheduleState": "No Schedule"
+            },
+            "interactionCount": 0,
+            "isVisibleInPicker": true,
+            "isPlatformObject": false,
+            "category": "Event",
+            "publishedInteractionCount": 0,
+            "automationId": "00000000-0000-0000-0000-000000000000",
+            "disableDEDataLogging": false
+        }
+    ]
+}

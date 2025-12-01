@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>CreateResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:bb642235-9021-414c-8f0e-31d693a573e8</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:b49d6c14-33d7-4ba8-8aea-0fe3282fdbfd</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-3e603e14-dc4c-4733-be8a-e2d8d3e205cb">
+                <wsu:Created>2024-04-15T21:38:02Z</wsu:Created>
+                <wsu:Expires>2024-04-15T21:43:02Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <CreateResponse xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <Results>
+                <StatusCode>OK</StatusCode>
+                <StatusMessage>SendClassification created</StatusMessage>
+                <OrdinalID>0</OrdinalID>
+                <NewID>0</NewID>
+                <NewObjectID>07cf2a6e-70fb-ee11-a5c8-5cba2c6fc270</NewObjectID>
+                <Object xsi:type="SendClassification">
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID>07cf2a6e-70fb-ee11-a5c8-5cba2c6fc270</ObjectID>
+                    <CustomerKey>testNew_sendClassification</CustomerKey>
+                    <SendClassificationType>Operational</SendClassificationType>
+                    <Name>testNew_sendClassification</Name>
+                    <Description>created on deploy</Description>
+                    <SenderProfile>
+                        <PartnerKey xsi:nil="true" />
+                        <ObjectID>a75d452b-7ef4-eb11-b82d-48df37d1da95</ObjectID>
+                        <CustomerKey>testExisting_senderProfile</CustomerKey>
+                    </SenderProfile>
+                    <DeliveryProfile>
+                        <PartnerKey xsi:nil="true" />
+                        <ObjectID xsi:nil="true" />
+                        <CustomerKey>Default</CustomerKey>
+                    </DeliveryProfile>
+                </Object>
+            </Results>
+            <RequestID>d5f798f9-02eb-4b76-a4b4-90cfee939ce2</RequestID>
+            <OverallStatus>OK</OverallStatus>
+        </CreateResponse>
+    </soap:Body>
+</soap:Envelope>

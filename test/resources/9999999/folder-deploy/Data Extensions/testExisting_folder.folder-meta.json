@@ -1,0 +1,9 @@
+{
+    "Name": "testExisting_folder",
+    "Description": "",
+    "ContentType": "dataextension",
+    "IsActive": true,
+    "IsEditable": true,
+    "AllowChildren": true,
+    "_generated": true
+}

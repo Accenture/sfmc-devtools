@@ -3,6 +3,6 @@
     "definitionKey": "testTemplated_tpush",
     "description": "foobar. note that applicationId can only be manually set up in Setup - Mobile Push",
     "applicationId": "ffbab4c9-fbf6-4b87-9c9a-10c6ce86e81d",
-    "content": { "customerKey": "mobileMessage_testTarget" },
+    "r__asset_key": "mobileMessage_testTarget",
     "options": { "sound": "temp.wmv", "badge": "1" }
 }

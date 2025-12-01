@@ -1,0 +1,8 @@
+{
+    "CustomerKey": "{{{prefix}}}sendClassification",
+    "Description": "",
+    "Name": "{{{prefix}}}sendClassification",
+    "c__classification": "Commercial",
+    "r__deliveryProfile_key": "Default",
+    "r__senderProfile_key": "{{{prefix}}}senderProfile"
+}

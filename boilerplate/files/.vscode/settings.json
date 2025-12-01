@@ -1,7 +1,5 @@
 {
-    "workbench.editorAssociations": {
-        "*.md": "vscode.markdown.preview.editor"
-    },
+    "explorer.compactFolders": false,
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.expand": false,
     "explorer.fileNesting.patterns": {
@@ -16,6 +14,11 @@
         "*-meta.html": "${capture}-meta.json",
         "*-meta.sql": "${capture}-meta.json",
         "*-meta.ssjs": "${capture}-meta.json",
+        "*-meta.js": "${capture}-meta.json",
+        "*-meta.css": "${capture}-meta.json",
+        "*-meta.rss": "${capture}-meta.json",
+        "*-meta.txt": "${capture}-meta.json",
+        "*-meta.xml": "${capture}-meta.json",
         "*.asset-asset-meta.html": "${dirname}.asset-asset-meta.json",
         "*.asset-message-meta.html": "${dirname}.asset-message-meta.json",
         "*.asset-template-meta.html": "${dirname}.asset-template-meta.json",
@@ -32,11 +35,12 @@
         "*.txt": "${capture}.asset-textfile-meta.json"
     },
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": "explicit"
     },
     "editor.formatOnSave": true,
     "files.associations": {
-        "*.ssjs": "javascript"
+        "*.ssjs": "javascript",
+        "*.html": "ampscript"
     },
     "files.eol": "\n",
     "files.exclude": {
@@ -47,7 +51,7 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "FiB.beautyAmp"
     },
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -63,5 +67,16 @@
     },
     "[AMPscript]": {
         "editor.defaultFormatter": "FiB.beautyAmp"
-    }
+    },
+    "vsicons.associations.files": [
+        {
+            "icon": "apex",
+            "languages": [
+                { "ids": "ampscript", "defaultExtension": "amp" },
+                { "ids": "AMPscript", "defaultExtension": "amp" }
+            ],
+            "light": true,
+            "format": "FileFormat.svg"
+        }
+    ]
 }

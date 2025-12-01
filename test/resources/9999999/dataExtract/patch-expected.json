@@ -1,5 +1,6 @@
 {
-    "createdBy": 700304523,
+    "createdBy": "Jörn Berkefeld",
+    "createdDate": "2022-11-09T05:31:21.667",
     "dataFields": [
         {
             "name": "ColumnDelimiter",
@@ -8,8 +9,7 @@
         },
         {
             "name": "DECustomerKey",
-            "type": "string",
-            "value": "testExisting_dataExtension"
+            "type": "string"
         },
         {
             "name": "HasColumnHeaders",
@@ -27,11 +27,13 @@
             "value": "False"
         }
     ],
-    "description": "created via deploy",
+    "description": "blabla",
     "fileSpec": "testExisting-%%Year%%-%%Month%%-%%Day%%",
     "intervalType": 0,
     "key": "testExisting_dataExtract",
-    "modifiedBy": 700304523,
+    "modifiedBy": "Jörn Berkefeld",
+    "modifiedDate": "2022-11-17T07:13:36.9",
     "name": "testExisting_dataExtract",
+    "r__dataExtension_key": "testExisting_dataExtension",
     "r__dataExtractType_name": "Data Extension Extract"
 }

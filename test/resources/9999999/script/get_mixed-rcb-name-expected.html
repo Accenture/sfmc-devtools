@@ -1,0 +1,14 @@
+<script runat="server">
+    //dummy
+</script>
+line1
+%%[
+    SET @test = 'bla bla'
+]%%
+line2 %%= ContentBlockByName("Content Builder\dont strip non ssjs content") =%% still line2; collapsed to line2 because it's assumed
+HTML
+<script runat="server">
+    Platform.Function.ContentBlockByName(
+        "Content Builder\\dont strip non ssjs content"
+    );
+</script>

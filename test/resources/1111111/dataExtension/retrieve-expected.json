@@ -1,8 +1,6 @@
 {
     "CustomerKey": "testExisting_dataExtensionShared",
     "DataRetentionPeriodLength": 6,
-    "DataRetentionPeriodUnitOfMeasure": 5,
-    "DeleteAtEndOfRetentionPeriod": false,
     "Description": "bla bla",
     "Fields": [
         {
@@ -42,14 +40,14 @@
     "IsTestable": true,
     "Name": "testExisting_dataExtensionShared",
     "ResetRetentionPeriodOnImport": false,
-    "RetainUntil": "",
-    "RowBasedRetention": true,
     "SendableDataExtensionField": {
         "Name": "ContactKey"
     },
     "SendableSubscriberField": {
         "Name": "Subscriber Key"
     },
+    "c__dataRetentionPeriodUnitOfMeasure": "Months",
+    "c__retentionPolicy": "individialRecords",
     "r__folder_ContentType": "shared_dataextension",
     "r__folder_Path": "Shared Items/Shared Data Extensions"
 }

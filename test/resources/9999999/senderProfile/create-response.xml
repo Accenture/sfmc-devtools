@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>CreateResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:da5fb2ee-2ca9-4f56-a9e8-2b98d43379f7</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:3cbd2577-f0e6-4593-8657-e1f48d94624c</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-8768684a-59c7-44f4-977e-3a4e44db441d">
+                <wsu:Created>2024-04-12T12:53:28Z</wsu:Created>
+                <wsu:Expires>2024-04-12T12:58:28Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <CreateResponse xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <Results>
+                <StatusCode>OK</StatusCode>
+                <StatusMessage>SenderProfile created</StatusMessage>
+                <OrdinalID>0</OrdinalID>
+                <NewID>0</NewID>
+                <NewObjectID>70accba4-cbf8-ee11-a5c8-5cba2c6fc270</NewObjectID>
+                <Object xsi:type="SenderProfile">
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID>70accba4-cbf8-ee11-a5c8-5cba2c6fc270</ObjectID>
+                    <CustomerKey>testNew_senderProfile</CustomerKey>
+                    <Name>testNew_senderProfile</Name>
+                    <Description>created on deploy</Description>
+                    <FromName>Jörn Berkefeld</FromName>
+                    <FromAddress>joern.berkefeld@accenture.com</FromAddress>
+                    <UseDefaultRMMRules>false</UseDefaultRMMRules>
+                    <AutoForwardToEmailAddress>joern.berkefeld@accenture.com</AutoForwardToEmailAddress>
+                    <AutoForwardToName>Jörn Berkefeld</AutoForwardToName>
+                    <DirectForward>false</DirectForward>
+                    <AutoReply>false</AutoReply>
+                    <SenderHeaderEmailAddress />
+                    <SenderHeaderName />
+                    <FallbackFromAddress>joern.berkefeld.New@accenture.com</FallbackFromAddress>
+                </Object>
+            </Results>
+            <RequestID>b6be1480-01a4-4e48-9f47-06bf51a301c1</RequestID>
+            <OverallStatus>OK</OverallStatus>
+        </CreateResponse>
+    </soap:Body>
+</soap:Envelope>

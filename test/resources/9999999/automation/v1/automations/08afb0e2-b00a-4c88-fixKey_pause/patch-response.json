@@ -1,5 +1,6 @@
 {
     "id": "08afb0e2-b00a-4c88-fixKey_pause",
+    "legacyId": "RkpOcE9qSVh2VUdnYTVJbWFfWW14dzoyNTow",
     "name": "testExisting_automation_fixedKey_paused",
     "description": "testing fixKey on an a paused automation",
     "key": "testExisting_automation_fixedKey_paused",

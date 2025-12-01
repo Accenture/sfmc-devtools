@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:6d2f81c8-80ab-44d5-8664-206753e7ac8d</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:a7354389-079e-4844-93b5-af6b7bf1d535</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-468a08b7-c8fd-44bf-a2c8-fd6063127ca6">
+                <wsu:Created>2022-04-21T19:21:52Z</wsu:Created>
+                <wsu:Expires>2022-04-21T19:26:52Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>cfe51e71-6a2b-4cb4-aecd-3777076d63bc</RequestID>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>eb18160e-ec0f-46ca-b59a-1287dbeb7172</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[DisplayName]</CustomerKey>
+                <Name>DisplayName</Name>
+                <DefaultValue />
+                <MaxLength>256</MaxLength>
+                <IsRequired>false</IsRequired>
+                <Ordinal>15</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>ae0a3a3e-e81a-4b13-9a70-12ff6903c901</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[PreferredLanguage]</CustomerKey>
+                <Name>PreferredLanguage</Name>
+                <DefaultValue />
+                <MaxLength>50</MaxLength>
+                <IsRequired>false</IsRequired>
+                <Ordinal>6</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>3d39db8b-b561-4227-9051-1c201c79033e</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[FirstReminderDate]</CustomerKey>
+                <Name>FirstReminderDate</Name>
+                <DefaultValue />
+                <IsRequired>false</IsRequired>
+                <Ordinal>12</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Date</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>4eadce50-f552-41e5-8318-2fd367f043b9</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[Description]</CustomerKey>
+                <Name>Description</Name>
+                <DefaultValue />
+                <MaxLength>4000</MaxLength>
+                <IsRequired>false</IsRequired>
+                <Ordinal>17</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>d2826773-6965-4e78-9a05-3008ea45a104</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[EndDate]</CustomerKey>
+                <Name>EndDate</Name>
+                <DefaultValue />
+                <IsRequired>false</IsRequired>
+                <Ordinal>10</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Date</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>3bb8fa91-5881-4ca1-ac09-30604ba0b9be</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[TaskArea]</CustomerKey>
+                <Name>TaskArea</Name>
+                <DefaultValue />
+                <MaxLength>255</MaxLength>
+                <IsRequired>false</IsRequired>
+                <Ordinal>25</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>721b938f-67ab-4d82-bb1c-33add4ec1533</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[ContactId]</CustomerKey>
+                <Name>ContactId</Name>
+                <DefaultValue />
+                <MaxLength>18</MaxLength>
+                <IsRequired>true</IsRequired>
+                <Ordinal>0</Ordinal>
+                <IsPrimaryKey>true</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>5ccee5f6-f282-4741-899d-400b05c57425</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[FirstName]</CustomerKey>
+                <Name>FirstName</Name>
+                <DefaultValue />
+                <MaxLength>256</MaxLength>
+                <IsRequired>false</IsRequired>
+                <Ordinal>4</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>d0ec626c-7cba-492b-abd0-48484e0c18bb</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[Type]</CustomerKey>
+                <Name>Type</Name>
+                <DefaultValue />
+                <MaxLength>50</MaxLength>
+                <IsRequired>true</IsRequired>
+                <Ordinal>1</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>0d49e8cf-cce9-4323-9b17-52f2366f9fc2</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[Datestamp]</CustomerKey>
+                <Name>Datestamp</Name>
+                <DefaultValue>GetDate()</DefaultValue>
+                <IsRequired>false</IsRequired>
+                <Ordinal>8</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Date</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>c44861f7-bac3-4b32-a5f8-744f67a66aaa</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[Email]</CustomerKey>
+                <Name>Email</Name>
+                <DefaultValue />
+                <MaxLength>254</MaxLength>
+                <IsRequired>false</IsRequired>
+                <Ordinal>21</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>EmailAddress</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>c78d6054-5ce0-4438-a7ad-76b375224033</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[Status]</CustomerKey>
+                <Name>Status</Name>
+                <DefaultValue />
+                <MaxLength>50</MaxLength>
+                <IsRequired>true</IsRequired>
+                <Ordinal>2</Ordinal>
+                <IsPrimaryKey>true</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>541b063f-7c25-45b2-af53-7fdafbe0ee12</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[BroadcastedNotificationDate]</CustomerKey>
+                <Name>BroadcastedNotificationDate</Name>
+                <DefaultValue />
+                <IsRequired>false</IsRequired>
+                <Ordinal>11</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Date</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>ff54519e-931b-432f-9083-861213fa9460</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[TouchPoint]</CustomerKey>
+                <Name>TouchPoint</Name>
+                <DefaultValue />
+                <MaxLength>256</MaxLength>
+                <IsRequired>false</IsRequired>
+                <Ordinal>7</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>f0a58625-0b62-496f-bea9-9d2722e50864</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[Points]</CustomerKey>
+                <Name>Points</Name>
+                <DefaultValue />
+                <IsRequired>false</IsRequired>
+                <Ordinal>23</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Number</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>43f69e09-9f47-477f-95b6-a9b9b8111f5e</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[Title]</CustomerKey>
+                <Name>Title</Name>
+                <DefaultValue />
+                <MaxLength>256</MaxLength>
+                <IsRequired>false</IsRequired>
+                <Ordinal>14</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>e9cd8c9f-39b0-4c93-8fce-aa3f0ca0d310</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[SecondReminderDate]</CustomerKey>
+                <Name>SecondReminderDate</Name>
+                <DefaultValue />
+                <IsRequired>false</IsRequired>
+                <Ordinal>13</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Date</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>403e68ee-f203-42e1-ac48-af18def0cccd</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[TaskType]</CustomerKey>
+                <Name>TaskType</Name>
+                <DefaultValue />
+                <MaxLength>255</MaxLength>
+                <IsRequired>false</IsRequired>
+                <Ordinal>24</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>555ad728-f99a-4e13-a992-b70b1ffe36a2</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[Respondent]</CustomerKey>
+                <Name>Respondent</Name>
+                <DefaultValue />
+                <MaxLength>256</MaxLength>
+                <IsRequired>false</IsRequired>
+                <Ordinal>3</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>95948e52-e8d0-4908-98a9-cc34cd84233e</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[LastName]</CustomerKey>
+                <Name>LastName</Name>
+                <DefaultValue />
+                <MaxLength>256</MaxLength>
+                <IsRequired>false</IsRequired>
+                <Ordinal>5</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>7976b904-1ed5-46f0-a524-cd1a787bfb5e</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[FirstReminderChannel]</CustomerKey>
+                <Name>FirstReminderChannel</Name>
+                <DefaultValue />
+                <MaxLength>256</MaxLength>
+                <IsRequired>false</IsRequired>
+                <Ordinal>19</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>ed225fdd-1aff-401d-906e-cd59b4d86fe2</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[SecondReminderChannel]</CustomerKey>
+                <Name>SecondReminderChannel</Name>
+                <DefaultValue />
+                <MaxLength>256</MaxLength>
+                <IsRequired>false</IsRequired>
+                <Ordinal>20</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>30222d00-35c5-46e8-ab41-d3febd909eed</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[ArticleOrTaskID]</CustomerKey>
+                <Name>ArticleOrTaskID</Name>
+                <DefaultValue />
+                <MaxLength>18</MaxLength>
+                <IsRequired>true</IsRequired>
+                <Ordinal>22</Ordinal>
+                <IsPrimaryKey>true</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>8c79306f-4f3a-4925-bd48-e6c6905c157c</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[StartDate]</CustomerKey>
+                <Name>StartDate</Name>
+                <DefaultValue />
+                <IsRequired>false</IsRequired>
+                <Ordinal>9</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Date</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>1892b0ee-26ea-4280-8bca-e8cc5d3f9658</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[Channel]</CustomerKey>
+                <Name>Channel</Name>
+                <DefaultValue />
+                <MaxLength>256</MaxLength>
+                <IsRequired>false</IsRequired>
+                <Ordinal>18</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+            <Results xsi:type="DataExtensionField">
+                <PartnerKey xsi:nil="true" />
+                <ObjectID>bf50095e-54ba-42c7-9baf-f91618738d85</ObjectID>
+                <CustomerKey>[testNew_event_withSchema].[Text]</CustomerKey>
+                <Name>Text</Name>
+                <DefaultValue />
+                <MaxLength>256</MaxLength>
+                <IsRequired>false</IsRequired>
+                <Ordinal>16</Ordinal>
+                <IsPrimaryKey>false</IsPrimaryKey>
+                <FieldType>Text</FieldType>
+                <DataExtension>
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_event_withSchema</CustomerKey>
+                </DataExtension>
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>

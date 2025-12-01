@@ -1,0 +1,112 @@
+{
+    "startIndex": 0,
+    "itemsPerPage": 50,
+    "totalResults": 3,
+    "entry": [
+        {
+            "id": "ZTFXX0hpNDNFZXU0RzBqZk45SGIxdzo0MTow",
+            "name": "testExisting_importFileSMS",
+            "sourceFile": "_CustomObject",
+            "audience": {
+                "id": "QUFBQUFBQUFBQUFBQUFBQUFBQUFBQTo2Mzow",
+                "name": "testExisting_importFileSMS",
+                "description": ""
+            },
+            "code": {
+                "id": "RXBwc0JoNk9jVTY0YWJNWFZDaGxvdzo4MTow",
+                "code": "4912312345678",
+                "codeType": "PRIVATE",
+                "isShortCode": false,
+                "isGsmCharacterSetOnly": false,
+                "isMms": false,
+                "isStackIndependant": false,
+                "dipSwitches": 0,
+                "moEngineVersion": 0,
+                "supportsConcatenation": false,
+                "isClientOwned": false,
+                "isOwner": false
+            },
+            "keyword": {
+                "id": "cTVJaG5oSDJPVUNHcUh6Z3pQT2tVdzo4Njow",
+                "keyword": "TESTEXISTING_KEYWORD",
+                "restriction": "NONE",
+                "isInherited": false,
+                "isLinkShorteningEnabled": false,
+                "isSubscriberTrackingEnabled": false,
+                "shortenerType": "BitLy"
+            },
+            "sourceObjectId": "NWQwdnhEU3dFZWVBekJRQzdISWl0QTo0NTow",
+            "sourceObjectName": "testExisting_dataExtension"
+        },
+        {
+            "id": "MVZtWUtidEVFZWlpdnhRQzdKVHM4UTo0MTow",
+            "name": "ContactSMS_DEV",
+            "sourceFile": "_CustomObject",
+            "audience": {
+                "id": "QUFBQUFBQUFBQUFBQUFBQUFBQUFBQTo2Mzow",
+                "name": "ContactSMS_DEV",
+                "description": ""
+            },
+            "code": {
+                "id": "RXBwc0JoNk9jVTY0YWJNWFZDaGxvdzo4MTow",
+                "code": "4912312345678",
+                "codeType": "PRIVATE",
+                "isShortCode": false,
+                "isGsmCharacterSetOnly": false,
+                "isMms": false,
+                "isStackIndependant": false,
+                "dipSwitches": 0,
+                "moEngineVersion": 0,
+                "supportsConcatenation": false,
+                "isClientOwned": false,
+                "isOwner": false
+            },
+            "keyword": {
+                "id": "X2RqemdvVHFja1dpTzlKcERRQ25MZzo4Njow",
+                "keyword": "COMMUNITYCLOUD_DEV",
+                "restriction": "NONE",
+                "isInherited": false,
+                "isLinkShorteningEnabled": false,
+                "isSubscriberTrackingEnabled": false,
+                "shortenerType": "BitLy"
+            },
+            "sourceObjectId": "NWQwdnhEU3dFZWVBekJRQzdISWl0QTo0NTow",
+            "sourceObjectName": "testExisting_dataExtension"
+        },
+        {
+            "id": "NHNwUFR5YTdFZTY0WVVqZk45SGNlUTo0MTow",
+            "name": "ContactSMS_DEV3",
+            "sourceFile": "_CustomObject",
+            "audience": {
+                "id": "QUFBQUFBQUFBQUFBQUFBQUFBQUFBQTo2Mzow",
+                "name": "ContactSMS_DEV3",
+                "description": ""
+            },
+            "code": {
+                "id": "RXBwc0JoNk9jVTY0YWJNWFZDaGxvdzo4MTow",
+                "code": "4912312345678",
+                "codeType": "PRIVATE",
+                "isShortCode": false,
+                "isGsmCharacterSetOnly": false,
+                "isMms": false,
+                "isStackIndependant": false,
+                "dipSwitches": 0,
+                "moEngineVersion": 0,
+                "supportsConcatenation": false,
+                "isClientOwned": false,
+                "isOwner": false
+            },
+            "keyword": {
+                "id": "X2RqemdvVHFja1dpTzlKcERRQ25MZzo4Njow",
+                "keyword": "COMMUNITYCLOUD_DEV",
+                "restriction": "NONE",
+                "isInherited": false,
+                "isLinkShorteningEnabled": false,
+                "isSubscriberTrackingEnabled": false,
+                "shortenerType": "BitLy"
+            },
+            "sourceObjectId": "NWQwdnhEU3dFZWVBekJRQzdISWl0QTo0NTow",
+            "sourceObjectName": "testExisting_dataExtension"
+        }
+    ]
+}

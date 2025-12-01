@@ -1,0 +1,34 @@
+{
+    "status": "Error",
+    "errors": [
+        {
+            "errorDetail": "The default email or mobile address in Journey Settings is invalid. Select a different one.",
+            "errorCode": "121226",
+            "errorType": "Error",
+            "additionalInfo": {}
+        },
+        {
+            "errorDetail": "Email Activity: CCE OpsIssue Satisfaction Email -- The email specified for the job did not pass validation. EmailID: 72604 An unverified from email address was detected. ",
+            "errorCode": "121008",
+            "errorType": "Error",
+            "additionalInfo": {
+                "activityKey": "EMAILV2-1",
+                "activityId": "620dbe27-665a-49a3-ad61-ceea5aab720f",
+                "activityType": "EMAILV2",
+                "definitionId": "2d5f37b8-7acf-4ac4-b76a-74690255600c"
+            }
+        }
+    ],
+    "warnings": [
+        {
+            "errorDetail": "Last modified date for email activity is more then 6 months ago. Please review the content or use path optimizer to test it.",
+            "errorCode": "121546",
+            "errorType": "Warning",
+            "additionalInfo": {
+                "activityKey": "EMAILV2-1",
+                "activityId": "620dbe27-665a-49a3-ad61-ceea5aab720f",
+                "activityType": "EMAILV2"
+            }
+        }
+    ]
+}

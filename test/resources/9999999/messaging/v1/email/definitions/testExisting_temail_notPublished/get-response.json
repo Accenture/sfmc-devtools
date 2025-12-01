@@ -1,0 +1,26 @@
+{
+    "requestId": "37ef06bd-4790-40c2-809f-41d0a8f1b068",
+    "name": "testExisting_temail_notPublis - 754cc4a10da14f538ecbd5470d771eaf",
+    "definitionKey": "testExisting_temail_notPublished",
+    "definitionId": "6a2f70c5-2561-ef11-b876-f40343c95928",
+    "description": "testExisting_temail_notPublis - 754cc4a10da14f538ecbd5470d771eaf",
+    "classification": "Default Transactional",
+    "status": "Active",
+    "createdDate": "2024-08-23T02:01:00",
+    "modifiedDate": "2024-08-23T02:01:00",
+    "content": {
+        "customerKey": "testExisting_asset_message"
+    },
+    "subscriptions": {
+        "dataExtension": "testExisting_temail_notPublished",
+        "list": "All Subscribers - 277",
+        "autoAddSubscriber": true,
+        "updateSubscriber": true
+    },
+    "options": {
+        "trackLinks": true
+    },
+    "journey": {
+        "interactionKey": "testExisting_temail_notPublished"
+    }
+}

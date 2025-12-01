@@ -7,8 +7,7 @@
         },
         {
             "name": "DECustomerKey",
-            "type": "string",
-            "value": "testTemplated_dataExtension"
+            "type": "string"
         },
         {
             "name": "HasColumnHeaders",
@@ -31,5 +30,6 @@
     "intervalType": 0,
     "key": "testTemplated_dataExtract",
     "name": "testTemplated_dataExtract",
+    "r__dataExtension_key": "testTemplated_dataExtension",
     "r__dataExtractType_name": "Data Extension Extract"
 }

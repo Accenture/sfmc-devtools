@@ -1,0 +1,79 @@
+{
+    "id": "cDhLQ2o2NExxVVc5N3VZeHF5WEExUToyNTow",
+    "key": "testExisting_automation_event",
+    "createdDate": "2024-11-07T10:20:18.877Z",
+    "name": "testExisting_automation_event",
+    "description": "",
+    "clientId": 9999999,
+    "status": "Scheduled",
+    "createdBy": {
+        "id": "NzEwNDIwNDE4OjQ6MA",
+        "name": "Jörn Berkefeld",
+        "email": "joern.berkefeld@accenture.com"
+    },
+    "modifiedDate": "2024-11-07T22:17:24.457Z",
+    "modifiedBy": {
+        "id": "LTEwMDA6NDow",
+        "name": "System"
+    },
+    "processes": [
+        {
+            "id": "Q3FPcDlGeGc1VTJHcE9mZmlmNW9oUToyNzow",
+            "createdDate": "2024-11-07T10:26:58.62Z",
+            "name": "",
+            "description": "",
+            "sequence": 0,
+            "status": "Complete",
+            "workerCounts": [
+                {
+                    "name": "QueryDefinition",
+                    "objectTypeId": 300,
+                    "count": 1,
+                    "status": "Complete"
+                }
+            ],
+            "instanceId": "aDJvYXJPR2Z5MHVNNHdBVVA0cG5xUToyODow"
+        },
+        {
+            "id": "UDF0MWd4SlF0RW1CRWdLUnlIbTUxUToyNzow",
+            "createdDate": "2024-11-07T10:59:15.813Z",
+            "name": "",
+            "description": "",
+            "sequence": 2,
+            "status": "Complete",
+            "workerCounts": [
+                {
+                    "name": "JourneyBuilderAudience",
+                    "objectTypeId": 952,
+                    "count": 1,
+                    "status": "Complete"
+                }
+            ],
+            "instanceId": "VjBzTVVjZHJja0M3TS12ZlRPMmZ6QToyODow"
+        }
+    ],
+    "schedule": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/automations/schedule/dXZSTUJ0Q2xDa0tLVHlZRldqVlF1ZzozNjow",
+    "scheduledTime": "2024-11-07T23:15:00Z",
+    "startTime": "2024-11-07T22:15:19.057Z",
+    "completedTime": "2024-11-07T22:17:24.453Z",
+    "lastRunTime": "2024-11-07T22:15:19.057Z",
+    "lastRunInstance": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/bulk/automations/automation/instance/VEhxcm1sTk5DMEdhZnQ1S0ZsMURIZzoyNjow",
+    "instanceId": "VEhxcm1sTk5DMEdhZnQ1S0ZsMURIZzoyNjow",
+    "automationInstance": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/bulk/automations/automation/instance/VEhxcm1sTk5DMEdhZnQ1S0ZsMURIZzoyNjow",
+    "isPlatformObject": false,
+    "notifications": "https://mcxxxxx.rest.marketingcloudapis.com/legacy/v1/beta/hub/notifications/cDhLQ2o2NExxVVc5N3VZeHF5WEExUToxMjow",
+    "automationType": "scheduled",
+    "lastPausedDate": "2025-03-14T15:21:57.62Z",
+    "lastPausedBy": {
+        "id": "NzEwNDIwNDE4OjQ6MA",
+        "name": "Jörn Berkefeld",
+        "email": "joern.berkefeld@accenture.com"
+    },
+    "lastSaveDate": "2024-11-04T17:42:13.143Z",
+    "lastSavedBy": {
+        "id": "NzEwNDIwNDE4OjQ6MA",
+        "name": "Jörn Berkefeld",
+        "email": "joern.berkefeld@accenture.com"
+    },
+    "lastRunStatus": "Complete"
+}

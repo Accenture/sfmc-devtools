@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>RetrieveResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:1512750f-32c9-4e70-adfe-6863acb037b4</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:58a10fa7-12d7-4221-9d70-028add22d7be</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-fb923341-9f26-4ee2-8893-28bbf44ef6bb">
+                <wsu:Created>2024-04-16T16:38:36Z</wsu:Created>
+                <wsu:Expires>2024-04-16T16:43:36Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <RetrieveResponseMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <OverallStatus>OK</OverallStatus>
+            <RequestID>f0fec0a3-586b-4da9-95d3-ed47245d395c</RequestID>
+            <Results xsi:type="DataFolder">
+                <Client>
+                    <ID>9999999</ID>
+                </Client>
+                <PartnerKey xsi:nil="true" />
+                <CreatedDate>2021-06-21T11:54:58.023</CreatedDate>
+                <ModifiedDate>2021-06-21T11:54:58.023</ModifiedDate>
+                <ID>4691</ID>
+                <ObjectID xsi:nil="true" />
+                <CustomerKey>userinitiatedsends_default</CustomerKey>
+                <ParentFolder>
+                    <PartnerKey xsi:nil="true" />
+                    <ID>0</ID>
+                    <ObjectID xsi:nil="true" />
+                </ParentFolder>
+                <Name>User-Initiated</Name>
+                <Description />
+                <ContentType>userinitiatedsends</ContentType>
+                <IsActive>true</IsActive>
+                <IsEditable>false</IsEditable>
+                <AllowChildren>true</AllowChildren>
+            </Results>
+        </RetrieveResponseMsg>
+    </soap:Body>
+</soap:Envelope>

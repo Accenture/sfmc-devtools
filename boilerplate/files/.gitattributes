@@ -2,4 +2,4 @@
 * text=auto eol=lf
 
 # Declare files that will always have LF line endings on checkout.
-*.ssjs text eol=lf
+*.ssjs text eol=lf gitlab-language=javascript

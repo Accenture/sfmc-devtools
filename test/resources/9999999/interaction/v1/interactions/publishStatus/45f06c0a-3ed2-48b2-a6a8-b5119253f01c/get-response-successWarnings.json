@@ -1,0 +1,36 @@
+{
+    "status": "PublishCompleted",
+    "errors": [],
+    "warnings": [
+        {
+            "errorDetail": "The journey has a long wait (1 days), please consider reducing wait to under 4 minutes.",
+            "errorCode": "121547",
+            "errorType": "Warning",
+            "additionalInfo": {
+                "activityKey": "WAITBYDURATION-5",
+                "activityId": "2d0b5dbf-14cc-4635-acee-64071c8e1022",
+                "activityType": "WAIT"
+            }
+        },
+        {
+            "errorDetail": "The journey has a long wait (1 days), please consider reducing wait to under 4 minutes.",
+            "errorCode": "121547",
+            "errorType": "Warning",
+            "additionalInfo": {
+                "activityKey": "WAITBYDURATION-4",
+                "activityId": "26298616-e89b-4166-8e7e-8417031f276b",
+                "activityType": "WAIT"
+            }
+        },
+        {
+            "errorDetail": "Last modified date for email activity is more then 6 months ago. Please review the content or use path optimizer to test it.",
+            "errorCode": "121546",
+            "errorType": "Warning",
+            "additionalInfo": {
+                "activityKey": "EMAILV2-1",
+                "activityId": "966651f8-e1b6-4261-849c-e95589001c75",
+                "activityType": "EMAILV2"
+            }
+        }
+    ]
+}

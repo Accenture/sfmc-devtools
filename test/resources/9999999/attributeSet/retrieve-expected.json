@@ -28,7 +28,7 @@
     },
     "name": "testExisting_dataExtensionShared",
     "parentID": "00000000-0000-0000-0000-000000000000",
-    "r__dataExtension_CustomerKey": "testExisting_dataExtensionShared",
+    "r__dataExtension_key": "testExisting_dataExtensionShared",
     "r__folder_Path": "Shared Items/Shared Data Extensions",
     "relationshipCount": 1,
     "relationships": [
@@ -40,7 +40,7 @@
             "isSystemDefined": false,
             "leftItem": {
                 "cardinality": "One",
-                "r__attributeGroup_definitionKey": "testExisting_attributeGroup",
+                "r__attributeGroup_key": "testExisting_attributeGroup",
                 "relationshipType": "AttributeGroup"
             },
             "leftRelationshipIDs": [
@@ -59,7 +59,7 @@
             "relationshipID": "598b787a-5238-ee11-b85a-48df37d1de8a",
             "rightItem": {
                 "cardinality": "One",
-                "r__attributeSet_definitionKey": "testExisting_dataExtensionShared",
+                "r__attributeSet_key": "testExisting_dataExtensionShared",
                 "relationshipType": "AttributeSet"
             }
         }

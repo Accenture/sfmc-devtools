@@ -1,0 +1,15 @@
+{
+    "startIndex": 0,
+    "itemsPerPage": 50,
+    "totalResults": 1,
+    "entry": [
+        {
+            "id": "ejQ1Y2Q5SzVFZXU0UHZRRFE4bFptQTo0ODow",
+            "key": "Default",
+            "createdDate": "2021-06-21T17:55:00Z",
+            "lastUpdated": "2021-06-21T17:55:00Z",
+            "name": "Default",
+            "description": "Account defaults"
+        }
+    ]
+}

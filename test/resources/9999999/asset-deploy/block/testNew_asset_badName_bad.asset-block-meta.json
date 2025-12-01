@@ -1,0 +1,39 @@
+{
+    "customerKey": "testNew_asset_badName",
+    "assetType": {
+        "name": "textblock",
+        "displayName": "Text Block"
+    },
+    "fileProperties": {
+        "fileName": "testNew_asset_badName"
+    },
+    "name": "testNew_asset_badName",
+    "description": "bla bla",
+    "owner": {
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld"
+    },
+    "createdDate": "2022-10-14T08:54:26.643-06:00",
+    "createdBy": {
+        "email": "joern.berkefeld@accenture.com",
+        "name": "Jörn Berkefeld"
+    },
+    "modifiedDate": "2024-05-06T07:18:33.787-06:00",
+    "modifiedBy": {
+        "name": "SFMC DEVOPS app user"
+    },
+    "memberId": 1111111,
+    "status": {
+        "name": "Draft"
+    },
+    "meta": {
+        "wrapperStyles": {
+            "mobile": {
+                "visible": true
+            }
+        }
+    },
+    "availableViews": [],
+    "modelVersion": 2,
+    "r__folder_Path": "Content Builder"
+}

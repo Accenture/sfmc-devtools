@@ -14,27 +14,27 @@
         {
             "activities": [
                 {
-                    "name": "testExisting_dataExtract",
+                    "r__key": "testExisting_dataExtract",
                     "r__type": "dataExtract"
                 },
                 {
-                    "name": "testExisting_emailSend",
+                    "r__key": "testExisting_emailSend",
                     "r__type": "emailSend"
                 },
                 {
-                    "name": "testExisting_fileTransfer",
+                    "r__key": "testExisting_fileTransfer",
                     "r__type": "fileTransfer"
                 },
                 {
-                    "name": "testExisting_importFile",
+                    "r__key": "testExisting_importFile",
                     "r__type": "importFile"
                 },
                 {
-                    "name": "testExisting_query",
+                    "r__key": "testExisting_query",
                     "r__type": "query"
                 },
                 {
-                    "name": "testExisting_script",
+                    "r__key": "testExisting_script",
                     "r__type": "script"
                 }
             ],

@@ -7,6 +7,7 @@
         // collaboration
         "aaron-bond.better-comments",
         "github.vscode-pull-request-github",
+        "johnpapa.vscode-peacock",
 
         // Linters
         "dbaeumer.vscode-eslint",
@@ -14,6 +15,8 @@
         // Formatting & colors
         "editorconfig.editorconfig",
         "esbenp.prettier-vscode",
+        "xnerd.ampscript-language",
+        "FiB.beautyAmp",
 
         // mcdev tests
         "hbenl.vscode-mocha-test-adapter",

@@ -4,7 +4,7 @@ about: Technical improvements without functional impact / changes to the Documen
 title: "[TASK] "
 labels: NEW, chore
 assignees: ''
-
+issueType: task
 ---
 
 

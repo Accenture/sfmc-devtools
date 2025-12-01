@@ -21,9 +21,14 @@
     "name": "testNew_importFile",
     "sendEmailNotification": false,
     "standardQuotedStrings": true,
-    "r__fileLocation_name": "ExactTarget Enhanced FTP",
-    "c__destinationType": "DataExtension",
-    "r__dataExtension_CustomerKey": "testExisting_dataExtension",
     "c__subscriberImportType": "DataExtension",
-    "c__dataAction": "AddUpdate"
+    "c__dataAction": "AddUpdate",
+    "destination": {
+        "c__type": "DataExtension",
+        "r__dataExtension_key": "testExisting_dataExtension"
+    },
+    "source": {
+        "c__type": "File Location",
+        "r__fileLocation_name": "ExactTarget Enhanced FTP"
+    }
 }

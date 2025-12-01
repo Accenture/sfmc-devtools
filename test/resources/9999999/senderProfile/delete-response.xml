@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>DeleteResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:9d089538-9132-421c-b905-827dc760447b</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:2dbd051c-b714-4302-bb66-53d0916620ed</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-c7ba7ffe-ac41-4cb7-a0a1-471df321d8a6">
+                <wsu:Created>2024-04-12T13:05:55Z</wsu:Created>
+                <wsu:Expires>2024-04-12T13:10:55Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <DeleteResponse xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <Results>
+                <StatusCode>OK</StatusCode>
+                <StatusMessage>SenderProfile deleted</StatusMessage>
+                <OrdinalID>0</OrdinalID>
+                <Object xsi:type="SenderProfile">
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testExisting_senderProfile</CustomerKey>
+                </Object>
+            </Results>
+            <RequestID>0387ba17-c330-4239-a2dd-c0e15f968476</RequestID>
+            <OverallStatus>OK</OverallStatus>
+        </DeleteResponse>
+    </soap:Body>
+</soap:Envelope>

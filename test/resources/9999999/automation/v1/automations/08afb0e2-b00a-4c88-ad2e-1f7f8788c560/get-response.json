@@ -29,18 +29,18 @@
             "step": 1,
             "activities": [
                 {
-                    "id": "8081a992-a27d-4a43-984a-d60114ea1025",
-                    "name": "testExisting_dataExtract",
-                    "activityObjectId": "56c5370a-f988-4f36-b0ee-0f876573f6d7",
-                    "objectTypeId": 73,
-                    "displayOrder": 1
-                },
-                {
                     "id": "d3774dc2-a271-4a44-8cbe-f630a6d6545e",
                     "name": "testExisting_emailSend",
                     "activityObjectId": "9b1c7bf9-4964-ed11-b849-48df37d1de8b",
                     "objectTypeId": 42,
                     "displayOrder": 2
+                },
+                {
+                    "id": "8081a992-a27d-4a43-984a-d60114ea1025",
+                    "name": "testExisting_dataExtract",
+                    "activityObjectId": "56c5370a-f988-4f36-b0ee-0f876573f6d7",
+                    "objectTypeId": 73,
+                    "displayOrder": 1
                 },
                 {
                     "id": "2c77fc42-85eb-4611-98f9-223d29d89d72",

@@ -1,15 +1,17 @@
-const chai = require('chai');
-const chaiFiles = require('chai-files');
+import * as chai from 'chai';
 const assert = chai.assert;
+
+import chaiFiles from 'chai-files';
+import cache from '../lib/util/cache.js';
+import * as testUtils from './utils.js';
+import handler from '../lib/index.js';
 chai.use(chaiFiles);
-const cache = require('../lib/util/cache');
-const testUtils = require('./utils');
-const handler = require('../lib/index');
 
 describe('type: transactionalPush', () => {
     beforeEach(() => {
         testUtils.mockSetup();
     });
+
     afterEach(() => {
         testUtils.mockReset();
     });
@@ -19,7 +21,7 @@ describe('type: transactionalPush', () => {
             // WHEN
             await handler.retrieve('testInstance/testBU', ['transactionalPush']);
             // THEN
-            assert.equal(process.exitCode, false, 'retrieve should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -40,15 +42,17 @@ describe('type: transactionalPush', () => {
             return;
         });
     });
+
     describe('Deploy ================', () => {
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
+
         it('Should create & upsert a transactionalPush', async () => {
             // WHEN
             await handler.deploy('testInstance/testBU', ['transactionalPush']);
             // THEN
-            assert.equal(process.exitCode, false, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -76,6 +80,7 @@ describe('type: transactionalPush', () => {
             );
             return;
         });
+
         it('Should NOT change the key during update with --changeKeyValue and instead fail due to missing support', async () => {
             // WHEN
             handler.setOptions({ changeKeyValue: 'updatedKey' });
@@ -93,6 +98,7 @@ describe('type: transactionalPush', () => {
             return;
         });
     });
+
     describe('Templating ================', () => {
         // it.skip('Should create a transactionalPush template via retrieveAsTemplate and build it');
         it('Should create a transactionalPush template via buildTemplate and build it', async () => {
@@ -103,9 +109,9 @@ describe('type: transactionalPush', () => {
                 'testInstance/testBU',
                 'transactionalPush',
                 ['testExisting_tpush'],
-                'testSourceMarket'
+                ['testSourceMarket']
             );
-            assert.equal(process.exitCode, false, 'buildTemplate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
             assert.equal(
                 result.transactionalPush ? Object.keys(result.transactionalPush).length : 0,
                 1,
@@ -120,14 +126,10 @@ describe('type: transactionalPush', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'transactionalPush',
-                'testExisting_tpush',
-                'testTargetMarket'
+                ['testExisting_tpush'],
+                ['testTargetMarket']
             );
-            assert.equal(
-                process.exitCode,
-                false,
-                'buildDefinition should not have thrown an error'
-            );
+            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
 
             assert.deepEqual(
                 await testUtils.getActualDeployJson('testTemplated_tpush', 'transactionalPush'),
@@ -142,13 +144,14 @@ describe('type: transactionalPush', () => {
             return;
         });
     });
+
     describe('Delete ================', () => {
         // TODO: add this test
         it('Should delete the item'); // , async () => {
         //     // WHEN
         //     const isDeleted = await handler.deleteByKey('testInstance/testBU', 'mobileKeyword', 'testExisting_keyword');
         //     // THEN
-        //     assert.equal(process.exitCode, false, 'delete should not have thrown an error');
+        //     assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
 
         //     assert.equal(isDeleted, true, 'should have deleted the item');
         //     return;

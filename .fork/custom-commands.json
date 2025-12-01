@@ -1,38 +1,140 @@
 [
   {
-    "name": "Create PR to develop branch",
-    "target": "ref",
-    "refTargets": [
+    "version" : 1
+  },
+  {
+    "action" : {
+      "type" : "url",
+      "url" : "https://github.com/Accenture/sfmc-devtools/compare/main...${ref:short}?expand=1&template=pr_template_release.md"
+    },
+    "name" : "Create PR/Release-PR to master branch",
+    "refTargets" : [
       "localbranch",
       "remotebranch"
     ],
-    "action": {
-      "type": "url",
-      "url": "https://github.com/Accenture/sfmc-devtools/compare/develop...$shortname?expand=1"
+    "target" : "ref"
+  },
+  {
+    "action" : {
+      "type" : "url",
+      "url" : "https://github.com/Accenture/sfmc-devtools/compare/develop...${ref:short}?expand=1"
+    },
+    "name" : "Create PR/To develop branch",
+    "refTargets" : [
+      "localbranch",
+      "remotebranch"
+    ],
+    "target" : "ref"
+  },
+  {
+    "action" : {
+      "type" : "url",
+      "url" : "https://github.com/Accenture/sfmc-devtools/compare/hotfix...${ref:short}?expand=1"
+    },
+    "name" : "Create PR/To hotfix branch",
+    "refTargets" : [
+      "localbranch",
+      "remotebranch"
+    ],
+    "target" : "ref"
+  },
+  {
+    "action" : {
+      "script" : "SKIP_HOOKS=1 git switch ${ref}",
+      "showOutput" : false,
+      "type" : "sh",
+      "waitForExit" : true
+    },
+    "name" : "Skip Hooks/Checkout",
+    "refTargets" : [
+      "localbranch"
+    ],
+    "target" : "ref"
+  },
+  {
+    "action" : {
+      "script" : "SKIP_HOOKS=1 git switch ${ref:short} && SKIP_HOOKS=2 git pull",
+      "showOutput" : false,
+      "type" : "sh",
+      "waitForExit" : true
+    },
+    "name" : "Skip Hooks/Checkout & Pull",
+    "refTargets" : [
+      "remotebranch"
+    ],
+    "target" : "ref"
+  },
+  {
+    "name" : "Skip Hooks/Commit",
+    "refTargets" : [
+      "localbranch",
+      "remotebranch"
+    ],
+    "target" : "ref",
+    "ui" : {
+      "buttons" : [
+        {
+          "action" : {
+            "args" : "commit -n -m \"$1{text}\" -m \" $2{text}\"",
+            "path" : "${git}",
+            "showOutput" : false,
+            "type" : "process",
+            "waitForExit" : true
+          },
+          "title" : "Commit without Hooks"
+        },
+        {
+          "action" : {
+            "type" : "cancel"
+          },
+          "title" : "Cancel"
+        }
+      ],
+      "controls" : [
+        {
+          "placeholder" : "",
+          "text" : "",
+          "textBoxType" : "generic",
+          "title" : "Commit subject",
+          "type" : "textBox"
+        },
+        {
+          "placeholder" : "",
+          "text" : "",
+          "textBoxType" : "generic",
+          "title" : "Description",
+          "type" : "textBox"
+        }
+      ],
+      "description" : "This will create a commit but not run pre-commit hooks",
+      "title" : "Commit skipping Hooks"
     }
   },
   {
-    "name": "Create PR to hotfix branch",
-    "target": "ref",
-    "refTargets": [
-      "localbranch",
-      "remotebranch"
+    "action" : {
+      "script" : "SKIP_HOOKS=4 git merge ${ref:short}",
+      "showOutput" : false,
+      "type" : "sh",
+      "waitForExit" : true
+    },
+    "name" : "Skip Hooks/Merge into current branch",
+    "refTargets" : [
+      "localbranch"
     ],
-    "action": {
-      "type": "url",
-      "url": "https://github.com/Accenture/sfmc-devtools/compare/hotfix...$shortname?expand=1"
-    }
+    "target" : "ref"
   },
   {
-    "name": "Create Release-PR to master branch",
-    "target": "ref",
-    "refTargets": [
+    "action" : {
+      "script" : "SKIP_HOOKS=3 git pull",
+      "showOutput" : false,
+      "type" : "sh",
+      "waitForExit" : true
+    },
+    "name" : "Skip Hooks/Pull",
+    "refTargets" : [
       "localbranch",
       "remotebranch"
     ],
-    "action": {
-      "type": "url",
-      "url": "https://github.com/Accenture/sfmc-devtools/compare/main...$shortname?expand=1&template=pr_template_release.md"
-    }
+    "target" : "ref"
   }
 ]

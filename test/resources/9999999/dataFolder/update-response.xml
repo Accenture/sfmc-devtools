@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>UpdateResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:be177208-5317-4cf6-ac91-ca6ee3cf2e9c</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:860092b1-f5d0-4e26-bac6-e6176e1a24e3</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-31f5e02a-c01e-4460-9652-c34da0c5eaa4">
+                <wsu:Created>2025-04-23T11:22:29Z</wsu:Created>
+                <wsu:Expires>2025-04-23T11:27:29Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <UpdateResponse xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <Results>
+                <StatusCode>OK</StatusCode>
+                <StatusMessage>Folder updated successfully.</StatusMessage>
+                <OrdinalID>0</OrdinalID>
+            </Results>
+            <RequestID>b7ffdc43-dd86-41ef-979d-ab3d4badcb07</RequestID>
+            <OverallStatus>OK</OverallStatus>
+        </UpdateResponse>
+    </soap:Body>
+</soap:Envelope>
