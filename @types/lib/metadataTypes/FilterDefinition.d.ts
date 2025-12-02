@@ -273,7 +273,7 @@ declare namespace FilterDefinition {
                 retrieving: boolean;
                 template: boolean;
             };
-            r__dataExtension_CustomerKey: {
+            r__source_dataExtension_CustomerKey: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

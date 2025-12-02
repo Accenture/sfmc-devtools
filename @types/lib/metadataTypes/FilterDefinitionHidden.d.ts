@@ -10,7 +10,7 @@ declare class FilterDefinitionHidden extends FilterDefinition {
      *
      * @returns {Promise.<number[]>} Array of folder IDs
      */
-    static getFilterFolderIds(): Promise<number[]>;
+    static _getFilterFolderIds(): Promise<number[]>;
 }
 declare namespace FilterDefinitionHidden {
     let definition: {
@@ -136,7 +136,7 @@ declare namespace FilterDefinitionHidden {
                 retrieving: boolean;
                 template: boolean;
             };
-            r__dataExtension_CustomerKey: {
+            r__source_dataExtension_CustomerKey: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

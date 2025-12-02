@@ -185,7 +185,7 @@ declare namespace _default {
             let template_16: boolean;
             export { template_16 as template };
         }
-        namespace r__dataExtension_CustomerKey {
+        namespace r__source_dataExtension_CustomerKey {
             let isCreateable_17: boolean;
             export { isCreateable_17 as isCreateable };
             let isUpdateable_17: boolean;
