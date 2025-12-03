@@ -5,12 +5,6 @@ export default FilterDefinitionHidden;
  * @augments FilterDefinition
  */
 declare class FilterDefinitionHidden extends FilterDefinition {
-    /**
-     * helper for {@link FilterDefinition.retrieve}
-     *
-     * @returns {Promise.<number[]>} Array of folder IDs
-     */
-    static _getFilterFolderIds(): Promise<number[]>;
 }
 declare namespace FilterDefinitionHidden {
     let definition: {

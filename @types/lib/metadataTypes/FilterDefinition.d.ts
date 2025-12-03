@@ -39,6 +39,7 @@ export type FilterCondition = import("../../types/mcdev.d.js").FilterCondition;
 declare class FilterDefinition extends MetadataType {
     static cache: {};
     static deIdKeyMap: any;
+    static hidden: boolean;
     /**
      * Retrieves all records and saves it to disk
      *
@@ -55,10 +56,10 @@ declare class FilterDefinition extends MetadataType {
     /**
      * helper for {@link FilterDefinition.retrieve}
      *
-     * @param {boolean} [hidden] used to filter out hidden or non-hidden filterDefinitions
+     * @param {boolean} [recached] indicates if this is a recursive call after cache refresh
      * @returns {Promise.<number[]>} Array of folder IDs
      */
-    static _getFilterFolderIds(hidden?: boolean): Promise<number[]>;
+    static _getFilterFolderIds(recached?: boolean): Promise<number[]>;
     /**
      * helper for {@link FilterDefinition._cacheMeasures}
      *
@@ -107,15 +108,15 @@ declare class FilterDefinition extends MetadataType {
      * @param {FilterConditionSet} [filter] -
      * @returns {void}
      */
-    static _resolveFieldIds(metadata: FilterDefinitionItem, fieldCache?: object[], filter?: FilterConditionSet): void;
+    static _postRetrieve_resolveFieldIds(metadata: FilterDefinitionItem, fieldCache?: object[], filter?: FilterConditionSet): void;
     /**
-     * helper for {@link _resolveFieldIds}
+     * helper for {@link _postRetrieve_resolveFieldIds}
      *
      * @param {FilterCondition} condition -
      * @param {object[]} fieldCache -
      * @returns {void}
      */
-    static _resolveFieldIdsCondition(condition: FilterCondition, fieldCache: object[]): void;
+    static _postRetrieve_resolveFieldIdsCondition(condition: FilterCondition, fieldCache: object[]): void;
     /**
      * helper for {@link postRetrieveTasks}
      *
@@ -123,7 +124,7 @@ declare class FilterDefinition extends MetadataType {
      * @param {object} [filter] -
      * @returns {void}
      */
-    static _resolveAttributeIds(metadata: FilterDefinitionItem, filter?: object): void;
+    static _postRetrieve_resolveAttributeIds(metadata: FilterDefinitionItem, filter?: object): void;
     /**
      * prepares a item for deployment
      *

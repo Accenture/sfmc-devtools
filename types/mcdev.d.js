@@ -108,6 +108,7 @@
  * @typedef {object} DataExtensionItem
  * @property {string} CustomerKey key
  * @property {string} Name name
+ * @property {string} [ObjectID] id
  * @property {string} Description -
  * @property {string} [CreatedDate] iso format
  * @property {string} [ModifiedDate] iso format
@@ -133,6 +134,7 @@
  * @property {boolean} [RowBasedRetention] true for retention policy individialRecords
  * @property {boolean} ResetRetentionPeriodOnImport ?
  * @property {boolean} [DeleteAtEndOfRetentionPeriod] true for retention policy allRecords
+ * @property {string} [r__filterDefinition_key] reference to (hidden) filterDefinition key
  */
 
 /**
