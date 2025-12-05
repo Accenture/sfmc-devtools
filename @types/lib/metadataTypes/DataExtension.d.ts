@@ -35,8 +35,6 @@ declare class DataExtension extends MetadataType {
             [x: string]: import("../../types/mcdev.d.js").DataExtensionFieldItem;
         };
     };
-    static filterDefinitionMap: {};
-    static deIdfilterDefinitionMap: {};
     /**
      * Upserts dataExtensions after retrieving them from source and target to compare
      * if create or update operation is needed.
@@ -564,9 +562,6 @@ declare namespace DataExtension {
                 skipValidation: boolean;
             };
             c__dataRetentionPeriodUnitOfMeasure: {
-                skipValidation: boolean;
-            };
-            r__filterDefinition_key: {
                 skipValidation: boolean;
             };
         };

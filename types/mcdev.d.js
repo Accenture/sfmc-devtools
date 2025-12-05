@@ -396,12 +396,20 @@
  * @property {string} filterDefinitionId ObjectID of filterDefinition
  * @property {string} modifiedDate -
  * @property {string} name name
+ * @property {string} [description] -
  * @property {string} sourceObjectId DE/List ID
+ * @property {null} resultGroupFolderId required for upsert; unknown purpose; set to null
+ * @property {null} resultGroupName required for upsert; unknown purpose; set to null
+ * @property {null} sourceId required for upsert; unknown purpose; set to null
  * @property {1|2|3|4} sourceTypeId 1:SubscriberList, 2:DataExtension, 3:GroupWizard, 4:BehavioralData
+ * @property {1|2|3|4} [filterDefinitionSourceTypeId] seems to be a duplicate of sourceTypeId?
+ * @property {string} [resultDEDescription] description of destination DE
+ * @property {string} [resultDEName] name of destination DE
+ * @property {string} [resultDEKey] key of destination DE
  * @property {number} statusId ?
- * @property {string} [r__filterDefinition_CustomerKey] relationship to filterDefinition
- * @property {string} [r__source_dataExtension_CustomerKey] relationship to dataExtension source
- * @property {string} [r__destination_dataExtension_CustomerKey] relationship to dataExtension destination
+ * @property {string} [r__filterDefinition_key] relationship to filterDefinition
+ * @property {string} [r__source_dataExtension_key] relationship to dataExtension source
+ * @property {string} [r__destination_dataExtension_key] relationship to dataExtension destination
  * @property {string} [r__folder_Path] relationship to folder
  * @typedef {Object.<string, FilterItem>} FilterMap
  */
@@ -468,7 +476,7 @@
  * @property {object} [c__filterDefinition] copied from SOAP API, defines the filter in readable form
  * @property {FilterConditionSet} c__filterDefinition.ConditionSet -
  * @property {string} [r__source_list_PathName] relationship to list source (if derivedFromType=1)
- * @property {string} [r__source_dataExtension_CustomerKey] relationship to dataExtension source (if derivedFromType=2)
+ * @property {string} [r__source_dataExtension_key] relationship to dataExtension source (if derivedFromType=2)
  */
 /**
  * @typedef {object} FilterConditionSet

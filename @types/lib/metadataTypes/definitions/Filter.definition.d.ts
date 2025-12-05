@@ -1,9 +1,13 @@
 declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: string[];
+    namespace dependencyGraph {
+        let filterDefinition: string[];
+        let dataExtension: string[];
+    }
     let hasExtended: boolean;
     let idField: string;
-    let keyIsFixed: any;
+    let keyIsFixed: boolean;
     let keyField: string;
     let nameField: string;
     let folderType: string;
@@ -18,6 +22,7 @@ declare namespace _default {
     let restPagination: boolean;
     let maxKeyLength: number;
     let type: string;
+    let soapType: string;
     let typeDescription: string;
     let typeRetrieveByDefault: boolean;
     let typeCdpByDefault: boolean;
@@ -139,7 +144,7 @@ declare namespace _default {
             let template_11: boolean;
             export { template_11 as template };
         }
-        export namespace statusId_1 {
+        export namespace filterDefinitionSourceTypeId {
             let isCreateable_12: boolean;
             export { isCreateable_12 as isCreateable };
             let isUpdateable_12: boolean;
@@ -149,8 +154,7 @@ declare namespace _default {
             let template_12: boolean;
             export { template_12 as template };
         }
-        export { statusId_1 as statusId };
-        export namespace r__folder_Path {
+        export namespace statusId_1 {
             let isCreateable_13: boolean;
             export { isCreateable_13 as isCreateable };
             let isUpdateable_13: boolean;
@@ -160,7 +164,8 @@ declare namespace _default {
             let template_13: boolean;
             export { template_13 as template };
         }
-        export namespace r__filterDefinition_CustomerKey {
+        export { statusId_1 as statusId };
+        export namespace r__folder_Path {
             let isCreateable_14: boolean;
             export { isCreateable_14 as isCreateable };
             let isUpdateable_14: boolean;
@@ -170,7 +175,7 @@ declare namespace _default {
             let template_14: boolean;
             export { template_14 as template };
         }
-        export namespace r__source_dataExtension_CustomerKey {
+        export namespace r__filterDefinition_CustomerKey {
             let isCreateable_15: boolean;
             export { isCreateable_15 as isCreateable };
             let isUpdateable_15: boolean;
@@ -180,7 +185,7 @@ declare namespace _default {
             let template_15: boolean;
             export { template_15 as template };
         }
-        export namespace r__destination_dataExtension_CustomerKey {
+        export namespace r__source_dataExtension_CustomerKey {
             let isCreateable_16: boolean;
             export { isCreateable_16 as isCreateable };
             let isUpdateable_16: boolean;
@@ -189,6 +194,16 @@ declare namespace _default {
             export { retrieving_16 as retrieving };
             let template_16: boolean;
             export { template_16 as template };
+        }
+        export namespace r__destination_dataExtension_CustomerKey {
+            let isCreateable_17: boolean;
+            export { isCreateable_17 as isCreateable };
+            let isUpdateable_17: boolean;
+            export { isUpdateable_17 as isUpdateable };
+            let retrieving_17: boolean;
+            export { retrieving_17 as retrieving };
+            let template_17: boolean;
+            export { template_17 as template };
         }
     }
 }

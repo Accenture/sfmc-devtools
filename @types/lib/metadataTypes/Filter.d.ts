@@ -57,20 +57,53 @@ declare class Filter extends MetadataType {
      */
     static _postRetrieve_dataTypeMapping(target: "source" | "destination", metadata: FilterItem): void;
     /**
+     * helper for preDeployTasks to map data types
+     *
+     * @param {'source'|'destination'} target we are processing source and destinations
+     * @param {FilterItem} metadata single record
+     */
+    static _preDeploy_dataTypeMapping(target: "source" | "destination", metadata: FilterItem): void;
+    /**
+     * Creates a single item
+     *
+     * @param {MetadataTypeItem} item a single item
+     * @returns {Promise} Promise
+     */
+    static create(item: MetadataTypeItem): Promise<any>;
+    /**
+     * Updates a single item
+     *
+     * @param {MetadataTypeItem} item a single item
+     * @returns {Promise} Promise
+     */
+    static update(item: MetadataTypeItem): Promise<any>;
+    /**
      * prepares a record for deployment
      *
      * @param {FilterItem} metadata a single record
      * @returns {Promise.<FilterItem>} Promise of updated single record
      */
     static preDeployTasks(metadata: FilterItem): Promise<FilterItem>;
+    /**
+     * helper to allow us to select single metadata entries via REST
+     *
+     * @private
+     * @param {string} key customer key
+     * @returns {Promise.<string>} objectId or enpty string
+     */
+    private static _getObjectIdForSingleRetrieve;
 }
 declare namespace Filter {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            filterDefinition: string[];
+            dataExtension: string[];
+        };
         hasExtended: boolean;
         idField: string;
-        keyIsFixed: any;
+        keyIsFixed: boolean;
         keyField: string;
         nameField: string;
         folderType: string;
@@ -85,6 +118,7 @@ declare namespace Filter {
         restPagination: boolean;
         maxKeyLength: number;
         type: string;
+        soapType: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
         typeCdpByDefault: boolean;
@@ -157,6 +191,12 @@ declare namespace Filter {
                 template: boolean;
             };
             sourceTypeId: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            filterDefinitionSourceTypeId: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

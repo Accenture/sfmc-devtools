@@ -5,17 +5,14 @@ export default FilterDefinitionHidden;
  * @augments FilterDefinition
  */
 declare class FilterDefinitionHidden extends FilterDefinition {
-    /**
-     * helper for {@link FilterDefinition.retrieve}
-     *
-     * @returns {Promise.<number[]>} Array of folder IDs
-     */
-    static _getFilterFolderIds(): Promise<number[]>;
 }
 declare namespace FilterDefinitionHidden {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            dataExtension: string[];
+        };
         filter: {};
         hasExtended: boolean;
         idField: string;
@@ -30,6 +27,7 @@ declare namespace FilterDefinitionHidden {
         restPagination: boolean;
         restPageSize: number;
         type: string;
+        soapType: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
         typeName: string;
@@ -136,7 +134,7 @@ declare namespace FilterDefinitionHidden {
                 retrieving: boolean;
                 template: boolean;
             };
-            r__source_dataExtension_CustomerKey: {
+            r__source_dataExtension_key: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

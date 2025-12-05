@@ -1,6 +1,9 @@
 declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: string[];
+    namespace dependencyGraph {
+        let dataExtension: string[];
+    }
     let filter: {};
     let hasExtended: boolean;
     let idField: string;
@@ -15,6 +18,7 @@ declare namespace _default {
     let restPagination: boolean;
     let restPageSize: number;
     let type: string;
+    let soapType: string;
     let typeDescription: string;
     let typeRetrieveByDefault: boolean;
     let typeName: string;
@@ -185,7 +189,7 @@ declare namespace _default {
             let template_16: boolean;
             export { template_16 as template };
         }
-        namespace r__source_dataExtension_CustomerKey {
+        namespace r__source_dataExtension_key {
             let isCreateable_17: boolean;
             export { isCreateable_17 as isCreateable };
             let isUpdateable_17: boolean;

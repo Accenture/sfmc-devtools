@@ -39,6 +39,7 @@ export type FilterCondition = import("../../types/mcdev.d.js").FilterCondition;
 declare class FilterDefinition extends MetadataType {
     static cache: {};
     static deIdKeyMap: any;
+    static hidden: boolean;
     /**
      * Retrieves all records and saves it to disk
      *
@@ -55,10 +56,10 @@ declare class FilterDefinition extends MetadataType {
     /**
      * helper for {@link FilterDefinition.retrieve}
      *
-     * @param {boolean} [hidden] used to filter out hidden or non-hidden filterDefinitions
+     * @param {boolean} [recached] indicates if this is a recursive call after cache refresh
      * @returns {Promise.<number[]>} Array of folder IDs
      */
-    static _getFilterFolderIds(hidden?: boolean): Promise<number[]>;
+    static _getFilterFolderIds(recached?: boolean): Promise<number[]>;
     /**
      * helper for {@link FilterDefinition._cacheMeasures}
      *
@@ -69,8 +70,9 @@ declare class FilterDefinition extends MetadataType {
      * helper for {@link FilterDefinition.retrieve}. uses cached dataExtensions to resolve dataExtensionFields
      *
      * @param {FilterDefinitionMap} metadataTypeMap -
+     * @param {'retrieve'|'deploy'} [mode] -
      */
-    static _cacheDeFields(metadataTypeMap: FilterDefinitionMap): Promise<void>;
+    static _cacheDeFields(metadataTypeMap: FilterDefinitionMap, mode?: "retrieve" | "deploy"): Promise<void>;
     /**
      * helper for {@link FilterDefinition.retrieve}
      *
@@ -103,19 +105,28 @@ declare class FilterDefinition extends MetadataType {
      * helper for {@link postRetrieveTasks}
      *
      * @param {FilterDefinitionItem} metadata -
+     * @param {'postRetrieve'|'preDeploy'} mode -
      * @param {object[]} [fieldCache] -
      * @param {FilterConditionSet} [filter] -
      * @returns {void}
      */
-    static _resolveFieldIds(metadata: FilterDefinitionItem, fieldCache?: object[], filter?: FilterConditionSet): void;
+    static _resolveFields(metadata: FilterDefinitionItem, mode: "postRetrieve" | "preDeploy", fieldCache?: object[], filter?: FilterConditionSet): void;
     /**
-     * helper for {@link _resolveFieldIds}
+     * helper for {@link _resolveFields}
      *
      * @param {FilterCondition} condition -
      * @param {object[]} fieldCache -
      * @returns {void}
      */
-    static _resolveFieldIdsCondition(condition: FilterCondition, fieldCache: object[]): void;
+    static _postRetrieve_resolveFieldIdsCondition(condition: FilterCondition, fieldCache: object[]): void;
+    /**
+     * helper for {@link _resolveFields}
+     *
+     * @param {FilterCondition} condition -
+     * @param {object[]} fieldCache -
+     * @returns {void}
+     */
+    static _preDeploy_resolveFieldNamesCondition(condition: FilterCondition, fieldCache: object[]): void;
     /**
      * helper for {@link postRetrieveTasks}
      *
@@ -123,7 +134,7 @@ declare class FilterDefinition extends MetadataType {
      * @param {object} [filter] -
      * @returns {void}
      */
-    static _resolveAttributeIds(metadata: FilterDefinitionItem, filter?: object): void;
+    static _postRetrieve_resolveAttributeIds(metadata: FilterDefinitionItem, filter?: object): void;
     /**
      * prepares a item for deployment
      *
@@ -145,6 +156,14 @@ declare class FilterDefinition extends MetadataType {
      * @returns {Promise.<FilterDefinitionItem>} Promise
      */
     static update(metadata: FilterDefinitionItem): Promise<FilterDefinitionItem>;
+    /**
+     * helper to allow us to select single metadata entries via REST
+     *
+     * @private
+     * @param {string} key customer key
+     * @returns {Promise.<string>} objectId or enpty string
+     */
+    private static _getObjectIdForSingleRetrieve;
 }
 declare namespace FilterDefinition {
     let dataExtensionFieldCache: {
@@ -153,6 +172,9 @@ declare namespace FilterDefinition {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            dataExtension: string[];
+        };
         filter: {};
         hasExtended: boolean;
         idField: string;
@@ -167,6 +189,7 @@ declare namespace FilterDefinition {
         restPagination: boolean;
         restPageSize: number;
         type: string;
+        soapType: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
         typeName: string;
@@ -273,7 +296,7 @@ declare namespace FilterDefinition {
                 retrieving: boolean;
                 template: boolean;
             };
-            r__source_dataExtension_CustomerKey: {
+            r__source_dataExtension_key: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
