@@ -52,6 +52,27 @@ describe('type: journey', () => {
             return;
         });
 
+        it('Should retrieve only published journeys', async () => {
+            handler.setOptions({ onlyPublished: true });
+            // WHEN
+            await handler.retrieve('testInstance/testBU', ['journey']);
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.journey ? Object.keys(result.journey).length : 0,
+                1,
+                'unexpected number of journeys'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                24,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
         it('Should retrieve a Quicksend journey with key', async () => {
             // WHEN
             await handler.retrieve(
