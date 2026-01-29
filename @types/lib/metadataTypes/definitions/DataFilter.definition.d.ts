@@ -2,39 +2,34 @@ declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: string[];
     namespace dependencyGraph {
-        let filterDefinition: string[];
         let dataExtension: string[];
     }
+    let filter: {};
     let hasExtended: boolean;
     let idField: string;
-    let keyIsFixed: boolean;
     let keyField: string;
     let nameField: string;
     let folderType: string;
     let folderIdField: string;
-    namespace filter {
-        let statusId: number;
-    }
     let createdDateField: string;
-    let createdNameField: any;
+    let createdNameField: string;
     let lastmodDateField: string;
-    let lastmodNameField: any;
+    let lastmodNameField: string;
     let restPagination: boolean;
-    let maxKeyLength: number;
+    let restPageSize: number;
     let type: string;
     let soapType: string;
     let typeDescription: string;
     let typeRetrieveByDefault: boolean;
-    let typeCdpByDefault: boolean;
     let typeName: string;
     namespace fields {
-        export namespace categoryId {
+        namespace id {
             let isCreateable: boolean;
             let isUpdateable: boolean;
             let retrieving: boolean;
             let template: boolean;
         }
-        export namespace createdDate {
+        namespace key {
             let isCreateable_1: boolean;
             export { isCreateable_1 as isCreateable };
             let isUpdateable_1: boolean;
@@ -44,7 +39,7 @@ declare namespace _default {
             let template_1: boolean;
             export { template_1 as template };
         }
-        export namespace customerKey {
+        namespace createdDate {
             let isCreateable_2: boolean;
             export { isCreateable_2 as isCreateable };
             let isUpdateable_2: boolean;
@@ -54,7 +49,7 @@ declare namespace _default {
             let template_2: boolean;
             export { template_2 as template };
         }
-        export namespace description {
+        namespace createdBy {
             let isCreateable_3: boolean;
             export { isCreateable_3 as isCreateable };
             let isUpdateable_3: boolean;
@@ -64,7 +59,7 @@ declare namespace _default {
             let template_3: boolean;
             export { template_3 as template };
         }
-        export namespace destinationObjectId {
+        namespace createdByName {
             let isCreateable_4: boolean;
             export { isCreateable_4 as isCreateable };
             let isUpdateable_4: boolean;
@@ -74,7 +69,7 @@ declare namespace _default {
             let template_4: boolean;
             export { template_4 as template };
         }
-        export namespace destinationTypeId {
+        namespace lastUpdated {
             let isCreateable_5: boolean;
             export { isCreateable_5 as isCreateable };
             let isUpdateable_5: boolean;
@@ -84,7 +79,7 @@ declare namespace _default {
             let template_5: boolean;
             export { template_5 as template };
         }
-        export namespace filterActivityId {
+        namespace lastUpdatedBy {
             let isCreateable_6: boolean;
             export { isCreateable_6 as isCreateable };
             let isUpdateable_6: boolean;
@@ -94,7 +89,7 @@ declare namespace _default {
             let template_6: boolean;
             export { template_6 as template };
         }
-        export namespace filterDefinitionId {
+        namespace lastUpdatedByName {
             let isCreateable_7: boolean;
             export { isCreateable_7 as isCreateable };
             let isUpdateable_7: boolean;
@@ -104,7 +99,7 @@ declare namespace _default {
             let template_7: boolean;
             export { template_7 as template };
         }
-        export namespace modifiedDate {
+        namespace name {
             let isCreateable_8: boolean;
             export { isCreateable_8 as isCreateable };
             let isUpdateable_8: boolean;
@@ -114,7 +109,7 @@ declare namespace _default {
             let template_8: boolean;
             export { template_8 as template };
         }
-        export namespace name {
+        namespace categoryId {
             let isCreateable_9: boolean;
             export { isCreateable_9 as isCreateable };
             let isUpdateable_9: boolean;
@@ -124,7 +119,7 @@ declare namespace _default {
             let template_9: boolean;
             export { template_9 as template };
         }
-        export namespace sourceObjectId {
+        namespace description {
             let isCreateable_10: boolean;
             export { isCreateable_10 as isCreateable };
             let isUpdateable_10: boolean;
@@ -134,7 +129,7 @@ declare namespace _default {
             let template_10: boolean;
             export { template_10 as template };
         }
-        export namespace sourceTypeId {
+        namespace filterDefinitionXml {
             let isCreateable_11: boolean;
             export { isCreateable_11 as isCreateable };
             let isUpdateable_11: boolean;
@@ -144,7 +139,7 @@ declare namespace _default {
             let template_11: boolean;
             export { template_11 as template };
         }
-        export namespace filterDefinitionSourceTypeId {
+        namespace derivedFromType {
             let isCreateable_12: boolean;
             export { isCreateable_12 as isCreateable };
             let isUpdateable_12: boolean;
@@ -154,7 +149,7 @@ declare namespace _default {
             let template_12: boolean;
             export { template_12 as template };
         }
-        export namespace statusId_1 {
+        namespace derivedFromObjectId {
             let isCreateable_13: boolean;
             export { isCreateable_13 as isCreateable };
             let isUpdateable_13: boolean;
@@ -164,8 +159,7 @@ declare namespace _default {
             let template_13: boolean;
             export { template_13 as template };
         }
-        export { statusId_1 as statusId };
-        export namespace r__folder_Path {
+        namespace derivedFromObjectTypeName {
             let isCreateable_14: boolean;
             export { isCreateable_14 as isCreateable };
             let isUpdateable_14: boolean;
@@ -175,7 +169,7 @@ declare namespace _default {
             let template_14: boolean;
             export { template_14 as template };
         }
-        export namespace r__dataFilter_key {
+        namespace derivedFromObjectName {
             let isCreateable_15: boolean;
             export { isCreateable_15 as isCreateable };
             let isUpdateable_15: boolean;
@@ -185,7 +179,7 @@ declare namespace _default {
             let template_15: boolean;
             export { template_15 as template };
         }
-        export namespace r__source_dataExtension_key {
+        namespace isSendable {
             let isCreateable_16: boolean;
             export { isCreateable_16 as isCreateable };
             let isUpdateable_16: boolean;
@@ -195,7 +189,7 @@ declare namespace _default {
             let template_16: boolean;
             export { template_16 as template };
         }
-        export namespace r__destination_dataExtension_key {
+        namespace r__source_dataExtension_key {
             let isCreateable_17: boolean;
             export { isCreateable_17 as isCreateable };
             let isUpdateable_17: boolean;
@@ -205,7 +199,20 @@ declare namespace _default {
             let template_17: boolean;
             export { template_17 as template };
         }
+        namespace c__filterDefinition {
+            let skipValidation: boolean;
+        }
+        namespace r__folder_Path {
+            let isCreateable_18: boolean;
+            export { isCreateable_18 as isCreateable };
+            let isUpdateable_18: boolean;
+            export { isUpdateable_18 as isUpdateable };
+            let retrieving_18: boolean;
+            export { retrieving_18 as retrieving };
+            let template_18: boolean;
+            export { template_18 as template };
+        }
     }
 }
 export default _default;
-//# sourceMappingURL=Filter.definition.d.ts.map
+//# sourceMappingURL=DataFilter.definition.d.ts.map

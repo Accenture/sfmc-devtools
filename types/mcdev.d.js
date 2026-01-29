@@ -407,32 +407,13 @@
  * @property {string} [resultDEName] name of destination DE
  * @property {string} [resultDEKey] key of destination DE
  * @property {number} statusId ?
- * @property {string} [r__filterDefinition_key] relationship to filterDefinition
+ * @property {string} [r__dataFilter_key] relationship to filterDefinition
  * @property {string} [r__source_dataExtension_key] relationship to dataExtension source
  * @property {string} [r__destination_dataExtension_key] relationship to dataExtension destination
  * @property {string} [r__folder_Path] relationship to folder
  * @typedef {Object.<string, FilterItem>} FilterMap
  */
 
-/**
- * @typedef {object} FilterDefinitionSOAPItem
- * @property {string} ObjectID id
- * @property {string} CustomerKey key
- * @property {object} [DataFilter] most relevant part that defines the filter
- * @property {object} DataFilter.LeftOperand -
- * @property {string} DataFilter.LeftOperand.Property -
- * @property {string} DataFilter.LeftOperand.SimpleOperator -
- * @property {string} DataFilter.LeftOperand.Value -
- * @property {string} DataFilter.LogicalOperator -
- * @property {object} [DataFilter.RightOperand] -
- * @property {string} DataFilter.RightOperand.Property -
- * @property {string} DataFilter.RightOperand.SimpleOperator -
- * @property {string} DataFilter.RightOperand.Value -
- * @property {string} Name name
- * @property {string} Description -
- * @property {string} [ObjectState] returned from SOAP API; used to return error messages
- * @typedef {Object.<string, FilterDefinitionSOAPItem>} FilterDefinitionSOAPItemMap
- */
 /**
  * /automation/v1/filterdefinitions/<id> (not used)
  *
@@ -455,7 +436,7 @@
 /**
  * /email/v1/filters/filterdefinition/<id>
  *
- * @typedef {object} FilterDefinitionItem
+ * @typedef {object} DataFilterItem
  * @property {string} id object id
  * @property {string} key external key
  * @property {string} createdDate date
@@ -491,7 +472,7 @@
  * @property {string} [r__dataExtensionField_name] name of field
  */
 /**
- * @typedef {Object.<string, FilterDefinitionItem>} FilterDefinitionMap
+ * @typedef {Object.<string, DataFilterItem>} DataFilterMap
  */
 
 /**

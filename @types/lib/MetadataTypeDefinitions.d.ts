@@ -5,6 +5,8 @@ declare namespace _default {
     export { automation };
     export { campaign };
     export { contentArea };
+    export { dataFilter };
+    export { dataFilterHidden };
     export { dataExtension };
     export { dataExtensionField };
     export { dataExtensionTemplate };
@@ -19,8 +21,6 @@ declare namespace _default {
     export { fileLocation };
     export { fileTransfer };
     export { filter };
-    export { filterDefinition };
-    export { filterDefinitionHidden };
     export { folder };
     export { importFile };
     export { journey };
@@ -49,6 +49,8 @@ import attributeSet from './metadataTypes/definitions/AttributeSet.definition.js
 import automation from './metadataTypes/definitions/Automation.definition.js';
 import campaign from './metadataTypes/definitions/Campaign.definition.js';
 import contentArea from './metadataTypes/definitions/ContentArea.definition.js';
+import dataFilter from './metadataTypes/definitions/DataFilter.definition.js';
+import dataFilterHidden from './metadataTypes/definitions/DataFilterHidden.definition.js';
 import dataExtension from './metadataTypes/definitions/DataExtension.definition.js';
 import dataExtensionField from './metadataTypes/definitions/DataExtensionField.definition.js';
 import dataExtensionTemplate from './metadataTypes/definitions/DataExtensionTemplate.definition.js';
@@ -63,8 +65,6 @@ import event from './metadataTypes/definitions/Event.definition.js';
 import fileLocation from './metadataTypes/definitions/FileLocation.definition.js';
 import fileTransfer from './metadataTypes/definitions/FileTransfer.definition.js';
 import filter from './metadataTypes/definitions/Filter.definition.js';
-import filterDefinition from './metadataTypes/definitions/FilterDefinition.definition.js';
-import filterDefinitionHidden from './metadataTypes/definitions/FilterDefinitionHidden.definition.js';
 import folder from './metadataTypes/definitions/Folder.definition.js';
 import importFile from './metadataTypes/definitions/ImportFile.definition.js';
 import journey from './metadataTypes/definitions/Journey.definition.js';
