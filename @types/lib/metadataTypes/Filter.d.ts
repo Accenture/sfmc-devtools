@@ -61,8 +61,9 @@ declare class Filter extends MetadataType {
      *
      * @param {'source'|'destination'} target we are processing source and destinations
      * @param {FilterItem} metadata single record
+     * @param {FilterItem} cachedVersion cached version of the metadata
      */
-    static _preDeploy_dataTypeMapping(target: "source" | "destination", metadata: FilterItem): void;
+    static _preDeploy_dataTypeMapping(target: "source" | "destination", metadata: FilterItem, cachedVersion: FilterItem): void;
     /**
      * Creates a single item
      * this uses soap API because the rest api does not allow hotlinking to an existing target DE
