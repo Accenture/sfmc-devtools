@@ -178,6 +178,7 @@ declare namespace DataFilter {
         filter: {};
         hasExtended: boolean;
         idField: string;
+        keyIsFixed: boolean;
         keyField: string;
         nameField: string;
         folderType: string;
@@ -188,6 +189,7 @@ declare namespace DataFilter {
         lastmodNameField: string;
         restPagination: boolean;
         restPageSize: number;
+        maxKeyLength: number;
         type: string;
         soapType: string;
         typeDescription: string;
@@ -213,6 +215,12 @@ declare namespace DataFilter {
                 template: boolean;
             };
             createdBy: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            owner: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

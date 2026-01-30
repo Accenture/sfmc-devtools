@@ -16,6 +16,7 @@ declare namespace DataFilterHidden {
         filter: {};
         hasExtended: boolean;
         idField: string;
+        keyIsFixed: boolean;
         keyField: string;
         nameField: string;
         folderType: string;
@@ -26,6 +27,7 @@ declare namespace DataFilterHidden {
         lastmodNameField: string;
         restPagination: boolean;
         restPageSize: number;
+        maxKeyLength: number;
         type: string;
         soapType: string;
         typeDescription: string;
@@ -51,6 +53,12 @@ declare namespace DataFilterHidden {
                 template: boolean;
             };
             createdBy: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            owner: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
