@@ -1,0 +1,20 @@
+{
+    "c__filterDefinition": {
+        "ConditionSet": {
+            "@_ConditionSetName": "Outer Grouping",
+            "@_Operator": "AND",
+            "Condition": {
+                "@_Operator": "Begins",
+                "Value": "testExisting_",
+                "r__dataExtensionField_name": "LastName"
+            }
+        }
+    },
+    "createdDate": "2026-01-27T06:24:40.527",
+    "isSendable": true,
+    "key": "testExisting_dataFilter",
+    "lastUpdated": "2026-01-30T10:46:59.777",
+    "name": "testExisting_dataFilter",
+    "r__folder_Path": "Data Filters",
+    "r__source_dataExtension_key": "testExisting_dataExtension"
+}
