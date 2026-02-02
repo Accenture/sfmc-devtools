@@ -1,0 +1,19 @@
+{
+    "c__filterDefinition": {
+        "ConditionSet": {
+            "@_ConditionSetName": "Outer Grouping",
+            "@_Operator": "AND",
+            "Condition": {
+                "@_Operator": "Ends",
+                "Value": "{{{suffix}}}",
+                "r__dataExtensionField_name": "LastName"
+            }
+        }
+    },
+    "description": "test",
+    "isSendable": true,
+    "key": "{{{prefix}}}dataFilter",
+    "name": "{{{prefix}}}dataFilter",
+    "r__folder_Path": "Data Filters",
+    "r__source_dataExtension_key": "{{{prefix}}}dataExtension"
+}

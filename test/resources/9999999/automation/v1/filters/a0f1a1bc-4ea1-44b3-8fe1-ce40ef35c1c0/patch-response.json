@@ -1,0 +1,18 @@
+{
+    "categoryId": 37139,
+    "customerKey": "testNew_filter",
+    "description": "created via deploy",
+    "destinationObjectId": "21711373-72c1-ec11-b83b-exclusion",
+    "destinationTypeId": 2,
+    "filterActivityId": "a0f1a1bc-4ea1-44b3-8fe1-ce40ef35c1c0",
+    "filterDefinitionId": "10ef27dd-4be8-4bf6-970a-8acf8e281e55",
+    "name": "testNew_filter",
+    "sourceObjectId": "21711373-72c1-ec11-b83b-48df37d1deb7",
+    "sourceTypeId": 2,
+    "statusId": 1,
+    "resultDEName": "testExisting_dataExtension_exclusion",
+    "resultDEKey": "testExisting_dataExtension_exclusion",
+    "resultDEDescription": "",
+    "createdDate": "2026-02-02T07:34:49.203",
+    "modifiedDate": "2026-02-02T07:34:49.277"
+}

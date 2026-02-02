@@ -1,0 +1,11 @@
+{
+    "customerKey": "testNew_filter",
+    "name": "testNew_filter",
+    "description": "created via deploy",
+    "modifiedDate": "2026-02-02T07:34:49.277",
+    "statusId": 1,
+    "r__dataFilter_key": "testExisting_dataFilter",
+    "r__destination_dataExtension_key": "testExisting_dataExtension_exclusion",
+    "r__source_dataExtension_key": "testExisting_dataExtension",
+    "r__folder_Path": "Filter/filterSubfolder"
+}
