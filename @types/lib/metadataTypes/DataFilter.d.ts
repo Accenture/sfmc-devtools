@@ -161,7 +161,7 @@ declare class DataFilter extends MetadataType {
      *
      * @private
      * @param {string} key customer key
-     * @returns {Promise.<string>} objectId or enpty string
+     * @returns {Promise.<string>} objectId or empty string
      */
     private static _getObjectIdForSingleRetrieve;
 }
