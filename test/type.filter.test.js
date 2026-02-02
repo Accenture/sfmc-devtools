@@ -37,7 +37,7 @@ describe('type: filter', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                13,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -62,7 +62,7 @@ describe('type: filter', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                14,
+                15,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -102,7 +102,7 @@ describe('type: filter', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                16,
+                17,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -146,7 +146,7 @@ describe('type: filter', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                13,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
