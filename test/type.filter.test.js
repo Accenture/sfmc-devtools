@@ -69,6 +69,46 @@ describe('type: filter', () => {
         });
     });
 
+    describe('Deploy ================', () => {
+        beforeEach(() => {
+            testUtils.mockSetup(true);
+        });
+
+        it('Should create & upsert a filter', async () => {
+            // WHEN
+
+            await handler.deploy('testInstance/testBU', ['filter']);
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.filter ? Object.keys(result.filter).length : 0,
+                2,
+                'unexptected number of filters in cache'
+            );
+            // confirm created item
+            assert.deepEqual(
+                await testUtils.getActualJson('testNew_filter', 'filter'),
+                await testUtils.getExpectedJson('9999999', 'filter', 'post'),
+                'returned new-JSON was not equal expected for insert filter'
+            );
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_filter', 'filter'),
+                await testUtils.getExpectedJson('9999999', 'filter', 'patch'),
+                'returned existing-JSON was not equal expected for update filter'
+            );
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                16,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+    });
+
     describe('Templating ================', () => {
         it('Should create a filter template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
