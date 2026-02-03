@@ -73,7 +73,7 @@
         "conf": "13.1.0",
         "console.table": "0.10.0",
         "deep-equal": "2.2.3",
-        "fs-extra": "11.3.0",
+        "fs-extra": "11.3.3",
         "inquirer": "12.6.0",
         "json-to-table": "4.2.1",
         "mustache": "4.2.0",
