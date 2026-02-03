@@ -7,11 +7,15 @@ on:
     release:
         types: [published]
 
+permissions:
+  id-token: write  # Required for OIDC
+  contents: read
+
 jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v5
+            - uses: actions/checkout@v6
             - uses: actions/setup-node@v6
               with:
                   node-version-file: ./package.json
@@ -23,12 +27,10 @@ jobs:
         needs: build
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v5
+            - uses: actions/checkout@v6
             - uses: actions/setup-node@v6
               with:
                   node-version-file: ./package.json
                   registry-url: https://registry.npmjs.org/
-            - run: npm ci
             - run: npm publish
-              env:
-                  NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+
