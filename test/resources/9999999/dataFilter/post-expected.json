@@ -1,0 +1,20 @@
+{
+    "createdDate": "2026-01-30T11:04:06.883",
+    "lastUpdated": "2026-01-30T11:04:06.883",
+    "isSendable": false,
+    "key": "testNew_dataFilter",
+    "name": "testNew_dataFilter",
+    "c__filterDefinition": {
+        "ConditionSet": {
+            "@_ConditionSetName": "Outer Grouping",
+            "@_Operator": "AND",
+            "Condition": {
+                "@_Operator": "Ends",
+                "Value": "_test",
+                "r__dataExtensionField_name": "LastName"
+            }
+        }
+    },
+    "r__folder_Path": "Data Filters",
+    "r__source_dataExtension_key": "testExisting_dataExtension"
+}

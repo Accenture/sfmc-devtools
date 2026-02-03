@@ -26,7 +26,7 @@ describe('type: journey', () => {
             const result = cache.getCache();
             assert.equal(
                 result.journey ? Object.keys(result.journey).length : 0,
-                4,
+                5,
                 'unexpected number of journeys'
             );
             assert.deepEqual(
@@ -46,7 +46,7 @@ describe('type: journey', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                27,
+                29,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -106,6 +106,36 @@ describe('type: journey', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 19,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should retrieve a journey containing an UPDATECONTACTDATA activity with key', async () => {
+            // WHEN
+            await handler.retrieve(
+                'testInstance/testBU',
+                ['journey'],
+                ['testExisting_journey_updatecontact']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.journey ? Object.keys(result.journey).length : 0,
+                1,
+                'only 1 journeys expected'
+            );
+
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_journey_updatecontact', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get-updatecontact'),
+                'returned JSON was not equal expected'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                20,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -425,6 +455,29 @@ describe('type: journey', () => {
             );
             return;
         });
+
+        it('Should update a journey with UPDATECONTACT activity', async () => {
+            // WHEN
+            await handler.deploy(
+                'testInstance/testBU',
+                ['journey'],
+                ['testExisting_journey_updatecontact']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+            // // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_journey_updatecontact', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'put-updatecontact'),
+                'returned metadata was not equal expected for update journey with updatecontact activity'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                22,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 
     describe('Templating ================', () => {
@@ -466,7 +519,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                27,
+                29,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -662,7 +715,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                33,
+                35,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -697,7 +750,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                33,
+                35,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -732,7 +785,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                33,
+                35,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -1329,7 +1382,6 @@ describe('type: journey', () => {
                 ['testExisting_temail', 'testExisting_journey_Multistep'],
                 'should have found the right journeys that need updating'
             );
-
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 42,
