@@ -1,0 +1,23 @@
+{
+    "createdByName": "Jörn Berkefeld",
+    "createdDate": "2025-12-01T16:54:09.813",
+    "lastUpdated": "2025-12-01T17:17:31.827",
+    "lastUpdatedByName": "Jörn Berkefeld",
+    "description": "test",
+    "key": "testExisting_dataFilter",
+    "name": "testExisting_dataFilter",
+    "isSendable": true,
+    "c__filterDefinition": {
+        "ConditionSet": {
+            "@_ConditionSetName": "Outer Grouping",
+            "@_Operator": "AND",
+            "Condition": {
+                "@_Operator": "Ends",
+                "Value": "_test",
+                "r__dataExtensionField_name": "LastName"
+            }
+        }
+    },
+    "r__folder_Path": "Data Filters",
+    "r__source_dataExtension_key": "testExisting_dataExtension"
+}

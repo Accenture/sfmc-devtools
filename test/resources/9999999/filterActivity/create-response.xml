@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soap:Header>
+        <wsa:Action>CreateResponse</wsa:Action>
+        <wsa:MessageID>urn:uuid:d5e6c2a7-842c-49c4-9486-5f62c19a3bb3</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:25aedc29-eff1-40d2-bb67-c0e12af440c1</wsa:RelatesTo>
+        <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+        <wsse:Security>
+            <wsu:Timestamp wsu:Id="Timestamp-2b9eda1c-baa1-4ee7-b79f-8ce8d79f7f8a">
+                <wsu:Created>2026-02-02T13:15:41Z</wsu:Created>
+                <wsu:Expires>2026-02-02T13:20:41Z</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body>
+        <CreateResponse xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <Results>
+                <StatusCode>OK</StatusCode>
+                <StatusMessage>FilterActivity Created</StatusMessage>
+                <OrdinalID>0</OrdinalID>
+                <NewID>0</NewID>
+                <NewObjectID>a0f1a1bc-4ea1-44b3-8fe1-ce40ef35c1c0</NewObjectID>
+                <Object xsi:type="FilterActivity">
+                    <PartnerKey xsi:nil="true" />
+                    <ObjectID xsi:nil="true" />
+                    <CustomerKey>testNew_filter</CustomerKey>
+                    <Name>testNew_filter</Name>
+                    <Description />
+                    <FilterActivityID>a0f1a1bc-4ea1-44b3-8fe1-ce40ef35c1c0</FilterActivityID>
+                    <FilterDefinitionID>10ef27dd-4be8-4bf6-970a-8acf8e281e55</FilterDefinitionID>
+                    <DestinationObjectID>21711373-72c1-ec11-b83b-exclusion</DestinationObjectID>
+                    <DestinationTypeID>2</DestinationTypeID>
+                    <SourceObjectID>21711373-72c1-ec11-b83b-48df37d1deb7</SourceObjectID>
+                    <SourceTypeID>2</SourceTypeID>
+                </Object>
+            </Results>
+            <RequestID>1391248a-ec47-4941-9e84-8272d4d23f8a</RequestID>
+            <OverallStatus>OK</OverallStatus>
+        </CreateResponse>
+    </soap:Body>
+</soap:Envelope>
