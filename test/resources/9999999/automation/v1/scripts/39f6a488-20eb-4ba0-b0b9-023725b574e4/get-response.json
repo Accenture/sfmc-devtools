@@ -5,6 +5,6 @@
     "description": "updated on deploy",
     "script": "<script runat=\"server\">\n// dummy updated\n</script>",
     "categoryId": 304,
-    "createdDate": "0001-01-01T00:00:00",
-    "modifiedDate": "0001-01-01T00:00:00"
+    "createdDate": "2022-10-20T00:41:26.163",
+    "modifiedDate": "2022-10-20T00:41:26.163"
 }
