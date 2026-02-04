@@ -70,8 +70,9 @@ declare class FilterDefinition extends MetadataType {
      * helper for {@link FilterDefinition.retrieve}. uses cached dataExtensions to resolve dataExtensionFields
      *
      * @param {FilterDefinitionMap} metadataTypeMap -
+     * @param {'retrieve'|'deploy'} [mode] -
      */
-    static _cacheDeFields(metadataTypeMap: FilterDefinitionMap): Promise<void>;
+    static _cacheDeFields(metadataTypeMap: FilterDefinitionMap, mode?: "retrieve" | "deploy"): Promise<void>;
     /**
      * helper for {@link FilterDefinition.retrieve}
      *
@@ -104,19 +105,28 @@ declare class FilterDefinition extends MetadataType {
      * helper for {@link postRetrieveTasks}
      *
      * @param {FilterDefinitionItem} metadata -
+     * @param {'postRetrieve'|'preDeploy'} mode -
      * @param {object[]} [fieldCache] -
      * @param {FilterConditionSet} [filter] -
      * @returns {void}
      */
-    static _postRetrieve_resolveFieldIds(metadata: FilterDefinitionItem, fieldCache?: object[], filter?: FilterConditionSet): void;
+    static _resolveFields(metadata: FilterDefinitionItem, mode: "postRetrieve" | "preDeploy", fieldCache?: object[], filter?: FilterConditionSet): void;
     /**
-     * helper for {@link _postRetrieve_resolveFieldIds}
+     * helper for {@link _resolveFields}
      *
      * @param {FilterCondition} condition -
      * @param {object[]} fieldCache -
      * @returns {void}
      */
     static _postRetrieve_resolveFieldIdsCondition(condition: FilterCondition, fieldCache: object[]): void;
+    /**
+     * helper for {@link _resolveFields}
+     *
+     * @param {FilterCondition} condition -
+     * @param {object[]} fieldCache -
+     * @returns {void}
+     */
+    static _preDeploy_resolveFieldNamesCondition(condition: FilterCondition, fieldCache: object[]): void;
     /**
      * helper for {@link postRetrieveTasks}
      *
@@ -146,6 +156,14 @@ declare class FilterDefinition extends MetadataType {
      * @returns {Promise.<FilterDefinitionItem>} Promise
      */
     static update(metadata: FilterDefinitionItem): Promise<FilterDefinitionItem>;
+    /**
+     * helper to allow us to select single metadata entries via REST
+     *
+     * @private
+     * @param {string} key customer key
+     * @returns {Promise.<string>} objectId or enpty string
+     */
+    private static _getObjectIdForSingleRetrieve;
 }
 declare namespace FilterDefinition {
     let dataExtensionFieldCache: {
@@ -154,6 +172,9 @@ declare namespace FilterDefinition {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            dataExtension: string[];
+        };
         filter: {};
         hasExtended: boolean;
         idField: string;
@@ -168,6 +189,7 @@ declare namespace FilterDefinition {
         restPagination: boolean;
         restPageSize: number;
         type: string;
+        soapType: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
         typeName: string;
@@ -274,7 +296,7 @@ declare namespace FilterDefinition {
                 retrieving: boolean;
                 template: boolean;
             };
-            r__source_dataExtension_CustomerKey: {
+            r__source_dataExtension_key: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

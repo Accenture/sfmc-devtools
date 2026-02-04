@@ -1,0 +1,10 @@
+{
+    "customerKey": "testExisting_filter",
+    "name": "testExisting_filter",
+    "description": "updated on deploy",
+    "statusId": 1,
+    "r__dataFilter_key": "testExisting_dataFilter",
+    "r__destination_dataExtension_key": "testExisting_dataExtension_exclusion",
+    "r__source_dataExtension_key": "testExisting_dataExtension",
+    "r__folder_Path": "Filter"
+}

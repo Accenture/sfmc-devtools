@@ -1,0 +1,10 @@
+{
+    "customerKey": "{{{prefix}}}filter",
+    "name": "{{{prefix}}}filter",
+    "description": "blabla",
+    "statusId": 1,
+    "r__dataFilter_key": "{{{prefix}}}dataFilter",
+    "r__destination_dataExtension_key": "{{{prefix}}}dataExtension_exclusion",
+    "r__source_dataExtension_key": "{{{prefix}}}dataExtension",
+    "r__folder_Path": "Filter/filterSubfolder"
+}

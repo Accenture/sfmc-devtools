@@ -443,7 +443,7 @@ describe('type: asset', () => {
             const deployResult = await handler.deploy(
                 'testInstance/testBU',
                 ['asset'],
-                ['testExisting_asset_htmlblock-matchName']
+                ['testExisting_asset_html-matchName']
             );
             // THEN
             assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
@@ -464,8 +464,8 @@ describe('type: asset', () => {
             );
             assert.equal(
                 upsertCallout?.customerKey,
-                'testExisting_asset_htmlblock-matchName',
-                'customerKey should be testExisting_asset_htmlblock-matchName'
+                'testExisting_asset_html-matchName',
+                'customerKey should be testExisting_asset_html-matchName'
             );
             assert.equal(
                 upsertCallout?.id,
@@ -487,7 +487,7 @@ describe('type: asset', () => {
             const deployResult = await handler.deploy(
                 'testInstance/testBU',
                 ['asset'],
-                ['testExisting_asset_htmlblock-matchName-fail']
+                ['testExisting_asset_html-matchNamFail']
             );
             // THEN
             assert.equal(process.exitCode, 1, 'deploy should have thrown an error');
@@ -518,7 +518,7 @@ describe('type: asset', () => {
             const deployResult = await handler.deploy(
                 'testInstance/testBU',
                 ['asset'],
-                ['testExisting_asset_htmlblock-matchName-create']
+                ['testExisting_asset_html-matchNameAdd']
             );
             // THEN
             assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
@@ -535,8 +535,8 @@ describe('type: asset', () => {
             const upsertCallout = testUtils.getRestCallout('post', '/asset/v1/content/assets/');
             assert.equal(
                 upsertCallout?.customerKey,
-                'testExisting_asset_htmlblock-matchName-create',
-                'asset.customerKey should be testExisting_asset_htmlblock-matchName-create'
+                'testExisting_asset_html-matchNameAdd',
+                'asset.customerKey should be testExisting_asset_html-matchNameAdd'
             );
             assert.equal(
                 upsertCallout?.id,

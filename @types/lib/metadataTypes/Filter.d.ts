@@ -57,12 +57,36 @@ declare class Filter extends MetadataType {
      */
     static _postRetrieve_dataTypeMapping(target: "source" | "destination", metadata: FilterItem): void;
     /**
-     * Creates a single item
+     * helper for preDeployTasks to map data types
      *
-     * @param {MetadataTypeItem} item a single item
+     * @param {'source'|'destination'} target we are processing source and destinations
+     * @param {FilterItem} metadata single record
+     * @param {FilterItem} cachedVersion cached version of the metadata
+     */
+    static _preDeploy_dataTypeMapping(target: "source" | "destination", metadata: FilterItem, cachedVersion: FilterItem): void;
+    /**
+     * Creates a single item
+     * this uses soap API because the rest api does not allow hotlinking to an existing target DE
+     *
+     * @param {FilterItem} item a single item
      * @returns {Promise} Promise
      */
-    static create(item: MetadataTypeItem): Promise<any>;
+    static create(item: FilterItem): Promise<any>;
+    /**
+     * helper that converts the rest item into a soap item
+     *
+     * @param {FilterItem} item a single item
+     * @returns {object} SOAP formatted filter item
+     */
+    static preCreateSOAPItem(item: FilterItem): object;
+    /**
+     * helper that runs update on all create calls to ensure all fields are set
+     *
+     * @param {FilterItem} restItem original rest item
+     * @param {object} response SOAP response
+     * @returns {Promise.<FilterItem>} created item
+     */
+    static postCreateTasks(restItem: FilterItem, response: object): Promise<FilterItem>;
     /**
      * Updates a single item
      *
@@ -78,18 +102,11 @@ declare class Filter extends MetadataType {
      */
     static preDeployTasks(metadata: FilterItem): Promise<FilterItem>;
     /**
-     * helper for postRetrieveTasks to map data types
-     *
-     * @param {'source'|'destination'} target we are processing source and destinations
-     * @param {FilterItem} metadata single record
-     */
-    static _preDeploy_dataTypeMapping(target: "source" | "destination", metadata: FilterItem): void;
-    /**
      * helper to allow us to select single metadata entries via REST
      *
      * @private
      * @param {string} key customer key
-     * @returns {Promise.<string>} objectId or enpty string
+     * @returns {Promise.<string>} objectId or empty string
      */
     private static _getObjectIdForSingleRetrieve;
 }
@@ -97,9 +114,13 @@ declare namespace Filter {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
+        dependencyGraph: {
+            filterDefinition: string[];
+            dataExtension: string[];
+        };
         hasExtended: boolean;
         idField: string;
-        keyIsFixed: any;
+        keyIsFixed: boolean;
         keyField: string;
         nameField: string;
         folderType: string;
@@ -114,6 +135,7 @@ declare namespace Filter {
         restPagination: boolean;
         maxKeyLength: number;
         type: string;
+        soapType: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
         typeCdpByDefault: boolean;
@@ -137,7 +159,19 @@ declare namespace Filter {
                 retrieving: boolean;
                 template: boolean;
             };
+            CustomerKey: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             description: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            Description: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -149,7 +183,19 @@ declare namespace Filter {
                 retrieving: boolean;
                 template: boolean;
             };
+            DestinationObjectID: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             destinationTypeId: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            DestinationTypeID: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -167,6 +213,12 @@ declare namespace Filter {
                 retrieving: boolean;
                 template: boolean;
             };
+            FilterDefinitionID: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             modifiedDate: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -179,7 +231,19 @@ declare namespace Filter {
                 retrieving: boolean;
                 template: boolean;
             };
+            Name: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             sourceObjectId: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            SourceObjectID: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -191,7 +255,37 @@ declare namespace Filter {
                 retrieving: boolean;
                 template: boolean;
             };
+            SourceTypeID: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            filterDefinitionSourceTypeId: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             statusId: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            resultDEName: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            resultDEKey: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            resultDEDescription: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -203,19 +297,19 @@ declare namespace Filter {
                 retrieving: boolean;
                 template: boolean;
             };
-            r__filterDefinition_CustomerKey: {
+            r__dataFilter_key: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            r__source_dataExtension_CustomerKey: {
+            r__source_dataExtension_key: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            r__destination_dataExtension_CustomerKey: {
+            r__destination_dataExtension_key: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

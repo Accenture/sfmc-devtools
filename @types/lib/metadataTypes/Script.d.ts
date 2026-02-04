@@ -79,14 +79,6 @@ declare class Script extends MetadataType {
      */
     static update(script: MetadataTypeItem): Promise<any>;
     /**
-     * helper for {@link MetadataType.updateREST} and {@link MetadataType.updateSOAP}
-     *
-     * @param {MetadataTypeItem} metadataEntry a single metadata Entry
-     * @param {object} apiResponse varies depending on the API call
-     * @returns {Promise.<object>} apiResponse, potentially modified
-     */
-    static postUpdateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): Promise<object>;
-    /**
      * Creates a single Script
      *
      * @param {MetadataTypeItem} script a single Script
@@ -293,12 +285,6 @@ declare namespace Script {
                 template: boolean;
             };
             statusId: {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            parentCategoryId: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

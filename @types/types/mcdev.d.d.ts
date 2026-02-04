@@ -1157,13 +1157,45 @@ export type FilterItem = {
      */
     name: string;
     /**
+     * -
+     */
+    description?: string;
+    /**
      * DE/List ID
      */
     sourceObjectId: string;
     /**
+     * required for upsert; unknown purpose; set to null
+     */
+    resultGroupFolderId: null;
+    /**
+     * required for upsert; unknown purpose; set to null
+     */
+    resultGroupName: null;
+    /**
+     * required for upsert; unknown purpose; set to null
+     */
+    sourceId: null;
+    /**
      * 1:SubscriberList, 2:DataExtension, 3:GroupWizard, 4:BehavioralData
      */
     sourceTypeId: 1 | 2 | 3 | 4;
+    /**
+     * seems to be a duplicate of sourceTypeId?
+     */
+    filterDefinitionSourceTypeId?: 1 | 2 | 3 | 4;
+    /**
+     * description of destination DE
+     */
+    resultDEDescription?: string;
+    /**
+     * name of destination DE
+     */
+    resultDEName?: string;
+    /**
+     * key of destination DE
+     */
+    resultDEKey?: string;
     /**
      * ?
      */
@@ -1171,15 +1203,15 @@ export type FilterItem = {
     /**
      * relationship to filterDefinition
      */
-    r__filterDefinition_CustomerKey?: string;
+    r__dataFilter_key?: string;
     /**
      * relationship to dataExtension source
      */
-    r__source_dataExtension_CustomerKey?: string;
+    r__source_dataExtension_key?: string;
     /**
      * relationship to dataExtension destination
      */
-    r__destination_dataExtension_CustomerKey?: string;
+    r__destination_dataExtension_key?: string;
     /**
      * relationship to folder
      */
@@ -1187,47 +1219,6 @@ export type FilterItem = {
 };
 export type FilterMap = {
     [x: string]: FilterItem;
-};
-export type FilterDefinitionSOAPItem = {
-    /**
-     * id
-     */
-    ObjectID: string;
-    /**
-     * key
-     */
-    CustomerKey: string;
-    /**
-     * most relevant part that defines the filter
-     */
-    DataFilter?: {
-        LeftOperand: {
-            Property: string;
-            SimpleOperator: string;
-            Value: string;
-        };
-        LogicalOperator: string;
-        RightOperand?: {
-            Property: string;
-            SimpleOperator: string;
-            Value: string;
-        };
-    };
-    /**
-     * name
-     */
-    Name: string;
-    /**
-     * -
-     */
-    Description: string;
-    /**
-     * returned from SOAP API; used to return error messages
-     */
-    ObjectState?: string;
-};
-export type FilterDefinitionSOAPItemMap = {
-    [x: string]: FilterDefinitionSOAPItem;
 };
 /**
  * /automation/v1/filterdefinitions/<id> (not used)
@@ -1293,7 +1284,7 @@ export type AutomationFilterDefinitionItem = {
 /**
  * /email/v1/filters/filterdefinition/<id>
  */
-export type FilterDefinitionItem = {
+export type DataFilterItem = {
     /**
      * object id
      */
@@ -1375,7 +1366,7 @@ export type FilterDefinitionItem = {
     /**
      * relationship to dataExtension source (if derivedFromType=2)
      */
-    r__source_dataExtension_CustomerKey?: string;
+    r__source_dataExtension_key?: string;
 };
 export type FilterConditionSet = {
     /**
@@ -1405,8 +1396,8 @@ export type FilterCondition = {
      */
     r__dataExtensionField_name?: string;
 };
-export type FilterDefinitionMap = {
-    [x: string]: FilterDefinitionItem;
+export type DataFilterMap = {
+    [x: string]: DataFilterItem;
 };
 export type AuthObject = {
     /**

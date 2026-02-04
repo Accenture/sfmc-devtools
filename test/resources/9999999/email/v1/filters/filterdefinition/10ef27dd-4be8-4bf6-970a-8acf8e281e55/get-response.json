@@ -1,0 +1,19 @@
+{
+    "id": "10ef27dd-4be8-4bf6-970a-8acf8e281e55",
+    "key": "testExisting_dataFilter",
+    "createdDate": "2025-12-01T16:54:09.813",
+    "createdBy": 700301950,
+    "createdByName": "Jörn Berkefeld",
+    "lastUpdated": "2025-12-01T17:17:31.827",
+    "lastUpdatedBy": 700301950,
+    "lastUpdatedByName": "Jörn Berkefeld",
+    "name": "testExisting_dataFilter",
+    "description": "test",
+    "categoryId": 5318,
+    "filterDefinitionXml": "<FilterDefinition Source=\"DataExtension\" SourceID=\"21711373-72c1-ec11-b83b-48df37d1deb7\"><ConditionSet Operator=\"AND\" ConditionSetName=\"Outer Grouping\"><Condition ID=\"bea0e308-5d45-4181-a673-da9972a7c674\" Operator=\"Ends\"><Value><![CDATA[_test]]></Value></Condition></ConditionSet></FilterDefinition>",
+    "derivedFromObjectId": "21711373-72c1-ec11-b83b-48df37d1deb7",
+    "derivedFromType": 2,
+    "isSendable": true,
+    "derivedFromObjectTypeName": "DataExtension",
+    "derivedFromObjectName": "testExisting_dataExtension"
+}

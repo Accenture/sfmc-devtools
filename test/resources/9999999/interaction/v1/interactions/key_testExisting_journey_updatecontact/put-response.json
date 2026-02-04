@@ -1,0 +1,106 @@
+{
+    "key": "testExisting_journey_updatecontact",
+    "name": "testExisting_journey_updatecontact",
+    "lastPublishedDate": "0001-01-01T00:00:00",
+    "description": "",
+    "version": 1,
+    "workflowApiVersion": 1,
+    "createdDate": "0001-01-01T00:00:00",
+    "modifiedDate": "2024-05-04T17:25:57.9",
+    "activities": [
+        {
+            "key": "UPDATECONTACTDATAV2-1",
+            "name": "Update Contact - TEST",
+            "description": "",
+            "type": "UPDATECONTACTDATA",
+            "outcomes": [
+                {
+                    "key": "9f21d42b-4679-4561-911a-4bccf84672ba",
+                    "arguments": {},
+                    "metaData": {
+                        "invalid": false
+                    }
+                }
+            ],
+            "arguments": {
+                "activityData": {
+                    "updateContactFields": [
+                        {
+                            "field": "bea0e308-5d45-4181-a673-da9972a7c674",
+                            "value": "TEST",
+                            "dataExtensionId": "21711373-72c1-ec11-b83b-48df37d1deb7"
+                        }
+                    ]
+                }
+            },
+            "configurationArguments": {},
+            "metaData": {
+                "isConfigured": true
+            },
+            "schema": {
+                "arguments": {
+                    "activityData": {
+                        "dataType": "Text",
+                        "isNullable": false,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "contactKey": {
+                        "dataType": "Text",
+                        "isNullable": false,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    }
+                }
+            }
+        }
+    ],
+    "triggers": [
+        {
+            "key": "TRIGGER",
+            "name": "TRIGGER",
+            "description": "",
+            "type": "EmailAudience",
+            "outcomes": [],
+            "arguments": {},
+            "configurationArguments": {},
+            "metaData": {
+                "r__event_key": "DEAudience-2e3c73b6-48cc-2ec0-5522-48636e1a236e",
+                "chainType": "None",
+                "configurationRequired": false,
+                "iconUrl": "/images/icon-data-extension.svg",
+                "title": "Data Extension",
+                "entrySourceGroupConfigUrl": "jb:///data/entry/audience/entrysourcegroupconfig.json",
+                "sourceInteractionId": "00000000-0000-0000-0000-000000000000"
+            }
+        }
+    ],
+    "goals": [],
+    "exits": [],
+    "notifiers": [],
+    "entryMode": "NotSet",
+    "definitionType": "Multistep",
+    "channel": "",
+    "defaults": {
+        "email": ["{{Event.DEAudience-2e3c73b6-48cc-2ec0-5522-48636e1a236e.\"Email\"}}"],
+        "properties": {
+            "analyticsTracking": {
+                "enabled": true,
+                "analyticsType": "google",
+                "urlDomainsToTrack": []
+            }
+        }
+    },
+    "metaData": {
+        "dataSource": "ContactsModel",
+        "highThroughputSending": {
+            "email": false
+        }
+    },
+    "executionMode": "Production",
+    "status": "Draft",
+    "scheduledStatus": "Draft",
+    "r__folder_Path": "my journeys"
+}
