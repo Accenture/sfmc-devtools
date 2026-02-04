@@ -233,6 +233,9 @@ declare namespace _default {
         c__dataRetentionPeriodUnitOfMeasure: {
             skipValidation: boolean;
         };
+        r__dataFilterHidden_key: {
+            skipValidation: boolean;
+        };
     };
 }
 export default _default;

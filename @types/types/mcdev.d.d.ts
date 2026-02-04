@@ -312,6 +312,10 @@ export type DataExtensionItem = {
      */
     Name: string;
     /**
+     * id
+     */
+    ObjectID?: string;
+    /**
      * -
      */
     Description: string;
@@ -405,6 +409,10 @@ export type DataExtensionItem = {
      * true for retention policy allRecords
      */
     DeleteAtEndOfRetentionPeriod?: boolean;
+    /**
+     * reference to (hidden) dataFilter key
+     */
+    r__dataFilterHidden_key?: string;
 };
 export type DataExtensionMap = {
     [x: string]: DataExtensionItem;

@@ -38,7 +38,7 @@ export default class ReplaceContentBlockReference {
         name: AssetItemSimpleMap;
     };
     /** @type {Object.<string, {id: RegExp[], key: RegExp[], name: RegExp[]}>} */
-    static "__#private@#regexBy": {
+    static "__#2@#regexBy": {
         [x: string]: {
             id: RegExp[];
             key: RegExp[];
@@ -67,7 +67,7 @@ export default class ReplaceContentBlockReference {
      * @param {boolean} [handleOutside] don not print error message if asset not found
      * @returns {AssetItemSimple} asset object
      */
-    static "__#private@#getAssetBy"(from: ContentBlockConversionTypes, identifier: string | number, parentName: string, isSsjs?: boolean, handleOutside?: boolean): AssetItemSimple;
+    static "__#2@#getAssetBy"(from: ContentBlockConversionTypes, identifier: string | number, parentName: string, isSsjs?: boolean, handleOutside?: boolean): AssetItemSimple;
     /**
      *
      * @param {AssetItemSimple} asset asset object
@@ -75,7 +75,7 @@ export default class ReplaceContentBlockReference {
      * @param {boolean} [isSsjs] replaces backslashes with double backslashes in name if true
      * @returns {string} replaced string
      */
-    static "__#private@#replaceWith"(asset: AssetItemSimple, to: ContentBlockConversionTypes, isSsjs?: boolean): string;
+    static "__#2@#replaceWith"(asset: AssetItemSimple, to: ContentBlockConversionTypes, isSsjs?: boolean): string;
     /**
      * ensures we cache the right things from disk and if required from server
      *

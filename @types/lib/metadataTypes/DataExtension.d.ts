@@ -35,6 +35,8 @@ declare class DataExtension extends MetadataType {
             [x: string]: import("../../types/mcdev.d.js").DataExtensionFieldItem;
         };
     };
+    static dataFilterMap: {};
+    static deIdDataFilterMap: {};
     /**
      * Upserts dataExtensions after retrieving them from source and target to compare
      * if create or update operation is needed.
@@ -50,7 +52,7 @@ declare class DataExtension extends MetadataType {
      * @param {object} res -
      * @returns {boolean} true: keep, false: discard
      */
-    static "__#private@#filterUpsertResults"(res: object): boolean;
+    static "__#5@#filterUpsertResults"(res: object): boolean;
     /**
      * Create a single dataExtension. Also creates their columns in 'dataExtension.columns'
      *
@@ -66,7 +68,7 @@ declare class DataExtension extends MetadataType {
      * @param {DataExtensionItem} metadata single metadata entry
      * @returns {void}
      */
-    static "__#private@#cleanupRetentionPolicyFields"(metadata: DataExtensionItem): void;
+    static "__#5@#cleanupRetentionPolicyFields"(metadata: DataExtensionItem): void;
     /**
      * Updates a single dataExtension. Also updates their columns in 'dataExtension.columns'
      *
@@ -97,7 +99,7 @@ declare class DataExtension extends MetadataType {
      * @param {{created: number, updated: number}} createdUpdated counter representing successful creates/updates
      * @returns {Promise.<void>} -
      */
-    static "__#private@#fixShared"(upsertedMetadata: DataExtensionMap, originalMetadata: DataExtensionMap, createdUpdated: {
+    static "__#5@#fixShared"(upsertedMetadata: DataExtensionMap, originalMetadata: DataExtensionMap, createdUpdated: {
         created: number;
         updated: number;
     }): Promise<void>;
@@ -106,7 +108,7 @@ declare class DataExtension extends MetadataType {
      *
      * @returns {Promise.<string[]>} list of selected BU names
      */
-    static "__#private@#fixShared_getBUs"(): Promise<string[]>;
+    static "__#5@#fixShared_getBUs"(): Promise<string[]>;
     /**
      * helper for {@link DataExtension.#fixShared}
      *
@@ -116,7 +118,7 @@ declare class DataExtension extends MetadataType {
      * @param {Object.<string, string>} sharedDataExtensionMap ID-Key relationship of shared data extensions
      * @returns {Promise.<string[]>} updated shared DE keys on BU
      */
-    static "__#private@#fixShared_onBU"(childBuName: string, buObjectParent: BuObject, clientParent: object, sharedDataExtensionMap: {
+    static "__#5@#fixShared_onBU"(childBuName: string, buObjectParent: BuObject, clientParent: object, sharedDataExtensionMap: {
         [x: string]: string;
     }): Promise<string[]>;
     /**
@@ -131,7 +133,7 @@ declare class DataExtension extends MetadataType {
      * @param {object} clientParent SDK for parent BU
      * @returns {Promise.<boolean>} flag that signals if the fix was successful
      */
-    static "__#private@#fixShared_item"(deId: string, deKey: string, buObjectChildBu: BuObject, clientChildBu: object, buObjectParent: BuObject, clientParent: object): Promise<boolean>;
+    static "__#5@#fixShared_item"(deId: string, deKey: string, buObjectChildBu: BuObject, clientChildBu: object, buObjectParent: BuObject, clientParent: object): Promise<boolean>;
     /**
      * add a new field to the shared DE to trigger an update to the data model
      * helper for {@link DataExtension.#fixShared_item}
@@ -142,7 +144,7 @@ declare class DataExtension extends MetadataType {
      * @param {string} deId dataExtension ObjectID
      * @returns {Promise.<string>} randomSuffix
      */
-    static "__#private@#fixShared_item_addField"(buObjectChildBu: BuObject, clientChildBu: object, deKey: string, deId: string): Promise<string>;
+    static "__#5@#fixShared_item_addField"(buObjectChildBu: BuObject, clientChildBu: object, deKey: string, deId: string): Promise<string>;
     /**
      * get ID of the field added by {@link DataExtension.#fixShared_item_addField} on the shared DE via parent BU
      * helper for {@link DataExtension.#fixShared_item}
@@ -153,7 +155,7 @@ declare class DataExtension extends MetadataType {
      * @param {string} deKey dataExtension key
      * @returns {Promise.<string>} fieldObjectID
      */
-    static "__#private@#fixShared_item_getFieldId"(randomSuffix: string, buObjectParent: BuObject, clientParent: object, deKey: string): Promise<string>;
+    static "__#5@#fixShared_item_getFieldId"(randomSuffix: string, buObjectParent: BuObject, clientParent: object, deKey: string): Promise<string>;
     /**
      * delete the field added by {@link DataExtension.#fixShared_item_addField}
      * helper for {@link DataExtension.#fixShared_item}
@@ -165,7 +167,7 @@ declare class DataExtension extends MetadataType {
      * @param {string} fieldObjectID field ObjectID
      * @returns {Promise} -
      */
-    static "__#private@#fixShared_item_deleteField"(randomSuffix: string, buObjectChildBu: BuObject, clientChildBu: object, deKey: string, fieldObjectID: string): Promise<any>;
+    static "__#5@#fixShared_item_deleteField"(randomSuffix: string, buObjectChildBu: BuObject, clientChildBu: object, deKey: string, fieldObjectID: string): Promise<any>;
     /**
      * Retrieves dataExtension metadata. Afterwards starts retrieval of dataExtensionColumn metadata retrieval
      *
@@ -562,6 +564,9 @@ declare namespace DataExtension {
                 skipValidation: boolean;
             };
             c__dataRetentionPeriodUnitOfMeasure: {
+                skipValidation: boolean;
+            };
+            r__dataFilterHidden_key: {
                 skipValidation: boolean;
             };
         };
