@@ -10,6 +10,8 @@ export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMa
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 export type DataFilterItem = import("../../types/mcdev.d.js").DataFilterItem;
+export type DataExtensionFieldMap = import("../../types/mcdev.d.js").DataExtensionFieldMap;
+export type DataExtensionFieldItem = import("../../types/mcdev.d.js").DataExtensionFieldItem;
 export type DataFilterMap = import("../../types/mcdev.d.js").DataFilterMap;
 export type MultiMetadataTypeMap = import("../../types/mcdev.d.js").MultiMetadataTypeMap;
 export type FilterConditionSet = import("../../types/mcdev.d.js").FilterConditionSet;
@@ -26,6 +28,8 @@ export type FilterCondition = import("../../types/mcdev.d.js").FilterCondition;
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
  * @typedef {import('../../types/mcdev.d.js').DataFilterItem} DataFilterItem
+ * @typedef {import('../../types/mcdev.d.js').DataExtensionFieldMap} DataExtensionFieldMap
+ * @typedef {import('../../types/mcdev.d.js').DataExtensionFieldItem} DataExtensionFieldItem
  * @typedef {import('../../types/mcdev.d.js').DataFilterMap} DataFilterMap
  * @typedef {import('../../types/mcdev.d.js').MultiMetadataTypeMap} MultiMetadataTypeMap
  * @typedef {import('../../types/mcdev.d.js').FilterConditionSet} FilterConditionSet
@@ -74,6 +78,12 @@ declare class DataFilter extends MetadataType {
      */
     static _cacheDeFields(metadataTypeMap: DataFilterMap, mode?: "retrieve" | "deploy"): Promise<void>;
     /**
+     * helper for {@link DataFilter._cacheDeFields}
+     *
+     * @param {DataExtensionFieldMap} deFieldCache -
+     */
+    static saveDataExtensionFieldCacheToMap(deFieldCache: DataExtensionFieldMap): void;
+    /**
      * helper for {@link DataFilter.retrieve}
      *
      * @param {DataFilterMap} metadataTypeMap -
@@ -106,27 +116,29 @@ declare class DataFilter extends MetadataType {
      *
      * @param {DataFilterItem} metadata -
      * @param {'postRetrieve'|'preDeploy'} mode -
-     * @param {object[]} [fieldCache] -
+     * @param {DataExtensionFieldItem[]} [fieldCache] -
      * @param {FilterConditionSet} [filter] -
      * @returns {void}
      */
-    static _resolveFields(metadata: DataFilterItem, mode: "postRetrieve" | "preDeploy", fieldCache?: object[], filter?: FilterConditionSet): void;
+    static _resolveFields(metadata: DataFilterItem, mode: "postRetrieve" | "preDeploy", fieldCache?: DataExtensionFieldItem[], filter?: FilterConditionSet): void;
     /**
      * helper for {@link _resolveFields}
      *
+     * @param {DataFilterItem} metadata -
      * @param {FilterCondition} condition -
-     * @param {object[]} fieldCache -
+     * @param {DataExtensionFieldItem[]} fieldCache -
      * @returns {void}
      */
-    static _postRetrieve_resolveFieldIdsCondition(condition: FilterCondition, fieldCache: object[]): void;
+    static _postRetrieve_resolveFieldIdsCondition(metadata: DataFilterItem, condition: FilterCondition, fieldCache: DataExtensionFieldItem[]): void;
     /**
      * helper for {@link _resolveFields}
      *
+     * @param {DataFilterItem} metadata -
      * @param {FilterCondition} condition -
-     * @param {object[]} fieldCache -
+     * @param {DataExtensionFieldItem[]} fieldCache -
      * @returns {void}
      */
-    static _preDeploy_resolveFieldNamesCondition(condition: FilterCondition, fieldCache: object[]): void;
+    static _preDeploy_resolveFieldNamesCondition(metadata: DataFilterItem, condition: FilterCondition, fieldCache: DataExtensionFieldItem[]): void;
     /**
      * helper for {@link postRetrieveTasks}
      *
@@ -166,9 +178,6 @@ declare class DataFilter extends MetadataType {
     private static _getObjectIdForSingleRetrieve;
 }
 declare namespace DataFilter {
-    let dataExtensionFieldCache: {
-        [x: string]: import("../../types/mcdev.d.js").DataExtensionFieldItem;
-    };
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
