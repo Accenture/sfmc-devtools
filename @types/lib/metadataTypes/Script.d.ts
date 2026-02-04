@@ -290,6 +290,12 @@ declare namespace Script {
                 retrieving: boolean;
                 template: boolean;
             };
+            parentCategoryId: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             r__folder_Path: {
                 skipValidation: boolean;
             };
