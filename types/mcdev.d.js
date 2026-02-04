@@ -134,7 +134,7 @@
  * @property {boolean} [RowBasedRetention] true for retention policy individialRecords
  * @property {boolean} ResetRetentionPeriodOnImport ?
  * @property {boolean} [DeleteAtEndOfRetentionPeriod] true for retention policy allRecords
- * @property {string} [r__filterDefinition_key] reference to (hidden) filterDefinition key
+ * @property {string} [r__dataFilterHidden_key] reference to (hidden) dataFilter key
  */
 
 /**

@@ -410,9 +410,9 @@ export type DataExtensionItem = {
      */
     DeleteAtEndOfRetentionPeriod?: boolean;
     /**
-     * reference to (hidden) filterDefinition key
+     * reference to (hidden) dataFilter key
      */
-    r__filterDefinition_key?: string;
+    r__dataFilterHidden_key?: string;
 };
 export type DataExtensionMap = {
     [x: string]: DataExtensionItem;
