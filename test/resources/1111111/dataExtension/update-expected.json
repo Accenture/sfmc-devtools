@@ -34,14 +34,6 @@
         {
             "DefaultValue": "",
             "FieldType": "Text",
-            "IsPrimaryKey": true,
-            "IsRequired": true,
-            "MaxLength": 50,
-            "Name": "ContactKey"
-        },
-        {
-            "DefaultValue": "",
-            "FieldType": "Text",
             "IsPrimaryKey": false,
             "IsRequired": false,
             "MaxLength": 254,

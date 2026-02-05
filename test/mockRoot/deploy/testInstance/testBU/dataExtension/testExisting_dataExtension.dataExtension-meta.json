@@ -26,8 +26,7 @@
             "FieldType": "Text"
         },
         {
-            "Name": "EmailAddress",
-            "Name_new": "Email",
+            "Name": "Email",
             "DefaultValue": "",
             "MaxLength": 254,
             "IsRequired": true,
@@ -35,19 +34,35 @@
             "FieldType": "EmailAddress"
         },
         {
-            "Name": "testField",
-            "DefaultValue": "",
-            "MaxLength": 254,
-            "IsRequired": false,
-            "IsPrimaryKey": false,
-            "FieldType": "Text"
-        },
-        {
             "Name": "ContactKey",
             "DefaultValue": "",
             "MaxLength": 50,
             "IsRequired": true,
             "IsPrimaryKey": true,
+            "FieldType": "Text"
+        },
+        {
+            "Name": "decimalField",
+            "DefaultValue": "",
+            "MaxLength": 6,
+            "Scale": 3,
+            "IsPrimaryKey": false,
+            "IsRequired": true,
+            "FieldType": "Decimal"
+        },
+        {
+            "Name": "numberField",
+            "DefaultValue": "",
+            "IsPrimaryKey": false,
+            "IsRequired": true,
+            "FieldType": "Number"
+        },
+        {
+            "Name": "testField",
+            "DefaultValue": "",
+            "MaxLength": 254,
+            "IsRequired": false,
+            "IsPrimaryKey": false,
             "FieldType": "Text"
         }
     ],
