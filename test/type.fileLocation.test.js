@@ -136,34 +136,41 @@ describe('type: fileLocation', () => {
             testUtils.mockSetup(true);
         });
 
-        it('Should create & upsert a fileLocation', async () => {
+        it('Should update fileLocations', async () => {
             // WHEN
-            await handler.deploy('testInstance/testBU', ['fileLocation']);
+            const deployed = await handler.deploy('testInstance/testBU', ['fileLocation']);
             // THEN
-            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 1, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.fileLocation ? Object.keys(result.fileLocation).length : 0,
+                6,
+                'unexpected number of fileLocations in cache'
+            );
+            assert.equal(
+                deployed?.['testInstance/testBU']?.fileLocation
+                    ? Object.keys(deployed['testInstance/testBU'].fileLocation).length
+                    : 0,
                 2,
-                'two fileLocations expected'
+                'unexpected number of fileLocations deployed'
             );
             // confirm created item
             assert.deepEqual(
-                await testUtils.getActualJson('testNew_fileLocation', 'fileLocation'),
-                await testUtils.getExpectedJson('9999999', 'fileLocation', 'post'),
+                await testUtils.getActualJson('testExisting_fileLocation_exsftp', 'fileLocation'),
+                await testUtils.getExpectedJson('9999999', 'fileLocation', 'patch-exsftp'),
                 'returned JSON was not equal expected for insert fileLocation'
             );
             // confirm updated item
             assert.deepEqual(
-                await testUtils.getActualJson('testExisting_fileLocation', 'fileLocation'),
-                await testUtils.getExpectedJson('9999999', 'fileLocation', 'patch'),
+                await testUtils.getActualJson('testExisting_fileLocation_aws', 'fileLocation'),
+                await testUtils.getExpectedJson('9999999', 'fileLocation', 'patch-aws'),
                 'returned JSON was not equal expected for update fileLocation'
             );
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                5,
+                4,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
