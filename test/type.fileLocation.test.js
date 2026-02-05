@@ -171,46 +171,6 @@ describe('type: fileLocation', () => {
     });
 
     describe('Templating ================', () => {
-        it('Should create a fileLocation template via retrieveAsTemplate and build it', async () => {
-            // buildTemplate
-            const result = await handler.retrieveAsTemplate(
-                'testInstance/testBU',
-                'fileLocation',
-                ['testExisting_fileLocation'],
-                'testSourceMarket'
-            );
-            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
-            assert.equal(
-                result.fileLocation ? Object.keys(result.fileLocation).length : 0,
-                1,
-                'only one fileLocation expected'
-            );
-            assert.deepEqual(
-                await testUtils.getActualTemplateJson('testExisting_fileLocation', 'fileLocation'),
-                await testUtils.getExpectedJson('9999999', 'fileLocation', 'template'),
-                'returned template JSON was not equal expected'
-            );
-            // buildDefinition
-            await handler.buildDefinition(
-                'testInstance/testBU',
-                'fileLocation',
-                ['testExisting_fileLocation'],
-                ['testTargetMarket']
-            );
-            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
-            assert.deepEqual(
-                await testUtils.getActualDeployJson('testTemplated_fileLocation', 'fileLocation'),
-                await testUtils.getExpectedJson('9999999', 'fileLocation', 'build'),
-                'returned deployment JSON was not equal expected'
-            );
-            assert.equal(
-                testUtils.getAPIHistoryLength(),
-                3,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            );
-            return;
-        });
-
         it('Should create a fileLocation template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['fileLocation']);
@@ -218,7 +178,7 @@ describe('type: fileLocation', () => {
             const result = await handler.buildTemplate(
                 'testInstance/testBU',
                 'fileLocation',
-                ['testExisting_fileLocation'],
+                ['testExisting_fileLocation_azure'],
                 ['testSourceMarket']
             );
             assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
@@ -228,7 +188,10 @@ describe('type: fileLocation', () => {
                 'only one fileLocation expected'
             );
             assert.deepEqual(
-                await testUtils.getActualTemplateJson('testExisting_fileLocation', 'fileLocation'),
+                await testUtils.getActualTemplateJson(
+                    'testExisting_fileLocation_azure',
+                    'fileLocation'
+                ),
                 await testUtils.getExpectedJson('9999999', 'fileLocation', 'template'),
                 'returned template JSON was not equal expected'
             );
@@ -236,18 +199,21 @@ describe('type: fileLocation', () => {
             await handler.buildDefinition(
                 'testInstance/testBU',
                 'fileLocation',
-                ['testExisting_fileLocation'],
+                ['testExisting_fileLocation_azure'],
                 ['testTargetMarket']
             );
             assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
             assert.deepEqual(
-                await testUtils.getActualDeployJson('testTemplated_fileLocation', 'fileLocation'),
+                await testUtils.getActualDeployJson(
+                    'testTemplated_fileLocation_azure',
+                    'fileLocation'
+                ),
                 await testUtils.getExpectedJson('9999999', 'fileLocation', 'build'),
                 'returned deployment JSON was not equal expected'
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                3,
+                2,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
