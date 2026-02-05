@@ -27,6 +27,7 @@ export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
  * @augments MetadataType
  */
 declare class FileLocation extends MetadataType {
+    static cache: {};
     /**
      * Retrieves Metadata of FileLocation
      * Endpoint /automation/v1/ftplocations/ return all FileLocations
@@ -44,6 +45,36 @@ declare class FileLocation extends MetadataType {
      * @returns {Promise.<MetadataTypeMapObj>} Promise
      */
     static retrieveForCache(): Promise<MetadataTypeMapObj>;
+    /**
+     * Creates a single item
+     *
+     * @param {MetadataTypeItem} metadata a single item
+     * @returns {Promise.<MetadataTypeItem>} Promise
+     */
+    static create(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
+    /**
+     * Updates a single item
+     *
+     * @param {MetadataTypeItem} metadata a single item
+     * @returns {Promise.<MetadataTypeItem>} Promise
+     */
+    static update(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
+    /**
+     * helper for {@link MetadataType.createREST}
+     *
+     * @param {MetadataTypeItem} _ a single metadata Entry
+     * @param {object} apiResponse varies depending on the API call
+     * @returns {Promise.<object>} apiResponse, potentially modified
+     */
+    static postCreateTasks(_: MetadataTypeItem, apiResponse: object): Promise<object>;
+    /**
+     * helper for {@link MetadataType.updateREST} and {@link MetadataType.updateSOAP}
+     *
+     * @param {MetadataTypeItem} _ a single metadata Entry
+     * @param {object} apiResponse varies depending on the API call
+     * @returns {Promise.<object>} apiResponse, potentially modified
+     */
+    static postUpdateTasks(_: MetadataTypeItem, apiResponse: object): Promise<object>;
     /**
      * prepares a import definition for deployment
      *
@@ -93,6 +124,12 @@ declare namespace FileLocation {
             'Azure Blob Storage': number;
             'Google Cloud Storage': number;
         };
+        locationTypeMappingDeployable: {
+            'External SFTP Site': string;
+            'Amazon Simple Storage Service': string;
+            'Azure Blob Storage': string;
+            'Google Cloud Storage': string;
+        };
         fields: {
             id: {
                 isCreateable: boolean;
@@ -101,6 +138,12 @@ declare namespace FileLocation {
                 template: boolean;
             };
             locationTypeId: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            locationType: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -118,11 +161,35 @@ declare namespace FileLocation {
                 retrieving: boolean;
                 template: boolean;
             };
+            customerKey: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            description: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             relPath: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
+            };
+            awsFileTransferLocation: {
+                skipValidation: boolean;
+            };
+            azureFileTransferLocation: {
+                skipValidation: boolean;
+            };
+            gcpFileTransferLocation: {
+                skipValidation: boolean;
+            };
+            sFtpFileTransferLocation: {
+                skipValidation: boolean;
             };
             c__locationType: {
                 isCreateable: boolean;
