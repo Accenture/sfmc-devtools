@@ -1,7 +1,7 @@
 {
     "page": 1,
     "pageSize": 2,
-    "count": 2,
+    "count": 5,
     "items": [
         {
             "name": "Salesforce Objects & Reports",
@@ -13,6 +13,31 @@
             "id": "41a5ded7-0d98-4910-a15f-d09e7ab0af24",
             "locationTypeId": 0,
             "relPath": "ExactTarget Enhanced FTP"
+        },
+        {
+            "name": "testExisting_fileLocation_gcp_name",
+            "id": "5fc2cc79-b4fb-465d-bc09-7dacf8afebae",
+            "locationTypeId": 16,
+            "locationUrl": "GCP://some-bucket/Task/Activity"
+        },
+
+        {
+            "name": "testExisting_fileLocation_azure_name",
+            "id": "fff73b41-dced-4a2a-a6cf-430a46a18df6",
+            "locationTypeId": 15,
+            "locationUrl": "Azure://container-name/my/path"
+        },
+        {
+            "name": "testExisting_fileLocation_aws_name",
+            "id": "62bb39b1-c84f-47b5-98a0-61e5d79b7f31",
+            "locationTypeId": 13,
+            "locationUrl": "S3://bucket-name/my/path"
+        },
+        {
+            "name": "testExisting_fileLocation_exsftp_name",
+            "id": "335802a4-479d-4834-a491-fc5d2d068132",
+            "locationTypeId": 2,
+            "locationUrl": "sftp://test.com"
         }
     ]
 }
