@@ -37,6 +37,12 @@ declare namespace _default {
         'Azure Blob Storage': string;
         'Google Cloud Storage': string;
     };
+    let locationTypeIdMappingDeployable: {
+        2: string;
+        13: string;
+        15: string;
+        16: string;
+    };
     namespace fields {
         namespace id {
             let isCreateable: boolean;
