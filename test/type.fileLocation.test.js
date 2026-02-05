@@ -71,6 +71,64 @@ describe('type: fileLocation', () => {
             );
             return;
         });
+
+        it('Should retrieve an old fileLocation by key', async () => {
+            // WHEN
+            await handler.retrieve(
+                'testInstance/testBU',
+                ['fileLocation'],
+                ['Salesforce Objects & Reports']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.fileLocation ? Object.keys(result.fileLocation).length : 0,
+                1,
+                'unexpected number of fileLocations'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('Salesforce Objects %26 Reports', 'fileLocation'),
+                await testUtils.getExpectedJson('9999999', 'fileLocation', 'get-sor'),
+                'returned JSON was not equal expected'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                2,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should retrieve a new fileLocation by key', async () => {
+            // WHEN
+            await handler.retrieve(
+                'testInstance/testBU',
+                ['fileLocation'],
+                ['testExisting_fileLocation_azure']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.fileLocation ? Object.keys(result.fileLocation).length : 0,
+                1,
+                'unexpected number of fileLocations'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_fileLocation_azure', 'fileLocation'),
+                await testUtils.getExpectedJson('9999999', 'fileLocation', 'get-azure'),
+                'returned JSON was not equal expected'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                2,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 
     describe('Deploy ================', () => {
