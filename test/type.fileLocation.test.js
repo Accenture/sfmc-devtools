@@ -260,7 +260,7 @@ describe('type: fileLocation', () => {
             const isDeleted = await handler.deleteByKey(
                 'testInstance/testBU',
                 'fileLocation',
-                'testExisting_fileLocation'
+                'testExisting_fileLocation_azure'
             );
             // THEN
             assert.equal(process.exitCode, 0, 'deleteByKey should not have thrown an error');
