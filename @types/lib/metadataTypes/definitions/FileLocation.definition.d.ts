@@ -12,6 +12,7 @@ declare namespace _default {
     let lastmodDateField: any;
     let lastmodNameField: any;
     let restPagination: boolean;
+    let maxKeyLength: number;
     let type: string;
     let typeDescription: string;
     let typeRetrieveByDefault: boolean;
@@ -31,6 +32,18 @@ declare namespace _default {
         'Azure Blob Storage': number;
         'Google Cloud Storage': number;
     };
+    let locationTypeMappingDeployable: {
+        'External SFTP Site': string;
+        'Amazon Simple Storage Service': string;
+        'Azure Blob Storage': string;
+        'Google Cloud Storage': string;
+    };
+    let locationTypeIdMappingDeployable: {
+        2: string;
+        13: string;
+        15: string;
+        16: string;
+    };
     namespace fields {
         namespace id {
             let isCreateable: boolean;
@@ -48,7 +61,7 @@ declare namespace _default {
             let template_1: boolean;
             export { template_1 as template };
         }
-        namespace locationUrl {
+        namespace locationType {
             let isCreateable_2: boolean;
             export { isCreateable_2 as isCreateable };
             let isUpdateable_2: boolean;
@@ -58,7 +71,7 @@ declare namespace _default {
             let template_2: boolean;
             export { template_2 as template };
         }
-        namespace name {
+        namespace locationUrl {
             let isCreateable_3: boolean;
             export { isCreateable_3 as isCreateable };
             let isUpdateable_3: boolean;
@@ -68,7 +81,7 @@ declare namespace _default {
             let template_3: boolean;
             export { template_3 as template };
         }
-        namespace relPath {
+        namespace name {
             let isCreateable_4: boolean;
             export { isCreateable_4 as isCreateable };
             let isUpdateable_4: boolean;
@@ -78,7 +91,7 @@ declare namespace _default {
             let template_4: boolean;
             export { template_4 as template };
         }
-        namespace c__locationType {
+        namespace customerKey {
             let isCreateable_5: boolean;
             export { isCreateable_5 as isCreateable };
             let isUpdateable_5: boolean;
@@ -87,6 +100,51 @@ declare namespace _default {
             export { retrieving_5 as retrieving };
             let template_5: boolean;
             export { template_5 as template };
+        }
+        namespace description {
+            let isCreateable_6: boolean;
+            export { isCreateable_6 as isCreateable };
+            let isUpdateable_6: boolean;
+            export { isUpdateable_6 as isUpdateable };
+            let retrieving_6: boolean;
+            export { retrieving_6 as retrieving };
+            let template_6: boolean;
+            export { template_6 as template };
+        }
+        namespace relPath {
+            let isCreateable_7: boolean;
+            export { isCreateable_7 as isCreateable };
+            let isUpdateable_7: boolean;
+            export { isUpdateable_7 as isUpdateable };
+            let retrieving_7: boolean;
+            export { retrieving_7 as retrieving };
+            let template_7: boolean;
+            export { template_7 as template };
+        }
+        namespace awsFileTransferLocation {
+            let skipValidation: boolean;
+        }
+        namespace azureFileTransferLocation {
+            let skipValidation_1: boolean;
+            export { skipValidation_1 as skipValidation };
+        }
+        namespace gcpFileTransferLocation {
+            let skipValidation_2: boolean;
+            export { skipValidation_2 as skipValidation };
+        }
+        namespace sFtpFileTransferLocation {
+            let skipValidation_3: boolean;
+            export { skipValidation_3 as skipValidation };
+        }
+        namespace c__locationType {
+            let isCreateable_8: boolean;
+            export { isCreateable_8 as isCreateable };
+            let isUpdateable_8: boolean;
+            export { isUpdateable_8 as isUpdateable };
+            let retrieving_8: boolean;
+            export { retrieving_8 as retrieving };
+            let template_8: boolean;
+            export { template_8 as template };
         }
     }
 }

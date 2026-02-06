@@ -1,0 +1,59 @@
+{
+    "page": 1,
+    "pageSize": 50,
+    "count": 4,
+    "items": [
+        {
+            "customerKey": "testExisting_fileLocation_gcp",
+            "name": "testExisting_fileLocation_gcp_name",
+            "description": "",
+            "locationType": "GcpBlobStorage",
+            "gcpFileTransferLocation": {
+                "relativePath": "Task/Activity",
+                "bucketName": "some-bucket"
+            }
+        },
+        {
+            "customerKey": "testExisting_fileLocation_aws",
+            "name": "testExisting_fileLocation_aws_name",
+            "description": "",
+            "locationType": "AmazonSimpleStorage",
+            "awsFileTransferLocation": {
+                "regionName": "eucentral1",
+                "transferAccelerationEnabled": false,
+                "accessKeyId": "key-id",
+                "relativePath": "my/path",
+                "bucketName": "bucket-name",
+                "authType": "AccessKey"
+            }
+        },
+        {
+            "customerKey": "testExisting_fileLocation_azure",
+            "name": "testExisting_fileLocation_azure_name",
+            "description": "blabla",
+            "locationType": "AzureBlobStorage",
+            "azureFileTransferLocation": {
+                "storageAccountName": "accountname",
+                "tenantId": "my-id",
+                "accessKeyId": "client-id",
+                "relativePath": "my/path",
+                "bucketName": "container-name",
+                "authType": "AccessKey"
+            }
+        },
+        {
+            "customerKey": "testExisting_fileLocation_exsftp",
+            "name": "testExisting_fileLocation_exsftp_name",
+            "description": "blabla",
+            "locationType": "ExternalSftp",
+            "sFtpFileTransferLocation": {
+                "portNumber": 22,
+                "userName": "abc",
+                "url": "sftp://test.com",
+                "authType": "Password"
+            }
+        }
+    ],
+    "requestId": "3870c0e1-943c-4ae4-9cff-26736372dbe7",
+    "resultMessages": []
+}

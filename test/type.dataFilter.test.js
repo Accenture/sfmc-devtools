@@ -81,7 +81,7 @@ describe('type: dataFilter', () => {
         it('Should create & upsert a dataFilter', async () => {
             // WHEN
 
-            await handler.deploy('testInstance/testBU', ['dataFilter']);
+            const deployed = await handler.deploy('testInstance/testBU', ['dataFilter']);
             // THEN
             assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // get results from cache
@@ -89,8 +89,16 @@ describe('type: dataFilter', () => {
             assert.equal(
                 result.dataFilter ? Object.keys(result.dataFilter).length : 0,
                 2,
-                'unexptected number of dataFilters in cache'
+                'unexpected number of dataFilters in cache'
             );
+            assert.equal(
+                deployed?.['testInstance/testBU']?.dataFilter
+                    ? Object.keys(deployed['testInstance/testBU'].dataFilter).length
+                    : 0,
+                2,
+                'unexpected number of dataFilters deployed'
+            );
+
             // confirm created item
             assert.deepEqual(
                 await testUtils.getActualJson('testNew_dataFilter', 'dataFilter'),
