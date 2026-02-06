@@ -2,7 +2,7 @@
     "fileTransferLocation": {
         "customerKey": "testExisting_fileLocation_aws",
         "name": "testExisting_fileLocation_aws_name",
-        "description": "",
+        "description": "updated via deploy",
         "locationType": "AmazonSimpleStorage",
         "awsFileTransferLocation": {
             "regionName": "eucentral1",

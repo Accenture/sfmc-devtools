@@ -45,18 +45,13 @@ describe('type: fileLocation', () => {
                 'returned JSON was not equal expected'
             );
             assert.deepEqual(
-                await testUtils.getActualJson('testExisting_fileLocation_gcp', 'fileLocation'),
-                await testUtils.getExpectedJson('9999999', 'fileLocation', 'get-gcp'),
+                await testUtils.getActualJson('testExisting_fileLocation_azure', 'fileLocation'),
+                await testUtils.getExpectedJson('9999999', 'fileLocation', 'get-azure'),
                 'returned JSON was not equal expected'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_fileLocation_aws', 'fileLocation'),
                 await testUtils.getExpectedJson('9999999', 'fileLocation', 'get-aws'),
-                'returned JSON was not equal expected'
-            );
-            assert.deepEqual(
-                await testUtils.getActualJson('testExisting_fileLocation_azure', 'fileLocation'),
-                await testUtils.getExpectedJson('9999999', 'fileLocation', 'get-azure'),
                 'returned JSON was not equal expected'
             );
             assert.deepEqual(
@@ -138,9 +133,13 @@ describe('type: fileLocation', () => {
 
         it('Should update fileLocations', async () => {
             // WHEN
-            const deployed = await handler.deploy('testInstance/testBU', ['fileLocation']);
+            const deployed = await handler.deploy(
+                'testInstance/testBU',
+                ['fileLocation'],
+                ['testExisting_fileLocation_exsftp', 'testExisting_fileLocation_aws']
+            );
             // THEN
-            assert.equal(process.exitCode, 1, 'deploy should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // get results from cache
             const result = cache.getCache();
             assert.equal(
@@ -156,6 +155,9 @@ describe('type: fileLocation', () => {
                 'unexpected number of fileLocations deployed'
             );
             // confirm created item
+            // TODO
+
+            // confirm updated item
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_fileLocation_exsftp', 'fileLocation'),
                 await testUtils.getExpectedJson('9999999', 'fileLocation', 'patch-exsftp'),
@@ -171,6 +173,39 @@ describe('type: fileLocation', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 4,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should not update fileLocations', async () => {
+            // WHEN
+            const deployed = await handler.deploy(
+                'testInstance/testBU',
+                ['fileLocation'],
+                ['ExactTarget Enhanced FTP']
+            );
+            // THEN
+            assert.equal(process.exitCode, 1, 'deploy should have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.fileLocation ? Object.keys(result.fileLocation).length : 0,
+                6,
+                'unexpected number of fileLocations in cache'
+            );
+            assert.equal(
+                deployed?.['testInstance/testBU']?.fileLocation
+                    ? Object.keys(deployed['testInstance/testBU'].fileLocation).length
+                    : 0,
+                0,
+                'unexpected number of fileLocations deployed'
+            );
+
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                2,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

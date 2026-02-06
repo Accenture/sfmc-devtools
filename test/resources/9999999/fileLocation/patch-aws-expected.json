@@ -1,6 +1,6 @@
 {
     "customerKey": "testExisting_fileLocation_aws",
-    "description": "",
+    "description": "updated via deploy",
     "name": "testExisting_fileLocation_aws_name",
     "awsFileTransferLocation": {
         "accessKeyId": "key-id",
