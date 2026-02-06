@@ -1,0 +1,10 @@
+{
+    "customerKey": "testExisting_fileLocation_gcp",
+    "name": "testExisting_fileLocation_gcp_name",
+    "description": "",
+    "gcpFileTransferLocation": {
+        "bucketName": "some-bucket",
+        "relativePath": "Task/Activity"
+    },
+    "c__locationType": "Google Cloud Storage"
+}
