@@ -105,6 +105,7 @@ declare namespace FileLocation {
         lastmodDateField: any;
         lastmodNameField: any;
         restPagination: boolean;
+        maxKeyLength: number;
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
