@@ -1111,6 +1111,286 @@ export type SkipInteraction = {
      */
     downloadBUs?: string;
 };
+export type FilterItem = {
+    /**
+     * folder id
+     */
+    categoryId: number;
+    /**
+     * -
+     */
+    createdDate?: string;
+    /**
+     * key
+     */
+    customerKey: string;
+    /**
+     * DE/List ID
+     */
+    destinationObjectId: string;
+    /**
+     * 1:SubscriberList, 2:DataExtension, 3:GroupWizard, 4:BehavioralData
+     */
+    destinationTypeId: 1 | 2 | 3 | 4;
+    /**
+     * ?
+     */
+    filterActivityId: string;
+    /**
+     * ObjectID of filterDefinition
+     */
+    filterDefinitionId: string;
+    /**
+     * -
+     */
+    modifiedDate: string;
+    /**
+     * name
+     */
+    name: string;
+    /**
+     * -
+     */
+    description?: string;
+    /**
+     * DE/List ID
+     */
+    sourceObjectId: string;
+    /**
+     * required for upsert; unknown purpose; set to null
+     */
+    resultGroupFolderId: null;
+    /**
+     * required for upsert; unknown purpose; set to null
+     */
+    resultGroupName: null;
+    /**
+     * required for upsert; unknown purpose; set to null
+     */
+    sourceId: null;
+    /**
+     * 1:SubscriberList, 2:DataExtension, 3:GroupWizard, 4:BehavioralData
+     */
+    sourceTypeId: 1 | 2 | 3 | 4;
+    /**
+     * seems to be a duplicate of sourceTypeId?
+     */
+    filterDefinitionSourceTypeId?: 1 | 2 | 3 | 4;
+    /**
+     * description of destination DE
+     */
+    resultDEDescription?: string;
+    /**
+     * name of destination DE
+     */
+    resultDEName?: string;
+    /**
+     * key of destination DE
+     */
+    resultDEKey?: string;
+    /**
+     * ?
+     */
+    statusId: number;
+    /**
+     * relationship to filterDefinition
+     */
+    r__dataFilter_key?: string;
+    /**
+     * relationship to dataExtension source
+     */
+    r__source_dataExtension_key?: string;
+    /**
+     * relationship to dataExtension destination
+     */
+    r__destination_dataExtension_key?: string;
+    /**
+     * relationship to folder
+     */
+    r__folder_Path?: string;
+};
+export type FilterMap = {
+    [x: string]: FilterItem;
+};
+/**
+ * /automation/v1/filterdefinitions/<id> (not used)
+ */
+export type AutomationFilterDefinitionItem = {
+    /**
+     * object id
+     */
+    id: string;
+    /**
+     * external key
+     */
+    key: string;
+    /**
+     * -
+     */
+    createdDate: string;
+    /**
+     * user id
+     */
+    createdBy: number;
+    /**
+     * -
+     */
+    createdName: string;
+    /**
+     * (omitted by API if empty)
+     */
+    description?: string;
+    /**
+     * -
+     */
+    modifiedDate: string;
+    /**
+     * user id
+     */
+    modifiedBy: number;
+    /**
+     * -
+     */
+    modifiedName: string;
+    /**
+     * name
+     */
+    name: string;
+    /**
+     * folder id
+     */
+    categoryId: string;
+    /**
+     * from REST API defines the filter in XML form
+     */
+    filterDefinitionXml: string;
+    /**
+     * 1:list/profile attributes/measures, 2: dataExtension
+     */
+    derivedFromType: 1 | 2;
+    /**
+     * ?
+     */
+    isSendable: boolean;
+};
+/**
+ * /email/v1/filters/filterdefinition/<id>
+ */
+export type DataFilterItem = {
+    /**
+     * object id
+     */
+    id: string;
+    /**
+     * external key
+     */
+    key: string;
+    /**
+     * date
+     */
+    createdDate: string;
+    /**
+     * user id
+     */
+    createdBy: number;
+    /**
+     * name
+     */
+    createdName: string;
+    /**
+     * (omitted by API if empty)
+     */
+    description?: string;
+    /**
+     * date
+     */
+    lastUpdated: string;
+    /**
+     * user id
+     */
+    lastUpdatedBy: number;
+    /**
+     * name
+     */
+    lastUpdatedName: string;
+    /**
+     * name
+     */
+    name: string;
+    /**
+     * folder id
+     */
+    categoryId: string;
+    /**
+     * from REST API defines the filter in XML form
+     */
+    filterDefinitionXml: string;
+    /**
+     * 1:list/profile attributes/measures, 2: dataExtension
+     */
+    derivedFromType: 1 | 2;
+    /**
+     * Id of DataExtension - present if derivedFromType=2
+     */
+    derivedFromObjectId: string;
+    /**
+     * -
+     */
+    derivedFromObjectTypeName: "DataExtension" | "SubscriberAttributes";
+    /**
+     * name of DataExtension
+     */
+    derivedFromObjectName?: string;
+    /**
+     * ?
+     */
+    isSendable: boolean;
+    /**
+     * copied from SOAP API, defines the filter in readable form
+     */
+    c__filterDefinition?: {
+        ConditionSet: FilterConditionSet;
+    };
+    /**
+     * relationship to list source (if derivedFromType=1)
+     */
+    r__source_list_PathName?: string;
+    /**
+     * relationship to dataExtension source (if derivedFromType=2)
+     */
+    r__source_dataExtension_key?: string;
+};
+export type FilterConditionSet = {
+    /**
+     * -
+     */
+    Condition: FilterCondition | FilterCondition[];
+    /**
+     * -
+     */
+    ConditionSet: FilterConditionSet;
+};
+export type FilterCondition = {
+    /**
+     * comparison operator (actually \@_Operator)
+     */
+    Operator: "IsEmpty" | "IsNotEmpty" | "Equals";
+    /**
+     * object id of field (actually \@_ID)
+     */
+    ID?: string;
+    /**
+     * filter value to compare against
+     */
+    Value?: string;
+    /**
+     * name of field
+     */
+    r__dataExtensionField_name?: string;
+};
+export type DataFilterMap = {
+    [x: string]: DataFilterItem;
+};
 export type AuthObject = {
     /**
      * client_id client_id for sfmc-sdk auth

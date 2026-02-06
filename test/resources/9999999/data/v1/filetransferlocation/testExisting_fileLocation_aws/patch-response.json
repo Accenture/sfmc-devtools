@@ -1,0 +1,18 @@
+{
+    "fileTransferLocation": {
+        "customerKey": "testExisting_fileLocation_aws",
+        "name": "testExisting_fileLocation_aws_name",
+        "description": "updated via deploy",
+        "locationType": "AmazonSimpleStorage",
+        "awsFileTransferLocation": {
+            "regionName": "eucentral1",
+            "transferAccelerationEnabled": false,
+            "accessKeyId": "key-id",
+            "relativePath": "my/path",
+            "bucketName": "bucket-name",
+            "authType": "AccessKey"
+        }
+    },
+    "requestId": "ae8149ee-819e-40b7-b08f-cb59fdf88ddb",
+    "resultMessages": []
+}

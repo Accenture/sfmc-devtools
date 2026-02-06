@@ -10,6 +10,8 @@ declare namespace _default {
     export { dataExtensionTemplate };
     export { dataExtract };
     export { dataExtractType };
+    export { dataFilter };
+    export { dataFilterHidden };
     export { deliveryProfile };
     export { discovery };
     export { domainVerification };
@@ -51,6 +53,8 @@ import dataExtensionField from './metadataTypes/DataExtensionField.js';
 import dataExtensionTemplate from './metadataTypes/DataExtensionTemplate.js';
 import dataExtract from './metadataTypes/DataExtract.js';
 import dataExtractType from './metadataTypes/DataExtractType.js';
+import dataFilter from './metadataTypes/DataFilter.js';
+import dataFilterHidden from './metadataTypes/DataFilterHidden.js';
 import deliveryProfile from './metadataTypes/DeliveryProfile.js';
 import discovery from './metadataTypes/Discovery.js';
 import domainVerification from './metadataTypes/DomainVerification.js';

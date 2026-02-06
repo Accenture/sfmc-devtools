@@ -261,7 +261,7 @@ describe('type: script', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                4,
+                5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

@@ -1,0 +1,12 @@
+{
+    "name": "testExisting_fileLocation_exsftp_name",
+    "customerKey": "testExisting_fileLocation_exsftp",
+    "description": "updated via deploy",
+    "sFtpFileTransferLocation": {
+        "portNumber": 22,
+        "userName": "abc",
+        "url": "sftp://test.com",
+        "authType": "Password"
+    },
+    "c__locationType": "External SFTP Site"
+}

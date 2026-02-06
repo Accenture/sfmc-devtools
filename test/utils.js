@@ -7,6 +7,7 @@ import auth from '../lib/util/auth.js';
 import { Util } from '../lib/util/util.js';
 import cache from '../lib/util/cache.js';
 import ReplaceContentBlockReference from '../lib/util/replaceContentBlockReference.js';
+import MetadataTypes from '../lib/MetadataTypeInfo.js';
 
 import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -191,6 +192,13 @@ export function getExpectedFile(mid, type, action, ext) {
  */
 export function mockSetup(isDeploy) {
     cache.clearCache();
+    // clear local caches
+    for (const type of Object.keys(MetadataTypes)) {
+        if (MetadataTypes[type].cache) {
+            // we rarely use a local cache in types which also needs to be reset
+            MetadataTypes[type].cache = {};
+        }
+    }
     // no need to execute this again if we ran it a 2nd time for deploy - already done in standard setup
     if (!isDeploy) {
         // reset all options to default

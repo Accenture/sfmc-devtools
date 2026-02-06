@@ -5,6 +5,8 @@ declare namespace _default {
     export { automation };
     export { campaign };
     export { contentArea };
+    export { dataFilter };
+    export { dataFilterHidden };
     export { dataExtension };
     export { dataExtensionField };
     export { dataExtensionTemplate };
@@ -47,6 +49,8 @@ import attributeSet from './metadataTypes/definitions/AttributeSet.definition.js
 import automation from './metadataTypes/definitions/Automation.definition.js';
 import campaign from './metadataTypes/definitions/Campaign.definition.js';
 import contentArea from './metadataTypes/definitions/ContentArea.definition.js';
+import dataFilter from './metadataTypes/definitions/DataFilter.definition.js';
+import dataFilterHidden from './metadataTypes/definitions/DataFilterHidden.definition.js';
 import dataExtension from './metadataTypes/definitions/DataExtension.definition.js';
 import dataExtensionField from './metadataTypes/definitions/DataExtensionField.definition.js';
 import dataExtensionTemplate from './metadataTypes/definitions/DataExtensionTemplate.definition.js';

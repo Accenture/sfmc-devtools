@@ -1,0 +1,19 @@
+{
+    "description": "updated on deploy",
+    "key": "testExisting_dataFilter",
+    "name": "testExisting_dataFilter",
+    "isSendable": true,
+    "c__filterDefinition": {
+        "ConditionSet": {
+            "@_ConditionSetName": "Outer Grouping",
+            "@_Operator": "AND",
+            "Condition": {
+                "@_Operator": "Begins",
+                "Value": "testExisting_",
+                "r__dataExtensionField_name": "LastName"
+            }
+        }
+    },
+    "r__folder_Path": "Data Filters",
+    "r__source_dataExtension_key": "testExisting_dataExtension"
+}

@@ -1,0 +1,14 @@
+{
+    "customerKey": "testTemplated_fileLocation_azure",
+    "description": "blabla",
+    "name": "testTemplated_fileLocation_azure_name",
+    "azureFileTransferLocation": {
+        "accessKeyId": "client-id",
+        "authType": "AccessKey",
+        "bucketName": "container-name",
+        "relativePath": "my/path",
+        "storageAccountName": "accountname",
+        "tenantId": "my-id"
+    },
+    "c__locationType": "Azure Blob Storage"
+}
