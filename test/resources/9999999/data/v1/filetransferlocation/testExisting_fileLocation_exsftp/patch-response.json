@@ -1,0 +1,16 @@
+{
+    "fileTransferLocation": {
+        "customerKey": "testExisting_fileLocation_exsftp",
+        "name": "testExisting_fileLocation_exsftp_name",
+        "description": "updated via deploy",
+        "locationType": "ExternalSftp",
+        "sFtpFileTransferLocation": {
+            "portNumber": 22,
+            "userName": "abc",
+            "url": "sftp://test.com",
+            "authType": "Password"
+        }
+    },
+    "requestId": "05ef7257-72e6-4774-87c7-1f99aa892534",
+    "resultMessages": []
+}

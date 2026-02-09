@@ -77,7 +77,7 @@ describe('type: filter', () => {
         it('Should create & upsert a filter', async () => {
             // WHEN
 
-            await handler.deploy('testInstance/testBU', ['filter']);
+            const deployed = await handler.deploy('testInstance/testBU', ['filter']);
             // THEN
             assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
             // get results from cache
@@ -85,7 +85,14 @@ describe('type: filter', () => {
             assert.equal(
                 result.filter ? Object.keys(result.filter).length : 0,
                 2,
-                'unexptected number of filters in cache'
+                'unexpected number of filters in cache'
+            );
+            assert.equal(
+                deployed?.['testInstance/testBU']?.filter
+                    ? Object.keys(deployed['testInstance/testBU'].filter).length
+                    : 0,
+                2,
+                'unexpected number of filters deployed'
             );
             // confirm created item
             assert.deepEqual(
