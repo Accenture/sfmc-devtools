@@ -32,6 +32,7 @@ declare namespace DataFilterHidden {
         soapType: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
+        typeCdpByDefault: boolean;
         typeName: string;
         fields: {
             id: {

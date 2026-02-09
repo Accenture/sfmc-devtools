@@ -1315,6 +1315,12 @@ declare namespace Journey {
                 retrieving: boolean;
                 template: boolean;
             };
+            campaigns: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             metaData: {
                 skipValidation: boolean;
             };

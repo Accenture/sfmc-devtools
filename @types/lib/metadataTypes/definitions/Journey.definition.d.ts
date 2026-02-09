@@ -1145,6 +1145,12 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        campaigns: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         metaData: {
             skipValidation: boolean;
         };
