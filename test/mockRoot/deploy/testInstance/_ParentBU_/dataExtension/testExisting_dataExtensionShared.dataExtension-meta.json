@@ -34,19 +34,19 @@
             "FieldType": "EmailAddress"
         },
         {
-            "Name": "newField",
-            "DefaultValue": "",
-            "MaxLength": 254,
-            "IsRequired": false,
-            "IsPrimaryKey": false,
-            "FieldType": "Text"
-        },
-        {
             "Name": "ContactKey",
             "DefaultValue": "",
             "MaxLength": 50,
             "IsRequired": true,
             "IsPrimaryKey": true,
+            "FieldType": "Text"
+        },
+        {
+            "Name": "newField",
+            "DefaultValue": "",
+            "MaxLength": 254,
+            "IsRequired": false,
+            "IsPrimaryKey": false,
             "FieldType": "Text"
         }
     ],
