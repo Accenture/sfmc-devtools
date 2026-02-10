@@ -677,6 +677,24 @@ declare namespace _default {
         'activities[].schema': {
             skipValidation: boolean;
         };
+        'activities[].arguments.activityData.updateContactFields[].r__dataExtension_key': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.activityData.updateContactFields[].r__dataExtensionField_name': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.activityData.updateContactFields[].field': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         categoryId: {
             isCreateable: boolean;
             isUpdateable: boolean;
@@ -1122,6 +1140,12 @@ declare namespace _default {
             template: boolean;
         };
         workflowApiVersion: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        campaigns: {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;

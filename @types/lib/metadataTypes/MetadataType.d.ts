@@ -300,6 +300,12 @@ declare class MetadataType {
      */
     static hasChangedGeneric(cachedVersion: MetadataTypeItem, metadataItem: MetadataTypeItem, fieldName?: string, silent?: boolean): boolean;
     /**
+     * helper for {@link MetadataType.upsert} to enforce max key length
+     *
+     * @param {string} metadataKey key of metadata
+     */
+    static enforceMaxKeyLength(metadataKey: string): void;
+    /**
      * MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
      *
      * @param {MetadataTypeMap} metadataMap metadata mapped by their keyField

@@ -1,0 +1,14 @@
+{
+    "name": "testExisting_fileLocation_aws_name",
+    "customerKey": "testExisting_fileLocation_aws",
+    "description": "updated via deploy",
+    "awsFileTransferLocation": {
+        "regionName": "eucentral1",
+        "transferAccelerationEnabled": false,
+        "accessKeyId": "key-id",
+        "relativePath": "my/path",
+        "bucketName": "bucket-name",
+        "authType": "AccessKey"
+    },
+    "c__locationType": "Amazon Simple Storage Service"
+}

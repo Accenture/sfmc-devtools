@@ -1,0 +1,165 @@
+export default DataFilterHidden;
+/**
+ * DataFilterHidden (FilterDefinitionHidden) MetadataType
+ *
+ * @augments DataFilter
+ */
+declare class DataFilterHidden extends DataFilter {
+}
+declare namespace DataFilterHidden {
+    let definition: {
+        bodyIteratorField: string;
+        dependencies: string[];
+        dependencyGraph: {
+            dataExtension: string[];
+        };
+        filter: {};
+        hasExtended: boolean;
+        idField: string;
+        keyIsFixed: boolean;
+        keyField: string;
+        nameField: string;
+        folderType: string;
+        folderIdField: string;
+        createdDateField: string;
+        createdNameField: string;
+        lastmodDateField: string;
+        lastmodNameField: string;
+        restPagination: boolean;
+        restPageSize: number;
+        maxKeyLength: number;
+        type: string;
+        soapType: string;
+        typeDescription: string;
+        typeRetrieveByDefault: boolean;
+        typeCdpByDefault: boolean;
+        typeName: string;
+        fields: {
+            id: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            key: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            createdDate: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            createdBy: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            owner: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            createdByName: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            lastUpdated: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            lastUpdatedBy: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            lastUpdatedByName: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            name: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            categoryId: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            description: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            filterDefinitionXml: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            derivedFromType: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            derivedFromObjectId: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            derivedFromObjectTypeName: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            derivedFromObjectName: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            isSendable: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            r__source_dataExtension_key: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            c__filterDefinition: {
+                skipValidation: boolean;
+            };
+            r__folder_Path: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+        };
+    };
+}
+import DataFilter from './DataFilter.js';
+//# sourceMappingURL=DataFilterHidden.d.ts.map

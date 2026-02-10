@@ -1,0 +1,18 @@
+{
+    "fileTransferLocation": {
+        "customerKey": "testExisting_fileLocation_azure",
+        "name": "testExisting_fileLocation_azure_name",
+        "description": "blabla",
+        "locationType": "AzureBlobStorage",
+        "azureFileTransferLocation": {
+            "storageAccountName": "accountname",
+            "tenantId": "my-id",
+            "accessKeyId": "client-id",
+            "relativePath": "my/path",
+            "bucketName": "container-name",
+            "authType": "AccessKey"
+        }
+    },
+    "requestId": "d49c372e-9939-4b81-91d2-69a37a8bb036",
+    "resultMessages": []
+}

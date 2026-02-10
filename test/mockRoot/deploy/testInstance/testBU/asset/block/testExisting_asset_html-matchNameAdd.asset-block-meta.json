@@ -1,13 +1,13 @@
 {
-    "customerKey": "testExisting_asset_htmlblock-matchName",
+    "customerKey": "testExisting_asset_html-matchNameAdd",
     "assetType": {
         "name": "htmlblock",
         "displayName": "HTML Block"
     },
     "fileProperties": {
-        "fileName": "dont strip non ssjs content"
+        "fileName": "testExisting_asset_html-matchNameAdd"
     },
-    "name": "dont strip non ssjs content",
+    "name": "testExisting_asset_html-matchNameAdd",
     "owner": {
         "email": "joern.berkefeld@accenture.com",
         "name": "Jörn Berkefeld (ASGR)"
