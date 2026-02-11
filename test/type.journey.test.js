@@ -65,6 +65,11 @@ describe('type: journey', () => {
                 1,
                 'unexpected number of journeys'
             );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_temail', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get-transactionalEmail'),
+                'returned JSON was not equal expected'
+            );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 24,
