@@ -276,6 +276,8 @@ export const handleRESTRequest = async (config) => {
             filterName = 'mostRecentVersionOnly';
         } else if (urlObj.searchParams.get('versionNumber')) {
             filterName = 'versionNumber';
+        } else if (urlObj.searchParams.get('status')) {
+            filterName = 'status';
         } else if (urlObj.searchParams.get('id')) {
             filterName = 'id';
         }
@@ -301,6 +303,9 @@ export const handleRESTRequest = async (config) => {
                   : '') +
               (urlObj.searchParams.get('mostRecentVersionOnly')
                   ? 'mostRecentVersionOnly=' + urlObj.searchParams.get('mostRecentVersionOnly')
+                  : '') +
+              (urlObj.searchParams.get('status')
+                  ? 'status=' + urlObj.searchParams.get('status')
                   : '')
             : null;
 
@@ -338,7 +343,8 @@ export const handleRESTRequest = async (config) => {
                     response.items &&
                     filterName !== 'mostRecentVersionOnly' &&
                     filterName !== 'versionNumber' &&
-                    filterName !== 'id'
+                    filterName !== 'id' &&
+                    filterName !== 'status'
                 ) {
                     response.items = response.items.filter((def) => def.name == filterName);
                 }
@@ -407,7 +413,8 @@ export const handleRESTRequest = async (config) => {
                 filterName &&
                 filterName !== 'mostRecentVersionOnly' &&
                 filterName !== 'versionNumber' &&
-                filterName !== 'id'
+                filterName !== 'id' &&
+                filterName !== 'status'
             ) {
                 const response = JSON.parse(
                     await fs.readFile(testPath + '.json', {
