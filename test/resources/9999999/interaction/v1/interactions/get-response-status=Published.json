@@ -1,0 +1,40 @@
+{
+    "count": 1,
+    "page": 1,
+    "pageSize": 500,
+    "links": {},
+    "items": [
+        {
+            "id": "dsfdsafdsa-922c-4568-85a5-e5cc77efc3be",
+            "key": "testExisting_temail",
+            "name": "testExisting_temail",
+            "lastPublishedDate": "0001-01-01T00:00:00",
+            "description": "",
+            "version": 2,
+            "workflowApiVersion": 1,
+            "createdDate": "2022-03-24T02:20:32.74",
+            "modifiedDate": "2022-03-24T02:20:40.45",
+            "goals": [],
+            "exits": [],
+            "notifiers": [],
+            "entryMode": "MultipleEntries",
+            "definitionType": "Transactional",
+            "channel": "email",
+            "defaults": {
+                "properties": {
+                    "analyticsTracking": {
+                        "enabled": false,
+                        "analyticsType": "google",
+                        "urlDomainsToTrack": []
+                    }
+                }
+            },
+            "metaData": {},
+            "executionMode": "Production",
+            "categoryId": 6298,
+            "status": "Published",
+            "scheduledStatus": "Draft",
+            "definitionId": "dsfdsafdsa-922c-4568-85a5-e5cc77efc3be"
+        }
+    ]
+}
