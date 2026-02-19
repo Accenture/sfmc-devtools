@@ -400,6 +400,18 @@ declare class Mcdev {
         };
     }>;
     /**
+     * Updates notification email address field
+     *
+     * @param {string} businessUnit name of BU
+     * @param {TypeKeyCombo} selectedTypes limit retrieval to given metadata type
+     * @returns {Promise.<Object.<string, Object.<string, string[]>>>} key: business unit name, key2: type, value: list of affected item keys
+     */
+    static updateNotifications(businessUnit: string, selectedTypes: TypeKeyCombo): Promise<{
+        [x: string]: {
+            [x: string]: string[];
+        };
+    }>;
+    /**
      * stop an item
      *
      * @param {string} businessUnit name of BU
@@ -437,13 +449,13 @@ declare class Mcdev {
     /**
      * run a method across BUs
      *
-     * @param {'schedule'|'execute'|'pause'|'stop'|'publish'|'validate'|'fixKeys'|'replaceCbReference'|'refresh'|'audit'} methodName what to run
+     * @param {'schedule'|'execute'|'pause'|'stop'|'publish'|'validate'|'fixKeys'|'replaceCbReference'|'refresh'|'audit'|'updateNotifications'} methodName what to run
      * @param {string} businessUnit name of BU
      * @param {string[] | TypeKeyCombo} [selectedTypes] limit to given metadata types
      * @param {string[]} [keys] customerkey of the metadata
      * @returns {Promise.<Object.<string, Object.<string, string[]>>>} key: business unit name, key2: type, value: list of affected item keys
      */
-    static "__#private@#runMethod"(methodName: "schedule" | "execute" | "pause" | "stop" | "publish" | "validate" | "fixKeys" | "replaceCbReference" | "refresh" | "audit", businessUnit: string, selectedTypes?: string[] | TypeKeyCombo, keys?: string[]): Promise<{
+    static "__#private@#runMethod"(methodName: "schedule" | "execute" | "pause" | "stop" | "publish" | "validate" | "fixKeys" | "replaceCbReference" | "refresh" | "audit" | "updateNotifications", businessUnit: string, selectedTypes?: string[] | TypeKeyCombo, keys?: string[]): Promise<{
         [x: string]: {
             [x: string]: string[];
         };
@@ -451,14 +463,14 @@ declare class Mcdev {
     /**
      * helper for Mcdev.#runMethod
      *
-     * @param {'schedule'|'execute'|'pause'|'stop'|'publish'|'validate'|'fixKeys'|'replaceCbReference'|'refresh'|'audit'} methodName what to run
+     * @param {'schedule'|'execute'|'pause'|'stop'|'publish'|'validate'|'fixKeys'|'replaceCbReference'|'refresh'|'audit'|'updateNotifications'} methodName what to run
      * @param {string} cred name of Credential
      * @param {string} bu name of BU
      * @param {string} [type] limit execution to given metadata type
      * @param {string[]} [keyArr] customerkey of the metadata
      * @returns {Promise.<string[]>} list of keys that were affected
      */
-    static "__#private@#runOnBU"(methodName: "schedule" | "execute" | "pause" | "stop" | "publish" | "validate" | "fixKeys" | "replaceCbReference" | "refresh" | "audit", cred: string, bu: string, type?: string, keyArr?: string[]): Promise<string[]>;
+    static "__#private@#runOnBU"(methodName: "schedule" | "execute" | "pause" | "stop" | "publish" | "validate" | "fixKeys" | "replaceCbReference" | "refresh" | "audit" | "updateNotifications", cred: string, bu: string, type?: string, keyArr?: string[]): Promise<string[]>;
     /**
      * helper for Mcdev.#runOnBU
      *

@@ -122,6 +122,13 @@ export namespace Util {
         subType: string;
     };
     /**
+     * helper that validates email address
+     *
+     * @param {string} email email to validate
+     * @returns {boolean} first elem is type, second elem is subType
+     */
+    function isEmailValid(email: string): boolean;
+    /**
      * helper for getDefaultProperties()
      *
      * @param {'typeRetrieveByDefault'|'typeCdpByDefault'} field relevant field in type definition

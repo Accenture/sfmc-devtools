@@ -44,7 +44,7 @@ declare class List extends MetadataType {
      */
     static retrieveForCache(): Promise<MetadataTypeMapObj>;
     /**
-     * helper for @link retrieveForCache and @link retrieve
+     * helper for {@link retrieveForCache} and {@link retrieve}
      *
      * @private
      * @param {MetadataTypeMapObj} results metadata from retrieve for current BU

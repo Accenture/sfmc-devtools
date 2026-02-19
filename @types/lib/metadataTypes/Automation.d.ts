@@ -17,6 +17,20 @@ export type AutomationMap = import("../../types/mcdev.d.js").AutomationMap;
 export type AutomationMapObj = import("../../types/mcdev.d.js").AutomationMapObj;
 export type AutomationSchedule = import("../../types/mcdev.d.js").AutomationSchedule;
 export type AutomationScheduleSoap = import("../../types/mcdev.d.js").AutomationScheduleSoap;
+export type notification = {
+    /**
+     * email addresses
+     */
+    email: string[];
+    /**
+     * message
+     */
+    message: string;
+    /**
+     * what kind of notification
+     */
+    type: "Complete" | "Error";
+};
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -40,12 +54,21 @@ export type AutomationScheduleSoap = import("../../types/mcdev.d.js").Automation
  * @typedef {import('../../types/mcdev.d.js').AutomationScheduleSoap} AutomationScheduleSoap
  */
 /**
+ * @typedef {object} notification
+ * @property {string[]} email email addresses
+ * @property {string} message message
+ * @property {'Complete'|'Error'} type what kind of notification
+ */
+/**
  * Automation MetadataType
  *
  * @augments MetadataType
  */
 declare class Automation extends MetadataType {
-    static notificationUpdates: {};
+    /** @type {Object.<string,notification[]>} */
+    static notificationUpdates: {
+        [x: string]: notification[];
+    };
     static createdKeyMap: any;
     static _skipNotificationRetrieve: boolean;
     /** @type {AutomationMap} */
