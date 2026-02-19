@@ -4,9 +4,6 @@
         "name": "jscoderesource"
     },
     "availableViews": [],
-    "category": {
-        "name": "mcdev"
-    },
     "contentType": "application/javascript",
     "createdBy": {
         "email": "joern.berkefeld@accenture.com",
@@ -43,5 +40,6 @@
     "status": {
         "name": "Draft"
     },
-    "version": 1
+    "version": 1,
+    "r__folder_Path": "Content Builder/Test Folder"
 }

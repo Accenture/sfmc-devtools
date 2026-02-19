@@ -91,6 +91,47 @@ describe('type: dataExtension', () => {
             );
             return;
         });
+
+        it('Should not fail if shared dataExtension cannot be retrieved', async () => {
+            // WHEN
+            await handler.retrieve('testInstance/_ParentBU_', ['dataExtension', 'query']);
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.dataExtension ? Object.keys(result.dataExtension).length : 0,
+                1,
+                'only one dataExtension expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    'testExisting_dataExtensionShared',
+                    'dataExtension',
+                    '_ParentBU_'
+                ),
+                await testUtils.getExpectedJson('1111111', 'dataExtension', 'retrieve'),
+
+                'returned metadata was not equal expected'
+            );
+            // check if MD file was created and equals expectations
+            expect(
+                await testUtils.getActualDoc(
+                    'testExisting_dataExtensionShared',
+                    'dataExtension',
+                    '_ParentBU_'
+                )
+            ).to.equal(
+                await testUtils.getExpectedFile('1111111', 'dataExtension', 'retrieve', 'md')
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                7,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 
     describe('Deploy ================', () => {
@@ -341,20 +382,6 @@ describe('type: dataExtension', () => {
                 'testInstance/testBU',
                 'dataExtension',
                 'testExisting_dataExtension'
-            );
-            // THEN
-            assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
-
-            assert.equal(isDeleted, true, 'should have deleted the item');
-            return;
-        });
-
-        it('Should delete the dataExtensionField', async () => {
-            // WHEN
-            const isDeleted = await handler.deleteByKey(
-                'testInstance/testBU',
-                'dataExtensionField',
-                'testExisting_dataExtension.LastName'
             );
             // THEN
             assert.equal(process.exitCode, 0, 'delete should not have thrown an error');

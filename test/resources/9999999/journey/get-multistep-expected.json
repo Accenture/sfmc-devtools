@@ -9,7 +9,6 @@
     "modifiedDate": "2024-05-04T17:25:57.9",
     "activities": [
         {
-            "id": "7ba1e59a-6be4-46c7-b76f-4c06feb1268a",
             "key": "EMAILV2-1",
             "name": "my custom activity name",
             "description": "",
@@ -182,7 +181,6 @@
             }
         },
         {
-            "id": "342dd0aa-a6be-401e-8614-3538800bfd7c",
             "key": "MULTICRITERIADECISIONV2-1",
             "name": "",
             "description": "",
@@ -234,7 +232,6 @@
             }
         },
         {
-            "id": "e2a486cf-c85f-4543-88a2-d579cac1e0de",
             "key": "WAITBYDURATION-1",
             "name": "1 day",
             "description": "",
@@ -304,7 +301,6 @@
             }
         },
         {
-            "id": "70572b1a-e274-4f09-a3fa-6fc0732ec52b",
             "key": "WAITBYDURATION-2",
             "name": "",
             "description": "",

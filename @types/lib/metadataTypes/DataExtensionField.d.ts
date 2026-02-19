@@ -52,6 +52,13 @@ declare class DataExtensionField extends MetadataType {
      */
     static retrieveForCache(): Promise<MetadataTypeMapObj>;
     /**
+     * helps retrieving fields for a single DE. Use when needing field data for one DE only.
+     *
+     * @param {string} customerKey external key of single DE
+     * @returns {Promise.<object>} Promise of items
+     */
+    static retrieveFieldsForSingleDe(customerKey: string): Promise<object>;
+    /**
      * Retrieves all records for caching
      *
      * @param {SoapRequestParams} [requestParams] required for the specific request (filter for example)
@@ -101,13 +108,6 @@ declare class DataExtensionField extends MetadataType {
      * @returns {Promise.<boolean>} deletion success flag
      */
     static deleteByKeySOAP(customerKey: string, fieldId?: string): Promise<boolean>;
-    /**
-     * clean up after deleting a metadata item
-     *
-     * @param {string} customerKey Identifier of metadata item
-     * @returns {Promise.<void>} -
-     */
-    static postDeleteTasks(customerKey: string): Promise<void>;
 }
 declare namespace DataExtensionField {
     let definition: {
@@ -126,6 +126,7 @@ declare namespace DataExtensionField {
         typeRetrieveByDefault: boolean;
         typeCdpByDefault: boolean;
         typeName: string;
+        deleteSynchronously: boolean;
         fields: {
             'Client.ID': {
                 isCreateable: boolean;

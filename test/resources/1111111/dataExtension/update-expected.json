@@ -49,7 +49,7 @@
         }
     ],
     "c__dataRetentionPeriodUnitOfMeasure": "Months",
-    "c__retentionPolicy": "individialRecords",
+    "c__retentionPolicy": "allRecords",
     "r__folder_ContentType": "shared_dataextension",
     "r__folder_Path": "Shared Items/Shared Data Extensions"
 }

@@ -5,6 +5,8 @@
     "mode": "Production",
     "eventDefinitionKey": "testExisting_event",
     "entrySourceGroupConfigUrl": "jb:///data/entry/api-event/entrysourcegroupconfig.json",
+    "automationId": "00000000-0000-0000-0000-000000000000",
+    "filterDefinitionId": "00000000-0000-0000-0000-000000000000",
     "iconUrl": "/images/icon_journeyBuilder-event-api-blue.svg",
     "schema": {
         "fields": [
@@ -195,6 +197,7 @@
     },
     "isVisibleInPicker": false,
     "arguments": {
+        "automationId": "00000000-0000-0000-0000-000000000000",
         "eventDefinitionKey": "testExisting_event",
         "dataExtensionId": "f2cc2b21-d73a-ef11-a5c8-5cba2c702db8"
     },

@@ -99,7 +99,7 @@ declare class Automation extends MetadataType {
      * @param {boolean} [skipNotification] skip notification retrieval
      * @returns {Promise.<object>} Promise of automation legacy api response
      */
-    static "__#4@#getAutomationLegacyREST"(metadataMap: MetadataTypeMap, skipNotification?: boolean): Promise<object>;
+    static "__#private@#getAutomationLegacyREST"(metadataMap: MetadataTypeMap, skipNotification?: boolean): Promise<object>;
     /**
      * Retrieves Metadata of Automation
      *
@@ -115,6 +115,7 @@ declare class Automation extends MetadataType {
     /**
      * Retrieve a specific Automation Definition by Name
      *
+     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
      * @param {string} templateDir Directory where retrieved metadata directory will be saved
      * @param {string} name name of the metadata file
      * @param {TemplateMap} templateVariables variables to be replaced in the metadata
@@ -127,7 +128,7 @@ declare class Automation extends MetadataType {
      * @param {AutomationItem} metadata a single automation
      * @returns {boolean} true if the automation schedule is valid
      */
-    static "__#4@#isValidSchedule"(metadata: AutomationItem): boolean;
+    static "__#private@#isValidSchedule"(metadata: AutomationItem): boolean;
     /**
      * manages post retrieve steps
      *
@@ -156,7 +157,7 @@ declare class Automation extends MetadataType {
      * @param {string[]} keyArr customerkey of the metadata
      * @returns {Promise.<string[]>} Returns list of keys that were executed
      */
-    static "__#4@#schedulePause"(mode: "schedule" | "pause", keyArr: string[]): Promise<string[]>;
+    static "__#private@#schedulePause"(mode: "schedule" | "pause", keyArr: string[]): Promise<string[]>;
     /**
      * helper for {@link Automation.schedule}
      *
@@ -167,7 +168,7 @@ declare class Automation extends MetadataType {
      * @param {string} [description] schedule description
      * @returns {Promise.<{key:string, response:object}>} metadata key and API response
      */
-    static "__#4@#schedulePauseItem"(mode: "schedule" | "pause", key: string, automationLegacyId: string, scheduleLegacyId?: string, description?: string): Promise<{
+    static "__#private@#schedulePauseItem"(mode: "schedule" | "pause", key: string, automationLegacyId: string, scheduleLegacyId?: string, description?: string): Promise<{
         key: string;
         response: object;
     }>;
@@ -198,7 +199,7 @@ declare class Automation extends MetadataType {
      *
      * @param {AutomationItem} metadata metadata mapped by their keyField
      */
-    static "__#4@#preDeploySchedule"(metadata: AutomationItem): void;
+    static "__#private@#preDeploySchedule"(metadata: AutomationItem): void;
     /**
      * Gets executed before deploying metadata
      *
@@ -235,7 +236,7 @@ declare class Automation extends MetadataType {
      * @param {string} key current customer key
      * @returns {Promise.<void>} -
      */
-    static "__#4@#updateNotificationInfoREST"(metadataMap: AutomationMap, key: string): Promise<void>;
+    static "__#private@#updateNotificationInfoREST"(metadataMap: AutomationMap, key: string): Promise<void>;
     /**
      * Builds a schedule object to be used for scheduling an automation
      * based on combination of ical string and start/end dates.
@@ -290,7 +291,7 @@ declare class Automation extends MetadataType {
      * @param {string} key customer key
      * @returns {Promise.<string>} objectId or enpty string
      */
-    static "__#4@#getObjectIdForSingleRetrieve"(key: string): Promise<string>;
+    static "__#private@#getObjectIdForSingleRetrieve"(key: string): Promise<string>;
     /**
      * clean up after deleting a metadata item
      *

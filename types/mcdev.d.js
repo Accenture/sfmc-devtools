@@ -386,6 +386,96 @@
  */
 
 /**
+ * @typedef {object} FilterItem
+ * @property {number} categoryId folder id
+ * @property {string} [createdDate] -
+ * @property {string} customerKey key
+ * @property {string} destinationObjectId DE/List ID
+ * @property {1|2|3|4} destinationTypeId 1:SubscriberList, 2:DataExtension, 3:GroupWizard, 4:BehavioralData
+ * @property {string} filterActivityId ?
+ * @property {string} filterDefinitionId ObjectID of filterDefinition
+ * @property {string} modifiedDate -
+ * @property {string} name name
+ * @property {string} [description] -
+ * @property {string} sourceObjectId DE/List ID
+ * @property {null} resultGroupFolderId required for upsert; unknown purpose; set to null
+ * @property {null} resultGroupName required for upsert; unknown purpose; set to null
+ * @property {null} sourceId required for upsert; unknown purpose; set to null
+ * @property {1|2|3|4} sourceTypeId 1:SubscriberList, 2:DataExtension, 3:GroupWizard, 4:BehavioralData
+ * @property {1|2|3|4} [filterDefinitionSourceTypeId] seems to be a duplicate of sourceTypeId?
+ * @property {string} [resultDEDescription] description of destination DE
+ * @property {string} [resultDEName] name of destination DE
+ * @property {string} [resultDEKey] key of destination DE
+ * @property {number} statusId ?
+ * @property {string} [r__dataFilter_key] relationship to filterDefinition
+ * @property {string} [r__source_dataExtension_key] relationship to dataExtension source
+ * @property {string} [r__destination_dataExtension_key] relationship to dataExtension destination
+ * @property {string} [r__folder_Path] relationship to folder
+ * @typedef {Object.<string, FilterItem>} FilterMap
+ */
+
+/**
+ * /automation/v1/filterdefinitions/<id> (not used)
+ *
+ * @typedef {object} AutomationFilterDefinitionItem
+ * @property {string} id object id
+ * @property {string} key external key
+ * @property {string} createdDate -
+ * @property {number} createdBy user id
+ * @property {string} createdName -
+ * @property {string} [description] (omitted by API if empty)
+ * @property {string} modifiedDate -
+ * @property {number} modifiedBy user id
+ * @property {string} modifiedName -
+ * @property {string} name name
+ * @property {string} categoryId folder id
+ * @property {string} filterDefinitionXml from REST API defines the filter in XML form
+ * @property {1|2} derivedFromType 1:list/profile attributes/measures, 2: dataExtension
+ * @property {boolean} isSendable ?
+ */
+/**
+ * /email/v1/filters/filterdefinition/<id>
+ *
+ * @typedef {object} DataFilterItem
+ * @property {string} id object id
+ * @property {string} key external key
+ * @property {string} createdDate date
+ * @property {number} createdBy user id
+ * @property {string} createdName name
+ * @property {string} [description] (omitted by API if empty)
+ * @property {string} lastUpdated date
+ * @property {number} lastUpdatedBy user id
+ * @property {string} lastUpdatedName name
+ * @property {string} name name
+ * @property {string} categoryId folder id
+ * @property {string} filterDefinitionXml from REST API defines the filter in XML form
+ * @property {1|2} derivedFromType 1:list/profile attributes/measures, 2: dataExtension
+ * @property {string} derivedFromObjectId Id of DataExtension - present if derivedFromType=2
+ * @property {'DataExtension'|'SubscriberAttributes'} derivedFromObjectTypeName -
+ * @property {string} [derivedFromObjectName] name of DataExtension
+ * @property {boolean} isSendable ?
+ * @property {object} [c__filterDefinition] copied from SOAP API, defines the filter in readable form
+ * @property {FilterConditionSet} c__filterDefinition.ConditionSet -
+ * @property {string} [r__source_list_PathName] relationship to list source (if derivedFromType=1)
+ * @property {string} [r__source_dataExtension_key] relationship to dataExtension source (if derivedFromType=2)
+ */
+/**
+ * @typedef {object} FilterConditionSet
+ * @property {FilterCondition | FilterCondition[]} Condition -
+ * @property {FilterConditionSet} ConditionSet -
+ */
+/**
+ * @typedef {object} FilterCondition
+ * @property {'IsEmpty'|'IsNotEmpty'|'Equals'} Operator comparison operator (actually \@_Operator)
+ * @property {string} [ID] object id of field (actually \@_ID)
+ * @property {string} [Value] filter value to compare against
+ * @property {string} [r__dataExtensionField_name] name of field
+ */
+/**
+ * @typedef {Object.<string, DataFilterItem>} DataFilterMap
+ */
+
+/**
  * @typedef {object} AuthObject
  * @property {string} client_id client_id client_id for sfmc-sdk auth
  * @property {string} client_secret client_secret for sfmc-sdk auth
@@ -671,6 +761,17 @@ complex
  * @property {string[]} [addresses] for bulk-creation only: list of email addresses to verify
  * @property {string} [deTable] for bulk-creation only: instead of an array in addresses, specify the name of a DE
  * @property {string} [deColumn] for bulk-creation only: instead of an array in addresses, specify the name of a DE column/field here
+ */
+
+/**
+ * @typedef {object} BuildFilter
+ * @property {BuildFilterKeys} [include] include key filters
+ * @property {BuildFilterKeys} [exclude] exclude key filters
+ */
+
+/**
+ * @typedef {object} BuildFilterKeys
+ * @property {Object.<"*"|SupportedMetadataTypes, string[]>} [key] object with keys representing metadata types ("*" for all types, or specific type names) and values being arrays of string patterns to match against
  */
 
 export default {};

@@ -9,7 +9,6 @@
     "eventDefinitionKey": "testNew_event_withExistingDE",
     "iconUrl": "/images/icon_journeyBuilder-event-api-blue.svg",
     "sourceApplicationExtensionId": "7db1f972-f8b7-49b6-91b5-fa218e13953d",
-    "filterDefinitionId": "00000000-0000-0000-0000-000000000000",
     "arguments": {
         "serializedObjectType": 11
     },
@@ -18,6 +17,5 @@
     "isVisibleInPicker": true,
     "category": "Event",
     "publishedInteractionCount": 0,
-    "automationId": "00000000-0000-0000-0000-000000000000",
     "r__dataExtension_key": "testExisting_event - 2024-07-05T080154625"
 }

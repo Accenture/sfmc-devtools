@@ -13,9 +13,10 @@ declare namespace _default {
      * @param {string} searchField field name (key in object) which contains the unique identifer
      * @param {string} returnField field which should be returned
      * @param {number} [overrideMID] ignore currentMID and use alternative (for example parent MID)
+     * @param {boolean} caseInsensitive optional; if true, search is case insensitive
      * @returns {string} value of specified field. Error is thrown if not found
      */
-    function searchForField(metadataType: string, searchValue: string | number | boolean, searchField: string, returnField: string, overrideMID?: number): string;
+    function searchForField(metadataType: string, searchValue: string | number | boolean, searchField: string, returnField: string, overrideMID?: number, caseInsensitive?: boolean): string;
     /**
      * helper for setFolderId
      *
@@ -25,6 +26,15 @@ declare namespace _default {
      * @returns {number} folder ID
      */
     function getFolderId(r__folder_Path: string, overrideMID?: number, allowOtherBu?: boolean): number;
+    /**
+     * helper for setFolderId
+     *
+     * @param {string} r__folder_Path folder path value
+     * @param {number} [overrideMID] ignore currentMID and use alternative (for example parent MID)
+     * @param {boolean} allowOtherBu getting folder from other BU; FALSE for folder parent search
+     * @returns {object} folder item
+     */
+    function getFolderByPath(r__folder_Path: string, overrideMID?: number, allowOtherBu?: boolean): object;
     /**
      * standardized method for getting data from cache - adapted for special case of lists
      * ! keeping this in util/cache.js rather than in metadataTypes/List.js to avoid potential circular dependencies

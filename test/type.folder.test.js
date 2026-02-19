@@ -37,7 +37,7 @@ describe('type: folder', () => {
             const cached = cache.getCache();
             assert.equal(
                 cached.folder ? Object.keys(cached.folder).length : 0,
-                38,
+                40,
                 'unexpected number of folders in cache'
             );
 
@@ -48,6 +48,7 @@ describe('type: folder', () => {
                     : null,
                 [
                     'Data Extensions/my',
+                    'Data Extensions/testExisting_folder',
                     'Data Extensions/my/sub',
                     'Data Extensions/my/sub/path',
                     'Data Extensions/my/sub/path/subpath',
@@ -73,6 +74,7 @@ describe('type: folder', () => {
             );
 
             const createSoapCallouts = testUtils.getSoapCallouts('Create', 'DataFolder');
+            const updateSoapCallouts = testUtils.getSoapCallouts('Update', 'DataFolder');
             // confirm created item
             assert.deepEqual(
                 createSoapCallouts,
@@ -84,11 +86,19 @@ describe('type: folder', () => {
                 ],
                 'create-payload XL was not equal expected'
             );
+            // confirm updated item - this should have updated despite the folder name being different (changed case). The server compares folders case insensitively
+            assert.deepEqual(
+                updateSoapCallouts,
+                [
+                    '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><Body><UpdateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI"><Objects xsi:type="DataFolder"><Name>testExisting_folder</Name><IsActive>true</IsActive><IsEditable>true</IsEditable><AllowChildren>true</AllowChildren><ParentFolder><ID>2</ID></ParentFolder><ID>66666</ID></Objects></UpdateRequest></Body><Header><fueloauth xmlns="http://exacttarget.com">9999999</fueloauth></Header></Envelope>',
+                ],
+                'update-payload XL was not equal expected'
+            );
 
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                11,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

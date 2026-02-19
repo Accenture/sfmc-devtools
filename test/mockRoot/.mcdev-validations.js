@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use strict';
 /**
  * @typedef {Object.<string, any>} MetadataTypeItem generic metadata item
@@ -39,13 +40,11 @@ const buPrefixBlacklistMap = {
  * @returns {validationRuleList} MetadataItem
  */
 export function validation(definition, item, targetDir, codeExtractItemArr, Util) {
-    Util.logger.verbose('just here to not get a warning about the unused property Util');
-
     const bu =
         (targetDir.includes('/') ? targetDir.split('/').pop() : targetDir.split('\\').pop()) ||
         'not-found';
     const prefixBlacklist = buPrefixBlacklistMap[bu] || [];
-    // eslint-disable-next-line no-unused-vars -- codeExtractItemArr is not used in this example
+
     const temp = codeExtractItemArr;
 
     return {

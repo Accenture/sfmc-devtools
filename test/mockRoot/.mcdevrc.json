@@ -131,11 +131,13 @@
             "automation",
             "dataExtension",
             "dataExtract",
+            "dataFilter",
             "domainVerification",
             "emailSend",
             "event",
             "fileLocation",
             "fileTransfer",
+            "filter",
             "importFile",
             "journey",
             "list",
@@ -157,6 +159,7 @@
             "automation",
             "dataExtension",
             "dataExtract",
+            "dataFilter",
             "emailSend",
             "event",
             "fileTransfer",
@@ -175,5 +178,5 @@
             "verification"
         ]
     },
-    "version": "7.10.1"
+    "version": "8.4.0"
 }

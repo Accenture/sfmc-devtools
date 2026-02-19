@@ -67,6 +67,7 @@ declare class Asset extends MetadataType {
     /**
      * Retrieves asset metadata for templating
      *
+     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
      * @param {string} templateDir Directory where retrieved metadata directory will be saved
      * @param {string} name name of the metadata file
      * @param {TemplateMap} templateVariables variables to be replaced in the metadata
@@ -210,7 +211,7 @@ declare class Asset extends MetadataType {
      * @param {string} extendedSubType webpage, htmlblock, etc
      * @returns {string} subType: block, message, other, etc
      */
-    static "__#3@#getMainSubtype"(extendedSubType: string): string;
+    static "__#private@#getMainSubtype"(extendedSubType: string): string;
     /**
      * determines the subtype of the current asset
      *
@@ -386,7 +387,7 @@ declare class Asset extends MetadataType {
      * @param {string} buName owner business unit name
      * @returns {Promise.<string>} path to the asset's code
      */
-    static "__#3@#getPath"(subType: string, item: object, buName: string): Promise<string>;
+    static "__#private@#getPath"(subType: string, item: object, buName: string): Promise<string>;
     /**
      * helper for {@link Asset.resolveId} that loads the JSON file for the asset
      *
@@ -394,7 +395,7 @@ declare class Asset extends MetadataType {
      * @param {object} item api response for metadata
      * @returns {Promise.<object>} JS object of the asset we loaded from disk
      */
-    static "__#3@#getJson"(subType: string, item: object): Promise<object>;
+    static "__#private@#getJson"(subType: string, item: object): Promise<object>;
     /**
      *
      * @param {MetadataTypeItem} item single metadata item

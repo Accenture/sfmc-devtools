@@ -145,6 +145,7 @@ declare class MetadataType {
     /**
      * Gets metadata cache with limited fields and does not store value to disk
      *
+     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
      * @param {string} templateDir Directory where retrieved metadata directory will be saved
      * @param {string} name name of the metadata file
      * @param {TemplateMap} templateVariables variables to be replaced in the metadata
@@ -299,6 +300,12 @@ declare class MetadataType {
      */
     static hasChangedGeneric(cachedVersion: MetadataTypeItem, metadataItem: MetadataTypeItem, fieldName?: string, silent?: boolean): boolean;
     /**
+     * helper for {@link MetadataType.upsert} to enforce max key length
+     *
+     * @param {string} metadataKey key of metadata
+     */
+    static enforceMaxKeyLength(metadataKey: string): void;
+    /**
      * MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
      *
      * @param {MetadataTypeMap} metadataMap metadata mapped by their keyField
@@ -374,8 +381,9 @@ declare class MetadataType {
      * @param {'creating'|'updating'|'retrieving'|'executing'|'pausing'} msg what to print in the log
      * @param {MetadataTypeItem} [metadataEntry] single metadata entry
      * @param {boolean} [handleOutside] if the API reponse is irregular this allows you to handle it outside of this generic method
+     * @param {string} [nameAttribute] name attribute to use in the error message instead of keyField
      */
-    static _handleSOAPErrors(ex: SOAPError, msg: "creating" | "updating" | "retrieving" | "executing" | "pausing", metadataEntry?: MetadataTypeItem, handleOutside?: boolean): void;
+    static _handleSOAPErrors(ex: SOAPError, msg: "creating" | "updating" | "retrieving" | "executing" | "pausing", metadataEntry?: MetadataTypeItem, handleOutside?: boolean, nameAttribute?: string): void;
     /**
      * helper for {@link MetadataType._handleSOAPErrors}
      *

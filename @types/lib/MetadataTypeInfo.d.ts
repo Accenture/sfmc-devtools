@@ -10,6 +10,8 @@ declare namespace _default {
     export { dataExtensionTemplate };
     export { dataExtract };
     export { dataExtractType };
+    export { dataFilter };
+    export { dataFilterHidden };
     export { deliveryProfile };
     export { discovery };
     export { domainVerification };
@@ -35,6 +37,7 @@ declare namespace _default {
     export { transactionalPush };
     export { transactionalSMS };
     export { triggeredSend };
+    export { triggeredSendSummary };
     export { user };
     export { verification };
 }
@@ -50,6 +53,8 @@ import dataExtensionField from './metadataTypes/DataExtensionField.js';
 import dataExtensionTemplate from './metadataTypes/DataExtensionTemplate.js';
 import dataExtract from './metadataTypes/DataExtract.js';
 import dataExtractType from './metadataTypes/DataExtractType.js';
+import dataFilter from './metadataTypes/DataFilter.js';
+import dataFilterHidden from './metadataTypes/DataFilterHidden.js';
 import deliveryProfile from './metadataTypes/DeliveryProfile.js';
 import discovery from './metadataTypes/Discovery.js';
 import domainVerification from './metadataTypes/DomainVerification.js';
@@ -75,6 +80,7 @@ import transactionalEmail from './metadataTypes/TransactionalEmail.js';
 import transactionalPush from './metadataTypes/TransactionalPush.js';
 import transactionalSMS from './metadataTypes/TransactionalSMS.js';
 import triggeredSend from './metadataTypes/TriggeredSend.js';
+import triggeredSendSummary from './metadataTypes/TriggeredSendSummary.js';
 import user from './metadataTypes/User.js';
 import verification from './metadataTypes/Verification.js';
 //# sourceMappingURL=MetadataTypeInfo.d.ts.map

@@ -26,7 +26,7 @@ describe('type: journey', () => {
             const result = cache.getCache();
             assert.equal(
                 result.journey ? Object.keys(result.journey).length : 0,
-                4,
+                5,
                 'unexpected number of journeys'
             );
             assert.deepEqual(
@@ -46,7 +46,33 @@ describe('type: journey', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                27,
+                29,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should retrieve only published journeys', async () => {
+            handler.setOptions({ onlyPublished: true });
+            // WHEN
+            await handler.retrieve('testInstance/testBU', ['journey']);
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.journey ? Object.keys(result.journey).length : 0,
+                1,
+                'unexpected number of journeys'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_temail', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get-transactionalEmail'),
+                'returned JSON was not equal expected'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                24,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -106,6 +132,36 @@ describe('type: journey', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 19,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should retrieve a journey containing an UPDATECONTACTDATA activity with key', async () => {
+            // WHEN
+            await handler.retrieve(
+                'testInstance/testBU',
+                ['journey'],
+                ['testExisting_journey_updatecontact']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.journey ? Object.keys(result.journey).length : 0,
+                1,
+                'only 1 journeys expected'
+            );
+
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_journey_updatecontact', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get-updatecontact'),
+                'returned JSON was not equal expected'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                20,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -425,6 +481,29 @@ describe('type: journey', () => {
             );
             return;
         });
+
+        it('Should update a journey with UPDATECONTACT activity', async () => {
+            // WHEN
+            await handler.deploy(
+                'testInstance/testBU',
+                ['journey'],
+                ['testExisting_journey_updatecontact']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+            // // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_journey_updatecontact', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'put-updatecontact'),
+                'returned metadata was not equal expected for update journey with updatecontact activity'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                22,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 
     describe('Templating ================', () => {
@@ -466,7 +545,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                27,
+                29,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -662,7 +741,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                33,
+                35,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -697,7 +776,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                33,
+                35,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -732,7 +811,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                33,
+                35,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -1132,17 +1211,52 @@ describe('type: journey', () => {
         it('Should not validate a transactional journey by key', async () => {
             handler.setOptions({ skipStatusCheck: true });
             // WHEN
-            await handler.validate(
+            const validate = await handler.validate(
                 'testInstance/testBU',
                 ['journey'],
                 ['testExisting_temail_notPublished']
             );
             // THEN
-            assert.equal(process.exitCode, 1, 'validate should not have thrown an error');
+            assert.equal(process.exitCode, 0, 'validate should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                validate['testInstance/testBU']?.journey,
+                [],
+                'should not have validated any journey'
+            );
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 1,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should validate a multi-step journey but not the transactional journey by key', async () => {
+            await testUtils.copyFile(
+                'interaction/v1/interactions/validateStatus/45f06c0a-3ed2-48b2-a6a8-b5119253f01c/get-response-success.json',
+                'interaction/v1/interactions/validateStatus/45f06c0a-3ed2-48b2-a6a8-b5119253f01c/get-response.json'
+            );
+            handler.setOptions({ skipStatusCheck: true });
+            // WHEN
+            const validate = await handler.validate(
+                'testInstance/testBU',
+                ['journey'],
+                ['testExisting_temail_notPublished', 'testExisting_journey_Multistep']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'validate should not have thrown an error');
+            // retrieve result
+            assert.deepEqual(
+                validate['testInstance/testBU']?.journey,
+                ['testExisting_journey_Multistep'],
+                'should not have validated any journey'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                3,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -1291,15 +1405,142 @@ describe('type: journey', () => {
 
             assert.deepEqual(
                 replace['testInstance/testBU'].journey,
-                ['testExisting_journey_Multistep', 'testExisting_temail'],
+                ['testExisting_temail', 'testExisting_journey_Multistep'],
                 'should have found the right journeys that need updating'
             );
-
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 42,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
+            return;
+        });
+    });
+
+    describe('Audit ================', () => {
+        it('Should show audit log of a transactional journey and version', async () => {
+            const audit = await handler.audit('testInstance/testBU', {
+                journey: ['testExisting_temail/2'],
+            });
+            // THEN
+            assert.equal(process.exitCode, 0, 'audit should not have thrown an error');
+
+            assert.deepEqual(
+                audit['testInstance/testBU'].journey,
+                ['testExisting_temail'],
+                'should have returned the right journeys'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                2,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+
+            return;
+        });
+
+        it('Should show audit log of a transactional journey with all its versions', async () => {
+            const audit = await handler.audit('testInstance/testBU', {
+                journey: ['testExisting_temail'],
+            });
+            // THEN
+            assert.equal(process.exitCode, 0, 'audit should not have thrown an error');
+
+            assert.deepEqual(
+                audit['testInstance/testBU'].journey,
+                ['testExisting_temail'],
+                'should have returned the right journeys'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                3,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+
+            return;
+        });
+
+        it('Should not show audit log of a transactional journey with a too high version', async () => {
+            const audit = await handler.audit('testInstance/testBU', {
+                journey: ['testExisting_temail/99'],
+            });
+            // THEN
+            assert.equal(process.exitCode, 404, 'audit should have thrown an error');
+
+            assert.deepEqual(
+                audit['testInstance/testBU'].journey,
+                [],
+                'should have returned the right journeys'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                2,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+
+            return;
+        });
+
+        it('Should show audit log of a multi-step journey and version', async () => {
+            const audit = await handler.audit('testInstance/testBU', {
+                journey: ['testExisting_journey_Multistep/1'],
+            });
+            // THEN
+            assert.equal(process.exitCode, 0, 'audit should not have thrown an error');
+
+            assert.deepEqual(
+                audit['testInstance/testBU'].journey,
+                ['testExisting_journey_Multistep'],
+                'should have returned the right journeys'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                2,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+
+            return;
+        });
+
+        it('Should show audit log of a multi-step journey with all its versions', async () => {
+            const audit = await handler.audit('testInstance/testBU', {
+                journey: ['testExisting_journey_Multistep'],
+            });
+            // THEN
+            assert.equal(process.exitCode, 0, 'audit should not have thrown an error');
+
+            assert.deepEqual(
+                audit['testInstance/testBU'].journey,
+                ['testExisting_journey_Multistep'],
+                'should have returned the right journeys'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                4,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+
+            return;
+        });
+
+        it('Should show audit log of a multi-step journey with all its versions via /*', async () => {
+            const audit = await handler.audit('testInstance/testBU', {
+                journey: ['testExisting_journey_Multistep'],
+            });
+            // THEN
+            assert.equal(process.exitCode, 0, 'audit should not have thrown an error');
+
+            assert.deepEqual(
+                audit['testInstance/testBU'].journey,
+                ['testExisting_journey_Multistep'],
+                'should have returned the right journeys'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                4,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+
             return;
         });
     });

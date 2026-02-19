@@ -39,6 +39,7 @@ export type DataExtensionItem = import("../../types/mcdev.d.js").DataExtensionIt
  */
 declare class Event extends MetadataType {
     static reCacheDataExtensions: any[];
+    static createdKeys: any[];
     /**
      * Retrieves Metadata of Event Definition.
      * Endpoint /interaction/v1/eventDefinitions return all Event Definitions with all details.
@@ -60,6 +61,7 @@ declare class Event extends MetadataType {
     /**
      * Retrieve a specific Event Definition by Name
      *
+     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
      * @param {string} templateDir Directory where retrieved metadata directory will be saved
      * @param {string} name name of the metadata file
      * @param {TemplateMap} templateVariables variables to be replaced in the metadata
@@ -1186,6 +1188,12 @@ declare namespace Event {
                 template: boolean;
             };
             sourceApplicationExtensionId: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            entrySourceGroupConfigUrl: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

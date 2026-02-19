@@ -1,0 +1,10 @@
+{
+    "customerKey": "testTemplated_filter",
+    "name": "testTemplated_filter",
+    "description": "blabla",
+    "statusId": 1,
+    "r__dataFilter_key": "testTemplated_dataFilter",
+    "r__destination_dataExtension_key": "testTemplated_dataExtension_exclusion",
+    "r__source_dataExtension_key": "testTemplated_dataExtension",
+    "r__folder_Path": "Filter/filterSubfolder"
+}

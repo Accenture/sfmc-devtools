@@ -17,6 +17,7 @@ export type TemplateMap = import("../types/mcdev.d.js").TemplateMap;
 export type TypeKeyCombo = import("../types/mcdev.d.js").TypeKeyCombo;
 export type ExplainType = import("../types/mcdev.d.js").ExplainType;
 export type ContentBlockConversionTypes = import("../types/mcdev.d.js").ContentBlockConversionTypes;
+export type BuildFilter = import("../types/mcdev.d.js").BuildFilter;
 /**
  * @typedef {import('../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -36,6 +37,7 @@ export type ContentBlockConversionTypes = import("../types/mcdev.d.js").ContentB
  * @typedef {import('../types/mcdev.d.js').TypeKeyCombo} TypeKeyCombo
  * @typedef {import('../types/mcdev.d.js').ExplainType} ExplainType
  * @typedef {import('../types/mcdev.d.js').ContentBlockConversionTypes} ContentBlockConversionTypes
+ * @typedef {import('../types/mcdev.d.js').BuildFilter} BuildFilter
  */
 /**
  * main class
@@ -107,7 +109,7 @@ declare class Mcdev {
     /**
      * helper to show an off-the-logs message to users
      */
-    static "__#8@#welcomeMessage"(): void;
+    static "__#private@#welcomeMessage"(): void;
     /**
      * Retrieve all metadata from the specified business unit into the local file system.
      *
@@ -128,7 +130,7 @@ declare class Mcdev {
      * @param {boolean} [changelogOnly] skip saving, only create json in memory
      * @returns {Promise.<object>} ensure that BUs are worked on sequentially
      */
-    static "__#8@#retrieveBU"(cred: string, bu: string, selectedTypesArr?: string[] | TypeKeyCombo, keys?: string[], changelogOnly?: boolean): Promise<object>;
+    static "__#private@#retrieveBU"(cred: string, bu: string, selectedTypesArr?: string[] | TypeKeyCombo, keys?: string[], changelogOnly?: boolean): Promise<object>;
     /**
      * Deploys all metadata located in the 'deploy' directory to the specified business unit
      *
@@ -221,6 +223,7 @@ declare class Mcdev {
     /**
      * Retrieve a specific metadata file and templatise.
      *
+     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
      * @param {string} businessUnit references credentials from properties.json
      * @param {string} selectedType supported metadata type
      * @param {string[]} name name of the metadata
@@ -259,9 +262,10 @@ declare class Mcdev {
      * @param {string[]} marketTemplate market localizations
      * @param {string[]} marketDefinition market localizations
      * @param {boolean} [bulk] runs buildDefinitionBulk instead of buildDefinition; requires marketList to be defined and given via marketDefinition
+     * @param {BuildFilter} [filter] market list specific filter for buildTemplate
      * @returns {Promise.<MultiMetadataTypeList | object>} response from buildDefinition
      */
-    static build(businessUnitTemplate: string, businessUnitDefinition: string, typeKeyCombo: TypeKeyCombo, marketTemplate: string[], marketDefinition: string[], bulk?: boolean): Promise<MultiMetadataTypeList | object>;
+    static build(businessUnitTemplate: string, businessUnitDefinition: string, typeKeyCombo: TypeKeyCombo, marketTemplate: string[], marketDefinition: string[], bulk?: boolean, filter?: BuildFilter): Promise<MultiMetadataTypeList | object>;
     /**
      * Build a template based on a list of metadata files in the retrieve folder.
      *
@@ -269,9 +273,17 @@ declare class Mcdev {
      * @param {string | TypeKeyCombo} selectedTypes limit retrieval to given metadata type
      * @param {string[] | undefined} keyArr customerkey of the metadata
      * @param {string[]} marketArr market localizations
+     * @param {BuildFilter} [filter] market list specific filter
      * @returns {Promise.<MultiMetadataTypeList>} -
      */
-    static buildTemplate(businessUnit: string, selectedTypes: string | TypeKeyCombo, keyArr: string[] | undefined, marketArr: string[]): Promise<MultiMetadataTypeList>;
+    static buildTemplate(businessUnit: string, selectedTypes: string | TypeKeyCombo, keyArr: string[] | undefined, marketArr: string[], filter?: BuildFilter): Promise<MultiMetadataTypeList>;
+    /**
+     * helper for {@link buildTemplate} to apply include/exclude key filters
+     *
+     * @param {TypeKeyCombo | undefined} typeKeyList supported metadata type
+     * @param {BuildFilter} filter market list specific filter for buildTemplate
+     */
+    static applyKeyFilters(typeKeyList: TypeKeyCombo | undefined, filter: BuildFilter): void;
     /**
      * Build a specific metadata file based on a template.
      *
@@ -400,6 +412,18 @@ declare class Mcdev {
         };
     }>;
     /**
+     * stop an item
+     *
+     * @param {string} businessUnit name of BU
+     * @param {TypeKeyCombo} selectedTypes limit to given metadata types
+     * @returns {Promise.<Object.<string, Object.<string, string[]>>>} key: business unit name, key2: type, value: list of affected item keys
+     */
+    static audit(businessUnit: string, selectedTypes: TypeKeyCombo): Promise<{
+        [x: string]: {
+            [x: string]: string[];
+        };
+    }>;
+    /**
      * Updates the key to match the name field
      *
      * @param {string} businessUnit name of BU
@@ -425,13 +449,13 @@ declare class Mcdev {
     /**
      * run a method across BUs
      *
-     * @param {'schedule'|'execute'|'pause'|'stop'|'publish'|'validate'|'fixKeys'|'replaceCbReference'|'refresh'|'updateNotifications'} methodName what to run
+     * @param {'schedule'|'execute'|'pause'|'stop'|'publish'|'validate'|'fixKeys'|'replaceCbReference'|'refresh'|'audit'|'updateNotifications'} methodName what to run
      * @param {string} businessUnit name of BU
      * @param {string[] | TypeKeyCombo} [selectedTypes] limit to given metadata types
      * @param {string[]} [keys] customerkey of the metadata
      * @returns {Promise.<Object.<string, Object.<string, string[]>>>} key: business unit name, key2: type, value: list of affected item keys
      */
-    static "__#8@#runMethod"(methodName: "schedule" | "execute" | "pause" | "stop" | "publish" | "validate" | "fixKeys" | "replaceCbReference" | "refresh" | "updateNotifications", businessUnit: string, selectedTypes?: string[] | TypeKeyCombo, keys?: string[]): Promise<{
+    static "__#private@#runMethod"(methodName: "schedule" | "execute" | "pause" | "stop" | "publish" | "validate" | "fixKeys" | "replaceCbReference" | "refresh" | "audit" | "updateNotifications", businessUnit: string, selectedTypes?: string[] | TypeKeyCombo, keys?: string[]): Promise<{
         [x: string]: {
             [x: string]: string[];
         };
@@ -439,14 +463,14 @@ declare class Mcdev {
     /**
      * helper for Mcdev.#runMethod
      *
-     * @param {'schedule'|'execute'|'pause'|'stop'|'publish'|'validate'|'fixKeys'|'replaceCbReference'|'refresh'|'updateNotifications'} methodName what to run
+     * @param {'schedule'|'execute'|'pause'|'stop'|'publish'|'validate'|'fixKeys'|'replaceCbReference'|'refresh'|'audit'|'updateNotifications'} methodName what to run
      * @param {string} cred name of Credential
      * @param {string} bu name of BU
      * @param {string} [type] limit execution to given metadata type
      * @param {string[]} [keyArr] customerkey of the metadata
      * @returns {Promise.<string[]>} list of keys that were affected
      */
-    static "__#8@#runOnBU"(methodName: "schedule" | "execute" | "pause" | "stop" | "publish" | "validate" | "fixKeys" | "replaceCbReference" | "refresh" | "updateNotifications", cred: string, bu: string, type?: string, keyArr?: string[]): Promise<string[]>;
+    static "__#private@#runOnBU"(methodName: "schedule" | "execute" | "pause" | "stop" | "publish" | "validate" | "fixKeys" | "replaceCbReference" | "refresh" | "audit" | "updateNotifications", cred: string, bu: string, type?: string, keyArr?: string[]): Promise<string[]>;
     /**
      * helper for Mcdev.#runOnBU
      *
@@ -454,7 +478,7 @@ declare class Mcdev {
      * @param {BuObject} buObject properties for auth
      * @returns {Promise.<string[]>} keyArr
      */
-    static "__#8@#retrieveKeysWithLike"(selectedType: string, buObject: BuObject): Promise<string[]>;
+    static "__#private@#retrieveKeysWithLike"(selectedType: string, buObject: BuObject): Promise<string[]>;
     /**
      * Updates the key to match the name field
      *
@@ -464,7 +488,7 @@ declare class Mcdev {
      * @param {string[]} [keyArr] customerkey of the metadata
      * @returns {Promise.<string[]>} list of keys that were affected
      */
-    static "__#8@#fixKeys"(cred: string, bu: string, type: string, keyArr?: string[]): Promise<string[]>;
+    static "__#private@#fixKeys"(cred: string, bu: string, type: string, keyArr?: string[]): Promise<string[]>;
     /**
      * Updates the key to match the name field
      *
@@ -474,7 +498,7 @@ declare class Mcdev {
      * @param {string[]} [keyArr] customerkey of the metadata
      * @returns {Promise.<string[]>} list of keys that were affected
      */
-    static "__#8@#replaceCbReference"(cred: string, bu: string, type: string, keyArr?: string[]): Promise<string[]>;
+    static "__#private@#replaceCbReference"(cred: string, bu: string, type: string, keyArr?: string[]): Promise<string[]>;
     /**
      * helper to convert CSVs into an array. if only one value was given, it's also returned as an array
      *

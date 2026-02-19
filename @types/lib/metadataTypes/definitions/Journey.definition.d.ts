@@ -78,9 +78,162 @@ declare namespace _default {
             skipValidation: boolean;
         };
         'activities[].arguments': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.waitEndDateAttributeDataBound': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.waitDefinitionId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.waitForEventId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.executionMode': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.startActivityKey': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.waitQueueId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.activityId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.definitionId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.emailSubjectDataBound': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.contactId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.contactKey': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.emailAddress': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.sourceCustomObjectId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.sourceCustomObjectKey': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.fieldType': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.eventData': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.obfuscationProperties': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.customObjectKey': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.definitionInstanceId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.filterResult': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.version': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.requestObjectId': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.activityData': {
+            skipValidation: boolean;
+        };
+        'activities[].arguments.objectMap': {
             skipValidation: boolean;
         };
         'activities[].configurationArguments': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.isReconcilable': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].configurationArguments.isActivityBatchValidated': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
@@ -398,6 +551,12 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        'activities[].configurationArguments.triggeredSend.updateSubscriber': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         'activities[].configurationArguments.applicationExtensionKey': {
             isCreateable: boolean;
             isUpdateable: boolean;
@@ -517,6 +676,24 @@ declare namespace _default {
         };
         'activities[].schema': {
             skipValidation: boolean;
+        };
+        'activities[].arguments.activityData.updateContactFields[].r__dataExtension_key': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.activityData.updateContactFields[].r__dataExtensionField_name': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'activities[].arguments.activityData.updateContactFields[].field': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
         };
         categoryId: {
             isCreateable: boolean;
@@ -794,6 +971,12 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        'triggers[].configurationArguments.objectApiName': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         'triggers[].configurationArguments.objectAPIName': {
             isCreateable: boolean;
             isUpdateable: boolean;
@@ -867,12 +1050,6 @@ declare namespace _default {
             template: boolean;
         };
         'triggers[].configurationArguments.whoToInject': {
-            isCreateable: boolean;
-            isUpdateable: boolean;
-            retrieving: boolean;
-            template: boolean;
-        };
-        'triggers[].configurationArguments.objectApiName': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
@@ -963,6 +1140,12 @@ declare namespace _default {
             template: boolean;
         };
         workflowApiVersion: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        campaigns: {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;

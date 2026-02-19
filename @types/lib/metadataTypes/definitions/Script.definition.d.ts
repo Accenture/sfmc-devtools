@@ -146,6 +146,16 @@ declare namespace _default {
             let template_12: boolean;
             export { template_12 as template };
         }
+        namespace parentCategoryId {
+            let isCreateable_13: boolean;
+            export { isCreateable_13 as isCreateable };
+            let isUpdateable_13: boolean;
+            export { isUpdateable_13 as isUpdateable };
+            let retrieving_13: boolean;
+            export { retrieving_13 as retrieving };
+            let template_13: boolean;
+            export { template_13 as template };
+        }
         namespace r__folder_Path {
             let skipValidation: boolean;
         }

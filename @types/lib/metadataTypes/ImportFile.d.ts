@@ -62,6 +62,7 @@ declare class ImportFile extends MetadataType {
     /**
      * Retrieve a specific Import Definition by Name
      *
+     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
      * @param {string} templateDir Directory where retrieved metadata directory will be saved
      * @param {string} name name of the metadata file
      * @param {TemplateMap} templateVariables variables to be replaced in the metadata
@@ -122,6 +123,7 @@ declare namespace ImportFile {
             List: number;
             SMS: number;
             Push: number;
+            WhatsApp: number;
         };
         hasExtended: boolean;
         idField: string;

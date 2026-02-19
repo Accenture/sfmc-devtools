@@ -61,6 +61,7 @@ declare class Script extends MetadataType {
     /**
      * Retrieve a specific Script by Name
      *
+     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
      * @param {string} templateDir Directory where retrieved metadata directory will be saved
      * @param {string} name name of the metadata file
      * @param {TemplateMap} templateVariables variables to be replaced in the metadata
@@ -77,6 +78,14 @@ declare class Script extends MetadataType {
      * @returns {Promise} Promise
      */
     static update(script: MetadataTypeItem): Promise<any>;
+    /**
+     * helper for {@link MetadataType.updateREST} and {@link MetadataType.updateSOAP}
+     *
+     * @param {MetadataTypeItem} metadataEntry a single metadata Entry
+     * @param {object} apiResponse varies depending on the API call
+     * @returns {Promise.<object>} apiResponse, potentially modified
+     */
+    static postUpdateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): Promise<object>;
     /**
      * Creates a single Script
      *
@@ -284,6 +293,12 @@ declare namespace Script {
                 template: boolean;
             };
             statusId: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            parentCategoryId: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

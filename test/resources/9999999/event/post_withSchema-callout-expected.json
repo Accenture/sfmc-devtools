@@ -3,6 +3,8 @@
     "name": "testNew_event_withSchema",
     "description": "created on deploy",
     "mode": "Production",
+    "automationId": "00000000-0000-0000-0000-000000000000",
+    "filterDefinitionId": "00000000-0000-0000-0000-000000000000",
     "eventDefinitionKey": "testNew_event_withSchema",
     "sourceApplicationExtensionId": "7db1f972-f8b7-49b6-91b5-fa218e13953d",
     "entrySourceGroupConfigUrl": "jb:///data/entry/api-event/entrysourcegroupconfig.json",
@@ -194,6 +196,7 @@
     },
     "isVisibleInPicker": true,
     "arguments": {
+        "automationId": "00000000-0000-0000-0000-000000000000",
         "eventDefinitionKey": "testNew_event_withSchema"
     }
 }

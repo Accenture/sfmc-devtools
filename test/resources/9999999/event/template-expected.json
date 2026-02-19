@@ -221,7 +221,6 @@
     "metaData": { "scheduleState": "No Schedule" },
     "isVisibleInPicker": true,
     "category": "Event",
-    "automationId": "00000000-0000-0000-0000-000000000000",
     "disableDEDataLogging": false,
     "r__dataExtension_key": "{{{prefix}}}event - 2024-07-05T080154625"
 }
