@@ -33,7 +33,7 @@ declare namespace Init {
      */
     function joinProject(): Promise<void>;
     /**
-     * helper for @initProject that optionally creates markets and market lists for all BUs
+     * helper for {@link Init.initProject} that optionally creates markets and market lists for all BUs
      */
     function _initMarkets(): Promise<void>;
     /**
