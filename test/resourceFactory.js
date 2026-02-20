@@ -84,7 +84,7 @@ function getFilterPath(filter, QueryAllAccounts, shorten) {
         (QueryAllAccounts ? '-QAA' : '');
     if ((filterPath + '-response.xml').length > 256) {
         shorten ||= 10;
-        return getFilterPath(filter, QueryAllAccounts, --shorten);
+        return getFilterPath(filter, QueryAllAccounts, shorten - 1);
     } else {
         return filterPath;
     }
