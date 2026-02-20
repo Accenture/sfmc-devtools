@@ -81,7 +81,7 @@
         "prettier": "3.8.1",
         "prettier-plugin-sql": "0.19.2",
         "semver": "7.7.4",
-        "sfmc-sdk": "2.1.4",
+        "sfmc-sdk": "3.0.0",
         "simple-git": "3.31.1",
         "toposort": "2.0.2",
         "update-notifier": "7.3.1",
