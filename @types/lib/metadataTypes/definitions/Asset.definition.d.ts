@@ -535,6 +535,8 @@ declare namespace _default {
         export let archive: string[];
         let asset_1: string[];
         export { asset_1 as asset };
+        let _package: string[];
+        export { _package as package };
         export let audio: string[];
         export let block: string[];
         export let cloudpage: string[];
@@ -777,8 +779,16 @@ declare namespace _default {
         liveimageblock: number;
         livesettingblock: number;
         contentmap: number;
+        enhanceddynamicblock: number;
         jsonmessage: number;
+        jbtemplate: number;
         icemailformblock: number;
+        iccloudpageblock: number;
+        einsteincontentselectionblock: number;
+        jsonmessagetemplate: number;
+        packagedefinition: number;
+        packagedeployment: number;
+        einsteincontenttesting: number;
         coderesource: number;
         jscoderesource: number;
         csscoderesource: number;
