@@ -401,10 +401,6 @@ export namespace Util {
      * @returns {object} obj but with sorted attributes
      */
     function sortObjectAttributes(obj: object): object;
-    /**
-     * enables metadata definitions required for sharing assets
-     */
-    function enableShareAssets(): void;
 }
 export type AuthObject = import("../../types/mcdev.d.js").AuthObject;
 export type BuObject = import("../../types/mcdev.d.js").BuObject;
