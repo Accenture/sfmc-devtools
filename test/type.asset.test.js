@@ -1082,7 +1082,7 @@ describe('type: asset', () => {
             return;
         });
 
-        it('Should stringify shareAssets numeric paths during buildTemplate', async () => {
+        it('Should stringify shareAsset numeric paths during buildTemplate', async () => {
             await handler.retrieve('testInstance/testBU', ['asset']);
 
             const expectedApiCallsRetrieve = 26;
@@ -1093,7 +1093,7 @@ describe('type: asset', () => {
             );
 
             const sourceKey = 'testExisting_asset_htmlblock';
-            const templatingKey = 'testExisting_asset_htmlblock_shareAssets';
+            const templatingKey = 'testExisting_asset_htmlblock_shareAsset';
             const source = await getActualJson(sourceKey, 'asset', 'block');
             source.customerKey = templatingKey;
             source.name = templatingKey;
@@ -1124,7 +1124,7 @@ describe('type: asset', () => {
                 sourceHtml
             );
 
-            handler.setOptions({ shareAssets: true });
+            handler.setOptions({ shareAsset: true });
             const result = await handler.buildTemplate(
                 'testInstance/testBU',
                 'asset',
@@ -1162,10 +1162,10 @@ describe('type: asset', () => {
                         },
                     ],
                     createdBy: {},
-                    customerKey: '{{{prefix}}}asset_htmlblock_shareAssets',
+                    customerKey: '{{{prefix}}}asset_htmlblock_shareAsset',
                     design: '',
                     fileProperties: {
-                        fileName: '{{{prefix}}}asset_htmlblock_shareAssets',
+                        fileName: '{{{prefix}}}asset_htmlblock_shareAsset',
                     },
                     memberId: '{{{mid}}}',
                     meta: {
@@ -1178,7 +1178,7 @@ describe('type: asset', () => {
                     },
                     modelVersion: 2,
                     modifiedBy: {},
-                    name: '{{{prefix}}}asset_htmlblock_shareAssets',
+                    name: '{{{prefix}}}asset_htmlblock_shareAsset',
                     r__folder_Path: 'Content Builder',
                     sharingProperties: {
                         sharedWith: ['{{{mid}}}'],

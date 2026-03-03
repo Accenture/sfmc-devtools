@@ -134,16 +134,6 @@ declare class Asset extends MetadataType {
      */
     static update(metadata: AssetItem): Promise<any>;
     /**
-     * helper for {@link MetadataType.buildDefinition}
-     *
-     * @param {string} templateDir Directory where metadata templates are stored
-     * @param {string} targetDir Directory where built definitions are stored
-     * @param {string} templateName name of the metadata file
-     * @param {TemplateMap} variables variables to be replaced in the metadata
-     * @returns {Promise.<MetadataTypeItemObj>} single metadata
-     */
-    static buildDefinition(templateDir: string, targetDir: string, templateName: string, variables: TemplateMap): Promise<MetadataTypeItemObj>;
-    /**
      * Retrieves Metadata of a specific asset type
      *
      * @param {string|string[]} subType group of similar assets to put in a folder (ie. images)
@@ -434,13 +424,13 @@ declare class Asset extends MetadataType {
      *
      * @returns {void}
      */
-    static _enableShareAssets(): void;
+    static _enableShareAsset(): void;
     /**
-     * enables share-assets metadata fields at runtime if option is active
+     * enables share-asset metadata fields at runtime if option is active
      *
      * @returns {void}
      */
-    static _enableShareAssetsIfNeeded(): void;
+    static _enableShareAssetIfNeeded(): void;
 }
 declare namespace Asset {
     let getJsonFromFSCache: {
