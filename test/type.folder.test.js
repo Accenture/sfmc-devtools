@@ -6,6 +6,7 @@ import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
+import { Util } from '../lib/util/util.js';
 chai.use(chaiFiles);
 
 describe('type: folder', () => {
@@ -141,6 +142,87 @@ describe('type: folder', () => {
                         c.includes('<ParentFolder><ID>89397</ID></ParentFolder>')
                 ),
                 "'Content Builder/testFolder_samePath' folder creation callout not found - folder was incorrectly skipped"
+            );
+            return;
+        });
+
+        it('Should create a folder whose name contains a slash character (direct folder deploy)', async () => {
+            // GIVEN a folder deploy file named Headers%2FFolders.folder-meta.json with Name "Headers/Folders"
+            // (the % encoding represents the actual '/' in the SFMC folder name)
+            testUtils.copyToDeploy('folder-deploy-slash', 'folder');
+
+            const deployed = await handler.deploy('testInstance/testBU', ['folder']);
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+
+            // Verify the deployed path uses the escape char (∕) not the real slash
+            const deployedFolderPaths = deployed['testInstance/testBU']?.folder
+                ? Object.values(deployed['testInstance/testBU']?.folder).map((f) => f.Path)
+                : [];
+            assert.include(
+                deployedFolderPaths,
+                'Content Builder/Headers' + Util.folderNameSlashEscapeChar + 'Folders',
+                'deployed folder path should use escape char for the slash in folder name'
+            );
+
+            // Verify that the SOAP Create callout uses the REAL slash character in the Name field
+            // (not the escape character), so that SFMC creates a folder named "Headers/Folders"
+            const createSoapCallouts = testUtils.getSoapCallouts('Create', 'DataFolder');
+            assert.ok(
+                createSoapCallouts.some(
+                    (c) =>
+                        c.includes('<Name>Headers/Folders</Name>') &&
+                        c.includes('<ContentType>asset</ContentType>') &&
+                        c.includes('<ParentFolder><ID>89397</ID></ParentFolder>')
+                ),
+                "SOAP create for 'Headers/Folders' should use the real slash in Name, not the escape char"
+            );
+            // Verify the escape char was NOT sent as the folder name
+            assert.ok(
+                !createSoapCallouts.some((c) =>
+                    c.includes('<Name>Headers' + Util.folderNameSlashEscapeChar + 'Folders</Name>')
+                ),
+                'SOAP create should NOT use the escape char in the Name field'
+            );
+            return;
+        });
+
+        it('Should create a folder whose name contains a slash when triggered via r__folder_Path from another type (script)', async () => {
+            // GIVEN a script deploy with r__folder_Path pointing to a subfolder whose name contains a slash
+            // The escape char (∕) in r__folder_Path separates the slash-in-name from path separators
+            testUtils.copyToDeploy('script-slashfolder-deploy', 'script');
+
+            const deployed = await handler.deploy('testInstance/testBU', ['script']);
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+
+            // Verify the script was deployed
+            assert.equal(
+                deployed['testInstance/testBU']?.script
+                    ? Object.keys(deployed['testInstance/testBU']?.script).length
+                    : 0,
+                1,
+                'one script should have been deployed'
+            );
+
+            // Verify the auto-generated folder was created with REAL slash in the SOAP Name field
+            // (not the escape char), so SFMC creates a folder named "Headers/Folders"
+            const createSoapCallouts = testUtils.getSoapCallouts('Create', 'DataFolder');
+            assert.ok(
+                createSoapCallouts.some(
+                    (c) =>
+                        c.includes('<Name>Headers/Folders</Name>') &&
+                        c.includes('<ContentType>ssjsactivity</ContentType>') &&
+                        c.includes('<ParentFolder><ID>304</ID></ParentFolder>')
+                ),
+                "SOAP create for 'Scripts/Headers∕Folders' should send <Name>Headers/Folders</Name> with real slash"
+            );
+            // Verify the escape char was NOT sent as the folder name
+            assert.ok(
+                !createSoapCallouts.some((c) =>
+                    c.includes('<Name>Headers' + Util.folderNameSlashEscapeChar + 'Folders</Name>')
+                ),
+                'SOAP create should NOT use the escape char in the Name field'
             );
             return;
         });
