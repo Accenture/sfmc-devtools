@@ -103,5 +103,46 @@ describe('type: folder', () => {
             );
             return;
         });
+
+        it('Should create folder when same path exists in another Business Unit', async () => {
+            // prepare
+            // Use folder deploy data with an asset folder path
+            testUtils.copyToDeploy('folder-deploy-samepath', 'folder');
+            // Use a modified retrieve response that includes 'Content Builder/testFolder_samePath'
+            // from a different BU (Client.ID=1111111). ContentType 'asset' is in folderTypesFromParent
+            // so it will be cached even though it belongs to another BU - simulating the bug scenario
+            await testUtils.copyFile(
+                'dataFolder/retrieve-samePathOtherBU-response.xml',
+                'dataFolder/retrieve-response.xml'
+            );
+
+            const deployed = await handler.deploy('testInstance/testBU', ['folder']);
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+
+            // check what was deployed - 'Content Builder/testFolder_samePath' should be created
+            // even though it exists in another BU (1111111)
+            const deployedFolderPaths = deployed['testInstance/testBU']?.folder
+                ? Object.values(deployed['testInstance/testBU']?.folder).map((f) => f.Path)
+                : [];
+            assert.include(
+                deployedFolderPaths,
+                'Content Builder/testFolder_samePath',
+                "'Content Builder/testFolder_samePath' should have been created in current BU, not skipped because it exists in another BU"
+            );
+
+            const createSoapCallouts = testUtils.getSoapCallouts('Create', 'DataFolder');
+            // 'Content Builder/testFolder_samePath' must be created in current BU (not skipped due to same path in other BU)
+            assert.ok(
+                createSoapCallouts.some(
+                    (c) =>
+                        c.includes('<Name>testFolder_samePath</Name>') &&
+                        c.includes('<ContentType>asset</ContentType>') &&
+                        c.includes('<ParentFolder><ID>89397</ID></ParentFolder>')
+                ),
+                "'Content Builder/testFolder_samePath' folder creation callout not found - folder was incorrectly skipped"
+            );
+            return;
+        });
     });
 });
