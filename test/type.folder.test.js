@@ -18,6 +18,43 @@ describe('type: folder', () => {
         testUtils.mockReset();
     });
 
+    describe('Retrieve ================', () => {
+        it('Should retrieve a script whose folder name contains a slash and escape the slash in r__folder_Path', async () => {
+            // GIVEN the SFMC folder "Headers/Folders" (child of Scripts) and a script in that folder
+            await testUtils.copyFile(
+                'dataFolder/+retrieve-ContentType=ssjsactivity-slashfolder-response.xml',
+                'dataFolder/retrieve-ContentType=ssjsactivity-response.xml'
+            );
+            await testUtils.copyFile(
+                'automation/v1/scripts/+get-slashfolder-response.json',
+                'automation/v1/scripts/get-response.json'
+            );
+
+            const retrieve = await handler.retrieve('testInstance/testBU', ['script']);
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            assert.equal(
+                retrieve['testInstance/testBU'].script
+                    ? Object.keys(retrieve['testInstance/testBU'].script).length
+                    : 0,
+                1,
+                'one script expected in retrieve response'
+            );
+            // Verify the retrieved script has the escape char (∕) in r__folder_Path, not a real slash
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_slashFolderScript', 'script'),
+                await testUtils.getExpectedJson('9999999', 'script', 'get_slashfolder'),
+                'r__folder_Path should use ∕ (U+2215) to escape the slash in the folder name'
+            );
+            assert.equal(
+                await testUtils.getActualFile('testExisting_slashFolderScript', 'script', 'ssjs'),
+                await testUtils.getExpectedFile('9999999', 'script', 'get_slashfolder', 'ssjs'),
+                'retrieved ssjs content should match expected'
+            );
+            return;
+        });
+    });
+
     describe('Deploy ================', () => {
         it('Should create automation & dataExtension folders', async () => {
             // prepare
