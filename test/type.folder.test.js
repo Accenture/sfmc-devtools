@@ -19,37 +19,32 @@ describe('type: folder', () => {
     });
 
     describe('Retrieve ================', () => {
-        it('Should retrieve a script whose folder name contains a slash and escape the slash in r__folder_Path', async () => {
-            // GIVEN the SFMC folder "Headers/Folders" (child of Scripts) and a script in that folder
+        it('Should retrieve an asset whose folder name contains a slash and escape the slash in r__folder_Path', async () => {
+            // GIVEN the SFMC folder "bla/blub" (child of Content Builder) and an asset in that folder
             await testUtils.copyFile(
-                'dataFolder/+retrieve-ContentType=ssjsactivity-slashfolder-response.xml',
-                'dataFolder/retrieve-ContentType=ssjsactivity-response.xml'
+                'dataFolder/+retrieve-ContentTypeINasset,asset-shared,cloudpages-slashfolder-response.xml',
+                'dataFolder/retrieve-ContentTypeINasset,asset-shared,cloudpages-response.xml'
             );
             await testUtils.copyFile(
-                'automation/v1/scripts/+get-slashfolder-response.json',
-                'automation/v1/scripts/get-response.json'
+                'asset/v1/content/assets/query/+post-response-assetType.idIN3,195,196,197,198,199,200,201,202,203,210,211,212,213-slashfolder.json',
+                'asset/v1/content/assets/query/post-response-assetType.idIN3,195,196,197,198,199,200,201,202,203,210,211,212,213.json'
             );
 
-            const retrieve = await handler.retrieve('testInstance/testBU', ['script']);
+            const retrieve = await handler.retrieve('testInstance/testBU', ['asset-block']);
             // THEN
             assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
             assert.equal(
-                retrieve['testInstance/testBU'].script
-                    ? Object.keys(retrieve['testInstance/testBU'].script).length
+                retrieve['testInstance/testBU'].asset
+                    ? Object.keys(retrieve['testInstance/testBU'].asset).length
                     : 0,
-                1,
-                'one script expected in retrieve response'
+                5,
+                'five assets expected in retrieve response (4 existing + 1 new test_slash)'
             );
-            // Verify the retrieved script has the escape char (∕) in r__folder_Path, not a real slash
-            assert.deepEqual(
-                await testUtils.getActualJson('testExisting_slashFolderScript', 'script'),
-                await testUtils.getExpectedJson('9999999', 'script', 'get_slashfolder'),
-                'r__folder_Path should use ∕ (U+2215) to escape the slash in the folder name'
-            );
+            // Verify the retrieved asset has the escape char (∕) in r__folder_Path, not a real slash
             assert.equal(
-                await testUtils.getActualFile('testExisting_slashFolderScript', 'script', 'ssjs'),
-                await testUtils.getExpectedFile('9999999', 'script', 'get_slashfolder', 'ssjs'),
-                'retrieved ssjs content should match expected'
+                retrieve['testInstance/testBU'].asset?.test_slash?.r__folder_Path,
+                'Content Builder/bla' + Util.folderNameSlashEscapeChar + 'blub',
+                'r__folder_Path should use ∕ (U+2215) to escape the slash in the folder name'
             );
             return;
         });
@@ -169,14 +164,16 @@ describe('type: folder', () => {
                 "'Content Builder/testFolder_samePath' should have been created in current BU, not skipped because it exists in another BU"
             );
 
-            const createSoapCallouts = testUtils.getSoapCallouts('Create', 'DataFolder');
-            // 'Content Builder/testFolder_samePath' must be created in current BU (not skipped due to same path in other BU)
+            const createRestCallouts = testUtils.getRestCallout(
+                'post',
+                '/asset/v1/content/categories',
+                true
+            );
+            // 'Content Builder/testFolder_samePath' must be created in current BU via REST
+            // (not skipped due to same path in other BU)
             assert.ok(
-                createSoapCallouts.some(
-                    (c) =>
-                        c.includes('<Name>testFolder_samePath</Name>') &&
-                        c.includes('<ContentType>asset</ContentType>') &&
-                        c.includes('<ParentFolder><ID>89397</ID></ParentFolder>')
+                createRestCallouts?.some(
+                    (c) => c.name === 'testFolder_samePath' && c.parentId === 89397
                 ),
                 "'Content Builder/testFolder_samePath' folder creation callout not found - folder was incorrectly skipped"
             );
@@ -202,64 +199,64 @@ describe('type: folder', () => {
                 'deployed folder path should use escape char for the slash in folder name'
             );
 
-            // Verify that the SOAP Create callout uses the REAL slash character in the Name field
+            // Verify that the REST Create callout uses the REAL slash character in the name field
             // (not the escape character), so that SFMC creates a folder named "Headers/Folders"
-            const createSoapCallouts = testUtils.getSoapCallouts('Create', 'DataFolder');
+            const createRestCallouts = testUtils.getRestCallout(
+                'post',
+                '/asset/v1/content/categories',
+                true
+            );
             assert.ok(
-                createSoapCallouts.some(
-                    (c) =>
-                        c.includes('<Name>Headers/Folders</Name>') &&
-                        c.includes('<ContentType>asset</ContentType>') &&
-                        c.includes('<ParentFolder><ID>89397</ID></ParentFolder>')
+                createRestCallouts?.some(
+                    (c) => c.name === 'Headers/Folders' && c.parentId === 89397
                 ),
-                "SOAP create for 'Headers/Folders' should use the real slash in Name, not the escape char"
+                "REST create for 'Headers/Folders' should use the real slash in name, not the escape char"
             );
             // Verify the escape char was NOT sent as the folder name
             assert.ok(
-                !createSoapCallouts.some((c) =>
-                    c.includes('<Name>Headers' + Util.folderNameSlashEscapeChar + 'Folders</Name>')
+                !createRestCallouts?.some(
+                    (c) => c.name === 'Headers' + Util.folderNameSlashEscapeChar + 'Folders'
                 ),
-                'SOAP create should NOT use the escape char in the Name field'
+                'REST create should NOT use the escape char in the name field'
             );
             return;
         });
 
-        it('Should create a folder whose name contains a slash when triggered via r__folder_Path from another type (script)', async () => {
-            // GIVEN a script deploy with r__folder_Path pointing to a subfolder whose name contains a slash
+        it('Should create a folder whose name contains a slash when triggered via r__folder_Path from an asset', async () => {
+            // GIVEN an asset deploy with r__folder_Path pointing to a subfolder whose name contains a slash
             // The escape char (∕) in r__folder_Path separates the slash-in-name from path separators
-            testUtils.copyToDeploy('script-slashfolder-deploy', 'script');
+            testUtils.copyToDeploy('asset-slashfolder-deploy', 'asset');
 
-            const deployed = await handler.deploy('testInstance/testBU', ['script']);
+            const deployed = await handler.deploy('testInstance/testBU', ['asset']);
             // THEN
             assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
 
-            // Verify the script was deployed
+            // Verify the asset was deployed
             assert.equal(
-                deployed['testInstance/testBU']?.script
-                    ? Object.keys(deployed['testInstance/testBU']?.script).length
+                deployed['testInstance/testBU']?.asset
+                    ? Object.keys(deployed['testInstance/testBU']?.asset).length
                     : 0,
                 1,
-                'one script should have been deployed'
+                'one asset should have been deployed'
             );
 
-            // Verify the auto-generated folder was created with REAL slash in the SOAP Name field
-            // (not the escape char), so SFMC creates a folder named "Headers/Folders"
-            const createSoapCallouts = testUtils.getSoapCallouts('Create', 'DataFolder');
+            // Verify the auto-generated folder was created via REST with the REAL slash in the name field
+            // (not the escape char), so SFMC creates a folder named "bla/blub"
+            const createRestCallouts = testUtils.getRestCallout(
+                'post',
+                '/asset/v1/content/categories',
+                true
+            );
             assert.ok(
-                createSoapCallouts.some(
-                    (c) =>
-                        c.includes('<Name>Headers/Folders</Name>') &&
-                        c.includes('<ContentType>ssjsactivity</ContentType>') &&
-                        c.includes('<ParentFolder><ID>304</ID></ParentFolder>')
-                ),
-                "SOAP create for 'Scripts/Headers∕Folders' should send <Name>Headers/Folders</Name> with real slash"
+                createRestCallouts?.some((c) => c.name === 'bla/blub' && c.parentId === 89397),
+                "REST create for 'Content Builder/bla∕blub' should send name 'bla/blub' with real slash"
             );
             // Verify the escape char was NOT sent as the folder name
             assert.ok(
-                !createSoapCallouts.some((c) =>
-                    c.includes('<Name>Headers' + Util.folderNameSlashEscapeChar + 'Folders</Name>')
+                !createRestCallouts?.some(
+                    (c) => c.name === 'bla' + Util.folderNameSlashEscapeChar + 'blub'
                 ),
-                'SOAP create should NOT use the escape char in the Name field'
+                'REST create should NOT use the escape char in the name field'
             );
             return;
         });
