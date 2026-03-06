@@ -4,6 +4,7 @@ export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
 export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
 export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
 export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
 export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
@@ -19,6 +20,7 @@ export type ContentBlockConversionTypes = import("../../types/mcdev.d.js").Conte
  * @typedef {import('../../types/mcdev.d.js').CodeExtractItem} CodeExtractItem
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeItem} MetadataTypeItem
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemDiff} MetadataTypeItemDiff
+ * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemObj} MetadataTypeItemObj
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMap} MetadataTypeMap
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
@@ -417,6 +419,18 @@ declare class Asset extends MetadataType {
      * @param {string[]} dependentKeyArr list of found keys
      */
     static _getDependentFilesExtra(slots: object, dependentKeyArr: string[]): void;
+    /**
+     * enables metadata definitions required for sharing assets
+     *
+     * @returns {void}
+     */
+    static _enableShareAsset(): void;
+    /**
+     * enables share-asset metadata fields at runtime if option is active
+     *
+     * @returns {void}
+     */
+    static _enableShareAssetIfNeeded(): void;
 }
 declare namespace Asset {
     let getJsonFromFSCache: {
