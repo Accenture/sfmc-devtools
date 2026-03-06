@@ -1,0 +1,60 @@
+{
+    "id": 16992,
+    "customerKey": "test_slash",
+    "objectID": "13f34d9c-f555-4fce-b862-26ff7f9fef7a",
+    "assetType": {
+        "id": 197,
+        "name": "htmlblock",
+        "displayName": "HTML Block"
+    },
+    "fileProperties": {
+        "fileName": "test_slash"
+    },
+    "name": "test_slash",
+    "owner": {
+        "id": 710420432,
+        "email": "",
+        "name": "IDE - joern.berkefeld app user",
+        "userId": "710420432"
+    },
+    "createdDate": "2026-03-06T07:47:11.04-06:00",
+    "createdBy": {
+        "id": 710420432,
+        "email": "",
+        "name": "IDE - joern.berkefeld app user",
+        "userId": "710420432"
+    },
+    "modifiedDate": "2026-03-06T07:47:11.04-06:00",
+    "modifiedBy": {
+        "id": 710420432,
+        "email": "",
+        "name": "IDE - joern.berkefeld app user",
+        "userId": "710420432"
+    },
+    "enterpriseId": 1111111,
+    "memberId": 9999999,
+    "status": {
+        "id": 1,
+        "name": "Draft"
+    },
+    "thumbnail": {
+        "thumbnailUrl": "/v1/assets/16992/thumbnail"
+    },
+    "category": {
+        "id": 38491,
+        "name": "bla/blub",
+        "parentId": 89397
+    },
+    "content": "<table\n    cellpadding=\"0\"\n    cellspacing=\"0\"\n    width=\"100%\"\n    role=\"presentation\"\n    style=\"min-width: 100%\"\n    class=\"stylingblock-content-wrapper\"\n>\n    <tr>\n        <td class=\"stylingblock-content-wrapper camarker-inner\">test</td>\n    </tr>\n</table>\n",
+    "design": "",
+    "meta": {
+        "wrapperStyles": {
+            "mobile": {
+                "visible": true
+            },
+            "styling": {}
+        }
+    },
+    "availableViews": [],
+    "modelVersion": 2
+}
