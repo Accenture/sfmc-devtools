@@ -43,7 +43,7 @@ jobs:
             - name: Download coverage artifact
               uses: actions/download-artifact@v5
               with:
-                  path: artifacts
+                  path: artifacts/test-coverage-output
 
             - name: Get Run ID
               id: get_run_id
