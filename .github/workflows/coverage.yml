@@ -41,7 +41,7 @@ jobs:
                   retention-days: 90
 
             - name: Download coverage artifact
-              uses: actions/download-artifact@v5
+              uses: actions/download-artifact@v8
               with:
                   path: artifacts/test-coverage-output
 
