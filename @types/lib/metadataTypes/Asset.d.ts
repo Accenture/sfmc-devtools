@@ -427,11 +427,11 @@ declare class Asset extends MetadataType {
      */
     static _getDependentFilesExtra(slots: object, dependentKeyArr: string[]): void;
     /**
-        * TSD-specific refresh method that finds active TSDs and refreshes them
-        *
-        * @param {string[]} [keyArr] metadata keys
-        * @returns {Promise.<string[]>} Returns list of keys that were refreshed
-        */
+     * Finds emails in running journeys, filters out the ones that reference the block (if it's a block) and refreshes related TSDs
+     *
+     * @param {string[]} [keyArr] metadata keys
+     * @returns {Promise.<string[]>} Returns list of keys that were refreshed
+     */
     static refresh(keyArr?: string[]): Promise<string[]>;
 }
 declare namespace Asset {
