@@ -59,6 +59,21 @@ declare class DataExtensionField extends MetadataType {
      */
     static retrieveFieldsForSingleDe(customerKey: string): Promise<object>;
     /**
+     * determines if a dataExtension is shared (from parent BU) by checking its folder's ContentType in the parent BU folder cache
+     *
+     * @param {string} customerKey external key of single DE
+     * @returns {boolean} true if the DE is shared (stored on parent BU)
+     */
+    static isSharedDe(customerKey: string): boolean;
+    /**
+     * helps retrieving fields for a single shared DE from parent BU.
+     * Use when the DE is shared (stored on parent BU) and its fields are not in the current BU's cache.
+     *
+     * @param {string} customerKey external key of single DE
+     * @returns {Promise.<object>} Promise of items
+     */
+    static retrieveFieldsForSingleSharedDe(customerKey: string): Promise<object>;
+    /**
      * Retrieves all records for caching
      *
      * @param {SoapRequestParams} [requestParams] required for the specific request (filter for example)
@@ -110,6 +125,8 @@ declare class DataExtensionField extends MetadataType {
     static deleteByKeySOAP(customerKey: string, fieldId?: string): Promise<boolean>;
 }
 declare namespace DataExtensionField {
+    let buObject: import("../../types/mcdev.d.js").BuObject;
+    let client: import("sfmc-sdk").default;
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
