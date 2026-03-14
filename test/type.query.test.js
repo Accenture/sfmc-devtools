@@ -27,8 +27,8 @@ describe('type: query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                4,
-                'only 4 queries expected'
+                5,
+                'only 5 queries expected'
             );
             // normal test
             assert.deepEqual(
@@ -49,6 +49,37 @@ describe('type: query', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 5,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should resolve shared dataExtensions in query when retrieved together with dataExtension', async () => {
+            // WHEN
+            // this test verifies the fix for: shared DEs not resolved if query+dataExtension is retrieved together
+            await handler.retrieve('testInstance/testBU', ['dataExtension', 'query']);
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.query ? Object.keys(result.query).length : 0,
+                5,
+                'only 5 queries expected'
+            );
+            // verify that shared DE was resolved correctly in query (this is the key bug fix check)
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_query_SharedDE', 'query'),
+                await testUtils.getExpectedJson('9999999', 'query', 'get_sharedDE'),
+                'returned metadata was not equal expected - shared DE should be resolved even when dataExtension is retrieved together with query'
+            );
+            expect(
+                await testUtils.getActualFile('testExisting_query_SharedDE', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'get_sharedDE', 'sql'));
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                8,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -92,8 +123,8 @@ describe('type: query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                4,
-                '4 queries in cache expected'
+                5,
+                '5 queries in cache expected'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_query', 'query'),
@@ -123,8 +154,8 @@ describe('type: query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                4,
-                '4 queries in cache expected'
+                5,
+                '5 queries in cache expected'
             );
 
             expect(await testUtils.getActualFile('testExisting_query', 'query', 'sql')).to.not
@@ -165,8 +196,8 @@ describe('type: query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                5,
-                '5 queries expected in cache'
+                6,
+                '6 queries expected in cache'
             );
             // confirm created item
             assert.deepEqual(
