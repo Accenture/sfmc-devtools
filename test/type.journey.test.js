@@ -60,6 +60,41 @@ describe('type: journey', () => {
             return;
         });
 
+        it('Should retrieve journeys with dataExtension type simultaneously (mcdev retrieve cred/bu -m journey dataExtension)', async () => {
+            // WHEN - both types at once, no keys: unrelated DEs present alongside UPDATECONTACTDATA DEs
+            await handler.retrieve('testInstance/testBU', ['journey', 'dataExtension']);
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.journey ? Object.keys(result.journey).length : 0,
+                6,
+                'unexpected number of journeys (includes local-DE and shared-DE UPDATECONTACTDATA journeys)'
+            );
+            // Verify UPDATECONTACTDATA activity with local DE is correctly resolved
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_journey_updatecontact', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get-updatecontact'),
+                'returned JSON was not equal expected for journey with local DE updatecontact activity'
+            );
+            // Verify UPDATECONTACTDATA activity with shared DE is correctly resolved
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    'testExisting_journey_updatecontact_sharedDE',
+                    'journey'
+                ),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get-updatecontact-sharedDE'),
+                'returned JSON was not equal expected for journey with shared DE updatecontact activity'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                34,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
         it('Should retrieve only published journeys', async () => {
             handler.setOptions({ onlyPublished: true });
             // WHEN

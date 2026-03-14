@@ -66,13 +66,21 @@ declare class DataExtensionField extends MetadataType {
      */
     static isSharedDe(customerKey: string): boolean;
     /**
-     * helps retrieving fields for a single shared DE from parent BU.
+     * helps retrieving fields for a single DE from parent BU.
      * Use when the DE is shared (stored on parent BU) and its fields are not in the current BU's cache.
      *
      * @param {string} customerKey external key of single DE
      * @returns {Promise.<object>} Promise of items
      */
     static retrieveFieldsForSingleSharedDe(customerKey: string): Promise<object>;
+    /**
+     * Routes field retrieval to the correct method depending on whether the DE is local or shared.
+     * Use this instead of duplicating the isSharedDe() check at each call site.
+     *
+     * @param {string} customerKey external key of single DE
+     * @returns {Promise.<object>} Promise of items
+     */
+    static retrieveFieldsForSingleDeAuto(customerKey: string): Promise<object>;
     /**
      * Retrieves all records for caching
      *
