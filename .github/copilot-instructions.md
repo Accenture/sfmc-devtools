@@ -1,5 +1,7 @@
 # GitHub Copilot Instructions for sfmc-devtools
 
+Always assume a bug-ticket might be outdated and first try to verify if the described issue is still occurring.
+
 ## Commit Messages
 
 Prefix every commit message with the issue number it was created for:
