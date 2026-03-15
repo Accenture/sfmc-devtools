@@ -74,7 +74,7 @@ Examples:
 - Changes to `lib/metadataTypes/Automation.js` → assign label `c/automation`
 - Changes to `lib/metadataTypes/DataExtension.js` → assign label `c/dataextension`
 
-The label name is `c/` followed by the lowercase class name (filename without extension).
+The label name is `c/` followed by the lower camel-cased class name (filename without extension).
 
 Only assign labels that already exist in the repository.
 
