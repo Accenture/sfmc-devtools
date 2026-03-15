@@ -749,6 +749,15 @@ declare class MetadataType {
      */
     static getDependentFilesExtra(metadataItem: object, dependentTypeKeyCombo: TypeKeyCombo): void;
     /**
+     * Returns alternative file paths to check when a dependency key is not found in the primary
+     * retrieve folder. Override in subtypes to support items stored in other BU folders.
+     * Used by {@link MetadataType.getDependentFiles}.
+     *
+     * @param {string[]} keyArr keys that were not found in the primary location
+     * @returns {Promise.<string[]>} alternative file paths to check
+     */
+    static getAlternativeFilesToCommit(keyArr: string[]): Promise<string[]>;
+    /**
      * helper for {@link MetadataType.getDependentFiles}
      *
      * @param {MetadataTypeItem} obj the metadataItem to search in

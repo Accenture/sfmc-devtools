@@ -815,6 +815,87 @@ describe('type: query', () => {
             return;
         });
 
+        it('Should find shared dataExtension in _ParentBU_ when running buildTemplate with --dependencies on child BU', async () => {
+            // Retrieve shared DEs from _ParentBU_ to disk first
+            await handler.retrieve('testInstance/_ParentBU_', ['dataExtension']);
+            assert.equal(
+                process.exitCode,
+                0,
+                '_ParentBU_ retrieve should not have thrown an error'
+            );
+            const expectedApiCallsParentBURetrieve = 4;
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                expectedApiCallsParentBURetrieve,
+                'Unexpected number of requests for _ParentBU_ dataExtension retrieve'
+            );
+
+            // Retrieve query from child BU (testBU)
+            await handler.retrieve('testInstance/testBU', ['query']);
+            assert.equal(
+                process.exitCode,
+                0,
+                'testBU query retrieve should not have thrown an error'
+            );
+            const expectedApiCallsTestBURetrieve = 5;
+            assert.equal(
+                testUtils.getAPIHistoryLength() - expectedApiCallsParentBURetrieve,
+                expectedApiCallsTestBURetrieve,
+                'Unexpected number of requests for testBU query retrieve'
+            );
+
+            // Run buildTemplate with --dependencies: shared DE must be found in _ParentBU_ without warning
+            handler.setOptions({ dependencies: true, skipInteraction: true });
+            const templateResult = await handler.buildTemplate(
+                'testInstance/testBU',
+                'query',
+                ['testExisting_query_SharedDE'],
+                ['testSourceMarket']
+            );
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+
+            // Verify query was templated
+            assert.equal(
+                templateResult.query ? templateResult.query.length : 0,
+                1,
+                'expected one query to be templated'
+            );
+            assert.deepEqual(
+                await testUtils.getActualTemplateJson('testExisting_query_SharedDE', 'query'),
+                await testUtils.getExpectedJson('9999999', 'query', 'template_sharedDE'),
+                'returned query template JSON was not equal expected'
+            );
+            expect(
+                await testUtils.getActualTemplateFile('testExisting_query_SharedDE', 'query', 'sql')
+            ).to.equal(
+                await testUtils.getExpectedFile('9999999', 'query', 'template_sharedDE', 'sql')
+            );
+
+            // Verify shared DE was found in _ParentBU_ and templated (not listed as missing)
+            assert.equal(
+                templateResult.dataExtension ? templateResult.dataExtension.length : 0,
+                1,
+                'expected shared DE to be found in _ParentBU_ and included in template result'
+            );
+            assert.deepEqual(
+                await testUtils.getActualTemplateJson(
+                    'testExisting_dataExtensionShared',
+                    'dataExtension'
+                ),
+                await testUtils.getExpectedJson('1111111', 'dataExtension', 'template_sharedDE'),
+                'returned shared DE template JSON was not equal expected'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength() -
+                    expectedApiCallsParentBURetrieve -
+                    expectedApiCallsTestBURetrieve,
+                4,
+                'Unexpected number of requests made during buildTemplate --dependencies'
+            );
+            return;
+        });
+
         it('Should create a query template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['query']);

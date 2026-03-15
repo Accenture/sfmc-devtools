@@ -1,0 +1,8 @@
+{
+    "name": "{{{prefix}}}query_SharedDE",
+    "key": "{{{prefix}}}query_SharedDE",
+    "description": "{{{description}}}",
+    "r__dataExtension_key": "{{{prefix}}}dataExtensionShared",
+    "targetUpdateTypeName": "Overwrite",
+    "r__folder_Path": "Query"
+}
