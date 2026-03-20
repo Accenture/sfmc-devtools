@@ -214,7 +214,11 @@ describe('CLI', function () {
                     'testExisting_query.query-meta.json'
                 )
             );
-            assert.equal(retrievedFile.key, 'testExisting_query', 'retrieved query key should match');
+            assert.equal(
+                retrievedFile.key,
+                'testExisting_query',
+                'retrieved query key should match'
+            );
             return;
         });
 
@@ -260,11 +264,7 @@ describe('CLI', function () {
     describe('delete ================', () => {
         it('Should delete a query by key via CLI', async () => {
             // WHEN
-            await runCLI(
-                'delete testInstance/testBU query testExisting_query',
-                tmpDir,
-                mockPort
-            );
+            await runCLI('delete testInstance/testBU query testExisting_query', tmpDir, mockPort);
             // THEN - runCLI() throws if the subprocess exits with non-zero code.
             return;
         });
@@ -284,11 +284,7 @@ describe('CLI', function () {
     describe('execute ================', () => {
         it('Should execute a query by key via CLI', async () => {
             // WHEN - query execute calls REST POST to start the query
-            await runCLI(
-                'execute testInstance/testBU query testExisting_query',
-                tmpDir,
-                mockPort
-            );
+            await runCLI('execute testInstance/testBU query testExisting_query', tmpDir, mockPort);
             // THEN - runCLI() throws if the subprocess exits with non-zero code.
             return;
         });
@@ -349,8 +345,9 @@ describe('CLI', function () {
             // WHEN - fixKeys without re-retrieve uses the existing retrieve folder
             // We first need to retrieve to populate the retrieve folder
             await runCLI('retrieve testInstance/testBU query', tmpDir, mockPort);
+            // --yes skips the interactive "re-retrieve dependent types?" prompt
             await runCLI(
-                'fixKeys testInstance/testBU query testExisting_query_fixKeys',
+                'fixKeys testInstance/testBU query testExisting_query_fixKeys --yes',
                 tmpDir,
                 mockPort
             );
@@ -421,10 +418,12 @@ describe('CLI', function () {
 
         it('Should run build (buildTemplate + buildDefinition) via CLI', async () => {
             // WHEN - build is a combined command that runs buildTemplate then buildDefinition
+            // --no-purge skips the interactive "empty deploy folder?" prompt
             await runCLI(
                 'build --buFrom testInstance/testBU --buTo testInstance/testBU' +
                     ' --metadata query:testExisting_query' +
-                    ' --marketFrom testSourceMarket --marketTo testTargetMarket',
+                    ' --marketFrom testSourceMarket --marketTo testTargetMarket' +
+                    ' --no-purge',
                 tmpDir,
                 mockPort
             );
