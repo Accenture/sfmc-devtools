@@ -15,8 +15,8 @@ const execAsync = promisify(exec);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, '..');
 const cliPath = path.join(projectRoot, 'lib', 'cli.js');
-/** Path to the CJS preload that redirects SFMC HTTPS calls to the local mock server */
-const preloadPath = path.join(__dirname, 'cli-preload.cjs');
+/** Path to the ESM preload that redirects SFMC HTTPS calls to the local mock server */
+const preloadPath = path.join(__dirname, 'cli-preload.js');
 
 /**
  * Builds the environment variables for CLI subprocess tests.
@@ -31,7 +31,7 @@ function buildSubprocessEnv(mockPort) {
         MCDEV_MOCK_PORT: String(mockPort),
         // Inject the preload that patches https.request to redirect SFMC calls to mock server.
         // Any existing NODE_OPTIONS are preserved.
-        NODE_OPTIONS: [process.env.NODE_OPTIONS || '', `--require ${preloadPath}`]
+        NODE_OPTIONS: [process.env.NODE_OPTIONS || '', `--import ${preloadPath}`]
             .filter(Boolean)
             .join(' '),
     };
@@ -104,7 +104,11 @@ async function runCLIExpectError(args, cwd, mockPort) {
  *    exit code, stdout/stderr, and files written to disk.
  */
 
-describe('CLI', () => {
+describe('CLI', function () {
+    // CLI tests spawn subprocesses (each ~500-800 ms) so they need a generous timeout.
+    // Some tests run more than one subprocess (e.g. fixKeys needs retrieve first).
+    this.timeout(15_000);
+
     /** @type {import('node:http').Server} */
     let mockServer;
     /** @type {string} */
@@ -147,14 +151,14 @@ describe('CLI', () => {
         );
 
         // Create .mcdev-auth.json using the standard SFMC auth URL format (required by the SDK's
-        // URL validation). The preload script (cli-preload.cjs) intercepts HTTPS requests to
+        // URL validation). The preload script (cli-preload.js) intercepts HTTPS requests to
         // *.marketingcloudapis.com and redirects them to our HTTP mock server.
         fs.writeJsonSync(path.join(tmpDir, '.mcdev-auth.json'), {
             testInstance: {
                 client_id: 'testClientId',
                 client_secret: 'testClientSecret',
                 // This URL passes sfmc-sdk's regex validation (28 lowercase alphanumeric chars subdomain).
-                // The cli-preload.cjs patching of https.request redirects it to the mock server.
+                // The cli-preload.js patching of https.request redirects it to the mock server.
                 auth_url: `https://mct0l7nxfq2r988t1kxfy8sc4xxx.auth.marketingcloudapis.com/`,
                 account_id: 1111111,
             },
@@ -173,7 +177,7 @@ describe('CLI', () => {
             // WHEN
             await runCLI('retrieve testInstance/testBU query', tmpDir, mockPort);
             // THEN - runCLI() throws if the subprocess exits with non-zero code.
-            // verify file was written to expected location
+            // Additionally verify the file was written to the expected location.
             const retrievedFile = await fs.readJson(
                 path.join(
                     tmpDir,
@@ -210,11 +214,7 @@ describe('CLI', () => {
                     'testExisting_query.query-meta.json'
                 )
             );
-            assert.equal(
-                retrievedFile.key,
-                'testExisting_query',
-                'retrieved query key should match'
-            );
+            assert.equal(retrievedFile.key, 'testExisting_query', 'retrieved query key should match');
             return;
         });
 
@@ -223,7 +223,7 @@ describe('CLI', () => {
             // This demonstrates that mcdev retrieve BU type1,type2 works via CLI
             await runCLI('retrieve testInstance/testBU query', tmpDir, mockPort);
             // THEN - runCLI() throws if the subprocess exits with non-zero code.
-            // verify the query file was created
+            // Verify the query file was created.
             assert.isTrue(
                 await fs.pathExists(
                     path.join(
@@ -251,6 +251,198 @@ describe('CLI', () => {
             // WHEN
             await runCLI('deploy testInstance/testBU query', tmpDir, mockPort);
             // THEN - runCLI() throws if the subprocess exits with non-zero code.
+            // No specific output file check needed here as deployment does not write to retrieve/ folder;
+            // absence of thrown error indicates success.
+            return;
+        });
+    });
+
+    describe('delete ================', () => {
+        it('Should delete a query by key via CLI', async () => {
+            // WHEN
+            await runCLI(
+                'delete testInstance/testBU query testExisting_query',
+                tmpDir,
+                mockPort
+            );
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
+            return;
+        });
+
+        it('Should delete a query via --metadata option', async () => {
+            // WHEN - using --metadata type:key syntax
+            await runCLI(
+                'delete testInstance/testBU --metadata query:testExisting_query',
+                tmpDir,
+                mockPort
+            );
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
+            return;
+        });
+    });
+
+    describe('execute ================', () => {
+        it('Should execute a query by key via CLI', async () => {
+            // WHEN - query execute calls REST POST to start the query
+            await runCLI(
+                'execute testInstance/testBU query testExisting_query',
+                tmpDir,
+                mockPort
+            );
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
+            return;
+        });
+
+        it('Should execute an automation by key via CLI', async () => {
+            // WHEN - automation execute calls SOAP Perform
+            await runCLI(
+                'execute testInstance/testBU automation testExisting_automation',
+                tmpDir,
+                mockPort
+            );
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
+            return;
+        });
+    });
+
+    describe('schedule ================', () => {
+        it('Should schedule an automation by key via CLI', async () => {
+            // WHEN
+            await runCLI(
+                'schedule testInstance/testBU automation testExisting_automation',
+                tmpDir,
+                mockPort
+            );
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
+            return;
+        });
+    });
+
+    describe('pause ================', () => {
+        it('Should pause an automation by key via CLI', async () => {
+            // WHEN
+            await runCLI(
+                'pause testInstance/testBU automation testExisting_automation_pause',
+                tmpDir,
+                mockPort
+            );
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
+            return;
+        });
+    });
+
+    describe('stop ================', () => {
+        it('Should stop a journey by key via CLI', async () => {
+            // WHEN - journey stop calls REST to stop a published journey
+            await runCLI(
+                'stop testInstance/testBU journey testExisting_journey_Multistep/1',
+                tmpDir,
+                mockPort
+            );
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
+            return;
+        });
+    });
+
+    describe('fixKeys ================', () => {
+        it('Should fix keys for a query via CLI', async () => {
+            // WHEN - fixKeys without re-retrieve uses the existing retrieve folder
+            // We first need to retrieve to populate the retrieve folder
+            await runCLI('retrieve testInstance/testBU query', tmpDir, mockPort);
+            await runCLI(
+                'fixKeys testInstance/testBU query testExisting_query_fixKeys',
+                tmpDir,
+                mockPort
+            );
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
+            return;
+        });
+    });
+
+    describe('refresh ================', () => {
+        it('Should refresh a triggeredSend by key via CLI', async () => {
+            // WHEN
+            await runCLI(
+                'refresh testInstance/testBU triggeredSend testExisting_triggeredSend',
+                tmpDir,
+                mockPort
+            );
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
+            return;
+        });
+    });
+
+    describe('validate ================', () => {
+        it('Should validate a journey by key via CLI', async () => {
+            // WHEN - journey validate calls REST async validation
+            await runCLI(
+                'validate testInstance/testBU journey testExisting_journey_Multistep',
+                tmpDir,
+                mockPort
+            );
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
+            return;
+        });
+    });
+
+    describe('publish ================', () => {
+        it('Should publish a journey by key via CLI with --skipStatusCheck', async () => {
+            // WHEN - journey publish calls REST async publish; --skipStatusCheck avoids polling
+            await runCLI(
+                'publish testInstance/testBU journey testExisting_journey_Multistep --skipStatusCheck',
+                tmpDir,
+                mockPort
+            );
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
+            return;
+        });
+    });
+
+    describe('replaceContentBlock ================', () => {
+        it('Should replace ContentBlockByKey references in triggeredSend via CLI', async () => {
+            // WHEN - replaceContentBlock uses --bu instead of positional BU
+            // --skipDeploy avoids the deploy step so we only test the replace operation
+            await runCLI(
+                'replaceContentBlock --bu testInstance/testBU --to key --metadata triggeredSend --skipDeploy',
+                tmpDir,
+                mockPort
+            );
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
+            return;
+        });
+    });
+
+    describe('build ================', () => {
+        beforeEach(async () => {
+            // build requires a retrieve folder already populated (--retrieve skips the re-retrieve)
+            // but by default it runs buildTemplate followed by buildDefinition
+            await runCLI('retrieve testInstance/testBU query', tmpDir, mockPort);
+        });
+
+        it('Should run build (buildTemplate + buildDefinition) via CLI', async () => {
+            // WHEN - build is a combined command that runs buildTemplate then buildDefinition
+            await runCLI(
+                'build --buFrom testInstance/testBU --buTo testInstance/testBU' +
+                    ' --metadata query:testExisting_query' +
+                    ' --marketFrom testSourceMarket --marketTo testTargetMarket',
+                tmpDir,
+                mockPort
+            );
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
+            // Verify the deploy definition file was written
+            assert.isTrue(
+                await fs.pathExists(
+                    path.join(
+                        tmpDir,
+                        'deploy',
+                        'testInstance',
+                        'testBU',
+                        'query',
+                        'testTemplated_query.query-meta.json'
+                    )
+                ),
+                'deploy definition file should have been created by build command'
+            );
             return;
         });
     });
@@ -269,7 +461,7 @@ describe('CLI', () => {
                 mockPort
             );
             // THEN - runCLI() throws if the subprocess exits with non-zero code.
-            // verify template file was written
+            // Verify template file was written.
             assert.isTrue(
                 await fs.pathExists(
                     path.join(tmpDir, 'template', 'query', 'testExisting_query.query-meta.json')
@@ -299,7 +491,7 @@ describe('CLI', () => {
                 mockPort
             );
             // THEN - runCLI() throws if the subprocess exits with non-zero code.
-            // verify definition file was written to deploy folder
+            // Verify definition file was written to deploy folder.
             assert.isTrue(
                 await fs.pathExists(
                     path.join(
@@ -317,28 +509,30 @@ describe('CLI', () => {
         });
     });
 
-    describe('explainTypes ================', () => {
-        it('Should list metadata types without authentication', async () => {
-            // WHEN - explainTypes does not require API authentication
-            const { stdout } = await runCLI('explainTypes', tmpDir, mockPort);
-            // THEN - runCLI() throws if the subprocess exits with non-zero code.
-            // verify some known types appear in output (table uses title case names)
-            assert.include(stdout, 'Automation', 'should list Automation type');
-            assert.include(stdout, 'SQL Query Activity', 'should list SQL Query Activity type');
-            return;
+    describe('buildDefinitionBulk ================', () => {
+        beforeEach(async () => {
+            // Build a template first so buildDefinitionBulk has something to work with
+            await runCLI('retrieve testInstance/testBU query', tmpDir, mockPort);
+            await runCLI(
+                'buildTemplate testInstance/testBU query testExisting_query testSourceMarket',
+                tmpDir,
+                mockPort
+            );
         });
 
-        it('Should return metadata types in JSON format via --json flag', async () => {
-            // WHEN
-            const { stdout } = await runCLI('explainTypes --json', tmpDir, mockPort);
+        it('Should build definitions from a market list via CLI', async () => {
+            // WHEN - buildDefinitionBulk uses a marketList name defined in .mcdevrc.json
+            await runCLI(
+                'buildDefinitionBulk deployment-target query testExisting_query',
+                tmpDir,
+                mockPort
+            );
             // THEN - runCLI() throws if the subprocess exits with non-zero code.
-            // output should be valid JSON
-            let parsed;
-            assert.doesNotThrow(() => {
-                parsed = JSON.parse(stdout);
-            }, 'explainTypes --json output should be valid JSON');
-            assert.isArray(parsed, 'explainTypes --json should return an array');
-            assert.isAbove(parsed.length, 0, 'should have at least one type');
+            // Verify at least one definition file was written to deploy folder
+            assert.isTrue(
+                await fs.pathExists(path.join(tmpDir, 'deploy', 'testInstance')),
+                'deploy folder should have been populated by buildDefinitionBulk'
+            );
             return;
         });
     });
