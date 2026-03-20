@@ -141,4 +141,17 @@ export default [
             'mocha/no-pending-tests': 'off',
         },
     },
+    // CJS files (e.g. Node.js --require preload scripts for testing) use CommonJS syntax
+    {
+        files: ['**/*.cjs'],
+        languageOptions: {
+            sourceType: 'commonjs',
+            globals: {
+                ...globals.node,
+            },
+        },
+        rules: {
+            'unicorn/prefer-node-protocol': 'off',
+        },
+    },
 ];
