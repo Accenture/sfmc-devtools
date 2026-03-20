@@ -160,24 +160,19 @@ describe('CLI', () => {
             },
         });
 
-        // Reset exit code before each test so mock server's process.exitCode changes don't bleed over
-        process.exitCode = 0;
         // Clear cached auth sessions so the CLI subprocess always does a fresh auth against our mock server
         auth.clearSessions();
     });
 
     afterEach(() => {
         fs.removeSync(tmpDir);
-        // Reset exit code again after each test
-        process.exitCode = 0;
     });
 
     describe('retrieve ================', () => {
         it('Should retrieve all queries via CLI', async () => {
             // WHEN
             await runCLI('retrieve testInstance/testBU query', tmpDir, mockPort);
-            // THEN
-            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
             // verify file was written to expected location
             const retrievedFile = await fs.readJson(
                 path.join(
@@ -204,8 +199,7 @@ describe('CLI', () => {
                 tmpDir,
                 mockPort
             );
-            // THEN
-            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
             const retrievedFile = await fs.readJson(
                 path.join(
                     tmpDir,
@@ -228,12 +222,7 @@ describe('CLI', () => {
             // WHEN - comma-separated types are a CLI-specific feature (csvToArray)
             // This demonstrates that mcdev retrieve BU type1,type2 works via CLI
             await runCLI('retrieve testInstance/testBU query', tmpDir, mockPort);
-            // THEN
-            assert.equal(
-                process.exitCode,
-                0,
-                'retrieve with csv type should not have thrown an error'
-            );
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
             // verify the query file was created
             assert.isTrue(
                 await fs.pathExists(
@@ -261,8 +250,7 @@ describe('CLI', () => {
         it('Should deploy a query via CLI', async () => {
             // WHEN
             await runCLI('deploy testInstance/testBU query', tmpDir, mockPort);
-            // THEN - exit code check is the main verification since we cannot easily inspect API calls
-            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
             return;
         });
     });
@@ -271,7 +259,6 @@ describe('CLI', () => {
         beforeEach(async () => {
             // Retrieve first so the retrieve folder is populated for buildTemplate
             await runCLI('retrieve testInstance/testBU query', tmpDir, mockPort);
-            process.exitCode = 0;
         });
 
         it('Should build a query template via CLI', async () => {
@@ -281,8 +268,7 @@ describe('CLI', () => {
                 tmpDir,
                 mockPort
             );
-            // THEN
-            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
             // verify template file was written
             assert.isTrue(
                 await fs.pathExists(
@@ -303,7 +289,6 @@ describe('CLI', () => {
                 tmpDir,
                 mockPort
             );
-            process.exitCode = 0;
         });
 
         it('Should build a query definition via CLI', async () => {
@@ -313,8 +298,7 @@ describe('CLI', () => {
                 tmpDir,
                 mockPort
             );
-            // THEN
-            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
             // verify definition file was written to deploy folder
             assert.isTrue(
                 await fs.pathExists(
@@ -337,8 +321,7 @@ describe('CLI', () => {
         it('Should list metadata types without authentication', async () => {
             // WHEN - explainTypes does not require API authentication
             const { stdout } = await runCLI('explainTypes', tmpDir, mockPort);
-            // THEN
-            assert.equal(process.exitCode, 0, 'explainTypes should not have thrown an error');
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
             // verify some known types appear in output (table uses title case names)
             assert.include(stdout, 'Automation', 'should list Automation type');
             assert.include(stdout, 'SQL Query Activity', 'should list SQL Query Activity type');
@@ -348,12 +331,7 @@ describe('CLI', () => {
         it('Should return metadata types in JSON format via --json flag', async () => {
             // WHEN
             const { stdout } = await runCLI('explainTypes --json', tmpDir, mockPort);
-            // THEN
-            assert.equal(
-                process.exitCode,
-                0,
-                'explainTypes --json should not have thrown an error'
-            );
+            // THEN - runCLI() throws if the subprocess exits with non-zero code.
             // output should be valid JSON
             let parsed;
             assert.doesNotThrow(() => {

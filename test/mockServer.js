@@ -18,6 +18,8 @@ export async function startMockServer() {
                 chunks.push(chunk);
             }
             const body = Buffer.concat(chunks).toString();
+            // Cache port for use in auth response and REST baseURL construction
+            const port = /** @type {import('node:net').AddressInfo} */ (server.address()).port;
 
             // Handle authentication endpoint
             if (req.url === '/v2/token') {
@@ -27,7 +29,6 @@ export async function startMockServer() {
                 } catch {
                     // ignore JSON parse errors, fall back to '0'
                 }
-                const port = /** @type {import('node:net').AddressInfo} */ (server.address()).port;
                 res.writeHead(200, { 'Content-Type': 'application/json' });
                 res.end(
                     JSON.stringify({
@@ -45,7 +46,6 @@ export async function startMockServer() {
             }
 
             // Build config object compatible with resourceFactory handlers
-            const port = /** @type {import('node:net').AddressInfo} */ (server.address()).port;
             const config = {
                 data: body,
                 headers: {

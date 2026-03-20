@@ -69,7 +69,7 @@ function buildHttpOptions(options) {
  */
 https.request = function patchedHttpsRequest(options, callback) {
     const host = getHost(options);
-    if (host.includes('marketingcloudapis.com')) {
+    if (host === 'marketingcloudapis.com' || host.endsWith('.marketingcloudapis.com')) {
         let httpOptions;
         if (typeof options === 'string' || options instanceof URL) {
             const url = options instanceof URL ? options : new URL(options);
@@ -100,7 +100,7 @@ const originalGet = https.get.bind(https);
  */
 https.get = function patchedHttpsGet(options, callback) {
     const host = getHost(options);
-    if (host.includes('marketingcloudapis.com')) {
+    if (host === 'marketingcloudapis.com' || host.endsWith('.marketingcloudapis.com')) {
         const req = https.request(options, callback);
         req.end();
         return req;
