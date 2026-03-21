@@ -815,7 +815,7 @@ describe('type: query', () => {
             return;
         });
 
-        it('Should find shared dataExtension in _ParentBU_ when running buildTemplate with --dependencies on child BU', async () => {
+        it('Should warn about shared dataExtension in _ParentBU_ when running buildTemplate with --dependencies on child BU', async () => {
             // Retrieve shared DEs from _ParentBU_ to disk first
             await handler.retrieve('testInstance/_ParentBU_', ['dataExtension']);
             assert.equal(
@@ -844,7 +844,7 @@ describe('type: query', () => {
                 'Unexpected number of requests for testBU query retrieve'
             );
 
-            // Run buildTemplate with --dependencies: shared DE must be found in _ParentBU_ without warning
+            // Run buildTemplate with --dependencies: shared DE must show a warning, not be included in result
             handler.setOptions({ dependencies: true, skipInteraction: true });
             const templateResult = await handler.buildTemplate(
                 'testInstance/testBU',
@@ -871,28 +871,13 @@ describe('type: query', () => {
                 await testUtils.getExpectedFile('9999999', 'query', 'template_sharedDE', 'sql')
             );
 
-            // Verify shared DE was found in _ParentBU_ and templated (not listed as missing)
+            // Verify shared DE was NOT included in template result (only a warning should be shown)
             assert.equal(
                 templateResult.dataExtension ? templateResult.dataExtension.length : 0,
-                1,
-                'expected shared DE to be found in _ParentBU_ and included in template result'
-            );
-            assert.deepEqual(
-                await testUtils.getActualTemplateJson(
-                    'testExisting_dataExtensionShared',
-                    'dataExtension'
-                ),
-                await testUtils.getExpectedJson('1111111', 'dataExtension', 'template_sharedDE'),
-                'returned shared DE template JSON was not equal expected'
+                0,
+                'shared DE should not be included in the child BU template result - only a warning should be shown'
             );
 
-            assert.equal(
-                testUtils.getAPIHistoryLength() -
-                    expectedApiCallsParentBURetrieve -
-                    expectedApiCallsTestBURetrieve,
-                4,
-                'Unexpected number of requests made during buildTemplate --dependencies'
-            );
             return;
         });
 

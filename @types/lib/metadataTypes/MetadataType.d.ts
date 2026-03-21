@@ -749,14 +749,16 @@ declare class MetadataType {
      */
     static getDependentFilesExtra(metadataItem: object, dependentTypeKeyCombo: TypeKeyCombo): void;
     /**
-     * Returns alternative file paths to check when a dependency key is not found in the primary
-     * retrieve folder. Override in subtypes to support items stored in other BU folders.
+     * Hook called when dependency keys were not found in the primary retrieve folder.
+     * Override in subtypes to show type-specific warnings (e.g. shared/synchronized dataExtensions).
+     * Keys returned by this method still receive the generic "not found" warning.
      * Used by {@link MetadataType.getDependentFiles}.
      *
-     * @param {string[]} keyArr keys that were not found in the primary location
-     * @returns {Promise.<string[]>} alternative file paths to check
+     * @param {string[]} notFound keys that could not be found in the retrieve folder
+     * @param {TypeKeyCombo} notFoundList accumulator of all not-found keys
+     * @returns {Promise.<string[]>} keys that should still trigger the default "not found" warning
      */
-    static getAlternativeFilesToCommit(keyArr: string[]): Promise<string[]>;
+    static handleNotFoundDependencies(notFound: string[], notFoundList: TypeKeyCombo): Promise<string[]>;
     /**
      * helper for {@link MetadataType.getDependentFiles}
      *
