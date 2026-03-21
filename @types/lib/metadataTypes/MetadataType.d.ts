@@ -755,10 +755,9 @@ declare class MetadataType {
      * Used by {@link MetadataType.getDependentFiles}.
      *
      * @param {string[]} notFound keys that could not be found in the retrieve folder
-     * @param {TypeKeyCombo} notFoundList accumulator of all not-found keys
      * @returns {Promise.<string[]>} keys that should still trigger the default "not found" warning
      */
-    static handleNotFoundDependencies(notFound: string[], notFoundList: TypeKeyCombo): Promise<string[]>;
+    static handleNotFoundDependencies(notFound: string[]): Promise<string[]>;
     /**
      * helper for {@link MetadataType.getDependentFiles}
      *
