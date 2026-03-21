@@ -310,7 +310,7 @@ export const handleRESTRequest = async (config) => {
             : null;
 
         if (!testPathFilter && config.method === 'post' && config.data) {
-            const simpleOperators = { equal: '=', in: 'IN' };
+            const simpleOperators = { equal: '=', in: 'IN', mustContain: 'MUSTCONTAIN' };
             const data = JSON.parse(config.data);
             const myObj = data.query?.rightOperand || data.query;
             if (myObj) {

@@ -825,6 +825,33 @@ describe('type: asset', () => {
             );
             return;
         });
+
+        it('Should update an asset-block and refresh triggeredSends related to emails containing the block', async () => {
+            handler.setOptions({ refresh: true });
+            // WHEN
+            const deployResult = await handler.deploy(
+                'testInstance/testBU',
+                ['asset'],
+                ['testExisting_block_refresh']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+            // check how many items were deployed
+            assert.equal(
+                deployResult['testInstance/testBU']?.asset
+                    ? Object.keys(deployResult['testInstance/testBU']?.asset).length
+                    : 0,
+                1,
+                'Unexpected number of assets deployed'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                19,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 
     describe('Templating ================', () => {
