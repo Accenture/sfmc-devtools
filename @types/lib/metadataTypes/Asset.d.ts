@@ -194,7 +194,6 @@ declare class Asset extends MetadataType {
      *
      * @private
      * @param {string[]} keys metadata keys
-     * @param {string[]} activeEmailKeys keys of emails in published journeys
      * @returns {Promise.<object[]>} - array of assets
      */
     private static _findEmailsUsingBlock;
