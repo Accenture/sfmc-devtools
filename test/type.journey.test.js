@@ -26,7 +26,7 @@ describe('type: journey', () => {
             const result = cache.getCache();
             assert.equal(
                 result.journey ? Object.keys(result.journey).length : 0,
-                5,
+                6,
                 'unexpected number of journeys'
             );
             assert.deepEqual(
@@ -44,9 +44,52 @@ describe('type: journey', () => {
                 await testUtils.getExpectedJson('9999999', 'journey', 'get-transactionalEmail'),
                 'returned JSON was not equal expected'
             );
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    'testExisting_journey_updatecontact_sharedDE',
+                    'journey'
+                ),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get-updatecontact-sharedDE'),
+                'returned JSON was not equal expected'
+            );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                29,
+                31,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should retrieve journeys with dataExtension type simultaneously (mcdev retrieve cred/bu -m journey dataExtension)', async () => {
+            // WHEN - both types at once, no keys: unrelated DEs present alongside UPDATECONTACTDATA DEs
+            await handler.retrieve('testInstance/testBU', ['journey', 'dataExtension']);
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.journey ? Object.keys(result.journey).length : 0,
+                6,
+                'unexpected number of journeys (includes local-DE and shared-DE UPDATECONTACTDATA journeys)'
+            );
+            // Verify UPDATECONTACTDATA activity with local DE is correctly resolved
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_journey_updatecontact', 'journey'),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get-updatecontact'),
+                'returned JSON was not equal expected for journey with local DE updatecontact activity'
+            );
+            // Verify UPDATECONTACTDATA activity with shared DE is correctly resolved
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    'testExisting_journey_updatecontact_sharedDE',
+                    'journey'
+                ),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get-updatecontact-sharedDE'),
+                'returned JSON was not equal expected for journey with shared DE updatecontact activity'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                34,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -157,6 +200,39 @@ describe('type: journey', () => {
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_journey_updatecontact', 'journey'),
                 await testUtils.getExpectedJson('9999999', 'journey', 'get-updatecontact'),
+                'returned JSON was not equal expected'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                20,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should retrieve a journey containing an UPDATECONTACTDATA activity referencing a shared DE with key', async () => {
+            // WHEN
+            await handler.retrieve(
+                'testInstance/testBU',
+                ['journey'],
+                ['testExisting_journey_updatecontact_sharedDE']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.journey ? Object.keys(result.journey).length : 0,
+                1,
+                'only 1 journeys expected'
+            );
+
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    'testExisting_journey_updatecontact_sharedDE',
+                    'journey'
+                ),
+                await testUtils.getExpectedJson('9999999', 'journey', 'get-updatecontact-sharedDE'),
                 'returned JSON was not equal expected'
             );
             assert.equal(
@@ -504,6 +580,32 @@ describe('type: journey', () => {
             );
             return;
         });
+
+        it('Should update a journey with UPDATECONTACT activity referencing a shared DE', async () => {
+            // WHEN
+            await handler.deploy(
+                'testInstance/testBU',
+                ['journey'],
+                ['testExisting_journey_updatecontact_sharedDE']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+            // confirm updated item
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    'testExisting_journey_updatecontact_sharedDE',
+                    'journey'
+                ),
+                await testUtils.getExpectedJson('9999999', 'journey', 'put-updatecontact-sharedDE'),
+                'returned metadata was not equal expected for update journey with shared DE updatecontact activity'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                22,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 
     describe('Templating ================', () => {
@@ -545,7 +647,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                29,
+                31,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -741,7 +843,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                35,
+                37,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -776,7 +878,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                35,
+                37,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -811,7 +913,7 @@ describe('type: journey', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                35,
+                37,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

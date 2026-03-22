@@ -1,3 +1,3 @@
-enhancement: ['feature/*', 'feat/*']
-bug: ['bugfix/*', 'bug/*', 'fix/*', 'hotfix/*']
-chore: ['chore/*', 'task/*']
+enhancement: ['feature/*', 'feat/*', 'copilot/feature/*']
+bug: ['bugfix/*', 'bug/*', 'fix/*', 'hotfix/*', 'copilot/bug/*']
+chore: ['chore/*', 'task/*', 'copilot/task/*']
