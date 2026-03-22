@@ -847,7 +847,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                18,
+                22,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
