@@ -190,11 +190,19 @@ declare class Asset extends MetadataType {
      */
     static postRetrieveTasks(metadata: AssetItem): CodeExtractItem;
     /**
+     * helper for {@link Asset}. finds active emails that reference the updated block
+     *
+     * @private
+     * @param {string[]} keys metadata keys
+     * @returns {Promise.<object[]>} - array of assets
+     */
+    private static _findEmailsUsingBlock;
+    /**
      * helper for {@link Asset.postDeployTasks}. triggers a refresh of active triggerredSendDefinitions associated with the updated asset-message items. Gets executed if refresh option has been set.
      *
      * @private
      * @param {MetadataTypeMap} metadata metadata mapped by their keyField
-     * @returns {Promise.<void>} -
+     * @returns {Promise.<string[]>} Returns list of keys that were refreshed
      */
     private static _refreshTriggeredSend;
     /**
@@ -417,6 +425,13 @@ declare class Asset extends MetadataType {
      * @param {string[]} dependentKeyArr list of found keys
      */
     static _getDependentFilesExtra(slots: object, dependentKeyArr: string[]): void;
+    /**
+     * Finds emails in running journeys, filters out the ones that reference the block (if it's a block) and refreshes related TSDs
+     *
+     * @param {string[]} [keyArr] metadata keys
+     * @returns {Promise.<string[]>} Returns list of keys that were refreshed
+     */
+    static refresh(keyArr?: string[]): Promise<string[]>;
 }
 declare namespace Asset {
     let getJsonFromFSCache: {
