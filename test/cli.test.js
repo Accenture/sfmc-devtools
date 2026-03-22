@@ -6,7 +6,7 @@ import { promisify } from 'node:util';
 import fs from 'fs-extra';
 import path from 'node:path';
 import os from 'node:os';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { startMockServer } from './mockServer.js';
 import auth from '../lib/util/auth.js';
 
@@ -15,8 +15,11 @@ const execAsync = promisify(exec);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, '..');
 const cliPath = path.join(projectRoot, 'lib', 'cli.js');
-/** Path to the ESM preload that redirects SFMC HTTPS calls to the local mock server */
-const preloadPath = path.join(__dirname, 'cli-preload.js');
+/**
+ * Path to the ESM preload that redirects SFMC HTTPS calls to the local mock server.
+ * Use file:// URL form so --import works on Node 21 as well as 22+.
+ */
+const preloadUrl = pathToFileURL(path.join(__dirname, 'cli-preload.js')).href;
 
 /**
  * Builds the environment variables for CLI subprocess tests.
@@ -31,7 +34,7 @@ function buildSubprocessEnv(mockPort) {
         MCDEV_MOCK_PORT: String(mockPort),
         // Inject the preload that patches https.request to redirect SFMC calls to mock server.
         // Any existing NODE_OPTIONS are preserved.
-        NODE_OPTIONS: [process.env.NODE_OPTIONS || '', `--import ${preloadPath}`]
+        NODE_OPTIONS: [process.env.NODE_OPTIONS || '', `--import ${preloadUrl}`]
             .filter(Boolean)
             .join(' '),
     };
