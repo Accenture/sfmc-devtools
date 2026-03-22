@@ -19,7 +19,7 @@ const cliPath = path.join(projectRoot, 'lib', 'cli.js');
  * Path to the ESM preload that redirects SFMC HTTPS calls to the local mock server.
  * Use file:// URL form so --import works on Node 21 as well as 22+.
  */
-const preloadUrl = pathToFileURL(path.join(__dirname, 'cli-preload.js')).href;
+const preloadUrl = pathToFileURL(path.join(__dirname, 'cli-preload.mjs')).href;
 
 /**
  * Builds the environment variables for CLI subprocess tests.
@@ -152,6 +152,12 @@ describe('CLI', function () {
             path.join(__dirname, 'mockRoot', '.mcdev-validations.js'),
             path.join(tmpDir, '.mcdev-validations.js')
         );
+
+        // Write a minimal package.json so that Node 21 treats .js files in tmpDir as ESM.
+        // Without this, Node 21 falls back to CommonJS for .js files in directories that have
+        // no package.json, causing `import('file:///.../.mcdev-validations.js')` to fail.
+        // Real mcdev project directories always have a package.json, so this matches reality.
+        fs.writeJsonSync(path.join(tmpDir, 'package.json'), { type: 'module' });
 
         // Create .mcdev-auth.json using the standard SFMC auth URL format (required by the SDK's
         // URL validation). The preload script (cli-preload.js) intercepts HTTPS requests to
