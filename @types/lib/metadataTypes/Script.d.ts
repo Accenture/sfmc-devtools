@@ -45,7 +45,7 @@ declare class Script extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<{metadata: ScriptMap, type: string}>} Promise
      */
-    static retrieve(retrieveDir?: string, _?: void | string[] | undefined, __?: void | string[] | undefined, key?: string): Promise<{
+    static retrieve(retrieveDir?: string, _?: void | string[], __?: void | string[], key?: string): Promise<{
         metadata: ScriptMap;
         type: string;
     }>;
@@ -201,7 +201,7 @@ declare namespace Script {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
-        dependencyGraph: null;
+        dependencyGraph: any;
         folderType: string;
         hasExtended: boolean;
         idField: string;
@@ -210,9 +210,9 @@ declare namespace Script {
         nameField: string;
         folderIdField: string;
         createdDateField: string;
-        createdNameField: null;
+        createdNameField: any;
         lastmodDateField: string;
-        lastmodNameField: null;
+        lastmodNameField: any;
         restPagination: boolean;
         type: string;
         typeDescription: string;

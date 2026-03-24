@@ -17,8 +17,8 @@ export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestPara
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 declare const FileFs: typeof fs & {
-    prettierConfig: null;
-    prettierConfigFileType: null;
+    prettierConfig: any;
+    prettierConfigFileType: any;
     /**
      * copies a file from one path to another
      *

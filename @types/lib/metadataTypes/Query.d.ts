@@ -42,7 +42,7 @@ declare class Query extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<{metadata: QueryMap, type: string}>} Promise of metadata
      */
-    static retrieve(retrieveDir: string, _?: void | string[] | undefined, __?: void | string[] | undefined, key?: string): Promise<{
+    static retrieve(retrieveDir: string, _?: void | string[], __?: void | string[], key?: string): Promise<{
         metadata: QueryMap;
         type: string;
     }>;
@@ -183,9 +183,9 @@ declare namespace Query {
         nameField: string;
         folderIdField: string;
         createdDateField: string;
-        createdNameField: null;
+        createdNameField: any;
         lastmodDateField: string;
-        lastmodNameField: null;
+        lastmodNameField: any;
         restPagination: boolean;
         targetUpdateTypeMapping: {
             Append: number;

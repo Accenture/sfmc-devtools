@@ -17,7 +17,7 @@ export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestPara
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 declare namespace config {
-    let properties: null;
+    let properties: any;
     /**
      * loads central properties from config file
      *

@@ -50,7 +50,7 @@ declare class User extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
      */
-    static retrieve(retrieveDir: string, _: void | string[], __?: void | string[] | undefined, key?: string): Promise<MetadataTypeMapObj>;
+    static retrieve(retrieveDir: string, _: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
      * Retrieves import definition metadata for caching
      *
@@ -191,7 +191,7 @@ declare class User extends MetadataType {
      * @param {string} interval defaults to 'days'
      * @returns {string} time difference
      */
-    static #timeSinceDate(dateStr: string, interval?: string): string;
+    static "__#private@#timeSinceDate"(dateStr: string, interval?: string): string;
     /**
      * helper to print bu names
      *
@@ -240,12 +240,12 @@ declare class User extends MetadataType {
     static postRetrieveTasks(metadata: UserDocument): MetadataTypeItem | void;
 }
 declare namespace User {
-    let buIdName: {} | undefined;
+    let buIdName: {};
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
         dependencyGraph: {};
-        folderType: null;
+        folderType: any;
         hasExtended: boolean;
         idField: string;
         keepId: boolean;
@@ -253,7 +253,7 @@ declare namespace User {
         keyField: string;
         nameField: string;
         createdDateField: string;
-        createdNameField: null;
+        createdNameField: any;
         lastmodDateField: string;
         lastmodNameField: string;
         maxKeyLength: number;
@@ -441,10 +441,10 @@ declare namespace User {
                 template: boolean;
             };
             ObjectID: {
-                isCreateable: null;
-                isUpdateable: null;
+                isCreateable: any;
+                isUpdateable: any;
                 retrieving: boolean;
-                template: null;
+                template: any;
             };
             ObjectState: {
                 isCreateable: boolean;
@@ -555,8 +555,8 @@ declare namespace User {
                 template: boolean;
             };
             'UserPermissions.PartnerKey': {
-                isCreateable: null;
-                isUpdateable: null;
+                isCreateable: any;
+                isUpdateable: any;
                 retrieving: boolean;
                 template: boolean;
             };
@@ -564,38 +564,38 @@ declare namespace User {
                 skipValidation: boolean;
             };
             'UserPermissions.ObjectID': {
-                isCreateable: null;
-                isUpdateable: null;
+                isCreateable: any;
+                isUpdateable: any;
                 retrieving: boolean;
                 template: boolean;
             };
             'UserPermissions.Name': {
-                isCreateable: null;
-                isUpdateable: null;
+                isCreateable: any;
+                isUpdateable: any;
                 retrieving: boolean;
                 template: boolean;
             };
             'UserPermissions.Value': {
-                isCreateable: null;
-                isUpdateable: null;
+                isCreateable: any;
+                isUpdateable: any;
                 retrieving: boolean;
                 template: boolean;
             };
             'UserPermissions.Description': {
-                isCreateable: null;
-                isUpdateable: null;
+                isCreateable: any;
+                isUpdateable: any;
                 retrieving: boolean;
                 template: boolean;
             };
             'UserPermissions.Delete': {
-                isCreateable: null;
-                isUpdateable: null;
+                isCreateable: any;
+                isUpdateable: any;
                 retrieving: boolean;
                 template: boolean;
             };
             'UserPermissions[].PartnerKey': {
-                isCreateable: null;
-                isUpdateable: null;
+                isCreateable: any;
+                isUpdateable: any;
                 retrieving: boolean;
                 template: boolean;
             };
@@ -603,39 +603,39 @@ declare namespace User {
                 skipValidation: boolean;
             };
             'UserPermissions[].ObjectID': {
-                isCreateable: null;
-                isUpdateable: null;
+                isCreateable: any;
+                isUpdateable: any;
                 retrieving: boolean;
                 template: boolean;
             };
             'UserPermissions[].Name': {
-                isCreateable: null;
-                isUpdateable: null;
+                isCreateable: any;
+                isUpdateable: any;
                 retrieving: boolean;
                 template: boolean;
             };
             'UserPermissions[].Value': {
-                isCreateable: null;
-                isUpdateable: null;
+                isCreateable: any;
+                isUpdateable: any;
                 retrieving: boolean;
                 template: boolean;
             };
             'UserPermissions[].Description': {
-                isCreateable: null;
-                isUpdateable: null;
+                isCreateable: any;
+                isUpdateable: any;
                 retrieving: boolean;
                 template: boolean;
             };
             'UserPermissions[].Delete': {
-                isCreateable: null;
-                isUpdateable: null;
+                isCreateable: any;
+                isUpdateable: any;
                 retrieving: boolean;
                 template: boolean;
             };
             c__type: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
-                retrieve: null;
+                retrieve: any;
                 template: boolean;
             };
             c__AssociatedBusinessUnits: {
@@ -653,13 +653,13 @@ declare namespace User {
             c__AccountUserID: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
-                retrieve: null;
+                retrieve: any;
                 template: boolean;
             };
             c__IsLocked_readOnly: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
-                retrieve: null;
+                retrieve: any;
                 template: boolean;
             };
         };

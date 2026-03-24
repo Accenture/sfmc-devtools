@@ -12,11 +12,11 @@ declare namespace _default {
     let keyField: string;
     let nameField: string;
     let folderIdField: string;
-    let createdDateField: null;
-    let createdNameField: null;
-    let lastmodDateField: null;
-    let lastmodNameField: null;
-    let restPagination: null;
+    let createdDateField: any;
+    let createdNameField: any;
+    let lastmodDateField: any;
+    let lastmodNameField: any;
+    let restPagination: any;
     let maxKeyLength: number;
     let type: string;
     let soapType: string;

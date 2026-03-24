@@ -36,7 +36,7 @@ declare class EmailSend extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
      */
-    static retrieve(retrieveDir?: string, _?: void | string[] | undefined, __?: void | string[] | undefined, key?: string): Promise<MetadataTypeMapObj>;
+    static retrieve(retrieveDir?: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
      * Updates a single item
      *
@@ -87,10 +87,10 @@ declare namespace EmailSend {
         nameField: string;
         folderIdField: string;
         createdDateField: string;
-        createdNameField: null;
+        createdNameField: any;
         lastmodDateField: string;
-        lastmodNameField: null;
-        restPagination: null;
+        lastmodNameField: any;
+        restPagination: any;
         maxKeyLength: number;
         type: string;
         soapType: string;

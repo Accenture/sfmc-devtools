@@ -36,7 +36,7 @@ declare class List extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<MetadataTypeMapObj>} Promise
      */
-    static retrieve(retrieveDir?: string, _?: void | string[] | undefined, __?: void | string[] | undefined, key?: string): Promise<MetadataTypeMapObj>;
+    static retrieve(retrieveDir?: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
      * Gets metadata cache with limited fields and does not store value to disk
      *
@@ -68,19 +68,19 @@ declare class List extends MetadataType {
     static parseMetadata(metadata: MetadataTypeItem, parseForCache?: boolean): MetadataTypeItem;
 }
 declare namespace List {
-    let client: import("sfmc-sdk").default | undefined;
-    let buObject: import("../../types/mcdev.d.js").BuObject | undefined;
+    let client: import("sfmc-sdk").default;
+    let buObject: import("../../types/mcdev.d.js").BuObject;
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
-        dependencyGraph: null;
+        dependencyGraph: any;
         folderType: string;
         hasExtended: boolean;
         idField: string;
         keyIsFixed: boolean;
         keyField: string;
         nameField: string;
-        restPagination: null;
+        restPagination: any;
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;

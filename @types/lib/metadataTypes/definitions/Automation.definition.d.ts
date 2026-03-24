@@ -272,7 +272,7 @@ declare namespace _default {
     export let typeCdpByDefault: boolean;
     export let typeName: string;
     export let customDeployTypes: string[];
-    export let manualDeployTypes: never[];
+    export let manualDeployTypes: any[];
     export let fields: {
         categoryId: {
             isCreateable: boolean;
@@ -324,7 +324,7 @@ declare namespace _default {
         };
         id: {
             isCreateable: boolean;
-            isUpdateable: null;
+            isUpdateable: any;
             retrieving: boolean;
             template: boolean;
         };

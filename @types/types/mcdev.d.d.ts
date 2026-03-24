@@ -4,31 +4,31 @@ export type BuObject = {
     /**
      * installed package client id
      */
-    clientId?: string | undefined;
+    clientId?: string;
     /**
      * installed package client secret
      */
-    clientSecret?: string | undefined;
+    clientSecret?: string;
     /**
      * subdomain part of Authentication Base Uri
      */
-    tenant?: string | undefined;
+    tenant?: string;
     /**
      * Enterprise ID = MID of the parent BU
      */
-    eid?: number | undefined;
+    eid?: number;
     /**
      * MID of the BU to work with
      */
-    mid?: number | undefined;
+    mid?: number;
     /**
      * name of the BU to interact with
      */
-    businessUnit?: string | undefined;
+    businessUnit?: string;
     /**
      * name of the credential to interact with
      */
-    credential?: string | undefined;
+    credential?: string;
 };
 export type TemplateMap = {
     [x: string]: string;
@@ -38,7 +38,7 @@ export type SupportedMetadataTypes = "asset" | "asset-archive" | "asset-asset" |
  * object-key=SupportedMetadataTypes, value=array of external keys
  */
 export type TypeKeyCombo = {
-    [x: string]: string[] | null;
+    [x: string]: string[];
 };
 /**
  * generic metadata item
@@ -123,7 +123,7 @@ export type CodeExtract = {
     /**
      * optional for binary files
      */
-    encoding?: "base64" | undefined;
+    encoding?: "base64";
 };
 export type QueryItem = {
     /**
@@ -141,7 +141,7 @@ export type QueryItem = {
     /**
      * Object ID of DE (removed before save)
      */
-    targetId?: string | undefined;
+    targetId?: string;
     /**
      * key of target data extension
      */
@@ -165,11 +165,11 @@ export type QueryItem = {
     /**
      * 0|1|2, mapped to targetUpdateTypeName via this.definition.targetUpdateTypeMapping
      */
-    targetUpdateTypeId?: number | undefined;
+    targetUpdateTypeId?: number;
     /**
      * Description DE (removed before save)
      */
-    targetDescription?: string | undefined;
+    targetDescription?: string;
     /**
      * looks like this is always set to false
      */
@@ -177,11 +177,11 @@ export type QueryItem = {
     /**
      * contains SQL query with line breaks converted to '\n'. The content is extracted during retrieval and written into a separate *.sql file
      */
-    queryText?: string | undefined;
+    queryText?: string;
     /**
      * holds folder ID, replaced with r__folder_Path during retrieve
      */
-    categoryId?: string | undefined;
+    categoryId?: string;
     /**
      * folder path in which this DE is saved
      */
@@ -189,7 +189,7 @@ export type QueryItem = {
     /**
      * Object ID of query
      */
-    queryDefinitionId?: string | undefined;
+    queryDefinitionId?: string;
 };
 export type QueryMap = {
     [x: string]: QueryItem;
@@ -218,11 +218,11 @@ export type ScriptItem = {
     /**
      * contains script with line breaks converted to '\n'. The content is extracted during retrieval and written into a separate *.ssjs file
      */
-    script?: string | undefined;
+    script?: string;
     /**
      * holds folder ID, replaced with r__folder_Path during retrieve
      */
-    categoryId?: string | undefined;
+    categoryId?: string;
     /**
      * folder path in which this DE is saved
      */
@@ -244,20 +244,17 @@ export type DataExtensionFieldItem = {
     /**
      * id
      */
-    ObjectID?: string | undefined;
+    ObjectID?: string;
     /**
      * key in format [DEkey].[FieldName]
      */
-    CustomerKey?: string | undefined;
+    CustomerKey?: string;
     /**
      * -
      */
     DataExtension?: {
-        /**
-         * key of DE
-         */
         CustomerKey: string;
-    } | undefined;
+    };
     /**
      * name of field
      */
@@ -265,7 +262,7 @@ export type DataExtensionFieldItem = {
     /**
      * custom attribute that is only used when trying to rename a field from Name to Name_new
      */
-    Name_new?: string | undefined;
+    Name_new?: string;
     /**
      * empty string for not set
      */
@@ -277,7 +274,7 @@ export type DataExtensionFieldItem = {
     /**
      * opposite of IsRequired
      */
-    IsNullable?: boolean | undefined;
+    IsNullable?: true | false;
     /**
      * -
      */
@@ -321,11 +318,11 @@ export type DataExtensionItem = {
     /**
      * iso format
      */
-    CreatedDate?: string | undefined;
+    CreatedDate?: string;
     /**
      * iso format
      */
-    ModifiedDate?: string | undefined;
+    ModifiedDate?: string;
     /**
      * -
      */
@@ -361,20 +358,17 @@ export type DataExtensionItem = {
     /**
      * holds folder ID, replaced with r__folder_Path during retrieve
      */
-    CategoryID?: string | undefined;
+    CategoryID?: string;
     /**
      * name of optionally associated DE template
      */
-    r__dataExtensionTemplate_name?: string | undefined;
+    r__dataExtensionTemplate_name?: string;
     /**
      * -
      */
     Template?: {
-        /**
-         * key of optionally associated DE teplate
-         */
-        CustomerKey?: string | undefined;
-    } | undefined;
+        CustomerKey?: string;
+    };
     /**
      * empty string or US date + 12:00:00 AM
      */
@@ -386,23 +380,23 @@ export type DataExtensionItem = {
     /**
      * readable name of retention policy
      */
-    c__retentionPolicy?: "none" | "allRecordsAndDataextension" | "allRecords" | "individialRecords" | undefined;
+    c__retentionPolicy?: "none" | "allRecordsAndDataextension" | "allRecords" | "individialRecords";
     /**
      * number of days/weeks/months/years before retention kicks in
      */
-    DataRetentionPeriodLength?: number | undefined;
+    DataRetentionPeriodLength?: number;
     /**
      * 3:Days, 4:Weeks, 5:Months, 6:Years
      */
-    DataRetentionPeriodUnitOfMeasure?: number | undefined;
+    DataRetentionPeriodUnitOfMeasure?: number;
     /**
      * 3:Days, 4:Weeks, 5:Months, 6:Years
      */
-    c__dataRetentionPeriodUnitOfMeasure?: string | undefined;
+    c__dataRetentionPeriodUnitOfMeasure?: string;
     /**
      * true for retention policy individialRecords
      */
-    RowBasedRetention?: boolean | undefined;
+    RowBasedRetention?: boolean;
     /**
      * ?
      */
@@ -410,7 +404,7 @@ export type DataExtensionItem = {
     /**
      * true for retention policy allRecords
      */
-    DeleteAtEndOfRetentionPeriod?: boolean | undefined;
+    DeleteAtEndOfRetentionPeriod?: boolean;
 };
 export type DataExtensionMap = {
     [x: string]: DataExtensionItem;
@@ -423,7 +417,7 @@ export type UserDocument = {
     /**
      * equal to UserID; optional in update/create calls
      */
-    ID?: string | undefined;
+    ID?: string;
     /**
      * equal to ID; required in update/create calls
      */
@@ -431,7 +425,7 @@ export type UserDocument = {
     /**
      * user.AccountUserID
      */
-    AccountUserID?: number | undefined;
+    AccountUserID?: number;
     /**
      * copy of AccountUserID
      */
@@ -476,11 +470,8 @@ export type UserDocument = {
      * (API only)
      */
     Roles?: {
-        /**
-         * roles (API only)
-         */
-        Role?: object[] | undefined;
-    } | undefined;
+        Role?: object[];
+    };
     /**
      * roles
      */
@@ -505,8 +496,8 @@ export type UserDocument = {
      * -
      */
     Client: {
-        ID?: number | undefined;
-        ModifiedBy?: number | undefined;
+        ID?: number;
+        ModifiedBy?: number;
     };
     /**
      * -
@@ -515,11 +506,11 @@ export type UserDocument = {
     /**
      * (API only)
      */
-    IsLocked?: boolean | undefined;
+    IsLocked?: boolean;
     /**
      * used to unlock a user that has IsLocked === true
      */
-    Unlock?: boolean | undefined;
+    Unlock?: boolean;
     /**
      * copy of IsLocked
      */
@@ -532,19 +523,13 @@ export type UserDocument = {
      * (API only)
      */
     TimeZone?: {
-        /**
-         * (API only)
-         */
-        Name?: string | undefined;
-        /**
-         * (API only)
-         */
-        ID?: string | undefined;
-    } | undefined;
+        Name?: string;
+        ID?: string;
+    };
     /**
      * only used to set the password. cannot be retrieved
      */
-    Password?: string | undefined;
+    Password?: string;
     /**
      * fr-CA, en-US, ...
      */
@@ -553,19 +538,16 @@ export type UserDocument = {
      * (API only)
      */
     Locale?: {
-        /**
-         * (API only)
-         */
-        LocaleCode?: "en-US" | "fr-CA" | "fr-FR" | "de-DE" | "it-IT" | "ja-JP" | "pt-BR" | "es-419" | "es-ES" | undefined;
-    } | undefined;
+        LocaleCode?: "en-US" | "fr-CA" | "fr-FR" | "de-DE" | "it-IT" | "ja-JP" | "pt-BR" | "es-419" | "es-ES";
+    };
     /**
      * -
      */
-    SsoIdentity?: object | undefined;
+    SsoIdentity?: object;
     /**
      * -
      */
-    SsoIdentities?: object | any[] | undefined;
+    SsoIdentities?: any[] | object;
 };
 export type UserDocumentDiff = {
     before: UserDocument;
@@ -626,7 +608,7 @@ export type AccountUserConfiguration = {
     /**
      * empty string
      */
-    PartnerKey?: string | undefined;
+    PartnerKey?: string;
     /**
      * User ID e.g:717133502
      */
@@ -634,11 +616,11 @@ export type AccountUserConfiguration = {
     /**
      * empty string
      */
-    ObjectID?: string | undefined;
+    ObjectID?: string;
     /**
      * 0,1
      */
-    Delete?: number | undefined;
+    Delete?: number;
     /**
      * -
      */
@@ -664,23 +646,23 @@ export type AutomationActivity = {
     /**
      * name (not key) of associated activity
      */
-    name?: string | undefined;
+    name?: string;
     /**
      * used by wait activity if a specific time of day was set
      */
-    timeZone?: string | undefined;
+    timeZone?: string;
     /**
      * Id of assoicated activity type; see this.definition.activityTypeMapping
      */
-    objectTypeId?: number | undefined;
+    objectTypeId?: number;
     /**
      * Object Id of assoicated metadata item
      */
-    activityObjectId?: string | undefined;
+    activityObjectId?: string;
     /**
      * order within step; starts with 1 or higher number
      */
-    displayOrder?: number | undefined;
+    displayOrder?: number;
     /**
      * see this.definition.activityTypeMapping
      */
@@ -694,15 +676,15 @@ export type AutomationStep = {
     /**
      * equals AutomationStep.name
      */
-    annotation?: string | undefined;
+    annotation?: string;
     /**
      * step iterator; starts with 1
      */
-    step?: number | undefined;
+    step?: number;
     /**
      * step iterator, automatically set during deployment
      */
-    stepNumber?: number | undefined;
+    stepNumber?: number;
     /**
      * -
      */
@@ -723,7 +705,7 @@ export type AutomationSchedule = {
     /**
      * equals schedule.typeId; upsert endpoint requires scheduleTypeId. retrieve endpoint returns typeId
      */
-    scheduleTypeId?: number | undefined;
+    scheduleTypeId?: number;
     /**
      * example: '2021-05-07T09:00:00'
      */
@@ -739,7 +721,7 @@ export type AutomationSchedule = {
     /**
      * same as icalRecur but returned by legacy-API; example: 'FREQ=DAILY;UNTIL=20790606T160000;INTERVAL=1'
      */
-    iCalRecur?: string | undefined;
+    iCalRecur?: string;
     /**
      * example: 'W. Europe Standard Time'; see this.definition.timeZoneMapping
      */
@@ -747,23 +729,23 @@ export type AutomationSchedule = {
     /**
      * same as timezoneName but returned by legacy-API; example: 'W. Europe Standard Time'; see this.definition.timeZoneMapping
      */
-    timeZone?: string | undefined;
+    timeZone?: string;
     /**
      * kept in legacy API only, exact description of what this schedule does
      */
-    description?: string | undefined;
+    description?: string;
     /**
      * see this.definition.timeZoneMapping
      */
-    timezoneId?: number | undefined;
+    timezoneId?: number;
     /**
      * same as timezoneId but returned by legacy-API; see this.definition.timeZoneMapping
      */
-    timeZoneId?: number | undefined;
+    timeZoneId?: number;
     /**
      * ?
      */
-    rangeTypeId?: number | undefined;
+    rangeTypeId?: number;
     /**
      * ?
      */
@@ -775,7 +757,7 @@ export type AutomationSchedule = {
     /**
      * ?
      */
-    scheduledStatus?: string | undefined;
+    scheduledStatus?: string;
 };
 /**
  * SOAP format
@@ -784,40 +766,40 @@ export type AutomationScheduleSoap = {
     /**
      * 'Minutely'|'Hourly'|'Daily'|'Weekly'|'Monthly'|'Yearly'
      */
-    RecurrenceType?: string | undefined;
+    RecurrenceType?: string;
     /**
      * -
      */
     Recurrence: {
-        $?: object | undefined;
-        YearlyRecurrencePatternType?: "ByYear" | undefined;
-        MonthlyRecurrencePatternType?: "ByMonth" | undefined;
-        WeeklyRecurrencePatternType?: "ByWeek" | undefined;
-        DailyRecurrencePatternType?: "ByDay" | undefined;
-        MinutelyRecurrencePatternType?: "Interval" | undefined;
-        HourlyRecurrencePatternType?: "Interval" | undefined;
-        YearInterval?: number | undefined;
-        MonthInterval?: number | undefined;
-        WeekInterval?: number | undefined;
-        DayInterval?: number | undefined;
-        HourInterval?: number | undefined;
-        MinuteInterval?: number | undefined;
+        $?: object;
+        YearlyRecurrencePatternType?: "ByYear";
+        MonthlyRecurrencePatternType?: "ByMonth";
+        WeeklyRecurrencePatternType?: "ByWeek";
+        DailyRecurrencePatternType?: "ByDay";
+        MinutelyRecurrencePatternType?: "Interval";
+        HourlyRecurrencePatternType?: "Interval";
+        YearInterval?: number;
+        MonthInterval?: number;
+        WeekInterval?: number;
+        DayInterval?: number;
+        HourInterval?: number;
+        MinuteInterval?: number;
     };
     /**
      * internal variable for CLI output only
      */
-    _interval?: number | undefined;
+    _interval?: number;
     /**
      * -
      */
     TimeZone: {
         ID: number;
-        IDSpecified?: true | undefined;
+        IDSpecified?: true;
     };
     /**
      * internal variable for CLI output only
      */
-    _timezoneString?: string | undefined;
+    _timezoneString?: string;
     /**
      * AutomationSchedule.startDate
      */
@@ -825,11 +807,11 @@ export type AutomationScheduleSoap = {
     /**
      * AutomationSchedule.startDate; internal variable for CLI output only
      */
-    _StartDateTime?: string | undefined;
+    _StartDateTime?: string;
     /**
      * AutomationSchedule.endDate
      */
-    EndDateTime?: string | undefined;
+    EndDateTime?: string;
     /**
      * set to 'EndOn' if AutomationSchedule.icalRecur contains 'UNTIL'; otherwise to 'EndAfter'
      */
@@ -837,7 +819,7 @@ export type AutomationScheduleSoap = {
     /**
      * only exists if RecurrenceRangeType=='EndAfter'
      */
-    Occurrences?: number | undefined;
+    Occurrences?: number;
 };
 export type AutomationItem = {
     /**
@@ -847,15 +829,15 @@ export type AutomationItem = {
     /**
      * legacy Object Id - used for handling notifications
      */
-    legacyId?: string | undefined;
+    legacyId?: string;
     /**
      * Object Id as returned by SOAP API
      */
-    ObjectID?: string | undefined;
+    ObjectID?: string;
     /**
      * legacy id
      */
-    programId?: string | undefined;
+    programId?: string;
     /**
      * key (Rest API)
      */
@@ -863,15 +845,15 @@ export type AutomationItem = {
     /**
      * key (SOAP API)
      */
-    CustomerKey?: string | undefined;
+    CustomerKey?: string;
     /**
      * name (Rest API)
      */
-    name?: string | undefined;
+    name?: string;
     /**
      * name (SOAP API)
      */
-    Name?: string | undefined;
+    Name?: string;
     /**
      * notifications
      */
@@ -879,130 +861,91 @@ export type AutomationItem = {
     /**
      * -
      */
-    description?: string | undefined;
+    description?: string;
     /**
      * Starting Source = Schedule / File Drop
      */
-    type?: "scheduled" | "triggered" | "automationtriggered" | undefined;
+    type?: "scheduled" | "triggered" | "automationtriggered";
     /**
      * Starting Source = Schedule / File Drop; from legacy api
      */
-    automationType?: "scheduled" | "triggered" | "automationtriggered" | undefined;
+    automationType?: "scheduled" | "triggered" | "automationtriggered";
     /**
      * automation status
      */
-    status?: "Scheduled" | "Running" | "Ready" | "Building" | "PausedSchedule" | "InactiveTrigger" | undefined;
+    status?: "Scheduled" | "Running" | "Ready" | "Building" | "PausedSchedule" | "InactiveTrigger";
     /**
      * automation status
      */
-    statusId?: number | undefined;
+    statusId?: number;
     /**
      * only existing if type=scheduled
      */
-    schedule?: AutomationSchedule | undefined;
+    schedule?: AutomationSchedule;
     /**
      * only existing if type=triggered
      */
     fileTrigger?: {
-        /**
-         * file name with placeholders
-         */
         fileNamingPattern: string;
-        /**
-         * -
-         */
         fileNamePatternTypeId: number;
-        /**
-         * where to look for the fileNamingPattern
-         */
         folderLocationText: string;
-        /**
-         * ?
-         */
         isPublished: boolean;
-        /**
-         * ?
-         */
         queueFiles: boolean;
-        /**
-         * -
-         */
         triggerActive: boolean;
-    } | undefined;
+    };
     /**
      * only existing if type=automationtriggered
      */
-    automationTrigger?: object | undefined;
+    automationTrigger?: object;
     /**
      * -
      */
     startSource?: {
-        /**
-         * rewritten to AutomationItem.schedule
-         */
-        schedule?: AutomationSchedule | undefined;
-        /**
-         * rewritten to AutomationItem.fileTrigger
-         */
+        schedule?: AutomationSchedule;
         fileDrop?: {
-            /**
-             * file name with placeholders
-             */
             fileNamePattern: string;
-            /**
-             * -
-             */
             fileNamePatternTypeId: number;
-            /**
-             * -
-             */
             folderLocation: string;
-            /**
-             * -
-             */
             queueFiles: boolean;
-        } | undefined;
-        /**
-         * -
-         */
+        };
         typeId: number;
-    } | undefined;
+    };
     /**
      * -
      */
-    steps?: AutomationStep[] | undefined;
+    steps?: AutomationStep[];
     /**
      * folder path
      */
-    r__folder_Path?: string | undefined;
+    r__folder_Path?: string;
     /**
      * holds folder ID, replaced with r__folder_Path during retrieve
      */
-    categoryId?: string | undefined;
+    categoryId?: string;
     /**
      * user name of person who created this automation
      */
-    createdName?: string | undefined;
+    createdName?: string;
     /**
      * iso format
      */
-    createdDate?: string | undefined;
+    createdDate?: string;
     /**
      * user name of person who last modified this automation
      */
-    modifiedName?: string | undefined;
+    modifiedName?: string;
     /**
      * iso format
      */
-    modifiedDate?: string | undefined;
+    modifiedDate?: string;
     /**
      * user name of person who paused this automation
      */
-    pausedName?: string | undefined;
+    pausedName?: string;
     /**
      * iso format
      */
-    pausedDate?: string | undefined;
+    pausedDate?: string;
 };
 export type VerificationItem = {
     /**
@@ -1044,7 +987,7 @@ export type VerificationItem = {
     /**
      * ObjectID of target data extension
      */
-    targetObjectId?: string | undefined;
+    targetObjectId?: string;
     /**
      * key of target data extension
      */
@@ -1093,7 +1036,7 @@ export type McdevDeltaPkgItem = {
     /**
      * git thinks this relative path is where the file was before
      */
-    fromPath?: string | undefined;
+    fromPath?: string;
     /**
      * metadata type
      */
@@ -1130,43 +1073,43 @@ export type SkipInteraction = {
     /**
      * client id of installed package
      */
-    client_id?: string | undefined;
+    client_id?: string;
     /**
      * client secret of installed package
      */
-    client_secret?: string | undefined;
+    client_secret?: string;
     /**
      * tenant specific auth url of installed package
      */
-    auth_url?: string | undefined;
+    auth_url?: string;
     /**
      * MID of the Parent Business Unit
      */
-    account_id?: number | undefined;
+    account_id?: number;
     /**
      * how you would like the credential to be named
      */
-    credentialName?: string | undefined;
+    credentialName?: string;
     /**
      * URL of Git remote server
      */
-    gitRemoteUrl?: string | undefined;
+    gitRemoteUrl?: string;
     /**
      * will trigger re-downloading latest versions of dependent types after fixing keys
      */
-    fixKeysReretrieve?: boolean | undefined;
+    fixKeysReretrieve?: boolean;
     /**
      * used by mcdev init to directly push to a remote
      */
-    gitPush?: string | undefined;
+    gitPush?: string;
     /**
      * used by mcdev init to directly push to a remote
      */
-    developmentBu?: string | undefined;
+    developmentBu?: string;
     /**
      * used by mcdev init to directly push to a remote
      */
-    downloadBUs?: string | undefined;
+    downloadBUs?: string;
 };
 export type FilterItem = {
     /**
@@ -1176,7 +1119,7 @@ export type FilterItem = {
     /**
      * -
      */
-    createdDate?: string | undefined;
+    createdDate?: string;
     /**
      * key
      */
@@ -1208,7 +1151,7 @@ export type FilterItem = {
     /**
      * -
      */
-    description?: string | undefined;
+    description?: string;
     /**
      * DE/List ID
      */
@@ -1232,19 +1175,19 @@ export type FilterItem = {
     /**
      * seems to be a duplicate of sourceTypeId?
      */
-    filterDefinitionSourceTypeId?: 1 | 2 | 3 | 4 | undefined;
+    filterDefinitionSourceTypeId?: 1 | 2 | 3 | 4;
     /**
      * description of destination DE
      */
-    resultDEDescription?: string | undefined;
+    resultDEDescription?: string;
     /**
      * name of destination DE
      */
-    resultDEName?: string | undefined;
+    resultDEName?: string;
     /**
      * key of destination DE
      */
-    resultDEKey?: string | undefined;
+    resultDEKey?: string;
     /**
      * ?
      */
@@ -1252,19 +1195,19 @@ export type FilterItem = {
     /**
      * relationship to filterDefinition
      */
-    r__dataFilter_key?: string | undefined;
+    r__dataFilter_key?: string;
     /**
      * relationship to dataExtension source
      */
-    r__source_dataExtension_key?: string | undefined;
+    r__source_dataExtension_key?: string;
     /**
      * relationship to dataExtension destination
      */
-    r__destination_dataExtension_key?: string | undefined;
+    r__destination_dataExtension_key?: string;
     /**
      * relationship to folder
      */
-    r__folder_Path?: string | undefined;
+    r__folder_Path?: string;
 };
 export type FilterMap = {
     [x: string]: FilterItem;
@@ -1296,7 +1239,7 @@ export type AutomationFilterDefinitionItem = {
     /**
      * (omitted by API if empty)
      */
-    description?: string | undefined;
+    description?: string;
     /**
      * -
      */
@@ -1357,7 +1300,7 @@ export type DataFilterItem = {
     /**
      * (omitted by API if empty)
      */
-    description?: string | undefined;
+    description?: string;
     /**
      * date
      */
@@ -1397,7 +1340,7 @@ export type DataFilterItem = {
     /**
      * name of DataExtension
      */
-    derivedFromObjectName?: string | undefined;
+    derivedFromObjectName?: string;
     /**
      * ?
      */
@@ -1406,19 +1349,16 @@ export type DataFilterItem = {
      * copied from SOAP API, defines the filter in readable form
      */
     c__filterDefinition?: {
-        /**
-         * -
-         */
         ConditionSet: FilterConditionSet;
-    } | undefined;
+    };
     /**
      * relationship to list source (if derivedFromType=1)
      */
-    r__source_list_PathName?: string | undefined;
+    r__source_list_PathName?: string;
     /**
      * relationship to dataExtension source (if derivedFromType=2)
      */
-    r__source_dataExtension_key?: string | undefined;
+    r__source_dataExtension_key?: string;
 };
 export type FilterConditionSet = {
     /**
@@ -1438,15 +1378,15 @@ export type FilterCondition = {
     /**
      * object id of field (actually \@_ID)
      */
-    ID?: string | undefined;
+    ID?: string;
     /**
      * filter value to compare against
      */
-    Value?: string | undefined;
+    Value?: string;
     /**
      * name of field
      */
-    r__dataExtensionField_name?: string | undefined;
+    r__dataExtensionField_name?: string;
 };
 export type DataFilterMap = {
     [x: string]: DataFilterItem;
@@ -1473,11 +1413,11 @@ export type SoapRequestParams = {
     /**
      * request id
      */
-    continueRequest?: string | undefined;
+    continueRequest?: string;
     /**
      * additional options (CallsInConversation, Client, ConversationID, Priority, RequestType, SaveOptions, ScheduledTime, SendResponseTo, SequenceCode)
      */
-    options?: object | undefined;
+    options?: object;
     /**
      * ?
      */
@@ -1486,11 +1426,11 @@ export type SoapRequestParams = {
      * simple or complex
      * complex
      */
-    filter?: SoapSDKFilter | undefined;
+    filter?: SoapSDKFilter;
     /**
      * all BUs or just one
      */
-    QueryAllAccounts?: boolean | undefined;
+    QueryAllAccounts?: boolean;
 };
 export type SoapFilterSimple = {
     /**
@@ -1504,7 +1444,7 @@ export type SoapFilterSimple = {
     /**
      * field value
      */
-    value?: string | number | boolean | string[] | number[] | undefined;
+    value?: string | number | boolean | string[] | number[];
 };
 export type SoapFilterComplex = {
     /**
@@ -1553,11 +1493,11 @@ export type AssetRequestParams = {
     /**
      * request id
      */
-    continueRequest?: string | undefined;
+    continueRequest?: string;
     /**
      * additional options (CallsInConversation, Client, ConversationID, Priority, RequestType, SaveOptions, ScheduledTime, SendResponseTo, SequenceCode)
      */
-    options?: object | undefined;
+    options?: object;
     /**
      * ?
      * complex
@@ -1566,22 +1506,22 @@ export type AssetRequestParams = {
     /**
      * pagination
      */
-    page?: object | undefined;
+    page?: object;
     /**
      * list of fields we want returned
      */
-    fields?: string[] | undefined;
+    fields?: string[];
     /**
      * pagination
      */
     sort?: {
         property: string;
         direction: "ASC" | "DESC";
-    }[] | undefined;
+    }[];
     /**
      * simple or complex filter
      */
-    query?: AssetFilter | AssetFilterSimple | undefined;
+    query?: AssetFilter | AssetFilterSimple;
 };
 export type AssetFilter = {
     /**
@@ -1595,7 +1535,7 @@ export type AssetFilter = {
     /**
      * string for simple or a new filter-object for complex; omit for isNull and isNotNull
      */
-    rightOperand?: SoapSDKFilter | AssetFilterSimple | undefined;
+    rightOperand?: SoapSDKFilter | AssetFilterSimple;
 };
 export type AssetFilterSimple = {
     /**
@@ -1635,7 +1575,7 @@ export type Mcdevrc = {
      * templating variables grouped by markets
      */
     markets: {
-        [x: string]: object;
+        [x: string]: any;
     };
     /**
      * combination of markets and BUs for streamlined deployments
@@ -1659,7 +1599,7 @@ export type McdevLogger = {
     /**
      * (msg) print info message
      */
-    level?: LoggerLevel | undefined;
+    level?: LoggerLevel;
     /**
      * (msg) print error message; wrapper around winstonLogger.error that also sets error code to 1
      */
@@ -1717,56 +1657,44 @@ export type ListItem = {
      * wrapper
      */
     Client?: {
-        /**
-         * owning BU's MID
-         */
         ID: number;
-    } | undefined;
+    };
     /**
      * not used
      */
-    PartnerKey?: string | undefined;
+    PartnerKey?: string;
     /**
      * "2021-06-21T11:54:57.103"
      */
-    CreatedDate?: string | undefined;
+    CreatedDate?: string;
     /**
      * "2021-06-21T11:54:57.103"
      */
-    ModifiedDate?: string | undefined;
+    ModifiedDate?: string;
     /**
      * unique identifier per BU
      */
-    ID?: number | undefined;
+    ID?: number;
     /**
      * not used
      */
-    ObjectID?: string | undefined;
+    ObjectID?: string;
     /**
      * unique identifer per BU
      */
-    CustomerKey?: string | undefined;
+    CustomerKey?: string;
     /**
      * customn field that tracks the exact directory path of the current folder including its own name
      */
-    Path?: string | undefined;
+    Path?: string;
     /**
      * wrapper
      */
     ParentFolder?: {
-        /**
-         * folder id of parent folder; 0 if current folder is already on top level
-         */
         ID: number;
-        /**
-         * not used
-         */
-        ObjectID?: string | undefined;
-        /**
-         * customn field that tracks the exact directory path of the current folder including its own name
-         */
-        Path?: string | undefined;
-    } | undefined;
+        ObjectID?: string;
+        Path?: string;
+    };
     /**
      * folder name
      */
@@ -1774,7 +1702,7 @@ export type ListItem = {
     /**
      * deprecated option to describe the folder content
      */
-    Description?: string | undefined;
+    Description?: string;
     /**
      * e.g. "shared_data"; see folder-subtypes for complete list
      */
@@ -1794,7 +1722,7 @@ export type ListItem = {
     /**
      * helper flag for Deployer class to signal if the folder was auto-generated or manually placed
      */
-    _generated?: boolean | undefined;
+    _generated?: boolean;
 };
 /**
  * key=id
@@ -1929,7 +1857,7 @@ export type SfObjectField = {
     /**
      * list of values
      */
-    picklist?: SfObjectPicklist[] | undefined;
+    picklist?: SfObjectPicklist[];
 };
 export type configurationArguments = {
     /**
@@ -1961,7 +1889,7 @@ export type configurationArguments = {
     /**
      * seems to only exist on journey but not on event and also not on every journey
      */
-    additionalObjectFilterCriteria?: object | undefined;
+    additionalObjectFilterCriteria?: object;
     /**
      * defines how this event links to the all contacts list
      */
@@ -1970,7 +1898,7 @@ export type configurationArguments = {
         relationshipName: string;
         isPolymorphic: boolean;
         referenceObjectName: string;
-        fieldName?: string | undefined;
+        fieldName?: string;
     };
     /**
      * TODO
@@ -1979,7 +1907,7 @@ export type configurationArguments = {
         fields: {
             ContactKey: string;
             Email: object;
-            HasOptedOutOfEmail?: string | undefined;
+            HasOptedOutOfEmail?: string;
         };
     };
     /**
@@ -2042,7 +1970,7 @@ export type eventDataConfigObject = {
     /**
      * ?
      */
-    relationshipIdName?: string | undefined;
+    relationshipIdName?: string;
     /**
      * list of field names that are used by this journey
      */
@@ -2100,7 +2028,7 @@ export type FieldCondition = {
     /**
      * value to compare the field with if operator is sth like "equals"; booleans are stored as upper-camel-case string!
      */
-    value?: string | undefined;
+    value?: string;
     /**
      * ?
      */
@@ -2140,7 +2068,7 @@ export type validationRule = {
     /**
      * test to run
      */
-    fix?: validationRuleFix | undefined;
+    fix?: validationRuleFix;
 };
 /**
  * key=rule name
@@ -2152,27 +2080,27 @@ export type DomainVerificationItem = {
     /**
      * EID
      */
-    enterpriseId?: number | undefined;
+    enterpriseId?: number;
     /**
      * MID
      */
-    memberId?: number | undefined;
+    memberId?: number;
     /**
      * domain or email address used in retrieve and create
      */
-    domain?: string | undefined;
+    domain?: string;
     /**
      * email address used in update call for isSendable field
      */
-    emailAddress?: string | undefined;
+    emailAddress?: string;
     /**
      * returned by retrieve
      */
-    status?: "Verified" | "Pending" | undefined;
+    status?: "Verified" | "Pending";
     /**
      * returned by retrieve and required for update call
      */
-    domainType?: "SAP" | "UserDomain" | "PrivateDomain" | "RegisteredDomain" | undefined;
+    domainType?: "SAP" | "UserDomain" | "PrivateDomain" | "RegisteredDomain";
     /**
      * automatically true upon creation. can be changed to false via update
      */
@@ -2180,33 +2108,33 @@ export type DomainVerificationItem = {
     /**
      * e.g. ""2023-06-19T11:11:17.32""
      */
-    emailSendTime?: string | undefined;
+    emailSendTime?: string;
     /**
      * for bulk-creation only: email address to send notifications to when done
      */
-    notificationEmail?: string | undefined;
+    notificationEmail?: string;
     /**
      * for bulk-creation only: list of email addresses to verify
      */
-    addresses?: string[] | undefined;
+    addresses?: string[];
     /**
      * for bulk-creation only: instead of an array in addresses, specify the name of a DE
      */
-    deTable?: string | undefined;
+    deTable?: string;
     /**
      * for bulk-creation only: instead of an array in addresses, specify the name of a DE column/field here
      */
-    deColumn?: string | undefined;
+    deColumn?: string;
 };
 export type BuildFilter = {
     /**
      * include key filters
      */
-    include?: BuildFilterKeys | undefined;
+    include?: BuildFilterKeys;
     /**
      * exclude key filters
      */
-    exclude?: BuildFilterKeys | undefined;
+    exclude?: BuildFilterKeys;
 };
 export type BuildFilterKeys = {
     /**

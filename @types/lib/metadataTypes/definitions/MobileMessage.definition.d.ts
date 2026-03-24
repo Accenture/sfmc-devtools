@@ -11,10 +11,10 @@ declare namespace _default {
     let keyIsFixed: boolean;
     let keyField: string;
     let nameField: string;
-    let createdDateField: null;
-    let createdNameField: null;
+    let createdDateField: any;
+    let createdNameField: any;
     let lastmodDateField: string;
-    let lastmodNameField: null;
+    let lastmodNameField: any;
     let restPagination: boolean;
     let restPageSize: number;
     let type: string;

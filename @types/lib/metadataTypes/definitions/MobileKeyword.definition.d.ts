@@ -12,7 +12,7 @@ declare namespace _default {
     let createdDateField: string;
     let createdNameField: string;
     let lastmodDateField: string;
-    let lastmodNameField: null;
+    let lastmodNameField: any;
     let restPagination: boolean;
     let restPageSize: number;
     let maxKeyLength: number;

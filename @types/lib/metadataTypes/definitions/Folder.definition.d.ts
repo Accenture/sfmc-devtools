@@ -1,7 +1,7 @@
 declare namespace _default {
     let bodyIteratorField: string;
-    let dependencies: never[];
-    let dependencyGraph: null;
+    let dependencies: any[];
+    let dependencyGraph: any;
     let subTypes: string[];
     let deployFolderTypes: string[];
     let deployFolderTypesEmailRest: string[];

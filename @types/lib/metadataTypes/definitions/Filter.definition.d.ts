@@ -16,9 +16,9 @@ declare namespace _default {
         let statusId: number;
     }
     let createdDateField: string;
-    let createdNameField: null;
+    let createdNameField: any;
     let lastmodDateField: string;
-    let lastmodNameField: null;
+    let lastmodNameField: any;
     let restPagination: boolean;
     let maxKeyLength: number;
     let type: string;

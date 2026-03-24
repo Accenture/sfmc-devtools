@@ -53,32 +53,32 @@ declare namespace _default {
             template: boolean;
         };
         'attributeSetIdentifiers[].connectingID.identifierType': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
             template: boolean;
         };
         'attributeSetIdentifiers[].definitionID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
             template: boolean;
         };
         'attributeSetIdentifiers[].definitionKey': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
             template: boolean;
         };
         'attributeSetIdentifiers[].definitionName.value': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
             template: boolean;
         };
         'attributeSetIdentifiers[].namespace': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
             template: boolean;
         };
@@ -197,20 +197,20 @@ declare namespace _default {
             template: boolean;
         };
         'localizedDescription.resourceSetKey': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
             template: boolean;
         };
         'localizedDescription.resourceValueKey': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
             template: boolean;
         };
         'localizedDescription.value': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
             template: boolean;
         };

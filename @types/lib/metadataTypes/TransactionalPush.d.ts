@@ -56,9 +56,9 @@ declare namespace TransactionalPush {
         keyField: string;
         nameField: string;
         createdDateField: string;
-        createdNameField: null;
+        createdNameField: any;
         lastmodDateField: string;
-        lastmodNameField: null;
+        lastmodNameField: any;
         restPagination: boolean;
         restPageSize: number;
         type: string;

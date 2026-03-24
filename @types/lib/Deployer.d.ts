@@ -97,10 +97,6 @@ declare class Deployer {
      */
     _deploy(types?: string[] | TypeKeyCombo, keyArr?: string[]): Promise<MultiMetadataTypeMap>;
     /** @type {MultiMetadataTypeMap} */
-    metadata: {
-        [x: string]: {
-            [x: string]: any;
-        };
-    } | undefined;
+    metadata: MultiMetadataTypeMap;
 }
 //# sourceMappingURL=Deployer.d.ts.map

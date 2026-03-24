@@ -64,9 +64,9 @@ declare class Mcdev {
      * @returns {void}
      */
     static setLoggingLevel(argv: {
-        silent?: boolean | undefined;
-        verbose?: boolean | undefined;
-        debug?: boolean | undefined;
+        silent?: boolean;
+        verbose?: boolean;
+        debug?: boolean;
     }): void;
     static knownOptions: string[];
     /**
@@ -88,11 +88,11 @@ declare class Mcdev {
      * @returns {Promise.<DeltaPkgItem[]>} list of changed items
      */
     static createDeltaPkg(argv: {
-        commitrange?: string | undefined;
-        range?: string | undefined;
-        filter?: string | undefined;
-        commitHistory?: number | undefined;
-        diffArr?: import("../types/mcdev.d.js").DeltaPkgItem[] | undefined;
+        commitrange?: string;
+        range?: string;
+        filter?: string;
+        commitHistory?: number;
+        diffArr?: DeltaPkgItem[];
     }): Promise<DeltaPkgItem[]>;
     /**
      * @returns {Promise} .
@@ -109,7 +109,7 @@ declare class Mcdev {
     /**
      * helper to show an off-the-logs message to users
      */
-    static #welcomeMessage(): void;
+    static "__#private@#welcomeMessage"(): void;
     /**
      * Retrieve all metadata from the specified business unit into the local file system.
      *
@@ -130,7 +130,7 @@ declare class Mcdev {
      * @param {boolean} [changelogOnly] skip saving, only create json in memory
      * @returns {Promise.<object>} ensure that BUs are worked on sequentially
      */
-    static #retrieveBU(cred: string, bu: string, selectedTypesArr?: string[] | TypeKeyCombo, keys?: string[], changelogOnly?: boolean): Promise<object>;
+    static "__#private@#retrieveBU"(cred: string, bu: string, selectedTypesArr?: string[] | TypeKeyCombo, keys?: string[], changelogOnly?: boolean): Promise<object>;
     /**
      * Deploys all metadata located in the 'deploy' directory to the specified business unit
      *
@@ -443,7 +443,7 @@ declare class Mcdev {
      * @param {string[]} [keys] customerkey of the metadata
      * @returns {Promise.<Object.<string, Object.<string, string[]>>>} key: business unit name, key2: type, value: list of affected item keys
      */
-    static #runMethod(methodName: "schedule" | "execute" | "pause" | "stop" | "publish" | "validate" | "fixKeys" | "replaceCbReference" | "refresh" | "audit", businessUnit: string, selectedTypes?: string[] | TypeKeyCombo, keys?: string[]): Promise<{
+    static "__#private@#runMethod"(methodName: "schedule" | "execute" | "pause" | "stop" | "publish" | "validate" | "fixKeys" | "replaceCbReference" | "refresh" | "audit", businessUnit: string, selectedTypes?: string[] | TypeKeyCombo, keys?: string[]): Promise<{
         [x: string]: {
             [x: string]: string[];
         };
@@ -458,7 +458,7 @@ declare class Mcdev {
      * @param {string[]} [keyArr] customerkey of the metadata
      * @returns {Promise.<string[]>} list of keys that were affected
      */
-    static #runOnBU(methodName: "schedule" | "execute" | "pause" | "stop" | "publish" | "validate" | "fixKeys" | "replaceCbReference" | "refresh" | "audit", cred: string, bu: string, type?: string, keyArr?: string[]): Promise<string[]>;
+    static "__#private@#runOnBU"(methodName: "schedule" | "execute" | "pause" | "stop" | "publish" | "validate" | "fixKeys" | "replaceCbReference" | "refresh" | "audit", cred: string, bu: string, type?: string, keyArr?: string[]): Promise<string[]>;
     /**
      * helper for Mcdev.#runOnBU
      *
@@ -466,7 +466,7 @@ declare class Mcdev {
      * @param {BuObject} buObject properties for auth
      * @returns {Promise.<string[]>} keyArr
      */
-    static #retrieveKeysWithLike(selectedType: string, buObject: BuObject): Promise<string[]>;
+    static "__#private@#retrieveKeysWithLike"(selectedType: string, buObject: BuObject): Promise<string[]>;
     /**
      * Updates the key to match the name field
      *
@@ -476,7 +476,7 @@ declare class Mcdev {
      * @param {string[]} [keyArr] customerkey of the metadata
      * @returns {Promise.<string[]>} list of keys that were affected
      */
-    static #fixKeys(cred: string, bu: string, type: string, keyArr?: string[]): Promise<string[]>;
+    static "__#private@#fixKeys"(cred: string, bu: string, type: string, keyArr?: string[]): Promise<string[]>;
     /**
      * Updates the key to match the name field
      *
@@ -486,7 +486,7 @@ declare class Mcdev {
      * @param {string[]} [keyArr] customerkey of the metadata
      * @returns {Promise.<string[]>} list of keys that were affected
      */
-    static #replaceCbReference(cred: string, bu: string, type: string, keyArr?: string[]): Promise<string[]>;
+    static "__#private@#replaceCbReference"(cred: string, bu: string, type: string, keyArr?: string[]): Promise<string[]>;
     /**
      * helper to convert CSVs into an array. if only one value was given, it's also returned as an array
      *

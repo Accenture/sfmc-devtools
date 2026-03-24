@@ -1,16 +1,16 @@
 declare namespace _default {
     let bodyIteratorField: string;
-    let dependencies: never[];
-    let dependencyGraph: null;
+    let dependencies: any[];
+    let dependencyGraph: any;
     let hasExtended: boolean;
     let idField: string;
     let keyIsFixed: boolean;
     let keyField: string;
     let nameField: string;
-    let createdDateField: null;
-    let createdNameField: null;
-    let lastmodDateField: null;
-    let lastmodNameField: null;
+    let createdDateField: any;
+    let createdNameField: any;
+    let lastmodDateField: any;
+    let lastmodNameField: any;
     let restPagination: boolean;
     let maxKeyLength: number;
     let type: string;

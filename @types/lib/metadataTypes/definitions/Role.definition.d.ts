@@ -1,7 +1,7 @@
 declare namespace _default {
     let bodyIteratorField: string;
-    let dependencies: never[];
-    let dependencyGraph: null;
+    let dependencies: any[];
+    let dependencyGraph: any;
     let deployBlacklist: string[];
     let documentInOneFile: boolean;
     let hasExtended: boolean;
@@ -10,9 +10,9 @@ declare namespace _default {
     let keyField: string;
     let nameField: string;
     let createdDateField: string;
-    let createdNameField: null;
+    let createdNameField: any;
     let lastmodDateField: string;
-    let lastmodNameField: null;
+    let lastmodNameField: any;
     let maxKeyLength: number;
     let type: string;
     let typeDescription: string;
@@ -57,9 +57,9 @@ declare namespace _default {
             export { template_3 as template };
         }
         namespace Name {
-            let isCreateable_4: null;
+            let isCreateable_4: any;
             export { isCreateable_4 as isCreateable };
-            let isUpdateable_4: null;
+            let isUpdateable_4: any;
             export { isUpdateable_4 as isUpdateable };
             let retrieving_4: boolean;
             export { retrieving_4 as retrieving };

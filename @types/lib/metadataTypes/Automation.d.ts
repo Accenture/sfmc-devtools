@@ -59,7 +59,7 @@ declare class Automation extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<AutomationMapObj>} Promise of metadata
      */
-    static retrieve(retrieveDir?: string, _?: void | string[] | undefined, __?: void | string[] | undefined, key?: string): Promise<AutomationMapObj>;
+    static retrieve(retrieveDir?: string, _?: void | string[], __?: void | string[], key?: string): Promise<AutomationMapObj>;
     /**
      * helper for {@link this.retrieveRESTcollection}
      *
@@ -76,7 +76,7 @@ declare class Automation extends MetadataType {
      * @param {boolean} [skipNotification] skip notification retrieval
      * @returns {Promise.<object>} Promise of automation legacy api response
      */
-    static #getAutomationLegacyREST(metadataMap: MetadataTypeMap, skipNotification?: boolean): Promise<object>;
+    static "__#private@#getAutomationLegacyREST"(metadataMap: MetadataTypeMap, skipNotification?: boolean): Promise<object>;
     /**
      * Retrieves Metadata of Automation
      *
@@ -105,7 +105,7 @@ declare class Automation extends MetadataType {
      * @param {AutomationItem} metadata a single automation
      * @returns {boolean} true if the automation schedule is valid
      */
-    static #isValidSchedule(metadata: AutomationItem): boolean;
+    static "__#private@#isValidSchedule"(metadata: AutomationItem): boolean;
     /**
      * manages post retrieve steps
      *
@@ -134,7 +134,7 @@ declare class Automation extends MetadataType {
      * @param {string[]} keyArr customerkey of the metadata
      * @returns {Promise.<string[]>} Returns list of keys that were executed
      */
-    static #schedulePause(mode: "schedule" | "pause", keyArr: string[]): Promise<string[]>;
+    static "__#private@#schedulePause"(mode: "schedule" | "pause", keyArr: string[]): Promise<string[]>;
     /**
      * helper for {@link Automation.schedule}
      *
@@ -145,7 +145,7 @@ declare class Automation extends MetadataType {
      * @param {string} [description] schedule description
      * @returns {Promise.<{key:string, response:object}>} metadata key and API response
      */
-    static #schedulePauseItem(mode: "schedule" | "pause", key: string, automationLegacyId: string, scheduleLegacyId?: string, description?: string): Promise<{
+    static "__#private@#schedulePauseItem"(mode: "schedule" | "pause", key: string, automationLegacyId: string, scheduleLegacyId?: string, description?: string): Promise<{
         key: string;
         response: object;
     }>;
@@ -176,7 +176,7 @@ declare class Automation extends MetadataType {
      *
      * @param {AutomationItem} metadata metadata mapped by their keyField
      */
-    static #preDeploySchedule(metadata: AutomationItem): void;
+    static "__#private@#preDeploySchedule"(metadata: AutomationItem): void;
     /**
      * Gets executed before deploying metadata
      *
@@ -213,7 +213,7 @@ declare class Automation extends MetadataType {
      * @param {string} key current customer key
      * @returns {Promise.<void>} -
      */
-    static #updateNotificationInfoREST(metadataMap: AutomationMap, key: string): Promise<void>;
+    static "__#private@#updateNotificationInfoREST"(metadataMap: AutomationMap, key: string): Promise<void>;
     /**
      * Builds a schedule object to be used for scheduling an automation
      * based on combination of ical string and start/end dates.
@@ -268,7 +268,7 @@ declare class Automation extends MetadataType {
      * @param {string} key customer key
      * @returns {Promise.<string>} objectId or enpty string
      */
-    static #getObjectIdForSingleRetrieve(key: string): Promise<string>;
+    static "__#private@#getObjectIdForSingleRetrieve"(key: string): Promise<string>;
     /**
      * clean up after deleting a metadata item
      *
@@ -278,7 +278,7 @@ declare class Automation extends MetadataType {
     static postDeleteTasks(customerKey: string): Promise<void>;
 }
 declare namespace Automation {
-    let retrieveDir: string | undefined;
+    let retrieveDir: string;
     let definition: {
         activityTypeMapping: {
             dataExtract: number;
@@ -545,7 +545,7 @@ declare namespace Automation {
         typeCdpByDefault: boolean;
         typeName: string;
         customDeployTypes: string[];
-        manualDeployTypes: never[];
+        manualDeployTypes: any[];
         fields: {
             categoryId: {
                 isCreateable: boolean;
@@ -597,7 +597,7 @@ declare namespace Automation {
             };
             id: {
                 isCreateable: boolean;
-                isUpdateable: null;
+                isUpdateable: any;
                 retrieving: boolean;
                 template: boolean;
             };

@@ -14,8 +14,8 @@ declare namespace _default {
     let folderIdField: string;
     let createdDateField: string;
     let createdNameField: string;
-    let lastmodDateField: null;
-    let lastmodNameField: null;
+    let lastmodDateField: any;
+    let lastmodNameField: any;
     let restPagination: boolean;
     let type: string;
     let typeDescription: string;
@@ -24,52 +24,52 @@ declare namespace _default {
     let typeName: string;
     let fields: {
         applicationID: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         applicationKey: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         attributeCount: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         canAddValues: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         canChangeValues: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         canModify: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         canRemove: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         categoryID: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'connectingID.identifierType': {
             isCreateable: boolean;
@@ -78,70 +78,70 @@ declare namespace _default {
             template: boolean;
         };
         createDate: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         createdBy: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         customObjectOwnerMID: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'dataRetentionProperties.isDeleteAtEndOfRetentionPeriod': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'dataRetentionProperties.isResetRetentionPeriodOnImport': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'dataRetentionProperties.isRowBasedRetention': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'dataRetentionProperties.periodUnitOfMeasure': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'dataRetentionProperties.setDefinitionID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'dataRetentionProperties.periodLength': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         definitionID: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         definitionKey: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         definitionName: {
             isCreateable: boolean;
@@ -162,94 +162,94 @@ declare namespace _default {
             template: boolean;
         };
         isCustomObjectBacked: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         isEvent: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         isHidden: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         isReadOnly: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         isRoot: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         isSendable: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         isShared: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         isSystemDefined: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         isTestaable: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'leftConnectingID.identifierType': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'leftItem.cardinality': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'leftItem.cardinality ': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'leftItem.connectingID.identifierType': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'leftItem.identifier': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'leftItem.relationshipType': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         localizedDescription: {
             isCreateable: boolean;
@@ -276,658 +276,658 @@ declare namespace _default {
             template: boolean;
         };
         name: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         nonStandardAttributeGroupReferences: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'nonStandardAttributeGroupReferences[].attributeGroupType': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'nonStandardAttributeGroupReferences[].attributeGroupID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'nonStandardAttributeGroupReferences[].definitionKey': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'obfuscationProperties.maskType': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'obfuscationProperties.maskTypeID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'obfuscationProperties.storageType': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'obfuscationProperties.storageTypeID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'obfuscationProperties.valueDefinitionID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'parentDefinition.connectingID.identifierType': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'parentDefinition.definitionID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'parentDefinition.definitionKey': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'parentDefinition.definitionName.value': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         parentID: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         relationshipCount: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         relationships: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].canModify': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].canRemove': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].isGroupToSetRelationship': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].isHidden': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].isSystemDefined': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].leftRelationshipID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].leftRelationshipIDs': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].leftItem.cardinality': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].leftItem.relationshipType': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].leftItem.r__attributeSet_key': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].leftItem.r__attributeGroup_key': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].rightItem.cardinality': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].rightItem.relationshipType': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].rightItem.r__attributeSet_key': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].rightItem.r__attributeGroup_key': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].leftRelationshipIDs[].type': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].leftRelationshipIDs[].value': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].leftRelationshipReferenceType': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].relationshipAttributes': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].relationshipAttributes[].leftAttributeID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].relationshipAttributes[].rightAttributeID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].relationshipAttributes[].c__leftFullyQualifiedName': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].relationshipAttributes[].c__rightFullyQualifiedName': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'relationships[].relationshipID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'rightConnectingID.identifierType': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'rightItem.cardinality': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'rightItem.connectingID.identifierType': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'rightItem.identifier': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'rightItem.relationshipType': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         sendAttributeStorageName: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         sendContactKeyStorageName: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         setDefinitionID: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         setDefinitionKey: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'setDefinitionName.value': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'storageFieldReferenceID.type': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'storageFieldReferenceID.value': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         storageLogicalType: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         storageName: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'storageObjectFieldInformation.externalIsRowIdentifier': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'storageObjectFieldInformation.externalObjectFieldAPIName': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'storageObjectFieldInformation.externalObjectFieldDataTypeName': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'storageObjectFieldInformation.externalObjectFieldLength': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         storageObjectIDs: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'storageObjectInformation.externalObjectAPIName': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'storageReferenceID.type': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'storageReferenceID.value': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         valueDefinitions: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].baseType': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].customerDataID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].connectingID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].dataSourceID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].dataSourceName': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].dataType': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].defaultValue': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].definitionID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].definitionKey': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].definitionName': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].description': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].displayOrder': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].fullyQualifiedName': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].identifierType': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].isHidden': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].isIdentityValue': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].isNullable': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].isPrimaryKey': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].isReadOnly': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].isSystemDefined': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].isUpdateable': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].length': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].localizedDescription': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].name': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].obfuscationProperties': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].obfuscationProperties.maskType': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].obfuscationProperties.maskTypeID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].obfuscationProperties.storageType': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].obfuscationProperties.storageTypeID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].obfuscationProperties.valueDefinitionID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].ordinal': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].parentDefinition': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].parentIdentifier': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].parentType': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].restrictionLookupListID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].scale': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].setDefinitionID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].setDefinitionKey': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].setDefinitionName': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].storageFieldReferenceID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].storageFieldReferenceID.type': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].storageFieldReferenceID.value': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].storageFieldValueID.type': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].storageFieldValueID.value': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].storageName': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].storageObjectFieldInformation': {
             skipValidation: boolean;
@@ -945,28 +945,28 @@ declare namespace _default {
             skipValidation: boolean;
         };
         'valueDefinitions[].valueDefinitionID': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         'valueDefinitions[].valueDefinitionKey': {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         r__folder_Path: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
         r__dataExtension_key: {
-            isCreateable: null;
-            isUpdateable: null;
+            isCreateable: any;
+            isUpdateable: any;
             retrieving: boolean;
-            template: null;
+            template: any;
         };
     };
 }

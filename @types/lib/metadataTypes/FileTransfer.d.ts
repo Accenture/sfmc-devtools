@@ -37,7 +37,7 @@ declare class FileTransfer extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<MetadataTypeMapObj>} Promise
      */
-    static retrieve(retrieveDir: string, _?: void | string[] | undefined, __?: void | string[] | undefined, key?: string): Promise<MetadataTypeMapObj>;
+    static retrieve(retrieveDir: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
      * Retrieves Metadata of  FileTransfer Activity for caching
      *
@@ -102,9 +102,9 @@ declare namespace FileTransfer {
         keyField: string;
         nameField: string;
         createdDateField: string;
-        createdNameField: null;
+        createdNameField: any;
         lastmodDateField: string;
-        lastmodNameField: null;
+        lastmodNameField: any;
         restPagination: boolean;
         type: string;
         typeDescription: string;

@@ -43,7 +43,7 @@ declare class Verification extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
      */
-    static retrieve(retrieveDir?: string, _?: void | string[] | undefined, __?: void | string[] | undefined, key?: string): Promise<MetadataTypeMapObj>;
+    static retrieve(retrieveDir?: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
      * helper for {@link this.retrieveRESTcollection}
      *
@@ -98,10 +98,10 @@ declare namespace Verification {
         idField: string;
         keyIsFixed: boolean;
         keyField: string;
-        createdDateField: null;
+        createdDateField: any;
         createdNameField: string;
-        lastmodDateField: null;
-        lastmodNameField: null;
+        lastmodDateField: any;
+        lastmodNameField: any;
         nameField: string;
         restPagination: boolean;
         maxKeyLength: number;

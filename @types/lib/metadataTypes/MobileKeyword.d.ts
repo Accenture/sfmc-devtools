@@ -37,13 +37,13 @@ declare class MobileKeyword extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
      */
-    static retrieve(retrieveDir: string, _?: void | string[] | undefined, __?: void | string[] | undefined, key?: string): Promise<MetadataTypeMapObj>;
+    static retrieve(retrieveDir: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
      * helper for {@link MobileKeyword.preDeployTasks} and {@link MobileKeyword.createOrUpdate} to ensure we have code & keyword properly set
      *
      * @param {MetadataTypeItem} metadata single item
      */
-    static #setCodeAndKeyword(metadata: MetadataTypeItem): void;
+    static "__#private@#setCodeAndKeyword"(metadata: MetadataTypeItem): void;
     /**
      * Retrieves event definition metadata for caching
      *
@@ -52,7 +52,7 @@ declare class MobileKeyword extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
      */
-    static retrieveForCache(_?: void | string[] | undefined, __?: void | string[] | undefined, key?: string): Promise<MetadataTypeMapObj>;
+    static retrieveForCache(_?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
      * retrieve an item and create a template from it
      *
@@ -69,7 +69,7 @@ declare class MobileKeyword extends MetadataType {
      * @param {string} key customer key of single item to retrieve / name of the metadata file
      * @returns {Array} key, queryParams
      */
-    static #getRetrieveKeyAndUrl(key: string): any[];
+    static "__#private@#getRetrieveKeyAndUrl"(key: string): any[];
     /**
      * Creates a single item
      *
@@ -162,7 +162,7 @@ declare namespace MobileKeyword {
         createdDateField: string;
         createdNameField: string;
         lastmodDateField: string;
-        lastmodNameField: null;
+        lastmodNameField: any;
         restPagination: boolean;
         restPageSize: number;
         maxKeyLength: number;

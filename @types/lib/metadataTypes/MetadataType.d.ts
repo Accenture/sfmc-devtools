@@ -813,9 +813,9 @@ declare class MetadataType {
 declare namespace MetadataType {
     namespace definition {
         let bodyIteratorField: string;
-        let dependencies: never[];
-        let fields: null;
-        let hasExtended: null;
+        let dependencies: any[];
+        let fields: any;
+        let hasExtended: any;
         let idField: string;
         let keyField: string;
         let nameField: string;

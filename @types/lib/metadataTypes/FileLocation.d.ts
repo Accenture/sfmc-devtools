@@ -38,7 +38,7 @@ declare class FileLocation extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<MetadataTypeMapObj>} Promise
      */
-    static retrieve(retrieveDir: string, _?: void | string[] | undefined, __?: void | string[] | undefined, key?: string): Promise<MetadataTypeMapObj>;
+    static retrieve(retrieveDir: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
      * Retrieves folder metadata into local filesystem. Also creates a uniquePath attribute for each folder.
      *
@@ -93,17 +93,17 @@ declare class FileLocation extends MetadataType {
 declare namespace FileLocation {
     let definition: {
         bodyIteratorField: string;
-        dependencies: never[];
-        dependencyGraph: null;
+        dependencies: any[];
+        dependencyGraph: any;
         hasExtended: boolean;
         idField: string;
         keyIsFixed: boolean;
         keyField: string;
         nameField: string;
-        createdDateField: null;
-        createdNameField: null;
-        lastmodDateField: null;
-        lastmodNameField: null;
+        createdDateField: any;
+        createdNameField: any;
+        lastmodDateField: any;
+        lastmodNameField: any;
         restPagination: boolean;
         maxKeyLength: number;
         type: string;

@@ -41,7 +41,7 @@ declare class Journey extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<MetadataTypeMapObj>} Promise
      */
-    static retrieve(retrieveDir: string, _?: void | string[] | undefined, __?: void | string[] | undefined, key?: string): Promise<MetadataTypeMapObj>;
+    static retrieve(retrieveDir: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
      * Updates a single item
      *
@@ -191,9 +191,9 @@ declare namespace Journey {
         keyField: string;
         nameField: string;
         createdDateField: string;
-        createdNameField: null;
+        createdNameField: any;
         lastmodDateField: string;
-        lastmodNameField: null;
+        lastmodNameField: any;
         restPagination: boolean;
         restPageSize: number;
         maxKeyLength: number;
@@ -890,25 +890,25 @@ declare namespace Journey {
                 skipValidation: boolean;
             };
             'defaults.properties.analyticsTracking.enabled': {
-                isCreateable: null;
-                isUpdateable: null;
-                retrieving: null;
-                template: null;
+                isCreateable: any;
+                isUpdateable: any;
+                retrieving: any;
+                template: any;
             };
             'defaults.properties': {
                 skipValidation: boolean;
             };
             'defaults.properties.analyticsTracking.analyticsType': {
-                isCreateable: null;
-                isUpdateable: null;
-                retrieving: null;
-                template: null;
+                isCreateable: any;
+                isUpdateable: any;
+                retrieving: any;
+                template: any;
             };
             'defaults.properties.analyticsTracking.urlDomainsToTrack': {
-                isCreateable: null;
-                isUpdateable: null;
-                retrieving: null;
-                template: null;
+                isCreateable: any;
+                isUpdateable: any;
+                retrieving: any;
+                template: any;
             };
             definitionId: {
                 isCreateable: boolean;
@@ -989,10 +989,10 @@ declare namespace Journey {
                 template: boolean;
             };
             scheduledStatus: {
-                isCreateable: null;
-                isUpdateable: null;
-                retrieving: null;
-                template: null;
+                isCreateable: any;
+                isUpdateable: any;
+                retrieving: any;
+                template: any;
             };
             stats: {
                 isCreateable: boolean;

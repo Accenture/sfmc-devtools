@@ -8,10 +8,10 @@ declare namespace _default {
     let idField: string;
     let keyIsFixed: boolean;
     let keyField: string;
-    let createdDateField: null;
+    let createdDateField: any;
     let createdNameField: string;
-    let lastmodDateField: null;
-    let lastmodNameField: null;
+    let lastmodDateField: any;
+    let lastmodNameField: any;
     let nameField: string;
     let restPagination: boolean;
     let maxKeyLength: number;

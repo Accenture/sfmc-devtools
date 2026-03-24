@@ -37,7 +37,7 @@ declare class TransactionalMessage extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
      */
-    static retrieve(retrieveDir?: string, _?: void | string[] | undefined, __?: void | string[] | undefined, key?: string): Promise<MetadataTypeMapObj>;
+    static retrieve(retrieveDir?: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
      * Retrieves event definition metadata for caching
      *
@@ -46,7 +46,7 @@ declare class TransactionalMessage extends MetadataType {
      * @param {string} [key] customer key of single item to cache
      * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
      */
-    static retrieveForCache(_?: void | string[] | undefined, __?: void | string[] | undefined, key?: string): Promise<MetadataTypeMapObj>;
+    static retrieveForCache(_?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
      * Updates a single item
      *
@@ -65,17 +65,17 @@ declare class TransactionalMessage extends MetadataType {
 declare namespace TransactionalMessage {
     let definition: {
         bodyIteratorField: string;
-        dependencies: never[];
-        dependencyGraph: null;
+        dependencies: any[];
+        dependencyGraph: any;
         hasExtended: boolean;
         idField: string;
         keyIsFixed: boolean;
         keyField: string;
         nameField: string;
         createdDateField: string;
-        createdNameField: null;
+        createdNameField: any;
         lastmodDateField: string;
-        lastmodNameField: null;
+        lastmodNameField: any;
         restPagination: boolean;
         restPageSize: number;
         type: string;

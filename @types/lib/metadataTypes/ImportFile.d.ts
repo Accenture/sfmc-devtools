@@ -40,7 +40,7 @@ declare class ImportFile extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<MetadataTypeMapObj>} Promise
      */
-    static retrieve(retrieveDir?: string, _?: void | string[] | undefined, __?: void | string[] | undefined, key?: string): Promise<MetadataTypeMapObj>;
+    static retrieve(retrieveDir?: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
      * helper for {@link MetadataType.retrieveRESTcollection}
      *
@@ -58,7 +58,7 @@ declare class ImportFile extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<MetadataTypeMapObj>} Promise
      */
-    static retrieveForCache(_?: void | string[] | undefined, __?: void | string[] | undefined, key?: string): Promise<MetadataTypeMapObj>;
+    static retrieveForCache(_?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
      * Retrieve a specific Import Definition by Name
      *
@@ -107,8 +107,8 @@ declare class ImportFile extends MetadataType {
     static postRetrieveTasks(metadata: MetadataTypeItem): MetadataTypeItem;
 }
 declare namespace ImportFile {
-    let smsImports: {} | undefined;
-    let dataExtensionsLegacy: {} | undefined;
+    let smsImports: {};
+    let dataExtensionsLegacy: {};
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
@@ -131,9 +131,9 @@ declare namespace ImportFile {
         keyField: string;
         nameField: string;
         createdDateField: string;
-        createdNameField: null;
+        createdNameField: any;
         lastmodDateField: string;
-        lastmodNameField: null;
+        lastmodNameField: any;
         restPagination: boolean;
         restPageSize: number;
         restConcurrentLimit: number;

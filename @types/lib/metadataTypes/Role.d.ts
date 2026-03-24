@@ -38,7 +38,7 @@ declare class Role extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<MetadataTypeMapObj>} Metadata store object
      */
-    static retrieve(retrieveDir: string, _?: void | string[] | undefined, ___?: void | string[] | undefined, key?: string): Promise<MetadataTypeMapObj>;
+    static retrieve(retrieveDir: string, _?: void | string[], ___?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
      * adds default roles to the list of retrieved roles for proper caching (but not storing)
      * also caches available timezones for retrieve-user
@@ -88,11 +88,11 @@ declare class Role extends MetadataType {
     static _traverseRoles(role: string, element: object, permission?: string, isAllowed?: string): void;
 }
 declare namespace Role {
-    let allPermissions: {} | undefined;
+    let allPermissions: {};
     let definition: {
         bodyIteratorField: string;
-        dependencies: never[];
-        dependencyGraph: null;
+        dependencies: any[];
+        dependencyGraph: any;
         deployBlacklist: string[];
         documentInOneFile: boolean;
         hasExtended: boolean;
@@ -101,9 +101,9 @@ declare namespace Role {
         keyField: string;
         nameField: string;
         createdDateField: string;
-        createdNameField: null;
+        createdNameField: any;
         lastmodDateField: string;
-        lastmodNameField: null;
+        lastmodNameField: any;
         maxKeyLength: number;
         type: string;
         typeDescription: string;
@@ -136,8 +136,8 @@ declare namespace Role {
                 template: boolean;
             };
             Name: {
-                isCreateable: null;
-                isUpdateable: null;
+                isCreateable: any;
+                isUpdateable: any;
                 retrieving: boolean;
             };
             ObjectID: {
