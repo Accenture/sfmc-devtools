@@ -36,7 +36,7 @@ declare class SendClassification extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
      */
-    static retrieve(retrieveDir: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
+    static retrieve(retrieveDir: string, _?: void | string[] | undefined, __?: void | string[] | undefined, key?: string): Promise<MetadataTypeMapObj>;
     /**
      * Retrieves event definition metadata for caching
      *
@@ -100,9 +100,9 @@ declare namespace SendClassification {
         maxKeyLength: number;
         nameField: string;
         createdDateField: string;
-        createdNameField: any;
+        createdNameField: null;
         lastmodDateField: string;
-        lastmodNameField: any;
+        lastmodNameField: null;
         restPagination: boolean;
         type: string;
         typeDescription: string;

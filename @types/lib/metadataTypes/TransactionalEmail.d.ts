@@ -76,9 +76,9 @@ declare namespace TransactionalEmail {
         keyField: string;
         nameField: string;
         createdDateField: string;
-        createdNameField: any;
+        createdNameField: null;
         lastmodDateField: string;
-        lastmodNameField: any;
+        lastmodNameField: null;
         restPagination: boolean;
         restPageSize: number;
         maxKeyLength: number;

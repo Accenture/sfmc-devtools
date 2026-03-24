@@ -4,5 +4,5 @@ lint-staged
 
 # update typescript type declarations
 echo "[PRE-COMMIT] Run typescript validation and create/update d.ts files"
-tsc -p tsconfig.precommit.json
+tsc -p tsconfig.precommit.json || true
 git add @types

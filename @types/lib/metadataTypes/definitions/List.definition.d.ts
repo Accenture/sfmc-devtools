@@ -1,14 +1,14 @@
 declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: string[];
-    let dependencyGraph: any;
+    let dependencyGraph: null;
     let folderType: string;
     let hasExtended: boolean;
     let idField: string;
     let keyIsFixed: boolean;
     let keyField: string;
     let nameField: string;
-    let restPagination: any;
+    let restPagination: null;
     let type: string;
     let typeDescription: string;
     let typeRetrieveByDefault: boolean;

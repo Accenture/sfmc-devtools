@@ -21,9 +21,9 @@ declare namespace _default {
     let keyField: string;
     let nameField: string;
     let createdDateField: string;
-    let createdNameField: any;
+    let createdNameField: null;
     let lastmodDateField: string;
-    let lastmodNameField: any;
+    let lastmodNameField: null;
     let restPagination: boolean;
     let restPageSize: number;
     let maxKeyLength: number;
@@ -720,25 +720,25 @@ declare namespace _default {
             skipValidation: boolean;
         };
         'defaults.properties.analyticsTracking.enabled': {
-            isCreateable: any;
-            isUpdateable: any;
-            retrieving: any;
-            template: any;
+            isCreateable: null;
+            isUpdateable: null;
+            retrieving: null;
+            template: null;
         };
         'defaults.properties': {
             skipValidation: boolean;
         };
         'defaults.properties.analyticsTracking.analyticsType': {
-            isCreateable: any;
-            isUpdateable: any;
-            retrieving: any;
-            template: any;
+            isCreateable: null;
+            isUpdateable: null;
+            retrieving: null;
+            template: null;
         };
         'defaults.properties.analyticsTracking.urlDomainsToTrack': {
-            isCreateable: any;
-            isUpdateable: any;
-            retrieving: any;
-            template: any;
+            isCreateable: null;
+            isUpdateable: null;
+            retrieving: null;
+            template: null;
         };
         definitionId: {
             isCreateable: boolean;
@@ -819,10 +819,10 @@ declare namespace _default {
             template: boolean;
         };
         scheduledStatus: {
-            isCreateable: any;
-            isUpdateable: any;
-            retrieving: any;
-            template: any;
+            isCreateable: null;
+            isUpdateable: null;
+            retrieving: null;
+            template: null;
         };
         stats: {
             isCreateable: boolean;

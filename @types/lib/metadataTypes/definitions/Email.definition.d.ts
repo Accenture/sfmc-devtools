@@ -1,7 +1,7 @@
 declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: string[];
-    let dependencyGraph: any;
+    let dependencyGraph: null;
     let hasExtended: boolean;
     let idField: string;
     let keepId: boolean;
@@ -9,7 +9,7 @@ declare namespace _default {
     let keyField: string;
     let nameField: string;
     let folderIdField: string;
-    let restPagination: any;
+    let restPagination: null;
     let type: string;
     let typeDescription: string;
     let typeRetrieveByDefault: boolean;

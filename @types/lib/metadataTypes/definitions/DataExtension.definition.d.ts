@@ -1,7 +1,7 @@
 declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: string[];
-    let dependencyGraph: any;
+    let dependencyGraph: null;
     let folderType: string;
     namespace filter {
         let CustomerKey: string[];
@@ -16,8 +16,8 @@ declare namespace _default {
         SendLog: string[];
         'SmartCapture - Contacts Template Extension': string[];
         SmsSendLog: string[];
-        SMSMessageTracking: any;
-        SMSSubscriptionLog: any;
+        SMSMessageTracking: null;
+        SMSSubscriptionLog: null;
         TriggeredSendDataExtension: string[];
     };
     namespace dataRetentionPeriodUnitOfMeasureMapping {
@@ -33,9 +33,9 @@ declare namespace _default {
     let nameField: string;
     let folderIdField: string;
     let createdDateField: string;
-    let createdNameField: any;
+    let createdNameField: null;
     let lastmodDateField: string;
-    let lastmodNameField: any;
+    let lastmodNameField: null;
     let restPagination: boolean;
     let maxKeyLength: number;
     let type: string;
@@ -45,8 +45,8 @@ declare namespace _default {
     let typeName: string;
     let fields: {
         CategoryID: {
-            isCreateable: any;
-            isUpdateable: any;
+            isCreateable: null;
+            isUpdateable: null;
             retrieving: boolean;
             template: boolean;
         };

@@ -43,13 +43,13 @@ declare namespace _default {
         createdBy: {
             isCreateable: boolean;
             isUpdateable: boolean;
-            retrieving: any;
+            retrieving: null;
             template: boolean;
         };
         modifiedBy: {
             isCreateable: boolean;
             isUpdateable: boolean;
-            retrieving: any;
+            retrieving: null;
             template: boolean;
         };
         CreatedDate: {

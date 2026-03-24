@@ -141,7 +141,7 @@ export namespace Util {
     function summarizeSubtypes(field: "typeRetrieveByDefault" | "typeCdpByDefault", selectedTypes: string[], type?: "asset"): string[];
     let logFileName: string;
     function _createNewLoggerTransport(noLogFile?: boolean): object;
-    let loggerTransports: any;
+    let loggerTransports: null;
     let logger: Logger;
     function startLogger(restart?: boolean, noLogFile?: boolean): void;
     function metadataLogger(level: string, type: string, method: string, payload: any, source?: string): void;
@@ -199,9 +199,9 @@ export namespace Util {
      * @returns {void}
      */
     function setLoggingLevel(argv: {
-        silent?: boolean;
-        verbose?: boolean;
-        debug?: boolean;
+        silent?: boolean | undefined;
+        verbose?: boolean | undefined;
+        debug?: boolean | undefined;
     }): void;
     /**
      * outputs a warning that the given type is still in beta

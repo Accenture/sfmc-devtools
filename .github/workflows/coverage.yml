@@ -24,8 +24,6 @@ jobs:
             - run: npm ci --ignore-scripts
 
             - name: Run mcdev-tests with coverage
-              env:
-                  MCDEV_MOCK_PORT: 1337
               run: npm run coverage
 
             - name: Prepare for Report Coverage

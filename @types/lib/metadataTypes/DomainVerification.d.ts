@@ -39,7 +39,7 @@ declare class DomainVerification extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
      */
-    static retrieve(retrieveDir: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
+    static retrieve(retrieveDir: string, _?: void | string[] | undefined, __?: void | string[] | undefined, key?: string): Promise<MetadataTypeMapObj>;
     /**
      * Retrieves Metadata of DomainVerification for caching
      *
@@ -115,16 +115,16 @@ declare class DomainVerification extends MetadataType {
 declare namespace DomainVerification {
     let definition: {
         bodyIteratorField: string;
-        dependencies: any[];
-        dependencyGraph: any;
+        dependencies: never[];
+        dependencyGraph: null;
         hasExtended: boolean;
         idField: string;
         keyIsFixed: boolean;
         keyField: string;
-        createdDateField: any;
-        createdNameField: any;
-        lastmodDateField: any;
-        lastmodNameField: any;
+        createdDateField: null;
+        createdNameField: null;
+        lastmodDateField: null;
+        lastmodNameField: null;
         nameField: string;
         restPagination: boolean;
         maxKeyLength: number;

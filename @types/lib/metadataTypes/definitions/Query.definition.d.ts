@@ -15,9 +15,9 @@ declare namespace _default {
     let nameField: string;
     let folderIdField: string;
     let createdDateField: string;
-    let createdNameField: any;
+    let createdNameField: null;
     let lastmodDateField: string;
-    let lastmodNameField: any;
+    let lastmodNameField: null;
     let restPagination: boolean;
     namespace targetUpdateTypeMapping {
         let Append: number;

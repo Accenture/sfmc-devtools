@@ -36,7 +36,7 @@ declare class Email extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
      */
-    static retrieve(retrieveDir: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
+    static retrieve(retrieveDir: string, _?: void | string[] | undefined, __?: void | string[] | undefined, key?: string): Promise<MetadataTypeMapObj>;
     /**
      * manages post retrieve steps
      *
@@ -49,7 +49,7 @@ declare namespace Email {
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
-        dependencyGraph: any;
+        dependencyGraph: null;
         hasExtended: boolean;
         idField: string;
         keepId: boolean;
@@ -57,7 +57,7 @@ declare namespace Email {
         keyField: string;
         nameField: string;
         folderIdField: string;
-        restPagination: any;
+        restPagination: null;
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;

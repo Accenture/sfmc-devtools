@@ -18,10 +18,10 @@ declare namespace _default {
     let nameField: string;
     let folderIdField: string;
     let createdDateField: string;
-    let createdNameField: any;
+    let createdNameField: null;
     let lastmodDateField: string;
-    let lastmodNameField: any;
-    let restPagination: any;
+    let lastmodNameField: null;
+    let restPagination: null;
     let maxKeyLength: number;
     let type: string;
     let soapType: string;

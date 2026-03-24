@@ -3,6 +3,14 @@ import http from 'node:http';
 import { handleSOAPRequest, handleRESTRequest } from './resourceFactory.js';
 
 /**
+ * Fixed port for the mock HTTP server used in CLI subprocess tests.
+ * Must match the hardcoded port in test/cli-preload.mjs.
+ *
+ * @type {number}
+ */
+export const MOCK_PORT = 19999;
+
+/**
  * Starts a mock HTTP server that simulates the SFMC API for subprocess CLI testing.
  * Adapts raw HTTP requests to the format expected by resourceFactory handlers and
  * serves responses from the test/resources/ directory.
@@ -80,7 +88,7 @@ export async function startMockServer() {
             }
         });
 
-        server.listen(0, '127.0.0.1', () => {
+        server.listen(MOCK_PORT, '127.0.0.1', () => {
             resolve(server);
         });
     });

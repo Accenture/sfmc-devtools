@@ -12,9 +12,9 @@ declare namespace _default {
     let maxKeyLength: number;
     let nameField: string;
     let createdDateField: string;
-    let createdNameField: any;
+    let createdNameField: null;
     let lastmodDateField: string;
-    let lastmodNameField: any;
+    let lastmodNameField: null;
     let restPagination: boolean;
     let type: string;
     let typeDescription: string;

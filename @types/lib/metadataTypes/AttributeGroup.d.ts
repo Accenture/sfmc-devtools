@@ -20,7 +20,7 @@ declare class AttributeGroup extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
      */
-    static retrieve(retrieveDir: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
+    static retrieve(retrieveDir: string, _?: void | string[] | undefined, __?: void | string[] | undefined, key?: string): Promise<MetadataTypeMapObj>;
     /**
      * Retrieves Metadata of schema attribute groups for caching.
      *
@@ -91,32 +91,32 @@ declare namespace AttributeGroup {
                 template: boolean;
             };
             'attributeSetIdentifiers[].connectingID.identifierType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: null;
+                isUpdateable: null;
                 retrieving: boolean;
                 template: boolean;
             };
             'attributeSetIdentifiers[].definitionID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: null;
+                isUpdateable: null;
                 retrieving: boolean;
                 template: boolean;
             };
             'attributeSetIdentifiers[].definitionKey': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: null;
+                isUpdateable: null;
                 retrieving: boolean;
                 template: boolean;
             };
             'attributeSetIdentifiers[].definitionName.value': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: null;
+                isUpdateable: null;
                 retrieving: boolean;
                 template: boolean;
             };
             'attributeSetIdentifiers[].namespace': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: null;
+                isUpdateable: null;
                 retrieving: boolean;
                 template: boolean;
             };
@@ -235,20 +235,20 @@ declare namespace AttributeGroup {
                 template: boolean;
             };
             'localizedDescription.resourceSetKey': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: null;
+                isUpdateable: null;
                 retrieving: boolean;
                 template: boolean;
             };
             'localizedDescription.resourceValueKey': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: null;
+                isUpdateable: null;
                 retrieving: boolean;
                 template: boolean;
             };
             'localizedDescription.value': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: null;
+                isUpdateable: null;
                 retrieving: boolean;
                 template: boolean;
             };

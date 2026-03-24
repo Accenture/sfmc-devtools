@@ -37,7 +37,7 @@ declare class MobileCode extends MetadataType {
      * @param {string} [key] customer key of single item to retrieve
      * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
      */
-    static retrieve(retrieveDir: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
+    static retrieve(retrieveDir: string, _?: void | string[] | undefined, __?: void | string[] | undefined, key?: string): Promise<MetadataTypeMapObj>;
     /**
      * Retrieves event definition metadata for caching
      *
@@ -48,17 +48,17 @@ declare class MobileCode extends MetadataType {
 declare namespace MobileCode {
     let definition: {
         bodyIteratorField: string;
-        dependencies: any[];
-        dependencyGraph: any;
+        dependencies: never[];
+        dependencyGraph: null;
         hasExtended: boolean;
         idField: string;
         keyIsFixed: boolean;
         keyField: string;
         nameField: string;
         createdDateField: string;
-        createdNameField: any;
+        createdNameField: null;
         lastmodDateField: string;
-        lastmodNameField: any;
+        lastmodNameField: null;
         restPagination: boolean;
         restPageSize: number;
         type: string;

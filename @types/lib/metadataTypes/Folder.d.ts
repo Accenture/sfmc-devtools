@@ -54,7 +54,7 @@ declare class Folder extends MetadataType {
      * @param {string[]} [subTypeArr] content type of folder
      * @returns {Promise.<{metadata: ListMap, type: string}>} Promise
      */
-    static retrieveForCache(_?: void | string[], subTypeArr?: string[]): Promise<{
+    static retrieveForCache(_?: void | string[] | undefined, subTypeArr?: string[]): Promise<{
         metadata: ListMap;
         type: string;
     }>;
@@ -124,8 +124,8 @@ declare class Folder extends MetadataType {
 declare namespace Folder {
     let definition: {
         bodyIteratorField: string;
-        dependencies: any[];
-        dependencyGraph: any;
+        dependencies: never[];
+        dependencyGraph: null;
         subTypes: string[];
         deployFolderTypes: string[];
         deployFolderTypesEmailRest: string[];

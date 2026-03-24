@@ -60,7 +60,7 @@ declare class Asset extends MetadataType {
      * @param {boolean} [loadShared] optionally retrieve assets from other BUs that were shared with the current
      * @returns {Promise.<{metadata: AssetMap, type: string}>} Promise
      */
-    static retrieveForCache(_?: void | string[], subTypeArr?: string[], __?: void | string, loadShared?: boolean): Promise<{
+    static retrieveForCache(_?: void | string[] | undefined, subTypeArr?: string[], __?: string | void | undefined, loadShared?: boolean): Promise<{
         metadata: AssetMap;
         type: string;
     }>;
@@ -211,7 +211,7 @@ declare class Asset extends MetadataType {
      * @param {string} extendedSubType webpage, htmlblock, etc
      * @returns {string} subType: block, message, other, etc
      */
-    static "__#private@#getMainSubtype"(extendedSubType: string): string;
+    static #getMainSubtype(extendedSubType: string): string;
     /**
      * determines the subtype of the current asset
      *
@@ -387,7 +387,7 @@ declare class Asset extends MetadataType {
      * @param {string} buName owner business unit name
      * @returns {Promise.<string>} path to the asset's code
      */
-    static "__#private@#getPath"(subType: string, item: object, buName: string): Promise<string>;
+    static #getPath(subType: string, item: object, buName: string): Promise<string>;
     /**
      * helper for {@link Asset.resolveId} that loads the JSON file for the asset
      *
@@ -395,7 +395,7 @@ declare class Asset extends MetadataType {
      * @param {object} item api response for metadata
      * @returns {Promise.<object>} JS object of the asset we loaded from disk
      */
-    static "__#private@#getJson"(subType: string, item: object): Promise<object>;
+    static #getJson(subType: string, item: object): Promise<object>;
     /**
      *
      * @param {MetadataTypeItem} item single metadata item
@@ -421,7 +421,7 @@ declare class Asset extends MetadataType {
 declare namespace Asset {
     let getJsonFromFSCache: {
         [x: string]: any;
-    };
+    } | undefined;
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];

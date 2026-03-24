@@ -133,12 +133,12 @@ declare class DataExtensionField extends MetadataType {
     static deleteByKeySOAP(customerKey: string, fieldId?: string): Promise<boolean>;
 }
 declare namespace DataExtensionField {
-    let buObject: import("../../types/mcdev.d.js").BuObject;
-    let client: import("sfmc-sdk").default;
+    let buObject: import("../../types/mcdev.d.js").BuObject | undefined;
+    let client: import("sfmc-sdk").default | undefined;
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];
-        dependencyGraph: any;
+        dependencyGraph: null;
         filter: {};
         hasExtended: boolean;
         idField: string;

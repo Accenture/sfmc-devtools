@@ -3,16 +3,14 @@
  * Patches Node.js https module to redirect SFMC API requests
  * to the local HTTP mock server used for CLI subprocess testing.
  *
- * Usage: NODE_OPTIONS='--import /abs/path/to/cli-preload.js'
- * Requires: MCDEV_MOCK_PORT env var set to the mock server's port
+ * Usage: NODE_OPTIONS='--import file:///abs/path/to/cli-preload.mjs'
+ * The port must match MOCK_PORT in test/mockServer.js.
  */
 import https from 'node:https';
 import http from 'node:http';
 
-const mockPort = Number(process.env.MCDEV_MOCK_PORT);
-if (!mockPort) {
-    throw new Error('cli-preload.js: MCDEV_MOCK_PORT env var not set');
-}
+/** Fixed port matching MOCK_PORT in test/mockServer.js */
+const mockPort = 19999;
 
 const originalRequest = https.request.bind(https);
 

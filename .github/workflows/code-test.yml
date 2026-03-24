@@ -38,6 +38,4 @@ jobs:
 
             # Assuming code passes, run tests
             - name: Run mcdev-tests
-              env:
-                MCDEV_MOCK_PORT: 1337
               run: npm run test

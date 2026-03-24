@@ -1,7 +1,7 @@
 declare namespace _default {
     let bodyIteratorField: string;
-    let dependencies: any[];
-    let dependencyGraph: any;
+    let dependencies: never[];
+    let dependencyGraph: null;
     let filter: {};
     let hasExtended: boolean;
     let idField: string;
@@ -10,9 +10,9 @@ declare namespace _default {
     let maxKeyLength: number;
     let nameField: string;
     let createdDateField: string;
-    let createdNameField: any;
+    let createdNameField: null;
     let lastmodDateField: string;
-    let lastmodNameField: any;
+    let lastmodNameField: null;
     let restPagination: boolean;
     let type: string;
     let typeDescription: string;
