@@ -115,7 +115,7 @@ declare namespace Filter {
         bodyIteratorField: string;
         dependencies: string[];
         dependencyGraph: {
-            filterDefinition: string[];
+            dataFilter: string[];
             dataExtension: string[];
         };
         hasExtended: boolean;
