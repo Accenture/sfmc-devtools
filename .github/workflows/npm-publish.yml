@@ -56,7 +56,10 @@ jobs:
 
                   milestone_number="$(echo "$milestones_json" | jq -r \
                     --arg milestone_title "$milestone_title" \
-                    '.[] | select(.title == $milestone_title) | .number' \
+                    '($milestone_title | gsub("\\."; "\\\\.")) as $escaped_milestone_title
+                    | .[]
+                    | select(.title | test("^" + $escaped_milestone_title + "($|[ :a-z0-9-])"))
+                    | .number' \
                     | head -n1)"
 
                   if [ -z "${milestone_number}" ] || [ "${milestone_number}" = "null" ]; then
