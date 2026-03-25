@@ -5,6 +5,7 @@ export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataType
 export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 export type DataExtensionFieldItem = import("../../types/mcdev.d.js").DataExtensionFieldItem;
 export type DataExtensionFieldMap = import("../../types/mcdev.d.js").DataExtensionFieldMap;
 export type DataExtensionItem = import("../../types/mcdev.d.js").DataExtensionItem;
@@ -16,6 +17,7 @@ export type DataExtensionMap = import("../../types/mcdev.d.js").DataExtensionMap
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMap} MetadataTypeMap
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
+ * @typedef {import('../../types/mcdev.d.js').TypeKeyCombo} TypeKeyCombo
  */
 /**
  * @typedef {import('../../types/mcdev.d.js').DataExtensionFieldItem} DataExtensionFieldItem

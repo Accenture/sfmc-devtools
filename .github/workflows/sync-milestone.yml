@@ -1,0 +1,55 @@
+name: Sync Milestone from Issue
+on:
+  pull_request:
+    types: [opened, edited, reopened]
+
+jobs:
+  sync-milestone:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: read
+      pull-requests: write
+    steps:
+      - name: Sync Milestone
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          # 1. Get the milestone of the officially linked issues and the PR's current milestone via GraphQL
+          # This catches issues linked via "Fixes #123" and similar in the body or the UI sidebar.
+          API_RESPONSE=$(gh api graphql -f query='
+            query($owner: String!, $name: String!, $pr: Int!) {
+              repository(owner: $owner, name: $name) {
+                pullRequest(number: $pr) {
+                  milestone {
+                    number
+                  }
+                  closingIssuesReferences(first: 1) {
+                    nodes {
+                      milestone {
+                        number
+                        title
+                      }
+                    }
+                  }
+                }
+              }
+            }' -F owner="$OWNER" -F name="${REPO#*/}" -F pr=$PR_NUMBER)
+
+          MILESTONE_NUMBER=$(echo "$API_RESPONSE" | jq -r '.data.repository.pullRequest.closingIssuesReferences.nodes[0].milestone.number // "null"')
+          MILESTONE_TITLE=$(echo "$API_RESPONSE" | jq -r '.data.repository.pullRequest.closingIssuesReferences.nodes[0].milestone.title // "null"')
+          CURRENT_PR_MILESTONE=$(echo "$API_RESPONSE" | jq -r '.data.repository.pullRequest.milestone.number // "null"')
+
+          # 2. Check if a milestone was found
+          if [ "$MILESTONE_NUMBER" != "null" ] && [ -n "$MILESTONE_NUMBER" ]; then
+            if [ "$MILESTONE_NUMBER" = "$CURRENT_PR_MILESTONE" ]; then
+              echo "PR already has milestone '$MILESTONE_TITLE' set. No update needed."
+            else
+              echo "Found milestone '$MILESTONE_TITLE' from linked issue. Assigning to PR..."
+              gh pr edit $PR_NUMBER --milestone "$MILESTONE_TITLE" --repo "$REPO"
+            fi
+          else
+            echo "No milestone found on linked issues or no issues linked."
+          fi

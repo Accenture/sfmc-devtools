@@ -1,6 +1,7 @@
+#!/bin/sh
 # ### git commit message template ###
 git config commit.template .git/templatemessage
-TICKETID=`git rev-parse --abbrev-ref HEAD | LC_ALL=en_US.utf8 grep -oP '^((feature|bug|bugfix|fix|hotfix|task|chore)\/)?\K\d{1,7}' || true`
+TICKETID=`git rev-parse --abbrev-ref HEAD | LC_ALL=en_US.utf8 grep -oP '^((copilot\/)?(feature|bug|bugfix|fix|hotfix|task|chore)\/)?\K\d{1,7}' || true`
 if [ -z "$TICKETID" ]
 then
   TICKETID="0"
@@ -11,24 +12,21 @@ echo "[POST-CHECKOUT] Setting template commit to '$TEMPLATE'"
 echo "$TEMPLATE" > ".git/templatemessage"
 
 
-if [[ $SKIP_HOOKS>0 ]]; then
+if [ "${SKIP_HOOKS:-0}" -gt 0 ] 2>/dev/null; then
   echo "[POST-CHECKOUT] skipping hooks ($SKIP_HOOKS)"
   exit 0
 fi
 
 # ### run npm install ###
 echo "[POST-CHECKOUT] 📦 Checking for changes to dependencies"
-# define how to split strings into array elements
-IFS=$'\n'
 # $1 is the new HEAD pointer
 NEWHEAD=$1
 # $2 is the previous HEAD pointer
 OLDHEAD=$2
 # extract all paths to package-lock.json files
-PACKAGE_LOCK_REGEX="(^package-lock\.json)"
-PACKAGES=$(git diff --name-only $OLDHEAD $NEWHEAD | grep -E $PACKAGE_LOCK_REGEX || true)
+PACKAGES=$(git diff --name-only "$OLDHEAD" "$NEWHEAD" | grep -E "^package-lock\.json" || true)
 
-if [[ ${PACKAGES[@]} ]]; then
+if [ -n "$PACKAGES" ]; then
   for package in $PACKAGES; do
     echo "📦 $package was changed."
   done

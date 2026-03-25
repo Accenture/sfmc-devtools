@@ -8,8 +8,8 @@ on:
         types: [published]
 
 permissions:
-  id-token: write  # Required for OIDC
-  contents: read
+    id-token: write # Required for OIDC
+    contents: read
 
 jobs:
     build:
@@ -34,3 +34,55 @@ jobs:
                   registry-url: https://registry.npmjs.org/
             - run: npm publish
 
+            - name: Close release milestone if empty
+              env:
+                  GH_TOKEN: ${{ github.token }}
+                  REPO: ${{ github.repository }}
+                  RELEASE_TAG: ${{ github.event.release.tag_name }}
+              run: |
+                  set -euo pipefail
+
+                  owner="${REPO%%/*}"
+                  repo="${REPO##*/}"
+
+                  milestone_title="${RELEASE_TAG#v}"
+
+                  if [ -z "${milestone_title}" ]; then
+                    echo "Could not parse milestone version from release tag (tag=${RELEASE_TAG})."
+                    exit 0
+                  fi
+
+                  milestones_json="$(gh api "repos/${owner}/${repo}/milestones?state=open&per_page=100")"
+
+                  milestone_number="$(echo "$milestones_json" | jq -r \
+                    --arg milestone_title "$milestone_title" \
+                    '($milestone_title | gsub("\\."; "\\\\.")) as $escaped_milestone_title
+                    | .[]
+                    | select(.title | test("^" + $escaped_milestone_title + "($|[ :a-z0-9-])"))
+                    | .number' \
+                    | head -n1)"
+
+                  if [ -z "${milestone_number}" ] || [ "${milestone_number}" = "null" ]; then
+                    echo "No matching open milestone found for parsed version '${milestone_title}'."
+                    exit 0
+                  fi
+
+                  milestone="$(gh api "repos/${owner}/${repo}/milestones/${milestone_number}")"
+                  state="$(echo "$milestone" | jq -r '.state')"
+                  open_issues="$(echo "$milestone" | jq -r '.open_issues')"
+                  title="$(echo "$milestone" | jq -r '.title')"
+
+                  echo "Matched milestone #${milestone_number} '${title}' (state=${state}, open_issues=${open_issues})."
+
+                  if [ "$state" != "open" ]; then
+                    echo "Milestone is already closed. Nothing to do."
+                    exit 0
+                  fi
+
+                  if [ "$open_issues" -ne 0 ]; then
+                    echo "Milestone has open items. Skipping close."
+                    exit 0
+                  fi
+
+                  gh api -X PATCH "repos/${owner}/${repo}/milestones/${milestone_number}" -f state="closed" >/dev/null
+                  echo "Milestone #${milestone_number} closed."

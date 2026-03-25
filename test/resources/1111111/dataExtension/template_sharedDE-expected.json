@@ -1,0 +1,53 @@
+{
+    "CustomerKey": "{{{prefix}}}dataExtensionShared",
+    "DataRetentionPeriodLength": 6,
+    "Description": "{{{description}}}",
+    "Fields": [
+        {
+            "DefaultValue": "",
+            "FieldType": "Text",
+            "IsPrimaryKey": false,
+            "IsRequired": false,
+            "MaxLength": 50,
+            "Name": "FirstName"
+        },
+        {
+            "DefaultValue": "",
+            "FieldType": "Text",
+            "IsPrimaryKey": false,
+            "IsRequired": false,
+            "MaxLength": 50,
+            "Name": "LastName"
+        },
+        {
+            "DefaultValue": "",
+            "FieldType": "EmailAddress",
+            "IsPrimaryKey": false,
+            "IsRequired": true,
+            "MaxLength": 254,
+            "Name": "EmailAddress"
+        },
+        {
+            "DefaultValue": "",
+            "FieldType": "Text",
+            "IsPrimaryKey": true,
+            "IsRequired": true,
+            "MaxLength": 50,
+            "Name": "ContactKey"
+        }
+    ],
+    "IsSendable": true,
+    "IsTestable": true,
+    "Name": "{{{prefix}}}dataExtensionShared",
+    "ResetRetentionPeriodOnImport": false,
+    "SendableDataExtensionField": {
+        "Name": "ContactKey"
+    },
+    "SendableSubscriberField": {
+        "Name": "Subscriber Key"
+    },
+    "c__dataRetentionPeriodUnitOfMeasure": "Months",
+    "c__retentionPolicy": "individialRecords",
+    "r__folder_ContentType": "shared_dataextension",
+    "r__folder_Path": "Shared Items/Shared Data Extensions"
+}

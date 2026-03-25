@@ -5,6 +5,7 @@ export namespace Util {
     let defaultGitBranch: string;
     let parentBuName: string;
     let standardizedSplitChar: string;
+    let folderNameSlashEscapeChar: string;
     let skipInteraction: SkipInteraction;
     let packageJsonMcdev: any;
     let OPTIONS: {};

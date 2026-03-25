@@ -27,8 +27,8 @@ describe('type: query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                4,
-                'only 4 queries expected'
+                5,
+                'only 5 queries expected'
             );
             // normal test
             assert.deepEqual(
@@ -49,6 +49,37 @@ describe('type: query', () => {
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 5,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should resolve shared dataExtensions in query when retrieved together with dataExtension', async () => {
+            // WHEN
+            // this test verifies the fix for: shared DEs not resolved if query+dataExtension is retrieved together
+            await handler.retrieve('testInstance/testBU', ['dataExtension', 'query']);
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.query ? Object.keys(result.query).length : 0,
+                5,
+                'only 5 queries expected'
+            );
+            // verify that shared DE was resolved correctly in query (this is the key bug fix check)
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_query_SharedDE', 'query'),
+                await testUtils.getExpectedJson('9999999', 'query', 'get_sharedDE'),
+                'returned metadata was not equal expected - shared DE should be resolved even when dataExtension is retrieved together with query'
+            );
+            expect(
+                await testUtils.getActualFile('testExisting_query_SharedDE', 'query', 'sql')
+            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'get_sharedDE', 'sql'));
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                8,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -92,8 +123,8 @@ describe('type: query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                4,
-                '4 queries in cache expected'
+                5,
+                '5 queries in cache expected'
             );
             assert.deepEqual(
                 await testUtils.getActualJson('testExisting_query', 'query'),
@@ -123,8 +154,8 @@ describe('type: query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                4,
-                '4 queries in cache expected'
+                5,
+                '5 queries in cache expected'
             );
 
             expect(await testUtils.getActualFile('testExisting_query', 'query', 'sql')).to.not
@@ -165,8 +196,8 @@ describe('type: query', () => {
             const result = cache.getCache();
             assert.equal(
                 result.query ? Object.keys(result.query).length : 0,
-                5,
-                '5 queries expected in cache'
+                6,
+                '6 queries expected in cache'
             );
             // confirm created item
             assert.deepEqual(
@@ -781,6 +812,72 @@ describe('type: query', () => {
                 5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
+            return;
+        });
+
+        it('Should warn about shared dataExtension in _ParentBU_ when running buildTemplate with --dependencies on child BU', async () => {
+            // Retrieve shared DEs from _ParentBU_ to disk first
+            await handler.retrieve('testInstance/_ParentBU_', ['dataExtension']);
+            assert.equal(
+                process.exitCode,
+                0,
+                '_ParentBU_ retrieve should not have thrown an error'
+            );
+            const expectedApiCallsParentBURetrieve = 4;
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                expectedApiCallsParentBURetrieve,
+                'Unexpected number of requests for _ParentBU_ dataExtension retrieve'
+            );
+
+            // Retrieve query from child BU (testBU)
+            await handler.retrieve('testInstance/testBU', ['query']);
+            assert.equal(
+                process.exitCode,
+                0,
+                'testBU query retrieve should not have thrown an error'
+            );
+            const expectedApiCallsTestBURetrieve = 5;
+            assert.equal(
+                testUtils.getAPIHistoryLength() - expectedApiCallsParentBURetrieve,
+                expectedApiCallsTestBURetrieve,
+                'Unexpected number of requests for testBU query retrieve'
+            );
+
+            // Run buildTemplate with --dependencies: shared DE must show a warning, not be included in result
+            handler.setOptions({ dependencies: true, skipInteraction: true });
+            const templateResult = await handler.buildTemplate(
+                'testInstance/testBU',
+                'query',
+                ['testExisting_query_SharedDE'],
+                ['testSourceMarket']
+            );
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+
+            // Verify query was templated
+            assert.equal(
+                templateResult.query ? templateResult.query.length : 0,
+                1,
+                'expected one query to be templated'
+            );
+            assert.deepEqual(
+                await testUtils.getActualTemplateJson('testExisting_query_SharedDE', 'query'),
+                await testUtils.getExpectedJson('9999999', 'query', 'template_sharedDE'),
+                'returned query template JSON was not equal expected'
+            );
+            expect(
+                await testUtils.getActualTemplateFile('testExisting_query_SharedDE', 'query', 'sql')
+            ).to.equal(
+                await testUtils.getExpectedFile('9999999', 'query', 'template_sharedDE', 'sql')
+            );
+
+            // Verify shared DE was NOT included in template result (only a warning should be shown)
+            assert.equal(
+                templateResult.dataExtension ? templateResult.dataExtension.length : 0,
+                0,
+                'shared DE should not be included in the child BU template result - only a warning should be shown'
+            );
+
             return;
         });
 
