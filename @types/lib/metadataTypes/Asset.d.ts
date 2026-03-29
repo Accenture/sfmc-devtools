@@ -193,8 +193,10 @@ declare class Asset extends MetadataType {
      * helper for {@link Asset}. finds active emails that reference the updated block
      *
      * @private
-     * @param {string[]} keys metadata keys
-     * @returns {Promise.<object[]>} - array of assets
+     * @param {AssetMap[]} blocks block metadata
+     * @param {AssetMap} _foundEmails map of found emails
+     * @param {Set} _searchedKeys set of searched block keys
+     * @returns {Promise.<AssetMap[]>} - map of assets keyed by their keyField
      */
     private static _findEmailsUsingBlock;
     /**

@@ -315,6 +315,13 @@ export const handleRESTRequest = async (config) => {
             const myObj = data.query?.rightOperand || data.query;
             if (myObj) {
                 const op = simpleOperators[myObj.simpleOperator];
+                // if it's a content block refresh. update expected file name to remove special characters from it
+                const contentBlockMatch =
+                    typeof myObj.value === 'string' &&
+                    myObj.value.match(/^ContentBlockByName\("(.+?)"\)$/);
+                if (contentBlockMatch) {
+                    myObj.value = contentBlockMatch[1];
+                }
                 filterBody = `${myObj.property}${op}${op === 'IN' ? myObj.value.join(',') : myObj.value}`;
             } else if (config.url === '/email/v1/category') {
                 const data = JSON.parse(config.data);

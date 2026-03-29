@@ -844,7 +844,6 @@ describe('type: asset', () => {
                 1,
                 'Unexpected number of assets deployed'
             );
-
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 22,
