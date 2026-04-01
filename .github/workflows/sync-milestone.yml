@@ -62,13 +62,14 @@ jobs:
 
           echo "Candidate milestone: '$MILESTONE_TITLE' (current PR milestone: '$CURRENT_PR_MILESTONE_TITLE')"
 
-          # 5. Confirm the milestone title exists on this repo before calling gh pr edit.
-          REPO_MILESTONE_MATCH=$(gh api "repos/$REPO/milestones?per_page=100&state=all" --paginate \
+          # 5. Confirm the milestone title exists as an OPEN milestone on this repo.
+          #    gh pr edit --milestone only accepts open milestones; closed ones return "not found".
+          REPO_MILESTONE_MATCH=$(gh api "repos/$REPO/milestones?per_page=100&state=open" --paginate \
             | jq -r '.[].title' \
             | grep -Fx "$MILESTONE_TITLE" || true)
 
           if [ -z "$REPO_MILESTONE_MATCH" ]; then
-            echo "::warning::Milestone '$MILESTONE_TITLE' not found on $REPO. Skipping PR milestone update."
+            echo "::warning::Milestone '$MILESTONE_TITLE' not found as an open milestone on $REPO (it may be closed or deleted). Skipping PR milestone update."
             exit 0
           fi
 
