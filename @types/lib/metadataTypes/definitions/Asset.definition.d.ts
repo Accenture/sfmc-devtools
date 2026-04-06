@@ -545,6 +545,7 @@ declare namespace _default {
         export let document: string[];
         export let image: string[];
         export let message: string[];
+        export let mobile: string[];
         export let other: string[];
         export let rawimage: string[];
         export let template: string[];

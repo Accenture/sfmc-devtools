@@ -967,6 +967,7 @@ declare namespace Asset {
             document: string[];
             image: string[];
             message: string[];
+            mobile: string[];
             other: string[];
             rawimage: string[];
             template: string[];

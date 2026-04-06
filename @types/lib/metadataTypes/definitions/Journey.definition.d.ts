@@ -13,6 +13,7 @@ declare namespace _default {
         let mobileMessage: string[];
         let mobileKeyword: string[];
         let mobileCode: string[];
+        let mobileApplication: string[];
     }
     let folderIdField: string;
     let hasExtended: boolean;
