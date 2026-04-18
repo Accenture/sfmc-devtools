@@ -961,9 +961,8 @@ declare namespace Asset {
             package: string[];
             audio: string[];
             block: string[];
-            cloudpage: string[];
+            webstudio: string[];
             code: string[];
-            coderesource: string[];
             document: string[];
             image: string[];
             message: string[];

@@ -539,9 +539,8 @@ declare namespace _default {
         export { _package as package };
         export let audio: string[];
         export let block: string[];
-        export let cloudpage: string[];
+        export let webstudio: string[];
         export let code: string[];
-        export let coderesource: string[];
         export let document: string[];
         export let image: string[];
         export let message: string[];
