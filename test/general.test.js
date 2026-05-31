@@ -1,4 +1,5 @@
 import * as chai from 'chai';
+import { Util } from '../lib/util/util.js';
 const assert = chai.assert;
 const expect = chai.expect;
 
@@ -877,6 +878,57 @@ describe('GENERAL', () => {
                     0,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
+            });
+
+            it('templated log shows the value once when key and name are equal', async () => {
+                // preparation: retrieve first so buildTemplate has data;
+                // automation has key == name in the mock data
+                await handler.retrieve('testInstance/testBU', ['automation']);
+                const argvMetadata = ['automation:testExisting_automation'];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                const buName = 'testInstance/testBU';
+
+                // capture during buildTemplate — that is the code path whose
+                // templated log line used to print `key (name)` without an
+                // equality check
+                const logMessages = [];
+                const originalInfo = Util.logger.info;
+                Util.logger.info = (msg) => {
+                    logMessages.push(msg);
+                };
+                try {
+                    await handler.buildTemplate(buName, typeKeyCombo, undefined, [
+                        'testSourceMarket',
+                    ]);
+                } finally {
+                    Util.logger.info = originalInfo;
+                }
+                assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown');
+
+                const templatedLines = logMessages.filter((m) =>
+                    m.includes(' - templated automation:')
+                );
+                assert.isAbove(
+                    templatedLines.length,
+                    0,
+                    'expected at least one templated log line'
+                );
+                for (const line of templatedLines) {
+                    // the value must not repeat itself in key / name or key (name) form
+                    const prefix = ' - templated automation: ';
+                    const value = line.startsWith(prefix)
+                        ? line.slice(prefix.length).trim()
+                        : line.trim();
+                    const parts = value.includes(' / ')
+                        ? value.split(' / ')
+                        : value.replaceAll(/[()]/g, '').split(' ');
+                    const uniqueParts = [...new Set(parts)];
+                    assert.equal(
+                        uniqueParts.length,
+                        parts.length,
+                        `expected no duplicated value in log line "${line}"`
+                    );
+                }
             });
 
             it('buildTemplate + buildDefinition for multiple types with keys and --retrieve', async () => {
