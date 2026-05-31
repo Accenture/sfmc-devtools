@@ -1,0 +1,30 @@
+{
+    "id": 334322,
+    "customerKey": "testExisting_block_refresh",
+    "objectID": "baf8348d-61d5-451f-948a-28045e41e50c",
+    "assetType": {
+        "id": 220,
+        "name": "codesnippetblock",
+        "displayName": "Code Snippet Block"
+    },
+    "name": "testExisting_block_refresh",
+    "createdDate": "2025-10-24T12:19:21.2-06:00",
+    "createdBy": {
+        "id": 724496218,
+        "email": "test@test.com",
+        "name": "Yuliia Likhytska",
+        "userId": "724496218"
+    },
+    "modifiedDate": "2026-03-15T11:37:51.38-06:00",
+    "modifiedBy": {
+        "id": 724496218,
+        "email": "test@test.com",
+        "name": "Yuliia Likhytska",
+        "userId": "724496218"
+    },
+    "category": {
+        "id": 370568
+    },
+    "modelVersion": 2,
+    "r__folder_Path": "Content Builder"
+}
