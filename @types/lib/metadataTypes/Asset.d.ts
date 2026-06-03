@@ -958,14 +958,15 @@ declare namespace Asset {
         extendedSubTypes: {
             archive: string[];
             asset: string[];
+            package: string[];
             audio: string[];
             block: string[];
-            cloudpage: string[];
+            webstudio: string[];
             code: string[];
-            coderesource: string[];
             document: string[];
             image: string[];
             message: string[];
+            mobile: string[];
             other: string[];
             rawimage: string[];
             template: string[];
@@ -1200,8 +1201,16 @@ declare namespace Asset {
             liveimageblock: number;
             livesettingblock: number;
             contentmap: number;
+            enhanceddynamicblock: number;
             jsonmessage: number;
+            jbtemplate: number;
             icemailformblock: number;
+            iccloudpageblock: number;
+            einsteincontentselectionblock: number;
+            jsonmessagetemplate: number;
+            packagedefinition: number;
+            packagedeployment: number;
+            einsteincontenttesting: number;
             coderesource: number;
             jscoderesource: number;
             csscoderesource: number;
