@@ -17,7 +17,7 @@ jobs:
                   ref: ${{ github.event.pull_request.head.sha }}
                   fetch-depth: 1000
 
-            - uses: actions/setup-node@v6
+            - uses: actions/setup-node@v7
               with:
                   node-version-file: ./package.json
 
