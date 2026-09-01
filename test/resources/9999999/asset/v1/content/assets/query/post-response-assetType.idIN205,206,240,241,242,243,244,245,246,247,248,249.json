@@ -1,0 +1,367 @@
+{
+    "count": 7,
+    "items": [
+        {
+            "id": 950143,
+            "customerKey": "testExisting_asset",
+            "objectID": "198ad191-59ae-44d1-9981-ffa71b076ad9",
+            "contentType": "text/html",
+            "assetType": {
+                "id": 205,
+                "name": "webpage",
+                "displayName": "Web Page"
+            },
+            "version": 1,
+            "name": "testExisting_asset",
+            "owner": {
+                "id": 717319337,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "717319337"
+            },
+            "createdDate": "2021-09-13T12:14:02.32-06:00",
+            "createdBy": {
+                "id": 717319337,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "717319337"
+            },
+            "modifiedDate": "2023-08-02T07:10:29.553-06:00",
+            "modifiedBy": {
+                "id": 700304523,
+                "name": "SFMC DEVOPS app user",
+                "userId": "700304523"
+            },
+            "enterpriseId": 111111,
+            "memberId": 999999,
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "thumbnail": {
+                "thumbnailUrl": "/v1/assets/950143/thumbnail"
+            },
+            "category": {
+                "id": 89397
+            },
+            "meta": {
+                "globalStyles": {
+                    "isLocked": false,
+                    "body": {
+                        "max-width": "1280px",
+                        "color": "#000000",
+                        "font-family": "Arial",
+                        "font-size": "12px",
+                        "margin": "0px auto"
+                    },
+                    "template": {
+                        "background-color": "#FFFFFF",
+                        "border": "none",
+                        "box-sizing": "border-box",
+                        "padding": "0px",
+                        "width": "100%"
+                    }
+                }
+            },
+            "views": {
+                "html": {
+                    "thumbnail": {},
+                    "content": "<!DOCTYPE html>\n<html>\n    <head>\n        <meta\n            name=\"viewport\"\n            content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0\"\n        />\n        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n        <style class=\"main_style\">\n            .layout-canvas-g {\n                background-color: #ffffff;\n                border: none;\n                box-sizing: border-box;\n                padding: 0px;\n                width: 100%;\n            }\n            .layout-canvas-g > .header,\n            .layout-canvas-g > .section,\n            .layout-canvas-g > .footer {\n                position: relative;\n                overflow: hidden;\n                width: 100%;\n                overflow-wrap: break-word;\n            }\n            .layout-canvas-g > .section {\n                margin: 10px 0px;\n            }\n            .layout-canvas-g > .section > .columns {\n                box-sizing: border-box;\n                overflow-wrap: break-word;\n            }\n            body {\n                color: #000000;\n                font-family: Arial;\n                font-size: 12px;\n                margin: 0px auto;\n                max-width: 1280px;\n            }\n            @media only screen and (max-width: 480px) {\n                .mobile-hidden {\n                    display: none !important;\n                }\n                .responsive-td {\n                    width: 100% !important;\n                    display: block !important;\n                    padding: 0px !important;\n                }\n            }\n            .layout-canvas-g > .section > .columns {\n                width: 100%;\n            }\n        </style>\n    </head>\n    <body>\n        <div class=\"layout layout-canvas-g\">\n            <div class=\"section\">\n                <div class=\"columns col1\">\n                    <div data-type=\"slot\" data-key=\"col1\"></div>\n                </div>\n            </div>\n        </div>\n    </body>\n</html>\n",
+                    "slots": {
+                        "col1": {
+                            "content": "<div data-type=\"block\" data-key=\"bgbqbbx4we9\"></div>",
+                            "design": "<p style=\"font-family:arial;color:#ccc;font-size:11px;text-align:center;vertical-align:middle;font-weight:bold;padding:10px;margin:0;border:#ccc dashed 1px;\">Drop blocks or content here</p>",
+                            "blocks": {
+                                "bgbqbbx4we9": {
+                                    "assetType": {
+                                        "id": 197,
+                                        "name": "htmlblock"
+                                    },
+                                    "content": "<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" role=\"presentation\" style=\"min-width: 100%; \" class=\"stylingblock-content-wrapper\"><tr><td class=\"stylingblock-content-wrapper camarker-inner\">\n%%[FOR @I=1 TO 1000 DO\n    SET @a = CONCAT(IIF(MOD(@i, 3)==0, \"Fizz\", \"\"), IIF(MOD(@i,5)==0,\"Buzz\",\"\"), IIF(MOD(@i, 7)==0, \"Boing\", \"\"), IIF(MOD(@i,11)==0,\"Bang\",\"\"))\nOUTPUT(CONCAT(@a, IIF(LENGTH(@a)>0, \"\", @i), \"<br>\"))NEXT @i\n]%%\n</td></tr></table>",
+                                    "design": "<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" role=\"presentation\" style=\"min-width: 100%; \" class=\"stylingblock-content-wrapper\"><tr><td class=\"stylingblock-content-wrapper camarker-inner\"><div class=\"default-design\"></div></td></tr></table>",
+                                    "meta": {
+                                        "wrapperStyles": {
+                                            "mobile": {
+                                                "visible": true
+                                            }
+                                        }
+                                    },
+                                    "modelVersion": 2
+                                }
+                            },
+                            "modelVersion": 2
+                        }
+                    },
+                    "modelVersion": 2
+                }
+            },
+            "availableViews": [
+                "html"
+            ],
+            "modelVersion": 2
+        },
+        {
+            "id": 9451,
+            "customerKey": "test_coderesource_js",
+            "assetType": {
+                "id": 240,
+                "name": "jscoderesource",
+                "displayName": "Javascript Code Resource"
+            },
+            "name": "test_coderesource_js",
+            "createdDate": "2025-03-24T05:20:40.82-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:03:20.603-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "category": {
+                "id": 27675,
+                "name": "mcdev",
+                "parentId": 23009
+            },
+            "content": "/* insert code here */\n",
+            "meta": {
+                "cloudPages": {
+                    "publishDate": "2025-03-24 06:05:23.203"
+                }
+            },
+            "availableViews": [],
+            "data": {
+                "site": {
+                    "content": "{\"url\":\"https://oss-test.accenture.com/test_coderesource\"}"
+                }
+            },
+            "modelVersion": 2
+        },
+        {
+            "id": 9463,
+            "customerKey": "test_coderesource_json",
+            "assetType": {
+                "id": 242,
+                "name": "jsoncoderesource",
+                "displayName": "JSON Code Resource"
+            },
+            "name": "test_coderesource_json",
+            "createdDate": "2025-03-25T03:15:22.72-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:16:40.913-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "category": {
+                "id": 27675,
+                "name": "mcdev",
+                "parentId": 23009
+            },
+            "content": "{\n\"test\": true\n}",
+            "meta": {
+                "cloudPages": {
+                    "publishDate": "2025-03-25 03:16:40.913"
+                }
+            },
+            "availableViews": [],
+            "data": {
+                "site": {
+                    "content": "{\"url\":\"https://oss-test.accenture.com/test_coderesource_json\"}"
+                }
+            },
+            "modelVersion": 2
+        },
+        {
+            "id": 9460,
+            "customerKey": "test_coderesource_xml",
+            "assetType": {
+                "id": 245,
+                "name": "xmlcoderesource",
+                "displayName": "XML Code Resource"
+            },
+            "name": "test_coderesource_xml",
+            "createdDate": "2025-03-25T03:03:45.713-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:04:06.48-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "category": {
+                "id": 27675,
+                "name": "mcdev",
+                "parentId": 23009
+            },
+            "content": "<xml>test</xml>",
+            "meta": {
+                "cloudPages": {}
+            },
+            "availableViews": [],
+            "data": {
+                "site": {
+                    "content": "{\"url\":\"https://oss-test.accenture.com/test_coderesource_xml\"}"
+                }
+            },
+            "modelVersion": 2
+        },
+        {
+            "id": 9465,
+            "customerKey": "test_landingpage",
+            "assetType": {
+                "id": 247,
+                "name": "landingpage",
+                "displayName": "Landing Page"
+            },
+            "name": "test_landingpage",
+            "createdDate": "2025-03-25T03:17:51.88-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:17:52.187-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "category": {
+                "id": 27675,
+                "name": "mcdev",
+                "parentId": 23009
+            },
+            "content": "{\"url\":\"https://oss-test.accenture.com/test_landingpage\"}",
+            "meta": {
+                "thumbnailRefAssetId": 9466,
+                "cloudPages": {}
+            },
+            "availableViews": [],
+            "modelVersion": 2
+        },
+        {
+            "id": 9456,
+            "customerKey": "test_microsite",
+            "assetType": {
+                "id": 248,
+                "name": "microsite",
+                "displayName": "Microsite"
+            },
+            "name": "test_microsite",
+            "createdDate": "2025-03-25T03:01:05.467-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:12:51.85-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "category": {
+                "id": 27675,
+                "name": "mcdev",
+                "parentId": 23009
+            },
+            "content": "{\"url\":\"https://oss-test.accenture.com/test_microsite\"}",
+            "meta": {
+                "thumbnailRefAssetId": 9461,
+                "cloudPages": {
+                    "publishDate": "2025-03-25 03:12:51.850"
+                }
+            },
+            "availableViews": [],
+            "modelVersion": 2
+        },
+        {
+            "id": 9458,
+            "customerKey": "test_interactivecontent",
+            "assetType": {
+                "id": 249,
+                "name": "interactivecontent",
+                "displayName": "Interactive Email Page"
+            },
+            "name": "test_interactivecontent",
+            "createdDate": "2025-03-25T03:02:46.823-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:02:55.307-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "category": {
+                "id": 27675,
+                "name": "mcdev",
+                "parentId": 23009
+            },
+            "content": "{\"url\":\"https://oss-test.accenture.com/test_interactivecontent\"}",
+            "meta": {
+                "thumbnailRefAssetId": 9459,
+                "cloudPages": {
+                    "publishDate": "2025-03-25 03:02:55.307"
+                }
+            },
+            "availableViews": [],
+            "modelVersion": 2
+        }
+    ],
+    "page": 1,
+    "pageSize": 50,
+    "links": {}
+}

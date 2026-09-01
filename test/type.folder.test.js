@@ -26,8 +26,8 @@ describe('type: folder', () => {
                 'dataFolder/retrieve-ContentTypeINasset,asset-shared,cloudpages-response.xml'
             );
             await testUtils.copyFile(
-                'asset/v1/content/assets/query/+post-response-assetType.idIN3,195,196,197,198,199,200,201,202,203,210,211,212,213-slashfolder.json',
-                'asset/v1/content/assets/query/post-response-assetType.idIN3,195,196,197,198,199,200,201,202,203,210,211,212,213.json'
+                'asset/v1/content/assets/query/+post-response-assetType.idIN3,195,196,197,198,199,200,201,202,203,210,211,212,213,229,233,234,238-slashfolder.json',
+                'asset/v1/content/assets/query/post-response-assetType.idIN3,195,196,197,198,199,200,201,202,203,210,211,212,213,229,233,234,238.json'
             );
 
             const retrieve = await handler.retrieve('testInstance/testBU', ['asset-block']);

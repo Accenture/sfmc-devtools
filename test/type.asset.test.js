@@ -159,14 +159,14 @@ describe('type: asset', () => {
                 retrieve['testInstance/testBU'].asset
                     ? Object.keys(retrieve['testInstance/testBU'].asset).length
                     : 0,
-                12,
+                15,
                 'Unexpected number of assets in retrieve response'
             );
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                15,
+                18,
                 'Unexpected number of assets in cache'
             );
 
@@ -229,7 +229,7 @@ describe('type: asset', () => {
             );
 
             assert.deepEqual(
-                await getActualJson('test_coderesource_js', 'asset', 'coderesource'),
+                await getActualJson('test_coderesource_js', 'asset', 'webstudio'),
                 await testUtils.getExpectedJson(
                     '9999999',
                     'asset',
@@ -238,7 +238,7 @@ describe('type: asset', () => {
                 'returned metadata was not equal expected'
             );
             expect(
-                await getActualFile('test_coderesource_js', 'asset', 'coderesource', 'js')
+                await getActualFile('test_coderesource_js', 'asset', 'webstudio', 'js')
             ).to.equal(
                 await testUtils.getExpectedFile(
                     '9999999',
@@ -249,7 +249,7 @@ describe('type: asset', () => {
             );
 
             assert.deepEqual(
-                await getActualJson('test_coderesource_json', 'asset', 'coderesource'),
+                await getActualJson('test_coderesource_json', 'asset', 'webstudio'),
                 await testUtils.getExpectedJson(
                     '9999999',
                     'asset',
@@ -258,7 +258,7 @@ describe('type: asset', () => {
                 'returned metadata was not equal expected'
             );
             expect(
-                await getActualFile('test_coderesource_json', 'asset', 'coderesource', 'jsonc')
+                await getActualFile('test_coderesource_json', 'asset', 'webstudio', 'jsonc')
             ).to.equal(
                 await testUtils.getExpectedFile(
                     '9999999',
@@ -269,7 +269,7 @@ describe('type: asset', () => {
             );
 
             assert.deepEqual(
-                await getActualJson('test_coderesource_xml', 'asset', 'coderesource'),
+                await getActualJson('test_coderesource_xml', 'asset', 'webstudio'),
                 await testUtils.getExpectedJson(
                     '9999999',
                     'asset',
@@ -278,7 +278,7 @@ describe('type: asset', () => {
                 'returned metadata was not equal expected'
             );
             expect(
-                await getActualFile('test_coderesource_xml', 'asset', 'coderesource', 'xml')
+                await getActualFile('test_coderesource_xml', 'asset', 'webstudio', 'xml')
             ).to.equal(
                 await testUtils.getExpectedFile(
                     '9999999',
@@ -290,15 +290,15 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                26,
+                32,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
         });
 
-        it('Should retrieve asset-cloudpage', async () => {
+        it('Should retrieve asset-webstudio', async () => {
             // WHEN
-            const retrieve = await handler.retrieve('testInstance/testBU', ['asset-cloudpage']);
+            const retrieve = await handler.retrieve('testInstance/testBU', ['asset-webstudio']);
 
             // THEN
             assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
@@ -306,31 +306,31 @@ describe('type: asset', () => {
                 retrieve['testInstance/testBU'].asset
                     ? Object.keys(retrieve['testInstance/testBU'].asset).length
                     : 0,
-                3,
+                7,
                 'Unexpected number of assets in retrieve response'
             );
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                13,
+                15,
                 'Unexpected number of assets in cache'
             );
 
             assert.deepEqual(
-                await getActualJson('test_landingpage', 'asset', 'cloudpage'),
+                await getActualJson('test_landingpage', 'asset', 'webstudio'),
                 await testUtils.getExpectedJson('9999999', 'asset', 'test_landingpage-retrieve'),
                 'returned metadata was not equal expected'
             );
 
             assert.deepEqual(
-                await getActualJson('test_microsite', 'asset', 'cloudpage'),
+                await getActualJson('test_microsite', 'asset', 'webstudio'),
                 await testUtils.getExpectedJson('9999999', 'asset', 'test_microsite-retrieve'),
                 'returned metadata was not equal expected'
             );
 
             assert.deepEqual(
-                await getActualJson('test_interactivecontent', 'asset', 'cloudpage'),
+                await getActualJson('test_interactivecontent', 'asset', 'webstudio'),
                 await testUtils.getExpectedJson(
                     '9999999',
                     'asset',
@@ -341,7 +341,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                10,
+                14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -368,7 +368,7 @@ describe('type: asset', () => {
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                10,
+                15,
                 'Unexpected number of assets in cache'
             );
 
@@ -832,7 +832,7 @@ describe('type: asset', () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['asset']);
 
-            const expectedApiCallsRetrieve = 26;
+            const expectedApiCallsRetrieve = 32;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 expectedApiCallsRetrieve,
@@ -977,7 +977,7 @@ describe('type: asset', () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['asset']);
 
-            const expectedApiCallsRetrieve = 26;
+            const expectedApiCallsRetrieve = 32;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 expectedApiCallsRetrieve,
@@ -1192,7 +1192,7 @@ describe('type: asset', () => {
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                12,
+                15,
                 'Unexpected number of assets in cache'
             );
             // check if conversions happened
@@ -1247,7 +1247,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                28,
+                34,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -1280,7 +1280,7 @@ describe('type: asset', () => {
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                12,
+                15,
                 'Unexpected number of assets in cache'
             );
             // check if conversions happened
@@ -1335,7 +1335,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                28,
+                34,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -1368,7 +1368,7 @@ describe('type: asset', () => {
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                12,
+                15,
                 'Unexpected number of assets in cache'
             );
             // check if conversions happened
@@ -1423,7 +1423,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                28,
+                34,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
