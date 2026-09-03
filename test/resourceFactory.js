@@ -255,6 +255,219 @@ export const soapUrl =
     'https://mct0l7nxfq2r988t1kxfy8sc4xxx.soap.marketingcloudapis.com/Service.asmx';
 
 /**
+ * canonical query-view projection key-set — the fields an asset `query` (POST assets/query)
+ * response item returns. Most GET-only fields (content/views/meta/design/slots/objectID/owner/
+ * version/thumbnail/contentType/enterpriseId/…) are reserved for the GET response / withheld here;
+ * `data` + `legacyData` are the exception — the recorded query-view surfaced them for the email
+ * subtypes, and downstream types resolve email references through the cached `legacyData.legacyId`.
+ *
+ * @type {string[]}
+ */
+const ASSET_QUERY_PROJECTION_KEYS = [
+    'id',
+    'customerKey',
+    'assetType',
+    'name',
+    'description',
+    'category',
+    'fileProperties',
+    'availableViews',
+    'status',
+    'createdDate',
+    'createdBy',
+    'modifiedDate',
+    'modifiedBy',
+    'modelVersion',
+    // message/email subtypes (207 templatebasedemail, 208 htmlemail) surfaced their `data` +
+    // `legacyData` blocks in the recorded query-view — journeys / emailSends / triggeredSends
+    // resolve the referenced email by the query-cached `legacyData.legacyId`, so these must be
+    // projected (copied only when present on the body; a diverging query value is supplied via
+    // the pool entry's `queryOverrides`).
+    'data',
+    'legacyData',
+];
+
+/**
+ * lazily loads the asset pool (id → { body }) fresh through the mocked fs so mock-fs serves it
+ *
+ * @returns {Promise.<object>} parsed pool object, or {} on missing/parse error
+ */
+async function loadAssetPool() {
+    const poolPath = path.join(
+        'test',
+        'resources',
+        '9999999',
+        'asset',
+        'v1',
+        'content',
+        'assets',
+        'assets-pool.json'
+    );
+    try {
+        if (!(await fs.pathExists(poolPath))) {
+            return {};
+        }
+        const raw = await fs.readFile(poolPath, { encoding: 'utf8' });
+        return JSON.parse(raw);
+    } catch {
+        return {};
+    }
+}
+
+/**
+ * projects a full asset body down to the canonical query key-set (copying only keys that exist).
+ * A pool entry may carry an optional `queryOverrides` object whose keys are shallow-merged onto
+ * the projected item — this reproduces recorded fixtures where the query-view of an asset returned
+ * a different value than its GET body (e.g. asset 1295064's name differs between query and GET).
+ *
+ * @param {object} body full asset body
+ * @param {object} [queryOverrides] optional per-field query-view overrides
+ * @returns {object} slim query-view item
+ */
+function projectAssetQueryItem(body, queryOverrides) {
+    const item = {};
+    for (const key of ASSET_QUERY_PROJECTION_KEYS) {
+        if (Object.prototype.hasOwnProperty.call(body, key)) {
+            item[key] = body[key];
+        }
+    }
+    if (queryOverrides) {
+        Object.assign(item, queryOverrides);
+    }
+    return item;
+}
+
+/**
+ * dynamic asset READ engine — serves by-id GET, assetType.id-in query POST, and customerKey
+ * by-key GET from the asset pool. Reads only; never matches create (bare POST), update (PATCH)
+ * or delete (DELETE). Returns null when the request is not an engine-owned read.
+ *
+ * @param {object} config mock api request object
+ * @param {URL} urlObj parsed request URL
+ * @returns {Promise.<Array|null>} [200, stringified response] when owned, else null
+ */
+async function handleAssetReadEngine(config, urlObj) {
+    const method = config.method;
+    // query POST — assetType.id-in only (equal-op falls through to file fixtures)
+    if (method === 'post' && /^\/?asset\/v1\/content\/assets\/query(\?|$)/.test(config.url)) {
+        if (!config.data) {
+            return null;
+        }
+        let data;
+        try {
+            data = JSON.parse(config.data);
+        } catch {
+            return null;
+        }
+        // mirror resolver: parse rightOperand || query (compound leftOperand omitted — unreachable)
+        const myObj = data.query?.rightOperand || data.query;
+        if (
+            !myObj ||
+            myObj.property !== 'assetType.id' ||
+            myObj.simpleOperator !== 'in' ||
+            !Array.isArray(myObj.value)
+        ) {
+            // not an assetType.id-in filter → fall through so file fixtures win
+            return null;
+        }
+        const requested = myObj.value.map(Number);
+        const pool = await loadAssetPool();
+        // The retrieve makes two kinds of assetType.id-in queries:
+        //   • the cache pass bundles ALL self-linked subtypes into one broad chunk, so a single
+        //     query spans multiple subtypes (e.g. asks for both a block type 197 AND webpage 205).
+        //   • the download pass queries ONE subtype at a time (e.g. webstudio = 205,206,240…249),
+        //     so a webpage query never also asks for a block type.
+        // Content-child assets (webpage content nested inside a landingpage/microsite/
+        // interactivecontent parent — the only pool bodies without a `status`) are dependencies
+        // pulled into cache for reference resolution, not standalone retrievable assets. The
+        // recorded API surfaced them only in the broad cache-pass query, never in the isolated
+        // per-subtype download query. Detect the cache-pass query by it spanning both a block
+        // type (197) and the webpage type (205); only then include the content children.
+        const isCrossSubtypeCacheQuery = requested.includes(197) && requested.includes(205);
+        const items = [];
+        for (const key of Object.keys(pool)) {
+            const entry = pool[key];
+            const body = entry?.body;
+            if (!body) {
+                continue;
+            }
+            // content children (no `status`) only belong in the broad cache-pass query
+            if (!body.status && !isCrossSubtypeCacheQuery) {
+                continue;
+            }
+            // some pool entries are query-only "phantom" assets that the recorded API surfaced
+            // only in specific queries (e.g. the two duplicate `testExisting_htmlblock_matchName`
+            // assets that only appear when the message subtype — type 5 — is in the request). An
+            // optional `queryOnlyWhenTypes` gate reproduces that: include the entry only when the
+            // request asks for at least one of the listed types.
+            if (
+                Array.isArray(entry.queryOnlyWhenTypes) &&
+                !entry.queryOnlyWhenTypes.some((t) => requested.includes(Number(t)))
+            ) {
+                continue;
+            }
+            // match by the body's OWN assetType.id; M3 fallback: match by the id-key
+            const ownTypeId = body.assetType?.id;
+            const matches =
+                ownTypeId == null
+                    ? requested.includes(Number(key))
+                    : requested.includes(Number(ownTypeId));
+            if (matches) {
+                items.push(projectAssetQueryItem(body, entry.queryOverrides));
+            }
+        }
+        const response = { count: items.length, page: 1, pageSize: 50, links: {}, items };
+        console.log(`${loadingFile}asset-pool (dynamic: assetType.id in [${requested.join(',')}])`); // eslint-disable-line no-console
+        return [200, JSON.stringify(response)];
+    }
+    // GET by-id — anchored so it never hijacks /assets/<id>/file or /thumbnail
+    if (method === 'get') {
+        const byIdMatch = urlObj.pathname.match(/\/asset\/v1\/content\/assets\/(\d+)\/?$/);
+        if (byIdMatch) {
+            const id = byIdMatch[1];
+            const pool = await loadAssetPool();
+            const body = pool[id]?.body;
+            if (!body) {
+                return null; // leave existing 404 behavior
+            }
+            console.log(`${loadingFile}asset-pool (dynamic: GET asset ${id})`); // eslint-disable-line no-console
+            return [200, JSON.stringify(body)];
+        }
+        // by-key GET — $filter=customerKey eq <key>; mirror resolver name-filter + count-recompute
+        if (/\/asset\/v1\/content\/assets\/?$/.test(urlObj.pathname)) {
+            const rawFilter = urlObj.searchParams.get('$filter');
+            if (rawFilter) {
+                const [property, , value] = rawFilter.split(' ');
+                if (property === 'customerKey' && value) {
+                    const pool = await loadAssetPool();
+                    const items = [];
+                    for (const poolKey of Object.keys(pool)) {
+                        const body = pool[poolKey]?.body;
+                        if (body && body.customerKey === value) {
+                            items.push(body);
+                        }
+                    }
+                    const response = {
+                        count: items.length,
+                        page: 1,
+                        pageSize: 50,
+                        links: {},
+                        items,
+                    };
+                    // eslint-disable-next-line no-console
+                    console.log(
+                        `${loadingFile}asset-pool (dynamic: GET assets customerKey=${value})`
+                    );
+                    return [200, JSON.stringify(response)];
+                }
+            }
+        }
+    }
+    // create (bare POST /assets/), update (PATCH), delete (DELETE) are never engine-owned
+    return null;
+}
+
+/**
  * based on request, respond with different soap data
  *
  * @param {object} config mock api request object
@@ -466,6 +679,15 @@ export const handleRESTRequest = async (config) => {
                 }),
             ];
         } else {
+            // ── dynamic asset READ engine (reads only — never create/update/delete) ──
+            // Serves asset by-id GET, assetType.id-in query POST, and customerKey by-key GET
+            // from a single pool of full bodies. Lives in the 404 else, so any matching file
+            // fixture still wins. See asset_fixture_database plan.
+            const assetEngineResponse = await handleAssetReadEngine(config, urlObj);
+            if (assetEngineResponse) {
+                return assetEngineResponse;
+            }
+
             /* eslint-disable no-console */
             console.log(
                 `${tError}: Please create file ${testPath}.json/.txt${filterName ? ` or ${testPathFilter}.json/.txt` : testPathFilterBody ? ` or ${testPathFilterBody}.json/.txt` : ''}`
