@@ -21,6 +21,37 @@ declare namespace _default {
     let typeRetrieveByDefault: boolean;
     let typeCdpByDefault: boolean;
     let typeName: string;
+    namespace messageTypeMapping {
+        let outboundPush: number;
+        let locationEntry: number;
+        let locationExit: number;
+        let beacon: number;
+        let inapp: number;
+        let inbox: number;
+    }
+    namespace contentTypeMapping {
+        export let alert: number;
+        let inbox_1: number;
+        export { inbox_1 as inbox };
+        export let inboxAndAlert: number;
+    }
+    namespace tzPastSendActionMapping {
+        let sendImmediately: number;
+        let sendAtScheduledTimeNextDay: number;
+        let neverSend: number;
+    }
+    namespace statusMapping {
+        let draft: number;
+        let active: number;
+        let inactive: number;
+        let deleted: number;
+    }
+    namespace sendInitiatorMapping {
+        let gui: number;
+        let api: number;
+        let automation: number;
+        let journeyBuilder: number;
+    }
     let fields: {
         id: {
             isCreateable: boolean;
@@ -46,7 +77,19 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        c__messageType: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         contentType: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        c__contentType: {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
@@ -76,13 +119,31 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        c__tzPastSendAction: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         sendInitiator: {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
             template: boolean;
         };
+        c__sendInitiator: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         status: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        c__status: {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
