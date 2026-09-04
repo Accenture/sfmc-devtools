@@ -363,6 +363,18 @@ declare namespace MobilePush {
                 retrieving: boolean;
                 template: boolean;
             };
+            links: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            activeTimes: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
         };
     };
 }

@@ -281,6 +281,18 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        links: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        activeTimes: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
     };
 }
 export default _default;
