@@ -148,6 +148,26 @@ describe('type: mobilePush', () => {
             );
             return;
         });
+
+        it('Should update a mobilePush', async () => {
+            // WHEN
+            await handler.deploy('testInstance/testBU', ['mobilePush'], ['MTk6MTE0OjA']);
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+            // confirm updated item (upsert API: PUT /push/v1/message/<id>)
+            assert.deepEqual(
+                await testUtils.getActualJson('MTk6MTE0OjA', 'mobilePush'),
+                await testUtils.getExpectedJson('9999999', 'mobilePush', 'put'),
+                'returned JSON was not equal expected for update mobilePush'
+            );
+            // check number of API calls
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                4,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 
     describe('Templating ================', () => {
