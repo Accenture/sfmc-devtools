@@ -406,6 +406,14 @@ async function handleAssetReadEngine(config, urlObj) {
             ) {
                 continue;
             }
+            // some pool entries exist ONLY to be resolved by-id / by-key (e.g. an asset referenced
+            // by a mobilePush message). They must never surface in an assetType.id-in query, or
+            // they would inflate the asset/journey/automation retrieve counts. An optional
+            // `queryExclude` gate keeps them out of every query response while leaving the by-id
+            // and by-key GET branches (below) free to serve them.
+            if (entry.queryExclude) {
+                continue;
+            }
             // match by the body's OWN assetType.id; M3 fallback: match by the id-key
             const ownTypeId = body.assetType?.id;
             const matches =
