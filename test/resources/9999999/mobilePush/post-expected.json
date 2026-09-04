@@ -1,0 +1,19 @@
+{
+    "id": "MTY2OjExNDow",
+    "alert": "my push message %%=ContentBlockByKey(\"testExisting_contentBlock_DEV\")=%%",
+    "sound": "default",
+    "startDateUtc": "2026-04-15T08:54:00.000Z",
+    "startDate": "2026-04-15T02:54:00",
+    "name": "test_mobilePush_DEV",
+    "title": "my push title",
+    "subtitle": "my push subtitle for ios",
+    "createdDate": "2026-09-04T05:16:00",
+    "lastUpdated": "2026-09-04T05:16:00",
+    "r__asset_key": "testExisting_mobilePush_asset_DEV",
+    "r__mobilePushApp_key": "ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA",
+    "c__messageType": "outboundPush",
+    "c__contentType": "alert",
+    "c__tzPastSendAction": "sendImmediately",
+    "c__sendInitiator": "api",
+    "c__status": "active"
+}
