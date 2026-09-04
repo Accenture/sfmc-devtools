@@ -45,6 +45,42 @@ describe('type: mobileMessage', () => {
             );
             return;
         });
+
+        it('Should gracefully handle retrieving a non-existent mobileMessage by key (API returns 400) and download 0 instead of hard-failing', async () => {
+            // GIVEN a key that does not exist, GET /legacy/v1/beta/mobile/message/<key> returns HTTP
+            // 400 with a plain (errorcode-less) body; sfmc-sdk's RestError then falls back to the
+            // axios error code, which is 'ERR_BAD_REQUEST' for a <500 status — exactly what
+            // MobileMessage.retrieve's catch guard checks. (The legacy mobile/message API differs from
+            // the mobilePush REST API, whose 400 body carries errorcode 10006.)
+            testUtils.mockRESTError(
+                '/legacy/v1/beta/mobile/message/doesNotExist',
+                400,
+                undefined,
+                'get'
+            );
+            // WHEN
+            await handler.retrieve('testInstance/testBU', ['mobileMessage'], ['doesNotExist']);
+            // THEN
+            assert.equal(
+                process.exitCode,
+                0,
+                'retrieve should not have thrown an error despite the 400 on the by-key endpoint'
+            );
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.mobileMessage ? Object.keys(result.mobileMessage).length : 0,
+                0,
+                'no mobileMessage expected because the requested key does not exist'
+            );
+            // 3 dependency-cache GETs (mobileCode, mobileKeyword, campaign) + 1 failing by-key GET
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                4,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 
     describe('Deploy ================', () => {

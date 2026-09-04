@@ -23,6 +23,8 @@ import {
     soapUrl,
     restUrl,
     tWarn,
+    addRestErrorOverride,
+    resetRestErrorOverrides,
 } from './resourceFactory.js';
 const authResources = File.readJsonSync(path.join(__dirname, './resources/auth.json'));
 
@@ -192,6 +194,8 @@ export function getExpectedFile(mid, type, action, ext) {
  */
 export function mockSetup(isDeploy) {
     cache.clearCache();
+    // clear any REST error overrides so they never leak between tests
+    resetRestErrorOverrides();
     // clear local caches
     for (const type of Object.keys(MetadataTypes)) {
         if (MetadataTypes[type].cache) {
@@ -290,6 +294,26 @@ export function mockReset() {
     auth.clearSessions();
     fsmock.restore();
     apimock.restore();
+}
+
+/**
+ * registers a REST error override for the current test, forcing the mock to answer any REST
+ * request whose pathname contains `urlIncludes` with the given error status/body instead of the
+ * normal fixture (used to simulate the SFMC API returning e.g. HTTP 500 for an endpoint). The
+ * override is cleared automatically on the next mockSetup.
+ *
+ * @param {string} urlIncludes substring the request pathname must contain to trigger the error
+ * @param {number} status HTTP status code to return (e.g. 500)
+ * @param {object} [body] response body to return; when omitted the shared error fixture for the
+ * status is served (e.g. `test/resources/rest500-response.json`)
+ * @param {string} [method] optional http method filter (lowercase, e.g. 'get')
+ * @param {string} [code] axios error code to attach (defaults based on status, e.g. 5xx → ERR_BAD_RESPONSE)
+ * @param {string} [bodyFixture] base filename of a fixture in `test/resources` to use as the
+ * response body (e.g. `rest400-validationError-response.json`); overrides the `rest<status>-response.json` default
+ * @returns {void}
+ */
+export function mockRESTError(urlIncludes, status, body, method, code, bodyFixture) {
+    addRestErrorOverride(urlIncludes, status, body, method, code, bodyFixture);
 }
 
 /**

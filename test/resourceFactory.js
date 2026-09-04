@@ -476,12 +476,115 @@ async function handleAssetReadEngine(config, urlObj) {
 }
 
 /**
+ * per-test REST error injections. Each entry forces the mock to answer any REST request whose
+ * pathname contains `urlIncludes` with an error status/body instead of the normal fixture, so
+ * tests can simulate the SFMC API returning e.g. HTTP 500 for a specific endpoint. Reset between
+ * tests via {@link resetRestErrorOverrides} (called from mockSetup).
+ *
+ * @type {{urlIncludes: string, method?: string, status: number, body: object, bodyFixture?: string, code: string}[]}
+ */
+let restErrorOverrides = [];
+
+/**
+ * registers a REST error override for the current test (see {@link restErrorOverrides})
+ *
+ * @param {string} urlIncludes substring the request pathname must contain to trigger the error
+ * @param {number} status HTTP status code to return (e.g. 500)
+ * @param {object} [body] response body to return; when omitted the shared error fixture for the
+ * status is served (e.g. `test/resources/rest500-response.json`), unless `bodyFixture` is given
+ * @param {string} [method] optional http method filter (lowercase, e.g. 'get')
+ * @param {string} [code] axios error code to attach (e.g. 'ERR_BAD_RESPONSE' for 5xx); defaults
+ * to the code the real axios client assigns for the status (5xx → ERR_BAD_RESPONSE, else ERR_BAD_REQUEST)
+ * @param {string} [bodyFixture] base filename of a fixture in `test/resources` to use as the
+ * response body (e.g. `rest400-validationError-response.json`); overrides the `rest<status>-response.json` default
+ * @returns {void}
+ */
+export function addRestErrorOverride(urlIncludes, status, body, method, code, bodyFixture) {
+    restErrorOverrides.push({
+        urlIncludes,
+        method: method ? method.toLowerCase() : undefined,
+        status,
+        body,
+        bodyFixture,
+        code: code || (status >= 500 ? 'ERR_BAD_RESPONSE' : 'ERR_BAD_REQUEST'),
+    });
+}
+
+/**
+ * clears all REST error overrides. Called from mockSetup so overrides never leak between tests.
+ *
+ * @returns {void}
+ */
+export function resetRestErrorOverrides() {
+    restErrorOverrides = [];
+}
+
+/**
+ * builds an axios-shaped rejection for an error override. Unlike returning a `[status, body]`
+ * tuple (which axios-mock-adapter rejects WITHOUT an error `code`), throwing this reproduces what
+ * the real axios client does for an error response — it carries `error.code` (e.g.
+ * `ERR_BAD_RESPONSE` for a 5xx) and a `response`, which is what sfmc-sdk's RestError reads.
+ *
+ * @param {object} config mock api request object
+ * @param {{status: number, body: object, bodyFixture?: string, code: string}} override matched override
+ * @returns {Promise.<never>} always rejects
+ */
+async function rejectWithAxiosError(config, override) {
+    const bodyString =
+        override.body === undefined
+            ? await fs.readFile(
+                  path.join(
+                      'test',
+                      'resources',
+                      override.bodyFixture || `rest${override.status}-response.json`
+                  ),
+                  { encoding: 'utf8' }
+              )
+            : JSON.stringify(override.body);
+    const response = {
+        status: override.status,
+        statusText: 'Internal Server Error',
+        headers: {},
+        config,
+        data: JSON.parse(bodyString),
+    };
+    const error = new Error(`Request failed with status code ${override.status}`);
+    // @ts-expect-error mimic axios error shape consumed by sfmc-sdk RestError
+    error.isAxiosError = true;
+    // @ts-expect-error see above
+    error.code = override.code;
+    // @ts-expect-error see above
+    error.config = config;
+    // @ts-expect-error see above
+    error.response = response;
+    throw error;
+}
+
+/**
  * based on request, respond with different soap data
  *
  * @param {object} config mock api request object
  * @returns {Promise.<Array>} status code plus response in string form
  */
 export const handleRESTRequest = async (config) => {
+    // per-test error injection: if an override matches, reject with an axios-shaped error (carrying
+    // error.code, e.g. ERR_BAD_RESPONSE) instead of the normal fixture, so tests can simulate the
+    // SFMC API returning e.g. HTTP 500 for a specific endpoint. Kept OUTSIDE the try/catch below so
+    // the rejection is not swallowed and re-wrapped as a bare [500, {}].
+    {
+        const urlObj = new URL(
+            config.baseURL + (config.url.startsWith('/') ? config.url.slice(1) : config.url)
+        );
+        const errorOverride = restErrorOverrides.find(
+            (override) =>
+                urlObj.pathname.includes(override.urlIncludes) &&
+                (!override.method || override.method === config.method)
+        );
+        if (errorOverride) {
+            console.log(`${tWarn}: forcing ${errorOverride.status} for ${urlObj.pathname}`); // eslint-disable-line no-console
+            return rejectWithAxiosError(config, errorOverride);
+        }
+    }
     try {
         // check if filtered
         const urlObj = new URL(
