@@ -85,7 +85,7 @@ declare namespace MobilePush {
         bodyIteratorField: string;
         dependencies: string[];
         dependencyGraph: {
-            mobileApplication: string[];
+            mobilePushApp: string[];
         };
         hasExtended: boolean;
         idField: string;
@@ -345,7 +345,7 @@ declare namespace MobilePush {
                 retrieving: boolean;
                 template: boolean;
             };
-            r__mobileApplication_key: {
+            r__mobilePushApp_key: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

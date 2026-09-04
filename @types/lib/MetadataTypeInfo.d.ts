@@ -25,7 +25,7 @@ declare namespace _default {
     export { importFile };
     export { journey };
     export { list };
-    export { mobileApplication };
+    export { mobilePushApp };
     export { mobileCode };
     export { mobileKeyword };
     export { mobileMessage };
@@ -70,7 +70,7 @@ import folder from './metadataTypes/Folder.js';
 import importFile from './metadataTypes/ImportFile.js';
 import journey from './metadataTypes/Journey.js';
 import list from './metadataTypes/List.js';
-import mobileApplication from './metadataTypes/MobileApplication.js';
+import mobilePushApp from './metadataTypes/MobilePushApp.js';
 import mobileCode from './metadataTypes/MobileCode.js';
 import mobileKeyword from './metadataTypes/MobileKeyword.js';
 import mobileMessage from './metadataTypes/MobileMessage.js';
