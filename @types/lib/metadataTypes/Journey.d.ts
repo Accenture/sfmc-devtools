@@ -183,6 +183,7 @@ declare namespace Journey {
             mobileMessage: string[];
             mobileKeyword: string[];
             mobileCode: string[];
+            mobilePush: string[];
             mobilePushApp: string[];
         };
         folderIdField: string;
