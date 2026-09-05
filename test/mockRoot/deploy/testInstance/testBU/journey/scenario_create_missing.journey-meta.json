@@ -1,0 +1,38 @@
+{
+    "key": "scenario_create_missing",
+    "name": "scenario_create_missing",
+    "description": "Journey create with a missing push app",
+    "version": 1,
+    "workflowApiVersion": 1,
+    "activities": [
+        {
+            "key": "PUSHNOTIFICATIONACTIVITY-1",
+            "name": "Scenario Missing Push",
+            "description": "",
+            "type": "PUSHNOTIFICATIONACTIVITY",
+            "outcomes": [],
+            "arguments": {},
+            "configurationArguments": {
+                "r__mobilePush_key": "test_mobilePush_missingApp",
+                "r__mobilePush_name": "test_mobilePush_missingApp",
+                "r__mobilePushApp_key": "doesNotExist_appKey",
+                "r__mobilePushApp_name": "This App Does Not Exist On Target"
+            },
+            "metaData": {},
+            "schema": { "arguments": {} }
+        }
+    ],
+    "triggers": [],
+    "goals": [],
+    "exits": [],
+    "notifiers": [],
+    "entryMode": "NotSet",
+    "definitionType": "Multistep",
+    "channel": "",
+    "defaults": { "properties": {} },
+    "metaData": {},
+    "executionMode": "Production",
+    "status": "Draft",
+    "scheduledStatus": "Draft",
+    "r__folder_Path": "my journeys"
+}

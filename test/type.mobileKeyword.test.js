@@ -52,6 +52,42 @@ describe('type: mobileKeyword', () => {
             );
             return;
         });
+
+        it('Should gracefully handle retrieving a non-existent mobileKeyword by key (API returns 400) and download 0 instead of hard-failing', async () => {
+            // GIVEN a key that does not exist, GET /legacy/v1/beta/mobile/keyword/<id> returns HTTP
+            // 400 with a plain (errorcode-less) body; sfmc-sdk's RestError then falls back to the
+            // axios error code, which is 'ERR_BAD_REQUEST' for a <500 status — exactly what
+            // MobileKeyword.retrieve's catch guard checks. (The legacy mobile/keyword API differs from
+            // the mobilePush REST API, whose 400 body carries errorcode 10006.)
+            testUtils.mockRESTError(
+                '/legacy/v1/beta/mobile/keyword/doesNotExist',
+                400,
+                undefined,
+                'get'
+            );
+            // WHEN (id:-prefixed key routes to the by-key GET pathname .../keyword/doesNotExist)
+            await handler.retrieve('testInstance/testBU', ['mobileKeyword'], ['id:doesNotExist']);
+            // THEN
+            assert.equal(
+                process.exitCode,
+                0,
+                'retrieve should not have thrown an error despite the 400 on the by-key endpoint'
+            );
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.mobileKeyword ? Object.keys(result.mobileKeyword).length : 0,
+                0,
+                'no mobileKeyword expected because the requested key does not exist'
+            );
+            // 1 dependency-cache GET (mobileCode) + 1 failing by-key GET
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                2,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 
     describe('Deploy ================', () => {

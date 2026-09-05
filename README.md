@@ -37,7 +37,7 @@ You can then include it in your code with JavaScript/ES module imports:
 import mcdev from 'mcdev';
 ```
 
-That will load `node_packages/mcdev/lib/index.js`. It can make sense to directly include other files if you have a special scenario. We've done that in our example for [retrieveChangelog.js](https://github.com/Accenture/sfmc-devtools/blob/main/lib/retrieveChangelog.js) or in more detail, in our child-project [sfmc-devtools-copado](https://github.com/Accenture/sfmc-devtools-copado) to get full control over certain aspects.
+That will load `node_modules/mcdev/lib/index.js`. It can make sense to directly include other files if you have a special scenario. We've done that in our example for [retrieveChangelog.js](https://github.com/Accenture/sfmc-devtools/blob/main/lib/retrieveChangelog.js) or in more detail, in our child-project [sfmc-devtools-copado](https://github.com/Accenture/sfmc-devtools-copado) to get full control over certain aspects.
 
 ## Documentation
 
@@ -73,4 +73,4 @@ The people that lead this project:
 
 ## Copyright
 
-Copyright (c) 2020-2025 Accenture. [MIT licensed](https://github.com/Accenture/sfmc-devtools/blob/main/LICENSE).
+Copyright (c) 2020-2026 Accenture. [MIT licensed](https://github.com/Accenture/sfmc-devtools/blob/main/LICENSE).

@@ -50,7 +50,6 @@
     "scripts": {
         "start": "node lib/cli.js",
         "mcdev": "node lib/cli.js",
-        "build": "run-s lint:fix docs test",
         "debug": "node --nolazy --inspect-brk=9229 lib/cli.js",
         "lint:fix": "eslint --fix lib/**/*.js types/*.js test/**/*.js",
         "lint": "eslint lib/**/*.js types/*.js test/**/*.js",
@@ -91,9 +90,11 @@
     },
     "devDependencies": {
         "@eslint/js": "10.0.1",
+        "@types/chai": "5.2.3",
         "@types/fs-extra": "11.0.4",
         "@types/inquirer": "9.0.9",
         "@types/mocha": "10.0.8",
+        "@types/mock-fs": "4.13.4",
         "@types/node": "25.9.1",
         "@types/yargs": "17.0.35",
         "assert": "2.1.0",

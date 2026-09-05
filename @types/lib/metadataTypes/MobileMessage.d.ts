@@ -34,9 +34,10 @@ declare class MobileMessage extends MetadataType {
      * @param {void | string[]} [_] unused parameter
      * @param {void | string[]} [__] unused parameter
      * @param {string} [key] customer key of single item to retrieve
+     * @param {boolean} [warnOnDuplicateNames] enable duplicate-name diagnostics for non-file retrieval contexts
      * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
      */
-    static retrieve(retrieveDir: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
+    static retrieve(retrieveDir: string, _?: void | string[], __?: void | string[], key?: string, warnOnDuplicateNames?: boolean): Promise<MetadataTypeMapObj>;
     /**
      * Retrieves event definition metadata for caching
      *
@@ -46,6 +47,21 @@ declare class MobileMessage extends MetadataType {
      * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
      */
     static retrieveForCache(_?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
+    /**
+     * Retrieves metadata without saving for an explicit changelog request.
+     *
+     * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
+     */
+    static retrieveChangelog(): Promise<MetadataTypeMapObj>;
+    /**
+     * warns (loudly, without dropping any item) when a retrieved metadata map contains multiple
+     * items that share the same name. Duplicate names make cross-BU name-fallback deploys ambiguous.
+     * Synchronous post-await group-by; a harmless no-op on single-key retrieve.
+     *
+     * @param {MetadataTypeMap} [metadata] the retrieved metadata map (id-keyed)
+     * @returns {void}
+     */
+    static _warnOnDuplicateNames(metadata?: MetadataTypeMap): void;
     /**
      * Updates a single item
      *
@@ -161,6 +177,12 @@ declare namespace MobileMessage {
                 skipValidation: boolean;
             };
             r__mobileCode_key: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            r__mobileMessage_name: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

@@ -1,3 +1,7 @@
+# disable ANSI color codes in hook output (readable in Fork's plain-text log viewer)
+unset FORCE_COLOR
+export NO_COLOR=1
+
 # run lint-staged hooks
 echo "[PRE-COMMIT] Run lint-staged"
 lint-staged
