@@ -75,7 +75,10 @@ describe('type: mobileMessage', () => {
 
             const warnings = [];
             const originalWarn = Util.logger.warn;
-            Util.logger.warn = (message) => warnings.push(message);
+            Util.logger.warn = (message) => {
+                warnings.push(message);
+                return originalWarn.call(Util.logger, message);
+            };
             try {
                 await handler.retrieve('testInstance/testBU', ['mobileMessage']);
             } finally {
@@ -116,6 +119,50 @@ describe('type: mobileMessage', () => {
                     `retrieve should persist extracted AMP for ${id}`
                 );
             }
+        });
+
+        it('Should warn for duplicate mobileMessage names during changelog-only retrieve without writing files', async () => {
+            const fixturePath =
+                'test/resources/9999999/legacy/v1/beta/mobile/message/get-response.json';
+            const fixture = await fs.readJson(fixturePath);
+            fixture.entry = [
+                { ...fixture.entry[0], id: 'changelogMessageOne', name: 'Changelog SMS' },
+                { ...fixture.entry[0], id: 'changelogMessageTwo', name: 'Changelog SMS' },
+            ];
+            fixture.totalResults = fixture.entry.length;
+            await fs.writeJson(fixturePath, fixture);
+
+            const warnings = [];
+            const originalWarn = Util.logger.warn;
+            Util.logger.warn = (message) => {
+                warnings.push(String(message));
+                return originalWarn.call(Util.logger, message);
+            };
+            let result;
+            try {
+                result = await handler.retrieve(
+                    'testInstance/testBU',
+                    ['mobileMessage'],
+                    undefined,
+                    true
+                );
+            } finally {
+                Util.logger.warn = originalWarn;
+            }
+
+            assert.sameMembers(Object.keys(result.mobileMessage), [
+                'changelogMessageOne',
+                'changelogMessageTwo',
+            ]);
+            assert.lengthOf(
+                warnings.filter((message) => message.includes('name "Changelog SMS" is used by')),
+                1,
+                'explicit changelog-only retrieve should emit the duplicate-name warning'
+            );
+            assert.isFalse(
+                await fs.pathExists('retrieve/testInstance/testBU/mobileMessage'),
+                'changelog-only retrieve must not write normal retrieve files'
+            );
         });
 
         it('Should gracefully handle retrieving a non-existent mobileMessage by key (API returns 400) and download 0 instead of hard-failing', async () => {
@@ -336,7 +383,9 @@ describe('type: mobileMessage', () => {
             await fs.writeJson(sourcePath, source);
 
             const errors = [];
+            const warnings = [];
             const originalError = Util.logger.error;
+            const originalWarn = Util.logger.warn;
             /**
              * Captures upsert errors while preserving the configured logger behavior.
              *
@@ -347,12 +396,28 @@ describe('type: mobileMessage', () => {
                 errors.push(String(message));
                 return originalError.call(this, message);
             };
+            /**
+             * Captures retrieve warnings while preserving the configured logger behavior.
+             *
+             * @param {unknown} message logger message
+             * @returns {unknown} original logger result
+             */
+            Util.logger.warn = function (message) {
+                warnings.push(String(message));
+                return originalWarn.call(this, message);
+            };
             try {
                 await handler.deploy('testInstance/testBU', ['mobileMessage'], ['new']);
             } finally {
                 Util.logger.error = originalError;
+                Util.logger.warn = originalWarn;
             }
             assert.equal(process.exitCode, 1, 'deploy should have set an error exit code');
+            assert.lengthOf(
+                warnings.filter((message) => message.includes('name "Duplicate SMS" is used by')),
+                0,
+                'deploy cache retrieval must not emit the explicit-retrieve duplicate-name warning'
+            );
 
             const emittedError = errors.join('\n');
             assert.include(
