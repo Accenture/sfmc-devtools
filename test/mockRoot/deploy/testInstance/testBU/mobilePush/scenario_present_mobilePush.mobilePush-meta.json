@@ -1,0 +1,18 @@
+{
+    "id": "scenario_present_mobilePush",
+    "alert": "scenario push message",
+    "sound": "default",
+    "startDateUtc": "2026-04-15T14:54:00.000Z",
+    "startDate": "2026-04-15T08:54:00",
+    "name": "testExisting_mobilePush_asset_DEV",
+    "title": "scenario updated push title",
+    "subtitle": "scenario push subtitle",
+    "r__mobilePushApp_key": "sourceOnlyAppKey",
+    "r__mobilePushApp_name": "Test Push App One",
+    "r__asset_key": "testExisting_mobilePush_asset_DEV",
+    "c__messageType": "outboundPush",
+    "c__contentType": "alert",
+    "c__tzPastSendAction": "sendImmediately",
+    "c__sendInitiator": "journeyBuilder",
+    "c__status": "active"
+}

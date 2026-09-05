@@ -1,0 +1,37 @@
+{
+    "id": "0175b971-71a3-4d8e-98ac-48121f3fbf4f",
+    "definitionId": "0175b971-71a3-4d8e-98ac-48121f3fbf4f",
+    "key": "testExisting_journey_updatecontact",
+    "name": "SMS Parity Update",
+    "description": "",
+    "version": 1,
+    "workflowApiVersion": 1,
+    "activities": [
+        {
+            "key": "SMSSYNC-1",
+            "name": "Send SMS",
+            "description": "",
+            "type": "SMSSYNC",
+            "outcomes": [],
+            "arguments": {},
+            "configurationArguments": {
+                "messageId": "NTIzOjc4OjA"
+            },
+            "metaData": {},
+            "schema": { "arguments": {} }
+        }
+    ],
+    "triggers": [],
+    "goals": [],
+    "exits": [],
+    "notifiers": [],
+    "entryMode": "NotSet",
+    "definitionType": "Multistep",
+    "channel": "",
+    "defaults": { "properties": {} },
+    "metaData": {},
+    "executionMode": "Production",
+    "categoryId": 6298,
+    "status": "Draft",
+    "scheduledStatus": "Draft"
+}

@@ -47,6 +47,15 @@ declare class MobileMessage extends MetadataType {
      */
     static retrieveForCache(_?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
+     * warns (loudly, without dropping any item) when a retrieved metadata map contains multiple
+     * items that share the same name. Duplicate names make cross-BU name-fallback deploys ambiguous.
+     * Synchronous post-await group-by; a harmless no-op on single-key retrieve.
+     *
+     * @param {MetadataTypeMap} [metadata] the retrieved metadata map (id-keyed)
+     * @returns {void}
+     */
+    static _warnOnDuplicateNames(metadata?: MetadataTypeMap): void;
+    /**
      * Updates a single item
      *
      * @param {MetadataTypeItem} metadata a single item
@@ -161,6 +170,12 @@ declare namespace MobileMessage {
                 skipValidation: boolean;
             };
             r__mobileCode_key: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            r__mobileMessage_name: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

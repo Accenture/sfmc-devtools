@@ -320,7 +320,7 @@ export function mockRESTError(urlIncludes, status, body, method, code, bodyFixtu
  * helper to return amount of api callouts
  *
  * @param {boolean} [includeToken] if true, will include token calls in count
- * @returns {object} of API history
+ * @returns {number} of API history
  */
 export function getAPIHistoryLength(includeToken) {
     const historyArr = Object.values(apimock.history).flat();
@@ -344,9 +344,10 @@ export function getAPIHistory() {
  * @param {'patch'|'delete'|'post'|'get'|'put'} method http method
  * @param {string} url url without domain, end on % if you want to search with startsWith()
  * @param {boolean} returnAll useful for post requests that often have multiple callouts with the same url
- * @returns {object} json payload of the request
+ * @param {boolean} expectNone if true, will not log an error if no callout is found
+ * @returns {object | null} json payload of the request
  */
-export function getRestCallout(method, url, returnAll = false) {
+export function getRestCallout(method, url, returnAll = false, expectNone = false) {
     if (!apimock.history[method]?.length) {
         console.log(`${tWarn} No history for method ${method}.`); // eslint-disable-line no-console
         const methods = Object.keys(apimock.history)
@@ -369,6 +370,9 @@ export function getRestCallout(method, url, returnAll = false) {
 
     const myCallout = returnAll ? subset.filter(findCallout) : subset.find(findCallout);
     if (!myCallout) {
+        if (expectNone) {
+            return null;
+        }
         console.error(`${tWarn} No callout found for ${method} ${url}`); // eslint-disable-line no-console
         const urls = [...new Set(subset.map((el) => el.url))].join('\n- ');
         const methods = Object.keys(apimock.history)
@@ -385,9 +389,10 @@ export function getRestCallout(method, url, returnAll = false) {
  *
  * @param {'Schedule'|'Retrieve'|'Create'|'Update'|'Delete'|'Describe'|'Execute'} requestAction soap request types
  * @param {string} [objectType] optionall filter requests by object
- * @returns {object[]} json payload of the requests
+ * @param {boolean} expectNone if true, will not log an error if no callout is found
+ * @returns {object[] | null} json payload of the requests
  */
-export function getSoapCallouts(requestAction, objectType) {
+export function getSoapCallouts(requestAction, objectType, expectNone = false) {
     const method = 'post';
     const url = '/Service.asmx';
     const subset = apimock.history[method];
@@ -406,6 +411,9 @@ export function getSoapCallouts(requestAction, objectType) {
         )
         .map((item) => item.data);
     if (!myCallout) {
+        if (expectNone) {
+            return null;
+        }
         console.error(`${tWarn} No callout found for ${requestAction} ${objectType || ''}`); // eslint-disable-line no-console
         return null;
     }

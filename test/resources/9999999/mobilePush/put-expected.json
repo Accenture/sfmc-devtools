@@ -11,6 +11,7 @@
     "lastUpdated": "2026-04-15T08:54:00",
     "r__asset_key": "testExisting_mobilePush_asset_DEV",
     "r__mobilePushApp_key": "ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA",
+    "r__mobilePushApp_name": "Test Push App One",
     "c__messageType": "outboundPush",
     "c__contentType": "alert",
     "c__tzPastSendAction": "sendImmediately",

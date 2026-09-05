@@ -49,6 +49,15 @@ declare class MobilePush extends MetadataType {
      */
     static retrieveForCache(_?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
+     * warns (loudly, without dropping any item) when a retrieved metadata map contains multiple
+     * items that share the same name. Duplicate names make cross-BU name-fallback deploys ambiguous.
+     * Synchronous post-await group-by; a harmless no-op on single-key retrieve.
+     *
+     * @param {MetadataTypeMap} [metadata] the retrieved metadata map (id-keyed)
+     * @returns {void}
+     */
+    static _warnOnDuplicateNames(metadata?: MetadataTypeMap): void;
+    /**
      * Updates a single item
      * docs: https://developer.salesforce.com/docs/marketing/marketing-cloud/references/mc_rest_push?meta=Update%2Ba%2BPush%2BMessage
      *
@@ -339,13 +348,22 @@ declare namespace MobilePush {
                 retrieving: boolean;
                 template: boolean;
             };
-            'application.id': {
+            application: {
+                skipValidation: boolean;
+            };
+            r__mobilePushApp_key: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            r__mobilePushApp_key: {
+            r__mobilePushApp_name: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            r__mobilePush_name: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
