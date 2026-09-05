@@ -62,7 +62,7 @@ export function copyToDeploy(from, to, mid = '9999999', buName = 'testBU') {
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} [buName] used when we need to test on ParentBU
- * @returns {Promise.<string>} file in string form
+ * @returns {Promise.<any>} file in string form
  */
 export function getActualJson(customerKey, type, buName = 'testBU') {
     return File.readJSON(
