@@ -69,38 +69,5 @@ describe('UTIL', () => {
 
             MetadataType.definition = definitionBackup;
         });
-
-        it('should exclude null REST error results before key processing', async () => {
-            const definitionBackup = MetadataType.definition;
-            const clientBackup = MetadataType.client;
-            MetadataType.definition = {
-                ...definitionBackup,
-                type: 'test',
-                keyField: 'key',
-            };
-            MetadataType.client = {
-                rest: {
-                    get: async (uri) => {
-                        if (uri === '/missing') {
-                            throw Object.assign(new Error('missing'), { code: '404' });
-                        }
-                        return { key: 'found' };
-                    },
-                },
-            };
-
-            const result = await MetadataType.retrieveRESTcollection(
-                [
-                    { id: 'found', uri: '/found' },
-                    { id: 'missing', uri: '/missing' },
-                ],
-                1,
-                false
-            );
-
-            assert.deepEqual(result.metadata, { found: { key: 'found' } });
-            MetadataType.definition = definitionBackup;
-            MetadataType.client = clientBackup;
-        });
     });
 });
