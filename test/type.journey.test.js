@@ -1,4 +1,5 @@
 import * as chai from 'chai';
+/** @type {typeof chai.assert} */
 const assert = chai.assert;
 
 import chaiFiles from 'chai-files';
@@ -8,6 +9,11 @@ import cache from '../lib/util/cache.js';
 import handler from '../lib/index.js';
 import Journey from '../lib/metadataTypes/Journey.js';
 import { Util } from '../lib/util/util.js';
+
+const journeyTestAccess =
+    /** @type {{_preDeployTasks_activities(metadata: ReturnType<JSON['parse']>): Promise.<void>}} */ (
+        /** @type {unknown} */ (Journey)
+    );
 import * as testUtils from './utils.js';
 chai.use(chaiFiles);
 
@@ -715,7 +721,7 @@ describe('type: journey', () => {
                 r__mobileMessage_key: 'missingMessageKey',
                 r__mobileMessage_name: 'Portable Message',
             };
-            await Journey._preDeployTasks_activities({
+            await journeyTestAccess._preDeployTasks_activities({
                 activities: [{ type: 'PUSHNOTIFICATIONACTIVITY', configurationArguments }],
             });
 
@@ -745,7 +751,7 @@ describe('type: journey', () => {
                 r__mobileMessage_name: 'Portable Message',
             };
 
-            await Journey._preDeployTasks_activities({
+            await journeyTestAccess._preDeployTasks_activities({
                 activities: [{ type: 'SMSSYNC', configurationArguments }],
             });
 
@@ -759,7 +765,7 @@ describe('type: journey', () => {
             cache.setMetadata('mobileMessage', {});
             let missingError;
             try {
-                await Journey._preDeployTasks_activities({
+                await journeyTestAccess._preDeployTasks_activities({
                     activities: [
                         {
                             type: 'SMSSYNC',
@@ -801,7 +807,7 @@ describe('type: journey', () => {
             });
             let duplicateError;
             try {
-                await Journey._preDeployTasks_activities({
+                await journeyTestAccess._preDeployTasks_activities({
                     activities: [
                         {
                             type: 'SMSSYNC',
@@ -869,7 +875,9 @@ describe('type: journey', () => {
                 }
                 const messagePath =
                     'deploy/testInstance/testBU/mobileMessage/new.mobileMessage-meta.json';
-                const message = await testUtils.getActualDeployJson('new', 'mobileMessage');
+                const message = /** @type {ReturnType<JSON['parse']>} */ (
+                    await testUtils.getActualDeployJson('new', 'mobileMessage')
+                );
                 message.name = 'testExisting_mobileMessage';
                 await fs.writeJson(messagePath, message);
                 await fs.copy(scenario.responseFixture, scenario.responsePath, { overwrite: true });
@@ -1004,7 +1012,9 @@ describe('type: journey', () => {
         ]) {
             // Register each named SMS failure scenario as an isolated Mocha test.
             it(scenario.title, async () => {
-                const journey = await testUtils.getActualDeployJson(scenario.journeyKey, 'journey');
+                const journey = /** @type {ReturnType<JSON['parse']>} */ (
+                    await testUtils.getActualDeployJson(scenario.journeyKey, 'journey')
+                );
                 const smsArguments = journey.activities.find(
                     (activity) => activity.type === 'SMSSYNC'
                 ).configurationArguments;
@@ -1080,7 +1090,8 @@ describe('type: journey', () => {
             });
         }
 
-        for (const [action, appState, journeyKey, mobilePushKey, succeeds, title] of [
+        /** @type {['create' | 'update', string, string, string, boolean, string][]} */
+        const mobilePushScenarios = [
             [
                 'create',
                 'pre-exists',
@@ -1113,7 +1124,15 @@ describe('type: journey', () => {
                 false,
                 'Should update a journey with its matching mobilePush when mobilePushApp is absent',
             ],
-        ]) {
+        ];
+        for (const [
+            action,
+            appState,
+            journeyKey,
+            mobilePushKey,
+            succeeds,
+            title,
+        ] of mobilePushScenarios) {
             // Register each literal scenario as an isolated Mocha test.
             it(title, async () => {
                 if (action === 'update') {
@@ -1137,9 +1156,8 @@ describe('type: journey', () => {
                     `${action}/${appState}: source app key must not exist in the target cache`
                 );
                 if (!succeeds) {
-                    const scenarioMetadata = await testUtils.getActualDeployJson(
-                        journeyKey,
-                        'journey'
+                    const scenarioMetadata = /** @type {ReturnType<JSON['parse']>} */ (
+                        await testUtils.getActualDeployJson(journeyKey, 'journey')
                     );
                     const pushReference = scenarioMetadata.activities.find(
                         (activity) => activity.type === 'PUSHNOTIFICATIONACTIVITY'
@@ -1162,7 +1180,16 @@ describe('type: journey', () => {
                 const errors = [];
                 const originalError = Util.logger.error;
                 const originalErrorStack = Util.logger.errorStack;
-                Util.logger.error = (message) => errors.push(String(message));
+                /**
+                 * Captures deploy errors using the logger contract.
+                 *
+                 * @param {unknown} message logger message
+                 * @returns {import('winston').Logger} logger instance
+                 */
+                Util.logger.error = function (message) {
+                    errors.push(String(message));
+                    return this;
+                };
                 Util.logger.errorStack = (error, message) => {
                     errors.push(`${message}: ${error?.message || error}`);
                     process.exitCode = 1;

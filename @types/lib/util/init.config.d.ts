@@ -21,9 +21,10 @@ declare namespace Init {
      * helper method for this.upgradeProject that upgrades project config if needed
      *
      * @param {Mcdevrc} properties config file's json
+     * @param {string} [versionToPersist] version to store while saving config migrations
      * @returns {Promise.<boolean>} returns true if worked without errors
      */
-    function fixMcdevConfig(properties: Mcdevrc): Promise<boolean>;
+    function fixMcdevConfig(properties: Mcdevrc, versionToPersist?: string): Promise<boolean>;
     /**
      * handles creation/update of all config file from the boilerplate
      *

@@ -6,9 +6,10 @@ declare namespace Init {
      * from the boilerplate directory to them as dev-dependencies
      *
      * @param {string} [repoName] if git URL was provided earlier, the repo name was extracted to use it for npm init
+     * @param {string} [versionBeforeUpgrade] mcdev project version before this upgrade
      * @returns {Promise.<boolean>} install successful or error occured
      */
-    function installDependencies(repoName?: string): Promise<boolean>;
+    function installDependencies(repoName?: string, versionBeforeUpgrade?: string): Promise<boolean>;
     /**
      * ensure we have certain default values in our config
      *

@@ -41,9 +41,9 @@ export type TypeKeyCombo = {
     [x: string]: string[];
 };
 /**
- * generic metadata item
+ * generic JSON metadata item
  */
-export type MetadataTypeItem = any;
+export type MetadataTypeItem = ReturnType<JSON["parse"]>;
 /**
  * key=customer key
  */
@@ -231,13 +231,9 @@ export type ScriptItem = {
 export type ScriptMap = {
     [x: string]: ScriptItem;
 };
-export type AssetItem = {
-    [x: string]: any;
-};
+export type AssetItem = ReturnType<JSON["parse"]>;
 export type AssetMap = {
-    [x: string]: {
-        [x: string]: any;
-    };
+    [x: string]: any;
 };
 export type AssetSubType = "archive" | "asset" | "audio" | "block" | "code" | "document" | "image" | "message" | "other" | "rawimage" | "template" | "textfile" | "video";
 export type DataExtensionFieldItem = {
@@ -747,13 +743,13 @@ export type AutomationSchedule = {
      */
     rangeTypeId?: number;
     /**
-     * ?
+     * schedule pattern returned by the API
      */
-    pattern?: any;
+    pattern?: object | string | null;
     /**
-     * ?
+     * scheduled timestamp returned by the API
      */
-    scheduledTime?: any;
+    scheduledTime?: string | null;
     /**
      * ?
      */
@@ -857,7 +853,7 @@ export type AutomationItem = {
     /**
      * notifications
      */
-    notifications?: any;
+    notifications?: object[];
     /**
      * -
      */
@@ -1419,9 +1415,11 @@ export type SoapRequestParams = {
      */
     options?: object;
     /**
-     * ?
+     * client identifiers
      */
-    clientIDs?: any;
+    clientIDs?: {
+        ID: number;
+    }[];
     /**
      * simple or complex
      * complex
@@ -1499,10 +1497,12 @@ export type AssetRequestParams = {
      */
     options?: object;
     /**
-     * ?
+     * client identifiers
      * complex
      */
-    clientIDs?: any;
+    clientIDs?: {
+        ID: number;
+    }[];
     /**
      * pagination
      */

@@ -1,28 +1,6 @@
 {
-    "useTabs": false,
-    "tabWidth": 4,
-    "printWidth": 100,
-    "singleQuote": true,
-    "trailingComma": "none",
+    "plugins": ["prettier-plugin-sfmc"],
     "overrides": [
-        {
-            "files": "*.ssjs",
-            "options": {
-                "parser": "babel",
-                "trailingComma": "none"
-            }
-        },
-        {
-            "files": "*.sql",
-            "options": {
-                "formatter": "sql-formatter",
-                "language": "tsql",
-                "identifierCase": "preserve",
-                "dataTypeCase": "preserve",
-                "functionCase": "upper",
-                "keywordCase": "upper"
-            }
-        },
         {
             "files": ".mcdev-validations.js",
             "options": {
