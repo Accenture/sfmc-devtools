@@ -189,14 +189,14 @@ declare class MetadataType {
      *
      * @param {string} key key of the item
      * @param {string} name name of the item
-     * @param {{ type: string; key: string; name: any; }[]} namesInFolder names of the items in the same folder
+     * @param {{ type: string; key: string; name: string; }[]} namesInFolder names of the items in the same folder
      * @param {string} [subtype] itemType-name
      * @returns {string} new name
      */
     static findUniqueName(key: string, name: string, namesInFolder: {
         type: string;
         key: string;
-        name: any;
+        name: string;
     }[], subtype?: string): string;
     /**
      * Abstract create method that needs to be implemented in child metadata type
@@ -431,9 +431,9 @@ declare class MetadataType {
      * @param {RestError} ex exception
      * @param {string} key id or key of item
      * @param {string} url url to call for retry
-     * @returns {Promise.<any>} -
+     * @returns {Promise.<null>} no retry result
      */
-    static handleRESTErrors(ex: RestError, key: string, url: string): Promise<any>;
+    static handleRESTErrors(ex: RestError, key: string, url: string): Promise<null>;
     /**
      * Used to execute a query/automation etc.
      *
@@ -770,12 +770,12 @@ declare class MetadataType {
     /**
      * helper for {@link MetadataType.getNestedValue}
      *
-     * @param {any} obj the metadataItem to search in (or the result)
+     * @param {ReturnType<JSON['parse']>} obj the metadataItem to search in (or the result)
      * @param {string[]} nestedKeyParts key in dot-notation split into parts
      * @param {string} dependentType used for types that need custom handling
      * @returns {(string) | (string)[]} result
      */
-    static getNestedValueHelper(obj: any, nestedKeyParts: string[], dependentType: string): (string) | (string)[];
+    static getNestedValueHelper(obj: ReturnType<JSON["parse"]>, nestedKeyParts: string[], dependentType: string): (string) | (string)[];
     /**
      *
      * @param {MetadataTypeMap} metadataMap metadata mapped by their keyField

@@ -1,5 +1,9 @@
- <script runat="server">line1 %%[ SET @test='bla bla' ]%% line2 %%= ContentBlockById(1295064) =%% still line2
-line3
+<script runat="server">
+    line1 %%[
+        set @test = 'bla bla'
+    ]%% line2 %%= ContentBlockByID(1295064) =%% still line2
+    line3
 </script>
 <script runat="server">
-Platform.Function.ContentBlockById(1295064);</script>
+    Platform.Function.ContentBlockById(1295064);
+</script>

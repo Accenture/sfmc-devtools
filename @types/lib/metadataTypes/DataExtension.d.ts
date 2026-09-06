@@ -285,9 +285,9 @@ declare class DataExtension extends MetadataType {
      * Parses metadata into a readable Markdown/HTML format then saves it
      *
      * @param {DataExtensionMap} [metadataMap] a list of dataExtension definitions
-     * @returns {Promise.<any>} -
+     * @returns {Promise.<void[]|void>} documentation writes or no result when no metadata exists
      */
-    static document(metadataMap?: DataExtensionMap): Promise<any>;
+    static document(metadataMap?: DataExtensionMap): Promise<void[] | void>;
     /**
      * clean up after deleting a metadata item
      *

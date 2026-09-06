@@ -1,4 +1,5 @@
 import * as chai from 'chai';
+/** @type {typeof chai.assert} */
 const assert = chai.assert;
 
 import chaiFiles from 'chai-files';
@@ -84,9 +85,15 @@ describe('type: mobilePush', () => {
 
             const warnings = [];
             const originalWarn = Util.logger.warn;
-            Util.logger.warn = (message) => {
-                warnings.push(message);
-                originalWarn(message);
+            /**
+             * Captures retrieve warnings while preserving logger behavior.
+             *
+             * @param {unknown} message logger message
+             * @returns {import('winston').Logger} logger instance
+             */
+            Util.logger.warn = function (message) {
+                warnings.push(String(message));
+                return originalWarn.call(this, message);
             };
             try {
                 await handler.retrieve('testInstance/testBU', ['mobilePush']);

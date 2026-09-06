@@ -62,7 +62,7 @@ export function copyToDeploy(from, to, mid = '9999999', buName = 'testBU') {
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} [buName] used when we need to test on ParentBU
- * @returns {Promise.<any>} file in string form
+ * @returns {Promise.<ReturnType<JSON['parse']>>} parsed metadata file
  */
 export function getActualJson(customerKey, type, buName = 'testBU') {
     return File.readJSON(
@@ -218,6 +218,8 @@ export function mockSetup(isDeploy) {
         handler.setOptions(resetOptions);
     }
     File.prettierConfig = null;
+    File.prettierConfigFileType = null;
+    File.prettierConfigCache.clear();
 
     apimock = new MockAdapter(axiosInstance, { onNoMatch: 'throwException' });
     // set access_token to mid to allow for autorouting of mock to correct resources
@@ -230,9 +232,6 @@ export function mockSetup(isDeploy) {
         .onAny(new RegExp(`^${escapeRegExp(restUrl)}`))
         .reply((config) => handleRESTRequest(config));
     const fsMockConf = {
-        '.beautyamp.json': fsmock.load(
-            path.resolve(__dirname, '../boilerplate/files/.beautyamp.json')
-        ),
         '.prettierrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.prettierrc')),
         'eslint.config.js': fsmock.load(
             path.resolve(__dirname, '../boilerplate/files/eslint.config.js')
@@ -245,26 +244,28 @@ export function mockSetup(isDeploy) {
         'boilerplate/config.json': fsmock.load(
             path.resolve(__dirname, '../boilerplate/config.json')
         ),
+        'boilerplate/gitignore-template': fsmock.load(
+            path.resolve(__dirname, '../boilerplate/gitignore-template')
+        ),
+        'boilerplate/files/.prettierrc': fsmock.load(
+            path.resolve(__dirname, '../boilerplate/files/.prettierrc')
+        ),
+        'boilerplate/forcedUpdates.json': fsmock.load(
+            path.resolve(__dirname, '../boilerplate/forcedUpdates.json')
+        ),
+        'boilerplate/npm-dependencies.json': fsmock.load(
+            path.resolve(__dirname, '../boilerplate/npm-dependencies.json')
+        ),
         test: fsmock.load(path.resolve(__dirname)),
-        // the following node_modules are required for prettier's SQL parser to work
+        // Prettier and the SFMC plugin are loaded statically before mock-fs starts.
         'node_modules/prettier': fsmock.load(path.resolve(__dirname, '../node_modules/prettier')),
-        'node_modules/prettier-plugin-sql': fsmock.load(
-            path.resolve(__dirname, '../node_modules/prettier-plugin-sql')
+        'node_modules/prettier-plugin-sfmc': fsmock.load(
+            path.resolve(__dirname, '../node_modules/prettier-plugin-sfmc')
         ),
-        'node_modules/beauty-amp-core2': fsmock.load(
-            path.resolve(__dirname, '../node_modules/beauty-amp-core2')
-        ),
-        'node_modules/node-sql-parser': fsmock.load(
-            path.resolve(__dirname, '../node_modules/node-sql-parser')
-        ),
-        'node_modules/big-integer': fsmock.load(
-            path.resolve(__dirname, '../node_modules/big-integer')
-        ),
+        // SQL formatting lazily reads this transitive package at runtime.
         'node_modules/sql-formatter': fsmock.load(
             path.resolve(__dirname, '../node_modules/sql-formatter')
         ),
-        'node_modules/jsox': fsmock.load(path.resolve(__dirname, '../node_modules/jsox')),
-        'node_modules/nearley': fsmock.load(path.resolve(__dirname, '../node_modules/nearley')),
     };
     if (isDeploy) {
         // load files we manually prepared for a direct test of `deploy` command
@@ -361,7 +362,7 @@ export function getRestCallout(method, url, returnAll = false, expectNone = fals
     /**
      * helper for filter/find
      *
-     * @param {any} item history item
+     * @param {{url:string}} item history item
      * @returns {boolean} if item matches
      */
     function findCallout(item) {

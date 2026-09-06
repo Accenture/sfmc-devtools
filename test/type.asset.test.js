@@ -1110,7 +1110,15 @@ describe('type: asset', () => {
             assert.equal(process.exitCode, 0, 'resolveId should not have thrown an error');
             assert.deepEqual(
                 resolveIdJson,
-                await testUtils.getExpectedJson('9999999', 'asset', 'resolveId-1295064-noPath'),
+                /** @type {{key:string, name:string, path:string}} */ (
+                    /** @type {unknown} */ (
+                        await testUtils.getExpectedJson(
+                            '9999999',
+                            'asset',
+                            'resolveId-1295064-noPath'
+                        )
+                    )
+                ),
                 'returned response was not equal expected'
             );
             return;
@@ -1142,7 +1150,15 @@ describe('type: asset', () => {
             assert.equal(process.exitCode, 0, 'resolveId should not have thrown an error');
             assert.deepEqual(
                 resolveIdJson,
-                await testUtils.getExpectedJson('9999999', 'asset', 'resolveId-1295064-withPath'),
+                /** @type {{key:string, name:string, path:string}} */ (
+                    /** @type {unknown} */ (
+                        await testUtils.getExpectedJson(
+                            '9999999',
+                            'asset',
+                            'resolveId-1295064-withPath'
+                        )
+                    )
+                ),
                 'returned response was not equal expected'
             );
             return;
@@ -1156,7 +1172,15 @@ describe('type: asset', () => {
             // IMPORTANT: this will throw a false "TEST-ERROR" but our testing framework currently needs to not find the file to throw a 404
             assert.deepEqual(
                 resolveIdJson,
-                await testUtils.getExpectedJson('9999999', 'asset', 'resolveId-1234-notFound'),
+                /** @type {{key:string, name:string, path:string}} */ (
+                    /** @type {unknown} */ (
+                        await testUtils.getExpectedJson(
+                            '9999999',
+                            'asset',
+                            'resolveId-1234-notFound'
+                        )
+                    )
+                ),
                 'returned response was not equal expected'
             );
             return;

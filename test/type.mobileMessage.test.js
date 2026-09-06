@@ -1,4 +1,5 @@
 import * as chai from 'chai';
+/** @type {typeof chai.assert} */
 const assert = chai.assert;
 const expect = chai.expect;
 
@@ -390,7 +391,7 @@ describe('type: mobileMessage', () => {
              * Captures upsert errors while preserving the configured logger behavior.
              *
              * @param {unknown} message logger message
-             * @returns {unknown} original logger result
+             * @returns {import('winston').Logger} logger instance
              */
             Util.logger.error = function (message) {
                 errors.push(String(message));
@@ -400,7 +401,7 @@ describe('type: mobileMessage', () => {
              * Captures retrieve warnings while preserving the configured logger behavior.
              *
              * @param {unknown} message logger message
-             * @returns {unknown} original logger result
+             * @returns {import('winston').Logger} logger instance
              */
             Util.logger.warn = function (message) {
                 warnings.push(String(message));
