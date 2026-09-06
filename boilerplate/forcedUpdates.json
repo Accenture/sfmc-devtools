@@ -1,7 +1,7 @@
 [
     {
         "version": "10.0.0",
-        "files": [".prettierrc"],
+        "files": [".prettierrc", ".vscode/settings.json"],
         "filesRemove": [".beautyamp.json"]
     },
     {
