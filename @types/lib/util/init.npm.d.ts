@@ -1,25 +1,28 @@
 export default Init;
 declare namespace Init {
     /**
-     * initiates npm project and then
-     * takes care of loading the pre-configured dependency list
-     * from the boilerplate directory to them as dev-dependencies
+     * Prepare package changes without writing or invoking npm.
      *
-     * @param {string} [repoName] if git URL was provided earlier, the repo name was extracted to use it for npm init
-     * @param {string} [versionBeforeUpgrade] mcdev project version before this upgrade
-     * @returns {Promise.<boolean>} install successful or error occured
+     * @param {string} [repoName] optional initial project name
+     * @param {string} [versionBeforeUpgrade] original project version for retirement gating
+     * @returns {Promise.<object | false>} approved package and dependency installation plan
      */
-    function installDependencies(repoName?: string, versionBeforeUpgrade?: string): Promise<boolean>;
+    function preflightDependencies(repoName?: string, versionBeforeUpgrade?: string): Promise<object | false>;
     /**
-     * ensure we have certain default values in our config
+     * Apply an approved package migration and install package-derived defaults.
      *
-     * @param {object} [currentContent] what was read from existing package.json file
-     * @returns {Promise.<{script: object, author: string, license: string}>} extended currentContent
+     * @param {string} [repoName] initial project name
+     * @param {string} [versionBeforeUpgrade] original pre-v10 project version, retained for migration retries
+     * @param {object} [prepared] preflight result from the orchestrator
+     * @returns {Promise.<boolean>} whether installation succeeded
      */
-    function _getDefaultPackageJson(currentContent?: object): Promise<{
-        script: object;
-        author: string;
-        license: string;
-    }>;
+    function installDependencies(repoName?: string, versionBeforeUpgrade?: string, prepared?: object): Promise<boolean>;
+    /**
+     * Apply owned defaults while retaining unrelated project settings.
+     *
+     * @param {object} currentContent existing package contents
+     * @returns {object} updated package contents
+     */
+    function _getDefaultPackageJson(currentContent: object): object;
 }
 //# sourceMappingURL=init.npm.d.ts.map

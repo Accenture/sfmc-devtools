@@ -247,9 +247,7 @@ export function mockSetup(isDeploy) {
         'boilerplate/gitignore-template': fsmock.load(
             path.resolve(__dirname, '../boilerplate/gitignore-template')
         ),
-        'boilerplate/files/.prettierrc': fsmock.load(
-            path.resolve(__dirname, '../boilerplate/files/.prettierrc')
-        ),
+        'boilerplate/files': fsmock.load(path.resolve(__dirname, '../boilerplate/files')),
         'boilerplate/forcedUpdates.json': fsmock.load(
             path.resolve(__dirname, '../boilerplate/forcedUpdates.json')
         ),
@@ -405,9 +403,9 @@ export function getSoapCallouts(requestAction, objectType, expectNone = false) {
         // find soap requestst of the correct request type
         .filter((item) =>
             !objectType || item.data.includes('<ObjectType')
-                ? item.data.split('<ObjectType>')[1].split('</ObjectType>')[0] === objectType
+                ? item.data.split('<ObjectType>', 2)[1].split('</ObjectType>', 1)[0] === objectType
                 : item.data.includes('<Objects xsi:type="')
-                  ? item.data.split('<Objects xsi:type="')[1].split('">')[0] === objectType
+                  ? item.data.split('<Objects xsi:type="', 2)[1].split('">', 1)[0] === objectType
                   : false
         )
         .map((item) => item.data);

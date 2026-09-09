@@ -120,7 +120,7 @@ describe('type: mobilePushApp', () => {
             assert.equal(process.exitCode, 0, 'getFilesToCommit should not have thrown an error');
             assert.equal(fileList.length, 1, 'expected only 1 file to be returned');
             assert.equal(
-                fileList[0].split('\\').join('/'),
+                fileList[0].replaceAll('\\', '/'),
                 'retrieve/testInstance/testBU/mobilePushApp/ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA.mobilePushApp-meta.json',
                 'wrong file path returned'
             );

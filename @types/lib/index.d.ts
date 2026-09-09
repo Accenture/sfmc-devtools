@@ -1,23 +1,3 @@
-export default Mcdev;
-export type BuObject = import("../types/mcdev.d.js").BuObject;
-export type CodeExtract = import("../types/mcdev.d.js").CodeExtract;
-export type CodeExtractItem = import("../types/mcdev.d.js").CodeExtractItem;
-export type DeltaPkgItem = import("../types/mcdev.d.js").DeltaPkgItem;
-export type Mcdevrc = import("../types/mcdev.d.js").Mcdevrc;
-export type MetadataTypeItem = import("../types/mcdev.d.js").MetadataTypeItem;
-export type MetadataTypeItemDiff = import("../types/mcdev.d.js").MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import("../types/mcdev.d.js").MetadataTypeItemObj;
-export type MetadataTypeMap = import("../types/mcdev.d.js").MetadataTypeMap;
-export type MetadataTypeMapObj = import("../types/mcdev.d.js").MetadataTypeMapObj;
-export type MultiMetadataTypeList = import("../types/mcdev.d.js").MultiMetadataTypeList;
-export type MultiMetadataTypeMap = import("../types/mcdev.d.js").MultiMetadataTypeMap;
-export type SkipInteraction = import("../types/mcdev.d.js").SkipInteraction;
-export type SoapRequestParams = import("../types/mcdev.d.js").SoapRequestParams;
-export type TemplateMap = import("../types/mcdev.d.js").TemplateMap;
-export type TypeKeyCombo = import("../types/mcdev.d.js").TypeKeyCombo;
-export type ExplainType = import("../types/mcdev.d.js").ExplainType;
-export type ContentBlockConversionTypes = import("../types/mcdev.d.js").ContentBlockConversionTypes;
-export type BuildFilter = import("../types/mcdev.d.js").BuildFilter;
 /**
  * @typedef {import('../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -42,7 +22,7 @@ export type BuildFilter = import("../types/mcdev.d.js").BuildFilter;
 /**
  * main class
  */
-declare class Mcdev {
+export default class Mcdev {
     /**
      * @returns {string} current version of mcdev
      */
@@ -497,4 +477,23 @@ declare class Mcdev {
      */
     static metadataToTypeKey(metadataOption: string | string[] | undefined, allowedIdentifiers?: string[], firstOnly?: boolean): TypeKeyCombo;
 }
+export type BuObject = import("../types/mcdev.d.js").BuObject;
+export type CodeExtract = import("../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../types/mcdev.d.js").CodeExtractItem;
+export type DeltaPkgItem = import("../types/mcdev.d.js").DeltaPkgItem;
+export type Mcdevrc = import("../types/mcdev.d.js").Mcdevrc;
+export type MetadataTypeItem = import("../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../types/mcdev.d.js").MetadataTypeMapObj;
+export type MultiMetadataTypeList = import("../types/mcdev.d.js").MultiMetadataTypeList;
+export type MultiMetadataTypeMap = import("../types/mcdev.d.js").MultiMetadataTypeMap;
+export type SkipInteraction = import("../types/mcdev.d.js").SkipInteraction;
+export type SoapRequestParams = import("../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../types/mcdev.d.js").TemplateMap;
+export type TypeKeyCombo = import("../types/mcdev.d.js").TypeKeyCombo;
+export type ExplainType = import("../types/mcdev.d.js").ExplainType;
+export type ContentBlockConversionTypes = import("../types/mcdev.d.js").ContentBlockConversionTypes;
+export type BuildFilter = import("../types/mcdev.d.js").BuildFilter;
 //# sourceMappingURL=index.d.ts.map

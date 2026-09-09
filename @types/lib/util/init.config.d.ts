@@ -29,9 +29,39 @@ declare namespace Init {
      * handles creation/update of all config file from the boilerplate
      *
      * @param {string} versionBeforeUpgrade 'x.y.z'
+     * @param {object} [prepared] approved preflight result
      * @returns {Promise.<boolean>} status of config file creation
      */
-    function createIdeConfigFiles(versionBeforeUpgrade: string): Promise<boolean>;
+    function createIdeConfigFiles(versionBeforeUpgrade: string, prepared?: object): Promise<boolean>;
+    /**
+     * Require real interactive consent; automation flags never approve tooling overrides.
+     *
+     * @param {string} message description of the required changes
+     * @returns {Promise.<boolean>} explicit approval, or false when declined/unattended
+     */
+    function confirmToolingReplacement(message: string): Promise<boolean>;
+    /**
+     * Prompt for a configuration selection independently of automation options.
+     *
+     * @param {string} message selection to present
+     * @param {boolean} [defaultValue] initial selection
+     * @returns {Promise.<boolean>} user's selection
+     */
+    function promptConfirmation(message: string, defaultValue?: boolean): Promise<boolean>;
+    /**
+     * Inspect all destinations and backups before any coupled tooling mutation.
+     *
+     * @param {string} versionBeforeUpgrade prior project version
+     * @returns {Promise.<object | false>} approved writes and retirements, or false
+     */
+    function preflightIdeConfigFiles(versionBeforeUpgrade: string): Promise<object | false>;
+    /**
+     * Check entry occupancy without following links or hiding access errors.
+     *
+     * @param {string} fileName destination or backup path
+     * @returns {Promise.<boolean>} whether the directory entry exists
+     */
+    function _hasDirectoryEntry(fileName: string): Promise<boolean>;
     /**
      * recursive helper for {@link Init.fixMcdevConfig} that adds missing settings
      *
@@ -45,24 +75,13 @@ declare namespace Init {
      * returns list of files that need to be updated
      *
      * @param {string} projectVersion version found in config file of the current project
+     * @param {object[]} [migrations] metadata already loaded by the coupled preflight
      * @returns {Promise.<{updates:string[],deletes:string[]}>} relevant files with path that need to be updated
      */
-    function _getForcedUpdateList(projectVersion: string): Promise<{
+    function _getForcedUpdateList(projectVersion: string, migrations?: object[]): Promise<{
         updates: string[];
         deletes: string[];
     }>;
-    /**
-     * handles creation/update of one config file from the boilerplate at a time
-     *
-     * @param {string[]} fileNameArr 0: path, 1: filename, 2: extension with dot
-     * @param {{updates:string[],deletes:string[]}} relevantForced if fileNameArr is in this list we require an override
-     * @param {string} [boilerplateFileContent] in case we cannot copy files 1:1 this can be used to pass in content
-     * @returns {Promise.<boolean>} install successful or error occured
-     */
-    function _createIdeConfigFile(fileNameArr: string[], relevantForced: {
-        updates: string[];
-        deletes: string[];
-    }, boilerplateFileContent?: string): Promise<boolean>;
     /**
      * handles deletion of no longer needed config files
      *

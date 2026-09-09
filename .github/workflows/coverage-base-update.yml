@@ -18,6 +18,10 @@ jobs:
                   ref: ${{ github.event.pull_request.head.sha }}
                   fetch-depth: 1000
 
+            - uses: actions/setup-node@v6
+              with:
+                  node-version: '24'
+
             - name: Prepare for Report Coverage (without nyc run)
               run: |
                   npm i svelte-to-html@1.0.9
