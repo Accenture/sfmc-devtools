@@ -536,9 +536,9 @@ describe('type: mobilePush', () => {
                     cache.initCache({ mid: 9999999, eid: 1111111 });
                     cache.setMetadata('mobilePush', {
                         cachedOne: { id: 'cachedOne', name: deployedName },
-                        ...(cachedCount === 2
-                            ? { cachedTwo: { id: 'cachedTwo', name: deployedName } }
-                            : {}),
+                        ...(cachedCount === 2 && {
+                            cachedTwo: { id: 'cachedTwo', name: deployedName },
+                        }),
                     });
                     assert.equal(
                         MobilePush.getCacheMatchedByName({ id: 'sourceId', name: deployedName }),
@@ -658,7 +658,7 @@ describe('type: mobilePush', () => {
             assert.equal(process.exitCode, 0, 'getFilesToCommit should not have thrown an error');
             assert.equal(fileList.length, 1, 'expected only 1 file to be returned');
             assert.equal(
-                fileList[0].split('\\').join('/'),
+                fileList[0].replaceAll('\\', '/'),
                 'retrieve/testInstance/testBU/mobilePush/MTk6MTE0OjA.mobilePush-meta.json',
                 'wrong file path returned'
             );

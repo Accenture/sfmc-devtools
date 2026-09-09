@@ -404,12 +404,12 @@ describe('type: dataExtension', () => {
             assert.equal(fileList.length, 2, 'expected only 2 file paths (json, md)');
 
             assert.equal(
-                fileList[0].split('\\').join('/'),
+                fileList[0].replaceAll('\\', '/'),
                 'retrieve/testInstance/testBU/dataExtension/testExisting_dataExtension.dataExtension-meta.json',
                 'wrong JSON path'
             );
             assert.equal(
-                fileList[1].split('\\').join('/'),
+                fileList[1].replaceAll('\\', '/'),
                 'retrieve/testInstance/testBU/dataExtension/testExisting_dataExtension.dataExtension-doc.md',
                 'wrong MD path'
             );

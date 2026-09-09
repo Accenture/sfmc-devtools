@@ -402,7 +402,7 @@ async function handleAssetReadEngine(config, urlObj) {
             // request asks for at least one of the listed types.
             if (
                 Array.isArray(entry.queryOnlyWhenTypes) &&
-                !entry.queryOnlyWhenTypes.some((t) => requested.includes(Number(t)))
+                entry.queryOnlyWhenTypes.every((t) => !requested.includes(Number(t)))
             ) {
                 continue;
             }
@@ -445,7 +445,7 @@ async function handleAssetReadEngine(config, urlObj) {
         if (/\/asset\/v1\/content\/assets\/?$/.test(urlObj.pathname)) {
             const rawFilter = urlObj.searchParams.get('$filter');
             if (rawFilter) {
-                const [property, , value] = rawFilter.split(' ');
+                const [property, , value] = rawFilter.split(' ', 3);
                 if (property === 'customerKey' && value) {
                     const pool = await loadAssetPool();
                     const items = [];
@@ -593,7 +593,7 @@ export const handleRESTRequest = async (config) => {
         let filterName;
         let filterBody;
         if (urlObj.searchParams.get('$filter')) {
-            filterName = urlObj.searchParams.get('$filter').split(' eq ')[1];
+            filterName = urlObj.searchParams.get('$filter').split(' eq ', 2)[1];
         } else if (urlObj.searchParams.get('action')) {
             filterName = urlObj.searchParams.get('action');
         } else if (urlObj.searchParams.get('mostRecentVersionOnly')) {

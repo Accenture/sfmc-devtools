@@ -548,9 +548,9 @@ describe('type: mobileMessage', () => {
                     cache.initCache({ mid: 9999999, eid: 1111111 });
                     cache.setMetadata('mobileMessage', {
                         cachedOne: { id: 'cachedOne', name: deployedName },
-                        ...(cachedCount === 2
-                            ? { cachedTwo: { id: 'cachedTwo', name: deployedName } }
-                            : {}),
+                        ...(cachedCount === 2 && {
+                            cachedTwo: { id: 'cachedTwo', name: deployedName },
+                        }),
                     });
                     assert.equal(
                         MobileMessage.getCacheMatchedByName({
@@ -649,12 +649,12 @@ describe('type: mobileMessage', () => {
             assert.equal(fileList.length, 2, 'expected only 2 file paths');
 
             assert.equal(
-                fileList[0].split('\\').join('/'),
+                fileList[0].replaceAll('\\', '/'),
                 'retrieve/testInstance/testBU/mobileMessage/NTIzOjc4OjA.mobileMessage-meta.json',
                 'wrong JSON path'
             );
             assert.equal(
-                fileList[1].split('\\').join('/'),
+                fileList[1].replaceAll('\\', '/'),
                 'retrieve/testInstance/testBU/mobileMessage/NTIzOjc4OjA.mobileMessage-meta.amp',
                 'wrong AMP path'
             );

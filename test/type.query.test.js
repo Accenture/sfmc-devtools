@@ -961,12 +961,12 @@ describe('type: query', () => {
             assert.equal(fileList.length, 2, 'expected only 2 file paths');
 
             assert.equal(
-                fileList[0].split('\\').join('/'),
+                fileList[0].replaceAll('\\', '/'),
                 'retrieve/testInstance/testBU/query/testExisting_query.query-meta.json',
                 'wrong JSON path'
             );
             assert.equal(
-                fileList[1].split('\\').join('/'),
+                fileList[1].replaceAll('\\', '/'),
                 'retrieve/testInstance/testBU/query/testExisting_query.query-meta.sql',
                 'wrong JSON path'
             );

@@ -23,6 +23,29 @@ const originalSave = File.saveConfigFile;
 const originalSkip = Util.skipInteraction;
 const originalOptions = Util.OPTIONS;
 const manifestPath = path.resolve(originalCwd, 'boilerplate/npm-dependencies.json');
+const unicornVersion = File.readJsonSync(path.resolve(import.meta.dirname, '../package.json'))
+    .devDependencies['eslint-plugin-unicorn'];
+assert.match(unicornVersion, /^\d+\.\d+\.\d+$/);
+const unicornMajor = Number(unicornVersion.split('.', 1)[0]);
+assert.ok(unicornMajor > 0);
+const olderUnicorn = `${unicornMajor - 1}.0.0`;
+const newerUnicorn = `${unicornMajor + 1}.0.0`;
+const unicornCases = [
+    ...['', '^', '~'].flatMap((prefix) => [
+        [`${prefix}${olderUnicorn}`, unicornVersion],
+        [`${prefix}${unicornVersion}`, `${prefix}${unicornVersion}`],
+        [`${prefix}${newerUnicorn}`, `${prefix}${newerUnicorn}`],
+    ]),
+    ...[
+        'file:../custom',
+        'git+https://example.com/tool.git#main',
+        'npm:custom-unicorn@1.0.0',
+        'next',
+        `>=${unicornMajor - 1} <${unicornMajor + 2}`,
+        `${unicornMajor - 1} || ${unicornMajor}`,
+        '*',
+    ].map((spec) => [spec, spec]),
+];
 let temporary;
 let approvals;
 let commands;
@@ -104,7 +127,7 @@ describe('INIT TOOLING', function () {
         }
     });
 
-    it('installs package-derived array defaults including Unicorn64 and repeats without prompts', async () => {
+    it('installs package-derived array defaults including Unicorn and repeats without prompts', async () => {
         assert.equal(await Init.upgradeProject(null, true), true);
         const manifest = await File.readJSON(manifestPath);
         assert.ok(Array.isArray(manifest));
@@ -117,7 +140,7 @@ describe('INIT TOOLING', function () {
                     'latest'
             );
         }
-        assert.equal(pkg.devDependencies['eslint-plugin-unicorn'], '64.0.0');
+        assert.equal(pkg.devDependencies['eslint-plugin-unicorn'], unicornVersion);
         assert.equal(pkg.scripts.lint, 'eslint .');
         assert.equal(pkg.scripts['lint:fix'], 'eslint . --fix');
         assert.equal(pkg.scripts.format, 'prettier . --write');
@@ -391,8 +414,8 @@ describe('INIT TOOLING', function () {
 
     it('evaluates differing duplicate dependency declarations independently without relocation', async () => {
         for (const [production, development, expectedProduction, expectedDevelopment] of [
-            ['^63.0.0', 'file:../custom', '64.0.0', 'file:../custom'],
-            ['^65.0.0', '~63.0.0', '^65.0.0', '64.0.0'],
+            [`^${olderUnicorn}`, 'file:../custom', unicornVersion, 'file:../custom'],
+            [`^${newerUnicorn}`, `~${olderUnicorn}`, `^${newerUnicorn}`, unicornVersion],
             ['file:../production', 'next', 'file:../production', 'next'],
         ]) {
             await File.writeJSON('package.json', {
@@ -557,24 +580,7 @@ describe('INIT TOOLING', function () {
     });
 
     for (const section of ['dependencies', 'devDependencies']) {
-        for (const spec of [
-            '63.0.0',
-            '^63.0.0',
-            '~63.0.0',
-            '64.0.0',
-            '^64.0.0',
-            '~64.0.0',
-            '65.0.0',
-            '^65.0.0',
-            '~65.0.0',
-            'file:../custom',
-            'git+https://example.com/tool.git#main',
-            'npm:custom-unicorn@1.0.0',
-            'next',
-            '>=63 <66',
-            '63 || 64',
-            '*',
-        ]) {
+        for (const [spec, expected] of unicornCases) {
             // Exercise each declaration independently, including its second installation.
 
             it(`preserves chosen ${section} spec ${spec} unless demonstrably older`, async () => {
@@ -582,7 +588,6 @@ describe('INIT TOOLING', function () {
                     [section]: { 'eslint-plugin-unicorn': spec },
                 });
                 assert.equal(await InitNpm.installDependencies(), true);
-                const expected = ['63.0.0', '^63.0.0', '~63.0.0'].includes(spec) ? '64.0.0' : spec;
                 const pkg = await File.readJSON('package.json');
                 assert.equal(pkg[section]['eslint-plugin-unicorn'], expected);
                 const other = section === 'dependencies' ? 'devDependencies' : 'dependencies';

@@ -89,11 +89,13 @@ describe('GENERATED TOOLING SMOKE', function () {
                 );
             }
         }
-        assert.equal(Util.packageJsonMcdev.devDependencies['eslint-plugin-unicorn'], '64.0.0');
+        const manifest = await readJson(path.join(repository, 'package.json'));
+        const expectedUnicorn = manifest.devDependencies['eslint-plugin-unicorn'];
+        assert.match(expectedUnicorn, /^\d+\.\d+\.\d+$/);
         const unicorn = await readJson(
             path.join(project, 'node_modules/eslint-plugin-unicorn/package.json')
         );
-        assert.equal(unicorn.version, '64.0.0');
+        assert.equal(unicorn.version, expectedUnicorn);
         const plugin = await readJson(
             path.join(project, 'node_modules/eslint-plugin-sfmc/package.json')
         );
@@ -184,7 +186,7 @@ describe('GENERATED TOOLING SMOKE', function () {
                 result.messages.some(({ ruleId }) => ruleId === 'sfmc/ssjs-no-unavailable-method'),
                 filename
             );
-            assert.ok(!result.messages.some(({ ruleId }) => ruleId?.startsWith('unicorn/')));
+            assert.ok(result.messages.every(({ ruleId }) => !ruleId?.startsWith('unicorn/')));
             const fixes = result.messages.flatMap((message) => (message.fix ? [message.fix] : []));
             const suggestions = result.messages.flatMap((message) => message.suggestions || []);
             // SFMC 5's HTML processor suppresses edits instead of returning unsafe virtual ranges.
@@ -197,8 +199,8 @@ describe('GENERATED TOOLING SMOKE', function () {
                 const [checked] = await eslint.lintText(edited, { filePath: filename });
                 assert.equal(checked.fatalErrorCount, 0, filename);
                 assert.ok(
-                    !checked.messages.some(
-                        ({ ruleId }) => ruleId === 'sfmc/ssjs-no-unsupported-syntax'
+                    checked.messages.every(
+                        ({ ruleId }) => ruleId !== 'sfmc/ssjs-no-unsupported-syntax'
                     ),
                     filename
                 );

@@ -27,7 +27,7 @@ describe('UTIL', () => {
             const result = Util.getGrayMsg('x');
             // THEN
             assert.equal(result, 'x', 'should return the unmodified message');
-            assert.isFalse(result.includes('\u001B'), 'should not contain any ANSI escape codes');
+            assert.isFalse(result.includes('\u{1B}'), 'should not contain any ANSI escape codes');
         });
 
         it('should wrap the message in dim/reset ANSI codes when noLogColors is false', () => {
@@ -36,8 +36,8 @@ describe('UTIL', () => {
             // WHEN
             const result = Util.getGrayMsg('x');
             // THEN
-            assert.include(result, '\u001B[2m', 'should contain the dim ANSI code');
-            assert.include(result, '\u001B[0m', 'should contain the reset ANSI code');
+            assert.include(result, '\u{1B}[2m', 'should contain the dim ANSI code');
+            assert.include(result, '\u{1B}[0m', 'should contain the reset ANSI code');
             assert.include(result, 'x', 'should still contain the original message');
         });
     });

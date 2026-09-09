@@ -206,7 +206,7 @@ describe('FORMATTER', () => {
 
         assert.equal(result, source);
         assert.include(errorLog, 'Parser: babel');
-        assert.notInclude(errorLog, '\u001B');
+        assert.notInclude(errorLog, '\u{1B}');
     });
 
     it('formats TransactionalSMS AMPscript without prior explicit initialization', async () => {

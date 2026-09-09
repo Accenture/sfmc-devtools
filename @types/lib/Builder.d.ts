@@ -1,16 +1,3 @@
-export default Builder;
-export type BuObject = import("../types/mcdev.d.js").BuObject;
-export type CodeExtract = import("../types/mcdev.d.js").CodeExtract;
-export type CodeExtractItem = import("../types/mcdev.d.js").CodeExtractItem;
-export type Mcdevrc = import("../types/mcdev.d.js").Mcdevrc;
-export type MetadataTypeItem = import("../types/mcdev.d.js").MetadataTypeItem;
-export type MetadataTypeItemDiff = import("../types/mcdev.d.js").MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import("../types/mcdev.d.js").MetadataTypeItemObj;
-export type MetadataTypeMap = import("../types/mcdev.d.js").MetadataTypeMap;
-export type MetadataTypeMapObj = import("../types/mcdev.d.js").MetadataTypeMapObj;
-export type MultiMetadataTypeList = import("../types/mcdev.d.js").MultiMetadataTypeList;
-export type SoapRequestParams = import("../types/mcdev.d.js").SoapRequestParams;
-export type TemplateMap = import("../types/mcdev.d.js").TemplateMap;
 /**
  * @typedef {import('../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -28,7 +15,7 @@ export type TemplateMap = import("../types/mcdev.d.js").TemplateMap;
 /**
  * Builds metadata from a template using market specific customisation
  */
-declare class Builder {
+export default class Builder {
     /**
      * Build a template based on a list of metadata files in the retrieve folder.
      *
@@ -108,4 +95,16 @@ saved
      */
     _buildTemplate(metadataType: string, keyArr: string[], templateVariables: TemplateMap): Promise<MultiMetadataTypeList>;
 }
+export type BuObject = import("../types/mcdev.d.js").BuObject;
+export type CodeExtract = import("../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../types/mcdev.d.js").CodeExtractItem;
+export type Mcdevrc = import("../types/mcdev.d.js").Mcdevrc;
+export type MetadataTypeItem = import("../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../types/mcdev.d.js").MetadataTypeMapObj;
+export type MultiMetadataTypeList = import("../types/mcdev.d.js").MultiMetadataTypeList;
+export type SoapRequestParams = import("../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../types/mcdev.d.js").TemplateMap;
 //# sourceMappingURL=Builder.d.ts.map
