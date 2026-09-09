@@ -1,6 +1,6 @@
 # Custom tests for mcdev
 #
-name: "Code Testing"
+name: 'Code Testing'
 
 on:
     push:
@@ -15,7 +15,8 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                node: [22, 24, 25]
+                # Exercise both exact supported floors and the current Node 25 patch.
+                node: ['22.22.2', '24.15.0', '25']
         name: lint & test w/ node v${{ matrix.node }}
         permissions:
             actions: read

@@ -247,9 +247,7 @@ export function mockSetup(isDeploy) {
         'boilerplate/gitignore-template': fsmock.load(
             path.resolve(__dirname, '../boilerplate/gitignore-template')
         ),
-        'boilerplate/files/.prettierrc': fsmock.load(
-            path.resolve(__dirname, '../boilerplate/files/.prettierrc')
-        ),
+        'boilerplate/files': fsmock.load(path.resolve(__dirname, '../boilerplate/files')),
         'boilerplate/forcedUpdates.json': fsmock.load(
             path.resolve(__dirname, '../boilerplate/forcedUpdates.json')
         ),

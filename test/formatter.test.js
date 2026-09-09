@@ -20,12 +20,18 @@ const DEFAULT_PROPERTIES = {
 };
 
 describe('FORMATTER', () => {
+    let confirmToolingReplacementOriginal;
+
     beforeEach(() => {
+        confirmToolingReplacementOriginal = InitConfig.confirmToolingReplacement;
         testUtils.mockSetup();
+        // These migration cases exercise post-approval outcomes; consent is covered separately.
+        InitConfig.confirmToolingReplacement = async () => true;
         config.properties = structuredClone(DEFAULT_PROPERTIES);
     });
 
     afterEach(() => {
+        InitConfig.confirmToolingReplacement = confirmToolingReplacementOriginal;
         testUtils.mockReset();
         config.properties = null;
     });
@@ -331,14 +337,13 @@ describe('FORMATTER', () => {
         let installAttempt = 0;
         Init._checkPathForCloud = async () => true;
         Util.execSync = (command, args) => {
-            if (command === 'npm' && args[0] === 'uninstall') {
-                const packageJson = File.readJSONSync('package.json');
-                dependencyVersions.push(properties.version);
-                delete packageJson.devDependencies['prettier-plugin-sql'];
-                File.writeJSONSync('package.json', packageJson, { spaces: 2 });
-                return '';
-            }
+            assert.equal(command, 'npm');
+            assert.deepEqual(args, ['install']);
             if (command === 'npm' && args[0] === 'install') {
+                dependencyVersions.push(properties.version);
+                expect(File.readJSONSync('package.json').devDependencies).not.to.have.property(
+                    'prettier-plugin-sql'
+                );
                 installAttempt++;
                 return installAttempt === 1 ? null : '';
             }
@@ -361,7 +366,7 @@ describe('FORMATTER', () => {
             Util.execSync = execSyncOriginal;
         }
 
-        assert.deepEqual(dependencyVersions, ['9.0.3']);
+        assert.deepEqual(dependencyVersions, ['9.0.3', '9.0.3']);
         expect(await File.pathExists('.beautyamp.json')).to.equal(false);
         expect(await File.pathExists('.beautyamp.json.BAK')).to.equal(true);
         assert.equal(
@@ -415,7 +420,7 @@ describe('FORMATTER', () => {
         );
     });
 
-    it('removes the legacy SQL formatter only during the 10.0.0 dependency upgrade', async () => {
+    it('removes the legacy SQL formatter during an approved dependency upgrade', async () => {
         const packageJson = {
             name: 'legacy-project',
             devDependencies: {
@@ -428,10 +433,9 @@ describe('FORMATTER', () => {
         const calls = [];
         Util.execSync = (command, args) => {
             calls.push([command, args]);
-            if (args[0] === 'uninstall') {
-                delete packageJson.devDependencies['prettier-plugin-sql'];
-                File.writeJSONSync('package.json', packageJson, { spaces: 2 });
-            }
+            expect(File.readJSONSync('package.json').devDependencies).not.to.have.property(
+                'prettier-plugin-sql'
+            );
             return '';
         };
 
@@ -447,7 +451,7 @@ describe('FORMATTER', () => {
             'prettier-plugin-sfmc',
             '2.0.0'
         );
-        assert.deepInclude(calls, ['npm', ['uninstall', '--save-dev', 'prettier-plugin-sql']]);
+        assert.deepEqual(calls, [['npm', ['install']]]);
     });
 
     it('fails dependency upgrade when install fails after removing the legacy SQL formatter', async () => {
@@ -466,11 +470,9 @@ describe('FORMATTER', () => {
         const errorLogs = [];
         Util.execSync = (command, args, hideOutput) => {
             calls.push([command, args, hideOutput]);
-            if (args[0] === 'uninstall') {
-                delete packageJson.devDependencies['prettier-plugin-sql'];
-                File.writeJSONSync('package.json', packageJson, { spaces: 2 });
-                return '';
-            }
+            expect(File.readJSONSync('package.json').devDependencies).not.to.have.property(
+                'prettier-plugin-sql'
+            );
             return null;
         };
         Util.logger.info = /** @type {typeof Util.logger.info} */ (
@@ -494,17 +496,15 @@ describe('FORMATTER', () => {
 
         const updatedPackageJson = await File.readJSON('package.json');
         expect(updatedPackageJson.devDependencies).not.to.have.property('prettier-plugin-sql');
-        assert.deepEqual(calls[0], [
-            'npm',
-            ['uninstall', '--save-dev', 'prettier-plugin-sql'],
-            true,
-        ]);
-        assert.equal(calls[1][0], 'npm');
-        assert.deepEqual(calls[1][1].slice(0, 2), ['install', '--save-dev']);
-        expect(calls[1][1]).to.include('prettier-plugin-sfmc@2.0.0');
-        expect(calls[1][2]).to.equal(true);
+        assert.deepEqual(calls, [['npm', ['install'], true]]);
+        expect(updatedPackageJson.devDependencies).to.have.property(
+            'prettier-plugin-sfmc',
+            '2.0.0'
+        );
         expect(infoLogs).not.to.include('✔️  Dependencies installed.');
-        expect(errorLogs).to.include('Could not install/update dependencies.');
+        expect(errorLogs).to.include(
+            'Could not install/update dependencies. Migration incomplete.'
+        );
     });
 
     it('declares the TransactionalSMS formatter helper in the public File types', () => {

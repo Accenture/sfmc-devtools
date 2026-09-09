@@ -38,10 +38,8 @@
         "source.fixAll.eslint": "explicit"
     },
     "editor.formatOnSave": true,
-    "files.associations": {
-        "*.ssjs": "javascript",
-        "*.html": "ampscript"
-    },
+    "prettier.requireConfig": true,
+    "files.associations": {},
     "files.eol": "\n",
     "files.exclude": {
         "node_modules": true
@@ -65,7 +63,13 @@
     "[markdown]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "[AMPscript]": {
+    "[ssjs]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[sfmc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[ampscript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "vsicons.associations.files": [
