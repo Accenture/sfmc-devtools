@@ -286,7 +286,9 @@ describe('type: automation', () => {
         });
     });
 
-    describe('FixKeys ================', () => {
+    describe('FixKeys ================', function () {
+        this.timeout(testUtils.IO_INTEGRATION_TIMEOUT);
+
         beforeEach(() => {
             testUtils.mockSetup(true);
         });
@@ -589,7 +591,9 @@ describe('type: automation', () => {
         });
     });
 
-    describe('Templating ================', () => {
+    describe('Templating ================', function () {
+        this.timeout(testUtils.IO_INTEGRATION_TIMEOUT);
+
         it('Should create a automation template via retrieveAsTemplate and build it', async () => {
             // GIVEN there is a template
             const result = await handler.retrieveAsTemplate(
@@ -780,7 +784,9 @@ describe('type: automation', () => {
         });
     });
 
-    describe('Schedule ================', () => {
+    describe('Schedule ================', function () {
+        this.timeout(testUtils.IO_INTEGRATION_TIMEOUT);
+
         it('Should schedule an automation by key', async () => {
             const scheduled = await handler.schedule(
                 'testInstance/testBU',

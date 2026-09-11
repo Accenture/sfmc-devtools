@@ -1,6 +1,7 @@
 {
-    // Change this to match your project
-    "include": ["lib/**/*.js", "types/**/*.js", "test/**/*.js"],
+    // Emit publishable declarations only. lint-ts validates all sources and declaration consumers.
+    "include": ["lib/**/*.js", "types/**/*.js"],
+    "exclude": ["node_modules", "types/**/*.type-test.js"],
     "compilerOptions": {
         "module": "nodenext",
         "moduleResolution": "nodenext",

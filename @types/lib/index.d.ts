@@ -24,6 +24,13 @@
  */
 export default class Mcdev {
     /**
+     * Run a local BU migration without authentication, logger files, or config upgrades.
+     *
+     * @param {string} businessUnit exact configured credential/BU
+     * @returns {Promise.<object>} local migration result
+     */
+    static migrate(businessUnit: string): Promise<object>;
+    /**
      * @returns {string} current version of mcdev
      */
     static version(): string;
@@ -243,9 +250,10 @@ export default class Mcdev {
      * @param {string[]} marketDefinition market localizations
      * @param {boolean} [bulk] runs buildDefinitionBulk instead of buildDefinition; requires marketList to be defined and given via marketDefinition
      * @param {BuildFilter} [filter] market list specific filter for buildTemplate
+     * @param {Map<string, string[]>} [verifiedAssetInputs] internal key-to-verified-files selection
      * @returns {Promise.<MultiMetadataTypeList | object>} response from buildDefinition
      */
-    static build(businessUnitTemplate: string, businessUnitDefinition: string, typeKeyCombo: TypeKeyCombo, marketTemplate: string[], marketDefinition: string[], bulk?: boolean, filter?: BuildFilter): Promise<MultiMetadataTypeList | object>;
+    static build(businessUnitTemplate: string, businessUnitDefinition: string, typeKeyCombo: TypeKeyCombo, marketTemplate: string[], marketDefinition: string[], bulk?: boolean, filter?: BuildFilter, verifiedAssetInputs?: Map<string, string[]>): Promise<MultiMetadataTypeList | object>;
     /**
      * Build a template based on a list of metadata files in the retrieve folder.
      *
@@ -254,9 +262,10 @@ export default class Mcdev {
      * @param {string[] | undefined} keyArr customerkey of the metadata
      * @param {string[]} marketArr market localizations
      * @param {BuildFilter} [filter] market list specific filter
+     * @param {Map<string, string[]>} [verifiedAssetInputs] internal key-to-verified-files selection
      * @returns {Promise.<MultiMetadataTypeList>} -
      */
-    static buildTemplate(businessUnit: string, selectedTypes: string | TypeKeyCombo, keyArr: string[] | undefined, marketArr: string[], filter?: BuildFilter): Promise<MultiMetadataTypeList>;
+    static buildTemplate(businessUnit: string, selectedTypes: string | TypeKeyCombo, keyArr: string[] | undefined, marketArr: string[], filter?: BuildFilter, verifiedAssetInputs?: Map<string, string[]>): Promise<MultiMetadataTypeList>;
     /**
      * helper for {@link buildTemplate} to apply include/exclude key filters
      *
@@ -281,18 +290,20 @@ export default class Mcdev {
      * @param {string | TypeKeyCombo} selectedTypes limit retrieval to given metadata type
      * @param {string[] | undefined} nameArr name of the metadata
      * @param {string[]} marketArr market localizations
+     * @param {Map<string, object>} [bindings] invocation-local verified template owner bindings
      * @returns {Promise.<MultiMetadataTypeList>} -
      */
-    static buildDefinition(businessUnit: string, selectedTypes: string | TypeKeyCombo, nameArr: string[] | undefined, marketArr: string[]): Promise<MultiMetadataTypeList>;
+    static buildDefinition(businessUnit: string, selectedTypes: string | TypeKeyCombo, nameArr: string[] | undefined, marketArr: string[], bindings?: Map<string, object>): Promise<MultiMetadataTypeList>;
     /**
      * Build a specific metadata file based on a template using a list of bu-market combos
      *
      * @param {string} listName name of list of BU-market combos
      * @param {string | TypeKeyCombo} selectedTypes supported metadata type
      * @param {string[]} [nameArr] name of the metadata
+     * @param {Map<string, object>} [bindings] invocation-local verified template owner bindings
      * @returns {Promise.<object>} -
      */
-    static buildDefinitionBulk(listName: string, selectedTypes: string | TypeKeyCombo, nameArr?: string[]): Promise<object>;
+    static buildDefinitionBulk(listName: string, selectedTypes: string | TypeKeyCombo, nameArr?: string[], bindings?: Map<string, object>): Promise<object>;
     /**
      *
      * @param {string} businessUnit references credentials from properties.json

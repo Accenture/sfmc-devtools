@@ -16,6 +16,15 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 import fsmock from 'mock-fs';
 
+/**
+ * Bounded budget for multi-stage mocked retrieval/build/publish integration suites.
+ * Windows filesystem/formatter/dependency timing varies under suite load; a bulk
+ * build with 118 mocked requests took 12,579ms. Allow headroom for these chains.
+ * Opt in per describe; keep quick unit defaults. This is not cancellation:
+ * commands must settle before mockReset restores the FS.
+ */
+export const IO_INTEGRATION_TIMEOUT = 30_000;
+
 let apimock;
 import {
     handleSOAPRequest,

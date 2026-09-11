@@ -1,0 +1,1 @@
+{"version":3,"file":"assetSubtypeMigrationV10.d.ts","sourceRoot":"","sources":["../../../lib/util/assetSubtypeMigrationV10.js"],"names":[],"mappings":"AAOA;;;;;;;;;;;;;;;;;GAiBG;AACH,gGANG;IAAwB,OAAO,EAAvB,MAAM,EAAE;IAC8B,UAAU,EAAhD;QAAC,IAAI,EAAE,MAAM,CAAC;QAAC,MAAM,EAAE,MAAM,CAAA;KAAC;IACd,UAAU,EAA1B,MAAM,EAAE;IACM,MAAM,EAApB,MAAM;CACd,GAAU,OAAO,CAAE,MAAM,CAAC,CAyN5B"}

@@ -1,6 +1,7 @@
 import File from '../lib/util/file.js';
 
 import * as chai from 'chai';
+/** @type {typeof chai.assert} */
 const assert = chai.assert;
 const expect = chai.expect;
 
@@ -8,6 +9,7 @@ import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
+import MetadataTypeDefinitions from '../lib/MetadataTypeDefinitions.js';
 chai.use(chaiFiles);
 
 /**
@@ -17,7 +19,7 @@ chai.use(chaiFiles);
  * @param {string} type of metadata
  * @param {string} subtype of metadata
  * @param {string} [buName] used when we need to test on ParentBU
- * @returns {Promise.<string>} file in string form
+ * @returns {Promise.<import('../types/mcdev.d.js').AssetItem>} parsed asset metadata
  */
 async function getActualJson(customerKey, type, subtype, buName = 'testBU') {
     try {
@@ -149,6 +151,58 @@ describe('type: asset', () => {
         testUtils.mockReset();
     });
 
+    describe('Email grouping ================', () => {
+        it('Should rename only the grouping while retaining API types and dependency coverage', () => {
+            const definition = MetadataTypeDefinitions.asset;
+            assert.include(definition.typeRetrieveByDefault, 'email');
+            assert.notInclude(definition.typeRetrieveByDefault, 'message');
+            assert.include(definition.subTypes, 'email');
+            assert.notInclude(definition.subTypes, 'message');
+            assert.notProperty(definition.extendedSubTypes, 'message');
+            assert.deepEqual(definition.extendedSubTypes.email, [
+                'templatebasedemail',
+                'htmlemail',
+                'textonlyemail',
+                'message',
+            ]);
+            assert.equal(definition.typeMapping.message, 5);
+            assert.notInclude(definition.extendedSubTypes.email, 'jsonmessage');
+            assert.include(definition.extendedSubTypes.mobile, 'jsonmessage');
+            for (const type of ['emailSend', 'journey', 'triggeredSend', 'transactionalEmail']) {
+                assert.include(MetadataTypeDefinitions[type].dependencies, 'asset-email', type);
+                assert.notInclude(
+                    MetadataTypeDefinitions[type].dependencies,
+                    'asset-message',
+                    type
+                );
+            }
+        });
+
+        it('Should nest extracted email HTML under its current metadata filename', async () => {
+            const settings = await File.readJSON('./boilerplate/files/.vscode/settings.json');
+            const patterns = settings['explorer.fileNesting.patterns'];
+            assert.equal(patterns['*.asset-email-meta.html'], '${dirname}.asset-email-meta.json');
+            assert.notProperty(patterns, '*.asset-message-meta.html');
+        });
+
+        it('Should retrieve the email selector without changing customer keys or API asset types', async () => {
+            const retrieve = await handler.retrieve('testInstance/testBU', ['asset-email']);
+            assert.equal(process.exitCode, 0);
+            assert.property(
+                retrieve['testInstance/testBU'].asset,
+                'testExisting_asset_templatebasedemail'
+            );
+            const email = await getActualJson(
+                'testExisting_asset_templatebasedemail',
+                'asset',
+                'email'
+            );
+            assert.equal(email.customerKey, 'testExisting_asset_templatebasedemail');
+            assert.equal(email.assetType.name, 'templatebasedemail');
+            assert.isFalse(await File.pathExists('./retrieve/testInstance/testBU/asset/message'));
+        });
+    });
+
     describe('Retrieve ================', () => {
         it('Should retrieve a asset & ensure non-ssjs code is not removed', async () => {
             // WHEN
@@ -191,7 +245,7 @@ describe('type: asset', () => {
             );
 
             assert.deepEqual(
-                await getActualJson('testExisting_asset_templatebasedemail', 'asset', 'message'),
+                await getActualJson('testExisting_asset_templatebasedemail', 'asset', 'email'),
                 await testUtils.getExpectedJson('9999999', 'asset', 'retrieve-templatebasedemail'),
                 'returned metadata was not equal expected'
             );
@@ -199,7 +253,7 @@ describe('type: asset', () => {
                 await getActualFile(
                     'testExisting_asset_templatebasedemail',
                     'asset',
-                    'message',
+                    'email',
                     'html',
                     'views.html.content'
                 )
@@ -215,7 +269,7 @@ describe('type: asset', () => {
                 await getActualFile(
                     'testExisting_asset_templatebasedemail',
                     'asset',
-                    'message',
+                    'email',
                     'amp',
                     'views.preheader.content'
                 )
@@ -859,7 +913,7 @@ describe('type: asset', () => {
                 await getActualTemplateJson(
                     'testExisting_asset_templatebasedemail',
                     'asset',
-                    'message'
+                    'email'
                 ),
                 await testUtils.getExpectedJson('9999999', 'asset', 'template-templatebasedemail'),
                 'returned template JSON of buildTemplate was not equal expected'
@@ -868,7 +922,7 @@ describe('type: asset', () => {
                 await getActualTemplateFile(
                     'testExisting_asset_templatebasedemail',
                     'asset',
-                    'message',
+                    'email',
                     'html',
                     'views.html.content'
                 )
@@ -884,7 +938,7 @@ describe('type: asset', () => {
                 await getActualTemplateFile(
                     'testExisting_asset_templatebasedemail',
                     'asset',
-                    'message',
+                    'email',
                     'amp',
                     'views.preheader.content'
                 )
@@ -915,7 +969,7 @@ describe('type: asset', () => {
                 await getActualDeployJson(
                     'testTemplated_asset_templatebasedemail',
                     'asset',
-                    'message'
+                    'email'
                 ),
                 await testUtils.getExpectedJson('9999999', 'asset', 'build-templatebasedemail'),
                 'returned deployment JSON was not equal expected'
@@ -924,7 +978,7 @@ describe('type: asset', () => {
                 await getActualDeployFile(
                     'testTemplated_asset_templatebasedemail',
                     'asset',
-                    'message',
+                    'email',
                     'html',
                     'views.html.content'
                 )
@@ -940,7 +994,7 @@ describe('type: asset', () => {
                 await getActualDeployFile(
                     'testTemplated_asset_templatebasedemail',
                     'asset',
-                    'message',
+                    'email',
                     'amp',
                     'views.preheader.content'
                 )
@@ -1017,7 +1071,7 @@ describe('type: asset', () => {
                 await getActualTemplateJson(
                     'testExisting_asset_templatebasedemail',
                     'asset',
-                    'message'
+                    'email'
                 ),
                 await testUtils.getExpectedJson('9999999', 'asset', 'template-templatebasedemail'),
                 'returned template JSON of buildTemplate was not equal expected'
@@ -1027,7 +1081,7 @@ describe('type: asset', () => {
                 await getActualTemplateFile(
                     'testExisting_asset_templatebasedemail',
                     'asset',
-                    'message',
+                    'email',
                     'html',
                     'views.html.content'
                 )
@@ -1043,7 +1097,7 @@ describe('type: asset', () => {
                 await getActualTemplateFile(
                     'testExisting_asset_templatebasedemail',
                     'asset',
-                    'message',
+                    'email',
                     'amp',
                     'views.preheader.content'
                 )
@@ -1224,7 +1278,7 @@ describe('type: asset', () => {
                 await getActualFile(
                     'testExisting_asset_message',
                     'asset',
-                    'message',
+                    'email',
                     'html',
                     'views.html.content'
                 )
@@ -1240,7 +1294,7 @@ describe('type: asset', () => {
                 await getActualFile(
                     'testExisting_asset_message',
                     'asset',
-                    'message',
+                    'email',
                     'amp',
                     'views.preheader.content'
                 )
@@ -1256,7 +1310,7 @@ describe('type: asset', () => {
                 await getActualFile(
                     'testExisting_asset_message',
                     'asset',
-                    'message',
+                    'email',
                     'amp',
                     'views.text.content'
                 )
@@ -1312,7 +1366,7 @@ describe('type: asset', () => {
                 await getActualFile(
                     'testExisting_asset_message',
                     'asset',
-                    'message',
+                    'email',
                     'html',
                     'views.html.content'
                 )
@@ -1328,7 +1382,7 @@ describe('type: asset', () => {
                 await getActualFile(
                     'testExisting_asset_message',
                     'asset',
-                    'message',
+                    'email',
                     'amp',
                     'views.preheader.content'
                 )
@@ -1344,7 +1398,7 @@ describe('type: asset', () => {
                 await getActualFile(
                     'testExisting_asset_message',
                     'asset',
-                    'message',
+                    'email',
                     'amp',
                     'views.text.content'
                 )
@@ -1400,7 +1454,7 @@ describe('type: asset', () => {
                 await getActualFile(
                     'testExisting_asset_message',
                     'asset',
-                    'message',
+                    'email',
                     'html',
                     'views.html.content'
                 )
@@ -1416,7 +1470,7 @@ describe('type: asset', () => {
                 await getActualFile(
                     'testExisting_asset_message',
                     'asset',
-                    'message',
+                    'email',
                     'amp',
                     'views.preheader.content'
                 )
@@ -1432,7 +1486,7 @@ describe('type: asset', () => {
                 await getActualFile(
                     'testExisting_asset_message',
                     'asset',
-                    'message',
+                    'email',
                     'amp',
                     'views.text.content'
                 )

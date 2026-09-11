@@ -23,9 +23,10 @@ export default class Builder {
      * @param {string} selectedType supported metadata type
      * @param {string[]} keyArr customerkey of the metadata
      * @param {string[]} marketArr market localizations
+     * @param {Map<string, string[]>} [verifiedAssetInputs] internal key-to-verified-files selection
      * @returns {Promise.<MultiMetadataTypeList>} -
      */
-    static buildTemplate(businessUnit: string, selectedType: string, keyArr: string[], marketArr: string[]): Promise<MultiMetadataTypeList>;
+    static buildTemplate(businessUnit: string, selectedType: string, keyArr: string[], marketArr: string[], verifiedAssetInputs?: Map<string, string[]>): Promise<MultiMetadataTypeList>;
     /**
      * Build a specific metadata file based on a template.
      *
@@ -33,18 +34,20 @@ export default class Builder {
      * @param {string} selectedType supported metadata type
      * @param {string[]} nameArr name of the metadata
      * @param {string[]} marketArr market localizations
+     * @param {Map<string, object>} [bindings] invocation-local verified template owner bindings
      * @returns {Promise.<MultiMetadataTypeList>} -
      */
-    static buildDefinition(businessUnit: string, selectedType: string, nameArr: string[], marketArr: string[]): Promise<MultiMetadataTypeList>;
+    static buildDefinition(businessUnit: string, selectedType: string, nameArr: string[], marketArr: string[], bindings?: Map<string, object>): Promise<MultiMetadataTypeList>;
     /**
      * Build a specific metadata file based on a template using a list of bu-market combos
      *
      * @param {string} listName name of list of BU-market combos
      * @param {string} type supported metadata type
      * @param {string[]} nameArr name of the metadata
+     * @param {Map<string, object>} [bindings] invocation-local verified template owner bindings
      * @returns {Promise.<object>} -
      */
-    static buildDefinitionBulk(listName: string, type: string, nameArr: string[]): Promise<object>;
+    static buildDefinitionBulk(listName: string, type: string, nameArr: string[], bindings?: Map<string, object>): Promise<object>;
     /**
      * helper for buildDefinitionBulk, createDeltaPkg
      *
@@ -82,18 +85,20 @@ saved
      * @param {string} metadataType metadata type to build
      * @param {string[]} nameArr name of metadata to build
      * @param {TemplateMap} templateVariables variables to be replaced in the metadata
+     * @param {Map<string, object>} [bindings] invocation-local verified template owner bindings
      * @returns {Promise.<MultiMetadataTypeList>} Promise
      */
-    _buildDefinition(metadataType: string, nameArr: string[], templateVariables: TemplateMap): Promise<MultiMetadataTypeList>;
+    _buildDefinition(metadataType: string, nameArr: string[], templateVariables: TemplateMap, bindings?: Map<string, object>): Promise<MultiMetadataTypeList>;
     /**
      * Build a template based on a list of metadata files in the retrieve folder.
      *
      * @param {string} metadataType metadata type to create a template of
      * @param {string[]} keyArr customerkey of metadata to create a template of
      * @param {TemplateMap} templateVariables variables to be replaced in the metadata
+     * @param {Map<string, string[]>} [verifiedAssetInputs] internal key-to-verified-files selection
      * @returns {Promise.<MultiMetadataTypeList>} Promise
      */
-    _buildTemplate(metadataType: string, keyArr: string[], templateVariables: TemplateMap): Promise<MultiMetadataTypeList>;
+    _buildTemplate(metadataType: string, keyArr: string[], templateVariables: TemplateMap, verifiedAssetInputs?: Map<string, string[]>): Promise<MultiMetadataTypeList>;
 }
 export type BuObject = import("../types/mcdev.d.js").BuObject;
 export type CodeExtract = import("../types/mcdev.d.js").CodeExtract;

@@ -56,6 +56,33 @@ describe('GENERATED TOOLING SMOKE', function () {
         });
     });
 
+    it('separates declaration emission from full source and declaration-consumer validation', async () => {
+        const ts = (await import('typescript')).default;
+        const readConfig = (filename) => {
+            const loaded = ts.readConfigFile(path.join(repository, filename), ts.sys.readFile);
+            assert.equal(loaded.error, undefined);
+            const parsed = ts.parseJsonConfigFileContent(loaded.config, ts.sys, repository);
+            assert.deepEqual(parsed.errors, []);
+            return parsed;
+        };
+        const emit = readConfig('tsconfig.json');
+        const validate = readConfig('tsconfig.npmScripts.json');
+        const emittedFiles = new Set(emit.fileNames.map((file) => path.resolve(file)));
+        const validatedFiles = new Set(validate.fileNames.map((file) => path.resolve(file)));
+        assert.equal(emit.options.emitDeclarationOnly, true);
+        assert.equal(validate.options.noEmit, true);
+        assert.equal(emit.options.checkJs, true);
+        assert.equal(validate.options.checkJs, true);
+        for (const filename of ['lib/index.js', 'types/mcdev.d.js']) {
+            assert.ok(emittedFiles.has(path.join(repository, filename)), filename);
+            assert.ok(validatedFiles.has(path.join(repository, filename)), filename);
+        }
+        for (const filename of ['test/formatter.test.js', 'types/init-declarations.type-test.js']) {
+            assert.ok(!emittedFiles.has(path.join(repository, filename)), filename);
+            assert.ok(validatedFiles.has(path.join(repository, filename)), filename);
+        }
+    });
+
     it('initializes the real CLI and prints its version', () => {
         const result = spawnSync(
             process.execPath,

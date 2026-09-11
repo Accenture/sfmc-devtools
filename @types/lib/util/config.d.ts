@@ -27,6 +27,14 @@ declare namespace config {
      */
     function getProperties(silent?: boolean, isInit?: boolean): Promise<Mcdevrc>;
     /**
+     * Validate only operational type selectors, never asset keys or template values.
+     * Kept separate from structural checks so upgrade can repair old selectors.
+     *
+     * @param {Mcdevrc} properties project configuration
+     * @returns {boolean} whether configured selectors are supported
+     */
+    function checkOperationalSelectors(properties: Mcdevrc): boolean;
+    /**
      * check if the config file is correctly formatted and has values
      *
      * @param {Mcdevrc} properties javascript object in .mcdevrc.json

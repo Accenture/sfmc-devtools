@@ -1,0 +1,22 @@
+/**
+ * Ordered local migrations. Applicability comes from the asset layout, not config version.
+ * Keep v10 independent of the temporary delta compatibility adapter.
+ */
+export const migrationRegistry: {
+    version: string;
+    /**
+     * Load the asset planner only after local command preflight.
+     *
+     * @param {string} assetRoot selected BU asset directory
+     * @returns {Promise.<object>} complete read-only manifest
+     */
+    plan(assetRoot: string): Promise<object>;
+    /**
+     * Execute a confirmed manifest without Git mutations.
+     *
+     * @param {object} plan complete manifest
+     * @returns {Promise.<object>} move and cleanup result
+     */
+    execute(plan: object): Promise<object>;
+}[];
+//# sourceMappingURL=registry.d.ts.map

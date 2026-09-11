@@ -3,6 +3,7 @@ export type BuObject = import("../../types/mcdev.d.js").BuObject;
 export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
 export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
 export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
 export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
 export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
@@ -18,6 +19,7 @@ export type ContentBlockConversionTypes = import("../../types/mcdev.d.js").Conte
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
  * @typedef {import('../../types/mcdev.d.js').CodeExtractItem} CodeExtractItem
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeItem} MetadataTypeItem
+ * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemObj} MetadataTypeItemObj
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemDiff} MetadataTypeItemDiff
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMap} MetadataTypeMap
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
@@ -37,6 +39,29 @@ export type ContentBlockConversionTypes = import("../../types/mcdev.d.js").Conte
  * @augments MetadataType
  */
 declare class Asset extends MetadataType {
+    /**
+     * Template an asset using either normal discovery or an isolated verified input set.
+     *
+     * @param {string} retrieveDir source BU directory
+     * @param {string} templateDir output template directory
+     * @param {string} key asset customer key
+     * @param {TemplateMap} templateVariables replacement values
+     * @param {string[]} [verifiedFiles] internal preflight-approved absolute source paths
+     * @returns {Promise.<MetadataTypeItemObj>} templated asset
+     */
+    static buildTemplate(retrieveDir: string, templateDir: string, key: string, templateVariables: TemplateMap, verifiedFiles?: string[]): Promise<MetadataTypeItemObj>;
+    /**
+     * Render only the explicitly bound owner and its approved companion files.
+     *
+     * @param {string} sourceDir source root
+     * @param {string|string[]} targetDir output roots
+     * @param {string} key logical source key
+     * @param {TemplateMap} variables template values
+     * @param {string[]|object} selection verified paths or transported template binding
+     * @param {boolean} [definition] render a definition instead of a template
+     * @returns {Promise.<object>} metadata and the fresh output binding
+     */
+    static buildBoundAsset(sourceDir: string, targetDir: string | string[], key: string, variables: TemplateMap, selection: string[] | object, definition?: boolean): Promise<object>;
     /**
      * Retrieves Metadata of Asset
      *
@@ -190,7 +215,7 @@ declare class Asset extends MetadataType {
      */
     static postRetrieveTasks(metadata: AssetItem): CodeExtractItem;
     /**
-     * helper for {@link Asset.postDeployTasks}. triggers a refresh of active triggerredSendDefinitions associated with the updated asset-message items. Gets executed if refresh option has been set.
+     * helper for {@link Asset.postDeployTasks}. triggers a refresh of active triggerredSendDefinitions associated with the updated asset-email items. Gets executed if refresh option has been set.
      *
      * @private
      * @param {MetadataTypeMap} metadata metadata mapped by their keyField
@@ -944,7 +969,7 @@ declare namespace Asset {
             code: string[];
             document: string[];
             image: string[];
-            message: string[];
+            email: string[];
             mobile: string[];
             other: string[];
             rawimage: string[];

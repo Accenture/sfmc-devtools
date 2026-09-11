@@ -20,7 +20,7 @@
         "*-meta.txt": "${capture}-meta.json",
         "*-meta.xml": "${capture}-meta.json",
         "*.asset-asset-meta.html": "${dirname}.asset-asset-meta.json",
-        "*.asset-message-meta.html": "${dirname}.asset-message-meta.json",
+        "*.asset-email-meta.html": "${dirname}.asset-email-meta.json",
         "*.asset-template-meta.html": "${dirname}.asset-template-meta.json",
         "*.css": "${capture}.asset-code-meta.json",
         "*.docx": "${capture}.asset-document-meta.json",

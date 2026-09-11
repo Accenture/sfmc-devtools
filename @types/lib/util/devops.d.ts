@@ -31,6 +31,26 @@ declare namespace DevOps {
      */
     function getDeltaList(properties: Mcdevrc, range?: string, saveToDeployDir?: boolean, filterPathsCSV?: string, commitHistory?: number): Promise<DeltaPkgItem[]>;
     /**
+     * Resolve source filters and verify selected inputs without producing output.
+     *
+     * @param {Mcdevrc} properties configuration
+     * @param {string} range exact user comparison
+     * @param {string} filterPathsCSV source filters
+     * @param {number} commitHistory interactive history limit
+     * @returns {Promise.<object>} analyzed delta and verified manifest
+     */
+    function _prepareDelta(properties: Mcdevrc, range: string, filterPathsCSV: string, commitHistory: number): Promise<object>;
+    /**
+     * Publish an already verified delta and optionally copy its selected inputs.
+     *
+     * @param {Mcdevrc} properties configuration
+     * @param {object} prepared read-only preparation result
+     * @param {boolean} saveToDeployDir copy mode
+     * @param {string} filterPathsCSV report suffix
+     * @returns {Promise.<DeltaPkgItem[]>} public delta records
+     */
+    function _publishDelta(properties: Mcdevrc, prepared: object, saveToDeployDir: boolean, filterPathsCSV?: string): Promise<DeltaPkgItem[]>;
+    /**
      * wrapper around DevOps.getDeltaList, Builder.buildTemplate and M
      *
      * @param {Mcdevrc} properties project config file

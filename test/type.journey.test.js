@@ -1319,7 +1319,9 @@ describe('type: journey', () => {
         }
     });
 
-    describe('Templating ================', () => {
+    describe('Templating ================', function () {
+        this.timeout(testUtils.IO_INTEGRATION_TIMEOUT);
+
         it('Should create a journey template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['journey']);
@@ -1631,7 +1633,9 @@ describe('type: journey', () => {
         });
     });
 
-    describe('Publish ================', () => {
+    describe('Publish ================', function () {
+        this.timeout(testUtils.IO_INTEGRATION_TIMEOUT);
+
         it(`Should not publish a transactional journey by key that is already published but instead trigger a refresh`, async () => {
             handler.setOptions({ skipStatusCheck: true });
             // WHEN

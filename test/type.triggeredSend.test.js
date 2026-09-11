@@ -82,7 +82,9 @@ describe('type: triggeredSend', () => {
         });
     });
 
-    describe('Templating ================', () => {
+    describe('Templating ================', function () {
+        this.timeout(testUtils.IO_INTEGRATION_TIMEOUT);
+
         it('Should create a triggeredSend template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['triggeredSend']);

@@ -8,7 +8,8 @@ import handler from '../lib/index.js';
 chai.use(chaiFiles);
 
 describe('GENERAL', () => {
-    beforeEach(() => {
+    beforeEach(function () {
+        this.timeout(testUtils.IO_INTEGRATION_TIMEOUT);
         testUtils.mockSetup();
     });
 
@@ -16,7 +17,9 @@ describe('GENERAL', () => {
         testUtils.mockReset();
     });
 
-    describe('ReplaceContentBlockByX ================', () => {
+    describe('ReplaceContentBlockByX ================', function () {
+        this.timeout(testUtils.IO_INTEGRATION_TIMEOUT);
+
         describe('with types specified ================', () => {
             it('Should replace references with ContentBlockByName w/o deploy', async () => {
                 handler.setOptions({ skipDeploy: true });
@@ -770,7 +773,9 @@ describe('GENERAL', () => {
             });
         });
 
-        describe('template --metadata ~~~', () => {
+        describe('template --metadata ~~~', function () {
+            this.timeout(testUtils.IO_INTEGRATION_TIMEOUT);
+
             it('buildTemplate + buildDefinition for multiple types with keys', async () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU', ['automation', 'query']);
@@ -2361,7 +2366,9 @@ describe('GENERAL', () => {
             });
         });
 
-        describe('Publish --metadata ~~~', () => {
+        describe('Publish --metadata ~~~', function () {
+            this.timeout(testUtils.IO_INTEGRATION_TIMEOUT);
+
             it('Should publish the journey', async () => {
                 handler.setOptions({ skipStatusCheck: true });
                 const argvMetadata = [
