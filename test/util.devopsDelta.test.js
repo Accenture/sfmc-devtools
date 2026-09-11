@@ -238,7 +238,7 @@ describe('delta caller output barrier', function () {
     it('preserves excluded mapping output while purging only effective market keys', async () => {
         properties.options.deployment.sourceTargetMapping.sourceQa = 'targetQa';
         properties.marketList.targetQa = { 'cred/sit': 'market' };
-        properties.marketList.sourceQa.filter = { exclude: { key: { '*': ['k*'] } } };
+        properties.marketList.sourceQa.filter = { exclude: { key: { '*': ['k%'] } } };
         await fs.mkdir('deploy/cred/sit', { recursive: true });
         await fs.writeFile('deploy/cred/sit/sentinel', 'retained');
         const purged = [];
@@ -264,10 +264,10 @@ describe('delta caller output barrier', function () {
 
     it('ignores empty filter arrays and purges overlapping targets before building', async () => {
         properties.marketList.sourceUat.filter = {
-            include: { key: { '*': [], asset: ['k*'] } },
+            include: { key: { '*': [], asset: ['k%'] } },
             exclude: { key: { asset: [] } },
         };
-        properties.marketList.sourceQa.filter = { exclude: { key: { asset: ['k*'] } } };
+        properties.marketList.sourceQa.filter = { exclude: { key: { asset: ['k%'] } } };
         await DevOps.buildDeltaDefinitions(properties, base);
         assert.equal(purge.callCount, 1);
         assert.equal(build.callCount, 1);
