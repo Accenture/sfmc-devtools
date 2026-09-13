@@ -77,11 +77,46 @@ export default class Mcdev {
     }): Promise<DeltaPkgItem[]>;
     /**
      * Migrates historical v10 asset groupings in one selected BU retrieve tree.
+     * Pass `credential/*` to migrate every Business Unit of that credential sequentially.
      *
-     * @param {string} businessUnit configured credential/BU
-     * @returns {Promise.<AssetV10MigrationReport>} migration report
+     * @param {string} businessUnit configured credential/BU; `credential/*` targets all BUs of one credential
+     * @returns {Promise.<AssetV10MigrationReport | Object.<string, AssetV10MigrationReport>>} per-BU reports, or the single report for a single BU
      */
-    static migrate(businessUnit: string): Promise<AssetV10MigrationReport>;
+    static migrate(businessUnit: string): Promise<AssetV10MigrationReport | {
+        [x: string]: AssetV10MigrationReport;
+    }>;
+    /**
+     * Migrates the retrieve asset tree of every BU of one credential sequentially.
+     *
+     * @param {Mcdevrc} properties config properties
+     * @param {string} cred name of the credential whose BUs are migrated
+     * @returns {Promise.<Object.<string, AssetV10MigrationReport>>} migration report per `credential/BU`
+     */
+    static "__#private@#migrateAllBus"(properties: Mcdevrc, cred: string): Promise<{
+        [x: string]: AssetV10MigrationReport;
+    }>;
+    /**
+     * Builds the retrieve asset root of one BU exactly as the single-BU migration does.
+     *
+     * @param {Mcdevrc} properties config properties
+     * @param {BuObject} buObject resolved credential/BU
+     * @returns {string} path to that BU's retrieve asset folder
+     */
+    static "__#private@#getMigrationRoot"(properties: Mcdevrc, buObject: BuObject): string;
+    /**
+     * Prints the messages shown once at the start of a migration run.
+     *
+     * @returns {void} -
+     */
+    static "__#private@#logMigrationHeader"(): void;
+    /**
+     * Writes the report of one BU to the log; per-BU runs prefix every line with the BU path.
+     *
+     * @param {AssetV10MigrationReport} report migration report of one BU
+     * @param {string} [buPath] `credential/BU` label; omitted for the unchanged single-BU output
+     * @returns {Promise.<void>} -
+     */
+    static "__#private@#logMigrationReport"(report: AssetV10MigrationReport, buPath?: string): Promise<void>;
     /**
      * @returns {Promise} .
      */

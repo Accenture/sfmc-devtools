@@ -1,3 +1,4 @@
+import cliProgress from 'cli-progress';
 import fs from 'fs-extra';
 import os from 'node:os';
 import path from 'node:path';
@@ -282,6 +283,48 @@ describe('v10 asset migration', function () {
         assert.isTrue(
             await fs.pathExists(path.join(root, 'email', 'mail', 'mail.asset-email-meta.json'))
         );
+    });
+
+    it('stops the group progress bar when the migration throws', async () => {
+        const root = path.join(temporary, 'asset');
+        await fs.outputJson(path.join(root, 'message', 'mail', 'mail.asset-message-meta.json'), {
+            assetType: { name: 'htmlemail' },
+        });
+
+        // make the move fail after the progress bar for that group was already started
+        const mutableFs =
+            /** @type {{move: (from: string, to: string, options?: object) => Promise.<void>}} */ (
+                /** @type {unknown} */ (fs)
+            );
+        const originalMove = mutableFs.move;
+        mutableFs.move = async () => {
+            throw new Error('simulated move failure');
+        };
+        const originalStop = cliProgress.SingleBar.prototype.stop;
+        let stopCalls = 0;
+        /**
+         * Counts progress-bar stops while still clearing the bar like the real method.
+         *
+         * @param {...unknown} args - arguments forwarded to the real stop method
+         * @returns {void} -
+         */
+        cliProgress.SingleBar.prototype.stop = function (...args) {
+            stopCalls++;
+            return originalStop.apply(this, args);
+        };
+
+        let error;
+        try {
+            await migrateAssetV10Tree(root);
+        } catch (ex) {
+            error = ex;
+        } finally {
+            mutableFs.move = originalMove;
+            cliProgress.SingleBar.prototype.stop = originalStop;
+        }
+
+        assert.match(error?.message ?? '', /simulated move failure/);
+        assert.equal(stopCalls, 1);
     });
 
     it('preflights the full move set and leaves an owner unchanged on conflict', async () => {
