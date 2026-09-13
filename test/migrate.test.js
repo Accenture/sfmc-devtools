@@ -2,6 +2,8 @@ import fs from 'fs-extra';
 import os from 'node:os';
 import path from 'node:path';
 import { assert } from 'chai';
+import { execFileSync } from 'node:child_process';
+import Cli from '../lib/util/cli.js';
 import handler from '../lib/index.js';
 import config from '../lib/util/config.js';
 import { Util } from '../lib/util/util.js';
@@ -86,6 +88,100 @@ describe('migrate command', function () {
         Util.skipInteraction = originalSkipInteraction;
         Util.OPTIONS.noLogFile = originalNoLogFile;
         await fs.remove(temporary);
+    });
+
+    it('parses bare migrate and calls its handler without a BU', () => {
+        const handlerUrl = new URL('../lib/index.js', import.meta.url).href;
+        const cliUrl = new URL('../lib/cli.js', import.meta.url).href;
+        const output = execFileSync(
+            process.execPath,
+            [
+                '--input-type=module',
+                '-e',
+                `import Mcdev from ${JSON.stringify(handlerUrl)};
+                Mcdev.setOptions = () => {};
+                Mcdev.migrate = (bu) => console.log('migration-target:' + String(bu));
+                process.argv = [process.execPath, 'mcdev', 'migrate'];
+                await import(${JSON.stringify(cliUrl)});`,
+            ],
+            { encoding: 'utf8', timeout: 30_000 }
+        );
+        assert.include(output, 'migration-target:undefined');
+    });
+
+    it('selects one BU interactively when the migration target is omitted', async () => {
+        await seedMappableAsset(temporary, 'testBU');
+        await seedMappableAsset(temporary, '_ParentBU_');
+        const originalSelectBU = Cli._selectBU;
+        const selections = [];
+        Cli._selectBU = async (...args) => {
+            selections.push(args);
+            return { credential: 'testInstance', businessUnit: 'testBU' };
+        };
+        Util.skipInteraction = null;
+        let report;
+        try {
+            report = /** @type {AssetV10MigrationReport} */ (await handler.migrate());
+        } finally {
+            Cli._selectBU = originalSelectBU;
+        }
+        assert.lengthOf(selections, 1);
+        assert.isNull(selections[0][1]);
+        assert.isAbove(report.moved.length, 0);
+        assert.isTrue(
+            await fs.pathExists(
+                path.join(
+                    retrieveRoot,
+                    'testInstance',
+                    '_ParentBU_',
+                    'asset',
+                    'message',
+                    'mail',
+                    'mail.asset-message-meta.json'
+                )
+            )
+        );
+    });
+
+    it('rejects malformed targets without selecting or mutating any BU', async () => {
+        const malformedTargets = [
+            'testInstance/*/extra',
+            'testInstance/*/',
+            'testInstance/testBU/extra',
+            'testInstance//testBU',
+            '/testBU',
+            'testInstance/',
+        ];
+        for (const target of malformedTargets) {
+            await seedMappableAsset(temporary, 'testBU');
+            await seedMappableAsset(temporary, '_ParentBU_');
+            const before = await fs.readdir(retrieveRoot, { recursive: true, encoding: 'utf8' });
+            const originals = new Map();
+            for (const entry of before) {
+                const file = path.join(retrieveRoot, entry);
+                if ((await fs.stat(file)).isFile()) {
+                    originals.set(file, await fs.readFile(file, 'utf8'));
+                }
+            }
+            const originalSelectBU = Cli._selectBU;
+            let selected = false;
+            Cli._selectBU = async () => {
+                selected = true;
+                return { credential: 'testInstance', businessUnit: 'testBU' };
+            };
+            let result;
+            try {
+                result = await handler.migrate(target);
+            } finally {
+                Cli._selectBU = originalSelectBU;
+            }
+            assert.isUndefined(result);
+            assert.isFalse(selected);
+            assert.deepEqual(await fs.readdir(retrieveRoot, { recursive: true }), before);
+            for (const [file, content] of originals) {
+                assert.equal(await fs.readFile(file, 'utf8'), content);
+            }
+        }
     });
 
     it('cred/* migrates every BU of that credential and returns per-BU results', async () => {

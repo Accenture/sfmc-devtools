@@ -79,10 +79,10 @@ export default class Mcdev {
      * Migrates historical v10 asset groupings in one selected BU retrieve tree.
      * Pass `credential/*` to migrate every Business Unit of that credential sequentially.
      *
-     * @param {string} businessUnit configured credential/BU; `credential/*` targets all BUs of one credential
+     * @param {string} [businessUnit] configured credential/BU; omit to select interactively; `credential/*` targets all BUs of one credential
      * @returns {Promise.<AssetV10MigrationReport | Object.<string, AssetV10MigrationReport>>} per-BU reports, or the single report for a single BU
      */
-    static migrate(businessUnit: string): Promise<AssetV10MigrationReport | {
+    static migrate(businessUnit?: string): Promise<AssetV10MigrationReport | {
         [x: string]: AssetV10MigrationReport;
     }>;
     /**

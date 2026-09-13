@@ -174,6 +174,25 @@ describe('v10 asset migration', function () {
         assert.deepEqual(report.unremovedNonEmptyDirs, [leftover, path.join(root, 'message')]);
     });
 
+    it('classifies link-only leftover directories as non-empty retained content', async () => {
+        const root = path.join(temporary, 'asset');
+        const groupRoot = path.join(root, 'message');
+        const leftover = path.join(groupRoot, 'leftover');
+        const target = path.join(temporary, 'empty-link-target');
+        await fs.ensureDir(target);
+        await fs.ensureDir(leftover);
+        const link = path.join(leftover, 'link');
+        // Junctions work on Windows without requiring symlink creation privileges.
+        await fs.symlink(target, link, process.platform === 'win32' ? 'junction' : 'dir');
+
+        const report = await migrateAssetV10Tree(root);
+
+        assert.isTrue((await fs.lstat(link)).isSymbolicLink());
+        assert.deepEqual(report.unremovedEmptyDirs, []);
+        assert.deepEqual(report.unremovedNonEmptyDirs, [leftover, groupRoot]);
+        assert.deepEqual(await fs.readdir(target), []);
+    });
+
     it('reports unmapped asset types and leaves them in place', async () => {
         const root = path.join(temporary, 'asset');
         const mapped = path.join(root, 'message', 'mail', 'mail.asset-message-meta.json');
