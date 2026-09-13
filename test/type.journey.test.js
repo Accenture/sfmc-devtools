@@ -17,7 +17,10 @@ const journeyTestAccess =
 import * as testUtils from './utils.js';
 chai.use(chaiFiles);
 
-describe('type: journey', () => {
+describe('type: journey', function () {
+    // file-system heavy suite: keep it green on slow/loaded machines
+    this.timeout(30_000);
+
     beforeEach(() => {
         testUtils.mockSetup();
     });

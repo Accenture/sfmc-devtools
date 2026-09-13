@@ -18,6 +18,7 @@
  * @typedef {import('../types/mcdev.d.js').ExplainType} ExplainType
  * @typedef {import('../types/mcdev.d.js').ContentBlockConversionTypes} ContentBlockConversionTypes
  * @typedef {import('../types/mcdev.d.js').BuildFilter} BuildFilter
+ * @typedef {import('./util/migrations/assetV10.js').AssetV10MigrationReport} AssetV10MigrationReport
  */
 /**
  * main class
@@ -78,13 +79,9 @@ export default class Mcdev {
      * Migrates historical v10 asset groupings in one selected BU retrieve tree.
      *
      * @param {string} businessUnit configured credential/BU
-     * @returns {Promise.<{moved: string[], conflicts: string[], skipped: string[]}>} migration report
+     * @returns {Promise.<AssetV10MigrationReport>} migration report
      */
-    static migrate(businessUnit: string): Promise<{
-        moved: string[];
-        conflicts: string[];
-        skipped: string[];
-    }>;
+    static migrate(businessUnit: string): Promise<AssetV10MigrationReport>;
     /**
      * @returns {Promise} .
      */
@@ -507,4 +504,5 @@ export type TypeKeyCombo = import("../types/mcdev.d.js").TypeKeyCombo;
 export type ExplainType = import("../types/mcdev.d.js").ExplainType;
 export type ContentBlockConversionTypes = import("../types/mcdev.d.js").ContentBlockConversionTypes;
 export type BuildFilter = import("../types/mcdev.d.js").BuildFilter;
+export type AssetV10MigrationReport = import("./util/migrations/assetV10.js").AssetV10MigrationReport;
 //# sourceMappingURL=index.d.ts.map

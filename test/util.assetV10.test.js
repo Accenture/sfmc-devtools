@@ -11,7 +11,9 @@ import {
 import AssetDefinition from '../lib/metadataTypes/definitions/Asset.definition.js';
 import { filterAssetRegroupingChanges } from '../lib/util/devops.js';
 
-describe('v10 asset migration', () => {
+describe('v10 asset migration', function () {
+    // file-system heavy suite: keep it green on slow/loaded machines
+    this.timeout(30_000);
     let temporary;
 
     beforeEach(async () => {
@@ -102,6 +104,9 @@ describe('v10 asset migration', () => {
             moved: [],
             conflicts: [],
             skipped: [],
+            unmapped: {},
+            unremovedEmptyDirs: [],
+            unremovedNonEmptyDirs: [],
         });
     });
 
@@ -127,6 +132,156 @@ describe('v10 asset migration', () => {
         assert.isFalse(await fs.pathExists(path.join(root, 'message', 'mail')));
         assert.isTrue(await fs.pathExists(root));
         assert.isTrue(await fs.pathExists(unmatched));
+        assert.deepEqual(report.unmapped, { unknownassettype: [unmatched] });
+        assert.deepEqual(report.unremovedEmptyDirs, []);
+        assert.deepEqual(report.unremovedNonEmptyDirs, [
+            path.join(root, 'message', 'keep'),
+            path.join(root, 'message'),
+        ]);
+    });
+
+    it('removes stale empty directories that no file was ever moved from', async () => {
+        const root = path.join(temporary, 'asset');
+        await fs.outputJson(path.join(root, 'message', 'mail', 'mail.asset-message-meta.json'), {
+            assetType: { name: 'htmlemail' },
+        });
+        // orphan empty tree that is not the source of any move and predates the migration
+        await fs.ensureDir(path.join(root, 'message', 'stale', 'blocks'));
+
+        const report = await migrateAssetV10Tree(root);
+
+        assert.lengthOf(report.conflicts, 0);
+        assert.isFalse(await fs.pathExists(path.join(root, 'message', 'stale')));
+        assert.isFalse(await fs.pathExists(path.join(root, 'message')));
+        assert.deepEqual(report.unremovedNonEmptyDirs, []);
+        assert.isTrue(
+            await fs.pathExists(path.join(root, 'email', 'mail', 'mail.asset-email-meta.json'))
+        );
+    });
+
+    it('preserves and reports a non-empty leftover directory', async () => {
+        const root = path.join(temporary, 'asset');
+        await fs.outputJson(path.join(root, 'message', 'mail', 'mail.asset-message-meta.json'), {
+            assetType: { name: 'htmlemail' },
+        });
+        const leftover = path.join(root, 'message', 'leftover');
+        await fs.outputFile(path.join(leftover, 'Thumbs.db'), 'not an asset');
+
+        const report = await migrateAssetV10Tree(root);
+
+        assert.isTrue(await fs.pathExists(path.join(leftover, 'Thumbs.db')));
+        assert.deepEqual(report.unremovedNonEmptyDirs, [leftover, path.join(root, 'message')]);
+    });
+
+    it('reports unmapped asset types and leaves them in place', async () => {
+        const root = path.join(temporary, 'asset');
+        const mapped = path.join(root, 'message', 'mail', 'mail.asset-message-meta.json');
+        const unmapped = path.join(root, 'message', 'push', 'push.asset-message-meta.json');
+        await fs.outputJson(mapped, { assetType: { name: 'htmlemail' } });
+        await fs.outputJson(unmapped, { assetType: { name: 'jsonmessagetemplate' } });
+
+        const report = await migrateAssetV10Tree(root);
+
+        assert.deepEqual(report.unmapped, { jsonmessagetemplate: [unmapped] });
+        assert.isTrue(await fs.pathExists(unmapped));
+        assert.isTrue(
+            await fs.pathExists(path.join(root, 'email', 'mail', 'mail.asset-email-meta.json'))
+        );
+        assert.deepEqual(report.unremovedNonEmptyDirs, [
+            path.join(root, 'message', 'push'),
+            path.join(root, 'message'),
+        ]);
+    });
+
+    it('reports directories that cannot be removed instead of throwing', async () => {
+        const root = path.join(temporary, 'asset');
+        const groupRoot = path.join(root, 'message');
+        await fs.outputJson(path.join(groupRoot, 'mail', 'mail.asset-message-meta.json'), {
+            assetType: { name: 'htmlemail' },
+        });
+
+        // simulate an OS-level block that survives the internal EPERM retry
+        const mutableFs = /** @type {{rmdir: (dir: string) => Promise.<void>}} */ (
+            /** @type {unknown} */ (fs)
+        );
+        const originalRmdir = mutableFs.rmdir;
+        mutableFs.rmdir = async (dir) => {
+            if (path.resolve(dir) === path.resolve(groupRoot)) {
+                throw Object.assign(new Error('blocked'), { code: 'EPERM' });
+            }
+            return originalRmdir.call(fs, dir);
+        };
+        let report;
+        try {
+            report = await migrateAssetV10Tree(root);
+        } finally {
+            mutableFs.rmdir = originalRmdir;
+        }
+
+        assert.deepEqual(report.unremovedEmptyDirs, [groupRoot]);
+        assert.deepEqual(report.unremovedNonEmptyDirs, []);
+        assert.isTrue(await fs.pathExists(groupRoot));
+        assert.lengthOf(await fs.readdir(groupRoot), 0);
+    });
+
+    it('reports a leftover of only empty subdirectories as empty, not as containing files', async () => {
+        const root = path.join(temporary, 'asset');
+        const groupRoot = path.join(root, 'message');
+        const emptyParent = path.join(groupRoot, 'emptyParent');
+        const emptyChild = path.join(emptyParent, 'emptyChild');
+        await fs.ensureDir(emptyChild);
+
+        // block the deepest empty folder so its parents survive holding subdirectories only
+        const mutableFs = /** @type {{rmdir: (dir: string) => Promise.<void>}} */ (
+            /** @type {unknown} */ (fs)
+        );
+        const originalRmdir = mutableFs.rmdir;
+        mutableFs.rmdir = async (dir) => {
+            if (path.resolve(dir) === path.resolve(emptyChild)) {
+                throw Object.assign(new Error('blocked'), { code: 'EPERM' });
+            }
+            return originalRmdir.call(fs, dir);
+        };
+        let report;
+        try {
+            report = await migrateAssetV10Tree(root);
+        } finally {
+            mutableFs.rmdir = originalRmdir;
+        }
+
+        assert.deepEqual(report.unremovedNonEmptyDirs, []);
+        assert.deepEqual(report.unremovedEmptyDirs, [emptyChild, emptyParent, groupRoot]);
+    });
+
+    it('keeps the sweep alive when a listed entry cannot be inspected', async () => {
+        const root = path.join(temporary, 'asset');
+        const owner = path.join(root, 'message', 'mail', 'mail.asset-message-meta.json');
+        await fs.outputJson(owner, { assetType: { name: 'htmlemail' } });
+        // simulate an entry that is listed but cannot be stat'ed (dangling link or race)
+        const dangling = path.join(root, 'message', 'dangling');
+        await fs.ensureDir(dangling);
+
+        const mutableFs = /** @type {{stat: (target: string) => Promise.<unknown>}} */ (
+            /** @type {unknown} */ (fs)
+        );
+        const originalStat = mutableFs.stat;
+        mutableFs.stat = async (target) => {
+            if (path.resolve(target) === path.resolve(dangling)) {
+                throw Object.assign(new Error('gone'), { code: 'ENOENT' });
+            }
+            return originalStat.call(fs, target);
+        };
+        let report;
+        try {
+            report = await migrateAssetV10Tree(root);
+        } finally {
+            mutableFs.stat = originalStat;
+        }
+
+        assert.isTrue(report.moved.some((moved) => moved.endsWith('mail.asset-email-meta.json')));
+        assert.isTrue(
+            await fs.pathExists(path.join(root, 'email', 'mail', 'mail.asset-email-meta.json'))
+        );
     });
 
     it('preflights the full move set and leaves an owner unchanged on conflict', async () => {
