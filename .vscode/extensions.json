@@ -15,7 +15,6 @@
         // Formatting & colors
         "editorconfig.editorconfig",
         "esbenp.prettier-vscode",
-        "xnerd.ampscript-language",
 
         // mcdev tests
         "hbenl.vscode-mocha-test-adapter",

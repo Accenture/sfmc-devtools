@@ -33,7 +33,7 @@ export type BuObject = {
 export type TemplateMap = {
     [x: string]: string;
 };
-export type SupportedMetadataTypes = "asset" | "asset-archive" | "asset-asset" | "asset-audio" | "asset-block" | "asset-code" | "asset-document" | "asset-image" | "asset-message" | "asset-other" | "asset-rawimage" | "asset-template" | "asset-textfile" | "asset-video" | "attributeGroup" | "attributeSet" | "automation" | "campaign" | "contentArea" | "dataExtension" | "dataExtensionField" | "dataExtensionTemplate" | "dataExtract" | "dataExtractType" | "discovery" | "deliveryProfile" | "email" | "emailSend" | "event" | "fileLocation" | "fileTransfer" | "filter" | "folder" | "importFile" | "journey" | "list" | "mobileCode" | "mobileKeyword" | "mobileMessage" | "query" | "role" | "script" | "sendClassification" | "senderProfile" | "transactionalEmail" | "transactionalPush" | "transactionalSMS" | "triggeredSend" | "user" | "verification";
+export type SupportedMetadataTypes = "asset" | "asset-archive" | "asset-asset" | "asset-audio" | "asset-block" | "asset-code" | "asset-document" | "asset-image" | "asset-email" | "asset-mobile" | "asset-other" | "asset-webstudio" | "asset-rawimage" | "asset-template" | "asset-textfile" | "asset-video" | "attributeGroup" | "attributeSet" | "automation" | "campaign" | "contentArea" | "dataExtension" | "dataExtensionField" | "dataExtensionTemplate" | "dataExtract" | "dataExtractType" | "discovery" | "deliveryProfile" | "email" | "emailSend" | "event" | "fileLocation" | "fileTransfer" | "filter" | "folder" | "importFile" | "journey" | "list" | "mobileCode" | "mobileKeyword" | "mobileMessage" | "query" | "role" | "script" | "sendClassification" | "senderProfile" | "transactionalEmail" | "transactionalPush" | "transactionalSMS" | "triggeredSend" | "user" | "verification";
 /**
  * object-key=SupportedMetadataTypes, value=array of external keys
  */
@@ -235,7 +235,7 @@ export type AssetItem = ReturnType<JSON["parse"]>;
 export type AssetMap = {
     [x: string]: any;
 };
-export type AssetSubType = "archive" | "asset" | "audio" | "block" | "code" | "document" | "image" | "message" | "other" | "rawimage" | "template" | "textfile" | "video";
+export type AssetSubType = "archive" | "asset" | "audio" | "block" | "code" | "document" | "email" | "image" | "mobile" | "other" | "rawimage" | "template" | "textfile" | "video" | "webstudio";
 export type DataExtensionFieldItem = {
     /**
      * id
