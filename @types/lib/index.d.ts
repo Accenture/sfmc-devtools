@@ -75,6 +75,17 @@ export default class Mcdev {
         diffArr?: DeltaPkgItem[];
     }): Promise<DeltaPkgItem[]>;
     /**
+     * Migrates historical v10 asset groupings in one selected BU retrieve tree.
+     *
+     * @param {string} businessUnit configured credential/BU
+     * @returns {Promise.<{moved: string[], conflicts: string[], skipped: string[]}>} migration report
+     */
+    static migrate(businessUnit: string): Promise<{
+        moved: string[];
+        conflicts: string[];
+        skipped: string[];
+    }>;
+    /**
      * @returns {Promise} .
      */
     static selectTypes(): Promise<any>;

@@ -54,3 +54,23 @@ Prettier with `prettier-plugin-sfmc` owns formatting. `eslint-config-prettier` r
 ## Validate your migrated project
 
 Run `npm run lint` and `npm run format:check` first. Inspect diagnostics before choosing fixes; avoid a blanket autofix of retrieved assets. Review any deliberate formatting changes, especially mixed-language assets and comments. Repeat checks after resolving issues, and run your project's own build/deploy validation separately.
+
+## Migrate asset groupings
+
+Historical asset group folders are renamed in v10. Run `mcdev migrate <cred/bu>` to move the selected Business Unit's existing retrieve tree into the current layout:
+
+| Historical group | Asset types | Current group |
+|---|---|---|
+| `message` | `templatebasedemail`, `htmlemail`, `textonlyemail`, `message` | `email` |
+| `message`, `asset` | `jsonmessage` | `mobile` |
+| `asset` | `webpage`, `webtemplate` | `webstudio` |
+| `cloudpage` | `cloudpages`, `landingpage`, `microsite`, `interactivecontent` | `webstudio` |
+| `coderesource` | `jscoderesource`, `csscoderesource`, `jsoncoderesource`, `rsscoderesource`, `textcoderesource`, `xmlcoderesource` | `webstudio` |
+
+`jsonmessagetemplate` keeps the `template` group. The destination group is resolved from each asset's owner JSON, so a historical group that holds several asset types is split correctly.
+
+Example: `mcdev migrate MyProject/DEV`.
+
+Only the retrieve tree of the single selected credential/Business Unit is touched. Deploy and template trees are not migrated and no server call is made. Moves are conflict-safe: if any destination path already exists, the whole asset is left in place and reported instead of being moved partially. Resolve the reported conflicts and re-run, then review and commit the moved files before migrating another Business Unit.
+
+`createDeltaPkg` ignores byte-identical regrouping moves, so a path change without an edit produces neither an addition nor a deletion. An asset that was moved and edited stays actionable as a change in its new location instead of appearing as a logical deletion in the old one.
