@@ -3,6 +3,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { assert } from 'chai';
 import { execFileSync } from 'node:child_process';
+import cliProgress from 'cli-progress';
 import Cli from '../lib/util/cli.js';
 import handler from '../lib/index.js';
 import config from '../lib/util/config.js';
@@ -227,6 +228,53 @@ describe('migrate command', function () {
                 )
             );
         }
+    });
+
+    it('logs each BU header immediately before that BU progress and summary', async () => {
+        await seedMappableAsset(temporary, 'testBU');
+        await seedMappableAsset(temporary, '_ParentBU_');
+
+        const events = [];
+        const mutableLogger = /** @type {{info: (message: string) => void}} */ (
+            /** @type {unknown} */ (Util.logger)
+        );
+        const originalLoggerInfo = mutableLogger.info;
+        const originalProgressStart = cliProgress.SingleBar.prototype.start;
+        mutableLogger.info = (message) => {
+            events.push(`log:${message}`);
+        };
+        /**
+         * Records when a migration progress bar starts.
+         *
+         * @returns {void} -
+         */
+        cliProgress.SingleBar.prototype.start = function () {
+            events.push('progress:start');
+        };
+
+        try {
+            await handler.migrate('testInstance/*');
+        } finally {
+            mutableLogger.info = originalLoggerInfo;
+            cliProgress.SingleBar.prototype.start = originalProgressStart;
+        }
+
+        assert.deepEqual(
+            events.filter((event) => event.startsWith('log:Migrating assets on ')),
+            [
+                'log:Migrating assets on testInstance/testBU:',
+                'log:Migrating assets on testInstance/_ParentBU_:',
+            ]
+        );
+        assert.deepEqual(events.slice(-7), [
+            'log:Migrating assets on testInstance/testBU:',
+            'progress:start',
+            'log:testInstance/testBU: Asset v10 migration: 2 moved, 0 conflicts, 0 skipped.',
+            'log:Migrating assets on testInstance/_ParentBU_:',
+            'progress:start',
+            'log:testInstance/_ParentBU_: Asset v10 migration: 2 moved, 0 conflicts, 0 skipped.',
+            'log:Asset v10 migration: processed 2 BUs of testInstance, 0 of them had conflicts.',
+        ]);
     });
 
     it('keeps migrating the remaining BUs when one BU has a conflict', async () => {
