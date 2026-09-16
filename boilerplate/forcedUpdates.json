@@ -1,7 +1,6 @@
 [
     {
         "version": "10.0.0",
-        "requiresExplicitApproval": true,
         "files": ["eslint.config.js", ".prettierrc", ".prettierignore", ".vscode/settings.json"],
         "filesRemove": [".beautyamp.json"]
     },
