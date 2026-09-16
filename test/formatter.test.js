@@ -20,18 +20,12 @@ const DEFAULT_PROPERTIES = {
 };
 
 describe('FORMATTER', () => {
-    let confirmToolingReplacementOriginal;
-
     beforeEach(() => {
-        confirmToolingReplacementOriginal = InitConfig.confirmToolingReplacement;
         testUtils.mockSetup();
-        // These migration cases exercise post-approval outcomes; consent is covered separately.
-        InitConfig.confirmToolingReplacement = async () => true;
         config.properties = structuredClone(DEFAULT_PROPERTIES);
     });
 
     afterEach(() => {
-        InitConfig.confirmToolingReplacement = confirmToolingReplacementOriginal;
         testUtils.mockReset();
         config.properties = null;
     });
@@ -238,13 +232,13 @@ describe('FORMATTER', () => {
         assert.equal(result.code, source);
     });
 
-    it('reports a failed IDE config upgrade without overwriting an existing backup', async () => {
+    it('retires IDE config files by replacing an existing backup', async () => {
         await File.writeFile('.beautyamp.json', '{}');
         await File.writeFile('.beautyamp.json.BAK', '{"existing":true}');
 
-        expect(await InitConfig.createIdeConfigFiles('9.0.3')).to.equal(false);
-        expect(await File.pathExists('.beautyamp.json')).to.equal(true);
-        assert.equal(await File.readFile('.beautyamp.json.BAK', 'utf8'), '{"existing":true}');
+        expect(await InitConfig.createIdeConfigFiles('9.0.3')).to.equal(true);
+        expect(await File.pathExists('.beautyamp.json')).to.equal(false);
+        assert.equal(await File.readFile('.beautyamp.json.BAK', 'utf8'), '{}');
     });
 
     it('aborts project upgrade before dependency installation when config migration fails', async () => {

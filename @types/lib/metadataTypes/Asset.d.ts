@@ -190,7 +190,7 @@ declare class Asset extends MetadataType {
      */
     static postRetrieveTasks(metadata: AssetItem): CodeExtractItem;
     /**
-     * helper for {@link Asset.postDeployTasks}. triggers a refresh of active triggerredSendDefinitions associated with the updated asset-message items. Gets executed if refresh option has been set.
+     * helper for {@link Asset.postDeployTasks}. triggers a refresh of active triggerredSendDefinitions associated with the updated asset-email items. Gets executed if refresh option has been set.
      *
      * @private
      * @param {MetadataTypeMap} metadata metadata mapped by their keyField
@@ -201,7 +201,7 @@ declare class Asset extends MetadataType {
      * find the subType matching the extendedSubType
      *
      * @param {string} extendedSubType webpage, htmlblock, etc
-     * @returns {string} subType: block, message, other, etc
+     * @returns {string} subType: block, email, other, etc
      */
     static "__#private@#getMainSubtype"(extendedSubType: string): string;
     /**
@@ -944,7 +944,7 @@ declare namespace Asset {
             code: string[];
             document: string[];
             image: string[];
-            message: string[];
+            email: string[];
             mobile: string[];
             other: string[];
             rawimage: string[];

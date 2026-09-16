@@ -26,22 +26,14 @@ declare namespace Init {
      */
     function fixMcdevConfig(properties: Mcdevrc, versionToPersist?: string): Promise<boolean>;
     /**
-     * handles creation/update of all config file from the boilerplate
+     * handles creation/update of all config files from the boilerplate, one at a time
      *
      * @param {string} versionBeforeUpgrade 'x.y.z'
-     * @param {object} [prepared] approved preflight result
      * @returns {Promise.<boolean>} status of config file creation
      */
-    function createIdeConfigFiles(versionBeforeUpgrade: string, prepared?: object): Promise<boolean>;
+    function createIdeConfigFiles(versionBeforeUpgrade: string): Promise<boolean>;
     /**
-     * Require real interactive consent; automation flags never approve tooling overrides.
-     *
-     * @param {string} message description of the required changes
-     * @returns {Promise.<boolean>} explicit approval, or false when declined/unattended
-     */
-    function confirmToolingReplacement(message: string): Promise<boolean>;
-    /**
-     * Prompt for a configuration selection independently of automation options.
+     * Prompt for an ordinary configuration override.
      *
      * @param {string} message selection to present
      * @param {boolean} [defaultValue] initial selection
@@ -49,12 +41,17 @@ declare namespace Init {
      */
     function promptConfirmation(message: string, defaultValue?: boolean): Promise<boolean>;
     /**
-     * Inspect all destinations and backups before any coupled tooling mutation.
+     * Compare, optionally back up, and write one configuration file.
      *
-     * @param {string} versionBeforeUpgrade prior project version
-     * @returns {Promise.<object | false>} approved writes and retirements, or false
+     * @param {string} fileName destination path
+     * @param {{updates:string[],deletes:string[]}} forced version-gated replacements and retirements
+     * @param {string} content boilerplate contents
+     * @returns {Promise.<boolean>} success, including a declined override
      */
-    function preflightIdeConfigFiles(versionBeforeUpgrade: string): Promise<object | false>;
+    function _createIdeConfigFile(fileName: string, forced: {
+        updates: string[];
+        deletes: string[];
+    }, content: string): Promise<boolean>;
     /**
      * Check entry occupancy without following links or hiding access errors.
      *
@@ -75,10 +72,9 @@ declare namespace Init {
      * returns list of files that need to be updated
      *
      * @param {string} projectVersion version found in config file of the current project
-     * @param {object[]} [migrations] metadata already loaded by the coupled preflight
      * @returns {Promise.<{updates:string[],deletes:string[]}>} relevant files with path that need to be updated
      */
-    function _getForcedUpdateList(projectVersion: string, migrations?: object[]): Promise<{
+    function _getForcedUpdateList(projectVersion: string): Promise<{
         updates: string[];
         deletes: string[];
     }>;

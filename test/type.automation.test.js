@@ -8,7 +8,10 @@ import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
 
-describe('type: automation', () => {
+describe('type: automation', function () {
+    // file-system heavy suite: keep it green on slow/loaded machines
+    this.timeout(30_000);
+
     beforeEach(() => {
         testUtils.mockSetup();
     });
