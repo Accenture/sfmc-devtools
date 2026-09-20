@@ -401,9 +401,10 @@ declare class Asset extends MetadataType {
     /**
      * enables metadata definitions required for sharing assets
      *
+     * @param {boolean} keepSharingInfo true to enable, false to disable
      * @returns {void}
      */
-    static _enableShareAsset(): void;
+    static _toggleShareAssetTemplating(keepSharingInfo: boolean): void;
 }
 declare namespace Asset {
     let getJsonFromFSCache: {
