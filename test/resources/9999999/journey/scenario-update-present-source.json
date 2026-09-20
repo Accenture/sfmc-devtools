@@ -1,0 +1,38 @@
+{
+    "key": "testExisting_journey_updatecontact",
+    "name": "testExisting_journey_updatecontact",
+    "description": "Journey update with an available push app",
+    "version": 1,
+    "workflowApiVersion": 1,
+    "activities": [
+        {
+            "key": "PUSHNOTIFICATIONACTIVITY-1",
+            "name": "Scenario Push",
+            "description": "",
+            "type": "PUSHNOTIFICATIONACTIVITY",
+            "outcomes": [],
+            "arguments": {},
+            "configurationArguments": {
+                "r__mobilePush_key": "scenario_present_mobilePush",
+                "r__mobilePush_name": "testExisting_mobilePush_asset_DEV",
+                "r__mobilePushApp_key": "sourceOnlyAppKey",
+                "r__mobilePushApp_name": "Test Push App One"
+            },
+            "metaData": {},
+            "schema": { "arguments": {} }
+        }
+    ],
+    "triggers": [],
+    "goals": [],
+    "exits": [],
+    "notifiers": [],
+    "entryMode": "NotSet",
+    "definitionType": "Multistep",
+    "channel": "",
+    "defaults": { "properties": {} },
+    "metaData": {},
+    "executionMode": "Production",
+    "status": "Draft",
+    "scheduledStatus": "Draft",
+    "r__folder_Path": "my journeys"
+}

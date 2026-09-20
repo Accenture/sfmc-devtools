@@ -1,0 +1,18 @@
+{
+    "id": "MTk6MTE0OjA",
+    "alert": "my push message %%=ContentBlockByKey(\"testTemplated_contentBlock_DEV\")=%%",
+    "sound": "default",
+    "startDateUtc": "2026-04-15T14:54:00.000Z",
+    "startDate": "2026-04-15T08:54:00",
+    "name": "testTemplated_mobilePush_asset_DEV",
+    "title": "my push title",
+    "subtitle": "my push subtitle for ios",
+    "r__asset_key": "testTemplated_mobilePush_asset_DEV",
+    "r__mobilePushApp_key": "ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA",
+    "r__mobilePushApp_name": "Test Push App One",
+    "c__messageType": "outboundPush",
+    "c__contentType": "alert",
+    "c__tzPastSendAction": "sendImmediately",
+    "c__sendInitiator": "journeyBuilder",
+    "c__status": "active"
+}

@@ -1,5 +1,5 @@
 {
-    "count": 3,
+    "count": 6,
     "page": 1,
     "pageSize": 500,
     "links": {},
@@ -172,6 +172,44 @@
         {
             "key": "testExisting_journey_updatecontact",
             "name": "testExisting_journey_updatecontact",
+            "lastPublishedDate": "0001-01-01T00:00:00",
+            "description": "",
+            "version": 1,
+            "workflowApiVersion": 1,
+            "createdDate": "2024-05-04T05:54:48.027",
+            "modifiedDate": "2024-05-04T17:25:57.9",
+            "goals": [],
+            "exits": [],
+            "notifiers": [],
+            "entryMode": "NotSet",
+            "definitionType": "Multistep",
+            "channel": "",
+            "defaults": {
+                "email": [
+                    "{{Event.DEAudience-2e3c73b6-48cc-2ec0-5522-48636e1a236e.\"Email\"}}"
+                ],
+                "properties": {
+                    "analyticsTracking": {
+                        "enabled": true,
+                        "analyticsType": "google",
+                        "urlDomainsToTrack": []
+                    }
+                }
+            },
+            "metaData": {
+                "dataSource": "ContactsModel",
+                "highThroughputSending": {
+                    "email": false
+                }
+            },
+            "executionMode": "Production",
+            "status": "Draft",
+            "scheduledStatus": "Draft",
+            "r__folder_Path": "my journeys"
+        },
+        {
+            "key": "testExisting_journey_updatecontact_sharedDE",
+            "name": "testExisting_journey_updatecontact_sharedDE",
             "lastPublishedDate": "0001-01-01T00:00:00",
             "description": "",
             "version": 1,

@@ -23,6 +23,8 @@ import {
     soapUrl,
     restUrl,
     tWarn,
+    addRestErrorOverride,
+    resetRestErrorOverrides,
 } from './resourceFactory.js';
 const authResources = File.readJsonSync(path.join(__dirname, './resources/auth.json'));
 
@@ -60,7 +62,7 @@ export function copyToDeploy(from, to, mid = '9999999', buName = 'testBU') {
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} [buName] used when we need to test on ParentBU
- * @returns {Promise.<string>} file in string form
+ * @returns {Promise.<ReturnType<JSON['parse']>>} parsed metadata file
  */
 export function getActualJson(customerKey, type, buName = 'testBU') {
     return File.readJSON(
@@ -192,6 +194,8 @@ export function getExpectedFile(mid, type, action, ext) {
  */
 export function mockSetup(isDeploy) {
     cache.clearCache();
+    // clear any REST error overrides so they never leak between tests
+    resetRestErrorOverrides();
     // clear local caches
     for (const type of Object.keys(MetadataTypes)) {
         if (MetadataTypes[type].cache) {
@@ -214,6 +218,8 @@ export function mockSetup(isDeploy) {
         handler.setOptions(resetOptions);
     }
     File.prettierConfig = null;
+    File.prettierConfigFileType = null;
+    File.prettierConfigCache.clear();
 
     apimock = new MockAdapter(axiosInstance, { onNoMatch: 'throwException' });
     // set access_token to mid to allow for autorouting of mock to correct resources
@@ -226,9 +232,6 @@ export function mockSetup(isDeploy) {
         .onAny(new RegExp(`^${escapeRegExp(restUrl)}`))
         .reply((config) => handleRESTRequest(config));
     const fsMockConf = {
-        '.beautyamp.json': fsmock.load(
-            path.resolve(__dirname, '../boilerplate/files/.beautyamp.json')
-        ),
         '.prettierrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.prettierrc')),
         'eslint.config.js': fsmock.load(
             path.resolve(__dirname, '../boilerplate/files/eslint.config.js')
@@ -241,26 +244,26 @@ export function mockSetup(isDeploy) {
         'boilerplate/config.json': fsmock.load(
             path.resolve(__dirname, '../boilerplate/config.json')
         ),
+        'boilerplate/gitignore-template': fsmock.load(
+            path.resolve(__dirname, '../boilerplate/gitignore-template')
+        ),
+        'boilerplate/files': fsmock.load(path.resolve(__dirname, '../boilerplate/files')),
+        'boilerplate/forcedUpdates.json': fsmock.load(
+            path.resolve(__dirname, '../boilerplate/forcedUpdates.json')
+        ),
+        'boilerplate/npm-dependencies.json': fsmock.load(
+            path.resolve(__dirname, '../boilerplate/npm-dependencies.json')
+        ),
         test: fsmock.load(path.resolve(__dirname)),
-        // the following node_modules are required for prettier's SQL parser to work
+        // Prettier and the SFMC plugin are loaded statically before mock-fs starts.
         'node_modules/prettier': fsmock.load(path.resolve(__dirname, '../node_modules/prettier')),
-        'node_modules/prettier-plugin-sql': fsmock.load(
-            path.resolve(__dirname, '../node_modules/prettier-plugin-sql')
+        'node_modules/prettier-plugin-sfmc': fsmock.load(
+            path.resolve(__dirname, '../node_modules/prettier-plugin-sfmc')
         ),
-        'node_modules/beauty-amp-core2': fsmock.load(
-            path.resolve(__dirname, '../node_modules/beauty-amp-core2')
-        ),
-        'node_modules/node-sql-parser': fsmock.load(
-            path.resolve(__dirname, '../node_modules/node-sql-parser')
-        ),
-        'node_modules/big-integer': fsmock.load(
-            path.resolve(__dirname, '../node_modules/big-integer')
-        ),
+        // SQL formatting lazily reads this transitive package at runtime.
         'node_modules/sql-formatter': fsmock.load(
             path.resolve(__dirname, '../node_modules/sql-formatter')
         ),
-        'node_modules/jsox': fsmock.load(path.resolve(__dirname, '../node_modules/jsox')),
-        'node_modules/nearley': fsmock.load(path.resolve(__dirname, '../node_modules/nearley')),
     };
     if (isDeploy) {
         // load files we manually prepared for a direct test of `deploy` command
@@ -293,10 +296,30 @@ export function mockReset() {
 }
 
 /**
+ * registers a REST error override for the current test, forcing the mock to answer any REST
+ * request whose pathname contains `urlIncludes` with the given error status/body instead of the
+ * normal fixture (used to simulate the SFMC API returning e.g. HTTP 500 for an endpoint). The
+ * override is cleared automatically on the next mockSetup.
+ *
+ * @param {string} urlIncludes substring the request pathname must contain to trigger the error
+ * @param {number} status HTTP status code to return (e.g. 500)
+ * @param {object} [body] response body to return; when omitted the shared error fixture for the
+ * status is served (e.g. `test/resources/rest500-response.json`)
+ * @param {string} [method] optional http method filter (lowercase, e.g. 'get')
+ * @param {string} [code] axios error code to attach (defaults based on status, e.g. 5xx → ERR_BAD_RESPONSE)
+ * @param {string} [bodyFixture] base filename of a fixture in `test/resources` to use as the
+ * response body (e.g. `rest400-validationError-response.json`); overrides the `rest<status>-response.json` default
+ * @returns {void}
+ */
+export function mockRESTError(urlIncludes, status, body, method, code, bodyFixture) {
+    addRestErrorOverride(urlIncludes, status, body, method, code, bodyFixture);
+}
+
+/**
  * helper to return amount of api callouts
  *
  * @param {boolean} [includeToken] if true, will include token calls in count
- * @returns {object} of API history
+ * @returns {number} of API history
  */
 export function getAPIHistoryLength(includeToken) {
     const historyArr = Object.values(apimock.history).flat();
@@ -320,9 +343,10 @@ export function getAPIHistory() {
  * @param {'patch'|'delete'|'post'|'get'|'put'} method http method
  * @param {string} url url without domain, end on % if you want to search with startsWith()
  * @param {boolean} returnAll useful for post requests that often have multiple callouts with the same url
- * @returns {object} json payload of the request
+ * @param {boolean} expectNone if true, will not log an error if no callout is found
+ * @returns {object | null} json payload of the request
  */
-export function getRestCallout(method, url, returnAll = false) {
+export function getRestCallout(method, url, returnAll = false, expectNone = false) {
     if (!apimock.history[method]?.length) {
         console.log(`${tWarn} No history for method ${method}.`); // eslint-disable-line no-console
         const methods = Object.keys(apimock.history)
@@ -336,7 +360,7 @@ export function getRestCallout(method, url, returnAll = false) {
     /**
      * helper for filter/find
      *
-     * @param {any} item history item
+     * @param {{url:string}} item history item
      * @returns {boolean} if item matches
      */
     function findCallout(item) {
@@ -345,6 +369,9 @@ export function getRestCallout(method, url, returnAll = false) {
 
     const myCallout = returnAll ? subset.filter(findCallout) : subset.find(findCallout);
     if (!myCallout) {
+        if (expectNone) {
+            return null;
+        }
         console.error(`${tWarn} No callout found for ${method} ${url}`); // eslint-disable-line no-console
         const urls = [...new Set(subset.map((el) => el.url))].join('\n- ');
         const methods = Object.keys(apimock.history)
@@ -361,9 +388,10 @@ export function getRestCallout(method, url, returnAll = false) {
  *
  * @param {'Schedule'|'Retrieve'|'Create'|'Update'|'Delete'|'Describe'|'Execute'} requestAction soap request types
  * @param {string} [objectType] optionall filter requests by object
- * @returns {object[]} json payload of the requests
+ * @param {boolean} expectNone if true, will not log an error if no callout is found
+ * @returns {object[] | null} json payload of the requests
  */
-export function getSoapCallouts(requestAction, objectType) {
+export function getSoapCallouts(requestAction, objectType, expectNone = false) {
     const method = 'post';
     const url = '/Service.asmx';
     const subset = apimock.history[method];
@@ -375,13 +403,16 @@ export function getSoapCallouts(requestAction, objectType) {
         // find soap requestst of the correct request type
         .filter((item) =>
             !objectType || item.data.includes('<ObjectType')
-                ? item.data.split('<ObjectType>')[1].split('</ObjectType>')[0] === objectType
+                ? item.data.split('<ObjectType>', 2)[1].split('</ObjectType>', 1)[0] === objectType
                 : item.data.includes('<Objects xsi:type="')
-                  ? item.data.split('<Objects xsi:type="')[1].split('">')[0] === objectType
+                  ? item.data.split('<Objects xsi:type="', 2)[1].split('">', 1)[0] === objectType
                   : false
         )
         .map((item) => item.data);
     if (!myCallout) {
+        if (expectNone) {
+            return null;
+        }
         console.error(`${tWarn} No callout found for ${requestAction} ${objectType || ''}`); // eslint-disable-line no-console
         return null;
     }

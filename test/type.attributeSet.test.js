@@ -52,5 +52,46 @@ describe('type: attributeSet', () => {
             );
             return;
         });
+
+        it('Should resolve shared dataExtensions in attributeSet when retrieved together with dataExtension', async () => {
+            // WHEN
+            // this test verifies the fix for: shared DEs not resolved if attributeSet+dataExtension is retrieved together
+            const retrieve = await handler.retrieve('testInstance/testBU', [
+                'dataExtension',
+                'attributeSet',
+            ]);
+
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            assert.equal(
+                retrieve['testInstance/testBU'].attributeSet
+                    ? Object.keys(retrieve['testInstance/testBU'].attributeSet).length
+                    : 0,
+                28,
+                'only 28 attributeSets expected in retrieve response'
+            );
+            // get results from cache
+            const result = cache.getCache();
+            assert.equal(
+                result.attributeSet ? Object.keys(result.attributeSet).length : 0,
+                28,
+                'only 28 attributeSets expected in cache'
+            );
+
+            // verify that shared DE was resolved correctly in attributeSet (this is the key bug fix check)
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_dataExtensionShared', 'attributeSet'),
+                await testUtils.getExpectedJson('9999999', 'attributeSet', 'retrieve'),
+
+                'returned metadata was not equal expected - shared DE should be resolved even when dataExtension is retrieved together with attributeSet'
+            );
+
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                9,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 });

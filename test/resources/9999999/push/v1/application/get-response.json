@@ -1,0 +1,64 @@
+[
+    {
+        "keys": [
+            "Card_Theme"
+        ],
+        "id": "7d00d57d-0d94-4a5d-85bd-b51a47ba1b9f",
+        "key": "ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA",
+        "name": "Test Push App One",
+        "description": "test push application",
+        "createdDate": "2026-03-24T20:56:00Z",
+        "modifiedDate": "2026-08-25T12:45:07.933Z",
+        "apnsEnabled": false,
+        "gcmEnabled": false,
+        "configuration": {
+            "customSound": false,
+            "openDirect": false,
+            "customKeys": true,
+            "payloadEditor": false,
+            "messageCategories": false
+        },
+        "deviceEndpoint": "https://mct0l7nxfq2r988t1kxfy8sc4xxx.device.marketingcloudapis.com/"
+    },
+    {
+        "keys": [
+            "name",
+            "objId"
+        ],
+        "id": "d4f2c26f-2104-40f8-873e-c33bc579e744",
+        "key": "YjhMeTFBUWgtRUNIUHNNN3hYbm5SQToxMTc6MA",
+        "name": "Test Push App Two",
+        "description": "",
+        "createdDate": "2026-05-19T09:19:00Z",
+        "modifiedDate": "2026-08-26T14:40:59.657Z",
+        "apnsEnabled": true,
+        "apnsTopic": "com.example.testapp.two",
+        "gcmEnabled": false,
+        "configuration": {
+            "customSound": false,
+            "openDirect": false,
+            "customKeys": true,
+            "payloadEditor": false,
+            "messageCategories": false
+        },
+        "deviceEndpoint": "https://mct0l7nxfq2r988t1kxfy8sc4xxx.device.marketingcloudapis.com/"
+    },
+    {
+        "id": "16d6ca5e-7992-4fb3-967c-269119f8c537",
+        "key": "WHNyV0ZwSjVzMC1XZkNhUkdmakZOdzoxMTc6MA",
+        "name": "Test Push App Three",
+        "description": "this is a testing app",
+        "createdDate": "2025-08-12T12:20:00Z",
+        "modifiedDate": "2025-08-12T12:27:50.56Z",
+        "apnsEnabled": false,
+        "gcmEnabled": false,
+        "configuration": {
+            "customSound": false,
+            "openDirect": false,
+            "customKeys": false,
+            "payloadEditor": false,
+            "messageCategories": false
+        },
+        "deviceEndpoint": "https://mct0l7nxfq2r988t1kxfy8sc4xxx.device.marketingcloudapis.com/"
+    }
+]

@@ -439,17 +439,17 @@ describe('type: script', () => {
             assert.equal(fileList.length, 3, 'expected only 3 file paths (html, json, ssjs)');
 
             assert.equal(
-                fileList[0].split('\\').join('/'),
+                fileList[0].replaceAll('\\', '/'),
                 'retrieve/testInstance/testBU/script/testExisting_script.script-meta.json',
                 'wrong JSON path'
             );
             assert.equal(
-                fileList[1].split('\\').join('/'),
+                fileList[1].replaceAll('\\', '/'),
                 'retrieve/testInstance/testBU/script/testExisting_script.script-meta.ssjs',
                 'wrong SSJS path'
             );
             assert.equal(
-                fileList[2].split('\\').join('/'),
+                fileList[2].replaceAll('\\', '/'),
                 'retrieve/testInstance/testBU/script/testExisting_script.script-meta.html',
                 'wrong HTML path'
             );

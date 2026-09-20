@@ -2,7 +2,7 @@ declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: string[];
     namespace dependencyGraph {
-        let filterDefinition: string[];
+        let dataFilter: string[];
         let dataExtension: string[];
     }
     let hasExtended: boolean;

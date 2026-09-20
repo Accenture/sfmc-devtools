@@ -9,14 +9,15 @@
         "aaron-bond.better-comments",
         "johnpapa.vscode-peacock",
 
+        // SFMC language support
+        "joernberkefeld.sfmc-language",
+
         // Linters
         "dbaeumer.vscode-eslint",
 
         // Formatting & colors
         "editorconfig.editorconfig",
         "esbenp.prettier-vscode",
-        "xnerd.ampscript-language",
-        "FiB.beautyAmp",
 
         // coding helper
         "MarketingThibs.ampscriptsnippets",
@@ -26,5 +27,12 @@
 
         // Markdown / Readme.md
         "joernberkefeld.markdown-preview-bitbucket-innersource"
+    ],
+
+    // These extensions conflict with joernberkefeld.sfmc-language and should not be used alongside it.
+    // They cause unpredictable formatting, syntax highlighting, and IntelliSense in AMPscript/HTML files.
+    "unwantedRecommendations": [
+        "xnerd.ampscript-language",
+        "FiB.beautyAmp"
     ]
 }

@@ -19,6 +19,21 @@ export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 declare const FileFs: typeof fs & {
     prettierConfig: any;
     prettierConfigFileType: any;
+    prettierConfigCache: Map<any, any>;
+    /**
+     * Maps mcdev file extensions to Prettier parser names.
+     *
+     * @param {string} filetype file extension without dot
+     * @returns {string | undefined} parser name when mcdev has an explicit mapping
+     */
+    _getPrettierParser(filetype: string): string | undefined;
+    /**
+     * Checks whether formatting is enabled by CLI or project configuration.
+     *
+     * @param {Mcdevrc} properties project configuration
+     * @returns {boolean} whether formatting should run
+     */
+    _isFormattingEnabled(properties: Mcdevrc): boolean;
     /**
      * copies a file from one path to another
      *
@@ -81,21 +96,12 @@ declare const FileFs: typeof fs & {
      */
     writePrettyToFile: (directory: string | string[], filename: string, filetype: string, content: string, templateVariables?: TemplateMap) => Promise<boolean>;
     /**
-     * helper that applies beautyAmp onto given stringified content; strongly typed for strings only
+     * Formats extracted Transactional SMS content when formatting is enabled.
      *
-     * @param {string} content code
-     * @param {boolean} [formatHTML] applies formatting to html and ampscript if true
-     * @returns {Promise.<string>} formatted code
+     * @param {string} content extracted AMPscript content
+     * @returns {Promise.<string>} original string when disabled or on error; formatted string on success
      */
-    _beautify_beautyAmp_beautify: (content: string, formatHTML?: boolean) => Promise<string>;
-    /**
-     * helper for {@link File.writePrettyToFile}, applying beautyAmp onto given stringified content
-     *
-     * @param {string} content filecontent
-     * @param {boolean} formatHTML should we format HTML or not via prettier included in beautyAmp
-     * @returns {Promise.<string>} original string on error; formatted string on success
-     */
-    beautify_beautyAmp: (content: string, formatHTML?: boolean) => Promise<string>;
+    _formatTransactionalSmsContent: (content: string) => Promise<string>;
     /**
      * helper for {@link File.writePrettyToFile}, applying prettier onto given stringified content
      * ! Important: run 'await File.initPrettier()' in your MetadataType.retrieve() once before hitting this
@@ -166,9 +172,10 @@ declare const FileFs: typeof fs & {
      * helper that splits the config back into auth & config parts to save them separately
      *
      * @param {Mcdevrc} properties central properties object
-     * @returns {Promise.<void>} -
+     * @param {string} [version] version to persist; defaults to the current mcdev version
+     * @returns {Promise.<boolean>} whether the config file was saved successfully
      */
-    saveConfigFile(properties: Mcdevrc): Promise<void>;
+    saveConfigFile(properties: Mcdevrc, version?: string): Promise<boolean>;
     /**
      * Initalises Prettier formatting lib async.
      *

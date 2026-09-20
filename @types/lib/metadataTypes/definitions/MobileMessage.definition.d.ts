@@ -47,6 +47,12 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        r__mobileMessage_name: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         'code.code': {
             isCreateable: boolean;
             isUpdateable: boolean;

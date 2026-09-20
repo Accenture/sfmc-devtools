@@ -1,0 +1,29 @@
+{
+    "customerKey": "test_slash",
+    "assetType": {
+        "name": "htmlblock",
+        "displayName": "HTML Block"
+    },
+    "fileProperties": {
+        "fileName": "test_slash"
+    },
+    "name": "test_slash",
+    "createdBy": {},
+    "modifiedBy": {},
+    "memberId": "9999999",
+    "status": {
+        "name": "Draft"
+    },
+    "design": "",
+    "meta": {
+        "wrapperStyles": {
+            "mobile": {
+                "visible": true
+            },
+            "styling": {}
+        }
+    },
+    "availableViews": [],
+    "modelVersion": 2,
+    "r__folder_Path": "Content Builder/bla∕blub"
+}

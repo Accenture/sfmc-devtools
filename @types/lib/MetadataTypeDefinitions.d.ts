@@ -28,6 +28,8 @@ declare namespace _default {
     export { mobileCode };
     export { mobileKeyword };
     export { mobileMessage };
+    export { mobilePush };
+    export { mobilePushApp };
     export { query };
     export { role };
     export { script };
@@ -72,6 +74,8 @@ import list from './metadataTypes/definitions/List.definition.js';
 import mobileCode from './metadataTypes/definitions/MobileCode.definition.js';
 import mobileKeyword from './metadataTypes/definitions/MobileKeyword.definition.js';
 import mobileMessage from './metadataTypes/definitions/MobileMessage.definition.js';
+import mobilePush from './metadataTypes/definitions/MobilePush.definition.js';
+import mobilePushApp from './metadataTypes/definitions/MobilePushApp.definition.js';
 import query from './metadataTypes/definitions/Query.definition.js';
 import role from './metadataTypes/definitions/Role.definition.js';
 import script from './metadataTypes/definitions/Script.definition.js';

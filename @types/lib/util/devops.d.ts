@@ -1,3 +1,12 @@
+/**
+ * Suppresses migration-only asset changes while preserving edited destinations.
+ *
+ * @param {DeltaPkgItem[]} files normalized Git changes
+ * @param {string} range compared Git range
+ * @param {import('simple-git').SimpleGit} gitClient Git client
+ * @returns {Promise.<DeltaPkgItem[]>} filtered changes
+ */
+export function filterAssetRegroupingChanges(files: DeltaPkgItem[], range: string, gitClient?: import("simple-git").SimpleGit): Promise<DeltaPkgItem[]>;
 export default DevOps;
 export type AuthObject = import("../../types/mcdev.d.js").AuthObject;
 export type BuObject = import("../../types/mcdev.d.js").BuObject;

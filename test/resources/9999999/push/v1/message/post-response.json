@@ -1,0 +1,38 @@
+{
+    "links": {},
+    "id": "MTY2OjExNDow",
+    "alert": "my push message %%=ContentBlockByKey(\"testExisting_contentBlock_DEV\")=%%",
+    "sound": "default",
+    "startDateUtc": "2026-04-15T08:54:00.000Z",
+    "startDate": "2026-04-15T02:54:00",
+    "messageType": 1,
+    "contentType": 1,
+    "messageObjectId": "5d3426a9-bda9-4d43-9575-bb4624e3938e",
+    "application": {
+        "links": {},
+        "keys": ["Card_Theme"],
+        "id": "7d00d57d-0d94-4a5d-85bd-b51a47ba1b9f",
+        "key": "ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA",
+        "name": "Android Learning App",
+        "description": "joerns testing app",
+        "createdDate": "2026-03-24T20:56:00Z",
+        "modifiedDate": "2026-08-25T12:45:07.933Z",
+        "configuration": {
+            "customSound": false,
+            "openDirect": false,
+            "customKeys": true,
+            "payloadEditor": false,
+            "messageCategories": false
+        }
+    },
+    "name": "test_mobilePush_DEV",
+    "tzPastSendAction": 0,
+    "sendInitiator": 1,
+    "status": 2,
+    "title": "my push title",
+    "subtitle": "my push subtitle for ios",
+    "activeTimes": [],
+    "createdDate": "2026-09-04T05:16:00",
+    "lastUpdated": "2026-09-04T05:16:00",
+    "assetId": 17180
+}
