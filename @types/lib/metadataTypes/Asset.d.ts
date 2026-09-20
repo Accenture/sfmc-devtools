@@ -404,12 +404,6 @@ declare class Asset extends MetadataType {
      * @returns {void}
      */
     static _enableShareAsset(): void;
-    /**
-     * enables share-asset metadata fields at runtime if option is active
-     *
-     * @returns {void}
-     */
-    static _enableShareAssetIfNeeded(): void;
 }
 declare namespace Asset {
     let getJsonFromFSCache: {
@@ -508,31 +502,64 @@ declare namespace Asset {
                 retrieving: boolean;
                 template: boolean;
             };
-            'businessUnitAvailability.%.view': {
+            'businessUnitAvailability[].view': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            'businessUnitAvailability.%.update': {
+            'businessUnitAvailability[].update': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            'businessUnitAvailability.%.delete': {
+            'businessUnitAvailability[].delete': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            'businessUnitAvailability.%.memberId': {
+            'businessUnitAvailability[].memberId': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            'businessUnitAvailability.%.transferOwnership': {
+            'businessUnitAvailability[].transferOwnership': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            sharingProperties: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'sharingProperties.localAssets': {
+                skipValidation: boolean;
+            };
+            'sharingProperties.sharedWith': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'sharingProperties.sharedFrom': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'sharingProperties.sharedFromMID': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'sharingProperties.sharingType': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -854,39 +881,6 @@ declare namespace Asset {
                 template: boolean;
             };
             'owner.userId': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            sharingProperties: {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            'sharingProperties.localAssets': {
-                skipValidation: boolean;
-            };
-            'sharingProperties.sharedWith': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            'sharingProperties.sharedFrom': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            'sharingProperties.sharedFromMID': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            'sharingProperties.sharingType': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
