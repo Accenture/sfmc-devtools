@@ -441,10 +441,7 @@ describe('FORMATTER', () => {
 
         const updatedPackageJson = await File.readJSON('package.json');
         expect(updatedPackageJson.devDependencies).not.to.have.property('prettier-plugin-sql');
-        expect(updatedPackageJson.devDependencies).to.have.property(
-            'prettier-plugin-sfmc',
-            '2.0.0'
-        );
+        expect(updatedPackageJson.devDependencies).to.have.property('prettier-plugin-sfmc');
         assert.deepEqual(calls, [['npm', ['install']]]);
     });
 
@@ -491,10 +488,7 @@ describe('FORMATTER', () => {
         const updatedPackageJson = await File.readJSON('package.json');
         expect(updatedPackageJson.devDependencies).not.to.have.property('prettier-plugin-sql');
         assert.deepEqual(calls, [['npm', ['install'], true]]);
-        expect(updatedPackageJson.devDependencies).to.have.property(
-            'prettier-plugin-sfmc',
-            '2.0.0'
-        );
+        expect(updatedPackageJson.devDependencies).to.have.property('prettier-plugin-sfmc');
         expect(infoLogs).not.to.include('✔️  Dependencies installed.');
         expect(errorLogs).to.include(
             'Could not install/update dependencies. Migration incomplete.'

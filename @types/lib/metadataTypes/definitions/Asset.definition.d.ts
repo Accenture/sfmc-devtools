@@ -91,31 +91,64 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
-        'businessUnitAvailability.%.view': {
+        'businessUnitAvailability[].view': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
             template: boolean;
         };
-        'businessUnitAvailability.%.update': {
+        'businessUnitAvailability[].update': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
             template: boolean;
         };
-        'businessUnitAvailability.%.delete': {
+        'businessUnitAvailability[].delete': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
             template: boolean;
         };
-        'businessUnitAvailability.%.memberId': {
+        'businessUnitAvailability[].memberId': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
             template: boolean;
         };
-        'businessUnitAvailability.%.transferOwnership': {
+        'businessUnitAvailability[].transferOwnership': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        sharingProperties: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'sharingProperties.localAssets': {
+            skipValidation: boolean;
+        };
+        'sharingProperties.sharedWith': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'sharingProperties.sharedFrom': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'sharingProperties.sharedFromMID': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'sharingProperties.sharingType': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
@@ -437,39 +470,6 @@ declare namespace _default {
             template: boolean;
         };
         'owner.userId': {
-            isCreateable: boolean;
-            isUpdateable: boolean;
-            retrieving: boolean;
-            template: boolean;
-        };
-        sharingProperties: {
-            isCreateable: boolean;
-            isUpdateable: boolean;
-            retrieving: boolean;
-            template: boolean;
-        };
-        'sharingProperties.localAssets': {
-            skipValidation: boolean;
-        };
-        'sharingProperties.sharedWith': {
-            isCreateable: boolean;
-            isUpdateable: boolean;
-            retrieving: boolean;
-            template: boolean;
-        };
-        'sharingProperties.sharedFrom': {
-            isCreateable: boolean;
-            isUpdateable: boolean;
-            retrieving: boolean;
-            template: boolean;
-        };
-        'sharingProperties.sharedFromMID': {
-            isCreateable: boolean;
-            isUpdateable: boolean;
-            retrieving: boolean;
-            template: boolean;
-        };
-        'sharingProperties.sharingType': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;

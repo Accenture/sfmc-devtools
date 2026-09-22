@@ -4,6 +4,7 @@ export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
 export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
 export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
 export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
 export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
@@ -19,6 +20,7 @@ export type ContentBlockConversionTypes = import("../../types/mcdev.d.js").Conte
  * @typedef {import('../../types/mcdev.d.js').CodeExtractItem} CodeExtractItem
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeItem} MetadataTypeItem
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemDiff} MetadataTypeItemDiff
+ * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemObj} MetadataTypeItemObj
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMap} MetadataTypeMap
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
@@ -396,6 +398,13 @@ declare class Asset extends MetadataType {
      * @param {string[]} dependentKeyArr list of found keys
      */
     static _getDependentFilesExtra(slots: object, dependentKeyArr: string[]): void;
+    /**
+     * enables metadata definitions required for sharing assets
+     *
+     * @param {boolean} keepSharingInfo true to enable, false to disable
+     * @returns {void}
+     */
+    static _toggleShareAssetTemplating(keepSharingInfo: boolean): void;
 }
 declare namespace Asset {
     let getJsonFromFSCache: {
@@ -494,31 +503,64 @@ declare namespace Asset {
                 retrieving: boolean;
                 template: boolean;
             };
-            'businessUnitAvailability.%.view': {
+            'businessUnitAvailability[].view': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            'businessUnitAvailability.%.update': {
+            'businessUnitAvailability[].update': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            'businessUnitAvailability.%.delete': {
+            'businessUnitAvailability[].delete': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            'businessUnitAvailability.%.memberId': {
+            'businessUnitAvailability[].memberId': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            'businessUnitAvailability.%.transferOwnership': {
+            'businessUnitAvailability[].transferOwnership': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            sharingProperties: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'sharingProperties.localAssets': {
+                skipValidation: boolean;
+            };
+            'sharingProperties.sharedWith': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'sharingProperties.sharedFrom': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'sharingProperties.sharedFromMID': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'sharingProperties.sharingType': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -840,39 +882,6 @@ declare namespace Asset {
                 template: boolean;
             };
             'owner.userId': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            sharingProperties: {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            'sharingProperties.localAssets': {
-                skipValidation: boolean;
-            };
-            'sharingProperties.sharedWith': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            'sharingProperties.sharedFrom': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            'sharingProperties.sharedFromMID': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            'sharingProperties.sharingType': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;

@@ -167,6 +167,21 @@ declare class MetadataType {
         type: string;
     }>;
     /**
+     * helper for buildTemplate
+     *
+     * @param {any} value convert anything to string
+     * @returns {string|any[]} stringified value
+     */
+    static stringifyValue(value: any): string | any[];
+    /**
+     * helper for buildTemplate
+     *
+     * @param {any} target -
+     * @param {any} fieldPathParts -
+     * @returns {void} .
+     */
+    static stringifyFieldByPath(target: any, fieldPathParts: any): void;
+    /**
      * Gets metadata cache with limited fields and does not store value to disk
      *
      * @param {string} retrieveDir Directory where retrieved metadata directory will be saved

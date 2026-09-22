@@ -17,7 +17,7 @@ chai.use(chaiFiles);
  * @param {string} type of metadata
  * @param {string} subtype of metadata
  * @param {string} [buName] used when we need to test on ParentBU
- * @returns {Promise.<string>} file in string form
+ * @returns {Promise.<ReturnType<JSON['parse']>>} file in string form
  */
 async function getActualJson(customerKey, type, subtype, buName = 'testBU') {
     try {
@@ -1078,6 +1078,118 @@ describe('type: asset', () => {
                 testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
                 4,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should stringify shareAsset numeric paths during buildTemplate', async () => {
+            await handler.retrieve('testInstance/testBU', ['asset']);
+
+            const expectedApiCallsRetrieve = 31;
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                expectedApiCallsRetrieve,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+
+            const sourceKey = 'testExisting_asset_htmlblock';
+            const templatingKey = 'testExisting_asset_htmlblock_shareAsset';
+            const source = await getActualJson(sourceKey, 'asset', 'block');
+            source.customerKey = templatingKey;
+            source.name = templatingKey;
+            source.fileProperties.fileName = templatingKey;
+            source.businessUnitAvailability = [
+                {
+                    view: true,
+                    update: true,
+                    delete: false,
+                    memberId: 9999999,
+                    transferOwnership: false,
+                },
+            ];
+            source.sharingProperties = {
+                sharedWith: [9999999],
+                sharingType: 'view',
+            };
+            const sourceHtml = await getActualFile(sourceKey, 'asset', 'block', 'html');
+            await File.writeJSONToFile(
+                './retrieve/testInstance/testBU/asset/block',
+                `${templatingKey}.asset-block-meta`,
+                source
+            );
+            await File.writeToFile(
+                './retrieve/testInstance/testBU/asset/block',
+                `${templatingKey}.asset-block-meta`,
+                'html',
+                sourceHtml
+            );
+
+            handler.setOptions({ shareAsset: true });
+            const result = await handler.buildTemplate(
+                'testInstance/testBU',
+                'asset',
+                [templatingKey],
+                ['testSourceMarket']
+            );
+
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+            assert.equal(
+                result.asset ? Object.keys(result.asset).length : 0,
+                1,
+                'unexpected number of assets templated'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength() - expectedApiCallsRetrieve,
+                0,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+
+            const expectedTemplateJson = {
+                assetType: {
+                    displayName: 'HTML Block',
+                    name: 'htmlblock',
+                },
+                availableViews: [],
+                businessUnitAvailability: [
+                    {
+                        delete: false,
+                        memberId: '{{{mid}}}',
+                        transferOwnership: false,
+                        update: true,
+                        view: true,
+                    },
+                ],
+                createdBy: {},
+                customerKey: '{{{prefix}}}asset_htmlblock_shareAsset',
+                design: '',
+                fileProperties: {
+                    fileName: '{{{prefix}}}asset_htmlblock_shareAsset',
+                },
+                memberId: '{{{mid}}}',
+                meta: {
+                    wrapperStyles: {
+                        mobile: {
+                            visible: true,
+                        },
+                        styling: {},
+                    },
+                },
+                modelVersion: 2,
+                modifiedBy: {},
+                name: '{{{prefix}}}asset_htmlblock_shareAsset',
+                r__folder_Path: 'Content Builder',
+                sharingProperties: {
+                    sharedWith: ['{{{mid}}}'],
+                    sharingType: 'view',
+                },
+                status: {
+                    name: 'Draft',
+                },
+            };
+            assert.deepEqual(
+                await getActualTemplateJson(templatingKey, 'asset', 'block'),
+                expectedTemplateJson,
+                'returned template JSON of buildTemplate was not equal expected'
             );
             return;
         });
