@@ -66,6 +66,7 @@
         "version:patch": "npm version --no-commit-hooks patch"
     },
     "dependencies": {
+        "@inquirer/prompts": "8.7.2",
         "cli-progress": "3.12.0",
         "command-exists": "1.2.9",
         "conf": "15.1.0",
@@ -73,7 +74,6 @@
         "deep-equal": "2.2.3",
         "fast-xml-parser": "5.8.0",
         "fs-extra": "11.3.4",
-        "inquirer": "14.0.1",
         "json-to-table": "4.2.1",
         "mustache": "4.2.0",
         "p-limit": "7.3.0",
@@ -92,7 +92,6 @@
         "@eslint/js": "10.0.1",
         "@types/chai": "5.2.3",
         "@types/fs-extra": "11.0.4",
-        "@types/inquirer": "9.0.9",
         "@types/mocha": "10.0.8",
         "@types/mock-fs": "4.13.4",
         "@types/node": "25.9.1",
