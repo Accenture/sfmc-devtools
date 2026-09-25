@@ -169,18 +169,18 @@ declare class MetadataType {
     /**
      * helper for buildTemplate
      *
-     * @param {any} value convert anything to string
-     * @returns {string|any[]} stringified value
+     * @param {unknown} value convert anything to string
+     * @returns {string|unknown[]|object} stringified value
      */
-    static stringifyValue(value: any): string | any[];
+    static stringifyValue(value: unknown): string | unknown[] | object;
     /**
      * helper for buildTemplate
      *
-     * @param {any} target -
-     * @param {any} fieldPathParts -
+     * @param {object|unknown[]} target -
+     * @param {string[]} fieldPathParts -
      * @returns {void} .
      */
-    static stringifyFieldByPath(target: any, fieldPathParts: any): void;
+    static stringifyFieldByPath(target: object | unknown[], fieldPathParts: string[]): void;
     /**
      * Gets metadata cache with limited fields and does not store value to disk
      *

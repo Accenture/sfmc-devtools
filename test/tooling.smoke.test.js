@@ -70,6 +70,21 @@ describe('GENERATED TOOLING SMOKE', function () {
         assert.equal(result.stdout.trim(), Util.packageJsonMcdev.version);
     }).timeout(150_000);
 
+    it('prints the mcdev package version outside the repository', () => {
+        const result = spawnSync(
+            process.execPath,
+            [path.join(repository, 'lib/cli.js'), '--version'],
+            {
+                cwd: path.dirname(repository),
+                encoding: 'utf8',
+                timeout: 120_000,
+            }
+        );
+        assert.ifError(result.error);
+        assert.equal(result.status, 0, result.stderr);
+        assert.equal(result.stdout.trim(), Util.packageJsonMcdev.version);
+    }).timeout(150_000);
+
     it('keeps an array manifest whose selected versions come from mcdev', async () => {
         const dependencies = await readJson(
             path.join(repository, 'boilerplate/npm-dependencies.json')
@@ -99,7 +114,7 @@ describe('GENERATED TOOLING SMOKE', function () {
         const plugin = await readJson(
             path.join(project, 'node_modules/eslint-plugin-sfmc/package.json')
         );
-        assert.equal(plugin.version, '5.0.0');
+        assert.equal(plugin.version, manifest.devDependencies['eslint-plugin-sfmc']);
     });
 
     it('preserves complete SFMC array entries and compatibility objects', async () => {

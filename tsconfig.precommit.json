@@ -4,7 +4,7 @@
     "compilerOptions": {
         "module": "nodenext",
         "moduleResolution": "nodenext",
-        "target": "es2023",
+        "target": "es2024",
         "checkJs": true,
         "skipLibCheck": true,
         // Tells TypeScript to read JS files, as
