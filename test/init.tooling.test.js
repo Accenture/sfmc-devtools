@@ -273,9 +273,8 @@ describe('INIT TOOLING', function () {
     it('retries a failed file write and refreshes its backup', async () => {
         await File.outputFile('eslint.config.js', 'first version');
         File.writeToFile = async (directory, name, extension, content) =>
-            name === 'eslint.config'
-                ? false
-                : originals.write.call(File, directory, name, extension, content);
+            name !== 'eslint.config' &&
+            originals.write.call(File, directory, name, extension, content);
         assert.equal(await Init.upgradeProject(null, true), false);
         assert.equal(await File.readFile('eslint.config.js.BAK', 'utf8'), 'first version');
         await File.outputFile('eslint.config.js', 'retry version');

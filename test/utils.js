@@ -227,10 +227,16 @@ export function mockSetup(isDeploy) {
         authResources.success.response.access_token = JSON.parse(config.data).account_id;
         return [authResources.success.status, authResources.success.response];
     });
-    apimock.onPost(soapUrl).reply((config) => handleSOAPRequest(config));
+    apimock
+        .onPost(soapUrl)
+        .reply(
+            async (config) => /** @type {[number, unknown]} */ (await handleSOAPRequest(config))
+        );
     apimock
         .onAny(new RegExp(`^${escapeRegExp(restUrl)}`))
-        .reply((config) => handleRESTRequest(config));
+        .reply(
+            async (config) => /** @type {[number, unknown]} */ (await handleRESTRequest(config))
+        );
     const fsMockConf = {
         '.prettierrc': fsmock.load(path.resolve(__dirname, '../boilerplate/files/.prettierrc')),
         'eslint.config.js': fsmock.load(

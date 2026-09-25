@@ -150,10 +150,10 @@ describe('FORMATTER', () => {
     });
 
     it('keeps parser-specific immutable configs isolated sequentially and concurrently', async () => {
-        const sequential = [];
-        for (const filetype of ['sql', 'ssjs', 'html', 'sql', 'html', 'ssjs']) {
-            sequential.push(
-                await File._beautify_prettier(
+        const sequential = await Array.fromAsync(
+            ['sql', 'ssjs', 'html', 'sql', 'html', 'ssjs'],
+            (filetype) =>
+                File._beautify_prettier(
                     '',
                     filetype,
                     filetype,
@@ -163,8 +163,7 @@ describe('FORMATTER', () => {
                         html: '<p>%%[set @x=1]%%</p>',
                     }[filetype]
                 )
-            );
-        }
+        );
         const concurrent = await Promise.all([
             File._beautify_prettier('', 'sql2', 'sql', 'select b from t'),
             File._beautify_prettier('', 'ssjs2', 'ssjs', 'var y={b:2};'),

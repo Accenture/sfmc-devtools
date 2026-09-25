@@ -60,7 +60,7 @@ async function getActualFile(customerKey, type, subtype, ext, filename, buName =
  * @param {string} customerKey of metadata
  * @param {string} type of metadata
  * @param {string} subtype of metadata
- * @returns {Promise.<string>} file in string form
+ * @returns {Promise.<object>} parsed template JSON
  */
 async function getActualTemplateJson(customerKey, type, subtype) {
     try {
@@ -1188,8 +1188,7 @@ describe('type: asset', () => {
             };
             assert.deepEqual(
                 await getActualTemplateJson(templatingKey, 'asset', 'block'),
-                expectedTemplateJson,
-                'returned template JSON of buildTemplate was not equal expected'
+                expectedTemplateJson
             );
             return;
         });

@@ -40,3 +40,7 @@ jobs:
             # Assuming code passes, run tests
             - name: Run mcdev-tests
               run: npm run test
+
+            - name: Verify packed production artifact
+              if: matrix.node == '24.15.0'
+              run: npm run verify:packed
