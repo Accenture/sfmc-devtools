@@ -106,6 +106,7 @@ declare namespace FileTransfer {
         lastmodDateField: string;
         lastmodNameField: any;
         restPagination: boolean;
+        restPaginationForKey: boolean;
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;

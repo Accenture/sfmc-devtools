@@ -69,6 +69,7 @@ declare namespace Campaign {
         lastmodDateField: string;
         lastmodNameField: any;
         restPagination: boolean;
+        restPaginationForKey: boolean;
         restPageSize: number;
         type: string;
         typeDescription: string;
