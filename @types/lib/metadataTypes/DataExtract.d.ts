@@ -115,6 +115,7 @@ declare namespace DataExtract {
         lastmodNameField: string;
         nameField: string;
         restPagination: boolean;
+        restPaginationForKey: boolean;
         maxKeyLength: number;
         type: string;
         typeDescription: string;

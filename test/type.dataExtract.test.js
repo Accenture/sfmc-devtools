@@ -41,6 +41,37 @@ describe('type: dataExtract', () => {
             );
             return;
         });
+
+        it('Should retrieve one specific dataExtract by key with pagination', async () => {
+            // WHEN
+            await handler.retrieve(
+                'testInstance/testBU',
+                ['dataExtract'],
+                ['testExisting_dataExtract']
+            );
+
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            const result = cache.getCache();
+            assert.deepEqual(
+                Object.keys(result.dataExtract || {}),
+                ['testExisting_dataExtract'],
+                'only the requested dataExtract expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_dataExtract', 'dataExtract'),
+                await testUtils.getExpectedJson('9999999', 'dataExtract', 'get'),
+                'returned JSON was not equal expected'
+            );
+            const dataExtractListCall = testUtils
+                .getAPIHistory()
+                .get.find((request) => request.url.startsWith('/automation/v1/dataextracts/'));
+            assert.equal(
+                dataExtractListCall?.url,
+                '/automation/v1/dataextracts/?$pageSize=500&$page=1',
+                'retrieve by key should use the paginated endpoint'
+            );
+        });
     });
 
     describe('Deploy ================', () => {

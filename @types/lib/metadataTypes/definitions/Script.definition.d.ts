@@ -14,6 +14,7 @@ declare namespace _default {
     let lastmodDateField: string;
     let lastmodNameField: any;
     let restPagination: boolean;
+    let restPaginationForKey: boolean;
     let type: string;
     let typeDescription: string;
     let typeRetrieveByDefault: boolean;
