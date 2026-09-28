@@ -6,6 +6,7 @@ import { createRequire } from 'node:module';
 import os from 'node:os';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { getSpinnerScenarios } from '../test/helpers/progress-scenarios.js';
 
 const repository = path.resolve(import.meta.dirname, '..');
 const fixturePath = path.join(repository, 'test', 'fixtures', 'progress-visual.json');
@@ -272,13 +273,12 @@ function createCaptures(cliProgress, createSpinner) {
         assetMigration: captureBar(
             '                 Migrating asset-message [{bar}] {percentage}% | {value}/{total}'
         ),
-        spinnerDefault: captureSpinner(),
-        spinnerCyan: captureSpinner({ color: 'cyan' }),
-        spinnerAscii: captureSpinner({ spinner: { frames: ['-', '\\', '|', '/'], interval: 80 } }),
-        spinnerPartial: captureSpinner({ partial: true }),
-        spinnerSuccess: captureSpinner({ finish: 'success' }),
-        spinnerError: captureSpinner({ finish: 'error' }),
-        nonTtySpinner: captureSpinner({ tty: false }),
+        ...Object.fromEntries(
+            Object.entries(getSpinnerScenarios()).map(([name, options]) => [
+                name,
+                captureSpinner(options),
+            ])
+        ),
     };
 }
 

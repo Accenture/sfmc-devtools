@@ -55,5 +55,6 @@ describe('experimental CLI bundle readiness', function () {
             [['--version'], ['--help'], ['explainTypes', '--json']]
         );
         assert.isTrue(report.commands.every((command) => command.exitCode === 0));
+        assert.equal(report.package.runtimeVersion, report.package.version);
     });
 });

@@ -4,6 +4,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createSpinner, getDefaultSpinnerFrames, ProgressBar } from '../lib/util/progress.js';
+import { getSpinnerScenarios } from './helpers/progress-scenarios.js';
 
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
 const fixturePath = path.join(testDirectory, 'fixtures', 'progress-visual.json');
@@ -203,13 +204,12 @@ function captureScenarios() {
         assetMigration: captureBar(
             '                 Migrating asset-message [{bar}] {percentage}% | {value}/{total}'
         ),
-        spinnerDefault: captureSpinner(),
-        spinnerCyan: captureSpinner({ color: 'cyan' }),
-        spinnerAscii: captureSpinner({ spinner: { frames: ['-', '\\', '|', '/'], interval: 80 } }),
-        spinnerPartial: captureSpinner({ partial: true }),
-        spinnerSuccess: captureSpinner({ finish: 'success' }),
-        spinnerError: captureSpinner({ finish: 'error' }),
-        nonTtySpinner: captureSpinner({ tty: false }),
+        ...Object.fromEntries(
+            Object.entries(getSpinnerScenarios()).map(([name, options]) => [
+                name,
+                captureSpinner(options),
+            ])
+        ),
     };
 }
 

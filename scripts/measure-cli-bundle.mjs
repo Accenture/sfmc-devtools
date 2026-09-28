@@ -48,7 +48,7 @@ export function extractBundledPackages(inputs) {
  * @param {string} cli bundled CLI path
  * @param {string[]} arguments_ CLI arguments
  * @param {string} cwd fixture working directory
- * @returns {{arguments: string[], exitCode: number, stdoutBytes: number, stderrBytes: number}} captured command metrics
+ * @returns {{arguments: string[], exitCode: number, stdout: string, stdoutBytes: number, stderrBytes: number}} captured command metrics
  */
 function runCli(cli, arguments_, cwd) {
     const result = spawnSync(process.execPath, [cli, ...arguments_], {
@@ -70,6 +70,7 @@ function runCli(cli, arguments_, cwd) {
     return {
         arguments: arguments_,
         exitCode: result.status,
+        stdout: result.stdout,
         stdoutBytes: Buffer.byteLength(result.stdout),
         stderrBytes: Buffer.byteLength(result.stderr),
     };
@@ -145,17 +146,19 @@ export async function measureCliBundle() {
         const transitiveBundledPackages = bundledPackages.filter(
             (dependency) => !directDependencies.includes(dependency)
         );
-        const commands = [
+        const commandRuns = [
             runCli(bundlePath, ['--version'], fixture),
             runCli(bundlePath, ['--help'], fixture),
             runCli(bundlePath, ['explainTypes', '--json'], fixture),
         ];
+        const commands = commandRuns.map(({ stdout, ...command }) => command);
 
         return {
             schemaVersion: 1,
             package: {
                 name: packageJson.name,
                 version: packageJson.version,
+                runtimeVersion: commandRuns[0].stdout.trim(),
             },
             closure: {
                 directDeclaredCount: directDependencies.length,
