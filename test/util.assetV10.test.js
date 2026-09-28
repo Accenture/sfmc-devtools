@@ -386,9 +386,10 @@ describe('v10 asset migration', function () {
         const rawIdenticalGit = {
             revparse: async () => 'same-blob',
         };
-        const identicalGit = /** @type {import('simple-git').SimpleGit} */ (
-            /** @type {unknown} */ (rawIdenticalGit)
-        );
+        const identicalGit =
+            /** @type {Pick<import('../lib/util/git.js').GitAdapter, 'revparse'>} */ (
+                /** @type {unknown} */ (rawIdenticalGit)
+            );
         assert.deepEqual(
             await filterAssetRegroupingChanges(gitDiff, 'base..target', identicalGit),
             []
@@ -397,7 +398,7 @@ describe('v10 asset migration', function () {
         const rawEditedGit = {
             revparse: async ([spec]) => (spec.startsWith('base:') ? 'old-blob' : 'new-blob'),
         };
-        const editedGit = /** @type {import('simple-git').SimpleGit} */ (
+        const editedGit = /** @type {Pick<import('../lib/util/git.js').GitAdapter, 'revparse'>} */ (
             /** @type {unknown} */ (rawEditedGit)
         );
         assert.deepEqual(await filterAssetRegroupingChanges(gitDiff, 'base..target', editedGit), [
@@ -418,9 +419,10 @@ describe('v10 asset migration', function () {
         const rawIdenticalGit = {
             revparse: async () => 'same-blob',
         };
-        const identicalGit = /** @type {import('simple-git').SimpleGit} */ (
-            /** @type {unknown} */ (rawIdenticalGit)
-        );
+        const identicalGit =
+            /** @type {Pick<import('../lib/util/git.js').GitAdapter, 'revparse'>} */ (
+                /** @type {unknown} */ (rawIdenticalGit)
+            );
         assert.deepEqual(
             await filterAssetRegroupingChanges([movedFile], 'base..target', identicalGit),
             []
@@ -429,7 +431,7 @@ describe('v10 asset migration', function () {
         const rawEditedGit = {
             revparse: async ([spec]) => (spec.startsWith('base:') ? 'old-blob' : 'new-blob'),
         };
-        const editedGit = /** @type {import('simple-git').SimpleGit} */ (
+        const editedGit = /** @type {Pick<import('../lib/util/git.js').GitAdapter, 'revparse'>} */ (
             /** @type {unknown} */ (rawEditedGit)
         );
         assert.deepEqual(

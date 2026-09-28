@@ -3,10 +3,10 @@
  *
  * @param {DeltaPkgItem[]} files normalized Git changes
  * @param {string} range compared Git range
- * @param {import('simple-git').SimpleGit} gitClient Git client
+ * @param {Pick<import('./git.js').GitAdapter, 'revparse'>} gitClient Git client
  * @returns {Promise.<DeltaPkgItem[]>} filtered changes
  */
-export function filterAssetRegroupingChanges(files: DeltaPkgItem[], range: string, gitClient?: import("simple-git").SimpleGit): Promise<DeltaPkgItem[]>;
+export function filterAssetRegroupingChanges(files: DeltaPkgItem[], range: string, gitClient?: Pick<import("./git.js").GitAdapter, "revparse">): Promise<DeltaPkgItem[]>;
 export default DevOps;
 export type AuthObject = import("../../types/mcdev.d.js").AuthObject;
 export type BuObject = import("../../types/mcdev.d.js").BuObject;

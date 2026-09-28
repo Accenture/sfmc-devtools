@@ -530,7 +530,6 @@ declare const packageJsonMcdev: {
         "prettier-plugin-sfmc": string;
         semver: string;
         "sfmc-sdk": string;
-        "simple-git": string;
         winston: string;
         yargs: string;
     };

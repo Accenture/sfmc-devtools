@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { simpleGit } from 'simple-git';
+import { GitAdapter } from '../lib/util/git.js';
 import DevOps, { filterAssetRegroupingChanges } from '../lib/util/devops.js';
 import File from '../lib/util/file.js';
 import Cli from '../lib/util/cli.js';
@@ -73,7 +73,7 @@ describe('v10 asset delta selection', () => {
             marketList: { source: { 'cred/bu': 'market' }, target: { 'cred/target': 'market' } },
             metaDataTypes: { createDeltaPkg: ['asset'] },
         };
-        const gitPrototype = Object.getPrototypeOf(simpleGit());
+        const gitPrototype = GitAdapter.prototype;
         replace(gitPrototype, 'diffSummary', async () => ({ files: structuredClone(summary) }));
         replace(gitPrototype, 'revparse', async () => 'same-blob');
         replace(File, 'pathExists', async (file) => file.startsWith(newRoot));
@@ -170,7 +170,7 @@ describe('v10 asset delta selection', () => {
             oldRoot + 'mail2.asset-message-meta.json'
         );
         const deletion = change(oldRoot + 'mail.asset-message-meta.txt');
-        const gitClient = /** @type {import('simple-git').SimpleGit} */ (
+        const gitClient = /** @type {Pick<import('../lib/util/git.js').GitAdapter, 'revparse'>} */ (
             /** @type {unknown} */ ({ revparse: async () => 'same-blob' })
         );
         assert.deepEqual(
@@ -190,7 +190,7 @@ describe('v10 asset delta selection', () => {
         );
         const ownDeletion = change(oldRoot + 'message.asset-message-meta.txt');
         const unrelatedDeletion = change(oldRoot + 'other.asset-message-meta.txt');
-        const gitClient = /** @type {import('simple-git').SimpleGit} */ (
+        const gitClient = /** @type {Pick<import('../lib/util/git.js').GitAdapter, 'revparse'>} */ (
             /** @type {unknown} */ ({ revparse: async () => 'same-blob' })
         );
         assert.deepEqual(

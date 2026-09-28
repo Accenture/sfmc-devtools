@@ -1058,7 +1058,7 @@ export type McdevDeltaPkgItem = {
      */
     _businessUnit: string;
 };
-export type DeltaPkgItem = import("simple-git").DiffResultTextFile & McdevDeltaPkgItem;
+export type DeltaPkgItem = McdevDeltaPkgItem;
 export type RestError = import("sfmc-sdk/util").RestError;
 export type SOAPError = import("sfmc-sdk/util").SOAPError;
 export type SDKError = SOAPError & RestError;
