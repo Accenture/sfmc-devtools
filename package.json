@@ -56,6 +56,7 @@
     "lint-ts": "tsc -p tsconfig.npmScripts.json",
     "measure:cli-bundle": "node scripts/measure-cli-bundle.mjs",
     "verify:packed": "node scripts/verify-packed-package.mjs",
+    "verify:progress-fixture": "node scripts/verify-progress-fixture.mjs",
     "prepare": "husky || true",
     "lint-and-test": "run-s lint test",
     "test": "mocha --reporter-option maxDiffSize=25000",

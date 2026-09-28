@@ -509,6 +509,7 @@ declare const packageJsonMcdev: {
         "lint-ts": string;
         "measure:cli-bundle": string;
         "verify:packed": string;
+        "verify:progress-fixture": string;
         prepare: string;
         "lint-and-test": string;
         test: string;
