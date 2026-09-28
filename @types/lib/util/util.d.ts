@@ -532,8 +532,6 @@ declare const packageJsonMcdev: {
         semver: string;
         "sfmc-sdk": string;
         "simple-git": string;
-        toposort: string;
-        "update-notifier": string;
         winston: string;
         yargs: string;
         "yocto-spinner": string;

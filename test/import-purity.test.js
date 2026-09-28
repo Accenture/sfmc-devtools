@@ -5,7 +5,7 @@ import path from 'node:path';
 const repository = path.resolve(import.meta.dirname, '..');
 
 describe('import purity', () => {
-    it('imports file utilities without starting notifier or Winston logging', () => {
+    it('imports file utilities without starting Winston logging', () => {
         const script = [
             "await import('./lib/util/file.js');",
             "const { Util } = await import('./lib/util/util.js');",
@@ -15,11 +15,28 @@ describe('import purity', () => {
         const result = spawnSync(process.execPath, ['--input-type=module', '--eval', script], {
             cwd: repository,
             encoding: 'utf8',
-            env: { ...process.env, NO_UPDATE_NOTIFIER: '1' },
         });
 
         assert.equal(result.status, 0, result.stderr || result.stdout);
         assert.equal(result.stdout, '');
+        assert.equal(result.stderr, '');
+    });
+
+    it('runs the CLI without loading or invoking an update notifier', () => {
+        const script = [
+            "import Module from 'node:module';",
+            'const originalLoad = Module._load;',
+            "Module._load = function(request, parent, isMain) { if (request === 'update-notifier') process.exit(7); return originalLoad.call(this, request, parent, isMain); };",
+            "process.argv = [process.execPath, './lib/cli.js', '--version'];",
+            "await import('./lib/cli.js');",
+        ].join('');
+        const result = spawnSync(process.execPath, ['--input-type=module', '--eval', script], {
+            cwd: repository,
+            encoding: 'utf8',
+        });
+
+        assert.equal(result.status, 0, result.stderr || result.stdout);
+        assert.match(result.stdout, /^\d+\.\d+\.\d+\s*$/u);
         assert.equal(result.stderr, '');
     });
 

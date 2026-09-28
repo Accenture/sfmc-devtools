@@ -79,8 +79,6 @@
     "semver": "7.8.5",
     "sfmc-sdk": "4.0.0",
     "simple-git": "3.36.0",
-    "toposort": "2.0.2",
-    "update-notifier": "7.3.1",
     "winston": "3.19.0",
     "yargs": "18.2.0",
     "yocto-spinner": "1.2.2"
