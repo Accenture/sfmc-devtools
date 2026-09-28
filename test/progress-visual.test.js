@@ -1,14 +1,13 @@
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createSpinner, getDefaultSpinnerFrames, ProgressBar } from '../lib/util/progress.js';
 
-const fixturePath = path.join(
-    path.dirname(fileURLToPath(import.meta.url)),
-    'fixtures',
-    'progress-visual.json'
-);
+const testDirectory = path.dirname(fileURLToPath(import.meta.url));
+const fixturePath = path.join(testDirectory, 'fixtures', 'progress-visual.json');
+const signalChildPath = path.join(testDirectory, 'fixtures', 'progress-signal-child.js');
 const originalCi = process.env.CI;
 const originalTerm = process.env.TERM;
 
@@ -260,25 +259,26 @@ describe('progress visualization dependency parity', () => {
         assert.equal(getDefaultSpinnerFrames('win32', { TERM_PROGRAM: 'vscode' })[0], '⠋');
     });
 
-    it('restores signal listeners and exits with dependency-compatible signal codes', () => {
-        const clock = installClock();
-        const capture = createStream({ isTTY: true, columns: 80 });
-        const beforeInt = process.listenerCount('SIGINT');
-        const beforeTerm = process.listenerCount('SIGTERM');
-        const spinner = createSpinner({ stream: capture.stream, handleSignals: true });
-        try {
-            spinner.start();
-            assert.equal(process.listenerCount('SIGINT'), beforeInt + 1);
-            assert.equal(process.listenerCount('SIGTERM'), beforeTerm + 1);
-            spinner.stop();
-            assert.equal(process.listenerCount('SIGINT'), beforeInt);
-            assert.equal(process.listenerCount('SIGTERM'), beforeTerm);
-            assert.equal(clock.active(), 0);
-        } finally {
-            spinner.stop();
-            clock.restore();
-        }
-    });
+    for (const [signal, exitCode] of [
+        ['SIGINT', 130],
+        ['SIGTERM', 143],
+    ]) {
+        it(`cleans up and exits ${exitCode} when receiving ${signal}`, () => {
+            const child = spawnSync(process.execPath, [signalChildPath, String(signal)], {
+                encoding: 'utf8',
+            });
+            assert.equal(child.status, exitCode, child.stderr);
+            assert.equal(child.signal, null);
+            const evidence = JSON.parse(child.stdout.trim());
+            assert.equal(evidence.signal, signal);
+            assert.equal(evidence.code, exitCode);
+            assert.equal(evidence.timerStopped, true);
+            assert.equal(evidence.listenersRestored, true);
+            assert.equal(evidence.writeRestored, true);
+            assert.equal(evidence.output.includes('\u001B[?25h'), true);
+            assert.match(evidence.output, /<cursorTo><clearLine>/);
+        });
+    }
 
     it('restores both companion process stream hooks after interleaved writes', () => {
         const clock = installClock();
