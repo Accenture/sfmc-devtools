@@ -18,6 +18,19 @@ export function getScenarioSpinner(platform) {
 }
 
 /**
+ * Normalizes dependency status symbols to the fixture platform without changing production behavior.
+ *
+ * @param {string} output captured terminal output
+ * @param {'win32'|'unicode'} [platform] normalized fixture platform
+ * @returns {string} platform-normalized output
+ */
+export function normalizeSpinnerOutput(output, platform = PROGRESS_FIXTURE_PLATFORM) {
+    return platform === 'win32'
+        ? output.replaceAll('✔', '√').replaceAll('✖', '×')
+        : output.replaceAll('√', '✔').replaceAll('×', '✖');
+}
+
+/**
  * Defines the spinner scenarios shared by the exact dependency verifier and replacement tests.
  *
  * @param {'win32'|'unicode'} [platform] normalized fixture platform

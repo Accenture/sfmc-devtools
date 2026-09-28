@@ -6,7 +6,10 @@ import { createRequire } from 'node:module';
 import os from 'node:os';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { getSpinnerScenarios } from '../test/helpers/progress-scenarios.js';
+import {
+    getSpinnerScenarios,
+    normalizeSpinnerOutput,
+} from '../test/helpers/progress-scenarios.js';
 
 const repository = path.resolve(import.meta.dirname, '..');
 const fixturePath = path.join(repository, 'test', 'fixtures', 'progress-visual.json');
@@ -254,7 +257,10 @@ function createCaptures(cliProgress, createSpinner) {
                 spinner.stop();
             }
             return {
-                output: capture.output(),
+                output: Buffer.from(
+                    normalizeSpinnerOutput(Buffer.from(capture.output(), 'base64').toString()),
+                    'utf8'
+                ).toString('base64'),
                 activeTimers: clock.active(),
                 writeRestored: capture.stream.write === originalWrite,
             };

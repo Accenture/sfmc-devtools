@@ -4,7 +4,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createSpinner, getDefaultSpinnerFrames, ProgressBar } from '../lib/util/progress.js';
-import { getSpinnerScenarios } from './helpers/progress-scenarios.js';
+import { getSpinnerScenarios, normalizeSpinnerOutput } from './helpers/progress-scenarios.js';
 
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
 const fixturePath = path.join(testDirectory, 'fixtures', 'progress-visual.json');
@@ -183,7 +183,10 @@ function captureSpinner(options = {}) {
             spinner.stop();
         }
         return {
-            output: capture.output(),
+            output: Buffer.from(
+                normalizeSpinnerOutput(Buffer.from(capture.output(), 'base64').toString()),
+                'utf8'
+            ).toString('base64'),
             activeTimers: clock.active(),
             writeRestored: capture.stream.write === originalWrite,
         };
