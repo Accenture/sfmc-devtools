@@ -3,7 +3,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { assert } from 'chai';
 import { execFileSync } from 'node:child_process';
-import cliProgress from 'cli-progress';
+import { ProgressBar } from '../lib/util/progress.js';
 import Cli from '../lib/util/cli.js';
 import handler from '../lib/index.js';
 import config from '../lib/util/config.js';
@@ -239,7 +239,7 @@ describe('migrate command', function () {
             /** @type {unknown} */ (Util.logger)
         );
         const originalLoggerInfo = mutableLogger.info;
-        const originalProgressStart = cliProgress.SingleBar.prototype.start;
+        const originalProgressStart = ProgressBar.prototype.start;
         mutableLogger.info = (message) => {
             events.push(`log:${message}`);
         };
@@ -248,7 +248,7 @@ describe('migrate command', function () {
          *
          * @returns {void} -
          */
-        cliProgress.SingleBar.prototype.start = function () {
+        ProgressBar.prototype.start = function () {
             events.push('progress:start');
         };
 
@@ -256,7 +256,7 @@ describe('migrate command', function () {
             await handler.migrate('testInstance/*');
         } finally {
             mutableLogger.info = originalLoggerInfo;
-            cliProgress.SingleBar.prototype.start = originalProgressStart;
+            ProgressBar.prototype.start = originalProgressStart;
         }
 
         assert.deepEqual(

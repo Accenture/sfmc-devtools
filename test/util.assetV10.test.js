@@ -1,4 +1,4 @@
-import cliProgress from 'cli-progress';
+import { ProgressBar } from '../lib/util/progress.js';
 import fs from 'fs-extra';
 import os from 'node:os';
 import path from 'node:path';
@@ -319,7 +319,7 @@ describe('v10 asset migration', function () {
         mutableFs.move = async () => {
             throw new Error('simulated move failure');
         };
-        const originalStop = cliProgress.SingleBar.prototype.stop;
+        const originalStop = ProgressBar.prototype.stop;
         let stopCalls = 0;
         /**
          * Counts progress-bar stops while still clearing the bar like the real method.
@@ -327,7 +327,7 @@ describe('v10 asset migration', function () {
          * @param {...unknown} args - arguments forwarded to the real stop method
          * @returns {void} -
          */
-        cliProgress.SingleBar.prototype.stop = function (...args) {
+        ProgressBar.prototype.stop = function (...args) {
             stopCalls++;
             return originalStop.apply(this, args);
         };
@@ -339,7 +339,7 @@ describe('v10 asset migration', function () {
             error = ex;
         } finally {
             mutableFs.move = originalMove;
-            cliProgress.SingleBar.prototype.stop = originalStop;
+            ProgressBar.prototype.stop = originalStop;
         }
 
         assert.match(error?.message ?? '', /simulated move failure/);

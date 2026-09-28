@@ -522,7 +522,6 @@ declare const packageJsonMcdev: {
     };
     dependencies: {
         "@inquirer/prompts": string;
-        "cli-progress": string;
         "fast-xml-parser": string;
         "fs-extra": string;
         mustache: string;
@@ -534,7 +533,6 @@ declare const packageJsonMcdev: {
         "simple-git": string;
         winston: string;
         yargs: string;
-        "yocto-spinner": string;
     };
     devDependencies: {
         "@eslint/js": string;

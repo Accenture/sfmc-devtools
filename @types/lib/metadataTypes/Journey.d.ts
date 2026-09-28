@@ -120,11 +120,11 @@ declare class Journey extends MetadataType {
      * @param {string} statusUrl URL to check the status of the publish request
      * @param {string} key journey-key or id for log messages
      * @param {string} name journey-name for log messages
-     * @param {import('yocto-spinner').Spinner} spinner reference to spinner to allow stopping it when done
+     * @param {import('../util/progress.js').Spinner} spinner reference to spinner to allow stopping it when done
      * @param {number} [tries] number of tries used to check the status
      * @returns {Promise.<string>} key of the item that was published successfully
      */
-    static _checkPublishStatus(statusUrl: string, key: string, name: string, spinner: import("yocto-spinner").Spinner, tries?: number): Promise<string>;
+    static _checkPublishStatus(statusUrl: string, key: string, name: string, spinner: import("../util/progress.js").Spinner, tries?: number): Promise<string>;
     /**
      * helper for {@link Journey._checkPublishStatus}
      *
