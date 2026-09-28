@@ -20,6 +20,10 @@ const DEFAULT_PROPERTIES = {
 };
 
 describe('FORMATTER', () => {
+    before(async () => {
+        await File._loadPrettierModules();
+    });
+
     beforeEach(() => {
         testUtils.mockSetup();
         config.properties = structuredClone(DEFAULT_PROPERTIES);
