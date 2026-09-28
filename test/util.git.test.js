@@ -1,9 +1,14 @@
+import { execFile } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import fs from 'fs-extra';
 import os from 'node:os';
 import path from 'node:path';
+import { promisify } from 'node:util';
 import { assert } from 'chai';
+import DevOps from '../lib/util/devops.js';
 import { createGit, GitCommandError } from '../lib/util/git.js';
+
+const execFileAsync = promisify(execFile);
 
 /**
  * Runs a Git command in a fixture repository.
@@ -206,5 +211,33 @@ describe('native Git adapter', () => {
             assert.include(ex.message, 'diff --name-status -z -M missing-ref..HEAD');
             assert.match(ex.stderr, /ambiguous argument|unknown revision/i);
         }
+    });
+
+    it('maps an invalid DevOps revision range to the established checkout guidance', async () => {
+        const repository = await fixtures.createRepository('devops invalid range');
+        await commitFile(repository, 'file.txt', 'content\n', 'initial');
+        const runner = path.join(fixtures.root, 'devops-range-runner.mjs');
+        fixtures.registered.add(path.resolve(runner));
+        await fs.writeFile(
+            runner,
+            `import DevOps from ${JSON.stringify(new URL('../lib/util/devops.js', import.meta.url).href)};\n` +
+                `process.chdir(${JSON.stringify(repository)});\n` +
+                `const properties = { directories: { retrieve: 'retrieve/' }, options: { deployment: { commitHistory: 10 } } };\n` +
+                `try { await DevOps.getDeltaList(properties, 'missing-branch..HEAD', false, 'cred/bu'); } catch (error) { console.error(error.message); process.exit(23); }\n`,
+            'utf8'
+        );
+
+        try {
+            await execFileAsync(process.execPath, [runner], { cwd: repository, encoding: 'utf8' });
+            assert.fail('expected DevOps range to fail');
+        } catch (ex) {
+            assert.equal(ex.code, 23);
+            assert.include(
+                ex.stderr,
+                'Make sure you checked out the branches mentioned in your git range (missing-branch..HEAD)'
+            );
+            assert.notInclude(ex.stderr, 'Git command failed in');
+        }
+        assert.isObject(DevOps);
     });
 });

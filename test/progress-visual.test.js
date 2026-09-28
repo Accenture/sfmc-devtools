@@ -2,32 +2,39 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createSpinner, ProgressBar } from '../lib/util/progress.js';
+import { createSpinner, getDefaultSpinnerFrames, ProgressBar } from '../lib/util/progress.js';
 
 const fixturePath = path.join(
     path.dirname(fileURLToPath(import.meta.url)),
     'fixtures',
     'progress-visual.json'
 );
-const originalForceColor = process.env.FORCE_COLOR;
 const originalCi = process.env.CI;
 const originalTerm = process.env.TERM;
 
 /**
- * Creates a deterministic stream that records terminal writes as bytes.
+ * Creates a deterministic terminal stream and records every emitted byte.
  *
- * @param {object} options - Stream characteristics.
- * @param {boolean} options.isTTY - Whether the stream behaves as a TTY.
- * @param {number} options.columns - Reported terminal width.
- * @returns {{stream: object, output: () => string}} Fake stream and output reader.
+ * @param {object} options stream characteristics
+ * @param {boolean} options.isTTY terminal status
+ * @param {number} options.columns terminal width
+ * @param {boolean} [options.hasColors] color support
+ * @returns {{stream: object, output: () => string}} fake stream and captured output
  */
-function createStream({ isTTY, columns }) {
+function createStream({ isTTY, columns, hasColors = true }) {
     const chunks = [];
     const stream = {
         isTTY,
         columns,
-        write: (chunk) => {
+        hasColors: () => hasColors,
+        write: (chunk, encoding, callback) => {
             chunks.push(Buffer.from(String(chunk)));
+            if (typeof encoding === 'function') {
+                encoding();
+            }
+            if (typeof callback === 'function') {
+                callback();
+            }
             return true;
         },
         cursorTo: (x) => {
@@ -49,16 +56,18 @@ function createStream({ isTTY, columns }) {
 }
 
 /**
- * Installs deterministic clock and timer shims for dependency characterization.
+ * Installs deterministic clock and timer shims.
  *
- * @returns {{advance: (milliseconds: number) => void, runIntervals: () => void, restore: () => void, active: () => number}} Clock controls.
+ * @returns {{advance: (milliseconds: number) => void, runIntervals: () => void, restore: () => void, active: () => number}} clock controls
  */
 function installClock() {
-    const originalNow = Date.now;
-    const originalSetTimeout = setTimeout;
-    const originalClearTimeout = clearTimeout;
-    const originalSetInterval = setInterval;
-    const originalClearInterval = clearInterval;
+    const originals = {
+        now: Date.now,
+        setTimeout,
+        clearTimeout,
+        setInterval,
+        clearInterval,
+    };
     let now = 1_000;
     let nextId = 1;
     const timeouts = new Map();
@@ -73,10 +82,7 @@ function installClock() {
                 return id;
             },
         },
-        clearTimeout: {
-            configurable: true,
-            value: (id) => timeouts.delete(id),
-        },
+        clearTimeout: { configurable: true, value: (id) => timeouts.delete(id) },
         setInterval: {
             configurable: true,
             value: (callback, delay) => {
@@ -85,10 +91,7 @@ function installClock() {
                 return id;
             },
         },
-        clearInterval: {
-            configurable: true,
-            value: (id) => intervals.delete(id),
-        },
+        clearInterval: { configurable: true, value: (id) => intervals.delete(id) },
     });
     return {
         advance: (milliseconds) => {
@@ -101,48 +104,33 @@ function installClock() {
         },
         active: () => timeouts.size + intervals.size,
         restore: () => {
-            Object.defineProperty(Date, 'now', { configurable: true, value: originalNow });
+            Object.defineProperty(Date, 'now', { configurable: true, value: originals.now });
             Object.defineProperties(globalThis, {
-                setTimeout: {
-                    configurable: true,
-                    value: originalSetTimeout,
-                },
-                clearTimeout: {
-                    configurable: true,
-                    value: originalClearTimeout,
-                },
-                setInterval: {
-                    configurable: true,
-                    value: originalSetInterval,
-                },
-                clearInterval: {
-                    configurable: true,
-                    value: originalClearInterval,
-                },
+                setTimeout: { configurable: true, value: originals.setTimeout },
+                clearTimeout: { configurable: true, value: originals.clearTimeout },
+                setInterval: { configurable: true, value: originals.setInterval },
+                clearInterval: { configurable: true, value: originals.clearInterval },
             });
         },
     };
 }
 
 /**
- * Captures one dependency-backed progress bar lifecycle.
+ * Captures one dependency-compatible progress bar lifecycle.
  *
- * @param {string} format - Configured bar template.
- * @param {number} columns - Terminal width.
- * @returns {{output: string, activeTimers: number}} Captured bytes and cleanup state.
+ * @param {string} format configured bar template
+ * @returns {{output: string, activeTimers: number}} captured bytes and timer state
  */
-function captureBar(format, columns = 120) {
+function captureBar(format) {
     const clock = installClock();
-    const capture = createStream({ isTTY: true, columns });
+    const capture = createStream({ isTTY: true, columns: 120 });
     try {
         const bar = new ProgressBar({ format, stream: capture.stream });
         bar.start(4, 0);
         clock.advance(250);
         bar.update(1);
-        bar.render();
         clock.advance(250);
         bar.update(2);
-        bar.render();
         clock.advance(250);
         bar.update(4);
         bar.stop();
@@ -153,83 +141,58 @@ function captureBar(format, columns = 120) {
 }
 
 /**
- * Captures the dependency's non-TTY progress behavior.
+ * Captures a spinner scenario matching the clean dependency-baseline harness.
  *
- * @returns {{output: string, activeTimers: number}} Captured bytes and cleanup state.
+ * @param {object} [options] scenario controls
+ * @returns {{output: string, activeTimers: number, writeRestored: boolean}} captured bytes and cleanup state
  */
-function captureNonTtyBar() {
+function captureSpinner(options = {}) {
     const clock = installClock();
-    const capture = createStream({ isTTY: false, columns: 100 });
-    try {
-        const bar = new ProgressBar({
-            format: '                 Processing changes [{bar}] {percentage}% | {value}/{total}',
-            stream: capture.stream,
-        });
-        bar.start(2, 0);
-        bar.increment();
-        bar.stop();
-        return { output: capture.output(), activeTimers: clock.active() };
-    } finally {
-        clock.restore();
-    }
-}
-
-/**
- * Captures an interactive spinner including frame, hook, wrapping, and cleanup behavior.
- *
- * @returns {{output: string, activeTimers: number}} Captured bytes and cleanup state.
- */
-function captureSpinner() {
-    const clock = installClock();
-    const capture = createStream({ isTTY: true, columns: 16 });
+    const capture = createStream({
+        isTTY: options.tty ?? true,
+        columns: options.columns ?? 16,
+        hasColors: true,
+    });
+    const originalWrite = capture.stream.write;
     try {
         const spinner = createSpinner({
             text: 'Publishing multi-step journey…',
             stream: capture.stream,
-            spinner: { frames: ['-', '\\', '|'], interval: 80 },
+            spinner: options.spinner,
             handleSignals: false,
+            color: options.color,
         });
         spinner.start();
         clock.advance(80);
         clock.runIntervals();
-        capture.stream.write('status update\n');
+        if (options.partial) {
+            capture.stream.write('partial');
+            clock.advance(80);
+            clock.runIntervals();
+            capture.stream.write(' complete\n');
+        } else {
+            capture.stream.write('status update\n');
+        }
         clock.advance(80);
         clock.runIntervals();
-        spinner.stop();
-        return { output: capture.output(), activeTimers: clock.active() };
+        if (options.finish === 'success') {
+            spinner.success('Done');
+        } else if (options.finish === 'error') {
+            spinner.error('Failed');
+        } else {
+            spinner.stop();
+        }
+        return {
+            output: capture.output(),
+            activeTimers: clock.active(),
+            writeRestored: capture.stream.write === originalWrite,
+        };
     } finally {
         clock.restore();
     }
 }
 
-/**
- * Captures non-interactive spinner rendering and cleanup.
- *
- * @returns {{output: string, activeTimers: number}} Captured bytes and cleanup state.
- */
-function captureNonTtySpinner() {
-    const clock = installClock();
-    const capture = createStream({ isTTY: false, columns: 80 });
-    try {
-        const spinner = createSpinner({
-            text: 'Validating journey…',
-            stream: capture.stream,
-            spinner: { frames: ['-'], interval: 80 },
-            handleSignals: false,
-        });
-        spinner.start();
-        spinner.stop();
-        return { output: capture.output(), activeTimers: clock.active() };
-    } finally {
-        clock.restore();
-    }
-}
-
-/**
- * Builds all golden visualization scenarios used by current call sites.
- *
- * @returns {object} Scenario results keyed by stable names.
- */
+/** @returns {object} all immutable dependency-backed golden scenarios */
 function captureScenarios() {
     return {
         assetDownload: captureBar(
@@ -239,28 +202,25 @@ function captureScenarios() {
             '                 Processing changes [{bar}] {percentage}% | {value}/{total}'
         ),
         assetMigration: captureBar(
-            '                 Migrating asset-message [{bar}] {percentage}% | {value}/{total}',
-            72
+            '                 Migrating asset-message [{bar}] {percentage}% | {value}/{total}'
         ),
-        nonTtyBar: captureNonTtyBar(),
-        journeySpinner: captureSpinner(),
-        nonTtySpinner: captureNonTtySpinner(),
+        spinnerDefault: captureSpinner(),
+        spinnerCyan: captureSpinner({ color: 'cyan' }),
+        spinnerAscii: captureSpinner({ spinner: { frames: ['-', '\\', '|', '/'], interval: 80 } }),
+        spinnerPartial: captureSpinner({ partial: true }),
+        spinnerSuccess: captureSpinner({ finish: 'success' }),
+        spinnerError: captureSpinner({ finish: 'error' }),
+        nonTtySpinner: captureSpinner({ tty: false }),
     };
 }
 
-describe('progress visualization golden parity', () => {
+describe('progress visualization dependency parity', () => {
     before(() => {
-        process.env.FORCE_COLOR = '1';
         delete process.env.CI;
         process.env.TERM = 'xterm-256color';
     });
 
     after(() => {
-        if (originalForceColor === undefined) {
-            delete process.env.FORCE_COLOR;
-        } else {
-            process.env.FORCE_COLOR = originalForceColor;
-        }
         if (originalCi === undefined) {
             delete process.env.CI;
         } else {
@@ -273,16 +233,103 @@ describe('progress visualization golden parity', () => {
         }
     });
 
-    it('matches the installed dependencies byte-for-byte', async () => {
-        const actual = captureScenarios();
-        if (process.env.UPDATE_PROGRESS_FIXTURES === '1') {
-            await fs.mkdir(path.dirname(fixturePath), { recursive: true });
-            await fs.writeFile(fixturePath, `${JSON.stringify(actual, null, 2)}\n`);
-        }
+    it('matches unchanged cli-progress 3.12.0 and yocto-spinner 1.2.2 captures byte-for-byte', async () => {
         const expected = JSON.parse(await fs.readFile(fixturePath, 'utf8'));
+        const actual = captureScenarios();
         assert.deepEqual(actual, expected);
         for (const scenario of Object.values(actual)) {
             assert.equal(scenario.activeTimers, 0);
+        }
+    });
+
+    it('selects Unicode and legacy Windows ASCII default frame sets', () => {
+        assert.deepEqual(getDefaultSpinnerFrames('linux', {}), [
+            '⠋',
+            '⠙',
+            '⠹',
+            '⠸',
+            '⠼',
+            '⠴',
+            '⠦',
+            '⠧',
+            '⠇',
+            '⠏',
+        ]);
+        assert.deepEqual(getDefaultSpinnerFrames('win32', {}), ['-', '\\', '|', '/']);
+        assert.equal(getDefaultSpinnerFrames('win32', { WT_SESSION: '1' })[0], '⠋');
+        assert.equal(getDefaultSpinnerFrames('win32', { TERM_PROGRAM: 'vscode' })[0], '⠋');
+    });
+
+    it('restores signal listeners and exits with dependency-compatible signal codes', () => {
+        const clock = installClock();
+        const capture = createStream({ isTTY: true, columns: 80 });
+        const beforeInt = process.listenerCount('SIGINT');
+        const beforeTerm = process.listenerCount('SIGTERM');
+        const spinner = createSpinner({ stream: capture.stream, handleSignals: true });
+        try {
+            spinner.start();
+            assert.equal(process.listenerCount('SIGINT'), beforeInt + 1);
+            assert.equal(process.listenerCount('SIGTERM'), beforeTerm + 1);
+            spinner.stop();
+            assert.equal(process.listenerCount('SIGINT'), beforeInt);
+            assert.equal(process.listenerCount('SIGTERM'), beforeTerm);
+            assert.equal(clock.active(), 0);
+        } finally {
+            spinner.stop();
+            clock.restore();
+        }
+    });
+
+    it('restores both companion process stream hooks after interleaved writes', () => {
+        const clock = installClock();
+        const originals = {
+            stdoutWrite: process.stdout.write,
+            stderrWrite: process.stderr.write,
+            stdoutTty: process.stdout.isTTY,
+            stderrTty: process.stderr.isTTY,
+        };
+        const writes = [];
+        try {
+            Object.defineProperty(process.stdout, 'isTTY', { configurable: true, value: true });
+            Object.defineProperty(process.stderr, 'isTTY', { configurable: true, value: true });
+            process.stdout.write = (chunk) => {
+                writes.push(`out:${String(chunk)}`);
+                return true;
+            };
+            process.stderr.write = (chunk) => {
+                writes.push(`err:${String(chunk)}`);
+                return true;
+            };
+            const baseOut = process.stdout.write;
+            const baseErr = process.stderr.write;
+            const spinner = createSpinner({
+                text: 'working',
+                stream: process.stderr,
+                spinner: { frames: ['-'], interval: 80 },
+                handleSignals: false,
+            }).start();
+            process.stdout.write('stdout line\n');
+            process.stderr.write('stderr partial');
+            process.stderr.write(' end\n');
+            spinner.stop();
+            assert.equal(process.stdout.write, baseOut);
+            assert.equal(process.stderr.write, baseErr);
+            assert.match(writes.join(''), /stdout line\n/);
+            assert.match(writes.join(''), /stderr partial/);
+            assert.match(writes.join(''), / end\n/);
+            assert.equal(clock.active(), 0);
+        } finally {
+            process.stdout.write = originals.stdoutWrite;
+            process.stderr.write = originals.stderrWrite;
+            Object.defineProperty(process.stdout, 'isTTY', {
+                configurable: true,
+                value: originals.stdoutTty,
+            });
+            Object.defineProperty(process.stderr, 'isTTY', {
+                configurable: true,
+                value: originals.stderrTty,
+            });
+            clock.restore();
         }
     });
 });

@@ -1,24 +1,28 @@
 /**
+ * Selects the exact platform-dependent default frames used by `yocto-spinner` 1.2.2.
+ *
+ * @param {NodeJS.Platform} [platform] runtime platform
+ * @param {NodeJS.ProcessEnv} [environment] runtime environment
+ * @returns {string[]} default spinner frames
+ */
+export function getDefaultSpinnerFrames(platform?: NodeJS.Platform, environment?: NodeJS.ProcessEnv): string[];
+/**
  * Creates a Journey spinner with the supported lifecycle.
  *
- * @param {ConstructorParameters<typeof Spinner>[0]} [options] - Spinner options.
- * @returns {Spinner} New spinner.
+ * @param {ConstructorParameters<typeof Spinner>[0]} [options] spinner options
+ * @returns {Spinner} new spinner
  */
 export function createSpinner(options?: ConstructorParameters<typeof Spinner>[0]): Spinner;
 /**
- * Minimal single progress bar with deterministic terminal cleanup.
- *
- * The class writes to stderr by default, owns one redraw timeout while active, saves and
- * restores the TTY cursor, disables line wrapping, and appends one newline on stop. Non-TTY
- * streams receive no output, matching the removed dependency's default behavior.
+ * Minimal single progress bar with `cli-progress` 3.12.0 lifecycle and terminal side effects.
  */
 export class ProgressBar {
     /**
      * Creates a progress bar for one of mcdev's existing format strings.
      *
-     * @param {object} options - Bar configuration.
-     * @param {string} options.format - Template containing bar/value tokens.
-     * @param {TerminalStream} [options.stream] - Output stream.
+     * @param {object} options bar configuration
+     * @param {string} options.format template containing bar/value tokens
+     * @param {TerminalStream} [options.stream] output stream
      */
     constructor({ format, stream }: {
         format: string;
@@ -30,25 +34,26 @@ export class ProgressBar {
     value: number;
     timer: NodeJS.Timeout;
     lastDrawn: string;
+    lastRedraw: number;
     /**
-     * Starts rendering and takes ownership of the terminal cursor until `stop()`.
+     * Starts rendering, saves the cursor, and disables line wrapping until `stop()`.
      *
-     * @param {number} total - Maximum progress value.
-     * @param {number} startValue - Initial progress value.
+     * @param {number} total maximum progress value
+     * @param {number} startValue initial progress value
      * @returns {void}
      */
     start(total: number, startValue: number): void;
     /**
-     * Advances the current value without forcing an immediate extra redraw.
+     * Advances the current value using the dependency's synchronous-update throttle.
      *
-     * @param {number} [delta] - Amount to add.
+     * @param {number} [delta] amount to add
      * @returns {void}
      */
     increment(delta?: number): void;
     /**
-     * Updates the current value; active bars redraw synchronously after the throttle window.
+     * Updates the current value and redraws once more than two throttle windows elapsed.
      *
-     * @param {number} value - New progress value.
+     * @param {number} value new progress value
      * @returns {void}
      */
     update(value: number): void;
@@ -59,95 +64,176 @@ export class ProgressBar {
      */
     render(): void;
     /**
-     * Performs a final render, cancels timers, restores wrapping/cursor position, and writes
-     * the terminating newline. Calling it while inactive is a no-op.
+     * Performs a final render, cancels timers, restores wrapping/cursor position, and writes a newline.
      *
      * @returns {void}
      */
     stop(): void;
 }
 /**
- * Minimal Journey polling spinner that preserves writes made while animation is active.
+ * Minimal Journey polling spinner preserving `yocto-spinner` 1.2.2 output and cleanup behavior.
  */
 export class Spinner {
     /**
-     * Creates a spinner. It owns an interval only for interactive streams and restores any
-     * stream write hook, cursor visibility, and timer on `stop()`.
+     * Creates a spinner with validated frames and interval.
      *
-     * @param {object} options - Spinner configuration.
-     * @param {string} [options.text] - Visible label.
-     * @param {TerminalStream} [options.stream] - Output stream.
-     * @param {{frames: string[], interval: number}} [options.spinner] - Deterministic frames.
-     * @param {boolean} [options.handleSignals] - Retained API option; signal handling is unused by mcdev.
+     * @param {object} [options] spinner configuration
+     * @param {string} [options.text] visible label
+     * @param {TerminalStream} [options.stream] output stream
+     * @param {{frames: string[], interval?: number}} [options.spinner] deterministic frames
+     * @param {boolean} [options.handleSignals] subscribe to SIGINT and SIGTERM while active
+     * @param {string} [options.color] supported frame color
      */
-    constructor({ text, stream, spinner, handleSignals, }?: {
+    constructor({ text, stream, spinner, handleSignals, color, }?: {
         text?: string;
         stream?: TerminalStream;
         spinner?: {
             frames: string[];
-            interval: number;
+            interval?: number;
         };
         handleSignals?: boolean;
+        color?: string;
     });
-    text: string;
+    _text: string;
     stream: TerminalStream;
     frames: string[];
     interval: number;
     handleSignals: boolean;
+    _color: string;
     frame: number;
     lastFrameTime: number;
     lines: number;
     spinning: boolean;
     internalWrite: boolean;
+    deferringRender: boolean;
     timer: NodeJS.Timeout;
-    originalWrite: {
-        (buffer: Uint8Array | string, cb?: (err?: Error | null) => void): boolean;
-        (str: string, encoding?: BufferEncoding, cb?: (err?: Error | null) => void): boolean;
-    };
+    hookedStreams: Map<any, any>;
+    exitHandler: (signal: any) => void;
+    interactive: boolean;
+    /** @returns {boolean} whether the spinner is active */
+    get isSpinning(): boolean;
+    /** @param {string} value replacement label */
+    set text(value: string);
+    /** @returns {string} current spinner label */
+    get text(): string;
+    /** @param {string} value replacement color */
+    set color(value: string);
+    /** @returns {string} current frame color */
+    get color(): string;
     /**
-     * Starts animation, hides the cursor, and hooks stream writes so log lines do not overwrite it.
+     * Starts animation, hooks both process terminal streams when applicable, and installs signals.
      *
-     * @param {string} [text] - Optional replacement label.
-     * @returns {Spinner} This spinner.
+     * @param {string} [text] optional replacement label
+     * @returns {Spinner} this spinner
      */
     start(text?: string): Spinner;
     /**
-     * Stops animation and restores the stream, cursor, and terminal line state.
+     * Stops animation, optionally writes final text, and restores all owned resources.
      *
-     * @returns {Spinner} This spinner.
+     * @param {string} [finalText] final unprefixed text
+     * @returns {Spinner} this spinner
      */
-    stop(): Spinner;
+    stop(finalText?: string): Spinner;
     /**
-     * Installs the single active hook allowed per stream.
+     * Stops with a success status.
+     *
+     * @param {string} [text] success label
+     * @returns {Spinner} this spinner
+     */
+    success(text?: string): Spinner;
+    /**
+     * Stops with an error status.
+     *
+     * @param {string} [text] error label
+     * @returns {Spinner} this spinner
+     */
+    error(text?: string): Spinner;
+    /**
+     * Stops with a warning status.
+     *
+     * @param {string} [text] warning label
+     * @returns {Spinner} this spinner
+     */
+    warning(text?: string): Spinner;
+    /**
+     * Stops with an information status.
+     *
+     * @param {string} [text] information label
+     * @returns {Spinner} this spinner
+     */
+    info(text?: string): Spinner;
+    /**
+     * Stops with a status symbol.
+     *
+     * @param {string} symbol status symbol
+     * @param {string} [text] replacement label
+     * @returns {Spinner} this spinner
+     */
+    symbolStop(symbol: string, text?: string): Spinner;
+    /**
+     * Hooks the spinner stream and interactive stdout/stderr companion stream.
      *
      * @returns {void}
      */
-    installHook(): void;
+    installHooks(): void;
     /**
-     * Restores the exact write function replaced by this spinner.
+     * Installs one write hook without replacing another active spinner's hook.
+     *
+     * @param {TerminalStream} stream stream to hook
+     * @returns {void}
+     */
+    hookStream(stream: TerminalStream): void;
+    /**
+     * Restores every exact stream write function owned by this spinner.
      *
      * @returns {void}
      */
-    uninstallHook(): void;
+    uninstallHooks(): void;
+    /**
+     * Preserves external writes, including partial chunks, without drawing through unfinished lines.
+     *
+     * @param {TerminalStream} stream written stream
+     * @param {NodeJS.WritableStream['write']} originalWrite original writer
+     * @param {unknown} chunk write chunk
+     * @param {BufferEncoding | ((error?: Error | null) => void)} [encoding] encoding or callback
+     * @param {(error?: Error | null) => void} [callback] callback
+     * @returns {boolean} stream backpressure result
+     */
+    hookedWrite(stream: TerminalStream, originalWrite: NodeJS.WritableStream["write"], chunk: unknown, encoding?: BufferEncoding | ((error?: Error | null) => void), callback?: (error?: Error | null) => void): boolean;
+    /**
+     * Converts writable chunks using Node's encoding conventions.
+     *
+     * @param {unknown} chunk chunk to normalize
+     * @param {BufferEncoding | ((error?: Error | null) => void)} [encoding] requested encoding
+     * @returns {string} chunk text
+     */
+    stringifyChunk(chunk: unknown, encoding?: BufferEncoding | ((error?: Error | null) => void)): string;
     /**
      * Clears every terminal row occupied by the spinner.
      *
-     * @returns {Spinner} This spinner.
+     * @returns {Spinner} this spinner
      */
     clear(): Spinner;
     /**
-     * Draws a frame with synchronized-output control sequences on interactive terminals.
+     * Draws one frame with synchronized-output control sequences on interactive terminals.
      *
      * @returns {void}
      */
     render(): void;
     /**
-     * Writes without triggering this spinner's stream hook.
+     * Writes without triggering spinner hooks and always resets the internal-write guard.
      *
-     * @param {string} text - Bytes to emit.
+     * @param {string} text bytes to emit
      * @returns {void}
      */
     write(text: string): void;
+    /**
+     * Restores terminal state before exiting with the dependency-compatible signal code.
+     *
+     * @param {NodeJS.Signals} signal received signal
+     * @returns {void}
+     */
+    handleExit(signal: NodeJS.Signals): void;
 }
 /**
  * Terminal-capable writable stream subset used by the visual utility.
@@ -155,6 +241,7 @@ export class Spinner {
 export type TerminalStream = NodeJS.WritableStream & {
     isTTY?: boolean;
     columns?: number;
+    hasColors?: () => boolean;
     cursorTo?: (x: number) => void;
     moveCursor?: (x: number, y: number) => void;
     clearLine?: (direction: number) => void;
