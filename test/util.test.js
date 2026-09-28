@@ -70,5 +70,57 @@ describe('UTIL', () => {
 
             MetadataType.definition = definitionBackup;
         });
+
+        it('should treat equal complex metadata values as unchanged', () => {
+            const definitionBackup = MetadataType.definition;
+            MetadataType.definition = {
+                ...definitionBackup,
+                type: 'test',
+                keyField: 'key',
+                nameField: 'name',
+                fields: {
+                    key: { isUpdateable: true },
+                    name: { isUpdateable: true },
+                    complex: { isUpdateable: true },
+                },
+            };
+
+            assert.isFalse(
+                MetadataType.hasChangedGeneric(
+                    { key: 'one', name: 'One', complex: { nested: [1, { value: true }] } },
+                    { key: 'one', name: 'One', complex: { nested: [1, { value: true }] } },
+                    undefined,
+                    true
+                )
+            );
+
+            MetadataType.definition = definitionBackup;
+        });
+
+        it('should treat unequal complex metadata values as changed', () => {
+            const definitionBackup = MetadataType.definition;
+            MetadataType.definition = {
+                ...definitionBackup,
+                type: 'test',
+                keyField: 'key',
+                nameField: 'name',
+                fields: {
+                    key: { isUpdateable: true },
+                    name: { isUpdateable: true },
+                    complex: { isUpdateable: true },
+                },
+            };
+
+            assert.isTrue(
+                MetadataType.hasChangedGeneric(
+                    { key: 'one', name: 'One', complex: { nested: [1, { value: true }] } },
+                    { key: 'one', name: 'One', complex: { nested: [1, { value: false }] } },
+                    undefined,
+                    true
+                )
+            );
+
+            MetadataType.definition = definitionBackup;
+        });
     });
 });
