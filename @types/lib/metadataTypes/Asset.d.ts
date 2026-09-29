@@ -96,6 +96,27 @@ declare class Asset extends MetadataType {
      */
     static _getUpsertOrderAndSkipMissing(metadataMap: AssetMap, deployDir: string): Promise<AssetMap>;
     /**
+     * Loads assets shared with the current BU (`?scope=shared`) and adds them to the
+     * ContentBlockByX reference lookup map ({@link ReplaceCbReference.createCacheForMap}) in fill-only mode.
+     * Existing BU / deployment package entries always win for the same key, id or name.
+     *
+     * @returns {Promise.<void>} -
+     */
+    static _addSharedAssetsToReferenceCache(): Promise<void>;
+    /**
+     * Prepares BU-owned assets from `cache.asset` for the ContentBlockByX reference lookup map.
+     * Returns shallow clones with `r__folder_Path` resolved so that ContentBlockByName can match them.
+     *
+     * The original cache items are NOT mutated: `setFolderPath` deletes `category`, which is still needed
+     * by `preDeployTasks` (duplicate-name handling) and `getCacheMatchedByName`.
+     * A shallow clone is sufficient because `setFolderPath` only sets `r__folder_Path` and deletes `category`
+     * on the top level; nested objects are only read.
+     *
+     * @param {AssetMap} [assetMap] BU-owned assets, usually `cache.getCache().asset`
+     * @returns {AssetMap} new map with cloned items (empty if assetMap is not set)
+     */
+    static _populateFolders(assetMap?: AssetMap): AssetMap;
+    /**
      * MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
      *
      * @param {AssetMap} metadataMap metadata mapped by their keyField
