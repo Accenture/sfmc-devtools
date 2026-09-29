@@ -97,8 +97,8 @@ declare class Asset extends MetadataType {
     static _getUpsertOrderAndSkipMissing(metadataMap: AssetMap, deployDir: string): Promise<AssetMap>;
     /**
      * Loads assets shared with the current BU (`?scope=shared`) and adds them to the
-     * ContentBlockByX reference lookup map ({@link ReplaceCbReference.createCacheForMap}) in fill-only mode.
-     * Existing BU / deployment package entries always win for the same key, id or name.
+     * ContentBlockByX reference lookup map ({@link ReplaceCbReference.createCacheForMap}) as a fallback.
+     * Existing BU / deployment package entries win for the same key or full folder path and name.
      *
      * @returns {Promise.<void>} -
      */
@@ -115,7 +115,7 @@ declare class Asset extends MetadataType {
      * @param {AssetMap} [assetMap] BU-owned assets, usually `cache.getCache().asset`
      * @returns {AssetMap} new map with cloned items (empty if assetMap is not set)
      */
-    static _populateFolders(assetMap?: AssetMap): AssetMap;
+    static _cloneAssetsWithFolderPaths(assetMap?: AssetMap): AssetMap;
     /**
      * MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
      *
