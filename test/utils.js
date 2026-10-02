@@ -295,9 +295,9 @@ export function mockReset() {
     }
     // avoid spillover from other tests
     ReplaceContentBlockReference.resetCacheMap();
-    // reset sfmc login
-    auth.clearSessions();
     fsmock.restore();
+    // reset sfmc login after restoring the real filesystem
+    auth.clearSessions();
     apimock.restore();
 }
 

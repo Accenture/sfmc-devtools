@@ -362,7 +362,7 @@
  * @property {'move'|'add/update'|'delete'} gitAction what git recognized as an action
  * @property {string} _credential mcdev credential name
  * @property {string} _businessUnit mcdev business unit name inside of _credential
- * @typedef {import('simple-git').DiffResultTextFile & McdevDeltaPkgItem} DeltaPkgItem
+ * @typedef {McdevDeltaPkgItem} DeltaPkgItem
  */
 
 /**

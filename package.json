@@ -54,7 +54,9 @@
     "lint:fix": "eslint --fix lib/**/*.js types/*.js test/**/*.js",
     "lint": "eslint lib/**/*.js types/*.js test/**/*.js",
     "lint-ts": "tsc -p tsconfig.npmScripts.json",
+    "measure:cli-bundle": "node scripts/measure-cli-bundle.mjs",
     "verify:packed": "node scripts/verify-packed-package.mjs",
+    "verify:progress-fixture": "node scripts/verify-progress-fixture.mjs",
     "prepare": "husky || true",
     "lint-and-test": "run-s lint test",
     "test": "mocha --reporter-option maxDiffSize=25000",
@@ -68,26 +70,16 @@
   },
   "dependencies": {
     "@inquirer/prompts": "8.7.2",
-    "cli-progress": "3.12.0",
-    "command-exists": "1.2.9",
-    "conf": "15.1.0",
-    "console.table": "0.10.0",
-    "deep-equal": "2.2.3",
     "fast-xml-parser": "5.11.1",
     "fs-extra": "11.4.1",
-    "json-to-table": "4.2.1",
     "mustache": "4.2.0",
     "p-limit": "7.3.3",
     "prettier": "3.9.9",
     "prettier-plugin-sfmc": "2.1.0",
     "semver": "7.8.5",
     "sfmc-sdk": "4.0.0",
-    "simple-git": "3.36.0",
-    "toposort": "2.0.2",
-    "update-notifier": "7.3.1",
     "winston": "3.19.0",
-    "yargs": "18.2.0",
-    "yocto-spinner": "1.2.2"
+    "yargs": "18.2.0"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
@@ -102,6 +94,7 @@
     "c8": "12.0.0",
     "chai": "6.2.2",
     "chai-files": "1.4.0",
+    "esbuild": "0.28.2",
     "eslint": "10.11.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-jsdoc": "64.5.4",
@@ -117,9 +110,6 @@
     "npm-run-all": "4.1.5",
     "prettier-eslint": "17.1.2",
     "typescript": "5.9.3"
-  },
-  "optionalDependencies": {
-    "fsevents": "*"
   },
   "lint-staged": {
     "*.js": [

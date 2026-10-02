@@ -6,6 +6,7 @@ import config from '../lib/util/config.js';
 import Init from '../lib/util/init.js';
 import InitConfig from '../lib/util/init.config.js';
 import InitNpm from '../lib/util/init.npm.js';
+import { isGitInstalled } from '../lib/util/init.git.js';
 import { Util } from '../lib/util/util.js';
 
 const originalCwd = process.cwd();
@@ -120,6 +121,28 @@ describe('INIT TOOLING', function () {
         } finally {
             process.chdir(temporary);
         }
+    });
+
+    it('probes Git with a synchronous argument array and no shell', () => {
+        let invocation;
+        const installed = isGitInstalled((command, args, options) => {
+            invocation = { command, args, options };
+            return { status: 0 };
+        });
+
+        assert.equal(installed, true);
+        assert.deepEqual(invocation, {
+            command: 'git',
+            args: ['--version'],
+            options: { shell: false, stdio: 'ignore' },
+        });
+    });
+
+    it('reports Git as unavailable when the probe cannot start it', () => {
+        assert.equal(
+            isGitInstalled(() => ({ error: new Error('missing'), status: null })),
+            false
+        );
     });
 
     it('installs modern package-derived defaults and reports identical files on repeat', async () => {
