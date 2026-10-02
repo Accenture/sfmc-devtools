@@ -57,10 +57,6 @@ If you want to enhance Accenture SFMC DevTools you are welcome to fork the repo 
 
 More details on how to best do that are described in our [wiki](https://github.com/Accenture/sfmc-devtools/wiki/10.-Contribute).
 
-### Progress fixture provenance
-
-The progress replacement test compares `lib/util/progress.js` with the committed byte-level oracle in `test/fixtures/progress-visual.json`. To independently prove that oracle's provenance, run `npm run verify:progress-fixture`. This non-default check creates an owned temporary project, installs exact `cli-progress@3.12.0` and `yocto-spinner@1.2.2` packages without changing this repository's package files or `node_modules`, captures every committed scenario directly from those dependencies, and compares the result without rewriting the fixture. It then removes only its registered temporary descendants and empty run directory. The command may use the npm cache, but can require registry access when the exact packages are not cached.
-
 ## Main Contacts
 
 The people that lead this project:
