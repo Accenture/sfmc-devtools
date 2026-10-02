@@ -70,7 +70,7 @@
   },
   "dependencies": {
     "@inquirer/prompts": "8.7.2",
-    "fast-xml-parser": "5.11.1",
+    "fast-xml-parser": "5.11.2",
     "fs-extra": "11.4.1",
     "mustache": "4.2.0",
     "p-limit": "7.3.3",
