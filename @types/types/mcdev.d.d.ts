@@ -983,9 +983,9 @@ export type VerificationItem = {
      */
     shouldEmailOnFailure: boolean;
     /**
-     * email address to send notification to; empty string if shouldEmailOnFailure=false
+     * email address(es) to send notification to; empty array if shouldEmailOnFailure=false. Stored as an array on disk, sent as a comma-joined string to the API
      */
-    notificationEmailAddress: string;
+    notificationEmailAddress: string[] | string;
     /**
      * email message to send; empty string if shouldEmailOnFailure=false
      */
