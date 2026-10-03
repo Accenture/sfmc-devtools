@@ -1,7 +1,9 @@
 {
     "createdBy": "Jörn Berkefeld",
     "c__automation_step": "testExisting_automation__s1.7",
-    "notificationEmailAddress": "test@accenture.com",
+    "notificationEmailAddress": [
+        "test@accenture.com"
+    ],
     "notificationEmailMessage": "",
     "r__dataExtension_key": "testExisting_dataExtension",
     "shouldEmailOnFailure": true,

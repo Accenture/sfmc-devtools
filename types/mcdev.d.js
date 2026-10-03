@@ -336,7 +336,7 @@
  * @property {number} value2 only used for IsOutsideRange, IsInsideRange, IsNotOutsideRange, IsNotInsideRange; otherwise set to 0
  * @property {boolean} shouldStopOnFailure flag to stop automation if verification fails
  * @property {boolean} shouldEmailOnFailure flag to send email if verification fails
- * @property {string} notificationEmailAddress email address to send notification to; empty string if shouldEmailOnFailure=false
+ * @property {string[] | string} notificationEmailAddress email address(es) to send notification to; empty array if shouldEmailOnFailure=false. Stored as an array on disk, sent as a comma-joined string to the API
  * @property {string} notificationEmailMessage email message to send; empty string if shouldEmailOnFailure=false
  * @property {number} createdBy user id of creator
  * @property {string} [targetObjectId] ObjectID of target data extension
