@@ -10,7 +10,14 @@
  */
 
 /**
- * @typedef {Object.<string, string>} TemplateMap
+ * @typedef {object} RegexTemplateValue
+ * @property {string} search regular expression source, compiled with the global flag
+ * @property {string | number | boolean} replace literal build value rendered in text or JSON string fields
+ * @property {string} [template] native JavaScript replacement expression; defaults to the market key in triple braces
+ */
+
+/**
+ * @typedef {Object.<string, string | number | boolean | RegexTemplateValue>} TemplateMap
  * @typedef {'asset'|'asset-archive'|'asset-asset'|'asset-audio'|'asset-block'|'asset-code'|'asset-document'|'asset-image'|'asset-email'|'asset-mobile'|'asset-other'|'asset-webstudio'|'asset-rawimage'|'asset-template'|'asset-textfile'|'asset-video'|'attributeGroup'|'attributeSet'|'automation'|'campaign'|'contentArea'|'dataExtension'|'dataExtensionField'|'dataExtensionTemplate'|'dataExtract'|'dataExtractType'|'discovery'|'deliveryProfile'|'email'|'emailSend'|'event'|'fileLocation'|'fileTransfer'|'filter'|'folder'|'importFile'|'journey'|'list'|'mobileCode'|'mobileKeyword'|'mobileMessage'|'query'|'role'|'script'|'sendClassification'|'senderProfile'|'transactionalEmail'|'transactionalPush'|'transactionalSMS'|'triggeredSend'|'user'|'verification'} SupportedMetadataTypes
  * @typedef {Object.<string, string[] | null>} TypeKeyCombo object-key=SupportedMetadataTypes, value=array of external keys
  */

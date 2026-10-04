@@ -30,8 +30,22 @@ export type BuObject = {
      */
     credential?: string;
 };
+export type RegexTemplateValue = {
+    /**
+     * regular expression source, compiled with the global flag
+     */
+    search: string;
+    /**
+     * literal build value rendered in text or JSON string fields
+     */
+    replace: string | number | boolean;
+    /**
+     * native JavaScript replacement expression; defaults to the market key in triple braces
+     */
+    template?: string;
+};
 export type TemplateMap = {
-    [x: string]: string;
+    [x: string]: string | number | boolean | RegexTemplateValue;
 };
 export type SupportedMetadataTypes = "asset" | "asset-archive" | "asset-asset" | "asset-audio" | "asset-block" | "asset-code" | "asset-document" | "asset-image" | "asset-email" | "asset-mobile" | "asset-other" | "asset-webstudio" | "asset-rawimage" | "asset-template" | "asset-textfile" | "asset-video" | "attributeGroup" | "attributeSet" | "automation" | "campaign" | "contentArea" | "dataExtension" | "dataExtensionField" | "dataExtensionTemplate" | "dataExtract" | "dataExtractType" | "discovery" | "deliveryProfile" | "email" | "emailSend" | "event" | "fileLocation" | "fileTransfer" | "filter" | "folder" | "importFile" | "journey" | "list" | "mobileCode" | "mobileKeyword" | "mobileMessage" | "query" | "role" | "script" | "sendClassification" | "senderProfile" | "transactionalEmail" | "transactionalPush" | "transactionalSMS" | "triggeredSend" | "user" | "verification";
 /**
