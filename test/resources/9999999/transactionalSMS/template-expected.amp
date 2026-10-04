@@ -1,34 +1,38 @@
-line1
-%%[
-    SET @test = '{{{description}}}'
+line1 %%[
+    set @test = '{{{description}}}'
+]%% line2 %%= v(@test) =%% still line2
+line3 %%[
+    set @key = '{{{secret}}}'
 ]%%
-line2 %%= v(@test) =%% still line2
-line3
 %%[
-    SET @key = '{{{secret}}}'
-]%%
-
-%%[
-    SET @unsubMessages = 'UnsubscribeSMSMessages_DEV'
-    SET @unsubEvents = 'UnsubscribeSMS_DEV'
-    SET @num = concat('+', [MOBILE_NUMBER])
-    SET @rs = RetrieveSalesforceObjects(
-        'Contact',
-        'Id,et4ae5__HasOptedOutOfMobile__c',
-        'MobilePhone',
-        '=',
-        @num
-    )
-    SET @count = rowCount(@rs)
-    VAR @response
-    SET @rx = '^\+((?:9[679]\d8[035789]\d|6[789]\d|5[90]\d|42\d|3[578]\d|2[1-689]\d)|9[0-58]|8[1246]|6[0-6]|5[1-8]|4[013-9]|3[0-469]|2[70]|7|1)'
-    SET @prefix = concat('+', RegExMatch(@num, @rx, 1))
-    IF @count>0 THEN
-        FOR @i = 1 TO @count DO
-            SET @sk = Field(Row(@rs, @i), 'Id')
-            IF Field(Row(@rs, 1), 'et4ae5__HasOptedOutOfMobile__c') == 'false' THEN
-                SET @result = UpdateSingleSalesforceObject('Contact', @sk, 'et4ae5__HasOptedOutOfMobile__c', 'true')
-                IF @result == 0 THEN
+    set @unsubMessages = 'UnsubscribeSMSMessages_DEV'
+    set @unsubEvents = 'UnsubscribeSMS_DEV'
+    set @num = Concat('+', [MOBILE_NUMBER])
+    set @rs =
+        RetrieveSalesforceObjects(
+            'Contact',
+            'Id,et4ae5__HasOptedOutOfMobile__c',
+            'MobilePhone',
+            '=',
+            @num
+        )
+    set @count = RowCount(@rs)
+    var @response
+    set @rx =
+        '^\+((?:9[679]\d8[035789]\d|6[789]\d|5[90]\d|42\d|3[578]\d|2[1-689]\d)|9[0-58]|8[1246]|6[0-6]|5[1-8]|4[013-9]|3[0-469]|2[70]|7|1)'
+    set @prefix = Concat('+', RegExMatch(@num, @rx, 1))
+    if @count > 0 then
+        for @i = 1 to @count do
+            set @sk = Field(Row(@rs, @i), 'Id')
+            if Field(Row(@rs, 1), 'et4ae5__HasOptedOutOfMobile__c') == 'false' then
+                set @result =
+                    UpdateSingleSalesforceObject(
+                        'Contact',
+                        @sk,
+                        'et4ae5__HasOptedOutOfMobile__c',
+                        'true'
+                    )
+                if @result == 0 then
                     InsertData(
                         @unsubEvents,
                         'MobileNumber',
@@ -40,7 +44,7 @@ line3
                         'Status',
                         'Error Updating'
                     )
-                ELSE
+                else
                     InsertData(
                         @unsubEvents,
                         'MobileNumber',
@@ -52,8 +56,8 @@ line3
                         'Status',
                         'Successfully Unsubscribed'
                     )
-                ENDIF
-            ELSE
+                endif
+            else
                 InsertData(
                     @unsubEvents,
                     'MobileNumber',
@@ -65,22 +69,15 @@ line3
                     'Status',
                     'Already Unsubscribed'
                 )
-            ENDIF
-        NEXT @i
-        SET @msg = Lookup(
-            @unsubMessages,
-            'Message',
-            'Prefix',
-            @prefix,
-            'Type',
-            'Found'
-        )
-        IF Length(@msg) == 0 THEN
-            SET @response = 'You have unsubscribed and will no longer receive any messages.|'
-        ELSE
-            SET @response = @msg
-        ENDIF
-    ELSE
+            endif
+        next @i
+        set @msg = Lookup(@unsubMessages, 'Message', 'Prefix', @prefix, 'Type', 'Found')
+        if Length(@msg) == 0 then
+            set @response = 'You have unsubscribed and will no longer receive any messages.|'
+        else
+            set @response = @msg
+        endif
+    else
         InsertData(
             @unsubEvents,
             'MobileNumber',
@@ -90,19 +87,12 @@ line3
             'Status',
             'Not Found'
         )
-        SET @msg = Lookup(
-            @unsubMessages,
-            'Message',
-            'Prefix',
-            @prefix,
-            'Type',
-            'NotFound'
-        )
-        IF Length(@msg) == 0 THEN
-            SET @response = 'Sorry, we could not find you'
-        ELSE
-            SET @response = @msg
-        ENDIF
-    ENDIF
+        set @msg = Lookup(@unsubMessages, 'Message', 'Prefix', @prefix, 'Type', 'NotFound')
+        if Length(@msg) == 0 then
+            set @response = 'Sorry, we could not find you'
+        else
+            set @response = @msg
+        endif
+    endif
 ]%%
-%%=v(@response)=%%
+%%= v(@response) =%%

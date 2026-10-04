@@ -1,3 +1,31 @@
+/**
+ * @typedef {import('../../types/mcdev.d.js').AuthObject} AuthObject
+ * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
+ * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
+ * @typedef {import('../../types/mcdev.d.js').CodeExtractItem} CodeExtractItem
+ * @typedef {import('../../types/mcdev.d.js').DeltaPkgItem} DeltaPkgItem
+ * @typedef {import('../../types/mcdev.d.js').Mcdevrc} Mcdevrc
+ * @typedef {import('../../types/mcdev.d.js').MetadataTypeItem} MetadataTypeItem
+ * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemDiff} MetadataTypeItemDiff
+ * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemObj} MetadataTypeItemObj
+ * @typedef {import('../../types/mcdev.d.js').MetadataTypeMap} MetadataTypeMap
+ * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
+ * @typedef {import('../../types/mcdev.d.js').MultiMetadataTypeList} MultiMetadataTypeList
+ * @typedef {import('../../types/mcdev.d.js').MultiMetadataTypeMap} MultiMetadataTypeMap
+ * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
+ * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
+ * @typedef {import('../../types/mcdev.d.js').TypeKeyCombo} TypeKeyCombo
+ */
+/**
+ * Create an authentication service with injectable session storage and SDK construction.
+ *
+ * @param {{sessionStore?: typeof defaultSessionStore, SDKConstructor?: typeof SDK}} [dependencies] dependencies
+ * @returns {object} authentication service
+ */
+export function createAuth({ sessionStore, SDKConstructor }?: {
+    sessionStore?: typeof defaultSessionStore;
+    SDKConstructor?: typeof SDK;
+}): object;
 export default Auth;
 export type AuthObject = import("../../types/mcdev.d.js").AuthObject;
 export type BuObject = import("../../types/mcdev.d.js").BuObject;
@@ -15,28 +43,7 @@ export type MultiMetadataTypeMap = import("../../types/mcdev.d.js").MultiMetadat
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
-declare namespace Auth {
-    /**
-     * For each business unit, set up base credentials to be used.
-     *
-     * @param {AuthObject} authObject details for
-     * @param {string} credential of the instance
-     * @returns {Promise.<void>} -
-     */
-    function saveCredential(authObject: AuthObject, credential: string): Promise<void>;
-    /**
-     * Returns an SDK instance to be used for API calls
-     *
-     * @param {BuObject} buObject information about current context
-     * @returns {SDK} auth object
-     */
-    function getSDK(buObject: BuObject): SDK;
-    /**
-     * helper to clear all auth sessions
-     *
-     * @returns {void}
-     */
-    function clearSessions(): void;
-}
+import defaultSessionStore from './sessionStore.js';
 import SDK from 'sfmc-sdk';
+declare const Auth: any;
 //# sourceMappingURL=auth.d.ts.map

@@ -1,0 +1,36 @@
+{
+    "key": "smsParityJourney",
+    "name": "SMS Parity Journey",
+    "description": "",
+    "version": 1,
+    "workflowApiVersion": 1,
+    "activities": [
+        {
+            "key": "SMSSYNC-1",
+            "name": "Send SMS",
+            "description": "",
+            "type": "SMSSYNC",
+            "outcomes": [],
+            "arguments": {},
+            "configurationArguments": {
+                "r__mobileMessage_key": "NTIzOjc4OjA",
+                "r__mobileMessage_name": "testExisting_mobileMessage"
+            },
+            "metaData": {},
+            "schema": { "arguments": {} }
+        }
+    ],
+    "triggers": [],
+    "goals": [],
+    "exits": [],
+    "notifiers": [],
+    "entryMode": "NotSet",
+    "definitionType": "Multistep",
+    "channel": "",
+    "defaults": { "properties": {} },
+    "metaData": {},
+    "executionMode": "Production",
+    "status": "Draft",
+    "scheduledStatus": "Draft",
+    "r__folder_Path": "my journeys"
+}

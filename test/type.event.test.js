@@ -27,7 +27,7 @@ describe('type: event', () => {
             const result = cache.getCache();
             assert.equal(
                 result.event ? Object.keys(result.event).length : 0,
-                5,
+                6,
                 'unexpected amount of events'
             );
             assert.deepEqual(
@@ -76,7 +76,7 @@ describe('type: event', () => {
             const result = cache.getCache();
             assert.equal(
                 result.event ? Object.keys(result.event).length : 0,
-                6,
+                7,
                 'unexpected number of events'
             );
             // get callouts
@@ -145,7 +145,7 @@ describe('type: event', () => {
             const result = cache.getCache();
             assert.equal(
                 result.event ? Object.keys(result.event).length : 0,
-                6,
+                7,
                 'unexpected number of events'
             );
             // get callouts
@@ -181,7 +181,7 @@ describe('type: event', () => {
             const result = cache.getCache();
             assert.equal(
                 result.event ? Object.keys(result.event).length : 0,
-                5,
+                6,
                 'unexpected number of events'
             );
             // get callouts

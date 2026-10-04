@@ -1,19 +1,3 @@
-export default Deployer;
-export type BuObject = import("../types/mcdev.d.js").BuObject;
-export type CodeExtract = import("../types/mcdev.d.js").CodeExtract;
-export type CodeExtractItem = import("../types/mcdev.d.js").CodeExtractItem;
-export type Mcdevrc = import("../types/mcdev.d.js").Mcdevrc;
-export type MetadataTypeItem = import("../types/mcdev.d.js").MetadataTypeItem;
-export type MetadataTypeItemDiff = import("../types/mcdev.d.js").MetadataTypeItemDiff;
-export type MetadataTypeItemObj = import("../types/mcdev.d.js").MetadataTypeItemObj;
-export type MetadataTypeMap = import("../types/mcdev.d.js").MetadataTypeMap;
-export type MetadataTypeMapObj = import("../types/mcdev.d.js").MetadataTypeMapObj;
-export type MultiMetadataTypeList = import("../types/mcdev.d.js").MultiMetadataTypeList;
-export type SoapRequestParams = import("../types/mcdev.d.js").SoapRequestParams;
-export type TemplateMap = import("../types/mcdev.d.js").TemplateMap;
-export type MultiMetadataTypeMap = import("../types/mcdev.d.js").MultiMetadataTypeMap;
-export type TypeKeyCombo = import("../types/mcdev.d.js").TypeKeyCombo;
-export type ListMap = import("../types/mcdev.d.js").ListMap;
 /**
  * @typedef {import('../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -36,7 +20,7 @@ export type ListMap = import("../types/mcdev.d.js").ListMap;
  * Reads metadata from local directory and deploys it to specified target business unit.
  * Source and target business units are also compared before the deployment to apply metadata specific patches.
  */
-declare class Deployer {
+export default class Deployer {
     /**
      * Deploys all metadata located in the 'deploy' directory to the specified business unit
      *
@@ -99,4 +83,19 @@ declare class Deployer {
     /** @type {MultiMetadataTypeMap} */
     metadata: MultiMetadataTypeMap;
 }
+export type BuObject = import("../types/mcdev.d.js").BuObject;
+export type CodeExtract = import("../types/mcdev.d.js").CodeExtract;
+export type CodeExtractItem = import("../types/mcdev.d.js").CodeExtractItem;
+export type Mcdevrc = import("../types/mcdev.d.js").Mcdevrc;
+export type MetadataTypeItem = import("../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeItemDiff = import("../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../types/mcdev.d.js").MetadataTypeItemObj;
+export type MetadataTypeMap = import("../types/mcdev.d.js").MetadataTypeMap;
+export type MetadataTypeMapObj = import("../types/mcdev.d.js").MetadataTypeMapObj;
+export type MultiMetadataTypeList = import("../types/mcdev.d.js").MultiMetadataTypeList;
+export type SoapRequestParams = import("../types/mcdev.d.js").SoapRequestParams;
+export type TemplateMap = import("../types/mcdev.d.js").TemplateMap;
+export type MultiMetadataTypeMap = import("../types/mcdev.d.js").MultiMetadataTypeMap;
+export type TypeKeyCombo = import("../types/mcdev.d.js").TypeKeyCombo;
+export type ListMap = import("../types/mcdev.d.js").ListMap;
 //# sourceMappingURL=Deployer.d.ts.map

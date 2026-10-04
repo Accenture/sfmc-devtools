@@ -194,6 +194,7 @@ declare namespace Query {
         };
         maxKeyLength: number;
         type: string;
+        soapType: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
         typeCdpByDefault: boolean;

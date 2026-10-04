@@ -6,7 +6,7 @@
         "moduleResolution": "nodenext",
         "checkJs": true,
         "skipLibCheck": true,
-        "target": "es2023",
+        "target": "es2024",
         // Tells TypeScript to read JS files, as
         // normally they are ignored as source files
         "allowJs": true,

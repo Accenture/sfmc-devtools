@@ -1,0 +1,1617 @@
+{
+    "5286": {
+        "body": {
+            "id": 5286,
+            "customerKey": "testExisting_asset_template",
+            "objectID": "50855339-3f87-47a7-8677-a8c63eb36a43",
+            "assetType": {
+                "id": 4,
+                "name": "template",
+                "displayName": "Template"
+            },
+            "fileProperties": {
+                "fileName": " testExisting_asset_template"
+            },
+            "name": " testExisting_asset_template",
+            "owner": {
+                "id": 710411605,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710411605"
+            },
+            "createdDate": "2024-04-22T03:33:08.253-06:00",
+            "createdBy": {
+                "id": 710411605,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710411605"
+            },
+            "modifiedDate": "2024-05-13T07:12:13.117-06:00",
+            "modifiedBy": {
+                "id": 710420432,
+                "name": "joern.berkefeld app user",
+                "userId": "710420432"
+            },
+            "enterpriseId": 510004860,
+            "memberId": 510009653,
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "thumbnail": {
+                "thumbnailUrl": "/v1/assets/5286/thumbnail"
+            },
+            "category": {
+                "id": 89397
+            },
+            "content": "<a href=\"%%ftaf_url%%\"\n    ><img\n        src=\"https://www.exacttarget.com/members/newsletters/gfx/forwardafriendicon.gif\"\n        border=\"0\" /></a\n><a href=\"%%profile_center_url%%\" alias=\"Update Profile\">Update Profile</a>\n<table cellpadding=\"2\" cellspacing=\"0\" width=\"600\" id=\"Table5\" border=\"0\">\n    <tr>\n        <td>\n            <font face=\"verdana\" size=\"1\" color=\"#444444\"\n                >This email was sent by: <b>%%Member_Busname%%</b><br />%%Member_Addr%%\n                %%Member_City%%, %%Member_State%%, %%Member_PostalCode%%, %%Member_Country%%<br /><br\n            /></font>\n        </td>\n    </tr>\n</table>\n<a href=\"%%subscription_center_url%%\" alias=\"Manage Subscriptions\">Manage Subscriptions</a\n><img src=\"https://www.exacttarget.com/images/Powered_By_1206.jpg\" border=\"0\" /><custom\n    name=\"opencounter\"\n    type=\"tracking\"\n/>\n",
+            "availableViews": [],
+            "modelVersion": 2
+        }
+    },
+    "5289": {
+        "body": {
+            "id": 5289,
+            "customerKey": "testExisting_asset_templatebasedemail",
+            "objectID": "26c925ba-af6e-4c2a-a04a-a67f39cceeee",
+            "contentType": "application/vnd.etmc.email.Message; kind=template",
+            "assetType": {
+                "id": 207,
+                "name": "templatebasedemail",
+                "displayName": "Template-Based Email"
+            },
+            "name": " testExisting_asset_templatebasedemail",
+            "owner": {
+                "id": 710369861,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710369861"
+            },
+            "createdDate": "2024-04-22T06:36:03.117-06:00",
+            "createdBy": {
+                "id": 710369861,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710369861"
+            },
+            "modifiedDate": "2024-05-13T07:15:29.77-06:00",
+            "modifiedBy": {
+                "id": 710420432,
+                "name": "IDE - joern.berkefeld app user",
+                "userId": "710420432"
+            },
+            "enterpriseId": 1111111,
+            "memberId": 9999999,
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "thumbnail": {
+                "thumbnailUrl": "/v1/assets/5289/thumbnail"
+            },
+            "category": {
+                "id": 89397
+            },
+            "views": {
+                "subjectline": {
+                    "contentType": "application/vnd.etmc.email.View; kind=subjectline",
+                    "thumbnail": {},
+                    "content": "my subject line",
+                    "availableViews": [],
+                    "data": {
+                        "email": {
+                            "options": {
+                                "generateFrom": null
+                            }
+                        }
+                    },
+                    "modelVersion": 2
+                },
+                "preheader": {
+                    "contentType": "application/vnd.etmc.email.View; kind=preheader",
+                    "thumbnail": {},
+                    "content": "my custom preheader text",
+                    "availableViews": [],
+                    "data": {
+                        "email": {
+                            "options": {
+                                "generateFrom": null
+                            }
+                        }
+                    },
+                    "modelVersion": 2
+                },
+                "text": {
+                    "thumbnail": {},
+                    "availableViews": [],
+                    "data": {
+                        "email": {
+                            "options": {
+                                "generateFrom": "html"
+                            }
+                        }
+                    },
+                    "generateFrom": "html",
+                    "modelVersion": 2
+                },
+                "viewAsAWebPage": {
+                    "thumbnail": {},
+                    "availableViews": [],
+                    "data": {
+                        "email": {
+                            "options": {
+                                "generateFrom": null
+                            }
+                        }
+                    },
+                    "modelVersion": 2
+                },
+                "subscriptioncenter": {
+                    "thumbnail": {},
+                    "availableViews": [],
+                    "data": {
+                        "email": {
+                            "options": {
+                                "generateFrom": null
+                            }
+                        }
+                    },
+                    "modelVersion": 2
+                },
+                "forwardHTML": {
+                    "thumbnail": {},
+                    "availableViews": [],
+                    "data": {
+                        "email": {
+                            "options": {
+                                "generateFrom": null
+                            }
+                        }
+                    },
+                    "modelVersion": 2
+                },
+                "forwardText": {
+                    "thumbnail": {},
+                    "availableViews": [],
+                    "data": {
+                        "email": {
+                            "options": {
+                                "generateFrom": null
+                            }
+                        }
+                    },
+                    "modelVersion": 2
+                },
+                "html": {
+                    "thumbnail": {},
+                    "content": "<a href=\"%%ftaf_url%%\"\n    ><img\n        src=\"https://www.exacttarget.com/members/newsletters/gfx/forwardafriendicon.gif\"\n        border=\"0\" /></a\n><a href=\"%%profile_center_url%%\" alias=\"Update Profile\">Update Profile</a>\n<table cellpadding=\"2\" cellspacing=\"0\" width=\"600\" id=\"Table5\" border=\"0\">\n    <tr>\n        <td>\n            <font face=\"verdana\" size=\"1\" color=\"#444444\"\n                >This email was sent by: <b>%%Member_Busname%%</b><br />%%Member_Addr%%\n                %%Member_City%%, %%Member_State%%, %%Member_PostalCode%%, %%Member_Country%%<br /><br\n            /></font>\n        </td>\n    </tr>\n</table>\n<a href=\"%%subscription_center_url%%\" alias=\"Manage Subscriptions\">Manage Subscriptions</a\n><img src=\"https://www.exacttarget.com/images/Powered_By_1206.jpg\" border=\"0\" /><custom\n    name=\"opencounter\"\n    type=\"tracking\"\n/>\n",
+                    "availableViews": [],
+                    "slots": {
+                        "banner": {
+                            "content": "<div data-type=\"block\" data-key=\"5v1vodxyvz\"></div><div data-type=\"block\" data-key=\"c2m5fa0c6ym\"></div><div data-type=\"block\" data-key=\"cdsuxkm6kyt\"></div><div data-type=\"block\" data-key=\"7xogokk59k\"></div><div data-type=\"block\" data-key=\"sf47b6tjg2m\"></div><div data-type=\"block\" data-key=\"hy6ik0ftsb4\"></div><div data-type=\"block\" data-key=\"csscq2x1lpr\"></div>",
+                            "design": "<p style=\"font-family:Arial;color:#ccc;font-size:12px;text-align:center;vertical-align:middle;font-weight:bold;height:150px;display:flex;flex-direction:column;justify-content:center;padding:10px;margin:0;border: #cccccc dashed 1px;\">Drop blocks or content here</p>",
+                            "availableViews": [],
+                            "blocks": {
+                                "hy6ik0ftsb4": {
+                                    "id": 1295064,
+                                    "customerKey": "testExisting_asset_htmlblock",
+                                    "objectID": "972974ed-dc44-4df2-ab6e-53bae9070339",
+                                    "assetType": {
+                                        "id": 197,
+                                        "name": "htmlblock",
+                                        "displayName": "HTML Block"
+                                    },
+                                    "fileProperties": {
+                                        "fileName": "testExisting_asset_htmlblock-Mcdev-strips-content"
+                                    },
+                                    "name": "testExisting_asset_htmlblock-Mcdev-strips-content",
+                                    "owner": {
+                                        "id": 700301950,
+                                        "email": "joern.berkefeld@accenture.com",
+                                        "name": "Jörn Berkefeld (ASGR)",
+                                        "userId": "700301950"
+                                    },
+                                    "createdDate": "2024-01-08T08:26:58.277-06:00",
+                                    "createdBy": {
+                                        "id": 700301950,
+                                        "email": "joern.berkefeld@accenture.com",
+                                        "name": "Jörn Berkefeld (ASGR)",
+                                        "userId": "700301950"
+                                    },
+                                    "modifiedDate": "2024-01-08T08:28:01.6-06:00",
+                                    "modifiedBy": {
+                                        "id": 700301950,
+                                        "email": "joern.berkefeld@accenture.com",
+                                        "name": "Jörn Berkefeld (ASGR)",
+                                        "userId": "700301950"
+                                    },
+                                    "enterpriseId": 99991999,
+                                    "memberId": 99991999,
+                                    "status": {
+                                        "id": 1,
+                                        "name": "Draft"
+                                    },
+                                    "thumbnail": {
+                                        "thumbnailUrl": "/v1/assets/1295064/thumbnail"
+                                    },
+                                    "category": {
+                                        "id": 89397,
+                                        "name": "Content Builder",
+                                        "parentId": 0
+                                    },
+                                    "content": "<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" role=\"presentation\" style=\"min-width: 100%; \" class=\"stylingblock-content-wrapper\"><tr><td class=\"stylingblock-content-wrapper camarker-inner\"><div>\n  my 1st html\n</div>\n\n%%[ /* my ampscript */ ]%%\n\n<script runat=\"server\">\n// my ssjs\n</script>\n\n<div>\n  my 2nd html\n</div>\n<div>%%=TreatAsContent(ContentBlockByFake(\"Content Builder\\my very long path\\Content Blocks Library\\COMMON\\some other folder\\my code snippet\"))=%%</div></td></tr></table>",
+                                    "design": "",
+                                    "meta": {
+                                        "wrapperStyles": {
+                                            "mobile": {
+                                                "visible": true
+                                            },
+                                            "styling": {}
+                                        }
+                                    },
+                                    "availableViews": [],
+                                    "modelVersion": 2
+                                }
+                            },
+                            "data": {
+                                "email": {
+                                    "options": {}
+                                }
+                            },
+                            "modelVersion": 2
+                        }
+                    },
+                    "template": {
+                        "id": 5286,
+                        "assetType": {
+                            "id": 4,
+                            "name": "template",
+                            "displayName": "Template"
+                        },
+                        "name": "testExisting_asset_template",
+                        "meta": {
+                            "contentHash": -166410261
+                        },
+                        "availableViews": [],
+                        "data": {
+                            "email": {
+                                "options": {
+                                    "generateFrom": null
+                                }
+                            }
+                        },
+                        "modelVersion": 2
+                    },
+                    "data": {
+                        "email": {
+                            "options": {
+                                "generateFrom": null
+                            }
+                        }
+                    },
+                    "modelVersion": 2
+                }
+            },
+            "availableViews": [
+                "subjectline",
+                "preheader",
+                "text",
+                "viewAsAWebPage",
+                "subscriptioncenter",
+                "forwardHTML",
+                "forwardText",
+                "html"
+            ],
+            "data": {
+                "email": {
+                    "options": {
+                        "characterEncoding": "utf-8"
+                    },
+                    "legacy": {
+                        "legacyId": 1643,
+                        "legacyKey": "9b6edc22-d19a-429a-a705-da88c3a16543",
+                        "legacyType": "email",
+                        "legacyCategoryId": 10251
+                    }
+                }
+            },
+            "legacyData": {
+                "legacyId": 1643,
+                "legacyKey": "9b6edc22-d19a-429a-a705-da88c3a16543",
+                "legacyType": "email",
+                "legacyCategoryId": 10251
+            },
+            "modelVersion": 2
+        }
+    },
+    "9451": {
+        "body": {
+            "id": 9451,
+            "customerKey": "test_coderesource_js",
+            "objectID": "cbd96028-3fd4-49cc-910b-e3640d4686e5",
+            "contentType": "application/javascript",
+            "assetType": {
+                "id": 240,
+                "name": "jscoderesource",
+                "displayName": "Javascript Code Resource"
+            },
+            "version": 1,
+            "name": "test_coderesource_js",
+            "description": "",
+            "owner": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "createdDate": "2025-03-24T05:20:40.82-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:03:20.603-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "enterpriseId": 1111111,
+            "memberId": 9999999,
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "thumbnail": {
+                "thumbnailUrl": "/v1/assets/9451/thumbnail"
+            },
+            "category": {
+                "id": 90888,
+                "name": "Test Folder",
+                "parentId": 89397
+            },
+            "content": "/* insert code here */\n",
+            "meta": {
+                "cloudPages": {
+                    "publishDate": "2025-03-24 06:05:23.203"
+                }
+            },
+            "availableViews": [],
+            "data": {
+                "site": {
+                    "content": "{\"url\":\"https://oss-test.accenture.com/test_coderesource\"}"
+                }
+            },
+            "modelVersion": 2
+        }
+    },
+    "9456": {
+        "body": {
+            "id": 9456,
+            "customerKey": "test_microsite",
+            "objectID": "5f717219-6766-48da-9843-e514cc9aa919",
+            "assetType": {
+                "id": 248,
+                "name": "microsite",
+                "displayName": "Microsite"
+            },
+            "version": 1,
+            "name": "test_microsite",
+            "description": "",
+            "owner": {
+                "id": 710420418,
+                "email": "joern.berkefeld@randstad.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "createdDate": "2025-03-25T03:01:05.467-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@randstad.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:12:51.85-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@randstad.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "enterpriseId": 1111111,
+            "memberId": 9999999,
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "thumbnail": {
+                "thumbnailUrl": "/v1/assets/9456/thumbnail"
+            },
+            "category": {
+                "id": 90888,
+                "name": "Test Folder",
+                "parentId": 89397
+            },
+            "content": "{\"url\":\"https://oss-test.accenture.com/test_microsite\"}",
+            "meta": {
+                "thumbnailRefAssetId": 9461,
+                "cloudPages": {
+                    "publishDate": "2025-03-25 03:12:51.850"
+                }
+            },
+            "availableViews": [],
+            "modelVersion": 2
+        }
+    },
+    "9458": {
+        "body": {
+            "id": 9458,
+            "customerKey": "test_interactivecontent",
+            "objectID": "02b1c184-87fb-4c58-ba3d-22d811c6cbbd",
+            "assetType": {
+                "id": 249,
+                "name": "interactivecontent",
+                "displayName": "Interactive Email Page"
+            },
+            "version": 1,
+            "name": "test_interactivecontent",
+            "description": "",
+            "owner": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "createdDate": "2025-03-25T03:02:46.823-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:02:55.307-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "enterpriseId": 1111111,
+            "memberId": 9999999,
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "thumbnail": {
+                "thumbnailUrl": "/v1/assets/9458/thumbnail"
+            },
+            "category": {
+                "id": 90888,
+                "name": "Test Folder",
+                "parentId": 89397
+            },
+            "content": "{\"url\":\"https://oss-test.accenture.com/test_interactivecontent\"}",
+            "meta": {
+                "thumbnailRefAssetId": 9459,
+                "cloudPages": {
+                    "publishDate": "2025-03-25 03:02:55.307"
+                }
+            },
+            "availableViews": [],
+            "modelVersion": 2
+        }
+    },
+    "9459": {
+        "body": {
+            "id": 9459,
+            "customerKey": "test_interactivecontent_content",
+            "objectID": "283dc273-84c0-44b6-979c-b9f2534b28a1",
+            "assetType": {
+                "id": 205,
+                "name": "webpage",
+                "displayName": "Web Page"
+            },
+            "name": "test_interactivecontent",
+            "createdDate": "2025-03-25T03:02:47.323-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:02:47.323-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "category": {
+                "id": 5328,
+                "name": "Content Builder",
+                "parentId": 0
+            },
+            "modelVersion": 2
+        }
+    },
+    "9460": {
+        "body": {
+            "id": 9460,
+            "customerKey": "test_coderesource_xml",
+            "objectID": "66787c5f-3d36-4a61-91a5-34e760391505",
+            "contentType": "application/xml",
+            "assetType": {
+                "id": 245,
+                "name": "xmlcoderesource",
+                "displayName": "XML Code Resource"
+            },
+            "version": 1,
+            "name": "test_coderesource_xml",
+            "description": "",
+            "owner": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "createdDate": "2025-03-25T03:03:45.713-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:04:06.48-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "enterpriseId": 1111111,
+            "memberId": 9999999,
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "thumbnail": {
+                "thumbnailUrl": "/v1/assets/9460/thumbnail"
+            },
+            "category": {
+                "id": 90888,
+                "name": "Test Folder",
+                "parentId": 89397
+            },
+            "content": "<xml>test</xml>",
+            "meta": {
+                "cloudPages": {}
+            },
+            "availableViews": [],
+            "data": {
+                "site": {
+                    "content": "{\"url\":\"https://oss-test.accenture.com/test_coderesource_xml\"}"
+                }
+            },
+            "modelVersion": 2
+        }
+    },
+    "9461": {
+        "body": {
+            "id": 9461,
+            "customerKey": "test_microsite_content",
+            "objectID": "8f32dff3-026b-4cd6-9096-d3ecb319f386",
+            "assetType": {
+                "id": 205,
+                "name": "webpage",
+                "displayName": "Web Page"
+            },
+            "name": "test_microsite_content",
+            "createdDate": "2025-03-25T03:10:56.733-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:10:56.733-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "category": {
+                "id": 5328,
+                "name": "Content Builder",
+                "parentId": 0
+            },
+            "modelVersion": 2
+        }
+    },
+    "9463": {
+        "body": {
+            "id": 9463,
+            "customerKey": "test_coderesource_json",
+            "objectID": "5974959b-c531-404b-9361-e27d0d760b37",
+            "contentType": "application/json",
+            "assetType": {
+                "id": 242,
+                "name": "jsoncoderesource",
+                "displayName": "JSON Code Resource"
+            },
+            "version": 1,
+            "name": "test_coderesource_json",
+            "description": "",
+            "owner": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "createdDate": "2025-03-25T03:15:22.72-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:16:40.913-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "enterpriseId": 1111111,
+            "memberId": 9999999,
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "thumbnail": {
+                "thumbnailUrl": "/v1/assets/9463/thumbnail"
+            },
+            "category": {
+                "id": 90888,
+                "name": "Test Folder",
+                "parentId": 89397
+            },
+            "content": "{\n\"test\": true\n}",
+            "meta": {
+                "cloudPages": {
+                    "publishDate": "2025-03-25 03:16:40.913"
+                }
+            },
+            "availableViews": [],
+            "data": {
+                "site": {
+                    "content": "{\"url\":\"https://oss-test.accenture.com/test_coderesource_json\"}"
+                }
+            },
+            "modelVersion": 2
+        }
+    },
+    "9465": {
+        "body": {
+            "id": 9465,
+            "customerKey": "test_landingpage",
+            "objectID": "7e515e0c-e13e-442e-b076-fe768782b453",
+            "assetType": {
+                "id": 247,
+                "name": "landingpage",
+                "displayName": "Landing Page"
+            },
+            "version": 1,
+            "name": "test_landingpage",
+            "description": "",
+            "owner": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "createdDate": "2025-03-25T03:17:51.88-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:17:52.187-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "enterpriseId": 1111111,
+            "memberId": 9999999,
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "thumbnail": {
+                "thumbnailUrl": "/v1/assets/9465/thumbnail"
+            },
+            "category": {
+                "id": 90888,
+                "name": "Test Folder",
+                "parentId": 89397
+            },
+            "content": "{\"url\":\"https://oss-test.accenture.com/test_landingpage\"}",
+            "meta": {
+                "thumbnailRefAssetId": 9466,
+                "cloudPages": {}
+            },
+            "availableViews": [],
+            "modelVersion": 2
+        }
+    },
+    "9466": {
+        "body": {
+            "id": 9466,
+            "customerKey": "test_landingpage_content",
+            "objectID": "95aa069b-5d48-41b9-a206-a623832cfc6d",
+            "assetType": {
+                "id": 205,
+                "name": "webpage",
+                "displayName": "Web Page"
+            },
+            "name": "test_landingpage_content",
+            "createdDate": "2025-03-25T03:17:52.317-06:00",
+            "createdBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "modifiedDate": "2025-03-25T03:17:52.317-06:00",
+            "modifiedBy": {
+                "id": 710420418,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "710420418"
+            },
+            "category": {
+                "id": 5328,
+                "name": "Content Builder",
+                "parentId": 0
+            },
+            "modelVersion": 2
+        }
+    },
+    "17180": {
+        "body": {
+            "id": 17180,
+            "customerKey": "testExisting_mobilePush_asset_DEV",
+            "objectID": "e00a6fa7-5566-4558-a724-ea9fe0ea1695",
+            "assetType": {
+                "id": 230,
+                "name": "jsonmessage",
+                "displayName": "JSON Message"
+            },
+            "name": "testExisting_mobilePush_asset_DEV",
+            "owner": {
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld"
+            },
+            "createdDate": "2026-03-24T19:02:12.407-06:00",
+            "createdBy": {
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld"
+            },
+            "modifiedDate": "2026-04-15T09:13:42.443-06:00",
+            "modifiedBy": {
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld"
+            },
+            "enterpriseId": 9999999,
+            "memberId": 9999999,
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "thumbnail": {
+                "thumbnailUrl": "/v1/assets/17180/thumbnail"
+            },
+            "category": {
+                "id": 89397,
+                "name": "Content Builder",
+                "parentId": 0
+            },
+            "views": {
+                "push": {
+                    "thumbnail": {},
+                    "content": "<!doctype html>\n<html>\n\n<head>\n\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\t<meta name=\"description\" content=\"Push Preview\">\n\t<style>\n\thtml,\n\tbody {\n\t\tmargin: 0;\n\t\tpadding: 0;\n\t\theight: 100%;\n\t\twidth: 100%;\n\t\tline-height: 1.4;\n\t}\n\n\t.push-previewer {\n\t\twidth: inherit;\n\t\theight: inherit;\n\t\tposition: relative;\n\t}\n\n\t.device {\n\t\theight: inherit;\n\t\twidth: inherit;\n\t\tbackground-size: cover;\n\t\tbackground-repeat: no-repeat;\n\t\tborder-radius: 12px;\n\t\tbackground-position: center;\n\t}\n\n\t.device-layout {\n\t\theight: inherit;\n\t\twidth: inherit;\n\t}\n\n\t.device-layout.android, .device-layout.iphone {\n\t\tborder: 12px solid #333;\n\t\theight: calc(100vh - 24px);\n\t\twidth: calc(100vw - 24px);\n\t\tborder-radius: 24px;\n\t\tbackground: #333;\n\t\tposition: relative;\n\t}\n\n\t.device-layout.android {\n\t\t.top-notch {\n\t\t\tposition: relative;\n   \t\t \twidth: 100%;\n\t\t\t.camera {\n\t\t\t\tbackground: linear-gradient(145deg, #222, #555);\n\t\t\t\theight: 16px;\n\t\t\t\twidth: 16px;\n\t\t\t\tborder-radius: 10px;\n\t\t\t\tposition: absolute;\n\t\t\t\tleft: 50%;\n\t\t\t\ttransform: translateX(-50%);\n\t\t\t\ttop: 4px;\n\t\t\t}\n\t\t}\n\t\t.layout-footer {\n\t\t\tposition: absolute;\n\t\t\theight: 24px;\n\t\t\tbottom: 0;\n\t\t\twidth: 100%;\n\t\t\tbackground-color: #333;\n\t\t\t.layout-footer-swipe {\n\t\t\t\tposition: absolute;\n\t\t\t\tbottom: 6px;\n\t\t\t\tleft: 50%;\n\t\t\t\ttransform: translateX(-50%);\n\t\t\t\tbackground-color: #fff;\n\t\t\t\theight: 3px;\n\t\t\t\tborder-radius: 2px;\n\t\t\t\twidth: 32px;\n\t\t\t}\n\t\t}\n\t}\n\n\t.device-layout.iphone {\n\t\t.top-notch {\n\t\t\tz-index: 1;\n\t\t\theight: 16px;\n\t\t\tposition: absolute;\n\t\t\twidth: 100px;\n\t\t\tbackground-color: #333;\n\t\t\ttop: 0;\n\t\t\tleft: 50%;\n\t\t\ttransform: translateX(-50%);\n\t\t\tborder-bottom-left-radius: 8px;\n\t\t\tborder-bottom-right-radius: 8px;\n\t\t\t.camera {\n\t\t\t\tbackground: linear-gradient(145deg, #222, #555);\n\t\t\t\theight: 10px;\n\t\t\t\twidth: 10px;\n\t\t\t\tborder-radius: 10px;\n\t\t\t\tposition: absolute;\n\t\t\t\tleft: 4px;\n\t\t\t\ttop: 50%;\n\t\t\t\ttransform: translateY(-50%);\t\n\t\t\t}\n\t\t}\n\t\t.layout-footer {\n\t\t\tposition: relative;\n\t\t\t.layout-footer-swipe {\n\t\t\t\tposition: absolute;\n\t\t\t\tbottom: 8px;\n\t\t\t\tleft: 50%;\n\t\t\t\ttransform: translateX(-50%);\n\t\t\t\tbackground-color: #fff;\n\t\t\t\theight: 3px;\n\t\t\t\tborder-radius: 2px;\n\t\t\t\twidth: 80px;\n\t\t\t}\n\t\t}\n\t}\n\n\t.carousel-container {\n\t\t&.isVisible {\n\t\t\tmargin-top: 5px;\n\t\t}\n\t\t.push-carousel-preview {\n\t\t\t.carousel-media-container {\n                display: flex;\n                position: relative;\n                border-radius: 17px;\n                height: calc(50vw - 26px);\n                width: 100%;\n                justify-content: center;\n                align-items: center;\n                border: 1px solid #C9C9C9;\n                overflow: hidden;\n                img, .img-placeholder {\n                    max-height: 100%; /* aspect ratio 2:1 */\n                    max-width: 100%;\n                    overflow: hidden;\n                    object-fit: contain;\n                    position: relative;\n                    font-size: 0.75rem;\n                }\n                img::before {\n                    content: attr(alt);\n                    width: calc(100vw - 48px);\n                    height: 100%;\n                    background-color: var(--alt-bg-color);\n                    position: absolute;\n                    top: 49%;\n                    left: 50%;\n                    transform: translate(-50%, -50%);\n                    text-align: center;\n                    font-size: 0.75rem;\n                }\n                .display-none {\n                    display: none;\n                }\n            }\n\t\t\t.left-chevron, .right-chevron {\n\t\t\t\tposition: absolute;\n\t\t\t\ttop: 50%;\n\t\t\t\ttransform: translateY(-50%);\n\t\t\t\tfont-size: 16px;\n\t\t\t\tcolor: #747474;\n\t\t\t\tbackground-color: #FFFFFF;\n\t\t\t\tpadding: 0px 8px;\n\t\t\t\tborder-radius: 50%;\n\t\t\t\t&.disabled-icon {\n\t\t\t\t\tcolor: #C9C9C9;\n\t\t\t\t\tbackground-color: #F3F3F3;\t\n\t\t\t\t}\n\t\t\t}\n\t\t\t.left-chevron {\n\t\t\t\tleft: 8px;\n\t\t\t}\n\t\t\t.right-chevron {\n\t\t\t\tright: 8px;\n\t\t\t}\n\t\t\t.dots {\n\t\t\t\tposition: absolute;\n\t\t\t\tbottom: 8px;\n\t\t\t\tleft: 50%;\n\t\t\t\ttransform: translateX(-50%);\n\t\t\t\tdisplay: flex;\n\t\t\t\t.dot {\n\t\t\t\t\twidth: 6px;\n\t\t\t\t\theight: 6px;\n\t\t\t\t\tmargin: 0 4px;\n\t\t\t\t\tbackground-color: #1D1919;\n\t\t\t\t\tborder-radius: 50%;\n\t\t\t\t\topacity: 0.4;\n\t\t\t\t\t&.active {\n\t\t\t\t\t\topacity: 1;\n\t\t\t\t\t}\n\t\t\t\t}\t\n\t\t\t}\n\t\t\t.carousel-text {\n\t\t\t\tmargin-top: 8px;\n\t\t\t\t&.caption {\n\t\t\t\t\tline-height: 16px;\n\t\t\t\t}\n\t\t\t\t&.subcaption {\n\t\t\t\t\tline-height: 14px;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\t.interactive-buttons-container {\n\t\tdisplay: flex;\n\t\talign-items: stretch;\n\t\toverflow: hidden;\n\t\t&.isVisible {\n\t\t\tmargin-top: 10px;\n\t\t}\n\t\t.interactive-button {\n\t\t\tmargin-right: 12px;\n\t\t\tdisplay: flex;\n        \talign-items: center;\n\t\t\tflex: 0 0 auto;\n\t\t\t.interactive-button-icon {\n\t\t\t\theight: 8px;\n\t\t\t\twidth: 8px;\n\t\t\t\tborder-radius: 8px;\n\t\t\t\tvertical-align: middle;\n\t\t\t\tborder: 2px dashed #000;\n\t\t\t\t&.has-label {\n\t\t\t\t\tmargin-right: 4px;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\t.customised-text {\n\t\t&.caption, &.subcaption {\n\t\t\tdisplay: -webkit-box;\n\t\t\t-webkit-line-clamp: 1;\n\t\t\toverflow: hidden;\n\t\t\t-webkit-box-orient: vertical;\n\t\t}\n\t\t&.placeholder-container {\n\t\t\t&.caption {\n\t\t\t\tmin-height: 16px;\n\t\t\t}\n\t\t\t&.subcaption {\n\t\t\t\tmin-height: 14px;\n\t\t\t}\n\t\t}\n\t\t&.style-I {\n\t\t\tfont-style: italic;\n\t\t}\n\t\t&.style-B {\n\t\t\tfont-weight: 700;\n\t\t}\n\t\t&.style-R {\n\t\t\tfont-style: normal;\n\t\t}\n\t\t&.alignment-B {\n\t\t\ttext-align: left;\n\t\t}\n\t\t&.alignment-C {\n\t\t\ttext-align: center;\n\t\t}\n\t\t&.alignment-E {\n\t\t\ttext-align: right;\n\t\t}\n\t\t&.size-S {\n\t\t\tfont-size: 10px;\t\n\t\t}\n\t\t&.size-M {\n\t\t\tfont-size: 12px;\t\n\t\t}\n\t\t&.size-L {\n\t\t\tfont-size: 14px;\t\n\t\t}\n\t}\n\t.large-icon {\n\t\theight: 36px;\n\t\twidth: 36px;\n\t\tborder-radius: 12px;\n\t\tbackground-color: #BDBDBD;\n\t}\n</style> <style>\n\t@font-face {\n\t\tfont-family: 'SF Pro Text - Regular';\n\t\tsrc: url('https://mobilepush-device-previewer.s7.marketingcloudapps.com/fonts/SFProText-Regular.woff') format('woff');\n\t\tfont-weight: normal;\n\t\tfont-style: normal;\n\t}\n\t\n\t@font-face {\n\t\tfont-family: 'Helvetica Neue - Roman';\n\t\tsrc: url('https://mobilepush-device-previewer.s7.marketingcloudapps.com/fonts/HelveticaNeue-Roman.woff') format('woff');\n\t\tfont-weight: normal;\n\t\tfont-style: normal;\n\t}\n\t\n\t@font-face {\n\t\tfont-family: 'SF Compact Text - Light';\n\t\tsrc: url('https://mobilepush-device-previewer.s7.marketingcloudapps.com/fonts/SFCompactText-Light.woff') format('woff');\n\t\tfont-weight: normal;\n\t\tfont-style: normal;\n\t}\n\t\n\t.device.iphone.lock-screen {\n\t\tfont-family: 'SF Pro Text - Regular';\n\t\tbackground-image: url('https://image.s8.exacttarget.com/lib/fe8e1c72746d057a70/m/1/d1948d1e-93af-4b9d-8b28-a087a351e8a8.jpg');\n\t}\n\t\n\t.device.iphone.lock-screen .header {\n\t\ttext-align: center;\n\t\tmargin-bottom: 20px;\n\t}\n\t\n\t.device.iphone.lock-screen .header .time {\n\t\tcolor: #FFFFFF;\n\t\tfont-family: 'SF Compact Text - Light';\n\t\tfont-size: 60px;\n\t\theight: 70px;\n\t}\n\n\t.device.iphone.lock-screen .header .date {\n\t\tcolor: #FFFFFF;\n\t\tfont-family: 'Helvetica Neue - Roman';\n\t\tfont-size: 17px;\n\t}\n\t\n\t.device.iphone.lock-screen .body {\n\t\tbackground: #FFFFFF;\n\t\tborder-radius: 12px;\n\t\tpadding: 10px;\n\t\tmargin: 0 4px;\n\t\topacity: 1;\n\t\tposition: relative;\n\t}\n\t\n\t.device.iphone.lock-screen .body .application {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t\tborder-radius: 12px 12px 0 0;\n\t\tbackground: #FFFFFF;\n\t\tmargin: -10px -10px 0 -10px;\n\t\tpadding: 10px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .application .icon {\n\t\t\n\t}\n\t\n\t.device.iphone.lock-screen .body .application .icon .icon-placeholder {\n\t\theight: 17px;\n\t\twidth: 17px;\n\t\tborder-radius: 3px;\n\t\tbackground-color: grey;\n\t\tdisplay: inline-block;\n\t\tvertical-align: middle;\n\t}\n\t\n\t.device.iphone.lock-screen .body .application .name {\n\t\tcolor: #000000;\n\t\topacity: .50;\n\t\tfont-size: 12px;\n\t\ttext-overflow: ellipsis;\n\t\toverflow: hidden;\n\t\twhite-space: nowrap;\n\t\twidth: 100%;\n\t\tpadding: 2px 5px 0 10px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .application .timestamp {\n\t\tfont-size: 11px;\n\t\topacity: .50;\n\t\tfont-weight: bold;\n\t\tmargin-left: auto;\n\t}\n\t\n\t.device.iphone.lock-screen .body .media {\n\t\tborder-radius: 3px;\n\t\twidth: 26px;\n\t\theight: 26px;\n\t\tposition: absolute;\n\t\tright: 10px;\n\t\tbottom: 10px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .media img {\n\t\theight: 100%;\n\t\tmax-height: 26px;\n\t\twidth: 100%;\n\t\tmax-width: 26px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content {\n\t\tcolor: #000000;\n\t\tfont-size: 13px;\n\t\tpadding-top: 5px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content > div {\n\t\ttext-overflow: ellipsis;\n\t\toverflow: hidden;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content .title {\n\t\tfont-weight: bold;\n\t\twhite-space: nowrap;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content .subtitle {\n\t\tfont-weight: bold;\n\t\twhite-space: nowrap;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content .message {\n\t\twhite-space: pre-wrap;\n\t\tdisplay: -webkit-box;\n\t\t-webkit-line-clamp: 4;\n\t\t-webkit-box-orient: vertical;\n\t\ttext-overflow: ellipsis;\n\t\t-o-text-overflow: ellipsis;\n\t\t-ms-text-overflow: ellipsis;\n\t\tword-break: break-word;\n\t\t-ms-word-wrap: break-word;\n\t\tword-wrap: break-word;\n\t\tmax-height: 75px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content .message.hasTitle {\n\t\tmax-height: 55px;\n\t\t-webkit-line-clamp: 3;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content .message.hasSubtitle {\n\t\tmax-height: 35px;\n\t\t-webkit-line-clamp: 2;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content.hasMedia .message {\n\t\tpadding-right: 50px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .action {\n\t\tcolor: #157EBF;\n\t\tfont-size: 11px;\n\t\topacity: .3;\n\t\tmargin-top: 5px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .buttons {\n\t\tdisplay: none;\n\t}\n\t\n\t.device.iphone.lock-screen .footer {\n\t\tdisplay: none;\n\t}\n\n\t.device.iphone.lock-screen .body .carousel-container {\n\t\tdisplay: none;\n\t}\n</style>\n</head>\n\n<body>\n\t<div class=\"push-previewer\">\n\t\t<div class=\"device-layout iphone\">\n\t\t\t<div class=\"top-notch\">\n\t\t\t\t<div class=\"camera\"></div>\n\t\t\t</div>\n\t\t\t<div class=\"device iphone lock-screen\">\n\t\t\t\t<div class=\"header\">\n\t\t\t\t\t<div class=\"time\">12:00 AM</div>\n\t\t\t\t\t<div class=\"date\">January 1, 2020</div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"body\">\n\t\t\t\t\t<div class=\"application\">\n\t\t\t\t\t\t<div class=\"icon\">\n\t\t\t\t\t\t\t<div class=\"icon-placeholder\"></div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"name\">App Name</div>\n\t\t\t\t\t\t<div class=\"timestamp\"></div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"media\"></div>\n\t\t\t\t\t<div class=\"content \">\n\t\t\t\t\t\t<div class=\"title\">my push title %%ContactKey%%</div>\n\t\t\t\t\t\t<div class=\"subtitle\">my push subtitle for ios­ƒÿÇ</div>\n\t\t\t\t\t\t<div class=\"message hasTitle hasSubtitle\">my push message%%=ContentBlockByKey(&quot;genericContentBlock_DEV&quot;)=%%</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"action\"></div>\n\t\t\t\t\t<div class=\"buttons\">\n\t\t\t\t\t\t<div class=\"button1\"></div>\n\t\t\t\t\t\t<div class=\"button2\"></div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"carousel-container\"></div>\n\t\t\t\t\t<div class=\"interactive-buttons-container\"></div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"footer\"></div>\n\t\t\t</div>\n\t\t\t<div class=\"layout-footer\">\n\t\t\t\t<div class=\"layout-footer-swipe\"></div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</body>\n\n</html>",
+                    "meta": {
+                        "options": {
+                            "customBlockData": {
+                                "display:title": "my push title %%ContactKey%%",
+                                "androidSound": "default",
+                                "iOSSound": "default",
+                                "channel": "push",
+                                "showTemplatePicker": false,
+                                "collapsedPanels": [
+                                    "iOSConfigurations"
+                                ],
+                                "display:title:display": "my push title %%ContactKey%%",
+                                "openBehavior:actionType": {
+                                    "label": "Open the App",
+                                    "value": "openApp",
+                                    "id": "openApp_0",
+                                    "localizedLabel": "Open the App"
+                                },
+                                "display:message": "my push message%%=ContentBlockByKey(\"genericContentBlock_DEV\")=%%",
+                                "currentColumn": 0,
+                                "display:subtitle": "my push subtitle for ios­ƒÿÇ",
+                                "display:message:display": "my push message%%=ContentBlockByKey(\"genericContentBlock_DEV\")=%%",
+                                "display:subtitle:display": "my push subtitle for ios­ƒÿÇ",
+                                "jmbVersion": "2.0",
+                                "richFeatures": {
+                                    "buttonsEnabled": true,
+                                    "buttons": [
+                                        {
+                                            "icon": "",
+                                            "identifier": "btn-1",
+                                            "title": {
+                                                "text": "more details",
+                                                "style": {
+                                                    "fontSize": "M",
+                                                    "fontColor": "000000",
+                                                    "fontStyle": "R"
+                                                }
+                                            },
+                                            "actions": [
+                                                {
+                                                    "type": "0"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "template": "push",
+                                "contents": [],
+                                "uncheckedPanels": [
+                                    "pushmedia",
+                                    "pushmedia",
+                                    "pushmedia",
+                                    "pushmedia",
+                                    "pushmedia",
+                                    "pushmedia"
+                                ]
+                            }
+                        }
+                    },
+                    "modelVersion": 2
+                }
+            },
+            "availableViews": [
+                "push"
+            ],
+            "blocks": {},
+            "slots": {},
+            "modelVersion": 2
+        }
+    },
+    "808714": {
+        "body": {
+            "id": 808714,
+            "customerKey": "testExisting_asset_message",
+            "objectID": "01f883be-c5c3-4eb1-b6e1-d7036f8153d4",
+            "contentType": "application/vnd.etmc.email.Message; kind=paste",
+            "assetType": {
+                "id": 208,
+                "name": "htmlemail",
+                "displayName": "HTML Email"
+            },
+            "name": "testExisting_asset_message",
+            "owner": {
+                "id": 717129834,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "717129834"
+            },
+            "createdDate": "2020-03-06T02:35:15.677-06:00",
+            "createdBy": {
+                "id": 717129834,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "717129834"
+            },
+            "modifiedDate": "2023-08-02T07:08:00.86-06:00",
+            "modifiedBy": {
+                "id": 700304523,
+                "name": "SFMC DEVOPS app user",
+                "userId": "700304523"
+            },
+            "enterpriseId": 7281698,
+            "memberId": 7281698,
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "thumbnail": {
+                "thumbnailUrl": "/v1/assets/808714/thumbnail"
+            },
+            "category": {
+                "id": 89397,
+                "name": "Content Builder",
+                "parentId": 0
+            },
+            "views": {
+                "subjectline": {
+                    "contentType": "application/vnd.etmc.email.View; kind=subjectline",
+                    "thumbnail": {},
+                    "content": "TEST",
+                    "availableViews": [],
+                    "data": {
+                        "email": {
+                            "options": {
+                                "generateFrom": null
+                            }
+                        }
+                    },
+                    "modelVersion": 2
+                },
+                "preheader": {
+                    "thumbnail": {},
+                    "content": "%%= ContentBlockByKey(\"testExisting_asset_htmlblock\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByKey(\"testExisting_asset_htmlblock\");</script>%%= ContentBlockById(1295065) =%% <script runat=\"server\">\nPlatform.Function.ContentBlockById(1295064);</script>%%= ContentBlockByName(\"Content Builder\\dont strip non ssjs content\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByName(\"Content Builder\\\\dont strip non ssjs content\");</script>",
+                    "availableViews": [],
+                    "data": {
+                        "email": {
+                            "options": {
+                                "generateFrom": null
+                            }
+                        }
+                    },
+                    "modelVersion": 2
+                },
+                "html": {
+                    "thumbnail": {},
+                    "content": "<a href=\"%%ftaf_url%%\"\n    ><img\n        src=\"https://www.exacttarget.com/members/newsletters/gfx/forwardafriendicon.gif\"\n        border=\"0\" /></a\n><a href=\"%%profile_center_url%%\" alias=\"Update Profile\">Update Profile</a>\n<table cellpadding=\"2\" cellspacing=\"0\" width=\"600\" id=\"Table5\" border=\"0\">\n    <tr>\n        <td>\n            <font face=\"verdana\" size=\"1\" color=\"#444444\"\n                >This email was sent by: <b>%%Member_Busname%%</b><br />%%Member_Addr%%\n                %%Member_City%%, %%Member_State%%, %%Member_PostalCode%%, %%Member_Country%%<br /><br\n            /></font>\n        </td>\n    </tr>\n</table>\n<a href=\"%%subscription_center_url%%\" alias=\"Manage Subscriptions\">Manage Subscriptions</a\n><img src=\"https://www.exacttarget.com/images/Powered_By_1206.jpg\" border=\"0\" /><custom\n    name=\"opencounter\"\n    type=\"tracking\"\n/>\n%%= ContentBlockByKey(\"testExisting_asset_htmlblock\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByKey(\"testExisting_asset_htmlblock\");</script>%%= ContentBlockById(1295064) =%% <script runat=\"server\">\nPlatform.Function.ContentBlockById(1295064);</script>%%= ContentBlockByName(\"Content Builder\\dont strip non ssjs content\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByName(\"Content Builder\\\\dont strip non ssjs content\");</script>",
+                    "availableViews": [],
+                    "data": {
+                        "email": {
+                            "options": {
+                                "generateFrom": null
+                            }
+                        }
+                    },
+                    "modelVersion": 2
+                },
+                "text": {
+                    "thumbnail": {},
+                    "content": "%%= ContentBlockByKey(\"testExisting_asset_htmlblock\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByKey(\"testExisting_asset_htmlblock\");</script>%%= ContentBlockById(1295064) =%% <script runat=\"server\">\nPlatform.Function.ContentBlockById(1295064);</script>%%= ContentBlockByName(\"Content Builder\\dont strip non ssjs content\") =%% <script runat=\"server\">\nPlatform.Function.ContentBlockByName(\"Content Builder\\\\dont strip non ssjs content\");</script>",
+                    "availableViews": [],
+                    "data": {
+                        "email": {
+                            "options": {
+                                "generateFrom": null
+                            }
+                        }
+                    },
+                    "modelVersion": 2
+                },
+                "viewAsAWebPage": {
+                    "thumbnail": {},
+                    "availableViews": [],
+                    "data": {
+                        "email": {
+                            "options": {
+                                "generateFrom": null
+                            }
+                        }
+                    },
+                    "modelVersion": 2
+                },
+                "subscriptioncenter": {
+                    "thumbnail": {},
+                    "availableViews": [],
+                    "data": {
+                        "email": {
+                            "options": {
+                                "generateFrom": null
+                            }
+                        }
+                    },
+                    "modelVersion": 2
+                },
+                "forwardHTML": {
+                    "thumbnail": {},
+                    "availableViews": [],
+                    "data": {
+                        "email": {
+                            "options": {
+                                "generateFrom": null
+                            }
+                        }
+                    },
+                    "modelVersion": 2
+                },
+                "forwardText": {
+                    "thumbnail": {},
+                    "availableViews": [],
+                    "data": {
+                        "email": {
+                            "options": {
+                                "generateFrom": null
+                            }
+                        }
+                    },
+                    "modelVersion": 2
+                }
+            },
+            "availableViews": [
+                "subjectline",
+                "preheader",
+                "html",
+                "text",
+                "viewAsAWebPage",
+                "subscriptioncenter",
+                "forwardHTML",
+                "forwardText"
+            ],
+            "data": {
+                "email": {
+                    "options": {
+                        "characterEncoding": "utf-8"
+                    },
+                    "legacy": {
+                        "legacyId": 429827,
+                        "legacyKey": "c7308370-bb2c-4bd4-83dd-0ea422e2009d",
+                        "legacyType": "email",
+                        "legacyCategoryId": 90890
+                    }
+                },
+                "approvals": {
+                    "approvalStatus": {
+                        "id": 4,
+                        "name": "Approved",
+                        "displayName": "Approved"
+                    }
+                }
+            },
+            "legacyData": {
+                "legacyId": 429827,
+                "legacyKey": "c7308370-bb2c-4bd4-83dd-0ea422e2009d",
+                "legacyType": "email",
+                "legacyCategoryId": 90890
+            },
+            "modelVersion": 2
+        },
+        "queryOverrides": {
+            "legacyData": {
+                "legacyId": 531213,
+                "legacyKey": "testExisting_asset_message",
+                "legacyType": "email",
+                "legacyCategoryId": 290835
+            },
+            "data": {
+                "email": {
+                    "options": {
+                        "characterEncoding": "us-ascii"
+                    },
+                    "legacy": {
+                        "legacyId": 531213,
+                        "legacyKey": "testExisting_asset_message",
+                        "legacyType": "email",
+                        "legacyCategoryId": 290835
+                    }
+                }
+            }
+        }
+    },
+    "950143": {
+        "body": {
+            "id": 950143,
+            "customerKey": "testExisting_asset",
+            "objectID": "198ad191-59ae-44d1-9981-ffa71b076ad9",
+            "contentType": "text/html",
+            "assetType": {
+                "id": 205,
+                "name": "webpage",
+                "displayName": "Web Page"
+            },
+            "version": 1,
+            "name": "testExisting_asset",
+            "owner": {
+                "id": 717319337,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "717319337"
+            },
+            "createdDate": "2021-09-13T12:14:02.32-06:00",
+            "createdBy": {
+                "id": 717319337,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld",
+                "userId": "717319337"
+            },
+            "modifiedDate": "2023-08-02T07:10:29.553-06:00",
+            "modifiedBy": {
+                "id": 700304523,
+                "name": "SFMC DEVOPS app user",
+                "userId": "700304523"
+            },
+            "enterpriseId": 111111,
+            "memberId": 999999,
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "thumbnail": {
+                "thumbnailUrl": "/v1/assets/950143/thumbnail"
+            },
+            "category": {
+                "id": 89397
+            },
+            "meta": {
+                "globalStyles": {
+                    "isLocked": false,
+                    "body": {
+                        "max-width": "1280px",
+                        "color": "#000000",
+                        "font-family": "Arial",
+                        "font-size": "12px",
+                        "margin": "0px auto"
+                    },
+                    "template": {
+                        "background-color": "#FFFFFF",
+                        "border": "none",
+                        "box-sizing": "border-box",
+                        "padding": "0px",
+                        "width": "100%"
+                    }
+                }
+            },
+            "views": {
+                "html": {
+                    "thumbnail": {},
+                    "content": "<!DOCTYPE html>\n<html>\n    <head>\n        <meta\n            name=\"viewport\"\n            content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0\"\n        />\n        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n        <style class=\"main_style\">\n            .layout-canvas-g {\n                background-color: #ffffff;\n                border: none;\n                box-sizing: border-box;\n                padding: 0px;\n                width: 100%;\n            }\n            .layout-canvas-g > .header,\n            .layout-canvas-g > .section,\n            .layout-canvas-g > .footer {\n                position: relative;\n                overflow: hidden;\n                width: 100%;\n                overflow-wrap: break-word;\n            }\n            .layout-canvas-g > .section {\n                margin: 10px 0px;\n            }\n            .layout-canvas-g > .section > .columns {\n                box-sizing: border-box;\n                overflow-wrap: break-word;\n            }\n            body {\n                color: #000000;\n                font-family: Arial;\n                font-size: 12px;\n                margin: 0px auto;\n                max-width: 1280px;\n            }\n            @media only screen and (max-width: 480px) {\n                .mobile-hidden {\n                    display: none !important;\n                }\n                .responsive-td {\n                    width: 100% !important;\n                    display: block !important;\n                    padding: 0px !important;\n                }\n            }\n            .layout-canvas-g > .section > .columns {\n                width: 100%;\n            }\n        </style>\n    </head>\n    <body>\n        <div class=\"layout layout-canvas-g\">\n            <div class=\"section\">\n                <div class=\"columns col1\">\n                    <div data-type=\"slot\" data-key=\"col1\"></div>\n                </div>\n            </div>\n        </div>\n    </body>\n</html>\n",
+                    "slots": {
+                        "col1": {
+                            "content": "<div data-type=\"block\" data-key=\"bgbqbbx4we9\"></div>",
+                            "design": "<p style=\"font-family:arial;color:#ccc;font-size:11px;text-align:center;vertical-align:middle;font-weight:bold;padding:10px;margin:0;border:#ccc dashed 1px;\">Drop blocks or content here</p>",
+                            "blocks": {
+                                "bgbqbbx4we9": {
+                                    "assetType": {
+                                        "id": 197,
+                                        "name": "htmlblock"
+                                    },
+                                    "content": "<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" role=\"presentation\" style=\"min-width: 100%; \" class=\"stylingblock-content-wrapper\"><tr><td class=\"stylingblock-content-wrapper camarker-inner\">\n%%[FOR @I=1 TO 1000 DO\n    SET @a = CONCAT(IIF(MOD(@i, 3)==0, \"Fizz\", \"\"), IIF(MOD(@i,5)==0,\"Buzz\",\"\"), IIF(MOD(@i, 7)==0, \"Boing\", \"\"), IIF(MOD(@i,11)==0,\"Bang\",\"\"))\nOUTPUT(CONCAT(@a, IIF(LENGTH(@a)>0, \"\", @i), \"<br>\"))NEXT @i\n]%%\n</td></tr></table>",
+                                    "design": "<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" role=\"presentation\" style=\"min-width: 100%; \" class=\"stylingblock-content-wrapper\"><tr><td class=\"stylingblock-content-wrapper camarker-inner\"><div class=\"default-design\"></div></td></tr></table>",
+                                    "meta": {
+                                        "wrapperStyles": {
+                                            "mobile": {
+                                                "visible": true
+                                            }
+                                        }
+                                    },
+                                    "modelVersion": 2
+                                }
+                            },
+                            "modelVersion": 2
+                        }
+                    },
+                    "modelVersion": 2
+                }
+            },
+            "availableViews": [
+                "html"
+            ],
+            "modelVersion": 2
+        }
+    },
+    "1209971": {
+        "body": {
+            "customerKey": "mobileMessage_test",
+            "assetType": {
+                "name": "jsonmessage",
+                "displayName": "JSON Message",
+                "id": 230
+            },
+            "name": "mobileMessage_test",
+            "owner": {
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld"
+            },
+            "createdDate": "2021-11-22T09:21:11.933-06:00",
+            "createdBy": {
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld"
+            },
+            "modifiedDate": "2021-12-16T02:56:24.29-06:00",
+            "modifiedBy": {
+                "name": "SFMC DEVOPS app user"
+            },
+            "memberId": 9999999,
+            "status": {
+                "name": "Draft"
+            },
+            "views": {
+                "push": {
+                    "thumbnail": {},
+                    "content": "<!doctype html>\n<html>\n\t<head>\n\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\t\t<meta name=\"description\" content=\"Push Preview\">\n\t\t<style>\n\thtml,\n\tbody {\n\t\tmargin: 0;\n\t\tpadding: 0;\n\t\theight: 100%;\n\t\twidth: 100%;\n\t\tline-height: 1.4;\n\t}\n\n\t.push-previewer {\n\t\twidth: inherit;\n\t\theight: inherit;\n\t\tposition: relative;\n\t}\n\n\t.device {\n\t\theight: inherit;\n\t\twidth: inherit;\n\t\tbackground-size: cover;\n\t\tbackground-repeat: no-repeat;\n\t}\n</style> <style>\n\t@font-face {\n\t\tfont-family: 'SF Pro Text - Regular';\n\t\tsrc: url('https://mobilepush-device-previewer.s7.marketingcloudapps.com/fonts/SFProText-Regular.woff') format('woff');\n\t\tfont-weight: normal;\n\t\tfont-style: normal;\n\t}\n\t\n\t@font-face {\n\t\tfont-family: 'Helvetica Neue - Roman';\n\t\tsrc: url('https://mobilepush-device-previewer.s7.marketingcloudapps.com/fonts/HelveticaNeue-Roman.woff') format('woff');\n\t\tfont-weight: normal;\n\t\tfont-style: normal;\n\t}\n\t\n\t@font-face {\n\t\tfont-family: 'SF Compact Text - Light';\n\t\tsrc: url('https://mobilepush-device-previewer.s7.marketingcloudapps.com/fonts/SFCompactText-Light.woff') format('woff');\n\t\tfont-weight: normal;\n\t\tfont-style: normal;\n\t}\n\t\n\t.device.iphone.lock-screen {\n\t\tfont-family: 'SF Pro Text - Regular';\n\t\tbackground-image: url('https://image.s8.exacttarget.com/lib/fe8e1c72746d057a70/m/1/d1948d1e-93af-4b9d-8b28-a087a351e8a8.jpg');\n\t}\n\t\n\t.device.iphone.lock-screen .header {\n\t\ttext-align: center;\n\t\tmargin-bottom: 20px;\n\t}\n\t\n\t.device.iphone.lock-screen .header .time {\n\t\tcolor: #FFFFFF;\n\t\tfont-family: 'SF Compact Text - Light';\n\t\tfont-size: 60px;\n\t\theight: 70px;\n\t}\n\n\t.device.iphone.lock-screen .header .date {\n\t\tcolor: #FFFFFF;\n\t\tfont-family: 'Helvetica Neue - Roman';\n\t\tfont-size: 17px;\n\t}\n\t\n\t.device.iphone.lock-screen .body {\n\t\tbackground: rgba(240, 240, 240, 0.97);\n\t\tborder-radius: 12px;\n\t\tpadding: 10px;\n\t\tmargin: 0 4px;\n\t\topacity: 1;\n\t\tposition: relative;\n\t}\n\t\n\t.device.iphone.lock-screen .body .application {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t\tborder-radius: 12px 12px 0 0;\n\t\tbackground: #F0F0F0;\n\t\tmargin: -10px -10px 0 -10px;\n\t\tpadding: 10px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .application .icon {\n\t\t\n\t}\n\t\n\t.device.iphone.lock-screen .body .application .icon .icon-placeholder {\n\t\theight: 17px;\n\t\twidth: 17px;\n\t\tborder-radius: 3px;\n\t\tbackground-color: grey;\n\t\tdisplay: inline-block;\n\t\tvertical-align: middle;\n\t}\n\t\n\t.device.iphone.lock-screen .body .application .name {\n\t\tcolor: #000000;\n\t\topacity: .50;\n\t\tfont-size: 12px;\n\t\ttext-overflow: ellipsis;\n\t\toverflow: hidden;\n\t\twhite-space: nowrap;\n\t\twidth: 100%;\n\t\tpadding: 2px 5px 0 10px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .application .timestamp {\n\t\tfont-size: 11px;\n\t\topacity: .50;\n\t\tfont-weight: bold;\n\t\tmargin-left: auto;\n\t}\n\t\n\t.device.iphone.lock-screen .body .media {\n\t\tborder-radius: 3px;\n\t\twidth: 26px;\n\t\theight: 26px;\n\t\tposition: absolute;\n\t\tright: 10px;\n\t\tbottom: 10px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .media img {\n\t\theight: 100%;\n\t\tmax-height: 26px;\n\t\twidth: 100%;\n\t\tmax-width: 26px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content {\n\t\tcolor: #000000;\n\t\tfont-size: 13px;\n\t\tpadding-top: 5px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content > div {\n\t\ttext-overflow: ellipsis;\n\t\toverflow: hidden;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content .title {\n\t\tfont-weight: bold;\n\t\twhite-space: nowrap;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content .subtitle {\n\t\tfont-weight: bold;\n\t\twhite-space: nowrap;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content .message {\n\t\twhite-space: pre-wrap;\n\t\tdisplay: -webkit-box;\n\t\t-webkit-line-clamp: 4;\n\t\t-webkit-box-orient: vertical;\n\t\ttext-overflow: ellipsis;\n\t\t-o-text-overflow: ellipsis;\n\t\t-ms-text-overflow: ellipsis;\n\t\tword-break: break-word;\n\t\t-ms-word-wrap: break-word;\n\t\tword-wrap: break-word;\n\t\tmax-height: 75px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content .message.hasTitle {\n\t\tmax-height: 55px;\n\t\t-webkit-line-clamp: 3;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content .message.hasSubtitle {\n\t\tmax-height: 35px;\n\t\t-webkit-line-clamp: 2;\n\t}\n\t\n\t.device.iphone.lock-screen .body .content.hasMedia .message {\n\t\tpadding-right: 50px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .action {\n\t\tcolor: #157EBF;\n\t\tfont-size: 11px;\n\t\topacity: .3;\n\t\tmargin-top: 5px;\n\t}\n\t\n\t.device.iphone.lock-screen .body .buttons {\n\t\tdisplay: none;\n\t}\n\t\n\t.device.iphone.lock-screen .footer {\n\t\tdisplay: none;\n\t}\n</style>\n\t</head>\n\t<body>\n\t\t<div class=\"push-previewer\">\n\t\t\t<div class=\"device iphone lock-screen\">\n\t\t\t\t<div class=\"header\">\n\t\t\t\t\t<div class=\"time\">12:00 AM</div>\n\t\t\t\t\t<div class=\"date\">January 1, 2020</div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"body\">\n\t\t\t\t\t<div class=\"application\">\n\t\t\t\t\t\t<div class=\"icon\">\n\t\t\t\t\t\t\t<div class=\"icon-placeholder\"></div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"name\">App Name</div>\n\t\t\t\t\t\t<div class=\"timestamp\">now</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"media\"></div>\n\t\t\t\t\t<div class=\"content \">\n\t\t\t\t\t\t<div class=\"title\">test</div>\n\t\t\t\t\t\t<div class=\"subtitle\"></div>\n\t\t\t\t\t\t<div class=\"message hasTitle \">asdfasf </div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"action\"></div>\n\t\t\t\t\t<div class=\"buttons\">\n\t\t\t\t\t\t<div class=\"button1\"></div>\n\t\t\t\t\t\t<div class=\"button2\"></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"footer\"></div>\n\t\t\t</div>\n\t\t</div>\n\t</body>\n</html>",
+                    "meta": {
+                        "options": {
+                            "customBlockData": {
+                                "display:title": "test",
+                                "channel": "push",
+                                "showTemplatePicker": false,
+                                "display:title:display": "test",
+                                "stack": "S7",
+                                "openBehavior:actionType": {
+                                    "label": "Open the App",
+                                    "value": "openApp",
+                                    "id": "openApp_0",
+                                    "localizedLabel": "Open the App"
+                                },
+                                "display:message": "asdfasf ",
+                                "currentColumn": 0,
+                                "display:message:display": "asdfasf ",
+                                "template": "push",
+                                "uncheckedPanels": [
+                                    "pushmedia",
+                                    "subtitle"
+                                ]
+                            }
+                        }
+                    },
+                    "modelVersion": 2
+                }
+            },
+            "availableViews": [
+                "push"
+            ],
+            "modelVersion": 2,
+            "category": {
+                "id": 89397,
+                "name": "Content Builder",
+                "parentId": 0
+            },
+            "id": 1209971
+        }
+    },
+    "1295064": {
+        "body": {
+            "id": 1295064,
+            "customerKey": "testExisting_asset_htmlblock",
+            "objectID": "972974ed-dc44-4df2-ab6e-53bae9070339",
+            "assetType": {
+                "id": 197,
+                "name": "htmlblock",
+                "displayName": "HTML Block"
+            },
+            "fileProperties": {
+                "fileName": "testExisting_asset_htmlblock-Mcdev-strips-content"
+            },
+            "name": "testExisting_asset_htmlblock-Mcdev-strips-content",
+            "owner": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "createdDate": "2024-01-08T08:26:58.277-06:00",
+            "createdBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "modifiedDate": "2024-01-08T08:28:01.6-06:00",
+            "modifiedBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "enterpriseId": 9999999,
+            "memberId": 9999999,
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "thumbnail": {
+                "thumbnailUrl": "/v1/assets/1295064/thumbnail"
+            },
+            "category": {
+                "id": 89397,
+                "name": "Content Builder",
+                "parentId": 0
+            },
+            "content": "<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" role=\"presentation\" style=\"min-width: 100%; \" class=\"stylingblock-content-wrapper\"><tr><td class=\"stylingblock-content-wrapper camarker-inner\"><div>\n  my 1st html\n</div>\n\n%%[ /* my ampscript */ ]%%\n\n<script runat=\"server\">\n// my ssjs\n</script>\n\n<div>\n  my 2nd html\n</div>\n<div>%%=ContentBlockById(1295065)=%%</div></td></tr></table>",
+            "design": "",
+            "meta": {
+                "wrapperStyles": {
+                    "mobile": {
+                        "visible": true
+                    },
+                    "styling": {}
+                }
+            },
+            "availableViews": [],
+            "modelVersion": 2
+        },
+        "queryOverrides": {
+            "name": "dont strip non ssjs content",
+            "fileProperties": {
+                "fileName": "dont strip non ssjs content"
+            }
+        }
+    },
+    "1295065": {
+        "body": {
+            "id": 1295065,
+            "customerKey": "testExisting_htmlblock1",
+            "objectID": "972974ed-dc44-4df2-ab6e-53bae9070335",
+            "assetType": {
+                "id": 197,
+                "name": "htmlblock",
+                "displayName": "HTML Block"
+            },
+            "fileProperties": {
+                "fileName": "testExisting_htmlblock1"
+            },
+            "name": "testExisting_htmlblock1",
+            "owner": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "createdDate": "2024-01-08T08:26:58.277-06:00",
+            "createdBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "modifiedDate": "2024-01-08T08:28:01.6-06:00",
+            "modifiedBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "enterpriseId": 9999999,
+            "memberId": 9999999,
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "thumbnail": {
+                "thumbnailUrl": "/v1/assets/1295065/thumbnail"
+            },
+            "category": {
+                "id": 89397,
+                "name": "Content Builder",
+                "parentId": 0
+            },
+            "content": "<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" role=\"presentation\" style=\"min-width: 100%; \" class=\"stylingblock-content-wrapper\"><tr><td class=\"stylingblock-content-wrapper camarker-inner\"><div>\n  my 1st html\n</div>\n\n%%[ /* my ampscript */ ]%%\n\n<script runat=\"server\">\n// my ssjs\n</script>\n\n<div>\n  my 2nd html\n</div>\n<div>%%= ContentBlockById(1295066)=%%%%= ContentBlockByKey(\"testExisting_htmlblock 3 spaces\")=%%</div></td></tr></table>",
+            "design": "",
+            "meta": {
+                "wrapperStyles": {
+                    "mobile": {
+                        "visible": true
+                    },
+                    "styling": {}
+                }
+            },
+            "availableViews": [],
+            "modelVersion": 2
+        }
+    },
+    "1295066": {
+        "body": {
+            "id": 1295066,
+            "customerKey": "testExisting_htmlblock2",
+            "objectID": "972974ed-dc44-4df2-ab6e-53bae9070336",
+            "assetType": {
+                "id": 197,
+                "name": "htmlblock",
+                "displayName": "HTML Block"
+            },
+            "fileProperties": {
+                "fileName": "testExisting_htmlblock2"
+            },
+            "name": "testExisting_htmlblock2",
+            "owner": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "createdDate": "2024-01-08T08:26:58.277-06:00",
+            "createdBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "modifiedDate": "2024-01-08T08:28:01.6-06:00",
+            "modifiedBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "enterpriseId": 9999999,
+            "memberId": 9999999,
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "thumbnail": {
+                "thumbnailUrl": "/v1/assets/1295066/thumbnail"
+            },
+            "category": {
+                "id": 89397,
+                "name": "Content Builder",
+                "parentId": 0
+            },
+            "content": "<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" role=\"presentation\" style=\"min-width: 100%; \" class=\"stylingblock-content-wrapper\"><tr><td class=\"stylingblock-content-wrapper camarker-inner\"><div>\n  my 1st html\n</div>\n\n%%[ /* my ampscript */ ]%%\n\n<script runat=\"server\">\n// my ssjs\n</script>\n\n<div>\n  my 2nd html\n</div>\n<div>%%=TreatAsContent(ContentBlockByFake(\"Content Builder\\my very long path\\Content Blocks Library\\COMMON\\some other folder\\my code snippet\"))=%%</div></td></tr></table>",
+            "design": "",
+            "meta": {
+                "wrapperStyles": {
+                    "mobile": {
+                        "visible": true
+                    },
+                    "styling": {}
+                }
+            },
+            "availableViews": [],
+            "modelVersion": 2
+        }
+    },
+    "1295067": {
+        "body": {
+            "id": 1295067,
+            "customerKey": "testExisting_htmlblock 3 spaces",
+            "objectID": "972974ed-dc44-4df2-ab6e-53bae9070336",
+            "assetType": {
+                "id": 197,
+                "name": "htmlblock",
+                "displayName": "HTML Block"
+            },
+            "fileProperties": {
+                "fileName": "testExisting_htmlblock 3 spaces"
+            },
+            "name": "testExisting_htmlblock 3 spaces",
+            "owner": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "createdDate": "2024-01-08T08:26:58.277-06:00",
+            "createdBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "modifiedDate": "2024-01-08T08:28:01.6-06:00",
+            "modifiedBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "enterpriseId": 9999999,
+            "memberId": 9999999,
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "thumbnail": {
+                "thumbnailUrl": "/v1/assets/1295066/thumbnail"
+            },
+            "category": {
+                "id": 89397,
+                "name": "Content Builder",
+                "parentId": 0
+            },
+            "content": "<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" role=\"presentation\" style=\"min-width: 100%; \" class=\"stylingblock-content-wrapper\"><tr><td class=\"stylingblock-content-wrapper camarker-inner\"><div>\n  my 1st html\n</div>\n\n%%[ /* my ampscript */ ]%%\n\n<script runat=\"server\">\n// my ssjs\n</script>\n\n<div>\n  my 2nd html\n</div>\n<div>%%=TreatAsContent(ContentBlockByFake(\"Content Builder\\my very long path\\Content Blocks Library\\COMMON\\some other folder\\my code snippet\"))=%% %%= ContentBlockByKey(\"testExisting_htmlblock1\")=%% %%= ContentBlockByKey(\"testExisting_htmlblock1 \")=%%</div></td></tr></table>",
+            "design": "",
+            "meta": {
+                "wrapperStyles": {
+                    "mobile": {
+                        "visible": true
+                    },
+                    "styling": {}
+                }
+            },
+            "availableViews": [],
+            "modelVersion": 2
+        }
+    },
+    "1295075": {
+        "queryOnlyWhenTypes": [
+            5
+        ],
+        "body": {
+            "id": 1295075,
+            "customerKey": "testExisting_htmlblock_matchName1",
+            "assetType": {
+                "id": 197,
+                "name": "htmlblock",
+                "displayName": "HTML Block"
+            },
+            "name": "testExisting_htmlblock_matchName",
+            "createdDate": "2024-01-08T08:26:58.277-06:00",
+            "createdBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "modifiedDate": "2024-01-08T08:28:01.6-06:00",
+            "modifiedBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "availableViews": [],
+            "modelVersion": 2,
+            "fileProperties": {
+                "fileName": "testExisting_htmlblock_matchName"
+            },
+            "category": {
+                "id": 89397,
+                "name": "Content Builder",
+                "parentId": 0
+            }
+        }
+    },
+    "1295076": {
+        "queryOnlyWhenTypes": [
+            5
+        ],
+        "body": {
+            "id": 1295076,
+            "customerKey": "testExisting_htmlblock_matchName2",
+            "assetType": {
+                "id": 197,
+                "name": "htmlblock",
+                "displayName": "HTML Block"
+            },
+            "name": "testExisting_htmlblock_matchName",
+            "createdDate": "2024-01-08T08:26:58.277-06:00",
+            "createdBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "modifiedDate": "2024-01-08T08:28:01.6-06:00",
+            "modifiedBy": {
+                "id": 700301950,
+                "email": "joern.berkefeld@accenture.com",
+                "name": "Jörn Berkefeld (ASGR)",
+                "userId": "700301950"
+            },
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
+            "availableViews": [],
+            "modelVersion": 2,
+            "fileProperties": {
+                "fileName": "testExisting_htmlblock_matchName"
+            },
+            "category": {
+                "id": 90888,
+                "name": "Test Folder",
+                "parentId": 89397
+            }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "keys": [
+        "Card_Theme"
+    ],
+    "id": "7d00d57d-0d94-4a5d-85bd-b51a47ba1b9f",
+    "key": "ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA",
+    "name": "Test Push App One",
+    "description": "test push application",
+    "createdDate": "2026-03-24T20:56:00Z",
+    "modifiedDate": "2026-08-25T12:45:07.933Z",
+    "apnsEnabled": false,
+    "gcmEnabled": false,
+    "configuration": {
+        "customSound": false,
+        "openDirect": false,
+        "customKeys": true,
+        "payloadEditor": false,
+        "messageCategories": false
+    },
+    "deviceEndpoint": "https://mct0l7nxfq2r988t1kxfy8sc4xxx.device.marketingcloudapis.com/"
+}

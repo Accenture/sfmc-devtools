@@ -1,3 +1,4 @@
 enhancement: ['feature/*', 'feat/*', 'copilot/feature/*']
 bug: ['bugfix/*', 'bug/*', 'fix/*', 'hotfix/*', 'copilot/bug/*']
 chore: ['chore/*', 'task/*', 'copilot/task/*']
+release: ['develop']

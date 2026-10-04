@@ -17,25 +17,6 @@ export type MultiMetadataTypeMap = import("../../types/mcdev.d.js").MultiMetadat
 export type FilterConditionSet = import("../../types/mcdev.d.js").FilterConditionSet;
 export type FilterCondition = import("../../types/mcdev.d.js").FilterCondition;
 /**
- * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
- * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
- * @typedef {import('../../types/mcdev.d.js').CodeExtractItem} CodeExtractItem
- * @typedef {import('../../types/mcdev.d.js').MetadataTypeItem} MetadataTypeItem
- * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemDiff} MetadataTypeItemDiff
- * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemObj} MetadataTypeItemObj
- * @typedef {import('../../types/mcdev.d.js').MetadataTypeMap} MetadataTypeMap
- * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
- * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
- * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
- * @typedef {import('../../types/mcdev.d.js').DataFilterItem} DataFilterItem
- * @typedef {import('../../types/mcdev.d.js').DataExtensionFieldMap} DataExtensionFieldMap
- * @typedef {import('../../types/mcdev.d.js').DataExtensionFieldItem} DataExtensionFieldItem
- * @typedef {import('../../types/mcdev.d.js').DataFilterMap} DataFilterMap
- * @typedef {import('../../types/mcdev.d.js').MultiMetadataTypeMap} MultiMetadataTypeMap
- * @typedef {import('../../types/mcdev.d.js').FilterConditionSet} FilterConditionSet
- * @typedef {import('../../types/mcdev.d.js').FilterCondition} FilterCondition
- */
-/**
  * DataFilter (FilterDefinition) MetadataType
  *
  * @augments MetadataType
@@ -44,6 +25,12 @@ declare class DataFilter extends MetadataType {
     static cache: {};
     static deIdKeyMap: any;
     static hidden: boolean;
+    /**
+     * Loads and caches XML conversion classes at the asynchronous DataFilter boundary.
+     *
+     * @returns {Promise.<typeof import('fast-xml-parser')>} XML parser module
+     */
+    static _loadXmlParserModules(): Promise<typeof import("fast-xml-parser")>;
     /**
      * Retrieves all records and saves it to disk
      *
