@@ -26,6 +26,9 @@ import {
     addRestErrorOverride,
     resetRestErrorOverrides,
 } from './resourceFactory.js';
+// Load formatter dependencies on the real filesystem before any synchronous mockSetup call.
+await File._loadPrettierModules();
+
 const authResources = File.readJsonSync(path.join(__dirname, './resources/auth.json'));
 
 const loadingFile = 'loading expected file:///' + __dirname.split(path.sep).join('/');
