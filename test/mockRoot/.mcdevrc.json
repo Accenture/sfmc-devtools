@@ -85,7 +85,7 @@
             "description": "bla bla",
             "countryCodeIn": "'test'",
             "regex": {
-                "search": "(\"FromAddress\": \"\")joern",
+                "search": "(\"FromAddress\":\\s*\")joern",
                 "replace": "joern",
                 "template": "$1{{{regex}}}"
             }
@@ -101,7 +101,7 @@
             "description": "foobar",
             "countryCodeIn": "'testTarget'",
             "regex": {
-                "search": "(\"FromAddress\": \"\")thuy",
+                "search": "(\"FromAddress\":\\s*\")thuy",
                 "replace": "thuy",
                 "template": "$1{{{regex}}}"
             }
