@@ -4,6 +4,7 @@ const expect = chai.expect;
 
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
+import File from '../lib/util/file.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
@@ -85,7 +86,15 @@ describe('type: query', () => {
             return;
         });
 
-        it('Should retrieve one specific query by key', async () => {
+        it('Should retrieve one specific query by key and overwrite conflict-marked JSON', async () => {
+            const basePath = './retrieve/testInstance/testBU/query';
+            await File.writeToFile(
+                basePath,
+                'testExisting_query.query-meta',
+                'json',
+                '<<<<<<< HEAD\n{}\n=======\n{}\n>>>>>>> incoming\n'
+            );
+            await File.writeToFile(basePath, 'sentinel', 'txt', 'preserve unrelated file');
             // WHEN
             await handler.retrieve('testInstance/testBU', ['query'], ['testExisting_query']);
             // THEN
@@ -109,6 +118,10 @@ describe('type: query', () => {
                 testUtils.getAPIHistoryLength(),
                 6,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            assert.equal(
+                await File.readFile(`${basePath}/sentinel.txt`, 'utf8'),
+                'preserve unrelated file'
             );
             return;
         });
