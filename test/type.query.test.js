@@ -763,6 +763,43 @@ describe('type: query', () => {
             );
             return;
         });
+
+        it('skips key change when the derived key belongs to another cached query', async () => {
+            // retrieve the query that will be key-changed
+            await handler.retrieve(
+                'testInstance/testBU',
+                ['query'],
+                ['testExisting_query_fixKeys']
+            );
+
+            handler.setOptions({ changeKeyField: 'name', fromRetrieve: true });
+
+            // simulate a collision: another query already uses the key
+            // that --changeKeyField would derive from this query's name
+            const item = cache.getByKey('query', 'testExisting_query_fixKeys');
+            assert.ok(item, 'testExisting_query_fixKeys should be in cache');
+            const derivedKey = item.name;
+            const original = cache.getCache().query[derivedKey];
+            cache.getCache().query[derivedKey] = {
+                ...item,
+                queryKey: derivedKey,
+            };
+
+            // deploy; the key change should be skipped with an error log
+            const deployed = await handler.deploy(
+                'testInstance/testBU',
+                ['query'],
+                ['testExisting_query_fixKeys']
+            );
+
+            assert.ok(deployed, 'deploy should have returned a result');
+
+            // cleanup
+            if (!original) {
+                delete cache.getCache().query[derivedKey];
+            }
+            handler.setOptions({ changeKeyField: undefined, fromRetrieve: undefined });
+        });
     });
 
     describe('Templating ================', () => {
