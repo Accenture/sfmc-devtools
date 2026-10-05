@@ -127,6 +127,7 @@ declare namespace DomainVerification {
         lastmodNameField: any;
         nameField: string;
         restPagination: boolean;
+        restPaginationForKey: boolean;
         maxKeyLength: number;
         type: string;
         typeDescription: string;

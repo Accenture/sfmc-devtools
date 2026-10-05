@@ -14,6 +14,7 @@ declare namespace _default {
     let lastmodNameField: string;
     let nameField: string;
     let restPagination: boolean;
+    let restPaginationForKey: boolean;
     let maxKeyLength: number;
     let type: string;
     let typeDescription: string;

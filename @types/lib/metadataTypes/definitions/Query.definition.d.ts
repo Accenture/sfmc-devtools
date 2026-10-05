@@ -26,6 +26,7 @@ declare namespace _default {
     }
     let maxKeyLength: number;
     let type: string;
+    let soapType: string;
     let typeDescription: string;
     let typeRetrieveByDefault: boolean;
     let typeCdpByDefault: boolean;

@@ -117,16 +117,16 @@ declare class Event extends MetadataType {
                 [x: string]: import("../../types/mcdev.d.js").SfObjectField;
             };
         };
-        /** @type {Object.<string, Promise.<any>>} */
+        /** @type {Object.<string, Promise.<void>>} */
         loadingFields: {
-            [x: string]: Promise<any>;
+            [x: string]: Promise<void>;
         };
-        /** @type {Object.<string, Promise.<any>>} */
+        /** @type {Object.<string, Promise.<void>>} */
         loadingRelatedObjects: {
-            [x: string]: Promise<any>;
+            [x: string]: Promise<void>;
         };
-        /** @type {Promise.<any>} */
-        loadingWorkflowObjects: Promise<any>;
+        /** @type {Promise.<void>} */
+        loadingWorkflowObjects: Promise<void>;
     };
     /**
      * helper for {@link checkSalesforceEntryEvents} that retrieves information about SF object fields

@@ -19,7 +19,7 @@ jobs:
 
             - uses: actions/setup-node@v6
               with:
-                  node-version-file: ./package.json
+                  node-version: '24'
 
             - run: npm ci --ignore-scripts
 
@@ -74,6 +74,7 @@ jobs:
                   files: 'base-artifacts/coverage-summary.json, artifacts/test-coverage-output/coverage-summary.json'
 
             - name: Report coverage
+              if: github.event.pull_request.head.repo.full_name == github.repository
               uses: sidx1024/report-nyc-coverage-github-action@v1.2.7
               id: report
               with:

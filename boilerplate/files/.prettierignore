@@ -1,0 +1,7 @@
+node_modules/
+docs/
+logs/
+template/
+**/*.BAK
+**/*.BAK/**
+package-lock.json

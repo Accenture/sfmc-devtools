@@ -17,13 +17,6 @@
             }
         },
         {
-            "files": "*.ssjs",
-            "options": {
-                "parser": "babel",
-                "trailingComma": "none"
-            }
-        },
-        {
             "files": "*.md",
             "options": {
                 "tabWidth": 2

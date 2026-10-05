@@ -30,10 +30,24 @@ export type BuObject = {
      */
     credential?: string;
 };
-export type TemplateMap = {
-    [x: string]: string;
+export type RegexTemplateValue = {
+    /**
+     * regular expression source, compiled with the global flag
+     */
+    search: string;
+    /**
+     * literal build value rendered in text or JSON string fields
+     */
+    replace: string | number | boolean;
+    /**
+     * native JavaScript replacement expression; defaults to the market key in triple braces
+     */
+    template?: string;
 };
-export type SupportedMetadataTypes = "asset" | "asset-archive" | "asset-asset" | "asset-audio" | "asset-block" | "asset-code" | "asset-document" | "asset-image" | "asset-message" | "asset-other" | "asset-rawimage" | "asset-template" | "asset-textfile" | "asset-video" | "attributeGroup" | "attributeSet" | "automation" | "campaign" | "contentArea" | "dataExtension" | "dataExtensionField" | "dataExtensionTemplate" | "dataExtract" | "dataExtractType" | "discovery" | "deliveryProfile" | "email" | "emailSend" | "event" | "fileLocation" | "fileTransfer" | "filter" | "folder" | "importFile" | "journey" | "list" | "mobileCode" | "mobileKeyword" | "mobileMessage" | "query" | "role" | "script" | "sendClassification" | "senderProfile" | "transactionalEmail" | "transactionalPush" | "transactionalSMS" | "triggeredSend" | "user" | "verification";
+export type TemplateMap = {
+    [x: string]: string | number | boolean | RegexTemplateValue;
+};
+export type SupportedMetadataTypes = "asset" | "asset-archive" | "asset-asset" | "asset-audio" | "asset-block" | "asset-code" | "asset-document" | "asset-image" | "asset-email" | "asset-mobile" | "asset-other" | "asset-webstudio" | "asset-rawimage" | "asset-template" | "asset-textfile" | "asset-video" | "attributeGroup" | "attributeSet" | "automation" | "campaign" | "contentArea" | "dataExtension" | "dataExtensionField" | "dataExtensionTemplate" | "dataExtract" | "dataExtractType" | "discovery" | "deliveryProfile" | "email" | "emailSend" | "event" | "fileLocation" | "fileTransfer" | "filter" | "folder" | "importFile" | "journey" | "list" | "mobileCode" | "mobileKeyword" | "mobileMessage" | "query" | "role" | "script" | "sendClassification" | "senderProfile" | "transactionalEmail" | "transactionalPush" | "transactionalSMS" | "triggeredSend" | "user" | "verification";
 /**
  * object-key=SupportedMetadataTypes, value=array of external keys
  */
@@ -41,9 +55,9 @@ export type TypeKeyCombo = {
     [x: string]: string[];
 };
 /**
- * generic metadata item
+ * generic JSON metadata item
  */
-export type MetadataTypeItem = any;
+export type MetadataTypeItem = ReturnType<JSON["parse"]>;
 /**
  * key=customer key
  */
@@ -231,15 +245,11 @@ export type ScriptItem = {
 export type ScriptMap = {
     [x: string]: ScriptItem;
 };
-export type AssetItem = {
+export type AssetItem = ReturnType<JSON["parse"]>;
+export type AssetMap = {
     [x: string]: any;
 };
-export type AssetMap = {
-    [x: string]: {
-        [x: string]: any;
-    };
-};
-export type AssetSubType = "archive" | "asset" | "audio" | "block" | "code" | "document" | "image" | "message" | "other" | "rawimage" | "template" | "textfile" | "video";
+export type AssetSubType = "archive" | "asset" | "audio" | "block" | "code" | "document" | "email" | "image" | "mobile" | "other" | "rawimage" | "template" | "textfile" | "video" | "webstudio";
 export type DataExtensionFieldItem = {
     /**
      * id
@@ -747,13 +757,13 @@ export type AutomationSchedule = {
      */
     rangeTypeId?: number;
     /**
-     * ?
+     * schedule pattern returned by the API
      */
-    pattern?: any;
+    pattern?: object | string | null;
     /**
-     * ?
+     * scheduled timestamp returned by the API
      */
-    scheduledTime?: any;
+    scheduledTime?: string | null;
     /**
      * ?
      */
@@ -857,7 +867,7 @@ export type AutomationItem = {
     /**
      * notifications
      */
-    notifications?: any;
+    notifications?: object[];
     /**
      * -
      */
@@ -1062,7 +1072,7 @@ export type McdevDeltaPkgItem = {
      */
     _businessUnit: string;
 };
-export type DeltaPkgItem = import("simple-git").DiffResultTextFile & McdevDeltaPkgItem;
+export type DeltaPkgItem = McdevDeltaPkgItem;
 export type RestError = import("sfmc-sdk/util").RestError;
 export type SOAPError = import("sfmc-sdk/util").SOAPError;
 export type SDKError = SOAPError & RestError;
@@ -1419,9 +1429,11 @@ export type SoapRequestParams = {
      */
     options?: object;
     /**
-     * ?
+     * client identifiers
      */
-    clientIDs?: any;
+    clientIDs?: {
+        ID: number;
+    }[];
     /**
      * simple or complex
      * complex
@@ -1499,10 +1511,12 @@ export type AssetRequestParams = {
      */
     options?: object;
     /**
-     * ?
+     * client identifiers
      * complex
      */
-    clientIDs?: any;
+    clientIDs?: {
+        ID: number;
+    }[];
     /**
      * pagination
      */

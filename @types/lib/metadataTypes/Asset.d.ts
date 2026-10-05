@@ -4,6 +4,7 @@ export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
 export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
 export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
 export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
 export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
@@ -19,6 +20,7 @@ export type ContentBlockConversionTypes = import("../../types/mcdev.d.js").Conte
  * @typedef {import('../../types/mcdev.d.js').CodeExtractItem} CodeExtractItem
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeItem} MetadataTypeItem
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemDiff} MetadataTypeItemDiff
+ * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemObj} MetadataTypeItemObj
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMap} MetadataTypeMap
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
@@ -200,7 +202,7 @@ declare class Asset extends MetadataType {
      */
     private static _findEmailsUsingBlock;
     /**
-     * helper for {@link Asset.postDeployTasks}. triggers a refresh of active triggerredSendDefinitions associated with the updated asset-message items. Gets executed if refresh option has been set.
+     * helper for {@link Asset.postDeployTasks}. triggers a refresh of active triggerredSendDefinitions associated with the updated asset-email items. Gets executed if refresh option has been set.
      *
      * @private
      * @param {MetadataTypeMap} metadata metadata mapped by their keyField
@@ -208,18 +210,10 @@ declare class Asset extends MetadataType {
      */
     private static _refreshTriggeredSend;
     /**
-     * prepares an asset definition for deployment
-     *
-     * @param {AssetItem} metadata a single asset
-     * @param {string} deployDir directory of deploy files
-     * @returns {Promise.<AssetItem>} Promise
-     */
-    static preDeployTasks(metadata: AssetItem, deployDir: string): Promise<AssetItem>;
-    /**
      * find the subType matching the extendedSubType
      *
      * @param {string} extendedSubType webpage, htmlblock, etc
-     * @returns {string} subType: block, message, other, etc
+     * @returns {string} subType: block, email, other, etc
      */
     static "__#private@#getMainSubtype"(extendedSubType: string): string;
     /**
@@ -242,19 +236,6 @@ declare class Asset extends MetadataType {
      * @returns {Promise.<string[][]>} list of extracted files with path-parts provided as an array
      */
     static buildDefinitionForNested(templateDir: string, targetDir: string, metadata: AssetItem, templateVariables: TemplateMap, templateName: string): Promise<string[][]>;
-    /**
-     * helper for {@link MetadataType.buildTemplate}
-     * handles extracted code if any are found for complex types
-     *
-     * @example assets of type codesnippetblock will result in 1 json and 1 amp/html file. both files need to be run through templating
-     * @param {string} templateDir Directory where metadata templates are stored
-     * @param {string|string[]} targetDir (List of) Directory where built definitions will be saved
-     * @param {AssetItem} metadata main JSON file that was read from file system
-     * @param {TemplateMap} templateVariables variables to be replaced in the metadata
-     * @param {string} templateName name of the template to be built
-     * @returns {Promise.<string[][]>} list of extracted files with path-parts provided as an array
-     */
-    static buildTemplateForNested(templateDir: string, targetDir: string | string[], metadata: AssetItem, templateVariables: TemplateMap, templateName: string): Promise<string[][]>;
     /**
      * helper for {@link MetadataType.buildDefinition}
      * handles extracted code if any are found for complex types
@@ -430,10 +411,17 @@ declare class Asset extends MetadataType {
     /**
      * Finds emails in running journeys, filters out the ones that reference the block (if it's a block) and refreshes related TSDs
      *
-     * @param {string[]} [keyArr] metadata keys
+     * @param {string[]} keyArr metadata keys
      * @returns {Promise.<string[]>} Returns list of keys that were refreshed
      */
-    static refresh(keyArr?: string[]): Promise<string[]>;
+    static refresh(keyArr: string[]): Promise<string[]>;
+    /**
+     * enables metadata definitions required for sharing assets
+     *
+     * @param {boolean} keepSharingInfo true to enable, false to disable
+     * @returns {void}
+     */
+    static _toggleShareAssetTemplating(keepSharingInfo: boolean): void;
 }
 declare namespace Asset {
     let getJsonFromFSCache: {
@@ -532,31 +520,64 @@ declare namespace Asset {
                 retrieving: boolean;
                 template: boolean;
             };
-            'businessUnitAvailability.%.view': {
+            'businessUnitAvailability[].view': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            'businessUnitAvailability.%.update': {
+            'businessUnitAvailability[].update': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            'businessUnitAvailability.%.delete': {
+            'businessUnitAvailability[].delete': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            'businessUnitAvailability.%.memberId': {
+            'businessUnitAvailability[].memberId': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            'businessUnitAvailability.%.transferOwnership': {
+            'businessUnitAvailability[].transferOwnership': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            sharingProperties: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'sharingProperties.localAssets': {
+                skipValidation: boolean;
+            };
+            'sharingProperties.sharedWith': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'sharingProperties.sharedFrom': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'sharingProperties.sharedFromMID': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'sharingProperties.sharingType': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -883,39 +904,6 @@ declare namespace Asset {
                 retrieving: boolean;
                 template: boolean;
             };
-            sharingProperties: {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            'sharingProperties.localAssets': {
-                skipValidation: boolean;
-            };
-            'sharingProperties.sharedWith': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            'sharingProperties.sharedFrom': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            'sharingProperties.sharedFromMID': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            'sharingProperties.sharingType': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
             slots: {
                 skipValidation: boolean;
             };
@@ -975,14 +963,15 @@ declare namespace Asset {
         extendedSubTypes: {
             archive: string[];
             asset: string[];
+            package: string[];
             audio: string[];
             block: string[];
-            cloudpage: string[];
+            webstudio: string[];
             code: string[];
-            coderesource: string[];
             document: string[];
             image: string[];
-            message: string[];
+            email: string[];
+            mobile: string[];
             other: string[];
             rawimage: string[];
             template: string[];
@@ -1217,8 +1206,16 @@ declare namespace Asset {
             liveimageblock: number;
             livesettingblock: number;
             contentmap: number;
+            enhanceddynamicblock: number;
             jsonmessage: number;
+            jbtemplate: number;
             icemailformblock: number;
+            iccloudpageblock: number;
+            einsteincontentselectionblock: number;
+            jsonmessagetemplate: number;
+            packagedefinition: number;
+            packagedeployment: number;
+            einsteincontenttesting: number;
             coderesource: number;
             jscoderesource: number;
             csscoderesource: number;

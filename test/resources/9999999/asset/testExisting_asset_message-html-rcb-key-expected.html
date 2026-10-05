@@ -7,21 +7,20 @@
     <tr>
         <td>
             <font face="verdana" size="1" color="#444444"
-                >This email was sent by: <b>%%Member_Busname%%</b
-                ><br />%%Member_Addr%% %%Member_City%%, %%Member_State%%,
-                %%Member_PostalCode%%, %%Member_Country%%<br /><br
+                >This email was sent by: <b>%%Member_Busname%%</b><br />%%Member_Addr%%
+                %%Member_City%%, %%Member_State%%, %%Member_PostalCode%%, %%Member_Country%%<br /><br
             /></font>
         </td>
     </tr>
 </table>
-<a href="%%subscription_center_url%%" alias="Manage Subscriptions"
-    >Manage Subscriptions</a
-><img
-    src="https://www.exacttarget.com/images/Powered_By_1206.jpg"
-    border="0"
-/><custom name="opencounter" type="tracking" /> %%= ContentBlockByKey("testExisting_asset_htmlblock") =%%
+<a href="%%subscription_center_url%%" alias="Manage Subscriptions">Manage Subscriptions</a
+><img src="https://www.exacttarget.com/images/Powered_By_1206.jpg" border="0" /><custom
+    name="opencounter"
+    type="tracking"
+/>
+%%= ContentBlockByKey('testExisting_asset_htmlblock') =%%
 <script runat="server">
-    Platform.Function.ContentBlockByKey("testExisting_asset_htmlblock");
+    Platform.Function.ContentBlockByKey('testExisting_asset_htmlblock');
 </script>
 %%= ContentBlockByKey("testExisting_asset_htmlblock") =%%
 <script runat="server">

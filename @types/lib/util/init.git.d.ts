@@ -1,3 +1,13 @@
+/**
+ * Checks whether Git can be executed without invoking a shell.
+ *
+ * @param {(command: string, args: string[], options: object) => {error?: Error, status: number | null}} [run] synchronous process runner
+ * @returns {boolean} true when `git --version` succeeds
+ */
+export function isGitInstalled(run?: (command: string, args: string[], options: object) => {
+    error?: Error;
+    status: number | null;
+}): boolean;
 export default Init;
 declare namespace Init {
     /**

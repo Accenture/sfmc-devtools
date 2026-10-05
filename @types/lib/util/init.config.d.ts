@@ -21,16 +21,44 @@ declare namespace Init {
      * helper method for this.upgradeProject that upgrades project config if needed
      *
      * @param {Mcdevrc} properties config file's json
+     * @param {string} [versionToPersist] version to store while saving config migrations
      * @returns {Promise.<boolean>} returns true if worked without errors
      */
-    function fixMcdevConfig(properties: Mcdevrc): Promise<boolean>;
+    function fixMcdevConfig(properties: Mcdevrc, versionToPersist?: string): Promise<boolean>;
     /**
-     * handles creation/update of all config file from the boilerplate
+     * handles creation/update of all config files from the boilerplate, one at a time
      *
      * @param {string} versionBeforeUpgrade 'x.y.z'
      * @returns {Promise.<boolean>} status of config file creation
      */
     function createIdeConfigFiles(versionBeforeUpgrade: string): Promise<boolean>;
+    /**
+     * Prompt for an ordinary configuration override.
+     *
+     * @param {string} message selection to present
+     * @param {boolean} [defaultValue] initial selection
+     * @returns {Promise.<boolean>} user's selection
+     */
+    function promptConfirmation(message: string, defaultValue?: boolean): Promise<boolean>;
+    /**
+     * Compare, optionally back up, and write one configuration file.
+     *
+     * @param {string} fileName destination path
+     * @param {{updates:string[],deletes:string[]}} forced version-gated replacements and retirements
+     * @param {string} content boilerplate contents
+     * @returns {Promise.<boolean>} success, including a declined override
+     */
+    function _createIdeConfigFile(fileName: string, forced: {
+        updates: string[];
+        deletes: string[];
+    }, content: string): Promise<boolean>;
+    /**
+     * Check entry occupancy without following links or hiding access errors.
+     *
+     * @param {string} fileName destination or backup path
+     * @returns {Promise.<boolean>} whether the directory entry exists
+     */
+    function _hasDirectoryEntry(fileName: string): Promise<boolean>;
     /**
      * recursive helper for {@link Init.fixMcdevConfig} that adds missing settings
      *
@@ -50,18 +78,6 @@ declare namespace Init {
         updates: string[];
         deletes: string[];
     }>;
-    /**
-     * handles creation/update of one config file from the boilerplate at a time
-     *
-     * @param {string[]} fileNameArr 0: path, 1: filename, 2: extension with dot
-     * @param {{updates:string[],deletes:string[]}} relevantForced if fileNameArr is in this list we require an override
-     * @param {string} [boilerplateFileContent] in case we cannot copy files 1:1 this can be used to pass in content
-     * @returns {Promise.<boolean>} install successful or error occured
-     */
-    function _createIdeConfigFile(fileNameArr: string[], relevantForced: {
-        updates: string[];
-        deletes: string[];
-    }, boilerplateFileContent?: string): Promise<boolean>;
     /**
      * handles deletion of no longer needed config files
      *

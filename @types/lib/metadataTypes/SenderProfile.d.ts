@@ -62,9 +62,14 @@ declare class SenderProfile extends MetadataType {
      *
      * @param {MetadataTypeItem} metadata a single item
      * @param {MetadataTypeItem} [metadataCaller] if called from SendClassification this can be used to adjust logs
-     * @param {any} [definition] type defintiion from SendClassification
+     * @param {{type:string, typeName:string, keyField:string, nameField:string}} [definition] type definition from SendClassification
      */
-    static verifySenderEmailAddresses(metadata: MetadataTypeItem, metadataCaller?: MetadataTypeItem, definition?: any): void;
+    static verifySenderEmailAddresses(metadata: MetadataTypeItem, metadataCaller?: MetadataTypeItem, definition?: {
+        type: string;
+        typeName: string;
+        keyField: string;
+        nameField: string;
+    }): void;
     /**
      * prepares a single item for deployment
      *
