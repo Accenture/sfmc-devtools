@@ -1,4 +1,5 @@
 import * as chai from 'chai';
+import { Util } from '../lib/util/util.js';
 const assert = chai.assert;
 const expect = chai.expect;
 
@@ -1111,6 +1112,41 @@ describe('GENERAL', () => {
                     4,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
+            });
+
+            it('build does not prompt for purge when skipInteraction is set', async () => {
+                // preparation
+                await handler.retrieve('testInstance/testBU', ['automation']);
+                const argvMetadata = ['automation:testExisting_automation'];
+                const typeKeyCombo = handler.metadataToTypeKey(argvMetadata);
+                const buName = 'testInstance/testBU';
+
+                // simulate --y / --yes
+                handler.setOptions({ skipInteraction: true });
+
+                // buildTemplate first, then build; if the confirm prompt fires
+                // here the test hangs (no TTY), proving the bug; with the fix
+                // it should complete and set purge to the default (true)
+                await handler.buildTemplate(buName, typeKeyCombo, undefined, ['testSourceMarket']);
+                await handler.build(
+                    buName,
+                    undefined,
+                    typeKeyCombo,
+                    ['testSourceMarket'],
+                    ['deployment-target'],
+                    true
+                );
+
+                assert.equal(process.exitCode, 0, 'build should not have thrown');
+                assert.strictEqual(
+                    Util.OPTIONS.purge,
+                    true,
+                    'purge should default to true when skipInteraction is set'
+                );
+
+                // cleanup
+                handler.setOptions({ skipInteraction: undefined });
+                Util.OPTIONS.purge = undefined;
             });
 
             it('buildTemplate + buildDefinition for multiple types with keys and --dependencies and --retrieve', async () => {
