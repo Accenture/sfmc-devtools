@@ -7,6 +7,5 @@
     "eslint",
     "globals",
     "prettier-plugin-sfmc",
-    "prettier",
-    "sfmc-boilerplate"
+    "prettier"
 ]

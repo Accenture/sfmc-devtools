@@ -26,3 +26,4 @@ eslint.config.js
 .gitattributes
 prepare-release.js
 CONTRIBUTING.md
+!boilerplate/files/**
