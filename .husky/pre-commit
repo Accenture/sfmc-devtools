@@ -1,6 +1,13 @@
-# run lint-staged hooks
-echo "[PRE-COMMIT] Run lint-staged"
-lint-staged
+# run lint-staged only when committing directly to main; on feature branches
+# the PR's CI lint (npm run lint in code-test.yml) catches issues instead,
+# keeping local commits fast (#2092)
+CURRENT_BRANCH=$(git branch --show-current)
+if [ "$CURRENT_BRANCH" = "main" ] || [ "$CURRENT_BRANCH" = "master" ]; then
+    echo "[PRE-COMMIT] Run lint-staged (on $CURRENT_BRANCH)"
+    lint-staged
+else
+    echo "[PRE-COMMIT] Skipping lint-staged on $CURRENT_BRANCH (CI lints on the PR)"
+fi
 
 # update typescript type declarations
 echo "[PRE-COMMIT] Run typescript validation and create/update d.ts files"
