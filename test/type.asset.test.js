@@ -10,7 +10,6 @@ import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 import * as fsNode from 'node:fs/promises';
-import os from 'node:os';
 import path from 'node:path';
 chai.use(chaiFiles);
 
@@ -1603,12 +1602,13 @@ describe('type: asset', () => {
         // set (e.g. from Asset.replaceCbReference during deploy)
         let deployDir;
         const customerKey = 'testNew_asset_webpage2022';
-        const subtypeExtension = '.asset-webpage-meta';
+        const subtypeExtension = '.asset-webstudio-meta';
         const htmlContent = '<html><body>hello 2022+ webpage</body></html>';
 
         beforeEach(async () => {
-            deployDir = await fsNode.mkdtemp(path.join(os.tmpdir(), 'mcdev-asset-webpage-2022-'));
-            const assetDir = path.join(deployDir, 'asset', 'webpage', customerKey);
+            // Keep the path relative: the production filename filter encodes drive colons.
+            deployDir = await fsNode.mkdtemp('./mcdev-asset-webpage-2022-');
+            const assetDir = path.join(deployDir, 'asset', 'webstudio', customerKey);
             await fsNode.mkdir(assetDir, { recursive: true });
             await fsNode.writeFile(
                 path.join(assetDir, `content${subtypeExtension}.html`),
@@ -1630,7 +1630,7 @@ describe('type: asset', () => {
             };
 
             // WHEN
-            const fileList = await Asset._mergeCode(metadata, deployDir, 'webpage', customerKey);
+            const fileList = await Asset._mergeCode(metadata, deployDir, 'webstudio', customerKey);
 
             // THEN it should not throw and should return the merged content
             assert.equal(fileList.length, 1, 'expected exactly one merged file');
