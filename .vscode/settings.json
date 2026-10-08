@@ -4,7 +4,6 @@
         "source.fixAll.markdownlint": "explicit"
     },
     "editor.formatOnSave": true,
-    "mochaExplorer.mochaPath": null,
     "files.associations": {
         "*.ssjs": "javascript",
         "*.html": "ampscript"

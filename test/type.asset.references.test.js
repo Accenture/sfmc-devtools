@@ -192,7 +192,10 @@ describe('Asset reverse-reference fixture routing', () => {
 
 describe('Asset explicit refresh contract', () => {
     beforeEach(() => {
+        // Initialize test options before deploy fixtures to keep file logging off in isolated runs.
+        testUtils.mockSetup();
         testUtils.mockSetup(true);
+        assert.equal(Util.OPTIONS.noLogFile, true);
     });
 
     afterEach(() => {
