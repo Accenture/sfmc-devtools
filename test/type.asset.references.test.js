@@ -1,13 +1,18 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+import fixtureFs from 'fs-extra';
 import handler from '../lib/index.js';
 import Asset from '../lib/metadataTypes/Asset.js';
 import cache from '../lib/util/cache.js';
 import { mock } from 'node:test';
-import Folder from '../lib/metadataTypes/Folder.js';
 import TriggeredSend from '../lib/metadataTypes/TriggeredSend.js';
+import Folder from '../lib/metadataTypes/Folder.js';
+import List from '../lib/metadataTypes/List.js';
+import SendClassification from '../lib/metadataTypes/SendClassification.js';
+import SenderProfile from '../lib/metadataTypes/SenderProfile.js';
 import * as testUtils from './utils.js';
 import { Util } from '../lib/util/util.js';
+import { handleRESTRequest, restUrl } from './resourceFactory.js';
 
 // Access the private traversal helper directly for focused regression assertions.
 const findEmails = Asset['_findEmailsUsingBlock'].bind(Asset);
@@ -46,6 +51,144 @@ function matchesQuery(query, candidate) {
     assert.equal(query.simpleOperator, 'mustContain');
     return candidate.content.includes(query.value);
 }
+
+/**
+ * Send a predicate directly through the real fixture router.
+ *
+ * @param {object} query query predicate
+ * @returns {Promise.<Array>} HTTP status and fixture response
+ */
+function request(query) {
+    return handleRESTRequest({
+        method: 'post',
+        baseURL: restUrl,
+        url: '/asset/v1/content/assets/query',
+        headers: { Authorization: 'Bearer 9999999' },
+        data: JSON.stringify({ query }),
+    });
+}
+
+describe('Asset reverse-reference fixture routing', () => {
+    const contentQuery = {
+        leftOperand: {
+            leftOperand: {
+                property: 'content',
+                simpleOperator: 'mustContain',
+                value: 'ContentBlockByKey',
+            },
+            logicalOperator: 'OR',
+            rightOperand: {
+                property: 'content',
+                simpleOperator: 'mustContain',
+                value: 'ContentBlockById',
+            },
+        },
+        logicalOperator: 'OR',
+        rightOperand: {
+            property: 'content',
+            simpleOperator: 'mustContain',
+            value: 'ContentBlockByName',
+        },
+    };
+
+    it('evaluates all content branches and the optional ID cursor', async () => {
+        const query = structuredClone(contentQuery);
+        const [status, body] = await request(query);
+        assert.equal(status, 200);
+        assert.equal(JSON.parse(body).items[0].id, 317008);
+        assert.deepEqual(query, contentQuery, 'Routing must not mutate the predicate');
+        for (const cursor of [317007, 317008, 317009]) {
+            const [cursorStatus, cursorBody] = await request({
+                leftOperand: contentQuery,
+                logicalOperator: 'AND',
+                rightOperand: { property: 'id', simpleOperator: 'greaterThan', value: cursor },
+            });
+            assert.equal(cursorStatus, 200);
+            const response = JSON.parse(cursorBody);
+            assert.equal(response.count, cursor < 317008 ? 1 : 0);
+            assert.equal(response.items.length, response.count);
+        }
+    });
+
+    it('filters unrelated fixture content while retaining each supported reference token', async () => {
+        const fixtureRead = mock.method(fixtureFs, 'readFile', async () =>
+            JSON.stringify({
+                items: [
+                    { id: 1, content: 'Unrelated content' },
+                    { id: 2, views: { html: { content: 'ContentBlockByKey("key")' } } },
+                    { id: 3, content: 'ContentBlockById(123)' },
+                    { id: 4, slots: { block: { content: 'ContentBlockByName("name")' } } },
+                ],
+                count: 4,
+            })
+        );
+        try {
+            const [status, body] = await request(contentQuery);
+            assert.equal(status, 200);
+            assert.deepEqual(
+                JSON.parse(body).items.map((item) => item.id),
+                [2, 3, 4]
+            );
+            assert.equal(JSON.parse(body).count, 3);
+        } finally {
+            fixtureRead.mock.restore();
+        }
+    });
+
+    it('rejects partial and malformed predicates instead of routing the rightmost token', async () => {
+        const missingBranch = structuredClone(contentQuery);
+        delete missingBranch.leftOperand;
+        const wrongContent = structuredClone(contentQuery);
+        wrongContent.leftOperand.leftOperand.property = 'name';
+        const wrongOperator = structuredClone(contentQuery);
+        wrongOperator.leftOperand.logicalOperator = 'AND';
+        const duplicateToken = structuredClone(contentQuery);
+        duplicateToken.leftOperand.rightOperand.value = 'ContentBlockByKey';
+        for (const query of [
+            contentQuery.rightOperand,
+            { logicalOperator: 'OR', rightOperand: contentQuery.rightOperand },
+            missingBranch,
+            wrongContent,
+            wrongOperator,
+            duplicateToken,
+            {
+                leftOperand: contentQuery,
+                logicalOperator: 'XOR',
+                rightOperand: contentQuery.rightOperand,
+            },
+            ...['equal', 'greaterThan'].map((simpleOperator) => ({
+                leftOperand: contentQuery,
+                logicalOperator: 'AND',
+                rightOperand: { property: 'id', simpleOperator, value: '317008' },
+            })),
+            {
+                leftOperand: contentQuery,
+                logicalOperator: 'AND',
+                rightOperand: { property: 'customerKey', simpleOperator: 'greaterThan', value: 1 },
+            },
+        ]) {
+            const [status, body] = await request(query);
+            assert.equal(status, 400, JSON.stringify(query));
+            assert.match(JSON.parse(body).message, /Invalid reverse-reference predicate/);
+        }
+    });
+
+    it('preserves the ordinary assetType selector and cursor fixture routing', async () => {
+        const selector = { property: 'assetType.id', simpleOperator: 'in', value: [207, 208] };
+        for (const query of [
+            selector,
+            {
+                leftOperand: { property: 'id', simpleOperator: 'greaterThan', value: 1 },
+                logicalOperator: 'AND',
+                rightOperand: selector,
+            },
+        ]) {
+            const [status, body] = await request(query);
+            assert.equal(status, 200);
+            assert.ok(JSON.parse(body).items.length > 0);
+        }
+    });
+});
 
 describe('Asset explicit refresh contract', () => {
     beforeEach(() => {
@@ -157,6 +300,114 @@ describe('Asset explicit refresh contract', () => {
         });
         assert.deepEqual(await asset['_refreshTriggeredSend']({ email: {} }), []);
         assert.equal(discovery.mock.callCount(), 0);
+    });
+
+    it('refreshes exactly two JOURNEY sends for two dependent emails, excluding unrelated and inactive sends', async () => {
+        const block = { customerKey: 'target-key', assetType: { name: 'htmlblock' } };
+        const emails = [101, 102].map((legacyId) => ({
+            customerKey: `email-${legacyId}`,
+            name: `Email ${legacyId}`,
+            assetType: { name: 'htmlemail' },
+            legacyData: { legacyId },
+            views: { html: { content: 'ContentBlockByKey("target-key")' } },
+        }));
+        const unrelatedEmail = {
+            ...emails[0],
+            customerKey: 'unrelated-email',
+            legacyData: { legacyId: 103 },
+            views: { html: { content: 'ContentBlockByKey("other-key")' } },
+        };
+        const sends = [
+            { CustomerKey: 'JOURNEY-email-101', Email: { ID: 101 }, TriggeredSendStatus: 'Active' },
+            { CustomerKey: 'JOURNEY-email-102', Email: { ID: 102 }, TriggeredSendStatus: 'Active' },
+            { CustomerKey: 'JOURNEY-unrelated', Email: { ID: 103 }, TriggeredSendStatus: 'Active' },
+            {
+                CustomerKey: 'JOURNEY-inactive',
+                Email: { ID: 101 },
+                TriggeredSendStatus: 'Inactive',
+            },
+        ].map((send) => ({ ...send, Name: send.CustomerKey, CategoryID: 9 }));
+        const metadata = Object.fromEntries(
+            [block, ...emails, unrelatedEmail].map((item) => [item.customerKey, item])
+        );
+        cache.initCache({ mid: 9999999, eid: 9999999 });
+        mock.method(asset, 'retrieveForCache', async () => ({ type: 'asset', metadata }));
+        mock.method(Folder, 'retrieveForCache', async () => ({
+            type: 'folder',
+            metadata: { journey: { ID: 9, Path: 'Journey Builder Sends/Example' } },
+        }));
+        for (const dependency of [List, SendClassification, SenderProfile]) {
+            mock.method(dependency, 'retrieveForCache', async () => ({
+                type: dependency.definition.type,
+                metadata: {},
+            }));
+        }
+        const originalClient = asset.client;
+        const foundEmails = [];
+        const discoveryStatuses = [];
+        const checkedKeys = [];
+        const updates = [];
+        const originalRefreshEmails = asset['_refreshTriggeredSend'];
+        // @ts-expect-error Observe the private helper while retaining its real filtering behavior.
+        mock.method(asset, '_refreshTriggeredSend', async (items) => {
+            foundEmails.push(...items.map((item) => item.customerKey));
+            return originalRefreshEmails.call(asset, items);
+        });
+        asset.client = {
+            // @ts-expect-error Minimal REST transport implements only dependency discovery.
+            rest: { post: async () => ({ items: [...emails, emails[0], unrelatedEmail] }) },
+            // @ts-expect-error Minimal SOAP transport implements only retrieval and refresh.
+            soap: {
+                retrieveBulk: async (type, fields, params) => {
+                    assert.equal(type, 'TriggeredSendDefinition');
+                    const filter = params.filter;
+                    if (filter.leftOperand === 'TriggeredSendStatus') {
+                        assert.equal(filter.operator, 'IN');
+                        discoveryStatuses.push([...filter.rightOperand]);
+                        // Honor the real discovery predicate rather than preselecting matching IDs.
+                        return structuredClone(
+                            sends.filter((send) =>
+                                filter.rightOperand.includes(send.TriggeredSendStatus)
+                            )
+                        );
+                    }
+                    assert.equal(filter.leftOperand, 'CustomerKey');
+                    assert.equal(filter.operator, 'equals');
+                    checkedKeys.push(filter.rightOperand);
+                    return structuredClone(
+                        sends.filter((send) => send.CustomerKey === filter.rightOperand)
+                    );
+                },
+                update: async (type, item) => {
+                    assert.equal(type, 'TriggeredSendDefinition');
+                    updates.push(structuredClone(item));
+                    return { OverallStatus: 'OK' };
+                },
+            },
+        };
+        try {
+            assert.deepEqual((await asset.refresh(['target-key'])).toSorted(), [
+                'JOURNEY-email-101',
+                'JOURNEY-email-102',
+            ]);
+            assert.deepEqual(foundEmails, ['email-101', 'email-102']);
+            assert.deepEqual(discoveryStatuses, [['dummy', 'Active']]);
+            assert.deepEqual(checkedKeys.toSorted(), ['JOURNEY-email-101', 'JOURNEY-email-102']);
+            for (const key of checkedKeys) {
+                assert.deepEqual(
+                    updates.filter((item) => item.CustomerKey === key),
+                    [
+                        { CustomerKey: key, TriggeredSendStatus: 'Inactive' },
+                        { CustomerKey: key, RefreshContent: 'true' },
+                        { CustomerKey: key, TriggeredSendStatus: 'Active' },
+                    ]
+                );
+            }
+            assert.equal(updates.length, 6);
+            assert.equal(process.exitCode, 0);
+        } finally {
+            asset.client = originalClient;
+        }
     });
 
     it('filters sends by legacy ID and returns successful refresh keys', async () => {
@@ -615,6 +866,97 @@ describe('Asset reverse content block references', () => {
             (error) => error === failure
         );
         assert.equal(calls, 2);
+    });
+
+    it('follows C to B to A to an email without selecting unrelated branches', async () => {
+        const candidates = [
+            {
+                customerKey: 'B',
+                assetType: { name: 'htmlblock' },
+                content: 'ContentBlockByKey("C")',
+            },
+            {
+                customerKey: 'A',
+                assetType: { name: 'htmlblock' },
+                content: 'ContentBlockByKey("B")',
+            },
+            {
+                customerKey: 'email',
+                assetType: { name: 'htmlemail' },
+                content: 'ContentBlockByKey("A")',
+            },
+            {
+                customerKey: 'unrelated',
+                assetType: { name: 'htmlemail' },
+                content: 'ContentBlockByKey("other")',
+            },
+        ];
+        let calls = 0;
+        asset.client = {
+            // @ts-expect-error Minimal REST transport returns the same candidate universe at each depth.
+            rest: {
+                post: async () => {
+                    assert.ok(
+                        ++calls <= 3,
+                        'Traversal must terminate after the three block levels'
+                    );
+                    return { items: structuredClone(candidates) };
+                },
+                get: async () => assert.fail('Complete candidates need no full asset fetch'),
+            },
+        };
+        const searched = new Set();
+        const found = await findEmails([{ customerKey: 'C' }], {}, searched);
+        assert.deepEqual(Object.keys(found), ['email']);
+        assert.deepEqual(found.email, candidates[2]);
+        assert.deepEqual([...searched], ['C', 'B', 'A']);
+        assert.equal(calls, 3);
+    });
+
+    it('terminates a C B A C cycle and deduplicates an email reachable from multiple blocks', async () => {
+        const candidates = [
+            {
+                customerKey: 'C',
+                assetType: { name: 'htmlblock' },
+                content: 'ContentBlockByKey("A")',
+            },
+            {
+                customerKey: 'B',
+                assetType: { name: 'htmlblock' },
+                content: 'ContentBlockByKey("C")',
+            },
+            {
+                customerKey: 'A',
+                assetType: { name: 'htmlblock' },
+                content: 'ContentBlockByKey("B")',
+            },
+            {
+                customerKey: 'email',
+                assetType: { name: 'htmlemail' },
+                content: 'ContentBlockByKey("B") ContentBlockByKey("A")',
+            },
+            {
+                customerKey: 'unrelated',
+                assetType: { name: 'htmlemail' },
+                content: 'ContentBlockByKey("other")',
+            },
+        ];
+        let calls = 0;
+        asset.client = {
+            // @ts-expect-error Minimal REST transport deliberately includes duplicate candidates and a cycle.
+            rest: {
+                post: async () => {
+                    assert.ok(++calls <= 3, 'Cycle must not cause a fourth query');
+                    return { items: structuredClone([...candidates, ...candidates]) };
+                },
+            },
+        };
+        const searched = new Set();
+        const found = await findEmails([{ customerKey: 'C' }], {}, searched);
+        assert.deepEqual(Object.keys(found), ['email']);
+        assert.deepEqual(found.email, candidates[3]);
+        assert.deepEqual([...searched], ['C', 'B', 'A']);
+        assert.equal(calls, 3);
     });
 
     it('retains recursive block traversal and customer-key deduplication', async () => {

@@ -871,6 +871,19 @@ describe('type: asset', () => {
                 1,
                 'Unexpected number of assets deployed'
             );
+            const refreshUpdates = testUtils.getSoapCallouts('Update', 'TriggeredSendDefinition');
+            assert.equal(refreshUpdates.length, 3, 'Exactly one dependent send must be refreshed');
+            assert.deepEqual(
+                refreshUpdates.map((xml) => xml.match(/<CustomerKey>([^<]+)<\/CustomerKey>/)?.[1]),
+                Array.from({ length: 3 }, () => 'testExistingRefresh_triggeredSend'),
+                'Unrelated triggered sends must not be updated'
+            );
+            assert.include(
+                refreshUpdates[0],
+                '<TriggeredSendStatus>Inactive</TriggeredSendStatus>'
+            );
+            assert.include(refreshUpdates[1], '<RefreshContent>true</RefreshContent>');
+            assert.include(refreshUpdates[2], '<TriggeredSendStatus>Active</TriggeredSendStatus>');
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 22,
