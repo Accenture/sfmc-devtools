@@ -647,6 +647,10 @@ export const handleRESTRequest = async (config) => {
                     myObj.value = contentBlockMatch[1];
                 }
                 filterBody = `${myObj.property}${op}${op === 'IN' ? myObj.value.join(',') : myObj.value}`;
+                if (filterBody === 'contentMUSTCONTAINContentBlockByName') {
+                    // Reuse the existing nested refresh candidates for the broad reference query.
+                    filterBody = 'contentMUSTCONTAINtestExisting_block_refresh';
+                }
             } else if (config.url === '/email/v1/category') {
                 const data = JSON.parse(config.data);
 

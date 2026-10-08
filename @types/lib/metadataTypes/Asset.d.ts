@@ -409,6 +409,25 @@ declare class Asset extends MetadataType {
      */
     static _getDependentFilesExtra(slots: object, dependentKeyArr: string[]): void;
     /**
+     * Collect content strings from an asset and its nested views, slots and blocks.
+     *
+     * @param {object} item asset or nested content node
+     * @returns {string[]} content strings available in the query response
+     */
+    static _getReferenceContents(item: object): string[];
+    /**
+     * Match literal first arguments only, without evaluating dynamic expressions.
+     *
+     * @param {string} content asset content
+     * @param {{key: Set.<string>, id: Set.<string>, name: Set.<string>}} references target identifiers
+     * @returns {boolean} whether the content references a target block
+     */
+    static _hasLiteralBlockReference(content: string, references: {
+        key: Set<string>;
+        id: Set<string>;
+        name: Set<string>;
+    }): boolean;
+    /**
      * Finds emails in running journeys, filters out the ones that reference the block (if it's a block) and refreshes related TSDs
      *
      * @param {string[]} keyArr metadata keys

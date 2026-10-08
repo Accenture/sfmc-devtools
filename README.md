@@ -47,6 +47,8 @@ That will load `node_modules/mcdev/lib/index.js`. It can make sense to directly 
 
 Please checkout the [GitHub wiki](https://github.com/Accenture/sfmc-devtools/wiki) for the full documentation.
 
+Content block refresh discovery verifies literal first arguments in `ContentBlockByKey`, `ContentBlockById`, and `ContentBlockByName`, including nested asset content, either quote style, whitespace, and optional arguments. Name references must use the full Content Builder folder path with backslash separators (escaped backslashes in SSJS), not just the block name. Dynamic first arguments, such as variables, concatenation, or function calls, are not evaluated and cannot be discovered this way.
+
 ## Changelog
 
 Find info on the latest releases with a detailed changelog in the [GitHub Releases tab](https://github.com/Accenture/sfmc-devtools/releases).
