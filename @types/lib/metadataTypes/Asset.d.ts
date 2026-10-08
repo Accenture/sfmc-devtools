@@ -39,6 +39,8 @@ export type ContentBlockConversionTypes = import("../../types/mcdev.d.js").Conte
  * @augments MetadataType
  */
 declare class Asset extends MetadataType {
+    /** @type {Promise.<void> | null} in-flight asset cache load shared by parallel retrieve() calls */
+    static _assetCachePromise: Promise<void> | null;
     /**
      * Retrieves Metadata of Asset
      *
