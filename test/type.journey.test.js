@@ -128,7 +128,7 @@ describe('type: journey', function () {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                26,
+                27,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
