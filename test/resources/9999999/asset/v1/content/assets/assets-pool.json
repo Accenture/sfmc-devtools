@@ -1641,7 +1641,7 @@
                 "thumbnailUrl": "/v1/assets/317008/thumbnail"
             },
             "category": {
-                "id": 370568
+                "id": 89397
             },
             "meta": {
                 "globalStyles": {
@@ -1921,6 +1921,10 @@
                 "displayName": "Code Snippet Block"
             },
             "name": "testExisting_block_refresh",
+            "status": {
+                "id": 1,
+                "name": "Draft"
+            },
             "createdDate": "2025-10-24T12:19:21.2-06:00",
             "createdBy": {
                 "id": 724496218,
@@ -1936,7 +1940,7 @@
                 "userId": "724496218"
             },
             "category": {
-                "id": 370568
+                "id": 89397
             },
             "modelVersion": 2,
             "r__folder_Path": "Content Builder"
