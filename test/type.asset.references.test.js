@@ -13,6 +13,34 @@ const references = {
     name: new Set([String.raw`Content Builder\Blocks\Target`]),
 };
 
+/**
+ * Evaluate the complete dependency query, including compound cursor predicates.
+ *
+ * @param {object} query REST filter
+ * @param {object} candidate asset candidate
+ * @returns {boolean} Whether the candidate matches
+ */
+function matchesQuery(query, candidate) {
+    if (query.logicalOperator === 'OR') {
+        return (
+            matchesQuery(query.leftOperand, candidate) ||
+            matchesQuery(query.rightOperand, candidate)
+        );
+    }
+    if (query.logicalOperator === 'AND') {
+        return (
+            matchesQuery(query.leftOperand, candidate) &&
+            matchesQuery(query.rightOperand, candidate)
+        );
+    }
+    if (query.property === 'id' && query.simpleOperator === 'greaterThan') {
+        return candidate.id > query.value;
+    }
+    assert.equal(query.property, 'content');
+    assert.equal(query.simpleOperator, 'mustContain');
+    return candidate.content.includes(query.value);
+}
+
 describe('Asset reverse content block references', () => {
     let originalClient;
     let originalBu;
@@ -206,6 +234,105 @@ describe('Asset reverse content block references', () => {
         } finally {
             cache.clearCache(987654321);
         }
+    });
+
+    it('preserves the dependency predicate and ascending ID cursor after shard failure', async () => {
+        const candidates = [
+            { id: 30, customerKey: 'later', content: 'ContentBlockByKey("target-key")' },
+            { id: 10, customerKey: 'first', content: 'ContentBlockByKey("target-key")' },
+            { id: 20, customerKey: 'unrelated', content: 'Unrelated content' },
+            { id: 40, customerKey: 'false-positive', content: 'ContentBlockByKey("other-key")' },
+        ].map((item) => ({ ...item, assetType: { name: 'htmlemail' } }));
+        const requests = [];
+        const returnedIds = [];
+        asset.client = {
+            // @ts-expect-error Minimal REST mock implements only exercised operations.
+            rest: {
+                post: async (uri, body) => {
+                    assert.equal(uri, '/asset/v1/content/assets/query');
+                    assert.deepEqual(body.sort, [{ property: 'id', direction: 'ASC' }]);
+                    requests.push(structuredClone(body));
+                    if (requests.length === 2) {
+                        return { message: 'all shards failed' };
+                    }
+                    const matches = candidates
+                        .filter((item) => matchesQuery(body.query, item))
+                        .toSorted((a, b) => a.id - b.id);
+                    const pageSize = 1;
+                    const items = matches.slice(body.page.page - 1, body.page.page);
+                    returnedIds.push(...items.map((item) => item.id));
+                    return { items, count: matches.length, page: body.page.page, pageSize };
+                },
+                get: async () => assert.fail('Unrelated candidates must never be fetched'),
+            },
+        };
+        assert.deepEqual(Object.keys(await findEmails([{ customerKey: 'target-key' }])), [
+            'first',
+            'later',
+        ]);
+        assert.deepEqual(returnedIds, [10, 30, 40]);
+        assert.equal(requests.length, 4);
+        assert.deepEqual(
+            requests.map((request) => request.page.page),
+            [1, 2, 1, 2]
+        );
+        assert.deepEqual(requests[2].query, {
+            leftOperand: requests[0].query,
+            logicalOperator: 'AND',
+            rightOperand: { property: 'id', simpleOperator: 'greaterThan', value: 10 },
+        });
+        assert.deepEqual(requests[3].query, requests[2].query);
+    });
+
+    it('rejects first-page shard failure without a usable cursor', async () => {
+        let calls = 0;
+        asset.client = {
+            // @ts-expect-error Minimal REST mock implements only exercised operations.
+            rest: {
+                post: async () => {
+                    calls++;
+                    return { message: 'all shards failed' };
+                },
+            },
+        };
+        await assert.rejects(
+            findEmails([{ customerKey: 'target-key' }]),
+            /all shards failed without a usable ID cursor/
+        );
+        assert.equal(calls, 1);
+    });
+
+    it('propagates query exceptions instead of returning collected partial results', async () => {
+        const failure = new Error('Query unavailable');
+        let calls = 0;
+        asset.client = {
+            // @ts-expect-error Minimal REST mock implements only exercised operations.
+            rest: {
+                post: async () => {
+                    if (++calls === 2) {
+                        throw failure;
+                    }
+                    return {
+                        items: [
+                            {
+                                id: 10,
+                                customerKey: 'partial',
+                                assetType: { name: 'htmlemail' },
+                                content: 'ContentBlockByKey("target-key")',
+                            },
+                        ],
+                        count: 2,
+                        page: 1,
+                        pageSize: 1,
+                    };
+                },
+            },
+        };
+        await assert.rejects(
+            findEmails([{ customerKey: 'target-key' }]),
+            (error) => error === failure
+        );
+        assert.equal(calls, 2);
     });
 
     it('retains recursive block traversal and customer-key deduplication', async () => {
