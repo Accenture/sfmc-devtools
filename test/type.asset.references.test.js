@@ -1,7 +1,13 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+import handler from '../lib/index.js';
 import Asset from '../lib/metadataTypes/Asset.js';
 import cache from '../lib/util/cache.js';
+import { mock } from 'node:test';
+import Folder from '../lib/metadataTypes/Folder.js';
+import TriggeredSend from '../lib/metadataTypes/TriggeredSend.js';
+import * as testUtils from './utils.js';
+import { Util } from '../lib/util/util.js';
 
 // Access the private traversal helper directly for focused regression assertions.
 const findEmails = Asset['_findEmailsUsingBlock'].bind(Asset);
@@ -40,6 +46,282 @@ function matchesQuery(query, candidate) {
     assert.equal(query.simpleOperator, 'mustContain');
     return candidate.content.includes(query.value);
 }
+
+describe('Asset explicit refresh contract', () => {
+    beforeEach(() => {
+        testUtils.mockSetup(true);
+    });
+
+    afterEach(() => {
+        mock.restoreAll();
+        testUtils.mockReset();
+    });
+
+    it('rejects omitted, null and non-array keys before caching', async () => {
+        const caching = mock.method(asset, 'retrieveForCache', async () => {
+            assert.fail('Invalid keys must not cache assets');
+        });
+        // @ts-expect-error Deliberately exercise omitted required keys.
+        await assert.rejects(asset.refresh(), /explicit array of keys/);
+        await assert.rejects(asset.refresh(null), /explicit array of keys/);
+        // @ts-expect-error Deliberately exercise invalid caller input.
+        await assert.rejects(asset.refresh('email'), /explicit array of keys/);
+        assert.equal(caching.mock.callCount(), 0);
+        assert.equal(testUtils.getAPIHistoryLength(), 0);
+    });
+
+    it('returns an empty selection without caching or requests', async () => {
+        const caching = mock.method(asset, 'retrieveForCache', async () => {
+            assert.fail('Empty keys must not cache assets');
+        });
+        assert.deepEqual(await asset.refresh([]), []);
+        assert.equal(caching.mock.callCount(), 0);
+        assert.equal(testUtils.getAPIHistoryLength(), 0);
+    });
+
+    it('returns no matches after caching local and shared assets with undefined subtypes', async () => {
+        const caching = mock.method(asset, 'retrieveForCache', async () => ({
+            metadata: {},
+            type: 'asset',
+        }));
+        const refresh = mock.method(TriggeredSend, 'refresh', async () => {
+            assert.fail('No matching emails must not refresh any sends');
+        });
+        cache.initCache({ mid: 9999999, eid: 9999999 });
+        assert.deepEqual(await asset.refresh(['missing']), []);
+        assert.deepEqual(
+            caching.mock.calls.map((call) => call.arguments),
+            [
+                [undefined, undefined, undefined, false],
+                [undefined, undefined, undefined, true],
+            ]
+        );
+        assert.equal(refresh.mock.callCount(), 0);
+    });
+
+    it('resolves name-only dependent emails from explicit keys with a cold folder cache', async () => {
+        const block = {
+            customerKey: 'target-key',
+            name: 'Target',
+            category: { id: 9 },
+            assetType: { name: 'htmlblock' },
+        };
+        const emails = ['Target', 'Unrelated'].map((name) => ({
+            customerKey: `email-${name}`,
+            assetType: { name: 'htmlemail' },
+            content: `ContentBlockByName("Content Builder\\Blocks\\${name}")`,
+        }));
+        const originalClient = asset.client;
+        const originalBu = asset.buObject;
+        asset.buObject = { mid: 9999999, eid: 9999999 };
+        cache.initCache(asset.buObject);
+        mock.method(asset, 'retrieveForCache', async () => ({
+            type: 'asset',
+            metadata: { 'target-key': block },
+        }));
+        const folders = mock.method(Folder, 'retrieveForCache', async () => {
+            assert.equal(Folder.client, asset.client);
+            assert.equal(Folder.buObject, asset.buObject);
+            assert.equal(Folder.properties, asset.properties);
+            return {
+                type: 'folder',
+                metadata: {
+                    blocks: { ID: 9, Path: 'Content Builder/Blocks', Client: { ID: 9999999 } },
+                },
+            };
+        });
+        // @ts-expect-error Observe selected emails without issuing triggered-send mutations.
+        mock.method(asset, '_refreshTriggeredSend', async (items) =>
+            items.map((item) => item.customerKey)
+        );
+        asset.client = {
+            // @ts-expect-error Minimal REST transport implements only dependency discovery.
+            rest: { post: async () => ({ items: emails }) },
+        };
+        try {
+            assert.equal(cache.getCache().folder, undefined);
+            assert.deepEqual(await asset.refresh(['target-key']), ['email-Target']);
+            assert.deepEqual(folders.mock.calls[0].arguments, [null, ['asset', 'asset-shared']]);
+            assert.deepEqual(block.category, { id: 9 }, 'Name resolution must not mutate targets');
+            assert.deepEqual(await asset.refresh(['target-key']), ['email-Target']);
+            assert.equal(folders.mock.callCount(), 1, 'A warm folder cache must be reused');
+        } finally {
+            asset.client = originalClient;
+            asset.buObject = originalBu;
+        }
+    });
+
+    it('returns no legacy email IDs without discovering triggered sends', async () => {
+        const discovery = mock.method(TriggeredSend, 'findRefreshableItems', async () => {
+            assert.fail('No legacy IDs must not discover sends');
+        });
+        assert.deepEqual(await asset['_refreshTriggeredSend']({ email: {} }), []);
+        assert.equal(discovery.mock.callCount(), 0);
+    });
+
+    it('filters sends by legacy ID and returns successful refresh keys', async () => {
+        const discovery = mock.method(TriggeredSend, 'findRefreshableItems', async () => ({
+            type: 'triggeredSend',
+            metadata: { matching: { Email: { ID: 123 } }, unrelated: { Email: { ID: 456 } } },
+        }));
+        const validation = mock.method(TriggeredSend, 'getKeysForValidTSDs', async (metadata) =>
+            Object.keys(metadata)
+        );
+        const refresh = mock.method(TriggeredSend, 'refresh', async (keys) => keys);
+        assert.deepEqual(
+            await asset['_refreshTriggeredSend']({ email: { legacyData: { legacyId: 123 } } }),
+            ['matching']
+        );
+        assert.deepEqual(discovery.mock.calls[0].arguments, [true]);
+        assert.deepEqual(Object.keys(validation.mock.calls[0].arguments[0]), ['matching']);
+        assert.deepEqual(refresh.mock.calls[0].arguments, [['matching']]);
+    });
+
+    it('does not call refresh-all when no matching or valid sends remain', async () => {
+        mock.method(TriggeredSend, 'findRefreshableItems', async () => ({
+            type: 'triggeredSend',
+            metadata: { unrelated: { Email: { ID: 456 } } },
+        }));
+        const validation = mock.method(TriggeredSend, 'getKeysForValidTSDs', async () => []);
+        const refresh = mock.method(TriggeredSend, 'refresh', async () => {
+            assert.fail('Empty selection must never reach refresh');
+        });
+        assert.deepEqual(
+            await asset['_refreshTriggeredSend']({ email: { legacyData: { legacyId: 123 } } }),
+            []
+        );
+        assert.deepEqual(validation.mock.calls[0].arguments, [{}]);
+        assert.equal(refresh.mock.callCount(), 0);
+    });
+
+    it('propagates triggered-send discovery and refresh exceptions', async () => {
+        const failure = new Error('Triggered send unavailable');
+        const metadata = { email: { legacyData: { legacyId: 123 } } };
+        const discovery = mock.method(TriggeredSend, 'findRefreshableItems', async () => {
+            throw failure;
+        });
+        await assert.rejects(
+            asset['_refreshTriggeredSend'](metadata),
+            (error) => error === failure
+        );
+        discovery.mock.mockImplementation(async () => ({
+            type: 'triggeredSend',
+            metadata: { matching: { Email: { ID: 123 } } },
+        }));
+        mock.method(TriggeredSend, 'getKeysForValidTSDs', async () => ['matching']);
+        mock.method(TriggeredSend, 'refresh', async () => {
+            throw failure;
+        });
+        await assert.rejects(
+            asset['_refreshTriggeredSend'](metadata),
+            (error) => error === failure
+        );
+    });
+
+    it('returns no valid matching sends without calling refresh', async () => {
+        mock.method(TriggeredSend, 'findRefreshableItems', async () => ({
+            type: 'triggeredSend',
+            metadata: { matching: { Email: { ID: 123 } } },
+        }));
+        mock.method(TriggeredSend, 'getKeysForValidTSDs', async () => []);
+        const refresh = mock.method(TriggeredSend, 'refresh', async () => {
+            assert.fail('No valid sends must not refresh');
+        });
+        assert.deepEqual(
+            await asset['_refreshTriggeredSend']({ email: { legacyData: { legacyId: 123 } } }),
+            []
+        );
+        assert.equal(refresh.mock.callCount(), 0);
+    });
+
+    it('retains individual send failures and returns only successful refreshes', async () => {
+        mock.method(TriggeredSend, 'findRefreshableItems', async () => ({
+            type: 'triggeredSend',
+            metadata: { good: { Email: { ID: 123 } }, bad: { Email: { ID: 123 } } },
+        }));
+        mock.method(TriggeredSend, 'getKeysForValidTSDs', async () => ['good', 'bad']);
+        mock.method(TriggeredSend, '_refreshItem', async (key) => {
+            if (key === 'bad') {
+                Util.logger.error('Failed to refresh bad triggered send');
+                return false;
+            }
+            return true;
+        });
+        assert.deepEqual(
+            await asset['_refreshTriggeredSend']({ email: { legacyData: { legacyId: 123 } } }),
+            ['good']
+        );
+        assert.equal(process.exitCode, 1);
+    });
+
+    it('propagates asset cache failures before discovering dependencies', async () => {
+        const failure = new Error('Asset cache unavailable');
+        mock.method(asset, 'retrieveForCache', async () => {
+            throw failure;
+        });
+        await assert.rejects(asset.refresh(['email']), (error) => error === failure);
+    });
+
+    it('reports block discovery failures through the refresh handler', async () => {
+        // @ts-expect-error Exercise the private discovery helper's failure path.
+        mock.method(asset, '_findEmailsUsingBlock', async () => {
+            throw new Error('Block discovery unavailable');
+        });
+        const result = await handler.refresh(
+            'testInstance/testBU',
+            ['asset'],
+            ['testExisting_block_refresh']
+        );
+        assert.deepEqual(result['testInstance/testBU'].asset, []);
+        assert.equal(process.exitCode, 1);
+    });
+
+    it('reports refresh discovery failure through the handler failure signal', async () => {
+        mock.method(TriggeredSend, 'findRefreshableItems', async () => {
+            throw new Error('Discovery unavailable');
+        });
+        const result = await handler.refresh(
+            'testInstance/testBU',
+            ['asset'],
+            ['testExisting_email_block_refresh']
+        );
+        assert.deepEqual(result['testInstance/testBU'].asset, []);
+        assert.equal(process.exitCode, 1);
+    });
+
+    it('reports deploy refresh failure after the asset was updated', async () => {
+        handler.setOptions({ refresh: true });
+        mock.method(TriggeredSend, 'findRefreshableItems', async () => {
+            throw new Error('Discovery unavailable');
+        });
+        const result = await handler.deploy(
+            'testInstance/testBU',
+            ['asset'],
+            ['testExisting_block_refresh']
+        );
+        assert.equal(process.exitCode, 1);
+        assert.equal(result['testInstance/testBU'], undefined);
+        assert.ok(
+            testUtils.getRestCallout('patch', '/asset/v1/content/assets/%'),
+            'The asset update must have completed before the refresh failure'
+        );
+    });
+
+    it('skips refresh for create-only deployments and propagates failures for updates', async () => {
+        handler.setOptions({ refresh: true });
+        const refresh = mock.method(asset, 'refresh', async () => {
+            throw new Error('Refresh failed');
+        });
+        await asset.postDeployTasks({ email: {} }, {}, { created: 1, updated: 0 });
+        assert.equal(refresh.mock.callCount(), 0);
+        await assert.rejects(
+            asset.postDeployTasks({ email: {} }, {}, { created: 0, updated: 1 }),
+            /Refresh failed/
+        );
+        assert.deepEqual(refresh.mock.calls[0].arguments, [['email']]);
+        assert.equal(Util.OPTIONS.refresh, true);
+    });
+});
 
 describe('Asset reverse content block references', () => {
     let originalClient;

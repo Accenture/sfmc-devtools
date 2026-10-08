@@ -49,6 +49,8 @@ Please checkout the [GitHub wiki](https://github.com/Accenture/sfmc-devtools/wik
 
 Content block refresh discovery verifies literal first arguments in `ContentBlockByKey`, `ContentBlockById`, and `ContentBlockByName`, including nested asset content, either quote style, whitespace, and optional arguments. Name references must use the full Content Builder folder path with backslash separators (escaped backslashes in SSJS), not just the block name. Dynamic first arguments, such as variables, concatenation, or function calls, are not evaluated and cannot be discovered this way.
 
+Asset refresh requires an explicit array of asset keys. Direct `Asset.refresh()` calls with omitted or `null` keys reject before caching; an empty array returns `[]` without requests. No matching emails, no legacy email IDs, or no valid matching triggered sends also return `[]`, without refreshing unrelated sends. Discovery and refresh exceptions propagate to the existing refresh/deploy failure handler; failed individual triggered sends retain their error signal and are omitted from the returned refreshed-key list. With `deploy --refresh`, refresh runs only when assets were updated: a refresh failure marks the deployment as failed, but does not roll back assets already deployed.
+
 ## Changelog
 
 Find info on the latest releases with a detailed changelog in the [GitHub Releases tab](https://github.com/Accenture/sfmc-devtools/releases).
