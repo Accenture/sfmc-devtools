@@ -51,6 +51,12 @@ Content block refresh discovery verifies literal first arguments in `ContentBloc
 
 Asset refresh requires an explicit array of asset keys. Direct `Asset.refresh()` calls with omitted or `null` keys reject before caching; an empty array returns `[]` without requests. No matching emails, no legacy email IDs, or no valid matching triggered sends also return `[]`, without refreshing unrelated sends. Discovery and refresh exceptions propagate to the existing refresh/deploy failure handler; failed individual triggered sends retain their error signal and are omitted from the returned refreshed-key list. With `deploy --refresh`, refresh runs only when assets were updated: a refresh failure marks the deployment as failed, but does not roll back assets already deployed.
 
+### Editable SMS and push assets
+
+For Content Builder `jsonmessage` assets, `asset-mobile` extracts SMS message text and push title/message text from `views.<channel>.meta.options.customBlockData` into `.amp` files. Each asset uses an `asset/mobile/<customerKey>/` directory, with field-named files beside its JSON. Colons in field names are encoded as `%3A` for Windows-safe filenames. These files participate in templating, content-block reference replacement, dependency discovery, and Git file discovery like other extracted asset code.
+
+Edit the `.amp` files rather than `views.sms.content` or `views.push.content`: those HTML strings are generated GUI previews. Their original layout, styling, and media are retained. Preview text slots that exactly match the HTML-escaped source are replaced by field-specific, non-Mustache tokens during retrieval and restored from the final source during predeployment. Tokens survive Mustache-based templating; stale or unmatched preview text stays unchanged, and absent previews are not generated. Equal `:display` companion values are extracted only once and restored from the edited source during reassembly. Different companion values remain in JSON without being overwritten and are checked independently for content-block references. Local duplicate/preview bookkeeping is removed before deployment; missing extracted source files cause an error rather than deploying incomplete content. Existing JSON-only assets remain readable. WhatsApp assets are not extracted by this implementation.
+
 ## Changelog
 
 Find info on the latest releases with a detailed changelog in the [GitHub Releases tab](https://github.com/Accenture/sfmc-devtools/releases).

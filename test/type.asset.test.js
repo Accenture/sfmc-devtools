@@ -1387,6 +1387,7 @@ describe('type: asset', () => {
                     'testExisting_htmlblock 3 spaces',
                     'testExisting_email_block_refresh',
                     'testExisting_asset_message',
+                    'testExisting_mobilePush_asset_DEV',
                 ],
                 'should have found the right assets that need updating'
             );
@@ -1476,6 +1477,7 @@ describe('type: asset', () => {
                     'testExisting_htmlblock 3 spaces',
                     'testExisting_email_block_refresh',
                     'testExisting_asset_message',
+                    'testExisting_mobilePush_asset_DEV',
                 ],
                 'should have found the right assets that need updating'
             );

@@ -301,7 +301,49 @@ declare class Asset extends MetadataType {
      * to allow saving that separately and formatted
      *
      * @param {AssetItem} metadata a single asset definition
-     * @returns {CodeExtractItem} { json: metadata, codeArr: object[], subFolder: string[] }
+     * @returns {{channel: 'push' | 'sms', field: 'display:title' | 'display:message', companion: 'display:title:display' | 'display:message:display', data: object}[]} editable mobile fields
+     */
+    static _getMobileCodeFields(metadata: AssetItem): {
+        channel: "push" | "sms";
+        field: "display:title" | "display:message";
+        companion: "display:title:display" | "display:message:display";
+        data: object;
+    }[];
+    /**
+     * Escape literal mobile source for an existing HTML text slot, without rendering it.
+     *
+     * @param {string} value source text
+     * @returns {string} escaped text
+     */
+    static _escapeMobilePreview(value: string): string;
+    /**
+     * Tokenize only known, source-equal mobile preview text slots before extracting source.
+     *
+     * @param {AssetItem} metadata asset with inline source
+     * @returns {void} -
+     */
+    static _tokenizeMobilePreview(metadata: AssetItem): void;
+    /**
+     * Replace text only in recognized mobile preview slots, preserving wrapper bytes.
+     *
+     * @param {string} content preview HTML
+     * @param {'push' | 'sms'} channel push or SMS
+     * @param {(text: string, field: 'display:title' | 'display:subtitle' | 'display:message') => string} replaceSlot text replacement
+     * @returns {string} updated HTML
+     */
+    static _replaceMobilePreviewSlots(content: string, channel: "push" | "sms", replaceSlot: (text: string, field: "display:title" | "display:subtitle" | "display:message") => string): string;
+    /**
+     * Restore mapped preview slots after final source merging, never during Mustache builds.
+     *
+     * @param {AssetItem} metadata asset with merged source
+     * @returns {void} -
+     */
+    static _restoreMobilePreview(metadata: AssetItem): void;
+    /**
+     * Extract editable source into sidecars.
+     *
+     * @param {AssetItem} metadata a single asset definition
+     * @returns {CodeExtractItem} extracted source and JSON
      */
     static _extractCode(metadata: AssetItem): CodeExtractItem;
     /**
