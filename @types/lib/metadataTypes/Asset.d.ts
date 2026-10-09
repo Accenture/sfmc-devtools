@@ -39,6 +39,8 @@ export type ContentBlockConversionTypes = import("../../types/mcdev.d.js").Conte
  * @augments MetadataType
  */
 declare class Asset extends MetadataType {
+    /** @type {Promise.<void> | null} in-flight asset cache load shared by parallel retrieve() calls */
+    static _assetCachePromise: Promise<void> | null;
     /**
      * Retrieves Metadata of Asset
      *
@@ -95,6 +97,27 @@ declare class Asset extends MetadataType {
      * @returns {Promise.<AssetMap>} keyField => metadata map but sorted to ensure dependencies are deployed in correct order
      */
     static _getUpsertOrderAndSkipMissing(metadataMap: AssetMap, deployDir: string): Promise<AssetMap>;
+    /**
+     * Loads assets shared with the current BU (`?scope=shared`) and adds them to the
+     * ContentBlockByX reference lookup map ({@link ReplaceCbReference.createCacheForMap}) as a fallback.
+     * Existing BU / deployment package entries win for the same key or full folder path and name.
+     *
+     * @returns {Promise.<void>} -
+     */
+    static _addSharedAssetsToReferenceCache(): Promise<void>;
+    /**
+     * Prepares BU-owned assets from `cache.asset` for the ContentBlockByX reference lookup map.
+     * Returns shallow clones with `r__folder_Path` resolved so that ContentBlockByName can match them.
+     *
+     * The original cache items are NOT mutated: `setFolderPath` deletes `category`, which is still needed
+     * by `preDeployTasks` (duplicate-name handling) and `getCacheMatchedByName`.
+     * A shallow clone is sufficient because `setFolderPath` only sets `r__folder_Path` and deletes `category`
+     * on the top level; nested objects are only read.
+     *
+     * @param {AssetMap} [assetMap] BU-owned assets, usually `cache.getCache().asset`
+     * @returns {AssetMap} new map with cloned items (empty if assetMap is not set)
+     */
+    static _cloneAssetsWithFolderPaths(assetMap?: AssetMap): AssetMap;
     /**
      * MetadataType upsert, after retrieving from target and comparing to check if create or update operation is needed.
      *

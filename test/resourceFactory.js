@@ -387,6 +387,11 @@ async function handleAssetReadEngine(config, urlObj) {
         const items = [];
         for (const key of Object.keys(pool)) {
             const entry = pool[key];
+            // Optional scope keeps shared-only fixtures out of the local asset cache.
+            const queryScope = urlObj.searchParams.get('scope') === 'shared' ? 'shared' : 'local';
+            if (entry.queryScope && entry.queryScope !== queryScope) {
+                continue;
+            }
             const body = entry?.body;
             if (!body) {
                 continue;

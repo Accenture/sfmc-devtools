@@ -59,6 +59,16 @@ declare class Folder extends MetadataType {
         type: string;
     }>;
     /**
+     * Retrieves folders owned by other BUs for caching.
+     *
+     * @param {BuObject} buObject BU context of the caller, used as template for the other BUs' BuObjects and for the BU name lookup
+     * @param {object} properties mcdev config of the caller, used for the BU name lookup and set on Folder during retrieval
+     * @param {number[]} midList MIDs of BUs to retrieve folders from
+     * @param {string[]} [subTypeArr] content type of folder
+     * @returns {Promise.<ListMap>} merged folder map of all given BUs keyed by CustomerKey
+     */
+    static retrieveForCacheFromOtherBUs(buObject: BuObject, properties: object, midList: number[], subTypeArr?: string[]): Promise<ListMap>;
+    /**
      * Folder upsert (copied from Metadata Upsert), after retrieving from target
      * and comparing to check if create or update operation is needed.
      * Copied due to having a dependency on itself, meaning the created need to be serial
@@ -122,6 +132,9 @@ declare class Folder extends MetadataType {
     static saveResults(results: ListMap, retrieveDir: string): Promise<ListMap>;
 }
 declare namespace Folder {
+    let buObject: import("../../types/mcdev.d.js").BuObject;
+    let properties: any;
+    let client: any;
     let definition: {
         bodyIteratorField: string;
         dependencies: any[];
