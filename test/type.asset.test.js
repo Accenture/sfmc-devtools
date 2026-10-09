@@ -1,4 +1,5 @@
 import File from '../lib/util/file.js';
+import Asset from '../lib/metadataTypes/Asset.js';
 
 import * as chai from 'chai';
 const assert = chai.assert;
@@ -8,6 +9,8 @@ import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
+import * as fsNode from 'node:fs/promises';
+import path from 'node:path';
 chai.use(chaiFiles);
 
 /**
@@ -1630,6 +1633,60 @@ describe('type: asset', () => {
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
+        });
+    });
+
+    describe('_mergeCode webpage (2022+) ================', () => {
+        // bug #2632: 2022+ webpages have no `views` object; `_mergeCode` was
+        // reading `metadata.views.html.content` for the fileList entry instead
+        // of `metadata.content`, throwing a TypeError whenever templateName is
+        // set (e.g. from Asset.replaceCbReference during deploy)
+        let deployDir;
+        const customerKey = 'testNew_asset_webpage2022';
+        const subtypeExtension = '.asset-webstudio-meta';
+        const htmlContent = '<html><body>hello 2022+ webpage</body></html>';
+
+        beforeEach(async () => {
+            // Keep the path relative: the production filename filter encodes drive colons.
+            deployDir = await fsNode.mkdtemp('./mcdev-asset-webpage-2022-');
+            const assetDir = path.join(deployDir, 'asset', 'webstudio', customerKey);
+            await fsNode.mkdir(assetDir, { recursive: true });
+            await fsNode.writeFile(
+                path.join(assetDir, `content${subtypeExtension}.html`),
+                htmlContent,
+                'utf8'
+            );
+        });
+
+        afterEach(async () => {
+            await fsNode.rm(deployDir, { recursive: true, force: true });
+        });
+
+        it('should merge code without throwing for a 2022+ webpage without a views object', async () => {
+            // GIVEN a 2022+ webpage asset (no `views` key at all) and a truthy
+            // templateName, mirroring how Asset.replaceCbReference calls _mergeCode
+            const metadata = {
+                customerKey,
+                assetType: { name: 'webpage' },
+            };
+
+            // WHEN
+            const fileList = await Asset._mergeCode(metadata, deployDir, 'webstudio', customerKey);
+
+            // THEN it should not throw and should return the merged content
+            assert.equal(fileList.length, 1, 'expected exactly one merged file');
+            assert.equal(fileList[0].fileName, `content${subtypeExtension}`);
+            assert.equal(fileList[0].fileExt, 'html');
+            assert.equal(
+                fileList[0].content,
+                htmlContent,
+                'fileList entry should carry metadata.content, not metadata.views.html.content'
+            );
+            assert.equal(
+                metadata.content,
+                htmlContent,
+                'metadata.content should have been populated from disk'
+            );
         });
     });
 });
