@@ -1,0 +1,41 @@
+{
+    "7001": {
+        "queryScope": "shared",
+        "queryOverrides": { "memberId": 1111111 },
+        "body": {
+            "id": 7001,
+            "customerKey": "shared-key",
+            "name": "Shared block",
+            "memberId": 1111111,
+            "category": { "id": 4707 },
+            "assetType": { "id": 197, "name": "htmlblock" },
+            "status": { "id": 1, "name": "Draft" }
+        }
+    },
+    "7002": {
+        "queryScope": "shared",
+        "queryOverrides": { "memberId": 9999999 },
+        "body": {
+            "id": 7002,
+            "customerKey": "own-shared-key",
+            "name": "Own shared block",
+            "memberId": 9999999,
+            "category": { "id": 89397 },
+            "assetType": { "id": 197, "name": "htmlblock" },
+            "status": { "id": 1, "name": "Draft" }
+        }
+    },
+    "8801": {
+        "queryScope": "shared",
+        "queryOverrides": { "memberId": 8888888 },
+        "body": {
+            "id": 8801,
+            "customerKey": "sibling-shared-key",
+            "name": "Sibling block",
+            "memberId": 8888888,
+            "category": { "id": 88002 },
+            "assetType": { "id": 197, "name": "htmlblock" },
+            "status": { "id": 1, "name": "Draft" }
+        }
+    }
+}

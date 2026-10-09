@@ -6,9 +6,37 @@ const expect = chai.expect;
 
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
+import config from '../lib/util/config.js';
+import Cli from '../lib/util/cli.js';
+import Asset from '../lib/metadataTypes/Asset.js';
+import Folder from '../lib/metadataTypes/Folder.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
+
+/**
+ * adds the given entries of assets-pool-shared.json to the asset pool (removing the others);
+ * all other pool entries become local-only so that the shared-assets query returns only these
+ *
+ * @param {...number} ids ids of entries in assets-pool-shared.json
+ * @returns {Promise.<void>} -
+ */
+async function shareAssets(...ids) {
+    const folder = 'test/resources/9999999/asset/v1/content/assets/';
+    const pool = await File.readJSON(folder + 'assets-pool.json');
+    const shared = await File.readJSON(folder + 'assets-pool-shared.json');
+    for (const entry of Object.values(pool)) {
+        entry.queryScope ||= 'local';
+    }
+    for (const id of Object.keys(shared)) {
+        if (ids.includes(Number(id))) {
+            pool[id] = shared[id];
+        } else {
+            delete pool[id];
+        }
+    }
+    await File.writeJSON(folder + 'assets-pool.json', pool);
+}
 
 /**
  * gets file from Retrieve folder
@@ -387,6 +415,147 @@ describe('type: asset', () => {
                 8,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
+            return;
+        });
+
+        it('Should load the asset cache once when retrieving 2 keys in parallel', async () => {
+            // WHEN
+            const retrieve = await handler.retrieve(
+                'testInstance/testBU',
+                ['asset'],
+                ['testExisting_asset_htmlblock', 'testExisting_htmlblock1']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            assert.sameMembers(
+                Object.keys(retrieve['testInstance/testBU'].asset),
+                ['testExisting_asset_htmlblock', 'testExisting_htmlblock1'],
+                'Unexpected assets in retrieve response'
+            );
+            assert.lengthOf(
+                testUtils.getRestCallout(
+                    'post',
+                    '/asset/v1/content/assets/query?scope=shared',
+                    true
+                ),
+                2,
+                'shared assets should be queried by one cache load (= 2 subtype chunks)'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                10,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should cache the folders of sibling BUs', async () => {
+            await shareAssets(8801);
+            // WHEN
+            await handler.retrieve(
+                'testInstance/testBU',
+                ['asset'],
+                ['testExisting_asset_htmlblock']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            assert.equal(
+                cache.getCache().folder['1111111-88002']?.Path,
+                'Content Builder/Sibling Folder',
+                'sibling folder should be cached'
+            );
+            assert.include(
+                testUtils.getRestCallout('post', '/asset/v1/content/assets/query?scope=shared')
+                    .fields,
+                'memberId',
+                'shared assets query should request memberId'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                10,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should not retrieve extra folders for shared assets of the current or parent BU', async () => {
+            await shareAssets(7001, 7002);
+            // WHEN
+            await handler.retrieve(
+                'testInstance/testBU',
+                ['asset'],
+                ['testExisting_asset_htmlblock']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                8,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should not fail the retrieve when the sibling folder retrieve fails', async () => {
+            await shareAssets(8801);
+            await testUtils.copyFile(
+                'dataFolder/+retrieve-ContentTypeINasset,asset-shared-error-response.xml',
+                'dataFolder/retrieve-ContentTypeINasset,asset-shared-response.xml',
+                '8888888'
+            );
+            // WHEN
+            await handler.retrieve(
+                'testInstance/testBU',
+                ['asset'],
+                ['testExisting_asset_htmlblock']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            assert.isUndefined(
+                cache.getCache().folder['1111111-88002'],
+                'sibling folder should not be cached'
+            );
+            return;
+        });
+
+        it('Should restore the Folder context after a failing BU in retrieveForCacheFromOtherBUs', async () => {
+            // checked directly: a leaked BU context is not visible in retrieve or deploy results
+            await testUtils.copyFile(
+                'dataFolder/+retrieve-ContentTypeINasset,asset-shared-error-response.xml',
+                'dataFolder/retrieve-ContentTypeINasset,asset-shared-response.xml',
+                '8888888'
+            );
+            const properties = await config.getProperties();
+            const buObject = await Cli.getCredentialObject(properties, 'testInstance/testBU');
+            const contextBefore = [Folder.buObject, Folder.client, Folder.properties];
+            // WHEN
+            const folders = await Folder.retrieveForCacheFromOtherBUs(
+                buObject,
+                properties,
+                [8888888],
+                ['asset', 'asset-shared']
+            );
+            // THEN
+            assert.isEmpty(folders, 'no folders expected from the failing BU');
+            assert.sameOrderedMembers(
+                [Folder.buObject, Folder.client, Folder.properties],
+                contextBefore,
+                'Folder context should be restored'
+            );
+            return;
+        });
+
+        it('Should reset Asset._assetCachePromise after a parallel and a failed retrieve', async () => {
+            // checked directly: a leftover promise would make the next BU reuse this cache load
+            const keys = ['testExisting_asset_htmlblock', 'testExisting_htmlblock1'];
+            await handler.retrieve('testInstance/testBU', ['asset'], keys);
+            assert.isNull(Asset._assetCachePromise, 'promise should be reset after success');
+            testUtils.mockRESTError('/asset/v1/content/assets/query', 500);
+            // WHEN
+            await handler.retrieve('testInstance/testBU', ['asset'], keys);
+            // THEN
+            assert.equal(process.exitCode, 1, 'retrieve should have thrown an error');
+            assert.isNull(Asset._assetCachePromise, 'promise should be reset after failure');
             return;
         });
     });
@@ -825,6 +994,92 @@ describe('type: asset', () => {
             );
             return;
         });
+
+        // the consumer references a block that is only visible via the shared-assets query:
+        // 7001 is owned by the parent BU, 8801 by sibling BU 8888888
+        for (const [reference, id] of [
+            ['ContentBlockByKey("shared-key")', 7001],
+            [String.raw`ContentBlockByName("Content Builder\Shared block")`, 7001],
+            ['ContentBlockById(7001)', 7001],
+            [String.raw`ContentBlockByName("Content Builder\Sibling Folder\Sibling block")`, 8801],
+        ]) {
+            it(`Should deploy ${reference} when the block is shared`, async () => {
+                await shareAssets(id);
+                await File.writeFile(
+                    'deploy/testInstance/testBU/asset/block/testNew_asset_withCBBK_preexisting.asset-block-meta.html',
+                    `%%= ${reference} =%%`
+                );
+                // WHEN
+                const deployResult = await handler.deploy('testInstance/testBU', {
+                    asset: ['testNew_asset_withCBBK_preexisting'],
+                });
+                // THEN
+                assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+                assert.deepEqual(
+                    Object.keys(deployResult['testInstance/testBU']?.asset || {}),
+                    ['testNew_asset_withCBBK_preexisting'],
+                    'Unexpected assets deployed'
+                );
+                return;
+            });
+        }
+
+        it('Should reject a stale ContentBlockByKey after switching to a BU without sharing', async () => {
+            // 8801 is owned by sibling BU 8888888, i.e. neither testBU nor _ParentBU_
+            await shareAssets(8801);
+            await File.writeFile(
+                'deploy/testInstance/testBU/asset/block/testNew_asset_withCBBK_preexisting.asset-block-meta.html',
+                '%%= ContentBlockByKey("sibling-shared-key") =%%'
+            );
+            File.copySync(
+                'deploy/testInstance/testBU/asset/block/testNew_asset_withCBBK_preexisting.asset-block-meta.json',
+                'deploy/testInstance/_ParentBU_/asset/block/testNew_asset_withCBBK_preexisting.asset-block-meta.json'
+            );
+            await File.writeFile(
+                'deploy/testInstance/_ParentBU_/asset/block/testNew_asset_withCBBK_preexisting.asset-block-meta.html',
+                '%%= ContentBlockByKey("sibling-shared-key") =%%'
+            );
+            await handler.deploy('testInstance/testBU', {
+                asset: ['testNew_asset_withCBBK_preexisting'],
+            });
+            assert.equal(process.exitCode, 0, 'first deploy should not have thrown an error');
+            await shareAssets();
+            // WHEN
+            const deployResult = await handler.deploy('testInstance/_ParentBU_', {
+                asset: ['testNew_asset_withCBBK_preexisting'],
+            });
+            // THEN
+            assert.equal(process.exitCode, 1, 'deploy should have thrown an error');
+            assert.isEmpty(
+                Object.keys(deployResult['testInstance/_ParentBU_']?.asset || {}),
+                'Unexpected assets deployed'
+            );
+            return;
+        });
+
+        it('Should prefer a package block over a shared block with the same name', async () => {
+            await shareAssets(7001);
+            testUtils.copyToDeploy('asset-sharedDependency-deploy', 'asset');
+            await File.writeFile(
+                'deploy/testInstance/testBU/asset/block/testNew_asset_withCBBK_preexisting.asset-block-meta.html',
+                String.raw`%%= ContentBlockByName("Content Builder\Shared block") =%%`
+            );
+            // WHEN
+            await handler.deploy('testInstance/testBU', {
+                asset: ['testNew_asset_withCBBK_preexisting', 'zz_package_block'],
+            });
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+            // the package block has to be created before the consumer that references it
+            assert.deepEqual(
+                testUtils
+                    .getRestCallout('post', '/asset/v1/content/assets/', true)
+                    .map((item) => item.customerKey),
+                ['zz_package_block', 'testNew_asset_withCBBK_preexisting'],
+                'Unexpected create callouts'
+            );
+            return;
+        });
     });
 
     describe('Templating ================', () => {
@@ -1189,6 +1444,32 @@ describe('type: asset', () => {
             assert.deepEqual(
                 await getActualTemplateJson(templatingKey, 'asset', 'block'),
                 expectedTemplateJson
+            );
+            return;
+        });
+
+        it('Should find a sibling block referenced via ContentBlockByName with --dependencies', async () => {
+            await shareAssets(8801);
+            File.copySync(
+                'test/mockRoot/deploy/testInstance/testBU/asset/block/testNew_asset_withCBBK_preexisting.asset-block-meta.json',
+                'retrieve/testInstance/testBU/asset/block/testNew_asset_withCBBK_preexisting.asset-block-meta.json'
+            );
+            await File.writeFile(
+                'retrieve/testInstance/testBU/asset/block/testNew_asset_withCBBK_preexisting.asset-block-meta.html',
+                String.raw`%%= ContentBlockByName("Content Builder\Sibling Folder\Sibling block") =%%`
+            );
+            handler.setOptions({ dependencies: true });
+            // WHEN
+            // called directly: it is the ContentBlockByX step of buildTemplate --dependencies
+            const typeKeyList = await handler.addDependentCbReferences('testInstance/testBU', {
+                asset: ['testNew_asset_withCBBK_preexisting'],
+            });
+            // THEN
+            assert.equal(process.exitCode, 0, 'dependency search should not have thrown an error');
+            assert.sameMembers(
+                typeKeyList.asset,
+                ['testNew_asset_withCBBK_preexisting', 'sibling-shared-key'],
+                'sibling block should be found as dependency'
             );
             return;
         });
