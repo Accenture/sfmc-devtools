@@ -375,7 +375,15 @@ describe('type: asset', () => {
             return;
         });
 
-        it('Should retrieve a asset by key', async () => {
+        it('Should retrieve an asset by key and overwrite conflict-marked JSON', async () => {
+            const basePath = './retrieve/testInstance/testBU/asset/block';
+            await File.writeToFile(
+                basePath,
+                'testExisting_asset_htmlblock.asset-block-meta',
+                'json',
+                '<<<<<<< HEAD\n{}\n=======\n{}\n>>>>>>> incoming\n'
+            );
+            await File.writeToFile(basePath, 'sentinel', 'txt', 'preserve unrelated file');
             // WHEN
             const retrieve = await handler.retrieve(
                 'testInstance/testBU',
@@ -415,7 +423,26 @@ describe('type: asset', () => {
                 8,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
+            assert.equal(
+                await File.readFile(`${basePath}/sentinel.txt`, 'utf8'),
+                'preserve unrelated file'
+            );
             return;
+        });
+
+        it('Should retain valid asset cleanup when re-retrieving by key', async () => {
+            const key = 'testExisting_asset_htmlblock';
+            const basePath = './retrieve/testInstance/testBU/asset/block';
+            await handler.retrieve('testInstance/testBU', ['asset'], [key]);
+            await File.writeToFile(basePath, `${key}.asset-block-meta`, 'ssjs', 'stale code');
+            await handler.retrieve('testInstance/testBU', ['asset'], [key]);
+
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            assert.equal(await File.pathExists(`${basePath}/${key}.asset-block-meta.ssjs`), false);
+            assert.deepEqual(
+                await getActualJson(key, 'asset', 'block'),
+                await testUtils.getExpectedJson('9999999', 'asset', `${key}-retrieve`)
+            );
         });
 
         it('Should load the asset cache once when retrieving 2 keys in parallel', async () => {

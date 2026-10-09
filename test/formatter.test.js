@@ -20,6 +20,10 @@ const DEFAULT_PROPERTIES = {
 };
 
 describe('FORMATTER', () => {
+    before(async () => {
+        await File._loadPrettierModules();
+    });
+
     beforeEach(() => {
         testUtils.mockSetup();
         config.properties = structuredClone(DEFAULT_PROPERTIES);
@@ -331,8 +335,15 @@ describe('FORMATTER', () => {
         Init._checkPathForCloud = async () => true;
         Util.execSync = (command, args) => {
             assert.equal(command, 'npm');
-            assert.deepEqual(args, ['install']);
+            if (args[0] === 'uninstall') {
+                const pkg = File.readJSONSync('package.json');
+                for (const name of args.slice(1)) {
+                    delete pkg.devDependencies[name];
+                }
+                File.writeJSONSync('package.json', pkg);
+            }
             if (command === 'npm' && args[0] === 'install') {
+                assert.equal(args[1], '--save-dev');
                 dependencyVersions.push(properties.version);
                 expect(File.readJSONSync('package.json').devDependencies).not.to.have.property(
                     'prettier-plugin-sql'
@@ -426,9 +437,11 @@ describe('FORMATTER', () => {
         const calls = [];
         Util.execSync = (command, args) => {
             calls.push([command, args]);
-            expect(File.readJSONSync('package.json').devDependencies).not.to.have.property(
-                'prettier-plugin-sql'
-            );
+            if (args[0] === 'uninstall') {
+                const pkg = File.readJSONSync('package.json');
+                delete pkg.devDependencies['prettier-plugin-sql'];
+                File.writeJSONSync('package.json', pkg);
+            }
             return '';
         };
 
@@ -441,7 +454,12 @@ describe('FORMATTER', () => {
         const updatedPackageJson = await File.readJSON('package.json');
         expect(updatedPackageJson.devDependencies).not.to.have.property('prettier-plugin-sql');
         expect(updatedPackageJson.devDependencies).to.have.property('prettier-plugin-sfmc');
-        assert.deepEqual(calls, [['npm', ['install']]]);
+        assert.deepEqual(calls[0], ['npm', ['uninstall', 'prettier-plugin-sql']]);
+        assert.deepEqual(calls[1][1].slice(0, 2), ['install', '--save-dev']);
+        assert.include(
+            calls[1][1],
+            `prettier-plugin-sfmc@${Util.packageJsonMcdev.dependencies['prettier-plugin-sfmc']}`
+        );
     });
 
     it('fails dependency upgrade when install fails after removing the legacy SQL formatter', async () => {
@@ -460,9 +478,12 @@ describe('FORMATTER', () => {
         const errorLogs = [];
         Util.execSync = (command, args, hideOutput) => {
             calls.push([command, args, hideOutput]);
-            expect(File.readJSONSync('package.json').devDependencies).not.to.have.property(
-                'prettier-plugin-sql'
-            );
+            if (args[0] === 'uninstall') {
+                const pkg = File.readJSONSync('package.json');
+                delete pkg.devDependencies['prettier-plugin-sql'];
+                File.writeJSONSync('package.json', pkg);
+                return '';
+            }
             return null;
         };
         Util.logger.info = /** @type {typeof Util.logger.info} */ (
@@ -486,8 +507,10 @@ describe('FORMATTER', () => {
 
         const updatedPackageJson = await File.readJSON('package.json');
         expect(updatedPackageJson.devDependencies).not.to.have.property('prettier-plugin-sql');
-        assert.deepEqual(calls, [['npm', ['install'], true]]);
-        expect(updatedPackageJson.devDependencies).to.have.property('prettier-plugin-sfmc');
+        assert.deepEqual(calls[0], ['npm', ['uninstall', 'prettier-plugin-sql'], true]);
+        assert.deepEqual(calls[1][1].slice(0, 2), ['install', '--save-dev']);
+        assert.equal(calls[1][2], true);
+        expect(updatedPackageJson.devDependencies).not.to.have.property('prettier-plugin-sfmc');
         expect(infoLogs).not.to.include('✔️  Dependencies installed.');
         expect(errorLogs).to.include(
             'Could not install/update dependencies. Migration incomplete.'

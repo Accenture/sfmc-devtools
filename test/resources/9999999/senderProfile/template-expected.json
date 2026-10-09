@@ -6,7 +6,7 @@
     "CustomerKey": "{{{prefix}}}senderProfile",
     "Description": "Send from joern.berkefeld@accenture.com",
     "DirectForward": false,
-    "FromAddress": "joern.berkefeld@accenture.com",
+    "FromAddress": "{{{regex}}}.berkefeld@accenture.com",
     "FromName": "Jörn Berkefeld",
     "Name": "{{{prefix}}}senderProfile",
     "SenderHeaderEmailAddress": "",

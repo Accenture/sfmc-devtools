@@ -21,6 +21,15 @@ declare const FileFs: typeof fs & {
     prettierConfigFileType: any;
     prettierConfigCache: Map<any, any>;
     /**
+     * Loads and caches formatting packages after formatting has been confirmed enabled.
+     *
+     * @returns {Promise.<{prettier: import('prettier'), prettierPluginSfmc: object}>} formatter modules
+     */
+    _loadPrettierModules(): Promise<{
+        prettier: typeof import("prettier");
+        prettierPluginSfmc: object;
+    }>;
+    /**
      * Maps mcdev file extensions to Prettier parser names.
      *
      * @param {string} filetype file extension without dot

@@ -134,7 +134,7 @@ declare class Folder extends MetadataType {
 declare namespace Folder {
     let buObject: import("../../types/mcdev.d.js").BuObject;
     let properties: any;
-    let client: import("sfmc-sdk").default;
+    let client: any;
     let definition: {
         bodyIteratorField: string;
         dependencies: any[];

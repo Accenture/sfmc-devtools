@@ -6,6 +6,9 @@ import config from '../lib/util/config.js';
 import Init from '../lib/util/init.js';
 import InitConfig from '../lib/util/init.config.js';
 import InitNpm from '../lib/util/init.npm.js';
+import InitGit from '../lib/util/init.git.js';
+import Cli from '../lib/util/cli.js';
+import { isGitInstalled } from '../lib/util/init.git.js';
 import { Util } from '../lib/util/util.js';
 
 const originalCwd = process.cwd();
@@ -29,6 +32,17 @@ let warnings;
 let originalExitCode;
 const unicornVersion = Util.packageJsonMcdev.devDependencies['eslint-plugin-unicorn'];
 const major = Number(unicornVersion.split('.', 1)[0]);
+const manifest = File.readJsonSync(Util.getBoilerplatePath('npm-dependencies.json'));
+const defaultSpec = (name) =>
+    Util.packageJsonMcdev.dependencies?.[name] ||
+    Util.packageJsonMcdev.devDependencies?.[name] ||
+    'latest';
+const installCommand = (names = manifest) => [
+    'npm',
+    'install',
+    '--save-dev',
+    ...names.map((name) => `${name}@${defaultSpec(name)}`),
+];
 const unicornCases = [
     ...['', '^', '~'].flatMap((prefix) => [
         [`${prefix}${major - 1}.0.0`, unicornVersion],
@@ -42,7 +56,7 @@ const unicornCases = [
         'next',
         `>=${major - 1} <${major + 2}`,
         '*',
-    ].map((spec) => [spec, spec]),
+    ].map((spec) => [spec, unicornVersion]),
 ];
 
 describe('INIT TOOLING', function () {
@@ -91,7 +105,25 @@ describe('INIT TOOLING', function () {
                     scripts: { test: 'npm default test' },
                 });
             } else {
-                assert.deepEqual(args, ['install']);
+                const pkg = File.readJsonSync('package.json');
+                if (args[0] === 'uninstall') {
+                    for (const name of args.slice(1)) {
+                        delete pkg.dependencies?.[name];
+                        delete pkg.devDependencies?.[name];
+                    }
+                } else {
+                    assert.equal(args[0], 'install');
+                    assert.equal(args[1], '--save-dev');
+                    pkg.devDependencies ||= {};
+                    for (const declaration of args.slice(2)) {
+                        const separator = declaration.lastIndexOf('@');
+                        const name = declaration.slice(0, separator);
+                        const spec = declaration.slice(separator + 1);
+                        delete pkg.dependencies?.[name];
+                        pkg.devDependencies[name] = spec === 'latest' ? '^1.0.0' : spec;
+                    }
+                }
+                File.writeJsonSync('package.json', pkg);
             }
             return '';
         };
@@ -122,6 +154,28 @@ describe('INIT TOOLING', function () {
         }
     });
 
+    it('probes Git with a synchronous argument array and no shell', () => {
+        let invocation;
+        const installed = isGitInstalled((command, args, options) => {
+            invocation = { command, args, options };
+            return { status: 0 };
+        });
+
+        assert.equal(installed, true);
+        assert.deepEqual(invocation, {
+            command: 'git',
+            args: ['--version'],
+            options: { shell: false, stdio: 'ignore' },
+        });
+    });
+
+    it('reports Git as unavailable when the probe cannot start it', () => {
+        assert.equal(
+            isGitInstalled(() => ({ error: new Error('missing'), status: null })),
+            false
+        );
+    });
+
     it('installs modern package-derived defaults and reports identical files on repeat', async () => {
         assert.equal(await Init.upgradeProject(null, true), true);
         const manifest = await File.readJSON(
@@ -133,7 +187,7 @@ describe('INIT TOOLING', function () {
                 pkg.devDependencies[name],
                 Util.packageJsonMcdev.dependencies?.[name] ||
                     Util.packageJsonMcdev.devDependencies?.[name] ||
-                    'latest'
+                    '^1.0.0'
             );
         }
         assert.equal(pkg.scripts.lint, 'eslint .');
@@ -152,9 +206,109 @@ describe('INIT TOOLING', function () {
         assert.deepEqual(prompts, []);
         assert.deepEqual(commands, [
             ['npm', 'init', '--yes'],
-            ['npm', 'install'],
-            ['npm', 'install'],
+            installCommand(),
+            installCommand(['sfmc-boilerplate']),
         ]);
+    });
+
+    it('copies every bundled root, dotfile and nested template through fresh init', async () => {
+        const initGit = InitGit.initGitRepo;
+        const initConfig = Cli.initMcdevConfig;
+        const properties = config.properties;
+        try {
+            config.properties = null;
+            InitGit.initGitRepo = async () => ({ status: 'update', repoName: 'fresh-project' });
+            // Stop before credentials, retrieval or Git writes; tooling setup runs unchanged.
+            Cli.initMcdevConfig = async () => false;
+            await Init.initProject(null);
+            const filesRoot = Util.getBoilerplatePath('files');
+            const directories = File.readDirectoriesSync(filesRoot, 10, false);
+            assert.ok(Array.isArray(directories));
+            assert.ok(directories.includes('.'));
+            assert.ok(directories.includes('.vscode'));
+            for (const directory of directories) {
+                for (const name of await File.readdir(path.join(filesRoot, directory))) {
+                    const source = path.join(filesRoot, directory, name);
+                    if ((await File.lstat(source)).isFile()) {
+                        assert.equal(
+                            await File.readFile(path.join(directory, name), 'utf8'),
+                            await File.readFile(source, 'utf8'),
+                            `bundled template ${path.join(directory, name)}`
+                        );
+                    }
+                }
+            }
+            assert.equal(
+                await File.readFile('.gitignore', 'utf8'),
+                await File.readFile(Util.getBoilerplatePath('gitignore-template'), 'utf8')
+            );
+            assert.equal(await File.pathExists('deploy'), true);
+            assert.equal(await File.pathExists('src/cloudPages'), true);
+            assert.equal((await File.readJSON('package.json')).name, 'fresh-project');
+            assert.deepEqual(commands, [['npm', 'init', '--yes'], installCommand()]);
+        } finally {
+            InitGit.initGitRepo = initGit;
+            Cli.initMcdevConfig = initConfig;
+            config.properties = properties;
+        }
+    });
+
+    it('reports runtime, development and latest manifest defaults before installing', async () => {
+        const manifest = await File.readJSON(Util.getBoilerplatePath('npm-dependencies.json'));
+        assert.ok(manifest.includes('prettier'));
+        assert.ok(manifest.includes('eslint'));
+        assert.ok(manifest.includes('sfmc-boilerplate'));
+        assert.equal(await InitNpm.installDependencies(), true);
+        const pkg = await File.readJSON('package.json');
+        assert.equal(pkg.devDependencies.prettier, Util.packageJsonMcdev.dependencies.prettier);
+        assert.equal(pkg.devDependencies.eslint, Util.packageJsonMcdev.devDependencies.eslint);
+        assert.equal(pkg.devDependencies['sfmc-boilerplate'], '^1.0.0');
+        assert.ok(logs.includes('Installing/Updating Dependencies:'));
+        assert.ok(commands[1].includes('sfmc-boilerplate@latest'));
+        assert.deepEqual(commands, [['npm', 'init', '--yes'], installCommand()]);
+    });
+
+    it('skips npm with all-current defaults even without installed artifacts', async () => {
+        const original = Util.packageJsonMcdev.devDependencies['sfmc-boilerplate'];
+        Util.packageJsonMcdev.devDependencies['sfmc-boilerplate'] = '1.0.0';
+        try {
+            await File.writeJSON('package.json', {
+                devDependencies: Object.fromEntries(
+                    manifest.map((name) => [name, defaultSpec(name)])
+                ),
+            });
+            assert.equal(await File.pathExists('node_modules'), false);
+            assert.equal(await File.pathExists('package-lock.json'), false);
+            assert.equal(await InitNpm.installDependencies(), true);
+            assert.deepEqual(commands, []);
+            assert.ok(
+                logs.some((message) =>
+                    message.startsWith('✔️  All default dependencies are already installed: ')
+                )
+            );
+        } finally {
+            if (original === undefined) {
+                delete Util.packageJsonMcdev.devDependencies['sfmc-boilerplate'];
+            } else {
+                Util.packageJsonMcdev.devDependencies['sfmc-boilerplate'] = original;
+            }
+        }
+    });
+
+    it('stops before installation when retirement uninstall fails', async () => {
+        await File.writeJSON('package.json', {
+            devDependencies: { 'prettier-plugin-sql': '0.1.0' },
+        });
+        Util.execSync = (command, args) => {
+            commands.push([command, ...args]);
+            return null;
+        };
+        assert.equal(await InitNpm.installDependencies(undefined, '9.0.3'), false);
+        assert.deepEqual(commands, [['npm', 'uninstall', 'prettier-plugin-sql']]);
+        assert.equal(
+            (await File.readJSON('package.json')).devDependencies['prettier-plugin-sql'],
+            '0.1.0'
+        );
     });
 
     it('defaults overrides to Yes and writes each accepted file before the next prompt', async () => {
@@ -197,7 +351,7 @@ describe('INIT TOOLING', function () {
         assert.equal((await File.readJSON('package.json')).scripts.lint, 'eslint .');
         assert.ok(logs.includes('✔️  Configuration files done.'));
         assert.ok(!logs.includes('Configuration files are up to date.'));
-        assert.deepEqual(commands, [['npm', 'install']]);
+        assert.deepEqual(commands, [installCommand()]);
     });
 
     for (const version of ['7.0.2', '9.0.3', 'invalid', '10.0.0']) {
@@ -254,10 +408,7 @@ describe('INIT TOOLING', function () {
             assert.notEqual(await File.readFile(fileName, 'utf8'), 'current custom file');
             assert.equal(await File.readFile(fileName + '.BAK', 'utf8'), 'current custom file');
             assert.ok(logs.includes('✔️  Configuration files done.'));
-            assert.deepEqual(commands, [
-                ['npm', 'init', '--yes'],
-                ['npm', 'install'],
-            ]);
+            assert.deepEqual(commands, [['npm', 'init', '--yes'], installCommand()]);
         });
     }
 
@@ -368,14 +519,21 @@ describe('INIT TOOLING', function () {
         for (const [spec, expected] of unicornCases) {
             // Exercise each declaration independently.
 
-            it(`preserves ${section} spec ${spec} unless demonstrably older`, async () => {
+            it(`selects ${section} spec ${spec} using historical dev-only selection`, async () => {
                 await File.writeJSON('package.json', {
                     [section]: { 'eslint-plugin-unicorn': spec },
                 });
                 assert.equal(await InitNpm.installDependencies(), true);
+                const pkg = await File.readJSON('package.json');
                 assert.equal(
-                    (await File.readJSON('package.json'))[section]['eslint-plugin-unicorn'],
-                    expected
+                    pkg.devDependencies['eslint-plugin-unicorn'],
+                    section === 'dependencies' ? unicornVersion : expected
+                );
+                assert.equal(pkg.dependencies?.['eslint-plugin-unicorn'], undefined);
+                const selected = section === 'dependencies' || expected !== spec;
+                assert.equal(
+                    commands[0].includes(`eslint-plugin-unicorn@${unicornVersion}`),
+                    selected
                 );
                 assert.equal(await InitNpm.installDependencies(), true);
                 assert.deepEqual(prompts, []);
@@ -392,7 +550,10 @@ describe('INIT TOOLING', function () {
                 test: 'keep',
                 lint: 'custom',
             },
-            dependencies: { 'eslint-plugin-unicorn': `^${major + 1}.0.0` },
+            dependencies: {
+                'eslint-plugin-unicorn': `^${major + 1}.0.0`,
+                unrelated: 'file:../keep',
+            },
             devDependencies: { 'eslint-plugin-unicorn': `~${major - 1}.0.0` },
         });
         assert.equal(await InitNpm.installDependencies(), true);
@@ -401,7 +562,8 @@ describe('INIT TOOLING', function () {
         assert.equal(pkg.scripts['build-cp'], undefined);
         assert.equal(pkg.scripts['build-email'], 'sfmc-build emails && custom');
         assert.equal(pkg.scripts.test, 'keep');
-        assert.equal(pkg.dependencies['eslint-plugin-unicorn'], `^${major + 1}.0.0`);
+        assert.equal(pkg.dependencies['eslint-plugin-unicorn'], undefined);
+        assert.equal(pkg.dependencies.unrelated, 'file:../keep');
         assert.equal(pkg.devDependencies['eslint-plugin-unicorn'], unicornVersion);
     });
 

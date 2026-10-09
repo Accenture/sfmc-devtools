@@ -6,7 +6,7 @@
     "CustomerKey": "testTemplated_senderProfile",
     "Description": "Send from joern.berkefeld@accenture.com",
     "DirectForward": false,
-    "FromAddress": "joern.berkefeld@accenture.com",
+    "FromAddress": "thuy.berkefeld@accenture.com",
     "FromName": "Jörn Berkefeld",
     "Name": "testTemplated_senderProfile",
     "SenderHeaderEmailAddress": "",

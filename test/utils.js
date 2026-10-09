@@ -26,6 +26,9 @@ import {
     addRestErrorOverride,
     resetRestErrorOverrides,
 } from './resourceFactory.js';
+// Load formatter dependencies on the real filesystem before any synchronous mockSetup call.
+await File._loadPrettierModules();
+
 const authResources = File.readJsonSync(path.join(__dirname, './resources/auth.json'));
 
 const loadingFile = 'loading expected file:///' + __dirname.split(path.sep).join('/');
@@ -253,6 +256,9 @@ export function mockSetup(isDeploy) {
         'boilerplate/gitignore-template': fsmock.load(
             path.resolve(__dirname, '../boilerplate/gitignore-template')
         ),
+        'boilerplate/npmrc-template': fsmock.load(
+            path.resolve(__dirname, '../boilerplate/npmrc-template')
+        ),
         'boilerplate/files': fsmock.load(path.resolve(__dirname, '../boilerplate/files')),
         'boilerplate/forcedUpdates.json': fsmock.load(
             path.resolve(__dirname, '../boilerplate/forcedUpdates.json')
@@ -295,9 +301,9 @@ export function mockReset() {
     }
     // avoid spillover from other tests
     ReplaceContentBlockReference.resetCacheMap();
-    // reset sfmc login
-    auth.clearSessions();
     fsmock.restore();
+    // reset sfmc login after restoring the real filesystem
+    auth.clearSessions();
     apimock.restore();
 }
 

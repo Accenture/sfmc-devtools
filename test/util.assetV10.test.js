@@ -1,4 +1,4 @@
-import cliProgress from 'cli-progress';
+import { ProgressBar } from '../lib/util/progress.js';
 import fs from 'fs-extra';
 import os from 'node:os';
 import path from 'node:path';
@@ -319,7 +319,7 @@ describe('v10 asset migration', function () {
         mutableFs.move = async () => {
             throw new Error('simulated move failure');
         };
-        const originalStop = cliProgress.SingleBar.prototype.stop;
+        const originalStop = ProgressBar.prototype.stop;
         let stopCalls = 0;
         /**
          * Counts progress-bar stops while still clearing the bar like the real method.
@@ -327,7 +327,7 @@ describe('v10 asset migration', function () {
          * @param {...unknown} args - arguments forwarded to the real stop method
          * @returns {void} -
          */
-        cliProgress.SingleBar.prototype.stop = function (...args) {
+        ProgressBar.prototype.stop = function (...args) {
             stopCalls++;
             return originalStop.apply(this, args);
         };
@@ -339,7 +339,7 @@ describe('v10 asset migration', function () {
             error = ex;
         } finally {
             mutableFs.move = originalMove;
-            cliProgress.SingleBar.prototype.stop = originalStop;
+            ProgressBar.prototype.stop = originalStop;
         }
 
         assert.match(error?.message ?? '', /simulated move failure/);
@@ -386,9 +386,10 @@ describe('v10 asset migration', function () {
         const rawIdenticalGit = {
             revparse: async () => 'same-blob',
         };
-        const identicalGit = /** @type {import('simple-git').SimpleGit} */ (
-            /** @type {unknown} */ (rawIdenticalGit)
-        );
+        const identicalGit =
+            /** @type {Pick<import('../lib/util/git.js').GitAdapter, 'revparse'>} */ (
+                /** @type {unknown} */ (rawIdenticalGit)
+            );
         assert.deepEqual(
             await filterAssetRegroupingChanges(gitDiff, 'base..target', identicalGit),
             []
@@ -397,7 +398,7 @@ describe('v10 asset migration', function () {
         const rawEditedGit = {
             revparse: async ([spec]) => (spec.startsWith('base:') ? 'old-blob' : 'new-blob'),
         };
-        const editedGit = /** @type {import('simple-git').SimpleGit} */ (
+        const editedGit = /** @type {Pick<import('../lib/util/git.js').GitAdapter, 'revparse'>} */ (
             /** @type {unknown} */ (rawEditedGit)
         );
         assert.deepEqual(await filterAssetRegroupingChanges(gitDiff, 'base..target', editedGit), [
@@ -418,9 +419,10 @@ describe('v10 asset migration', function () {
         const rawIdenticalGit = {
             revparse: async () => 'same-blob',
         };
-        const identicalGit = /** @type {import('simple-git').SimpleGit} */ (
-            /** @type {unknown} */ (rawIdenticalGit)
-        );
+        const identicalGit =
+            /** @type {Pick<import('../lib/util/git.js').GitAdapter, 'revparse'>} */ (
+                /** @type {unknown} */ (rawIdenticalGit)
+            );
         assert.deepEqual(
             await filterAssetRegroupingChanges([movedFile], 'base..target', identicalGit),
             []
@@ -429,7 +431,7 @@ describe('v10 asset migration', function () {
         const rawEditedGit = {
             revparse: async ([spec]) => (spec.startsWith('base:') ? 'old-blob' : 'new-blob'),
         };
-        const editedGit = /** @type {import('simple-git').SimpleGit} */ (
+        const editedGit = /** @type {Pick<import('../lib/util/git.js').GitAdapter, 'revparse'>} */ (
             /** @type {unknown} */ (rawEditedGit)
         );
         assert.deepEqual(

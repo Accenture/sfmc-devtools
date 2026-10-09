@@ -83,7 +83,12 @@
             "prefix": "testExisting_",
             "prefixUpper": "TESTEXISTING_",
             "description": "bla bla",
-            "countryCodeIn": "'test'"
+            "countryCodeIn": "'test'",
+            "regex": {
+                "search": "(\"FromAddress\":\\s*\")joern",
+                "replace": "joern",
+                "template": "$1{{{regex}}}"
+            }
         },
         "testTargetMarket": {
             "mid": "1111111",
@@ -94,7 +99,12 @@
             "prefix": "testTemplated_",
             "prefixUpper": "TESTTEMPLATED_",
             "description": "foobar",
-            "countryCodeIn": "'testTarget'"
+            "countryCodeIn": "'testTarget'",
+            "regex": {
+                "search": "(\"FromAddress\":\\s*\")thuy",
+                "replace": "thuy",
+                "template": "$1{{{regex}}}"
+            }
         },
         "testBlacklistMarket": {
             "mid": "1111111",

@@ -4,6 +4,9 @@
 
     // List of extensions which should be recommended for users of this workspace.
     "recommendations": [
+        // extension pack (includes the below list)
+        "joernberkefeld.sfmc-extension-pack-expanded",
+
         // collaboration
         "Accenture-oss.sfmc-devtools-vscode",
         "aaron-bond.better-comments",
@@ -12,27 +15,17 @@
         // SFMC language support
         "joernberkefeld.sfmc-language",
 
+        // SFMC data loader
+        "joernberkefeld.sfmc-data",
+
         // Linters
         "dbaeumer.vscode-eslint",
 
         // Formatting & colors
-        "editorconfig.editorconfig",
-        "esbenp.prettier-vscode",
-
-        // coding helper
-        "MarketingThibs.ampscriptsnippets",
-
-        // file icons for ampscript
-        "vscode-icons-team.vscode-icons",
-
-        // Markdown / Readme.md
-        "joernberkefeld.markdown-preview-bitbucket-innersource"
+        "esbenp.prettier-vscode"
     ],
 
     // These extensions conflict with joernberkefeld.sfmc-language and should not be used alongside it.
     // They cause unpredictable formatting, syntax highlighting, and IntelliSense in AMPscript/HTML files.
-    "unwantedRecommendations": [
-        "xnerd.ampscript-language",
-        "FiB.beautyAmp"
-    ]
+    "unwantedRecommendations": ["xnerd.ampscript-language", "FiB.beautyAmp"]
 }
