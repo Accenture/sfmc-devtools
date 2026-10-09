@@ -180,6 +180,7 @@ export default [
         rules: {
             'mocha/no-mocha-arrows': 'off',
             'mocha/no-pending-tests': 'off',
+            'mocha/consistent-spacing-between-blocks': 'off',
         },
     },
 ];

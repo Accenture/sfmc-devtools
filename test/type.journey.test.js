@@ -118,7 +118,7 @@ describe('type: journey', function () {
             const result = cache.getCache();
             assert.equal(
                 result.journey ? Object.keys(result.journey).length : 0,
-                1,
+                2,
                 'unexpected number of journeys'
             );
             assert.deepEqual(
@@ -128,7 +128,7 @@ describe('type: journey', function () {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                26,
+                27,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

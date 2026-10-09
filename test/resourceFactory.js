@@ -476,6 +476,95 @@ async function handleAssetReadEngine(config, urlObj) {
 }
 
 /**
+ * Validate the complete narrow reverse-reference predicate before evaluating fixture candidates.
+ *
+ * @param {object} query dependency query, optionally wrapped in an ID cursor
+ * @returns {boolean} Whether all three content predicates and a valid optional cursor are present
+ */
+function isReferenceQuery(query) {
+    let contentQuery = query;
+    if (query?.logicalOperator === 'AND') {
+        const cursor = query.rightOperand;
+        if (
+            cursor?.property !== 'id' ||
+            cursor.simpleOperator !== 'greaterThan' ||
+            !Number.isSafeInteger(cursor.value) ||
+            cursor.value < 0
+        ) {
+            return false;
+        }
+        contentQuery = query.leftOperand;
+    }
+    const values = [];
+    /**
+     * Check every OR branch rather than trusting its rightmost operand.
+     *
+     * @param {object} node predicate node
+     * @returns {boolean} Whether the node is a supported content predicate
+     */
+    function validate(node) {
+        if (node?.logicalOperator === 'OR') {
+            const left = validate(node.leftOperand);
+            const right = validate(node.rightOperand);
+            return left && right;
+        }
+        if (
+            node?.logicalOperator ||
+            node?.leftOperand ||
+            node?.rightOperand ||
+            node?.property !== 'content' ||
+            node.simpleOperator !== 'mustContain' ||
+            !['ContentBlockByKey', 'ContentBlockById', 'ContentBlockByName'].includes(node.value)
+        ) {
+            return false;
+        }
+        values.push(node.value);
+        return true;
+    }
+    return validate(contentQuery) && values.length === 3 && new Set(values).size === 3;
+}
+
+/**
+ * Evaluate validated reference filters against all nested content and the candidate's ID.
+ *
+ * @param {object} query validated predicate
+ * @param {object} candidate full asset fixture
+ * @returns {boolean} Whether the candidate satisfies the entire predicate
+ */
+function matchesReferenceQuery(query, candidate) {
+    if (query.logicalOperator === 'AND') {
+        return (
+            matchesReferenceQuery(query.leftOperand, candidate) &&
+            candidate.id > query.rightOperand.value
+        );
+    }
+    if (query.logicalOperator === 'OR') {
+        return (
+            matchesReferenceQuery(query.leftOperand, candidate) ||
+            matchesReferenceQuery(query.rightOperand, candidate)
+        );
+    }
+    /**
+     * Search content fields in views, slots and blocks without treating metadata as content.
+     *
+     * @param {object} node nested asset object
+     * @returns {boolean} Whether any content field contains the requested token
+     */
+    function contains(node) {
+        return (
+            node !== null &&
+            typeof node === 'object' &&
+            Object.entries(node).some(([key, value]) =>
+                key === 'content' && typeof value === 'string'
+                    ? value.includes(query.value)
+                    : contains(value)
+            )
+        );
+    }
+    return contains(candidate);
+}
+
+/**
  * per-test REST error injections. Each entry forces the mock to answer any REST request whose
  * pathname contains `urlIncludes` with an error status/body instead of the normal fixture, so
  * tests can simulate the SFMC API returning e.g. HTTP 500 for a specific endpoint. Reset between
@@ -634,11 +723,45 @@ export const handleRESTRequest = async (config) => {
             : null;
 
         if (!testPathFilter && config.method === 'post' && config.data) {
-            const simpleOperators = { equal: '=', in: 'IN' };
+            const simpleOperators = { equal: '=', in: 'IN', mustContain: 'MUSTCONTAIN' };
             const data = JSON.parse(config.data);
-            const myObj = data.query?.rightOperand || data.query;
+            const query = data.query;
+            if (
+                urlObj.pathname === '/asset/v1/content/assets/query' &&
+                query &&
+                (query.logicalOperator === 'OR' ||
+                    /"value":"ContentBlockBy(?:Key|Id|Name)"/.test(JSON.stringify(query)))
+            ) {
+                if (!isReferenceQuery(query)) {
+                    return [
+                        400,
+                        JSON.stringify({ message: 'Invalid reverse-reference predicate' }),
+                    ];
+                }
+                const response = JSON.parse(
+                    await fs.readFile(
+                        testPath + '-contentMUSTCONTAINtestExisting_block_refresh.json',
+                        {
+                            encoding: 'utf8',
+                        }
+                    )
+                );
+                response.items = response.items.filter((item) =>
+                    matchesReferenceQuery(query, item)
+                );
+                response.count = response.items.length;
+                return [200, JSON.stringify(response)];
+            }
+            const myObj = query?.rightOperand || query;
             if (myObj) {
                 const op = simpleOperators[myObj.simpleOperator];
+                // if it's a content block refresh. update expected file name to remove special characters from it
+                const contentBlockMatch =
+                    typeof myObj.value === 'string' &&
+                    myObj.value.match(/^ContentBlockByName\("(.+?)"\)$/);
+                if (contentBlockMatch) {
+                    myObj.value = contentBlockMatch[1];
+                }
                 filterBody = `${myObj.property}${op}${op === 'IN' ? myObj.value.join(',') : myObj.value}`;
             } else if (config.url === '/email/v1/category') {
                 const data = JSON.parse(config.data);

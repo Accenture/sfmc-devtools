@@ -195,7 +195,9 @@ function captureSpinner(options = {}) {
     }
 }
 
-/** @returns {object} all immutable dependency-backed golden scenarios */
+/**
+ * @returns {object} all immutable dependency-backed golden scenarios
+ */
 function captureScenarios() {
     return {
         assetDownload: captureBar(

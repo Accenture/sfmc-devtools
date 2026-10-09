@@ -2,6 +2,7 @@
     // Change this to match your project
     "include": ["lib/**/*.js", "types/**/*.js", "test/**/*.js"],
     "compilerOptions": {
+        "types": ["node", "mocha"],
         "module": "nodenext",
         "moduleResolution": "nodenext",
         "checkJs": true,

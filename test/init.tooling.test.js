@@ -204,11 +204,7 @@ describe('INIT TOOLING', function () {
         assert.ok(logs.includes('- ✔️  .gitignore found. No update needed'));
         assert.ok(logs.includes('- ✔️  eslint.config.js found. No update needed'));
         assert.deepEqual(prompts, []);
-        assert.deepEqual(commands, [
-            ['npm', 'init', '--yes'],
-            installCommand(),
-            installCommand(['sfmc-boilerplate']),
-        ]);
+        assert.deepEqual(commands, [['npm', 'init', '--yes'], installCommand()]);
     });
 
     it('copies every bundled root, dotfile and nested template through fresh init', async () => {
@@ -257,42 +253,30 @@ describe('INIT TOOLING', function () {
         const manifest = await File.readJSON(Util.getBoilerplatePath('npm-dependencies.json'));
         assert.ok(manifest.includes('prettier'));
         assert.ok(manifest.includes('eslint'));
-        assert.ok(manifest.includes('sfmc-boilerplate'));
+        assert.equal(manifest.includes('sfmc-boilerplate'), false);
         assert.equal(await InitNpm.installDependencies(), true);
         const pkg = await File.readJSON('package.json');
         assert.equal(pkg.devDependencies.prettier, Util.packageJsonMcdev.dependencies.prettier);
         assert.equal(pkg.devDependencies.eslint, Util.packageJsonMcdev.devDependencies.eslint);
-        assert.equal(pkg.devDependencies['sfmc-boilerplate'], '^1.0.0');
+        assert.equal(pkg.devDependencies['sfmc-boilerplate'], undefined);
         assert.ok(logs.includes('Installing/Updating Dependencies:'));
-        assert.ok(commands[1].includes('sfmc-boilerplate@latest'));
+        assert.equal(commands[1].includes('sfmc-boilerplate@latest'), false);
         assert.deepEqual(commands, [['npm', 'init', '--yes'], installCommand()]);
     });
 
     it('skips npm with all-current defaults even without installed artifacts', async () => {
-        const original = Util.packageJsonMcdev.devDependencies['sfmc-boilerplate'];
-        Util.packageJsonMcdev.devDependencies['sfmc-boilerplate'] = '1.0.0';
-        try {
-            await File.writeJSON('package.json', {
-                devDependencies: Object.fromEntries(
-                    manifest.map((name) => [name, defaultSpec(name)])
-                ),
-            });
-            assert.equal(await File.pathExists('node_modules'), false);
-            assert.equal(await File.pathExists('package-lock.json'), false);
-            assert.equal(await InitNpm.installDependencies(), true);
-            assert.deepEqual(commands, []);
-            assert.ok(
-                logs.some((message) =>
-                    message.startsWith('✔️  All default dependencies are already installed: ')
-                )
-            );
-        } finally {
-            if (original === undefined) {
-                delete Util.packageJsonMcdev.devDependencies['sfmc-boilerplate'];
-            } else {
-                Util.packageJsonMcdev.devDependencies['sfmc-boilerplate'] = original;
-            }
-        }
+        await File.writeJSON('package.json', {
+            devDependencies: Object.fromEntries(manifest.map((name) => [name, defaultSpec(name)])),
+        });
+        assert.equal(await File.pathExists('node_modules'), false);
+        assert.equal(await File.pathExists('package-lock.json'), false);
+        assert.equal(await InitNpm.installDependencies(), true);
+        assert.deepEqual(commands, []);
+        assert.ok(
+            logs.some((message) =>
+                message.startsWith('✔️  All default dependencies are already installed: ')
+            )
+        );
     });
 
     it('stops before installation when retirement uninstall fails', async () => {

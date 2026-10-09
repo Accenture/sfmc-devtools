@@ -159,14 +159,14 @@ describe('type: asset', () => {
                 retrieve['testInstance/testBU'].asset
                     ? Object.keys(retrieve['testInstance/testBU'].asset).length
                     : 0,
-                16,
+                18,
                 'Unexpected number of assets in retrieve response'
             );
             // get results from cache
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                19,
+                21,
                 'Unexpected number of assets in cache'
             );
 
@@ -290,7 +290,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                31,
+                33,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -313,7 +313,7 @@ describe('type: asset', () => {
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                15,
+                16,
                 'Unexpected number of assets in cache'
             );
 
@@ -376,7 +376,7 @@ describe('type: asset', () => {
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                15,
+                16,
                 'Unexpected number of assets in cache'
             );
 
@@ -852,6 +852,45 @@ describe('type: asset', () => {
             );
             return;
         });
+
+        it('Should update an asset-block and refresh triggeredSends related to emails containing the block', async () => {
+            handler.setOptions({ refresh: true });
+            // WHEN
+            const deployResult = await handler.deploy(
+                'testInstance/testBU',
+                ['asset'],
+                ['testExisting_block_refresh']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+            // check how many items were deployed
+            assert.equal(
+                deployResult['testInstance/testBU']?.asset
+                    ? Object.keys(deployResult['testInstance/testBU']?.asset).length
+                    : 0,
+                1,
+                'Unexpected number of assets deployed'
+            );
+            const refreshUpdates = testUtils.getSoapCallouts('Update', 'TriggeredSendDefinition');
+            assert.equal(refreshUpdates.length, 3, 'Exactly one dependent send must be refreshed');
+            assert.deepEqual(
+                refreshUpdates.map((xml) => xml.match(/<CustomerKey>([^<]+)<\/CustomerKey>/)?.[1]),
+                Array.from({ length: 3 }, () => 'testExistingRefresh_triggeredSend'),
+                'Unrelated triggered sends must not be updated'
+            );
+            assert.include(
+                refreshUpdates[0],
+                '<TriggeredSendStatus>Inactive</TriggeredSendStatus>'
+            );
+            assert.include(refreshUpdates[1], '<RefreshContent>true</RefreshContent>');
+            assert.include(refreshUpdates[2], '<TriggeredSendStatus>Active</TriggeredSendStatus>');
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                22,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
     });
 
     describe('Templating ================', () => {
@@ -859,7 +898,7 @@ describe('type: asset', () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['asset']);
 
-            const expectedApiCallsRetrieve = 31;
+            const expectedApiCallsRetrieve = 33;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 expectedApiCallsRetrieve,
@@ -1004,7 +1043,7 @@ describe('type: asset', () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['asset']);
 
-            const expectedApiCallsRetrieve = 31;
+            const expectedApiCallsRetrieve = 33;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 expectedApiCallsRetrieve,
@@ -1112,7 +1151,7 @@ describe('type: asset', () => {
         it('Should stringify shareAsset numeric paths during buildTemplate', async () => {
             await handler.retrieve('testInstance/testBU', ['asset']);
 
-            const expectedApiCallsRetrieve = 31;
+            const expectedApiCallsRetrieve = 33;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 expectedApiCallsRetrieve,
@@ -1346,6 +1385,7 @@ describe('type: asset', () => {
                     'testExisting_asset_htmlblock',
                     'testExisting_htmlblock1',
                     'testExisting_htmlblock 3 spaces',
+                    'testExisting_email_block_refresh',
                     'testExisting_asset_message',
                 ],
                 'should have found the right assets that need updating'
@@ -1354,7 +1394,7 @@ describe('type: asset', () => {
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                16,
+                18,
                 'Unexpected number of assets in cache'
             );
             // check if conversions happened
@@ -1409,7 +1449,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                33,
+                35,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -1434,6 +1474,7 @@ describe('type: asset', () => {
                 [
                     'testExisting_htmlblock1',
                     'testExisting_htmlblock 3 spaces',
+                    'testExisting_email_block_refresh',
                     'testExisting_asset_message',
                 ],
                 'should have found the right assets that need updating'
@@ -1442,7 +1483,7 @@ describe('type: asset', () => {
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                16,
+                18,
                 'Unexpected number of assets in cache'
             );
             // check if conversions happened
@@ -1497,7 +1538,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                33,
+                35,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -1530,7 +1571,7 @@ describe('type: asset', () => {
             const result = cache.getCache();
             assert.equal(
                 result.asset ? Object.keys(result.asset).length : 0,
-                16,
+                18,
                 'Unexpected number of assets in cache'
             );
             // check if conversions happened
@@ -1585,7 +1626,7 @@ describe('type: asset', () => {
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                33,
+                35,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

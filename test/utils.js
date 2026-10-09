@@ -166,7 +166,7 @@ export function getActualTemplateFile(customerKey, type, ext) {
  * @param {string} mid of Business Unit
  * @param {string} type of metadata
  * @param {string} action of SOAP request
- * @returns {Promise.<string>} file in JSON form
+ * @returns {Promise.<ReturnType<JSON['parse']>>} file in JSON form
  */
 export function getExpectedJson(mid, type, action) {
     const path = `/resources/${mid}/${type}/${action}-expected.json`;
