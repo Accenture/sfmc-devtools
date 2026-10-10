@@ -301,10 +301,10 @@ declare class Asset extends MetadataType {
      * to allow saving that separately and formatted
      *
      * @param {AssetItem} metadata a single asset definition
-     * @returns {{channel: 'push' | 'sms', field: 'display:title' | 'display:message', companion: 'display:title:display' | 'display:message:display', data: object}[]} editable mobile fields
+     * @returns {{channel: 'push' | 'sms' | 'inApp', field: 'display:title' | 'display:message', companion: 'display:title:display' | 'display:message:display', data: object}[]} editable mobile fields
      */
     static _getMobileCodeFields(metadata: AssetItem): {
-        channel: "push" | "sms";
+        channel: "push" | "sms" | "inApp";
         field: "display:title" | "display:message";
         companion: "display:title:display" | "display:message:display";
         data: object;
@@ -317,6 +317,13 @@ declare class Asset extends MetadataType {
      */
     static _escapeMobilePreview(value: string): string;
     /**
+     * Escape a URL for the generated unquoted CSS url slot, including HTML style boundaries.
+     *
+     * @param {string} value source URL
+     * @returns {string} escaped CSS URL
+     */
+    static _escapeMobilePreviewUrl(value: string): string;
+    /**
      * Tokenize only known, source-equal mobile preview text slots before extracting source.
      *
      * @param {AssetItem} metadata asset with inline source
@@ -324,14 +331,23 @@ declare class Asset extends MetadataType {
      */
     static _tokenizeMobilePreview(metadata: AssetItem): void;
     /**
+     * Replace an exact source value with whitespace allowed only outside that value.
+     *
+     * @param {string} slot complete preview slot
+     * @param {string} source escaped source or field token
+     * @param {string} replacement updated slot value
+     * @returns {string} slot with external padding preserved
+     */
+    static _replaceMobilePreviewPadding(slot: string, source: string, replacement: string): string;
+    /**
      * Replace text only in recognized mobile preview slots, preserving wrapper bytes.
      *
      * @param {string} content preview HTML
-     * @param {'push' | 'sms'} channel push or SMS
-     * @param {(text: string, field: 'display:title' | 'display:subtitle' | 'display:message') => string} replaceSlot text replacement
+     * @param {'push' | 'sms' | 'inApp'} channel mobile view
+     * @param {(text: string, field: 'display:title' | 'display:subtitle' | 'display:message' | 'button1:title' | 'button2:title' | 'display:media:url', context?: 'url' | 'padded') => string} replaceSlot slot replacement
      * @returns {string} updated HTML
      */
-    static _replaceMobilePreviewSlots(content: string, channel: "push" | "sms", replaceSlot: (text: string, field: "display:title" | "display:subtitle" | "display:message") => string): string;
+    static _replaceMobilePreviewSlots(content: string, channel: "push" | "sms" | "inApp", replaceSlot: (text: string, field: "display:title" | "display:subtitle" | "display:message" | "button1:title" | "button2:title" | "display:media:url", context?: "url" | "padded") => string): string;
     /**
      * Restore mapped preview slots after final source merging, never during Mustache builds.
      *

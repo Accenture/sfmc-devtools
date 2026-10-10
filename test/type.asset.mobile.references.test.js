@@ -114,9 +114,22 @@ describe('type: asset-mobile reference replacement', () => {
         });
         await save(item);
         await Asset.replaceCbReference(item, root, new Set());
+        Object.assign(item.views.push.meta.options.customBlockData, {
+            'display:message': 'Stale canonical',
+            'display:message:display': 'Stale companion',
+        });
         const original = structuredClone(item);
-        await Asset._mergeCode(item, 'deploy/missing-source', 'mobile');
+        const files = await Asset._mergeCode(
+            item,
+            'deploy/missing-source',
+            'mobile',
+            item.customerKey,
+            true
+        );
+        assert.isEmpty(files);
         assert.deepEqual(item, original);
+        await Asset._mergeCode(item, 'deploy/missing-source', 'mobile');
+        assert.isEmpty(item.views.push.meta.options.customBlockData);
     });
 
     it('converts sidecars without consuming aliases before final merge', async () => {
@@ -139,6 +152,8 @@ describe('type: asset-mobile reference replacement', () => {
         ['push', 'display:title'],
         ['push', 'display:message'],
         ['sms', 'display:message'],
+        ['inApp', 'display:title'],
+        ['inApp', 'display:message'],
     ]) {
         it(`normalizes divergent ${channel} ${field} companions and replaces canonical references`, async () => {
             const item = mobile(channel, {
