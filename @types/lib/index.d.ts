@@ -130,10 +130,6 @@ export default class Mcdev {
      */
     static upgrade(): Promise<boolean>;
     /**
-     * helper to show an off-the-logs message to users
-     */
-    static "__#private@#welcomeMessage"(): void;
-    /**
      * Retrieve all metadata from the specified business unit into the local file system.
      *
      * @param {string} businessUnit references credentials from properties.json

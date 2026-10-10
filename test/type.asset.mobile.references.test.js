@@ -57,9 +57,7 @@ function messagePath() {
         'asset',
         'mobile',
         key,
-        File.filterIllegalFilenames(
-            'views.push.meta.options.customBlockData.display_message.asset-mobile-meta.amp'
-        ),
+        File.filterIllegalFilenames('display_message.asset-mobile-meta.amp'),
     ]);
 }
 
@@ -165,7 +163,7 @@ describe('type: asset-mobile reference replacement', () => {
                 await File.pathExists(
                     File.normalizePath([
                         ...dir,
-                        `views.${channel}.meta.options.customBlockData.${field.replaceAll(':', '_')}.asset-mobile-meta.amp`,
+                        `${field.replaceAll(':', '_')}.asset-mobile-meta.amp`,
                     ])
                 )
             );
@@ -198,6 +196,21 @@ describe('type: asset-mobile reference replacement', () => {
             assert.equal(data[`${field}:display`], converted);
         });
     }
+
+    it('uses short canonical sidecars instead of discovering stale companion references', async () => {
+        const item = mobile('push', { 'display:message': source });
+        await save(item);
+        item.views.push.meta.options.customBlockData['display:message:display'] =
+            '%%=ContentBlockByKey("stale-companion")=%%';
+        const original = structuredClone(item);
+        const keys = new Set();
+        await Asset.replaceCbReference(item, root, keys);
+        assert.deepEqual([...keys], ['synthetic-block']);
+        assert.deepEqual(item, original);
+        await Asset.replaceCbReference(item, root);
+        assert.equal(await File.readFile(messagePath(), 'utf8'), converted);
+        assert.deepEqual(item, original);
+    });
 
     it('persists alias-only metadata in its existing flat JSON location', async () => {
         const item = mobile('sms', { 'display:message:display': source });

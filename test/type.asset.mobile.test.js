@@ -60,9 +60,7 @@ function sidecar(field) {
         'asset',
         'mobile',
         'synthetic-mobile',
-        File.filterIllegalFilenames(
-            `views.push.meta.options.customBlockData.${field.replaceAll(':', '_')}.asset-mobile-meta.amp`
-        ),
+        File.filterIllegalFilenames(`${field.replaceAll(':', '_')}.asset-mobile-meta.amp`),
     ]);
 }
 
@@ -105,10 +103,7 @@ describe('type: asset-mobile source extraction', () => {
         assert.lengthOf(extracted.codeArr, 2);
         assert.deepEqual(
             extracted.codeArr.map((code) => code.fileName),
-            [
-                'views.push.meta.options.customBlockData.display_title',
-                'views.push.meta.options.customBlockData.display_message',
-            ]
+            ['display_title', 'display_message']
         );
         assert.isUndefined(item.views.push.meta.options.customBlockData['display:message:display']);
         assert.isTrue(await File.pathExists(sidecar('display:message')));
@@ -161,6 +156,83 @@ describe('type: asset-mobile source extraction', () => {
         }
     });
 
+    for (const [first, second] of [
+        ['push', 'sms'],
+        ['push', 'inApp'],
+        ['sms', 'inApp'],
+    ]) {
+        it(`rejects ${first}/${second} extraction before changing source or preview`, () => {
+            const item = mobile(first, {
+                'display:message': 'Message',
+                'display:message:display': 'Message',
+            });
+            item.views[first].content =
+                first === 'sms'
+                    ? '<div class="text-bubble"><span>Message</span></div>'
+                    : '<div class="message">Message</div>';
+            item.views[second] = mobile(second).views[second];
+            const original = structuredClone(item);
+            assert.throws(() => Asset._extractCode(item), TypeError, 'multiple supported channels');
+            assert.deepEqual(item, original);
+        });
+
+        for (const fileListOnly of [false, true]) {
+            it(`rejects ${first}/${second} merge with discovery=${fileListOnly} before reads or mutation`, async () => {
+                const item = mobile(first, {});
+                item.views[second] = mobile(second, {}).views[second];
+                const original = structuredClone(item);
+                const pathExists = File.pathExists;
+                const readFilteredFilename = File.readFilteredFilename;
+                let reads = 0;
+                try {
+                    File.pathExists = async () => {
+                        reads++;
+                        return true;
+                    };
+                    File.readFilteredFilename = async () => {
+                        reads++;
+                        return 'Unexpected source';
+                    };
+                    let rejected = false;
+                    try {
+                        await Asset._mergeCode(
+                            item,
+                            root,
+                            'mobile',
+                            item.customerKey,
+                            fileListOnly
+                        );
+                    } catch (ex) {
+                        rejected = true;
+                        assert.instanceOf(ex, TypeError);
+                        assert.include(ex.message, 'multiple supported channels');
+                    }
+                    assert.isTrue(rejected);
+                    assert.equal(reads, 0);
+                    assert.deepEqual(item, original);
+                } finally {
+                    File.pathExists = pathExists;
+                    File.readFilteredFilename = readFilteredFilename;
+                }
+            });
+        }
+    }
+
+    it('ignores supported preview-only views when selecting the source channel', async () => {
+        const item = mobile('sms', { 'display:message': source });
+        item.views.push = { content: '<div class="message">Preview only</div>' };
+        item.views.inApp = { content: '<p class="jmb-message">Preview only</p>' };
+        const original = structuredClone(item.views);
+        assert.deepEqual(
+            (await save(item)).codeArr.map((code) => code.fileName),
+            ['display_message']
+        );
+        await Asset._mergeCode(item, root, 'mobile');
+        assert.deepEqual(item.views.push, original.push);
+        assert.deepEqual(item.views.inApp, original.inApp);
+        assert.equal(item.views.sms.meta.options.customBlockData['display:message'], source);
+    });
+
     it('does not invent source or companions when no sidecar exists', async () => {
         const item = mobile();
         Asset._extractCode(item);
@@ -195,10 +267,7 @@ describe('type: asset-mobile source extraction', () => {
                     messageOpen +
                     '[[[display:message]]]' +
                     messageClose;
-                await File.writeFile(
-                    sidecar('display:message').replace('views.push.', `views.${channel}.`),
-                    text
-                );
+                await File.writeFile(sidecar('display:message'), text);
                 const original = structuredClone(item);
                 const files = await Asset._mergeCode(item, root, 'mobile', item.customerKey, true);
                 assert.lengthOf(files, 1);
@@ -257,10 +326,7 @@ describe('type: asset-mobile source extraction', () => {
         assert.lengthOf(files, 2);
         assert.deepEqual(
             files.map((file) => file.fileName),
-            [
-                'views.push.meta.options.customBlockData.display_title.asset-mobile-meta',
-                'views.push.meta.options.customBlockData.display_message.asset-mobile-meta',
-            ]
+            ['display_title.asset-mobile-meta', 'display_message.asset-mobile-meta']
         );
         assert.deepEqual(item, original);
         Asset.properties = {
@@ -292,7 +358,7 @@ describe('type: asset-mobile source extraction', () => {
             item.customerKey,
             'template'
         );
-        const file = 'views.push.meta.options.customBlockData.display_message.asset-mobile-meta';
+        const file = 'display_message.asset-mobile-meta';
         assert.equal(
             await File.readFilteredFilename(
                 ['template', 'asset', 'mobile', item.customerKey],
@@ -346,10 +412,7 @@ describe('type: asset-mobile source extraction', () => {
             const extracted = await save(item);
             assert.deepEqual(
                 extracted.codeArr.map((code) => code.fileName),
-                [
-                    'views.inApp.meta.options.customBlockData.display_title',
-                    'views.inApp.meta.options.customBlockData.display_message',
-                ]
+                ['display_title', 'display_message']
             );
             assert.equal(data['button2:title'], 'Second');
             assert.equal(data['display:media:url'], 'https://example.test/image.jpg');
@@ -363,14 +426,8 @@ describe('type: asset-mobile source extraction', () => {
             assert.deepEqual(item.views, original.views);
 
             await save(item);
-            await File.writeFile(
-                sidecar('display:title').replace('views.push.', 'views.inApp.'),
-                'Title <&'
-            );
-            await File.writeFile(
-                sidecar('display:message').replace('views.push.', 'views.inApp.'),
-                ''
-            );
+            await File.writeFile(sidecar('display:title'), 'Title <&');
+            await File.writeFile(sidecar('display:message'), '');
             data['button1:title'] = 'Changed first';
             data['button2:title'] = 'Edited "<&';
             data['display:media:url'] = 'https://example.test/a (b)"\'\\</style>\n';
@@ -548,14 +605,8 @@ describe('type: asset-mobile source extraction', () => {
         await save(item);
         assert.include(item.views.inApp.content, 'title="Stale">\n [[[button1:title]]]\t');
         assert.include(item.views.inApp.content, 'title="[[[button2:title]]]"> Stale ');
-        await File.writeFile(
-            sidecar('display:title').replace('views.push.', 'views.inApp.'),
-            '[[[display:message]]]'
-        );
-        await File.writeFile(
-            sidecar('display:message').replace('views.push.', 'views.inApp.'),
-            'Final'
-        );
+        await File.writeFile(sidecar('display:title'), '[[[display:message]]]');
+        await File.writeFile(sidecar('display:message'), 'Final');
         const data = item.views.inApp.meta.options.customBlockData;
         data['button1:title'] = 'One';
         data['button2:title'] = 'Two';
@@ -654,10 +705,7 @@ describe('type: asset-mobile source extraction', () => {
         item.views.sms.content = '<div class="text-bubble extra"><span data-x="1">SMS</span></div>';
         await save(item);
         const edited = `&<>"'\nGrüße ${source}`;
-        await File.writeFile(
-            sidecar('display:message').replace('views.push.', 'views.sms.'),
-            edited
-        );
+        await File.writeFile(sidecar('display:message'), edited);
         await deploy(item);
         assert.equal(item.views.sms.meta.options.customBlockData['display:message'], edited);
         assert.equal(
@@ -736,10 +784,7 @@ describe('type: asset-mobile source extraction', () => {
             '<div class="text-bubble"><span>[[[display:title]]]</span></div>';
         item.views.sms.content = unrelated + '<div class="text-bubble"><span>SMS</span></div>';
         await save(item);
-        await File.writeFile(
-            sidecar('display:message').replace('views.push.', 'views.sms.'),
-            'Edited & safe'
-        );
+        await File.writeFile(sidecar('display:message'), 'Edited & safe');
         await deploy(item);
         assert.equal(
             item.views.sms.content,
