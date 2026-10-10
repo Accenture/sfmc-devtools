@@ -582,6 +582,60 @@ describe('type: asset-mobile source extraction', () => {
         );
     });
 
+    for (const braces of ['{', '}', '{}']) {
+        it(`extracts and restores media with ${braces} inside CSS comments without changing other bytes`, async () => {
+            const item = mobile('inApp', { 'display:media:url': 'image.jpg' });
+            const opaque =
+                '/* .jmb-image {background:url(image.jpg);} */\n' +
+                '.other {background:url(image.jpg);}\n';
+            const before = `/* ${braces} background:url(image.jpg); */`;
+            const after = `/* ${braces} background-image:url(image.jpg); */`;
+            const image = `.jmb-image {${before}\n background-image: url(image.jpg); ${after}}\n`;
+            const preview = '<style>' + opaque + image + '.last {color:red;}</style>';
+            const tokenized = preview.replace(
+                'background-image: url(image.jpg)',
+                'background-image: url([[[display:media:url]]])'
+            );
+            item.views.inApp.content = preview;
+            await save(item);
+            assert.equal(item.views.inApp.content, tokenized);
+            await deploy(item);
+            assert.equal(item.views.inApp.content, preview);
+
+            item.views.inApp.content = tokenized;
+            item.views.inApp.meta.options.customBlockData['display:media:url'] = 'edited.jpg';
+            Asset._restoreMobilePreview(item);
+            assert.equal(
+                item.views.inApp.content,
+                preview.replace(
+                    'background-image: url(image.jpg)',
+                    'background-image: url(edited.jpg)'
+                )
+            );
+        });
+    }
+
+    it('handles long and unterminated CSS comments without backtracking or replacing opaque URLs', () => {
+        const comment = '/* {' + '*'.repeat(20_000) + ' background:url(image.jpg); } */';
+        const valid = `<style>.jmb-image {${comment} background:url(image.jpg);}</style>`;
+        const malformed = [
+            '<style>.jmb-image {/* {' + '*'.repeat(20_000) + ' background:url(image.jpg);}</style>',
+            '<style>.jmb-image {' + '/x'.repeat(20_000) + ' background:url(image.jpg);</style>',
+        ];
+        const start = performance.now();
+        assert.equal(
+            Asset._replaceMobilePreviewSlots(valid, 'inApp', () => 'replaced'),
+            `<style>.jmb-image {${comment} background:url(replaced);}</style>`
+        );
+        for (const preview of malformed) {
+            assert.equal(
+                Asset._replaceMobilePreviewSlots(preview, 'inApp', () => 'replaced'),
+                preview
+            );
+        }
+        assert.isBelow(performance.now() - start, 2000, 'CSS matching should remain bounded');
+    });
+
     it('maps inApp button text and attributes independently and leaves unknown slots untouched', async () => {
         const item = mobile('inApp', {
             'display:title': 'Same',
