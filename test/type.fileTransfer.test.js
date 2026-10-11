@@ -83,46 +83,6 @@ describe('type: fileTransfer', () => {
     });
 
     describe('Templating ================', () => {
-        it('Should create a fileTransfer template via retrieveAsTemplate and build it', async () => {
-            // buildTemplate
-            const result = await handler.retrieveAsTemplate(
-                'testInstance/testBU',
-                'fileTransfer',
-                ['testExisting_fileTransfer'],
-                'testSourceMarket'
-            );
-            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
-            assert.equal(
-                result.fileTransfer ? Object.keys(result.fileTransfer).length : 0,
-                1,
-                'only one fileTransfer expected'
-            );
-            assert.deepEqual(
-                await testUtils.getActualTemplateJson('testExisting_fileTransfer', 'fileTransfer'),
-                await testUtils.getExpectedJson('9999999', 'fileTransfer', 'template'),
-                'returned template JSON was not equal expected'
-            );
-            // buildDefinition
-            await handler.buildDefinition(
-                'testInstance/testBU',
-                'fileTransfer',
-                ['testExisting_fileTransfer'],
-                ['testTargetMarket']
-            );
-            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
-            assert.deepEqual(
-                await testUtils.getActualDeployJson('testTemplated_fileTransfer', 'fileTransfer'),
-                await testUtils.getExpectedJson('9999999', 'fileTransfer', 'build'),
-                'returned deployment JSON was not equal expected'
-            );
-            assert.equal(
-                testUtils.getAPIHistoryLength(),
-                4,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            );
-            return;
-        });
-
         it('Should create a fileTransfer template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['fileTransfer']);

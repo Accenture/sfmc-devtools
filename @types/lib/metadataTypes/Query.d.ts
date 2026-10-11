@@ -71,19 +71,6 @@ declare class Query extends MetadataType {
         type: string;
     }>;
     /**
-     * Retrieve a specific Query by Name
-     *
-     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
-     * @param {string} templateDir Directory where retrieved metadata directory will be saved
-     * @param {string} name name of the metadata file
-     * @param {TemplateMap} templateVariables variables to be replaced in the metadata
-     * @returns {Promise.<{metadata: Query, type: string}>} Promise of metadata
-     */
-    static retrieveAsTemplate(templateDir: string, name: string, templateVariables: TemplateMap): Promise<{
-        metadata: Query;
-        type: string;
-    }>;
-    /**
      * manages post retrieve steps
      *
      * @param {QueryItem} metadata a single query

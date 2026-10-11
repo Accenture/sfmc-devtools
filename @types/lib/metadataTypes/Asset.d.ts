@@ -67,21 +67,7 @@ declare class Asset extends MetadataType {
         type: string;
     }>;
     /**
-     * Retrieves asset metadata for templating
-     *
-     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
-     * @param {string} templateDir Directory where retrieved metadata directory will be saved
-     * @param {string} name name of the metadata file
-     * @param {TemplateMap} templateVariables variables to be replaced in the metadata
-     * @param {AssetSubType} [selectedSubType] optionally limit to a single subtype
-     * @returns {Promise.<{metadata: AssetItem, type: string}>} Promise
-     */
-    static retrieveAsTemplate(templateDir: string, name: string, templateVariables: TemplateMap, selectedSubType?: AssetSubType): Promise<{
-        metadata: AssetItem;
-        type: string;
-    }>;
-    /**
-     * helper for {@link Asset.retrieve} + {@link Asset.retrieveAsTemplate}
+     * helper for {@link Asset.retrieve}
      *
      * @private
      * @returns {string[]} AssetSubType array
@@ -139,21 +125,19 @@ declare class Asset extends MetadataType {
      * @param {string|string[]} subType group of similar assets to put in a folder (ie. images)
      * @param {string} [retrieveDir] target directory for saving assets
      * @param {string} [key] key/id/name to filter by
-     * @param {TemplateMap} [templateVariables] variables to be replaced in the metadata
      * @param {boolean} [loadShared] optionally retrieve assets from other BUs that were shared with the current
      * @returns {Promise.<object[]>} Promise
      */
-    static requestSubType(subType: string | string[], retrieveDir?: string, key?: string, templateVariables?: TemplateMap, loadShared?: boolean): Promise<object[]>;
+    static requestSubType(subType: string | string[], retrieveDir?: string, key?: string, loadShared?: boolean): Promise<object[]>;
     /**
      * Retrieves extended metadata (files or extended content) of asset
      *
      * @param {Array} items array of items to retrieve
      * @param {string} subType group of similar assets to put in a folder (ie. images)
      * @param {string} retrieveDir target directory for saving assets
-     * @param {TemplateMap} [templateVariables] variables to be replaced in the metadata
      * @returns {Promise.<MetadataTypeMap>} Promise
      */
-    static requestAndSaveExtended(items: any[], subType: string, retrieveDir: string, templateVariables?: TemplateMap): Promise<MetadataTypeMap>;
+    static requestAndSaveExtended(items: any[], subType: string, retrieveDir: string): Promise<MetadataTypeMap>;
     /**
      * helper that reset the log level and prints errors
      *

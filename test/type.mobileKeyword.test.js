@@ -163,46 +163,6 @@ describe('type: mobileKeyword', () => {
     });
 
     describe('Templating ================', () => {
-        it('Should create a mobileKeyword template via retrieveAsTemplate and build it', async () => {
-            // GIVEN there is a template
-            const result = await handler.retrieveAsTemplate(
-                'testInstance/testBU',
-                'mobileKeyword',
-                ['4912312345678.TESTEXISTING_KEYWORD'],
-                'testSourceMarket'
-            );
-            // WHEN
-            assert.equal(process.exitCode, 0, 'retrieveAsTemplate should not have thrown an error');
-            assert.equal(
-                result.mobileKeyword ? Object.keys(result.mobileKeyword).length : 0,
-                1,
-                'only one item expected'
-            );
-            assert.deepEqual(
-                await testUtils.getActualTemplateJson(
-                    '4912312345678.TESTEXISTING_KEYWORD',
-                    'mobileKeyword'
-                ),
-                await testUtils.getExpectedJson('9999999', 'mobileKeyword', 'template'),
-                'returned template JSON was not equal expected'
-            );
-            expect(
-                await testUtils.getActualTemplateFile(
-                    '4912312345678.TESTEXISTING_KEYWORD',
-                    'mobileKeyword',
-                    'amp'
-                )
-            ).to.equal(
-                await testUtils.getExpectedFile('9999999', 'mobileKeyword', 'template', 'amp')
-            );
-            assert.equal(
-                testUtils.getAPIHistoryLength(),
-                2,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            );
-            return;
-        });
-
         it('Should create a mobileKeyword template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['mobileKeyword']);

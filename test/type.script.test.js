@@ -269,55 +269,6 @@ describe('type: script', () => {
     });
 
     describe('Templating ================', () => {
-        it('Should create a script template via retrieveAsTemplate and build it', async () => {
-            // GIVEN there is a template
-            const result = await handler.retrieveAsTemplate(
-                'testInstance/testBU',
-                'script',
-                ['testExisting_script'],
-                'testSourceMarket'
-            );
-            // WHEN
-            assert.equal(process.exitCode, 0, 'retrieveAsTemplate should not have thrown an error');
-            assert.equal(
-                result.script ? Object.keys(result.script).length : 0,
-                1,
-                'only one script expected'
-            );
-            assert.deepEqual(
-                await testUtils.getActualTemplateJson('testExisting_script', 'script'),
-                await testUtils.getExpectedJson('9999999', 'script', 'template'),
-                'returned template JSON of retrieveAsTemplate was not equal expected'
-            );
-            expect(
-                await testUtils.getActualTemplateFile('testExisting_script', 'script', 'ssjs')
-            ).to.equal(await testUtils.getExpectedFile('9999999', 'script', 'template', 'ssjs'));
-            // THEN
-            await handler.buildDefinition(
-                'testInstance/testBU',
-                'script',
-                ['testExisting_script'],
-                ['testTargetMarket']
-            );
-            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
-
-            assert.deepEqual(
-                await testUtils.getActualDeployJson('testTemplated_script', 'script'),
-                await testUtils.getExpectedJson('9999999', 'script', 'build'),
-                'returned deployment JSON was not equal expected'
-            );
-            expect(
-                await testUtils.getActualDeployFile('testTemplated_script', 'script', 'ssjs')
-            ).to.equal(await testUtils.getExpectedFile('9999999', 'script', 'build', 'ssjs'));
-
-            assert.equal(
-                testUtils.getAPIHistoryLength(),
-                2,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            );
-            return;
-        });
-
         it('Should create a script template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['script']);

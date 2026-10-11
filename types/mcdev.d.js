@@ -607,7 +607,6 @@ complex
  * @property {boolean} supports.delete can you delete records of this type
  * @property {boolean} supports.changeKey can you change the key of existing records of this type
  * @property {boolean} supports.buildTemplate can you apply templating on downloaded records of this type
- * @property {boolean} supports.retrieveAsTemplate can you retrieve & template in one step
  */
 
 /**
