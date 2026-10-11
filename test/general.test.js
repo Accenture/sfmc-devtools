@@ -7,6 +7,7 @@ import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 import { Util } from '../lib/util/util.js';
 import MetadataType from '../lib/metadataTypes/MetadataType.js';
+import Asset from '../lib/metadataTypes/Asset.js';
 import File from '../lib/util/file.js';
 import fs from 'fs-extra';
 import config from '../lib/util/config.js';
@@ -1014,7 +1015,7 @@ describe('GENERAL', () => {
                 assert.deepEqual(
                     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                     await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                    'returned template JSON of retrieveAsTemplate was not equal expected'
+                    'returned template JSON of buildTemplate was not equal expected'
                 );
                 expect(
                     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
@@ -1116,7 +1117,7 @@ describe('GENERAL', () => {
                 assert.deepEqual(
                     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                     await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                    'returned template JSON of retrieveAsTemplate was not equal expected'
+                    'returned template JSON of buildTemplate was not equal expected'
                 );
                 expect(
                     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
@@ -1248,7 +1249,7 @@ describe('GENERAL', () => {
                 assert.deepEqual(
                     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                     await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                    'returned template JSON of retrieveAsTemplate was not equal expected'
+                    'returned template JSON of buildTemplate was not equal expected'
                 );
                 expect(
                     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
@@ -1369,7 +1370,7 @@ describe('GENERAL', () => {
                 assert.deepEqual(
                     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                     await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                    'returned template JSON of retrieveAsTemplate was not equal expected'
+                    'returned template JSON of buildTemplate was not equal expected'
                 );
                 expect(
                     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
@@ -1478,7 +1479,7 @@ describe('GENERAL', () => {
                 assert.deepEqual(
                     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                     await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                    'returned template JSON of retrieveAsTemplate was not equal expected'
+                    'returned template JSON of buildTemplate was not equal expected'
                 );
                 expect(
                     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
@@ -1739,7 +1740,7 @@ describe('GENERAL', () => {
                 // assert.deepEqual(
                 //     await testUtils.getActualTemporaryTemplateJson('testExisting_query', 'query'),
                 //     await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                //     'returned template JSON of retrieveAsTemplate was not equal expected'
+                //     'returned template JSON of buildTemplate was not equal expected'
                 // );
                 // expect(
                 //     await testUtils.getActualTemporaryTemplateFile(
@@ -1837,7 +1838,7 @@ describe('GENERAL', () => {
                 // assert.deepEqual(
                 //     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                 //     await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                //     'returned template JSON of retrieveAsTemplate was not equal expected'
+                //     'returned template JSON of buildTemplate was not equal expected'
                 // );
                 // expect(
                 //     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
@@ -1945,7 +1946,7 @@ describe('GENERAL', () => {
                 // assert.deepEqual(
                 //     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                 //     await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                //     'returned template JSON of retrieveAsTemplate was not equal expected'
+                //     'returned template JSON of buildTemplate was not equal expected'
                 // );
                 // expect(
                 //     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
@@ -2059,7 +2060,7 @@ describe('GENERAL', () => {
                 // assert.deepEqual(
                 //     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                 //     await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                //     'returned template JSON of retrieveAsTemplate was not equal expected'
+                //     'returned template JSON of buildTemplate was not equal expected'
                 // );
                 // expect(
                 //     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
@@ -2240,7 +2241,7 @@ describe('GENERAL', () => {
                 // assert.deepEqual(
                 //     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                 //     await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                //     'returned template JSON of retrieveAsTemplate was not equal expected'
+                //     'returned template JSON of buildTemplate was not equal expected'
                 // );
                 // expect(
                 //     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
@@ -2840,6 +2841,33 @@ describe('GENERAL', () => {
     });
 
     describe('explainTypes ================', () => {
+        it('preserves the shared-asset flag through cache retrieval', async () => {
+            const client = Asset.client;
+            const urls = [];
+            Asset.client = /** @type {typeof Asset.client} */ (
+                /** @type {unknown} */ ({
+                    rest: {
+                        post: async (uri) => {
+                            urls.push(uri);
+                            return { items: [], count: 0, page: 1, pageSize: 50 };
+                        },
+                    },
+                })
+            );
+            try {
+                const shared = await Asset.retrieveForCache(undefined, ['block'], undefined, true);
+                const local = await Asset.retrieveForCache(undefined, ['block'], undefined, false);
+                assert.deepEqual(shared.metadata, {});
+                assert.deepEqual(local.metadata, {});
+                assert.deepEqual(urls, [
+                    '/asset/v1/content/assets/query?scope=shared',
+                    '/asset/v1/content/assets/query',
+                ]);
+            } finally {
+                Asset.client = client;
+            }
+        });
+
         it('without options', () => {
             handler.explainTypes();
             assert.equal(process.exitCode, 0, 'explainTypes should not have thrown an error');
@@ -2871,8 +2899,7 @@ describe('GENERAL', () => {
                 'update',
                 'delete',
                 'changeKey',
-                'buildTemplate',
-                'retrieveAsTemplate'
+                'buildTemplate'
             );
 
             // check if certain types were returned

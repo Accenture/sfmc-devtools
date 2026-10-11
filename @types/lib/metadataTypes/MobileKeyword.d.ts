@@ -54,17 +54,7 @@ declare class MobileKeyword extends MetadataType {
      */
     static retrieveForCache(_?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
-     * retrieve an item and create a template from it
-     *
-     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
-     * @param {string} templateDir Directory where retrieved metadata directory will be saved
-     * @param {string} key name of the metadata file
-     * @param {TemplateMap} templateVariables variables to be replaced in the metadata
-     * @returns {Promise.<MetadataTypeItemObj>} Promise of metadata
-     */
-    static retrieveAsTemplate(templateDir: string, key: string, templateVariables: TemplateMap): Promise<MetadataTypeItemObj>;
-    /**
-     * helper for {@link MobileKeyword.retrieve} and {@link MobileKeyword.retrieveAsTemplate}
+     * helper for {@link MobileKeyword.retrieve}
      *
      * @param {string} key customer key of single item to retrieve / name of the metadata file
      * @returns {Array} key, queryParams

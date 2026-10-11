@@ -14,7 +14,6 @@ export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMa
 export type MultiMetadataTypeList = import("../../types/mcdev.d.js").MultiMetadataTypeList;
 export type MultiMetadataTypeMap = import("../../types/mcdev.d.js").MultiMetadataTypeMap;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
-export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
 export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 declare const FileFs: typeof fs & {
     prettierConfig: any;
@@ -100,10 +99,9 @@ declare const FileFs: typeof fs & {
      * @param {string} filename name of the file without suffix
      * @param {string} filetype filetype ie. JSON or SSJS
      * @param {string} content filecontent
-     * @param {TemplateMap} [templateVariables] templating variables to be replaced in the metadata
      * @returns {Promise.<boolean>} Promise
      */
-    writePrettyToFile: (directory: string | string[], filename: string, filetype: string, content: string, templateVariables?: TemplateMap) => Promise<boolean>;
+    writePrettyToFile: (directory: string | string[], filename: string, filetype: string, content: string) => Promise<boolean>;
     /**
      * Formats extracted Transactional SMS content when formatting is enabled.
      *

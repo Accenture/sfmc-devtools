@@ -779,55 +779,6 @@ describe('type: query', () => {
     });
 
     describe('Templating ================', () => {
-        it('Should create a query template via retrieveAsTemplate and build it', async () => {
-            // GIVEN there is a template
-            const result = await handler.retrieveAsTemplate(
-                'testInstance/testBU',
-                'query',
-                ['testExisting_query'],
-                'testSourceMarket'
-            );
-            // WHEN
-            assert.equal(process.exitCode, 0, 'retrieveAsTemplate should not have thrown an error');
-            assert.equal(
-                result.query ? Object.keys(result.query).length : 0,
-                1,
-                'only one query expected'
-            );
-            assert.deepEqual(
-                await testUtils.getActualTemplateJson('testExisting_query', 'query'),
-                await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                'returned template JSON of retrieveAsTemplate was not equal expected'
-            );
-            expect(
-                await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
-            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
-            // THEN
-            await handler.buildDefinition(
-                'testInstance/testBU',
-                'query',
-                ['testExisting_query'],
-                ['testTargetMarket']
-            );
-            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
-
-            assert.deepEqual(
-                await testUtils.getActualDeployJson('testTemplated_query', 'query'),
-                await testUtils.getExpectedJson('9999999', 'query', 'build'),
-                'returned deployment JSON was not equal expected'
-            );
-            expect(
-                await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
-            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
-
-            assert.equal(
-                testUtils.getAPIHistoryLength(),
-                5,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            );
-            return;
-        });
-
         it('Should warn about shared dataExtension in _ParentBU_ when running buildTemplate with --dependencies on child BU', async () => {
             // Retrieve shared DEs from _ParentBU_ to disk first
             await handler.retrieve('testInstance/_ParentBU_', ['dataExtension']);

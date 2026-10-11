@@ -117,7 +117,7 @@ export namespace Util {
     export function _isEqualArray(array1: any[], array2: any[]): boolean;
     export function _isEqualObject(item1: object, item2: object): boolean;
     /**
-     * helper for Mcdev.retrieve, Mcdev.retrieveAsTemplate and Mcdev.deploy
+     * helper for Mcdev.retrieve and Mcdev.deploy
      *
      * @param {string} selectedType type or type-subtype
      * @param {boolean} [handleOutside] if the API reponse is irregular this allows you to handle it outside of this generic method
@@ -125,7 +125,7 @@ export namespace Util {
      */
     export function _isValidType(selectedType: string, handleOutside?: boolean): boolean;
     /**
-     * helper for Mcdev.retrieve, Mcdev.retrieveAsTemplate and Mcdev.deploy
+     * helper for Mcdev.retrieve and Mcdev.deploy
      *
      * @param {Mcdevrc} properties javascript object in .mcdevrc.json
      * @param {string} businessUnit name of BU

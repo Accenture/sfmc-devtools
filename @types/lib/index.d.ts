@@ -240,17 +240,6 @@ export default class Mcdev {
      */
     static badKeys(businessUnit: string): Promise<void>;
     /**
-     * Retrieve a specific metadata file and templatise.
-     *
-     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
-     * @param {string} businessUnit references credentials from properties.json
-     * @param {string} selectedType supported metadata type
-     * @param {string[]} name name of the metadata
-     * @param {string} market market which should be used to revert template
-     * @returns {Promise.<MultiMetadataTypeList>} -
-     */
-    static retrieveAsTemplate(businessUnit: string, selectedType: string, name: string[], market: string): Promise<MultiMetadataTypeList>;
-    /**
      * @param {string} businessUnit references credentials from properties.json
      * @param {TypeKeyCombo} typeKeyList limit retrieval to given metadata type
      * @returns {Promise.<TypeKeyCombo>} selected types including dependencies

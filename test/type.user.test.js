@@ -173,7 +173,6 @@ describe('type: user', () => {
     });
 
     describe('Templating ================', () => {
-        // it('Should create a user template via retrieveAsTemplate and build it', async () => {});
         it('Should create a user template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/_ParentBU_', ['user']);

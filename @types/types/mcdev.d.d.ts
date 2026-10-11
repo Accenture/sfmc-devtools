@@ -1663,7 +1663,6 @@ export type ExplainType = {
         delete: boolean;
         changeKey: boolean;
         buildTemplate: boolean;
-        retrieveAsTemplate: boolean;
     };
 };
 export type ListItem = {

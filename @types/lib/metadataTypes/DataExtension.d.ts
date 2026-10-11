@@ -225,15 +225,6 @@ declare class DataExtension extends MetadataType {
      */
     private static _retrieveFields;
     /**
-     * helps retrieving fields during templating and deploy where we dont want the full list
-     *
-     * @private
-     * @param {DataExtensionMap} metadata list of DEs
-     * @param {string} customerKey external key of single DE
-     * @returns {Promise.<void>} -
-     */
-    private static _retrieveFieldsForSingleDe;
-    /**
      * helper for {@link MetadataType.updateREST} and {@link MetadataType.updateSOAP} that removes old files after the key was changed
      *
      * @param {MetadataTypeItem} metadataEntry a single metadata Entry
@@ -302,19 +293,6 @@ declare class DataExtension extends MetadataType {
      */
     static retrieveForCache(): Promise<{
         metadata: DataExtensionMap;
-        type: string;
-    }>;
-    /**
-     * Retrieves dataExtension metadata in template format.
-     *
-     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
-     * @param {string} templateDir Directory where retrieved metadata directory will be saved
-     * @param {string} name name of the metadata item
-     * @param {TemplateMap} templateVariables variables to be replaced in the metadata
-     * @returns {Promise.<{metadata: DataExtensionItem, type: string}>} Promise of items
-     */
-    static retrieveAsTemplate(templateDir: string, name: string, templateVariables: TemplateMap): Promise<{
-        metadata: DataExtensionItem;
         type: string;
     }>;
     /**
