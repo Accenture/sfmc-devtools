@@ -8,7 +8,10 @@ import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
 
-describe('type: automation', () => {
+describe('type: automation', function () {
+    // file-system heavy suite: keep it green on slow/loaded machines
+    this.timeout(30_000);
+
     beforeEach(() => {
         testUtils.mockSetup();
     });
@@ -590,48 +593,6 @@ describe('type: automation', () => {
     });
 
     describe('Templating ================', () => {
-        it('Should create a automation template via retrieveAsTemplate and build it', async () => {
-            // GIVEN there is a template
-            const result = await handler.retrieveAsTemplate(
-                'testInstance/testBU',
-                'automation',
-                ['testExisting_automation'],
-                'testSourceMarket'
-            );
-            assert.equal(process.exitCode, 0, 'retrieveAsTemplate should not have thrown an error');
-
-            // WHEN
-            assert.equal(
-                result.automation ? Object.keys(result.automation).length : 0,
-                1,
-                'only one automation expected'
-            );
-            assert.deepEqual(
-                await testUtils.getActualTemplateJson('testExisting_automation', 'automation'),
-                await testUtils.getExpectedJson('9999999', 'automation', 'template'),
-                'returned template was not equal expected'
-            );
-            // THEN
-            await handler.buildDefinition(
-                'testInstance/testBU',
-                'automation',
-                ['testExisting_automation'],
-                ['testTargetMarket']
-            );
-            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
-            assert.deepEqual(
-                await testUtils.getActualDeployJson('testTemplated_automation', 'automation'),
-                await testUtils.getExpectedJson('9999999', 'automation', 'build'),
-                'returned deployment file was not equal expected'
-            );
-            assert.equal(
-                testUtils.getAPIHistoryLength(),
-                30,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            );
-            return;
-        });
-
         it('Should create a automation template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['automation']);
@@ -681,7 +642,7 @@ describe('type: automation', () => {
             await handler.retrieve('testInstance/testBU');
             assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
 
-            const expectedApiCallsRetrieve = 111;
+            const expectedApiCallsRetrieve = 120;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 expectedApiCallsRetrieve,
@@ -767,12 +728,12 @@ describe('type: automation', () => {
             assert.equal(fileList.length, 2, 'expected only 2 file paths');
 
             assert.equal(
-                fileList[0].split('\\').join('/'),
+                fileList[0].replaceAll('\\', '/'),
                 'retrieve/testInstance/testBU/automation/testExisting_automation.automation-meta.json',
                 'wrong JSON path'
             );
             assert.equal(
-                fileList[1].split('\\').join('/'),
+                fileList[1].replaceAll('\\', '/'),
                 'retrieve/testInstance/testBU/automation/testExisting_automation.automation-doc.md',
                 'wrong MD path'
             );

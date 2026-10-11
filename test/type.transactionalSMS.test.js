@@ -116,7 +116,6 @@ describe('type: transactionalSMS', () => {
     });
 
     describe('Templating ================', () => {
-        // it.skip('Should create a transactionalSMS template via retrieveAsTemplate and build it');
         it('Should create a transactionalSMS template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['transactionalSMS']);

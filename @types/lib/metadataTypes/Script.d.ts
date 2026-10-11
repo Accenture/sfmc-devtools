@@ -59,19 +59,6 @@ declare class Script extends MetadataType {
         type: string;
     }>;
     /**
-     * Retrieve a specific Script by Name
-     *
-     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
-     * @param {string} templateDir Directory where retrieved metadata directory will be saved
-     * @param {string} name name of the metadata file
-     * @param {TemplateMap} templateVariables variables to be replaced in the metadata
-     * @returns {Promise.<{metadata: ScriptItem, type: string}>} Promise
-     */
-    static retrieveAsTemplate(templateDir: string, name: string, templateVariables: TemplateMap): Promise<{
-        metadata: ScriptItem;
-        type: string;
-    }>;
-    /**
      * Updates a single Script
      *
      * @param {MetadataTypeItem} script a single Script
@@ -214,6 +201,7 @@ declare namespace Script {
         lastmodDateField: string;
         lastmodNameField: any;
         restPagination: boolean;
+        restPaginationForKey: boolean;
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;

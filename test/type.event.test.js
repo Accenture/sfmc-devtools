@@ -27,7 +27,7 @@ describe('type: event', () => {
             const result = cache.getCache();
             assert.equal(
                 result.event ? Object.keys(result.event).length : 0,
-                5,
+                6,
                 'unexpected amount of events'
             );
             assert.deepEqual(
@@ -76,7 +76,7 @@ describe('type: event', () => {
             const result = cache.getCache();
             assert.equal(
                 result.event ? Object.keys(result.event).length : 0,
-                6,
+                7,
                 'unexpected number of events'
             );
             // get callouts
@@ -145,7 +145,7 @@ describe('type: event', () => {
             const result = cache.getCache();
             assert.equal(
                 result.event ? Object.keys(result.event).length : 0,
-                6,
+                7,
                 'unexpected number of events'
             );
             // get callouts
@@ -181,7 +181,7 @@ describe('type: event', () => {
             const result = cache.getCache();
             assert.equal(
                 result.event ? Object.keys(result.event).length : 0,
-                5,
+                6,
                 'unexpected number of events'
             );
             // get callouts
@@ -239,49 +239,6 @@ describe('type: event', () => {
     });
 
     describe('Templating ================', () => {
-        it('Should create a event template via retrieveAsTemplate and build it', async () => {
-            // GIVEN there is a template
-            const result = await handler.retrieveAsTemplate(
-                'testInstance/testBU',
-                'event',
-                ['testExisting_event'],
-                'testSourceMarket'
-            );
-            // WHEN
-            assert.equal(process.exitCode, 0, 'retrieveAsTemplate should not have thrown an error');
-            assert.equal(
-                result.event ? Object.keys(result.event).length : 0,
-                1,
-                'only one event expected'
-            );
-            assert.deepEqual(
-                await testUtils.getActualTemplateJson('testExisting_event', 'event'),
-                await testUtils.getExpectedJson('9999999', 'event', 'template'),
-                'returned template JSON of retrieveAsTemplate was not equal expected'
-            );
-            // THEN
-            await handler.buildDefinition(
-                'testInstance/testBU',
-                'event',
-                ['testExisting_event'],
-                ['testTargetMarket']
-            );
-            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
-
-            assert.deepEqual(
-                await testUtils.getActualDeployJson('testTemplated_event', 'event'),
-                await testUtils.getExpectedJson('9999999', 'event', 'build'),
-                'returned deployment JSON was not equal expected'
-            );
-
-            assert.equal(
-                testUtils.getAPIHistoryLength(),
-                10,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            );
-            return;
-        });
-
         it('Should create a event template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['event']);

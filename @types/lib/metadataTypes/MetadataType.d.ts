@@ -99,10 +99,9 @@ declare class MetadataType {
      *
      * @param {MetadataTypeItem} metadata a single item
      * @param {string} targetDir folder where retrieves should be saved
-     * @param {boolean} [isTemplating] signals that we are retrieving templates
      * @returns {MetadataTypeItem} cloned metadata
      */
-    static postRetrieveTasks(metadata: MetadataTypeItem, targetDir: string, isTemplating?: boolean): MetadataTypeItem;
+    static postRetrieveTasks(metadata: MetadataTypeItem, targetDir: string): MetadataTypeItem;
     /**
      * generic script that retrieves the folder path from cache and updates the given metadata with it after retrieve
      *
@@ -143,29 +142,20 @@ declare class MetadataType {
      */
     static retrieveForCache(additionalFields?: string[], subTypeArr?: string[], key?: string): Promise<MetadataTypeMapObj>;
     /**
-     * Gets metadata cache with limited fields and does not store value to disk
+     * helper for buildTemplate
      *
-     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
-     * @param {string} templateDir Directory where retrieved metadata directory will be saved
-     * @param {string} name name of the metadata file
-     * @param {TemplateMap} templateVariables variables to be replaced in the metadata
-     * @param {string} [subType] optionally limit to a single subtype
-     * @returns {Promise.<MetadataTypeItemObj>} metadata
+     * @param {unknown} value convert anything to string
+     * @returns {string|unknown[]|object} stringified value
      */
-    static retrieveAsTemplate(templateDir: string, name: string, templateVariables: TemplateMap, subType?: string): Promise<MetadataTypeItemObj>;
+    static stringifyValue(value: unknown): string | unknown[] | object;
     /**
-     * Retrieve a specific Script by Name
+     * helper for buildTemplate
      *
-     * @param {string} templateDir Directory where retrieved metadata directory will be saved
-     * @param {string} uri rest endpoint for GET
-     * @param {TemplateMap} templateVariables variables to be replaced in the metadata
-     * @param {string} name name (not key) of the metadata item
-     * @returns {Promise.<{metadata: MetadataTypeItem, type: string}>} Promise
+     * @param {object|unknown[]} target -
+     * @param {string[]} fieldPathParts -
+     * @returns {void} .
      */
-    static retrieveTemplateREST(templateDir: string, uri: string, templateVariables: TemplateMap, name: string): Promise<{
-        metadata: MetadataTypeItem;
-        type: string;
-    }>;
+    static stringifyFieldByPath(target: object | unknown[], fieldPathParts: string[]): void;
     /**
      * Gets metadata cache with limited fields and does not store value to disk
      *
@@ -189,14 +179,14 @@ declare class MetadataType {
      *
      * @param {string} key key of the item
      * @param {string} name name of the item
-     * @param {{ type: string; key: string; name: any; }[]} namesInFolder names of the items in the same folder
+     * @param {{ type: string; key: string; name: string; }[]} namesInFolder names of the items in the same folder
      * @param {string} [subtype] itemType-name
      * @returns {string} new name
      */
     static findUniqueName(key: string, name: string, namesInFolder: {
         type: string;
         key: string;
-        name: any;
+        name: string;
     }[], subtype?: string): string;
     /**
      * Abstract create method that needs to be implemented in child metadata type
@@ -406,12 +396,11 @@ declare class MetadataType {
      *
      * @param {string} retrieveDir Directory where retrieved metadata directory will be saved
      * @param {string} uri rest endpoint for GET
-     * @param {TemplateMap} [templateVariables] variables to be replaced in the metadata
      * @param {string} [singleRetrieve] key of single item to filter by
-     * @returns {Promise.<{metadata: (MetadataTypeMap | MetadataTypeItem), type: string}>} Promise of item map (single item for templated result)
+     * @returns {Promise.<{metadata: MetadataTypeMap, type: string}>} Promise of item map
      */
-    static retrieveREST(retrieveDir: string, uri: string, templateVariables?: TemplateMap, singleRetrieve?: string): Promise<{
-        metadata: (MetadataTypeMap | MetadataTypeItem);
+    static retrieveREST(retrieveDir: string, uri: string, singleRetrieve?: string): Promise<{
+        metadata: MetadataTypeMap;
         type: string;
     }>;
     /**
@@ -419,10 +408,10 @@ declare class MetadataType {
      * @param {object[]} urlArray {uri: string, id: string} combo of URL and ID/key of metadata
      * @param {number} [concurrentRequests] optionally set a different amount of concurrent requests
      * @param {boolean} [logAmountOfUrls] if true, prints an info message about to-be loaded amount of metadata
-     * @returns {Promise.<{metadata: (MetadataTypeMap | MetadataTypeItem), type: string}>} Promise of item map (single item for templated result)
+     * @returns {Promise.<{metadata: MetadataTypeMap, type: string}>} Promise of item map
      */
     static retrieveRESTcollection(urlArray: object[], concurrentRequests?: number, logAmountOfUrls?: boolean): Promise<{
-        metadata: (MetadataTypeMap | MetadataTypeItem);
+        metadata: MetadataTypeMap;
         type: string;
     }>;
     /**
@@ -431,9 +420,9 @@ declare class MetadataType {
      * @param {RestError} ex exception
      * @param {string} key id or key of item
      * @param {string} url url to call for retry
-     * @returns {Promise.<any>} -
+     * @returns {Promise.<null>} no retry result
      */
-    static handleRESTErrors(ex: RestError, key: string, url: string): Promise<any>;
+    static handleRESTErrors(ex: RestError, key: string, url: string): Promise<null>;
     /**
      * Used to execute a query/automation etc.
      *
@@ -562,20 +551,18 @@ declare class MetadataType {
      * @param {MetadataTypeMap} results metadata results from deploy
      * @param {string} retrieveDir directory where metadata should be stored after deploy/retrieve
      * @param {string} [overrideType] for use when there is a subtype (such as folder-queries)
-     * @param {TemplateMap} [templateVariables] variables to be replaced in the metadata
      * @returns {Promise.<MetadataTypeMap>} Promise of saved metadata
      */
-    static saveResults(results: MetadataTypeMap, retrieveDir: string, overrideType?: string, templateVariables?: TemplateMap): Promise<MetadataTypeMap>;
+    static saveResults(results: MetadataTypeMap, retrieveDir: string, overrideType?: string): Promise<MetadataTypeMap>;
     /**
      *
      * @param {MetadataTypeMap} results metadata results from deploy
      * @param {string} originalKey key of metadata
      * @param {string[]} baseDir [retrieveDir, ...overrideType.split('-')]
      * @param {string} [subtypeExtension] e.g. ".asset-meta" or ".query-meta"
-     * @param {TemplateMap} [templateVariables] variables to be replaced in the metadata
      * @returns {Promise.<MetadataTypeItem>} saved metadata
      */
-    static saveToDisk(results: MetadataTypeMap, originalKey: string, baseDir: string[], subtypeExtension?: string, templateVariables?: TemplateMap): Promise<MetadataTypeItem>;
+    static saveToDisk(results: MetadataTypeMap, originalKey: string, baseDir: string[], subtypeExtension?: string): Promise<MetadataTypeItem>;
     /**
      * helper for {@link MetadataType.buildDefinitionForNested}
      * searches extracted file for template variable names and applies the market values
@@ -770,12 +757,12 @@ declare class MetadataType {
     /**
      * helper for {@link MetadataType.getNestedValue}
      *
-     * @param {any} obj the metadataItem to search in (or the result)
+     * @param {ReturnType<JSON['parse']>} obj the metadataItem to search in (or the result)
      * @param {string[]} nestedKeyParts key in dot-notation split into parts
      * @param {string} dependentType used for types that need custom handling
      * @returns {(string) | (string)[]} result
      */
-    static getNestedValueHelper(obj: any, nestedKeyParts: string[], dependentType: string): (string) | (string)[];
+    static getNestedValueHelper(obj: ReturnType<JSON["parse"]>, nestedKeyParts: string[], dependentType: string): (string) | (string)[];
     /**
      *
      * @param {MetadataTypeMap} metadataMap metadata mapped by their keyField

@@ -45,16 +45,6 @@ declare class FileTransfer extends MetadataType {
      */
     static retrieveForCache(): Promise<MetadataTypeMapObj>;
     /**
-     * Retrieve a specific File Transfer Definition by Name
-     *
-     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
-     * @param {string} templateDir Directory where retrieved metadata directory will be saved
-     * @param {string} name name of the metadata file
-     * @param {TemplateMap} templateVariables variables to be replaced in the metadata
-     * @returns {Promise.<MetadataTypeItemObj>} Promise
-     */
-    static retrieveAsTemplate(templateDir: string, name: string, templateVariables: TemplateMap): Promise<MetadataTypeItemObj>;
-    /**
      * Creates a single File Transfer
      *
      * @param {MetadataTypeItem} fileTransfer a single File Transfer
@@ -106,6 +96,7 @@ declare namespace FileTransfer {
         lastmodDateField: string;
         lastmodNameField: any;
         restPagination: boolean;
+        restPaginationForKey: boolean;
         type: string;
         typeDescription: string;
         typeRetrieveByDefault: boolean;
