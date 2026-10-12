@@ -1,4 +1,22 @@
 /**
+ * Checks whether Git can be executed without invoking a shell.
+ *
+ * @param {(command: string, args: string[], options: object) => {error?: Error, status: number | null}} [run] synchronous process runner
+ * @returns {boolean} true when `git --version` succeeds
+ */
+export function isGitInstalled(run?: (command: string, args: string[], options: object) => {
+    error?: Error;
+    status: number | null;
+}): boolean;
+/**
+ * Rejects Git-dependent operations before prompts or filesystem changes.
+ *
+ * @param {string} operation command or workflow requiring Git
+ * @returns {void}
+ * @throws {Error} when Git cannot be executed
+ */
+export function requireGit(operation: string): void;
+/**
  * Creates a Git adapter rooted at the supplied directory.
  *
  * @param {{cwd?: string, gitBinary?: string, run?: typeof execFileAsync}} [options] client options
