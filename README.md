@@ -23,6 +23,14 @@ Run the following to install Accenture SFMC DevTools on your computer:
 npm install -g mcdev
 ```
 
+### Git and active CLI behavior
+
+Git is optional for ordinary retrieve/deploy operations and for project setup. If Git is missing, `mcdev init` and `mcdev upgrade` warn and continue their non-Git work, skipping Git initialization, remotes, staging, commits and push. A real Git failure when Git is installed is still an error. `mcdev join` requires Git to clone a repository. Git-backed `createDeltaPkg` and related delta workflows fail before prompting, purging or writing output when Git is unavailable; programmatic delta calls supplied with a `diffArr` do not require Git.
+
+Recursive CLI calls during configuration repair and initial retrieval reuse the active Node interpreter and mcdev entry point instead of requiring another `mcdev` on PATH. Generated tooling versions and the canonical SFMC formatter plugin resolve from the active mcdev package. When invoked as an extension-bundled runtime, version guidance points to updating the extension or selecting a compatible installed CLI, not updating a global package that cannot replace the bundle. Standalone CLI update guidance remains unchanged.
+
+These changes are currently local to the bundled-fallback feature branch, not a newly published release. Release notes remain in GitHub Releases; no version bump is included here.
+
 ### VSCode Extension
 
 We also provide a [VSCode extension](https://marketplace.visualstudio.com/items?itemName=Accenture-oss.sfmc-devtools-vscode) that integrates SFMC DevTools into your IDE. You can install it from the [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=Accenture-oss.sfmc-devtools-vscode).
