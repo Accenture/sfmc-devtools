@@ -34,20 +34,22 @@ describe('optional Git workflows', () => {
     let exitCode;
     let options;
     let warning;
+    let spawn;
+    let execute;
 
     beforeEach(() => {
         exitCode = process.exitCode;
         options = Util.OPTIONS;
         process.exitCode = undefined;
         Util.OPTIONS = { purge: true };
-        mock.method(childProcess, 'spawnSync', () => ({
+        spawn = mock.method(childProcess, 'spawnSync', () => ({
             error: new Error('ENOENT'),
             status: null,
         }));
         syncBuiltinESMExports();
         warning = mock.method(Util.logger, 'warn', () => Util.logger);
         mock.method(Util.logger, 'info', () => Util.logger);
-        mock.method(Util, 'execSync', () => assert.fail('unexpected subprocess'));
+        execute = mock.method(Util, 'execSync', () => assert.fail('unexpected subprocess'));
         mock.method(InitGit, 'gitPush', async () => assert.fail('unexpected push'));
         mock.method(InitGit, '_updateGitConfigUser', async () => assert.fail('unexpected config'));
         mock.method(InitGit, '_addGitRemote', async () => assert.fail('unexpected remote'));
@@ -67,10 +69,10 @@ describe('optional Git workflows', () => {
     });
 
     it('retains actual initialization failures when Git is available', async () => {
-        mock.method(childProcess, 'spawnSync', () => ({ status: 0 }));
+        spawn.mock.mockImplementation(() => ({ status: 0 }));
         syncBuiltinESMExports();
         mock.method(File, 'pathExists', async () => false);
-        mock.method(Util, 'execSync', () => {
+        execute.mock.mockImplementation(() => {
             throw new Error('git init failed');
         });
         await assert.rejects(InitGit.initGitRepo(), /git init failed/);
@@ -104,9 +106,8 @@ describe('optional Git workflows', () => {
     });
 
     it('retrieves without backing up when initialization was skipped', async () => {
-        mock.method(Util, 'execSync', (command, args) => {
-            assert.equal(command, 'mcdev');
-            assert.deepEqual(args, ['retrieve', '"*"']);
+        mock.method(Util, 'execMcdev', (args) => {
+            assert.deepEqual(args, ['retrieve', '*']);
         });
         const skip = Util.skipInteraction;
         Util.skipInteraction = { downloadBUs: 'true' };
