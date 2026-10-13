@@ -170,7 +170,7 @@ export function getActualTemplateFile(customerKey, type, ext) {
  */
 export function getExpectedJson(mid, type, action) {
     const path = `/resources/${mid}/${type}/${action}-expected.json`;
-    console.log(loadingFile + path); // eslint-disable-line no-console
+    Util.logger.debug(loadingFile + path);
     return File.readJSON(`./test` + path);
 }
 
@@ -185,7 +185,7 @@ export function getExpectedJson(mid, type, action) {
  */
 export function getExpectedFile(mid, type, action, ext) {
     const path = `/resources/${mid}/${type}/${action}-expected.${ext}`;
-    console.log(loadingFile + path); // eslint-disable-line no-console
+    Util.logger.debug(loadingFile + path);
     return File.readFile(`./test` + path, 'utf8');
 }
 
@@ -214,8 +214,8 @@ export function mockSetup(isDeploy) {
         for (const option in handler.knownOptions) {
             resetOptions[option] = undefined;
         }
-        // test config
-        resetOptions.debug = true;
+        // Keep routine full-suite output below capture limits; individual tests can enable debug.
+        resetOptions.debug = false;
         resetOptions.noLogFile = true;
 
         handler.setOptions(resetOptions);

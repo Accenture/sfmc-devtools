@@ -425,7 +425,9 @@ async function handleAssetReadEngine(config, urlObj) {
             }
         }
         const response = { count: items.length, page: 1, pageSize: 50, links: {}, items };
-        console.log(`${loadingFile}asset-pool (dynamic: assetType.id in [${requested.join(',')}])`); // eslint-disable-line no-console
+        Util.logger.debug(
+            `${loadingFile}asset-pool (dynamic: assetType.id in [${requested.join(',')}])`
+        );
         return [200, JSON.stringify(response)];
     }
     // GET by-id — anchored so it never hijacks /assets/<id>/file or /thumbnail
@@ -438,7 +440,7 @@ async function handleAssetReadEngine(config, urlObj) {
             if (!body) {
                 return null; // leave existing 404 behavior
             }
-            console.log(`${loadingFile}asset-pool (dynamic: GET asset ${id})`); // eslint-disable-line no-console
+            Util.logger.debug(`${loadingFile}asset-pool (dynamic: GET asset ${id})`);
             return [200, JSON.stringify(body)];
         }
         // by-key GET — $filter=customerKey eq <key>; mirror resolver name-filter + count-recompute
@@ -462,8 +464,7 @@ async function handleAssetReadEngine(config, urlObj) {
                         links: {},
                         items,
                     };
-                    // eslint-disable-next-line no-console
-                    console.log(
+                    Util.logger.debug(
                         `${loadingFile}asset-pool (dynamic: GET assets customerKey=${value})`
                     );
                     return [200, JSON.stringify(response)];
