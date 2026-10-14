@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import SDK from 'sfmc-sdk';
 import MockAdapter from 'axios-mock-adapter';
+import semver from 'semver';
 import { axiosInstance } from '../node_modules/sfmc-sdk/lib/util.js';
 
 const workflow = fs.readFileSync('.github/workflows/npm-publish.yml', 'utf8');
@@ -12,13 +13,16 @@ const releaseScript = workflow
 
 // Evaluate the workflow guard without publishing or writing to GitHub.
 describe('V9 HOTFIX RELEASE', () => {
-    it('Checks out the release tag in both jobs and only publishes to literal v9', () => {
+    it('Checks out the release tag in both jobs and only publishes to literal legacy-v9', () => {
         assert.equal(workflow.split('ref: ${{ github.event.release.tag_name }}').length - 1, 2);
         const commands = workflow.split('\n').filter((line) => line.includes('npm publish'));
         assert.deepEqual(
             commands.map((line) => line.trim()),
-            ['- run: npm publish --tag v9']
+            ['- run: npm publish --tag legacy-v9']
         );
+        const channel = commands[0].trim().split('--tag ')[1];
+        assert.isNull(semver.validRange(channel), 'npm channels must not be valid semver ranges');
+        assert.isNotNull(semver.validRange('v9'), 'the previous channel was a semver range');
     });
 
     const releases = [

@@ -51,7 +51,7 @@ jobs:
                   }
                   NODE
 
-            - run: npm publish --tag v9
+            - run: npm publish --tag legacy-v9
 
             - name: Close release milestone if empty
               env:
