@@ -83,7 +83,7 @@
   "devDependencies": {
     "@eslint/js": "10.0.1",
     "@types/chai": "5.2.3",
-    "@types/expect": "1.20.4",
+    "@types/expect": "24.3.2",
     "@types/fs-extra": "11.0.4",
     "@types/mocha": "10.0.10",
     "@types/mock-fs": "4.13.4",
