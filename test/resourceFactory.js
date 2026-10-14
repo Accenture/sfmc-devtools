@@ -34,13 +34,16 @@ async function loadSOAPRecords(mcdevAction, type, mid, filter, QueryAllAccounts)
     const testPath = path.join('test', 'resources', mid.toString(), type, mcdevAction);
     const filterPath = getFilterPath(filter, QueryAllAccounts);
     if (await fs.pathExists(testPath + filterPath + '-response.xml')) {
-        console.log(loadingFile + projectRoot + testPath + filterPath + '-response.xml'); // eslint-disable-line no-console
+        if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+            // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+            console.log(loadingFile + projectRoot + testPath + filterPath + '-response.xml');
+        }
         return fs.readFile(testPath + filterPath + '-response.xml', {
             encoding: 'utf8',
         });
     } else if (await fs.pathExists(testPath + '-response.xml')) {
-        if (filterPath) {
-            /* eslint-disable no-console */
+        if (filterPath && process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+            // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
             console.log(
                 `${tWarn}: You are loading your reponse from ${
                     testPath + '-response.xml'
@@ -48,20 +51,24 @@ async function loadSOAPRecords(mcdevAction, type, mid, filter, QueryAllAccounts)
                     testPath + filterPath + '-response.xml'
                 }. Make sure this is intended`
             );
-            /* eslint-enable no-console */
         }
-        console.log(loadingFile + projectRoot + testPath + '-response.xml'); // eslint-disable-line no-console
+
+        if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+            // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+            console.log(loadingFile + projectRoot + testPath + '-response.xml');
+        }
         return fs.readFile(testPath + '-response.xml', {
             encoding: 'utf8',
         });
     }
-    /* eslint-disable no-console */
-    console.log(
-        `${tError}: Please create file ${
-            filterPath ? testPath + filterPath + '-response.xml or ' : ''
-        }${testPath + '-response.xml'}`
-    );
-    /* eslint-enable no-console */
+    if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+        // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+        console.log(
+            `${tError}: Please create file ${
+                filterPath ? testPath + filterPath + '-response.xml or ' : ''
+            }${testPath + '-response.xml'}`
+        );
+    }
 
     // return error
     process.exitCode = 404;
@@ -425,7 +432,13 @@ async function handleAssetReadEngine(config, urlObj) {
             }
         }
         const response = { count: items.length, page: 1, pageSize: 50, links: {}, items };
-        console.log(`${loadingFile}asset-pool (dynamic: assetType.id in [${requested.join(',')}])`); // eslint-disable-line no-console
+
+        if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+            // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+            console.log(
+                `${loadingFile}asset-pool (dynamic: assetType.id in [${requested.join(',')}])`
+            );
+        }
         return [200, JSON.stringify(response)];
     }
     // GET by-id — anchored so it never hijacks /assets/<id>/file or /thumbnail
@@ -438,7 +451,11 @@ async function handleAssetReadEngine(config, urlObj) {
             if (!body) {
                 return null; // leave existing 404 behavior
             }
-            console.log(`${loadingFile}asset-pool (dynamic: GET asset ${id})`); // eslint-disable-line no-console
+
+            if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+                // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+                console.log(`${loadingFile}asset-pool (dynamic: GET asset ${id})`);
+            }
             return [200, JSON.stringify(body)];
         }
         // by-key GET — $filter=customerKey eq <key>; mirror resolver name-filter + count-recompute
@@ -462,10 +479,13 @@ async function handleAssetReadEngine(config, urlObj) {
                         links: {},
                         items,
                     };
-                    // eslint-disable-next-line no-console
-                    console.log(
-                        `${loadingFile}asset-pool (dynamic: GET assets customerKey=${value})`
-                    );
+
+                    if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+                        // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+                        console.log(
+                            `${loadingFile}asset-pool (dynamic: GET assets customerKey=${value})`
+                        );
+                    }
                     return [200, JSON.stringify(response)];
                 }
             }
@@ -670,7 +690,10 @@ export const handleRESTRequest = async (config) => {
                 (!override.method || override.method === config.method)
         );
         if (errorOverride) {
-            console.log(`${tWarn}: forcing ${errorOverride.status} for ${urlObj.pathname}`); // eslint-disable-line no-console
+            if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+                // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+                console.log(`${tWarn}: forcing ${errorOverride.status} for ${urlObj.pathname}`);
+            }
             return rejectWithAxiosError(config, errorOverride);
         }
     }
@@ -795,10 +818,16 @@ export const handleRESTRequest = async (config) => {
                 ) {
                     response.items = response.items.filter((def) => def.name == filterName);
                 }
-                console.log(loadingFile + projectRoot + testPathFilter + '.json'); // eslint-disable-line no-console
+                if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+                    // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+                    console.log(loadingFile + projectRoot + testPathFilter + '.json');
+                }
                 return [200, JSON.stringify(response)];
             } else {
-                console.log(loadingFile + projectRoot + testPathFilter + '.json'); // eslint-disable-line no-console
+                if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+                    // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+                    console.log(loadingFile + projectRoot + testPathFilter + '.json');
+                }
                 return [
                     200,
                     await fs.readFile(testPathFilter + '.json', {
@@ -807,7 +836,10 @@ export const handleRESTRequest = async (config) => {
                 ];
             }
         } else if (testPathFilter && (await fs.pathExists(testPathFilter + '.txt'))) {
-            console.log(loadingFile + projectRoot + testPathFilter + '.txt'); // eslint-disable-line no-console
+            if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+                // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+                console.log(loadingFile + projectRoot + testPathFilter + '.txt');
+            }
             return [
                 200,
                 await fs.readFile(testPathFilter + '.txt', {
@@ -815,7 +847,10 @@ export const handleRESTRequest = async (config) => {
                 }),
             ];
         } else if (testPathFilterBody && (await fs.pathExists(testPathFilterBody + '.json'))) {
-            console.log(loadingFile + projectRoot + testPathFilterBody + '.json'); // eslint-disable-line no-console
+            if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+                // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+                console.log(loadingFile + projectRoot + testPathFilterBody + '.json');
+            }
             return [
                 200,
                 await fs.readFile(testPathFilterBody + '.json', {
@@ -823,7 +858,10 @@ export const handleRESTRequest = async (config) => {
                 }),
             ];
         } else if (testPathFilterBody && (await fs.pathExists(testPathFilterBody + '.txt'))) {
-            console.log(loadingFile + projectRoot + testPathFilterBody + '.txt'); // eslint-disable-line no-console
+            if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+                // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+                console.log(loadingFile + projectRoot + testPathFilterBody + '.txt');
+            }
             return [
                 200,
                 await fs.readFile(testPathFilterBody + '.txt', {
@@ -831,8 +869,8 @@ export const handleRESTRequest = async (config) => {
                 }),
             ];
         } else if (await fs.pathExists(testPath + '.json')) {
-            if (testPathFilter) {
-                /* eslint-disable no-console */
+            if (testPathFilter && process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+                // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
                 console.log(
                     `${tWarn}: You are loading your reponse from ${
                         testPath + '.json'
@@ -840,11 +878,10 @@ export const handleRESTRequest = async (config) => {
                         testPathFilter + '.json'
                     }. Make sure this is intended`
                 );
-                /* eslint-enable no-console */
             }
 
-            if (testPathFilterBody) {
-                /* eslint-disable no-console */
+            if (testPathFilterBody && process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+                // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
                 console.log(
                     `${tWarn}: You are loading your reponse from ${
                         testPath + '.json'
@@ -852,7 +889,6 @@ export const handleRESTRequest = async (config) => {
                         testPathFilterBody + '.json'
                     }. Make sure this is intended`
                 );
-                /* eslint-enable no-console */
             }
 
             // build filter logic to ensure templating works
@@ -870,10 +906,16 @@ export const handleRESTRequest = async (config) => {
                 );
                 response.items = response.items.filter((def) => def.name == filterName);
                 response.count = response.items.length;
-                console.log(loadingFile + projectRoot + testPath + '.json'); // eslint-disable-line no-console
+                if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+                    // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+                    console.log(loadingFile + projectRoot + testPath + '.json');
+                }
                 return [200, JSON.stringify(response)];
             } else {
-                console.log(loadingFile + projectRoot + testPath + '.json'); // eslint-disable-line no-console
+                if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+                    // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+                    console.log(loadingFile + projectRoot + testPath + '.json');
+                }
 
                 return [
                     200,
@@ -883,8 +925,8 @@ export const handleRESTRequest = async (config) => {
                 ];
             }
         } else if (await fs.pathExists(testPath + '.txt')) {
-            if (testPathFilter) {
-                /* eslint-disable no-console */
+            if (testPathFilter && process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+                // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
                 console.log(
                     `${tWarn}: You are loading your reponse from ${
                         testPath + '.txt'
@@ -892,10 +934,10 @@ export const handleRESTRequest = async (config) => {
                         testPathFilter + '.txt'
                     }. Make sure this is intended`
                 );
-                /* eslint-enable no-console */
             }
-            if (testPathFilterBody) {
-                /* eslint-disable no-console */
+
+            if (testPathFilterBody && process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+                // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
                 console.log(
                     `${tWarn}: You are loading your reponse from ${
                         testPath + '.txt'
@@ -903,9 +945,12 @@ export const handleRESTRequest = async (config) => {
                         testPathFilterBody + '.txt'
                     }. Make sure this is intended`
                 );
-                /* eslint-enable no-console */
             }
-            console.log(loadingFile + projectRoot + testPath + '.txt'); // eslint-disable-line no-console
+
+            if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+                // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+                console.log(loadingFile + projectRoot + testPath + '.txt');
+            }
             return [
                 200,
                 await fs.readFile(testPath + '.txt', {
@@ -922,11 +967,12 @@ export const handleRESTRequest = async (config) => {
                 return assetEngineResponse;
             }
 
-            /* eslint-disable no-console */
-            console.log(
-                `${tError}: Please create file ${testPath}.json/.txt${filterName ? ` or ${testPathFilter}.json/.txt` : testPathFilterBody ? ` or ${testPathFilterBody}.json/.txt` : ''}`
-            );
-            /* eslint-enable no-console */
+            if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+                // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+                console.log(
+                    `${tError}: Please create file ${testPath}.json/.txt${filterName ? ` or ${testPathFilter}.json/.txt` : testPathFilterBody ? ` or ${testPathFilterBody}.json/.txt` : ''}`
+                );
+            }
             process.exitCode = 404;
 
             return [
@@ -937,7 +983,10 @@ export const handleRESTRequest = async (config) => {
             ];
         }
     } catch (ex) {
-        console.log(ex); // eslint-disable-line no-console
+        if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+            // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+            console.log(ex);
+        }
         return [500, {}];
     }
 };
