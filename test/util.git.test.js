@@ -109,7 +109,11 @@ async function commitFile(repository, relativePath, content, message) {
     return (await git(repository, 'rev-parse', 'HEAD')).trim();
 }
 
-describe('native Git adapter', () => {
+describe('native Git adapter', function () {
+    // Real Git subprocesses (especially clone/fetch on Windows) exceed Mocha's 2s default.
+    // Allow them to finish before fixture cleanup; a timeout does not cancel the subprocess.
+    this.timeout(20000);
+
     /** @type {GitFixtureRegistry} */
     let fixtures;
 

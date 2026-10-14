@@ -105,6 +105,28 @@ describe('npm test logging boundary', () => {
                     });
                     assert.equal(asset[0], 200);
                     assert.equal(JSON.parse(asset[1]).id, 5286);
+                    const query = await handleRESTRequest({
+                        ...config,
+                        method: 'post',
+                        url: '/asset/v1/content/assets/query',
+                        data: JSON.stringify({
+                            query: { property: 'assetType.id', simpleOperator: 'in', value: [4] },
+                        }),
+                    });
+                    assert.equal(query[0], 200);
+                    assert.include(
+                        JSON.parse(query[1]).items.map((item) => item.id),
+                        5286
+                    );
+                    const byKey = await handleRESTRequest({
+                        ...config,
+                        url: '/asset/v1/content/assets?$filter=customerKey%20eq%20testExisting_asset_template',
+                    });
+                    assert.equal(byKey[0], 200);
+                    assert.include(
+                        JSON.parse(byKey[1]).items.map((item) => item.id),
+                        5286
+                    );
                     const missing = await handleRESTRequest({ ...config, url: '/logging/missing' });
                     assert.equal(missing[0], 404);
                     assert.equal(process.exitCode, 404);
@@ -115,7 +137,7 @@ describe('npm test logging boundary', () => {
                     if (marker === '1') {
                         assert.isEmpty(logs);
                     } else {
-                        assert.lengthOf(logs, 10);
+                        assert.lengthOf(logs, 12);
                         assert.include(logs[0][0], '/logging/sample-expected.json');
                         assert.include(logs[1][0], '/logging/sample-expected.txt');
                         assert.equal(
@@ -126,8 +148,13 @@ describe('npm test logging boundary', () => {
                         assert.deepEqual(logs[5], [[]]);
                         assert.match(logs[6][0], /push[/\\]v1[/\\]application/);
                         assert.include(logs[7][0], 'asset-pool (dynamic: GET asset 5286)');
-                        assert.include(logs[8][0], 'TEST-ERROR');
-                        assert.instanceOf(logs[9][0], Error);
+                        assert.include(logs[8][0], 'asset-pool (dynamic: assetType.id in [4])');
+                        assert.include(
+                            logs[9][0],
+                            'asset-pool (dynamic: GET assets customerKey=testExisting_asset_template)'
+                        );
+                        assert.include(logs[10][0], 'TEST-ERROR');
+                        assert.instanceOf(logs[11][0], Error);
                     }
                 } finally {
                     // eslint-disable-next-line no-console -- Capture and restore fixture diagnostics for boundary assertions.
