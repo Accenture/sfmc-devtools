@@ -1,6 +1,6 @@
 {
   "name": "mcdev",
-  "version": "10.0.0",
+  "version": "10.1.0",
   "description": "Accenture Salesforce Marketing Cloud DevTools",
   "author": "Accenture: joern.berkefeld, douglas.midgley, robert.zimmermann, maciej.barnas",
   "license": "MIT",
@@ -58,7 +58,7 @@
     "verify:progress-fixture": "node scripts/verify-progress-fixture.mjs",
     "prepare": "husky || true",
     "lint-and-test": "run-s lint test",
-    "test": "mocha --reporter-option maxDiffSize=25000",
+    "test": "node test/run.js",
     "coverage": "c8 npm run test",
     "prepare-release:audit-fix": "npm audit fix",
     "prepare-release:git": "node prepare-release.js",
@@ -76,7 +76,7 @@
     "prettier": "3.9.9",
     "prettier-plugin-sfmc": "2.1.1",
     "semver": "7.8.5",
-    "sfmc-sdk": "4.0.1",
+    "sfmc-sdk": "4.0.2",
     "winston": "3.19.0",
     "yargs": "18.2.0"
   },

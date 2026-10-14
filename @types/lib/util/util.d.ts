@@ -202,6 +202,13 @@ export namespace Util {
      */
     export function execSync(cmd: string, args?: string[], hideOutput?: boolean): string | void;
     /**
+     * Runs this package's CLI with the current Node interpreter and inherited terminal.
+     *
+     * @param {string[]} args CLI arguments, without shell quoting
+     * @returns {void} -
+     */
+    export function execMcdev(args: string[]): void;
+    /**
      * standardize check to ensure only one result is returned from template search
      *
      * @param {MetadataTypeItem[]} results array of metadata
