@@ -9,6 +9,7 @@
         "*.html": "ampscript"
     },
     "files.eol": "\n",
+    "mochaExplorer.exit": true,
     "js/ts.implicitProjectConfig.checkJs": true,
     "javascript.validate.enable": true,
     "markdown.extension.italic.indicator": "_",
