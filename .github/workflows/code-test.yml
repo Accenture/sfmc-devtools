@@ -4,10 +4,10 @@ name: "Code Testing"
 
 on:
     push:
-        branches: [main, develop, hotfix]
+        branches: [main, develop, hotfix, v9-hotfixes]
     pull_request:
         # The branches below must be a subset of the branches above
-        branches: [main, develop, hotfix]
+        branches: [main, develop, hotfix, v9-hotfixes]
 
 jobs:
     lintandTesting:
@@ -15,7 +15,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                node: ["20.19", 21, 22, 23, 24, 25]
+                node: ["22.22.2", "24.15.0", 25]
         name: lint & test w/ node v${{ matrix.node }}
         permissions:
             actions: read

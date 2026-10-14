@@ -47,9 +47,9 @@ declare class ImportFile extends MetadataType {
      * @param {SDKError} ex exception
      * @param {string} key id or key of item
      * @param {string} url url to call for retry
-     * @returns {Promise.<any>} can return retry-result
+     * @returns {Promise.<MetadataTypeItem | null>} can return retry-result
      */
-    static handleRESTErrors(ex: SDKError, key: string, url: string): Promise<any>;
+    static handleRESTErrors(ex: SDKError, key: string, url: string): Promise<MetadataTypeItem | null>;
     /**
      * Retrieves import definition metadata for caching
      *

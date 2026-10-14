@@ -66,9 +66,9 @@ declare class Automation extends MetadataType {
      * @param {SDKError} ex exception
      * @param {string} key id or key of item
      * @param {string} url url to call for retry
-     * @returns {Promise.<any>} can return retry-result
+     * @returns {Promise.<MetadataTypeItem | null>} can return retry-result
      */
-    static handleRESTErrors(ex: SDKError, key: string, url: string): Promise<any>;
+    static handleRESTErrors(ex: SDKError, key: string, url: string): Promise<MetadataTypeItem | null>;
     /**
      * helper for {@link Automation.retrieve} to get Automation Notifications
      *
@@ -276,6 +276,15 @@ declare class Automation extends MetadataType {
      * @returns {Promise.<void>} -
      */
     static postDeleteTasks(customerKey: string): Promise<void>;
+    /**
+     * helper for {@link MetadataType.getNestedValue} - adjusted for automation activities
+     *
+     * @param {object | string | number | boolean | null} obj the metadataItem to search in (or the result)
+     * @param {string[]} nestedKeyParts key in dot-notation split into parts
+     * @param {string} dependentType used for types that need custom handling
+     * @returns {(string) | (string)[]} result
+     */
+    static getNestedValueHelper(obj: object | string | number | boolean | null, nestedKeyParts: string[], dependentType: string): (string) | (string)[];
 }
 declare namespace Automation {
     let retrieveDir: string;

@@ -43,7 +43,7 @@ export type TypeKeyCombo = {
 /**
  * generic metadata item
  */
-export type MetadataTypeItem = any;
+export type MetadataTypeItem = Record<string, unknown> | object;
 /**
  * key=customer key
  */
@@ -231,13 +231,9 @@ export type ScriptItem = {
 export type ScriptMap = {
     [x: string]: ScriptItem;
 };
-export type AssetItem = {
-    [x: string]: any;
-};
+export type AssetItem = MetadataTypeItem;
 export type AssetMap = {
-    [x: string]: {
-        [x: string]: any;
-    };
+    [x: string]: any;
 };
 export type AssetSubType = "archive" | "asset" | "audio" | "block" | "code" | "document" | "image" | "message" | "other" | "rawimage" | "template" | "textfile" | "video";
 export type DataExtensionFieldItem = {
@@ -749,11 +745,11 @@ export type AutomationSchedule = {
     /**
      * ?
      */
-    pattern?: any;
+    pattern?: unknown;
     /**
      * ?
      */
-    scheduledTime?: any;
+    scheduledTime?: unknown;
     /**
      * ?
      */
@@ -857,7 +853,11 @@ export type AutomationItem = {
     /**
      * notifications
      */
-    notifications?: any;
+    notifications?: {
+        type: string;
+        email: string | string[];
+        message?: string;
+    }[];
     /**
      * -
      */
@@ -1421,7 +1421,7 @@ export type SoapRequestParams = {
     /**
      * ?
      */
-    clientIDs?: any;
+    clientIDs?: unknown;
     /**
      * simple or complex
      * complex
@@ -1502,7 +1502,7 @@ export type AssetRequestParams = {
      * ?
      * complex
      */
-    clientIDs?: any;
+    clientIDs?: unknown;
     /**
      * pagination
      */

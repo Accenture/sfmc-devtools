@@ -16,6 +16,8 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v6
+              with:
+                  ref: ${{ github.event.release.tag_name }}
             - uses: actions/setup-node@v6
               with:
                   node-version-file: ./package.json
@@ -28,11 +30,28 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v6
+              with:
+                  ref: ${{ github.event.release.tag_name }}
             - uses: actions/setup-node@v6
               with:
                   node-version-file: ./package.json
                   registry-url: https://registry.npmjs.org/
-            - run: npm publish
+            - name: Validate v9 release version
+              env:
+                  RELEASE_TAG: ${{ github.event.release.tag_name }}
+              run: |
+                  node --input-type=module <<'NODE'
+                  import fs from 'node:fs';
+                  const { version } = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+                  if (process.env.RELEASE_TAG !== `v${version}`) {
+                      throw new Error('Release tag must match package.json version');
+                  }
+                  if (!/^9\.\d+\.\d+$/.test(version)) {
+                      throw new Error('This maintenance workflow only publishes v9 releases');
+                  }
+                  NODE
+
+            - run: npm publish --tag v9
 
             - name: Close release milestone if empty
               env:

@@ -45,12 +45,12 @@
         "mcdev": "./lib/cli.js"
     },
     "engines": {
-        "node": "^20.19.0 || ^22.13.0 || >=24"
+        "node": "^22.22.2 || >=24.15.0"
     },
     "scripts": {
         "start": "node lib/cli.js",
         "mcdev": "node lib/cli.js",
-        "build": "run-s lint:fix docs test",
+        "build": "run-s lint:fix test",
         "debug": "node --nolazy --inspect-brk=9229 lib/cli.js",
         "lint:fix": "eslint --fix lib/**/*.js types/*.js test/**/*.js",
         "lint": "eslint lib/**/*.js types/*.js test/**/*.js",
@@ -81,7 +81,7 @@
         "prettier": "3.8.1",
         "prettier-plugin-sql": "0.20.0",
         "semver": "7.7.4",
-        "sfmc-sdk": "3.0.3",
+        "sfmc-sdk": "4.0.2",
         "simple-git": "3.33.0",
         "toposort": "2.0.2",
         "update-notifier": "7.3.1",

@@ -16,7 +16,10 @@
  */
 
 /**
- * @typedef {Object.<any, any>} MetadataTypeItem generic metadata item
+ * @typedef {Record<string, unknown> | object} MetadataTypeItem generic metadata item
+ */
+
+/**
  * @typedef {Object.<string, MetadataTypeItem>} MetadataTypeMap key=customer key
  * @typedef {Object.<string, MetadataTypeMap>} MultiMetadataTypeMap key=Supported MetadataType
  * @typedef {Object.<string, MetadataTypeItem[]>} MultiMetadataTypeList key=Supported MetadataType
@@ -77,7 +80,10 @@
  */
 
 /**
- * @typedef {Object.<string, any>} AssetItem
+ * @typedef {MetadataTypeItem} AssetItem
+ */
+
+/**
  * @typedef {Object.<string, AssetItem>} AssetMap
  * @typedef {'archive'|'asset'|'audio'|'block'|'code'|'document'|'image'|'message'|'other'|'rawimage'|'template'|'textfile'|'video'} AssetSubType
  */
@@ -250,8 +256,8 @@
  * @property {number} [timezoneId] see this.definition.timeZoneMapping
  * @property {number} [timeZoneId] same as timezoneId but returned by legacy-API; see this.definition.timeZoneMapping
  * @property {number} [rangeTypeId] ?
- * @property {any} [pattern] ?
- * @property {any} [scheduledTime] ?
+ * @property {unknown} [pattern] ?
+ * @property {unknown} [scheduledTime] ?
  * @property {string} [scheduledStatus] ?
  */
 
@@ -294,7 +300,7 @@
  * @property {string} [CustomerKey] key (SOAP API)
  * @property {string} [name] name (Rest API)
  * @property {string} [Name] name (SOAP API)
- * @property {any} [notifications] notifications
+ * @property {{type: string, email: string | string[], message?: string}[]} [notifications] notifications
  * @property {string} [description] -
  * @property {'scheduled'|'triggered'|'automationtriggered'} [type] Starting Source = Schedule / File Drop
  * @property {'scheduled'|'triggered'|'automationtriggered'} [automationType] Starting Source = Schedule / File Drop; from legacy api
@@ -487,7 +493,7 @@
  * @typedef {object} SoapRequestParams
  * @property {string} [continueRequest] request id
  * @property {object} [options] additional options (CallsInConversation, Client, ConversationID, Priority, RequestType, SaveOptions, ScheduledTime, SendResponseTo, SequenceCode)
- * @property {*} [clientIDs] ?
+ * @property {unknown} [clientIDs] ?
  * @property {SoapSDKFilter} [filter] simple or complex
 complex
  * @property {boolean} [QueryAllAccounts] all BUs or just one
@@ -529,7 +535,7 @@ complex
  * @typedef {object} AssetRequestParams
  * @property {string} [continueRequest] request id
  * @property {object} [options] additional options (CallsInConversation, Client, ConversationID, Priority, RequestType, SaveOptions, ScheduledTime, SendResponseTo, SequenceCode)
- * @property {*} [clientIDs] ?
+ * @property {unknown} [clientIDs] ?
 complex
  * @property {object} [page] pagination
  * @property {string[]} [fields] list of fields we want returned

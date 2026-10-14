@@ -1,5 +1,6 @@
 import File from '../lib/util/file.js';
 import path from 'node:path';
+import os from 'node:os';
 import MockAdapter from 'axios-mock-adapter';
 import { axiosInstance } from '../node_modules/sfmc-sdk/lib/util.js';
 import handler from '../lib/index.js';
@@ -226,6 +227,8 @@ export function mockSetup(isDeploy) {
         .onAny(new RegExp(`^${escapeRegExp(restUrl)}`))
         .reply((config) => handleRESTRequest(config));
     const fsMockConf = {
+        // Conf sessions may live on a different drive than cwd and the temp directory.
+        [path.parse(process.env.APPDATA || os.homedir()).root]: {},
         '.beautyamp.json': fsmock.load(
             path.resolve(__dirname, '../boilerplate/files/.beautyamp.json')
         ),
@@ -336,7 +339,7 @@ export function getRestCallout(method, url, returnAll = false) {
     /**
      * helper for filter/find
      *
-     * @param {any} item history item
+     * @param {import('axios').AxiosRequestConfig} item history item
      * @returns {boolean} if item matches
      */
     function findCallout(item) {

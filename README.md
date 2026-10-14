@@ -13,11 +13,15 @@ Accenture Salesforce Marketing Cloud DevTools (mcdev) is a rapid deployment/roll
 
 ### Install
 
-Run the following to install Accenture SFMC DevTools on your computer:
+The v9 maintenance line requires Node.js 22.22.2 or later within Node 22, or Node.js 24.15.0 or later. Node.js 20 and 23 are not supported.
+
+To stay on v9 without adopting v10's breaking changes, install from the `v9` npm channel:
 
 ```bash
-npm install -g mcdev
+npm install -g mcdev@v9
 ```
+
+The default `npm install -g mcdev` command follows the `latest` channel, which contains v10.
 
 ### VSCode Extension
 

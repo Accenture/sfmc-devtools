@@ -14,14 +14,15 @@ export namespace Util {
     /**
      * helper that allows filtering an object by its keys
      *
-     * @param {Object.<string,*>} originalObj object that you want to filter
+     * @template T
+     * @param {Object.<string, T>} originalObj object that you want to filter
      * @param {string[]} [whitelistArr] positive filter. if not provided, returns originalObj without filter
-     * @returns {Object.<string,*>} filtered object that only contains keys you provided
+     * @returns {Object.<string, T>} filtered object that only contains keys you provided
      */
-    function filterObjByKeys(originalObj: {
-        [x: string]: any;
+    function filterObjByKeys<T>(originalObj: {
+        [x: string]: T;
     }, whitelistArr?: string[]): {
-        [x: string]: any;
+        [x: string]: T;
     };
     /**
      * extended Array.includes method that allows check if an array-element starts with a certain string
@@ -80,18 +81,18 @@ export namespace Util {
      * SFMC accepts multiple true values for Boolean attributes for which we are checking here.
      * The same problem occurs when evaluating boolean CLI flags
      *
-     * @param {*} attrValue value
+     * @param {string | number | boolean} attrValue value
      * @returns {boolean} attribute value == true ? true : false
      */
-    function isTrue(attrValue: any): boolean;
+    function isTrue(attrValue: string | number | boolean): boolean;
     /**
      * SFMC accepts multiple false values for Boolean attributes for which we are checking here.
      * The same problem occurs when evaluating boolean CLI flags
      *
-     * @param {*} attrValue value
+     * @param {string | number | boolean} attrValue value
      * @returns {boolean} attribute value == false ? true : false
      */
-    function isFalse(attrValue: any): boolean;
+    function isFalse(attrValue: string | number | boolean): boolean;
     function isEqual(item1: string | number | boolean | any[] | object, item2: string | number | boolean | any[] | object): boolean;
     function _isEqualArray(array1: any[], array2: any[]): boolean;
     function _isEqualObject(item1: object, item2: object): boolean;
@@ -144,7 +145,7 @@ export namespace Util {
     let loggerTransports: any;
     let logger: Logger;
     function startLogger(restart?: boolean, noLogFile?: boolean): void;
-    function metadataLogger(level: string, type: string, method: string, payload: any, source?: string): void;
+    function metadataLogger(level: string, type: string, method: string, payload: unknown, source?: string): void;
     function replaceByObject(str: string | object, obj: TemplateMap): string | object;
     function inverseGet(objs: object, val: string | number): string;
     /**
@@ -167,10 +168,10 @@ export namespace Util {
      * let's you dynamically walk down an object and get a value
      *
      * @param {string} path 'fieldA.fieldB.fieldC'
-     * @param {object} obj some parent object
-     * @returns {any} value of obj.path
+     * @param {MetadataTypeItem} obj some parent object
+     * @returns {unknown} value of obj.path
      */
-    function resolveObjPath(path: string, obj: object): any;
+    function resolveObjPath(path: string, obj: MetadataTypeItem): unknown;
     /**
      * helper to run other commands as if run manually by user
      *
@@ -216,7 +217,11 @@ export namespace Util {
      * @param {string} [useInstead] optionally specify which method to use instead
      */
     function logDeprecated(method: string, useInstead?: string): void;
-    function logNotSupported(definition: any, method: string, item?: MetadataTypeItem): void;
+    function logNotSupported(definition: {
+        type: string;
+        keyField: string;
+        nameField: string;
+    }, method: string, item?: MetadataTypeItem): void;
     namespace color {
         let reset: string;
         let dim: string;
@@ -254,27 +259,39 @@ export namespace Util {
     /**
      * helper that returns the prefix of item specific log messages
      *
-     * @param {any} definition metadata definition
+     * @param {{type: string, keyField: string, nameField: string}} definition metadata definition
      * @param {MetadataTypeItem} metadataItem metadata item
      * @returns {string} msg prefix
      */
-    function getMsgPrefix(definition: any, metadataItem: MetadataTypeItem): string;
+    function getMsgPrefix(definition: {
+        type: string;
+        keyField: string;
+        nameField: string;
+    }, metadataItem: MetadataTypeItem): string;
     /**
      * helper that returns the prefix of item specific log messages
      *
-     * @param {any} definition metadata definition
+     * @param {{type: string, keyField: string, nameField: string}} definition metadata definition
      * @param {MetadataTypeItem} metadataItem metadata item
      * @returns {string} key or key/name combo
      */
-    function getTypeKeyName(definition: any, metadataItem: MetadataTypeItem): string;
+    function getTypeKeyName(definition: {
+        type: string;
+        keyField: string;
+        nameField: string;
+    }, metadataItem: MetadataTypeItem): string;
     /**
      * helper that returns the prefix of item specific log messages
      *
-     * @param {any} definition metadata definition
+     * @param {{type: string, keyField: string, nameField: string}} definition metadata definition
      * @param {MetadataTypeItem} metadataItem metadata item
      * @returns {string} key or key/name combo
      */
-    function getKeyName(definition: any, metadataItem: MetadataTypeItem): string;
+    function getKeyName(definition: {
+        type: string;
+        keyField: string;
+        nameField: string;
+    }, metadataItem: MetadataTypeItem): string;
     /**
      * helper to print the subtypes we filtered by
      *
@@ -375,11 +392,12 @@ export namespace Util {
      * async version of Array.find()
      * returns the first element in the provided array that satisfies the provided testin function
      *
-     * @param {Array} arr your test array
-     * @param {Function} asyncCallback callback
-     * @returns {Promise.<any | undefined>} first element that passed the test
+     * @template T
+     * @param {T[]} arr your test array
+     * @param {(element: T) => boolean | Promise.<boolean>} asyncCallback callback
+     * @returns {Promise.<T | undefined>} first element that passed the test
      */
-    function findAsync(arr: any[], asyncCallback: Function): Promise<any | undefined>;
+    function findAsync<T>(arr: T[], asyncCallback: (element: T) => boolean | Promise<boolean>): Promise<T | undefined>;
     /**
      *
      * @param {Array} array array to be chunked
@@ -390,11 +408,11 @@ export namespace Util {
     /**
      * recursively find all values of the given key in the object
      *
-     * @param {any} object data to search in
+     * @param {object} object data to search in
      * @param {string} key attribute to find
      * @returns {Array} all values of the given key
      */
-    function findLeafVals(object: any, key: string): any[];
+    function findLeafVals(object: object, key: string): any[];
     /**
      * helper that returns a new object with sorted attributes of the given object
      *

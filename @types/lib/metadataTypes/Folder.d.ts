@@ -71,16 +71,24 @@ declare class Folder extends MetadataType {
      * creates a folder based on metatadata
      *
      * @param {ListItem} metadataEntry metadata of the folder
-     * @returns {Promise.<any>} Promise of api response
+     * @returns {Promise.<{Results?: {Object: MetadataTypeItem}[]} | undefined>} Promise of api response
      */
-    static create(metadataEntry: ListItem): Promise<any>;
+    static create(metadataEntry: ListItem): Promise<{
+        Results?: {
+            Object: MetadataTypeItem;
+        }[];
+    } | undefined>;
     /**
      * Updates a single Folder.
      *
      * @param {MetadataTypeItem} metadataEntry single metadata entry
-     * @returns {Promise.<any>} Promise of api response
+     * @returns {Promise.<{Results?: {Object: MetadataTypeItem}[]} | undefined>} Promise of api response
      */
-    static update(metadataEntry: MetadataTypeItem): Promise<any>;
+    static update(metadataEntry: MetadataTypeItem): Promise<{
+        Results?: {
+            Object: MetadataTypeItem;
+        }[];
+    } | undefined>;
     /**
      * prepares a folder for deployment
      *
