@@ -55,7 +55,10 @@ export async function copyFile(from, to, mid = '9999999') {
  * @returns {void} -
  */
 export function copyToDeploy(from, to, mid = '9999999', buName = 'testBU') {
-    console.log(`Copying ${from} to deploy folder`); // eslint-disable-line no-console
+    if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+        // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+        console.log(`Copying ${from} to deploy folder`);
+    }
     File.copySync(`./test/resources/${mid}/${from}`, `./deploy/testInstance/${buName}/${to}`);
 }
 
@@ -102,7 +105,10 @@ export async function getActualFile(customerKey, type, ext, buName = 'testBU') {
     try {
         return await File.readFile(path, 'utf8');
     } catch {
-        console.log(`File not found: ${path}`); // eslint-disable-line no-console
+        if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+            // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+            console.log(`File not found: ${path}`);
+        }
         return null;
     }
 }
@@ -170,7 +176,10 @@ export function getActualTemplateFile(customerKey, type, ext) {
  */
 export function getExpectedJson(mid, type, action) {
     const path = `/resources/${mid}/${type}/${action}-expected.json`;
-    Util.logger.debug(loadingFile + path);
+    if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+        // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+        console.log(loadingFile + path);
+    }
     return File.readJSON(`./test` + path);
 }
 
@@ -185,7 +194,10 @@ export function getExpectedJson(mid, type, action) {
  */
 export function getExpectedFile(mid, type, action, ext) {
     const path = `/resources/${mid}/${type}/${action}-expected.${ext}`;
-    Util.logger.debug(loadingFile + path);
+    if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+        // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+        console.log(loadingFile + path);
+    }
     return File.readFile(`./test` + path, 'utf8');
 }
 
@@ -214,7 +226,8 @@ export function mockSetup(isDeploy) {
         for (const option in handler.knownOptions) {
             resetOptions[option] = undefined;
         }
-        // Keep routine full-suite output below capture limits; individual tests can enable debug.
+        // Only the argument-free npm test runner opts into mcdev's errors-only logging.
+        resetOptions.silent = process.env.MCDEV_FULL_TEST_SUITE === '1';
         resetOptions.debug = false;
         resetOptions.noLogFile = true;
 
@@ -360,7 +373,10 @@ export function getAPIHistory() {
  */
 export function getRestCallout(method, url, returnAll = false, expectNone = false) {
     if (!apimock.history[method]?.length) {
-        console.log(`${tWarn} No history for method ${method}.`); // eslint-disable-line no-console
+        if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+            // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+            console.log(`${tWarn} No history for method ${method}.`);
+        }
         const methods = Object.keys(apimock.history)
             .filter((el) => apimock.history[el]?.length)
             .join(', ');
@@ -455,7 +471,10 @@ export function getAPIHistoryDebug() {
  * @returns {void} of API history
  */
 export function logAPIHistoryDebug() {
-    console.log(getAPIHistoryDebug()); // eslint-disable-line no-console
+    if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+        // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+        console.log(getAPIHistoryDebug());
+    }
 }
 
 /**

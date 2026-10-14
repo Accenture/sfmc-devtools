@@ -57,6 +57,8 @@ If you want to enhance Accenture SFMC DevTools you are welcome to fork the repo 
 
 More details on how to best do that are described in our [wiki](https://github.com/Accenture/sfmc-devtools/wiki/10.-Contribute).
 
+Run the full test suite with `npm test`. With no additional arguments, it uses mcdev's errors-only `silent` option and suppresses fixture/helper `console.log` diagnostics; existing `console.error` diagnostics and Mocha results remain visible. Supplying any arguments (for example `npm test -- --grep "UTIL"` or `npm test -- test/util.test.js`) retains normal mcdev logging, as do direct Mocha runs and the VS Code Mocha test adapter. Individual tests can still enable debug logging.
+
 ## Main Contacts
 
 The people that lead this project:
