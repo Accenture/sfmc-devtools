@@ -41,6 +41,37 @@ describe('type: dataExtract', () => {
             );
             return;
         });
+
+        it('Should retrieve one specific dataExtract by key with pagination', async () => {
+            // WHEN
+            await handler.retrieve(
+                'testInstance/testBU',
+                ['dataExtract'],
+                ['testExisting_dataExtract']
+            );
+
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            const result = cache.getCache();
+            assert.deepEqual(
+                Object.keys(result.dataExtract || {}),
+                ['testExisting_dataExtract'],
+                'only the requested dataExtract expected'
+            );
+            assert.deepEqual(
+                await testUtils.getActualJson('testExisting_dataExtract', 'dataExtract'),
+                await testUtils.getExpectedJson('9999999', 'dataExtract', 'get'),
+                'returned JSON was not equal expected'
+            );
+            const dataExtractListCall = testUtils
+                .getAPIHistory()
+                .get.find((request) => request.url.startsWith('/automation/v1/dataextracts/'));
+            assert.equal(
+                dataExtractListCall?.url,
+                '/automation/v1/dataextracts/?$pageSize=500&$page=1',
+                'retrieve by key should use the paginated endpoint'
+            );
+        });
     });
 
     describe('Deploy ================', () => {
@@ -86,46 +117,6 @@ describe('type: dataExtract', () => {
     });
 
     describe('Templating ================', () => {
-        it('Should create a dataExtract template via retrieveAsTemplate and build it', async () => {
-            // buildTemplate
-            const result = await handler.retrieveAsTemplate(
-                'testInstance/testBU',
-                'dataExtract',
-                ['testExisting_dataExtract'],
-                'testSourceMarket'
-            );
-            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
-            assert.equal(
-                result.dataExtract ? Object.keys(result.dataExtract).length : 0,
-                1,
-                'only one dataExtract expected'
-            );
-            assert.deepEqual(
-                await testUtils.getActualTemplateJson('testExisting_dataExtract', 'dataExtract'),
-                await testUtils.getExpectedJson('9999999', 'dataExtract', 'template'),
-                'returned template JSON was not equal expected'
-            );
-            // buildDefinition
-            await handler.buildDefinition(
-                'testInstance/testBU',
-                'dataExtract',
-                ['testExisting_dataExtract'],
-                ['testTargetMarket']
-            );
-            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
-            assert.deepEqual(
-                await testUtils.getActualDeployJson('testTemplated_dataExtract', 'dataExtract'),
-                await testUtils.getExpectedJson('9999999', 'dataExtract', 'build'),
-                'returned deployment JSON was not equal expected'
-            );
-            assert.equal(
-                testUtils.getAPIHistoryLength(),
-                9,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            );
-            return;
-        });
-
         it('Should create a dataExtract template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['dataExtract']);

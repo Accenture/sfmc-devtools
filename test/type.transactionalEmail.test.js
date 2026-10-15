@@ -100,7 +100,6 @@ describe('type: transactionalEmail', () => {
     });
 
     describe('Templating ================', () => {
-        // it.skip('Should create a transactionalEmail template via retrieveAsTemplate and build it');
         it('Should create a transactionalEmail template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['transactionalEmail']);

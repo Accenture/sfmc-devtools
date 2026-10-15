@@ -66,9 +66,9 @@ declare class Automation extends MetadataType {
      * @param {SDKError} ex exception
      * @param {string} key id or key of item
      * @param {string} url url to call for retry
-     * @returns {Promise.<any>} can return retry-result
+     * @returns {Promise.<object|null>} retry result or null when the request cannot be recovered
      */
-    static handleRESTErrors(ex: SDKError, key: string, url: string): Promise<any>;
+    static handleRESTErrors(ex: SDKError, key: string, url: string): Promise<object | null>;
     /**
      * helper for {@link Automation.retrieve} to get Automation Notifications
      *
@@ -89,16 +89,6 @@ declare class Automation extends MetadataType {
      * @returns {Promise.<AutomationMapObj>} Promise of metadata
      */
     static retrieveForCache(): Promise<AutomationMapObj>;
-    /**
-     * Retrieve a specific Automation Definition by Name
-     *
-     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
-     * @param {string} templateDir Directory where retrieved metadata directory will be saved
-     * @param {string} name name of the metadata file
-     * @param {TemplateMap} templateVariables variables to be replaced in the metadata
-     * @returns {Promise.<AutomationItemObj>} Promise of metadata
-     */
-    static retrieveAsTemplate(templateDir: string, name: string, templateVariables: TemplateMap): Promise<AutomationItemObj>;
     /**
      * helper for {@link Automation.postRetrieveTasks} and {@link Automation.execute}
      *

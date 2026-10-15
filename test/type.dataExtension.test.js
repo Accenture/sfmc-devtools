@@ -282,51 +282,6 @@ describe('type: dataExtension', () => {
     });
 
     describe('Templating ================', () => {
-        it('Should create a dataExtension template via retrieveAsTemplate and build it', async () => {
-            // GIVEN there is a template
-            const result = await handler.retrieveAsTemplate(
-                'testInstance/testBU',
-                'dataExtension',
-                ['testExisting_dataExtension'],
-                'testSourceMarket'
-            );
-            assert.equal(process.exitCode, 0, 'retrieveAsTemplate should not have thrown an error');
-
-            // WHEN
-            assert.equal(
-                result.dataExtension ? Object.keys(result.dataExtension).length : 0,
-                1,
-                'only one dataExtension expected'
-            );
-            assert.deepEqual(
-                await testUtils.getActualTemplateJson(
-                    'testExisting_dataExtension',
-                    'dataExtension'
-                ),
-                await testUtils.getExpectedJson('9999999', 'dataExtension', 'template'),
-                'returned template was not equal expected'
-            );
-            // THEN
-            await handler.buildDefinition(
-                'testInstance/testBU',
-                'dataExtension',
-                ['testExisting_dataExtension'],
-                ['testTargetMarket']
-            );
-            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
-            assert.deepEqual(
-                await testUtils.getActualDeployJson('testTemplated_dataExtension', 'dataExtension'),
-                await testUtils.getExpectedJson('9999999', 'dataExtension', 'build'),
-                'returned deployment file was not equal expected'
-            );
-            assert.equal(
-                testUtils.getAPIHistoryLength(),
-                5,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            );
-            return;
-        });
-
         it('Should create a dataExtension template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['dataExtension']);
@@ -404,12 +359,12 @@ describe('type: dataExtension', () => {
             assert.equal(fileList.length, 2, 'expected only 2 file paths (json, md)');
 
             assert.equal(
-                fileList[0].split('\\').join('/'),
+                fileList[0].replaceAll('\\', '/'),
                 'retrieve/testInstance/testBU/dataExtension/testExisting_dataExtension.dataExtension-meta.json',
                 'wrong JSON path'
             );
             assert.equal(
-                fileList[1].split('\\').join('/'),
+                fileList[1].replaceAll('\\', '/'),
                 'retrieve/testInstance/testBU/dataExtension/testExisting_dataExtension.dataExtension-doc.md',
                 'wrong MD path'
             );

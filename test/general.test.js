@@ -5,6 +5,12 @@ const expect = chai.expect;
 import chaiFiles from 'chai-files';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
+import { Util } from '../lib/util/util.js';
+import MetadataType from '../lib/metadataTypes/MetadataType.js';
+import Asset from '../lib/metadataTypes/Asset.js';
+import File from '../lib/util/file.js';
+import fs from 'fs-extra';
+import config from '../lib/util/config.js';
 chai.use(chaiFiles);
 
 describe('GENERAL', () => {
@@ -60,7 +66,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    48,
+                    50,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -108,7 +114,7 @@ describe('GENERAL', () => {
                 );
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    48,
+                    50,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -157,7 +163,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    48,
+                    50,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -183,7 +189,9 @@ describe('GENERAL', () => {
                         'testExisting_asset_htmlblock',
                         'testExisting_htmlblock1',
                         'testExisting_htmlblock 3 spaces',
+                        'testExisting_email_block_refresh',
                         'testExisting_asset_message',
+                        'testExisting_mobilePush_asset_DEV',
                     ],
                     'should have found the right assets that need updating'
                 );
@@ -224,7 +232,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    84,
+                    93,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -247,7 +255,9 @@ describe('GENERAL', () => {
                     [
                         'testExisting_htmlblock1',
                         'testExisting_htmlblock 3 spaces',
+                        'testExisting_email_block_refresh',
                         'testExisting_asset_message',
+                        'testExisting_mobilePush_asset_DEV',
                     ],
                     'should have found the right assets that need updating'
                 );
@@ -284,7 +294,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    84,
+                    93,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -344,7 +354,7 @@ describe('GENERAL', () => {
 
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
-                    84,
+                    93,
                     'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
                 );
                 return;
@@ -771,6 +781,187 @@ describe('GENERAL', () => {
         });
 
         describe('template --metadata ~~~', () => {
+            it('supports regex templates for exact quoted Dynamic values without partial matches', () => {
+                const markets = {
+                    mode: {
+                        search: '("Dynamic")',
+                        replace: 'Static',
+                        template: '"{{{mode}}}"',
+                    },
+                };
+                const input = { mode: 'Dynamic', other: 'DynamicContent', repeated: 'Dynamic' };
+                const template = Util.replaceByObject(input, markets);
+                assert.deepEqual(template, {
+                    mode: '{{{mode}}}',
+                    other: 'DynamicContent',
+                    repeated: '{{{mode}}}',
+                });
+                assert.deepEqual(
+                    JSON.parse(MetadataType.applyTemplateValues(JSON.stringify(template), markets)),
+                    { mode: 'Static', other: 'DynamicContent', repeated: 'Static' }
+                );
+                assert.equal(input.mode, 'Dynamic');
+            });
+
+            it('preserves native regex captures and whitespace across extracted code', () => {
+                const code = 'SET @count = 123\nSET @count\t=\t456\n';
+                const markets = {
+                    count: {
+                        search: String.raw`(SET @count\s*=\s*)\d+(\s*)`,
+                        replace: 0,
+                        template: '$1{{{count}}}$2',
+                    },
+                };
+                const template = MetadataType.applyTemplateNames(code, markets);
+                assert.equal(template, 'SET @count = {{{count}}}\nSET @count\t=\t{{{count}}}\n');
+                assert.equal(
+                    MetadataType.applyTemplateValues(template, markets),
+                    'SET @count = 0\nSET @count\t=\t0\n'
+                );
+                assert.equal(
+                    Util.replaceByObject('a123b a456b', {
+                        count: { search: String.raw`(a)\d+(b)`, replace: 1, template: '$11$2' },
+                    }),
+                    'a1b a1b'
+                );
+            });
+
+            it('mixes regex defaults with escaped scalars and retains falsy scalar skipping', () => {
+                const markets = {
+                    short: 'alpha',
+                    long: 'alpha.beta',
+                    literal: 'a+b[$]',
+                    digits: { search: String.raw`\b\d+\b`, replace: 0 },
+                    disabled: { search: 'ENABLED', replace: false },
+                    empty: { search: 'REMOVE', replace: '' },
+                    skippedZero: 0,
+                    skippedFalse: false,
+                    skippedEmpty: '',
+                };
+                const template = Util.replaceByObject(
+                    'alpha.beta alpha a+b[$] 123 ENABLED REMOVE false',
+                    markets
+                );
+                assert.equal(
+                    template,
+                    '{{{long}}} {{{short}}} {{{literal}}} {{{digits}}} {{{disabled}}} {{{empty}}} false'
+                );
+                const frozen = Object.freeze({
+                    ...markets,
+                    digits: Object.freeze(markets.digits),
+                    disabled: Object.freeze(markets.disabled),
+                    empty: Object.freeze(markets.empty),
+                });
+                assert.equal(
+                    MetadataType.applyTemplateValues(template, frozen),
+                    'alpha.beta alpha a+b[$] 0 false  false'
+                );
+                assert.deepEqual(frozen, markets);
+                assert.deepEqual(
+                    JSON.parse(
+                        MetadataType.applyTemplateValues(
+                            '{"count":"{{{digits}}}","enabled":"{{{disabled}}}","empty":"{{{empty}}}"}',
+                            frozen
+                        )
+                    ),
+                    { count: '0', enabled: 'false', empty: '' }
+                );
+                assert.equal(
+                    MetadataType.applyTemplateValues('{{{literal}}}', {
+                        literal: { search: 'unused', replace: '$1/$&' },
+                    }),
+                    '$1/$&'
+                );
+            });
+
+            it('preserves legacy overlap ordering for truthy numeric and boolean scalars', () => {
+                assert.equal(
+                    Util.replaceByObject('123 12', { short: 12, long: 123 }),
+                    '{{{short}}}3 {{{short}}}'
+                );
+                assert.equal(
+                    Util.replaceByObject('true trueish', { short: true, long: 'trueish' }),
+                    '{{{short}}} {{{short}}}ish'
+                );
+            });
+
+            it('buildTemplate + buildDefinition integrates regex entries in JSON strings and SQL', async () => {
+                const properties = await File.readJSON('.mcdevrc.json');
+                const source = {
+                    prefix: 'source_',
+                    mode: { search: '("Dynamic")', replace: 'Dynamic', template: '"{{{mode}}}"' },
+                    count: {
+                        search: String.raw`(SET @count\s*=\s*)\d+(\s*)`,
+                        replace: 123,
+                        template: '$1{{{count}}}$2',
+                    },
+                    enabled: { search: 'ENABLED', replace: true },
+                    empty: { search: 'REMOVE', replace: 'REMOVE' },
+                };
+                properties.markets.regexSource = source;
+                properties.markets.regexTarget = {
+                    ...source,
+                    prefix: 'target_',
+                    mode: { ...source.mode, replace: 'Static' },
+                    count: { ...source.count, replace: 0 },
+                    enabled: { ...source.enabled, replace: false },
+                    empty: { ...source.empty, replace: '' },
+                };
+                await fs.writeJSON('.mcdevrc.json', properties);
+                config.properties = null;
+                const directory = 'retrieve/testInstance/testBU/query';
+                await fs.outputJSON(`${directory}/source_query.query-meta.json`, {
+                    name: 'source_query',
+                    key: 'source_query',
+                    description: 'Dynamic',
+                    r__dataExtension_key: 'DynamicContent',
+                    targetUpdateTypeName: 'Overwrite',
+                    r__folder_Path: 'Query',
+                });
+                await fs.outputFile(
+                    `${directory}/source_query.query-meta.sql`,
+                    'SET @count = 123\nSET @count\t=\t456\nSELECT ENABLED, REMOVE\n'
+                );
+                await handler.buildTemplate(
+                    'testInstance/testBU',
+                    'query',
+                    ['source_query'],
+                    ['regexSource']
+                );
+                assert.equal(process.exitCode, 0);
+                const template = JSON.parse(
+                    await testUtils.getActualTemplateFile('source_query', 'query', 'json')
+                );
+                assert.equal(template.description, '{{{mode}}}');
+                assert.equal(template.r__dataExtension_key, 'DynamicContent');
+                assert.equal(
+                    await testUtils.getActualTemplateFile('source_query', 'query', 'sql'),
+                    'SET @count = {{{count}}}\nSET @count\t=\t{{{count}}}\nSELECT {{{enabled}}}, {{{empty}}}\n'
+                );
+                await handler.buildDefinition(
+                    'testInstance/testBU',
+                    'query',
+                    ['source_query'],
+                    ['regexTarget']
+                );
+                assert.equal(process.exitCode, 0);
+                const built = JSON.parse(
+                    await testUtils.getActualDeployFile('target_query', 'query', 'json')
+                );
+                assert.equal(built.description, 'Static');
+                assert.equal(built.r__dataExtension_key, 'DynamicContent');
+                assert.equal(
+                    await testUtils.getActualDeployFile('target_query', 'query', 'sql'),
+                    'SET @count = 0\nSET @count\t=\t0\nSELECT false, \n'
+                );
+                assert.equal(testUtils.getAPIHistoryLength(), 0);
+                assert.deepEqual(
+                    (await File.readJSON('.mcdevrc.json')).markets.regexSource,
+                    source
+                );
+                config.properties = null;
+            });
+
             it('buildTemplate + buildDefinition for multiple types with keys', async () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU', ['automation', 'query']);
@@ -824,7 +1015,7 @@ describe('GENERAL', () => {
                 assert.deepEqual(
                     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                     await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                    'returned template JSON of retrieveAsTemplate was not equal expected'
+                    'returned template JSON of buildTemplate was not equal expected'
                 );
                 expect(
                     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
@@ -926,7 +1117,7 @@ describe('GENERAL', () => {
                 assert.deepEqual(
                     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                     await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                    'returned template JSON of retrieveAsTemplate was not equal expected'
+                    'returned template JSON of buildTemplate was not equal expected'
                 );
                 expect(
                     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
@@ -985,7 +1176,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 111;
+                const expectedApiCallsRetrieve = 120;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1058,7 +1249,7 @@ describe('GENERAL', () => {
                 assert.deepEqual(
                     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                     await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                    'returned template JSON of retrieveAsTemplate was not equal expected'
+                    'returned template JSON of buildTemplate was not equal expected'
                 );
                 expect(
                     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
@@ -1179,7 +1370,7 @@ describe('GENERAL', () => {
                 assert.deepEqual(
                     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                     await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                    'returned template JSON of retrieveAsTemplate was not equal expected'
+                    'returned template JSON of buildTemplate was not equal expected'
                 );
                 expect(
                     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
@@ -1227,7 +1418,7 @@ describe('GENERAL', () => {
                     await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
                 ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
 
-                const expectedApiCallsRetrieve = 115;
+                const expectedApiCallsRetrieve = 124;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1288,7 +1479,7 @@ describe('GENERAL', () => {
                 assert.deepEqual(
                     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                     await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                    'returned template JSON of retrieveAsTemplate was not equal expected'
+                    'returned template JSON of buildTemplate was not equal expected'
                 );
                 expect(
                     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
@@ -1549,7 +1740,7 @@ describe('GENERAL', () => {
                 // assert.deepEqual(
                 //     await testUtils.getActualTemporaryTemplateJson('testExisting_query', 'query'),
                 //     await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                //     'returned template JSON of retrieveAsTemplate was not equal expected'
+                //     'returned template JSON of buildTemplate was not equal expected'
                 // );
                 // expect(
                 //     await testUtils.getActualTemporaryTemplateFile(
@@ -1601,7 +1792,7 @@ describe('GENERAL', () => {
                 // download everything before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 111;
+                const expectedApiCallsRetrieve = 120;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1647,7 +1838,7 @@ describe('GENERAL', () => {
                 // assert.deepEqual(
                 //     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                 //     await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                //     'returned template JSON of retrieveAsTemplate was not equal expected'
+                //     'returned template JSON of buildTemplate was not equal expected'
                 // );
                 // expect(
                 //     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
@@ -1755,7 +1946,7 @@ describe('GENERAL', () => {
                 // assert.deepEqual(
                 //     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                 //     await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                //     'returned template JSON of retrieveAsTemplate was not equal expected'
+                //     'returned template JSON of buildTemplate was not equal expected'
                 // );
                 // expect(
                 //     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
@@ -1812,7 +2003,7 @@ describe('GENERAL', () => {
                     await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
                 ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
 
-                const expectedApiCallsRetrieve = 115;
+                const expectedApiCallsRetrieve = 124;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -1869,7 +2060,7 @@ describe('GENERAL', () => {
                 // assert.deepEqual(
                 //     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                 //     await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                //     'returned template JSON of retrieveAsTemplate was not equal expected'
+                //     'returned template JSON of buildTemplate was not equal expected'
                 // );
                 // expect(
                 //     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
@@ -2003,7 +2194,7 @@ describe('GENERAL', () => {
                 // download first before we test buildTemplate
                 await handler.retrieve('testInstance/testBU');
 
-                const expectedApiCallsRetrieve = 111;
+                const expectedApiCallsRetrieve = 120;
                 assert.equal(
                     testUtils.getAPIHistoryLength(),
                     expectedApiCallsRetrieve,
@@ -2050,7 +2241,7 @@ describe('GENERAL', () => {
                 // assert.deepEqual(
                 //     await testUtils.getActualTemplateJson('testExisting_query', 'query'),
                 //     await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                //     'returned template JSON of retrieveAsTemplate was not equal expected'
+                //     'returned template JSON of buildTemplate was not equal expected'
                 // );
                 // expect(
                 //     await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
@@ -2650,6 +2841,33 @@ describe('GENERAL', () => {
     });
 
     describe('explainTypes ================', () => {
+        it('preserves the shared-asset flag through cache retrieval', async () => {
+            const client = Asset.client;
+            const urls = [];
+            Asset.client = /** @type {typeof Asset.client} */ (
+                /** @type {unknown} */ ({
+                    rest: {
+                        post: async (uri) => {
+                            urls.push(uri);
+                            return { items: [], count: 0, page: 1, pageSize: 50 };
+                        },
+                    },
+                })
+            );
+            try {
+                const shared = await Asset.retrieveForCache(undefined, ['block'], undefined, true);
+                const local = await Asset.retrieveForCache(undefined, ['block'], undefined, false);
+                assert.deepEqual(shared.metadata, {});
+                assert.deepEqual(local.metadata, {});
+                assert.deepEqual(urls, [
+                    '/asset/v1/content/assets/query?scope=shared',
+                    '/asset/v1/content/assets/query',
+                ]);
+            } finally {
+                Asset.client = client;
+            }
+        });
+
         it('without options', () => {
             handler.explainTypes();
             assert.equal(process.exitCode, 0, 'explainTypes should not have thrown an error');
@@ -2681,8 +2899,7 @@ describe('GENERAL', () => {
                 'update',
                 'delete',
                 'changeKey',
-                'buildTemplate',
-                'retrieveAsTemplate'
+                'buildTemplate'
             );
 
             // check if certain types were returned

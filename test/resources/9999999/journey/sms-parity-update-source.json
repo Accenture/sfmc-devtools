@@ -1,0 +1,36 @@
+{
+    "key": "testExisting_journey_updatecontact",
+    "name": "SMS Parity Update",
+    "description": "",
+    "version": 1,
+    "workflowApiVersion": 1,
+    "activities": [
+        {
+            "key": "SMSSYNC-1",
+            "name": "Send SMS",
+            "description": "",
+            "type": "SMSSYNC",
+            "outcomes": [],
+            "arguments": {},
+            "configurationArguments": {
+                "r__mobileMessage_key": "sourceOnlyMessageId",
+                "r__mobileMessage_name": "testExisting_mobileMessage"
+            },
+            "metaData": {},
+            "schema": { "arguments": {} }
+        }
+    ],
+    "triggers": [],
+    "goals": [],
+    "exits": [],
+    "notifiers": [],
+    "entryMode": "NotSet",
+    "definitionType": "Multistep",
+    "channel": "",
+    "defaults": { "properties": {} },
+    "metaData": {},
+    "executionMode": "Production",
+    "status": "Draft",
+    "scheduledStatus": "Draft",
+    "r__folder_Path": "my journeys"
+}

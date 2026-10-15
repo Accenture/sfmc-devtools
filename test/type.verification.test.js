@@ -5,6 +5,8 @@ import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
+import Automation from '../lib/metadataTypes/Automation.js';
+import Verification from '../lib/metadataTypes/Verification.js';
 chai.use(chaiFiles);
 
 describe('type: verification', () => {
@@ -49,6 +51,63 @@ describe('type: verification', () => {
             );
             return;
         });
+    });
+
+    describe('Empty automation retrieval regressions ================', () => {
+        for (const initialState of ['undefined', 'stale earlier-BU']) {
+            it(`Should preserve the submitted create key when the map is ${initialState}`, async () => {
+                const automationFields = [
+                    'retrieve',
+                    'client',
+                    'buObject',
+                    'properties',
+                    '_skipNotificationRetrieve',
+                    '_cachedMetadataMap',
+                ];
+                const automationDescriptors = automationFields.map((field) =>
+                    Object.getOwnPropertyDescriptor(Automation, field)
+                );
+                const mapDescriptor = Object.getOwnPropertyDescriptor(
+                    Verification,
+                    'verificationIdKeyMap'
+                );
+                const submittedKey = 'testNew_automation__s1.7';
+                const createdId = 'created-verification-id';
+                try {
+                    Verification.verificationIdKeyMap =
+                        initialState === 'undefined'
+                            ? undefined
+                            : { [createdId]: 'earlierBU_automation__s1.1' };
+                    Automation.retrieve = async () => ({ metadata: {}, type: 'automation' });
+
+                    const retrieved = await Verification.retrieveForCache();
+                    assert.deepEqual(retrieved, { metadata: {}, type: 'verification' });
+
+                    const response = await Verification.postCreateTasks(
+                        {},
+                        { dataVerificationDefinitionId: createdId },
+                        { c__automation_step: submittedKey }
+                    );
+                    const parsed = Verification.parseResponseBody([response]);
+                    assert.deepEqual(Object.keys(parsed), [submittedKey]);
+                    assert.equal(parsed[submittedKey].c__automation_step, submittedKey);
+                    assert.deepEqual(Verification.verificationIdKeyMap, {});
+                } finally {
+                    for (const [index, field] of automationFields.entries()) {
+                        if (automationDescriptors[index]) {
+                            Object.defineProperty(Automation, field, automationDescriptors[index]);
+                        } else {
+                            delete Automation[field];
+                        }
+                    }
+                    if (mapDescriptor) {
+                        Object.defineProperty(Verification, 'verificationIdKeyMap', mapDescriptor);
+                    } else {
+                        delete Verification.verificationIdKeyMap;
+                    }
+                }
+            });
+        }
     });
 
     describe('Deploy ================', () => {

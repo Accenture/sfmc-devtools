@@ -1,24 +1,19 @@
 export default Init;
 declare namespace Init {
     /**
-     * initiates npm project and then
-     * takes care of loading the pre-configured dependency list
-     * from the boilerplate directory to them as dev-dependencies
+     * Update project tooling defaults and install dependencies.
      *
-     * @param {string} [repoName] if git URL was provided earlier, the repo name was extracted to use it for npm init
-     * @returns {Promise.<boolean>} install successful or error occured
+     * @param {string} [repoName] optional initial project name
+     * @param {string} [versionBeforeUpgrade] original project version for retirement gating
+     * @returns {Promise.<boolean>} whether installation succeeded
      */
-    function installDependencies(repoName?: string): Promise<boolean>;
+    function installDependencies(repoName?: string, versionBeforeUpgrade?: string): Promise<boolean>;
     /**
-     * ensure we have certain default values in our config
+     * Apply owned defaults while retaining unrelated project settings.
      *
-     * @param {object} [currentContent] what was read from existing package.json file
-     * @returns {Promise.<{script: object, author: string, license: string}>} extended currentContent
+     * @param {object} currentContent existing package contents
+     * @returns {object} updated package contents
      */
-    function _getDefaultPackageJson(currentContent?: object): Promise<{
-        script: object;
-        author: string;
-        license: string;
-    }>;
+    function _getDefaultPackageJson(currentContent: object): object;
 }
 //# sourceMappingURL=init.npm.d.ts.map

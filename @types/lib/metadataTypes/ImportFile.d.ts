@@ -47,9 +47,9 @@ declare class ImportFile extends MetadataType {
      * @param {SDKError} ex exception
      * @param {string} key id or key of item
      * @param {string} url url to call for retry
-     * @returns {Promise.<any>} can return retry-result
+     * @returns {Promise.<object|null>} retry result or null when the request cannot be recovered
      */
-    static handleRESTErrors(ex: SDKError, key: string, url: string): Promise<any>;
+    static handleRESTErrors(ex: SDKError, key: string, url: string): Promise<object | null>;
     /**
      * Retrieves import definition metadata for caching
      *
@@ -59,16 +59,6 @@ declare class ImportFile extends MetadataType {
      * @returns {Promise.<MetadataTypeMapObj>} Promise
      */
     static retrieveForCache(_?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
-    /**
-     * Retrieve a specific Import Definition by Name
-     *
-     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
-     * @param {string} templateDir Directory where retrieved metadata directory will be saved
-     * @param {string} name name of the metadata file
-     * @param {TemplateMap} templateVariables variables to be replaced in the metadata
-     * @returns {Promise.<MetadataTypeItemObj>} Promise
-     */
-    static retrieveAsTemplate(templateDir: string, name: string, templateVariables: TemplateMap): Promise<MetadataTypeItemObj>;
     /**
      * helper to allow us to select single metadata entries via REST
      *
