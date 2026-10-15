@@ -4,6 +4,7 @@ const expect = chai.expect;
 
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
+import File from '../lib/util/file.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
@@ -85,7 +86,15 @@ describe('type: query', () => {
             return;
         });
 
-        it('Should retrieve one specific query by key', async () => {
+        it('Should retrieve one specific query by key and overwrite conflict-marked JSON', async () => {
+            const basePath = './retrieve/testInstance/testBU/query';
+            await File.writeToFile(
+                basePath,
+                'testExisting_query.query-meta',
+                'json',
+                '<<<<<<< HEAD\n{}\n=======\n{}\n>>>>>>> incoming\n'
+            );
+            await File.writeToFile(basePath, 'sentinel', 'txt', 'preserve unrelated file');
             // WHEN
             await handler.retrieve('testInstance/testBU', ['query'], ['testExisting_query']);
             // THEN
@@ -109,6 +118,10 @@ describe('type: query', () => {
                 testUtils.getAPIHistoryLength(),
                 6,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            assert.equal(
+                await File.readFile(`${basePath}/sentinel.txt`, 'utf8'),
+                'preserve unrelated file'
             );
             return;
         });
@@ -766,55 +779,6 @@ describe('type: query', () => {
     });
 
     describe('Templating ================', () => {
-        it('Should create a query template via retrieveAsTemplate and build it', async () => {
-            // GIVEN there is a template
-            const result = await handler.retrieveAsTemplate(
-                'testInstance/testBU',
-                'query',
-                ['testExisting_query'],
-                'testSourceMarket'
-            );
-            // WHEN
-            assert.equal(process.exitCode, 0, 'retrieveAsTemplate should not have thrown an error');
-            assert.equal(
-                result.query ? Object.keys(result.query).length : 0,
-                1,
-                'only one query expected'
-            );
-            assert.deepEqual(
-                await testUtils.getActualTemplateJson('testExisting_query', 'query'),
-                await testUtils.getExpectedJson('9999999', 'query', 'template'),
-                'returned template JSON of retrieveAsTemplate was not equal expected'
-            );
-            expect(
-                await testUtils.getActualTemplateFile('testExisting_query', 'query', 'sql')
-            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'template', 'sql'));
-            // THEN
-            await handler.buildDefinition(
-                'testInstance/testBU',
-                'query',
-                ['testExisting_query'],
-                ['testTargetMarket']
-            );
-            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
-
-            assert.deepEqual(
-                await testUtils.getActualDeployJson('testTemplated_query', 'query'),
-                await testUtils.getExpectedJson('9999999', 'query', 'build'),
-                'returned deployment JSON was not equal expected'
-            );
-            expect(
-                await testUtils.getActualDeployFile('testTemplated_query', 'query', 'sql')
-            ).to.equal(await testUtils.getExpectedFile('9999999', 'query', 'build', 'sql'));
-
-            assert.equal(
-                testUtils.getAPIHistoryLength(),
-                5,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            );
-            return;
-        });
-
         it('Should warn about shared dataExtension in _ParentBU_ when running buildTemplate with --dependencies on child BU', async () => {
             // Retrieve shared DEs from _ParentBU_ to disk first
             await handler.retrieve('testInstance/_ParentBU_', ['dataExtension']);
@@ -961,12 +925,12 @@ describe('type: query', () => {
             assert.equal(fileList.length, 2, 'expected only 2 file paths');
 
             assert.equal(
-                fileList[0].split('\\').join('/'),
+                fileList[0].replaceAll('\\', '/'),
                 'retrieve/testInstance/testBU/query/testExisting_query.query-meta.json',
                 'wrong JSON path'
             );
             assert.equal(
-                fileList[1].split('\\').join('/'),
+                fileList[1].replaceAll('\\', '/'),
                 'retrieve/testInstance/testBU/query/testExisting_query.query-meta.sql',
                 'wrong JSON path'
             );

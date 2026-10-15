@@ -109,7 +109,7 @@ describe('type: filter', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                17,
+                18,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

@@ -91,31 +91,64 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
-        'businessUnitAvailability.%.view': {
+        'businessUnitAvailability[].view': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
             template: boolean;
         };
-        'businessUnitAvailability.%.update': {
+        'businessUnitAvailability[].update': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
             template: boolean;
         };
-        'businessUnitAvailability.%.delete': {
+        'businessUnitAvailability[].delete': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
             template: boolean;
         };
-        'businessUnitAvailability.%.memberId': {
+        'businessUnitAvailability[].memberId': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
             template: boolean;
         };
-        'businessUnitAvailability.%.transferOwnership': {
+        'businessUnitAvailability[].transferOwnership': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        sharingProperties: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'sharingProperties.localAssets': {
+            skipValidation: boolean;
+        };
+        'sharingProperties.sharedWith': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'sharingProperties.sharedFrom': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'sharingProperties.sharedFromMID': {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        'sharingProperties.sharingType': {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;
@@ -442,39 +475,6 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
-        sharingProperties: {
-            isCreateable: boolean;
-            isUpdateable: boolean;
-            retrieving: boolean;
-            template: boolean;
-        };
-        'sharingProperties.localAssets': {
-            skipValidation: boolean;
-        };
-        'sharingProperties.sharedWith': {
-            isCreateable: boolean;
-            isUpdateable: boolean;
-            retrieving: boolean;
-            template: boolean;
-        };
-        'sharingProperties.sharedFrom': {
-            isCreateable: boolean;
-            isUpdateable: boolean;
-            retrieving: boolean;
-            template: boolean;
-        };
-        'sharingProperties.sharedFromMID': {
-            isCreateable: boolean;
-            isUpdateable: boolean;
-            retrieving: boolean;
-            template: boolean;
-        };
-        'sharingProperties.sharingType': {
-            isCreateable: boolean;
-            isUpdateable: boolean;
-            retrieving: boolean;
-            template: boolean;
-        };
         slots: {
             skipValidation: boolean;
         };
@@ -535,14 +535,16 @@ declare namespace _default {
         export let archive: string[];
         let asset_1: string[];
         export { asset_1 as asset };
+        let _package: string[];
+        export { _package as package };
         export let audio: string[];
         export let block: string[];
-        export let cloudpage: string[];
+        export let webstudio: string[];
         export let code: string[];
-        export let coderesource: string[];
         export let document: string[];
         export let image: string[];
-        export let message: string[];
+        export let email: string[];
+        export let mobile: string[];
         export let other: string[];
         export let rawimage: string[];
         export let template: string[];
@@ -777,8 +779,16 @@ declare namespace _default {
         liveimageblock: number;
         livesettingblock: number;
         contentmap: number;
+        enhanceddynamicblock: number;
         jsonmessage: number;
+        jbtemplate: number;
         icemailformblock: number;
+        iccloudpageblock: number;
+        einsteincontentselectionblock: number;
+        jsonmessagetemplate: number;
+        packagedefinition: number;
+        packagedeployment: number;
+        einsteincontenttesting: number;
         coderesource: number;
         jscoderesource: number;
         csscoderesource: number;

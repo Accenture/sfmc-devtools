@@ -5,6 +5,7 @@ import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
+import DataFilter from '../lib/metadataTypes/DataFilter.js';
 chai.use(chaiFiles);
 
 describe('type: dataFilter', () => {
@@ -14,6 +15,32 @@ describe('type: dataFilter', () => {
 
     afterEach(() => {
         testUtils.mockReset();
+    });
+
+    describe('XML conversion ================', () => {
+        it('Should preserve filter behavior across XML parsing and building', async () => {
+            const input = /** @type {import('../types/mcdev.d.js').DataFilterItem} */ ({
+                key: 'round-trip',
+                derivedFromType: 1,
+                filterDefinitionXml:
+                    '<FilterDefinition Source="SubscriberAttribute"><ConditionSet Operator="AND"><Condition ID="123" Operator="Equal"><Value><![CDATA[active]]></Value></Condition></ConditionSet></FilterDefinition>',
+            });
+            const retrieved = await DataFilter.postRetrieveTasks(input);
+            assert.equal(retrieved.c__filterDefinition['@_Source'], 'SubscriberAttribute');
+
+            const folderIdField = DataFilter.definition.folderIdField;
+            DataFilter.definition.folderIdField = null;
+            let deployed;
+            try {
+                deployed = await DataFilter.preDeployTasks(structuredClone(retrieved));
+            } finally {
+                DataFilter.definition.folderIdField = folderIdField;
+            }
+            assert.equal(
+                deployed.filterDefinitionXml,
+                '<FilterDefinition Source="SubscriberAttribute"><ConditionSet Operator="AND"><Condition ID="123" Operator="Equal"><Value>active</Value></Condition></ConditionSet></FilterDefinition>'
+            );
+        });
     });
 
     describe('Retrieve ================', () => {

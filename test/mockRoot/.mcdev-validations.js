@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 'use strict';
 /**
- * @typedef {Object.<string, any>} MetadataTypeItem generic metadata item
+ * @typedef {ReturnType<JSON['parse']>} MetadataTypeItem generic JSON metadata item
  *
  * @typedef {object} CodeExtract
  * @property {string[]} subFolder mostly set to null, otherwise subfolders path split into elements
@@ -32,11 +32,11 @@ const buPrefixBlacklistMap = {
 
 /**
  *
- * @param {any} definition type definition
+ * @param {{type:string, keyField:string, nameField:string}} definition type definition
  * @param {MetadataTypeItem} item MetadataItem
  * @param {string} targetDir folder in which the MetadataItem is deployed from (deploy/cred/bu)
  * @param {CodeExtract[]} codeExtractItemArr array of code snippets
- * @param {any} Util utility functions
+ * @param {typeof import('../../lib/util/util.js').Util} Util utility functions
  * @returns {validationRuleList} MetadataItem
  */
 export function validation(definition, item, targetDir, codeExtractItemArr, Util) {

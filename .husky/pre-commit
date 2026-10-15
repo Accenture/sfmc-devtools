@@ -1,3 +1,7 @@
+# disable ANSI color codes in hook output (readable in Fork's plain-text log viewer)
+unset FORCE_COLOR
+export NO_COLOR=1
+
 # run lint-staged only when committing directly to main; on feature branches
 # the PR's CI lint (npm run lint in code-test.yml) catches issues instead,
 # keeping local commits fast (#2092)

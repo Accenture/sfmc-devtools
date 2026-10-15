@@ -100,7 +100,6 @@ describe('type: transactionalPush', () => {
     });
 
     describe('Templating ================', () => {
-        // it.skip('Should create a transactionalPush template via retrieveAsTemplate and build it');
         it('Should create a transactionalPush template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['transactionalPush']);
