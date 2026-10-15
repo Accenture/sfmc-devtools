@@ -10,6 +10,7 @@
     },
     "files.eol": "\n",
     "mochaExplorer.exit": true,
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
     "js/ts.implicitProjectConfig.checkJs": true,
     "javascript.validate.enable": true,
     "markdown.extension.italic.indicator": "_",
@@ -57,17 +58,6 @@
         {
             "label": "Created By Me",
             "query": "author:${user} state:open repo:${owner}/${repository} sort:created-desc"
-        }
-    ],
-    "vsicons.associations.files": [
-        {
-            "icon": "apex",
-            "languages": [
-                { "ids": "ampscript", "defaultExtension": "amp" },
-                { "ids": "AMPscript", "defaultExtension": "amp" }
-            ],
-            "light": true,
-            "format": "FileFormat.svg"
         }
     ],
     "workbench.colorCustomizations": {
