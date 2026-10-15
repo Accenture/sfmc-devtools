@@ -4,6 +4,7 @@ export type CodeExtract = import("../../types/mcdev.d.js").CodeExtract;
 export type CodeExtractItem = import("../../types/mcdev.d.js").CodeExtractItem;
 export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
 export type MetadataTypeItemDiff = import("../../types/mcdev.d.js").MetadataTypeItemDiff;
+export type MetadataTypeItemObj = import("../../types/mcdev.d.js").MetadataTypeItemObj;
 export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
@@ -19,6 +20,7 @@ export type ContentBlockConversionTypes = import("../../types/mcdev.d.js").Conte
  * @typedef {import('../../types/mcdev.d.js').CodeExtractItem} CodeExtractItem
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeItem} MetadataTypeItem
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemDiff} MetadataTypeItemDiff
+ * @typedef {import('../../types/mcdev.d.js').MetadataTypeItemObj} MetadataTypeItemObj
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMap} MetadataTypeMap
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
@@ -65,21 +67,7 @@ declare class Asset extends MetadataType {
         type: string;
     }>;
     /**
-     * Retrieves asset metadata for templating
-     *
-     * @deprecated Use `retrieve` followed by `build` instead. `retrieveAsTemplate` will be removed in a future version.
-     * @param {string} templateDir Directory where retrieved metadata directory will be saved
-     * @param {string} name name of the metadata file
-     * @param {TemplateMap} templateVariables variables to be replaced in the metadata
-     * @param {AssetSubType} [selectedSubType] optionally limit to a single subtype
-     * @returns {Promise.<{metadata: AssetItem, type: string}>} Promise
-     */
-    static retrieveAsTemplate(templateDir: string, name: string, templateVariables: TemplateMap, selectedSubType?: AssetSubType): Promise<{
-        metadata: AssetItem;
-        type: string;
-    }>;
-    /**
-     * helper for {@link Asset.retrieve} + {@link Asset.retrieveAsTemplate}
+     * helper for {@link Asset.retrieve}
      *
      * @private
      * @returns {string[]} AssetSubType array
@@ -137,21 +125,19 @@ declare class Asset extends MetadataType {
      * @param {string|string[]} subType group of similar assets to put in a folder (ie. images)
      * @param {string} [retrieveDir] target directory for saving assets
      * @param {string} [key] key/id/name to filter by
-     * @param {TemplateMap} [templateVariables] variables to be replaced in the metadata
      * @param {boolean} [loadShared] optionally retrieve assets from other BUs that were shared with the current
      * @returns {Promise.<object[]>} Promise
      */
-    static requestSubType(subType: string | string[], retrieveDir?: string, key?: string, templateVariables?: TemplateMap, loadShared?: boolean): Promise<object[]>;
+    static requestSubType(subType: string | string[], retrieveDir?: string, key?: string, loadShared?: boolean): Promise<object[]>;
     /**
      * Retrieves extended metadata (files or extended content) of asset
      *
      * @param {Array} items array of items to retrieve
      * @param {string} subType group of similar assets to put in a folder (ie. images)
      * @param {string} retrieveDir target directory for saving assets
-     * @param {TemplateMap} [templateVariables] variables to be replaced in the metadata
      * @returns {Promise.<MetadataTypeMap>} Promise
      */
-    static requestAndSaveExtended(items: any[], subType: string, retrieveDir: string, templateVariables?: TemplateMap): Promise<MetadataTypeMap>;
+    static requestAndSaveExtended(items: any[], subType: string, retrieveDir: string): Promise<MetadataTypeMap>;
     /**
      * helper that reset the log level and prints errors
      *
@@ -190,26 +176,28 @@ declare class Asset extends MetadataType {
      */
     static postRetrieveTasks(metadata: AssetItem): CodeExtractItem;
     /**
-     * helper for {@link Asset.postDeployTasks}. triggers a refresh of active triggerredSendDefinitions associated with the updated asset-message items. Gets executed if refresh option has been set.
+     * helper for {@link Asset}. finds active emails that reference the updated block
+     *
+     * @private
+     * @param {AssetMap[]} blocks block metadata
+     * @param {AssetMap} _foundEmails map of found emails
+     * @param {Set} _searchedKeys set of searched block keys
+     * @returns {Promise.<AssetMap[]>} - map of assets keyed by their keyField
+     */
+    private static _findEmailsUsingBlock;
+    /**
+     * helper for {@link Asset.postDeployTasks}. triggers a refresh of active triggerredSendDefinitions associated with the updated asset-email items. Gets executed if refresh option has been set.
      *
      * @private
      * @param {MetadataTypeMap} metadata metadata mapped by their keyField
-     * @returns {Promise.<void>} -
+     * @returns {Promise.<string[]>} Returns list of keys that were refreshed
      */
     private static _refreshTriggeredSend;
-    /**
-     * prepares an asset definition for deployment
-     *
-     * @param {AssetItem} metadata a single asset
-     * @param {string} deployDir directory of deploy files
-     * @returns {Promise.<AssetItem>} Promise
-     */
-    static preDeployTasks(metadata: AssetItem, deployDir: string): Promise<AssetItem>;
     /**
      * find the subType matching the extendedSubType
      *
      * @param {string} extendedSubType webpage, htmlblock, etc
-     * @returns {string} subType: block, message, other, etc
+     * @returns {string} subType: block, email, other, etc
      */
     static "__#private@#getMainSubtype"(extendedSubType: string): string;
     /**
@@ -232,19 +220,6 @@ declare class Asset extends MetadataType {
      * @returns {Promise.<string[][]>} list of extracted files with path-parts provided as an array
      */
     static buildDefinitionForNested(templateDir: string, targetDir: string, metadata: AssetItem, templateVariables: TemplateMap, templateName: string): Promise<string[][]>;
-    /**
-     * helper for {@link MetadataType.buildTemplate}
-     * handles extracted code if any are found for complex types
-     *
-     * @example assets of type codesnippetblock will result in 1 json and 1 amp/html file. both files need to be run through templating
-     * @param {string} templateDir Directory where metadata templates are stored
-     * @param {string|string[]} targetDir (List of) Directory where built definitions will be saved
-     * @param {AssetItem} metadata main JSON file that was read from file system
-     * @param {TemplateMap} templateVariables variables to be replaced in the metadata
-     * @param {string} templateName name of the template to be built
-     * @returns {Promise.<string[][]>} list of extracted files with path-parts provided as an array
-     */
-    static buildTemplateForNested(templateDir: string, targetDir: string | string[], metadata: AssetItem, templateVariables: TemplateMap, templateName: string): Promise<string[][]>;
     /**
      * helper for {@link MetadataType.buildDefinition}
      * handles extracted code if any are found for complex types
@@ -310,7 +285,65 @@ declare class Asset extends MetadataType {
      * to allow saving that separately and formatted
      *
      * @param {AssetItem} metadata a single asset definition
-     * @returns {CodeExtractItem} { json: metadata, codeArr: object[], subFolder: string[] }
+     * @returns {{channel: 'push' | 'sms' | 'inApp', field: 'display:title' | 'display:message', companion: 'display:title:display' | 'display:message:display', data: object}[]} editable mobile fields
+     */
+    static _getMobileCodeFields(metadata: AssetItem): {
+        channel: "push" | "sms" | "inApp";
+        field: "display:title" | "display:message";
+        companion: "display:title:display" | "display:message:display";
+        data: object;
+    }[];
+    /**
+     * Escape literal mobile source for an existing HTML text slot, without rendering it.
+     *
+     * @param {string} value source text
+     * @returns {string} escaped text
+     */
+    static _escapeMobilePreview(value: string): string;
+    /**
+     * Escape a URL for the generated unquoted CSS url slot, including HTML style boundaries.
+     *
+     * @param {string} value source URL
+     * @returns {string} escaped CSS URL
+     */
+    static _escapeMobilePreviewUrl(value: string): string;
+    /**
+     * Tokenize only known, source-equal mobile preview text slots before extracting source.
+     *
+     * @param {AssetItem} metadata asset with inline source
+     * @returns {void} -
+     */
+    static _tokenizeMobilePreview(metadata: AssetItem): void;
+    /**
+     * Replace an exact source value with whitespace allowed only outside that value.
+     *
+     * @param {string} slot complete preview slot
+     * @param {string} source escaped source or field token
+     * @param {string} replacement updated slot value
+     * @returns {string} slot with external padding preserved
+     */
+    static _replaceMobilePreviewPadding(slot: string, source: string, replacement: string): string;
+    /**
+     * Replace text only in recognized mobile preview slots, preserving wrapper bytes.
+     *
+     * @param {string} content preview HTML
+     * @param {'push' | 'sms' | 'inApp'} channel mobile view
+     * @param {(text: string, field: 'display:title' | 'display:subtitle' | 'display:message' | 'button1:title' | 'button2:title' | 'display:media:url', context?: 'url' | 'padded') => string} replaceSlot slot replacement
+     * @returns {string} updated HTML
+     */
+    static _replaceMobilePreviewSlots(content: string, channel: "push" | "sms" | "inApp", replaceSlot: (text: string, field: "display:title" | "display:subtitle" | "display:message" | "button1:title" | "button2:title" | "display:media:url", context?: "url" | "padded") => string): string;
+    /**
+     * Restore mapped preview slots after final source merging, never during Mustache builds.
+     *
+     * @param {AssetItem} metadata asset with merged source
+     * @returns {void} -
+     */
+    static _restoreMobilePreview(metadata: AssetItem): void;
+    /**
+     * Extract editable source into sidecars.
+     *
+     * @param {AssetItem} metadata a single asset definition
+     * @returns {CodeExtractItem} extracted source and JSON
      */
     static _extractCode(metadata: AssetItem): CodeExtractItem;
     /**
@@ -417,6 +450,39 @@ declare class Asset extends MetadataType {
      * @param {string[]} dependentKeyArr list of found keys
      */
     static _getDependentFilesExtra(slots: object, dependentKeyArr: string[]): void;
+    /**
+     * Collect content strings from an asset and its nested views, slots and blocks.
+     *
+     * @param {object} item asset or nested content node
+     * @returns {string[]} content strings available in the query response
+     */
+    static _getReferenceContents(item: object): string[];
+    /**
+     * Match literal first arguments only, without evaluating dynamic expressions.
+     *
+     * @param {string} content asset content
+     * @param {{key: Set.<string>, id: Set.<string>, name: Set.<string>}} references target identifiers
+     * @returns {boolean} whether the content references a target block
+     */
+    static _hasLiteralBlockReference(content: string, references: {
+        key: Set<string>;
+        id: Set<string>;
+        name: Set<string>;
+    }): boolean;
+    /**
+     * Finds emails in running journeys, filters out the ones that reference the block (if it's a block) and refreshes related TSDs
+     *
+     * @param {string[]} keyArr metadata keys
+     * @returns {Promise.<string[]>} Returns list of keys that were refreshed
+     */
+    static refresh(keyArr: string[]): Promise<string[]>;
+    /**
+     * enables metadata definitions required for sharing assets
+     *
+     * @param {boolean} keepSharingInfo true to enable, false to disable
+     * @returns {void}
+     */
+    static _toggleShareAssetTemplating(keepSharingInfo: boolean): void;
 }
 declare namespace Asset {
     let getJsonFromFSCache: {
@@ -515,31 +581,64 @@ declare namespace Asset {
                 retrieving: boolean;
                 template: boolean;
             };
-            'businessUnitAvailability.%.view': {
+            'businessUnitAvailability[].view': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            'businessUnitAvailability.%.update': {
+            'businessUnitAvailability[].update': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            'businessUnitAvailability.%.delete': {
+            'businessUnitAvailability[].delete': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            'businessUnitAvailability.%.memberId': {
+            'businessUnitAvailability[].memberId': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
-            'businessUnitAvailability.%.transferOwnership': {
+            'businessUnitAvailability[].transferOwnership': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            sharingProperties: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'sharingProperties.localAssets': {
+                skipValidation: boolean;
+            };
+            'sharingProperties.sharedWith': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'sharingProperties.sharedFrom': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'sharingProperties.sharedFromMID': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            'sharingProperties.sharingType': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
@@ -866,39 +965,6 @@ declare namespace Asset {
                 retrieving: boolean;
                 template: boolean;
             };
-            sharingProperties: {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            'sharingProperties.localAssets': {
-                skipValidation: boolean;
-            };
-            'sharingProperties.sharedWith': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            'sharingProperties.sharedFrom': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            'sharingProperties.sharedFromMID': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
-            'sharingProperties.sharingType': {
-                isCreateable: boolean;
-                isUpdateable: boolean;
-                retrieving: boolean;
-                template: boolean;
-            };
             slots: {
                 skipValidation: boolean;
             };
@@ -958,14 +1024,15 @@ declare namespace Asset {
         extendedSubTypes: {
             archive: string[];
             asset: string[];
+            package: string[];
             audio: string[];
             block: string[];
-            cloudpage: string[];
+            webstudio: string[];
             code: string[];
-            coderesource: string[];
             document: string[];
             image: string[];
-            message: string[];
+            email: string[];
+            mobile: string[];
             other: string[];
             rawimage: string[];
             template: string[];
@@ -1200,8 +1267,16 @@ declare namespace Asset {
             liveimageblock: number;
             livesettingblock: number;
             contentmap: number;
+            enhanceddynamicblock: number;
             jsonmessage: number;
+            jbtemplate: number;
             icemailformblock: number;
+            iccloudpageblock: number;
+            einsteincontentselectionblock: number;
+            jsonmessagetemplate: number;
+            packagedefinition: number;
+            packagedeployment: number;
+            einsteincontenttesting: number;
             coderesource: number;
             jscoderesource: number;
             csscoderesource: number;

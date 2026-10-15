@@ -1,0 +1,253 @@
+{
+    "key": "testExisting_journey_Push",
+    "name": "testExisting_journey_Push",
+    "lastPublishedDate": "2026-08-12T02:30:22",
+    "description": "",
+    "version": 1,
+    "workflowApiVersion": 1,
+    "createdDate": "2026-08-12T02:24:08.633",
+    "modifiedDate": "2026-08-12T02:30:22.293",
+    "activities": [
+        {
+            "key": "MULTICRITERIADECISIONV2-1",
+            "name": "",
+            "description": "",
+            "type": "MULTICRITERIADECISION",
+            "outcomes": [
+                {
+                    "key": "default_path_1",
+                    "next": "PUSHNOTIFICATIONACTIVITY-1",
+                    "arguments": {},
+                    "metaData": {
+                        "label": null,
+                        "criteriaDescription": "consentPushTransactional is True AND consentInAppTransactional is True"
+                    }
+                },
+                {
+                    "key": "remainder_path",
+                    "arguments": {},
+                    "metaData": {
+                        "label": null
+                    }
+                }
+            ],
+            "arguments": {
+                "filterResult": "default_path_1={{Contact.FilterId.1d1b28e3-6225-4996-b0db-c933eb546adb}},remainder_path=False"
+            },
+            "configurationArguments": {
+                "schemaVersionId": 252,
+                "criteria": {
+                    "default_path_1": "<FilterDefinition><ConditionSet Operator=\"AND\" ConditionSetName=\"Individual Filter Grouping\"><Condition Key=\"testExisting_dataExtension.consentPushTransactional\" Operator=\"Is\" UiMetaData=\"{&quot;groupToSetRelationshipId&quot;:&quot;df8f60cf-ab5d-f111-a5ce-5cba2c85f570&quot;}\"><Value><![CDATA[true]]></Value></Condition><Condition Key=\"testExisting_dataExtension.consentInAppTransactional\" Operator=\"Is\" UiMetaData=\"{&quot;groupToSetRelationshipId&quot;:&quot;df8f60cf-ab5d-f111-a5ce-5cba2c85f570&quot;}\"><Value><![CDATA[true]]></Value></Condition></ConditionSet></FilterDefinition>"
+                }
+            },
+            "metaData": {
+                "isConfigured": true
+            },
+            "schema": {
+                "arguments": {
+                    "actualChoice": {
+                        "dataType": "Number",
+                        "isNullable": false,
+                        "direction": "Out",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "filterResult": {
+                        "dataType": "Text",
+                        "isNullable": false,
+                        "direction": "In",
+                        "readOnly": true,
+                        "access": "Hidden"
+                    }
+                }
+            }
+        },
+        {
+            "key": "PUSHNOTIFICATIONACTIVITY-1",
+            "name": "testExisting_journey_Push",
+            "description": "",
+            "type": "PUSHNOTIFICATIONACTIVITY",
+            "outcomes": [
+                {
+                    "key": "bbbb5db7-d029-405e-976c-4fad951cc1d9",
+                    "arguments": {},
+                    "metaData": {
+                        "invalid": false
+                    }
+                }
+            ],
+            "arguments": {
+                "contactKey": "{{Context.ContactKey}}",
+                "contactId": "{{Context.ContactId}}",
+                "eventData": "{{Event}}"
+            },
+            "configurationArguments": {
+                "applicationExtensionKey": "f46a5725-997b-490d-8194-15e229c61754",
+                "name": "testExisting_journey_Push",
+                "mobilePushReportingName": "testExisting_journey_Push-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "startDate": "2026-08-12T08:30:22.0975364Z",
+                "scheduledTimezone": "",
+                "scheduledTzOffset": "",
+                "iosBadge": false,
+                "sound": "default",
+                "keys": "",
+                "interactiveNotification": "",
+                "campaignId": 0,
+                "jbWaitUntilEventKey": "",
+                "followedByWaitUntil": false,
+                "waitDuration": 0,
+                "waitUnit": "",
+                "sendWindowStartTime": "",
+                "sendWindowEndTime": "",
+                "sendWindowTimeZone": "",
+                "endDate": "",
+                "isPushCopyToInbox": false,
+                "pushCopyToInboxScheduledTimezone": "",
+                "pushCopyToInboxScheduledTzOffset": "",
+                "engagementCriteria": "",
+                "templateType": "",
+                "sendAudienceMode": "",
+                "r__mobilePush_key": "MTk6MTE0OjA",
+                "r__mobilePush_name": "testExisting_mobilePush_asset_DEV",
+                "r__mobilePushApp_key": "YjhMeTFBUWgtRUNIUHNNN3hYbm5SQToxMTc6MA",
+                "r__mobilePushApp_name": "Test Push App Two",
+                "r__asset_name_readOnly": "testExisting_mobilePush_asset_DEV",
+                "r__asset_key": "testExisting_mobilePush_asset_DEV"
+            },
+            "metaData": {
+                "icon": "https://mobilepush-push-activity.s7.marketingcloudapps.com/images/push_icon.svg",
+                "category": "message",
+                "original_icon": "images/push_icon.svg",
+                "sections": {
+                    "message-definition": {
+                        "contentType": "asset"
+                    }
+                },
+                "isConfigured": true,
+                "globals": {
+                    "description": ""
+                },
+                "store": {
+                    "isLegacyContent": false,
+                    "messageDefinition": {},
+                    "messageConfiguration": {
+                        "payload": {
+                            "application": {
+                                "id": "d4f2c26f-2104-40f8-873e-c33bc579e744",
+                                "name": "Test Push App Two"
+                            }
+                        },
+                        "application": {
+                            "id": "d4f2c26f-2104-40f8-873e-c33bc579e744",
+                            "name": "Test Push App Two",
+                            "value": "Test Push App Two",
+                            "title": "Test Push App Two",
+                            "disabled": false,
+                            "expired": false
+                        }
+                    },
+                    "advancedOptions": {
+                        "payload": {
+                            "mobilePushReportingName": "testExisting_journey_Push-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                        },
+                        "mobilePushReportingName": "testExisting_journey_Push-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                    },
+                    "deliveryOptions": {
+                        "payload": {
+                            "sound": "default",
+                            "iosBadge": false
+                        },
+                        "isIOSBadgeToggleEnabled": "Disabled",
+                        "interactiveNotifications": []
+                    },
+                    "shouldRefreshContentBuilderTabView": false,
+                    "shouldRefreshLegacyContentTabView": false,
+                    "activityName": "testExisting_journey_Push",
+                    "isReportingNameSupported": false
+                }
+            },
+            "schema": {
+                "arguments": {
+                    "contactKey": {
+                        "dataType": "Text",
+                        "isNullable": false,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "contactId": {
+                        "dataType": "LongNumber",
+                        "isNullable": false,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    },
+                    "eventData": {
+                        "dataType": "Text",
+                        "isNullable": true,
+                        "direction": "In",
+                        "readOnly": false,
+                        "access": "Hidden"
+                    }
+                }
+            }
+        }
+    ],
+    "triggers": [
+        {
+            "key": "TRIGGER",
+            "name": "testExisting_journey_Push",
+            "description": "",
+            "type": "APIEvent",
+            "outcomes": [],
+            "arguments": {
+                "startActivityKey": "{{Context.StartActivityKey}}",
+                "dequeueReason": "{{Context.DequeueReason}}",
+                "lastExecutedActivityKey": "{{Context.LastExecutedActivityKey}}",
+                "filterResult": "true"
+            },
+            "configurationArguments": {
+                "schemaVersionId": 0,
+                "criteria": ""
+            },
+            "metaData": {
+                "scheduleState": "No Schedule",
+                "chainType": "None",
+                "configurationRequired": false,
+                "iconUrl": "/images/icon_journeyBuilder-event-api-blue.svg",
+                "title": "",
+                "category": "Event",
+                "entrySourceGroupConfigUrl": "jb:///data/entry/api-event/entrysourcegroupconfig.json",
+                "sourceInteractionId": "00000000-0000-0000-0000-000000000000",
+                "r__event_key": "testExisting_journey_Push"
+            }
+        }
+    ],
+    "goals": [],
+    "exits": [],
+    "notifiers": [],
+    "entryMode": "MultipleEntries",
+    "definitionType": "Multistep",
+    "channel": "",
+    "defaults": {
+        "properties": {
+            "analyticsTracking": {
+                "enabled": false,
+                "analyticsType": "google",
+                "urlDomainsToTrack": []
+            }
+        }
+    },
+    "metaData": {
+        "disableEndWait": true,
+        "dataSource": "ContactsModel",
+        "highThroughputSending": {
+            "email": false
+        }
+    },
+    "executionMode": "Production",
+    "status": "Published",
+    "scheduledStatus": "Draft",
+    "campaigns": [],
+    "r__folder_Path": "my journeys"
+}

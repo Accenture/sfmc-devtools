@@ -221,13 +221,17 @@ describe('type: triggeredSend', () => {
 
             assert.deepEqual(
                 replace['testInstance/testBU'].triggeredSend,
-                ['testExisting_triggeredSend', 'testExisting_triggeredSend_rcb'],
+                [
+                    'testExisting_triggeredSend',
+                    'testExisting_triggeredSend_rcb',
+                    'testExistingRefresh_triggeredSend',
+                ],
                 'should have found the right triggeredSends that need updating'
             );
 
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                15,
+                18,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;

@@ -134,7 +134,7 @@ declare class DataExtensionField extends MetadataType {
 }
 declare namespace DataExtensionField {
     let buObject: import("../../types/mcdev.d.js").BuObject;
-    let client: import("sfmc-sdk").default;
+    let client: any;
     let definition: {
         bodyIteratorField: string;
         dependencies: string[];

@@ -123,46 +123,6 @@ describe('type: importFile', () => {
     });
 
     describe('Templating ================', () => {
-        it('Should create a importFile template via retrieveAsTemplate and build it', async () => {
-            // buildTemplate
-            const result = await handler.retrieveAsTemplate(
-                'testInstance/testBU',
-                'importFile',
-                ['testExisting_importFile'],
-                'testSourceMarket'
-            );
-            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
-            assert.equal(
-                result.importFile ? Object.keys(result.importFile).length : 0,
-                1,
-                'only one importFile expected'
-            );
-            assert.deepEqual(
-                await testUtils.getActualTemplateJson('testExisting_importFile', 'importFile'),
-                await testUtils.getExpectedJson('9999999', 'importFile', 'template'),
-                'returned template JSON was not equal expected'
-            );
-            // buildDefinition
-            await handler.buildDefinition(
-                'testInstance/testBU',
-                'importFile',
-                ['testExisting_importFile'],
-                ['testTargetMarket']
-            );
-            assert.equal(process.exitCode, 0, 'buildDefinition should not have thrown an error');
-            assert.deepEqual(
-                await testUtils.getActualDeployJson('testTemplated_importFile', 'importFile'),
-                await testUtils.getExpectedJson('9999999', 'importFile', 'build'),
-                'returned deployment JSON was not equal expected'
-            );
-            assert.equal(
-                testUtils.getAPIHistoryLength(),
-                14,
-                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
-            );
-            return;
-        });
-
         it('Should create a importFile template via buildTemplate and build it', async () => {
             // download first before we test buildTemplate
             await handler.retrieve('testInstance/testBU', ['importFile']);

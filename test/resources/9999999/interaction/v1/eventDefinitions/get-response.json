@@ -1,5 +1,5 @@
 {
-    "count": 5,
+    "count": 6,
     "page": 1,
     "pageSize": 50,
     "links": {},
@@ -419,6 +419,39 @@
             "isPlatformObject": false,
             "category": "Event",
             "publishedInteractionCount": 0,
+            "automationId": "00000000-0000-0000-0000-000000000000",
+            "disableDEDataLogging": false
+        },
+        {
+            "id": "39a9f8e2-1234-4371-b813-028f66decaa1",
+            "type": "APIEvent",
+            "name": "testExisting_journey_Push",
+            "description": "",
+            "createdDate": "2026-08-12T02:24:08.633",
+            "createdBy": 700301950,
+            "modifiedDate": "2026-08-12T02:30:22.293",
+            "modifiedBy": 700301950,
+            "mode": "Production",
+            "eventDefinitionKey": "testExisting_journey_Push",
+            "sourceApplicationExtensionId": "7db1f972-f8b7-49b6-91b5-fa218e13953d",
+            "filterDefinitionTemplate": "",
+            "iconUrl": "/events/images/icon_journeyBuilder-event-api-blue.svg",
+            "arguments": {
+                "serializedObjectType": 11,
+                "eventDefinitionKey": "testExisting_journey_Push",
+                "eventDefinitionId": "39a9f8e2-1234-4371-b813-028f66decaa1",
+                "dataExtensionId": "00000000-0000-0000-0000-000000000000",
+                "criteria": ""
+            },
+            "metaData": {
+                "scheduleState": "No Schedule",
+                "criteriaDescription": ""
+            },
+            "interactionCount": 1,
+            "isVisibleInPicker": true,
+            "isPlatformObject": false,
+            "category": "Event",
+            "publishedInteractionCount": 1,
             "automationId": "00000000-0000-0000-0000-000000000000",
             "disableDEDataLogging": false
         }

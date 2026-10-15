@@ -1,3 +1,4 @@
+export { isGitInstalled } from "./git.js";
 export default Init;
 declare namespace Init {
     /**

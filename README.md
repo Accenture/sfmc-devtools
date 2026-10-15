@@ -13,6 +13,10 @@ Accenture Salesforce Marketing Cloud DevTools (mcdev) is a rapid deployment/roll
 
 ### Install
 
+Starting with v10, mcdev requires Node.js `^22.22.2 || >=24.15.0`: Node 22.22.2 or newer within Node 22, or Node 24.15.0 and newer. Node 20, 21, 23 and earlier patches of Node 22/24 are unsupported. Update terminal, CI/container and editor ESLint runtimes before migrating.
+
+See [Migrating to v10](https://github.com/Accenture/sfmc-devtools/wiki/03.a-~-Migrating-to-v10) for tooling changes, file-replacement behavior, script migration and asset regrouping.
+
 Run the following to install Accenture SFMC DevTools on your computer:
 
 ```bash
@@ -37,7 +41,7 @@ You can then include it in your code with JavaScript/ES module imports:
 import mcdev from 'mcdev';
 ```
 
-That will load `node_packages/mcdev/lib/index.js`. It can make sense to directly include other files if you have a special scenario. We've done that in our example for [retrieveChangelog.js](https://github.com/Accenture/sfmc-devtools/blob/main/lib/retrieveChangelog.js) or in more detail, in our child-project [sfmc-devtools-copado](https://github.com/Accenture/sfmc-devtools-copado) to get full control over certain aspects.
+That will load `node_modules/mcdev/lib/index.js`. It can make sense to directly include other files if you have a special scenario. We've done that in our example for [retrieveChangelog.js](https://github.com/Accenture/sfmc-devtools/blob/main/lib/retrieveChangelog.js) or in more detail, in our child-project [sfmc-devtools-copado](https://github.com/Accenture/sfmc-devtools-copado) to get full control over certain aspects.
 
 ## Documentation
 
@@ -52,6 +56,8 @@ Find info on the latest releases with a detailed changelog in the [GitHub Releas
 If you want to enhance Accenture SFMC DevTools you are welcome to fork the repo and create a pull request. Please understand that we will have to conduct a code review before accepting your changes.
 
 More details on how to best do that are described in our [wiki](https://github.com/Accenture/sfmc-devtools/wiki/10.-Contribute).
+
+Run the full test suite with `npm test`. With no additional arguments, it uses mcdev's errors-only `silent` option and suppresses fixture/helper `console.log` diagnostics; existing `console.error` diagnostics and Mocha results remain visible. Supplying any arguments (for example `npm test -- --grep "UTIL"` or `npm test -- test/util.test.js`) retains normal mcdev logging, as do direct Mocha runs and the VS Code Mocha test adapter. Individual tests can still enable debug logging.
 
 ## Main Contacts
 
@@ -73,4 +79,4 @@ The people that lead this project:
 
 ## Copyright
 
-Copyright (c) 2020-2025 Accenture. [MIT licensed](https://github.com/Accenture/sfmc-devtools/blob/main/LICENSE).
+Copyright (c) 2020-2026 Accenture. [MIT licensed](https://github.com/Accenture/sfmc-devtools/blob/main/LICENSE).
