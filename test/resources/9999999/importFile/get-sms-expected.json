@@ -65,7 +65,9 @@
     "maxImportFrequencyHours": 0,
     "modifiedDate": "2023-07-19T23:06:33.577",
     "name": "testExisting_importFileSMS",
-    "notificationEmailAddress": "joern.berkefeld@accenture.com",
+    "notificationEmailAddress": [
+        "joern.berkefeld@accenture.com"
+    ],
     "sendEmailNotification": true,
     "standardQuotedStrings": false,
     "destination": {
