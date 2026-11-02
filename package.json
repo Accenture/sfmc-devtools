@@ -94,7 +94,7 @@
     "c8": "12.0.0",
     "chai": "6.3.0",
     "chai-files": "1.4.0",
-    "eslint": "10.13.0",
+    "eslint": "10.14.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-jsdoc": "65.4.2",
     "eslint-plugin-mocha": "12.0.2",
