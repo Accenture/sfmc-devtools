@@ -68,7 +68,7 @@
     "version:patch": "npm version --no-commit-hooks patch"
   },
   "dependencies": {
-    "@inquirer/prompts": "8.7.4",
+    "@inquirer/prompts": "8.7.5",
     "fast-xml-parser": "5.11.2",
     "fs-extra": "11.4.1",
     "mustache": "4.2.0",
