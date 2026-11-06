@@ -1,6 +1,6 @@
 {
     "c__automation_step": "testTemplated_automation__s1.7",
-    "notificationEmailAddress": "",
+    "notificationEmailAddress": [],
     "notificationEmailMessage": "",
     "r__dataExtension_key": "testTemplated_dataExtension",
     "shouldEmailOnFailure": false,
