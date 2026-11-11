@@ -1,0 +1,42 @@
+{
+    "definitionKey": "testNew_attributeSetParent",
+    "definitionName": {
+        "value": "testNew_attributeSetParent"
+    },
+    "storageReferenceID": {
+        "type": "Guid",
+        "value": "21711373-72c1-ec11-b83b-exclusion"
+    },
+    "storageName": "testExisting_dataExtension_exclusion",
+    "storageLogicalType": "DataExtension",
+    "isRoot": false,
+    "valueDefinitions": [],
+    "nonStandardAttributeGroupReferences": [],
+    "relationships": [
+        {
+            "leftItem": {
+                "identifier": "79846c6e-5238-ee11-b85a-48df37d1de8a",
+                "relationshipType": "AttributeGroup",
+                "cardinality": "One"
+            },
+            "rightItem": {
+                "relationshipType": "AttributeSet",
+                "cardinality": "One"
+            },
+            "relationshipAttributes": [
+                {
+                    "leftAttributeID": "9393dc39-31e2-e611-80cc-1402ec7222b4",
+                    "rightAttributeID": "a1b2c3d4-0000-4000-8000-000000000201"
+                }
+            ],
+            "isGroupToSetRelationship": true,
+            "leftRelationshipReferenceType": "CustomerData",
+            "leftRelationshipIDs": [
+                {
+                    "type": "int16",
+                    "value": "3"
+                }
+            ]
+        }
+    ]
+}

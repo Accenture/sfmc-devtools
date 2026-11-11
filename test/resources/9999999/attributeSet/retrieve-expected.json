@@ -30,7 +30,7 @@
     "parentID": "00000000-0000-0000-0000-000000000000",
     "r__dataExtension_key": "testExisting_dataExtensionShared",
     "r__folder_Path": "Shared Items/Shared Data Extensions",
-    "relationshipCount": 1,
+    "relationshipCount": 2,
     "relationships": [
         {
             "canModify": true,
@@ -52,8 +52,8 @@
             "leftRelationshipReferenceType": "CustomerData",
             "relationshipAttributes": [
                 {
-                    "c__leftFullyQualifiedName": "Contact.Contact Key",
-                    "c__rightFullyQualifiedName": "testExisting_dataExtensionShared.ContactKey"
+                    "c__leftField": "ContactKey",
+                    "c__rightField": "ContactKey"
                 }
             ],
             "relationshipID": "598b787a-5238-ee11-b85a-48df37d1de8a",

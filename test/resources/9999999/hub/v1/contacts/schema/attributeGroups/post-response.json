@@ -1,0 +1,42 @@
+{
+    "attributeGroupDefinition": {
+        "mID": 9999999,
+        "objectState": "Created",
+        "attributeSetIdentifiers": [],
+        "isOwner": true,
+        "isPrimary": false,
+        "isSystemDefined": false,
+        "isHidden": false,
+        "canAddProperties": true,
+        "canAddRelationships": true,
+        "containsSchemaAttributes": false,
+        "canRemove": true,
+        "canChangeProperties": true,
+        "displayOrder": 9,
+        "requiredRelationships": [],
+        "canModify": true,
+        "attributeGroupIconKey": "People",
+        "fullyQualifiedName": "testNew_attributeGroup",
+        "attributeGroupType": "Standard",
+        "description": "created on deploy",
+        "localizedDescription": {
+            "value": "created on deploy"
+        },
+        "attributeCount": 0,
+        "definitionID": "a1b2c3d4-0000-4000-8000-000000000001",
+        "definitionName": {
+            "value": "testNew_attributeGroup"
+        },
+        "definitionKey": "testNew_attributeGroup",
+        "connectingID": {
+            "identifierType": "FullyQualifiedName"
+        },
+        "namespace": ""
+    },
+    "responseContext": {
+        "operationStatus": "OK",
+        "schemaType": "Contacts"
+    },
+    "isBadRequest": false,
+    "resultMessages": []
+}
