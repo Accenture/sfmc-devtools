@@ -1,0 +1,239 @@
+{
+    "asyncRequestID": "a1b2c3d4-0000-4000-8000-000000000999",
+    "setDefinition": {
+        "definitionID": "a1b2c3d4-0000-4000-8000-000000000401",
+        "definitionKey": "testNew_attributeSetChild",
+        "definitionName": {
+            "value": "testNew_attributeSetChild"
+        },
+        "connectingID": {
+            "identifierType": "FullyQualifiedName"
+        },
+        "relationships": [
+            {
+                "canModify": true,
+                "canRemove": true,
+                "isHidden": false,
+                "isSystemDefined": false,
+                "isGroupToSetRelationship": false,
+                "leftItem": {
+                    "cardinality": "One",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "identifier": "a1b2c3d4-0000-4000-8000-000000000301",
+                    "relationshipType": "AttributeSet"
+                },
+                "relationshipAttributes": [
+                    {
+                        "leftAttributeID": "a1b2c3d4-0000-4000-8000-000000000303",
+                        "leftConnectingID": {
+                            "identifierType": "FullyQualifiedName"
+                        },
+                        "rightAttributeID": "a1b2c3d4-0000-4000-8000-000000000403",
+                        "rightConnectingID": {
+                            "identifierType": "FullyQualifiedName"
+                        }
+                    }
+                ],
+                "relationshipID": "a1b2c3d4-0000-4000-8000-000000000405",
+                "rightItem": {
+                    "cardinality": "Many",
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "identifier": "a1b2c3d4-0000-4000-8000-000000000401",
+                    "relationshipType": "AttributeSet"
+                }
+            }
+        ],
+        "valueDefinitions": [
+            {
+                "baseType": "Numeric",
+                "dataSourceName": {},
+                "dataType": "LongNumber",
+                "description": "",
+                "localizedDescription": {
+                    "value": ""
+                },
+                "definitionID": "a1b2c3d4-0000-4000-8000-000000000402",
+                "definitionKey": "CustomObjectKey",
+                "definitionName": {
+                    "value": "Custom Object Key"
+                },
+                "connectingID": {
+                    "identifierType": "FullyQualifiedName"
+                },
+                "fullyQualifiedName": "testNew_attributeSetChild.Custom Object Key",
+                "isHidden": true,
+                "isIdentityValue": true,
+                "isNullable": false,
+                "isPrimaryKey": false,
+                "isReadOnly": true,
+                "isSystemDefined": true,
+                "isUpdateable": true,
+                "parentDefinition": {
+                    "definitionID": "a1b2c3d4-0000-4000-8000-000000000401",
+                    "definitionKey": "testNew_attributeSetChild",
+                    "definitionName": {
+                        "value": "testNew_attributeSetChild"
+                    },
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    }
+                },
+                "parentType": "Set",
+                "storageName": "_CustomObjectKey",
+                "valueDefinitionID": "a1b2c3d4-0000-4000-8000-000000000402",
+                "valueDefinitionKey": "CustomObjectKey",
+                "name": "Custom Object Key",
+                "setDefinitionID": "a1b2c3d4-0000-4000-8000-000000000401",
+                "setDefinitionKey": "testNew_attributeSetChild",
+                "setDefinitionName": {
+                    "value": "testNew_attributeSetChild"
+                },
+                "parentIdentifier": "a1b2c3d4-0000-4000-8000-000000000401"
+            },
+            {
+                "baseType": "Text",
+                "dataSourceName": {},
+                "dataType": "Text",
+                "description": "",
+                "localizedDescription": {
+                    "value": ""
+                },
+                "definitionID": "a1b2c3d4-0000-4000-8000-000000000403",
+                "definitionKey": "ContactKey",
+                "definitionName": {
+                    "value": "ContactKey"
+                },
+                "connectingID": {
+                    "identifierType": "FullyQualifiedName"
+                },
+                "fullyQualifiedName": "testNew_attributeSetChild.ContactKey",
+                "isHidden": false,
+                "isIdentityValue": false,
+                "isNullable": false,
+                "isPrimaryKey": true,
+                "isReadOnly": false,
+                "isSystemDefined": false,
+                "isUpdateable": true,
+                "length": 50,
+                "parentDefinition": {
+                    "definitionID": "a1b2c3d4-0000-4000-8000-000000000401",
+                    "definitionKey": "testNew_attributeSetChild",
+                    "definitionName": {
+                        "value": "testNew_attributeSetChild"
+                    },
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    }
+                },
+                "parentType": "Set",
+                "storageName": "ContactKey",
+                "valueDefinitionID": "a1b2c3d4-0000-4000-8000-000000000403",
+                "valueDefinitionKey": "ContactKey",
+                "name": "ContactKey",
+                "setDefinitionID": "a1b2c3d4-0000-4000-8000-000000000401",
+                "setDefinitionKey": "testNew_attributeSetChild",
+                "setDefinitionName": {
+                    "value": "testNew_attributeSetChild"
+                },
+                "parentIdentifier": "a1b2c3d4-0000-4000-8000-000000000401"
+            },
+            {
+                "baseType": "Text",
+                "dataSourceName": {},
+                "dataType": "Text",
+                "description": "",
+                "localizedDescription": {
+                    "value": ""
+                },
+                "definitionID": "a1b2c3d4-0000-4000-8000-000000000404",
+                "definitionKey": "Domain",
+                "definitionName": {
+                    "value": "Domain"
+                },
+                "connectingID": {
+                    "identifierType": "FullyQualifiedName"
+                },
+                "fullyQualifiedName": "testNew_attributeSetChild.Domain",
+                "isHidden": false,
+                "isIdentityValue": false,
+                "isNullable": false,
+                "isPrimaryKey": true,
+                "isReadOnly": false,
+                "isSystemDefined": false,
+                "isUpdateable": true,
+                "length": 50,
+                "parentDefinition": {
+                    "definitionID": "a1b2c3d4-0000-4000-8000-000000000401",
+                    "definitionKey": "testNew_attributeSetChild",
+                    "definitionName": {
+                        "value": "testNew_attributeSetChild"
+                    },
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    }
+                },
+                "parentType": "Set",
+                "storageName": "Domain",
+                "valueDefinitionID": "a1b2c3d4-0000-4000-8000-000000000404",
+                "valueDefinitionKey": "Domain",
+                "name": "Domain",
+                "setDefinitionID": "a1b2c3d4-0000-4000-8000-000000000401",
+                "setDefinitionKey": "testNew_attributeSetChild",
+                "setDefinitionName": {
+                    "value": "testNew_attributeSetChild"
+                },
+                "parentIdentifier": "a1b2c3d4-0000-4000-8000-000000000401"
+            }
+        ],
+        "attributeCount": 0,
+        "canAddValues": true,
+        "canChangeValues": true,
+        "canModify": true,
+        "canRemove": true,
+        "categoryID": 2,
+        "createdBy": 700301950,
+        "createDate": "2026-11-11T10:00:00",
+        "customObjectOwnerMID": 9999999,
+        "dataRetentionProperties": {
+            "isRowBasedRetention": false,
+            "isResetRetentionPeriodOnImport": false,
+            "isDeleteAtEndOfRetentionPeriod": false,
+            "setDefinitionID": "a1b2c3d4-0000-4000-8000-000000000401"
+        },
+        "localizedDescription": {
+            "value": ""
+        },
+        "fullyQualifiedName": "testNew_attributeSetChild",
+        "isCustomObjectBacked": true,
+        "isEvent": false,
+        "isHidden": false,
+        "isReadOnly": false,
+        "isRoot": false,
+        "isSendable": false,
+        "isShared": false,
+        "isSystemDefined": false,
+        "isTestaable": false,
+        "parentID": "00000000-0000-0000-0000-000000000000",
+        "relationshipCount": 1,
+        "storageLogicalType": "DataExtension",
+        "storageName": "testExisting_DomainExclusion",
+        "storageObjectIDs": [
+            "a1b2c3d4-0000-4000-8000-000000000491"
+        ],
+        "storageReferenceID": {
+            "type": "guid",
+            "value": "5a7194ad-6602-ef11-a5c8-5cba2c702db8"
+        },
+        "setDefinitionID": "a1b2c3d4-0000-4000-8000-000000000401",
+        "setDefinitionKey": "testNew_attributeSetChild",
+        "name": "testNew_attributeSetChild"
+    },
+    "requestServiceMessageID": "a1b2c3d4-0000-4000-8000-000000000998",
+    "responseDateTime": "2026-11-11T10:00:00.000-06:00",
+    "resultMessages": [],
+    "serviceMessageID": "a1b2c3d4-0000-4000-8000-000000000997"
+}

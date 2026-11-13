@@ -1,0 +1,26 @@
+{
+    "id": "21711373-72c1-ec11-b83b-exclusion",
+    "fields": [
+        {
+            "id": "a1b2c3d4-0000-4000-8000-000000000201",
+            "name": "ContactKey",
+            "type": "Text",
+            "length": 254,
+            "ordinal": 0,
+            "isNullable": false,
+            "isPrimaryKey": true,
+            "isReadOnly": false,
+            "isHidden": false
+        },
+        {
+            "id": "a1b2c3d4-0000-4000-8000-000000000202",
+            "name": "EmailAddress",
+            "type": "EmailAddress",
+            "ordinal": 1,
+            "isNullable": true,
+            "isPrimaryKey": false,
+            "isReadOnly": false,
+            "isHidden": false
+        }
+    ]
+}

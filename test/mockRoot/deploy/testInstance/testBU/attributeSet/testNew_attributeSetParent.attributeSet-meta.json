@@ -1,0 +1,41 @@
+{
+    "dataRetentionProperties": {
+        "isDeleteAtEndOfRetentionPeriod": false,
+        "isResetRetentionPeriodOnImport": false,
+        "isRowBasedRetention": false
+    },
+    "definitionKey": "testNew_attributeSetParent",
+    "isRoot": false,
+    "name": "testNew_attributeSetParent",
+    "r__dataExtension_key": "testExisting_dataExtension_exclusion",
+    "r__folder_Path": "Data Extensions",
+    "relationships": [
+        {
+            "isGroupToSetRelationship": true,
+            "leftItem": {
+                "cardinality": "One",
+                "r__attributeGroup_key": "testExisting_attributeGroup",
+                "relationshipType": "AttributeGroup"
+            },
+            "leftRelationshipIDs": [
+                {
+                    "type": "int16",
+                    "value": "3"
+                }
+            ],
+            "leftRelationshipReferenceType": "CustomerData",
+            "relationshipAttributes": [
+                {
+                    "c__leftField": "ContactKey",
+                    "c__rightField": "ContactKey"
+                }
+            ],
+            "rightItem": {
+                "cardinality": "One",
+                "r__attributeSet_key": "testNew_attributeSetParent",
+                "relationshipType": "AttributeSet"
+            }
+        }
+    ],
+    "storageLogicalType": "DataExtension"
+}

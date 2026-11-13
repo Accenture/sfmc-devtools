@@ -1,0 +1,9 @@
+{
+    "attributeGroupIconKey": "People",
+    "definitionID": "a1b2c3d4-0000-4000-8000-000000000999",
+    "definitionKey": "testNew_attributeGroupWithId",
+    "definitionName": {
+        "value": "testNew_attributeGroupWithId"
+    },
+    "description": "copied from another BU, still carrying its id"
+}

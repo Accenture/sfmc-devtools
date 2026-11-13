@@ -1,0 +1,27 @@
+{
+    "id": "5a7194ad-6602-ef11-a5c8-5cba2c702db8",
+    "fields": [
+        {
+            "id": "a1b2c3d4-0000-4000-8000-000000000211",
+            "name": "ContactKey",
+            "type": "Text",
+            "length": 254,
+            "ordinal": 0,
+            "isNullable": false,
+            "isPrimaryKey": true,
+            "isReadOnly": false,
+            "isHidden": false
+        },
+        {
+            "id": "a1b2c3d4-0000-4000-8000-000000000212",
+            "name": "Domain",
+            "type": "Text",
+            "length": 254,
+            "ordinal": 1,
+            "isNullable": true,
+            "isPrimaryKey": false,
+            "isReadOnly": false,
+            "isHidden": false
+        }
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "attributeGroupIconKey": "People",
+    "definitionKey": "testNew_attributeGroup",
+    "definitionName": {
+        "value": "testNew_attributeGroup"
+    },
+    "description": {
+        "value": "created on deploy"
+    },
+    "fullyQualifiedName": "testNew_attributeGroup"
+}
