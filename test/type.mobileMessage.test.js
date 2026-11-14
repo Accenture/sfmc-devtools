@@ -175,6 +175,22 @@ describe('type: mobileMessage', () => {
             assert.include(Object.keys(cache.getCache().mobileMessage), 'NTIzOjc4OjA');
         });
 
+        it('Should not name-match journey-owned (INTERACTION) mobileMessages on deploy', () => {
+            cache.initCache({ mid: 9999999, eid: 1111111 });
+            cache.setMetadata('mobileMessage', {
+                original: { id: 'original', name: 'Shared Name' },
+                copy: { id: 'copy', name: 'Shared Name', sendMethod: 'INTERACTION' },
+            });
+            assert.equal(
+                MobileMessage.getCacheMatchedByName({ name: 'Shared Name' }).id,
+                'original'
+            );
+            cache.setMetadata('mobileMessage', {
+                copy: { id: 'copy', name: 'Shared Name', sendMethod: 'INTERACTION' },
+            });
+            assert.notExists(MobileMessage.getCacheMatchedByName({ name: 'Shared Name' }));
+        });
+
         it('Should skip deploying journey-owned (INTERACTION) mobileMessages', async () => {
             const result = await MobileMessage.preDeployTasks({
                 id: 'NDQ6Nzg6MA',

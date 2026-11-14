@@ -187,6 +187,19 @@ describe('type: mobilePush', () => {
             );
         });
 
+        it('Should not name-match journey-owned mobilePush items on deploy', () => {
+            cache.initCache({ mid: 9999999, eid: 1111111 });
+            cache.setMetadata('mobilePush', {
+                original: { id: 'original', name: 'Shared Name', sendInitiator: 0 },
+                copy: { id: 'copy', name: 'Shared Name', sendInitiator: 3 },
+            });
+            assert.equal(MobilePush.getCacheMatchedByName({ name: 'Shared Name' }).id, 'original');
+            cache.setMetadata('mobilePush', {
+                copy: { id: 'copy', name: 'Shared Name', sendInitiator: 3 },
+            });
+            assert.notExists(MobilePush.getCacheMatchedByName({ name: 'Shared Name' }));
+        });
+
         it('Should skip deploying journey-owned mobilePush items', async () => {
             const result = await MobilePush.preDeployTasks({
                 id: 'journeyPushOne',

@@ -418,6 +418,27 @@ describe('type: journey', function () {
             });
         });
 
+        it('Should ignore journey-owned copies when resolving mobile references by name', async () => {
+            cache.initCache({ mid: 9999999, eid: 1111111 });
+            cache.setMetadata('journey', { existingJourney: { key: 'existingJourney' } });
+            cache.setMetadata('mobileMessage', {
+                original: { id: 'original', name: 'Shared Name' },
+                copy: { id: 'copy', name: 'Shared Name', sendMethod: 'INTERACTION' },
+            });
+            const configurationArguments = {
+                r__mobileMessage_key: 'otherBuKey',
+                r__mobileMessage_name: 'Shared Name',
+            };
+            await journeyTestAccess._preDeployTasks_activities({
+                key: 'existingJourney',
+                activities: [{ key: 'SMSSYNC-1', type: 'SMSSYNC', configurationArguments }],
+            });
+            assert.equal(
+                /** @type {ReturnType<JSON['parse']>} */ (configurationArguments).messageId,
+                'original'
+            );
+        });
+
         it('Should not guess a mobileMessage when the numeric prefix is ambiguous', () => {
             const journeyAccess = mobileIdAccess;
             cache.initCache({ mid: 9999999, eid: 1111111 });
