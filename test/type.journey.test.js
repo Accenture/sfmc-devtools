@@ -951,6 +951,7 @@ describe('type: journey', function () {
                     sendInitiator: 3,
                 },
             });
+            cache.setMetadata('asset', { someAsset: { id: 1, customerKey: 'someAsset' } });
             const activities = [
                 {
                     key: 'SMSSYNC-1',
@@ -958,6 +959,7 @@ describe('type: journey', function () {
                     configurationArguments: {
                         r__mobileMessage_key: 'NDQ6Nzg6MA',
                         r__mobileMessage_name: 'Journey SMS',
+                        r__asset_key: 'someAsset',
                     },
                 },
                 {
@@ -990,6 +992,26 @@ describe('type: journey', function () {
                 assert.notProperty(args, 'r__mobilePush_key');
                 assert.notProperty(args, 'r__mobilePush_name');
             }
+        });
+
+        it('Should keep the messageId of a journey-owned mobileMessage when the SMS activity has no asset', async () => {
+            cache.initCache({ mid: 9999999, eid: 1111111 });
+            cache.setMetadata('journey', {});
+            cache.setMetadata('mobileMessage', {
+                NDQ6Nzg6MA: { id: 'NDQ6Nzg6MA', name: 'Journey SMS', sendMethod: 'INTERACTION' },
+            });
+            const configurationArguments = {
+                r__mobileMessage_key: 'NDQ6Nzg6MA',
+                r__mobileMessage_name: 'Journey SMS',
+            };
+            await journeyTestAccess._preDeployTasks_activities({
+                key: 'newJourney',
+                name: 'New Journey',
+                activities: [{ key: 'SMSSYNC-1', type: 'SMSSYNC', configurationArguments }],
+            });
+            assert.equal(configurationArguments.messageId, 'NDQ6Nzg6MA');
+            assert.notProperty(configurationArguments, 'r__mobileMessage_key');
+            assert.notProperty(configurationArguments, 'r__mobileMessage_name');
         });
 
         it('Should block Journey writes when an SMSSYNC mobileMessage is missing', async () => {
