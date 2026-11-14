@@ -14,6 +14,10 @@ const journeyTestAccess =
     /** @type {{_preDeployTasks_activities(metadata: ReturnType<JSON['parse']>): Promise.<void>}} */ (
         /** @type {unknown} */ (Journey)
     );
+const mobileIdAccess =
+    /** @type {{_findMobileMessageIdInCache(id: string): string | undefined, _resolveMobileMessageId(id: string): Promise.<string>}} */ (
+        /** @type {unknown} */ (Journey)
+    );
 import * as testUtils from './utils.js';
 chai.use(chaiFiles);
 
@@ -273,6 +277,46 @@ describe('type: journey', function () {
             assert.equal(smsArguments.r__mobileMessage_key, 'NTIzOjc4OjA');
             assert.equal(smsArguments.r__mobileMessage_name, 'testExisting_mobileMessage');
             assert.notProperty(smsArguments, 'messageId');
+        });
+
+        it('Should match a published journey messageId (entity code 625) to the cached mobileMessage (entity code 78) by its numeric prefix', async () => {
+            const journeyAccess = mobileIdAccess;
+            cache.initCache({ mid: 9999999, eid: 1111111 });
+            // NDQ6NjI1OjA = 44:625:0 (as stored by a published journey), NDQ6Nzg6MA = 44:78:0 (as returned by the mobileMessage API)
+            cache.setMetadata('mobileMessage', {
+                NDQ6Nzg6MA: { id: 'NDQ6Nzg6MA', name: 'Journey SMS', sendMethod: 'INTERACTION' },
+                NDU6Nzg6MA: { id: 'NDU6Nzg6MA', name: 'Journey SMS', sendMethod: 'INTERACTION' },
+            });
+            assert.equal(
+                journeyAccess._findMobileMessageIdInCache('NDQ6NjI1OjA'),
+                'NDQ6Nzg6MA',
+                'entity code must be ignored'
+            );
+            assert.equal(
+                await journeyAccess._resolveMobileMessageId('NDU6NjI1OjA'),
+                'NDU6Nzg6MA',
+                'resolution must not need an API call when the cache knows the item'
+            );
+            assert.equal(
+                journeyAccess._findMobileMessageIdInCache('NDQ6Nzg6MA'),
+                'NDQ6Nzg6MA',
+                'exact id must still match'
+            );
+            assert.isUndefined(
+                journeyAccess._findMobileMessageIdInCache('NDY6NjI1OjA'),
+                'unknown number must not match'
+            );
+        });
+
+        it('Should not guess a mobileMessage when the numeric prefix is ambiguous', () => {
+            const journeyAccess = mobileIdAccess;
+            cache.initCache({ mid: 9999999, eid: 1111111 });
+            // NDQ6Nzg6MA = 44:78:0 and NDQ6NjI1OjA = 44:625:0 are both cached
+            cache.setMetadata('mobileMessage', {
+                NDQ6Nzg6MA: { id: 'NDQ6Nzg6MA', name: 'A' },
+                NDQ6NjI1OjA: { id: 'NDQ6NjI1OjA', name: 'B' },
+            });
+            assert.isUndefined(journeyAccess._findMobileMessageIdInCache('NDQ6NzAwOjA'));
         });
 
         it('Should retrieve a journey containing an UPDATECONTACTDATA activity with key', async () => {
