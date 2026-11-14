@@ -279,6 +279,46 @@ describe('type: journey', function () {
             assert.notProperty(smsArguments, 'messageId');
         });
 
+        it('Should retrieve a published SMSSYNC journey whose messageId uses entity code 625 without a not-found warning', async () => {
+            const fixturePath =
+                'test/resources/9999999/interaction/v1/interactions/key_smsParityJourney/get-response.json';
+            const fixture = await fs.readJson(fixturePath);
+            // NTIzOjYyNTow = 523:625:0 while the mobileMessage API returns NTIzOjc4OjA = 523:78:0
+            for (const activity of fixture.activities) {
+                if (activity.type === 'SMSSYNC') {
+                    activity.configurationArguments.messageId = 'NTIzOjYyNTow';
+                }
+            }
+            await fs.writeJson(fixturePath, fixture);
+            const warnings = [];
+            const originalWarn = Util.logger.warn;
+            /**
+             * Captures retrieve warnings while preserving logger behavior.
+             *
+             * @param {unknown} message logger message
+             * @returns {import('winston').Logger} logger instance
+             */
+            Util.logger.warn = function (message) {
+                warnings.push(String(message));
+                return originalWarn.call(this, message);
+            };
+            try {
+                await handler.retrieve('testInstance/testBU', ['journey'], ['smsParityJourney']);
+            } finally {
+                Util.logger.warn = originalWarn;
+            }
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            assert.isUndefined(
+                warnings.find((message) => message.includes('was not found on your BU')),
+                'the 625-form id must resolve to the cached mobileMessage'
+            );
+            const smsArguments = (
+                await testUtils.getActualJson('smsParityJourney', 'journey')
+            ).activities.find((activity) => activity.type === 'SMSSYNC').configurationArguments;
+            assert.equal(smsArguments.r__mobileMessage_key, 'NTIzOjc4OjA');
+            assert.equal(smsArguments.r__mobileMessage_name, 'testExisting_mobileMessage');
+        });
+
         it('Should match a published journey messageId (entity code 625) to the cached mobileMessage (entity code 78) by its numeric prefix', async () => {
             const journeyAccess = mobileIdAccess;
             cache.initCache({ mid: 9999999, eid: 1111111 });
