@@ -308,6 +308,76 @@ describe('type: journey', function () {
             );
         });
 
+        it('Should strip the redundant mobilePushApp fields on retrieve and restore them on deploy', async () => {
+            const stripAccess = /** @type {{_stripMobilePushAppFromStore(a: object): void}} */ (
+                /** @type {unknown} */ (Journey)
+            );
+            const activity = {
+                metaData: {
+                    store: {
+                        messageConfiguration: {
+                            payload: { application: { id: 'appGuid', name: 'App' } },
+                            application: {
+                                id: 'appGuid',
+                                name: 'App',
+                                value: 'App',
+                                title: 'App',
+                                disabled: false,
+                                expired: false,
+                            },
+                        },
+                    },
+                },
+            };
+            stripAccess._stripMobilePushAppFromStore(activity);
+            assert.deepEqual(activity.metaData.store.messageConfiguration, {
+                application: { disabled: false, expired: false },
+            });
+
+            cache.initCache({ mid: 9999999, eid: 1111111 });
+            cache.setMetadata('journey', {});
+            cache.setMetadata('mobilePushApp', {
+                appKey: { id: 'targetGuid', key: 'appKey', name: 'Target App' },
+            });
+            cache.setMetadata('mobileCode', {
+                123: { id: 'codeId', code: '123', countryCode: 'NL' },
+            });
+            const smsActivity = {
+                key: 'SMSSYNC-1',
+                type: 'SMSSYNC',
+                configurationArguments: { r__mobileCode_key: '123' },
+            };
+            const pushActivity = {
+                key: 'PUSH-1',
+                type: 'PUSHNOTIFICATIONACTIVITY',
+                ...activity,
+                configurationArguments: {
+                    r__mobilePushApp_key: 'appKey',
+                    r__mobilePushApp_name: 'Target App',
+                },
+            };
+            await journeyTestAccess._preDeployTasks_activities({
+                key: 'newJourney',
+                activities: [smsActivity, pushActivity],
+            });
+            assert.deepEqual(
+                /** @type {ReturnType<JSON['parse']>} */ (smsActivity).metaData.store
+                    .messageConfiguration.selectedCode,
+                { countryCode: 'NL', id: 'codeId', code: '123' }
+            );
+            assert.deepEqual(pushActivity.metaData.store.messageConfiguration, {
+                payload: { application: { id: 'targetGuid', name: 'Target App' } },
+                application: {
+                    id: 'targetGuid',
+                    name: 'Target App',
+                    value: 'Target App',
+                    title: 'Target App',
+                    disabled: false,
+                    expired: false,
+                },
+            });
+        });
+
         it('Should not guess a mobileMessage when the numeric prefix is ambiguous', () => {
             const journeyAccess = mobileIdAccess;
             cache.initCache({ mid: 9999999, eid: 1111111 });

@@ -56,6 +56,24 @@ declare class Journey extends MetadataType {
      */
     static postRetrieveTasks(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
     /**
+     * the Journey Builder UI state repeats the id and name of the mobilePushApp in 6 places. They are
+     * redundant with r__mobilePushApp_key/_name and therefore not stored on disk.
+     *
+     * @private
+     * @param {MetadataTypeItem} activity a single journey activity
+     * @returns {void}
+     */
+    private static _stripMobilePushAppFromStore;
+    /**
+     * counterpart of {@link Journey._stripMobilePushAppFromStore}
+     *
+     * @private
+     * @param {MetadataTypeItem} activity a single journey activity
+     * @param {MetadataTypeItem} mobilePushApp the mobilePushApp on the target BU
+     * @returns {void}
+     */
+    private static _restoreMobilePushAppInStore;
+    /**
      * @private
      * @param {string} id base64-encoded id in the format <number>:<entity code>:<number>
      * @returns {string} the leading number of the decoded id
