@@ -807,12 +807,69 @@ describe('type: journey', function () {
             assert.notProperty(configurationArguments, 'r__mobileMessage_name');
         });
 
+        it('Should drop unresolvable mobile references and journey-owned items from a journey that is being created', async () => {
+            cache.initCache({ mid: 9999999, eid: 1111111 });
+            cache.setMetadata('journey', {});
+            cache.setMetadata('mobileMessage', {
+                NDQ6Nzg6MA: { id: 'NDQ6Nzg6MA', name: 'Journey SMS', sendMethod: 'INTERACTION' },
+            });
+            cache.setMetadata('mobilePush', {
+                journeyPush: {
+                    id: 'journeyPush',
+                    name: 'Journey Push',
+                    sendInitiator: 3,
+                },
+            });
+            const activities = [
+                {
+                    key: 'SMSSYNC-1',
+                    type: 'SMSSYNC',
+                    configurationArguments: {
+                        r__mobileMessage_key: 'NDQ6Nzg6MA',
+                        r__mobileMessage_name: 'Journey SMS',
+                    },
+                },
+                {
+                    key: 'SMSSYNC-2',
+                    type: 'SMSSYNC',
+                    configurationArguments: {
+                        r__mobileMessage_key: 'missingMessageKey',
+                        r__mobileMessage_name: 'Missing SMS',
+                    },
+                },
+                {
+                    key: 'PUSH-1',
+                    type: 'PUSHNOTIFICATIONACTIVITY',
+                    configurationArguments: {
+                        r__mobilePush_key: 'journeyPush',
+                        r__mobilePush_name: 'Journey Push',
+                    },
+                },
+            ];
+            await journeyTestAccess._preDeployTasks_activities({
+                key: 'newJourney',
+                name: 'New Journey',
+                activities,
+            });
+            for (const activity of activities) {
+                const args = activity.configurationArguments;
+                assert.notProperty(args, 'messageId');
+                assert.notProperty(args, 'pushMessageId');
+                assert.notProperty(args, 'r__mobileMessage_key');
+                assert.notProperty(args, 'r__mobilePush_key');
+                assert.notProperty(args, 'r__mobilePush_name');
+            }
+        });
+
         it('Should block Journey writes when an SMSSYNC mobileMessage is missing', async () => {
             cache.initCache({ mid: 9999999, eid: 1111111 });
+            // the journey already exists on the target, hence the reference must not silently disappear
+            cache.setMetadata('journey', { existingJourney: { key: 'existingJourney' } });
             cache.setMetadata('mobileMessage', {});
             let missingError;
             try {
                 await journeyTestAccess._preDeployTasks_activities({
+                    key: 'existingJourney',
                     activities: [
                         {
                             type: 'SMSSYNC',
@@ -1043,14 +1100,6 @@ describe('type: journey', function () {
 
         for (const scenario of [
             {
-                kind: 'missing',
-                journeyKey: 'sms_parity_create',
-                messageName: 'Missing SMS',
-                candidateIds: [],
-                title: 'Should block combined deploy when the mobileMessage reference is missing',
-            },
-            {
-                kind: 'ambiguous',
                 journeyKey: 'sms_parity_create',
                 messageName: 'Duplicate SMS',
                 candidateIds: ['duplicateMessageOne', 'duplicateMessageTwo'],
@@ -1071,18 +1120,16 @@ describe('type: journey', function () {
                     `deploy/testInstance/testBU/journey/${scenario.journeyKey}.journey-meta.json`,
                     journey
                 );
-                if (scenario.kind === 'ambiguous') {
-                    const fixturePath =
-                        'test/resources/9999999/legacy/v1/beta/mobile/message/get-response.json';
-                    const fixture = await fs.readJson(fixturePath);
-                    fixture.entry = scenario.candidateIds.map((id) => ({
-                        ...fixture.entry[0],
-                        id,
-                        name: scenario.messageName,
-                    }));
-                    fixture.totalResults = fixture.entry.length;
-                    await fs.writeJson(fixturePath, fixture);
-                }
+                const fixturePath =
+                    'test/resources/9999999/legacy/v1/beta/mobile/message/get-response.json';
+                const fixture = await fs.readJson(fixturePath);
+                fixture.entry = scenario.candidateIds.map((id) => ({
+                    ...fixture.entry[0],
+                    id,
+                    name: scenario.messageName,
+                }));
+                fixture.totalResults = fixture.entry.length;
+                await fs.writeJson(fixturePath, fixture);
 
                 const errors = [];
                 const originalErrorStack = Util.logger.errorStack;
@@ -1106,17 +1153,10 @@ describe('type: journey', function () {
                 }
 
                 const emittedError = errors.join('\n');
-                if (scenario.kind === 'missing') {
-                    assert.include(
-                        emittedError,
-                        "mobileMessage 'Missing SMS' not found on target BU — must be deployed first"
-                    );
-                } else {
-                    assert.include(emittedError, scenario.messageName);
-                    assert.include(emittedError, scenario.candidateIds[0]);
-                    assert.include(emittedError, scenario.candidateIds[1]);
-                    assert.include(emittedError, 'clean up the duplicates first');
-                }
+                assert.include(emittedError, scenario.messageName);
+                assert.include(emittedError, scenario.candidateIds[0]);
+                assert.include(emittedError, scenario.candidateIds[1]);
+                assert.include(emittedError, 'clean up the duplicates first');
                 const history = testUtils.getAPIHistory();
                 assert.lengthOf(
                     (history.post || []).filter(
