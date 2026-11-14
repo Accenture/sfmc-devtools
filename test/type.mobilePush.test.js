@@ -133,6 +133,69 @@ describe('type: mobilePush', () => {
             }
         });
 
+        it('Should not write journey-owned mobilePush items to disk but keep them in the cache', async () => {
+            const fixturePath = 'test/resources/9999999/push/v1/message/get-response.json';
+            const fixture = await fs.readJson(fixturePath);
+            const journeyOwnedOne = {
+                ...fixture.items[0],
+                id: 'journeyPushOne',
+                name: 'Journey Push',
+                sendInitiator: MobilePush.definition.sendInitiatorMapping.journeyBuilder,
+            };
+            const journeyOwnedTwo = { ...journeyOwnedOne, id: 'journeyPushTwo' };
+            fixture.items = [...fixture.items, journeyOwnedOne, journeyOwnedTwo];
+            fixture.count = fixture.items.length;
+            await fs.writeJson(fixturePath, fixture);
+
+            const warnings = [];
+            const originalWarn = Util.logger.warn;
+            /**
+             * Captures retrieve warnings while preserving logger behavior.
+             *
+             * @param {unknown} message logger message
+             * @returns {import('winston').Logger} logger instance
+             */
+            Util.logger.warn = function (message) {
+                warnings.push(String(message));
+                return originalWarn.call(this, message);
+            };
+            try {
+                await handler.retrieve('testInstance/testBU', ['mobilePush']);
+            } finally {
+                Util.logger.warn = originalWarn;
+            }
+
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            assert.isUndefined(
+                warnings.find((message) => message.includes('Journey Push')),
+                'journey-owned items must not trigger the duplicate-name warning'
+            );
+            assert.isTrue(
+                (await testUtils.getActualJson('MTk6MTE0OjA', 'mobilePush')).id === 'MTk6MTE0OjA',
+                'regular mobilePush should still be written'
+            );
+            assert.isFalse(
+                fs.existsSync(
+                    './retrieve/testInstance/testBU/mobilePush/journeyPushOne.mobilePush-meta.json'
+                ),
+                'journey-owned mobilePush must not be written to disk'
+            );
+            assert.sameMembers(
+                Object.keys(cache.getCache().mobilePush),
+                ['MTk6MTE0OjA', 'journeyPushOne', 'journeyPushTwo'],
+                'journey-owned items must stay resolvable in the cache'
+            );
+        });
+
+        it('Should skip deploying journey-owned mobilePush items', async () => {
+            const result = await MobilePush.preDeployTasks({
+                id: 'journeyPushOne',
+                name: 'Journey Push',
+                c__sendInitiator: 'journeyBuilder',
+            });
+            assert.isNull(result, 'journey-owned mobilePush should be skipped on deploy');
+        });
+
         it('Should warn for duplicate mobilePush names during changelog-only retrieve without writing files', async () => {
             const fixturePath = 'test/resources/9999999/push/v1/message/get-response.json';
             const fixture = await fs.readJson(fixturePath);

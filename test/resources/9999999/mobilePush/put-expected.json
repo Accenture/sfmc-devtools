@@ -15,6 +15,6 @@
     "c__messageType": "outboundPush",
     "c__contentType": "alert",
     "c__tzPastSendAction": "sendImmediately",
-    "c__sendInitiator": "journeyBuilder",
+    "c__sendInitiator": "automation",
     "c__status": "active"
 }
