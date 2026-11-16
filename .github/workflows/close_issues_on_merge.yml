@@ -18,6 +18,6 @@ jobs:
 
     steps:
       - name: Closes issues related to a merged pull request.
-        uses: ldez/gha-mjolnir@v1.5.0
+        uses: ldez/gha-mjolnir@v1.5.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
