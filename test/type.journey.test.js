@@ -315,7 +315,11 @@ describe('type: journey', function () {
             const smsArguments = (
                 await testUtils.getActualJson('smsParityJourney', 'journey')
             ).activities.find((activity) => activity.type === 'SMSSYNC').configurationArguments;
-            assert.equal(smsArguments.r__mobileMessage_key, 'NTIzOjc4OjA');
+            assert.equal(
+                smsArguments.r__mobileMessage_key,
+                'NTIzOjYyNTow',
+                'the key stays as the journey stores it'
+            );
             assert.equal(smsArguments.r__mobileMessage_name, 'testExisting_mobileMessage');
         });
 
@@ -1012,6 +1016,24 @@ describe('type: journey', function () {
             assert.equal(configurationArguments.messageId, 'NDQ6Nzg6MA');
             assert.notProperty(configurationArguments, 'r__mobileMessage_key');
             assert.notProperty(configurationArguments, 'r__mobileMessage_name');
+        });
+
+        it('Should resolve a journey-stored mobileMessage key (entity code 625) to the cached mobileMessage when updating an existing journey', async () => {
+            cache.initCache({ mid: 9999999, eid: 1111111 });
+            cache.setMetadata('journey', { existingJourney: { key: 'existingJourney' } });
+            // NDQ6NjI1OjA = 44:625:0 (journey), NDQ6Nzg6MA = 44:78:0 (mobileMessage API)
+            cache.setMetadata('mobileMessage', {
+                NDQ6Nzg6MA: { id: 'NDQ6Nzg6MA', name: 'Journey SMS', sendMethod: 'INTERACTION' },
+            });
+            const configurationArguments = {
+                r__mobileMessage_key: 'NDQ6NjI1OjA',
+                r__mobileMessage_name: 'Journey SMS',
+            };
+            await journeyTestAccess._preDeployTasks_activities({
+                key: 'existingJourney',
+                activities: [{ key: 'SMSSYNC-1', type: 'SMSSYNC', configurationArguments }],
+            });
+            assert.equal(configurationArguments.messageId, 'NDQ6Nzg6MA');
         });
 
         it('Should block Journey writes when an SMSSYNC mobileMessage is missing', async () => {
