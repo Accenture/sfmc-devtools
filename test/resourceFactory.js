@@ -798,6 +798,12 @@ export const handleRESTRequest = async (config) => {
                 if (data.customerKey) {
                     filterBody = 'key=' + data.customerKey;
                 }
+            } else // attributeSet create: one response per created set
+            if (
+                urlObj.pathname === '/hub/v1/contacts/schema/setDefinitions' &&
+                data.definitionKey
+            ) {
+                filterBody = 'key=' + data.definitionKey;
             }
         }
         const testPathFilterBody = filterBody ? testPath + '-' + filterBody : null;

@@ -1,0 +1,20 @@
+{
+    "attributeCount": 0,
+    "attributeGroupIconKey": "People",
+    "attributeGroupType": "Standard",
+    "r__attributeSet_key": [],
+    "canAddProperties": true,
+    "canAddRelationships": true,
+    "canChangeProperties": true,
+    "canModify": true,
+    "canRemove": true,
+    "definitionKey": "testNew_attributeGroup",
+    "definitionName": {
+        "value": "testNew_attributeGroup"
+    },
+    "description": "created on deploy",
+    "displayOrder": 9,
+    "isHidden": false,
+    "isOwner": true,
+    "requiredRelationships": []
+}

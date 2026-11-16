@@ -122,6 +122,87 @@ describe('type: mobileMessage', () => {
             }
         });
 
+        it('Should not write journey-owned (INTERACTION) mobileMessages to disk but keep them in the cache', async () => {
+            const fixturePath =
+                'test/resources/9999999/legacy/v1/beta/mobile/message/get-response.json';
+            const fixture = await fs.readJson(fixturePath);
+            const journeyOwnedOne = {
+                ...fixture.entry[0],
+                id: 'NDQ6Nzg6MA',
+                name: 'Journey SMS',
+                sendMethod: 'INTERACTION',
+            };
+            const journeyOwnedTwo = { ...journeyOwnedOne, id: 'NDU6Nzg6MA' };
+            fixture.entry = [...fixture.entry, journeyOwnedOne, journeyOwnedTwo];
+            fixture.count = fixture.entry.length;
+            await fs.writeJson(fixturePath, fixture);
+
+            const warnings = [];
+            const originalWarn = Util.logger.warn;
+            /**
+             * Captures retrieve warnings while preserving logger behavior.
+             *
+             * @param {unknown} message logger message
+             * @returns {import('winston').Logger} logger instance
+             */
+            Util.logger.warn = function (message) {
+                warnings.push(String(message));
+                return originalWarn.call(this, message);
+            };
+            try {
+                await handler.retrieve('testInstance/testBU', ['mobileMessage']);
+            } finally {
+                Util.logger.warn = originalWarn;
+            }
+
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            assert.isUndefined(
+                warnings.find((message) => message.includes('Journey SMS')),
+                'journey-owned items must not trigger the duplicate-name warning'
+            );
+            assert.isFalse(
+                fs.existsSync(
+                    './retrieve/testInstance/testBU/mobileMessage/NDQ6Nzg6MA.mobileMessage-meta.json'
+                ),
+                'journey-owned mobileMessage must not be written to disk'
+            );
+            assert.include(
+                Object.keys(cache.getCache().mobileMessage),
+                'NDQ6Nzg6MA',
+                'journey-owned items must stay resolvable in the cache'
+            );
+            assert.include(Object.keys(cache.getCache().mobileMessage), 'NDU6Nzg6MA');
+            assert.include(Object.keys(cache.getCache().mobileMessage), 'NTIzOjc4OjA');
+        });
+
+        it('Should not name-match journey-owned (INTERACTION) mobileMessages on deploy', () => {
+            cache.initCache({ mid: 9999999, eid: 1111111 });
+            cache.setMetadata('mobileMessage', {
+                original: { id: 'original', name: 'Shared Name' },
+                copy: { id: 'copy', name: 'Shared Name', sendMethod: 'INTERACTION' },
+            });
+            assert.equal(
+                MobileMessage.getCacheMatchedByName({ name: 'Shared Name' }).id,
+                'original'
+            );
+            cache.setMetadata('mobileMessage', {
+                copy: { id: 'copy', name: 'Shared Name', sendMethod: 'INTERACTION' },
+            });
+            assert.notExists(MobileMessage.getCacheMatchedByName({ name: 'Shared Name' }));
+        });
+
+        it('Should skip deploying journey-owned (INTERACTION) mobileMessages', async () => {
+            const result = await MobileMessage.preDeployTasks(
+                {
+                    id: 'NDQ6Nzg6MA',
+                    name: 'Journey SMS',
+                    sendMethod: 'INTERACTION',
+                },
+                'deployDir'
+            );
+            assert.isNull(result, 'journey-owned mobileMessage should be skipped on deploy');
+        });
+
         it('Should warn for duplicate mobileMessage names during changelog-only retrieve without writing files', async () => {
             const fixturePath =
                 'test/resources/9999999/legacy/v1/beta/mobile/message/get-response.json';

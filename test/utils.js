@@ -466,6 +466,87 @@ export function getAPIHistoryDebug() {
 }
 
 /**
+ * returns all write requests: non-GET requests except token requests and SOAP Retrieve requests
+ *
+ * @returns {object[]} list of write requests
+ */
+export function getWriteRequests() {
+    return Object.values(apimock.history)
+        .flat()
+        .filter(
+            (call) =>
+                call.method !== 'get' &&
+                call.url !== '/v2/token' &&
+                !(call.url === '/Service.asmx' && call.headers?.SOAPAction === 'Retrieve')
+        );
+}
+
+/**
+ * runs a deploy while capturing the given log level.
+ *
+ * @param {'warn'|'error'} level logger method to capture
+ * @param {string} type metadata type to deploy
+ * @param {string[]} keys keys to deploy
+ * @returns {Promise.<{result: object, messages: string[]}>} deploy result and captured messages
+ */
+export async function deployCapturing(level, type, keys) {
+    return runCapturing(level, () => handler.deploy('testInstance/testBU', [type], keys));
+}
+
+/**
+ * runs a delete while capturing the given log level.
+ *
+ * @param {'info'|'warn'|'error'} level logger method to capture
+ * @param {string|Object.<string, string[]>} type metadata type to delete, or type => keys map
+ * @param {string|string[]} [key] key(s) to delete; omit when type is a type => keys map
+ * @returns {Promise.<{result: boolean, messages: string[]}>} delete result and captured messages
+ */
+export async function deleteCapturing(level, type, key) {
+    return runCapturing(level, () => handler.deleteByKey('testInstance/testBU', type, key));
+}
+
+/**
+ * runs a handler command while capturing the given log level.
+ * handler commands restart the logger, hence the capture is re-applied after every Util.startLogger call
+ *
+ * @param {'info'|'warn'|'error'} level logger method to capture
+ * @param {function(): Promise.<object|boolean>} run handler command
+ * @returns {Promise.<{result: object|boolean, messages: string[]}>} command result and captured messages
+ */
+async function runCapturing(level, run) {
+    const messages = [];
+    const originalStartLogger = Util.startLogger;
+    const capture = () => {
+        const original = Util.logger[level];
+        Util.logger[level] = (message) => {
+            messages.push(String(message));
+            return original.call(Util.logger, message);
+        };
+        if (level === 'error') {
+            // errorStack logs via winston directly and hence bypasses Util.logger.error
+            const originalErrorStack = Util.logger.errorStack;
+            Util.logger.errorStack = (ex, message) => {
+                messages.push(`${message}: ${ex.message}`);
+                return originalErrorStack.call(Util.logger, ex, message);
+            };
+        }
+    };
+    Util.startLogger = (...args) => {
+        const response = originalStartLogger.apply(Util, args);
+        capture();
+        return response;
+    };
+    try {
+        const result = await run();
+        return { result, messages };
+    } finally {
+        Util.startLogger = originalStartLogger;
+        // drop the capturing wrapper
+        Util.startLogger(true);
+    }
+}
+
+/**
  * helper to return most important fields for each api call
  *
  * @returns {void} of API history
