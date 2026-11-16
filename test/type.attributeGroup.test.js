@@ -1,4 +1,5 @@
 import * as chai from 'chai';
+/** @type {typeof chai.assert} */
 const assert = chai.assert;
 
 import chaiFiles from 'chai-files';

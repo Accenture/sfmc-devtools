@@ -374,7 +374,7 @@ describe('type: journey', function () {
                 },
             };
             stripAccess._stripMobilePushAppFromStore(activity);
-            assert.deepEqual(activity.metaData.store.messageConfiguration, {
+            assert.deepEqual(/** @type {object} */ (activity.metaData.store.messageConfiguration), {
                 application: { disabled: false, expired: false },
             });
 

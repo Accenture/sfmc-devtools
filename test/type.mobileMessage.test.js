@@ -192,11 +192,14 @@ describe('type: mobileMessage', () => {
         });
 
         it('Should skip deploying journey-owned (INTERACTION) mobileMessages', async () => {
-            const result = await MobileMessage.preDeployTasks({
-                id: 'NDQ6Nzg6MA',
-                name: 'Journey SMS',
-                sendMethod: 'INTERACTION',
-            });
+            const result = await MobileMessage.preDeployTasks(
+                {
+                    id: 'NDQ6Nzg6MA',
+                    name: 'Journey SMS',
+                    sendMethod: 'INTERACTION',
+                },
+                'deployDir'
+            );
             assert.isNull(result, 'journey-owned mobileMessage should be skipped on deploy');
         });
 

@@ -1,4 +1,5 @@
 import * as chai from 'chai';
+/** @type {typeof chai.assert} */
 const assert = chai.assert;
 
 import chaiFiles from 'chai-files';
@@ -62,6 +63,7 @@ function setLinkedTo(parentKey) {
  * @returns {Object.<string, string[]>} sorted dependent keys per type
  */
 function getDependencies(metadataItem) {
+    /** @type {Object.<string, string[]>} */
     const result = {};
     for (const depType in AttributeSet.definition.dependencyGraph) {
         result[depType] = AttributeSet.definition.dependencyGraph[depType]
