@@ -21,6 +21,9 @@ jobs:
                   node-version: '24'
 
             - run: npm ci
+            # Release-only network check: our own packages must be the newest published versions.
+            - name: Verify own packages are the newest published versions
+              run: npm run verify:own-dependencies-latest
             - run: npm test
 
     publish-npm:

@@ -7,6 +7,7 @@ import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
+import Folder from '../lib/metadataTypes/Folder.js';
 import { Util } from '../lib/util/util.js';
 chai.use(chaiFiles);
 
@@ -136,6 +137,20 @@ describe('type: folder', () => {
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
+        });
+
+        it('Should not call any API when updating journey, automation or triggered send journeybuilder folders', async () => {
+            for (const ContentType of ['journey', 'automations', 'triggered_send_journeybuilder']) {
+                const result = await Folder.update({
+                    ID: 12345,
+                    Name: 'existing',
+                    ContentType,
+                    Path: 'my folders/existing',
+                    ParentFolder: { ID: 100 },
+                });
+                assert.deepEqual(result, {}, `${ContentType}: unexpected update result`);
+            }
+            assert.equal(testUtils.getAPIHistoryLength(), 0, 'no API call expected');
         });
 
         it('Should create folder when same path exists in another Business Unit', async () => {

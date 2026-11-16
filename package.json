@@ -59,6 +59,8 @@
     "prepare": "husky || true",
     "lint-and-test": "run-s lint test",
     "test": "node test/run.js",
+    "verify:own-dependencies-latest": "node scripts/verify-own-dependencies-latest.mjs",
+    "preversion": "npm run verify:own-dependencies-latest",
     "coverage": "c8 npm run test",
     "prepare-release:audit-fix": "npm audit fix",
     "prepare-release:git": "node prepare-release.js",

@@ -131,17 +131,7 @@
                     "isLegacyContent": false,
                     "messageDefinition": {},
                     "messageConfiguration": {
-                        "payload": {
-                            "application": {
-                                "id": "d4f2c26f-2104-40f8-873e-c33bc579e744",
-                                "name": "Test Push App Two"
-                            }
-                        },
                         "application": {
-                            "id": "d4f2c26f-2104-40f8-873e-c33bc579e744",
-                            "name": "Test Push App Two",
-                            "value": "Test Push App Two",
-                            "title": "Test Push App Two",
                             "disabled": false,
                             "expired": false
                         }
