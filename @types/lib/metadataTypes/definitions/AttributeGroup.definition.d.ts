@@ -1,9 +1,8 @@
 declare namespace _default {
     let bodyIteratorField: string;
-    let dependencies: string[];
-    namespace dependencyGraph {
-        let attributeSet: string[];
-    }
+    let dependencies: any[];
+    let dependencyGraph: {};
+    let deleteSynchronously: boolean;
     let hasExtended: boolean;
     let idField: string;
     let keyIsFixed: boolean;
@@ -53,32 +52,32 @@ declare namespace _default {
             template: boolean;
         };
         'attributeSetIdentifiers[].connectingID.identifierType': {
-            isCreateable: any;
-            isUpdateable: any;
+            isCreateable: boolean;
+            isUpdateable: boolean;
             retrieving: boolean;
             template: boolean;
         };
         'attributeSetIdentifiers[].definitionID': {
-            isCreateable: any;
-            isUpdateable: any;
+            isCreateable: boolean;
+            isUpdateable: boolean;
             retrieving: boolean;
             template: boolean;
         };
         'attributeSetIdentifiers[].definitionKey': {
-            isCreateable: any;
-            isUpdateable: any;
+            isCreateable: boolean;
+            isUpdateable: boolean;
             retrieving: boolean;
             template: boolean;
         };
         'attributeSetIdentifiers[].definitionName.value': {
-            isCreateable: any;
-            isUpdateable: any;
+            isCreateable: boolean;
+            isUpdateable: boolean;
             retrieving: boolean;
             template: boolean;
         };
         'attributeSetIdentifiers[].namespace': {
-            isCreateable: any;
-            isUpdateable: any;
+            isCreateable: boolean;
+            isUpdateable: boolean;
             retrieving: boolean;
             template: boolean;
         };
@@ -142,6 +141,12 @@ declare namespace _default {
             retrieving: boolean;
             template: boolean;
         };
+        definitionName: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
         'definitionName.value': {
             isCreateable: boolean;
             isUpdateable: boolean;
@@ -197,20 +202,20 @@ declare namespace _default {
             template: boolean;
         };
         'localizedDescription.resourceSetKey': {
-            isCreateable: any;
-            isUpdateable: any;
+            isCreateable: boolean;
+            isUpdateable: boolean;
             retrieving: boolean;
             template: boolean;
         };
         'localizedDescription.resourceValueKey': {
-            isCreateable: any;
-            isUpdateable: any;
+            isCreateable: boolean;
+            isUpdateable: boolean;
             retrieving: boolean;
             template: boolean;
         };
         'localizedDescription.value': {
-            isCreateable: any;
-            isUpdateable: any;
+            isCreateable: boolean;
+            isUpdateable: boolean;
             retrieving: boolean;
             template: boolean;
         };

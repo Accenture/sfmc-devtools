@@ -19846,6 +19846,42 @@
                         "identifier": "528b787a-5238-ee11-b85a-48df37d1de8a",
                         "relationshipType": "AttributeSet"
                     }
+                },
+                {
+                    "canModify": true,
+                    "canRemove": true,
+                    "isHidden": false,
+                    "isSystemDefined": false,
+                    "isGroupToSetRelationship": false,
+                    "leftItem": {
+                        "cardinality": "One",
+                        "connectingID": {
+                            "identifierType": "FullyQualifiedName"
+                        },
+                        "identifier": "528b787a-5238-ee11-b85a-48df37d1de8a",
+                        "relationshipType": "AttributeSet"
+                    },
+                    "relationshipAttributes": [
+                        {
+                            "leftAttributeID": "558b787a-5238-ee11-b85a-48df37d1de8a",
+                            "leftConnectingID": {
+                                "identifierType": "FullyQualifiedName"
+                            },
+                            "rightAttributeID": "a1b2c3d4-0000-4000-8000-000000000103",
+                            "rightConnectingID": {
+                                "identifierType": "FullyQualifiedName"
+                            }
+                        }
+                    ],
+                    "relationshipID": "a1b2c3d4-0000-4000-8000-000000000105",
+                    "rightItem": {
+                        "cardinality": "Many",
+                        "connectingID": {
+                            "identifierType": "FullyQualifiedName"
+                        },
+                        "identifier": "a1b2c3d4-0000-4000-8000-000000000101",
+                        "relationshipType": "AttributeSet"
+                    }
                 }
             ],
             "valueDefinitions": [
@@ -20167,7 +20203,7 @@
             "isSystemDefined": false,
             "isTestaable": true,
             "parentID": "00000000-0000-0000-0000-000000000000",
-            "relationshipCount": 1,
+            "relationshipCount": 2,
             "sendAttributeStorageName": "ContactKey",
             "sendContactKeyStorageName": "_SubscriberKey",
             "storageLogicalType": "DataExtension",
@@ -20180,6 +20216,152 @@
             "setDefinitionID": "528b787a-5238-ee11-b85a-48df37d1de8a",
             "setDefinitionKey": "testExisting_dataExtensionShared",
             "name": "testExisting_dataExtensionShared"
+        },
+        {
+            "definitionID": "a1b2c3d4-0000-4000-8000-000000000101",
+            "definitionKey": "testExisting_attributeSetLinked",
+            "definitionName": {
+                "value": "testExisting_attributeSetLinked"
+            },
+            "connectingID": {
+                "identifierType": "FullyQualifiedName"
+            },
+            "relationships": [],
+            "valueDefinitions": [
+                {
+                    "baseType": "Numeric",
+                    "dataSourceName": {},
+                    "dataType": "LongNumber",
+                    "description": "",
+                    "localizedDescription": {
+                        "value": ""
+                    },
+                    "definitionID": "a1b2c3d4-0000-4000-8000-000000000102",
+                    "definitionKey": "CustomObjectKey",
+                    "definitionName": {
+                        "value": "Custom Object Key"
+                    },
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "fullyQualifiedName": "testExisting_attributeSetLinked.Custom Object Key",
+                    "isHidden": true,
+                    "isIdentityValue": true,
+                    "isNullable": false,
+                    "isPrimaryKey": false,
+                    "isReadOnly": true,
+                    "isSystemDefined": true,
+                    "isUpdateable": true,
+                    "parentDefinition": {
+                        "definitionID": "a1b2c3d4-0000-4000-8000-000000000101",
+                        "definitionKey": "testExisting_attributeSetLinked",
+                        "definitionName": {
+                            "value": "testExisting_attributeSetLinked"
+                        },
+                        "connectingID": {
+                            "identifierType": "FullyQualifiedName"
+                        }
+                    },
+                    "parentType": "Set",
+                    "storageName": "_CustomObjectKey",
+                    "valueDefinitionID": "a1b2c3d4-0000-4000-8000-000000000102",
+                    "valueDefinitionKey": "CustomObjectKey",
+                    "name": "Custom Object Key",
+                    "setDefinitionID": "a1b2c3d4-0000-4000-8000-000000000101",
+                    "setDefinitionKey": "testExisting_attributeSetLinked",
+                    "setDefinitionName": {
+                        "value": "testExisting_attributeSetLinked"
+                    },
+                    "parentIdentifier": "a1b2c3d4-0000-4000-8000-000000000101"
+                },
+                {
+                    "baseType": "Text",
+                    "dataSourceName": {},
+                    "dataType": "Text",
+                    "description": "",
+                    "localizedDescription": {
+                        "value": ""
+                    },
+                    "definitionID": "a1b2c3d4-0000-4000-8000-000000000103",
+                    "definitionKey": "ContactKey",
+                    "definitionName": {
+                        "value": "ContactKey"
+                    },
+                    "connectingID": {
+                        "identifierType": "FullyQualifiedName"
+                    },
+                    "fullyQualifiedName": "testExisting_attributeSetLinked.ContactKey",
+                    "isHidden": false,
+                    "isIdentityValue": false,
+                    "isNullable": false,
+                    "isPrimaryKey": true,
+                    "isReadOnly": false,
+                    "isSystemDefined": false,
+                    "isUpdateable": true,
+                    "length": 50,
+                    "parentDefinition": {
+                        "definitionID": "a1b2c3d4-0000-4000-8000-000000000101",
+                        "definitionKey": "testExisting_attributeSetLinked",
+                        "definitionName": {
+                            "value": "testExisting_attributeSetLinked"
+                        },
+                        "connectingID": {
+                            "identifierType": "FullyQualifiedName"
+                        }
+                    },
+                    "parentType": "Set",
+                    "storageName": "ContactKey",
+                    "valueDefinitionID": "a1b2c3d4-0000-4000-8000-000000000103",
+                    "valueDefinitionKey": "ContactKey",
+                    "name": "ContactKey",
+                    "setDefinitionID": "a1b2c3d4-0000-4000-8000-000000000101",
+                    "setDefinitionKey": "testExisting_attributeSetLinked",
+                    "setDefinitionName": {
+                        "value": "testExisting_attributeSetLinked"
+                    },
+                    "parentIdentifier": "a1b2c3d4-0000-4000-8000-000000000101"
+                }
+            ],
+            "attributeCount": 0,
+            "canAddValues": true,
+            "canChangeValues": true,
+            "canModify": true,
+            "canRemove": true,
+            "categoryID": 2,
+            "createdBy": 700301950,
+            "createDate": "2026-11-11T08:00:00",
+            "customObjectOwnerMID": 9999999,
+            "dataRetentionProperties": {
+                "isRowBasedRetention": false,
+                "isResetRetentionPeriodOnImport": false,
+                "isDeleteAtEndOfRetentionPeriod": false,
+                "setDefinitionID": "a1b2c3d4-0000-4000-8000-000000000101"
+            },
+            "localizedDescription": {
+                "value": ""
+            },
+            "fullyQualifiedName": "testExisting_attributeSetLinked",
+            "isCustomObjectBacked": true,
+            "isEvent": false,
+            "isHidden": false,
+            "isReadOnly": false,
+            "isRoot": false,
+            "isSendable": false,
+            "isShared": false,
+            "isSystemDefined": false,
+            "isTestaable": false,
+            "parentID": "00000000-0000-0000-0000-000000000000",
+            "relationshipCount": 0,
+            "storageLogicalType": "DataExtension",
+            "storageName": "testExisting_dataExtension",
+            "storageObjectIDs": ["a1b2c3d4-0000-4000-8000-000000000104"],
+            "storageReferenceID": {
+                "type": "guid",
+                "value": "21711373-72c1-ec11-b83b-48df37d1deb7"
+            },
+            "setDefinitionID": "a1b2c3d4-0000-4000-8000-000000000101",
+            "setDefinitionKey": "testExisting_attributeSetLinked",
+            "name": "testExisting_attributeSetLinked"
         }
     ],
     "responseContext": {

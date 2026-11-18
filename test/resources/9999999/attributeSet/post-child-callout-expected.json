@@ -1,0 +1,35 @@
+{
+    "definitionKey": "testNew_attributeSetChild",
+    "definitionName": {
+        "value": "testNew_attributeSetChild"
+    },
+    "storageReferenceID": {
+        "type": "Guid",
+        "value": "5a7194ad-6602-ef11-a5c8-5cba2c702db8"
+    },
+    "storageName": "testExisting_DomainExclusion",
+    "storageLogicalType": "DataExtension",
+    "isRoot": false,
+    "valueDefinitions": [],
+    "nonStandardAttributeGroupReferences": [],
+    "relationships": [
+        {
+            "leftItem": {
+                "identifier": "a1b2c3d4-0000-4000-8000-000000000301",
+                "relationshipType": "AttributeSet",
+                "cardinality": "One"
+            },
+            "rightItem": {
+                "relationshipType": "AttributeSet",
+                "cardinality": "Many"
+            },
+            "relationshipAttributes": [
+                {
+                    "leftAttributeID": "a1b2c3d4-0000-4000-8000-000000000303",
+                    "rightAttributeID": "a1b2c3d4-0000-4000-8000-000000000211"
+                }
+            ],
+            "isGroupToSetRelationship": false
+        }
+    ]
+}

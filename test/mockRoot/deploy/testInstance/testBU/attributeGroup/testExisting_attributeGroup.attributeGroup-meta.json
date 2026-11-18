@@ -1,0 +1,20 @@
+{
+    "attributeCount": 6,
+    "attributeGroupIconKey": "et-icon-databas",
+    "attributeGroupType": "Standard",
+    "r__attributeSet_key": ["testExisting_dataExtensionShared"],
+    "canAddProperties": true,
+    "canAddRelationships": true,
+    "canChangeProperties": true,
+    "canModify": true,
+    "canRemove": true,
+    "definitionKey": "testExisting_attributeGroup",
+    "definitionName": {
+        "value": "testExisting_attributeGroup"
+    },
+    "description": "updated on deploy",
+    "displayOrder": 8,
+    "isHidden": false,
+    "isOwner": true,
+    "requiredRelationships": []
+}

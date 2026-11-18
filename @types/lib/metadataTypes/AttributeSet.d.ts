@@ -3,17 +3,33 @@ export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem
 export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
 /**
- * @typedef {import('../../types/mcdev.d.js').MetadataTypeItem} MetadataTypeItem
- * @typedef {import('../../types/mcdev.d.js').MetadataTypeMap} MetadataTypeMap
- * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
- */
-/**
  * AttributeSet MetadataType
  *
  * @augments MetadataType
  */
 declare class AttributeSet extends MetadataType {
     static systemValueDefinitions: any;
+    /**
+     * data resolved in preDeployTasks that create() needs but which must not be sent to the API
+     *
+     * @type {Map.<string, {attributeGroupID: string}>}
+     */
+    static deployContext: Map<string, {
+        attributeGroupID: string;
+    }>;
+    /**
+     * owning attributeGroup id of every set created during the current deploy, keyed by the set's definitionID
+     *
+     * @type {Map.<string, string>}
+     */
+    static createdSetGroups: Map<string, string>;
+    /**
+     * keys of sets the server deleted together with their parent set or attributeGroup during the current delete run;
+     * reset whenever the attributeSet cache is reloaded for a delete (see AttributeGroup.cacheForDelete)
+     *
+     * @type {Set.<string>}
+     */
+    static cascadeDeletedKeys: Set<string>;
     /**
      * Retrieves Metadata of schema set Definitions.
      *
@@ -50,6 +66,179 @@ declare class AttributeSet extends MetadataType {
     static postRetrieveTasks(metadata: MetadataTypeItem): MetadataTypeItem;
     /**
      * helper for {@link AttributeSet.postRetrieveTasks}
+     * Returns the relationships that link the given set in (set is rightItem), incl. self-relationships.
+     * The API returns set-to-set relationships only on the left (pre-existing) set, so these are taken from the other sets in the cache,
+     * while relationships pointing from this set to another set are left out (they are stored in the other set's file).
+     *
+     * @param {MetadataTypeItem} metadata a single attributeSet (raw API format)
+     * @returns {object[] | undefined} copy of the incoming relationships; undefined if the set had none and none were found
+     */
+    static _getIncomingRelationships(metadata: MetadataTypeItem): object[] | undefined;
+    /**
+     * sets linked to other sets of the same deploy need to be created after those; hence upsert runs sequentially on a sorted map
+     *
+     * @param {MetadataTypeMap} metadataMap metadata mapped by their keyField
+     * @param {string} deployDir directory where deploy metadata are saved
+     * @returns {Promise.<MetadataTypeMap>} keyField => metadata map
+     */
+    static upsert(metadataMap: MetadataTypeMap, deployDir: string): Promise<MetadataTypeMap>;
+    /**
+     * helper for {@link AttributeSet.upsert}: puts sets whose incoming relationship starts at another set of this deploy after that set.
+     * Sets that are part of (or depend on) a cycle are reported and left out.
+     *
+     * @param {MetadataTypeMap} metadataMap metadata mapped by their keyField
+     * @returns {MetadataTypeMap} sorted copy of the map
+     */
+    static _sortForDeploy(metadataMap: MetadataTypeMap): MetadataTypeMap;
+    /**
+     * prepares a set for deployment: resolves all references and builds the create payload.
+     * Every unsupported situation throws, which makes upsert skip the item.
+     *
+     * @param {MetadataTypeItem} metadata a single item
+     * @returns {Promise.<MetadataTypeItem>} Promise of the create payload
+     */
+    static preDeployTasks(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
+    /**
+     * helper for {@link AttributeSet.preDeployTasks}
+     *
+     * @param {object} leftItem leftItem of the relationship in retrieve format
+     * @returns {{identifier: string, relationshipType: 'AttributeGroup'|'AttributeSet', groupId: string, set?: MetadataTypeItem}} resolved left side
+     */
+    static _resolveLeftItem(leftItem: object): {
+        identifier: string;
+        relationshipType: "AttributeGroup" | "AttributeSet";
+        groupId: string;
+        set?: MetadataTypeItem;
+    };
+    /**
+     * helper for {@link AttributeSet.preDeployTasks}
+     *
+     * @param {{relationshipType: string, set?: MetadataTypeItem}} left resolved left side
+     * @param {string} fieldKey c__leftField
+     * @returns {string} valueDefinitionID of the left attribute
+     */
+    static _getLeftAttributeID(left: {
+        relationshipType: string;
+        set?: MetadataTypeItem;
+    }, fieldKey: string): string;
+    /**
+     * helper for {@link AttributeSet.preDeployTasks}: SOAP cannot return fields of parent-owned DEs from a child BU, REST can
+     *
+     * @param {string} deObjectID ObjectID of the data extension
+     * @returns {Promise.<Object.<string, string>>} field name => field id
+     */
+    static _getDataExtensionFieldIds(deObjectID: string): Promise<{
+        [x: string]: string;
+    }>;
+    /**
+     * finds the raw relationship that links the given set in (set is rightItem; self-relationships are ignored).
+     * A set-to-set relationship is only stored on the left set, hence all cached sets are searched.
+     *
+     * @param {string} setId definitionID of the set
+     * @returns {{relationship: object, storedOn: string} | undefined} relationship and the definitionID of the set that holds it
+     */
+    static _findIncomingRelationship(setId: string): {
+        relationship: object;
+        storedOn: string;
+    } | undefined;
+    /**
+     * returns the id of the attributeGroup a set belongs to; needed as attributeGroupID query parameter
+     *
+     * @param {string} setId definitionID of the set
+     * @param {Set.<string>} [visited] used internally to stop on circular relationships
+     * @returns {string | undefined} definitionID of the attributeGroup
+     */
+    static _getOwningGroupId(setId: string, visited?: Set<string>): string | undefined;
+    /**
+     * Creates a single attributeSet
+     *
+     * @param {MetadataTypeItem} metadata single metadata entry
+     * @returns {Promise.<object> | null} Promise of API response or null in case of an error
+     */
+    static create(metadata: MetadataTypeItem): Promise<object> | null;
+    /**
+     * helper for {@link MetadataType.createREST}: unwraps the created item so that upsert can parse it like a retrieved item.
+     * The server generates definitionID and valueDefinitions; these are copied onto the deployed entry so that upsert caches them
+     * and sets linked to this one later in the same deploy can be resolved.
+     *
+     * @param {MetadataTypeItem} metadataEntry a single metadata Entry
+     * @param {object} apiResponse varies depending on the API call
+     * @returns {Promise.<object>} apiResponse, potentially modified
+     */
+    static postCreateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): Promise<object>;
+    /**
+     * helper for {@link AttributeSet.hasChanged} and {@link AttributeSet.update}
+     *
+     * @param {MetadataTypeItem} cachedVersion cached version from the server (raw API format)
+     * @param {MetadataTypeItem} metadata payload created by preDeployTasks
+     * @returns {{name: boolean, cardinality: {relationship: object, storedOn: string} | null, unsupported: string[]}} differences
+     */
+    static _getDifferences(cachedVersion: MetadataTypeItem, metadata: MetadataTypeItem): {
+        name: boolean;
+        cardinality: {
+            relationship: object;
+            storedOn: string;
+        } | null;
+        unsupported: string[];
+    };
+    /**
+     * test if metadata was actually changed or not to potentially skip it during deployment.
+     * only compares what the payload contains, as the cache holds raw API data
+     *
+     * @param {MetadataTypeItem} cachedVersion cached version from the server
+     * @param {MetadataTypeItem} metadata item to upload
+     * @returns {boolean} true if metadata was changed
+     */
+    static hasChanged(cachedVersion: MetadataTypeItem, metadata: MetadataTypeItem): boolean;
+    /**
+     * Updates the few things the API allows to change: the name and the cardinality of the incoming relationship.
+     * Everything else is reported as warning. Relationships are never deleted here because deleting the last one deletes the set.
+     *
+     * @param {MetadataTypeItem} metadata payload created by preDeployTasks
+     * @param {MetadataTypeItem} metadataBefore cached version from the server (raw API format)
+     * @returns {Promise.<object | null>} updated item in raw API format or null if nothing was updated
+     */
+    static update(metadata: MetadataTypeItem, metadataBefore: MetadataTypeItem): Promise<object | null>;
+    /**
+     * helper for {@link AttributeSet.update}
+     *
+     * @param {object} ex error
+     * @param {string} key key of the set
+     * @param {string} what what was updated
+     * @returns {void}
+     */
+    static _logUpdateError(ex: object, key: string, what: string): void;
+    /**
+     * makes sure attributeGroup and attributeSet are cached (raw API format) before deleting
+     *
+     * @returns {Promise.<void>} -
+     */
+    static preDeleteTasks(): Promise<void>;
+    /**
+     * keys of all cached sets that belong to the given attributeGroup (incl. sets linked in via another set)
+     *
+     * @param {string} groupId definitionID of the attributeGroup
+     * @returns {string[]} attributeSet keys
+     */
+    static _getSetKeysOfGroup(groupId: string): string[];
+    /**
+     * keys of all cached sets that are linked in only through the given set (recursively).
+     * The API deletes a set together with its last incoming relationship, hence these go with it.
+     *
+     * @param {string} setId definitionID of the set that is deleted
+     * @returns {string[]} attributeSet keys
+     */
+    static _getSetKeysLinkedOnlyThrough(setId: string): string[];
+    /**
+     * removes deleted sets from the cache and their retrieved files from disk
+     *
+     * @param {string[]} keys attributeSet keys
+     * @param {boolean} [isCascade] true if the server deleted these sets together with their parent set or attributeGroup
+     * @returns {Promise.<void>} -
+     */
+    static removeDeletedSets(keys: string[], isCascade?: boolean): Promise<void>;
+    /**
+     * helper for {@link AttributeSet.postRetrieveTasks}
      *
      * @returns {object[]} all system value definitions
      */
@@ -64,6 +253,7 @@ declare namespace AttributeSet {
             attributeSet: string[];
             attributeGroup: string[];
         };
+        deleteSynchronously: boolean;
         hasExtended: boolean;
         idField: string;
         keyIsFixed: boolean;
@@ -82,50 +272,50 @@ declare namespace AttributeSet {
         typeName: string;
         fields: {
             applicationID: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             applicationKey: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             attributeCount: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             canAddValues: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             canChangeValues: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             canModify: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             canRemove: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             categoryID: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
@@ -136,68 +326,74 @@ declare namespace AttributeSet {
                 template: boolean;
             };
             createDate: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             createdBy: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             customObjectOwnerMID: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: any;
+            };
+            dataRetentionProperties: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'dataRetentionProperties.isDeleteAtEndOfRetentionPeriod': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'dataRetentionProperties.isResetRetentionPeriodOnImport': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'dataRetentionProperties.isRowBasedRetention': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'dataRetentionProperties.periodUnitOfMeasure': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'dataRetentionProperties.setDefinitionID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'dataRetentionProperties.periodLength': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             definitionID: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             definitionKey: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
@@ -220,92 +416,92 @@ declare namespace AttributeSet {
                 template: boolean;
             };
             isCustomObjectBacked: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             isEvent: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             isHidden: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             isReadOnly: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             isRoot: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             isSendable: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             isShared: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             isSystemDefined: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             isTestaable: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'leftConnectingID.identifierType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'leftItem.cardinality': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'leftItem.cardinality ': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'leftItem.connectingID.identifierType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'leftItem.identifier': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'leftItem.relationshipType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
@@ -334,656 +530,680 @@ declare namespace AttributeSet {
                 template: boolean;
             };
             name: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             nonStandardAttributeGroupReferences: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'nonStandardAttributeGroupReferences[].attributeGroupType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'nonStandardAttributeGroupReferences[].attributeGroupID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'nonStandardAttributeGroupReferences[].definitionKey': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'obfuscationProperties.maskType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'obfuscationProperties.maskTypeID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'obfuscationProperties.storageType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'obfuscationProperties.storageTypeID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'obfuscationProperties.valueDefinitionID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'parentDefinition.connectingID.identifierType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'parentDefinition.definitionID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'parentDefinition.definitionKey': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'parentDefinition.definitionName.value': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             parentID: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             relationshipCount: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             relationships: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].canModify': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].canRemove': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].isGroupToSetRelationship': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].isHidden': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].isSystemDefined': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].leftRelationshipID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].leftRelationshipIDs': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: any;
+            };
+            'relationships[].leftItem': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: any;
+            };
+            'relationships[].leftItem.identifier': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].leftItem.cardinality': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].leftItem.relationshipType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].leftItem.r__attributeSet_key': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].leftItem.r__attributeGroup_key': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: any;
+            };
+            'relationships[].rightItem': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].rightItem.cardinality': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].rightItem.relationshipType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].rightItem.r__attributeSet_key': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].rightItem.r__attributeGroup_key': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].leftRelationshipIDs[].type': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].leftRelationshipIDs[].value': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].leftRelationshipReferenceType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].relationshipAttributes': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].relationshipAttributes[].leftAttributeID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].relationshipAttributes[].rightAttributeID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
-            'relationships[].relationshipAttributes[].c__leftFullyQualifiedName': {
-                isCreateable: any;
-                isUpdateable: any;
+            'relationships[].relationshipAttributes[].c__leftField': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
-            'relationships[].relationshipAttributes[].c__rightFullyQualifiedName': {
-                isCreateable: any;
-                isUpdateable: any;
+            'relationships[].relationshipAttributes[].c__rightField': {
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'relationships[].relationshipID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'rightConnectingID.identifierType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'rightItem.cardinality': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'rightItem.connectingID.identifierType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'rightItem.identifier': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'rightItem.relationshipType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             sendAttributeStorageName: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             sendContactKeyStorageName: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             setDefinitionID: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             setDefinitionKey: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'setDefinitionName.value': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'storageFieldReferenceID.type': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'storageFieldReferenceID.value': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             storageLogicalType: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             storageName: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'storageObjectFieldInformation.externalIsRowIdentifier': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'storageObjectFieldInformation.externalObjectFieldAPIName': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'storageObjectFieldInformation.externalObjectFieldDataTypeName': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'storageObjectFieldInformation.externalObjectFieldLength': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             storageObjectIDs: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'storageObjectInformation.externalObjectAPIName': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: any;
+            };
+            storageReferenceID: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'storageReferenceID.type': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'storageReferenceID.value': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             valueDefinitions: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].baseType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].customerDataID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].connectingID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].dataSourceID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].dataSourceName': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].dataType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].defaultValue': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].definitionID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].definitionKey': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].definitionName': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].description': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].displayOrder': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].fullyQualifiedName': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].identifierType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].isHidden': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].isIdentityValue': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].isNullable': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].isPrimaryKey': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].isReadOnly': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].isSystemDefined': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].isUpdateable': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].length': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].localizedDescription': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].name': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].obfuscationProperties': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].obfuscationProperties.maskType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].obfuscationProperties.maskTypeID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].obfuscationProperties.storageType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].obfuscationProperties.storageTypeID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].obfuscationProperties.valueDefinitionID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].ordinal': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].parentDefinition': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].parentIdentifier': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].parentType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].restrictionLookupListID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].scale': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].setDefinitionID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].setDefinitionKey': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].setDefinitionName': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].storageFieldReferenceID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].storageFieldReferenceID.type': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].storageFieldReferenceID.value': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].storageFieldValueID.type': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].storageFieldValueID.value': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].storageName': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
@@ -1003,26 +1223,26 @@ declare namespace AttributeSet {
                 skipValidation: boolean;
             };
             'valueDefinitions[].valueDefinitionID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             'valueDefinitions[].valueDefinitionKey': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             r__folder_Path: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
             r__dataExtension_key: {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: any;
             };
