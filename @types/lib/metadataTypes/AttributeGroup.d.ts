@@ -1,10 +1,7 @@
 export default AttributeGroup;
 export type MetadataTypeItem = import("../../types/mcdev.d.js").MetadataTypeItem;
+export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
-/**
- * @typedef {import('../../types/mcdev.d.js').MetadataTypeItem} MetadataTypeItem
- * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
- */
 /**
  * AttributeGroup MetadataType
  *
@@ -34,14 +31,56 @@ declare class AttributeGroup extends MetadataType {
      * @returns {MetadataTypeItem} metadata
      */
     static postRetrieveTasks(metadata: MetadataTypeItem): MetadataTypeItem;
+    /**
+     * prepares for deployment
+     *
+     * @param {MetadataTypeItem} metadata a single item
+     * @returns {Promise.<MetadataTypeItem>} Promise
+     */
+    static preDeployTasks(metadata: MetadataTypeItem): Promise<MetadataTypeItem>;
+    /**
+     * Creates a single attributeGroup
+     *
+     * @param {MetadataTypeItem} metadata single metadata entry
+     * @returns {Promise.<object> | null} Promise of API response or null in case of an error
+     */
+    static create(metadata: MetadataTypeItem): Promise<object> | null;
+    /**
+     * helper for {@link MetadataType.createREST}: unwraps the created item so that upsert can parse it like a retrieved item
+     *
+     * @param {MetadataTypeItem} metadataEntry a single metadata Entry
+     * @param {object} apiResponse varies depending on the API call
+     * @returns {Promise.<object>} apiResponse, potentially modified
+     */
+    static postCreateTasks(metadataEntry: MetadataTypeItem, apiResponse: object): Promise<object>;
+    /**
+     * attributeGroups cannot be changed via API after creation (only a rename exists, which also overwrites the key on the server).
+     * Nothing is sent; differences are only reported. Compares against the raw cached API data.
+     *
+     * @param {MetadataTypeItem} metadata single metadata entry
+     * @param {MetadataTypeItem} metadataBefore cached version from the server
+     * @returns {Promise.<null>} always null as nothing is updated
+     */
+    static update(metadata: MetadataTypeItem, metadataBefore: MetadataTypeItem): Promise<null>;
+    /**
+     * caches attributeGroup and attributeSet (raw API format) unless already cached; shared by both types' preDeleteTasks
+     *
+     * @returns {Promise.<void>} -
+     */
+    static cacheForDelete(): Promise<void>;
+    /**
+     * makes sure attributeGroup and attributeSet are cached before deleting
+     *
+     * @returns {Promise.<void>} -
+     */
+    static preDeleteTasks(): Promise<void>;
 }
 declare namespace AttributeGroup {
     let definition: {
         bodyIteratorField: string;
-        dependencies: string[];
-        dependencyGraph: {
-            attributeSet: string[];
-        };
+        dependencies: any[];
+        dependencyGraph: {};
+        deleteSynchronously: boolean;
         hasExtended: boolean;
         idField: string;
         keyIsFixed: boolean;
@@ -91,32 +130,32 @@ declare namespace AttributeGroup {
                 template: boolean;
             };
             'attributeSetIdentifiers[].connectingID.identifierType': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
             'attributeSetIdentifiers[].definitionID': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
             'attributeSetIdentifiers[].definitionKey': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
             'attributeSetIdentifiers[].definitionName.value': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
             'attributeSetIdentifiers[].namespace': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
@@ -180,6 +219,12 @@ declare namespace AttributeGroup {
                 retrieving: boolean;
                 template: boolean;
             };
+            definitionName: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
             'definitionName.value': {
                 isCreateable: boolean;
                 isUpdateable: boolean;
@@ -235,20 +280,20 @@ declare namespace AttributeGroup {
                 template: boolean;
             };
             'localizedDescription.resourceSetKey': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
             'localizedDescription.resourceValueKey': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };
             'localizedDescription.value': {
-                isCreateable: any;
-                isUpdateable: any;
+                isCreateable: boolean;
+                isUpdateable: boolean;
                 retrieving: boolean;
                 template: boolean;
             };

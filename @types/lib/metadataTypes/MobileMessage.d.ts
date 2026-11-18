@@ -54,6 +54,13 @@ declare class MobileMessage extends MetadataType {
      */
     static retrieveChangelog(): Promise<MetadataTypeMapObj>;
     /**
+     * mobileMessages with sendMethod INTERACTION are the copies Journey Builder creates when a journey is published
+     *
+     * @param {MetadataTypeItem} metadataItem a single mobileMessage
+     * @returns {boolean} true if the item is owned by a journey
+     */
+    static _isJourneyOwned(metadataItem: MetadataTypeItem): boolean;
+    /**
      * warns (loudly, without dropping any item) when a retrieved metadata map contains multiple
      * items that share the same name. Duplicate names make cross-BU name-fallback deploys ambiguous.
      * Synchronous post-await group-by; a harmless no-op on single-key retrieve.

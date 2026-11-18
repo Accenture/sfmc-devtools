@@ -29,7 +29,7 @@
     },
     "name": "testExisting_mobilePush_asset_DEV",
     "tzPastSendAction": 0,
-    "sendInitiator": 3,
+    "sendInitiator": 2,
     "status": 2,
     "title": "my push title",
     "subtitle": "my push subtitle for ios",

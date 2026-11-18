@@ -1,0 +1,90 @@
+{
+    "attributeCount": 0,
+    "canAddValues": true,
+    "canChangeValues": true,
+    "canModify": true,
+    "canRemove": true,
+    "createDate": "2026-11-11T08:00:00",
+    "createdBy": 700301950,
+    "dataRetentionProperties": {
+        "isDeleteAtEndOfRetentionPeriod": false,
+        "isResetRetentionPeriodOnImport": false,
+        "isRowBasedRetention": false
+    },
+    "definitionKey": "testExisting_attributeSetLinked",
+    "isCustomObjectBacked": true,
+    "isEvent": false,
+    "isHidden": false,
+    "isReadOnly": false,
+    "isRoot": false,
+    "isSendable": false,
+    "isShared": false,
+    "isSystemDefined": false,
+    "isTestaable": false,
+    "localizedDescription": {
+        "value": ""
+    },
+    "name": "testExisting_attributeSetLinked",
+    "parentID": "00000000-0000-0000-0000-000000000000",
+    "r__dataExtension_key": "testExisting_dataExtension",
+    "r__folder_Path": "Data Extensions",
+    "relationshipCount": 0,
+    "relationships": [
+        {
+            "canModify": true,
+            "canRemove": true,
+            "isGroupToSetRelationship": false,
+            "isHidden": false,
+            "isSystemDefined": false,
+            "leftItem": {
+                "cardinality": "One",
+                "r__attributeSet_key": "testExisting_dataExtensionShared",
+                "relationshipType": "AttributeSet"
+            },
+            "relationshipAttributes": [
+                {
+                    "c__leftField": "ContactKey",
+                    "c__rightField": "ContactKey"
+                }
+            ],
+            "relationshipID": "a1b2c3d4-0000-4000-8000-000000000105",
+            "rightItem": {
+                "cardinality": "Many",
+                "r__attributeSet_key": "testExisting_attributeSetLinked",
+                "relationshipType": "AttributeSet"
+            }
+        }
+    ],
+    "setDefinitionKey": "testExisting_attributeSetLinked",
+    "storageLogicalType": "DataExtension",
+    "storageObjectIDs": ["a1b2c3d4-0000-4000-8000-000000000104"],
+    "valueDefinitions": [
+        {
+            "dataType": "LongNumber",
+            "definitionKey": "CustomObjectKey",
+            "description": "",
+            "isHidden": true,
+            "isIdentityValue": true,
+            "isNullable": false,
+            "isPrimaryKey": false,
+            "isReadOnly": true,
+            "isSystemDefined": true,
+            "isUpdateable": true,
+            "name": "Custom Object Key"
+        },
+        {
+            "dataType": "Text",
+            "definitionKey": "ContactKey",
+            "description": "",
+            "isHidden": false,
+            "isIdentityValue": false,
+            "isNullable": false,
+            "isPrimaryKey": true,
+            "isReadOnly": false,
+            "isSystemDefined": false,
+            "isUpdateable": true,
+            "length": 50,
+            "name": "ContactKey"
+        }
+    ]
+}

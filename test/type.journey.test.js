@@ -14,6 +14,10 @@ const journeyTestAccess =
     /** @type {{_preDeployTasks_activities(metadata: ReturnType<JSON['parse']>): Promise.<void>}} */ (
         /** @type {unknown} */ (Journey)
     );
+const mobileIdAccess =
+    /** @type {{_findMobileMessageIdInCache(id: string): string | undefined, _resolveMobileMessageId(id: string): Promise.<string>}} */ (
+        /** @type {unknown} */ (Journey)
+    );
 import * as testUtils from './utils.js';
 chai.use(chaiFiles);
 
@@ -273,6 +277,181 @@ describe('type: journey', function () {
             assert.equal(smsArguments.r__mobileMessage_key, 'NTIzOjc4OjA');
             assert.equal(smsArguments.r__mobileMessage_name, 'testExisting_mobileMessage');
             assert.notProperty(smsArguments, 'messageId');
+        });
+
+        it('Should retrieve a published SMSSYNC journey whose messageId uses entity code 625 without a not-found warning', async () => {
+            const fixturePath =
+                'test/resources/9999999/interaction/v1/interactions/key_smsParityJourney/get-response.json';
+            const fixture = await fs.readJson(fixturePath);
+            // NTIzOjYyNTow = 523:625:0 while the mobileMessage API returns NTIzOjc4OjA = 523:78:0
+            for (const activity of fixture.activities) {
+                if (activity.type === 'SMSSYNC') {
+                    activity.configurationArguments.messageId = 'NTIzOjYyNTow';
+                }
+            }
+            await fs.writeJson(fixturePath, fixture);
+            const warnings = [];
+            const originalWarn = Util.logger.warn;
+            /**
+             * Captures retrieve warnings while preserving logger behavior.
+             *
+             * @param {unknown} message logger message
+             * @returns {import('winston').Logger} logger instance
+             */
+            Util.logger.warn = function (message) {
+                warnings.push(String(message));
+                return originalWarn.call(this, message);
+            };
+            try {
+                await handler.retrieve('testInstance/testBU', ['journey'], ['smsParityJourney']);
+            } finally {
+                Util.logger.warn = originalWarn;
+            }
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            assert.isUndefined(
+                warnings.find((message) => message.includes('was not found on your BU')),
+                'the 625-form id must resolve to the cached mobileMessage'
+            );
+            const smsArguments = (
+                await testUtils.getActualJson('smsParityJourney', 'journey')
+            ).activities.find((activity) => activity.type === 'SMSSYNC').configurationArguments;
+            assert.equal(
+                smsArguments.r__mobileMessage_key,
+                'NTIzOjYyNTow',
+                'the key stays as the journey stores it'
+            );
+            assert.equal(smsArguments.r__mobileMessage_name, 'testExisting_mobileMessage');
+        });
+
+        it('Should match a published journey messageId (entity code 625) to the cached mobileMessage (entity code 78) by its numeric prefix', async () => {
+            const journeyAccess = mobileIdAccess;
+            cache.initCache({ mid: 9999999, eid: 1111111 });
+            // NDQ6NjI1OjA = 44:625:0 (as stored by a published journey), NDQ6Nzg6MA = 44:78:0 (as returned by the mobileMessage API)
+            cache.setMetadata('mobileMessage', {
+                NDQ6Nzg6MA: { id: 'NDQ6Nzg6MA', name: 'Journey SMS', sendMethod: 'INTERACTION' },
+                NDU6Nzg6MA: { id: 'NDU6Nzg6MA', name: 'Journey SMS', sendMethod: 'INTERACTION' },
+            });
+            assert.equal(
+                journeyAccess._findMobileMessageIdInCache('NDQ6NjI1OjA'),
+                'NDQ6Nzg6MA',
+                'entity code must be ignored'
+            );
+            assert.equal(
+                await journeyAccess._resolveMobileMessageId('NDU6NjI1OjA'),
+                'NDU6Nzg6MA',
+                'resolution must not need an API call when the cache knows the item'
+            );
+            assert.equal(
+                journeyAccess._findMobileMessageIdInCache('NDQ6Nzg6MA'),
+                'NDQ6Nzg6MA',
+                'exact id must still match'
+            );
+            assert.isUndefined(
+                journeyAccess._findMobileMessageIdInCache('NDY6NjI1OjA'),
+                'unknown number must not match'
+            );
+        });
+
+        it('Should strip the redundant mobilePushApp fields on retrieve and restore them on deploy', async () => {
+            const stripAccess = /** @type {{_stripMobilePushAppFromStore(a: object): void}} */ (
+                /** @type {unknown} */ (Journey)
+            );
+            const activity = {
+                metaData: {
+                    store: {
+                        messageConfiguration: {
+                            payload: { application: { id: 'appGuid', name: 'App' } },
+                            application: {
+                                id: 'appGuid',
+                                name: 'App',
+                                value: 'App',
+                                title: 'App',
+                                disabled: false,
+                                expired: false,
+                            },
+                        },
+                    },
+                },
+            };
+            stripAccess._stripMobilePushAppFromStore(activity);
+            assert.deepEqual(/** @type {object} */ (activity.metaData.store.messageConfiguration), {
+                application: { disabled: false, expired: false },
+            });
+
+            cache.initCache({ mid: 9999999, eid: 1111111 });
+            cache.setMetadata('journey', {});
+            cache.setMetadata('mobilePushApp', {
+                appKey: { id: 'targetGuid', key: 'appKey', name: 'Target App' },
+            });
+            cache.setMetadata('mobileCode', {
+                123: { id: 'codeId', code: '123', countryCode: 'NL' },
+            });
+            const smsActivity = {
+                key: 'SMSSYNC-1',
+                type: 'SMSSYNC',
+                configurationArguments: { r__mobileCode_key: '123' },
+            };
+            const pushActivity = {
+                key: 'PUSH-1',
+                type: 'PUSHNOTIFICATIONACTIVITY',
+                ...activity,
+                configurationArguments: {
+                    r__mobilePushApp_key: 'appKey',
+                    r__mobilePushApp_name: 'Target App',
+                },
+            };
+            await journeyTestAccess._preDeployTasks_activities({
+                key: 'newJourney',
+                activities: [smsActivity, pushActivity],
+            });
+            assert.deepEqual(
+                /** @type {ReturnType<JSON['parse']>} */ (smsActivity).metaData.store
+                    .messageConfiguration.selectedCode,
+                { countryCode: 'NL', id: 'codeId', code: '123' }
+            );
+            assert.deepEqual(pushActivity.metaData.store.messageConfiguration, {
+                payload: { application: { id: 'targetGuid', name: 'Target App' } },
+                application: {
+                    id: 'targetGuid',
+                    name: 'Target App',
+                    value: 'Target App',
+                    title: 'Target App',
+                    disabled: false,
+                    expired: false,
+                },
+            });
+        });
+
+        it('Should ignore journey-owned copies when resolving mobile references by name', async () => {
+            cache.initCache({ mid: 9999999, eid: 1111111 });
+            cache.setMetadata('journey', { existingJourney: { key: 'existingJourney' } });
+            cache.setMetadata('mobileMessage', {
+                original: { id: 'original', name: 'Shared Name' },
+                copy: { id: 'copy', name: 'Shared Name', sendMethod: 'INTERACTION' },
+            });
+            const configurationArguments = {
+                r__mobileMessage_key: 'otherBuKey',
+                r__mobileMessage_name: 'Shared Name',
+            };
+            await journeyTestAccess._preDeployTasks_activities({
+                key: 'existingJourney',
+                activities: [{ key: 'SMSSYNC-1', type: 'SMSSYNC', configurationArguments }],
+            });
+            assert.equal(
+                /** @type {ReturnType<JSON['parse']>} */ (configurationArguments).messageId,
+                'original'
+            );
+        });
+
+        it('Should not guess a mobileMessage when the numeric prefix is ambiguous', () => {
+            const journeyAccess = mobileIdAccess;
+            cache.initCache({ mid: 9999999, eid: 1111111 });
+            // NDQ6Nzg6MA = 44:78:0 and NDQ6NjI1OjA = 44:625:0 are both cached
+            cache.setMetadata('mobileMessage', {
+                NDQ6Nzg6MA: { id: 'NDQ6Nzg6MA', name: 'A' },
+                NDQ6NjI1OjA: { id: 'NDQ6NjI1OjA', name: 'B' },
+            });
+            assert.isUndefined(journeyAccess._findMobileMessageIdInCache('NDQ6NzAwOjA'));
         });
 
         it('Should retrieve a journey containing an UPDATECONTACTDATA activity with key', async () => {
@@ -763,12 +942,109 @@ describe('type: journey', function () {
             assert.notProperty(configurationArguments, 'r__mobileMessage_name');
         });
 
+        it('Should drop unresolvable mobile references and journey-owned items from a journey that is being created', async () => {
+            cache.initCache({ mid: 9999999, eid: 1111111 });
+            cache.setMetadata('journey', {});
+            cache.setMetadata('mobileMessage', {
+                NDQ6Nzg6MA: { id: 'NDQ6Nzg6MA', name: 'Journey SMS', sendMethod: 'INTERACTION' },
+            });
+            cache.setMetadata('mobilePush', {
+                journeyPush: {
+                    id: 'journeyPush',
+                    name: 'Journey Push',
+                    sendInitiator: 3,
+                },
+            });
+            cache.setMetadata('asset', { someAsset: { id: 1, customerKey: 'someAsset' } });
+            const activities = [
+                {
+                    key: 'SMSSYNC-1',
+                    type: 'SMSSYNC',
+                    configurationArguments: {
+                        r__mobileMessage_key: 'NDQ6Nzg6MA',
+                        r__mobileMessage_name: 'Journey SMS',
+                        r__asset_key: 'someAsset',
+                    },
+                },
+                {
+                    key: 'SMSSYNC-2',
+                    type: 'SMSSYNC',
+                    configurationArguments: {
+                        r__mobileMessage_key: 'missingMessageKey',
+                        r__mobileMessage_name: 'Missing SMS',
+                    },
+                },
+                {
+                    key: 'PUSH-1',
+                    type: 'PUSHNOTIFICATIONACTIVITY',
+                    configurationArguments: {
+                        r__mobilePush_key: 'journeyPush',
+                        r__mobilePush_name: 'Journey Push',
+                    },
+                },
+            ];
+            await journeyTestAccess._preDeployTasks_activities({
+                key: 'newJourney',
+                name: 'New Journey',
+                activities,
+            });
+            for (const activity of activities) {
+                const args = activity.configurationArguments;
+                assert.notProperty(args, 'messageId');
+                assert.notProperty(args, 'pushMessageId');
+                assert.notProperty(args, 'r__mobileMessage_key');
+                assert.notProperty(args, 'r__mobilePush_key');
+                assert.notProperty(args, 'r__mobilePush_name');
+            }
+        });
+
+        it('Should keep the messageId of a journey-owned mobileMessage when the SMS activity has no asset', async () => {
+            cache.initCache({ mid: 9999999, eid: 1111111 });
+            cache.setMetadata('journey', {});
+            cache.setMetadata('mobileMessage', {
+                NDQ6Nzg6MA: { id: 'NDQ6Nzg6MA', name: 'Journey SMS', sendMethod: 'INTERACTION' },
+            });
+            const configurationArguments = {
+                r__mobileMessage_key: 'NDQ6Nzg6MA',
+                r__mobileMessage_name: 'Journey SMS',
+            };
+            await journeyTestAccess._preDeployTasks_activities({
+                key: 'newJourney',
+                name: 'New Journey',
+                activities: [{ key: 'SMSSYNC-1', type: 'SMSSYNC', configurationArguments }],
+            });
+            assert.equal(configurationArguments.messageId, 'NDQ6Nzg6MA');
+            assert.notProperty(configurationArguments, 'r__mobileMessage_key');
+            assert.notProperty(configurationArguments, 'r__mobileMessage_name');
+        });
+
+        it('Should resolve a journey-stored mobileMessage key (entity code 625) to the cached mobileMessage when updating an existing journey', async () => {
+            cache.initCache({ mid: 9999999, eid: 1111111 });
+            cache.setMetadata('journey', { existingJourney: { key: 'existingJourney' } });
+            // NDQ6NjI1OjA = 44:625:0 (journey), NDQ6Nzg6MA = 44:78:0 (mobileMessage API)
+            cache.setMetadata('mobileMessage', {
+                NDQ6Nzg6MA: { id: 'NDQ6Nzg6MA', name: 'Journey SMS', sendMethod: 'INTERACTION' },
+            });
+            const configurationArguments = {
+                r__mobileMessage_key: 'NDQ6NjI1OjA',
+                r__mobileMessage_name: 'Journey SMS',
+            };
+            await journeyTestAccess._preDeployTasks_activities({
+                key: 'existingJourney',
+                activities: [{ key: 'SMSSYNC-1', type: 'SMSSYNC', configurationArguments }],
+            });
+            assert.equal(configurationArguments.messageId, 'NDQ6Nzg6MA');
+        });
+
         it('Should block Journey writes when an SMSSYNC mobileMessage is missing', async () => {
             cache.initCache({ mid: 9999999, eid: 1111111 });
+            // the journey already exists on the target, hence the reference must not silently disappear
+            cache.setMetadata('journey', { existingJourney: { key: 'existingJourney' } });
             cache.setMetadata('mobileMessage', {});
             let missingError;
             try {
                 await journeyTestAccess._preDeployTasks_activities({
+                    key: 'existingJourney',
                     activities: [
                         {
                             type: 'SMSSYNC',
@@ -999,14 +1275,6 @@ describe('type: journey', function () {
 
         for (const scenario of [
             {
-                kind: 'missing',
-                journeyKey: 'sms_parity_create',
-                messageName: 'Missing SMS',
-                candidateIds: [],
-                title: 'Should block combined deploy when the mobileMessage reference is missing',
-            },
-            {
-                kind: 'ambiguous',
                 journeyKey: 'sms_parity_create',
                 messageName: 'Duplicate SMS',
                 candidateIds: ['duplicateMessageOne', 'duplicateMessageTwo'],
@@ -1027,18 +1295,16 @@ describe('type: journey', function () {
                     `deploy/testInstance/testBU/journey/${scenario.journeyKey}.journey-meta.json`,
                     journey
                 );
-                if (scenario.kind === 'ambiguous') {
-                    const fixturePath =
-                        'test/resources/9999999/legacy/v1/beta/mobile/message/get-response.json';
-                    const fixture = await fs.readJson(fixturePath);
-                    fixture.entry = scenario.candidateIds.map((id) => ({
-                        ...fixture.entry[0],
-                        id,
-                        name: scenario.messageName,
-                    }));
-                    fixture.totalResults = fixture.entry.length;
-                    await fs.writeJson(fixturePath, fixture);
-                }
+                const fixturePath =
+                    'test/resources/9999999/legacy/v1/beta/mobile/message/get-response.json';
+                const fixture = await fs.readJson(fixturePath);
+                fixture.entry = scenario.candidateIds.map((id) => ({
+                    ...fixture.entry[0],
+                    id,
+                    name: scenario.messageName,
+                }));
+                fixture.totalResults = fixture.entry.length;
+                await fs.writeJson(fixturePath, fixture);
 
                 const errors = [];
                 const originalErrorStack = Util.logger.errorStack;
@@ -1062,17 +1328,10 @@ describe('type: journey', function () {
                 }
 
                 const emittedError = errors.join('\n');
-                if (scenario.kind === 'missing') {
-                    assert.include(
-                        emittedError,
-                        "mobileMessage 'Missing SMS' not found on target BU — must be deployed first"
-                    );
-                } else {
-                    assert.include(emittedError, scenario.messageName);
-                    assert.include(emittedError, scenario.candidateIds[0]);
-                    assert.include(emittedError, scenario.candidateIds[1]);
-                    assert.include(emittedError, 'clean up the duplicates first');
-                }
+                assert.include(emittedError, scenario.messageName);
+                assert.include(emittedError, scenario.candidateIds[0]);
+                assert.include(emittedError, scenario.candidateIds[1]);
+                assert.include(emittedError, 'clean up the duplicates first');
                 const history = testUtils.getAPIHistory();
                 assert.lengthOf(
                     (history.post || []).filter(
