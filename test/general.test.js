@@ -2923,4 +2923,60 @@ describe('GENERAL', () => {
         );
         // mcdev createDeltaPkg master..develop --filter 'MyProject/BU1'
     });
+
+    describe('getSsjs ================', () => {
+        it('Should return the code between script tags without the newlines the wrapper added', () => {
+            assert.equal(
+                Util.getSsjs('<script runat="server">\nvar a = 1;\n</script>'),
+                'var a = 1;\n'
+            );
+        });
+        it('Should remove leading newlines that accumulated over deploy/retrieve roundtrips', () => {
+            assert.equal(
+                Util.getSsjs('<script runat="server">\n\n\n\nvar a = 1;\n</script>'),
+                'var a = 1;\n'
+            );
+        });
+        it('Should remove leading CRLF sequences', () => {
+            assert.equal(
+                Util.getSsjs('<script runat="server">\r\nvar a = 1;\r\n</script>'),
+                'var a = 1;\r\n'
+            );
+        });
+        it('Should keep code that starts right after the opening tag unchanged', () => {
+            assert.equal(Util.getSsjs('<script runat="server">var a = 1;</script>'), 'var a = 1;');
+        });
+        it('Should return null for content without script tags', () => {
+            assert.isNull(Util.getSsjs('var a = 1;'));
+        });
+        it('Should return null for nested script tags', () => {
+            assert.isNull(Util.getSsjs('<script runat="server"><script></script></script>'));
+        });
+        it('Should return null for empty input', () => {
+            assert.isNull(Util.getSsjs(null));
+        });
+
+        it('Should keep ssjs files free of leading empty lines across deploy/retrieve roundtrips', async () => {
+            const key = 'testNew_asset_ssjsRoundtrip';
+            const deployDir = './deploy/testInstance/testBU';
+            // simulate a file as it looks after previous versions added one empty line per roundtrip
+            await File.writeToFile(
+                [deployDir, 'asset', 'other'],
+                `${key}.asset-other-meta`,
+                'ssjs',
+                '\n\nvar a = 1;\n'
+            );
+            const metadata = {
+                customerKey: key,
+                assetType: { name: 'codesnippetblock' },
+            };
+            await Asset._mergeCode(metadata, deployDir, 'other');
+            // the API payload wraps the code exactly once, like Script._mergeCode does,
+            // instead of carrying the accumulated newlines into the stored script
+            assert.equal(metadata.content, '<script runat="server">\nvar a = 1;\n</script>');
+            // unwrapping the API payload returns the original file content: the roundtrip
+            // is idempotent and no longer grows per deployment
+            assert.equal(Util.getSsjs(metadata.content), 'var a = 1;\n');
+        });
+    });
 });
