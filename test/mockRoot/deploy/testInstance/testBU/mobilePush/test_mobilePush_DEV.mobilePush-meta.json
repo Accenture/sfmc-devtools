@@ -7,7 +7,7 @@
     "name": "test_mobilePush_DEV",
     "title": "my push title",
     "subtitle": "my push subtitle for ios",
-    "r__mobilePushApp_key": "ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA",
+    "r__mobilePushApp_key": "7d00d57d-0d94-4a5d-85bd-b51a47ba1b9f",
     "r__asset_key": "testExisting_mobilePush_asset_DEV",
     "c__messageType": "outboundPush",
     "c__contentType": "alert",

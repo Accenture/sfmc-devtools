@@ -10,7 +10,7 @@
     "createdDate": "2026-04-15T08:54:00",
     "lastUpdated": "2026-04-15T08:54:00",
     "r__asset_key": "testExisting_mobilePush_asset_DEV",
-    "r__mobilePushApp_key": "ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA",
+    "r__mobilePushApp_key": "7d00d57d-0d94-4a5d-85bd-b51a47ba1b9f",
     "r__mobilePushApp_name": "Test Push App One",
     "c__messageType": "outboundPush",
     "c__contentType": "alert",

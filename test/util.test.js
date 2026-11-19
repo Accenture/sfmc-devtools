@@ -42,6 +42,48 @@ describe('UTIL', () => {
         });
     });
 
+    describe('mobilePushAppLegacyKeyToId ================', () => {
+        it('should translate the legacy key of a mobilePushApp into its id', () => {
+            // real key/id pairs, see test/resources/9999999/push/v1/application/get-response.json
+            const pairs = {
+                ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA: '7d00d57d-0d94-4a5d-85bd-b51a47ba1b9f',
+                YjhMeTFBUWgtRUNIUHNNN3hYbm5SQToxMTc6MA: 'd4f2c26f-2104-40f8-873e-c33bc579e744',
+                WHNyV0ZwSjVzMC1XZkNhUkdmakZOdzoxMTc6MA: '16d6ca5e-7992-4fb3-967c-269119f8c537',
+            };
+            for (const [legacyKey, id] of Object.entries(pairs)) {
+                assert.equal(Util.mobilePushAppLegacyKeyToId(legacyKey), id);
+            }
+        });
+
+        it('should return an id unchanged', () => {
+            assert.equal(
+                Util.mobilePushAppLegacyKeyToId('7d00d57d-0d94-4a5d-85bd-b51a47ba1b9f'),
+                '7d00d57d-0d94-4a5d-85bd-b51a47ba1b9f'
+            );
+        });
+
+        it('should return everything that is not a legacy key unchanged', () => {
+            const others = [
+                'doesNotExist',
+                'key with spaces',
+                '',
+                // mobilePush id: decodes to 19:114:0
+                'MTk6MTE0OjA',
+                // decodes to <21 chars>:117:0
+                Buffer.from('fdUAfZQNXUqFvbUaR7obn:117:0').toString('base64url'),
+                // decodes to <22 chars>:118:0
+                Buffer.from('fdUAfZQNXUqFvbUaR7obnw:118:0').toString('base64url'),
+                // a legacy key with characters that base64url decoding would silently skip
+                'ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA==',
+                ' ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA',
+            ];
+            for (const value of others) {
+                assert.equal(Util.mobilePushAppLegacyKeyToId(value), value);
+            }
+            assert.isNull(Util.mobilePushAppLegacyKeyToId(null));
+        });
+    });
+
     describe('Metadata and REST contracts ================', () => {
         it('should find nested string leaf values without filtering or duplication', () => {
             const metadata = {
