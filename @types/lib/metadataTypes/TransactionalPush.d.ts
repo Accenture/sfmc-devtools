@@ -48,6 +48,7 @@ declare namespace TransactionalPush {
         bodyIteratorField: string;
         dependencies: string[];
         dependencyGraph: {
+            mobilePushApp: string[];
             asset: string[];
         };
         hasExtended: boolean;
@@ -158,6 +159,18 @@ declare namespace TransactionalPush {
                 template: boolean;
             };
             applicationId: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            r__mobilePushApp_key: {
+                isCreateable: boolean;
+                isUpdateable: boolean;
+                retrieving: boolean;
+                template: boolean;
+            };
+            r__mobilePushApp_name: {
                 isCreateable: boolean;
                 isUpdateable: boolean;
                 retrieving: boolean;
