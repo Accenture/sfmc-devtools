@@ -1,0 +1,46 @@
+{
+    "id": 12345,
+    "customerKey": "testExisting_asset_webpage2022",
+    "objectID": "00000000-0000-0000-0000-000000000000",
+    "contentType": "text/html",
+    "assetType": {
+        "id": 205,
+        "name": "webpage",
+        "displayName": "Web Page"
+    },
+    "name": "testExisting_asset_webpage2022",
+    "owner": {
+        "id": 1,
+        "name": "Jane Doe",
+        "email": "jane.doe@example.com",
+        "userId": "1"
+    },
+    "createdDate": "2026-07-02T03:27:52.677-06:00",
+    "createdBy": {
+        "id": 1,
+        "name": "Jane Doe",
+        "email": "jane.doe@example.com",
+        "userId": "1"
+    },
+    "modifiedDate": "2026-10-07T07:02:12.693-06:00",
+    "modifiedBy": {
+        "id": 2,
+        "name": "VSCode_DevTools app user",
+        "userId": "2"
+    },
+    "enterpriseId": 1111111,
+    "memberId": 9999999,
+    "status": {
+        "id": 1,
+        "name": "Draft"
+    },
+    "thumbnail": {
+        "thumbnailUrl": "/v1/assets/12345/thumbnail"
+    },
+    "category": {
+        "id": 8888
+    },
+    "content": "<!DOCTYPE html>\n<html>\n<body>\n%%[ SET @greeting = \"Hello\" ]%%\n<p>%%=v(@greeting)=%% World</p>\n</body>\n</html>\n",
+    "availableViews": [],
+    "modelVersion": 2
+}

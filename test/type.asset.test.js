@@ -1,4 +1,5 @@
 import File from '../lib/util/file.js';
+import Asset from '../lib/metadataTypes/Asset.js';
 
 import * as chai from 'chai';
 const assert = chai.assert;
@@ -8,6 +9,8 @@ import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
+import * as fsNode from 'node:fs/promises';
+import path from 'node:path';
 chai.use(chaiFiles);
 
 /**
@@ -1632,6 +1635,90 @@ describe('type: asset', () => {
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
+        });
+    });
+
+    describe('_mergeCode webpage ================', () => {
+        let deployDir;
+        const subtypeExtension = '.asset-webstudio-meta';
+
+        beforeEach(async () => {
+            // Keep the path relative: the production filename filter encodes drive colons.
+            deployDir = await fsNode.mkdtemp('./mcdev-asset-webpage-content-');
+        });
+
+        afterEach(async () => {
+            await fsNode.rm(deployDir, { recursive: true, force: true });
+        });
+
+        it('should merge the recorded top-level content response without views', async () => {
+            // Sanitized live response supplied by rlilov in PR #2648, issuecomment-6120092441.
+            // The response shape varies by BU; its creation date is not the trigger.
+            const response = await File.readJSON(
+                './test/resources/9999999/asset/v1/content/assets/12345/get-response.json'
+            );
+            const htmlContent = response.content;
+            const customerKey = response.customerKey;
+            assert.notProperty(response, 'views');
+            const { json: metadata, codeArr } = Asset._extractCode(response);
+            const assetDir = path.join(deployDir, 'asset', 'webstudio', customerKey);
+            await fsNode.mkdir(assetDir, { recursive: true });
+            for (const code of codeArr) {
+                await fsNode.writeFile(
+                    path.join(assetDir, `${code.fileName}${subtypeExtension}.${code.fileExt}`),
+                    code.content,
+                    'utf8'
+                );
+            }
+
+            // WHEN
+            const fileList = await Asset._mergeCode(metadata, deployDir, 'webstudio', customerKey);
+
+            // THEN it should not throw and should return the merged content
+            assert.equal(fileList.length, 1, 'expected exactly one merged file');
+            assert.equal(fileList[0].fileName, `content${subtypeExtension}`);
+            assert.equal(fileList[0].fileExt, 'html');
+            assert.equal(
+                fileList[0].content,
+                htmlContent,
+                'fileList entry should carry metadata.content, not metadata.views.html.content'
+            );
+            assert.equal(
+                metadata.content,
+                htmlContent,
+                'metadata.content should have been populated from disk'
+            );
+
+            // The deployment dependency scan must retain this asset, not report a missing block.
+            const ordered = await Asset._getUpsertOrderAndSkipMissing(
+                { [customerKey]: metadata },
+                deployDir
+            );
+            assert.deepEqual(Object.keys(ordered), [customerKey]);
+        });
+
+        it('should preserve the existing views.html.content layout', async () => {
+            const pool = await File.readJSON(
+                './test/resources/9999999/asset/v1/content/assets/assets-pool.json'
+            );
+            const response = pool['950143'].body;
+            const htmlContent = response.views.html.content;
+            const customerKey = response.customerKey;
+            const { json: metadata, codeArr } = Asset._extractCode(response);
+            const assetDir = path.join(deployDir, 'asset', 'webstudio', customerKey);
+            await fsNode.mkdir(assetDir, { recursive: true });
+            for (const code of codeArr) {
+                await fsNode.writeFile(
+                    path.join(assetDir, `${code.fileName}${subtypeExtension}.${code.fileExt}`),
+                    code.content,
+                    'utf8'
+                );
+            }
+            const fileList = await Asset._mergeCode(metadata, deployDir, 'webstudio', customerKey);
+            assert.equal(fileList[0].fileName, `views.html.content${subtypeExtension}`);
+            assert.equal(fileList[0].content, htmlContent);
+            assert.equal(metadata.views.html.content, htmlContent);
+            assert.notProperty(metadata, 'content');
         });
     });
 });
