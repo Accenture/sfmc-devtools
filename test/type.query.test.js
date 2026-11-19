@@ -1,4 +1,5 @@
 import * as chai from 'chai';
+/** @type {typeof chai.assert} */
 const assert = chai.assert;
 const expect = chai.expect;
 
@@ -7,7 +8,29 @@ import cache from '../lib/util/cache.js';
 import File from '../lib/util/file.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
+import Query from '../lib/metadataTypes/Query.js';
+import { Util } from '../lib/util/util.js';
 chai.use(chaiFiles);
+
+/**
+ * collects warnings while still printing them
+ *
+ * @returns {{list: string[], restore: () => void}} collected messages and a function to stop collecting
+ */
+function captureWarnings() {
+    const list = [];
+    const originalWarn = Util.logger.warn;
+    Util.logger.warn = (message) => {
+        list.push(message);
+        return originalWarn.call(Util.logger, message);
+    };
+    return {
+        list,
+        restore: () => {
+            Util.logger.warn = originalWarn;
+        },
+    };
+}
 
 describe('type: query', () => {
     beforeEach(() => {
@@ -841,8 +864,218 @@ describe('type: query', () => {
                 0,
                 'shared DE should not be included in the child BU template result - only a warning should be shown'
             );
+            // 4 requests for the ContentBlockByX search plus 3 for caching dataExtension names
+            // (testBU, _ParentBU_ and shared folders) because the SQL selects from the shared DE
+            assert.equal(
+                testUtils.getAPIHistoryLength() -
+                    expectedApiCallsParentBURetrieve -
+                    expectedApiCallsTestBURetrieve,
+                7,
+                'Unexpected number of requests for buildTemplate. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
 
             return;
+        });
+
+        it('Should add dataExtensions used in the SQL when running buildTemplate with --dependencies', async () => {
+            // GIVEN dataExtensions of _ParentBU_ and testBU as well as queries of testBU are on disk
+            await handler.retrieve('testInstance/_ParentBU_', ['dataExtension']);
+            await handler.retrieve('testInstance/testBU', ['dataExtension', 'query']);
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            const apiCallsRetrieve = testUtils.getAPIHistoryLength();
+            // AND a query that selects from local, shared and missing tables as well as a data view
+            await File.copy(
+                'test/mockRoot/retrieve/testInstance/testBU/query',
+                'retrieve/testInstance/testBU/query'
+            );
+
+            // WHEN
+            const warnings = captureWarnings();
+            handler.setOptions({ dependencies: true, skipInteraction: true });
+            let templateResult;
+            try {
+                templateResult = await handler.buildTemplate(
+                    'testInstance/testBU',
+                    'query',
+                    ['testExisting_query_sqlDependencies', 'testExisting_query_SharedDE'],
+                    ['testSourceMarket']
+                );
+            } finally {
+                warnings.restore();
+            }
+
+            // THEN
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+            assert.deepEqual(
+                templateResult.query.map((item) => item.key).toSorted(),
+                ['{{{prefix}}}query_SharedDE', '{{{prefix}}}query_sqlDependencies'],
+                'expected both queries to be templated'
+            );
+            // target DE plus the DE from the JOIN, found by name regardless of case
+            assert.deepEqual(
+                templateResult.dataExtension.map((item) => item.CustomerKey).toSorted(),
+                ['{{{prefix}}}dataExtension', '{{{prefix}}}dataExtension_exclusion'],
+                'expected target (testExisting_dataExtension) and source (testExisting_dataExtension_exclusion) dataExtensions in the template result'
+            );
+            // shared DE from ENT. prefix keeps the existing warning and is not packaged;
+            // it is also the target of the other query and must not be reported twice
+            assert.equal(
+                warnings.list.filter((msg) =>
+                    msg.includes(
+                        `dataExtension 'testExisting_dataExtensionShared' is a shared dataExtension stored in _ParentBU_`
+                    )
+                ).length,
+                1,
+                'expected one warning about the shared dataExtension'
+            );
+            // missing table is a visible warning with a summary; data view, comment and string are ignored
+            const missingWarnings = warnings.list.filter((msg) =>
+                msg.includes('testMissing_dataExtension')
+            );
+            assert.equal(missingWarnings.length, 1, 'expected one warning for the missing table');
+            assert.include(
+                missingWarnings[0],
+                'query testExisting_query_sqlDependencies (testExisting_query_sqlDependencies): Table testMissing_dataExtension used in the SQL was not found as dataExtension on testInstance/testBU'
+            );
+            assert.isTrue(
+                warnings.list.some((msg) =>
+                    msg.startsWith(
+                        '1 table used in the SQL of 1 query could not be resolved to a dataExtension'
+                    )
+                ),
+                'expected summary warning for unresolved tables'
+            );
+            for (const ignored of ['_Subscribers', 'testCommented_', 'testString_']) {
+                assert.isFalse(
+                    warnings.list.some((msg) => msg.includes(ignored)),
+                    `did not expect a warning about ${ignored}`
+                );
+            }
+            // 4 requests for the ContentBlockByX search plus 3 for caching dataExtension names once for both queries
+            assert.equal(
+                testUtils.getAPIHistoryLength() - apiCallsRetrieve,
+                7,
+                'Unexpected number of requests for buildTemplate. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+
+            // WHEN running again in the same process (e.g. VS Code extension), names are loaded again to see new dataExtensions
+            await handler.buildTemplate(
+                'testInstance/testBU',
+                'query',
+                ['testExisting_query_sqlDependencies'],
+                ['testSourceMarket']
+            );
+            assert.equal(
+                process.exitCode,
+                0,
+                'second buildTemplate should not have thrown an error'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength() - apiCallsRetrieve,
+                14,
+                'expected the dataExtension name cache to be rebuilt for the second run'
+            );
+            return;
+        });
+
+        it('Should warn when a table name in the SQL cannot be read', async () => {
+            // GIVEN a query whose SQL contains template syntax broken by a formatter
+            await handler.retrieve('testInstance/testBU', ['query']);
+            await File.copy(
+                'test/mockRoot/retrieve/testInstance/testBU/query',
+                'retrieve/testInstance/testBU/query'
+            );
+            await File.writeFile(
+                'retrieve/testInstance/testBU/query/testExisting_query_sqlDependencies.query-meta.sql',
+                'SELECT a.ContactKey FROM { { { prefix } } }_Orders a'
+            );
+
+            // WHEN
+            const warnings = captureWarnings();
+            handler.setOptions({ dependencies: true, skipInteraction: true });
+            try {
+                await handler.buildTemplate(
+                    'testInstance/testBU',
+                    'query',
+                    ['testExisting_query_sqlDependencies'],
+                    ['testSourceMarket']
+                );
+            } finally {
+                warnings.restore();
+            }
+
+            // THEN
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+            assert.isTrue(
+                warnings.list.some((msg) =>
+                    msg.includes(
+                        'query testExisting_query_sqlDependencies (testExisting_query_sqlDependencies): Could not read the table name in SQL near "FROM { { {"'
+                    )
+                ),
+                'expected a warning about the unreadable table name'
+            );
+            return;
+        });
+
+        it('Should not cache dataExtension names when the SQL only uses data views', async () => {
+            // GIVEN
+            await handler.retrieve('testInstance/testBU', ['query']);
+            const apiCallsRetrieve = testUtils.getAPIHistoryLength();
+
+            // WHEN
+            const warnings = captureWarnings();
+            handler.setOptions({ dependencies: true, skipInteraction: true });
+            let templateResult;
+            try {
+                templateResult = await handler.buildTemplate(
+                    'testInstance/testBU',
+                    'query',
+                    ['testExisting_query'],
+                    ['testSourceMarket']
+                );
+            } finally {
+                warnings.restore();
+            }
+
+            // THEN
+            assert.equal(process.exitCode, 0, 'buildTemplate should not have thrown an error');
+            assert.equal(templateResult.query.length, 1, 'expected one query to be templated');
+            assert.isFalse(
+                warnings.list.some((msg) => msg.includes('used in the SQL')),
+                'did not expect warnings about tables used in the SQL'
+            );
+            // only the 4 requests for the ContentBlockByX search that were made before this change
+            assert.equal(
+                testUtils.getAPIHistoryLength() - apiCallsRetrieve,
+                4,
+                'Unexpected number of requests for buildTemplate. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should resolve table names to dataExtension keys, preferring shared ones for ENT.', () => {
+            const nameMap = {
+                local: { 'customer data': 'local-key', orders: 'orders-key' },
+                shared: { 'customer data': 'shared-key', products: 'products-key' },
+            };
+            assert.equal(
+                Query._resolveTableName({ name: 'Customer Data', isEnt: false }, nameMap),
+                'local-key'
+            );
+            assert.equal(
+                Query._resolveTableName({ name: 'Customer Data', isEnt: true }, nameMap),
+                'shared-key'
+            );
+            // fall back to the other list instead of reporting a false warning
+            assert.equal(
+                Query._resolveTableName({ name: 'ORDERS', isEnt: true }, nameMap),
+                'orders-key'
+            );
+            assert.equal(
+                Query._resolveTableName({ name: 'products', isEnt: false }, nameMap),
+                'products-key'
+            );
+            assert.isUndefined(Query._resolveTableName({ name: 'missing', isEnt: false }, nameMap));
         });
 
         it('Should create a query template via buildTemplate and build it', async () => {
