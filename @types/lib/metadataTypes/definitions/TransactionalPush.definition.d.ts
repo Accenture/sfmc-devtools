@@ -2,6 +2,7 @@ declare namespace _default {
     let bodyIteratorField: string;
     let dependencies: string[];
     namespace dependencyGraph {
+        let mobilePushApp: string[];
         let asset: string[];
     }
     let hasExtended: boolean;
@@ -112,6 +113,18 @@ declare namespace _default {
             template: boolean;
         };
         applicationId: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        r__mobilePushApp_key: {
+            isCreateable: boolean;
+            isUpdateable: boolean;
+            retrieving: boolean;
+            template: boolean;
+        };
+        r__mobilePushApp_name: {
             isCreateable: boolean;
             isUpdateable: boolean;
             retrieving: boolean;

@@ -2,7 +2,8 @@
     "definitionKey": "testExisting_tpush",
     "name": "testExisting_tpush",
     "status": "Active",
-    "applicationId": "ffbab4c9-fbf6-4b87-9c9a-10c6ce86e81d",
+    "r__mobilePushApp_key": "ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA",
+    "r__mobilePushApp_name": "Test Push App One",
     "description": "updated via deploy; note that applicationId can only be manually set up in Setup - Mobile Push",
     "r__asset_key": "mobileMessage_test",
     "options": {
