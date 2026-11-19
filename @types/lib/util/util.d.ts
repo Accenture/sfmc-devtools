@@ -336,6 +336,15 @@ export namespace Util {
      */
     export function getKeysString(keyArr: string[] | string, isId?: boolean): string;
     /**
+     * translates the key that mcdev used for mobilePushApp before the id became its key back into that id.
+     * The old key was the API's "key" field: base64url of `<base64url of the 16 id bytes in .NET Guid order>:117:<digits>`.
+     * Anything that does not strictly match that shape (e.g. an id) is returned unchanged.
+     *
+     * @param {string} value id or legacy key of a mobilePushApp
+     * @returns {string} id of the mobilePushApp if value was a legacy key; otherwise value
+     */
+    export function mobilePushAppLegacyKeyToId(value: string): string;
+    /**
      * pause execution of code; useful when multiple server calls are dependent on each other and might not be executed right away
      *
      * @param {number} ms time in miliseconds to wait

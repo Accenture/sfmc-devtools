@@ -31,7 +31,7 @@ describe('type: mobilePushApp', () => {
             );
             assert.deepEqual(
                 await testUtils.getActualJson(
-                    'ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA',
+                    '7d00d57d-0d94-4a5d-85bd-b51a47ba1b9f',
                     'mobilePushApp'
                 ),
                 await testUtils.getExpectedJson('9999999', 'mobilePushApp', 'get'),
@@ -45,7 +45,32 @@ describe('type: mobilePushApp', () => {
             return;
         });
 
-        it('Should retrieve one mobilePushApp by key', async () => {
+        it('Should retrieve one mobilePushApp by id', async () => {
+            // WHEN
+            await handler.retrieve(
+                'testInstance/testBU',
+                ['mobilePushApp'],
+                ['7d00d57d-0d94-4a5d-85bd-b51a47ba1b9f']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            assert.deepEqual(
+                await testUtils.getActualJson(
+                    '7d00d57d-0d94-4a5d-85bd-b51a47ba1b9f',
+                    'mobilePushApp'
+                ),
+                await testUtils.getExpectedJson('9999999', 'mobilePushApp', 'get'),
+                'returned JSON was not equal expected'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                1,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should retrieve one mobilePushApp by legacy key (written before key==id) and save it under its id', async () => {
             // WHEN
             await handler.retrieve(
                 'testInstance/testBU',
@@ -54,13 +79,19 @@ describe('type: mobilePushApp', () => {
             );
             // THEN
             assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            // the file is named after the id, not after the legacy key that was asked for
             assert.deepEqual(
                 await testUtils.getActualJson(
-                    'ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA',
+                    '7d00d57d-0d94-4a5d-85bd-b51a47ba1b9f',
                     'mobilePushApp'
                 ),
                 await testUtils.getExpectedJson('9999999', 'mobilePushApp', 'get'),
                 'returned JSON was not equal expected'
+            );
+            assert.deepEqual(
+                Object.keys(cache.getCache().mobilePushApp),
+                ['7d00d57d-0d94-4a5d-85bd-b51a47ba1b9f'],
+                'the app should be cached under its id'
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
@@ -70,8 +101,8 @@ describe('type: mobilePushApp', () => {
             return;
         });
 
-        it('Should gracefully handle retrieving a non-existent mobilePushApp by key (API returns 400 Validation Error 10006) and download 0 instead of hard-failing', async () => {
-            // GIVEN a key that does not exist, GET /push/v1/application/<key> returns HTTP 400 with body
+        it('Should gracefully handle retrieving a non-existent mobilePushApp by id (API returns 400 Validation Error 10006) and download 0 instead of hard-failing', async () => {
+            // GIVEN an id that does not exist, GET /push/v1/application/<id> returns HTTP 400 with body
             // { message: "Validation Error", errorcode: 10006 }; sfmc-sdk's RestError maps that to
             // code === 10006 (number). The bodyFixture faithfully reproduces the real API body so the
             // real RestError mapping is exercised (not a hand-set code bypass).
@@ -114,14 +145,14 @@ describe('type: mobilePushApp', () => {
             const fileList = await handler.getFilesToCommit(
                 'testInstance/testBU',
                 'mobilePushApp',
-                ['ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA']
+                ['7d00d57d-0d94-4a5d-85bd-b51a47ba1b9f']
             );
             // THEN
             assert.equal(process.exitCode, 0, 'getFilesToCommit should not have thrown an error');
             assert.equal(fileList.length, 1, 'expected only 1 file to be returned');
             assert.equal(
                 fileList[0].replaceAll('\\', '/'),
-                'retrieve/testInstance/testBU/mobilePushApp/ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA.mobilePushApp-meta.json',
+                'retrieve/testInstance/testBU/mobilePushApp/7d00d57d-0d94-4a5d-85bd-b51a47ba1b9f.mobilePushApp-meta.json',
                 'wrong file path returned'
             );
             return;

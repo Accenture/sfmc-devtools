@@ -238,8 +238,8 @@ describe('type: journey', function () {
             );
             assert.equal(
                 pushActivity.configurationArguments.r__mobilePushApp_key,
-                'YjhMeTFBUWgtRUNIUHNNN3hYbm5SQToxMTc6MA',
-                'mobilePushApp dependency should have resolved to r__mobilePushApp_key'
+                'd4f2c26f-2104-40f8-873e-c33bc579e744',
+                'mobilePushApp dependency should have resolved to the id of the app in r__mobilePushApp_key'
             );
             // cross-BU coverage: retrieve must write BOTH the id-based _key AND the portable _name
             // ref for every resolved mobile dependency
@@ -420,6 +420,32 @@ describe('type: journey', function () {
                     expired: false,
                 },
             });
+        });
+
+        it('Should still resolve a mobilePushApp referenced by its legacy key (written before key==id) on deploy', async () => {
+            cache.initCache({ mid: 9999999, eid: 1111111 });
+            cache.setMetadata('journey', {});
+            cache.setMetadata('mobilePushApp', {
+                'd4f2c26f-2104-40f8-873e-c33bc579e744': {
+                    id: 'd4f2c26f-2104-40f8-873e-c33bc579e744',
+                    key: 'YjhMeTFBUWgtRUNIUHNNN3hYbm5SQToxMTc6MA',
+                    name: 'Test Push App Two',
+                },
+            });
+            const configurationArguments = {
+                r__mobilePushApp_key: 'YjhMeTFBUWgtRUNIUHNNN3hYbm5SQToxMTc6MA',
+            };
+            await journeyTestAccess._preDeployTasks_activities({
+                key: 'newJourney',
+                activities: [
+                    { key: 'PUSH-1', type: 'PUSHNOTIFICATIONACTIVITY', configurationArguments },
+                ],
+            });
+            assert.deepEqual(
+                /** @type {ReturnType<JSON['parse']>} */ (configurationArguments).application,
+                { id: 'd4f2c26f-2104-40f8-873e-c33bc579e744', name: 'Test Push App Two' },
+                'the legacy key should have been resolved to the mobilePushApp with that id'
+            );
         });
 
         it('Should ignore journey-owned copies when resolving mobile references by name', async () => {

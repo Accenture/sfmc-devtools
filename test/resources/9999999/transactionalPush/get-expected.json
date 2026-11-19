@@ -2,7 +2,7 @@
     "name": "testExisting_tpush",
     "definitionKey": "testExisting_tpush",
     "description": "bla bla. note that applicationId can only be manually set up in Setup - Mobile Push",
-    "r__mobilePushApp_key": "ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA",
+    "r__mobilePushApp_key": "7d00d57d-0d94-4a5d-85bd-b51a47ba1b9f",
     "r__mobilePushApp_name": "Test Push App One",
     "status": "Active",
     "createdDate": "2022-12-07T02:56:00",

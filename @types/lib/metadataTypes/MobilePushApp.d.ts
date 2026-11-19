@@ -33,7 +33,7 @@ declare class MobilePushApp extends MetadataType {
      * @param {string} retrieveDir Directory where retrieved metadata directory will be saved
      * @param {void | string[]} [_] unused parameter
      * @param {void | string[]} [__] unused parameter
-     * @param {string} [key] customer key of single item to retrieve
+     * @param {string} [key] id (or legacy encoded key) of single item to retrieve
      * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
      */
     static retrieve(retrieveDir: string, _?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
@@ -42,7 +42,7 @@ declare class MobilePushApp extends MetadataType {
      *
      * @param {void | string[]} [_] parameter not used
      * @param {void | string[]} [__] parameter not used
-     * @param {string} [key] customer key of single item to retrieve
+     * @param {string} [key] id (or legacy encoded key) of single item to retrieve
      * @returns {Promise.<MetadataTypeMapObj>} Promise of metadata
      */
     static retrieveForCache(_?: void | string[], __?: void | string[], key?: string): Promise<MetadataTypeMapObj>;
