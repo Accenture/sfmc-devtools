@@ -43,8 +43,8 @@ describe('type: mobilePush', () => {
             const retrieved = await testUtils.getActualJson('MTk6MTE0OjA', 'mobilePush');
             assert.equal(
                 retrieved.r__mobilePushApp_key,
-                'ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA',
-                'mobilePushApp dependency should have resolved to r__mobilePushApp_key'
+                '7d00d57d-0d94-4a5d-85bd-b51a47ba1b9f',
+                'mobilePushApp dependency should have resolved to the id of the app in r__mobilePushApp_key'
             );
             assert.equal(
                 retrieved.r__mobilePushApp_name,
@@ -393,6 +393,27 @@ describe('type: mobilePush', () => {
                 testUtils.getAPIHistoryLength(),
                 4,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should still resolve a mobilePushApp referenced by its legacy key (written before key==id)', async () => {
+            // GIVEN a file that references "Test Push App One" by the encoded key only
+            const deployPath =
+                './deploy/testInstance/testBU/mobilePush/MTk6MTE0OjA.mobilePush-meta.json';
+            const item = await fs.readJson(deployPath);
+            item.r__mobilePushApp_key = 'ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA';
+            delete item.r__mobilePushApp_name;
+            await fs.writeJson(deployPath, item);
+            // WHEN
+            await handler.deploy('testInstance/testBU', ['mobilePush'], ['MTk6MTE0OjA']);
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+            const updateCallout = testUtils.getRestCallout('put', '/push/v1/message/MTk6MTE0OjA');
+            assert.equal(
+                updateCallout?.application?.id,
+                '7d00d57d-0d94-4a5d-85bd-b51a47ba1b9f',
+                'the legacy key should have been resolved to the mobilePushApp with that id'
             );
             return;
         });

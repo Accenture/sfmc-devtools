@@ -39,8 +39,8 @@ describe('type: transactionalPush', () => {
             const actual = await testUtils.getActualJson('testExisting_tpush', 'transactionalPush');
             assert.equal(
                 actual.r__mobilePushApp_key,
-                'ZmRVQWZaUU5YVXFGdmJVYVI3b2JudzoxMTc6MA',
-                'applicationId should have been resolved to the key of the mobilePushApp'
+                '7d00d57d-0d94-4a5d-85bd-b51a47ba1b9f',
+                'applicationId should have been confirmed as the key (==id) of the mobilePushApp'
             );
             assert.equal(
                 actual.r__mobilePushApp_name,
@@ -127,6 +127,35 @@ describe('type: transactionalPush', () => {
                 6,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
+            return;
+        });
+
+        it('Should still resolve a mobilePushApp referenced by its legacy key (written before key==id)', async () => {
+            // GIVEN a file that references "Test Push App Two" by the encoded key only
+            const deployPath =
+                './deploy/testInstance/testBU/transactionalPush/testExisting_tpush.transactionalPush-meta.json';
+            const item = await fs.readJson(deployPath);
+            item.r__mobilePushApp_key = 'YjhMeTFBUWgtRUNIUHNNN3hYbm5SQToxMTc6MA';
+            delete item.r__mobilePushApp_name;
+            await fs.writeJson(deployPath, item);
+            // WHEN
+            await handler.deploy(
+                'testInstance/testBU',
+                ['transactionalPush'],
+                ['testExisting_tpush']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+            const updateCallout = testUtils.getRestCallout(
+                'patch',
+                '/messaging/v1/push/definitions/testExisting_tpush'
+            );
+            assert.equal(
+                updateCallout.applicationId,
+                'd4f2c26f-2104-40f8-873e-c33bc579e744',
+                'the legacy key should have been resolved to the id of the mobilePushApp'
+            );
+            assert.notProperty(updateCallout, 'r__mobilePushApp_key');
             return;
         });
 
@@ -233,7 +262,7 @@ describe('type: transactionalPush', () => {
             const deployPath =
                 './deploy/testInstance/testBU/transactionalPush/testExisting_tpush.transactionalPush-meta.json';
             const item = await fs.readJson(deployPath);
-            item.r__mobilePushApp_key = apps[1].key;
+            item.r__mobilePushApp_key = apps[1].id;
             item.r__mobilePushApp_name = 'Test Push App Two';
             await fs.writeJson(deployPath, item);
             // WHEN
