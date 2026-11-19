@@ -8,6 +8,8 @@ import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
+import config from '../lib/util/config.js';
+import fs from 'fs-extra';
 chai.use(chaiFiles);
 
 /**
@@ -344,6 +346,58 @@ describe('type: asset', () => {
                 14,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
+            return;
+        });
+
+        it('Should leave asset IDs from options.exclude.asset.id out of the API query', async () => {
+            // GIVEN test_landingpage (id 9465) is excluded. A corrupt asset like that makes the
+            // real API return HTTP 500 for every page of query results that would contain it,
+            // so it has to be excluded in the query, not filtered after download.
+            const properties = await File.readJSON('.mcdevrc.json');
+            properties.options.exclude.asset = { id: [9465, '9999999999'] };
+            await fs.writeJSON('.mcdevrc.json', properties);
+            config.properties = null;
+
+            try {
+                // WHEN
+                const retrieve = await handler.retrieve('testInstance/testBU', ['asset-webstudio']);
+
+                // THEN
+                assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+                const retrieved = Object.keys(retrieve['testInstance/testBU'].asset ?? {});
+                assert.notInclude(retrieved, 'test_landingpage', 'excluded asset was retrieved');
+                assert.include(retrieved, 'test_microsite', 'non-excluded asset was not retrieved');
+                assert.equal(
+                    retrieved.length,
+                    6,
+                    'Unexpected number of assets in retrieve response'
+                );
+
+                const typeQueries = testUtils
+                    .getRestCallout('post', '/asset/v1/content/assets/query', true)
+                    .filter((payload) => JSON.stringify(payload.query).includes('assetType.id'));
+                assert.isNotEmpty(typeQueries, 'no assetType.id query was sent');
+                for (const payload of typeQueries) {
+                    assert.deepEqual(
+                        payload.query.rightOperand,
+                        { property: 'id', simpleOperator: 'notEquals', value: 9999999999 },
+                        'last excluded ID missing from query'
+                    );
+                    assert.deepEqual(
+                        payload.query.leftOperand.rightOperand,
+                        { property: 'id', simpleOperator: 'notEquals', value: 9465 },
+                        'first excluded ID missing from query'
+                    );
+                    assert.equal(
+                        payload.query.leftOperand.leftOperand.property,
+                        'assetType.id',
+                        'assetType filter should stay the innermost condition'
+                    );
+                }
+            } finally {
+                // the edited config is cached; drop it so later tests reload the original
+                config.properties = null;
+            }
             return;
         });
 

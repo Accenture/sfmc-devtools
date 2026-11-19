@@ -366,8 +366,20 @@ async function handleAssetReadEngine(config, urlObj) {
         } catch {
             return null;
         }
+        // peel off trailing `AND id notEquals <id>` clauses (options.exclude.asset.id) and
+        // apply them to the response, like the real API does
+        const excludedIds = new Set();
+        let baseQuery = data.query;
+        while (
+            baseQuery?.logicalOperator === 'AND' &&
+            baseQuery.rightOperand?.property === 'id' &&
+            baseQuery.rightOperand.simpleOperator === 'notEquals'
+        ) {
+            excludedIds.add(Number(baseQuery.rightOperand.value));
+            baseQuery = baseQuery.leftOperand;
+        }
         // mirror resolver: parse rightOperand || query (compound leftOperand omitted — unreachable)
-        const myObj = data.query?.rightOperand || data.query;
+        const myObj = baseQuery?.rightOperand || baseQuery;
         if (
             !myObj ||
             myObj.property !== 'assetType.id' ||
@@ -427,7 +439,7 @@ async function handleAssetReadEngine(config, urlObj) {
                 ownTypeId == null
                     ? requested.includes(Number(key))
                     : requested.includes(Number(ownTypeId));
-            if (matches) {
+            if (matches && !excludedIds.has(Number(body.id))) {
                 items.push(projectAssetQueryItem(body, entry.queryOverrides));
             }
         }
