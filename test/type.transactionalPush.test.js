@@ -189,6 +189,73 @@ describe('type: transactionalPush', () => {
             return;
         });
 
+        it('Should NOT deploy a transactionalPush whose mobilePushApp name matches more than one app on the target BU', async () => {
+            // GIVEN two apps on the BU that share the name "Test Push App Two"
+            const appsPath = './test/resources/9999999/push/v1/application/get-response.json';
+            const apps = await fs.readJson(appsPath);
+            apps[0].name = 'Test Push App Two';
+            await fs.writeJson(appsPath, apps);
+            // ... and a key from another BU, so that the name has to decide
+            const deployPath =
+                './deploy/testInstance/testBU/transactionalPush/testExisting_tpush.transactionalPush-meta.json';
+            const item = await fs.readJson(deployPath);
+            item.r__mobilePushApp_key = 'keyFromAnotherBU';
+            item.r__mobilePushApp_name = 'Test Push App Two';
+            await fs.writeJson(deployPath, item);
+            // WHEN
+            await handler.deploy(
+                'testInstance/testBU',
+                ['transactionalPush'],
+                ['testExisting_tpush']
+            );
+            // THEN
+            assert.equal(process.exitCode, 1, 'deploy should have set an error exit code');
+            assert.equal(
+                testUtils.getRestCallout(
+                    'patch',
+                    '/messaging/v1/push/definitions/testExisting_tpush',
+                    false,
+                    true
+                ),
+                null,
+                'the item must not be sent to the API'
+            );
+            return;
+        });
+
+        it('Should resolve the mobilePushApp by KEY on the same BU even if its name matches more than one app', async () => {
+            // GIVEN two apps on the BU that share the name "Test Push App Two"
+            const appsPath = './test/resources/9999999/push/v1/application/get-response.json';
+            const apps = await fs.readJson(appsPath);
+            apps[0].name = 'Test Push App Two';
+            await fs.writeJson(appsPath, apps);
+            // ... and the key of the second of them
+            const deployPath =
+                './deploy/testInstance/testBU/transactionalPush/testExisting_tpush.transactionalPush-meta.json';
+            const item = await fs.readJson(deployPath);
+            item.r__mobilePushApp_key = apps[1].key;
+            item.r__mobilePushApp_name = 'Test Push App Two';
+            await fs.writeJson(deployPath, item);
+            // WHEN
+            await handler.deploy(
+                'testInstance/testBU',
+                ['transactionalPush'],
+                ['testExisting_tpush']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+            const updateCallout = testUtils.getRestCallout(
+                'patch',
+                '/messaging/v1/push/definitions/testExisting_tpush'
+            );
+            assert.equal(
+                updateCallout.applicationId,
+                apps[1].id,
+                'the key should have been resolved without looking at the ambiguous name'
+            );
+            return;
+        });
+
         it('Should resolve mobilePushApp references key-first, then by one unique name', async () => {
             cache.initCache({ mid: 9999999, eid: 1111111 });
             cache.setMetadata('mobilePushApp', {
@@ -258,6 +325,21 @@ describe('type: transactionalPush', () => {
             }
             assert.include(duplicateError?.message, 'appOne');
             assert.include(duplicateError?.message, 'appTwo');
+            assert.include(
+                duplicateError?.message,
+                'Names must be unique within a BU',
+                'more than one name match should hard-error and say why'
+            );
+
+            const keyDespiteDuplicates = await TransactionalPush.preDeployTasks({
+                r__mobilePushApp_key: 'appTwo',
+                r__mobilePushApp_name: 'Duplicate App',
+            });
+            assert.deepEqual(
+                keyDespiteDuplicates,
+                { applicationId: 'appTwo' },
+                'a matching key should win even if the name is ambiguous'
+            );
         });
 
         it('Should NOT change the key during update with --changeKeyValue and instead fail due to missing support', async () => {
