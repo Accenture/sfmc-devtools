@@ -9,8 +9,24 @@ export type MetadataTypeMap = import("../../types/mcdev.d.js").MetadataTypeMap;
 export type MetadataTypeMapObj = import("../../types/mcdev.d.js").MetadataTypeMapObj;
 export type SoapRequestParams = import("../../types/mcdev.d.js").SoapRequestParams;
 export type TemplateMap = import("../../types/mcdev.d.js").TemplateMap;
+export type TypeKeyCombo = import("../../types/mcdev.d.js").TypeKeyCombo;
 export type QueryItem = import("../../types/mcdev.d.js").QueryItem;
 export type QueryMap = import("../../types/mcdev.d.js").QueryMap;
+export type SqlTable = import("../util/sqlTables.js").SqlTable;
+export type DataExtensionNameMap = {
+    /**
+     * lower-case name => key of dataExtensions on the current BU
+     */
+    local: {
+        [x: string]: string;
+    };
+    /**
+     * lower-case name => key of shared / synchronized dataExtensions from _ParentBU_
+     */
+    shared: {
+        [x: string]: string;
+    };
+};
 /**
  * @typedef {import('../../types/mcdev.d.js').BuObject} BuObject
  * @typedef {import('../../types/mcdev.d.js').CodeExtract} CodeExtract
@@ -22,10 +38,17 @@ export type QueryMap = import("../../types/mcdev.d.js").QueryMap;
  * @typedef {import('../../types/mcdev.d.js').MetadataTypeMapObj} MetadataTypeMapObj
  * @typedef {import('../../types/mcdev.d.js').SoapRequestParams} SoapRequestParams
  * @typedef {import('../../types/mcdev.d.js').TemplateMap} TemplateMap
+ * @typedef {import('../../types/mcdev.d.js').TypeKeyCombo} TypeKeyCombo
  */
 /**
  * @typedef {import('../../types/mcdev.d.js').QueryItem} QueryItem
  * @typedef {import('../../types/mcdev.d.js').QueryMap} QueryMap
+ * @typedef {import('../util/sqlTables.js').SqlTable} SqlTable
+ */
+/**
+ * @typedef {object} DataExtensionNameMap
+ * @property {Object.<string, string>} local lower-case name => key of dataExtensions on the current BU
+ * @property {Object.<string, string>} shared lower-case name => key of shared / synchronized dataExtensions from _ParentBU_
  */
 /**
  * Query MetadataType
@@ -33,6 +56,16 @@ export type QueryMap = import("../../types/mcdev.d.js").QueryMap;
  * @augments MetadataType
  */
 declare class Query extends MetadataType {
+    /**
+     * dataExtension names cached per dependency search, keyed by the notFoundList object that
+     * {@link Mcdev.addDependencies} creates once per run and passes through all recursive calls.
+     * A new run therefore always sees new dataExtensions, also in long-running processes like the VS Code extension.
+     *
+     * @type {WeakMap.<TypeKeyCombo, Object.<number, DataExtensionNameMap>>}
+     */
+    static "__#private@#dataExtensionNameMaps": WeakMap<TypeKeyCombo, {
+        [x: number]: DataExtensionNameMap;
+    }>;
     /**
      * Retrieves Metadata of queries
      *
@@ -138,6 +171,43 @@ declare class Query extends MetadataType {
      * @returns {Promise.<string[][]>} list of extracted files with path-parts provided as an array
      */
     private static _buildForNested;
+    /**
+     * helper for {@link Query.getDependentFiles}
+     * reads the SQL of the given queries and returns the keys of the dataExtensions it selects from.
+     * Tables that cannot be resolved to a dataExtension are reported as a warning.
+     *
+     * @param {string[]} keyArr keys of queries that were found in the retrieve folder
+     * @param {TypeKeyCombo} runCacheKey object that identifies the current dependency search, used to cache dataExtension names
+     * @returns {Promise.<string[]>} unique dataExtension keys
+     */
+    static _getSourceDataExtensionKeys(keyArr: string[], runCacheKey: TypeKeyCombo): Promise<string[]>;
+    /**
+     * helper for {@link Query._getSourceDataExtensionKeys}
+     * loads all dataExtension names of the current BU (and shared ones from _ParentBU_ on child BUs) once per BU and run
+     *
+     * @param {TypeKeyCombo} runCacheKey object that identifies the current dependency search
+     * @returns {Promise.<DataExtensionNameMap>} lower-case name => key maps
+     */
+    static _getDataExtensionNameMap(runCacheKey: TypeKeyCombo): Promise<DataExtensionNameMap>;
+    /**
+     * helper for {@link Query._getDataExtensionNameMap}
+     * shared folders of _ParentBU_ were cached under the EID by {@link DataExtension.retrieveSharedForCache};
+     * same check as in {@link DataExtensionField.isSharedDe}, which reads the dataExtension from the global cache instead
+     *
+     * @param {number|string} categoryId folder ID of a dataExtension
+     * @returns {boolean} true if the folder holds shared or synchronized dataExtensions
+     */
+    static _isSharedDataExtensionFolder(categoryId: number | string): boolean;
+    /**
+     * helper for {@link Query._getSourceDataExtensionKeys}
+     * SFMC compares table names without case. ENT. prefers shared dataExtensions, other names prefer local ones.
+     * Both fall back to the other list because this is used to find dependencies, not to validate the SQL.
+     *
+     * @param {SqlTable} table table found in the SQL
+     * @param {DataExtensionNameMap} nameMap lower-case name => key maps
+     * @returns {string|undefined} dataExtension key or undefined if not found
+     */
+    static _resolveTableName(table: SqlTable, nameMap: DataExtensionNameMap): string | undefined;
     /**
      * clean up after deleting a metadata item
      *
