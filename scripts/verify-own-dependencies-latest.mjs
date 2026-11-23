@@ -33,12 +33,15 @@ export const OWNED_PACKAGES = [
     'mcdev',
     'mso-conditional-parser',
     'prettier-plugin-sfmc',
+    'salesforce-data360-rules',
     'sf-plugin-cms',
+    'sf-plugin-data',
     'sfmc-dataloader',
     'sfmc-handlebars-parser',
     'sfmc-language-lsp',
     'sfmc-sdk',
     'ssjs-data',
+    'waba-devtools',
 ];
 
 /**
@@ -92,9 +95,7 @@ export function findOutdated(lock, latestByName) {
  * @returns {Promise.<string>} version
  */
 async function latestVersion(name) {
-    const response = await fetch(
-        `https://registry.npmjs.org/${name.replaceAll('/', '%2F')}/latest`
-    );
+    const response = await fetch(`https://registry.npmjs.org/${name.replace('/', '%2F')}/latest`);
     assert.ok(response.ok, `npm registry answered ${response.status} for ${name}`);
     const { version } = await response.json();
     assert.equal(typeof version, 'string', `npm registry returned no version for ${name}`);
