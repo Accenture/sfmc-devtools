@@ -1,0 +1,7 @@
+{
+    "id": "NTQ4Ojc4OjA",
+    "name": "testExisting_tsms",
+    "status": "Active",
+    "sendMethod": "API",
+    "smsTriggeredSendDefinitionId": "0a650d90-755e-ed11-b852-48df37d1df5b"
+}
