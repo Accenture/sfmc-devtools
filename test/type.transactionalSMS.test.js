@@ -4,6 +4,7 @@ const expect = chai.expect;
 
 import chaiFiles from 'chai-files';
 import cache from '../lib/util/cache.js';
+import File from '../lib/util/file.js';
 import * as testUtils from './utils.js';
 import handler from '../lib/index.js';
 chai.use(chaiFiles);
@@ -42,8 +43,26 @@ describe('type: transactionalSMS', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                4,
+                5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should warn about a transactionalSMS that is listed but cannot be read', async () => {
+            // WHEN
+            const { messages } = await testUtils.retrieveCapturing('warn', 'transactionalSMS');
+            // THEN
+            assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
+            assert.deepEqual(
+                Object.keys(cache.getCache().transactionalSMS),
+                ['testExisting_tsms'],
+                'only the readable transactionalSMS expected'
+            );
+            assert.include(
+                messages,
+                ' - transactionalSMS testUnreadable_tsms (name: testUnreadable_tsms, status: Active) is listed on the server but could not be read: Definition not found (30003)',
+                'expected a warning for the unreadable transactionalSMS'
             );
             return;
         });
@@ -91,7 +110,7 @@ describe('type: transactionalSMS', () => {
             // check number of API calls
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                6,
+                7,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -168,7 +187,7 @@ describe('type: transactionalSMS', () => {
             );
             assert.equal(
                 testUtils.getAPIHistoryLength(),
-                4,
+                5,
                 'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
             );
             return;
@@ -186,6 +205,28 @@ describe('type: transactionalSMS', () => {
         //     assert.equal(isDeleted, true, 'should have deleted the item');
         //     return;
         // });
+
+        it('Should NOT delete a transactionalSMS that is listed but cannot be read and keep its local files', async () => {
+            // GIVEN
+            const localFile =
+                'retrieve/testInstance/testBU/transactionalSMS/testUnreadable_tsms.transactionalSMS-meta.json';
+            await File.outputFile(localFile, '{}');
+            // WHEN
+            const { result, messages } = await testUtils.deleteCapturing(
+                'error',
+                'transactionalSMS',
+                'testUnreadable_tsms'
+            );
+            // THEN
+            assert.equal(result, false, 'should not have deleted the item');
+            assert.include(
+                messages,
+                ' ☇ skipping deletion of transactionalSMS testUnreadable_tsms: still listed on server (name: testUnreadable_tsms, status: Active) but cannot be read or deleted',
+                'expected an error that the transactionalSMS is still listed'
+            );
+            assert.isTrue(await File.pathExists(localFile), 'local files should have been kept');
+            return;
+        });
     });
 
     describe('CI/CD ================', () => {

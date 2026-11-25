@@ -494,6 +494,18 @@ export async function deployCapturing(level, type, keys) {
 }
 
 /**
+ * runs a retrieve while capturing the given log level.
+ *
+ * @param {'info'|'warn'|'error'} level logger method to capture
+ * @param {string} type metadata type to retrieve
+ * @param {string[]} [keys] keys to retrieve
+ * @returns {Promise.<{result: object, messages: string[]}>} retrieve result and captured messages
+ */
+export async function retrieveCapturing(level, type, keys) {
+    return runCapturing(level, () => handler.retrieve('testInstance/testBU', [type], keys));
+}
+
+/**
  * runs a delete while capturing the given log level.
  *
  * @param {'info'|'warn'|'error'} level logger method to capture
