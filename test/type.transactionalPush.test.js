@@ -137,6 +137,8 @@ describe('type: transactionalPush', () => {
             const item = await fs.readJson(deployPath);
             item.r__mobilePushApp_key = 'YjhMeTFBUWgtRUNIUHNNN3hYbm5SQToxMTc6MA';
             delete item.r__mobilePushApp_name;
+            // ... with a custom key that this app defines
+            item.options.customKeys = [{ key: 'objId', value: '1' }];
             await fs.writeJson(deployPath, item);
             // WHEN
             await handler.deploy(
@@ -166,6 +168,7 @@ describe('type: transactionalPush', () => {
             const item = await fs.readJson(deployPath);
             item.r__mobilePushApp_key = 'keyFromAnotherBU';
             item.r__mobilePushApp_name = 'Test Push App Two';
+            item.options.customKeys = [{ key: 'objId', value: '1' }];
             await fs.writeJson(deployPath, item);
             // WHEN
             await handler.deploy(
@@ -230,6 +233,7 @@ describe('type: transactionalPush', () => {
             const item = await fs.readJson(deployPath);
             item.r__mobilePushApp_key = 'keyFromAnotherBU';
             item.r__mobilePushApp_name = 'Test Push App Two';
+            item.options.customKeys = [{ key: 'objId', value: '1' }];
             await fs.writeJson(deployPath, item);
             // WHEN
             await handler.deploy(
@@ -264,6 +268,7 @@ describe('type: transactionalPush', () => {
             const item = await fs.readJson(deployPath);
             item.r__mobilePushApp_key = apps[1].id;
             item.r__mobilePushApp_name = 'Test Push App Two';
+            item.options.customKeys = [{ key: 'objId', value: '1' }];
             await fs.writeJson(deployPath, item);
             // WHEN
             await handler.deploy(
@@ -283,6 +288,131 @@ describe('type: transactionalPush', () => {
                 'the key should have been resolved without looking at the ambiguous name'
             );
             return;
+        });
+
+        it('Should NOT deploy a transactionalPush with a custom key that its mobilePushApp does not define', async () => {
+            // GIVEN a key of "Test Push App One" and a key it does not define
+            const deployPath =
+                './deploy/testInstance/testBU/transactionalPush/testExisting_tpush.transactionalPush-meta.json';
+            const item = await fs.readJson(deployPath);
+            item.options.customKeys = [
+                { key: 'Card_Theme', value: 'dark' },
+                { key: 'Unknown_Key', value: 'x' },
+            ];
+            await fs.writeJson(deployPath, item);
+            // WHEN
+            await handler.deploy(
+                'testInstance/testBU',
+                ['transactionalPush'],
+                ['testExisting_tpush']
+            );
+            // THEN
+            assert.equal(process.exitCode, 1, 'deploy should have set an error exit code');
+            assert.equal(
+                testUtils.getRestCallout(
+                    'patch',
+                    '/messaging/v1/push/definitions/testExisting_tpush',
+                    false,
+                    true
+                ),
+                null,
+                'the item must not be sent to the API'
+            );
+            return;
+        });
+
+        it('Should convert a number as custom key value into a string before deploying', async () => {
+            // GIVEN a number as value
+            const deployPath =
+                './deploy/testInstance/testBU/transactionalPush/testExisting_tpush.transactionalPush-meta.json';
+            const item = await fs.readJson(deployPath);
+            item.options.customKeys = [{ key: 'Card_Theme', value: 5 }];
+            await fs.writeJson(deployPath, item);
+            // WHEN
+            await handler.deploy(
+                'testInstance/testBU',
+                ['transactionalPush'],
+                ['testExisting_tpush']
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'deploy should not have thrown an error');
+            const updateCallout = testUtils.getRestCallout(
+                'patch',
+                '/messaging/v1/push/definitions/testExisting_tpush'
+            );
+            assert.deepEqual(
+                updateCallout.options.customKeys,
+                [{ key: 'Card_Theme', value: '5' }],
+                'the value should have been sent as a string'
+            );
+            return;
+        });
+
+        it('Should check options.customKeys against the keys of the mobilePushApp', async () => {
+            cache.initCache({ mid: 9999999, eid: 1111111 });
+            cache.setMetadata('mobilePushApp', {
+                appId: { id: 'appId', key: 'appId', name: 'Customer App', keys: ['Order_Id'] },
+                noKeysId: { id: 'noKeysId', key: 'noKeysId', name: 'No Keys App' },
+            });
+
+            const known = await TransactionalPush.preDeployTasks({
+                definitionKey: 'order_shipped',
+                r__mobilePushApp_name: 'Customer App',
+                options: { customKeys: [{ key: 'Order_Id', value: true }] },
+            });
+            assert.deepEqual(
+                known.options.customKeys,
+                [{ key: 'Order_Id', value: 'true' }],
+                'a known key should pass and a boolean value should become a string'
+            );
+
+            const uncached = await TransactionalPush.preDeployTasks({
+                definitionKey: 'order_shipped',
+                applicationId: 'unknownId',
+                options: { customKeys: [{ key: 'Card_Theme', value: 'dark' }] },
+            });
+            assert.equal(
+                uncached.applicationId,
+                'unknownId',
+                'the check should be skipped for an applicationId that is not cached'
+            );
+
+            let unknownError;
+            try {
+                await TransactionalPush.preDeployTasks({
+                    definitionKey: 'order_shipped',
+                    applicationId: 'appId',
+                    options: {
+                        customKeys: [
+                            { key: 'Order_Id', value: '1' },
+                            { key: 'Card_Theme', value: 'dark' },
+                        ],
+                    },
+                });
+            } catch (ex) {
+                unknownError = ex;
+            }
+            assert.equal(
+                unknownError?.message,
+                "transactionalPush 'order_shipped': custom key 'Card_Theme' is not defined for mobilePushApp 'Customer App' (appId) on this BU. Keys defined there: 'Order_Id'. Add the key to the app in MobilePush Administration or remove it from options.customKeys.",
+                'an unknown key should hard-error and say how to fix it'
+            );
+
+            let noKeysError;
+            try {
+                await TransactionalPush.preDeployTasks({
+                    definitionKey: 'order_shipped',
+                    r__mobilePushApp_key: 'noKeysId',
+                    options: { customKeys: [{ key: 'Card_Theme', value: 'dark' }] },
+                });
+            } catch (ex) {
+                noKeysError = ex;
+            }
+            assert.include(
+                noKeysError?.message,
+                'Keys defined there: none.',
+                'an app without keys should be treated as having none'
+            );
         });
 
         it('Should resolve mobilePushApp references key-first, then by one unique name', async () => {
