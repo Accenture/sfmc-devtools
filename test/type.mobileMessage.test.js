@@ -12,6 +12,17 @@ import { Util } from '../lib/util/util.js';
 import * as testUtils from './utils.js';
 chai.use(chaiFiles);
 
+/**
+ * helper to check if a callout without payload was made
+ *
+ * @param {'get'|'delete'} method http method
+ * @param {string} url url without domain
+ * @returns {boolean} true if the callout was made
+ */
+function hasCallout(method, url) {
+    return !!testUtils.getAPIHistory()[method]?.some((item) => item.url === url);
+}
+
 describe('type: mobileMessage', () => {
     beforeEach(() => {
         testUtils.mockSetup();
@@ -713,6 +724,74 @@ describe('type: mobileMessage', () => {
             assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
 
             assert.equal(isDeleted, true, 'should have deleted the item');
+            assert.isTrue(
+                hasCallout('get', '/messaging/v1/sms/definitions/testExisting_tsms'),
+                'transactionalSMS definitions should have been checked'
+            );
+            assert.isTrue(
+                hasCallout('delete', '/legacy/v1/beta/mobile/message/NTIzOjc4OjA'),
+                'mobileMessage should have been deleted'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                4,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should not delete the mobileMessage of a transactionalSMS', async () => {
+            // WHEN
+            const { result: isDeleted, messages } = await testUtils.deleteCapturing(
+                'error',
+                'mobileMessage',
+                'NTQ4Ojc4OjA'
+            );
+            // THEN
+            assert.equal(isDeleted, false, 'should not have deleted the item');
+            assert.isTrue(
+                messages.some(
+                    (msg) =>
+                        msg.includes('transactionalSMS testExisting_tsms') &&
+                        msg.includes('delete the transactionalSMS instead')
+                ),
+                'should have told the user to delete the transactionalSMS instead'
+            );
+            assert.isFalse(
+                hasCallout('delete', '/legacy/v1/beta/mobile/message/NTQ4Ojc4OjA'),
+                'mobileMessage should not have been deleted'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                3,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
+            return;
+        });
+
+        it('Should delete a mobileMessage without transactionalSMS', async () => {
+            // WHEN
+            const isDeleted = await handler.deleteByKey(
+                'testInstance/testBU',
+                'mobileMessage',
+                'NTQ5Ojc4OjA'
+            );
+            // THEN
+            assert.equal(process.exitCode, 0, 'delete should not have thrown an error');
+            assert.equal(isDeleted, true, 'should have deleted the item');
+            assert.isFalse(
+                hasCallout('get', '/messaging/v1/sms/definitions/testExisting_tsms'),
+                'transactionalSMS definitions should not have been checked'
+            );
+            assert.isTrue(
+                hasCallout('delete', '/legacy/v1/beta/mobile/message/NTQ5Ojc4OjA'),
+                'mobileMessage should have been deleted'
+            );
+            assert.equal(
+                testUtils.getAPIHistoryLength(),
+                2,
+                'Unexpected number of requests made. Run testUtils.logAPIHistoryDebug() to see the requests'
+            );
             return;
         });
     });

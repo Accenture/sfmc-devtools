@@ -1,0 +1,7 @@
+{
+    "id": "NTQ5Ojc4OjA",
+    "name": "testDraft_mobileMessage",
+    "status": "Draft",
+    "sendMethod": "API",
+    "smsTriggeredSendDefinitionId": "00000000-0000-0000-0000-000000000000"
+}
