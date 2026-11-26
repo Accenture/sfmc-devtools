@@ -642,7 +642,7 @@ describe('type: automation', function () {
             await handler.retrieve('testInstance/testBU');
             assert.equal(process.exitCode, 0, 'retrieve should not have thrown an error');
 
-            const expectedApiCallsRetrieve = 120;
+            const expectedApiCallsRetrieve = 121;
             assert.equal(
                 testUtils.getAPIHistoryLength(),
                 expectedApiCallsRetrieve,

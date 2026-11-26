@@ -963,6 +963,18 @@ export const handleRESTRequest = async (config) => {
                     encoding: 'utf8',
                 }),
             ];
+        } else if (await fs.pathExists(testPath + '-404.json')) {
+            // simulate an item the API answers with 404 for, e.g. one that is listed but cannot be read
+            if (process.env.MCDEV_FULL_TEST_SUITE !== '1') {
+                // eslint-disable-next-line no-console -- Fixture diagnostics are visible outside full-suite runs.
+                console.log(loadingFile + projectRoot + testPath + '-404.json');
+            }
+            return [
+                404,
+                await fs.readFile(testPath + '-404.json', {
+                    encoding: 'utf8',
+                }),
+            ];
         } else {
             // ── dynamic asset READ engine (reads only — never create/update/delete) ──
             // Serves asset by-id GET, assetType.id-in query POST, and customerKey by-key GET
